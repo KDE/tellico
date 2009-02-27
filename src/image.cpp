@@ -25,7 +25,7 @@
 using Tellico::Data::Image;
 
 const Image Image::null;
-QStringList Image::s_outputFormats;
+QList<QByteArray> Image::s_outputFormats;
 
 Image::Image() : QImage(), m_linkOnly(false) {
 }
@@ -107,7 +107,7 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
 }
 
 QString Image::idClean(const QString& id_) {
-  static const QRegExp rx('[' + QRegExp::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + ']');
+  static const QRegExp rx(QLatin1Char('[') + QRegExp::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + QLatin1Char(']'));
   QString clean = id_;
   return Tellico::shareString(clean.remove(rx));
 }
@@ -120,7 +120,7 @@ void Image::calculateID() {
   // the id will eventually be used as a filename
   if(!isNull()) {
     KMD5 md5(byteArray());
-    m_id = QLatin1String(md5.hexDigest()) + QLatin1String(".") + QByteArray(m_format).toLower();
+    m_id = QLatin1String(md5.hexDigest()) + QLatin1Char('.') + QLatin1String(m_format.toLower());
     m_id = idClean(m_id);
   }
 }

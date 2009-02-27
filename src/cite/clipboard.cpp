@@ -41,7 +41,7 @@ bool Clipboard::cite(Tellico::Data::EntryList entries_) {
     s += QLatin1String(", ");
   }
   s.truncate(s.length()-2); // remove last comma
-  s += '}';
+  s += QLatin1Char('}');
 
   QClipboard* cb = QApplication::clipboard();
   cb->setText(s, QClipboard::Clipboard);

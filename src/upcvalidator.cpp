@@ -32,7 +32,7 @@ QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
   }
 
   // no spaces allowed
-  if(input_.contains(' ')) {
+  if(input_.contains(QLatin1Char(' '))) {
     return QValidator::Invalid;
   }
 
@@ -68,7 +68,7 @@ void UPCValidator::fixup(QString& input_) const {
   }
   input_ = input_.trimmed();
 
-  int pos = input_.indexOf(' ');
+  int pos = input_.indexOf(QLatin1Char(' '));
   if(pos > -1) {
     input_ = input_.left(pos);
   }
@@ -99,7 +99,7 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
  if(!input_.startsWith(QLatin1String(".C3"))) { // all cuecat codes start with .C3
     return QValidator::Invalid;
   }
-  const int periods = input_.count('.');
+  const int periods = input_.count(QLatin1Char('.'));
   if(periods < 4) {
     return QValidator::Intermediate; // not enough yet
   } else if(periods > 4) {
@@ -107,24 +107,24 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
   }
 
   // ok, let's have a go, take the third token
-  QString code = input_.section('.', 2, 2, QString::SectionSkipEmpty);
+  QString code = input_.section(QLatin1Char('.'), 2, 2, QString::SectionSkipEmpty);
   while(code.length() % 4 > 0) {
-    code += '=';
+    code += QLatin1Char('=');
   }
 
   for(int i = 0; i < code.length(); ++i) {
-    if(code[i] >= 'A' && code[i] <= 'Z') {
+    if(code[i] >= QLatin1Char('A') && code[i] <= QLatin1Char('Z')) {
       code.replace(i, 1, code[i].toLower());
-    } else if(code[i] >= 'a' && code[i] <= 'z') {
+    } else if(code[i] >= QLatin1Char('a') && code[i] <= QLatin1Char('z')) {
       code.replace(i, 1, code[i].toUpper());
     }
   }
 
-  code = KCodecs::base64Decode(code.toAscii());
+  code = QString::fromLatin1(KCodecs::base64Decode(code.toAscii()));
 
   for(int i = 0; i < code.length(); ++i) {
     char c = code[i].toAscii() ^ 'C';
-    code.replace(i, 1, c);
+    code.replace(i, 1, QLatin1Char(c));
   }
 
   input_ = code;

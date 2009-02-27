@@ -204,7 +204,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
   if(!cw) {
     // bad bad bad!
     myWarning() << "no config widget found for type" << type;
-    m_typeCombo->setCurrentItem(0);
+    m_typeCombo->setCurrentIndex(0);
     slotNewSourceSelected(0);
     return;
   }

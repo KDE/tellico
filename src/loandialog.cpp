@@ -24,14 +24,16 @@
 #include "commands/addloans.h"
 #include "commands/modifyloans.h"
 
-#include <config.h>
+#include "config.h"
 
 #include <klocale.h>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <ktextedit.h>
 #include <kiconloader.h>
+#ifdef HAVE_KABC
 #include <kabc/stdaddressbook.h>
+#endif
 
 #include <KHBox>
 #include <QLabel>
@@ -177,11 +179,13 @@ void LoanDialog::init() {
   KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
   restoreDialogSize(config);
 
+#ifdef HAVE_KABC
   KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
   connect(abook, SIGNAL(addressBookChanged(AddressBook*)),
           SLOT(slotLoadAddressBook()));
   connect(abook, SIGNAL(loadingFinished(Resource*)),
           SLOT(slotLoadAddressBook()));
+#endif
   slotLoadAddressBook();
 }
 
@@ -211,11 +215,13 @@ void LoanDialog::slotGetBorrower() {
 void LoanDialog::slotLoadAddressBook() {
   m_borrowerEdit->completionObject()->clear();
 
+#ifdef HAVE_KABC
   const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
       it != end; ++it) {
     m_borrowerEdit->completionObject()->addItem((*it).realName());
   }
+#endif
 
   // add current borrowers, too
   QStringList items = m_borrowerEdit->completionObject()->items();

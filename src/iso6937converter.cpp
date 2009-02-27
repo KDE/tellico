@@ -228,7 +228,7 @@ QChar Iso6937Converter::getChar(uchar c) {
   case 0xFF:
     return 0x00AD; // 15/15 SOFT HYPHEN$
   default:
-    return c;
+    return QLatin1Char(c);
   }
 }
 

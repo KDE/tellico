@@ -95,7 +95,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
     m_imageFields.append(field_);
   }
 
-  if(!field_->category().isEmpty() && m_fieldCategories.indexOf(field_->category()) == -1) {
+  if(!field_->category().isEmpty() && !m_fieldCategories.contains(field_->category())) {
     m_fieldCategories << field_->category();
   }
 
@@ -137,7 +137,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
 
   if(newField_->type() == Field::Table2) {
     newField_->setType(Data::Field::Table);
-    newField_->setProperty(QLatin1String("columns"), QChar('2'));
+    newField_->setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
 
   // the original field type is kept
@@ -494,7 +494,7 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
 
 Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
 #ifndef NDEBUG
-  if(m_fieldCategories.indexOf(cat_) == -1) {
+  if(!m_fieldCategories.contains(cat_)) {
     myDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
   }
 #endif

@@ -645,7 +645,7 @@ void ConfigDialog::readTemplateConfig() {
   // entry template selection
   const int collType = Kernel::self()->collectionType();
   QString file = Config::templateName(collType);
-  file.replace('_', ' ');
+  file.replace(QLatin1Char('_'), QLatin1Char(' '));
   QString fileContext = file + QLatin1String(" XSL Template");
   m_templateCombo->setCurrentItem(i18nc(fileContext.toUtf8(), file.toUtf8()));
 
@@ -703,7 +703,7 @@ void ConfigDialog::saveConfiguration() {
   Config::setAutoFormat(m_cbFormat->isChecked());
 
   const QRegExp semicolon(QLatin1String("\\s*;\\s*"));
-  const QChar comma = ',';
+  const QChar comma = QLatin1Char(',');
 
   Config::setNoCapitalizationString(m_leCapitals->text().replace(semicolon, comma));
   Config::setArticlesString(m_leArticles->text().replace(semicolon, comma));
@@ -920,18 +920,18 @@ void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {
 
 void ConfigDialog::slotNewStuffClicked() {
   KNS::Engine engine(this);
-  if (engine.init("tellico-script.knsrc")) {
+  if(engine.init(QLatin1String("tellico-script.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
-    if (entries.size() > 0) {
-        Fetch::Manager::self()->loadFetchers();
-        readFetchConfig();
-     }
-   }
+    if(entries.size() > 0) {
+      Fetch::Manager::self()->loadFetchers();
+      readFetchConfig();
+    }
+  }
 }
 
 Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
-    kWarning() << "ConfigDialog::findItem() - empty path";
+    myWarning() << "ConfigDialog::findItem() - empty path";
     return 0;
   }
 
@@ -998,9 +998,9 @@ void ConfigDialog::loadTemplateList() {
   KSortableList<QString, QString> templates;
   foreach(const QString& file, files) {
     QFileInfo fi(file);
-    QString lfile = fi.fileName().section('.', 0, -2);
+    QString lfile = fi.fileName().section(QLatin1Char('.'), 0, -2);
     QString name = lfile;
-    name.replace('_', ' ');
+    name.replace(QLatin1Char('_'), QLatin1Char(' '));
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
@@ -1015,8 +1015,8 @@ void ConfigDialog::loadTemplateList() {
 }
 
 void ConfigDialog::slotInstallTemplate() {
-  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + '\n';
-  filter += i18n("*.tar.gz *.tgz|Template Packages (*.tar.gz)") + '\n';
+  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QLatin1Char('\n');
+  filter += i18n("*.tar.gz *.tgz|Template Packages (*.tar.gz)") + QLatin1Char('\n');
   filter += i18n("*|All Files");
 
   QString f = KFileDialog::getOpenFileName(KUrl(), filter, this);
@@ -1024,19 +1024,19 @@ void ConfigDialog::slotInstallTemplate() {
     return;
   }
 
-  if (Tellico::NewStuff::Manager::self()->installTemplate(f)) {
+  if(Tellico::NewStuff::Manager::self()->installTemplate(f)) {
     loadTemplateList();
   }
 }
 
 void ConfigDialog::slotDownloadTemplate() {
-    KNS::Engine engine(this);
-    if (engine.init("tellico-template.knsrc")) {
-        KNS::Entry::List entries = engine.downloadDialogModal(this);
-        if (entries.size() > 0) {
-            loadTemplateList();
-        }
+  KNS::Engine engine(this);
+  if(engine.init(QLatin1String("tellico-template.knsrc"))) {
+    KNS::Entry::List entries = engine.downloadDialogModal(this);
+    if(entries.size() > 0) {
+      loadTemplateList();
     }
+  }
 }
 
 void ConfigDialog::slotDeleteTemplate() {

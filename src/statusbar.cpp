@@ -86,11 +86,11 @@ void StatusBar::clearStatus() {
 
 void StatusBar::setStatus(const QString& status_) {
   // always add a space for asthetics
-  m_mainLabel->setText(status_ + ' ');
+  m_mainLabel->setText(status_ + QLatin1Char(' '));
 }
 
 void StatusBar::setCount(const QString& count_) {
-  m_countLabel->setText(count_ + ' ');
+  m_countLabel->setText(count_ + QLatin1Char(' '));
 }
 
 void StatusBar::slotProgress(uint progress_) {

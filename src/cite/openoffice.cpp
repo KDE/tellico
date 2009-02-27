@@ -262,7 +262,7 @@ bool OpenOffice::connectionDialog() {
 }
 
 bool OpenOffice::hasLibrary() {
-  QString path = KLibLoader::findLibrary("tellico_ooo");
+  QString path = KLibLoader::findLibrary(QLatin1String("tellico_ooo"));
   if(!path.isEmpty()) myDebug() << "OpenOffice::hasLibrary() - Found OOo plugin: " << path << endl;
   return !path.isEmpty();
 }

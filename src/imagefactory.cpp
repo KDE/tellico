@@ -385,7 +385,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
     return QPixmap();
   }
 
-  const QString key = id_ + '|' + QString::number(width_) + '|' + QString::number(height_);
+  const QString key = id_ + QLatin1Char('|') + QString::number(width_) + QLatin1Char('|') + QString::number(height_);
   QPixmap* pix = factory->d->pixmapCache.object(key);
   if(pix) {
     return *pix;
@@ -529,7 +529,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
     QString dir = url_.directory(KUrl::AppendTrailingSlash);
     // could have already been set once
     if(!url_.fileName().contains(QLatin1String("_files"))) {
-      dir += url_.fileName().section('.', 0, 0) + QLatin1String("_files/");
+      dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
     }
     factory->d->localImageDir.setPath(dir);
     myLog() << "local dir = " << dir;

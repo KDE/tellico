@@ -383,7 +383,7 @@ void FetchDialog::slotUpdateStatus() {
 }
 
 void FetchDialog::setStatus(const QString& text_) {
-  m_statusLabel->setText(QChar(' ') + text_);
+  m_statusLabel->setText(QLatin1Char(' ') + text_);
 }
 
 void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
@@ -596,7 +596,7 @@ void FetchDialog::slotMultipleISBN(bool toggle_) {
   if(!wasEnabled && m_valueLineEdit->isEnabled()) {
     // if we enable it, it probably had multiple isbn values
     // the validator doesn't like that, so only keep the first value
-    QString val = m_valueLineEdit->text().section(';', 0, 0);
+    QString val = m_valueLineEdit->text().section(QLatin1Char(';'), 0, 0);
     m_valueLineEdit->setText(val);
   }
   m_editISBN->setEnabled(toggle_);
@@ -617,7 +617,7 @@ void FetchDialog::slotEditMultipleISBN() {
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
   (void) new QLabel(s, box);
   m_isbnTextEdit = new KTextEdit(box);
-  m_isbnTextEdit->setText(m_isbnList.join(QChar('\n')));
+  m_isbnTextEdit->setText(m_isbnList.join(QLatin1String("\n")));
   m_isbnTextEdit->setWhatsThis(s);
   KPushButton* fromFileBtn = new KPushButton(KIcon(QLatin1String("document-open")),
                                              i18n("&Load From File..."), box);
@@ -627,7 +627,7 @@ void FetchDialog::slotEditMultipleISBN() {
   dlg.setMinimumWidth(qMax(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
 
   if(dlg.exec() == QDialog::Accepted) {
-    m_isbnList = m_isbnTextEdit->toPlainText().split('\n');
+    m_isbnList = m_isbnTextEdit->toPlainText().split(QLatin1String("\n"));
     const QValidator* val = m_valueLineEdit->validator();
     if(val) {
       for(QStringList::Iterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {

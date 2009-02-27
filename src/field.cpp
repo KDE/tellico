@@ -44,15 +44,15 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     m_flags = AllowMultiple;
     if(m_type == Table2) {
       m_type = Table;
-      setProperty(QLatin1String("columns"), QChar('2'));
+      setProperty(QLatin1String("columns"), QLatin1String("2"));
     } else {
-      setProperty(QLatin1String("columns"), QChar('1'));
+      setProperty(QLatin1String("columns"), QLatin1String("1"));
     }
   } else if(m_type == Date) {  // hidden from user
     m_formatFlag = FormatDate;
   } else if(m_type == Rating) {
-    setProperty(QLatin1String("minimum"), QChar('1'));
-    setProperty(QLatin1String("maximum"), QChar('5'));
+    setProperty(QLatin1String("minimum"), QLatin1String("1"));
+    setProperty(QLatin1String("maximum"), QLatin1String("5"));
   }
   m_id = getID();
 }
@@ -73,7 +73,7 @@ Field::Field(const Field& field_)
     m_allowed = field_.allowed();
   } else if(m_type == Table2) {
     m_type = Table;
-    setProperty(QLatin1String("columns"), QChar('2'));
+    setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
   m_id = getID();
 }
@@ -91,7 +91,7 @@ Field& Field::operator=(const Field& field_) {
     m_allowed = field_.allowed();
   } else if(m_type == Table2) {
     m_type = Table;
-    setProperty(QLatin1String("columns"), QChar('2'));
+    setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
   m_flags = field_.flags();
   m_formatFlag = field_.formatFlag();
@@ -119,10 +119,10 @@ void Field::setType(Field::Type type_) {
     m_flags |= AllowMultiple;
     if(m_type == Table2) {
       m_type = Table;
-      setProperty(QLatin1String("columns"), QChar('2'));
+      setProperty(QLatin1String("columns"), QLatin1String("2"));
     }
     if(property(QLatin1String("columns")).isEmpty()) {
-      setProperty(QLatin1String("columns"), QChar('1'));
+      setProperty(QLatin1String("columns"), QLatin1String("1"));
     }
   }
   if(isSingleCategory()) {

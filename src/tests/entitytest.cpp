@@ -11,6 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#undef QT_NO_CAST_FROM_ASCII
+
 #include "qtest_kde.h"
 #include "entitytest.h"
 #include "entitytest.moc"

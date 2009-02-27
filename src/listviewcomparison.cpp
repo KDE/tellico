@@ -100,8 +100,8 @@ int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2
   // I want the empty strings to be at the end
   bool ok1, ok2;
   // use section in case of multiple values
-  float num1 = str1_.section(';', 0, 0).toFloat(&ok1);
-  float num2 = str2_.section(';', 0, 0).toFloat(&ok2);
+  float num1 = str1_.section(QLatin1Char(';'), 0, 0).toFloat(&ok1);
+  float num2 = str2_.section(QLatin1Char(';'), 0, 0).toFloat(&ok2);
   if(ok1 && ok2) {
     return static_cast<int>(num1 - num2);
   } else if(ok1 && !ok2) {
@@ -220,7 +220,7 @@ int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2
   // modelled after Field::formatDate()
   // so dates would sort as expected without padding month and day with zero
   // and accounting for "current year - 1 - 1" default scheme
-  QStringList dlist1 = str1.split('-', QString::KeepEmptyParts);
+  QStringList dlist1 = str1.split(QLatin1Char('-'), QString::KeepEmptyParts);
   bool ok = true;
   int y1 = dlist1.count() > 0 ? dlist1[0].toInt(&ok) : QDate::currentDate().year();
   if(!ok) {
@@ -236,7 +236,7 @@ int Tellico::ISODateComparison::compare(const QString& str1, const QString& str2
   }
   QDate date1(y1, m1, d1);
 
-  QStringList dlist2 = str2.split('-', QString::KeepEmptyParts);
+  QStringList dlist2 = str2.split(QLatin1Char('-'), QString::KeepEmptyParts);
   int y2 = dlist2.count() > 0 ? dlist2[0].toInt(&ok) : QDate::currentDate().year();
   if(!ok) {
     y2 = QDate::currentDate().year();

@@ -11,7 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "formattest.h"
+#undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
 #include "formattest.h"

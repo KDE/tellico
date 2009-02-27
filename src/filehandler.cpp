@@ -205,7 +205,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
   }
 
   KUrl backup(url_);
-  backup.setPath(backup.path() + '~');
+  backup.setPath(backup.path() + QLatin1Char('~'));
 
   bool success = true;
   if(url_.isLocalFile()) {
@@ -226,7 +226,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
     // KDE bug 178640, for versions prior to KDE 4.2RC1, backup file was not deleted first
     // this might fail if a different backup scheme is being used
     if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
-      QFile::remove(url_.path() + '~');
+      QFile::remove(url_.path() + QLatin1Char('~'));
     }
     success = KSaveFile::backupFile(url_.path());
     if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
@@ -242,7 +242,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
     success = KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
   }
   if(!success) {
-    Kernel::self()->sorry(i18n(errorWrite, url_.fileName() + '~'));
+    Kernel::self()->sorry(i18n(errorWrite, url_.fileName() + QLatin1Char('~')));
   }
   return success;
 }

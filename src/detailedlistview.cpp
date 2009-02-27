@@ -115,15 +115,15 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     }
   }
 
-  QStringList colNames = config.readEntry("ColumnNames" + configN, QStringList());
-  QList<int> colWidths = config.readEntry("ColumnWidths" + configN, QList<int>());
-  QList<int> colOrder = config.readEntry("ColumnOrder" + configN, QList<int>());
+  QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
+  QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
+  QList<int> colOrder = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
 
   sourceModel()->setFields(coll_->fields());
 
   setUpdatesEnabled(false);
 
-  QByteArray state = QByteArray::fromBase64(config.readEntry("ColumnState" + configN).toAscii());
+  QByteArray state = QByteArray::fromBase64(config.readEntry(QLatin1String("ColumnState") + configN).toAscii());
   if(!state.isEmpty()) {
     // the easy case first. I fwe have saved state, just restore it
     header()->restoreState(state);
@@ -148,8 +148,8 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   //  int sortCol = config.readEntry("SortColumn" + configN, 0);
   //  bool sortAsc = config.readEntry("SortAscending" + configN, true);
   //  model()->sort(sortCol, sortAsc ? Qt::AscendingOrder : Qt::DescendingOrder);
-  sortModel()->setSecondarySortColumn(config.readEntry("PrevSortColumn" + configN, -1));
-  sortModel()->setTertiarySortColumn(config.readEntry("Prev2SortColumn" + configN, -1));
+  sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
+  sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
   //  updateComparison(header()->sortIndicatorSection());
 
   m_loadingCollection = true;
@@ -318,14 +318,14 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       if(!u.isEmpty() && i != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;
-        ci.cols      = config.readEntry("ColumnNames" + configN, QStringList());
-        ci.widths    = config.readEntry("ColumnWidths" + configN, QList<int>());
-        ci.order     = config.readEntry("ColumnOrder" + configN, QList<int>());
-        ci.colSorted = config.readEntry("SortColumn" + configN, 0);
-        ci.ascSort   = config.readEntry("SortAscending" + configN, true);
-        ci.prevSort  = config.readEntry("PrevSortColumn" + configN, 0);
-        ci.prev2Sort = config.readEntry("Prev2SortColumn" + configN, 0);
-        ci.state     = config.readEntry("ColumnState" + configN, QString());
+        ci.cols      = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
+        ci.widths    = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
+        ci.order     = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
+        ci.colSorted = config.readEntry(QLatin1String("SortColumn") + configN, 0);
+        ci.ascSort   = config.readEntry(QLatin1String("SortAscending") + configN, true);
+        ci.prevSort  = config.readEntry(QLatin1String("PrevSortColumn") + configN, 0);
+        ci.prev2Sort = config.readEntry(QLatin1String("Prev2SortColumn") + configN, 0);
+        ci.state     = config.readEntry(QLatin1String("ColumnState") + configN, QString());
         info.append(ci);
       }
     }
@@ -334,9 +334,9 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     for(int i = 0; i < limit; ++i) {
       // starts at one since the current config will be written below
       configN = QString::fromLatin1("_%1").arg(i+1);
-      config.writeEntry("PrevSortColumn"  + configN, info[i].prevSort);
-      config.writeEntry("Prev2SortColumn" + configN, info[i].prev2Sort);
-      config.writeEntry("ColumnState"     + configN, info[i].state);
+      config.writeEntry(QLatin1String("PrevSortColumn")  + configN, info[i].prevSort);
+      config.writeEntry(QLatin1String("Prev2SortColumn") + configN, info[i].prev2Sort);
+      config.writeEntry(QLatin1String("ColumnState")     + configN, info[i].state);
     }
     configN = QLatin1String("_0");
   }
@@ -354,13 +354,13 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
   config.writeEntry("ColumnNames" + configN, colNames);
 */
   QByteArray state = header()->saveState();
-  config.writeEntry("ColumnState" + configN, state.toBase64());
+  config.writeEntry(QLatin1String("ColumnState") + configN, state.toBase64());
   // the main sort order gets saved in the state
   // the secondary and tertiary need saving separately
   int sortCol2 = sortModel()->secondarySortColumn();
   int sortCol3 = sortModel()->tertiarySortColumn();
-  config.writeEntry("PrevSortColumn" + configN, sortCol2);
-  config.writeEntry("Prev2SortColumn" + configN, sortCol3);
+  config.writeEntry(QLatin1String("PrevSortColumn") + configN, sortCol2);
+  config.writeEntry(QLatin1String("Prev2SortColumn") + configN, sortCol3);
 }
 
 QString DetailedListView::sortColumnTitle1() const {

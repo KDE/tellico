@@ -21,7 +21,7 @@ QTEST_MAIN( CsvTest )
 void CsvTest::initTestCase() {
   QString dummy;
   p = new Tellico::CSVParser(dummy);
-  p->setDelimiter(QChar(','));
+  p->setDelimiter(QLatin1String(","));
 }
 
 void CsvTest::cleanupTestCase() {

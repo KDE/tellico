@@ -70,7 +70,7 @@ private:
   QByteArray m_format;
   bool m_linkOnly : 1;
 
-  static QStringList s_outputFormats;
+  static QList<QByteArray> s_outputFormats;
 };
 
   } // end namespace

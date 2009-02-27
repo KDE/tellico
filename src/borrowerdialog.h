@@ -15,6 +15,7 @@
 #define TELLICO_BORROWERDIALOG_H
 
 #include "borrower.h"
+#include "config.h"
 
 #include <kdialog.h>
 
@@ -22,9 +23,11 @@
 #include <QTreeWidget>
 
 class KLineEdit;
+#ifdef HAVE_KABC
 namespace KABC {
   class Addressee;
 }
+#endif
 
 namespace Tellico {
 
@@ -58,7 +61,9 @@ private:
 
 class Item : public QTreeWidgetItem {
 public:
+#ifdef HAVE_KABC
   Item(QTreeWidget* parent, const KABC::Addressee& addressee);
+#endif
   Item(QTreeWidget* parent, const Data::Borrower& borrower);
   const QString& uid() const { return m_uid; }
 

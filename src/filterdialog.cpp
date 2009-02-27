@@ -58,7 +58,7 @@ FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
 void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
-    m_ruleFieldList.append('<' + i18n("Any Field") + '>');
+    m_ruleFieldList.append(QLatin1Char('<') + i18n("Any Field") + QLatin1Char('>'));
     m_ruleFieldList += Kernel::self()->fieldTitles();
   }
 
@@ -131,7 +131,7 @@ void FilterRuleWidget::slotEditRegExp() {
 void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   Q_UNUSED(which_);
   QString fieldTitle = m_ruleField->currentText();
-  if(fieldTitle.isEmpty() || fieldTitle[0] == '<') {
+  if(fieldTitle.isEmpty() || fieldTitle[0] == QLatin1Char('<')) {
     m_ruleValue->setCompletionObject(0);
     return;
   }

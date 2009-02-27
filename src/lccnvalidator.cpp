@@ -45,10 +45,10 @@ QString LCCNValidator::formalize(const QString& value_) {
   QString year;
   QString serial;
   // have to be able to differentiate 2 and 4-digit years, first check for hyphen position
-  int pos = afterAlpha.indexOf('-');
+  int pos = afterAlpha.indexOf(QLatin1Char('-'));
   if(pos > -1) {
-    year = afterAlpha.section('-', 0, 0);
-    serial = afterAlpha.section('-', 1);
+    year = afterAlpha.section(QLatin1Char('-'), 0, 0);
+    serial = afterAlpha.section(QLatin1Char('-'), 1);
   } else {
     // make two assumptions, the user will never have a book from the year 1920
     // or from any year after 2100. Reasonable, right?
@@ -69,7 +69,7 @@ QString LCCNValidator::formalize(const QString& value_) {
   QString suffix = serial.mid(pos);
   serial = serial.left(pos);
   // serial must be left-padded with zeros to 6 characters
-  serial = serial.rightJustified(6, '0');
+  serial = serial.rightJustified(6, QLatin1Char('0'));
   return alpha + year + serial + suffix;
 }
 

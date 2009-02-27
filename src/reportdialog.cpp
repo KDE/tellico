@@ -74,8 +74,8 @@ ReportDialog::ReportDialog(QWidget* parent_)
   foreach(const QString& file, files) {
     QFileInfo fi(file);
     QString lfile = fi.fileName();
-    QString name = lfile.section('.', 0, -2);
-    name.replace('_', ' ');
+    QString name = lfile.section(QLatin1Char('.'), 0, -2);
+    name.replace(QLatin1Char('_'), QLatin1Char(' '));
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
@@ -112,7 +112,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QString text = QString::fromLatin1("<html><style>p{font-weight:bold;width:50%;"
                                      "margin:20% auto auto auto;text-align:center;"
                                      "background:white;color:%1;}</style><body><p>").arg(color.name())
-               + i18n("Select a report template and click <em>Generate</em>.") + ' '
+               + i18n("Select a report template and click <em>Generate</em>.") + QLatin1Char(' ')
                + i18n("Some reports may take several seconds to generate for large collections.")
                + QLatin1String("</p></body></html>");
   m_HTMLPart->begin();
@@ -203,7 +203,7 @@ void ReportDialog::slotPrint() {
 }
 
 void ReportDialog::slotSaveAs() {
-  QString filter = i18n("*.html|HTML Files (*.html)") + QChar('\n') + i18n("*|All Files");
+  QString filter = i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
   KUrl u = KFileDialog::getSaveUrl(KUrl(), filter, this);
   if(!u.isEmpty() && u.isValid()) {
     KConfigGroup config(KGlobal::config(), "ExportOptions");

@@ -183,9 +183,13 @@ void EntryView::showText(const QString& text_) {
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
+  if(file_.isEmpty()) {
+    myWarning() << "empty xslt file";
+    return;
+  }
   QString oldFile = m_xsltFile;
   // if starts with slash, then absolute path
-  if(file_.at(0) == '/') {
+  if(file_.at(0) == QLatin1Char('/')) {
     m_xsltFile = file_;
   } else {
     const QString templateDir = QLatin1String("entry-templates/");
@@ -198,7 +202,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       if(m_xsltFile.isEmpty()) {
         QString str = QLatin1String("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
-        str += QChar(' ');
+        str += QLatin1Char(' ');
         str += i18n("Please check your installation.");
         str += QLatin1String("</qt>");
         KMessageBox::error(view(), str);
@@ -344,7 +348,7 @@ void EntryView::slotResetColors() {
 void EntryView::resetColors() {
   ImageFactory::createStyleImages(); // recreate gradients
 
-  QString dir = m_handler ? m_handler->param("imgdir") : QString();
+  QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {
     dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
   } else {

@@ -733,7 +733,7 @@ void MainWindow::initFileOpen(bool nofile_) {
     text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
     text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
     text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
-    text.replace(QLatin1String("$IMGDIR$"),  QFile::encodeName(ImageFactory::tempDir()));
+    text.replace(QLatin1String("$IMGDIR$"),  ImageFactory::tempDir());
     text.replace(QLatin1String("$BANNER$"),
                  i18n("Welcome to the Tellico Collection Manager"));
     text.replace(QLatin1String("$WELCOMETEXT$"),
@@ -892,7 +892,7 @@ void MainWindow::readOptions() {
 
   m_viewStack->iconView()->setMaxAllowedIconWidth(Config::maxIconSize());
 
-  connect(toolBar("collectionToolBar"), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
+  connect(toolBar(QLatin1String("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
 
   m_toggleGroupWidget->setChecked(Config::showGroupWidget());
   slotToggleGroupWidget();
@@ -1176,7 +1176,7 @@ bool MainWindow::fileSaveAs() {
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
   QString filter = i18n("*.tc *.bc|Tellico Files (*.tc)");
-  filter += QChar('\n');
+  filter += QLatin1Char('\n');
   filter += i18n("*|All Files");
 
   // keyword 'open'
@@ -1411,13 +1411,13 @@ void MainWindow::slotEntryCount() {
   int filterCount = m_detailedView->visibleItems();
   // if more than one book is selected, add the number of selected books
   if(filterCount < count && selectCount > 1) {
-    text += QChar(' ');
+    text += QLatin1Char(' ');
     text += i18n("(%1 filtered; %2 selected)", filterCount, selectCount);
   } else if(filterCount < count) {
-    text += QChar(' ');
+    text += QLatin1Char(' ');
     text += i18n("(%1 filtered)", filterCount);
   } else if(selectCount > 1) {
-    text += QChar(' ');
+    text += QLatin1Char(' ');
     text += i18n("(%1 selected)", selectCount);
   }
 
@@ -1493,7 +1493,7 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
   foreach(const QString& groupName, groups) {
     // special case for people "pseudo-group"
     if(groupName == Data::Collection::s_peopleGroupName) {
-      groupMap.insert(groupName, '<' + i18n("People") + '>');
+      groupMap.insert(groupName, QLatin1Char('<') + i18n("People") + QLatin1Char('>'));
     } else {
       groupMap.insert(groupName, coll_->fieldTitleByName(groupName));
     }
@@ -1538,7 +1538,7 @@ void MainWindow::slotChangeGrouping() {
 
   QString groupName = Kernel::self()->fieldNameByTitle(title);
   if(groupName.isEmpty()) {
-    if(title == QLatin1String("<") + i18n("People") + QLatin1String(">")) {
+    if(title == (QLatin1Char('<') + i18n("People") + QLatin1Char('>'))) {
       groupName = Data::Collection::s_peopleGroupName;
     } else {
       groupName = Data::Document::self()->collection()->defaultGroupField();
@@ -1585,7 +1585,7 @@ void MainWindow::doPrint(const QString& html_) {
 }
 
 void MainWindow::XSLTError() {
-  QString str = i18n("Tellico encountered an error in XSLT processing.") + QChar('\n');
+  QString str = i18n("Tellico encountered an error in XSLT processing.") + QLatin1Char('\n');
   str += i18n("Please check your installation.");
   Kernel::self()->sorry(str);
 }
@@ -1638,7 +1638,7 @@ void MainWindow::slotUpdateFilter() {
 void MainWindow::slotClearFilterNow() {
   // Can't just block signals because clear button won't show then
   m_dontQueueFilter = true;
-  m_quickFilter->setText(" "); // To be able to clear custom filter
+  m_quickFilter->setText(QLatin1String(" ")); // To be able to clear custom filter
   setFilter(QString());
   m_dontQueueFilter = false;
 }
@@ -1650,9 +1650,9 @@ void MainWindow::setFilter(const QString& text_) {
     filter.attach(new Filter(Filter::MatchAll));
     QString fieldName; // empty field name means match on any field
     // if the text contains '=' assume it's a field name or title
-    if(text.indexOf('=') > -1) {
-        fieldName = text.section('=', 0, 0).trimmed();
-        text = text.section('=', 1).trimmed();
+    if(text.indexOf(QLatin1Char('=')) > -1) {
+        fieldName = text.section(QLatin1Char('='), 0, 0).trimmed();
+        text = text.section(QLatin1Char('='), 1).trimmed();
         // check that the field name might be a title
         if(!Data::Document::self()->collection()->hasField(fieldName)) {
         fieldName = Data::Document::self()->collection()->fieldNameByTitle(fieldName);
@@ -2002,7 +2002,7 @@ void MainWindow::updateCaption(bool modified_) {
     KUrl u = Data::Document::self()->URL();
     if(u.isLocalFile()) {
       // for new files, the path is set to /Untitled in Data::Document
-      if(u.path() == '/' + i18n("Untitled")) {
+      if(u.path() == QLatin1Char('/') + i18n("Untitled")) {
         caption += u.fileName();
       } else {
         caption += u.path();
@@ -2042,7 +2042,7 @@ void MainWindow::slotUpdateToolbarIcons() {
 
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
-  KToolBar* tb = toolBar("collectionToolBar");
+  KToolBar* tb = toolBar(QLatin1String("collectionToolBar"));
   if(!tb) {
     return;
   }

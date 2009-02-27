@@ -53,8 +53,8 @@ QString FieldFormat::title(const QString& title_) {
     foreach(const QString& article, articles) {
       // assume white space is already stripped
       // the articles are already in lower-case
-      if(lower.startsWith(article + ' ')) {
-        QRegExp regexp(QChar('^') + QRegExp::escape(article) + QLatin1String("\\s*"), Qt::CaseInsensitive);
+      if(lower.startsWith(article + QLatin1Char(' '))) {
+        QRegExp regexp(QLatin1Char('^') + QRegExp::escape(article) + QLatin1String("\\s*"), Qt::CaseInsensitive);
         // can't just use article since it's in lower-case
         QString titleArticle = newTitle.left(article.length());
         newTitle = newTitle.remove(regexp)
@@ -101,10 +101,10 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
 
     // split the name by white space and commas
     QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
-    lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
+    lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
 
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!Config::autoFormat() || (name.indexOf(',') > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
+    if(!Config::autoFormat() || (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       name.replace(commaSplitRx, QLatin1String(", "));
@@ -116,26 +116,26 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
     if(words.count() > 1) {
       // if the last word is a suffix, it has to be kept with last name
       if(Config::nameSuffixList().filter(lastWord).count() > 0) {
-        words.prepend(words.last().append(QChar(',')));
+        words.prepend(words.last().append(QLatin1Char(',')));
         words.removeLast();
       }
 
       // now move the word
       // adding comma here when there had been a suffix is because it was originally split with space or comma
-      words.prepend(words.last().append(QChar(',')));
+      words.prepend(words.last().append(QLatin1Char(',')));
       words.removeLast();
 
       // update last word regexp
-      lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
+      lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
 
       // this is probably just something for me, limited to english
       while(Config::surnamePrefixList().filter(lastWord).count() > 0) {
         words.prepend(words.last());
         words.removeLast();
-        lastWord.setPattern(QChar('^') + QRegExp::escape(words.last()) + QChar('$'));
+        lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
       }
 
-      names << words.join(QChar(' ')) + tail;
+      names << words.join(QLatin1String(" ")) + tail;
     } else {
       names << name + tail;
     }
@@ -151,7 +151,7 @@ QString FieldFormat::date(const QString& date_) {
   bool empty = true;
   // for empty year, use current
   // for empty month or date, use 1
-  QStringList s = date_.split('-');
+  QStringList s = date_.split(QLatin1Char('-'));
   bool ok = true;
   int y = s.count() > 0 ? s[0].toInt(&ok) : QDate::currentDate().year();
   if(ok) {
@@ -230,7 +230,7 @@ QString FieldFormat::capitalize(QString str_) {
     }
 
     if(!aposMatch) {
-      wordRx.setPattern(QChar('^') + QRegExp::escape(word) + QChar('$'));
+      wordRx.setPattern(QLatin1Char('^') + QRegExp::escape(word) + QLatin1Char('$'));
       if(notCap.filter(wordRx).isEmpty() && nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).toUpper());
       }
@@ -246,7 +246,7 @@ QString FieldFormat::sortKeyTitle(const QString& title_) {
   foreach(const QString& article, articles) {
     // assume white space is already stripped
     // the articles are already in lower-case
-    if(lower.startsWith(article + ' ')) {
+    if(lower.startsWith(article + QLatin1Char(' '))) {
       return title_.mid(article.length() + 1);
     }
   }
@@ -264,7 +264,7 @@ void FieldFormat::articlesUpdated() {
   articles = Config::articleList();
   articlesApos.clear();
   foreach(const QString& article, articles) {
-    if(article.endsWith(QChar('\''))) {
+    if(article.endsWith(QLatin1Char('\''))) {
       articlesApos += article;
     }
   }

@@ -187,7 +187,7 @@ QChar Iso5426Converter::getChar(uchar c) {
   // 7/13 (this position shall not be used)
   // 7/14 (this position shall not be used)
   default:
-    return c;
+    return QLatin1Char(c);
   }
 }
 

@@ -259,47 +259,47 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
   QString text;
   switch(format_) {
     case Import::TellicoXML:
-      text = i18n("*.tc *.bc|Tellico Files (*.tc)") + QChar('\n');
-      text += i18n("*.xml|XML Files (*.xml)") + QChar('\n');
+      text = i18n("*.tc *.bc|Tellico Files (*.tc)") + QLatin1Char('\n');
+      text += i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
 
     case Import::Bibtex:
-      text = i18n("*.bib|Bibtex Files (*.bib)") + QChar('\n');
+      text = i18n("*.bib|Bibtex Files (*.bib)") + QLatin1Char('\n');
       break;
 
     case Import::CSV:
-      text = i18n("*.csv|CSV Files (*.csv)") + QChar('\n');
+      text = i18n("*.csv|CSV Files (*.csv)") + QLatin1Char('\n');
       break;
 
     case Import::Bibtexml:
     case Import::XSLT:
-      text = i18n("*.xml|XML Files (*.xml)") + QChar('\n');
+      text = i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
 
     case Import::MODS:
     case Import::Delicious:
-      text = i18n("*.xml|XML Files (*.xml)") + QChar('\n');
+      text = i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
 
     case Import::RIS:
-      text = i18n("*.ris|RIS Files (*.ris)") + QChar('\n');
+      text = i18n("*.ris|RIS Files (*.ris)") + QLatin1Char('\n');
       break;
 
     case Import::GCfilms:
-      text = i18n("*.gcs|GCstar Data Files (*.gcs)") + QChar('\n');
-      text += i18n("*.gcf|GCfilms Data Files (*.gcf)") + QChar('\n');
+      text = i18n("*.gcs|GCstar Data Files (*.gcs)") + QLatin1Char('\n');
+      text += i18n("*.gcf|GCfilms Data Files (*.gcf)") + QLatin1Char('\n');
       break;
 
     case Import::AMC:
-      text = i18n("*.amc|AMC Data Files (*.amc)") + QChar('\n');
+      text = i18n("*.amc|AMC Data Files (*.amc)") + QLatin1Char('\n');
       break;
 
     case Import::PDF:
-      text = i18n("*.pdf|PDF Files (*.pdf)") + QChar('\n');
+      text = i18n("*.pdf|PDF Files (*.pdf)") + QLatin1Char('\n');
       break;
 
     case Import::Referencer:
-      text = i18n("*.reflib|Referencer Files (*.reflib)") + QChar('\n');
+      text = i18n("*.reflib|Referencer Files (*.reflib)") + QLatin1Char('\n');
       break;
 
     case Import::AudioFile:

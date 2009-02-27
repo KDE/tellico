@@ -22,8 +22,10 @@
 
 #include <klocale.h>
 #include <klineedit.h>
+#ifdef HAVE_KABC
 #include <kabc/addressee.h>
 #include <kabc/stdaddressbook.h>
+#endif
 
 #include <QVBoxLayout>
 
@@ -34,11 +36,13 @@
 
 using Tellico::BorrowerDialog;
 
+#ifdef HAVE_KABC
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const KABC::Addressee& add_)
     : QTreeWidgetItem(parent_), m_uid(add_.uid()) {
   setData(0, Qt::DisplayRole, add_.realName());
   setData(0, Qt::DecorationRole, KIcon(QLatin1String("kaddressbook")));
 }
+#endif
 
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const Tellico::Data::Borrower& bor_)
     : QTreeWidgetItem(parent_), m_uid(bor_.uid()) {
@@ -72,11 +76,13 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_)
   m_lineEdit->setFocus();
   m_lineEdit->completionObject()->setIgnoreCase(true);
 
+#ifdef HAVE_KABC
   KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
   connect(abook, SIGNAL(addressBookChanged(AddressBook*)),
           SLOT(slotLoadAddressBook()));
   connect(abook, SIGNAL(loadingFinished(Resource*)),
           SLOT(slotLoadAddressBook()));
+#endif
   slotLoadAddressBook();
 
   setMinimumWidth(400);
@@ -87,6 +93,7 @@ void BorrowerDialog::slotLoadAddressBook() {
   m_itemHash.clear();
   m_lineEdit->completionObject()->clear();
 
+#ifdef HAVE_KABC
   const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
       it != end; ++it) {
@@ -98,6 +105,7 @@ void BorrowerDialog::slotLoadAddressBook() {
     m_itemHash.insert((*it).realName(), item);
     m_lineEdit->completionObject()->addItem((*it).realName());
   }
+#endif
 
   // add current borrowers, too
   Data::BorrowerList borrowers = Data::Document::self()->collection()->borrowers();

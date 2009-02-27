@@ -344,10 +344,10 @@ QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool 
 
   int endPos;
   int curPos = 0;
-  int pctPos = format_.indexOf('%', curPos);
+  int pctPos = format_.indexOf(QLatin1Char('%'), curPos);
   while(pctPos != -1 && pctPos+1 < static_cast<int>(format_.length())) {
-    if(format_[pctPos+1] == '{') {
-      endPos = format_.indexOf('}', pctPos+2);
+    if(format_[pctPos+1] == QLatin1Char('{')) {
+      endPos = format_.indexOf(QLatin1Char('}'), pctPos+2);
       if(endPos > -1) {
         result += format_.mid(curPos, pctPos-curPos);
         fieldName = format_.mid(pctPos+2, endPos-pctPos-2);
@@ -372,7 +372,7 @@ QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool 
       result += format_.mid(curPos, pctPos-curPos+1);
       curPos = pctPos+1;
     }
-    pctPos = format_.indexOf('%', curPos);
+    pctPos = format_.indexOf(QLatin1Char('%'), curPos);
   }
   result += format_.mid(curPos, format_.length()-curPos);
 //  myDebug() << "Entry::dependentValue() - " << format_ << " = " << result << endl;
