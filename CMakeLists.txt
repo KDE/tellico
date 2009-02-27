@@ -56,9 +56,17 @@ macro_log_feature(YAZ_FOUND "libyaz" "Support for searching z39.50 databases" "h
 
 macro_optional_find_package(PopplerQt4)
 macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
+if(POPPLER_QT4_FOUND)
+    add_definitions(${POPPLER_QT4_DEFINITIONS})
+    include_directories(${POPPLER_QT4_INCLUDE_DIR})
+endif(POPPLER_QT4_FOUND)
 
 macro_optional_find_package(Exempi 2.0)
 macro_log_feature(LIBEXEMPI_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
+if(LIBEXEMPI_FOUND)
+    add_definitions(${LIBEXEMPI_CFLAGS})
+    include_directories(${LIBEXEMPI_INCLUDE_DIR})
+endif(LIBEXEMPI_FOUND)
 
 if(CMAKE_SYSTEM_NAME MATCHES Linux)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
@@ -66,8 +74,6 @@ endif(CMAKE_SYSTEM_NAME MATCHES Linux)
 
 add_definitions(${QT_DEFINITIONS}
                 ${KDE4_DEFINITIONS}
-                ${POPPLER_QT4_DEFINITIONS}
-                ${LIBEXEMPI_CFLAGS}
                 ${TAGLIB_CFLAGS}
                 ${YAZ_CFLAGS})
 add_definitions(-DQT_STRICT_ITERATORS -DQT_STL)
@@ -77,8 +83,6 @@ include_directories(${KDE4_INCLUDES}
                     ${QT_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
-                    ${POPPLER_QT4_INCLUDE_DIR}
-                    ${LIBEXEMPI_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_SOURCE_DIR}/src/core
                     ${CMAKE_SOURCE_DIR}/src/3rdparty)
@@ -92,7 +96,7 @@ add_subdirectory(icons)
 add_subdirectory(xslt)
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
-message("WARNING: CDDB Lookup is not supported on your platform")
+    message("WARNING: CDDB Lookup is not supported on your platform")
 endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
 
 ########## Wrap tests results around the tests done within the source
