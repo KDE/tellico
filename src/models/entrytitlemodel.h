@@ -42,7 +42,7 @@ private:
   QString imageField(Data::CollPtr coll) const;
 
   mutable QHash<int, KIcon*> m_defaultIcons;
-  mutable QHash<int, QString> m_imageFields;
+  mutable QHash<long, QString> m_imageFields;
 };
 
 } // end namespace
