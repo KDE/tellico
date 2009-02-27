@@ -18,12 +18,6 @@ option(ENABLE_CDTEXT "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM "Enable support for webcams" FALSE)
 option(ENABLE_SAX "Enable SAX loading" TRUE)
 
-option(ENABLE_POPPLER "Enable poppler support" TRUE)
-option(ENABLE_EXEMPI "Enable exempi support" TRUE)
-
-option(ENABLE_LIBKCAL "Enable libkcal support" FALSE)
-option(ENABLE_LIBKCDDB "Enable libkcddb support" TRUE)
-
 include(CheckTypeSize)
 check_type_size("unsigned char" SIZEOF_UNSIGNED_CHAR)
 check_type_size("unsigned short" SIZEOF_UNSIGNED_SHORT)
@@ -43,41 +37,28 @@ include(MacroLibrary)
 include(MacroBoolTo01)
 include(MacroLogFeature)
 
-macro_log_feature(KDE4_FOUND "kdelibs" "????" "http://www.kde.org" TRUE "4.2.0" "")
-
 find_package(Gettext REQUIRED)
-macro_log_feature(GETTEXT_FOUND "gettext" "????" "http://www.gnu.org/software/gettext/" TRUE "" "")
-
 find_package(QImageBlitz REQUIRED)
-macro_log_feature(QIMAGEBLITZ_FOUND "libqimageblitz" "????" "http://www.kde.org" TRUE "" "")
-
-find_package(KdepimLibs REQUIRED)
-macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "????" "http://www.kde.org" TRUE "4.2.0" "")
-
 find_package(LibXml2 REQUIRED)
-macro_log_feature(LIBXML2_FOUND "libxml2" "????" "http://www.xmlsoft.org" TRUE "" "")
-
 find_package(LibXslt REQUIRED)
-macro_log_feature(LIBXSLT_FOUND "libxslt" "????" "http://www.xmlsoft.org" TRUE "" "")
 
-find_package(Kcddb)
-macro_log_feature(KCDDB_FOUND "kcddb" "????" "http://multimedia.kde.org" FALSE "4.2.0" "")
+macro_optional_find_package(Kcal)
+macro_log_feature(KCAL_FOUND "libkcal" "Support for adding loans to calendar" "http://www.kde.org" FALSE "4.2.0" "")
 
-find_package(Taglib)
-macro_log_feature(TAGLIB_FOUND "taglib" "????" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
+macro_optional_find_package(Kcddb)
+macro_log_feature(KCDDB_FOUND "libkcddb" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
 
-find_package(Yaz 2.0)
-macro_log_feature(YAZ_FOUND "libyaz" "????" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
+macro_optional_find_package(Taglib)
+macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
 
-if(ENABLE_POPPLER)
-find_package(PopplerQt4)
-macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "????" "http://poppler.freedesktop.org/" FALSE "" "")
-endif(ENABLE_POPPLER)
+macro_optional_find_package(Yaz 2.0)
+macro_log_feature(YAZ_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
 
-if(ENABLE_EXEMPI)
-find_package(Exempi 2.0)
-macro_log_feature(LIBEXEMPI_FOUND "libexempi" "????" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
-endif(ENABLE_EXEMPI)
+macro_optional_find_package(PopplerQt4)
+macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
+
+macro_optional_find_package(Exempi 2.0)
+macro_log_feature(LIBEXEMPI_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
 
 if(CMAKE_SYSTEM_NAME MATCHES Linux)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
@@ -86,7 +67,7 @@ endif(CMAKE_SYSTEM_NAME MATCHES Linux)
 add_definitions(${QT_DEFINITIONS}
                 ${KDE4_DEFINITIONS}
                 ${POPPLER_QT4_DEFINITIONS}
-                ${LIBEXEMPI_DEFINITIONS}
+                ${LIBEXEMPI_CFLAGS}
                 ${TAGLIB_CFLAGS}
                 ${YAZ_CFLAGS})
 add_definitions(-DQT_STRICT_ITERATORS -DQT_STL)
@@ -96,12 +77,12 @@ include_directories(${KDE4_INCLUDES}
                     ${QT_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
-                    ${LIBEXEMPI_INCLUDE_DIR}
                     ${POPPLER_QT4_INCLUDE_DIR}
+                    ${LIBEXEMPI_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_SOURCE_DIR}/src/core
                     ${CMAKE_SOURCE_DIR}/src/3rdparty)
-                    
+
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
 add_subdirectory(src)
@@ -119,20 +100,16 @@ endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
 macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
-macro_bool_to_01(HAVE_KCAL ENABLE_LIBKCAL)
+macro_bool_to_01(KCAL_FOUND HAVE_KCAL)
 macro_bool_to_01(YAZ_FOUND HAVE_YAZ)
-if(ENABLE_LIBKCAL)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
-endif(ENABLE_LIBKCAL)
-if(ENABLE_LIBKCDDB)
 macro_bool_to_01(KCDDB_FOUND HAVE_KCDDB)
-endif(ENABLE_LIBKCDDB)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 ########### install files ###############
 
-install(FILES tellico.dtd tellico.tips DESTINATION ${DATA_INSTALL_DIR}/tellico)
+install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
 install(FILES tellico.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${XDG_MIME_INSTALL_DIR})
 install(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application)
