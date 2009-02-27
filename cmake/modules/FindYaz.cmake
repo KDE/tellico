@@ -14,6 +14,7 @@ find_path(YAZ_INCLUDE_DIR
     NAMES yaz-version.h
     PATH_SUFFIXES yaz
     PATHS ${YAZ_INCLUDEDIR})
+
 find_library(YAZ_LIBRARIES NAMES yaz ${YAZ_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)

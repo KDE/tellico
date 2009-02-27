@@ -29,7 +29,7 @@ FIND_LIBRARY(KCDDB_LIBRARIES
 )
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(libkcddb "libkcddb was not found. Need to install from kdemultimedia" KCDDB_LIBRARIES KCDDB_INCLUDE_DIR)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(kcddb "libkcddb was not found. Need to install from kdemultimedia" KCDDB_LIBRARIES KCDDB_INCLUDE_DIR)
 
 # show the KCDDB_INCLUDE_DIR and KCDDB_LIBRARIES variables only in the advanced view
 MARK_AS_ADVANCED(KCDDB_INCLUDE_DIR KCDDB_LIBRARIES )

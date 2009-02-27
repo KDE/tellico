@@ -29,7 +29,7 @@ FIND_LIBRARY(KCAL_LIBRARIES
 )
 
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(libkcal "libkcal was not found. Need to install from kdepimlibs" KCAL_LIBRARIES KCAL_INCLUDE_DIR)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(kcal "libkcal was not found. Need to install from kdepimlibs" KCAL_LIBRARIES KCAL_INCLUDE_DIR)
 
 # show the KCAL_INCLUDE_DIR and KCAL_LIBRARIES variables only in the advanced view
 MARK_AS_ADVANCED(KCAL_INCLUDE_DIR KCAL_LIBRARIES )
