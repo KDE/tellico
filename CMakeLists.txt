@@ -42,8 +42,13 @@ find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
+macro_optional_find_package(Kabc)
+macro_log_feature(KABC_FOUND "kabc" "Support for reading address book" "http://pim.kde.org" FALSE "4.2.0" "")
+
 macro_optional_find_package(Kcal)
-macro_log_feature(KCAL_FOUND "libkcal" "Support for adding loans to calendar" "http://www.kde.org" FALSE "4.2.0" "")
+macro_log_feature(KCAL_FOUND "kcal" "Support for adding loans to calendar" "http://pim.kde.org" FALSE "4.2.0" "")
+# for now, kcal doesn't compile
+set(KCAL_FOUND FALSE)
 
 macro_optional_find_package(Kcddb)
 macro_log_feature(KCDDB_FOUND "libkcddb" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
@@ -76,7 +81,7 @@ add_definitions(${QT_DEFINITIONS}
                 ${KDE4_DEFINITIONS}
                 ${TAGLIB_CFLAGS}
                 ${YAZ_CFLAGS})
-add_definitions(-DQT_STRICT_ITERATORS -DQT_STL)
+add_definitions(-DQT_STRICT_ITERATORS -DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL)
 
 include_directories(${KDE4_INCLUDES}
@@ -104,10 +109,11 @@ endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
 macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
-macro_bool_to_01(KCAL_FOUND HAVE_KCAL)
 macro_bool_to_01(YAZ_FOUND HAVE_YAZ)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
 macro_bool_to_01(KCDDB_FOUND HAVE_KCDDB)
+macro_bool_to_01(KABC_FOUND HAVE_KABC)
+macro_bool_to_01(KCAL_FOUND HAVE_KCAL)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
