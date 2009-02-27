@@ -20,7 +20,7 @@
 #include <kstandarddirs.h>
 #include <kconfig.h>
 
-#ifdef USE_KCAL
+#ifdef HAVE_KCAL
 #include <libkcal/calendarresources.h>
 #include <libkcal/todo.h>
 #include <libkcal/resourcelocal.h>
@@ -36,14 +36,14 @@
 using Tellico::CalendarHandler;
 
 void CalendarHandler::addLoans(Tellico::Data::LoanList loans_) {
-#ifdef USE_KCAL
+#ifdef HAVE_KCAL
   addLoans(loans_, 0);
 #else
   Q_UNUSED(loans_);
 #endif
 }
 
-#ifdef USE_KCAL
+#ifdef HAVE_KCAL
 void CalendarHandler::addLoans(Data::LoanList loans_, KCal::CalendarResources* resources_) {
   if(loans_.isEmpty()) {
     return;
@@ -83,7 +83,7 @@ void CalendarHandler::addLoans(Data::LoanList loans_, KCal::CalendarResources* r
 #endif
 
 void CalendarHandler::modifyLoans(Tellico::Data::LoanList loans_) {
-#ifndef USE_KCAL
+#ifndef HAVE_KCAL
   Q_UNUSED(loans_);
   return;
 #else
@@ -124,7 +124,7 @@ void CalendarHandler::modifyLoans(Tellico::Data::LoanList loans_) {
 }
 
 void CalendarHandler::removeLoans(Tellico::Data::LoanList loans_) {
-#ifndef USE_KCAL
+#ifndef HAVE_KCAL
   Q_UNUSED(loans_);
   return;
 #else
@@ -151,7 +151,7 @@ void CalendarHandler::removeLoans(Tellico::Data::LoanList loans_) {
 #endif
 }
 
-#ifdef USE_KCAL
+#ifdef HAVE_KCAL
 bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
   KCal::CalendarResourceManager* manager = resources->resourceManager();
   if(manager->isEmpty()) {

@@ -17,14 +17,6 @@
 #include <config.h>
 #include "borrower.h"
 
-#include <kdeversion.h>
-
-// libkcal is not binary compatible between versions
-// for now, just support KDE 3.4 and higher
-#if defined(HAVE_KCAL) && KDE_IS_VERSION(3,3,90)
-#define USE_KCAL
-#endif
-
 namespace KCal {
   class CalendarResources;
   class Todo;
@@ -44,7 +36,7 @@ public:
 private:
   static QString timezone();
 
-#ifdef USE_KCAL
+#ifdef HAVE_KCAL
   // helper function
   static void addLoans(Data::LoanList loans, KCal::CalendarResources* resources);
   static bool checkCalendar(KCal::CalendarResources* resources);
