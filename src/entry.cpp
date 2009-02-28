@@ -61,7 +61,7 @@ bool Entry::operator==(const Entry& e1) {
   return m_fieldValues == e1.m_fieldValues;
 }
 
-Entry::Entry(Tellico::Data::CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) {
+Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
   if(!coll_) {
     kWarning() << "Entry() - null collection pointer!";
@@ -69,7 +69,7 @@ Entry::Entry(Tellico::Data::CollPtr coll_) : KShared(), m_coll(coll_), m_id(-1) 
 #endif
 }
 
-Entry::Entry(Tellico::Data::CollPtr coll_, int id_) : KShared(), m_coll(coll_), m_id(id_) {
+Entry::Entry(Tellico::Data::CollPtr coll_, int id_) : QSharedData(), m_coll(coll_), m_id(id_) {
 #ifndef NDEBUG
   if(!coll_) {
     kWarning() << "Entry() - null collection pointer!";
@@ -78,7 +78,7 @@ Entry::Entry(Tellico::Data::CollPtr coll_, int id_) : KShared(), m_coll(coll_), 
 }
 
 Entry::Entry(const Entry& entry_) :
-    KShared(entry_),
+    QSharedData(entry_),
     m_coll(entry_.m_coll),
     m_id(-1),
     m_fieldValues(entry_.m_fieldValues),
@@ -89,7 +89,7 @@ Entry& Entry::operator=(const Entry& other_) {
   if(this == &other_) return *this;
 
 //  myDebug() << "Entry::operator=()" << endl;
-//  static_cast<KShared&>(*this) = static_cast<const KShared&>(other_);
+//  static_cast<QSharedData&>(*this) = static_cast<const QSharedData&>(other_);
   m_coll = other_.m_coll;
   m_id = other_.m_id;
   m_fieldValues = other_.m_fieldValues;

@@ -44,7 +44,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class Collection : public QObject, public KShared {
+class Collection : public QObject, public QSharedData {
 Q_OBJECT
 
 public:

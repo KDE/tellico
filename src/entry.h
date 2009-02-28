@@ -66,7 +66,7 @@ private:
  *
  * @author Robby Stephenson
  */
-class Entry : public KShared {
+class Entry : public QSharedData {
 
 public:
   /**

@@ -27,7 +27,7 @@ using Tellico::Data::Field;
 
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
-    : KShared(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
+    : QSharedData(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
       m_type(type_), m_flags(0), m_formatFlag(FormatNone) {
 
 #ifndef NDEBUG
@@ -59,13 +59,13 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
-    : KShared(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
+    : QSharedData(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
   m_id = getID();
 }
 
 Field::Field(const Field& field_)
-    : KShared(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
+    : QSharedData(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
       m_desc(field_.description()), m_type(field_.type()),
       m_flags(field_.flags()), m_formatFlag(field_.formatFlag()),
       m_properties(field_.propertyList()) {
@@ -81,7 +81,7 @@ Field::Field(const Field& field_)
 Field& Field::operator=(const Field& field_) {
   if(this == &field_) return *this;
 
-//  static_cast<KShared&>(*this) = static_cast<const KShared&>(field_);
+//  static_cast<QSharedData&>(*this) = static_cast<const QSharedData&>(field_);
   m_name = field_.name();
   m_title = field_.title();
   m_category = field_.category();

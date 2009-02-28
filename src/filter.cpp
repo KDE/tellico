@@ -105,7 +105,7 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
 
 /*******************************************************/
 
-Filter::Filter(const Filter& other_) : QList<FilterRule*>(), KShared()
+Filter::Filter(const Filter& other_) : QList<FilterRule*>(), QSharedData()
     , m_op(other_.op())
     , m_name(other_.name()) {
   foreach(const FilterRule* rule, static_cast<const QList<FilterRule*>&>(other_)) {

@@ -30,7 +30,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class Field : public KShared {
+class Field : public QSharedData {
 public:
   /**
    * The possible field types. A Line is represented by a KLineEdit,

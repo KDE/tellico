@@ -25,7 +25,7 @@
 namespace Tellico {
   namespace Data {
 
-class Loan : public KShared {
+class Loan : public QSharedData {
 
 public:
   Loan(Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note);
@@ -68,7 +68,7 @@ typedef QList<LoanPtr> LoanList;
 /**
  * @author Robby Stephenson
  */
-class Borrower : public KShared {
+class Borrower : public QSharedData {
 
 public:
   Borrower(const QString& name, const QString& uid);

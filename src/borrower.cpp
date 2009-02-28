@@ -19,11 +19,11 @@ using Tellico::Data::Loan;
 using Tellico::Data::Borrower;
 
 Loan::Loan(Tellico::Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note)
-    : KShared(), m_uid(Tellico::uid()), m_borrower(0), m_entry(entry), m_loanDate(loanDate), m_dueDate(dueDate),
+    : QSharedData(), m_uid(Tellico::uid()), m_borrower(0), m_entry(entry), m_loanDate(loanDate), m_dueDate(dueDate),
       m_note(note), m_inCalendar(false) {
 }
 
-Loan::Loan(const Loan& other) : KShared(other), m_uid(Tellico::uid()), m_borrower(other.m_borrower),
+Loan::Loan(const Loan& other) : QSharedData(other), m_uid(Tellico::uid()), m_borrower(other.m_borrower),
       m_entry(other.m_entry), m_loanDate(other.m_loanDate), m_dueDate(other.m_dueDate),
       m_note(other.m_note), m_inCalendar(false) {
 }
@@ -37,17 +37,17 @@ Tellico::Data::EntryPtr Loan::entry() const {
 }
 
 Borrower::Borrower(const QString& name_, const QString& uid_)
-    : KShared(), m_name(name_), m_uid(uid_) {
+    : QSharedData(), m_name(name_), m_uid(uid_) {
 }
 
 Borrower::Borrower(const Borrower& b)
-    : KShared(b), m_name(b.m_name), m_uid(b.m_uid), m_loans(b.m_loans) {
+    : QSharedData(b), m_name(b.m_name), m_uid(b.m_uid), m_loans(b.m_loans) {
 }
 
 Borrower& Borrower::operator=(const Borrower& other_) {
   if(this == &other_) return *this;
 
-//  static_cast<KShared&>(*this) = static_cast<const KShared&>(other_);
+//  static_cast<QSharedData&>(*this) = static_cast<const QSharedData&>(other_);
   m_name = other_.m_name;
   m_uid = other_.m_uid;
   m_loans = other_.m_loans;

@@ -480,7 +480,7 @@ void CollectionFieldsDialog::slotDelete() {
   }
   m_fieldsWidget->removeItemWidget(m_fieldsWidget->currentItem());
   m_fieldsWidget->scrollToItem(m_fieldsWidget->currentItem());
-  m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field(); // KShared gets auto-deleted
+  m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field(); // QSharedData gets auto-deleted
 }
 
 void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {

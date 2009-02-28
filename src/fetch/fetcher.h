@@ -35,7 +35,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class Fetcher : public QObject, public KShared {
+class Fetcher : public QObject, public QSharedData {
 Q_OBJECT
 
 public:
@@ -44,7 +44,7 @@ public:
 
   /**
    */
-  Fetcher(QObject* parent) : QObject(parent), KShared(),
+  Fetcher(QObject* parent) : QObject(parent), QSharedData(),
                              m_updateOverwrite(false), m_hasMoreResults(false),
                              m_messager(0) {}
   /**

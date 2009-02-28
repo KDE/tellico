@@ -98,7 +98,7 @@ private:
  *
  * @author Robby Stephenson
  */
-class Filter : public QList<FilterRule*>, public KShared {
+class Filter : public QList<FilterRule*>, public QSharedData {
 
 public:
   enum FilterOp {

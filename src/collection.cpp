@@ -33,7 +33,7 @@ const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
 Collection::Collection(const QString& title_)
-    : QObject(), KShared(), m_nextEntryId(0), m_title(title_), m_entryIdDict()
+    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_entryIdDict()
     , m_trackGroups(false) {
   m_id = getID();
 }
