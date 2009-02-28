@@ -575,7 +575,7 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
   FieldPtr field = fieldByName(key_);
 
   // if the type is not multiple choice or if value_ is allowed, return true
-  if(field && (field->type() != Field::Choice || field->allowed().indexOf(value_) > -1)) {
+  if(field && (field->type() != Field::Choice || field->allowed().contains(value_))) {
     return true;
   }
 
@@ -758,6 +758,27 @@ void Collection::cleanGroups() {
     delete groupToDelete;
   }
   m_groupsToDelete.clear();
+}
+
+Tellico::Data::FieldList Collection::fieldDependsOn(FieldPtr field_) const {
+  FieldList vec;
+  if(field_->type() != Field::Dependent) {
+    return vec;
+  }
+
+  const QStringList fieldNames = field_->dependsOn();
+  // do NOT call recursively!
+  foreach(const QString& fieldName, fieldNames) {
+    FieldPtr targetField = fieldByName(fieldName);
+    if(!targetField) {
+      // allow the user to also use field titles
+      targetField = fieldByTitle(fieldName);
+    }
+    if(targetField) {
+      vec.append(targetField);
+    }
+  }
+  return vec;
 }
 
 bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {

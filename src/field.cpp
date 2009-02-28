@@ -15,7 +15,6 @@
 #include "fieldformat.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
-#include "collection.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -160,7 +159,7 @@ QString Field::defaultValue() const {
 }
 
 void Field::setDefaultValue(const QString& value_) {
-  if(value_.isEmpty() || m_type != Choice || m_allowed.indexOf(value_) > -1) {
+  if(value_.isEmpty() || m_type != Choice || m_allowed.contains(value_)) {
     setProperty(QLatin1String("default"), value_);
   }
 }
@@ -170,27 +169,6 @@ bool Field::isSingleCategory() const {
 }
 
 // format is something like "%{year} %{author}"
-Tellico::Data::FieldList Field::dependsOn(Tellico::Data::CollPtr coll_) const {
-  FieldList vec;
-  if(m_type != Dependent || !coll_) {
-    return vec;
-  }
-
-  const QStringList fieldNames = dependsOn();
-  // do NOT call recursively!
-  for(QStringList::ConstIterator it = fieldNames.begin(); it != fieldNames.end(); ++it) {
-    FieldPtr field = coll_->fieldByName(*it);
-    if(!field) {
-      // allow the user to also use field titles
-      field = coll_->fieldByTitle(*it);
-    }
-    if(field) {
-      vec.append(field);
-    }
-  }
-  return vec;
-}
-
 QStringList Field::dependsOn() const {
   QStringList list;
   if(m_type != Dependent) {
@@ -279,7 +257,7 @@ void Field::addAllowed(const QString& value_) {
   if(m_type != Choice) {
     return;
   }
-  if(m_allowed.indexOf(value_) == -1) {
+  if(!m_allowed.contains(value_)) {
     m_allowed += value_;
   }
 }

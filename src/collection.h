@@ -316,6 +316,12 @@ public:
   bool removeFilter(FilterPtr filter);
   const FilterList& filters() const { return m_filters; }
 
+  /**
+   * Return a vector of all the fields on which a field depends.
+   * Returns an empty vector for non-Dpendent fields
+   */
+  FieldList fieldDependsOn(FieldPtr field) const;
+
   static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, bool askUser=false);
   /**
    * The string used for empty values. This forces consistency.

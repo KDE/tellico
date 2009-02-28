@@ -186,7 +186,7 @@ int Tellico::RatingComparison::compare(const QString& str1_, const QString& str2
 }
 
 Tellico::DependentComparison::DependentComparison(Data::FieldPtr field) : StringComparison(field) {
-  Data::FieldList fields = field->dependsOn(Data::Document::self()->collection());
+  Data::FieldList fields = Data::Document::self()->collection()->fieldDependsOn(field);
   foreach(Data::FieldPtr field, fields) {
     m_comparisons.append(create(field));
   }

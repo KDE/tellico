@@ -291,11 +291,7 @@ public:
    * @return The property list
    */
   const StringMap& propertyList() const { return m_properties; }
-  /**
-   * Return a vector of all the fields on which the value of this field depends.
-   * Returns an empty vector for non-Dpendent fields
-   */
-  FieldList dependsOn(CollPtr coll) const;
+
   QStringList dependsOn() const;
 
   /*************************** STATIC **********************************/
