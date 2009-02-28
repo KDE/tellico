@@ -14,8 +14,8 @@
 #ifndef TELLICO_BIBTEXIMPORTER_H
 #define TELLICO_BIBTEXIMPORTER_H
 
-#include <config.h>
 #include "importer.h"
+#include "config.h"
 #include "../datavectors.h"
 
 extern "C" {

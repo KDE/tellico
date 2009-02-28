@@ -80,7 +80,7 @@ void FreeDBImporter::readCDROM() {
   QString drivePath = m_driveCombo->currentText();
   if(drivePath.isEmpty()) {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>", drivePath));
-    myDebug() << "FreeDBImporter::readCDROM() - no drive!" << endl;
+    myDebug() << "no drive!";
     return;
   }
 
@@ -168,9 +168,8 @@ void FreeDBImporter::readCDROM() {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>", drivePath));
     return;
   }
-//  myDebug() << KCDDB::trackOffsetListToId(list) << endl;
 //  for(KCDDB::TrackOffsetList::iterator it = list.begin(); it != list.end(); ++it) {
-//    myDebug() << *it << endl;
+//    myDebug() << *it;
 //  }
 
   // the result info, could be multiple ones
@@ -201,7 +200,7 @@ void FreeDBImporter::readCDROM() {
         if(listValue == res) {
           break;
         }
-	++i;
+        ++i;
       }
       if(i < infoList.size()) {
         info = infoList[i];
@@ -212,23 +211,23 @@ void FreeDBImporter::readCDROM() {
   } else if(r == KCDDB::Success) {
     info = client.lookupResponse().first();
   } else {
-//    myDebug() << "FreeDBImporter::readCDROM() - no success! Return value = " << r << endl;
+    myDebug() << "no success! Return value = " << r;
     QString s;
     switch(r) {
       case KCDDB::NoRecordFound:
         s = i18n("<qt>No records were found to match the CD.</qt>");
         break;
       case KCDDB::ServerError:
-        myDebug() << "Server Error" << endl;
+        myDebug() << "Server Error";
         break;
       case KCDDB::HostNotFound:
-        myDebug() << "Host Not Found" << endl;
+        myDebug() << "Host Not Found";
         break;
       case KCDDB::NoResponse:
-        myDebug() << "No Response" << endl;
+        myDebug() << "No Response";
         break;
       case KCDDB::UnknownError:
-        myDebug() << "Unknown Error" << endl;
+        myDebug() << "Unknown Error";
         break;
       default:
         break;
@@ -323,7 +322,7 @@ void FreeDBImporter::readCache() {
   int numFiles = files.count();
 
   if(numFiles == 0) {
-    myDebug() << "FreeDBImporter::readCache() - no files found" << endl;
+    myDebug() << "no files found";
     return;
   }
 
@@ -358,8 +357,8 @@ void FreeDBImporter::readCache() {
     file.close();
 
     if(cddbData.isEmpty() || !info.load(cddbData) || !info.isValid()) {
-      myDebug() << "FreeDBImporter::readCache() - Error - CDDB record is not valid" << endl;
-      myDebug() << "FreeDBImporter::readCache() - File = " << it.value() << endl;
+      myDebug() << "Error - CDDB record is not valid";
+      myDebug() << "File = " << it.value();
       continue;
     }
 
@@ -438,10 +437,10 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
 
   CDText cdtext = getCDText(drive_);
 /*
-  myDebug() << "CDText - title: " << cdtext.title << endl;
-  myDebug() << "CDText - title: " << cdtext.artist << endl;
+  myDebug() << "CDText - title: " << cdtext.title;
+  myDebug() << "CDText - title: " << cdtext.artist;
   for(int i = 0; i < cdtext.trackTitles.size(); ++i) {
-    myDebug() << i << "::" << cdtext.trackTitles[i] << " - " << cdtext.trackArtists[i] << endl;
+    myDebug() << i << "::" << cdtext.trackTitles[i] << " - " << cdtext.trackArtists[i];
   }
 */
 
