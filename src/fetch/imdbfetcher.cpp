@@ -28,9 +28,9 @@
 #include <klineedit.h>
 #include <knuminput.h>
 #include <KVBox>
+#include <KListWidget>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KListWidget>
 
 #include <QRegExp>
 #include <QFile>
@@ -157,11 +157,10 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
       return;
   }
 
-  // as far as I can tell, the url encoding should always be iso-8859-1
-  // not utf-8. KDE4 not supported?
+  // as far as I can tell, the url encoding should always be iso-8859-1?
   m_url.addQueryItem(QLatin1String("q"), value_);
 
-  myDebug() << "url =" << m_url;
+//  myDebug() << "url =" << m_url;
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
@@ -254,7 +253,7 @@ void IMDBFetcher::slotComplete(KJob*) {
 }
 
 void IMDBFetcher::parseSingleTitleResult() {
-//  myDebug() << "";
+//  DEBUG_LINE
   s_titleRx->indexIn(Tellico::decodeHTML(m_text));
   // split title at parenthesis
   const QString cap1 = s_titleRx->cap(1);
@@ -272,9 +271,8 @@ void IMDBFetcher::parseSingleTitleResult() {
 }
 
 void IMDBFetcher::parseMultipleTitleResults() {
-  DEBUG_LINE;
+//  DEBUG_LINE;
   QString output = Tellico::decodeHTML(m_text);
-  myDebug() << "output length" << output.length();
 
   // IMDb can return three title lists, popular, exact, and partial
   // the popular titles are in the first table
@@ -290,7 +288,6 @@ void IMDBFetcher::parseMultipleTitleResults() {
     end_exact = output.length();
   }
 
-  myDebug() << "pos_popular" << pos_popular;
   // if found popular matches
   if(pos_popular > -1) {
     m_popularTitles = output.mid(pos_popular, end_popular-pos_popular);
@@ -329,7 +326,6 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     m_countOffset = 0;
     return;
   }
-  myDebug() << str_;
 
   QRegExp akaRx(QLatin1String("aka (.*)(</li>|</td>|<br)"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
@@ -408,7 +404,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
 }
 
 void IMDBFetcher::parseSingleNameResult() {
-//  myDebug() << "";
+//  DEBUG_LINE
 
   m_currentTitleBlock = SinglePerson;
 
@@ -490,7 +486,7 @@ void IMDBFetcher::parseSingleNameResult() {
 }
 
 void IMDBFetcher::parseMultipleNameResults() {
-//  myDebug() << "";
+//  DEBUG_LINE
 
   // the exact results are in the first table after the "exact results" text
   QString output = Tellico::decodeHTML(m_text);
