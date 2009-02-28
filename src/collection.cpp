@@ -584,7 +584,7 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
 
 Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& name_) {
 //  myDebug() << "Collection::entryGroupDictByName() - " << name_ << endl;
-  if(name_.isEmpty() || !m_entryGroupDicts.contains(name_)) {
+  if(name_.isEmpty() || !m_entryGroupDicts.contains(name_) || m_entries.isEmpty()) {
     return 0;
   }
   EntryGroupDict* dict = m_entryGroupDicts[name_];
