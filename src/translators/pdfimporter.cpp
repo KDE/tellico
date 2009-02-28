@@ -160,7 +160,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                        ")"));
         if(rx.indexIn(text) > -1) {
           QString doi = rx.cap(1);
-          myDebug() << "PDFImporter::collection() - in PDF file, found DOI: " << doi << endl;
+          myDebug() << "in PDF file, found DOI: " << doi;
           entry->setField(QLatin1String("doi"), doi);
           hasDOI = true;
         }
@@ -172,7 +172,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                          ")"));
         if(rx.indexIn(text) > -1) {
           QString arxiv = rx.cap(1);
-          myDebug() << "PDFImporter::collection() - in PDF file, found arxiv: " << arxiv << endl;
+          myDebug() << "in PDF file, found arxiv: " << arxiv;
           if(!entry->collection()->hasField(QLatin1String("arxiv"))) {
             Data::FieldPtr field(new Data::Field(QLatin1String("arxiv"), i18n("arXiv ID")));
             field->setCategory(i18n("Publishing"));
@@ -185,7 +185,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         delete page;
       }
     } else {
-      myDebug() << "PDFImporter::collection() - unable to read PDF info (poppler)" << endl;
+      myDebug() << "unable to read PDF info (poppler)";
     }
     delete doc;
 #endif
