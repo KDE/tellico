@@ -16,7 +16,7 @@
 #include "tellicoxmlexporter.h"
 #include "../document.h"
 #include "../collection.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../image.h"
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"

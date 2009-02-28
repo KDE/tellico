@@ -16,7 +16,7 @@
 #include "xslthandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../xmphandler.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../fetch/fetchmanager.h"

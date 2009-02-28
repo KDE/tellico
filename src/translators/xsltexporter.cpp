@@ -14,7 +14,7 @@
 #include "xsltexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 
 #include <klocale.h>
 #include <kurlrequester.h>

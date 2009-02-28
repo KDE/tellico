@@ -16,7 +16,7 @@
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
 #include "../gui/listwidgetitem.h"

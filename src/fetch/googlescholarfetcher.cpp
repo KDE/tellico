@@ -13,7 +13,7 @@
 
 #include "googlescholarfetcher.h"
 #include "messagehandler.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../translators/bibteximporter.h"
 #include "../collection.h"
 #include "../entry.h"

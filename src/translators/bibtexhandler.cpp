@@ -17,7 +17,7 @@
 #include "../field.h"
 #include "../collection.h"
 #include "../document.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>

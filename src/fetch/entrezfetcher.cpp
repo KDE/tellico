@@ -15,7 +15,7 @@
 #include "../tellico_kernel.h"
 #include "../collection.h"
 #include "../entry.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../tellico_debug.h"

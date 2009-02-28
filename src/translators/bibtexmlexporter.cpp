@@ -17,7 +17,7 @@
 #include "bibtexhandler.h"
 #include "../document.h"
 #include "../collections/bibtexcollection.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "tellico_xml.h"
 #include "../stringset.h"
 #include "../tellico_debug.h"

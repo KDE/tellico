@@ -16,7 +16,7 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../isbnvalidator.h"
 #include "../tellico_debug.h"
 

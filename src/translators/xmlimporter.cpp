@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "xmlimporter.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../collection.h"
 
 #include <klocale.h>

@@ -17,7 +17,7 @@
 #include "../image.h"
 #include "../imageinfo.h"
 #include "../controller.h" // needed for getting groupView pointer
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../groupiterator.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"

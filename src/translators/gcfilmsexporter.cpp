@@ -14,7 +14,7 @@
 #include "gcfilmsexporter.h"
 #include "../collection.h"
 #include "../document.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../stringset.h"
 #include "../tellico_kernel.h"

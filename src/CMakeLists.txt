@@ -40,7 +40,6 @@ SET(tellico_SRCS
    field.cpp
    fieldcompletion.cpp
    fieldformat.cpp
-   filehandler.cpp
    filter.cpp
    filterdialog.cpp
    filterview.cpp

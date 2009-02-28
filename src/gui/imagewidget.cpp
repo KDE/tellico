@@ -15,7 +15,7 @@
 #include "../imagefactory.h"
 #include "../image.h"
 #include "../imageinfo.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 #include "../tellico_utils.h"
 

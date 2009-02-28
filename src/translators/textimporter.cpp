@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "textimporter.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 
 using Tellico::Import::TextImporter;
 

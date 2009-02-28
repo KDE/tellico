@@ -12,12 +12,12 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "tellico_kernel.h"
-#include "image.h"
-#include "tellico_strings.h"
-#include "tellico_utils.h"
-#include "tellico_debug.h"
-#include "core/netaccess.h"
+#include "../tellico_kernel.h"
+#include "../image.h"
+#include "../tellico_strings.h"
+#include "../tellico_utils.h"
+#include "../tellico_debug.h"
+#include "netaccess.h"
 
 #include <kurl.h>
 #include <klocale.h>

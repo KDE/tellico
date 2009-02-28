@@ -17,7 +17,7 @@
 #include "../imagefactory.h"
 #include "../image.h"
 #include "../imageinfo.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../stringset.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"

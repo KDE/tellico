@@ -3,6 +3,7 @@
 SET(core_STAT_SRCS
    dbusinterface.cpp
    drophandler.cpp
+   filehandler.cpp
    netaccess.cpp
    tellico_config_addons.cpp
    )

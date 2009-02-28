@@ -15,7 +15,7 @@
 #define TELLICO_DATAIMPORTER_H
 
 #include "importer.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 
 namespace Tellico {
   namespace Import {

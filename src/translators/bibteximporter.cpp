@@ -16,7 +16,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../progressmanager.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>

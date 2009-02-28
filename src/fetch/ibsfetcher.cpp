@@ -17,7 +17,7 @@
 #include "../tellico_utils.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../imagefactory.h"
 #include "../tellico_debug.h"
 

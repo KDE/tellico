@@ -13,7 +13,7 @@
 
 #include "manager.h"
 #include "newstuffadaptor.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"

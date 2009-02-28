@@ -14,7 +14,7 @@
 #include "csvexporter.h"
 #include "../document.h"
 #include "../collection.h"
-#include "../filehandler.h"
+#include "../core/filehandler.h"
 
 #include <klocale.h>
 #include <kdebug.h>
