@@ -16,6 +16,7 @@
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
 #include "collection.h"
+#include "progressmanager.h"
 
 #include "translators/importer.h"
 #include "translators/tellicoimporter.h"
@@ -125,6 +126,13 @@ ImportDialog::~ImportDialog() {
 
 Tellico::Data::CollPtr ImportDialog::collection() {
   if(m_importer && !m_coll) {
+    ProgressItem& item = ProgressManager::self()->newProgressItem(m_importer, m_importer->progressLabel(), true);
+    connect(m_importer, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
+            ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
+    connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
+            ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
+    connect(&item, SIGNAL(signalCancelled(ProgressItem*)), m_importer, SLOT(slotCancel()));
+    ProgressItem::Done done(m_importer);
     m_coll = m_importer->collection();
   }
   return m_coll;
@@ -384,6 +392,15 @@ void ImportDialog::slotUpdateAction() {
 // static
 Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const KUrl& url_) {
   Import::Importer* imp = importer(format_, url_);
+
+  ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
+  connect(imp, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
+  connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), imp, SLOT(slotCancel()));
+  ProgressItem::Done done(imp);
+
   Data::CollPtr c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {
     Kernel::self()->sorry(imp->statusMessage());

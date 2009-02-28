@@ -16,7 +16,6 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../progressmanager.h"
 #include "../filehandler.h"
 #include "../isbnvalidator.h"
 #include "../tellico_debug.h"
@@ -145,10 +144,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
     risFields.insert(ris, f);
   }
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(urls().count() * 100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
+  emit signalTotalSteps(this, urls().count() * 100);
 
   int count = 0;
   KUrl::List urls = this->urls();
@@ -274,7 +270,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     entry->setField(f, value);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, n*100 + 100*j/length);
+      emit signalProgress(this, n*100 + 100*j/length);
       kapp->processEvents();
     }
   }

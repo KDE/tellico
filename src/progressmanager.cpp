@@ -42,7 +42,7 @@ ProgressItem::~ProgressItem() {
 //  myDebug() << "~ProgressItem() - " << m_label << endl;
 }
 
-void ProgressItem::setProgress(uint steps_) {
+void ProgressItem::setProgress(qulonglong steps_) {
   m_progress = steps_;
   emit signalProgress(this);
 
@@ -51,7 +51,7 @@ void ProgressItem::setProgress(uint steps_) {
   }
 }
 
-void ProgressItem::setTotalSteps(uint steps_) {
+void ProgressItem::setTotalSteps(qulonglong steps_) {
   m_total = steps_;
   emit signalTotalSteps(this);
 }
@@ -78,7 +78,7 @@ void ProgressItem::cancel() {
 ProgressManager::ProgressManager() : QObject() {
 }
 
-void ProgressManager::setProgress(QObject* owner_, uint steps_) {
+void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
   if(!m_items.contains(owner_)) {
     return;
   }
@@ -88,7 +88,7 @@ void ProgressManager::setProgress(QObject* owner_, uint steps_) {
 //  emit signalItemProgress(m_items[owner_]);
 }
 
-void ProgressManager::setTotalSteps(QObject* owner_, uint steps_) {
+void ProgressManager::setTotalSteps(QObject* owner_, qulonglong steps_) {
   if(!m_items.contains(owner_)) {
     return;
   }
@@ -140,7 +140,7 @@ ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
   connect(item, SIGNAL(signalTotalSteps(ProgressItem*)), SLOT(slotUpdateTotalProgress()));
   connect(item, SIGNAL(signalProgress(ProgressItem*)),   SLOT(slotUpdateTotalProgress()));
   connect(item, SIGNAL(signalDone(ProgressItem*)),       SLOT(slotUpdateTotalProgress()));
-  connect(item, SIGNAL(signalDone(ProgressItem*)), SLOT(slotItemDone(ProgressItem*)));
+  connect(item, SIGNAL(signalDone(ProgressItem*)),       SLOT(slotItemDone(ProgressItem*)));
 
 //  connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
 //  emit signalItemAdded(item);
@@ -148,8 +148,8 @@ ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
 }
 
 void ProgressManager::slotUpdateTotalProgress() {
-  uint progress = 0;
-  uint total = 0;
+  qulonglong progress = 0;
+  qulonglong total = 0;
 
   for(ProgressMap::ConstIterator it = m_items.constBegin(); it != m_items.constEnd(); ++it) {
     if(it.value()) {

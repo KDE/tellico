@@ -47,10 +47,10 @@ public:
   void setLabel(const QString& label);
 
 //  uint progress() const { return m_total ? (100*m_completed/m_total) : 0; }
-  uint progress() const { return m_progress; }
-  void setProgress(uint steps);
-  uint totalSteps() const { return m_total; }
-  void setTotalSteps(uint steps);
+  qulonglong progress() const { return m_progress; }
+  void setProgress(qulonglong steps);
+  qulonglong totalSteps() const { return m_total; }
+  void setTotalSteps(qulonglong steps);
   void setDone();
 
   void cancel();
@@ -69,8 +69,8 @@ protected:
 private:
   QString m_label;
   bool m_canCancel;
-  uint m_progress;
-  uint m_total;
+  qulonglong m_progress;
+  qulonglong m_total;
   bool m_cancelled;
 };
 
@@ -89,10 +89,6 @@ public:
     return newProgressItemImpl(owner, label, canCancel);
   }
 
-  void setProgress(QObject* owner, uint steps);
-  void setTotalSteps(QObject* owner, uint steps);
-  void setDone(QObject* owner);
-
   bool anyCanBeCancelled() const;
 
 signals:
@@ -100,10 +96,13 @@ signals:
 //  void signalItemProgress(ProgressItem* item);
 //  void signalItemDone(ProgressItem* item);
 //  void signalItemCancelled(ProgressItem* item);
-  void signalTotalProgress(uint progress);
+  void signalTotalProgress(qulonglong progress);
 
 public slots:
   void slotCancelAll();
+  void setProgress(QObject* owner, qulonglong steps);
+  void setTotalSteps(QObject* owner, qulonglong steps);
+  void setDone(QObject* owner);
 
 private slots:
   void slotItemDone(ProgressItem* item);

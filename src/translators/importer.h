@@ -106,6 +106,10 @@ public slots:
    */
   virtual void slotActionChanged(int) {}
 
+signals:
+  void signalTotalSteps(QObject* obj, qulonglong steps);
+  void signalProgress(QObject* obj, qulonglong progress);
+
 protected:
   /**
    * Return the URL of the imported file.

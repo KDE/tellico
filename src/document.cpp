@@ -344,8 +344,6 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  DEBUG_BLOCK;
-
   KUrl url;
   url.setFileName(i18n("Untitled"));
   setURL(url);
