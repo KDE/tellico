@@ -33,9 +33,9 @@
 #include <QString>
 #include <QPixmap>
 
-#include <config.h>
+#include "config.h"
 #ifdef HAVE_POPPLER
-#include <qt4/poppler-qt4.h>
+#include <poppler-qt4.h>
 #endif
 
 namespace {
@@ -54,7 +54,7 @@ bool PDFImporter::canImport(int type_) const {
 Tellico::Data::CollPtr PDFImporter::collection() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("xmp2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "DropHandler::handleURL() - can not locate xmp2tellico.xsl";
+    myWarning() << "can not locate xmp2tellico.xsl";
     return Data::CollPtr();
   }
 
@@ -69,7 +69,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   XSLTHandler xsltHandler(u);
   if(!xsltHandler.isValid()) {
-    kWarning() << "DropHandler::handleURL() - invalid xslt in xmp2tellico.xsl";
+    myWarning() << "invalid xslt in xmp2tellico.xsl";
     return Data::CollPtr();
   }
 
@@ -100,7 +100,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       Import::TellicoImporter importer(xsltHandler.applyStylesheet(xmp));
       newColl = importer.collection();
       if(!newColl || newColl->entryCount() == 0) {
-        kWarning() << "DropHandler::handleURL() - no collection found";
+        myWarning() << "no collection found";
         setStatusMessage(i18n("Tellico was unable to read any metadata from the PDF file."));
       } else {
         entry = newColl->entries().front();
@@ -130,7 +130,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       // author could be separated by commas, "and" or whatever
       // we're not going to overwrite it
       if(entry->field(QLatin1String("author")).isEmpty()) {
-        QRegExp rx(QLatin1String("\\s*(and|,|;)\\s*"));
+        QRegExp rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
         QStringList authors = doc->info(QLatin1String("Author")).simplified().split(rx);
         entry->setField(QLatin1String("author"), authors.join(QLatin1String("; ")));
       }
@@ -228,7 +228,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasDOI) {
-    myDebug() << "looking for DOI" << endl;
+    myDebug() << "looking for DOI";
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
     if(vec.isEmpty()) {
       GUI::CursorSaver cs(Qt::ArrowCursor);
