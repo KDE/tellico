@@ -28,6 +28,7 @@ public:
    * @return The delimeter regexp
    */
   static const QRegExp& delimiter();
+
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed
@@ -58,7 +59,7 @@ public:
    *
    * @param str String to fix
    */
-  static QString capitalize(QString str);
+  static QString capitalize(QString str, bool checkConfig=false);
   /**
    * Return the key to be used for sorting titles
    */

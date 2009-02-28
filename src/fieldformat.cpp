@@ -177,8 +177,12 @@ QString FieldFormat::date(const QString& date_) {
 //  return KGlobal::locale()->formatDate(date, true);
 }
 
-QString FieldFormat::capitalize(QString str_) {
+QString FieldFormat::capitalize(QString str_, bool checkConfig_) {
   if(str_.isEmpty()) {
+    return str_;
+  }
+
+  if(checkConfig_ && !Config::autoCapitalization()) {
     return str_;
   }
 

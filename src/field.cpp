@@ -15,7 +15,6 @@
 #include "fieldformat.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
-#include "core/tellico_config.h"
 #include "collection.h"
 
 #include <klocale.h>
@@ -224,7 +223,7 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
       text = FieldFormat::date(value_);
       break;
     case FormatPlain:
-      text = Config::autoCapitalization() ? FieldFormat::capitalize(value_) : value_;
+      text = FieldFormat::capitalize(value_, true /*check config */);
       break;
     default:
       text = value_;
