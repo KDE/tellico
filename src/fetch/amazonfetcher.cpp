@@ -243,7 +243,7 @@ void AmazonFetcher::doSearch() {
         // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
         // isbn13 search
         bool isbn13 = false;
-        for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
+        for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
           if(m_value.startsWith(QLatin1String("979"))) {
             if(m_site == JP) { // never works for JP
               myWarning() << "AmazonFetcher:doSearch() - ISBN-13 searching not implemented for Japan";
