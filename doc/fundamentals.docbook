@@ -39,7 +39,7 @@ in a different manner. The primary view is the <link linkend="detailed-view">&de
 the upper right area, where the value of every field for each entry may be shown. On the left side, tabs
 hold the <link linkend="group-view">&group-view;</link>, which can be used to sort the entries into groups
 in a tree-structure, the <link linkend="filter-view">&filter-view;</link>, which is used to track which
-entries meet cerrtain critera, and the <link linkend="loan-view">&loan-view;</link>, where any loans are
+entries meet certain criteria, and the <link linkend="loan-view">&loan-view;</link>, where any loans are
 listed. Finally, the <link linkend="entry-view">&entry-view;</link> shows a formatted view
 of the data for a single entry, or an icon view of a group of entries, in the lower right.
 </para>

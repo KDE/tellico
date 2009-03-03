@@ -379,7 +379,7 @@ root if you are installing in a system folder:
 
 <para>Since &appname; uses autoconf and automake you should not have
 any trouble compiling it. Should you run into problems please report
-them to the the author at <email>&email;</email>.</para>
+them to the author at <email>&email;</email>.</para>
 
 <sect2 id="compilation-ooo">
 <title>Compiling With OpenOffice.org</title>

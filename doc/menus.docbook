@@ -195,7 +195,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>reverts a previous Undo.</action>.</para>
+<para>This command <action>reverts a previous Undo</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -243,7 +243,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>pastes the text in the clipboard</action>,if any, into the editor at the cursor position.</para>
+<para>This command <action>pastes the text in the clipboard</action>, if any, into the editor at the cursor position.</para>
 </listitem>
 </varlistentry>
 
@@ -393,7 +393,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This menu contains a list of all available data sources, and can be used to autmatically query the
+<para>This menu contains a list of all available data sources, and can be used to automatically query the
 source and <action>update the selected entries</action>.</para>
 </listitem>
 </varlistentry>
@@ -402,7 +402,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Collection</guimenu>
-  <guimenuitem>Check-out.</guimenuitem>
+  <guimenuitem>Check-out</guimenuitem>
  </menuchoice>
 </term>
 
@@ -636,7 +636,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the the &kde; &shortcut-dialog;</action>.</para>
+<para>This command <action>opens the &kde; &shortcut-dialog;</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -649,7 +649,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the the &kde; &toolbar-dialog;</action>.</para>
+<para>This command <action>opens the &kde; &toolbar-dialog;</action>.</para>
 </listitem>
 </varlistentry>
 
