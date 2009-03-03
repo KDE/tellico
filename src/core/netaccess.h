@@ -35,7 +35,7 @@ public:
   static void removeTempFile(const QString& name);
 
 private slots:
-  void slotPreview(const KFileItem* item, const QPixmap& pix);
+  void slotPreview(const KFileItem& item, const QPixmap& pix);
 
 private:
   QPixmap m_preview;

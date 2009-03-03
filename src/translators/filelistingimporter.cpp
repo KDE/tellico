@@ -37,8 +37,8 @@
 namespace {
   static const int FILE_PREVIEW_SIZE = 128;
   // volume name starts at 16*2048+40 bytes into the header
-  static const int VOLUME_NAME_POS = 32808;
-  static const int VOLUME_NAME_SIZE = 32;
+  static const size_t VOLUME_NAME_POS = 32808;
+  static const size_t VOLUME_NAME_SIZE = 32;
 }
 
 using Tellico::Import::FileListingImporter;
@@ -144,7 +144,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
     if(!m_cancelled && usePreview) {
-      m_pixmap = NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
+      m_pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
       if(m_pixmap.isNull()) {
         m_pixmap = item.pixmap(0);
       }
@@ -226,16 +226,16 @@ QString FileListingImporter::volumeName() const {
   // this functions turns /media/cdrom into /dev/hdc, then reads 32 bytes after the 16 x 2048 header
   QString volume;
   const KMountPoint::List mountPoints = KMountPoint::currentMountPoints(KMountPoint::NeedRealDeviceName);
-  for(KMountPoint::List::ConstIterator it = mountPoints.begin(), end = mountPoints.end(); it != end; ++it) {
+  foreach(const KSharedPtr<KMountPoint>& mountPoint, mountPoints) {
     // path() could be /media/cdrom
     // which could be the mount point of the device
     // I know it works for iso9660 (cdrom) and udf (dvd)
-    if(url().path() == (*it)->mountPoint()
-       && ((*it)->mountType() == QLatin1String("iso9660")
-           || (*it)->mountType() == QLatin1String("udf"))) {
-      volume = (*it)->mountPoint();
-      if(!(*it)->realDeviceName().isEmpty()) {
-        QString devName = (*it)->realDeviceName();
+    if(url().path() == mountPoint->mountPoint()
+       && (mountPoint->mountType() == QLatin1String("iso9660")
+           || mountPoint->mountType() == QLatin1String("udf"))) {
+      volume = mountPoint->mountPoint();
+      if(!mountPoint->realDeviceName().isEmpty()) {
+        QString devName = mountPoint->realDeviceName();
         if(devName.endsWith(QLatin1Char('/'))) {
           devName.truncate(devName.length()-1);
         }
@@ -245,16 +245,16 @@ QString FileListingImporter::volumeName() const {
           // returns 0 on success
           if(KDE_fseek(dev, VOLUME_NAME_POS, SEEK_SET) == 0) {
             char buf[VOLUME_NAME_SIZE];
-            int ret = fread(buf, 1, VOLUME_NAME_SIZE, dev);
+            size_t ret = fread(buf, 1, VOLUME_NAME_SIZE, dev);
             if(ret == VOLUME_NAME_SIZE) {
               volume = QString::fromLatin1(buf, VOLUME_NAME_SIZE).trimmed();
             }
           } else {
-            myDebug() << "FileListingImporter::volumeName() - can't seek " << devName << endl;
+            myDebug() << "can't seek " << devName;
           }
           fclose(dev);
         } else {
-          myDebug() << "FileListingImporter::volumeName() - can't read " << devName << endl;
+          myDebug() << "can't read " << devName;
         }
       }
       break;

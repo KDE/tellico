@@ -61,8 +61,8 @@ QPixmap NetAccess::filePreview(const KUrl& url, int size) {
   KUrl::List list;
   list.append(url);
   KIO::Job* previewJob = KIO::filePreview(list, size, size);
-  connect(previewJob, SIGNAL(gotPreview(const KFileItem*, const QPixmap&)),
-          &netaccess, SLOT(slotPreview(const KFileItem*, const QPixmap&)));
+  connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+          &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
   KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget());
   return netaccess.m_preview;
@@ -74,14 +74,14 @@ QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   KFileItemList list;
   list.append(item);
   KIO::Job* previewJob = KIO::filePreview(list, size, size);
-  connect(previewJob, SIGNAL(gotPreview(const KFileItem*, const QPixmap&)),
-          &netaccess, SLOT(slotPreview(const KFileItem*, const QPixmap&)));
+  connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
+          &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
   KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget());
   return netaccess.m_preview;
 }
 
-void NetAccess::slotPreview(const KFileItem*, const QPixmap& pix_) {
+void NetAccess::slotPreview(const KFileItem&, const QPixmap& pix_) {
   m_preview = pix_;
 }
 
