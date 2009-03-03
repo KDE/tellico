@@ -23,10 +23,11 @@
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
-#include <kmountpoint.h>
 #include <kio/job.h>
 #include <kio/netaccess.h>
-#include <kde_file.h>
+#include <solid/device.h>
+#include <solid/storagevolume.h>
+#include <solid/storageaccess.h>
 
 #include <QCheckBox>
 #include <QGroupBox>
@@ -36,9 +37,6 @@
 
 namespace {
   static const int FILE_PREVIEW_SIZE = 128;
-  // volume name starts at 16*2048+40 bytes into the header
-  static const size_t VOLUME_NAME_POS = 32808;
-  static const size_t VOLUME_NAME_SIZE = 32;
 }
 
 using Tellico::Import::FileListingImporter;
@@ -110,7 +108,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     entry->setField(url,    u.url());
     entry->setField(desc,   item.mimeComment());
     entry->setField(vol,    volume);
-    tmp = KUrl::relativePath(this->url().path(), u.directory());
+    tmp = KUrl::relativePath(this->url().toLocalFile(), u.directory());
     // remove "./" from the string
     entry->setField(folder, tmp.right(tmp.length()-2));
     entry->setField(type,   item.mimetype());
@@ -223,41 +221,21 @@ void FileListingImporter::slotEntries(KIO::Job* job_, const KIO::UDSEntryList& l
 }
 
 QString FileListingImporter::volumeName() const {
-  // this functions turns /media/cdrom into /dev/hdc, then reads 32 bytes after the 16 x 2048 header
-  QString volume;
-  const KMountPoint::List mountPoints = KMountPoint::currentMountPoints(KMountPoint::NeedRealDeviceName);
-  foreach(const KSharedPtr<KMountPoint>& mountPoint, mountPoints) {
-    // path() could be /media/cdrom
-    // which could be the mount point of the device
-    // I know it works for iso9660 (cdrom) and udf (dvd)
-    if(url().path() == mountPoint->mountPoint()
-       && (mountPoint->mountType() == QLatin1String("iso9660")
-           || mountPoint->mountType() == QLatin1String("udf"))) {
-      volume = mountPoint->mountPoint();
-      if(!mountPoint->realDeviceName().isEmpty()) {
-        QString devName = mountPoint->realDeviceName();
-        if(devName.endsWith(QLatin1Char('/'))) {
-          devName.truncate(devName.length()-1);
-        }
-        // QFile can't do a sequential seek, and I don't want to do a 32808x loop on getch()
-        FILE* dev = 0;
-        if((dev = fopen(devName.toLatin1(), "rb")) != 0) {
-          // returns 0 on success
-          if(KDE_fseek(dev, VOLUME_NAME_POS, SEEK_SET) == 0) {
-            char buf[VOLUME_NAME_SIZE];
-            size_t ret = fread(buf, 1, VOLUME_NAME_SIZE, dev);
-            if(ret == VOLUME_NAME_SIZE) {
-              volume = QString::fromLatin1(buf, VOLUME_NAME_SIZE).trimmed();
-            }
-          } else {
-            myDebug() << "can't seek " << devName;
-          }
-          fclose(dev);
-        } else {
-          myDebug() << "can't read " << devName;
+  const QString filePath = url().toLocalFile();
+  QString matchingPath, volume;
+  QList<Solid::Device> devices = Solid::Device::listFromType(Solid::DeviceInterface::StorageVolume, QString());
+  foreach(const Solid::Device& device, devices) {
+    const Solid::StorageAccess* acc = device.as<const Solid::StorageAccess>();
+    if(acc && !acc->filePath().isEmpty() && filePath.startsWith(acc->filePath())) {
+      // it might be possible for one volume to be mounted at /dir1 and another to be mounted at /dir1/dir2
+      // so we need to find the longest natching filePath
+      if(acc->filePath().length() > matchingPath.length()) {
+        matchingPath = acc->filePath();
+        const Solid::StorageVolume* vol = device.as<const Solid::StorageVolume>();
+        if(vol) {
+          volume = vol->label();
         }
       }
-      break;
     }
   }
   return volume;
