@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,13 +11,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef IMPORTER_H
-#define IMPORTER_H
+#ifndef TELLICO_IMPORT_IMPORTER_H
+#define TELLICO_IMPORT_IMPORTER_H
 
 #include "../datavectors.h"
+#include "../collection.h"
 
-#include <klocale.h>
 #include <kurl.h>
+#include <klocale.h>
 
 #include <QObject>
 #include <QString>
@@ -96,9 +97,9 @@ public:
   /**
    * Returns a string useful for the ProgressManager
    */
-  QString progressLabel() const {
-    if(url().isEmpty()) return i18n("Loading data..."); else return i18n("Loading %1...").arg(url().fileName());
-  }
+  QString progressLabel() const;
+
+  Data::CollPtr currentCollection() const;
 
 public slots:
   /**
@@ -133,6 +134,7 @@ private:
   KUrl::List m_urls;
   QString m_text;
   QString m_statusMsg;
+  Data::CollPtr m_currentCollection;
 };
 
   } // end namespace

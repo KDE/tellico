@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2008 by Robby Stephenson
+    copyright            : (C) 2008-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,5 +12,19 @@
  ***************************************************************************/
 
 #include "importer.h"
+
+#include <klocale.h>
+
+using Tellico::Import::Importer;
+
+Tellico::Data::CollPtr Importer::currentCollection() const {
+  return m_currentCollection;
+}
+
+QString Importer::progressLabel() const {
+  return url().isEmpty() ?
+         i18n("Loading data...") :
+         i18n("Loading %1...").arg(url().fileName());
+}
 
 #include "importer.moc"
