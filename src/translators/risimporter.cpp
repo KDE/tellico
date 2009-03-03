@@ -127,7 +127,10 @@ Tellico::Data::CollPtr RISImporter::collection() {
 
   // need to know if any extended properties in current collection point to RIS
   // if so, add to collection
-  Data::CollPtr currColl = Data::Document::self()->collection();
+  Data::CollPtr currColl = currentCollection();
+  if(!currColl) {
+    currColl = Data::Document::self()->collection();
+  }
   foreach(Data::FieldPtr field, currColl->fields()) {
     // continue if property is empty
     QString ris = field->property(QLatin1String("ris"));
