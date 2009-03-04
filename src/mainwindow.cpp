@@ -607,6 +607,9 @@ void MainWindow::initActions() {
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
+  // really bad hack, but I can't figure out how to make the combobox resize when the contents change
+  // see note in slotChangeGrouping() - so ensure its at least a little bigger
+  m_entryGrouping->addAction(QLatin1String("               "));
   connect(m_entryGrouping, SIGNAL(triggered(int)), SLOT(slotChangeGrouping()));
   actionCollection()->addAction(QLatin1String("change_entry_grouping"), m_entryGrouping);
 
@@ -1511,22 +1514,20 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
   // in case the current grouping field get modified to be non-grouping...
   m_groupView->setGroupField(current); // don't call slotChangeGrouping() since it adds an undo item
 
-  // this isn't really proper, but works so the combo box width gets adjusted
-#ifndef WIN32
-#warning MainWindow containerCount() is not ported
-#endif
+  // I have no idea how to get the combobox to update its size
 #if 0
-  const int len = m_entryGrouping->containerCount();
-  for(int i = 0; i < len; ++i) {
-    KToolBar* tb = dynamic_cast<KToolBar*>(m_entryGrouping->container(i));
-    if(tb) {
-      KComboBox* cb = tb->getCombo(m_entryGrouping->itemId(i));
-      if(cb) {
-        // qt caches the combobox size and never recalculates the sizeHint()
-        // the source code recommends calling setFont to invalidate the sizeHint
-        cb->setFont(cb->font());
-        cb->updateGeometry();
+  foreach(QWidget* widget, m_entryGrouping->associatedWidgets()) {
+    if(::qobject_cast<KToolBar*>(widget)) {
+      QWidget* container = m_entryGrouping->requestWidget(widget);
+      if(container) {
+        container->adjustSize();
+        container->updateGeometry();
+        container->setFont(container->font());
+        myDebug() << "combobox width=" << container->width();
+        myDebug() << "combobox width hint=" << container->minimumSizeHint().width();
       }
+      widget->adjustSize();
+      widget->updateGeometry();
     }
   }
 #endif
@@ -2017,39 +2018,20 @@ void MainWindow::updateCaption(bool modified_) {
 void MainWindow::slotUpdateToolbarIcons() {
   // first change the icon for the menu item
   m_newEntry->setIcon(KIcon(Kernel::self()->collectionTypeName()));
-
-#ifndef WIN32
-#warning MainWindow::slotUpdateToolbarIcons
-#endif
-#if 0
-  // since the toolbar icon is probably a different size than the menu item icon
-  // superimpose it on the "mime_empty" icon
-  KToolBar* tb = toolBar("collectionToolBar");
-  if(!tb) {
-    return;
-  }
-
-  for(int i = 0; i < tb->count(); ++i) {
-    if(m_newEntry->isPlugged(tb, tb->idAt(i))) {
-      QIcon icons;
-      icons.installIconFactory(new EntryIconFactory(tb->iconSize()));
-      tb->setButtonIcon(tb->idAt(i), icons);
-      break;
-    }
-  }
-#endif
 }
 
 void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
-  KToolBar* tb = toolBar(QLatin1String("collectionToolBar"));
-  if(!tb) {
-    return;
-  }
-
-  QComboBox* combo = ::qobject_cast<QComboBox*>(tb->widgetForAction(m_entryGrouping));
-  if(combo) {
-    combo->showPopup();
+  foreach(QWidget* widget, m_entryGrouping->associatedWidgets()) {
+    if(::qobject_cast<KToolBar*>(widget)) {
+      widget->adjustSize();
+      widget->updateGeometry();
+      QWidget* container = m_entryGrouping->requestWidget(widget);
+      QComboBox* combo = ::qobject_cast<QComboBox*>(container);
+      if(combo) {
+        combo->showPopup();
+      }
+    }
   }
 }
 
