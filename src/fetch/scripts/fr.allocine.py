@@ -14,6 +14,9 @@
 # *                                                                         *
 # ***************************************************************************
 #
+# Version 0.6: 2009-03-04 (Thanks to R. Fischer and Henry-Nicolas Tourneur)
+# * Fixed parsing issues (various RegExp issues due to allocine's HTML changes)
+#
 # Version 0.5: 2009-01-21 (Changes contributed by R. Fischer <fischer.tellico@free.fr>)
 # * Added complete distribution of actors and roles, Genres, Nationalities, producers, composer and scenarist
 # * Fixed the plot field that returned a wrong answer when no plot is available
@@ -40,7 +43,7 @@ import locale
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.5"
+VERSION = "0.6"
 
 def genMD5():
 	obj = md5.new()
@@ -207,12 +210,12 @@ class AlloCineParser:
 		self.__castURL = self.__baseURL + self.__castPath
 
 		# Define some regexps
-		self.__regExps = { 	'title' 	: '<title>(?P<title>.+?)</title>',
-							'dirs'		: 'Réalisé par <a.*?>(?P<step1>.+?)</a>.*?</h4>',
-							'nat'		: '<h4>Film *(?P<nat>.+?)[\.]',
-							'genres' 	: '<h4>Genre *:*(?P<step1>.+?)</h4>',
-							'time' 		: '<h4>Durée *: *(?P<hours>[0-9])?h *(?P<mins>[0-9]{1,2})min',
-							'year' 		: 'Année de production *: *(?P<year>[0-9]{4})',
+		self.__regExps = { 	'title' 	: '<td><h1 class=".*?">(?P<title>.+?)</h1></td>',
+							'dirs'		: 'Réalisé par <a.*?>(?P<step1>.+?)</a>.*?</h3>',
+							'nat'		: '<h3 class=".*?">Film *(?P<nat>.+?)[\.]',
+							'genres' 	: '<h3 class=".*?">Genre *:*(?P<step1>.+?)</h3>',
+							'time' 		: '<h3 class=".*?">Durée *: *(?P<hours>[0-9])?h[ \.]*(?P<mins>[0-9]*)',
+							'year' 		: '<h3 class=".*?">Année de production *: *(?P<year>[0-9]{4})',
 							# Original movie title
 							'otitle' 	: 'Titre original *: *<i>(?P<otitle>.+?)</i>',
 							'plot'		: """(?s)<td valign="top" style="padding:10 0 0 0"><div align="justify"><h4> *(?P<plot>.*?) *</h4>""",
@@ -222,7 +225,7 @@ class AlloCineParser:
 		self.__castRegExps = {	'role' 			: '.*?<td width="50%" valign="center" style="padding:2 0 2 0"><h5>(?P<role>[^<]*?)</h5></td>',
 								'roleactor'		: '.*?<td width="50%" valign="center" style="padding:2 0 2 0"><h5>(?P<role>[^<]*?)</h5></td>.*?<a href="/personne/.*?" class="link1">(?P<someone>[^(]+?)\(*[0-9]*\)*</a>',
 								'someone'		: '.*?<a href="/personne/.*?" class="link1">(?P<someone>[^(]+?)\(*[0-9]*\)*</a>',
-								'debut_actors'	: '<tr><td colspan="2" valign="top"><h4 style="color: #D20000"><b>Acteurs</b></h4><hr /></td></tr>',
+								'debut_actors'	: '<tr><td.*?><h2[^>]*>Acteurs</h2>',
 								'debut_prod'	: '.*?<td width="50%" valign="top" style="padding:5 2 0 0"><h5>Producteur</h5></td>',
 								'fin_cat' 		: '.*?<td width="50%" valign="top" style="padding:5 2 0 0"><h5>',
 								'debut_scenar'	: '.*?<td [^>]*><h5>Scénariste</h5></td>',
@@ -307,6 +310,8 @@ class AlloCineParser:
 
 				elif name == 'time':
 					h, m = matches[name].group('hours'), matches[name].group('mins')
+					if len(m) == 0:
+						m = 0
 					totmin = int(h)*60+int(m)
 					data[name] = str(totmin)
 
