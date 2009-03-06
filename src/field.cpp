@@ -264,9 +264,9 @@ void Field::addAllowed(const QString& value_) {
 
 void Field::setProperty(const QString& key_, const QString& value_) {
   if(value_.isEmpty()) {
-    m_properties.insert(key_, value_);
-  } else {
     m_properties.remove(key_);
+  } else {
+    m_properties.insert(key_, value_);
   }
 }
 
