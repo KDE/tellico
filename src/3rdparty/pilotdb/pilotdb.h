@@ -41,7 +41,7 @@ public:
   /**
    * Return the total number of records/resources in this database.
    */
-  virtual unsigned getNumRecords() const { return m_records.size(); }
+  virtual size_t getNumRecords() const { return m_records.size(); }
 
   /**
    * Return the database's application info block as a Block
@@ -82,7 +82,7 @@ public:
    * Append the given record to the database.
    */
   virtual void appendRecord(const PalmLib::Record& rec);
-  
+
   /**
    * Delete all records
    */

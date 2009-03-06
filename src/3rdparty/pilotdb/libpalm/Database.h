@@ -120,7 +120,7 @@ namespace PalmLib {
 
   // Return the total number of records/resources in this
   // database.
-  virtual unsigned getNumRecords() const = 0;
+  virtual size_t getNumRecords() const = 0;
 
   // Return the database's application info block as a Block
   // object.
@@ -153,7 +153,7 @@ namespace PalmLib {
   // RawRecord object.
   virtual Resource getResourceByType(pi_uint32_t type,
              pi_uint32_t id) const = 0;
-  
+
   // Return the resource present at the given index. NULL is
   // returned if the index is invalid. The caller owns the
   // returned RawRecord object.
