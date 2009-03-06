@@ -40,7 +40,7 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field->setFlags(Field::NoDelete);
   list.append(field);
 
-  field = new Field(QLatin1String("producer"), i18n("Producer"));
+  field = new Field(QLatin1String("producer"), i18nc("Wine Producer", "Producer"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatFlag(Field::FormatPlain);
