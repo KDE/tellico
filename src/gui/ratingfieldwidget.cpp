@@ -14,7 +14,6 @@
 #include "ratingfieldwidget.h"
 #include "ratingwidget.h"
 #include "../field.h"
-#include "../tellico_debug.h"
 
 using Tellico::GUI::RatingFieldWidget;
 
@@ -40,7 +39,6 @@ void RatingFieldWidget::setText(const QString& text_) {
   blockSignals(false);
 
   if(m_rating->text() != text_) {
-    myDebug() << "text:" << text_ << " - new text:" << m_rating->text();
     emit modified();
   }
 }
