@@ -90,6 +90,26 @@
 namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
+
+KIcon mimeIcon(const char* s) {
+  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s), KMimeType::ResolveAliases);
+  if(!ptr) {
+    myDebug() << "*** no icon for" << s;
+  }
+  return ptr ? KIcon(ptr->iconName()) : KIcon();
+}
+
+KIcon mimeIcon(const char* s1, const char* s2) {
+  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s1), KMimeType::ResolveAliases);
+  if(!ptr) {
+    ptr = KMimeType::mimeType(QLatin1String(s2), KMimeType::ResolveAliases);
+    if(!ptr) {
+      myDebug() << "*** no icon for" << s1 << "or" << s2;
+    }
+  }
+  return ptr ? KIcon(ptr->iconName()) : KIcon();
+}
+
 }
 
 using Tellico::MainWindow;
@@ -176,25 +196,6 @@ void MainWindow::initStatusBar() {
   MARK;
   m_statusBar = new Tellico::StatusBar(this);
   setStatusBar(m_statusBar);
-}
-
-namespace {
-
-inline
-KIcon mimeIcon(const char* s) {
-  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s), KMimeType::ResolveAliases);
-  return ptr ? KIcon(ptr->iconName()) : KIcon();
-}
-
-inline
-KIcon mimeIcon(const char* s1, const char* s2) {
-  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s1), KMimeType::ResolveAliases);
-  if(!ptr) {
-    ptr = KMimeType::mimeType(QLatin1String(s2), KMimeType::ResolveAliases);
-  }
-  return ptr ? KIcon(ptr->iconName()) : KIcon();
-}
-
 }
 
 void MainWindow::initActions() {
@@ -340,7 +341,7 @@ void MainWindow::initActions() {
 #endif
 
   IMPORT_ACTION(Import::FreeDB, "file_import_freedb", i18n("Import Audio CD Data..."),
-                i18n("Import audio CD information"), mimeIcon("media/audiocd"));
+                i18n("Import audio CD information"), mimeIcon("media/audiocd", "application/x-cda"));
 #ifndef HAVE_KCDDB
   action->setEnabled(false);
 #endif
@@ -635,8 +636,6 @@ void MainWindow::initActions() {
   action->setShortcutConfigurable(false);
   actionCollection()->addAction(QLatin1String("quick_filter"), action);
 
-  //  wAction->setAutoSized(true);
-
 #ifdef UIFILE
   myWarning() << "change createGUI() call!";
   createGUI(UIFILE);
@@ -923,47 +922,6 @@ void MainWindow::readOptions() {
 
   // Don't read any options for the edit dialog here, since it's not yet initialized.
   // Put them in init()
-}
-
-void MainWindow::saveProperties(KConfigGroup& cfg_) {
-  if(!isNewDocument() && !Data::Document::self()->isModified()) {
-    // saving to tempfile not necessary
-  } else {
-    KUrl url = Data::Document::self()->URL();
-    cfg_.writeEntry("filename", url.url());
-    cfg_.writeEntry("modified", Data::Document::self()->isModified());
-//    QString tempname = KUrl::encode_string(kapp->temporarySaveName(url.url()));
-    QString tempname = kapp->tempSaveName(url.url());
-    KUrl tempurl;
-    tempurl.setPath(tempname);
-    Data::Document::self()->saveDocument(tempurl);
-  }
-}
-
-void MainWindow::readProperties(const KConfigGroup& cfg_) {
-  QString filename = cfg_.readEntry(QLatin1String("filename"), QString());
-  if(filename.isEmpty()) {
-    return;
-  }
-  bool modified = cfg_.readEntry(QLatin1String("modified"), false);
-  if(modified) {
-    bool canRecover;
-    QString tempname = kapp->checkRecoverFile(filename, canRecover);
-
-    if(canRecover) {
-      KUrl tempurl;
-      tempurl.setPath(tempname);
-      Data::Document::self()->openDocument(tempurl);
-      Data::Document::self()->slotSetModified(true);
-      updateCaption(true);
-      QFile::remove(tempname);
-    }
-  } else {
-    KUrl url;
-    url.setPath(filename);
-    Data::Document::self()->openDocument(url);
-    updateCaption(false);
-  }
 }
 
 bool MainWindow::queryClose() {

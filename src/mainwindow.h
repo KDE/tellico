@@ -25,7 +25,6 @@
 #include <QList>
 
 class KToolBar;
-class KUrl;
 class KAction;
 class KSelectAction;
 class KToggleAction;
@@ -335,24 +334,6 @@ private:
    * Initiates shutdown
    */
 //  void closeEvent(QCloseEvent *e);
-  /**
-   * Saves the window properties for each open window during session end to the
-   * session config file, including saving the currently opened file by a temporary
-   * filename provided by KApplication.
-   * @see KMainWindow::saveProperties
-   *
-   * @param cfg The config class with the properties to restore
-   */
-  void saveProperties(KConfigGroup& cfg);
-  /**
-   * Reads the session config file and restores the application's state including
-   * the last opened files and documents by reading the temporary files saved by
-   * @ref saveProperties().
-   * @see KMainWindow::readProperties
-   *
-   * @param cfg The config class with the properties to restore
-   */
-  void readProperties(const KConfigGroup& cfg);
   /**
    * Called before the window is closed, either by the user or indirectely by the
    * session manager.
