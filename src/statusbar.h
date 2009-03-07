@@ -44,7 +44,7 @@ public:
   virtual void ensurePolished() const;
 
 private slots:
-  void slotProgress(uint progress);
+  void slotProgress(qulonglong progress);
   void slotUpdate();
 
 private:

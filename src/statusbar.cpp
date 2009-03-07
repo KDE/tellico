@@ -57,7 +57,7 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
   m_cancelButton->hide();
 
   ProgressManager* pm = ProgressManager::self();
-  connect(pm, SIGNAL(signalTotalProgress(uint)), SLOT(slotProgress(uint)));
+  connect(pm, SIGNAL(signalTotalProgress(qulonglong)), SLOT(slotProgress(qulonglong)));
   connect(m_cancelButton, SIGNAL(clicked()), pm, SLOT(slotCancelAll()));
 }
 
@@ -93,7 +93,8 @@ void StatusBar::setCount(const QString& count_) {
   m_countLabel->setText(count_ + QLatin1Char(' '));
 }
 
-void StatusBar::slotProgress(uint progress_) {
+void StatusBar::slotProgress(qulonglong progress_) {
+  // yes, yes, yes, casting from longlong to int is bad, I know...
   m_progress->setValue(progress_);
   if(m_progress->isDone()) {
     m_progress->hide();
