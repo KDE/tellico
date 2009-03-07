@@ -459,7 +459,8 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
 bool FieldValueHandler::start(const QString&, const QString&, const QString& localName_, const QXmlAttributes& atts_) {
   d->currentField = d->coll->fieldByName(localName_);
   m_i18n = attValue(atts_, "i18n") == QLatin1String("true");
-  m_validateISBN = attValue(atts_, "validate") != QLatin1String("no");
+  m_validateISBN = (localName_ == QLatin1String("isbn")) &&
+                   (attValue(atts_, "validate") != QLatin1String("no"));
   return true;
 }
 
@@ -513,7 +514,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     fieldValue = i18n(fieldValue.toUtf8());
   }
   // special case for isbn fields, go ahead and validate
-  if(m_validateISBN && fieldName == QLatin1String("isbn")) {
+  if(m_validateISBN) {
     ISBNValidator val(0);
     val.fixup(fieldValue);
   }
