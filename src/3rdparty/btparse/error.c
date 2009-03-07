@@ -88,7 +88,7 @@ void print_error (bt_error *err)
 
    if (err->filename)
    {
-      fprintf (stderr, err->filename);
+      fprintf (stderr,"%s" ,err->filename);
       something_printed = TRUE;
    }
    if (err->line > 0)                   /* going to print a line number? */
@@ -111,7 +111,7 @@ void print_error (bt_error *err)
    {
       if (something_printed)
          fprintf (stderr, ", ");
-      fprintf (stderr, name);
+      fprintf (stderr,"%s" ,name);
       something_printed = TRUE;
    }
 
