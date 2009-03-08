@@ -118,7 +118,7 @@ public:
    * @param width Width
    * @param height Height
    */
-  void setPixmapSize(int width, int height) {}
+  void setPixmapSize(int width, int height) { Q_UNUSED(width) Q_UNUSED(height) }
   void resetEntryStatus();
 
 public slots:

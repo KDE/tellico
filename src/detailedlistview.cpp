@@ -160,6 +160,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   updateHeaderMenu();
 
   setUpdatesEnabled(true);
+  sortModel()->invalidate();
 }
 
 void DetailedListView::slotReset() {
@@ -292,6 +293,7 @@ void DetailedListView::addField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr 
 }
 
 void DetailedListView::modifyField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
+  Q_UNUSED(oldField_)
   sourceModel()->modifyFields(Data::FieldList() << newField_);
   updateHeaderMenu();
 }
