@@ -1,3 +1,7 @@
+2009-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added reading album artist from TPE2 tags in mp3 files.
+
 2009-02-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Reverted change from 2007 that merged entries by combining all values in multiple-value fields.
