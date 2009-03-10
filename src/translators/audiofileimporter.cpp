@@ -171,20 +171,62 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         changeTrackTitle = false;
       }
     }
-    bool various = false;
     bool exists = true;
     Data::EntryPtr entry;
-    if(!(entry = albumMap[album.toLower()])) {
+/*
+    Let's assume an album already exists (has already been imported) if an
+    album entry with same Album Title and Album Artist is found; indeed,
+    multiple albums can have the same title (but from different artists),
+    but this is very unlikely the same artist release multiple albums with
+    the same title. Therefore, we propose to make an album entry ID as follows:
+    "<album title>::<album artist>" if album artist info is available,
+    "<album title>" if not.
+*/
+    QString albumKey = album.toLower();
+/*
+    For MP3 files, get the Album Artist from the ID3v2 TPE2 frame.
+    See http://www.id3.org/id3v2.4.0-frames for a description of this frame.
+    Although this is not standard in ID3, using a specific frame for album
+    artist is a solution to the problem of tagging albums that feature
+    various artists but still have an identified Album Artist, such as
+    Remix and DJ albums. Example:
+    Album title: Some Title; Album artist: Some DJ;
+                 Track 1: Some Track Title - Some Artist(s);
+                 Track 2: Some Other Track Title - Some Other Artist(s), etc.
+    We read the Album Artist from the TPE2 frame to be compatible with
+    Amarok as the most popular music player for KDE, but also Apple (iTunes),
+    Microsoft (Windows Media Player) and others which use this frame to
+    read/write the album artist too.
+    See Amarok source file src/collectionscanner/CollectionScanner.cpp,
+    method AttributeHash CollectionScanner::readTags(...).
+*/
+    // TODO: find another way for non-MP3 files
+    QString albumArtist;
+/*  As mpeg implementation on TagLib uses a Tag class that's not defined on the headers,
+    we have to cast the files, not the tags!
+*/
+    TagLib::MPEG::File* mpegFile = dynamic_cast<TagLib::MPEG::File*>(f.file());
+    if(mpegFile && mpegFile->ID3v2Tag() && !mpegFile->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) {
+      albumArtist = TStringToQString(mpegFile->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
+      if(!albumArtist.isEmpty()) {
+        albumKey += QLatin1String("::") + albumArtist.toLower();
+      }
+    }
+
+    entry = albumMap[albumKey];
+    if(!entry) {
       entry = Data::EntryPtr(new Data::Entry(m_coll));
-      albumMap.insert(album.toLower(), entry);
+      albumMap.insert(albumKey, entry);
       exists = false;
     }
     // album entries use the album name as the title
     entry->setField(title, album);
     QString a = TStringToQString(tag->artist()).trimmed();
-    if(!a.isEmpty()) {
+    // If no album artist identified, we use track artist as album artist, or  "(Various)" if tracks have various artists.
+    if(!albumArtist.isEmpty()) {
+      entry->setField(artist, albumArtist);
+    } else if(!a.isEmpty()) {
       if(exists && entry->field(artist).toLower() != a.toLower()) {
-        various = true;
         entry->setField(artist, i18n("(Various)"));
       } else {
         entry->setField(artist, a);
