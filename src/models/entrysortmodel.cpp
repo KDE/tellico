@@ -68,7 +68,7 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     Data::EntryPtr leftEntry = sourceModel()->data(left, EntryPtrRole).value<Data::EntryPtr>();
     Data::EntryPtr rightEntry = sourceModel()->data(right, EntryPtrRole).value<Data::EntryPtr>();
     /*
-    if (comp && t) {
+    if (comp) {
       QString l, r;
       int re = 0;
       if (leftEntry) {

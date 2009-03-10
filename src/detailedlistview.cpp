@@ -53,8 +53,9 @@ protected:
 
     QStyleOptionViewItemV4* opt = ::qstyleoption_cast<QStyleOptionViewItemV4*>(option);
     const int state = index.data(SaveStateRole).toInt();
-    if(state == NewState) {
-      opt->backgroundBrush = QBrush(Qt::blue);
+    if(state == NewState || state == ModifiedState) {
+      opt->font.setBold(true);
+      opt->font.setItalic(true);
     }
   }
 };
@@ -174,6 +175,10 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
     return;
   }
   sourceModel()->addEntries(entries_);
+  if (!m_loadingCollection) {
+    setState(entries_, NewState);
+    setEntriesSelected(entries_);
+  }
 }
 
 void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {
@@ -181,6 +186,8 @@ void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {
     return;
   }
   sourceModel()->modifyEntries(entries_);
+  setState(entries_, ModifiedState);
+  setEntriesSelected(entries_);
 }
 
 void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
@@ -188,6 +195,17 @@ void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
     return;
   }
   sourceModel()->removeEntries(entries_);
+}
+
+void DetailedListView::setState(Tellico::Data::EntryList entries_, int state) {
+  for(QModelIndex index = model()->index(0, 0); index.isValid(); index = index.sibling(index.row()+1, 0)) {
+    foreach (Data::EntryPtr entry, entries_) {
+      Data::EntryPtr tmpEntry = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+      if(tmpEntry == entry) {
+        model()->setData(index, state, SaveStateRole);
+      }
+    }
+  }
 }
 
 void DetailedListView::removeCollection(Tellico::Data::CollPtr coll_) {
@@ -212,32 +230,27 @@ void DetailedListView::contextMenuEvent(QContextMenuEvent* event_) {
 }
 
 // don't shadow QListView::setSelected
-void DetailedListView::setEntrySelected(Tellico::Data::EntryPtr entry_) {
+void DetailedListView::setEntriesSelected(Data::EntryList entries) {
 //  DEBUG_LINE;
-  if(!entry_) {
+  if(entries.count() == 0) {
     // don't move this one outside the block since it calls setCurrentItem(0)
     clearSelection();
-    return;
-  }
-
-  // if the selected entry is the same as the current one, just return
-  QModelIndex curr = currentIndex();
-  Data::EntryPtr currEntry = model()->data(curr, EntryPtrRole).value<Data::EntryPtr>();
-  if(entry_ == currEntry) {
     return;
   }
 
   clearSelection();
   QModelIndex index = model()->index(0, 0);
   for(; index.isValid(); index = index.sibling(index.row()+1, 0)) {
-    Data::EntryPtr tmpEntry = model()->data(curr, EntryPtrRole).value<Data::EntryPtr>();
-    if(tmpEntry == entry_) {
-      blockSignals(true);
-      selectionModel()->select(index, QItemSelectionModel::Select);
-      setCurrentIndex(index);
-      blockSignals(false);
-      scrollTo(index);
-      break;
+    foreach (Data::EntryPtr entry_, entries) {
+      Data::EntryPtr tmpEntry = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+      if(tmpEntry == entry_) {
+        blockSignals(true);
+        selectionModel()->select(index, QItemSelectionModel::Select | QItemSelectionModel::Rows);
+        //setCurrentIndex(index);
+        blockSignals(false);
+        scrollTo(index);
+        break;
+      }
     }
   }
 }

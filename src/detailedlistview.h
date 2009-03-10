@@ -58,7 +58,7 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  void setEntrySelected(Data::EntryPtr entry);
+  void setEntriesSelected(Data::EntryList entries);
   void setFilter(FilterPtr filter);
   FilterPtr filter() const;
 
@@ -140,6 +140,7 @@ private slots:
 private:
   void contextMenuEvent(QContextMenuEvent* event);
   void updateHeaderMenu();
+  void setState(Tellico::Data::EntryList entries_, int state);
 
   struct ConfigInfo {
     QStringList cols;
