@@ -55,6 +55,7 @@ private slots:
   void slotRemoveRow();
   void slotMoveRowUp();
   void slotMoveRowDown();
+  void slotClear();
 
 private:
   void makeRowContextMenu(const QPoint& point);

@@ -128,17 +128,10 @@ void TableFieldWidget::setTextImpl(const QString& text_) {
 }
 
 void TableFieldWidget::clearImpl() {
-  bool wasEmpty = true;
-  for(int row = 0; row < m_table->rowCount(); ++row) {
-    if(!emptyRow(row)) {
-      wasEmpty = false;
-    }
-  }
+  m_table->clear();
   m_table->setRowCount(MIN_TABLE_ROWS);
+  labelColumns(m_field);
   editMultiple(false);
-  if(!wasEmpty) {
-    checkModified();
-  }
 }
 
 QWidget* TableFieldWidget::widget() {
@@ -269,7 +262,7 @@ void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
   }
   menu.addSeparator();
   menu.addAction(KIcon(QLatin1String("locationbar_erase")), i18n("Clear Table"),
-                 this, SLOT(clear()));
+                 this, SLOT(slotClear()));
 
   menu.exec(point_);
 }
@@ -316,6 +309,10 @@ void TableFieldWidget::slotMoveRowDown() {
     }
   }
   checkModified();
+}
+
+void TableFieldWidget::slotClear() {
+  clearImpl();
 }
 
 #include "tablefieldwidget.moc"
