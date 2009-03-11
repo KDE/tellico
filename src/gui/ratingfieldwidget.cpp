@@ -14,13 +14,14 @@
 #include "ratingfieldwidget.h"
 #include "ratingwidget.h"
 #include "../field.h"
+#include "../tellico_debug.h"
 
 using Tellico::GUI::RatingFieldWidget;
 
 RatingFieldWidget::RatingFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_) {
   m_rating = new RatingWidget(field_, this);
-  connect(m_rating, SIGNAL(modified()), SIGNAL(modified()));
+  connect(m_rating, SIGNAL(signalModified()), SLOT(checkModified()));
 
   registerWidget();
 }
@@ -29,21 +30,11 @@ QString RatingFieldWidget::text() const {
   return m_rating->text();
 }
 
-void RatingFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-
-  m_rating->blockSignals(true);
+void RatingFieldWidget::setTextImpl(const QString& text_) {
   m_rating->setText(text_);
-  m_rating->blockSignals(false);
-
-  blockSignals(false);
-
-  if(m_rating->text() != text_) {
-    emit modified();
-  }
 }
 
-void RatingFieldWidget::clear() {
+void RatingFieldWidget::clearImpl() {
   m_rating->clear();
   editMultiple(false);
 }

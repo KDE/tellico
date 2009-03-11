@@ -44,7 +44,8 @@ public:
 
   Data::FieldPtr field() const { return m_field; }
   virtual QString text() const = 0;
-  virtual void setText(const QString& text) = 0;
+  void setText(const QString& text);
+  void clear();
 
   int labelWidth() const;
   void setLabelWidth(int width);
@@ -62,16 +63,20 @@ public:
 
 public slots:
   virtual void insertDefault();
-  virtual void clear() = 0;
   void setEnabled(bool enabled);
 
 signals:
-  virtual void modified();
+  virtual void valueChanged();
+
+protected slots:
+  void checkModified();
 
 protected:
   QLabel* label() { return m_label; } // needed so the URLField can handle clicks on the label
   virtual QWidget* widget() = 0;
   void registerWidget();
+  virtual void setTextImpl(const QString& text) = 0;
+  virtual void clearImpl() = 0;
 
   // not all widgets have to be updated when the field changes
   virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
@@ -82,6 +87,7 @@ private:
   Data::FieldPtr m_field;
   QLabel* m_label;
   QCheckBox* m_editMultiple;
+  QString m_oldValue;
 
   bool m_expands;
 };

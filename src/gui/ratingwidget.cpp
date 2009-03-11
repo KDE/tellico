@@ -134,7 +134,7 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   if(m_currIndex != idx) {
     m_currIndex = idx;
     update();
-    emit modified();
+    emit signalModified();
   }
 }
 

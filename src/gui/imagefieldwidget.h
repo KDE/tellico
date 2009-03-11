@@ -34,10 +34,10 @@ public:
   virtual ~ImageFieldWidget() {}
 
   virtual QString text() const;
-  virtual void setText(const QString& text);
+  virtual void setTextImpl(const QString& text);
 
 public slots:
-  virtual void clear();
+  virtual void clearImpl();
 
 protected:
   virtual QWidget* widget();

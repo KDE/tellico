@@ -36,7 +36,7 @@ NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
 
 void NumberFieldWidget::initLineEdit() {
   m_lineEdit = new KLineEdit(this);
-  connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
+  connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
@@ -47,10 +47,10 @@ void NumberFieldWidget::initLineEdit() {
 void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers
   m_spinBox = new GUI::SpinBox(-1, INT_MAX, this);
-  connect(m_spinBox, SIGNAL(valueChanged(int)), SIGNAL(modified()));
+  connect(m_spinBox, SIGNAL(valueChanged(int)), SLOT(checkModified()));
   // QSpinBox doesn't emit valueChanged if you edit the value with
   // the lineEdit until you change the keyboard focus. Fixed in QT4 ???
-//  connect(m_spinBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
+//  connect(m_spinBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
   // I want to allow no value, so set space as special text. Empty text is ignored
   m_spinBox->setSpecialValueText(QLatin1String(" "));
 }
@@ -71,9 +71,7 @@ QString NumberFieldWidget::text() const {
   return text.simplified();
 }
 
-void NumberFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-
+void NumberFieldWidget::setTextImpl(const QString& text_) {
   if(isSpinBox()) {
     bool ok;
     int n = text_.toInt(&ok);
@@ -82,20 +80,14 @@ void NumberFieldWidget::setText(const QString& text_) {
       if(n < 0) {
         m_spinBox->setMinimum(INT_MIN+1);
       }
-      m_spinBox->blockSignals(true);
       m_spinBox->setValue(n);
-      m_spinBox->blockSignals(false);
     }
   } else {
-    m_lineEdit->blockSignals(true);
     m_lineEdit->setText(text_);
-    m_lineEdit->blockSignals(false);
   }
-
-  blockSignals(false);
 }
 
-void NumberFieldWidget::clear() {
+void NumberFieldWidget::clearImpl() {
   if(isSpinBox()) {
     // show empty special value text
     m_spinBox->setValue(m_spinBox->minimum());

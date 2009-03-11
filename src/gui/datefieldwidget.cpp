@@ -21,7 +21,7 @@ DateFieldWidget::DateFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     : FieldWidget(field_, parent_) {
 
   m_widget = new DateWidget(this);
-  connect(m_widget, SIGNAL(signalModified()), SIGNAL(modified()));
+  connect(m_widget, SIGNAL(signalModified()), SLOT(checkModified()));
 
   registerWidget();
 }
@@ -30,17 +30,11 @@ QString DateFieldWidget::text() const {
   return m_widget->text();
 }
 
-void DateFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-  m_widget->blockSignals(true);
-
+void DateFieldWidget::setTextImpl(const QString& text_) {
   m_widget->setDate(text_);
-
-  m_widget->blockSignals(false);
-  blockSignals(false);
 }
 
-void DateFieldWidget::clear() {
+void DateFieldWidget::clearImpl() {
   m_widget->clear();
   editMultiple(false);
 }

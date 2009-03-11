@@ -60,7 +60,7 @@ TableFieldWidget::TableFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pare
   m_table->verticalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
   m_table->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SIGNAL(modified()));
+  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SLOT(checkModified()));
   connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SLOT(slotResizeColumn(QTableWidgetItem*)));
   connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCheckRows(int, int)));
   connect(m_table, SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(tableContextMenu(const QPoint&)));
@@ -109,7 +109,7 @@ QString TableFieldWidget::text() const {
   return text;
 }
 
-void TableFieldWidget::setText(const QString& text_) {
+void TableFieldWidget::setTextImpl(const QString& text_) {
   QStringList list = Data::Field::split(text_, true);
   if(list.count() != m_table->rowCount()) {
     m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
@@ -127,7 +127,7 @@ void TableFieldWidget::setText(const QString& text_) {
   }
 }
 
-void TableFieldWidget::clear() {
+void TableFieldWidget::clearImpl() {
   bool wasEmpty = true;
   for(int row = 0; row < m_table->rowCount(); ++row) {
     if(!emptyRow(row)) {
@@ -137,7 +137,7 @@ void TableFieldWidget::clear() {
   m_table->setRowCount(MIN_TABLE_ROWS);
   editMultiple(false);
   if(!wasEmpty) {
-    emit modified();
+    checkModified();
   }
 }
 
@@ -277,14 +277,14 @@ void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
 void TableFieldWidget::slotInsertRow() {
   if(m_row > -1) {
     m_table->insertRow(m_row);
-    emit modified();
+    checkModified();
   }
 }
 
 void TableFieldWidget::slotRemoveRow() {
   if(m_row > -1) {
     m_table->removeRow(m_row);
-    emit modified();
+    checkModified();
   }
 }
 
@@ -300,7 +300,7 @@ void TableFieldWidget::slotMoveRowUp() {
       m_table->setItem(m_row-1, col, item2);
     }
   }
-  emit modified();
+  checkModified();
 }
 
 void TableFieldWidget::slotMoveRowDown() {
@@ -315,7 +315,7 @@ void TableFieldWidget::slotMoveRowDown() {
       m_table->setItem(m_row  , col, item2);
     }
   }
-  emit modified();
+  checkModified();
 }
 
 #include "tablefieldwidget.moc"

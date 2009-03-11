@@ -23,6 +23,7 @@
 #include "tablefieldwidget.h"
 #include "ratingfieldwidget.h"
 #include "../field.h"
+#include "../tellico_debug.h"
 
 #include <kdebug.h>
 #include <kurllabel.h>
@@ -123,7 +124,7 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   connect(m_editMultiple, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
   l->addWidget(m_editMultiple);
 
-  this->setWhatsThis(field_->description());
+  setWhatsThis(field_->description());
   // after letting the subclass get created, insert default value
   QTimer::singleShot(0, this, SLOT(insertDefault()));
 }
@@ -145,6 +146,16 @@ void FieldWidget::setEnabled(bool enabled_) {
   m_editMultiple->setChecked(enabled_);
 }
 
+void FieldWidget::setText(const QString& text_) {
+  m_oldValue = text_;
+  setTextImpl(text_);
+}
+
+void FieldWidget::clear() {
+  m_oldValue.clear();
+  clearImpl();
+}
+
 int FieldWidget::labelWidth() const {
   return m_label->sizeHint().width();
 }
@@ -162,13 +173,13 @@ void FieldWidget::editMultiple(bool show_) {
     return;
   }
 
-  // FIXME: maybe modified should only be signaled when the button is toggle on
+  // FIXME: maybe valueChanged should only be signaled when the button is toggled on
   if(show_) {
     m_editMultiple->show();
-    connect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(modified()));
+    connect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(valueChanged()));
   } else {
     m_editMultiple->hide();
-    disconnect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(modified()));
+    disconnect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(valueChanged()));
   }
   // the widget length needs to be updated since it gets shorter
   widget()->updateGeometry();
@@ -193,8 +204,17 @@ void FieldWidget::updateField(Tellico::Data::FieldPtr oldField_, Tellico::Data::
   m_field = newField_;
   m_label->setText(i18nc("Edit Label", "%1:", newField_->title()));
   updateGeometry();
-  this->setWhatsThis(newField_->description());
+  setWhatsThis(newField_->description());
   updateFieldHook(oldField_, newField_);
+}
+
+void FieldWidget::checkModified() {
+  const QString value = text();
+  if(value != m_oldValue) {
+    m_oldValue = value;
+//    myDebug() << sender()->metaObject()->className() << ": new value:" << value;
+    emit valueChanged();
+  }
 }
 
 #include "fieldwidget.moc"

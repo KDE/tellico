@@ -22,7 +22,7 @@ ImageFieldWidget::ImageFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pare
 
   m_widget = new ImageWidget(this);
   m_widget->setLinkOnlyChecked(field_->property(QLatin1String("link")) == QLatin1String("true"));
-  connect(m_widget, SIGNAL(signalModified()), SIGNAL(modified()));
+  connect(m_widget, SIGNAL(signalModified()), SLOT(checkModified()));
 
   registerWidget();
 }
@@ -31,17 +31,11 @@ QString ImageFieldWidget::text() const {
   return m_widget->id();
 }
 
-void ImageFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-  m_widget->blockSignals(true);
-
+void ImageFieldWidget::setTextImpl(const QString& text_) {
   m_widget->setImage(text_);
-
-  m_widget->blockSignals(false);
-  blockSignals(false);
 }
 
-void ImageFieldWidget::clear() {
+void ImageFieldWidget::clearImpl() {
   m_widget->slotClear();
   editMultiple(false);
 }

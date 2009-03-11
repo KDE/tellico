@@ -22,7 +22,7 @@ BoolFieldWidget::BoolFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     : FieldWidget(field_, parent_) {
 
   m_checkBox = new QCheckBox(this);
-  connect(m_checkBox, SIGNAL(clicked()), SIGNAL(modified()));
+  connect(m_checkBox, SIGNAL(clicked()), SLOT(checkModified()));
   registerWidget();
 }
 
@@ -34,19 +34,13 @@ QString BoolFieldWidget::text() const {
   return QString();
 }
 
-void BoolFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-
-  m_checkBox->blockSignals(true);
+void BoolFieldWidget::setTextImpl(const QString& text_) {
   // be lax, don't have to check for "1" or "true"
   // just check for a non-empty string
   m_checkBox->setChecked(!text_.isEmpty());
-  m_checkBox->blockSignals(false);
-
-  blockSignals(false);
 }
 
-void BoolFieldWidget::clear() {
+void BoolFieldWidget::clearImpl() {
   m_checkBox->setChecked(false);
   editMultiple(false);
 }

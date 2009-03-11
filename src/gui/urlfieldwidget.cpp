@@ -37,7 +37,7 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_requester = new KUrlRequester(this);
   m_requester->lineEdit()->setCompletionObject(new URLCompletion());
   m_requester->lineEdit()->setAutoDeleteCompletionObject(true);
-  connect(m_requester, SIGNAL(textChanged(const QString&)), SIGNAL(modified()));
+  connect(m_requester, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
   connect(m_requester, SIGNAL(textChanged(const QString&)), label(), SLOT(setUrl(const QString&)));
   connect(label(), SIGNAL(leftClickedUrl(const QString&)), SLOT(slotOpenURL(const QString&)));
   registerWidget();
@@ -62,18 +62,12 @@ QString URLFieldWidget::text() const {
   return KUrl(m_requester->url()).url();
 }
 
-void URLFieldWidget::setText(const QString& text_) {
-  blockSignals(true);
-
-  m_requester->blockSignals(true);
+void URLFieldWidget::setTextImpl(const QString& text_) {
   m_requester->setUrl(text_);
-  m_requester->blockSignals(false);
   static_cast<KUrlLabel*>(label())->setUrl(text_);
-
-  blockSignals(false);
 }
 
-void URLFieldWidget::clear() {
+void URLFieldWidget::clearImpl() {
   m_requester->clear();
   editMultiple(false);
 }

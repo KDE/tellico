@@ -103,6 +103,7 @@ void ImageWidget::setLinkOnlyChecked(bool link_) {
 }
 
 void ImageWidget::slotClear() {
+  bool wasEmpty = m_imageID.isEmpty();
 //  m_image = Data::Image();
   m_imageID.clear();
   m_pixmap = QPixmap();
@@ -113,7 +114,9 @@ void ImageWidget::slotClear() {
   m_cbLinkOnly->setChecked(false);
   m_cbLinkOnly->setEnabled(true);
   update();
-  emit signalModified();
+  if(!wasEmpty) {
+    emit signalModified();
+  }
 }
 
 void ImageWidget::scale() {

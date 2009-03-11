@@ -111,17 +111,16 @@ void EntryEditDialog::slotClose() {
 }
 
 void EntryEditDialog::slotReset() {
-//  myDebug() << "EntryEditDialog::slotReset()" << endl;
   if(m_isWorking) {
     return;
   }
+//  myDebug();
 
+  slotSetModified(false);
   enableButton(m_saveBtn, false);
   setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
   m_currColl = 0;
   m_currEntries.clear();
-
-  m_modified = false;
 
   while(m_tabs->count() > 0) {
     QWidget* widget = m_tabs->widget(0);
@@ -135,13 +134,13 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
-//  myDebug() << "EntryEditDialog::setLayout()" << endl;
+//  myDebug();
 
   button(m_newBtn)->setIcon(KIcon(coll_->typeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
-//    myDebug() << "EntryEditDialog::setLayout() - resetting contents." << endl;
+//    myDebug() << "resetting contents.";
     slotReset();
   }
   m_isWorking = true;
@@ -196,7 +195,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
       if(!widget) {
         continue;
       }
-      connect(widget, SIGNAL(modified()), SLOT(slotSetModified()));
+      connect(widget, SIGNAL(valueChanged()), SLOT(slotSetModified()));
       if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
         focusedFirst = true;
@@ -271,13 +270,13 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 
   m_isWorking = false;
   slotHandleNew();
-  m_modified = false; // because the year is inserted
 }
 
 void EntryEditDialog::slotHandleNew() {
   if(!m_currColl || !queryModified()) {
     return;
   }
+//  myDebug();
 
   m_tabs->setCurrentIndex(1);
   m_tabs->setFocusToFirstChild();
@@ -298,11 +297,12 @@ void EntryEditDialog::slotHandleSave() {
   if(!m_currColl || m_isWorking) {
     return;
   }
+//  myDebug();
 
   m_isWorking = true;
 
   if(m_currEntries.isEmpty()) {
-    myDebug() << "EntryEditDialog::slotHandleSave() - creating new entry" << endl;
+    myDebug() << "creating new entry";
     m_currEntries.append(Data::EntryPtr(new Data::Entry(m_currColl)));
     m_isOrphan = true;
   }
@@ -384,9 +384,8 @@ void EntryEditDialog::slotHandleSave() {
     }
   }
 
-  m_modified = false;
   m_isWorking = false;
-  enableButton(m_saveBtn, false);
+  slotSetModified(false);
 //  slotHandleNew();
 }
 
@@ -394,7 +393,7 @@ void EntryEditDialog::clear() {
   if(m_isWorking) {
     return;
   }
-//  myDebug() << "EntryEditDialog::clear()" << endl;
+//  myDebug();
 
   m_isWorking = true;
   // clear the widgets
@@ -408,17 +407,16 @@ void EntryEditDialog::clear() {
 
   if(m_isOrphan) {
     if(m_currEntries.count() > 1) {
-      kWarning() << "EntryEditDialog::clear() - is an orphan, but more than one";
+      myWarning() << "EntryEditDialog::clear() - is an orphan, but more than one";
     }
     m_isOrphan = false;
   }
   m_currEntries.clear();
 
   setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
-  enableButton(m_saveBtn, false);
 
-  m_modified = false;
   m_isWorking = false;
+  slotSetModified(false);
 }
 
 void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
@@ -428,7 +426,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   }
 
   if(entries_.isEmpty()) {
-//    myDebug() << "EntryEditDialog::setContents() - empty list" << endl;
+//    myDebug() << "empty list";
     if(queryModified()) {
       blockSignals(true);
       slotHandleNew();
@@ -437,7 +435,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
     return;
   }
 
-//  myDebug() << "EntryEditDialog::setContents() - " << entries_.count() << " entries" << endl;
+//  myDebug() << entries_.count() << " entries";
 
   // if some entries get selected in one view, then in another, don't reset
   if(!m_needReset && entries_ == m_currEntries) {
@@ -487,18 +485,18 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
 }
 
 void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
-  bool ok = queryModified();
-  if(!ok || m_isWorking) {
+  if(m_isWorking || !queryModified()) {
     return;
   }
+//  myDebug();
 
   if(!entry_) {
-    myDebug() << "EntryEditDialog::setContents() - null entry pointer" << endl;
+    myDebug() << "null entry pointer";
     slotHandleNew();
     return;
   }
 
-//  myDebug() << "EntryEditDialog::setContents() - " << entry_->title() << endl;
+//  myDebug() << entry_->title();
   blockSignals(true);
   clear();
   blockSignals(false);
@@ -511,11 +509,9 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   }
 
   if(m_currColl != entry_->collection()) {
-    myDebug() << "EntryEditDialog::setContents() - collections don't match" << endl;
+    myDebug() << "collections don't match";
     m_currColl = entry_->collection();
   }
-
-  slotSetModified(false);
 
   foreach(Data::FieldPtr field, m_currColl->fields()) {
     QString key = QString::number(m_currColl->id()) + field->name();
@@ -533,8 +529,9 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   enableButton(m_nextBtn, true);
   if(entry_->isOwned()) {
     setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
-    enableButton(m_saveBtn, m_modified);
+    slotSetModified(false);
   } else {
+    // saving is necessary for unoqnwed entries
     slotSetModified(true);
   }
   m_isWorking = false;
@@ -545,7 +542,7 @@ void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPt
     return;
   }
 
-//  myDebug() << "EntryEditDialog::removeField - name = " << field_->name() << endl;
+//  myDebug() << "name = " << field_->name();
   QString key = QString::number(m_currColl->id()) + field_->name();
   GUI::FieldWidget* widget = m_widgetDict.value(key);
   if(widget) {
@@ -554,7 +551,7 @@ void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPt
     // this function is called after the field has been removed from the collection,
     // so the category should be gone from the category list
     if(m_currColl->fieldCategories().indexOf(field_->category()) == -1) {
-//      myDebug() << "last field in the category" << endl;
+//      myDebug() << "last field in the category";
       // fragile, widget's parent is the grid, whose parent is the tab page
       QWidget* w = widget->parentWidget()->parentWidget();
       m_tabs->removeTab(m_tabs->indexOf(w));
@@ -608,7 +605,7 @@ void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPt
 void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
 #ifndef NDEBUG
   if(m_currColl != entry_->collection()) {
-    myDebug() << "EntryEditDialog::updateCompletions - inconsistent collection pointers!" << endl;
+    myDebug() << "inconsistent collection pointers!";
 //    m_currColl = entry_->collection();
   }
 #endif
@@ -641,7 +638,7 @@ void EntryEditDialog::slotSetModified(bool mod_/*=true*/) {
 }
 
 bool EntryEditDialog::queryModified() {
-//  myDebug() << "EntryEditDialog::queryModified() - modified is " << (m_modified?"true":"false") << endl;
+//  myDebug() << "modified is " << (m_modified?"true":"false");
   bool ok = true;
   // assume that if the dialog is hidden, we shouldn't ask the user to modify changes
   if(!isVisible()) {
@@ -675,10 +672,10 @@ bool EntryEditDialog::queryModified() {
 
 // modified fields will always have the same name
 void EntryEditDialog::modifyField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
-//  myDebug() << "EntryEditDialog::slotUpdateField() - " << newField_->name() << endl;
+//  myDebug() << newField_->name();
 
   if(coll_ != m_currColl) {
-    myDebug() << "EntryEditDialog::slotUpdateField() - wrong collection pointer!" << endl;
+    myDebug() << "wrong collection pointer!";
     m_currColl = coll_;
   }
 

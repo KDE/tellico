@@ -50,7 +50,7 @@ public slots:
   void update();
 
 signals:
-  void modified();
+  void signalModified();
 
 protected:
   virtual void mousePressEvent(QMouseEvent* e);
