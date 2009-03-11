@@ -278,7 +278,7 @@ void EntryEditDialog::slotHandleNew() {
   }
 //  myDebug();
 
-  m_tabs->setCurrentIndex(1);
+  m_tabs->setCurrentIndex(0);
   m_tabs->setFocusToFirstChild();
   clear();
   m_isWorking = true; // clear() will get called again
