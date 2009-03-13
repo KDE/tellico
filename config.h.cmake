@@ -32,3 +32,4 @@
 
 #cmakedefine HAVE_YAZ
 
+#cmakedefine HAVE_KSANE

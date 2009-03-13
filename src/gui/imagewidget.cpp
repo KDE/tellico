@@ -23,7 +23,14 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <KPushButton>
+#include <KStandardDirs>
+#include <KProgressDialog>
+#include <KTemporaryFile>
+#include <KProcess>
+#include <KMimeTypeTrader>
+#include <KRun>
 
+#include <QMenu>
 #include <QMatrix>
 #include <QLabel>
 #include <QCheckBox>
@@ -34,6 +41,14 @@
 #include <QResizeEvent>
 #include <QMouseEvent>
 #include <QDragEnterEvent>
+#include <QToolButton>
+#include <QActionGroup>
+
+#ifdef HAVE_KSANE
+#include <libksane/ksane.h>
+#endif
+
+Q_DECLARE_METATYPE(KService::Ptr)
 
 namespace {
   static const uint IMAGE_WIDGET_BUTTON_MARGIN = 8;
@@ -44,7 +59,12 @@ namespace {
 
 using Tellico::GUI::ImageWidget;
 
-ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_) {
+ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
+  m_editProcess(0), m_waitDlg(0)
+#ifdef HAVE_KSANE
+  , m_saneWidget(0), m_saneDlg(0)
+#endif
+{
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(IMAGE_WIDGET_BUTTON_MARGIN);
   m_label = new QLabel(this);
@@ -63,9 +83,48 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_) {
   connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
   boxLayout->addWidget(button1);
 
-  KPushButton* button2 = new KPushButton(i18n("Clear"), this);
-  connect(button2, SIGNAL(clicked()), this, SLOT(slotClear()));
+  KPushButton* button2 = new KPushButton(i18n("Scan Image..."), this);
+  connect(button2, SIGNAL(clicked()), this, SLOT(slotScanImage()));
   boxLayout->addWidget(button2);
+#ifndef HAVE_KSANE
+  button2->setEnabled(false);
+#endif
+
+  m_edit = new QToolButton(this);
+  m_edit->setText(i18n("Open With..."));
+  m_edit->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+  m_edit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+  connect(m_edit, SIGNAL(clicked()), this, SLOT(slotEditImage()));
+  boxLayout->addWidget(m_edit);
+
+  KConfigGroup config(KGlobal::config(), "EditImage");
+  QString editor = config.readEntry("editor", "");
+  m_editMenu = new QMenu(this);
+  QActionGroup* grp = new QActionGroup(this);
+  grp->setExclusive(true);
+  QAction* selectedAction = 0;
+  KService::List offers = KMimeTypeTrader::self()->query(QLatin1String("image/png"),
+                                                         QLatin1String("Application"));
+  foreach (KService::Ptr service, offers) {
+    QAction* action = m_editMenu->addAction(KIcon(service->icon()), service->name());
+    action->setCheckable(true);
+    action->setData(QVariant::fromValue(service));
+    grp->addAction(action);
+    if (!selectedAction || editor == service->name()) {
+      selectedAction = action;
+    }
+  }
+  if (selectedAction) {
+    selectedAction->setChecked(true);
+    slotEditMenu(selectedAction);
+    m_edit->setMenu(m_editMenu);
+    connect(m_editMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotEditMenu(QAction*)));
+  } else {
+    m_edit->setEnabled(false);
+  }
+  KPushButton* button4 = new KPushButton(i18n("Clear"), this);
+  connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
+  boxLayout->addWidget(button4);
 
   boxLayout->addSpacing(8);
 
@@ -78,6 +137,11 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_) {
 
   // accept image drops
   setAcceptDrops(true);
+}
+
+ImageWidget::~ImageWidget() {
+  KConfigGroup config(KGlobal::config(), "EditImage");
+  config.writeEntry("editor", m_editor->name());
 }
 
 void ImageWidget::setImage(const QString& id_) {
@@ -159,6 +223,97 @@ void ImageWidget::slotGetImage() {
     return;
   }
   loadImage(url);
+}
+
+void ImageWidget::slotScanImage()
+{
+#ifdef HAVE_KSANE
+  if (!m_saneWidget) {
+    m_saneDlg = new KDialog(this);
+    m_saneWidget = new KSaneIface::KSaneWidget(m_saneDlg);
+    if (m_saneWidget->openDevice(QString()) == false) {
+      QString dev = m_saneWidget->selectDevice(0);
+      if (!dev.isEmpty()) {
+        if (m_saneWidget->openDevice(dev) == false) {
+          KMessageBox::sorry(0, i18n("Opening the selected scanner failed!"));
+          dev.clear();
+        }
+      }
+      if (dev.isEmpty()) {
+        delete m_saneWidget;
+        m_saneWidget = 0;
+        delete m_saneDlg;
+        m_saneDlg = 0;
+        return;
+      }
+    }
+    m_saneDlg->setMainWidget(m_saneWidget);
+    m_saneDlg->setButtons(KDialog::Cancel);
+
+    connect(m_saneWidget, SIGNAL(imageReady(QByteArray &, int, int, int, int)),
+            this, SLOT(imageReady(QByteArray &, int, int, int, int)));
+  }
+  m_saneDlg->exec();
+#endif
+}
+
+void ImageWidget::imageReady(QByteArray &data, int w, int h, int bpl, int f)
+{
+#ifdef HAVE_KSANE
+  QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl,
+          (KSaneIface::KSaneWidget::ImageFormat)f);
+  scannedImage.setDotsPerMeterX(m_saneWidget->currentDPI() * (1000.0 / 25.4));
+  scannedImage.setDotsPerMeterY(m_saneWidget->currentDPI() * (1000.0 / 25.4));
+  KTemporaryFile temp;
+  temp.setSuffix(QLatin1String(".png"));
+  if (temp.open()) {
+    scannedImage.save(temp.fileName());
+    loadImage(temp.fileName());
+  }
+  m_saneDlg->close();
+#endif
+}
+
+void ImageWidget::slotEditImage()
+{
+  if (!m_editProcess) {
+    m_editProcess = new KProcess(this);
+    connect(m_editProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
+            this, SLOT(slotFinished()));
+  }
+  if (m_editProcess->state() == QProcess::NotRunning) {
+    KTemporaryFile temp;
+    temp.setSuffix(QLatin1String(".png"));
+    if (temp.open()) {
+      m_img = temp.fileName();
+      const Data::Image& img = ImageFactory::imageById(m_imageID);
+      img.save(m_img);
+      m_editedFileDateTime = QFileInfo(m_img).lastModified();
+      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, KUrl::List() << m_img));
+      m_editProcess->start();
+      if (!m_waitDlg) {
+        m_waitDlg = new KProgressDialog(this);
+        m_waitDlg->showCancelButton(false);
+        m_waitDlg->setLabelText(i18n("Image open in %1...").arg(m_editor->name()));
+        m_waitDlg->progressBar()->setRange(0, 0);
+      }
+      m_waitDlg->exec();
+    }
+  }
+}
+
+void ImageWidget::slotFinished()
+{
+  if (m_editedFileDateTime != QFileInfo(m_img).lastModified()) {
+    loadImage(KUrl(m_img));
+  }
+  m_waitDlg->close();
+}
+
+void ImageWidget::slotEditMenu(QAction* action)
+{
+  m_editor = action->data().value<KService::Ptr>();
+  m_edit->setIcon(KIcon(m_editor->icon()));
 }
 
 void ImageWidget::slotLinkOnlyClicked() {

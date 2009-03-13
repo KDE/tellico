@@ -19,6 +19,10 @@
 #include <QWidget>
 #include <QPixmap>
 #include <QPoint>
+#include <KService>
+#include <QDateTime>
+
+#include "config.h"
 
 class QLabel;
 class QResizeEvent;
@@ -27,7 +31,14 @@ class QDragEnterEvent;
 class QDropEvent;
 class QCheckBox;
 class QLabel;
-
+class QToolButton;
+class QMenu;
+class KProgressDialog;
+class KProcess;
+#ifdef HAVE_KSANE
+class KDialog;
+namespace KSaneIface { class KSaneWidget; }
+#endif
 namespace Tellico {
   namespace GUI {
 
@@ -39,7 +50,7 @@ Q_OBJECT
 
 public:
   ImageWidget(QWidget* parent);
-  virtual ~ImageWidget() {}
+  virtual ~ImageWidget();
 
   const QString& id() const { return m_imageID; }
   void setImage(const QString& id);
@@ -61,6 +72,11 @@ protected:
 private slots:
   void slotGetImage();
   void slotLinkOnlyClicked();
+  void slotScanImage();
+  void imageReady(QByteArray &data, int w, int h, int bpl, int f);
+  void slotEditImage();
+  void slotEditMenu(QAction* action);
+  void slotFinished();
 
 private:
   void scale();
@@ -73,6 +89,17 @@ private:
   QCheckBox* m_cbLinkOnly;
   KUrl m_originalURL;
   QPoint m_dragStart;
+  QMenu* m_editMenu;
+  QToolButton* m_edit;
+  KService::Ptr m_editor;
+  QString m_img;
+  KProcess* m_editProcess;
+  KProgressDialog* m_waitDlg;
+  QDateTime m_editedFileDateTime;
+#ifdef HAVE_KSANE
+  KSaneIface::KSaneWidget* m_saneWidget;
+  KDialog* m_saneDlg;
+#endif
 };
 
   } // end GUI namespace
