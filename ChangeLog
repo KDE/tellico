@@ -1,3 +1,8 @@
+2009-03-13  Petri Damstén  <damu@iki.fi>
+
+	* Added scanning support to image widget.
+	* Added 'Open With...' -button to image widget
+
 2009-03-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Added reading album artist from TPE2 tags in mp3 files.
