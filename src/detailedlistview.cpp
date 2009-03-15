@@ -198,11 +198,11 @@ void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
 }
 
 void DetailedListView::setState(Tellico::Data::EntryList entries_, int state) {
-  for(QModelIndex index = model()->index(0, 0); index.isValid(); index = index.sibling(index.row()+1, 0)) {
+  for(QModelIndex index = sourceModel()->index(0, 0); index.isValid(); index = index.sibling(index.row()+1, 0)) {
     foreach (Data::EntryPtr entry, entries_) {
-      Data::EntryPtr tmpEntry = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+      Data::EntryPtr tmpEntry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
       if(tmpEntry == entry) {
-        model()->setData(index, state, SaveStateRole);
+        sourceModel()->setData(index, state, SaveStateRole);
       }
     }
   }
