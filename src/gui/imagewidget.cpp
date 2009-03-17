@@ -262,8 +262,8 @@ void ImageWidget::imageReady(QByteArray &data, int w, int h, int bpl, int f)
 #ifdef HAVE_KSANE
   QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl,
           (KSaneIface::KSaneWidget::ImageFormat)f);
-  scannedImage.setDotsPerMeterX(m_saneWidget->currentDPI() * (1000.0 / 25.4));
-  scannedImage.setDotsPerMeterY(m_saneWidget->currentDPI() * (1000.0 / 25.4));
+  //scannedImage.setDotsPerMeterX(m_saneWidget->currentDPI() * (1000.0 / 25.4));
+  //scannedImage.setDotsPerMeterY(m_saneWidget->currentDPI() * (1000.0 / 25.4));
   KTemporaryFile temp;
   temp.setSuffix(QLatin1String(".png"));
   if (temp.open()) {
