@@ -235,7 +235,7 @@ void ImageWidget::slotScanImage()
       QString dev = m_saneWidget->selectDevice(0);
       if (!dev.isEmpty()) {
         if (m_saneWidget->openDevice(dev) == false) {
-          KMessageBox::sorry(0, i18n("Opening the selected scanner failed!"));
+          KMessageBox::sorry(0, i18n("Opening the selected scanner failed."));
           dev.clear();
         }
       }
