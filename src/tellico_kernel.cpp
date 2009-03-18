@@ -19,7 +19,7 @@
 #include "filter.h"
 #include "filterdialog.h"
 #include "loandialog.h"
-#include "calendarhandler.h"
+#include "utils/calendarhandler.h"
 #include "tellico_debug.h"
 #include "commands/collectioncommand.h"
 #include "commands/fieldcommand.h"

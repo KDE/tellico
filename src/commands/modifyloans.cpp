@@ -15,7 +15,7 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../controller.h"
-#include "../calendarhandler.h"
+#include "../utils/calendarhandler.h"
 
 #include <klocale.h>
 

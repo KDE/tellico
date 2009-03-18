@@ -12,9 +12,9 @@
  ***************************************************************************/
 
 #include "calendarhandler.h"
-#include "entry.h"
-#include "tellico_kernel.h"
-#include "tellico_debug.h"
+#include "../entry.h"
+#include "../tellico_kernel.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>

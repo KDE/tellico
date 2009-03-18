@@ -15,7 +15,7 @@
 #define TELLICO_CALENDARHANDLER_H
 
 #include <config.h>
-#include "borrower.h"
+#include "../borrower.h"
 
 namespace KCal {
   class CalendarResources;

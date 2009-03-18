@@ -20,7 +20,6 @@ ENDIF( ENABLE_WEBCAM )
 SET(tellico_SRCS
    borrower.cpp
    borrowerdialog.cpp
-   calendarhandler.cpp
    collection.cpp
    collectionfactory.cpp
    collectionfieldsdialog.cpp
