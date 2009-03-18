@@ -17,9 +17,9 @@
 #include "controller.h"
 #include "field.h"
 #include "entry.h"
-#include "tellico_utils.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
+#include "gui/cursorsaver.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>

@@ -22,7 +22,7 @@
 // code, and including a large portion of it here
 
 #include "iso6937converter.h"
-#include "tellico_debug.h"
+#include "../tellico_debug.h"
 
 #include <QString>
 #include <QByteArray>

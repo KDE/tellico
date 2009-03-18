@@ -19,7 +19,7 @@
 #include "../image.h"
 #include "../imageinfo.h"
 #include "../imagefactory.h"
-#include "../isbnvalidator.h"
+#include "../utils/isbnvalidator.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 

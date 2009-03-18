@@ -41,7 +41,6 @@
 #include "filterview.h"
 #include "loanview.h"
 #include "gui/lineedit.h"
-#include "tellico_utils.h"
 #include "tellico_debug.h"
 #include "statusbar.h"
 #include "fetch/fetchmanager.h"
@@ -51,6 +50,7 @@
 #include "core/dbusinterface.h"
 #include "models/models.h"
 #include "newstuff/manager.h"
+#include "gui/cursorsaver.h"
 
 #include <kapplication.h>
 #include <kcombobox.h>

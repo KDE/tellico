@@ -7,6 +7,7 @@ SET(gui_STAT_SRCS
    collectiontypecombo.cpp
    combobox.cpp
    countdelegate.cpp
+   cursorsaver.cpp
    datefieldwidget.cpp
    datewidget.cpp
    imagefieldwidget.cpp

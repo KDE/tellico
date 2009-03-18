@@ -33,8 +33,8 @@
 #include "../tellico_debug.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
-#include "../isbnvalidator.h"
-#include "../lccnvalidator.h"
+#include "../utils/isbnvalidator.h"
+#include "../utils/lccnvalidator.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>

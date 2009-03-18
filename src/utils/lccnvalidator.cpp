@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "lccnvalidator.h"
-#include "tellico_debug.h"
+#include "../tellico_debug.h"
 
 using Tellico::LCCNValidator;
 

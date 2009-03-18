@@ -13,7 +13,7 @@
 
 #include "isbnvalidator.h"
 #include "upcvalidator.h"
-#include "tellico_debug.h"
+#include "../tellico_debug.h"
 
 using Tellico::ISBNValidator;
 

@@ -41,6 +41,7 @@ SET(translators_STAT_SRCS
    textimporter.cpp
    xmlimporter.cpp
    xmlstatehandler.cpp
+   xmphandler.cpp
    xsltexporter.cpp
    xslthandler.cpp
    xsltimporter.cpp

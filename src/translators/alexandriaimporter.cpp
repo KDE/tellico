@@ -15,10 +15,10 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../isbnvalidator.h"
 #include "../imagefactory.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
+#include "../utils/isbnvalidator.h"
 
 #include <kcombobox.h>
 #include <kapplication.h>

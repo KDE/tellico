@@ -589,7 +589,6 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
   }
   EntryGroupDict* dict = m_entryGroupDicts[name_];
   if(dict && dict->isEmpty()) {
-    GUI::CursorSaver cs;
     const bool b = signalsBlocked();
     // block signals so all the group created/modified signals don't fire
     blockSignals(true);

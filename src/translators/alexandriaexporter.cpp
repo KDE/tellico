@@ -20,6 +20,7 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
+#include "../gui/cursorsaver.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>

@@ -20,7 +20,6 @@
 #include "filterdialog.h"
 #include "loandialog.h"
 #include "calendarhandler.h"
-#include "tellico_utils.h"
 #include "tellico_debug.h"
 #include "commands/collectioncommand.h"
 #include "commands/fieldcommand.h"
@@ -34,6 +33,7 @@
 #include "commands/renamecollection.h"
 #include "collectionfactory.h"
 #include "stringset.h"
+#include "gui/cursorsaver.h"
 
 #include <kmessagebox.h>
 #include <kglobal.h>

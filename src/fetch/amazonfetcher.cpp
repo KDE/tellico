@@ -23,7 +23,7 @@
 #include "../field.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
-#include "../isbnvalidator.h"
+#include "../utils/isbnvalidator.h"
 #include "../gui/combobox.h"
 
 #include <klocale.h>

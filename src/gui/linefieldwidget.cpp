@@ -13,10 +13,10 @@
 
 #include "linefieldwidget.h"
 #include "../field.h"
-#include "../isbnvalidator.h"
 #include "../fieldcompletion.h"
 #include "../tellico_kernel.h"
 #include "../gui/lineedit.h"
+#include "../utils/isbnvalidator.h"
 
 using Tellico::GUI::LineFieldWidget;
 

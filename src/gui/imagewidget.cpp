@@ -16,8 +16,8 @@
 #include "../image.h"
 #include "../imageinfo.h"
 #include "../core/filehandler.h"
+#include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
-#include "../tellico_utils.h"
 
 #include <kfiledialog.h>
 #include <klocale.h>

@@ -23,6 +23,7 @@
 #include "../tellico_utils.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
+#include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>

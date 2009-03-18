@@ -19,9 +19,9 @@
 #include "document.h"
 #include "entry.h"
 #include "controller.h"
-#include "tellico_utils.h"
 #include "tellico_debug.h"
 #include "gui/combobox.h"
+#include "gui/cursorsaver.h"
 #include "core/tellico_config.h"
 
 #include <klocale.h>

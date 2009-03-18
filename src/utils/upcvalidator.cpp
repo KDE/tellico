@@ -13,7 +13,7 @@
 
 #include "upcvalidator.h"
 #include "isbnvalidator.h"
-#include "tellico_debug.h"
+#include "../tellico_debug.h"
 
 #include <kcodecs.h>
 

@@ -25,7 +25,6 @@
 
 #include <QRegExp>
 #include <QDir>
-#include <QCursor>
 #include <QTextCodec>
 
 namespace {
@@ -218,19 +217,4 @@ QString Tellico::saveLocation(const QString& dir_) {
 QString Tellico::fromHtmlData(const QByteArray& data_) {
   QTextCodec* codec = QTextCodec::codecForHtml(data_);
   return codec->toUnicode(data_);
-}
-
-Tellico::GUI::CursorSaver::CursorSaver(const QCursor& cursor_) : m_restored(false) {
-  kapp->setOverrideCursor(cursor_);
-}
-
-Tellico::GUI::CursorSaver::~CursorSaver() {
-  if(!m_restored) {
-    kapp->restoreOverrideCursor();
-  }
-}
-
-void Tellico::GUI::CursorSaver::restore() {
-  kapp->restoreOverrideCursor();
-  m_restored = true;
 }

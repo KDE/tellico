@@ -19,10 +19,10 @@
 #include "../translators/tellicoimporter.h"
 #include "../gui/combobox.h"
 #include "../gui/collectiontypecombo.h"
+#include "../gui/cursorsaver.h"
 #include "../core/filehandler.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
-#include "../tellico_utils.h"
 
 #include <KConfigGroup>
 #include <KProcess>

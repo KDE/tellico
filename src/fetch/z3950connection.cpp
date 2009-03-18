@@ -15,8 +15,8 @@
 #include "z3950fetcher.h"
 #include "messagehandler.h"
 #include "../tellico_debug.h"
-#include "../iso5426converter.h"
-#include "../iso6937converter.h"
+#include "../utils/iso5426converter.h"
+#include "../utils/iso6937converter.h"
 
 #include <config.h>
 

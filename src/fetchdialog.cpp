@@ -15,8 +15,8 @@
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
 #include "entryview.h"
-#include "isbnvalidator.h"
-#include "upcvalidator.h"
+#include "utils/isbnvalidator.h"
+#include "utils/upcvalidator.h"
 #include "tellico_kernel.h"
 #include "filehandler.h"
 #include "collection.h"
@@ -24,7 +24,7 @@
 #include "document.h"
 #include "tellico_debug.h"
 #include "gui/combobox.h"
-#include "tellico_utils.h"
+#include "gui/cursorsaver.h"
 #include "stringset.h"
 
 #include <klocale.h>

@@ -19,8 +19,6 @@
 #include <klocale.h>
 #include <kglobal.h>
 
-#include <QDateTime>
-
 using Tellico::Data::Field;
 
 // this constructor is for anything but Choice type
@@ -296,6 +294,7 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
     min = qMin(min, n);
     max = qMax(max, n);
   }
+  min = qMax(max, 1);
   max = qMin(max, 10);
   if(min >= max) {
     min = 1;
@@ -303,6 +302,7 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   }
   field_->setProperty(QLatin1String("minimum"), QString::number(min));
   field_->setProperty(QLatin1String("maximum"), QString::number(max));
+  //remove any old property
   field_->setProperty(QLatin1String("rating"), QString());
   field_->setType(Rating);
 }

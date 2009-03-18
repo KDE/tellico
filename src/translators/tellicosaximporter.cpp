@@ -20,7 +20,7 @@
 #include "../field.h"
 #include "../imagefactory.h"
 #include "../image.h"
-#include "../isbnvalidator.h"
+#include "../utils/isbnvalidator.h"
 #include "../tellico_strings.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"

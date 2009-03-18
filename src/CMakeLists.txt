@@ -7,6 +7,7 @@ ADD_SUBDIRECTORY( commands )
 ADD_SUBDIRECTORY( cite )
 ADD_SUBDIRECTORY( newstuff )
 ADD_SUBDIRECTORY( models )
+ADD_SUBDIRECTORY( utils )
 ADD_SUBDIRECTORY( 3rdparty )
 ADD_SUBDIRECTORY( tests )
 
@@ -50,10 +51,6 @@ SET(tellico_SRCS
    imagefactory.cpp
    imageinfo.cpp
    importdialog.cpp
-   isbnvalidator.cpp
-   iso5426converter.cpp
-   iso6937converter.cpp
-   lccnvalidator.cpp
    listviewcomparison.cpp
    loandialog.cpp
    loanview.cpp
@@ -65,9 +62,7 @@ SET(tellico_SRCS
    tellico_kernel.cpp
    tellico_strings.cpp
    tellico_utils.cpp
-   upcvalidator.cpp
    viewstack.cpp
-   xmphandler.cpp
    )
 
 KDE4_ADD_EXECUTABLE(tellico ${tellico_SRCS})
@@ -81,6 +76,7 @@ TARGET_LINK_LIBRARIES(tellico
     gui
     commands
     models
+    utils
     newstuff
     pilotdb
     rtf2html

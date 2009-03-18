@@ -14,16 +14,16 @@
 #include "pdfimporter.h"
 #include "tellicoimporter.h"
 #include "xslthandler.h"
+#include "xmphandler.h"
 #include "../collections/bibtexcollection.h"
-#include "../xmphandler.h"
 #include "../core/filehandler.h"
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../fetch/fetchmanager.h"
 #include "../fetch/crossreffetcher.h"
-#include "../tellico_utils.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
+#include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>

@@ -24,7 +24,7 @@
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../tellico_utils.h"
-#include "../lccnvalidator.h"
+#include "../utils/lccnvalidator.h"
 
 #include <klocale.h>
 #include <kio/job.h>

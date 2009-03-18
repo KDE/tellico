@@ -26,6 +26,7 @@
 #include "../tellico_debug.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"
+#include "../gui/cursorsaver.h"
 
 #include <config.h>
 

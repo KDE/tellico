@@ -16,10 +16,10 @@
 #include "tellicoxmlexporter.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
-#include "../tellico_utils.h"
 #include "../imagefactory.h"
 #include "../image.h"
 #include "../tellico_debug.h"
+#include "../gui/cursorsaver.h"
 
 #include <config.h>
 

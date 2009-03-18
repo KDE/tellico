@@ -29,13 +29,13 @@
 #include "borrower.h"
 #include "filterview.h"
 #include "loanview.h"
-#include "gui/treeview.h"
 #include "calendarhandler.h"
 #include "tellico_debug.h"
 #include "groupiterator.h"
-#include "tellico_utils.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
+#include "gui/treeview.h"
+#include "gui/cursorsaver.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>

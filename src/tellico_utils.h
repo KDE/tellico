@@ -15,10 +15,10 @@
 #define TELLICO_UTILS_H
 
 #include <Qt>
-#include <QCursor>
 
 class KLibrary;
 
+class QByteArray;
 class QString;
 class QStringList;
 
@@ -62,18 +62,6 @@ namespace Tellico {
   QString fromHtmlData(const QByteArray& data);
 
   KLibrary* openLibrary(const QString& libName);
-
-namespace GUI {
-  class CursorSaver {
-  public:
-    CursorSaver(const QCursor& cursor = QCursor(Qt::WaitCursor));
-    ~CursorSaver();
-    void restore();
-  private:
-    bool m_restored : 1;
-  };
-}
-
 }
 
 #endif

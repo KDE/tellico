@@ -17,7 +17,7 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../core/filehandler.h"
-#include "../isbnvalidator.h"
+#include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>

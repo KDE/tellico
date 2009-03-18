@@ -22,7 +22,7 @@
 #include "../gui/combobox.h"
 #include "../gui/lineedit.h"
 #include "../gui/collectiontypecombo.h"
-#include "../tellico_utils.h"
+#include "../gui/cursorsaver.h"
 //#include "../newstuff/manager.h"
 
 #include <klocale.h>

@@ -12,11 +12,13 @@
  ***************************************************************************/
 
 #include "xmphandler.h"
-#include "tellico_debug.h"
+#include "../tellico_debug.h"
+
 #include <config.h>
 
 #include <QFile>
 #include <QTextStream>
+
 #ifdef HAVE_EXEMPI
 #include <exempi/xmp.h>
 #endif
