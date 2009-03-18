@@ -29,17 +29,23 @@ LCCNValidator::LCCNValidator(QObject* parent_) : QRegExpValidator(parent_) {
 
 // static
 QString LCCNValidator::formalize(const QString& value_) {
+  QString value = value_.simplified();
+  // remove spaces
+  value.remove(QLatin1Char(' '));
+  // remove everything after the forward slash
+  value = value.section(QLatin1Char('/'), 0, 0);
+
   const int len = value_.length();
   // first remove alpha prefix
   QString alpha;
   for(int pos = 0; pos < len; ++pos) {
-    QChar c = value_.at(pos);
+    QChar c = value.at(pos);
     if(c.isNumber()) {
       break;
     }
-    alpha += value_.at(pos);
+    alpha += value.at(pos);
   }
-  QString afterAlpha = value_.mid(alpha.length());
+  QString afterAlpha = value.mid(alpha.length());
   alpha = alpha.trimmed(); // possible to have a space at the end
 
   QString year;
