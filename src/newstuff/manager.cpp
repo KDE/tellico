@@ -120,7 +120,7 @@ QMap<QString, QString> Manager::userTemplates() {
   dir.setFilter(QDir::Files | QDir::Writable);
   QStringList files = dir.entryList();
   QMap<QString, QString> nameFileMap;
-  foreach(QString file, files) {
+  foreach(const QString& file, files) {
     QString name = file;
     name.truncate(file.length()-4); // remove ".xsl"
     name.replace(QLatin1Char('_'), QLatin1Char(' '));

@@ -605,7 +605,7 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
   QList<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
     QStringList groups = entryGroupNamesByField(entry, fieldName_);
-    foreach(QString groupTitle, groups) {
+    foreach(QString groupTitle, groups) { // krazy:exclude=foreach
       // find the group for this group name
       // bool fields used the field title
       if(isBool && groupTitle != i18n(s_emptyGroupTitle)) {

@@ -21,9 +21,6 @@
 #include <QHash>
 
 namespace Tellico {
-  namespace Data {
-    class Field;
-  }
   namespace Import {
 
 /**
