@@ -10,6 +10,7 @@ Comment[pt]=Ficheiro de Dados do Tellico
 Comment[pt_BR]=Ficheiro de Dados do Tellico
 Comment[sv]=Tellico-datafil
 Comment[uk]=Файл даних Tellico
+Comment[x-test]=xxTellico Data Filexx
 DefaultApp=tellico
 Icon=application-x-tellico
 MimeType=application/x-tellico
