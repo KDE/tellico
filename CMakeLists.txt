@@ -70,6 +70,15 @@ macro_optional_find_package(KSane)
 macro_log_feature(KSANE_FOUND "libksane" "Support for scanning images" "http://www.kde.org/" FALSE "4.2.0" "")
 if(KSANE_FOUND)
     include_directories(${KSANE_INCLUDE_DIR})
+    check_cxx_source_compiles("
+        #include <libksane/ksane.h>
+        int main()
+        {
+            KSaneIface::KSaneWidget* w = 0;
+            (void)w->currentDPI();
+            return 0;
+        }
+        " HAVE_KSANE_0_2)
 endif(KSANE_FOUND)
 
 macro_optional_find_package(Exempi 2.0)

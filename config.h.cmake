@@ -33,3 +33,6 @@
 #cmakedefine HAVE_YAZ
 
 #cmakedefine HAVE_KSANE
+
+/* Defined if we have the 0.2 version of the ksane library */
+#cmakedefine HAVE_KSANE_0_2
