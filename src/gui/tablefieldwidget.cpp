@@ -221,9 +221,9 @@ void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
   m_col = col;
 
   KMenu menu(this);
-  menu.addAction(KIcon(QLatin1String("edit")), i18n("Rename Column..."),
+  menu.addAction(KIcon(QLatin1String("edit-rename")), i18n("Rename Column..."),
                  this, SLOT(slotRenameColumn()));
-  menu.addAction(KIcon(QLatin1String("locationbar_erase")), i18n("Clear Table"),
+  menu.addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Table"),
                  this, SLOT(clear()));
   menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
 }
@@ -255,13 +255,13 @@ void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  act = menu.addAction(KIcon(QLatin1String("edit")), i18n("Rename Column..."),
+  act = menu.addAction(KIcon(QLatin1String("edit-rename")), i18n("Rename Column..."),
                        this, SLOT(slotRenameColumn()));
   if(m_col < 0 || m_col > m_columns-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  menu.addAction(KIcon(QLatin1String("locationbar_erase")), i18n("Clear Table"),
+  menu.addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Table"),
                  this, SLOT(slotClear()));
 
   menu.exec(point_);

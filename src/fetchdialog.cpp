@@ -137,7 +137,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   m_searchButton = new KPushButton(box1);
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("cancel"))));
+                                      KIcon(QLatin1String("dialog-cancel"))));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
   m_searchButton->setWhatsThis(i18n("Click to start or stop the search"));
 
@@ -475,7 +475,7 @@ void FetchDialog::slotMoreClicked() {
 
   m_started = true;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("cancel"))));
+                                      KIcon(QLatin1String("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));
   kapp->processEvents();
