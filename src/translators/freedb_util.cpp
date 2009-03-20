@@ -17,6 +17,8 @@
 #include "freedbimporter.h"
 #include "../tellico_debug.h"
 
+#include <kde_file.h>
+
 #include <QList>
 
 using Tellico::Import::FreeDBImporter;
@@ -133,7 +135,7 @@ namespace {
 QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& trackLengths_) {
   QList<uint> list;
 
-  int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  int drive = KDE_open(drive_.data(), O_RDONLY | O_NONBLOCK);
   CloseDrive closer(drive);
   if(drive < 0) {
     return list;
@@ -243,7 +245,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
 #ifdef ENABLE_CDTEXT
 // only works for linux ATM
 #if defined(__linux__)
-  int drive = ::open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  int drive = KDE_open(drive_.data(), O_RDONLY | O_NONBLOCK);
   CloseDrive closer(drive);
   if(drive < 0) {
     return cdtext;
