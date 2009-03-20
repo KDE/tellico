@@ -29,7 +29,7 @@
 #include "borrower.h"
 #include "filterview.h"
 #include "loanview.h"
-#include "calendarhandler.h"
+#include "utils/calendarhandler.h"
 #include "tellico_debug.h"
 #include "groupiterator.h"
 #include "entryupdater.h"

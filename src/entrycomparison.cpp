@@ -16,8 +16,8 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "collection.h"
-#include "isbnvalidator.h"
-#include "lccnvalidator.h"
+#include "utils/isbnvalidator.h"
+#include "utils/lccnvalidator.h"
 
 using Tellico::EntryComparison;
 
