@@ -2067,7 +2067,7 @@ void MainWindow::importFile(Tellico::Import::Format format_, const KUrl::List& u
     KUrl u = urls_.front();
     QString url = u.isLocalFile() ? u.path() : u.prettyUrl();
     Kernel::self()->sorry(i18n("Tellico can only import one file of this type at a time. "
-                               "Only %1 will be imported.").arg(url));
+                               "Only %1 will be imported.", url));
     urls.clear();
     urls = u;
   }

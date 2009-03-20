@@ -46,9 +46,9 @@ EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
 }
 
 void EntryMerger::slotStartNext() {
-  QString statusMsg = i18n("Total merged/scanned entries: %1/%2")
-                      .arg(m_entriesToRemove.count())
-                      .arg(m_origCount - m_entriesToCheck.count());
+  QString statusMsg = i18n("Total merged/scanned entries: %1/%2",
+                           m_entriesToRemove.count(),
+                           m_origCount - m_entriesToCheck.count());
   StatusBar::self()->setStatus(statusMsg);
   ProgressManager::self()->setProgress(this, m_origCount - m_entriesToCheck.count());
 
