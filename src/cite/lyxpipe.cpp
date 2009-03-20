@@ -19,6 +19,7 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
+#include <kde_file.h>
 
 #include <QFile>
 #include <QTextStream>
@@ -56,7 +57,7 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
     return false;
   }
 
-  int pipeFd = ::open(QFile::encodeName(lyxpipe), O_WRONLY);
+  int pipeFd = KDE_open(QFile::encodeName(lyxpipe), O_WRONLY);
   if(!file.open(pipeFd, QIODevice::WriteOnly)) {
     Kernel::self()->sorry(errorStr);
     ::close(pipeFd);

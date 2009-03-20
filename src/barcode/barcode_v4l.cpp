@@ -28,8 +28,8 @@
 
 #include "barcode_v4l.h"
 #include "../tellico_debug.h"
-//Added by qt3to4:
-#include <Q3PtrList>
+
+#include <kde_file.h>
 
 using barcodeRecognition::ng_vid_driver;
 using barcodeRecognition::ng_vid_driver_v4l;
@@ -344,7 +344,7 @@ ng_vid_driver_v4l::ng_vid_driver_v4l()
 bool ng_vid_driver_v4l::open2( QString device )
 {
   /* open device */
-  if ((m_fd = ::open( device.toLatin1(), O_RDWR )) == -1) {
+  if ((m_fd = KDE_open( device.toLatin1(), O_RDWR )) == -1) {
     qDebug() << "v4l: open" << device.toLatin1() << ":" << strerror(errno);
     return false;
   }
