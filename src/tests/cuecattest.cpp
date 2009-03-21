@@ -16,7 +16,7 @@
 #include "qtest_kde.h"
 #include "cuecattest.h"
 #include "cuecattest.moc"
-#include "../upcvalidator.h"
+#include "../utils/upcvalidator.h"
 
 QTEST_KDEMAIN_CORE( CueCatTest )
 

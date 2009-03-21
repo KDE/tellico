@@ -16,7 +16,7 @@
 #include "qtest_kde.h"
 #include "lccntest.h"
 #include "lccntest.moc"
-#include "../lccnvalidator.h"
+#include "../utils/lccnvalidator.h"
 
 // see http://www.loc.gov/marc/lccn_structure.html
 // see http://www.loc.gov/marc/lccn-namespace.html

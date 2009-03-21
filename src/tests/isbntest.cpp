@@ -16,7 +16,7 @@
 #include "qtest_kde.h"
 #include "isbntest.h"
 #include "isbntest.moc"
-#include "../isbnvalidator.h"
+#include "../utils/isbnvalidator.h"
 
 QTEST_KDEMAIN_CORE( IsbnTest )
 
