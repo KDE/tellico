@@ -111,7 +111,7 @@ void FilterRuleWidget::initWidget() {
 void FilterRuleWidget::slotEditRegExp() {
   if(!m_editRegExpDialog) {
     m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QLatin1String("KRegExpEditor/KRegExpEditor"),
-                                                                              QString(), this);
+                                                                              QString(), this);  //krazy:exclude=qclasses
   }
 
   if(!m_editRegExpDialog) {
@@ -119,7 +119,7 @@ void FilterRuleWidget::slotEditRegExp() {
     return;
   }
 
-  KRegExpEditorInterface* iface = qobject_cast<KRegExpEditorInterface*>(m_editRegExpDialog);
+  KRegExpEditorInterface* iface = ::qobject_cast<KRegExpEditorInterface*>(m_editRegExpDialog);
   if(iface) {
     iface->setRegExp(m_ruleValue->text());
     if(m_editRegExpDialog->exec() == QDialog::Accepted) {

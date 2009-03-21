@@ -19,7 +19,7 @@
 namespace Tellico {
 
 /**
- * Library of Congress Controll Number validator
+ * Library of Congress Control Number validator
  *
  * see http://www.loc.gov/marc/lccn_structure.html
  *

@@ -67,7 +67,6 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QLabel* l = new QLabel(i18n("&Report template:"), mainWidget);
   hlay->addWidget(l);
 
-// KStandardDirs::findAllResources(const char *type, const QString &filter, bool recursive, bool uniq)
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("report-templates/*.xsl"),
                                                         KStandardDirs::NoDuplicates);
   KSortableList<QString, QString> templates;

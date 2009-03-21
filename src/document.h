@@ -124,7 +124,7 @@ public:
   /**
    * Appends the contents of another collection to the current one. The collections must be the
    * same type. Fields which are in the current collection are left alone. Fields
-   * in the appended collection not in the current one are added. Entrys in the appended collection
+   * in the appended collection not in the current one are added. Entries in the appended collection
    * are added to the current one.
    *
    * @param coll A pointer to the appended collection.

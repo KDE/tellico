@@ -1985,7 +1985,7 @@ void MainWindow::slotGroupLabelActivated() {
       widget->adjustSize();
       widget->updateGeometry();
       QWidget* container = m_entryGrouping->requestWidget(widget);
-      QComboBox* combo = ::qobject_cast<QComboBox*>(container);
+      QComboBox* combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
       if(combo) {
         combo->showPopup();
       }
