@@ -103,7 +103,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   } else {
     // since the label doesn't have a buddy, we don't want an accel,
     // but also want to reuse string we already have
-      label = new QLabel(removeAcceleratorMarker(i18n("Source &type: ")), widget);
+    label = new QLabel(removeAcceleratorMarker(i18n("Source &type: ")), widget);
   }
   gl->addWidget(label, ++row, 0);
   w = i18n("Tellico supports several different data sources.");
@@ -148,6 +148,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     m_stack = 0;
     // just add config widget and reparent
     m_configWidget->setParent(widget);
+    m_configWidget->show();
     vlay2->addWidget(m_configWidget);
     connect(m_configWidget, SIGNAL(signalName(const QString&)), SLOT(slotPossibleNewName(const QString&)));
   }
