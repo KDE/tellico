@@ -46,11 +46,12 @@ EntryIconView::EntryIconView(QWidget* parent_)
     : QListView(parent_), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE) {
   setViewMode(QListView::IconMode);
   setMovement(QListView::Static);
-  setUniformItemSizes(true);
+//  setUniformItemSizes(true);
   setDragEnabled(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setResizeMode(QListView::Adjust);
   setWordWrap(true);
+  setSpacing(ENTRY_ICON_SIZE_PAD);
 
   EntryTitleModel* baseModel = new EntryTitleModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
@@ -73,11 +74,13 @@ Tellico::AbstractEntryModel* EntryIconView::sourceModel() const {
 
 void EntryIconView::setMaxAllowedIconWidth(int width_) {
   m_maxAllowedIconWidth = qBound(MIN_ENTRY_ICON_SIZE, width_, MAX_ENTRY_ICON_SIZE);
-  QSize iconSize(m_maxAllowedIconWidth + 2*ENTRY_ICON_SIZE_PAD, m_maxAllowedIconWidth);
+  QSize iconSize(m_maxAllowedIconWidth, m_maxAllowedIconWidth);
   setIconSize(iconSize);
-  QSize gridSize(m_maxAllowedIconWidth,
+
+  QSize gridSize(m_maxAllowedIconWidth + 2*ENTRY_ICON_SIZE_PAD,
                  m_maxAllowedIconWidth + 3*(fontMetrics().lineSpacing() + ENTRY_ICON_SIZE_PAD));
   setGridSize(gridSize);
+
   refresh();
 }
 
