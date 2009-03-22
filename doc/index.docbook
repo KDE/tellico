@@ -31,7 +31,7 @@
   <!ENTITY toolbar-dialog "<interface>Toolbar Configuration Dialog</interface>">
   <!ENTITY filter-view "<interface>Filter View</interface>">
   <!ENTITY loan-view "<interface>Loan View</interface>">
-  
+
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
   <!ENTITY configuration-chapter SYSTEM "configuration.docbook">
@@ -90,7 +90,7 @@ Do NOT change these in the translation. -->
 </copyright>
 
 <!-- Translators: put here the copyright notice of the translation -->
-<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook 
+<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
      and in the FDL itself on how to use it. -->
 <legalnotice>
 <para>Permission is granted to copy, distribute and/or modify this
@@ -206,7 +206,7 @@ facilities for reading or modifying multimedia files. It also does
 not provide any image-editing functionality. Although &appname; has some
 functionality for managing bibliography lists, it is not a full-blown
 bibliographic reference manager. &appname; also does not pretend to have
-all the capabilities of a full-fledged relational database. 
+all the capabilities of a full-fledged relational database.
 </para>
 
 <para>
@@ -385,7 +385,7 @@ them to the author at <email>&email;</email>.</para>
 <title>Compiling With OpenOffice.org</title>
 <para>
 &appname; uses a special plugin for communicating with OpenOffice.org, which is not compiled by default.
-The Software Development &kit;, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
+The Software Development Kit, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
 http://www.openoffice.org/dev_docs/source/sdk/</ulink>, is required.
 
 <screen width="40">
