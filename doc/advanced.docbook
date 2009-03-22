@@ -102,7 +102,7 @@ Calling <command>values()</command> using just a field name will return all the 
 </para>
 
 <para>
-If the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries. The bibtexKey for a specific entry may be found by using the <command>bibtekKey()</command> command.
+If the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries. The bibtexKey for a specific entry may be found by using the <command>bibtexKey()</command> command.
 </para>
 
 <para>

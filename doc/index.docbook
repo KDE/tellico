@@ -206,7 +206,7 @@ facilities for reading or modifying multimedia files. It also does
 not provide any image-editing functionality. Although &appname; has some
 functionality for managing bibliography lists, it is not a full-blown
 bibliographic reference manager. &appname; also does not pretend to have
-all the capabilities of a full-fledged relational database, 
+all the capabilities of a full-fledged relational database. 
 </para>
 
 <para>
@@ -257,7 +257,7 @@ the whole collection is always resident in memory, too many entries could slow d
 &appname; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
 However, if many large images are included in the collection, the loading and processing time
 does slow down greatly. Performance can be improved by having &appname; store images separate from
-the data file itself, either in the application-specific directory or a directory relative to
+the data file itself, either in the application-specific folder or a folder relative to
 the data file. More information can be found in the
 <link linkend="configuration">configuration section</link>.
 </para>
@@ -314,7 +314,7 @@ url="common/fdl-license.html">&GNU; Free Documentation
 License (GFDL)</ulink>.</para>
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
-url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
+url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
 
 </chapter>
 
@@ -385,7 +385,7 @@ them to the author at <email>&email;</email>.</para>
 <title>Compiling With OpenOffice.org</title>
 <para>
 &appname; uses a special plugin for communicating with OpenOffice.org, which is not compiled by default.
-The Software Development Kit, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
+The Software Development &kit;, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
 http://www.openoffice.org/dev_docs/source/sdk/</ulink>, is required.
 
 <screen width="40">

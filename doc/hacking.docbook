@@ -9,7 +9,7 @@ In the spirit of Free Software, you're welcome to hack on &appname; as much as y
 <title>File Format</title>
 
 <para>
-The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> directory in the archive., or they may be included in the &xml; data directly in a base64 encoding. Images may also be saved inside the application data directory, in which case, they are not in the data file at all. &appname; can also load the &xml; file, by itself, uncompressed.
+The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> directory in the archive, or they may be included in the &xml; data directly in a base64 encoding. Images may also be saved inside the application data directory, in which case, they are not in the data file at all. &appname; can also load the &xml; file, by itself, uncompressed.
 </para>
 
 <sect2 id="xml-format">
@@ -106,7 +106,7 @@ For every field in the collection, an <markup>&lt;entry&gt;</markup> may contain
 </para>
 
 <para>
-As a result, if additional fields are added to the collection, the date file will no longer conform to the DTD. However, &appname; uses a non-validating &xml; parser, so additional fields do not cause problems.
+As a result, if additional fields are added to the collection, the data file will no longer conform to the DTD. However, &appname; uses a non-validating &xml; parser, so additional fields do not cause problems.
 </para>
 </sect3>
 

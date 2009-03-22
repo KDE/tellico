@@ -380,7 +380,7 @@ All automatic formatting can be disabled by changing the global options in the <
 <title>Field Options</title>
 
 <para>
-Fields also have three general options. If auto-completion is enabled, &appname; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &appname; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry;
+Fields also have three general options. If auto-completion is enabled, &appname; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &appname; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry.
 </para>
 
 <para>
@@ -416,7 +416,7 @@ Up to eight (8) rules may be used in the filter. The <guibutton>More</guibutton>
 </para>
 
 <para>
-Filters may be saved, so that all entries which match are grouped together in the &filter-view;. The view is dynamic, so ad entries are added or modified, the group is automatically updated. To save the filter, enter a name in the text box, and lick the <guibutton>Save Filter</guibutton> button.
+Filters may be saved, so that all entries which match are grouped together in the &filter-view;. The view is dynamic, so as entries are added or modified, the group is automatically updated. To save the filter, enter a name in the text box, and click the <guibutton>Save Filter</guibutton> button.
 </para>
 
 <para>

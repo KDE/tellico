@@ -34,7 +34,7 @@ Multiple entries can be added at once by using the standard &kde; method for mul
 </para>
 
 <para>
-To facilitate the use of barcode scanners, searches can include multiple ISBN values. Selecting the <guilabel>Multiple ISBN search</guilabel> check box will disable the search box and enable the <guibutton>Edit ISBN list...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting. The ISBN list may also be read from a text file.
+To facilitate the use of barcode scanners, searches can include multiple ISBN/UPC values. Selecting the <guilabel>Multiple ISBN/UPC search</guilabel> check box will disable the search box and enable the <guibutton>Edit ISBN/UPC values...</guibutton> button, which will open a multi-line text entry box. Each ISBN should be entered on a line by itself. After closing the box, each ISBN will be validated for correct formatting. The ISBN validation is able to convert 13-digit EAN values, as well as full <acronym>UPC</acronym> codes, to the proper formatting. The ISBN list may also be read from a text file.
 </para>
 
 </sect1>
@@ -282,7 +282,7 @@ The HTML export uses the <filename>tellico2html.xsl</filename> stylesheet. Image
 </para>
 
 <para>
-The default format is similar to the printed output, and allows various options for modifying the HTML. Field headers may be printed at the top of each column, but unfortunately, &kde; does not yet allow the table headers to be be repeated on each page. The entries may be grouped as in the &group-view;, as well.
+The default format is similar to the printed output, and allows various options for modifying the HTML. Field headers may be printed at the top of each column, but unfortunately, &kde; does not yet allow the table headers to be repeated on each page. The entries may be grouped as in the &group-view;, as well.
 </para>
 
 <para>
