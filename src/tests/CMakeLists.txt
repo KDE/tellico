@@ -16,15 +16,14 @@ TARGET_LINK_LIBRARIES(isbntest utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} $
 KDE4_ADD_UNIT_TEST(lccntest NOGUI lccntest.cpp)
 TARGET_LINK_LIBRARIES(lccntest utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-# fix this someday
-#KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../lcccomparison.cpp)
-#TARGET_LINK_LIBRARIES(lcctest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
+KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../fieldformat.cpp)
+TARGET_LINK_LIBRARIES(lcctest utils core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
 KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp)
-TARGET_LINK_LIBRARIES(csvtest ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} csv)
+TARGET_LINK_LIBRARIES(csvtest csv ${QT_AND_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} )
 
 KDE4_ADD_UNIT_TEST(formattest NOGUI formattest.cpp ../fieldformat.cpp)
-TARGET_LINK_LIBRARIES(formattest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} core)
+TARGET_LINK_LIBRARIES(formattest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
 #KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp)
 #TARGET_LINK_LIBRARIES(risimporttest ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} translators)

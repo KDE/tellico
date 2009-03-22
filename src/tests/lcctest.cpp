@@ -11,22 +11,38 @@
  *                                                                         *
  ***************************************************************************/
 
-//TODO: fix this to be able to run
+#undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
 #include "lcctest.h"
 #include "lcctest.moc"
-//#include "../listviewcomparison.h"
+#include "../utils/stringcomparison.h"
 
 QTEST_KDEMAIN_CORE( LccTest )
 
+// see http://library.dts.edu/Pages/RM/Helps/lc_call.shtml
+
 void LccTest::testSorting() {
-//  Tellico::Data::FieldPtr f;
-//  Tellico::LCCComparison comp(f);
+  Tellico::LCCComparison comp;
 
-  QString lcc1 = QLatin1String("DA870.F64");
-  QString lcc2 = QLatin1String("DK602.3.B76 1996");
-  QString lcc3 = QLatin1String("Q335.P416 1994");
+  QString lcc1 = QLatin1String("B17.A4 1990");
+  QString lcc2 = QLatin1String("B17.G3 1964");
+  QString lcc3 = QLatin1String("B17.6.B64 Z59");
+  QString lcc4 = QLatin1String("B17.6.B8 G37");
+  QString lcc5 = QLatin1String("BR123.H4");
+  QString lcc6 = QLatin1String("BR123.H56");
+  QString lcc7 = QLatin1String("BR123.H56 1935");
+  QString lcc8 = QLatin1String("BR123.H56 B5");
+  QString lcc9 = QLatin1String("BR123.H8 v.1");
 
-//  QCOMPARE(comp.compare(lcc1, lcc2), -1);
+  QCOMPARE(comp.compare(lcc1, lcc2) < 0, true);
+  QCOMPARE(comp.compare(lcc2, lcc3) < 0, true);
+  QCOMPARE(comp.compare(lcc3, lcc4) < 0, true);
+  QCOMPARE(comp.compare(lcc1, lcc4) < 0, true);
+  QCOMPARE(comp.compare(lcc4, lcc5) < 0, true);
+  QCOMPARE(comp.compare(lcc5, lcc6) < 0, true);
+  QCOMPARE(comp.compare(lcc6, lcc7) < 0, true);
+  QCOMPARE(comp.compare(lcc6, lcc8) < 0, true);
+  QCOMPARE(comp.compare(lcc7, lcc8) < 0, true);
+  QCOMPARE(comp.compare(lcc8, lcc9) < 0, true);
 }

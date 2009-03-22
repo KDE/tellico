@@ -18,7 +18,6 @@
 #include "collection.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
-#include "listviewcomparison.h"
 #include "models/borrowermodel.h"
 #include "models/entrysortmodel.h"
 #include "models/models.h"

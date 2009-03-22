@@ -50,7 +50,6 @@ SET(tellico_SRCS
    imagefactory.cpp
    imageinfo.cpp
    importdialog.cpp
-   listviewcomparison.cpp
    loandialog.cpp
    loanview.cpp
    main.cpp

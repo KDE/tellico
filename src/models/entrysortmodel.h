@@ -22,7 +22,7 @@
 
 namespace Tellico {
 
-class ListViewComparison;
+class FieldComparison;
 
 /**
  * @author Robby Stephenson
@@ -44,10 +44,10 @@ protected:
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
 private:
-  ListViewComparison* getComparison(const QModelIndex& index) const;
+  FieldComparison* getComparison(const QModelIndex& index) const;
 
   FilterPtr m_filter;
-  mutable QHash<int, ListViewComparison*> m_comparisons;
+  mutable QHash<int, FieldComparison*> m_comparisons;
 };
 
 } // end namespace

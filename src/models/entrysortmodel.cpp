@@ -13,7 +13,7 @@
 
 #include "entrysortmodel.h"
 #include "models.h"
-#include "../listviewcomparison.h"
+#include "../utils/fieldcomparison.h"
 #include "../field.h"
 #include "../entry.h"
 #include "../tellico_debug.h"
@@ -64,7 +64,7 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   QModelIndex right = right_;
 
   for(int i = 0; i < 3; ++i) {
-    ListViewComparison* comp = getComparison(left);
+    FieldComparison* comp = getComparison(left);
     Data::EntryPtr leftEntry = sourceModel()->data(left, EntryPtrRole).value<Data::EntryPtr>();
     Data::EntryPtr rightEntry = sourceModel()->data(right, EntryPtrRole).value<Data::EntryPtr>();
     /*
@@ -112,14 +112,14 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   return AbstractSortModel::lessThan(left_, right_);
 }
 
-Tellico::ListViewComparison* EntrySortModel::getComparison(const QModelIndex& index_) const {
+Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index_) const {
   if(m_comparisons.contains(index_.column())) {
     return m_comparisons.value(index_.column());
   }
-  ListViewComparison* comp = 0;
+  FieldComparison* comp = 0;
   Data::FieldPtr field = sourceModel()->data(index_, FieldPtrRole).value<Data::FieldPtr>();
   if(field) {
-    comp = ListViewComparison::create(field);
+    comp = FieldComparison::create(field);
     m_comparisons.insert(index_.column(), comp);
   }
   return comp;
