@@ -24,7 +24,7 @@ Tellico::Data::CollPtr Importer::currentCollection() const {
 QString Importer::progressLabel() const {
   return url().isEmpty() ?
          i18n("Loading data...") :
-         i18n("Loading %1...").arg(url().fileName());
+         i18n("Loading %1...", url().fileName());
 }
 
 #include "importer.moc"

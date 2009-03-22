@@ -378,7 +378,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   label->setBuddy(m_pathEdit);
 
   w = i18n("Select the search keys supported by the data source.");
-  QString w2 = i18n("Add any arguments that may be needed. <b>%1</b> will be replaced by the search term.");
+  // in this string, the %1 is not a placeholder, it's an example
+  QString w2 = i18n("Add any arguments that may be needed. <b>%1</b> will be replaced by the search term."); //krazy:exclude=i18ncheckarg
   QGroupBox* gbox = new QGroupBox(i18n("Arguments"), optionsWidget());
   ++row;
   l->addWidget(gbox, row, 0, 1, 2);

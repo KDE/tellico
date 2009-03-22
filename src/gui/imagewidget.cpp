@@ -292,7 +292,7 @@ void ImageWidget::slotEditImage()
       if (!m_waitDlg) {
         m_waitDlg = new KProgressDialog(this);
         m_waitDlg->showCancelButton(false);
-        m_waitDlg->setLabelText(i18n("Image open in %1...").arg(m_editor->name()));
+        m_waitDlg->setLabelText(i18n("Opening image in %1...", m_editor->name()));
         m_waitDlg->progressBar()->setRange(0, 0);
       }
       m_waitDlg->exec();

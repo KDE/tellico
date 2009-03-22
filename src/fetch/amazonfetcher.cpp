@@ -42,6 +42,7 @@
 #include <QCheckBox>
 #include <QFile>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QGridLayout>
 
 namespace {
@@ -354,11 +355,11 @@ void AmazonFetcher::slotComplete(KJob*) {
   m_job = 0;
 
 #if 0
-  kWarning() << "Remove debug from amazonfetcher.cpp";
+  myWarning() << "Remove debug from amazonfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test%1.xml").arg(m_page));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << data;
   }
   f.close();
