@@ -19,7 +19,6 @@
 #include "amcimporter.h"
 #include "../collections/videocollection.h"
 #include "../imagefactory.h"
-#include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
@@ -59,6 +58,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.setDevice(f);
   // AMC is always little-endian? can't confirm
   m_ds.setByteOrder(QDataStream::LittleEndian);
+  emit signalTotalSteps(this, f->size());
 
   const uint l = AMC_FILE_ID.length();
   QVector<char> buffer(l+1);
@@ -69,11 +69,6 @@ Tellico::Data::CollPtr AMCImporter::collection() {
     myDebug() << "AMCImporter::collection() - no file id match" << endl;
     return Data::CollPtr();
   }
-
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(f->size());
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
 
   m_coll = Data::CollPtr(new Data::VideoCollection(true));
 
@@ -94,7 +89,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   while(!m_cancelled && !f->atEnd()) {
     readEntry();
     if(showProgress) {
-      ProgressManager::self()->setProgress(this, f->pos());
+      emit signalProgress(this, f->pos());
       kapp->processEvents();
     }
   }

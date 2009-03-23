@@ -220,10 +220,7 @@ public:
   static QString dependentValue(const Entry* e, const QString& formatString, bool formatted);
 
 private:
-  /**
-   * two entries are equal if all their field values are equal, except for
-   * file catalogs which match on the url only
-   */
+  // not used
   bool operator==(const Entry& other);
 
   CollPtr m_coll;

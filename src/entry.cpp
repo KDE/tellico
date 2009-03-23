@@ -15,7 +15,6 @@
 #include "collection.h"
 #include "field.h"
 #include "translators/bibtexhandler.h" // needed for BibtexHandler::cleanText()
-#include "document.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 
@@ -36,29 +35,6 @@ EntryGroup::~EntryGroup() {
   foreach(EntryPtr entry, vec) {
     entry->removeFromGroup(this);
   }
-}
-
-bool Entry::operator==(const Entry& e1) {
-// special case for file catalog, just check the url
-  if(m_coll && m_coll->type() == Collection::File &&
-     e1.m_coll && e1.m_coll->type() == Collection::File) {
-    // don't forget case where both could have empty urls
-    // but different values for other fields
-    QString u = field(QLatin1String("url"));
-    if(!u.isEmpty()) {
-      // versions before 1.2.7 could have saved the url without the protocol
-      bool b = KUrl(u) == KUrl(e1.field(QLatin1String("url")));
-      if(b) {
-        return true;
-      } else {
-        Data::FieldPtr f = m_coll->fieldByName(QLatin1String("url"));
-        if(f && f->property(QLatin1String("relative")) == QLatin1String("true")) {
-          return KUrl(Document::self()->URL(), u) == KUrl(e1.field(QLatin1String("url")));
-        }
-      }
-    }
-  }
-  return m_fieldValues == e1.m_fieldValues;
 }
 
 Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {

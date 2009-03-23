@@ -16,8 +16,11 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "collection.h"
+#include "document.h"
 #include "utils/isbnvalidator.h"
 #include "utils/lccnvalidator.h"
+
+#include <kurl.h>
 
 using Tellico::EntryComparison;
 
@@ -46,6 +49,14 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   }
   if(f->name() == QLatin1String("lccn") && LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2)) {
     return 5;
+  }
+  if(f->name() == QLatin1String("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
+    // versions before 1.2.7 could have saved the url without the protocol
+    if(KUrl(s1) == KUrl(s2) ||
+       (f->property(QLatin1String("relative")) == QLatin1String("true") &&
+        KUrl(Data::Document::self()->URL(), s1) == KUrl(Data::Document::self()->URL(), s2))) {
+      return 5;
+    }
   }
   if(f->name() == QLatin1String("arxiv")) {
     // normalize and unVersion arxiv ID
