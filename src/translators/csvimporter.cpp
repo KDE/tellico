@@ -21,7 +21,7 @@
 #include "../tellico_debug.h"
 #include "../collectionfactory.h"
 #include "../gui/collectiontypecombo.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 
 #include <klineedit.h>
 #include <kcombobox.h>

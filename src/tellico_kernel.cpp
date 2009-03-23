@@ -32,7 +32,7 @@
 #include "commands/reorderfields.h"
 #include "commands/renamecollection.h"
 #include "collectionfactory.h"
-#include "stringset.h"
+#include "utils/stringset.h"
 #include "gui/cursorsaver.h"
 
 #include <kmessagebox.h>

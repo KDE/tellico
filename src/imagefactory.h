@@ -14,7 +14,7 @@
 #ifndef TELLICO_IMAGEFACTORY_H
 #define TELLICO_IMAGEFACTORY_H
 
-#include "stringset.h"
+#include "utils/stringset.h"
 
 #include <kurl.h>
 

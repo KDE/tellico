@@ -16,7 +16,7 @@
 
 #include "dataimporter.h"
 #include "../datavectors.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 
 class KZip;
 class KArchiveDirectory;

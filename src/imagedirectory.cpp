@@ -78,9 +78,12 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
       myWarning() << "writing to empty path!";
     }
     QDir dir(m_path);
-    if(!dir.exists() && !dir.mkdir(m_path)) {
+    if(dir.mkdir(m_path)) {
+      myLog() << "created" << m_path;
+    } else {
       myWarning() << "unable to creatd dir:" << m_path;
     }
+    m_pathExists = true;
   }
   KUrl target;
   target.setPath(m_path);

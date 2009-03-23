@@ -18,7 +18,7 @@
 #include "tellico_utils.h"
 #include "controller.h"
 #include "collectionfactory.h"
-#include "stringset.h"
+#include "utils/stringset.h"
 #include "entrycomparison.h"
 #include "tellico_kernel.h"
 

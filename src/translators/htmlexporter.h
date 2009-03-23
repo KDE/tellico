@@ -15,7 +15,7 @@
 #define TELLICO_HTMLEXPORTER_H
 
 #include "exporter.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 
 #include <QStringList>
 #include <QHash>

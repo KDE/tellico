@@ -19,7 +19,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
 #include "tellico_xml.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>

@@ -23,7 +23,7 @@ class QDomElement;
 class QCheckBox;
 
 #include "exporter.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 
 namespace Tellico {
   namespace Export {

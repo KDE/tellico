@@ -25,7 +25,7 @@
 #include "tellico_debug.h"
 #include "gui/combobox.h"
 #include "gui/cursorsaver.h"
-#include "stringset.h"
+#include "utils/stringset.h"
 
 #include <klocale.h>
 #include <klineedit.h>

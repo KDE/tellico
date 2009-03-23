@@ -17,7 +17,7 @@
 #include "../document.h"
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 

@@ -532,7 +532,6 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
       dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
     }
     factory->d->localImageDir.setPath(dir);
-    myLog() << "local dir = " << dir;
   }
 }
 

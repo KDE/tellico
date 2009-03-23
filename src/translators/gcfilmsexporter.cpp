@@ -16,7 +16,7 @@
 #include "../document.h"
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
-#include "../stringset.h"
+#include "../utils/stringset.h"
 #include "../tellico_kernel.h"
 #include "../image.h"
 #include "../imagefactory.h"
