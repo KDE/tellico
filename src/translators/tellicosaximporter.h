@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2008 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,28 +11,24 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMPORTER_H
-#define TELLICO_IMPORTER_H
+#ifndef TELLICO_IMPORT_TELLICOSAXIMPORTER_H
+#define TELLICO_IMPORT_TELLICOSAXIMPORTER_H
 
 #include "dataimporter.h"
 #include "../datavectors.h"
 #include "../utils/stringset.h"
 
+class QBuffer;
 class KZip;
 class KArchiveDirectory;
-
-class QBuffer;
-class QDomElement;
 
 namespace Tellico {
   namespace Import {
 
 /**
- * Reading the @ref Tellico data files is done by the TellicoImporter.
- *
  * @author Robby Stephenson
  */
-class TellicoImporter : public DataImporter {
+class TellicoSaxImporter : public DataImporter {
 Q_OBJECT
 
 public:
@@ -41,14 +37,14 @@ public:
   /**
    * @param url The tellico data file.
    */
-  explicit TellicoImporter(const KUrl& url, bool loadAllImages=true);
+  explicit TellicoSaxImporter(const KUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
    * @param text The text
    */
-  explicit TellicoImporter(const QString& text);
-  virtual ~TellicoImporter();
+  explicit TellicoSaxImporter(const QString& text);
+  virtual ~TellicoSaxImporter();
 
   /**
    * sometimes, a new document format might add data
@@ -60,7 +56,7 @@ public:
   virtual Data::CollPtr collection();
   Format format() const { return m_format; }
 
-  bool hasImages() const { return m_hasImages; }
+  bool hasImages() const;
   bool loadImage(const QString& id_);
 
   static bool loadAllImages(const KUrl& url);
@@ -71,13 +67,6 @@ public slots:
 private:
   void loadXMLData(const QByteArray& data, bool loadImages);
   void loadZipData();
-
-  void readField(uint syntaxVersion, const QDomElement& elem);
-  void readEntry(uint syntaxVersion, const QDomElement& elem);
-  void readImage(const QDomElement& elem, bool loadImage);
-  void readFilter(const QDomElement& elem);
-  void readBorrower(const QDomElement& elem);
-  void addDefaultFilters();
 
   Data::CollPtr m_coll;
   bool m_loadAllImages;

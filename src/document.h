@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2009 by Robby Stephenson
+    copyright            : (C) 2001-20068 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,6 +13,8 @@
 
 #ifndef TELLICO_DOCUMENT_H
 #define TELLICO_DOCUMENT_H
+
+#include <config.h>
 
 #include "datavectors.h"
 #include "filter.h"
@@ -221,14 +223,18 @@ private:
   ~Document();
 
   CollPtr m_coll;
-  bool m_isModified;
-  bool m_loadAllImages;
+  bool m_isModified : 1;
+  bool m_loadAllImages : 1;
   KUrl m_url;
-  bool m_validFile;
+  bool m_validFile : 1;
+#ifdef ENABLE_SAX
+  QPointer<Import::TellicoSaxImporter> m_importer;
+#else
   QPointer<Import::TellicoImporter> m_importer;
-  bool m_cancelImageWriting;
+#endif
+  bool m_cancelImageWriting : 1;
   int m_fileFormat;
-  bool m_allImagesOnDisk;
+  bool m_allImagesOnDisk : 1;
 };
 
   } // end namespace
