@@ -155,6 +155,7 @@ private:
 
   KMenu* m_headerMenu;
   bool m_loadingCollection;
+  bool m_selectionChanging;
 };
 
 } // end namespace;

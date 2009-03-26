@@ -64,7 +64,8 @@ protected:
 
 using Tellico::DetailedListView;
 
-DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_) {
+DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m_selectionChanging(false)
+{
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
@@ -175,9 +176,11 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
     return;
   }
   sourceModel()->addEntries(entries_);
-  if (!m_loadingCollection) {
+  if(!m_loadingCollection) {
     setState(entries_, NewState);
-    setEntriesSelected(entries_);
+    if(!m_selectionChanging) {
+      setEntriesSelected(entries_);
+    }
   }
 }
 
@@ -187,7 +190,9 @@ void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {
   }
   sourceModel()->modifyEntries(entries_);
   setState(entries_, ModifiedState);
-  setEntriesSelected(entries_);
+  if(!m_selectionChanging) {
+    setEntriesSelected(entries_);
+  }
 }
 
 void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
@@ -199,7 +204,7 @@ void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
 
 void DetailedListView::setState(Tellico::Data::EntryList entries_, int state) {
   for(QModelIndex index = sourceModel()->index(0, 0); index.isValid(); index = index.sibling(index.row()+1, 0)) {
-    foreach (Data::EntryPtr entry, entries_) {
+    foreach(Data::EntryPtr entry, entries_) {
       Data::EntryPtr tmpEntry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
       if(tmpEntry == entry) {
         sourceModel()->setData(index, state, SaveStateRole);
@@ -239,9 +244,22 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries) {
   }
 
   clearSelection();
-  QModelIndex index = model()->index(0, 0);
-  for(; index.isValid(); index = index.sibling(index.row()+1, 0)) {
-    foreach (Data::EntryPtr entry_, entries) {
+  EntrySortModel* proxyModel = dynamic_cast<EntrySortModel*>(model());
+  for(QModelIndex index = sourceModel()->index(0, 0); index.isValid();
+      index = index.sibling(index.row()+1, 0)) {
+    foreach(Data::EntryPtr entry_, entries) {
+      Data::EntryPtr tmpEntry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+      if(tmpEntry == entry_) {
+        if(!proxyModel->mapFromSource(index).isValid()) {
+          Controller::self()->clearFilter();
+          break;
+        }
+      }
+    }
+  }
+  for(QModelIndex index = model()->index(0, 0); index.isValid();
+      index = index.sibling(index.row()+1, 0)) {
+    foreach(Data::EntryPtr entry_, entries) {
       Data::EntryPtr tmpEntry = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
       if(tmpEntry == entry_) {
         blockSignals(true);
@@ -265,6 +283,7 @@ bool DetailedListView::eventFilter(QObject* obj_, QEvent* event_) {
 }
 
 void DetailedListView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
+  m_selectionChanging = true;
   GUI::TreeView::selectionChanged(selected_, deselected_);
   Data::EntryList entries;
   foreach(const QModelIndex& index, selectionModel()->selectedRows()) {
@@ -275,6 +294,7 @@ void DetailedListView::selectionChanged(const QItemSelection& selected_, const Q
     }
   }
   Controller::self()->slotUpdateSelection(this, entries);
+  m_selectionChanging = false;
 }
 
 void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
@@ -405,7 +425,7 @@ Tellico::Data::EntryList DetailedListView::visibleEntries() {
   // We could just return the full collection entry list if the filter is 0
   // but printing depends on the sorted order
   Data::EntryList entries;
-  for (int i = 0; i < model()->rowCount(); ++i) {
+  for(int i = 0; i < model()->rowCount(); ++i) {
     Data::EntryPtr tmp = model()->data(model()->index(i, 0), EntryPtrRole).value<Data::EntryPtr>();
     if(tmp) {
       entries += tmp;

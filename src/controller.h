@@ -101,6 +101,8 @@ public:
 
   void reorderedFields(Data::CollPtr coll);
   void updatedFetchers();
+  
+  void clearFilter();
 
 public slots:
   /**

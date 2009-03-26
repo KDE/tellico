@@ -36,6 +36,7 @@
 #include "entrymerger.h"
 #include "gui/treeview.h"
 #include "gui/cursorsaver.h"
+#include "gui/lineedit.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -49,7 +50,7 @@ using Tellico::Controller;
 Controller* Controller::s_self = 0;
 
 Controller::Controller(Tellico::MainWindow* parent_)
-    : QObject(parent_), m_mainWindow(parent_), m_working (false), m_widgetWithSelection(0) {
+    : QObject(parent_), m_mainWindow(parent_), m_working(false), m_widgetWithSelection(0) {
 }
 
 void Controller::addObserver(Tellico::Observer* obs) {
@@ -325,6 +326,7 @@ void Controller::slotGoNextEntry() {
 }
 
 void Controller::goEntrySibling(EntryDirection dir_) {
+  Q_UNUSED(dir_)
   // if there are currently multiple selected, then do nothing
   if(m_selectedEntries.count() != 1) {
     return;
@@ -511,6 +513,7 @@ void Controller::blockAllSignals(bool block_) const {
   }
   m_mainWindow->m_detailedView->blockSignals(block_);
   m_mainWindow->m_groupView->blockSignals(block_);
+  m_mainWindow->m_quickFilter->blockSignals(block_);
   if(m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->blockSignals(block_);
   }
@@ -538,6 +541,13 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   blockAllSignals(false);
 
   m_mainWindow->slotEntryCount();
+}
+
+void Controller::clearFilter() {
+  blockAllSignals(true);
+  m_mainWindow->m_quickFilter->clear();
+  m_mainWindow->m_detailedView->setFilter(Tellico::FilterPtr());
+  blockAllSignals(false);
 }
 
 void Controller::editEntry(Tellico::Data::EntryPtr) const {
