@@ -18,13 +18,14 @@
 using Tellico::Import::TellicoXMLHandler;
 
 TellicoXMLHandler::TellicoXMLHandler() : QXmlDefaultHandler(), m_data(new SAX::StateData) {
-  m_handlers.setAutoDelete(true);
   m_handlers.push(new SAX::RootHandler(m_data));
 }
 
 TellicoXMLHandler::~TellicoXMLHandler() {
   delete m_data;
   m_data = 0;
+  qDeleteAll(m_handlers);
+  m_handlers.clear();
 }
 
 bool TellicoXMLHandler::startElement(const QString& nsURI_, const QString& localName_,

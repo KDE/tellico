@@ -16,7 +16,7 @@
 
 #include "xmlstatehandler.h"
 
-#include <Q3PtrStack>
+#include <QStack>
 
 namespace Tellico {
   namespace Import {
@@ -40,7 +40,7 @@ public:
   void setLoadImages(bool loadImages);
 
 private:
-  Q3PtrStack<SAX::StateHandler> m_handlers;
+  QStack<SAX::StateHandler*> m_handlers;
   SAX::StateData* m_data;
 };
 

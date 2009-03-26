@@ -88,7 +88,7 @@ add_definitions(${QT_DEFINITIONS}
                 ${TAGLIB_CFLAGS}
                 ${YAZ_CFLAGS})
 add_definitions(-DQT_STRICT_ITERATORS -DQT_STL -DQT_NO_CAST_FROM_ASCII)
-remove_definitions(-DQT_NO_STL)
+remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
 include_directories(${KDE4_INCLUDES}
                     ${QT_INCLUDES}
@@ -97,6 +97,13 @@ include_directories(${KDE4_INCLUDES}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${CMAKE_SOURCE_DIR}/src/core
                     ${CMAKE_SOURCE_DIR}/src/3rdparty)
+
+# is there a better way to disable qt3support library?
+get_directory_property(include_dirs INCLUDE_DIRECTORIES)
+if(QT_QT3SUPPORT_FOUND)
+  string(REPLACE ${QT_QT3SUPPORT_INCLUDE_DIR} "" include_dirs "${include_dirs}")
+endif(QT_QT3SUPPORT_FOUND)
+set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
