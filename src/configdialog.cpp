@@ -873,43 +873,25 @@ void ConfigDialog::slotRemoveSourceClicked() {
 }
 
 void ConfigDialog::slotMoveUpSourceClicked() {
-  QListWidgetItem* item = m_sourceListWidget->currentItem();
-  if(!item) {
+  int row = m_sourceListWidget->currentRow();
+  if(row < 1) {
     return;
   }
-  SourceListItem* prev = static_cast<SourceListItem*>(m_sourceListWidget->item(m_sourceListWidget->currentRow()-1)); // could be 0
-  if(prev) {
-    GeneralFetcherInfo info(prev->fetchType(), prev->data(Qt::DisplayRole).toString(), prev->updateOverwrite());
-    SourceListItem* newItem = new SourceListItem(info, prev->configGroup());
-    m_sourceListWidget->insertItem(m_sourceListWidget->currentRow(), newItem);
-    newItem->setFetcher(prev->fetcher());
-    Fetch::ConfigWidget* cw = m_configWidgets[prev];
-    m_configWidgets.remove(prev);
-    m_configWidgets.insert(newItem, cw);
-    delete prev;
-    slotModified(); // toggle apply button
-    slotSelectedSourceChanged(item);
-  }
+  QListWidgetItem* item = m_sourceListWidget->takeItem(row);
+  m_sourceListWidget->insertItem(row-1, item);
+  m_sourceListWidget->setCurrentItem(item);
+  slotModified(); // toggle apply button
 }
 
 void ConfigDialog::slotMoveDownSourceClicked() {
-  SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->currentItem());
-  if(!item) {
+  int row = m_sourceListWidget->currentRow();
+  if(row > m_sourceListWidget->count()-2) {
     return;
   }
-  QListWidgetItem* next = m_sourceListWidget->item(m_sourceListWidget->currentRow()+1); // could be 0
-  if(next) {
-    GeneralFetcherInfo info(item->fetchType(), item->data(Qt::DisplayRole).toString(), item->updateOverwrite());
-    SourceListItem* newItem = new SourceListItem(info, item->configGroup());
-    m_sourceListWidget->insertItem(m_sourceListWidget->currentRow()+1, newItem);
-    newItem->setFetcher(item->fetcher());
-    Fetch::ConfigWidget* cw = m_configWidgets[item];
-    m_configWidgets.remove(item);
-    m_configWidgets.insert(newItem, cw);
-    delete item;
-    slotModified(); // toggle apply button
-    m_sourceListWidget->setCurrentItem(newItem);
-  }
+  QListWidgetItem* item = m_sourceListWidget->takeItem(row);
+  m_sourceListWidget->insertItem(row+1, item);
+  m_sourceListWidget->setCurrentItem(item);
+  slotModified(); // toggle apply button
 }
 
 void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {
