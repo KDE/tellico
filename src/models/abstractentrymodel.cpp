@@ -51,19 +51,25 @@ void AbstractEntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
 }
 
 void AbstractEntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
+  beginInsertRows(QModelIndex(), m_entries.count(), m_entries.count() + entries_.count() - 1);
   m_entries += entries_;
-  reset();
+  endInsertRows();
 }
 
-void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList&) {
-  reset();
+void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
+  foreach(Data::EntryPtr entry, entries_) {
+    int idx = m_entries.indexOf(entry);
+    emit dataChanged(createIndex(idx, 0), createIndex(idx, columnCount(index(idx, 0)) - 1));
+  }
 }
 
 void AbstractEntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
+    int idx = m_entries.indexOf(entry);
+    beginRemoveRows(QModelIndex(), idx, idx);
     m_entries.removeOne(entry);
+    endRemoveRows();
   }
-  reset();
 }
 
 Tellico::Data::EntryPtr AbstractEntryModel::entry(const QModelIndex& index_) const {
