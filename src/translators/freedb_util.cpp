@@ -48,6 +48,8 @@ extern "C" {
 #define _ANSI_WAS_HERE_
 #endif
 #include <linux/types.h>
+// swabb.h is not C++ friendly. Prevent including it.
+#define _LINUX_BYTEORDER_SWABB_H
 #include <linux/cdrom.h>
 #ifdef _ANSI_WAS_HERE_
 #define __STRICT_ANSI__
