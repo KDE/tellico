@@ -110,6 +110,7 @@ void TellicoSaxImporter::loadXMLData(const QByteArray& data_, bool loadImages_) 
   reader.setContentHandler(&handler);
 
   QXmlInputSource source;
+  source.setData(QByteArray()); // necessary
   bool success = reader.parse(&source, true);
 
   const int blockSize = data_.size()/100 + 1;

@@ -14,17 +14,7 @@
 #ifndef TELLICO_IMPORT_XMLSTATEHANDLER_H
 #define TELLICO_IMPORT_XMLSTATEHANDLER_H
 
-#ifdef QT_NO_CAST_ASCII
-#define HAD_QT_NO_CAST_ASCII
-#undef QT_NO_CAST_ASCII
-#endif
-
 #include <QXmlAttributes>
-
-#ifdef HAD_QT_NO_CAST_ASCII
-#define QT_NO_CAST_ASCII
-#undef HAD_QT_NO_CAST_ASCII
-#endif
 
 #include "../datavectors.h"
 
