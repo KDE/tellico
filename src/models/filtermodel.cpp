@@ -26,7 +26,7 @@ using Tellico::FilterModel;
 
 class FilterModel::Node {
 public:
-  Node(Node* parent_, int id_=-1) : m_parent(parent_), m_id(id_) {}
+  Node(Node* parent_, long id_=-1) : m_parent(parent_), m_id(id_) {}
   ~Node() { qDeleteAll(m_children); }
 
   Node* parent() const { return m_parent; }
@@ -42,7 +42,7 @@ public:
 private:
   Node* m_parent;
   QList<Node*> m_children;
-  int m_id;
+  long m_id;
 };
 
 FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)) {
