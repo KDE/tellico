@@ -32,7 +32,7 @@ public:
   Node* parent() const { return m_parent; }
   Node* child(int row) const { return m_children.at(row); }
   int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : 0; }
-  int id() const { return m_id; }
+  long id() const { return m_id; }
   int count() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
