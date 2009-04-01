@@ -187,8 +187,8 @@ void Manager::continueSearch() {
     ++m_count;
     connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
             SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)));
-    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
-            SLOT(slotFetcherDone(Tellico::Fetch::Fetcher::Ptr)));
+    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
+            SLOT(slotFetcherDone(Tellico::Fetch::Fetcher*)));
     fetcher->continueSearch();
   } else {
     emit signalDone();
