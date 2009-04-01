@@ -123,6 +123,7 @@ bool Document::openDocument(const KUrl& url_) {
   if(!m_importer->hasImages() || m_fileFormat != Import::TellicoImporter::Zip) {
     m_loadAllImages = true;
   }
+  ImageFactory::setZipArchive(m_importer->takeImages());
 
   if(!coll) {
 //    myDebug() << "returning false";
@@ -424,19 +425,6 @@ void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::Fi
 bool Document::isEmpty() const {
   //an empty doc may contain a collection, but no entries
   return (!m_coll || m_coll->entries().isEmpty());
-}
-
-bool Document::loadImage(const QString& id_) {
-//  myLog() << id =" << id_;
-  if(!m_coll) {
-    return false;
-  }
-
-  bool b = !m_loadAllImages && m_validFile && m_importer && m_importer->loadImage(id_);
-  if(b) {
-    m_allImagesOnDisk = false;
-  }
-  return b;
 }
 
 bool Document::loadAllImagesNow() const {

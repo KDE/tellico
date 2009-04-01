@@ -14,16 +14,29 @@
 #ifndef TELLICO_IMAGEDIRECTORY_H
 #define TELLICO_IMAGEDIRECTORY_H
 
+#include "utils/stringset.h"
+
 #include <QString>
 
 class KTempDir;
+class KZip;
+class KArchiveDirectory;
 
 namespace Tellico {
   namespace Data {
     class Image;
   }
 
-class ImageDirectory {
+class ImageStorage {
+public:
+  ImageStorage() {}
+  virtual ~ImageStorage() {}
+
+  virtual bool hasImage(const QString& id) const = 0;
+  virtual Data::Image* imageById(const QString& id) = 0;
+};
+
+class ImageDirectory : public ImageStorage {
 public:
   ImageDirectory();
   ImageDirectory(const QString& path);
@@ -53,6 +66,22 @@ private:
   void setPath(const QString& path);
 
   KTempDir* m_dir;
+};
+
+class ImageZipArchive : public ImageStorage {
+public:
+  ImageZipArchive();
+  virtual ~ImageZipArchive();
+
+  void setZip(KZip* zip);
+
+  bool hasImage(const QString& id) const;
+  Data::Image* imageById(const QString& id);
+
+private:
+  KZip* m_zip;
+  const KArchiveDirectory* m_imgDir;
+  StringSet m_images;
 };
 
 } // end namespace

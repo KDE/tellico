@@ -113,7 +113,7 @@ QString Image::idClean(const QString& id_) {
 }
 
 void Image::setID(const QString& id_) {
-  m_id = id_;
+  m_id = idClean(id_);
 }
 
 void Image::calculateID() {

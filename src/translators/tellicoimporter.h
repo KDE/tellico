@@ -59,6 +59,9 @@ public:
   bool hasImages() const;
   bool loadImage(const QString& id_);
 
+  // take ownership of zip object with images
+  KZip* takeImages();
+
   static bool loadAllImages(const KUrl& url);
 
 public slots:

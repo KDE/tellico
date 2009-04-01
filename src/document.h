@@ -146,10 +146,6 @@ public:
   void replaceCollection(CollPtr coll);
   void unAppendCollection(CollPtr coll, FieldList origFields);
   void unMergeCollection(CollPtr coll, FieldList origFields_, MergePair entryPair);
-  /**
-   * Attempts to load an image from the document file
-   */
-  bool loadImage(const QString& id);
   bool loadAllImagesNow() const;
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;

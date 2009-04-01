@@ -18,17 +18,20 @@
 
 #include <kurl.h>
 #include <ktempdir.h>
+#include <kzip.h>
 
 #include <QFile>
 #include <QDir>
 
+using Tellico::ImageStorage;
 using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;
+using Tellico::ImageZipArchive;
 
-ImageDirectory::ImageDirectory() : m_pathExists(false) {
+ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false) {
 }
 
-ImageDirectory::ImageDirectory(const QString& path_) {
+ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() {
   setPath(path_);
 }
 
@@ -113,4 +116,68 @@ void TemporaryImageDirectory::purge() {
 
 void TemporaryImageDirectory::setPath(const QString& path_) {
   ImageDirectory::setPath(path_);
+}
+
+ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(0) {
+}
+
+ImageZipArchive::~ImageZipArchive() {
+  delete m_zip;
+  m_zip = 0;
+}
+
+void ImageZipArchive::setZip(KZip* zip_) {
+  m_images.clear();
+  delete m_zip;
+  m_zip = zip_;
+  m_imgDir = 0;
+
+  const KArchiveDirectory* dir = m_zip->directory();
+  if(!dir) {
+    delete m_zip;
+    m_zip = 0;
+    return;
+  }
+  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
+  if(!imgDirEntry || !imgDirEntry->isDirectory()) {
+    delete m_zip;
+    m_zip = 0;
+    return;
+  }
+  m_imgDir = static_cast<const KArchiveDirectory*>(imgDirEntry);
+  m_images.add(m_imgDir->entries());
+}
+
+bool ImageZipArchive::hasImage(const QString& id_) const {
+  return m_images.has(id_);
+}
+
+Tellico::Data::Image* ImageZipArchive::imageById(const QString& id_) {
+  if(!hasImage(id_)) {
+    return 0;
+  }
+  Data::Image* img = 0;
+  const KArchiveEntry* file = m_imgDir->entry(id_);
+  if(file && file->isFile()) {
+    img = new Data::Image(static_cast<const KArchiveFile*>(file)->data(),
+                          id_.section(QLatin1Char('.'), -1).toUpper(), id_);
+  }
+  // might be unexpected behavior, but in order to delete the zip object after
+  // all images are read, we need to consider the image gone now
+  m_images.remove(id_);
+  if(m_images.isEmpty()) {
+    delete m_zip;
+    m_zip = 0;
+    m_imgDir = 0;
+  }
+  if(!img) {
+    myLog() << "image not found:" << id_;
+    return 0;
+  }
+  if(img->isNull()) {
+    myLog() << "image found but null:" << id_;
+    delete img;
+    return 0;
+  }
+  return img;
 }

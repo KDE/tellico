@@ -15,7 +15,6 @@
 #include "image.h"
 #include "imageinfo.h"
 #include "imagedirectory.h"
-#include "document.h"
 #include "filehandler.h"
 #include "tellico_utils.h"
 #include "tellico_kernel.h"
@@ -49,6 +48,7 @@ public:
   ImageDirectory dataImageDir; // kept in $KDEHOME/share/apps/tellico/data/
   ImageDirectory localImageDir; // kept local to data file
   TemporaryImageDirectory tempImageDir; // kept in tmp directory
+  ImageZipArchive imageZipArchive;
 };
 
 ImageFactory::ImageFactory() : d(new Private()) {
@@ -193,11 +193,13 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
     img = d->dataImageDir.imageById(id_);
   } else if(dir_ == LocalDir) {
     img = d->localImageDir.imageById(id_);
-  } else {
+  } else if(dir_ == TempDir) {
     img = d->tempImageDir.imageById(id_);
+  } else if(dir_ == ZipArchive) {
+    img = d->imageZipArchive.imageById(id_);
   }
   if(!img) {
-    myWarning() << "image not found: " << id_;
+    myWarning() << "image not found:" << id_;
     return Data::Image::null;
   }
 
@@ -305,19 +307,15 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   }
 
   // try to do a delayed loading of the image
-  if(Data::Document::self()->loadImage(id_)) {
-    // loadImage() could insert in either the cache or the dict!
-    img = factory->d->imageCache.object(id_);
-    if(!img) {
-      img = factory->d->imageDict.value(id_);
-    }
-    if(img) {
-//      myLog() << "found in doc";
+  if(factory->d->imageZipArchive.hasImage(id_)) {
+    const Data::Image& img2 = factory->addCachedImageImpl(id_, ZipArchive);
+    if(!img2.isNull()) {
+//      myLog() << "found in zip archive";
       // go ahead and write image to disk so we don't have to keep it in memory
       // calling pixmap() could be loading all the covers, and we don't want one
       // to get pushed out of the cache yet
       writeCachedImage(id_, TempDir);
-      return *img;
+      return img2;
     }
   }
 
@@ -349,7 +347,8 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     if(!img2.isNull()) {
       // the img is in the other location
       // consider the document to be modified since it needs the image saved
-      Data::Document::self()->slotSetModified(true);
+//      Data::Document::self()->slotSetModified(true);
+      myWarning() << "need to emit modified!";
       return img2;
     } else {
       myDebug() << "tried to add" << id_ << "from" << imgDir2->path() << "but failed";
@@ -533,6 +532,12 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
     }
     factory->d->localImageDir.setPath(dir);
   }
+}
+void ImageFactory::setZipArchive(KZip* zip_) {
+  if(!zip_) {
+    return;
+  }
+  factory->d->imageZipArchive.setZip(zip_);
 }
 
 #undef RELEASE_IMAGES

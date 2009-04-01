@@ -24,6 +24,7 @@
 #include <QPixmap>
 
 class KTempDir;
+class KZip;
 
 namespace Tellico {
   namespace Data {
@@ -50,7 +51,8 @@ public:
   enum CacheDir {
     TempDir,
     DataDir,
-    LocalDir
+    LocalDir,
+    ZipArchive
   };
 
   /**
@@ -131,6 +133,7 @@ public:
   static StringSet imagesNotInCache();
 
   static void setLocalDirectory(const KUrl& url);
+  static void setZipArchive(KZip* zip);
 
 private:
   /**

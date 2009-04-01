@@ -22,6 +22,7 @@
 namespace Tellico {
   class ImageFactory;
   class ImageDirectory;
+  class ImageZipArchive;
   class FileHandler;
 
   namespace Data {
@@ -33,6 +34,7 @@ class Image : public QImage {
 
 friend class Tellico::ImageFactory;
 friend class Tellico::ImageDirectory;
+friend class Tellico::ImageZipArchive;
 friend class Tellico::FileHandler;
 
 public:
