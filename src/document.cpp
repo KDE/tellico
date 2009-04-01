@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2001-2008 by Robby Stephenson
+    copyright            : (C) 2001-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -15,7 +15,6 @@
 #include "mainwindow.h" // needed for calling fileSave()
 #include "collectionfactory.h"
 #include "translators/tellicoimporter.h"
-#include "translators/tellicosaximporter.h"
 #include "translators/tellicozipexporter.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
@@ -113,12 +112,7 @@ bool Document::openDocument(const KUrl& url_) {
   }
 
   delete m_importer;
-#ifdef ENABLE_SAX
-  myLog() << "Document::openDocument() - using SAX loader" << endl;
-  m_importer = new Import::TellicoSaxImporter(url_, m_loadAllImages);
-#else
   m_importer = new Import::TellicoImporter(url_, m_loadAllImages);
-#endif
 
   CollPtr coll = m_importer->collection();
   // delayed image loading only works for zip files

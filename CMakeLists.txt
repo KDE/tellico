@@ -16,7 +16,6 @@ option(ENABLE_AMAZON "Enable Amazon.com searching" TRUE)
 option(ENABLE_IMDB "Enable IMDb searching" TRUE)
 option(ENABLE_CDTEXT "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM "Enable support for webcams" FALSE)
-option(ENABLE_SAX "Enable SAX loading" TRUE)
 
 include(CheckTypeSize)
 check_type_size("unsigned char" SIZEOF_UNSIGNED_CHAR)

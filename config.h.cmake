@@ -30,8 +30,6 @@
 
 #cmakedefine ENABLE_WEBCAM
 
-#cmakedefine ENABLE_SAX
-
 #cmakedefine HAVE_YAZ
 
 #cmakedefine HAVE_KSANE
