@@ -110,7 +110,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QColor color = palette().color(QPalette::Link);
   QString text = QString::fromLatin1("<html><style>p{font-weight:bold;width:50%;"
                                      "margin:20% auto auto auto;text-align:center;"
-                                     "background:white;color:%1;}</style><body><p>").arg(color.name())
+                                     "color:%1;}</style><body><p>").arg(color.name())
                + i18n("Select a report template and click <em>Generate</em>.") + QLatin1Char(' ')
                + i18n("Some reports may take several seconds to generate for large collections.")
                + QLatin1String("</p></body></html>");
