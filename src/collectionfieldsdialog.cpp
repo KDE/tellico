@@ -478,7 +478,9 @@ void CollectionFieldsDialog::slotDelete() {
     emit signalCollectionModified();
     enableButtonOk(true);
   }
-  m_fieldsWidget->removeItemWidget(m_fieldsWidget->currentItem());
+  int currentRow = m_fieldsWidget->currentRow();
+  delete m_fieldsWidget->takeItem(currentRow);
+  m_fieldsWidget->setCurrentRow(qMin(currentRow, m_fieldsWidget->count()-1));
   m_fieldsWidget->scrollToItem(m_fieldsWidget->currentItem());
   m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field(); // QSharedData gets auto-deleted
 }
