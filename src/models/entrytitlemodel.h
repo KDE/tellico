@@ -35,8 +35,6 @@ public:
   virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
   virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
-  void clear();
-
 private:
   const KIcon& defaultIcon(Data::CollPtr coll) const;
   QString imageField(Data::CollPtr coll) const;

@@ -35,7 +35,7 @@ public:
   virtual QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
   virtual QModelIndex parent(const QModelIndex& index) const;
 
-  void clear();
+  virtual void clear();
   void reset();
 
   void    setEntries(const Data::EntryList& entries);

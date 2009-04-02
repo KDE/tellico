@@ -34,18 +34,15 @@ int AbstractSortModel::tertiarySortColumn() const {
   return m_tertiarySortColumn;
 }
 
-void AbstractSortModel::setSortColumn(int col)
-{
+void AbstractSortModel::setSortColumn(int col) {
   m_sortColumn = col;
 }
 
-void AbstractSortModel::setSecondarySortColumn(int col)
-{
+void AbstractSortModel::setSecondarySortColumn(int col) {
   m_secondarySortColumn = col;
 }
 
-void AbstractSortModel::setTertiarySortColumn(int col)
-{
+void AbstractSortModel::setTertiarySortColumn(int col) {
   m_tertiarySortColumn = col;
 }
 

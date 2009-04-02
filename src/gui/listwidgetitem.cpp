@@ -34,7 +34,6 @@ void ListWidgetItem::setColored(bool colored_) {
   }
   setFont(font);
 
-
   QBrush brush = listWidget()->palette().text();
   if(m_colored) {
     KColorScheme cs(QPalette::Active);
