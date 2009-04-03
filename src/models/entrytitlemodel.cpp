@@ -32,7 +32,7 @@ EntryTitleModel::~EntryTitleModel() {
 }
 
 int EntryTitleModel::columnCount(const QModelIndex&) const {
-  return 1;
+  return rowCount() > 0 ? entry(createIndex(0, 0))->collection()->fields().count() : 1;
 }
 
 QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
@@ -49,10 +49,17 @@ QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
     return QVariant();
   }
 
+  const int col = index_.column();
+  Data::FieldPtr field;
+  if(col > 0) {
+    // we need a field value, not just the title
+    field = entry->collection()->fields().at(col);
+  }
+
   switch(role_) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
-      return entry->title();
+      return field ? entry->field(field) : entry->title();
 
     case Qt::DecorationRole: {
       QString fieldName = imageField(entry->collection());
