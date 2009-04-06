@@ -21,6 +21,7 @@ Q_OBJECT
 
 private Q_SLOTS:
   void testEntities();
+  void testEntities_data();
 };
 
 #endif

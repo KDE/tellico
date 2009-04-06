@@ -20,7 +20,9 @@ class CueCatTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testDecode();
+  void testDecode_data();
 };
 
 #endif

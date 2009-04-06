@@ -20,9 +20,21 @@
 
 QTEST_KDEMAIN_CORE( EntityTest )
 
+#define QL1(x) QString::fromLatin1(x)
+
 void EntityTest::testEntities() {
-  QCOMPARE(Tellico::decodeHTML(QByteArray("robby")), QLatin1String("robby"));
-  QCOMPARE(Tellico::decodeHTML(QByteArray("&fake;")), QLatin1String("&fake;"));
-  QCOMPARE(Tellico::decodeHTML(QByteArray("&#48;")), QLatin1String("0"));
-  QCOMPARE(Tellico::decodeHTML(QByteArray("robby&#48;robby")), QLatin1String("robby0robby"));
+  QFETCH(QByteArray, data);
+  QFETCH(QString, expectedString);
+
+  QCOMPARE(Tellico::decodeHTML(data), expectedString);
+}
+
+void EntityTest::testEntities_data() {
+  QTest::addColumn<QByteArray>("data");
+  QTest::addColumn<QString>("expectedString");
+
+  QTest::newRow("robby") << QByteArray("robby") << QL1("robby");
+  QTest::newRow("&fake;") << QByteArray("&fake;") << QL1("&fake;");
+  QTest::newRow("&#48;") << QByteArray("&#48;") << QL1("0");
+  QTest::newRow("robby&#48;robb") << QByteArray("robby&#48;robby") << QL1("robby0robby");
 }

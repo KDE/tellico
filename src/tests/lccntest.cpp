@@ -24,27 +24,51 @@
 
 QTEST_KDEMAIN_CORE( LccnTest )
 
+Q_DECLARE_METATYPE(QValidator::State)
+
+#define QL1(x) QString::fromLatin1(x)
+
+void LccnTest::initTestCase() {
+  qRegisterMetaType<QValidator::State>();
+}
+
 void LccnTest::testValidation() {
-  QString lccn1 = QLatin1String("89-456");
-  QString lccn2 = QLatin1String("2001-1114");
-  QString lccn3 = QLatin1String("gm 71-2450");
+  QFETCH(QString, string);
+  QFETCH(QValidator::State, state);
 
   Tellico::LCCNValidator val(0);
   int pos = 0;
 
-  QCOMPARE(val.validate(lccn1, pos), QValidator::Acceptable);
-  QCOMPARE(val.validate(lccn2, pos), QValidator::Acceptable);
-  QCOMPARE(val.validate(lccn3, pos), QValidator::Acceptable);
+  QCOMPARE(val.validate(string, pos), state);
+}
+
+void LccnTest::testValidation_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QValidator::State>("state");
+
+  QTest::newRow("89-456") << QL1("89-456") << QValidator::Acceptable;
+  QTest::newRow("2001-1114") << QL1("2001-1114") << QValidator::Acceptable;
+  QTest::newRow("gm 71-2450") << QL1("gm 71-2450") << QValidator::Acceptable;
 }
 
 void LccnTest::testFormalization() {
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("89-456")), QLatin1String("89000456"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("2001-1114")), QLatin1String("2001001114"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("gm 71-2450 ")), QLatin1String("gm71002450"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("n78-890351 ")), QLatin1String("n78890351"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("n78-89035")), QLatin1String("n78089035"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("n 78890351")), QLatin1String("n78890351"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("85-2")), QLatin1String("85000002"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String("75-425165//r75")), QLatin1String("75425165"));
-  QCOMPARE(Tellico::LCCNValidator::formalize(QLatin1String(" 79139101 /AC/r932")), QLatin1String("79139101"));
+  QFETCH(QString, string);
+  QFETCH(QString, result);
+
+  QCOMPARE(Tellico::LCCNValidator::formalize(string), result);
+}
+
+void LccnTest::testFormalization_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("result");
+
+  QTest::newRow("89-456") << QL1("89-456") << QL1("89000456");
+  QTest::newRow("2001-1114") << QL1("2001-1114") << QL1("2001001114");
+  QTest::newRow("gm 71-2450 ") << QL1("gm 71-2450 ") << QL1("gm71002450");
+  QTest::newRow("n78-890351 ") << QL1("n78-890351 ") << QL1("n78890351");
+  QTest::newRow("n78-89035") << QL1("n78-89035") << QL1("n78089035");
+  QTest::newRow("n 78890351") << QL1("n 78890351") << QL1("n78890351");
+  QTest::newRow("85-2") << QL1("85-2") << QL1("85000002");
+  QTest::newRow("75-425165//r75") << QL1("75-425165//r75") << QL1("75425165");
+  QTest::newRow(" 79139101 /AC/r932") << QL1(" 79139101 /AC/r932") << QL1("79139101");
 }

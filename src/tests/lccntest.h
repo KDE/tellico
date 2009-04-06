@@ -20,8 +20,11 @@ class LccnTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testValidation();
+  void testValidation_data();
   void testFormalization();
+  void testFormalization_data();
 };
 
 #endif

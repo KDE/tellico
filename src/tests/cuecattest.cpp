@@ -20,16 +20,31 @@
 
 QTEST_KDEMAIN_CORE( CueCatTest )
 
+Q_DECLARE_METATYPE(QValidator::State)
+
+#define QL1(x) QString::fromLatin1(x)
+
+void CueCatTest::initTestCase() {
+  qRegisterMetaType<QValidator::State>();
+}
+
 void CueCatTest::testDecode() {
-  QString bad = QLatin1String("My name is robby");
-  QCOMPARE(Tellico::CueCat::decode(bad), QValidator::Invalid);
-  QCOMPARE(bad, QLatin1String("My name is robby"));
+  QFETCH(QString, string);
+  QFETCH(QString, expectedString);
+  QFETCH(QValidator::State, state);
 
-  QString almost = QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY");
-  QCOMPARE(Tellico::CueCat::decode(almost), QValidator::Intermediate);
-  QCOMPARE(almost, QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY"));
+  QCOMPARE(Tellico::CueCat::decode(string), state);
+  QCOMPARE(string, expectedString);
+}
 
-  QString valid = QLatin1String(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.");
-  QCOMPARE(Tellico::CueCat::decode(valid), QValidator::Acceptable);
-  QCOMPARE(valid, QLatin1String("9780201889543"));
+void CueCatTest::testDecode_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedString");
+  QTest::addColumn<QValidator::State>("state");
+
+  QTest::newRow("My name is robby") << QL1("My name is robby") << QL1("My name is robby") << QValidator::Invalid;
+
+  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QValidator::Intermediate;
+
+  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.") << QL1("9780201889543") << QValidator::Acceptable;
 }
