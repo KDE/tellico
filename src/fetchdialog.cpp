@@ -412,22 +412,14 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
   if(m_collType & (Data::Collection::Book | Data::Collection::Bibtex) &&
      m_multipleISBN->isChecked() &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
-    QStringList values = m_oldSearch.simplified().split(QLatin1String("; "));
-    for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
-      *it = ISBNValidator::cleanValue(*it);
-    }
+    QStringList searchValues = m_oldSearch.simplified().split(QLatin1String("; "));
+    QStringList resultValues;
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
-      QString isbn = ISBNValidator::cleanValue(static_cast<SearchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn);
-      values.removeOne(isbn);
-      if(isbn.length() > 10 && isbn.startsWith(QLatin1String("978"))) {
-        values.removeOne(ISBNValidator::cleanValue(ISBNValidator::isbn10(isbn)));
-      }
+      resultValues << static_cast<SearchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
     }
-    if(!values.isEmpty()) {
-      for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
-        ISBNValidator::staticFixup(*it);
-      }
-      KMessageBox::informationList(this, i18n("No results were found for the following ISBN values:"), values,
+    const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
+    if(!valuesNotFound.isEmpty()) {
+      KMessageBox::informationList(this, i18n("No results were found for the following ISBN values:"), valuesNotFound,
                                    i18n("No Results"));
     }
   }
