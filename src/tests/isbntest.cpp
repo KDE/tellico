@@ -20,67 +20,111 @@
 
 QTEST_KDEMAIN_CORE( IsbnTest )
 
-QString fixup(const char* s) {
-  static const Tellico::ISBNValidator val(0);
-  QString qs = QLatin1String(s);
+#define QL1(x) QString::fromLatin1(x)
+
+void IsbnTest::testFixup() {
+  QFETCH(QString, string);
+  QFETCH(QString, expectedIsbn);
+
+  Tellico::ISBNValidator val(0);
+  QString qs = string;
   val.fixup(qs);
-  return qs;
+  QCOMPARE(qs, expectedIsbn);
 }
 
-void IsbnTest::testGarbage() {
-  QCOMPARE(fixup("My name is robby"), QString());
-  QCOMPARE(fixup("http://www.abclinuxu.cz/clanky/show/63080"), QLatin1String("6-3080"));
-}
+void IsbnTest::testFixup_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedIsbn");
 
-void IsbnTest::testFormat() {
+  // garbage
+  QTest::newRow("My name is robby") << QL1("My name is robby") << QString();
+  QTest::newRow("http://www.abclinuxu.cz/clanky/show/63080") << QL1("http://www.abclinuxu.cz/clanky/show/63080") << QL1("6-3080");
+
   // initial checks
-  QCOMPARE(fixup("0-446-60098-9"), QLatin1String("0-446-60098-9"));
+  QTest::newRow("0-446-60098-9") << QL1("0-446-60098-9") << QL1("0-446-60098-9");
   // check sum value
-  QCOMPARE(fixup("0-446-60098"), QLatin1String("0-446-60098-9"));
-
-  QCOMPARE(Tellico::ISBNValidator::isbn10("978-0-06-087298-4"), QLatin1String("0-06-087298-5"));
-  QCOMPARE(Tellico::ISBNValidator::isbn13("0-06-087298-5"), QLatin1String("978-0-06-087298-4"));
+  QTest::newRow("0-446-60098") << QL1("0-446-60098") << QL1("0-446-60098-9");
 
   // check EAN-13
-  QCOMPARE(fixup("9780940016750"), QLatin1String("978-0-940016-75-0"));
-  QCOMPARE(fixup("978-0940016750"), QLatin1String("978-0-940016-75-0"));
-  QCOMPARE(fixup("978-0-940016-75-0"), QLatin1String("978-0-940016-75-0"));
-  QCOMPARE(fixup("978286274486"), QLatin1String("978-2-86274-486-5"));
-  QCOMPARE(fixup("9788186119130"), QLatin1String("978-81-86-11913-6"));
-  QCOMPARE(fixup("9788186119137"), QLatin1String("978-81-86-11913-6"));
-  QCOMPARE(fixup("97881-8611-9-13-0"), QLatin1String("978-81-86-11913-6"));
-  QCOMPARE(fixup("97881-8611-9-13-7"), QLatin1String("978-81-86-11913-6"));
+  QTest::newRow("9780940016750") << QL1("9780940016750") << QL1("978-0-940016-75-0");
+  QTest::newRow("978-0940016750") << QL1("978-0940016750") << QL1("978-0-940016-75-0");
+  QTest::newRow("978-0-940016-75-0") << QL1("978-0-940016-75-0") << QL1("978-0-940016-75-0");
+  QTest::newRow("978286274486") << QL1("978286274486") << QL1("978-2-86274-486-5");
+  QTest::newRow("9788186119130") << QL1("9788186119130") << QL1("978-81-86-11913-6");
+  QTest::newRow("9788186119137") << QL1("9788186119137") << QL1("978-81-86-11913-6");
+  QTest::newRow("97881-8611-9-13-0") << QL1("97881-8611-9-13-0") << QL1("978-81-86-11913-6");
+  QTest::newRow("97881-8611-9-13-7") << QL1("97881-8611-9-13-7") << QL1("978-81-86-11913-6");
 
   // don't add checksum for EAN that start with 978 or 979 and are less than 13 in length
-  QCOMPARE(fixup("978059600"), QLatin1String("978-059600"));
-  QCOMPARE(fixup("978-0596000"), QLatin1String("978-059600-0"));
-}
+  QTest::newRow("978059600") << QL1("978059600") << QL1("978-059600");
+  QTest::newRow("978-0596000") << QL1("978-0596000") << QL1("978-059600-0");
 
-void IsbnTest::testHyphenation() {
   // normal english-language hyphenation
-  QCOMPARE(fixup("0-596-00053"), QLatin1String("0-596-00053-7"));
-  QCOMPARE(fixup("044660098"), QLatin1String("0-446-60098-9"));
-  QCOMPARE(fixup("0446600989"), QLatin1String("0-446-60098-9"));
+  QTest::newRow("0-596-00053") << QL1("0-596-00053") << QL1("0-596-00053-7");
+  QTest::newRow("044660098") << QL1("044660098") << QL1("0-446-60098-9");
+  QTest::newRow("0446600989") << QL1("0446600989") << QL1("0-446-60098-9");
 
   // check french hyphenation
-  QCOMPARE(fixup("2862744867"), QLatin1String("2-86274-486-7"));
+  QTest::newRow("2862744867") << QL1("2862744867") << QL1("2-86274-486-7");
 
   // check german hyphenation
-  QCOMPARE(fixup("3423071516"), QLatin1String("3-423-07151-6"));
+  QTest::newRow("3423071516") << QL1("3423071516") << QL1("3-423-07151-6");
 
   // check keeping middle hyphens
-  QCOMPARE(fixup("6-18611913-0"),   QLatin1String("6-18611913-0"));
-  QCOMPARE(fixup("6-186119-13-0"),  QLatin1String("6-186119-13-0"));
-  QCOMPARE(fixup("6-18611-9-13-0"), QLatin1String("6-18611-913-0"));
+  QTest::newRow("6-18611913-0") << QL1("6-18611913-0") << QL1("6-18611913-0");
+  QTest::newRow("6-186119-13-0") << QL1("6-186119-13-0") << QL1("6-186119-13-0");
+  QTest::newRow("6-18611-9-13-0") << QL1("6-18611-9-13-0") << QL1("6-18611-913-0");
+}
+
+void IsbnTest::testIsbn10() {
+  QFETCH(QString, string);
+  QFETCH(QString, expectedIsbn);
+
+  QCOMPARE(Tellico::ISBNValidator::isbn10(string), expectedIsbn);
+}
+
+void IsbnTest::testIsbn10_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedIsbn");
+
+  QTest::newRow("978-0-06-087298-4") << QL1("978-0-06-087298-4") << QL1("0-06-087298-5");
+}
+
+void IsbnTest::testIsbn13() {
+  QFETCH(QString, string);
+  QFETCH(QString, expectedIsbn);
+
+  QCOMPARE(Tellico::ISBNValidator::isbn13(string), expectedIsbn);
+}
+
+void IsbnTest::testIsbn13_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedIsbn");
+
+  QTest::newRow("0-06-087298-5") << QL1("0-06-087298-5") << QL1("978-0-06-087298-4");
 }
 
 void IsbnTest::testComparison() {
-  Tellico::ISBNComparison comp;
-  QCOMPARE(comp("0446600989", "0-446-60098-9"), true);
-  QCOMPARE(comp("0940016753", "9780940016750"), true);
-  QCOMPARE(comp("9780940016750", "0940016753"), true);
-  QCOMPARE(comp("9780940016750", "978-0-940016-75-0"), true);
+  QFETCH(QString, value1);
+  QFETCH(QString, value2);
+  QFETCH(bool, equal);
 
+  Tellico::ISBNComparison comp;
+  QCOMPARE(comp(value1, value2), equal);
+}
+
+void IsbnTest::testComparison_data() {
+  QTest::addColumn<QString>("value1");
+  QTest::addColumn<QString>("value2");
+  QTest::addColumn<bool>("equal");
+
+  QTest::newRow("0446600989, 0-446-60098-9") << QL1("0446600989") << QL1("0-446-60098-9") << true;
+  QTest::newRow("0940016753, 9780940016750") << QL1("0940016753") << QL1("9780940016750") << true;
+  QTest::newRow("9780940016750, 0940016753") << QL1("9780940016750") << QL1("0940016753") << true;
+  QTest::newRow("9780940016750, 978-0-940016-75-0") << QL1("9780940016750") << QL1("978-0-940016-75-0") << true;
+}
+
+void IsbnTest::testListDifference() {
   QStringList list1;
   list1 << QLatin1String("0940016753") << QLatin1String("9780940016750");
   QStringList list2;

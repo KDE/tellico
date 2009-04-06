@@ -20,10 +20,15 @@ class IsbnTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
-  void testGarbage();
-  void testFormat();
-  void testHyphenation();
+  void testFixup();
+  void testFixup_data();
+  void testIsbn10();
+  void testIsbn10_data();
+  void testIsbn13();
+  void testIsbn13_data();
   void testComparison();
+  void testComparison_data();
+  void testListDifference();
 };
 
 #endif
