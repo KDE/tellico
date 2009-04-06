@@ -156,7 +156,8 @@ void EntrezFetcher::stop() {
   emit signalDone(this);
 }
 
-void EntrezFetcher::slotComplete(KJob*) {
+void EntrezFetcher::slotComplete(KJob* job_) {
+  m_job = static_cast<KIO::StoredTransferJob*>(job_);
   Q_ASSERT(m_job);
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
