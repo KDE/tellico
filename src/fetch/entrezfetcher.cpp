@@ -81,7 +81,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
 
 // only search if current collection is a bibliography
   if(!canFetch(Kernel::self()->collectionType())) {
-    myDebug() << "EntrezFetcher::search() - collection type mismatch, stopping" << endl;
+    myDebug() << "collection type mismatch, stopping" << endl;
     stop();
     return;
   }
@@ -124,7 +124,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
       break;
 
     default:
-      kWarning() << "EntrezFetcher::search() - FetchKey not supported";
+      myWarning() << "EntrezFetcher::search() - FetchKey not supported";
       stop();
       return;
   }
@@ -156,7 +156,8 @@ void EntrezFetcher::stop() {
   emit signalDone(this);
 }
 
-void EntrezFetcher::slotComplete(KJob* ) {
+void EntrezFetcher::slotComplete(KJob*) {
+  Q_ASSERT(m_job);
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
     stop();
@@ -165,15 +166,13 @@ void EntrezFetcher::slotComplete(KJob* ) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "EntrezFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data" << endl;
     stop();
     return;
   }
 
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 #if 0
-  kWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__;
+  myWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__;
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -185,24 +184,27 @@ void EntrezFetcher::slotComplete(KJob* ) {
 
   switch(m_step) {
     case Search:
-      searchResults();
+      searchResults(data);
       break;
     case Summary:
-      summaryResults();
+      summaryResults(data);
       break;
     case Begin:
     case Fetch:
     default:
-      myLog() << "EntrezFetcher::slotComplete() - wrong step = " << m_step << endl;
+      myLog() << "wrong step =" << m_step << endl;
       stop();
       break;
   }
+
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
 }
 
-void EntrezFetcher::searchResults() {
+void EntrezFetcher::searchResults(const QByteArray& data_) {
   QDomDocument dom;
-  if(!dom.setContent(m_job->data(), false)) {
-    kWarning() << "EntrezFetcher::searchResults() - server did not return valid XML.";
+  if(!dom.setContent(data_, false)) {
+    myWarning() << "server did not return valid XML.";
     stop();
     return;
   }
@@ -248,17 +250,17 @@ void EntrezFetcher::doSummary() {
 #endif
 
   m_step = Summary;
-//  myLog() << "EntrezFetcher::searchResults() - url: " << u.url() << endl;
+//  myLog() << "url:" << u.url() << endl;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(Kernel::self()->widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
 
-void EntrezFetcher::summaryResults() {
+void EntrezFetcher::summaryResults(const QByteArray& data_) {
   QDomDocument dom;
-  if(!dom.setContent(m_job->data(), false)) {
-    kWarning() << "EntrezFetcher::summaryResults() - server did not return valid XML.";
+  if(!dom.setContent(data_, false)) {
+    myWarning() << "EntrezFetcher::summaryResults() - server did not return valid XML.";
     stop();
     return;
   }
@@ -271,7 +273,7 @@ void EntrezFetcher::summaryResults() {
     }
     QDomNodeList nodes = e.elementsByTagName(QLatin1String("Id"));
     if(nodes.count() == 0) {
-      myDebug() << "EntrezFetcher::summaryResults() - no Id elements" << endl;
+      myDebug() << "no Id elements" << endl;
       continue;
     }
     int id = nodes.item(0).toElement().text().toInt();
@@ -339,11 +341,11 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   // now it's sychronous, and we know that it's utf8
   QString xmlOutput = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
   if(xmlOutput.isEmpty()) {
-    kWarning() << "EntrezFetcher::fetchEntry() - unable to download " << u;
+    myWarning() << "EntrezFetcher::fetchEntry() - unable to download " << u;
     return Data::EntryPtr();
   }
 #if 0
-  kWarning() << "EntrezFetcher::fetchEntry() - turn me off!";
+  myWarning() << "EntrezFetcher::fetchEntry() - turn me off!";
   QFile f1(QLatin1String("/tmp/test-entry.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
@@ -356,14 +358,14 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
-    kWarning() << "EntrezFetcher::fetchEntry() - invalid collection";
+    myWarning() << "invalid collection";
     return Data::EntryPtr();
   }
   if(coll->entryCount() == 0) {
-    myDebug() << "EntrezFetcher::fetchEntry() - no entries in collection" << endl;
+    myDebug() << "no entries in collection" << endl;
     return Data::EntryPtr();
   } else if(coll->entryCount() > 1) {
-    myDebug() << "EntrezFetcher::fetchEntry() - collection has multiple entries, taking first one" << endl;
+    myDebug() << "collection has multiple entries, taking first one" << endl;
   }
 
   Data::EntryPtr e = coll->entries().front();
@@ -414,7 +416,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
 void EntrezFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("pubmed2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "EntrezFetcher::initXSLTHandler() - can not locate pubmed2tellico.xsl.";
+    myWarning() << "can not locate pubmed2tellico.xsl.";
     return;
   }
 
@@ -425,7 +427,7 @@ void EntrezFetcher::initXSLTHandler() {
     m_xsltHandler = new XSLTHandler(u);
   }
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "EntrezFetcher::initXSLTHandler() - error in pubmed2tellico.xsl.";
+    myWarning() << "error in pubmed2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -433,7 +435,7 @@ void EntrezFetcher::initXSLTHandler() {
 }
 
 void EntrezFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "EntrezFetcher::updateEntry()" << endl;
+//  myDebug() << endl;
   QString s = entry_->field(QLatin1String("pmid"));
   if(!s.isEmpty()) {
     search(PubmedID, s);
@@ -452,7 +454,7 @@ void EntrezFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "EntrezFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search" << endl;
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

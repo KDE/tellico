@@ -75,8 +75,8 @@ private:
   void initXSLTHandler();
   void doSummary();
 
-  void searchResults();
-  void summaryResults();
+  void searchResults(const QByteArray& data);
+  void summaryResults(const QByteArray& data);
 
   enum Step {
     Begin,
