@@ -125,14 +125,26 @@ void IsbnTest::testComparison_data() {
 }
 
 void IsbnTest::testListDifference() {
+  QFETCH(QStringList, list1);
+  QFETCH(QStringList, list2);
+  QFETCH(QStringList, result);
+
+  QCOMPARE(Tellico::ISBNValidator::listDifference(list1, list2), result);
+}
+
+void IsbnTest::testListDifference_data() {
+  QTest::addColumn<QStringList>("list1");
+  QTest::addColumn<QStringList>("list2");
+  QTest::addColumn<QStringList>("result");
+
   QStringList list1;
   list1 << QLatin1String("0940016753") << QLatin1String("9780940016750");
   QStringList list2;
 
   // comparing to empty list should return the first list
-  QCOMPARE(Tellico::ISBNValidator::listDifference(list1, list2), list1);
+  QTest::newRow("list1") << list1 << list2 << list1;
 
   // comparing to a value that matches everything in the list should return empty list
   list2 << QLatin1String("0-940016-75-0");
-  QCOMPARE(Tellico::ISBNValidator::listDifference(list1, list2), QStringList());
+  QTest::newRow("list2") << list1 << list2 << QStringList();
 }

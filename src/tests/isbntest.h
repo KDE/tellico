@@ -29,6 +29,7 @@ private Q_SLOTS:
   void testComparison();
   void testComparison_data();
   void testListDifference();
+  void testListDifference_data();
 };
 
 #endif
