@@ -15,6 +15,8 @@
 #include "upcvalidator.h"
 #include "../tellico_debug.h"
 
+#include <QStringList>
+
 using Tellico::ISBNValidator;
 
 //static
@@ -29,7 +31,7 @@ QString ISBNValidator::isbn10(QString isbn13) {
   isbn13.truncate(isbn13.length()-1);
   // add new checksum
   isbn13 += checkSum10(isbn13);
-  staticFixup(isbn13);
+  fixup10(isbn13);
   return isbn13;
 }
 
@@ -45,8 +47,27 @@ QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.prepend(QLatin1String("978"));
   // add new checksum
   isbn10 += checkSum13(isbn10);
-  staticFixup(isbn10);
+  fixup13(isbn10);
   return isbn10;
+}
+
+QStringList ISBNValidator::listDifference(const QStringList& list1_, const QStringList& list2_) {
+  ISBNComparison comp;
+
+  QStringList notFound;
+  foreach(const QString& value1, list1_) {
+    bool found = false;
+    foreach(const QString& value2, list2_) {
+      if(comp(value1, value2)) {
+        found = true;
+        break;
+      }
+    }
+    if(!found) {
+      notFound.append(value1);
+    }
+  }
+  return notFound;
 }
 
 QString ISBNValidator::cleanValue(QString isbn) {
@@ -485,4 +506,29 @@ struct ISBNValidator::isbn_band ISBNValidator::bands[] = {
   ISBNGRP_5DIGIT(99999, ISBNPUB_2DIGIT(99),      0, 9)
 };
 
+bool Tellico::ISBNComparison::operator()(const QString& value1_, const QString& value2_) const {
+  QString value1 = ISBNValidator::cleanValue(value1_).toUpper();
+  QString value2 = ISBNValidator::cleanValue(value2_).toUpper();
+
+  if(value1 == value2) {
+    return true;
+  }
+  const int len1 = value1.length();
+  const int len2 = value2.length();
+  if(len1 < 10 || len2 < 10) {
+    // they're not ISBN values at all
+    return false;
+  }
+  if(len1 == 13) {
+    ISBNValidator::fixup13(value1);
+  } else {
+    value1 = ISBNValidator::isbn13(value1);
+  }
+  if(len2 == 13) {
+    ISBNValidator::fixup13(value2);
+  } else {
+    value2 = ISBNValidator::isbn13(value2);
+  }
+  return value1 == value2;
+}
 #include "isbnvalidator.moc"

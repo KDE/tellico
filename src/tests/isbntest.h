@@ -23,6 +23,7 @@ private Q_SLOTS:
   void testGarbage();
   void testFormat();
   void testHyphenation();
+  void testComparison();
 };
 
 #endif

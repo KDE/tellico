@@ -207,7 +207,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QLatin1String("Compact.xsl"));
   m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
-                                            "current collection by selecting it in the list above"));
+                                         "current collection by selecting it in the list above"));
 
   KHBox* box3 = new KHBox(mainWidget);
   topLayout->addWidget(box3);
@@ -386,7 +386,7 @@ void FetchDialog::setStatus(const QString& text_) {
   m_statusLabel->setText(QLatin1Char(' ') + text_);
 }
 
-void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
+void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
 //  myDebug() << "FetchDialog::slotFetchDone()" << endl;
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
@@ -403,7 +403,7 @@ void FetchDialog::slotFetchDone(bool checkISBN /* = true */) {
   m_moreButton->setEnabled(Fetch::Manager::self()->hasMoreResults());
 
   // if we're not checking isbn values, then, ok to return
-  if(!checkISBN) {
+  if(!checkISBN_) {
     return;
   }
 

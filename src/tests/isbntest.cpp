@@ -73,3 +73,22 @@ void IsbnTest::testHyphenation() {
   QCOMPARE(fixup("6-186119-13-0"),  QLatin1String("6-186119-13-0"));
   QCOMPARE(fixup("6-18611-9-13-0"), QLatin1String("6-18611-913-0"));
 }
+
+void IsbnTest::testComparison() {
+  Tellico::ISBNComparison comp;
+  QCOMPARE(comp("0446600989", "0-446-60098-9"), true);
+  QCOMPARE(comp("0940016753", "9780940016750"), true);
+  QCOMPARE(comp("9780940016750", "0940016753"), true);
+  QCOMPARE(comp("9780940016750", "978-0-940016-75-0"), true);
+
+  QStringList list1;
+  list1 << QLatin1String("0940016753") << QLatin1String("9780940016750");
+  QStringList list2;
+
+  // comparing to empty list should return the first list
+  QCOMPARE(Tellico::ISBNValidator::listDifference(list1, list2), list1);
+
+  // comparing to a value that matches everything in the list should return empty list
+  list2 << QLatin1String("0-940016-75-0");
+  QCOMPARE(Tellico::ISBNValidator::listDifference(list1, list2), QStringList());
+}

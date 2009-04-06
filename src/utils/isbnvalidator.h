@@ -16,6 +16,8 @@
 
 #include <QValidator>
 
+#include <functional>
+
 namespace Tellico {
 
 /**
@@ -113,11 +115,16 @@ public:
    * @param input The raw string, hyphens included
    */
   virtual void fixup(QString& input) const;
+
   static void staticFixup(QString& input);
+  static void fixup10(QString& input);
+  static void fixup13(QString& input);
 
   static QString isbn10(QString isbn13);
   static QString isbn13(QString isbn10);
   static QString cleanValue(QString isbn);
+  // returns the values in list1 that are not in list2
+  static QStringList listDifference(const QStringList& list1, const QStringList& list2);
 
 private:
   static struct isbn_band {
@@ -130,8 +137,6 @@ private:
   QValidator::State validate10(QString& input, int& pos) const;
   QValidator::State validate13(QString& input, int& pos) const;
 
-  static void fixup10(QString& input);
-  static void fixup13(QString& input);
 
   /**
    * This function calculates and returns the ISBN checksum. The
@@ -144,6 +149,12 @@ private:
    */
   static QChar checkSum10(const QString& input);
   static QChar checkSum13(const QString& input);
+};
+
+class ISBNComparison : public std::binary_function<const QString&, const QString&, bool> {
+public:
+  ISBNComparison() {}
+  bool operator()(const QString& value1, const QString& value2) const;
 };
 
 } // end namespace
