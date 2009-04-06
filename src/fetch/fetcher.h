@@ -17,8 +17,6 @@
 #include "fetch.h"
 #include "../datavectors.h"
 
-#include <krandom.h>
-
 #include <QObject>
 #include <QString>
 
@@ -131,18 +129,6 @@ private:
 
   MessageHandler* m_messager;
   QString m_configGroup;
-};
-
-class SearchResult {
-public:
-  SearchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i)
-   : uid(KRandom::random()), fetcher(f), title(t), desc(d), isbn(i) {}
-  Data::EntryPtr fetchEntry();
-  uint uid;
-  Fetcher::Ptr fetcher;
-  QString title;
-  QString desc;
-  QString isbn;
 };
 
   } // end namespace

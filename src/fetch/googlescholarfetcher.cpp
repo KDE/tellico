@@ -13,6 +13,7 @@
 
 #include "googlescholarfetcher.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "../core/filehandler.h"
 #include "../translators/bibteximporter.h"
 #include "../collection.h"
@@ -179,13 +180,8 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
       // might get aborted
       break;
     }
-    QString desc = entry->field(QLatin1String("author"))
-                 + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
-    if(!entry->field(QLatin1String("year")).isEmpty()) {
-      desc += QLatin1Char('/') + entry->field(QLatin1String("year"));
-    }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;

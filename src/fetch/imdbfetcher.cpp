@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "imdbfetcher.h"
+#include "searchresult.h"
 #include "../tellico_kernel.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
@@ -261,8 +262,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   // FIXME: maybe remove parentheses here?
   SearchResult* r = new SearchResult(Fetcher::Ptr(this),
                                      pPos == -1 ? cap1 : cap1.left(pPos),
-                                     pPos == -1 ? QString() : cap1.mid(pPos),
-                                     QString());
+                                     pPos == -1 ? QString() : cap1.mid(pPos));
   m_matches.insert(r->uid, m_url);
   emit signalResultFound(r);
 
@@ -390,7 +390,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       break;
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc);
     KUrl u(m_url, cap1);
     u.setQuery(QString());
     m_matches.insert(r->uid, u);

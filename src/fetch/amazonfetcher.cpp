@@ -13,6 +13,7 @@
 
 #include "amazonfetcher.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../imagefactory.h"
@@ -483,54 +484,6 @@ void AmazonFetcher::slotComplete(KJob*) {
       }
     }
 
-    QString desc;
-    switch(coll->type()) {
-      case Data::Collection::Book:
-      case Data::Collection::ComicBook:
-      case Data::Collection::Bibtex:
-        desc = entry->field(QLatin1String("author"))
-               + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
-        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
-        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
-        }
-        break;
-
-      case Data::Collection::Video:
-        desc = entry->field(QLatin1String("studio"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("director"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("medium"));
-        break;
-
-      case Data::Collection::Album:
-        desc = entry->field(QLatin1String("artist"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("label"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      case Data::Collection::Game:
-        desc = entry->field(QLatin1String("platform"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      case Data::Collection::BoardGame:
-        desc = entry->field(QLatin1String("publisher"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      default:
-        break;
-    }
-
     // strip HTML from comments, or plot in movies
     // tentatively don't do this, looks like ECS 4 cleaned everything up
 /*
@@ -549,7 +502,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     }
 */
 //    myDebug() << "AmazonFetcher::slotComplete() - " << entry->title() << endl;
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++m_numResults;

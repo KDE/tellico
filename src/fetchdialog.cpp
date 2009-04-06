@@ -14,6 +14,7 @@
 #include "fetchdialog.h"
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
+#include "fetch/searchresult.h"
 #include "entryview.h"
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"

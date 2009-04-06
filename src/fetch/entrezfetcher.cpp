@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
+#include "searchresult.h"
 #include "../tellico_kernel.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -295,7 +296,7 @@ void EntrezFetcher::summaryResults() {
         break; // done now
       }
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors, QString());
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors);
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }

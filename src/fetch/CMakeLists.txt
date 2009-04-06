@@ -21,6 +21,7 @@ SET(fetch_STAT_SRCS
    imdbfetcher.cpp
    isbndbfetcher.cpp
    messagehandler.cpp
+   searchresult.cpp
    srufetcher.cpp
    yahoofetcher.cpp
    z3950connection.cpp

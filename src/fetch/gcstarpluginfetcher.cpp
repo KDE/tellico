@@ -13,6 +13,7 @@
 
 #include "gcstarpluginfetcher.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -305,60 +306,7 @@ void GCstarPluginFetcher::slotProcessExited() {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    QString desc;
-    switch(coll->type()) {
-      case Data::Collection::Book:
-      case Data::Collection::Bibtex:
-        desc = entry->field(QLatin1String("author"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("publisher"));
-        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
-        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
-        }
-        break;
-
-      case Data::Collection::Video:
-        desc = entry->field(QLatin1String("studio"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("director"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("medium"));
-        break;
-
-      case Data::Collection::Album:
-        desc = entry->field(QLatin1String("artist"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("label"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      case Data::Collection::Game:
-        desc = entry->field(QLatin1String("platform"));
-        break;
-
-      case Data::Collection::ComicBook:
-        desc = entry->field(QLatin1String("publisher"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("pub_year"));
-        break;
-
-     case Data::Collection::BoardGame:
-       desc = entry->field(QLatin1String("designer"))
-              + QLatin1Char('/')
-              + entry->field(QLatin1String("publisher"))
-              + QLatin1Char('/')
-              + entry->field(QLatin1String("year"));
-       break;
-
-      default:
-        break;
-    }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

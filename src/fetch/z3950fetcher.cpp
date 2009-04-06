@@ -26,6 +26,7 @@
 #include "z3950fetcher.h"
 #include "z3950connection.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "../collection.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -422,14 +423,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    QString desc = entry->field(QLatin1String("author")) + QLatin1Char('/')
-                   + entry->field(QLatin1String("publisher"));
-    if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-      desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
-    } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-      desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
-    }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

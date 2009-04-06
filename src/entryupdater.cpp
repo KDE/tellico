@@ -20,6 +20,7 @@
 #include "statusbar.h"
 #include "gui/richtextlabel.h"
 #include "document.h"
+#include "fetch/searchresult.cpp"
 
 #include <kdialog.h>
 #include <klocale.h>

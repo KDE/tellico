@@ -13,6 +13,7 @@
 
 #include "animenfofetcher.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
 #include "../collections/videocollection.h"
@@ -143,7 +144,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
 
   for(int pos = infoRx.indexIn(s); m_started && pos > -1; pos = infoRx.indexIn(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
-      SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, y, QString());
+      SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, y);
       emit signalResultFound(r);
 
 #ifdef ANIMENFO_TEST

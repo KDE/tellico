@@ -13,6 +13,7 @@
 
 #include "srufetcher.h"
 #include "messagehandler.h"
+#include "searchresult.h"
 #include "../field.h"
 #include "../collection.h"
 #include "../translators/tellico_xml.h"
@@ -296,39 +297,7 @@ void SRUFetcher::slotComplete(KJob*) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    QString desc;
-    switch(coll->type()) {
-      case Data::Collection::Book:
-        desc = entry->field(QLatin1String("author"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("publisher"));
-        if(!entry->field(QLatin1String("cr_year")).isEmpty()) {
-          desc += QLatin1Char('/') + entry->field(QLatin1String("cr_year"));
-        } else if(!entry->field(QLatin1String("pub_year")).isEmpty()){
-          desc += QLatin1Char('/') + entry->field(QLatin1String("pub_year"));
-        }
-        break;
-
-      case Data::Collection::Video:
-        desc = entry->field(QLatin1String("studio"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("director"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      case Data::Collection::Album:
-        desc = entry->field(QLatin1String("artist"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("label"))
-               + QLatin1Char('/')
-               + entry->field(QLatin1String("year"));
-        break;
-
-      default:
-        break;
-    }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

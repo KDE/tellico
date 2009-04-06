@@ -13,14 +13,12 @@
 
 #include "fetcher.h"
 #include "messagehandler.h"
-#include "../entry.h"
 
 #include <kglobal.h>
 #include <KSharedConfig>
 #include <KConfigGroup>
 
 using Tellico::Fetch::Fetcher;
-using Tellico::Fetch::SearchResult;
 
 Fetcher::~Fetcher() {
   KConfigGroup config(KGlobal::config(), m_configGroup);
@@ -53,10 +51,6 @@ void Fetcher::infoList(const QString& message_, const QStringList& list_) const 
 
 void Fetcher::updateEntry(Tellico::Data::EntryPtr) {
   emit signalDone(this);
-}
-
-Tellico::Data::EntryPtr SearchResult::fetchEntry() {
-  return fetcher->fetchEntry(uid);
 }
 
 #include "fetcher.moc"
