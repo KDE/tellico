@@ -156,9 +156,7 @@ void EntrezFetcher::stop() {
   emit signalDone(this);
 }
 
-void EntrezFetcher::slotComplete(KJob* job_) {
-  m_job = static_cast<KIO::StoredTransferJob*>(job_);
-  Q_ASSERT(m_job);
+void EntrezFetcher::slotComplete(KJob*) {
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
     stop();
@@ -197,9 +195,6 @@ void EntrezFetcher::slotComplete(KJob* job_) {
       stop();
       break;
   }
-
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 }
 
 void EntrezFetcher::searchResults(const QByteArray& data_) {
