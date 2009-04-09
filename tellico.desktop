@@ -20,6 +20,7 @@ Terminal=false
 Name=Tellico
 Name[x-test]=xxTellicoxx
 GenericName=Collection Manager
+GenericName[de]=Sammlungsverwaltung
 GenericName[et]=Kogude haldur
 GenericName[fr]=Gestion de collection
 GenericName[ga]=Bainisteoir Bailiúchán
