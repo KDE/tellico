@@ -59,7 +59,7 @@ using Tellico::NewStuff::Manager;
 Manager::Manager(QObject* parent_) : QObject(parent_) {
   QDBusConnection::sessionBus().registerService(QLatin1String("org.kde.tellico"));
   new NewstuffAdaptor(this);
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/newstuff"), this);
+  QDBusConnection::sessionBus().registerObject(QLatin1String("/NewStuff"), this);
 }
 
 Manager::~Manager() {
