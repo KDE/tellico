@@ -197,3 +197,5 @@ bool CollectionInterface::addFieldValue(long id_, const QString& fieldName_, con
   Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);
   return true;
 }
+
+#include "dbusinterface.moc"
