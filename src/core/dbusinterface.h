@@ -20,6 +20,9 @@
 
 #include <QStringList>
 
+// DBus doesn't have a type for int int, which is the type of the entry id right now
+// go ahead and downcast to an int
+
 namespace Tellico {
 
 class MainWindow;
@@ -54,12 +57,12 @@ public slots:
   Q_SCRIPTABLE bool exportPilotDB(const QString& file)
     { return exportCollection(Export::PilotDB, KUrl::fromPath(file)); }
 
-  Q_SCRIPTABLE QList<long> selectedEntries() const;
-  Q_SCRIPTABLE QList<long> filteredEntries() const;
+  Q_SCRIPTABLE QList<int> selectedEntries() const;
+  Q_SCRIPTABLE QList<int> filteredEntries() const;
 
   Q_SCRIPTABLE virtual void openFile(const QString& file);
   Q_SCRIPTABLE virtual void setFilter(const QString& text);
-  Q_SCRIPTABLE virtual bool showEntry(long id);
+  Q_SCRIPTABLE virtual bool showEntry(int id);
 
 private:
   virtual bool importFile(Import::Format format, const KUrl& url, Import::Action action);
@@ -78,16 +81,16 @@ public:
   CollectionInterface(QObject* parent);
 
 public slots:
-  Q_SCRIPTABLE long addEntry();
-  Q_SCRIPTABLE bool removeEntry(long entryID);
+  Q_SCRIPTABLE int addEntry();
+  Q_SCRIPTABLE bool removeEntry(int entryID);
 
-  Q_SCRIPTABLE QStringList values(const QString& fieldName) const;
-  Q_SCRIPTABLE QStringList values(long entryID, const QString& fieldName) const;
-  Q_SCRIPTABLE QStringList bibtexKeys() const;
-  Q_SCRIPTABLE QString bibtexKey(long entryID) const;
+  Q_SCRIPTABLE QStringList allValues(const QString& fieldName) const;
+  Q_SCRIPTABLE QStringList entryValues(int entryID, const QString& fieldName) const;
+  Q_SCRIPTABLE QStringList selectedBibtexKeys() const;
+  Q_SCRIPTABLE QString entryBibtexKey(int entryID) const;
 
-  Q_SCRIPTABLE bool setFieldValue(long entryID, const QString& fieldName, const QString& value);
-  Q_SCRIPTABLE bool addFieldValue(long entryID, const QString& fieldName, const QString& value);
+  Q_SCRIPTABLE bool setEntryValue(int entryID, const QString& fieldName, const QString& value);
+  Q_SCRIPTABLE bool addEntryValue(int entryID, const QString& fieldName, const QString& value);
 };
 
 } // end namespace

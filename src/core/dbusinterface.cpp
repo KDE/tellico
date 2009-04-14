@@ -38,16 +38,16 @@ Tellico::Import::Action ApplicationInterface::actionType(const QString& actionNa
   return Import::Replace;
 }
 
-QList<long> ApplicationInterface::selectedEntries() const {
-  QList<long> ids;
+QList<int> ApplicationInterface::selectedEntries() const {
+  QList<int> ids;
   foreach(Data::EntryPtr entry, Controller::self()->selectedEntries()) {
     ids << entry->id();
   }
   return ids;
 }
 
-QList<long> ApplicationInterface::filteredEntries() const {
-  QList<long> ids;
+QList<int> ApplicationInterface::filteredEntries() const {
+  QList<int> ids;
   foreach(Data::EntryPtr entry, Controller::self()->visibleEntries()) {
     ids << entry->id();
   }
@@ -62,7 +62,7 @@ void ApplicationInterface::setFilter(const QString& text) {
   return m_mainWindow->setFilter(text);
 }
 
-bool ApplicationInterface::showEntry(long id)  {
+bool ApplicationInterface::showEntry(int id)  {
   return m_mainWindow->showEntry(id);
 }
 
@@ -78,7 +78,7 @@ CollectionInterface::CollectionInterface(QObject* parent_) : QObject(parent_) {
   QDBusConnection::sessionBus().registerObject(QLatin1String("/Collections"), this, QDBusConnection::ExportScriptableSlots);
 }
 
-long CollectionInterface::addEntry() {
+int CollectionInterface::addEntry() {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
     return -1;
@@ -88,7 +88,7 @@ long CollectionInterface::addEntry() {
   return entry->id();
 }
 
-bool CollectionInterface::removeEntry(long id_) {
+bool CollectionInterface::removeEntry(int id_) {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
     return false;
@@ -101,7 +101,7 @@ bool CollectionInterface::removeEntry(long id_) {
   return !coll->entryById(id_);
 }
 
-QStringList CollectionInterface::values(const QString& fieldName_) const {
+QStringList CollectionInterface::allValues(const QString& fieldName_) const {
   QStringList results;
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
@@ -121,7 +121,7 @@ QStringList CollectionInterface::values(const QString& fieldName_) const {
   return results;
 }
 
-QStringList CollectionInterface::values(long id_, const QString& fieldName_) const {
+QStringList CollectionInterface::entryValues(int id_, const QString& fieldName_) const {
   QStringList results;
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
@@ -141,7 +141,7 @@ QStringList CollectionInterface::values(long id_, const QString& fieldName_) con
   return results;
 }
 
-QStringList CollectionInterface::bibtexKeys() const {
+QStringList CollectionInterface::selectedBibtexKeys() const {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
     return QStringList();
@@ -149,7 +149,7 @@ QStringList CollectionInterface::bibtexKeys() const {
   return BibtexHandler::bibtexKeys(Controller::self()->selectedEntries());
 }
 
-QString CollectionInterface::bibtexKey(long id_) const {
+QString CollectionInterface::entryBibtexKey(int id_) const {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
     return QString();
@@ -161,7 +161,7 @@ QString CollectionInterface::bibtexKey(long id_) const {
   return BibtexHandler::bibtexKeys(Data::EntryList() << entry).first();
 }
 
-bool CollectionInterface::setFieldValue(long id_, const QString& fieldName_, const QString& value_) {
+bool CollectionInterface::setEntryValue(int id_, const QString& fieldName_, const QString& value_) {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
     return false;
@@ -178,7 +178,7 @@ bool CollectionInterface::setFieldValue(long id_, const QString& fieldName_, con
   return true;
 }
 
-bool CollectionInterface::addFieldValue(long id_, const QString& fieldName_, const QString& value_) {
+bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, const QString& value_) {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
     return false;
