@@ -22,13 +22,14 @@
 #include "controller.h"
 #include "borrower.h"
 #include "tellico_kernel.h"
-#include "tellico_debug.h"
+#include "tellico_strings.h"
 #include "imagefactory.h"
 #include "image.h"
 #include "imageinfo.h"
 #include "utils/stringset.h"
 #include "progressmanager.h"
 #include "core/tellico_config.h"
+#include "tellico_debug.h"
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -63,7 +64,7 @@ Tellico::Data::CollPtr Document::collection() const {
 
 void Document::setURL(const KUrl& url_) {
   m_url = url_;
-  if(m_url.fileName() != i18n("Untitled")) {
+  if(m_url.fileName() != i18n(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
   }
 }
@@ -96,7 +97,7 @@ bool Document::newDocument(int type_) {
 
   slotSetModified(false);
   KUrl url;
-  url.setFileName(i18n("Untitled"));
+  url.setFileName(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
   m_fileFormat = Import::TellicoImporter::Unknown;
@@ -340,7 +341,7 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
   }
 
   KUrl url;
-  url.setFileName(i18n("Untitled"));
+  url.setFileName(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
 

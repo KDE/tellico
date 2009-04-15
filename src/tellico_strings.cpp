@@ -25,3 +25,5 @@ const char* Tellico::errorMergeType = I18N_NOOP("Only collections with the same 
                                                 "the current one can be merged. No changes are being "
                                                 "made to the current collection.");
 const char* Tellico::errorImageLoad = I18N_NOOP("Tellico is unable to load an image from the file - %1.");
+
+const char* Tellico::untitledFilename = I18N_NOOP("Untitled");

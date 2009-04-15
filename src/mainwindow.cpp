@@ -1960,8 +1960,8 @@ void MainWindow::updateCaption(bool modified_) {
     }
     KUrl u = Data::Document::self()->URL();
     if(u.isLocalFile()) {
-      // for new files, the path is set to /Untitled in Data::Document
-      if(u.path() == QLatin1Char('/') + i18n("Untitled")) {
+      // for new files, the filename is set to Untitled in Data::Document
+      if(u.fileName() == i18n(Tellico::untitledFilename)) {
         caption += u.fileName();
       } else {
         caption += u.path();

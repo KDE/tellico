@@ -21,6 +21,7 @@ namespace Tellico {
   extern const char* errorAppendType;
   extern const char* errorMergeType;
   extern const char* errorImageLoad;
+  extern const char* untitledFilename;
 }
 
 #endif

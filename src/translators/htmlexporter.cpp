@@ -21,6 +21,7 @@
 #include "../imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
+#include "../tellico_strings.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
 #include "../gui/cursorsaver.h"
@@ -281,7 +282,7 @@ QString HTMLExporter::text() {
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   QString file = Kernel::self()->URL().fileName();
-  if(file != i18n("Untitled")) {
+  if(file != i18n(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
   m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).toUtf8());
