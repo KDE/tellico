@@ -12,12 +12,16 @@
  ***************************************************************************/
 
 #include "importer.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 
 using Tellico::Import::Importer;
 
 Tellico::Data::CollPtr Importer::currentCollection() const {
+  if(!m_currentCollection) {
+    myWarning() << "set current collection pointer!" << endl;
+  }
   return m_currentCollection;
 }
 

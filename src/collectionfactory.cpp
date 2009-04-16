@@ -119,8 +119,8 @@ Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, b
   }
 }
 
-Tellico::CollectionNameMap CollectionFactory::nameMap() {
-  CollectionNameMap map;
+Tellico::CollectionNameHash CollectionFactory::nameHash() {
+  CollectionNameHash map;
   map[Data::Collection::Book]        = i18n("Book Collection");
   map[Data::Collection::Bibtex]      = i18n("Bibliography");
   map[Data::Collection::ComicBook]   = i18n("Comic Book Collection");

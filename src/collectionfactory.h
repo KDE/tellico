@@ -16,11 +16,11 @@
 
 #include "datavectors.h"
 
-#include <QMap>
+#include <QHash>
 
 namespace Tellico {
 
-typedef QMap<int, QString> CollectionNameMap;
+typedef QHash<int, QString> CollectionNameHash;
 
 /**
  * A factory class for dealing with the different types of collections.
@@ -31,7 +31,7 @@ class CollectionFactory {
 public:
   static Data::CollPtr collection(int type, bool addFields);
   static Data::CollPtr collection(const QString& typeName, bool addFields);
-  static CollectionNameMap nameMap();
+  static CollectionNameHash nameHash();
   static QString typeName(int type);
   static bool isDefaultField(int type, const QString& name);
 };

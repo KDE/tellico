@@ -502,7 +502,7 @@ void CSVImporter::slotActionChanged(int action_) {
     case Import::Merge:
      {
         m_comboColl->clear();
-        QString name = CollectionFactory::nameMap()[currColl->type()];
+        QString name = CollectionFactory::nameHash().value(currColl->type());
         m_comboColl->addItem(name, currColl->type());
         m_existingCollection = currColl;
      }

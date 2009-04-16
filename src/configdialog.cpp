@@ -398,7 +398,7 @@ void ConfigDialog::setupTemplatePage() {
   QLabel* lab = new QLabel(s, frame);
   gridLayout->addWidget(lab, ++row, 0);
   const int collType = Kernel::self()->collectionType();
-  lab = new QLabel(CollectionFactory::nameMap()[collType], frame);
+  lab = new QLabel(CollectionFactory::nameHash()[collType], frame);
   gridLayout->addWidget(lab, row, 1, 1, 2);
 
   lab = new QLabel(i18n("Template:"), frame);

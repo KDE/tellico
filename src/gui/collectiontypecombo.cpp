@@ -24,9 +24,9 @@ CollectionTypeCombo::CollectionTypeCombo(QWidget* parent_) : ComboBox(parent_) {
 void CollectionTypeCombo::reset() {
   clear();
   // I want to sort the collection names, so use a map
-  const CollectionNameMap nameMap = CollectionFactory::nameMap();
-  QMap<QString, int> rNameMap;
-  for(CollectionNameMap::ConstIterator it = nameMap.begin(); it != nameMap.end(); ++it) {
+  const CollectionNameHash nameMap = CollectionFactory::nameHash();
+  QHash<QString, int> rNameMap;
+  for(CollectionNameHash::ConstIterator it = nameMap.constBegin(); it != nameMap.constEnd(); ++it) {
     rNameMap.insert(it.value(), it.key());
   }
   const QList<int> collTypes = rNameMap.values();
