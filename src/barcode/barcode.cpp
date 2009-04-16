@@ -568,7 +568,7 @@ QString Barcode_EAN13::toString() const
     if ((m_numbers[i] >= 0) && (m_numbers[i] <= 9))
       s += QString::number(m_numbers[i]);
     else
-      s += '?';
+      s += QLatin1String("?");
   return s;
 }
 

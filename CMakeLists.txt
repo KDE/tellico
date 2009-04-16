@@ -99,9 +99,9 @@ include_directories(${KDE4_INCLUDES}
 
 # is there a better way to disable qt3support library?
 get_directory_property(include_dirs INCLUDE_DIRECTORIES)
-if(QT_QT3SUPPORT_FOUND)
+if(NOT ENABLE_WEBCAM AND QT_QT3SUPPORT_FOUND)
   string(REPLACE ${QT_QT3SUPPORT_INCLUDE_DIR} "" include_dirs "${include_dirs}")
-endif(QT_QT3SUPPORT_FOUND)
+endif(NOT ENABLE_WEBCAM AND QT_QT3SUPPORT_FOUND)
 set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)

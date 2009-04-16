@@ -132,7 +132,7 @@ void barcodeRecognition::ng_color_yuv2rgb_init()
 
 barcode_v4l::barcode_v4l()
 {
-  m_devname = "/dev/video0";
+  m_devname = QLatin1String("/dev/video0");
   m_grab_width = 640;
   m_grab_height = 480;
   m_drv = 0;
@@ -321,7 +321,7 @@ video_converter *ng_vid_driver::find_video_converter( int out, int in )
 
 ng_vid_driver_v4l::ng_vid_driver_v4l()
 {
-  m_name = "v4l";
+  m_name = QLatin1String("v4l");
   m_drv = 0;
   m_fd = -1;
 
