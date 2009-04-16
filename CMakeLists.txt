@@ -94,8 +94,8 @@ include_directories(${KDE4_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_SOURCE_DIR}/src/core
-                    ${CMAKE_SOURCE_DIR}/src/3rdparty)
+                    ${Tellico_SOURCE_DIR}/src/core
+                    ${Tellico_SOURCE_DIR}/src/3rdparty)
 
 # is there a better way to disable qt3support library?
 get_directory_property(include_dirs INCLUDE_DIRECTORIES)
