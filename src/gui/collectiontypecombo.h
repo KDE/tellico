@@ -26,6 +26,8 @@ public:
   void reset();
   void setCurrentType(int type);
   int currentType() const { return currentData().toInt(); }
+  // this method "hides" the normal addItem from QComboBox
+  void addItem(const QString& value, int collType);
 };
 
   }

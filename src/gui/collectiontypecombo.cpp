@@ -15,6 +15,8 @@
 #include "../collection.h"
 #include "../collectionfactory.h"
 
+#include <KIcon>
+
 using Tellico::GUI::CollectionTypeCombo;
 
 CollectionTypeCombo::CollectionTypeCombo(QWidget* parent_) : ComboBox(parent_) {
@@ -44,4 +46,8 @@ void CollectionTypeCombo::reset() {
 
 void CollectionTypeCombo::setCurrentType(int type_) {
   setCurrentData(type_);
+}
+
+void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
+  QComboBox::addItem(KIcon(CollectionFactory::typeName(collType_)), value_, collType_);
 }
