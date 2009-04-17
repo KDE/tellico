@@ -441,21 +441,27 @@ void CSVImporter::updateHeader(bool force_) {
     return;
   }
 
-  Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
+  Data::CollPtr currColl = m_existingCollection ? m_existingCollection : m_coll;
   for(int col = 0; col < m_table->columnCount(); ++col) {
-    QString s = m_table->item(0, col)->text();
-    Data::FieldPtr f;
-    if(c) {
-      c->fieldByTitle(s);
-      if(!f) {
-        f = c->fieldByName(s);
+    QTableWidgetItem* item = m_table->item(0, col);
+    Data::FieldPtr field;
+    if(item && currColl) {
+      QString itemValue = item->text();
+      field = currColl->fieldByTitle(itemValue);
+      if(!field) {
+        field = currColl->fieldByName(itemValue);
       }
     }
-    if(m_firstRowHeader && !s.isEmpty() && c && f) {
-      m_table->horizontalHeaderItem(col)->setText(f->title());
+    QTableWidgetItem* headerItem = m_table->horizontalHeaderItem(col);
+    if(!headerItem) {
+      headerItem = new QTableWidgetItem();
+      m_table->setHorizontalHeaderItem(col, headerItem);
+    }
+    if(m_firstRowHeader && field) {
+      headerItem->setText(field->title());
       m_hasAssignedFields = true;
     } else {
-      m_table->horizontalHeaderItem(col)->setText(QString::number(col+1));
+      headerItem->setText(QString::number(col+1));
     }
   }
 }
