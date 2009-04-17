@@ -15,9 +15,7 @@
 #include "csvparser.h"
 #include "translators.h" // needed for ImportAction
 #include "../collectionfieldsdialog.h"
-#include "../document.h"
 #include "../collection.h"
-#include "../progressmanager.h"
 #include "../tellico_debug.h"
 #include "../collectionfactory.h"
 #include "../gui/collectiontypecombo.h"
@@ -108,14 +106,9 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     m_parser->skipLine();
   }
 
-  const uint numLines = text().count(QLatin1Char('\n'));
-  const uint stepSize = qMax(s_stepSize, numLines/100);
+  const uint numChars = text().size();
+  const uint stepSize = qMax(s_stepSize, numChars/100);
   const bool showProgress = options() & ImportProgress;
-
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(numLines);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
 
   uint j = 0;
   while(!m_cancelled && m_parser->hasNext()) {
@@ -140,16 +133,16 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       if(empty && success) {
         empty = false;
       }
+      j += value.size();
     }
     if(!empty) {
       m_coll->addEntries(entry);
     }
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      emit signalProgress(this, 100*j/numChars);
       kapp->processEvents();
     }
-    ++j;
   }
 
   {
@@ -488,7 +481,7 @@ void CSVImporter::slotFieldChanged(int idx_) {
 }
 
 void CSVImporter::slotActionChanged(int action_) {
-  Data::CollPtr currColl = Data::Document::self()->collection();
+  Data::CollPtr currColl = currentCollection();
   if(!currColl) {
     m_existingCollection = 0;
     return;
