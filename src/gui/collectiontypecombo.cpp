@@ -24,28 +24,22 @@ CollectionTypeCombo::CollectionTypeCombo(QWidget* parent_) : ComboBox(parent_) {
 void CollectionTypeCombo::reset() {
   clear();
   // I want to sort the collection names, so use a map
-  const CollectionNameHash nameMap = CollectionFactory::nameHash();
-  QHash<QString, int> rNameMap;
-  for(CollectionNameHash::ConstIterator it = nameMap.constBegin(); it != nameMap.constEnd(); ++it) {
-    rNameMap.insert(it.value(), it.key());
-  }
-  const QList<int> collTypes = rNameMap.values();
-  const QStringList collNames = rNameMap.keys();
-  int custom = -1;
-  const int total = collTypes.count();
-  // when i equals the size, then go back and do custom
-  for(int i = 0; i <= total; ++i) {
-    // put custom last
-    if(custom > -1 && count() >= total) {
-      break; // already done it!
-    } else if(i == total) {
-      i = custom;
-    } else if(collTypes[i] == Data::Collection::Base) {
-      custom = i;
-      continue;
+  const CollectionNameHash nameHash = CollectionFactory::nameHash();
+  // the values go into the combobox in alphabetical order by collection type name (which should be unique)
+  // with the custom collection coming last
+  // use a map to sort the values
+  QMap<QString, int> nameMap;
+  for(CollectionNameHash::ConstIterator it = nameHash.constBegin(); it != nameHash.constEnd(); ++it) {
+    // skip the custom type, we add it later
+    if(it.key() != Data::Collection::Base) {
+      nameMap.insert(it.value(), it.key());
     }
-    addItem(collNames[i], collTypes[i]);
   }
+  for(QMap<QString, int>::ConstIterator it = nameMap.constBegin(); it != nameMap.constEnd(); ++it) {
+    addItem(it.key(), it.value());
+  }
+  // now add the custom type last
+  addItem(nameHash.value(Data::Collection::Base), Data::Collection::Base);
 }
 
 void CollectionTypeCombo::setCurrentType(int type_) {
