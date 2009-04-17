@@ -31,7 +31,7 @@ Q_OBJECT
 public:
   /**
    */
-  BibtexmlImporter(const KUrl& url) : Import::XMLImporter(url), m_cancelled(false) {}
+  BibtexmlImporter(const KUrl& url);
 
   /**
    */

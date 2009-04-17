@@ -17,6 +17,7 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
+#include <kstringhandler.h>
 
 using Tellico::Data::BibtexCollection;
 
@@ -230,7 +231,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
-  field = new Field(QLatin1String("abstract"), i18n("Abstract"), Data::Field::Para);
+  field = new Field(QLatin1String("abstract"), i18n("Abstract"), Field::Para);
   field->setProperty(QLatin1String("bibtex"), QLatin1String("abstract"));
   list.append(field);
 
@@ -321,7 +322,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   CollPtr collPtr(coll);
   FieldList fields = coll_->fields();
   foreach(FieldPtr fIt, fields) {
-    FieldPtr field(new Data::Field(*fIt));
+    FieldPtr field(new Field(*fIt));
 
     // if it already has a bibtex property, skip it
     if(!field->property(bibtex).isEmpty()) {
@@ -378,12 +379,12 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   if(field) {
     entryTypeName = field->name();
   } else {
-    kWarning() << "BibtexCollection::convertBookCollection() - there must be an entry type field";
+    myWarning() << "BibtexCollection::convertBookCollection() - there must be an entry type field";
   }
 
   EntryList newEntries;
   foreach(EntryPtr entry, coll_->entries()) {
-    Data::EntryPtr newEntry(new Entry(*entry));
+    EntryPtr newEntry(new Entry(*entry));
     newEntry->setCollection(collPtr);
     if(!entryTypeName.isEmpty()) {
       newEntry->setField(entryTypeName, QLatin1String("book"));
@@ -396,6 +397,60 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   Document::self()->loadAllImagesNow();
 
   return collPtr;
+}
+
+bool BibtexCollection::setFieldValue(Tellico::Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
+  BibtexCollection* c = static_cast<BibtexCollection*>(entry_->collection().data());
+  FieldPtr field = c->fieldByBibtexName(bibtexField_);
+  if(!field) {
+    // it was the case that the default bibliography did not have a bibtex property for keywords
+    // so a "keywords" field would get created in the imported collection
+    // but the existing collection had a field "keyword" so the values would not get imported
+    // here, check to see if the current collection has a field with the same bibtex name and
+    // use it instead of creating a new one
+    BibtexCollection* existingColl = 0;
+    if(Document::self()->collection()->type() == Collection::Bibtex) {
+       existingColl = static_cast<BibtexCollection*>(Document::self()->collection().data());
+    }
+    FieldPtr existingField;
+    if(existingColl) {
+       existingField = existingColl->fieldByBibtexName(bibtexField_);
+    }
+    if(existingField) {
+      field = new Field(*existingField);
+    } else if(value_.length() < 100) {
+      // arbitrarily say if the value has more than 100 chars, then it's a paragraph
+      QString vlower = value_.toLower();
+      // special case, try to detect URLs
+      // In qt 3.1, QString::startsWith() is always case-sensitive
+      if(bibtexField_ == QLatin1String("url")
+         || vlower.startsWith(QLatin1String("http")) // may also be https
+         || vlower.startsWith(QLatin1String("ftp:/"))
+         || vlower.startsWith(QLatin1String("file:/"))
+         || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
+        myDebug() << "creating a URL field for " << bibtexField_ << endl;
+        field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::URL);
+      } else {
+        field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Line);
+      }
+      field->setCategory(i18n("Unknown"));
+    } else {
+      field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Para);
+    }
+    field->setProperty(QLatin1String("bibtex"), bibtexField_);
+    c->addField(field);
+  }
+  // special case keywords, replace commas with semi-colons so they get separated
+  QString value = value_;
+  if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
+    value.replace(QLatin1Char(','), QLatin1Char(';'));
+    // special case refbase bibtex export, with multiple keywords fields
+    QString oValue = entry_->field(field);
+    if(!oValue.isEmpty()) {
+      value = oValue + QLatin1String("; ") + value;
+    }
+  }
+  return entry_->setField(field, value);
 }
 
 #include "bibtexcollection.moc"

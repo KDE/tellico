@@ -160,11 +160,11 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
     str = QString::fromUtf8(bt_entry_type(node));
 //    kDebug() << "entry type: " << str;
     // text is automatically put into lower-case by btparse
-    BibtexHandler::setFieldValue(entry, QLatin1String("entry-type"), str);
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str);
 
     str = QString::fromUtf8(bt_entry_key(node));
 //    kDebug() << "entry key: " << str;
-    BibtexHandler::setFieldValue(entry, QLatin1String("key"), str);
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str);
 
     char* name;
     AST* field = 0;
@@ -199,7 +199,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
         str.replace(QRegExp(QLatin1String("\\sand\\s")), QLatin1String("; "));
       }
-      BibtexHandler::setFieldValue(entry, fieldName, str);
+      Data::BibtexCollection::setFieldValue(entry, fieldName, str);
     }
 
     ptr->addEntries(entry);

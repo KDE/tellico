@@ -60,6 +60,7 @@ public:
 
   static FieldList defaultFields();
   static CollPtr convertBookCollection(CollPtr coll);
+  static bool setFieldValue(EntryPtr entry, const QString& bibtexField, const QString& value);
 
 private:
   QHash<QString, Data::Field*> m_bibtexFieldDict;

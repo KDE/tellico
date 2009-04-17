@@ -16,13 +16,11 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
 #include <kurl.h>
-#include <kstringhandler.h>
 #include <klocale.h>
 
 #include <QDomDocument>
@@ -218,60 +216,6 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
   text.replace(QString(rquote)+octo+lquote, octo);
 
   return text;
-}
-
-bool BibtexHandler::setFieldValue(Tellico::Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
-  Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(entry_->collection().data());
-  Data::FieldPtr field = c->fieldByBibtexName(bibtexField_);
-  if(!field) {
-    // it was the case that the default bibliography did not have a bibtex property for keywords
-    // so a "keywords" field would get created in the imported collection
-    // but the existing collection had a field "keyword" so the values would not get imported
-    // here, check to see if the current collection has a field with the same bibtex name and
-    // use it instead of creating a new one
-    Data::BibtexCollection* existingColl = 0;
-    if(Data::Document::self()->collection()->type() == Data::Collection::Bibtex) {
-       existingColl = static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data());
-    }
-    Data::FieldPtr existingField;
-    if(existingColl) {
-       existingField = existingColl->fieldByBibtexName(bibtexField_);
-    }
-    if(existingField) {
-      field = new Data::Field(*existingField);
-    } else if(value_.length() < 100) {
-      // arbitrarily say if the value has more than 100 chars, then it's a paragraph
-      QString vlower = value_.toLower();
-      // special case, try to detect URLs
-      // In qt 3.1, QString::startsWith() is always case-sensitive
-      if(bibtexField_ == QLatin1String("url")
-         || vlower.startsWith(QLatin1String("http")) // may also be https
-         || vlower.startsWith(QLatin1String("ftp:/"))
-         || vlower.startsWith(QLatin1String("file:/"))
-         || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
-        myDebug() << "BibtexHandler::setFieldValue() - creating a URL field for " << bibtexField_ << endl;
-        field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::URL);
-      } else {
-        field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Line);
-      }
-      field->setCategory(i18n("Unknown"));
-    } else {
-      field = new Data::Field(bibtexField_, KStringHandler::capwords(bibtexField_), Data::Field::Para);
-    }
-    field->setProperty(QLatin1String("bibtex"), bibtexField_);
-    c->addField(field);
-  }
-  // special case keywords, replace commas with semi-colons so they get separated
-  QString value = value_;
-  if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
-    value.replace(QLatin1Char(','), QLatin1Char(';'));
-    // special case refbase bibtex export, with multiple keywords fields
-    QString oValue = entry_->field(field);
-    if(!oValue.isEmpty()) {
-      value = oValue + QLatin1String("; ") + value;
-    }
-  }
-  return entry_->setField(field, value);
 }
 
 QString& BibtexHandler::cleanText(QString& text_) {

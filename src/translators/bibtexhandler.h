@@ -32,7 +32,6 @@ public:
   static QString bibtexKey(Data::EntryPtr entry);
   static QString importText(char* text);
   static QString exportText(const QString& text, const QStringList& macros);
-  static bool setFieldValue(Data::EntryPtr entry, const QString& bibtexField, const QString& value);
   /**
    * Strips the text of all vestiges of LaTeX.
    *

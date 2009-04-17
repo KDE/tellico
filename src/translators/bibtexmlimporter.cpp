@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,17 +13,18 @@
 
 #include "bibtexmlimporter.h"
 #include "tellico_xml.h"
-#include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../field.h"
 #include "../entry.h"
 #include "../tellico_strings.h"
-#include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
 
 using Tellico::Import::BibtexmlImporter;
+
+BibtexmlImporter::BibtexmlImporter(const KUrl& url) : Import::XMLImporter(url), m_cancelled(false) {
+}
 
 bool BibtexmlImporter::canImport(int type) const {
   return type == Data::Collection::Bibtex;
@@ -47,22 +48,17 @@ void BibtexmlImporter::loadDomDocument() {
   m_coll = new Data::BibtexCollection(true);
 
   QDomNodeList entryelems = root.elementsByTagNameNS(ns, QLatin1String("entry"));
-//  kDebug() << "BibtexmlImporter::loadDomDocument - found " << entryelems.count() << " entries";
+//  myDebug() << "found " << entryelems.count() << " entries";
 
   const uint count = entryelems.count();
   const uint stepSize = qMax(s_stepSize, count/100);
   const bool showProgress = options() & ImportProgress;
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(count);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
-
   for(int j = 0; !m_cancelled && j < entryelems.count(); ++j) {
     readEntry(entryelems.item(j));
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      emit signalProgress(this, 100*j/count);
       kapp->processEvents();
     }
   } // end entry loop
@@ -103,7 +99,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
           if(!name.isEmpty() && !value.isEmpty()) {
-            BibtexHandler::setFieldValue(entry, name, value.simplified());
+            Data::BibtexCollection::setFieldValue(entry, name, value.simplified());
           }
         }
         name.clear();
@@ -148,7 +144,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
       }
     }
     if(!name.isEmpty() && !value.isEmpty()) {
-      BibtexHandler::setFieldValue(entry, name, value.simplified());
+      Data::BibtexCollection::setFieldValue(entry, name, value.simplified());
     }
   }
 
