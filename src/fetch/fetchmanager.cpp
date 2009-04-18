@@ -161,14 +161,14 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
   // assume there's only one fetcher match
   int i = 0;
   m_currentFetcherIndex = -1;
-  foreach(Fetcher::Ptr it, m_fetchers) {
-    if(source_ == it->source()) {
+  foreach(Fetcher::Ptr fetcher, m_fetchers) {
+    if(source_ == fetcher->source()) {
       ++m_count; // Fetcher::search() might emit done(), so increment before calling search()
-      connect(it.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
+      connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
               SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)));
-      connect(it.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
+      connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
               SLOT(slotFetcherDone(Tellico::Fetch::Fetcher*)));
-      it->search(key_, value_);
+      fetcher->startSearch(Kernel::self()->collectionType(), key_, value_);
       m_currentFetcherIndex = i;
       break;
     }

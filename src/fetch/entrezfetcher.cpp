@@ -13,7 +13,7 @@
 
 #include "entrezfetcher.h"
 #include "searchresult.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/filehandler.h"
@@ -80,7 +80,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
   m_total = -1;
 
 // only search if current collection is a bibliography
-  if(!canFetch(Kernel::self()->collectionType())) {
+  if(!canFetch(collectionType())) {
     myDebug() << "collection type mismatch, stopping" << endl;
     stop();
     return;
@@ -133,7 +133,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
   m_step = Search;
 //  myLog() << "EntrezFetcher::doSearch() - url: " << u.url() << endl;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -248,7 +248,7 @@ void EntrezFetcher::doSummary() {
   m_step = Summary;
 //  myLog() << "url:" << u.url() << endl;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

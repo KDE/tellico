@@ -14,7 +14,7 @@
 #include "animenfofetcher.h"
 #include "messagehandler.h"
 #include "searchresult.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
@@ -73,7 +73,7 @@ void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
   u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
   u.addQueryItem(QLatin1String("queryin"),    QLatin1String("anime_titles"));
 
-  if(!canFetch(Kernel::self()->collectionType())) {
+  if(!canFetch(collectionType())) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
@@ -93,7 +93,7 @@ void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
 //  myDebug() << "AnimeNfoFetcher::search() - url: " << u.url() << endl;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

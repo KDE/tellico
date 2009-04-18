@@ -22,7 +22,7 @@
 #include "../gui/collectiontypecombo.h"
 #include "../gui/cursorsaver.h"
 #include "../core/filehandler.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
@@ -376,7 +376,7 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   if(fetcher_ && fetcher_->m_collType > -1) {
     m_collCombo->setCurrentType(fetcher_->m_collType);
   } else {
-    m_collCombo->setCurrentType(Kernel::self()->collectionType());
+    m_collCombo->setCurrentType(fetcher_->collectionType());
   }
 
   if(fetcher_) {

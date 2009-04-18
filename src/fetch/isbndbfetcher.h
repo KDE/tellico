@@ -40,7 +40,6 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == ISBN; }
   virtual void stop();
@@ -67,6 +66,7 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   void initXSLTHandler();
   void doSearch();
 

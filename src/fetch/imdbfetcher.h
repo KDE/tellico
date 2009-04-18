@@ -50,7 +50,6 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   // imdb can search title, person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
@@ -86,6 +85,7 @@ private slots:
   void slotRedirection(KIO::Job* job, const KUrl& toURL);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   static void initRegExps();
   static QRegExp* s_tagRx;
   static QRegExp* s_anchorRx;

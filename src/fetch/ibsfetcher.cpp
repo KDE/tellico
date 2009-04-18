@@ -14,7 +14,7 @@
 #include "ibsfetcher.h"
 #include "messagehandler.h"
 #include "searchresult.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
@@ -70,7 +70,7 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 #else
   KUrl u(IBS_BASE_URL);
 
-  if(!canFetch(Kernel::self()->collectionType())) {
+  if(!canFetch(collectionType())) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
@@ -112,7 +112,7 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 //  myDebug() << "IBSFetcher::search() - url: " << u.url() << endl;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   if(key_ == ISBN) {
     connect(m_job, SIGNAL(result(KJob*)), SLOT(slotCompleteISBN(KJob*)));
   } else {

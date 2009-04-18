@@ -17,7 +17,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../imagefactory.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../collection.h"
 #include "../document.h"
 #include "../entry.h"
@@ -163,7 +163,7 @@ void AmazonFetcher::doSearch() {
   u.addQueryItem(QLatin1String("ItemPage"),       QString::number(m_page));
   u.addQueryItem(QLatin1String("Version"),        QLatin1String("2007-10-29"));
 
-  const int type = Kernel::self()->collectionType();
+  const int type = collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:
@@ -318,7 +318,7 @@ void AmazonFetcher::doSearch() {
 //  myDebug() << "AmazonFetcher::search() - url: " << u.url() << endl;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -549,7 +549,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
   }
 
   // do what we can to remove useless keywords
-  const int type = Kernel::self()->collectionType();
+  const int type = collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:

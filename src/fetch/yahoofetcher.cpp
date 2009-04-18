@@ -17,7 +17,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../imagefactory.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -93,7 +93,7 @@ void YahooFetcher::doSearch() {
   u.addQueryItem(QLatin1String("start"),   QString::number(m_start));
   u.addQueryItem(QLatin1String("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
 
-  if(!canFetch(Kernel::self()->collectionType())) {
+  if(!canFetch(collectionType())) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     stop();
     return;
@@ -123,7 +123,7 @@ void YahooFetcher::doSearch() {
 //  myDebug() << "YahooFetcher::search() - url: " << u.url() << endl;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

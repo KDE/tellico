@@ -13,7 +13,7 @@
 
 #include "imdbfetcher.h"
 #include "searchresult.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../field.h"
@@ -123,7 +123,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_countOffset = 0;
 
 // only search if current collection is a video collection
-  if(Kernel::self()->collectionType() != Data::Collection::Video) {
+  if(collectionType() != Data::Collection::Video) {
     myDebug() << "collection type mismatch, stopping";
     stop();
     return;
@@ -165,7 +165,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
   connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
@@ -563,7 +563,7 @@ void IMDBFetcher::parseMultipleNameResults() {
     return;
   }
 
-  KDialog dlg(Kernel::self()->widget());
+  KDialog dlg(GUI::Proxy::widget());
   dlg.setCaption(i18n("Select IMDB Result"));
   dlg.setModal(false);
   dlg.setButtons(KDialog::Ok|KDialog::Cancel);
@@ -611,7 +611,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   m_redirected = true;
   m_text.clear();
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
   connect(m_job, SIGNAL(redirection(KIO::Job *, const KUrl&)),
@@ -1108,7 +1108,7 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     m_url = link;
     m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result
     m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-    m_job->ui()->setWindow(Kernel::self()->widget());
+    m_job->ui()->setWindow(GUI::Proxy::widget());
     connect(m_job, SIGNAL(result(KJob*)),
             SLOT(slotComplete(KJob*)));
     connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),

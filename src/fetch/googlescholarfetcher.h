@@ -48,7 +48,6 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   virtual void continueSearch();
   // amazon can search title or person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
@@ -79,6 +78,7 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   void doSearch();
 
   int m_limit;

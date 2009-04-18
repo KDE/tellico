@@ -20,7 +20,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/dcimporter.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
@@ -122,7 +122,7 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   u.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
   u.addQueryItem(QLatin1String("recordSchema"), m_format);
 
-  const int type = Kernel::self()->collectionType();
+  const int type = collectionType();
   QString str = QLatin1Char('"') + value_ + QLatin1Char('"');
   switch(key_) {
     case Title:
@@ -184,7 +184,7 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 //  myDebug() << u.prettyUrl() << endl;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(Kernel::self()->widget());
+  m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

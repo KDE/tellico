@@ -61,7 +61,6 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   // only search title, person, isbn, or keyword. No Raw for now.
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN; }
   virtual void stop();
@@ -84,6 +83,7 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   bool initMARCXMLHandler();
   bool initMODSHandler();
 

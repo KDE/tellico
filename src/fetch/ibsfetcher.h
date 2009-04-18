@@ -42,7 +42,6 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   // can search title, person, isbn, or keyword. No UPC or Raw for now.
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
   virtual void stop();
@@ -70,6 +69,7 @@ private slots:
   void slotCompleteISBN(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   Data::EntryPtr parseEntry(const QString& str);
 
   int m_total;

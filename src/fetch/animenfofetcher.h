@@ -42,7 +42,6 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
   // only keyword search
   virtual bool canSearch(FetchKey k) const { return k == Keyword; }
   virtual void stop();
@@ -69,6 +68,7 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   Data::EntryPtr parseEntry(const QString& str);
 
   QByteArray m_data;

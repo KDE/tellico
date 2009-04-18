@@ -20,9 +20,22 @@
 
 using Tellico::Fetch::Fetcher;
 
+Fetcher::Fetcher(QObject* parent) : QObject(parent)
+    , QSharedData()
+    , m_collectionType(0)
+    , m_updateOverwrite(false)
+    , m_hasMoreResults(false)
+    , m_messager(0) {
+}
+
 Fetcher::~Fetcher() {
   KConfigGroup config(KGlobal::config(), m_configGroup);
   saveConfigHook(config);
+}
+
+void Fetcher::startSearch(int collType_, FetchKey key_, const QString& value_) {
+  m_collectionType = collType_;
+  search(key_, value_);
 }
 
 void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {

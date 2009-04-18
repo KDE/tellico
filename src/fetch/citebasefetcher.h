@@ -41,7 +41,6 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void search(FetchKey key, const QString& value);
 
   virtual bool canSearch(FetchKey k) const { return k == ArxivID; }
   virtual void stop();
@@ -69,6 +68,7 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   KUrl searchURL(FetchKey key, const QString& value) const;
 
   QMap<int, Data::EntryPtr> m_entries;

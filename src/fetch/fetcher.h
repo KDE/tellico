@@ -42,9 +42,7 @@ public:
 
   /**
    */
-  Fetcher(QObject* parent) : QObject(parent), QSharedData(),
-                             m_updateOverwrite(false), m_hasMoreResults(false),
-                             m_messager(0) {}
+  Fetcher(QObject* parent);
   /**
    */
   virtual ~Fetcher();
@@ -68,13 +66,17 @@ public:
    */
   virtual QString source() const = 0;
   /**
+   * Returns the collection type of the most recent search
+   */
+  int collectionType() const { return m_collectionType; }
+  /**
    * Returns whether the fetcher will overwite existing info when updating
    */
   bool updateOverwrite() const { return m_updateOverwrite; }
   /**
-   * Starts a search, using a key and value.
+   * Starts a search, using a key and value. Calls search()
    */
-  virtual void search(FetchKey key, const QString& value) = 0;
+  void startSearch(int collType, FetchKey key, const QString& value);
   virtual void continueSearch() {}
   virtual void updateEntry(Data::EntryPtr);
   // mopst fetchers won't support this. it's particular useful for text fetchers
@@ -120,10 +122,15 @@ signals:
 
 protected:
   QString m_name;
+  int m_collectionType;
   bool m_updateOverwrite : 1;
   bool m_hasMoreResults : 1;
 
 private:
+  /**
+   * Starts a search, using a key and value.
+   */
+  virtual void search(FetchKey key, const QString& value) = 0;
   virtual void readConfigHook(const KConfigGroup&) = 0;
   virtual void saveConfigHook(KConfigGroup&) {}
 

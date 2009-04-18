@@ -49,7 +49,6 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const { return k == Title; }
 
-  virtual void search(FetchKey key, const QString& value);
   virtual void updateEntry(Data::EntryPtr entry);
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
@@ -69,6 +68,7 @@ private slots:
   void slotProcessExited();
 
 private:
+  virtual void search(FetchKey key, const QString& value);
   // map Author, Name, Lang, etc...
   typedef QMap<QString, QVariant> PluginInfo;
   typedef QList<PluginInfo> PluginList;
