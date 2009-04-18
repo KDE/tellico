@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2008 by Robby Stephenson
+    copyright            : (C) 2005-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -24,7 +24,7 @@ void ManagerMessage::send(const QString& message_, Type type_) {
   Fetch::Manager::self()->updateStatus(message_);
   // plus errors get a message box
   if(type_ == Error) {
-    GUI::Proxy::sorry(message_);
+    KMessageBox::sorry(GUI::Proxy::widget(), message_);
   } else if(type_ == Warning) {
     KMessageBox::information(GUI::Proxy::widget(), message_);
   }
