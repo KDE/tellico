@@ -18,8 +18,8 @@
 #include "../tellico_utils.h"
 #include "../utils/stringset.h"
 #include "../gui/guiproxy.h"
-#include "../image.h"
-#include "../imagefactory.h"
+#include "../images/image.h"
+#include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>

@@ -14,7 +14,7 @@
 #include "previewdialog.h"
 #include "../entryview.h"
 #include "../entry.h"
-#include "../imagefactory.h" // for StyleOptions
+#include "../images/imagefactory.h" // for StyleOptions
 
 #include <klocale.h>
 #include <ktempdir.h>

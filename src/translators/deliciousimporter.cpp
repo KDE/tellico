@@ -13,7 +13,7 @@
 
 #include "deliciousimporter.h"
 #include "../collection.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
 #include "rtf2html/rtf2html.h"

@@ -12,9 +12,9 @@
  ***************************************************************************/
 
 #include "imagewidget.h"
-#include "../imagefactory.h"
-#include "../image.h"
-#include "../imageinfo.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
+#include "../images/imageinfo.h"
 #include "../core/filehandler.h"
 #include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"

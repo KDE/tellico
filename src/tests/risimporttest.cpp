@@ -17,14 +17,15 @@
 #include "risimporttest.h"
 #include "risimporttest.moc"
 
-#include "../translators/risimporter.h"
+#include "../translators/amcimporter.h"
 #include "../collection.h"
 
 QTEST_KDEMAIN_CORE( RisImportTest )
 
 void RisImportTest::testEmpty() {
+  KUrl emptyUrl;
   KUrl::List emptyList;
-  Tellico::Import::RISImporter importer(emptyList);
+  Tellico::Import::AMCImporter importer(emptyUrl);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());

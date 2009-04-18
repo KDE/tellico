@@ -19,7 +19,7 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../core/filehandler.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>

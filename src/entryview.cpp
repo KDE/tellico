@@ -18,7 +18,7 @@
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
 #include "core/tellico_config.h"

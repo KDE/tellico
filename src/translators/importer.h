@@ -44,16 +44,16 @@ class Importer : public QObject {
 Q_OBJECT
 
 public:
-  Importer() : QObject(), m_options(ImportProgress) {}
+  Importer();
   /**
    * The constructor should immediately load the contents of the file to be imported.
    * Any warnings or errors should be added the the status message queue.
    *
    * @param url The URL of the file to import
    */
-  Importer(const KUrl& url) : QObject(), m_options(ImportProgress), m_urls(url) {}
-  Importer(const KUrl::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {}
-  Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {}
+  Importer(const KUrl& url);
+  Importer(const KUrl::List& urls);
+  Importer(const QString& text);
   /**
    */
   virtual ~Importer() {}
@@ -98,8 +98,10 @@ public:
    * Returns a string useful for the ProgressManager
    */
   QString progressLabel() const;
-
-  Data::CollPtr currentCollection() const;
+  /**
+   * Sets a pointer to the existing collection in case importers need to use existing field information
+   */
+  void setCurrentCollection(Data::CollPtr coll) { m_currentCollection = coll; }
 
 public slots:
   /**
@@ -120,6 +122,7 @@ protected:
   KUrl url() const { return m_urls.isEmpty() ? KUrl() : m_urls[0]; }
   KUrl::List urls() const { return m_urls; }
   QString text() const { return m_text; }
+  Data::CollPtr currentCollection() const;
   /**
    * Adds a message to the status queue.
    *

@@ -16,7 +16,7 @@
 #include "searchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collection.h"

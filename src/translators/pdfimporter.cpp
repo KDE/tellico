@@ -17,7 +17,7 @@
 #include "xmphandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../fetch/fetchmanager.h"
 #include "../fetch/crossreffetcher.h"

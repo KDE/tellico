@@ -1,6 +1,7 @@
 ADD_SUBDIRECTORY( core )
 ADD_SUBDIRECTORY( gui )
 ADD_SUBDIRECTORY( collections )
+ADD_SUBDIRECTORY( images )
 ADD_SUBDIRECTORY( translators )
 ADD_SUBDIRECTORY( fetch )
 ADD_SUBDIRECTORY( commands )
@@ -45,10 +46,6 @@ SET(tellico_SRCS
    filterview.cpp
    groupiterator.cpp
    groupview.cpp
-   image.cpp
-   imagedirectory.cpp
-   imagefactory.cpp
-   imageinfo.cpp
    importdialog.cpp
    loandialog.cpp
    loanview.cpp
@@ -70,6 +67,7 @@ TARGET_LINK_LIBRARIES(tellico
     cite
     fetch
     collections
+    images
     translators
     gui
     commands

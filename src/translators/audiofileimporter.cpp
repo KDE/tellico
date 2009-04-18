@@ -17,7 +17,7 @@
 #include "../collections/musiccollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"

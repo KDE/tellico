@@ -14,7 +14,7 @@
 #ifndef TELLICO_IMAGEDIRECTORY_H
 #define TELLICO_IMAGEDIRECTORY_H
 
-#include "utils/stringset.h"
+#include "../utils/stringset.h"
 
 #include <QString>
 

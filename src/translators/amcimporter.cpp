@@ -18,7 +18,7 @@
 
 #include "amcimporter.h"
 #include "../collections/videocollection.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>

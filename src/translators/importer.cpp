@@ -18,6 +18,18 @@
 
 using Tellico::Import::Importer;
 
+Importer::Importer() : QObject(), m_options(ImportProgress) {
+}
+
+Importer::Importer(const KUrl& url) : QObject(), m_options(ImportProgress), m_urls(url) {
+}
+
+Importer::Importer(const KUrl::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {
+}
+
+Importer::Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {
+}
+
 Tellico::Data::CollPtr Importer::currentCollection() const {
   if(!m_currentCollection) {
     myWarning() << "set current collection pointer!" << endl;

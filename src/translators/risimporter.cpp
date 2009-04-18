@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2004-2008 by Robby Stephenson
+    copyright            : (C) 2004-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -13,7 +13,6 @@
 
 #include "risimporter.h"
 #include "../collections/bibtexcollection.h"
-#include "../document.h"
 #include "../entry.h"
 #include "../field.h"
 #include "../core/filehandler.h"
@@ -128,25 +127,23 @@ Tellico::Data::CollPtr RISImporter::collection() {
   // need to know if any extended properties in current collection point to RIS
   // if so, add to collection
   Data::CollPtr currColl = currentCollection();
-  if(!currColl) {
-    currColl = Data::Document::self()->collection();
-  }
-  foreach(Data::FieldPtr field, currColl->fields()) {
-    // continue if property is empty
-    QString ris = field->property(QLatin1String("ris"));
-    if(ris.isEmpty()) {
-      continue;
+  if(currColl) {
+    foreach(Data::FieldPtr field, currColl->fields()) {
+      // continue if property is empty
+      QString ris = field->property(QLatin1String("ris"));
+      if(ris.isEmpty()) {
+        continue;
+      }
+      // if current collection has one with the same name, set the property
+      Data::FieldPtr f = m_coll->fieldByName(field->name());
+      if(!f) {
+        f = new Data::Field(*field);
+        m_coll->addField(f);
+      }
+      f->setProperty(QLatin1String("ris"), ris);
+      risFields.insert(ris, f);
     }
-    // if current collection has one with the same name, set the property
-    Data::FieldPtr f = m_coll->fieldByName(field->name());
-    if(!f) {
-      f = new Data::Field(*field);
-      m_coll->addField(f);
-    }
-    f->setProperty(QLatin1String("ris"), ris);
-    risFields.insert(ris, f);
   }
-
   emit signalTotalSteps(this, urls().count() * 100);
 
   int count = 0;

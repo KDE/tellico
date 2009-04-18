@@ -15,7 +15,7 @@
 #include "entryview.h"
 #include "entryiconview.h"
 #include "tellico_debug.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "entry.h"
 
 #include <khtmlview.h>

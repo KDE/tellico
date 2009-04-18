@@ -14,7 +14,7 @@
 #include "referencerimporter.h"
 #include "../collection.h"
 #include "../core/netaccess.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 
 #include <kstandarddirs.h>
 #include <kdebug.h>

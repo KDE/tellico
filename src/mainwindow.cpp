@@ -32,7 +32,7 @@
 #include "translators/htmlexporter.h" // for printing
 #include "entryview.h"
 #include "entryiconview.h"
-#include "imagefactory.h" // needed so tmp files can get cleaned
+#include "images/imagefactory.h" // needed so tmp files can get cleaned
 #include "collections/bibtexcollection.h" // needed for bibtex string macro dialog
 #include "translators/bibtexhandler.h" // needed for bibtex options
 #include "fetchdialog.h"

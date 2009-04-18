@@ -13,7 +13,7 @@
 
 #include "detailedlistview.h"
 #include "collection.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "controller.h"
 #include "field.h"
 #include "entry.h"

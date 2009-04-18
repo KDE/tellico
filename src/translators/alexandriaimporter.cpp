@@ -15,7 +15,7 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 #include "../utils/isbnvalidator.h"

@@ -14,10 +14,10 @@
 #include "entrytitlemodel.h"
 #include "../collection.h"
 #include "../collectionfactory.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../image.h"
+#include "../images/image.h"
 #include "../tellico_debug.h"
 
 #include <kicon.h>

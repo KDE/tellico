@@ -13,9 +13,9 @@
 
 #include "tellicoxmlexporter.h"
 #include "../collections/bibtexcollection.h"
-#include "../imagefactory.h"
-#include "../image.h"
-#include "../imageinfo.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
+#include "../images/imageinfo.h"
 #include "../controller.h" // needed for getting groupView pointer
 #include "../core/filehandler.h"
 #include "../groupiterator.h"

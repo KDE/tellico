@@ -13,7 +13,7 @@
 
 #include "reportdialog.h"
 #include "translators/htmlexporter.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "tellico_kernel.h"
 #include "collection.h"
 #include "document.h"

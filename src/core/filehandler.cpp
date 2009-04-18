@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "../image.h"
+#include "../images/image.h"
 #include "../tellico_strings.h"
 #include "../tellico_debug.h"
 #include "netaccess.h"

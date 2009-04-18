@@ -14,7 +14,7 @@
 #include "gcfilmsimporter.h"
 #include "../collections/videocollection.h"
 #include "../tellico_utils.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../borrower.h"
 #include "../progressmanager.h"
 #include "xslthandler.h"

@@ -16,8 +16,8 @@
 #include "../field.h"
 #include "../collection.h"
 #include "../document.h"
-#include "../imagefactory.h"
-#include "../image.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
 
 #include <QPixmap>
 #include <QDateTime>

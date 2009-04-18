@@ -18,7 +18,7 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../core/filehandler.h"
-#include "../imagefactory.h"
+#include "../images/imagefactory.h"
 #include "../tellico_utils.h"
 #include "../gui/listwidgetitem.h"
 #include "../tellico_debug.h"

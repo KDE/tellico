@@ -253,11 +253,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       myDebug() << "ImportDialog::importer() - GRS1 not implemented" << endl;
       break;
   }
-#ifndef NDEBUG
   if(!importer) {
-    kWarning() << "ImportDialog::importer() - importer not created!";
+    myWarning() << "ImportDialog::importer() - importer not created!";
+    return 0;
   }
-#endif
+  importer->setCurrentCollection(Data::Document::self()->collection());
   return importer;
 #undef CHECK_SIZE
 }

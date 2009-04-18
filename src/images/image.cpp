@@ -12,8 +12,8 @@
  ***************************************************************************/
 
 #include "image.h"
-#include "tellico_debug.h"
-#include "tellico_utils.h"
+#include "../tellico_debug.h"
+#include "../tellico_utils.h"
 
 #include <kcodecs.h>
 

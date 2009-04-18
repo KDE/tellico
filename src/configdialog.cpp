@@ -23,7 +23,7 @@
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
 #include "core/tellico_config.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "gui/combobox.h"
 #include "gui/previewdialog.h"
 #include "newstuff/manager.h"

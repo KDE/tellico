@@ -14,7 +14,7 @@
 #include "entryiconview.h"
 #include "collection.h"
 #include "collectionfactory.h"
-#include "imagefactory.h"
+#include "images/imagefactory.h"
 #include "controller.h"
 #include "entry.h"
 #include "field.h"

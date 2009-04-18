@@ -16,10 +16,10 @@
 #include "imageinfo.h"
 #include "imagedirectory.h"
 #include "filehandler.h"
-#include "tellico_utils.h"
-#include "tellico_kernel.h"
-#include "core/tellico_config.h"
-#include "tellico_debug.h"
+#include "../core/tellico_config.h"
+#include "../tellico_utils.h"
+#include "../tellico_kernel.h"
+#include "../tellico_debug.h"
 
 #include <kapplication.h>
 #include <kcolorutils.h>
