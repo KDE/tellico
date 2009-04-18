@@ -13,7 +13,7 @@
 
 #include "drophandler.h"
 #include "../mainwindow.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/risimporter.h"
@@ -74,7 +74,7 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
       ptr = KMimeType::findByUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);
-      KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
+      KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget());
       ptr = KMimeType::mimeType(job->mimetype());
     }
     if(ptr->is(QLatin1String("application/x-tellico"))) {
@@ -100,7 +100,7 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
       hasUnknown = true;
     }
   }
-  MainWindow* mainWindow = ::qobject_cast<MainWindow*>(Kernel::self()->widget());
+  MainWindow* mainWindow = ::qobject_cast<MainWindow*>(GUI::Proxy::widget());
   if(!mainWindow) {
     myDebug() << "DropHandler::handleURL() - no main window!" << endl;
     return !hasUnknown;

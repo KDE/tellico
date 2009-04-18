@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2008 by Robby Stephenson
+    copyright            : (C) 2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,25 +11,30 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "messagehandler.h"
-#include "fetchmanager.h"
-#include "../gui/guiproxy.h"
+#ifndef TELLICO_GUI_PROXY_H
+#define TELLICO_GUI_PROXY_H
 
-#include <kmessagebox.h>
+class QWidget;
+class QString;
 
-using Tellico::Fetch::ManagerMessage;
+namespace Tellico {
+  class MainWindow;
+  namespace GUI {
 
-// all messages go to manager
-void ManagerMessage::send(const QString& message_, Type type_) {
-  Fetch::Manager::self()->updateStatus(message_);
-  // plus errors get a message box
-  if(type_ == Error) {
-    GUI::Proxy::sorry(message_);
-  } else if(type_ == Warning) {
-    KMessageBox::information(GUI::Proxy::widget(), message_);
-  }
-}
+/**
+ * @author Robby Stephenson
+ */
+class Proxy {
+public:
+  static QWidget* widget();
+  static void sorry(const QString& text, QWidget* widget=0);
 
-void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
-}
+private:
+  friend class Tellico::MainWindow;
+  static void setMainWidget(QWidget* widget);
+  static QWidget* s_widget;
+};
+
+  } // end namespace
+} // end namespace
+#endif

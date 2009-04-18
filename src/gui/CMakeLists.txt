@@ -10,6 +10,7 @@ SET(gui_STAT_SRCS
    cursorsaver.cpp
    datefieldwidget.cpp
    datewidget.cpp
+   guiproxy.cpp
    imagefieldwidget.cpp
    imagewidget.cpp
    fieldwidget.cpp

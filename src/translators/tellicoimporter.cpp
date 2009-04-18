@@ -22,7 +22,7 @@
 #include "../image.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_strings.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
@@ -302,7 +302,7 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
   KZip zip(url_.path());
   if(!zip.open(QIODevice::ReadOnly)) {
     if(u != url_) {
-      Kernel::self()->sorry(i18n(errorImageLoad, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorImageLoad, url_.fileName()));
     }
     u = url_;
     return false;
@@ -311,7 +311,7 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
   const KArchiveDirectory* dir = zip.directory();
   if(!dir) {
     if(u != url_) {
-      Kernel::self()->sorry(i18n(errorImageLoad, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorImageLoad, url_.fileName()));
     }
     u = url_;
     return false;

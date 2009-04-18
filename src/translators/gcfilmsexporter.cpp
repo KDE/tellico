@@ -17,7 +17,7 @@
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../utils/stringset.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../image.h"
 #include "../imagefactory.h"
 #include "../tellico_debug.h"
@@ -89,7 +89,7 @@ bool GCfilmsExporter::exec() {
     imageDir.cd(QLatin1String(".."));
     imageDir.addPath(url().fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_images/"));
     if(!KIO::NetAccess::exists(imageDir, KIO::NetAccess::DestinationSide, 0)) {
-      bool success = KIO::NetAccess::mkdir(imageDir, Kernel::self()->widget());
+      bool success = KIO::NetAccess::mkdir(imageDir, GUI::Proxy::widget());
       if(!success) {
         imageDir = KUrl(); // means don't write images
       }

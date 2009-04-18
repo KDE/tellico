@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2006-2008 by Robby Stephenson
+    copyright            : (C) 2006-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,7 +12,7 @@
  ***************************************************************************/
 
 #include "netaccess.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <kio/job.h>
@@ -64,7 +64,7 @@ QPixmap NetAccess::filePreview(const KUrl& url, int size) {
   connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
           &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
-  KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget());
+  KIO::NetAccess::synchronousRun(previewJob, GUI::Proxy::widget());
   return netaccess.m_preview;
 }
 
@@ -77,7 +77,7 @@ QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
           &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
-  KIO::NetAccess::synchronousRun(previewJob, Kernel::self()->widget());
+  KIO::NetAccess::synchronousRun(previewJob, GUI::Proxy::widget());
   return netaccess.m_preview;
 }
 

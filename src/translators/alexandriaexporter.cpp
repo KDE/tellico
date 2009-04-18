@@ -14,13 +14,13 @@
 #include "alexandriaexporter.h"
 #include "../document.h"
 #include "../collection.h"
-#include "../tellico_kernel.h"
 #include "../imagefactory.h"
 #include "../image.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
 #include "../gui/cursorsaver.h"
+#include "../gui/guiproxy.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -65,7 +65,7 @@ bool AlexandriaExporter::exec() {
 
   // the collection title is the name of the directory to create
   if(libraryDir.cd(coll->title())) {
-    int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(),
+    int ret = KMessageBox::warningContinueCancel(GUI::Proxy::widget(),
                                                  i18n("<qt>An Alexandria library called <i>%1</i> already exists. "
                                                       "Any existing books in that library could be overwritten.</qt>",
                                                       coll->title()));

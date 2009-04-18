@@ -17,7 +17,7 @@
 #include "../entry.h"
 #include "../tellico_utils.h"
 #include "../statusbar.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <klibloader.h>
@@ -163,7 +163,7 @@ bool OpenOffice::cite(Tellico::Data::EntryList entries_) {
 }
 
 bool OpenOffice::connectionDialog() {
-  KDialog dlg(Kernel::self()->widget());
+  KDialog dlg(GUI::Proxy::widget());
   dlg.setCaption(i18n("OpenOffice.org Connection"));
   dlg.setModal(true);
   dlg.setButtons(KDialog::Ok | KDialog::Cancel | KDialog::Help);

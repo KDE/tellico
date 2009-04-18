@@ -18,7 +18,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
 #include "../imagefactory.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../fetch/fetchmanager.h"
 #include "../fetch/crossreffetcher.h"
 #include "../progressmanager.h"
@@ -232,7 +232,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
     if(vec.isEmpty()) {
       GUI::CursorSaver cs(Qt::ArrowCursor);
-      KMessageBox::information(Kernel::self()->widget(),
+      KMessageBox::information(GUI::Proxy::widget(),
                               i18n("Tellico is able to download information about entries with a DOI from "
                                    "CrossRef.org. However, you must create an CrossRef account and add a new "
                                    "data source with your account information."),

@@ -24,7 +24,7 @@
 #include "../field.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../progressmanager.h"
 #include "../gui/cursorsaver.h"
 
@@ -194,7 +194,7 @@ void FreeDBImporter::readCDROM() {
     QString res = KInputDialog::getItem(i18n("Select CDDB Entry"),
                                         i18n("Select a CDDB entry:"),
                                         list, 0, false, &ok,
-                                        Kernel::self()->widget());
+                                        GUI::Proxy::widget());
     if(ok) {
       int i = 0;
       foreach(const QString& listValue, list) {

@@ -12,12 +12,12 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "../tellico_kernel.h"
 #include "../image.h"
 #include "../tellico_strings.h"
 #include "../tellico_debug.h"
 #include "netaccess.h"
 #include "../gui/cursorsaver.h"
+#include "../gui/guiproxy.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -25,10 +25,10 @@
 #include <kio/netaccess.h>
 #include <ktemporaryfile.h>
 #include <ksavefile.h>
-#include <kapplication.h>
 #include <kfileitem.h>
 #include <kio/chmodjob.h>
 #include <kfilterdev.h>
+#include <kdeversion.h>
 
 #include <QDomDocument>
 #include <QFile>
@@ -42,14 +42,14 @@ FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_, bool allowCompresse
     return;
   }
 
-  if(!Tellico::NetAccess::download(url_, m_filename, Kernel::self()->widget(), quiet_)) {
+  if(!Tellico::NetAccess::download(url_, m_filename, GUI::Proxy::widget(), quiet_)) {
     myDebug() << "can't download" << url_;
     QString s = KIO::NetAccess::lastErrorString();
     if(!s.isEmpty()) {
       myDebug() << s;
     }
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorLoad, url_.fileName()));
     }
     return;
   }
@@ -82,7 +82,7 @@ bool FileHandler::FileRef::open(bool quiet_) {
     if(!quiet_) {
       KUrl u;
       u.setPath(fileName());
-      Kernel::self()->sorry(i18n(errorLoad, u.fileName()));
+      GUI::Proxy::sorry(i18n(errorLoad, u.fileName()));
     }
     delete m_device;
     m_device = 0;
@@ -131,7 +131,7 @@ QDomDocument FileHandler::readXMLFile(const KUrl& url_, bool processNamespace_, 
       details += i18n("The error message from Qt is:");
       details += QLatin1String("\n\t") + errorMsg;
       GUI::CursorSaver cs(Qt::ArrowCursor);
-      KMessageBox::detailedSorry(Kernel::self()->widget(), i18n(errorLoad, url_.fileName()), details);
+      KMessageBox::detailedSorry(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
     }
     return QDomDocument();
   }
@@ -162,9 +162,9 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, 
   KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
   job->addMetaData(QLatin1String("referrer"), referrer_.url());
 
-  if(!KIO::NetAccess::synchronousRun(job, Kernel::self()->widget())) {
+  if(!KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget())) {
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorLoad, url_.fileName()));
     }
     return 0;
   }
@@ -180,28 +180,27 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_) 
   Data::Image* img = new Data::Image(f.fileName());
   if(img->isNull() && !quiet_) {
     QString str = i18n("Tellico is unable to load the image - %1.", url_.fileName());
-    Kernel::self()->sorry(str);
+    GUI::Proxy::sorry(str);
   }
   return img;
 }
 
 bool FileHandler::queryExists(const KUrl& url_) {
-  if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+  if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
     return true;
   }
 
-  // we always overwrite the current URL without asking
-  if(url_ != Kernel::self()->URL()) {
-    GUI::CursorSaver cs(Qt::ArrowCursor);
-    QString str = i18n("A file named \"%1\" already exists. "
-                       "Are you sure you want to overwrite it?", url_.fileName());
-    int want_continue = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str,
-                                                           i18n("Overwrite File?"),
-                                                           KGuiItem(i18n("Overwrite")));
+  // no need to check if we're actually overwriting the current url
+  // the TellicoImporter forces the write
+  GUI::CursorSaver cs(Qt::ArrowCursor);
+  QString str = i18n("A file named \"%1\" already exists. "
+                     "Are you sure you want to overwrite it?", url_.fileName());
+  int want_continue = KMessageBox::warningContinueCancel(GUI::Proxy::widget(), str,
+                                                         i18n("Overwrite File?"),
+                                                         KGuiItem(i18n("Overwrite")));
 
-    if(want_continue == KMessageBox::Cancel) {
-      return false;
-    }
+  if(want_continue == KMessageBox::Cancel) {
+    return false;
   }
 
   KUrl backup(url_);
@@ -214,7 +213,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
       KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       perm = item.permissions();
       grp = item.group();
@@ -237,12 +236,12 @@ bool FileHandler::queryExists(const KUrl& url_) {
       KIO::chmod(list, perm, 0, QString(), grp, true, KIO::HideProgressInfo);
     }
   } else {
-    KIO::NetAccess::del(backup, Kernel::self()->widget()); // might fail if backup doesn't exist, that's ok
+    KIO::NetAccess::del(backup, GUI::Proxy::widget()); // might fail if backup doesn't exist, that's ok
     KIO::FileCopyJob* job = KIO::file_copy(url_, backup, -1, KIO::Overwrite);
-    success = KIO::NetAccess::synchronousRun(job, Kernel::self()->widget());
+    success = KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget());
   }
   if(!success) {
-    Kernel::self()->sorry(i18n(errorWrite, url_.fileName() + QLatin1Char('~')));
+    GUI::Proxy::sorry(i18n(errorWrite, url_.fileName() + QLatin1Char('~')));
   }
   return success;
 }
@@ -261,7 +260,7 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
       KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       list.append(item);
       perm = item.permissions();
@@ -272,7 +271,7 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
     f.open();
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
+        GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
       }
       return false;
     }
@@ -292,18 +291,18 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
   if(f.error() != QFile::NoError) {
     tempfile.remove();
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
     }
     return false;
   }
 
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
-    bool uploaded = KIO::NetAccess::upload(tempfile.fileName(), url_, Kernel::self()->widget());
+    bool uploaded = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
     if(!uploaded) {
       tempfile.remove();
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorUpload, url_.fileName()));
+        GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
       }
       success = false;
     }
@@ -339,7 +338,7 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
     KFileItemList list;
     int perm = -1;
     QString grp;
-    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, Kernel::self()->widget())) {
+    if(KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
       KFileItem item(KFileItem::Unknown, KFileItem::Unknown, url_, true);
       list.append(item);
       perm = item.permissions();
@@ -350,7 +349,7 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
     f.open();
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
-        Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
+        GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
       }
       return false;
     }
@@ -369,16 +368,16 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
   f.open();
   if(f.error() != QFile::NoError) {
     if(!quiet_) {
-      Kernel::self()->sorry(i18n(errorWrite, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
     }
     return false;
   }
 
   bool success = FileHandler::writeDataFile(f, data_);
   if(success) {
-    success = KIO::NetAccess::upload(tempfile.fileName(), url_, Kernel::self()->widget());
+    success = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
     if(!success && !quiet_) {
-      Kernel::self()->sorry(i18n(errorUpload, url_.fileName()));
+      GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
     }
   }
   tempfile.remove();

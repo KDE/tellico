@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2005-2008 by Robby Stephenson
+    copyright            : (C) 2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -11,25 +11,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "messagehandler.h"
-#include "fetchmanager.h"
-#include "../gui/guiproxy.h"
+#include "guiproxy.h"
+#include "cursorsaver.h"
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 
-using Tellico::Fetch::ManagerMessage;
+#include <QWidget>
+#include <QMetaObject>
 
-// all messages go to manager
-void ManagerMessage::send(const QString& message_, Type type_) {
-  Fetch::Manager::self()->updateStatus(message_);
-  // plus errors get a message box
-  if(type_ == Error) {
-    GUI::Proxy::sorry(message_);
-  } else if(type_ == Warning) {
-    KMessageBox::information(GUI::Proxy::widget(), message_);
+using Tellico::GUI::Proxy;
+
+QWidget* Proxy::s_widget = 0;
+
+void Proxy::setMainWidget(QWidget* widget_) {
+  s_widget = widget_;
+}
+
+QWidget* Proxy::widget() {
+  return s_widget;
+}
+
+void Proxy::sorry(const QString& text_, QWidget* widget_/* =0 */) {
+  if(text_.isEmpty()) {
+    return;
   }
+  GUI::CursorSaver cs(Qt::ArrowCursor);
+  KMessageBox::sorry(widget_ ? widget_ : s_widget, text_);
 }
 
-void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
-}

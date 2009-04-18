@@ -51,6 +51,7 @@
 #include "models/models.h"
 #include "newstuff/manager.h"
 #include "gui/cursorsaver.h"
+#include "gui/guiproxy.cpp"
 
 #include <kapplication.h>
 #include <kcombobox.h>
@@ -135,6 +136,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   Controller::init(this); // the only time this is ever called!
   // has to be after controller init
   Kernel::init(this); // the only time this is ever called!
+  GUI::Proxy::setMainWidget(this);
 
   setWindowIcon(DesktopIcon(QLatin1String("tellico")));
 

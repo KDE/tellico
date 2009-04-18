@@ -17,7 +17,7 @@
 #include "../field.h"
 #include "../imagefactory.h"
 #include "../tellico_utils.h"
-#include "../tellico_kernel.h"
+#include "../gui/guiproxy.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"
@@ -68,7 +68,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   connect(m_job, SIGNAL(entries(KIO::Job*, const KIO::UDSEntryList&)),
           SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
 
-  if(!KIO::NetAccess::synchronousRun(m_job, Kernel::self()->widget()) || m_cancelled) {
+  if(!KIO::NetAccess::synchronousRun(m_job, GUI::Proxy::widget()) || m_cancelled) {
     return Data::CollPtr();
   }
 
