@@ -92,7 +92,6 @@ Manager::~Manager() {
 void Manager::loadFetchers() {
 //  myDebug() << "Manager::loadFetchers()" << endl;
   m_fetchers.clear();
-  m_configMap.clear();
 
   KSharedConfigPtr config = KGlobal::config();
   if(config->hasGroup(QLatin1String("Data Sources"))) {
@@ -102,7 +101,6 @@ void Manager::loadFetchers() {
       QString group = QString::fromLatin1("Data Source %1").arg(i);
       Fetcher::Ptr f = createFetcher(config, group);
       if(f) {
-        m_configMap.insert(f, group);
         m_fetchers.append(f);
         f->setMessageHandler(m_messager);
       }

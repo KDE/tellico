@@ -16,7 +16,7 @@
 
 #include "fetcher.h"
 
-#include <ksortablelist.h>
+#include <KSortableList>
 #include <KConfigGroup>
 
 #include <QObject>
@@ -96,8 +96,7 @@ private:
   FetcherVec m_fetchers;
   int m_currentFetcherIndex;
   KeyMap m_keyMap;
-  typedef QMap<Fetcher::Ptr, QString> ConfigMap;
-  ConfigMap m_configMap;
+
   StringMap m_scriptMap;
   ManagerMessage* m_messager;
   uint m_count;
