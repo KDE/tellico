@@ -131,6 +131,12 @@ public:
    * @return True if it is ok to continue, false otherwise.
    */
   static bool queryExists(const KUrl& url);
+  /**
+   * Write a backup file with '~' extension
+   *
+   * Returns true on success
+   */
+  static bool writeBackupFile(const KUrl& url);
 
 private:
   /**

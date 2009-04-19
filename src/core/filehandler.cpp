@@ -185,6 +185,8 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_) 
   return img;
 }
 
+// really, this hsould be decoupled from the writeBackupFile() function
+// but every other function that calls it would need to be updated
 bool FileHandler::queryExists(const KUrl& url_) {
   if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
     return true;
@@ -202,7 +204,10 @@ bool FileHandler::queryExists(const KUrl& url_) {
   if(want_continue == KMessageBox::Cancel) {
     return false;
   }
+  return writeBackupFile(url_);
+}
 
+bool FileHandler::writeBackupFile(const KUrl& url_) {
   KUrl backup(url_);
   backup.setPath(backup.path() + QLatin1Char('~'));
 

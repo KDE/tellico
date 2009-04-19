@@ -187,8 +187,16 @@ bool Document::saveModified() {
 }
 
 bool Document::saveDocument(const KUrl& url_) {
-  if(!FileHandler::queryExists(url_)) {
-    return false;
+  // FileHandler::queryExists calls FileHandler::writeBackupFile
+  // so the only reason to check queryExists() is if the url to write to is different than the current one
+  if(url_ == m_url) {
+    if(!FileHandler::writeBackupFile(url_)) {
+      return false;
+    }
+  } else {
+    if(!FileHandler::queryExists(url_)) {
+      return false;
+    }
   }
   DEBUG_BLOCK;
 
