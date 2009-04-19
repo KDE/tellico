@@ -17,7 +17,7 @@
 #include "risimporttest.h"
 #include "risimporttest.moc"
 
-#include "../translators/amcimporter.h"
+#include "../translators/risimporter.h"
 #include "../collection.h"
 
 QTEST_KDEMAIN_CORE( RisImportTest )
@@ -25,7 +25,7 @@ QTEST_KDEMAIN_CORE( RisImportTest )
 void RisImportTest::testEmpty() {
   KUrl emptyUrl;
   KUrl::List emptyList;
-  Tellico::Import::AMCImporter importer(emptyUrl);
+  Tellico::Import::RISImporter importer(emptyUrl);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
