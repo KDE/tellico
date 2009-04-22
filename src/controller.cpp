@@ -210,15 +210,16 @@ void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
 
 void Controller::removedEntries(Tellico::Data::EntryList entries_) {
   blockAllSignals(true);
-  foreach(Observer* it, m_observers) {
-    it->removeEntries(entries_);
+  foreach(Observer* obs, m_observers) {
+    obs->removeEntries(entries_);
   }
-  foreach(Data::EntryPtr it, entries_) {
-    m_selectedEntries.removeAll(it);
-    m_currentEntries.removeAll(it);
+  foreach(Data::EntryPtr entry, entries_) {
+    m_selectedEntries.removeAll(entry);
+    m_currentEntries.removeAll(entry);
   }
   if(m_currentEntries.isEmpty()) {
     m_mainWindow->m_viewStack->entryView()->clear();
+    m_mainWindow->m_editDialog->clear();
   }
   m_mainWindow->slotEntryCount();
   m_mainWindow->slotQueueFilter();
@@ -226,8 +227,8 @@ void Controller::removedEntries(Tellico::Data::EntryList entries_) {
 }
 
 void Controller::addedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr field_) {
-  foreach(Observer* it, m_observers) {
-    it->addField(coll_, field_);
+  foreach(Observer* obs, m_observers) {
+    obs->addField(coll_, field_);
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
@@ -235,8 +236,8 @@ void Controller::addedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPt
 }
 
 void Controller::removedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr field_) {
-  foreach(Observer* it, m_observers) {
-    it->removeField(coll_, field_);
+  foreach(Observer* obs, m_observers) {
+    obs->removeField(coll_, field_);
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
@@ -244,8 +245,8 @@ void Controller::removedField(Tellico::Data::CollPtr coll_, Tellico::Data::Field
 }
 
 void Controller::modifiedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
-  foreach(Observer* it, m_observers) {
-    it->modifyField(coll_, oldField_, newField_);
+  foreach(Observer* obs, m_observers) {
+    obs->modifyField(coll_, oldField_, newField_);
   }
   m_mainWindow->m_viewStack->refresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
