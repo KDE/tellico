@@ -136,6 +136,11 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
   m_selectedEntries.clear();
   m_mainWindow->slotEntryCount();
 
+  // there really should be a lot of signals to connect to, but right now, the only one
+  // is used when a field is added on a merge
+  connect(coll_.data(), SIGNAL(mergeAddedField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr)),
+          this, SLOT(slotFieldAdded(Tellico::Data::CollPtr, Tellico::Data::FieldPtr)));
+
   emit collectionAdded(coll_->type());
 
   updateActions();
@@ -172,6 +177,10 @@ void Controller::slotCollectionDeleted(Tellico::Data::CollPtr coll_) {
   // this is needed because the Collection::appendCollection() and mergeCollection()
   // functions signal collection deleted then added for the same collection
   coll_->disconnect();
+}
+
+void Controller::slotFieldAdded(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr field_) {
+  addedField(coll_, field_);
 }
 
 void Controller::addedEntries(Tellico::Data::EntryList entries_) {

@@ -340,6 +340,7 @@ public:
 signals:
   void signalGroupsModified(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
   void signalRefreshField(Tellico::Data::FieldPtr field);
+  void mergeAddedField(Tellico::Data::CollPtr coll, Tellico::Data::FieldPtr field);
 
 private:
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
@@ -370,6 +371,7 @@ private:
   QString m_typeName;
   QString m_iconName;
   QString m_defaultGroupField;
+  QString m_lastGroupField;
 
   FieldList m_fields;
   FieldList m_peopleFields; // keep separate list of people fields

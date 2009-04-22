@@ -16,7 +16,6 @@
 #include "entry.h"
 #include "tellico_debug.h"
 #include "tellico_utils.h"
-#include "controller.h"
 #include "collectionfactory.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
@@ -66,7 +65,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
 
   // this essentially checks for duplicates
   if(hasField(field_->name())) {
-    myDebug() << "Collection::addField() - replacing " << field_->name() << endl;
+    myDebug() << "replacing " << field_->name();
     removeField(fieldByName(field_->name()), true);
   }
 
@@ -131,7 +130,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     // does not exist in current collection, add it
     Data::FieldPtr f(new Field(*newField_));
     bool success = addField(f);
-    Controller::self()->addedField(CollPtr(this), f);
+    emit mergeAddedField(CollPtr(this), f);
     return success;
   }
 
@@ -142,7 +141,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
 
   // the original field type is kept
   if(currField->type() != newField_->type()) {
-    myDebug() << "Collection::mergeField() - skipping, field type mismatch for " << currField->title() << endl;
+    myDebug() << "skipping, field type mismatch for " << currField->title();
     return false;
   }
 
@@ -176,7 +175,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
       currField->setProperty(propName, it.value());
     } else if (it.value() != currValue) {
       if(currField->type() == Field::URL && propName == QLatin1String("relative")) {
-        kWarning() << "Collection::mergeField() - relative URL property does not match for " << currField->name();
+        myWarning() << "relative URL property does not match for " << currField->name();
       } else if((currField->type() == Field::Table && propName == QLatin1String("columns"))
              || (currField->type() == Field::Rating && propName == QLatin1String("maximum"))) {
         bool ok;
@@ -207,13 +206,13 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  myDebug() << "Collection::modifyField() - " << newField_->name() << endl;
+//  myDebug() << "newField_->name();
 
 // the field name never changes
   const QString fieldName = newField_->name();
   FieldPtr oldField = fieldByName(fieldName);
   if(!oldField) {
-    myDebug() << "Collection::modifyField() - no field named " << fieldName << endl;
+    myDebug() << "no field named " << fieldName;
     return false;
   }
 
@@ -237,7 +236,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(pos > -1) {
     m_fields.replace(pos, newField_);
   } else {
-    myDebug() << "Collection::modifyField() - no index found!" << endl;
+    myDebug() << "no index found!";
     return false;
   }
 
@@ -299,7 +298,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
       // in order to keep list in the same order, don't remove unless new field is not groupable
       m_entryGroups.removeAll(fieldName);
       delete m_entryGroupDicts.take(fieldName); // no auto-delete here
-      myDebug() << "Collection::modifyField() - no longer grouped: " << fieldName << endl;
+      myDebug() << "no longer grouped: " << fieldName;
       resetGroups = true;
     } else {
       // don't do this, it wipes out the old groups!
@@ -323,7 +322,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   if(resetGroups) {
-    myLog() << "Collection::modifyField() - invalidating groups" << endl;
+    myLog() << "Collection::modifyField() - invalidating groups";
     invalidateGroups();
   }
 
@@ -343,11 +342,11 @@ bool Collection::removeField(const QString& name_, bool force_) {
 bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false*/) {
   if(!field_ || !m_fields.contains(field_)) {
     if(field_) {
-      myDebug() << "Collection::removeField - false: " << field_->name() << endl;
+      myDebug() << "false: " << field_->name();
     }
     return false;
   }
-//  myDebug() << "Collection::removeField() - name = " << field_->name() << endl;
+//  myDebug() << "name = " << field_->name();
 
   // can't delete the title field
   if((field_->flags() & Field::NoDelete) && !force_) {
@@ -425,7 +424,7 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     }
 
     m_entries.append(entry);
-//  myDebug() << "Collection::addEntries() - added entry (" << entry->title() << ")" << endl;
+//  myDebug() << "added entry (" << entry->title() << ")";
 
     if(entry->id() >= m_nextEntryId) {
       m_nextEntryId = entry->id() + 1;
@@ -434,7 +433,7 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
       ++m_nextEntryId;
     } else if(m_entryIdDict[entry->id()]) {
       if(!foster) {
-        myDebug() << "Collection::addEntries() - the collection already has an entry with id = " << entry->id() << endl;
+        myDebug() << "the collection already has an entry with id = " << entry->id();
       }
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
@@ -467,7 +466,7 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
 // groupDicts current. It first removes the entry from every group to which it belongs,
 // then it repopulates the dicts with the entry's fields
 void Collection::updateDicts(const Tellico::Data::EntryList& entries_) {
-  if(entries_.isEmpty()) {
+  if(entries_.isEmpty() || !m_trackGroups) {
     return;
   }
 
@@ -481,7 +480,7 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
     return false;
   }
 
-//  myDebug() << "Collection::deleteEntry() - deleted entry - " << entry_->title() << endl;
+//  myDebug() << "deleted entry - " << entry_->title();
   removeEntriesFromDicts(vec_);
   bool success = true;
   foreach(EntryPtr entry, vec_) {
@@ -495,11 +494,11 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
 Tellico::Data::FieldList Collection::fieldsByCategory(const QString& cat_) {
 #ifndef NDEBUG
   if(!m_fieldCategories.contains(cat_)) {
-    myDebug() << "Collection::fieldsByCategory() - '" << cat_ << "' is not in category list" << endl;
+    myDebug() << cat_ << "' is not in category list";
   }
 #endif
   if(cat_.isEmpty()) {
-    myDebug() << "Collection::fieldsByCategory() - empty category!" << endl;
+    myDebug() << "empty category!";
     return FieldList();
   }
 
@@ -529,7 +528,7 @@ QString Collection::fieldTitleByName(const QString& name_) const {
   }
   FieldPtr f = fieldByName(name_);
   if(!f) {
-    kWarning() << "Collection::fieldTitleByName() - no field named " << name_;
+    myWarning() << "no field named " << name_;
     return QString();
   }
   return f->title();
@@ -583,7 +582,8 @@ bool Collection::isAllowed(const QString& key_, const QString& value_) const {
 }
 
 Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& name_) {
-//  myDebug() << "Collection::entryGroupDictByName() - " << name_ << endl;
+//  myDebug() << name_;
+  m_lastGroupField = name_; // keep track, even if it's invalid
   if(name_.isEmpty() || !m_entryGroupDicts.contains(name_) || m_entries.isEmpty()) {
     return 0;
   }
@@ -599,7 +599,7 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
 }
 
 void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QString& fieldName_, const Tellico::Data::EntryList& entries_) {
-//  myDebug() << "Collection::populateDict() - " << fieldName_ << endl;
+//  myDebug() << fieldName_;
   bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
 
   QList<EntryGroup*> modifiedGroups;
@@ -653,11 +653,11 @@ void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_) 
   }
 
   if(allEmpty) {
-    // need to populate the current group dict
-    const QString group = Controller::self()->groupBy();
-    EntryGroupDict* dict = m_entryGroupDicts[group];
+//    myDebug() << "all collection dicts are empty";
+    // still need to populate the current group dict
+    EntryGroupDict* dict = m_entryGroupDicts[m_lastGroupField];
     if(dict) {
-      populateDict(dict, group, entries_);
+      populateDict(dict, m_lastGroupField, entries_);
     }
   }
 }
@@ -832,7 +832,7 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
 // merges values from e2 into e1
 bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, bool overwrite_, bool askUser_) {
   if(!e1 || !e2) {
-    myDebug() << "Collection::mergeEntry() - bad entry pointer" << endl;
+    myDebug() << "bad entry pointer";
     return false;
   }
   bool ret = true;
@@ -841,9 +841,9 @@ bool Collection::mergeEntry(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr 
     if(e2->field(field).isEmpty()) {
       continue;
     }
-//    myLog() << "Collection::mergeEntry() - reading field: " << field->name() << endl;
+//    myLog() << "Collection::mergeEntry() - reading field: " << field->name();
     if(overwrite_ || e1->field(field).isEmpty()) {
-//      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name()) << endl;
+//      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name());
       e1->setField(field, e2->field(field));
       ret = true;
     } else if(e1->field(field) == e2->field(field)) {

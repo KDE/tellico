@@ -285,17 +285,16 @@ void Document::appendCollection(Tellico::Data::CollPtr coll_) {
   }
 
   m_coll->blockSignals(true);
-  Data::FieldList fields = coll_->fields();
-  foreach(FieldPtr field, fields) {
+
+  foreach(FieldPtr field, coll_->fields()) {
     m_coll->mergeField(field);
   }
 
-  EntryList entries = coll_->entries();
-  foreach(EntryPtr entry, entries) {
+  foreach(EntryPtr entry, coll_->entries()) {
     Data::EntryPtr newEntry(new Data::Entry(*entry));
     newEntry->setCollection(m_coll);
   }
-  m_coll->addEntries(entries);
+  m_coll->addEntries(coll_->entries());
   // TODO: merge filters and loans
   m_coll->blockSignals(false);
 }

@@ -101,7 +101,7 @@ public:
 
   void reorderedFields(Data::CollPtr coll);
   void updatedFetchers();
-  
+
   void clearFilter();
 
 public slots:
@@ -120,6 +120,7 @@ public slots:
    * @param coll A pointer to the collection being added
    */
   void slotCollectionDeleted(Tellico::Data::CollPtr coll);
+  void slotFieldAdded(Tellico::Data::CollPtr coll, Tellico::Data::FieldPtr field);
   void slotRefreshField(Tellico::Data::FieldPtr field);
 
   void slotClearSelection();
