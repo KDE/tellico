@@ -14,6 +14,7 @@
 #include "bibtexcollection.h"
 #include "../document.h"
 #include "../entrycomparison.h"
+#include "../translators/bibtexhandler.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -291,6 +292,12 @@ bool BibtexCollection::deleteField(Tellico::Data::FieldPtr field_, bool force_) 
 
 Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
   return FieldPtr(m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict[bibtex_]);
+}
+
+QString BibtexCollection::prepareText(const QString& text_) const {
+  QString text = text_;
+  BibtexHandler::cleanText(text);
+  return text;
 }
 
 // same as BookCollection::sameEntry()

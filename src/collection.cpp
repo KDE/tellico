@@ -780,6 +780,10 @@ Tellico::Data::FieldList Collection::fieldDependsOn(FieldPtr field_) const {
   return vec;
 }
 
+QString Collection::prepareText(const QString& text_) const {
+  return text_;
+}
+
 bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {
   if(!field_ || field_->type() != Field::Dependent) {
     return false;

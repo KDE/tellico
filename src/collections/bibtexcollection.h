@@ -56,6 +56,7 @@ public:
   void setMacroList(StringMap map) { m_macros = map; }
   void addMacro(const QString& key, const QString& value) { m_macros.insert(key, value); }
 
+  virtual QString prepareText(const QString& text) const;
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   static FieldList defaultFields();

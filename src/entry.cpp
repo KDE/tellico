@@ -14,7 +14,6 @@
 #include "entry.h"
 #include "collection.h"
 #include "field.h"
-#include "translators/bibtexhandler.h" // needed for BibtexHandler::cleanText()
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 
@@ -153,11 +152,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
   if(m_formattedFields.isEmpty() || !m_formattedFields.contains(fieldName_)) {
     QString value = field(fieldName_);
     if(!value.isEmpty()) {
-      // special for Bibtex collections
-      if(m_coll->type() == Collection::Bibtex) {
-        BibtexHandler::cleanText(value);
-      }
-      value = Field::format(value, flag);
+      value = Field::format(m_coll->prepareText(value), flag);
       m_formattedFields.insert(fieldName_, value);
     }
     return value;

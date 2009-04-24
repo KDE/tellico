@@ -321,6 +321,12 @@ public:
    * Returns an empty vector for non-Dpendent fields
    */
   FieldList fieldDependsOn(FieldPtr field) const;
+  /**
+   * Prepare text for formatting
+   *
+   * Useful only for BibtexCollection to strip bibtex strings
+   */
+  virtual QString prepareText(const QString& text) const;
 
   static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, bool askUser=false);
   /**
