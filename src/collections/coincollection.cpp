@@ -22,12 +22,12 @@ namespace {
 
 using Tellico::Data::CoinCollection;
 
-CoinCollection::CoinCollection(bool addFields_, const QString& title_ /*=null*/)
+CoinCollection::CoinCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Coins") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("denomination"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("denomination"));
 }
 
 Tellico::Data::FieldList CoinCollection::defaultFields() {

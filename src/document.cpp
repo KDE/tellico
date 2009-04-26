@@ -89,7 +89,7 @@ bool Document::newDocument(int type_) {
   m_importer = 0;
   deleteContents();
 
-  m_coll = CollectionFactory::collection(static_cast<Collection::Type>(type_), true);
+  m_coll = CollectionFactory::collection(type_, true);
   m_coll->setTrackGroups(true);
 
   Kernel::self()->resetHistory();

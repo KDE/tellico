@@ -24,12 +24,12 @@ namespace {
 
 using Tellico::Data::ComicBookCollection;
 
-ComicBookCollection::ComicBookCollection(bool addFields_, const QString& title_ /*=null*/)
+ComicBookCollection::ComicBookCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Comic Books") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("series"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("series"));
 }
 
 Tellico::Data::FieldList ComicBookCollection::defaultFields() {

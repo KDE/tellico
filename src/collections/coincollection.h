@@ -34,10 +34,9 @@ public:
   /**
    * The constructor
    *
-   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  CoinCollection(bool addFields, const QString& title = QString());
+  CoinCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Coin; }
 

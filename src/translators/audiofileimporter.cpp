@@ -109,7 +109,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   const QString comments = QLatin1String("comments");
   const QString file     = QLatin1String("file");
 
-  m_coll = Data::CollPtr(new Data::MusicCollection(true));
+  m_coll = new Data::MusicCollection(true);
 
   const bool addFile = m_addFilePath->isChecked();
   const bool addBitrate = m_addBitrate->isChecked();

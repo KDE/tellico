@@ -70,7 +70,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
     return Data::CollPtr();
   }
 
-  m_coll = Data::CollPtr(new Data::VideoCollection(true));
+  m_coll = new Data::VideoCollection(true);
 
   m_majVersion = versionRx.cap(1).toInt();
   m_minVersion = versionRx.cap(2).toInt();

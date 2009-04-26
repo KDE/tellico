@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -23,11 +23,8 @@ namespace {
 
 using Tellico::Data::MusicCollection;
 
-MusicCollection::MusicCollection(bool addFields_, const QString& title_ /*=null*/)
-   : Collection(title_.isEmpty() ? i18n("My Music") : title_) {
-  if(addFields_) {
-    addFields(defaultFields());
-  }
+MusicCollection::MusicCollection(bool addDefaultFields_, const QString& title_)
+   : Collection(addDefaultFields_, title_.isEmpty() ? i18n("My Music") : title_) {
   setDefaultGroupField(QLatin1String("artist"));
 }
 
@@ -120,7 +117,7 @@ int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   // not enough for title to be equal, must also have another field
   int res = 2*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
-//    myDebug() << "MusicCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//    myDebug() << "different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
   res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("artist"), this);

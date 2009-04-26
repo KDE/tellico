@@ -41,7 +41,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     return Data::CollPtr();
   }
 
-  m_coll = Data::CollPtr(new Data::BookCollection(true));
+  m_coll = new Data::BookCollection(true);
 
   QDir dataDir = m_libraryDir;
   dataDir.cd(m_library->currentText());

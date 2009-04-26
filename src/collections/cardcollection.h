@@ -22,9 +22,6 @@ namespace Tellico {
 /**
  * A collection for sports cards.
  *
- * It has the following standard attributes:
- * @li Title
- *
  * @author Robby Stephenson
  */
 class CardCollection : public Collection {
@@ -34,10 +31,9 @@ public:
   /**
    * The constructor
    *
-   * @param addFields A boolean indicating whether the default attributes should be added
    * @param title The title of the collection
    */
-  CardCollection(bool addFields, const QString& title = QString());
+  CardCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Card; }
 

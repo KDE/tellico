@@ -28,12 +28,12 @@ namespace {
   static const char* bibtex_misc = I18N_NOOP("Miscellaneous");
 }
 
-BibtexCollection::BibtexCollection(bool addFields_, const QString& title_ /*=null*/)
+BibtexCollection::BibtexCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("Bibliography") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("author"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("author"));
 
   // Bibtex has some default macros for the months
   addMacro(QLatin1String("jan"), QString());
@@ -368,9 +368,8 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
     coll->addField(field);
   }
 
-  // also need to add required fields
-  FieldList vec = defaultFields();
-  foreach(FieldPtr defaultField, vec) {
+  // also need to add required fields, those with NoDelete set
+  foreach(FieldPtr defaultField, coll->defaultFields()) {
     if(!coll->hasField(defaultField->name()) && (defaultField->flags() & Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
       if(defaultField->property(bibtex) != QLatin1String("key")
@@ -386,7 +385,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   if(field) {
     entryTypeName = field->name();
   } else {
-    myWarning() << "BibtexCollection::convertBookCollection() - there must be an entry type field";
+    myWarning() << "there must be an entry type field";
   }
 
   EntryList newEntries;

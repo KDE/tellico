@@ -25,12 +25,12 @@ namespace {
 
 using Tellico::Data::VideoCollection;
 
-VideoCollection::VideoCollection(bool addFields_, const QString& title_ /*=null*/)
+VideoCollection::VideoCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Videos") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("genre"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("genre"));
 }
 
 Tellico::Data::FieldList VideoCollection::defaultFields() {
@@ -223,7 +223,7 @@ int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   // ever possible for a studio to do two movies with identical titles?
   int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
-//    myDebug() << "VideoCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//    myDebug() << "different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("year"), this);

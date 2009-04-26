@@ -22,12 +22,12 @@ namespace {
 
 using Tellico::Data::GameCollection;
 
-GameCollection::GameCollection(bool addFields_, const QString& title_ /*=null*/)
+GameCollection::GameCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Games") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("platform"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("platform"));
 }
 
 Tellico::Data::FieldList GameCollection::defaultFields() {

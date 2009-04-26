@@ -65,14 +65,14 @@ public:
     // if you want to add custom collection types, use a number sure to be unique like 101
   };
 
+  Collection(const QString& title);
   /**
    * The constructor is only used to create custom collections. It adds a title field,
-   * in the "General" group. The iconName is set to be the typeName;
+   * in the "General" group.
    *
    * @param title The title of the collection itself
-   * @param entryTitle The title of the entries, which can be translated
    */
-  explicit Collection(const QString& title);
+  Collection(bool addDefaultFields, const QString& title=QString());
   /**
    */
   virtual ~Collection();
@@ -374,8 +374,6 @@ private:
   long m_id;
   long m_nextEntryId;
   QString m_title;
-  QString m_typeName;
-  QString m_iconName;
   QString m_defaultGroupField;
   QString m_lastGroupField;
 

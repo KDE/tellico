@@ -22,14 +22,6 @@ namespace Tellico {
 /**
  * A collection for music, like CD's and cassettes.
  *
- * It has the following standard attributes:
- * @li Title
- * @li Artist
- * @li Album
- * @li Year
- * @li Genre
- * @li Comments
- *
  * @author Robby Stephenson
  */
 class MusicCollection : public Collection {
@@ -39,13 +31,12 @@ public:
   /**
    * The constructor
    *
-   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  MusicCollection(bool addFields, const QString& title = QString());
+  MusicCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Album; }
-  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   static FieldList defaultFields();
 };

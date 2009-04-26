@@ -22,12 +22,12 @@ namespace {
 
 using Tellico::Data::FileCatalog;
 
-FileCatalog::FileCatalog(bool addFields_, const QString& title_ /*=null*/)
+FileCatalog::FileCatalog(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Files") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("volume"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("volume"));
 }
 
 Tellico::Data::FieldList FileCatalog::defaultFields() {

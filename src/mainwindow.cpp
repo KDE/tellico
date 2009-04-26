@@ -33,6 +33,7 @@
 #include "entryview.h"
 #include "entryiconview.h"
 #include "images/imagefactory.h" // needed so tmp files can get cleaned
+#include "collections/collectioninitializer.h"
 #include "collections/bibtexcollection.h" // needed for bibtex string macro dialog
 #include "translators/bibtexhandler.h" // needed for bibtex options
 #include "fetchdialog.h"
@@ -143,6 +144,10 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   // initialize the status bar and progress bar
   initStatusBar();
 
+  // initialize all the collection types
+  // which must be done before the document is created
+  CollectionInitializer init;
+
   // create a document, which also creates an empty book collection
   // must be done before the different widgets are created
   initDocument();
@@ -163,9 +168,6 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
 
   new ApplicationInterface(this);
   new CollectionInterface(this);
-
-  // Init DBUS
-  Tellico::NewStuff::Manager::self();
 
   MARK_LINE;
   QTimer::singleShot(0, this, SLOT(slotInit()));
@@ -189,6 +191,8 @@ void MainWindow::slotInit() {
 
   initConnections();
   ImageFactory::init();
+  // Init DBUS
+  NewStuff::Manager::self();
 
   // disable OOO menu item if library is not available
   action("cite_openoffice")->setEnabled(Cite::ActionManager::isEnabled(Cite::CiteOpenOffice));

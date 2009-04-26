@@ -22,12 +22,12 @@ namespace {
 
 using Tellico::Data::WineCollection;
 
-WineCollection::WineCollection(bool addFields_, const QString& title_ /*=null*/)
+WineCollection::WineCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Wines") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("type"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("type"));
 }
 
 Tellico::Data::FieldList WineCollection::defaultFields() {

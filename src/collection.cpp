@@ -32,9 +32,23 @@ const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
 Collection::Collection(const QString& title_)
-    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_entryIdDict()
-    , m_trackGroups(false) {
+    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
   m_id = getID();
+}
+
+Collection::Collection(bool addDefaultFields_, const QString& title_)
+    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
+  m_id = getID();
+  if(m_title.isEmpty()) {
+    m_title = i18n("My Collection");
+  }
+  if(addDefaultFields_) {
+    Data::FieldPtr field(new Field(QLatin1String("title"), i18n("Title")));
+    field->setCategory(i18n("General"));
+    field->setFlags(Field::NoDelete);
+    field->setFormatFlag(Field::FormatTitle);
+    addField(field);
+  }
 }
 
 Collection::~Collection() {

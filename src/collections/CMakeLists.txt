@@ -2,18 +2,19 @@
 ########### next target ###############
 
 SET(collections_STAT_SRCS
-   winecollection.cpp
-   stampcollection.cpp
-   comicbookcollection.cpp
+   bibtexcollection.cpp
+   boardgamecollection.cpp
+   bookcollection.cpp
    cardcollection.cpp
    coincollection.cpp
-   bibtexcollection.cpp
-   musiccollection.cpp
-   videocollection.cpp
-   bookcollection.cpp
-   gamecollection.cpp
+   collectioninitializer.cpp
+   comicbookcollection.cpp
    filecatalog.cpp
-   boardgamecollection.cpp
+   gamecollection.cpp
+   musiccollection.cpp
+   stampcollection.cpp
+   videocollection.cpp
+   winecollection.cpp
    )
 
 KDE4_ADD_LIBRARY(collections STATIC ${collections_STAT_SRCS})

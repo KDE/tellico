@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -25,12 +25,12 @@ namespace {
 
 using Tellico::Data::BookCollection;
 
-BookCollection::BookCollection(bool addFields_, const QString& title_ /*=null*/)
+BookCollection::BookCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Books") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("author"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("author"));
 }
 
 Tellico::Data::FieldList BookCollection::defaultFields() {

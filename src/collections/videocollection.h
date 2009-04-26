@@ -22,13 +22,6 @@ namespace Tellico {
 /**
  * A collection for videos.
  *
- * It has the following standard attributes:
- * @li Title
- * @li Year
- * @li Genre
- * @li Medium
- * @li Comments
- *
  * @author Robby Stephenson
  */
 class VideoCollection : public Collection {
@@ -38,10 +31,9 @@ public:
   /**
    * The constructor
    *
-   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  VideoCollection(bool addFields, const QString& title = QString());
+  VideoCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Video; }
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;

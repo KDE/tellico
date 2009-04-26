@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2006 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -22,33 +22,6 @@ namespace Tellico {
 /**
  * A collection for books.
  *
- * It has the following standard attributes:
- * @li Title
- * @li Subtitle
- * @li Author
- * @li Binding
- * @li Purchase Date
- * @li Purchase Price
- * @li Publisher
- * @li Edition
- * @li Copyright Year
- * @li Publication Year
- * @li ISBN Number
- * @li Library of Congress Catalog Number
- * @li Pages
- * @li Language
- * @li Genre
- * @li Keywords
- * @li Series
- * @li Series Number
- * @li Condition
- * @li Signed
- * @li Read
- * @li Gift
- * @li Loaned
- * @li Rating
- * @li Comments
- *
  * @author Robby Stephenson
  */
 class BookCollection : public Collection {
@@ -58,10 +31,9 @@ public:
   /**
    * The constructor
    *
-   * @param addFields Whether to add the default attributes
    * @param title The title of the collection
    */
-  BookCollection(bool addFields, const QString& title = QString());
+  BookCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Book; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;

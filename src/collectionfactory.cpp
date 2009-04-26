@@ -1,5 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2003-2008 by Robby Stephenson
+    copyright            : (C) 2003-2009 by Robby Stephenson
     email                : robby@periapsis.org
  ***************************************************************************/
 
@@ -12,190 +12,86 @@
  ***************************************************************************/
 
 #include "collectionfactory.h"
-#include "collections/bookcollection.h"
-#include "collections/bibtexcollection.h"
-#include "collections/musiccollection.h"
-#include "collections/videocollection.h"
-#include "collections/comicbookcollection.h"
-#include "collections/coincollection.h"
-#include "collections/stampcollection.h"
-#include "collections/cardcollection.h"
-#include "collections/winecollection.h"
-#include "collections/gamecollection.h"
-#include "collections/filecatalog.h"
-#include "collections/boardgamecollection.h"
-#include "field.h"
+#include "collection.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
 
 using Tellico::CollectionFactory;
 
-// static
-Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addFields_) {
-  switch(type_) {
-    case Data::Collection::Book:
-      return Data::CollPtr(new Data::BookCollection(addFields_));
+CollectionFactory::CollectionFactory() {
+}
 
-    case Data::Collection::Video:
-      return Data::CollPtr(new Data::VideoCollection(addFields_));
+void CollectionFactory::registerFunction(int type_, const QString& typeName_, CREATE_COLL_FN func_) {
+  functionRegistry.insert(type_, func_);
+  nameRegistry.insert(type_, typeName_);
+  titleRegistry.insert(type_, QString());
+}
 
-    case Data::Collection::Album:
-      return Data::CollPtr(new Data::MusicCollection(addFields_));
-
-    case Data::Collection::Bibtex:
-      return Data::CollPtr(new Data::BibtexCollection(addFields_));
-
-    case Data::Collection::Coin:
-      return Data::CollPtr(new Data::CoinCollection(addFields_));
-
-    case Data::Collection::Card:
-      return Data::CollPtr(new Data::CardCollection(addFields_));
-
-    case Data::Collection::Stamp:
-      return Data::CollPtr(new Data::StampCollection(addFields_));
-
-    case Data::Collection::Wine:
-      return Data::CollPtr(new Data::WineCollection(addFields_));
-
-    case Data::Collection::ComicBook:
-      return Data::CollPtr(new Data::ComicBookCollection(addFields_));
-
-    case Data::Collection::Game:
-      return Data::CollPtr(new Data::GameCollection(addFields_));
-
-    case Data::Collection::File:
-      return Data::CollPtr(new Data::FileCatalog(addFields_));
-
-    case Data::Collection::BoardGame:
-      return Data::CollPtr(new Data::BoardGameCollection(addFields_));
-
-    case Data::Collection::Base:
-      break;
-
-    default:
-      kWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_;
-      // fall through
+Tellico::Data::CollPtr CollectionFactory::create(int type_, bool addDefaultFields_) const {
+  Tellico::Data::CollPtr ptr;
+  if(functionRegistry.contains(type_)) {
+    ptr = functionRegistry.value(type_)(addDefaultFields_);
+  } else {
+    myWarning() << "no collection created for type = " << type_ << endl;
+    ptr = new Data::Collection(addDefaultFields_);
   }
+  return ptr;
+}
 
-  Data::CollPtr c(new Data::Collection(i18n("My Collection")));
-  Data::FieldPtr f(new Data::Field(QLatin1String("title"), i18n("Title")));
-  f->setCategory(i18n("General"));
-  f->setFlags(Data::Field::NoDelete);
-  f->setFormatFlag(Data::Field::FormatTitle);
-  c->addField(f);
-  return c;
+//static
+CollectionFactory& CollectionFactory::self() {
+  static CollectionFactory instance;
+  return instance;
 }
 
 // static
-Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, bool addFields_) {
-  if(typeName_ == typeName(Data::Collection::Book)) {
-    return Data::CollPtr(new Data::BookCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Album)) {
-    return Data::CollPtr(new Data::MusicCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Video)) {
-    return Data::CollPtr(new Data::VideoCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Bibtex)) {
-    return Data::CollPtr(new Data::BibtexCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Bibtex)) {
-    return Data::CollPtr(new Data::ComicBookCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::ComicBook)) {
-    return Data::CollPtr(new Data::CardCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Coin)) {
-    return Data::CollPtr(new Data::CoinCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Stamp)) {
-    return Data::CollPtr(new Data::StampCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Wine)) {
-    return Data::CollPtr(new Data::WineCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::Game)) {
-    return Data::CollPtr(new Data::GameCollection(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::File)) {
-    return Data::CollPtr(new Data::FileCatalog(addFields_));
-  } else if(typeName_ == typeName(Data::Collection::BoardGame)) {
-    return Data::CollPtr(new Data::BoardGameCollection(addFields_));
-  } else {
-    kWarning() << "CollectionFactory::collection() - collection type not implemented: " << typeName_;
-    return Data::CollPtr();
+Tellico::Data::CollPtr CollectionFactory::collection(int type_, bool addDefaultFields_) {
+  return self().create(type_, addDefaultFields_);
+}
+
+// static
+Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, bool addDefaultFields_) {
+  Data::CollPtr coll;
+  int type = -1;
+  TypeStringHash::const_iterator i = self().nameRegistry.constBegin();
+  while(i != self().nameRegistry.constEnd()) {
+    if(i.value() == typeName_) {
+      type = i.key();
+      break;
+    }
   }
+  if(type == -1) {
+    type = Data::Collection::Base;
+    myWarning() << "bad collection type name:" << typeName_ << endl;
+  }
+  return self().create(type, addDefaultFields_);
 }
 
 Tellico::CollectionNameHash CollectionFactory::nameHash() {
-  CollectionNameHash map;
-  map[Data::Collection::Book]        = i18n("Book Collection");
-  map[Data::Collection::Bibtex]      = i18n("Bibliography");
-  map[Data::Collection::ComicBook]   = i18n("Comic Book Collection");
-  map[Data::Collection::Video]       = i18n("Video Collection");
-  map[Data::Collection::Album]       = i18n("Music Collection");
-  map[Data::Collection::Coin]        = i18n("Coin Collection");
-  map[Data::Collection::Stamp]       = i18n("Stamp Collection");
-  map[Data::Collection::Wine]        = i18n("Wine Collection");
-  map[Data::Collection::Card]        = i18n("Card Collection");
-  map[Data::Collection::Game]        = i18n("Game Collection");
-  map[Data::Collection::File]        = i18n("File Catalog");
-  map[Data::Collection::BoardGame]   = i18n("Board Game Collection");
-  map[Data::Collection::Base]        = i18n("Custom Collection");
-  return map;
+  CollectionNameHash hash;
+  hash[Data::Collection::Book]        = i18n("Book Collection");
+  hash[Data::Collection::Bibtex]      = i18n("Bibliography");
+  hash[Data::Collection::ComicBook]   = i18n("Comic Book Collection");
+  hash[Data::Collection::Video]       = i18n("Video Collection");
+  hash[Data::Collection::Album]       = i18n("Music Collection");
+  hash[Data::Collection::Coin]        = i18n("Coin Collection");
+  hash[Data::Collection::Stamp]       = i18n("Stamp Collection");
+  hash[Data::Collection::Wine]        = i18n("Wine Collection");
+  hash[Data::Collection::Card]        = i18n("Card Collection");
+  hash[Data::Collection::Game]        = i18n("Game Collection");
+  hash[Data::Collection::File]        = i18n("File Catalog");
+  hash[Data::Collection::BoardGame]   = i18n("Board Game Collection");
+  hash[Data::Collection::Base]        = i18n("Custom Collection");
+  return hash;
 }
 
 QString CollectionFactory::typeName(int type_) {
-  switch(type_) {
-    case Data::Collection::Book:
-      return QLatin1String("book");
-      break;
-
-    case Data::Collection::Video:
-      return QLatin1String("video");
-      break;
-
-    case Data::Collection::Album:
-      return QLatin1String("album");
-      break;
-
-    case Data::Collection::Bibtex:
-      return QLatin1String("bibtex");
-      break;
-
-    case Data::Collection::ComicBook:
-      return QLatin1String("comic");
-      break;
-
-    case Data::Collection::Wine:
-      return QLatin1String("wine");
-      break;
-
-    case Data::Collection::Coin:
-      return QLatin1String("coin");
-      break;
-
-    case Data::Collection::Stamp:
-      return QLatin1String("stamp");
-      break;
-
-    case Data::Collection::Card:
-      return QLatin1String("card");
-      break;
-
-    case Data::Collection::Game:
-      return QLatin1String("game");
-      break;
-
-    case Data::Collection::File:
-      return QLatin1String("file");
-      break;
-
-    case Data::Collection::BoardGame:
-      return QLatin1String("boardgame");
-      break;
-
-    case Data::Collection::Base:
-      return QLatin1String("entry");
-      break;
-
-    default:
-      kWarning() << "CollectionFactory::collection() - collection type not implemented: " << type_;
-      return QLatin1String("entry");
-      break;
+  if(self().nameRegistry.contains(type_)) {
+    return self().nameRegistry.value(type_);
   }
+  myWarning() << "collection type not implemented:" << type_;
+  return QLatin1String("entry");
 }
 
 bool CollectionFactory::isDefaultField(int type_, const QString& name_) {

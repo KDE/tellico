@@ -22,26 +22,6 @@ namespace Tellico {
 /**
  * A stamp collection.
  *
- * It has the following standard attributes:
- * @li Title
- * @li Description
- * @li Denomination
- * @li Country
- * @li Year
- * @li Color
- * @li Scott
- * @li Grade
- * @li Cancelled
- * @li Hinged
- * @li Centering
- * @li Gummed
- * @li Pur_date
- * @li Pur_price
- * @li Location
- * @li Gift
- * @li Image
- * @li Comments
- *
  * @author Robby Stephenson
  */
 class StampCollection : public Collection {
@@ -51,10 +31,9 @@ public:
   /**
    * The constructor
    *
-   * @param addFields A boolean indicating whether the default attributes should be added
-   * @param title The title of the collection
+  * @param title The title of the collection
    */
-  StampCollection(bool addFields, const QString& title = QString());
+  StampCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Stamp; }
 

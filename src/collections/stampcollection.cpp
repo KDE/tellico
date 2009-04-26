@@ -23,12 +23,12 @@ namespace {
 
 using Tellico::Data::StampCollection;
 
-StampCollection::StampCollection(bool addFields_, const QString& title_ /*=null*/)
+StampCollection::StampCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Stamps") : title_) {
-  if(addFields_) {
+  setDefaultGroupField(QLatin1String("denomination"));
+  if(addDefaultFields_) {
     addFields(defaultFields());
   }
-  setDefaultGroupField(QLatin1String("denomination"));
 }
 
 Tellico::Data::FieldList StampCollection::defaultFields() {
