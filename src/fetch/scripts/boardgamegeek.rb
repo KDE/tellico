@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 #
 # ***************************************************************************
+#    Copyright (C) 2006-2009 Steve Beattie <sbeattie@suse.de>
+#    Copyright (C) 2008-2009 Sven Werlen <sven@boisdechet.org>
 #    copyright            : (C) 2006 by Steve Beattie
 #                         : (C) 2008 by Sven Werlen
 #    email                : sbeattie@suse.de
@@ -9,9 +11,21 @@
 #
 # ***************************************************************************
 # *                                                                         *
-# *   This program is free software; you can redistribute it and/or modify  *
-# *   it under the terms of version 2 of the GNU General Public License as  *
-# *   published by the Free Software Foundation;                            *
+# *   This program is free software; you can redistribute it and/or         *
+# *   modify it under the terms of the GNU General Public License as        *
+# *   published by the Free Software Foundation; either version 2 of        *
+# *   the License or (at your option) version 3 or any later version        *
+# *   accepted by the membership of KDE e.V. (or its successor approved     *
+# *   by the membership of KDE e.V.), which shall act as a proxy            *
+# *   defined in Section 14 of version 3 of the license.                    *
+# *                                                                         *
+# *   This program is distributed in the hope that it will be useful,       *
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+# *   GNU General Public License for more details.                          *
+# *                                                                         *
+# *   You should have received a copy of the GNU General Public License     *
+# *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 # *                                                                         *
 # ***************************************************************************
 
@@ -78,7 +92,7 @@ class Game
     element.add_element Element.new('boardgamegeek-link').add_text("http://www.boardgamegeek/game/#{@id}") if @id
     element.add_element Element.new('bggid').add_text(@id) if @id
     element.add_element Element.new('cover').add_text(@cover) if @cover
-  
+
     if @publishers.length > 0
       pub_elements = Element.new('publishers')
       @publishers.each {|p| pub_elements.add_element Element.new('publisher').add_text(p)}
@@ -96,7 +110,7 @@ class Game
     end
     return element
   end
-  
+
   def image()
     image = Element.new 'image'
     image.add_attribute('format', 'JPEG')
@@ -140,7 +154,7 @@ def getGameDetails(ids)
     doc = REXML::Document.new(search_result.body)
 
     games_xml = XPath.match(doc, "//game")
-    games_xml.each do |g| 
+    games_xml.each do |g|
       if( g.elements['name'] != nil )
         game = Game.new(g.elements['name'].text, g.attributes['gameid'])
         game.year = g.elements['yearpublished'].text
@@ -150,13 +164,13 @@ def getGameDetails(ids)
         minp = Integer(g.elements['minplayers'].text)
         maxp = Integer(g.elements['maxplayers'].text)
         minp.upto(maxp) {|n| game.add_players(n)}
-        
+
         # retrieve cover
         coverurl = g.elements['thumbnail'] != nil ? g.elements['thumbnail'].text : nil
         if( coverurl =~ /files.boardgamegeek.com(.*)$/ )
           # puts "downloading... " + $1
           cover = nil
-          Net::HTTP.start('files.boardgamegeek.com', 80) do |http| 
+          Net::HTTP.start('files.boardgamegeek.com', 80) do |http|
             cover = (http.get($1, {"User-Agent" => "BoardGameGeek plugin for Tellico #{$my_version}"}))
           end
           case cover
@@ -210,7 +224,7 @@ def listToXML(gameList)
       collection.add_element(element)
       images.add_element(g.image());
   end
-  collection.add_element(images);  
+  collection.add_element(images);
   tellico.add_element(collection)
   doc.add_element(tellico)
   doc.write($stdout, 0)

@@ -1,16 +1,27 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 
 # ***************************************************************************
-#    copyright            : (C) 2006 by Mathias Monnerville
-#    email                : tellico_dev@yahoo.fr
+#    Copyright (C) 2006-2009 Mathias Monnerville <tellico@monnerville.com>
 # ***************************************************************************
 #
 # ***************************************************************************
 # *                                                                         *
-# *   This program is free software; you can redistribute it and/or modify  *
-# *   it under the terms of version 2 of the GNU General Public License as  *
-# *   published by the Free Software Foundation;                            *
+# *   This program is free software; you can redistribute it and/or         *
+# *   modify it under the terms of the GNU General Public License as        *
+# *   published by the Free Software Foundation; either version 2 of        *
+# *   the License or (at your option) version 3 or any later version        *
+# *   accepted by the membership of KDE e.V. (or its successor approved     *
+# *   by the membership of KDE e.V.), which shall act as a proxy            *
+# *   defined in Section 14 of version 3 of the license.                    *
+# *                                                                         *
+# *   This program is distributed in the hope that it will be useful,       *
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+# *   GNU General Public License for more details.                          *
+# *                                                                         *
+# *   You should have received a copy of the GNU General Public License     *
+# *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 # *                                                                         *
 # ***************************************************************************
 
@@ -45,7 +56,7 @@ VERSION = "0.2"
 
 def genMD5():
 	"""
-	Generates and returns a random md5 string. Its main purpose is to allow random 
+	Generates and returns a random md5 string. Its main purpose is to allow random
 	image file name generation.
 	"""
 	obj = md5.new()
@@ -62,7 +73,7 @@ class BasicTellicoDOM:
 		self.__root = self.__doc.createElement('tellico')
 		self.__root.setAttribute('xmlns', 'http://periapsis.org/tellico/')
 		self.__root.setAttribute('syntaxVersion', '9')
-		
+
 		self.__collection = self.__doc.createElement('collection')
 		self.__collection.setAttribute('title', 'My Comics')
 		self.__collection.setAttribute('type', '6')
@@ -78,7 +89,7 @@ class BasicTellicoDOM:
 
 	def addEntry(self, movieData):
 		"""
-		Add a comic entry. 
+		Add a comic entry.
 		Returns an entry node instance
 		"""
 		d = movieData
@@ -137,8 +148,8 @@ class BasicTellicoDOM:
 			coverNode = self.__doc.createElement('cover')
 			coverNode.appendChild(self.__doc.createTextNode(d['image'][0]))
 
-		for name in (	'writersNode', 'genresNode', 'artistsNode', 'pagesNode', 'yearNode', 
-						'titleNode', 'issueNode', 'commentsNode', 'pubNode', 'langNode', 
+		for name in (	'writersNode', 'genresNode', 'artistsNode', 'pagesNode', 'yearNode',
+						'titleNode', 'issueNode', 'commentsNode', 'pubNode', 'langNode',
 						'countryNode' ):
 			entryNode.appendChild(eval(name))
 
@@ -147,7 +158,7 @@ class BasicTellicoDOM:
 			self.__images.appendChild(imageNode)
 
 		self.__collection.appendChild(entryNode)
-		
+
 		self.__currentId += 1
 		return entryNode
 
@@ -189,7 +200,7 @@ class DarkHorseParser:
 							'colorist'		: '<b>Colorist: *</b> *<a.*>(?P<colorist>.*)</a>',
 							'genre'			: '<b>Genre: *</b> *<a.*?>(?P<genre>.*?)</a><br>',
 							'format'		: '<b>Format: *</b> *(?P<format>.*?)<br>',
-						}	
+						}
 
 		# Compile patterns objects
 		self.__regExpsPO = {}
@@ -217,12 +228,12 @@ class DarkHorseParser:
 
 	def __fetchMovieLinks(self):
 		"""
-		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent() 
+		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
 		matchList = re.findall("""<a *href="%s(?P<page>.*?)">(?P<title>.*?)</a>""" % self.__basePath.replace('?', '\?'), self.__data)
 		if not matchList: return None
-			
+
 		return matchList
 
 	def __fetchCover(self, path, delete = True):
