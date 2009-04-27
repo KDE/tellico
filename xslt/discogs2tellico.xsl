@@ -9,7 +9,7 @@
    ===================================================================
    Tellico XSLT file - used for importing Discogs release search data.
 
-   Copyright (C) 2008 Robby Stephenson -robby@periapsis.org
+   Copyright (C) 2008-2009 Robby Stephenson -robby@periapsis.org
                       Roman L. Senn - roman.l.senn@gmail.com
 
    This XSLT stylesheet is designed to be used with the 'Tellico'

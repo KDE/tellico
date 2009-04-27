@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - classic template for viewing entry data
 
-   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
 
    Known Issues:
    o Dependent titles have no value in the entry element.

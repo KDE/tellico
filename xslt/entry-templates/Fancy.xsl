@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - fancy template for viewing entry data
 
-   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
 
    The drop-shadow effect is based on the "A List Apart" method
    at http://www.alistapart.com/articles/cssdropshadows/

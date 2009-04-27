@@ -16,7 +16,7 @@
 
    See http://www.crossref.org/schema/queryResultSchema/crossref_query_output2.0.7.xsd
 
-   Copyright (C) 2007 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/

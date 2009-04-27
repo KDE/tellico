@@ -8,7 +8,7 @@
    ===================================================================
    Tellico XSLT file - Entry template for videos
 
-   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
 
    Known Issues:
    o If there is more an one image, there's a lot of white space under

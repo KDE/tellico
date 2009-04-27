@@ -1,17 +1,26 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-1 -*-
-
+# -*- coding: utf-8 -*-
 # ***************************************************************************
-#    copyright            : (C) 2007 by Robby Stephenson
-#    email                : robby@periapsis.org
-#    based on             : fr.allocine.py by Mathias Monnerville
+#    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
 # ***************************************************************************
 #
 # ***************************************************************************
 # *                                                                         *
-# *   This program is free software; you can redistribute it and/or modify  *
-# *   it under the terms of version 2 of the GNU General Public License as  *
-# *   published by the Free Software Foundation;                            *
+# *   This program is free software; you can redistribute it and/or         *
+# *   modify it under the terms of the GNU General Public License as        *
+# *   published by the Free Software Foundation; either version 2 of        *
+# *   the License or (at your option) version 3 or any later version        *
+# *   accepted by the membership of KDE e.V. (or its successor approved     *
+# *   by the membership of KDE e.V.), which shall act as a proxy            *
+# *   defined in Section 14 of version 3 of the license.                    *
+# *                                                                         *
+# *   This program is distributed in the hope that it will be useful,       *
+# *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+# *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+# *   GNU General Public License for more details.                          *
+# *                                                                         *
+# *   You should have received a copy of the GNU General Public License     *
+# *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
 # *                                                                         *
 # ***************************************************************************
 
@@ -36,7 +45,7 @@ class BasicTellicoDOM:
 		self.__root = self.__doc.createElement('tellico')
 		self.__root.setAttribute('xmlns', 'http://periapsis.org/tellico/')
 		self.__root.setAttribute('syntaxVersion', '9')
-		
+
 		self.__collection = self.__doc.createElement('collection')
 		self.__collection.setAttribute('title', 'Griffith Import')
 		self.__collection.setAttribute('type', '3')
@@ -45,7 +54,7 @@ class BasicTellicoDOM:
 		# Add all default (standard) fields
 		self.__dfltField = self.__doc.createElement('field')
 		self.__dfltField.setAttribute('name', '_default')
-		
+
 		# change the rating to have a maximum of 10
 		self.__ratingField = self.__doc.createElement('field')
 		self.__ratingField.setAttribute('name', 'rating')
@@ -63,7 +72,7 @@ class BasicTellicoDOM:
 		propNode.setAttribute('name', 'minimum')
 		propNode.appendChild(self.__doc.createTextNode('1'))
 		self.__ratingField.appendChild(propNode);
-		
+
 		# Add a custom 'Original Title' field
 		self.__titleField = self.__doc.createElement('field')
 		self.__titleField.setAttribute('name', 'orig-title')
@@ -73,7 +82,7 @@ class BasicTellicoDOM:
 		self.__titleField.setAttribute('format', '1')
 		self.__titleField.setAttribute('type', '1')
 		self.__titleField.setAttribute('i18n', 'yes')
-		
+
 		self.__keywordField = self.__doc.createElement('field')
 		self.__keywordField.setAttribute('name', 'keyword')
 		self.__keywordField.setAttribute('title', 'Keywords')
@@ -98,7 +107,7 @@ class BasicTellicoDOM:
 		self.__fields.appendChild(self.__keywordField)
 		self.__fields.appendChild(self.__urlField)
 		self.__collection.appendChild(self.__fields)
-		
+
 		self.__images = self.__doc.createElement('images')
 
 		self.__root.appendChild(self.__collection)
@@ -121,7 +130,7 @@ class BasicTellicoDOM:
 		# make sure unique
 		set = {}
 		media = [set.setdefault(e,e) for e in orig_media if e not in set]
-		
+
 		mediaField = self.__doc.createElement('field')
 		mediaField.setAttribute('name', 'medium')
 		mediaField.setAttribute('title', 'Medium')
@@ -143,14 +152,14 @@ class BasicTellicoDOM:
 		for key, values in movieData.iteritems():
 			if key == 'id':
 				continue
-			
+
 			if self.__fieldsMap.has_key(key):
 				field = self.__fieldsMap[key]
 			else:
 				field = key
 
 			parentNode = self.__doc.createElement(field + 's')
-			
+
 			for value in values:
 				if len(value) == 0: continue
 				node = self.__doc.createElement(field)
@@ -163,18 +172,18 @@ class BasicTellicoDOM:
 					imageNode.appendChild(self.__doc.createTextNode(value[1]))
 					self.__images.appendChild(imageNode)
 					value = value[0] # value was (id, md5)
-				
+
 				if field == 'cast':
 					for v in value:
 						columnNode = self.__doc.createElement('column')
 						columnNode.appendChild(self.__doc.createTextNode(v.strip()))
 						node.appendChild(columnNode)
-					
+
 				else:
 					node.appendChild(self.__doc.createTextNode(value.strip()))
-				
+
 				if node.hasChildNodes(): parentNode.appendChild(node)
-			
+
 			if parentNode.hasChildNodes(): entryNode.appendChild(parentNode)
 
 		self.__collection.appendChild(entryNode)
@@ -210,7 +219,7 @@ class GriffithParser:
 		media = list([row[0].encode('utf-8') for row in c.fetchall()])
 		self.__domTree.addMedia(media)
 
-	
+
 	def __fetchMovieIds(self):
 		"""
 		Retrieve all movie ids
@@ -230,7 +239,7 @@ class GriffithParser:
 					'country','genre','classification','plot',
 					'runtime','o_title','studio','notes','image',
 					'[cast]','loaned','color','site')
-		
+
 		c = self.__conn.cursor()
 		c.execute("SELECT %s FROM movies WHERE movie_id=%s" % (','.join(columns),id))
 		row = c.fetchone()
@@ -240,14 +249,14 @@ class GriffithParser:
 
 		for i in range(len(columns)):
 			if row[i] == None : continue
-			
+
 			try:
 				value = row[i].encode('utf-8')
 			except:
 				value = str(row[i])
-			
+
 			col = columns[i].replace('[','').replace(']','')
-			
+
 			if col == 'genre' or col == 'studio':
 				values = value.split('/')
 			elif col == 'plot' or col == 'notes':
@@ -280,19 +289,19 @@ class GriffithParser:
 
 		media = list([row[0].encode('utf-8') for row in c.fetchall()])
 		if len(media) > 0: data['medium'] = media
-		
+
 		# get all tags
 		c.execute("SELECT name FROM tags WHERE tag_id IN (SELECT tag_id FROM movie_tag WHERE movie_id=%s)" % id)
 
 		tags = list([row[0].encode('utf-8') for row in c.fetchall()])
 		if len(tags) > 0: data['tag'] = tags
-		
+
 		# get all languages
 		c.execute("SELECT name FROM languages WHERE lang_id IN (SELECT lang_id FROM movie_lang WHERE movie_id=%s)" % id)
 
 		langs = list([row[0].encode('utf-8') for row in c.fetchall()])
 		if len(langs) > 0: data['language'] = langs
-		
+
 		return data
 
 

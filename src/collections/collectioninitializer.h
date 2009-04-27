@@ -1,6 +1,5 @@
 /***************************************************************************
-    copyright            : (C) 2009 by Robby Stephenson
-    email                : robby@periapsis.org
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,7 +19,6 @@
  *                                                                         *
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program.  If not, see <http://www.gnu.org/licenses/>. *
-
  *                                                                         *
  ***************************************************************************/
 

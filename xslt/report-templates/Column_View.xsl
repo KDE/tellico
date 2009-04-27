@@ -11,7 +11,7 @@
    ===================================================================
    Tellico XSLT file - Column View Report
 
-   Copyright (C) 2005-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://www.periapsis.org/tellico/

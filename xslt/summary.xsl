@@ -8,7 +8,7 @@
    ================================================================
    Tellico summary XSLT file
 
-   Copyright (C) 2003-2006 Robby Stephenson - robby@periapsis.org
+   Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with XML data files
    from the Tellico application, which can be found at:
