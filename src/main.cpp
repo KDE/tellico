@@ -27,7 +27,7 @@ namespace {
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", 0, ki18n("Tellico"),
                        version, ki18n(description), KAboutData::License_GPL,
-                       ki18n("(c) 2001-%1, Robby Stephenson").subs(2008), KLocalizedString(),
+                       ki18n("(c) 2001-2009, Robby Stephenson"), KLocalizedString(),
                        "http://www.periapsis.org/tellico/", "tellico-users@forge.novell.com");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
   aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
