@@ -24,6 +24,7 @@
 
 #include "detailedlistview.h"
 #include "collection.h"
+#include "collectionfactory.h"
 #include "images/imagefactory.h"
 #include "controller.h"
 #include "field.h"
@@ -114,7 +115,8 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  KConfigGroup config(KGlobal::config(), configGroup);
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
@@ -353,7 +355,8 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
 }
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  KConfigGroup config(KGlobal::config(), configGroup);
 
   // all of this is to have custom settings on a per file basis
   QString configN;

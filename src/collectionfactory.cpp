@@ -105,6 +105,10 @@ QString CollectionFactory::typeName(int type_) {
   return QLatin1String("entry");
 }
 
+QString CollectionFactory::typeName(Data::CollPtr coll_) {
+  return coll_ ? typeName(coll_->type()) : QLatin1String("entry");
+}
+
 bool CollectionFactory::isDefaultField(int type_, const QString& name_) {
   Data::CollPtr coll = collection(type_, true);
   foreach(Data::FieldPtr field, coll->fields()) {

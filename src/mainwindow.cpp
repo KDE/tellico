@@ -30,6 +30,7 @@
 #include "groupview.h"
 #include "viewstack.h"
 #include "collection.h"
+#include "collectionfactory.h"
 #include "entry.h"
 #include "configdialog.h"
 #include "filter.h"
@@ -819,7 +820,8 @@ void MainWindow::saveOptions() {
 }
 
 void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
-  KConfigGroup group(KGlobal::config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  KConfigGroup group(KGlobal::config(), configGroup);
 
   QString defaultGroup = coll_->defaultGroupField();
   QString entryGroup;
@@ -861,7 +863,8 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
   }
 
   int configIndex = -1;
-  KConfigGroup config(KGlobal::config(), QString::fromLatin1("Options - %1").arg(coll_->typeName()));
+  QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  KConfigGroup config(KGlobal::config(), configGroup);
   QString groupName;
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {

@@ -26,6 +26,7 @@
 #include "models.h"
 #include "../document.h"
 #include "../collection.h"
+#include "../collectionfactory.h"
 #include "../entry.h"
 #include "../tellico_debug.h"
 
@@ -117,7 +118,7 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
       // it points to a borrower
       return borrower(index_)->name();
     case Qt::DecorationRole:
-      return parent.isValid() ? KIcon(entry(index_)->collection()->typeName())
+      return parent.isValid() ? KIcon(CollectionFactory::typeName(entry(index_)->collection()))
                               : KIcon(QLatin1String("kaddressbook"));
     case RowCountRole:
       return rowCount(index_);

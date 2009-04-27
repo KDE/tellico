@@ -25,12 +25,11 @@
 #include "collection.h"
 #include "field.h"
 #include "entry.h"
-#include "tellico_debug.h"
 #include "tellico_utils.h"
-#include "collectionfactory.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
 #include "tellico_kernel.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 
@@ -69,10 +68,6 @@ Collection::~Collection() {
   }
   qDeleteAll(m_entryGroupDicts);
   m_entryGroupDicts.clear();
-}
-
-QString Collection::typeName() const {
-  return CollectionFactory::typeName(type());
 }
 
 bool Collection::addFields(Tellico::Data::FieldList list_) {

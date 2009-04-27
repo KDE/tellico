@@ -50,6 +50,7 @@ public:
   static Data::CollPtr collection(const QString& typeName, bool addDefaultFields);
   static CollectionNameHash nameHash();
   static QString typeName(int type);
+  static QString typeName(Data::CollPtr coll);
   static bool isDefaultField(int type, const QString& name);
 
   // public so we can iterate over them

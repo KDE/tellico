@@ -85,7 +85,7 @@ int Kernel::collectionType() const {
 }
 
 QString Kernel::collectionTypeName() const {
-  return Data::Document::self()->collection()->typeName();
+  return CollectionFactory::typeName(collectionType());
 }
 
 void Kernel::sorry(const QString& text_, QWidget* widget_/* =0 */) {

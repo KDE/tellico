@@ -26,6 +26,7 @@
 #include "models.h"
 #include "../entry.h"
 #include "../collection.h"
+#include "../collectionfactory.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -124,7 +125,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
       }
       return QString(); // DisplayRole should get an empty string, supposedly...
     case Qt::DecorationRole:
-      return parent.isValid() ? KIcon(entry(index_)->collection()->typeName())
+      return parent.isValid() ? KIcon(CollectionFactory::typeName(entry(index_)->collection()))
                               : KIcon(m_groupIconNames.at(index_.row()));
     case RowCountRole:
       return rowCount(index_);
