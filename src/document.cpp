@@ -40,6 +40,7 @@
 #include "utils/stringset.h"
 #include "progressmanager.h"
 #include "core/tellico_config.h"
+#include "entrymerger.h"
 #include "tellico_debug.h"
 
 #include <kmessagebox.h>
@@ -339,7 +340,7 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_)
       }
     }
     if(matchEntry) {
-      m_coll->mergeEntry(matchEntry, newEntry, false /*overwrite*/);
+      EntryMerger::mergeEntry(matchEntry, newEntry, false /*overwrite*/);
     } else {
       Data::EntryPtr e(new Data::Entry(*newEntry));
       e->setCollection(m_coll);

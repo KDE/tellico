@@ -39,6 +39,8 @@ Q_OBJECT
 public:
   EntryMerger(Data::EntryList entries, QObject* parent);
 
+  static bool mergeEntry(Data::EntryPtr entry1, Data::EntryPtr entry2, bool overwrite, bool askUser=false);
+
 public slots:
   void slotCancel();
 

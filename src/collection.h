@@ -339,7 +339,6 @@ public:
    */
   virtual QString prepareText(const QString& text) const;
 
-  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, bool askUser=false);
   /**
    * The string used for empty values. This forces consistency.
    */

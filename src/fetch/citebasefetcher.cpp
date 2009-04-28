@@ -32,6 +32,7 @@
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../core/filehandler.h"
+#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -233,7 +234,7 @@ void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   Data::CollPtr coll = imp.collection();
   if(coll && coll->entryCount() > 0) {
     myLog() << "CitebaseFetcher::updateEntrySynchronous() - found arxiv result, merging" << endl;
-    Data::Collection::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
+    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
   }
 }
 

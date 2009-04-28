@@ -29,7 +29,7 @@
 #include "risimporttest.moc"
 
 //#include "../translators/risimporter.h"
-#include "../field.h"
+#include "../collection.h"
 
 QTEST_KDEMAIN_CORE( RisImportTest )
 
@@ -38,8 +38,8 @@ void RisImportTest::testEmpty() {
   KUrl::List emptyList;
 //  Tellico::Import::RISImporter importer(emptyUrl);
 //  Tellico::Data::CollPtr coll = importer.collection();
-  Tellico::Data::FieldPtr field;
+  Tellico::Data::CollPtr coll;
 
-//  QVERIFY(!coll.isNull());
-//  QCOMPARE(coll->entryCount(), 0);
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->entryCount(), 0);
 }

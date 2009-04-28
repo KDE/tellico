@@ -33,6 +33,7 @@
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
+#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -346,8 +347,8 @@ void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(coll && coll->entryCount() > 0) {
-    myLog() << "ArxivFetcher::updateEntrySynchronous() - found Arxiv result, merging" << endl;
-    Data::Collection::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
+    myLog() << "found Arxiv result, merging";
+    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
     // the arxiv id might have a version#
     entry->setField(QLatin1String("arxiv"),
                     coll->entries().front()->field(QLatin1String("arxiv")));
