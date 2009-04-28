@@ -38,6 +38,7 @@ void CollectionTest::testEmpty() {
 
   QVERIFY(nullColl.isNull());
   QCOMPARE(coll.entryCount(), 0);
+  QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QCOMPARE(coll.fields().count(), 0);
   QCOMPARE(coll.title(), QLatin1String("Title"));
 }

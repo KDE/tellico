@@ -113,13 +113,6 @@ public:
    */
   void setTitle(const QString& title) { m_title = title; }
   /**
-   * Returns the name of the entries in the collection, e.g. "book".
-   * Not translated.
-   *
-   * @return The type name
-   */
-  QString typeName() const;
-  /**
    * Returns a reference to the list of all the entries in the collection.
    *
    * @return The list of entries
