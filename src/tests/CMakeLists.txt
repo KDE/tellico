@@ -41,5 +41,5 @@ SET(collection_SRCS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(collectiontest core utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-#KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ${collection_SRCS})
-#TARGET_LINK_LIBRARIES(risimporttest core utils translators ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTTEST_LIBRARY} )
+#KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp ${collection_SRCS})
+#TARGET_LINK_LIBRARIES(amcimporttest core utils images collections translators ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTTEST_LIBRARY} )

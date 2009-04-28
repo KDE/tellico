@@ -22,16 +22,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef RISIMPORTTEST_H
-#define RISIMPORTTEST_H
+#undef QT_NO_CAST_FROM_ASCII
 
-#include <QObject>
+#include "qtest_kde.h"
+#include "amcimporttest.h"
+#include "amcimporttest.moc"
 
-class RisImportTest : public QObject {
-Q_OBJECT
+#include "../translators/amcimporter.h"
+#include "../collection.h"
 
-private Q_SLOTS:
-  void testEmpty();
-};
+QTEST_KDEMAIN_CORE( AmcImportTest )
 
-#endif
+void AmcImportTest::testEmpty() {
+  KUrl emptyUrl;
+  KUrl::List emptyList;
+  Tellico::Import::AMCImporter importer(emptyUrl);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->entryCount(), 0);
+}

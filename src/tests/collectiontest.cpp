@@ -39,6 +39,18 @@ void CollectionTest::testEmpty() {
   QVERIFY(nullColl.isNull());
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
-  QCOMPARE(coll.fields().count(), 0);
+  QVERIFY(coll.fields().isEmpty());
   QCOMPARE(coll.title(), QLatin1String("Title"));
+}
+
+void CollectionTest::testCollection() {
+  Tellico::Data::Collection coll(true); // add default field
+
+  QCOMPARE(coll.entryCount(), 0);
+  QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
+  QCOMPARE(coll.fields().count(), 1);
+  QVERIFY(coll.hasField(QLatin1String("title")));
+  QVERIFY(coll.peopleFields().isEmpty());
+  QVERIFY(coll.imageFields().isEmpty());
+  QVERIFY(!coll.hasImages());
 }
