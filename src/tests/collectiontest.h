@@ -22,24 +22,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
+#ifndef COLLECTIONTEST_H
+#define COLLECTIONTEST_H
 
-#include "qtest_kde.h"
-#include "risimporttest.h"
-#include "risimporttest.moc"
+#include <QObject>
 
-//#include "../translators/risimporter.h"
-#include "../collection.h"
+class CollectionTest : public QObject {
+Q_OBJECT
 
-QTEST_KDEMAIN_CORE( RisImportTest )
+private Q_SLOTS:
+  void testEmpty();
+};
 
-void RisImportTest::testEmpty() {
-  KUrl emptyUrl;
-  KUrl::List emptyList;
-//  Tellico::Import::RISImporter importer(emptyUrl);
-//  Tellico::Data::CollPtr coll = importer.collection();
-  Tellico::Data::CollPtr coll;
-
-  QVERIFY(coll.isNull());
-  QCOMPARE(coll->entryCount(), 0);
-}
+#endif

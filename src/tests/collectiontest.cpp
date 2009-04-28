@@ -25,21 +25,19 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "risimporttest.h"
-#include "risimporttest.moc"
+#include "collectiontest.h"
+#include "collectiontest.moc"
 
-//#include "../translators/risimporter.h"
 #include "../collection.h"
 
-QTEST_KDEMAIN_CORE( RisImportTest )
+QTEST_KDEMAIN_CORE( CollectionTest )
 
-void RisImportTest::testEmpty() {
-  KUrl emptyUrl;
-  KUrl::List emptyList;
-//  Tellico::Import::RISImporter importer(emptyUrl);
-//  Tellico::Data::CollPtr coll = importer.collection();
-  Tellico::Data::CollPtr coll;
+void CollectionTest::testEmpty() {
+  Tellico::Data::CollPtr nullColl;
+  Tellico::Data::Collection coll(QLatin1String("Title"));
 
-  QVERIFY(coll.isNull());
-  QCOMPARE(coll->entryCount(), 0);
+  QVERIFY(nullColl.isNull());
+  QCOMPARE(coll.entryCount(), 0);
+  QCOMPARE(coll.fields().count(), 0);
+  QCOMPARE(coll.title(), QLatin1String("Title"));
 }

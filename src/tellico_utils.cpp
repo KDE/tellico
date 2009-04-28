@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "tellico_utils.h"
-#include "tellico_kernel.h"
 #include "tellico_debug.h"
 
 #include <kapplication.h>
