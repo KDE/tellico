@@ -27,12 +27,24 @@
 
 #include "datavectors.h"
 
+#include <kurl.h>
+
 namespace Tellico {
 
 class EntryComparison {
 public:
+  /**
+   * Set the url for comparing relative url field values
+   * this is totally not the way the comparison should be done, but it's too expensive to include
+   * a connection to document.h here
+   */
+  static void setDocumentUrl(const KUrl& url);
+
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field);
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, const QString& field, const Data::Collection* coll);
+
+private:
+  static KUrl s_documentUrl;
 };
 
 } // namespace

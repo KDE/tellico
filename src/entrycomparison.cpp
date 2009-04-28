@@ -27,13 +27,16 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "collection.h"
-#include "document.h"
 #include "utils/isbnvalidator.h"
 #include "utils/lccnvalidator.h"
 
-#include <kurl.h>
-
 using Tellico::EntryComparison;
+
+KUrl EntryComparison::s_documentUrl;
+
+void EntryComparison::setDocumentUrl(const KUrl& url_) {
+  s_documentUrl = url_;
+}
 
 int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, const QString& f, const Tellico::Data::Collection* c) {
   return score(e1, e2, c->fieldByName(f));
@@ -65,7 +68,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     // versions before 1.2.7 could have saved the url without the protocol
     if(KUrl(s1) == KUrl(s2) ||
        (f->property(QLatin1String("relative")) == QLatin1String("true") &&
-        KUrl(Data::Document::self()->URL(), s1) == KUrl(Data::Document::self()->URL(), s2))) {
+        KUrl(s_documentUrl, s1) == KUrl(s_documentUrl, s2))) {
       return 5;
     }
   }

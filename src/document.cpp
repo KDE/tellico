@@ -41,6 +41,7 @@
 #include "progressmanager.h"
 #include "core/tellico_config.h"
 #include "entrymerger.h"
+#include "entrycomparison.h"
 #include "tellico_debug.h"
 
 #include <kmessagebox.h>
@@ -78,6 +79,7 @@ void Document::setURL(const KUrl& url_) {
   m_url = url_;
   if(m_url.fileName() != i18n(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
+    EntryComparison::setDocumentUrl(m_url);
   }
 }
 
