@@ -149,12 +149,6 @@ public:
   ~Field();
 
   /**
-   * Returns the id of the field.
-   *
-   * @return The id
-   */
-//  ID id() const { return m_id; }
-  /**
    * Returns the name of the field.
    *
    * @return The field name
@@ -326,14 +320,8 @@ public:
   static void convertOldRating(Data::FieldPtr field);
 
 private:
-  /*
-   * Gets the preferred ID of the collection. Currently, it just gets incremented as
-   * new collections are created.
-   */
-  static ID getID();
   static QRegExp s_delimiter;
 
-  ID m_id;
   QString m_name;
   QString m_title;
   QString m_category;

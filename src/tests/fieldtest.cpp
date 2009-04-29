@@ -41,7 +41,6 @@ void FieldTest::testEmpty() {
   QCOMPARE(field1.title(), QLatin1String("title"));
   // description should match title, to begin with
   QCOMPARE(field1.description(), QLatin1String("title"));
-  QCOMPARE(field1.id(), (long)1);
   QCOMPARE(field1.flags(), 0);
   QCOMPARE(field1.formatFlag(), Tellico::Data::Field::FormatNone);
   field1.setTitle("newtitle");

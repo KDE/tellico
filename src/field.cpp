@@ -61,14 +61,12 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     setProperty(QLatin1String("minimum"), QLatin1String("1"));
     setProperty(QLatin1String("maximum"), QLatin1String("5"));
   }
-  m_id = getID();
 }
 
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
     : QSharedData(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
       m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
-  m_id = getID();
 }
 
 Field::Field(const Field& field_)
@@ -82,7 +80,6 @@ Field::Field(const Field& field_)
     m_type = Table;
     setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
-  m_id = getID();
 }
 
 Field& Field::operator=(const Field& field_) {
@@ -103,7 +100,6 @@ Field& Field::operator=(const Field& field_) {
   m_flags = field_.flags();
   m_formatFlag = field_.formatFlag();
   m_properties = field_.propertyList();
-  m_id = getID();
   return *this;
 }
 
@@ -316,10 +312,4 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   //remove any old property
   field_->setProperty(QLatin1String("rating"), QString());
   field_->setType(Rating);
-}
-
-// static
-Tellico::Data::ID Field::getID() {
-  static ID id = 0;
-  return ++id;
 }
