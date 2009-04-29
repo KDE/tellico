@@ -357,7 +357,7 @@ void EntryView::slotResetColors() {
 }
 
 void EntryView::resetColors() {
-  ImageFactory::createStyleImages(); // recreate gradients
+  ImageFactory::createStyleImages(m_entry ? m_entry->collection()->type() : Data::Collection::Base); // recreate gradients
 
   QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {

@@ -57,9 +57,9 @@ void PreviewDialog::setXSLTFile(const QString& file_) {
   m_view->setXSLTFile(file_);
 }
 
-void PreviewDialog::setXSLTOptions(Tellico::StyleOptions options_) {
+void PreviewDialog::setXSLTOptions(int collectionType_, Tellico::StyleOptions options_) {
   options_.imgDir = m_tempDir->name(); // images always get written to temp dir
-  ImageFactory::createStyleImages(options_);
+  ImageFactory::createStyleImages(collectionType_, options_);
   m_view->setXSLTOptions(options_);
 }
 

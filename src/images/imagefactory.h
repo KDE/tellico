@@ -138,7 +138,7 @@ public:
   /**
    * Creates the gradient images used in the entry view.
    */
-  static void createStyleImages(const StyleOptions& options = StyleOptions());
+  static void createStyleImages(int collectionType, const StyleOptions& options = StyleOptions());
 
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();

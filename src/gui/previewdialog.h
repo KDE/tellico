@@ -45,7 +45,7 @@ public:
   ~PreviewDialog();
 
   void setXSLTFile(const QString& file);
-  void setXSLTOptions(StyleOptions options);
+  void setXSLTOptions(int collectionType, StyleOptions options);
   void showEntry(Data::EntryPtr entry);
 
 private:

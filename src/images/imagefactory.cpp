@@ -26,10 +26,9 @@
 #include "image.h"
 #include "imageinfo.h"
 #include "imagedirectory.h"
-#include "filehandler.h"
+#include "../core/filehandler.h"
 #include "../core/tellico_config.h"
 #include "../tellico_utils.h"
-#include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
@@ -103,7 +102,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
 //  myLog() << "ImageFactory::addImageImpl(KUrl) - " << url_.prettyUrl();
   Data::Image* img = FileHandler::readImageFile(url_, quiet_, refer_);
   if(!img) {
-    myLog() << "ImageFactory::addImageImpl() - image not found: " << url_.prettyUrl();
+    myLog() << "image not found: " << url_.prettyUrl();
     return Data::Image::null;
   }
   if(img->isNull()) {
@@ -171,13 +170,13 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
   // do not call imageById(), it causes infinite looping with Document::loadImage()
   Data::Image* img = d->imageCache.object(id_);
   if(img) {
-    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in cache: " << id_;
+    myLog() << "already exists in cache: " << id_;
     return *img;
   }
 
   img = d->imageDict.value(id_);
   if(img) {
-    myLog() << "ImageFactory::addImageImpl(QByteArray) - already exists in dict: " << id_;
+    myLog() << "already exists in dict: " << id_;
     return *img;
   }
 
@@ -188,7 +187,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
     return Data::Image::null;
   }
 
-//  myLog() << "ImageFactory::addImageImpl(QByteArray) - " << data_.size()
+//  myLog() << "data_.size()
 //          << " bytes, format = " << format_
 //          << ", id = "<< img->id();
 
@@ -218,10 +217,10 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
 
   if(!d->imageCache.insert(img->id(), img, img->numBytes())) {
     // can't hold it in the cache
-    kWarning() << "Tellico's image cache is unable to hold the image, it might be too big!";
-    kWarning() << "Image name is " << img->id();
-    kWarning() << "Image size is " << img->numBytes();
-    kWarning() << "Max cache size is " << d->imageCache.maxCost();
+    myWarning() << "Tellico's image cache is unable to hold the image, it might be too big!";
+    myWarning() << "Image name is " << img->id();
+    myWarning() << "Image size is " << img->numBytes();
+    myWarning() << "Max cache size is " << d->imageCache.maxCost();
 
     // add it back to the dict, but add the image to the list of
     // images to release later. Necessary to avoid a memory leak since new Image()
@@ -414,9 +413,9 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
 
   // pixmap size is w x h x d, divided by 8 bits
   if(!factory->d->pixmapCache.insert(key, pix, pix->width()*pix->height()*pix->depth()/8)) {
-    kWarning() << "ImageFactory::pixmap() - can't save in cache: " << id_;
-    kWarning() << "### Current pixmap size is " << (pix->width()*pix->height()*pix->depth()/8);
-    kWarning() << "### Max pixmap cache size is " << factory->d->pixmapCache.maxCost();
+    myWarning() << "can't save in cache: " << id_;
+    myWarning() << "### Current pixmap size is " << (pix->width()*pix->height()*pix->depth()/8);
+    myWarning() << "### Max pixmap cache size is " << factory->d->pixmapCache.maxCost();
     QPixmap pix2(*pix);
     delete pix;
     return pix2;
@@ -437,15 +436,13 @@ void ImageFactory::clean(bool deleteTempDirectory_) {
   }
 }
 
-void ImageFactory::createStyleImages(const Tellico::StyleOptions& opt_) {
-  const int collType = Kernel::self()->collectionType();
-
+void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOptions& opt_) {
   const QColor& baseColor = opt_.baseColor.isValid()
                           ? opt_.baseColor
-                          : Config::templateBaseColor(collType);
+                          : Config::templateBaseColor(collectionType_);
   const QColor& highColor = opt_.highlightedBaseColor.isValid()
                           ? opt_.highlightedBaseColor
-                          : Config::templateHighlightedBaseColor(collType);
+                          : Config::templateHighlightedBaseColor(collectionType_);
 
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
