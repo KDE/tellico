@@ -33,12 +33,15 @@
 
 QTEST_KDEMAIN_CORE( AmcImportTest )
 
-void AmcImportTest::testEmpty() {
-  KUrl emptyUrl;
-  KUrl::List emptyList;
-  Tellico::Import::AMCImporter importer(emptyUrl);
+// this is a real basic test right now, AMC doesn't run real well under wine
+void AmcImportTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.amc");
+  Tellico::Import::AMCImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
-  QCOMPARE(coll->entryCount(), 0);
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QCOMPARE(entry->title(), QLatin1String("Title2"));
 }

@@ -31,7 +31,7 @@ class AmcImportTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
-  void testEmpty();
+  void testImport();
 };
 
 #endif

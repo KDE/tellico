@@ -42,7 +42,7 @@
 
 namespace {
   static const QByteArray AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
-  static const quint32 AMC_MAX_STRING_SIZE = 16 * 1024;
+  static const quint32 AMC_MAX_STRING_SIZE = 128 * 1024;
 }
 
 using Tellico::Import::AMCImporter;
