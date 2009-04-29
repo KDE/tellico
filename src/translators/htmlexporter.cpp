@@ -32,9 +32,9 @@
 #include "../images/imagefactory.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
-#include "../tellico_strings.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
+#include "../core/tellico_strings.h"
 #include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 

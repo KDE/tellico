@@ -27,7 +27,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../field.h"
 #include "../entry.h"
-#include "../tellico_strings.h"
+#include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
 #include <kapplication.h>

@@ -32,7 +32,7 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../utils/isbnvalidator.h"
-#include "../tellico_strings.h"
+#include "../core/tellico_strings.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"

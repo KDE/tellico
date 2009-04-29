@@ -6,6 +6,7 @@ SET(core_STAT_SRCS
    filehandler.cpp
    netaccess.cpp
    tellico_config_addons.cpp
+   tellico_strings.cpp
    )
 
 SET(core_KCFG_SRCS

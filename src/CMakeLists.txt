@@ -55,7 +55,6 @@ SET(tellico_SRCS
    reportdialog.cpp
    statusbar.cpp
    tellico_kernel.cpp
-   tellico_strings.cpp
    tellico_utils.cpp
    viewstack.cpp
    )
