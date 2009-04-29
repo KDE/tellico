@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef AMCIIMPORTTEST_H
+#ifndef AMCIMPORTTEST_H
 #define AMCIMPORTTEST_H
 
 #include <QObject>

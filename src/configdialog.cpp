@@ -957,7 +957,7 @@ void ConfigDialog::slotShowTemplatePreview() {
   options.textColor  = m_textColorCombo->color();
   options.highlightedTextColor = m_highTextColorCombo->color();
   options.highlightedBaseColor = m_highBaseColorCombo->color();
-  dlg->setXSLTOptions(options);
+  dlg->setXSLTOptions(Kernel::self()->collectionType(), options);
 
   Data::CollPtr c = CollectionFactory::collection(Kernel::self()->collectionType(), true);
   Data::EntryPtr e(new Data::Entry(c));
