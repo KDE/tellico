@@ -74,7 +74,6 @@ Entry::Entry(const Entry& entry_) :
 Entry& Entry::operator=(const Entry& other_) {
   if(this == &other_) return *this;
 
-//  myDebug() << "Entry::operator=()" << endl;
 //  static_cast<QSharedData&>(*this) = static_cast<const QSharedData&>(other_);
   m_coll = other_.m_coll;
   m_id = other_.m_id;
@@ -92,7 +91,7 @@ Tellico::Data::CollPtr Entry::collection() const {
 
 void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   if(coll_ == m_coll) {
-    myDebug() << "Entry::setCollection() - already belongs to collection!" << endl;
+    myDebug() << "already belongs to collection!";
     return;
   }
   // special case adding a book to a bibtex collection
@@ -190,7 +189,7 @@ bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
 
 bool Entry::setField(const QString& name_, const QString& value_) {
   if(name_.isEmpty()) {
-    kWarning() << "Entry::setField() - empty field name for value: " << value_;
+    kWarning() << "empty field name for value: " << value_;
     return false;
   }
   // an empty value means remove the field
@@ -204,15 +203,13 @@ bool Entry::setField(const QString& name_, const QString& value_) {
 
 #ifndef NDEBUG
   if(m_coll && (m_coll->fields().count() == 0 || !m_coll->hasField(name_))) {
-    myDebug() << "Entry::setField() - unknown collection entry field - "
-              << name_ << endl;
+    myDebug() << "unknown collection entry field - " << name_;
     return false;
   }
 #endif
 
   if(m_coll && !m_coll->isAllowed(name_, value_)) {
-    myDebug() << "Entry::setField() - for " << name_
-              << ", value is not allowed - " << value_ << endl;
+    myDebug() << "for " << name_ << ", value is not allowed - " << value_;
     return false;
   }
 
@@ -253,12 +250,11 @@ bool Entry::removeFromGroup(EntryGroup* group_) {
   // if the removal isn't successful, just return
   bool success = m_groups.removeAll(group_);
   success = success && group_->removeAll(EntryPtr(this));
-//  myDebug() << "Entry::removeFromGroup() - removing from group - "
-//              << group_->fieldName() << "::" << group_->groupName() << endl;
+//  myDebug() << "removing from group - " << group_->fieldName() << "::" << group_->groupName();
   if(success) {
 //    m_coll->groupModified(group_);
   } else {
-    myDebug() << "Entry::removeFromGroup() failed! " << endl;
+    myDebug() << "failed!";
   }
   return success;
 }
@@ -271,7 +267,7 @@ void Entry::clearGroups() {
 // update that list. This is the function that actually parses the field values
 // and returns the list of the group names.
 QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
-//  myDebug() << "Entry::groupsByfieldName() - " << fieldName_ << endl;
+//  myDebug() << "Entry::groupsByfieldName() - " << fieldName_;
   FieldPtr f = m_coll->fieldByName(fieldName_);
 
   // easy if not allowing multiple values
@@ -357,7 +353,7 @@ QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool 
     pctPos = format_.indexOf(QLatin1Char('%'), curPos);
   }
   result += format_.mid(curPos, format_.length()-curPos);
-//  myDebug() << "Entry::dependentValue() - " << format_ << " = " << result << endl;
+//  myDebug() << "format_ << " = " << result;
   // sometimes field value might empty, resulting in multiple consecutive white spaces
   // so let's simplify that...
   return result.simplified();
