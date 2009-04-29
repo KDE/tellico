@@ -133,7 +133,7 @@ public:
    */
   virtual void openFile(const QString& file);
   virtual void setFilter(const QString& text);
-  virtual bool showEntry(long id);
+  virtual bool showEntry(Data::ID id);
 
   bool eventFilter(QObject* watched, QEvent* event);
 

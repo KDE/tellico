@@ -1927,7 +1927,7 @@ bool MainWindow::exportCollection(Tellico::Export::Format format_, const KUrl& u
   return success;
 }
 
-bool MainWindow::showEntry(long id) {
+bool MainWindow::showEntry(Data::ID id) {
   Data::EntryPtr entry = Data::Document::self()->collection()->entryById(id);
   if(entry) {
     m_viewStack->showEntry(entry);

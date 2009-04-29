@@ -110,7 +110,7 @@ void ModifyEntries::swapValues() {
   for(int i = 0; i < m_entries.count(); ++i) {
     // need to swap entry values, not just pointers
     // the id gets reset when copying, so need to keep it
-    long id = m_entries[i]->id();
+    Data::ID id = m_entries[i]->id();
     Data::Entry tmp(*m_entries[i]); // tmp id becomes -1
     *m_entries[i] = *m_oldEntries[i]; // id becomes -1
     m_entries[i]->setId(id); // id becomes what was originally

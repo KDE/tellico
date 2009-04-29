@@ -41,6 +41,9 @@ namespace Tellico {
   typedef QList<FilterPtr> FilterList;
 
   namespace Data {
+    // used for fields, collections, and entries
+    typedef int ID;
+
     class Collection;
     typedef KSharedPtr<Collection> CollPtr;
     typedef QList<CollPtr> CollList;

@@ -55,7 +55,7 @@ Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(
 #endif
 }
 
-Entry::Entry(Tellico::Data::CollPtr coll_, int id_) : QSharedData(), m_coll(coll_), m_id(id_) {
+Entry::Entry(Tellico::Data::CollPtr coll_, ID id_) : QSharedData(), m_coll(coll_), m_id(id_) {
 #ifndef NDEBUG
   if(!coll_) {
     kWarning() << "Entry() - null collection pointer!";

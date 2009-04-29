@@ -38,13 +38,13 @@ using Tellico::FilterModel;
 
 class FilterModel::Node {
 public:
-  Node(Node* parent_, long id_=-1) : m_parent(parent_), m_id(id_) {}
+  Node(Node* parent_, Data::ID id_=-1) : m_parent(parent_), m_id(id_) {}
   ~Node() { qDeleteAll(m_children); }
 
   Node* parent() const { return m_parent; }
   Node* child(int row) const { return m_children.at(row); }
   int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : 0; }
-  long id() const { return m_id; }
+  Data::ID id() const { return m_id; }
   int count() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
@@ -54,7 +54,7 @@ public:
 private:
   Node* m_parent;
   QList<Node*> m_children;
-  long m_id;
+  Data::ID m_id;
 };
 
 FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)) {

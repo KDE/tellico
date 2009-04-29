@@ -31,8 +31,7 @@
 
 #include <QStringList>
 
-// DBus doesn't have a type for int int, which is the type of the entry id right now
-// go ahead and downcast to an int
+// the entry id is typedef'd to an int, but we need to use an int for DBUS
 
 namespace Tellico {
 

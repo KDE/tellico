@@ -319,7 +319,7 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
 }
 
 // static
-long Field::getID() {
-  static long id = 0;
+Tellico::Data::ID Field::getID() {
+  static ID id = 0;
   return ++id;
 }

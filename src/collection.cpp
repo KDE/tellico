@@ -714,7 +714,7 @@ void Collection::invalidateGroups() {
   blockSignals(false);
 }
 
-Tellico::Data::EntryPtr Collection::entryById(long id_) {
+Tellico::Data::EntryPtr Collection::entryById(ID id_) {
   return EntryPtr(m_entryIdDict[id_]);
 }
 
@@ -851,8 +851,8 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
   return res;
 }
 
-long Collection::getID() {
-  static long id = 0;
+Tellico::Data::ID Collection::getID() {
+  static ID id = 0;
   return ++id;
 }
 

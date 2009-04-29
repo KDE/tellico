@@ -99,7 +99,7 @@ public:
    *
    * @return The id
    */
-  long id() const { return m_id; }
+  ID id() const { return m_id; }
   /**
    * Returns the name of the collection.
    *
@@ -124,7 +124,7 @@ public:
    * @return The list of fields
    */
   const FieldList& fields() const { return m_fields; }
-  EntryPtr entryById(long id);
+  EntryPtr entryById(ID id);
   /**
    * Returns a reference to the list of the collection's people fields.
    *
@@ -363,7 +363,7 @@ private:
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
    * new collections are created.
    */
-  static long getID();
+  static int getID();
 
   /**
    * The copy constructor is private, to ensure that it's never used.
@@ -374,8 +374,8 @@ private:
    */
   Collection operator=(const Collection& coll);
 
-  long m_id;
-  long m_nextEntryId;
+  ID m_id;
+  ID m_nextEntryId;
   QString m_title;
   QString m_defaultGroupField;
   QString m_lastGroupField;
@@ -390,7 +390,7 @@ private:
   QStringList m_fieldTitles;
 
   EntryList m_entries;
-  QHash<long, Entry*> m_entryIdDict;
+  QHash<int, Entry*> m_entryIdDict;
 
   QHash<QString, EntryGroupDict*> m_entryGroupDicts;
   QStringList m_entryGroups;

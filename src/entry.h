@@ -87,7 +87,7 @@ public:
    * @param coll A pointer to the parent collection object
    */
   Entry(CollPtr coll);
-  Entry(CollPtr coll, int id);
+  Entry(CollPtr coll, ID id);
   /**
    * The copy constructor, needed since the id must be different.
    */
@@ -157,8 +157,8 @@ public:
    *
    * @return The id
    */
-  long id() const { return m_id; }
-  void setId(long id) { m_id = id; }
+  ID id() const { return m_id; }
+  void setId(ID id) { m_id = id; }
   /**
    * Adds the entry to a group. The group list within the entry is updated
    * and the entry is added to the group.
@@ -235,7 +235,7 @@ private:
   bool operator==(const Entry& other);
 
   CollPtr m_coll;
-  long m_id;
+  ID m_id;
   StringMap m_fieldValues;
   mutable StringMap m_formattedFields;
   QList<EntryGroup*> m_groups;
