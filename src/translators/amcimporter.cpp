@@ -42,11 +42,12 @@
 
 namespace {
   static const QByteArray AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
+  static const quint32 AMC_MAX_STRING_SIZE = 16 * 1024;
 }
 
 using Tellico::Import::AMCImporter;
 
-AMCImporter::AMCImporter(const KUrl& url_) : DataImporter(url_), m_cancelled(false) {
+AMCImporter::AMCImporter(const KUrl& url_) : DataImporter(url_), m_cancelled(false), m_failed(false) {
 }
 
 AMCImporter::~AMCImporter() {
@@ -97,7 +98,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
 
   const bool showProgress = options() & ImportProgress;
 
-  while(!m_cancelled && !f->atEnd()) {
+  while(!m_cancelled && !m_failed && !f->atEnd()) {
     readEntry();
     if(showProgress) {
       emit signalProgress(this, f->pos());
@@ -125,8 +126,13 @@ quint32 AMCImporter::readInt() {
 
 QString AMCImporter::readString() {
   // The serialization format is a length specifier first, then l bytes of data
-  uint l = readInt();
+  quint32 l = readInt();
   if(l == 0) {
+    return QString();
+  }
+  if(l > AMC_MAX_STRING_SIZE) {
+    myDebug() << "string is too long:" << l;
+    m_failed = true;
     return QString();
   }
   QVector<char> buffer(l+1);
@@ -137,8 +143,13 @@ QString AMCImporter::readString() {
 }
 
 QString AMCImporter::readImage(const QString& format_) {
-  uint l = readInt();
+  quint32 l = readInt();
   if(l == 0) {
+    return QString();
+  }
+  if(l > AMC_MAX_STRING_SIZE) {
+    myDebug() << "string is too long:" << l;
+    m_failed = true;
     return QString();
   }
   QVector<char> buffer(l+1);
@@ -148,7 +159,7 @@ QString AMCImporter::readImage(const QString& format_) {
   qCopy(buffer.data(), buffer.data() + l, bytes.begin());
   QImage img = QImage::fromData(bytes);
   if(img.isNull()) {
-    myDebug() << "AMCImporter::readImage() - null image" << endl;
+    myDebug() << "null image";
     return QString();
   }
   QString format = QLatin1String("PNG");
@@ -163,22 +174,22 @@ QString AMCImporter::readImage(const QString& format_) {
 void AMCImporter::readEntry() {
   Data::EntryPtr e(new Data::Entry(m_coll));
 
-  int id = readInt();
+  quint32 id = readInt();
   if(id > 0) {
     e->setId(id);
   }
   readInt(); // add date
 
-  int rating = readInt();
+  quint32 rating = readInt();
   if(m_majVersion >= 3 && m_minVersion >= 5) {
     rating /= 10;
   }
   e->setField(QLatin1String("rating"), QString::number(rating));
-  int year = readInt();
+  quint32 year = readInt();
   if(year > 0) {
     e->setField(QLatin1String("year"), QString::number(year));
   }
-  int time = readInt();
+  quint32 time = readInt();
   if(time > 0) {
     e->setField(QLatin1String("running-time"), QString::number(time));
   }

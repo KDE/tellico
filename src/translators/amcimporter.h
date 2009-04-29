@@ -54,7 +54,8 @@ private:
   QStringList parseCast(const QString& text);
 
   Data::CollPtr m_coll;
-  bool m_cancelled : 1;
+  bool m_cancelled;
+  bool m_failed;
   QDataStream m_ds;
   int m_majVersion;
   int m_minVersion;
