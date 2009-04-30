@@ -24,7 +24,7 @@
 
 #include "filehandler.h"
 #include "../images/image.h"
-#include "../tellico_strings.h"
+#include "tellico_strings.h"
 #include "../tellico_debug.h"
 #include "netaccess.h"
 #include "../gui/cursorsaver.h"
