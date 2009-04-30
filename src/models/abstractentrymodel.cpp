@@ -70,7 +70,7 @@ void AbstractEntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
 void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
     int idx = m_entries.indexOf(entry);
-    emit dataChanged(createIndex(idx, 0), createIndex(idx, columnCount(index(idx, 0)) - 1));
+    emit dataChanged(createIndex(idx, 0), createIndex(idx, 0));
   }
 }
 
