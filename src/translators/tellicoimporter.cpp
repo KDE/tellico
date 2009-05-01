@@ -116,6 +116,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   const int blockSize = data_.size()/100 + 1;
   int pos = 0;
+  emit signalTotalSteps(this, data_.size());
 
   while(success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
@@ -124,7 +125,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     success = reader.parseContinue();
     pos += blockSize;
     if(showProgress) {
-      emit signalProgress(this, 100*pos/blockSize);
+      emit signalProgress(this, pos);
       kapp->processEvents();
     }
   }

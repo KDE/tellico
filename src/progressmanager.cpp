@@ -50,7 +50,6 @@ ProgressItem::ProgressItem(const QString& label_, bool canCancel_)
 }
 
 ProgressItem::~ProgressItem() {
-//  myDebug() << "~ProgressItem() - " << m_label << endl;
 }
 
 void ProgressItem::setProgress(qulonglong steps_) {
@@ -77,7 +76,6 @@ void ProgressItem::setDone() {
 }
 
 void ProgressItem::cancel() {
-//  myDebug() << "ProgressItem::cancel()" << endl;
   if(!m_canCancel || m_cancelled) {
     return;
   }
@@ -90,7 +88,7 @@ ProgressManager::ProgressManager() : QObject() {
 }
 
 void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
-  if(!m_items.contains(owner_)) {
+  if(!owner_ || !m_items.contains(owner_)) {
     return;
   }
 
@@ -117,7 +115,7 @@ void ProgressManager::setDone(QObject* owner_) {
 
 void ProgressManager::setDone(ProgressItem* item_) {
   if(!item_) {
-    myDebug() << "ProgressManager::setDone() - null ProgressItem!" << endl;
+    myDebug() << "null ProgressItem!";
     return;
   }
   item_->setDone();
@@ -140,7 +138,7 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
 ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
                                                    const QString& label_,
                                                    bool canCancel_) {
-//  myDebug() << "ProgressManager::newProgressItem() - " << owner_->className() << ":" << label_ << endl;
+//  myDebug() << owner_->className() << ":" << label_;
   if(m_items.contains(owner_)) {
     return *m_items[owner_];
   }

@@ -129,6 +129,14 @@ bool Document::openDocument(const KUrl& url_) {
   delete m_importer;
   m_importer = new Import::TellicoImporter(url_, m_loadAllImages);
 
+  ProgressItem& item = ProgressManager::self()->newProgressItem(m_importer, m_importer->progressLabel(), true);
+  connect(m_importer, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
+  connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), m_importer, SLOT(slotCancel()));
+  ProgressItem::Done done(m_importer);
+
   CollPtr coll = m_importer->collection();
   // delayed image loading only works for zip files
   // format is only known AFTER collection() is called

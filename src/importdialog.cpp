@@ -165,7 +165,7 @@ Tellico::Import::Action ImportDialog::action() const {
 
 // static
 Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const KUrl::List& urls_) {
-#define CHECK_SIZE if(urls_.size() > 1) kWarning() << "ImportDialog::importer() - only importing first URL" << endl
+#define CHECK_SIZE if(urls_.size() > 1) myWarning() << "only importing first URL"
   KUrl firstURL = urls_.isEmpty() ? KUrl() : urls_[0];
   Import::Importer* importer = 0;
   switch(format_) {
