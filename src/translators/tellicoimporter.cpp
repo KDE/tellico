@@ -26,7 +26,6 @@
 #include "tellicoxmlhandler.h"
 #include "tellico_xml.h"
 #include "../collectionfactory.h"
-#include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../field.h"
 #include "../images/imagefactory.h"
@@ -36,7 +35,6 @@
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
-#include "../progressmanager.h"
 
 #include <klocale.h>
 #include <kcodecs.h>
@@ -104,11 +102,6 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
 }
 
 void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(data_.size());
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
-
   const bool showProgress = options() & ImportProgress;
 
   TellicoXMLHandler handler;
@@ -131,7 +124,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     success = reader.parseContinue();
     pos += blockSize;
     if(showProgress) {
-      ProgressManager::self()->setProgress(this, pos);
+      emit signalProgress(this, 100*pos/blockSize);
       kapp->processEvents();
     }
   }
