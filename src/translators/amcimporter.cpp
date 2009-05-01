@@ -116,6 +116,9 @@ bool AMCImporter::readBool() {
 }
 
 quint32 AMCImporter::readInt() {
+  if(m_failed) {
+    return 0;
+  }
   quint32 i;
   m_ds >> i;
   if(i >= UINT_MAX) {
@@ -125,6 +128,9 @@ quint32 AMCImporter::readInt() {
 }
 
 QString AMCImporter::readString() {
+  if(m_failed) {
+    return QString();
+  }
   // The serialization format is a length specifier first, then l bytes of data
   quint32 l = readInt();
   if(l == 0) {
@@ -143,6 +149,9 @@ QString AMCImporter::readString() {
 }
 
 QString AMCImporter::readImage(const QString& format_) {
+  if(m_failed) {
+    return QString();
+  }
   quint32 l = readInt();
   if(l == 0) {
     return QString();
