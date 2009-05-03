@@ -29,6 +29,9 @@
 
 using Tellico::Import::Importer;
 
+// really according to taste or computer speed
+const unsigned Importer::s_stepSize = 20;
+
 Importer::Importer() : QObject(), m_options(ImportProgress) {
 }
 
@@ -43,7 +46,7 @@ Importer::Importer(const QString& text) : QObject(), m_options(ImportProgress), 
 
 Tellico::Data::CollPtr Importer::currentCollection() const {
   if(!m_currentCollection) {
-    myWarning() << "set current collection pointer!" << endl;
+    myWarning() << "set current collection pointer!";
   }
   return m_currentCollection;
 }

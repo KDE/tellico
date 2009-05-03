@@ -58,9 +58,6 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-// really according to taste or computer speed
-const unsigned Tellico::Import::Importer::s_stepSize = 20;
-
 using Tellico::ImportDialog;
 
 ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& urls_, QWidget* parent_)
