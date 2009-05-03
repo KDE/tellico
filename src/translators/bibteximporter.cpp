@@ -120,7 +120,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
 
 Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n) {
   if(text.isEmpty()) {
-    myDebug() << "BibtexImporter::readCollection() - no text" << endl;
+    myDebug() << "no text";
     return Data::CollPtr();
   }
   Data::CollPtr ptr(new Data::BibtexCollection(true));
@@ -169,18 +169,18 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
     Data::EntryPtr entry(new Data::Entry(ptr));
 
     str = QString::fromUtf8(bt_entry_type(node));
-//    kDebug() << "entry type: " << str;
+//    myDebug() << "entry type: " << str;
     // text is automatically put into lower-case by btparse
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str);
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str, currentCollection());
 
     str = QString::fromUtf8(bt_entry_key(node));
-//    kDebug() << "entry key: " << str;
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str);
+//    myDebug() << "entry key: " << str;
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str, currentCollection());
 
     char* name;
     AST* field = 0;
     while((field = bt_next_field(node, field, &name))) {
-//      kDebug() << "\tfound: " << name;
+//      myDebug() << "\tfound: " << name;
 //      str = QLatin1String(bt_get_text(field));
       str.clear();
       AST* value = 0;
@@ -210,7 +210,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
         str.replace(QRegExp(QLatin1String("\\sand\\s")), QLatin1String("; "));
       }
-      Data::BibtexCollection::setFieldValue(entry, fieldName, str);
+      Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentCollection());
     }
 
     ptr->addEntries(entry);

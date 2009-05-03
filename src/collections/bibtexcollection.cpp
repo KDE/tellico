@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "bibtexcollection.h"
-#include "../document.h"
 #include "../entrycomparison.h"
 #include "../translators/bibtexhandler.h"
 #include "../tellico_debug.h"
@@ -410,13 +409,10 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
   }
   coll->addEntries(newEntries);
 
-  // now need to make sure all images are transferred
-  Document::self()->loadAllImagesNow();
-
   return collPtr;
 }
 
-bool BibtexCollection::setFieldValue(Tellico::Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_) {
+bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_, Data::CollPtr existingColl_) {
   BibtexCollection* c = static_cast<BibtexCollection*>(entry_->collection().data());
   FieldPtr field = c->fieldByBibtexName(bibtexField_);
   if(!field) {
@@ -425,13 +421,10 @@ bool BibtexCollection::setFieldValue(Tellico::Data::EntryPtr entry_, const QStri
     // but the existing collection had a field "keyword" so the values would not get imported
     // here, check to see if the current collection has a field with the same bibtex name and
     // use it instead of creating a new one
-    BibtexCollection* existingColl = 0;
-    if(Document::self()->collection()->type() == Collection::Bibtex) {
-       existingColl = static_cast<BibtexCollection*>(Document::self()->collection().data());
-    }
+    BibtexCollection* existingColl = dynamic_cast<BibtexCollection*>(existingColl_.data());
     FieldPtr existingField;
     if(existingColl) {
-       existingField = existingColl->fieldByBibtexName(bibtexField_);
+      existingField = existingColl->fieldByBibtexName(bibtexField_);
     }
     if(existingField) {
       field = new Field(*existingField);
@@ -445,7 +438,7 @@ bool BibtexCollection::setFieldValue(Tellico::Data::EntryPtr entry_, const QStri
          || vlower.startsWith(QLatin1String("ftp:/"))
          || vlower.startsWith(QLatin1String("file:/"))
          || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
-        myDebug() << "creating a URL field for " << bibtexField_ << endl;
+        myDebug() << "creating a URL field for " << bibtexField_;
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::URL);
       } else {
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Line);

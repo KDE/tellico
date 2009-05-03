@@ -1824,6 +1824,9 @@ void MainWindow::slotConvertToBibliography() {
 
   GUI::CursorSaver cs;
 
+  // need to make sure all images are transferred
+  Data::Document::self()->loadAllImagesNow();
+
   Data::CollPtr newColl = Data::BibtexCollection::convertBookCollection(coll);
   if(newColl) {
     m_newDocument = true;

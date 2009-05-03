@@ -110,7 +110,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
           name = n2.toElement().tagName();
           value = n2.toElement().text();
           if(!name.isEmpty() && !value.isEmpty()) {
-            Data::BibtexCollection::setFieldValue(entry, name, value.simplified());
+            Data::BibtexCollection::setFieldValue(entry, name, value.simplified(), currentCollection());
           }
         }
         name.clear();
@@ -155,7 +155,7 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
       }
     }
     if(!name.isEmpty() && !value.isEmpty()) {
-      Data::BibtexCollection::setFieldValue(entry, name, value.simplified());
+      Data::BibtexCollection::setFieldValue(entry, name, value.simplified(), currentCollection());
     }
   }
 
