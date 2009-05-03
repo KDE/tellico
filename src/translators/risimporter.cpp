@@ -228,6 +228,12 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     } else if(tag == QLatin1String("SP")) {
       sp = value;
       if(!ep.isEmpty()) {
+        int startPage = sp.toInt();
+        int endPage = ep.toInt();
+        if(endPage > 0 && endPage < startPage) {
+          myWarning() << "Assuming end page is really page count";
+          ep = QString::number(startPage + endPage);
+        }
         value = sp + QLatin1Char('-') + ep;
         tag = QLatin1String("EP");
         sp.clear();
@@ -239,6 +245,12 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     } else if(tag == QLatin1String("EP")) {
       ep = value;
       if(!sp.isEmpty()) {
+        int startPage = sp.toInt();
+        int endPage = ep.toInt();
+        if(endPage > 0 && endPage < startPage) {
+          myWarning() << "Assuming end page is really page count";
+          ep = QString::number(startPage + endPage);
+        }
         value = sp + QLatin1Char('-') + ep;
         sp.clear();
         ep.clear();
