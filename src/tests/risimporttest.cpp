@@ -40,15 +40,15 @@ void RisImportTest::testImport() {
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
-  QCOMPARE(coll->entryCount(), 3);
+  QCOMPARE(coll->entryCount(), 2);
 
-  Tellico::Data::EntryPtr entry = coll->entryById(0);
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("2276-2357"));
-  QCOMPARE(entry->fields("author", false).count(), 5);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Mizusawa,H."));
+  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
+  QCOMPARE(entry->fields("author", false).count(), 3);
+  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin,M."));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
