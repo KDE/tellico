@@ -44,6 +44,7 @@
  * But, at the least, collectionfactory is not coupled to every single collection type
  */
 Tellico::CollectionInitializer::CollectionInitializer() {
+  RegisterCollection<Data::Collection>          registerBase(Data::Collection::Base,           "entry");
   RegisterCollection<Data::BibtexCollection>    registerBibtex(Data::Collection::Bibtex,       "bibtex");
   RegisterCollection<Data::BoardGameCollection> registerBoardGame(Data::Collection::BoardGame, "boardgame");
   RegisterCollection<Data::BookCollection>      registerBook(Data::Collection::Book,           "book");
