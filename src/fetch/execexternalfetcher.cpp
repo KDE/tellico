@@ -72,12 +72,6 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   // catch the end stuff
   args += str_.mid(pos).split(spaces, QString::SkipEmptyParts);
 
-#if 0
-  for(QStringList::ConstIterator it = args.begin(); it != args.end(); ++it) {
-    myDebug() << *it << endl;
-  }
-#endif
-
   return args;
 }
 
@@ -166,21 +160,14 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
     return;
   }
 
-#if 0
-  myDebug() << m_path << endl;
-  for(QStringList::ConstIterator it = args_.begin(); it != args_.end(); ++it) {
-    myDebug() << "  " << *it << endl;
-  }
-#endif
-
   m_process = new KProcess();
   connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
   connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
   connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
   m_process->setOutputChannelMode(KProcess::SeparateChannels);
   m_process->setProgram(m_path, args_);
-  if(m_process->execute() < 0) {
-    myDebug() << "ExecExternalFetcher::startSearch() - process failed to start" << endl;
+  if(m_process && m_process->execute() < 0) {
+    myDebug() << "process failed to start";
     stop();
   }
 }
@@ -191,7 +178,7 @@ void ExecExternalFetcher::stop() {
   }
   if(m_process) {
     m_process->kill();
-    delete m_process;
+    m_process->deleteLater();
     m_process = 0;
   }
   m_data.clear();
@@ -211,14 +198,14 @@ void ExecExternalFetcher::slotError() {
   if(msg.endsWith(QChar::fromLatin1('\n'))) {
     msg.truncate(msg.length()-1);
   }
-  myDebug() << "ExecExternalFetcher::slotError() - " << msg << endl;
+  myDebug() << msg;
   m_errors << msg;
 }
 
 void ExecExternalFetcher::slotProcessExited() {
-//  myDebug() << "ExecExternalFetcher::slotProcessExited()" << endl;
+//  DEBUG_LINE;
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << "ExecExternalFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
+    myDebug() << source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QChar::fromLatin1('\n')), MessageHandler::Error);
     }
@@ -230,7 +217,7 @@ void ExecExternalFetcher::slotProcessExited() {
   }
 
   if(m_data.isEmpty()) {
-    myDebug() << "ExecExternalFetcher::slotProcessExited() - "<< source() << ": no data" << endl;
+    myDebug() << source() << ": no data";
     stop();
     return;
   }
@@ -248,7 +235,7 @@ void ExecExternalFetcher::slotProcessExited() {
     if(!imp->statusMessage().isEmpty()) {
       message(imp->statusMessage(), MessageHandler::Status);
     }
-    myDebug() << "ExecExternalFetcher::slotProcessExited() - "<< source() << ": no collection pointer" << endl;
+    myDebug() << source() << ": no collection pointer";
     delete imp;
     stop();
     return;
@@ -256,7 +243,7 @@ void ExecExternalFetcher::slotProcessExited() {
 
   delete imp;
   if(coll->entryCount() == 0) {
-//    myDebug() << "ExecExternalFetcher::slotProcessExited() - no results" << endl;
+//    myDebug() << "no results";
     stop();
     return;
   }

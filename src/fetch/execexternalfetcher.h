@@ -29,6 +29,7 @@
 #include "configwidget.h"
 
 #include <QHash>
+#include <QPointer>
 
 class KProcess;
 class KUrlRequester;
@@ -115,7 +116,7 @@ private:
   QMap<FetchKey, QString> m_args;
   bool m_canUpdate : 1;
   QString m_updateArgs;
-  KProcess* m_process;
+  QPointer<KProcess> m_process;
   QByteArray m_data;
   QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
