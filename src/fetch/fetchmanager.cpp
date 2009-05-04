@@ -89,9 +89,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(Keyword,    i18n("Keyword"));
   m_keyMap.insert(DOI,        i18n("DOI"));
   m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
-  m_keyMap.insert(PubmedID,   i18n("Pubmed ID"));
-  // to keep from having a new i18n string, just remove octothorpe
-  m_keyMap.insert(LCCN,       i18n("LCCN#").remove(QLatin1Char('#')));
+  m_keyMap.insert(LCCN,       i18n("LCCN"));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString());
 }
@@ -101,7 +99,7 @@ Manager::~Manager() {
 }
 
 void Manager::loadFetchers() {
-//  myDebug() << "Manager::loadFetchers()" << endl;
+  DEBUG_LINE;
   m_fetchers.clear();
 
   KSharedConfigPtr config = KGlobal::config();
@@ -148,7 +146,7 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) const {
     }
   }
   if(!foundFetcher) {
-    kWarning() << "Manager::keyMap() - no fetcher found!";
+    myWarning() << "no fetcher found!";
     return KeyMap();
   }
 
@@ -187,7 +185,7 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
 
 void Manager::continueSearch() {
   if(m_currentFetcherIndex < 0 || m_currentFetcherIndex >= static_cast<int>(m_fetchers.count())) {
-    myDebug() << "Manager::continueSearch() - can't continue!" << endl;
+    myDebug() << "can't continue!";
     emit signalDone();
     return;
   }
@@ -213,7 +211,7 @@ bool Manager::hasMoreResults() const {
 }
 
 void Manager::stop() {
-//  myDebug() << "Manager::stop()" << endl;
+//  DEBUG_LINE;
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
     if(fetcher->isSearching()) {
       fetcher->stop();
@@ -221,15 +219,14 @@ void Manager::stop() {
   }
 #ifndef NDEBUG
   if(m_count != 0) {
-    myDebug() << "Manager::stop() - count should be 0!" << endl;
+    myDebug() << "count should be 0!";
   }
 #endif
   m_count = 0;
 }
 
 void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
-//  myDebug() << "Manager::slotFetcherDone() - " << (fetcher_ ? fetcher_->source() : QString())
-//            << " :" << m_count << endl;
+//  myDebug() << (fetcher_ ? fetcher_->source() : QString()) << ":" << m_count;
   fetcher_->disconnect(); // disconnect all signals
   --m_count;
   if(m_count <= 0) {
@@ -248,7 +245,7 @@ bool Manager::canFetch() const {
 
 Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, const QString& group_) {
   if(!config_->hasGroup(group_)) {
-    myDebug() << "Manager::createFetcher() - no config group for " << group_ << endl;
+    myDebug() << "no config group for " << group_;
     return Fetcher::Ptr();
   }
 
@@ -256,7 +253,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 
   int fetchType = config.readEntry("Type", int(Fetch::Unknown));
   if(fetchType == Fetch::Unknown) {
-    myDebug() << "Manager::createFetcher() - unknown type " << fetchType << ", skipping" << endl;
+    myDebug() << "unknown type " << fetchType << ", skipping";
     return Fetcher::Ptr();
   }
 
@@ -267,7 +264,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
       {
         int site = config.readEntry("Site", int(AmazonFetcher::Unknown));
         if(site == AmazonFetcher::Unknown) {
-          myDebug() << "Manager::createFetcher() - unknown amazon site " << site << ", skipping" << endl;
+          myDebug() << "unknown amazon site" << site << "- skipping";
         } else {
           f = new AmazonFetcher(static_cast<AmazonFetcher::Site>(site), this);
         }
@@ -453,21 +450,21 @@ Tellico::Fetch::TypePairList Manager::typeList() {
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
                                                         KStandardDirs::NoDuplicates);
-  for(QStringList::Iterator it = files.begin(); it != files.end(); ++it) {
-    KConfig spec(*it, KConfig::SimpleConfig);
+  foreach(const QString& file, files) {
+    KConfig spec(file, KConfig::SimpleConfig);
     KConfigGroup specConfig(&spec, QString());
     QString name = specConfig.readEntry("Name");
     if(name.isEmpty()) {
-      myDebug() << "Fetch::Manager::typeList() - no Name for " << *it << endl;
+      myDebug() << "no name for " << file;
       continue;
     }
 
-    if(!bundledScriptHasExecPath(*it, specConfig)) { // no available exec
+    if(!bundledScriptHasExecPath(file, specConfig)) { // no available exec
       continue;
     }
 
     list.append(TypePair(name, ExecExternal));
-    m_scriptMap.insert(name, *it);
+    m_scriptMap.insert(name, file);
   }
   list.sort();
   return list;
@@ -504,7 +501,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       if(!name_.isEmpty() && m_scriptMap.contains(name_)) {
         // bundledScriptHasExecPath() actually needs to write the exec path
         // back to the config so the configWidget can read it. But if the spec file
-        // is not readablle, that doesn't work. So work around it with a copy to a temp file
+        // is not readable, that doesn't work. So work around it with a copy to a temp file
         KTemporaryFile tmpFile;
         tmpFile.setAutoRemove(true);
         tmpFile.open();
@@ -514,7 +511,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
         // have to overwrite since KTemporaryFile already created it
         KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
         if(!KIO::NetAccess::synchronousRun(job, 0)) {
-          myDebug() << KIO::NetAccess::lastErrorString() << endl;
+          myDebug() << KIO::NetAccess::lastErrorString();
         }
         KConfig spec(to.path(), KConfig::SimpleConfig);
         KConfigGroup specConfig(&spec, QString());
@@ -522,7 +519,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
         if(name_ == specConfig.readEntry("Name") && bundledScriptHasExecPath(m_scriptMap[name_], specConfig)) {
           static_cast<ExecExternalFetcher::ConfigWidget*>(w)->readConfig(specConfig);
         } else {
-          kWarning() << "Fetch::Manager::configWidget() - Can't read config file for " << to.path();
+          myWarning() << "Can't read config file for " << to.path();
         }
       }
       break;
@@ -560,7 +557,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       w = new DiscogsFetcher::ConfigWidget(parent_);
       break;
     case Unknown:
-      kWarning() << "Fetch::Manager::configWidget() - no widget defined for type = " << type_;
+      myWarning() << "no widget defined for type = " << type_;
   }
   return w;
 }
@@ -593,7 +590,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
     case Discogs: return DiscogsFetcher::defaultName();
     case Unknown: break;
   }
-  myWarning() << "Manager::typeName() - none found for " << type_ << endl;
+  myWarning() << "none found for " << type_;
   return QString();
 }
 
@@ -673,7 +670,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     case Discogs:
       name = favIcon("http://www.discogs.com"); break;
     case Unknown:
-      kWarning() << "Fetch::Manager::fetcherIcon() - no pixmap defined for type = " << type_;
+      myWarning() << "no pixmap defined for type = " << type_;
   }
 
   return name.isEmpty() ? QPixmap() : LOAD_ICON(name, group_, size_);
@@ -690,10 +687,9 @@ QString Manager::favIcon(const KUrl& url_) {
   QDBusReply<QString> iconName = kded.call(QLatin1String("iconForURL"), url_.url());
   if(iconName.isValid() && !iconName.value().isEmpty()) {
     return iconName;
-  } else {
-    // go ahead and try to download it for later
-    kded.call(QLatin1String("downloadHostIcon"), url_.url());
   }
+  // go ahead and try to download it for later
+  kded.call(QLatin1String("downloadHostIcon"), url_.url());
   return KMimeType::iconNameForUrl(url_);
 }
 
@@ -702,20 +698,21 @@ bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& c
   // for the bundled scripts, either the exec name is not set, in which case it is the
   // name of the spec file, minus the .spec, or the exec is set, and is local to the dir
   // if not, look for it
+  QFileInfo specInfo(specFile_);
   QString exec = config_.readPathEntry("ExecPath", QString());
-  QFileInfo specInfo(specFile_), execInfo(exec);
+  QFileInfo execInfo(exec);
   if(exec.isEmpty() || !execInfo.exists()) {
-    exec = specInfo.absoluteFilePath() + QDir::separator() + specInfo.completeBaseName(); // remove ".spec"
+    exec = specInfo.canonicalPath() + QDir::separator() + specInfo.completeBaseName(); // remove ".spec"
   } else if(execInfo.isRelative()) {
-    exec = specInfo.absoluteFilePath() + exec;
+    exec = specInfo.canonicalPath() + QDir::separator() + exec;
   } else if(!execInfo.isExecutable()) {
-    kWarning() << "Fetch::Manager::execPathForBundledScript() - not executable: " << specFile_;
+    myWarning() << "not executable:" << specFile_;
     return false;
   }
   execInfo.setFile(exec);
   if(!execInfo.exists() || !execInfo.isExecutable()) {
-    kWarning() << "Fetch::Manager::execPathForBundledScript() - no exec file for " << specFile_;
-    kWarning() << "exec = " << exec;
+    myWarning() << "no exec file for" << specFile_;
+    myWarning() << "exec =" << exec;
     return false; // we're not ok
   }
 

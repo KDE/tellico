@@ -35,7 +35,7 @@
 #include "../gui/lineedit.h"
 #include "../gui/collectiontypecombo.h"
 #include "../gui/cursorsaver.h"
-//#include "../newstuff/manager.h"
+#include "../newstuff/manager.h"
 
 #include <klocale.h>
 #include <kprocess.h>
@@ -506,12 +506,9 @@ void ExecExternalFetcher::ConfigWidget::removed() {
   if(!m_deleteOnRemove) {
     return;
   }
-#if 0
-if(!m_newStuffName.isEmpty()) {
-    NewStuff::Manager man(this);
-    man.removeScript(m_newStuffName);
+  if(!m_newStuffName.isEmpty()) {
+    NewStuff::Manager::self()->removeScript(m_newStuffName);
   }
-#endif
 }
 
 QString ExecExternalFetcher::ConfigWidget::preferredName() const {
