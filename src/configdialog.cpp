@@ -38,8 +38,8 @@
 #include "gui/combobox.h"
 #include "gui/previewdialog.h"
 #include "newstuff/manager.h"
-#include "../tellico_debug.h"
 #include "fieldformat.h"
+#include "../tellico_debug.h"
 
 #include <klineedit.h>
 #include <klocale.h>
@@ -530,7 +530,7 @@ void ConfigDialog::setupTemplatePage() {
   KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
   b2->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
-  whats = i18n("Click to download additional templates via the Internet.");
+  whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
   KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
@@ -589,7 +589,7 @@ void ConfigDialog::setupFetchPage() {
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
   m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
   m_newStuffBtn->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
-  m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources via the Internet."));
+  m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
 
   vlay->addWidget(newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
@@ -846,7 +846,7 @@ void ConfigDialog::slotModifySourceClicked() {
   if(!cw) {
     // no config widget for this one
     // might be because support was compiled out
-    myDebug() << "ConfigDialog::slotModifySourceClicked() - no config widget for source " << item->data(Qt::DisplayRole) << endl;
+    myDebug() << "no config widget for source " << item->data(Qt::DisplayRole);
     return;
   }
   FetcherConfigDialog dlg(item->data(Qt::DisplayRole).toString(), item->fetchType(), item->updateOverwrite(), cw, this);
@@ -915,7 +915,7 @@ void ConfigDialog::slotNewStuffClicked() {
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-script.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
-    if(entries.size() > 0) {
+    if(!entries.size().isEmpty()) {
       Fetch::Manager::self()->loadFetchers();
       readFetchConfig();
     }
@@ -924,7 +924,7 @@ void ConfigDialog::slotNewStuffClicked() {
 
 Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
-    myWarning() << "ConfigDialog::findItem() - empty path";
+    mydng() << "empty path";
     return 0;
   }
 
@@ -940,7 +940,7 @@ Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
       return item;
     }
   }
-  myDebug() << "ConfigDialog::findItem() - no matching item found" << endl;
+  myDebug() << "no matching item found";
   return 0;
 }
 
@@ -1026,7 +1026,7 @@ void ConfigDialog::slotDownloadTemplate() {
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-template.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
-    if(entries.size() > 0) {
+    if(!entries.size().isEmpty()) {
       loadTemplateList();
     }
   }
