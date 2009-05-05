@@ -915,7 +915,7 @@ void ConfigDialog::slotNewStuffClicked() {
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-script.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
-    if(!entries.size().isEmpty()) {
+    if(!entries.isEmpty()) {
       Fetch::Manager::self()->loadFetchers();
       readFetchConfig();
     }
@@ -924,7 +924,7 @@ void ConfigDialog::slotNewStuffClicked() {
 
 Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
-    mydng() << "empty path";
+    myDebug() << "empty path";
     return 0;
   }
 
@@ -1026,7 +1026,7 @@ void ConfigDialog::slotDownloadTemplate() {
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-template.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
-    if(!entries.size().isEmpty()) {
+    if(!entries.isEmpty()) {
       loadTemplateList();
     }
   }
