@@ -75,7 +75,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
     ~ConfigWidget();
 
     void readConfig(const KConfigGroup& config);

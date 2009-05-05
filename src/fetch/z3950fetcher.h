@@ -131,7 +131,7 @@ class Z3950Fetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent, const Z3950Fetcher* fetcher = 0);
   virtual ~ConfigWidget();
   virtual void saveConfig(KConfigGroup& config_);
   virtual QString preferredName() const;

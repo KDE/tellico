@@ -26,9 +26,9 @@
 #define TELLICO_BIBTEXIMPORTER_H
 
 #include "importer.h"
-#include "config.h"
 #include "../datavectors.h"
 
+#include <config.h>
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
 #include <btparse.h>

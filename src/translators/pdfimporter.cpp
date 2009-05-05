@@ -44,7 +44,7 @@
 #include <QString>
 #include <QPixmap>
 
-#include "config.h"
+#include <config.h>
 #ifdef HAVE_POPPLER
 #include <poppler-qt4.h>
 #endif

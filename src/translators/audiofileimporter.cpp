@@ -418,12 +418,12 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, int pos_) {
   QStringList list = Data::Field::split(str_, true);
   for(int i = list.count(); i < pos_; ++i) {
-    list += QString::null;
+    list.append(QString());
   }
-  if(!list[pos_-1].isEmpty()) {
-    myDebug() << "AudioFileImporter::insertValue() - overwriting track " << pos_ << endl;
-    myDebug() << "*** Old value: " << list[pos_-1] << endl;
-    myDebug() << "*** New value: " << value_ << endl;
+  if(!list.at(pos_-1).isEmpty()) {
+    myDebug() << "overwriting track " << pos_;
+    myDebug() << "*** Old value: " << list[pos_-1];
+    myDebug() << "*** New value: " << value_;
   }
   list[pos_-1] = value_;
   return list.join(QLatin1String("; "));

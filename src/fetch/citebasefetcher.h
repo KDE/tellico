@@ -67,7 +67,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, const CitebaseFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const CitebaseFetcher* fetcher = 0);
     virtual void saveConfig(KConfigGroup& config);
     virtual QString preferredName() const;
   };

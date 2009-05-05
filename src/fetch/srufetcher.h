@@ -117,7 +117,7 @@ Q_OBJECT
 friend class SRUFetcher;
 
 public:
-  SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
+  explicit SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
   virtual void saveConfig(KConfigGroup& config);
   virtual QString preferredName() const;
 

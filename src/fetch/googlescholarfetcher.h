@@ -77,7 +77,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* fetcher = 0);
     virtual void saveConfig(KConfigGroup&) {}
     virtual QString preferredName() const;
   };

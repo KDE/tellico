@@ -107,7 +107,7 @@ class GCstarPluginFetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  ConfigWidget(QWidget* parent, const GCstarPluginFetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent, const GCstarPluginFetcher* fetcher = 0);
   ~ConfigWidget();
 
   virtual void saveConfig(KConfigGroup& config);
