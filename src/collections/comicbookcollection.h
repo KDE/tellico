@@ -47,7 +47,7 @@ public:
    *
    * @param title The title of the collection
    */
-  ComicBookCollection(bool addDefaultFields, const QString& title = QString());
+  explicit ComicBookCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return ComicBook; }
 

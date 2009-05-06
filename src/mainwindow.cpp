@@ -1123,7 +1123,7 @@ bool MainWindow::fileSave() {
       KGuiItem yes(i18n("Save Images Separately"));
       KGuiItem no(i18n("Save Images in File"));
 
-      int res = KMessageBox::warningYesNo(this, msg, QString::null /* caption */, yes, no);
+      int res = KMessageBox::warningYesNo(this, msg, QString() /* caption */, yes, no);
       if(res == KMessageBox::No) {
         Config::setImageLocation(Config::ImagesInAppDir);
       }

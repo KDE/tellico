@@ -83,7 +83,7 @@ public:
    *
    * @param title The title of the collection itself
    */
-  Collection(bool addDefaultFields, const QString& title=QString());
+  explicit Collection(bool addDefaultFields, const QString& title=QString());
   /**
    */
   virtual ~Collection();

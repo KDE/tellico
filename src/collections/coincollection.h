@@ -47,7 +47,7 @@ public:
    *
    * @param title The title of the collection
    */
-  CoinCollection(bool addDefaultFields, const QString& title = QString());
+  explicit CoinCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Coin; }
 

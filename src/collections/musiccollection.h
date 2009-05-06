@@ -44,7 +44,7 @@ public:
    *
    * @param title The title of the collection
    */
-  MusicCollection(bool addDefaultFields, const QString& title = QString());
+  explicit MusicCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Album; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;

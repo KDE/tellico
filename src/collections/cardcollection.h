@@ -44,7 +44,7 @@ public:
    *
    * @param title The title of the collection
    */
-  CardCollection(bool addDefaultFields, const QString& title = QString());
+  explicit CardCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Card; }
 

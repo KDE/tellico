@@ -44,7 +44,7 @@ public:
    *
    * @param title The title of the collection
    */
-  BookCollection(bool addDefaultFields, const QString& title = QString());
+  explicit BookCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Book; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;

@@ -44,7 +44,7 @@ public:
    *
   * @param title The title of the collection
    */
-  StampCollection(bool addDefaultFields, const QString& title = QString());
+  explicit StampCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Stamp; }
 

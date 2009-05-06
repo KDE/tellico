@@ -46,7 +46,7 @@ public:
    *
    * @param title The title of the collection
    */
-  BibtexCollection(bool addDefaultFields, const QString& title = QString());
+  explicit BibtexCollection(bool addDefaultFields, const QString& title = QString());
   /**
    */
   virtual ~BibtexCollection() {}

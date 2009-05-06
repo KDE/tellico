@@ -117,18 +117,18 @@ void barcodeRecognition::ng_color_yuv2rgb_init()
 #define GREEN2_ADD  (-BLUE_ADD/6)
 
     /* init Lookup tables */
-    for (i = 0; i < 256; i++) {
+    for (i = 0; i < 256; ++i) {
         barcodeRecognition::ng_yuv_gray[i] = i * LUN_MUL >> 8;
         barcodeRecognition::ng_yuv_red[i]  = (RED_ADD    + i * RED_MUL)    >> 8;
         barcodeRecognition::ng_yuv_blue[i] = (BLUE_ADD   + i * BLUE_MUL)   >> 8;
         barcodeRecognition::ng_yuv_g1[i]   = (GREEN1_ADD + i * GREEN1_MUL) >> 8;
         barcodeRecognition::ng_yuv_g2[i]   = (GREEN2_ADD + i * GREEN2_MUL) >> 8;
     }
-    for (i = 0; i < CLIP; i++)
+    for (i = 0; i < CLIP; ++i)
         barcodeRecognition::ng_clip[i] = 0;
-    for (; i < CLIP + 256; i++)
+    for (; i < CLIP + 256; ++i)
         barcodeRecognition::ng_clip[i] = i - CLIP;
-    for (; i < 2 * CLIP + 256; i++)
+    for (; i < 2 * CLIP + 256; ++i)
         barcodeRecognition::ng_clip[i] = 255;
 }
 
@@ -197,7 +197,7 @@ QImage barcode_v4l::grab_one2()
   int depth = 32;
   QByteArray *buf2 = new QByteArray();
   buf2->resize( depth/8 *m_fmt.width*m_fmt.height );
-  for (uint i=0; i<m_fmt.width*m_fmt.height; i++) {
+  for (uint i=0; i<m_fmt.width*m_fmt.height; ++i) {
     (*buf2)[i*4+0] = buf->at(i*3+2);
     (*buf2)[i*4+1] = buf->at(i*3+1);
     (*buf2)[i*4+2] = buf->at(i*3+0);
@@ -245,7 +245,7 @@ bool barcode_v4l::grab_init()
 
   /* check all available conversion functions */
   m_fmt.bytesperline = m_fmt.width * ng_vfmt_to_depth[m_fmt.fmtid] / 8;
-  for (int i = 0; i<VIDEO_FMT_COUNT; i++) {
+  for (int i = 0; i<VIDEO_FMT_COUNT; ++i) {
     video_converter *conv = ng_vid_driver::find_video_converter( VIDEO_RGB24, i );
     if (!conv)
       continue;
@@ -339,7 +339,7 @@ ng_vid_driver_v4l::ng_vid_driver_v4l()
 
   m_use_read = false;
 
-  for (int i=0; i<VIDEO_FMT_COUNT; i++)
+  for (int i=0; i<VIDEO_FMT_COUNT; ++i)
     format2palette[i] = 0;
   format2palette[VIDEO_RGB08]    = VIDEO_PALETTE_HI240;
   format2palette[VIDEO_GRAY]     = VIDEO_PALETTE_GREY;
@@ -373,7 +373,7 @@ bool ng_vid_driver_v4l::open2( QString device )
 
 #ifdef Barcode_DEBUG
   myDebug() << "  capabilities: " << endl;
-  for (int i = 0; device_cap[i] != NULL; i++)
+  for (int i = 0; device_cap[i] != NULL; ++i)
     if (m_capability.type & (1 << i))
       qDebug( " %s", device_cap[i] );
   qDebug( "  size    : %dx%d => %dx%d", m_capability.minwidth, m_capability.minheight, m_capability.maxwidth, m_capability.maxheight );
@@ -533,7 +533,7 @@ void barcodeRecognition::yuv420p_to_rgb24::frame( QByteArray *out, const QByteAr
     u  = y + fmt.width * fmt.height;
     v  = u + fmt.width * fmt.height / 4;
 
-    for (i = 0; i < fmt.height; i++) {
+    for (i = 0; i < fmt.height; ++i) {
 	d = dp;
 	us = u; vs = v;
 	for (j = 0; j < fmt.width; j+= 2) {

@@ -37,7 +37,7 @@ class FileCatalog : public Collection {
 Q_OBJECT
 
 public:
-  FileCatalog(bool addDefaultFields, const QString& title = QString());
+  explicit FileCatalog(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return File; }
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;

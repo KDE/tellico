@@ -44,7 +44,7 @@ public:
    *
    * @param title The title of the collection
    */
-  WineCollection(bool addDefaultFields, const QString& title = QString());
+  explicit WineCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Wine; }
 

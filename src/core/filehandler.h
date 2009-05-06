@@ -69,7 +69,7 @@ public:
 
   private:
     friend class FileHandler;
-    FileRef(const KUrl& url, bool quiet=false, bool allowCompressed=false);
+    explicit FileRef(const KUrl& url, bool quiet=false, bool allowCompressed=false);
     QIODevice* m_device;
     QString m_filename;
     bool m_isValid;

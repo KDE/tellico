@@ -44,7 +44,7 @@ public:
    *
    * @param title The title of the collection
    */
-  VideoCollection(bool addDefaultFields, const QString& title = QString());
+  explicit VideoCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Video; }
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;

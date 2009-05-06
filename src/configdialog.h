@@ -209,8 +209,8 @@ public:
 
 class SourceListItem : public QListWidgetItem {
 public:
-  SourceListItem(const GeneralFetcherInfo& info,
-                 const QString& groupName = QString());
+  explicit SourceListItem(const GeneralFetcherInfo& info,
+                          const QString& groupName = QString());
   SourceListItem(KListWidget* parent, const GeneralFetcherInfo& info,
                  const QString& groupName = QString());
 

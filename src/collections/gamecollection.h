@@ -43,7 +43,7 @@ public:
    *
    * @param title The title of the collection
    */
-  GameCollection(bool addDefaultFields, const QString& title = QString());
+  explicit GameCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return Game; }
 
