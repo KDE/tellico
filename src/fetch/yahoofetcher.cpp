@@ -95,7 +95,7 @@ void YahooFetcher::continueSearch() {
 }
 
 void YahooFetcher::doSearch() {
-//  myDebug() << "YahooFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u(YAHOO_BASE_URL);
   u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
@@ -127,11 +127,11 @@ void YahooFetcher::doSearch() {
       break;
 
     default:
-      kWarning() << "YahooFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       stop();
       return;
   }
-//  myDebug() << "YahooFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -153,7 +153,7 @@ void YahooFetcher::stop() {
 }
 
 void YahooFetcher::slotComplete(KJob*) {
-//  myDebug() << "YahooFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -163,7 +163,7 @@ void YahooFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "YahooFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -171,7 +171,7 @@ void YahooFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 #if 0
-  kWarning() << "Remove debug from yahoofetcher.cpp";
+  myWarning() << "Remove debug from yahoofetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -192,7 +192,7 @@ void YahooFetcher::slotComplete(KJob*) {
   if(m_total == -1) {
     QDomDocument dom;
     if(!dom.setContent(data, false)) {
-      kWarning() << "YahooFetcher::slotComplete() - server did not return valid XML.";
+      myWarning() << "server did not return valid XML.";
       return;
     }
     // total is top level element, with attribute totalResultsAvailable
@@ -207,7 +207,7 @@ void YahooFetcher::slotComplete(KJob*) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
-    myDebug() << "YahooFetcher::slotComplete() - no collection pointer" << endl;
+    myDebug() << "no collection pointer";
     stop();
     return;
   }
@@ -236,7 +236,7 @@ void YahooFetcher::slotComplete(KJob*) {
 Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
-    kWarning() << "YahooFetcher::fetchEntry() - no entry in dict";
+    myWarning() << "no entry in dict";
     return Data::EntryPtr();
   }
 
@@ -265,7 +265,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
 void YahooFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("yahoo2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "YahooFetcher::initXSLTHandler() - can not locate yahoo2tellico.xsl.";
+    myWarning() << "can not locate yahoo2tellico.xsl.";
     return;
   }
 
@@ -275,7 +275,7 @@ void YahooFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "YahooFetcher::initXSLTHandler() - error in yahoo2tellico.xsl.";
+    myWarning() << "error in yahoo2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -299,15 +299,15 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
   u.addQueryItem(QLatin1String("results"), QString::number(50));
   u.addQueryItem(QLatin1String("albumid"), albumid);
 
-//  myDebug() << "YahooFetcher::getTracks() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
   QDomDocument dom = FileHandler::readXMLFile(u, false /*no namespace*/, true /*quiet*/);
   if(dom.isNull()) {
-    myDebug() << "YahooFetcher::getTracks() - null dom returned" << endl;
+    myDebug() << "null dom returned";
     return;
   }
 
 #if 0
-  kWarning() << "Remove debug from yahoofetcher.cpp";
+  myWarning() << "Remove debug from yahoofetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -365,7 +365,7 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
 }
 
 void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "YahooFetcher::updateEntry()" << endl;
+//  myDebug() << "";
   // limit to top 5 results
   m_limit = 5;
 
@@ -386,7 +386,7 @@ void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "YahooFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

@@ -116,7 +116,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
   }
 
   if(hasImage(img->id())) {
-//    myDebug() << "### ImageFactory::addImageImpl() - hasImage() is true!";
+//    myDebug() << "is true!";
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;

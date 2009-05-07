@@ -108,7 +108,7 @@ void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
     return;
   }
 
-//  myDebug() << "CrossRefFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
@@ -126,7 +126,7 @@ void CrossRefFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "CrossRefFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -136,7 +136,7 @@ void CrossRefFetcher::stop() {
 }
 
 void CrossRefFetcher::slotComplete(KJob*) {
-//  myDebug() << "CrossRefFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -146,7 +146,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "CrossRefFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -154,7 +154,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 #if 0
-  kWarning() << "Remove debug from crossreffetcher.cpp";
+  myWarning() << "Remove debug from crossreffetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -178,7 +178,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
-    myDebug() << "CrossRefFetcher::slotComplete() - no valid result" << endl;
+    myDebug() << "no valid result";
     stop();
     return;
   }
@@ -230,7 +230,7 @@ void CrossRefFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("crossref2tellico.xsl"));
 #endif
   if(xsltfile.isEmpty()) {
-    kWarning() << "CrossRefFetcher::initXSLTHandler() - can not locate xslt file.";
+    myWarning() << "can not locate xslt file.";
     return;
   }
 
@@ -240,7 +240,7 @@ void CrossRefFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "CrossRefFetcher::initXSLTHandler() - error in crossref2tellico.xsl.";
+    myWarning() << "error in crossref2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -260,14 +260,14 @@ KUrl CrossRefFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
       break;
 
     default:
-      kWarning() << "CrossRefFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       return KUrl();
   }
 
 #ifdef CROSSREF_TEST
   u = KUrl("/home/robby/crossref.xml");
 #endif
-  myDebug() << "CrossRefFetcher::search() - url: " << u.url() << endl;
+  myDebug() << "url: " << u.url();
   return u;
 }
 
@@ -288,7 +288,7 @@ void CrossRefFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
   }
 #endif
 
-  myDebug() << "CrossRefFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
@@ -297,7 +297,7 @@ void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
     return;
   }
   if(m_user.isEmpty() || m_password.isEmpty()) {
-    myDebug() << "CrossRefFetcher::updateEntrySynchronous() - username and password is required" << endl;
+    myDebug() << "username and password is required";
     return;
   }
   QString doi = entry->field(QLatin1String("doi"));

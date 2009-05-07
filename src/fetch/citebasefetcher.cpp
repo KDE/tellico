@@ -85,7 +85,7 @@ void CitebaseFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
     return;
   }
 
-//  myDebug() << "CitebaseFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
@@ -103,7 +103,7 @@ void CitebaseFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "CitebaseFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -113,7 +113,7 @@ void CitebaseFetcher::stop() {
 }
 
 void CitebaseFetcher::slotComplete(KJob*) {
-//  myDebug() << "CitebaseFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -123,7 +123,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "CitebaseFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -131,7 +131,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 #if 0
-  kWarning() << "Remove debug from citebasefetcher.cpp";
+  myWarning() << "Remove debug from citebasefetcher.cpp";
   QFile f(QLatin1String("/tmp/test.bib"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -145,7 +145,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
-    myDebug() << "CitebaseFetcher::slotComplete() - no valid result" << endl;
+    myDebug() << "no valid result";
     stop();
     return;
   }
@@ -192,14 +192,14 @@ KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
       break;
 
     default:
-      kWarning() << "CitebaseFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       return KUrl();
   }
 
 #ifdef CITEBASE_TEST
   u = KUrl("/home/robby/citebase.bib");
 #endif
-  myDebug() << "CitebaseFetcher::search() - url: " << u.url() << endl;
+  myDebug() << "url: " << u.url();
   return u;
 }
 
@@ -210,7 +210,7 @@ void CitebaseFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "CitebaseFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

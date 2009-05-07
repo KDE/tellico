@@ -174,13 +174,13 @@ bool barcode_v4l::isOpen()
 QImage barcode_v4l::grab_one2()
 {
   if (!m_drv) {
-    myDebug() << "no driver/device available" << endl;
+    myDebug() << "no driver/device available";
     return QImage();
   }
 
   QByteArray *cap;
   if (!(cap = m_drv->getimage2())) {
-      myDebug() << "capturing image failed" << endl;
+      myDebug() << "capturing image failed";
       return QImage();
   }
 
@@ -223,11 +223,11 @@ bool barcode_v4l::grab_init()
 {
   m_drv = ng_vid_driver::createDriver( m_devname );
   if (!m_drv) {
-      myDebug() << "no grabber device available" << endl;
+      myDebug() << "no grabber device available";
       return false;
   }
   if (!(m_drv->capabilities() & CAN_CAPTURE)) {
-      myDebug() << "device doesn't support capture" << endl;
+      myDebug() << "device doesn't support capture";
       m_drv->close();
       delete m_drv;
       m_drv = 0;
@@ -262,7 +262,7 @@ bool barcode_v4l::grab_init()
     }
   }
 
-  myDebug() << "can't get rgb24 data" << endl;
+  myDebug() << "can't get rgb24 data";
   m_drv->close();
   delete m_drv;
   m_drv = 0;
@@ -275,7 +275,7 @@ ng_vid_driver* ng_vid_driver::createDriver( QString device )
     /* check all grabber drivers */
     ng_vid_driver *drv = new ng_vid_driver_v4l();
     if (!drv->open2( device )) {
-      myDebug() << "no v4l device found" << endl;
+      myDebug() << "no v4l device found";
       delete drv;
       drv = 0;
     }
@@ -372,7 +372,7 @@ bool ng_vid_driver_v4l::open2( QString device )
   fcntl( m_fd, F_SETFD, FD_CLOEXEC ); // close on exit
 
 #ifdef Barcode_DEBUG
-  myDebug() << "  capabilities: " << endl;
+  myDebug() << "  capabilities: ";
   for (int i = 0; device_cap[i] != NULL; ++i)
     if (m_capability.type & (1 << i))
       qDebug( " %s", device_cap[i] );
@@ -465,7 +465,7 @@ bool ng_vid_driver_v4l::read_setformat( ng_video_fmt *fmt )
 QByteArray* ng_vid_driver_v4l::getimage2()
 {
 #ifdef Barcode_DEBUG
-  myDebug() << "v4l: getimage2" << endl;
+  myDebug() << "v4l: getimage2";
 #endif
 
   return read_getframe2();

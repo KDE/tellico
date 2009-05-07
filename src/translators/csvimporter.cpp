@@ -106,7 +106,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   }
 
   if(names.isEmpty()) {
-    myDebug() << "CSVImporter::collection() - no fields assigned" << endl;
+    myDebug() << "no fields assigned";
     return Data::CollPtr();
   }
 

@@ -115,12 +115,12 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kWarning() << "IBSFetcher::search() - key not recognized: " << key_;
+      myWarning() << "key not recognized: " << key_;
       stop();
       return;
   }
 #endif
-//  myDebug() << "IBSFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -153,7 +153,7 @@ void IBSFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "IBSFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -221,7 +221,7 @@ void IBSFetcher::slotCompleteISBN(KJob* job_) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "IBSFetcher::slotCompleteISBN() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -255,19 +255,19 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
 
   KUrl url = m_matches[uid_];
   if(url.isEmpty()) {
-    kWarning() << "IBSFetcher::fetchEntry() - no url in map";
+    myWarning() << "no url in map";
     return Data::EntryPtr();
   }
 
   QString results = Tellico::decodeHTML(FileHandler::readTextFile(url, true));
   if(results.isEmpty()) {
-    myDebug() << "IBSFetcher::fetchEntry() - no text results" << endl;
+    myDebug() << "no text results";
     return Data::EntryPtr();
   }
 
-//  myDebug() << url.url() << endl;
+//  myDebug() << url.url();
 #if 0
-  kWarning() << "Remove debug from ibsfetcher.cpp";
+  myWarning() << "Remove debug from ibsfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -279,7 +279,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
 
   entry = parseEntry(results);
   if(!entry) {
-    myDebug() << "IBSFetcher::fetchEntry() - error in processing entry" << endl;
+    myDebug() << "error in processing entry";
     return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
@@ -287,7 +287,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
- // myDebug() << "IBSFetcher::parseEntry()" << endl;
+ // myDebug() << "";
  // class might be anime_info_top
   QString pat = QLatin1String("%1(?:<[^>]+>)+([^<>\\s][^<>]+)");
 
@@ -402,7 +402,7 @@ void IBSFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "IBSFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

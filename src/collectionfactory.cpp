@@ -44,7 +44,7 @@ Tellico::Data::CollPtr CollectionFactory::create(int type_, bool addDefaultField
   if(functionRegistry.contains(type_)) {
     ptr = functionRegistry.value(type_)(addDefaultFields_);
   } else {
-    myWarning() << "no collection created for type = " << type_ << endl;
+    myWarning() << "no collection created for type = " << type_;
     ptr = new Data::Collection(addDefaultFields_);
   }
   return ptr;
@@ -74,7 +74,7 @@ Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, b
   }
   if(type == -1) {
     type = Data::Collection::Base;
-    myWarning() << "bad collection type name:" << typeName_ << endl;
+    myWarning() << "bad collection type name:" << typeName_;
   }
   return self().create(type, addDefaultFields_);
 }

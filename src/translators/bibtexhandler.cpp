@@ -146,7 +146,7 @@ void BibtexHandler::loadTranslationMaps() {
     QString s = keyList.item(i).toElement().attribute(QLatin1String("char"));
     for(int j = 0; j < strList.count(); ++j) {
       (*s_utf8LatexMap)[s].append(strList.item(j).toElement().text());
-//      kDebug() << "BibtexHandler::loadTranslationMaps - "
+//      myDebug() << "BibtexHandler::loadTranslationMaps - "
 //       << s << " = " << strList.item(j).toElement().text() << endl;
     }
   }

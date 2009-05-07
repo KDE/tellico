@@ -201,7 +201,7 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   }
   int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
-//    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//    myDebug() << "different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
   res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("author"), this);

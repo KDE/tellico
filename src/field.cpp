@@ -39,8 +39,8 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 
 #ifndef NDEBUG
   if(m_type == Choice) {
-    myWarning() << "Field() - A different constructor should be called for multiple choice attributes." << endl;
-    myWarning() << "Constructing a Field with name = " << name_ << endl;
+    myWarning() << "A different constructor should be called for multiple choice attributes.";
+    myWarning() << "Constructing a Field with name = " << name_;
   }
 #endif
   // a paragraph's category is always its title, along with tables

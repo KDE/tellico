@@ -26,9 +26,9 @@
 #include "../collection.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
+#include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
-#include <kdebug.h>
 
 #include <QPixmap>
 
@@ -41,7 +41,7 @@ ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
     u.setPath(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
-    kWarning() << "ReferencerImporter() - unable to find referencer2tellico.xml!";
+    myWarning() << "unable to find referencer2tellico.xml!";
   }
 }
 

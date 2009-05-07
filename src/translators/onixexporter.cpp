@@ -117,13 +117,13 @@ bool ONIXExporter::exec() {
 QString ONIXExporter::text() {
   QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
   if(xsltfile.isNull()) {
-    myDebug() << "ONIXExporter::text() - no xslt file for " << m_xsltFile << endl;
+    myDebug() << "no xslt file for " << m_xsltFile;
     return QString();
   }
 
   Data::CollPtr coll = collection();
   if(!coll) {
-    myDebug() << "ONIXExporter::text() - no collection pointer!" << endl;
+    myDebug() << "no collection pointer!";
     return QString();
     ;
   }
@@ -139,7 +139,7 @@ QString ONIXExporter::text() {
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLFile(u, false);
   if(dom.isNull()) {
-    myDebug() << "ONIXExporter::text() - error loading xslt file: " << xsltfile << endl;
+    myDebug() << "error loading xslt file: " << xsltfile;
     return QString();
   }
 

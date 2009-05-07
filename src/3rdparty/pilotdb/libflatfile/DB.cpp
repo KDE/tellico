@@ -26,8 +26,6 @@
 
 #include <cstring>
 
-#include <kdebug.h>
-
 #include "../strop.h"
 
 #include "DB.h"
@@ -198,7 +196,7 @@ void PalmLib::FlatFile::DB::extract_schema(unsigned numFields)
 
         default:
 //            throw PalmLib::error("unknown field type");
-            kDebug() << "PalmLib::FlatFile::DB::extract_schema() - unknown field type";
+            kDebug() << "unknown field type";
             type = PalmLib::FlatFile::Field::STRING;
             break;
         }

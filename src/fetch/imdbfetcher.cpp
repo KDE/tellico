@@ -164,7 +164,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kWarning() << "IMDBFetcher::search() - FetchKey not supported";
+      myWarning() << "FetchKey not supported";
       stop();
       return;
   }

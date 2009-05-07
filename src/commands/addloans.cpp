@@ -43,7 +43,7 @@ AddLoans::AddLoans(Tellico::Data::BorrowerPtr borrower_, Tellico::Data::LoanList
     , m_addToCalendar(addToCalendar_)
 {
   if(m_loans.isEmpty()) {
-    myWarning() << "AddLoans() - no loans!" << endl;
+    myWarning() << "no loans!";
   } else {
     setText(m_loans.count() > 1 ? i18n("Check-out Items")
                                 : i18nc("Check-out (Entry Title)", "Check-out %1", m_loans[0]->entry()->title()));
@@ -87,7 +87,7 @@ void AddLoans::redo() {
     Controller::self()->addedBorrower(m_borrower);
   } else {
     // don't have to do anything to the document, it just holds a pointer
-    myDebug() << "AddLoansCommand::redo() - modifying an existing borrower! " << endl;
+    myDebug() << "modifying an existing borrower! ";
     Controller::self()->modifiedBorrower(m_borrower);
   }
 }

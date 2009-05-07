@@ -203,7 +203,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     if(tag.isEmpty()) {
       continue;
     }
-//    myDebug() << tag << ": " << value << endl;
+//    myDebug() << tag << ": " << value;
     // if the next line is not empty and does not match start regexp, append to value
     while(!nextLine.isEmpty() && rx.indexIn(nextLine) == -1) {
       value += nextLine.trimmed();

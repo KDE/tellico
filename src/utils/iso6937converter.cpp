@@ -603,7 +603,7 @@ QChar Iso6937Converter::getCombiningChar(uint c) {
     return 0x017E; // LATIN SMALL LETTER Z WITH CARON
 
   default:
-    myDebug() << "Iso6937Converter::getCombiningChar() - no match for " << c << endl;
+    myDebug() << "no match for " << c;
     return QChar();
   }
 }

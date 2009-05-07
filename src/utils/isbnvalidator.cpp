@@ -33,7 +33,7 @@ using Tellico::ISBNValidator;
 //static
 QString ISBNValidator::isbn10(QString isbn13) {
   if(!isbn13.startsWith(QLatin1String("978"))) {
-    myDebug() << "ISBNValidator::isbn10() - can't convert, must start with 978: " << isbn13 << endl;
+    myDebug() << "can't convert, must start with 978: " << isbn13;
     return isbn13;
   }
   isbn13 = isbn13.mid(3);

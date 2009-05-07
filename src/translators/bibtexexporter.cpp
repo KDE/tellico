@@ -98,12 +98,12 @@ bool BibtexExporter::exec() {
   }
 
   if(typeField.isEmpty() || keyField.isEmpty()) {
-    kWarning() << "BibtexExporter::exec() - the collection must have fields defining "
+    myWarning() << "the collection must have fields defining "
                    "the entry-type and the key of the entry" << endl;
     return false;
   }
   if(fields.isEmpty()) {
-    kWarning() << "BibtexExporter::exec() - no bibtex field mapping exists in the collection.";
+    myWarning() << "no bibtex field mapping exists in the collection.";
     return false;
   }
 
@@ -144,7 +144,7 @@ bool BibtexExporter::exec() {
   foreach(Data::EntryPtr entryIt, entries()) {
     type = entryIt->field(typeField);
     if(type.isEmpty()) {
-      kWarning() << "BibtexExporter::text() - the entry for '" << entryIt->title()
+      myWarning() << "the entry for '" << entryIt->title()
                   << "' has no entry-type, skipping it!" << endl;
       continue;
     }

@@ -105,7 +105,7 @@ void ISBNdbFetcher::continueSearch() {
 }
 
 void ISBNdbFetcher::doSearch() {
-//  myDebug() << "ISBNdbFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u(ISBNDB_BASE_URL);
   u.addQueryItem(QLatin1String("access_key"), QLatin1String(ISBNDB_APP_ID));
@@ -140,11 +140,11 @@ void ISBNdbFetcher::doSearch() {
       break;
 
     default:
-      kWarning() << "ISBNdbFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       stop();
       return;
   }
-//  myDebug() << "ISBNdbFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -156,7 +156,7 @@ void ISBNdbFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "ISBNdbFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -167,7 +167,7 @@ void ISBNdbFetcher::stop() {
 }
 
 void ISBNdbFetcher::slotComplete(KJob*) {
-//  myDebug() << "ISBNdbFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -177,7 +177,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "ISBNdbFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -185,7 +185,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 #if 0
-  kWarning() << "Remove debug from isbndbfetcher.cpp";
+  myWarning() << "Remove debug from isbndbfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -197,7 +197,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
 
   QDomDocument dom;
   if(!dom.setContent(data, false)) {
-    kWarning() << "ISBNdbFetcher::slotComplete() - server did not return valid XML.";
+    myWarning() << "server did not return valid XML.";
     return;
   }
 
@@ -265,7 +265,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
 Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
-    kWarning() << "ISBNdbFetcher::fetchEntry() - no entry in dict";
+    myWarning() << "no entry in dict";
     return Data::EntryPtr();
   }
 
@@ -297,7 +297,7 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
 void ISBNdbFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "ISBNdbFetcher::initXSLTHandler() - can not locate isbndb2tellico.xsl.";
+    myWarning() << "can not locate isbndb2tellico.xsl.";
     return;
   }
 
@@ -307,7 +307,7 @@ void ISBNdbFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "ISBNdbFetcher::initXSLTHandler() - error in isbndb2tellico.xsl.";
+    myWarning() << "error in isbndb2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -315,7 +315,7 @@ void ISBNdbFetcher::initXSLTHandler() {
 }
 
 void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "ISBNdbFetcher::updateEntry()" << endl;
+//  myDebug() << "";
   // limit to top 5 results
   m_limit = 5;
 
@@ -333,7 +333,7 @@ void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "ISBNdbFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

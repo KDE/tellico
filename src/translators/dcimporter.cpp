@@ -50,7 +50,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
   QRegExp dateRX(QLatin1String("\\d{4}"));
 
   QDomNodeList recordList = doc.elementsByTagNameNS(zing, QLatin1String("recordData"));
-  myDebug() << "DCImporter::collection() - number of records: " << recordList.count() << endl;
+  myDebug() << "number of records: " << recordList.count();
 
   enum { UnknownNS, UseNS, NoNS } useNS = UnknownNS;
 
@@ -70,11 +70,11 @@ Tellico::Data::CollPtr DCImporter::collection() {
         if(nodeList.count() > 0) {
           useNS = NoNS;
         } else {
-          myDebug() << "DCImporter::collection() - no title, skipping" << endl;
+          myDebug() << "no title, skipping";
           continue;
         }
       } else {
-        myDebug() << "DCImporter::collection() - no title, skipping" << endl;
+        myDebug() << "no title, skipping";
         continue;
       }
     } else if(useNS == UnknownNS) {
@@ -96,7 +96,7 @@ Tellico::Data::CollPtr DCImporter::collection() {
           s = s.simplified();
           creators << s;
         } else {
-          myDebug() << "DCImporter::collection() - weird creator, skipping: " << s << endl;
+          myDebug() << "weird creator, skipping: " << s;
         }
       } else {
         creators << s;

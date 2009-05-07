@@ -25,9 +25,9 @@
 #include "drophandler.h"
 #include "../mainwindow.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_debug.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/risimporter.h"
+#include "../tellico_debug.h"
 
 #include <kmimetype.h>
 #include <kio/netaccess.h>
@@ -107,13 +107,13 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
     } else if(ptr->is(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
       ris << url;
     } else {
-      myDebug() << "DropHandler::handleURL() - unrecognized type: " << ptr->name() << " (" << url << ")" << endl;
+      myDebug() << "unrecognized type: " << ptr->name() << " (" << url << ")";
       hasUnknown = true;
     }
   }
   MainWindow* mainWindow = ::qobject_cast<MainWindow*>(GUI::Proxy::widget());
   if(!mainWindow) {
-    myDebug() << "DropHandler::handleURL() - no main window!" << endl;
+    myDebug() << "no main window!";
     return !hasUnknown;
   }
   if(!tc.isEmpty()) {

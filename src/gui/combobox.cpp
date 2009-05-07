@@ -23,8 +23,7 @@
  ***************************************************************************/
 
 #include "combobox.h"
-
-#include <kdebug.h>
+#include "../tellico_debug.h"
 
 using Tellico::GUI::ComboBox;
 
@@ -33,7 +32,7 @@ ComboBox::ComboBox(QWidget* parent_) : KComboBox(parent_) {
 
 void ComboBox::addItems(const QStringList& strings_, const QList<QVariant>& variants_) {
   if(strings_.count() != variants_.count()) {
-    kWarning() << "ComboBox::insertItems() - must have equal number of items in list!";
+    myWarning() << "must have equal number of items in list!";
     return;
   }
 

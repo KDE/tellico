@@ -66,7 +66,7 @@ XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() {
   if(m_buf) {
     m_buf->written = 0;
   } else {
-    myWarning() << "XMLOutputBuffer::XMLOutputBuffer() - error writing output buffer!" << endl;
+    myWarning() << "error writing output buffer!";
   }
 }
 
@@ -89,10 +89,10 @@ XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
     xmlDocPtr xsltDoc = xmlReadFile(file, NULL, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
-      myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+      myDebug() << "null stylesheet pointer for " << xsltFile_;
     }
   } else {
-    myDebug() << "XSLTHandler(QByteArray) - empty file name" << endl;
+    myDebug() << "XSLTHandler(QByteArray) - empty file name";
   }
 }
 
@@ -105,10 +105,10 @@ XSLTHandler::XSLTHandler(const KUrl& xsltURL_) :
     xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.encodedPathAndQuery().toUtf8(), NULL, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
-      myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltURL_.path() << endl;
+      myDebug() << "null stylesheet pointer for " << xsltURL_.path();
     }
   } else {
-    myDebug() << "XSLTHandler(KUrl) - invalid: " << xsltURL_ << endl;
+    myDebug() << "XSLTHandler(KUrl) - invalid: " << xsltURL_;
   }
 }
 
@@ -170,7 +170,7 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
         if(!pi.data().toLower().contains(QLatin1String("utf-8"))) {
           utf8 = false;
 //        } else {
-//          myDebug() << "XSLTHandler::setXSLTDoc() - PI = " << pi.data() << endl;
+//          myDebug() << "PI = " << pi.data();
         }
         break;
       }
@@ -196,7 +196,7 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
   }
   m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
   if(!m_stylesheet) {
-    myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer for " << xsltFile_ << endl;
+    myDebug() << "null stylesheet pointer for " << xsltFile_;
   }
 //  xmlFreeDoc(xsltDoc); // this causes a crash for some reason
 }
@@ -209,7 +209,7 @@ void XSLTHandler::addStringParam(const QByteArray& name_, const QByteArray& valu
 
 void XSLTHandler::addParam(const QByteArray& name_, const QByteArray& value_) {
   m_params.insert(name_, value_);
-//  myDebug() << "XSLTHandler::addParam() - " << name_ << ":" << value_ << endl;
+//  myDebug() << "" << name_ << ":" << value_;
 }
 
 void XSLTHandler::removeParam(const QByteArray& name_) {
@@ -222,7 +222,7 @@ const QByteArray& XSLTHandler::param(const QByteArray& name_) {
 
 QString XSLTHandler::applyStylesheet(const QString& text_) {
   if(!m_stylesheet) {
-    myDebug() << "XSLTHandler::applyStylesheet() - null stylesheet pointer!" << endl;
+    myDebug() << "null stylesheet pointer!";
     return QString();
   }
 
@@ -233,7 +233,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
 
 QString XSLTHandler::process() {
   if(!m_docIn) {
-    myDebug() << "XSLTHandler::process() - error parsing input string!" << endl;
+    myDebug() << "error parsing input string!";
     return QString();
   }
 
@@ -253,7 +253,7 @@ QString XSLTHandler::process() {
     delete[] params[i];
   }
   if(!m_docOut) {
-    myDebug() << "XSLTHandler::applyStylesheet() - error applying stylesheet!" << endl;
+    myDebug() << "error applying stylesheet!";
     return QString();
   }
 
@@ -261,7 +261,7 @@ QString XSLTHandler::process() {
   if(output.isValid()) {
     int num_bytes = xsltSaveResultTo(output.buffer(), m_docOut, m_stylesheet);
     if(num_bytes == -1) {
-      myDebug() << "XSLTHandler::applyStylesheet() - error saving output buffer!" << endl;
+      myDebug() << "error saving output buffer!";
     }
   }
   return output.result();

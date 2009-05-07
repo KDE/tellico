@@ -126,7 +126,7 @@ void FilterRuleWidget::slotEditRegExp() {
   }
 
   if(!m_editRegExpDialog) {
-    myWarning() << "FilterRuleWidget::slotEditRegExp() - no dialog" << endl;
+    myWarning() << "no dialog";
     return;
   }
 
@@ -200,7 +200,7 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
 }
 
 void FilterRuleWidget::reset() {
-//  kDebug() << "FilterRuleWidget::reset()";
+//  myDebug() << "";
   blockSignals(true);
 
   m_ruleField->setCurrentIndex(0);
@@ -243,7 +243,7 @@ void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
 
   const int count = filter_->count();
   if(count > mMaxWidgets) {
-    myDebug() << "FilterRuleWidgetLister::setFilter() - more rules than allowed!" << endl;
+    myDebug() << "more rules than allowed!";
   }
 
   // set the right number of widgets
@@ -412,7 +412,7 @@ void FilterDialog::slotApply() {
 }
 
 void FilterDialog::slotClear() {
-//  kDebug() << "FilterDialog::slotClear()";
+//  myDebug() << "";
   m_matchAll->setChecked(true);
   m_ruleLister->reset();
   m_filterName->clear();

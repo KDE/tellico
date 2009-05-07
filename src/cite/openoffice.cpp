@@ -86,7 +86,7 @@ Tellico::Cite::State OpenOffice::state() const {
 
 bool OpenOffice::connect() {
   if(!d->handler) {
-    myDebug() << "OpenOffice::connect() - unable to open OpenOffice.org plugin" << endl;
+    myDebug() << "unable to open OpenOffice.org plugin";
     return false;
   }
 
@@ -110,7 +110,7 @@ bool OpenOffice::connect() {
   while(needInput) {
     switch(state()) {
       case NoConnection:
-        myDebug() << "OpenOffice::connect() - NoConnection" << endl;
+        myDebug() << "NoConnection";
         // try to reconnect
         if(connectionDialog()) {
           success = d->handler->connect();
@@ -120,10 +120,10 @@ bool OpenOffice::connect() {
         }
         break;
       case NoDocument:
-        myDebug() << "OpenOffice::connect() - NoDocument" << endl;
+        myDebug() << "NoDocument";
         break;
       default:
-        myDebug() << "OpenOffice::connect() - weird state" << endl;
+        myDebug() << "weird state";
         break;
     }
   }
@@ -133,17 +133,17 @@ bool OpenOffice::connect() {
 
 bool OpenOffice::cite(Tellico::Data::EntryList entries_) {
   if(!connect()) {
-    myDebug() << "OpenOffice::cite() - can't connect to OpenOffice" << endl;
+    myDebug() << "can't connect to OpenOffice";
     return false;
   }
   if(entries_.isEmpty()) {
-    myDebug() << "OpenOffice::cite() - no entries" << endl;
+    myDebug() << "no entries";
     return false;
   }
 
   Data::CollPtr coll = entries_.front()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
-    myDebug() << "OpenOffice::cite() - not a bibtex collection" << endl;
+    myDebug() << "not a bibtex collection";
     return false;
   }
 
@@ -274,6 +274,6 @@ bool OpenOffice::connectionDialog() {
 
 bool OpenOffice::hasLibrary() {
   QString path = KLibLoader::findLibrary(QLatin1String("tellico_ooo"));
-  if(!path.isEmpty()) myDebug() << "OpenOffice::hasLibrary() - Found OOo plugin: " << path << endl;
+  if(!path.isEmpty()) myDebug() << "Found OOo plugin: " << path;
   return !path.isEmpty();
 }

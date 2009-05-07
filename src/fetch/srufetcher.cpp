@@ -112,7 +112,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   if(m_host.isEmpty() || m_path.isEmpty()) {
-    myDebug() << "SRUFetcher::search() - settings are not set!" << endl;
+    myDebug() << "settings are not set!";
     stop();
     return;
   }
@@ -187,12 +187,12 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
       break;
 
     default:
-      kWarning() << "SRUFetcher::search() - key not recognized: " << key_;
+      myWarning() << "key not recognized: " << key_;
       stop();
       break;
   }
 #endif
-//  myDebug() << u.prettyUrl() << endl;
+//  myDebug() << u.prettyUrl();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -251,7 +251,7 @@ void SRUFetcher::slotComplete(KJob*) {
         if(!d2.isEmpty()) {
           d += QLatin1String(" (") + d2 + QLatin1Char(')');
         }
-        myDebug() << "SRUFetcher::slotComplete() - " << d << endl;
+        myDebug() << "" << d;
         if(!msg.isEmpty()) {
           msg += QLatin1Char('\n');
         }
@@ -281,7 +281,7 @@ void SRUFetcher::slotComplete(KJob*) {
     }
     msg += imp.statusMessage();
   } else {
-    myDebug() << "SRUFetcher::slotComplete() - unrecognized format: " << m_format << endl;
+    myDebug() << "unrecognized format: " << m_format;
     stop();
     return;
   }
@@ -291,7 +291,7 @@ void SRUFetcher::slotComplete(KJob*) {
   }
 
   if(!coll) {
-    myDebug() << "SRUFetcher::slotComplete() - no collection pointer" << endl;
+    myDebug() << "no collection pointer";
     if(!msg.isEmpty()) {
       message(msg, MessageHandler::Error);
     }
@@ -320,7 +320,7 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
 }
 
 void SRUFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "SRUFetcher::updateEntry() - " << source() << ": " << entry_->title() << endl;
+//  myDebug() << "" << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
@@ -340,7 +340,7 @@ void SRUFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "SRUFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
@@ -351,7 +351,7 @@ bool SRUFetcher::initMARCXMLHandler() {
 
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "SRUFetcher::initHandlers() - can not locate MARC21slim2MODS3.xsl.";
+    myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
   }
 
@@ -360,7 +360,7 @@ bool SRUFetcher::initMARCXMLHandler() {
 
   m_MARCXMLHandler = new XSLTHandler(u);
   if(!m_MARCXMLHandler->isValid()) {
-    kWarning() << "SRUFetcher::initHandlers() - error in MARC21slim2MODS3.xsl.";
+    myWarning() << "error in MARC21slim2MODS3.xsl.";
     delete m_MARCXMLHandler;
     m_MARCXMLHandler = 0;
     return false;
@@ -375,7 +375,7 @@ bool SRUFetcher::initMODSHandler() {
 
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "SRUFetcher::initHandlers() - can not locate mods2tellico.xsl.";
+    myWarning() << "can not locate mods2tellico.xsl.";
     return false;
   }
 
@@ -384,7 +384,7 @@ bool SRUFetcher::initMODSHandler() {
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {
-    kWarning() << "SRUFetcher::initHandlers() - error in mods2tellico.xsl.";
+    myWarning() << "error in mods2tellico.xsl.";
     delete m_MODSHandler;
     m_MODSHandler = 0;
     return false;

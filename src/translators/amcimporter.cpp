@@ -78,7 +78,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   QString version = QString::fromLocal8Bit(buffer.data(), l);
   QRegExp versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
   if(versionRx.indexIn(version) == -1) {
-    myDebug() << "AMCImporter::collection() - no file id match" << endl;
+    myDebug() << "no file id match";
     return Data::CollPtr();
   }
 
@@ -86,7 +86,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
 
   m_majVersion = versionRx.cap(1).toInt();
   m_minVersion = versionRx.cap(2).toInt();
-//  myDebug() << m_majVersion << "::" << m_minVersion << endl;
+//  myDebug() << m_majVersion << "::" << m_minVersion;
 
   readString(); // name
   readString(); // email
@@ -144,7 +144,7 @@ QString AMCImporter::readString() {
   QVector<char> buffer(l+1);
   m_ds.readRawData(buffer.data(), l);
   QString s = QString::fromLocal8Bit(buffer.data(), l);
-//  myDebug() << "string: " << s << endl;
+//  myDebug() << "string: " << s;
   return s;
 }
 

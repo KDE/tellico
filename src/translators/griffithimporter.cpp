@@ -47,19 +47,19 @@ GriffithImporter::~GriffithImporter() {
 Tellico::Data::CollPtr GriffithImporter::collection() {
   QString filename = QDir::homePath() + QLatin1String("/.griffith/griffith.db");
   if(!QFile::exists(filename)) {
-    myWarning() << "GriffithImporter::collection() - database not found: " << filename << endl;
+    myWarning() << "database not found: " << filename;
     return Data::CollPtr();
   }
 
   QString python = KStandardDirs::findExe(QLatin1String("python"));
   if(python.isEmpty()) {
-    myWarning() << "GriffithImporter::collection() - python not found!" << endl;
+    myWarning() << "python not found!";
     return Data::CollPtr();
   }
 
   QString griffith = KGlobal::dirs()->findResource("appdata", QLatin1String("griffith2tellico.py"));
   if(griffith.isEmpty()) {
-    myWarning() << "GriffithImporter::collection() - griffith2tellico.py not found!" << endl;
+    myWarning() << "griffith2tellico.py not found!";
     return Data::CollPtr();
   }
 
@@ -69,7 +69,7 @@ Tellico::Data::CollPtr GriffithImporter::collection() {
   connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
   m_process->setProgram(python, QStringList(griffith));
   if(!m_process->execute()) {
-    myDebug() << "ExecExternalFetcher::startSearch() - process failed to start" << endl;
+    myDebug() << "process failed to start";
     return Data::CollPtr();
   }
 
@@ -82,20 +82,20 @@ void GriffithImporter::slotData() {
 
 void GriffithImporter::slotError() {
   QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
-  myDebug() << "GriffithImporter::slotError() - " << msg << endl;
+  myDebug() << "" << msg;
   setStatusMessage(msg);
 }
 
 
 void GriffithImporter::slotProcessExited() {
-//  myDebug() << "GriffithImporter::slotProcessExited()" << endl;
+//  myDebug() << "";
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << "GriffithImporter::slotProcessExited() - process did not exit successfully" << endl;
+    myDebug() << "process did not exit successfully";
     return;
   }
 
   if(m_data.isEmpty()) {
-    myDebug() << "GriffithImporter::slotProcessExited() - no data" << endl;
+    myDebug() << "no data";
     return;
   }
 
@@ -104,7 +104,7 @@ void GriffithImporter::slotProcessExited() {
 
   m_coll = imp.collection();
   if(!m_coll) {
-    myDebug() << "GriffithImporter::slotProcessExited() - no collection pointer" << endl;
+    myDebug() << "no collection pointer";
   } else {
     myLog() << "GriffithImporter::slotProcessExited() - results found: " << m_coll->entryCount() << endl;
   }

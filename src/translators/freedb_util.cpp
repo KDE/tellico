@@ -285,7 +285,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
   m_cmd.data_direction = CGC_DATA_READ;
 
   if(ioctl(drive, CDROM_SEND_PACKET, &m_cmd) != 0) {
-    myDebug() << "FreeDBImporter::getCDText() - access error" << endl;
+    myDebug() << "access error";
     return cdtext;
   }
 
@@ -320,7 +320,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
 
     char block_no = *(bufptr + 3);
     if(block_no & 0x80) {
-      myDebug() << "FreeDBImporter::readCDText() - double byte code not supported" << endl;
+      myDebug() << "double byte code not supported";
       continue;
     }
     block_no &= 0x70;

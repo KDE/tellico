@@ -52,7 +52,7 @@ bool TellicoXMLHandler::endElement(const QString& nsURI_, const QString& localNa
   m_data->text = m_data->text.trimmed();
 /*
   if(!m_data->text.isEmpty()) {
-    myDebug() << " text: " << m_text << endl;
+    myDebug() << " text: " << m_text;
   }
 */
 

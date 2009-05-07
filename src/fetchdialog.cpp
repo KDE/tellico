@@ -399,7 +399,7 @@ void FetchDialog::setStatus(const QString& text_) {
 }
 
 void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
-//  myDebug() << "FetchDialog::slotFetchDone()" << endl;
+//  myDebug() << "";
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
                                       KIcon(QLatin1String("edit-find"))));
@@ -473,7 +473,7 @@ void FetchDialog::slotAddEntry() {
 
 void FetchDialog::slotMoreClicked() {
   if(m_started) {
-    myDebug() << "FetchDialog::slotMoreClicked() - can't continue while running" << endl;
+    myDebug() << "can't continue while running";
     return;
   }
 

@@ -81,7 +81,7 @@ using Tellico::Import::SAX::LoanHandler;
 StateHandler* StateHandler::nextHandler(const QString& ns_, const QString& localName_, const QString& qName_) {
   StateHandler* handler = nextHandlerImpl(ns_, localName_, qName_);
   if(!handler) {
-    myWarning() << "StateHandler::nextHandler() - no handler for " << localName_ << endl;
+    myWarning() << "no handler for " << localName_;
   }
   return handler ? handler : new NullHandler(d);
 }
@@ -111,7 +111,7 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
     idx = atts_.index(QLatin1String("version"));
   }
   if(idx < 0) {
-    myWarning() << "RootHandler::start() - no syntax version" << endl;
+    myWarning() << "no syntax version";
     return false;
   }
   d->syntaxVersion = atts_.value(idx).toUInt();
@@ -123,12 +123,12 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
     QString str = i18n("Tellico is converting the file to a more recent document format. "
                        "Information loss may occur if an older version of Tellico is used "
                        "to read this file in the future.");
-    myDebug() << str <<  endl;
+    myDebug() << str;
   }
   if((d->syntaxVersion > 6 && localName_ != QLatin1String("tellico")) ||
      (d->syntaxVersion < 7 && localName_ != QLatin1String("bookcase"))) {
     // no error message
-    myWarning() << "RootHandler::start() - bad root element name" << endl;
+    myWarning() << "bad root element name";
     return false;
   }
   d->ns = d->syntaxVersion > 6 ? Tellico::XML::nsTellico : Tellico::XML::nsBookcase;
@@ -421,7 +421,7 @@ StateHandler* EntryHandler::nextHandlerImpl(const QString&, const QString& local
 bool EntryHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
-    myWarning() << "EntryHandler::start() - entries must come after fields are defined" << endl;
+    myWarning() << "entries must come after fields are defined";
     // TODO: i18n
     d->error = QLatin1String("File format error: entries must come after fields are defined");
     return false;
@@ -478,7 +478,7 @@ bool FieldValueHandler::start(const QString&, const QString&, const QString& loc
 bool FieldValueHandler::end(const QString&, const QString& localName_, const QString&) {
   Data::FieldPtr f = d->coll->fieldByName(localName_);
   if(!f) {
-    myWarning() << "FieldValueHandler::end() - no field named " << localName_ << endl;
+    myWarning() << "no field named " << localName_;
     return true;
   }
   // if it's a derived value, no field value is added
@@ -508,7 +508,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     // for dates and tables, the value is built up from child elements
 #ifndef NDEBUG
     if(!d->text.isEmpty()) {
-      myWarning() << "FieldValueHandler::end() - ignoring value for field " << localName_ << ": " << d->text << endl;
+      myWarning() << "ignoring value for field " << localName_ << ": " << d->text;
     }
 #endif
     fieldValue = d->textBuffer;
@@ -624,7 +624,7 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {
-        myDebug() << "TellicoImporter::readImage(XML) - null image for " << m_imageId << endl;
+        myDebug() << "TellicoImporter::readImage(XML) - null image for " << m_imageId;
       }
       d->hasImages = true;
       readInfo = false;
@@ -684,7 +684,7 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
   QString pattern = attValue(atts_, "pattern");
   // empty pattern is bad
   if(pattern.isEmpty()) {
-    myWarning() << "FilterRuleHandler::start() - empty rule!" << endl;
+    myWarning() << "empty rule!";
     return true;
   }
   QString function = attValue(atts_, "function").toLower();
@@ -702,7 +702,7 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
   } else if(function == QLatin1String("notregexp")) {
     func = FilterRule::FuncNotRegExp;
   } else {
-    myWarning() << "FilterRuleHandler::start() - invalid rule function: " << function << endl;
+    myWarning() << "invalid rule function: " << function;
     return true;
   }
   d->filter->append(new FilterRule(field, pattern, func));
@@ -763,7 +763,7 @@ bool LoanHandler::start(const QString&, const QString&, const QString&, const QX
 bool LoanHandler::end(const QString&, const QString&, const QString&) {
   Data::EntryPtr entry = d->coll->entryById(m_id);
   if(!entry) {
-    myWarning() << "LoanHandler::end() - no entry with id = " << m_id << endl;
+    myWarning() << "no entry with id = " << m_id;
     return true;
   }
   QDate loanDate, dueDate;

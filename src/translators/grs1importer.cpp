@@ -94,7 +94,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   }
   QTextStream t(&str, QIODevice::ReadOnly);
   for(QString line = t.readLine(); !t.atEnd(); line = t.readLine()) {
-//    myDebug() << line << endl;
+//    myDebug() << line;
     if(!rx.exactMatch(line)) {
       continue;
     }
@@ -107,7 +107,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     if(field.isEmpty()) {
       continue;
     }
-//    myDebug() << "field is " << field << endl;
+//    myDebug() << "field is " << field;
     // assume if multiple values, it's allowed
     val = rx.cap(3).trimmed();
     if(val.isEmpty()) {

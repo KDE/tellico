@@ -73,7 +73,7 @@ QString XMPHandler::extractXMP(const QString& file) {
 #ifdef HAVE_EXEMPI
   XmpFilePtr xmpfile = xmp_files_open_new(QFile::encodeName(file), XMP_OPEN_READ);
   if(!xmpfile) {
-    myDebug() << "XMPHandler::parse() - unable to open " << file << endl;
+    myDebug() << "unable to open " << file;
     return result;
   }
   XmpPtr xmp = xmp_files_get_new_xmp(xmpfile);
@@ -82,9 +82,9 @@ QString XMPHandler::extractXMP(const QString& file) {
     xmp_serialize(xmp, buffer, 0, 0);
     result = QString::fromUtf8(xmp_string_cstr(buffer));
     xmp_string_free(buffer);
-//    myDebug() << result << endl;
+//    myDebug() << result;
 #if 0
-    kWarning() << "XMPHandler::parse() - turn me off!";
+    myWarning() << "turn me off!";
     QFile f1(QLatin1String("/tmp/xmp.xml"));
     if(f1.open(QIODevice::WriteOnly)) {
       QTextStream t(&f1);
@@ -96,7 +96,7 @@ QString XMPHandler::extractXMP(const QString& file) {
     xmp_files_close(xmpfile, XMP_CLOSE_NOOPTION);
     xmp_files_free(xmpfile);
   } else {
-    myDebug() << "XMPHandler::parse() - unable to parse " << file << endl;
+    myDebug() << "unable to parse " << file;
   }
 #endif
   return result;

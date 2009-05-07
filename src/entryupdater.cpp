@@ -116,7 +116,7 @@ void EntryUpdater::slotStartNext() {
   ProgressManager::self()->setProgress(this, m_fetchers.count() * (m_origEntryCount - m_entriesToUpdate.count()) + m_fetchIndex);
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
-//  myDebug() << "EntryUpdater::slotDone() - starting " << f->source() << endl;
+//  myDebug() << "starting " << f->source();
   f->updateEntry(m_entriesToUpdate.front());
 }
 
@@ -133,7 +133,7 @@ void EntryUpdater::slotDone() {
 
   m_results.clear();
   ++m_fetchIndex;
-//  myDebug() << "EntryUpdater::slotDone() " << m_fetchIndex << endl;
+//  myDebug() << "" << m_fetchIndex;
   if(m_fetchIndex == m_fetchers.count()) {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
@@ -155,7 +155,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
     return;
   }
 
-//  myDebug() << "EntryUpdater::slotResult() - " << result_->title << " [" << result_->fetcher->source() << "]" << endl;
+//  myDebug() << "" << result_->title << " [" << result_->fetcher->source() << "]";
   m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
   Data::EntryPtr e = result_->fetchEntry();
   if(e) {
@@ -169,7 +169,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
 }
 
 void EntryUpdater::slotCancel() {
-//  myDebug() << "EntryUpdater::slotCancel()" << endl;
+//  myDebug() << "";
   m_cancelled = true;
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
   if(f) {
@@ -191,7 +191,7 @@ void EntryUpdater::handleResults() {
     m_fetchedEntries.append(e);
     int match = m_coll->sameEntry(entry, e);
     if(match) {
-//      myDebug() << e->title() << " matches by " << match << endl;
+//      myDebug() << e->title() << " matches by " << match;
     }
     if(match > best) {
       best = match;
@@ -203,11 +203,11 @@ void EntryUpdater::handleResults() {
   }
   if(best < Data::Collection::ENTRY_GOOD_MATCH) {
     if(best > 0) {
-      myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)" << endl;
+      myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)";
     }
     return;
   }
-//  myDebug() << "best match = " << best << " (" << matches.count() << " matches)" << endl;
+//  myDebug() << "best match = " << best << " (" << matches.count() << " matches)";
   UpdateResult match(0, true);
   if(matches.count() == 1) {
     match = matches.front();

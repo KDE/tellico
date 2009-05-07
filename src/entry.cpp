@@ -50,7 +50,7 @@ EntryGroup::~EntryGroup() {
 Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
   if(!coll_) {
-    kWarning() << "Entry() - null collection pointer!";
+    myWarning() << "null collection pointer!";
   }
 #endif
 }
@@ -58,7 +58,7 @@ Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(
 Entry::Entry(Tellico::Data::CollPtr coll_, ID id_) : QSharedData(), m_coll(coll_), m_id(id_) {
 #ifndef NDEBUG
   if(!coll_) {
-    kWarning() << "Entry() - null collection pointer!";
+    myWarning() << "null collection pointer!";
   }
 #endif
 }
@@ -189,7 +189,7 @@ bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
 
 bool Entry::setField(const QString& name_, const QString& value_) {
   if(name_.isEmpty()) {
-    kWarning() << "empty field name for value: " << value_;
+    myWarning() << "empty field name for value: " << value_;
     return false;
   }
   // an empty value means remove the field
@@ -267,7 +267,7 @@ void Entry::clearGroups() {
 // update that list. This is the function that actually parses the field values
 // and returns the list of the group names.
 QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
-//  myDebug() << "Entry::groupsByfieldName() - " << fieldName_;
+//  myDebug() << "" << fieldName_;
   FieldPtr f = m_coll->fieldByName(fieldName_);
 
   // easy if not allowing multiple values

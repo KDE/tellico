@@ -124,7 +124,7 @@ void Z3950Connection::setUserPassword(const QString& user_, const QString& pword
 }
 
 void Z3950Connection::run() {
-//  myDebug() << "Z3950Connection::run() - " << m_fetcher->source() << endl;
+//  myDebug() << "" << m_fetcher->source();
   m_aborted = false;
   m_hasMore = false;
   resultsLeft = 0;
@@ -139,7 +139,7 @@ void Z3950Connection::run() {
   myLog() << "Z3950Connection::run() - pqn = " << toCString(m_pqn) << endl;
   int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
   if(errcode != 0) {
-    myDebug() << "Z3950Connection::run() - query error: " << m_pqn << endl;
+    myDebug() << "query error: " << m_pqn;
     ZOOM_query_destroy(query);
     QString s = i18n("Query error!");
     s += QLatin1Char(' ') + m_pqn;
@@ -186,7 +186,7 @@ void Z3950Connection::run() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << "Z3950Connection::run() - " << s << endl;
+    myDebug() << "" << s;
     done(s, MessageHandler::Error);
     return;
   }
@@ -289,7 +289,7 @@ void Z3950Connection::run() {
     myLog() << "Z3950Connection::run() - grabbing index " << i << endl;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
-      myDebug() << "Z3950Connection::run() - no record returned for index " << i << endl;
+      myDebug() << "no record returned for index " << i;
       continue;
     }
     int len;
@@ -301,7 +301,7 @@ void Z3950Connection::run() {
       data = toString(ZOOM_record_get(rec, "render", &len));
     } else {
 #if 0
-      kWarning() << "Remove debug from z3950connection.cpp";
+      myWarning() << "Remove debug from z3950connection.cpp";
       {
         QFile f1(QLatin1String("/tmp/z3950.raw"));
         if(f1.open(QIODevice::WriteOnly)) {
@@ -333,7 +333,7 @@ bool Z3950Connection::makeConnection() {
   if(m_connected) {
     return true;
   }
-//  myDebug() << "Z3950Connection::makeConnection() - " << m_fetcher->source() << endl;
+//  myDebug() << "" << m_fetcher->source();
 // I don't know what to do except assume database, user, and password are in locale encoding
 #ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
@@ -358,7 +358,7 @@ bool Z3950Connection::makeConnection() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << "Z3950Connection::makeConnection() - " << s << endl;
+    myDebug() << "" << s;
     done(s, MessageHandler::Error);
     return false;
   }
@@ -419,7 +419,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
     } else if(charSetLower == QLatin1String("iso6937")) {
       return iconvRun(Iso6937Converter::toUtf8(text_).toUtf8(), QLatin1String("utf-8"), toCharSet_);
     }
-    kWarning() << "Z3950Connection::iconvRun() - conversion from " << fromCharSet_
+    myWarning() << "conversion from " << fromCharSet_
                 << " to " << toCharSet_ << " is unsupported" << endl;
     return text_;
   }
@@ -433,7 +433,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {
-    myDebug() << "Z3950Connection::iconvRun() - can't decode buffer" << endl;
+    myDebug() << "can't decode buffer";
     return text_;
   }
   // bug in yaz, need to flush buffer to catch last character
@@ -443,9 +443,9 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
   size_t len = result - result0.data();
 
   QByteArray output(result0.data(), len+1);
-//  myDebug() << "-------------------------------------------" << endl;
-//  myDebug() << output << endl;
-//  myDebug() << "-------------------------------------------" << endl;
+//  myDebug() << "-------------------------------------------";
+//  myDebug() << output;
+//  myDebug() << "-------------------------------------------";
   yaz_iconv_close(cd);
   return output;
 #endif
@@ -455,7 +455,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
 QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_) {
 #ifdef HAVE_YAZ
   if(marc_.isEmpty()) {
-    myDebug() << "Z3950Connection::toXML() - empty string" << endl;
+    myDebug() << "empty string";
     return QString();
   }
 
@@ -469,7 +469,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
     } else if(charSetLower == QLatin1String("iso6937")) {
       return toXML(Iso6937Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
     }
-    kWarning() << "Z3950Connection::toXML() - conversion from " << charSet_ << " is unsupported";
+    myWarning() << "conversion from " << charSet_ << " is unsupported";
     return QString();
   }
 
@@ -485,7 +485,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   size_t len = marc_.left(5).toInt(&ok);
 #endif
   if(ok && (len < 25 || len > 100000)) {
-    myDebug() << "Z3950Connection::toXML() - bad length: " << (ok ? len : -1) << endl;
+    myDebug() << "bad length: " << (ok ? len : -1);
     return QString();
   }
 
@@ -496,15 +496,15 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 #endif
   int r = yaz_marc_decode_buf(mt, marc_, -1, &result, &len);
   if(r <= 0) {
-    myDebug() << "Z3950Connection::toXML() - can't decode buffer" << endl;
+    myDebug() << "can't decode buffer";
     return QString();
   }
 
   QString output = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
   output += QString::fromUtf8(QByteArray(result, len+1), len+1);
-//  myDebug() << QCString(result) << endl;
-//  myDebug() << "-------------------------------------------" << endl;
-//  myDebug() << output << endl;
+//  myDebug() << QCString(result);
+//  myDebug() << "-------------------------------------------";
+//  myDebug() << output;
   yaz_iconv_close(cd);
   yaz_marc_destroy(mt);
 

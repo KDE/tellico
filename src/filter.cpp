@@ -54,7 +54,7 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
     case FuncNotRegExp:
       return !matchesRegExp(entry_);
     default:
-      myWarning() << "FilterRule::matches() - invalid function!" << endl;
+      myWarning() << "invalid function!";
       break;
   }
   return true;

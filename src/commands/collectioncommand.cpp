@@ -43,7 +43,7 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
 #ifndef NDEBUG
 // just some sanity checking
   if(!m_origColl || !m_newColl) {
-    myDebug() << "CollectionCommand() - null collection pointer" << endl;
+    myDebug() << "null collection pointer";
   }
 #endif
   switch(m_mode) {

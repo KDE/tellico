@@ -52,13 +52,13 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
 
   Data::CollPtr coll = entries_.front()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
-    myDebug() << "Lyxpipe::cite() - collection must be a bibliography!" << endl;
+    myDebug() << "collection must be a bibliography!";
     return false;
   }
 
   QString lyxpipe = Config::lyxpipe();
   lyxpipe += QLatin1String(".in");
-//  myDebug() << "Lyxpipe::cite() - " << lyxpipe << endl;
+//  myDebug() << "" << lyxpipe;
 
   QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
 
@@ -89,7 +89,7 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
     }
   }
   if(output.isEmpty()) {
-    myDebug() << "Lyxpipe::cite() - no available bibtex keys!" << endl;
+    myDebug() << "no available bibtex keys!";
     return false;
   } else {
     output.truncate(output.length()-2); // remove last comma and space

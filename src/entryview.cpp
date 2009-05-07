@@ -112,7 +112,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   m_textToShow.clear();
 #if 0
-  kWarning() << "EntryView::showEntry() - turn me off!";
+  myWarning() << "turn me off!";
   m_entry = 0;
   setXSLTFile(m_xsltFile);
 #endif
@@ -143,9 +143,9 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   exporter.setOptions(opt);
   QDomDocument dom = exporter.exportXML();
 
-//  myDebug() << dom.toString() << endl;
+//  myDebug() << dom.toString();
 #if 0
-  kWarning() << "EntryView::showEntry() - turn me off!";
+  myWarning() << "turn me off!";
   QFile f1(QLatin1String("/tmp/test.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
@@ -170,7 +170,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   }
 
 #if 0
-  kWarning() << "EntryView::showEntry() - turn me off!";
+  myWarning() << "turn me off!";
   QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
@@ -179,7 +179,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   f2.close();
 #endif
 
-//  myDebug() << html << endl;
+//  myDebug() << html;
   write(html);
   end();
   // not need anymore?
@@ -207,7 +207,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     m_xsltFile = KStandardDirs::locate("appdata", templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
-        myWarning() << "EntryView::setXSLTFile() - can't locate " << file_;
+        myWarning() << "can't locate " << file_;
       }
       m_xsltFile = KStandardDirs::locate("appdata", templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
@@ -251,7 +251,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       m_handler = new XSLTHandler(QFile::encodeName(m_xsltFile));
     }
     if(!m_handler->isValid()) {
-      kWarning() << "EntryView::setXSLTFile() - invalid xslt handler";
+      myWarning() << "invalid xslt handler";
       clear();
       delete m_handler;
       m_handler = 0;
@@ -379,7 +379,7 @@ void EntryView::resetColors() {
   m_tempFile = new KTemporaryFile();
   m_tempFile->setAutoRemove(true);
   if(!m_tempFile->open()) {
-    myDebug() << "EntryView::resetColors() - failed to open temp file" << endl;
+    myDebug() << "failed to open temp file";
     delete m_tempFile;
     m_tempFile = 0;
     return;

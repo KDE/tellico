@@ -96,12 +96,12 @@ void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
       break;
 
     default:
-      kWarning() << "AnimeNfoFetcher::search() - key not recognized: " << key_;
+      myWarning() << "key not recognized: " << key_;
       stop();
       return;
   }
 #endif
-//  myDebug() << "AnimeNfoFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -123,7 +123,7 @@ void AnimeNfoFetcher::stop() {
 }
 
 void AnimeNfoFetcher::slotComplete(KJob*) {
-//  myDebug() << "AnimeNfoFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -133,7 +133,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
 
   const QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "AnimeNfoFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -214,18 +214,18 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntry(uint uid_) {
 
   KUrl url = m_matches[uid_];
   if(url.isEmpty()) {
-    kWarning() << "AnimeNfoFetcher::fetchEntry() - no url in map";
+    myWarning() << "no url in map";
     return Data::EntryPtr();
   }
 
   QString results = Tellico::decodeHTML(FileHandler::readTextFile(url, true));
   if(results.isEmpty()) {
-    myDebug() << "AnimeNfoFetcher::fetchEntry() - no text results" << endl;
+    myDebug() << "no text results";
     return Data::EntryPtr();
   }
 
 #if 0
-  kWarning() << "Remove debug from animenfofetcher.cpp";
+  myWarning() << "Remove debug from animenfofetcher.cpp";
   QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -237,7 +237,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntry(uint uid_) {
 
   entry = parseEntry(results);
   if(!entry) {
-    myDebug() << "AnimeNfoFetcher::fetchEntry() - error in processing entry" << endl;
+    myDebug() << "error in processing entry";
     return Data::EntryPtr();
   }
   m_entries.insert(uid_, entry); // keep for later
@@ -245,7 +245,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntry(uint uid_) {
 }
 
 Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
- // myDebug() << "AnimeNfoFetcher::parseEntry()" << endl;
+ // myDebug() << "";
  // class might be anime_info_top
   QRegExp infoRx(QLatin1String("<td\\s+[^>]*class\\s*=\\s*[\"']anime_info[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   infoRx.setMinimal(true);

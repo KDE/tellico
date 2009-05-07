@@ -113,14 +113,14 @@ void CalendarHandler::modifyLoans(Tellico::Data::LoanList loans_) {
   for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
     KCal::Todo* todo = calendarResources.todo(loan->uid());
     if(!todo) {
-//      myDebug() << "couldn't find existing todo, adding a new todo" << endl;
+//      myDebug() << "couldn't find existing todo, adding a new todo";
       Data::LoanList newLoans;
       newLoans.append(loan);
       addLoans(newLoans, &calendarResources); // add loan
       continue;
     }
     if(loan->dueDate().isNull()) {
-      myDebug() << "removing todo" << endl;
+      myDebug() << "removing todo";
       calendarResources.deleteIncidence(todo);
       continue;
     }
@@ -167,7 +167,7 @@ void CalendarHandler::removeLoans(Tellico::Data::LoanList loans_) {
 bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
   KCal::CalendarResourceManager* manager = resources->resourceManager();
   if(manager->isEmpty()) {
-    kWarning() << "Tellico::CalendarHandler::checkCalendar() - adding default calendar";
+    myWarning() << "adding default calendar";
     KConfig config(QLatin1String("korganizerrc"));
     config.setGroup("General");
     QString fileName = config.readPathEntry("Active Calendar", QString());

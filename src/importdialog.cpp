@@ -200,7 +200,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
           u.setPath(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
         } else {
-          kWarning() << "ImportDialog::importer - unable to find mods2tellico.xml!";
+          myWarning() << "unable to find mods2tellico.xml!";
         }
       }
       break;
@@ -258,11 +258,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       break;
 
     case Import::GRS1:
-      myDebug() << "ImportDialog::importer() - GRS1 not implemented" << endl;
+      myDebug() << "GRS1 not implemented";
       break;
   }
   if(!importer) {
-    myWarning() << "ImportDialog::importer() - importer not created!";
+    myWarning() << "importer not created!";
     return 0;
   }
   importer->setCurrentCollection(Data::Document::self()->collection());

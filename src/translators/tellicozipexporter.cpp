@@ -114,12 +114,12 @@ bool TellicoZipExporter::exec() {
         const Data::Image& img = ImageFactory::imageById(id);
         // if no image, continue
         if(img.isNull()) {
-          kWarning() << "TellicoZipExporter::exec() - no image found for " << imageField->title() << " field";
-          kWarning() << "...for the entry titled " << entry->title();
+          myWarning() << "no image found for " << imageField->title() << " field";
+          myWarning() << "...for the entry titled " << entry->title();
           continue;
         }
         QByteArray ba = img.byteArray();
-//        myDebug() << "TellicoZipExporter::data() - adding image id = " << it->field(fIt) << endl;
+//        myDebug() << "adding image id = " << it->field(fIt);
         zip.writeFile(imagesDir + id, QString(), QString(), ba, ba.size());
         imageSet.add(id);
         if(j%stepSize == 0) {

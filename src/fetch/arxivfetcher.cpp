@@ -102,7 +102,7 @@ void ArxivFetcher::doSearch() {
     return;
   }
 
-//  myDebug() << "ArxivFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
@@ -120,7 +120,7 @@ void ArxivFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "ArxivFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -130,7 +130,7 @@ void ArxivFetcher::stop() {
 }
 
 void ArxivFetcher::slotComplete(KJob*) {
-//  myDebug() << "ArxivFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -140,7 +140,7 @@ void ArxivFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "ArxivFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -148,7 +148,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 #if 0
-  kWarning() << "Remove debug from arxivfetcher.cpp";
+  myWarning() << "Remove debug from arxivfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -169,7 +169,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   if(m_total == -1) {
     QDomDocument dom;
     if(!dom.setContent(data, true /*namespace*/)) {
-      kWarning() << "ArxivFetcher::slotComplete() - server did not return valid XML.";
+      myWarning() << "server did not return valid XML.";
       return;
     }
     // total is top level element, with attribute totalResultsAvailable
@@ -186,7 +186,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
-    myDebug() << "ArxivFetcher::slotComplete() - no valid result" << endl;
+    myDebug() << "no valid result";
     stop();
     return;
   }
@@ -242,7 +242,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntry(uint uid_) {
 void ArxivFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("arxiv2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "ArxivFetcher::initXSLTHandler() - can not locate arxiv2tellico.xsl.";
+    myWarning() << "can not locate arxiv2tellico.xsl.";
     return;
   }
 
@@ -252,7 +252,7 @@ void ArxivFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "ArxivFetcher::initXSLTHandler() - error in arxiv2tellico.xsl.";
+    myWarning() << "error in arxiv2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -291,14 +291,14 @@ KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value
       break;
 
     default:
-      kWarning() << "ArxivFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       return KUrl();
   }
 
 #ifdef ARXIV_TEST
   u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
 #endif
-  myDebug() << "ArxivFetcher::search() - url: " << u.url() << endl;
+  myDebug() << "url: " << u.url();
   return u;
 }
 
@@ -316,7 +316,7 @@ void ArxivFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "ArxivFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

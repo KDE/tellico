@@ -889,7 +889,7 @@ QChar Iso5426Converter::getCombiningChar(uint c) {
   // 5/15 right half of double tilde
 
   default:
-    myDebug() << "Iso5426Converter::getCombiningChar() - no match for " << c << endl;
+    myDebug() << "no match for " << c;
     return QChar();
   }
 }

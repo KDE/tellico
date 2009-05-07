@@ -39,16 +39,16 @@ FilterCommand::FilterCommand(Mode mode_, Tellico::FilterPtr activeFilter_, Telli
     , m_oldFilter(oldFilter_)
 {
   if(!m_activeFilter) {
-    myDebug() << "FilterCommand() - null active filter pointer" << endl;
+    myDebug() << "null active filter pointer";
   }
 #ifndef NDEBUG
 // just some sanity checking
   if(m_mode == FilterAdd && m_oldFilter) {
-    myDebug() << "FilterCommand() - adding field, but pointers are wrong" << endl;
+    myDebug() << "adding field, but pointers are wrong";
   } else if(m_mode == FilterModify && !m_oldFilter) {
-    myDebug() << "FilterCommand() - modifying field, but pointers are wrong" << endl;
+    myDebug() << "modifying field, but pointers are wrong";
   } else if(m_mode == FilterRemove && m_oldFilter) {
-    myDebug() << "FilterCommand() - removing field, but pointers are wrong" << endl;
+    myDebug() << "removing field, but pointers are wrong";
   }
 #endif
   switch(m_mode) {

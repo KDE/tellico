@@ -102,7 +102,7 @@ void RatingWidget::updateBounds() {
   m_min = Tellico::toUInt(m_field->property(QLatin1String("minimum")), &ok);
   m_max = Tellico::toUInt(m_field->property(QLatin1String("maximum")), &ok);
   if(m_max > RATING_WIDGET_MAX_ICONS) {
-    myDebug() << "RatingWidget::updateBounds() - max is too high: " << m_max << endl;
+    myDebug() << "max is too high: " << m_max;
     m_max = RATING_WIDGET_MAX_ICONS;
   }
   if(m_min < 1) {

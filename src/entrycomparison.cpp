@@ -94,13 +94,13 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   QString s1a = s1; s1a.remove(notAlphaNum);
   QString s2a = s2; s2a.remove(notAlphaNum);
   if(!s1a.isEmpty() && s1a == s2a) {
-//    myDebug() << "match without punctuation" << endl;
+//    myDebug() << "match without punctuation";
     return 5;
   }
   FieldFormat::stripArticles(s1);
   FieldFormat::stripArticles(s2);
   if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without articles" << endl;
+//    myDebug() << "match without articles";
     return 3;
   }
   // try removing everything between parentheses
@@ -108,7 +108,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   s1.remove(rx);
   s2.remove(rx);
   if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without parentheses" << endl;
+//    myDebug() << "match without parentheses";
     return 2;
   }
   if(f->flags() & Data::Field::AllowMultiple) {

@@ -225,7 +225,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  myDebug() << "newField_->name();
+//  myDebug() << ";
 
 // the field name never changes
   const QString fieldName = newField_->name();

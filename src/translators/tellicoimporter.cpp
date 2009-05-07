@@ -137,7 +137,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       error = i18n(errorLoad).arg(url().fileName()) + QLatin1Char('\n');
     }
     error += handler.errorString();
-    myDebug() << error << endl;
+    myDebug() << error;
     setStatusMessage(error);
     return;
   }
@@ -297,7 +297,7 @@ void TellicoImporter::slotCancel() {
 bool TellicoImporter::loadAllImages(const KUrl& url_) {
   // only local files are allowed
   if(url_.isEmpty() || !url_.isValid() || !url_.isLocalFile()) {
-//    myDebug() << "TellicoImporter::loadAllImages() - returning" << endl;
+//    myDebug() << "returning";
     return false;
   }
 

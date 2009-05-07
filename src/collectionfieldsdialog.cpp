@@ -461,7 +461,7 @@ void CollectionFieldsDialog::slotNew() {
 
   Data::FieldPtr field(new Data::Field(name, title));
   m_newFields.append(field);
-//  myDebug() << "CollectionFieldsDialog::slotNew() - adding new field " << title << endl;
+//  myDebug() << "adding new field " << title;
 
   m_currentField = field;
 
@@ -539,7 +539,7 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
-//  myDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - " << index_ << endl;
+//  myDebug() << "" << index_;
 
   // use this instead of blocking signals everywhere
   m_updatingValues = true;
@@ -568,7 +568,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   // need to get a pointer to the field with the new values to insert
   Data::FieldPtr field = item->field();
   if(!field) {
-    myDebug() << "CollectionFieldsDialog::slotHighlightedChanged() - no field found!" << endl;
+    myDebug() << "no field found!";
     return;
   }
 
@@ -617,7 +617,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
       break;
 
     default:
-      kWarning() << "CollectionFieldsDialog::slotHighlightedChanged() - no format type!";
+      myWarning() << "no format type!";
       break;
   }
 
@@ -639,7 +639,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 }
 
 void CollectionFieldsDialog::updateField() {
-//  myDebug() << "CollectionFieldsDialog::updateField()" << endl;
+//  myDebug() << "";
   Data::FieldPtr field = m_currentField;
   if(!field || !m_modified) {
     return;
@@ -724,7 +724,7 @@ void CollectionFieldsDialog::updateField() {
 // The purpose here is to first set the modified flag. Then, if the field being edited is one
 // that exists in the collection already, a deep copy needs to be made.
 void CollectionFieldsDialog::slotModified() {
-//  myDebug() << "CollectionFieldsDialog::slotModified()" << endl;
+//  myDebug() << "";
   // if I'm just updating the values, I don't care
   if(m_updatingValues) {
     return;
@@ -736,7 +736,7 @@ void CollectionFieldsDialog::slotModified() {
   enableButtonApply(true);
 
   if(!m_currentField) {
-    myDebug() << "no current field!" << endl;
+    myDebug() << "no current field!";
     m_currentField = static_cast<FieldListItem*>(m_fieldsWidget->currentItem())->field();
   }
 
@@ -760,7 +760,7 @@ void CollectionFieldsDialog::slotModified() {
 }
 
 void CollectionFieldsDialog::updateTitle(const QString& title_) {
-//  myDebug() << "CollectionFieldsDialog::updateTitle()" << endl;
+//  myDebug() << "";
   if(m_currentField && m_currentField->title() != title_) {
     m_fieldsWidget->blockSignals(true);
     FieldListItem* oldItem = findItem(m_currentField);
@@ -1057,7 +1057,7 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
       break;
 
     default:
-      myDebug() << "CollectionFieldsDialog::newTypesAllowed() - no match for " << type_ << endl;
+      myDebug() << "no match for " << type_;
       newTypes = Data::Field::typeTitles();
       break;
   }

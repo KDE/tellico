@@ -91,12 +91,12 @@ PalmLib::FlatFile::Database::appendField(const std::string& name,
                                          Field::FieldType type, std::string data)
 {
     if (! supportsFieldType(type)) {
-      kDebug() << "PalmLib::FlatFile::Database::appendField() - unsupported field type";
+      kDebug() << "unsupported field type";
         return;
     }
 //        throw PalmLib::error("unsupported field type");
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
-      kDebug() << "PalmLib::FlatFile::Database::appendField() - maximum number of fields reached";
+      kDebug() << "maximum number of fields reached";
         return;
       }
 //        throw PalmLib::error("maximum number of fields reached");

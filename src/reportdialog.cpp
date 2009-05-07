@@ -150,7 +150,7 @@ void ReportDialog::slotGenerate() {
   QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
   QString xsltFile = KStandardDirs::locate("appdata", fileName);
   if(xsltFile.isEmpty()) {
-    kWarning() << "ReportDialog::setXSLTFile() - can't locate " << m_templateCombo->currentData().toString();
+    myWarning() << "can't locate " << m_templateCombo->currentData().toString();
     return;
   }
   // if it's the same XSL file, no need to reload the XSLTHandler, just refresh
@@ -172,7 +172,7 @@ void ReportDialog::slotGenerate() {
 
 void ReportDialog::slotRefresh() {
   if(!m_exporter) {
-    kWarning() << "ReportDialog::slotRefresh() - no exporter";
+    myWarning() << "no exporter";
     return;
   }
 

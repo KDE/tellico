@@ -64,18 +64,18 @@ void FieldCommand::init() {
   }
 
   if(!m_coll) {
-    myDebug() << "FieldCommand() - null collection pointer" << endl;
+    myDebug() << "null collection pointer";
   } else if(!m_activeField) {
-    myDebug() << "FieldCommand() - null active field pointer" << endl;
+    myDebug() << "null active field pointer";
   }
 #ifndef NDEBUG
 // just some sanity checking
   if(m_mode == FieldAdd && m_oldField) {
-    myDebug() << "FieldCommand() - adding field, but pointers are wrong" << endl;
+    myDebug() << "adding field, but pointers are wrong";
   } else if(m_mode == FieldModify && !m_oldField) {
-    myDebug() << "FieldCommand() - modifying field, but pointers are wrong" << endl;
+    myDebug() << "modifying field, but pointers are wrong";
   } else if(m_mode == FieldRemove && m_oldField) {
-    myDebug() << "FieldCommand() - removing field, but pointers are wrong" << endl;
+    myDebug() << "removing field, but pointers are wrong";
   }
 #endif
 }

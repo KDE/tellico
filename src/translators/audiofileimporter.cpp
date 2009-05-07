@@ -161,7 +161,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     QString album = TStringToQString(tag->album()).trimmed();
     if(album.isEmpty()) {
       // can't do anything since tellico entries are by album
-      kWarning() << "Skipping: no album listed for " << *it;
+      myWarning() << "Skipping: no album listed for " << *it;
       continue;
     }
     int disc = discNumber(f);
@@ -296,10 +296,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
           entry->setField(file, insertValue(entry->field(file), fileValue, trackNum));
         }
       } else {
-        myDebug() << *it << " contains no track number and track number cannot be determined, so the track is not imported." << endl;
+        myDebug() << *it << " contains no track number and track number cannot be determined, so the track is not imported.";
       }
     } else {
-      myDebug() << *it << " has an empty title, so the track is not imported." << endl;
+      myDebug() << *it << " has an empty title, so the track is not imported.";
     }
     if(!tag->comment().stripWhiteSpace().isEmpty()) {
       QString c = entry->field(comments);
@@ -322,14 +322,14 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       kapp->processEvents();
     }
 
-/*    kDebug() << "-- TAG --";
-    kDebug() << "title   - \"" << tag->title().to8Bit()   << "\"";
-    kDebug() << "artist  - \"" << tag->artist().to8Bit()  << "\"";
-    kDebug() << "album   - \"" << tag->album().to8Bit()   << "\"";
-    kDebug() << "year    - \"" << tag->year()             << "\"";
-    kDebug() << "comment - \"" << tag->comment().to8Bit() << "\"";
-    kDebug() << "track   - \"" << tag->track()            << "\"";
-    kDebug() << "genre   - \"" << tag->genre().to8Bit()   << "\"";*/
+/*    myDebug() << "-- TAG --";
+    myDebug() << "title   - \"" << tag->title().to8Bit()   << "\"";
+    myDebug() << "artist  - \"" << tag->artist().to8Bit()  << "\"";
+    myDebug() << "album   - \"" << tag->album().to8Bit()   << "\"";
+    myDebug() << "year    - \"" << tag->year()             << "\"";
+    myDebug() << "comment - \"" << tag->comment().to8Bit() << "\"";
+    myDebug() << "track   - \"" << tag->track()            << "\"";
+    myDebug() << "genre   - \"" << tag->genre().to8Bit()   << "\"";*/
   }
 
   if(m_cancelled) {

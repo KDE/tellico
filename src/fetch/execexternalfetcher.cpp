@@ -108,7 +108,7 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   }
   QStringList sl = config_.readEntry("Arguments", QStringList());
   if(il.count() != sl.count()) {
-    kWarning() << "ExecExternalFetcher::readConfig() - unequal number of arguments and keys";
+    myWarning() << "unequal number of arguments and keys";
   }
   int n = qMin(il.count(), sl.count());
   for(int i = 0; i < n; ++i) {
@@ -409,7 +409,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
   QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
   QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
-    kWarning() << "ExecExternalFetcher::ConfigWidget::readConfig() - unequal number of arguments and keys";
+    myWarning() << "unequal number of arguments and keys";
   }
   int n = qMin(argKeys.count(), argValues.count());
   QMap<FetchKey, QString> args;

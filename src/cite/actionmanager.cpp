@@ -69,7 +69,7 @@ bool ActionManager::connect(Tellico::Cite::CiteAction action_) {
 
 bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::EntryList entries_) {
   if(entries_.isEmpty()) {
-    myDebug() << "ActionManager::cite() - no entries to cite" << endl;
+    myDebug() << "no entries to cite";
     return false;
   }
   if(m_action && m_action->type() != action_) {
@@ -77,11 +77,11 @@ bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::Entry
     m_action = 0;
   }
   if(!m_action && !connect(action_)) {
-    myDebug() << "ActionManager::cite() - unable to connect" << endl;
+    myDebug() << "unable to connect";
     return false;
   }
   if(!m_action) {
-    myDebug() << "ActionManager::cite() - no action found" << endl;
+    myDebug() << "no action found";
     return false;
   }
 

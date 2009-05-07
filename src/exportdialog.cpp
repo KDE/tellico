@@ -27,6 +27,7 @@
 #include "filehandler.h"
 #include "controller.h"
 #include "document.h"
+#include "tellico_debug.h"
 
 #include "translators/exporter.h"
 #include "translators/tellicoxmlexporter.h"
@@ -42,7 +43,6 @@
 #include "translators/gcfilmsexporter.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <kglobal.h>
 #include <kconfig.h>
 
@@ -218,7 +218,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       break;
 
     default:
-      kDebug() << "ExportDialog::exporter() - not implemented!";
+      myDebug() << "not implemented!";
       break;
   }
   if(exporter) {

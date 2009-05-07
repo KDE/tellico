@@ -126,7 +126,7 @@ QString TellicoXMLExporter::exportXMLString() const {
 void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
   Data::CollPtr coll = collection();
   if(!coll) {
-    kWarning() << "TellicoXMLExporter::exportCollectionXML() - no collection pointer!";
+    myWarning() << "no collection pointer!";
     return;
   }
 
@@ -259,8 +259,8 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     // optionally, verify images exist
     if(fIt->type() == Data::Field::Image && (options() & Export::ExportVerifyImages)) {
       if(!ImageFactory::validImage(fieldValue)) {
-        myDebug() << "TellicoXMLExporter::exportEntryXML() - entry: " << entry_->title() << endl;
-        myDebug() << "TellicoXMLExporter::exportEntryXML() - skipping image: " << fieldValue << endl;
+        myDebug() << "entry: " << entry_->title();
+        myDebug() << "skipping image: " << fieldValue;
         continue;
       }
     }
@@ -343,7 +343,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
 
 void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_, const QString& id_) const {
   if(id_.isEmpty()) {
-    myDebug() << "TellicoXMLExporter::exportImageXML() - empty image!" << endl;
+    myDebug() << "empty image!";
     return;
   }
 //  myLog() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;
@@ -352,7 +352,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
   if(m_includeImages) {
     const Data::Image& img = ImageFactory::imageById(id_);
     if(img.isNull()) {
-      myDebug() << "TellicoXMLExporter::exportImageXML() - null image - " << id_ << endl;
+      myDebug() << "null image - " << id_;
       return;
     }
     imgElem.setAttribute(QLatin1String("format"), QLatin1String(img.format()));
@@ -439,7 +439,7 @@ void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent
         ruleElem.setAttribute(QLatin1String("function"), QLatin1String("notregexp"));
         break;
       default:
-        kWarning() << "TellicoXMLExporter::exportFilterXML() - no matching rule function!";
+        myWarning() << "no matching rule function!";
     }
     filterElem.appendChild(ruleElem);
   }

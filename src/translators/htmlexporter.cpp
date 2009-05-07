@@ -114,7 +114,7 @@ void HTMLExporter::reset() {
 
 bool HTMLExporter::exec() {
   if(url().isEmpty() || !url().isValid()) {
-    kWarning() << "HTMLExporter::exec() - trying to export to invalid URL";
+    myWarning() << "trying to export to invalid URL";
     return false;
   }
 
@@ -142,7 +142,7 @@ bool HTMLExporter::exec() {
   htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().toUtf8().data()), NULL);
   xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
   if(root == 0) {
-    myDebug() << "HTMLExporter::exec() - no root" << endl;
+    myDebug() << "no root";
     return false;
   }
   parseDOM(root);
@@ -174,7 +174,7 @@ bool HTMLExporter::exec() {
 bool HTMLExporter::loadXSLTFile() {
   QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
   if(xsltfile.isEmpty()) {
-    myDebug() << "HTMLExporter::loadXSLTFile() - no xslt file for " << m_xsltFile << endl;
+    myDebug() << "no xslt file for " << m_xsltFile;
     return false;
   }
 
@@ -185,7 +185,7 @@ bool HTMLExporter::loadXSLTFile() {
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLFile(u, false);
   if(dom.isNull()) {
-    myDebug() << "HTMLExporter::loadXSLTFile() - error loading xslt file: " << xsltfile << endl;
+    myDebug() << "error loading xslt file: " << xsltfile;
     return false;
   }
 
@@ -241,13 +241,13 @@ bool HTMLExporter::loadXSLTFile() {
 
 QString HTMLExporter::text() {
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
-    kWarning() << "HTMLExporter::text() - error loading xslt file: " << m_xsltFile;
+    myWarning() << "error loading xslt file: " << m_xsltFile;
     return QString();
   }
 
   Data::CollPtr coll = collection();
   if(!coll) {
-    myDebug() << "HTMLExporter::text() - no collection pointer!" << endl;
+    myDebug() << "no collection pointer!";
     return QString();
   }
 
@@ -362,7 +362,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
         groupFields += QLatin1Char('|');
       }
     }
-//    myDebug() << groupFields << endl;
+//    myDebug() << groupFields;
     m_handler->addStringParam("group-fields", groupFields.toUtf8());
     m_handler->addStringParam("sort-title", sortString.toUtf8());
   }
@@ -465,7 +465,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
         success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), false);
       }
       if(!success) {
-        kWarning() << "HTMLExporter::writeImages() - unable to write image file: "
+        myWarning() << "unable to write image file: "
                     << imgDir.path() << id << endl;
       }
 
@@ -578,7 +578,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   if(m_xsltFilePath.isEmpty()) {
     m_xsltFilePath = KStandardDirs::locate("appdata", m_xsltFile);
     if(m_xsltFilePath.isEmpty()) {
-      kWarning() << "HTMLExporter::handleLink() - no xslt file for " << m_xsltFile;
+      myWarning() << "no xslt file for " << m_xsltFile;
     }
   }
 
@@ -645,7 +645,7 @@ void HTMLExporter::createDir() {
   }
   KUrl dir = fileDir();
   if(dir.isEmpty()) {
-    myDebug() << "HTMLExporter::createDir() - called on empty URL!" << endl;
+    myDebug() << "called on empty URL!";
     return;
   }
   if(KIO::NetAccess::exists(dir, KIO::NetAccess::DestinationSide, 0)) {
@@ -680,8 +680,8 @@ bool HTMLExporter::copyFiles() {
     if(success) {
       m_copiedFiles.add((*it).url());
     } else {
-      kWarning() << "HTMLExporter::copyFiles() - can't copy " << target;
-      kWarning() << KIO::NetAccess::lastErrorString();
+      myWarning() << "can't copy " << target;
+      myWarning() << KIO::NetAccess::lastErrorString();
     }
     if(j%stepSize == 0) {
       if(options() & ExportProgress) {
@@ -695,7 +695,7 @@ bool HTMLExporter::copyFiles() {
 
 bool HTMLExporter::writeEntryFiles() {
   if(m_entryXSLTFile.isEmpty()) {
-    kWarning() << "HTMLExporter::writeEntryFiles() - no entry XSLT file";
+    myWarning() << "no entry XSLT file";
     return false;
   }
 
@@ -786,7 +786,7 @@ void HTMLExporter::slotCancel() {
 
 void HTMLExporter::parseDOM(xmlNode* node_) {
   if(node_ == 0) {
-    myDebug() << "HTMLExporter::parseDOM() - no node" << endl;
+    myDebug() << "no node";
     return;
   }
 

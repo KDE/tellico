@@ -257,7 +257,7 @@ bool BibtexCollection::addField(Tellico::Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
-//  myDebug() << "BibtexCollection::addField()" << endl;
+//  myDebug() << "";
   bool success = Collection::addField(field_);
   if(success) {
     QString bibtex = field_->property(QLatin1String("bibtex"));
@@ -272,7 +272,7 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  myDebug() << "BibtexCollection::modifyField()" << endl;
+//  myDebug() << "";
   bool success = Collection::modifyField(newField_);
   FieldPtr oldField = fieldByName(newField_->name());
   QString oldBibtex = oldField->property(QLatin1String("bibtex"));
@@ -291,7 +291,7 @@ bool BibtexCollection::deleteField(Tellico::Data::FieldPtr field_, bool force_) 
   if(!field_) {
     return false;
   }
-//  myDebug() << "BibtexCollection::deleteField()" << endl;
+//  myDebug() << "";
   bool success = true;
   QString bibtex = field_->property(QLatin1String("bibtex"));
   if(!bibtex.isEmpty()) {
@@ -322,7 +322,7 @@ int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::
   }
   int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
-//    myDebug() << "BookCollection::sameEntry() - different titles for " << entry1_->title() << " vs. "
+//    myDebug() << "different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title() << endl;
 //  }
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("author"),   this);

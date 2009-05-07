@@ -173,7 +173,7 @@ bool Manager::removeTemplate(const QString& file, bool manual) {
     } else {
       success = success && QFile::remove(path + file);
       if(!success) {
-        myDebug() << "Manager::removeTemplate() - failed to remove " << (path+file) << endl;
+        myDebug() << "failed to remove " << (path+file);
       }
     }
   }
@@ -221,12 +221,12 @@ bool Manager::installScript(const QString& file) {
     const KArchiveDirectory* archiveDir = archive.directory();
     exeFile = findEXE(archiveDir);
     if(exeFile.isEmpty()) {
-      myDebug() << "No exe file found" << endl;
+      myDebug() << "No exe file found";
       return false;
     }
     sourceName = QFileInfo(exeFile).baseName();
     if(sourceName.isEmpty()) {
-      myDebug() << "Invalid packet name" << endl;
+      myDebug() << "Invalid packet name";
       return false;
     }
     // package could have a top-level directory or not
@@ -251,14 +251,14 @@ bool Manager::installScript(const QString& file) {
     exeFile.remove(QRegExp(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
     sourceName = QFileInfo(exeFile).completeBaseName();
     if(sourceName.isEmpty()) {
-      myDebug() << "Invalid packet name" << endl;
+      myDebug() << "Invalid packet name";
       return false;
     }
     copyTarget += sourceName;
     scriptFolder = copyTarget + QDir::separator();
     QDir().mkpath(scriptFolder);
     if(KIO::NetAccess::file_copy(KUrl(file), KUrl(scriptFolder + exeFile)) == false) {
-      myDebug() << "Copy failed." << endl;
+      myDebug() << "Copy failed.";
       return false;
     }
   }
@@ -280,10 +280,10 @@ bool Manager::installScript(const QString& file) {
   KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
   config.writeEntry(sourceName, file);
   config.writeEntry(file, scriptFolder);
-  //  myDebug() << "Manager::installScript() - exeFile = " << exeFile << endl;
-  //  myDebug() << "Manager::installScript() - sourceExec = " << info->sourceExec << endl;
-  //  myDebug() << "Manager::installScript() - sourceName = " << info->sourceName << endl;
-  //  myDebug() << "Manager::installScript() - specFile = " << info->specFile << endl;
+  //  myDebug() << "exeFile = " << exeFile;
+  //  myDebug() << "sourceExec = " << info->sourceExec;
+  //  myDebug() << "sourceName = " << info->sourceName;
+  //  myDebug() << "specFile = " << info->specFile;
   KConfigGroup configGroup(KGlobal::config(), QLatin1String("Data Sources"));
   int nSources = configGroup.readEntry("Sources Count", 0);
   config.writeEntry(file + QLatin1String("_nbr"), nSources);
@@ -402,7 +402,7 @@ bool Manager::checkCommonFile() {
     QString installCommonFile = installDir + QLatin1Char('/') + QLatin1String("tellico-common.xsl");
 #ifndef NDEBUG
     if(userCommonFile == installCommonFile) {
-      kWarning() << "Manager::checkCommonFile() - install location is same as user location";
+      myWarning() << "install location is same as user location";
     }
 #endif
     QFileInfo installInfo(installCommonFile);

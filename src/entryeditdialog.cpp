@@ -418,7 +418,7 @@ void EntryEditDialog::clear() {
 
   if(m_isOrphan) {
     if(m_currEntries.count() > 1) {
-      myWarning() << "EntryEditDialog::clear() - is an orphan, but more than one";
+      myWarning() << "is an orphan, but more than one";
     }
     m_isOrphan = false;
   }

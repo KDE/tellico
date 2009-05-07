@@ -149,7 +149,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
   m_started = true;
   m_done = false;
   if(m_host.isEmpty() || m_dbname.isEmpty()) {
-    myDebug() << "Z3950Fetcher::search() - settings are not set!" << endl;
+    myDebug() << "settings are not set!";
     stop();
     return;
   }
@@ -221,7 +221,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       m_pqn = m_value;
       break;
     default:
-      kWarning() << "Z3950Fetcher::search() - key not recognized: " << key_;
+      myWarning() << "key not recognized: " << key_;
       stop();
       return;
   }
@@ -252,7 +252,7 @@ void Z3950Fetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "Z3950Fetcher::stop()" << endl;
+//  myDebug() << "";
   m_started = false;
   if(m_conn) {
    // give it a second to cleanup
@@ -269,7 +269,7 @@ bool Z3950Fetcher::initMARC21Handler() {
 
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - can not locate MARC21slim2MODS3.xsl.";
+    myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
   }
 
@@ -278,7 +278,7 @@ bool Z3950Fetcher::initMARC21Handler() {
 
   m_MARC21XMLHandler = new XSLTHandler(u);
   if(!m_MARC21XMLHandler->isValid()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - error in MARC21slim2MODS3.xsl.";
+    myWarning() << "error in MARC21slim2MODS3.xsl.";
     delete m_MARC21XMLHandler;
     m_MARC21XMLHandler = 0;
     return false;
@@ -293,7 +293,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
 
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("UNIMARC2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - can not locate UNIMARC2MODS3.xsl.";
+    myWarning() << "can not locate UNIMARC2MODS3.xsl.";
     return false;
   }
 
@@ -302,7 +302,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
 
   m_UNIMARCXMLHandler = new XSLTHandler(u);
   if(!m_UNIMARCXMLHandler->isValid()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - error in UNIMARC2MODS3.xsl.";
+    myWarning() << "error in UNIMARC2MODS3.xsl.";
     delete m_UNIMARCXMLHandler;
     m_UNIMARCXMLHandler = 0;
     return false;
@@ -317,7 +317,7 @@ bool Z3950Fetcher::initMODSHandler() {
 
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - can not locate mods2tellico.xsl.";
+    myWarning() << "can not locate mods2tellico.xsl.";
     return false;
   }
 
@@ -326,7 +326,7 @@ bool Z3950Fetcher::initMODSHandler() {
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {
-    kWarning() << "Z3950Fetcher::initHandlers() - error in mods2tellico.xsl.";
+    myWarning() << "error in mods2tellico.xsl.";
     delete m_MODSHandler;
     m_MODSHandler = 0;
     // no use in keeping the MARC handlers now
@@ -355,12 +355,12 @@ void Z3950Fetcher::process() {
 
 void Z3950Fetcher::handleResult(const QString& result_) {
   if(result_.isEmpty()) {
-    myDebug() << "Z3950Fetcher::handleResult() - empty record found, maybe the character encoding or record format is wrong?" << endl;
+    myDebug() << "empty record found, maybe the character encoding or record format is wrong?";
     return;
   }
 
 #if 0
-  kWarning() << "Remove debug from z3950fetcher.cpp";
+  myWarning() << "Remove debug from z3950fetcher.cpp";
   {
     QFile f1(QLatin1String("/tmp/marc.xml"));
     if(f1.open(QIODevice::WriteOnly)) {
@@ -389,12 +389,12 @@ void Z3950Fetcher::handleResult(const QString& result_) {
       str = m_MARC21XMLHandler->applyStylesheet(result_);
     }
     if(str.isEmpty() || !initMODSHandler()) {
-      myDebug() << "Z3950Fetcher::handleResult() - empty string or can't init" << endl;
+      myDebug() << "empty string or can't init";
       stop();
       return;
     }
 #if 0
-    kWarning() << "Remove debug from z3950fetcher.cpp";
+    myWarning() << "Remove debug from z3950fetcher.cpp";
     {
       QFile f2(QLatin1String("/tmp/mods.xml"));
 //      if(f2.open(QIODevice::WriteOnly)) {
@@ -416,12 +416,12 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     if(!msg.isEmpty()) {
       message(msg, MessageHandler::Warning);
     }
-    myDebug() << "Z3950Fetcher::handleResult() - no collection pointer: " << msg << endl;
+    myDebug() << "no collection pointer: " << msg;
     return;
   }
 
   if(coll->entryCount() == 0) {
-//    myDebug() << "Z3950Fetcher::handleResult() - no Tellico entry in result" << endl;
+//    myDebug() << "no Tellico entry in result";
     return;
   }
 
@@ -456,7 +456,7 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
 
   if(event_->type() == Z3950ResultFound::uid()) {
     if(m_done) {
-      kWarning() << "Z3950Fetcher::customEvent() - result returned after done signal!";
+      myWarning() << "result returned after done signal!";
     }
     Z3950ResultFound* e = static_cast<Z3950ResultFound*>(event_);
     handleResult(e->result());
@@ -470,7 +470,7 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
     done();
   } else if(event_->type() == Z3950SyntaxChange::uid()) {
     if(m_done) {
-      kWarning() << "Z3950Fetcher::customEvent() - syntax changed after done signal!";
+      myWarning() << "syntax changed after done signal!";
     }
     Z3950SyntaxChange* e = static_cast<Z3950SyntaxChange*>(event_);
     if(m_syntax != e->syntax()) {
@@ -478,12 +478,12 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
       // it gets saved when saveConfigHook() get's called from the Fetcher() d'tor
     }
   } else {
-    kWarning() << "Z3950Fetcher::customEvent() - weird type: " << event_->type();
+    myWarning() << "weird type: " << event_->type();
   }
 }
 
 void Z3950Fetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "Z3950Fetcher::updateEntry() - " << source() << ": " << entry_->title() << endl;
+//  myDebug() << "" << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
@@ -503,7 +503,7 @@ void Z3950Fetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "Z3950Fetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
@@ -733,7 +733,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
 
   QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {
-    kWarning() << "Z3950Fetcher::loadPresets() - no z3950 servers file found";
+    myWarning() << "no z3950 servers file found";
     return;
   }
 
@@ -745,7 +745,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
   QMap<QString, QString> serverNameMap;
   for(QStringList::ConstIterator server = servers.constBegin(); server != servers.constEnd(); ++server) {
     if((*server).isEmpty()) {
-      myDebug() << "Z3950Fetcher::ConfigWidget::loadPresets() - empty id" << endl;
+      myDebug() << "empty id";
       continue;
     }
     KConfigGroup cfg(&serverConfig, *server);

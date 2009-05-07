@@ -28,9 +28,9 @@
 
 #include "../collection.h"
 #include "../core/filehandler.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <KConfigGroup>
 #include <kglobal.h>
 #include <kcharsets.h>
@@ -72,11 +72,11 @@ bool PilotDBExporter::exec() {
     codec = KGlobal::charsets()->codecForName(group.readEntry("Charset"));
   }
   if(!codec) {
-    kWarning() << "PilotDBExporter::exec() - no QTextCodec!";
+    myWarning() << "no QTextCodec!";
     return false;
 #ifndef NDEBUG
   } else {
-    kDebug() << "PilotDBExporter::exec() - encoding with " << codec->name();
+    myDebug() << "encoding with " << codec->name();
 #endif
   }
 
@@ -119,10 +119,10 @@ bool PilotDBExporter::exec() {
 
       case Data::Field::Para:
         if(hasNote) { // only one is allowed, according to palm-db-tools documentation
-          kDebug() << "PilotDBExporter::data() - adding note as string";
+          myDebug() << "adding note as string";
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
-          kDebug() << "PilotDBExporter::data() - adding note";
+          myDebug() << "adding note";
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::NOTE);
           hasNote = true;
         }
@@ -136,7 +136,7 @@ bool PilotDBExporter::exec() {
 
       case Data::Field::Image:
         // don't include images
-        kDebug() << "PilotDBExporter::data() - skipping " << fIt->title() << " image field";
+        myDebug() << "skipping " << fIt->title() << "image field";
         break;
 
       default:

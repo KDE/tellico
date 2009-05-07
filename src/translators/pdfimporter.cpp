@@ -102,7 +102,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     Data::EntryPtr entry;
 
     QString xmp = xmpHandler.extractXMP(ref->fileName());
-    //  myDebug() << xmp << endl;
+    //  myDebug() << xmp;
     if(xmp.isEmpty()) {
       setStatusMessage(i18n("Tellico was unable to read any metadata from the PDF file."));
     } else {

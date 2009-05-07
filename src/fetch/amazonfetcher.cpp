@@ -161,8 +161,8 @@ void AmazonFetcher::continueSearch() {
 }
 
 void AmazonFetcher::doSearch() {
-//  myDebug() << "AmazonFetcher::doSearch() - value = " << m_value << endl;
-//  myDebug() << "AmazonFetcher::doSearch() - getting page " << m_page << endl;
+//  myDebug() << "value = " << m_value;
+//  myDebug() << "getting page " << m_page;
 
   const SiteData& data = siteData(m_site);
   KUrl u = data.url;
@@ -259,7 +259,7 @@ void AmazonFetcher::doSearch() {
         for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
           if(m_value.startsWith(QLatin1String("979"))) {
             if(m_site == JP) { // never works for JP
-              myWarning() << "AmazonFetcher:doSearch() - ISBN-13 searching not implemented for Japan";
+              myWarning() << "ISBN-13 searching not implemented for Japan";
               it = isbns.erase(it);
               continue;
             }
@@ -322,11 +322,11 @@ void AmazonFetcher::doSearch() {
       break;
 
     default:
-      kWarning() << "AmazonFetcher::doSearch() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       stop();
       return;
   }
-//  myDebug() << "AmazonFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -338,7 +338,7 @@ void AmazonFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "AmazonFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -348,7 +348,7 @@ void AmazonFetcher::stop() {
 }
 
 void AmazonFetcher::slotComplete(KJob*) {
-//  myDebug() << "AmazonFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -358,7 +358,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "AmazonFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -381,7 +381,7 @@ void AmazonFetcher::slotComplete(KJob*) {
   if(m_total == -1) {
     QDomDocument dom;
     if(!dom.setContent(data, false)) {
-      kWarning() << "AmazonFetcher::slotComplete() - server did not return valid XML.";
+      myWarning() << "server did not return valid XML.";
       stop();
       return;
     }
@@ -436,7 +436,7 @@ void AmazonFetcher::slotComplete(KJob*) {
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
-    myDebug() << "AmazonFetcher::slotComplete() - no collection pointer" << endl;
+    myDebug() << "no collection pointer";
     stop();
     return;
   }
@@ -449,7 +449,7 @@ void AmazonFetcher::slotComplete(KJob*) {
   Data::EntryList entries = coll->entries();
   if(entries.isEmpty() && !errors.isEmpty()) {
     for(QStringList::ConstIterator it = errors.constBegin(); it != errors.constEnd(); ++it) {
-      myDebug() << "AmazonFetcher::" << *it << endl;
+      myDebug() << "AmazonFetcher::" << *it;
     }
     message(errors[0], MessageHandler::Error);
     stop();
@@ -512,7 +512,7 @@ void AmazonFetcher::slotComplete(KJob*) {
       entry->setField(QLatin1String("comments"), comments);
     }
 */
-//    myDebug() << "AmazonFetcher::slotComplete() - " << entry->title() << endl;
+//    myDebug() << "" << entry->title();
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
@@ -548,7 +548,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
-    kWarning() << "AmazonFetcher::fetchEntry() - no entry in dict";
+    myWarning() << "no entry in dict";
     return entry;
   }
 
@@ -690,7 +690,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     default:
       break;
   }
-//  myDebug() << "AmazonFetcher::fetchEntry() - grabbing " << imageURL.prettyUrl() << endl;
+//  myDebug() << "grabbing " << imageURL.prettyUrl();
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     // FIXME: need to add cover image field to bibtex collection
@@ -712,7 +712,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
 void AmazonFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("amazon2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    kWarning() << "AmazonFetcher::initXSLTHandler() - can not locate amazon2tellico.xsl.";
+    myWarning() << "can not locate amazon2tellico.xsl.";
     return;
   }
 
@@ -722,7 +722,7 @@ void AmazonFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    kWarning() << "AmazonFetcher::initXSLTHandler() - error in amazon2tellico.xsl.";
+    myWarning() << "error in amazon2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
@@ -730,7 +730,7 @@ void AmazonFetcher::initXSLTHandler() {
 }
 
 void AmazonFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "AmazonFetcher::updateEntry()" << endl;
+//  myDebug() << "";
 
   int type = entry_->collection()->type();
   if(type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex) {
@@ -755,7 +755,7 @@ void AmazonFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "AmazonFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

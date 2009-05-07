@@ -39,9 +39,9 @@ ReorderFields::ReorderFields(Tellico::Data::CollPtr coll_, const Tellico::Data::
     , m_newFields(newFields_)
 {
   if(!m_coll) {
-    myDebug() << "ReorderFieldsCommand() - null collection pointer" << endl;
+    myDebug() << "null collection pointer";
   } else if(m_oldFields.count() != m_newFields.count()) {
-    myDebug() << "ReorderFieldsCommand() - unequal number of fields" << endl;
+    myDebug() << "unequal number of fields";
   }
 }
 

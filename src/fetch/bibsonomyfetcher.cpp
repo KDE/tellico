@@ -82,7 +82,7 @@ void BibsonomyFetcher::search(Tellico::Fetch::FetchKey key_, const QString& valu
     return;
   }
 
-//  myDebug() << "BibsonomyFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);
   if(u.isEmpty()) {
@@ -100,7 +100,7 @@ void BibsonomyFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "BibsonomyFetcher::stop()" << endl;
+//  myDebug() << "";
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -110,7 +110,7 @@ void BibsonomyFetcher::stop() {
 }
 
 void BibsonomyFetcher::slotComplete(KJob*) {
-//  myDebug() << "BibsonomyFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -120,7 +120,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "BibsonomyFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -132,7 +132,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
-    myDebug() << "BibsonomyFetcher::slotComplete() - no valid result" << endl;
+    myDebug() << "no valid result";
     stop();
     return;
   }
@@ -170,12 +170,12 @@ KUrl BibsonomyFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& v
       break;
 
     default:
-      kWarning() << "BibsonomyFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       return KUrl();
   }
 
   u.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
-  myDebug() << "BibsonomyFetcher::search() - url: " << u.url() << endl;
+  myDebug() << "url: " << u.url();
   return u;
 }
 
@@ -186,7 +186,7 @@ void BibsonomyFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "BibsonomyFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

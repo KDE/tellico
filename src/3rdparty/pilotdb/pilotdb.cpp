@@ -133,7 +133,7 @@ QByteArray PilotDB::data() {
 // the returned RawRecord object.
 Record PilotDB::getRecord(unsigned index) const
 {
-    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index";
     return *(reinterpret_cast<Record *> (m_records[index]));
 }
 
@@ -182,7 +182,7 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
             return *resource;
     }
 
-  myWarning() << "PilotDB::getResourceByType() - not found!" << endl;
+  myWarning() << "not found!";
   return Resource();
 }
 
@@ -191,14 +191,14 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
 // object.
 Resource PilotDB::getResourceByIndex(unsigned index) const
 {
-    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index";
     return *(reinterpret_cast<Resource *> (m_records[index]));
 }
 
 // Set the resouce at given index to passed RawResource object.
 void PilotDB::setResource(unsigned index, const Resource& resource)
 {
-    if (index >= m_records.size()) myDebug() << "invalid index" << endl;
+    if (index >= m_records.size()) myDebug() << "invalid index";
     *(reinterpret_cast<Resource *> (m_records[index])) = resource;
 }
 
@@ -262,7 +262,7 @@ FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std
 #else
         if(!StrOps::strptime(fldstr.c_str(), "%Y/%m/%d", &time)) {
 #endif
-          myDebug() << "invalid date in field" << endl;
+          myDebug() << "invalid date in field";
         }
         field.v_date.month = time.tm_mon + 1;
         field.v_date.day = time.tm_mday;
@@ -279,7 +279,7 @@ FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std
       break;
 
     default:
-      myWarning() << "PilotDB::string2field() - unsupported field type" <<  endl;
+      myWarning() << "unsupported field type";
       break;
   }
 

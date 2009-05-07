@@ -655,7 +655,7 @@ void MainWindow::initActions() {
   actionCollection()->addAction(QLatin1String("quick_filter"), action);
 
 #ifdef UIFILE
-  myWarning() << "change createGUI() call!";
+  myWarning() << "call!";
   createGUI(UIFILE);
 #else
   createGUI();
@@ -2166,7 +2166,7 @@ void MainWindow::slotURLAction(const KUrl& url_) {
   if(action) {
     action->activate(QAction::Trigger);
   } else {
-    myWarning() << "MainWindow::slotURLAction() - unknown action: " << actionName;
+    myWarning() << "unknown action: " << actionName;
   }
 }
 

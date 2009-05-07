@@ -41,7 +41,7 @@ ModifyEntries::ModifyEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::
 {
 #ifndef NDEBUG
   if(m_oldEntries.count() != m_entries.count()) {
-    kWarning() << "ModifyEntriesCommand() - unequal number of entries";
+    myWarning() << "unequal number of entries";
   }
 #endif
   if(!m_entries.isEmpty()) {
@@ -59,7 +59,7 @@ ModifyEntries::ModifyEntries(QUndoCommand* parent, Tellico::Data::CollPtr coll_,
 {
 #ifndef NDEBUG
   if(m_oldEntries.count() != m_entries.count()) {
-    kWarning() << "ModifyEntriesCommand() - unequal number of entries";
+    myWarning() << "unequal number of entries";
   }
 #endif
   if(!m_entries.isEmpty()) {

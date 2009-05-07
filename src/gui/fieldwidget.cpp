@@ -92,11 +92,11 @@ FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent
 
     case Data::Field::ReadOnly:
     case Data::Field::Dependent:
-      kWarning() << "FieldWidget::create() - read-only/dependent field, this shouldn't have been called";
+      myWarning() << "read-only/dependent field, this shouldn't have been called";
       return 0;
 
     default:
-      kWarning() << "FieldWidget::create() - unknown field type = " << field_->type();
+      myWarning() << "unknown field type = " << field_->type();
       return 0;
   }
 }

@@ -72,7 +72,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
             int x = versionRx.cap(1).toInt();
             int y = versionRx.cap(2).toInt();
             int z = versionRx.cap(3).toInt(); // ok to be empty
-            myDebug() << QString::fromLatin1("GCstarPluginFetcher() - found %1.%2.%3").arg(x).arg(y).arg(z) << endl;
+            myDebug() << QString::fromLatin1("GCstarPluginFetcher() - found %1.%2.%3").arg(x).arg(y).arg(z);
             // --list-plugins argument was added for 1.3 release
             pluginParse = (x >= 1 && y >=3) ? New : Old;
           }
@@ -111,7 +111,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
 
   KProcess proc;
   if(proc.execute(gcstar_, args) < 0) {
-    myWarning() << "GCstarPluginFetcher::readPluginsNew() - can't start" << endl;
+    myWarning() << "can't start";
     return;
   }
 
@@ -134,7 +134,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
       } else {
         info.insert(QLatin1String("author"), line);
       }
-//      myDebug() << line << endl;
+//      myDebug() << line;
     }
   }
 
@@ -218,14 +218,14 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   m_data.clear();
 
   if(key_ != Fetch::Title) {
-    myDebug() << "GCstarPluginFetcher::search() - only Title searches are supported" << endl;
+    myDebug() << "only Title searches are supported";
     stop();
     return;
   }
 
   QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
-    myWarning() << "GCstarPluginFetcher::search() - gcstar not found!" << endl;
+    myWarning() << "gcstar not found!";
     stop();
     return;
   }
@@ -233,7 +233,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   QString gcstarCollection = gcstarType(m_collType);
 
   if(m_plugin.isEmpty()) {
-    myWarning() << "GCstarPluginFetcher::search() - no plugin name! " << endl;
+    myWarning() << "no plugin name! ";
     stop();
     return;
   }
@@ -252,7 +252,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   myLog() << "GCstarPluginFetcher::search() - " << args.join(QLatin1String(" ")) << endl;
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
-    myDebug() << "GCstarPluginFetcher::startSearch() - process failed to start" << endl;
+    myDebug() << "process failed to start";
     stop();
   }
 }
@@ -279,14 +279,14 @@ void GCstarPluginFetcher::slotData() {
 void GCstarPluginFetcher::slotError() {
   QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
   msg.prepend(source() + QLatin1String(": "));
-  myDebug() << "GCstarPluginFetcher::slotError() - " << msg << endl;
+  myDebug() << "" << msg;
   m_errors << msg;
 }
 
 void GCstarPluginFetcher::slotProcessExited() {
-//  myDebug() << "GCstarPluginFetcher::slotProcessExited()" << endl;
+//  myDebug() << "";
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << "GCstarPluginFetcher::slotProcessExited() - "<< source() << ": process did not exit successfully" << endl;
+    myDebug() << ""<< source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QLatin1String("\n")), MessageHandler::Error);
     }
@@ -298,7 +298,7 @@ void GCstarPluginFetcher::slotProcessExited() {
   }
 
   if(m_data.isEmpty()) {
-    myDebug() << "GCstarPluginFetcher::slotProcessExited() - "<< source() << ": no data" << endl;
+    myDebug() << ""<< source() << ": no data";
     stop();
     return;
   }
@@ -310,7 +310,7 @@ void GCstarPluginFetcher::slotProcessExited() {
     if(!imp.statusMessage().isEmpty()) {
       message(imp.statusMessage(), MessageHandler::Status);
     }
-    myDebug() << "GCstarPluginFetcher::slotProcessExited() - "<< source() << ": no collection pointer" << endl;
+    myDebug() << ""<< source() << ": no collection pointer";
     stop();
     return;
   }
@@ -336,7 +336,7 @@ void GCstarPluginFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "GCstarPluginFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 

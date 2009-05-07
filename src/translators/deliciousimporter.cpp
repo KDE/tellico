@@ -42,7 +42,7 @@ DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
     u.setPath(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
-    kWarning() << "DeliciousImporter() - unable to find delicious2tellico.xml!";
+    myWarning() << "unable to find delicious2tellico.xml!";
   }
 }
 

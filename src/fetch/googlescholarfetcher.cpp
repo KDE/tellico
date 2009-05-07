@@ -96,7 +96,7 @@ void GoogleScholarFetcher::continueSearch() {
 }
 
 void GoogleScholarFetcher::doSearch() {
-//  myDebug() << "GoogleScholarFetcher::search() - value = " << value_ << endl;
+//  myDebug() << "value = " << value_;
 
   if(!canFetch(collectionType())) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
@@ -121,11 +121,11 @@ void GoogleScholarFetcher::doSearch() {
       break;
 
     default:
-      kWarning() << "GoogleScholarFetcher::search() - key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << m_key;
       stop();
       return;
   }
-//  myDebug() << "GoogleScholarFetcher::search() - url: " << u.url() << endl;
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -146,7 +146,7 @@ void GoogleScholarFetcher::stop() {
 }
 
 void GoogleScholarFetcher::slotComplete(KJob*) {
-//  myDebug() << "GoogleScholarFetcher::slotComplete()" << endl;
+//  myDebug() << "";
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -156,7 +156,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
 
   QByteArray data = m_job->data();
   if(data.isEmpty()) {
-    myDebug() << "GoogleScholarFetcher::slotComplete() - no data" << endl;
+    myDebug() << "no data";
     stop();
     return;
   }
@@ -169,14 +169,14 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   int count = 0;
   for(int pos = m_bibtexRx.indexIn(text); count < m_limit && pos > -1; pos = m_bibtexRx.indexIn(text, pos+m_bibtexRx.matchedLength()), ++count) {
     KUrl bibtexUrl(KUrl(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
-//    myDebug() << bibtexUrl << endl;
+//    myDebug() << bibtexUrl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);
   }
 
   Import::BibtexImporter imp(bibtex);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
-    myDebug() << "GoogleScholarFetcher::slotComplete() - no collection pointer" << endl;
+    myDebug() << "no collection pointer";
     stop();
     return;
   }
@@ -209,7 +209,7 @@ Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntry(uint uid_) {
 }
 
 void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "GoogleScholarFetcher::updateEntry()" << endl;
+//  myDebug() << "";
   // limit to top 5 results
   m_limit = 5;
 
@@ -219,7 +219,7 @@ void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  myDebug() << "GoogleScholarFetcher::updateEntry() - insufficient info to search" << endl;
+  myDebug() << "insufficient info to search";
   emit signalDone(this); // always need to emit this if not continuing with the search
 }
 
