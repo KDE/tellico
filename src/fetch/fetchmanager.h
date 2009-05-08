@@ -27,7 +27,6 @@
 
 #include "fetcher.h"
 
-#include <KSortableList>
 #include <KConfigGroup>
 
 #include <QObject>
@@ -44,8 +43,7 @@ class SearchResult;
 class ConfigWidget;
 class ManagerMessage;
 
-typedef KSortableItem<Type, QString> TypePair; // fetcher info, type and name of type
-typedef KSortableList<Type, QString> TypePairList;
+typedef QMap<QString, Type> NameTypeMap; // map fetcher name to type
 typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
 typedef QList<Fetcher::Ptr> FetcherVec;
 
@@ -71,7 +69,7 @@ public:
   void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
   FetcherVec fetchers(int type);
-  TypePairList typeList();
+  NameTypeMap nameTypeMap();
   ConfigWidget* configWidget(QWidget* parent, Type type, const QString& name);
 
   // create fetcher for updating an entry

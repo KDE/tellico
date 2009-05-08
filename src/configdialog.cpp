@@ -48,7 +48,6 @@
 #include <knuminput.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
-#include <ksortablelist.h>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
 #include <kfiledialog.h>
@@ -988,7 +987,7 @@ void ConfigDialog::slotShowTemplatePreview() {
 void ConfigDialog::loadTemplateList() {
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("entry-templates/*.xsl"),
                                                         KStandardDirs::NoDuplicates);
-  KSortableList<QString, QString> templates;
+  QMap<QString, QString> templates; // a QMap will have them values sorted by key
   foreach(const QString& file, files) {
     QFileInfo fi(file);
     QString lfile = fi.fileName().section(QLatin1Char('.'), 0, -2);
@@ -997,12 +996,11 @@ void ConfigDialog::loadTemplateList() {
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
-  templates.sort();
 
   QString s = m_templateCombo->currentText();
   m_templateCombo->clear();
-  for(KSortableList<QString, QString>::iterator it2 = templates.begin(); it2 != templates.end(); ++it2) {
-    m_templateCombo->addItem((*it2).key(), (*it2).value());
+  for(QMap<QString, QString>::ConstIterator it2 = templates.constBegin(); it2 != templates.constEnd(); ++it2) {
+    m_templateCombo->addItem(it2.key(), it2.value());
   }
   m_templateCombo->setCurrentItem(s);
 }

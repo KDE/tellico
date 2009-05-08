@@ -421,31 +421,31 @@ void Manager::updateStatus(const QString& message_) {
   emit signalStatus(message_);
 }
 
-Tellico::Fetch::TypePairList Manager::typeList() {
-  Fetch::TypePairList list;
+Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
+  Fetch::NameTypeMap map;
 #ifdef ENABLE_AMAZON
-  list.append(TypePair(AmazonFetcher::defaultName(), Amazon));
+  map.insert(AmazonFetcher::defaultName(),       Amazon);
 #endif
 #ifdef ENABLE_IMDB
-  list.append(TypePair(IMDBFetcher::defaultName(),         IMDB));
+  map.insert(IMDBFetcher::defaultName(),         IMDB);
 #endif
 #ifdef HAVE_YAZ
-  list.append(TypePair(Z3950Fetcher::defaultName(),        Z3950));
+  map.insert(Z3950Fetcher::defaultName(),        Z3950);
 #endif
-  list.append(TypePair(SRUFetcher::defaultName(),          SRU));
-  list.append(TypePair(EntrezFetcher::defaultName(),       Entrez));
-  list.append(TypePair(ExecExternalFetcher::defaultName(), ExecExternal));
-  list.append(TypePair(YahooFetcher::defaultName(),        Yahoo));
-  list.append(TypePair(AnimeNfoFetcher::defaultName(),     AnimeNfo));
-  list.append(TypePair(IBSFetcher::defaultName(),          IBS));
-  list.append(TypePair(ISBNdbFetcher::defaultName(),       ISBNdb));
-  list.append(TypePair(GCstarPluginFetcher::defaultName(), GCstarPlugin));
-  list.append(TypePair(CrossRefFetcher::defaultName(),     CrossRef));
-  list.append(TypePair(ArxivFetcher::defaultName(),        Arxiv));
-  list.append(TypePair(CitebaseFetcher::defaultName(),     Citebase));
-  list.append(TypePair(BibsonomyFetcher::defaultName(),    Bibsonomy));
-  list.append(TypePair(GoogleScholarFetcher::defaultName(),GoogleScholar));
-  list.append(TypePair(DiscogsFetcher::defaultName(),      Discogs));
+  map.insert(SRUFetcher::defaultName(),          SRU);
+  map.insert(EntrezFetcher::defaultName(),       Entrez);
+  map.insert(ExecExternalFetcher::defaultName(), ExecExternal);
+  map.insert(YahooFetcher::defaultName(),        Yahoo);
+  map.insert(AnimeNfoFetcher::defaultName(),     AnimeNfo);
+  map.insert(IBSFetcher::defaultName(),          IBS);
+  map.insert(ISBNdbFetcher::defaultName(),       ISBNdb);
+  map.insert(GCstarPluginFetcher::defaultName(), GCstarPlugin);
+  map.insert(CrossRefFetcher::defaultName(),     CrossRef);
+  map.insert(ArxivFetcher::defaultName(),        Arxiv);
+  map.insert(CitebaseFetcher::defaultName(),     Citebase);
+  map.insert(BibsonomyFetcher::defaultName(),    Bibsonomy);
+  map.insert(GoogleScholarFetcher::defaultName(),GoogleScholar);
+  map.insert(DiscogsFetcher::defaultName(),      Discogs);
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
@@ -455,7 +455,7 @@ Tellico::Fetch::TypePairList Manager::typeList() {
     KConfigGroup specConfig(&spec, QString());
     QString name = specConfig.readEntry("Name");
     if(name.isEmpty()) {
-      myDebug() << "no name for " << file;
+      myDebug() << "no name for" << file;
       continue;
     }
 
@@ -463,11 +463,10 @@ Tellico::Fetch::TypePairList Manager::typeList() {
       continue;
     }
 
-    list.append(TypePair(name, ExecExternal));
+    map.insert(name, ExecExternal);
     m_scriptMap.insert(name, file);
   }
-  list.sort();
-  return list;
+  return map;
 }
 
 

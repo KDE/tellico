@@ -143,11 +143,11 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     connect(m_typeCombo, SIGNAL(activated(int)), SLOT(slotNewSourceSelected(int)));
 
     int z3950_idx = 0;
-    const Fetch::TypePairList typeList = Fetch::Manager::self()->typeList();
-    for(Fetch::TypePairList::ConstIterator it = typeList.begin(); it != typeList.end(); ++it) {
-      const Fetch::TypePair& type = *it;
-      m_typeCombo->addItem(type.key(), type.value());
-      if(type.value() == Fetch::Z3950) {
+    Fetch::NameTypeMap typeMap = Fetch::Manager::self()->nameTypeMap();
+    // key is the fetcher name, value is the type
+    for(Fetch::NameTypeMap::ConstIterator it = typeMap.constBegin(); it != typeMap.constEnd(); ++it) {
+      m_typeCombo->addItem(it.key(), it.value());
+      if(it.value() == Fetch::Z3950) {
         z3950_idx = m_typeCombo->count()-1;
       }
     }

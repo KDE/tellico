@@ -42,7 +42,6 @@
 #include <kapplication.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
-#include <ksortablelist.h>
 #include <kfiledialog.h>
 
 #include <QFile>
@@ -80,7 +79,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("report-templates/*.xsl"),
                                                         KStandardDirs::NoDuplicates);
-  KSortableList<QString, QString> templates;
+  QMap<QString, QString> templates; // gets sorted by title
   foreach(const QString& file, files) {
     QFileInfo fi(file);
     QString lfile = fi.fileName();
@@ -89,10 +88,10 @@ ReportDialog::ReportDialog(QWidget* parent_)
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
     templates.insert(title, lfile);
   }
-  templates.sort();
+
   m_templateCombo = new GUI::ComboBox(mainWidget);
-  for(KSortableList<QString, QString>::iterator it = templates.begin(); it != templates.end(); ++it) {
-    m_templateCombo->addItem((*it).key(), (*it).value());
+  for(QMap<QString, QString>::ConstIterator it = templates.constBegin(); it != templates.constEnd(); ++it) {
+    m_templateCombo->addItem(it.key(), it.value());
   }
   hlay->addWidget(m_templateCombo);
   l->setBuddy(m_templateCombo);
