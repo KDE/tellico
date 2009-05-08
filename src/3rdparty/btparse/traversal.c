@@ -1,10 +1,10 @@
 /* ------------------------------------------------------------------------
 @NAME       : traversal.c
 @DESCRIPTION: Routines for traversing the AST for a single entry.
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CREATED    : 1997/01/21, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 @VERSION    : $Id: traversal.c,v 1.17 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
 
@@ -14,7 +14,7 @@
               published by the Free Software Foundation; either version 2
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
-/*#include "bt_config.h"*/
+#include "bt_debug.h"
 #include <stdlib.h>
 #include "btparse.h"
 #include "parse_auxiliary.h"
@@ -29,7 +29,7 @@ AST *bt_next_entry (AST *entry_list, AST *prev_entry)
 
    if (prev_entry)
    {
-      if (prev_entry->nodetype != BTAST_ENTRY) 
+      if (prev_entry->nodetype != BTAST_ENTRY)
          return NULL;
       else
          return prev_entry->right;
@@ -85,7 +85,7 @@ AST *bt_next_field (AST *entry, AST *prev, char **name)
    if (metatype != BTE_MACRODEF && metatype != BTE_REGULAR)
       return NULL;
 
-   if (prev == NULL)                    /* no previous field -- they must */ 
+   if (prev == NULL)                    /* no previous field -- they must */
    {                                    /* want the first one */
       field = entry->down;
       if (metatype == BTE_REGULAR && field->nodetype == BTAST_KEY)
@@ -122,7 +122,7 @@ AST *bt_next_value (AST *top, AST *prev, bt_nodetype *nodetype, char **text)
    nt = top->nodetype;
    mt = top->metatype;
 
-   if ((nt == BTAST_FIELD) || 
+   if ((nt == BTAST_FIELD) ||
        (nt == BTAST_ENTRY && (mt == BTE_COMMENT || mt == BTE_PREAMBLE)))
    {
       if (prev == NULL)                 /* no previous value -- give 'em */

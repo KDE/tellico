@@ -2,9 +2,9 @@
 @NAME       : bt_debug.h
 @DESCRIPTION: Defines various macros needed for compile-time selection
               of debugging code.
-@GLOBALS    : 
-@CREATED    : 
-@MODIFIED   : 
+@GLOBALS    :
+@CREATED    :
+@MODIFIED   :
 @VERSION    : $Id: bt_debug.h,v 1.2 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
 
@@ -18,7 +18,7 @@
 #ifndef BT_DEBUG_H
 #define BT_DEBUG_H
 
-/* 
+/*
  * DEBUG      is the debug level -- an integer, defaults to 0
  * DBG_ACTION is a macro to conditionally execute a bit of code --
  *            must have compiled with DEBUG true, and the debug level

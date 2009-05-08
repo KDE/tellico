@@ -1,15 +1,15 @@
 /* ------------------------------------------------------------------------
 @NAME       : error.c
-@DESCRIPTION: Anything relating to reporting or recording errors and 
+@DESCRIPTION: Anything relating to reporting or recording errors and
               warnings.
 @GLOBALS    : errclass_names
               err_actions
               err_handlers
               errclass_counts
               error_buf
-@CALLS      : 
+@CALLS      :
 @CREATED    : 1996/08/28, Greg Ward
-@MODIFIED   : 
+@MODIFIED   :
 @VERSION    : $Id: error.c,v 2.5 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
 
@@ -36,7 +36,7 @@
 static const char *errclass_names[NUM_ERRCLASSES] =
 {
    NULL,                        /* BTERR_NOTIFY */
-   "warning",                   /* BTERR_CONTENT */ 
+   "warning",                   /* BTERR_CONTENT */
    "warning",                   /* BTERR_LEXWARN */
    "warning",                   /* BTERR_USAGEWARN */
    "error",                     /* BTERR_LEXERR */
@@ -47,12 +47,12 @@ static const char *errclass_names[NUM_ERRCLASSES] =
 
 static const bt_erraction err_actions[NUM_ERRCLASSES] =
 {
-   BTACT_NONE,                  /* BTERR_NOTIFY */  
-   BTACT_NONE,                  /* BTERR_CONTENT */ 
-   BTACT_NONE,                  /* BTERR_LEXWARN */ 
+   BTACT_NONE,                  /* BTERR_NOTIFY */
+   BTACT_NONE,                  /* BTERR_CONTENT */
+   BTACT_NONE,                  /* BTERR_LEXWARN */
    BTACT_NONE,                  /* BTERR_USAGEWARN */
-   BTACT_NONE,                  /* BTERR_LEXERR */   
-   BTACT_NONE,                  /* BTERR_SYNTAX */  
+   BTACT_NONE,                  /* BTERR_LEXERR */
+   BTACT_NONE,                  /* BTERR_SYNTAX */
    BTACT_CRASH,                 /* BTERR_USAGEERR */
    BTACT_ABORT                  /* BTERR_INTERNAL */
 };
@@ -139,9 +139,6 @@ report_error (bt_errclass errclass,
               va_list     arglist)
 {
    bt_error  err;
-#if !HAVE_VSNPRINTF
-   int       msg_len;
-#endif
 
    err.errclass = errclass;
    err.filename = filename;
@@ -152,7 +149,7 @@ report_error (bt_errclass errclass,
    errclass_counts[(int) errclass]++;
 
 
-   /* 
+   /*
     * Blech -- we're writing to a static buffer because there's no easy
     * way to know how long the error message is going to be.  (Short of
     * reimplementing printf(), or maybe printf()'ing to a dummy file
@@ -164,19 +161,13 @@ report_error (bt_errclass errclass,
     * we're stuck with using vsprintf()'s return value.  This can't be
     * trusted on all systems -- thus there's a check for it in configure.
     * Also, this won't necessarily trigger the internal_error() if we
-    * do overflow; it's conceivable that vsprintf() itself would crash.  
-    * At least doing it this way we avoid the possibility of vsprintf() 
+    * do overflow; it's conceivable that vsprintf() itself would crash.
+    * At least doing it this way we avoid the possibility of vsprintf()
     * silently corrupting some memory, and crashing unpredictably at some
     * later point.
     */
 
-#if HAVE_VSNPRINTF
    vsnprintf (error_buf, MAX_ERROR, fmt, arglist);
-#else
-   msg_len = vsprintf (error_buf, fmt, arglist);
-   if (msg_len > MAX_ERROR)
-      internal_error ("static error message buffer overflowed");
-#endif
 
    err.message = error_buf;
    if (err_handlers[errclass])
@@ -207,8 +198,8 @@ GEN_ERRFUNC (general_error,
 
 GEN_ERRFUNC (error,
              (bt_errclass errclass,
-              char *      filename, 
-              int         line, 
+              char *      filename,
+              int         line,
               char *      fmt,
               ...),
              errclass, filename, line, NULL, -1, fmt)
@@ -243,14 +234,14 @@ GEN_ERRFUNC (internal_error,
 
 /* ------------------------------------------------------------------------
 @NAME       : bt_reset_error_counts()
-@INPUT      : 
-@OUTPUT     : 
-@RETURNS    : 
+@INPUT      :
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Resets all the error counters to zero.
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CREATED    : 1997/01/08, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void bt_reset_error_counts (void)
 {
@@ -264,13 +255,13 @@ void bt_reset_error_counts (void)
 /* ------------------------------------------------------------------------
 @NAME       : bt_get_error_count()
 @INPUT      : errclass
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Returns number of errors seen in the specified class.
 @GLOBALS    : errclass_counts
-@CALLS      : 
-@CREATED    : 
-@MODIFIED   : 
+@CALLS      :
+@CREATED    :
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 int bt_get_error_count (bt_errclass errclass)
 {
@@ -283,16 +274,16 @@ int bt_get_error_count (bt_errclass errclass)
 @INPUT      : counts - pointer to an array big enough to hold all the counts
                        if NULL, the array will be allocated for you (and you
                        must free() it when done with it)
-@OUTPUT     : 
+@OUTPUT     :
 @RETURNS    : counts - either the passed-in pointer, or the newly-
                        allocated array if you pass in NULL
 @DESCRIPTION: Returns a newly-allocated array with the number of errors
               in each error class, indexed by the members of the
               eclass_t enum.
 @GLOBALS    : errclass_counts
-@CALLS      : 
+@CALLS      :
 @CREATED    : 1997/01/06, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 int *bt_get_error_counts (int *counts)
 {
@@ -309,22 +300,22 @@ int *bt_get_error_counts (int *counts)
 
 /* ------------------------------------------------------------------------
 @NAME       : bt_error_status
-@INPUT      : saved_counts - an array of error counts as returned by 
+@INPUT      : saved_counts - an array of error counts as returned by
                              bt_get_error_counts, or NULL not to compare
                              to a previous checkpoint
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Computes a bitmap where a bit is set for each error class
-              that has more errors now than it used to have (or, if 
+              that has more errors now than it used to have (or, if
               saved_counts is NULL, the bit is set of there are have been
               any errors in the corresponding error class).
 
               Eg. "x & (1<<E_SYNTAX)" (where x is returned by bt_error_status)
               is true if there have been any syntax errors.
-@GLOBALS    : 
-@CALLS      : 
-@CREATED    : 
-@MODIFIED   : 
+@GLOBALS    :
+@CALLS      :
+@CREATED    :
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 ushort bt_error_status (int *saved_counts)
 {

@@ -1,8 +1,8 @@
 /* ------------------------------------------------------------------------
 @NAME       : lex_auxiliary.c
-@INPUT      : 
-@OUTPUT     : 
-@RETURNS    : 
+@INPUT      :
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: The code and global variables here have three main purposes:
                 - maintain the lexical buffer (zztoktext, which
                   traditionally with PCCTS is a static array; I have
@@ -13,9 +13,9 @@
                   "what are the delimiters for the current entry/string?")
                 - everything called from lexical actions is here, to keep
                   the grammar file itself neat and clean
-@GLOBALS    : 
-@CALLS      : 
-@CALLERS    : 
+@GLOBALS    :
+@CALLS      :
+@CALLERS    :
 @CREATED    : Greg Ward, 1996/07/25-28
 @MODIFIED   : Jan 1997
               Jun 1997
@@ -29,7 +29,7 @@
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
 
-/*#include "bt_config.h"*/
+#include "bt_debug.h"
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -59,8 +59,8 @@ GEN_PRIVATE_ERRFUNC (lexical_error, (const char * fmt, ...),
 /* First, the lexical buffer.  This is used elsewhere, so can't be static */
 char *         zztoktext = NULL;
 
-/* 
- * Now, the lexical state -- first, stuff that arises from scanning 
+/*
+ * Now, the lexical state -- first, stuff that arises from scanning
  * at top-level and the beginnings of entries;
  *   EntryState:
  *     toplevel when we start scanning a file, or when we are in in_entry
@@ -75,17 +75,17 @@ char *         zztoktext = NULL;
  *     match; if not, we issue a warning)
  *   EntryMetatype: (NB. typedef for bt_metatype is in btparse.h)
  *     classifies entries according to the syntax we will use to parse them;
- *     also winds up (after being changed to a bt_nodetype value) in the 
+ *     also winds up (after being changed to a bt_nodetype value) in the
  *     node that roots the entry AST:
  *       comment    - anything between () or {}
  *       preamble   - a single compound value
  *       string     - a list of "name = compound_value" assignments; no key
  *       alias      - a single "name = compound_value" assignment (where
- *                    the compound value in this case is presumably a 
+ *                    the compound value in this case is presumably a
  *                    name, rather than a string -- this is not syntactically
  *                    checked though)
  *       modify,
- *       entry      - a key followed by a list of "name = compound_value" 
+ *       entry      - a key followed by a list of "name = compound_value"
  *                    assignments
  *   JunkCount:
  *     the number of non-whitespace, non-'@' characters seen at toplevel
@@ -93,7 +93,7 @@ char *         zztoktext = NULL;
  *     the beginning of entry, to help people catch "old style" implicit
  *     comments
  */
-static enum { toplevel, after_at, after_type, in_comment, in_entry } 
+static enum { toplevel, after_at, after_type, in_comment, in_entry }
                EntryState;
 static char    EntryOpener;             /* '(' or '{' */
 static bt_metatype
@@ -112,7 +112,7 @@ static int     JunkCount;               /* non-whitespace chars at toplevel */
  *     a paren-delimited string)
  *   StringOpener:
  *     similar to EntryOpener, but stronger than merely warning of token
- *     mismatch -- this determines which character ('"' or '}') can 
+ *     mismatch -- this determines which character ('"' or '}') can
  *     actually end the string
  *   StringStart:
  *     line on which current string started; if we detect an apparent
@@ -123,7 +123,7 @@ static int     JunkCount;               /* non-whitespace chars at toplevel */
  *     (and again and again and again)
  *   QuoteWarned:
  *     flags if we have already warned about seeing a '"' in a string,
- *     because they tend to come in pairs and one warning per string 
+ *     because they tend to come in pairs and one warning per string
  *     is enough
  *
  * (See bibtex.g for an explanation of my runaway string detection heuristic.)
@@ -199,7 +199,7 @@ void zzd_attr (Attrib *attr)
 
 /*
  * alloc_lex_buffer()
- * 
+ *
  * allocates the lexical buffer with `size' characters.  Clears the buffer,
  * points zzlextext at it, and sets zzbufsize to `size'.
  *
@@ -222,7 +222,7 @@ void alloc_lex_buffer (int size)
 
 /*
  * realloc_lex_buffer()
- * 
+ *
  * Reallocates the lexical buffer -- size is increased by `size_increment'
  * characters (which could be negative).  Updates all globals that point
  * to or into the buffer (zzlextext, zzbegexpr, zzendexpr), as well as
@@ -236,13 +236,13 @@ void alloc_lex_buffer (int size)
  * global in dlgauto.h (hence really in scan.c).  They both point into
  * the lexical buffer, so have to be passed by reference here so that
  * we can update them to point into the newly-reallocated buffer.
- * 
+ *
  * globals: zztottext, zzbufsize, zzlextext, zzbegexpr, zzendexpr
  * callers: lexer_overflow()
  */
 static void
-realloc_lex_buffer (int     size_increment, 
-                    unsigned char ** lastpos, 
+realloc_lex_buffer (int     size_increment,
+                    unsigned char ** lastpos,
                     unsigned char ** nextpos)
 {
    int   beg, end, next;
@@ -264,7 +264,7 @@ realloc_lex_buffer (int     size_increment,
    zzbegexpr = zzlextext + beg;
    zzendexpr = zzlextext + end;
    *nextpos = zzlextext + next;
-   
+
 } /* realloc_lex_buffer() */
 
 
@@ -276,7 +276,7 @@ realloc_lex_buffer (int     size_increment,
 void free_lex_buffer (void)
 {
    if (zztoktext == NULL)
-      internal_error ("attempt to free unallocated (or already freed) " 
+      internal_error ("attempt to free unallocated (or already freed) "
                       "lexical buffer");
 
    free (zztoktext);
@@ -292,7 +292,7 @@ void free_lex_buffer (void)
  * size increases linearly, not exponentially).
  *
  * Also prints a couple of lines of useful debugging stuff if DEBUG is true.
- */ 
+ */
 void lexer_overflow (unsigned char **lastpos, unsigned char **nextpos)
 {
 #if DEBUG
@@ -304,7 +304,7 @@ void lexer_overflow (unsigned char **lastpos, unsigned char **nextpos)
    strncpy (head, zzlextext, 15); head[15] = 0;
    strncpy (tail, zzlextext+ZZLEXBUFSIZE-15, 15); tail[15] = 0;
    printf ("        zzlextext=>%s...%s< (last char=%d (%c))\n",
-           head, tail, 
+           head, tail,
            zzlextext[ZZLEXBUFSIZE-1], zzlextext[ZZLEXBUFSIZE-1]);
    printf ("        zzchar = %d (%c), zzbegexpr=zzlextext+%d\n",
            zzchar, zzchar, zzbegexpr-zzlextext);
@@ -320,7 +320,7 @@ void lexer_overflow (unsigned char **lastpos, unsigned char **nextpos)
 #if ZZCOPY_FUNCTION
 /*
  * zzcopy()
- * 
+ *
  * Does the same as the ZZCOPY macro (in lex_auxiliary.h), but as a
  * function for easier debugging.
  */
@@ -339,7 +339,7 @@ void zzcopy (char **nextpos, char **lastpos, int *ovf_flag)
 
 
 /* ----------------------------------------------------------------------
- * Report/maintain lexical state 
+ * Report/maintain lexical state
  *   report_state()        (only meaningful if DEBUG)
  *   initialize_lexer_state()
  *
@@ -350,7 +350,7 @@ void zzcopy (char **nextpos, char **lastpos, int *ovf_flag)
 #if DEBUG
 char *state_names[] =
    { "toplevel", "after_at", "after_type", "in_comment", "in_entry" };
-char *metatype_names[] = 
+char *metatype_names[] =
    { "unknown", "comment", "preamble", "string", "alias", "modify", "entry" };
 
 static void
@@ -368,7 +368,7 @@ static void
 report_state (char *where) { }
 */
 #endif
-  
+
 void initialize_lexer_state (void)
 {
    zzmode (START);
@@ -390,9 +390,9 @@ bt_metatype entry_metatype (void)
  * Lexical actions (START and LEX_ENTRY modes)
  */
 
-/* 
+/*
  * newline ()
- * 
+ *
  * Does everything needed to handle newline outside of a quoted string:
  * increments line counter and skips the newline.
  */
@@ -408,7 +408,7 @@ void comment (void)
    zzline++;
    zzskip();
 }
-   
+
 
 void at_sign (void)
 {
@@ -446,10 +446,10 @@ void name (void)
    {
       case toplevel:
       {
-         internal_error ("junk at toplevel (\"%s\")", zzlextext); 
+         internal_error ("junk at toplevel (\"%s\")", zzlextext);
          break;
       }
-      case after_at: 
+      case after_at:
       {
          char * etype = zzlextext;
          EntryState = after_type;
@@ -490,7 +490,7 @@ void name (void)
 
 void lbrace (void)
 {
-   /* 
+   /*
     * Currently takes a restrictive view of "when an lbrace is an entry
     * opener" -- ie. *only* after '@name' (as determined by EntryState),
     * where name is not 'comment'.  This means that lbrace usually
@@ -639,7 +639,7 @@ void end_string (char end_char)
       case '}': match = '{'; break;
       case ')': match = '('; break;
       case '"': match = '"'; break;
-      default: 
+      default:
          internal_error ("end_string(): invalid end_char \"%c\"", end_char);
    }
 
@@ -665,9 +665,9 @@ void end_string (char end_char)
    {
       int   len = strlen (zzlextext);
 
-      /* 
-       * ARG! no, this is wrong -- what if unbalanced braces in the string 
-       * and we try to output put it later? 
+      /*
+       * ARG! no, this is wrong -- what if unbalanced braces in the string
+       * and we try to output put it later?
        *
        * ARG! again, this is no more wrong than when we strip quotes in
        * post_parse.c, and blithely assume that we can put them back on
@@ -691,15 +691,15 @@ void end_string (char end_char)
    {
       zzmode (LEX_ENTRY);
    }
-      
+
    report_state ("string");
 }
 
 
 /*
  * open_brace ()
- * 
- * Called when we see a '{', either to start a string (in which case 
+ *
+ * Called when we see a '{', either to start a string (in which case
  * it's called from start_string()) or inside a string (called directly
  * from the lexer).
  */
@@ -727,7 +727,7 @@ void close_brace (void)
       end_string ('}');
    }
 
-   /* 
+   /*
     * This could happen if some bonehead puts an unmatched right-brace
     * in a quote-delimited string (eg. "Hello}").  To attempt to recover,
     * we reset the depth to zero and continue slurping into the string.
@@ -769,9 +769,9 @@ void rparen_in_string (void)
 }
 
 
-/* 
+/*
  * quote_in_string ()
- * 
+ *
  * Called when we see '"' in a string.  Ends the string if the quote is at
  * depth 0 and the string was started with a quote, otherwise instructs the
  * lexer to continue munching happily along.  (Also prints a warning,
@@ -788,8 +788,8 @@ void quote_in_string (void)
    {
       boolean at_top = FALSE;;
 
-      /* 
-       * Note -- this warning assumes that strings are destined 
+      /*
+       * Note -- this warning assumes that strings are destined
        * to be processed by TeX, so it should be optional.  Hmmm.
        */
 
@@ -814,10 +814,10 @@ void quote_in_string (void)
 /*
  * check_runaway_string ()
  *
- * Called from the lexer whenever we see a newline in a string.  See 
+ * Called from the lexer whenever we see a newline in a string.  See
  * bibtex.g for a detailed explanation; basically, this function
  * looks for an entry start ("@name{") or new field ("name=") immediately
- * after a newline (with possible whitespace).  This is a heuristic 
+ * after a newline (with possible whitespace).  This is a heuristic
  * check for runaway strings, under the assumption that text that looks
  * like a new entry or new field won't actually occur inside a string
  * very often.
@@ -827,28 +827,28 @@ void check_runaway_string (void)
    int      len;
    int      i;
 
-   /* 
+   /*
     * could these be made significantly more efficient by a 256-element
     * lookup table instead of calling strchr()?
     */
    static const char *alpha_chars = "abcdefghijklmnopqrstuvwxyz";
    static const char *name_chars = "abcdefghijklmnopqrstuvwxyz0123456789:+/'.-";
 
-   /* 
+   /*
     * on entry: zzlextext contains the whole string, starting with {
     * and with newlines/tabs converted to space; zzbegexpr points to
-    * a chunk of the string starting with newline (newlines and 
+    * a chunk of the string starting with newline (newlines and
     * tabs have not yet been converted)
     */
 
 #if DEBUG > 1
    printf ("check_runaway_string(): zzline=%d\n", zzline);
-   printf ("zzlextext=>%s<\nzzbegexpr=>%s<\n", 
+   printf ("zzlextext=>%s<\nzzbegexpr=>%s<\n",
            zzlextext, zzbegexpr);
 #endif
-      
 
-   /* 
+
+   /*
     * increment zzline to take the leading newline into account -- but
     * first a sanity check to be sure that newline is there!
     */
@@ -876,7 +876,7 @@ void check_runaway_string (void)
       if (isspace (zzbegexpr[i]))
          zzbegexpr[i] = ' ';
    }
-   
+
 
    if (!ApparentRunaway)                /* haven't already warned about it */
    {
@@ -915,7 +915,7 @@ void check_runaway_string (void)
                   guess = field;
                else
                   guess = giveup;
-            }               
+            }
          }
       }
       else                              /* no name seen after WS or @ */
@@ -928,7 +928,7 @@ void check_runaway_string (void)
 
       if (guess != giveup)
       {
-         lexical_warning ("possible runaway string started at line %d", 
+         lexical_warning ("possible runaway string started at line %d",
                           StringStart);
          ApparentRunaway = 1;
       }

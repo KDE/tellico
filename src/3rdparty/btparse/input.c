@@ -3,9 +3,9 @@
 @DESCRIPTION: Routines for input of BibTeX data.
 @GLOBALS    : InputFilename
               StringOptions
-@CALLS      : 
+@CALLS      :
 @CREATED    : 1997/10/14, Greg Ward (from code in bibparse.c)
-@MODIFIED   : 
+@MODIFIED   :
 @VERSION    : $Id: input.c,v 1.18 1999/11/29 01:13:10 greg Rel $
 @COPYRIGHT  : Copyright (c) 1996-99 by Gregory P. Ward.  All rights reserved.
 
@@ -15,7 +15,7 @@
               published by the Free Software Foundation; either version 2
               of the License, or (at your option) any later version.
 -------------------------------------------------------------------------- */
-/*#include "bt_config.h"*/
+#include "bt_debug.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <limits.h>
@@ -28,7 +28,7 @@
 
 
 char *   InputFilename;
-ushort   StringOptions[NUM_METATYPES] = 
+ushort   StringOptions[NUM_METATYPES] =
 {
    0,                                   /* BTE_UNKNOWN */
    BTO_FULL,                            /* BTE_REGULAR */
@@ -41,14 +41,14 @@ ushort   StringOptions[NUM_METATYPES] =
 /* ------------------------------------------------------------------------
 @NAME       : bt_set_filename
 @INPUT      : filename
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Sets the current input filename -- used for generating
               error and warning messages.
 @GLOBALS    : InputFilename
-@CALLS      : 
+@CALLS      :
 @CREATED    : Feb 1997, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 #if 0
 void bt_set_filename (char *filename)
@@ -61,14 +61,14 @@ void bt_set_filename (char *filename)
 @NAME       : bt_set_stringopts
 @INPUT      : metatype
               options
-@OUTPUT     : 
-@RETURNS    : 
-@DESCRIPTION: Sets the string-processing options for a particular 
+@OUTPUT     :
+@RETURNS    :
+@DESCRIPTION: Sets the string-processing options for a particular
               entry metatype.  Used later on by bt_parse_* to determine
               just how to post-process each particular entry.
 @GLOBALS    : StringOptions
 @CREATED    : 1997/08/24, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void bt_set_stringopts (bt_metatype metatype, ushort options)
 {
@@ -84,7 +84,7 @@ void bt_set_stringopts (bt_metatype metatype, ushort options)
 
 /* ------------------------------------------------------------------------
 @NAME       : start_parse
-@INPUT      : infile     input stream we'll read from (or NULL if reading 
+@INPUT      : infile     input stream we'll read from (or NULL if reading
                          from string)
               instring   input string we'll read from (or NULL if reading
                          from stream)
@@ -93,20 +93,20 @@ void bt_set_stringopts (bt_metatype metatype, ushort options)
                          if it comes from a file, you should supply the
                          line number where it starts for better error
                          messages) (ignored if infile != NULL)
-@OUTPUT     : 
-@RETURNS    : 
-@DESCRIPTION: Prepares things for parsing, in particular initializes the 
+@OUTPUT     :
+@RETURNS    :
+@DESCRIPTION: Prepares things for parsing, in particular initializes the
               lexical state and lexical buffer, prepares DLG for
               reading (either from a stream or a string), and reads
               the first token.
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : initialize_lexer_state()
               alloc_lex_buffer()
               zzrdstream() or zzrdstr()
               zzgettok()
-@CALLERS    : 
+@CALLERS    :
 @CREATED    : 1997/06/21, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 start_parse (FILE *infile, char *instring, int line)
@@ -127,7 +127,7 @@ start_parse (FILE *infile, char *instring, int line)
       zzrdstr (instring);
       zzline = line;
    }
-      
+
    zzendcol = zzbegcol = 0;
    zzgettok ();
 }
@@ -138,15 +138,15 @@ start_parse (FILE *infile, char *instring, int line)
 @NAME       : finish_parse()
 @INPUT      : err_counts - pointer to error count list (which is local to
                            the parsing functions, hence has to be passed in)
-@OUTPUT     : 
-@RETURNS    : 
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Frees up what was needed to parse a whole file or a sequence
               of strings: the lexical buffer and the error count list.
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : free_lex_buffer()
-@CALLERS    : 
+@CALLERS    :
 @CREATED    : 1997/06/21, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 finish_parse (int **err_counts)
@@ -160,32 +160,32 @@ finish_parse (int **err_counts)
 /* ------------------------------------------------------------------------
 @NAME       : parse_status()
 @INPUT      : saved_counts
-@OUTPUT     : 
+@OUTPUT     :
 @RETURNS    : false if there were serious errors in the recently-parsed input
               true otherwise (no errors or just warnings)
 @DESCRIPTION: Gets the "error status" bitmap relative to a saved set of
               error counts and masks of non-serious errors.
-@GLOBALS    : 
-@CALLS      : 
-@CALLERS    : 
+@GLOBALS    :
+@CALLS      :
+@CALLERS    :
 @CREATED    : 1997/06/21, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static boolean
 parse_status (int *saved_counts)
 {
    ushort        ignore_emask;
 
-   /* 
+   /*
     * This bit-twiddling fetches the error status (which has a bit
     * for each error class), masks off the bits for trivial errors
-    * to get "true" if there were any serious errors, and then 
+    * to get "true" if there were any serious errors, and then
     * returns the opposite of that.
     */
    ignore_emask =
       (1<<BTERR_NOTIFY) | (1<<BTERR_CONTENT) | (1<<BTERR_LEXWARN);
    return !(bt_error_status (saved_counts) & ~ignore_emask);
-}   
+}
 
 
 /* ------------------------------------------------------------------------
@@ -200,17 +200,17 @@ parse_status (int *saved_counts)
                            (or NULL if entry_text was NULL, ie. at EOF)
 @RETURNS    : 1 with *top set to AST for entry on successful read/parse
               1 with *top==NULL if entry_text was NULL, ie. at EOF
-              0 if any serious errors seen in input (*top is still 
+              0 if any serious errors seen in input (*top is still
                 set to the AST, but only for as much of the input as we
                 were able to parse)
               (A "serious" error is a lexical or syntax error; "trivial"
               errors such as warnings and notifications count as "success"
               for the purposes of this function's return value.)
 @DESCRIPTION: Parses a BibTeX entry contained in a string.
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : ANTLR
 @CREATED    : 1997/01/18, GPW (from code in bt_parse_entry())
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 AST * bt_parse_entry_s (char *    entry_text,
                         char *    filename,
@@ -250,7 +250,7 @@ AST * bt_parse_entry_s (char *    entry_text,
    }
 
 #if DEBUG
-   dump_ast ("bt_parse_entry_s: single entry, after parsing:\n", 
+   dump_ast ("bt_parse_entry_s: single entry, after parsing:\n",
              entry_ast);
 #endif
    bt_postprocess_entry (entry_ast,
@@ -273,10 +273,10 @@ AST * bt_parse_entry_s (char *    entry_text,
 @OUTPUT     : *top    - AST for the entry, or NULL if no entries left in file
 @RETURNS    : same as bt_parse_entry_s()
 @DESCRIPTION: Starts (or continues) parsing from a file.
-@GLOBALS    : 
-@CALLS      : 
+@GLOBALS    :
+@CALLS      :
 @CREATED    : Jan 1997, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 AST * bt_parse_entry (FILE *    infile,
                       char *    filename,
@@ -318,40 +318,40 @@ AST * bt_parse_entry (FILE *    infile,
       return NULL;
    }
 
-   /* 
+   /*
     * Here we do some nasty poking about the innards of PCCTS in order to
     * enter the parser multiple times on the same input stream.  This code
     * comes from expanding the macro invokation:
-    * 
-    *    ANTLR (entry (top), infile);  
-    * 
+    *
+    *    ANTLR (entry (top), infile);
+    *
     * When LL_K, ZZINF_LOOK, and DEMAND_LOOK are all undefined, this
     * ultimately expands to
-    * 
+    *
     *    zzbufsize = ZZLEXBUFSIZE;
     *    {
     *       static char zztoktext[ZZLEXBUFSIZE];
-    *       zzlextext = zztoktext; 
+    *       zzlextext = zztoktext;
     *       zzrdstream (f);
     *       zzgettok();
     *    }
     *    entry (top);
     *    ++zzasp;
-    * 
+    *
     * (I'm expanding hte zzenterANTLR, zzleaveANTLR, and zzPrimateLookAhead
     * macros, but leaving ZZLEXBUFSIZE -- a simple constant -- alone.)
-    * 
+    *
     * There are two problems with this: 1) zztoktext is a statically
     * allocated buffer, and when it overflows we just ignore further
     * characters that should belong to that lexeme; and 2) zzrdstream() and
     * zzgettok() are called every time we enter the parser, which means the
     * token left over from the previous entry will be discarded when we
     * parse entries 2 .. N.
-    * 
+    *
     * I handle the static buffer problem with alloc_lex_buffer() and
     * realloc_lex_buffer() (in lex_auxiliary.c), and by rewriting the ZZCOPY
     * macro to call realloc_lex_buffer() when overflow is detected.
-    * 
+    *
     * I handle the extra token-read by hanging on to a static file
     * pointer, prev_file, between calls to bt_parse_entry() -- when
     * the program starts it is NULL, and we reset it to NULL on
@@ -386,13 +386,13 @@ AST * bt_parse_entry (FILE *    infile,
    }
 
 #if DEBUG
-   dump_ast ("bt_parse_entry(): single entry, after parsing:\n", 
+   dump_ast ("bt_parse_entry(): single entry, after parsing:\n",
              entry_ast);
 #endif
    bt_postprocess_entry (entry_ast,
                          StringOptions[entry_ast->metatype] | options);
 #if DEBUG
-   dump_ast ("bt_parse_entry(): single entry, after post-processing:\n", 
+   dump_ast ("bt_parse_entry(): single entry, after post-processing:\n",
              entry_ast);
 #endif
 
@@ -410,27 +410,27 @@ AST * bt_parse_entry (FILE *    infile,
 @OUTPUT     : top
 @RETURNS    : 0 if any entries in the file had serious errors
               1 if all entries were OK
-@DESCRIPTION: Parses an entire BibTeX file, and returns a linked list 
+@DESCRIPTION: Parses an entire BibTeX file, and returns a linked list
               of ASTs (or, if you like, a forest) for the entries in it.
               (Any entries with serious errors are omitted from the list.)
-@GLOBALS    : 
+@GLOBALS    :
 @CALLS      : bt_parse_entry()
 @CREATED    : 1997/01/18, from process_file() in bibparse.c
-@MODIFIED   : 
+@MODIFIED   :
 @COMMENTS   : This function bears a *striking* resemblance to bibparse.c's
-              process_file().  Eventually, I plan to replace this with 
+              process_file().  Eventually, I plan to replace this with
               a generalized process_file() that takes a function pointer
               to call for each entry.  Until I decide on the right interface
               for that, though, I'm sticking with this simpler (but possibly
               memory-intensive) approach.
 -------------------------------------------------------------------------- */
-AST * bt_parse_file (char *    filename, 
-                     ushort    options, 
+AST * bt_parse_file (char *    filename,
+                     ushort    options,
                      boolean * status)
 {
    FILE *  infile;
    AST *   entries,
-       *   cur_entry, 
+       *   cur_entry,
        *   last;
    boolean entry_status,
            overall_status;
@@ -464,7 +464,7 @@ AST * bt_parse_file (char *    filename,
 
    entries = NULL;
    last = NULL;
-      
+
 #if 1
    /* explicit loop over entries, with junk cleaned out by read_entry () */
 
