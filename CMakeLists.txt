@@ -107,7 +107,6 @@ set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
 add_subdirectory(src)
-add_subdirectory(po)
 add_subdirectory(doc)
 add_subdirectory(icons)
 add_subdirectory(xslt)
