@@ -140,7 +140,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
 
   QByteArray state = QByteArray::fromBase64(config.readEntry(QLatin1String("ColumnState") + configN).toAscii());
   if(!state.isEmpty()) {
-    // the easy case first. I fwe have saved state, just restore it
+    // the easy case first. If we have saved state, just restore it
     header()->restoreState(state);
   } else {
     // what's a good way to determine which columns to show by default?
@@ -149,7 +149,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
       colNames << QLatin1String("title");
       colWidths = QList<int>() << 1;
     }
-    // I'm being lazy and not trying to figrue out the order and column width
+    // I'm being lazy and not trying to figure out the order and column width
     // just restore the columns that the user had before
     for(int ncol = 0; ncol < header()->count(); ++ncol) {
       int idx = colNames.indexOf(coll_->fields().at(ncol)->name());
@@ -157,6 +157,12 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
       if(idx == -1 || idx >= colWidths.size() || colWidths.at(idx) == 0) {
         setColumnHidden(ncol, true);
       }
+    }
+  }
+  // just a sanity check, at one point, a zero-width column meant a hidden column
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    if(!isColumnHidden(ncol) && columnWidth(ncol) == 0) {
+      resizeColumnToContents(ncol);
     }
   }
 

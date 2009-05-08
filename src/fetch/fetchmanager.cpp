@@ -99,7 +99,6 @@ Manager::~Manager() {
 }
 
 void Manager::loadFetchers() {
-  DEBUG_LINE;
   m_fetchers.clear();
 
   KSharedConfigPtr config = KGlobal::config();
