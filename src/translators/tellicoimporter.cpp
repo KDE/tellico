@@ -75,9 +75,11 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
       return Data::CollPtr();
     }
     QIODevice* f = fileRef().file();
+    char c;
     for(int i = 0; i < 5; ++i) {
-      char c;
-      s += f->getChar(&c);
+      if(f->getChar(&c)) {
+        s += c;
+      }
     }
     f->reset();
   } else {

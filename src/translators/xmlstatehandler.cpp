@@ -81,7 +81,7 @@ using Tellico::Import::SAX::LoanHandler;
 StateHandler* StateHandler::nextHandler(const QString& ns_, const QString& localName_, const QString& qName_) {
   StateHandler* handler = nextHandlerImpl(ns_, localName_, qName_);
   if(!handler) {
-    myWarning() << "no handler for " << localName_;
+    myWarning() << "no handler for" << localName_;
   }
   return handler ? handler : new NullHandler(d);
 }
@@ -159,8 +159,6 @@ bool CollectionHandler::start(const QString&, const QString&, const QString&, co
   d->collTitle = attValue(atts_, "title");
   d->collType = attValue(atts_, "type").toInt();
   d->entryName = attValue(atts_, "unit");
-
-  Q_ASSERT(d->collType);
   return true;
 }
 
@@ -246,7 +244,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   const bool isI18n = attValue(atts_, "i18n") == QLatin1String("true");
 
-  QString name  = attValue(atts_, "name", "unknown");
+  QString name = attValue(atts_, "name", "unknown");
   if(name == QLatin1String("_default")) {
     d->defaultFields = true;
     return true;
@@ -508,7 +506,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     // for dates and tables, the value is built up from child elements
 #ifndef NDEBUG
     if(!d->text.isEmpty()) {
-      myWarning() << "ignoring value for field " << localName_ << ": " << d->text;
+      myWarning() << "ignoring value for field" << localName_ << ":" << d->text;
     }
 #endif
     fieldValue = d->textBuffer;
@@ -624,7 +622,7 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {
-        myDebug() << "TellicoImporter::readImage(XML) - null image for " << m_imageId;
+        myDebug() << "null image for" << m_imageId;
       }
       d->hasImages = true;
       readInfo = false;
@@ -702,7 +700,7 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
   } else if(function == QLatin1String("notregexp")) {
     func = FilterRule::FuncNotRegExp;
   } else {
-    myWarning() << "invalid rule function: " << function;
+    myWarning() << "invalid rule function:" << function;
     return true;
   }
   d->filter->append(new FilterRule(field, pattern, func));

@@ -71,6 +71,7 @@ Tellico::Data::CollPtr CollectionFactory::collection(const QString& typeName_, b
       type = i.key();
       break;
     }
+    ++i;
   }
   if(type == -1) {
     type = Data::Collection::Base;
