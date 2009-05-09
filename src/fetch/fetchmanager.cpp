@@ -89,6 +89,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   m_keyMap.insert(Keyword,    i18n("Keyword"));
   m_keyMap.insert(DOI,        i18n("DOI"));
   m_keyMap.insert(ArxivID,    i18n("arXiv ID"));
+  m_keyMap.insert(PubmedID,   i18n("PubMed ID"));
   m_keyMap.insert(LCCN,       i18n("LCCN"));
   m_keyMap.insert(Raw,        i18n("Raw Query"));
 //  m_keyMap.insert(FetchLast,  QString());

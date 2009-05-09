@@ -73,6 +73,10 @@ QString EntrezFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool EntrezFetcher::canSearch(FetchKey k) const {
+  return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID || k == DOI;
+}
+
 bool EntrezFetcher::canFetch(int type) const {
   return type == Data::Collection::Bibtex;
 }

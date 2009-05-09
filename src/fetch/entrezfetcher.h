@@ -55,8 +55,7 @@ public:
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  // pubmed can search title, person, and keyword
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == Raw || k == PubmedID || k == DOI; }
+  virtual bool canSearch(FetchKey k) const;
   virtual void continueSearch();
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
