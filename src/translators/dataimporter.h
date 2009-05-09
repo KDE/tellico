@@ -44,23 +44,21 @@ public:
    * @param url The URL of the file to import
    */
 //  DataImporter(const KUrl& url) : Importer(url), m_data(FileHandler::readDataFile(url)), m_source(URL) {}
-  DataImporter(const KUrl& url) : Importer(url), m_source(URL) { m_fileRef = FileHandler::fileRef(url); }
+  DataImporter(const KUrl& url);
   /**
    * Since the conversion to a QCString appends a \0 character at the end, remove it.
    *
    * @param text The text. It MUST be in UTF-8.
    */
-  DataImporter(const QString& text) : Importer(text), m_data(text.toUtf8()), m_source(Text), m_fileRef(0)
-    { m_data.truncate(m_data.size()-1); }
+  DataImporter(const QString& text);
+
   /**
    */
-  virtual ~DataImporter() { delete m_fileRef; m_fileRef = 0; }
+  virtual ~DataImporter();
 
   Source source() const { return m_source; }
 
-  virtual void setText(const QString& text) {
-    Importer::setText(text); m_data = text.toUtf8(); m_data.truncate(m_data.size()-1); m_source = Text;
-  }
+  virtual void setText(const QString& text);
 
 protected:
   /**

@@ -24,4 +24,28 @@
 
 #include "dataimporter.h"
 
+using Tellico::Import::DataImporter;
+
+DataImporter::DataImporter(const KUrl& url) : Importer(url), m_source(URL) {
+  m_fileRef = FileHandler::fileRef(url);
+}
+
+DataImporter::DataImporter(const QString& text) : Importer(text), m_data(text.toUtf8()), m_source(Text), m_fileRef(0) {
+  // remove newline
+  m_data.truncate(m_data.size()-1);
+}
+
+DataImporter::~DataImporter() {
+  delete m_fileRef;
+  m_fileRef = 0;
+}
+
+void DataImporter::setText(const QString& text) {
+  Importer::setText(text);
+  m_data = text.toUtf8();
+  // remove newline
+  m_data.truncate(m_data.size()-1);
+  m_source = Text;
+}
+
 #include "dataimporter.moc"
