@@ -49,12 +49,12 @@
 
 using Tellico::Fetch::GCstarPluginFetcher;
 
-GCstarPluginFetcher::PluginMap GCstarPluginFetcher::pluginMap;
+GCstarPluginFetcher::CollectionPlugins GCstarPluginFetcher::collectionPlugins;
 GCstarPluginFetcher::PluginParse GCstarPluginFetcher::pluginParse = NotYet;
 
 //static
 GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
-  if(!pluginMap.contains(collType_)) {
+  if(!collectionPlugins.contains(collType_)) {
     GUI::CursorSaver cs;
     QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
 
@@ -91,7 +91,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
     }
   }
 
-  return pluginMap.contains(collType_) ? pluginMap[collType_] : GCstarPluginFetcher::PluginList();
+  return collectionPlugins.contains(collType_) ? collectionPlugins.value(collType_) : GCstarPluginFetcher::PluginList();
 }
 
 void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) {
@@ -99,7 +99,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
 
   QString gcstarCollection = gcstarType(collType_);
   if(gcstarCollection.isEmpty()) {
-    pluginMap.insert(collType_, plugins);
+    collectionPlugins.insert(collType_, plugins);
     return;
   }
 
@@ -138,7 +138,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
     }
   }
 
-  pluginMap.insert(collType_, plugins);
+  collectionPlugins.insert(collType_, plugins);
 }
 
 void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) {
@@ -152,7 +152,7 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
 
   QString dirName = gcstarType(collType_);
   if(dirName.isEmpty()) {
-    pluginMap.insert(collType_, plugins);
+    collectionPlugins.insert(collType_, plugins);
     return;
   }
 
@@ -170,8 +170,8 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
       plugins << info;
     }
   }
-  // inserting empty map is ok
-  pluginMap.insert(collType_, plugins);
+  // inserting empty list is ok
+  collectionPlugins.insert(collType_, plugins);
 }
 
 QString GCstarPluginFetcher::gcstarType(int collType_) {

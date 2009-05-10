@@ -28,7 +28,6 @@
 #include "fetcher.h"
 #include "configwidget.h"
 
-#include <QMap>
 #include <QShowEvent>
 #include <QLabel>
 #include <QList>
@@ -84,8 +83,8 @@ private:
   typedef QMap<QString, QVariant> PluginInfo;
   typedef QList<PluginInfo> PluginList;
   // map collection type to all available plugins
-  typedef QMap<int, PluginList> PluginMap;
-  static PluginMap pluginMap;
+  typedef QHash<int, PluginList> CollectionPlugins;
+  static CollectionPlugins collectionPlugins;
   static PluginList plugins(int collType);
   // we need to keep track if we've searched for plugins yet and by what method
   enum PluginParse {NotYet, Old, New};
@@ -99,7 +98,7 @@ private:
   QString m_plugin;
   KProcess* m_process;
   QByteArray m_data;
-  QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
+  QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
 };
 

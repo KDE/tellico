@@ -82,7 +82,7 @@ private:
   virtual void search(FetchKey key, const QString& value);
   KUrl searchURL(FetchKey key, const QString& value) const;
 
-  QMap<int, Data::EntryPtr> m_entries;
+  QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;

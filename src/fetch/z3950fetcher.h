@@ -114,7 +114,7 @@ private:
 
   FetchKey m_key;
   QString m_value;
-  QMap<int, Data::EntryPtr> m_entries;
+  QHash<int, Data::EntryPtr> m_entries;
   bool m_started;
   bool m_done;
   QString m_preset;

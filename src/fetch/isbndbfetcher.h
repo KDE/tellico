@@ -88,7 +88,7 @@ private:
   int m_numResults;
   int m_countOffset;
 
-  QMap<int, Data::EntryPtr> m_entries;
+  QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;

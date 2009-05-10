@@ -97,7 +97,7 @@ private:
   int m_start;
   int m_total;
 
-  QMap<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
+  QHash<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;

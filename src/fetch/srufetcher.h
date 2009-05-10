@@ -103,7 +103,7 @@ private:
   QString m_path;
   QString m_format;
 
-  QMap<int, Data::EntryPtr> m_entries;
+  QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
   XSLTHandler* m_MARCXMLHandler;
   XSLTHandler* m_MODSHandler;

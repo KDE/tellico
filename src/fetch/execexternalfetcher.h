@@ -113,12 +113,12 @@ private:
   int m_collType;
   int m_formatType;
   QString m_path;
-  QMap<FetchKey, QString> m_args;
+  QHash<FetchKey, QString> m_args;
   bool m_canUpdate : 1;
   QString m_updateArgs;
   QPointer<KProcess> m_process;
   QByteArray m_data;
-  QMap<int, Data::EntryPtr> m_entries; // map from search result id to entry
+  QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
   bool m_deleteOnRemove : 1;
   QString m_newStuffName;

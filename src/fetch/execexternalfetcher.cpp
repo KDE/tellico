@@ -100,19 +100,19 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!s.isEmpty()) {
     m_path = s;
   }
-  QList<int> il;
+  QList<int> argKeys;
   if(config_.hasKey("ArgumentKeys")) {
-    il = config_.readEntry("ArgumentKeys", il);
+    argKeys = config_.readEntry("ArgumentKeys", argKeys);
   } else {
-    il.append(Keyword);
+    argKeys.append(Keyword);
   }
-  QStringList sl = config_.readEntry("Arguments", QStringList());
-  if(il.count() != sl.count()) {
+  QStringList args = config_.readEntry("Arguments", QStringList());
+  if(argKeys.count() != args.count()) {
     myWarning() << "unequal number of arguments and keys";
   }
-  int n = qMin(il.count(), sl.count());
+  int n = qMin(argKeys.count(), args.count());
   for(int i = 0; i < n; ++i) {
-    m_args[static_cast<FetchKey>(il[i])] = sl[i];
+    m_args.insert(static_cast<FetchKey>(argKeys[i]), args[i]);
   }
   if(config_.hasKey("UpdateArgs")) {
     m_canUpdate = true;
@@ -148,7 +148,7 @@ void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   if(!rx1.exactMatch(value)) {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
-  QString args = m_args[key_];
+  QString args = m_args.value(key_);
   QRegExp rx2(QLatin1String("['\"]%1\\1"));
   args.replace(rx2, QLatin1String("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
@@ -349,7 +349,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     if(fetcher_ && fetcher_->m_args.contains(key)) {
       cb->setChecked(true);
       le->setEnabled(true);
-      le->setText(fetcher_->m_args[key]);
+      le->setText(fetcher_->m_args.value(key));
     } else {
       cb->setChecked(false);
       le->setEnabled(false);

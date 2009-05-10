@@ -29,8 +29,6 @@
 #include "configwidget.h"
 
 #include <kurl.h>
-
-#include <QMap>
 #include <QPointer>
 
 class KLineEdit;
@@ -124,8 +122,8 @@ private:
   Data::EntryPtr parseEntry(const QString& str);
 
   QString m_text;
-  QMap<int, Data::EntryPtr> m_entries;
-  QMap<int, KUrl> m_matches;
+  QHash<int, Data::EntryPtr> m_entries;
+  QHash<int, KUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   FetchKey m_key;
