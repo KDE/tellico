@@ -420,8 +420,7 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
     myWarning() << "entries must come after fields are defined";
-    // TODO: i18n
-    d->error = QLatin1String("File format error: entries must come after fields are defined");
+    d->error = i18n("File format error: entries must come after fields are defined");
     return false;
   }
   int id = attValue(atts_, "id").toInt();
