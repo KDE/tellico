@@ -419,9 +419,17 @@ StateHandler* EntryHandler::nextHandlerImpl(const QString&, const QString& local
 bool EntryHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
-    myWarning() << "entries must come after fields are defined";
-    d->error = i18n("File format error: entries must come after fields are defined");
-    return false;
+    // special case for very old versions which did not have user-editable fields
+    if(d->syntaxVersion < 3) {
+      d->defaultFields = true;
+      FieldsHandler handler(d);
+      // fake the end of a fields element, which will add the default fields
+      handler.end(QString(), QString(), QString());
+    } else {
+      myWarning() << "entries must come after fields are defined";
+      d->error = i18n("File format error: entries must come after fields are defined");
+      return false;
+    }
   }
   int id = attValue(atts_, "id").toInt();
   Data::EntryPtr entry;
