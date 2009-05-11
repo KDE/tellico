@@ -51,6 +51,16 @@ QString attValue(const QXmlAttributes& atts, const char* name, const char* defau
   return attValue(atts, name, QLatin1String(defaultValue));
 }
 
+inline
+QString realFieldName(int syntaxVersion, const QString& localName) {
+  QString fieldName = localName;
+  if(syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
+    // in version 2, "keywords" changed to "keyword"
+    fieldName = QLatin1String("keyword");
+  }
+  return fieldName;
+}
+
 }
 
 using Tellico::Import::SAX::StateHandler;
@@ -410,7 +420,7 @@ bool BibtexMacroHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* EntryHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(d->coll->hasField(localName_)) {
+  if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
@@ -447,7 +457,7 @@ bool EntryHandler::end(const QString&, const QString&, const QString&) {
 }
 
 StateHandler* FieldValueContainerHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
-  if(d->coll->hasField(localName_)) {
+  if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
@@ -473,7 +483,7 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
 }
 
 bool FieldValueHandler::start(const QString&, const QString&, const QString& localName_, const QXmlAttributes& atts_) {
-  d->currentField = d->coll->fieldByName(localName_);
+  d->currentField = d->coll->fieldByName(realFieldName(d->syntaxVersion, localName_));
   m_i18n = attValue(atts_, "i18n") == QLatin1String("true");
   m_validateISBN = (localName_ == QLatin1String("isbn")) &&
                    (attValue(atts_, "validate") != QLatin1String("no"));
@@ -481,9 +491,14 @@ bool FieldValueHandler::start(const QString&, const QString&, const QString& loc
 }
 
 bool FieldValueHandler::end(const QString&, const QString& localName_, const QString&) {
-  Data::FieldPtr f = d->coll->fieldByName(localName_);
+  Data::EntryPtr entry = d->entries.back();
+  Q_ASSERT(entry);
+  QString fieldName = realFieldName(d->syntaxVersion, localName_);
+  QString fieldValue = d->text;
+
+  Data::FieldPtr f = d->coll->fieldByName(fieldName);
   if(!f) {
-    myWarning() << "no field named " << localName_;
+    myWarning() << "no field named " << fieldName;
     return true;
   }
   // if it's a derived value, no field value is added
@@ -491,15 +506,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     return true;
   }
 
-  Data::EntryPtr entry = d->entries.back();
-  Q_ASSERT(entry);
-  QString fieldName = localName_;
-  QString fieldValue = d->text;
-
-  if(d->syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
-    // in version 2, "keywords" changed to "keyword"
-    fieldName = QLatin1String("keyword");
-  } else if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
+  if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
     // in version 3 and prior, checkbox attributes had no text(), set it to "true"
     fieldValue = QLatin1String("true");
   } else if(d->syntaxVersion < 8 && f->type() == Data::Field::Rating) {
