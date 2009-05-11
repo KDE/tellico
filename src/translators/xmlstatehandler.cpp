@@ -437,7 +437,7 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
       handler.end(QString(), QString(), QString());
     } else {
       myWarning() << "entries must come after fields are defined";
-      d->error = i18n("File format error: entries must come after fields are defined");
+      d->error = i18n("File format error: entries must come after fields are defined.");
       return false;
     }
   }

@@ -95,10 +95,10 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   setButtonGuiItem(m_prevBtn, prev);
 
   // these are just fror the key shortcuts
-  KAction* newAct = new KAction(i18n("Go Previous"), this);
+  KAction* newAct = new KAction(i18n("Go to Previous"), this);
   newAct->setShortcut(Qt::Key_PageUp);
   connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoPrevEntry()));
-  newAct = new KAction(i18n("Go Next"), this);
+  newAct = new KAction(i18n("Go to Next"), this);
   newAct->setShortcut(Qt::Key_PageDown);
   connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoNextEntry()));
 
