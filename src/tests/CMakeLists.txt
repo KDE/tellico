@@ -48,3 +48,8 @@ TARGET_LINK_LIBRARIES(amcimporttest core gui utils images collections translator
 KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ../translators/risimporter.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(risimporttest core gui utils images collections translators
                       ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QIMAGEBLITZ_LIBRARIES} ${QT_QTTEST_LIBRARY} )
+
+KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp ../translators/tellicoimporter.cpp
+                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(tellicoreadtest core gui utils images collections translators
+                      ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QIMAGEBLITZ_LIBRARIES} ${QT_QTTEST_LIBRARY} )

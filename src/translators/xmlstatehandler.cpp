@@ -260,7 +260,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-    QStringList allowed =  attValue(atts_, "allowed").split(QRegExp(QLatin1String("\\s*;\\s*")));
+    QStringList allowed = attValue(atts_, "allowed").split(QRegExp(QLatin1String("\\s*;\\s*")));
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
         (*word) = i18n((*word).toUtf8());
