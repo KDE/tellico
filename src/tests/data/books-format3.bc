@@ -27,7 +27,7 @@
    <attribute flags="0" title="Gift" category="Personal" format="0" type="4" name="gift" />
    <attribute flags="0" title="Loaned" category="Personal" format="0" type="4" name="loaned" />
    <attribute flags="2" title="Rating" category="Personal" allowed="5 - Best;4 - Good;3 - Neutral;2 - Bad;1 - Worst" format="0" type="3" name="rating" />
-   <attribute flags="0" title="Comments" category="Personal" format="0" type="1" name="comments" />
+   <attribute flags="0" title="Comments" category="Personal" format="0" type="2" name="comments" />
   </attributes>
   <book>
    <title>my title1</title>

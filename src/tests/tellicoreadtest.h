@@ -26,13 +26,22 @@
 #define TELLICOREADTEST_H
 
 #include <QObject>
+#include <QList>
+
+#include "../collection.h"
 
 class TellicoReadTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
-  void testLoad();
+
+  void testCollection();
+  void testEntries();
+  void testEntries_data();
+
+private:
+  QList<Tellico::Data::CollPtr> m_collections;
 };
 
 #endif

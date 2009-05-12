@@ -285,7 +285,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   if(idx > -1) {
     // at one point, the categories had keyboard accels
     QString cat = atts_.value(idx);
-    if(d->syntaxVersion < 9 && cat.indexOf(QLatin1Char('&')) > -1) {
+    if(d->syntaxVersion < 9) {
       cat.remove(QLatin1Char('&'));
     }
     if(isI18n) {

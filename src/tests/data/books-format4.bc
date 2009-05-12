@@ -27,7 +27,7 @@
    <field flags="0" title="Gift" category="Personal" format="0" type="4" name="gift" />
    <field flags="0" title="Loaned" category="Personal" format="0" type="4" name="loaned" />
    <field flags="2" title="Rating" category="Personal" allowed="5 - Best;4 - Good;3 - Neutral;2 - Bad;1 - Worst" format="0" type="3" name="rating" />
-   <field flags="0" title="Comments" category="Personal" format="0" type="1" name="comments" />
+   <field flags="0" title="Comments" category="Personal" format="0" type="2" name="comments" />
   </fields>
   <entry>
    <title>my title1</title>
