@@ -40,7 +40,7 @@ void TellicoReadTest::initTestCase() {
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 
-  for(int i = 1; i < 6; ++i) {
+  for(int i = 1; i < 10; ++i) {
     KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
 
     Tellico::Import::TellicoImporter importer(url);
@@ -65,7 +65,6 @@ void TellicoReadTest::testEntries() {
   QFETCH(QString, fieldName);
 
   Tellico::Data::FieldPtr field1 = m_collections[0]->fieldByName(fieldName);
-  Tellico::Data::EntryPtr entry1 = m_collections[0]->entryById(0);
 
   // skip the first one
   for(int i = 1; i < m_collections.count(); ++i) {
@@ -76,10 +75,16 @@ void TellicoReadTest::testEntries() {
       QCOMPARE(field1->category(), field2->category());
       QCOMPARE(field1->type(), field2->type());
       QCOMPARE(field1->flags(), field2->flags());
+      QCOMPARE(field1->propertyList(), field2->propertyList());
     }
 
-    Tellico::Data::EntryPtr entry2 = m_collections[i]->entryById(0);
-    QCOMPARE(entry1->field(fieldName), entry2->field(fieldName));
+    for(int j = 0; j < m_collections[0]->entryCount(); ++j) {
+      Tellico::Data::EntryPtr entry1 = m_collections[0]->entryById(j);
+      Tellico::Data::EntryPtr entry2 = m_collections[i]->entryById(j);
+      QVERIFY(!entry1.isNull());
+      QVERIFY(!entry2.isNull());
+      QCOMPARE(entry1->field(fieldName), entry2->field(fieldName));
+    }
   }
 }
 
@@ -88,10 +93,12 @@ void TellicoReadTest::testEntries_data() {
 
   QTest::newRow("title") << QL1("title");
   QTest::newRow("author") << QL1("author");
+  QTest::newRow("publisher") << QL1("publisher");
   QTest::newRow("keywords") << QL1("keywords");
   QTest::newRow("keyword") << QL1("keyword");
   QTest::newRow("genre") << QL1("genre");
   QTest::newRow("isbn") << QL1("isbn");
+  QTest::newRow("pub_year") << QL1("pub_year");
   QTest::newRow("rating") << QL1("rating");
   QTest::newRow("comments") << QL1("comments");
 }
