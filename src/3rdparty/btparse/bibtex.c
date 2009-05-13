@@ -19,6 +19,7 @@
 #include "error.h"
 #include "parse_auxiliary.h"
 /*#include "my_dmalloc.h"*/
+#include "bt_debug.h"
 
 extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
 #define GENAST
@@ -33,7 +34,8 @@ extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
 #ifndef PURIFY
 #define PURIFY(r,s)
 #endif
-
+/* RS: bibtex import fails if the .c file is not included, don't ask me why */
+#include "ast.c"
 zzASTgvars
 
 ANTLR_INFO
