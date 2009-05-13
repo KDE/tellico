@@ -85,6 +85,7 @@ public slots:
 private:
   Data::CollPtr readCollection(const QString& text, int n);
   void parseText(const QString& text);
+  void appendCollection(Data::CollPtr newColl);
 
   QList<AST*> m_nodes;
   QHash<QString, QString> m_macros;

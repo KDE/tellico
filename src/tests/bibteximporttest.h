@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,47 +22,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_BIBTEXHANDLER_H
-#define TELLICO_BIBTEXHANDLER_H
+#ifndef BIBTEXIMPORTTEST_H
+#define BIBTEXIMPORTTEST_H
 
-#include "../datavectors.h"
+#include <QObject>
 
-#include <QStringList>
-#include <QHash>
-#include <QRegExp>
+class BibtexImportTest : public QObject {
+Q_OBJECT
 
-namespace Tellico {
-
-/**
- * @author Robby Stephenson
- */
-class BibtexHandler {
-public:
-  enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QStringList bibtexKeys(const Data::EntryList& entries);
-  static QString bibtexKey(Data::EntryPtr entry);
-  static QString importText(char* text);
-  static QString exportText(const QString& text, const QStringList& macros);
-  /**
-   * Strips the text of all vestiges of LaTeX.
-   *
-   * @param text A reference to the text
-   * @return A reference to the text
-   */
-  static QString& cleanText(QString& text);
-
-  static QuoteStyle s_quoteStyle;
-
-private:
-  typedef QHash<QString, QStringList> StringListHash;
-
-  static QString bibtexKey(const QString& author, const QString& title, const QString& year);
-  static void loadTranslationMaps();
-  static QString addBraces(const QString& string);
-
-  static StringListHash s_utf8LatexMap;
-  static const QRegExp s_badKeyChars;
+private Q_SLOTS:
+  void testImport();
 };
 
-} // end namespace
 #endif

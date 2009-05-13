@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,47 +22,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_BIBTEXHANDLER_H
-#define TELLICO_BIBTEXHANDLER_H
+#undef QT_NO_CAST_FROM_ASCII
 
-#include "../datavectors.h"
+#include "qtest_kde.h"
+#include "bibteximporttest.h"
+#include "bibteximporttest.moc"
 
-#include <QStringList>
-#include <QHash>
-#include <QRegExp>
+#include "../translators/bibteximporter.h"
+#include "../collections/bibtexcollection.h"
 
-namespace Tellico {
+QTEST_KDEMAIN_CORE( BibtexImportTest )
 
-/**
- * @author Robby Stephenson
- */
-class BibtexHandler {
-public:
-  enum QuoteStyle { BRACES=0, QUOTES=1 };
-  static QStringList bibtexKeys(const Data::EntryList& entries);
-  static QString bibtexKey(Data::EntryPtr entry);
-  static QString importText(char* text);
-  static QString exportText(const QString& text, const QStringList& macros);
-  /**
-   * Strips the text of all vestiges of LaTeX.
-   *
-   * @param text A reference to the text
-   * @return A reference to the text
-   */
-  static QString& cleanText(QString& text);
+#define QL1(x) QString::fromLatin1(x)
 
-  static QuoteStyle s_quoteStyle;
+void BibtexImportTest::testImport() {
+  KUrl::List urls;
+  urls << KUrl(QString::fromLatin1(KDESRCDIR) + "/data/test.bib");
 
-private:
-  typedef QHash<QString, QStringList> StringListHash;
+  Tellico::Import::BibtexImporter importer(urls);
+  // shut the importer up about current collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BibtexCollection(true));
+  importer.setCurrentCollection(tmpColl);
 
-  static QString bibtexKey(const QString& author, const QString& title, const QString& year);
-  static void loadTranslationMaps();
-  static QString addBraces(const QString& string);
+  Tellico::Data::CollPtr coll = importer.collection();
+  Tellico::Data::BibtexCollection* bColl = static_cast<Tellico::Data::BibtexCollection*>(coll.data());
 
-  static StringListHash s_utf8LatexMap;
-  static const QRegExp s_badKeyChars;
-};
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
+  QCOMPARE(coll->entryCount(), 36);
 
-} // end namespace
-#endif
+  QCOMPARE(bColl->preamble(), QL1("preamble"));
+}

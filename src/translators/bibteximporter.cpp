@@ -26,7 +26,6 @@
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
-#include "../progressmanager.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
@@ -40,6 +39,7 @@
 #include <QTextCodec>
 #include <QVBoxLayout>
 #include <QButtonGroup>
+#include <QFile>
 
 using Tellico::Import::BibtexImporter;
 
@@ -70,10 +70,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     return m_coll;
   }
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(urls().count() * 100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
+  emit signalTotalSteps(this, urls().count() * 100);
 
   bool useUTF8 = m_widget && m_readUTF8->isChecked();
 
@@ -87,7 +84,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     if(!coll || coll->entryCount() == 0) {
       setStatusMessage(i18n("No valid bibtex entries were found"));
     } else {
-      m_coll->addEntries(coll->entries());
+      appendCollection(coll);
     }
   }
 
@@ -108,7 +105,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
       setStatusMessage(i18n("No valid bibtex entries were found in file - %1", this->url().fileName()));
       continue;
     }
-    m_coll->addEntries(coll->entries());
+    appendCollection(coll);
   }
 
   if(m_cancelled) {
@@ -118,7 +115,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
   return m_coll;
 }
 
-Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n) {
+Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int urlCount) {
   if(text.isEmpty()) {
     myDebug() << "no text";
     return Data::CollPtr();
@@ -216,7 +213,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int n
     ptr->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, n*100 + 100*j/count);
+      emit signalProgress(this, urlCount*100 + 100*j/count);
       kapp->processEvents();
     }
   }
@@ -263,8 +260,10 @@ void BibtexImporter::parseText(const QString& text) {
     if(brace == 0) {
       entry = text.mid(startpos, pos-startpos+1).trimmed();
       // All the downstream text processing on the AST node will assume utf-8
-      AST* node = bt_parse_entry_s(const_cast<char*>(entry.toUtf8().data()),
-                                   const_cast<char*>(url().fileName().toLocal8Bit().data()),
+      QByteArray entryText = entry.toUtf8();
+      QByteArray filename = QFile::encodeName(url().fileName());
+      AST* node = bt_parse_entry_s(entryText.data(),
+                                   filename.data(),
                                    0, bt_options, &ok);
       if(ok && node) {
         if(bt_entry_metatype(node) == BTE_MACRODEF && macroName.indexIn(entry) > -1) {
@@ -369,6 +368,24 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   }
   bt_cleanup();
   return foundOne;
+}
+
+void BibtexImporter::appendCollection(Data::CollPtr coll_) {
+  Data::BibtexCollection* mainColl = static_cast<Data::BibtexCollection*>(m_coll.data());
+  Data::BibtexCollection* newColl = static_cast<Data::BibtexCollection*>(coll_.data());
+
+  mainColl->addEntries(newColl->entries());
+  // append the preamble and macro lists
+  if(!newColl->preamble().isEmpty()) {
+    QString pre = mainColl->preamble();
+    if(!pre.isEmpty()) {
+      pre += QLatin1Char('\n');
+    }
+    mainColl->setPreamble(pre + newColl->preamble());
+  }
+  StringMap macros = mainColl->macroList();
+  macros.unite(newColl->macroList());
+  mainColl->setMacroList(macros);
 }
 
 #include "bibteximporter.moc"
