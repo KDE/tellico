@@ -153,11 +153,16 @@ void BibtexHandler::loadTranslationMaps() {
 }
 
 QString BibtexHandler::importText(char* text_) {
+  QString str = QString::fromUtf8(text_);
+
   if(!s_utf8LatexMap) {
     loadTranslationMaps();
   }
+  if(!s_utf8LatexMap) {
+    myWarning() << "Failed to load translation maps";
+    return str;
+  }
 
-  QString str = QString::fromUtf8(text_);
   for(StringListHash::const_iterator it = s_utf8LatexMap->constBegin(); it != s_utf8LatexMap->constEnd(); ++it) {
     foreach(const QString& word, it.value()) {
       str.replace(word, it.key());
