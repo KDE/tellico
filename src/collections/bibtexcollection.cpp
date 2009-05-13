@@ -453,7 +453,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   // special case keywords, replace commas with semi-colons so they get separated
   QString value = value_;
   if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
-    value.replace(QLatin1Char(','), QLatin1Char(';'));
+    value.replace(QRegExp(QLatin1String("\\s*,\\s*")), QLatin1String("; "));
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
     if(!oValue.isEmpty()) {

@@ -52,4 +52,8 @@ void BibtexImportTest::testImport() {
   QCOMPARE(coll->entryCount(), 36);
 
   QCOMPARE(bColl->preamble(), QL1("preamble"));
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QCOMPARE(entry->field("author"), QL1("L[eslie] A. Aamport"));
+  QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
 }
