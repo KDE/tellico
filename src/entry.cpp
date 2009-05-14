@@ -156,7 +156,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
 
   // if auto format is not set or FormatNone, then just return the value
   if(flag == Field::FormatNone) {
-    return field(fieldName_);
+    return m_coll->prepareText(field(fieldName_));
   }
 
   if(m_formattedFields.isEmpty() || !m_formattedFields.contains(fieldName_)) {

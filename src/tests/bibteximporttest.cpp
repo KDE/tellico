@@ -54,6 +54,10 @@ void BibtexImportTest::testImport() {
   QCOMPARE(bColl->preamble(), QL1("preamble"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QCOMPARE(entry->field("entry-type"), QL1("article"));
+  QCOMPARE(entry->field("bibtex-key"), QL1("article-full"));
   QCOMPARE(entry->field("author"), QL1("L[eslie] A. Aamport"));
+  QCOMPARE(entry->field("month"), QL1("jul"));
   QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
+  QCOMPARE(bColl->macroList().value("ACM"), QL1("The OX Association for Computing Machinery"));
 }
