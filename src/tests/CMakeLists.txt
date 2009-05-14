@@ -38,22 +38,35 @@ SET(collection_SRCS
    ../tellico_utils.cpp
    )
 
+set(IMPORTER_LIBS
+   ${QT_AND_KDECORE_LIBS}
+   ${QT_QTTEST_LIBRARY}
+   ${KDE4_KDEUI_LIBS}
+   ${KDE4_KIO_LIBS}
+   ${QIMAGEBLITZ_LIBRARIES}
+   core
+   gui
+   utils
+   images
+   collections
+   translators
+   )
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(collectiontest core utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
 KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp ../translators/amcimporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(amcimporttest core gui utils images collections translators
-                      ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QIMAGEBLITZ_LIBRARIES} ${QT_QTTEST_LIBRARY} )
+TARGET_LINK_LIBRARIES(amcimporttest ${IMPORTER_LIBS} )
 
 KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ../translators/risimporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(risimporttest core gui utils images collections translators
-                      ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QIMAGEBLITZ_LIBRARIES} ${QT_QTTEST_LIBRARY} )
+TARGET_LINK_LIBRARIES(risimporttest ${IMPORTER_LIBS} )
 
 KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp ../translators/bibteximporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(bibteximporttest core gui utils images collections translators btparse
-                      ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QT_QTTEST_LIBRARY} )
+TARGET_LINK_LIBRARIES(bibteximporttest btparse ${IMPORTER_LIBS} )
+
+KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp ../translators/bibtexmlimporter.cpp
+                   ../core/filehandler.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(bibtexmlimporttest ${IMPORTER_LIBS} )
 
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp ../translators/tellicoimporter.cpp
                    ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(tellicoreadtest core gui utils images collections translators
-                      ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KIO_LIBS} ${QIMAGEBLITZ_LIBRARIES} ${QT_QTTEST_LIBRARY} )
+TARGET_LINK_LIBRARIES(tellicoreadtest ${IMPORTER_LIBS} )

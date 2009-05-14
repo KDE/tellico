@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE bibtex:file SYSTEM "bibtexml.dtd" >
+<bibtex:file xmlns:bibtex="http://bibtexml.sf.net/">
+
+<bibtex:entry id="esbensen">
+<bibtex:book>
+<bibtex:author>Kim Esbensen; Tonje Midtgaard</bibtex:author>
+<bibtex:title>Multivariate Analysis in Practice</bibtex:title>
+<bibtex:publisher>Camo AS</bibtex:publisher>
+<bibtex:year>1994</bibtex:year>
+<bibtex:address>Trondheim</bibtex:address>
+<bibtex:isbn>82-993330-0-8</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+<bibtex:entry id="martens.nes">
+<bibtex:book>
+<bibtex:author>Harald Martens</bibtex:author>
+<bibtex:title>Multivariate Calibration</bibtex:title>
+<bibtex:publisher>John Wiley &amp; Sons Ltd.</bibtex:publisher>
+<bibtex:year>1989</bibtex:year>
+<bibtex:address>Chichester</bibtex:address>
+<bibtex:isbn>0-471-93047-4</bibtex:isbn>
+</bibtex:book>
+</bibtex:entry>
+
+</bibtex:file>
