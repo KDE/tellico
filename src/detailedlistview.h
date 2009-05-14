@@ -141,6 +141,7 @@ public slots:
    * Refreshes the view, repopulating all items.
    */
   void slotRefresh();
+  void slotRefreshImages();
 
 private slots:
   void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);

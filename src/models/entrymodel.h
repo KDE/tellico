@@ -53,6 +53,7 @@ public:
 
   void clear();
   void clearSaveState();
+  void setImagesAreAvailable(bool b);
 
   void    setFields(const Data::FieldList& fields);
   void    addFields(const Data::FieldList& fields);
@@ -63,6 +64,7 @@ private:
   Data::FieldList m_fields;
   KIcon m_checkPix;
   QHash<int, int> m_saveStates;
+  bool m_imagesAreAvailable;
 };
 
 } // end namespace

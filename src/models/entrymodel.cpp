@@ -39,7 +39,8 @@
 
 using Tellico::EntryModel;
 
-EntryModel::EntryModel(QObject* parent) : AbstractEntryModel(parent), m_checkPix(QLatin1String("checkmark")) {
+EntryModel::EntryModel(QObject* parent) : AbstractEntryModel(parent),
+    m_checkPix(QLatin1String("checkmark")), m_imagesAreAvailable(false) {
 }
 
 EntryModel::~EntryModel() {
@@ -91,7 +92,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       return QVariant();
 
     case Qt::DecorationRole:
-      if(field->type() == Data::Field::Image) {
+      if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {
           return KIcon(QPixmap::fromImage(img));
@@ -198,6 +199,13 @@ void EntryModel::removeFields(const Tellico::Data::FieldList& fields_) {
       m_fields.removeAt(idx);
       endRemoveColumns();
     }
+  }
+}
+
+void EntryModel::setImagesAreAvailable(bool available_) {
+  if(m_imagesAreAvailable != available_) {
+    m_imagesAreAvailable = available_;
+    reset();
   }
 }
 

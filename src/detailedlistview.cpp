@@ -128,6 +128,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     }
   }
 
+  sourceModel()->setImagesAreAvailable(false);
   sourceModel()->setFields(coll_->fields());
 
   setUpdatesEnabled(false);
@@ -395,18 +396,6 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     configN = QLatin1String("_0");
   }
 
-  /*
-  config.writeEntry("ColumnWidths"    + configN, widths);
-  config.writeEntry("ColumnOrder"     + configN, order);
-  config.writeEntry("SortColumn"      + configN, columnSorted());
-  config.writeEntry("SortAscending"   + configN, ascendingSort());
-
-  QStringList colNames;
-  for(int col = 0; col < columns(); ++col) {
-    colNames += coll_->fieldNameByTitle(columnText(col));
-  }
-  config.writeEntry("ColumnNames" + configN, colNames);
-*/
   QByteArray state = header()->saveState();
   config.writeEntry(QLatin1String("ColumnState") + configN, state.toBase64());
   // the main sort order gets saved in the state
@@ -479,6 +468,10 @@ void DetailedListView::updateHeaderMenu() {
     act->setCheckable(true);
     act->setChecked(!isColumnHidden(ncol));
   }
+}
+
+void DetailedListView::slotRefreshImages() {
+  sourceModel()->setImagesAreAvailable(true);
 }
 
 #include "detailedlistview.moc"
