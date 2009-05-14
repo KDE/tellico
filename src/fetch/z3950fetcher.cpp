@@ -226,7 +226,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       return;
   }
 //  m_pqn = QLatin1String("@attr 1=7 0253333490");
-  myLog() << "Z3950Fetcher::search() - PQN query = " << m_pqn << endl;
+  myLog() << "PQN query = " << m_pqn;
 
   if(m_conn) {
     m_conn->reset(); // reset counts

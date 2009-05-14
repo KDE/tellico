@@ -233,7 +233,7 @@ void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   Import::BibtexImporter imp(bibtex);
   Data::CollPtr coll = imp.collection();
   if(coll && coll->entryCount() > 0) {
-    myLog() << "CitebaseFetcher::updateEntrySynchronous() - found arxiv result, merging" << endl;
+    myLog() << "found arxiv result, merging";
     EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
   }
 }

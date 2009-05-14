@@ -221,7 +221,7 @@ bool GCfilmsExporter::exec() {
       target.addPath(image);
       if(img.isNull() || !FileHandler::writeDataURL(target, img.byteArray(), false)) {
         myWarning() << "unable to write image file:"
-                    << imageDir << image << endl;
+                    << imageDir << image;
       }
     }
   }

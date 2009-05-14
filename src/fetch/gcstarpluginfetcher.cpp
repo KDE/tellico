@@ -249,7 +249,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
        << QLatin1String("--export")     << QLatin1String("Tellico")
        << QLatin1String("--website")    << m_plugin
        << QLatin1String("--download")   << KShell::quoteArg(value_);
-  myLog() << "GCstarPluginFetcher::search() - " << args.join(QLatin1String(" ")) << endl;
+  myLog() << "" << args.join(QLatin1String(" "));
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
     myDebug() << "process failed to start";

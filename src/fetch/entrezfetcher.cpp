@@ -146,7 +146,7 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
 #endif
 
   m_step = Search;
-//  myLog() << "EntrezFetcher::doSearch() - url: " << u.url() << endl;
+//  myLog() << "url: " << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -206,7 +206,7 @@ void EntrezFetcher::slotComplete(KJob*) {
     case Begin:
     case Fetch:
     default:
-      myLog() << "wrong step =" << m_step << endl;
+      myLog() << "wrong step =" << m_step;
       stop();
       break;
   }
@@ -261,7 +261,7 @@ void EntrezFetcher::doSummary() {
 #endif
 
   m_step = Summary;
-//  myLog() << "url:" << u.url() << endl;
+//  myLog() << "url:" << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),

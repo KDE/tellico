@@ -336,7 +336,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     entry->setField(QLatin1String("isbn"), isbn);
 #if 1
     KUrl imgURL = QString::fromLatin1("http://giotto.ibs.it/cop/copt13.asp?f=%1").arg(isbn);
-    myLog() << "IBSFetcher() - cover = " << imgURL << endl;
+    myLog() << "cover = " << imgURL;
     QString id = ImageFactory::addImage(imgURL, true, KUrl("http://internetbookshop.it"));
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);
@@ -346,7 +346,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     imgRx.setMinimal(true);
     pos = imgRx.indexIn(str_);
     if(pos > -1) {
-      myLog() << "IBSFetcher() - cover = " << imgRx.cap(1) << endl;
+      myLog() << "cover = " << imgRx.cap(1);
       QString id = ImageFactory::addImage(imgRx.cap(1), true, KUrl("http://internetbookshop.it"));
       if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);

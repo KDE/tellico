@@ -130,7 +130,7 @@ bool BibtexmlExporter::exec() {
     type = entryIt->field(typeField);
     if(type.isEmpty()) {
       myWarning() << "the entry for '" << entryIt->title()
-                 << "' has no entry-type, skipping it!" << endl;
+                 << "' has no entry-type, skipping it!";
       continue;
     }
 

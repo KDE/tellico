@@ -341,7 +341,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   if(resetGroups) {
-    myLog() << "Collection::modifyField() - invalidating groups";
+    myLog() << "invalidating groups";
     invalidateGroups();
   }
 

@@ -109,7 +109,7 @@ int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) 
   const QStringList cap2 = m_regexp.capturedTexts();
   if(pos1 > -1 && pos2 > -1) {
     int res = compareLCC(cap1, cap2);
-//    myLog() << "...result = " << res << endl;
+//    myLog() << "...result = " << res;
     return res;
   } else {
     if(pos1 == -1) {

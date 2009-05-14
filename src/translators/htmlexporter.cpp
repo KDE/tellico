@@ -466,7 +466,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
       }
       if(!success) {
         myWarning() << "unable to write image file: "
-                    << imgDir.path() << id << endl;
+                    << imgDir.path() << id;
       }
 
       if(++count == processCount) {

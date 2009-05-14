@@ -129,7 +129,7 @@ int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   int res = 2*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
 //    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title() << endl;
+//              << entry2_->title();
 //  }
   res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("artist"), this);
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("year"), this);

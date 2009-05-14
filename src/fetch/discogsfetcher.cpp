@@ -251,7 +251,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   // one way we tell if this entry has been fully initialized is to
   // check for a cover image
   if(!entry->field(QLatin1String("cover")).isEmpty()) {
-    myLog() << "DiscogsFetcher::fetchEntry() - already downloaded " << entry->title() << endl;
+    myLog() << "already downloaded " << entry->title();
     return entry;
   }
 

@@ -389,7 +389,7 @@ void ImportDialog::slotOk() {
   if(!m_importer || m_importer->validImport()) {
     accept();
   } else {
-    myLog() << "ImportDialog::slotOk() - not a valid import" << endl;
+    myLog() << "not a valid import";
   }
 }
 

@@ -99,7 +99,7 @@ bool BibtexExporter::exec() {
 
   if(typeField.isEmpty() || keyField.isEmpty()) {
     myWarning() << "the collection must have fields defining "
-                   "the entry-type and the key of the entry" << endl;
+                   "the entry-type and the key of the entry";
     return false;
   }
   if(fields.isEmpty()) {
@@ -145,7 +145,7 @@ bool BibtexExporter::exec() {
     type = entryIt->field(typeField);
     if(type.isEmpty()) {
       myWarning() << "the entry for '" << entryIt->title()
-                  << "' has no entry-type, skipping it!" << endl;
+                  << "' has no entry-type, skipping it!";
       continue;
     }
 

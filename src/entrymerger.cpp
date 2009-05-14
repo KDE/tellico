@@ -126,7 +126,7 @@ bool EntryMerger::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrit
     if(e2->field(field).isEmpty()) {
       continue;
     }
-//    myLog() << "Collection::mergeEntry() - reading field: " << field->name();
+//    myLog() << "reading field: " << field->name();
     if(overwrite_ || e1->field(field).isEmpty()) {
 //      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name());
       e1->setField(field, e2->field(field));

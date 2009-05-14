@@ -99,7 +99,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
   if(url_.isEmpty() || !url_.isValid()) {
     return Data::Image::null;
   }
-//  myLog() << "ImageFactory::addImageImpl(KUrl) - " << url_.prettyUrl();
+//  myLog() << url_.prettyUrl();
   Data::Image* img = FileHandler::readImageFile(url_, quiet_, refer_);
   if(!img) {
     myLog() << "image not found: " << url_.prettyUrl();
@@ -187,8 +187,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
     return Data::Image::null;
   }
 
-//  myLog() << "data_.size()
-//          << " bytes, format = " << format_
+//  myLog() << "//          << " bytes, format = " << format_
 //          << ", id = "<< img->id();
 
   d->imageDict.insert(img->id(), img);

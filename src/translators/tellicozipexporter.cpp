@@ -108,7 +108,7 @@ bool TellicoZipExporter::exec() {
         }
         const Data::ImageInfo& info = ImageFactory::imageInfo(id);
         if(info.linkOnly) {
-          myLog() << "TellicoZipExporter::exec() - not copying linked image: " << id << endl;
+          myLog() << "not copying linked image: " << id;
           continue;
         }
         const Data::Image& img = ImageFactory::imageById(id);

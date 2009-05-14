@@ -59,7 +59,7 @@ QString AlexandriaExporter::formatString() const {
 bool AlexandriaExporter::exec() {
   Data::CollPtr coll = collection();
   if(!coll || (coll->type() != Data::Collection::Book && coll->type() != Data::Collection::Bibtex)) {
-    myLog() << "AlexandriaExporter::exec() - bad collection" << endl;
+    myLog() << "bad collection";
     return false;
   }
 
@@ -69,7 +69,7 @@ bool AlexandriaExporter::exec() {
   QDir libraryDir = QDir::home();
   if(!libraryDir.cd(alexDirName)) {
     if(!libraryDir.mkdir(alexDirName) || !libraryDir.cd(alexDirName)) {
-      myLog() << "AlexandriaExporter::exec() - can't locate directory" << endl;
+      myLog() << "can't locate directory";
       return false;
     }
   }

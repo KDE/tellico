@@ -323,7 +323,7 @@ int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::
   int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
 //  if(res == 0) {
 //    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title() << endl;
+//              << entry2_->title();
 //  }
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("author"),   this);
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("cr_year"),  this);

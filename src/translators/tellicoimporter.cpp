@@ -235,7 +235,7 @@ void TellicoImporter::loadZipData() {
 
   // if all the images are not to be loaded, then we're done
   if(!m_loadAllImages) {
-//    myLog() << "TellicoImporter::loadZipData() - delayed loading for " << m_images.count() << " images" << endl;
+//    myLog() << "delayed loading for " << m_images.count() << " images";
     return;
   }
 
@@ -266,7 +266,7 @@ bool TellicoImporter::hasImages() const {
 }
 
 bool TellicoImporter::loadImage(const QString& id_) {
-//  myLog() << "TellicoImporter::loadImage() - id =  " << id_ << endl;
+//  myLog() << "id =  " << id_;
   if(m_format != Zip || !m_imgDir) {
     return false;
   }

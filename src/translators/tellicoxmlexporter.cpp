@@ -346,7 +346,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     myDebug() << "empty image!";
     return;
   }
-//  myLog() << "TellicoXMLExporter::exportImageXML() - id = " << id_ << endl;
+//  myLog() << "id = " << id_;
 
   QDomElement imgElem = dom_.createElement(QLatin1String("image"));
   if(m_includeImages) {

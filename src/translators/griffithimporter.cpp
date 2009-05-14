@@ -106,7 +106,7 @@ void GriffithImporter::slotProcessExited() {
   if(!m_coll) {
     myDebug() << "no collection pointer";
   } else {
-    myLog() << "GriffithImporter::slotProcessExited() - results found: " << m_coll->entryCount() << endl;
+    myLog() << "results found: " << m_coll->entryCount();
   }
 }
 
