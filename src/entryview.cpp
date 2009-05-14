@@ -33,7 +33,7 @@
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
 #include "core/tellico_config.h"
-//#include "newstuff/manager.h"
+#include "newstuff/manager.h"
 #include "document.h"
 #include "../core/drophandler.h"
 #include "../tellico_debug.h"
@@ -245,7 +245,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     // must read the file name to get proper context
     m_handler = new XSLTHandler(QFile::encodeName(m_xsltFile));
     if(m_checkCommonFile && !m_handler->isValid()) {
-//      NewStuff::Manager::checkCommonFile();
+      NewStuff::Manager::checkCommonFile();
       m_checkCommonFile = false;
       delete m_handler;
       m_handler = new XSLTHandler(QFile::encodeName(m_xsltFile));

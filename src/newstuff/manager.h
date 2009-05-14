@@ -50,6 +50,8 @@ public:
   bool removeScriptByName(const QString& name);
   bool removeScript(const QString& file, bool manual = false);
 
+  static bool checkCommonFile();
+
 private:
   friend class ManagerSingleton;
 
@@ -58,7 +60,6 @@ private:
 
   static QStringList archiveFiles(const KArchiveDirectory* dir,
                                   const QString& path = QString());
-  static bool checkCommonFile();
   static void removeNewStuffFile(const QString& file);
   static QString findXSL(const KArchiveDirectory* dir);
   static QString findEXE(const KArchiveDirectory* dir);
