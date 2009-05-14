@@ -5,5 +5,5 @@ ChecksumPolicy=ifpossible
 SignaturePolicy=ifpossible
 TargetDir=tellico/tmp
 Uncompress=never
-InstallationCommand=dbus-send --type=method_call --dest=org.kde.tellico /newstuff org.kde.tellico.newstuff.installTemplate string:%f
-UninstallCommand=dbus-send --type=method_call --dest=org.kde.tellico /newstuff org.kde.tellico.newstuff.removeTemplate string:%f
+InstallationCommand=dbus-send --type=method_call --dest=org.kde.tellico /NewStuff org.kde.tellico.newstuff.installTemplate string:%f
+UninstallCommand=dbus-send --type=method_call --dest=org.kde.tellico /NewStuff org.kde.tellico.newstuff.removeTemplate string:%f
