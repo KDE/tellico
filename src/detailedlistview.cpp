@@ -88,8 +88,6 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
 
   // header menu
   header()->installEventFilter(this);
-//  connect(header(), SIGNAL(sizeChange(int, int, int)),
-//          this, SLOT(slotCacheColumnWidth(int, int, int)));
 
   m_headerMenu = new KMenu(this);
   connect(m_headerMenu, SIGNAL(triggered(QAction*)),
@@ -130,10 +128,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     }
   }
 
-  QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
-  QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
-  QList<int> colOrder = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
-
   sourceModel()->setFields(coll_->fields());
 
   setUpdatesEnabled(false);
@@ -143,6 +137,11 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     // the easy case first. If we have saved state, just restore it
     header()->restoreState(state);
   } else {
+    // these are all deprecated values
+    QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
+    QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
+    QList<int> colOrder = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
+
     // what's a good way to determine which columns to show by default?
     // definitely the title, maybe that's enough
     if(colNames.isEmpty()) {
@@ -158,20 +157,20 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
         setColumnHidden(ncol, true);
       }
     }
+    config.deleteEntry(QLatin1String("ColumnNames") + configN);
+    config.deleteEntry(QLatin1String("ColumnWidth") + configN);
+    config.deleteEntry(QLatin1String("ColumnOrder") + configN);
   }
-  // just a sanity check, at one point, a zero-width column meant a hidden column
+  // just a sanity check, in the past, a zero-width column meant a hidden column
+  // that's no longer true, so don't allow zero-width columns
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
     if(!isColumnHidden(ncol) && columnWidth(ncol) == 0) {
       resizeColumnToContents(ncol);
     }
   }
 
-  //  int sortCol = config.readEntry("SortColumn" + configN, 0);
-  //  bool sortAsc = config.readEntry("SortAscending" + configN, true);
-  //  model()->sort(sortCol, sortAsc ? Qt::AscendingOrder : Qt::DescendingOrder);
   sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
   sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
-  //  updateComparison(header()->sortIndicatorSection());
 
   m_loadingCollection = true;
   addEntries(coll_->entries());
