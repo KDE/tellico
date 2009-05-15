@@ -147,11 +147,11 @@ private slots:
   void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
   void slotDoubleClicked(const QModelIndex& index);
   void slotHeaderMenuActivated(QAction* action);
+  void updateHeaderMenu();
 //  void slotCacheColumnWidth(int section, int oldSize, int newSize);
 
 private:
   void contextMenuEvent(QContextMenuEvent* event);
-  void updateHeaderMenu();
   void setState(Tellico::Data::EntryList entries_, int state);
 
   struct ConfigInfo {

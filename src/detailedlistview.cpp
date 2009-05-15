@@ -99,6 +99,10 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   sortModel->setSourceModel(entryModel);
   setModel(sortModel);
   setItemDelegate(new DetailedEntryItemDelegate(this));
+
+  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)), SLOT(updateHeaderMenu()));
+  connect(model(), SIGNAL(columnsRemoved(const QModelIndex&, int, int)), SLOT(updateHeaderMenu()));
+  connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateHeaderMenu()));
 }
 
 DetailedListView::~DetailedListView() {
@@ -160,12 +164,13 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     config.deleteEntry(QLatin1String("ColumnNames") + configN);
     config.deleteEntry(QLatin1String("ColumnWidth") + configN);
     config.deleteEntry(QLatin1String("ColumnOrder") + configN);
-  }
-  // just a sanity check, in the past, a zero-width column meant a hidden column
-  // that's no longer true, so don't allow zero-width columns
-  for(int ncol = 0; ncol < header()->count(); ++ncol) {
-    if(!isColumnHidden(ncol) && columnWidth(ncol) <= 0) {
-      resizeColumnToContents(ncol);
+
+    // just a sanity check, in the past, a zero-width column meant a hidden column
+    // that's no longer true, so don't allow zero-width columns
+    for(int ncol = 0; ncol < header()->count(); ++ncol) {
+      if(!isColumnHidden(ncol) && columnWidth(ncol) <= 0) {
+        resizeColumnToContents(ncol);
+      }
     }
   }
 
@@ -179,8 +184,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   setUpdatesEnabled(true);
 
   sortModel()->invalidate();
-  // must be after adding fields and entries
-  updateHeaderMenu();
 }
 
 void DetailedListView::slotReset() {
@@ -238,7 +241,6 @@ void DetailedListView::removeCollection(Tellico::Data::CollPtr coll_) {
   }
 
   sourceModel()->clear();
-  updateHeaderMenu();
 }
 
 void DetailedListView::contextMenuEvent(QContextMenuEvent* event_) {
@@ -340,23 +342,19 @@ Tellico::FilterPtr DetailedListView::filter() const {
 
 void DetailedListView::addField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr field) {
   sourceModel()->addFields(Data::FieldList() << field);
-  updateHeaderMenu();
 }
 
 void DetailedListView::modifyField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
   Q_UNUSED(oldField_)
   sourceModel()->modifyFields(Data::FieldList() << newField_);
-  updateHeaderMenu();
 }
 
 void DetailedListView::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr field_) {
   sourceModel()->removeFields(Data::FieldList() << field_);
-  updateHeaderMenu();
 }
 
 void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
   sourceModel()->setFields(fields_);
-  updateHeaderMenu();
 }
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
