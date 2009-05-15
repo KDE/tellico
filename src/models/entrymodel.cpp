@@ -51,7 +51,7 @@ int EntryModel::columnCount(const QModelIndex&) const {
 }
 
 QVariant EntryModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
-  if(section_ >= m_fields.count() || orientation_ != Qt::Horizontal || role_ != Qt::DisplayRole) {
+  if(section < 0 || section_ >= m_fields.count() || orientation_ != Qt::Horizontal || role_ != Qt::DisplayRole) {
     return QVariant();
   }
   return m_fields.at(section_)->title();

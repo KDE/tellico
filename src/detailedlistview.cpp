@@ -112,6 +112,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   if(!coll_) {
     return;
   }
+  DEBUG_BLOCK;
 
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KGlobal::config(), configGroup);
@@ -130,8 +131,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
 
   sourceModel()->setImagesAreAvailable(false);
   sourceModel()->setFields(coll_->fields());
-
-  setUpdatesEnabled(false);
 
   QByteArray state = QByteArray::fromBase64(config.readEntry(QLatin1String("ColumnState") + configN).toAscii());
   if(!state.isEmpty()) {
@@ -165,7 +164,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   // just a sanity check, in the past, a zero-width column meant a hidden column
   // that's no longer true, so don't allow zero-width columns
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
-    if(!isColumnHidden(ncol) && columnWidth(ncol) == 0) {
+    if(!isColumnHidden(ncol) && columnWidth(ncol) <= 0) {
       resizeColumnToContents(ncol);
     }
   }
@@ -173,15 +172,15 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
   sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
 
+  setUpdatesEnabled(false);
   m_loadingCollection = true;
   addEntries(coll_->entries());
   m_loadingCollection = false;
+  setUpdatesEnabled(true);
 
+  sortModel()->invalidate();
   // must be after adding fields and entries
   updateHeaderMenu();
-
-  setUpdatesEnabled(true);
-  sortModel()->invalidate();
 }
 
 void DetailedListView::slotReset() {
@@ -460,9 +459,7 @@ void DetailedListView::resetEntryStatus() {
 void DetailedListView::updateHeaderMenu() {
   m_headerMenu->clear();
   m_headerMenu->addTitle(i18n("View Columns"));
-  const int ncols = header()->count();
-//  const int ncols = model()->columnCount();
-  for(int ncol = 0; ncol < ncols; ++ncol) {
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
     QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
     act->setData(ncol);
     act->setCheckable(true);
