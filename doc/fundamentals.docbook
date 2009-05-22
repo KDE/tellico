@@ -123,7 +123,7 @@ on an entry item has an option for modifying the loan using the &loan-dialog;.
 A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>, along with custom colors and fonts.</para>
 
 <para>All of the default templates honor the color and font selection, but other custom templates might now.
-The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &html;, the current template is used for exporting the individual entry files.
+The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &HTML;, the current template is used for exporting the individual entry files.
 </para>
 
 <para>
@@ -184,7 +184,7 @@ The edit widget also supports drag-and-drop. Dragging an image file from a file-
 
 <warning>
 <para>
-By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, either in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> directory or in a directory in the same location as the data file. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
+By default, the images are stored in the collection data file, keeping everything contained in one location. However, too many images will cause &appname; to slow down significantly as well result in a very large data file. Alternatively, &appname; can save the images separately, either in the <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/data/</filename> folder or in a folder in the same location as the data file. Loading and saving data files is much faster if images are stored separately, but the data files are no longer portable or archivable.
 Self-contained data files can always be created by using the <menuchoice><guimenu>File</guimenu><guimenu>Export</guimenu><guimenuitem>Export to Zip...</guimenuitem></menuchoice> menu item.
 </para>
 </warning>
@@ -287,7 +287,7 @@ New fields may be any type, but changing the type of existing fields is restrict
 <tbody>
 <row>
 <entry><emphasis>Simple Text</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>URL</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>&URL;</emphasis>, <emphasis>Table</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Paragraph</emphasis></entry>
@@ -295,19 +295,19 @@ New fields may be any type, but changing the type of existing fields is restrict
 </row>
 <row>
 <entry><emphasis>Choice</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Choice</emphasis>, <emphasis>Number</emphasis>, <emphasis>URL</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Choice</emphasis>, <emphasis>Number</emphasis>, <emphasis>&URL;</emphasis>, <emphasis>Table</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Checkbox</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Checkbox</emphasis>, <emphasis>Number</emphasis>, <emphasis>URL</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Checkbox</emphasis>, <emphasis>Number</emphasis>, <emphasis>&URL;</emphasis>, <emphasis>Table</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Number</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>URL</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>&URL;</emphasis>, <emphasis>Table</emphasis></entry>
 </row>
 <row>
-<entry><emphasis>URL</emphasis></entry>
-<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>URL</emphasis>, <emphasis>Table</emphasis></entry>
+<entry><emphasis>&URL;</emphasis></entry>
+<entry><emphasis>Simple Text</emphasis>, <emphasis>Paragraph</emphasis>, <emphasis>Number</emphasis>, <emphasis>&URL;</emphasis>, <emphasis>Table</emphasis></entry>
 </row>
 <row>
 <entry><emphasis>Date</emphasis></entry>
@@ -440,11 +440,11 @@ button, set the first rule to <emphasis>Author contains Bujold</emphasis> and th
 <sect1 id="report-dialog">
 <title>Generating Reports</title>
 <para>
-&appname; can generate various reports about your current collection. The &report-dialog; checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they're automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
+&appname; can generate various reports about your current collection. The &report-dialog; checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
 </para>
 
 <para>
-The templates that are installed with &appname; include a list of titles only, the default column view, a group view, a summary of all of the groups and the most popular values in those groups, a loan report, and a large report with cover images. Select the desired template and click the <guibutton>Generate</guibutton> button. Any report may also be printed or saved to an &html; file.
+The templates that are installed with &appname; include a list of titles only, the default column view, a group view, a summary of all of the groups and the most popular values in those groups, a loan report, and a large report with cover images. Select the desired template and click the <guibutton>Generate</guibutton> button. Any report may also be printed or saved to an &HTML; file.
 </para>
 
 <screenshot>
@@ -557,7 +557,7 @@ to be sorted or printed together, for example.
 
 <tip>
 <para>You can modify the appearance of the printed output by modifying
-the <filename>tellico-printing.xsl</filename> file. The file generates &html;, and the &css;
+the <filename>tellico-printing.xsl</filename> file. The file generates &HTML;, and the &CSS;
 within the stylesheet governs things like the font, the margins, etc.
 </para>
 </tip>
@@ -568,7 +568,7 @@ within the stylesheet governs things like the font, the margins, etc.
 </tip>
 
 <tip>
-<para>You can add &html; tags to any <link linkend="para"><emphasis>Paragraph</emphasis></link> field for formatting, such as
+<para>You can add &HTML; tags to any <link linkend="para"><emphasis>Paragraph</emphasis></link> field for formatting, such as
 &lt;b&gt;<emphasis role="bold">bold</emphasis>&lt;/b&gt; or &lt;i&gt;<emphasis>italic</emphasis>&lt;/i&gt;.
 </para>
 </tip>
@@ -584,7 +584,7 @@ keyboard to skip to the next entry that starts with that letter.
 into a single field. Just select the type Dependent and use a description
 similar to "<userinput>Value: %{fielda}%{fieldb}</userinput>" where %{...} gets replaced with the
 appropriate field value. This is useful to collect multiple values in a
-single field, e.g. for better grouping, and to combine fields of different
+single field, &eg; for better grouping, and to combine fields of different
 types by respecting proper sorting at the same time. Consider for example
 a number field followed by a text subfield with entries 3b, 14a.
 </para>

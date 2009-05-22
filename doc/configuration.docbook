@@ -80,7 +80,7 @@ changed back and forth without affecting any of the data in the collection.</par
 <title><guilabel>Printing Options</guilabel></title>
 
 <para>
-&appname; uses an &xslt; template for creating &html;
+&appname; uses an &xslt; template for creating &HTML;
 and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view">&detailed-view;</link> are printed. Furthermore, if the collection
 is being filtered, only the visible entries will be printed. Initially, a warning message
 is shown if filtering is active.
@@ -283,7 +283,7 @@ Some servers require a username and password for access. &appname; can use and s
 <title>SRU Servers</title>
 
 <para>
-SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via URL</ulink> and is a standard search protocol for
+SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
 Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
 the best known.
 </para>
@@ -360,14 +360,14 @@ As an easier way for &appname; to integrate with third-party plugins, external s
 
 <para>
 The collection type returned by the script must be set, along with the data format. Not only can &appname; import data from scripts that
-use the <link linkend="file-format">default &appname; &xml; format</link>, but it can also import other formats as well, such as bibtex.
+use the <link linkend="file-format">default &appname; &XML; format</link>, but it can also import other formats as well, such as bibtex.
 </para>
 
 <para>The full path to the application should be entered in the source options. Be aware that the application is executed on the system with the same permissions as the current user, so do not use scripts from untrusted sources. Check the boxes next to the search keys supported by the application, and enter the required command line options in the edit box. The search value will be inserted where <userinput>%1</userinput> appears.
 </para>
 
 <para>
-For updating entries already in the collection, the final checkbox and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <emphasis><link linkend="dependent">Dependent</link></emphasis> fields.
+For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <emphasis><link linkend="dependent">Dependent</link></emphasis> fields.
 </para>
 </sect2>
 

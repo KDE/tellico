@@ -2,18 +2,18 @@
 <title>Hacking &appname;</title>
 
 <para>
-In the spirit of Free Software, you're welcome to hack on &appname; as much as you like. You should be able to write scripts to import, export, or modify data very easily. This chapter gives you more information about doing that.
+In the spirit of Free Software, you are welcome to hack on &appname; as much as you like. You should be able to write scripts to import, export, or modify data very easily. This chapter gives you more information about doing that.
 </para>
 
 <sect1 id="file-format">
 <title>File Format</title>
 
 <para>
-The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> directory in the archive, or they may be included in the &xml; data directly in a base64 encoding. Images may also be saved inside the application data directory, in which case, they are not in the data file at all. &appname; can also load the &xml; file, by itself, uncompressed.
+The default &appname; data file is a zip archive, normally with a <literal role="extension">.tc</literal> file extension. Inside the archive is a top-level <filename>tellico.xml</filename> file. Images may be included inside the <filename>images/</filename> folder in the archive, or they may be included in the &XML; data directly in a base64 encoding. Images may also be saved inside the application data folder, in which case, they are not in the data file at all. &appname; can also load the &XML; file, by itself, uncompressed.
 </para>
 
 <sect2 id="xml-format">
-<title>&xml; Data</title>
+<title>&XML; Data</title>
 
 <para>
 </para>
@@ -32,7 +32,7 @@ The default &appname; data file is a zip archive, normally with a <literal role=
 </programlisting>
 
 <para>
-The file begins with the required &xml; declaration and encoding, followed by the doctype. When a new field type is added or additional properties are set on the default fields, the doctype DTD version is incremented. &appname; is always able to open and read any previous DTD version, but will save files in the current version. The DTD location does point to an actual DTD file.
+The file begins with the required &XML; declaration and encoding, followed by the doctype. When a new field type is added or additional properties are set on the default fields, the doctype DTD version is incremented. &appname; is always able to open and read any previous DTD version, but will save files in the current version. The DTD location does point to an actual DTD file.
 </para>
 
 <para>
@@ -106,7 +106,7 @@ For every field in the collection, an <markup>&lt;entry&gt;</markup> may contain
 </para>
 
 <para>
-As a result, if additional fields are added to the collection, the data file will no longer conform to the DTD. However, &appname; uses a non-validating &xml; parser, so additional fields do not cause problems.
+As a result, if additional fields are added to the collection, the data file will no longer conform to the DTD. However, &appname; uses a non-validating &XML; parser, so additional fields do not cause problems.
 </para>
 </sect3>
 
@@ -121,7 +121,7 @@ As a result, if additional fields are added to the collection, the data file wil
 </programlisting>
 
 <para>
-Inside the <markup>&lt;images&gt;</markup> element, each image referenced by an entry is listed, along with attributes describing the image's size, format, and id. If the image is contained inside the Zip file, the element is empty. Otherwise, the image data may be contained in the &xml; stream as base64-encoded text.
+Inside the <markup>&lt;images&gt;</markup> element, each image referenced by an entry is listed, along with attributes describing the image's size, format, and id. If the image is contained inside the Zip file, the element is empty. Otherwise, the image data may be contained in the &XML; stream as base64-encoded text.
 </para>
 </sect3>
 
@@ -193,7 +193,7 @@ The type of field is given in the type attribute of the field element. The value
 <row><entry>Checkbox</entry><entry>4</entry></row>
 <row><entry><emphasis>ReadOnly</emphasis></entry><entry>5</entry></row>
 <row><entry>Number</entry><entry>6</entry></row>
-<row><entry>URL</entry><entry>7</entry></row>
+<row><entry>&URL;</entry><entry>7</entry></row>
 <row><entry>Single-Column Table</entry><entry>8</entry></row>
 <row><entry>Image</entry><entry>10</entry></row>
 <row><entry>Dependent</entry><entry>11</entry></row>
@@ -355,7 +355,7 @@ When bibtex files are imported or exported, certain characters are translated be
 <title>XSLT Tricks</title>
 
 <para>
-Here are some tips for writing XSLT to parse &appname; &xml; data: (TBD).
+Here are some tips for writing XSLT to parse &appname; &XML; data: (TBD).
 </para>
 </sect1>
 

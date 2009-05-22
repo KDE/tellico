@@ -39,7 +39,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>O</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>O</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Open...</guimenuitem>
@@ -69,7 +69,7 @@ that contains a list of recently opened files.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>S</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>S</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Save...</guimenuitem>
@@ -101,7 +101,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>P</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>P</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Print...</guimenuitem>
@@ -143,7 +143,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>Q</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>Q</keycap></keycombo>
   </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Quit</guimenuitem>
@@ -171,7 +171,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>Z</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>Z</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Undo</guimenuitem>
@@ -187,7 +187,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>&Shift;</keycap><keycap>Z</keycap></keycombo>
+   <keycombo>&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Redo</guimenuitem>
@@ -203,7 +203,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>X</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>X</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Cut</guimenuitem>
@@ -219,7 +219,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>C</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>C</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Copy</guimenuitem>
@@ -235,7 +235,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>V</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>V</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Paste</guimenuitem>
@@ -251,7 +251,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>A</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>A</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Select All</guimenuitem>
@@ -267,7 +267,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>&Shift;</keycap><keycap>A</keycap></keycombo>
+   <keycombo>&Ctrl;&Shift;<keycap>A</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Deselect</guimenuitem>
@@ -282,6 +282,9 @@ modified.</para>
 <varlistentry>
 <term>
  <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>M</keycap></keycombo>
+  </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Internet Search...</guimenuitem>
  </menuchoice>
@@ -296,7 +299,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>J</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>J</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Advanced Filter...</guimenuitem>
@@ -324,7 +327,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>N</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>N</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>New Entry</guimenuitem>
@@ -340,7 +343,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>E</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>E</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Edit Entry</guimenuitem>
@@ -356,7 +359,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>Y</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>Y</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Duplicate Entry</guimenuitem>
@@ -372,7 +375,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>D</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>D</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Delete Entry</guimenuitem>
@@ -428,7 +431,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>R</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>R</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Rename Collection</guimenuitem>
@@ -444,7 +447,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>U</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>U</keycap></keycombo>
   </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Collection Fields...</guimenuitem>
@@ -459,9 +462,6 @@ source and <action>update the selected entries</action>.</para>
 <varlistentry>
 <term>
  <menuchoice>
-  <shortcut>
-   <keycombo><keycap>&Ctrl;</keycap><keycap>U</keycap></keycombo>
-  </shortcut>
   <guimenu>Collection</guimenu>
   <guimenuitem>Generate Reports...</guimenuitem>
  </menuchoice>
@@ -694,7 +694,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo><keycap>&Shift;</keycap><keycap>F1</keycap></keycombo>
+   <keycombo>&Shift;<keycap>F1</keycap></keycombo>
   </shortcut>
   <guimenu>Help</guimenu>
   <guimenuitem>What's This?</guimenuitem>

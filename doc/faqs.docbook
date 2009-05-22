@@ -67,9 +67,9 @@ separating each value.</para>
  that to $<envar>KDEHOME</envar>/share/apps/tellico/ for personal modifications.
  You'll have to know <ulink
  url="http://www.w3.org/TR/xslt">&xslt;</ulink>, but modifying that file
- is how you change the printing layout. &html; is generated from the
+ is how you change the printing layout. &HTML; is generated from the
  file, and the easiest way to change the appearance of the printout is
- to modify the CSS in the top portion. Feel free to email me with questions. Any alternate &xslt; printing files will be available on <ulink
+ to modify the &CSS; in the top portion. Feel free to email me with questions. Any alternate &xslt; printing files will be available on <ulink
  url="&homepage;">the &appname; website</ulink>.</para>
  
 <para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy 
@@ -108,14 +108,14 @@ might also want to use
 takes a bit more memory when compiling, but is more efficient when
 running the application.</para>
 
-<para>The last message is slightly different, it just means your Qt
+<para>The last message is slightly different, it just means your &Qt;
  installation was compiled with some debugging information.</para>
 
 <para>Or, if &appname; is already installed, run
 <userinput><command>kdebugdialog</command></userinput> and make sure
 that "0 (generic)" is unchecked. That turns off debug messages from
-all generic KDE apps i.e. those not distributed officially by
-KDE.</para>
+all generic &kde; apps &ie; those not distributed officially by
+&kde;.</para>
 
 </answer>
 </qandaentry>
@@ -172,12 +172,12 @@ fine, but when &appname; starts up, the window is blank. What's
 wrong?</para></question>
 
 <answer>
-<para>KDE programs look for data in the locations defined in the
+<para>&kde; programs look for data in the locations defined in the
  $<envar>KDEDIRS</envar> environmental variable. If you install in
  <filename class="directory">/usr/local</filename> for example, but
  $<envar>KDEDIRS</envar> is empty or just <filename class="directory">/usr</filename>,
  then &appname; won't be able to find the files it needs. This is
- particularly true for SuSE, for which you should compile with
+ particularly true for &SuSE;, for which you should compile with
  <userinput><option>--prefix</option>=<filename class="directory">/opt/kde3</filename></userinput>. Alternatively,
  you could add a line to your <filename>.profile</filename> file to
  set $<envar>KDEDIRS</envar>. Check the documentation for your

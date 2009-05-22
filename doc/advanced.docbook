@@ -61,11 +61,11 @@ bool showEntry(long int id)
 </programlisting>
 
 <para>
-For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis>replace</emphasis>, <emphasis>append</emphasis>, and <emphasis>merge</emphasis>. Four file formats are supported for importing: Tellico XML files, Bibtex files, MODS files, and RIS files.
+For the four import commands, the first argument is the file to import, and the second is the import action. Three actions are available: <emphasis>replace</emphasis>, <emphasis>append</emphasis>, and <emphasis>merge</emphasis>. Four file formats are supported for importing: Tellico &XML; files, Bibtex files, MODS files, and RIS files.
 </para>
 
 <para>
-The current open collection in &appname; may be exported to a file, in either Tellico XML format, Tellico ZIP format, Bibtex, HTML, comma-separated values (CSV), or the PilotDB format.
+The current open collection in &appname; may be exported to a file, in either Tellico &XML; format, Tellico ZIP format, Bibtex, &HTML;, comma-separated values (CSV), or the PilotDB format.
 </para>
 
 <para>A list of the entry IDs currently selected or being filtered is able to facilitate showing or updating entries in the view.</para>

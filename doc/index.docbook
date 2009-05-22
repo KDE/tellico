@@ -9,11 +9,8 @@
   <!ENTITY email "robby@periapsis.org">
   <!ENTITY homepage "http://www.periapsis.org/tellico/">
   <!ENTITY maillist "http://forge.novell.com/mailman/listinfo/tellico-users">
-  <!ENTITY xml "<acronym>XML</acronym>">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
-  <!ENTITY html "<acronym>HTML</acronym>">
-  <!ENTITY css "<acronym>CSS</acronym>">
-
+<!-- remove these entities (*-view, *-dialog, *-editor, *-filter) to make the documentation translatable-->
   <!ENTITY group-view "<interface>Group View</interface>">
   <!ENTITY detailed-view "<interface>Column View</interface>">
   <!ENTITY entry-view "<interface>Entry View</interface>">

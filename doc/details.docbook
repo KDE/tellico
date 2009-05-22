@@ -518,7 +518,7 @@ Board game collections have 15 default fields.
 <para>
 File catalogs have 13 default fields.
 <emphasis>Name</emphasis>,
-<emphasis>URL</emphasis>,
+<emphasis>&URL;</emphasis>,
 <emphasis>Description</emphasis>,
 <emphasis>Volume</emphasis>,
 <emphasis>Mimetype</emphasis>,
