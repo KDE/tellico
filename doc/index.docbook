@@ -73,19 +73,13 @@ Do NOT change these in the translation. -->
 <!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
      and in the FDL itself on how to use it. -->
 <legalnotice>
-<para>Permission is granted to copy, distribute and/or modify this
-document under the terms of the &GNU; Free Documentation License,
-Version 1.1 or any later version published by the Free Software
-Foundation; with &FDLInvariantSections;, with &FDLFrontCoverText;, and
-with &FDLBackCoverText;.  A copy of the license is included in
-<xref linkend="gnu-fdl"/>.</para>
+&FDLNotice;
 
 <para>The author of this documentation has also granted you permission to use
 the content under the terms of the <ulink
 url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose.
 See the notice in the <link linkend="gnu-fdl">licensing section</link>.</para>
 </legalnotice>
-<!--<legalnotice>&FDLNotice;</legalnotice>-->
 
 <legalnotice>
 <para>This program is free software; you can redistribute it and/or
@@ -282,21 +276,18 @@ file included in the KDE distribution. -->
 &appname;
 </para>
 <para>
-Program copyright 2001-2008 &robby; <email>&email;</email>
+Program copyright 2001-2009 &robby; <email>&email;</email>
 </para>
 
-&underGPL;        	 <!-- GPL License -->
+&underGPL;
 
 <para>
-Documentation copyright 2001-2008 &robby; <email>&email;</email>
+Documentation copyright 2001-2009 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
-<para id="gnu-fdl" xreflabel="the section entitled &quot;GNU Free Documentation
-License&quot;">This documentation is licensed under the terms of the <ulink
-url="common/fdl-license.html">&GNU; Free Documentation
-License (GFDL)</ulink>.</para>
+&underFDL;
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
 url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
