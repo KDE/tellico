@@ -9,11 +9,11 @@ By default, &appname; starts with an empty book collection. To work with some ot
 </para>
 
 <para>
-New entries can be added by using the <link linkend="entry-editor"><interface>Entry Editor</interface></link>. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the &entry-editor; with an empty entry ready for editing. The &entry-editor; can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show &entry-editor;</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the &entry-editor; dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the &entry-editor; is not already open, you can double click an entry to open the editor and start editing.
+New entries can be added by using the <link linkend="entry-editor"><interface>Entry Editor</interface></link>. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the <interface>Entry Editor</interface> with an empty entry ready for editing. The <interface>Entry Editor</interface> can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show Entry Editor</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the <interface>Entry Editor</interface> dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the <interface>Entry Editor</interface> is not already open, you can double click an entry to open the editor and start editing.
 </para>
 
 <para>
-If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, or you can drag an image from the file manager or web browser into the &entry-editor;.
+If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, or you can drag an image from the file manager or web browser into the <interface>Entry Editor</interface>.
 </para>
 
 <para>
@@ -146,7 +146,7 @@ The status bar is used to show you what &appname; is currently doing. It also in
 <title>Editing Entries</title>
 
 <para>
-The <interface>Entry Editor</interface> is used to add and modify entries in the collection. Double-clicking on an entry in either the <interface>Group View</interface> or the <interface>Column View</interface> opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
+The <interface>Entry Editor</interface> is used to add and modify entries in the collection. Double-clicking on an entry in either the <interface>Group View</interface> or the <interface>Column View</interface> opens the <interface>Entry Editor</interface> with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the <interface>Entry Editor</interface> itself.</para>
 
 <para>
 The arrow buttons on the bottom will move to the previous or next entries in the current list.
@@ -268,7 +268,7 @@ On the left side of the dialog is the list of the current fields. Modified field
 <title>Field Properties</title>
 
 <para>
-A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The <interface>Entry Editor</interface> uses it to prompt for values. The <interface>Column View</interface> uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The <interface>Entry Editor</interface> uses it to prompt for values. The <interface>Column View</interface> uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the <interface>Entry Editor</interface>, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
 </para>
 
 <para>
@@ -440,7 +440,7 @@ button, set the first rule to <emphasis>Author contains Bujold</emphasis> and th
 <sect1 id="report-dialog">
 <title>Generating Reports</title>
 <para>
-&appname; can generate various reports about your current collection. The <interface>Report Dialog</interface> checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
+&appname; can generate various reports about your current collection. The <interface>Report Dialog</interface> checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the <interface>Report Dialog</interface>. Some complex reports may take a while to generate for large collections.
 </para>
 
 <para>

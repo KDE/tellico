@@ -579,7 +579,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show <interface>Group View</interface></guimenuitem>
+  <guimenuitem>Show Group View</guimenuitem>
  </menuchoice>
 </term>
 
@@ -592,7 +592,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show <interface>Entry Editor</interface></guimenuitem>
+  <guimenuitem>Show Entry Editor</guimenuitem>
  </menuchoice>
 </term>
 
@@ -605,7 +605,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show <interface>Entry View</interface></guimenuitem>
+  <guimenuitem>Show Entry View</guimenuitem>
  </menuchoice>
 </term>
 
