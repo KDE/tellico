@@ -11,7 +11,7 @@ changing some of the default behaviour of &appname;.
 Clicking the <guibutton>Apply</guibutton> button <action>causes the changes to
 take effect immediately</action> without closing the dialog, while
 <guibutton>OK</guibutton> <action>applies the changes and closes the dialog</action>. <guibutton>Cancel</guibutton> closes the dialog, but any changes already made
-and applied will remain. The <guibutton>Default</guibutton> button <action>reverts
+and applied will remain. The <guibutton>Defaults</guibutton> button <action>reverts
 the options</action> on the current page of the dialog to their default values,
 while <guibutton>Help</guibutton> <action>opens the &khelpcenter;</action> to
 the relative section of the &appname; manual.
@@ -186,7 +186,7 @@ in the Data Sources Dialog. There are several available types of sources:</para>
 <para>
 New sources may be added by clicking the <guibutton>New...</guibutton> button, while
 existing ones may be modified or deleted, using the <guibutton>Modify...</guibutton> or
-<guibutton>Remove</guibutton> buttons. The order of the sources, which shows up in the
+<guibutton>Delete</guibutton> buttons. The order of the sources, which shows up in the
 entry updating menus, can also be changed.
 </para>
 

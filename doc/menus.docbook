@@ -387,6 +387,23 @@ modified.</para>
 </listitem>
 </varlistentry>
 
+<!-- please check, correct und uncomment then
+<varlistentry>
+<term>
+ <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;<keycap>G</keycap></keycombo>
+  </shortcut>
+  <guimenu>Collection</guimenu>
+  <guimenuitem>Merge Entries</guimenuitem>
+ </menuchoice>
+</term>
+
+<listitem>
+<para>This command <action>merges the selected entries</action>.</para>
+</listitem>
+</varlistentry>
+-->
 <varlistentry>
 <term>
  <menuchoice>
@@ -673,39 +690,15 @@ source and <action>update the selected entries</action>.</para>
 
 <sect2>
 <title>The <guimenu>Help</guimenu> Menu</title>
-<para>
+
+<para>These are the &kde; standard items for the <guimenu>Help</guimenu> menu:</para>
+
+&help.menu.documentation;
+
+<para>Apart from the standard &kde; <guimenu>Help</guimenu> menu items
+described above &appname; has this additional menu entry:</para>
 
 <variablelist>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Help</guimenu>
-  <guimenuitem>&appname; Handbook</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &appname; Handbook</action>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <shortcut>
-   <keycombo>&Shift;<keycap>F1</keycap></keycombo>
-  </shortcut>
-  <guimenu>Help</guimenu>
-  <guimenuitem>What's This?</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>changes the mouse cursor to an arrow with a question mark</action>. Clicking on items in the window will show a small tooltip (if one exists for that item) explaining what the item does.</para>
-</listitem>
-</varlistentry>
-
 <varlistentry>
 <term>
  <menuchoice>
@@ -719,49 +712,8 @@ source and <action>update the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Help</guimenu>
-  <guimenuitem>Report Bug...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>open the Submit Bug Report dialog</action>. If you find
-a bug or a problem, if you have a suggestion for improvement, or a translation correction, use this interface to send the author an email.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Help</guimenu>
-  <guimenuitem>About &appname;</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the About &appname; dialog</action>, showing version and author information for the application.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Help</guimenu>
-  <guimenuitem>About &kde;</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the About &kde; dialog</action>, showing the &kde; version and other information about the desktop environment.</para>
-</listitem>
-</varlistentry>
-
 </variablelist>
 
-</para>
 </sect2>
 
 </sect1>
