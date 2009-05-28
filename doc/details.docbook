@@ -48,15 +48,15 @@ interpreted relative to the location of the data file, once it has been saved.
 </para>
 
 <para>
-In the <link linkend="entry-editor">&entry-editor;</link>,
-the label becomes the link, while in the <link linkend="entry-view">&entry-view;</link>, an actual
+In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>,
+the label becomes the link, while in the <link linkend="entry-view"><interface>Entry View</interface></link>, an actual
 hyperlink is used. This field type is convenient for linking to <acronym>PDF</acronym>
 files of bibliographic entries, or to movie reviews, for example. No
 formatting is ever applied.</para>
 
 <para>
 Relative &URL;s may also be used. They are interpreted relative to the location of the
-&appname; data file. In the <link linkend="entry-editor">&entry-editor;</link>, the line
+&appname; data file. In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, the line
 edit provides auto-completion for local file locations. If you want the &URL; from the &kde;
 File Selector Dialog Box to be interpreted relative to the document location, then an extended
 property for the &URL; field should be set to <emphasis>relative</emphasis> : <emphasis>true</emphasis>.
@@ -118,7 +118,7 @@ A <emphasis>Date</emphasis> field can include a day, month, and year. The date i
 
 <para>
 <emphasis>Table</emphasis> fields hold a one or more columns of values.
-In the <link linkend="entry-editor">&entry-editor;</link>, the field is presented using a
+In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, the field is presented using a
 spreadsheet-like view, with numbered rows. When the last row is selected, an additional
 row is then added.  Auto-completion is not available.
 This field is useful for a list of chapters in a book, scenes in a movie, or songs in an album.
@@ -132,7 +132,7 @@ on the header, or by setting a field property named <emphasis>column1</emphasis>
 </para>
 
 <para>
-When using the &entry-editor; for <emphasis>Table</emphasis> fields, rows may be rearranged by dragging
+When using the <interface>Entry Editor</interface> for <emphasis>Table</emphasis> fields, rows may be rearranged by dragging
 the mouse while holding the &Ctrl; button. A popup menu is also available by right-clicking on the table,
 which allows rows to be inserted or removed.
 </para>
@@ -158,7 +158,7 @@ file available locally. Images can also be dragged from a file manager or browse
 <para>
 <emphasis>Rating</emphasis> fields show a number of stars to represent a numerical rating
 for an entry. By default, the rating is a maximum of five. The minimum and maximum may be
-changed by setting properties in the field definition in the &fields-dialog;, named
+changed by setting properties in the field definition in the <interface>Collection Fields Dialog</interface>, named
 <emphasis>minimum</emphasis> and <emphasis>maximum</emphasis>, respectively.
 </para>
 
@@ -185,7 +185,7 @@ The entry ID is also available using <userinput>%{id}</userinput>.
 <title>Collection Types</title>
 
 <para>
-&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view">&group-view;</link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view"><interface>Group View</interface></link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
 </para>
 
 <para>

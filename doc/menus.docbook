@@ -109,7 +109,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>prints the collection</action>. Printing options may be set in the &config-dialog;.</para>
+<para>This command <action>prints the collection</action>. Printing options may be set in the <interface>Configuration Dialog</interface>.</para>
 </listitem>
 </varlistentry>
 
@@ -259,7 +259,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>selects all the entries</action> in the collection, in the &detailed-view;.</para>
+<para>This command <action>selects all the entries</action> in the collection, in the <interface>Column View</interface>.</para>
 </listitem>
 </varlistentry>
 
@@ -291,7 +291,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &fields-dialog;</action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
+<para>This command <action>opens the <interface>Collection Fields Dialog</interface></action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
 </listitem>
 </varlistentry>
 
@@ -307,7 +307,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &filter-dialog;</action>.</para>
+<para>This command <action>opens the <interface>Advanced Filter Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -335,7 +335,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &entry-editor; to edit a new entry</action>.</para>
+<para>This command <action>opens the <interface>Entry Editor</interface> to edit a new entry</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -351,7 +351,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &entry-editor; to edit the selected entries</action>.</para>
+<para>This command <action>opens the <interface>Entry Editor</interface> to edit the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -455,7 +455,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &fields-dialog;</action>.</para>
+<para>This command <action>opens the <interface>Collection Fields Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -468,7 +468,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &report-dialog;</action> for generating reports about the collection.</para>
+<para>This command <action>opens the <interface>Report Dialog</interface></action> for generating reports about the collection.</para>
 </listitem>
 </varlistentry>
 
@@ -579,12 +579,12 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show &group-view;</guimenuitem>
+  <guimenuitem>Show <interface>Group View</interface></guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>toggles the display of the &group-view;</action>.</para>
+<para>This command <action>toggles the display of the <interface>Group View</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -592,12 +592,12 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show &entry-editor;</guimenuitem>
+  <guimenuitem>Show <interface>Entry Editor</interface></guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>toggles the display of the &entry-editor;</action>.</para>
+<para>This command <action>toggles the display of the <interface>Entry Editor</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -605,12 +605,12 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show &entry-view;</guimenuitem>
+  <guimenuitem>Show <interface>Entry View</interface></guimenuitem>
  </menuchoice>
 </term>
 
 <listitem>
-<para>This command <action>toggles the display of the &entry-view;</action>.</para>
+<para>This command <action>toggles the display of the <interface>Entry View</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -636,7 +636,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &kde; &shortcut-dialog;</action>.</para>
+<para>This command <action>opens the &kde; <interface>Keyboard Shortcut Configuration Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -649,7 +649,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &kde; &toolbar-dialog;</action>.</para>
+<para>This command <action>opens the &kde; <interface>Toolbar Configuration Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 
@@ -662,7 +662,7 @@ source and <action>update the selected entries</action>.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the &appname; &config-dialog;</action>.</para>
+<para>This command <action>opens the &appname; <interface>Configuration Dialog</interface></action>.</para>
 </listitem>
 </varlistentry>
 

@@ -8,7 +8,7 @@
 <sect1 id="internet-search">
 <title>Importing from the Internet</title>
 <para>
-&appname; is able to search various Internet sites using the &fetch-dialog;. Entries may be directly imported and added to your current collection. The various providers are configured via the <link linkend="data-sources-options">Data Sources Options</link>.
+&appname; is able to search various Internet sites using the <interface>Internet Search Dialog</interface>. Entries may be directly imported and added to your current collection. The various providers are configured via the <link linkend="data-sources-options">Data Sources Options</link>.
 </para>
 
 <para>
@@ -18,10 +18,10 @@ Searches may use five different criteria: <guilabel>Title</guilabel>, <guilabel>
 </para>
 
 <screenshot>
-<screeninfo>The &appname; &fetch-dialog;</screeninfo>
+<screeninfo>The &appname; <interface>Internet Search Dialog</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fetch-dialog.png"/></imageobject>
-<textobject><phrase>The &appname; &fetch-dialog;</phrase></textobject>
+<textobject><phrase>The &appname; <interface>Internet Search Dialog</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -74,7 +74,7 @@ First, select the type of collection that you are importing. If you are appendin
 </para>
 
 <para>
-In order for &appname; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the drop down box and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the drop down box opens the  <link linkend="fields-dialog">&fields-dialog;</link>.
+In order for &appname; to properly import the file, it must know which field corresponds to each column. <emphasis>If the column only has a number in the header, the data in that column will not be imported.</emphasis> You should assign fields to each column by selecting a column, either by clicking in it or changing the column number itself, then selecting the field to assign from the drop down box and clicking the <guibutton>Assign Field</guibutton> button. If you need to add a new field to the collection, the last item in the drop down box opens the  <link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link>.
 </para>
 
 <para>
@@ -282,11 +282,11 @@ The &HTML; export uses the <filename>tellico2html.xsl</filename> stylesheet. Ima
 </para>
 
 <para>
-The default format is similar to the printed output, and allows various options for modifying the &HTML;. Field headers may be printed at the top of each column, but unfortunately, &kde; does not yet allow the table headers to be repeated on each page. The entries may be grouped as in the &group-view;, as well.
+The default format is similar to the printed output, and allows various options for modifying the &HTML;. Field headers may be printed at the top of each column, but unfortunately, &kde; does not yet allow the table headers to be repeated on each page. The entries may be grouped as in the <interface>Group View</interface>, as well.
 </para>
 
 <para>
-Additionally, individual files may be created for each entry in the collection, with links created in the top-level &HTML; file. The entry files will be created in the same folder as the images. The entry &HTML; files will use the current stylesheet template, as shown in the &entry-view;.
+Additionally, individual files may be created for each entry in the collection, with links created in the top-level &HTML; file. The entry files will be created in the same folder as the images. The entry &HTML; files will use the current stylesheet template, as shown in the <interface>Entry View</interface>.
 </para>
 
 <screenshot>

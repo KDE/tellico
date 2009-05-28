@@ -10,24 +10,6 @@
   <!ENTITY homepage "http://www.periapsis.org/tellico/">
   <!ENTITY maillist "http://forge.novell.com/mailman/listinfo/tellico-users">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
-<!-- remove these entities (*-view, *-dialog, *-editor, *-filter) to make the documentation translatable-->
-  <!ENTITY group-view "<interface>Group View</interface>">
-  <!ENTITY detailed-view "<interface>Column View</interface>">
-  <!ENTITY entry-view "<interface>Entry View</interface>">
-  <!ENTITY entry-editor "<interface>Entry Editor</interface>">
-  <!ENTITY icon-view "<interface>Icon View</interface>">
-  <!ENTITY fields-dialog "<interface>Collection Fields Dialog</interface>">
-  <!ENTITY fetch-dialog "<interface>Internet Search Dialog</interface>">
-  <!ENTITY config-dialog "<interface>Configuration Dialog</interface>">
-  <!ENTITY find-dialog "<interface>Find Dialog</interface>">
-  <!ENTITY quick-filter "<interface>Quick Filter</interface>">
-  <!ENTITY filter-dialog "<interface>Advanced Filter Dialog</interface>">
-  <!ENTITY loan-dialog "<interface>Loan Dialog</interface>">
-  <!ENTITY report-dialog "<interface>Report Dialog</interface>">
-  <!ENTITY shortcut-dialog "<interface>Keyboard Shortcut Configuration Dialog</interface>">
-  <!ENTITY toolbar-dialog "<interface>Toolbar Configuration Dialog</interface>">
-  <!ENTITY filter-view "<interface>Filter View</interface>">
-  <!ENTITY loan-view "<interface>Loan View</interface>">
 
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
   <!ENTITY importing-exporting-chapter SYSTEM "importing-exporting.docbook">
@@ -83,6 +65,7 @@ Do NOT change these in the translation. -->
 <year>2006</year>
 <year>2007</year>
 <year>2008</year>
+<year>2009</year>
 <holder>&robby;</holder>
 </copyright>
 
@@ -106,8 +89,12 @@ See the notice in the <link linkend="gnu-fdl">licensing section</link>.</para>
 
 <legalnotice>
 <para>This program is free software; you can redistribute it and/or
-modify it under the terms of version 2 of the &GNU; General Public
-License as published by the Free Software Foundation.</para>
+modify it under the terms of the &GNU; General Public
+License as published by the Free Software Foundation; either version 2 of
+the License or (at your option) version 3 or any later version
+accepted by the membership of KDE e.V. (or its successor approved
+by the membership of KDE e.V.), which shall act as a proxy
+defined in Section 14 of version 3 of the license. </para>
 
 <para>This program is distributed in the hope that it will be
 useful, but WITHOUT ANY WARRANTY; without even the implied warranty
@@ -141,6 +128,7 @@ Please at least include KDE, the KDE package it is in, the name
 <keyword>collection</keyword>
 <keyword>database</keyword>
 <keyword>catalog</keyword>
+<keyword>extragear</keyword>
 </keywordset>
 
 </bookinfo>

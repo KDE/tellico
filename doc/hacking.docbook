@@ -254,7 +254,7 @@ The format of the field is given in the format attribute on the field element. <
 <title>Hidden Configuration Options</title>
 
 <para>
-&appname; has some additional configuration options that are not visible in the &config-dialog;. They are not important enough to warrant cluttering the dialog with more settings, but as they represent options which may appeal to various users, the application does read them from the configuration file.
+&appname; has some additional configuration options that are not visible in the <interface>Configuration Dialog</interface>. They are not important enough to warrant cluttering the dialog with more settings, but as they represent options which may appeal to various users, the application does read them from the configuration file.
 </para>
 
 <para>
@@ -272,7 +272,7 @@ These settings should be placed in the <emphasis>General Options</emphasis> grou
 <title>Max Icon Size</title>
 
 <para>
-The maximum size of the icons in the &icon-view; may be changed with this setting. The default value is 96. The size must be in the range of 32 to 128.
+The maximum size of the icons in the <interface>Icon View</interface> may be changed with this setting. The default value is 96. The size must be in the range of 32 to 128.
 </para>
 </sect3>
 

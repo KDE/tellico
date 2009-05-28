@@ -81,7 +81,7 @@ changed back and forth without affecting any of the data in the collection.</par
 
 <para>
 &appname; uses an &xslt; template for creating &HTML;
-and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view">&detailed-view;</link> are printed. Furthermore, if the collection
+and then passes that to the &kde; printing service. Only the fields visible in the <link linkend="detailed-view"><interface>Column View</interface></link> are printed. Furthermore, if the collection
 is being filtered, only the visible entries will be printed. Initially, a warning message
 is shown if filtering is active.
 </para>
@@ -108,7 +108,7 @@ at the top of the column.
 </para>
 
 <para>
-In the printout, the entries will be sorted as they are in the <link linkend="detailed-view">&detailed-view;</link>. Additionally, they may be grouped as they are in the <link linkend="group-view">&group-view;</link>.
+In the printout, the entries will be sorted as they are in the <link linkend="detailed-view"><interface>Column View</interface></link>. Additionally, they may be grouped as they are in the <link linkend="group-view"><interface>Group View</interface></link>.
 </para>
 
 <para>
@@ -122,11 +122,11 @@ largest possible size of the image, though it will never be increased.
 <title><guilabel>Template Options</guilabel></title>
 
 <para>
-The <link linkend="entry-view">&entry-view;</link> uses templates to show the field
+The <link linkend="entry-view"><interface>Entry View</interface></link> uses templates to show the field
 values. You can specify a different template for each collection type. Some templates,
 such as the <emphasis>Album</emphasis> or <emphasis>Video</emphasis> templates are
 for a specific collection type, and a short error message will appear in the
-&entry-view; if they are used for other types. The
+<interface>Entry View</interface> if they are used for other types. The
 <guilabel>Preview</guilabel> button pops up a window to show you a preview of what the template looks like.
 Custom fonts and colors may be passed to the template, and all of the default templates
 will honor those settings. However, custom template may choose to ignore them.</para>

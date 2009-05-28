@@ -9,15 +9,15 @@ By default, &appname; starts with an empty book collection. To work with some ot
 </para>
 
 <para>
-New entries can be added by using the <link linkend="entry-editor">&entry-editor;</link>. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the &entry-editor; with an empty entry ready for editing. The &entry-editor; can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show &entry-editor;</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the &entry-editor; dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the &entry-editor; is not already open, you can double click an entry to open the editor and start editing.
+New entries can be added by using the <link linkend="entry-editor"><interface>Entry Editor</interface></link>. The <menuchoice><guimenu>Collection</guimenu><guimenuitem>New Entry</guimenuitem></menuchoice> menu item will open the &entry-editor; with an empty entry ready for editing. The &entry-editor; can also be opened by using the  <menuchoice><guimenu>Settings</guimenu><guimenuitem>Show &entry-editor;</guimenuitem></menuchoice> menu item. Once you've entered the values for the entry, you can save it to the collection by using the <guibutton>Save Entry</guibutton> button in the &entry-editor; dialog, which remains open in case you want to continue adding new entries. Once you've saved an entry in the collection, you can modify it by clicking on it in the main window. If the &entry-editor; is not already open, you can double click an entry to open the editor and start editing.
 </para>
 
 <para>
-If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the <link linkend="entry-editor">&entry-editor;</link>, or you can drag an image from the file manager or web browser into the &entry-editor;.
+If you want to include an image in the entry, you can use the standard &kde; File Selector by clicking the <guibutton>Select Image...</guibutton> button in the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, or you can drag an image from the file manager or web browser into the &entry-editor;.
 </para>
 
 <para>
-When you select an entry, the <link linkend="entry-view">&entry-view;</link> shows a formatted view of the entry's contents. You can change the template used for showing the entry in the <link linkend="configuration">&config-dialog;</link>.
+When you select an entry, the <link linkend="entry-view"><interface>Entry View</interface></link> shows a formatted view of the entry's contents. You can change the template used for showing the entry in the <link linkend="configuration"><interface>Configuration Dialog</interface></link>.
 </para>
 
 <para>
@@ -25,7 +25,7 @@ The entries in the collection are grouped together when they share the same valu
 </para>
 
 <para>
-You can use the &quick-filter; in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view">&detailed-view;</link> will only show the entries that match the filter. The status bar shows you how many entries are in the collection, and how many are currently being filtered.
+You can use the <interface>Quick Filter</interface> in the toolbar to quickly limit the visible entries to ones which contain the word you type. The filter is also useful when you want to quickly find an entry. You can type in the title or some other unique word that identifies the entry and the <link linkend="detailed-view"><interface>Column View</interface></link> will only show the entries that match the filter. The status bar shows you how many entries are in the collection, and how many are currently being filtered.
 </para>
 
 </sect1>
@@ -35,12 +35,12 @@ You can use the &quick-filter; in the toolbar to quickly limit the visible entri
 
 <para>
 The main window has three distinct areas, all of which show information about the collection
-in a different manner. The primary view is the <link linkend="detailed-view">&detailed-view;</link> in
+in a different manner. The primary view is the <link linkend="detailed-view"><interface>Column View</interface></link> in
 the upper right area, where the value of every field for each entry may be shown. On the left side, tabs
-hold the <link linkend="group-view">&group-view;</link>, which can be used to sort the entries into groups
-in a tree-structure, the <link linkend="filter-view">&filter-view;</link>, which is used to track which
-entries meet certain criteria, and the <link linkend="loan-view">&loan-view;</link>, where any loans are
-listed. Finally, the <link linkend="entry-view">&entry-view;</link> shows a formatted view
+hold the <link linkend="group-view"><interface>Group View</interface></link>, which can be used to sort the entries into groups
+in a tree-structure, the <link linkend="filter-view"><interface>Filter View</interface></link>, which is used to track which
+entries meet certain criteria, and the <link linkend="loan-view"><interface>Loan View</interface></link>, where any loans are
+listed. Finally, the <link linkend="entry-view"><interface>Entry View</interface></link> shows a formatted view
 of the data for a single entry, or an icon view of a group of entries, in the lower right.
 </para>
 
@@ -53,19 +53,19 @@ of the data for a single entry, or an icon view of a group of entries, in the lo
 </screenshot>
 
 <sect2 id="detailed-view">
-<title>&detailed-view;</title>
+<title><interface>Column View</interface></title>
 
 <para>
-Any of the fields in the collections may be shown in the &detailed-view;, although <emphasis><link linkend="para">Paragraph</link></emphasis>, <emphasis><link linkend="image">Image</link></emphasis>, and <emphasis><link linkend="table">Table</link></emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
+Any of the fields in the collections may be shown in the <interface>Column View</interface>, although <emphasis><link linkend="para">Paragraph</link></emphasis>, <emphasis><link linkend="image">Image</link></emphasis>, and <emphasis><link linkend="table">Table</link></emphasis> fields will probably not be useful. Right-clicking on the header of the view opens a menu for selecting the visible fields. The columns may be resized and reordered in any way, and the settings will be saved between sessions.
 </para>
 </sect2>
 
 <sect2 id="group-view">
-<title>&group-view;</title>
+<title><interface>Group View</interface></title>
 
 <para>
-The &group-view; groups the entries in a tree-view by any field which <link linkend="field-options">allows grouping</link>.
-The number of entries in each group is shown next to the group name. Groups may be expanded or collapsed by clicking the plus sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click context menu. The tree may be sorted either by the group name, or by the count, by clicking on the header. A group may also be used as a filter for the <link linkend="detailed-view">&detailed-view;</link>, by right-clicking on the group item.
+The <interface>Group View</interface> groups the entries in a tree-view by any field which <link linkend="field-options">allows grouping</link>.
+The number of entries in each group is shown next to the group name. Groups may be expanded or collapsed by clicking the plus sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click context menu. The tree may be sorted either by the group name, or by the count, by clicking on the header. A group may also be used as a filter for the <link linkend="detailed-view"><interface>Column View</interface></link>, by right-clicking on the group item.
 </para>
 
 <para id="people-group">
@@ -78,56 +78,56 @@ If an entry does not contain a value for the field being used to form the groups
 </sect2>
 
 <sect2 id="filter-view">
-<title>&filter-view;</title>
+<title><interface>Filter View</interface></title>
 
 <para>
-If any filters are saved for the collection, the &filter-view; becomes active. As you add or
+If any filters are saved for the collection, the <interface>Filter View</interface> becomes active. As you add or
 modify entries, they will automatically be checked against the filters and add or removed as
 appropriate. The filter may be modified by double-clicking on the item to open
-the &filter-dialog;. Right-clicking gives you the option to delete it altogether.
+the <interface>Advanced Filter Dialog</interface>. Right-clicking gives you the option to delete it altogether.
 </para>
 
 <screenshot>
-<screeninfo>The &filter-view;</screeninfo>
+<screeninfo>The <interface>Filter View</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="filter-view.png"/></imageobject>
-<textobject><phrase>The &filter-view;</phrase></textobject>
+<textobject><phrase>The <interface>Filter View</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
 </sect2>
 
 <sect2 id="loan-view">
-<title>&loan-view;</title>
+<title><interface>Loan View</interface></title>
 
 <para>
-Once entries are checked-out on loan, the &loan-view; is added to the window, so those
+Once entries are checked-out on loan, the <interface>Loan View</interface> is added to the window, so those
 borrowed entries may be tracked. Loans are tracked on a per-entry bases, so right-clicking
-on an entry item has an option for modifying the loan using the &loan-dialog;.
+on an entry item has an option for modifying the loan using the <interface>Loan Dialog</interface>.
 </para>
 
 <screenshot>
-<screeninfo>The &loan-view;</screeninfo>
+<screeninfo>The <interface>Loan View</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="loan-view.png"/></imageobject>
-<textobject><phrase>The &loan-view;</phrase></textobject>
+<textobject><phrase>The <interface>Loan View</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
 </sect2>
 
 <sect2 id="entry-view">
-<title>&entry-view;</title>
+<title><interface>Entry View</interface></title>
 
 <para>
-A formatted representation of the entry's values is shown in the &entry-view;. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options">&config-dialog;</link>, along with custom colors and fonts.</para>
+A formatted representation of the entry's values is shown in the <interface>Entry View</interface>. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options"><interface>Configuration Dialog</interface></link>, along with custom colors and fonts.</para>
 
 <para>All of the default templates honor the color and font selection, but other custom templates might now.
 The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &HTML;, the current template is used for exporting the individual entry files.
 </para>
 
 <para>
-In addition, when multiple entries are selected, an icon view is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the &detailed-view;. Right-clicking in the icon view will show a menu that changes the sorting criteria for the entries.
+In addition, when multiple entries are selected, an icon view is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the <interface>Column View</interface>. Right-clicking in the icon view will show a menu that changes the sorting criteria for the entries.
 </para>
 
 </sect2>
@@ -146,20 +146,20 @@ The status bar is used to show you what &appname; is currently doing. It also in
 <title>Editing Entries</title>
 
 <para>
-The &entry-editor; is used to add and modify entries in the collection. Double-clicking on an entry in either the &group-view; or the &detailed-view; opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
+The <interface>Entry Editor</interface> is used to add and modify entries in the collection. Double-clicking on an entry in either the <interface>Group View</interface> or the <interface>Column View</interface> opens the &entry-editor; with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the &entry-editor; itself.</para>
 
 <para>
 The arrow buttons on the bottom will move to the previous or next entries in the current list.
 </para>
 
-<para>Closing the &entry-editor; when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog">&fields-dialog;</link>. They may also be reordered.
+<para>Closing the <interface>Entry Editor</interface> when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link>. They may also be reordered.
 </para>
 
 <screenshot>
-<screeninfo>The &entry-editor;</screeninfo>
+<screeninfo>The <interface>Entry Editor</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="entry-editor1.png"/></imageobject>
-<textobject><phrase>The &entry-editor;</phrase></textobject>
+<textobject><phrase>The <interface>Entry Editor</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -168,13 +168,13 @@ Clicking the field title for a <link linkend="url"><emphasis>&URL;</emphasis></l
 </para>
 
 <para>
-For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the &entry-editor;. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. </para>
+For <link linkend="image"><emphasis>Image</emphasis></link> fields, the <guibutton>Select Image...</guibutton> button opens up the &kde; image file selection dialog. The image is saved in the collection in the original format, and a scaled version is shown in the <interface>Entry Editor</interface>. The image may be cleared by using the <guibutton>Clear</guibutton> button. Cleared images are removed from the collection. </para>
 
 <screenshot>
-<screeninfo>The &entry-editor; for <emphasis>Image</emphasis> fields</screeninfo>
+<screeninfo>The <interface>Entry Editor</interface> for <emphasis>Image</emphasis> fields</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="entry-editor3.png"/></imageobject>
-<textobject><phrase>The &entry-editor; for <emphasis>Image</emphasis> fields</phrase></textobject>
+<textobject><phrase>The <interface>Entry Editor</interface> for <emphasis>Image</emphasis> fields</phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -194,17 +194,17 @@ Self-contained data files can always be created by using the <menuchoice><guimen
 </para>
 
 <screenshot>
-<screeninfo>The &entry-editor; for <emphasis>Table</emphasis> fields</screeninfo>
+<screeninfo>The <interface>Entry Editor</interface> for <emphasis>Table</emphasis> fields</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="entry-editor4.png"/></imageobject>
-<textobject><phrase>The &entry-editor; for <emphasis>Table</emphasis> fields</phrase></textobject>
+<textobject><phrase>The <interface>Entry Editor</interface> for <emphasis>Table</emphasis> fields</phrase></textobject>
 </mediaobject>
 </screenshot>
 
 <sect2 id="edit-multiple">
 <title>Editing Multiple Entries</title>
 <para>
-Multiple entries may be edited at the same time by selecting more than one in either the &group-view; or the &detailed-view;. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Check boxes are added to the extreme right for each field entry which control whether the field is enabled or not, as shown in the screenshot below.
+Multiple entries may be edited at the same time by selecting more than one in either the <interface>Group View</interface> or the <interface>Column View</interface>. If multiple entries are selected, the fields which contain the same value in every entry are enabled. If entries have different values, then the fields are disabled. Check boxes are added to the extreme right for each field entry which control whether the field is enabled or not, as shown in the screenshot below.
 </para>
 
 <para>
@@ -212,10 +212,10 @@ Only enabled fields will be modified when the entries are saved, which makes lar
 </para>
 
 <screenshot>
-<screeninfo>The &entry-editor; for multiple entries</screeninfo>
+<screeninfo>The <interface>Entry Editor</interface> for multiple entries</screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="entry-editor5.png"/></imageobject>
-<textobject><phrase>The &entry-editor; for multiple entries</phrase></textobject>
+<textobject><phrase>The <interface>Entry Editor</interface> for multiple entries</phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -245,14 +245,14 @@ The entry updating may be started via the right-click menu for an entry, or by u
 <title>Editing Fields</title>
 
 <para>
-The &fields-dialog; allows you to add new fields to the collection, to modify the existing ones, or to delete fields altogether.
+The <interface>Collection Fields Dialog</interface> allows you to add new fields to the collection, to modify the existing ones, or to delete fields altogether.
 </para>
 
 <screenshot>
-<screeninfo>The &appname; &fields-dialog;</screeninfo>
+<screeninfo>The &appname; <interface>Collection Fields Dialog</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="fields-dialog.png"/></imageobject>
-<textobject><phrase>The &appname; &fields-dialog;</phrase></textobject>
+<textobject><phrase>The &appname; <interface>Collection Fields Dialog</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -260,7 +260,7 @@ The &fields-dialog; allows you to add new fields to the collection, to modify th
 <title>Field List</title>
 
 <para>
-On the left side of the dialog is the list of the current fields. Modified fields are shown in bold italics. The buttons below the list will add or delete a field, and the arrows can be used to change their order. The order of the fields in the list is important because the &entry-editor; uses the order for its layout. For each category, the fields will be laid out from left to right, according to the top-to-bottom order of the fields in the list.
+On the left side of the dialog is the list of the current fields. Modified fields are shown in bold italics. The buttons below the list will add or delete a field, and the arrows can be used to change their order. The order of the fields in the list is important because the <interface>Entry Editor</interface> uses the order for its layout. For each category, the fields will be laid out from left to right, according to the top-to-bottom order of the fields in the list.
 </para>
 </sect2>
 
@@ -268,7 +268,7 @@ On the left side of the dialog is the list of the current fields. Modified field
 <title>Field Properties</title>
 
 <para>
-A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The &entry-editor; uses it to prompt for values. The &detailed-view; uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The <interface>Entry Editor</interface> uses it to prompt for values. The <interface>Column View</interface> uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the &entry-editor;, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
 </para>
 
 <para>
@@ -342,7 +342,7 @@ New fields may be any type, but changing the type of existing fields is restrict
 </para>
 
 <para>
-All automatic formatting can be disabled by changing the global options in the <link linkend="general-options">&config-dialog;</link>. Globally, capitalization is a distinct option from formatting, so a title can be auto-formatted without being capitalized. Not all field types allow auto-formatting.
+All automatic formatting can be disabled by changing the global options in the <link linkend="general-options"><interface>Configuration Dialog</interface></link>. Globally, capitalization is a distinct option from formatting, so a title can be auto-formatted without being capitalized. Not all field types allow auto-formatting.
 </para>
 
 <table>
@@ -380,7 +380,7 @@ All automatic formatting can be disabled by changing the global options in the <
 <title>Field Options</title>
 
 <para>
-Fields also have three general options. If auto-completion is enabled, &appname; caches the values for each field, and the &entry-editor; offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &appname; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry.
+Fields also have three general options. If auto-completion is enabled, &appname; caches the values for each field, and the <interface>Entry Editor</interface> offers automatic completion, using the standard &kde; settings. Not all field types allow auto-completion. &appname; also needs to know if a field may have multiple values or may be used to group the entries. A semi-colon is used to separate multiple values when editing an entry.
 </para>
 
 <para>
@@ -393,17 +393,17 @@ For efficiency, do not enable auto-completion unless you need it for the fields.
 <sect1 id="filter-dialog">
 <title>Filtering Entries</title>
 <para>
-The &filter-dialog; allows you to limit the entries visible in the <link linkend="detailed-view">&detailed-view;</link>
+The <interface>Advanced Filter Dialog</interface> allows you to limit the entries visible in the <link linkend="detailed-view"><interface>Column View</interface></link>
 to those that match one or more filter rules.
 The filter may be used to find the entries that meet all of the rules in the dialog, or just to
-find those that meet any of them. The &filter-dialog; is also useful for advanced searching within a collection.
+find those that meet any of them. The <interface>Advanced Filter Dialog</interface> is also useful for advanced searching within a collection.
 </para>
 
 <screenshot>
-<screeninfo>The &appname; &filter-dialog;</screeninfo>
+<screeninfo>The &appname; <interface>Advanced Filter Dialog</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="filter-dialog.png"/></imageobject>
-<textobject><phrase>The &appname; &filter-dialog;</phrase></textobject>
+<textobject><phrase>The &appname; <interface>Advanced Filter Dialog</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -416,11 +416,11 @@ Up to eight (8) rules may be used in the filter. The <guibutton>More</guibutton>
 </para>
 
 <para>
-Filters may be saved, so that all entries which match are grouped together in the &filter-view;. The view is dynamic, so as entries are added or modified, the group is automatically updated. To save the filter, enter a name in the text box, and click the <guibutton>Save Filter</guibutton> button.
+Filters may be saved, so that all entries which match are grouped together in the <interface>Filter View</interface>. The view is dynamic, so as entries are added or modified, the group is automatically updated. To save the filter, enter a name in the text box, and click the <guibutton>Save Filter</guibutton> button.
 </para>
 
 <para>
-Previously saved filters may be modified by right-clicking on the filter item in the &filter-view; and selecting <guilabel>Modify Filter</guilabel>. The &filter-dialog; is opened, and changes may be made to the filter's name or rules.
+Previously saved filters may be modified by right-clicking on the filter item in the <interface>Filter View</interface> and selecting <guilabel>Modify Filter</guilabel>. The <interface>Advanced Filter Dialog</interface> is opened, and changes may be made to the filter's name or rules.
 </para>
 
 <informalexample>
@@ -440,7 +440,7 @@ button, set the first rule to <emphasis>Author contains Bujold</emphasis> and th
 <sect1 id="report-dialog">
 <title>Generating Reports</title>
 <para>
-&appname; can generate various reports about your current collection. The &report-dialog; checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
+&appname; can generate various reports about your current collection. The <interface>Report Dialog</interface> checks for all &xslt; templates in the installation path and in <filename class="directory">$<envar>KDEHOME</envar>/share/apps/tellico/report-templates/</filename>. So you can create new ones, and they are automatically found and included as options in the &report-dialog;. Some complex reports may take a while to generate for large collections.
 </para>
 
 <para>
@@ -448,22 +448,22 @@ The templates that are installed with &appname; include a list of titles only, t
 </para>
 
 <screenshot>
-<screeninfo>The &appname; &report-dialog;</screeninfo>
+<screeninfo>The &appname; <interface>Report Dialog</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="report-dialog.png"/></imageobject>
-<textobject><phrase>The &appname; &report-dialog;</phrase></textobject>
+<textobject><phrase>The &appname; <interface>Report Dialog</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
 <para>
-The entries included in the report will be limited to the ones in the &detailed-view; so if you've got an active filter, the &report-dialog; will use it.
+The entries included in the report will be limited to the ones in the <interface>Column View</interface> so if you've got an active filter, the <interface>Report Dialog</interface> will use it.
 </para>
 </sect1>
 
 <sect1 id="loan-dialog">
 <title>Loan Tracking</title>
 <para>
-&appname; supports tracking loans of any entries in the collection. The &loan-dialog; may be opened by using the <guilabel>Check-out</guilabel> menu item, or right-clicking on an entry. Multiple entries may be checked-out at once.
+&appname; supports tracking loans of any entries in the collection. The <interface>Loan Dialog</interface> may be opened by using the <guilabel>Check-out</guilabel> menu item, or right-clicking on an entry. Multiple entries may be checked-out at once.
 </para>
 
 <para>
@@ -475,14 +475,14 @@ If a due date is entered, and &appname; is compiled with libkcal support, a loan
 </para>
 
 <para>
-When an entry is checked-out, the <emphasis>Loaned</emphasis> field is set to <emphasis>true</emphasis>. If no loaned field exists in the collection, one is added. Do not modify that field directly! Entries on-loan may be checked-in using the menu item, or right-clicking on an entry in the &loan-view;.
+When an entry is checked-out, the <emphasis>Loaned</emphasis> field is set to <emphasis>true</emphasis>. If no loaned field exists in the collection, one is added. Do not modify that field directly! Entries on-loan may be checked-in using the menu item, or right-clicking on an entry in the <interface>Loan View</interface>.
 </para>
 
 <screenshot>
-<screeninfo>The &appname; &loan-dialog;</screeninfo>
+<screeninfo>The &appname; <interface>Loan Dialog</interface></screeninfo>
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="loan-dialog.png"/></imageobject>
-<textobject><phrase>The &appname; &loan-dialog;</phrase></textobject>
+<textobject><phrase>The &appname; <interface>Loan Dialog</interface></phrase></textobject>
 </mediaobject>
 </screenshot>
 
@@ -511,7 +511,7 @@ right-clicking on the column header.
 
 <tip>
 <para>You can add, edit, or modify the fields in the collection using
-the &fields-dialog;. The arrow buttons below the field list can be used to change the
+the <interface>Collection Fields Dialog</interface>. The arrow buttons below the field list can be used to change the
 position of the field in the list, which affects the placement in the entry
 editor.
 </para>
@@ -563,7 +563,7 @@ within the stylesheet governs things like the font, the margins, etc.
 </tip>
 
 <tip>
-<para>Double-clicking an entry item opens the &entry-editor;.
+<para>Double-clicking an entry item opens the <interface>Entry Editor</interface>.
 </para>
 </tip>
 
@@ -574,7 +574,7 @@ within the stylesheet governs things like the font, the margins, etc.
 </tip>
 
 <tip>
-<para>In the &detailed-view;, you can press a letter on the
+<para>In the <interface>Column View</interface>, you can press a letter on the
 keyboard to skip to the next entry that starts with that letter.
 </para>
 </tip>
