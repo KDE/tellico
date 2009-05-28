@@ -2,7 +2,7 @@ SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 # formattest includes fieldformat that include core/tellico_config.h
 # which is generated in the build directory
-INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/src )
+INCLUDE_DIRECTORIES( ${Tellico_BINARY_DIR}/src )
 
 KDE4_ADD_UNIT_TEST(entitytest NOGUI entitytest.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(entitytest ${KDE4_KDECORE_LIBS}  ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
