@@ -387,13 +387,14 @@ modified.</para>
 </listitem>
 </varlistentry>
 
-<!-- please check, correct und uncomment then
 <varlistentry>
 <term>
  <menuchoice>
-  <shortcut>
+<!--
+<shortcut>
    <keycombo>&Ctrl;<keycap>G</keycap></keycombo>
   </shortcut>
+-->
   <guimenu>Collection</guimenu>
   <guimenuitem>Merge Entries</guimenuitem>
  </menuchoice>
