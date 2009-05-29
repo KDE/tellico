@@ -507,7 +507,8 @@ void MainWindow::initActions() {
                                                Controller::self(), SLOT(slotMergeSelectedEntries()));
   m_mergeEntry->setText(i18n("&Merge Entries"));
   m_mergeEntry->setIcon(KIcon(QLatin1String("document-import")));
-  m_mergeEntry->setShortcut(Qt::CTRL + Qt::Key_G);
+//  CTRL+G is ambiguous, pick another
+//  m_mergeEntry->setShortcut(Qt::CTRL + Qt::Key_G);
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
   m_mergeEntry->setEnabled(false); // gets enabled when more than 1 entry is selected
 
