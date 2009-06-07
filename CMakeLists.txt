@@ -86,7 +86,7 @@ add_definitions(${QT_DEFINITIONS}
                 ${KDE4_DEFINITIONS}
                 ${TAGLIB_CFLAGS}
                 ${YAZ_CFLAGS})
-add_definitions(-DQT_STRICT_ITERATORS -DQT_STL -DQT_NO_CAST_FROM_ASCII)
+add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
 include_directories(${KDE4_INCLUDES}
