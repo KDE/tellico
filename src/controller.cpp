@@ -595,9 +595,9 @@ void Controller::plugEntryActions(KMenu* popup_) {
   popup_->addAction(m_mainWindow->m_copyEntry);
   popup_->addAction(m_mainWindow->m_deleteEntry);
   popup_->addAction(m_mainWindow->m_mergeEntry);
-  popup_->addAction(m_mainWindow->m_updateEntryMenu);
+  popup_->addMenu(m_mainWindow->m_updateEntryMenu->menu());
   // there's a bug in KActionMenu with KXMLGUIFactory::plugActionList
-  // pluging the menu action isn't enough to have the popup get populated
+  // pluging the menu isn't enough to have the popup get populated
   plugUpdateMenu(popup_);
   popup_->addSeparator();
   popup_->addAction(m_mainWindow->m_checkOutEntry);
