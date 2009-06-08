@@ -209,7 +209,7 @@ void XSLTHandler::addStringParam(const QByteArray& name_, const QByteArray& valu
 
 void XSLTHandler::addParam(const QByteArray& name_, const QByteArray& value_) {
   m_params.insert(name_, value_);
-//  myDebug() << "" << name_ << ":" << value_;
+//  myDebug() << name_ << ":" << value_;
 }
 
 void XSLTHandler::removeParam(const QByteArray& name_) {

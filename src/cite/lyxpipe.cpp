@@ -58,7 +58,7 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
 
   QString lyxpipe = Config::lyxpipe();
   lyxpipe += QLatin1String(".in");
-//  myDebug() << "" << lyxpipe;
+//  myDebug() << lyxpipe;
 
   QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
 

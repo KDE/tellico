@@ -133,7 +133,7 @@ void EntryUpdater::slotDone() {
 
   m_results.clear();
   ++m_fetchIndex;
-//  myDebug() << "" << m_fetchIndex;
+//  myDebug() << m_fetchIndex;
   if(m_fetchIndex == m_fetchers.count()) {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
@@ -155,7 +155,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
     return;
   }
 
-//  myDebug() << "" << result_->title << " [" << result_->fetcher->source() << "]";
+//  myDebug() << result_->title << " [" << result_->fetcher->source() << "]";
   m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
   Data::EntryPtr e = result_->fetchEntry();
   if(e) {

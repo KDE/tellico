@@ -483,7 +483,7 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
 }
 
 void Z3950Fetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "" << source() << ": " << entry_->title();
+//  myDebug() << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);

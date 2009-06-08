@@ -102,7 +102,7 @@ Tellico::LCCComparison::LCCComparison() : StringComparison(),
 }
 
 int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) {
-//  myDebug() << "" << str1_ << " to " << str2_;
+//  myDebug() << str1_ << " to " << str2_;
   int pos1 = m_regexp.indexIn(str1_);
   const QStringList cap1 = m_regexp.capturedTexts();
   int pos2 = m_regexp.indexIn(str2_);

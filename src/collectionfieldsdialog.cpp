@@ -539,7 +539,7 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
-//  myDebug() << "" << index_;
+//  myDebug() << index_;
 
   // use this instead of blocking signals everywhere
   m_updatingValues = true;

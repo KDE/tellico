@@ -512,7 +512,7 @@ void AmazonFetcher::slotComplete(KJob*) {
       entry->setField(QLatin1String("comments"), comments);
     }
 */
-//    myDebug() << "" << entry->title();
+//    myDebug() << entry->title();
     SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);

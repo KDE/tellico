@@ -124,7 +124,7 @@ void Z3950Connection::setUserPassword(const QString& user_, const QString& pword
 }
 
 void Z3950Connection::run() {
-//  myDebug() << "" << m_fetcher->source();
+//  myDebug() << m_fetcher->source();
   m_aborted = false;
   m_hasMore = false;
   resultsLeft = 0;
@@ -186,7 +186,7 @@ void Z3950Connection::run() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << "" << s;
+    myDebug() << s;
     done(s, MessageHandler::Error);
     return;
   }
@@ -333,7 +333,7 @@ bool Z3950Connection::makeConnection() {
   if(m_connected) {
     return true;
   }
-//  myDebug() << "" << m_fetcher->source();
+//  myDebug() << m_fetcher->source();
 // I don't know what to do except assume database, user, and password are in locale encoding
 #ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
@@ -358,7 +358,7 @@ bool Z3950Connection::makeConnection() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << "" << s;
+    myDebug() << s;
     done(s, MessageHandler::Error);
     return false;
   }

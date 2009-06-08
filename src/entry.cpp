@@ -267,7 +267,7 @@ void Entry::clearGroups() {
 // update that list. This is the function that actually parses the field values
 // and returns the list of the group names.
 QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
-//  myDebug() << "" << fieldName_;
+//  myDebug() << fieldName_;
   FieldPtr f = m_coll->fieldByName(fieldName_);
 
   // easy if not allowing multiple values

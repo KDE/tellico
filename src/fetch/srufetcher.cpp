@@ -251,7 +251,7 @@ void SRUFetcher::slotComplete(KJob*) {
         if(!d2.isEmpty()) {
           d += QLatin1String(" (") + d2 + QLatin1Char(')');
         }
-        myDebug() << "" << d;
+        myDebug() << d;
         if(!msg.isEmpty()) {
           msg += QLatin1Char('\n');
         }
@@ -320,7 +320,7 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
 }
 
 void SRUFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "" << source() << ": " << entry_->title();
+//  myDebug() << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
     search(Fetch::ISBN, isbn);
