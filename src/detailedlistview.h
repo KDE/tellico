@@ -155,11 +155,6 @@ private:
   void setState(Tellico::Data::EntryList entries_, int state);
 
   struct ConfigInfo {
-    QStringList cols;
-    QList<int> widths;
-    QList<int> order;
-    int colSorted;
-    bool ascSort : 1;
     int prevSort;
     int prev2Sort;
     QString state;

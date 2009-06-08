@@ -76,8 +76,7 @@ protected:
 
 using Tellico::DetailedListView;
 
-DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m_selectionChanging(false)
-{
+DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m_selectionChanging(false) {
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
@@ -116,7 +115,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   if(!coll_) {
     return;
   }
-  DEBUG_BLOCK;
 
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KGlobal::config(), configGroup);
@@ -141,6 +139,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     // the easy case first. If we have saved state, just restore it
     header()->restoreState(state);
   } else {
+    myLog() << "empty column state";
     // these are all deprecated values
     QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
     QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
@@ -173,6 +172,8 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
       }
     }
   }
+  // because some of the fields got hidden...
+  updateHeaderMenu();
 
   sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
   sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
@@ -370,11 +371,6 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       if(!u.isEmpty() && i != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;
-        ci.cols      = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
-        ci.widths    = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
-        ci.order     = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
-        ci.colSorted = config.readEntry(QLatin1String("SortColumn") + configN, 0);
-        ci.ascSort   = config.readEntry(QLatin1String("SortAscending") + configN, true);
         ci.prevSort  = config.readEntry(QLatin1String("PrevSortColumn") + configN, 0);
         ci.prev2Sort = config.readEntry(QLatin1String("Prev2SortColumn") + configN, 0);
         ci.state     = config.readEntry(QLatin1String("ColumnState") + configN, QString());
@@ -397,8 +393,8 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
   config.writeEntry(QLatin1String("ColumnState") + configN, state.toBase64());
   // the main sort order gets saved in the state
   // the secondary and tertiary need saving separately
-  int sortCol2 = sortModel()->secondarySortColumn();
-  int sortCol3 = sortModel()->tertiarySortColumn();
+  const int sortCol2 = sortModel()->secondarySortColumn();
+  const int sortCol3 = sortModel()->tertiarySortColumn();
   config.writeEntry(QLatin1String("PrevSortColumn") + configN, sortCol2);
   config.writeEntry(QLatin1String("Prev2SortColumn") + configN, sortCol3);
 }
@@ -458,6 +454,11 @@ void DetailedListView::updateHeaderMenu() {
   m_headerMenu->clear();
   m_headerMenu->addTitle(i18n("View Columns"));
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
+//    Data::FieldPtr field = sourceModel()->field(sourceModel()->index(0, ncol));
+    // don't show paragraphs and tables
+//    if(!field || field->type() == Data::Field::Para || field->type() == Data::Field::Table) {
+//      continue;
+//    }
     QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
     act->setData(ncol);
     act->setCheckable(true);
