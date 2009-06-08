@@ -126,7 +126,7 @@ void CrossRefFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "";
+//  myDebug();
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -136,7 +136,7 @@ void CrossRefFetcher::stop() {
 }
 
 void CrossRefFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();

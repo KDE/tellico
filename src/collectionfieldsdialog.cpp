@@ -639,7 +639,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 }
 
 void CollectionFieldsDialog::updateField() {
-//  myDebug() << "";
+//  myDebug();
   Data::FieldPtr field = m_currentField;
   if(!field || !m_modified) {
     return;
@@ -724,7 +724,7 @@ void CollectionFieldsDialog::updateField() {
 // The purpose here is to first set the modified flag. Then, if the field being edited is one
 // that exists in the collection already, a deep copy needs to be made.
 void CollectionFieldsDialog::slotModified() {
-//  myDebug() << "";
+//  myDebug();
   // if I'm just updating the values, I don't care
   if(m_updatingValues) {
     return;
@@ -760,7 +760,7 @@ void CollectionFieldsDialog::slotModified() {
 }
 
 void CollectionFieldsDialog::updateTitle(const QString& title_) {
-//  myDebug() << "";
+//  myDebug();
   if(m_currentField && m_currentField->title() != title_) {
     m_fieldsWidget->blockSignals(true);
     FieldListItem* oldItem = findItem(m_currentField);

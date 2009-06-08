@@ -284,7 +284,7 @@ void GCstarPluginFetcher::slotError() {
 }
 
 void GCstarPluginFetcher::slotProcessExited() {
-//  myDebug() << "";
+//  myDebug();
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << ""<< source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {

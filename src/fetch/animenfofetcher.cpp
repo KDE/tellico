@@ -123,7 +123,7 @@ void AnimeNfoFetcher::stop() {
 }
 
 void AnimeNfoFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -245,7 +245,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntry(uint uid_) {
 }
 
 Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
- // myDebug() << "";
+ // myDebug();
  // class might be anime_info_top
   QRegExp infoRx(QLatin1String("<td\\s+[^>]*class\\s*=\\s*[\"']anime_info[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   infoRx.setMinimal(true);

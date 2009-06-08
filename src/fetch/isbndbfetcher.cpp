@@ -156,7 +156,7 @@ void ISBNdbFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "";
+//  myDebug();
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -167,7 +167,7 @@ void ISBNdbFetcher::stop() {
 }
 
 void ISBNdbFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -315,7 +315,7 @@ void ISBNdbFetcher::initXSLTHandler() {
 }
 
 void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "";
+//  myDebug();
   // limit to top 5 results
   m_limit = 5;
 

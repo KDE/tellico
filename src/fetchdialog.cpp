@@ -399,7 +399,7 @@ void FetchDialog::setStatus(const QString& text_) {
 }
 
 void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
-//  myDebug() << "";
+//  myDebug();
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
                                       KIcon(QLatin1String("edit-find"))));

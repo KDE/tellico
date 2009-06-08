@@ -252,7 +252,7 @@ void Z3950Fetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "";
+//  myDebug();
   m_started = false;
   if(m_conn) {
    // give it a second to cleanup

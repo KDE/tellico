@@ -146,7 +146,7 @@ void GoogleScholarFetcher::stop() {
 }
 
 void GoogleScholarFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -209,7 +209,7 @@ Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntry(uint uid_) {
 }
 
 void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "";
+//  myDebug();
   // limit to top 5 results
   m_limit = 5;
 

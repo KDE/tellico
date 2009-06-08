@@ -88,7 +88,7 @@ void GriffithImporter::slotError() {
 
 
 void GriffithImporter::slotProcessExited() {
-//  myDebug() << "";
+//  myDebug();
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
     myDebug() << "process did not exit successfully";
     return;

@@ -169,7 +169,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
 }
 
 void EntryUpdater::slotCancel() {
-//  myDebug() << "";
+//  myDebug();
   m_cancelled = true;
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
   if(f) {

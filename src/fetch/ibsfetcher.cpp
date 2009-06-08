@@ -287,7 +287,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntry(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
- // myDebug() << "";
+ // myDebug();
  // class might be anime_info_top
   QString pat = QLatin1String("%1(?:<[^>]+>)+([^<>\\s][^<>]+)");
 

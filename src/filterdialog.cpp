@@ -200,7 +200,7 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
 }
 
 void FilterRuleWidget::reset() {
-//  myDebug() << "";
+//  myDebug();
   blockSignals(true);
 
   m_ruleField->setCurrentIndex(0);
@@ -412,7 +412,7 @@ void FilterDialog::slotApply() {
 }
 
 void FilterDialog::slotClear() {
-//  myDebug() << "";
+//  myDebug();
   m_matchAll->setChecked(true);
   m_ruleLister->reset();
   m_filterName->clear();

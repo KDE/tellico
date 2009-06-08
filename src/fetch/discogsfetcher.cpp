@@ -160,7 +160,7 @@ void DiscogsFetcher::stop() {
 }
 
 void DiscogsFetcher::slotComplete(KJob* ) {
-//  myDebug() << "";
+//  myDebug();
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
     stop();
@@ -332,7 +332,7 @@ void DiscogsFetcher::initXSLTHandler() {
 }
 
 void DiscogsFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "";
+//  myDebug();
 
   QString value;
   QString title = entry_->field(QLatin1String("title"));

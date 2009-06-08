@@ -153,7 +153,7 @@ void YahooFetcher::stop() {
 }
 
 void YahooFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -365,7 +365,7 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
 }
 
 void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "";
+//  myDebug();
   // limit to top 5 results
   m_limit = 5;
 

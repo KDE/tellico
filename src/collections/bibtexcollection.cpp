@@ -257,7 +257,7 @@ bool BibtexCollection::addField(Tellico::Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
-//  myDebug() << "";
+//  myDebug();
   bool success = Collection::addField(field_);
   if(success) {
     QString bibtex = field_->property(QLatin1String("bibtex"));
@@ -272,7 +272,7 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(!newField_) {
     return false;
   }
-//  myDebug() << "";
+//  myDebug();
   bool success = Collection::modifyField(newField_);
   FieldPtr oldField = fieldByName(newField_->name());
   QString oldBibtex = oldField->property(QLatin1String("bibtex"));
@@ -291,7 +291,7 @@ bool BibtexCollection::deleteField(Tellico::Data::FieldPtr field_, bool force_) 
   if(!field_) {
     return false;
   }
-//  myDebug() << "";
+//  myDebug();
   bool success = true;
   QString bibtex = field_->property(QLatin1String("bibtex"));
   if(!bibtex.isEmpty()) {

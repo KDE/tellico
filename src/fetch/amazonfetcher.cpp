@@ -338,7 +338,7 @@ void AmazonFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug() << "";
+//  myDebug();
   if(m_job) {
     m_job->kill();
     m_job = 0;
@@ -348,7 +348,7 @@ void AmazonFetcher::stop() {
 }
 
 void AmazonFetcher::slotComplete(KJob*) {
-//  myDebug() << "";
+//  myDebug();
 
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
@@ -730,7 +730,7 @@ void AmazonFetcher::initXSLTHandler() {
 }
 
 void AmazonFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug() << "";
+//  myDebug();
 
   int type = entry_->collection()->type();
   if(type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex) {
