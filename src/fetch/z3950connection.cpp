@@ -440,7 +440,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
   yaz_iconv(cd, 0, 0, &result, &outlen);
 
   // length is pointer difference
-  size_t len = result - result0.data();
+  int len = result - result0.data();
 
   QByteArray output(result0.data(), len+1);
 //  myDebug() << "-------------------------------------------";
