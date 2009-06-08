@@ -59,7 +59,7 @@ EntryUpdater::EntryUpdater(Tellico::Data::CollPtr coll_, Tellico::Data::EntryLis
   foreach(Fetch::Fetcher::Ptr fetcher, m_fetchers) {
     connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
             SLOT(slotResult(Tellico::Fetch::SearchResult*)));
-    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
+    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
             SLOT(slotDone()));
   }
   init();
