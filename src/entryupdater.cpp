@@ -76,7 +76,7 @@ EntryUpdater::EntryUpdater(const QString& source_, Tellico::Data::CollPtr coll_,
     m_fetchers.append(f);
     connect(f.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
             SLOT(slotResult(Tellico::Fetch::SearchResult*)));
-    connect(f.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher::Ptr)),
+    connect(f.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
             SLOT(slotDone()));
   }
   init();
