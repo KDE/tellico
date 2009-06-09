@@ -41,17 +41,12 @@
 #include <kaction.h>
 #include <kiconloader.h>
 #include <kmenu.h>
-#include <kcolorutils.h>
 
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QHeaderView>
 #include <QContextMenuEvent>
 #include <QStyledItemDelegate>
-
-namespace {
-  static const int MIN_COL_WIDTH = 50;
-}
 
 namespace Tellico {
 
@@ -160,6 +155,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
         setColumnHidden(ncol, true);
       }
     }
+    // these are legacy keys and no longer needed
     config.deleteEntry(QLatin1String("ColumnNames") + configN);
     config.deleteEntry(QLatin1String("ColumnWidth") + configN);
     config.deleteEntry(QLatin1String("ColumnOrder") + configN);

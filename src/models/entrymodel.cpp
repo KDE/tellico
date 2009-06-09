@@ -37,6 +37,10 @@
 #include <kicon.h>
 #include <klocale.h>
 
+namespace {
+  static const int ENTRYMODEL_IMAGE_HEIGHT = 64;
+}
+
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : AbstractEntryModel(parent),
@@ -95,7 +99,8 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {
-          return KIcon(QPixmap::fromImage(img));
+//          return KIcon(QPixmap::fromImage(img));
+          return QPixmap::fromImage(img).scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
         }
       } else if(field->type() == Data::Field::Bool) {
         return m_checkPix;
