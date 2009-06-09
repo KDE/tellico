@@ -130,6 +130,12 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         return Qt::AlignCenter;
       }
       return QVariant();
+
+    case Qt::SizeHintRole:
+      if(field->type() == Data::Field::Image) {
+        return QSize(0, ENTRYMODEL_IMAGE_HEIGHT+4);
+      }
+      return QVariant();
   }
   return QVariant();
 }
