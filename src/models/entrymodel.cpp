@@ -55,10 +55,17 @@ int EntryModel::columnCount(const QModelIndex&) const {
 }
 
 QVariant EntryModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
-  if(section_ < 0 || section_ >= m_fields.count() || orientation_ != Qt::Horizontal || role_ != Qt::DisplayRole) {
+  if(section_ < 0 || section_ >= m_fields.count() || orientation_ != Qt::Horizontal) {
     return QVariant();
   }
-  return m_fields.at(section_)->title();
+  switch(role_) {
+    case Qt::DisplayRole:
+      return m_fields.at(section_)->title();
+
+    case FieldPtrRole:
+      return qVariantFromValue(m_fields.at(section_));
+  }
+  return QVariant();
 }
 
 QVariant EntryModel::data(const QModelIndex& index_, int role_) const {

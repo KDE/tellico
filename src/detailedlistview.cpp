@@ -450,11 +450,12 @@ void DetailedListView::updateHeaderMenu() {
   m_headerMenu->clear();
   m_headerMenu->addTitle(i18n("View Columns"));
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
-//    Data::FieldPtr field = sourceModel()->field(sourceModel()->index(0, ncol));
+    Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     // don't show paragraphs and tables
-//    if(!field || field->type() == Data::Field::Para || field->type() == Data::Field::Table) {
-//      continue;
-//    }
+    if(field && (field->type() == Data::Field::Para || field->type() == Data::Field::Table)) {
+      hideColumn(ncol);
+      continue;
+    }
     QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
     act->setData(ncol);
     act->setCheckable(true);
