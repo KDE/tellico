@@ -251,7 +251,7 @@ void SRUFetcher::slotComplete(KJob*) {
         if(!d2.isEmpty()) {
           d += QLatin1String(" (") + d2 + QLatin1Char(')');
         }
-        myDebug() << d;
+        myDebug() << "[" << m_host << "/" << m_path << "]" << d;
         if(!msg.isEmpty()) {
           msg += QLatin1Char('\n');
         }

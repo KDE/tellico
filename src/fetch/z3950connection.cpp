@@ -136,7 +136,6 @@ void Z3950Connection::run() {
   }
 
   ZOOM_query query = ZOOM_query_create();
-  myLog() << "pqn = " << toCString(m_pqn);
   int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
   if(errcode != 0) {
     myDebug() << "query error: " << m_pqn;
@@ -186,7 +185,7 @@ void Z3950Connection::run() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << s;
+    myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
     return;
   }
@@ -358,7 +357,7 @@ bool Z3950Connection::makeConnection() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << s;
+    myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
     return false;
   }
