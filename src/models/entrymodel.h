@@ -47,9 +47,8 @@ public:
   virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
   virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
   virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-  Data::FieldPtr field(const QModelIndex& index) const;
 
-  bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
+  virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
 
   void clear();
   void clearSaveState();
@@ -61,6 +60,8 @@ public:
   void removeFields(const Data::FieldList& fields);
 
 private:
+  Data::FieldPtr field(const QModelIndex& index) const;
+
   Data::FieldList m_fields;
   KIcon m_checkPix;
   QHash<int, int> m_saveStates;
