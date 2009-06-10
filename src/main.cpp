@@ -37,7 +37,7 @@ namespace {
 
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", 0, ki18n("Tellico"),
-                       version, ki18n(description), KAboutData::License_GPL,
+                       version, ki18n(description), KAboutData::License_GPL_V2,
                        ki18n("(c) 2001-2009, Robby Stephenson"), KLocalizedString(),
                        "http://www.periapsis.org/tellico/", "tellico-users@forge.novell.com");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
@@ -51,6 +51,8 @@ int main(int argc, char* argv[]) {
   aboutData.addCredit(ki18n("Greg Ward"), ki18n("Author of btparse library"));
   aboutData.addCredit(ki18n("Robert Gamble"), ki18n("Author of libcsv library"));
   aboutData.addCredit(ki18n("Valentin Lavrinenko"), ki18n("Author of rtf2html library"));
+
+  aboutData.addLicense(KAboutData::License_GPL_V3);
 
   KCmdLineOptions options;
   options.add("nofile", ki18n("Do not reopen the last open file"));
