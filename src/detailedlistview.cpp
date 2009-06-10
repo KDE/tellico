@@ -168,6 +168,11 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
       }
     }
   }
+// we don't allow all sections to be hidden because the header disappears
+  if(header()->count() > 0 && header()->hiddenSectionCount() == header()->count()) {
+    showColumn(0);
+  }
+
   // because some of the fields got hidden...
   updateHeaderMenu();
 
@@ -323,7 +328,34 @@ void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
 
 void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
   int col = action_->data().toInt();
-  setColumnHidden(col, !action_->isChecked());
+  if(col < header()->count()) {
+    setColumnHidden(col, !action_->isChecked());
+  } else if(col == header()->count()) {
+    // hide all
+    for(int ncol = 0; ncol < header()->count(); ++ncol) {
+      hideColumn(ncol);
+    }
+    foreach(QAction* action, m_headerMenu->actions()) {
+      if(action->isCheckable()) {
+        action->setChecked(false);
+      }
+    }
+  }
+  // the header disappears if all columns are hidden
+  // don't allow the user to hide all, can this be fixed?
+  if(header()->count() == header()->hiddenSectionCount()) {
+    // find first checkable action in header menu
+    QAction* action = 0;
+    foreach(QAction* tryAction, m_headerMenu->actions()) {
+      if(tryAction->isCheckable()) {
+        action = tryAction;
+        break;
+      }
+    }
+    if(action) {
+      action->activate(QAction::Trigger);
+    }
+  }
 }
 
 void DetailedListView::slotRefresh() {
@@ -453,7 +485,9 @@ void DetailedListView::updateHeaderMenu() {
     Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     // don't show paragraphs and tables
     if(field && (field->type() == Data::Field::Para || field->type() == Data::Field::Table)) {
-      hideColumn(ncol);
+      if(!isColumnHidden(ncol)) {
+        hideColumn(ncol);
+      }
       continue;
     }
     QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
@@ -461,6 +495,9 @@ void DetailedListView::updateHeaderMenu() {
     act->setCheckable(true);
     act->setChecked(!isColumnHidden(ncol));
   }
+  m_headerMenu->addSeparator();
+  QAction* act = m_headerMenu->addAction(i18n("Hide All Columns"));
+  act->setData(header()->count());
 }
 
 void DetailedListView::slotRefreshImages() {
