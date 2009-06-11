@@ -50,7 +50,7 @@
 
 #include <QFile>
 #include <QTextStream>
-#include <qclipboard.h>
+#include <QClipboard>
 
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;
