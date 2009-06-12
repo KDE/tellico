@@ -98,12 +98,6 @@ void GoogleScholarFetcher::continueSearch() {
 void GoogleScholarFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
   KUrl u(SCHOLAR_BASE_URL);
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
 

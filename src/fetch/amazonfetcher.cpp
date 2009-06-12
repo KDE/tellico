@@ -206,7 +206,7 @@ void AmazonFetcher::doSearch() {
     case Data::Collection::Wine:
     case Data::Collection::Base:
     case Data::Collection::Card:
-      message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
+      myDebug() << "can't fetch this type:" << collectionType();
       stop();
       return;
   }

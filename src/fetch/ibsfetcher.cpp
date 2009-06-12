@@ -81,12 +81,6 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 #else
   KUrl u(IBS_BASE_URL);
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
   switch(key_) {
     case Title:
       u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));

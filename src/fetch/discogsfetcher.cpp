@@ -107,12 +107,6 @@ void DiscogsFetcher::doSearch() {
   u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
   switch(m_key) {
     case Title:
       u.setPath(QLatin1String("/search"));

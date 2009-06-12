@@ -102,12 +102,6 @@ void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
     return;
   }
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
 //  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);

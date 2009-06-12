@@ -133,13 +133,6 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_currentTitleBlock = Unknown;
   m_countOffset = 0;
 
-// only search if current collection is a video collection
-  if(collectionType() != Data::Collection::Video) {
-    myDebug() << "collection type mismatch, stopping (" << collectionType() << ")";
-    stop();
-    return;
-  }
-
 #ifdef IMDB_TEST
   if(m_key == Title) {
     m_url = KUrl(QLatin1String("/home/robby/imdb-title.html"));

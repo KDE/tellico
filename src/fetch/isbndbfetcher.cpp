@@ -90,11 +90,6 @@ void ISBNdbFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
   m_numResults = 0;
   m_countOffset = 0;
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
   doSearch();
 }
 

@@ -96,12 +96,6 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
 //  myDebug() << "value = " << value_;
 
   KUrl u = searchURL(m_key, m_value);

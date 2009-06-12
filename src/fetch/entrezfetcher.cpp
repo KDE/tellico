@@ -94,12 +94,6 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
   m_start = 1;
   m_total = -1;
 
-// only search if current collection is a bibliography
-  if(!canFetch(collectionType())) {
-    myDebug() << "collection type mismatch, stopping";
-    stop();
-    return;
-  }
   if(m_dbname.isEmpty()) {
     m_dbname = QLatin1String(ENTREZ_DEFAULT_DATABASE);
   }

@@ -84,12 +84,6 @@ void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
   u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
   u.addQueryItem(QLatin1String("queryin"),    QLatin1String("anime_titles"));
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
   switch(key_) {
     case Keyword:
       u.addQueryItem(QLatin1String("query"), value_);

@@ -104,12 +104,6 @@ void YahooFetcher::doSearch() {
   u.addQueryItem(QLatin1String("start"),   QString::number(m_start));
   u.addQueryItem(QLatin1String("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
 
-  if(!canFetch(collectionType())) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
-    stop();
-    return;
-  }
-
   switch(m_key) {
     case Title:
       u.addQueryItem(QLatin1String("album"), m_value);

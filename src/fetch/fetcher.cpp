@@ -28,6 +28,7 @@
 #include "../entry.h"
 
 #include <kglobal.h>
+#include <klocale.h>
 #include <KSharedConfig>
 #include <KConfigGroup>
 
@@ -48,13 +49,12 @@ Fetcher::~Fetcher() {
 
 void Fetcher::startSearch(int collType_, FetchKey key_, const QString& value_) {
   m_collectionType = collType_;
-/*
-if(!canFetch(m_collectionType)) {
+  if(!canFetch(m_collectionType)) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     emit signalDone(this);
     return;
   }
-*/
+
   search(key_, value_);
 }
 
