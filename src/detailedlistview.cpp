@@ -134,7 +134,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     // the easy case first. If we have saved state, just restore it
     header()->restoreState(state);
   } else {
-    myLog() << "empty column state";
     // these are all deprecated values
     QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
     QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());

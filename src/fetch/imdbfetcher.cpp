@@ -135,7 +135,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
 // only search if current collection is a video collection
   if(collectionType() != Data::Collection::Video) {
-    myDebug() << "collection type mismatch, stopping";
+    myDebug() << "collection type mismatch, stopping (" << collectionType() << ")";
     stop();
     return;
   }

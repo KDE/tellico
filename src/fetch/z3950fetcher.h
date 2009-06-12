@@ -76,7 +76,6 @@ public:
   virtual void readConfigHook(const KConfigGroup& config);
   virtual void saveConfigHook(KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
   const QString& host() const { return m_host; }
 
   static StringMap customFields();
@@ -93,6 +92,7 @@ protected:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   bool initMARC21Handler();
   bool initUNIMARCHandler();
   bool initMODSHandler();

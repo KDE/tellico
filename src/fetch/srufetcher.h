@@ -80,8 +80,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
-
   static StringMap customFields();
 
   virtual ConfigWidget* configWidget(QWidget* parent) const;
@@ -95,6 +93,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   bool initMARCXMLHandler();
   bool initMODSHandler();
 

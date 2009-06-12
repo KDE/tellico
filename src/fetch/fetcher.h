@@ -89,7 +89,7 @@ public:
    */
   void startSearch(int collType, FetchKey key, const QString& value);
   virtual void continueSearch() {}
-  virtual void updateEntry(Data::EntryPtr);
+  void startUpdate(Data::EntryPtr entry);
   // mopst fetchers won't support this. it's particular useful for text fetchers
   virtual void updateEntrySynchronous(Data::EntryPtr) {}
   /**
@@ -142,6 +142,7 @@ private:
    * Starts a search, using a key and value.
    */
   virtual void search(FetchKey key, const QString& value) = 0;
+  virtual void updateEntry(Data::EntryPtr entry) = 0;
   virtual void readConfigHook(const KConfigGroup&) = 0;
   virtual void saveConfigHook(KConfigGroup&) {}
 

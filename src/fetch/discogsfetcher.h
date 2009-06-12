@@ -73,8 +73,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
-
   /**
    * Returns a widget for modifying the fetcher's config.
    */
@@ -100,6 +98,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSearch();
 

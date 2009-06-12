@@ -61,8 +61,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
-
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget : public Fetch::ConfigWidget {
@@ -80,6 +78,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   Data::EntryPtr parseEntry(const QString& str);
 
   QByteArray m_data;

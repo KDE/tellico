@@ -63,7 +63,6 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const { return m_args.contains(k); }
   virtual bool canUpdate() const { return m_canUpdate; }
-  virtual void updateEntry(Data::EntryPtr entry);
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
   virtual Type type() const { return ExecExternal; }
@@ -107,6 +106,7 @@ private:
   static QStringList parseArguments(const QString& str);
 
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   void startSearch(const QStringList& args);
 
   bool m_started;

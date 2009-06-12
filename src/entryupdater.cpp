@@ -117,7 +117,7 @@ void EntryUpdater::slotStartNext() {
 
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
 //  myDebug() << "starting " << f->source();
-  f->updateEntry(m_entriesToUpdate.front());
+  f->startUpdate(m_entriesToUpdate.front());
 }
 
 void EntryUpdater::slotDone() {

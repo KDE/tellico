@@ -64,7 +64,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
   virtual void updateEntrySynchronous(Data::EntryPtr entry);
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
@@ -87,6 +86,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   void initXSLTHandler();
   KUrl searchURL(FetchKey key, const QString& value) const;
 

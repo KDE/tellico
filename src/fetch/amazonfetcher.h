@@ -93,8 +93,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntry(Data::EntryPtr entry);
-
   struct SiteData {
     QString title;
     KUrl url;
@@ -118,6 +116,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSearch();
   void parseTitle(Data::EntryPtr entry, int collType);

@@ -62,7 +62,6 @@ public:
   virtual Type type() const { return Entrez; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
-  virtual void updateEntry(Data::EntryPtr entry);
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   static StringMap customFields();
@@ -82,6 +81,7 @@ private slots:
 
 private:
   virtual void search(FetchKey key, const QString& value);
+  virtual void updateEntry(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSummary();
 
