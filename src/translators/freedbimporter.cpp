@@ -188,15 +188,16 @@ void FreeDBImporter::readCDROM() {
   KCDDB::CDInfo info;
   KCDDB::Client client;
   client.setBlockingMode(true);
+
   KCDDB::Result r = client.lookup(list);
+  const KCDDB::CDInfoList responseList = client.lookupResponse();
   // KCDDB doesn't return MultipleRecordFound properly, so check outselves
-  if(r == KCDDB::MultipleRecordFound || client.lookupResponse().count() > 1) {
+  if(r == KCDDB::MultipleRecordFound || responseList.count() > 1) {
     QStringList list;
-    KCDDB::CDInfoList infoList = client.lookupResponse();
-    for(KCDDB::CDInfoList::iterator it = infoList.begin(); it != infoList.end(); ++it) {
-      list.append(QString::fromLatin1("%1, %2, %3").arg((*it).get(KCDDB::Artist).toString())
-                                                   .arg((*it).get(KCDDB::Title).toString())
-                                                   .arg((*it).get(KCDDB::Genre).toString()));
+    foreach(const KCDDB::CDInfo& info, responseList) {
+      list.append(QString::fromLatin1("%1, %2, %3").arg(info.get(KCDDB::Artist).toString())
+                                                   .arg(info.get(KCDDB::Title).toString())
+                                                   .arg(info.get(KCDDB::Genre).toString()));
     }
 
     // switch back to pointer cursor
@@ -214,14 +215,14 @@ void FreeDBImporter::readCDROM() {
         }
         ++i;
       }
-      if(i < infoList.size()) {
-        info = infoList[i];
+      if(i < responseList.size()) {
+        info = responseList.at(i);
       }
     } else { // cancelled dialog
       m_cancelled = true;
     }
-  } else if(r == KCDDB::Success) {
-    info = client.lookupResponse().first();
+  } else if(r == KCDDB::Success && !responseList.isEmpty()) {
+    info = responseList.first();
   } else {
     myDebug() << "no success! Return value = " << r;
     QString s;
@@ -351,7 +352,7 @@ void FreeDBImporter::readCache() {
   uint step = 1;
 
   KCDDB::CDInfo info;
-  for(QMap<QString, QString>::Iterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++step) {
+  for(QMap<QString, QString>::ConstIterator it = files.constBegin(); !m_cancelled && it != files.constEnd(); ++it, ++step) {
     // open file and read content
     QFileInfo fileinfo(it.value()); // skip files larger than 10 kB
     if(!fileinfo.exists() || !fileinfo.isReadable() || fileinfo.size() > 10*1024) {
