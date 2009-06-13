@@ -25,7 +25,6 @@
 #include "actionmanager.h"
 #include "lyxpipe.h"
 #include "clipboard.h"
-#include "openoffice.h"
 #include "../entry.h"
 #include "../tellico_debug.h"
 
@@ -60,9 +59,6 @@ bool ActionManager::connect(Tellico::Cite::CiteAction action_) {
       m_action = new Lyxpipe();
       break;
 
-    case Cite::CiteOpenOffice:
-      m_action = new OpenOffice();
-      break;
   }
   return m_action ? m_action->connect() : false;
 }
@@ -86,11 +82,4 @@ bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::Entry
   }
 
   return m_action->cite(entries_);
-}
-
-bool ActionManager::isEnabled(Tellico::Cite::CiteAction action_) {
-  if(action_ == CiteOpenOffice) {
-    return OpenOffice::hasLibrary();
-  }
-  return true;
 }

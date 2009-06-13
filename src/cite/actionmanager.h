@@ -26,15 +26,13 @@
 #define TELLICO_CITE_ACTIONMANAGER_H
 
 #include "../datavectors.h"
-#include "handler.h"
 
 namespace Tellico {
   namespace Cite {
 
 enum CiteAction {
   CiteClipboard,
-  CiteLyxpipe,
-  CiteOpenOffice
+  CiteLyxpipe
 };
 
 /**
@@ -48,7 +46,6 @@ public:
   virtual CiteAction type() const = 0;
   virtual bool connect() { return true; }
   virtual bool cite(Data::EntryList entries) = 0;
-  virtual State state() const { return Success; }
 };
 
 /**
@@ -60,7 +57,6 @@ public:
   ~ActionManager();
 
   bool cite(CiteAction action, Data::EntryList entries);
-  static bool isEnabled(CiteAction action);
 
 private:
   ActionManager();

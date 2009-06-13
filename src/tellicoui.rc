@@ -92,7 +92,6 @@
    <Action name="coll_string_macros"/>
    <Action name="cite_clipboard"/>
    <Action name="cite_lyxpipe"/>
-   <Action name="cite_openoffice"/>
   </Menu>
   <Menu name="settings">
    <Action append="show_merge" name="toggle_collection_bar"/>
@@ -137,7 +136,6 @@
   <Action name="coll_string_macros"/>
   <Action name="cite_clipboard"/>
   <Action name="cite_lyxpipe"/>
-  <Action name="cite_openoffice"/>
  </Disable>
 </State>
 
@@ -159,7 +157,6 @@
 <!-- cite actions taken care in selection code
   <Action name="cite_clipboard"/>
   <Action name="cite_lyxpipe"/>
-  <Action name="cite_openoffice"/>
  -->
  </Enable>
 </State>

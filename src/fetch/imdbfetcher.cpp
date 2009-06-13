@@ -1014,7 +1014,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
 }
 
 // end up reparsing whole string, but it's not really that slow
-// loook at every anchor tag in the string
+// look at every anchor tag in the string
 void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   const QString genre = QLatin1String("/Genres/");
   const QString country = QLatin1String("/Countries/");

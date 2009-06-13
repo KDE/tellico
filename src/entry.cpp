@@ -95,7 +95,7 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
   // special case adding a book to a bibtex collection
-  // it would be better to do this in a real OOO way, but this should work
+  // it would be better to do this in a real OO way, but this should work
   const bool addEntryType = m_coll->type() == Collection::Book &&
                             coll_->type() == Collection::Bibtex &&
                             !m_coll->hasField(QLatin1String("entry-type"));

@@ -357,30 +357,6 @@ root if you are installing in a system folder:
 any trouble compiling it. Should you run into problems please report
 them to the author at <email>&email;</email>.</para>
 
-<sect2 id="compilation-ooo">
-<title>Compiling With OpenOffice.org</title>
-<para>
-&appname; uses a special plugin for communicating with OpenOffice.org, which is not compiled by default.
-The Software Development Kit, available from <ulink url="http://www.openoffice.org/dev_docs/source/sdk/">
-http://www.openoffice.org/dev_docs/source/sdk/</ulink>, is required.
-
-<screen width="40">
-<prompt>%</prompt> <userinput>./configure <option>--enable-ooo</option> <option>--with-ooo-dir</option>=<filename class="directory">/usr/lib/openoffice</filename> <option>--with-ooo-sdk-dir</option>=<filename class="directory">/usr/lib/openoffice/SDK</filename></userinput>
-</screen>
-
-You'll need to use the correct locations of the OpenOffice.org libraries and SDK, of course.
-</para>
-
-<para>
-In addition, some distributions may require you to modify the <filename>/etc/ld.so.conf</filename> file
-or add a configuration file to the <filename class="directory">/etc/ld.so.conf.d</filename> directory. Check
-to see if the OpenOffice.org plugin works without any changes first. If it doesn't, try editing
-<filename>/etc/ld.so.conf</filename> and adding the location of the OpenOffice.org libraries, the same as
-you used for the <filename>configure</filename> script.
-For additional help, use the <ulink url="&maillist;">&appname; Mailing List</ulink>
-</para>
-</sect2>
-
 </sect1>
 
 </appendix>

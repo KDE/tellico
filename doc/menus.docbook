@@ -542,19 +542,6 @@ source and <action>update the selected entries</action>.</para>
 </listitem>
 </varlistentry>
 
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Collection</guimenu>
-  <guimenuitem>Cite Entry in OpenOffice.org</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>sends a citation for the selected entries</action> to <application>OpenOffice.org Writer</application>. It is only enabled when editing a bibliography when the OpenOffice.org plugin is available.</para>
-</listitem>
-</varlistentry>
-
 </variablelist>
 
 </para>

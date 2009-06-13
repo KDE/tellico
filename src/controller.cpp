@@ -645,7 +645,6 @@ void Controller::updateActions() const {
   if(isBibtex) {
     m_mainWindow->action("cite_clipboard")->setEnabled(!emptySelection);
     m_mainWindow->action("cite_lyxpipe")->setEnabled(!emptySelection);
-    m_mainWindow->action("cite_openoffice")->setEnabled(!emptySelection);
   }
   m_mainWindow->m_checkInEntry->setEnabled(canCheckIn());
 

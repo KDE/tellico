@@ -205,9 +205,6 @@ void MainWindow::slotInit() {
   ImageFactory::init();
   // Init DBUS
   NewStuff::Manager::self();
-
-  // disable OOO menu item if library is not available
-  action("cite_openoffice")->setEnabled(Cite::ActionManager::isEnabled(Cite::CiteOpenOffice));
 }
 
 void MainWindow::initStatusBar() {
@@ -566,12 +563,6 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Cite the selected entries in LyX"));
   action->setIcon(KIcon(QLatin1String("lyx")));
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
-
-  action = actionCollection()->addAction(QLatin1String("cite_openoffice"), citeMapper, SLOT(map()));
-  action->setText(i18n("Ci&te Entry in OpenOffice.org"));
-  action->setToolTip(i18n("Cite the selected entries in OpenOffice.org"));
-  action->setIcon(KIcon(QLatin1String("ooo-writer")));
-  citeMapper->setMapping(action, Cite::CiteOpenOffice);
 
   m_updateMapper = new QSignalMapper(this);
   connect(m_updateMapper, SIGNAL(mapped(const QString&)),

@@ -400,52 +400,8 @@ Finally, &appname; is able to process its internal &XML; representation of the c
 <para>
 When working with a <link linkend="bibliography">bibliography</link>, citations for the currently selected entries
 may be generated and used in various other applications. A citation in bibtex format can be copied to the clipboard,
-and then pasted in a latex file. Bibtex citations can also be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis>. Finally, limited support is available for interacting with <application>OpenOffice.org Writer</application>.
+and then pasted in a latex file. Bibtex citations can also be pushed to an external application such as <application>LyX</application> or <application>Kile</application> using the so-called <emphasis><link linkend="hidden-bibtex-options">lyxpipe</link></emphasis>.
 </para>
-
-<sect2 id="openoffice-org">
-<title>Working with OpenOffice.org</title>
-<para>
-&appname; has some limited support for sending citations to <application>OpenOffice.org Writer</application> and
-updating the bibliography of a document. A special plugin is used, and if it is available, the menu command for
-citing an entry in <application>Writer</application> is enabled. If it is not enabled, then &appname; is either
-unable to find the plugin or is unable to load it. More information about building &appname; with
-OpenOffice.org support is in <link linkend="compilation-ooo">a later section</link>.
-</para>
-
-<para>
-<application>OpenOffice.org</application> must be configured to allow interaction from other applications.
-There are two methods: named pipes and TCP/IP. Named pipes are the easier and faster. To run
-<application>Writer</application> and connect with a named pipe, the following command may be used:
-
-<screen width="40">
-<prompt>%</prompt> <userinput>oowriter "-accept=pipe,name=OOo_pipe;urp;StarOffice.ServiceManager"</userinput>
-</screen>
-
-The pipe or TCP/IP port can be configured to be open every time OpenOffice.org is used. Check
-<ulink url="http://api.openoffice.org/docs/DevelopersGuide/OfficeBean/OfficeBean.xhtml#1_5_1_Default_Configuration">the OpenOffice.org documentation</ulink> for more details.
-</para>
-
-<para>
-To insert a citation, select the entry, then use the <guimenuitem>Cite Entry in OpenOffice.org</guimenuitem>.
-<application>Writer</application> must be running already. &appname;
-will attempt to connect, and if it fails, it will ask for more information about the connection.
-</para>
-
-<screenshot>
-<screeninfo>OpenOffice.org Connection Dialog</screeninfo>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="openoffice-dialog.png"/></imageobject>
-<textobject><phrase>OpenOffice.org Connection Dialog</phrase></textobject>
-</mediaobject>
-</screenshot>
-
-<para>
-Select the type of connection, either a pipe or a TCP/IP port. Enter the pipe name, or the hostname and port.
-&appname; will remember your connection settings for later use.
-</para>
-
-</sect2>
 
 </sect1>
 
