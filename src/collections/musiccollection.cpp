@@ -37,6 +37,9 @@ using Tellico::Data::MusicCollection;
 MusicCollection::MusicCollection(bool addDefaultFields_, const QString& title_)
    : Collection(addDefaultFields_, title_.isEmpty() ? i18n("My Music") : title_) {
   setDefaultGroupField(QLatin1String("artist"));
+  if(addDefaultFields_) {
+    addFields(defaultFields());
+  }
 }
 
 Tellico::Data::FieldList MusicCollection::defaultFields() {
