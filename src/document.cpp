@@ -220,7 +220,6 @@ bool Document::saveDocument(const KUrl& url_) {
       return false;
     }
   }
-  DEBUG_BLOCK;
 
   // in case we're still loading images, give that a chance to cancel
   m_cancelImageWriting = true;

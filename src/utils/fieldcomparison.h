@@ -75,17 +75,14 @@ protected:
   virtual int compare(const QString& str1, const QString& str2);
 };
 
-class DependentComparison : public FieldComparison {
+class DependentComparison : public ValueComparison {
 public:
   DependentComparison(Data::FieldPtr field);
   ~DependentComparison();
 
   virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
 
-  using FieldComparison::compare;
-
-protected:
-  virtual int compare(const QString&, const QString&) { return 0; }
+  using ValueComparison::compare;
 
 private:
   QList<FieldComparison*> m_comparisons;

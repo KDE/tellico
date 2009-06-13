@@ -351,9 +351,7 @@ void CollectionFieldsDialog::applyChanges() {
 // start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
   Kernel::self()->beginCommandGroup(i18n("Modify Fields"));
 
-  Data::FieldPtr field;
-  foreach(Data::FieldPtr it, m_copiedFields) {
-    field = it;
+  foreach(Data::FieldPtr field, m_copiedFields) {
     // check for Choice fields with removed values to warn user
     if(field->type() == Data::Field::Choice || field->type() == Data::Field::Rating) {
       QStringList oldValues = m_coll->fieldByName(field->name())->allowed();
@@ -384,8 +382,8 @@ void CollectionFieldsDialog::applyChanges() {
     Kernel::self()->modifyField(field);
   }
 
-  foreach(Data::FieldPtr it, m_newFields) {
-    Kernel::self()->addField(it);
+  foreach(Data::FieldPtr field, m_newFields) {
+    Kernel::self()->addField(field);
   }
 
   // set all text not to be colored, and get new list

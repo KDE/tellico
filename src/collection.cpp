@@ -130,9 +130,9 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   }
 
   // refresh all dependent fields, in case one references this new one
-  foreach(FieldPtr it, m_fields) {
-    if(it->type() == Field::Dependent) {
-      emit signalRefreshField(it);
+  foreach(FieldPtr existingField, m_fields) {
+    if(existingField->type() == Field::Dependent) {
+      emit signalRefreshField(existingField);
     }
   }
 
@@ -815,15 +815,16 @@ bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {
   while(!fieldsToCheck.isEmpty()) {
     FieldPtr f = fieldsToCheck.pop();
     const QStringList depFields = f->dependsOn();
-    for(QStringList::ConstIterator it = depFields.begin(); it != depFields.end(); ++it) {
-      if(fieldNamesFound.has(*it)) {
+    foreach(const QString& depFieldName, depFields) {
+      if(fieldNamesFound.has(depFieldName)) {
+        myLog() << "found recursion for" << field_->name() << ": refers to" << depFieldName << "more than one";
         // we have recursion
         return true;
       }
-      fieldNamesFound.add(*it);
-      FieldPtr f = fieldByName(*it);
+      fieldNamesFound.add(depFieldName);
+      FieldPtr f = fieldByName(depFieldName);
       if(!f) {
-        f = fieldByTitle(*it);
+        f = fieldByTitle(depFieldName);
       }
       if(f) {
         fieldsToCheck.push(f);

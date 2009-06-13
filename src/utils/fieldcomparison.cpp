@@ -109,7 +109,7 @@ int Tellico::ImageComparison::compare(const QString& str1_, const QString& str2_
   return image1.width() - image2.width();
 }
 
-Tellico::DependentComparison::DependentComparison(Data::FieldPtr field) : FieldComparison(field) {
+Tellico::DependentComparison::DependentComparison(Data::FieldPtr field) : ValueComparison(field, new StringComparison()) {
   Data::FieldList fields = Data::Document::self()->collection()->fieldDependsOn(field);
   foreach(Data::FieldPtr field, fields) {
     m_comparisons.append(create(field));
@@ -128,7 +128,7 @@ int Tellico::DependentComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr
       return res;
     }
   }
-  return FieldComparison::compare(entry1_, entry2_);
+  return ValueComparison::compare(entry1_, entry2_);
 }
 
 Tellico::ChoiceComparison::ChoiceComparison(Data::FieldPtr field) : FieldComparison(field) {
