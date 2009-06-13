@@ -35,12 +35,13 @@
 QTEST_KDEMAIN_CORE( TellicoReadTest )
 
 #define QL1(x) QString::fromLatin1(x)
+#define TELLICOREAD_NUMBER_OF_CASES 10
 
 void TellicoReadTest::initTestCase() {
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 
-  for(int i = 1; i < 10; ++i) {
+  for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
     KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
 
     Tellico::Import::TellicoImporter importer(url);
