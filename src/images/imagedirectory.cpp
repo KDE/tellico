@@ -60,7 +60,7 @@ void ImageDirectory::setPath(const QString& path_) {
 }
 
 bool ImageDirectory::hasImage(const QString& id_) const {
-  return QFile::exists(m_path + id_);
+  return QFile::exists(path() + id_);
 }
 
 Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
@@ -69,7 +69,7 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
   }
 
   KUrl imgUrl;
-  imgUrl.setPath(m_path + id_);
+  imgUrl.setPath(path() + id_);
   Data::Image* img = FileHandler::readImageFile(imgUrl, true /* quiet */);
   if(!img) {
     myLog() << "image not found:" << imgUrl;
@@ -87,26 +87,28 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
 }
 
 bool ImageDirectory::writeImage(const Data::Image& img_) {
+  const QString path = this->path(); // virtual function, so don't assume m_path is correct
   if(!m_pathExists) {
-    if(m_path.isEmpty()) {
-      myWarning() << "writing to empty path!";
+    if(path.isEmpty()) {
+      myWarning() << "trying to write to empty path!";
+      return false;
     }
-    QDir dir(m_path);
-    if(dir.mkdir(m_path)) {
-      myLog() << "created" << m_path;
+    QDir dir(path);
+    if(dir.mkdir(path)) {
+      myLog() << "created" << path;
     } else {
-      myWarning() << "unable to create dir:" << m_path;
+      myWarning() << "unable to create dir:" << path;
     }
     m_pathExists = true;
   }
   KUrl target;
-  target.setPath(m_path);
+  target.setPath(path);
   target.setFileName(img_.id());
   return FileHandler::writeDataURL(target, img_.byteArray(), true /* force */);
 }
 
 bool ImageDirectory::removeImage(const QString& id_) {
-  return QFile::remove(m_path + id_);
+  return QFile::remove(path() + id_);
 }
 
 TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(0) {
