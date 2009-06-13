@@ -329,6 +329,11 @@ void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
   int col = action_->data().toInt();
   if(col < header()->count()) {
     setColumnHidden(col, !action_->isChecked());
+    // if we're showing a column, resize all sections
+    if(action_->isChecked()) {
+      resizeColumnToContents(col);
+      adjustColumnWidths();
+    }
   } else if(col == header()->count()) {
     // hide all
     for(int ncol = 0; ncol < header()->count(); ++ncol) {
@@ -501,6 +506,19 @@ void DetailedListView::updateHeaderMenu() {
 
 void DetailedListView::slotRefreshImages() {
   sourceModel()->setImagesAreAvailable(true);
+}
+
+void DetailedListView::adjustColumnWidths() {
+  // this function is called when a column is shown
+  // reduce all visible columns to their size hint, if they are wider than that
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    if(!isColumnHidden(ncol)) {
+      const int width = sizeHintForColumn(ncol);
+      if(columnWidth(ncol) > width) {
+        setColumnWidth(ncol, width);
+      }
+    }
+  }
 }
 
 #include "detailedlistview.moc"

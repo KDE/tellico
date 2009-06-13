@@ -153,6 +153,7 @@ private slots:
 private:
   void contextMenuEvent(QContextMenuEvent* event);
   void setState(Tellico::Data::EntryList entries_, int state);
+  void adjustColumnWidths();
 
   struct ConfigInfo {
     int prevSort;
