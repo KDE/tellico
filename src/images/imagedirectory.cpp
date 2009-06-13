@@ -49,7 +49,7 @@ ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() {
 ImageDirectory::~ImageDirectory() {
 }
 
-const QString& ImageDirectory::path() const {
+QString ImageDirectory::path() {
   return m_path;
 }
 
@@ -95,7 +95,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     if(dir.mkdir(m_path)) {
       myLog() << "created" << m_path;
     } else {
-      myWarning() << "unable to creatd dir:" << m_path;
+      myWarning() << "unable to create dir:" << m_path;
     }
     m_pathExists = true;
   }
@@ -109,24 +109,28 @@ bool ImageDirectory::removeImage(const QString& id_) {
   return QFile::remove(m_path + id_);
 }
 
-TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory() {
-  m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
-  setPath(m_dir->name());
+TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(0) {
 }
 
 TemporaryImageDirectory::~TemporaryImageDirectory() {
-  delete m_dir;
-  m_dir = 0;
+  purge();
 }
 
 void TemporaryImageDirectory::purge() {
   delete m_dir;
-  m_dir = new KTempDir();
-  setPath(m_dir->name());
+  m_dir = 0;
 }
 
-void TemporaryImageDirectory::setPath(const QString& path_) {
-  ImageDirectory::setPath(path_);
+QString TemporaryImageDirectory::path() {
+  if(!m_dir) {
+    m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
+    ImageDirectory::setPath(m_dir->name());
+  }
+  return ImageDirectory::path();
+}
+
+void TemporaryImageDirectory::setPath(const QString& path) {
+  Q_ASSERT(path.isEmpty()); // should never be called, that's why it's private
 }
 
 ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(0) {

@@ -82,13 +82,31 @@ QString ImageFactory::tempDir() {
 }
 
 QString ImageFactory::dataDir() {
-  static const QString dataDir = Tellico::saveLocation(QLatin1String("data/"));
-  return dataDir;
+  return factory->d->dataImageDir.path();
 }
 
 QString ImageFactory::localDir() {
-  QString dir = factory->d->localImageDir.path();
+  const QString dir = factory->d->localImageDir.path();
   return dir.isEmpty() ? dataDir() : dir;
+}
+
+QString ImageFactory::imageDir() {
+  switch(cacheDir()) {
+    case LocalDir: return localDir();
+    case DataDir: return dataDir();
+    case ZipArchive: return tempDir();
+    case TempDir: return tempDir();
+  }
+  return tempDir();
+}
+
+Tellico::ImageFactory::CacheDir ImageFactory::cacheDir() {
+  switch(Config::imageLocation()) {
+    case Config::ImagesInLocalDir: return LocalDir;
+    case Config::ImagesInAppDir: return DataDir;
+    case Config::ImagesInFile: return TempDir;
+  }
+  return TempDir;
 }
 
 QString ImageFactory::addImage(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
@@ -198,14 +216,19 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
 const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_, CacheDir dir_) {
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
   Data::Image* img;
-  if(dir_ == DataDir) {
-    img = d->dataImageDir.imageById(id_);
-  } else if(dir_ == LocalDir) {
-    img = d->localImageDir.imageById(id_);
-  } else if(dir_ == TempDir) {
-    img = d->tempImageDir.imageById(id_);
-  } else if(dir_ == ZipArchive) {
-    img = d->imageZipArchive.imageById(id_);
+  switch(dir_) {
+    case DataDir:
+      img = d->dataImageDir.imageById(id_);
+      break;
+    case LocalDir:
+      img = d->localImageDir.imageById(id_);
+      break;
+    case TempDir:
+      img = d->tempImageDir.imageById(id_);
+      break;
+    case ZipArchive:
+      img = d->imageZipArchive.imageById(id_);
+      break;
   }
   if(!img) {
     myWarning() << "image not found:" << id_;
@@ -216,7 +239,7 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
 
   if(!d->imageCache.insert(img->id(), img, img->numBytes())) {
     // can't hold it in the cache
-    myWarning() << "Tellico's image cache is unable to hold the image, it might be too big!";
+    myWarning() << "Image cache is unable to hold the image, it might be too big!";
     myWarning() << "Image name is " << img->id();
     myWarning() << "Image size is " << img->numBytes();
     myWarning() << "Max cache size is " << d->imageCache.maxCost();
@@ -363,6 +386,20 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       myDebug() << "tried to add" << id_ << "from" << imgDir2->path() << "but failed";
     }
   }
+  // at this point, there's a possibility that the user has changed settings so that the images
+  // are currently in a local or data directory, but Config::imageLocation() doesn't match that location
+  if(factory->d->dataImageDir.hasImage(id_)) {
+    const Data::Image& img2 = factory->addCachedImageImpl(id_, DataDir);
+    if(!img2.isNull()) {
+      return img2;
+    }
+  }
+  if(factory->d->localImageDir.hasImage(id_)) {
+    const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
+    if(!img2.isNull()) {
+      return img2;
+    }
+  }
   myDebug() << "***not found:" << id_;
   return Data::Image::null;
 }
@@ -422,7 +459,7 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
   return *pix;
 }
 
-void ImageFactory::clean(bool deleteTempDirectory_) {
+void ImageFactory::clean(bool purgeTempDirectory_) {
   // the caches all auto-delete
   s_imagesToRelease.clear();
   qDeleteAll(factory->d->imageDict);
@@ -430,7 +467,7 @@ void ImageFactory::clean(bool deleteTempDirectory_) {
   s_imageInfoMap.clear();
   factory->d->imageCache.clear();
   factory->d->pixmapCache.clear();
-  if(deleteTempDirectory_) {
+  if(purgeTempDirectory_) {
     factory->d->tempImageDir.purge();
   }
 }

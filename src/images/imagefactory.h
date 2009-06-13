@@ -79,6 +79,8 @@ public:
   static QString tempDir();
   static QString dataDir();
   static QString localDir();
+  static QString imageDir();
+  static CacheDir cacheDir();
 
   /**
    * Add an image, reading it from a URL, which is the case when adding a new image from the

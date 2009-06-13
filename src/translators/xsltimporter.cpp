@@ -27,6 +27,7 @@
 #include "tellicoimporter.h"
 #include "../core/filehandler.h"
 #include "../collection.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kurlrequester.h>
@@ -122,6 +123,10 @@ QWidget* XSLTImporter::widget(QWidget* parent_) {
   l->addWidget(gbox);
   l->addStretch(1);
   return m_widget;
+}
+
+void XSLTImporter::slotCancel() {
+  myDebug() << "unimplemented";
 }
 
 #include "xsltimporter.moc"

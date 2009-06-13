@@ -53,7 +53,7 @@ public:
   ImageDirectory(const QString& path);
   virtual ~ImageDirectory();
 
-  const QString& path() const;
+  virtual QString path();
   virtual void setPath(const QString& path);
 
   bool hasImage(const QString& id) const;
@@ -71,12 +71,13 @@ public:
   TemporaryImageDirectory();
   virtual ~TemporaryImageDirectory();
 
+  virtual QString path();
   void purge();
 
 private:
   void setPath(const QString& path);
 
-  KTempDir* m_dir;
+  mutable KTempDir* m_dir;
 };
 
 class ImageZipArchive : public ImageStorage {

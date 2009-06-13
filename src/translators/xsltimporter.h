@@ -54,6 +54,9 @@ public:
   virtual QWidget* widget(QWidget* parent);
   void setXSLTURL(const KUrl& url) { m_xsltURL = url; }
 
+public slots:
+  void slotCancel();
+
 private:
   Data::CollPtr m_coll;
 

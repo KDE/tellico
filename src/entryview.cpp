@@ -25,17 +25,17 @@
 #include "entryview.h"
 #include "entry.h"
 #include "field.h"
-#include "filehandler.h"
 #include "translators/xslthandler.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
 #include "images/imagefactory.h"
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
+#include "core/filehandler.h"
 #include "core/tellico_config.h"
+#include "core/drophandler.h"
 #include "newstuff/manager.h"
 #include "document.h"
-#include "../core/drophandler.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -163,7 +163,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
       continue;
     }
     if(Data::Document::self()->allImagesOnDisk()) {
-      ImageFactory::writeCachedImage(id, ImageFactory::DataDir);
+      ImageFactory::writeCachedImage(id, ImageFactory::cacheDir());
     } else {
       ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
     }
@@ -267,7 +267,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
 
   if(Data::Document::self()->allImagesOnDisk()) {
-    m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::dataDir()));
+    m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::imageDir()));
   } else {
     m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
   }
