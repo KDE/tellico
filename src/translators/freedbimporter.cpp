@@ -128,7 +128,6 @@ void FreeDBImporter::readCDROM() {
     << 222158
     << 247076
     << 278203   // Last track start.
-    << 10       // Disc start.
     << 316732;  // Disc end.
 */
   list
@@ -160,7 +159,6 @@ void FreeDBImporter::readCDROM() {
     << 193270
     << 206451
     << 217303   // Last track start.
-    << 10       // Disc start.
     << 224925;  // Disc end.
 /*
   list
@@ -169,7 +167,6 @@ void FreeDBImporter::readCDROM() {
     << 127220
     << 151925
     << 176085
-    << 5
     << 234500;
 */
 #else
@@ -180,9 +177,7 @@ void FreeDBImporter::readCDROM() {
     setStatusMessage(i18n("<qt>Tellico was unable to access the CD-ROM device - <i>%1</i>.</qt>", drivePath));
     return;
   }
-//  for(KCDDB::TrackOffsetList::iterator it = list.begin(); it != list.end(); ++it) {
-//    myDebug() << *it;
-//  }
+//  myDebug() << list;
 
   // the result info, could be multiple ones
   KCDDB::CDInfo info;
@@ -191,7 +186,7 @@ void FreeDBImporter::readCDROM() {
 
   KCDDB::Result r = client.lookup(list);
   const KCDDB::CDInfoList responseList = client.lookupResponse();
-  // KCDDB doesn't return MultipleRecordFound properly, so check outselves
+  // KCDDB sometimes doesn't return MultipleRecordFound properly, so check length of response, too
   if(r == KCDDB::MultipleRecordFound || responseList.count() > 1) {
     QStringList list;
     foreach(const KCDDB::CDInfo& info, responseList) {

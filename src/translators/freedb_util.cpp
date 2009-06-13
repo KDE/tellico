@@ -232,7 +232,6 @@ QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& tr
     list.append(TocEntry[i].cdte_track_address + CD_MSF_OFFSET);
   }
 
-  list.append(TocEntry[0].cdte_track_address + CD_MSF_OFFSET);
   list.append(TocEntry[last].cdte_track_address + CD_MSF_OFFSET);
 
   // hey, these are track lengths! :P
