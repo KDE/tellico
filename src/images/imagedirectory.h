@@ -43,7 +43,7 @@ public:
   ImageStorage() {}
   virtual ~ImageStorage() {}
 
-  virtual bool hasImage(const QString& id) const = 0;
+  virtual bool hasImage(const QString& id) = 0;
   virtual Data::Image* imageById(const QString& id) = 0;
 };
 
@@ -56,7 +56,7 @@ public:
   virtual QString path();
   virtual void setPath(const QString& path);
 
-  bool hasImage(const QString& id) const;
+  bool hasImage(const QString& id);
   Data::Image* imageById(const QString& id);
   bool writeImage(const Data::Image& image);
   bool removeImage(const QString& id);
@@ -77,7 +77,7 @@ public:
 private:
   void setPath(const QString& path);
 
-  mutable KTempDir* m_dir;
+  KTempDir* m_dir;
 };
 
 class ImageZipArchive : public ImageStorage {
@@ -87,7 +87,7 @@ public:
 
   void setZip(KZip* zip);
 
-  bool hasImage(const QString& id) const;
+  bool hasImage(const QString& id);
   Data::Image* imageById(const QString& id);
 
 private:

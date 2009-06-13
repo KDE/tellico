@@ -59,7 +59,7 @@ void ImageDirectory::setPath(const QString& path_) {
   m_pathExists = dir.exists();
 }
 
-bool ImageDirectory::hasImage(const QString& id_) const {
+bool ImageDirectory::hasImage(const QString& id_) {
   return QFile::exists(path() + id_);
 }
 
@@ -165,7 +165,7 @@ void ImageZipArchive::setZip(KZip* zip_) {
   m_images.add(m_imgDir->entries());
 }
 
-bool ImageZipArchive::hasImage(const QString& id_) const {
+bool ImageZipArchive::hasImage(const QString& id_) {
   return m_images.has(id_);
 }
 
