@@ -315,7 +315,7 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
     success = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
-    if(!uploaded) {
+    if(!success) {
       tempfile.remove();
       if(!quiet_) {
         GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
