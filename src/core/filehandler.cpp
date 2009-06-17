@@ -314,13 +314,12 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
 
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
-    bool uploaded = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
+    success = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
     if(!uploaded) {
       tempfile.remove();
       if(!quiet_) {
         GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
       }
-      success = false;
     }
   }
   tempfile.remove();
@@ -328,16 +327,17 @@ bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool enco
   return success;
 }
 
-bool FileHandler::writeTextFile(KSaveFile& f_, const QString& text_, bool encodeUTF8_) {
-  QTextStream t(&f_);
+bool FileHandler::writeTextFile(KSaveFile& file_, const QString& text_, bool encodeUTF8_) {
+  QTextStream t(&file_);
   if(encodeUTF8_) {
     t.setCodec("UTF-8");
   }
   t << text_;
-  bool success = f_.finalize();
+  file_.flush();
+  bool success = file_.finalize();
 #ifndef NDEBUG
   if(!success) {
-    myDebug() << "error = " << f_.error();
+    myDebug() << "error = " << file_.error();
   }
 #endif
   return success;
@@ -370,7 +370,7 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
       return false;
     }
     bool success = FileHandler::writeDataFile(f, data_);
-    if(!list.isEmpty()) {
+    if(success && !list.isEmpty()) {
       // have to leave the user alone
       KIO::chmod(list, perm, 0, QString(), grp, true, KIO::HideProgressInfo);
     }
@@ -401,8 +401,15 @@ bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool f
   return success;
 }
 
-bool FileHandler::writeDataFile(KSaveFile& f_, const QByteArray& data_) {
-  QDataStream s(&f_);
+bool FileHandler::writeDataFile(KSaveFile& file_, const QByteArray& data_) {
+  QDataStream s(&file_);
   s.writeRawData(data_.data(), data_.size());
-  return f_.finalize();
+  file_.flush();
+  bool success = file_.finalize();
+#ifndef NDEBUG
+  if(!success) {
+    myDebug() << "error = " << file_.error();
+  }
+#endif
+  return success;
 }
