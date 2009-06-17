@@ -138,7 +138,7 @@ void EntryUpdater::slotDone() {
     m_fetchIndex = 0;
     // we've gone through the loop for the first entry in the vector
     // pop it and move on
-    m_entriesToUpdate.removeAll(m_entriesToUpdate[0]);
+    m_entriesToUpdate.removeAll(m_entriesToUpdate.front());
     // if there are no more entries, and this is the last fetcher, time to delete
     if(m_entriesToUpdate.isEmpty()) {
       QTimer::singleShot(500, this, SLOT(slotCleanup()));
