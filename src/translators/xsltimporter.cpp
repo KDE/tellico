@@ -45,7 +45,7 @@ namespace {
 
 static bool isUTF8(const KUrl& url_) {
   // read first line to check encoding
-  std::auto_ptr<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
+  const std::auto_ptr<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
   if(!ref->isValid()) {
     return false;
   }

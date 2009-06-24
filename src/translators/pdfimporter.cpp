@@ -49,6 +49,7 @@
 #include <poppler-qt4.h>
 #endif
 
+#include <memory>
 namespace {
   static const int PDF_FILE_PREVIEW_SIZE = 196;
 }
@@ -93,8 +94,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   XMPHandler xmpHandler;
   KUrl::List list = urls();
   for(KUrl::List::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
-    FileHandler::FileRef* ref = FileHandler::fileRef(*it);
-    if(!ref) {
+    const std::auto_ptr<FileHandler::FileRef> ref(FileHandler::fileRef(*it));
+    if(!ref->isValid()) {
       continue;
     }
 
@@ -206,7 +207,6 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
 
     QPixmap pix = NetAccess::filePreview(ref->fileName(), PDF_FILE_PREVIEW_SIZE);
-    delete ref; // removes temp file
 
     if(!pix.isNull()) {
       // is png best option?

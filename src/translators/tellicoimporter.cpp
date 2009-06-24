@@ -90,7 +90,6 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
     s = QByteArray(data(), 6);
   }
 
-
   // need to decide if the data is xml text, or a zip file
   // if the first 5 characters are <?xml then treat it like text
   if(s[0] == '<' && s[1] == '?' && s[2] == 'x' && s[3] == 'm' && s[4] == 'l') {
