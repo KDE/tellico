@@ -366,11 +366,11 @@ void DetailedListView::slotRefresh() {
 }
 
 void DetailedListView::setFilter(Tellico::FilterPtr filter_) {
-  sortModel()->setFilter(filter_);
+  static_cast<EntrySortModel*>(sortModel())->setFilter(filter_);
 }
 
 Tellico::FilterPtr DetailedListView::filter() const {
-  return sortModel()->filter();
+  return static_cast<EntrySortModel*>(sortModel())->filter();
 }
 
 void DetailedListView::addField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr field) {

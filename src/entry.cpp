@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "entry.h"
+#include "entrygroup.h"
 #include "collection.h"
 #include "field.h"
 #include "tellico_utils.h"
@@ -33,19 +34,6 @@
 #include <QRegExp>
 
 using Tellico::Data::Entry;
-using Tellico::Data::EntryGroup;
-
-EntryGroup::EntryGroup(const QString& group, const QString& field)
-   : QObject(), EntryList(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
-}
-
-EntryGroup::~EntryGroup() {
-  // need a copy since we remove ourselves
-  EntryList vec = *this;
-  foreach(EntryPtr entry, vec) {
-    entry->removeFromGroup(this);
-  }
-}
 
 Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {
 #ifndef NDEBUG
@@ -272,17 +260,12 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 
   // easy if not allowing multiple values
   if(!(f->flags() & Field::AllowMultiple)) {
-    QString value = formattedField(fieldName_);
-    if(value.isEmpty()) {
-      return QStringList(i18n(Collection::s_emptyGroupTitle));
-    } else {
-      return QStringList(value);
-    }
+    return QStringList(formattedField(fieldName_));
   }
 
   QStringList groups = fields(fieldName_, true);
   if(groups.isEmpty()) {
-    return QStringList(i18n(Collection::s_emptyGroupTitle));
+    return QStringList(QString());
   } else if(f->type() == Field::Table) {
     // quick hack for tables, how often will a user have "::" in their value?
     // only use first column for group
@@ -358,5 +341,3 @@ QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool 
   // so let's simplify that...
   return result.simplified();
 }
-
-#include "entry.moc"

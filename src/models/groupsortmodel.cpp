@@ -22,37 +22,51 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_TREEVIEW_H
-#define TELLICO_GUI_TREEVIEW_H
+#include "groupsortmodel.h"
+#include "models.h"
+#include "../field.h"
+#include "../entrygroup.h"
+#include "../utils/stringcomparison.h"
+#include "../utils/fieldcomparison.h"
 
-#include <QTreeView>
+using Tellico::GroupSortModel;
 
-namespace Tellico {
+GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent), m_titleComparison(new TitleComparison()), m_groupComparison(0) {
+}
 
-  class AbstractSortModel;
+GroupSortModel::~GroupSortModel() {
+  delete m_titleComparison;
+  m_titleComparison = 0;
+  delete m_groupComparison;
+  m_groupComparison = 0;
+}
 
-  namespace GUI {
+bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
+  if(sortRole() != GroupPtrRole) {
+    return AbstractSortModel::lessThan(left_, right_);
+  }
 
-/**
- * @author Robby Stephenson
- */
-class TreeView : public QTreeView {
-Q_OBJECT
+  // if the index have parents, then they represent entries, compare by title
+  QModelIndex leftParent = left_.parent();
+  QModelIndex rightParent = right_.parent();
+  if(leftParent.isValid() && rightParent.isValid()) {
+    return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
+  }
 
-public:
-  TreeView(QWidget* parent);
-  virtual ~TreeView();
+  Data::EntryGroup* leftGroup = static_cast<Data::EntryGroup*>(sourceModel()->data(left_, GroupPtrRole).value<void*>());
+  Data::EntryGroup* rightGroup = static_cast<Data::EntryGroup*>(sourceModel()->data(right_, GroupPtrRole).value<void*>());
 
-  virtual void setModel(QAbstractItemModel* model);
-  AbstractSortModel* sortModel() const;
+  const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
+  const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());
+  if(emptyLeft && !emptyRight) {
+    return true;
+  } else if(!emptyLeft && emptyRight) {
+    return false;
+  } else if(emptyLeft && emptyRight) {
+    return false;
+  }
 
-  bool isEmpty() const;
+  return AbstractSortModel::lessThan(left_, right_);
+}
 
-  void setSorting(Qt::SortOrder order, int role);
-  Qt::SortOrder sortOrder() const;
-  int sortRole() const;
-};
-
-  } // end namespace
-} // end namespace
-#endif
+#include "groupsortmodel.moc"

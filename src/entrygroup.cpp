@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,37 +22,35 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_TREEVIEW_H
-#define TELLICO_GUI_TREEVIEW_H
+#include "entrygroup.h"
+#include "entry.h"
+#include "tellico_utils.h"
 
-#include <QTreeView>
+#include <klocale.h>
 
-namespace Tellico {
+using Tellico::Data::EntryGroup;
 
-  class AbstractSortModel;
+EntryGroup::EntryGroup(const QString& group, const QString& field)
+   : EntryList(), m_group(Tellico::shareString(group)), m_field(Tellico::shareString(field)) {
+}
 
-  namespace GUI {
+EntryGroup::~EntryGroup() {
+  // need a copy since we remove ourselves
+  EntryList vec = *this;
+  foreach(EntryPtr entry, vec) {
+    entry->removeFromGroup(this);
+  }
+}
 
-/**
- * @author Robby Stephenson
- */
-class TreeView : public QTreeView {
-Q_OBJECT
+QString EntryGroup::groupName() const {
+  static const QString emptyGroupName = i18n("(Empty)");
+  return hasEmptyGroupName() ? emptyGroupName : m_group;
+}
 
-public:
-  TreeView(QWidget* parent);
-  virtual ~TreeView();
+QString EntryGroup::fieldName() const {
+  return m_field;
+}
 
-  virtual void setModel(QAbstractItemModel* model);
-  AbstractSortModel* sortModel() const;
-
-  bool isEmpty() const;
-
-  void setSorting(Qt::SortOrder order, int role);
-  Qt::SortOrder sortOrder() const;
-  int sortRole() const;
-};
-
-  } // end namespace
-} // end namespace
-#endif
+bool EntryGroup::hasEmptyGroupName() const {
+  return m_group.isEmpty();
+}

@@ -469,7 +469,6 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   SETFIELD("track", tracks.join(QLatin1String("; ")));
 
   // something special for compilations and such
-  SETFIELD("title",  i18n(Data::Collection::s_emptyGroupTitle));
   SETFIELD("artist", artist);
 #else
   Q_UNUSED(drive_);

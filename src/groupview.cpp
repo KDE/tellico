@@ -26,11 +26,12 @@
 #include "collection.h"
 #include "field.h"
 #include "entry.h"
+#include "entrygroup.h"
 #include "filter.h"
 #include "controller.h"
 #include "../tellico_debug.h"
 #include "models/entrygroupmodel.h"
-#include "models/entrysortmodel.h"
+#include "models/groupsortmodel.h"
 #include "models/models.h"
 #include "gui/countdelegate.h"
 
@@ -67,7 +68,7 @@ GroupView::GroupView(QWidget* parent_)
   m_groupOpenIconName = QLatin1String("folder-open");
   m_groupClosedIconName = QLatin1String("folder");
   EntryGroupModel* groupModel = new EntryGroupModel(this);
-  EntrySortModel* sortModel = new EntrySortModel(this);
+  GroupSortModel* sortModel = new GroupSortModel(this);
   sortModel->setSourceModel(groupModel);
   setModel(sortModel);
   setItemDelegate(new GUI::CountDelegate(this));
@@ -143,7 +144,7 @@ void GroupView::populateCollection() {
   sourceModel()->addGroups(dict->values(), m_groupClosedIconName);
   // still need to change icon for empty group
   foreach(Data::EntryGroup* group, *dict) {
-    if(group->groupName() == i18n(Data::Collection::s_emptyGroupTitle)) {
+    if(group->hasEmptyGroupName()) {
       QModelIndex emptyGroupIndex = sourceModel()->indexFromGroup(group);
       sourceModel()->setData(emptyGroupIndex, QLatin1String("folder-red"), Qt::DecorationRole);
       break;
@@ -271,17 +272,13 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
 }
 
 void GroupView::slotCollapsed(const QModelIndex& index_) {
-  if(model()->data(index_).toString() == i18n(Tellico::Data::Collection::s_emptyGroupTitle)) {
-    model()->setData(index_, QLatin1String("folder-red"), Qt::DecorationRole);
-  } else {
+  if(model()->data(index_, Qt::DecorationRole).toString() == m_groupOpenIconName) {
     model()->setData(index_, m_groupClosedIconName, Qt::DecorationRole);
   }
 }
 
 void GroupView::slotExpanded(const QModelIndex& index_) {
-  if(model()->data(index_).toString() == i18n(Tellico::Data::Collection::s_emptyGroupTitle)) {
-    model()->setData(index_, QLatin1String("folder-red"), Qt::DecorationRole);
-  } else {
+  if(model()->data(index_, Qt::DecorationRole).toString() == m_groupClosedIconName) {
     model()->setData(index_, m_groupOpenIconName, Qt::DecorationRole);
   }
 }
@@ -335,9 +332,9 @@ void GroupView::slotFilterGroup() {
         filter->append(new FilterRule(field->name(), model()->data(index).toString(), FilterRule::FuncContains));
       }
     } else {
-      QString text = model()->data(index).toString();
-      if(text != i18n(Data::Collection::s_emptyGroupTitle)) {
-        filter->append(new FilterRule(m_groupBy, text, FilterRule::FuncContains));
+      Data::EntryGroup* group = static_cast<Data::EntryGroup*>(model()->data(index, GroupPtrRole).value<void*>());
+      if(group && !group->hasEmptyGroupName()) {
+        filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
       }
     }
   }
@@ -420,7 +417,7 @@ void GroupView::addGroup(Tellico::Data::EntryGroup* group_) {
     return;
   }
   QModelIndex index = sourceModel()->addGroup(group_);
-  if(group_->groupName() == i18n(Data::Collection::s_emptyGroupTitle)) {
+  if(group_->hasEmptyGroupName()) {
     sourceModel()->setData(index, QLatin1String("folder-red"), Qt::DecorationRole);
   } else {
     sourceModel()->setData(index, m_groupClosedIconName, Qt::DecorationRole);

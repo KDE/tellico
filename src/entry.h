@@ -27,7 +27,6 @@
 
 #include "datavectors.h"
 
-#include <QObject>
 #include <QStringList>
 
 #include <functional>
@@ -38,33 +37,7 @@ namespace Tellico {
 
   namespace Data {
     class Collection;
-
-/**
- * The EntryGroup is simply a vector of entries which knows the name of its group,
- * and the name of the field to which that group belongs.
- *
- * An example for a book collection would be a group of books, all written by
- * David Weber. The @ref groupName() would be "Weber, David" and the
- * @ref fieldName() would be "author".
- *
- * It's a QObject because EntryGroupItem holds a QPointer
- *
- * @author Robby Stephenson
- */
-class EntryGroup : public QObject, public EntryList {
-Q_OBJECT
-
-public:
-  EntryGroup(const QString& group, const QString& field);
-  ~EntryGroup();
-
-  const QString& groupName() const { return m_group; }
-  const QString& fieldName() const { return m_field; }
-
-private:
-  QString m_group;
-  QString m_field;
-};
+    class EntryGroup;
 
 /**
  * The Entry class represents a book, a CD, or whatever is the basic entity

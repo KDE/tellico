@@ -22,37 +22,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_TREEVIEW_H
-#define TELLICO_GUI_TREEVIEW_H
+#ifndef TELLICO_GROUPSORTMODEL_H
+#define TELLICO_GROUPSORTMODEL_H
 
-#include <QTreeView>
+#include "abstractsortmodel.h"
 
 namespace Tellico {
 
-  class AbstractSortModel;
-
-  namespace GUI {
+class StringComparison;
+class FieldComparison;
 
 /**
  * @author Robby Stephenson
  */
-class TreeView : public QTreeView {
+class GroupSortModel : public AbstractSortModel {
 Q_OBJECT
 
 public:
-  TreeView(QWidget* parent);
-  virtual ~TreeView();
+  GroupSortModel(QObject* parent);
+  virtual ~GroupSortModel();
 
-  virtual void setModel(QAbstractItemModel* model);
-  AbstractSortModel* sortModel() const;
+protected:
+  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
-  bool isEmpty() const;
-
-  void setSorting(Qt::SortOrder order, int role);
-  Qt::SortOrder sortOrder() const;
-  int sortRole() const;
+private:
+  StringComparison* m_titleComparison;
+  FieldComparison* m_groupComparison;
 };
 
-  } // end namespace
 } // end namespace
 #endif

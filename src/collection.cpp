@@ -25,6 +25,7 @@
 #include "collection.h"
 #include "field.h"
 #include "entry.h"
+#include "entrygroup.h"
 #include "tellico_utils.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
@@ -37,7 +38,6 @@
 
 using Tellico::Data::Collection;
 
-const char* Collection::s_emptyGroupTitle = I18N_NOOP("(Empty)");
 const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
 Collection::Collection(const QString& title_)
@@ -623,11 +623,11 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
 
   QList<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
-    QStringList groups = entryGroupNamesByField(entry, fieldName_);
+    const QStringList groups = entryGroupNamesByField(entry, fieldName_);
     foreach(QString groupTitle, groups) { // krazy:exclude=foreach
       // find the group for this group name
-      // bool fields used the field title
-      if(isBool && groupTitle != i18n(s_emptyGroupTitle)) {
+      // bool fields use the field title
+      if(isBool && !groupTitle.isEmpty()) {
         groupTitle = fieldTitleByName(fieldName_);
       }
       EntryGroup* group = (*dict_)[groupTitle];
@@ -694,7 +694,7 @@ QStringList Collection::entryGroupNamesByField(Tellico::Data::EntryPtr entry_, c
   foreach(FieldPtr field, m_peopleFields) {
     values.add(entry_->groupNamesByFieldName(field->name()));
   }
-  values.remove(i18n(s_emptyGroupTitle));
+  values.remove(QString());
   return values.toList();
 }
 

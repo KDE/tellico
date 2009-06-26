@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "treeview.h"
-#include "../models/entrysortmodel.h"
+#include "../models/abstractsortmodel.h"
 
 #include <QHeaderView>
 
@@ -37,12 +37,12 @@ TreeView::~TreeView() {
 }
 
 void TreeView::setModel(QAbstractItemModel* model_) {
-  Q_ASSERT(::qobject_cast<EntrySortModel*>(model_));
+  Q_ASSERT(::qobject_cast<AbstractSortModel*>(model_));
   QTreeView::setModel(model_);
 }
 
-Tellico::EntrySortModel* TreeView::sortModel() const {
-  return static_cast<EntrySortModel*>(model());
+Tellico::AbstractSortModel* TreeView::sortModel() const {
+  return static_cast<AbstractSortModel*>(model());
 }
 
 bool TreeView::isEmpty() const {

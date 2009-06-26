@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,37 +22,42 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_TREEVIEW_H
-#define TELLICO_GUI_TREEVIEW_H
+#ifndef TELLICO_ENTRYGROUP_H
+#define TELLICO_ENTRYGROUP_H
 
-#include <QTreeView>
+#include "datavectors.h"
 
 namespace Tellico {
 
-  class AbstractSortModel;
-
-  namespace GUI {
+  namespace Data {
 
 /**
+ * The EntryGroup is simply a vector of entries which knows the name of its group,
+ * and the name of the field to which that group belongs.
+ *
+ * An example for a book collection would be a group of books, all written by
+ * David Weber. The @ref groupName() would be "Weber, David" and the
+ * @ref fieldName() would be "author".
+ *
  * @author Robby Stephenson
  */
-class TreeView : public QTreeView {
-Q_OBJECT
+class EntryGroup : public EntryList {
 
 public:
-  TreeView(QWidget* parent);
-  virtual ~TreeView();
+  EntryGroup(const QString& group, const QString& field);
+  ~EntryGroup();
 
-  virtual void setModel(QAbstractItemModel* model);
-  AbstractSortModel* sortModel() const;
+  QString groupName() const;
+  QString fieldName() const;
 
-  bool isEmpty() const;
+  bool hasEmptyGroupName() const;
 
-  void setSorting(Qt::SortOrder order, int role);
-  Qt::SortOrder sortOrder() const;
-  int sortRole() const;
+private:
+  QString m_group;
+  QString m_field;
 };
 
   } // end namespace
 } // end namespace
+
 #endif

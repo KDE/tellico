@@ -31,6 +31,7 @@ TARGET_LINK_LIBRARIES(fieldtest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} $
 SET(collection_SRCS
    ../collection.cpp
    ../entry.cpp
+   ../entrygroup.cpp
    ../entrycomparison.cpp
    ../field.cpp
    ../fieldformat.cpp

@@ -128,7 +128,7 @@ Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index
     return m_comparisons.value(index_.column());
   }
   FieldComparison* comp = 0;
-  Data::FieldPtr field = sourceModel()->data(index_, FieldPtrRole).value<Data::FieldPtr>();
+  Data::FieldPtr field = sourceModel()->headerData(index_.column(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
   if(field) {
     comp = FieldComparison::create(field);
     m_comparisons.insert(index_.column(), comp);

@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "tellicoxmlexporter.h"
+#include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"

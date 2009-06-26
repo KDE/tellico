@@ -30,6 +30,7 @@ SET(tellico_SRCS
    document.cpp
    entry.cpp
    entryeditdialog.cpp
+   entrygroup.cpp
    entryiconview.cpp
    entrycomparison.cpp
    entrymerger.cpp
