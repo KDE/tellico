@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "groupiterator.h"
+#include "entrygroup.h"
 #include "models/models.h"
 
 #include <QAbstractItemModel>
@@ -42,6 +43,5 @@ Tellico::Data::EntryGroup* GroupIterator::group() {
     return 0;
   }
 
-  QVariant v = m_model->data(m_model->index(m_row, 0), GroupPtrRole);
-  return reinterpret_cast<Data::EntryGroup*>(v.value<void*>());
+  return m_model->data(m_model->index(m_row, 0), GroupPtrRole).value<Data::EntryGroup*>();
 }

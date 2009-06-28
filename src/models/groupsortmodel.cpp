@@ -53,8 +53,8 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
   }
 
-  Data::EntryGroup* leftGroup = static_cast<Data::EntryGroup*>(sourceModel()->data(left_, GroupPtrRole).value<void*>());
-  Data::EntryGroup* rightGroup = static_cast<Data::EntryGroup*>(sourceModel()->data(right_, GroupPtrRole).value<void*>());
+  Data::EntryGroup* leftGroup = sourceModel()->data(left_, GroupPtrRole).value<Data::EntryGroup*>();
+  Data::EntryGroup* rightGroup = sourceModel()->data(right_, GroupPtrRole).value<Data::EntryGroup*>();
 
   const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
   const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());

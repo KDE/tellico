@@ -28,6 +28,10 @@
 
 #include <klocale.h>
 
+namespace {
+  static const char* emptyString = I18N_NOOP("(Empty)");
+}
+
 using Tellico::Data::EntryGroup;
 
 EntryGroup::EntryGroup(const QString& group, const QString& field)
@@ -43,8 +47,7 @@ EntryGroup::~EntryGroup() {
 }
 
 QString EntryGroup::groupName() const {
-  static const QString emptyGroupName = i18n("(Empty)");
-  return hasEmptyGroupName() ? emptyGroupName : m_group;
+  return hasEmptyGroupName() ? i18n(emptyString) : m_group;
 }
 
 QString EntryGroup::fieldName() const {

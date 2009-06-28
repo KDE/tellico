@@ -60,4 +60,6 @@ private:
   } // end namespace
 } // end namespace
 
+Q_DECLARE_METATYPE(Tellico::Data::EntryGroup*)
+
 #endif

@@ -132,7 +132,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
     case EntryPtrRole:
       return qVariantFromValue(entry(index_));
     case GroupPtrRole:
-      return QVariant::fromValue<void*>(group(index_));
+      return qVariantFromValue(group(index_));
   }
 
   return QVariant();

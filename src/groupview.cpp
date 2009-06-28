@@ -332,7 +332,7 @@ void GroupView::slotFilterGroup() {
         filter->append(new FilterRule(field->name(), model()->data(index).toString(), FilterRule::FuncContains));
       }
     } else {
-      Data::EntryGroup* group = static_cast<Data::EntryGroup*>(model()->data(index, GroupPtrRole).value<void*>());
+      Data::EntryGroup* group = model()->data(index, GroupPtrRole).value<Data::EntryGroup*>();
       if(group && !group->hasEmptyGroupName()) {
         filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
       }
