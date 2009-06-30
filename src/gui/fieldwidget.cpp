@@ -162,6 +162,8 @@ void FieldWidget::setText(const QString& text_) {
   m_settingText = true;
   setTextImpl(text_);
   m_settingText = false;
+  // now check to see if the widget modified the text
+  checkModified();
 }
 
 void FieldWidget::clear() {
