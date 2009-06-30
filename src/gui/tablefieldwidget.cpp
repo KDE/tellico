@@ -107,27 +107,18 @@ QString TableFieldWidget::text() const {
   if(!text.isEmpty()) {
     text.truncate(text.length()-2); // remove last semi-colon and space
   }
-
-  // now reduce number of rows if necessary
-  bool loop = true;
-  for(int row = m_table->rowCount()-1; loop && row > MIN_TABLE_ROWS; --row) {
-    if(emptyRow(row)) {
-      m_table->removeRow(row);
-    } else {
-      loop = false;
-    }
-  }
   return text;
 }
 
 void TableFieldWidget::setTextImpl(const QString& text_) {
-  QStringList list = Data::Field::split(text_, true);
+  const QStringList list = Data::Field::split(text_, true);
   if(list.count() != m_table->rowCount()) {
+    m_table->insertRow(MIN_TABLE_ROWS+1);
     m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
   }
   for(int row = 0; row < list.count(); ++row) {
     for(int col = 0; col < m_table->columnCount(); ++col) {
-      QString value = list[row].section(QLatin1String("::"), col, col);
+      QString value = list.at(row).section(QLatin1String("::"), col, col);
       QTableWidgetItem* item = new QTableWidgetItem(value);
       m_table->setItem(row, col, item);
     }
@@ -195,7 +186,6 @@ void TableFieldWidget::labelColumns(Tellico::Data::FieldPtr field_) {
       s = i18n("Column %1", col+1);
     }
     labels += s;
-//    m_table->horizontalHeaderItem(col)->setText(s);
   }
   m_table->setHorizontalHeaderLabels(labels);
 }
@@ -299,8 +289,10 @@ void TableFieldWidget::slotMoveRowUp() {
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QTableWidgetItem* item1 = m_table->takeItem(m_row-1, col);
     QTableWidgetItem* item2 = m_table->takeItem(m_row  , col);
-    if(item1 && item2) {
+    if(item1) {
       m_table->setItem(m_row  , col, item1);
+    }
+    if(item2) {
       m_table->setItem(m_row-1, col, item2);
     }
   }

@@ -101,6 +101,7 @@ private:
   QString m_oldValue;
 
   bool m_expands;
+  bool m_settingText;
 };
 
   } // end GUI namespace

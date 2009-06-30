@@ -102,7 +102,7 @@ FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent
 }
 
 FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
-    : QWidget(parent_), m_field(field_) {
+    : QWidget(parent_), m_field(field_), m_settingText(false) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(2);
   l->setSpacing(2);
@@ -159,7 +159,9 @@ void FieldWidget::setEnabled(bool enabled_) {
 
 void FieldWidget::setText(const QString& text_) {
   m_oldValue = text_;
+  m_settingText = true;
   setTextImpl(text_);
+  m_settingText = false;
 }
 
 void FieldWidget::clear() {
@@ -220,6 +222,13 @@ void FieldWidget::updateField(Tellico::Data::FieldPtr oldField_, Tellico::Data::
 }
 
 void FieldWidget::checkModified() {
+  // some of the widgets have signals that fire when the text is modified
+  // in particular, the tablewidget used to prune empty rows when text() was called
+  // just to guard against that in the future, don't emit anything if
+  // we're in the process of setting the text
+  if(m_settingText) {
+    return;
+  }
   const QString value = text();
   if(value != m_oldValue) {
     m_oldValue = value;
