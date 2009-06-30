@@ -113,7 +113,6 @@ QString TableFieldWidget::text() const {
 void TableFieldWidget::setTextImpl(const QString& text_) {
   const QStringList list = Data::Field::split(text_, true);
   if(list.count() != m_table->rowCount()) {
-    m_table->insertRow(MIN_TABLE_ROWS+1);
     m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
   }
   for(int row = 0; row < list.count(); ++row) {
