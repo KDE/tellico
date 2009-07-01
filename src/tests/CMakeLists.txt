@@ -55,6 +55,10 @@ set(IMPORTER_LIBS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(collectiontest core utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
+KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp ../translators/alexandriaimporter.cpp
+                   ../core/filehandler.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(alexandriaimporttest ${IMPORTER_LIBS} )
+
 KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp ../translators/amcimporter.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(amcimporttest ${IMPORTER_LIBS} )
 

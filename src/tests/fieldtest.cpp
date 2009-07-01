@@ -32,7 +32,7 @@
 
 QTEST_KDEMAIN_CORE( FieldTest )
 
-void FieldTest::testEmpty() {
+void FieldTest::testAll() {
   Tellico::Data::Field field1("name", "title");
 
   // the default field type is line

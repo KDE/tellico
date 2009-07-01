@@ -1,0 +1,11 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Dietrich Bonhoeffer
+  - My Other Author
+title: "Life Together"
+edition: "Hardback"
+isbn: "0060608536"
+notes: "<p align=\"left\">After his martyrdom at the hands of the Gestapo in 1945, Dietrich Bonhoeffer continued his witness in the hearts of Christians around the world. His <i>Letters and Papers from Prison</i> became a prized testimony to Christian faith and courage, read by thousands. Now in <i>Life Together</i> we have Pastor Bonhoeffer's experience of Christian community. This story of a unique fellowship in an underground seminary during the Nazi years reads like one of Paul's letters. It gives practical advice on how life together in Christ can be sustained in families and groups. The role of personal prayer, worship in common, everyday work, and Christian service is treated in simple, almost biblical, words. <i>Life Together</i> is bread for all who are hungry for the real life of Christian fellowship.</p>"
+publisher: "Harper Collins"
+publishing_year: "1993"
+rating: 3

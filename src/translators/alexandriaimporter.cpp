@@ -27,7 +27,6 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../images/imagefactory.h"
-#include "../progressmanager.h"
 #include "../tellico_debug.h"
 #include "../utils/isbnvalidator.h"
 
@@ -48,15 +47,25 @@ bool AlexandriaImporter::canImport(int type) const {
 }
 
 Tellico::Data::CollPtr AlexandriaImporter::collection() {
-  if(!m_widget || m_library->count() == 0) {
+  QDir dataDir;
+  if(m_libraryDir.exists() && m_library && m_library->count() > 0) {
+    dataDir = m_libraryDir;
+    dataDir.cd(m_library->currentText());
+  } else if(!m_libraryPath.isEmpty()) {
+    dataDir.setPath(m_libraryPath);
+  } else {
+    // no widget and no explicit set of the library path means we fail
+    myWarning() << "no widget and no library path";
     return Data::CollPtr();
   }
+  // just a sanity check
+  if(!dataDir.exists()) {
+    myDebug() << dataDir.path() << "doesn't exist";
+    return Data::CollPtr();
+  }
+  dataDir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
 
   m_coll = new Data::BookCollection(true);
-
-  QDir dataDir = m_libraryDir;
-  dataDir.cd(m_library->currentText());
-  dataDir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
 
   const QString title = QLatin1String("title");
   const QString author = QLatin1String("author");
@@ -75,10 +84,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   const uint stepSize = qMax(s_stepSize, numFiles/100);
   const bool showProgress = options() & ImportProgress;
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(numFiles);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
+  emit signalTotalSteps(this, numFiles);
 
   QStringList covers;
   covers << QLatin1String(".cover")
@@ -183,7 +189,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     m_coll->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      emit signalProgress(this, j);
       kapp->processEvents();
     }
   }
@@ -219,6 +225,10 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
 
   l->addWidget(gbox);
   l->addStretch(1);
+
+  // now that we set a widget, it should override library path
+  m_libraryPath.clear();
+
   return m_widget;
 }
 

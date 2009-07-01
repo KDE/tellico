@@ -1,0 +1,10 @@
+--- !ruby/object:Alexandria::Book
+authors:
+  - Lois McMaster Bujold
+title: "The Hallowed Hunt"
+edition: "Hardback"
+isbn: "0060574623"
+notes: ""
+publisher: "Eos"
+publishing_year: "2005"
+rating: 4

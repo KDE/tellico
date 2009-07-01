@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,65 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALEXANDRIAIMPORTER_H
-#define ALEXANDRIAIMPORTER_H
+#ifndef ALEXANDRIAIMPORTTEST_H
+#define ALEXANDRIAIMPORTTEST_H
 
-class KComboBox;
+#include <QObject>
 
-#include "importer.h"
-#include "../datavectors.h"
-
-#include <QDir>
-
-namespace Tellico {
-  namespace Import {
-
-/**
- * An importer for importing collections used by Alexandria, the Gnome book collection manager.
- *
- * The libraries are assumed to be in $HOME/.alexandria. The file format is YAML, but instead
- * using a real YAML reader, the file is parsed line-by-line, so it's very crude. When Alexandria
- * adds new fields or types, this will have to be updated.
- *
- * @author Robby Stephenson
- */
-class AlexandriaImporter : public Importer {
+class AlexandriaImportTest : public QObject {
 Q_OBJECT
 
-public:
-  /**
-   */
-  AlexandriaImporter() : Importer(), m_widget(0), m_library(0), m_cancelled(false) {}
-  /**
-   */
-  virtual ~AlexandriaImporter() {}
-
-  /**
-   */
-  virtual Data::CollPtr collection();
-  /**
-   */
-  virtual QWidget* widget(QWidget* parent);
-  virtual bool canImport(int type) const;
-
-  void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
-
-public slots:
-  void slotCancel();
-
-private:
-  static QString& cleanLine(QString& str);
-  static QString& clean(QString& str);
-
-  Data::CollPtr m_coll;
-  QWidget* m_widget;
-  KComboBox* m_library;
-  QString m_libraryPath;
-
-  QDir m_libraryDir;
-  bool m_cancelled : 1;
+private Q_SLOTS:
+  void initTestCase();
+  void testImport();
 };
 
-  } // end namespace
-} // end namespace
 #endif

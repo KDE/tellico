@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,65 +22,47 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALEXANDRIAIMPORTER_H
-#define ALEXANDRIAIMPORTER_H
+#undef QT_NO_CAST_FROM_ASCII
 
-class KComboBox;
+#include "qtest_kde.h"
+#include "alexandriaimporttest.h"
+#include "alexandriaimporttest.moc"
 
-#include "importer.h"
-#include "../datavectors.h"
+#include "../translators/alexandriaimporter.h"
+#include "../collections/bookcollection.h"
+#include "../images/imagefactory.h"
 
-#include <QDir>
+QTEST_KDEMAIN_CORE( AlexandriaImportTest )
 
-namespace Tellico {
-  namespace Import {
+#define QL1(x) QString::fromLatin1(x)
 
-/**
- * An importer for importing collections used by Alexandria, the Gnome book collection manager.
- *
- * The libraries are assumed to be in $HOME/.alexandria. The file format is YAML, but instead
- * using a real YAML reader, the file is parsed line-by-line, so it's very crude. When Alexandria
- * adds new fields or types, this will have to be updated.
- *
- * @author Robby Stephenson
- */
-class AlexandriaImporter : public Importer {
-Q_OBJECT
+void AlexandriaImportTest::initTestCase() {
+  Tellico::ImageFactory::init();
+}
 
-public:
-  /**
-   */
-  AlexandriaImporter() : Importer(), m_widget(0), m_library(0), m_cancelled(false) {}
-  /**
-   */
-  virtual ~AlexandriaImporter() {}
+void AlexandriaImportTest::testImport() {
+  Tellico::Import::AlexandriaImporter importer;
+  importer.setLibraryPath(QString::fromLatin1(KDESRCDIR) + "/data/alexandria/");
 
-  /**
-   */
-  virtual Data::CollPtr collection();
-  /**
-   */
-  virtual QWidget* widget(QWidget* parent);
-  virtual bool canImport(int type) const;
+  // shut the importer up about current collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BookCollection(true));
+  importer.setCurrentCollection(tmpColl);
 
-  void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
+  Tellico::Data::CollPtr coll = importer.collection();
 
-public slots:
-  void slotCancel();
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 2);
+  // should be translated somehow
+  QCOMPARE(coll->title(), QL1("My Books"));
 
-private:
-  static QString& cleanLine(QString& str);
-  static QString& clean(QString& str);
-
-  Data::CollPtr m_coll;
-  QWidget* m_widget;
-  KComboBox* m_library;
-  QString m_libraryPath;
-
-  QDir m_libraryDir;
-  bool m_cancelled : 1;
-};
-
-  } // end namespace
-} // end namespace
-#endif
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QCOMPARE(entry->field("title"), QL1("Life Together"));
+  QCOMPARE(entry->field("author"), QL1("Dietrich Bonhoeffer; My Other Author"));
+  // translated
+  QCOMPARE(entry->field("binding"), QL1("Hardback"));
+  QCOMPARE(entry->field("isbn"), QL1("0-06-060853-6"));
+  QCOMPARE(entry->field("pub_year"), QL1("1993"));
+  QCOMPARE(entry->field("publisher"), QL1("Harper Collins"));
+  QCOMPARE(entry->field("rating"), QL1("3"));
+}
