@@ -62,15 +62,19 @@ TARGET_LINK_LIBRARIES(alexandriaimporttest ${IMPORTER_LIBS} )
 KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp ../translators/amcimporter.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(amcimporttest ${IMPORTER_LIBS} )
 
-KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ../translators/risimporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(risimporttest ${IMPORTER_LIBS} )
-
 KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp ../translators/bibteximporter.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(bibteximporttest btparse ${IMPORTER_LIBS} )
 
 KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp ../translators/bibtexmlimporter.cpp
                    ../core/filehandler.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(bibtexmlimporttest ${IMPORTER_LIBS} )
+
+KDE4_ADD_UNIT_TEST(referencerimporttest NOGUI referencerimporttest.cpp ../translators/referencerimporter.cpp
+                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ../core/filehandler.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(referencerimporttest ${IMPORTER_LIBS} ${LIBXML2_LIBRARIES} ${LIBXSLT_LIBRARIES} ${LIBEXSLT_LIBRARIES})
+
+KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ../translators/risimporter.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(risimporttest ${IMPORTER_LIBS} )
 
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp ../translators/tellicoimporter.cpp
                    ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ${collection_SRCS})

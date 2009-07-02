@@ -22,36 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
+#ifndef REFERENCERIMPORTTEST_H
+#define REFERENCERIMPORTTEST_H
 
-#include "qtest_kde.h"
-#include "risimporttest.h"
-#include "risimporttest.moc"
+#include <QObject>
 
-#include "../translators/risimporter.h"
-#include "../collections/bibtexcollection.h"
+class ReferencerImportTest : public QObject {
+Q_OBJECT
 
-QTEST_KDEMAIN_CORE( RisImportTest )
+private Q_SLOTS:
+  void initTestCase();
+  void testImport();
+};
 
-void RisImportTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ris");
-  Tellico::Import::RISImporter importer(url);
-  Tellico::Data::CollPtr coll = importer.collection();
-
-  QVERIFY(!coll.isNull());
-  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
-  QCOMPARE(coll->entryCount(), 2);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
-
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
-  QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin,M."));
-
-  Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
-  QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QLatin1String("entry-type"));
-}
+#endif

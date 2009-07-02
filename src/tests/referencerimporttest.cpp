@@ -25,23 +25,33 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "risimporttest.h"
-#include "risimporttest.moc"
+#include "referencerimporttest.h"
+#include "referencerimporttest.moc"
 
-#include "../translators/risimporter.h"
+#include "../translators/referencerimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../collectionfactory.h"
 
-QTEST_KDEMAIN_CORE( RisImportTest )
+#include <kstandarddirs.h>
 
-void RisImportTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ris");
-  Tellico::Import::RISImporter importer(url);
+QTEST_KDEMAIN_CORE( ReferencerImportTest )
+
+void ReferencerImportTest::initTestCase() {
+  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  // need to register the collection type
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBook(Tellico::Data::Collection::Bibtex, "bibtex");
+}
+
+void ReferencerImportTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.reflib");
+  Tellico::Import::ReferencerImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
+  // should be translated somehow
+  QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(!entry.isNull());
@@ -49,9 +59,9 @@ void RisImportTest::testImport() {
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
   QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin,M."));
-
-  Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
-  QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QLatin1String("entry-type"));
+  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin, M."));
+  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
+  QCOMPARE(entry->field("bibtex-key"), QLatin1String("Koglin2002"));
+  QCOMPARE(entry->fields("keyword", false).count(), 2);
+  QCOMPARE(entry->fields("keyword", false).first(), QLatin1String("tag1"));
 }

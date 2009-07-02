@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<library>
+<manage_target braces="false" utf8="false"></manage_target>
+<library_folder monitor="false"></library_folder>
+<taglist>
+  <tag>
+    <uid>0</uid>
+    <name>tag1</name>
+  </tag>
+  <tag>
+    <uid>1</uid>
+    <name>longer tag</name>
+  </tag>
+</taglist>
+<doclist>
+  <doc>
+    <filename></filename>
+    <relative_filename></relative_filename>
+    <key>Russwurm2002</key>
+    <notes></notes>
+    <bib_type>Article</bib_type>
+    <bib_doi></bib_doi>
+    <bib_title>Isoforms of NO-sensitive guanylyl cyclase.</bib_title>
+    <bib_authors>Russwurm, M. and Koesling, D.</bib_authors>
+    <bib_journal>Mol Cell Biochem</bib_journal>
+    <bib_volume>230</bib_volume>
+    <bib_number>1-2</bib_number>
+    <bib_pages>159-64</bib_pages>
+    <bib_year>2002</bib_year>
+    <bib_extra key="Abstract">By the formation of cGMP the NO-sensitive guanylyl cyclase plays a key role within the NO/cGMP signaling cascade involved in vascular regulation and neurotransmission. The prosthetic heme group of the enzyme acts as the NO sensor, and binding of NO induces conformational changes leading to an up to 200-fold activation of the enzyme. The unexpected fast dissociation half-life of NO of a few seconds is fast enough to account for the deactivation of the enzyme in biological systems. YC-1 and its analogues acting as NO sensitizers uncovered a new pharmacologically and conceivably physiologically relevant regulatory principle of the enzyme. Two existing isoforms of the heterodimeric guanylyl cyclase (alpha1beta1, alpha2beta1) are known that are functionally indistinguishable. Up to now, the NO-sensitive guanylyl cyclase has been considered as a soluble enzyme. However, recent evidence about the alpha2beta1 isoform interacting with a PDZ domain of the postsynaptic scaffold protein PSD-95 suggests that the alpha2 subunit directs a membrane association of this isoform. The interaction with PSD-95 locates the alpha2beta1 isoform in close proximity to the NO-generating NO synthase thereby enabling the NO sensor to respond to locally raised NO concentrations.</bib_extra>
+    <bib_extra key="Authoraddress">Pharmakologie und Toxikologie, Medizinische Fakultat MA N1, Ruhr-Universitat Bochum, Germany. koesling@iname.com</bib_extra>
+    <bib_extra key="Partdateother">Jan</bib_extra>
+  </doc>
+  <doc>
+    <filename></filename>
+    <relative_filename></relative_filename>
+    <key>Koglin2002</key>
+    <notes></notes>
+    <tagged>0</tagged>
+    <tagged>1</tagged>
+    <bib_type>Article</bib_type>
+    <bib_doi></bib_doi>
+    <bib_title>BAY 41-2272 activates two isoforms of nitric oxide-sensitive guanylyl cyclase.</bib_title>
+    <bib_authors>Koglin, M. and Stasch, J. P. and Behrends, S.</bib_authors>
+    <bib_journal>Biochem Biophys Res Commun</bib_journal>
+    <bib_volume>292</bib_volume>
+    <bib_number>4</bib_number>
+    <bib_pages>1057-1119</bib_pages>
+    <bib_year>2002</bib_year>
+    <bib_extra key="Abstract">Soluble guanylyl cyclase is an important target for endogenous nitric oxide and the guanylyl cyclase modulator, YC-1. Recently BAY 41-2272 was identified as a similar but more potent and more specific substance. While YC-1 also acts as non-specific phosphodiesterase inhibitor, BAY 41-2272 is devoid of an effect on phosphodiesterases. BAY 41-2272 has so far only been tested on the alpha(1)/beta(1) heterodimeric isoform of soluble guanylyl cyclase and its binding site has been mapped to a region in the alpha(1) subunit amino-terminal sequence. Although this region is poorly conserved in the alpha(2) subunit, we show in the current study that the alpha(2)/beta(1) heterodimeric enzyme isoform is activated by BAY 41-2272. Deletion analysis of the alpha(2) subunit and co-expression with the beta(1) subunit in the baculovirus/Sf9 system is consistent with the amino-terminal amino acids 104 to 401 of the alpha(2) subunit as binding site for BAY 41-2272.</bib_extra>
+    <bib_extra key="Authoraddress">Institut fur Experimentelle und Klinische Pharmakologie, Universitat Hamburg, Martinistrasse 52, Hamburg, D-20246, Germany.</bib_extra>
+    <bib_extra key="Keywords">0 (BAY 41-2272); 0 (Enzyme Activators); 0 (Hydrazines); 0 (Indazoles); 0 (Isoenzymes); 0 (Nitric Oxide Donors); 0 (Protein Subunits); 0 (Pyrazoles); 0 (Pyridines); 0 (Receptors, Cytoplasmic and Nuclear); 0 (nitric oxide receptor); 10102-43-9 (Nitric Oxide); 154453-18-6 (3-(5&apos;-hydroxymethyl-2&apos;-furyl)-1-benzylindazole); 86831-65-4 (1,1-diethyl-2-hydroxy-2-nitrosohydrazine); Animal; Binding Sites [physiology]; Cell Line; Dose-Response Relationship, Drug; Enzyme Activation [drug effects]; Enzyme Activators [pharmacology]; Human; Hydrazines [pharmacology]; Indazoles [pharmacology]; Isoenzymes [drug effects]; Isoenzymes [genetics]; Isoenzymes [metabolism]; Mutagenesis, Site-Directed; Nitric Oxide [pharmacology]; Nitric Oxide Donors [pharmacology]; Protein Subunits; Pyrazoles [pharmacology]; Pyridines [pharmacology]; Rats; Receptors, Cytoplasmic and Nuclear [drug effects]; Receptors, Cytoplasmic and Nuclear [genetics]; Receptors, Cytoplasmic and Nuclear [metabolism]; Spodoptera</bib_extra>
+    <bib_extra key="Partdateother">Apr 12</bib_extra>
+  </doc>
+</doclist>
+</library>

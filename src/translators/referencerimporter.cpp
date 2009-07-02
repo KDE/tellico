@@ -41,7 +41,7 @@ ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
     u.setPath(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
-    myWarning() << "unable to find referencer2tellico.xml!";
+    myWarning() << "unable to find referencer2tellico.xsl!";
   }
 }
 
