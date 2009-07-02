@@ -80,7 +80,7 @@
   </url>
 
   <authors>
-   <xsl:for-each select="str:tokenize(bib_authors, ',/;')">
+   <xsl:for-each select="str:tokenize(bib_authors, '/;')">
     <xsl:call-template name="author_split">
      <xsl:with-param name="value" select="."/>
     </xsl:call-template>
