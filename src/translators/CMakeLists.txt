@@ -22,7 +22,7 @@ SET(translators_STAT_SRCS
    freedb_util.cpp
    freedbimporter.cpp
    gcfilmsexporter.cpp
-   gcfilmsimporter.cpp
+   gcstarimporter.cpp
    griffithimporter.cpp
    grs1importer.cpp
    htmlexporter.cpp

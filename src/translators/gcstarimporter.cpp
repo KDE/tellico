@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "gcfilmsimporter.h"
+#include "gcstarimporter.h"
 #include "../collections/videocollection.h"
 #include "../tellico_utils.h"
 #include "../images/imagefactory.h"
@@ -39,12 +39,12 @@
 
 #define CHECKLIMITS(n) if(values.count() <= n) continue
 
-using Tellico::Import::GCfilmsImporter;
+using Tellico::Import::GCstarImporter;
 
-GCfilmsImporter::GCfilmsImporter(const KUrl& url_) : TextImporter(url_), m_cancelled(false) {
+GCstarImporter::GCstarImporter(const KUrl& url_) : TextImporter(url_), m_cancelled(false) {
 }
 
-bool GCfilmsImporter::canImport(int type) const {
+bool GCstarImporter::canImport(int type) const {
   return type == Data::Collection::Video
       || type == Data::Collection::Book
       || type == Data::Collection::Album
@@ -53,7 +53,7 @@ bool GCfilmsImporter::canImport(int type) const {
       || type == Data::Collection::Coin;
 }
 
-Tellico::Data::CollPtr GCfilmsImporter::collection() {
+Tellico::Data::CollPtr GCstarImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
@@ -78,7 +78,7 @@ Tellico::Data::CollPtr GCfilmsImporter::collection() {
   return m_coll;
 }
 
-void GCfilmsImporter::readGCfilms(const QString& text_) {
+void GCstarImporter::readGCfilms(const QString& text_) {
   m_coll = new Data::VideoCollection(true);
   bool hasURL = false;
   if(m_coll->hasField(QLatin1String("url"))) {
@@ -255,7 +255,7 @@ void GCfilmsImporter::readGCfilms(const QString& text_) {
   }
 }
 
-void GCfilmsImporter::readGCstar(const QString& text_) {
+void GCstarImporter::readGCstar(const QString& text_) {
   QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("gcstar2tellico.xsl"));
   XSLTHandler handler(xsltFile);
   if(!handler.isValid()) {
@@ -276,13 +276,13 @@ void GCfilmsImporter::readGCstar(const QString& text_) {
 }
 
 inline
-QString GCfilmsImporter::splitJoin(const QRegExp& rx, const QString& s) {
+QString GCstarImporter::splitJoin(const QRegExp& rx, const QString& s) {
   return s.split(rx, QString::SkipEmptyParts).join(QLatin1String("; "));
 }
 
-void GCfilmsImporter::slotCancel() {
+void GCstarImporter::slotCancel() {
   m_cancelled = true;
 }
 
 #undef CHECKLIMITS
-#include "gcfilmsimporter.moc"
+#include "gcstarimporter.moc"

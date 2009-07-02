@@ -361,7 +361,7 @@ void MainWindow::initActions() {
   action->setEnabled(false);
 #endif
 
-  IMPORT_ACTION(Import::GCfilms, "file_import_gcfilms", i18n("Import GCstar Data..."),
+  IMPORT_ACTION(Import::GCstar, "file_import_gcstar", i18n("Import GCstar Data..."),
                 i18n("Import a GCstar data file"), KIcon(QLatin1String("gcstar")));
 
   IMPORT_ACTION(Import::Griffith, "file_import_griffith", i18n("Import Griffith Data..."),

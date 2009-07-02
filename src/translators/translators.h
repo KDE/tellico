@@ -38,7 +38,7 @@ namespace Tellico {
       Alexandria,
       FreeDB,
       RIS,
-      GCfilms,
+      GCstar,
       FileListing,
       GRS1,
       AMC,

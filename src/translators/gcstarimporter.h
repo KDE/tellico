@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMPORT_GCFILMSIMPORTER_H
-#define TELLICO_IMPORT_GCFILMSIMPORTER_H
+#ifndef TELLICO_IMPORT_GCSTARIMPORTER_H
+#define TELLICO_IMPORT_GCSTARIMPORTER_H
 
 #include "textimporter.h"
 #include "../datavectors.h"
@@ -36,13 +36,13 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
 */
-class GCfilmsImporter : public TextImporter {
+class GCstarImporter : public TextImporter {
 Q_OBJECT
 
 public:
   /**
    */
-  GCfilmsImporter(const KUrl& url);
+  GCstarImporter(const KUrl& url);
 
   /**
    *

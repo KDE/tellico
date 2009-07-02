@@ -39,7 +39,7 @@
 #include "translators/alexandriaimporter.h"
 #include "translators/freedbimporter.h"
 #include "translators/risimporter.h"
-#include "translators/gcfilmsimporter.h"
+#include "translators/gcstarimporter.h"
 #include "translators/filelistingimporter.h"
 #include "translators/amcimporter.h"
 #include "translators/griffithimporter.h"
@@ -224,9 +224,9 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       importer = new Import::RISImporter(urls_);
       break;
 
-    case Import::GCfilms:
+    case Import::GCstar:
       CHECK_SIZE;
-      importer = new Import::GCfilmsImporter(firstURL);
+      importer = new Import::GCstarImporter(firstURL);
       break;
 
     case Import::FileListing:
@@ -301,7 +301,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       text = i18n("*.ris|RIS Files (*.ris)") + QLatin1Char('\n');
       break;
 
-    case Import::GCfilms:
+    case Import::GCstar:
       text = i18n("*.gcs|GCstar Data Files (*.gcs)") + QLatin1Char('\n');
       text += i18n("*.gcf|GCfilms Data Files (*.gcf)") + QLatin1Char('\n');
       break;
@@ -358,7 +358,7 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
 //  map[Import::CSV]        = QLatin1String("CSV");
   map[Import::MODS]       = QLatin1String("MODS");
   map[Import::RIS]        = QLatin1String("RIS");
-  map[Import::GCfilms]    = QLatin1String("GCstar");
+  map[Import::GCstar]    = QLatin1String("GCstar");
   map[Import::AMC]        = QLatin1String("AMC");
   map[Import::Griffith]   = QLatin1String("Griffith");
   map[Import::PDF]        = QLatin1String("PDF");
@@ -374,10 +374,10 @@ bool ImportDialog::formatImportsText(Tellico::Import::Format format_) {
 }
 
 QString ImportDialog::startDir(Tellico::Import::Format format_) {
-  if(format_ == Import::GCfilms) {
+  if(format_ == Import::GCstar) {
     QDir dir = QDir::home();
     // able to cd if exists and readable
-    if(dir.cd(QLatin1String(".local/share/gcfilms/"))) {
+    if(dir.cd(QLatin1String(".local/share/gcstar/"))) {
       return dir.absolutePath();
     }
   }
