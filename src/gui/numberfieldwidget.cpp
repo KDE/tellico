@@ -86,7 +86,7 @@ void NumberFieldWidget::setTextImpl(const QString& text_) {
     int n = text_.toInt(&ok);
     if(ok) {
       // did just allow positive
-      if(n < 0) {
+      if(n < m_spinBox->minimum()+1) {
         m_spinBox->setMinimum(INT_MIN+1);
       }
       m_spinBox->setValue(n);

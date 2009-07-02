@@ -225,6 +225,10 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
     myDebug() << "null stylesheet pointer!";
     return QString();
   }
+  if(text_.isEmpty()) {
+    myDebug() << "empty input";
+    return QString();
+  }
 
   m_docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), NULL, NULL, xml_options);
 
