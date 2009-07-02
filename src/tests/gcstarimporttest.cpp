@@ -25,43 +25,47 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "referencerimporttest.h"
-#include "referencerimporttest.moc"
+#include "gcstarimporttest.h"
+#include "gcstarimporttest.moc"
 
-#include "../translators/referencerimporter.h"
-#include "../collections/bibtexcollection.h"
+#include "../translators/gcstarimporter.h"
+#include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( ReferencerImportTest )
+QTEST_KDEMAIN_CORE( GCstarImportTest )
 
-void ReferencerImportTest::initTestCase() {
+void GCstarImportTest::initTestCase() {
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   // need to register the collection type
-  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 
-void ReferencerImportTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.reflib");
-  Tellico::Import::ReferencerImporter importer(url);
+void GCstarImportTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.gcs");
+  Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
-  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
-  QCOMPARE(coll->entryCount(), 2);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 1);
   // should be translated somehow
-  QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
+  QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(!entry.isNull());
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
-  QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin, M."));
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("bibtex-key"), QLatin1String("Koglin2002"));
+  QCOMPARE(entry->field("title"), QLatin1String("The Reason for God"));
+  QCOMPARE(entry->field("pub_year"), QLatin1String("2008"));
+  QCOMPARE(entry->fields("author", false).count(), 2);
+  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Timothy Keller"));
+  QCOMPARE(entry->field("isbn"), QLatin1String("978-0-525-95049-3"));
+  QCOMPARE(entry->field("publisher"), QLatin1String("Dutton Adult"));
+  QCOMPARE(entry->fields("genre", false).count(), 2);
+  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("non-fiction"));
   QCOMPARE(entry->fields("keyword", false).count(), 2);
-  QCOMPARE(entry->fields("keyword", false).first(), QLatin1String("tag1"));
+  QCOMPARE(entry->fields("keyword", false).at(0), QLatin1String("tag1"));
+  QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag2"));
+  // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
+  QCOMPARE(entry->field("rating"), QLatin1String("2"));
 }

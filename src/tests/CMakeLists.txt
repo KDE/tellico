@@ -52,6 +52,7 @@ set(IMPORTER_LIBS
    collections
    translators
    )
+
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(collectiontest core utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -68,6 +69,10 @@ TARGET_LINK_LIBRARIES(bibteximporttest btparse ${IMPORTER_LIBS} )
 KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp ../translators/bibtexmlimporter.cpp
                    ../core/filehandler.cpp ${collection_SRCS})
 TARGET_LINK_LIBRARIES(bibtexmlimporttest ${IMPORTER_LIBS} )
+
+KDE4_ADD_UNIT_TEST(gcstarimporttest NOGUI gcstarimporttest.cpp ../translators/gcstarimporter.cpp
+                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ../core/filehandler.cpp ${collection_SRCS})
+TARGET_LINK_LIBRARIES(gcstarimporttest ${IMPORTER_LIBS} ${LIBXML2_LIBRARIES} ${LIBXSLT_LIBRARIES} ${LIBEXSLT_LIBRARIES})
 
 KDE4_ADD_UNIT_TEST(referencerimporttest NOGUI referencerimporttest.cpp ../translators/referencerimporter.cpp
                    ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ../core/filehandler.cpp ${collection_SRCS})

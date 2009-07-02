@@ -27,7 +27,6 @@
 #include "../tellico_utils.h"
 #include "../images/imagefactory.h"
 #include "../borrower.h"
-#include "../progressmanager.h"
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 
@@ -58,10 +57,7 @@ Tellico::Data::CollPtr GCstarImporter::collection() {
     return m_coll;
   }
 
-  ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
-  item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
-  ProgressItem::Done done(this);
+  emit signalTotalSteps(this, 100);
 
   QString str = text();
   QTextStream t(&str);
@@ -107,7 +103,8 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   const uint stepSize = qMax(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
-  ProgressManager::self()->setTotalSteps(this, length);
+  emit signalTotalSteps(this, length);
+
   uint j = 0;
   for(QString line = t.readLine(); !m_cancelled && !line.isNull(); line = t.readLine(), j += line.length()) {
     // string was wrongly converted
@@ -238,7 +235,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     m_coll->addEntries(entry);
 
     if(showProgress && j%stepSize == 0) {
-      ProgressManager::self()->setProgress(this, j);
+      emit signalProgress(this, j);
       kapp->processEvents();
     }
   }

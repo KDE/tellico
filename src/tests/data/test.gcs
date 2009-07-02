@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="GCbooks" items="1" version="1.4.1">
+ <information>
+  <maxId>1</maxId>
+ </information>
+
+
+
+ <item
+  id="1"
+  isbn="978-0-525-95049-3"
+  title="The Reason for God"
+  cover=""
+  backpic=""
+  publisher="Dutton Adult"
+  publication="2008"
+  language="English"
+  serie="Series"
+  edition="edition"
+  format=""
+  pages="320"
+  web="http://www.amazon.com/Reason-God-Belief-Age-Skepticism/dp/0525950494/ref=pd_bbs_sr_1/104-1347196-5229502?ie=UTF8&amp;s=books&amp;qid=1217426174&amp;sr=1-1##Amazon (US)"
+  read="1"
+  added="current"
+  rating="4"
+  acquisition="current"
+  location="location"
+  translator="translator"
+  artist=""
+  borrower=""
+  lendDate=""
+  borrowings=""
+  favourite="1"
+ >
+  <description></description>
+  <comments>&lt;br/&gt;
+   my description
+   &lt;br/&gt;
+  my comments</comments>
+  <authors>
+   <line>
+    <col>Timothy Keller</col>
+   </line>
+   <line>
+    <col>author2</col>
+   </line>
+  </authors>
+  <genre>
+   <line>
+    <col>non-fiction</col>
+   </line>
+   <line>
+    <col>genre2</col>
+   </line>
+  </genre>
+  <tags>
+   <line>
+    <col>tag1</col>
+   </line>
+   <line>
+    <col>tag2</col>
+   </line>
+  </tags>
+ </item>
+</collection>
