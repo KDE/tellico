@@ -28,7 +28,7 @@ TARGET_LINK_LIBRARIES(formattest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} 
 KDE4_ADD_UNIT_TEST(fieldtest NOGUI fieldtest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(fieldtest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-SET(collection_SRCS
+SET(tellicotest_SRCS
    ../collection.cpp
    ../entry.cpp
    ../entrygroup.cpp
@@ -36,51 +36,57 @@ SET(collection_SRCS
    ../field.cpp
    ../fieldformat.cpp
    ../filter.cpp
+   ../borrower.cpp
+   ../collectionfactory.cpp
    ../tellico_utils.cpp
    )
 
-set(IMPORTER_LIBS
+KDE4_ADD_LIBRARY(tellicotest STATIC ${tellicotest_SRCS})
+
+set(TELLICO_TEST_LIBS
    ${QT_AND_KDECORE_LIBS}
    ${QT_QTTEST_LIBRARY}
    ${KDE4_KDEUI_LIBS}
    ${KDE4_KIO_LIBS}
    ${QIMAGEBLITZ_LIBRARIES}
-   core
-   gui
-   utils
-   images
+   ${LIBXML2_LIBRARIES}
+   ${LIBXSLT_LIBRARIES}
+   ${LIBEXSLT_LIBRARIES}
+   tellicotest
    collections
    translators
+   utils
+   core
+   images
+   core
+   gui
    )
 
-KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(collectiontest core utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
+# for some of these, the libraries seem to require being repeated so
+# that the order of linking works...no idea why...
+KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp)
+TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp ../translators/alexandriaimporter.cpp
-                   ../core/filehandler.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(alexandriaimporttest ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp)
+TARGET_LINK_LIBRARIES(alexandriaimporttest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp ../translators/amcimporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(amcimporttest ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp)
+TARGET_LINK_LIBRARIES(amcimporttest ${TELLICO_TEST_LIBS} collections)
 
-KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp ../translators/bibteximporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(bibteximporttest btparse ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp)
+TARGET_LINK_LIBRARIES(bibteximporttest ${TELLICO_TEST_LIBS} btparse)
 
-KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp ../translators/bibtexmlimporter.cpp
-                   ../core/filehandler.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(bibtexmlimporttest ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp)
+TARGET_LINK_LIBRARIES(bibtexmlimporttest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(gcstarimporttest NOGUI gcstarimporttest.cpp ../translators/gcstarimporter.cpp
-                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ../core/filehandler.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(gcstarimporttest ${IMPORTER_LIBS} ${LIBXML2_LIBRARIES} ${LIBXSLT_LIBRARIES} ${LIBEXSLT_LIBRARIES})
+KDE4_ADD_UNIT_TEST(gcstarimporttest NOGUI gcstarimporttest.cpp)
+TARGET_LINK_LIBRARIES(gcstarimporttest translators ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(referencerimporttest NOGUI referencerimporttest.cpp ../translators/referencerimporter.cpp
-                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ../core/filehandler.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(referencerimporttest ${IMPORTER_LIBS} ${LIBXML2_LIBRARIES} ${LIBXSLT_LIBRARIES} ${LIBEXSLT_LIBRARIES})
+KDE4_ADD_UNIT_TEST(referencerimporttest NOGUI referencerimporttest.cpp)
+TARGET_LINK_LIBRARIES(referencerimporttest translators ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp ../translators/risimporter.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(risimporttest ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp)
+TARGET_LINK_LIBRARIES(risimporttest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp ../translators/tellicoimporter.cpp
-                   ../borrower.cpp ../collectionfactory.cpp ../collections/bibtexcollection.cpp ${collection_SRCS})
-TARGET_LINK_LIBRARIES(tellicoreadtest ${IMPORTER_LIBS} )
+KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
+TARGET_LINK_LIBRARIES(tellicoreadtest translators ${TELLICO_TEST_LIBS})
