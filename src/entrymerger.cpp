@@ -24,6 +24,7 @@
 
 #include "entrymerger.h"
 #include "entry.h"
+#include "entrycomparison.h"
 #include "collection.h"
 #include "tellico_kernel.h"
 #include "controller.h"
@@ -69,7 +70,7 @@ void EntryMerger::slotStartNext() {
     bool match = cleanMerge(baseEntry, it);
     if(!match) {
       int score = baseEntry->collection()->sameEntry(baseEntry, it);
-      match = score >= Data::Collection::ENTRY_PERFECT_MATCH;
+      match = score >= EntryComparison::ENTRY_PERFECT_MATCH;
     }
     if(match) {
       bool merge_ok = mergeEntry(baseEntry, it, false /*overwrite*/, true /*askUser*/);

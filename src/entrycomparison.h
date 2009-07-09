@@ -43,6 +43,11 @@ public:
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field);
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, const QString& field, const Data::Collection* coll);
 
+  // these are the values that should be compared against
+  // the result from Collection::sameEntry()
+  static const int ENTRY_GOOD_MATCH = 10;
+  static const int ENTRY_PERFECT_MATCH = 20;
+
 private:
   static KUrl s_documentUrl;
 };

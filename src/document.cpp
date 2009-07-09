@@ -339,10 +339,10 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_)
     Data::EntryPtr matchEntry;
     foreach(EntryPtr currEntry, currEntries) {
       int match = m_coll->sameEntry(currEntry, newEntry);
-      if(match >= Collection::ENTRY_PERFECT_MATCH) {
+      if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
         matchEntry = currEntry;
         break;
-      } else if(match >= Collection::ENTRY_GOOD_MATCH && match > bestMatch) {
+      } else if(match >= EntryComparison::ENTRY_GOOD_MATCH && match > bestMatch) {
         bestMatch = match;
         matchEntry = currEntry;
         // don't break, keep looking for better one

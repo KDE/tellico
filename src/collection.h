@@ -337,11 +337,6 @@ public:
    */
   static const QString s_peopleGroupName;
 
-  // these are the values that should be compared against
-  // the result from sameEntry()
-  static const int ENTRY_GOOD_MATCH = 10;
-  static const int ENTRY_PERFECT_MATCH = 20;
-
 signals:
   void signalGroupsModified(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
   void signalRefreshField(Tellico::Data::FieldPtr field);

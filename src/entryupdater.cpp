@@ -24,6 +24,7 @@
 
 #include "entryupdater.h"
 #include "entry.h"
+#include "entrycomparison.h"
 #include "collection.h"
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
@@ -161,7 +162,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
   if(e) {
     m_fetchedEntries.append(e);
     int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
-    if(match > Data::Collection::ENTRY_PERFECT_MATCH) {
+    if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
       result_->fetcher->stop();
     }
   }
@@ -201,7 +202,7 @@ void EntryUpdater::handleResults() {
       matches.append(res);
     }
   }
-  if(best < Data::Collection::ENTRY_GOOD_MATCH) {
+  if(best < EntryComparison::ENTRY_GOOD_MATCH) {
     if(best > 0) {
       myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)";
     }
