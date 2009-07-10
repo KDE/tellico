@@ -47,6 +47,19 @@ extern "C" {
 
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
+
+  class YazCloser {
+  public:
+    YazCloser(yaz_iconv_t iconv_) : iconv(iconv_), marc(0) {}
+    YazCloser(yaz_iconv_t iconv_, yaz_marc_t marc_) : iconv(iconv_), marc(marc_) {}
+    ~YazCloser() {
+      if(iconv) yaz_iconv_close(iconv);
+      if(marc) yaz_marc_destroy(marc);
+    }
+  private:
+    yaz_iconv_t iconv;
+    yaz_marc_t marc;
+  };
 }
 
 using Tellico::Fetch::Z3950ResultFound;
@@ -423,6 +436,8 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
     return text_;
   }
 
+  YazCloser closer(cd);
+
   const char* input = text_;
   size_t inlen = text_.length();
 
@@ -445,7 +460,6 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
 //  myDebug() << "-------------------------------------------";
 //  myDebug() << output;
 //  myDebug() << "-------------------------------------------";
-  yaz_iconv_close(cd);
   return output;
 #endif
   return text_;
@@ -476,6 +490,8 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   yaz_marc_iconv(mt, cd);
   yaz_marc_xml(mt, YAZ_MARC_MARCXML);
 
+  YazCloser closer(cd, mt);
+
   // first 5 bytes are length
   bool ok;
 #if YAZ_VERSIONL < 0x030000
@@ -504,8 +520,6 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 //  myDebug() << QCString(result);
 //  myDebug() << "-------------------------------------------";
 //  myDebug() << output;
-  yaz_iconv_close(cd);
-  yaz_marc_destroy(mt);
 
   return output;
 #else // no yaz
