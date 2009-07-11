@@ -620,7 +620,7 @@ void MainWindow::initActions() {
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
   // really bad hack, but I can't figure out how to make the combobox resize when the contents change
   // see note in slotChangeGrouping() - so ensure its at least a little bigger
-  m_entryGrouping->addAction(QLatin1String("               "));
+  m_entryGrouping->addAction(QLatin1String("                         "));
   connect(m_entryGrouping, SIGNAL(triggered(int)), SLOT(slotChangeGrouping()));
   actionCollection()->addAction(QLatin1String("change_entry_grouping"), m_entryGrouping);
 
@@ -1485,22 +1485,6 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
   m_groupView->setGroupField(current); // don't call slotChangeGrouping() since it adds an undo item
 
   // I have no idea how to get the combobox to update its size
-#if 0
-  foreach(QWidget* widget, m_entryGrouping->associatedWidgets()) {
-    if(::qobject_cast<KToolBar*>(widget)) {
-      QWidget* container = m_entryGrouping->requestWidget(widget);
-      if(container) {
-        container->adjustSize();
-        container->updateGeometry();
-        container->setFont(container->font());
-        myDebug() << "combobox width=" << container->width();
-        myDebug() << "combobox width hint=" << container->minimumSizeHint().width();
-      }
-      widget->adjustSize();
-      widget->updateGeometry();
-    }
-  }
-#endif
 }
 
 void MainWindow::slotChangeGrouping() {
@@ -1997,8 +1981,6 @@ void MainWindow::slotGroupLabelActivated() {
   // need entry grouping combo id
   foreach(QWidget* widget, m_entryGrouping->associatedWidgets()) {
     if(::qobject_cast<KToolBar*>(widget)) {
-      widget->adjustSize();
-      widget->updateGeometry();
       QWidget* container = m_entryGrouping->requestWidget(widget);
       QComboBox* combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
       if(combo) {
