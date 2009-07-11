@@ -26,21 +26,21 @@ Arguments:
 </sect1>
 
 <sect1 id="dbus-interface">
-<title>DBUS Interface</title>
+<title>&DBus; Interface</title>
 
 <para>
-&appname; has a minimal DBUS interface, which can be useful for scripting or interacting with a running application from the command-line. As with all DBUS calls, you need to specify the service you want to interface with, and the particular interface. The name of the DBUS service is <constant>org.kde.tellico</constant>.
+&appname; has a minimal &DBus; interface, which can be useful for scripting or interacting with a running application from the command-line. As with all &DBus; calls, you need to specify the service you want to interface with, and the particular interface. The name of the &DBus; service is <constant>org.kde.tellico</constant>.
 </para>
 
 <sect2 id="dbus-commands">
-<title>DBUS Commands</title>
+<title>&DBus; Commands</title>
 
-<para>Two DBUS primary objects are available in the tellico interface: <constant>Tellico</constant> and <constant>Collections</constant>.</para>
+<para>Two &DBus; primary objects are available in the tellico interface: <constant>Tellico</constant> and <constant>Collections</constant>.</para>
 
 <sect3 id="dbus-tellico">
 <title>The <constant>Tellico</constant> Object</title>
 
-<para>The full list of DBUS commands in the <constant>tellico</constant> object is shown below:</para>
+<para>The full list of &DBus; commands in the <constant>tellico</constant> object is shown below:</para>
 
 <programlisting>
 bool importTellico(QString file, QString action)
@@ -80,7 +80,7 @@ The current open collection in &appname; may be exported to a file, in either Te
 <sect3 id="dbus-collection">
 <title>The <constant>Collections</constant> Object</title>
 
-<para>The full list of DBUS commands in the <constant>Collections</constant> object is shown below:</para>
+<para>The full list of &DBus; commands in the <constant>Collections</constant> object is shown below:</para>
 
 <programlisting>
 int addEntry()
@@ -106,17 +106,17 @@ If the current collection is a bibliography, calling <command>selectedBibtexKeys
 </para>
 
 <para>
-Entries can be edited directly with the DBUS interface. Given an entry ID, <command>setEntryValue()</command> will set the field value directly. To add a value, without affecting the existing values, use <command>addEntryValue()</command>. The new value gets appended to the end of the existing list.
+Entries can be edited directly with the &DBus; interface. Given an entry ID, <command>setEntryValue()</command> will set the field value directly. To add a value, without affecting the existing values, use <command>addEntryValue()</command>. The new value gets appended to the end of the existing list.
 </para>
 </sect3>
 
 </sect2>
 
 <sect2 id="dbus-examples">
-<title>DBUS Examples</title>
+<title>&DBus; Examples</title>
 
 <para>
-Here are some examples for scripting &appname; using the DBUS interface. Since the <emphasis>pid</emphasis> must be known, the easiest way to include that in the shell command is like so: <userinput>dbus $(dbus | grep tellico) tellico</userinput>.
+Here are some examples for scripting &appname; using the &DBus; interface. Since the <emphasis>pid</emphasis> must be known, the easiest way to include that in the shell command is like so: <userinput>dbus $(dbus | grep tellico) tellico</userinput>.
 </para>
 
 <screen width="40">
