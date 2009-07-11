@@ -41,13 +41,12 @@
 #include "filterview.h"
 #include "loanview.h"
 #include "utils/calendarhandler.h"
-#include "tellico_debug.h"
 #include "groupiterator.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
-#include "gui/treeview.h"
 #include "gui/cursorsaver.h"
 #include "gui/lineedit.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -336,79 +335,6 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
   updateActions();
   m_mainWindow->slotEntryCount();
   m_working = false;
-}
-
-void Controller::slotGoPrevEntry() {
-  goEntrySibling(PrevEntry);
-}
-
-void Controller::slotGoNextEntry() {
-  goEntrySibling(NextEntry);
-}
-
-void Controller::goEntrySibling(EntryDirection dir_) {
-  Q_UNUSED(dir_)
-  // if there are currently multiple selected, then do nothing
-  if(m_selectedEntries.count() != 1) {
-    return;
-  }
-  // find the widget that has an entry selected
-  GUI::TreeView* view = ::qobject_cast<GUI::TreeView*>(m_widgetWithSelection);
-  if(!view) {
-    return;
-  }
-
-/*
-GUI::ListViewItemList items = view->selectedItems();
-  if(items.count() != 1) {
-    return;
-  }
-  GUI::ListViewItem* item = items.first();
-  if(item->isEntryItem()) {
-    bool looped = false;
-    // check sanity
-    if(m_selectedEntries.front() != static_cast<EntryItem*>(item)->entry()) {
-      myDebug() << "entries don't match!";
-    }
-    GUI::ListViewItem* nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
-                                                                         ? item->itemAbove()
-                                                                         : item->itemBelow());
-    if(!nextItem) {
-      // cycle through
-      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
-                                                       ? view->lastItem()
-                                                       : view->firstChild());
-      looped = true;
-    }
-    while(!nextItem->isVisible()) {
-      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
-                                                       ? nextItem->itemAbove()
-                                                       : nextItem->itemBelow());
-    }
-    while(nextItem && !nextItem->isEntryItem()) {
-      nextItem->setOpen(true); // have to be open to find the next one
-      nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
-                                                       ? nextItem->itemAbove()
-                                                       : nextItem->itemBelow());
-      if(!nextItem && !looped) {
-        // cycle through
-        nextItem = static_cast<GUI::ListViewItem*>(dir_ == PrevEntry
-                                                         ? view->lastItem()
-                                                         : view->firstChild());
-        looped = true;
-      }
-    }
-    if(nextItem) {
-      Data::EntryPtr e = static_cast<EntryItem*>(nextItem)->entry();
-      view->blockSignals(true);
-      view->setSelected(item, false);
-      view->setSelected(nextItem, true);
-      view->ensureItemVisible(nextItem);
-      view->blockSignals(false);
-      slotUpdateSelection(view, Data::EntryList() << e);
-    }
-  }
-  */
 }
 
 void Controller::slotUpdateCurrent(const Tellico::Data::EntryList& entries_) {

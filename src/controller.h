@@ -152,8 +152,6 @@ public slots:
   void slotCheckOut();
   void slotCheckIn();
   void slotCheckIn(const Data::EntryList& entries);
-  void slotGoPrevEntry();
-  void slotGoNextEntry();
 
 signals:
   void collectionAdded(int collType);
@@ -165,8 +163,6 @@ private:
   void blockAllSignals(bool block) const;
   bool canCheckIn() const;
   void plugUpdateMenu(KMenu* popup);
-  enum EntryDirection { PrevEntry, NextEntry };
-  void goEntrySibling(EntryDirection dir);
 
   MainWindow* m_mainWindow;
 

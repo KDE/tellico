@@ -37,7 +37,7 @@
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>
 #include <kaction.h>
-#include <KVBox>
+#include <kvbox.h>
 
 #include <QStringList>
 #include <QObject>
@@ -60,14 +60,12 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
       m_isWorking(false),
       m_needReset(false) {
   setCaption(i18n("Edit Entry"));
-  setButtons(Help|User1|User2|User3|Apply|Close);
+  setButtons(Help|User1|Apply|Close);
   setDefaultButton(User1);
   setButtonGuiItem(User1, KGuiItem(i18n("&New Entry")));
 
   setMainWidget(m_tabs);
 
-  m_prevBtn = User3;
-  m_nextBtn = User2;
   m_newBtn  = User1;
   m_saveBtn = Apply;
   KGuiItem save = KStandardGuiItem::save();
@@ -78,29 +76,6 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   connect(this, SIGNAL(closeClicked()), SLOT(slotClose()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
   connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
-  connect(this, SIGNAL(user2Clicked()), SLOT(slotGoNextEntry()));
-  connect(this, SIGNAL(user3Clicked()), SLOT(slotGoPrevEntry()));
-
-  KGuiItem prev;
-  prev.setIconName(QLatin1String(QApplication::isLeftToRight() ? "go-previous" : "go-next"));
-  prev.setToolTip(i18n("Go to the previous entry in the collection"));
-  prev.setWhatsThis(prev.toolTip());
-
-  KGuiItem next;
-  next.setIconName(QLatin1String(QApplication::isLeftToRight() ? "go-next" : "go-previous"));
-  next.setToolTip(i18n("Go to the next entry in the collection"));
-  next.setWhatsThis(next.toolTip());
-
-  setButtonGuiItem(m_nextBtn, next);
-  setButtonGuiItem(m_prevBtn, prev);
-
-  // these are just fror the key shortcuts
-  KAction* newAct = new KAction(i18n("Go to Previous"), this);
-  newAct->setShortcut(Qt::Key_PageUp);
-  connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoPrevEntry()));
-  newAct = new KAction(i18n("Go to Next"), this);
-  newAct->setShortcut(Qt::Key_PageDown);
-  connect(newAct, SIGNAL(triggered()), Controller::self(), SLOT(slotGoNextEntry()));
 
   setHelp(QLatin1String("entry-editor"));
 
@@ -296,9 +271,6 @@ void EntryEditDialog::slotHandleNew() {
   Controller::self()->slotClearSelection();
   m_isWorking = false;
 
-  enableButton(m_prevBtn, false);
-  enableButton(m_nextBtn, false);
-
   Data::EntryPtr entry(new Data::Entry(m_currColl));
   m_currEntries.append(entry);
   m_isOrphan = true;
@@ -489,9 +461,6 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   blockSignals(false);
   m_isWorking = false;
 
-  // can't go to next entry if multiple are selected
-  enableButton(m_prevBtn, false);
-  enableButton(m_nextBtn, false);
   setButtonText(m_saveBtn, i18n("Sa&ve Entries"));
 }
 
@@ -536,8 +505,6 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
     widget->editMultiple(false);
   } // end field loop
 
-  enableButton(m_prevBtn, true);
-  enableButton(m_nextBtn, true);
   if(entry_->isOwned()) {
     setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
     slotSetModified(false);
@@ -746,16 +713,6 @@ void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
     m_needReset = true;
     setContents(m_currEntries);
   }
-}
-
-void EntryEditDialog::slotGoPrevEntry() {
-  queryModified();
-  Controller::self()->slotGoPrevEntry();
-}
-
-void EntryEditDialog::slotGoNextEntry() {
-  queryModified();
-  Controller::self()->slotGoNextEntry();
 }
 
 #include "entryeditdialog.moc"

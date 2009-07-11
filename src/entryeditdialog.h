@@ -123,10 +123,6 @@ public slots:
    */
   void slotSetModified(bool modified=true);
 
-private slots:
-  void slotGoPrevEntry();
-  void slotGoNextEntry();
-
 private:
   /**
    * Sets the contents of the input controls to match the contents of a entry.
@@ -148,7 +144,8 @@ private:
   GUI::TabWidget* m_tabs;
   QHash<QString, GUI::FieldWidget*> m_widgetDict;
 
-  ButtonCode m_saveBtn, m_newBtn, m_nextBtn, m_prevBtn;
+  ButtonCode m_saveBtn;
+  ButtonCode m_newBtn;
 
   bool m_modified;
   bool m_isOrphan;
