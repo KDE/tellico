@@ -22,60 +22,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_DATEWIDGET_H
-#define TELLICO_GUI_DATEWIDGET_H
+#ifndef TELLICO_GUI_SPINBOX_H
+#define TELLICO_GUI_SPINBOX_H
 
-#include <QWidget>
-
-class KComboBox;
-class KPushButton;
-class KDatePicker;
-class KVBox;
-
-class QString;
-class QDate;
+#include <QSpinBox>
 
 namespace Tellico {
   namespace GUI {
 
-class SpinBox;
-
 /**
  * @author Robby Stephenson
  */
-class DateWidget : public QWidget {
+class SpinBox : public QSpinBox {
 Q_OBJECT
 
 public:
-  DateWidget(QWidget* parent);
-  ~DateWidget();
-
-  QDate date() const;
-  QString text() const;
-  void setDate(const QDate& date);
-  void setDate(const QString& date);
-  void clear();
-
-signals:
-  void signalModified();
-
-protected:
-  bool eventFilter(QObject *watched, QEvent *event);
+  SpinBox(int min, int max, QWidget *parent);
 
 private slots:
-  void slotDateChanged();
-  void slotShowPicker();
-  void slotDateSelected(const QDate& newDate);
-  void slotDateEntered(const QDate& newDate);
-
-private:
-  SpinBox* m_daySpin;
-  KComboBox* m_monthCombo;
-  SpinBox* m_yearSpin;
-  KPushButton* m_dateButton;
-
-  KVBox* m_frame;
-  KDatePicker* m_picker;
+  void checkValue();
 };
 
   } // end namespace

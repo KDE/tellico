@@ -32,7 +32,8 @@ class KLineEdit;
 
 namespace Tellico {
   namespace GUI {
-    class SpinBox;
+
+class SpinBox;
 
 /**
  * @author Robby Stephenson

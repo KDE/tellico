@@ -25,6 +25,7 @@ SET(gui_STAT_SRCS
    ratingfieldwidget.cpp
    ratingwidget.cpp
    richtextlabel.cpp
+   spinbox.cpp
    stringmapdialog.cpp
    tablefieldwidget.cpp
    tabwidget.cpp

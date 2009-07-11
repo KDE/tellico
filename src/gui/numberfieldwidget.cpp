@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "numberfieldwidget.h"
-#include "datewidget.h"
+#include "spinbox.h"
 #include "../field.h"
 #include "../tellico_debug.h"
 
@@ -59,18 +59,12 @@ void NumberFieldWidget::initLineEdit() {
 void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers
   m_spinBox = new GUI::SpinBox(-1, INT_MAX, this);
-  connect(m_spinBox, SIGNAL(valueChanged(int)), SLOT(checkModified()));
-  // I want to allow no value, so set space as special text. Empty text is ignored
-  m_spinBox->setSpecialValueText(QLatin1String(" "));
+  connect(m_spinBox, SIGNAL(valueChanged(const QString&)), SLOT(checkModified()));
 }
 
 QString NumberFieldWidget::text() const {
   if(isSpinBox()) {
-    // minValue = special empty text
-    if(m_spinBox->value() > m_spinBox->minimum()) {
-      return QString::number(m_spinBox->value());
-    }
-    return QString();
+    return m_spinBox->cleanText();
   }
 
   QString text = m_lineEdit->text();

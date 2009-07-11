@@ -233,8 +233,8 @@ void FieldWidget::checkModified() {
   }
   const QString value = text();
   if(value != m_oldValue) {
+//    myDebug() << "old value:" << m_oldValue << "| new value:" << value;
     m_oldValue = value;
-//    myDebug() << sender()->metaObject()->className() << ": new value:" << value;
     emit valueChanged();
   }
 }

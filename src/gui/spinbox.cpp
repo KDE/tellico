@@ -22,62 +22,28 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GUI_DATEWIDGET_H
-#define TELLICO_GUI_DATEWIDGET_H
+#include "spinbox.h"
 
-#include <QWidget>
+#include <QLineEdit>
 
-class KComboBox;
-class KPushButton;
-class KDatePicker;
-class KVBox;
+using Tellico::GUI::SpinBox;
 
-class QString;
-class QDate;
+SpinBox::SpinBox(int min_, int max_, QWidget * parent_) : QSpinBox(parent_) {
+  setMinimum(min_);
+  setMaximum(max_);
+  setAlignment(Qt::AlignRight);
+  // I want to be able to have an empty value
+  // an empty string just removes the special value, so set white space
+  setSpecialValueText(QLatin1String(" "));
+  connect(lineEdit(), SIGNAL(textEdited(const QString&)), SLOT(checkValue()));
+}
 
-namespace Tellico {
-  namespace GUI {
+void SpinBox::checkValue() {
+  // if we delete everything in the lineedit, then we want to have an empty value
+  // which is equivalent to the minimum, or special value text
+  if(cleanText().isEmpty()) {
+    setValue(minimum());
+  }
+}
 
-class SpinBox;
-
-/**
- * @author Robby Stephenson
- */
-class DateWidget : public QWidget {
-Q_OBJECT
-
-public:
-  DateWidget(QWidget* parent);
-  ~DateWidget();
-
-  QDate date() const;
-  QString text() const;
-  void setDate(const QDate& date);
-  void setDate(const QString& date);
-  void clear();
-
-signals:
-  void signalModified();
-
-protected:
-  bool eventFilter(QObject *watched, QEvent *event);
-
-private slots:
-  void slotDateChanged();
-  void slotShowPicker();
-  void slotDateSelected(const QDate& newDate);
-  void slotDateEntered(const QDate& newDate);
-
-private:
-  SpinBox* m_daySpin;
-  KComboBox* m_monthCombo;
-  SpinBox* m_yearSpin;
-  KPushButton* m_dateButton;
-
-  KVBox* m_frame;
-  KDatePicker* m_picker;
-};
-
-  } // end namespace
-} // end namespace
-#endif
+#include "spinbox.moc"

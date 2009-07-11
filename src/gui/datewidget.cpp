@@ -27,8 +27,8 @@
 // and published under the LGPL
 
 #include "datewidget.h"
+#include "spinbox.h"
 
-#include <kdebug.h>
 #include <kcombobox.h>
 #include <kpushbutton.h>
 #include <kdatepicker.h>
@@ -43,18 +43,7 @@
 #include <QFrame>
 #include <QEvent>
 
-using Tellico::GUI::SpinBox;
 using Tellico::GUI::DateWidget;
-
-SpinBox::SpinBox(int min, int max, QWidget *parent) : QSpinBox(parent)
-{
-  setMinimum(min);
-  setMaximum(max);
-  setAlignment(Qt::AlignRight);
-  // I want to be able to omit the day
-  // an empty string just removes the special value, so set white space
-  setSpecialValueText(QLatin1String(" "));
-}
 
 DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   QBoxLayout* l = new QHBoxLayout(this);
