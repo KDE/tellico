@@ -48,6 +48,22 @@ extern "C" {
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
 
+  class QueryDestroyer {
+  public:
+    QueryDestroyer(ZOOM_query query_) : query(query_) {}
+    ~QueryDestroyer() { if(query) ZOOM_query_destroy(query); }
+  private:
+    ZOOM_query query;
+  };
+
+  class ResultDestroyer {
+  public:
+    ResultDestroyer(ZOOM_resultset result_) : result(result_) {}
+    ~ResultDestroyer() { if(result) ZOOM_resultset_destroy(result); }
+  private:
+    ZOOM_resultset result;
+  };
+
   class YazCloser {
   public:
     YazCloser(yaz_iconv_t iconv_) : iconv(iconv_), marc(0) {}
@@ -149,10 +165,11 @@ void Z3950Connection::run() {
   }
 
   ZOOM_query query = ZOOM_query_create();
+  QueryDestroyer qd(query);
+
   int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
   if(errcode != 0) {
     myDebug() << "query error: " << m_pqn;
-    ZOOM_query_destroy(query);
     QString s = i18n("Query error!");
     s += QLatin1Char(' ') + m_pqn;
     done(s, MessageHandler::Error);
@@ -160,6 +177,7 @@ void Z3950Connection::run() {
   }
 
   ZOOM_resultset resultSet = ZOOM_connection_search(d->conn, query);
+  ResultDestroyer rd(resultSet);
 
   // check abort status
   if(m_aborted) {
@@ -190,8 +208,6 @@ void Z3950Connection::run() {
   const char* addinfo;
   errcode = ZOOM_connection_error(d->conn, &errmsg, &addinfo);
   if(errcode != 0) {
-    ZOOM_resultset_destroy(resultSet);
-    ZOOM_query_destroy(query);
     m_connected = false;
 
     QString s = i18n("Connection search error %1: %2", errcode, toString(errmsg));
@@ -269,8 +285,6 @@ void Z3950Connection::run() {
       }
       if(len == 0) {
         myLog() << "giving up";
-        ZOOM_resultset_destroy(resultSet);
-        ZOOM_query_destroy(query);
         done(i18n("Record syntax error"), MessageHandler::Error);
         return;
       }
@@ -298,10 +312,10 @@ void Z3950Connection::run() {
   const size_t realLimit = qMin(numResults, m_limit);
 
   for(size_t i = m_start; i < realLimit && !m_aborted; ++i) {
-    myLog() << "grabbing index " << i;
+//    myLog() << "grabbing index" << i;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
-      myDebug() << "no record returned for index " << i;
+      myDebug() << "no record returned for index" << i;
       continue;
     }
     int len;
@@ -328,9 +342,6 @@ void Z3950Connection::run() {
     Z3950ResultFound* ev = new Z3950ResultFound(data);
     QApplication::postEvent(m_fetcher.data(), ev);
   }
-
-  ZOOM_resultset_destroy(resultSet);
-  ZOOM_query_destroy(query);
 
   m_hasMore = m_limit < numResults;
   if(m_hasMore) {
