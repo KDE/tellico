@@ -25,22 +25,22 @@ Arguments:
 
 </sect1>
 
-<sect1 id="dcop-interface">
-<title>&DCOP; Interface</title>
+<sect1 id="dbus-interface">
+<title>&DBUS; Interface</title>
 
 <para>
-&appname; has a minimal &DCOP; interface, which can be used for scripting or interacting with a running application from the command-line. As with all &DCOP; calls, you need to specify the application you want to interface with, and the particular interface. The name of the &DCOP; application is <constant>tellico-&lt;pid&gt;</constant>, where <emphasis>&lt;pid&gt;</emphasis> is the process id of the running application.
+&appname; has a minimal &DBUS; interface, which can be useful for scripting or interacting with a running application from the command-line. As with all &DBUS; calls, you need to specify the service you want to interface with, and the particular interface. The name of the &DBUS; service is <constant>org.kde.tellico</constant>.
 </para>
 
-<sect2 id="dcop-commands">
-<title>DCOP Commands</title>
+<sect2 id="dbus-commands">
+<title>DBUS Commands</title>
 
-<para>Two &DCOP; objects are available in the tellico interface: <constant>tellico</constant> and <constant>collection</constant>.</para>
+<para>Two &DBUS; primary objects are available in the tellico interface: <constant>Tellico</constant> and <constant>Collections</constant>.</para>
 
-<sect3 id="dcop-tellico">
-<title>The <constant>tellico</constant> Object</title>
+<sect3 id="dbus-tellico">
+<title>The <constant>Tellico</constant> Object</title>
 
-<para>The full list of &DCOP; commands in the <constant>tellico</constant> object is shown below:</para>
+<para>The full list of &DBUS; commands in the <constant>tellico</constant> object is shown below:</para>
 
 <programlisting>
 bool importTellico(QString file, QString action)
@@ -53,11 +53,11 @@ bool exportBibtex(QString file)
 bool exportHTML(QString file)
 bool exportCSV(QString file)
 bool exportPilotDB(QString file)
-QValueList&lt;long int&gt; selectedEntries()
-QValueList&lt;long int&gt; filteredEntries()
+QList&lt;int&gt; selectedEntries()
+QList&lt;int&gt; filteredEntries()
 void openFile(QString file)
 void setFilter(QString text)
-bool showEntry(long int id)
+bool showEntry(int id)
 </programlisting>
 
 <para>
@@ -77,20 +77,20 @@ The current open collection in &appname; may be exported to a file, in either Te
 <para>Given an entry ID, <command>showEntry()</command> will select that entry and show the entry details in the main window.</para>
 </sect3>
 
-<sect3 id="dcop-collection">
-<title>The <constant>collection</constant> Object</title>
+<sect3 id="dbus-collection">
+<title>The <constant>Collections</constant> Object</title>
 
-<para>The full list of &DCOP; commands in the <constant>collection</constant> object is shown below:</para>
+<para>The full list of &DBUS; commands in the <constant>Collections</constant> object is shown below:</para>
 
 <programlisting>
-long int addEntry()
-bool removeEntry(long int entryID)
-QStringList values(QString fieldName)
-QStringList values(long int entryID,QString fieldName)
-QStringList bibtexKeys()
-QString bibtexKey(long int entryID)
-bool setFieldValue(long int entryID,QString fieldName,QString value)
-bool addFieldValue(long int entryID,QString fieldName,QString value)
+int addEntry()
+bool removeEntry(int entryID)
+QStringList allValues(QString fieldName)
+QStringList entryValues(int entryID, QString fieldName)
+QStringList selectedBibtexKeys()
+QString entryBibtexKey(int entryID)
+bool setEntryValue(int entryID, QString fieldName, QString value)
+bool addEntryValue(int entryID, QString fieldName, QString value)
 </programlisting>
 
 <para>
@@ -98,49 +98,49 @@ A new empty entry may be created in the current collection using the <command>ad
 </para>
 
 <para>
-Calling <command>values()</command> using just a field name will return all the values for that field for the currently selected entries. If no entries are selected, the return list is empty. If an entry ID is included in the command, the field values for that specific entry are returned.
+Calling <command>allValues()</command> using just a field name will return all the values for that field for the currently selected entries. If no entries are selected, the return list is empty. If an entry ID is included in the command, the field values for that specific entry are returned.
 </para>
 
 <para>
-If the current collection is a bibliography, calling <command>bibtexKeys()</command> will return the Bibtex citation key for all selected entries. The bibtexKey for a specific entry may be found by using the <command>bibtexKey()</command> command.
+If the current collection is a bibliography, calling <command>selectedBibtexKeys()</command> will return the Bibtex citation key for all selected entries. The bibtexKey for a specific entry may be found by using the <command>entryBibtexKey()</command> command.
 </para>
 
 <para>
-Entries can be edited directly with the &DCOP; interface. Given an entry ID, <command>setFieldValue()</command> will set the field value directly. To add a value, without affecting the existing values, use <command>addFieldValue()</command>. The new value gets appended to the end of the existing list.
+Entries can be edited directly with the &DBUS; interface. Given an entry ID, <command>setEntryValue()</command> will set the field value directly. To add a value, without affecting the existing values, use <command>addEntryValue()</command>. The new value gets appended to the end of the existing list.
 </para>
 </sect3>
 
 </sect2>
 
-<sect2 id="dcop-examples">
-<title>DCOP Examples</title>
+<sect2 id="dbus-examples">
+<title>DBUS Examples</title>
 
 <para>
-Here are some examples for scripting &appname; using the &DCOP; interface. Since the <emphasis>pid</emphasis> must be known, the easiest way to include that in the shell command is like so: <userinput>dcop $(dcop | grep tellico) tellico</userinput>.
+Here are some examples for scripting &appname; using the &DBUS; interface. Since the <emphasis>pid</emphasis> must be known, the easiest way to include that in the shell command is like so: <userinput>dbus $(dbus | grep tellico) tellico</userinput>.
 </para>
 
 <screen width="40">
 <emphasis>Open a Bibtex file</emphasis>
-<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico importBibtex ~/documents/reference.bib replace</userinput>
+<prompt>%</prompt> <userinput>qdbus org.kde.tellico /Tellico org.kde.tellico.importBibtex "/home/robby/reference.bib" "replace"</userinput>
 <computeroutput>true</computeroutput>
 </screen>
 
 <screen width="40">
 <emphasis>Export a Bibtex file</emphasis>
-<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) tellico exportBibtex ~/documents/reference.bib</userinput>
+<prompt>%</prompt> <userinput>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
 <computeroutput>true</computeroutput>
 </screen>
 
 <screen width="40">
 <emphasis>Echo the citation key of the current selection</emphasis>
-<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) collection bibtexKeys</userinput>
+<prompt>%</prompt> <userinput>qdbus org.kde.tellico /Collections org.kde.tellico.selectedBibtexKeys</userinput>
 <computeroutput>stephenson2004</computeroutput>
 </screen>
 
 <screen width="40">
 <emphasis>Add a new entry and set the title</emphasis>
-<prompt>%</prompt> <userinput>myid=`dcop $(dcop | grep tellico) collection addEntry`</userinput>
-<prompt>%</prompt> <userinput>dcop $(dcop | grep tellico) collection setFieldValue $myid title "My New Book"</userinput>
+<prompt>%</prompt> <userinput>myid=`qdbus org.kde.tellico /Collections org.kde.tellico.addEntry`</userinput>
+<prompt>%</prompt> <userinput>qdbus org.kde.tellico /Collections org.kde.tellico.setEntryValue $myid title "My New Book"</userinput>
 <computeroutput>true</computeroutput>
 </screen>
 
