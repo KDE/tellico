@@ -48,6 +48,7 @@ extern "C" {
 namespace {
   static const size_t Z3950_DEFAULT_MAX_RECORDS = 20;
 
+#ifdef HAVE_YAZ
   class QueryDestroyer {
   public:
     QueryDestroyer(ZOOM_query query_) : query(query_) {}
@@ -76,6 +77,7 @@ namespace {
     yaz_iconv_t iconv;
     yaz_marc_t marc;
   };
+#endif
 }
 
 using Tellico::Fetch::Z3950ResultFound;
