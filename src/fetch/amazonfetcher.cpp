@@ -170,7 +170,7 @@ void AmazonFetcher::continueSearch() {
 
 void AmazonFetcher::doSearch() {
 #ifndef HAVE_QCA2
-  message(i18n("Tellico was not compiled with support for searching %1.", source()), MessageHandler::Warning);
+  message(i18n("Tellico was not compiled with support for searching %1.", defaultName()), MessageHandler::Warning);
   stop();
   return;
 #else
@@ -185,41 +185,40 @@ void AmazonFetcher::doSearch() {
 //  myDebug() << "value = " << m_value;
 //  myDebug() << "getting page " << m_page;
 
-  const SiteData& data = siteData(m_site);
-  KUrl u = data.url;
-  u.addQueryItem(QLatin1String("Service"),        QLatin1String("AWSECommerceService"));
-  u.addQueryItem(QLatin1String("AssociateTag"),   m_assoc);
-  u.addQueryItem(QLatin1String("AWSAccessKeyId"), m_access);
-  u.addQueryItem(QLatin1String("Operation"),      QLatin1String("ItemSearch"));
-  u.addQueryItem(QLatin1String("ResponseGroup"),  QLatin1String("Large"));
-  u.addQueryItem(QLatin1String("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QLatin1String("Version"),        QLatin1String("2007-10-29"));
+  QMap<QString, QString> params;
+  params.insert(QLatin1String("Service"),        QLatin1String("AWSECommerceService"));
+  params.insert(QLatin1String("AssociateTag"),   m_assoc);
+  params.insert(QLatin1String("AWSAccessKeyId"), m_access);
+  params.insert(QLatin1String("Operation"),      QLatin1String("ItemSearch"));
+  params.insert(QLatin1String("ResponseGroup"),  QLatin1String("Large"));
+  params.insert(QLatin1String("ItemPage"),       QString::number(m_page));
+  params.insert(QLatin1String("Version"),        QLatin1String("2007-10-29"));
 
   const int type = collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
-      u.addQueryItem(QLatin1String("SearchIndex"), QLatin1String("Books"));
-      u.addQueryItem(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
+      params.insert(QLatin1String("SearchIndex"), QLatin1String("Books"));
+      params.insert(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
       break;
 
     case Data::Collection::Album:
-      u.addQueryItem(QLatin1String("SearchIndex"), QLatin1String("Music"));
+      params.insert(QLatin1String("SearchIndex"), QLatin1String("Music"));
       break;
 
     case Data::Collection::Video:
-      u.addQueryItem(QLatin1String("SearchIndex"), QLatin1String("Video"));
-      u.addQueryItem(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
+      params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
+      params.insert(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
       break;
 
     case Data::Collection::Game:
-      u.addQueryItem(QLatin1String("SearchIndex"), QLatin1String("VideoGames"));
+      params.insert(QLatin1String("SearchIndex"), QLatin1String("VideoGames"));
       break;
 
     case Data::Collection::BoardGame:
-      u.addQueryItem(QLatin1String("SearchIndex"), QLatin1String("Toys"));
-      u.addQueryItem(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
+      params.insert(QLatin1String("SearchIndex"), QLatin1String("Toys"));
+      params.insert(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
       break;
 
     case Data::Collection::Coin:
@@ -245,29 +244,28 @@ void AmazonFetcher::doSearch() {
 
   switch(m_key) {
     case Title:
-      u.addQueryItem(QLatin1String("Title"), value);
+      params.insert(QLatin1String("Title"), value);
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        u.addQueryItem(QLatin1String("Actor"),        value);
-        u.addQueryItem(QLatin1String("Director"),     value);
+        params.insert(QLatin1String("Actor"),        value);
+        params.insert(QLatin1String("Director"),     value);
       } else if(type == Data::Collection::Album) {
-        u.addQueryItem(QLatin1String("Artist"),       value);
+        params.insert(QLatin1String("Artist"),       value);
       } else if(type == Data::Collection::Game) {
-        u.addQueryItem(QLatin1String("Manufacturer"), value);
+        params.insert(QLatin1String("Manufacturer"), value);
       } else { // books and bibtex
         QString s = QString::fromLatin1("author:%1 or publisher:%2").arg(value, value);
-//        u.addQueryItem(QLatin1String("Author"),       value, mib);
-//        u.addQueryItem(QLatin1String("Publisher"),    value, mib);
-        u.addQueryItem(QLatin1String("Power"),    s);
+//        params.insert(QLatin1String("Author"),       value, mib);
+//        params.insert(QLatin1String("Publisher"),    value, mib);
+        params.insert(QLatin1String("Power"),    s);
       }
       break;
 
     case ISBN:
       {
-        u.removeQueryItem(QLatin1String("Operation"));
-        u.addQueryItem(QLatin1String("Operation"), QLatin1String("ItemLookup"));
+        params.insert(QLatin1String("Operation"), QLatin1String("ItemLookup"));
 
         QString s = m_value; // not encValue!!!
         s.remove(QLatin1Char('-'));
@@ -298,47 +296,46 @@ void AmazonFetcher::doSearch() {
             }
           }
           // the default search is by ASIN, which prohibits SearchIndex
-          u.removeQueryItem(QLatin1String("SearchIndex"));
+          params.remove(QLatin1String("SearchIndex"));
         }
         // limit to first 10
         while(isbns.size() > 10) {
           isbns.pop_back();
         }
-        u.addQueryItem(QLatin1String("ItemId"), isbns.join(QLatin1String(",")));
+        params.insert(QLatin1String("ItemId"), isbns.join(QLatin1String(",")));
         if(isbn13) {
-          u.addQueryItem(QLatin1String("IdType"), QLatin1String("EAN"));
+          params.insert(QLatin1String("IdType"), QLatin1String("EAN"));
         }
       }
       break;
 
     case UPC:
       {
-        u.removeQueryItem(QLatin1String("Operation"));
-        u.addQueryItem(QLatin1String("Operation"), QLatin1String("ItemLookup"));
+        params.insert(QLatin1String("Operation"), QLatin1String("ItemLookup"));
         // US allows UPC, all others are EAN
         if(m_site == US) {
-          u.addQueryItem(QLatin1String("IdType"), QLatin1String("UPC"));
+          params.insert(QLatin1String("IdType"), QLatin1String("UPC"));
         } else {
-          u.addQueryItem(QLatin1String("IdType"), QLatin1String("EAN"));
+          params.insert(QLatin1String("IdType"), QLatin1String("EAN"));
         }
         QString s = m_value; // not encValue!!!
         s.remove(QLatin1Char('-'));
         // limit to first 10
         s.replace(QLatin1String("; "), QLatin1String(","));
         s = s.section(QLatin1Char(','), 0, 9);
-        u.addQueryItem(QLatin1String("ItemId"), s);
+        params.insert(QLatin1String("ItemId"), s);
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("Keywords"), m_value);
+      params.insert(QLatin1String("Keywords"), m_value);
       break;
 
     case Raw:
       {
         QString key = value.section(QLatin1Char('='), 0, 0).trimmed();
         QString str = value.section(QLatin1Char('='), 1).trimmed();
-        u.addQueryItem(key, str);
+        params.insert(key, str);
       }
       break;
 
@@ -347,10 +344,9 @@ void AmazonFetcher::doSearch() {
       stop();
       return;
   }
-//  myDebug() << u;
 
-  AmazonRequest request(data.url, m_amazonKey);
-  KUrl newUrl = request.signedRequest(u.queryItems());
+  AmazonRequest request(siteData(m_site).url, m_amazonKey);
+  KUrl newUrl = request.signedRequest(params);
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
