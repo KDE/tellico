@@ -52,12 +52,14 @@
 #include <kinputdialog.h>
 #include <klocale.h>
 #include <kundostack.h>
+#include <kwallet.h>
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;
 
 Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
-    , m_commandHistory(new KUndoStack(parent)) {
+    , m_commandHistory(new KUndoStack(parent))
+    , m_wallet(0) {
 }
 
 const KUrl& Kernel::URL() const {
@@ -395,3 +397,45 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
   }
   return 0;
 }
+
+bool Kernel::prepareWallet() {
+  if(!m_wallet || !m_wallet->isOpen()) {
+    delete m_wallet;
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0);
+  }
+  if(!m_wallet || !m_wallet->isOpen()) {
+    delete m_wallet;
+    m_wallet = 0;
+    return false;
+  }
+
+  if(!m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) &&
+     !m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) {
+    return false;
+  }
+
+  return m_wallet->setFolder(KWallet::Wallet::PasswordFolder());
+}
+
+QByteArray Kernel::readWalletEntry(const QString& key_) {
+  QByteArray value;
+
+  if(!prepareWallet()) {
+    return value;
+  }
+
+  if(m_wallet->readEntry(key_, value) != 0) {
+    return QByteArray();
+  }
+
+  return value;
+}
+
+bool Kernel::writeWalletEntry(const QString& key_, const QByteArray& value_) {
+  if(!prepareWallet()) {
+    return false;
+  }
+
+  return m_wallet->writeEntry(key_, value_) == 0;
+}
+

@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "amazonfetcher.h"
+#include "amazonrequest.h"
 #include "messagehandler.h"
 #include "searchresult.h"
 #include "../translators/xslthandler.h"
@@ -34,9 +35,10 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../tellico_utils.h"
-#include "../tellico_debug.h"
+#include "../tellico_kernel.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/combobox.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -60,7 +62,6 @@
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
   static const int AMAZON_MAX_RETURNS_TOTAL = 20;
-  static const char* AMAZON_ACCESS_KEY = "0834VQ4S71KYPVSYQD02";
   static const char* AMAZON_ASSOC_TOKEN = "tellico-20";
   // need to have these in the translation file
   static const char* linkText = I18N_NOOP("Amazon Link");
@@ -97,7 +98,6 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
 
 AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
-      m_access(QLatin1String(AMAZON_ACCESS_KEY)),
       m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
   m_name = siteData(site_).title;
@@ -131,6 +131,12 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
+    QByteArray maybeKey = Kernel::self()->readWalletEntry(m_access);
+    if(!maybeKey.isNull()) {
+      m_amazonKey = maybeKey;
+    } else {
+      myDebug() << "no amazon secret key found";
+    }
   }
   s = config_.readEntry("AssocToken");
   if(!s.isEmpty()) {
@@ -161,6 +167,14 @@ void AmazonFetcher::continueSearch() {
 }
 
 void AmazonFetcher::doSearch() {
+  if(m_access.isEmpty() || m_amazonKey.isEmpty()) {
+    message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
+            QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
 //  myDebug() << "value = " << m_value;
 //  myDebug() << "getting page " << m_page;
 
@@ -326,9 +340,13 @@ void AmazonFetcher::doSearch() {
       stop();
       return;
   }
-//  myDebug() << "url: " << u.url();
+//  myDebug() << u;
 
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  AmazonRequest request(data.url, m_amazonKey);
+  KUrl newUrl = request.signedRequest(u.queryItems());
+//  myDebug() << newUrl;
+
+  m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
@@ -813,7 +831,40 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  QLabel* label = new QLabel(i18n("Co&untry: "), optionsWidget());
+
+  QLabel* al = new QLabel(i18n("An Access ID and Secret Key are required for accessing the Amazon Web Services. "
+                               "If you agree to the terms and conditions, "
+                               "<a href='https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html'>"
+                               "sign up for an account</a>, and enter your account information below."),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("Access key &ID: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_accessEdit = new KLineEdit(optionsWidget());
+  connect(m_accessEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_accessEdit, row, 1);
+  QString w = i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.");
+  label->setWhatsThis(w);
+  m_accessEdit->setWhatsThis(w);
+  label->setBuddy(m_accessEdit);
+
+  label = new QLabel(i18n("Secret &key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_secretKeyEdit = new KLineEdit(optionsWidget());
+  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+  connect(m_secretKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_secretKeyEdit, row, 1);
+  label->setWhatsThis(w);
+  m_secretKeyEdit->setWhatsThis(w);
+  label->setBuddy(m_secretKeyEdit);
+
+  label = new QLabel(i18n("Co&untry: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_siteCombo = new GUI::ComboBox(optionsWidget());
   m_siteCombo->addItem(i18n("United States"), US);
@@ -825,8 +876,8 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
   l->addWidget(m_siteCombo, row, 1);
-  QString w = i18n("Amazon.com provides data from several different localized sites. Choose the one "
-                   "you wish to use for this data source.");
+  w = i18n("Amazon.com provides data from several different localized sites. Choose the one "
+           "you wish to use for this data source.");
   label->setWhatsThis(w);
   m_siteCombo->setWhatsThis(w);
   label->setBuddy(m_siteCombo);
@@ -861,6 +912,8 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   if(fetcher_) {
     m_siteCombo->setCurrentData(fetcher_->m_site);
+    m_accessEdit->setText(fetcher_->m_access);
+    m_secretKeyEdit->setText(QString::fromUtf8(fetcher_->m_amazonKey));
     m_assocEdit->setText(fetcher_->m_assoc);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults
@@ -876,7 +929,15 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   int n = m_siteCombo->currentData().toInt();
   config_.writeEntry("Site", n);
-  QString s = m_assocEdit->text().trimmed();
+  QString s = m_accessEdit->text().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("AccessKey", s);
+    QByteArray key = m_secretKeyEdit->text().trimmed().toUtf8();
+    if(!key.isEmpty()) {
+      Kernel::self()->writeWalletEntry(s, key);
+    }
+  }
+  s = m_assocEdit->text().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("AssocToken", s);
   }

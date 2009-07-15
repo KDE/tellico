@@ -78,6 +78,15 @@ if(LIBEXEMPI_FOUND)
     include_directories(${LIBEXEMPI_INCLUDE_DIR})
 endif(LIBEXEMPI_FOUND)
 
+macro_optional_find_package(QCA2)
+macro_log_feature(QCA2_FOUND "QCA" "Support for signing Amazon requests" "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qca/html/" FALSE "2.0" "")
+if(QCA2_FOUND)
+#    add_definitions(${PC_QCA2_DEFINITIONS})
+    include_directories(${QCA2_INCLUDE_DIR})
+else(QCA2_FOUND)
+    set(ENABLE_AMAZON FALSE)
+endif(QCA2_FOUND)
+
 if(CMAKE_SYSTEM_NAME MATCHES Linux)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
 endif(CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -125,6 +134,7 @@ macro_bool_to_01(KSANE_FOUND HAVE_KSANE)
 macro_bool_to_01(KCDDB_FOUND HAVE_KCDDB)
 macro_bool_to_01(KABC_FOUND HAVE_KABC)
 macro_bool_to_01(KCAL_FOUND HAVE_KCAL)
+macro_bool_to_01(QCA2_FOUND HAVE_QCA2)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

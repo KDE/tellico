@@ -4,6 +4,7 @@ ADD_SUBDIRECTORY( scripts )
 
 SET(fetch_STAT_SRCS
    amazonfetcher.cpp
+   amazonrequest.cpp
    animenfofetcher.cpp
    arxivfetcher.cpp
    bibsonomyfetcher.cpp

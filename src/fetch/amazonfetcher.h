@@ -128,6 +128,7 @@ private:
 
   QString m_access;
   QString m_assoc;
+  QByteArray m_amazonKey;
   bool m_addLinkField;
   int m_limit;
   int m_countOffset;
@@ -157,6 +158,8 @@ private slots:
   void slotSiteChanged();
 
 private:
+  KLineEdit* m_accessEdit;
+  KLineEdit* m_secretKeyEdit;
   KLineEdit* m_assocEdit;
   GUI::ComboBox* m_siteCombo;
   GUI::ComboBox* m_imageCombo;
