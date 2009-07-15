@@ -167,6 +167,11 @@ void AmazonFetcher::continueSearch() {
 }
 
 void AmazonFetcher::doSearch() {
+#ifndef HAVE_QCA2
+  message(i18n("Tellico was not compiled with support for searching %1.", source()), MessageHandler::Warning);
+  stop();
+  return;
+#else
   if(m_access.isEmpty() || m_amazonKey.isEmpty()) {
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
@@ -350,6 +355,7 @@ void AmazonFetcher::doSearch() {
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
+#endif
 }
 
 void AmazonFetcher::stop() {
