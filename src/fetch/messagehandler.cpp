@@ -25,6 +25,7 @@
 #include "messagehandler.h"
 #include "fetchmanager.h"
 #include "../gui/guiproxy.h"
+#include "../gui/cursorsaver.h"
 
 #include <kmessagebox.h>
 
@@ -32,15 +33,18 @@ using Tellico::Fetch::ManagerMessage;
 
 // all messages go to manager
 void ManagerMessage::send(const QString& message_, Type type_) {
-  Fetch::Manager::self()->updateStatus(message_);
+  GUI::CursorSaver cs(Qt::ArrowCursor);
   // plus errors get a message box
   if(type_ == Error) {
     KMessageBox::sorry(GUI::Proxy::widget(), message_);
   } else if(type_ == Warning) {
     KMessageBox::information(GUI::Proxy::widget(), message_);
+  } else {
+    Fetch::Manager::self()->updateStatus(message_);
   }
 }
 
 void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
+  GUI::CursorSaver cs(Qt::ArrowCursor);
   KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
 }
