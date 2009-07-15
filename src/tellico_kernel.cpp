@@ -439,3 +439,25 @@ bool Kernel::writeWalletEntry(const QString& key_, const QByteArray& value_) {
   return m_wallet->writeEntry(key_, value_) == 0;
 }
 
+QMap<QString, QString> Kernel::readWalletMap(const QString& key_) {
+  QMap<QString, QString> map;
+
+  if(!prepareWallet()) {
+    return map;
+  }
+
+  if(m_wallet->readMap(key_, map) != 0) {
+    return QMap<QString, QString>();
+  }
+
+  return map;
+}
+
+bool Kernel::writeWalletMap(const QString& key_, const QMap<QString, QString>& map_) {
+  if(!prepareWallet()) {
+    return false;
+  }
+
+  return m_wallet->writeMap(key_, map_) == 0;
+}
+

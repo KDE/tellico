@@ -139,6 +139,8 @@ public:
 
   QByteArray readWalletEntry(const QString& key);
   bool writeWalletEntry(const QString& key, const QByteArray& value);
+  QMap<QString, QString> readWalletMap(const QString& key);
+  bool writeWalletMap(const QString& key, const QMap<QString, QString>& map);
 
 private:
   static Kernel* s_self;

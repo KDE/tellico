@@ -29,6 +29,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
+#include "../tellico_kernel.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
@@ -81,13 +82,13 @@ bool CrossRefFetcher::canFetch(int type) const {
 }
 
 void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString s = config_.readEntry("User");
-  if(!s.isEmpty()) {
-    m_user = s;
-  }
-  s = config_.readEntry("Password");
-  if(!s.isEmpty()) {
-    m_password = s;
+  QMap<QString, QString> map = Kernel::self()->readWalletMap(QLatin1String("crossref.org"));
+  if(!map.isEmpty()) {
+    m_user = map.value(QLatin1String("username"));
+    m_password = map.value(QLatin1String("password"));
+  } else {
+    m_user = config_.readEntry("User");
+    m_password = config_.readEntry("Password");
   }
 }
 
@@ -97,7 +98,7 @@ void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
   m_started = true;
 
   if(m_user.isEmpty() || m_password.isEmpty()) {
-    message(i18n("%1 requires a username and password.", source()), MessageHandler::Warning);
+    message(i18n("%1 requires a username and password.", source()), MessageHandler::Error);
     stop();
     return;
   }
@@ -352,8 +353,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   m_userEdit = new KLineEdit(optionsWidget());
   connect(m_userEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_userEdit, row, 1);
-  QString w = i18n("A username and password is required to access the CrossRef service. The password is "
-                   "stored as plain text in the Tellico configuration file.");
+  QString w = i18n("A username and password is required to access the CrossRef service.");
   label->setWhatsThis(w);
   m_userEdit->setWhatsThis(w);
   label->setBuddy(m_userEdit);
@@ -361,6 +361,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label = new QLabel(i18n("&Password: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_passEdit = new KLineEdit(optionsWidget());
+  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_passEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passEdit, row, 1);
   label->setWhatsThis(w);
@@ -374,11 +375,14 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 }
 
 void CrossRefFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  QString s = m_userEdit->text();
-  config_.writeEntry("User", s);
+  QMap<QString, QString> map;
+  map.insert(QLatin1String("username"), m_userEdit->text().trimmed());
+  map.insert(QLatin1String("password"), m_passEdit->text().trimmed());
+  Kernel::self()->writeWalletMap(QLatin1String("crossref.org"), map);
 
-  s = m_passEdit->text();
-  config_.writeEntry("Password", s);
+  // used to store username and password in plain text
+  config_.deleteEntry("User");
+  config_.deleteEntry("Password");
 
   slotSetModified(false);
 }
