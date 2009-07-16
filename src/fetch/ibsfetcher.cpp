@@ -24,7 +24,7 @@
 
 #include "ibsfetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/bookcollection.h"
@@ -170,7 +170,7 @@ void IBSFetcher::slotComplete(KJob*) {
   int pos2;
   for(int pos = anchorRx.indexIn(s); m_started && pos > -1; pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
     if(!u.isEmpty()) {
-      SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, d);
+      FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
       emit signalResultFound(r);
 
 #ifdef IBS_TEST
@@ -197,7 +197,7 @@ void IBSFetcher::slotComplete(KJob*) {
   }
 #ifndef IBS_TEST
   if(!u.isEmpty()) {
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, d);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
     emit signalResultFound(r);
     m_matches.insert(r->uid, u.replace(QLatin1String("&amp;"), QLatin1String("&")));
   }
@@ -232,7 +232,7 @@ void IBSFetcher::slotCompleteISBN(KJob* job_) {
   if(entry) {
     QString desc = entry->field(QLatin1String("author"))
                  + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
     emit signalResultFound(r);
     m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url().url());
   }

@@ -25,7 +25,7 @@
 #include "fetchdialog.h"
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
-#include "fetch/searchresult.h"
+#include "fetch/fetchresult.h"
 #include "entryview.h"
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"
@@ -100,17 +100,17 @@ namespace {
 using Tellico::FetchDialog;
 using barcodeRecognition::barcodeRecognitionThread;
 
-class FetchDialog::SearchResultItem : public QTreeWidgetItem {
+class FetchDialog::FetchResultItem : public QTreeWidgetItem {
   friend class FetchDialog;
   // always add to end
-  SearchResultItem(QTreeWidget* lv, Fetch::SearchResult* r)
+  FetchResultItem(QTreeWidget* lv, Fetch::FetchResult* r)
       : QTreeWidgetItem(lv), m_result(r) {
     setData(1, Qt::DisplayRole, r->title);
     setData(2, Qt::DisplayRole, r->desc);
     setData(3, Qt::DisplayRole, r->fetcher->source());
     setData(3, Qt::DecorationRole, Fetch::Manager::self()->fetcherIcon(r->fetcher));
   }
-  Fetch::SearchResult* m_result;
+  Fetch::FetchResult* m_result;
 };
 
 FetchDialog::FetchDialog(QWidget* parent_)
@@ -270,8 +270,8 @@ FetchDialog::FetchDialog(QWidget* parent_)
     split->setSizes(splitList);
   }
 
-  connect(Fetch::Manager::self(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
-                                  SLOT(slotResultFound(Tellico::Fetch::SearchResult*)));
+  connect(Fetch::Manager::self(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
+                                  SLOT(slotResultFound(Tellico::Fetch::FetchResult*)));
   connect(Fetch::Manager::self(), SIGNAL(signalStatus(const QString&)),
                                   SLOT(slotStatus(const QString&)));
   connect(Fetch::Manager::self(), SIGNAL(signalDone()),
@@ -427,7 +427,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
     QStringList searchValues = m_oldSearch.simplified().split(QLatin1String("; "));
     QStringList resultValues;
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
-      resultValues << static_cast<SearchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
+      resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
     }
     const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
     if(!valuesNotFound.isEmpty()) {
@@ -437,9 +437,9 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
   }
 }
 
-void FetchDialog::slotResultFound(Tellico::Fetch::SearchResult* result_) {
+void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
   m_results.append(result_);
-  (void) new SearchResultItem(m_treeWidget, result_);
+  (void) new FetchResultItem(m_treeWidget, result_);
   ++m_resultCount;
 }
 
@@ -447,9 +447,9 @@ void FetchDialog::slotAddEntry() {
   GUI::CursorSaver cs;
   Data::EntryList vec;
   foreach(QTreeWidgetItem* item_, m_treeWidget->selectedItems()) {
-    SearchResultItem* item = static_cast<SearchResultItem*>(item_);
+    FetchResultItem* item = static_cast<FetchResultItem*>(item_);
 
-    Fetch::SearchResult* r = item->m_result;
+    Fetch::FetchResult* r = item->m_result;
     Data::EntryPtr entry = m_entries.value(r->uid);
     if(!entry) {
       setStatus(i18n("Fetching %1...", r->title));
@@ -502,8 +502,8 @@ void FetchDialog::slotShowEntry() {
     return;
   }
 
-  SearchResultItem* item = static_cast<SearchResultItem*>(items.first());
-  Fetch::SearchResult* r = item->m_result;
+  FetchResultItem* item = static_cast<FetchResultItem*>(items.first());
+  Fetch::FetchResult* r = item->m_result;
   setStatus(i18n("Fetching %1...", r->title));
   Data::EntryPtr entry = m_entries.value(r->uid);
   if(!entry) {

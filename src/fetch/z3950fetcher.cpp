@@ -37,7 +37,7 @@
 #include "z3950fetcher.h"
 #include "z3950connection.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../collection.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -434,7 +434,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

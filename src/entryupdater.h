@@ -43,7 +43,7 @@ public:
   ~EntryUpdater();
 
 public slots:
-  void slotResult(Tellico::Fetch::SearchResult* result);
+  void slotResult(Tellico::Fetch::FetchResult* result);
   void slotCancel();
 
 private slots:
@@ -52,7 +52,7 @@ private slots:
   void slotCleanup();
 
 private:
-  typedef QPair<Fetch::SearchResult*, bool> UpdateResult;
+  typedef QPair<Fetch::FetchResult*, bool> UpdateResult;
   typedef QList<UpdateResult> ResultList;
 
   void init();

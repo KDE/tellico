@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "imdbfetcher.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
@@ -264,7 +264,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   const QString cap1 = s_titleRx->cap(1);
   int pPos = cap1.indexOf(QLatin1Char('('));
   // FIXME: maybe remove parentheses here?
-  SearchResult* r = new SearchResult(Fetcher::Ptr(this),
+  FetchResult* r = new FetchResult(Fetcher::Ptr(this),
                                      pPos == -1 ? cap1 : cap1.left(pPos),
                                      pPos == -1 ? QString() : cap1.mid(pPos));
   m_matches.insert(r->uid, m_url);
@@ -394,7 +394,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       break;
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc);
     KUrl u(m_url, cap1);
     u.setQuery(QString());
     m_matches.insert(r->uid, u);
@@ -473,7 +473,7 @@ void IMDBFetcher::parseSingleNameResult() {
     }
 
     // FIXME: maybe remove parentheses here?
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc, QString());
     KUrl u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
     u.setQuery(QString());
     m_matches.insert(r->uid, u);

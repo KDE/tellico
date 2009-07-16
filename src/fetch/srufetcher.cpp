@@ -24,7 +24,7 @@
 
 #include "srufetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../field.h"
 #include "../collection.h"
 #include "../translators/tellico_xml.h"
@@ -308,7 +308,7 @@ void SRUFetcher::slotComplete(KJob*) {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

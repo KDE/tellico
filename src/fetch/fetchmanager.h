@@ -39,7 +39,7 @@ class KUrl;
 namespace Tellico {
   namespace Fetch {
 
-class SearchResult;
+class FetchResult;
 class ConfigWidget;
 class ManagerMessage;
 
@@ -83,7 +83,7 @@ public:
 
 signals:
   void signalStatus(const QString& status);
-  void signalResultFound(Tellico::Fetch::SearchResult* result);
+  void signalResultFound(Tellico::Fetch::FetchResult* result);
   void signalDone();
 
 private slots:

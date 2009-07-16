@@ -24,7 +24,7 @@
 
 #include "googlescholarfetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../core/filehandler.h"
 #include "../translators/bibteximporter.h"
 #include "../collection.h"
@@ -186,7 +186,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
       break;
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;

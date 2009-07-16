@@ -24,7 +24,7 @@
 
 #include "discogsfetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -193,9 +193,9 @@ void DiscogsFetcher::slotComplete(KJob* ) {
       myWarning() << "server did not return valid XML.";
       return;
     }
-    // total is /resp/searchresults/@numResults
+    // total is /resp/fetchresults/@numResults
     QDomNode n = dom.documentElement().namedItem(QLatin1String("resp"))
-                                      .namedItem(QLatin1String("searchresults"));
+                                      .namedItem(QLatin1String("fetchresults"));
     QDomElement e = n.toElement();
     if(!e.isNull()) {
       m_total = e.attribute(QLatin1String("numResults")).toInt();
@@ -224,7 +224,7 @@ void DiscogsFetcher::slotComplete(KJob* ) {
       break;
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++count;

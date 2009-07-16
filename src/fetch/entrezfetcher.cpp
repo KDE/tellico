@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -303,7 +303,7 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
         break; // done now
       }
     }
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, pubdate + QLatin1Char('/') + authors);
     m_matches.insert(r->uid, id);
     emit signalResultFound(r);
   }

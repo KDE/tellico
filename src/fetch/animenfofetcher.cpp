@@ -24,7 +24,7 @@
 
 #include "animenfofetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/videocollection.h"
@@ -149,7 +149,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
 
   for(int pos = infoRx.indexIn(s); m_started && pos > -1; pos = infoRx.indexIn(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
-      SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, y);
+      FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y);
       emit signalResultFound(r);
 
 #ifdef ANIMENFO_TEST
@@ -189,7 +189,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   // grab last response
 #ifndef ANIMENFO_TEST
   if(!u.isEmpty()) {
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), t, y, QString());
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y, QString());
     emit signalResultFound(r);
     KUrl url(KUrl(ANIMENFO_BASE_URL), u);
     url.setQuery(QString());

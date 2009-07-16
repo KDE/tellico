@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_SEARCHRESULT_H
-#define TELLICO_FETCH_SEARCHRESULT_H
+#ifndef TELLICO_FETCH_FETCHRESULT_H
+#define TELLICO_FETCH_FETCHRESULT_H
 
 #include "fetcher.h"
 
@@ -32,11 +32,10 @@
 namespace Tellico {
   namespace Fetch {
 
-class SearchResult {
+class FetchResult {
 public:
-  SearchResult(Fetcher::Ptr f, Data::EntryPtr entry);
-  SearchResult(Fetcher::Ptr f, const QString& t, const QString& d);
-  SearchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i);
+  FetchResult(Fetcher::Ptr f, Data::EntryPtr entry);
+  FetchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i = QString());
 
   Data::EntryPtr fetchEntry();
 

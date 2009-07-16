@@ -24,7 +24,7 @@
 
 #include "isbndbfetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
@@ -231,7 +231,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
       break;
     }
 
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
     ++m_numResults;

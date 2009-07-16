@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "fetcher.h"
 #include "../entry.h"
 #include "../collection.h"
@@ -44,9 +44,9 @@ namespace {
   }
 }
 
-using Tellico::Fetch::SearchResult;
+using Tellico::Fetch::FetchResult;
 
-SearchResult::SearchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
+FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
    : uid(KRandom::random())
    , fetcher(fetcher_)
    , title(entry_->title())
@@ -54,14 +54,7 @@ SearchResult::SearchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
    , isbn(entry_->field(QLatin1String("isbn"))) {
 }
 
-SearchResult::SearchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_)
-   : uid(KRandom::random())
-   , fetcher(fetcher_)
-   , title(title_)
-   , desc(desc_) {
-}
-
-SearchResult::SearchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
+FetchResult::FetchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
    : uid(KRandom::random())
    , fetcher(fetcher_)
    , title(title_)
@@ -69,11 +62,11 @@ SearchResult::SearchResult(Fetcher::Ptr fetcher_, const QString& title_, const Q
    , isbn(isbn_) {
 }
 
-Tellico::Data::EntryPtr SearchResult::fetchEntry() {
+Tellico::Data::EntryPtr FetchResult::fetchEntry() {
   return fetcher->fetchEntry(uid);
 }
 
-QString SearchResult::makeDescription(Data::EntryPtr entry) {
+QString FetchResult::makeDescription(Data::EntryPtr entry) {
   Q_ASSERT(entry);
   QString desc;
   switch(entry->collection()->type()) {

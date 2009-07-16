@@ -39,7 +39,7 @@ namespace Tellico {
   class EntryView;
   namespace Fetch {
     class Fetcher;
-    class SearchResult;
+    class FetchResult;
   }
   namespace GUI {
     class ComboBox;
@@ -93,7 +93,7 @@ private slots:
   void slotUpdateStatus();
 
   void slotFetchDone(bool checkISBN = true);
-  void slotResultFound(Tellico::Fetch::SearchResult* result);
+  void slotResultFound(Tellico::Fetch::FetchResult* result);
   void slotKeyChanged(int);
   void slotSourceChanged(const QString& source);
   void slotMultipleISBN(bool toggle);
@@ -111,7 +111,7 @@ private:
 
   void customEvent(QEvent* event);
 
-  class SearchResultItem;
+  class FetchResultItem;
 
   KComboBox* m_sourceCombo;
   GUI::ComboBox* m_keyCombo;
@@ -136,7 +136,7 @@ private:
   QStringList m_isbnList;
   QStringList m_statusMessages;
   QHash<int, Data::EntryPtr> m_entries;
-  QList<Fetch::SearchResult*> m_results;
+  QList<Fetch::FetchResult*> m_results;
   int m_collType;
 
   barcodeRecognition::barcodeRecognitionThread* m_barcodeRecognitionThread;

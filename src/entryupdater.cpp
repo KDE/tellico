@@ -32,7 +32,7 @@
 #include "statusbar.h"
 #include "gui/richtextlabel.h"
 #include "document.h"
-#include "fetch/searchresult.cpp"
+#include "fetch/fetchresult.cpp"
 
 #include <kdialog.h>
 #include <klocale.h>
@@ -58,8 +58,8 @@ EntryUpdater::EntryUpdater(Tellico::Data::CollPtr coll_, Tellico::Data::EntryLis
   // for now, we're assuming all entries are same collection type
   m_fetchers = Fetch::Manager::self()->createUpdateFetchers(m_coll->type());
   foreach(Fetch::Fetcher::Ptr fetcher, m_fetchers) {
-    connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
-            SLOT(slotResult(Tellico::Fetch::SearchResult*)));
+    connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
+            SLOT(slotResult(Tellico::Fetch::FetchResult*)));
     connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
             SLOT(slotDone()));
   }
@@ -75,8 +75,8 @@ EntryUpdater::EntryUpdater(const QString& source_, Tellico::Data::CollPtr coll_,
   Fetch::Fetcher::Ptr f = Fetch::Manager::self()->createUpdateFetcher(m_coll->type(), source_);
   if(f) {
     m_fetchers.append(f);
-    connect(f.data(), SIGNAL(signalResultFound(Tellico::Fetch::SearchResult*)),
-            SLOT(slotResult(Tellico::Fetch::SearchResult*)));
+    connect(f.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
+            SLOT(slotResult(Tellico::Fetch::FetchResult*)));
     connect(f.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
             SLOT(slotDone()));
   }
@@ -151,7 +151,7 @@ void EntryUpdater::slotDone() {
   QTimer::singleShot(500, this, SLOT(slotStartNext()));
 }
 
-void EntryUpdater::slotResult(Tellico::Fetch::SearchResult* result_) {
+void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
   if(!result_ || m_cancelled) {
     return;
   }

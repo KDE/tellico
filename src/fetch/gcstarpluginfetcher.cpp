@@ -24,7 +24,7 @@
 
 #include "gcstarpluginfetcher.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -317,7 +317,7 @@ void GCstarPluginFetcher::slotProcessExited() {
 
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }

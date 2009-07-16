@@ -37,7 +37,7 @@ namespace Tellico {
   namespace Fetch {
     class ConfigWidget;
     class MessageHandler;
-    class SearchResult;
+    class FetchResult;
 
 /**
  * The top-level abstract class for fetching data.
@@ -128,7 +128,7 @@ public:
 
 signals:
 //  void signalStatus(const QString& status);
-  void signalResultFound(Tellico::Fetch::SearchResult* result);
+  void signalResultFound(Tellico::Fetch::FetchResult* result);
   void signalDone(Tellico::Fetch::Fetcher* fetcher);
 
 protected:

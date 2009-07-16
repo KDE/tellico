@@ -25,7 +25,7 @@
 #include "amazonfetcher.h"
 #include "amazonrequest.h"
 #include "messagehandler.h"
-#include "searchresult.h"
+#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -535,7 +535,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     }
 */
 //    myDebug() << entry->title();
-    SearchResult* r = new SearchResult(Fetcher::Ptr(this), entry);
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
     ++m_numResults;
