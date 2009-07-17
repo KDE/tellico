@@ -36,7 +36,6 @@ using Tellico::Fetch::Fetcher;
 
 Fetcher::Fetcher(QObject* parent) : QObject(parent)
     , QSharedData()
-    , m_collectionType(0)
     , m_updateOverwrite(false)
     , m_hasMoreResults(false)
     , m_messager(0) {
