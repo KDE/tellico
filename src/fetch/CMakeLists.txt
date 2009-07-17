@@ -15,6 +15,7 @@ SET(fetch_STAT_SRCS
    entrezfetcher.cpp
    execexternalfetcher.cpp
    fetcher.cpp
+   fetcherjob.cpp
    fetchmanager.cpp
    gcstarpluginfetcher.cpp
    googlescholarfetcher.cpp

@@ -31,7 +31,7 @@
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
-#include "../entrymerger.h"
+//#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -45,6 +45,7 @@
 #include <QTextStream>
 #include <QPixmap>
 #include <QVBoxLayout>
+#include <QFile>
 
 //#define ARXIV_TEST
 
@@ -142,7 +143,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -288,7 +289,7 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
 #ifdef ARXIV_TEST
   u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
 #endif
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
   return u;
 }
 
@@ -335,7 +336,7 @@ void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   Data::CollPtr coll = imp.collection();
   if(coll && coll->entryCount() > 0) {
     myLog() << "found Arxiv result, merging";
-    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
+//    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
     // the arxiv id might have a version#
     entry->setField(QLatin1String("arxiv"),
                     coll->entries().front()->field(QLatin1String("arxiv")));
