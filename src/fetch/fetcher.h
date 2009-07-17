@@ -68,7 +68,7 @@ public:
    * Returns true if the fetcher can search using a certain key.
    */
   virtual bool canSearch(FetchKey key) const = 0;
-  virtual bool canUpdate() const { return true; }
+  virtual bool canUpdate() const;
 
   /**
    * Returns the type of the data source.
@@ -81,20 +81,20 @@ public:
   /**
    * Returns the collection type of the most recent search
    */
-  int collectionType() const { return m_collectionType; }
+  int collectionType() const;
   /**
    * Returns whether the fetcher will overwite existing info when updating
    */
-  bool updateOverwrite() const { return m_updateOverwrite; }
+  bool updateOverwrite() const;
+  const FetchRequest& request() const;
   /**
    * Starts a search, using a key and value. Calls search()
    */
-  void startSearch(int collType, const FetchRequest& request);
+  void startSearch(const FetchRequest& request);
   virtual void continueSearch() {}
   void startUpdate(Data::EntryPtr entry);
   // mopst fetchers won't support this. it's particular useful for text fetchers
   virtual void updateEntrySynchronous(Data::EntryPtr) {}
-  const FetchRequest& request() const { return m_request; }
   /**
    * Returns true if the fetcher is currently searching.
    */
@@ -136,7 +136,6 @@ signals:
 
 protected:
   QString m_name;
-  int m_collectionType;
   FetchRequest m_request;
   bool m_updateOverwrite : 1;
   bool m_hasMoreResults : 1;

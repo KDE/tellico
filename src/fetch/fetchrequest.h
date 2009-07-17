@@ -34,11 +34,13 @@ namespace Tellico {
 
 class FetchRequest {
 public:
-  FetchRequest() : key(FetchFirst) {}
-  FetchRequest(FetchKey key_, const QString& value_) : key(key_), value(value_) {}
+  FetchRequest() : collectionType(0), key(FetchFirst) {}
+  FetchRequest(FetchKey key_, const QString& value_) : collectionType(0), key(key_), value(value_) {}
+  FetchRequest(int type_, FetchKey key_, const QString& value_) : collectionType(type_), key(key_), value(value_) {}
 
   bool isNull() const { return key == FetchFirst || value.isEmpty(); }
 
+  int collectionType;
   FetchKey key;
   QString value;
 };

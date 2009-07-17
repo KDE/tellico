@@ -47,10 +47,26 @@ Fetcher::~Fetcher() {
   saveConfigHook(config);
 }
 
-void Fetcher::startSearch(int collType_, const FetchRequest& request_) {
-  m_collectionType = collType_;
+int Fetcher::collectionType() const {
+  return m_request.collectionType;
+}
+
+/// virtual, overridden by subclasses
+bool Fetcher::canUpdate() const {
+  return true;
+}
+
+bool Fetcher::updateOverwrite() const {
+  return m_updateOverwrite;
+}
+
+const Tellico::Fetch::FetchRequest& Fetcher::request() const {
+  return m_request;
+}
+
+void Fetcher::startSearch(const FetchRequest& request_) {
   m_request = request_;
-  if(!canFetch(m_collectionType)) {
+  if(!canFetch(m_request.collectionType)) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     emit signalDone(this);
     return;
@@ -62,8 +78,8 @@ void Fetcher::startSearch(int collType_, const FetchRequest& request_) {
 void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
   Q_ASSERT(entry_->collection());
-  m_collectionType = entry_->collection()->type();
   m_request = updateRequest(entry_);
+  m_request.collectionType = entry_->collection()->type();
   if(!m_request.isNull()) {
     search();
   } else {

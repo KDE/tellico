@@ -165,6 +165,8 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
     return;
   }
 
+  FetchRequest request(Kernel::self()->collectionType(), key_, value_);
+
   // assume there's only one fetcher match
   int i = 0;
   m_currentFetcherIndex = -1;
@@ -175,7 +177,7 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
               SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)));
       connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
               SLOT(slotFetcherDone(Tellico::Fetch::Fetcher*)));
-      fetcher->startSearch(Kernel::self()->collectionType(), FetchRequest(key_, value_));
+      fetcher->startSearch(request);
       m_currentFetcherIndex = i;
       break;
     }
