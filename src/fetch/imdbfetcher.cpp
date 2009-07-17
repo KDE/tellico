@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "imdbfetcher.h"
-#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
@@ -120,9 +119,7 @@ void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 // multiple values not supported
-void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_;
+void IMDBFetcher::search() {
   m_started = true;
   m_redirected = false;
 
@@ -134,7 +131,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_countOffset = 0;
 
 #ifdef IMDB_TEST
-  if(m_key == Title) {
+  if(request().key == Title) {
     m_url = KUrl(QLatin1String("/home/robby/imdb-title.html"));
     m_redirected = false;
   } else {
@@ -147,7 +144,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   m_url.setHost(m_host.isEmpty() ? QLatin1String(IMDB_SERVER) : m_host);
   m_url.setPath(QLatin1String("/find"));
 
-  switch(key_) {
+  switch(request().key) {
     case Title:
       m_url.addQueryItem(QLatin1String("s"), QLatin1String("tt"));
       break;
@@ -163,7 +160,7 @@ void IMDBFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   }
 
   // as far as I can tell, the url encoding should always be iso-8859-1?
-  m_url.addQueryItem(QLatin1String("q"), value_);
+  m_url.addQueryItem(QLatin1String("q"), request().value);
 
 //  myDebug() << "url =" << m_url;
 #endif
@@ -242,7 +239,7 @@ void IMDBFetcher::slotComplete(KJob*) {
   m_job = 0;
 
   // a single result was found if we got redirected
-  if(m_key == Title) {
+  if(request().key == Title) {
     if(m_redirected) {
       parseSingleTitleResult();
     } else {
@@ -1092,20 +1089,20 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   }
 }
 
-void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myLog() << entry_->title();
-  // only take first 5
-  m_limit = 5;
+Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
   QString t = entry_->field(QLatin1String("title"));
   KUrl link = entry_->field(QLatin1String("imdb"));
+
   if(!link.isEmpty() && link.isValid()) {
+    myWarning() << "IMDb link searching not implemented";
+    return FetchRequest(Title, t);
     // check if we want a different host
     if(link.host() != m_host) {
 //      myLog() << "switching hosts to " << m_host;
       link.setHost(m_host);
     }
-    m_key = Fetch::Title;
-    m_value = t;
+//    request().key = Fetch::Title;
+//    request().value = t;
     m_started = true;
     m_text.clear();
     m_matches.clear();
@@ -1117,14 +1114,13 @@ void IMDBFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
             SLOT(slotComplete(KJob*)));
     connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
             SLOT(slotRedirection(KIO::Job*, const KUrl&)));
-    return;
   }
+
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* IMDBFetcher::configWidget(QWidget* parent_) const {

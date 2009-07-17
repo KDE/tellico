@@ -44,6 +44,7 @@ enum FetchKey {
   PubmedID,
   LCCN,
   Raw,
+  ExecUpdate,
   FetchLast
 };
 

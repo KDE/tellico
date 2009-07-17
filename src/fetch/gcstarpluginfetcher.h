@@ -77,8 +77,9 @@ private slots:
   void slotProcessExited();
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+
   // map Author, Name, Lang, etc...
   typedef QMap<QString, QVariant> PluginInfo;
   typedef QList<PluginInfo> PluginList;
@@ -87,7 +88,7 @@ private:
   static CollectionPlugins collectionPlugins;
   static PluginList plugins(int collType);
   // we need to keep track if we've searched for plugins yet and by what method
-  enum PluginParse {NotYet, Old, New};
+  enum PluginParse { NotYet, Old, New };
   static PluginParse pluginParse;
   static void readPluginsNew(int collType, const QString& exe);
   static void readPluginsOld(int collType, const QString& exe);

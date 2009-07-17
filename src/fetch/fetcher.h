@@ -26,6 +26,9 @@
 #define TELLICO_FETCHER_H
 
 #include "fetch.h"
+#include "fetchrequest.h"
+#include "fetchresult.h"
+#include "messagehandler.h"
 #include "../datavectors.h"
 
 #include <QObject>
@@ -35,9 +38,8 @@ class KConfigGroup;
 
 namespace Tellico {
   namespace Fetch {
-    class ConfigWidget;
-    class MessageHandler;
-    class FetchResult;
+
+class ConfigWidget;
 
 /**
  * The top-level abstract class for fetching data.
@@ -87,11 +89,12 @@ public:
   /**
    * Starts a search, using a key and value. Calls search()
    */
-  void startSearch(int collType, FetchKey key, const QString& value);
+  void startSearch(int collType, const FetchRequest& request);
   virtual void continueSearch() {}
   void startUpdate(Data::EntryPtr entry);
   // mopst fetchers won't support this. it's particular useful for text fetchers
   virtual void updateEntrySynchronous(Data::EntryPtr) {}
+  const FetchRequest& request() const { return m_request; }
   /**
    * Returns true if the fetcher is currently searching.
    */
@@ -134,6 +137,7 @@ signals:
 protected:
   QString m_name;
   int m_collectionType;
+  FetchRequest m_request;
   bool m_updateOverwrite : 1;
   bool m_hasMoreResults : 1;
 
@@ -141,8 +145,8 @@ private:
   /**
    * Starts a search, using a key and value.
    */
-  virtual void search(FetchKey key, const QString& value) = 0;
-  virtual void updateEntry(Data::EntryPtr entry) = 0;
+  virtual void search() = 0;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) = 0;
   virtual void readConfigHook(const KConfigGroup&) = 0;
   virtual void saveConfigHook(KConfigGroup&) {}
 

@@ -80,8 +80,8 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSummary();
 

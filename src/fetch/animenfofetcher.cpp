@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "animenfofetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/videocollection.h"
@@ -72,7 +70,7 @@ void AnimeNfoFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void AnimeNfoFetcher::search() {
   m_started = true;
   m_matches.clear();
 
@@ -82,15 +80,15 @@ void AnimeNfoFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
   KUrl u(ANIMENFO_BASE_URL);
   u.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
   u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
-  u.addQueryItem(QLatin1String("queryin"),    QLatin1String("anime_titles"));
+  u.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
 
-  switch(key_) {
+  switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("query"), value_);
+      u.addQueryItem(QLatin1String("query"), request().value);
       break;
 
     default:
-      myWarning() << "key not recognized: " << key_;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -352,13 +350,12 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
   return entry;
 }
 
-void AnimeNfoFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest AnimeNfoFetcher::updateRequest(Data::EntryPtr entry_) {
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Keyword, t);
-    return;
+    return FetchRequest(Fetch::Keyword, t);
   }
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* AnimeNfoFetcher::configWidget(QWidget* parent_) const {

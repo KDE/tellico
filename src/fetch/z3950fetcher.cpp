@@ -36,8 +36,6 @@
 
 #include "z3950fetcher.h"
 #include "z3950connection.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../collection.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -144,7 +142,7 @@ void Z3950Fetcher::saveConfigHook(KConfigGroup& config_) {
   config_.sync();
 }
 
-void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void Z3950Fetcher::search() {
 #ifdef HAVE_YAZ
   m_started = true;
   m_done = false;
@@ -153,29 +151,27 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
     stop();
     return;
   }
-  m_key = key_;
-  m_value = value_;
   m_started = true;
 
-  QString svalue = m_value;
+  QString svalue = request().value;
   QRegExp rx1(QLatin1String("['\"].*\\1"));
   if(!rx1.exactMatch(svalue)) {
     svalue = QLatin1Char('"') + svalue + QLatin1Char('"');
   }
 
-  switch(key_) {
+  switch(request().key) {
     case Title:
       m_pqn = QLatin1String("@attr 1=4 ") + svalue;
       break;
     case Person:
 //      m_pqn = QLatin1String("@or ");
-//      m_pqn += QLatin1String("@attr 1=1 \"") + m_value + QLatin1Char('"');
+//      m_pqn += QLatin1String("@attr 1=1 \"") + request().value + QLatin1Char('"');
       m_pqn = QLatin1String(" @attr 1=1003 ") + svalue;
       break;
     case ISBN:
       {
         m_pqn.clear();
-        QString s = m_value;
+        QString s = request().value;
         s.remove(QLatin1Char('-'));
         QStringList isbnList = s.split(QLatin1String("; "));
         // also going to search for isbn10 values
@@ -201,7 +197,7 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
     case LCCN:
       {
         m_pqn.clear();
-        QString s = m_value;
+        QString s = request().value;
         s.remove(QLatin1Char('-'));
         QStringList lccnList = s.split(QLatin1String("; "));
         while(!lccnList.isEmpty()) {
@@ -218,10 +214,10 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
       m_pqn = QLatin1String("@attr 1=1016 ") + svalue;
       break;
     case Raw:
-      m_pqn = m_value;
+      m_pqn = request().value;
       break;
     default:
-      myWarning() << "key not recognized: " << key_;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -234,8 +230,6 @@ void Z3950Fetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) 
 
   process();
 #else // HAVE_YAZ
-  Q_UNUSED(key_);
-  Q_UNUSED(value_);
   stop();
   return;
 #endif
@@ -482,29 +476,24 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
   }
 }
 
-void Z3950Fetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest Z3950Fetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug() << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
-    search(Fetch::ISBN, isbn);
-    return;
+    return FetchRequest(Fetch::ISBN, isbn);
   }
 
   QString lccn = entry_->field(QLatin1String("lccn"));
   if(!lccn.isEmpty()) {
-    search(Fetch::LCCN, lccn);
-    return;
+    return FetchRequest(Fetch::LCCN, lccn);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* Z3950Fetcher::configWidget(QWidget* parent_) const {

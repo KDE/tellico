@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "discogsfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -88,9 +86,7 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void DiscogsFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_;
+void DiscogsFetcher::search() {
   m_started = true;
   m_start = 1;
   m_total = -1;
@@ -107,25 +103,25 @@ void DiscogsFetcher::doSearch() {
   u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
-  switch(m_key) {
+  switch(request().key) {
     case Title:
       u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("q"), m_value);
+      u.addQueryItem(QLatin1String("q"), request().value);
       u.addQueryItem(QLatin1String("type"), QLatin1String("release"));
       break;
 
     case Person:
-      u.setPath(QString::fromLatin1("/artist/%1").arg(m_value));
+      u.setPath(QString::fromLatin1("/artist/%1").arg(request().value));
       break;
 
     case Keyword:
       u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("q"), m_value);
+      u.addQueryItem(QLatin1String("q"), request().value);
       u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -325,24 +321,19 @@ void DiscogsFetcher::initXSLTHandler() {
   }
 }
 
-void DiscogsFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug();
 
-  QString value;
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
-    search(Title, value);
-    return;
+    return FetchRequest(Title, title);
   }
 
   QString artist = entry_->field(QLatin1String("artist"));
   if(!artist.isEmpty()) {
-    search(Person, artist);
-    return;
+    return FetchRequest(Person, artist);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) const {

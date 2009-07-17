@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "bibsonomyfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/bibteximporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
@@ -71,18 +69,30 @@ bool BibsonomyFetcher::canFetch(int type) const {
 void BibsonomyFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-void BibsonomyFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void BibsonomyFetcher::search() {
   m_started = true;
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(m_key, m_value);
-  if(u.isEmpty()) {
-    stop();
-    return;
+  KUrl u(BIBSONOMY_BASE_URL);
+  u.setPath(QLatin1String("/bib/"));
+
+  switch(request().key) {
+    case Person:
+      u.addPath(QString::fromLatin1("author/%1").arg(request().value));
+      break;
+
+    case Keyword:
+      u.addPath(QString::fromLatin1("search/%1").arg(request().value));
+      break;
+
+    default:
+      myWarning() << "key not recognized: " << request().key;
+      stop();
+      return;
   }
+
+  u.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -150,38 +160,12 @@ Tellico::Data::EntryPtr BibsonomyFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-KUrl BibsonomyFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
-  KUrl u(BIBSONOMY_BASE_URL);
-  u.setPath(QLatin1String("/bib/"));
-
-  switch(key_) {
-    case Person:
-      u.addPath(QString::fromLatin1("author/%1").arg(value_));
-      break;
-
-    case Keyword:
-      u.addPath(QString::fromLatin1("search/%1").arg(value_));
-      break;
-
-    default:
-      myWarning() << "key not recognized: " << m_key;
-      return KUrl();
-  }
-
-  u.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
-  myDebug() << "url: " << u.url();
-  return u;
-}
-
-void BibsonomyFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest BibsonomyFetcher::updateRequest(Data::EntryPtr entry_) {
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
-    search(Fetch::Keyword, title);
-    return;
+    return FetchRequest(Fetch::Keyword, title);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* BibsonomyFetcher::configWidget(QWidget* parent_) const {

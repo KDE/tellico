@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "googlescholarfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../core/filehandler.h"
 #include "../translators/bibteximporter.h"
 #include "../collection.h"
@@ -76,14 +74,12 @@ void GoogleScholarFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void GoogleScholarFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void GoogleScholarFetcher::search() {
   if(!m_cookieIsSet) {
     // have to set preferences to have bibtex output
     FileHandler::readTextFile(KUrl(SCHOLAR_SET_BIBTEX_URL), true);
     m_cookieIsSet = true;
   }
-  m_key = key_;
-  m_value = value_;
   m_started = true;
   m_start = 0;
   m_total = -1;
@@ -101,21 +97,21 @@ void GoogleScholarFetcher::doSearch() {
   KUrl u(SCHOLAR_BASE_URL);
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
 
-  switch(m_key) {
+  switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(m_value));
+      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(request().value));
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), m_value);
+      u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(m_value));
+      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(request().value));
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -202,19 +198,12 @@ Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void GoogleScholarFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug();
-  // limit to top 5 results
-  m_limit = 5;
-
+Tellico::Fetch::FetchRequest GoogleScholarFetcher::updateRequest(Data::EntryPtr entry_) {
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
-    search(Title, title);
-    return;
+    return FetchRequest(Title, title);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* GoogleScholarFetcher::configWidget(QWidget* parent_) const {

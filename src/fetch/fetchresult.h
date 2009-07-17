@@ -25,22 +25,26 @@
 #ifndef TELLICO_FETCH_FETCHRESULT_H
 #define TELLICO_FETCH_FETCHRESULT_H
 
-#include "fetcher.h"
+#include "../datavectors.h"
+
+#include <KSharedPtr>
 
 #include <QString>
 
 namespace Tellico {
   namespace Fetch {
 
+class Fetcher;
+
 class FetchResult {
 public:
-  FetchResult(Fetcher::Ptr f, Data::EntryPtr entry);
-  FetchResult(Fetcher::Ptr f, const QString& t, const QString& d, const QString& i = QString());
+  FetchResult(KSharedPtr<Fetcher> f, Data::EntryPtr entry);
+  FetchResult(KSharedPtr<Fetcher> f, const QString& t, const QString& d, const QString& i = QString());
 
   Data::EntryPtr fetchEntry();
 
   uint uid;
-  Fetcher::Ptr fetcher;
+  KSharedPtr<Fetcher> fetcher;
   QString title;
   QString desc;
   QString isbn;

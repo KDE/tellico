@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "gcstarpluginfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -213,15 +211,9 @@ void GCstarPluginFetcher::readConfigHook(const KConfigGroup& config_) {
   m_plugin = config_.readEntry("Plugin");
 }
 
-void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void GCstarPluginFetcher::search() {
   m_started = true;
   m_data.clear();
-
-  if(key_ != Fetch::Title) {
-    myDebug() << "only Title searches are supported";
-    stop();
-    return;
-  }
 
   QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
@@ -248,7 +240,7 @@ void GCstarPluginFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
        << QLatin1String("--collection") << gcstarCollection
        << QLatin1String("--export")     << QLatin1String("Tellico")
        << QLatin1String("--website")    << m_plugin
-       << QLatin1String("--download")   << KShell::quoteArg(value_);
+       << QLatin1String("--download")   << KShell::quoteArg(request().value);
   myLog() << args.join(QLatin1String(" "));
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
@@ -328,16 +320,13 @@ Tellico::Data::EntryPtr GCstarPluginFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void GCstarPluginFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest GCstarPluginFetcher::updateRequest(Data::EntryPtr entry_) {
   // ry searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* GCstarPluginFetcher::configWidget(QWidget* parent_) const {

@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "srufetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../field.h"
 #include "../collection.h"
 #include "../translators/tellico_xml.h"
@@ -110,7 +108,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
   m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void SRUFetcher::search() {
   if(m_host.isEmpty() || m_path.isEmpty()) {
     myDebug() << "settings are not set!";
     stop();
@@ -134,8 +132,8 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
   u.addQueryItem(QLatin1String("recordSchema"), m_format);
 
   const int type = collectionType();
-  QString str = QLatin1Char('"') + value_ + QLatin1Char('"');
-  switch(key_) {
+  QString str = QLatin1Char('"') + request().value + QLatin1Char('"');
+  switch(request().key) {
     case Title:
       u.addQueryItem(QLatin1String("query"), QLatin1String("dc.title=") + str);
       break;
@@ -180,14 +178,14 @@ void SRUFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
     case Raw:
       {
-        QString key = value_.section(QLatin1Char('='), 0, 0).trimmed();
-        QString str = value_.section(QLatin1Char('='), 1).trimmed();
+        QString key = request().value.section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = request().value.section(QLatin1Char('='), 1).trimmed();
         u.addQueryItem(key, str);
       }
       break;
 
     default:
-      myWarning() << "key not recognized: " << key_;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       break;
   }
@@ -319,29 +317,24 @@ Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void SRUFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest SRUFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug() << source() << ": " << entry_->title();
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
-    search(Fetch::ISBN, isbn);
-    return;
+    return FetchRequest(Fetch::ISBN, isbn);
   }
 
   QString lccn = entry_->field(QLatin1String("lccn"));
   if(!lccn.isEmpty()) {
-    search(Fetch::LCCN, lccn);
-    return;
+    return FetchRequest(Fetch::LCCN, lccn);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 bool SRUFetcher::initMARCXMLHandler() {

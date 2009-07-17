@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "yahoofetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -80,9 +78,7 @@ void YahooFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void YahooFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_;
+void YahooFetcher::search() {
   m_started = true;
   m_start = 1;
   m_total = -1;
@@ -104,24 +100,24 @@ void YahooFetcher::doSearch() {
   u.addQueryItem(QLatin1String("start"),   QString::number(m_start));
   u.addQueryItem(QLatin1String("results"), QString::number(YAHOO_MAX_RETURNS_TOTAL));
 
-  switch(m_key) {
+  switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("album"), m_value);
+      u.addQueryItem(QLatin1String("album"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("artist"), m_value);
+      u.addQueryItem(QLatin1String("artist"), request().value);
       break;
 
     // raw is used for the entry updates
     case Raw:
 //      u.removeQueryItem(QLatin1String("type"));
 //      u.addQueryItem(QLatin1String("type"), QLatin1String("phrase"));
-      u.setQuery(u.query() + QLatin1Char('&') + m_value);
+      u.setQuery(u.query() + QLatin1Char('&') + request().value);
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -358,11 +354,7 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
   return list.join(QLatin1String("; "));
 }
 
-void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug();
-  // limit to top 5 results
-  m_limit = 5;
-
+Tellico::Fetch::FetchRequest YahooFetcher::updateRequest(Data::EntryPtr entry_) {
   QString value;
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
@@ -376,12 +368,9 @@ void YahooFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
     value += QLatin1String("artist=") + artist;
   }
   if(!value.isEmpty()) {
-    search(Fetch::Raw, value);
-    return;
+    return FetchRequest(Fetch::Raw, value);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* YahooFetcher::configWidget(QWidget* parent_) const {

@@ -75,8 +75,8 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSearch();
 
@@ -90,8 +90,6 @@ private:
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
-  FetchKey m_key;
-  QString m_value;
   bool m_started;
 };
 

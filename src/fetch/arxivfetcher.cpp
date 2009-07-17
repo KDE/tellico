@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "arxivfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
@@ -81,9 +79,7 @@ bool ArxivFetcher::canFetch(int type) const {
 void ArxivFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-void ArxivFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void ArxivFetcher::search() {
   m_started = true;
   m_start = 0;
   m_total = -1;
@@ -98,7 +94,7 @@ void ArxivFetcher::continueSearch() {
 void ArxivFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(m_key, m_value);
+  KUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -225,7 +221,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntry(uint uid_) {
   }
   QRegExp versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
-  if(m_key != ArxivID || !m_value.contains(versionRx)) {
+  if(request().key != ArxivID || !request().value.contains(versionRx)) {
     QString arxiv = entry->field(QLatin1String("arxiv"));
     arxiv.remove(versionRx);
     entry->setField(QLatin1String("arxiv"), arxiv);
@@ -253,7 +249,7 @@ void ArxivFetcher::initXSLTHandler() {
   }
 }
 
-KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   KUrl u(ARXIV_BASE_URL);
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
   u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
@@ -285,7 +281,7 @@ KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       return KUrl();
   }
 
@@ -296,22 +292,19 @@ KUrl ArxivFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value
   return u;
 }
 
-void ArxivFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) {
   QString id = entry_->field(QLatin1String("arxiv"));
   if(!id.isEmpty()) {
-    search(Fetch::ArxivID, id);
-    return;
+    return FetchRequest(Fetch::ArxivID, id);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
 
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {

@@ -23,9 +23,9 @@
  ***************************************************************************/
 
 #include "fetcher.h"
-#include "messagehandler.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../tellico_debug.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -47,22 +47,30 @@ Fetcher::~Fetcher() {
   saveConfigHook(config);
 }
 
-void Fetcher::startSearch(int collType_, FetchKey key_, const QString& value_) {
+void Fetcher::startSearch(int collType_, const FetchRequest& request_) {
   m_collectionType = collType_;
+  m_request = request_;
   if(!canFetch(m_collectionType)) {
     message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
     emit signalDone(this);
     return;
   }
 
-  search(key_, value_);
+  search();
 }
 
 void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
   Q_ASSERT(entry_->collection());
   m_collectionType = entry_->collection()->type();
-  updateEntry(entry_);
+  m_request = updateRequest(entry_);
+  if(!m_request.isNull()) {
+    search();
+  } else {
+    myDebug() << "insufficient info to search";
+    emit signalDone(this); // always need to emit this if not continuing with the search
+  }
+//  updateEntry(entry_);
 }
 
 void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {

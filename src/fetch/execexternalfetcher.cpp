@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "execexternalfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -126,11 +124,17 @@ void ExecExternalFetcher::readConfigHook(const KConfigGroup& config_) {
   m_newStuffName = config_.readEntry("NewStuffName");
 }
 
-void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void ExecExternalFetcher::search() {
   m_started = true;
 
-  if(!m_args.contains(key_)) {
+  if(request().key != ExecUpdate && !m_args.contains(request().key)) {
     stop();
+    return;
+  }
+
+  if(request().key == ExecUpdate) {
+    QStringList args = request().value.split(QLatin1String("::"));
+    startSearch(args);
     return;
   }
 
@@ -139,8 +143,8 @@ void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   // the search value needs to be enclosed in quotation marks
   // but first check to make sure the user didn't do that already
   // AND the "%1" wasn't used in the settings
-  QString value = value_;
-  if(key_ == ISBN) {
+  QString value = request().value;
+  if(request().key == ISBN) {
     value.remove(QLatin1Char('-')); // remove hyphens from isbn values
     // shouldn't hurt and might keep from confusing stupid search sources
   }
@@ -148,7 +152,7 @@ void ExecExternalFetcher::search(Tellico::Fetch::FetchKey key_, const QString& v
   if(!rx1.exactMatch(value)) {
     value = QLatin1Char('"') + value + QLatin1Char('"');
   }
-  QString args = m_args.value(key_);
+  QString args = m_args.value(request().key);
   QRegExp rx2(QLatin1String("['\"]%1\\1"));
   args.replace(rx2, QLatin1String("%1"));
   startSearch(parseArguments(args.arg(value))); // replace %1 with search value
@@ -261,18 +265,16 @@ Tellico::Data::EntryPtr ExecExternalFetcher::fetchEntry(uint uid_) {
   return m_entries[uid_];
 }
 
-void ExecExternalFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest ExecExternalFetcher::updateRequest(Data::EntryPtr entry_) {
   if(!m_canUpdate) {
-    emit signalDone(this); // must do this
+    return FetchRequest();
   }
-
-  m_started = true;
 
   QStringList args = parseArguments(m_updateArgs);
   for(QStringList::Iterator it = args.begin(); it != args.end(); ++it) {
     *it = Data::Entry::dependentValue(entry_.data(), *it, false);
   }
-  startSearch(args);
+  return FetchRequest(ExecUpdate, args.join(QLatin1String("::")));
 }
 
 Tellico::Fetch::ConfigWidget* ExecExternalFetcher::configWidget(QWidget* parent_) const {

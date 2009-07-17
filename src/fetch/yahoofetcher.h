@@ -84,8 +84,8 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
   void doSearch();
   void getTracks(Data::EntryPtr entry);
@@ -99,8 +99,6 @@ private:
   QHash<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QPointer<KIO::StoredTransferJob> m_job;
 
-  FetchKey m_key;
-  QString m_value;
   bool m_started;
 };
 

@@ -24,8 +24,6 @@
 
 #include "amazonfetcher.h"
 #include "amazonrequest.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -151,9 +149,7 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   m_fields = config_.readEntry("Custom Fields", QStringList() << QLatin1String("keyword"));
 }
 
-void AmazonFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void AmazonFetcher::search() {
   m_started = true;
   m_page = 1;
   m_total = -1;
@@ -182,7 +178,7 @@ void AmazonFetcher::doSearch() {
     return;
   }
 
-//  myDebug() << "value = " << m_value;
+//  myDebug() << "value = " << request().value;
 //  myDebug() << "getting page " << m_page;
 
   QMap<QString, QString> params;
@@ -238,11 +234,11 @@ void AmazonFetcher::doSearch() {
 
 //  QString value = KUrl::decode_string(value_, 106);
 //  QString value = QString::fromLocal8Bit(value_.toUtf8());
-  QString value = m_value;
+  QString value = request().value;
   // a mibenum of 106 is utf-8, 4 is iso-8859-1, 0 means use user's locale,
 //  int mib = m_site == AmazonFetcher::JP ? 106 : 4;
 
-  switch(m_key) {
+  switch(request().key) {
     case Title:
       params.insert(QLatin1String("Title"), value);
       break;
@@ -267,16 +263,16 @@ void AmazonFetcher::doSearch() {
       {
         params.insert(QLatin1String("Operation"), QLatin1String("ItemLookup"));
 
-        QString s = m_value; // not encValue!!!
-        s.remove(QLatin1Char('-'));
+        QString cleanValue = value;
+        cleanValue.remove(QLatin1Char('-'));
         // ISBN only get digits or 'X', and multiple values are connected with "; "
-        QStringList isbns = s.split(QLatin1String("; "));
+        QStringList isbns = cleanValue.split(QLatin1String("; "));
         // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
         // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
         // isbn13 search
         bool isbn13 = false;
         for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
-          if(m_value.startsWith(QLatin1String("979"))) {
+          if((*it).startsWith(QLatin1String("979"))) {
             if(m_site == JP) { // never works for JP
               myWarning() << "ISBN-13 searching not implemented for Japan";
               it = isbns.erase(it);
@@ -318,17 +314,17 @@ void AmazonFetcher::doSearch() {
         } else {
           params.insert(QLatin1String("IdType"), QLatin1String("EAN"));
         }
-        QString s = m_value; // not encValue!!!
-        s.remove(QLatin1Char('-'));
+        QString cleanValue = value;
+        cleanValue.remove(QLatin1Char('-'));
         // limit to first 10
-        s.replace(QLatin1String("; "), QLatin1String(","));
-        s = s.section(QLatin1Char(','), 0, 9);
-        params.insert(QLatin1String("ItemId"), s);
+        cleanValue.replace(QLatin1String("; "), QLatin1String(","));
+        cleanValue = cleanValue.section(QLatin1Char(','), 0, 9);
+        params.insert(QLatin1String("ItemId"), cleanValue);
       }
       break;
 
     case Keyword:
-      params.insert(QLatin1String("Keywords"), m_value);
+      params.insert(QLatin1String("Keywords"), value);
       break;
 
     case Raw:
@@ -340,7 +336,7 @@ void AmazonFetcher::doSearch() {
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -431,7 +427,7 @@ void AmazonFetcher::slotComplete(KJob*) {
         // for some reason, Amazon will return an error simply when a valid ISBN is not found
         // I really want to ignore that, so check the IsValid element in the Request element
         QDomNode isValidNode = n.parentNode().namedItem(QLatin1String("IsValid"));
-        if(m_key == ISBN && isValidNode.toElement().text().toLower() == QLatin1String("true")) {
+        if(request().key == ISBN && isValidNode.toElement().text().toLower() == QLatin1String("true")) {
           continue;
         }
         e = nodes.item(i).toElement().namedItem(QLatin1String("Message")).toElement();
@@ -556,8 +552,10 @@ void AmazonFetcher::slotComplete(KJob*) {
     ++m_page;
     m_countOffset = 0;
     doSearch();
-  } else if(m_value.count(QLatin1Char(';')) > 9) {
-    search(m_key, m_value.section(QLatin1Char(';'), 10));
+  } else if(request().value.count(QLatin1Char(';')) > 9) {
+    FetchRequest newRequest = request();
+    newRequest.value = request().value.section(QLatin1Char(';'), 10);
+    startSearch(collectionType(), newRequest);
   } else {
     m_countOffset = m_entries.count() % AMAZON_RETURNS_PER_REQUEST;
     if(m_countOffset == 0) {
@@ -751,34 +749,27 @@ void AmazonFetcher::initXSLTHandler() {
   }
 }
 
-void AmazonFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug();
-
+Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_) {
   int type = entry_->collection()->type();
   if(type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex) {
     QString isbn = entry_->field(QLatin1String("isbn"));
     if(!isbn.isEmpty()) {
-      m_limit = 5; // no need for more
-      search(Fetch::ISBN, isbn);
-      return;
+      return FetchRequest(Fetch::ISBN, isbn);
     }
   } else if(type == Data::Collection::Album) {
     QString a = entry_->field(QLatin1String("artist"));
     if(!a.isEmpty()) {
-      search(Fetch::Person, a);
-      return;
+      return FetchRequest(Fetch::Person, a);
     }
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
 
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry, int collType) {

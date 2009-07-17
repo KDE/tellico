@@ -91,8 +91,8 @@ protected:
   virtual void customEvent(QEvent* event);
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
   bool initMARC21Handler();
   bool initUNIMARCHandler();
   bool initMODSHandler();
@@ -112,8 +112,6 @@ private:
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
 
-  FetchKey m_key;
-  QString m_value;
   QHash<int, Data::EntryPtr> m_entries;
   bool m_started;
   bool m_done;

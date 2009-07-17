@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
-#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -89,7 +88,7 @@ void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
   m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void EntrezFetcher::search() {
   m_started = true;
   m_start = 1;
   m_total = -1;
@@ -108,8 +107,8 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
   u.addQueryItem(QLatin1String("usehistory"), QLatin1String("y"));
   u.addQueryItem(QLatin1String("retmax"),     QLatin1String("1")); // we're just getting the count
   u.addQueryItem(QLatin1String("db"),         m_dbname);
-  u.addQueryItem(QLatin1String("term"),       value_);
-  switch(key_) {
+  u.addQueryItem(QLatin1String("term"),       request().value);
+  switch(request().key) {
     case Title:
       u.addQueryItem(QLatin1String("field"), QLatin1String("titl"));
       break;
@@ -129,11 +128,11 @@ void EntrezFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_)
 
     case DOI:
     case Raw:
-      u.setQuery(u.query() + QLatin1Char('&') + value_);
+      u.setQuery(u.query() + QLatin1Char('&') + request().value);
       break;
 
     default:
-      myWarning() << "FetchKey not supported";
+      myWarning() << "key not supported:" << request().key;
       stop();
       return;
   }
@@ -439,28 +438,23 @@ void EntrezFetcher::initXSLTHandler() {
   }
 }
 
-void EntrezFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest EntrezFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug();
   QString s = entry_->field(QLatin1String("pmid"));
   if(!s.isEmpty()) {
-    search(PubmedID, s);
-    return;
+    return FetchRequest(PubmedID, s);
   }
 
   s = entry_->field(QLatin1String("doi"));
   if(!s.isEmpty()) {
-    search(DOI, s);
-    return;
+    return FetchRequest(DOI, s);
   }
 
   s = entry_->field(QLatin1String("title"));
   if(!s.isEmpty()) {
-    search(Title, s);
-    return;
+    return FetchRequest(Title, s);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* EntrezFetcher::configWidget(QWidget* parent_) const {

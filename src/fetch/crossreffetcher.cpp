@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "crossreffetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
@@ -92,9 +90,7 @@ void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
   }
 }
 
-void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void CrossRefFetcher::search() {
   m_started = true;
 
   if(m_user.isEmpty() || m_password.isEmpty()) {
@@ -105,7 +101,7 @@ void CrossRefFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(m_key, m_value);
+  KUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -242,7 +238,7 @@ void CrossRefFetcher::initXSLTHandler() {
   }
 }
 
-KUrl CrossRefFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+KUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
   KUrl u(CROSSREF_BASE_URL);
 #ifdef CROSSREF_USE_UNIXREF
   u.addQueryItem(QLatin1String("format"), QLatin1String("unixref"));
@@ -255,7 +251,7 @@ KUrl CrossRefFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << key_;
       return KUrl();
   }
 
@@ -266,25 +262,20 @@ KUrl CrossRefFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
   return u;
 }
 
-void CrossRefFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest CrossRefFetcher::updateRequest(Data::EntryPtr entry_) {
   QString doi = entry_->field(QLatin1String("doi"));
   if(!doi.isEmpty()) {
-    search(Fetch::DOI, doi);
-    return;
+    return FetchRequest(Fetch::DOI, doi);
   }
 
 #if 0
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    m_limit = 10; // raise limit so more possibility of match
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
 #endif
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {

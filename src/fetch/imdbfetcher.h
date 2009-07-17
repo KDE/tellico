@@ -92,8 +92,8 @@ private slots:
   void slotRedirection(KIO::Job* job, const KUrl& toURL);
 
 private:
-  virtual void search(FetchKey key, const QString& value);
-  virtual void updateEntry(Data::EntryPtr entry);
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
   static void initRegExps();
   static QRegExp* s_tagRx;
   static QRegExp* s_anchorRx;
@@ -125,8 +125,6 @@ private:
   QHash<int, KUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
-  FetchKey m_key;
-  QString m_value;
   bool m_started;
   bool m_fetchImages;
 

@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "citebasefetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/bibteximporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
@@ -74,14 +72,12 @@ bool CitebaseFetcher::canFetch(int type) const {
 void CitebaseFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-void CitebaseFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void CitebaseFetcher::search() {
   m_started = true;
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(m_key, m_value);
+  KUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -163,7 +159,7 @@ Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   QRegExp versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
-  if(m_key != ArxivID || !m_value.contains(versionRx)) {
+  if(request().key != ArxivID || !request().value.contains(versionRx)) {
     QString arxiv = entry->field(QLatin1String("arxiv"));
     arxiv.remove(versionRx);
     entry->setField(QLatin1String("arxiv"), arxiv);
@@ -171,7 +167,7 @@ Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
   return entry;
 }
 
-KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& value_) const {
+KUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
   KUrl u(CITEBASE_BASE_URL);
 
   switch(key_) {
@@ -186,7 +182,7 @@ KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << key_;
       return KUrl();
   }
 
@@ -197,15 +193,12 @@ KUrl CitebaseFetcher::searchURL(Tellico::Fetch::FetchKey key_, const QString& va
   return u;
 }
 
-void CitebaseFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest CitebaseFetcher::updateRequest(Data::EntryPtr entry_) {
   QString arxiv = entry_->field(QLatin1String("arxiv"));
   if(!arxiv.isEmpty()) {
-    search(Fetch::ArxivID, arxiv);
-    return;
+    return FetchRequest(Fetch::ArxivID, arxiv);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {

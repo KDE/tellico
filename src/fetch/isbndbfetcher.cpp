@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "isbndbfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
@@ -81,9 +79,7 @@ void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void ISBNdbFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
-  m_key = key_;
-  m_value = value_.trimmed();
+void ISBNdbFetcher::search() {
   m_started = true;
   m_page = 1;
   m_total = -1;
@@ -107,35 +103,35 @@ void ISBNdbFetcher::doSearch() {
   u.addQueryItem(QLatin1String("results"), QLatin1String("details,authors,subjects,texts"));
   u.addQueryItem(QLatin1String("page_number"), QString::number(m_page));
 
-  switch(m_key) {
+  switch(request().key) {
     case Title:
       u.addQueryItem(QLatin1String("index1"), QLatin1String("title"));
-      u.addQueryItem(QLatin1String("value1"), m_value);
+      u.addQueryItem(QLatin1String("value1"), request().value);
       break;
 
     case Person:
       // yes, this also queries titles, too, it's a limitation of the isbndb api service
       u.addQueryItem(QLatin1String("index1"), QLatin1String("combined"));
-      u.addQueryItem(QLatin1String("value1"), m_value);
+      u.addQueryItem(QLatin1String("value1"), request().value);
       break;
 
     case Keyword:
       u.addQueryItem(QLatin1String("index1"), QLatin1String("full"));
-      u.addQueryItem(QLatin1String("value1"), m_value);
+      u.addQueryItem(QLatin1String("value1"), request().value);
       break;
 
     case ISBN:
       u.addQueryItem(QLatin1String("index1"), QLatin1String("isbn"));
       {
         // only grab first value
-        QString v = m_value.section(QLatin1Char(';'), 0);
+        QString v = request().value.section(QLatin1Char(';'), 0);
         v.remove(QLatin1Char('-'));
         u.addQueryItem(QLatin1String("value1"), v);
       }
       break;
 
     default:
-      myWarning() << "key not recognized: " << m_key;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -309,27 +305,18 @@ void ISBNdbFetcher::initXSLTHandler() {
   }
 }
 
-void ISBNdbFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
-//  myDebug();
-  // limit to top 5 results
-  m_limit = 5;
-
+Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_) {
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
-    search(Fetch::ISBN, isbn);
-    return;
+    return FetchRequest(Fetch::ISBN, isbn);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    m_limit = 10; // raise limit so more possibility of match
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* ISBNdbFetcher::configWidget(QWidget* parent_) const {

@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "ibsfetcher.h"
-#include "messagehandler.h"
-#include "fetchresult.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../collections/bookcollection.h"
@@ -72,7 +70,7 @@ void IBSFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
 
-void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
+void IBSFetcher::search() {
   m_started = true;
   m_matches.clear();
 
@@ -81,20 +79,20 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 #else
   KUrl u(IBS_BASE_URL);
 
-  switch(key_) {
+  switch(request().key) {
     case Title:
       u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("T"), value_);
+      u.addQueryItem(QLatin1String("T"), request().value);
       break;
 
     case Person:
       u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("A"), value_);
+      u.addQueryItem(QLatin1String("A"), request().value);
       break;
 
     case ISBN:
       {
-        QString s = value_;
+        QString s = request().value;
         s.remove(QLatin1Char('-'));
         // limit to first isbn
         s = s.section(QLatin1Char(';'), 0, 0);
@@ -105,11 +103,11 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
     case Keyword:
       u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("S"), value_);
+      u.addQueryItem(QLatin1String("S"), request().value);
       break;
 
     default:
-      myWarning() << "key not recognized: " << key_;
+      myWarning() << "key not recognized: " << request().key;
       stop();
       return;
   }
@@ -118,7 +116,7 @@ void IBSFetcher::search(Tellico::Fetch::FetchKey key_, const QString& value_) {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
-  if(key_ == ISBN) {
+  if(request().key == ISBN) {
     connect(m_job, SIGNAL(result(KJob*)), SLOT(slotCompleteISBN(KJob*)));
   } else {
     connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
@@ -384,20 +382,16 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   return entry;
 }
 
-void IBSFetcher::updateEntry(Tellico::Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest IBSFetcher::updateRequest(Data::EntryPtr entry_) {
   QString isbn = entry_->field(QLatin1String("isbn"));
   if(!isbn.isEmpty()) {
-    search(Fetch::ISBN, isbn);
-    return;
+    return FetchRequest(Fetch::ISBN, isbn);
   }
   QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
-    search(Fetch::Title, t);
-    return;
+    return FetchRequest(Fetch::Title, t);
   }
-
-  myDebug() << "insufficient info to search";
-  emit signalDone(this); // always need to emit this if not continuing with the search
+  return FetchRequest();
 }
 
 Tellico::Fetch::ConfigWidget* IBSFetcher::configWidget(QWidget* parent_) const {

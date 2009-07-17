@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,74 +22,28 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_IBSFETCHER_H
-#define TELLICO_FETCH_IBSFETCHER_H
+#ifndef TELLICO_FETCH_FETCHREQUEST_H
+#define TELLICO_FETCH_FETCHREQUEST_H
 
-#include "fetcher.h"
-#include "configwidget.h"
+#include "fetch.h"
 
-#include <QPointer>
-
-class KUrl;
-class KJob;
-namespace KIO {
-  class StoredTransferJob;
-}
+#include <QString>
 
 namespace Tellico {
   namespace Fetch {
 
-/**
- * A fetcher for animenfo.com
- *
- * @author Robby Stephenson
- */
-class IBSFetcher : public Fetcher {
-Q_OBJECT
-
+class FetchRequest {
 public:
-  IBSFetcher(QObject* parent);
-  virtual ~IBSFetcher() {}
+  FetchRequest() : key(FetchFirst) {}
+  FetchRequest(FetchKey key_, const QString& value_) : key(key_), value(value_) {}
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  // can search title, person, isbn, or keyword. No UPC or Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
-  virtual Type type() const { return IBS; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  bool isNull() const { return key == FetchFirst || value.isEmpty(); }
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
-
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    explicit ConfigWidget(QWidget* parent_);
-    virtual void saveConfig(KConfigGroup&) {}
-    virtual QString preferredName() const;
-  };
-  friend class ConfigWidget;
-
-  static QString defaultName();
-
-private slots:
-  void slotComplete(KJob* job);
-  void slotCompleteISBN(KJob* job);
-
-private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  Data::EntryPtr parseEntry(const QString& str);
-
-  int m_total;
-  QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, KUrl> m_matches;
-  QPointer<KIO::StoredTransferJob> m_job;
-
-  bool m_started;
+  FetchKey key;
+  QString value;
 };
 
   } // end namespace
 } // end namespace
+
 #endif
