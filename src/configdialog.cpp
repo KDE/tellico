@@ -126,23 +126,6 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   QSize s = sizeHint();
   resize(qMax(s.width(), CONFIG_MIN_WIDTH), qMax(s.height(), CONFIG_MIN_HEIGHT));
 
-  // purely for asthetics make all widgets line up
-  QList<QWidget*> widgets;
-  widgets.append(m_fontCombo);
-  widgets.append(m_fontSizeInput);
-  widgets.append(m_baseColorCombo);
-  widgets.append(m_textColorCombo);
-  widgets.append(m_highBaseColorCombo);
-  widgets.append(m_highTextColorCombo);
-  int w = 0;
-  foreach(QWidget* widget, widgets) {
-    widget->ensurePolished();
-    w = qMax(w, widget->sizeHint().width());
-  }
-  foreach(QWidget* widget, widgets) {
-    widget->setMinimumWidth(w);
-  }
-
   connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
   connect(this, SIGNAL(defaultClicked()), SLOT(slotDefault()));
@@ -152,6 +135,7 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
 
   setHelp(QLatin1String("general-options"));
   connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotUpdateHelpLink(KPageWidgetItem*)));
+  connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotInitPage(KPageWidgetItem*)));
 }
 
 ConfigDialog::~ConfigDialog() {
@@ -161,7 +145,7 @@ ConfigDialog::~ConfigDialog() {
 }
 
 void ConfigDialog::slotUpdateHelpLink(KPageWidgetItem* item_) {
-  QString name = item_->name();
+  const QString name = item_->name();
   // thes ename must be kept in sync with the page names
   if(name == i18n("General")) {
     setHelp(QLatin1String("general-options"));
@@ -171,6 +155,29 @@ void ConfigDialog::slotUpdateHelpLink(KPageWidgetItem* item_) {
     setHelp(QLatin1String("template-options"));
   } else if(name == i18n("Data Sources")) {
     setHelp(QLatin1String("internet-sources-options"));
+  }
+}
+
+void ConfigDialog::slotInitPage(KPageWidgetItem* item_) {
+  Q_ASSERT(item_);
+  // every page item has a frame
+  // if the frame has no layout, then we need to initialize the itme
+  QFrame* frame = ::qobject_cast<QFrame*>(item_->widget());
+  Q_ASSERT(frame);
+  if(frame->layout()) {
+    return;
+  }
+
+  const QString name = item_->name();
+  // thes ename must be kept in sync with the page names
+  if(name == i18n("General")) {
+    initGeneralPage(frame);
+  } else if(name == i18n("Printing")) {
+    initPrintingPage(frame);
+  } else if(name == i18n("Templates")) {
+    initTemplatePage(frame);
+  } else if(name == i18n("Data Sources")) {
+    initFetchPage(frame);
   }
 }
 
@@ -209,6 +216,11 @@ void ConfigDialog::setupGeneralPage() {
   page->setIcon(KIcon(pix));
   addPage(page);
 
+  // since this is the first page, go ahead and lay it out
+  initGeneralPage(frame);
+}
+
+void ConfigDialog::initGeneralPage(QFrame* frame) {
   QVBoxLayout* l = new QVBoxLayout(frame);
 
   m_cbOpenLastFile = new QCheckBox(i18n("&Reopen file at startup"), frame);
@@ -313,6 +325,7 @@ void ConfigDialog::setupGeneralPage() {
 
   // stretch to fill lower area
   l->addStretch(1);
+  readGeneralConfig();
 }
 
 void ConfigDialog::setupPrintingPage() {
@@ -322,7 +335,9 @@ void ConfigDialog::setupPrintingPage() {
   page->setHeader(i18n("Printing Options"));
   page->setIcon(KIcon(pix));
   addPage(page);
+}
 
+void ConfigDialog::initPrintingPage(QFrame* frame) {
   QVBoxLayout* l = new QVBoxLayout(frame);
 
   QGroupBox* formatOptions = new QGroupBox(i18n("Formatting Options"), frame);
@@ -386,6 +401,7 @@ void ConfigDialog::setupPrintingPage() {
 
   // stretch to fill lower area
   l->addStretch(1);
+  readPrintingConfig();
 }
 
 void ConfigDialog::setupTemplatePage() {
@@ -396,7 +412,9 @@ void ConfigDialog::setupTemplatePage() {
   page->setHeader(i18n("Template Options"));
   page->setIcon(KIcon(pix));
   addPage(page);
+}
 
+void ConfigDialog::initTemplatePage(QFrame* frame) {
   QVBoxLayout* l = new QVBoxLayout(frame);
 
   QGridLayout* gridLayout = new QGridLayout();
@@ -541,7 +559,25 @@ void ConfigDialog::setupTemplatePage() {
   // stretch to fill lower area
   l->addStretch(1);
 
+  // purely for asthetics make all widgets line up
+  QList<QWidget*> widgets;
+  widgets.append(m_fontCombo);
+  widgets.append(m_fontSizeInput);
+  widgets.append(m_baseColorCombo);
+  widgets.append(m_textColorCombo);
+  widgets.append(m_highBaseColorCombo);
+  widgets.append(m_highTextColorCombo);
+  int w = 0;
+  foreach(QWidget* widget, widgets) {
+    widget->ensurePolished();
+    w = qMax(w, widget->sizeHint().width());
+  }
+  foreach(QWidget* widget, widgets) {
+    widget->setMinimumWidth(w);
+  }
+
   KAcceleratorManager::manage(frame);
+  readTemplateConfig();
 }
 
 void ConfigDialog::setupFetchPage() {
@@ -551,7 +587,9 @@ void ConfigDialog::setupFetchPage() {
   page->setHeader(i18n("Data Sources Options"));
   page->setIcon(KIcon(pix));
   addPage(page);
+}
 
+void ConfigDialog::initFetchPage(QFrame* frame) {
   QHBoxLayout* l = new QHBoxLayout(frame);
 
   QVBoxLayout* leftLayout = new QVBoxLayout();
@@ -606,20 +644,12 @@ void ConfigDialog::setupFetchPage() {
   connect(m_newStuffBtn, SIGNAL(clicked()), SLOT(slotNewStuffClicked()));
 
   KAcceleratorManager::manage(frame);
-}
-
-void ConfigDialog::readConfiguration() {
-  m_modifying = true;
-
-  readGeneralConfig();
-  readPrintingConfig();
-  readTemplateConfig();
   readFetchConfig();
-
-  m_modifying = false;
 }
 
 void ConfigDialog::readGeneralConfig() {
+  m_modifying = true;
+
   m_cbShowTipDay->setChecked(Config::showTipOfDay());
   m_cbOpenLastFile->setChecked(Config::reopenLastFile());
   switch(Config::imageLocation()) {
@@ -641,17 +671,25 @@ void ConfigDialog::readGeneralConfig() {
   m_leArticles->setText(Config::articlesString().replace(comma, semicolon));
   m_leSuffixes->setText(Config::nameSuffixesString().replace(comma, semicolon));
   m_lePrefixes->setText(Config::surnamePrefixesString().replace(comma, semicolon));
+
+  m_modifying = false;
 }
 
 void ConfigDialog::readPrintingConfig() {
+  m_modifying = true;
+
   m_cbPrintHeaders->setChecked(Config::printFieldHeaders());
   m_cbPrintFormatted->setChecked(Config::printFormatted());
   m_cbPrintGrouped->setChecked(Config::printGrouped());
   m_imageWidthBox->setValue(Config::maxImageWidth());
   m_imageHeightBox->setValue(Config::maxImageHeight());
+
+  m_modifying = false;
 }
 
 void ConfigDialog::readTemplateConfig() {
+  m_modifying = true;
+
   // entry template selection
   const int collType = Kernel::self()->collectionType();
   QString file = Config::templateName(collType);
@@ -665,9 +703,13 @@ void ConfigDialog::readTemplateConfig() {
   m_textColorCombo->setColor(Config::templateTextColor(collType));
   m_highBaseColorCombo->setColor(Config::templateHighlightedBaseColor(collType));
   m_highTextColorCombo->setColor(Config::templateHighlightedTextColor(collType));
+
+  m_modifying = false;
 }
 
 void ConfigDialog::readFetchConfig() {
+  m_modifying = true;
+
   m_sourceListWidget->clear();
   m_configWidgets.clear();
 
@@ -693,6 +735,8 @@ void ConfigDialog::readFetchConfig() {
     // go ahead and select the first one
     m_sourceListWidget->setCurrentItem(m_sourceListWidget->item(0));
   }
+
+  m_modifying = false;
 }
 
 void ConfigDialog::saveConfiguration() {

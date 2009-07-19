@@ -1340,7 +1340,6 @@ void MainWindow::slotShowConfigDialog() {
   if(!m_configDlg) {
     m_configDlg = new ConfigDialog(this);
     m_configDlg->show();
-    m_configDlg->readConfiguration();
     connect(m_configDlg, SIGNAL(signalConfigChanged()),
             SLOT(slotHandleConfigChange()));
     connect(m_configDlg, SIGNAL(finished()),

@@ -40,6 +40,7 @@ class KColorCombo;
 class QFontComboBox;
 class QCheckBox;
 class QRadioButton;
+class QFrame;
 
 namespace Tellico {
   class SourceListItem;
@@ -68,13 +69,6 @@ public:
   ConfigDialog(QWidget* parent);
   virtual ~ConfigDialog();
 
-  /**
-   * Reads the current configuration. Only the options which are not saved somewhere
-   * else are read at this point.
-   *
-   * @param config A pointer to the KConfig object
-   */
-  void readConfiguration();
   /**
    * Saves the configuration. @ref KConfigBase::sync is called. This method is called
    * from the main Tellico object.
@@ -111,7 +105,8 @@ private slots:
    *
    * @param w The page
    */
-  void slotUpdateHelpLink(KPageWidgetItem* w);
+  void slotUpdateHelpLink(KPageWidgetItem* item);
+  void slotInitPage(KPageWidgetItem* item);
   /**
    * Create a new Internet source
    */
@@ -138,21 +133,24 @@ private:
    * Sets-up the page for the general options.
    */
   void setupGeneralPage();
+  void initGeneralPage(QFrame* frame);
   void readGeneralConfig();
   /**
    * Sets-up the page for printing options.
    */
   void setupPrintingPage();
+  void initPrintingPage(QFrame* frame);
   void readPrintingConfig();
   /**
    * Sets-up the page for template options.
    */
   void setupTemplatePage();
+  void initTemplatePage(QFrame* frame);
   void readTemplateConfig();
-  void setupFetchPage();
   /**
-   * Load fetcher config
    */
+  void setupFetchPage();
+  void initFetchPage(QFrame* frame);
   void readFetchConfig();
 
   SourceListItem* findItem(const QString& path) const;
