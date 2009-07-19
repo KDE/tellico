@@ -131,12 +131,6 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
-    QByteArray maybeKey = Kernel::self()->readWalletEntry(m_access);
-    if(!maybeKey.isNull()) {
-      m_amazonKey = maybeKey;
-    } else {
-      myDebug() << "no amazon secret key found";
-    }
   }
   s = config_.readEntry("AssocToken");
   if(!s.isEmpty()) {
@@ -170,7 +164,8 @@ void AmazonFetcher::doSearch() {
   stop();
   return;
 #else
-  if(m_access.isEmpty() || m_amazonKey.isEmpty()) {
+  // calling secretKey() ensures that we try to read it first
+  if(secretKey().isEmpty() || m_access.isEmpty()) {
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
             i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
@@ -816,6 +811,18 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
   return res;
 }
 
+QString AmazonFetcher::secretKey() const {
+  if(m_amazonKey.isEmpty()) {
+    QByteArray maybeKey = Kernel::self()->readWalletEntry(m_access);
+    if(!maybeKey.isNull()) {
+      m_amazonKey = maybeKey;
+    } else {
+      myDebug() << "no amazon secret key found";
+    }
+  }
+  return QString::fromUtf8(m_amazonKey);
+}
+
 Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) const {
   return new AmazonFetcher::ConfigWidget(parent_, this);
 }
@@ -909,7 +916,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   if(fetcher_) {
     m_siteCombo->setCurrentData(fetcher_->m_site);
     m_accessEdit->setText(fetcher_->m_access);
-    m_secretKeyEdit->setText(QString::fromUtf8(fetcher_->m_amazonKey));
+    m_secretKeyEdit->setText(fetcher_->secretKey());
     m_assocEdit->setText(fetcher_->m_assoc);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults

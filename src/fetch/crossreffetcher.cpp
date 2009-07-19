@@ -80,19 +80,16 @@ bool CrossRefFetcher::canFetch(int type) const {
 }
 
 void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
-  QMap<QString, QString> map = Kernel::self()->readWalletMap(QLatin1String("crossref.org"));
-  if(!map.isEmpty()) {
-    m_user = map.value(QLatin1String("username"));
-    m_password = map.value(QLatin1String("password"));
-  } else {
-    m_user = config_.readEntry("User");
-    m_password = config_.readEntry("Password");
-  }
+  // the settings have been moved to the wallet now, and are saved there in the config widget
+  // for now, try to read them, since they may still be there. It can't hurt...
+  m_user = config_.readEntry("User");
+  m_password = config_.readEntry("Password");
 }
 
 void CrossRefFetcher::search() {
   m_started = true;
 
+  readWallet();
   if(m_user.isEmpty() || m_password.isEmpty()) {
     message(i18n("%1 requires a username and password.", source()), MessageHandler::Error);
     stop();
@@ -282,6 +279,7 @@ void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(!entry) {
     return;
   }
+  readWallet();
   if(m_user.isEmpty() || m_password.isEmpty()) {
     myDebug() << "username and password is required";
     return;
@@ -311,6 +309,16 @@ void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
   if(coll && coll->entryCount() > 0) {
     myLog() << "found DOI result, merging";
     EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
+  }
+}
+
+void CrossRefFetcher::readWallet() const {
+  if(m_user.isEmpty() || m_password.isEmpty()) {
+    QMap<QString, QString> map = Kernel::self()->readWalletMap(QLatin1String("crossref.org"));
+    if(!map.isEmpty()) {
+      m_user = map.value(QLatin1String("username"));
+      m_password = map.value(QLatin1String("password"));
+    }
   }
 }
 
@@ -360,6 +368,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label->setBuddy(m_passEdit);
 
   if(fetcher_) {
+    fetcher_->readWallet(); // make sure that the wallet values are read
     m_userEdit->setText(fetcher_->m_user);
     m_passEdit->setText(fetcher_->m_password);
   }
