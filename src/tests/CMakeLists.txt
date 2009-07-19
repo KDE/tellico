@@ -91,5 +91,5 @@ TARGET_LINK_LIBRARIES(risimporttest ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
 TARGET_LINK_LIBRARIES(tellicoreadtest translators ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(fetchertest NOGUI fetchertest.cpp)
-TARGET_LINK_LIBRARIES(fetchertest fetch translators ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
+TARGET_LINK_LIBRARIES(arxivfetchertest fetch translators ${TELLICO_TEST_LIBS})

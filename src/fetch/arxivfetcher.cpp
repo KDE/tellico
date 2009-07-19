@@ -182,14 +182,13 @@ void ArxivFetcher::slotComplete(KJob*) {
     return;
   }
 
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     if(!m_started) {
       // might get aborted
       break;
     }
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
 
@@ -255,20 +254,24 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
   u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
-  // quotes should be used if spaces are present, just use all the time
-  QString quotedValue = QLatin1Char('"') + value_ + QLatin1Char('"');
+  // quotes should be used if spaces are present
+  QString value = value_;
+  value.replace(QLatin1Char(' '), QLatin1Char('+'));
+  // seems to have problems with dashes, too
+  value.replace(QLatin1Char('-'), QLatin1Char('+'));
+
   switch(key_) {
     case Title:
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("ti:%1").arg(quotedValue));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("ti:%1").arg(value));
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("au:%1").arg(quotedValue));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("au:%1").arg(value));
       break;
 
     case Keyword:
       // keyword gets to use all the words without being quoted
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("all:%1").arg(value_));
+      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("all:%1").arg(value));
       break;
 
     case ArxivID:
@@ -289,7 +292,7 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
 #ifdef ARXIV_TEST
   u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
 #endif
-//  myDebug() << "url: " << u.url();
+  myDebug() << "url: " << u;
   return u;
 }
 

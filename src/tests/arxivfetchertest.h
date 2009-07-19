@@ -22,27 +22,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FETCHERTEST_H
-#define FETCHERTEST_H
+#ifndef ARXIVFETCHERTEST_H
+#define ARXIVFETCHERTEST_H
 
 #include <QObject>
 #include <QEventLoop>
+#include <QHash>
 
 class KJob;
 
-class FetcherTest : public QObject {
+class ArxivFetcherTest : public QObject {
 Q_OBJECT
 public:
-  FetcherTest();
+  ArxivFetcherTest();
 
 private Q_SLOTS:
   void initTestCase();
-  void testArxivFetcher();
+  void testArxivTitle();
+  void testArxivID();
+  void testArxivIDVersioned();
 
   void slotResult(KJob* job);
 
 private:
   QEventLoop m_loop;
+  QHash<QString, QString> m_fieldValues;
 };
 
 #endif
