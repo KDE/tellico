@@ -301,6 +301,9 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
 Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) {
   QString id = entry_->field(QLatin1String("arxiv"));
   if(!id.isEmpty()) {
+    // remove prefix and/or version number
+    id.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
+    id.remove(QRegExp(QLatin1String("v\\d+$")));
     return FetchRequest(Fetch::ArxivID, id);
   }
 
