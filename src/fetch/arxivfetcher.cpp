@@ -260,18 +260,19 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   // seems to have problems with dashes, too
   value.replace(QLatin1Char('-'), QLatin1Char('+'));
 
+  QString query;
   switch(key_) {
     case Title:
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("ti:%1").arg(value));
+      query = QString::fromLatin1("ti:%1").arg(value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("au:%1").arg(value));
+      query = QString::fromLatin1("au:%1").arg(value);
       break;
 
     case Keyword:
       // keyword gets to use all the words without being quoted
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("all:%1").arg(value));
+      query = QString::fromLatin1("all:%1").arg(value);
       break;
 
     case ArxivID:
@@ -280,7 +281,7 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       QString value = value_;
       value.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
       value.remove(QRegExp(QLatin1String("v\\d+$")));
-      u.addQueryItem(QLatin1String("search_query"), QString::fromLatin1("id:%1").arg(value));
+      query = QString::fromLatin1("id:%1").arg(value);
       }
       break;
 
@@ -288,11 +289,12 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       myWarning() << "key not recognized: " << request().key;
       return KUrl();
   }
+  u.addQueryItem(QLatin1String("search_query"), query);
 
 #ifdef ARXIV_TEST
   u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
 #endif
-  myDebug() << "url: " << u;
+//  myDebug() << "url: " << u;
   return u;
 }
 

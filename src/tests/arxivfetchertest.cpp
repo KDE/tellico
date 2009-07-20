@@ -38,6 +38,11 @@
 
 QTEST_KDEMAIN_CORE( ArxivFetcherTest )
 
+namespace {
+  // 5 is BibtexCollection
+  static const int COLLECTION_TYPE = 5;
+}
+
 ArxivFetcherTest::ArxivFetcherTest() : m_loop(this) {
 }
 
@@ -56,8 +61,7 @@ void ArxivFetcherTest::initTestCase() {
 }
 
 void ArxivFetcherTest::testArxivTitle() {
-  // 5 is BibtexCollection
-  Tellico::Fetch::FetchRequest request(5, Tellico::Fetch::Title, QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
+  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::Title, QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -83,8 +87,7 @@ void ArxivFetcherTest::testArxivTitle() {
 }
 
 void ArxivFetcherTest::testArxivID() {
-  // 5 is BibtexCollection
-  Tellico::Fetch::FetchRequest request(5, Tellico::Fetch::ArxivID, "arxiv:" + m_fieldValues.value("arxiv"));
+  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::ArxivID, "arxiv:" + m_fieldValues.value("arxiv"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -106,9 +109,8 @@ void ArxivFetcherTest::testArxivID() {
 }
 
 void ArxivFetcherTest::testArxivIDVersioned() {
-// 5 is BibtexCollection
   QString arxivVersioned = m_fieldValues.value("arxiv") + "v1";
-  Tellico::Fetch::FetchRequest request(5, Tellico::Fetch::ArxivID, arxivVersioned);
+  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::ArxivID, arxivVersioned);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
