@@ -196,6 +196,9 @@ KUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
 Tellico::Fetch::FetchRequest CitebaseFetcher::updateRequest(Data::EntryPtr entry_) {
   QString arxiv = entry_->field(QLatin1String("arxiv"));
   if(!arxiv.isEmpty()) {
+    // remove prefix and/or version number
+    arxiv.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
+    arxiv.remove(QRegExp(QLatin1String("v\\d+$")));
     return FetchRequest(Fetch::ArxivID, arxiv);
   }
   return FetchRequest();
