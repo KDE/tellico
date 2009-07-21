@@ -38,6 +38,7 @@
 #include <QLabel>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QFile>
 
 // #define CITEBASE_TEST
 
@@ -123,7 +124,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
   QFile f(QLatin1String("/tmp/test.bib"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec("UTF-8");
     t << data;
   }
   f.close();
@@ -143,6 +144,19 @@ void CitebaseFetcher::slotComplete(KJob*) {
     if(!m_started) {
       // might get aborted
       break;
+    }
+
+    if(request().key == ArxivID && entry->field(QLatin1String("arxiv")).isEmpty()) {
+      QString url = entry->field(QLatin1String("url"));
+      QRegExp rx(QLatin1String("id=oai:arXiv\\.org:([^&]+)"));
+      if(rx.indexIn(url) > -1) {
+        if(!coll->hasField(QLatin1String("arxiv"))) {
+          Data::FieldPtr field(new Data::Field(QLatin1String("arxiv"), QLatin1String("arXiv ID")));
+          field->setCategory(i18n("Publishing"));
+          coll->addFields(Data::FieldList() << field);
+        }
+        entry->setField(QLatin1String("arxiv"), rx.cap(1));
+      }
     }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);

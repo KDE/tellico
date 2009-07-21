@@ -39,7 +39,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testArxivID();
-  void testArxivIDVersioned();
 
   void slotResult(KJob* job);
 
