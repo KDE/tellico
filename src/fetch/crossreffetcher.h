@@ -64,8 +64,6 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  virtual void updateEntrySynchronous(Data::EntryPtr entry);
-
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget : public Fetch::ConfigWidget {

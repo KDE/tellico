@@ -32,7 +32,6 @@
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
-#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -273,43 +272,6 @@ Tellico::Fetch::FetchRequest CrossRefFetcher::updateRequest(Data::EntryPtr entry
   }
 #endif
   return FetchRequest();
-}
-
-void CrossRefFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
-  if(!entry) {
-    return;
-  }
-  readWallet();
-  if(m_user.isEmpty() || m_password.isEmpty()) {
-    myDebug() << "username and password is required";
-    return;
-  }
-  QString doi = entry->field(QLatin1String("doi"));
-  if(doi.isEmpty()) {
-    return;
-  }
-
-  KUrl u = searchURL(DOI, doi);
-  QString xml = FileHandler::readTextFile(u, true, true);
-  if(xml.isEmpty()) {
-    return;
-  }
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      return;
-    }
-  }
-
-  // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(xml);
-  Import::TellicoImporter imp(str);
-  Data::CollPtr coll = imp.collection();
-  if(coll && coll->entryCount() > 0) {
-    myLog() << "found DOI result, merging";
-    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
-  }
 }
 
 void CrossRefFetcher::readWallet() const {

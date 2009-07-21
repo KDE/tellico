@@ -29,8 +29,6 @@
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
-#include "../core/filehandler.h"
-//#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -202,30 +200,6 @@ Tellico::Fetch::FetchRequest CitebaseFetcher::updateRequest(Data::EntryPtr entry
     return FetchRequest(Fetch::ArxivID, arxiv);
   }
   return FetchRequest();
-}
-
-void CitebaseFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
-  if(!entry) {
-    return;
-  }
-  QString arxiv = entry->field(QLatin1String("arxiv"));
-  if(arxiv.isEmpty()) {
-    return;
-  }
-
-  KUrl u = searchURL(ArxivID, arxiv);
-  QString bibtex = FileHandler::readTextFile(u, true);
-  if(bibtex.isEmpty()) {
-    return;
-  }
-
-  // assume result is always utf-8
-  Import::BibtexImporter imp(bibtex);
-  Data::CollPtr coll = imp.collection();
-  if(coll && coll->entryCount() > 0) {
-    myLog() << "found arxiv result, merging";
-//    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
-  }
 }
 
 Tellico::Fetch::ConfigWidget* CitebaseFetcher::configWidget(QWidget* parent_) const {

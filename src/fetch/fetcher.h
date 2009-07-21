@@ -93,8 +93,6 @@ public:
   void startSearch(const FetchRequest& request);
   virtual void continueSearch() {}
   void startUpdate(Data::EntryPtr entry);
-  // mopst fetchers won't support this. it's particular useful for text fetchers
-  virtual void updateEntrySynchronous(Data::EntryPtr) {}
   /**
    * Returns true if the fetcher is currently searching.
    */

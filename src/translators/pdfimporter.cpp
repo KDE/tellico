@@ -28,6 +28,7 @@
 #include "xmphandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
+#include "../core/netaccess.h"
 #include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../fetch/fetchmanager.h"
@@ -35,6 +36,7 @@
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
 #include "../gui/cursorsaver.h"
+#include "../entryupdatejob.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -252,7 +254,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     } else {
       foreach(Fetch::Fetcher::Ptr fetcher, vec) {
         foreach(Data::EntryPtr entry, coll->entries()) {
-          fetcher->updateEntrySynchronous(entry);
+          NetAccess::synchronousRun(new EntryUpdateJob(this, entry, fetcher));
         }
       }
     }
@@ -263,10 +265,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasArxiv) {
+    myDebug() << "looking for arxiv";
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::ArxivID);
     foreach(Fetch::Fetcher::Ptr fetcher, vec) {
       foreach(Data::EntryPtr entry, coll->entries()) {
-        fetcher->updateEntrySynchronous(entry);
+        NetAccess::synchronousRun(new EntryUpdateJob(this, entry, fetcher));
       }
     }
   }

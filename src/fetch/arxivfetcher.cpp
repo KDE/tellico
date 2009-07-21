@@ -31,7 +31,6 @@
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
-//#include "../entrymerger.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -314,41 +313,6 @@ Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) 
   }
 
   return FetchRequest();
-}
-
-void ArxivFetcher::updateEntrySynchronous(Tellico::Data::EntryPtr entry) {
-  if(!entry) {
-    return;
-  }
-  QString arxiv = entry->field(QLatin1String("arxiv"));
-  if(arxiv.isEmpty()) {
-    return;
-  }
-
-  KUrl u = searchURL(ArxivID, arxiv);
-  QString xml = FileHandler::readTextFile(u, true, true);
-  if(xml.isEmpty()) {
-    return;
-  }
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      return;
-    }
-  }
-
-  // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(xml);
-  Import::TellicoImporter imp(str);
-  Data::CollPtr coll = imp.collection();
-  if(coll && coll->entryCount() > 0) {
-    myLog() << "found Arxiv result, merging";
-//    EntryMerger::mergeEntry(entry, coll->entries().front(), false /*overwrite*/);
-    // the arxiv id might have a version#
-    entry->setField(QLatin1String("arxiv"),
-                    coll->entries().front()->field(QLatin1String("arxiv")));
-  }
 }
 
 Tellico::Fetch::ConfigWidget* ArxivFetcher::configWidget(QWidget* parent_) const {
