@@ -58,7 +58,6 @@ SET(tellico_SRCS
    mainwindow.cpp
    progressmanager.cpp
    reportdialog.cpp
-   statusbar.cpp
    tellico_kernel.cpp
    tellico_utils.cpp
    viewstack.cpp

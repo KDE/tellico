@@ -97,5 +97,5 @@ TARGET_LINK_LIBRARIES(arxivfetchertest fetch translators ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
 TARGET_LINK_LIBRARIES(citebasefetchertest fetch translators ${TELLICO_TEST_LIBS} btparse)
 
-#KDE4_ADD_UNIT_TEST(entryupdatejobtest NOGUI entryupdatejobtest.cpp ../entryupdatejob.cpp ../entrymerger.cpp)
+#KDE4_ADD_UNIT_TEST(entryupdatejobtest NOGUI entryupdatejobtest.cpp ../entryupdatejob.cpp ../entrymerger.cpp ../progressmanager.cpp)
 #TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})

@@ -53,9 +53,6 @@
 #include "tellico_strings.h"
 #include "filterview.h"
 #include "loanview.h"
-#include "gui/lineedit.h"
-#include "tellico_debug.h"
-#include "statusbar.h"
 #include "fetch/fetchmanager.h"
 #include "cite/actionmanager.h"
 #include "core/tellico_config.h"
@@ -63,8 +60,11 @@
 #include "core/dbusinterface.h"
 #include "models/models.h"
 #include "newstuff/manager.h"
+#include "gui/lineedit.h"
+#include "gui/statusbar.h"
 #include "gui/cursorsaver.h"
 #include "gui/guiproxy.cpp"
+#include "tellico_debug.h"
 
 #include <kapplication.h>
 #include <kcombobox.h>
