@@ -102,7 +102,7 @@ private:
   KComboBox* m_ruleFunc;
   KLineEdit* m_ruleValue;
   KPushButton* m_editRegExp;
-  QDialog* m_editRegExpDialog;
+  QDialog* m_editRegExpDialog;  //krazy:exclude=qclasses
   QStringList m_ruleFieldList;
   QStringList m_ruleFuncList;
 };

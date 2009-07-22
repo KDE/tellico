@@ -60,5 +60,5 @@ void CollectionTypeCombo::setCurrentType(int type_) {
 }
 
 void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
-  QComboBox::addItem(KIcon(CollectionFactory::typeName(collType_)), value_, collType_);
+  ComboBox::addItem(KIcon(CollectionFactory::typeName(collType_)), value_, collType_);
 }

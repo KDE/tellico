@@ -614,11 +614,7 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
     // Determine the packed size of this record.
     size_t size = getNumOfFields() * sizeof(pi_uint16_t);
     for (i = 0; i < getNumOfFields(); i++) {
-#ifdef HAVE_VECTOR_AT
-  const Field field = record.fields().at(i);
-#else
-  const Field field = record.fields()[i];
-#endif
+      const Field field = record.fields().at(i);
         switch (field.type) {
         case PalmLib::FlatFile::Field::STRING:
             size += field.v_string.length() + 1;
@@ -679,13 +675,9 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
 
     // Pack the fields into the buffer.
     for (i = 0; i < getNumOfFields(); i++) {
-    pi_char_t* noteOffsetOffset = 0;
-    bool setNote = false;
-#ifdef HAVE_VECTOR_AT
-    const Field fieldData = record.fields().at(i);
-#else
-    const Field fieldData = record.fields()[i];
-#endif
+        pi_char_t* noteOffsetOffset = 0;
+        bool setNote = false;
+        const Field fieldData = record.fields().at(i);
 
         // Mark the offset to the start of this field in the offests table.
         PalmLib::set_short(offsets, static_cast<pi_uint16_t> (p - buf));

@@ -174,11 +174,7 @@ PalmLib::FlatFile::Database::appendRecord(PalmLib::FlatFile::Record rec)
         return;
     }
     for (unsigned int i = 0; i < getNumOfFields(); i++) {
-#ifdef HAVE_VECTOR_AT
         const Field field = rec.fields().at(i);
-#else
-        const Field field = rec.fields()[i];
-#endif
         if (field.type != field_type(i)) {
           kDebug() << "field " << i << " type " << field_type(i) << " mismatch: " << field.type;
           return;
