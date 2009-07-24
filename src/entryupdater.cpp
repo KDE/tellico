@@ -29,7 +29,7 @@
 #include "tellico_kernel.h"
 #include "tellico_debug.h"
 #include "progressmanager.h"
-#include "statusbar.h"
+#include "gui/statusbar.h"
 #include "gui/richtextlabel.h"
 #include "document.h"
 #include "fetch/fetchresult.cpp"

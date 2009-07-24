@@ -29,7 +29,7 @@
 #include "tellico_kernel.h"
 #include "controller.h"
 #include "progressmanager.h"
-#include "statusbar.h"
+#include "gui/statusbar.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
