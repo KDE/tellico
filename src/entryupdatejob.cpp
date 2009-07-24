@@ -64,7 +64,6 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
   // allows us to get the best match by taking the first key
   m_fetchResults.insert(-1 * match, entry);
   if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
-    myDebug() << "found perfect match";
     doKill();
   }
 }
@@ -78,7 +77,6 @@ void EntryUpdateJob::slotDone() {
     const int matchToBeat = (m_mode == PerfectMatchOnly ? EntryComparison::ENTRY_PERFECT_MATCH
                                                         : EntryComparison::ENTRY_GOOD_MATCH);
     if(match > matchToBeat) {
-      myDebug() << "merging entry with score =" << match;
       EntryMerger::mergeEntry(m_entry, i.value(), false /*overwrite*/);
     }
   }

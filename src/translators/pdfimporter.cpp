@@ -34,7 +34,6 @@
 #include "../fetch/fetchmanager.h"
 #include "../fetch/crossreffetcher.h"
 #include "../progressmanager.h"
-#include "../core/netaccess.h"
 #include "../gui/cursorsaver.h"
 #include "../entryupdatejob.h"
 #include "../tellico_debug.h"
@@ -254,7 +253,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     } else {
       foreach(Fetch::Fetcher::Ptr fetcher, vec) {
         foreach(Data::EntryPtr entry, coll->entries()) {
-          NetAccess::synchronousRun(new EntryUpdateJob(this, entry, fetcher));
+          KJob* job = new EntryUpdateJob(this, entry, fetcher);
+          job->exec();
         }
       }
     }
@@ -269,7 +269,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::ArxivID);
     foreach(Fetch::Fetcher::Ptr fetcher, vec) {
       foreach(Data::EntryPtr entry, coll->entries()) {
-        NetAccess::synchronousRun(new EntryUpdateJob(this, entry, fetcher));
+        KJob* job = new EntryUpdateJob(this, entry, fetcher);
+        job->exec();
       }
     }
   }

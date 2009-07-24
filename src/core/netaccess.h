@@ -30,7 +30,6 @@
 
 class KUrl;
 class KFileItem;
-class KJob;
 
 namespace Tellico {
 
@@ -42,23 +41,12 @@ public:
   static QPixmap filePreview(const KUrl& fileName, int size=196);
   static QPixmap filePreview(const KFileItem& item, int size=196);
   static void removeTempFile(const QString& name);
-  static bool synchronousRun(KJob* job);
-
-signals:
-  void leaveModality();
 
 private slots:
   void slotPreview(const KFileItem& item, const QPixmap& pix);
-  void slotResult(KJob* job);
 
 private:
-  NetAccess();
-
-  void enter_loop();
-  bool synchronousRunInternal(KJob* job);
-
   QPixmap m_preview;
-  bool m_jobSuccess;
 };
 
 }

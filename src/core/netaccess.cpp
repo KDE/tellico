@@ -38,9 +38,6 @@ static QStringList* tmpfiles = 0;
 
 using Tellico::NetAccess;
 
-NetAccess::NetAccess() : m_jobSuccess(false) {
-}
-
 bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
   if(url_.isLocalFile()) {
     return KIO::NetAccess::download(url_, target_, window_);
@@ -101,11 +98,6 @@ void NetAccess::slotPreview(const KFileItem&, const QPixmap& pix_) {
   m_preview = pix_;
 }
 
-void NetAccess::slotResult(KJob* job_) {
-  m_jobSuccess = !job_->error();
-  emit leaveModality();
-}
-
 void NetAccess::removeTempFile(const QString& name) {
   if(!tmpfiles) {
     return;
@@ -116,32 +108,6 @@ void NetAccess::removeTempFile(const QString& name) {
   } else {
     KIO::NetAccess::removeTempFile(name);
   }
-}
-
-bool NetAccess::synchronousRun(KJob* job_) {
-  NetAccess netaccess;
-  // Disable autodeletion until we are back from this event loop (#170963)
-  // We just have to hope people don't mess with setAutoDelete in slots connected to the job, though.
-  const bool wasAutoDelete = job_->isAutoDelete();
-  job_->setAutoDelete(false);
-  const bool ok = netaccess.synchronousRunInternal(job_);
-  if(wasAutoDelete) {
-    job_->deleteLater();
-  }
-  return ok;
-}
-
-void NetAccess::enter_loop() {
-  QEventLoop eventLoop;
-  connect(this, SIGNAL(leaveModality()), &eventLoop, SLOT(quit()));
-  eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
-}
-
-bool NetAccess::synchronousRunInternal(KJob* job_) {
-  connect(job_, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job_->start();
-  enter_loop();
-  return m_jobSuccess;
 }
 
 #include "netaccess.moc"
