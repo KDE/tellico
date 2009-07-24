@@ -44,6 +44,10 @@ public:
   virtual void start();
 
   Data::EntryList entries();
+  void setMaximumResults(int count);
+
+protected:
+  bool doKill();
 
 private slots:
   void startSearch();
@@ -54,6 +58,7 @@ private:
   Fetcher::Ptr m_fetcher;
   FetchRequest m_request;
   QList<Tellico::Fetch::FetchResult*> m_results;
+  int m_maximumResults;
 };
 
   }

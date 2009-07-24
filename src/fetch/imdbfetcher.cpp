@@ -262,8 +262,8 @@ void IMDBFetcher::parseSingleTitleResult() {
   int pPos = cap1.indexOf(QLatin1Char('('));
   // FIXME: maybe remove parentheses here?
   FetchResult* r = new FetchResult(Fetcher::Ptr(this),
-                                     pPos == -1 ? cap1 : cap1.left(pPos),
-                                     pPos == -1 ? QString() : cap1.mid(pPos));
+                                   pPos == -1 ? cap1 : cap1.left(pPos),
+                                   pPos == -1 ? QString() : cap1.mid(pPos));
   m_matches.insert(r->uid, m_url);
   emit signalResultFound(r);
 

@@ -51,6 +51,11 @@ Tellico::Data::EntryList FetcherJob::entries() {
   return list;
 }
 
+void FetcherJob::setMaximumResults(int count_) {
+  Q_ASSERT(count_ >= 0);
+  m_maximumResults = count_;
+}
+
 void FetcherJob::start() {
   QTimer::singleShot(0, this, SLOT(startSearch()));
 }
@@ -65,10 +70,18 @@ void FetcherJob::slotResult(Tellico::Fetch::FetchResult* result_) {
     return;
   }
   m_results.append(result_);
+  if(m_maximumResults > 0 && m_results.count() >= m_maximumResults) {
+    doKill();
+  }
 }
 
 void FetcherJob::slotDone() {
   emitResult();
+}
+
+bool FetcherJob::doKill() {
+  m_fetcher->stop();
+  return true;
 }
 
 #include "fetcherjob.moc"
