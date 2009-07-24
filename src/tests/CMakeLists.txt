@@ -97,5 +97,8 @@ TARGET_LINK_LIBRARIES(arxivfetchertest fetch translators ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
 TARGET_LINK_LIBRARIES(citebasefetchertest fetch translators ${TELLICO_TEST_LIBS} btparse)
 
+KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
+TARGET_LINK_LIBRARIES(imdbfetchertest fetch translators ${TELLICO_TEST_LIBS})
+
 #KDE4_ADD_UNIT_TEST(entryupdatejobtest NOGUI entryupdatejobtest.cpp ../entryupdatejob.cpp ../entrymerger.cpp)
 #TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
