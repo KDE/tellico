@@ -26,7 +26,7 @@
 #include "../translators/bibteximporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
-#include "../collection.h"
+#include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"
@@ -131,6 +131,8 @@ void CitebaseFetcher::slotComplete(KJob*) {
 #endif
 
   Import::BibtexImporter imp(QString::fromUtf8(data, data.size()));
+  // to head off the warnings about using the current collection, a dummy bibtex collection is used for now
+  imp.setCurrentCollection(Data::CollPtr(new Data::BibtexCollection(true)));
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {
@@ -201,7 +203,7 @@ KUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
 #ifdef CITEBASE_TEST
   u = KUrl("/home/robby/citebase.bib");
 #endif
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
   return u;
 }
 

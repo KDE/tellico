@@ -118,6 +118,14 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       } else {
         entry = newColl->entries().front();
         hasDOI |= !entry->field(QLatin1String("doi")).isEmpty();
+        // the XMP handler has a habit of inserting empty values surrounded by parentheses
+        QRegExp rx(QLatin1String("\\(\\s*\\)"));
+        foreach(Data::FieldPtr field, newColl->fields()) {
+          QString value = entry->field(field);
+          if(rx.exactMatch(value)) {
+            entry->setField(field, QString());
+          }
+        }
       }
     }
 
@@ -173,7 +181,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                        ")"));
         if(rx.indexIn(text) > -1) {
           QString doi = rx.cap(1);
-          myDebug() << "in PDF file, found DOI: " << doi;
+          myLog() << "in PDF file, found DOI:" << doi;
           entry->setField(QLatin1String("doi"), doi);
           hasDOI = true;
         }
@@ -185,7 +193,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                          ")"));
         if(rx.indexIn(text) > -1) {
           QString arxiv = rx.cap(1);
-          myDebug() << "in PDF file, found arxiv: " << arxiv;
+          myLog() << "in PDF file, found arxiv:" << arxiv;
           if(!entry->collection()->hasField(QLatin1String("arxiv"))) {
             Data::FieldPtr field(new Data::Field(QLatin1String("arxiv"), i18n("arXiv ID")));
             field->setCategory(i18n("Publishing"));
@@ -240,7 +248,6 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasDOI) {
-    myDebug() << "looking for DOI";
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
     if(vec.isEmpty()) {
       GUI::CursorSaver cs(Qt::ArrowCursor);
@@ -265,7 +272,6 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   }
 
   if(hasArxiv) {
-    myDebug() << "looking for arxiv";
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::ArxivID);
     foreach(Fetch::Fetcher::Ptr fetcher, vec) {
       foreach(Data::EntryPtr entry, coll->entries()) {
