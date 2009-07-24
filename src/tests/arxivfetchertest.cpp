@@ -38,11 +38,6 @@
 
 QTEST_KDEMAIN_CORE( ArxivFetcherTest )
 
-namespace {
-  // 5 is BibtexCollection
-  static const int COLLECTION_TYPE = 5;
-}
-
 ArxivFetcherTest::ArxivFetcherTest() : m_loop(this) {
 }
 
@@ -61,7 +56,8 @@ void ArxivFetcherTest::initTestCase() {
 }
 
 void ArxivFetcherTest::testArxivTitle() {
-  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::Title, QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+                                       QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -71,12 +67,11 @@ void ArxivFetcherTest::testArxivTitle() {
   job->start();
   m_loop.exec();
 
-  Tellico::Data::EntryList results = job->entries();
   QEXPECT_FAIL("", "Exact title searches are currently failing", Continue);
-  QCOMPARE(results.size(), 1);
+  QCOMPARE(m_results.size(), 1);
 
-  if(!results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = results.at(0);
+  if(!m_results.isEmpty()) {
+    Tellico::Data::EntryPtr entry = m_results.at(0);
 
     QHashIterator<QString, QString> i(m_fieldValues);
     while(i.hasNext()) {
@@ -87,7 +82,8 @@ void ArxivFetcherTest::testArxivTitle() {
 }
 
 void ArxivFetcherTest::testArxivID() {
-  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::ArxivID, "arxiv:" + m_fieldValues.value("arxiv"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID,
+                                       "arxiv:" + m_fieldValues.value("arxiv"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -97,9 +93,8 @@ void ArxivFetcherTest::testArxivID() {
   job->start();
   m_loop.exec();
 
-  Tellico::Data::EntryList results = job->entries();
-  QCOMPARE(results.size(), 1);
-  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(m_results.size(), 1);
+  Tellico::Data::EntryPtr entry = m_results.at(0);
 
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
@@ -110,7 +105,7 @@ void ArxivFetcherTest::testArxivID() {
 
 void ArxivFetcherTest::testArxivIDVersioned() {
   QString arxivVersioned = m_fieldValues.value("arxiv") + "v1";
-  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::ArxivID, arxivVersioned);
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID, arxivVersioned);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -120,9 +115,8 @@ void ArxivFetcherTest::testArxivIDVersioned() {
   job->start();
   m_loop.exec();
 
-  Tellico::Data::EntryList results = job->entries();
-  QCOMPARE(results.size(), 1);
-  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(m_results.size(), 1);
+  Tellico::Data::EntryPtr entry = m_results.at(0);
   // id has version since original search included it
   QCOMPARE(entry->field("arxiv"), arxivVersioned);
 
@@ -134,6 +128,7 @@ void ArxivFetcherTest::testArxivIDVersioned() {
   }
 }
 
-void ArxivFetcherTest::slotResult(KJob*) {
+void ArxivFetcherTest::slotResult(KJob* job_) {
+  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();
 }

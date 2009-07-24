@@ -38,11 +38,6 @@
 
 QTEST_KDEMAIN_CORE( CitebaseFetcherTest )
 
-namespace {
-  // 5 is BibtexCollection
-  static const int COLLECTION_TYPE = 5;
-}
-
 CitebaseFetcherTest::CitebaseFetcherTest() : m_loop(this) {
 }
 
@@ -64,7 +59,8 @@ void CitebaseFetcherTest::initTestCase() {
 }
 
 void CitebaseFetcherTest::testArxivID() {
-  Tellico::Fetch::FetchRequest request(COLLECTION_TYPE, Tellico::Fetch::ArxivID, "arxiv:" + m_fieldValues.value("arxiv"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID,
+                                       "arxiv:" + m_fieldValues.value("arxiv"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::CitebaseFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -74,11 +70,10 @@ void CitebaseFetcherTest::testArxivID() {
   job->start();
   m_loop.exec();
 
-  Tellico::Data::EntryList results = job->entries();
-  QCOMPARE(results.size(), 1);
+  QCOMPARE(m_results.size(), 1);
 
-  if(!results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = results.at(0);
+  if(!m_results.isEmpty()) {
+    Tellico::Data::EntryPtr entry = m_results.at(0);
     QHashIterator<QString, QString> i(m_fieldValues);
     while(i.hasNext()) {
       i.next();
@@ -87,6 +82,7 @@ void CitebaseFetcherTest::testArxivID() {
   }
 }
 
-void CitebaseFetcherTest::slotResult(KJob*) {
+void CitebaseFetcherTest::slotResult(KJob* job_) {
+  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();
 }

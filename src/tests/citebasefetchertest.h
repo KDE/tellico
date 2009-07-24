@@ -29,6 +29,8 @@
 #include <QEventLoop>
 #include <QHash>
 
+#include "../datavectors.h"
+
 class KJob;
 
 class CitebaseFetcherTest : public QObject {
@@ -45,6 +47,7 @@ private Q_SLOTS:
 private:
   QEventLoop m_loop;
   QHash<QString, QString> m_fieldValues;
+  Tellico::Data::EntryList m_results;
 };
 
 #endif
