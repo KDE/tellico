@@ -627,6 +627,9 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
   m_newStuffBtn->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
+  // checksum and signature checking are no longer possible with knewstuff2
+  // disable button for now
+  m_newStuffBtn->setEnabled(false);
 
   vlay->addWidget(newSourceBtn);
   vlay->addWidget(m_modifySourceBtn);
