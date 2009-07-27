@@ -279,7 +279,6 @@ void FreeDBImporter::readCDROM() {
       s += QLatin1String("::") + Tellico::minutes(lengths[i]);
     }
     trackList << s;
-    // TODO: KDE4 will probably have track length too
   }
   entry->setField(QLatin1String("track"), trackList.join(QLatin1String("; ")));
 

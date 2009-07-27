@@ -738,9 +738,7 @@ bool Collection::removeFilter(Tellico::FilterPtr filter_) {
     return false;
   }
 
-  // TODO: test for success
-  m_filters.removeAll(filter_);
-  return true;
+  return m_filters.removeAll(filter_) > 0;
 }
 
 void Collection::clear() {
