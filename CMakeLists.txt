@@ -116,7 +116,6 @@ set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
 add_subdirectory(src)
-add_subdirectory(doc)
 add_subdirectory(icons)
 add_subdirectory(xslt)
 
@@ -148,17 +147,3 @@ install(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application)
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     macro_display_feature_log()
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-
-########### CPack stuff ###############
-
-set(CPACK_PACKAGE_VERSION "1.9")
-set(CPACK_SOURCE_PACKAGE_FILE_NAME "tellico-${CPACK_PACKAGE_VERSION}")
-
-set(CPACK_GENERATOR "TGZ")
-set(CPACK_SOURCE_GENERATOR "TGZ")
-
-set(CPACK_SOURCE_IGNORE_FILES "/builds/;svn.motd;Makefile;/debian/;/\\\\.svn/;\\\\.swp$;\\\\.#;/#")
-
-include(CPack)
-
-########################################
