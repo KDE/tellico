@@ -70,10 +70,7 @@ public:
   virtual ~ConfigDialog();
 
   /**
-   * Saves the configuration. @ref KConfigBase::sync is called. This method is called
-   * from the main Tellico object.
-   *
-   * @param config A pointer to the KConfig object
+   * Saves the configuration
    */
   void saveConfiguration();
 
@@ -129,29 +126,42 @@ private slots:
   void slotDeleteTemplate();
 
 private:
+  enum Page {
+    General  = 1 << 0,
+    Printing = 1 << 1,
+    Template = 1 << 2,
+    Fetch    = 1 << 3
+  };
+  int m_initializedPages;
+  bool isPageInitialized(Page page) const;
+
   /**
    * Sets-up the page for the general options.
    */
   void setupGeneralPage();
   void initGeneralPage(QFrame* frame);
   void readGeneralConfig();
+  void saveGeneralConfig();
   /**
    * Sets-up the page for printing options.
    */
   void setupPrintingPage();
   void initPrintingPage(QFrame* frame);
   void readPrintingConfig();
+  void savePrintingConfig();
   /**
    * Sets-up the page for template options.
    */
   void setupTemplatePage();
   void initTemplatePage(QFrame* frame);
   void readTemplateConfig();
+  void saveTemplateConfig();
   /**
    */
   void setupFetchPage();
   void initFetchPage(QFrame* frame);
   void readFetchConfig();
+  void saveFetchConfig();
 
   SourceListItem* findItem(const QString& path) const;
   void loadTemplateList();

@@ -110,6 +110,7 @@ void SourceListItem::setFetcher(Tellico::Fetch::Fetcher::Ptr fetcher) {
 
 ConfigDialog::ConfigDialog(QWidget* parent_)
     : KPageDialog(parent_)
+    , m_initializedPages(0)
     , m_modifying(false)
     , m_okClicked(false) {
   setFaceType(List);
@@ -206,6 +207,10 @@ void ConfigDialog::slotDefault() {
   }
   Config::self()->useDefaults(false);
   slotModified();
+}
+
+bool ConfigDialog::isPageInitialized(Page page_) const {
+  return m_initializedPages & page_;
 }
 
 void ConfigDialog::setupGeneralPage() {
@@ -325,6 +330,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   // stretch to fill lower area
   l->addStretch(1);
+  m_initializedPages |= General;
   readGeneralConfig();
 }
 
@@ -401,6 +407,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 
   // stretch to fill lower area
   l->addStretch(1);
+  m_initializedPages |= Printing;
   readPrintingConfig();
 }
 
@@ -577,6 +584,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   }
 
   KAcceleratorManager::manage(frame);
+  m_initializedPages |= Template;
   readTemplateConfig();
 }
 
@@ -647,6 +655,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   connect(m_newStuffBtn, SIGNAL(clicked()), SLOT(slotNewStuffClicked()));
 
   KAcceleratorManager::manage(frame);
+  m_initializedPages |= Fetch;
   readFetchConfig();
 }
 
@@ -743,6 +752,13 @@ void ConfigDialog::readFetchConfig() {
 }
 
 void ConfigDialog::saveConfiguration() {
+  if(isPageInitialized(General)) saveGeneralConfig();
+  if(isPageInitialized(Printing)) savePrintingConfig();
+  if(isPageInitialized(Template)) saveTemplateConfig();
+  if(isPageInitialized(Fetch)) saveFetchConfig();
+}
+
+void ConfigDialog::saveGeneralConfig() {
   Config::setShowTipOfDay(m_cbShowTipDay->isChecked());
 
   int imageLocation;
@@ -767,14 +783,17 @@ void ConfigDialog::saveConfiguration() {
   FieldFormat::articlesUpdated();
   Config::setNameSuffixesString(m_leSuffixes->text().replace(semicolon, comma));
   Config::setSurnamePrefixesString(m_lePrefixes->text().replace(semicolon, comma));
+}
 
+void ConfigDialog::savePrintingConfig() {
   Config::setPrintFieldHeaders(m_cbPrintHeaders->isChecked());
   Config::setPrintFormatted(m_cbPrintFormatted->isChecked());
   Config::setPrintGrouped(m_cbPrintGrouped->isChecked());
   Config::setMaxImageWidth(m_imageWidthBox->value());
   Config::setMaxImageHeight(m_imageHeightBox->value());
+}
 
-  // entry template selection
+void ConfigDialog::saveTemplateConfig() {
   const int collType = Kernel::self()->collectionType();
   Config::setTemplateName(collType, m_templateCombo->currentData().toString());
   QFont font(m_fontCombo->currentFont().family(), m_fontSizeInput->value());
@@ -783,7 +802,9 @@ void ConfigDialog::saveConfiguration() {
   Config::setTemplateTextColor(collType, m_textColorCombo->color());
   Config::setTemplateHighlightedBaseColor(collType, m_highBaseColorCombo->color());
   Config::setTemplateHighlightedTextColor(collType, m_highTextColorCombo->color());
+}
 
+void ConfigDialog::saveFetchConfig() {
   // first, tell config widgets they got deleted
   foreach(Fetch::ConfigWidget* widget, m_removedConfigWidgets) {
     widget->removed();
