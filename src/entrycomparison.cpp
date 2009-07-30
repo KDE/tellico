@@ -111,7 +111,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
 //    myDebug() << "match without parentheses";
     return 2;
   }
-  if(f->flags() & Data::Field::AllowMultiple) {
+  if(f->hasFlag(Data::Field::AllowMultiple)) {
     QStringList sl1 = e1->fields(f, false);
     QStringList sl2 = e2->fields(f, false);
     int matches = 0;

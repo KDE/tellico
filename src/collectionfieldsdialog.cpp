@@ -52,6 +52,7 @@
 #include <QTimer>
 #include <QHBoxLayout>
 #include <QGridLayout>
+#include <QStackedWidget>
 
 using Tellico::FieldListItem;
 using Tellico::CollectionFieldsDialog;
@@ -95,8 +96,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   Data::FieldList fields = m_coll->fields();
   foreach(Data::FieldPtr field, fields) {
-    // ignore ReadOnly
-    if(field->type() != Data::Field::ReadOnly) {
+    // ignore fields which are not user-editable
+    if(!field->hasFlag(Data::Field::NoEdit)) {
       (void) new FieldListItem(m_fieldsWidget, field);
     }
   }
@@ -170,8 +171,6 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats += i18n("An <i>Image</i> field holds a picture. ");
   whats += i18n("A <i>Date</i> field can be used for values with a day, month, and year. ");
   whats += i18n("A <i>Rating</i> field uses stars to show a rating number. ");
-  whats += i18n("A <i>Dependent</i> field depends on the values of other "
-                "fields, and is formatted according to the field description. ");
   whats += i18n("A <i>Read Only</i> is for internal values, possibly useful for import and export. ");
   whats += QLatin1String("</qt>");
   label->setWhatsThis(whats);
@@ -203,19 +202,31 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_catCombo->setDuplicatesEnabled(false);
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Descr&iption:"), grid);
-  layout->addWidget(label, ++row, 0);
+  m_descLabelStack = new QStackedWidget(grid);
+  layout->addWidget(m_descLabelStack, ++row, 0);
+  label = new QLabel(i18n("Description:"), m_descLabelStack);
+  m_descLabelStack->addWidget(label);
+  label = new QLabel(i18n("Value template:"), m_descLabelStack);
+  m_descLabelStack->addWidget(label);
+  m_descLabelStack->setCurrentIndex(0);
+
   m_descEdit = new KLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
-  layout->addWidget(m_descEdit, row, 1, 1, 3);
+  layout->addWidget(m_descEdit, row, 1);
   label->setBuddy(m_descEdit);
   /* TRANSLATORS: Do not translate %{year} and %{title}. */
   whats = i18n("The description is a useful reminder of what information is contained in the "
-               "field. For <i>Dependent</i> fields, the description is a format string such as "
+               "field. For fields whi use derived values, the description is a format string such as "
                "\"%{year} %{title}\" where the named fields get substituted in the string.");
   label->setWhatsThis(whats);
   m_descEdit->setWhatsThis(whats);
   connect(m_descEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+
+  m_derived = new QCheckBox(i18n("Use derived value"), grid);
+  m_derived->setWhatsThis(i18n("Derived values are formed from the values of other fields according to the value template."));
+  layout->addWidget(m_derived, row, 2, 1, 2);
+  connect(m_derived, SIGNAL(clicked(bool)), SLOT(slotDerivedChecked(bool)));
+  connect(m_derived, SIGNAL(clicked()), SLOT(slotModified()));
 
   label = new QLabel(i18n("&Default value:"), grid);
   layout->addWidget(label, ++row, 0);
@@ -403,7 +414,7 @@ void CollectionFieldsDialog::applyChanges() {
   if(m_reordered) {
     Data::FieldList allFields = m_coll->fields();
     foreach(Data::FieldPtr field, allFields) {
-      if(field->type() == Data::Field::ReadOnly) {
+      if(field->hasFlag(Data::Field::NoEdit)) {
         fields.append(field);
       }
     }
@@ -595,6 +606,8 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   m_catCombo->setCurrentIndex(idx); // have to do this here
   m_descEdit->setText(field->description());
   m_defaultEdit->setText(field->defaultValue());
+  m_derived->setChecked(field->hasFlag(Data::Field::Derived));
+  slotDerivedChecked(m_derived->isChecked());
 
   switch(field->formatFlag()) {
     case Data::Field::FormatNone:
@@ -619,12 +632,11 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
       break;
   }
 
-  int flags = field->flags();
-  m_complete->setChecked(flags & Data::Field::AllowCompletion);
-  m_multiple->setChecked(flags & Data::Field::AllowMultiple);
-  m_grouped->setChecked(flags & Data::Field::AllowGrouped);
+  m_complete->setChecked(field->hasFlag(Data::Field::AllowCompletion));
+  m_multiple->setChecked(field->hasFlag(Data::Field::AllowMultiple));
+  m_grouped->setChecked(field->hasFlag(Data::Field::AllowGrouped));
 
-  m_btnDelete->setEnabled(!(flags & Data::Field::NoDelete));
+  m_btnDelete->setEnabled(!field->hasFlag(Data::Field::NoDelete));
 
   // default button is enabled only if default collection contains the field
   if(m_defaultCollection) {
@@ -705,6 +717,9 @@ void CollectionFieldsDialog::updateField() {
   }
 
   int flags = 0;
+  if(m_derived->isChecked()) {
+    flags |= Data::Field::Derived;
+  }
   if(m_complete->isChecked()) {
     flags |= Data::Field::AllowCompletion;
   }
@@ -812,6 +827,7 @@ void CollectionFieldsDialog::slotDefault() {
   m_catCombo->setCurrentIndex(idx); // have to do this here
   m_descEdit->setText(defaultField->description());
   m_defaultEdit->setText(defaultField->defaultValue());
+  m_derived->setChecked(defaultField->hasFlag(Data::Field::Derived));
 
   switch(defaultField->formatFlag()) {
     case Data::Field::FormatNone:
@@ -835,12 +851,11 @@ void CollectionFieldsDialog::slotDefault() {
       break;
   }
 
-  int flags = defaultField->flags();
-  m_complete->setChecked(flags & Data::Field::AllowCompletion);
-  m_multiple->setChecked(flags & Data::Field::AllowMultiple);
-  m_grouped->setChecked(flags & Data::Field::AllowGrouped);
+  m_complete->setChecked(defaultField->hasFlag(Data::Field::AllowCompletion));
+  m_multiple->setChecked(defaultField->hasFlag(Data::Field::AllowMultiple));
+  m_grouped->setChecked(defaultField->hasFlag(Data::Field::AllowGrouped));
 
-  m_btnDelete->setEnabled(!(defaultField->flags() & Data::Field::NoDelete));
+  m_btnDelete->setEnabled(!defaultField->hasFlag(Data::Field::NoDelete));
 
 //  m_titleEdit->setFocus();
 //  m_titleEdit->selectAll();
@@ -915,6 +930,12 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
     return true;
   }
   return false;
+}
+
+void CollectionFieldsDialog::slotDerivedChecked(bool checked_) {
+  // first label is description, second is template
+  // so if the derived button is checked show index 1
+  m_descLabelStack->setCurrentIndex(checked_ ? 1 : 0);
 }
 
 bool CollectionFieldsDialog::checkValues() {
@@ -1050,7 +1071,6 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
 
     // these can never be changed
     case Data::Field::Image:
-    case Data::Field::Dependent:
       newTypes += fieldMap[static_cast<Data::Field::Type>(type_)];
       break;
 

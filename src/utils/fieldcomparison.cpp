@@ -42,14 +42,14 @@ Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_
     return new ValueComparison(field_, new RatingComparison());
   } else if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);
-  } else if(field_->type() == Data::Field::Dependent) {
-    return new DependentComparison(field_);
+  } else if(field_->hasFlag(Data::Field::Derived)) {
+    return new DerivedValueComparison(field_);
   } else if(field_->type() == Data::Field::Date || field_->formatFlag() == Data::Field::FormatDate) {
     return new ValueComparison(field_, new ISODateComparison());
   } else if(field_->type() == Data::Field::Choice) {
     return new ChoiceComparison(field_);
   } else if(field_->formatFlag() == Data::Field::FormatTitle) {
-    // Dependent could be title, so put this test after
+    // derived value could be formatted as title, so put this test after derived
     return new ValueComparison(field_, new TitleComparison());
   } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||
             field_->name() == QLatin1String("lcc")) {
@@ -109,19 +109,19 @@ int Tellico::ImageComparison::compare(const QString& str1_, const QString& str2_
   return image1.width() - image2.width();
 }
 
-Tellico::DependentComparison::DependentComparison(Data::FieldPtr field) : ValueComparison(field, new StringComparison()) {
+Tellico::DerivedValueComparison::DerivedValueComparison(Data::FieldPtr field) : ValueComparison(field, new StringComparison()) {
   Data::FieldList fields = Data::Document::self()->collection()->fieldDependsOn(field);
   foreach(Data::FieldPtr field, fields) {
     m_comparisons.append(create(field));
   }
 }
 
-Tellico::DependentComparison::~DependentComparison() {
+Tellico::DerivedValueComparison::~DerivedValueComparison() {
   qDeleteAll(m_comparisons);
   m_comparisons.clear();
 }
 
-int Tellico::DependentComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr entry2_) {
+int Tellico::DerivedValueComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr entry2_) {
   foreach(FieldComparison* comp, m_comparisons) {
     int res = comp->compare(entry1_, entry2_);
     if(res != 0) {

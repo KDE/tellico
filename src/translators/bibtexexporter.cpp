@@ -303,9 +303,9 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
     // If the entry is formatted as a name and allows multiple values
     // insert "and" in between them (e.g. author and editor)
     if(fIt->formatFlag() == Data::Field::FormatName
-       && fIt->flags() & Data::Field::AllowMultiple) {
+       && fIt->hasFlag(Data::Field::AllowMultiple)) {
       value.replace(FieldFormat::delimiter(), QLatin1String(" and "));
-    } else if(fIt->flags() & Data::Field::AllowMultiple) {
+    } else if(fIt->hasFlag(Data::Field::AllowMultiple)) {
       QString bibsep = fIt->property(bibtexSep);
       if(!bibsep.isEmpty()) {
         value.replace(FieldFormat::delimiter(), bibsep);

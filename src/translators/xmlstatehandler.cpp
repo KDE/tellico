@@ -308,7 +308,10 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     if(d->syntaxVersion < 4 && name == QLatin1String("title")) {
       flags |= Data::Field::NoDelete;
     }
-    field->setFlags(flags);
+    // some of the flags may have been set in the constructor
+    // in the case of old Dependent fields changing, for example
+    // so combine with the existing flags
+    field->setFlags(field->flags() | flags);
   }
 
   QString formatStr = attValue(atts_, "format", QString::number(Data::Field::FormatNone));
@@ -502,7 +505,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     return true;
   }
   // if it's a derived value, no field value is added
-  if(f->type() == Data::Field::Dependent) {
+  if(f->hasFlag(Data::Field::Derived)) {
     return true;
   }
 

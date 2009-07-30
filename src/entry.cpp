@@ -112,7 +112,7 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
   if(!f) {
     return QString();
   }
-  if(f->type() == Field::Dependent) {
+  if(f->hasFlag(Field::Derived)) {
     return dependentValue(this, f->description(), false);
   }
 
@@ -133,7 +133,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
   }
 
   Field::FormatFlag flag = f->formatFlag();
-  if(f->type() == Field::Dependent) {
+  if(f->hasFlag(Field::Derived)) {
     if(flag == Field::FormatNone) {
       return dependentValue(this, f->description(), false);
     } else {
@@ -212,7 +212,7 @@ bool Entry::setField(const QString& name_, const QString& value_) {
                    f->type() == Field::Image ||
                    f->type() == Field::Rating ||
                    f->type() == Field::Number;
-  if(!(f->flags() & Field::AllowMultiple) &&
+  if(!(f->hasFlag(Field::AllowMultiple)) &&
      (shareType ||
       (f->type() == Field::Line && (f->flags() & Field::AllowCompletion)))) {
     m_fieldValues.insert(Tellico::shareString(name_), Tellico::shareString(value_));
@@ -259,7 +259,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   FieldPtr f = m_coll->fieldByName(fieldName_);
 
   // easy if not allowing multiple values
-  if(!(f->flags() & Field::AllowMultiple)) {
+  if(!(f->hasFlag(Field::AllowMultiple))) {
     return QStringList(formattedField(fieldName_));
   }
 

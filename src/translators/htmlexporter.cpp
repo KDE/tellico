@@ -342,7 +342,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
       if(!f) {
         continue;
       }
-      if(f->flags() & Data::Field::AllowMultiple) {
+      if(f->hasFlag(Data::Field::AllowMultiple)) {
         groupFields += QLatin1String("tc:") + *it + QLatin1String("s/tc:") + *it;
       } else {
         groupFields += QLatin1String("tc:") + *it;
@@ -724,7 +724,7 @@ bool HTMLExporter::writeEntryFiles() {
 
   const QString title = QLatin1String("title");
   const QString html = QLatin1String(".html");
-  bool multipleTitles = collection()->fieldByName(title)->flags() & Data::Field::AllowMultiple;
+  bool multipleTitles = collection()->fieldByName(title)->hasFlag(Data::Field::AllowMultiple);
   Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
   foreach(Data::EntryPtr entryIt, entries) {
     QString file = entryIt->field(title, formatted);

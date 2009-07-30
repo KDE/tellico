@@ -104,7 +104,7 @@ bool PilotDBExporter::exec() {
 
       case Data::Field::Number:
         // the DB only supports single values of integers
-        if(fIt->flags() & Data::Field::AllowMultiple) {
+        if(fIt->hasFlag(Data::Field::AllowMultiple)) {
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::STRING);
         } else {
           db.appendField(codec->fromUnicode(fIt->title()).data(), PalmLib::FlatFile::Field::INTEGER);

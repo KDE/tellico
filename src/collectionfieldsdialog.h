@@ -37,6 +37,7 @@ class KListWidget;
 class QRadioButton;
 class QCheckBox;
 class QPainter;
+class QStackedWidget;
 
 namespace Tellico {
   namespace Data {
@@ -79,6 +80,7 @@ private slots:
   void slotModified();
   bool slotShowExtendedProperties();
   void slotSelectInitial();
+  void slotDerivedChecked(bool checked);
 
 private:
   void applyChanges();
@@ -106,10 +108,12 @@ private:
 
   KLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
-  KLineEdit* m_allowEdit;
-  KLineEdit* m_defaultEdit;
   KComboBox* m_catCombo;
+  QStackedWidget* m_descLabelStack;
   KLineEdit* m_descEdit;
+  KLineEdit* m_defaultEdit;
+  QCheckBox* m_derived;
+  KLineEdit* m_allowEdit;
   KPushButton* m_btnExtended;
 
   QRadioButton* m_formatNone;

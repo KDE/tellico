@@ -37,29 +37,39 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     : QSharedData(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
       m_type(type_), m_flags(0), m_formatFlag(FormatNone) {
 
-#ifndef NDEBUG
-  if(m_type == Choice) {
-    myWarning() << "A different constructor should be called for multiple choice attributes.";
-    myWarning() << "Constructing a Field with name = " << name_;
-  }
-#endif
+  Q_ASSERT(m_type != Choice);
   // a paragraph's category is always its title, along with tables
   if(isSingleCategory()) {
     m_category = m_title;
   }
-  if(m_type == Table || m_type == Table2) {
-    m_flags = AllowMultiple;
-    if(m_type == Table2) {
-      m_type = Table;
-      setProperty(QLatin1String("columns"), QLatin1String("2"));
-    } else {
-      setProperty(QLatin1String("columns"), QLatin1String("1"));
-    }
-  } else if(m_type == Date) {  // hidden from user
-    m_formatFlag = FormatDate;
-  } else if(m_type == Rating) {
-    setProperty(QLatin1String("minimum"), QLatin1String("1"));
-    setProperty(QLatin1String("maximum"), QLatin1String("5"));
+  switch(m_type) {
+    case Table:
+    case Table2:
+      m_flags = AllowMultiple;
+      if(m_type == Table2) {
+        m_type = Table;
+        setProperty(QLatin1String("columns"), QLatin1String("2"));
+      } else {
+        setProperty(QLatin1String("columns"), QLatin1String("1"));
+      }
+      break;
+    case Date:  // hidden from user
+      m_formatFlag = FormatDate;
+      break;
+    case Rating:
+      setProperty(QLatin1String("minimum"), QLatin1String("1"));
+      setProperty(QLatin1String("maximum"), QLatin1String("5"));
+      break;
+    case ReadOnly:
+      m_flags = NoEdit;
+      m_type = Line;
+      break;
+    case Dependent:
+      m_flags = Derived;
+      m_type = Line;
+      break;
+    default: // ssshhhhhhhh
+      break;
   }
 }
 
@@ -71,15 +81,9 @@ Field::Field(const QString& name_, const QString& title_, const QStringList& all
 
 Field::Field(const Field& field_)
     : QSharedData(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
-      m_desc(field_.description()), m_type(field_.type()),
+      m_desc(field_.description()), m_type(field_.type()), m_allowed(field_.allowed()),
       m_flags(field_.flags()), m_formatFlag(field_.formatFlag()),
       m_properties(field_.propertyList()) {
-  if(m_type == Choice) {
-    m_allowed = field_.allowed();
-  } else if(m_type == Table2) {
-    m_type = Table;
-    setProperty(QLatin1String("columns"), QLatin1String("2"));
-  }
 }
 
 Field& Field::operator=(const Field& field_) {
@@ -91,12 +95,7 @@ Field& Field::operator=(const Field& field_) {
   m_category = field_.category();
   m_desc = field_.description();
   m_type = field_.type();
-  if(m_type == Choice) {
-    m_allowed = field_.allowed();
-  } else if(m_type == Table2) {
-    m_type = Table;
-    setProperty(QLatin1String("columns"), QLatin1String("2"));
-  }
+  m_allowed = field_.allowed();
   m_flags = field_.flags();
   m_formatFlag = field_.formatFlag();
   m_properties = field_.propertyList();
@@ -118,22 +117,34 @@ void Field::setType(Field::Type type_) {
   if(m_type != Field::Choice) {
     m_allowed = QStringList();
   }
-  if(m_type == Table || m_type == Table2) {
-    m_flags |= AllowMultiple;
-    if(m_type == Table2) {
-      m_type = Table;
-      setProperty(QLatin1String("columns"), QLatin1String("2"));
-    }
-    if(property(QLatin1String("columns")).isEmpty()) {
-      setProperty(QLatin1String("columns"), QLatin1String("1"));
-    }
+  switch(m_type) {
+    case Table:
+    case Table2:
+      m_flags |= AllowMultiple;
+      if(m_type == Table2) {
+        m_type = Table;
+        setProperty(QLatin1String("columns"), QLatin1String("2"));
+      }
+      if(property(QLatin1String("columns")).isEmpty()) {
+        setProperty(QLatin1String("columns"), QLatin1String("1"));
+      }
+      break;
+    case Date:
+      m_formatFlag = FormatDate;
+      break;
+    case ReadOnly:
+      m_flags |= NoEdit;
+      m_type = Line;
+      break;
+    case Dependent:
+      m_flags |= Derived;
+      m_type = Line;
+      break;
+    default: // ssshhhhhhhh
+      break;
   }
   if(isSingleCategory()) {
     m_category = m_title;
-  }
-  // hidden from user
-  if(type_ == Date) {
-    m_formatFlag = FormatDate;
   }
 }
 
@@ -145,11 +156,15 @@ void Field::setCategory(const QString& category_) {
 
 void Field::setFlags(int flags_) {
   // tables always have multiple allowed
-  if(m_type == Table || m_type == Table2) {
+  if(m_type == Table) {
     m_flags = AllowMultiple | flags_;
   } else {
     m_flags = flags_;
   }
+}
+
+bool Field::hasFlag(FieldFlag flag_) const {
+  return m_flags & flag_;
 }
 
 void Field::setFormatFlag(FormatFlag flag_) {
@@ -170,13 +185,13 @@ void Field::setDefaultValue(const QString& value_) {
 }
 
 bool Field::isSingleCategory() const {
-  return (m_type == Para || m_type == Table || m_type == Table2 || m_type == Image);
+  return (m_type == Para || m_type == Table || m_type == Image);
 }
 
 // format is something like "%{year} %{author}"
 QStringList Field::dependsOn() const {
   QStringList list;
-  if(m_type != Dependent) {
+  if(!hasFlag(Derived)) {
     return list;
   }
 
@@ -227,8 +242,6 @@ Field::FieldMap Field::typeMap() {
   map[Field::URL]       = i18n("URL");
   map[Field::Table]     = i18n("Table");
   map[Field::Image]     = i18n("Image");
-  map[Field::Dependent] = i18n("Dependent");
-//  map[Field::ReadOnly] = i18n("Read Only");
   map[Field::Date]      = i18n("Date");
   map[Field::Rating]    = i18n("Rating");
   return map;
@@ -248,7 +261,6 @@ QStringList Field::typeTitles() {
   list.append(map[Field::Table]);
   list.append(map[Field::Image]);
   list.append(map[Field::Rating]);
-  list.append(map[Field::Dependent]);
   return list;
 }
 

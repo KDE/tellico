@@ -48,18 +48,13 @@ public:
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
    * or not and is thus a QCheckBox. A Number type is an integer, though it used
-   * to be a Year. A ReadOnly is a hidden value. A URL is obvious, too.
+   * to be a Year. A URL is obvious, too.
    * A Table looks like a small spreadsheet with one column, and a Table2
-   * type has two columns.  An Image points to a QImage. A Dependent field
-   * depends on the values of other attributes. A Date contains a date.
+   * type has two columns.  An Image points to a QImage. A Date contains a date.
+   *
+   * Table2, ReadOnly, and Dependent are deprecated
    *
    * Don't forget to change Field::typeMap().
-   *
-   * @see KLineEdit
-   * @see QTextEdit
-   * @see KComboBox
-   * @see QCheckBox
-   * @see QTable
    **/
   enum Type {
     Undef      = 0,
@@ -67,13 +62,13 @@ public:
     Para       = 2,
     Choice     = 3,
     Bool       = 4,
-    ReadOnly   = 5,
+    ReadOnly   = 5, // deprecated in favor of FieldFlags::NoEdit
     Number     = 6,
     URL        = 7,
     Table      = 8,
     Table2     = 9, // deprecated in favor of property("columns")
     Image      = 10,
-    Dependent  = 11,
+    Dependent  = 11, // deprecated in favor of FieldFlags::Derived
     Date       = 12,
     // Michael Zimmermann used 13 for his Keyword field, so go ahead and skip it
     Rating     = 14 // similar to a Choice field, but allowed values are numbers only
@@ -91,11 +86,13 @@ public:
    * @li AllowGrouped - Entries may be grouped by this field.
    * @li NoDelete - The user may not delete this field.
    */
-  enum FieldFlags {
+  enum FieldFlag {
     AllowMultiple   = 1 << 0,   // allow multiple values, separated by a semi-colon
     AllowGrouped    = 1 << 1,   // this field can be used to group entries
     AllowCompletion = 1 << 2,   // allow auto-completion
-    NoDelete        = 1 << 3    // don't allow user to delete this field
+    NoDelete        = 1 << 3,   // don't allow user to delete this field
+    NoEdit          = 1 << 4,   // don't allow user to delete this field
+    Derived   = 1 << 5    // dependent value
   };
 
   /**
@@ -228,6 +225,7 @@ public:
    * @param flags The field flags
    */
   void setFlags(int flags);
+  bool hasFlag(FieldFlag flag) const;
   /**
    * Returns the formatting flag for the field.
    *

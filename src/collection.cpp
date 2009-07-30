@@ -117,7 +117,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
     m_fieldCategories << field_->category();
   }
 
-  if(field_->flags() & Field::AllowGrouped) {
+  if(field_->hasFlag(Field::AllowGrouped)) {
     // m_entryGroupsDicts autoDeletes each QDict when the Collection d'tor is called
     EntryGroupDict* dict = new EntryGroupDict();
     m_entryGroupDicts.insert(field_->name(), dict);
@@ -125,13 +125,13 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
     m_entryGroups << field_->name();
   }
 
-  if(m_defaultGroupField.isEmpty() && field_->flags() & Field::AllowGrouped) {
+  if(m_defaultGroupField.isEmpty() && field_->hasFlag(Field::AllowGrouped)) {
     m_defaultGroupField = field_->name();
   }
 
   // refresh all dependent fields, in case one references this new one
   foreach(FieldPtr existingField, m_fields) {
-    if(existingField->type() == Field::Dependent) {
+    if(existingField->hasFlag(Field::Derived)) {
       emit signalRefreshField(existingField);
     }
   }
@@ -310,8 +310,8 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
     }
   }
 
-  bool wasGrouped = oldField->flags() & Field::AllowGrouped;
-  bool isGrouped = newField_->flags() & Field::AllowGrouped;
+  bool wasGrouped = oldField->hasFlag(Field::AllowGrouped);
+  bool isGrouped = newField_->hasFlag(Field::AllowGrouped);
   if(wasGrouped) {
     if(!isGrouped) {
       // in order to keep list in the same order, don't remove unless new field is not groupable
@@ -346,7 +346,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   // now to update all entries if the field is a dependent and the description changed
-  if(newField_->type() == Field::Dependent && oldField->description() != newField_->description()) {
+  if(newField_->hasFlag(Field::Derived) && oldField->description() != newField_->description()) {
     emit signalRefreshField(newField_);
   }
 
@@ -368,7 +368,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
 //  myDebug() << "name = " << field_->name();
 
   // can't delete the title field
-  if((field_->flags() & Field::NoDelete) && !force_) {
+  if((field_->hasFlag(Field::NoDelete)) && !force_) {
     return false;
   }
 
@@ -394,7 +394,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
     entry->setField(field_, QString());
   }
 
-  if(field_->flags() & Field::AllowGrouped) {
+  if(field_->hasFlag(Field::AllowGrouped)) {
     EntryGroupDict* dict = m_entryGroupDicts.take(field_->name());
     qDeleteAll(*dict);
     m_entryGroups.removeAll(field_->name());
@@ -409,7 +409,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
   // likely to be weird effects when checking dependent fields
   // while removing one, so refresh all of them
   foreach(FieldPtr field, m_fields) {
-    if(field->type() == Field::Dependent) {
+    if(field->hasFlag(Field::Derived)) {
       emit signalRefreshField(field);
     }
   }
@@ -557,7 +557,7 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
   if(name_.isEmpty()) {
     return QStringList();
   }
-  bool multiple = (fieldByName(name_)->flags() & Field::AllowMultiple);
+  bool multiple = (fieldByName(name_)->hasFlag(Field::AllowMultiple));
 
   StringSet values;
   foreach(EntryPtr entry, m_entries) {
@@ -778,7 +778,8 @@ void Collection::cleanGroups() {
 
 Tellico::Data::FieldList Collection::fieldDependsOn(FieldPtr field_) const {
   FieldList vec;
-  if(field_->type() != Field::Dependent) {
+  // non derived fields don't have dependent fields
+  if(!field_->hasFlag(Field::Derived)) {
     return vec;
   }
 
@@ -802,7 +803,7 @@ QString Collection::prepareText(const QString& text_) const {
 }
 
 bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {
-  if(!field_ || field_->type() != Field::Dependent) {
+  if(!field_ || !field_->hasFlag(Field::Derived)) {
     return false;
   }
 

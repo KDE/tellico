@@ -37,7 +37,7 @@ using Tellico::GUI::NumberFieldWidget;
 NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_), m_lineEdit(0), m_spinBox(0) {
 
-  if(field_->flags() & Data::Field::AllowMultiple) {
+  if(field_->hasFlag(Data::Field::AllowMultiple)) {
     initLineEdit();
   } else {
     initSpinBox();
@@ -68,7 +68,7 @@ QString NumberFieldWidget::text() const {
   }
 
   QString text = m_lineEdit->text();
-  if(field()->flags() & Data::Field::AllowMultiple) {
+  if(field()->hasFlag(Data::Field::AllowMultiple)) {
     text.replace(s_semiColon, QLatin1String("; "));
   }
   return text.simplified();
@@ -101,7 +101,7 @@ void NumberFieldWidget::clearImpl() {
 
 void NumberFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   bool wasLineEdit = !isSpinBox();
-  bool nowLineEdit = newField_->flags() & Tellico::Data::Field::AllowMultiple;
+  bool nowLineEdit = newField_->hasFlag(Data::Field::AllowMultiple);
 
   if(wasLineEdit == nowLineEdit) {
     return;

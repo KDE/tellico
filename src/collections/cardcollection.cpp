@@ -45,10 +45,10 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Line);
   field->setCategory(i18n(card_general));
   field->setDescription(QLatin1String("%{year} %{brand} %{player}"));
-  field->setFlags(Field::NoDelete);
+  field->setFlags(Field::NoDelete | Field::Derived);
   list.append(field);
 
   field = new Field(QLatin1String("player"), i18n("Player"));

@@ -58,7 +58,12 @@ using Tellico::GUI::FieldWidget;
 const QRegExp FieldWidget::s_semiColon = QRegExp(QLatin1String("\\s*;\\s*"));
 
 FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent_) {
-  switch (field_->type()) {
+  if(field_->hasFlag(Data::Field::NoEdit) ||
+     field_->hasFlag(Data::Field::Derived)) {
+    myWarning() << "read-only/dependent field, this shouldn't have been called";
+    return 0;
+  }
+  switch(field_->type()) {
     case Data::Field::Line:
       return new GUI::LineFieldWidget(field_, parent_);
 
@@ -89,11 +94,6 @@ FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent
 
     case Data::Field::Rating:
       return new GUI::RatingFieldWidget(field_, parent_);
-
-    case Data::Field::ReadOnly:
-    case Data::Field::Dependent:
-      myWarning() << "read-only/dependent field, this shouldn't have been called";
-      return 0;
 
     default:
       myWarning() << "unknown field type = " << field_->type();

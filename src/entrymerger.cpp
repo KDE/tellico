@@ -192,7 +192,7 @@ bool EntryMerger::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrit
 // remove the merging due to user comments
 // maybe in the future have a more intelligent way
 #if 0
-    } else if(field->flags() & Data::Field::AllowMultiple) {
+    } else if(field->hasFlag(Data::Field::AllowMultiple)) {
       // if field F allows multiple values and not a Table (see above case),
       // e1's F values = (e1's F values) U (e2's F values) (union)
       // replace e1's field with union of e1's and e2's values for this field

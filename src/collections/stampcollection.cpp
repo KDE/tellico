@@ -46,10 +46,10 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Line);
   field->setCategory(i18n(stamp_general));
   field->setDescription(QLatin1String("%{year} %{description} %{denomination}"));
-  field->setFlags(Field::NoDelete);
+  field->setFlags(Field::NoDelete | Field::Derived);
   list.append(field);
 
   field = new Field(QLatin1String("description"), i18n("Description"));

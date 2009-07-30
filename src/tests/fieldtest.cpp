@@ -63,6 +63,8 @@ void FieldTest::testAll() {
   field2.setProperty("columns", "1");
   QCOMPARE(field2.property("columns"), QLatin1String("1"));
   QCOMPARE(field2.isSingleCategory(), true);
+  QCOMPARE(field2.flags(), int(Tellico::Data::Field::AllowMultiple));
+  QVERIFY(field2.hasFlag(Tellico::Data::Field::AllowMultiple));
 
   QStringList allowed;
   allowed << "choice1";
@@ -71,4 +73,19 @@ void FieldTest::testAll() {
   QCOMPARE(field3.allowed(), allowed);
   field3.setDefaultValue("default");
   QCOMPARE(field3.defaultValue(), QLatin1String(""));
+  QCOMPARE(field3.flags(), 0);
+
+  Tellico::Data::Field field4("derived", "Derived", Tellico::Data::Field::Dependent);
+  // should be converted to Line type
+  QCOMPARE(field4.type(), Tellico::Data::Field::Line);
+  QCOMPARE(field4.isSingleCategory(), false);
+  QCOMPARE(field4.flags(), int(Tellico::Data::Field::Derived));
+  QVERIFY(field4.hasFlag(Tellico::Data::Field::Derived));
+
+  Tellico::Data::Field field5("readonly", "Readonly", Tellico::Data::Field::ReadOnly);
+  // should be converted to Line type
+  QCOMPARE(field5.type(), Tellico::Data::Field::Line);
+  QCOMPARE(field5.isSingleCategory(), false);
+  QCOMPARE(field5.flags(), int(Tellico::Data::Field::NoEdit));
+  QVERIFY(field5.hasFlag(Tellico::Data::Field::NoEdit));
 }

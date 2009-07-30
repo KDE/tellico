@@ -147,8 +147,8 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
     return;
   }
   Data::FieldPtr field = Data::Document::self()->collection()->fieldByTitle(fieldTitle);
-  if(field && (field->flags() & Data::Field::AllowCompletion)) {
-    FieldCompletion* completion = new FieldCompletion(field->flags() & Data::Field::AllowMultiple);
+  if(field && (field->hasFlag(Data::Field::AllowCompletion))) {
+    FieldCompletion* completion = new FieldCompletion(field->hasFlag(Data::Field::AllowMultiple));
     completion->setItems(Kernel::self()->valuesByFieldName(field->name()));
     completion->setIgnoreCase(true);
     m_ruleValue->setCompletionObject(completion);

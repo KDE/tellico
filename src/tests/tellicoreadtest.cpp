@@ -30,6 +30,7 @@
 
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
+#include "../collections/coincollection.h"
 #include "../collectionfactory.h"
 
 QTEST_KDEMAIN_CORE( TellicoReadTest )
@@ -40,6 +41,7 @@ QTEST_KDEMAIN_CORE( TellicoReadTest )
 void TellicoReadTest::initTestCase() {
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerCoin(Tellico::Data::Collection::Coin, "coin");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
     KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
@@ -50,7 +52,7 @@ void TellicoReadTest::initTestCase() {
   }
 }
 
-void TellicoReadTest::testCollection() {
+void TellicoReadTest::testBookCollection() {
   Tellico::Data::CollPtr coll1 = m_collections[0];
   // skip the first one
   for(int i = 1; i < m_collections.count(); ++i) {
@@ -102,4 +104,25 @@ void TellicoReadTest::testEntries_data() {
   QTest::newRow("pub_year") << QL1("pub_year");
   QTest::newRow("rating") << QL1("rating");
   QTest::newRow("comments") << QL1("comments");
+}
+
+void TellicoReadTest::testCoinCollection() {
+  KUrl url(QL1(KDESRCDIR) + QL1("/data/coins-format9.tc"));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
+
+  Tellico::Data::FieldPtr field = coll->fieldByName("title");
+  // old fiend has Dependent value, now is Line
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->type(), Tellico::Data::Field::Line);
+  QCOMPARE(field->title(), QL1("Title"));
+  QVERIFY(field->hasFlag(Tellico::Data::Field::Derived));
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  // test creating the derived title
+  QCOMPARE(entry->title(), QL1("1974D Jefferson Nickel 0.05"));
 }

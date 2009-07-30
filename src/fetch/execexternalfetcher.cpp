@@ -369,7 +369,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   gridLayout->addWidget(m_leUpdate, row, 1);
   /* TRANSLATORS: Do not translate %{author}. */
   w2 = i18n("<p>Enter the arguments which should be used to search for available updates to an entry.</p><p>"
-           "The format is the same as for <i>Dependent</i> fields, where field values "
+           "The format is the same as for fields with derived values, where field names "
            "are contained inside braces, such as <i>%{author}</i>. See the documentation for details.</p>");
   m_cbUpdate->setWhatsThis(w);
   m_leUpdate->setWhatsThis(w2);

@@ -267,7 +267,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     }
 
     // if multiple versions are allowed, split them into separate elements
-    if(fIt->flags() & Data::Field::AllowMultiple) {
+    if(fIt->hasFlag(Data::Field::AllowMultiple)) {
       // parent element if field contains multiple values, child of entryElem
       // who cares about grammar, just add an QLatin1Char('s') to the name
       QDomElement parElem = dom_.createElement(fieldName + QLatin1Char('s'));

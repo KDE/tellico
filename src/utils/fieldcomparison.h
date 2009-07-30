@@ -75,10 +75,10 @@ protected:
   virtual int compare(const QString& str1, const QString& str2);
 };
 
-class DependentComparison : public ValueComparison {
+class DerivedValueComparison : public ValueComparison {
 public:
-  DependentComparison(Data::FieldPtr field);
-  ~DependentComparison();
+  DerivedValueComparison(Data::FieldPtr field);
+  ~DerivedValueComparison();
 
   virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
 

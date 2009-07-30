@@ -45,10 +45,10 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Line);
   field->setCategory(i18n(wine_general));
   field->setDescription(QLatin1String("%{vintage} %{producer} %{varietal}"));
-  field->setFlags(Field::NoDelete);
+  field->setFlags(Field::NoDelete | Field::Derived);
   list.append(field);
 
   field = new Field(QLatin1String("producer"), i18nc("Wine Producer", "Producer"));

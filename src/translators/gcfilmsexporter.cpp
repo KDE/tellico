@@ -232,11 +232,11 @@ bool GCfilmsExporter::exec() {
 void GCfilmsExporter::push(QTextStream& ts_, const QByteArray& fieldName_, Tellico::Data::EntryPtr entry_, bool format_) {
   Data::FieldPtr f = collection()->fieldByName(QLatin1String(fieldName_));
   // don't format multiple names cause commas will cause problems
-  if(f->formatFlag() == Data::Field::FormatName && (f->flags() & Data::Field::AllowMultiple)) {
+  if(f->formatFlag() == Data::Field::FormatName && (f->hasFlag(Data::Field::AllowMultiple))) {
     format_ = false;
   }
   QString s = entry_->field(QLatin1String(fieldName_), format_);
-  if(f->flags() & Data::Field::AllowMultiple) {
+  if(f->hasFlag(Data::Field::AllowMultiple)) {
     ts_ << s.replace(QLatin1String("; "), QLatin1String(","));
   } else {
     ts_ << s;

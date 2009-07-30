@@ -380,7 +380,7 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
 
   // also need to add required fields, those with NoDelete set
   foreach(FieldPtr defaultField, coll->defaultFields()) {
-    if(!coll->hasField(defaultField->name()) && (defaultField->flags() & Field::NoDelete)) {
+    if(!coll->hasField(defaultField->name()) && defaultField->hasFlag(Field::NoDelete)) {
       // but don't add a Bibtex Key if there's already a bibtex-id
       if(defaultField->property(bibtex) != QLatin1String("key")
          || !coll->hasField(QLatin1String("bibtex-id"))) {

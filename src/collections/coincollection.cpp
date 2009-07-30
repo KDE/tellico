@@ -45,11 +45,11 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = new Field(QLatin1String("title"), i18n("Title"), Field::Dependent);
+  field = new Field(QLatin1String("title"), i18n("Title"), Field::Line);
   field->setCategory(i18n(coin_general));
   // not i18n()
   field->setDescription(QLatin1String("%{year}%{mintmark} %{type} %{denomination}"));
-  field->setFlags(Field::NoDelete);
+  field->setFlags(Field::NoDelete | Field::Derived);
   list.append(field);
 
   field = new Field(QLatin1String("type"), i18n("Type"));

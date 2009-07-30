@@ -73,7 +73,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   QString author;
   Data::FieldPtr authorField = c->fieldByBibtexName(QLatin1String("author"));
   if(authorField) {
-    if(authorField->flags() & Data::Field::AllowMultiple) {
+    if(authorField->hasFlag(Data::Field::AllowMultiple)) {
       // grab first author only;
       QString tmp = entry_->field(authorField->name());
       author = tmp.section(QLatin1Char(';'), 0, 0);

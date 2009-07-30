@@ -169,8 +169,9 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 
     int count = 0;
     foreach(Data::FieldPtr field, fields) {
-      // ReadOnly and Dependent fields don't get widgets
-      if(field->type() == Data::Field::ReadOnly || field->type() == Data::Field::Dependent) {
+      // uneditabled and fields with derived values don't get widgets
+      if(field->hasFlag(Data::Field::NoEdit) ||
+         field->hasFlag(Data::Field::Derived)) {
         continue;
       }
       if(field->type() == Data::Field::Choice) {
@@ -590,7 +591,7 @@ void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
 
   foreach(Data::FieldPtr it, m_currColl->fields()) {
     if(it->type() != Data::Field::Line
-       || !(it->flags() & Data::Field::AllowCompletion)) {
+       || !(it->hasFlag(Data::Field::AllowCompletion))) {
       continue;
     }
 
@@ -599,7 +600,7 @@ void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
     if(!widget) {
       continue;
     }
-    if(it->flags() & Data::Field::AllowMultiple) {
+    if(it->hasFlag(Data::Field::AllowMultiple)) {
       QStringList items = entry_->fields(it, false);
       for(QStringList::ConstIterator it = items.constBegin(); it != items.constEnd(); ++it) {
         widget->addCompletionObjectItem(*it);

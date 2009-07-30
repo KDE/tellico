@@ -41,8 +41,8 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 
   registerWidget();
 
-  if(field_->flags() & Data::Field::AllowCompletion) {
-    FieldCompletion* completion = new FieldCompletion(field_->flags() & Tellico::Data::Field::AllowMultiple);
+  if(field_->hasFlag(Data::Field::AllowCompletion)) {
+    FieldCompletion* completion = new FieldCompletion(field_->hasFlag(Data::Field::AllowMultiple));
     completion->setItems(Kernel::self()->valuesByFieldName(field_->name()));
     completion->setIgnoreCase(true);
     m_lineEdit->setCompletionObject(completion);
@@ -56,7 +56,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 
 QString LineFieldWidget::text() const {
   QString text = m_lineEdit->text();
-  if(field()->flags() & Data::Field::AllowMultiple) {
+  if(field()->hasFlag(Data::Field::AllowMultiple)) {
     text.replace(s_semiColon, QLatin1String("; "));
   }
   return text.trimmed();
@@ -76,8 +76,8 @@ void LineFieldWidget::addCompletionObjectItem(const QString& text_) {
 }
 
 void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
-  bool wasComplete = (oldField_->flags() & Tellico::Data::Field::AllowCompletion);
-  bool isComplete = (newField_->flags() & Tellico::Data::Field::AllowCompletion);
+  bool wasComplete = (oldField_->hasFlag(Data::Field::AllowCompletion));
+  bool isComplete = (newField_->hasFlag(Data::Field::AllowCompletion));
   if(!wasComplete && isComplete) {
     FieldCompletion* completion = new FieldCompletion(isComplete);
     completion->setItems(Kernel::self()->valuesByFieldName(newField_->name()));
