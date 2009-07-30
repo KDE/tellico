@@ -79,7 +79,7 @@ images | borrowers | filters)+>
 <!ATTLIST rule function CDATA #REQUIRED>
 <!ATTLIST rule pattern CDATA #REQUIRED>
 
-<!ELEMENT entry (title | subtitle | authors | binding | pur_date |
+<!ELEMENT entry (id | title | subtitle | authors | binding | pur_date |
 pur_price | publisher | edition | cr_years | pub_year | isbn | lccn |
 pages | languages | genres | keywords | series | series_num |
 condition | signed | read | gift | loaned | rating | comments |
@@ -100,6 +100,7 @@ allcertification | address | abstract | designer | bggid |
 mechanism | num-players )+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
+<!ELEMENT id (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT subtitle (#PCDATA)>
 <!ELEMENT authors (author+)>

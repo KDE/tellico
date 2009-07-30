@@ -42,12 +42,11 @@ const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
 Collection::Collection(const QString& title_)
     : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
-  m_id = getID();
+  init();
 }
 
 Collection::Collection(bool addDefaultFields_, const QString& title_)
     : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
-  m_id = getID();
   if(m_title.isEmpty()) {
     m_title = i18n("My Collection");
   }
@@ -58,6 +57,7 @@ Collection::Collection(bool addDefaultFields_, const QString& title_)
     field->setFormatFlag(Field::FormatTitle);
     addField(field);
   }
+  init();
 }
 
 Collection::~Collection() {
@@ -67,6 +67,16 @@ Collection::~Collection() {
   }
   qDeleteAll(m_entryGroupDicts);
   m_entryGroupDicts.clear();
+}
+
+void Collection::init() {
+  m_id = getID();
+  Data::FieldPtr field(new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number));
+  field->setCategory(i18n("Personal"));
+  field->setDescription(QLatin1String("%{_id}"));
+  field->setFlags(Field::NoDelete | Field::Derived);
+  field->setFormatFlag(Field::FormatNone);
+  addField(field);
 }
 
 bool Collection::addFields(Tellico::Data::FieldList list_) {

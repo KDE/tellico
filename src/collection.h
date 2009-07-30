@@ -343,6 +343,7 @@ signals:
   void mergeAddedField(Tellico::Data::CollPtr coll, Tellico::Data::FieldPtr field);
 
 private:
+  void init();
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   void removeEntriesFromDicts(const EntryList& entries);
   void populateDict(EntryGroupDict* dict, const QString& fieldName, const EntryList& entries);
