@@ -67,7 +67,7 @@ The <markup>&lt;tellico&gt;</markup> element contains one <markup>&lt;collection
 </programlisting>
 
 <para>
-All of the fields are defined inside a <markup>&lt;fields&gt;</markup> element, of which there can be only one. All of the information for a field, except for any extended properties, are included as attributes of the <markup>&lt;field&gt;</markup> element. The allowable values for the <markup>flags</markup>, <markup>format</markup>, and <markup>type</markup> attributes are given in a <link linkend="field-type-values">following section</link>.
+All of the fields are defined inside a <markup>&lt;fields&gt;</markup> element, of which there can be only one. All of the information for a field, except for any properties, are included as attributes of the <markup>&lt;field&gt;</markup> element. The allowable values for the <markup>flags</markup>, <markup>format</markup>, and <markup>type</markup> attributes are given in a <link linkend="field-type-values">following section</link>.
 </para>
 
 <para>
@@ -174,7 +174,7 @@ The type of collection is given in the type attribute of the collection element.
 </para>
 
 <para>
-The type of field is given in the type attribute of the field element. The value is equal to the <type>FieldType</type> enum value in <filename>src/field.h</filename>. <emphasis>ReadOnly</emphasis> fields were intended for fields which should be retained in the collection, but which should not be editable by the user, such as some fields added when importing a collection from another file format. It is not currently used.
+The type of field is given in the type attribute of the field element. The value is equal to the <type>FieldType</type> enum value in <filename>src/field.h</filename>.
 </para>
 
 <table>
@@ -191,12 +191,10 @@ The type of field is given in the type attribute of the field element. The value
 <row><entry>Paragraph</entry><entry>2</entry></row>
 <row><entry>Choice</entry><entry>3</entry></row>
 <row><entry>Checkbox</entry><entry>4</entry></row>
-<row><entry><emphasis>ReadOnly</emphasis></entry><entry>5</entry></row>
 <row><entry>Number</entry><entry>6</entry></row>
 <row><entry>&URL;</entry><entry>7</entry></row>
 <row><entry>Single-Column Table</entry><entry>8</entry></row>
 <row><entry>Image</entry><entry>10</entry></row>
-<row><entry>Dependent</entry><entry>11</entry></row>
 <row><entry>Date</entry><entry>12</entry></row>
 <row><entry>Rating</entry><entry>14</entry></row>
 </tbody>

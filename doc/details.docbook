@@ -58,7 +58,7 @@ formatting is ever applied.</para>
 Relative &URL;s may also be used. They are interpreted relative to the location of the
 &appname; data file. In the <link linkend="entry-editor"><interface>Entry Editor</interface></link>, the line
 edit provides auto-completion for local file locations. If you want the &URL; from the &kde;
-File Selector Dialog Box to be interpreted relative to the document location, then an extended
+File Selector Dialog Box to be interpreted relative to the document location, then a
 property for the &URL; field should be set to <emphasis>relative</emphasis> : <emphasis>true</emphasis>.
 </para>
 
@@ -164,18 +164,17 @@ changed by setting properties in the field definition in the <interface>Collecti
 
 </sect2>
 
-<sect2 id="dependent">
-<title>Dependent</title>
+<sect2 id="derived">
+<title>Derived Value Fields</title>
 
 <para>
-The final field type is the <emphasis>Dependent</emphasis> field. You probably won't use
-this one very often. It is used to combine values from other fields using a format
-string in the field description. For example, if a <emphasis>Dependent</emphasis> field has
-a description of <userinput>%{title} %{year}</userinput>, then the value of that field will
+Fields with derived values are a special case. The field type corresponds to the typical type of value
+contained in the field, but the value of the field is constructed from other fields using a format
+string in the field description. For example, if the field has
+a value template of <userinput>%{title} %{year}</userinput>, then the value of that field will
 be the title, followed by the year. This field type is used primarily for the title field in
 the coin, stamp, trading card, and wine collections. Either the internal field name or the field title
 may be used in the description for formatting.
-The entry ID is also available using <userinput>%{id}</userinput>.
 </para>
 </sect2>
 
@@ -185,7 +184,7 @@ The entry ID is also available using <userinput>%{id}</userinput>.
 <title>Collection Types</title>
 
 <para>
-&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view"><interface>Group View</interface></link> works correctly. For some collection types, that is just a <emphasis><link linkend="dependent">Dependent</link></emphasis> field combining two or more of the others.
+&appname; supports twelve specific collection types by default: books, bibliographic entries, comic books, videos, music, video games, trading cards, coins, stamps, wines, board games, and file catalogs. In addition, an empty generic collection template is available for any other collectibles. The default collections are only meant to include a general set of fields. You should add, modify, or delete them to fit your needs. The only requirement is that a collection should always have a <emphasis>Title</emphasis> field, so that the <link linkend="group-view"><interface>Group View</interface></link> works correctly. For some collection types, that is just a <link linkend="derived">derived value</link> field combining two or more of the others.
 </para>
 
 <para>
@@ -262,7 +261,7 @@ Bibliographies have 25 default fields:
 </para>
 
 <para>
-Although bibliographic collections are not specifically linked to bibtex, the default set of fields is taken from a typical set of bibtex fields. When exporting to bibtex, an extended property called <emphasis>bibtex</emphasis> is used for each fields to define the corresponding bibtex field. If you add an additional field to a bibliography and want to export it to bibtex, be sure to set the <emphasis>bibtex</emphasis> extended property.
+Although bibliographic collections are not specifically linked to bibtex, the default set of fields is taken from a typical set of bibtex fields. When exporting to bibtex, a property called <emphasis>bibtex</emphasis> is used for each field to define the corresponding bibtex field. If you add an additional field to a bibliography and want to export it to bibtex, be sure to set the <emphasis>bibtex</emphasis> property.
 </para>
 
 <para>
@@ -270,7 +269,7 @@ Although bibliographic collections are not specifically linked to bibtex, the de
 </para>
 
 <para>
-Book collections can be converted to bibliographies. Default bibtex fields are added, and the extended properties are set. This functionality exists primarily to convert old collections, before the bibliography type was separated from the book collection type.
+Book collections can be converted to bibliographies. Default bibtex fields are added, and the bibtex properties are set. This functionality exists primarily to convert old collections, before the bibliography type was separated from the book collection type.
 </para>
 </sect2>
 

@@ -268,7 +268,7 @@ On the left side of the dialog is the list of the current fields. Modified field
 <title>Field Properties</title>
 
 <para>
-A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The <interface>Entry Editor</interface> uses it to prompt for values. The <interface>Column View</interface> uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the <interface>Entry Editor</interface>, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="dependent"><emphasis>Dependent</emphasis></link> fields, the description is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
+A field is defined by its title, type, category, description, and possibly a default value or some allowed values. The title is used everywhere to refer to the field in the user interface. The <interface>Entry Editor</interface> uses it to prompt for values. The <interface>Column View</interface> uses it as a column header. The different types of fields are <link linkend="field-types">explained in the Field Types section</link>. The description is used as a tooltip in the <interface>Entry Editor</interface>, perhaps to provide an explanation of the field's contents. In addition, for <link linkend="derived">fields with <emphasis>derived</emphasis> values</link>, a value template is used to format the field's value. The default value is automatically added when creating a new entry. The list of allowed values for <link linkend="choice"><emphasis>Choice</emphasis></link> fields should be separated by a semi-colon.
 </para>
 
 <para>
@@ -324,10 +324,6 @@ New fields may be any type, but changing the type of existing fields is restrict
 <row>
 <entry><emphasis>Rating</emphasis></entry>
 <entry><emphasis>Choice</emphasis>, <emphasis>Rating</emphasis></entry>
-</row>
-<row>
-<entry><emphasis>Dependent</emphasis></entry>
-<entry><emphasis>Dependent</emphasis></entry>
 </row>
 </tbody>
 </tgroup>
@@ -580,8 +576,8 @@ keyboard to skip to the next entry that starts with that letter.
 </tip>
 
 <tip>
-<para>You can use Dependent Fields to combine multiple separated fields
-into a single field. Just select the type Dependent and use a description
+<para>You can use derived values to combine values from multiple fields
+into a single value. Just check the derived value box and use a value template
 similar to "<userinput>Value: %{fielda}%{fieldb}</userinput>" where %{...} gets replaced with the
 appropriate field value. This is useful to collect multiple values in a
 single field, &eg; for better grouping, and to combine fields of different

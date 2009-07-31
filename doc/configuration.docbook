@@ -253,7 +253,7 @@ that to a certain number.
 The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; comes with
 several preset configurations for major libraries, or you can specify the connection information manually.</para>
 
-<para>&appname; 
+<para>&appname;
 is able to read data in the <acronym>MODS</acronym>, <acronym>USMARC</acronym>/<acronym>MARC21</acronym>, or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
 In addition, there is limited support for the <acronym>GRS-1</acronym> format.
 </para>
@@ -367,7 +367,7 @@ use the <link linkend="file-format">default &appname; &XML; format</link>, but i
 </para>
 
 <para>
-For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <emphasis><link linkend="dependent">Dependent</link></emphasis> fields.
+For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <link linkend="derived">derived value</link> fields.
 </para>
 </sect2>
 

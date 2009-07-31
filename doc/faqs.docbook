@@ -71,8 +71,8 @@ separating each value.</para>
  file, and the easiest way to change the appearance of the printout is
  to modify the &CSS; in the top portion. Feel free to email me with questions. Any alternate &xslt; printing files will be available on <ulink
  url="&homepage;">the &appname; website</ulink>.</para>
- 
-<para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy 
+
+<para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy
 <filename>tellico-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>tellico-common.xsl</filename> file or copy the common file as well.
 </para>
 </answer>
@@ -190,7 +190,7 @@ wrong?</para></question>
 <answer>
 <para>&appname; uses the <emphasis>bibtex</emphasis> property to know how to export
  bibtex fields. If you want to add additional fields to export, such
- as an abstract, open up the <interface>Collection Fields Dialog</interface>, and click the <guibutton>Extended
+ as an abstract, open up the <interface>Collection Fields Dialog</interface>, and click the <guibutton>Set
  Properties</guibutton> button. Add a <emphasis>bibtex</emphasis> property with value
  <emphasis>abstract</emphasis>. Then, when you export to bibtex or bibtexml, that
  property will be used for the bibtex field name.</para>
