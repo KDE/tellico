@@ -72,7 +72,7 @@ Collection::~Collection() {
 void Collection::init() {
   m_id = getID();
   Data::FieldPtr field(new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number));
-  field->setCategory(i18n("Personal"));
+  field->setCategory(i18n("General"));
   field->setDescription(QLatin1String("%{_id}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatFlag(Field::FormatNone);
