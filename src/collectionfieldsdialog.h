@@ -37,11 +37,13 @@ class KListWidget;
 class QRadioButton;
 class QCheckBox;
 class QPainter;
-class QStackedWidget;
 
 namespace Tellico {
   namespace Data {
     class Collection;
+  }
+  namespace GUI {
+    class ComboBox;
   }
 
 class FieldListItem;
@@ -89,6 +91,7 @@ private:
   bool checkValues();
   FieldListItem* findItem(Data::FieldPtr field);
   QStringList newTypesAllowed(int type);
+  void populate(Data::FieldPtr field);
 
   Data::CollPtr m_coll;
   Data::CollPtr m_defaultCollection;
@@ -109,17 +112,14 @@ private:
   KLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
   KComboBox* m_catCombo;
-  QStackedWidget* m_descLabelStack;
   KLineEdit* m_descEdit;
+  KLineEdit* m_derivedEdit;
   KLineEdit* m_defaultEdit;
   QCheckBox* m_derived;
   KLineEdit* m_allowEdit;
   KPushButton* m_btnExtended;
 
-  QRadioButton* m_formatNone;
-  QRadioButton* m_formatPlain;
-  QRadioButton* m_formatTitle;
-  QRadioButton* m_formatName;
+  GUI::ComboBox* m_formatCombo;
   QCheckBox* m_complete;
   QCheckBox* m_multiple;
   QCheckBox* m_grouped;

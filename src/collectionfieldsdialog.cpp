@@ -28,13 +28,13 @@
 #include "collectionfactory.h"
 #include "gui/listwidgetitem.h"
 #include "gui/stringmapdialog.h"
+#include "gui/combobox.h"
 #include "tellico_kernel.h"
 #include "translators/tellico_xml.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
-#include <kcombobox.h>
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
@@ -52,7 +52,6 @@
 #include <QTimer>
 #include <QHBoxLayout>
 #include <QGridLayout>
-#include <QStackedWidget>
 
 using Tellico::FieldListItem;
 using Tellico::CollectionFieldsDialog;
@@ -171,7 +170,6 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats += i18n("An <i>Image</i> field holds a picture. ");
   whats += i18n("A <i>Date</i> field can be used for values with a day, month, and year. ");
   whats += i18n("A <i>Rating</i> field uses stars to show a rating number. ");
-  whats += i18n("A <i>Read Only</i> is for internal values, possibly useful for import and export. ");
   whats += QLatin1String("</qt>");
   label->setWhatsThis(whats);
   m_typeCombo->setWhatsThis(whats);
@@ -202,46 +200,65 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_catCombo->setDuplicatesEnabled(false);
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  m_descLabelStack = new QStackedWidget(grid);
-  layout->addWidget(m_descLabelStack, ++row, 0);
-  label = new QLabel(i18n("Description:"), m_descLabelStack);
-  m_descLabelStack->addWidget(label);
-  label = new QLabel(i18n("Value template:"), m_descLabelStack);
-  m_descLabelStack->addWidget(label);
-  m_descLabelStack->setCurrentIndex(0);
+  m_btnExtended = new KPushButton(i18n("Set &properties..."), grid);
+  m_btnExtended->setIcon(KIcon(QLatin1String("bookmarks")));
+  layout->addWidget(m_btnExtended, row, 2, 1, 2);
+  label->setBuddy(m_btnExtended);
+  whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");
+  label->setWhatsThis(whats);
+  m_btnExtended->setWhatsThis(whats);
+  connect(m_btnExtended, SIGNAL(clicked()), SLOT(slotShowExtendedProperties()));
 
+  label = new QLabel(i18n("Description:"), grid);
+  layout->addWidget(label, ++row, 0);
   m_descEdit = new KLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
-  layout->addWidget(m_descEdit, row, 1);
+  layout->addWidget(m_descEdit, row, 1, 1, 3);
   label->setBuddy(m_descEdit);
-  /* TRANSLATORS: Do not translate %{year} and %{title}. */
-  whats = i18n("The description is a useful reminder of what information is contained in the "
-               "field. For fields whi use derived values, the description is a format string such as "
-               "\"%{year} %{title}\" where the named fields get substituted in the string.");
+
+  whats = i18n("The description is a useful reminder of what information is contained in the field.");
   label->setWhatsThis(whats);
   m_descEdit->setWhatsThis(whats);
   connect(m_descEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  m_derived = new QCheckBox(i18n("Use derived value"), grid);
-  m_derived->setWhatsThis(i18n("Derived values are formed from the values of other fields according to the value template."));
-  layout->addWidget(m_derived, row, 2, 1, 2);
-  connect(m_derived, SIGNAL(clicked(bool)), SLOT(slotDerivedChecked(bool)));
-  connect(m_derived, SIGNAL(clicked()), SLOT(slotModified()));
+  QGroupBox* valueGroup = new QGroupBox(i18n("Value Options"), vbox);
+  QGridLayout* valueLayout = new QGridLayout(valueGroup);
+  int valueRow = -1;
 
-  label = new QLabel(i18n("&Default value:"), grid);
-  layout->addWidget(label, ++row, 0);
-  m_defaultEdit = new KLineEdit(grid);
-  layout->addWidget(m_defaultEdit, row, 1, 1, 3);
+  label = new QLabel(i18n("&Default value:"), valueGroup);
+  valueLayout->addWidget(label, ++valueRow, 0);
+  m_defaultEdit = new KLineEdit(valueGroup);
+  valueLayout->addWidget(m_defaultEdit, valueRow, 1, 1, 3);
   label->setBuddy(m_defaultEdit);
   whats = i18n("<qt>A default value can be set for new entries.</qt>");
   label->setWhatsThis(whats);
   m_defaultEdit->setWhatsThis(whats);
   connect(m_defaultEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("A&llowed values:"), grid);
-  layout->addWidget(label, ++row, 0);
-  m_allowEdit = new KLineEdit(grid);
-  layout->addWidget(m_allowEdit, row, 1, 1, 3);
+  label = new QLabel(i18n("Value template:"), valueGroup);
+  valueLayout->addWidget(label, ++valueRow, 0);
+  m_derivedEdit = new KLineEdit(valueGroup);
+  m_derivedEdit->setMinimumWidth(150);
+  valueLayout->addWidget(m_derivedEdit, valueRow, 1);
+  label->setBuddy(m_derivedEdit);
+
+  /* TRANSLATORS: Do not translate %{year} and %{title}. */
+  whats = i18n("Derived values are formed from the values of other fields according to the value template. "
+               "Named fields, such as \"%{year} %{title}\", get substituted in the value.");
+  label->setWhatsThis(whats);
+  m_derivedEdit->setWhatsThis(whats);
+  connect(m_derivedEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+
+  m_derived = new QCheckBox(i18n("Use derived value"), valueGroup);
+  m_derived->setWhatsThis(whats);
+  valueLayout->addWidget(m_derived, valueRow, 2, 1, 2);
+  connect(m_derived, SIGNAL(clicked(bool)), SLOT(slotDerivedChecked(bool)));
+  connect(m_derived, SIGNAL(clicked()), SLOT(slotModified()));
+
+  label = new QLabel(i18n("A&llowed values:"), valueGroup);
+  valueLayout->addWidget(label, ++valueRow, 0);
+  m_allowEdit = new KLineEdit(valueGroup);
+  valueLayout->addWidget(m_allowEdit, valueRow, 1, 1, 3);
   label->setBuddy(m_allowEdit);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "
                "placed in a combo box. The possible values have to be separated by a semi-colon, "
@@ -250,41 +267,17 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_allowEdit->setWhatsThis(whats);
   connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
-  label = new QLabel(i18n("Extended &properties:"), grid);
-  layout->addWidget(label, ++row, 0);
-  m_btnExtended = new KPushButton(i18n("&Set..."), grid);
-  m_btnExtended->setIcon(KIcon(QLatin1String("bookmarks")));
-  layout->addWidget(m_btnExtended, row, 1);
-  label->setBuddy(m_btnExtended);
-  whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");
-  label->setWhatsThis(whats);
-  m_btnExtended->setWhatsThis(whats);
-  connect(m_btnExtended, SIGNAL(clicked()), SLOT(slotShowExtendedProperties()));
+  label = new QLabel(i18n("Format options:"), valueGroup);
+  valueLayout->addWidget(label, ++valueRow, 0);
+  m_formatCombo = new GUI::ComboBox(valueGroup);
+  valueLayout->addWidget(m_formatCombo, valueRow, 1, 1, 3);
+  label->setBuddy(m_formatCombo);
 
-  QGroupBox* formatGroup = new QGroupBox(i18n("Format Options"), vbox);
-  QBoxLayout* formatLayout = new QVBoxLayout(formatGroup);
-
-  m_formatNone = new QRadioButton(i18n("No formatting"), formatGroup);
-  m_formatNone->setWhatsThis(i18n("This option prevents the field from ever being "
-                                  "automatically formatted or capitalized."));
-  m_formatPlain = new QRadioButton(i18n("Allow auto-capitalization only"), formatGroup);
-  m_formatPlain->setWhatsThis(i18n("This option allows the field to be capitalized, but "
-                                   "not specially formatted."));
-  m_formatTitle = new QRadioButton(i18n("Format as a title"), formatGroup);
-  m_formatTitle->setWhatsThis(i18n("This option capitalizes and formats the field as a "
-                                   "title, but only if those options are globally set."));
-  m_formatName = new QRadioButton(i18n("Format as a name"), formatGroup);
-  m_formatName->setWhatsThis(i18n("This option capitalizes and formats the field as a "
-                                  "name, but only if those options are globally set."));
-  formatLayout->addWidget(m_formatNone);
-  formatLayout->addWidget(m_formatPlain);
-  formatLayout->addWidget(m_formatTitle);
-  formatLayout->addWidget(m_formatName);
-
-  connect(m_formatNone, SIGNAL(clicked()), SLOT(slotModified()));
-  connect(m_formatPlain, SIGNAL(clicked()), SLOT(slotModified()));
-  connect(m_formatTitle, SIGNAL(clicked()), SLOT(slotModified()));
-  connect(m_formatName, SIGNAL(clicked()), SLOT(slotModified()));
+  m_formatCombo->addItem(i18n("No formatting"), Data::Field::FormatNone);
+  m_formatCombo->addItem(i18n("Allow auto-capitalization only"), Data::Field::FormatPlain);
+  m_formatCombo->addItem(i18n("Format as a title"), Data::Field::FormatTitle);
+  m_formatCombo->addItem(i18n("Format as a name"), Data::Field::FormatName);
+  connect(m_formatCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotModified()));
 
   QGroupBox* optionsGroup = new QGroupBox(i18n("Field Options"), vbox);
   QBoxLayout* optionsLayout = new QVBoxLayout(optionsGroup);
@@ -524,16 +517,13 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
 
   // paragraphs, tables, and images are their own category
   bool isCategory = (type == Data::Field::Para || type == Data::Field::Table ||
-                     type == Data::Field::Table2 || type == Data::Field::Image);
+                     type == Data::Field::Image);
   m_catCombo->setEnabled(!isCategory);
 
   // formatting is only applicable when the type is simple text or a table
-  bool isText = (type == Data::Field::Line || type == Data::Field::Table ||
-                 type == Data::Field::Table2);
+  bool isText = (type == Data::Field::Line || type == Data::Field::Table);
   // formatNone is the default
-  m_formatPlain->setEnabled(isText);
-  m_formatName->setEnabled(isText);
-  m_formatTitle->setEnabled(isText);
+  m_formatCombo->setEnabled(isText);
 
   // multiple is only applicable for simple text and number
   isText = (type == Data::Field::Line || type == Data::Field::Number);
@@ -581,8 +571,6 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
     return;
   }
 
-  m_titleEdit->setText(field->title());
-
   // type is limited to certain types, unless it's a new field
   m_typeCombo->clear();
   if(m_newFields.contains(field)) {
@@ -590,57 +578,11 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   } else {
     m_typeCombo->addItems(newTypesAllowed(field->type()));
   }
-  // if the current name is not there, then this will change the list!
-  const Data::Field::FieldMap& fieldMap = Data::Field::typeMap();
-  int idx = m_typeCombo->findText(fieldMap[field->type()]);
-  m_typeCombo->setCurrentIndex(idx);
-  slotTypeChanged(fieldMap[field->type()]); // just setting the text doesn't emit the activated signal
-
-  if(field->type() == Data::Field::Choice) {
-    m_allowEdit->setText(field->allowed().join(QLatin1String("; ")));
-  } else {
-    m_allowEdit->clear();
-  }
-
-  idx = m_catCombo->findText(field->category());
-  m_catCombo->setCurrentIndex(idx); // have to do this here
-  m_descEdit->setText(field->description());
-  m_defaultEdit->setText(field->defaultValue());
-  m_derived->setChecked(field->hasFlag(Data::Field::Derived));
-  slotDerivedChecked(m_derived->isChecked());
-
-  switch(field->formatFlag()) {
-    case Data::Field::FormatNone:
-    case Data::Field::FormatDate: // as yet unimplemented
-      m_formatNone->setChecked(true);
-      break;
-
-    case Data::Field::FormatPlain:
-      m_formatPlain->setChecked(true);
-      break;
-
-    case Data::Field::FormatTitle:
-      m_formatTitle->setChecked(true);
-      break;
-
-    case Data::Field::FormatName:
-      m_formatName->setChecked(true);
-      break;
-
-    default:
-      myWarning() << "no format type!";
-      break;
-  }
-
-  m_complete->setChecked(field->hasFlag(Data::Field::AllowCompletion));
-  m_multiple->setChecked(field->hasFlag(Data::Field::AllowMultiple));
-  m_grouped->setChecked(field->hasFlag(Data::Field::AllowGrouped));
-
-  m_btnDelete->setEnabled(!field->hasFlag(Data::Field::NoDelete));
+  populate(field);
 
   // default button is enabled only if default collection contains the field
   if(m_defaultCollection) {
-    bool hasField = m_defaultCollection->hasField(field->name());
+    const bool hasField = m_defaultCollection->hasField(field->name());
     button(Default)->setEnabled(hasField);
   }
 
@@ -703,15 +645,16 @@ void CollectionFieldsDialog::updateField() {
     m_catCombo->setCurrentItem(category, true); // if it doesn't exist, it's added
   }
 
-  field->setDescription(m_descEdit->text());
+  if(m_derived->isChecked()) {
+    // description is the derived template
+    field->setDescription(m_derivedEdit->text());
+  } else {
+    field->setDescription(m_descEdit->text());
+  }
   field->setDefaultValue(m_defaultEdit->text());
 
-  if(m_formatTitle->isChecked()) {
-    field->setFormatFlag(Data::Field::FormatTitle);
-  } else if(m_formatName->isChecked()) {
-    field->setFormatFlag(Data::Field::FormatName);
-  } else if(m_formatPlain->isChecked()) {
-    field->setFormatFlag(Data::Field::FormatPlain);
+  if(m_formatCombo->isEnabled()) {
+    field->setFormatFlag(static_cast<Data::Field::FormatFlag>(m_formatCombo->currentData().toInt()));
   } else {
     field->setFormatFlag(Data::Field::FormatNone);
   }
@@ -810,56 +753,7 @@ void CollectionFieldsDialog::slotDefault() {
 
   // now update all values with default
   m_updatingValues = true;
-  m_titleEdit->setText(defaultField->title());
-
-  const Data::Field::FieldMap& fieldMap = Data::Field::typeMap();
-  int idx = m_typeCombo->findText(fieldMap[defaultField->type()]);
-  m_typeCombo->setCurrentIndex(idx);
-  slotTypeChanged(fieldMap[defaultField->type()]); // just setting the text doesn't emit the activated signal
-
-  if(defaultField->type() == Data::Field::Choice) {
-    m_allowEdit->setText(defaultField->allowed().join(QLatin1String("; ")));
-  } else {
-    m_allowEdit->clear();
-  }
-
-  idx = m_catCombo->findText(defaultField->category());
-  m_catCombo->setCurrentIndex(idx); // have to do this here
-  m_descEdit->setText(defaultField->description());
-  m_defaultEdit->setText(defaultField->defaultValue());
-  m_derived->setChecked(defaultField->hasFlag(Data::Field::Derived));
-
-  switch(defaultField->formatFlag()) {
-    case Data::Field::FormatNone:
-    case Data::Field::FormatDate:
-      m_formatNone->setChecked(true);
-      break;
-
-    case Data::Field::FormatPlain:
-      m_formatPlain->setChecked(true);
-      break;
-
-    case Data::Field::FormatTitle:
-      m_formatTitle->setChecked(true);
-      break;
-
-    case Data::Field::FormatName:
-      m_formatName->setChecked(true);
-      break;
-
-    default:
-      break;
-  }
-
-  m_complete->setChecked(defaultField->hasFlag(Data::Field::AllowCompletion));
-  m_multiple->setChecked(defaultField->hasFlag(Data::Field::AllowMultiple));
-  m_grouped->setChecked(defaultField->hasFlag(Data::Field::AllowGrouped));
-
-  m_btnDelete->setEnabled(!defaultField->hasFlag(Data::Field::NoDelete));
-
-//  m_titleEdit->setFocus();
-//  m_titleEdit->selectAll();
-
+  populate(defaultField);
   m_updatingValues = false;
   slotModified();
 }
@@ -933,9 +827,8 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
 }
 
 void CollectionFieldsDialog::slotDerivedChecked(bool checked_) {
-  // first label is description, second is template
-  // so if the derived button is checked show index 1
-  m_descLabelStack->setCurrentIndex(checked_ ? 1 : 0);
+  m_descEdit->setEnabled(!checked_);
+  m_derivedEdit->setEnabled(checked_);
 }
 
 bool CollectionFieldsDialog::checkValues() {
@@ -1005,6 +898,41 @@ bool CollectionFieldsDialog::checkValues() {
   }
 
   return true;
+}
+
+void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
+  m_titleEdit->setText(field_->title());
+
+  // if the current name is not there, then this will change the list!
+  const Data::Field::FieldMap& fieldMap = Data::Field::typeMap();
+  int idx = m_typeCombo->findText(fieldMap[field_->type()]);
+  m_typeCombo->setCurrentIndex(idx);
+  slotTypeChanged(fieldMap[field_->type()]); // just setting the text doesn't emit the activated signal
+
+  if(field_->type() == Data::Field::Choice) {
+    m_allowEdit->setText(field_->allowed().join(QLatin1String("; ")));
+  } else {
+    m_allowEdit->clear();
+  }
+
+  idx = m_catCombo->findText(field_->category());
+  m_catCombo->setCurrentIndex(idx); // have to do this here
+  if(field_->hasFlag(Data::Field::Derived)) {
+    m_derivedEdit->setText(field_->description());
+  } else {
+    m_descEdit->setText(field_->description());
+  }
+  m_derived->setChecked(field_->hasFlag(Data::Field::Derived));
+  slotDerivedChecked(m_derived->isChecked());
+  m_defaultEdit->setText(field_->defaultValue());
+
+  m_formatCombo->setCurrentData(field_->formatFlag());
+
+  m_complete->setChecked(field_->hasFlag(Data::Field::AllowCompletion));
+  m_multiple->setChecked(field_->hasFlag(Data::Field::AllowMultiple));
+  m_grouped->setChecked(field_->hasFlag(Data::Field::AllowGrouped));
+
+  m_btnDelete->setEnabled(!field_->hasFlag(Data::Field::NoDelete));
 }
 
 // only certain type changes are allowed
