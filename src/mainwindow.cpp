@@ -476,6 +476,7 @@ void MainWindow::initActions() {
                                              this, SLOT(slotNewEntry()));
   m_newEntry->setText(i18n("&New Entry..."));
   m_newEntry->setIcon(KIcon(QLatin1String("document-new")));
+  m_newEntry->setIconText(i18n("New"));
   m_newEntry->setShortcut(Qt::CTRL + Qt::Key_N);
   m_newEntry->setToolTip(i18n("Create a new entry"));
 
@@ -570,6 +571,7 @@ void MainWindow::initActions() {
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
   m_updateEntryMenu->setIcon(KIcon(QLatin1String("document-export")));
+  m_updateEntryMenu->setIconText(i18nc("Update Entry", "Update"));
   m_updateEntryMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("coll_update_entry"), m_updateEntryMenu);
 
