@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", 0, ki18n("Tellico"),
                        version, ki18n(description), KAboutData::License_GPL_V2,
                        ki18n("(c) 2001-2009, Robby Stephenson"), KLocalizedString(),
-                       "http://tellico-project.org", "tellico-users@forge.novell.com");
+                       "http://tellico-project.org", "tellico-users@kde.org");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
   aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
   aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString());
