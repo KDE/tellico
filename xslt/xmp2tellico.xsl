@@ -42,8 +42,8 @@
 <xsl:variable name="months-top" select="document('')/*/m:months"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <!-- for lower-casing -->
 <xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
@@ -53,7 +53,7 @@
 <xsl:template match="text()|@*"></xsl:template>
 
 <xsl:template match="/">
- <tellico syntaxVersion="9">
+ <tellico syntaxVersion="11">
   <collection title="XMP Conversion" type="5">
    <fields>
     <field name="_default"/>
@@ -103,7 +103,7 @@
 
 <xsl:template match="dc:identifier">
  <!-- assume DOI requires a period and a slash -->
- <xsl:if test="not(//jabref:doi) and 
+ <xsl:if test="not(//jabref:doi) and
                (contains(.,'.') and contains(.,'/'))">
   <doi><xsl:value-of select="normalize-space(.)"/></doi>
  </xsl:if>

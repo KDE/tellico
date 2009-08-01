@@ -35,7 +35,7 @@
 </xsl:template>
 
 <xsl:template match="tc:tellico">
- <xsl:if test="@syntaxVersion &lt; '10'">
+ <xsl:if test="@syntaxVersion &lt; '11'">
   <xsl:message>
    <xsl:text>This stylesheet was designed for Tellico DTD version </xsl:text>
    <xsl:value-of select="'7'"/>

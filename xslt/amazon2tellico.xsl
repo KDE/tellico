@@ -19,8 +19,8 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 
 <!-- need to figure out what type of collection -->
@@ -57,7 +57,7 @@
 <xsl:template match="text()|@*"></xsl:template>
 
 <xsl:template match="/">
- <tellico syntaxVersion="10">
+ <tellico syntaxVersion="11">
   <collection title="Amazon Import">
    <xsl:attribute name="type">
     <xsl:choose>
@@ -217,7 +217,7 @@
      <xsl:for-each select="aws:Author">
       <author>
        <xsl:value-of select="."/>
-      </author>   
+      </author>
      </xsl:for-each>
     </authors>
 
@@ -329,7 +329,7 @@
      <xsl:for-each select="aws:Director">
       <director>
        <xsl:value-of select="."/>
-      </director>   
+      </director>
      </xsl:for-each>
     </directors>
 
@@ -385,7 +385,7 @@
       <xsl:otherwise>
        <xsl:text>Color</xsl:text>
       </xsl:otherwise>
-     </xsl:choose>   
+     </xsl:choose>
     </color>
 
     <aspect-ratios>
@@ -508,7 +508,7 @@
       </xsl:when>
       <xsl:otherwise>
        <xsl:value-of select="aws:ESRBAgeRating"/>
-      </xsl:otherwise>    
+      </xsl:otherwise>
      </xsl:choose>
     </certification>
    </xsl:when>
@@ -555,7 +555,7 @@
   <xsl:when test="string-length($firstNode)">
    <xsl:choose>
     <xsl:when test="string-length($tailNodes)">
-     <xsl:value-of select="concat($tailNodes, '/', $firstNode)"/>     
+     <xsl:value-of select="concat($tailNodes, '/', $firstNode)"/>
     </xsl:when>
     <xsl:otherwise>
      <xsl:value-of select="$firstNode"/>
@@ -621,7 +621,7 @@
   <xsl:otherwise>
    <xsl:value-of select="$value"/>
   </xsl:otherwise>
- </xsl:choose> 
+ </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>

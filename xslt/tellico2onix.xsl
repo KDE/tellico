@@ -32,7 +32,7 @@
 <!-- sent date -->
 <xsl:param name="sentDate"/>
 <xsl:param name="version"/>
- 
+
 <xsl:template match="/">
  <xsl:apply-templates select="tc:tellico"/>
 </xsl:template>
@@ -40,7 +40,7 @@
 <xsl:template match="tc:tellico">
  <!-- This stylesheet is designed for Tellico document syntax version 10 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'10'"/>
+  <xsl:with-param name="this-version" select="'11'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -120,9 +120,9 @@
        <xsl:text>03</xsl:text>
       </xsl:when>
      </xsl:choose>
-    </MediaFileFormatCode> 
+    </MediaFileFormatCode>
     <MediaFileLinkTypeCode>06</MediaFileLinkTypeCode>
-    <MediaFileLink> 
+    <MediaFileLink>
      <xsl:text>images/</xsl:text>
      <xsl:value-of select="tc:cover"/>
     </MediaFileLink>

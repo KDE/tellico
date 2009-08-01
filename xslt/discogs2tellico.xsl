@@ -19,11 +19,11 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="10">
+ <tellico syntaxVersion="11">
   <collection title="Discogs API" type="4"> <!-- 4 is music -->
    <fields>
     <field name="_default"/>
@@ -34,7 +34,7 @@
     <xsl:if test="contains(resp/release/extraartists/artist/role, 'Producer')">
      <field flags="7" title="Producer" category="General" format="2" type="1" name="producer" i18n="true"/>
     </xsl:if>
-    
+
    </fields>
    <xsl:apply-templates select="/resp/searchresults/result[@type='release'] | resp/artist | resp/release"/>
   </collection>
@@ -46,27 +46,27 @@
   <title>
    <xsl:value-of select="substring-after(title,' - ')"/>
   </title>
-  
+
   <artists>
    <artist>
     <xsl:value-of select="substring-before(title,' - ')"/>
    </artist>
   </artists>
-  
+
   <labels>
    <label>
     <xsl:value-of select="substring-before(substring-after(normalize-space(summary),'Label: '),' Catalog#:')"/>
    </label>
   </labels>
-  
+
   <comments>
    <xsl:value-of select="summary"/>
   </comments>
-  
+
   <discogs>
    <xsl:value-of select="uri"/>
   </discogs>
-  
+
   <discogs-id>
    <xsl:variable name="tokens" select="str:tokenize(uri, '/')"/>
    <xsl:value-of select="$tokens[count($tokens)]"/>
@@ -80,26 +80,26 @@
    <title>
     <xsl:value-of select="title"/>
    </title>
-   
+
    <artists>
     <artist>
      <xsl:value-of select="../../name"/>
     </artist>
    </artists>
-   
+
    <labels>
     <label>
      <xsl:value-of select="label"/>
     </label>
    </labels>
-   
+
    <discogs-id>
     <xsl:value-of select="@id"/>
    </discogs-id>
-   
+
   </entry>
  </xsl:for-each>
- 
+
 </xsl:template>
 
 <xsl:template match="resp/release">
@@ -107,7 +107,7 @@
   <title>
    <xsl:value-of select="title"/>
   </title>
-  
+
   <artists>
    <xsl:for-each select="artists/artist">
     <artist>
@@ -115,7 +115,7 @@
     </artist>
    </xsl:for-each>
   </artists>
-  
+
   <labels>
    <xsl:for-each select="labels/label">
     <label>
@@ -123,7 +123,7 @@
     </label>
    </xsl:for-each>
   </labels>
-  
+
   <genres i18n="true">
    <xsl:for-each select="genres/genre">
     <genre>
@@ -131,7 +131,7 @@
     </genre>
    </xsl:for-each>
   </genres>
-  
+
   <keywords i18n="true">
    <xsl:for-each select="styles/style">
     <keyword>
@@ -139,15 +139,15 @@
     </keyword>
    </xsl:for-each>
   </keywords>
-  
+
   <discogs-id>
    <xsl:value-of select="@id"/>
   </discogs-id>
-  
+
   <comments>
    <xsl:value-of select="notes"/>
   </comments>
-  
+
   <medium i18n="true">
    <xsl:variable name="medium" select="formats/format[1]/@name"/>
    <xsl:choose>
@@ -159,11 +159,11 @@
     </xsl:otherwise>
    </xsl:choose>
   </medium>
-  
+
   <year>
    <xsl:value-of select="substring(released,0,5)"/>
   </year>
-  
+
   <tracks>
    <xsl:for-each select="tracklist/track">
     <xsl:sort select="position" data-type="number"/>
@@ -174,7 +174,7 @@
     </track>
    </xsl:for-each>
   </tracks>
-  
+
   <producers>
    <xsl:for-each select="extraartists/artist[contains(role, 'Producer')]">
     <producer>
@@ -182,13 +182,13 @@
     </producer>
    </xsl:for-each>
   </producers>
-  
+
   <nationalitys>
    <nationality>
     <xsl:value-of select="country"/>
    </nationality>
   </nationalitys>
-  
+
   <cover>
    <xsl:for-each select="images/image">
     <xsl:sort select="type"/> <!-- 'primary' before 'secondary' -->
@@ -199,7 +199,7 @@
     </xsl:if>
    </xsl:for-each>
   </cover>
-  
+
  </entry>
 </xsl:template>
 

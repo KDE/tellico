@@ -37,11 +37,11 @@
 <xsl:variable name="months-top" select="document('')/*/m:months"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="10">
+ <tellico syntaxVersion="11">
   <collection title="PubMed Import" type="5">
    <fields>
     <field name="_default"/>
@@ -68,11 +68,11 @@
   </entry-type>
 
   <volume>
-   <xsl:value-of select="Article/Journal/JournalIssue/Volume"/>  
+   <xsl:value-of select="Article/Journal/JournalIssue/Volume"/>
   </volume>
 
   <number>
-   <xsl:value-of select="Article/Journal/JournalIssue/Issue"/>  
+   <xsl:value-of select="Article/Journal/JournalIssue/Issue"/>
   </number>
 
   <xsl:variable name="year">

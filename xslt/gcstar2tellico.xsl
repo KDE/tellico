@@ -19,8 +19,8 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V9.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v9/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <xsl:variable name="coll">
  <xsl:choose>
@@ -49,7 +49,7 @@
 </xsl:variable>
 
 <xsl:template match="/">
- <tc:tellico syntaxVersion="9">
+ <tc:tellico syntaxVersion="11">
   <xsl:apply-templates select="collection"/>
  </tc:tellico>
 </xsl:template>
@@ -134,7 +134,7 @@
    </xsl:when>
    <xsl:otherwise>
     <xsl:value-of select="local-name()"/>
-   </xsl:otherwise> 
+   </xsl:otherwise>
   </xsl:choose>
  </xsl:variable>
 
@@ -484,7 +484,7 @@
 
 <!-- coins -->
 <xsl:template match="condition">
-<!-- by default, Tellico includes 
+<!-- by default, Tellico includes
         "Proof-65,Proof-60,Mint State-65,Mint State-60,"
         "Almost Uncirculated-55,Almost Uncirculated-50,"
         "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
@@ -526,7 +526,7 @@
 
 <xsl:template name="year">
  <xsl:param name="value"/>
- <!-- want to find a 4-digit number to treat as the year --> 
+ <!-- want to find a 4-digit number to treat as the year -->
  <xsl:variable name="nondigits" select="translate($value,'0123456789','')"/>
   <xsl:choose>
 

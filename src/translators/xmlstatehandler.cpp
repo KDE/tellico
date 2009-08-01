@@ -232,6 +232,16 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
     d->coll->setTitle(d->collTitle);
   }
 
+  // add a default field for ID
+  if(d->syntaxVersion < 11) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Data::Field::Number));
+    field->setCategory(i18n("General"));
+    field->setDescription(QLatin1String("%{@id}"));
+    field->setFlags(Data::Field::Derived);
+    field->setFormatFlag(Data::Field::FormatNone);
+    d->coll->addField(field);
+  }
+  // now add all the new fields
   d->coll->addFields(d->fields);
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
@@ -329,12 +339,6 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 
   if(d->syntaxVersion < 5 && atts_.index(QLatin1String("bibtex-field")) > -1) {
     field->setProperty(QLatin1String("bibtex"), attValue(atts_, "bibtex-field"));
-  }
-
-  // Table2 is deprecated
-  if(type == Data::Field::Table2) {
-    field->setType(Data::Field::Table);
-    field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   }
 
   // for syntax 8, rating fields got their own type

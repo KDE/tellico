@@ -54,8 +54,8 @@
 <xsl:variable name="langs-top" select="document('')/*/l:langs"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <!-- for now, it's a bibtex collection if it has an identifier,
      book collection if not -->
@@ -78,7 +78,7 @@
 <xsl:template match="text()|@*"></xsl:template>
 
 <xsl:template match="/">
- <tellico syntaxVersion="10">
+ <tellico syntaxVersion="11">
   <collection title="MODS Import">
    <xsl:attribute name="type">
     <xsl:choose>
@@ -121,7 +121,7 @@
 <!-- for now, go the route of bibliox, and assume only text records
      with an originInfo/publisher or identifier[isbn] elements are actually books -->
 <!-- Changed in Tellico 1.1, don't be so strict about the text thing, not every library
-     includes that in the mods output, so just check for publisher 
+     includes that in the mods output, so just check for publisher
      Changed in Tellico 1.2.9, allow anything that has typeOfResource='text'
      //mods:mods[(mods:typeOfResource='text' and -->
    <xsl:for-each select=".//mods:mods[ mods:typeOfResource='text' or

@@ -61,7 +61,7 @@
 <xsl:template match="tc:tellico">
  <!-- This stylesheet is designed for Tellico document syntax version 10 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'10'"/>
+  <xsl:with-param name="this-version" select="'11'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -129,7 +129,7 @@
      work on the tr element, so have to put it on the th element */
    tr.category th {
         background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
-        background-repeat: repeat-x; 
+        background-repeat: repeat-x;
    }
    th {
         font-weight: bold;

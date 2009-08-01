@@ -24,14 +24,14 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <!-- by default, don't output text -->
 <xsl:template match="text()" />
 
 <xsl:template match="/">
- <tellico syntaxVersion="10">
+ <tellico syntaxVersion="11">
   <!-- always bibliography -->
   <collection title="CrossRef Import" type="5">
    <fields>

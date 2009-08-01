@@ -63,7 +63,7 @@
 <xsl:template match="tc:tellico">
  <!-- This stylesheet is designed for Tellico document syntax version 10 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'10'"/>
+  <xsl:with-param name="this-version" select="'11'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -90,7 +90,7 @@
         color: <xsl:value-of select="$color1"/>;
         background-color: <xsl:value-of select="$color2"/>;
         background-image: url(<xsl:value-of select="concat($imgdir, 'gradient_header.png')"/>);
-        background-repeat: repeat-x; 
+        background-repeat: repeat-x;
         font-size: 1.8em;
         text-align: left;
         padding: .1em .5em;
@@ -187,7 +187,7 @@
    <xsl:if test="$entry/*[local-name(.) = $images[1]/@name]">
     <td valign="top" rowspan="2">
      <xsl:for-each select="$images">
-      
+
       <!-- images will never be multiple, so no need to check for that -->
       <!-- find the value of the image field in the entry -->
       <xsl:variable name="image" select="$entry/*[local-name(.) = current()/@name]"/>
@@ -472,7 +472,7 @@
       </xsl:choose>
      </tr>
     </xsl:for-each>
-   
+
    <!-- if it has multiple columns,
         and the final one has a ':', add the time together -->
    <!-- it should still work if the first row itself doesn't contain a ':' -->

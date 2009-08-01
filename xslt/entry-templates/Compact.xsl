@@ -58,7 +58,7 @@
 <xsl:template match="tc:tellico">
  <!-- This stylesheet is designed for Tellico document syntax version 10 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'10'"/>
+  <xsl:with-param name="this-version" select="'11'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
@@ -273,7 +273,7 @@
           </xsl:otherwise>
          </xsl:choose>
         </xsl:when>
-        
+
         <xsl:otherwise>
          <xsl:call-template name="simple-field-value">
           <xsl:with-param name="entry" select="$entry"/>

@@ -18,13 +18,13 @@
 -->
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
-            doctype-public="-//Robby Stephenson/DTD Tellico V10.0//EN"
-            doctype-system="http://periapsis.org/tellico/dtd/v10/tellico.dtd"/>
+            doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
+            doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <xsl:param name="item-type"/>
 
 <xsl:template match="/">
- <tc:tellico syntaxVersion="10">
+ <tc:tellico syntaxVersion="11">
   <!-- DL libraries can contain mixed types and right now, there's no way to do that in Tellico -->
   <!-- so we're going to limit the export to whatever the type of the first item is -->
   <xsl:variable name="item">

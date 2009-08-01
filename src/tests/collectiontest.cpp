@@ -48,8 +48,9 @@ void CollectionTest::testCollection() {
 
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
-  QCOMPARE(coll.fields().count(), 1);
+  QCOMPARE(coll.fields().count(), 2);
   QVERIFY(coll.hasField(QLatin1String("title")));
+  QVERIFY(coll.hasField(QLatin1String("id")));
   QVERIFY(coll.peopleFields().isEmpty());
   QVERIFY(coll.imageFields().isEmpty());
   QVERIFY(!coll.hasImages());

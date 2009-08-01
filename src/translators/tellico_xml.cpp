@@ -57,8 +57,10 @@ const QString Tellico::XML::dtdBibtexml = QLatin1String("bibtexml.dtd");
  * added file catalog collection.
  *
  * VERSION 10 added the game board collection.
+ *
+ * VERSION 11 remove ReadOnly and Dependent fields, and added apprioriate FieldFlags. An ID field was added by default.
  */
-const uint Tellico::XML::syntaxVersion = 10;
+const uint Tellico::XML::syntaxVersion = 11;
 const QString Tellico::XML::nsTellico = QLatin1String("http://periapsis.org/tellico/");
 
 const QString Tellico::XML::nsBookcase = QLatin1String("http://periapsis.org/bookcase/");

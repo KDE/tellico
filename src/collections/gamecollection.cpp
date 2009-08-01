@@ -46,6 +46,13 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
+  field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
+  field->setCategory(i18n(game_general));
+  field->setDescription(QLatin1String("%{@id}"));
+  field->setFlags(Field::Derived);
+  field->setFormatFlag(Field::FormatNone);
+  list.append(field);
+
   field = new Field(QLatin1String("title"), i18n("Title"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::NoDelete);
