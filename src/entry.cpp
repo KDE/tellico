@@ -320,7 +320,9 @@ QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool 
         if(field) {
           // don't format, just capitalize
           result += entry_->field(field, formatted_);
-        } else if(fieldName == QLatin1String("@id")) {
+        } else if(fieldName == QLatin1String("@id") ||
+                  fieldName == QLatin1String("id")) {
+          // '@id' is the best way to use it, but formerly, we allowed just 'id'
           result += QString::number(entry_->id());
         } else {
           result += format_.mid(pctPos, endPos-pctPos+1);
