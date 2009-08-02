@@ -392,7 +392,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
 
   // add locale code to stylesheet (for sorting)
-  m_handler->addStringParam("lang", KGlobal::locale()->language());
+  m_handler->addStringParam("lang", KGlobal::locale()->language().toLatin1());
 }
 
 void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
