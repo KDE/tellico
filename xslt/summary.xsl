@@ -11,8 +11,7 @@
    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with XML data files
-   from the Tellico application, which can be found at:
-   http://www.periapsis.org/tellico/
+   from the Tellico application, which can be found at http://tellico-project.org
    ================================================================
 -->
 

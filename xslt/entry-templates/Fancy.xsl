@@ -14,7 +14,7 @@
    at http://www.alistapart.com/articles/cssdropshadows/
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
-   application, which can be found at http://www.periapsis.org/tellico/
+   application, which can be found at http://tellico-project.org
    ===================================================================
 -->
 

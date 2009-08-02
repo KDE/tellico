@@ -12,8 +12,7 @@
    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
-   application, which can be found at
-   http://www.periapsis.org/tellico/
+   application, which can be found at http://tellico-project.org
 
    Most of the schema for this spreadsheet was copied from the
    Alexandria application,(C) Laurent Sansonetti, released under

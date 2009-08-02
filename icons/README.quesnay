@@ -43,7 +43,7 @@ Version:	1.0
 
 DESCRIPTION:
 
-"NUVOLA ICONS" FOR TELLICO are a set of icon for Tellico, a collection manager for KDE (http://www.periapsis.org/tellico/).
+"NUVOLA ICONS" FOR TELLICO are a set of icon for Tellico, a collection manager for KDE.
 They are SVG based icons.
 This mean that all icons where designed with a vector graphics
 application and SVG files are available (in the "Scalable" directory).
@@ -56,7 +56,7 @@ Look at the license.txt file.
 
 CONTACT
 
-Virignie Quesnay	
+Virignie Quesnay
 e-mail :		virginie.quesnay [at] free.fr
 ICQ :			8120945
 http:           	http://virginie.quesnay.free.fr

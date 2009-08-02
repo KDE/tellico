@@ -18,7 +18,7 @@
    o Bool and URL fields are assumed to never have multiple values.
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
-   application, which can be found at http://www.periapsis.org/tellico/
+   application, which can be found at http://tellico-project.org
    ===================================================================
 -->
 

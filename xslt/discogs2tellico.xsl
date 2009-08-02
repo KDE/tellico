@@ -13,7 +13,7 @@
                       Roman L. Senn - roman.l.senn@gmail.com
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
-   application, which can be found at http://www.periapsis.org/tellico/
+   application, which can be found at http://tellico-project.org
 
    ===================================================================
 -->
