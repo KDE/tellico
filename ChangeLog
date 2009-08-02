@@ -1,3 +1,10 @@
+2009-08-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated HTML export to use country and language code both for sorting.
+	* Updated Tellico home page URL.
+	* Moved to document syntax 11 for removing Dependent and ReadOnly fields.
+	* Added ID field to each new collection by default.
+
 2009-03-13  Petri Damstén  <damu@iki.fi>
 
 	* Added scanning support to image widget.
