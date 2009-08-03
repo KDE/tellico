@@ -897,14 +897,18 @@ void MainWindow::readOptions() {
   applyMainWindowSettings(mainWindowConfig);
 
   QList<int> splitList = Config::mainSplitterSizes();
-  if(!splitList.empty()) {
-    m_split->setSizes(splitList);
+  if(splitList.empty()) {
+    const int tw = width()/3;
+    splitList << tw << 2*tw;
   }
+  m_split->setSizes(splitList);
 
   splitList = Config::secondarySplitterSizes();
-  if(!splitList.empty()) {
-    m_rightSplit->setSizes(splitList);
+  if(splitList.empty()) {
+    const int th = height()/3;
+    splitList << th << 2*th;
   }
+  m_rightSplit->setSizes(splitList);
 
   m_viewStack->iconView()->setMaxAllowedIconWidth(Config::maxIconSize());
 
