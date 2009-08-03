@@ -119,6 +119,10 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   if(!m_handler || !m_handler->isValid()) {
     setXSLTFile(m_xsltFile);
   }
+  if(!m_handler || !m_handler->isValid()) {
+    myWarning() << "no xslt handler";
+    return;
+  }
 
   m_entry = entry_;
 
