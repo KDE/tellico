@@ -355,9 +355,6 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 // static
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
-#ifdef ENABLE_AMAZON
-  vec.append(Fetcher::Ptr(new AmazonFetcher(AmazonFetcher::US, this)));
-#endif
 #ifdef ENABLE_IMDB
   vec.append(Fetcher::Ptr(new IMDBFetcher(this)));
 #endif
