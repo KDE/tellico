@@ -215,7 +215,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
 
 const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_, CacheDir dir_) {
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
-  Data::Image* img;
+  Data::Image* img = 0;
   switch(dir_) {
     case DataDir:
       img = d->dataImageDir.imageById(id_);
