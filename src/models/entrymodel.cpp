@@ -199,9 +199,11 @@ void EntryModel::setFields(const Tellico::Data::FieldList& fields_) {
 }
 
 void EntryModel::addFields(const Tellico::Data::FieldList& fields_) {
-  beginInsertColumns(QModelIndex(), m_fields.size(), m_fields.size());
-  m_fields += fields_;
-  endInsertColumns();
+  if(!fields_.isEmpty()) {
+    beginInsertColumns(QModelIndex(), m_fields.size(), m_fields.size() + fields_.size()-1);
+    m_fields += fields_;
+    endInsertColumns();
+  }
 }
 
 void EntryModel::modifyFields(const Tellico::Data::FieldList& fields_) {

@@ -94,9 +94,8 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   setModel(sortModel);
   setItemDelegate(new DetailedEntryItemDelegate(this));
 
-  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)), SLOT(updateHeaderMenu()));
-  connect(model(), SIGNAL(columnsRemoved(const QModelIndex&, int, int)), SLOT(updateHeaderMenu()));
   connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateHeaderMenu()));
+  connect(header(), SIGNAL(sectionCountChanged(int, int)), SLOT(updateHeaderMenu()));
 }
 
 DetailedListView::~DetailedListView() {
@@ -327,14 +326,7 @@ void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
 
 void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
   int col = action_->data().toInt();
-  if(col < header()->count()) {
-    setColumnHidden(col, !action_->isChecked());
-    // if we're showing a column, resize all sections
-    if(action_->isChecked()) {
-      resizeColumnToContents(col);
-      adjustColumnWidths();
-    }
-  } else if(col == header()->count()) {
+  if(col == -1) { // hide all
     // hide all
     for(int ncol = 0; ncol < header()->count(); ++ncol) {
       hideColumn(ncol);
@@ -343,6 +335,13 @@ void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
       if(action->isCheckable()) {
         action->setChecked(false);
       }
+    }
+  } else if(col < header()->count()) {
+    setColumnHidden(col, !action_->isChecked());
+    // if we're showing a column, resize all sections
+    if(action_->isChecked()) {
+      resizeColumnToContents(col);
+      adjustColumnWidths();
     }
   }
   // the header disappears if all columns are hidden
@@ -483,15 +482,17 @@ void DetailedListView::resetEntryStatus() {
 }
 
 void DetailedListView::updateHeaderMenu() {
+  // we only want to update the menu when the header count and model count agree
+  if(model()->columnCount() != header()->count()) {
+    return;
+  }
   m_headerMenu->clear();
   m_headerMenu->addTitle(i18n("View Columns"));
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
     Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     // don't show paragraphs and tables
     if(field && (field->type() == Data::Field::Para || field->type() == Data::Field::Table)) {
-      if(!isColumnHidden(ncol)) {
-        hideColumn(ncol);
-      }
+      setColumnHidden(ncol, true);
       continue;
     }
     QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
@@ -501,7 +502,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   m_headerMenu->addSeparator();
   QAction* act = m_headerMenu->addAction(i18n("Hide All Columns"));
-  act->setData(header()->count());
+  act->setData(-1);
 }
 
 void DetailedListView::slotRefreshImages() {
@@ -515,7 +516,7 @@ void DetailedListView::adjustColumnWidths() {
     if(!isColumnHidden(ncol)) {
       const int width = sizeHintForColumn(ncol);
       if(columnWidth(ncol) > width) {
-        setColumnWidth(ncol, width);
+        setColumnWidth(ncol, qMax(width, 50));
       }
     }
   }
