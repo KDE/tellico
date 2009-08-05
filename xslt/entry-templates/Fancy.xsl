@@ -115,6 +115,13 @@
     text-align: center;
     font-size: 1.1em;
   }
+  div#id {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    text-align: right;
+    color: <xsl:value-of select="$color1"/>;
+  }
   div#content {
     padding-left: 1%;
     padding-right: 1%;
@@ -219,6 +226,12 @@
 
 <xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
+
+ <xsl:if test="tc:id">
+  <div id="id">
+   <xsl:value-of select="tc:id"/>
+  </div>
+ </xsl:if>
 
  <!-- first, show the title -->
  <xsl:if test=".//tc:title">
@@ -416,7 +429,8 @@
      <table>
       <tbody>
        <!-- already used title, so skip it -->
-       <xsl:for-each select="$fields[@name != 'title']">
+       <!-- don't show id either -->
+       <xsl:for-each select="$fields[@name != 'title' and @name != 'id']">
         <tr>
          <th class="fieldName" valign="top">
           <xsl:value-of select="@title"/>
