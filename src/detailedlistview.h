@@ -154,6 +154,7 @@ private:
   void contextMenuEvent(QContextMenuEvent* event);
   void setState(Tellico::Data::EntryList entries_, int state);
   void adjustColumnWidths();
+  void checkHeader();
 
   struct ConfigInfo {
     int prevSort;

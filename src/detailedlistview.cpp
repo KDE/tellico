@@ -82,6 +82,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
 
   // header menu
   header()->installEventFilter(this);
+  header()->setMinimumSectionSize(50);
 
   m_headerMenu = new KMenu(this);
   connect(m_headerMenu, SIGNAL(triggered(QAction*)),
@@ -165,10 +166,6 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
         resizeColumnToContents(ncol);
       }
     }
-  }
-// we don't allow all sections to be hidden because the header disappears
-  if(header()->count() > 0 && header()->hiddenSectionCount() == header()->count()) {
-    showColumn(0);
   }
 
   // because some of the fields got hidden...
@@ -325,9 +322,8 @@ void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
 }
 
 void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
-  int col = action_->data().toInt();
+  const int col = action_->data().toInt();
   if(col == -1) { // hide all
-    // hide all
     for(int ncol = 0; ncol < header()->count(); ++ncol) {
       hideColumn(ncol);
     }
@@ -344,21 +340,7 @@ void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
       adjustColumnWidths();
     }
   }
-  // the header disappears if all columns are hidden
-  // don't allow the user to hide all, can this be fixed?
-  if(header()->count() == header()->hiddenSectionCount()) {
-    // find first checkable action in header menu
-    QAction* action = 0;
-    foreach(QAction* tryAction, m_headerMenu->actions()) {
-      if(tryAction->isCheckable()) {
-        action = tryAction;
-        break;
-      }
-    }
-    if(action) {
-      action->activate(QAction::Trigger);
-    }
-  }
+  checkHeader();
 }
 
 void DetailedListView::slotRefresh() {
@@ -511,10 +493,35 @@ void DetailedListView::adjustColumnWidths() {
     if(!isColumnHidden(ncol)) {
       const int width = sizeHintForColumn(ncol);
       if(columnWidth(ncol) > width) {
-        setColumnWidth(ncol, qMax(width, 50));
+        resizeColumnToContents(ncol);
       }
     }
   }
 }
+
+void DetailedListView::checkHeader() {
+  // the header disappears if all columns are hidden, so if the user hides all
+  // columns, we turn around and show the title
+  //
+  // normally, I would expect a check like header()->count() == header()->hiddenSectionCount()
+  // to tell me if all sections are hidden, but it often doesn't work, with the hiddenSectionCount()
+  // being greater than count()! From testing, if the sizeHint() width is 0, then the header is hidden
+  if(header()->sizeHint().isEmpty()) {
+    // find title action in menu and activate it
+    QAction* action = 0;
+    foreach(QAction* tryAction, m_headerMenu->actions()) {
+      const int ncol = tryAction->data().toInt();
+      Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+      if(field && field->name() == QLatin1String("title")) {
+        action = tryAction;
+        break;
+      }
+    }
+    if(action) {
+      action->activate(QAction::Trigger);
+    }
+  }
+}
+
 
 #include "detailedlistview.moc"
