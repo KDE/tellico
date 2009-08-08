@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "amazonfetcher.h"
 #include "amazonrequest.h"
 #include "../translators/xslthandler.h"
@@ -37,8 +39,6 @@
 #include "../utils/isbnvalidator.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
-
-#include <config.h>
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -166,6 +166,7 @@ void AmazonFetcher::doSearch() {
 #else
   // calling secretKey() ensures that we try to read it first
   if(secretKey().isEmpty() || m_access.isEmpty()) {
+    // this message is split in two since the first half is reused later
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
             i18n("Those values must be entered in the data source settings."), MessageHandler::Error);

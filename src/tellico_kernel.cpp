@@ -401,7 +401,7 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
 bool Kernel::prepareWallet() {
   if(!m_wallet || !m_wallet->isOpen()) {
     delete m_wallet;
-    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0);
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), m_widget->effectiveWinId());
   }
   if(!m_wallet || !m_wallet->isOpen()) {
     delete m_wallet;
