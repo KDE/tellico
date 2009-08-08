@@ -128,12 +128,6 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
   if(d->syntaxVersion > Tellico::XML::syntaxVersion) {
     d->error = i18n("It is from a future version of Tellico.");
     return false;
-  } else if(Tellico::XML::versionConversion(d->syntaxVersion, Tellico::XML::syntaxVersion)) {
-    // going from version 9 to 10, there's no conversion needed
-    QString str = i18n("Tellico is converting the file to a more recent document format. "
-                       "Information loss may occur if an older version of Tellico is used "
-                       "to read this file in the future.");
-    myDebug() << str;
   }
   if((d->syntaxVersion > 6 && localName_ != QLatin1String("tellico")) ||
      (d->syntaxVersion < 7 && localName_ != QLatin1String("bookcase"))) {

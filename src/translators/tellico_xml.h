@@ -39,8 +39,6 @@ namespace Tellico {
     QString pubTellico(int version = syntaxVersion);
     QString dtdTellico(int version = syntaxVersion);
 
-    bool versionConversion(uint from, uint to);
-
     extern const QString nsBookcase;
     extern const QString nsDublinCore;
     extern const QString nsZing;
