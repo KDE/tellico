@@ -82,7 +82,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
 
   // header menu
   header()->installEventFilter(this);
-  header()->setMinimumSectionSize(50);
+  header()->setMinimumSectionSize(20);
 
   m_headerMenu = new KMenu(this);
   connect(m_headerMenu, SIGNAL(triggered(QAction*)),
@@ -129,47 +129,41 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   sourceModel()->setImagesAreAvailable(false);
   sourceModel()->setFields(coll_->fields());
 
-  QByteArray state = QByteArray::fromBase64(config.readEntry(QLatin1String("ColumnState") + configN).toAscii());
-  if(!state.isEmpty()) {
-    // the easy case first. If we have saved state, just restore it
-    header()->restoreState(state);
-  } else {
-    // these are all deprecated values
-    QStringList colNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
-    QList<int> colWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
-    QList<int> colOrder = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
+  // we're not using saveState() and restoreState() since our columns are variable
+  QStringList columnNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
+  QList<int> columnWidths = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
+  QList<int> columnOrder = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
 
-    // what's a good way to determine which columns to show by default?
-    // definitely the title, maybe that's enough
-    if(colNames.isEmpty()) {
-      colNames << QLatin1String("title");
-      colWidths = QList<int>() << 1;
-    }
-    // I'm being lazy and not trying to figure out the order and column width
-    // just restore the columns that the user had before
-    for(int ncol = 0; ncol < header()->count(); ++ncol) {
-      int idx = colNames.indexOf(coll_->fields().at(ncol)->name());
-      // column width of 0 meant hidden for old versions of Tellico
-      if(idx == -1 || idx >= colWidths.size() || colWidths.at(idx) == 0) {
-        setColumnHidden(ncol, true);
+  // just a broken-world check
+  while(columnWidths.size() < columnNames.size()) {
+    columnWidths << 0;
+  }
+  while(columnOrder.size() < columnNames.size()) {
+    columnOrder << columnOrder.size();
+  }
+  QList<int> currentColumnOrder;
+  // now restore widths and order
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    int idx = columnNames.indexOf(columnFieldName(ncol));
+    // column width of 0 means hidden
+    if(idx < 0 || columnWidths.at(idx) <= 0) {
+      hideColumn(ncol);
+      if(idx > -1) {
+        currentColumnOrder << ncol;
       }
+    } else {
+      setColumnWidth(ncol, columnWidths.at(idx));
+      currentColumnOrder << ncol;
     }
-    // these are legacy keys and no longer needed
-    config.deleteEntry(QLatin1String("ColumnNames") + configN);
-    config.deleteEntry(QLatin1String("ColumnWidth") + configN);
-    config.deleteEntry(QLatin1String("ColumnOrder") + configN);
-
-    // just a sanity check, in the past, a zero-width column meant a hidden column
-    // that's no longer true, so don't allow zero-width columns
-    for(int ncol = 0; ncol < header()->count(); ++ncol) {
-      if(!isColumnHidden(ncol) && columnWidth(ncol) <= 0) {
-        resizeColumnToContents(ncol);
-      }
-    }
+  }
+  const int maxCount = qMin(currentColumnOrder.size(), columnOrder.size());
+  for(int i = 0; i < maxCount; ++i) {
+    header()->moveSection(header()->visualIndex(currentColumnOrder.at(i)), columnOrder.at(i));
   }
 
   // because some of the fields got hidden...
   updateHeaderMenu();
+  checkHeader();
 
   sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
   sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
@@ -384,9 +378,11 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       if(!u.isEmpty() && i != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;
+        ci.cols      = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
+        ci.widths    = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
+        ci.order     = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
         ci.prevSort  = config.readEntry(QLatin1String("PrevSortColumn") + configN, 0);
         ci.prev2Sort = config.readEntry(QLatin1String("Prev2SortColumn") + configN, 0);
-        ci.state     = config.readEntry(QLatin1String("ColumnState") + configN, QString());
         info.append(ci);
       }
     }
@@ -395,21 +391,40 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     for(int i = 0; i < limit; ++i) {
       // starts at one since the current config will be written below
       configN = QString::fromLatin1("_%1").arg(i+1);
+      config.writeEntry(QLatin1String("ColumnNames")     + configN, info[i].cols);
+      config.writeEntry(QLatin1String("ColumnWidths")    + configN, info[i].widths);
+      config.writeEntry(QLatin1String("ColumnOrder")     + configN, info[i].order);
       config.writeEntry(QLatin1String("PrevSortColumn")  + configN, info[i].prevSort);
       config.writeEntry(QLatin1String("Prev2SortColumn") + configN, info[i].prev2Sort);
-      config.writeEntry(QLatin1String("ColumnState")     + configN, info[i].state);
+      // legacy entry item
+      config.deleteEntry(QLatin1String("ColumnState")    + configN);
     }
     configN = QLatin1String("_0");
   }
 
-  QByteArray state = header()->saveState();
-  config.writeEntry(QLatin1String("ColumnState") + configN, state.toBase64());
+  QStringList colNames;
+  QList<int> widths, order;
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    // ignore hidden columns
+    if(!isColumnHidden(ncol)) {
+      colNames << columnFieldName(ncol);
+      widths << columnWidth(ncol);
+      order << header()->visualIndex(ncol);
+    }
+  }
+
+  config.writeEntry(QLatin1String("ColumnNames") + configN, colNames);
+  config.writeEntry(QLatin1String("ColumnWidths") + configN, widths);
+  config.writeEntry(QLatin1String("ColumnOrder") + configN, order);
+
   // the main sort order gets saved in the state
   // the secondary and tertiary need saving separately
   const int sortCol2 = sortModel()->secondarySortColumn();
   const int sortCol3 = sortModel()->tertiarySortColumn();
-  config.writeEntry(QLatin1String("PrevSortColumn") + configN, sortCol2);
+  config.writeEntry(QLatin1String("PrevSortColumn")  + configN, sortCol2);
   config.writeEntry(QLatin1String("Prev2SortColumn") + configN, sortCol3);
+  // remove old entry item
+  config.deleteEntry(QLatin1String("ColumnState")    + configN);
 }
 
 QString DetailedListView::sortColumnTitle1() const {
@@ -466,6 +481,7 @@ void DetailedListView::resetEntryStatus() {
 void DetailedListView::updateHeaderMenu() {
   // we only want to update the menu when the header count and model count agree
   if(model()->columnCount() != header()->count()) {
+    myDebug() << "column counts diagree";
     return;
   }
   m_headerMenu->clear();
@@ -479,7 +495,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   m_headerMenu->addSeparator();
   QAction* act = m_headerMenu->addAction(i18n("Hide All Columns"));
-  act->setData(-1);
+  act->setData(-1); // means hide all
 }
 
 void DetailedListView::slotRefreshImages() {
@@ -511,17 +527,22 @@ void DetailedListView::checkHeader() {
     QAction* action = 0;
     foreach(QAction* tryAction, m_headerMenu->actions()) {
       const int ncol = tryAction->data().toInt();
-      Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
-      if(field && field->name() == QLatin1String("title")) {
+      if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {
         action = tryAction;
         break;
       }
     }
     if(action) {
       action->activate(QAction::Trigger);
+    } else {
+      myDebug() << "found no action to show, still empty header!";
     }
   }
 }
 
+QString DetailedListView::columnFieldName(int ncol_) const {
+  Data::FieldPtr field = model()->headerData(ncol_, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+  return field ? field->name() : QString();
+}
 
 #include "detailedlistview.moc"

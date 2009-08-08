@@ -155,11 +155,14 @@ private:
   void setState(Tellico::Data::EntryList entries_, int state);
   void adjustColumnWidths();
   void checkHeader();
+  QString columnFieldName(int ncol) const;
 
   struct ConfigInfo {
+    QStringList cols;
+    QList<int> widths;
+    QList<int> order;
     int prevSort;
     int prev2Sort;
-    QString state;
   };
 
   KMenu* m_headerMenu;
