@@ -31,13 +31,12 @@
 #include <klocale.h>
 
 namespace {
-  static const char* description = "Tellico - a collection manager for KDE";
-  static const char* version = VERSION;
+  static const char* version = "2.0";
 }
 
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", 0, ki18n("Tellico"),
-                       version, ki18n(description), KAboutData::License_GPL_V2,
+                       version, ki18n("Tellico - a collection manager for KDE"), KAboutData::License_GPL_V2,
                        ki18n("(c) 2001-2009, Robby Stephenson"), KLocalizedString(),
                        "http://tellico-project.org", "tellico-users@kde.org");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
