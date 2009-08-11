@@ -79,7 +79,7 @@ if(LIBEXEMPI_FOUND)
 endif(LIBEXEMPI_FOUND)
 
 macro_optional_find_package(QCA2)
-macro_log_feature(QCA2_FOUND "QCA" "Support for signing Amazon requests" "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qca/html/" FALSE "2.0" "")
+macro_log_feature(QCA2_FOUND "QCA" "Support for signing Amazon requests, the qca-ossl plugin is required for SHA256" "http://delta.affinix.com/qca/" FALSE "2.0" "")
 if(QCA2_FOUND)
 #    add_definitions(${PC_QCA2_DEFINITIONS})
     include_directories(${QCA2_INCLUDE_DIR})

@@ -92,7 +92,7 @@ KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   return url;
 #else
   Q_UNUSED(params_);
-  myWarning() << "sha256 signing is not available";
+  myWarning() << "SHA256 signing is not available";
   return KUrl();
 #endif
 }

@@ -339,6 +339,11 @@ void AmazonFetcher::doSearch() {
 
   AmazonRequest request(siteData(m_site).url, m_amazonKey);
   KUrl newUrl = request.signedRequest(params);
+  if(newUrl.isEmpty()) {
+    message(i18n("Tellico was not compiled with support for searching %1.", defaultName()), MessageHandler::Warning);
+    stop();
+    return;
+  }
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
