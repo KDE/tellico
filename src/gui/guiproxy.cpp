@@ -28,7 +28,6 @@
 #include <KMessageBox>
 
 #include <QWidget>
-#include <QMetaObject>
 
 using Tellico::GUI::Proxy;
 

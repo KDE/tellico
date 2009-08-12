@@ -36,7 +36,7 @@
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( ArxivFetcherTest )
+QTEST_KDEMAIN( ArxivFetcherTest, GUI )
 
 ArxivFetcherTest::ArxivFetcherTest() : m_loop(this) {
 }

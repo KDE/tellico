@@ -36,7 +36,7 @@
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( CitebaseFetcherTest )
+QTEST_KDEMAIN( CitebaseFetcherTest, GUI )
 
 CitebaseFetcherTest::CitebaseFetcherTest() : m_loop(this) {
 }

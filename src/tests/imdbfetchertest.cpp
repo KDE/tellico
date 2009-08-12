@@ -35,7 +35,7 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
-QTEST_KDEMAIN_CORE( ImdbFetcherTest )
+QTEST_KDEMAIN( ImdbFetcherTest, GUI )
 
 ImdbFetcherTest::ImdbFetcherTest() : m_loop(this) {
 }

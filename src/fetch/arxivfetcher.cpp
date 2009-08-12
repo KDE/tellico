@@ -92,8 +92,6 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-//  myDebug() << "value = " << value_;
-
   KUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
