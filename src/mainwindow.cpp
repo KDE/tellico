@@ -1432,6 +1432,9 @@ void MainWindow::slotHandleConfigChange() {
   // only modified if there are entries and image location is changed
   if(imageLocation != Config::imageLocation() && !Data::Document::self()->isEmpty()) {
     Data::Document::self()->slotSetModified();
+    KMessageBox::information(this, i18n("The location for saving collection images has changed.\n"
+                                        "The images will be transferred to the new location."));
+    fileSave();
   }
 
   if(autoCapitalize != Config::autoCapitalization() ||
