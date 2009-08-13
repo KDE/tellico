@@ -433,7 +433,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     imgDirRelative = imgDir.path();
   } else if(m_parseDOM) {
     imgDir = fileDir(); // copy to fileDir
-    imgDirRelative = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
+    imgDirRelative = ImageFactory::imageDir();
     createDir();
   } else {
     imgDir = fileDir();
