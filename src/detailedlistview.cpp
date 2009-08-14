@@ -440,7 +440,7 @@ QString DetailedListView::sortColumnTitle3() const {
 }
 
 QStringList DetailedListView::visibleColumns() const {
-  // we want the visual order, so use a WMap and sort by visualIndex
+  // we want the visual order, so use a QMap and sort by visualIndex
   QMap<int, QString> titleMap;
   for(int i = 0; i < header()->count(); ++i) {
     if(!isColumnHidden(i)) {

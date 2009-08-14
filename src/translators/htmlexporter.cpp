@@ -275,7 +275,7 @@ QString HTMLExporter::text() {
   f.close();
 #endif
 
-  QString text = m_handler->applyStylesheet(output.toString());
+  const QString text = m_handler->applyStylesheet(output.toString());
 #if 0
   QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {

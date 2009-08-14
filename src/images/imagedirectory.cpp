@@ -90,7 +90,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
   const QString path = this->path(); // virtual function, so don't assume m_path is correct
   if(!m_pathExists) {
     if(path.isEmpty()) {
-      myWarning() << "trying to write to empty path!";
+      myWarning() << "trying to write to empty path:" << img_.id();
       return false;
     }
     QDir dir(path);

@@ -493,16 +493,16 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                                               Blitz::VerticalGradient, 100, -100);
 
   if(opt_.imgDir.isEmpty()) {
-    // write the style images both to the tmp dir and the data dir
+    // write the style images both to the tmp dir and the cache dir
     // doesn't really hurt and lets the user switch back and forth
     ImageFactory::removeImage(bgname, true /*delete */);
     factory->addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QLatin1String("PNG"), bgname);
-    ImageFactory::writeCachedImage(bgname, DataDir, true /*force*/);
+    ImageFactory::writeCachedImage(bgname, cacheDir(), true /*force*/);
     ImageFactory::writeCachedImage(bgname, TempDir, true /*force*/);
 
     ImageFactory::removeImage(hdrname, true /*delete */);
     factory->addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QLatin1String("PNG"), hdrname);
-    ImageFactory::writeCachedImage(hdrname, DataDir, true /*force*/);
+    ImageFactory::writeCachedImage(hdrname, cacheDir(), true /*force*/);
     ImageFactory::writeCachedImage(hdrname, TempDir, true /*force*/);
   } else {
     bgImage.save(opt_.imgDir + bgname, "PNG");
@@ -577,6 +577,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
     factory->d->localImageDir.setPath(dir);
   }
 }
+
 void ImageFactory::setZipArchive(KZip* zip_) {
   if(!zip_) {
     return;

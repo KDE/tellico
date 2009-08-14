@@ -211,7 +211,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     m_xsltFile = KStandardDirs::locate("appdata", templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
-        myWarning() << "can't locate " << file_;
+        myWarning() << "can't locate" << file_;
       }
       m_xsltFile = KStandardDirs::locate("appdata", templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
@@ -361,11 +361,12 @@ void EntryView::slotResetColors() {
 }
 
 void EntryView::resetColors() {
-  ImageFactory::createStyleImages(m_entry ? m_entry->collection()->type() : Data::Collection::Base); // recreate gradients
+  // recreate gradients
+  ImageFactory::createStyleImages(m_entry ? m_entry->collection()->type() : Data::Collection::Base);
 
   QString dir = m_handler ? QFile::decodeName(m_handler->param("imgdir")) : QString();
   if(dir.isEmpty()) {
-    dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::dataDir() : ImageFactory::tempDir();
+    dir = Data::Document::self()->allImagesOnDisk() ? ImageFactory::imageDir() : ImageFactory::tempDir();
   } else {
     // it's a string param, so it has quotes on both sides
     dir = dir.mid(1);
