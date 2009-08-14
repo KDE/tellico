@@ -147,7 +147,6 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
                     i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
     menu.addAction(KIcon(QLatin1String("edit-delete")),
                     i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
-    menu.exec(event_->globalPos());
   } else {
     Controller::self()->plugEntryActions(&menu);
   }
