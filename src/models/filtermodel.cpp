@@ -45,11 +45,12 @@ public:
   Node* child(int row) const { return m_children.at(row); }
   int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : 0; }
   Data::ID id() const { return m_id; }
-  int count() const { return m_children.count(); }
+  int childCount() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
   void replaceChild(int i, Node* child) {  m_children.replace(i, child); }
   void removeChild(int i) {  delete m_children.takeAt(i); }
+  void removeAll() { qDeleteAll(m_children); m_children.clear(); }
 
 private:
   Node* m_parent;
@@ -74,7 +75,8 @@ int FilterModel::rowCount(const QModelIndex& index_) const {
     return 0; // a parent index means it points to an entry, not a filter, so there are no children
   }
   Node* node = static_cast<Node*>(index_.internalPointer());
-  return node ? node->count() : 0;
+  Q_ASSERT(node);
+  return node->childCount();
 }
 
 int FilterModel::columnCount(const QModelIndex&) const {
@@ -82,7 +84,7 @@ int FilterModel::columnCount(const QModelIndex&) const {
 }
 
 QVariant FilterModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
-  if(section_ >= columnCount() || orientation_ != Qt::Horizontal) {
+  if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal) {
     return QVariant();
   }
   if(role_ == Qt::DisplayRole) {
@@ -93,7 +95,7 @@ QVariant FilterModel::headerData(int section_, Qt::Orientation orientation_, int
 
 bool FilterModel::setHeaderData(int section_, Qt::Orientation orientation_,
                                     const QVariant& value_, int role_) {
-  if(section_ >= columnCount() || orientation_ != Qt::Horizontal || role_ != Qt::EditRole) {
+  if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal || role_ != Qt::EditRole) {
     return false;
   }
   m_header = value_.toString();
@@ -157,7 +159,9 @@ QModelIndex FilterModel::parent(const QModelIndex& index_) const {
   }
 
   Node* node = static_cast<Node*>(index_.internalPointer());
+  Q_ASSERT(node);
   Node* parentNode = node->parent();
+  Q_ASSERT(parentNode);
 
   // if it's top-level, it has no parent
   if(parentNode == m_rootNode) {
@@ -236,17 +240,23 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   if(index_.parent().isValid()) {
     return;
   }
-  emit layoutAboutToBeChanged();
-  Node* oldNode = static_cast<Node*>(index_.internalPointer());
-  Node* newNode = new Node(m_rootNode);
-  m_rootNode->replaceChild(index_.row(), newNode);
+
+  Node* filterNode = static_cast<Node*>(index_.internalPointer());
+  Q_ASSERT(filterNode);
+
+  beginRemoveRows(index_, 0, filterNode->childCount() - 1);
+  filterNode->removeAll();
+  endRemoveRows();
+
   Data::EntryList entries = Data::Document::self()->filteredEntries(filter(index_));
+  beginInsertRows(index_, 0, entries.count() - 1);
   foreach(Data::EntryPtr entry, entries) {
-    Node* childNode = new Node(newNode, entry->id());
-    newNode->addChild(childNode);
+    Node* childNode = new Node(filterNode);
+    filterNode->addChild(childNode);
   }
-  delete oldNode;
-  emit layoutChanged();
+  endInsertRows();
+
+  emit dataChanged(index_, index_);
 }
 
 #include "filtermodel.moc"
