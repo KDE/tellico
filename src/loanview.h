@@ -50,6 +50,7 @@ public:
 
   virtual void    addBorrower(Data::BorrowerPtr);
   virtual void modifyBorrower(Data::BorrowerPtr);
+  virtual void removeBorrower(Data::BorrowerPtr);
 
 public slots:
   /**

@@ -87,7 +87,6 @@ void AddLoans::redo() {
     Controller::self()->addedBorrower(m_borrower);
   } else {
     // don't have to do anything to the document, it just holds a pointer
-    myDebug() << "modifying an existing borrower! ";
     Controller::self()->modifiedBorrower(m_borrower);
   }
 }

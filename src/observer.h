@@ -40,7 +40,7 @@ public:
 
   virtual void    addBorrower(Data::BorrowerPtr) {}
   virtual void modifyBorrower(Data::BorrowerPtr) {}
-  // no removeBorrower()
+  virtual void removeBorrower(Data::BorrowerPtr) {}
 
   virtual void    addEntries(Data::EntryList) {}
   virtual void modifyEntries(Data::EntryList) {}

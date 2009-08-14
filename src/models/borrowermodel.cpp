@@ -43,11 +43,12 @@ public:
   Node* parent() const { return m_parent; }
   Node* child(int row) const { return m_children.at(row); }
   int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : 0; }
-  int count() const { return m_children.count(); }
+  int childCount() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
   void replaceChild(int i, Node* child) {  m_children.replace(i, child); }
   void removeChild(int i) {  delete m_children.takeAt(i); }
+  void removeAll() { qDeleteAll(m_children); m_children.clear(); }
 
 private:
   Node* m_parent;
@@ -71,7 +72,8 @@ int BorrowerModel::rowCount(const QModelIndex& index_) const {
     return 0; // a parent index means it points to an entry, not a filter, so there are no children
   }
   Node* node = static_cast<Node*>(index_.internalPointer());
-  return node ? node->count() : 0;
+  Q_ASSERT(node);
+  return node->childCount();
 }
 
 int BorrowerModel::columnCount(const QModelIndex&) const {
@@ -79,7 +81,7 @@ int BorrowerModel::columnCount(const QModelIndex&) const {
 }
 
 QVariant BorrowerModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
-  if(section_ >= columnCount() || orientation_ != Qt::Horizontal) {
+  if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal) {
     return QVariant();
   }
   if(role_ == Qt::DisplayRole) {
@@ -90,7 +92,7 @@ QVariant BorrowerModel::headerData(int section_, Qt::Orientation orientation_, i
 
 bool BorrowerModel::setHeaderData(int section_, Qt::Orientation orientation_,
                                   const QVariant& value_, int role_) {
-  if(section_ >= columnCount() || orientation_ != Qt::Horizontal || role_ != Qt::EditRole) {
+  if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal || role_ != Qt::EditRole) {
     return false;
   }
   m_header = value_.toString();
@@ -154,7 +156,9 @@ QModelIndex BorrowerModel::parent(const QModelIndex& index_) const {
   }
 
   Node* node = static_cast<Node*>(index_.internalPointer());
+  Q_ASSERT(node);
   Node* parentNode = node->parent();
+  Q_ASSERT(parentNode);
 
   // if it's top-level, it has no parent
   if(parentNode == m_rootNode) {
@@ -193,24 +197,29 @@ QModelIndex BorrowerModel::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
 
 QModelIndex BorrowerModel::modifyBorrower(Tellico::Data::BorrowerPtr borrower_) {
   Q_ASSERT(borrower_);
+  Q_ASSERT(!borrower_->isEmpty());
   int idx = m_borrowers.indexOf(borrower_);
   if(idx < 0) {
     myWarning() << "no borrower named" << borrower_->name();
     return QModelIndex();
   }
 
-  emit layoutAboutToBeChanged();
-  Node* oldNode = m_rootNode->child(idx);
-  Node* newNode = new Node(m_rootNode);
-  m_rootNode->replaceChild(idx, newNode);
-  for(int i = 0; i < borrower_->count(); ++i) {
-    Node* childNode = new Node(newNode);
-    newNode->addChild(childNode);
-  }
-  delete oldNode;
+  QModelIndex borrowerIndex = index(idx, 0);
+  Node* borrowerNode = m_rootNode->child(idx);
 
-  emit layoutChanged();
-  return index(idx, 0);
+  beginRemoveRows(borrowerIndex, 0, borrowerNode->childCount() - 1);
+  borrowerNode->removeAll();
+  endRemoveRows();
+
+  beginInsertRows(borrowerIndex, 0, borrower_->count() - 1);
+  for(int i = 0; i < borrower_->count(); ++i) {
+    Node* childNode = new Node(borrowerNode);
+    borrowerNode->addChild(childNode);
+  }
+  endInsertRows();
+
+  emit dataChanged(borrowerIndex, borrowerIndex);
+  return borrowerIndex;
 }
 
 void BorrowerModel::removeBorrower(Tellico::Data::BorrowerPtr borrower_) {

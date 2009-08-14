@@ -100,6 +100,11 @@ void LoanView::modifyBorrower(Tellico::Data::BorrowerPtr borrower_) {
   sourceModel()->modifyBorrower(borrower_);
 }
 
+void LoanView::removeBorrower(Tellico::Data::BorrowerPtr borrower_) {
+  Q_ASSERT(borrower_);
+  sourceModel()->removeBorrower(borrower_);
+}
+
 void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
   QModelIndex index = indexAt(event_->pos());
   if(!index.isValid()) {

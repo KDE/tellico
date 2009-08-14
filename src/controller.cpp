@@ -599,7 +599,11 @@ void Controller::addedBorrower(Tellico::Data::BorrowerPtr borrower_) {
 
 void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
   foreach(Observer* it, m_observers) {
-    it->modifyBorrower(borrower_);
+    if(borrower_->isEmpty()) {
+      it->removeBorrower(borrower_);
+    } else {
+      it->modifyBorrower(borrower_);
+    }
   }
   hideTabs();
 }

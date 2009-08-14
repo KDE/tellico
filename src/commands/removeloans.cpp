@@ -59,8 +59,8 @@ void RemoveLoans::redo() {
     Data::Document::self()->checkInEntry(loan->entry());
     Data::EntryList vec;
     vec.append(loan->entry());
-    Controller::self()->modifiedEntries(vec);
     Controller::self()->modifiedBorrower(loan->borrower());
+    Controller::self()->modifiedEntries(vec);
   }
   if(!calLoans.isEmpty()) {
     CalendarHandler::removeLoans(calLoans);
