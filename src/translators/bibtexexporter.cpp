@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 
 #include "bibtexexporter.h"
 #include "bibtexhandler.h"
@@ -31,8 +32,6 @@
 #include "../utils/stringset.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
-
-#include <config.h>
 
 #include <klocale.h>
 #include <KConfigGroup>
