@@ -897,6 +897,13 @@ bool CollectionFieldsDialog::checkValues() {
     }
   }
 
+  if(m_derived->isChecked() && m_derivedEdit->text().indexOf(QLatin1Char('%')) == -1) {
+    KMessageBox::sorry(this, i18n("A field with a derived value must have a value template."));
+    m_derivedEdit->setFocus();
+    m_derivedEdit->selectAll();
+    return false;
+  }
+
   return true;
 }
 
@@ -919,8 +926,10 @@ void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
   m_catCombo->setCurrentIndex(idx); // have to do this here
   if(field_->hasFlag(Data::Field::Derived)) {
     m_derivedEdit->setText(field_->description());
+    m_descEdit->clear();
   } else {
     m_descEdit->setText(field_->description());
+    m_derivedEdit->clear();
   }
   m_derived->setChecked(field_->hasFlag(Data::Field::Derived));
   slotDerivedChecked(m_derived->isChecked());
