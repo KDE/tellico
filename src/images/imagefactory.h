@@ -201,6 +201,7 @@ private:
 
   bool hasImage(const QString& id) const;
   void releaseImages();
+  void emitImageMismatch();
 
   class Private;
   Private* const d;

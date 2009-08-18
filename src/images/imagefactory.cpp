@@ -383,7 +383,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, dir2);
     if(!img2.isNull()) {
       // the img is in the other location
-      emit factory->imageLocationMismatch();
+      factory->emitImageMismatch();
       return img2;
     } else {
       myDebug() << "tried to add" << id_ << "from" << imgDir2->path() << "but failed";
@@ -562,6 +562,10 @@ void ImageFactory::releaseImages() {
   }
   s_imagesToRelease.clear();
 #endif
+}
+
+void ImageFactory::emitImageMismatch() {
+  emit imageLocationMismatch();
 }
 
 void ImageFactory::setLocalDirectory(const KUrl& url_) {
