@@ -61,7 +61,7 @@ public:
   ImageZipArchive imageZipArchive;
 };
 
-ImageFactory::ImageFactory() : d(new Private()) {
+ImageFactory::ImageFactory() : QObject(), d(new Private()) {
 }
 
 ImageFactory::~ImageFactory() {
@@ -75,6 +75,11 @@ void ImageFactory::init() {
   factory = new ImageFactory();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
   factory->d->dataImageDir.setPath(Tellico::saveLocation(QLatin1String("data/")));
+}
+
+Tellico::ImageFactory* ImageFactory::self() {
+  Q_ASSERT(factory);
+  return factory;
 }
 
 QString ImageFactory::tempDir() {
@@ -378,9 +383,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, dir2);
     if(!img2.isNull()) {
       // the img is in the other location
-      // consider the document to be modified since it needs the image saved
-//      Data::Document::self()->slotSetModified(true);
-      myWarning() << "need to emit modified!";
+      emit factory->imageLocationMismatch();
       return img2;
     } else {
       myDebug() << "tried to add" << id_ << "from" << imgDir2->path() << "but failed";
@@ -586,3 +589,5 @@ void ImageFactory::setZipArchive(KZip* zip_) {
 }
 
 #undef RELEASE_IMAGES
+
+#include "imagefactory.moc"

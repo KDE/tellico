@@ -29,6 +29,7 @@
 
 #include <kurl.h>
 
+#include <QObject>
 #include <QColor>
 #include <QHash>
 #include <QCache>
@@ -57,7 +58,9 @@ public:
 /**
  * @author Robby Stephenson
  */
-class ImageFactory {
+class ImageFactory : public QObject {
+Q_OBJECT
+
 public:
   enum CacheDir {
     TempDir,
@@ -147,6 +150,11 @@ public:
 
   static void setLocalDirectory(const KUrl& url);
   static void setZipArchive(KZip* zip);
+
+  static ImageFactory* self();
+
+signals:
+  void imageLocationMismatch();
 
 private:
   /**

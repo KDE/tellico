@@ -469,6 +469,7 @@ private slots:
   void slotClearFilter();
   void slotClearFilterNow();
   void slotRenameCollection();
+  void slotImageLocationChanged();
 
 private:
   void importFile(Import::Format format, const KUrl::List& kurls);

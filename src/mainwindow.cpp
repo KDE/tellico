@@ -203,6 +203,8 @@ void MainWindow::slotInit() {
 
   initConnections();
   ImageFactory::init();
+  connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
+          this, SLOT(slotImageLocationChanged()));
   // Init DBUS
   NewStuff::Manager::self();
 }
@@ -1431,10 +1433,7 @@ void MainWindow::slotHandleConfigChange() {
 
   // only modified if there are entries and image location is changed
   if(imageLocation != Config::imageLocation() && !Data::Document::self()->isEmpty()) {
-    Data::Document::self()->slotSetModified();
-    KMessageBox::information(this, i18n("The location for saving collection images has changed.\n"
-                                        "The images will be transferred to the new location."));
-    fileSave();
+    slotImageLocationChanged();
   }
 
   if(autoCapitalize != Config::autoCapitalization() ||
@@ -2010,6 +2009,15 @@ void MainWindow::slotClearFilter() {
 
 void MainWindow::slotRenameCollection() {
   Kernel::self()->renameCollection();
+}
+
+void MainWindow::slotImageLocationChanged() {
+  Data::Document::self()->slotSetModified();
+  KMessageBox::information(this, QLatin1String("<qt>") +
+                                 i18n("Some images are not saved in the configured location. The current file "
+                                      "must be saved and the images will be transferred to the new location.") +
+                                 QLatin1String("</qt>"));
+  fileSave();
 }
 
 void MainWindow::updateCollectionActions() {
