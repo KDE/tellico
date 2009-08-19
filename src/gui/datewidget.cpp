@@ -77,6 +77,7 @@ class DateWidget::DatePickerAction : public QWidgetAction
 
 DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   QBoxLayout* l = new QHBoxLayout(this);
+  l->setContentsMargins(0, 0, 0, 0);
 
   KLocale* locale = KGlobal::locale();
 
