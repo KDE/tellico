@@ -30,7 +30,6 @@
 #include "tellico_debug.h"
 #include "progressmanager.h"
 #include "gui/statusbar.h"
-#include "gui/richtextlabel.h"
 #include "document.h"
 #include "fetch/fetchresult.cpp"
 
@@ -39,6 +38,7 @@
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <KVBox>
+#include <ktextedit.h>
 
 #include <QTimer>
 #include <QLabel>
@@ -239,7 +239,9 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
                    "the entry currently in the collection. Please select the correct match.</qt>",
                    m_fetchers[m_fetchIndex]->source(),
                    m_entriesToUpdate.front()->field(QLatin1String("title")));
-  GUI::RichTextLabel* l = new GUI::RichTextLabel(s, hbox);
+  KTextEdit* l = new KTextEdit(hbox);
+  l->setHtml(s);
+  l->setReadOnly(true);
   hbox->setStretchFactor(l, 100);
 
   QTreeWidget* view = new QTreeWidget(box);

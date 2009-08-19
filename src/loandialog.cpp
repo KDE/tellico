@@ -22,20 +22,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef QT_STRICT_ITERATORS
-#define WAS_STRICT
-#undef QT_STRICT_ITERATORS
-#endif
+#include <config.h>
 
 #include "loandialog.h"
 #include "borrowerdialog.h"
 #include "gui/datewidget.h"
-#include "gui/richtextlabel.h"
 #include "collection.h"
 #include "commands/addloans.h"
 #include "commands/modifyloans.h"
-
-#include "config.h"
 
 #include <klocale.h>
 #include <klineedit.h>
@@ -50,11 +44,6 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QGridLayout>
-
-#ifdef WAS_STRICT
-#define QT_STRICT_ITERATORS
-#undef WAS_STRICT
-#endif
 
 using Tellico::LoanDialog;
 
@@ -115,7 +104,9 @@ void LoanDialog::init() {
     entryString += QLatin1String("<li>") + m_loan->entry()->title() + QLatin1String("</li>");
   }
   entryString += QLatin1String("</ol></qt>");
-  GUI::RichTextLabel* entryLabel = new GUI::RichTextLabel(entryString, hbox);
+  KTextEdit* entryLabel = new KTextEdit(hbox);
+  entryLabel->setHtml(entryString);
+  entryLabel->setReadOnly(true);
   hbox->setStretchFactor(entryLabel, 1);
 
   topLayout->addWidget(hbox, 0, 0, 1, 2);

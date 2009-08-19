@@ -24,7 +24,6 @@ SET(gui_STAT_SRCS
    progress.cpp
    ratingfieldwidget.cpp
    ratingwidget.cpp
-   richtextlabel.cpp
    spinbox.cpp
    statusbar.cpp
    stringmapdialog.cpp
