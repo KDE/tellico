@@ -40,7 +40,6 @@
 #include <kabc/stdaddressbook.h>
 #endif
 
-#include <KHBox>
 #include <QLabel>
 #include <QCheckBox>
 #include <QGridLayout>
@@ -83,13 +82,15 @@ void LoanDialog::init() {
   QWidget* mainWidget = new QWidget(this);
   setMainWidget(mainWidget);
   QGridLayout* topLayout = new QGridLayout(mainWidget);
+  // middle column gets to be the widest
+  topLayout->setColumnStretch(1, 1);
 
-  KHBox* hbox = new KHBox(mainWidget);
-  hbox->setSpacing(KDialog::spacingHint());
-  QLabel* pixLabel = new QLabel(hbox);
+  int row = -1;
+
+  QLabel* pixLabel = new QLabel(mainWidget);
   pixLabel->setPixmap(DesktopIcon(QLatin1String("tellico"), 64));
   pixLabel->setAlignment(Qt::AlignLeft | Qt::AlignTop);
-  hbox->setStretchFactor(pixLabel, 0);
+  topLayout->addWidget(pixLabel, ++row, 0);
 
   QString entryString = QLatin1String("<qt><p>");
   if(m_mode == Add) {
@@ -104,30 +105,26 @@ void LoanDialog::init() {
     entryString += QLatin1String("<li>") + m_loan->entry()->title() + QLatin1String("</li>");
   }
   entryString += QLatin1String("</ol></qt>");
-  KTextEdit* entryLabel = new KTextEdit(hbox);
+  KTextEdit* entryLabel = new KTextEdit(mainWidget);
   entryLabel->setHtml(entryString);
   entryLabel->setReadOnly(true);
-  hbox->setStretchFactor(entryLabel, 1);
-
-  topLayout->addWidget(hbox, 0, 0, 1, 2);
+  topLayout->addWidget(entryLabel, row, 1, 1, 2);
 
   QLabel* l = new QLabel(i18n("&Lend to:"), mainWidget);
-  topLayout->addWidget(l, 1, 0);
-  hbox = new KHBox(mainWidget);
-  hbox->setSpacing(KDialog::spacingHint());
-  topLayout->addWidget(hbox, 1, 1);
-  m_borrowerEdit = new KLineEdit(hbox);
+  topLayout->addWidget(l, ++row, 0);
+  m_borrowerEdit = new KLineEdit(mainWidget);
+  topLayout->addWidget(m_borrowerEdit, row, 1);
   l->setBuddy(m_borrowerEdit);
   m_borrowerEdit->completionObject()->setIgnoreCase(true);
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
   button(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(KIcon(QLatin1String("kaddressbook")), QString(), hbox);
+  KPushButton* pb = new KPushButton(KIcon(QLatin1String("kaddressbook")), QString(), mainWidget);
+  topLayout->addWidget(pb, row, 2);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
                        "Clicking the button allows you to select from your address book.");
   l->setWhatsThis(whats);
-  hbox->setWhatsThis(whats);
   // only enable for new loans
   if(m_mode == Modify) {
     m_borrowerEdit->setEnabled(false);
@@ -135,11 +132,11 @@ void LoanDialog::init() {
   }
 
   l = new QLabel(i18n("&Loan date:"), mainWidget);
-  topLayout->addWidget(l, 2, 0);
+  topLayout->addWidget(l, ++row, 0);
   m_loanDate = new GUI::DateWidget(mainWidget);
   m_loanDate->setDate(QDate::currentDate());
   l->setBuddy(m_loanDate);
-  topLayout->addWidget(m_loanDate, 2, 1);
+  topLayout->addWidget(m_loanDate, row, 1, 1, 2);
   whats = i18n("The check-out date is the date that you lent the items. By default, "
                "today's date is used.");
   l->setWhatsThis(whats);
@@ -150,10 +147,10 @@ void LoanDialog::init() {
   }
 
   l = new QLabel(i18n("D&ue date:"), mainWidget);
-  topLayout->addWidget(l, 3, 0);
+  topLayout->addWidget(l, ++row, 0);
   m_dueDate = new GUI::DateWidget(mainWidget);
   l->setBuddy(m_dueDate);
-  topLayout->addWidget(m_dueDate, 3, 1);
+  topLayout->addWidget(m_dueDate, row, 1, 1, 2);
   // valid due dates will enable the calendar adding checkbox
   connect(m_dueDate, SIGNAL(signalModified()), SLOT(slotDueDateChanged()));
   whats = i18n("The due date is when the items are due to be returned. The due date "
@@ -162,17 +159,17 @@ void LoanDialog::init() {
   m_dueDate->setWhatsThis(whats);
 
   l = new QLabel(i18n("&Note:"), mainWidget);
-  topLayout->addWidget(l, 4, 0);
+  topLayout->addWidget(l, ++row, 0);
   m_note = new KTextEdit(mainWidget);
   l->setBuddy(m_note);
-  topLayout->addWidget(m_note, 5, 0, 1, 2);
-  topLayout->setRowStretch(5, 1);
-  whats = i18n("You can add notes about the loan, as well.");
+  topLayout->addWidget(m_note, row, 0, 1, 2);
+  topLayout->setRowStretch(row, 1);
+  whats = i18n("You can add notes about the loan.");
   l->setWhatsThis(whats);
   m_note->setWhatsThis(whats);
 
   m_addEvent = new QCheckBox(i18n("&Add a reminder to the active calendar"), mainWidget);
-  topLayout->addWidget(m_addEvent, 6, 0, 1, 2);
+  topLayout->addWidget(m_addEvent, ++row, 0, 1, 3);
   m_addEvent->setEnabled(false); // gets enabled when valid due date is entered
   m_addEvent->setWhatsThis(i18n("<qt>Checking this box will add a <em>To-do</em> item "
                                    "to your active calendar, which can be viewed using KOrganizer. "
