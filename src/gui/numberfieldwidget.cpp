@@ -107,6 +107,9 @@ void NumberFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
     return;
   }
 
+  const int widgetIndex = layout()->indexOf(widget());
+  Q_ASSERT(widgetIndex > -1);
+
   QString value = text();
   if(wasLineEdit && !nowLineEdit) {
     layout()->removeWidget(m_lineEdit);
@@ -120,8 +123,7 @@ void NumberFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
     initLineEdit();
   }
 
-  // should really be FIELD_EDIT_WIDGET_INDEX from fieldwidget.cpp
-  static_cast<QBoxLayout*>(layout())->insertWidget(2, widget(), 1 /*stretch*/);
+  static_cast<QBoxLayout*>(layout())->insertWidget(widgetIndex, widget(), 1 /*stretch*/);
   widget()->show();
   setText(value);
 }

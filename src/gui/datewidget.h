@@ -30,10 +30,9 @@
 class KComboBox;
 class KPushButton;
 class KDatePicker;
-class KVBox;
 
-class QString;
 class QDate;
+class QMenu;
 
 namespace Tellico {
   namespace GUI {
@@ -59,9 +58,6 @@ public:
 signals:
   void signalModified();
 
-protected:
-  bool eventFilter(QObject *watched, QEvent *event);
-
 private slots:
   void slotDateChanged();
   void slotShowPicker();
@@ -69,12 +65,13 @@ private slots:
   void slotDateEntered(const QDate& newDate);
 
 private:
+  class DatePickerAction;
   SpinBox* m_daySpin;
   KComboBox* m_monthCombo;
   SpinBox* m_yearSpin;
   KPushButton* m_dateButton;
 
-  KVBox* m_frame;
+  QMenu* m_menu;
   KDatePicker* m_picker;
 };
 

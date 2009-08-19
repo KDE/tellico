@@ -36,14 +36,44 @@
 #include <klocale.h>
 #include <kglobalsettings.h>
 #include <kcalendarsystem.h>
-#include <KVBox>
-#include <KWindowSystem>
 
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QEvent>
+#include <QMenu>
+#include <QWidgetAction>
 
 using Tellico::GUI::DateWidget;
+
+class DateWidget::DatePickerAction : public QWidgetAction
+{
+  public:
+    DatePickerAction( KDatePicker *widget, QObject *parent )
+      : QWidgetAction( parent ),
+        mDatePicker( widget ), mOriginalParent( widget->parentWidget() )
+    {
+    }
+
+  protected:
+    QWidget *createWidget( QWidget *parent )
+    {
+      mDatePicker->setParent( parent );
+      return mDatePicker;
+    }
+
+    void deleteWidget( QWidget *widget )
+    {
+      if ( widget != mDatePicker ) {
+        return;
+      }
+
+      mDatePicker->setParent( mOriginalParent );
+    }
+
+  private:
+    KDatePicker *mDatePicker;
+    QWidget *mOriginalParent;
+};
 
 DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   QBoxLayout* l = new QHBoxLayout(this);
@@ -53,9 +83,11 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   // 0 allows empty value
   m_daySpin = new SpinBox(0, 31, this);
   l->addWidget(m_daySpin, 1);
+  l->setStretchFactor(m_daySpin, 1);
 
   m_monthCombo = new KComboBox(false, this);
   l->addWidget(m_monthCombo, 1);
+  l->setStretchFactor(m_monthCombo, 1);
   // allow empty item
   m_monthCombo->addItem(QString());
   QDate d;
@@ -70,6 +102,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   m_yearSpin = new SpinBox(locale->calendar()->earliestValidDate().year(),
                            locale->calendar()->latestValidDate().year(), this);
   l->addWidget(m_yearSpin, 1);
+  l->setStretchFactor(m_yearSpin, 1);
 
   connect(m_daySpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
   connect(m_monthCombo, SIGNAL(activated(int)), SLOT(slotDateChanged()));
@@ -80,22 +113,18 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   connect(m_dateButton, SIGNAL(clicked()), SLOT(slotShowPicker()));
   l->addWidget(m_dateButton, 0);
 
-  m_frame = new KVBox();
-  m_frame->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-  m_frame->setFrameStyle(QFrame::StyledPanel | QFrame::Raised);
-  m_frame->setLineWidth(3);
-  m_frame->hide();
-  m_frame->installEventFilter(this);
+  m_menu = new QMenu(this);
+  m_menu->hide();
 
-  m_picker = new KDatePicker(m_frame);
+  m_picker = new KDatePicker(m_menu);
+  m_picker->setCloseButton(false);
   connect(m_picker, SIGNAL(dateEntered(QDate)), SLOT(slotDateEntered(QDate)));
   connect(m_picker, SIGNAL(dateSelected(QDate)), SLOT(slotDateSelected(QDate)));
-  m_frame->resize(m_picker->sizeHint());
+
+  m_menu->addAction(new DatePickerAction(m_picker, m_menu));
 }
 
-DateWidget::~DateWidget()
-{
-  delete m_frame;
+DateWidget::~DateWidget() {
 }
 
 void DateWidget::slotDateChanged() {
@@ -246,15 +275,17 @@ void DateWidget::slotShowPicker() {
   QRect desk = KGlobalSettings::desktopGeometry(this);
   QPoint popupPoint = mapToGlobal(QPoint(0, 0));
 
-  int dateFrameHeight = m_frame->sizeHint().height();
+  int dateFrameHeight = m_menu->sizeHint().height();
   if(popupPoint.y() + height() + dateFrameHeight > desk.bottom()) {
     popupPoint.setY(popupPoint.y() - dateFrameHeight);
   } else {
     popupPoint.setY(popupPoint.y() + height());
   }
-  int dateFrameWidth = m_frame->sizeHint().width();
-  if(popupPoint.x() + dateFrameWidth > desk.right()) {
+  int dateFrameWidth = m_menu->sizeHint().width();
+  if(popupPoint.x() + width() > desk.right()) {
     popupPoint.setX(desk.right() - dateFrameWidth);
+  } else {
+    popupPoint.setX(popupPoint.x() + width() - dateFrameWidth);
   }
 
   if(popupPoint.x() < desk.left()) {
@@ -263,22 +294,20 @@ void DateWidget::slotShowPicker() {
   if(popupPoint.y() < desk.top()) {
     popupPoint.setY(desk.top());
   }
-  m_frame->move(popupPoint);
 
   QDate d = date();
   if(d.isValid()) {
     m_picker->setDate(d);
   }
 
-  KWindowSystem::setState(m_frame->winId(), NET::SkipTaskbar | NET::SkipPager);
-  m_frame->show();
+  m_menu->popup(popupPoint);
 }
 
 void DateWidget::slotDateSelected(const QDate& date_) {
   if(date_.isValid()) {
     setDate(date_);
     emit signalModified();
-    m_frame->hide();
+    m_menu->hide();
   }
 }
 
@@ -287,14 +316,6 @@ void DateWidget::slotDateEntered(const QDate& date_) {
     setDate(date_);
     emit signalModified();
   }
-}
-
-bool DateWidget::eventFilter(QObject *watched, QEvent *event)
-{
-  if (watched == m_frame && (event->type() == QEvent::WindowDeactivate)) {
-    m_frame->hide();
-  }
-  return QWidget::eventFilter(watched, event);
 }
 
 #include "datewidget.moc"
