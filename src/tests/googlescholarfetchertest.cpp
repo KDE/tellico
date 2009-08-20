@@ -55,7 +55,7 @@ void GoogleScholarFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("volume"), QLatin1String("519"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2001"));
   m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("177–182"));
-  m_fieldValues.insert(QLatin1String("bibtex-key"), QLatin1String(""));
+  m_fieldValues.insert(QLatin1String("bibtex-key"), QLatin1String("hasenbusch2001speeding"));
 }
 
 void GoogleScholarFetcherTest::testTitle() {
@@ -87,7 +87,7 @@ void GoogleScholarFetcherTest::testTitle() {
 }
 
 void GoogleScholarFetcherTest::testAuthor() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
                                        QLatin1Char('"') + m_fieldValues.value("author") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
