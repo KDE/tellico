@@ -25,7 +25,7 @@
 #include "googlescholarfetcher.h"
 #include "../core/filehandler.h"
 #include "../translators/bibteximporter.h"
-#include "../collection.h"
+#include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
@@ -37,6 +37,8 @@
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QFile>
+#include <QTextCodec>
 
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
@@ -154,16 +156,32 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString text = QString::fromUtf8(data, data.size());
+  const QString text = QString::fromUtf8(data, data.size());
+
+#if 0
+  myWarning() << "Remove debug from googlescholarfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
+    t << text;
+  }
+  f.close();
+#endif
+
   QString bibtex;
   int count = 0;
   for(int pos = m_bibtexRx.indexIn(text); count < m_limit && pos > -1; pos = m_bibtexRx.indexIn(text, pos+m_bibtexRx.matchedLength()), ++count) {
-    KUrl bibtexUrl(KUrl(SCHOLAR_BASE_URL), m_bibtexRx.cap(1));
+    // for some reason, KIO and google don't return bibtex when '&' is escaped
+    QString url = m_bibtexRx.cap(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
+    KUrl bibtexUrl(KUrl(SCHOLAR_BASE_URL), url);
 //    myDebug() << bibtexUrl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);
   }
 
   Import::BibtexImporter imp(bibtex);
+  // quiet warnings...
+  imp.setCurrentCollection(Data::CollPtr(new Data::BibtexCollection(true)));
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     myDebug() << "no collection pointer";
