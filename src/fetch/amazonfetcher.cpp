@@ -159,11 +159,6 @@ void AmazonFetcher::continueSearch() {
 }
 
 void AmazonFetcher::doSearch() {
-#ifndef HAVE_QCA2
-  message(i18n("Tellico was not compiled with support for searching %1.", defaultName()), MessageHandler::Warning);
-  stop();
-  return;
-#else
   // calling secretKey() ensures that we try to read it first
   if(secretKey().isEmpty() || m_access.isEmpty()) {
     // this message is split in two since the first half is reused later
@@ -339,18 +334,12 @@ void AmazonFetcher::doSearch() {
 
   AmazonRequest request(siteData(m_site).url, m_amazonKey);
   KUrl newUrl = request.signedRequest(params);
-  if(newUrl.isEmpty()) {
-    message(i18n("Tellico was not compiled with support for searching %1.", defaultName()), MessageHandler::Warning);
-    stop();
-    return;
-  }
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
-#endif
 }
 
 void AmazonFetcher::stop() {

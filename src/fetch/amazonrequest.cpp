@@ -22,47 +22,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef QT_NO_CAST_FROM_ASCII
-#define WAS_NO_ASCII
-#undef QT_NO_CAST_FROM_ASCII
-#endif
-
 #include "amazonrequest.h"
+#include "hmac_sha2.h"
 #include "../tellico_debug.h"
-
-#include <config.h>
-#ifdef HAVE_QCA2
-#include <QtCrypto>
-#endif
-
-#ifdef WAS_NO_ASCII
-#define QT_NO_CAST_FROM_ASCII
-#undef WAS_NO_ASCII
-#endif
 
 #include <KCodecs>
 
+#include <QDateTime>
+
 using Tellico::Fetch::AmazonRequest;
 
-QCA::Initializer* AmazonRequest::s_initializer = 0;
-
 AmazonRequest::AmazonRequest(const KUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
-#ifdef HAVE_QCA2
-  if(!s_initializer) {
-    s_initializer = new QCA::Initializer();
-  }
-#endif
 }
 
 KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
-#ifdef HAVE_QCA2
-  if(!QCA::isSupported("sha256")) {
-    myWarning() << "SHA256 not supported!";
-    return KUrl();
-  }
-
   QMap<QString, QString> allParams = params_;
-  allParams.insert("Timestamp", QDateTime::currentDateTime().toUTC().toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
+  allParams.insert(QLatin1String("Timestamp"),
+                   QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
   QByteArray query;
   // has to be a map so that the query elements are sorted
@@ -83,16 +59,14 @@ KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
                           + m_siteUrl.path().toUtf8() + '\n'
                           + query;
 
-  QCA::MessageAuthenticationCode hmac(QLatin1String("hmac(sha256)"), m_key);
-  hmac.update(toSign);
-  const QByteArray sig = KCodecs::base64Encode(hmac.final().toByteArray()).toPercentEncoding();
+  QByteArray hmac_buffer(SHA256_DIGEST_SIZE, '\0');
+  hmac_sha256(reinterpret_cast<unsigned char*>(const_cast<char*>(m_key.data())), m_key.length(),
+              reinterpret_cast<unsigned char*>(const_cast<char*>(toSign.data())), toSign.length(),
+              reinterpret_cast<unsigned char*>(hmac_buffer.data()), hmac_buffer.length());
+  const QByteArray sig = KCodecs::base64Encode(hmac_buffer).toPercentEncoding();
+//  myDebug() << sig;
 
   KUrl url = m_siteUrl;
   url.setEncodedQuery(query + "&Signature=" + sig);
   return url;
-#else
-  Q_UNUSED(params_);
-  myWarning() << "SHA256 signing is not available";
-  return KUrl();
-#endif
 }

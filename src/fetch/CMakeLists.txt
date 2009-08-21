@@ -17,13 +17,15 @@ SET(fetch_STAT_SRCS
    fetcher.cpp
    fetcherjob.cpp
    fetchmanager.cpp
+   fetchresult.cpp
    gcstarpluginfetcher.cpp
    googlescholarfetcher.cpp
+   hmac_sha2.c
    ibsfetcher.cpp
    imdbfetcher.cpp
    isbndbfetcher.cpp
    messagehandler.cpp
-   fetchresult.cpp
+   sha2.c
    srufetcher.cpp
    yahoofetcher.cpp
    z3950connection.cpp

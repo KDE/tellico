@@ -29,10 +29,6 @@
 
 #include <QMap>
 
-namespace QCA {
-  class Initializer;
-}
-
 namespace Tellico {
   namespace Fetch {
 
@@ -46,7 +42,6 @@ public:
   KUrl signedRequest(const QMap<QString, QString>& params) const;
 
 private:
-  static QCA::Initializer* s_initializer;
   KUrl m_siteUrl;
   QByteArray m_key;
 };
