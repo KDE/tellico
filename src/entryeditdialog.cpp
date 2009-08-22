@@ -140,7 +140,18 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   bool focusedFirst = false;
   QStringList catList = m_currColl->fieldCategories();
   for(QStringList::ConstIterator catIt = catList.constBegin(); catIt != catList.constEnd(); ++catIt) {
-    Data::FieldList fields = m_currColl->fieldsByCategory(*catIt);
+    Data::FieldList allCategoryfields = m_currColl->fieldsByCategory(*catIt);
+    Data::FieldList fields;
+    // remove fields which we don't plan to show
+    foreach(Data::FieldPtr field, allCategoryfields) {
+      // uneditabled and fields with derived values don't get widgets
+      if(field->hasFlag(Data::Field::NoEdit) ||
+         field->hasFlag(Data::Field::Derived)) {
+        continue;
+      }
+      fields << field;
+    }
+
     if(fields.isEmpty()) { // sanity check
       continue;
     }
@@ -169,11 +180,6 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 
     int count = 0;
     foreach(Data::FieldPtr field, fields) {
-      // uneditabled and fields with derived values don't get widgets
-      if(field->hasFlag(Data::Field::NoEdit) ||
-         field->hasFlag(Data::Field::Derived)) {
-        continue;
-      }
       if(field->type() == Data::Field::Choice) {
         noChoices = false;
       }
