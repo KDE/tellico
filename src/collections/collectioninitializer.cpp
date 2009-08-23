@@ -39,7 +39,7 @@
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
- * but as a static variable, they weren't always bein initialized, so do it the manual way.
+ * but as a static variable, they weren't always being initialized, so do it the manual way.
  *
  * But, at the least, collectionfactory is not coupled to every single collection type
  */

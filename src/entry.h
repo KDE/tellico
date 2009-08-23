@@ -197,14 +197,17 @@ public:
    * of that field for the entry. Whether or not formatting is done on the
    * strings themselves should be taken into account.
    *
+   * @param entry The entry
    * @param formatString The format string
    * @param formatted Whether the inserted values should be formatted.
    * @return The constructed field value
    */
-  static QString dependentValue(const Entry* e, const QString& formatString, bool formatted);
+  static QString derivedValue(const Entry* entry, const QString& formatString, bool formatted);
 
 private:
   // not used
+  Entry();
+
   bool operator==(const Entry& other);
 
   CollPtr m_coll;

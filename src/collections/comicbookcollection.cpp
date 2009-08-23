@@ -49,7 +49,7 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
 
   field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
   field->setCategory(i18n(comic_general));
-  field->setDescription(QLatin1String("%{@id}"));
+  field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
   field->setFlags(Field::Derived);
   field->setFormatFlag(Field::FormatNone);
   list.append(field);

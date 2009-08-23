@@ -437,8 +437,8 @@ void CollectionFieldsDialog::applyChanges() {
     m_typeCombo->clear();
     m_typeCombo->addItems(newTypesAllowed(m_currentField->type()));
     m_typeCombo->setCurrentItem(currType);
-    // description might have been changed for dependent fields
-    m_descEdit->setText(m_currentField->description());
+    // template might have been changed for dependent fields
+    m_derivedEdit->setText(m_currentField->property(QLatin1String("template")));
     m_updatingValues = wasUpdating;
   }
   enableButtonApply(false);
@@ -646,11 +646,9 @@ void CollectionFieldsDialog::updateField() {
   }
 
   if(m_derived->isChecked()) {
-    // description is the derived template
-    field->setDescription(m_derivedEdit->text());
-  } else {
-    field->setDescription(m_descEdit->text());
+    field->setProperty(QLatin1String("template"), m_derivedEdit->text());
   }
+  field->setDescription(m_descEdit->text());
   field->setDefaultValue(m_defaultEdit->text());
 
   if(m_formatCombo->isEnabled()) {
@@ -808,8 +806,10 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
   // the default value is included in properties, but it has a
   // separate edit box
   QString dv = m_currentField->defaultValue();
+  QString dt = m_currentField->property(QLatin1String("template"));
   StringMap props = m_currentField->propertyList();
   props.remove(QLatin1String("default"));
+  props.remove(QLatin1String("template"));
 
   StringMapDialog dlg(props, this, true);
   dlg.setCaption(i18n("Extended Field Properties"));
@@ -819,6 +819,9 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
     if(!dv.isEmpty()) {
       props.insert(QLatin1String("default"), dv);
     }
+    if(!dt.isEmpty()) {
+      props.insert(QLatin1String("template"), dt);
+    }
     m_currentField->setPropertyList(props);
     slotModified();
     return true;
@@ -827,7 +830,7 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
 }
 
 void CollectionFieldsDialog::slotDerivedChecked(bool checked_) {
-  m_descEdit->setEnabled(!checked_);
+  m_defaultEdit->setEnabled(!checked_);
   m_derivedEdit->setEnabled(checked_);
 }
 
@@ -897,7 +900,7 @@ bool CollectionFieldsDialog::checkValues() {
     }
   }
 
-  if(m_derived->isChecked() && m_derivedEdit->text().indexOf(QLatin1Char('%')) == -1) {
+  if(m_derived->isChecked() && !m_derivedEdit->text().contains(QLatin1Char('%'))) {
     KMessageBox::sorry(this, i18n("A field with a derived value must have a value template."));
     m_derivedEdit->setFocus();
     m_derivedEdit->selectAll();
@@ -924,16 +927,17 @@ void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
 
   idx = m_catCombo->findText(field_->category());
   m_catCombo->setCurrentIndex(idx); // have to do this here
+  m_descEdit->setText(field_->description());
   if(field_->hasFlag(Data::Field::Derived)) {
-    m_derivedEdit->setText(field_->description());
-    m_descEdit->clear();
+    m_derivedEdit->setText(field_->property(QLatin1String("template")));
+    m_derived->setChecked(true);
+    m_defaultEdit->clear();
   } else {
-    m_descEdit->setText(field_->description());
     m_derivedEdit->clear();
+    m_derived->setChecked(false);
+    m_defaultEdit->setText(field_->defaultValue());
   }
-  m_derived->setChecked(field_->hasFlag(Data::Field::Derived));
   slotDerivedChecked(m_derived->isChecked());
-  m_defaultEdit->setText(field_->defaultValue());
 
   m_formatCombo->setCurrentData(field_->formatFlag());
 

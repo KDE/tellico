@@ -272,7 +272,7 @@ Tellico::Fetch::FetchRequest ExecExternalFetcher::updateRequest(Data::EntryPtr e
 
   QStringList args = parseArguments(m_updateArgs);
   for(QStringList::Iterator it = args.begin(); it != args.end(); ++it) {
-    *it = Data::Entry::dependentValue(entry_.data(), *it, false);
+    *it = Data::Entry::derivedValue(entry_.data(), *it, false);
   }
   return FetchRequest(ExecUpdate, args.join(QLatin1String("::")));
 }

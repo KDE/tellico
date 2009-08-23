@@ -76,7 +76,6 @@ public:
     // if you want to add custom collection types, use a number sure to be unique like 101
   };
 
-  Collection(const QString& title);
   /**
    * The constructor is only used to create custom collections. It adds a title field,
    * in the "General" group.
@@ -322,7 +321,7 @@ public:
 
   /**
    * Return a vector of all the fields on which a field depends.
-   * Returns an empty vector for non-Dpendent fields
+   * Returns an empty vector for non-derived fields
    */
   FieldList fieldDependsOn(FieldPtr field) const;
   /**
@@ -342,13 +341,16 @@ signals:
   void signalRefreshField(Tellico::Data::FieldPtr field);
   void mergeAddedField(Tellico::Data::CollPtr coll, Tellico::Data::FieldPtr field);
 
+protected:
+  Collection(const QString& title);
+
 private:
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
   void removeEntriesFromDicts(const EntryList& entries);
   void populateDict(EntryGroupDict* dict, const QString& fieldName, const EntryList& entries);
   void populateCurrentDicts(const EntryList& entries);
   void cleanGroups();
-  bool dependentFieldHasRecursion(FieldPtr field);
+  bool derivedFieldHasRecursion(FieldPtr field);
 
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as

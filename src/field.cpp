@@ -198,7 +198,8 @@ QStringList Field::dependsOn() const {
   QRegExp rx(QLatin1String("%\\{(.+)\\}"));
   rx.setMinimal(true);
   // do NOT call recursively!
-  for(int pos = rx.indexIn(m_desc); pos > -1; pos = rx.indexIn(m_desc, pos+3)) {
+  const QString valueTemplate = property(QLatin1String("template"));
+  for(int pos = rx.indexIn(valueTemplate); pos > -1; pos = rx.indexIn(valueTemplate, pos+3)) {
     list << rx.cap(1);
   }
   return list;

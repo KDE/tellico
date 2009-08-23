@@ -113,7 +113,7 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
     return QString();
   }
   if(f->hasFlag(Field::Derived)) {
-    return dependentValue(this, f->description(), false);
+    return derivedValue(this, f->property(QLatin1String("template")), false);
   }
 
   if(!m_fieldValues.isEmpty() && m_fieldValues.contains(fieldName_)) {
@@ -135,10 +135,10 @@ QString Entry::formattedField(const QString& fieldName_) const {
   Field::FormatFlag flag = f->formatFlag();
   if(f->hasFlag(Field::Derived)) {
     if(flag == Field::FormatNone) {
-      return dependentValue(this, f->description(), false);
+      return derivedValue(this, f->property(QLatin1String("template")), false);
     } else {
       // format sub fields and whole string
-      return Field::format(dependentValue(this, f->description(), true), flag);
+      return Field::format(derivedValue(this, f->property(QLatin1String("template")), true), flag);
     }
   }
 
@@ -295,7 +295,7 @@ void Entry::invalidateFormattedFieldValue(const QString& name_) {
 }
 
 // format is something like "%{year} %{author}"
-QString Entry::dependentValue(const Entry* entry_, const QString& format_, bool formatted_) {
+QString Entry::derivedValue(const Entry* entry_, const QString& format_, bool formatted_) {
   if(!entry_) {
     return format_;
   }

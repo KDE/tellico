@@ -34,9 +34,10 @@ QTEST_KDEMAIN_CORE( CollectionTest )
 
 void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
-  Tellico::Data::Collection coll(QLatin1String("Title"));
-
   QVERIFY(nullColl.isNull());
+
+  Tellico::Data::Collection coll(false, QLatin1String("Title"));
+
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QVERIFY(coll.fields().isEmpty());
@@ -44,14 +45,20 @@ void CollectionTest::testEmpty() {
 }
 
 void CollectionTest::testCollection() {
-  Tellico::Data::Collection coll(true); // add default field
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
-  QCOMPARE(coll.entryCount(), 0);
-  QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
-  QCOMPARE(coll.fields().count(), 2);
-  QVERIFY(coll.hasField(QLatin1String("title")));
-  QVERIFY(coll.hasField(QLatin1String("id")));
-  QVERIFY(coll.peopleFields().isEmpty());
-  QVERIFY(coll.imageFields().isEmpty());
-  QVERIFY(!coll.hasImages());
+  QCOMPARE(coll->entryCount(), 0);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
+  QCOMPARE(coll->fields().count(), 2);
+  QVERIFY(coll->hasField(QLatin1String("title")));
+  QVERIFY(coll->hasField(QLatin1String("id")));
+  QVERIFY(coll->peopleFields().isEmpty());
+  QVERIFY(coll->imageFields().isEmpty());
+  QVERIFY(!coll->hasImages());
+
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+
+  // check derived value
+  QCOMPARE(entry->field(QLatin1String("id")), QLatin1String("0"));
 }

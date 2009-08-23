@@ -55,7 +55,7 @@ Collection::Collection(bool addDefaultFields_, const QString& title_)
     FieldPtr field;
     field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
     field->setCategory(i18n("General"));
-    field->setDescription(QLatin1String("%{@id}"));
+    field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
     field->setFlags(Field::Derived);
     field->setFormatFlag(Field::FormatNone);
     addField(field);
@@ -97,8 +97,8 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   }
 
   // it's not sufficient to merely check the new field
-  if(dependentFieldHasRecursion(field_)) {
-    field_->setDescription(QString());
+  if(derivedFieldHasRecursion(field_)) {
+    field_->setProperty(QLatin1String("template"), QString());
   }
 
   m_fields.append(field_);
@@ -189,9 +189,6 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
   // add new description if current is empty
   if(currField->description().isEmpty()) {
     currField->setDescription(newField_->description());
-    if(dependentFieldHasRecursion(currField)) {
-      currField->setDescription(QString());
-    }
   }
 
   // if new field has additional extended properties, add those
@@ -219,6 +216,9 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
           currField->setProperty(propName, QString::number(newNum));
         }
       }
+    }
+    if(propName == QLatin1String("template") && derivedFieldHasRecursion(currField)) {
+      currField->setProperty(QLatin1String("template"), QString());
     }
   }
 
@@ -278,8 +278,8 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
     }
   }
 
-  if(dependentFieldHasRecursion(newField_)) {
-    newField_->setDescription(QString());
+  if(derivedFieldHasRecursion(newField_)) {
+    newField_->setProperty(QLatin1String("template"), QString());
   }
 
   // keep track of if the entry groups will need to be reset
@@ -444,6 +444,10 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
   }
 
   foreach(EntryPtr entry, entries_) {
+    if(!entry) {
+      Q_ASSERT(entry);
+      continue;
+    }
     bool foster = false;
     if(CollPtr(this) != entry->collection()) {
       entry->setCollection(CollPtr(this));
@@ -810,7 +814,7 @@ QString Collection::prepareText(const QString& text_) const {
   return text_;
 }
 
-bool Collection::dependentFieldHasRecursion(Tellico::Data::FieldPtr field_) {
+bool Collection::derivedFieldHasRecursion(Tellico::Data::FieldPtr field_) {
   if(!field_ || !field_->hasFlag(Field::Derived)) {
     return false;
   }

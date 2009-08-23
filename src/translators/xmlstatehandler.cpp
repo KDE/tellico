@@ -230,7 +230,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   if(d->syntaxVersion < 11) {
     Data::FieldPtr field(new Data::Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Data::Field::Number));
     field->setCategory(i18n("General"));
-    field->setDescription(QLatin1String("%{@id}"));
+    field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
     field->setFlags(Data::Field::Derived);
     field->setFormatFlag(Data::Field::FormatNone);
     d->coll->addField(field);
@@ -345,6 +345,23 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 }
 
 bool FieldHandler::end(const QString&, const QString&, const QString&) {
+  // the value template for derived values used to be the field description
+  // now it is the 'template' property
+  // for derived value fields, if there is no property and the description has a '%'
+  // move it to the property
+  //
+  // might be empty is we're only adding default fields
+  if(!d->fields.isEmpty()) {
+    Data::FieldPtr field = d->fields.back();
+    if(field->hasFlag(Data::Field::Derived) &&
+       field->property(QLatin1String("template")).isEmpty() &&
+       field->description().contains(QLatin1Char('%'))) {
+      field->setProperty(QLatin1String("template"), field->description());
+      field->setDescription(QString());
+      myDebug() << "setting template to a property";
+    }
+  }
+
   return true;
 }
 
