@@ -192,7 +192,10 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
           }
         }
         value = Data::Image::idClean(value);
+        // since the modified date gets reset, keep a copy
+        const QString mdate = entry->field(QLatin1String("mdate"));
         entry->setField(field->name(), value);
+        entry->setField(QLatin1String("mdate"), mdate);
       }
     }
   }
