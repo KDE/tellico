@@ -191,6 +191,10 @@ may be used in the description for formatting.
 In general, there's no functional difference between the collection types. You could create a custom collection for your books just as easily as using the default book collection. But &appname; chooses icons based on collection type, and there may be some specialized functionality that is unique to a certain collection, so if you can, you should use the defaults. So, if you want to create a wine collection, but don't like any of the default fields, go ahead and create a default wine collection, then delete all the defaults. That way, &appname; still knows that it's a wine collection.
 </para>
 
+<para>
+By default, all the collection types include an <emphasis>ID</emphasis> field, which shows the ID number of the entry. In addition, except for the file catalog, each collection includes fields showing the date that the entry was created in the collection and the last time that it was modified.
+</para>
+
 <sect2 id="book-collection">
 <title>Book Collections</title>
 <para>
