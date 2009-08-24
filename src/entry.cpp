@@ -180,6 +180,21 @@ bool Entry::setField(const QString& name_, const QString& value_) {
     myWarning() << "empty field name for value: " << value_;
     return false;
   }
+
+  if(m_coll->fields().isEmpty() || !m_coll->hasField(name_)) {
+    myDebug() << "unknown collection entry field -" << name_;
+    return false;
+  }
+
+  const bool res = setFieldImpl(name_, value_);
+  // returning true means entry was successfully modified
+  if(res && name_ != QLatin1String("mdate") && m_coll->hasField(QLatin1String("mdate"))) {
+    setFieldImpl(QLatin1String("mdate"), QDate::currentDate().toString(Qt::ISODate));
+  }
+  return res;
+}
+
+bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
   // an empty value means remove the field
   if(value_.isEmpty()) {
     if(!m_fieldValues.isEmpty() && m_fieldValues.contains(name_)) {
@@ -189,15 +204,8 @@ bool Entry::setField(const QString& name_, const QString& value_) {
     return true;
   }
 
-#ifndef NDEBUG
-  if(m_coll && (m_coll->fields().count() == 0 || !m_coll->hasField(name_))) {
-    myDebug() << "unknown collection entry field - " << name_;
-    return false;
-  }
-#endif
-
   if(m_coll && !m_coll->isAllowed(name_, value_)) {
-    myDebug() << "for " << name_ << ", value is not allowed - " << value_;
+    myDebug() << "for" << name_ << ", value is not allowed -" << value_;
     return false;
   }
 

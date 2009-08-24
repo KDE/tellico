@@ -47,7 +47,6 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(IDField));
   list.append(createDefaultField(TitleField));
 
   field = new Field(QLatin1String("subtitle"), i18n("Subtitle"));
@@ -157,6 +156,10 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   field->setCategory(i18n(comic_personal));
   list.append(field);
+
+  list.append(createDefaultField(IDField));
+  list.append(createDefaultField(CreatedDateField));
+  list.append(createDefaultField(ModifiedDateField));
 
   return list;
 }

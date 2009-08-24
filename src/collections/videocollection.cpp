@@ -48,7 +48,6 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(IDField));
   list.append(createDefaultField(TitleField));
 
   QStringList media;
@@ -222,6 +221,10 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
+
+  list.append(createDefaultField(IDField));
+  list.append(createDefaultField(CreatedDateField));
+  list.append(createDefaultField(ModifiedDateField));
 
   return list;
 }

@@ -176,6 +176,9 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   foreach(Data::EntryPtr entry, d->entries) {
     foreach(Data::FieldPtr field, fields) {
       QString value = entry->field(field, false);
+      if(value.isEmpty()) {
+        continue;
+      }
       // image info should have already been loaded
       const Data::ImageInfo& info = ImageFactory::imageInfo(value);
       // possible that value needs to be cleaned first in which case info is null
@@ -227,11 +230,17 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   }
 
   // add a default field for ID
-  if(d->syntaxVersion < 11) {
+  // checking the defaultFields bool since if it is true, we already added these default fields
+  // even for old syntax versions
+  if(d->syntaxVersion < 11 && !d->defaultFields) {
     d->coll->addField(Data::Collection::createDefaultField(Data::Collection::IDField));
   }
   // now add all the new fields
   d->coll->addFields(d->fields);
+  if(d->syntaxVersion < 11 && !d->defaultFields) {
+    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::CreatedDateField));
+    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::ModifiedDateField));
+  }
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(d->syntaxVersion < 4 && d->collType == Data::Collection::Book
@@ -353,7 +362,6 @@ bool FieldHandler::end(const QString&, const QString&, const QString&) {
        field->description().contains(QLatin1Char('%'))) {
       field->setProperty(QLatin1String("template"), field->description());
       field->setDescription(QString());
-      myDebug() << "setting template to a property";
     }
   }
 
@@ -466,6 +474,12 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
 }
 
 bool EntryHandler::end(const QString&, const QString&, const QString&) {
+  Data::EntryPtr entry = d->entries.back();
+  Q_ASSERT(entry);
+  if(!d->modifiedDate.isEmpty() && d->coll->hasField(QLatin1String("mdate"))) {
+    entry->setField(QLatin1String("mdate"), d->modifiedDate);
+    d->modifiedDate.clear();
+  }
   return true;
 }
 
@@ -559,10 +573,16 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   }
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
-  if(!oldValue.isEmpty()) {
+  if(!oldValue.isEmpty() && f->hasFlag(Data::Field::AllowMultiple)) {
     fieldValue = oldValue + QLatin1String("; ") + fieldValue;
   }
-  entry->setField(fieldName, fieldValue);
+  // since the modified date value in the entry gets changed everytime we set a new value
+  // we have to save it and set it after changing all the others
+  if(fieldName == QLatin1String("mdate")) {
+    d->modifiedDate = fieldValue;
+  } else {
+    entry->setField(fieldName, fieldValue);
+  }
   return true;
 }
 

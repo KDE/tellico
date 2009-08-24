@@ -49,16 +49,35 @@ void CollectionTest::testCollection() {
 
   QCOMPARE(coll->entryCount(), 0);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
-  QCOMPARE(coll->fields().count(), 2);
+  QCOMPARE(coll->fields().count(), 4);
   QVERIFY(coll->hasField(QLatin1String("title")));
   QVERIFY(coll->hasField(QLatin1String("id")));
+  QVERIFY(coll->hasField(QLatin1String("cdate")));
+  QVERIFY(coll->hasField(QLatin1String("mdate")));
   QVERIFY(coll->peopleFields().isEmpty());
   QVERIFY(coll->imageFields().isEmpty());
   QVERIFY(!coll->hasImages());
 
-  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
-  coll->addEntries(entry);
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry1);
 
   // check derived value
-  QCOMPARE(entry->field(QLatin1String("id")), QLatin1String("0"));
+  QCOMPARE(entry1->field(QLatin1String("id")), QLatin1String("0"));
+  // check created and modified values
+  QCOMPARE(entry1->field(QLatin1String("cdate")), QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(entry1->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  // add created and modified dates from earlier, to make sure they don't get overwritten
+  QDate weekAgo = QDate::currentDate().addDays(-7);
+  QDate yesterday = QDate::currentDate().addDays(-1);
+  entry2->setField(QLatin1String("cdate"), weekAgo.toString(Qt::ISODate));
+  entry2->setField(QLatin1String("mdate"), yesterday.toString(Qt::ISODate));
+  coll->addEntries(entry2);
+
+  // check derived value
+  QCOMPARE(entry2->field(QLatin1String("id")), QLatin1String("1"));
+  // check created and modified values
+  QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
+  QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));
 }

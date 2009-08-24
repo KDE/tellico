@@ -338,7 +338,9 @@ public:
 
   enum DefaultField {
     IDField,
-    TitleField
+    TitleField,
+    CreatedDateField,
+    ModifiedDateField
   };
 
   static FieldPtr createDefaultField(DefaultField field);

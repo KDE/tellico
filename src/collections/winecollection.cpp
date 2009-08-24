@@ -45,8 +45,6 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(IDField));
-
   field = createDefaultField(TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{vintage} %{producer} %{varietal}"));
   field->setFlags(Field::NoDelete | Field::Derived);
@@ -126,6 +124,10 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
 
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
+
+  list.append(createDefaultField(IDField));
+  list.append(createDefaultField(CreatedDateField));
+  list.append(createDefaultField(ModifiedDateField));
 
   return list;
 }

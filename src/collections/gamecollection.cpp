@@ -46,7 +46,6 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(IDField));
   list.append(createDefaultField(TitleField));
 
   QStringList platform;
@@ -127,6 +126,10 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   field->setCategory(i18n(game_personal));
   list.append(field);
+
+  list.append(createDefaultField(IDField));
+  list.append(createDefaultField(CreatedDateField));
+  list.append(createDefaultField(ModifiedDateField));
 
   return list;
 }

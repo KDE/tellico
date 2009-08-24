@@ -47,6 +47,7 @@ public:
   Data::FieldList fields;
   Data::FieldPtr currentField;
   Data::EntryList entries;
+  QString modifiedDate;
   FilterPtr filter;
   Data::BorrowerPtr borrower;
   bool defaultFields;

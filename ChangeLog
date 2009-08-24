@@ -1,3 +1,7 @@
+2009-08-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Added default fields for entry creation date and last-modified date.
+
 2009-08-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Tellico user mailing list address.

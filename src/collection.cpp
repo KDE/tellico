@@ -45,7 +45,7 @@ Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
   switch(fieldEnum) {
     case IDField:
       field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
-      field->setCategory(i18n("General"));
+      field->setCategory(i18n("Personal"));
       field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
       field->setFlags(Field::Derived);
       field->setFormatFlag(Field::FormatNone);
@@ -55,6 +55,17 @@ Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
       field->setCategory(i18n("General"));
       field->setFlags(Field::NoDelete);
       field->setFormatFlag(Field::FormatTitle);
+      break;
+    case CreatedDateField:
+      field = new Field(QLatin1String("cdate"), i18n("Date Created"), Field::Date);
+      field->setCategory(i18n("Personal"));
+      field->setFlags(Field::NoEdit);
+      break;
+    case ModifiedDateField:
+      field = new Field(QLatin1String("mdate"), i18n("Date Modified"), Field::Date);
+      field->setCategory(i18n("Personal"));
+      field->setFlags(Field::NoEdit);
+      break;
   }
   return field;
 }
@@ -73,6 +84,8 @@ Collection::Collection(bool addDefaultFields_, const QString& title_)
   if(addDefaultFields_) {
     addField(createDefaultField(IDField));
     addField(createDefaultField(TitleField));
+    addField(createDefaultField(CreatedDateField));
+    addField(createDefaultField(ModifiedDateField));
   }
 }
 
@@ -100,7 +113,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
 
   // this essentially checks for duplicates
   if(hasField(field_->name())) {
-    myDebug() << "replacing " << field_->name();
+    myDebug() << "replacing" << field_->name() << "in collection" << m_title;
     removeField(fieldByName(field_->name()), true);
   }
 
@@ -478,6 +491,13 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
       ++m_nextEntryId;
     }
     m_entryIdDict.insert(entry->id(), entry.data());
+
+    if(hasField(QLatin1String("cdate")) && entry->field(QLatin1String("cdate")).isEmpty()) {
+      entry->setField(QLatin1String("cdate"), QDate::currentDate().toString(Qt::ISODate));
+    }
+    if(hasField(QLatin1String("mdate")) && entry->field(QLatin1String("mdate")).isEmpty()) {
+      entry->setField(QLatin1String("mdate"), QDate::currentDate().toString(Qt::ISODate));
+    }
   }
   if(m_trackGroups) {
     populateCurrentDicts(entries_);

@@ -28,12 +28,17 @@
 #include "datavectors.h"
 
 #include <QStringList>
+#include <QHash>
 
 #include <functional>
 
 namespace Tellico {
 
-  enum SaveState { NormalState, NewState, ModifiedState };
+  enum SaveState {
+    NormalState,
+    NewState,
+    ModifiedState
+  };
 
   namespace Data {
     class Collection;
@@ -210,10 +215,12 @@ private:
 
   bool operator==(const Entry& other);
 
+  bool setFieldImpl(const QString& fieldName, const QString& value);
+
   CollPtr m_coll;
   ID m_id;
-  StringMap m_fieldValues;
-  mutable StringMap m_formattedFields;
+  QHash<QString, QString> m_fieldValues;
+  mutable QHash<QString, QString> m_formattedFields;
   QList<EntryGroup*> m_groups;
 };
 
