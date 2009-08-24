@@ -92,7 +92,7 @@ public:
     AllowCompletion = 1 << 2,   // allow auto-completion
     NoDelete        = 1 << 3,   // don't allow user to delete this field
     NoEdit          = 1 << 4,   // don't allow user to delete this field
-    Derived   = 1 << 5    // dependent value
+    Derived         = 1 << 5    // dependent value
   };
 
   /**
