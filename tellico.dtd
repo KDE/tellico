@@ -98,11 +98,16 @@ platform | publishers | developers | completed |url |
 mimetype | size | permissions | owner | group | created | modified |
 metainfos | icon | amazon | imdb | imdb-rating | alttitle |
 allcertification | address | abstract | designer | bggid |
-mechanism | num-players )+>
+mechanism | num-players | cdate | mdate )+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
+<!-- general -->
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
+<!ELEMENT mdate (#PCDATA)>
+<!ELEMENT cdate (#PCDATA)>
+
+<!-- books -->
 <!ELEMENT subtitle (#PCDATA)>
 <!ELEMENT authors (author+)>
 <!ELEMENT author (#PCDATA)>
