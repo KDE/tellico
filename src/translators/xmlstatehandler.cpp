@@ -228,12 +228,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
 
   // add a default field for ID
   if(d->syntaxVersion < 11) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Data::Field::Number));
-    field->setCategory(i18n("General"));
-    field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
-    field->setFlags(Data::Field::Derived);
-    field->setFormatFlag(Data::Field::FormatNone);
-    d->coll->addField(field);
+    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::IDField));
   }
   // now add all the new fields
   d->coll->addFields(d->fields);
