@@ -168,10 +168,13 @@ bool CollectionHandler::start(const QString&, const QString&, const QString&, co
 
 bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   d->coll->addEntries(d->entries);
+
   // a little hidden capability was to just have a local path as an image file name
   // and on reading the xml file, Tellico would load the image file, too
   // here, we need to scan all the image values in all the entries and check
   // maybe this is too costly, especially since the capability wasn't advertised?
+  const bool hasMDate = d->coll->hasField(QLatin1String("mdate"));
+
   Data::FieldList fields = d->coll->imageFields();
   foreach(Data::EntryPtr entry, d->entries) {
     foreach(Data::FieldPtr field, fields) {
@@ -192,10 +195,14 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
           }
         }
         value = Data::Image::idClean(value);
-        // since the modified date gets reset, keep a copy
-        const QString mdate = entry->field(QLatin1String("mdate"));
-        entry->setField(field->name(), value);
-        entry->setField(QLatin1String("mdate"), mdate);
+        if(hasMDate) {
+          // since the modified date gets reset, keep a copy
+          const QString mdate = entry->field(QLatin1String("mdate"));
+          entry->setField(field->name(), value);
+          entry->setField(QLatin1String("mdate"), mdate);
+        } else {
+          entry->setField(field->name(), value);
+        }
       }
     }
   }
