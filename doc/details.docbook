@@ -176,6 +176,15 @@ be the title, followed by the year. This field type is used primarily for the ti
 the coin, stamp, trading card, and wine collections. Either the internal field name or the field title
 may be used in the description for formatting.
 </para>
+
+<para>
+To select only a single value for a field with multiple values, add a position index to the template,
+such as <userinput>%{author:1}</userinput> for the first author. The position may be negative,
+counting from the end, so <userinput>%{author:-1}</userinput> would be the last author. Upper and
+lower-case values may be used by setting template flags, such as <userinput>%{author:1/l}</userinput>
+for lower-case first author and <userinput>%{author:1/u}</userinput> for upper-case.
+</para>
+
 </sect2>
 
 </sect1>
