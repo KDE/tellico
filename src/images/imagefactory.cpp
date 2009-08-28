@@ -50,7 +50,7 @@ class ImageFactory::Private {
 public:
   // since most images get turned into pixmaps quickly, use 10 megs
   // for images and 10 megs for pixmaps
-  Private() : imageCache(10 * 1024 * 1024), pixmapCache(10 * 1024 * 1024) {}
+  Private() {}
 
   QHash<QString, Data::Image*> imageDict;
   QCache<QString, Data::Image> imageCache;
@@ -74,6 +74,7 @@ void ImageFactory::init() {
   }
   factory = new ImageFactory();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
+  factory->d->pixmapCache.setMaxCost(Config::imageCacheSize());
   factory->d->dataImageDir.setPath(Tellico::saveLocation(QLatin1String("data/")));
 }
 
@@ -242,9 +243,11 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
 
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
 
-  if(!d->imageCache.insert(img->id(), img, img->numBytes())) {
+  // if numBytes() is greater than maxCost, then trying and failing to insert it would
+  // mean the image gets deleted
+  if(img->numBytes() > d->imageCache.maxCost()) {
     // can't hold it in the cache
-    myWarning() << "Image cache is unable to hold the image, it might be too big!";
+    myWarning() << "Image cache is unable to hold the image, it's too big!";
     myWarning() << "Image name is " << img->id();
     myWarning() << "Image size is " << img->numBytes();
     myWarning() << "Max cache size is " << d->imageCache.maxCost();
@@ -254,6 +257,10 @@ const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_,
     // was called, we need to keep the pointer
     d->imageDict.insert(img->id(), img);
     s_imagesToRelease.add(img->id());
+  } else if(!d->imageCache.insert(img->id(), img, img->numBytes())) {
+    // at this point, img has been deleted!
+    myWarning() << "Unable to insert into image cache";
+    return Data::Image::null;
   }
   return *img;
 }
