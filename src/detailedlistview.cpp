@@ -523,21 +523,26 @@ void DetailedListView::checkHeader() {
   // normally, I would expect a check like header()->count() == header()->hiddenSectionCount()
   // to tell me if all sections are hidden, but it often doesn't work, with the hiddenSectionCount()
   // being greater than count()! From testing, if the sizeHint() width is 0, then the header is hidden
-  if(header()->sizeHint().isEmpty()) {
-    // find title action in menu and activate it
-    QAction* action = 0;
-    foreach(QAction* tryAction, m_headerMenu->actions()) {
-      const int ncol = tryAction->data().toInt();
-      if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {
-        action = tryAction;
-        break;
-      }
+  if(!header()->sizeHint().isEmpty()) {
+    return;
+  }
+  // find title action in menu and activate it
+  QAction* action = 0;
+  foreach(QAction* tryAction, m_headerMenu->actions()) {
+    const int ncol = tryAction->data().toInt();
+    if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {
+      action = tryAction;
+      break;
     }
-    if(action) {
-      action->activate(QAction::Trigger);
-    } else {
-      myDebug() << "found no action to show, still empty header!";
-    }
+  }
+  if(action) {
+    action->setChecked(true);
+    const int col = action->data().toInt();
+    // calling slotHeaderMenuActivated() would be infinite loop
+    setColumnHidden(col, false);
+    resizeColumnToContents(col);
+  } else {
+    myDebug() << "found no action to show, still empty header!";
   }
 }
 
