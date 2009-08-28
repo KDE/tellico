@@ -362,7 +362,39 @@ void DetailedListView::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldP
 }
 
 void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
+  QStringList columnNames;
+  QList<int> columnWidths, columnOrder;
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    // ignore hidden columns
+    if(!isColumnHidden(ncol)) {
+      columnNames << columnFieldName(ncol);
+      columnWidths << columnWidth(ncol);
+      columnOrder << header()->visualIndex(ncol);
+    }
+  }
+
   sourceModel()->setFields(fields_);
+
+  QList<int> currentColumnOrder;
+  // now restore widths and order
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    int idx = columnNames.indexOf(columnFieldName(ncol));
+    // column width of 0 means hidden
+    if(idx < 0 || columnWidths.at(idx) <= 0) {
+      hideColumn(ncol);
+      if(idx > -1) {
+        currentColumnOrder << ncol;
+      }
+    } else {
+      setColumnWidth(ncol, columnWidths.at(idx));
+      currentColumnOrder << ncol;
+    }
+  }
+  const int maxCount = qMin(currentColumnOrder.size(), columnOrder.size());
+  for(int i = 0; i < maxCount; ++i) {
+    header()->moveSection(header()->visualIndex(currentColumnOrder.at(i)), columnOrder.at(i));
+  }
+  updateHeaderMenu();
 }
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
