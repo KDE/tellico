@@ -39,6 +39,7 @@ SET(tellicotest_SRCS
    ../borrower.cpp
    ../collectionfactory.cpp
    ../tellico_utils.cpp
+   ../derivedvalue.cpp
    )
 
 KDE4_ADD_LIBRARY(tellicotest STATIC ${tellicotest_SRCS})

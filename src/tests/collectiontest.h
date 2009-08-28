@@ -33,6 +33,7 @@ Q_OBJECT
 private Q_SLOTS:
   void testEmpty();
   void testCollection();
+  void testDerived();
 };
 
 #endif

@@ -295,8 +295,6 @@ public:
    */
   const StringMap& propertyList() const { return m_properties; }
 
-  QStringList dependsOn() const;
-
   /*************************** STATIC **********************************/
   static QString format(const QString& value, FormatFlag flag);
   /**

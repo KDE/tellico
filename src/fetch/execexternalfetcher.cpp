@@ -26,6 +26,7 @@
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../derivedvalue.h"
 #include "../importdialog.h"
 #include "../translators/tellicoimporter.h"
 #include "../tellico_debug.h"
@@ -272,7 +273,8 @@ Tellico::Fetch::FetchRequest ExecExternalFetcher::updateRequest(Data::EntryPtr e
 
   QStringList args = parseArguments(m_updateArgs);
   for(QStringList::Iterator it = args.begin(); it != args.end(); ++it) {
-    *it = Data::Entry::derivedValue(entry_.data(), *it, false);
+    Data::DerivedValue dv(*it);
+    *it = dv.value(entry_, false);
   }
   return FetchRequest(ExecUpdate, args.join(QLatin1String("::")));
 }

@@ -26,6 +26,7 @@
 #include "entrygroup.h"
 #include "collection.h"
 #include "field.h"
+#include "derivedvalue.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 
@@ -113,7 +114,8 @@ QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const
     return QString();
   }
   if(f->hasFlag(Field::Derived)) {
-    return derivedValue(this, f->property(QLatin1String("template")), false);
+    DerivedValue dv(f);
+    return dv.value(EntryPtr(const_cast<Entry*>(this)), false);
   }
 
   if(!m_fieldValues.isEmpty() && m_fieldValues.contains(fieldName_)) {
@@ -134,12 +136,9 @@ QString Entry::formattedField(const QString& fieldName_) const {
 
   Field::FormatFlag flag = f->formatFlag();
   if(f->hasFlag(Field::Derived)) {
-    if(flag == Field::FormatNone) {
-      return derivedValue(this, f->property(QLatin1String("template")), false);
-    } else {
-      // format sub fields and whole string
-      return Field::format(derivedValue(this, f->property(QLatin1String("template")), true), flag);
-    }
+    DerivedValue dv(f);
+    // format sub fields and whole string
+    return Field::format(dv.value(EntryPtr(const_cast<Entry*>(this)), true), flag);
   }
 
   // if auto format is not set or FormatNone, then just return the value
@@ -300,54 +299,4 @@ void Entry::invalidateFormattedFieldValue(const QString& name_) {
   } else if(!m_formattedFields.isEmpty() && m_formattedFields.contains(name_)) {
     m_formattedFields.remove(name_);
   }
-}
-
-// format is something like "%{year} %{author}"
-QString Entry::derivedValue(const Entry* entry_, const QString& format_, bool formatted_) {
-  if(!entry_) {
-    return format_;
-  }
-
-  QString result, fieldName;
-  FieldPtr field;
-
-  int endPos;
-  int curPos = 0;
-  int pctPos = format_.indexOf(QLatin1Char('%'), curPos);
-  while(pctPos != -1 && pctPos+1 < static_cast<int>(format_.length())) {
-    if(format_[pctPos+1] == QLatin1Char('{')) {
-      endPos = format_.indexOf(QLatin1Char('}'), pctPos+2);
-      if(endPos > -1) {
-        result += format_.mid(curPos, pctPos-curPos);
-        fieldName = format_.mid(pctPos+2, endPos-pctPos-2);
-        field = entry_->collection()->fieldByName(fieldName);
-        if(!field) {
-          // allow the user to also use field titles
-          field = entry_->collection()->fieldByTitle(fieldName);
-        }
-        if(field) {
-          // don't format, just capitalize
-          result += entry_->field(field, formatted_);
-        } else if(fieldName == QLatin1String("@id") ||
-                  fieldName == QLatin1String("id")) {
-          // '@id' is the best way to use it, but formerly, we allowed just 'id'
-          result += QString::number(entry_->id());
-        } else {
-          result += format_.mid(pctPos, endPos-pctPos+1);
-        }
-        curPos = endPos+1;
-      } else {
-        break;
-      }
-    } else {
-      result += format_.mid(curPos, pctPos-curPos+1);
-      curPos = pctPos+1;
-    }
-    pctPos = format_.indexOf(QLatin1Char('%'), curPos);
-  }
-  result += format_.mid(curPos, format_.length()-curPos);
-//  myDebug() << "format_ << " = " << result;
-  // sometimes field value might empty, resulting in multiple consecutive white spaces
-  // so let's simplify that...
-  return result.simplified();
 }

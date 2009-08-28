@@ -42,8 +42,6 @@ Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_
     return new ValueComparison(field_, new RatingComparison());
   } else if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);
-  } else if(field_->hasFlag(Data::Field::Derived)) {
-    return new DerivedValueComparison(field_);
   } else if(field_->type() == Data::Field::Date || field_->formatFlag() == Data::Field::FormatDate) {
     return new ValueComparison(field_, new ISODateComparison());
   } else if(field_->type() == Data::Field::Choice) {
@@ -107,28 +105,6 @@ int Tellico::ImageComparison::compare(const QString& str1_, const QString& str2_
   }
   // large images come first
   return image1.width() - image2.width();
-}
-
-Tellico::DerivedValueComparison::DerivedValueComparison(Data::FieldPtr field) : ValueComparison(field, new StringComparison()) {
-  Data::FieldList fields = Data::Document::self()->collection()->fieldDependsOn(field);
-  foreach(Data::FieldPtr field, fields) {
-    m_comparisons.append(create(field));
-  }
-}
-
-Tellico::DerivedValueComparison::~DerivedValueComparison() {
-  qDeleteAll(m_comparisons);
-  m_comparisons.clear();
-}
-
-int Tellico::DerivedValueComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr entry2_) {
-  foreach(FieldComparison* comp, m_comparisons) {
-    int res = comp->compare(entry1_, entry2_);
-    if(res != 0) {
-      return res;
-    }
-  }
-  return ValueComparison::compare(entry1_, entry2_);
 }
 
 Tellico::ChoiceComparison::ChoiceComparison(Data::FieldPtr field) : FieldComparison(field) {

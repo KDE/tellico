@@ -188,23 +188,6 @@ bool Field::isSingleCategory() const {
   return (m_type == Para || m_type == Table || m_type == Image);
 }
 
-// format is something like "%{year} %{author}"
-QStringList Field::dependsOn() const {
-  QStringList list;
-  if(!hasFlag(Derived)) {
-    return list;
-  }
-
-  QRegExp rx(QLatin1String("%\\{(.+)\\}"));
-  rx.setMinimal(true);
-  // do NOT call recursively!
-  const QString valueTemplate = property(QLatin1String("template"));
-  for(int pos = rx.indexIn(valueTemplate); pos > -1; pos = rx.indexIn(valueTemplate, pos+3)) {
-    list << rx.cap(1);
-  }
-  return list;
-}
-
 QString Field::format(const QString& value_, FormatFlag flag_) {
   if(value_.isEmpty()) {
     return value_;
@@ -224,7 +207,7 @@ QString Field::format(const QString& value_, FormatFlag flag_) {
     case FormatPlain:
       text = FieldFormat::capitalize(value_, true /*check config */);
       break;
-    default:
+    case FormatNone:
       text = value_;
       break;
   }

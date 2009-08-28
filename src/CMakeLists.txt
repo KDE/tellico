@@ -30,6 +30,7 @@ SET(tellico_SRCS
    configdialog.cpp
    controller.cpp
    detailedlistview.cpp
+   derivedvalue.cpp
    document.cpp
    entry.cpp
    entryeditdialog.cpp

@@ -29,6 +29,8 @@
 #include "collectiontest.moc"
 
 #include "../collection.h"
+#include "../field.h"
+#include "../entry.h"
 
 QTEST_KDEMAIN_CORE( CollectionTest )
 
@@ -80,4 +82,65 @@ void CollectionTest::testCollection() {
   // check created and modified values
   QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
   QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));
+}
+
+void CollectionTest::testDerived() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
+
+  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"), QLatin1String("Author")));
+  aField->setFlags(Tellico::Data::Field::AllowMultiple);
+  aField->setFormatFlag(Tellico::Data::Field::FormatName);
+  coll->addField(aField);
+
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QLatin1String("author"), QLatin1String("Albert Einstein; Niels Bohr"));
+  coll->addEntries(entry);
+
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("Test")));
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author}"));
+  field->setFlags(Tellico::Data::Field::Derived);
+  field->setFormatFlag(Tellico::Data::Field::FormatName);
+  coll->addField(field);
+
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein; Niels Bohr"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{test3}"));
+
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QLatin1String("test2"), QLatin1String("Test")));
+  field2->setProperty(QLatin1String("template"), QLatin1String("%{test}"));
+  field2->setFlags(Tellico::Data::Field::Derived);
+  coll->addField(field2);
+
+  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QLatin1String("test3"), QLatin1String("Test")));
+  field3->setProperty(QLatin1String("template"), QLatin1String("%{test3:1}"));
+  field3->setFlags(Tellico::Data::Field::Derived);
+  coll->addField(field3);
+
+  // recursive, so template should be empty now
+  QCOMPARE(field3->property(QLatin1String("template")), QString());
+
+  // now test all the possible format options
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1/l}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("albert einstein"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1/u}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("ALBERT EINSTEIN"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
+  QCOMPARE(entry->field(QLatin1String("test"), true), QLatin1String("Einstein, Albert"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:2}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
+  QCOMPARE(entry->field(QLatin1String("test"), true), QLatin1String("Bohr, Niels"));
+
+  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-2}"));
+  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));
 }

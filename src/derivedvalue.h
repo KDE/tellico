@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,71 +22,40 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FIELDCOMPARISON_H
-#define TELLICO_FIELDCOMPARISON_H
+#ifndef TELLICO_DATA_DERIVEDVALUE_H
+#define TELLICO_DATA_DERIVEDVALUE_H
 
-#include "../datavectors.h"
+#include "datavectors.h"
 
-#include <QStringList>
+#include <QRegExp>
 
 namespace Tellico {
+  namespace Data {
 
-class StringComparison;
-
-class FieldComparison {
+class DerivedValue {
 public:
-  FieldComparison(Data::FieldPtr field);
-  virtual ~FieldComparison() {}
+  DerivedValue(const QString& valueTemplate);
+  DerivedValue(FieldPtr field);
 
-  Data::FieldPtr field() const { return m_field; }
+  // the reason we don't use a CollPtr is because this gets
+  // called when adding fields in the Collection() constructor
+  // which would create a ptr then destroy it and dereference the object
+  bool isRecursive(Collection* coll) const;
 
-  virtual int compare(Data::EntryPtr entry1, Data::EntryPtr entry2);
-
-  static FieldComparison* create(Data::FieldPtr field);
-
-protected:
-  virtual int compare(const QString& str1, const QString& str2) = 0;
+  QString value(EntryPtr entry, bool formatted) const;
 
 private:
-  Data::FieldPtr m_field;
+  QStringList templateFields() const;
+  QString templateKeyValue(EntryPtr entry, const QString& key, bool formatted) const;
+
+  QString m_fieldName;
+  QString m_valueTemplate;
+  mutable QRegExp m_keyRx;
 };
 
-class ValueComparison : public FieldComparison {
-public:
-  ValueComparison(Data::FieldPtr field, StringComparison* comp);
-  ~ValueComparison();
+  } // end namespace
+} // end namespace
 
-  using FieldComparison::compare;
-
-protected:
-  virtual int compare(const QString& str1, const QString& str2);
-
-private:
-  StringComparison* m_stringComparison;
-};
-
-class ImageComparison : public FieldComparison {
-public:
-  ImageComparison(Data::FieldPtr field);
-
-  using FieldComparison::compare;
-
-protected:
-  virtual int compare(const QString& str1, const QString& str2);
-};
-
-class ChoiceComparison : public FieldComparison {
-public:
-  ChoiceComparison(Data::FieldPtr field);
-
-  using FieldComparison::compare;
-
-protected:
-  virtual int compare(const QString& str1, const QString& str2);
-
-private:
-  QStringList m_values;
-};
-
-}
 #endif
+
+

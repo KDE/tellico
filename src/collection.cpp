@@ -26,6 +26,7 @@
 #include "field.h"
 #include "entry.h"
 #include "entrygroup.h"
+#include "derivedvalue.h"
 #include "tellico_utils.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
@@ -34,7 +35,6 @@
 #include <klocale.h>
 
 #include <QRegExp>
-#include <QStack>
 
 using Tellico::Data::Collection;
 
@@ -67,6 +67,7 @@ Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
       field->setFlags(Field::NoEdit);
       break;
   }
+  Q_ASSERT(field);
   return field;
 }
 
@@ -107,6 +108,7 @@ bool Collection::addFields(Tellico::Data::FieldList list_) {
 }
 
 bool Collection::addField(Tellico::Data::FieldPtr field_) {
+  Q_ASSERT(field_);
   if(!field_) {
     return false;
   }
@@ -117,12 +119,10 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
     removeField(fieldByName(field_->name()), true);
   }
 
-  // it's not sufficient to merely check the new field
-  if(derivedFieldHasRecursion(field_)) {
-    field_->setProperty(QLatin1String("template"), QString());
-  }
-
   m_fields.append(field_);
+  m_fieldByName.insert(field_->name(), field_.data());
+  m_fieldByTitle.insert(field_->title(), field_.data());
+
   if(field_->formatFlag() == Field::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
     if(m_peopleFields.count() > 1) {
@@ -134,10 +134,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
       }
     }
   }
-  m_fieldNameDict.insert(field_->name(), field_.data());
-  m_fieldTitleDict.insert(field_->title(), field_.data());
-  m_fieldNames << field_->name();
-  m_fieldTitles << field_->title();
+
   if(field_->type() == Field::Image) {
     m_imageFields.append(field_);
   }
@@ -156,6 +153,13 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
 
   if(m_defaultGroupField.isEmpty() && field_->hasFlag(Field::AllowGrouped)) {
     m_defaultGroupField = field_->name();
+  }
+
+  if(field_->hasFlag(Field::Derived)) {
+    DerivedValue dv(field_);
+    if(dv.isRecursive(this)) {
+      field_->setProperty(QLatin1String("template"), QString());
+    }
   }
 
   // refresh all dependent fields, in case one references this new one
@@ -238,8 +242,11 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
         }
       }
     }
-    if(propName == QLatin1String("template") && derivedFieldHasRecursion(currField)) {
-      currField->setProperty(QLatin1String("template"), QString());
+    if(propName == QLatin1String("template") && currField->hasFlag(Field::Derived)) {
+      DerivedValue dv(currField);
+      if(dv.isRecursive(this)) {
+        currField->setProperty(QLatin1String("template"), QString());
+      }
     }
   }
 
@@ -265,18 +272,16 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   // update name dict
-  m_fieldNameDict.insert(fieldName, newField_.data());
+  m_fieldByName.insert(fieldName, newField_.data());
 
   // update titles
   const QString oldTitle = oldField->title();
   const QString newTitle = newField_->title();
   if(oldTitle == newTitle) {
-    m_fieldTitleDict.insert(newTitle, newField_.data());
+    m_fieldByTitle.insert(newTitle, newField_.data());
   } else {
-    m_fieldTitleDict.remove(oldTitle);
-    m_fieldTitles.removeAll(oldTitle);
-    m_fieldTitleDict.insert(newTitle, newField_.data());
-    m_fieldTitles.append(newTitle);
+    m_fieldByTitle.remove(oldTitle);
+    m_fieldByTitle.insert(newTitle, newField_.data());
   }
 
   // now replace the field pointer in the list
@@ -299,8 +304,11 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
     }
   }
 
-  if(derivedFieldHasRecursion(newField_)) {
-    newField_->setProperty(QLatin1String("template"), QString());
+  if(newField_->hasFlag(Field::Derived)) {
+    DerivedValue dv(newField_);
+    if(dv.isRecursive(this)) {
+      newField_->setProperty(QLatin1String("template"), QString());
+    }
   }
 
   // keep track of if the entry groups will need to be reset
@@ -309,8 +317,8 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   // if format is different, go ahead and invalidate all formatted entry values
   if(oldField->formatFlag() != newField_->formatFlag()) {
     // invalidate cached format strings of all entry attributes of this name
-    foreach(EntryPtr it, m_entries) {
-      it->invalidateFormattedFieldValue(fieldName);
+    foreach(EntryPtr entry, m_entries) {
+      entry->invalidateFormattedFieldValue(fieldName);
     }
     resetGroups = true;
   }
@@ -374,8 +382,9 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
     invalidateGroups();
   }
 
-  // now to update all entries if the field is a dependent and the description changed
-  if(newField_->hasFlag(Field::Derived) && oldField->description() != newField_->description()) {
+  // now to update all entries if the field is a derived value and the template changed
+  if(newField_->hasFlag(Field::Derived) &&
+     oldField->property(QLatin1String("template")) != newField_->property(QLatin1String("template"))) {
     emit signalRefreshField(newField_);
   }
 
@@ -409,10 +418,8 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
   if(field_->type() == Field::Image) {
     m_imageFields.removeAll(field_);
   }
-  m_fieldNameDict.remove(field_->name());
-  m_fieldTitleDict.remove(field_->title());
-  m_fieldNames.removeAll(field_->name());
-  m_fieldTitles.removeAll(field_->title());
+  m_fieldByName.remove(field_->name());
+  m_fieldByTitle.remove(field_->title());
 
   if(fieldsByCategory(field_->category()).count() == 1) {
     m_fieldCategories.removeAll(field_->category());
@@ -428,7 +435,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
     qDeleteAll(*dict);
     m_entryGroups.removeAll(field_->name());
     if(field_->name() == m_defaultGroupField) {
-      setDefaultGroupField(m_entryGroups[0]);
+      setDefaultGroupField(m_entryGroups.first());
     }
   }
 
@@ -470,7 +477,7 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
       continue;
     }
     bool foster = false;
-    if(CollPtr(this) != entry->collection()) {
+    if(this != entry->collection().data()) {
       entry->setCollection(CollPtr(this));
       foster = true;
     }
@@ -483,14 +490,14 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     } else if(entry->id() == -1) {
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
-    } else if(m_entryIdDict[entry->id()]) {
+    } else if(m_entryById.value(entry->id())) {
       if(!foster) {
         myDebug() << "the collection already has an entry with id = " << entry->id();
       }
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
     }
-    m_entryIdDict.insert(entry->id(), entry.data());
+    m_entryById.insert(entry->id(), entry.data());
 
     if(hasField(QLatin1String("cdate")) && entry->field(QLatin1String("cdate")).isEmpty()) {
       entry->setField(QLatin1String("cdate"), QDate::currentDate().toString(Qt::ISODate));
@@ -543,7 +550,7 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
   removeEntriesFromDicts(vec_);
   bool success = true;
   foreach(EntryPtr entry, vec_) {
-    m_entryIdDict.remove(entry->id());
+    m_entryById.remove(entry->id());
     m_entries.removeAll(entry);
   }
   cleanGroups();
@@ -581,6 +588,14 @@ QString Collection::fieldNameByTitle(const QString& title_) const {
   return f->name();
 }
 
+QStringList Collection::fieldNames() const {
+  return m_fieldByName.keys();
+}
+
+QStringList Collection::fieldTitles() const {
+  return m_fieldByTitle.keys();
+}
+
 QString Collection::fieldTitleByName(const QString& name_) const {
   if(name_.isEmpty()) {
     return QString();
@@ -612,15 +627,15 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
 }
 
 Tellico::Data::FieldPtr Collection::fieldByName(const QString& name_) const {
-  return FieldPtr(m_fieldNameDict[name_]);
+  return FieldPtr(m_fieldByName.value(name_));
 }
 
 Tellico::Data::FieldPtr Collection::fieldByTitle(const QString& title_) const {
-  return FieldPtr(m_fieldTitleDict[title_]);
+  return FieldPtr(m_fieldByTitle.value(title_));
 }
 
 bool Collection::hasField(const QString& name_) const {
-  return fieldByName(name_);
+  return m_fieldByName.contains(name_);
 }
 
 bool Collection::isAllowed(const QString& key_, const QString& value_) const {
@@ -646,7 +661,7 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
   if(name_.isEmpty() || !m_entryGroupDicts.contains(name_) || m_entries.isEmpty()) {
     return 0;
   }
-  EntryGroupDict* dict = m_entryGroupDicts[name_];
+  EntryGroupDict* dict = m_entryGroupDicts.value(name_);
   if(dict && dict->isEmpty()) {
     const bool b = signalsBlocked();
     // block signals so all the group created/modified signals don't fire
@@ -670,7 +685,7 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
       if(isBool && !groupTitle.isEmpty()) {
         groupTitle = fieldTitleByName(fieldName_);
       }
-      EntryGroup* group = (*dict_)[groupTitle];
+      EntryGroup* group = (*dict_).value(groupTitle);
       // if the group doesn't exist, create it
       if(!group) {
         group = new EntryGroup(groupTitle, fieldName_);
@@ -714,7 +729,7 @@ void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_) 
   if(allEmpty) {
 //    myDebug() << "all collection dicts are empty";
     // still need to populate the current group dict
-    EntryGroupDict* dict = m_entryGroupDicts[m_lastGroupField];
+    EntryGroupDict* dict = m_entryGroupDicts.value(m_lastGroupField);
     if(dict) {
       populateDict(dict, m_lastGroupField, entries_);
     }
@@ -755,7 +770,7 @@ void Collection::invalidateGroups() {
 }
 
 Tellico::Data::EntryPtr Collection::entryById(ID id_) {
-  return EntryPtr(m_entryIdDict[id_]);
+  return EntryPtr(m_entryById.value(id_));
 }
 
 void Collection::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
@@ -789,11 +804,11 @@ void Collection::clear() {
   m_fields.clear();
   m_peopleFields.clear();
   m_imageFields.clear();
-  m_fieldNameDict.clear();
-  m_fieldTitleDict.clear();
+  m_fieldByName.clear();
+  m_fieldByTitle.clear();
 
   m_entries.clear();
-  m_entryIdDict.clear();
+  m_entryById.clear();
   foreach(EntryGroupDict* dict, m_entryGroupDicts) {
     qDeleteAll(*dict);
   }
@@ -816,61 +831,8 @@ void Collection::cleanGroups() {
   m_groupsToDelete.clear();
 }
 
-Tellico::Data::FieldList Collection::fieldDependsOn(FieldPtr field_) const {
-  FieldList vec;
-  // non derived fields don't have dependent fields
-  if(!field_->hasFlag(Field::Derived)) {
-    return vec;
-  }
-
-  const QStringList fieldNames = field_->dependsOn();
-  // do NOT call recursively!
-  foreach(const QString& fieldName, fieldNames) {
-    FieldPtr targetField = fieldByName(fieldName);
-    if(!targetField) {
-      // allow the user to also use field titles
-      targetField = fieldByTitle(fieldName);
-    }
-    if(targetField) {
-      vec.append(targetField);
-    }
-  }
-  return vec;
-}
-
 QString Collection::prepareText(const QString& text_) const {
   return text_;
-}
-
-bool Collection::derivedFieldHasRecursion(Tellico::Data::FieldPtr field_) {
-  if(!field_ || !field_->hasFlag(Field::Derived)) {
-    return false;
-  }
-
-  StringSet fieldNamesFound;
-  fieldNamesFound.add(field_->name());
-  QStack<FieldPtr> fieldsToCheck;
-  fieldsToCheck.push(field_);
-  while(!fieldsToCheck.isEmpty()) {
-    FieldPtr f = fieldsToCheck.pop();
-    const QStringList depFields = f->dependsOn();
-    foreach(const QString& depFieldName, depFields) {
-      if(fieldNamesFound.has(depFieldName)) {
-        myLog() << "found recursion for" << field_->name() << ": refers to" << depFieldName << "more than one";
-        // we have recursion
-        return true;
-      }
-      fieldNamesFound.add(depFieldName);
-      FieldPtr f = fieldByName(depFieldName);
-      if(!f) {
-        f = fieldByTitle(depFieldName);
-      }
-      if(f) {
-        fieldsToCheck.push(f);
-      }
-    }
-  }
-  return false;
 }
 
 int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {

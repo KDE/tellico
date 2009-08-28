@@ -196,19 +196,6 @@ public:
    */
   void invalidateFormattedFieldValue(const QString& name=QString());
 
-  /**
-   * Construct the derived valued for an field. The format string should be
-   * of the form "%{name1} %{name2}" where the names are replaced by the value
-   * of that field for the entry. Whether or not formatting is done on the
-   * strings themselves should be taken into account.
-   *
-   * @param entry The entry
-   * @param formatString The format string
-   * @param formatted Whether the inserted values should be formatted.
-   * @return The constructed field value
-   */
-  static QString derivedValue(const Entry* entry, const QString& formatString, bool formatted);
-
 private:
   // not used
   Entry();

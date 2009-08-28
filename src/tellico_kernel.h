@@ -70,13 +70,13 @@ public:
    *
    * @return The URL
    */
-  const KUrl& URL() const;
+  KUrl URL() const;
   /**
    * Returns a list of the field titles, wraps the call to the collection itself.
    *
    * @return the field titles
    */
-  const QStringList& fieldTitles() const;
+  QStringList fieldTitles() const;
   /**
    * Returns the name of an field, given its title. Wraps the call to the collection itself.
    *

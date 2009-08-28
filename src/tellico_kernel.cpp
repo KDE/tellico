@@ -62,11 +62,11 @@ Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
     , m_wallet(0) {
 }
 
-const KUrl& Kernel::URL() const {
+KUrl Kernel::URL() const {
   return Data::Document::self()->URL();
 }
 
-const QStringList& Kernel::fieldTitles() const {
+QStringList Kernel::fieldTitles() const {
   return Data::Document::self()->collection()->fieldTitles();
 }
 

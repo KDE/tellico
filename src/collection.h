@@ -77,9 +77,9 @@ public:
   };
 
   /**
-   * The constructor is only used to create custom collections. It adds a title field,
-   * in the "General" group.
+   * The constructor is only used to create custom collections.
    *
+   * @param addDefaultFields whether to add default fields or not
    * @param title The title of the collection itself
    */
   explicit Collection(bool addDefaultFields, const QString& title=QString());
@@ -182,13 +182,13 @@ public:
    */
   bool removeEntries(const EntryList& entries);
   /**
-   * Adds a whole list of attributes. It's gotta be virtual since it calls
+   * Adds a whole list of fields. It calls
    * @ref addField, which is virtual.
    *
-   * @param list List of attributes to add
-   * @return A boolean indicating if the field was added or not
+   * @param list List of fields to add
+   * @return A boolean indicating if the fields were successfully added or not
    */
-  virtual bool addFields(FieldList list);
+  bool addFields(FieldList list);
   /**
    * Adds an field to the collection, unless an field with that name
    * already exists. The collection takes ownership of the field object.
@@ -204,9 +204,9 @@ public:
   void reorderFields(const FieldList& list);
 
   // the reason this is not static is so I can call it from a collection pointer
-  // it also gets virtualized for different collection types
+  // it also gets overridden for different collection types
   // the return values should be compared against the GOOD and PERFECT
-  // static match constants in this class
+  // static match constants
   virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
 
   /**
@@ -222,13 +222,13 @@ public:
    *
    * @return The list of names
    */
-  const QStringList& fieldNames() const { return m_fieldNames; }
+  QStringList fieldNames() const;
   /**
    * Returns a list of all the field titles.
    *
    * @return The list of titles
    */
-  const QStringList& fieldTitles() const { return m_fieldTitles; }
+  QStringList fieldTitles() const;
   /**
    * Returns the title of an field, given its name.
    *
@@ -320,11 +320,6 @@ public:
   const FilterList& filters() const { return m_filters; }
 
   /**
-   * Return a vector of all the fields on which a field depends.
-   * Returns an empty vector for non-derived fields
-   */
-  FieldList fieldDependsOn(FieldPtr field) const;
-  /**
    * Prepare text for formatting
    *
    * Useful only for BibtexCollection to strip bibtex strings
@@ -359,7 +354,6 @@ private:
   void populateDict(EntryGroupDict* dict, const QString& fieldName, const EntryList& entries);
   void populateCurrentDicts(const EntryList& entries);
   void cleanGroups();
-  bool derivedFieldHasRecursion(FieldPtr field);
 
   /*
    * Gets the preferred ID of the collection. Currently, it just gets incremented as
@@ -378,14 +372,12 @@ private:
   FieldList m_fields;
   FieldList m_peopleFields; // keep separate list of people fields
   FieldList m_imageFields; // keep track of image fields
-  QHash<QString, Field*> m_fieldNameDict;
-  QHash<QString, Field*> m_fieldTitleDict;
+  QHash<QString, Field*> m_fieldByName;
+  QHash<QString, Field*> m_fieldByTitle;
   QStringList m_fieldCategories;
-  QStringList m_fieldNames;
-  QStringList m_fieldTitles;
 
   EntryList m_entries;
-  QHash<int, Entry*> m_entryIdDict;
+  QHash<int, Entry*> m_entryById;
 
   QHash<QString, EntryGroupDict*> m_entryGroupDicts;
   QStringList m_entryGroups;
