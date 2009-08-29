@@ -31,7 +31,7 @@
 #include <klocale.h>
 
 namespace {
-  static const char* version = "2.0";
+  static const char* version = "2.0pre2";
 }
 
 int main(int argc, char* argv[]) {
