@@ -758,6 +758,7 @@ bool HTMLExporter::writeEntryFiles() {
       }
       kapp->processEvents();
     }
+    ++j;
   }
   // the images in "pics/" are special data images, copy them always
   // since the entry files may refer to them, but we don't know that
