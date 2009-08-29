@@ -76,6 +76,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
   setRootIsDecorated(false);
+  setUniformRowHeights(true);
 
 //  connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
   connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
@@ -327,9 +328,10 @@ void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
       }
     }
   } else if(col < header()->count()) {
-    setColumnHidden(col, !action_->isChecked());
+    const bool isChecked = action_->isChecked();
+    setColumnHidden(col, !isChecked);
     // if we're showing a column, resize all sections
-    if(action_->isChecked()) {
+    if(isChecked) {
       resizeColumnToContents(col);
       adjustColumnWidths();
     }
