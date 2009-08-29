@@ -35,7 +35,6 @@ class KComboBox;
 class KIntSpinBox;
 class KPushButton;
 
-class QGroupBox;
 class QCheckBox;
 class QRadioButton;
 class QTableWidget;
@@ -96,7 +95,6 @@ private:
   QWidget* m_widget;
   GUI::CollectionTypeCombo* m_comboColl;
   QCheckBox* m_checkFirstRowHeader;
-  QGroupBox* m_delimiterGroup;
   QRadioButton* m_radioComma;
   QRadioButton* m_radioSemicolon;
   QRadioButton* m_radioTab;

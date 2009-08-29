@@ -176,7 +176,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   QGroupBox* groupBox = new QGroupBox(i18n("CSV Options"), m_widget);
   QVBoxLayout* vlay = new QVBoxLayout(groupBox);
 
-  QHBoxLayout* hlay = new QHBoxLayout(groupBox);
+  QHBoxLayout* hlay = new QHBoxLayout();
   vlay->addLayout(hlay);
   QLabel* lab = new QLabel(i18n("Collection &type:"), groupBox);
   hlay->addWidget(lab);
@@ -191,58 +191,55 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   connect(m_checkFirstRowHeader, SIGNAL(toggled(bool)), SLOT(slotFirstRowHeader(bool)));
   hlay->addWidget(m_checkFirstRowHeader);
 
-  hlay->addStretch(1);
+  hlay->addStretch(10);
 
-  QHBoxLayout* hlay2 = new QHBoxLayout(groupBox);
-  vlay->addLayout(hlay2);
+  QHBoxLayout* delimiterLayout = new QHBoxLayout();
+  vlay->addLayout(delimiterLayout);
 
-  m_delimiterGroup = new QGroupBox(i18n("Delimiter"), groupBox);
-  hlay2->addWidget(m_delimiterGroup);
-  QGridLayout* m_delimiterGroupLayout = new QGridLayout(m_delimiterGroup);
-  m_delimiterGroupLayout->setAlignment(Qt::AlignTop);
-  m_delimiterGroup->setWhatsThis(i18n("In addition to a comma, other characters may be used as "
+  lab = new QLabel(i18n("Delimiter:"), groupBox);
+  lab->setWhatsThis(i18n("In addition to a comma, other characters may be used as "
                                       "a delimiter, separating each value in the file."));
+  delimiterLayout->addWidget(lab);
 
-  m_radioComma = new QRadioButton(m_delimiterGroup);
+  m_radioComma = new QRadioButton(groupBox);
   m_radioComma->setText(i18n("&Comma"));
   m_radioComma->setChecked(true);
   m_radioComma->setWhatsThis(i18n("Use a comma as the delimiter."));
-  m_delimiterGroupLayout->addWidget(m_radioComma, 1, 0);
+  delimiterLayout->addWidget(m_radioComma);
 
-  m_radioSemicolon = new QRadioButton( m_delimiterGroup);
+  m_radioSemicolon = new QRadioButton( groupBox);
   m_radioSemicolon->setText(i18n("&Semicolon"));
   m_radioSemicolon->setWhatsThis(i18n("Use a semi-colon as the delimiter."));
-  m_delimiterGroupLayout->addWidget(m_radioSemicolon, 1, 1);
+  delimiterLayout->addWidget(m_radioSemicolon);
 
-  m_radioTab = new QRadioButton(m_delimiterGroup);
+  m_radioTab = new QRadioButton(groupBox);
   m_radioTab->setText(i18n("Ta&b"));
   m_radioTab->setWhatsThis(i18n("Use a tab as the delimiter."));
-  m_delimiterGroupLayout->addWidget(m_radioTab, 2, 0);
+  delimiterLayout->addWidget(m_radioTab);
 
-  m_radioOther = new QRadioButton(m_delimiterGroup);
+  m_radioOther = new QRadioButton(groupBox);
   m_radioOther->setText(i18n("Ot&her:"));
   m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
-  m_delimiterGroupLayout->addWidget(m_radioOther, 2, 1);
+  delimiterLayout->addWidget(m_radioOther);
 
-  m_editOther = new KLineEdit(m_delimiterGroup);
+  m_editOther = new KLineEdit(groupBox);
   m_editOther->setEnabled(false);
   m_editOther->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editOther->setMaxLength(1);
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_editOther->setEnabled(false);
-  m_delimiterGroupLayout->addWidget(m_editOther, 2, 2);
+  delimiterLayout->addWidget(m_editOther);
   connect(m_radioOther, SIGNAL(toggled(bool)),
           m_editOther, SLOT(setEnabled(bool)));
   connect(m_editOther, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+  delimiterLayout->addStretch(10);
 
-  QButtonGroup* buttonGroup = new QButtonGroup(m_delimiterGroup);
+  QButtonGroup* buttonGroup = new QButtonGroup(groupBox);
   buttonGroup->addButton(m_radioComma);
   buttonGroup->addButton(m_radioSemicolon);
   buttonGroup->addButton(m_radioTab);
   buttonGroup->addButton(m_radioOther);
   connect(buttonGroup, SIGNAL(buttonClicked(int)), SLOT(slotDelimiter()));
-
-  hlay2->addStretch(1);
 
   m_table = new QTableWidget(5, 0, groupBox);
   vlay->addWidget(m_table);
@@ -254,9 +251,9 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCurrentChanged(int, int)));
   connect(m_table->horizontalHeader(), SIGNAL(sectionClicked(int)), SLOT(slotHeaderClicked(int)));
 
-  QHBoxLayout* hlay3 = new QHBoxLayout(groupBox);
+  QHBoxLayout* hlay3 = new QHBoxLayout();
   vlay->addLayout(hlay3);
-  hlay3->addStretch(1);
+
   QString what = i18n("<qt>Set each column to correspond to a field in the collection by choosing "
                       "a column, selecting the field, then clicking the <i>Assign Field</i> button.</qt>");
   lab = new QLabel(i18n("Co&lumn:"), groupBox);
@@ -268,6 +265,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_colSpinBox->setMinimum(1);
   connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
   lab->setBuddy(m_colSpinBox);
+
   hlay3->addSpacing(10);
 
   lab = new QLabel(i18n("&Data field in this column:"), groupBox);
@@ -276,8 +274,11 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_comboField = new KComboBox(groupBox);
   hlay3->addWidget(m_comboField);
   m_comboField->setWhatsThis(what);
+  m_comboField->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 20);
+//  m_comboField->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
   lab->setBuddy(m_comboField);
+
   hlay3->addSpacing(10);
 
   m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
@@ -285,7 +286,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_setColumnBtn->setWhatsThis(what);
   m_setColumnBtn->setIcon(KIcon(QLatin1String("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
-  hlay3->addStretch(10);
+//  hlay3->addStretch(10);
 
   l->addWidget(groupBox);
   l->addStretch(1);
