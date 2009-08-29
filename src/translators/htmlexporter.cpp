@@ -462,7 +462,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
         const Data::Image& img = ImageFactory::imageById(id);
         KUrl target = imgDir;
         target.addPath(id);
-        success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), false);
+        success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), true);
       }
       if(!success) {
         myWarning() << "unable to write image file: "
