@@ -812,7 +812,7 @@ QString AmazonFetcher::secretKey() const {
     if(!maybeKey.isNull()) {
       m_amazonKey = maybeKey;
     } else {
-      myDebug() << "no amazon secret key found";
+      myDebug() << "no amazon secret key found for" << source();
     }
   }
   return QString::fromUtf8(m_amazonKey);
@@ -855,7 +855,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   label = new QLabel(i18n("Secret &key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_secretKeyEdit = new KLineEdit(optionsWidget());
-  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+//  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_secretKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_secretKeyEdit, row, 1);
   label->setWhatsThis(w);

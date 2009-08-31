@@ -322,7 +322,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label = new QLabel(i18n("&Password: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_passEdit = new KLineEdit(optionsWidget());
-  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+//  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_passEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passEdit, row, 1);
   label->setWhatsThis(w);
