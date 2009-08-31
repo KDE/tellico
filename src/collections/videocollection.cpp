@@ -78,7 +78,8 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   list.append(field);
 
   QStringList region;
-  region << i18n("Region 1")
+  region << i18n("Region 0")
+         << i18n("Region 1")
          << i18n("Region 2")
          << i18n("Region 3")
          << i18n("Region 4")
