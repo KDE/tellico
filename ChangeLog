@@ -1,6 +1,11 @@
+2009-09-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.0pre2.
+
 2009-08-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Added default fields for entry creation date and last-modified date.
+	* Removed dependency on QCA2 library.
 
 2009-08-09  Robby Stephenson  <robby@periapsis.org>
 
