@@ -118,10 +118,13 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
     case Qt::DisplayRole:
       if(parent.isValid()) {
         // it points to an entry
-        return entry(index_)->title();
+        Data::EntryPtr e = entry(index_);
+        return e ? e->title() : QString();
+      } else {
+        // it points to a filter
+        FilterPtr f = filter(index_);
+        return f ? f->name() : QString();
       }
-      // it points to a filter
-      return filter(index_)->name();
     case Qt::DecorationRole:
       return parent.isValid() ? KIcon(CollectionFactory::typeName(entry(index_)->collection()))
                               : KIcon(QLatin1String("view-filter"));
@@ -216,6 +219,7 @@ void FilterModel::removeFilter(Tellico::FilterPtr filter_) {
 Tellico::FilterPtr FilterModel::filter(const QModelIndex& index_) const {
   // if the parent isn't invalid, then it's not a top-level filter
   if(!index_.isValid() || index_.parent().isValid() || index_.row() >= m_filters.count()) {
+    myDebug() << "no filter found for" << index_.row();
     return FilterPtr();
   }
   return m_filters.at(index_.row());
@@ -230,6 +234,9 @@ Tellico::Data::EntryPtr FilterModel::entry(const QModelIndex& index_) const {
   Node* node = static_cast<Node*>(index_.internalPointer());
   if(node) {
     entry = Data::Document::self()->collection()->entryById(node->id());
+    if(!entry)  {
+      myWarning() << "no entry found for id" << node->id();
+    }
   }
   return entry;
 }
@@ -251,7 +258,7 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   Data::EntryList entries = Data::Document::self()->filteredEntries(filter(index_));
   beginInsertRows(index_, 0, entries.count() - 1);
   foreach(Data::EntryPtr entry, entries) {
-    Node* childNode = new Node(filterNode);
+    Node* childNode = new Node(filterNode, entry->id());
     filterNode->addChild(childNode);
   }
   endInsertRows();
