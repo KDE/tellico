@@ -1,6 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
-    email                : sebastian.held@gmx.de
+    Copyright (C) 2007-2009 Sebastian Held <sebastian.held@gmx.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,29 +25,13 @@
 #ifndef BARCODE_V4L_H
 #define BARCODE_V4L_H
 
-#define GETELEM(array,index,default) \
-	(index < sizeof(array)/sizeof(array[0]) ? array[index] : default)
-
-/*
- *  Taken from xawtv-3.5.9 source 8/15/01 by George Staikos <staikos@kde.org>
- */
-#ifdef __STRICT_ANSI__
-#undef __STRICT_ANSI__
-#define FOO__STRICT_ANSI__
-#endif
-#include <asm/types.h>
-#ifdef FOO__STRICT_ANSI__
-#define __STRICT_ANSI__ 1
-#undef FOO__STRICT_ANSI__
-#endif
-
-//#include <linux/videodev2.h>
-#include <linux/videodev.h>
+//#define Barcode_DEBUG
 
 #include <QString>
 #include <QImage>
-//Added by qt3to4:
-#include <Q3PtrList>
+
+#include <linux/types.h>
+#include <linux/videodev.h>
 
 namespace barcodeRecognition {
 
@@ -77,71 +60,6 @@ extern unsigned int  ng_yuv_g2[256];
 extern unsigned int  ng_clip[256 + 2 * CLIP];
 void ng_color_yuv2rgb_init();
 
-
-
-class video_converter
-{
-public:
-  video_converter() {;}
-  virtual ~video_converter() {;}
-  virtual void init( ng_video_fmt* ) {;}
-  virtual void exit() {;}
-  virtual void frame( QByteArray*, const QByteArray*,  ng_video_fmt ) {;}
-  int fmtid_in() {return m_fmtid_in;}
-  int fmtid_out() {return m_fmtid_out;}
-protected:
-  int m_fmtid_in, m_fmtid_out;
-};
-
-class yuv422p_to_rgb24 : public video_converter
-{
-public:
-  yuv422p_to_rgb24() {m_fmtid_in=VIDEO_YUV422P; m_fmtid_out=VIDEO_RGB24;}
-  virtual void frame( QByteArray *, const QByteArray *,  ng_video_fmt  ) {;}
-};
-class yuv422_to_rgb24 : public video_converter
-{
-public:
-  yuv422_to_rgb24() {m_fmtid_in=VIDEO_YUYV; m_fmtid_out=VIDEO_RGB24;}
-  virtual void frame( QByteArray *, const QByteArray *,  ng_video_fmt  ) {;}
-};
-class yuv420p_to_rgb24 : public video_converter
-{
-public:
-  yuv420p_to_rgb24() {m_fmtid_in=VIDEO_YUV420P; m_fmtid_out=VIDEO_RGB24;}
-  virtual void frame( QByteArray *, const QByteArray *,  ng_video_fmt  );
-};
-
-class ng_vid_driver
-{
-public:
-  virtual ~ng_vid_driver() {}
-
-  static ng_vid_driver *createDriver( QString device );
-  static int xioctl( int fd, int cmd, void *arg );
-
-  /* open/close */
-  virtual bool open2( QString device ) = 0;
-  virtual void close() = 0;
-
-  /* attributes */
-  virtual QString get_devname() {return m_name;}
-  virtual int capabilities() = 0;
-
-  /* capture */
-  virtual bool setformat( ng_video_fmt *fmt ) = 0;
-  virtual QByteArray* getimage2() = 0;  /* single image */
-
-  // video converter
-  static void register_video_converter( video_converter *conv );
-  static video_converter *find_video_converter( int out, int in );
-
-protected:
-  QString m_name;
-  static Q3PtrList<video_converter> m_converter;
-};
-
-
 class barcode_v4l
 {
 public:
@@ -152,48 +70,16 @@ public:
 
 protected:
   bool grab_init();
+  int get_brightness_adj(unsigned char *image, long size, long *brightness);
 
   QString m_devname;
-  int m_grab_width, m_grab_height;
-  ng_vid_driver *m_drv;
-  ng_video_fmt m_fmt, m_fmt_drv;
-  video_converter *m_conv;
-
-};
-
-
-class ng_vid_driver_v4l : public ng_vid_driver
-{
-public:
-  ng_vid_driver_v4l();
-
-  /* open/close */
-  //virtual bool open( QString device );
-  virtual bool open2( QString device );
-  virtual void close();
-
-  /* attributes */
-  virtual int capabilities();
-
-  /* capture */
-  virtual bool setformat( ng_video_fmt *fmt );
-  //virtual ng_video_buf* getimage();  /* single image */
-  virtual QByteArray* getimage2();  /* single image */
-
-protected:
-  bool read_setformat( ng_video_fmt *fmt );
-  QByteArray* read_getframe2();
-  void *m_drv;
   int m_fd;
+  int m_grab_width, m_grab_height;
   video_capability m_capability;
   video_picture m_pict;
   video_window m_win;
-
-  /* capture */
-  bool m_use_read;
-  ng_video_fmt m_fmt;
-
-  unsigned short format2palette[VIDEO_FMT_COUNT];
+  QByteArray *m_buffer;
+  QImage *m_image;
 };
 
 } // namespace

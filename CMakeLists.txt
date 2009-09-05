@@ -78,6 +78,14 @@ if(LIBEXEMPI_FOUND)
     include_directories(${LIBEXEMPI_INCLUDE_DIR})
 endif(LIBEXEMPI_FOUND)
 
+macro_optional_find_package(V4l)
+macro_log_feature(LIBV4L_FOUND "libv4l" "Support for barcode scanning" "http://hansdegoede.livejournal.com/3636.html" FALSE "" "Required for using a webcam")
+if(LIBV4L_FOUND)
+    include_directories(${LIBV4L_INCLUDE_DIR})
+else(LIBV4L_FOUND)
+    set( ENABLE_WEBCAM FALSE )
+endif(LIBV4L_FOUND)
+
 if(CMAKE_SYSTEM_NAME MATCHES Linux)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
 endif(CMAKE_SYSTEM_NAME MATCHES Linux)
@@ -99,9 +107,9 @@ include_directories(${KDE4_INCLUDES}
 
 # is there a better way to disable qt3support library?
 get_directory_property(include_dirs INCLUDE_DIRECTORIES)
-if(NOT ENABLE_WEBCAM AND QT_QT3SUPPORT_FOUND)
+if(QT_QT3SUPPORT_FOUND)
   string(REPLACE ${QT_QT3SUPPORT_INCLUDE_DIR} "" include_dirs "${include_dirs}")
-endif(NOT ENABLE_WEBCAM AND QT_QT3SUPPORT_FOUND)
+endif(QT_QT3SUPPORT_FOUND)
 set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
@@ -114,6 +122,11 @@ if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Da
     message("WARNING: CDDB Lookup is not supported on your platform")
 endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
 
+if(ENABLE_WEBCAM AND NOT CMAKE_SYSTEM_NAME MATCHES "Linux")
+    message("WARNING: Webcam support is not available on your platform")
+    set( ENABLE_WEBCAM FALSE )
+endif(ENABLE_WEBCAM AND NOT CMAKE_SYSTEM_NAME MATCHES "Linux")
+
 ########## Wrap tests results around the tests done within the source
 
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
@@ -124,6 +137,7 @@ macro_bool_to_01(KSANE_FOUND HAVE_KSANE)
 macro_bool_to_01(KCDDB_FOUND HAVE_KCDDB)
 macro_bool_to_01(KABC_FOUND HAVE_KABC)
 macro_bool_to_01(KCAL_FOUND HAVE_KCAL)
+macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

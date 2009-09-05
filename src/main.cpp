@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
   aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
   aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString());
   aboutData.addAuthor(ki18n("Petri Damstén"), KLocalizedString(), "damu@iki.fi");
+  aboutData.addAuthor(ki18n("Sebastian Held"), KLocalizedString());
 
   aboutData.addCredit(ki18n("Virginie Quesnay"), ki18n("Icons"));
   aboutData.addCredit(ki18n("Amarok"), ki18n("Code examples and general inspiration"),

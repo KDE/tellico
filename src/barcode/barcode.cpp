@@ -1,6 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
-    email                : sebastian.held@gmx.de
+    Copyright (C) 2007-2009 Sebastian Held <sebastian.held@gmx.de>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,13 +26,13 @@
 
 // includes code from http://v4l2spec.bytesex.org/spec/a16323.htm
 
-
 #include "barcode.h"
-
-#include <stdlib.h>
 
 #include <QImage>
 #include <QMutex>
+#include <QDebug>
+
+#include <stdlib.h>
 
 using barcodeRecognition::barcodeRecognitionThread;
 using barcodeRecognition::Barcode_EAN13;
@@ -53,6 +52,11 @@ barcodeRecognitionThread::~barcodeRecognitionThread()
 bool barcodeRecognitionThread::isWebcamAvailable()
 {
   return m_barcode_v4l->isOpen();
+}
+
+QSize barcodeRecognitionThread::getPreviewSize() const
+{
+  return QSize( 320,240 );
 }
 
 void barcodeRecognitionThread::run()
@@ -124,7 +128,7 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
   int h = img.height();
 
   // the array which will contain the result:
-  Q3ValueVector< Q3ValueVector<int> > numbers( amount_scanlines, Q3ValueVector<int>(13,-1) ); // no init in java source!!!!!!!!!
+  QVector< QVector<int> > numbers( amount_scanlines, QVector<int>(13,-1) ); // no init in java source!!!!!!!!!
 
   // generate and initialize the array that will contain all detected
   // digits at a specific code position:
@@ -160,7 +164,7 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
 
 #ifdef BarcodeDecoder_DEBUG
     // show the information that has been recognized along the scanline:
-    qDebug( "Scanline %i result: %s\n", i, ean13_code.toString().toLatin1() );
+    qDebug( "Scanline %i result: %s\n", i, ean13_code.toString().latin1() );
 #endif
   }
 
@@ -184,36 +188,32 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
 void barcodeRecognitionThread::printArray( int array[10][13][2], int level )
 {
   for (int i = 0; i < 10; i++) {
-    QByteArray temp;
-    temp.setNum( i );
-    fprintf( stderr, temp + " :   " );
+    QString temp;
+    temp = QString::number( i ) + QString::fromAscii(" :   ");
     for (int j = 0; j < 13; j++) {
       if (array[i][j][level] == -1)
-        fprintf( stderr, "x  " );
-      else {
-        QByteArray temp;
-        temp.setNum( array[i][j][level] );
-        fprintf( stderr, temp + "  " );
-      }
+        temp += QString::fromAscii("x  ");
+      else
+      temp += QString::number( array[i][j][level] ) + QString::fromAscii("  ");
     }
-    fprintf( stderr, "\n" );
+  qDebug() << temp;
   }
 }
 
 barcodeRecognition::Barcode_EAN13 barcodeRecognitionThread::recognizeCode( QImage img, int x1, int x2, int y )
 {
-  Q3ValueVector<QRgb> raw_path(x2-x1+1);
+  QVector<QRgb> raw_path(x2-x1+1);
   for (int x=x1; x<=x2; x++)
     raw_path[x-x1] = img.pixel(x,y);
   // convert the given path into a string of black and white pixels:
-  Q3ValueVector<int> string = transformPathToBW( raw_path );
+  QVector<int> string = transformPathToBW( raw_path );
 
   // convert the string of black&white pixels into a list, containing
   // information about the black and white fields
   // first indes = field nr.
   // second index: 0 = color of the field
   //               1 = field length
-  Q3ValueVector< Q3ValueVector<int> > fields = extractFieldInformation( string );
+  QVector< QVector<int> > fields = extractFieldInformation( string );
 
   // try to recognize a EAN13 code:
   Barcode_EAN13 barcode = Decoder_EAN13::recognize( fields );
@@ -221,7 +221,7 @@ barcodeRecognition::Barcode_EAN13 barcodeRecognitionThread::recognizeCode( QImag
   return barcode;
 }
 
-void barcodeRecognitionThread::addNumberToPossibleNumbers( Q3ValueVector<int> number, int possible_numbers[10][13][2], bool correct_code )
+void barcodeRecognitionThread::addNumberToPossibleNumbers( QVector<int> number, int possible_numbers[10][13][2], bool correct_code )
 {
   int i;
   bool digit_contained;
@@ -292,7 +292,7 @@ void barcodeRecognitionThread::sortDigits( int possible_numbers[10][13][2] )
 Barcode_EAN13 barcodeRecognitionThread::extractBarcode( int possible_numbers[10][13][2] )
 {
   // create and initialize the temporary variables:
-  Q3ValueVector<int> temp_code(13);
+  QVector<int> temp_code(13);
   for (int i = 0; i < 13; i++)
     temp_code[i] = possible_numbers[0][i][0];
 
@@ -309,13 +309,13 @@ Barcode_EAN13 barcodeRecognitionThread::extractBarcode( int possible_numbers[10]
 Barcode_EAN13 barcodeRecognitionThread::detectValidBarcode ( int possible_numbers[10][13][2], int max_amount_of_considered_codes )
 {
   // create and initialize the temporary variables:
-  Q3ValueVector<int> temp_code(13);
+  QVector<int> temp_code(13);
   for ( int i = 0; i < 13; i++ )
     temp_code[i] = possible_numbers[0][i][0];
 
   int alternative_amount = 0;
 
-  Q3ValueVector<int> counter( 13 ); // no init in java source!!!
+  QVector<int> counter( 13 ); // no init in java source!!!
   int counter_nr = 11;
 
   // check if there is at least one complete code present:
@@ -381,12 +381,12 @@ Barcode_EAN13 barcodeRecognitionThread::detectValidBarcode ( int possible_number
 
 bool barcodeRecognitionThread::isValid( int numbers[13] )
 {
-  Q3ValueVector<int> temp(13);
+  QVector<int> temp(13);
   for (int i=0; i<13; i++)
     temp[i] = numbers[i];
   return isValid( temp );
 }
-bool barcodeRecognitionThread::isValid( Q3ValueVector<int> numbers )
+bool barcodeRecognitionThread::isValid( QVector<int> numbers )
 {
   Q_ASSERT( numbers.count() == 13 );
   // calculate the checksum of the barcode:
@@ -407,14 +407,14 @@ bool barcodeRecognitionThread::isValid( Q3ValueVector<int> numbers )
   return (numbers[12] == checksum_digit);
 }
 
-Q3ValueVector<int> barcodeRecognitionThread::transformPathToBW( Q3ValueVector<QRgb> line )
+QVector<int> barcodeRecognitionThread::transformPathToBW( QVector<QRgb> line )
 {
   int w = line.count();
-  Q3ValueVector<int> bw_line(w,0);
+  QVector<int> bw_line(w,0);
   bw_line[0] = 255;
 
   // create greyscale values:
-  Q3ValueVector<int> grey_line(w,0);
+  QVector<int> grey_line(w,0);
   int average_illumination = 0;
   for (int x = 0; x < w; x++) {
     grey_line[x] = (qRed(line.at(x)) + qGreen(line.at(x)) + qBlue(line.at(x))) / 3;
@@ -466,7 +466,7 @@ Q3ValueVector<int> barcodeRecognitionThread::transformPathToBW( Q3ValueVector<QR
     }
   }
 
-  Q3ValueVector<int> ret(w,0);
+  QVector<int> ret(w,0);
   for (int i=0; i<w; i++)
     ret[i] = bw_line[i];
 
@@ -483,12 +483,12 @@ Q3ValueVector<int> barcodeRecognitionThread::transformPathToBW( Q3ValueVector<QR
   return ret;
 }
 
-Q3ValueVector< Q3ValueVector<int> > barcodeRecognitionThread::extractFieldInformation( Q3ValueVector<int> string )
+QVector< QVector<int> > barcodeRecognitionThread::extractFieldInformation( QVector<int> string )
 {
-  Q3ValueVector< Q3ValueVector<int> > temp_fields( string.count(), Q3ValueVector<int>(2,0) );
+  QVector< QVector<int> > temp_fields( string.count(), QVector<int>(2,0) );
 
   if (string.count() == 0)
-    return Q3ValueVector< Q3ValueVector<int> >();
+    return QVector< QVector<int> >();
 
   int field_counter = 0;
   int last_value = string.at(0);
@@ -520,24 +520,23 @@ Q3ValueVector< Q3ValueVector<int> > barcodeRecognitionThread::extractFieldInform
 }
 
 //ok
-Barcode_EAN13::Barcode_EAN13()
+Barcode_EAN13::Barcode_EAN13() : m_numbers(13,-1)
 {
-  m_numbers.resize(13,-1);
   m_null = true;
 }
 
 //ok
-Barcode_EAN13::Barcode_EAN13( Q3ValueVector<int> code )
+Barcode_EAN13::Barcode_EAN13( QVector<int> code )
 {
   setCode( code );
 }
 
 //ok
-void Barcode_EAN13::setCode( Q3ValueVector<int> code )
+void Barcode_EAN13::setCode( QVector<int> code )
 {
   if (code.count() != 13) {
     m_numbers.clear();
-    m_numbers.resize(13,-1);
+    m_numbers.insert(0,13,-1);
     m_null = true;
     return;
   }
@@ -567,7 +566,7 @@ bool Barcode_EAN13::isValid() const
 }
 
 //ok
-Q3ValueVector<int> Barcode_EAN13::getNumbers() const
+QVector<int> Barcode_EAN13::getNumbers() const
 {
   return m_numbers;
 }
@@ -580,7 +579,7 @@ QString Barcode_EAN13::toString() const
     if ((m_numbers[i] >= 0) && (m_numbers[i] <= 9))
       s += QString::number(m_numbers[i]);
     else
-      s += QLatin1String("?");
+      s += QChar::fromAscii('?');
   return s;
 }
 
@@ -597,17 +596,17 @@ bool Barcode_EAN13::operator!= ( const Barcode_EAN13 &code )
 }
 
 //ok
-Barcode_EAN13 Decoder_EAN13::recognize( Q3ValueVector< Q3ValueVector<int> > fields )
+Barcode_EAN13 Decoder_EAN13::recognize( QVector< QVector<int> > fields )
 {
   // try to extract the encoded information from the field series:
-  Q3ValueVector<int> numbers = decode( fields, 0, fields.count() );
+  QVector<int> numbers = decode( fields, 0, fields.count() );
   Barcode_EAN13 barcode( numbers );
 
   // return the results:
   return barcode;
 }
 
-Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fields, int start_i, int end_i )
+QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i, int end_i )
 {
   // determine the length of the path in pixels
   int length = 0;
@@ -631,11 +630,11 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
 
   // consistency checks:
   if (fields.count() <= 0)
-    return Q3ValueVector<int>();
+    return QVector<int>();
   if (start_i > end_i - 3)
-    return Q3ValueVector<int>();
+    return QVector<int>();
   if (end_i - start_i < 30)
-    return Q3ValueVector<int>(); // (just a rough value)
+    return QVector<int>(); // (just a rough value)
 
   // relevant indexes:
   int start_sentinel_i;
@@ -648,7 +647,7 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
   float unit_length;
 
   // results:
-  Q3ValueVector<int> numbers( 13, -1 ); // the java source does no initialization
+  QVector<int> numbers( 13, -1 ); // the java source does no initialization
 
   // determine the relevant positions:
 
@@ -671,7 +670,7 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
 #endif
 
   if (start_sentinel_i < 0)
-    return Q3ValueVector<int>();
+    return QVector<int>();
 
   // calculate the other positions:
   left_numbers_i = start_sentinel_i + 3;
@@ -680,7 +679,7 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
   end_sentinel_i = right_numbers_i + 6 * 4;
 
   if (end_sentinel_i + 3 > end_i)
-    return Q3ValueVector<int>();
+    return QVector<int>();
 
   // calculate the average (pixel) length of a bar that is one unit wide:
   // (a complete  barcode consists out of 95 length units)
@@ -694,10 +693,10 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
   fprintf( stderr, "unit_width: %f\n", unit_length );
 #endif
 
-  Q3ValueVector< Q3ValueVector<int> > current_number_field( 4, Q3ValueVector<int>(2,0) );
+  QVector< QVector<int> > current_number_field( 4, QVector<int>(2,0) );
 
   if (left_numbers_i + 1 > end_i)
-    return Q3ValueVector<int>();
+    return QVector<int>();
 
 
   // test the side from which we are reading the barcode:
@@ -787,14 +786,14 @@ Q3ValueVector<int> Decoder_EAN13::decode( Q3ValueVector< Q3ValueVector<int> > fi
   return numbers;
 }
 
-MatchMakerResult Decoder_EAN13::recognizeNumber( Q3ValueVector< Q3ValueVector<int> > fields, int code_table_to_use)
+MatchMakerResult Decoder_EAN13::recognizeNumber( QVector< QVector<int> > fields, int code_table_to_use)
 {
   // convert the pixel lenghts of the four black&white fields into
   // normed values that have together a length of 70;
   int pixel_sum = fields[0][1] + fields[1][1] + fields[2][1] + fields[3][1];
   int b[4];
   for (int i = 0; i < 4; i++) {
-    b[i] = round((((float) fields[i][1]) / ((float) pixel_sum)) * 70);
+    b[i] = ::round((((float) fields[i][1]) / ((float) pixel_sum)) * 70);
   }
 
 #ifdef Decoder_EAN13_DEBUG
@@ -813,7 +812,7 @@ MatchMakerResult Decoder_EAN13::recognizeNumber( Q3ValueVector< Q3ValueVector<in
   int odd_min_difference_index = 0;
 
   if ((code_table_to_use == BOTH_TABLES)||(code_table_to_use == EVEN_TABLE)) {
-    Q3ValueVector<int> even_differences(10,0);
+    QVector<int> even_differences(10,0);
 
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 4; j++) {
@@ -832,7 +831,7 @@ MatchMakerResult Decoder_EAN13::recognizeNumber( Q3ValueVector< Q3ValueVector<in
   }
 
   if ((code_table_to_use == BOTH_TABLES) || (code_table_to_use == ODD_TABLE)) {
-    Q3ValueVector<int> odd_differences(10,0);
+    QVector<int> odd_differences(10,0);
 
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 4; j++) {
@@ -852,13 +851,11 @@ MatchMakerResult Decoder_EAN13::recognizeNumber( Q3ValueVector< Q3ValueVector<in
 
   // select the digit and parity with the lowest difference to the found pattern:
   if (even_min_difference <= odd_min_difference) {
-    if (even_min_difference < max_difference_for_acceptance) {
+    if (even_min_difference < max_difference_for_acceptance)
       return MatchMakerResult( true, even_min_difference_index );
-    }
   } else {
-    if (odd_min_difference < max_difference_for_acceptance) {
+    if (odd_min_difference < max_difference_for_acceptance)
       return MatchMakerResult( false, odd_min_difference_index );
-    }
   }
 
   return MatchMakerResult( false, -1 );

@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "fetchdialog.h"
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
@@ -38,6 +40,10 @@
 #include "gui/combobox.h"
 #include "gui/cursorsaver.h"
 #include "utils/stringset.h"
+
+#ifdef ENABLE_WEBCAM
+#include "barcode/barcode.h"
+#endif
 
 #include <klocale.h>
 #include <klineedit.h>
@@ -64,12 +70,6 @@
 #include <QProgressBar>
 #include <QTreeWidget>
 #include <QHeaderView>
-
-#include <config.h>
-#include <kglobal.h>
-#ifdef ENABLE_WEBCAM
-#include "barcode/barcode.h"
-#endif
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -286,29 +286,28 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_barcodeRecognitionThread = new barcodeRecognitionThread();
   if (m_barcodeRecognitionThread->isWebcamAvailable()) {
     m_barcodePreview = new QLabel(0);
-    m_barcodePreview->move( KGlobalSettings::desktopGeometry(m_barcodePreview).width() - 350, 30 );
-    m_barcodePreview->adjustSize();
+    m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
+    m_barcodePreview->move(KGlobalSettings::desktopGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
     m_barcodePreview->show();
+
+    connect( m_barcodeRecognitionThread, SIGNAL(recognized(const QString&)), this, SLOT(slotBarcodeRecognized(const QString&)) );
+    connect( m_barcodeRecognitionThread, SIGNAL(gotImage(const QImage&)), this, SLOT(slotBarcodeGotImage(const QImage&)) );
+//    connect( m_barcodePreview, SIGNAL(destroyed(QObject *)), this, SLOT(slotBarcodeStop()) );
+    m_barcodeRecognitionThread->start();
   } else {
     m_barcodePreview = 0;
   }
-  connect( m_barcodeRecognitionThread, SIGNAL(recognized(const QString&)), this, SLOT(slotBarcodeRecognized(const QString&)) );
-  connect( m_barcodeRecognitionThread, SIGNAL(gotImage(const QImage&)), this, SLOT(slotBarcodeGotImage(const QImage&)) );
-  m_barcodeRecognitionThread->start();
-/*  //DEBUG
-  QImage img( "/home/sebastian/white.png", "PNG" );
-  m_barcodeRecognitionThread->recognizeBarcode( img );*/
 #endif
 }
 
 FetchDialog::~FetchDialog() {
 #ifdef ENABLE_WEBCAM
   m_barcodeRecognitionThread->stop();
-  if (!m_barcodeRecognitionThread->wait( 1000 )) {
+  if(!m_barcodeRecognitionThread->wait( 1000 )) {
     m_barcodeRecognitionThread->terminate();
   }
   delete m_barcodeRecognitionThread;
-  if (m_barcodePreview) {
+  if(m_barcodePreview) {
     delete m_barcodePreview;
   }
 #endif
@@ -694,33 +693,30 @@ void FetchDialog::slotResetCollection() {
   }
 }
 
-void FetchDialog::slotBarcodeRecognized(const QString& string )
-{
+void FetchDialog::slotBarcodeRecognized(const QString& string_) {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
-  StringDataEvent *e = new StringDataEvent( string );
-  kapp->postEvent( this, e ); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  StringDataEvent* e = new StringDataEvent(string_);
+  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
-void FetchDialog::slotBarcodeGotImage(const QImage& img )
-{
+void FetchDialog::slotBarcodeGotImage(const QImage& img_)  {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
-  ImageDataEvent *e = new ImageDataEvent( img );
-  kapp->postEvent( this, e ); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  ImageDataEvent* e = new ImageDataEvent(img_);
+  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
-void FetchDialog::customEvent( QEvent *e )
-{
-  if (!e) {
+void FetchDialog::customEvent(QEvent* e) {
+  if(!e) {
     return;
   }
-  if ( e->type() == StringDataType) {
+  if(e->type() == StringDataType) {
     // slotBarcodeRecognized() queued call
     kapp->beep();
-    m_valueLineEdit->setText( static_cast<StringDataEvent*>(e)->string() );
+    m_valueLineEdit->setText(static_cast<StringDataEvent*>(e)->string());
     m_searchButton->animateClick();
-  } else if ( e->type() == ImageDataType ) {
+  } else if(e->type() == ImageDataType) {
     // slotBarcodegotImage() queued call
-    m_barcodePreview->setPixmap( QPixmap::fromImage(static_cast<ImageDataEvent*>(e)->image()) );
+    m_barcodePreview->setPixmap(QPixmap::fromImage(static_cast<ImageDataEvent*>(e)->image()));
   }
 }
 
