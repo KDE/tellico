@@ -108,9 +108,11 @@ Z3950Fetcher::~Z3950Fetcher() {
   delete m_MODSHandler;
   m_MODSHandler = 0;
 
-  m_conn->wait();
-  m_conn->deleteLater();
-  m_conn = 0;
+  if(m_conn) {
+    m_conn->wait();
+    m_conn->deleteLater();
+    m_conn = 0;
+  }
 }
 
 QString Z3950Fetcher::defaultName() {
@@ -781,7 +783,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     if(current_.isEmpty() && idx == -1) {
       // set the initial selection to something depending on the language
       const QStringList locales = cfg.readEntry("Locale", QStringList());
-      if(locales.indexOf(lang) > -1 || locales.indexOf(lang2A) > -1) {
+      if(locales.contains(lang) || locales.contains(lang2A)) {
         idx = m_serverCombo->count() - 1;
       }
     } else if(group == current_) {
