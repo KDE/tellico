@@ -434,7 +434,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
     EntryGroupDict* dict = m_entryGroupDicts.take(field_->name());
     qDeleteAll(*dict);
     m_entryGroups.removeAll(field_->name());
-    if(field_->name() == m_defaultGroupField) {
+    if(field_->name() == m_defaultGroupField && !m_entryGroups.isEmpty()) {
       setDefaultGroupField(m_entryGroups.first());
     }
   }

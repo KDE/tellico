@@ -40,11 +40,11 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/grs1importer.h"
-#include "../tellico_debug.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -75,6 +75,31 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_)
       m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
 }
 
+Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
+    : Fetcher(parent_), m_conn(0), m_started(false), m_done(true), m_preset(preset_),
+      m_MARC21XMLHandler(0), m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
+  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+  if(!serverFile.isEmpty()) {
+    KConfig serverConfig(serverFile, KConfig::SimpleConfig);
+    const QStringList servers = serverConfig.groupList();
+    for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
+      if(*server == m_preset) {
+        KConfigGroup cfg(&serverConfig, *server);
+        const QString name = cfg.readEntry("Name");
+        m_host = cfg.readEntry("Host");
+        m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
+        m_dbname = cfg.readEntry("Database");
+        m_sourceCharSet = cfg.readEntry("Charset");
+        m_syntax = cfg.readEntry("Syntax");
+        m_user = cfg.readEntry("User");
+        m_password = cfg.readEntry("Password");
+      }
+    }
+  } else {
+    myDebug() << "z3950-servers.cfg not found";
+  }
+}
+
 Z3950Fetcher::~Z3950Fetcher() {
   delete m_MARC21XMLHandler;
   m_MARC21XMLHandler = 0;
@@ -82,7 +107,9 @@ Z3950Fetcher::~Z3950Fetcher() {
   m_UNIMARCXMLHandler = 0;
   delete m_MODSHandler;
   m_MODSHandler = 0;
-  delete m_conn;
+
+  m_conn->wait();
+  m_conn->deleteLater();
   m_conn = 0;
 }
 
@@ -118,10 +145,8 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
       KConfig serverConfig(serverFile, KConfig::SimpleConfig);
       const QStringList servers = serverConfig.groupList();
       for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
-        KConfigGroup cfg(&serverConfig, *server);
-
-        const QString& id = *server;
-        if(id == preset) {
+        if(*server == preset) {
+          KConfigGroup cfg(&serverConfig, *server);
           const QString name = cfg.readEntry("Name");
           m_host = cfg.readEntry("Host");
           m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
@@ -132,6 +157,8 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
           m_password = cfg.readEntry("Password");
         }
       }
+    } else {
+      myDebug() << "z3950-servers.cfg not found";
     }
   }
 

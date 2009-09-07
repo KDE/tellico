@@ -61,6 +61,7 @@ Q_OBJECT
 
 public:
   Z3950Fetcher(QObject* parent);
+  Z3950Fetcher(QObject* parent, const QString& preset);
 
   virtual ~Z3950Fetcher();
 
