@@ -172,7 +172,6 @@ void SRUFetcher::search() {
             q += QLatin1String(" or ");
           }
         }
-        myDebug() << q;
         u.addQueryItem(QLatin1String("query"), q);
       }
       break;
