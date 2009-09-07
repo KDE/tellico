@@ -59,6 +59,7 @@
 #include <QLabel>
 #include <QDomDocument>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QGridLayout>
 
 namespace {
@@ -119,7 +120,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
       for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
         KConfigGroup cfg(&serverConfig, *server);
 
-        const QString id = *server;
+        const QString& id = *server;
         if(id == preset) {
           const QString name = cfg.readEntry("Name");
           m_host = cfg.readEntry("Host");
@@ -360,7 +361,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     if(f1.open(QIODevice::WriteOnly)) {
 //      if(f1.open(QIODevice::WriteOnly | QIODevice::Append)) {
       QTextStream t(&f1);
-      t.setCodec("UTF-8");
+      t.setCodec(QTextCodec::codecForName("UTF-8"));
       t << result_;
     }
     f1.close();
@@ -394,7 +395,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 //      if(f2.open(QIODevice::WriteOnly)) {
       if(f2.open(QIODevice::WriteOnly | QIODevice::Append)) {
         QTextStream t(&f2);
-        t.setCodec("UTF-8");
+        t.setCodec(QTextCodec::codecForName("UTF-8"));
         t << str;
       }
       f2.close();
@@ -410,7 +411,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     if(!msg.isEmpty()) {
       message(msg, MessageHandler::Warning);
     }
-    myDebug() << "no collection pointer: " << msg;
+    myDebug() << "no collection pointer:" << msg;
     return;
   }
 

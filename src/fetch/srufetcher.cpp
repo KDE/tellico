@@ -51,7 +51,7 @@
 //#define SRU_DEBUG
 
 namespace {
-  // 7090 was the old default port, but that wa sjust because LoC used it
+  // 7090 was the old default port, but that was just because LoC used it
   // let's use default HTTP port of 80 now
   static const int SRU_DEFAULT_PORT = 80;
   static const int SRU_MAX_RECORDS = 25;

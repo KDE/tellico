@@ -22,14 +22,14 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "z3950connection.h"
 #include "z3950fetcher.h"
 #include "messagehandler.h"
 #include "../tellico_debug.h"
 #include "../utils/iso5426converter.h"
 #include "../utils/iso6937converter.h"
-
-#include <config.h>
 
 #include <klocale.h>
 #include <kapplication.h>
@@ -460,7 +460,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
 
   int r = yaz_iconv(cd, const_cast<char**>(&input), &inlen, &result, &outlen);
   if(r <= 0) {
-    myDebug() << "can't decode buffer";
+    myDebug() << "can't convert buffer from" << fromCharSet_ << "to" << toCharSet_;
     return text_;
   }
   // bug in yaz, need to flush buffer to catch last character
@@ -495,7 +495,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
     } else if(charSetLower == QLatin1String("iso6937")) {
       return toXML(Iso6937Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
     }
-    myWarning() << "conversion from " << charSet_ << " is unsupported";
+    myWarning() << "conversion from" << charSet_ << "is unsupported";
     return QString();
   }
 
@@ -513,7 +513,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
   size_t len = marc_.left(5).toInt(&ok);
 #endif
   if(ok && (len < 25 || len > 100000)) {
-    myDebug() << "bad length: " << (ok ? len : -1);
+    myDebug() << "bad length:" << (ok ? len : -1);
     return QString();
   }
 
