@@ -837,7 +837,8 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
       entryGroup = group.readEntry("Group By", defaultGroup);
     }
   }
-  if(entryGroup.isEmpty() || !coll_->entryGroups().contains(entryGroup)) {
+  if(entryGroup.isEmpty() ||
+     (!coll_->entryGroups().contains(entryGroup) && entryGroup != Data::Collection::s_peopleGroupName)) {
     entryGroup = defaultGroup;
   }
   m_groupView->setGroupField(entryGroup);
@@ -864,7 +865,11 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
   QString groupName;
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
-    groupName = Kernel::self()->fieldNameByTitle(m_entryGrouping->currentText());
+    if(m_entryGrouping->currentText() == (QLatin1Char('<') + i18n("People") + QLatin1Char('>'))) {
+      groupName = Data::Collection::s_peopleGroupName;
+    } else {
+      groupName = Kernel::self()->fieldNameByTitle(m_entryGrouping->currentText());
+    }
     if(coll_->type() != Data::Collection::Base) {
       config.writeEntry("Group By", groupName);
     }
