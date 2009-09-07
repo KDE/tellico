@@ -100,4 +100,5 @@ void UpdateEntries::redo() {
     // the first one is not owned by current collection
     new ModifyEntries(this, m_coll, Data::EntryList() << cmd->oldEntry(), Data::EntryList() << m_oldEntry);
   }
+  QUndoCommand::redo();
 }
