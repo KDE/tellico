@@ -114,7 +114,9 @@
         vertical-align: top;
    }
    </style>
-   <title>Tellico</title>
+   <title>
+    <xsl:value-of select="tc:collection/@title"/>
+   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection"/>
@@ -131,7 +133,7 @@
 
  <!-- find first image field -->
  <xsl:variable name="image-field" select="tc:fields/tc:field[@type=10][1]/@name"/>
- 
+
  <xsl:for-each select="tc:entry">
   <xsl:sort lang="$lang" select=".//tc:title[1]"/>
   <xsl:variable name="entry" select="."/>
@@ -176,14 +178,14 @@
        </xsl:call-template>
       </xsl:if>
      </xsl:for-each>
-     
+
      <!-- add all paragraph fields, too -->
      <xsl:for-each select="../tc:fields/tc:field[@type = 2]">
       <xsl:call-template name="field-output">
        <xsl:with-param name="entry" select="$entry"/>
        <xsl:with-param name="field" select="."/>
       </xsl:call-template>
-      
+
      </xsl:for-each>
     </tbody>
    </table>
@@ -204,7 +206,7 @@
 
   <td class="fieldValue">
    <xsl:variable name="numvalues" select="count($entry//*[local-name() = $field/@name])"/>
-   
+
    <xsl:choose>
     <xsl:when test="$numvalues &gt; 1">
      <xsl:call-template name="simple-field-value">
@@ -212,10 +214,10 @@
       <xsl:with-param name="field" select="$field/@name"/>
      </xsl:call-template>
     </xsl:when>
-    
+
     <xsl:when test="$numvalues = 1">
      <xsl:choose>
-      
+
       <!-- boolean values end up as 'true', output 'X' -->
       <xsl:when test="$field/@type=4 and . = 'true'">
        <xsl:call-template name="simple-field-value">
@@ -223,7 +225,7 @@
         <xsl:with-param name="field" select="$field/@name"/>
        </xsl:call-template>
       </xsl:when>
-      
+
       <!-- handle URL here, so no link created -->
       <xsl:when test="$field/@type=7">
        <xsl:value-of select="$entry/*[local-name() = $field/@name]"/>

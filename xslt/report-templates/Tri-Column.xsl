@@ -107,7 +107,9 @@
        font-size: 1em;
    }
    </style>
-   <title>Tellico</title>
+   <title>
+    <xsl:value-of select="tc:collection/@title"/>
+   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection"/>
@@ -127,7 +129,7 @@
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
  </h1>
- 
+
  <!-- first, build sorted list -->
  <xsl:variable name="sorted-entries">
   <xsl:for-each select="tc:entry">
@@ -135,10 +137,10 @@
    <xsl:copy-of select="."/>
   </xsl:for-each>
  </xsl:variable>
- 
+
  <!-- needed for key context -->
  <xsl:variable name="coll" select="."/>
- 
+
  <table class="tablelist" cellpadding="0" cellspacing="0" width="100%">
    <colgroup width="33%"/>
    <colgroup width="34%"/>
@@ -148,17 +150,17 @@
    <!-- have to pass in image width and height because
         context changes inside the exsl:node-set -->
    <xsl:variable name="entries" select="exsl:node-set($sorted-entries)/tc:entry"/>
-   
+
    <xsl:for-each select="$entries[position() mod 3 = 1]">
     <xsl:variable name="e1" select="."/>
     <xsl:variable name="e2" select="$e1/following-sibling::tc:entry[position() = 1]"/>
     <xsl:variable name="e3" select="$e2/following-sibling::tc:entry[position() = 1]"/>
-    
+
     <tr class="r{position() mod 2}">
-     
+
      <!-- switch context back to document -->
      <xsl:for-each select="$coll">
-      
+
       <td>
        <xsl:apply-templates select="$e1">
         <xsl:with-param name="img" select="key('imagesById', $e1/*[local-name() = $image-field])"/>
@@ -177,10 +179,10 @@
      </xsl:for-each>
     </tr>
    </xsl:for-each>
-   
+
   </tbody>
  </table>
- 
+
 </xsl:template>
 
 <xsl:template match="tc:entry">

@@ -86,7 +86,9 @@
         background-color: #eee;
    }
    </style>
-   <title>Tellico</title>
+   <title>
+    <xsl:value-of select="tc:collection/@title"/>
+   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection"/>
@@ -111,7 +113,7 @@
      <xsl:copy-of select="."/>
     </xsl:for-each>
    </xsl:variable>
-   
+
    <xsl:variable name="nrows"
                  select="ceiling(count(tc:entry) div $num-columns)"/>
 
@@ -144,7 +146,7 @@
    <xsl:if test="position() &lt; last()">
     <xsl:text>; </xsl:text>
     <br/>
-   </xsl:if>   
+   </xsl:if>
   </xsl:for-each>
 </td>
 </xsl:template>

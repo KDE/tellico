@@ -86,7 +86,9 @@
         background-color: #eee;
    }
    </style>
-   <title>Tellico</title>
+   <title>
+    <xsl:value-of select="tc:collection/@title"/>
+   </title>
   </head>
   <body>
    <xsl:apply-templates select="tc:collection"/>
