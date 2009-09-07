@@ -104,6 +104,9 @@ TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch translators ${TELLICO_TEST_
 KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
 TARGET_LINK_LIBRARIES(imdbfetchertest fetch translators ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp)
+TARGET_LINK_LIBRARIES(srufetchertest fetch translators ${TELLICO_TEST_LIBS})
+
 IF( YAZ_FOUND )
     KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp)
     TARGET_LINK_LIBRARIES(z3950fetchertest fetch translators ${TELLICO_TEST_LIBS} ${YAZ_LIBRARIES})
