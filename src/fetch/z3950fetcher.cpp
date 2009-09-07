@@ -216,7 +216,7 @@ void Z3950Fetcher::search() {
           m_pqn = QLatin1String("@or ");
         }
         for(int i = 0; i < count; ++i) {
-          m_pqn += QLatin1String(" @attr 1=7 ") + isbnList[i];
+          m_pqn += QLatin1String(" @attr 1=7 ") + isbnList.at(i);
           if(count > 1 && i < count-2) {
             m_pqn += QLatin1String(" @or");
           }

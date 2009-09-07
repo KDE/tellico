@@ -35,6 +35,7 @@
 #include "../gui/combobox.h"
 #include "../tellico_utils.h"
 #include "../utils/lccnvalidator.h"
+#include "../utils/isbnvalidator.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -66,7 +67,7 @@ SRUFetcher::SRUFetcher(QObject* parent_)
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
                        QObject* parent_) : Fetcher(parent_),
-      m_host(host_), m_port(port_), m_path(path_),
+      m_host(host_), m_port(port_), m_path(path_), m_format(QLatin1String("mods")),
       m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_started(false) {
   m_name = name_; // m_name is protected in super class
 }
@@ -109,7 +110,7 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void SRUFetcher::search() {
-  if(m_host.isEmpty() || m_path.isEmpty()) {
+  if(m_host.isEmpty() || m_path.isEmpty() || m_format.isEmpty()) {
     myDebug() << "settings are not set!";
     stop();
     return;
@@ -151,24 +152,44 @@ void SRUFetcher::search() {
       break;
 
     case ISBN:
-      // no validation here
-      str.remove(QLatin1Char('-'));
-      // limit to first isbn
-      str = str.section(QLatin1Char(';'), 0, 0);
-      u.addQueryItem(QLatin1String("query"), QLatin1String("bath.isbn=") + str);
+      {
+        QString s = request().value;
+        s.remove(QLatin1Char('-'));
+        QStringList isbnList = s.split(QLatin1String("; "));
+        // also search for isbn10 values
+        for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
+          if((*it).startsWith(QLatin1String("978"))) {
+            QString isbn10 = ISBNValidator::isbn10(*it);
+            isbn10.remove(QLatin1Char('-'));
+            it = isbnList.insert(it, isbn10);
+            ++it;
+          }
+        }
+        QString q;
+        for(int i = 0; i < isbnList.count(); ++i) {
+          q += QLatin1String("bath.isbn=") + isbnList.at(i);
+          if(i < isbnList.count()-1) {
+            q += QLatin1String(" or ");
+          }
+        }
+        myDebug() << q;
+        u.addQueryItem(QLatin1String("query"), q);
+      }
       break;
 
     case LCCN:
       {
-        // limit to first lccn
-        str.remove(QLatin1Char('-'));
-        str = str.section(QLatin1Char(';'), 0, 0);
-        // also try formalized lccn
-        QString lccn = LCCNValidator::formalize(str);
-        u.addQueryItem(QLatin1String("query"),
-                       QLatin1String("bath.lccn=") + str +
-                       QLatin1String(" or bath.lccn=") + lccn
-                       );
+        QString s = request().value;
+        QStringList lccnList = s.split(QLatin1String("; "));
+        QString q;
+        for(int i = 0; i < lccnList.count(); ++i) {
+          q += QLatin1String("bath.lccn=") + lccnList.at(i);
+          q += QLatin1String(" or bath.lccn=") + LCCNValidator::formalize(lccnList.at(i));
+          if(i < lccnList.count()-1) {
+            q += QLatin1String(" or ");
+          }
+        }
+        u.addQueryItem(QLatin1String("query"), q);
       }
       break;
 
@@ -279,7 +300,7 @@ void SRUFetcher::slotComplete(KJob*) {
     }
     msg += imp.statusMessage();
   } else {
-    myDebug() << "unrecognized format: " << m_format;
+    myDebug() << "unrecognized format:" << m_format;
     stop();
     return;
   }

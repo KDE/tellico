@@ -1,3 +1,7 @@
+2009-09-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled multiple ISBN and LCCN search for SRU fetcher.
+
 2009-09-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated the "Multiple ISBN" dialog box to validate ISBN and CueCat input.
