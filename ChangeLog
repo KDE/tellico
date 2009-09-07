@@ -1,3 +1,7 @@
+2009-09-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated the "Multiple ISBN" dialog box to validate ISBN and CueCat input.
+
 2009-09-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated webcam support to use libv4l library.

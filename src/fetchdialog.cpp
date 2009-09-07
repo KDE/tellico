@@ -622,6 +622,8 @@ void FetchDialog::slotEditMultipleISBN() {
   m_isbnTextEdit = new KTextEdit(box);
   m_isbnTextEdit->setText(m_isbnList.join(QLatin1String("\n")));
   m_isbnTextEdit->setWhatsThis(s);
+  connect(m_isbnTextEdit, SIGNAL(textChanged()), this, SLOT(slotISBNTextChanged()));
+
   KPushButton* fromFileBtn = new KPushButton(KIcon(QLatin1String("document-open")),
                                              i18n("&Load From File..."), box);
   fromFileBtn->setWhatsThis(i18n("<qt>Load the list from a text file.</qt>"));
@@ -661,6 +663,43 @@ void FetchDialog::slotLoadISBNList() {
     m_isbnTextEdit->setText(m_isbnTextEdit->toPlainText() + FileHandler::readTextFile(u));
     m_isbnTextEdit->moveCursor(QTextCursor::End);
     m_isbnTextEdit->ensureCursorVisible();
+  }
+}
+
+void FetchDialog::slotISBNTextChanged() {
+  const QValidator* val = m_valueLineEdit->validator();
+  if(!val) {
+    return;
+  }
+  const QString text = m_isbnTextEdit->toPlainText();
+  if(text.isEmpty())  {
+    return;
+  }
+  const QTextCursor cursor = m_isbnTextEdit->textCursor();
+  // only try to validate if char before cursor is an eol
+  if(text.at(cursor.position()-1) != QLatin1Char('\n')) {
+    return;
+  }
+  QStringList lines = text.left(cursor.position()-1).split(QLatin1String("\n"));
+  QString newLine = lines.last();
+  int pos = 0;
+  // validate() changes the input
+  if(val->validate(newLine, pos) != QValidator::Acceptable) {
+    return;
+  }
+  lines.replace(lines.count()-1, newLine);
+  QString newText = lines.join(QLatin1String("\n")) + text.mid(cursor.position()-1);
+  if(newText == text) {
+    return;
+  }
+
+  if(newText.isEmpty()) {
+    m_isbnTextEdit->clear();
+  } else {
+    m_isbnTextEdit->blockSignals(true);
+    m_isbnTextEdit->setPlainText(newText);
+    m_isbnTextEdit->setTextCursor(cursor);
+    m_isbnTextEdit->blockSignals(false);
   }
 }
 

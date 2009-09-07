@@ -100,10 +100,12 @@ private slots:
   void slotEditMultipleISBN();
   void slotInit();
   void slotLoadISBNList();
+  void slotISBNTextChanged();
   void slotUPC2ISBN();
 
   void slotBarcodeRecognized(const QString&);
   void slotBarcodeGotImage(const QImage&);
+
 private:
   void startProgress();
   void stopProgress();
