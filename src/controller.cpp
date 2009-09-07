@@ -203,7 +203,6 @@ void Controller::addedEntries(Tellico::Data::EntryList entries_) {
 }
 
 void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
-   DEBUG_BLOCK;
   // when a new document is being loaded, loans are added to borrowers, which
   // end up calling Entry::checkIn() which called Document::saveEntry() which calls here
   // ignore that
