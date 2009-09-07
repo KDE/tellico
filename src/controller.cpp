@@ -86,8 +86,8 @@ QStringList Controller::expandedGroupBy() const {
   if(g[0] == Data::Collection::s_peopleGroupName) {
     g.clear();
     Data::FieldList fields = Data::Document::self()->collection()->peopleFields();
-    foreach(Data::FieldPtr it, fields) {
-      g << it->name();
+    foreach(Data::FieldPtr field, fields) {
+      g << field->name();
     }
   }
   // special case for no groups
@@ -195,14 +195,15 @@ void Controller::slotFieldAdded(Tellico::Data::CollPtr coll_, Tellico::Data::Fie
 
 void Controller::addedEntries(Tellico::Data::EntryList entries_) {
   blockAllSignals(true);
-  foreach(Observer* it, m_observers) {
-    it->addEntries(entries_);
+  foreach(Observer* obs, m_observers) {
+    obs->addEntries(entries_);
   }
   m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
 
 void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
+   DEBUG_BLOCK;
   // when a new document is being loaded, loans are added to borrowers, which
   // end up calling Entry::checkIn() which called Document::saveEntry() which calls here
   // ignore that
@@ -210,8 +211,8 @@ void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
     return;
   }
   blockAllSignals(true);
-  foreach(Observer* it, m_observers) {
-    it->modifyEntries(entries_);
+  foreach(Observer* obs, m_observers) {
+    obs->modifyEntries(entries_);
   }
   m_mainWindow->m_viewStack->entryView()->slotRefresh(); // special case
   m_mainWindow->slotQueueFilter();
@@ -591,18 +592,18 @@ void Controller::updateActions() const {
 
 void Controller::addedBorrower(Tellico::Data::BorrowerPtr borrower_) {
   m_mainWindow->addLoanView(); // just in case
-  foreach(Observer* it, m_observers) {
-    it->addBorrower(borrower_);
+  foreach(Observer* obs, m_observers) {
+    obs->addBorrower(borrower_);
   }
   m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
 void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
-  foreach(Observer* it, m_observers) {
+  foreach(Observer* obs, m_observers) {
     if(borrower_->isEmpty()) {
-      it->removeBorrower(borrower_);
+      obs->removeBorrower(borrower_);
     } else {
-      it->modifyBorrower(borrower_);
+      obs->modifyBorrower(borrower_);
     }
   }
   hideTabs();
@@ -610,15 +611,15 @@ void Controller::modifiedBorrower(Tellico::Data::BorrowerPtr borrower_) {
 
 void Controller::addedFilter(Tellico::FilterPtr filter_) {
   m_mainWindow->addFilterView(); // just in case
-  foreach(Observer* it, m_observers) {
-    it->addFilter(filter_);
+  foreach(Observer* obs, m_observers) {
+    obs->addFilter(filter_);
   }
   m_mainWindow->m_viewTabs->setTabBarHidden(false);
 }
 
 void Controller::removedFilter(Tellico::FilterPtr filter_) {
-  foreach(Observer* it, m_observers) {
-    it->removeFilter(filter_);
+  foreach(Observer* obs, m_observers) {
+    obs->removeFilter(filter_);
   }
   hideTabs();
 }
