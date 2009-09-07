@@ -175,12 +175,13 @@ void Z3950Fetcher::search() {
         QString s = request().value;
         s.remove(QLatin1Char('-'));
         QStringList isbnList = s.split(QLatin1String("; "));
-        // also going to search for isbn10 values
+        // also search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
           if((*it).startsWith(QLatin1String("978"))) {
             QString isbn10 = ISBNValidator::isbn10(*it);
             isbn10.remove(QLatin1Char('-'));
-            isbnList.insert(it, isbn10);
+            it = isbnList.insert(it, isbn10);
+            ++it;
           }
         }
         const int count = isbnList.count();
