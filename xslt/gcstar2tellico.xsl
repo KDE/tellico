@@ -97,7 +97,7 @@
       element is created with the same name as the attribute, and
       that dummy element is then parsed. This way, I can use the same
       stylesheet for either format without having to repeat a lot
-      of XPath expression. -->
+      of XPath expressions. -->
  <!-- simplicity, the id will either be an attribute or an element -->
  <tc:entry id="{concat(id,@id)}">
   <xsl:apply-templates select="@*|*"/>
@@ -480,6 +480,26 @@
    </tc:num-player>
   </xsl:for-each>
  </tc:num-players>
+</xsl:template>
+
+<xsl:template match="mechanics">
+ <tc:mechanisms>
+  <xsl:for-each select="line">
+   <tc:mechanism>
+    <xsl:value-of select="col[1]"/>
+   </tc:mechanism>
+  </xsl:for-each>
+ </tc:mechanisms>
+</xsl:template>
+
+<xsl:template match="category">
+ <tc:genres>
+  <xsl:for-each select="line">
+   <tc:genre>
+    <xsl:value-of select="col[1]"/>
+   </tc:genre>
+  </xsl:for-each>
+ </tc:genres>
 </xsl:template>
 
 <!-- coins -->

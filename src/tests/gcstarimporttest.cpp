@@ -29,21 +29,23 @@
 #include "gcstarimporttest.moc"
 
 #include "../translators/gcstarimporter.h"
-#include "../collections/bookcollection.h"
+#include "../collections/collectioninitializer.h"
 #include "../collectionfactory.h"
+#include "../images/imagefactory.h"
 
 #include <kstandarddirs.h>
 
 QTEST_KDEMAIN_CORE( GCstarImportTest )
 
 void GCstarImportTest::initTestCase() {
+  Tellico::ImageFactory::init();
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
-  // need to register the collection type
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  // need to register the collection types
+  Tellico::CollectionInitializer ci;
 }
 
-void GCstarImportTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.gcs");
+void GCstarImportTest::testImportBook() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -68,4 +70,61 @@ void GCstarImportTest::testImport() {
   QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag2"));
   // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
   QCOMPARE(entry->field("rating"), QLatin1String("2"));
+}
+
+void GCstarImportTest::testImportVideo() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-video.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
+  QCOMPARE(entry->field("year"), QLatin1String("1982"));
+  QCOMPARE(entry->fields("director", false).count(), 1);
+  QCOMPARE(entry->fields("director", false).first(), QLatin1String("George Miller"));
+  QCOMPARE(entry->fields("nationality", false).count(), 1);
+  QCOMPARE(entry->fields("nationality", false).first(), QLatin1String("Australia"));
+  QCOMPARE(entry->field("medium"), QLatin1String("DVD"));
+  QCOMPARE(entry->field("running-time"), QLatin1String("102"));
+  QCOMPARE(entry->fields("genre", false).count(), 4);
+  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Drama"));
+  QCOMPARE(entry->fields("cast", false).count(), 10);
+  QCOMPARE(entry->fields("cast", false).at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QCOMPARE(entry->fields("cast", false).at(2), QLatin1String("Kirk Douglas::Harrison / Spur"));
+  QCOMPARE(entry->fields("keyword", false).count(), 2);
+  QCOMPARE(entry->fields("keyword", false).at(0), QLatin1String("tag2"));
+  QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag1"));
+  QCOMPARE(entry->field("rating"), QLatin1String("3"));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("comments").isEmpty());
+}
+
+void GCstarImportTest::testImportBoardGame() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-boardgame.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::BoardGame);
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("title"), QLatin1String("Risk"));
+  QCOMPARE(entry->field("year"), QLatin1String("1959"));
+  QCOMPARE(entry->fields("designer", false).count(), 2);
+  QCOMPARE(entry->fields("designer", false).at(1), QLatin1String("Michael I. Levin"));
+  QCOMPARE(entry->fields("publisher", false).count(), 11);
+  QCOMPARE(entry->fields("publisher", false).at(1), QLatin1String("Borras Plana S.A."));
+  QCOMPARE(entry->fields("mechanism", false).count(), 3);
+  QCOMPARE(entry->fields("mechanism", false).at(1), QLatin1String("Dice Rolling"));
+  QCOMPARE(entry->fields("genre", false).count(), 1);
+  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Wargame"));
+  QVERIFY(!entry->field("description").isEmpty());
+  QVERIFY(!entry->field("comments").isEmpty());
 }

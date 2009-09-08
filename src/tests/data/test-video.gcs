@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="GCfilms" items="2" version="1.5.0.beta1">
+ <information>
+  <maxId>3</maxId>
+ </information>
+
+
+
+ <item
+  id="2"
+  title="The Man from Snowy River"
+  date="1982"
+  time="102 min"
+  director="George Miller"
+  country="Australia"
+  image="/home/robby/.local/share/gcstar/images/gcstar_26.jpg"
+  backpic=""
+  original=""
+  webPage="http://www.imdb.com/title/tt0084296/##IMDb"
+  seen="1"
+  added="07/09/2009"
+  region="1"
+  format="DVD"
+  number="1"
+  identifier="0"
+  place=""
+  rating="7"
+  ratingpress="0"
+  audio=""
+  subt=""
+  age="11"
+  video=""
+  serie=""
+  rank=""
+  trailer=""
+  borrower="none"
+  lendDate=""
+  borrowings=""
+  favourite="1"
+ >
+  <synopsis>Jim Craig has lived his first 18 years in the mountains of Australia on his father's farm. The death...</synopsis>
+  <comment>My favorite comments</comment>
+  <genre>
+   <line>
+    <col>Drama</col>
+   </line>
+   <line>
+    <col>Family</col>
+   </line>
+   <line>
+    <col>Romance</col>
+   </line>
+   <line>
+    <col>Western</col>
+   </line>
+  </genre>
+  <actors>
+   <line>
+    <col>Tom Burlinson</col>
+    <col>Jim Craig</col>
+   </line>
+   <line>
+    <col>Terence Donovan</col>
+    <col>Henry Craig</col>
+   </line>
+   <line>
+    <col>Kirk Douglas</col>
+    <col>Harrison / Spur</col>
+   </line>
+   <line>
+    <col>Tommy Dysart</col>
+    <col>Mountain Man</col>
+   </line>
+   <line>
+    <col>Bruce Kerr</col>
+    <col>Man in Street</col>
+   </line>
+   <line>
+    <col>David Bradshaw</col>
+    <col>Banjo Paterson</col>
+   </line>
+   <line>
+    <col>Sigrid Thornton</col>
+    <col>Jessica Harrison</col>
+   </line>
+   <line>
+    <col>Jack Thompson</col>
+    <col>Clancy</col>
+   </line>
+   <line>
+    <col>Tony Bonner</col>
+    <col>Kane</col>
+   </line>
+   <line>
+    <col>June Jago</col>
+    <col>Mrs. Bailey</col>
+   </line>
+  </actors>
+  <tags>
+   <line>
+    <col>tag2</col>
+   </line>
+   <line>
+    <col>tag1</col>
+   </line>
+  </tags>
+ </item>
+ <item
+  id="3"
+  title="The Man from Snowy River II"
+  date="1988"
+  time="99 min"
+  director="Geoff Burrowes"
+  country="Australia"
+  image="/home/robby/.local/share/gcstar/images/gcstar_27.jpg"
+  backpic=""
+  original=""
+  webPage="http://www.imdb.com/find?q=Return+to+Snowy+River;tt=on;mx=20##IMDb"
+  seen="0"
+  added="07/09/2009"
+  region=""
+  format="DVD"
+  number="1"
+  identifier="0"
+  place=""
+  rating="6"
+  ratingpress="0"
+  audio=""
+  subt=""
+  age="5"
+  video=""
+  serie=""
+  rank=""
+  trailer=""
+  borrower="none"
+  lendDate=""
+  borrowings=""
+  favourite="0"
+  tags=""
+ >
+  <synopsis>Young Jim Craig returns to his home in the Australian high country. He finds that things are not as he left them - his girlfriend is being pursued by another man, and her father doesn't want Jim back into her life.</synopsis>
+  <comment></comment>
+  <genre>
+   <line>
+    <col>Adventure</col>
+   </line>
+   <line>
+    <col>Drama</col>
+   </line>
+   <line>
+    <col>Western</col>
+   </line>
+  </genre>
+  <actors>
+   <line>
+    <col>Tom Burlinson</col>
+    <col>Jim Craig</col>
+   </line>
+   <line>
+    <col>Sigrid Thornton</col>
+    <col>Jessica</col>
+   </line>
+   <line>
+    <col>Brian Dennehy</col>
+    <col>Harrison</col>
+   </line>
+   <line>
+    <col>Nicholas Eadie</col>
+    <col>Alistair Patton</col>
+   </line>
+   <line>
+    <col>Mark Hembrow</col>
+    <col>Seb</col>
+   </line>
+   <line>
+    <col>Bryan Marshall</col>
+    <col>Hawker</col>
+   </line>
+   <line>
+    <col>Rhys McConnochie</col>
+    <col>Patton Snr.</col>
+   </line>
+   <line>
+    <col>Peter Cummins</col>
+    <col>Jake</col>
+   </line>
+   <line>
+    <col>Cornelia Frances</col>
+    <col>Mrs. Darcy</col>
+   </line>
+   <line>
+    <col>Tony Barry</col>
+    <col>Jacko</col>
+   </line>
+  </actors>
+ </item>
+</collection>
