@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "onixexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
@@ -29,10 +31,8 @@
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../tellico_debug.h"
 #include "../gui/cursorsaver.h"
-
-#include <config.h>
+#include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
 #include <kapplication.h>
@@ -125,7 +125,6 @@ QString ONIXExporter::text() {
   if(!coll) {
     myDebug() << "no collection pointer!";
     return QString();
-    ;
   }
 
   // notes about utf-8 encoding:
@@ -155,7 +154,7 @@ QString ONIXExporter::text() {
   QDateTime now = QDateTime::currentDateTime();
   m_handler->addStringParam("sentDate", now.toString(QLatin1String("yyyyMMddhhmm")).toUtf8());
 
-  m_handler->addStringParam("version", VERSION);
+  m_handler->addStringParam("version", TELLICO_VERSION);
 
   GUI::CursorSaver cs(Qt::WaitCursor);
 

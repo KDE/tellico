@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "mainwindow.h"
 #include "translators/translators.h" // needed for file type enum
 
@@ -30,13 +32,10 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 
-namespace {
-  static const char* version = "2.0pre2";
-}
-
 int main(int argc, char* argv[]) {
   KAboutData aboutData("tellico", 0, ki18n("Tellico"),
-                       version, ki18n("Tellico - a collection manager for KDE"), KAboutData::License_GPL_V2,
+                       TELLICO_VERSION, ki18n("Tellico - a collection manager for KDE"),
+                       KAboutData::License_GPL_V2,
                        ki18n("(c) 2001-2009, Robby Stephenson"), KLocalizedString(),
                        "http://tellico-project.org", "tellico-users@kde.org");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
