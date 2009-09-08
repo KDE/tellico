@@ -383,7 +383,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   gridLayout->addWidget(m_imageWidthBox, 0, 1);
   m_imageWidthBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageWidthBox);
-  QString whats = i18n("The maximum width of the images in the printout. The aspect ratio is preserved.");
+  QString whats = i18n("The maximum width of the images in the printout. The aspect ration is preserved.");
   lab->setWhatsThis(whats);
   m_imageWidthBox->setWhatsThis(whats);
   connect(m_imageWidthBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
@@ -397,7 +397,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   gridLayout->addWidget(m_imageHeightBox, 1, 1);
   m_imageHeightBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageHeightBox);
-  whats = i18n("The maximum height of the images in the printout. The aspect ratio is preserved.");
+  whats = i18n("The maximum height of the images in the printout. The aspect ration is preserved.");
   lab->setWhatsThis(whats);
   m_imageHeightBox->setWhatsThis(whats);
   connect(m_imageHeightBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
