@@ -134,10 +134,6 @@ bool EntryMerger::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrit
       ret = true;
     } else if(e1->field(field) == e2->field(field)) {
       continue;
-    } else if(field->type() == Data::Field::Para) {
-      // for paragraph fields, concatenate the values, if they're not equal
-      e1->setField(field, e1->field(field) + QLatin1String("<br/><br/>") + e2->field(field));
-      ret = true;
     } else if(field->type() == Data::Field::Table) {
       // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
       // if e1's F val in [row i, column j] empty, replace with e2's val at same position
