@@ -28,7 +28,6 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
-#include "../controller.h" // needed for getting groupView pointer
 #include "../core/filehandler.h"
 #include "../groupiterator.h"
 #include "../tellico_utils.h"
@@ -37,6 +36,7 @@
 #include "tellico_xml.h"
 #include "../document.h" // needed for sorting groups
 #include "../translators/bibtexhandler.h" // needed for cleaning text
+#include "../models/modelmanager.h"
 
 #include <klocale.h>
 #include <KConfigGroup>
@@ -387,7 +387,7 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   Data::EntryList vec = entries();
   bool exportAll = collection()->entries().count() == vec.count();
   // iterate over each group, which are the first children
-  for(GroupIterator gIt = Controller::self()->groupIterator(); gIt.group(); ++gIt) {
+  for(GroupIterator gIt(ModelManager::self()->groupModel()); gIt.group(); ++gIt) {
     if(gIt.group()->isEmpty()) {
       continue;
     }

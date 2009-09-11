@@ -10,6 +10,7 @@ SET(models_STAT_SRCS
    entrytitlemodel.cpp
    filtermodel.cpp
    groupsortmodel.cpp
+   modelmanager.cpp
    modeltest.cpp
    )
 

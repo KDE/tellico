@@ -32,6 +32,7 @@
 #include "../tellico_debug.h"
 #include "models/entrygroupmodel.h"
 #include "models/groupsortmodel.h"
+#include "models/modelmanager.h"
 #include "models/models.h"
 #include "gui/countdelegate.h"
 
@@ -72,6 +73,8 @@ GroupView::GroupView(QWidget* parent_)
   sortModel->setSourceModel(groupModel);
   setModel(sortModel);
   setItemDelegate(new GUI::CountDelegate(this));
+
+  ModelManager::self()->setGroupModel(model());
 }
 
 Tellico::EntryGroupModel* GroupView::sourceModel() const {

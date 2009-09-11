@@ -41,7 +41,6 @@
 #include "filterview.h"
 #include "loanview.h"
 #include "utils/calendarhandler.h"
-#include "groupiterator.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
 #include "gui/cursorsaver.h"
@@ -69,10 +68,6 @@ void Controller::addObserver(Tellico::Observer* obs) {
 
 void Controller::removeObserver(Tellico::Observer* obs) {
   m_observers.removeAll(obs);
-}
-
-Tellico::GroupIterator Controller::groupIterator() const {
-  return GroupIterator(m_mainWindow->m_groupView->model());
 }
 
 QString Controller::groupBy() const {

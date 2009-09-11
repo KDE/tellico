@@ -37,7 +37,10 @@ namespace Tellico {
  */
 class GroupIterator{
 public:
+  GroupIterator();
   GroupIterator(QAbstractItemModel* model);
+
+  bool isValid() const;
 
   GroupIterator& operator++();
   Data::EntryGroup* group();

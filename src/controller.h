@@ -34,8 +34,6 @@ class KMenu;
 
 namespace Tellico {
   class MainWindow;
-  class GroupView;
-  class GroupIterator;
   namespace Data {
     class Collection;
   }
@@ -71,7 +69,6 @@ public:
   void plugEntryActions(KMenu* popup);
   void updateActions() const;
 
-  GroupIterator groupIterator() const;
   /**
    * Returns the name of the field being used to group the entries.
    * That field name may not be an actual field in the collection, since

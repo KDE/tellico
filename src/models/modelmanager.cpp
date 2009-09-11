@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "groupiterator.h"
-#include "entrygroup.h"
-#include "models/models.h"
+#include "modelmanager.h"
 
-#include <QAbstractItemModel>
+#include <qglobal.h>
 
-using Tellico::GroupIterator;
+using Tellico::ModelManager;
 
-GroupIterator::GroupIterator() : m_model(0), m_row(0) {
+ModelManager* ModelManager::self() {
+  static ModelManager manager;
+  return &manager;
 }
 
-GroupIterator::GroupIterator(QAbstractItemModel* model_) : m_model(model_), m_row(0) {
+ModelManager::ModelManager() : m_groupModel(0) {
 }
 
-bool GroupIterator::isValid() const {
-  return m_model != 0;
+QAbstractItemModel* ModelManager::groupModel() {
+  Q_ASSERT(m_groupModel);
+  return m_groupModel;
 }
 
-GroupIterator& GroupIterator::operator++() {
-  ++m_row;
-  return *this;
-}
-
-Tellico::Data::EntryGroup* GroupIterator::group() {
-  if(!m_model || m_row >= m_model->rowCount()) {
-    return 0;
-  }
-
-  return m_model->data(m_model->index(m_row, 0), GroupPtrRole).value<Data::EntryGroup*>();
+void ModelManager::setGroupModel(QAbstractItemModel* model_) {
+  Q_ASSERT(model_);
+  m_groupModel = model_;
 }
