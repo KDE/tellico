@@ -52,8 +52,6 @@
 #include <QRegExp>
 #include <QTimer>
 
-// use a vector so we can use a sort functor
-#include <vector>
 #include <algorithm>
 
 using Tellico::Data::Document;
@@ -645,10 +643,7 @@ int Document::imageCount() const {
 }
 
 Tellico::Data::EntryList Document::sortEntries(Tellico::Data::EntryList entries_) const {
-  std::vector<EntryPtr> vec;
-  foreach(EntryPtr entry, entries_) {
-    vec.push_back(entry);
-  }
+  Data::EntryList sorted = entries_;
 
   QStringList titles = Controller::self()->sortTitles();
   // have to go in reverse for sorting
@@ -656,14 +651,12 @@ Tellico::Data::EntryList Document::sortEntries(Tellico::Data::EntryList entries_
     if(titles[i].isEmpty()) {
       continue;
     }
-    QString field = m_coll->fieldNameByTitle(titles[i]);
-    std::sort(vec.begin(), vec.end(), EntryCmp(field));
+    QString fieldName = m_coll->fieldNameByTitle(titles[i]);
+    if(!fieldName.isEmpty()) {
+      std::sort(sorted.begin(), sorted.end(), EntryCmp(fieldName));
+    }
   }
 
-  Data::EntryList sorted;
-  for(std::vector<EntryPtr>::iterator it = vec.begin(); it != vec.end(); ++it) {
-    sorted.append(*it);
-  }
   return sorted;
 }
 
