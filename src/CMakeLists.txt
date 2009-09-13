@@ -50,7 +50,6 @@ SET(tellico_SRCS
    filter.cpp
    filterdialog.cpp
    filterview.cpp
-   groupiterator.cpp
    groupview.cpp
    importdialog.cpp
    loandialog.cpp
