@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,34 +22,42 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_GROUPITERATOR_H
-#define TELLICO_GROUPITERATOR_H
+#include "modeliterator.h"
+#include "models.h"
+#include "../entrygroup.h"
+#include "../entry.h"
 
-class QAbstractItemModel;
+#include <QAbstractItemModel>
 
-namespace Tellico {
-  namespace Data {
-    class EntryGroup;
-  }
+using Tellico::ModelIterator;
 
-/**
- * @author Robby Stephenson
- */
-class GroupIterator{
-public:
-  GroupIterator();
-  GroupIterator(QAbstractItemModel* model);
-
-  bool isValid() const;
-
-  GroupIterator& operator++();
-  Data::EntryGroup* group();
-
-private:
-  QAbstractItemModel* m_model;
-  int m_row;
-};
-
+ModelIterator::ModelIterator() : m_model(0), m_row(0) {
 }
 
-#endif
+ModelIterator::ModelIterator(QAbstractItemModel* model_) : m_model(model_), m_row(0) {
+}
+
+bool ModelIterator::isValid() const {
+  return m_model != 0 && m_row >= 0 && m_row < m_model->rowCount();
+}
+
+ModelIterator& ModelIterator::operator++() {
+  ++m_row;
+  return *this;
+}
+
+Tellico::Data::EntryGroup* ModelIterator::group() const {
+  if(!isValid()) {
+    return 0;
+  }
+
+  return m_model->data(m_model->index(m_row, 0), GroupPtrRole).value<Data::EntryGroup*>();
+}
+
+Tellico::Data::EntryPtr ModelIterator::entry() const {
+  if(!isValid()) {
+    return Data::EntryPtr();
+  }
+
+  return m_model->data(m_model->index(m_row, 0), EntryPtrRole).value<Data::EntryPtr>();
+}

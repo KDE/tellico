@@ -23,20 +23,20 @@
  ***************************************************************************/
 
 #include "tellicoxmlexporter.h"
+#include "tellico_xml.h"
 #include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../groupiterator.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
-#include "../tellico_debug.h"
-#include "tellico_xml.h"
 #include "../document.h" // needed for sorting groups
 #include "../translators/bibtexhandler.h" // needed for cleaning text
 #include "../models/modelmanager.h"
+#include "../models/modeliterator.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <KConfigGroup>
@@ -387,7 +387,7 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
   Data::EntryList vec = entries();
   bool exportAll = collection()->entries().count() == vec.count();
   // iterate over each group, which are the first children
-  for(GroupIterator gIt(ModelManager::self()->groupModel()); gIt.group(); ++gIt) {
+  for(ModelIterator gIt(ModelManager::self()->groupModel()); gIt.group(); ++gIt) {
     if(gIt.group()->isEmpty()) {
       continue;
     }
