@@ -161,10 +161,6 @@ public:
   bool allImagesOnDisk() const { return m_allImagesOnDisk; }
   int imageCount() const;
   EntryList filteredEntries(FilterPtr filter) const;
-  /**
-   * Sort entries according to current detailed view
-   */
-  EntryList sortEntries(EntryList entries) const;
 
   void renameCollection(const QString& newTitle);
 

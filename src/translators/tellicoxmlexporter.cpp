@@ -32,10 +32,11 @@
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
-#include "../document.h" // needed for sorting groups
 #include "../translators/bibtexhandler.h" // needed for cleaning text
+#include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
 #include "../models/modeliterator.h"
+#include "../models/models.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -49,6 +50,8 @@
 #include <QDomDocument>
 #include <QTextCodec>
 #include <QVBoxLayout>
+
+#include <algorithm>
 
 using Tellico::Export::TellicoXMLExporter;
 
@@ -394,7 +397,7 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
     QDomElement groupElem = dom_.createElement(QLatin1String("group"));
     groupElem.setAttribute(QLatin1String("title"), gIt.group()->groupName());
     // now iterate over all entry items in the group
-    Data::EntryList sorted = Data::Document::self()->sortEntries(*gIt.group());
+    Data::EntryList sorted = sortEntries(*gIt.group());
     foreach(Data::EntryPtr eIt, sorted) {
       if(!exportAll && vec.indexOf(eIt) == -1) {
         continue;
@@ -510,5 +513,30 @@ void TellicoXMLExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Images", m_includeImages);
 }
+
+Tellico::Data::EntryList TellicoXMLExporter::sortEntries(const Data::EntryList& entries_) const {
+  Data::EntryList sorted = entries_;
+
+  EntrySortModel* model = static_cast<EntrySortModel*>(ModelManager::self()->entryModel());
+  // have to go in reverse for sorting
+  Data::FieldList fields;
+  if(model->tertiarySortColumn() > -1) {
+    fields << model->headerData(model->tertiarySortColumn(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+  }
+  if(model->secondarySortColumn() > -1) {
+    fields << model->headerData(model->secondarySortColumn(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+  }
+  if(model->sortColumn() > -1) {
+    fields << model->headerData(model->sortColumn(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+  }
+
+  // now sort
+  foreach(Data::FieldPtr field, fields) {
+    std::sort(sorted.begin(), sorted.end(), Data::EntryCmp(field->name()));
+  }
+
+  return sorted;
+}
+
 
 #include "tellicoxmlexporter.moc"

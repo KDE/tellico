@@ -34,6 +34,7 @@
 #include "core/tellico_config.h"
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
+#include "models/modelmanager.h"
 
 #include <klocale.h>
 #include <kconfig.h>
@@ -95,6 +96,8 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   sortModel->setSourceModel(entryModel);
   setModel(sortModel);
   setItemDelegate(new DetailedEntryItemDelegate(this));
+
+  ModelManager::self()->setEntryModel(sortModel);
 
   connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateHeaderMenu()));
   connect(header(), SIGNAL(sectionCountChanged(int, int)), SLOT(updateHeaderMenu()));

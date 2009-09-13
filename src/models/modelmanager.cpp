@@ -33,7 +33,17 @@ ModelManager* ModelManager::self() {
   return &manager;
 }
 
-ModelManager::ModelManager() : m_groupModel(0) {
+ModelManager::ModelManager() : m_entryModel(0), m_groupModel(0) {
+}
+
+QAbstractItemModel* ModelManager::entryModel() {
+  Q_ASSERT(m_entryModel);
+  return m_entryModel;
+}
+
+void ModelManager::setEntryModel(QAbstractItemModel* model_) {
+  Q_ASSERT(model_);
+  m_entryModel = model_;
 }
 
 QAbstractItemModel* ModelManager::groupModel() {

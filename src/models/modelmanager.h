@@ -37,12 +37,16 @@ class ModelManager {
 public:
   static ModelManager* self();
 
+  QAbstractItemModel* entryModel();
+  void setEntryModel(QAbstractItemModel* model_);
+
   QAbstractItemModel* groupModel();
   void setGroupModel(QAbstractItemModel* model_);
 
 private:
   ModelManager();
 
+  QAbstractItemModel* m_entryModel;
   QAbstractItemModel* m_groupModel;
 };
 

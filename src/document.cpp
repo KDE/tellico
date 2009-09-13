@@ -52,8 +52,6 @@
 #include <QRegExp>
 #include <QTimer>
 
-#include <algorithm>
-
 using Tellico::Data::Document;
 Document* Document::s_self = 0;
 
@@ -640,24 +638,6 @@ int Document::imageCount() const {
     }
   }
   return images.count();
-}
-
-Tellico::Data::EntryList Document::sortEntries(Tellico::Data::EntryList entries_) const {
-  Data::EntryList sorted = entries_;
-
-  QStringList titles = Controller::self()->sortTitles();
-  // have to go in reverse for sorting
-  for(int i = titles.count()-1; i >= 0; --i) {
-    if(titles[i].isEmpty()) {
-      continue;
-    }
-    QString fieldName = m_coll->fieldNameByTitle(titles[i]);
-    if(!fieldName.isEmpty()) {
-      std::sort(sorted.begin(), sorted.end(), EntryCmp(fieldName));
-    }
-  }
-
-  return sorted;
 }
 
 void Document::removeImagesNotInCollection(Tellico::Data::EntryList entries_, Tellico::Data::EntryList entriesToKeep_) {
