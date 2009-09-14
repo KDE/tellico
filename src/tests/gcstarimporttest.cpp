@@ -29,6 +29,8 @@
 #include "gcstarimporttest.moc"
 
 #include "../translators/gcstarimporter.h"
+//#include "../translators/tellicoimporter.h"
+//#include "../translators/gcstarexporter.h"
 #include "../collections/collectioninitializer.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
@@ -70,6 +72,18 @@ void GCstarImportTest::testImportBook() {
   QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag2"));
   // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
   QCOMPARE(entry->field("rating"), QLatin1String("2"));
+
+#if 0
+  Tellico::Export::GCstarExporter exporter(coll);
+  Tellico::Import::TellicoImporter tcImporter(exporter.text());
+  Tellico::Data::CollPtr coll2 = tcImporter.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll2->entryCount(), 1);
+  // should be translated somehow
+  QCOMPARE(coll2->title(), QLatin1String("GCstar Import"));
+#endif
 }
 
 void GCstarImportTest::testImportVideo() {
