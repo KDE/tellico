@@ -23,16 +23,13 @@
  ***************************************************************************/
 
 #include "document.h"
-#include "mainwindow.h" // needed for calling fileSave()
 #include "collectionfactory.h"
 #include "translators/tellicoimporter.h"
 #include "translators/tellicozipexporter.h"
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
 #include "filehandler.h"
-#include "controller.h"
 #include "borrower.h"
-#include "tellico_kernel.h"
 #include "tellico_strings.h"
 #include "images/imagefactory.h"
 #include "images/image.h"
@@ -42,6 +39,7 @@
 #include "core/tellico_config.h"
 #include "entrymerger.h"
 #include "entrycomparison.h"
+#include "gui/guiproxy.h"
 #include "tellico_debug.h"
 
 #include <kmessagebox.h>
@@ -102,8 +100,7 @@ bool Document::newDocument(int type_) {
   m_coll = CollectionFactory::collection(type_, true);
   m_coll->setTrackGroups(true);
 
-  Kernel::self()->resetHistory();
-  Controller::self()->slotCollectionAdded(m_coll);
+  emit signalCollectionAdded(m_coll);
 
   slotSetModified(false);
   KUrl url;
@@ -146,7 +143,7 @@ bool Document::openDocument(const KUrl& url_) {
 
   if(!coll) {
 //    myDebug() << "returning false";
-    Kernel::self()->sorry(m_importer->statusMessage());
+    GUI::Proxy::sorry(m_importer->statusMessage());
     m_validFile = false;
     return false;
   }
@@ -156,8 +153,7 @@ bool Document::openDocument(const KUrl& url_) {
   setURL(url_);
   m_validFile = true;
 
-  Kernel::self()->resetHistory();
-  Controller::self()->slotCollectionAdded(m_coll);
+  emit signalCollectionAdded(m_coll);
 
   // m_importer might have been deleted?
   slotSetModified(m_importer && m_importer->modifiedOriginal());
@@ -173,35 +169,6 @@ bool Document::openDocument(const KUrl& url_) {
     m_importer = 0;
   }
   return true;
-}
-
-bool Document::saveModified() {
-  bool completed = true;
-
-  if(m_isModified) {
-    MainWindow* app = static_cast<MainWindow*>(Kernel::self()->widget());
-    QString str = i18n("The current file has been modified.\n"
-                       "Do you want to save it?");
-    int want_save = KMessageBox::warningYesNoCancel(Kernel::self()->widget(), str, i18n("Unsaved Changes"),
-                                                    KStandardGuiItem::save(), KStandardGuiItem::discard());
-    switch(want_save) {
-      case KMessageBox::Yes:
-        completed = app->fileSave();
-        break;
-
-      case KMessageBox::No:
-        slotSetModified(false);
-        completed = true;
-        break;
-
-      case KMessageBox::Cancel:
-      default:
-        completed = false;
-        break;
-    }
-  }
-
-  return completed;
 }
 
 bool Document::saveDocument(const KUrl& url_) {
@@ -262,7 +229,6 @@ bool Document::saveDocument(const KUrl& url_) {
   item.setProgress(int(0.9*totalSteps));
 
   if(success) {
-    Kernel::self()->resetHistory();
     setURL(url_);
     // if successful, doc is no longer modified
     slotSetModified(false);
@@ -282,7 +248,7 @@ bool Document::closeDocument() {
 
 void Document::deleteContents() {
   if(m_coll) {
-    Controller::self()->slotCollectionDeleted(m_coll);
+    emit signalCollectionDeleted(m_coll);
   }
   // don't delete the m_importer here, bad things will happen
 

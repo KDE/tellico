@@ -31,7 +31,7 @@
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
-#include "../tellico_kernel.h"
+#include "../document.h"
 #include "../translators/bibtexhandler.h" // needed for cleaning text
 #include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
@@ -328,7 +328,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
                 fIt->property(QLatin1String("relative")) == QLatin1String("true") &&
                 !url().isEmpty()) {
         // if a relative URL and url() is not empty, change the value!
-        KUrl old_url(Kernel::self()->URL(), fieldValue);
+        KUrl old_url(Data::Document::self()->URL(), fieldValue);
         fieldElem.appendChild(dom_.createTextNode(KUrl::relativeUrl(url(), old_url)));
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));

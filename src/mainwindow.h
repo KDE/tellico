@@ -341,10 +341,9 @@ private:
    * Initiates all the signal and slot connections between major objects in the view.
    */
   void initConnections();
-  /**
-   * Initiates shutdown
-   */
-//  void closeEvent(QCloseEvent *e);
+
+  bool querySaveModified();
+
   /**
    * Called before the window is closed, either by the user or indirectely by the
    * session manager.

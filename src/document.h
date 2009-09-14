@@ -95,14 +95,6 @@ public:
    */
   bool openDocument(const KUrl& url);
   /**
-   * Checks to see if the document has been modified before deleting the contents.
-   * If it has, then a message box asks the user if the document should be saved,
-   * and then acts on the result.
-   *
-   * @return A boolean indicating success
-   */
-  bool saveModified();
-  /**
    * Saves the document contents to a file.
    *
    * @param url The location to save the file
@@ -199,6 +191,8 @@ signals:
    * into memory or onto the disk
    */
   void signalCollectionImagesLoaded(Tellico::Data::CollPtr coll);
+  void signalCollectionAdded(Tellico::Data::CollPtr coll);
+  void signalCollectionDeleted(Tellico::Data::CollPtr coll);
 
 private slots:
   /**

@@ -204,7 +204,7 @@ void MainWindow::slotInit() {
   initConnections();
   ImageFactory::init();
   connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
-          this, SLOT(slotImageLocationChanged()));
+          SLOT(slotImageLocationChanged()));
   // Init DBUS
   NewStuff::Manager::self();
 }
@@ -663,6 +663,7 @@ void MainWindow::initActions() {
 void MainWindow::initDocument() {
   MARK;
   Data::Document* doc = Data::Document::self();
+  Kernel::self()->resetHistory();
 
   KConfigGroup config(KGlobal::config(), "General Options");
   doc->setLoadAllImages(config.readEntry("Load All Images", false));
@@ -674,6 +675,11 @@ void MainWindow::initDocument() {
   // do stuff that changes when the doc is modified
   connect(doc, SIGNAL(signalModified(bool)),
           SLOT(slotEnableModifiedActions(bool)));
+
+  connect(doc, SIGNAL(signalCollectionAdded(Tellico::Data::CollPtr)),
+          Controller::self(), SLOT(slotCollectionAdded(Tellico::Data::CollPtr)));
+  connect(doc, SIGNAL(signalCollectionDeleted(Tellico::Data::CollPtr)),
+          Controller::self(), SLOT(slotCollectionDeleted(Tellico::Data::CollPtr)));
 
   connect(Kernel::self()->commandHistory(), SIGNAL(cleanChanged(bool)),
           doc, SLOT(slotSetClean(bool)));
@@ -949,10 +955,38 @@ void MainWindow::readOptions() {
   // Put them in init()
 }
 
+bool MainWindow::querySaveModified() {
+  bool completed = true;
+
+  if(Data::Document::self()->isModified()) {
+    QString str = i18n("The current file has been modified.\n"
+                       "Do you want to save it?");
+    int want_save = KMessageBox::warningYesNoCancel(this, str, i18n("Unsaved Changes"),
+                                                    KStandardGuiItem::save(), KStandardGuiItem::discard());
+    switch(want_save) {
+      case KMessageBox::Yes:
+        completed = fileSave();
+        break;
+
+      case KMessageBox::No:
+        Data::Document::self()->slotSetModified(false);
+        completed = true;
+        break;
+
+      case KMessageBox::Cancel:
+      default:
+        completed = false;
+        break;
+    }
+  }
+
+  return completed;
+}
+
 bool MainWindow::queryClose() {
   // in case we're still loading the images, cancel that
   Data::Document::self()->cancelImageWriting();
-  return m_editDialog->queryModified() && Data::Document::self()->saveModified();
+  return m_editDialog->queryModified() && querySaveModified();
 }
 
 bool MainWindow::queryExit() {
@@ -967,7 +1001,7 @@ void MainWindow::slotFileNew(int type_) {
   // close the fields dialog
   slotHideCollectionFieldsDialog();
 
-  if(m_editDialog->queryModified() && Data::Document::self()->saveModified()) {
+  if(m_editDialog->queryModified() && querySaveModified()) {
     // remove filter and loan tabs, they'll get re-added if needed
     if(m_filterView) {
       m_viewTabs->removeTab(m_viewTabs->indexOf(m_filterView));
@@ -983,6 +1017,7 @@ void MainWindow::slotFileNew(int type_) {
     }
     m_viewTabs->setTabBarHidden(true);
     Data::Document::self()->newDocument(type_);
+    Kernel::self()->resetHistory();
     m_fileOpenRecent->setCurrentItem(-1);
     slotEnableOpenedActions();
     slotEnableModifiedActions(false);
@@ -996,7 +1031,7 @@ void MainWindow::slotFileNew(int type_) {
 void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
-  if(m_editDialog->queryModified() && Data::Document::self()->saveModified()) {
+  if(m_editDialog->queryModified() && querySaveModified()) {
     QString filter = i18n("*.tc *.bc|Tellico Files (*.tc)");
     filter += QLatin1String("\n");
     filter += i18n("*.xml|XML Files (*.xml)");
@@ -1020,7 +1055,7 @@ void MainWindow::slotFileOpen(const KUrl& url_) {
 
   // there seems to be a race condition at start between slotInit() and initFileOpen()
   // which means the edit dialog might not have been created yet
-  if((!m_editDialog || m_editDialog->queryModified()) && Data::Document::self()->saveModified()) {
+  if((!m_editDialog || m_editDialog->queryModified()) && querySaveModified()) {
     if(openURL(url_)) {
       m_fileOpenRecent->addUrl(url_);
       m_fileOpenRecent->setCurrentItem(-1);
@@ -1036,7 +1071,7 @@ void MainWindow::slotFileOpenRecent(const KUrl& url_) {
   // close the fields dialog
   slotHideCollectionFieldsDialog();
 
-  if(m_editDialog->queryModified() && Data::Document::self()->saveModified()) {
+  if(m_editDialog->queryModified() && querySaveModified()) {
     if(!openURL(url_)) {
       m_fileOpenRecent->removeUrl(url_);
       m_fileOpenRecent->setCurrentItem(-1);
@@ -1063,6 +1098,7 @@ bool MainWindow::openURL(const KUrl& url_) {
   bool success = Data::Document::self()->openDocument(url_);
 
   if(success) {
+    Kernel::self()->resetHistory();
     m_quickFilter->clear();
     slotEnableOpenedActions();
     m_newDocument = false;
@@ -1137,6 +1173,7 @@ bool MainWindow::fileSave() {
 
     GUI::CursorSaver cs(Qt::WaitCursor);
     if(Data::Document::self()->saveDocument(Data::Document::self()->URL())) {
+      Kernel::self()->resetHistory();
       m_newDocument = false;
       updateCaption(false);
       m_fileSave->setEnabled(false);
@@ -1177,6 +1214,7 @@ bool MainWindow::fileSaveAs() {
   if(url.isValid()) {
     GUI::CursorSaver cs(Qt::WaitCursor);
     if(Data::Document::self()->saveDocument(url)) {
+      Kernel::self()->resetHistory();
       KRecentDocument::add(url);
       m_fileOpenRecent->addUrl(url);
       updateCaption(false);
@@ -2097,7 +2135,7 @@ void MainWindow::importFile(Tellico::Import::Format format_, const KUrl::List& u
 
 //  if edit dialog is saved ok and if replacing, then the doc is saved ok
   if(m_editDialog->queryModified() &&
-     (dlg.action() != Import::Replace || Data::Document::self()->saveModified())) {
+     (dlg.action() != Import::Replace || querySaveModified())) {
     GUI::CursorSaver cs(Qt::WaitCursor);
     Data::CollPtr coll = dlg.collection();
     if(!coll) {
