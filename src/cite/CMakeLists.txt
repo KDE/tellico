@@ -5,3 +5,5 @@ SET(cite_STAT_SRCS
    )
 
 KDE4_ADD_LIBRARY(cite STATIC ${cite_STAT_SRCS})
+
+ADD_DEPENDENCIES(cite tellico_config)

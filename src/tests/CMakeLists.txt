@@ -44,6 +44,8 @@ SET(tellicotest_SRCS
 
 KDE4_ADD_LIBRARY(tellicotest STATIC ${tellicotest_SRCS})
 
+ADD_DEPENDENCIES(tellicotest tellico_config)
+
 set(TELLICO_TEST_LIBS
    ${QT_AND_KDECORE_LIBS}
    ${QT_QTTEST_LIBRARY}

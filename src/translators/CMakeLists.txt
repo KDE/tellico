@@ -48,6 +48,8 @@ SET(translators_STAT_SRCS
 
 KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
 
+ADD_DEPENDENCIES(translators tellico_config)
+
 ########### install files ###############
 
 INSTALL(PROGRAMS   griffith2tellico.py DESTINATION ${TELLICO_DATA_INSTALL_DIR} )

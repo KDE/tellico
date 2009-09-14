@@ -7,4 +7,4 @@ SET(images_STAT_SRCS
 
 KDE4_ADD_LIBRARY(images STATIC ${images_STAT_SRCS})
 
-ADD_DEPENDENCIES(images core)
+ADD_DEPENDENCIES(images tellico_config)
