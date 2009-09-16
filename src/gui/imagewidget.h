@@ -33,7 +33,7 @@
 #include <KService>
 #include <QDateTime>
 
-#include "config.h"
+#include <config.h>
 
 class QLabel;
 class QResizeEvent;

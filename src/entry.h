@@ -200,7 +200,7 @@ private:
   // not used
   Entry();
 
-  bool operator==(const Entry& other);
+  bool operator==(const Entry& other) const;
 
   bool setFieldImpl(const QString& fieldName, const QString& value);
 

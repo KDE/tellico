@@ -26,7 +26,7 @@
 #define TELLICO_BORROWERDIALOG_H
 
 #include "borrower.h"
-#include "config.h"
+#include <config.h>
 
 #include <kdialog.h>
 

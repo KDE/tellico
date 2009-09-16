@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_COLLECTIONINITALIZER_H
-#define TELLICO_COLLECTIONINITALIZER_H
+#ifndef TELLICO_COLLECTIONINITIALIZER_H
+#define TELLICO_COLLECTIONINITIALIZER_H
 
 namespace Tellico {
 

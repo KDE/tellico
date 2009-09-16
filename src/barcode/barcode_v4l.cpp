@@ -24,15 +24,15 @@
 
 // uses code from v4lgrab.c         (c) Linux Kernel 2.6.30
 
+#include "barcode_v4l.h"
+#include "../tellico_debug.h"
+
 #include <fcntl.h>              /* low-level i/o */
 #include <errno.h>
 #include <sys/ioctl.h>
 
-#include "barcode_v4l.h"
-#include "../tellico_debug.h"
-
 extern "C" {
-#include "libv4l1.h"
+#include <libv4l1.h>
 }
 
 using barcodeRecognition::barcode_v4l;
