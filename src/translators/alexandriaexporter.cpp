@@ -168,6 +168,11 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     ts << "rating: " << rating << "\n";
   }
 
+  tmp = entry_->field(QLatin1String("read"));
+  if(!tmp.isEmpty()) {
+    ts << "redd: true\n";
+  }
+
   file.close();
 
   QString cover = entry_->field(QLatin1String("cover"));
