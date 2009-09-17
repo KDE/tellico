@@ -67,7 +67,8 @@ Tellico::Data::CollPtr GriffithImporter::collection() {
   connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
   connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
   connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
-  m_process->setProgram(python, QStringList(griffith));
+  m_process->setProgram(python, QStringList() << griffith);
+  m_process->setOutputChannelMode(KProcess::SeparateChannels);
   if(!m_process->execute()) {
     myDebug() << "process failed to start";
     return Data::CollPtr();

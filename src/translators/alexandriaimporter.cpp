@@ -182,7 +182,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       } else if(m_coll->fieldByName(alexField)) {
         entry->setField(alexField, alexValue);
 
-      } else if(m_coll->fieldByTitle(alexField)) {
+      } else if(m_coll->hasField(alexField)) {
         entry->setField(m_coll->fieldByTitle(alexField), alexValue);
       }
     }

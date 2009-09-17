@@ -58,10 +58,10 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
 
     if(pluginParse == NotYet) {
       KProcess proc;
-      QStringList args;
-      args << QLatin1String("--version");
+      proc.setProgram(gcstar, QStringList() << QLatin1String("--version"));
+      proc.setOutputChannelMode(KProcess::OnlyStdoutChannel);
       // wait 5 seconds at most, just a sanity thing, never want to block completely
-      if(proc.execute(gcstar, args, 5000) > -1) {
+      if(proc.execute(5000) > -1) {
         QString output = QString::fromLocal8Bit(proc.readAllStandardOutput());
         if(!output.isEmpty()) {
           // always going to be x.y[.z] ?
@@ -108,7 +108,9 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
        << gcstarCollection;
 
   KProcess proc;
-  if(proc.execute(gcstar_, args) < 0) {
+  proc.setProgram(gcstar_, args);
+  proc.setOutputChannelMode(KProcess::OnlyStdoutChannel);
+  if(proc.execute() < 0) {
     myWarning() << "can't start";
     return;
   }
@@ -278,7 +280,7 @@ void GCstarPluginFetcher::slotError() {
 void GCstarPluginFetcher::slotProcessExited() {
 //  myDebug();
   if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << ""<< source() << ": process did not exit successfully";
+    myDebug() << source() << ": process did not exit successfully";
     if(!m_errors.isEmpty()) {
       message(m_errors.join(QLatin1String("\n")), MessageHandler::Error);
     }
@@ -290,7 +292,7 @@ void GCstarPluginFetcher::slotProcessExited() {
   }
 
   if(m_data.isEmpty()) {
-    myDebug() << ""<< source() << ": no data";
+    myDebug() << source() << ": no data";
     stop();
     return;
   }
@@ -302,7 +304,7 @@ void GCstarPluginFetcher::slotProcessExited() {
     if(!imp.statusMessage().isEmpty()) {
       message(imp.statusMessage(), MessageHandler::Status);
     }
-    myDebug() << ""<< source() << ": no collection pointer";
+    myDebug() << source() << ": no collection pointer";
     stop();
     return;
   }
@@ -373,14 +375,16 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
 //  m_langLabel = new QLabel(optionsWidget());
 //  l->addWidget(m_langLabel, row, 3);
 
-  if(fetcher_ && fetcher_->m_collType > -1) {
-    m_collCombo->setCurrentType(fetcher_->m_collType);
-  } else {
-    m_collCombo->setCurrentType(fetcher_->collectionType());
-  }
-
   if(fetcher_) {
+    if(fetcher_->m_collType > -1) {
+      m_collCombo->setCurrentType(fetcher_->m_collType);
+    } else {
+      m_collCombo->setCurrentType(fetcher_->collectionType());
+    }
     m_originalPluginName = fetcher_->m_plugin;
+  } else {
+    // default o Book for now
+    m_collCombo->setCurrentType(Data::Collection::Book);
   }
 
   KAcceleratorManager::manage(optionsWidget());
@@ -395,7 +399,8 @@ void GCstarPluginFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 }
 
 QString GCstarPluginFetcher::ConfigWidget::preferredName() const {
-  return QLatin1String("GCstar - ") + m_pluginCombo->currentText();
+  QString plugin = m_pluginCombo->currentText();
+  return plugin.isEmpty() ? plugin : QLatin1String("GCstar - ") + plugin;
 }
 
 void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
