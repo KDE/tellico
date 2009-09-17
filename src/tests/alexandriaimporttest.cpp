@@ -65,4 +65,6 @@ void AlexandriaImportTest::testImport() {
   QCOMPARE(entry->field("pub_year"), QL1("1993"));
   QCOMPARE(entry->field("publisher"), QL1("Harper Collins"));
   QCOMPARE(entry->field("rating"), QL1("3"));
+  QCOMPARE(entry->field("read"), QL1("true"));
+  QCOMPARE(entry->field("loaned"), QL1(""));
 }
