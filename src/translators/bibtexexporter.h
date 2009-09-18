@@ -49,6 +49,7 @@ public:
   virtual bool exec();
   virtual QString formatString() const;
   virtual QString fileFilter() const;
+  QString text();
 
   virtual QWidget* widget(QWidget* parent);
   virtual void readOptions(KSharedConfigPtr);
