@@ -83,6 +83,7 @@ public slots:
   void slotCancel();
 
 private:
+  void init();
   Data::CollPtr readCollection(const QString& text, int n);
   void parseText(const QString& text);
   void appendCollection(Data::CollPtr newColl);
@@ -95,6 +96,8 @@ private:
   QRadioButton* m_readUTF8;
   QRadioButton* m_readLocale;
   bool m_cancelled : 1;
+
+  static int s_initCount;
 };
 
   } // end namespace

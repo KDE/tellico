@@ -43,22 +43,34 @@
 
 using Tellico::Import::BibtexImporter;
 
+int BibtexImporter::s_initCount = 0;
+
 BibtexImporter::BibtexImporter(const KUrl::List& urls_) : Importer(urls_)
     , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
-  bt_initialize();
+  init();
 }
 
 BibtexImporter::BibtexImporter(const QString& text_) : Importer(text_)
     , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
-  bt_initialize();
+  init();
 }
 
 BibtexImporter::~BibtexImporter() {
-  bt_cleanup();
+  --s_initCount;
+  if(s_initCount == 0) {
+    bt_cleanup();
+  }
   if(m_readUTF8) {
     KConfigGroup config(KGlobal::config(), "Import Options");
     config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
   }
+}
+
+void BibtexImporter::init() {
+  if(s_initCount == 0) {
+    bt_initialize();
+  }
+  ++s_initCount;
 }
 
 bool BibtexImporter::canImport(int type) const {
