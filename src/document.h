@@ -38,6 +38,17 @@ namespace Tellico {
     class TellicoImporter;
     class TellicoSaxImporter;
   }
+
+class MergeConflictResolver {
+public:
+  enum Result { KeepFirst, KeepSecond, CancelMerge };
+
+  MergeConflictResolver() {}
+  virtual ~MergeConflictResolver() {}
+  virtual Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                         const QString& value1 = QString(), const QString& value2 = QString()) = 0;
+};
+
   namespace Data {
 
 /**
@@ -165,6 +176,8 @@ public:
    */
   void removeImagesNotInCollection(EntryList entries, EntryList entriesToKeep);
   void cancelImageWriting() { m_cancelImageWriting = true; }
+
+  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, MergeConflictResolver* resolver=0);
 
 public slots:
   /**

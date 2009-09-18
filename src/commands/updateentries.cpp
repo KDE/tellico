@@ -27,7 +27,7 @@
 #include "modifyentries.h"
 #include "../collection.h"
 #include "../tellico_kernel.h"
-#include "../entrymerger.h"
+#include "../document.h"
 
 #include <klocale.h>
 
@@ -44,7 +44,7 @@ public:
     // we merge the entries here instead of in redo() because this
     // command is never called without also calling ModifyEntries()
     // which takes care of copying the entry values
-    EntryMerger::mergeEntry(currEntry_, newEntry_, overWrite_);
+    Data::Document::mergeEntry(currEntry_, newEntry_, overWrite_);
   }
 
   virtual void redo() {} // does nothing

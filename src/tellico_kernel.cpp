@@ -391,11 +391,11 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
                                             KGuiItem(i18n("Select value from %1", title1)),
                                             KGuiItem(i18n("Select value from %1", title2)));
   switch(ret) {
-    case KMessageBox::Cancel: return 0;
-    case KMessageBox::Yes: return -1; // keep original value
-    case KMessageBox::No: return 1; // use newer value
+    case KMessageBox::Cancel: return MergeConflictResolver::CancelMerge;
+    case KMessageBox::Yes: return MergeConflictResolver::KeepFirst; // keep original value
+    case KMessageBox::No: return MergeConflictResolver::KeepSecond; // use newer value
   }
-  return 0;
+  return MergeConflictResolver::CancelMerge;
 }
 
 bool Kernel::prepareWallet() {

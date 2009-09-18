@@ -26,10 +26,20 @@
 #define TELLICO_ENTRYMERGER_H
 
 #include "datavectors.h"
+#include "document.h"
 
 #include <QObject>
 
 namespace Tellico {
+
+class AskUserResolver : public MergeConflictResolver {
+public:
+  AskUserResolver()  {};
+  ~AskUserResolver() {};
+  virtual MergeConflictResolver::Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                                                const QString& value1 = QString(), const QString& value2 = QString());
+
+};
 
 /**
  * @author Robby Stephenson
@@ -38,8 +48,7 @@ class EntryMerger : public QObject {
 Q_OBJECT
 public:
   EntryMerger(Data::EntryList entries, QObject* parent);
-
-  static bool mergeEntry(Data::EntryPtr entry1, Data::EntryPtr entry2, bool overwrite, bool askUser=false);
+  ~EntryMerger();
 
 public slots:
   void slotCancel();
@@ -51,13 +60,13 @@ private slots:
 private:
   // if a clean merge is possible
   bool cleanMerge(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
-  bool askUser(Data::EntryPtr entry1, Data::EntryPtr entry2);
 
   Data::EntryList m_entriesToCheck;
   Data::EntryList m_entriesToRemove;
   Data::EntryList m_entriesLeft;
   int m_origCount;
   bool m_cancelled;
+  MergeConflictResolver* m_resolver;
 };
 
 } // end namespace

@@ -36,10 +36,17 @@
 
 #include <QTimer>
 
+using Tellico::AskUserResolver;
 using Tellico::EntryMerger;
 
+Tellico::MergeConflictResolver::Result AskUserResolver::resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
+                                                                const QString& value1, const QString& value2) {
+  return static_cast<MergeConflictResolver::Result>(Kernel::self()->askAndMerge(entry1, entry2, field, value1, value2));
+}
+
 EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
-    : QObject(parent_), m_entriesToCheck(entries_), m_origCount(entries_.count()), m_cancelled(false) {
+    : QObject(parent_), m_entriesToCheck(entries_), m_origCount(entries_.count()), m_cancelled(false)
+    , m_resolver(new AskUserResolver) {
 
   m_entriesLeft = m_entriesToCheck;
   Kernel::self()->beginCommandGroup(i18n("Merge Entries"));
@@ -55,6 +62,10 @@ EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
   } else {
     slotStartNext(); // starts fetching
   }
+}
+
+EntryMerger::~EntryMerger() {
+  delete m_resolver;
 }
 
 void EntryMerger::slotStartNext() {
@@ -73,7 +84,7 @@ void EntryMerger::slotStartNext() {
       match = score >= EntryComparison::ENTRY_PERFECT_MATCH;
     }
     if(match) {
-      bool merge_ok = mergeEntry(baseEntry, it, false /*overwrite*/, true /*askUser*/);
+      bool merge_ok = Data::Document::mergeEntry(baseEntry, it, false /*overwrite*/, m_resolver);
       if(merge_ok) {
         m_entriesToRemove.append(it);
         m_entriesLeft.removeAll(it);
@@ -112,110 +123,6 @@ bool EntryMerger::cleanMerge(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr
     }
   }
   return true;
-}
-
-// static
-// merges values from e2 into e1
-bool EntryMerger::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_, bool askUser_) {
-  if(!e1 || !e2) {
-    myDebug() << "bad entry pointer";
-    return false;
-  }
-  bool ret = true;
-  Data::FieldList fields = e1->collection()->fields();
-  foreach(Data::FieldPtr field, fields) {
-    if(e2->field(field).isEmpty()) {
-      continue;
-    }
-//    myLog() << "reading field: " << field->name();
-    if(overwrite_ || e1->field(field).isEmpty()) {
-//      myLog() << e1->title() << ": updating field(" << field->name() << ") to " << e2->field(field->name());
-      e1->setField(field, e2->field(field));
-      ret = true;
-    } else if(e1->field(field) == e2->field(field)) {
-      continue;
-    } else if(field->type() == Data::Field::Table) {
-      // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
-      // if e1's F val in [row i, column j] empty, replace with e2's val at same position
-      // if different (non-empty) vals at same position, CONFLICT!
-      const QString sep = QLatin1String("::");
-      QStringList vals1 = e1->fields(field, false);
-      QStringList vals2 = e2->fields(field, false);
-      while(vals1.count() < vals2.count()) {
-        vals1 += QString();
-      }
-      for(int i = 0; i < vals2.count(); ++i) {
-        if(vals2[i].isEmpty()) {
-          continue;
-        }
-        if(vals1[i].isEmpty()) {
-          vals1[i] = vals2[i];
-          ret = true;
-        } else {
-          QStringList parts1 = vals1[i].split(sep);
-          QStringList parts2 = vals2[i].split(sep);
-          bool changedPart = false;
-          while(parts1.count() < parts2.count()) {
-            parts1 += QString();
-          }
-          for(int j = 0; j < parts2.count(); ++j) {
-            if(parts2[j].isEmpty()) {
-              continue;
-            }
-            if(parts1[j].isEmpty()) {
-              parts1[j] = parts2[j];
-              changedPart = true;
-            } else if(askUser_ && parts1[j] != parts2[j]) {
-              int ret = Kernel::self()->askAndMerge(e1, e2, field, parts1[j], parts2[j]);
-              if(ret == 0) {
-                return false; // we got cancelled
-              }
-              if(ret == 1) {
-                parts1[j] = parts2[j];
-                changedPart = true;
-              }
-            }
-          }
-          if(changedPart) {
-            vals1[i] = parts1.join(sep);
-            ret = true;
-          }
-        }
-      }
-      if(ret) {
-        e1->setField(field, vals1.join(QLatin1String("; ")));
-      }
-// remove the merging due to user comments
-// maybe in the future have a more intelligent way
-#if 0
-    } else if(field->hasFlag(Data::Field::AllowMultiple)) {
-      // if field F allows multiple values and not a Table (see above case),
-      // e1's F values = (e1's F values) U (e2's F values) (union)
-      // replace e1's field with union of e1's and e2's values for this field
-      QStringList items1 = e1->fields(field, false);
-      QStringList items2 = e2->fields(field, false);
-      foreach(const QString& item2, items2) {
-        // possible to have one value formatted and the other one not...
-        if(!items1.contains(item2) && !items1.contains(Field::format(item2, field->formatFlag()))) {
-          items1.append(item2);
-        }
-      }
-// not sure if I think it should be sorted or not
-//      items1.sort();
-      e1->setField(field, items1.join(QLatin1String("; ")));
-      ret = true;
-#endif
-    } else if(askUser_ && e1->field(field) != e2->field(field)) {
-      int ret = Kernel::self()->askAndMerge(e1, e2, field);
-      if(ret == 0) {
-        return false; // we got cancelled
-      }
-      if(ret == 1) {
-        e1->setField(field, e2->field(field));
-      }
-    }
-  }
-  return ret;
 }
 
 #include "entrymerger.moc"
