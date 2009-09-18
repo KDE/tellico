@@ -30,10 +30,7 @@
 
 #include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
-#include "../collections/bookcollection.h"
 #include "../translators/bibtexexporter.h"
-#include "../translators/tellicoimporter.h"
-#include "../collectionfactory.h"
 
 #include <kstandarddirs.h>
 
@@ -42,8 +39,6 @@ QTEST_KDEMAIN_CORE( BibtexImportTest )
 #define QL1(x) QString::fromLatin1(x)
 
 void BibtexImportTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
-  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the bibtex importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
 }
@@ -74,10 +69,11 @@ void BibtexImportTest::testImport() {
   QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
   QCOMPARE(bColl->macroList().value("ACM"), QL1("The OX Association for Computing Machinery"));
 
-  Tellico::Export::BibtexExporter exporter;
+  Tellico::Export::BibtexExporter exporter(coll);
   exporter.setEntries(coll->entries());
-  Tellico::Import::TellicoImporter tcImporter(exporter.text());
-  Tellico::Data::CollPtr coll2 = tcImporter.collection();
+  Tellico::Import::BibtexImporter importer2(exporter.text());
+  importer2.setCurrentCollection(tmpColl);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
 
   QVERIFY(!coll2.isNull());
   QCOMPARE(coll2->type(), coll->type());

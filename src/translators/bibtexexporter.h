@@ -45,6 +45,7 @@ Q_OBJECT
 
 public:
   BibtexExporter();
+  BibtexExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;
