@@ -341,21 +341,7 @@ url="&homepage;">&homepage;</ulink>.
 <sect1 id="compilation">
 <title>Compilation and Installation</title>
 
-<para>
-In order to compile and install &appname; on your system, type the following
-in the base folder of the archive, where the third step must be done as
-root if you are installing in a system folder:
-
-<screen width="40">
-<prompt>%</prompt> <userinput>./configure <option>--enable-final</option> <option>--disable-debug</option></userinput>
-<prompt>%</prompt> <userinput>make</userinput>
-<prompt>%</prompt> <userinput>make install</userinput>
-</screen>
-</para>
-
-<para>Since &appname; uses autoconf and automake you should not have
-any trouble compiling it. Should you run into problems please report
-them to the author at <email>&email;</email>.</para>
+&install.compile.documentation;
 
 </sect1>
 
