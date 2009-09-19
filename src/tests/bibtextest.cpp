@@ -25,8 +25,8 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "bibteximporttest.h"
-#include "bibteximporttest.moc"
+#include "bibtextest.h"
+#include "bibtextest.moc"
 
 #include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
@@ -35,16 +35,16 @@
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( BibtexImportTest )
+QTEST_KDEMAIN_CORE( BibtexTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
-void BibtexImportTest::initTestCase() {
+void BibtexTest::initTestCase() {
   // since we use the bibtex importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
 }
 
-void BibtexImportTest::testImport() {
+void BibtexTest::testImport() {
   KUrl::List urls;
   urls << KUrl(QString::fromLatin1(KDESRCDIR) + "/data/test.bib");
 

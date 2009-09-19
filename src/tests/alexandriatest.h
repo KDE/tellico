@@ -22,19 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef GCSTARIMPORTTEST_H
-#define GCSTARIMPORTTEST_H
+#ifndef ALEXANDRIATEST_H
+#define ALEXANDRIATEST_H
 
 #include <QObject>
 
-class GCstarImportTest : public QObject {
+class AlexandriaTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
-  void testImportBook();
-  void testImportVideo();
-  void testImportBoardGame();
+  void testImport();
 };
 
 #endif

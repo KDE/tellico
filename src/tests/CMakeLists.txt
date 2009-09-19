@@ -70,26 +70,26 @@ set(TELLICO_TEST_LIBS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp)
 TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp ../progressmanager.cpp)
-TARGET_LINK_LIBRARIES(alexandriaimporttest ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(alexandriatest NOGUI alexandriatest.cpp ../progressmanager.cpp)
+TARGET_LINK_LIBRARIES(alexandriatest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp)
-TARGET_LINK_LIBRARIES(amcimporttest ${TELLICO_TEST_LIBS} collections)
+KDE4_ADD_UNIT_TEST(amctest NOGUI amctest.cpp)
+TARGET_LINK_LIBRARIES(amctest ${TELLICO_TEST_LIBS} collections)
 
-KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp)
-TARGET_LINK_LIBRARIES(bibteximporttest translators ${TELLICO_TEST_LIBS} btparse)
+KDE4_ADD_UNIT_TEST(bibtextest NOGUI bibtextest.cpp)
+TARGET_LINK_LIBRARIES(bibtextest translators ${TELLICO_TEST_LIBS} btparse)
 
-KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp)
-TARGET_LINK_LIBRARIES(bibtexmlimporttest ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(bibtexmltest NOGUI bibtexmltest.cpp)
+TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(gcstarimporttest NOGUI gcstarimporttest.cpp)
-TARGET_LINK_LIBRARIES(gcstarimporttest translators ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(gcstartest NOGUI gcstartest.cpp)
+TARGET_LINK_LIBRARIES(gcstartest translators ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(referencerimporttest NOGUI referencerimporttest.cpp)
-TARGET_LINK_LIBRARIES(referencerimporttest translators ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(referencertest NOGUI referencertest.cpp)
+TARGET_LINK_LIBRARIES(referencertest translators ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(risimporttest NOGUI risimporttest.cpp)
-TARGET_LINK_LIBRARIES(risimporttest ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(ristest NOGUI ristest.cpp)
+TARGET_LINK_LIBRARIES(ristest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
 TARGET_LINK_LIBRARIES(tellicoreadtest translators ${TELLICO_TEST_LIBS})

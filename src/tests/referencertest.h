@@ -22,12 +22,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXIMPORTTEST_H
-#define BIBTEXIMPORTTEST_H
+#ifndef REFERENCERTEST_H
+#define REFERENCERTEST_H
 
 #include <QObject>
 
-class BibtexImportTest : public QObject {
+class ReferencerTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:

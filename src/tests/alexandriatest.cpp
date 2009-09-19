@@ -25,8 +25,8 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "alexandriaimporttest.h"
-#include "alexandriaimporttest.moc"
+#include "alexandriatest.h"
+#include "alexandriatest.moc"
 
 #include "../translators/alexandriaimporter.h"
 #include "../translators/alexandriaexporter.h"
@@ -35,15 +35,15 @@
 
 #include <ktempdir.h>
 
-QTEST_KDEMAIN_CORE( AlexandriaImportTest )
+QTEST_KDEMAIN_CORE( AlexandriaTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
-void AlexandriaImportTest::initTestCase() {
+void AlexandriaTest::initTestCase() {
   Tellico::ImageFactory::init();
 }
 
-void AlexandriaImportTest::testImport() {
+void AlexandriaTest::testImport() {
   Tellico::Import::AlexandriaImporter importer;
   importer.setLibraryPath(QString::fromLatin1(KDESRCDIR) + "/data/alexandria/");
 

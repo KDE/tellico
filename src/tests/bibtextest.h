@@ -22,15 +22,16 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef AMCIMPORTTEST_H
-#define AMCIMPORTTEST_H
+#ifndef BIBTEXTEST_H
+#define BIBTEXTEST_H
 
 #include <QObject>
 
-class AmcImportTest : public QObject {
+class BibtexTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testImport();
 };
 

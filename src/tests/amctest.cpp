@@ -22,16 +22,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef RISIMPORTTEST_H
-#define RISIMPORTTEST_H
+#undef QT_NO_CAST_FROM_ASCII
 
-#include <QObject>
+#include "qtest_kde.h"
+#include "amctest.h"
+#include "amctest.moc"
 
-class RisImportTest : public QObject {
-Q_OBJECT
+#include "../translators/amcimporter.h"
+#include "../collection.h"
 
-private Q_SLOTS:
-  void testImport();
-};
+QTEST_KDEMAIN_CORE( AmcTest )
 
-#endif
+// this is a real basic test right now, AMC doesn't run real well under wine
+void AmcTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.amc");
+  Tellico::Import::AMCImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QCOMPARE(entry->title(), QLatin1String("Title2"));
+}

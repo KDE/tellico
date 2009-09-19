@@ -25,8 +25,8 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "referencerimporttest.h"
-#include "referencerimporttest.moc"
+#include "referencertest.h"
+#include "referencertest.moc"
 
 #include "../translators/referencerimporter.h"
 #include "../collections/bibtexcollection.h"
@@ -34,15 +34,15 @@
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( ReferencerImportTest )
+QTEST_KDEMAIN_CORE( ReferencerTest )
 
-void ReferencerImportTest::initTestCase() {
+void ReferencerTest::initTestCase() {
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 }
 
-void ReferencerImportTest::testImport() {
+void ReferencerTest::testImport() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.reflib");
   Tellico::Import::ReferencerImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();

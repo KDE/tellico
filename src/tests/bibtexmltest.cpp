@@ -25,33 +25,55 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "risimporttest.h"
-#include "risimporttest.moc"
+#include "bibtexmltest.h"
+#include "bibtexmltest.moc"
 
-#include "../translators/risimporter.h"
+#include "../translators/bibtexmlimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../translators/bibtexmlexporter.h"
 
-QTEST_KDEMAIN_CORE( RisImportTest )
+QTEST_KDEMAIN_CORE( BibtexmlTest )
 
-void RisImportTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ris");
-  Tellico::Import::RISImporter importer(url);
+#define QL1(x) QString::fromLatin1(x)
+
+void BibtexmlTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.bibtexml");
+
+  Tellico::Import::BibtexmlImporter importer(url);
+  // shut the importer up about current collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BibtexCollection(true));
+  importer.setCurrentCollection(tmpColl);
+
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
-  QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin,M."));
+  Tellico::Data::EntryPtr entry = coll->entryById(0);
+  QCOMPARE(entry->field("entry-type"), QL1("book"));
+  QCOMPARE(entry->field("bibtex-key"), QL1("esbensen"));
+  QCOMPARE(entry->field("author"), QL1("Kim Esbensen; Tonje Midtgaard"));
 
-  Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
-  QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QLatin1String("entry-type"));
+  Tellico::Export::BibtexmlExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::BibtexmlImporter importer2(exporter.text());
+  importer2.setCurrentCollection(tmpColl);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  Tellico::Data::BibtexCollection* bColl2 = static_cast<Tellico::Data::BibtexCollection*>(coll2.data());
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QLatin1String("bibtex-key")));
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // entry ids will be different
+      if(f->name() != QLatin1String("id")) {
+        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+      }
+    }
+  }
 }

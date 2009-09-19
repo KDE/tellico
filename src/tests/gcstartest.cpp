@@ -25,8 +25,8 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "qtest_kde.h"
-#include "gcstarimporttest.h"
-#include "gcstarimporttest.moc"
+#include "gcstartest.h"
+#include "gcstartest.moc"
 
 #include "../translators/gcstarimporter.h"
 //#include "../translators/tellicoimporter.h"
@@ -37,16 +37,16 @@
 
 #include <kstandarddirs.h>
 
-QTEST_KDEMAIN_CORE( GCstarImportTest )
+QTEST_KDEMAIN_CORE( GCstarTest )
 
-void GCstarImportTest::initTestCase() {
+void GCstarTest::initTestCase() {
   Tellico::ImageFactory::init();
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   // need to register the collection types
   Tellico::CollectionInitializer ci;
 }
 
-void GCstarImportTest::testImportBook() {
+void GCstarTest::testImportBook() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -86,7 +86,7 @@ void GCstarImportTest::testImportBook() {
 #endif
 }
 
-void GCstarImportTest::testImportVideo() {
+void GCstarTest::testImportVideo() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-video.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -118,7 +118,7 @@ void GCstarImportTest::testImportVideo() {
   QVERIFY(!entry->field("comments").isEmpty());
 }
 
-void GCstarImportTest::testImportBoardGame() {
+void GCstarTest::testImportBoardGame() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-boardgame.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
