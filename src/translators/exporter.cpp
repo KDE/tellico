@@ -23,8 +23,8 @@
  ***************************************************************************/
 
 #include "exporter.h"
-#include "../document.h"
 #include "../collection.h"
+#include "../tellico_debug.h"
 
 using Tellico::Export::Exporter;
 
@@ -41,7 +41,11 @@ Tellico::Data::CollPtr Exporter::collection() const {
   if(m_coll) {
     return m_coll;
   }
-  return Data::Document::self()->collection();
+  if(!m_entries.isEmpty()) {
+    return m_entries.first()->collection();
+  }
+  myWarning() << "no collection set";
+  return Data::CollPtr();
 }
 
 #include "exporter.moc"

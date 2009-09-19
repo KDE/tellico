@@ -40,8 +40,6 @@ SET(tellicotest_SRCS
    ../collectionfactory.cpp
    ../tellico_utils.cpp
    ../derivedvalue.cpp
-   ../document.cpp
-   ../progressmanager.cpp
    )
 
 KDE4_ADD_LIBRARY(tellicotest STATIC ${tellicotest_SRCS})
