@@ -30,7 +30,6 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
-#include "../gui/cursorsaver.h"
 #include "../gui/guiproxy.h"
 
 #include <klocale.h>
@@ -66,7 +65,22 @@ bool AlexandriaExporter::exec() {
   const QString alexDirName = QLatin1String(".alexandria");
 
   // create if necessary
-  QDir libraryDir = QDir::home();
+  const KUrl u = url();
+  QDir libraryDir;
+  if(u.isEmpty()) {
+    libraryDir = QDir::home();
+  } else {
+    if(u.isLocalFile()) {
+      if(!libraryDir.cd(u.path())) {
+        myWarning() << "can't change to directory:" << u.path();
+        return false;
+      }
+    } else {
+      myWarning() << "can't write to remote directory";
+      return false;
+    }
+  }
+
   if(!libraryDir.cd(alexDirName)) {
     if(!libraryDir.mkdir(alexDirName) || !libraryDir.cd(alexDirName)) {
       myLog() << "can't locate directory";
@@ -93,7 +107,6 @@ bool AlexandriaExporter::exec() {
   const uint stepSize = qMax(1, entries().count()/100);
   const bool showProgress = options() & ExportProgress;
 
-  GUI::CursorSaver cs;
   bool success = true;
   uint j = 0;
   foreach(const Data::EntryPtr& entry, entries()) {
@@ -189,14 +202,12 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     }
     img2 = img1.scaled(ALEXANDRIA_MAX_SIZE_SMALL, ALEXANDRIA_MAX_SIZE_SMALL, Qt::KeepAspectRatio);
   } else {
-    img2 = img1.scaled(ALEXANDRIA_MAX_SIZE_MEDIUM, ALEXANDRIA_MAX_SIZE_MEDIUM,
-                       Qt::KeepAspectRatio, Qt::SmoothTransformation); // scale up
+    // img2 is the small image
+    img2 = img1;
+    img1 = QImage();
   }
-  if(!img1.save(filename + QLatin1String("_medium.jpg"), "JPEG")
-     || !img2.save(filename + QLatin1String("_small.jpg"), "JPEG")) {
-    return false;
-  }
-  return true;
+  return (img1.isNull() || img1.save(filename + QLatin1String("_medium.jpg"), "JPEG"))
+      && img2.save(filename + QLatin1String("_small.jpg"), "JPEG");
 }
 
 #include "alexandriaexporter.moc"

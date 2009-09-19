@@ -63,6 +63,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
     myDebug() << dataDir.path() << "doesn't exist";
     return Data::CollPtr();
   }
+
   dataDir.setFilter(QDir::Files | QDir::Readable | QDir::NoSymLinks);
 
   m_coll = new Data::BookCollection(true);
@@ -97,9 +98,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   for(QStringList::ConstIterator it = files.begin(); !m_cancelled && it != files.end(); ++it, ++j) {
     QFile file(dataDir.absoluteFilePath(*it));
     if(!file.open(QIODevice::ReadOnly)) {
+      myLog() << "can't open" << file.fileName();
       continue;
     }
-
     Data::EntryPtr entry(new Data::Entry(m_coll));
 
     bool readNextLine = true;

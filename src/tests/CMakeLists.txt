@@ -70,7 +70,7 @@ set(TELLICO_TEST_LIBS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp)
 TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
 
-KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp)
+KDE4_ADD_UNIT_TEST(alexandriaimporttest NOGUI alexandriaimporttest.cpp ../progressmanager.cpp)
 TARGET_LINK_LIBRARIES(alexandriaimporttest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp)

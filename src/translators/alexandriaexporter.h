@@ -25,9 +25,9 @@
 #ifndef TELLICO_ALEXANDRIAEXPORTER_H
 #define TELLICO_ALEXANDRIAEXPORTER_H
 
-class QDir;
-
 #include "exporter.h"
+
+class QDir;
 
 namespace Tellico {
   namespace Data {

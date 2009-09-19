@@ -29,8 +29,11 @@
 #include "alexandriaimporttest.moc"
 
 #include "../translators/alexandriaimporter.h"
+#include "../translators/alexandriaexporter.h"
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
+
+#include <ktempdir.h>
 
 QTEST_KDEMAIN_CORE( AlexandriaImportTest )
 
@@ -67,4 +70,31 @@ void AlexandriaImportTest::testImport() {
   QCOMPARE(entry->field("rating"), QL1("3"));
   QCOMPARE(entry->field("read"), QL1("true"));
   QCOMPARE(entry->field("loaned"), QL1(""));
+
+  KTempDir outputDir;
+
+  Tellico::Export::AlexandriaExporter exporter;
+  exporter.setEntries(coll->entries());
+  exporter.setURL(outputDir.name());
+  QVERIFY(exporter.exec());
+
+  importer.setLibraryPath(outputDir.name() + "/.alexandria/" + coll->title());
+  Tellico::Data::CollPtr coll2 = importer.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->title(), coll->title());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    // assume IDs stay the same
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+      }
+    }
+  }
 }
