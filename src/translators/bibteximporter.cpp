@@ -219,7 +219,14 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
         str.replace(QRegExp(QLatin1String("\\sand\\s")), QLatin1String("; "));
       }
-      Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentCollection());
+      // there's a 'key' field different from the citation key
+      // http://nwalsh.com/tex/texhelp/bibtx-37.html
+      // TODO account for this later
+      if(fieldName == QLatin1String("key")) {
+        myLog() << "skipping bibtex 'key' field for" << str;
+      } else {
+        Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentCollection());
+      }
     }
 
     ptr->addEntries(entry);
@@ -259,6 +266,7 @@ void BibtexImporter::parseText(const QString& text) {
   QRegExp macroName(QLatin1String("@string\\s*\\{\\s*(.*)="), Qt::CaseInsensitive);
   macroName.setMinimal(true);
 
+  int line = 1;
   bool needsCleanup = false;
   int brace = 0;
   int startpos = 0;
@@ -270,13 +278,13 @@ void BibtexImporter::parseText(const QString& text) {
       --brace;
     }
     if(brace == 0) {
-      entry = text.mid(startpos, pos-startpos+1).trimmed();
+      entry = text.mid(startpos, pos-startpos+1);
       // All the downstream text processing on the AST node will assume utf-8
       QByteArray entryText = entry.toUtf8();
       QByteArray filename = QFile::encodeName(url().fileName());
       AST* node = bt_parse_entry_s(entryText.data(),
                                    filename.data(),
-                                   0, bt_options, &ok);
+                                   line, bt_options, &ok);
       if(ok && node) {
         if(bt_entry_metatype(node) == BTE_MACRODEF && macroName.indexIn(entry) > -1) {
           char* macro;
@@ -287,6 +295,7 @@ void BibtexImporter::parseText(const QString& text) {
         needsCleanup = true;
       }
       startpos = pos+1;
+      line += entry.count(QLatin1Char('\n'));
     }
     pos = rx.indexIn(text, pos+1);
   }

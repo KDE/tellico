@@ -314,6 +314,17 @@ Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibte
   return FieldPtr(m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict[bibtex_]);
 }
 
+Tellico::Data::EntryPtr BibtexCollection::entryByBibtexKey(const QString& key_) const {
+  EntryPtr entry;
+  foreach(EntryPtr e, entries()) {
+    if(e->field(QLatin1String("bibtex-key")) == key_) {
+      entry = e;
+      break;
+    }
+  }
+  return entry;
+}
+
 QString BibtexCollection::prepareText(const QString& text_) const {
   QString text = text_;
   BibtexHandler::cleanText(text);

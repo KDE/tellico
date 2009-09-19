@@ -121,11 +121,14 @@ QString BibtexExporter::text() {
                + QLatin1String(TELLICO_VERSION)
                + QLatin1String("}\n\n");
 
+  const QStringList macros = coll->macroList().keys();
+
   if(!coll->preamble().isEmpty()) {
-    text += QLatin1String("@preamble{") + coll->preamble() + QLatin1String("}\n\n");
+    text += QLatin1String("@preamble{")
+            + BibtexHandler::exportText(coll->preamble(), macros)
+            + QLatin1String("}\n\n");
   }
 
-  const QStringList macros = coll->macroList().keys();
   if(!m_expandMacros) {
     QMap<QString, QString>::ConstIterator macroIt;
     for(macroIt = coll->macroList().constBegin(); macroIt != coll->macroList().constEnd(); ++macroIt) {
@@ -298,6 +301,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   const QStringList macros = static_cast<const Data::BibtexCollection*>(collection().data())->macroList().keys();
   const QString bibtex = QLatin1String("bibtex");
   const QString bibtexSep = QLatin1String("bibtex-separator");
+  QRegExp numberRx(QLatin1String("^\\d+$"));
 
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;
 
@@ -336,7 +340,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
       value = (b ? QLatin1Char('{') : QLatin1Char('"'))
             + QLatin1String("\\url{") + BibtexHandler::exportText(value, macros) + QLatin1Char('}')
             + (b ? QLatin1Char('}') : QLatin1Char('"'));
-    } else if(fIt->type() != Data::Field::Number) {
+    } else if(numberRx.indexIn(value) == -1) {
       // numbers aren't escaped, nor will they have macros
       // if m_expandMacros is true, then macros is empty, so this is ok even then
       value = BibtexHandler::exportText(value, macros);

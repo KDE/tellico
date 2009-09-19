@@ -57,6 +57,7 @@ public:
   virtual bool deleteField(FieldPtr field, bool force=false);
 
   FieldPtr fieldByBibtexName(const QString& name) const;
+  EntryPtr entryByBibtexKey(const QString& key) const;
   const QString& preamble() const { return m_preamble; }
   void setPreamble(const QString& preamble) { m_preamble = preamble; }
   const StringMap& macroList() const { return m_macros; }

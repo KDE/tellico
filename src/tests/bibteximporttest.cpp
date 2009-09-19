@@ -31,6 +31,7 @@
 #include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../translators/bibtexexporter.h"
+#include "../translators/bibtexhandler.h"
 
 #include <kstandarddirs.h>
 
@@ -69,13 +70,27 @@ void BibtexImportTest::testImport() {
   QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
   QCOMPARE(bColl->macroList().value("ACM"), QL1("The OX Association for Computing Machinery"));
 
+  Tellico::BibtexHandler::s_quoteStyle = Tellico::BibtexHandler::QUOTES;
+
   Tellico::Export::BibtexExporter exporter(coll);
   exporter.setEntries(coll->entries());
   Tellico::Import::BibtexImporter importer2(exporter.text());
   importer2.setCurrentCollection(tmpColl);
   Tellico::Data::CollPtr coll2 = importer2.collection();
+  Tellico::Data::BibtexCollection* bColl2 = static_cast<Tellico::Data::BibtexCollection*>(coll2.data());
 
   QVERIFY(!coll2.isNull());
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QLatin1String("bibtex-key")));
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // entry ids will be different
+      if(f->name() != QLatin1String("id")) {
+        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+      }
+    }
+  }
 }
