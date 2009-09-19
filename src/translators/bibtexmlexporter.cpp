@@ -50,9 +50,14 @@ QString BibtexmlExporter::fileFilter() const {
 }
 
 bool BibtexmlExporter::exec() {
+  const QString text = this->text();
+  return text.isEmpty() ? false : FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
+}
+
+QString BibtexmlExporter::text() {
   Data::CollPtr c = collection();
   if(!c || c->type() != Data::Collection::Bibtex) {
-    return false;
+    return QString();
   }
   const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c.data());
 
@@ -182,8 +187,7 @@ bool BibtexmlExporter::exec() {
     }
   }
 
-  return FileHandler::writeTextURL(url(), dom.toString(),
-                                   options() & ExportUTF8, options() & Export::ExportForce);
+  return dom.toString();
 }
 
 #include "bibtexmlexporter.moc"

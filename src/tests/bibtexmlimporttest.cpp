@@ -30,6 +30,7 @@
 
 #include "../translators/bibtexmlimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../translators/bibtexmlexporter.h"
 
 QTEST_KDEMAIN_CORE( BibtexmlImportTest )
 
@@ -53,4 +54,26 @@ void BibtexmlImportTest::testImport() {
   QCOMPARE(entry->field("entry-type"), QL1("book"));
   QCOMPARE(entry->field("bibtex-key"), QL1("esbensen"));
   QCOMPARE(entry->field("author"), QL1("Kim Esbensen; Tonje Midtgaard"));
+
+  Tellico::Export::BibtexmlExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::BibtexmlImporter importer2(exporter.text());
+  importer2.setCurrentCollection(tmpColl);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  Tellico::Data::BibtexCollection* bColl2 = static_cast<Tellico::Data::BibtexCollection*>(coll2.data());
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QLatin1String("bibtex-key")));
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // entry ids will be different
+      if(f->name() != QLatin1String("id")) {
+        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+      }
+    }
+  }
 }

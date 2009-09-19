@@ -37,6 +37,9 @@ using Tellico::Import::BibtexmlImporter;
 BibtexmlImporter::BibtexmlImporter(const KUrl& url) : Import::XMLImporter(url), m_cancelled(false) {
 }
 
+BibtexmlImporter::BibtexmlImporter(const QString& text) : Import::XMLImporter(text), m_cancelled(false) {
+}
+
 bool BibtexmlImporter::canImport(int type) const {
   return type == Data::Collection::Bibtex;
 }

@@ -43,6 +43,7 @@ public:
   /**
    */
   BibtexmlImporter(const KUrl& url);
+  BibtexmlImporter(const QString& text);
 
   /**
    */

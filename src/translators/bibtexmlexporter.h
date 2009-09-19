@@ -38,10 +38,12 @@ Q_OBJECT
 
 public:
   BibtexmlExporter() : Exporter() {}
+  BibtexmlExporter(Data::CollPtr coll) : Exporter(coll) {}
 
-  virtual bool exec();
   virtual QString formatString() const;
   virtual QString fileFilter() const;
+  virtual bool exec();
+  QString text();
 
   // no options
   virtual QWidget* widget(QWidget*) { return 0; }
