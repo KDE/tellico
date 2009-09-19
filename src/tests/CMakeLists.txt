@@ -77,7 +77,7 @@ KDE4_ADD_UNIT_TEST(amcimporttest NOGUI amcimporttest.cpp)
 TARGET_LINK_LIBRARIES(amcimporttest ${TELLICO_TEST_LIBS} collections)
 
 KDE4_ADD_UNIT_TEST(bibteximporttest NOGUI bibteximporttest.cpp)
-TARGET_LINK_LIBRARIES(bibteximporttest translators ${TELLICO_TEST_LIBS} btparse models tellicotest)
+TARGET_LINK_LIBRARIES(bibteximporttest translators ${TELLICO_TEST_LIBS} btparse)
 
 KDE4_ADD_UNIT_TEST(bibtexmlimporttest NOGUI bibtexmlimporttest.cpp)
 TARGET_LINK_LIBRARIES(bibtexmlimporttest ${TELLICO_TEST_LIBS})
