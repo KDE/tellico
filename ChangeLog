@@ -1,3 +1,7 @@
+2009-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.0.
+
 2009-09-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Enabled multiple ISBN and LCCN search for SRU fetcher.
@@ -39,6 +43,10 @@
 2009-03-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Added reading album artist from TPE2 tags in mp3 files.
+
+2009-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 1.3.5.
 
 2009-02-04  Robby Stephenson  <robby@periapsis.org>
 
