@@ -252,7 +252,7 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT metainfo (#PCDATA)>
 <!ELEMENT icon (#PCDATA)>
 
-<!-- boardgames --?
+<!-- boardgames -->
 <!-- publisher is defined above -->
 <!-- publishers is defined above -->
 <!ELEMENT designers (designer+)>
