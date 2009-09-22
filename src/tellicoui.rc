@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="25" name="tellico">
+<kpartgui version="26" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -58,7 +58,7 @@
     <Action name="file_export_bibtexml"/>
     <Action name="file_export_onix"/>
     <Separator/>
-    <Action name="file_export_gcfilms"/>
+    <Action name="file_export_gcstar"/>
     <Separator/>
     <Action name="file_export_xslt"/>
    </Menu>
@@ -130,7 +130,7 @@
   <Action name="file_export_onix"/>
   <Action name="file_export_bibtex"/>
   <Action name="file_export_bibtexml"/>
-  <Action name="file_export_gcfilms"/>
+  <Action name="file_export_gcstar"/>
   <Action name="file_export_amc"/>
   <Action name="coll_convert_bibliography"/>
   <Action name="coll_string_macros"/>
@@ -163,7 +163,7 @@
 
 <State name="is_video">
  <Enable>
-  <Action name="file_export_gcfilms"/>
+  <Action name="file_export_gcstar"/>
   <Action name="file_export_amc"/>
  </Enable>
 </State>

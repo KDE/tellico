@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,34 +22,40 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_EXPORT_GCFILMSEXPORTER_H
-#define TELLICO_EXPORT_GCFILMSEXPORTER_H
+#ifndef TELLICO_GCSTAREXPORTER_H
+#define TELLICO_GCSTAREXPORTER_H
 
 #include "exporter.h"
 
-class QTextStream;
-
 namespace Tellico {
+  namespace Data {
+    class Collection;
+  }
+  class XSLTHandler;
   namespace Export {
 
 /**
  * @author Robby Stephenson
  */
-class GCfilmsExporter : public Exporter {
+class GCstarExporter : public Exporter {
 Q_OBJECT
 
 public:
-  GCfilmsExporter();
+  GCstarExporter();
+  GCstarExporter(Data::CollPtr coll);
+  ~GCstarExporter();
 
   virtual bool exec();
   virtual QString formatString() const;
   virtual QString fileFilter() const;
 
-  // no options
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*);
+
+  QString text();
 
 private:
-  void push(QTextStream& ts, const QByteArray& fieldName, Data::EntryPtr entry, bool format);
+  XSLTHandler* m_handler;
+  QString m_xsltFile;
 };
 
   } // end namespace

@@ -29,8 +29,7 @@
 #include "gcstartest.moc"
 
 #include "../translators/gcstarimporter.h"
-//#include "../translators/tellicoimporter.h"
-//#include "../translators/gcstarexporter.h"
+#include "../translators/gcstarexporter.h"
 #include "../collections/collectioninitializer.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
@@ -46,7 +45,7 @@ void GCstarTest::initTestCase() {
   Tellico::CollectionInitializer ci;
 }
 
-void GCstarTest::testImportBook() {
+void GCstarTest::testBook() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -72,21 +71,33 @@ void GCstarTest::testImportBook() {
   QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag2"));
   // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
   QCOMPARE(entry->field("rating"), QLatin1String("2"));
+  QCOMPARE(entry->fields("language", false).count(), 1);
+  QCOMPARE(entry->fields("language", false).at(0), QLatin1String("English"));
 
-#if 0
   Tellico::Export::GCstarExporter exporter(coll);
-  Tellico::Import::TellicoImporter tcImporter(exporter.text());
-  Tellico::Data::CollPtr coll2 = tcImporter.collection();
+  exporter.setEntries(coll->entries());
+
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
 
   QVERIFY(!coll2.isNull());
-  QCOMPARE(coll2->type(), Tellico::Data::Collection::Book);
-  QCOMPARE(coll2->entryCount(), 1);
-  // should be translated somehow
-  QCOMPARE(coll2->title(), QLatin1String("GCstar Import"));
-#endif
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
 }
 
-void GCstarTest::testImportVideo() {
+void GCstarTest::testVideo() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-video.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -116,9 +127,30 @@ void GCstarTest::testImportVideo() {
   QCOMPARE(entry->field("rating"), QLatin1String("3"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
 }
 
-void GCstarTest::testImportBoardGame() {
+void GCstarTest::testBoardGame() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-boardgame.gcs");
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -141,4 +173,27 @@ void GCstarTest::testImportBoardGame() {
   QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Wargame"));
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  // no support for board games yet
+  QEXPECT_FAIL("", "Support for exporting board games is not implemented yet", Abort);
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
 }

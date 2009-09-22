@@ -1,3 +1,11 @@
+2009-09-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed the GCcfilms exporter and added the GCstar exporter.
+
+2009-09-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed typo in DTD.
+
 2009-09-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.0.

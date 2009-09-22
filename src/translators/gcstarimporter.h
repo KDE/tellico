@@ -43,6 +43,7 @@ public:
   /**
    */
   GCstarImporter(const KUrl& url);
+  GCstarImporter(const QString& text);
 
   /**
    *

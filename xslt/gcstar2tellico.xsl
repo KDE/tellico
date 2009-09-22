@@ -351,7 +351,7 @@
 
 <xsl:template match="comments">
  <tc:comments>
-  <xsl:if test="$coll = 2">
+  <xsl:if test="$coll = 2 and ../description">
    &lt;br/&gt;
    <xsl:value-of select="../description"/>
    &lt;br/&gt;

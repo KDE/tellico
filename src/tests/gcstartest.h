@@ -32,9 +32,9 @@ Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
-  void testImportBook();
-  void testImportVideo();
-  void testImportBoardGame();
+  void testBook();
+  void testVideo();
+  void testBoardGame();
 };
 
 #endif

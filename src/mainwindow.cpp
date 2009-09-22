@@ -427,13 +427,8 @@ void MainWindow::initActions() {
   EXPORT_ACTION(Export::ONIX, "file_export_onix", i18n("Export to ONIX..."),
                 i18n("Export to an ONIX file"), mimeIcon("text/xml"));
 
-  EXPORT_ACTION(Export::GCfilms, "file_export_gcfilms", i18n("Export to GCfilms..."),
-                i18n("Export to a GCfilms data file"), KIcon(QLatin1String("gcstar")));
-
-#if 0
-    QString dummy1 = i18n("Export to GCstar...");
-    QString dummy2 = i18n("Export to a GCstar data file");
-#endif
+  EXPORT_ACTION(Export::GCstar, "file_export_gcstar", i18n("Export to GCstar..."),
+                i18n("Export to a GCstar data file"), KIcon(QLatin1String("gcstar")));
 
   EXPORT_ACTION(Export::XSLT, "file_export_xslt", i18n("Export XSL Transform..."),
                 i18n("Export using an XSL Transform"), mimeIcon("application/xslt+xml", "text/x-xslt"));

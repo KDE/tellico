@@ -43,8 +43,8 @@
   <a:attribute name="format">binding</a:attribute>
   <a:attribute name="format">medium</a:attribute>
   <a:attribute name="format">format</a:attribute>
-  <a:attribute name="web">url</a:attribute>
-  <a:attribute name="webPage">url</a:attribute>
+  <a:attribute name="web" skip="GCfilms">url</a:attribute>
+  <a:attribute name="webPage" type="GCfilms">url</a:attribute>
   <a:attribute name="read" format="bool" type="GCbooks">read</a:attribute>
   <a:attribute name="seen" format="bool" type="GCfilms">seen</a:attribute>
   <a:attribute name="favourite" format="bool">favorite</a:attribute>
@@ -70,7 +70,9 @@
  </xsl:choose>
 </xsl:variable>
 <!-- grab all the applicable attributes once -->
-<xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[not(@type) or @type=$collType]"/>
+<xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[not(@type) or
+                                                                                (contains(@type, $collType) and
+                                                                                 not(contains(@skip, $collType)))]"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
@@ -88,7 +90,7 @@
  </xsl:message>
 </xsl:template>
 
-<xsl:template match="tc:collection[@type&gt;1 and @type&lt;6]">
+<xsl:template match="tc:collection[(@type&gt;1 and @type&lt;6) or @type=8]">
  <collection items="{count(tc:entry)}" type="{$collType}">
   <information>
    <maxId>
@@ -158,9 +160,6 @@
   </xsl:if>
 
   <!-- for books -->
-  <comments>
-   <xsl:value-of select="tc:comments"/>
-  </comments>
   <authors>
    <xsl:call-template name="multiline">
     <xsl:with-param name="elem" select="tc:authors"/>
@@ -176,11 +175,13 @@
     <xsl:with-param name="elem" select="tc:keywords"/>
    </xsl:call-template>
   </tags>
+  <xsl:if test="$collType  = 'GCbooks'">
+   <comments>
+    <xsl:value-of select="tc:comments"/>
+   </comments>
+  </xsl:if>
 
   <!-- for movies -->
-  <comment> <!-- note the lack of an 's' -->
-   <xsl:value-of select="tc:comments"/>
-  </comment>
   <synopsis>
    <xsl:value-of select="tc:plot"/>
   </synopsis>
@@ -201,7 +202,12 @@
     <xsl:with-param name="elem" select="tc:subtitles"/>
    </xsl:call-template>
   </subt>
-  <xsl:apply-templates select="tc:languages"/>
+  <xsl:if test="$collType  = 'GCfilms'">
+   <comment> <!-- note the lack of an 's' -->
+    <xsl:value-of select="tc:comments"/>
+   </comment>
+   <xsl:apply-templates select="tc:languages"/>
+  </xsl:if>
 
   <!-- for music -->
   <xsl:apply-templates select="tc:tracks"/>

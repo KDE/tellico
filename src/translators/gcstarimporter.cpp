@@ -43,6 +43,9 @@ using Tellico::Import::GCstarImporter;
 GCstarImporter::GCstarImporter(const KUrl& url_) : TextImporter(url_), m_cancelled(false) {
 }
 
+GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false) {
+}
+
 bool GCstarImporter::canImport(int type) const {
   return type == Data::Collection::Video
       || type == Data::Collection::Book

@@ -40,6 +40,8 @@ SET(tellicotest_SRCS
    ../collectionfactory.cpp
    ../tellico_utils.cpp
    ../derivedvalue.cpp
+   ../document.cpp
+   ../progressmanager.cpp
    )
 
 KDE4_ADD_LIBRARY(tellicotest STATIC ${tellicotest_SRCS})
@@ -83,7 +85,7 @@ KDE4_ADD_UNIT_TEST(bibtexmltest NOGUI bibtexmltest.cpp)
 TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(gcstartest NOGUI gcstartest.cpp)
-TARGET_LINK_LIBRARIES(gcstartest translators ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(gcstartest translators models ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(referencertest NOGUI referencertest.cpp)
 TARGET_LINK_LIBRARIES(referencertest translators ${TELLICO_TEST_LIBS})

@@ -74,7 +74,7 @@ namespace Tellico {
       PilotDB,
       Alexandria,
       ONIX,
-      GCfilms
+      GCstar
     };
 
     enum Target {

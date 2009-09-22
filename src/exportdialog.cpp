@@ -40,7 +40,7 @@
 #include "translators/pilotdbexporter.h"
 #include "translators/alexandriaexporter.h"
 #include "translators/onixexporter.h"
-#include "translators/gcfilmsexporter.h"
+#include "translators/gcstarexporter.h"
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -213,8 +213,8 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       exporter = new Export::ONIXExporter();
       break;
 
-    case Export::GCfilms:
-      exporter = new Export::GCfilmsExporter();
+    case Export::GCstar:
+      exporter = new Export::GCstarExporter();
       break;
 
     default:
