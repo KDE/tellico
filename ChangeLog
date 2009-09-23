@@ -1,5 +1,6 @@
 2009-09-22  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed crash when exporting to HTML under certain conditions.
 	* Removed the GCcfilms exporter and added the GCstar exporter.
 
 2009-09-21  Robby Stephenson  <robby@periapsis.org>
