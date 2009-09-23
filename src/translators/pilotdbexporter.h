@@ -41,7 +41,7 @@ class PilotDBExporter : public Exporter {
 Q_OBJECT
 
 public:
-  PilotDBExporter();
+  PilotDBExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;

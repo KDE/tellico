@@ -46,7 +46,6 @@ class TellicoXMLExporter : public Exporter {
 Q_OBJECT
 
 public:
-  TellicoXMLExporter();
   TellicoXMLExporter(Data::CollPtr coll);
 
   virtual bool exec();

@@ -41,7 +41,7 @@
 
 using Tellico::Export::CSVExporter;
 
-CSVExporter::CSVExporter() : Tellico::Export::Exporter(),
+CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_includeTitles(true),
     m_delimiter(QLatin1String(",")),
     m_widget(0) {

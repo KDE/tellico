@@ -38,11 +38,6 @@
 
 using Tellico::Export::GCstarExporter;
 
-GCstarExporter::GCstarExporter() : Tellico::Export::Exporter(),
-    m_handler(0),
-    m_xsltFile(QLatin1String("tellico2gcstar.xsl")) {
-}
-
 GCstarExporter::GCstarExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_xsltFile(QLatin1String("tellico2gcstar.xsl")) {

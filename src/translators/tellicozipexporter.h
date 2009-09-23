@@ -37,7 +37,7 @@ class TellicoZipExporter : public Exporter {
 Q_OBJECT
 
 public:
-  TellicoZipExporter() : Exporter(), m_includeImages(true), m_cancelled(false) {}
+  TellicoZipExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;

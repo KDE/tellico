@@ -73,7 +73,7 @@ void AlexandriaTest::testImport() {
 
   KTempDir outputDir;
 
-  Tellico::Export::AlexandriaExporter exporter;
+  Tellico::Export::AlexandriaExporter exporter(coll);
   exporter.setEntries(coll->entries());
   exporter.setURL(outputDir.name());
   QVERIFY(exporter.exec());

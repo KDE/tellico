@@ -42,7 +42,7 @@ class AlexandriaExporter : public Exporter {
 Q_OBJECT
 
 public:
-  AlexandriaExporter() : Exporter() {}
+  AlexandriaExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;

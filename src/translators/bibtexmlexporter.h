@@ -37,8 +37,7 @@ class BibtexmlExporter : public Exporter {
 Q_OBJECT
 
 public:
-  BibtexmlExporter() : Exporter() {}
-  BibtexmlExporter(Data::CollPtr coll) : Exporter(coll) {}
+  BibtexmlExporter(Data::CollPtr coll);
 
   virtual QString formatString() const;
   virtual QString fileFilter() const;

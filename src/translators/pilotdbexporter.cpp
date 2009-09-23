@@ -43,7 +43,7 @@
 
 using Tellico::Export::PilotDBExporter;
 
-PilotDBExporter::PilotDBExporter() : Tellico::Export::Exporter(),
+PilotDBExporter::PilotDBExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
       m_backup(true),
       m_widget(0),
       m_checkBackup(0) {

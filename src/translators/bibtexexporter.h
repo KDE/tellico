@@ -44,7 +44,6 @@ class BibtexExporter : public Exporter {
 Q_OBJECT
 
 public:
-  BibtexExporter();
   BibtexExporter(Data::CollPtr coll);
 
   virtual bool exec();

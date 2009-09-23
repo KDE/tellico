@@ -59,7 +59,7 @@ private slots:
   void slotSaveOptions();
 
 private:
-  static Export::Exporter* exporter(Export::Format format);
+  static Export::Exporter* exporter(Export::Format format, Data::CollPtr coll);
 
   void readOptions();
 

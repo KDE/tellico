@@ -62,20 +62,6 @@ extern "C" {
 
 using Tellico::Export::HTMLExporter;
 
-HTMLExporter::HTMLExporter() : Tellico::Export::Exporter(),
-    m_handler(0),
-    m_printHeaders(true),
-    m_printGrouped(false),
-    m_exportEntryFiles(false),
-    m_cancelled(false),
-    m_parseDOM(true),
-    m_checkCreateDir(true),
-    m_imageWidth(0),
-    m_imageHeight(0),
-    m_widget(0),
-    m_xsltFile(QLatin1String("tellico2html.xsl")) {
-}
-
 HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_printHeaders(true),

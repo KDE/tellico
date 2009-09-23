@@ -28,9 +28,6 @@
 
 using Tellico::Export::Exporter;
 
-Exporter::Exporter() : QObject(), m_options(Export::ExportUTF8 | Export::ExportComplete) {
-}
-
 Exporter::Exporter(Tellico::Data::CollPtr coll) : QObject(), m_options(Export::ExportUTF8), m_coll(coll) {
 }
 

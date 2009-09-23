@@ -210,10 +210,10 @@ bool Document::saveDocument(const KUrl& url_) {
   }
   Export::Exporter* exporter;
   if(m_fileFormat == Import::TellicoImporter::XML) {
-    exporter = new Export::TellicoXMLExporter();
+    exporter = new Export::TellicoXMLExporter(m_coll);
     static_cast<Export::TellicoXMLExporter*>(exporter)->setIncludeImages(includeImages);
   } else {
-    exporter = new Export::TellicoZipExporter();
+    exporter = new Export::TellicoZipExporter(m_coll);
     static_cast<Export::TellicoZipExporter*>(exporter)->setIncludeImages(includeImages);
   }
   item.setProgress(int(0.8*totalSteps));

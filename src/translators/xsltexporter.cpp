@@ -25,6 +25,7 @@
 #include "xsltexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
+#include "../collection.h"
 #include "../core/filehandler.h"
 
 #include <klocale.h>
@@ -39,7 +40,7 @@
 
 using Tellico::Export::XSLTExporter;
 
-XSLTExporter::XSLTExporter() : Export::Exporter(),
+XSLTExporter::XSLTExporter(Data::CollPtr coll_) : Export::Exporter(coll_),
     m_widget(0),
     m_URLRequester(0) {
 }
@@ -64,7 +65,7 @@ bool XSLTExporter::exec() {
   handler.addStringParam("time", QTime::currentTime().toString(Qt::ISODate).toLatin1());
   handler.addStringParam("user", KUser(KUser::UseRealUserID).loginName().toLatin1());
 
-  TellicoXMLExporter exporter;
+  TellicoXMLExporter exporter(collection());
   exporter.setEntries(entries());
   exporter.setOptions(options());
   QDomDocument dom = exporter.exportXML();

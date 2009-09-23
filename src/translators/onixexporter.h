@@ -43,7 +43,6 @@ class ONIXExporter : public Exporter {
 Q_OBJECT
 
 public:
-  ONIXExporter();
   ONIXExporter(Data::CollPtr coll);
   ~ONIXExporter();
 

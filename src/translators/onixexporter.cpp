@@ -51,13 +51,6 @@
 
 using Tellico::Export::ONIXExporter;
 
-ONIXExporter::ONIXExporter() : Tellico::Export::Exporter(),
-    m_handler(0),
-    m_xsltFile(QLatin1String("tellico2onix.xsl")),
-    m_includeImages(true),
-    m_widget(0) {
-}
-
 ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(0),
     m_xsltFile(QLatin1String("tellico2onix.xsl")),

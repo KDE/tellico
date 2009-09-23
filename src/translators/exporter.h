@@ -59,7 +59,6 @@ class Exporter : public QObject {
 Q_OBJECT
 
 public:
-  Exporter();
   Exporter(Data::CollPtr coll);
   virtual ~Exporter();
 

@@ -41,7 +41,6 @@ class GCstarExporter : public Exporter {
 Q_OBJECT
 
 public:
-  GCstarExporter();
   GCstarExporter(Data::CollPtr coll);
   ~GCstarExporter();
 

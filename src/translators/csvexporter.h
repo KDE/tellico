@@ -25,13 +25,13 @@
 #ifndef TELLICO_CSVEXPORTER_H
 #define TELLICO_CSVEXPORTER_H
 
+#include "exporter.h"
+
 class KLineEdit;
 
 class QWidget;
 class QCheckBox;
 class QRadioButton;
-
-#include "exporter.h"
 
 namespace Tellico {
   namespace Export {
@@ -43,7 +43,7 @@ class CSVExporter : public Exporter {
 Q_OBJECT
 
 public:
-  CSVExporter();
+  CSVExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;

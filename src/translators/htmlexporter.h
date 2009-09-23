@@ -54,7 +54,6 @@ class HTMLExporter : public Exporter {
 Q_OBJECT
 
 public:
-  HTMLExporter();
   HTMLExporter(Data::CollPtr coll);
   ~HTMLExporter();
 

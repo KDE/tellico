@@ -58,7 +58,7 @@ using Tellico::ExportDialog;
 
 ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollPtr coll_, QWidget* parent_)
     : KDialog(parent_),
-      m_format(format_), m_coll(coll_), m_exporter(exporter(format_)) {
+      m_format(format_), m_coll(coll_), m_exporter(exporter(format_, coll_)) {
   setModal(true);
   setCaption(i18n("Export Options"));
   setButtons(Ok|Cancel);
@@ -159,21 +159,21 @@ void ExportDialog::slotSaveOptions() {
 }
 
 // static
-Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_) {
+Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_, Data::CollPtr coll_) {
   Export::Exporter* exporter = 0;
 
   switch(format_) {
     case Export::TellicoXML:
-      exporter = new Export::TellicoXMLExporter();
+      exporter = new Export::TellicoXMLExporter(coll_);
       break;
 
     case Export::TellicoZip:
-      exporter = new Export::TellicoZipExporter();
+      exporter = new Export::TellicoZipExporter(coll_);
       break;
 
     case Export::HTML:
       {
-        Export::HTMLExporter* htmlExp = new Export::HTMLExporter();
+        Export::HTMLExporter* htmlExp = new Export::HTMLExporter(coll_);
         htmlExp->setGroupBy(Controller::self()->expandedGroupBy());
         htmlExp->setSortTitles(Controller::self()->sortTitles());
         htmlExp->setColumns(Controller::self()->visibleColumns());
@@ -182,39 +182,39 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       break;
 
     case Export::CSV:
-      exporter = new Export::CSVExporter();
+      exporter = new Export::CSVExporter(coll_);
       break;
 
     case Export::Bibtex:
-      exporter = new Export::BibtexExporter();
+      exporter = new Export::BibtexExporter(coll_);
       break;
 
     case Export::Bibtexml:
-      exporter = new Export::BibtexmlExporter();
+      exporter = new Export::BibtexmlExporter(coll_);
       break;
 
     case Export::XSLT:
-      exporter = new Export::XSLTExporter();
+      exporter = new Export::XSLTExporter(coll_);
       break;
 
     case Export::PilotDB:
       {
-        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter();
+        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(coll_);
         pdbExp->setColumns(Controller::self()->visibleColumns());
         exporter = pdbExp;
       }
       break;
 
     case Export::Alexandria:
-      exporter = new Export::AlexandriaExporter();
+      exporter = new Export::AlexandriaExporter(coll_);
       break;
 
     case Export::ONIX:
-      exporter = new Export::ONIXExporter();
+      exporter = new Export::ONIXExporter(coll_);
       break;
 
     case Export::GCstar:
-      exporter = new Export::GCstarExporter();
+      exporter = new Export::GCstarExporter(coll_);
       break;
 
     default:
@@ -272,7 +272,7 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 
 // static
 bool ExportDialog::exportCollection(Tellico::Export::Format format_, const KUrl& url_) {
-  Export::Exporter* exp = exporter(format_);
+  Export::Exporter* exp = exporter(format_, Data::Document::self()->collection());
 
   exp->setURL(url_);
   exp->setEntries(Data::Document::self()->collection()->entries());

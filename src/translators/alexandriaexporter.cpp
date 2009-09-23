@@ -46,6 +46,9 @@ namespace {
 
 using Tellico::Export::AlexandriaExporter;
 
+AlexandriaExporter::AlexandriaExporter(Data::CollPtr coll_) : Exporter(coll_) {
+}
+
 QString& AlexandriaExporter::escapeText(QString& str_) {
   str_.replace(QLatin1String("\""), QLatin1String("\\\""));
   return str_;

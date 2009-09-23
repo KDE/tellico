@@ -45,13 +45,6 @@
 
 using Tellico::Export::BibtexExporter;
 
-BibtexExporter::BibtexExporter() : Tellico::Export::Exporter(),
-   m_expandMacros(false),
-   m_packageURL(true),
-   m_skipEmptyKeys(false),
-   m_widget(0) {
-}
-
 BibtexExporter::BibtexExporter(Data::CollPtr coll) : Tellico::Export::Exporter(coll),
    m_expandMacros(false),
    m_packageURL(true),

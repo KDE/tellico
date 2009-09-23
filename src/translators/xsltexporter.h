@@ -37,7 +37,7 @@ namespace Tellico {
  */
 class XSLTExporter : public Exporter {
 public:
-  XSLTExporter();
+  XSLTExporter(Data::CollPtr coll);
 
   virtual bool exec();
   virtual QString formatString() const;
