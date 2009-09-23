@@ -133,7 +133,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   } else {
     m_edit->setEnabled(false);
   }
-  KPushButton* button4 = new KPushButton(i18n("Clear"), this);
+  KPushButton* button4 = new KPushButton(i18nc("Clear image", "Clear"), this);
   connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
   boxLayout->addWidget(button4);
 
