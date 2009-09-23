@@ -84,7 +84,6 @@ binary-arch: build install
 	dh_installexamples
 	dh_install -a
 	dh_installmenu
-	dh_desktop -ptellico
 	dh_installman -a debian/tellico.1x
 	dh_link -a
 	dh_strip
