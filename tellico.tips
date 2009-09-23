@@ -96,8 +96,8 @@ keyboard to skip to the next entry that starts with that letter.</p>
 </tip>
 <tip category="Tellico">
 <html>
-<p>...that you can use Dependent Fields to combine multiple separated fields
-into a single field. Just select the type Dependent and use a description
+<p>...that you can use a field with a derived value to combine multiple separated fields
+into a single field. Use a derived value template
 similar to "Value: %{fielda}%{fieldb}" where %{...} gets replaced with the
 appropriate field value. This is useful to collect multiple values in a
 single field, e.g. for better grouping, and to combine fields of different
