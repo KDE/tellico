@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="GCmusics" items="1" version="1.4.3">
+ <information>
+  <maxId>1</maxId>
+ </information>
+
+
+
+ <item
+  gcsautoid="1"
+  unique=""
+  title="Lifesong"
+  cover="/home/robby/.local/share/gcstar/images/gcstar_30.jpeg"
+  backpic=""
+  artist="Casting Crowns"
+  format="CD"
+  origin="US"
+  running="52:18"
+  release="2005"
+  label="Beach Street Records"
+  composer="Chad Cates, David Hunt, Mark Hall (5), Nichole Nordeman"
+  producer="Mark A. Miller"
+  web="http://www.discogs.com/release/873151?f=xml&amp;api_key=e8f5ae8ba2##Discogs"
+  rating="0"
+  added="22/09/2009"
+  location=""
+  playlist=""
+  borrower="none"
+  lendDate=""
+  borrowings=""
+  favourite="0"
+  tags=""
+ >
+  <comments></comments>
+  <genre>
+   <line>
+    <col>Electronic</col>
+   </line>
+   <line>
+    <col>Rock</col>
+   </line>
+  </genre>
+  <tracks>
+   <line>
+    <col>1</col>
+    <col>Lifesong</col>
+    <col>5:17</col>
+   </line>
+   <line>
+    <col>2</col>
+    <col>Praise You In This Storm</col>
+    <col>4:59</col>
+   </line>
+   <line>
+    <col>3</col>
+    <col>Does Anybody Hear Her</col>
+    <col>4:30</col>
+   </line>
+   <line>
+    <col>4</col>
+    <col>Stained Glass Masquerade</col>
+    <col>3:52</col>
+   </line>
+   <line>
+    <col>5</col>
+    <col>Love Them Like Jesus</col>
+    <col>4:32</col>
+   </line>
+   <line>
+    <col>6</col>
+    <col>Set Me Free</col>
+    <col>4:27</col>
+   </line>
+   <line>
+    <col>7</col>
+    <col>While You Were Sleeping</col>
+    <col>4:55</col>
+   </line>
+   <line>
+    <col>8</col>
+    <col>Father, Spirit, Jesus</col>
+    <col>5:12</col>
+   </line>
+   <line>
+    <col>9</col>
+    <col>In Me</col>
+    <col>4:45</col>
+   </line>
+   <line>
+    <col>10</col>
+    <col>Prodigal</col>
+    <col>5:46</col>
+   </line>
+   <line>
+    <col>11</col>
+    <col>And Now My Lifesong Sings</col>
+    <col>4:03</col>
+   </line>
+  </tracks>
+ </item>
+</collection>
