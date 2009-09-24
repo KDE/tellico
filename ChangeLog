@@ -1,3 +1,7 @@
+2009-09-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated the SRU fetcher to leave the response format empty.
+
 2009-09-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crash when exporting to HTML under certain conditions.

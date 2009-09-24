@@ -130,7 +130,9 @@ void SRUFetcher::search() {
   u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
   u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
   u.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
-  u.addQueryItem(QLatin1String("recordSchema"), m_format);
+  if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
+    u.addQueryItem(QLatin1String("recordSchema"), m_format);
+  }
 
   const int type = collectionType();
   QString str = QLatin1Char('"') + request().value + QLatin1Char('"');
@@ -291,7 +293,7 @@ void SRUFetcher::slotComplete(KJob*) {
       msg += QLatin1Char('\n');
     }
     msg += imp.statusMessage();
-  } else if(m_format == QLatin1String("dc")) {
+  } else if(m_format == QLatin1String("dc") | m_format == QLatin1String("none")) {
     Import::DCImporter imp(dom);
     coll = imp.collection();
     if(!msg.isEmpty()) {
@@ -467,6 +469,7 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   m_formatCombo->addItem(QLatin1String("MODS"), QLatin1String("mods"));
   m_formatCombo->addItem(QLatin1String("MARCXML"), QLatin1String("marcxml"));
   m_formatCombo->addItem(QLatin1String("Dublin Core"), QLatin1String("dc"));
+  m_formatCombo->addItem(QLatin1String(""), QLatin1String("none"));
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Enter the result format used by the server.");
