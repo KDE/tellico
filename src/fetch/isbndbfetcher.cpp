@@ -36,6 +36,7 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
+#include <klineedit.h>
 
 #include <QDomDocument>
 #include <QLabel>
@@ -76,7 +77,10 @@ bool ISBNdbFetcher::canFetch(int type) const {
 }
 
 void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
-  Q_UNUSED(config_);
+  QString k = config_.readEntry("API Key", ISBNDB_APP_ID);
+  if(!k.isEmpty()) {
+    m_apiKey = k;
+  }
 }
 
 void ISBNdbFetcher::search() {
@@ -99,7 +103,7 @@ void ISBNdbFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
   KUrl u(ISBNDB_BASE_URL);
-  u.addQueryItem(QLatin1String("access_key"), QLatin1String(ISBNDB_APP_ID));
+  u.addQueryItem(QLatin1String("access_key"), m_apiKey);
   u.addQueryItem(QLatin1String("results"), QLatin1String("details,authors,subjects,texts"));
   u.addQueryItem(QLatin1String("page_number"), QString::number(m_page));
 
@@ -135,7 +139,7 @@ void ISBNdbFetcher::doSearch() {
       stop();
       return;
   }
-//  myDebug() << "url: " << u.url();
+  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -323,11 +327,51 @@ Tellico::Fetch::ConfigWidget* ISBNdbFetcher::configWidget(QWidget* parent_) cons
   return new ISBNdbFetcher::ConfigWidget(parent_, this);
 }
 
-ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* /*=0*/)
+ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  QLabel* al = new QLabel(i18n("An Access Key is required for searching ISBNdb.com. "
+                               "If you agree to the terms and conditions, "
+                               "<a href='http://isbndb.com/docs/api/30-keys.html'>"
+                               "sign up for an account</a>, and enter your information below."),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_apiKeyEdit, row, 1);
+  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
+  label->setWhatsThis(w);
+  m_apiKeyEdit->setWhatsThis(w);
+  label->setBuddy(m_apiKeyEdit);
+
+  l->setRowStretch(++row, 10);
+
+  if(fetcher_) {
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+  }
+}
+
+void ISBNdbFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+  QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty()) {
+    config_.writeEntry("API Key", apiKey);
+  }
+
+  saveFieldsConfig(config_);
+  slotSetModified(false);
 }
 
 QString ISBNdbFetcher::ConfigWidget::preferredName() const {

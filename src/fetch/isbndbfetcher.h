@@ -30,6 +30,7 @@
 
 #include <QPointer>
 
+class KLineEdit;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -64,8 +65,10 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup&) {}
+    virtual void saveConfig(KConfigGroup&);
     virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -91,6 +94,7 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  QString m_apiKey;
 };
 
   }

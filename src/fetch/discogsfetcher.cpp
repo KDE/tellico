@@ -78,7 +78,7 @@ bool DiscogsFetcher::canFetch(int type) const {
 }
 
 void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key");
+  QString k = config_.readEntry("API Key", DISCOGS_API_KEY);
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
@@ -347,14 +347,26 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  QLabel* label = new QLabel(i18n("API &key: "), optionsWidget());
+
+  QLabel* al = new QLabel(i18n("An Access Key is required for searching Discogs. "
+                               "If you agree to the terms and conditions, "
+                               "<a href='http://www.discogs.com/users/api_key'>"
+                               "sign up for an account</a>, and enter your information below."),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new KLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
-  QString w = i18n("With your discogs.com account you receive an API key for the usage of their XML-based interface "
-                   "(See http://www.discogs.com/help/api).");
+  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
   label->setWhatsThis(w);
   m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
@@ -376,7 +388,6 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
     m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
   } else {
-    m_apiKeyEdit->setText(QLatin1String(DISCOGS_API_KEY));
     m_fetchImageCheck->setChecked(true);
   }
 }

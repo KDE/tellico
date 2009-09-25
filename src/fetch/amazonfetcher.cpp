@@ -842,7 +842,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
 
-  QLabel* label = new QLabel(i18n("Access key &ID: "), optionsWidget());
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_accessEdit = new KLineEdit(optionsWidget());
   connect(m_accessEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
@@ -852,7 +852,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_accessEdit->setWhatsThis(w);
   label->setBuddy(m_accessEdit);
 
-  label = new QLabel(i18n("Secret &key: "), optionsWidget());
+  label = new QLabel(i18n("Secret key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_secretKeyEdit = new KLineEdit(optionsWidget());
 //  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);

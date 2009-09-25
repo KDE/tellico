@@ -86,7 +86,7 @@ public:
     virtual void saveConfig(KConfigGroup&);
     virtual QString preferredName() const;
   private:
-    KLineEdit *m_apiKeyEdit;
+    KLineEdit* m_apiKeyEdit;
     QCheckBox* m_fetchImageCheck;
   };
   friend class ConfigWidget;

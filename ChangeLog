@@ -1,3 +1,7 @@
+2009-09-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated ISBNdb.com fetcher and Discogs fetcher to allow user access keys.
+
 2009-09-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated the SRU fetcher to leave the response format empty.
