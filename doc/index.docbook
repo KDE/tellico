@@ -8,7 +8,7 @@
 
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
-  <!ENTITY homepage "http://www.periapsis.org/tellico/">
+  <!ENTITY homepage "http://tellico-project.org">
   <!ENTITY maillist "http://forge.novell.com/mailman/listinfo/tellico-users">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
 
@@ -301,41 +301,9 @@ url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so 
 <title>How to obtain &appname;</title>
 
 <para>
-The &appname; home page can be found at
+The &appname; home page is
 <ulink url="&homepage;">&homepage;</ulink>.
 Updates and news can be found there.</para>
-</sect1>
-
-<sect1 id="requirements">
-<title>Requirements</title>
-
-<!--
-List any special requirements for your application here. This should include:
-.Libraries or other software that is not included in kdesupport,
-kdelibs, or kdebase.
-.Hardware requirements like amount of RAM, disk space, graphics card
-capabilities, screen resolution, special expansion cards, etc.
-.Operating systems the app will run on. If your app is designed only for a
-specific OS, (you wrote a graphical LILO configurator for example) put this
-information here.
--->
-
-<para>
-In order to successfully use &appname;, you need &kde; 3.3.1.
-&appname; uses about 5 megabytes of memory to run, but this may vary
-depending on your platform, configuration, and most of all, your collection size.
-</para>
-
-<para>
-&kde; can be found at <ulink url="http://www.kde.org">the &kde; home page</ulink>.
-</para>
-
-<!-- For a list of updates, you may refer to the application web site
-or the ChangeLog file, or ... -->
-<para>
-You can find a list of changes at <ulink
-url="&homepage;">&homepage;</ulink>.
-</para>
 </sect1>
 
 <sect1 id="compilation">
