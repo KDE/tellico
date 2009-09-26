@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
                        "http://tellico-project.org", "tellico-users@kde.org");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
   aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
-  aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString());
+  aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString(), "regis@boudin.name");
   aboutData.addAuthor(ki18n("Petri Damstén"), KLocalizedString(), "damu@iki.fi");
   aboutData.addAuthor(ki18n("Sebastian Held"), KLocalizedString());
 

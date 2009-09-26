@@ -8,7 +8,7 @@ SET(pilotdb_STAT_SRCS
     strop.cpp
    )
 
-KDE4_ADD_LIBRARY(pilotdb STATIC ${pilotdb_STAT_SRCS})
+ADD_LIBRARY(pilotdb STATIC ${pilotdb_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(pilotdb
     libflatfile

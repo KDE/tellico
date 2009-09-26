@@ -6,4 +6,4 @@ SET(libflatfile_STAT_SRCS
    Database.cpp
    )
 
-KDE4_ADD_LIBRARY(libflatfile STATIC ${libflatfile_STAT_SRCS})
+ADD_LIBRARY(libflatfile STATIC ${libflatfile_STAT_SRCS})
