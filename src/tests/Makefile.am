@@ -16,7 +16,7 @@ METASOURCES = AUTO
 DISTCLEANFILES = *~ *.Po $(CLEANFILES)
 
 isbntest_SOURCES = isbntest.cpp
-isbntest_LDADD = ../isbnvalidator.o $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
+isbntest_LDADD = ../isbnvalidator.o ../upcvalidator.o $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 
 latin1test_SOURCES = latin1test.cpp
 latin1test_LDADD = $(LIB_QT) $(LIB_KDECORE)

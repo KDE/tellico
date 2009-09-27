@@ -10,7 +10,7 @@ libfetch_a_SOURCES = amazonfetcher.cpp animenfofetcher.cpp arxivfetcher.cpp \
 	discogsfetcher.cpp entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
 	gcstarpluginfetcher.cpp googlescholarfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp \
 	isbndbfetcher.cpp messagehandler.cpp srufetcher.cpp yahoofetcher.cpp z3950connection.cpp \
-	z3950fetcher.cpp
+	z3950fetcher.cpp amazonrequest.cpp hmac_sha2.c sha2.c
 
 ####### kdevelop will overwrite this part!!! (end)############
 
@@ -40,6 +40,8 @@ citebasefetcher.h citebasefetcher.cpp \
 bibsonomyfetcher.h bibsonomyfetcher.cpp \
 googlescholarfetcher.h googlescholarfetcher.cpp \
 discogsfetcher.h discogsfetcher.cpp \
+amazonrequest.h amazonrequest.cpp \
+hmac_sha2.h hmac_sha2.c sha2.h sha2.c \
 z3950-servers.cfg
 
 appdir = $(kde_datadir)/tellico

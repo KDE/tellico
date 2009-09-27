@@ -60,10 +60,11 @@ am_libfetch_a_OBJECTS = amazonfetcher.$(OBJEXT) \
 	imdbfetcher.$(OBJEXT) isbndbfetcher.$(OBJEXT) \
 	messagehandler.$(OBJEXT) srufetcher.$(OBJEXT) \
 	yahoofetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
-	z3950fetcher.$(OBJEXT)
+	z3950fetcher.$(OBJEXT) amazonrequest.$(OBJEXT) \
+	hmac_sha2.$(OBJEXT) sha2.$(OBJEXT)
 #>- libfetch_a_OBJECTS = $(am_libfetch_a_OBJECTS)
-#>+ 15
-libfetch_a_final_OBJECTS = libfetch_a.all_cpp.o 
+#>+ 16
+libfetch_a_final_OBJECTS = sha2.o hmac_sha2.o libfetch_a.all_cpp.o 
 libfetch_a_nofinal_OBJECTS = amazonfetcher.$(OBJEXT) \
 	animenfofetcher.$(OBJEXT) arxivfetcher.$(OBJEXT) \
 	bibsonomyfetcher.$(OBJEXT) citebasefetcher.$(OBJEXT) \
@@ -75,12 +76,22 @@ libfetch_a_nofinal_OBJECTS = amazonfetcher.$(OBJEXT) \
 	imdbfetcher.$(OBJEXT) isbndbfetcher.$(OBJEXT) \
 	messagehandler.$(OBJEXT) srufetcher.$(OBJEXT) \
 	yahoofetcher.$(OBJEXT) z3950connection.$(OBJEXT) \
-	z3950fetcher.$(OBJEXT)
+	z3950fetcher.$(OBJEXT) amazonrequest.$(OBJEXT) \
+	hmac_sha2.$(OBJEXT) sha2.$(OBJEXT)
 @KDE_USE_FINAL_FALSE@libfetch_a_OBJECTS = $(libfetch_a_nofinal_OBJECTS)
 @KDE_USE_FINAL_TRUE@libfetch_a_OBJECTS = $(libfetch_a_final_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/admin/depcomp
 am__depfiles_maybe = depfiles
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+LTCOMPILE = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 #>- CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 #>- 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 #>+ 2
@@ -412,7 +423,7 @@ libfetch_a_SOURCES = amazonfetcher.cpp animenfofetcher.cpp arxivfetcher.cpp \
 	discogsfetcher.cpp entrezfetcher.cpp execexternalfetcher.cpp fetcher.cpp fetchmanager.cpp \
 	gcstarpluginfetcher.cpp googlescholarfetcher.cpp ibsfetcher.cpp imdbfetcher.cpp \
 	isbndbfetcher.cpp messagehandler.cpp srufetcher.cpp yahoofetcher.cpp z3950connection.cpp \
-	z3950fetcher.cpp
+	z3950fetcher.cpp amazonrequest.cpp hmac_sha2.c sha2.c
 
 
 ####### kdevelop will overwrite this part!!! (end)############
@@ -439,6 +450,8 @@ citebasefetcher.h citebasefetcher.cpp \
 bibsonomyfetcher.h bibsonomyfetcher.cpp \
 googlescholarfetcher.h googlescholarfetcher.cpp \
 discogsfetcher.h discogsfetcher.cpp \
+amazonrequest.h amazonrequest.cpp \
+hmac_sha2.h hmac_sha2.c sha2.h sha2.c \
 z3950-servers.cfg
 
 appdir = $(kde_datadir)/tellico
@@ -448,7 +461,7 @@ app_DATA = z3950-servers.cfg
 all: docs-am  all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .c .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 #>- 	@for dep in $?; do \
 #>- 	  case '$(am__configure_deps)' in \
@@ -506,6 +519,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/amazonfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/amazonrequest.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/animenfofetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arxivfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bibsonomyfetcher.Po@am__quote@
@@ -519,14 +533,37 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fetchmanager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcstarpluginfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/googlescholarfetcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hmac_sha2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ibsfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/imdbfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/isbndbfetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/messagehandler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sha2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srufetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yahoofetcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/z3950connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/z3950fetcher.Po@am__quote@
+
+.c.o:
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c $<
+
+.c.obj:
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+.c.lo:
+@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCC_TRUE@	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -1051,11 +1088,11 @@ bcheck-am:
 
 
 #>+ 11
-libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/arxivfetcher.cpp $(srcdir)/yahoofetcher.cpp $(srcdir)/messagehandler.cpp $(srcdir)/isbndbfetcher.cpp $(srcdir)/fetchmanager.cpp $(srcdir)/citebasefetcher.cpp $(srcdir)/animenfofetcher.cpp $(srcdir)/bibsonomyfetcher.cpp $(srcdir)/ibsfetcher.cpp $(srcdir)/z3950connection.cpp $(srcdir)/fetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/gcstarpluginfetcher.cpp $(srcdir)/discogsfetcher.cpp $(srcdir)/googlescholarfetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/srufetcher.cpp $(srcdir)/crossreffetcher.cpp $(srcdir)/execexternalfetcher.cpp  isbndbfetcher.moc citebasefetcher.moc crossreffetcher.moc arxivfetcher.moc animenfofetcher.moc imdbfetcher.moc execexternalfetcher.moc googlescholarfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc discogsfetcher.moc fetchmanager.moc bibsonomyfetcher.moc
+libfetch_a.all_cpp.cpp: $(srcdir)/Makefile.in $(srcdir)/arxivfetcher.cpp $(srcdir)/yahoofetcher.cpp $(srcdir)/messagehandler.cpp $(srcdir)/isbndbfetcher.cpp $(srcdir)/fetchmanager.cpp $(srcdir)/citebasefetcher.cpp $(srcdir)/animenfofetcher.cpp $(srcdir)/bibsonomyfetcher.cpp $(srcdir)/ibsfetcher.cpp $(srcdir)/z3950connection.cpp $(srcdir)/fetcher.cpp $(srcdir)/configwidget.cpp $(srcdir)/gcstarpluginfetcher.cpp $(srcdir)/discogsfetcher.cpp $(srcdir)/googlescholarfetcher.cpp $(srcdir)/imdbfetcher.cpp $(srcdir)/amazonrequest.cpp $(srcdir)/entrezfetcher.cpp $(srcdir)/z3950fetcher.cpp $(srcdir)/amazonfetcher.cpp $(srcdir)/srufetcher.cpp $(srcdir)/crossreffetcher.cpp $(srcdir)/execexternalfetcher.cpp  isbndbfetcher.moc citebasefetcher.moc crossreffetcher.moc arxivfetcher.moc animenfofetcher.moc imdbfetcher.moc execexternalfetcher.moc googlescholarfetcher.moc z3950fetcher.moc entrezfetcher.moc amazonfetcher.moc ibsfetcher.moc configwidget.moc yahoofetcher.moc gcstarpluginfetcher.moc fetcher.moc srufetcher.moc discogsfetcher.moc fetchmanager.moc bibsonomyfetcher.moc
 	@echo 'creating libfetch_a.all_cpp.cpp ...'; \
 	rm -f libfetch_a.all_cpp.files libfetch_a.all_cpp.final; \
 	echo "#define KDE_USE_FINAL 1" >> libfetch_a.all_cpp.final; \
-	for file in arxivfetcher.cpp yahoofetcher.cpp messagehandler.cpp isbndbfetcher.cpp fetchmanager.cpp citebasefetcher.cpp animenfofetcher.cpp bibsonomyfetcher.cpp ibsfetcher.cpp z3950connection.cpp fetcher.cpp configwidget.cpp gcstarpluginfetcher.cpp discogsfetcher.cpp googlescholarfetcher.cpp imdbfetcher.cpp entrezfetcher.cpp z3950fetcher.cpp amazonfetcher.cpp srufetcher.cpp crossreffetcher.cpp execexternalfetcher.cpp; do \
+	for file in arxivfetcher.cpp yahoofetcher.cpp messagehandler.cpp isbndbfetcher.cpp fetchmanager.cpp citebasefetcher.cpp animenfofetcher.cpp bibsonomyfetcher.cpp ibsfetcher.cpp z3950connection.cpp fetcher.cpp configwidget.cpp gcstarpluginfetcher.cpp discogsfetcher.cpp googlescholarfetcher.cpp imdbfetcher.cpp amazonrequest.cpp entrezfetcher.cpp z3950fetcher.cpp amazonfetcher.cpp srufetcher.cpp crossreffetcher.cpp execexternalfetcher.cpp; do \
 	  echo "#include \"$$file\"" >> libfetch_a.all_cpp.files; \
 	  test ! -f $(srcdir)/$$file || egrep '^#pragma +implementation' $(srcdir)/$$file >> libfetch_a.all_cpp.final; \
 	done; \

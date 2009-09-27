@@ -56,8 +56,9 @@ am_isbntest_OBJECTS = isbntest.$(OBJEXT)
 #>- isbntest_OBJECTS = $(am_isbntest_OBJECTS)
 #>+ 1
 isbntest_OBJECTS = isbntest.$(OBJEXT)
-isbntest_DEPENDENCIES = ../isbnvalidator.o $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+isbntest_DEPENDENCIES = ../isbnvalidator.o ../upcvalidator.o \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 am_latin1test_OBJECTS = latin1test.$(OBJEXT)
 #>- latin1test_OBJECTS = $(am_latin1test_OBJECTS)
 #>+ 1
@@ -368,7 +369,7 @@ AM_LDFLAGS = $(QT_LDFLAGS) $(KDE_LDFLAGS) $(X_LDFLAGS)
 #>- METASOURCES = AUTO
 DISTCLEANFILES = *~ *.Po $(CLEANFILES)
 isbntest_SOURCES = isbntest.cpp
-isbntest_LDADD = ../isbnvalidator.o $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
+isbntest_LDADD = ../isbnvalidator.o ../upcvalidator.o $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI)
 latin1test_SOURCES = latin1test.cpp
 latin1test_LDADD = $(LIB_QT) $(LIB_KDECORE)
 entitytest_SOURCES = entitytest.cpp

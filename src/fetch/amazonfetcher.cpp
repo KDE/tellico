@@ -12,6 +12,7 @@
  ***************************************************************************/
 
 #include "amazonfetcher.h"
+#include "amazonrequest.h"
 #include "messagehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -47,7 +48,6 @@
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
   static const int AMAZON_MAX_RETURNS_TOTAL = 20;
-  static const char* AMAZON_ACCESS_KEY = "0834VQ4S71KYPVSYQD02";
   static const char* AMAZON_ASSOC_TOKEN = "tellico-20";
   // need to have these in the translation file
   static const char* linkText = I18N_NOOP("Amazon Link");
@@ -84,7 +84,6 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
 
 AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_, const char* name_)
     : Fetcher(parent_, name_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
-      m_access(QString::fromLatin1(AMAZON_ACCESS_KEY)),
       m_assoc(QString::fromLatin1(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
   m_name = siteData(site_).title;
@@ -117,6 +116,10 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
+  }
+  s = config_.readEntry("SecretKey");
+  if(!s.isEmpty()) {
+    m_amazonKey = s;
   }
   s = config_.readEntry("AssocToken");
   if(!s.isEmpty()) {
@@ -153,40 +156,41 @@ void AmazonFetcher::doSearch() {
 //  myDebug() << "AmazonFetcher::doSearch() - getting page " << m_page << endl;
 
   const SiteData& data = siteData(m_site);
-  KURL u = data.url;
-  u.addQueryItem(QString::fromLatin1("Service"),        QString::fromLatin1("AWSECommerceService"));
-  u.addQueryItem(QString::fromLatin1("AssociateTag"),   m_assoc);
-  u.addQueryItem(QString::fromLatin1("AWSAccessKeyId"), m_access);
-  u.addQueryItem(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
-  u.addQueryItem(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
-  u.addQueryItem(QString::fromLatin1("ItemPage"),       QString::number(m_page));
-  u.addQueryItem(QString::fromLatin1("Version"),        QString::fromLatin1("2007-10-29"));
+
+  QMap<QString, QString> params;
+  params.insert(QString::fromLatin1("Service"),        QString::fromLatin1("AWSECommerceService"));
+  params.insert(QString::fromLatin1("AssociateTag"),   m_assoc);
+  params.insert(QString::fromLatin1("AWSAccessKeyId"), m_access);
+  params.insert(QString::fromLatin1("Operation"),      QString::fromLatin1("ItemSearch"));
+  params.insert(QString::fromLatin1("ResponseGroup"),  QString::fromLatin1("Large"));
+  params.insert(QString::fromLatin1("ItemPage"),       QString::number(m_page));
+  params.insert(QString::fromLatin1("Version"),        QString::fromLatin1("2007-10-29"));
 
   const int type = Kernel::self()->collectionType();
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
-      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Books"));
-      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
+      params.insert(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Books"));
+      params.insert(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
       break;
 
     case Data::Collection::Album:
-      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Music"));
+      params.insert(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Music"));
       break;
 
     case Data::Collection::Video:
-      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Video"));
-      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
+      params.insert(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Video"));
+      params.insert(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
       break;
 
     case Data::Collection::Game:
-      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("VideoGames"));
+      params.insert(QString::fromLatin1("SearchIndex"), QString::fromLatin1("VideoGames"));
       break;
 
     case Data::Collection::BoardGame:
-      u.addQueryItem(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Toys"));
-      u.addQueryItem(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
+      params.insert(QString::fromLatin1("SearchIndex"), QString::fromLatin1("Toys"));
+      params.insert(QString::fromLatin1("SortIndex"), QString::fromLatin1("relevancerank"));
       break;
 
     case Data::Collection::Coin:
@@ -212,29 +216,28 @@ void AmazonFetcher::doSearch() {
 
   switch(m_key) {
     case Title:
-      u.addQueryItem(QString::fromLatin1("Title"), value, mib);
+      params.insert(QString::fromLatin1("Title"), value);
       break;
 
     case Person:
       if(type == Data::Collection::Video) {
-        u.addQueryItem(QString::fromLatin1("Actor"),        value, mib);
-        u.addQueryItem(QString::fromLatin1("Director"),     value, mib);
+        params.insert(QString::fromLatin1("Actor"),        value);
+        params.insert(QString::fromLatin1("Director"),     value);
       } else if(type == Data::Collection::Album) {
-        u.addQueryItem(QString::fromLatin1("Artist"),       value, mib);
+        params.insert(QString::fromLatin1("Artist"),       value);
       } else if(type == Data::Collection::Game) {
-        u.addQueryItem(QString::fromLatin1("Manufacturer"), value, mib);
+        params.insert(QString::fromLatin1("Manufacturer"), value);
       } else { // books and bibtex
         QString s = QString::fromLatin1("author:%1 or publisher:%2").arg(value, value);
-//        u.addQueryItem(QString::fromLatin1("Author"),       value, mib);
-//        u.addQueryItem(QString::fromLatin1("Publisher"),    value, mib);
-        u.addQueryItem(QString::fromLatin1("Power"),    s, mib);
+//        params.insert(QString::fromLatin1("Author"),       value, mib);
+//        params.insert(QString::fromLatin1("Publisher"),    value, mib);
+        params.insert(QString::fromLatin1("Power"),    s);
       }
       break;
 
     case ISBN:
       {
-        u.removeQueryItem(QString::fromLatin1("Operation"));
-        u.addQueryItem(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
+        params.insert(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
 
         QString s = m_value; // not encValue!!!
         s.remove('-');
@@ -265,47 +268,46 @@ void AmazonFetcher::doSearch() {
             }
           }
           // the default search is by ASIN, which prohibits SearchIndex
-          u.removeQueryItem(QString::fromLatin1("SearchIndex"));
+          params.remove(QString::fromLatin1("SearchIndex"));
         }
         // limit to first 10
         while(isbns.size() > 10) {
           isbns.pop_back();
         }
-        u.addQueryItem(QString::fromLatin1("ItemId"), isbns.join(QString::fromLatin1(",")));
+        params.insert(QString::fromLatin1("ItemId"), isbns.join(QString::fromLatin1(",")));
         if(isbn13) {
-          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
+          params.insert(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
         }
       }
       break;
 
     case UPC:
       {
-        u.removeQueryItem(QString::fromLatin1("Operation"));
-        u.addQueryItem(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
+        params.insert(QString::fromLatin1("Operation"), QString::fromLatin1("ItemLookup"));
         // US allows UPC, all others are EAN
         if(m_site == US) {
-          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("UPC"));
+          params.insert(QString::fromLatin1("IdType"), QString::fromLatin1("UPC"));
         } else {
-          u.addQueryItem(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
+          params.insert(QString::fromLatin1("IdType"), QString::fromLatin1("EAN"));
         }
         QString s = m_value; // not encValue!!!
         s.remove('-');
         // limit to first 10
         s.replace(QString::fromLatin1("; "), QString::fromLatin1(","));
         s = s.section(',', 0, 9);
-        u.addQueryItem(QString::fromLatin1("ItemId"), s);
+        params.insert(QString::fromLatin1("ItemId"), s);
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QString::fromLatin1("Keywords"), m_value, mib);
+      params.insert(QString::fromLatin1("Keywords"), value);
       break;
 
     case Raw:
       {
         QString key = value.section('=', 0, 0).stripWhiteSpace();
         QString str = value.section('=', 1).stripWhiteSpace();
-        u.addQueryItem(key, str, mib);
+        params.insert(key, str);
       }
       break;
 
@@ -314,9 +316,12 @@ void AmazonFetcher::doSearch() {
       stop();
       return;
   }
-//  myDebug() << "AmazonFetcher::search() - url: " << u.url() << endl;
 
-  m_job = KIO::get(u, false, false);
+  AmazonRequest request(siteData(m_site).url, m_amazonKey);
+  KURL newUrl = request.signedRequest(params);
+//  myDebug() << "AmazonFetcher::search() - url: " << newUrl.url() << endl;
+
+  m_job = KIO::get(newUrl, false, false);
   connect(m_job, SIGNAL(data(KIO::Job*, const QByteArray&)),
           SLOT(slotData(KIO::Job*, const QByteArray&)));
   connect(m_job, SIGNAL(result(KIO::Job*)),
@@ -900,11 +905,25 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   QWhatsThis::add(m_assocEdit, w);
   label->setBuddy(m_assocEdit);
 
+  label = new QLabel(i18n("Access key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_accessEdit = new KLineEdit(optionsWidget());
+  connect(m_accessEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_accessEdit, row, 1);
+
+  label = new QLabel(i18n("Secret Key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_secretKeyEdit = new KLineEdit(optionsWidget());
+  connect(m_secretKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_secretKeyEdit, row, 1);
+
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
     m_siteCombo->setCurrentData(fetcher_->m_site);
     m_assocEdit->setText(fetcher_->m_assoc);
+    m_accessEdit->setText(fetcher_->m_access);
+    m_secretKeyEdit->setText(fetcher_->m_amazonKey);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults
     m_assocEdit->setText(QString::fromLatin1(AMAZON_ASSOC_TOKEN));
@@ -922,6 +941,14 @@ void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString s = m_assocEdit->text().stripWhiteSpace();
   if(!s.isEmpty()) {
     config_.writeEntry("AssocToken", s);
+  }
+  s = m_accessEdit->text().stripWhiteSpace();
+  if(!s.isEmpty()) {
+    config_.writeEntry("AccessKey", s);
+  }
+  s = m_secretKeyEdit->text().stripWhiteSpace();
+  if(!s.isEmpty()) {
+    config_.writeEntry("SecretKey", s);
   }
   n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);

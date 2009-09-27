@@ -117,6 +117,7 @@ private:
   ImageSize m_imageSize;
 
   QString m_access;
+  QString m_amazonKey;
   QString m_assoc;
   bool m_addLinkField;
   int m_limit;
@@ -149,6 +150,8 @@ private slots:
 
 private:
   KLineEdit* m_assocEdit;
+  KLineEdit* m_accessEdit;
+  KLineEdit* m_secretKeyEdit;
   GUI::ComboBox* m_siteCombo;
   GUI::ComboBox* m_imageCombo;
 };

@@ -562,10 +562,10 @@ uninstall-am:
 
 
 #>+ 2
-KDE_DIST=CMakeLists.txt Makefile.in Makefile.am 
+KDE_DIST=CMakeLists.txt Makefile.in Makefile.am index.cache.bz2 
 
 #>+ 24
-index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png CMakeLists.txt filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png export-html.png menus.docbook export-pdb.png csv-dialog.png main-window.png 
+index.cache.bz2: $(srcdir)/index.docbook $(KDE_XSL_STYLESHEET) freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png menus.docbook export-html.png export-pdb.png csv-dialog.png main-window.png CMakeLists.txt 
 	@if test -n "$(MEINPROC)"; then echo $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; $(MEINPROC) --check --cache index.cache.bz2 $(srcdir)/index.docbook; fi
 
 docs-am: index.cache.bz2
@@ -592,20 +592,20 @@ clean-docs:
 #>+ 13
 install-nls:
 	$(mkinstalldirs) $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico
-	@for base in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png CMakeLists.txt filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png export-html.png menus.docbook export-pdb.png csv-dialog.png main-window.png ; do \
+	@for base in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png menus.docbook export-html.png export-pdb.png csv-dialog.png main-window.png CMakeLists.txt ; do \
 	  echo $(INSTALL_DATA) $$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
 	  $(INSTALL_DATA) $(srcdir)/$$base $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
 	done
 
 uninstall-nls:
-	for base in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png CMakeLists.txt filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png export-html.png menus.docbook export-pdb.png csv-dialog.png main-window.png ; do \
+	for base in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png menus.docbook export-html.png export-pdb.png csv-dialog.png main-window.png CMakeLists.txt ; do \
 	  rm -f $(DESTDIR)$(kde_htmldir)/$(KDE_LANG)/tellico/$$base ;\
 	done
 
 
 #>+ 5
 distdir-nls:
-	for file in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png CMakeLists.txt filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png export-html.png menus.docbook export-pdb.png csv-dialog.png main-window.png ; do \
+	for file in freebsd-doc-license.html export-bibtex.png loan-view.png advanced.docbook sru-options.png index.docbook fields-dialog.png fundamentals.docbook configuration.docbook amazon-options.png print-options.png loan-dialog.png fetch-dialog.png faqs.docbook source-options.png filter-view.png hacking.docbook template-options.png imdb-options.png openoffice-dialog.png general-options.png entry-editor1.png entry-editor3.png report-dialog.png entry-editor4.png entry-editor5.png export-csv.png export-options.png importing-exporting.docbook externalexec-options.png filter-dialog.png details.docbook z3950-options.png menus.docbook export-html.png export-pdb.png csv-dialog.png main-window.png CMakeLists.txt ; do \
 	  cp $(srcdir)/$$file $(distdir); \
 	done
 
