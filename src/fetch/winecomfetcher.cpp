@@ -119,7 +119,7 @@ void WineComFetcher::doSearch() {
       stop();
       return;
   }
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -159,7 +159,7 @@ void WineComFetcher::slotComplete(KJob*) {
 
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
-#if 1
+#if 0
   myWarning() << "Remove debug from winecomfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
