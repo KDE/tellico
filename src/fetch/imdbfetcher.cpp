@@ -565,7 +565,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   }
 
   KDialog dlg(GUI::Proxy::widget());
-  dlg.setCaption(i18n("Select IMDB Result"));
+  dlg.setCaption(i18n("Select IMDb Result"));
   dlg.setModal(false);
   dlg.setButtons(KDialog::Ok|KDialog::Cancel);
 
@@ -688,7 +688,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
 
   const QString imdb = QLatin1String("imdb");
   if(!coll->hasField(imdb) && m_fields.indexOf(imdb) > -1) {
-    Data::FieldPtr field(new Data::Field(imdb, i18n("IMDB Link"), Data::Field::URL));
+    Data::FieldPtr field(new Data::Field(imdb, i18n("IMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -958,7 +958,7 @@ void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) 
   if(rx.indexIn(str_) > -1 && !rx.cap(1).isEmpty()) {
     Data::FieldPtr f = entry_->collection()->fieldByName(QLatin1String("imdb-rating"));
     if(!f) {
-      f = new Data::Field(QLatin1String("imdb-rating"), i18n("IMDB Rating"), Data::Field::Rating);
+      f = new Data::Field(QLatin1String("imdb-rating"), i18n("IMDb Rating"), Data::Field::Rating);
       f->setCategory(i18n("General"));
       f->setProperty(QLatin1String("maximum"), QLatin1String("10"));
       entry_->collection()->addField(f);
@@ -1198,8 +1198,8 @@ QString IMDBFetcher::ConfigWidget::preferredName() const {
 //static
 Tellico::StringMap IMDBFetcher::customFields() {
   StringMap map;
-  map[QLatin1String("imdb")]             = i18n("IMDB Link");
-  map[QLatin1String("imdb-rating")]      = i18n("IMDB Rating");
+  map[QLatin1String("imdb")]             = i18n("IMDb Link");
+  map[QLatin1String("imdb-rating")]      = i18n("IMDb Rating");
   map[QLatin1String("alttitle")]         = i18n("Alternative Titles");
   map[QLatin1String("allcertification")] = i18n("Certifications");
   return map;
