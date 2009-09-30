@@ -293,7 +293,7 @@ void SRUFetcher::slotComplete(KJob*) {
       msg += QLatin1Char('\n');
     }
     msg += imp.statusMessage();
-  } else if(m_format == QLatin1String("dc") | m_format == QLatin1String("none")) {
+  } else if(m_format == QLatin1String("dc") || m_format == QLatin1String("none")) {
     Import::DCImporter imp(dom);
     coll = imp.collection();
     if(!msg.isEmpty()) {

@@ -43,6 +43,7 @@
 #include <QTextStream>
 #include <QGridLayout>
 #include <QDomDocument>
+#include <QTextCodec>
 
 //#define DISCOGS_TEST
 
@@ -56,8 +57,8 @@ using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(DISCOGS_MAX_RETURNS_TOTAL), m_job(0), m_started(false),
-      m_apiKey(QLatin1String(DISCOGS_API_KEY)) {
+      m_limit(DISCOGS_MAX_RETURNS_TOTAL),
+      m_job(0), m_started(false) {
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
@@ -268,7 +269,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << output;
   }
   f.close();
@@ -385,7 +386,11 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   addFieldsWidget(DiscogsFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
-    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    // only show the key if it is not the default Tellico one...
+    // that way the user is prompted to apply for their own
+    if(fetcher_->m_apiKey != QLatin1String(DISCOGS_API_KEY)) {
+      m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    }
     m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
   } else {
     m_fetchImageCheck->setChecked(true);

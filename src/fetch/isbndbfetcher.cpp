@@ -43,6 +43,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QTextCodec>
 
 namespace {
   static const int ISBNDB_RETURNS_PER_REQUEST = 10;
@@ -184,7 +185,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << data;
   }
   f.close();
@@ -216,6 +217,18 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
+
+  if(coll->entryCount() == 0) {
+    QDomNode n = dom.documentElement().namedItem(QLatin1String("ErrorMessage"));
+    QDomElement e = n.toElement();
+    if(!e.isNull() && e.text() == QLatin1String("Access key error")) {
+      message(i18n("<qt><p><b>The ISBNndb.com server reports an access key error.</b></p>"
+                   "You may have reached the maximum number of searches for today with this key, "
+                   "or you may have entered the access key incorrectly.</qt>"), MessageHandler::Error);
+      stop();
+      return;
+    }
+  }
 
   int count = 0;
   Data::EntryList entries = coll->entries();
@@ -269,7 +282,7 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
   if(!id.isEmpty()) {
     KUrl u(ISBNDB_BASE_URL);
     u.setFileName(QLatin1String("publishers.xml"));
-    u.addQueryItem(QLatin1String("access_key"), QLatin1String(ISBNDB_APP_ID));
+    u.addQueryItem(QLatin1String("access_key"), m_apiKey);
     u.addQueryItem(QLatin1String("index1"), QLatin1String("publisher_id"));
     u.addQueryItem(QLatin1String("value1"), id);
 
@@ -360,7 +373,11 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
-    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    // only show the key if it is not the default Tellico one...
+    // that way the user is prompted to apply for their own
+    if(fetcher_->m_apiKey != QLatin1String(ISBNDB_APP_ID)) {
+      m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    }
   }
 }
 
