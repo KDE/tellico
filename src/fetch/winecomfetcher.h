@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,56 +22,81 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef TELLICO_FETCH_WINECOMFETCHER_H
+#define TELLICO_FETCH_WINECOMFETCHER_H
+
+#include "fetcher.h"
+#include "configwidget.h"
+
+#include <QPointer>
+
+class KLineEdit;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
+  class XSLTHandler;
   namespace Fetch {
 
 /**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
+ * @author Robby Stephenson
  */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
-};
+class WineComFetcher : public Fetcher {
+Q_OBJECT
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo,
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase,
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom
+public:
+  WineComFetcher(QObject* parent = 0);
+  ~WineComFetcher();
+
+  virtual QString source() const;
+  virtual bool isSearching() const { return m_started; }
+  virtual void continueSearch();
+  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Type type() const { return WineCom; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
+
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const WineComFetcher* fetcher = 0);
+    virtual void saveConfig(KConfigGroup&);
+    virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+
+private slots:
+  void slotComplete(KJob* job);
+
+private:
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  void initXSLTHandler();
+  void doSearch();
+
+  XSLTHandler* m_xsltHandler;
+  int m_limit;
+  int m_page;
+  int m_total;
+  int m_numResults;
+  int m_offset;
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
+
+  bool m_started;
+  QString m_apiKey;
 };
 
   }
 }
-
 #endif

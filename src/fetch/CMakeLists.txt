@@ -27,6 +27,7 @@ SET(fetch_STAT_SRCS
    messagehandler.cpp
    sha2.c
    srufetcher.cpp
+   winecomfetcher.cpp
    yahoofetcher.cpp
    z3950connection.cpp
    z3950fetcher.cpp

@@ -122,6 +122,9 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field = new Field(QLatin1String("label"), i18n("Label Image"), Field::Image);
   list.append(field);
 
+  field = new Field(QLatin1String("description"), i18n("Description"), Field::Para);
+  list.append(field);
+
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 

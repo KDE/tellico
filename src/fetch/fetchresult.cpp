@@ -100,6 +100,11 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
       append(desc, entry, "publisher");
       append(desc, entry, "designer");
       append(desc, entry, "year");
+      break;
+
+    case Data::Collection::Wine:
+      append(desc, entry, "appellation");
+      break;
 
     default:
       myDebug() << "no description for collection type =" << entry->collection()->type();

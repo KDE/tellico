@@ -56,6 +56,7 @@
 #include "bibsonomyfetcher.h"
 #include "googlescholarfetcher.h"
 #include "discogsfetcher.h"
+#include "winecomfetcher.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -342,6 +343,10 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
       f = new DiscogsFetcher(this);
       break;
 
+    case WineCom:
+      f = new WineComFetcher(this);
+      break;
+
     case Unknown:
     default:
       break;
@@ -445,6 +450,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   map.insert(BibsonomyFetcher::defaultName(),    Bibsonomy);
   map.insert(GoogleScholarFetcher::defaultName(),GoogleScholar);
   map.insert(DiscogsFetcher::defaultName(),      Discogs);
+  map.insert(WineComFetcher::defaultName(),      WineCom);
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
@@ -554,6 +560,9 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
     case Discogs:
       w = new DiscogsFetcher::ConfigWidget(parent_);
       break;
+    case WineCom:
+      w = new WineComFetcher::ConfigWidget(parent_);
+      break;
     case Unknown:
       myWarning() << "no widget defined for type = " << type_;
   }
@@ -586,6 +595,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
     case Bibsonomy: return BibsonomyFetcher::defaultName();
     case GoogleScholar: return GoogleScholarFetcher::defaultName();
     case Discogs: return DiscogsFetcher::defaultName();
+    case WineCom: return WineComFetcher::defaultName();
     case Unknown: break;
   }
   myWarning() << "none found for " << type_;
@@ -667,6 +677,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
       name = favIcon("http://scholar.google.com"); break;
     case Discogs:
       name = favIcon("http://www.discogs.com"); break;
+    case WineCom:
+      name = favIcon("http://www.wine.com"); break;
     case Unknown:
       myWarning() << "no pixmap defined for type = " << type_;
   }
