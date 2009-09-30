@@ -71,9 +71,6 @@
    <xsl:if test="item/@producer">
     <tc:field flags="7" title="Producer" category="General" format="2" type="1" name="producer" i18n="true"/>
    </xsl:if>
-   <xsl:if test="@type='GCmusics' and item/@format">
-    <tc:field flags="7" title="Format" category="General" format="0" type="1" name="format" i18n="true"/>
-   </xsl:if>
    <xsl:choose>
     <xsl:when test="@type='GCfilms'">
      <tc:field flags="8" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="true"/>
@@ -99,7 +96,7 @@
       stylesheet for either format without having to repeat a lot
       of XPath expressions. -->
  <!-- simplicity, the id will either be an attribute or an element -->
- <tc:entry id="{concat(id,@id)}">
+ <tc:entry id="{(id|@id|@gcsautoid)[1]}">
   <xsl:apply-templates select="@*|*"/>
  </tc:entry>
 </xsl:template>
@@ -115,6 +112,9 @@
  </xsl:for-each>
 </xsl:template>
 
+<!-- ignore anything not explicit -->
+<xsl:template match="*"/>
+
 <!-- the easy one matches identical local names -->
 <xsl:template match="title|isbn|edition|pages|label|platform|location">
  <xsl:element name="{concat('tc:',local-name())}">
@@ -126,7 +126,7 @@
  <tc:origtitle><xsl:value-of select="."/></tc:origtitle>
 </xsl:template>
 
-<xsl:template match="author|authors|language|genre|artist|composer|producer">
+<xsl:template match="author|authors|language|genre|artist|composer|producer|developer">
  <xsl:variable name="tag">
   <xsl:choose>
    <xsl:when test="local-name() = 'authors'">
@@ -142,18 +142,24 @@
   <xsl:when test="line">
    <xsl:element name="{concat('tc:',$tag,'s')}">
     <xsl:for-each select="line">
-     <xsl:element name="{concat('tc:',$tag)}">
-      <xsl:attribute name="i18n">true</xsl:attribute>
-      <xsl:value-of select="col[1]"/>
-     </xsl:element>
+     <xsl:for-each select="str:tokenize(col[1], ',/;')">
+      <xsl:element name="{concat('tc:',$tag)}">
+       <xsl:attribute name="i18n">true</xsl:attribute>
+       <xsl:value-of select="normalize-space(.)"/>
+      </xsl:element>
+     </xsl:for-each>
     </xsl:for-each>
    </xsl:element>
   </xsl:when>
 
   <xsl:otherwise>
-   <xsl:element name="{concat('tc:',$tag)}">
-    <xsl:attribute name="i18n">true</xsl:attribute>
-    <xsl:value-of select="."/>
+   <xsl:element name="{concat('tc:',$tag,'s')}">
+    <xsl:for-each select="str:tokenize(., ',/;')">
+     <xsl:element name="{concat('tc:',$tag)}">
+      <xsl:attribute name="i18n">true</xsl:attribute>
+      <xsl:value-of select="normalize-space(.)"/>
+     </xsl:element>
+    </xsl:for-each>
    </xsl:element>
   </xsl:otherwise>
 
@@ -178,7 +184,16 @@
    <tc:medium i18n="true"><xsl:value-of select="."/></tc:medium>
   </xsl:when>
   <xsl:when test="$coll = 4">
-   <tc:format i18n="true"><xsl:value-of select="."/></tc:format>
+   <tc:medium i18n="true">
+    <xsl:choose>
+     <xsl:when test="text()='CD'">
+      <xsl:text>Compact Disc</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
+   </tc:medium>
   </xsl:when>
  </xsl:choose>
 </xsl:template>
@@ -343,6 +358,14 @@
  <xsl:if test="not(../acquisition)">
   <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
  </xsl:if>
+ <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
+ <xsl:if test="count($numbers)=3">
+  <tc:cdate calendar="gregorian" >
+    <tc:year><xsl:value-of  select="$numbers[3]"/></tc:year>
+    <tc:month><xsl:value-of  select="$numbers[2]"/></tc:month>
+    <tc:day><xsl:value-of  select="$numbers[1]"/></tc:day>
+   </tc:cdate>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="serie">
@@ -382,7 +405,7 @@
      <xsl:value-of select="col[2]"/>
     </tc:column>
     <tc:column>
-     <xsl:value-of select="../../artist"/>
+     <xsl:value-of select="(../../artist|../../@artist)[1]"/>
     </tc:column>
     <tc:column>
      <xsl:value-of select="col[3]"/>
@@ -401,13 +424,14 @@
   <tc:completed>true</tc:completed>
  </xsl:if>
 </xsl:template>
-<xsl:template match="*"/>
 
-<xsl:template match="editor|publisher">
+<xsl:template match="editor|publisher|publishedby">
  <tc:publishers>
-  <tc:publisher>
-   <xsl:value-of select="."/>
-  </tc:publisher>
+  <xsl:for-each select="str:tokenize(., ',/;')">
+   <tc:publisher>
+    <xsl:value-of select="normalize-space(.)"/>
+   </tc:publisher>
+  </xsl:for-each>
  </tc:publishers>
 </xsl:template>
 
@@ -449,16 +473,6 @@
 
 <xsl:template match="back">
  <tc:reverse><xsl:value-of select="."/></tc:reverse>
-</xsl:template>
-
-<xsl:template match="publishedby">
- <tc:publishers>
-  <xsl:for-each select="str:tokenize(., ',/;')">
-   <tc:publisher>
-    <xsl:value-of select="normalize-space(.)"/>
-   </tc:publisher>
-  </xsl:for-each>
- </tc:publishers>
 </xsl:template>
 
 <xsl:template match="designedby">

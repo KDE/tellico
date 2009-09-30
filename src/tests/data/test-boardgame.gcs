@@ -38,42 +38,42 @@
   favourite="0"
   tags=""
  >
-  <description>Widely accepted as the first mainstream wargame. Players are given tons of little army units to place onto the map of the world.  When it's your turn, you use your units to attack other players' positions, hopefully with superior numbers.  Combat is a simple dice rolling affair that stresses attrition, and reinforcements are given to players who collect sets of cards.Re-implements:    La Conquête du MondeExpanded by:    Medieval Risk    Hyborian Risk    Risk - Going Over the Trenches    Risk 2042    One World DominionRe-implemented by:    Risk - 40th Anniversary Collector's Edition    Risk Édition Napoléon    Risk - The Lord of the Rings    Risk - Lord of the Rings Expansion Set (incl. Siege of Minas Tirith game)    Risk - The Lord of the Rings - Trilogy Edition    Risk - Star Wars: Original Trilogy Edition    Risk - Star Wars: The Clone Wars Edition    Risk 2210 A.D.    Risk: Godstorm    Castle Risk    Narnia Risk Junior    Risk - Transformers    Risk: Black Ops    Risk (Revised Edition)    War    Risk - Balance of Power</description>
+  <description>Widely accepted as the first mainstream wargame. Players are given tons of little army units to place onto the map of the world.  When it's your turn, you use your units to attack other players' positions, hopefully with superior numbers.  Combat is a simple dice rolling affair that stresses attrition, and reinforcements are given to players who collect sets of cards.</description>
   <comments>My comments</comments>
   <category>
    <line>
-    <col>Wargame</col>
+ <col>Wargame</col>
    </line>
   </category>
   <mechanics>
    <line>
-    <col>Area Movement</col>
+ <col>Area Movement</col>
    </line>
    <line>
-    <col>Dice Rolling</col>
+ <col>Dice Rolling</col>
    </line>
    <line>
-    <col>Set Collection</col>
+ <col>Set Collection</col>
    </line>
   </mechanics>
   <expandedby>
    <line>
-    <col>Hyborian Risk</col>
+ <col>Hyborian Risk</col>
    </line>
    <line>
-    <col>La Conquête du Monde revised</col>
+ <col>La Conquête du Monde revised</col>
    </line>
    <line>
-    <col>Medieval Risk</col>
+ <col>Medieval Risk</col>
    </line>
    <line>
-    <col>One World Dominion</col>
+ <col>One World Dominion</col>
    </line>
    <line>
-    <col>Risk - Going Over the Trenches</col>
+ <col>Risk - Going Over the Trenches</col>
    </line>
    <line>
-    <col>Risk 2042</col>
+ <col>Risk 2042</col>
    </line>
   </expandedby>
  </item>
@@ -85,7 +85,7 @@
   backpic=""
   designedby="Klaus Teuber"
   illustratedby="Tanja Donner, Franz Vohwinkel"
-  publishedby="999 Games, Albi, Brain Games, Capcom, dan-spil, Descartes Editeur, Devir, Eurogames, Filosofia Editions, Galakta, Giochi Uniti, Hanayama, Ideal Board Games, Ísöld ehf., Kaissa Chess &amp; Games, Korea Boardgames, Kosmos (Franckh-Kosmos), L&amp;M Games, Laser plus, Laserplus, Logojogos, Marektoy, Mayfair Games, Piatnik, Prata Speles, Smart Ltd, Tilsit"
+  publishedby="999 Games, Albi, Brain Games, Capcom, dan-spil, Descartes Editeur, Devir, Eurogames, Filosofia Editions, Galakta, Giochi Uniti, Hanayama, Ideal Board Games"
   players="3-4"
   playingtime="90"
   suggestedage="10"
@@ -113,128 +113,128 @@
   <comments></comments>
   <category>
    <line>
-    <col>City Building</col>
+ <col>City Building</col>
    </line>
    <line>
-    <col>Civilization</col>
+ <col>Civilization</col>
    </line>
    <line>
-    <col>Negotiation</col>
+ <col>Negotiation</col>
    </line>
   </category>
   <mechanics>
    <line>
-    <col>Dice Rolling</col>
+ <col>Dice Rolling</col>
    </line>
    <line>
-    <col>Modular Board</col>
+ <col>Modular Board</col>
    </line>
    <line>
-    <col>Route/network Building</col>
+ <col>Route/network Building</col>
    </line>
    <line>
-    <col>Trading</col>
+ <col>Trading</col>
    </line>
   </mechanics>
   <expandedby>
    <line>
-    <col>Atlantis: Szenarien &amp; Varianten zu Die Siedler von Catan</col>
+ <col>Atlantis: Szenarien &amp; Varianten zu Die Siedler von Catan</col>
    </line>
    <line>
-    <col>Catan Austria / Wien meets Catan</col>
+ <col>Catan Austria / Wien meets Catan</col>
    </line>
    <line>
-    <col>Catan Geographies: North Rhine - Westphalia</col>
+ <col>Catan Geographies: North Rhine - Westphalia</col>
    </line>
    <line>
-    <col>Catan Geographies: Settlers of Hesse</col>
+ <col>Catan Geographies: Settlers of Hesse</col>
    </line>
    <line>
-    <col>Catan: Cities &amp; Knights</col>
+ <col>Catan: Cities &amp; Knights</col>
    </line>
    <line>
-    <col>Catan: Seafarers</col>
+ <col>Catan: Seafarers</col>
    </line>
    <line>
-    <col>Catan: Traders &amp; Barbarians</col>
+ <col>Catan: Traders &amp; Barbarians</col>
    </line>
    <line>
-    <col>Catan: Traders &amp; Barbarians - 5-6 Player Extension</col>
+ <col>Catan: Traders &amp; Barbarians - 5-6 Player Extension</col>
    </line>
    <line>
-    <col>The Cities and Knights of Catan - 5-6 Player Expansion</col>
+ <col>The Cities and Knights of Catan - 5-6 Player Expansion</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De Diamanten</col>
+ <col>De Kolonisten van Catan: De Diamanten</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De drie Handelsteden van Noord-Nederland</col>
+ <col>De Kolonisten van Catan: De drie Handelsteden van Noord-Nederland</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De Specialisten</col>
+ <col>De Kolonisten van Catan: De Specialisten</col>
    </line>
    <line>
-    <col>Die Gilden von Ankh-Morpork</col>
+ <col>Die Gilden von Ankh-Morpork</col>
    </line>
    <line>
-    <col>Der Hafenmeister</col>
+ <col>Der Hafenmeister</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De Koloniën</col>
+ <col>De Kolonisten van Catan: De Koloniën</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De Wereldwonderen</col>
+ <col>De Kolonisten van Catan: De Wereldwonderen</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: De Woestijnruiters</col>
+ <col>De Kolonisten van Catan: De Woestijnruiters</col>
    </line>
    <line>
-    <col>De Kolonisten van Catan: Het Grote Kanaal</col>
+ <col>De Kolonisten van Catan: Het Grote Kanaal</col>
    </line>
    <line>
-    <col>Rincewind and the Tourist</col>
+ <col>Rincewind and the Tourist</col>
    </line>
    <line>
-    <col>The Seafarers of Catan - 5-6 Player Expansion</col>
+ <col>The Seafarers of Catan - 5-6 Player Expansion</col>
    </line>
    <line>
-    <col>The Settlers of Catan - 5-6 Player Extension </col>
+ <col>The Settlers of Catan - 5-6 Player Extension </col>
    </line>
    <line>
-    <col>Settlers of Catan - Event Cards</col>
+ <col>Settlers of Catan - Event Cards</col>
    </line>
    <line>
-    <col>Settlers of Catan - The Fishermen of Catan</col>
+ <col>Settlers of Catan - The Fishermen of Catan</col>
    </line>
    <line>
-    <col>Settlers of Catan - The Great River</col>
+ <col>Settlers of Catan - The Great River</col>
    </line>
    <line>
-    <col>Settlers of New Catan (and extra modules)</col>
+ <col>Settlers of New Catan (and extra modules)</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Burgbau auf Chaffenberch</col>
+ <col>Die Siedler von Catan - Burgbau auf Chaffenberch</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Das Buch zum Spielen</col>
+ <col>Die Siedler von Catan - Das Buch zum Spielen</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Die große Karawane</col>
+ <col>Die Siedler von Catan - Die große Karawane</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Historische Szenarien</col>
+ <col>Die Siedler von Catan - Historische Szenarien</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Historische Szenarien II</col>
+ <col>Die Siedler von Catan - Historische Szenarien II</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Renaissance in der Steiermark</col>
+ <col>Die Siedler von Catan - Renaissance in der Steiermark</col>
    </line>
    <line>
-    <col>Die Siedler von Catan - Saggsen Gadan</col>
+ <col>Die Siedler von Catan - Saggsen Gadan</col>
    </line>
    <line>
-    <col>Die Siedler von Luxemburg</col>
+ <col>Die Siedler von Luxemburg</col>
    </line>
   </expandedby>
  </item>

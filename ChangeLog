@@ -1,3 +1,7 @@
+2009-09-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated GCstar import support for video games and board games.
+
 2009-09-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated ISBNdb.com fetcher and Discogs fetcher to allow user access keys.

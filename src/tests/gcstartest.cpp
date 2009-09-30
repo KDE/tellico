@@ -172,6 +172,56 @@ void GCstarTest::testMusic() {
   QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Electronic"));
   QCOMPARE(entry->fields("track", false).count(), 11);
   QCOMPARE(entry->fields("track", false).at(1), QLatin1String("Praise You In This Storm::Casting Crowns::4:59"));
+  QCOMPARE(entry->fields("producer", false).count(), 1);
+  QCOMPARE(entry->fields("producer", false).at(0), QLatin1String("Mark A. Miller"));
+  QCOMPARE(entry->fields("composer", false).count(), 4);
+  QCOMPARE(entry->fields("composer", false).at(1), QLatin1String("David Hunt"));
+  QCOMPARE(entry->field("cdate"), QLatin1String("2009-09-22"));
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
+}
+
+void GCstarTest::testVideoGame() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-videogame.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Game);
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("title"), QLatin1String("Halo 3"));
+  QCOMPARE(entry->field("year"), QLatin1String("2007"));
+  QCOMPARE(entry->field("platform"), QLatin1String("Xbox 360"));
+  QCOMPARE(entry->fields("developer", false).count(), 1);
+  QCOMPARE(entry->fields("developer", false).first(), QLatin1String("Bungie Studios"));
+  QCOMPARE(entry->fields("publisher", false).count(), 1);
+  QCOMPARE(entry->fields("publisher", false).first(), QLatin1String("Microsoft Games Studios"));
+  QCOMPARE(entry->fields("genre", false).count(), 3);
+  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Action"));
+  QCOMPARE(entry->field("cdate"), QLatin1String("2009-09-24"));
+  QVERIFY(!entry->field("description").isEmpty());
 
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -224,8 +274,6 @@ void GCstarTest::testBoardGame() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  // no support for board games yet
-  QEXPECT_FAIL("", "Support for exporting board games is not implemented yet", Abort);
   QVERIFY(!coll2.isNull());
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());

@@ -25,7 +25,8 @@
 <a:attributes>
  <a:attribute name="isbn">isbn</a:attribute>
   <a:attribute name="title">title</a:attribute>
-  <a:attribute name="publisher">publisher</a:attribute>
+  <a:attribute name="publisher" skip="GCboardgames">publisher</a:attribute>
+  <a:attribute name="publishedby" type="GCboardgames">publisher</a:attribute>
   <a:attribute name="publication">pub_year</a:attribute>
   <a:attribute name="language">language</a:attribute>
   <a:attribute name="serie">series</a:attribute>
@@ -52,6 +53,10 @@
   <a:attribute name="release">year</a:attribute>
   <a:attribute name="composer">composer</a:attribute>
   <a:attribute name="producer">producer</a:attribute>
+  <a:attribute name="platform">platform</a:attribute>
+  <a:attribute name="designedby">designer</a:attribute>
+  <a:attribute name="players">num-player</a:attribute>
+  <a:attribute name="developer">developer</a:attribute>
 </a:attributes>
 <xsl:variable name="collType">
  <xsl:choose>
@@ -67,12 +72,17 @@
   <xsl:when test="tc:tellico/tc:collection/@type=8">
    <xsl:text>GCcoins</xsl:text>
   </xsl:when>
+  <xsl:when test="tc:tellico/tc:collection/@type=11">
+   <xsl:text>GCgames</xsl:text>
+  </xsl:when>
+  <xsl:when test="tc:tellico/tc:collection/@type=13">
+   <xsl:text>GCboardgames</xsl:text>
+  </xsl:when>
  </xsl:choose>
 </xsl:variable>
 <!-- grab all the applicable attributes once -->
-<xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[not(@type) or
-                                                                                (contains(@type, $collType) and
-                                                                                 not(contains(@skip, $collType)))]"/>
+<xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[(contains(@type, $collType) or not(@type)) and
+                                                                                 not(contains(@skip, $collType))]"/>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
@@ -84,13 +94,19 @@
  <xsl:apply-templates select="tc:collection"/>
 </xsl:template>
 
-<xsl:template match="tc:collection[@type&lt;2 or @type&gt;5 and not(@type=8)]">
+<xsl:template match="tc:collection">
  <xsl:message terminate="yes">
   <xsl:text>GCstar export is not supported for this collection type.</xsl:text>
  </xsl:message>
 </xsl:template>
 
-<xsl:template match="tc:collection[(@type&gt;1 and @type&lt;6) or @type=8]">
+<xsl:template match="tc:collection[@type=2 or
+                                   @type=3 or
+                                   @type=4 or
+                                   @type=5 or
+                                   @type=8 or
+                                   @type=11 or
+                                   @type=13]">
  <collection items="{count(tc:entry)}" type="{$collType}">
   <information>
    <maxId>
@@ -202,7 +218,7 @@
     <xsl:with-param name="elem" select="tc:subtitles"/>
    </xsl:call-template>
   </subt>
-  <xsl:if test="$collType  = 'GCfilms'">
+  <xsl:if test="$collType  = 'GCfilms' or $collType = 'GCboardgames'">
    <comment> <!-- note the lack of an 's' -->
     <xsl:value-of select="tc:comments"/>
    </comment>
@@ -211,6 +227,18 @@
 
   <!-- for music -->
   <xsl:apply-templates select="tc:tracks"/>
+
+  <!-- board games -->
+  <mechanics>
+   <xsl:call-template name="multiline">
+    <xsl:with-param name="elem" select="tc:mechanisms"/>
+   </xsl:call-template>
+  </mechanics>
+  <xsl:if test="$collType = 'GCgames' or $collType = 'GCboardgames'">
+   <description>
+    <xsl:value-of select="tc:description"/>
+   </description>
+  </xsl:if>
 
  </item>
 </xsl:template>
@@ -277,17 +305,24 @@
  <xsl:param name="att"/>
  <xsl:param name="entry"/>
  <!-- should technically check namespace, too, but unlikely to match -->
- <xsl:variable name="value" select="$entry//*[local-name()=$att][1]"/>
+ <!-- select the direct children of the entry, or those grandchildren whose parent is equal to their name + 's' -->
+ <xsl:variable name="values" select="$entry/*[local-name()=$att] |
+                                     $entry/*[local-name()=concat($att,'s')]/*[local-name()=$att]"/>
  <xsl:choose>
   <xsl:when test="$att/@format='bool'">
    <xsl:attribute name="{$att/@name}">
-    <xsl:value-of select="number($value='true')"/>
+    <xsl:value-of select="number($values[1]='true')"/>
    </xsl:attribute>
   </xsl:when>
   <xsl:otherwise>
-   <xsl:if test="string-length($value) &gt; 0">
+   <xsl:if test="count($values)">
     <xsl:attribute name="{$att/@name}">
-     <xsl:value-of select="$value"/>
+     <xsl:for-each select="$values">
+      <xsl:value-of select="."/>
+      <xsl:if test="position() &lt; last()">
+       <xsl:text>, </xsl:text>
+      </xsl:if>
+     </xsl:for-each>
     </xsl:attribute>
    </xsl:if>
   </xsl:otherwise>
