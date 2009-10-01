@@ -146,7 +146,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     Fetch::NameTypeMap typeMap = Fetch::Manager::self()->nameTypeMap();
     // key is the fetcher name, value is the type
     for(Fetch::NameTypeMap::ConstIterator it = typeMap.constBegin(); it != typeMap.constEnd(); ++it) {
-      m_typeCombo->addItem(it.key(), it.value());
+      m_typeCombo->addItem(Fetch::Manager::self()->fetcherIcon(it.value()), it.key(), it.value());
       if(it.value() == Fetch::Z3950) {
         z3950_idx = m_typeCombo->count()-1;
       }
