@@ -349,10 +349,11 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
 
   int row = -1;
 
-  QLabel* al = new QLabel(i18n("An Access Key is required for searching Discogs. "
-                               "If you agree to the terms and conditions, "
-                               "<a href='http://www.discogs.com/users/api_key'>"
-                               "sign up for an account</a>, and enter your information below."),
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.")
+                                .arg(preferredName(),
+                                     QLatin1String("http://www.discogs.com/users/api_key")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

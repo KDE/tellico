@@ -296,11 +296,11 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 
   int row = 0;
 
-  QLabel* al = new QLabel(i18n("CrossRef requires an account for access. "
-                               "If you agree to the terms and conditions, "
-                               "<a href='http://www.crossref.org/requestaccount/'>"
-                               "request an account</a>, and enter your OpenURL "
-                               "account information below."),
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.")
+                                .arg(preferredName(),
+                                     QLatin1String("http://www.crossref.org/requestaccount/")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

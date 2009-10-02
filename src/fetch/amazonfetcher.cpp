@@ -830,10 +830,11 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   int row = -1;
 
-  QLabel* al = new QLabel(i18n("An Access ID and Secret Key are required for accessing the Amazon Web Services. "
-                               "If you agree to the terms and conditions, "
-                               "<a href='https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html'>"
-                               "sign up for an account</a>, and enter your account information below."),
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.")
+                                .arg(AmazonFetcher::defaultName(),
+                                     QLatin1String("https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

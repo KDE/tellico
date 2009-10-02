@@ -347,10 +347,11 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  QLabel* al = new QLabel(i18n("An Access Key is required for searching ISBNdb.com. "
-                               "If you agree to the terms and conditions, "
-                               "<a href='http://isbndb.com/docs/api/30-keys.html'>"
-                               "sign up for an account</a>, and enter your information below."),
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.")
+                                .arg(preferredName(),
+                                     QLatin1String("http://isbndb.com/docs/api/30-keys.html")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

@@ -291,10 +291,11 @@ WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetche
   l->setColumnStretch(1, 10);
 
   int row = -1;
-  QLabel* al = new QLabel(i18n("An Access Key is required for searching Wine.com. "
-                               "If you agree to the terms and conditions, "
-                               "<a href='http://api.wine.com/plans'>"
-                               "sign up for an account</a>, and enter your information below."),
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.")
+                                .arg(preferredName(),
+                                     QLatin1String("http://api.wine.com/plans")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
