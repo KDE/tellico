@@ -226,7 +226,7 @@ void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
   menu.addAction(KIcon(QLatin1String("edit-rename")), i18n("Rename Column..."),
                  this, SLOT(slotRenameColumn()));
   menu.addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Table"),
-                 this, SLOT(clear()));
+                 this, SLOT(clearImpl()));
   menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
 }
 
