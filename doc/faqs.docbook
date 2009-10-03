@@ -15,30 +15,6 @@ application work. -->
 
 <qandaentry>
 <question>
-<para>How do I start the program?</para>
-</question>
-<answer>
-
-<para>After downloading and unpacking &appname;, run
-<userinput><command>configure</command>
-<option>--disable-debug</option>
-<option>--enable-final</option></userinput> to configure
-everything. You may need to modify some of the command line
-options. After that, running
-<userinput><command>make</command></userinput> will compile
-&appname;. Then, as root, run <userinput><command>make
-install</command></userinput> to install everything. Being root is
-only necessary if you install somewhere where you don't have write
-permissions. The command line to start &appname; is
-<userinput><command>tellico</command></userinput>. If you install one
-of the pre-packaged binaries, a menu item will be inserted for
-&appname;.  </para>
-
-</answer>
-</qandaentry>
-
-<qandaentry>
-<question>
 <para>How do I enter multiple authors?</para>
 </question>
 <answer>
@@ -69,8 +45,7 @@ separating each value.</para>
  url="http://www.w3.org/TR/xslt">&xslt;</ulink>, but modifying that file
  is how you change the printing layout. &HTML; is generated from the
  file, and the easiest way to change the appearance of the printout is
- to modify the &CSS; in the top portion. Feel free to email me with questions. Any alternate &xslt; printing files will be available on <ulink
- url="&homepage;">the &appname; website</ulink>.</para>
+ to modify the &CSS; in the top portion.</para>
 
 <para>Be aware that the <filename>tellico-printing.xsl</filename> references another file, <filename>tellico-common.xsl</filename>, that contains some common &xslt; templates. If you copy
 <filename>tellico-printing.xsl</filename> to $<envar>KDEHOME</envar>, you must either modify the &lt;xsl:import&gt; element to point to the actual location of the <filename>tellico-common.xsl</filename> file or copy the common file as well.
