@@ -150,7 +150,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
           }
         }
       }
-      entry->setField(metainfo, strings.join(FieldFormat::delimiterString()));
+      entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
     }
 
     if(!m_cancelled && usePreview) {

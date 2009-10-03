@@ -94,7 +94,7 @@ KDE4_ADD_UNIT_TEST(ristest NOGUI ristest.cpp)
 TARGET_LINK_LIBRARIES(ristest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
-TARGET_LINK_LIBRARIES(tellicoreadtest translators ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(tellicoreadtest translators models ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
 TARGET_LINK_LIBRARIES(arxivfetchertest fetch translators ${TELLICO_TEST_LIBS})

@@ -584,8 +584,12 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   }
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
-  if(!oldValue.isEmpty() && f->hasFlag(Data::Field::AllowMultiple)) {
-    fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
+  if(!oldValue.isEmpty()) {
+    if(f->type() == Data::Field::Table) {
+      fieldValue = oldValue + FieldFormat::rowDelimiterString() + fieldValue;
+    } else if(f->hasFlag(Data::Field::AllowMultiple)) {
+      fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
+    }
   }
   // since the modified date value in the entry gets changed everytime we set a new value
   // we have to save it and set it after changing all the others

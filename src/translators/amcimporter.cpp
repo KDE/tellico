@@ -238,7 +238,7 @@ void AMCImporter::readEntry() {
   e->setField(QLatin1String("nationality"), readString());
   e->setField(QLatin1String("genre"), readString().replace(QLatin1String(", "), FieldFormat::delimiterString()));
 
-  e->setField(QLatin1String("cast"), parseCast(readString()).join(FieldFormat::delimiterString()));
+  e->setField(QLatin1String("cast"), parseCast(readString()).join(FieldFormat::rowDelimiterString()));
 
   readString(); // url
   e->setField(QLatin1String("plot"), readString());

@@ -29,6 +29,7 @@
 #include "fieldformat.h"
 #include "derivedvalue.h"
 #include "tellico_utils.h"
+#include "utils/stringset.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
@@ -160,6 +161,7 @@ QString Entry::formattedField(const QString& fieldName_) const {
 }
 
 QStringList Entry::fields(Tellico::Data::FieldPtr field_, bool formatted_) const {
+  Q_ASSERT(field_->type() != Field::Table);
   return fields(field_->name(), formatted_);
 }
 
@@ -266,27 +268,22 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 //  myDebug() << fieldName_;
   FieldPtr f = m_coll->fieldByName(fieldName_);
 
-  // easy if not allowing multiple values
-  if(!(f->hasFlag(Field::AllowMultiple))) {
-    return QStringList(formattedField(fieldName_));
+  if(f->type() == Field::Table) {
+    // we only take groups from the first column
+    StringSet groups;
+    foreach(const QString& row, FieldFormat::splitTable(formattedField(fieldName_))) {
+      const QStringList columns = FieldFormat::splitRow(row);
+      groups.add(FieldFormat::splitValue(columns.at(0)));
+    }
+    return groups.toList();
   }
 
-  QStringList groups = fields(fieldName_, true);
-  if(groups.isEmpty()) {
-    return QStringList(QString());
-  } else if(f->type() == Field::Table) {
-    // quick hack for tables, how often will a user have column delimiter in their value?
-    // only use first column for group
-    QStringList newGroupNames;
-    foreach(const QString& group, groups) {
-      QString newGroupName = FieldFormat::splitRow(group).at(0);
-      if(!newGroupName.isEmpty()) {
-        newGroupNames.append(newGroupName);
-      }
-    }
-    groups = newGroupNames;
+  if(f->hasFlag(Field::AllowMultiple)) {
+    return fields(fieldName_, true);
   }
-  return groups;
+
+  // easy if not allowing multiple values
+  return QStringList() << formattedField(fieldName_);
 }
 
 bool Entry::isOwned() {

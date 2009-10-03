@@ -338,7 +338,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
 // not zero-based
 QString YahooFetcher::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = FieldFormat::splitValue(str_);
+  QStringList list = FieldFormat::splitTable(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list += QString();
   }
@@ -352,7 +352,7 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
   if(!value_.isEmpty() && write) {
     list[pos_-1] = value_;
   }
-  return list.join(FieldFormat::delimiterString());
+  return list.join(FieldFormat::rowDelimiterString());
 }
 
 Tellico::Fetch::FetchRequest YahooFetcher::updateRequest(Data::EntryPtr entry_) {

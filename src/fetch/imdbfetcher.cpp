@@ -786,7 +786,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       }
     }
     if(!values.isEmpty()) {
-      entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::delimiterString()));
+      entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
   }
 }
@@ -941,7 +941,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   }
 
   if(!cast.isEmpty()) {
-    entry_->setField(QLatin1String("cast"), cast.join(FieldFormat::delimiterString()));
+    entry_->setField(QLatin1String("cast"), cast.join(FieldFormat::rowDelimiterString()));
   }
 }
 
@@ -1084,7 +1084,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
         f->setFlags(Data::Field::AllowGrouped);
         entry_->collection()->addField(f);
       }
-      entry_->setField(QLatin1String("allcertification"), certs.join(FieldFormat::delimiterString()));
+      entry_->setField(QLatin1String("allcertification"), certs.join(FieldFormat::rowDelimiterString()));
     }
   }
 }

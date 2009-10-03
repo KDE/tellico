@@ -32,6 +32,9 @@
 #include "../collections/bookcollection.h"
 #include "../collections/coincollection.h"
 #include "../collectionfactory.h"
+#include "../translators/tellicoxmlexporter.h"
+#include "../fieldformat.h"
+#include "../entry.h"
 
 QTEST_KDEMAIN_CORE( TellicoReadTest )
 
@@ -42,6 +45,7 @@ void TellicoReadTest::initTestCase() {
   // need to register this first
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerCoin(Tellico::Data::Collection::Coin, "coin");
+  Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
     KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
@@ -125,4 +129,45 @@ void TellicoReadTest::testCoinCollection() {
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   // test creating the derived title
   QCOMPARE(entry->title(), QL1("1974D Jefferson Nickel 0.05"));
+}
+
+void TellicoReadTest::testTableData() {
+  KUrl url(QL1(KDESRCDIR) + QL1("/data/tabletest.tc"));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->entryCount(), 2);
+
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::TellicoImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
+    }
+  }
+
+  // test table value concatenation
+  Tellico::Data::EntryPtr e3(new Tellico::Data::Entry(coll));
+  coll->addEntries(e3);
+  QString value = "11a" + Tellico::FieldFormat::delimiterString() + "11b"
+                + Tellico::FieldFormat::columnDelimiterString() + "12"
+                + Tellico::FieldFormat::columnDelimiterString() + "13"
+                + Tellico::FieldFormat::rowDelimiterString() + "21"
+                + Tellico::FieldFormat::columnDelimiterString() + "22"
+                + Tellico::FieldFormat::columnDelimiterString() + "23";
+  e3->setField(QL1("table"), value);
+  QStringList groups = e3->groupNamesByFieldName("table");
+  QCOMPARE(groups.count(), 3);
+  QCOMPARE(groups.at(0), QL1("11a"));
 }

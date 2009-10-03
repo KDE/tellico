@@ -79,12 +79,12 @@ bool TellicoXMLExporter::exec() {
                                    options() & Export::ExportForce);
 }
 
+QString TellicoXMLExporter::text() const {
+  return exportXML().toString();
+}
+
 QDomDocument TellicoXMLExporter::exportXML() const {
-  // don't be hard on people with older versions. The only difference with DTD 10 was adding
-  // a board game collection, so use 9 still unless it's a board game
-  int exportVersion = (XML::syntaxVersion == 10 && collection()->type() != Data::Collection::BoardGame)
-                    ? 9
-                    : XML::syntaxVersion;
+  const int exportVersion = XML::syntaxVersion;
 
   QDomImplementation impl;
   QDomDocumentType doctype = impl.createDocumentType(QLatin1String("tellico"),
@@ -119,10 +119,6 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   return dom;
 }
 
-QString TellicoXMLExporter::exportXMLString() const {
-  return exportXML().toString();
-}
-
 void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
   Data::CollPtr coll = collection();
   if(!coll) {
@@ -131,8 +127,8 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   }
 
   QDomElement collElem = dom_.createElement(QLatin1String("collection"));
-  collElem.setAttribute(QLatin1String("type"),       coll->type());
-  collElem.setAttribute(QLatin1String("title"),      coll->title());
+  collElem.setAttribute(QLatin1String("type"), coll->type());
+  collElem.setAttribute(QLatin1String("title"), coll->title());
 
   QDomElement fieldsElem = dom_.createElement(QLatin1String("fields"));
   collElem.appendChild(fieldsElem);
@@ -265,8 +261,33 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       }
     }
 
-    // if multiple versions are allowed, split them into separate elements
+    if(fIt->type() == Data::Field::Table) {
+      // who cares about grammar, just add an QLatin1Char('s') to the name
+      QDomElement parElem = dom_.createElement(fieldName + QLatin1Char('s'));
+      entryElem.appendChild(parElem);
+
+      bool ok;
+      int ncols = Tellico::toUInt(fIt->property(QLatin1String("columns")), &ok);
+      if(!ok) {
+        ncols = 1;
+      }
+      foreach(const QString& rowValue, FieldFormat::splitTable(fieldValue)) {
+        QDomElement fieldElem = dom_.createElement(fieldName);
+        parElem.appendChild(fieldElem);
+
+        QStringList columnValues = FieldFormat::splitRow(rowValue);
+        Q_ASSERT(ncols >= columnValues.count());
+        for(int col = 0; col < columnValues.count(); ++col) {
+          QDomElement elem = dom_.createElement(QLatin1String("column"));
+          elem.appendChild(dom_.createTextNode(columnValues.at(col)));
+          fieldElem.appendChild(elem);
+        }
+      }
+      continue;
+    }
+
     if(fIt->hasFlag(Data::Field::AllowMultiple)) {
+      // if multiple versions are allowed, split them into separate elements
       // parent element if field contains multiple values, child of entryElem
       // who cares about grammar, just add an QLatin1Char('s') to the name
       QDomElement parElem = dom_.createElement(fieldName + QLatin1Char('s'));
@@ -277,26 +298,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       for(QStringList::ConstIterator it = fields.constBegin(); it != fields.constEnd(); ++it) {
         // element for field value, child of either entryElem or ParentElem
         QDomElement fieldElem = dom_.createElement(fieldName);
-        // special case for multi-column tables
-        int ncols = 0;
-        if(fIt->type() == Data::Field::Table) {
-          bool ok;
-          ncols = Tellico::toUInt(fIt->property(QLatin1String("columns")), &ok);
-          if(!ok) {
-            ncols = 1;
-          }
-        }
-        if(ncols > 1) {
-          QStringList rowValues = FieldFormat::splitRow(*it);
-          for(int col = 0; col < ncols; ++col) {
-            QDomElement elem;
-            elem = dom_.createElement(QLatin1String("column"));
-            elem.appendChild(dom_.createTextNode(col < rowValues.count() ? rowValues.at(col) : QString()));
-            fieldElem.appendChild(elem);
-          }
-        } else {
-          fieldElem.appendChild(dom_.createTextNode(*it));
-        }
+        fieldElem.appendChild(dom_.createTextNode(*it));
         parElem.appendChild(fieldElem);
       }
     } else {

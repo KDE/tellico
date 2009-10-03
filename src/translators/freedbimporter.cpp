@@ -281,7 +281,7 @@ void FreeDBImporter::readCDROM() {
     }
     trackList << s;
   }
-  entry->setField(QLatin1String("track"), trackList.join(FieldFormat::delimiterString()));
+  entry->setField(QLatin1String("track"), trackList.join(FieldFormat::rowDelimiterString()));
 
   m_coll->addEntries(entry);
   readCDText(drive);
@@ -390,7 +390,7 @@ void FreeDBImporter::readCache() {
     for(int i = 0; i < info.numberOfTracks(); ++i) {
       trackList << info.track(i).get(KCDDB::Title).toString();
     }
-    entry->setField(track, trackList.join(FieldFormat::delimiterString()));
+    entry->setField(track, trackList.join(FieldFormat::rowDelimiterString()));
 
 #if 0
     // add CDDB info
@@ -466,7 +466,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
       artist = i18n("Various");
     }
   }
-  SETFIELD("track", tracks.join(FieldFormat::delimiterString()));
+  SETFIELD("track", tracks.join(FieldFormat::rowDelimiterString()));
 
   // something special for compilations and such
   SETFIELD("artist", artist);

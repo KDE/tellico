@@ -1,3 +1,7 @@
+2009-10-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug to allow multiple values in table columns.
+
 2009-09-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Wine.com data source.

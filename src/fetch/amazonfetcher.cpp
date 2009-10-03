@@ -677,7 +677,10 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
 
   // also sometimes table fields have rows but no values
   Data::FieldList fields = entry->collection()->fields();
-  QRegExp blank(QLatin1String("[\\s:;]+")); // only white space, column separators and row separators
+  QRegExp blank(QLatin1String("[\\s") +
+                FieldFormat::columnDelimiterString() +
+                FieldFormat::delimiterString() +
+                QLatin1String("]+")); // only white space, column separators and value separators
   foreach(Data::FieldPtr fIt, fields) {
     if(fIt->type() != Data::Field::Table) {
       continue;

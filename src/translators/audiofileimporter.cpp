@@ -417,7 +417,7 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
 
 // pos_ is NOT zero-indexed!
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = FieldFormat::splitValue(str_);
+  QStringList list = FieldFormat::splitTable(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list.append(QString());
   }
@@ -427,7 +427,7 @@ QString AudioFileImporter::insertValue(const QString& str_, const QString& value
     myDebug() << "*** New value: " << value_;
   }
   list[pos_-1] = value_;
-  return list.join(FieldFormat::delimiterString());
+  return list.join(FieldFormat::rowDelimiterString());
 }
 
 void AudioFileImporter::slotCancel() {

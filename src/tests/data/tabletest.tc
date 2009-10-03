@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11" >
+ <collection title="My Collection" type="1" >
+  <fields>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id" >
+    <prop name="template" >%{@id}</prop>
+   </field>
+   <field title="Title" flags="8" category="General" format="1" type="1" name="title" />
+   <field title="Date Created" flags="16" category="Personal" format="3" type="12" name="cdate" />
+   <field title="Date Modified" flags="16" category="Personal" format="3" type="12" name="mdate" />
+   <field title="Table" flags="3" category="Table" format="0" type="8" name="table" >
+    <prop name="columns" >3</prop>
+   </field>
+  </fields>
+  <entry id="0" >
+   <id>0</id>
+   <title>Easy Table</title>
+   <cdate calendar="gregorian" >
+    <year>2009</year>
+    <month>10</month>
+    <day>03</day>
+   </cdate>
+   <mdate calendar="gregorian" >
+    <year>2009</year>
+    <month>10</month>
+    <day>03</day>
+   </mdate>
+   <tables>
+    <table>
+     <column>value11</column>
+     <column>value12</column>
+     <column>value13</column>
+    </table>
+    <table>
+     <column>value21</column>
+     <column>value22</column>
+     <column>value23</column>
+    </table>
+    <table>
+     <column>value31</column>
+     <column>value32</column>
+     <column>value33</column>
+    </table>
+   </tables>
+  </entry>
+  <entry id="1" >
+   <id>1</id>
+   <title>Hard Table</title>
+   <cdate calendar="gregorian" >
+    <year>2009</year>
+    <month>10</month>
+    <day>03</day>
+   </cdate>
+   <mdate calendar="gregorian" >
+    <year>2009</year>
+    <month>10</month>
+    <day>03</day>
+   </mdate>
+   <tables>
+    <table>
+     <column>value11;value11b</column>
+     <column>value12</column>
+     <column>value13</column>
+    </table>
+    <table>
+     <column>value21</column>
+     <column>value22</column>
+     <column>value23</column>
+    </table>
+    <table>
+     <column>value31</column>
+     <column>value32</column>
+     <column>value33</column>
+    </table>
+   </tables>
+  </entry>
+ </collection>
+</tellico>

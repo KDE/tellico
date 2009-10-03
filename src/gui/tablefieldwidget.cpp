@@ -98,26 +98,26 @@ QString TableFieldWidget::text() const {
       }
     }
     if(rowStr.isEmpty()) {
-      rstack += FieldFormat::delimiterString();
+      rstack += FieldFormat::rowDelimiterString();
     } else {
-      rowStr.truncate(rowStr.length()-2); // remove last semi-colon and space
-      text += rstack + rowStr + FieldFormat::delimiterString();
+      rowStr.truncate(rowStr.length()-FieldFormat::columnDelimiterString().length()); // remove last delimiter
+      text += rstack + rowStr + FieldFormat::rowDelimiterString();
       rstack.clear();
     }
   }
   if(!text.isEmpty()) {
-    text.truncate(text.length()-2); // remove last semi-colon and space
+    text.truncate(text.length()-FieldFormat::rowDelimiterString().length()); // remove last delimiter
   }
   return text;
 }
 
 void TableFieldWidget::setTextImpl(const QString& text_) {
-  const QStringList list = FieldFormat::splitValue(text_);
-  if(list.count() != m_table->rowCount()) {
-    m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
+  const QStringList rows = FieldFormat::splitTable(text_);
+  if(rows.count() != m_table->rowCount()) {
+    m_table->setRowCount(qMax(rows.count(), MIN_TABLE_ROWS));
   }
-  for(int row = 0; row < list.count(); ++row) {
-    QStringList columnValues = FieldFormat::splitRow(list.at(row));
+  for(int row = 0; row < rows.count(); ++row) {
+    QStringList columnValues = FieldFormat::splitRow(rows.at(row));
     for(int col = 0; col < m_table->columnCount(); ++col) {
       QString value = col < columnValues.count() ? columnValues.at(col) : QString();
       QTableWidgetItem* item = new QTableWidgetItem(value);

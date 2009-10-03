@@ -663,8 +663,8 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
       // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
       // if e1's F val in [row i, column j] empty, replace with e2's val at same position
       // if different (non-empty) vals at same position, CONFLICT!
-      QStringList vals1 = e1->fields(field, false);
-      QStringList vals2 = e2->fields(field, false);
+      QStringList vals1 = FieldFormat::splitTable(e1->field(field));
+      QStringList vals2 = FieldFormat::splitTable(e2->field(field));
       while(vals1.count() < vals2.count()) {
         vals1 += QString();
       }
@@ -707,7 +707,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
         }
       }
       if(ret) {
-        e1->setField(field, vals1.join(FieldFormat::delimiterString()));
+        e1->setField(field, vals1.join(FieldFormat::rowDelimiterString()));
       }
 // remove the merging due to user comments
 // maybe in the future have a more intelligent way

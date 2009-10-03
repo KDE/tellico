@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testEntries();
   void testEntries_data();
   void testCoinCollection();
+  void testTableData();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
