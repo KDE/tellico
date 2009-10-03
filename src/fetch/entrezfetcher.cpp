@@ -26,6 +26,7 @@
 #include "../gui/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
@@ -296,7 +297,7 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
             list << aNode.toElement().text();
           }
         }
-        authors = list.join(QLatin1String("; "));
+        authors = list.join(FieldFormat::delimiterString());
       }
       if(!title.isEmpty() && !pubdate.isEmpty() && !authors.isEmpty()) {
         break; // done now

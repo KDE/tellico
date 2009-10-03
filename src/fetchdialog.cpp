@@ -36,10 +36,12 @@
 #include "collection.h"
 #include "entry.h"
 #include "document.h"
-#include "tellico_debug.h"
+#include "field.h"
+#include "fieldformat.h"
 #include "gui/combobox.h"
 #include "gui/cursorsaver.h"
 #include "utils/stringset.h"
+#include "tellico_debug.h"
 
 #ifdef ENABLE_WEBCAM
 #include "barcode/barcode.h"
@@ -423,7 +425,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
   if(m_collType & (Data::Collection::Book | Data::Collection::Bibtex) &&
      m_multipleISBN->isChecked() &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
-    QStringList searchValues = m_oldSearch.simplified().split(QLatin1String("; "));
+    QStringList searchValues = Data::Field::splitValue(m_oldSearch.simplified());
     QStringList resultValues;
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
       resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
@@ -649,7 +651,7 @@ void FetchDialog::slotEditMultipleISBN() {
                                  "first 100 values in your list will be used.</qt>"), this);
       m_isbnList = m_isbnList.mid(0, 100);
     }
-    m_valueLineEdit->setText(m_isbnList.join(QLatin1String("; ")));
+    m_valueLineEdit->setText(m_isbnList.join(FieldFormat::delimiterString()));
   }
   m_isbnTextEdit = 0; // gets auto-deleted
 }

@@ -30,6 +30,7 @@
 #include "collection.h"
 #include "filehandler.h"
 #include "borrower.h"
+#include "fieldformat.h"
 #include "tellico_strings.h"
 #include "images/imagefactory.h"
 #include "images/image.h"
@@ -707,7 +708,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
         }
       }
       if(ret) {
-        e1->setField(field, vals1.join(QLatin1String("; ")));
+        e1->setField(field, vals1.join(FieldFormat::delimiterString()));
       }
 // remove the merging due to user comments
 // maybe in the future have a more intelligent way
@@ -726,7 +727,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
       }
 // not sure if I think it should be sorted or not
 //      items1.sort();
-      e1->setField(field, items1.join(QLatin1String("; ")));
+      e1->setField(field, items1.join(FieldFormat::delimiterString()));
       ret = true;
 #endif
     } else if(resolver_ && e1->field(field) != e2->field(field)) {

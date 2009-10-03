@@ -27,6 +27,7 @@
 #include "../tellico_kernel.h"
 #include "../document.h"
 #include "../collection.h"
+#include "../fieldformat.h"
 #include "../translators/bibtexhandler.h"
 #include "../mainwindow.h"
 
@@ -202,7 +203,7 @@ bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, cons
   QStringList values = entry->fields(fieldName_, false);
   QStringList newValues = values;
   newValues << value_;
-  if(!entry->setField(fieldName_, newValues.join(QLatin1String("; ")))) {
+  if(!entry->setField(fieldName_, newValues.join(FieldFormat::delimiterString()))) {
     return false;
   }
   Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);

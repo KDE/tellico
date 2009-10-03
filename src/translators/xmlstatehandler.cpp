@@ -27,6 +27,7 @@
 #include "../collection.h"
 #include "../collectionfactory.h"
 #include "../collections/bibtexcollection.h"
+#include "../fieldformat.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../images/imagefactory.h"
@@ -584,7 +585,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
   if(!oldValue.isEmpty() && f->hasFlag(Data::Field::AllowMultiple)) {
-    fieldValue = oldValue + QLatin1String("; ") + fieldValue;
+    fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
   }
   // since the modified date value in the entry gets changed everytime we set a new value
   // we have to save it and set it after changing all the others

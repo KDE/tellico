@@ -26,6 +26,7 @@
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 #include "../utils/isbnvalidator.h"
@@ -146,7 +147,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
           authors += clean(line);
           line = ts.readLine();
         }
-        entry->setField(author, authors.join(QLatin1String("; ")));
+        entry->setField(author, authors.join(FieldFormat::delimiterString()));
         // the next line has already been read
         readNextLine = false;
 

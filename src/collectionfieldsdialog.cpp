@@ -25,6 +25,7 @@
 #include "collectionfieldsdialog.h"
 #include "collection.h"
 #include "field.h"
+#include "fieldformat.h"
 #include "collectionfactory.h"
 #include "gui/listwidgetitem.h"
 #include "gui/stringmapdialog.h"
@@ -920,7 +921,7 @@ void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
   slotTypeChanged(fieldMap[field_->type()]); // just setting the text doesn't emit the activated signal
 
   if(field_->type() == Data::Field::Choice) {
-    m_allowEdit->setText(field_->allowed().join(QLatin1String("; ")));
+    m_allowEdit->setText(field_->allowed().join(FieldFormat::delimiterString()));
   } else {
     m_allowEdit->clear();
   }

@@ -40,7 +40,7 @@ QString FieldCompletion::makeCompletion(const QString& string_) {
     return KCompletion::makeCompletion(string_);
   }
 
-  static QRegExp rx = FieldFormat::delimiter();
+  static QRegExp rx = FieldFormat::delimiterRegExp();
   int pos = rx.lastIndexIn(string_);
   if(pos == -1) {
     m_beginText.clear();

@@ -26,6 +26,7 @@
 #include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
@@ -217,7 +218,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
       }
       QString fieldName = QString::fromUtf8(name);
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
-        str.replace(QRegExp(QLatin1String("\\sand\\s")), QLatin1String("; "));
+        str.replace(QRegExp(QLatin1String("\\sand\\s")),FieldFormat::delimiterString());
       }
       // there's a 'key' field different from the citation key
       // http://nwalsh.com/tex/texhelp/bibtx-37.html

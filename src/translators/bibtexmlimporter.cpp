@@ -26,6 +26,7 @@
 #include "tellico_xml.h"
 #include "../collections/bibtexcollection.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../entry.h"
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
@@ -148,11 +149,11 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
               value += n3.toText().data();
             }
             if(n3 != n2.lastChild()) {
-              value += QLatin1String(" ");
+              value += QLatin1Char(' ');
             }
           }
           if(n2 != n.lastChild()) {
-            value += QLatin1String("; ");
+            value += FieldFormat::delimiterString();
           }
         }
       }

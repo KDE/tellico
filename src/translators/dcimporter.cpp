@@ -23,8 +23,9 @@
  ***************************************************************************/
 
 #include "dcimporter.h"
-#include "../collections/bookcollection.h"
 #include "tellico_xml.h"
+#include "../collections/bookcollection.h"
+#include "../fieldformat.h"
 #include "../tellico_debug.h"
 
 using Tellico::Import::DCImporter;
@@ -102,21 +103,21 @@ Tellico::Data::CollPtr DCImporter::collection() {
         creators << s;
       }
     }
-    e->setField(QLatin1String("author"), creators.join(QLatin1String("; ")));
+    e->setField(QLatin1String("author"), creators.join(FieldFormat::delimiterString()));
 
     nodeList = GETELEMENTS("publisher");
     QStringList publishers;
     for(int j = 0; j < nodeList.count(); ++j) {
       publishers << nodeList.item(j).toElement().text();
     }
-    e->setField(QLatin1String("publisher"), publishers.join(QLatin1String("; ")));
+    e->setField(QLatin1String("publisher"), publishers.join(FieldFormat::delimiterString()));
 
     nodeList = GETELEMENTS("subject");
     QStringList keywords;
     for(int j = 0; j < nodeList.count(); ++j) {
       keywords << nodeList.item(j).toElement().text();
     }
-    e->setField(QLatin1String("keyword"), keywords.join(QLatin1String("; ")));
+    e->setField(QLatin1String("keyword"), keywords.join(FieldFormat::delimiterString()));
 
     nodeList = GETELEMENTS("date");
     if(nodeList.count() > 0) {

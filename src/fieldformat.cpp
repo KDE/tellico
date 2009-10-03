@@ -34,8 +34,18 @@ QStringList FieldFormat::articlesApos;
 QRegExp FieldFormat::delimiterRx = QRegExp(QLatin1String("\\s*;\\s*"));
 QRegExp FieldFormat::commaSplitRx = QRegExp(QLatin1String("\\s*,\\s*"));
 
-const QRegExp& FieldFormat::delimiter() {
+QString FieldFormat::delimiterString() {
+  return QLatin1String("; ");
+}
+
+QRegExp FieldFormat::delimiterRegExp() {
   return delimiterRx;
+}
+
+QString FieldFormat::fixupValue(const QString& value_) {
+  QString value = value_;
+  value.replace(delimiterRegExp(), delimiterString());
+  return value;
 }
 
 QString FieldFormat::title(const QString& title_) {

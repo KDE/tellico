@@ -26,6 +26,7 @@
 #include "../collections/filecatalog.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../tellico_utils.h"
 #include "../gui/guiproxy.h"
@@ -149,7 +150,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
           }
         }
       }
-      entry->setField(metainfo, strings.join(QLatin1String("; ")));
+      entry->setField(metainfo, strings.join(FieldFormat::delimiterString()));
     }
 
     if(!m_cancelled && usePreview) {

@@ -26,6 +26,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
@@ -288,7 +289,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     f->addAllowed(value);
     // if the field can have multiple values, append current values to new value
     if((f->hasFlag(Data::Field::AllowMultiple)) && !entry->field(f->name()).isEmpty()) {
-      value.prepend(entry->field(f->name()) + QLatin1String("; "));
+      value.prepend(entry->field(f->name()) + FieldFormat::delimiterString());
     }
     entry->setField(f, value);
 

@@ -28,7 +28,6 @@
 #include "../datavectors.h"
 
 #include <QWidget>
-#include <QRegExp>
 
 class QLabel;
 class QCheckBox;
@@ -91,8 +90,6 @@ protected:
 
   // not all widgets have to be updated when the field changes
   virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
-
-  static const QRegExp s_semiColon;
 
 private:
   Data::FieldPtr m_field;

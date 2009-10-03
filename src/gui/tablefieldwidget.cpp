@@ -24,6 +24,7 @@
 
 #include "tablefieldwidget.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
@@ -97,10 +98,10 @@ QString TableFieldWidget::text() const {
       }
     }
     if(rowStr.isEmpty()) {
-      rstack += QLatin1String("; ");
+      rstack += FieldFormat::delimiterString();
     } else {
       rowStr.truncate(rowStr.length()-2); // remove last semi-colon and space
-      text += rstack + rowStr + QLatin1String("; ");
+      text += rstack + rowStr + FieldFormat::delimiterString();
       rstack.clear();
     }
   }
@@ -111,7 +112,7 @@ QString TableFieldWidget::text() const {
 }
 
 void TableFieldWidget::setTextImpl(const QString& text_) {
-  const QStringList list = Data::Field::split(text_, true);
+  const QStringList list = Data::Field::splitValue(text_);
   if(list.count() != m_table->rowCount()) {
     m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
   }

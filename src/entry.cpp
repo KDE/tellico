@@ -167,7 +167,7 @@ QStringList Entry::fields(const QString& field_, bool formatted_) const {
   if(s.isEmpty()) {
     return QStringList();
   }
-  return Field::split(s, true);
+  return Field::splitValue(s);
 }
 
 bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {

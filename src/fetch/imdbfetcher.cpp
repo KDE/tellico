@@ -27,6 +27,7 @@
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../tellico_utils.h"
@@ -56,7 +57,6 @@
 namespace {
   static const char* IMDB_SERVER = "akas.imdb.com";
   static const uint IMDB_MAX_RESULTS = 20;
-  static const QString sep = QLatin1String("; ");
 }
 
 using Tellico::Fetch::IMDBFetcher;
@@ -786,7 +786,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       }
     }
     if(!values.isEmpty()) {
-      entry_->setField(QLatin1String("alttitle"), values.join(sep));
+      entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::delimiterString()));
     }
   }
 }
@@ -859,7 +859,7 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
     }
   }
   if(!people.isEmpty()) {
-    entry_->setField(fieldName_, people.toList().join(sep));
+    entry_->setField(fieldName_, people.toList().join(FieldFormat::delimiterString()));
   }
 }
 
@@ -941,7 +941,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   }
 
   if(!cast.isEmpty()) {
-    entry_->setField(QLatin1String("cast"), cast.join(sep));
+    entry_->setField(QLatin1String("cast"), cast.join(FieldFormat::delimiterString()));
   }
 }
 
@@ -1054,11 +1054,11 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
     }
   }
 
-  entry_->setField(QLatin1String("genre"), genres.join(sep));
-  entry_->setField(QLatin1String("nationality"), countries.join(sep));
-  entry_->setField(QLatin1String("language"), langs.join(sep));
-  entry_->setField(QLatin1String("audio-track"), tracks.join(sep));
-  entry_->setField(QLatin1String("studio"), studios.join(sep));
+  entry_->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("nationality"), countries.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("audio-track"), tracks.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("studio"), studios.join(FieldFormat::delimiterString()));
   if(!certs.isEmpty()) {
     // first try to set default certification
     const QStringList& certsAllowed = entry_->collection()->fieldByName(QLatin1String("certification"))->allowed();
@@ -1084,7 +1084,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
         f->setFlags(Data::Field::AllowGrouped);
         entry_->collection()->addField(f);
       }
-      entry_->setField(QLatin1String("allcertification"), certs.join(sep));
+      entry_->setField(QLatin1String("allcertification"), certs.join(FieldFormat::delimiterString()));
     }
   }
 }

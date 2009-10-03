@@ -36,7 +36,6 @@
 #include "../field.h"
 #include "../tellico_debug.h"
 
-#include <kdebug.h>
 #include <kurllabel.h>
 #include <klocale.h>
 
@@ -54,8 +53,6 @@ namespace {
 }
 
 using Tellico::GUI::FieldWidget;
-
-const QRegExp FieldWidget::s_semiColon = QRegExp(QLatin1String("\\s*;\\s*"));
 
 FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent_) {
   if(field_->hasFlag(Data::Field::NoEdit) ||

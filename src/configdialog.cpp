@@ -677,12 +677,11 @@ void ConfigDialog::readGeneralConfig() {
   m_cbFormat->setChecked(autoFormat);
 
   const QRegExp comma(QLatin1String("\\s*,\\s*"));
-  const QString semicolon = QLatin1String("; ");
 
-  m_leCapitals->setText(Config::noCapitalizationString().replace(comma, semicolon));
-  m_leArticles->setText(Config::articlesString().replace(comma, semicolon));
-  m_leSuffixes->setText(Config::nameSuffixesString().replace(comma, semicolon));
-  m_lePrefixes->setText(Config::surnamePrefixesString().replace(comma, semicolon));
+  m_leCapitals->setText(Config::noCapitalizationString().replace(comma, FieldFormat::delimiterString()));
+  m_leArticles->setText(Config::articlesString().replace(comma, FieldFormat::delimiterString()));
+  m_leSuffixes->setText(Config::nameSuffixesString().replace(comma, FieldFormat::delimiterString()));
+  m_lePrefixes->setText(Config::surnamePrefixesString().replace(comma, FieldFormat::delimiterString()));
 
   m_modifying = false;
 }

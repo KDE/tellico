@@ -27,6 +27,7 @@
 #include "../tellico_utils.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
@@ -292,7 +293,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
         value = value.simplified();
         if(value.length() > 2) { // might be "-"
           if(key == QLatin1String("Genres")) {
-            entry->setField(fieldMap[key], value.split(QRegExp(QLatin1String("\\s*,\\s*"))).join(QLatin1String("; ")));
+            entry->setField(fieldMap[key], value.split(QRegExp(QLatin1String("\\s*,\\s*"))).join(FieldFormat::delimiterString()));
           } else {
             entry->setField(fieldMap[key], value);
           }

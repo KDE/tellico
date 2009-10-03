@@ -28,6 +28,7 @@
 #include "../collections/musiccollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
@@ -416,7 +417,7 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
 
 // pos_ is NOT zero-indexed!
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = Data::Field::split(str_, true);
+  QStringList list = Data::Field::splitValue(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list.append(QString());
   }
@@ -426,7 +427,7 @@ QString AudioFileImporter::insertValue(const QString& str_, const QString& value
     myDebug() << "*** New value: " << value_;
   }
   list[pos_-1] = value_;
-  return list.join(QLatin1String("; "));
+  return list.join(FieldFormat::delimiterString());
 }
 
 void AudioFileImporter::slotCancel() {

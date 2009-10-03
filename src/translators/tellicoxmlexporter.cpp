@@ -272,7 +272,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(parElem);
 
       // the space after the semi-colon is enforced when the field is set for the entry
-      QStringList fields = fieldValue.split(QLatin1String("; "));
+      QStringList fields = Data::Field::splitValue(fieldValue);
       for(QStringList::ConstIterator it = fields.constBegin(); it != fields.constEnd(); ++it) {
         // element for field value, child of either entryElem or ParentElem
         QDomElement fieldElem = dom_.createElement(fieldName);

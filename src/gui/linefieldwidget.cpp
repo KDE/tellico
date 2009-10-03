@@ -24,6 +24,7 @@
 
 #include "linefieldwidget.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../fieldcompletion.h"
 #include "../tellico_kernel.h"
 #include "../gui/lineedit.h"
@@ -57,7 +58,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 QString LineFieldWidget::text() const {
   QString text = m_lineEdit->text();
   if(field()->hasFlag(Data::Field::AllowMultiple)) {
-    text.replace(s_semiColon, QLatin1String("; "));
+    text = FieldFormat::fixupValue(text);
   }
   return text.trimmed();
 }

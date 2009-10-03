@@ -25,6 +25,7 @@
 #include "numberfieldwidget.h"
 #include "spinbox.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../tellico_debug.h"
 
 #include <klineedit.h>
@@ -69,7 +70,7 @@ QString NumberFieldWidget::text() const {
 
   QString text = m_lineEdit->text();
   if(field()->hasFlag(Data::Field::AllowMultiple)) {
-    text.replace(s_semiColon, QLatin1String("; "));
+    text = FieldFormat::fixupValue(text);
   }
   return text.simplified();
 }

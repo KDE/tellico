@@ -30,6 +30,7 @@
 #include "../tellico_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -337,7 +338,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
 // not zero-based
 QString YahooFetcher::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = Data::Field::split(str_, true);
+  QStringList list = Data::Field::splitValue(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list += QString();
   }
@@ -351,7 +352,7 @@ QString YahooFetcher::insertValue(const QString& str_, const QString& value_, in
   if(!value_.isEmpty() && write) {
     list[pos_-1] = value_;
   }
-  return list.join(QLatin1String("; "));
+  return list.join(FieldFormat::delimiterString());
 }
 
 Tellico::Fetch::FetchRequest YahooFetcher::updateRequest(Data::EntryPtr entry_) {

@@ -34,6 +34,7 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../utils/isbnvalidator.h"
@@ -256,8 +257,8 @@ void AmazonFetcher::doSearch() {
 
         QString cleanValue = value;
         cleanValue.remove(QLatin1Char('-'));
-        // ISBN only get digits or 'X', and multiple values are connected with "; "
-        QStringList isbns = cleanValue.split(QLatin1String("; "));
+        // ISBN only get digits or 'X'
+        QStringList isbns = Data::Field::splitValue(cleanValue);
         // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
         // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
         // isbn13 search
@@ -308,7 +309,7 @@ void AmazonFetcher::doSearch() {
         QString cleanValue = value;
         cleanValue.remove(QLatin1Char('-'));
         // limit to first 10
-        cleanValue.replace(QLatin1String("; "), QLatin1String(","));
+        cleanValue.replace(FieldFormat::delimiterString(), QLatin1String(","));
         cleanValue = cleanValue.section(QLatin1Char(','), 0, 9);
         params.insert(QLatin1String("ItemId"), cleanValue);
       }
@@ -486,7 +487,7 @@ void AmazonFetcher::slotComplete(KJob*) {
       for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
         (*it).replace(rx, QLatin1String(". \\1"));
       }
-      entry->setField(QLatin1String("author"), values.join(QLatin1String("; ")));
+      entry->setField(QLatin1String("author"), values.join(FieldFormat::delimiterString()));
     }
 
     // UK puts the year in the title for some reason
@@ -595,7 +596,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
             words.add(*it2);
           }
         }
-        entry->setField(keywords, words.toList().join(QLatin1String("; ")));
+        entry->setField(keywords, words.toList().join(FieldFormat::delimiterString()));
       }
       entry->setField(QLatin1String("comments"), Tellico::decodeHTML(entry->field(QLatin1String("comments"))));
       break;
@@ -625,11 +626,11 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
             break; // we're done
           }
         }
-        entry->setField(genres, words.toList().join(QLatin1String("; ")));
+        entry->setField(genres, words.toList().join(FieldFormat::delimiterString()));
         // language tracks get duplicated, too
         words.clear();
         words.add(entry->fields(QLatin1String("language"), false));
-        entry->setField(QLatin1String("language"), words.toList().join(QLatin1String("; ")));
+        entry->setField(QLatin1String("language"), words.toList().join(FieldFormat::delimiterString()));
       }
       entry->setField(QLatin1String("plot"), Tellico::decodeHTML(entry->field(QLatin1String("plot"))));
       break;
@@ -661,7 +662,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
             }
           }
         }
-        entry->setField(genres, words.toList().join(QLatin1String("; ")));
+        entry->setField(genres, words.toList().join(FieldFormat::delimiterString()));
       }
       entry->setField(QLatin1String("comments"), Tellico::decodeHTML(entry->field(QLatin1String("comments"))));
       break;

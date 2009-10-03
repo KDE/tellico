@@ -27,6 +27,7 @@
 #include "../tellico_utils.h"
 #include "../images/imagefactory.h"
 #include "../borrower.h"
+#include "../fieldformat.h"
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 
@@ -192,8 +193,8 @@ void GCstarImporter::readGCfilms(const QString& text_) {
       langs << value.section(QLatin1Char(';'), 0, 0);
       tracks << value.section(QLatin1Char(';'), 1, 1);
     }
-    entry->setField(QLatin1String("language"),    langs.join(QLatin1String("; ")));
-    entry->setField(QLatin1String("audio-track"), tracks.join(QLatin1String("; ")));
+    entry->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
+    entry->setField(QLatin1String("audio-track"), tracks.join(FieldFormat::delimiterString()));
 
     entry->setField(QLatin1String("subtitle"), splitJoin(rx, values[19]));
 
@@ -277,7 +278,7 @@ void GCstarImporter::readGCstar(const QString& text_) {
 
 inline
 QString GCstarImporter::splitJoin(const QRegExp& rx, const QString& s) {
-  return s.split(rx, QString::SkipEmptyParts).join(QLatin1String("; "));
+  return s.split(rx, QString::SkipEmptyParts).join(FieldFormat::delimiterString());
 }
 
 void GCstarImporter::slotCancel() {

@@ -27,6 +27,7 @@
 #include "xslthandler.h"
 #include "xmphandler.h"
 #include "../collections/bibtexcollection.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
@@ -153,7 +154,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       if(entry->field(QLatin1String("author")).isEmpty()) {
         QRegExp rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
         QStringList authors = doc->info(QLatin1String("Author")).simplified().split(rx);
-        entry->setField(QLatin1String("author"), authors.join(QLatin1String("; ")));
+        entry->setField(QLatin1String("author"), authors.join(FieldFormat::delimiterString()));
       }
       s = doc->info(QLatin1String("Keywords")).simplified();
       if(!s.isEmpty()) {

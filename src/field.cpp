@@ -248,10 +248,9 @@ QStringList Field::typeTitles() {
   return list;
 }
 
-QStringList Field::split(const QString& string_, bool allowEmpty_) {
-  return string_.isEmpty() ? QStringList()
-                           : string_.split(FieldFormat::delimiter(), allowEmpty_ ? QString::KeepEmptyParts
-                                                                                 : QString::SkipEmptyParts);
+QStringList Field::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
+  return parsing_ == StringSplit ? string_.split(FieldFormat::delimiterString(), behavior_)
+                                 : string_.split(FieldFormat::delimiterRegExp(), behavior_);
 }
 
 void Field::addAllowed(const QString& value_) {

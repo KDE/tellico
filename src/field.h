@@ -310,7 +310,10 @@ public:
    *
    * @param string The string to be split
    */
-  static QStringList split(const QString& string, bool allowEmpty);
+  enum SplitParsing { StringSplit, RegExpSplit };
+  static QStringList splitValue(const QString& string,
+                                SplitParsing parsing = RegExpSplit,
+                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
   /**
    * reset if the field is a rating field used for syntax version 7 and earlier */
   static void convertOldRating(Data::FieldPtr field);

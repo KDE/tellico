@@ -310,11 +310,11 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
     // insert "and" in between them (e.g. author and editor)
     if(fIt->formatFlag() == Data::Field::FormatName
        && fIt->hasFlag(Data::Field::AllowMultiple)) {
-      value.replace(FieldFormat::delimiter(), QLatin1String(" and "));
+      value.replace(FieldFormat::delimiterString(), QLatin1String(" and "));
     } else if(fIt->hasFlag(Data::Field::AllowMultiple)) {
       QString bibsep = fIt->property(bibtexSep);
       if(!bibsep.isEmpty()) {
-        value.replace(FieldFormat::delimiter(), bibsep);
+        value.replace(FieldFormat::delimiterString(), bibsep);
       }
     } else if(fIt->type() == Data::Field::Para) {
       // strip HTML from bibtex export

@@ -27,6 +27,7 @@
 #include "../tellico_utils.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
@@ -377,7 +378,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
       words.pop_front();
       *it = words.join(QLatin1String(" "));
     }
-    entry->setField(QLatin1String("author"), names.join(QLatin1String("; ")));
+    entry->setField(QLatin1String("author"), names.join(FieldFormat::delimiterString()));
   }
   return entry;
 }

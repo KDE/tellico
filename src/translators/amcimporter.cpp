@@ -28,6 +28,7 @@
 //                      2005 Aurelien Mino
 
 #include "amcimporter.h"
+#include "../fieldformat.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
@@ -235,9 +236,9 @@ void AMCImporter::readEntry() {
     e->setField(QLatin1String("producer"), s);
   }
   e->setField(QLatin1String("nationality"), readString());
-  e->setField(QLatin1String("genre"), readString().replace(QLatin1String(", "), QLatin1String("; ")));
+  e->setField(QLatin1String("genre"), readString().replace(QLatin1String(", "), FieldFormat::delimiterString()));
 
-  e->setField(QLatin1String("cast"), parseCast(readString()).join(QLatin1String("; ")));
+  e->setField(QLatin1String("cast"), parseCast(readString()).join(FieldFormat::delimiterString()));
 
   readString(); // url
   e->setField(QLatin1String("plot"), readString());

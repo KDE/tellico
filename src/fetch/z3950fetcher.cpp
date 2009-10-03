@@ -203,7 +203,7 @@ void Z3950Fetcher::search() {
         m_pqn.clear();
         QString s = request().value;
         s.remove(QLatin1Char('-'));
-        QStringList isbnList = s.split(QLatin1String("; "));
+        QStringList isbnList = Data::Field::splitValue(s);
         // also search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
           if((*it).startsWith(QLatin1String("978"))) {
@@ -230,7 +230,7 @@ void Z3950Fetcher::search() {
         m_pqn.clear();
         QString s = request().value;
         s.remove(QLatin1Char('-'));
-        QStringList lccnList = s.split(QLatin1String("; "));
+        QStringList lccnList = Data::Field::splitValue(s);
         while(!lccnList.isEmpty()) {
           m_pqn += QLatin1String(" @or @attr 1=9 ") + lccnList.front();
           if(lccnList.count() > 1) {

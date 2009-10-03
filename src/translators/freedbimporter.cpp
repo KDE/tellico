@@ -33,11 +33,12 @@
 #include "../collections/musiccollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../tellico_utils.h"
-#include "../tellico_debug.h"
 #include "../gui/guiproxy.h"
 #include "../progressmanager.h"
 #include "../gui/cursorsaver.h"
+#include "../tellico_debug.h"
 
 #include <config.h>
 
@@ -280,7 +281,7 @@ void FreeDBImporter::readCDROM() {
     }
     trackList << s;
   }
-  entry->setField(QLatin1String("track"), trackList.join(QLatin1String("; ")));
+  entry->setField(QLatin1String("track"), trackList.join(FieldFormat::delimiterString()));
 
   m_coll->addEntries(entry);
   readCDText(drive);
@@ -389,7 +390,7 @@ void FreeDBImporter::readCache() {
     for(int i = 0; i < info.numberOfTracks(); ++i) {
       trackList << info.track(i).get(KCDDB::Title).toString();
     }
-    entry->setField(track, trackList.join(QLatin1String("; ")));
+    entry->setField(track, trackList.join(FieldFormat::delimiterString()));
 
 #if 0
     // add CDDB info
@@ -465,7 +466,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
       artist = i18n("Various");
     }
   }
-  SETFIELD("track", tracks.join(QLatin1String("; ")));
+  SETFIELD("track", tracks.join(FieldFormat::delimiterString()));
 
   // something special for compilations and such
   SETFIELD("artist", artist);

@@ -36,9 +36,17 @@ public:
   /**
    * Returns the delimiter used to split field values
    *
-   * @return The delimeter regexp
+   * @return The delimiter string
    */
-  static const QRegExp& delimiter();
+  static QString delimiterString();
+  /**
+   * Returns the delimiter used to split field values
+   *
+   * @return The delimiter regexp
+   */
+  static QRegExp delimiterRegExp();
+
+  static QString fixupValue(const QString& value);
 
   /**
    * A convenience function to format a string as a title.

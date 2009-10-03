@@ -26,6 +26,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../field.h"
+#include "../fieldformat.h"
 #include "../tellico_debug.h"
 
 #include <QTextStream>
@@ -127,7 +128,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
 
     tmp = e->field(field);
     if(!tmp.isEmpty()) {
-      tmp += QLatin1String("; ");
+      tmp += FieldFormat::delimiterString();
     }
     e->setField(field, tmp + val);
   }
