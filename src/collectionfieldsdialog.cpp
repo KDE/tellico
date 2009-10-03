@@ -994,7 +994,7 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
       newTypes += fieldMap[Data::Field::Rating];
       break;
 
-    case Data::Field::Table: // not really a good idea since the "::" will be exposed, but allow it
+    case Data::Field::Table: // not really a good idea since the row delimiter will be exposed, but allow it
     case Data::Field::Table2:
       newTypes += fieldMap[Data::Field::Line];
       newTypes += fieldMap[Data::Field::Number];

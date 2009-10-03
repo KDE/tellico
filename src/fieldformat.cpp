@@ -48,14 +48,34 @@ QString FieldFormat::fixupValue(const QString& value_) {
   return value;
 }
 
+QString FieldFormat::columnDelimiterString() {
+  return QLatin1String("::");
+}
+
+QString FieldFormat::rowDelimiterString() {
+  return QChar(0x2028);
+}
+
+QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
+  return parsing_ == StringSplit ? string_.split(delimiterString(), behavior_)
+                                 : string_.split(delimiterRegExp(), behavior_);
+}
+
+QStringList FieldFormat::splitRow(const QString& string_, QString::SplitBehavior behavior_) {
+  return string_.split(columnDelimiterString(), behavior_);
+}
+
+QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavior behavior_) {
+  return string_.split(rowDelimiterString(), behavior_);
+}
+
 QString FieldFormat::title(const QString& title_) {
   QString newTitle = title_;
-  // special case for multi-column tables, assume user never has '::' in a value
-  const QString colonColon = QLatin1String("::");
+  // special case for multi-column tables, assume user never has column delimiter in a value
   QString tail;
-  if(newTitle.indexOf(colonColon) > -1) {
-    tail = colonColon + newTitle.section(colonColon, 1);
-    newTitle = newTitle.section(colonColon, 0, 0);
+  if(newTitle.indexOf(columnDelimiterString()) > -1) {
+    tail = columnDelimiterString() + newTitle.section(columnDelimiterString(), 1);
+    newTitle = newTitle.section(columnDelimiterString(), 0, 0);
   }
 
   if(Config::autoFormat()) {
@@ -91,14 +111,13 @@ QString FieldFormat::title(const QString& title_) {
 
 QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
   static const QRegExp spaceComma(QLatin1String("[\\s,]"));
-  static const QString colonColon = QLatin1String("::");
   // the ending look-ahead is so that a space is not added at the end
   static const QRegExp periodSpace(QLatin1String("\\.\\s*(?=.)"));
 
   QStringList entries;
   if(multiple_) {
     // split by semi-colon, optionally preceded or followed by white spacee
-    entries = name_.split(delimiterRx, QString::SkipEmptyParts);
+    entries = name_.split(delimiterRegExp(), QString::SkipEmptyParts);
   } else {
     entries << name_;
   }
@@ -111,9 +130,9 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
     QString name = *it;
     // special case for 2-column tables, assume user never has '::' in a value
     QString tail;
-    if(name.indexOf(colonColon) > -1) {
-      tail = colonColon + name.section(colonColon, 1);
-      name = name.section(colonColon, 0, 0);
+    if(name.indexOf(columnDelimiterString()) > -1) {
+      tail = columnDelimiterString() + name.section(columnDelimiterString(), 1);
+      name = name.section(columnDelimiterString(), 0, 0);
     }
     name.replace(periodSpace, QLatin1String(". "));
     if(Config::autoCapitalization()) {

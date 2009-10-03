@@ -248,11 +248,6 @@ QStringList Field::typeTitles() {
   return list;
 }
 
-QStringList Field::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
-  return parsing_ == StringSplit ? string_.split(FieldFormat::delimiterString(), behavior_)
-                                 : string_.split(FieldFormat::delimiterRegExp(), behavior_);
-}
-
 void Field::addAllowed(const QString& value_) {
   if(m_type != Choice) {
     return;

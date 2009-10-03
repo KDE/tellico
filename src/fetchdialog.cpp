@@ -425,7 +425,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
   if(m_collType & (Data::Collection::Book | Data::Collection::Bibtex) &&
      m_multipleISBN->isChecked() &&
      (key == Fetch::ISBN || key == Fetch::UPC)) {
-    QStringList searchValues = Data::Field::splitValue(m_oldSearch.simplified());
+    QStringList searchValues = FieldFormat::splitValue(m_oldSearch.simplified());
     QStringList resultValues;
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
       resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;

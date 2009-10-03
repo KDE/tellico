@@ -567,7 +567,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   // this is not an else branch, the data may be in the textBuffer
   if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {
     // yes, this assumes the artist has already been set
-    fieldValue += QLatin1String("::");
+    fieldValue += FieldFormat::columnDelimiterString();
     fieldValue += entry->field(QLatin1String("artist"));
   }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
@@ -629,16 +629,16 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
      d->coll->type() == Data::Collection::Album &&
      d->currentField->name() == QLatin1String("track") &&
      !d->textBuffer.isEmpty() &&
-     d->textBuffer.contains(QLatin1String("::")) == 0) {
+     d->textBuffer.contains(FieldFormat::columnDelimiterString()) == 0) {
     QRegExp rx(QLatin1String("\\d+:\\d\\d"));
     if(rx.exactMatch(d->text)) {
-      d->text += QLatin1String("::");
+      d->text += FieldFormat::columnDelimiterString();
       d->text += d->entries.back()->field(QLatin1String("artist"));
     }
   }
 
   if(!d->textBuffer.isEmpty()) {
-    d->textBuffer += QLatin1String("::");
+    d->textBuffer += FieldFormat::columnDelimiterString();
   }
   d->textBuffer += d->text;
   return true;

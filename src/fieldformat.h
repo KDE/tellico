@@ -48,6 +48,23 @@ public:
 
   static QString fixupValue(const QString& value);
 
+  static QString columnDelimiterString();
+  static QString rowDelimiterString();
+
+  /**
+   * Splits a string into multiple values;
+   *
+   * @param string The string to be split
+   */
+  enum SplitParsing { StringSplit, RegExpSplit };
+  static QStringList splitValue(const QString& string,
+                                SplitParsing parsing = RegExpSplit,
+                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
+  static QStringList splitRow(const QString& string,
+                              QString::SplitBehavior behavior = QString::KeepEmptyParts);
+  static QStringList splitTable(const QString& string,
+                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
+
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed

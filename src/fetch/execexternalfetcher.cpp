@@ -26,6 +26,7 @@
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../fieldformat.h"
 #include "../derivedvalue.h"
 #include "../importdialog.h"
 #include "../translators/tellicoimporter.h"
@@ -134,7 +135,8 @@ void ExecExternalFetcher::search() {
   }
 
   if(request().key == ExecUpdate) {
-    QStringList args = request().value.split(QLatin1String("::"));
+    // because the rowDelimiterString() is used below
+    QStringList args = FieldFormat::splitTable(request().value);
     startSearch(args);
     return;
   }
@@ -276,7 +278,7 @@ Tellico::Fetch::FetchRequest ExecExternalFetcher::updateRequest(Data::EntryPtr e
     Data::DerivedValue dv(*it);
     *it = dv.value(entry_, false);
   }
-  return FetchRequest(ExecUpdate, args.join(QLatin1String("::")));
+  return FetchRequest(ExecUpdate, args.join(FieldFormat::rowDelimiterString()));
 }
 
 Tellico::Fetch::ConfigWidget* ExecExternalFetcher::configWidget(QWidget* parent_) const {

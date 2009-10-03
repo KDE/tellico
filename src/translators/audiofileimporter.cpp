@@ -221,7 +221,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(mpegFile && mpegFile->ID3v2Tag() && !mpegFile->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) {
       albumArtist = TStringToQString(mpegFile->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
       if(!albumArtist.isEmpty()) {
-        albumKey += QLatin1String("::") + albumArtist.toLower();
+        albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
       }
     }
 
@@ -282,17 +282,17 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       }
       if(trackNum > 0) {
         QString t = TStringToQString(tag->title()).trimmed();
-        t += QLatin1String("::") + a;
+        t += FieldFormat::columnDelimiterString() + a;
         const int len = f.audioProperties()->length();
         if(len > 0) {
-          t += QLatin1String("::") + Tellico::minutes(len);
+          t += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
         }
         QString realTrack = disc > 1 ? track + QString::number(disc) : track;
         entry->setField(realTrack, insertValue(entry->field(realTrack), t, trackNum));
         if(addFile) {
           QString fileValue = *it;
           if(addBitrate) {
-            fileValue += QLatin1String("::") + QString::number(f.audioProperties()->bitrate());
+            fileValue += FieldFormat::columnDelimiterString() + QString::number(f.audioProperties()->bitrate());
           }
           entry->setField(file, insertValue(entry->field(file), fileValue, trackNum));
         }
@@ -417,7 +417,7 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
 
 // pos_ is NOT zero-indexed!
 QString AudioFileImporter::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = Data::Field::splitValue(str_);
+  QStringList list = FieldFormat::splitValue(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list.append(QString());
   }

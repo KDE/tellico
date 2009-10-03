@@ -26,6 +26,7 @@
 #include "entrygroup.h"
 #include "collection.h"
 #include "field.h"
+#include "fieldformat.h"
 #include "derivedvalue.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
@@ -167,7 +168,7 @@ QStringList Entry::fields(const QString& field_, bool formatted_) const {
   if(s.isEmpty()) {
     return QStringList();
   }
-  return Field::splitValue(s);
+  return FieldFormat::splitValue(s);
 }
 
 bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
@@ -245,7 +246,7 @@ bool Entry::removeFromGroup(EntryGroup* group_) {
   // if the removal isn't successful, just return
   bool success = m_groups.removeAll(group_);
   success = success && group_->removeAll(EntryPtr(this));
-//  myDebug() << "removing from group - " << group_->fieldName() << "::" << group_->groupName();
+//  myDebug() << "removing from group - " << group_->fieldName() << "--" << group_->groupName();
   if(success) {
 //    m_coll->groupModified(group_);
   } else {
@@ -274,11 +275,11 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(groups.isEmpty()) {
     return QStringList(QString());
   } else if(f->type() == Field::Table) {
-    // quick hack for tables, how often will a user have "::" in their value?
+    // quick hack for tables, how often will a user have column delimiter in their value?
     // only use first column for group
     QStringList newGroupNames;
     foreach(const QString& group, groups) {
-      QString newGroupName = group.section(QLatin1String("::"),  0,  0);
+      QString newGroupName = FieldFormat::splitRow(group).at(0);
       if(!newGroupName.isEmpty()) {
         newGroupNames.append(newGroupName);
       }

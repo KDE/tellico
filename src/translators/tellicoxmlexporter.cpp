@@ -32,6 +32,7 @@
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../document.h"
+#include "../fieldformat.h"
 #include "../translators/bibtexhandler.h" // needed for cleaning text
 #include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
@@ -272,7 +273,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(parElem);
 
       // the space after the semi-colon is enforced when the field is set for the entry
-      QStringList fields = Data::Field::splitValue(fieldValue);
+      QStringList fields = FieldFormat::splitValue(fieldValue);
       for(QStringList::ConstIterator it = fields.constBegin(); it != fields.constEnd(); ++it) {
         // element for field value, child of either entryElem or ParentElem
         QDomElement fieldElem = dom_.createElement(fieldName);
@@ -286,10 +287,11 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           }
         }
         if(ncols > 1) {
+          QStringList rowValues = FieldFormat::splitRow(*it);
           for(int col = 0; col < ncols; ++col) {
             QDomElement elem;
             elem = dom_.createElement(QLatin1String("column"));
-            elem.appendChild(dom_.createTextNode((*it).section(QLatin1String("::"), col, col)));
+            elem.appendChild(dom_.createTextNode(col < rowValues.count() ? rowValues.at(col) : QString()));
             fieldElem.appendChild(elem);
           }
         } else {

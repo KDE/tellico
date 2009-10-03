@@ -91,9 +91,9 @@ QString TableFieldWidget::text() const {
       QTableWidgetItem* item = m_table->item(row, col);
       str = item ? item->text().simplified() : QString();
       if(str.isEmpty()) {
-        cstack += QLatin1String("::");
+        cstack += FieldFormat::columnDelimiterString();
       } else {
-        rowStr += cstack + str + QLatin1String("::");
+        rowStr += cstack + str + FieldFormat::columnDelimiterString();
         cstack.clear();
       }
     }
@@ -112,13 +112,14 @@ QString TableFieldWidget::text() const {
 }
 
 void TableFieldWidget::setTextImpl(const QString& text_) {
-  const QStringList list = Data::Field::splitValue(text_);
+  const QStringList list = FieldFormat::splitValue(text_);
   if(list.count() != m_table->rowCount()) {
     m_table->setRowCount(qMax(list.count(), MIN_TABLE_ROWS));
   }
   for(int row = 0; row < list.count(); ++row) {
+    QStringList columnValues = FieldFormat::splitRow(list.at(row));
     for(int col = 0; col < m_table->columnCount(); ++col) {
-      QString value = list.at(row).section(QLatin1String("::"), col, col);
+      QString value = col < columnValues.count() ? columnValues.at(col) : QString();
       QTableWidgetItem* item = new QTableWidgetItem(value);
       m_table->setItem(row, col, item);
     }

@@ -87,7 +87,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
 
   m_majVersion = versionRx.cap(1).toInt();
   m_minVersion = versionRx.cap(2).toInt();
-//  myDebug() << m_majVersion << "::" << m_minVersion;
+//  myDebug() << m_majVersion << "-" << m_minVersion;
 
   readString(); // name
   readString(); // email
@@ -278,7 +278,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
         if(role.startsWith(QLatin1String("as "))) {
           role = role.mid(3);
         }
-        all += QLatin1String("::") + role;
+        all += FieldFormat::columnDelimiterString() + role;
       }
       cast << all;
       person.clear();
@@ -307,7 +307,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
       if(role.startsWith(QLatin1String("as "))) {
         role = role.mid(3);
       }
-      all += QLatin1String("::") + role;
+      all += FieldFormat::columnDelimiterString() + role;
     }
     cast << all;
   }

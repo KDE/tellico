@@ -932,7 +932,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
       const int pos2 = tdRx.indexIn(castText, pos);
       if(pos2 > -1 && tdRx.indexIn(castText, pos2+1) > -1) {
         cast += s_anchorRx->cap(2).trimmed()
-              + QLatin1String("::") + tdRx.cap(1).simplified().remove(*s_tagRx);
+              + FieldFormat::columnDelimiterString() + tdRx.cap(1).simplified().remove(*s_tagRx);
       } else {
         cast += s_anchorRx->cap(2).trimmed();
       }

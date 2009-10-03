@@ -258,7 +258,7 @@ void AmazonFetcher::doSearch() {
         QString cleanValue = value;
         cleanValue.remove(QLatin1Char('-'));
         // ISBN only get digits or 'X'
-        QStringList isbns = Data::Field::splitValue(cleanValue);
+        QStringList isbns = FieldFormat::splitValue(cleanValue);
         // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
         // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
         // isbn13 search

@@ -305,17 +305,10 @@ public:
    * Returns a list of the titles of the field types.
    */
   static QStringList typeTitles();
-  /**
-   * Splits a string into multiple values;
-   *
-   * @param string The string to be split
-   */
-  enum SplitParsing { StringSplit, RegExpSplit };
-  static QStringList splitValue(const QString& string,
-                                SplitParsing parsing = RegExpSplit,
-                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
-  /**
-   * reset if the field is a rating field used for syntax version 7 and earlier */
+
+ /**
+  * reset if the field is a rating field used for syntax version 7 and earlier
+  */
   static void convertOldRating(Data::FieldPtr field);
 
 private:

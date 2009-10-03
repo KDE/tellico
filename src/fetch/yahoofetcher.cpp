@@ -328,9 +328,9 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
     QString l = e.namedItem(QLatin1String("Length")).toElement().text();
 
     int len = Tellico::toUInt(l, &ok);
-    QString value = t + QLatin1String("::") + a;
+    QString value = t + FieldFormat::columnDelimiterString() + a;
     if(ok && len > 0) {
-      value += QLatin1String("::") + Tellico::minutes(len);
+      value += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
     }
     entry_->setField(track, insertValue(entry_->field(track), value, trackNum));
   }
@@ -338,14 +338,14 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
 // not zero-based
 QString YahooFetcher::insertValue(const QString& str_, const QString& value_, int pos_) {
-  QStringList list = Data::Field::splitValue(str_);
+  QStringList list = FieldFormat::splitValue(str_);
   for(int i = list.count(); i < pos_; ++i) {
     list += QString();
   }
   bool write = true;
   if(!list[pos_-1].isNull()) {
     // for some reason, some songs are repeated from yahoo, with 0 length, don't overwrite that
-    if(value_.count(QLatin1String("::")) < 2) { // means no length value
+    if(value_.count(FieldFormat::columnDelimiterString()) < 2) { // means no length value
       write = false;
     }
   }

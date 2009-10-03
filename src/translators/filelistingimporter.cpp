@@ -146,7 +146,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
         if(item.isValid()) {
           QString s = item.value().toString();
           if(!s.isEmpty()) {
-            strings << item.name() + QLatin1String("::") + s;
+            strings << item.name() + FieldFormat::columnDelimiterString() + s;
           }
         }
       }

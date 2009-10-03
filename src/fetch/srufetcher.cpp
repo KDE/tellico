@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "srufetcher.h"
-#include "../field.h"
+#include "../fieldformat.h"
 #include "../collection.h"
 #include "../translators/tellico_xml.h"
 #include "../translators/xslthandler.h"
@@ -157,7 +157,7 @@ void SRUFetcher::search() {
       {
         QString s = request().value;
         s.remove(QLatin1Char('-'));
-        QStringList isbnList = Data::Field::splitValue(s);
+        QStringList isbnList = FieldFormat::splitValue(s);
         // also search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
           if((*it).startsWith(QLatin1String("978"))) {
@@ -181,7 +181,7 @@ void SRUFetcher::search() {
     case LCCN:
       {
         QString s = request().value;
-        QStringList lccnList = Data::Field::splitValue(s);
+        QStringList lccnList = FieldFormat::splitValue(s);
         QString q;
         for(int i = 0; i < lccnList.count(); ++i) {
           q += QLatin1String("bath.lccn=") + lccnList.at(i);

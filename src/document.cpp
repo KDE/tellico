@@ -663,7 +663,6 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
       // if field F is a table-type field (album tracks, files, etc.), merge rows (keep their position)
       // if e1's F val in [row i, column j] empty, replace with e2's val at same position
       // if different (non-empty) vals at same position, CONFLICT!
-      const QString sep = QLatin1String("::");
       QStringList vals1 = e1->fields(field, false);
       QStringList vals2 = e2->fields(field, false);
       while(vals1.count() < vals2.count()) {
@@ -677,8 +676,8 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
           vals1[i] = vals2[i];
           ret = true;
         } else {
-          QStringList parts1 = vals1[i].split(sep);
-          QStringList parts2 = vals2[i].split(sep);
+          QStringList parts1 = FieldFormat::splitRow(vals1[i]);
+          QStringList parts2 = FieldFormat::splitRow(vals2[i]);
           bool changedPart = false;
           while(parts1.count() < parts2.count()) {
             parts1 += QString();
@@ -702,7 +701,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
             }
           }
           if(changedPart) {
-            vals1[i] = parts1.join(sep);
+            vals1[i] = parts1.join(FieldFormat::columnDelimiterString());
             ret = true;
           }
         }

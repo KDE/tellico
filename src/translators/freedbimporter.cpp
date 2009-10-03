@@ -275,9 +275,9 @@ void FreeDBImporter::readCDROM() {
 
   QStringList trackList;
   for(int i = 0; i < info.numberOfTracks(); ++i) {
-    QString s = info.track(i).get(KCDDB::Title).toString() + QLatin1String("::") + info.get(KCDDB::Artist).toString();
+    QString s = info.track(i).get(KCDDB::Title).toString() + FieldFormat::columnDelimiterString() + info.get(KCDDB::Artist).toString();
     if(i < lengths.count()) {
-      s += QLatin1String("::") + Tellico::minutes(lengths[i]);
+      s += FieldFormat::columnDelimiterString() + Tellico::minutes(lengths[i]);
     }
     trackList << s;
   }
@@ -448,7 +448,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   myDebug() << "CDText - title: " << cdtext.title;
   myDebug() << "CDText - title: " << cdtext.artist;
   for(int i = 0; i < cdtext.trackTitles.size(); ++i) {
-    myDebug() << i << "::" << cdtext.trackTitles[i] << " - " << cdtext.trackArtists[i];
+    myDebug() << i << "--" << cdtext.trackTitles[i] << " - " << cdtext.trackArtists[i];
   }
 */
 
@@ -458,7 +458,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   SETFIELD("comments", cdtext.message);
   QStringList tracks;
   for(int i = 0; i < cdtext.trackTitles.size(); ++i) {
-    tracks << cdtext.trackTitles[i] + QLatin1String("::") + cdtext.trackArtists[i];
+    tracks << cdtext.trackTitles[i] + FieldFormat::columnDelimiterString() + cdtext.trackArtists[i];
     if(artist.isEmpty()) {
       artist = cdtext.trackArtists[i];
     }

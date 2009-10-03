@@ -37,6 +37,7 @@
 #include "z3950fetcher.h"
 #include "z3950connection.h"
 #include "../collection.h"
+#include "../fieldformat.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/grs1importer.h"
@@ -203,7 +204,7 @@ void Z3950Fetcher::search() {
         m_pqn.clear();
         QString s = request().value;
         s.remove(QLatin1Char('-'));
-        QStringList isbnList = Data::Field::splitValue(s);
+        QStringList isbnList = FieldFormat::splitValue(s);
         // also search for isbn10 values
         for(QStringList::Iterator it = isbnList.begin(); it != isbnList.end(); ++it) {
           if((*it).startsWith(QLatin1String("978"))) {
@@ -230,7 +231,7 @@ void Z3950Fetcher::search() {
         m_pqn.clear();
         QString s = request().value;
         s.remove(QLatin1Char('-'));
-        QStringList lccnList = Data::Field::splitValue(s);
+        QStringList lccnList = FieldFormat::splitValue(s);
         while(!lccnList.isEmpty()) {
           m_pqn += QLatin1String(" @or @attr 1=9 ") + lccnList.front();
           if(lccnList.count() > 1) {

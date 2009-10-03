@@ -116,3 +116,11 @@ void FormatTest::testName_data() {
   QTest::newRow("test5") << "swift, jr., tom" << "Swift, Jr., Tom" << true << false;
   QTest::newRow("test6") << "tom de swift, jr." << "de Swift, Jr., Tom" << true << true;
 }
+
+void FormatTest::testSplit() {
+  QStringList list = QStringList() << "one" << "two" << "three";
+  QCOMPARE(Tellico::FieldFormat::splitValue(list.join(Tellico::FieldFormat::delimiterString())), list);
+  QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
+  QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);
+}
+
