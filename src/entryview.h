@@ -76,6 +76,7 @@ public:
    * @param file The XSLT file name
    */
   void setXSLTFile(const QString& file);
+  void addXSLTStringParam(const QByteArray& name, const QByteArray& value);
   void setXSLTOptions(const StyleOptions& options);
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
 

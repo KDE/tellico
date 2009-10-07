@@ -240,14 +240,6 @@ Tellico::Data::EntryPtr WineComFetcher::fetchEntry(uint uid_) {
     return Data::EntryPtr();
   }
 
-  const QString label = entry->field(QLatin1String("label"));
-  if(!label.isEmpty() && !ImageFactory::validImage(label)) {
-    const QString id = ImageFactory::addImage(label, true);
-    if(!id.isEmpty()) {
-      entry->setField(QLatin1String("label"), id);
-    }
-  }
-
   return entry;
 }
 

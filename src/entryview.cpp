@@ -340,7 +340,17 @@ void EntryView::slotReloadEntry() {
   m_tempFile = 0;
 }
 
+void EntryView::addXSLTStringParam(const QByteArray& name_, const QByteArray& value_) {
+  if(!m_handler) {
+    return;
+  }
+  m_handler->addStringParam(name_, value_);
+}
+
 void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
+  if(!m_handler) {
+    return;
+  }
   m_handler->addStringParam("font",     opt_.fontFamily.toLatin1());
   m_handler->addStringParam("fontsize", QByteArray().setNum(opt_.fontSize));
   m_handler->addStringParam("bgcolor",  opt_.baseColor.name().toLatin1());

@@ -40,6 +40,10 @@
 <xsl:param name="bgcolor"/> <!-- background color -->
 
 <xsl:param name="collection-file"/> <!-- might have a link to parent collection -->
+<xsl:param name="skip-fields"/> <!-- comma-separated listed of field names to skip -->
+<!-- really a lazy man's way of field name matching, add a comma to front and back
+     and then do contain() on the field name with commas on either side -->
+<xsl:variable name="skip-list" select="concat(',', $skip-fields, ',')"/>
 
 <xsl:key name="fieldsByName" match="tc:field" use="@name"/>
 <xsl:key name="imagesById" match="tc:image" use="@id"/>
@@ -210,7 +214,7 @@
   <!-- iterate over the categories, but skip images -->
   <table>
    <tbody>
-    <xsl:for-each select="../tc:fields/tc:field[@type!=10]">
+    <xsl:for-each select="../tc:fields/tc:field[@type!=10 and not(contains($skip-list, concat(',',@name,',')))]">
      <xsl:variable name="field" select="."/>
 
      <xsl:if test="$entry//*[local-name(.) = $field/@name]">

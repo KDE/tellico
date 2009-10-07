@@ -220,6 +220,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_entryView->setUseGradientImages(false);
   // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QLatin1String("Compact.xsl"));
+  m_entryView->addXSLTStringParam("skip-fields", "id,mdate,cdate");
   m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
                                          "current collection by selecting it in the list above"));
 
