@@ -126,10 +126,11 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
 //  myLog() << url_.prettyUrl();
   Data::Image* img = FileHandler::readImageFile(url_, quiet_, refer_);
   if(!img) {
-    myLog() << "image not found: " << url_.prettyUrl();
+    myLog() << "image not found:" << url_.prettyUrl();
     return Data::Image::null;
   }
   if(img->isNull()) {
+    myLog() << "null image:" << url_.prettyUrl();
     delete img;
     return Data::Image::null;
   }
@@ -140,7 +141,6 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
   }
 
   if(hasImage(img->id())) {
-//    myDebug() << "is true!";
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;
@@ -333,7 +333,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // id is a valid absolute url
   // yeah, it's probably slow
   if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KUrl::isRelativeUrl(id_)) {
-    KUrl u = id_;
+    KUrl u(id_);
     if(u.isValid()) {
       return factory->addImageImpl(u, true, KUrl(), true);
     }
@@ -428,6 +428,10 @@ Tellico::Data::ImageInfo ImageFactory::imageInfo(const QString& id_) {
 
 void ImageFactory::cacheImageInfo(const Tellico::Data::ImageInfo& info) {
   s_imageInfoMap.insert(info.id, info);
+}
+
+bool ImageFactory::hasImageInfo(const QString& id_) {
+  return s_imageInfoMap.contains(id_);
 }
 
 bool ImageFactory::validImage(const QString& id_) {

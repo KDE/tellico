@@ -130,6 +130,7 @@ public:
   static const Data::Image& imageById(const QString& id);
   static Data::ImageInfo imageInfo(const QString& id);
   static void cacheImageInfo(const Data::ImageInfo& info);
+  static bool hasImageInfo(const QString& id);
   // basically returns !imageById().isNull()
   static bool validImage(const QString& id);
 

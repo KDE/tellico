@@ -176,6 +176,9 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   // maybe this is too costly, especially since the capability wasn't advertised?
   const bool hasMDate = d->coll->hasField(QLatin1String("mdate"));
 
+  const int maxImageWarnings = 3;
+  int imageWarnings = 0;
+
   Data::FieldList fields = d->coll->imageFields();
   foreach(Data::EntryPtr entry, d->entries) {
     foreach(Data::FieldPtr field, fields) {
@@ -184,18 +187,23 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
         continue;
       }
       // image info should have already been loaded
-      const Data::ImageInfo& info = ImageFactory::imageInfo(value);
-      // possible that value needs to be cleaned first in which case info is null
-      if(info.isNull() || !info.linkOnly) {
-        // for local files only, allow paths here
+      // if not, then there was no <image> in the XML
+      // so it's a url, but maybe link only
+      if(!ImageFactory::hasImageInfo(value)) {
         KUrl u(value);
-        if(u.isValid() && u.isLocalFile()) {
-          QString result = ImageFactory::addImage(u, false /* quiet */);
-          if(!result.isEmpty()) {
+        // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
+        if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
+          QString result = ImageFactory::addImage(u, imageWarnings >= maxImageWarnings /* quiet */);
+          if(result.isEmpty()) {
+            // clear value for the field in this case
+            value.clear();
+            ++imageWarnings;
+          } else {
             value = result;
           }
+        } else {
+          value = Data::Image::idClean(value);
         }
-        value = Data::Image::idClean(value);
         if(hasMDate) {
           // since the modified date gets reset, keep a copy
           const QString mdate = entry->field(QLatin1String("mdate"));
@@ -677,8 +685,8 @@ bool ImageHandler::start(const QString&, const QString&, const QString&, const Q
 }
 
 bool ImageHandler::end(const QString&, const QString&, const QString&) {
-  bool readInfo = true;
-  if(d->loadImages) {
+  bool needToAddInfo = true;
+  if(d->loadImages && !d->text.isEmpty()) {
     QByteArray ba;
     KCodecs::base64Decode(QByteArray(d->text.toLatin1()), ba);
     if(!ba.isEmpty()) {
@@ -687,10 +695,10 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
         myDebug() << "null image for" << m_imageId;
       }
       d->hasImages = true;
-      readInfo = false;
+      needToAddInfo = false;
     }
   }
-  if(readInfo) {
+  if(needToAddInfo) {
     // a width or height of 0 is ok here
     Data::ImageInfo info(m_imageId, m_format.toLatin1(), m_width, m_height, m_link);
     ImageFactory::cacheImageInfo(info);

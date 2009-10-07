@@ -84,36 +84,11 @@
    </xsl:for-each>
   </keywords>
 
-<!--
   <label>
    <xsl:value-of select="wine:Labels/wine:Label[1]/wine:Url"/>
   </label>
--->
 
  </entry>
-</xsl:template>
-
-<xsl:template name="split-string">
- <xsl:param name="string"/>
- <xsl:param name="pattern"/>
-  <xsl:choose>
-   <xsl:when test="contains($string, $pattern)">
-    <xsl:if test="not(starts-with($string, $pattern))">
-     <token>
-      <xsl:value-of select="substring-before($string, $pattern)"/>
-     </token>
-    </xsl:if>
-    <xsl:call-template name="split-string">
-     <xsl:with-param name="string" select="substring-after($string, $pattern)"/>
-     <xsl:with-param name="pattern" select="$pattern"/>
-    </xsl:call-template>
-   </xsl:when>
-   <xsl:otherwise>
-    <token>
-     <xsl:value-of select="$string"/>
-    </token>
-   </xsl:otherwise>
-  </xsl:choose>
 </xsl:template>
 
 <xsl:template name="token-union">

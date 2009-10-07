@@ -166,16 +166,18 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, 
 
   KTemporaryFile tempFile;
   tempFile.open();
+  tempFile.setAutoRemove(true);
   KUrl tempURL;
   tempURL.setPath(tempFile.fileName());
-  tempFile.setAutoRemove(true);
+  myDebug() << "Temp file:" << tempURL;
 
   KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
   job->addMetaData(QLatin1String("referrer"), referrer_.url());
 
   if(!KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget())) {
     if(!quiet_) {
-      GUI::Proxy::sorry(i18n(errorLoad, url_.fileName()));
+      QString str = i18n("Tellico is unable to load the image - %1.", url_.prettyUrl());
+      GUI::Proxy::sorry(str);
     }
     return 0;
   }
