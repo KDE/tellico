@@ -34,6 +34,7 @@
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../fieldformat.h"
 
 QTEST_KDEMAIN( ImdbFetcherTest, GUI )
 
@@ -68,7 +69,9 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
-  QCOMPARE(entry->fields("cast", false).at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QString cast = entry->field("cast", false);
+  QStringList castList = Tellico::FieldFormat::splitTable(cast);
+  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
 }
 
 void ImdbFetcherTest::slotResult(KJob* job_) {

@@ -33,6 +33,7 @@
 #include "../collections/collectioninitializer.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../fieldformat.h"
 
 #include <kstandarddirs.h>
 
@@ -118,9 +119,11 @@ void GCstarTest::testVideo() {
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->fields("genre", false).count(), 4);
   QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Drama"));
-  QCOMPARE(entry->fields("cast", false).count(), 10);
-  QCOMPARE(entry->fields("cast", false).at(0), QLatin1String("Tom Burlinson::Jim Craig"));
-  QCOMPARE(entry->fields("cast", false).at(2), QLatin1String("Kirk Douglas::Harrison / Spur"));
+  QString cast = entry->field("cast", false);
+  QStringList castList = Tellico::FieldFormat::splitTable(cast);
+  QCOMPARE(castList.count(), 10);
+  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QCOMPARE(castList.at(2), QLatin1String("Kirk Douglas::Harrison / Spur"));
   QCOMPARE(entry->fields("keyword", false).count(), 2);
   QCOMPARE(entry->fields("keyword", false).at(0), QLatin1String("tag2"));
   QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag1"));
@@ -170,8 +173,10 @@ void GCstarTest::testMusic() {
   QCOMPARE(entry->field("medium"), QLatin1String("Compact Disc"));
   QCOMPARE(entry->fields("genre", false).count(), 2);
   QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Electronic"));
-  QCOMPARE(entry->fields("track", false).count(), 11);
-  QCOMPARE(entry->fields("track", false).at(1), QLatin1String("Praise You In This Storm::Casting Crowns::4:59"));
+  QString track = entry->field("track", false);
+  QStringList trackList = Tellico::FieldFormat::splitTable(track);
+  QCOMPARE(trackList.count(), 11);
+  QCOMPARE(trackList.at(1), QLatin1String("Praise You In This Storm::Casting Crowns::4:59"));
   QCOMPARE(entry->fields("producer", false).count(), 1);
   QCOMPARE(entry->fields("producer", false).at(0), QLatin1String("Mark A. Miller"));
   QCOMPARE(entry->fields("composer", false).count(), 4);
