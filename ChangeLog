@@ -1,3 +1,7 @@
+2009-10-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon search to no longer store key in the KWallet.
+
 2009-10-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug to allow multiple values in table columns.

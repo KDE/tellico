@@ -137,6 +137,10 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!s.isEmpty()) {
     m_assoc = s;
   }
+  s = config_.readEntry("SecretKey");
+  if(!s.isEmpty()) {
+    m_amazonKey = s.toUtf8();
+  }
   int imageSize = config_.readEntry("Image Size", -1);
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
@@ -935,10 +939,10 @@ void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString s = m_accessEdit->text().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("AccessKey", s);
-    QByteArray key = m_secretKeyEdit->text().trimmed().toUtf8();
-    if(!key.isEmpty()) {
-      Kernel::self()->writeWalletEntry(s, key);
-    }
+  }
+  s = m_secretKeyEdit->text().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("SecretKey", s);
   }
   s = m_assocEdit->text().trimmed();
   if(!s.isEmpty()) {
