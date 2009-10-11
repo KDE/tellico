@@ -42,6 +42,9 @@ find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
+# The taglib cmake script is broken, this works around the issue
+set(TAGLIB_INCLUDES)
+
 macro_optional_find_package(Kabc)
 macro_log_feature(KABC_FOUND "kabc" "Support for reading address book" "http://pim.kde.org" FALSE "4.2.0" "")
 
