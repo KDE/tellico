@@ -4,7 +4,7 @@
 
 2009-10-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated Amazon search to no longer store key in the KWallet.
+	* Updated Amazon and Crossref search to no longer store key in the KWallet.
 
 2009-10-03  Robby Stephenson  <robby@periapsis.org>
 

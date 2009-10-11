@@ -79,8 +79,6 @@ bool CrossRefFetcher::canFetch(int type) const {
 }
 
 void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
-  // the settings have been moved to the wallet now, and are saved there in the config widget
-  // for now, try to read them, since they may still be there. It can't hurt...
   m_user = config_.readEntry("User");
   m_password = config_.readEntry("Password");
 }
@@ -337,14 +335,14 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 }
 
 void CrossRefFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  QMap<QString, QString> map;
-  map.insert(QLatin1String("username"), m_userEdit->text().trimmed());
-  map.insert(QLatin1String("password"), m_passEdit->text().trimmed());
-  Kernel::self()->writeWalletMap(QLatin1String("crossref.org"), map);
-
-  // used to store username and password in plain text
-  config_.deleteEntry("User");
-  config_.deleteEntry("Password");
+  QString s = m_userEdit->text().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("User", s);
+  }
+  s = m_passEdit->text().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("Password", s);
+  }
 
   slotSetModified(false);
 }
