@@ -28,14 +28,14 @@
 #include "../translators/tellico_xml.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../translators/dcimporter.h"
+#include "../translators/xmlimporter.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_debug.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../tellico_utils.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/isbnvalidator.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/job.h>
@@ -48,8 +48,7 @@
 
 #include <QLabel>
 #include <QGridLayout>
-
-//#define SRU_DEBUG
+#include <QFile>
 
 namespace {
   // 7090 was the old default port, but that was just because LoC used it
@@ -62,13 +61,13 @@ using Tellico::Fetch::SRUFetcher;
 using Tellico::Fetch::SRUConfigWidget;
 
 SRUFetcher::SRUFetcher(QObject* parent_)
-    : Fetcher(parent_), m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_started(false) {
+    : Fetcher(parent_), m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
                        QObject* parent_) : Fetcher(parent_),
       m_host(host_), m_port(port_), m_path(path_), m_format(QLatin1String("mods")),
-      m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_started(false) {
+      m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
   m_name = name_; // m_name is protected in super class
 }
 
@@ -77,6 +76,8 @@ SRUFetcher::~SRUFetcher() {
   m_MARCXMLHandler = 0;
   delete m_MODSHandler;
   m_MODSHandler = 0;
+  delete m_SRWHandler;
+  m_SRWHandler = 0;
 }
 
 QString SRUFetcher::defaultName() {
@@ -118,9 +119,6 @@ void SRUFetcher::search() {
 
   m_started = true;
 
-#ifdef SRU_DEBUG
-  KUrl u(QLatin1String("/home/robby/sru.xml"));
-#else
   KUrl u;
   u.setProtocol(QLatin1String("http"));
   u.setHost(m_host);
@@ -132,6 +130,10 @@ void SRUFetcher::search() {
   u.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
   if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
     u.addQueryItem(QLatin1String("recordSchema"), m_format);
+  }
+  // added for the nature.com openSearch, what's the best way to make this an option?
+  if(m_host.endsWith(QLatin1String("nature.com"))) {
+    u.addQueryItem(QLatin1String("httpAccept"), QLatin1String("application/sru+xml"));
   }
 
   const int type = collectionType();
@@ -211,8 +213,7 @@ void SRUFetcher::search() {
       stop();
       break;
   }
-#endif
-//  myDebug() << u.prettyUrl();
+  myDebug() << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -245,6 +246,17 @@ void SRUFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
+
+#if 0
+  myWarning() << "Remove debug from srufetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.xml"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
 
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
@@ -293,8 +305,11 @@ void SRUFetcher::slotComplete(KJob*) {
       msg += QLatin1Char('\n');
     }
     msg += imp.statusMessage();
-  } else if(m_format == QLatin1String("dc") || m_format == QLatin1String("none")) {
-    Import::DCImporter imp(dom);
+  } else if((m_format == QLatin1String("pam") ||
+             m_format == QLatin1String("dc") ||
+             m_format == QLatin1String("none")) &&
+            initSRWHandler()) {
+    Import::TellicoImporter imp(m_SRWHandler->applyStylesheet(result));
     coll = imp.collection();
     if(!msg.isEmpty()) {
       msg += QLatin1Char('\n');
@@ -407,6 +422,30 @@ bool SRUFetcher::initMODSHandler() {
   return true;
 }
 
+bool SRUFetcher::initSRWHandler() {
+  if(m_SRWHandler) {
+    return true;
+  }
+
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("srw2tellico.xsl"));
+  if(xsltfile.isEmpty()) {
+    myWarning() << "can not locate srw2tellico.xsl.";
+    return false;
+  }
+
+  KUrl u;
+  u.setPath(xsltfile);
+
+  m_SRWHandler = new XSLTHandler(u);
+  if(!m_SRWHandler->isValid()) {
+    myWarning() << "error in srw2tellico.xsl.";
+    delete m_SRWHandler;
+    m_SRWHandler = 0;
+    return false;
+  }
+  return true;
+}
+
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
   return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QLatin1String("z3950.loc.gov"), 7090,
                                      QLatin1String("voyager"), parent_));
@@ -468,6 +507,7 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   m_formatCombo = new GUI::ComboBox(optionsWidget());
   m_formatCombo->addItem(QLatin1String("MODS"), QLatin1String("mods"));
   m_formatCombo->addItem(QLatin1String("MARCXML"), QLatin1String("marcxml"));
+  m_formatCombo->addItem(QLatin1String("PAM"), QLatin1String("pam"));
   m_formatCombo->addItem(QLatin1String("Dublin Core"), QLatin1String("dc"));
   m_formatCombo->addItem(QLatin1String(""), QLatin1String("none"));
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));

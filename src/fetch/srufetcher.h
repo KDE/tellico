@@ -96,6 +96,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   bool initMARCXMLHandler();
   bool initMODSHandler();
+  bool initSRWHandler();
 
   QString m_host;
   uint m_port;
@@ -106,6 +107,7 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
   XSLTHandler* m_MARCXMLHandler;
   XSLTHandler* m_MODSHandler;
+  XSLTHandler* m_SRWHandler;
   bool m_started;
   QStringList m_fields;
 };

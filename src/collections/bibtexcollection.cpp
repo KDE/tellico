@@ -334,7 +334,7 @@ QString BibtexCollection::prepareText(const QString& text_) const {
 
 // same as BookCollection::sameEntry()
 int BibtexCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
-  // equal isbn's or lccn's are easy, give it a weight of 100
+  // equal identifiers are easy, give it a weight of 100
   if(EntryComparison::score(entry1_, entry2_, QLatin1String("isbn"),  this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QLatin1String("lccn"),  this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QLatin1String("doi"),   this) > 0 ||

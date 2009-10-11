@@ -1,3 +1,7 @@
+2009-10-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added PAM/PRISM translator to SRU fetcher. 
+
 2009-10-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Amazon search to no longer store key in the KWallet.
