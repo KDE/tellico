@@ -90,9 +90,9 @@ else(LIBV4L_FOUND)
     set( ENABLE_WEBCAM FALSE )
 endif(LIBV4L_FOUND)
 
-if(CMAKE_SYSTEM_NAME MATCHES Linux)
+if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
-endif(CMAKE_SYSTEM_NAME MATCHES Linux)
+endif(CMAKE_COMPILER_IS_GNUCXX)
 
 add_definitions(${QT_DEFINITIONS}
                 ${KDE4_DEFINITIONS}
