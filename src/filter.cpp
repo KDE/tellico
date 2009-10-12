@@ -36,10 +36,14 @@ FilterRule::FilterRule() : m_function(FuncEquals) {
 }
 
 FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Function func_)
- : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
+    : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
 }
 
 bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
+  Q_ASSERT(entry_);
+  if(!entry_) {
+    return false;
+  }
   switch (m_function) {
     case FuncEquals:
       return equals(entry_);
@@ -57,7 +61,7 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
       myWarning() << "invalid function!";
       break;
   }
-  return true;
+  return false;
 }
 
 bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
@@ -70,8 +74,8 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
       }
     }
   } else {
-    return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0
-           || m_pattern.compare(entry_->formattedField(m_fieldName), Qt::CaseInsensitive) == 0;
+    return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0 ||
+           m_pattern.compare(entry_->formattedField(m_fieldName), Qt::CaseInsensitive) == 0;
   }
 
   return false;
@@ -88,8 +92,8 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
       }
     }
   } else {
-    return entry_->field(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0
-           || entry_->formattedField(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
+    return entry_->field(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0 ||
+           entry_->formattedField(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
   }
 
   return false;
@@ -106,8 +110,8 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
       }
     }
   } else {
-    return rx.indexIn(entry_->field(m_fieldName)) >= 0
-           || rx.indexIn(entry_->formattedField(m_fieldName)) >= 0;
+    return rx.indexIn(entry_->field(m_fieldName)) >= 0 ||
+           rx.indexIn(entry_->formattedField(m_fieldName)) >= 0;
   }
 
   return false;
@@ -150,4 +154,10 @@ bool Filter::matches(Tellico::Data::EntryPtr entry_) const {
   }
 
   return match;
+}
+
+bool Filter::operator==(const Filter& other) const {
+  return m_op == other.m_op &&
+         m_name == other.m_name &&
+         *static_cast<const QList<FilterRule*>*>(this) == static_cast<const QList<FilterRule*>&>(other);
 }

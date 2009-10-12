@@ -41,7 +41,7 @@ EntrySortModel::~EntrySortModel() {
 }
 
 void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
-  if(m_filter != filter_) {
+  if(m_filter != filter_ || (m_filter && *m_filter != *filter_)) {
     m_filter = filter_;
     invalidateFilter();
   }
@@ -62,7 +62,9 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
     return true;
   }
   QModelIndex index = sourceModel()->index(row_, 0, parent_);
+  Q_ASSERT(index.isValid());
   Data::EntryPtr entry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+  Q_ASSERT(entry);
   return m_filter->matches(entry);
 }
 
@@ -76,24 +78,8 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
 
   for(int i = 0; i < 3; ++i) {
     FieldComparison* comp = getComparison(left);
-    Data::EntryPtr leftEntry = sourceModel()->data(left, EntryPtrRole).value<Data::EntryPtr>();
-    Data::EntryPtr rightEntry = sourceModel()->data(right, EntryPtrRole).value<Data::EntryPtr>();
-    /*
-    if (comp) {
-      QString l, r;
-      int re = 0;
-      if (leftEntry) {
-        l = leftEntry->field(sourceModel()->data(left, FieldPtrRole).value<Data::FieldPtr>());
-      }
-      if (rightEntry) {
-        r = rightEntry->field(sourceModel()->data(right, FieldPtrRole).value<Data::FieldPtr>());
-      }
-      if (leftEntry && rightEntry) {
-        re = comp->compare(leftEntry, rightEntry);
-      }
-      myDebug() << i + 1 << ":" << l << (re < 0 ? "< " : ">=") << r;
-    }
-    */
+    Data::EntryPtr leftEntry = left.model()->data(left, EntryPtrRole).value<Data::EntryPtr>();
+    Data::EntryPtr rightEntry = right.model()->data(right, EntryPtrRole).value<Data::EntryPtr>();
     if(comp && leftEntry && rightEntry) {
       int res = comp->compare(leftEntry, rightEntry);
       if(res == 0) {
@@ -128,7 +114,7 @@ Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index
     return m_comparisons.value(index_.column());
   }
   FieldComparison* comp = 0;
-  Data::FieldPtr field = sourceModel()->headerData(index_.column(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+  Data::FieldPtr field = index_.model()->headerData(index_.column(), Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
   if(field) {
     comp = FieldComparison::create(field);
     m_comparisons.insert(index_.column(), comp);

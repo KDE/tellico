@@ -87,14 +87,14 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
     return QVariant();
   }
 
-  QString value = entry->field(field);
-  if(value.isEmpty()) {
-    return QVariant();
-  }
+  const QString value = entry->field(field);
 
   switch(role_) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
+      if(value.isEmpty()) {
+        return QVariant();
+      }
       if(field->type() != Data::Field::Image &&
          field->type() != Data::Field::Bool &&
          field->type() != Data::Field::Rating) {
@@ -103,6 +103,9 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       return QVariant();
 
     case Qt::DecorationRole:
+      if(value.isEmpty()) {
+        return QVariant();
+      }
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {

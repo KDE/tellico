@@ -70,16 +70,21 @@ void AbstractEntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
 void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
     int idx = m_entries.indexOf(entry);
-    emit dataChanged(createIndex(idx, 0), createIndex(idx, 0));
+    if(idx > -1) {
+      QModelIndex index = createIndex(idx, 0);
+      emit dataChanged(index, index);
+    }
   }
 }
 
 void AbstractEntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
     int idx = m_entries.indexOf(entry);
-    beginRemoveRows(QModelIndex(), idx, idx);
-    m_entries.removeOne(entry);
-    endRemoveRows();
+    if(idx > -1) {
+      beginRemoveRows(QModelIndex(), idx, idx);
+      m_entries.removeOne(entry);
+      endRemoveRows();
+    }
   }
 }
 

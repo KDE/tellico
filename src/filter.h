@@ -130,6 +130,8 @@ public:
 
   int count() const { return QList<FilterRule*>::count(); } // disambiguate
 
+  bool operator==(const Filter& other) const;
+
 private:
   Filter& operator=(const Filter& other);
 
