@@ -267,6 +267,10 @@ void Entry::clearGroups() {
 QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 //  myDebug() << fieldName_;
   FieldPtr f = m_coll->fieldByName(fieldName_);
+  if(!f) {
+    myWarning() << "no field named" << fieldName_;
+    return QStringList();
+  }
 
   if(f->type() == Field::Table) {
     // we only take groups from the first column
@@ -279,7 +283,13 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   }
 
   if(f->hasFlag(Field::AllowMultiple)) {
-    return fields(fieldName_, true);
+    QStringList groups = fields(fieldName_, true);
+    // possible to be empty for no value
+    // but we want to populate an empty group
+    if(groups.isEmpty()) {
+      groups << QString();
+    }
+    return groups;
   }
 
   // easy if not allowing multiple values

@@ -1,3 +1,7 @@
+2009-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed grouping to always show group for empty value.
+
 2009-10-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Added PAM/PRISM translator to SRU fetcher. 

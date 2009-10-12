@@ -69,6 +69,13 @@ void CollectionTest::testCollection() {
   QCOMPARE(entry1->field(QLatin1String("cdate")), QDate::currentDate().toString(Qt::ISODate));
   QCOMPARE(entry1->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
 
+  // also verify that the empty string is included in list of group names
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
+  coll->addField(field1);
+  QStringList groupNames = entry1->groupNamesByFieldName(QLatin1String("test"));
+  QCOMPARE(groupNames.count(), 1);
+  QVERIFY(groupNames.at(0).isEmpty());
+
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
   // add created and modified dates from earlier, to make sure they don't get overwritten
   QDate weekAgo = QDate::currentDate().addDays(-7);

@@ -745,11 +745,19 @@ QStringList Collection::entryGroupNamesByField(Tellico::Data::EntryPtr entry_, c
     return entry_->groupNamesByFieldName(fieldName_);
   }
 
+  // the empty group is only returned if the entry has an empty list for every people field
+  bool allEmpty = true;
   StringSet values;
   foreach(FieldPtr field, m_peopleFields) {
-    values.add(entry_->groupNamesByFieldName(field->name()));
+    QStringList groups = entry_->groupNamesByFieldName(field->name());
+    if(groups.count() != 1 || !groups.at(0).isEmpty()) {
+      allEmpty = false;
+    }
+    values.add(groups);
   }
-  values.remove(QString());
+  if(!allEmpty) {
+    values.remove(QString());
+  }
   return values.toList();
 }
 
