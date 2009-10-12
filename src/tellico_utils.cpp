@@ -108,7 +108,7 @@ QString Tellico::removeAcceleratorMarker(const QString& label_) {
 
   int p = 0;
   while (true) {
-      p = label.indexOf('&', p);
+      p = label.indexOf(QLatin1Char('&'), p);
       if (p < 0 || p + 1 == label.length()) {
           break;
       }
@@ -120,7 +120,7 @@ QString Tellico::removeAcceleratorMarker(const QString& label_) {
           // May have been an accelerator in style of
           // "(<marker><alnum>)" at the start or end of text.
           if (   p > 0 && p + 1 < label.length()
-              && label[p - 1] == '(' && label[p + 1] == ')')
+              && label[p - 1] == QLatin1Char('(') && label[p + 1] == QLatin1Char(')'))
           {
               // Check if at start or end, ignoring non-alphanumerics.
               int len = label.length();
@@ -141,7 +141,7 @@ QString Tellico::removeAcceleratorMarker(const QString& label_) {
                   label = label.left(p1) + label.mid(p + 2);
               }
           }
-      } else if (label[p + 1] == '&') {
+      } else if (label[p + 1] == QLatin1Char('&')) {
           // Escaped accelerator marker.
           label = label.left(p) + label.mid(p + 1);
       }
