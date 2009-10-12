@@ -212,17 +212,30 @@ void FilterView::invalidate(Tellico::Data::EntryList entries_) {
   const int rows = model()->rowCount();
   for(int row = 0; row < rows; ++row) {
     QModelIndex index = sourceModel()->index(row, 0);
-    FilterPtr filter = sourceModel()->filter(index);
-    if(!filter) {
-      continue;
-    }
+     FilterPtr filter = sourceModel()->filter(index);
+     if(!filter) {
+       continue;
+     }
+    // two cases: if the filter used to match the entry and no longer does, then check the children indexes
+    // if the filter matches now, check the actual match
     foreach(Data::EntryPtr entry, entries_) {
-      if(filter->matches(entry)) {
+      if(indexContainsEntry(index, entry) || filter->matches(entry)) {
         sourceModel()->invalidate(index);
         break;
       }
     }
   }
+}
+
+bool FilterView::indexContainsEntry(const QModelIndex& parent_, Data::EntryPtr entry_) const {
+  QModelIndex entryIndex = sourceModel()->index(0, 0, parent_);
+  while(entryIndex.isValid()) {
+    if(sourceModel()->entry(entryIndex) == entry_) {
+      return true;
+    }
+    entryIndex = entryIndex.sibling(entryIndex.row()+1, 0);
+  }
+  return false;
 }
 
 #include "filterview.moc"

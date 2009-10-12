@@ -77,6 +77,7 @@ private:
   void contextMenuEvent(QContextMenuEvent* event);
   void updateHeader();
   void invalidate(Data::EntryList entries);
+  bool indexContainsEntry(const QModelIndex& parent, Data::EntryPtr entry) const;
 
   bool m_notSortedYet;
   Data::CollPtr m_coll;

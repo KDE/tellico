@@ -3,6 +3,7 @@
 	* Fixed grouping to always show group for empty value.
 	* Fixed crashing bug when filtering entry with empty title.
 	* Fixed compilation for KDE < 4.2.
+	* Fixed filtering bug when modifying entry value.
 
 2009-10-10  Robby Stephenson  <robby@periapsis.org>
 
