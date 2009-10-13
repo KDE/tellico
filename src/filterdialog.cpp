@@ -70,7 +70,9 @@ void FilterRuleWidget::initLists() {
   //---------- initialize list of filter fields
   if(m_ruleFieldList.isEmpty()) {
     m_ruleFieldList.append(QLatin1Char('<') + i18n("Any Field") + QLatin1Char('>'));
-    m_ruleFieldList += Kernel::self()->fieldTitles();
+    QStringList titles = Kernel::self()->fieldTitles();
+    titles.sort();
+    m_ruleFieldList += titles;
   }
 
   //---------- initialize list of filter operators
