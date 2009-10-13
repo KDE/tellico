@@ -335,7 +335,7 @@ void FilterDialog::init() {
   m_ruleLister->setFocus();
   vlay->addWidget(m_ruleLister);
 
-  QHBoxLayout* blay = new QHBoxLayout(page);
+  QHBoxLayout* blay = new QHBoxLayout();
   topLayout->addLayout(blay);
   QLabel* lab = new QLabel(i18n("Filter name:"), page);
   blay->addWidget(lab);
