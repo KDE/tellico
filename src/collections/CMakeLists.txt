@@ -18,3 +18,4 @@ SET(collections_STAT_SRCS
    )
 
 KDE4_ADD_LIBRARY(collections STATIC ${collections_STAT_SRCS})
+TARGET_LINK_LIBRARIES(collections translators)
