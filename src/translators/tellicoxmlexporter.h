@@ -25,6 +25,9 @@
 #ifndef TELLICO_XMLEXPORTER_H
 #define TELLICO_XMLEXPORTER_H
 
+#include "exporter.h"
+#include "../utils/stringset.h"
+
 namespace Tellico {
   class Filter;
 }
@@ -32,9 +35,6 @@ namespace Tellico {
 class QDomDocument;
 class QDomElement;
 class QCheckBox;
-
-#include "exporter.h"
-#include "../utils/stringset.h"
 
 namespace Tellico {
   namespace Export {
@@ -68,9 +68,9 @@ public:
   static const unsigned syntaxVersion;
 
 private:
-  void exportCollectionXML(QDomDocument& doc, QDomElement& parent, bool format) const;
+  void exportCollectionXML(QDomDocument& doc, QDomElement& parent, int format) const;
   void exportFieldXML(QDomDocument& doc, QDomElement& parent, Data::FieldPtr field) const;
-  void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::EntryPtr entry, bool format) const;
+  void exportEntryXML(QDomDocument& doc, QDomElement& parent, Data::EntryPtr entry, int format) const;
   void exportImageXML(QDomDocument& doc, QDomElement& parent, const QString& imageID) const;
   void exportGroupXML(QDomDocument& doc, QDomElement& parent) const;
   void exportFilterXML(QDomDocument& doc, QDomElement& parent, FilterPtr filter) const;

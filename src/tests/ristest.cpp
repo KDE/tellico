@@ -30,6 +30,7 @@
 
 #include "../translators/risimporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../fieldformat.h"
 
 QTEST_KDEMAIN_CORE( RisTest )
 
@@ -48,8 +49,8 @@ void RisTest::testImport() {
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
-  QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin,M."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("Koglin,M."));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);

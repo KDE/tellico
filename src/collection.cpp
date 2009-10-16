@@ -27,6 +27,7 @@
 #include "entry.h"
 #include "entrygroup.h"
 #include "derivedvalue.h"
+#include "fieldformat.h"
 #include "tellico_utils.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
@@ -612,15 +613,10 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
   if(name_.isEmpty()) {
     return QStringList();
   }
-  bool multiple = (fieldByName(name_)->hasFlag(Field::AllowMultiple));
 
   StringSet values;
   foreach(EntryPtr entry, m_entries) {
-    if(multiple) {
-      values.add(entry->fields(name_, false));
-    } else {
-      values.add(entry->field(name_));
-    }
+    values.add(FieldFormat::splitValue(entry->field(name_)));
   } // end entry loop
 
   return values.toList();

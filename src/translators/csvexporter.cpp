@@ -89,13 +89,15 @@ bool CSVExporter::exec() {
     text += QLatin1Char('\n');
   }
 
-  bool format = options() & Export::ExportFormatted;
+  Data::FormatValue format = (options() & Export::ExportFormatted ?
+                                                Data::ForceFormat :
+                                                Data::NoFormat);
 
   QString tmp;
   Data::EntryList entries = this->entries();
   foreach(Data::EntryPtr entryIt, entries) {
     foreach(Data::FieldPtr fIt, fields) {
-      tmp = entryIt->field(fIt->name(), format);
+      tmp = entryIt->formattedField(fIt->name(), format);
       text += escapeText(tmp) + m_delimiter;
     }
     // remove last delimiter

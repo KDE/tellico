@@ -37,6 +37,8 @@
 
 #include <kstandarddirs.h>
 
+#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
+
 QTEST_KDEMAIN_CORE( GCstarTest )
 
 void GCstarTest::initTestCase() {
@@ -61,19 +63,19 @@ void GCstarTest::testBook() {
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("title"), QLatin1String("The Reason for God"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2008"));
-  QCOMPARE(entry->fields("author", false).count(), 2);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Timothy Keller"));
+  QCOMPARE(FIELDS(entry, "author").count(), 2);
+  QCOMPARE(FIELDS(entry, "author").first(), QLatin1String("Timothy Keller"));
   QCOMPARE(entry->field("isbn"), QLatin1String("978-0-525-95049-3"));
   QCOMPARE(entry->field("publisher"), QLatin1String("Dutton Adult"));
-  QCOMPARE(entry->fields("genre", false).count(), 2);
-  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("non-fiction"));
-  QCOMPARE(entry->fields("keyword", false).count(), 2);
-  QCOMPARE(entry->fields("keyword", false).at(0), QLatin1String("tag1"));
-  QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag2"));
+  QCOMPARE(FIELDS(entry, "genre").count(), 2);
+  QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("non-fiction"));
+  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
+  QCOMPARE(FIELDS(entry, "keyword").at(0), QLatin1String("tag1"));
+  QCOMPARE(FIELDS(entry, "keyword").at(1), QLatin1String("tag2"));
   // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
   QCOMPARE(entry->field("rating"), QLatin1String("2"));
-  QCOMPARE(entry->fields("language", false).count(), 1);
-  QCOMPARE(entry->fields("language", false).at(0), QLatin1String("English"));
+  QCOMPARE(FIELDS(entry, "language").count(), 1);
+  QCOMPARE(FIELDS(entry, "language").at(0), QLatin1String("English"));
 
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -111,22 +113,21 @@ void GCstarTest::testVideo() {
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(entry->fields("director", false).count(), 1);
-  QCOMPARE(entry->fields("director", false).first(), QLatin1String("George Miller"));
-  QCOMPARE(entry->fields("nationality", false).count(), 1);
-  QCOMPARE(entry->fields("nationality", false).first(), QLatin1String("Australia"));
+  QCOMPARE(FIELDS(entry, "director").count(), 1);
+  QCOMPARE(FIELDS(entry, "director").first(), QLatin1String("George Miller"));
+  QCOMPARE(FIELDS(entry, "nationality").count(), 1);
+  QCOMPARE(FIELDS(entry, "nationality").first(), QLatin1String("Australia"));
   QCOMPARE(entry->field("medium"), QLatin1String("DVD"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
-  QCOMPARE(entry->fields("genre", false).count(), 4);
-  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Drama"));
-  QString cast = entry->field("cast", false);
-  QStringList castList = Tellico::FieldFormat::splitTable(cast);
+  QCOMPARE(FIELDS(entry, "genre").count(), 4);
+  QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("Drama"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.count(), 10);
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(castList.at(2), QLatin1String("Kirk Douglas::Harrison / Spur"));
-  QCOMPARE(entry->fields("keyword", false).count(), 2);
-  QCOMPARE(entry->fields("keyword", false).at(0), QLatin1String("tag2"));
-  QCOMPARE(entry->fields("keyword", false).at(1), QLatin1String("tag1"));
+  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
+  QCOMPARE(FIELDS(entry, "keyword").at(0), QLatin1String("tag2"));
+  QCOMPARE(FIELDS(entry, "keyword").at(1), QLatin1String("tag1"));
   QCOMPARE(entry->field("rating"), QLatin1String("3"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
@@ -166,21 +167,20 @@ void GCstarTest::testMusic() {
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("title"), QLatin1String("Lifesong"));
   QCOMPARE(entry->field("year"), QLatin1String("2005"));
-  QCOMPARE(entry->fields("artist", false).count(), 1);
-  QCOMPARE(entry->fields("artist", false).first(), QLatin1String("Casting Crowns"));
-  QCOMPARE(entry->fields("label", false).count(), 1);
-  QCOMPARE(entry->fields("label", false).first(), QLatin1String("Beach Street Records"));
+  QCOMPARE(FIELDS(entry, "artist").count(), 1);
+  QCOMPARE(FIELDS(entry, "artist").first(), QLatin1String("Casting Crowns"));
+  QCOMPARE(FIELDS(entry, "label").count(), 1);
+  QCOMPARE(FIELDS(entry, "label").first(), QLatin1String("Beach Street Records"));
   QCOMPARE(entry->field("medium"), QLatin1String("Compact Disc"));
-  QCOMPARE(entry->fields("genre", false).count(), 2);
-  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Electronic"));
-  QString track = entry->field("track", false);
-  QStringList trackList = Tellico::FieldFormat::splitTable(track);
+  QCOMPARE(FIELDS(entry, "genre").count(), 2);
+  QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("Electronic"));
+  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(trackList.count(), 11);
   QCOMPARE(trackList.at(1), QLatin1String("Praise You In This Storm::Casting Crowns::4:59"));
-  QCOMPARE(entry->fields("producer", false).count(), 1);
-  QCOMPARE(entry->fields("producer", false).at(0), QLatin1String("Mark A. Miller"));
-  QCOMPARE(entry->fields("composer", false).count(), 4);
-  QCOMPARE(entry->fields("composer", false).at(1), QLatin1String("David Hunt"));
+  QCOMPARE(FIELDS(entry, "producer").count(), 1);
+  QCOMPARE(FIELDS(entry, "producer").at(0), QLatin1String("Mark A. Miller"));
+  QCOMPARE(FIELDS(entry, "composer").count(), 4);
+  QCOMPARE(FIELDS(entry, "composer").at(1), QLatin1String("David Hunt"));
   QCOMPARE(entry->field("cdate"), QLatin1String("2009-09-22"));
 
   Tellico::Export::GCstarExporter exporter(coll);
@@ -219,12 +219,12 @@ void GCstarTest::testVideoGame() {
   QCOMPARE(entry->field("title"), QLatin1String("Halo 3"));
   QCOMPARE(entry->field("year"), QLatin1String("2007"));
   QCOMPARE(entry->field("platform"), QLatin1String("Xbox 360"));
-  QCOMPARE(entry->fields("developer", false).count(), 1);
-  QCOMPARE(entry->fields("developer", false).first(), QLatin1String("Bungie Studios"));
-  QCOMPARE(entry->fields("publisher", false).count(), 1);
-  QCOMPARE(entry->fields("publisher", false).first(), QLatin1String("Microsoft Games Studios"));
-  QCOMPARE(entry->fields("genre", false).count(), 3);
-  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Action"));
+  QCOMPARE(FIELDS(entry, "developer").count(), 1);
+  QCOMPARE(FIELDS(entry, "developer").first(), QLatin1String("Bungie Studios"));
+  QCOMPARE(FIELDS(entry, "publisher").count(), 1);
+  QCOMPARE(FIELDS(entry, "publisher").first(), QLatin1String("Microsoft Games Studios"));
+  QCOMPARE(FIELDS(entry, "genre").count(), 3);
+  QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("Action"));
   QCOMPARE(entry->field("cdate"), QLatin1String("2009-09-24"));
   QVERIFY(!entry->field("description").isEmpty());
 
@@ -263,14 +263,14 @@ void GCstarTest::testBoardGame() {
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("title"), QLatin1String("Risk"));
   QCOMPARE(entry->field("year"), QLatin1String("1959"));
-  QCOMPARE(entry->fields("designer", false).count(), 2);
-  QCOMPARE(entry->fields("designer", false).at(1), QLatin1String("Michael I. Levin"));
-  QCOMPARE(entry->fields("publisher", false).count(), 11);
-  QCOMPARE(entry->fields("publisher", false).at(1), QLatin1String("Borras Plana S.A."));
-  QCOMPARE(entry->fields("mechanism", false).count(), 3);
-  QCOMPARE(entry->fields("mechanism", false).at(1), QLatin1String("Dice Rolling"));
-  QCOMPARE(entry->fields("genre", false).count(), 1);
-  QCOMPARE(entry->fields("genre", false).at(0), QLatin1String("Wargame"));
+  QCOMPARE(FIELDS(entry, "designer").count(), 2);
+  QCOMPARE(FIELDS(entry, "designer").at(1), QLatin1String("Michael I. Levin"));
+  QCOMPARE(FIELDS(entry, "publisher").count(), 11);
+  QCOMPARE(FIELDS(entry, "publisher").at(1), QLatin1String("Borras Plana S.A."));
+  QCOMPARE(FIELDS(entry, "mechanism").count(), 3);
+  QCOMPARE(FIELDS(entry, "mechanism").at(1), QLatin1String("Dice Rolling"));
+  QCOMPARE(FIELDS(entry, "genre").count(), 1);
+  QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("Wargame"));
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 

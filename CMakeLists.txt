@@ -91,7 +91,7 @@ else(LIBV4L_FOUND)
 endif(LIBV4L_FOUND)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -pedantic -Wextra -fno-check-new -Woverloaded-virtual")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 add_definitions(${QT_DEFINITIONS}

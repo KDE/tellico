@@ -182,7 +182,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   Data::FieldList fields = d->coll->imageFields();
   foreach(Data::EntryPtr entry, d->entries) {
     foreach(Data::FieldPtr field, fields) {
-      QString value = entry->field(field, false);
+      QString value = entry->field(field);
       if(value.isEmpty()) {
         continue;
       }

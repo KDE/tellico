@@ -69,8 +69,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
-  QString cast = entry->field("cast", false);
-  QStringList castList = Tellico::FieldFormat::splitTable(cast);
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
 }
 

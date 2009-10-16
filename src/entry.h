@@ -44,6 +44,12 @@ namespace Tellico {
     class Collection;
     class EntryGroup;
 
+    enum FormatValue {
+      NoFormat,
+      AutoFormat,
+      ForceFormat
+    };
+
 /**
  * The Entry class represents a book, a CD, or whatever is the basic entity
  * in the collection.
@@ -87,29 +93,18 @@ public:
    * Returns the value of the field with a given key name.
    *
    * @param fieldName The field name
-   * @param formatted Whether to format the field or not.
    * @return The value of the field
    */
-  QString field(const QString& fieldName, bool formatted=false) const;
-  QString field(Data::FieldPtr field, bool formatted=false) const;
+  QString field(const QString& fieldName) const;
+  QString field(Data::FieldPtr field) const;
   /**
    * Returns the formatted value of the field with a given key name.
    *
-   * @param fieldName The field name
+   * @param field The field
    * @return The formatted value of the field
    */
-  QString formattedField(const QString& fieldName) const;
-  QString formattedField(Data::FieldPtr field) const;
-  /**
-   * Splits a field value. This is faster than calling Data::Field::split() since
-   * a regexp is not used, only a string.
-   *
-   * @param field The field name
-   * @param format Whether to format the values or not
-   * @return The list of field values
-   */
-  QStringList fields(const QString& fieldName, bool formatted) const;
-  QStringList fields(Data::FieldPtr field, bool formatted) const;
+  QString formattedField(const QString& fieldName, FormatValue formatted=AutoFormat) const;
+  QString formattedField(Data::FieldPtr field, FormatValue formatted=AutoFormat) const;
   /**
    * Sets the value of an field for the entry. The method first verifies that
    * the value is allowed for that particular key.

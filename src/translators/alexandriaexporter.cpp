@@ -25,12 +25,13 @@
 #include "alexandriaexporter.h"
 #include "../document.h"
 #include "../collection.h"
+#include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../tellico_utils.h"
-#include "../tellico_debug.h"
 #include "../progressmanager.h"
 #include "../gui/guiproxy.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -138,14 +139,16 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   }
 
   // do we format?
-  bool format = options() & Export::ExportFormatted;
+  Data::FormatValue format = (options() & Export::ExportFormatted ?
+                                                Data::ForceFormat :
+                                                Data::NoFormat);
 
   QTextStream ts(&file);
   // alexandria uses utf-8 all the time
   ts.setCodec("UTF-8");
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
-  QStringList authors = entry_->fields(QLatin1String("author"), format);
+  QStringList authors = FieldFormat::splitValue(entry_->formattedField(QLatin1String("author"), format));
   for(QStringList::Iterator it = authors.begin(); it != authors.end(); ++it) {
     ts << "  - " << escapeText(*it) << "\n";
   }
@@ -154,25 +157,25 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     ts << "  - n/a\n";
   }
 
-  QString tmp = entry_->field(QLatin1String("title"), format);
+  QString tmp = entry_->formattedField(QLatin1String("title"), format);
   ts << "title: \"" << escapeText(tmp) << "\"\n";
 
   // Alexandria refers to the binding as the edition
-  tmp = entry_->field(QLatin1String("binding"), format);
+  tmp = entry_->formattedField(QLatin1String("binding"), format);
   ts << "edition: \"" << escapeText(tmp) << "\"\n";
 
   // sometimes Alexandria interprets the isbn as a number instead of a string
   // I have no idea how to debug ruby, so err on safe side and add quotes
   ts << "isbn: \"" << isbn << "\"\n";
 
-  tmp = entry_->field(QLatin1String("comments"), format);
+  tmp = entry_->formattedField(QLatin1String("comments"), format);
   ts << "notes: \"" << escapeText(tmp) << "\"\n";
 
-  tmp = entry_->field(QLatin1String("publisher"), format);
+  tmp = entry_->formattedField(QLatin1String("publisher"), format);
   // publisher uses n/a when empty
   ts << "publisher: \"" << (tmp.isEmpty() ? QLatin1String("n/a") : escapeText(tmp)) << "\"\n";
 
-  tmp = entry_->field(QLatin1String("pub_year"), format);
+  tmp = entry_->formattedField(QLatin1String("pub_year"), format);
   if(!tmp.isEmpty()) {
     ts << "publishing_year: \"" << escapeText(tmp) << "\"\n";
   }

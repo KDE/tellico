@@ -111,7 +111,11 @@ QDomDocument TellicoXMLExporter::exportXML() const {
 
   root.setAttribute(QLatin1String("syntaxVersion"), exportVersion);
 
-  exportCollectionXML(dom, root, options() & Export::ExportFormatted);
+  Data::FormatValue format = (options() & Export::ExportFormatted ?
+                                                Data::ForceFormat :
+                                                Data::NoFormat);
+
+  exportCollectionXML(dom, root, format);
 
   // clear image list
   m_images.clear();
@@ -119,7 +123,7 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   return dom;
 }
 
-void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, bool format_) const {
+void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& parent_, int format_) const {
   Data::CollPtr coll = collection();
   if(!coll) {
     myWarning() << "no collection pointer!";
@@ -231,7 +235,7 @@ void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_
   parent_.appendChild(elem);
 }
 
-void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Tellico::Data::EntryPtr entry_, bool format_) const {
+void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Tellico::Data::EntryPtr entry_, int format_) const {
   QDomElement entryElem = dom_.createElement(QLatin1String("entry"));
   entryElem.setAttribute(QLatin1String("id"), QString::number(entry_->id()));
 
@@ -241,8 +245,9 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     QString fieldName = fIt->name();
 
     // Date fields are special, don't format in export
-    QString fieldValue = (format_ && fIt->type() != Data::Field::Date) ? entry_->formattedField(fieldName)
-                                                                       : entry_->field(fieldName);
+    QString fieldValue = (format_ == Data::ForceFormat && fIt->type() != Data::Field::Date) ?
+                                                           entry_->formattedField(fieldName, Data::ForceFormat) :
+                                                           entry_->field(fieldName);
     if(options() & ExportClean) {
       BibtexHandler::cleanText(fieldValue);
     }

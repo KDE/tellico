@@ -31,8 +31,8 @@
 #include "../field.h"
 #include "../images/image.h"
 #include "../document.h"
-#include "../tellico_debug.h"
 #include "../gui/ratingwidget.h"
+#include "../tellico_debug.h"
 
 #include <kicon.h>
 #include <klocale.h>
@@ -87,22 +87,25 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
     return QVariant();
   }
 
-  const QString value = entry->field(field);
+  QString value;
 
   switch(role_) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
+      if(field->type() == Data::Field::Image ||
+         field->type() == Data::Field::Bool ||
+         field->type() == Data::Field::Rating) {
+        return QVariant();
+      }
+      value = entry->formattedField(field);
       if(value.isEmpty()) {
         return QVariant();
       }
-      if(field->type() != Data::Field::Image &&
-         field->type() != Data::Field::Bool &&
-         field->type() != Data::Field::Rating) {
-        return value;
-      }
-      return QVariant();
+      return value;
 
     case Qt::DecorationRole:
+      // we don't need a formatted value for image id
+      value = entry->field(field);
       if(value.isEmpty()) {
         return QVariant();
       }

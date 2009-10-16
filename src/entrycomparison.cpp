@@ -83,16 +83,18 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     }
   }
   if(f->formatFlag() == Data::Field::FormatName) {
-    s1 = e1->field(f, true).toLower();
-    s2 = e2->field(f, true).toLower();
+    s1 = e1->formattedField(f, Data::ForceFormat).toLower();
+    s2 = e2->formattedField(f, Data::ForceFormat).toLower();
     if(s1 == s2) {
       return 5;
     }
   }
   // try removing punctuation
   QRegExp notAlphaNum(QLatin1String("[^\\s\\w]"));
-  QString s1a = s1; s1a.remove(notAlphaNum);
-  QString s2a = s2; s2a.remove(notAlphaNum);
+  QString s1a = s1;
+  s1a.remove(notAlphaNum);
+  QString s2a = s2;
+  s2a.remove(notAlphaNum);
   if(!s1a.isEmpty() && s1a == s2a) {
 //    myDebug() << "match without punctuation";
     return 5;
@@ -112,15 +114,15 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     return 2;
   }
   if(f->hasFlag(Data::Field::AllowMultiple)) {
-    QStringList sl1 = e1->fields(f, false);
-    QStringList sl2 = e2->fields(f, false);
+    QStringList sl1 = FieldFormat::splitValue(e1->field(f));
+    QStringList sl2 = FieldFormat::splitValue(e2->field(f));
     int matches = 0;
     for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
       matches += sl2.count(*it);
     }
     if(matches == 0 && f->formatFlag() == Data::Field::FormatName) {
-      sl1 = e1->fields(f, true);
-      sl2 = e2->fields(f, true);
+      sl1 = FieldFormat::splitValue(e1->formattedField(f, Data::ForceFormat));
+      sl2 = FieldFormat::splitValue(e2->formattedField(f, Data::ForceFormat));
       for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
         matches += sl2.count(*it);
       }

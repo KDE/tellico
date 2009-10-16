@@ -30,6 +30,7 @@
 #include "derivedvalue.h"
 #include "tellico_utils.h"
 #include "utils/stringset.h"
+#include "core/tellico_config.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
@@ -99,78 +100,66 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
 }
 
 QString Entry::title() const {
-  return formattedField(QLatin1String("title"));
+  return field(QLatin1String("title"));
 }
 
-QString Entry::field(Tellico::Data::FieldPtr field_, bool formatted_/*=false*/) const {
-  return field(field_->name(), formatted_);
+QString Entry::field(const QString& fieldName_) const {
+  return field(m_coll->fieldByName(fieldName_));
 }
 
-QString Entry::field(const QString& fieldName_, bool formatted_/*=false*/) const {
-  if(formatted_) {
-    return formattedField(fieldName_);
-  }
-
-  FieldPtr f = m_coll->fieldByName(fieldName_);
-  if(!f) {
+QString Entry::field(Tellico::Data::FieldPtr field_) const {
+  if(!field_) {
     return QString();
   }
-  if(f->hasFlag(Field::Derived)) {
-    DerivedValue dv(f);
+
+  if(field_->hasFlag(Field::Derived)) {
+    DerivedValue dv(field_);
     return dv.value(EntryPtr(const_cast<Entry*>(this)), false);
   }
 
-  if(!m_fieldValues.isEmpty() && m_fieldValues.contains(fieldName_)) {
-    return m_fieldValues[fieldName_];
+  if(!m_fieldValues.isEmpty() && m_fieldValues.contains(field_->name())) {
+    return m_fieldValues.value(field_->name());
   }
   return QString();
 }
 
-QString Entry::formattedField(Tellico::Data::FieldPtr field_) const {
-  return formattedField(field_->name());
+QString Entry::formattedField(const QString& fieldName_, FormatValue formatted_) const {
+  return formattedField(m_coll->fieldByName(fieldName_), formatted_);
 }
 
-QString Entry::formattedField(const QString& fieldName_) const {
-  FieldPtr f = m_coll->fieldByName(fieldName_);
-  if(!f) {
+QString Entry::formattedField(Tellico::Data::FieldPtr field_, FormatValue formatted_) const {
+  if(!field_) {
     return QString();
   }
 
-  Field::FormatFlag flag = f->formatFlag();
-  if(f->hasFlag(Field::Derived)) {
-    DerivedValue dv(f);
+  // if neither the capitalization or formatting option is turned on, don't format the value
+  if(formatted_ == NoFormat ||
+     (formatted_ == AutoFormat && !Config::autoCapitalization() && !Config::autoFormat())) {
+    return field(field_);
+  }
+
+  Field::FormatFlag flag = field_->formatFlag();
+  if(field_->hasFlag(Field::Derived)) {
+    DerivedValue dv(field_);
     // format sub fields and whole string
     return Field::format(dv.value(EntryPtr(const_cast<Entry*>(this)), true), flag);
   }
 
   // if auto format is not set or FormatNone, then just return the value
   if(flag == Field::FormatNone) {
-    return m_coll->prepareText(field(fieldName_));
+    return m_coll->prepareText(field(field_));
   }
 
-  if(m_formattedFields.isEmpty() || !m_formattedFields.contains(fieldName_)) {
-    QString value = field(fieldName_);
+  if(m_formattedFields.isEmpty() || !m_formattedFields.contains(field_->name())) {
+    QString value = field(field_);
     if(!value.isEmpty()) {
       value = Field::format(m_coll->prepareText(value), flag);
-      m_formattedFields.insert(fieldName_, value);
+      m_formattedFields.insert(field_->name(), value);
     }
     return value;
   }
   // otherwise, just look it up
-  return m_formattedFields[fieldName_];
-}
-
-QStringList Entry::fields(Tellico::Data::FieldPtr field_, bool formatted_) const {
-  Q_ASSERT(field_->type() != Field::Table);
-  return fields(field_->name(), formatted_);
-}
-
-QStringList Entry::fields(const QString& field_, bool formatted_) const {
-  QString s = formatted_ ? formattedField(field_) : field(field_);
-  if(s.isEmpty()) {
-    return QStringList();
-  }
-  return FieldFormat::splitValue(s);
+  return m_formattedFields.value(field_->name());
 }
 
 bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
@@ -199,7 +188,7 @@ bool Entry::setField(const QString& name_, const QString& value_) {
 bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
   // an empty value means remove the field
   if(value_.isEmpty()) {
-    if(!m_fieldValues.isEmpty() && m_fieldValues.contains(name_)) {
+    if(m_fieldValues.contains(name_)) {
       m_fieldValues.remove(name_);
     }
     invalidateFormattedFieldValue(name_);
@@ -275,7 +264,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   if(f->type() == Field::Table) {
     // we only take groups from the first column
     StringSet groups;
-    foreach(const QString& row, FieldFormat::splitTable(formattedField(fieldName_))) {
+    foreach(const QString& row, FieldFormat::splitTable(field(f))) {
       const QStringList columns = FieldFormat::splitRow(row);
       groups.add(FieldFormat::splitValue(columns.at(0)));
     }
@@ -283,7 +272,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   }
 
   if(f->hasFlag(Field::AllowMultiple)) {
-    QStringList groups = fields(fieldName_, true);
+    QStringList groups = FieldFormat::splitValue(field(f));
     // possible to be empty for no value
     // but we want to populate an empty group
     if(groups.isEmpty()) {
@@ -293,7 +282,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   }
 
   // easy if not allowing multiple values
-  return QStringList() << formattedField(fieldName_);
+  return QStringList() << field(fieldName_);
 }
 
 bool Entry::isOwned() {

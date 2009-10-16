@@ -109,7 +109,7 @@ void CollectionTest::testDerived() {
   field->setFormatFlag(Tellico::Data::Field::FormatName);
   coll->addField(field);
 
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein; Niels Bohr"));
+  QCOMPARE(entry->field(QLatin1String("test"), Tellico::Data::NoFormat), QLatin1String("Albert Einstein; Niels Bohr"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{test3}"));
 
@@ -137,7 +137,7 @@ void CollectionTest::testDerived() {
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("ALBERT EINSTEIN"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
-  QCOMPARE(entry->field(QLatin1String("test"), true), QLatin1String("Einstein, Albert"));
+  QCOMPARE(entry->entry->field("cast")(QLatin1String("test"), Tellico::Data::ForceFormat), QLatin1String("Einstein, Albert"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:2}"));
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
@@ -146,7 +146,7 @@ void CollectionTest::testDerived() {
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
-  QCOMPARE(entry->field(QLatin1String("test"), true), QLatin1String("Bohr, Niels"));
+  QCOMPARE(entry->entry->field("cast")(QLatin1String("test"), Tellico::Data::ForceFormat), QLatin1String("Bohr, Niels"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:-2}"));
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));

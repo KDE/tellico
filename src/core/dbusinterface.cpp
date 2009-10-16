@@ -128,7 +128,11 @@ QStringList CollectionInterface::allValues(const QString& fieldName_) const {
   }
   Data::EntryList entries = Controller::self()->selectedEntries();
   foreach(Data::EntryPtr entry, entries) {
-    results += entry->fields(field, false);
+    if(field->type() == Data::Field::Table) {
+      results += FieldFormat::splitTable(entry->field(field));
+    } else {
+      results += FieldFormat::splitValue(entry->field(field));
+    }
   }
   return results;
 }
@@ -148,7 +152,11 @@ QStringList CollectionInterface::entryValues(int id_, const QString& fieldName_)
   }
   Data::EntryPtr entry = coll->entryById(id_);
   if(entry) {
-    results += entry->fields(field, false);
+    if(field->type() == Data::Field::Table) {
+      results = FieldFormat::splitTable(entry->field(field));
+    } else {
+      results = FieldFormat::splitValue(entry->field(field));
+    }
   }
   return results;
 }
@@ -199,11 +207,22 @@ bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, cons
   if(!entry) {
     return false;
   }
+  Data::FieldPtr field = coll->fieldByName(fieldName_);
+  if(!field) {
+    return false;
+  }
+
   Data::EntryPtr oldEntry(new Data::Entry(*entry));
-  QStringList values = entry->fields(fieldName_, false);
+  QStringList values;
+  if(field->type() == Data::Field::Table) {
+    values = FieldFormat::splitTable(entry->field(fieldName_));
+  } else {
+    values = FieldFormat::splitValue(entry->field(fieldName_));
+  }
   QStringList newValues = values;
   newValues << value_;
-  if(!entry->setField(fieldName_, newValues.join(FieldFormat::delimiterString()))) {
+  const QString del = field->type() == Data::Field::Table ? FieldFormat::rowDelimiterString() : FieldFormat::delimiterString();
+  if(!entry->setField(fieldName_, newValues.join(del))) {
     return false;
   }
   Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);

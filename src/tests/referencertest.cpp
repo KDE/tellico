@@ -31,8 +31,11 @@
 #include "../translators/referencerimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../fieldformat.h"
 
 #include <kstandarddirs.h>
+
+#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
 
 QTEST_KDEMAIN_CORE( ReferencerTest )
 
@@ -58,10 +61,10 @@ void ReferencerTest::testImport() {
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
-  QCOMPARE(entry->fields("author", false).count(), 3);
-  QCOMPARE(entry->fields("author", false).first(), QLatin1String("Koglin, M."));
+  QCOMPARE(FIELDS(entry, "author").count(), 3);
+  QCOMPARE(FIELDS(entry, "author").first(), QLatin1String("Koglin, M."));
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("bibtex-key"), QLatin1String("Koglin2002"));
-  QCOMPARE(entry->fields("keyword", false).count(), 2);
-  QCOMPARE(entry->fields("keyword", false).first(), QLatin1String("tag1"));
+  QCOMPARE(FIELDS(entry, "keyword").count(), 2);
+  QCOMPARE(FIELDS(entry, "keyword").first(), QLatin1String("tag1"));
 }

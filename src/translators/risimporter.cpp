@@ -288,7 +288,7 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
     // for entry-type, want it in lower case
     f->addAllowed(value);
     // if the field can have multiple values, append current values to new value
-    if((f->hasFlag(Data::Field::AllowMultiple)) && !entry->field(f->name()).isEmpty()) {
+    if(f->hasFlag(Data::Field::AllowMultiple) && !entry->field(f->name()).isEmpty()) {
       value.prepend(entry->field(f->name()) + FieldFormat::delimiterString());
     }
     entry->setField(f, value);

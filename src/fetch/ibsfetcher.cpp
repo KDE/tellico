@@ -363,7 +363,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   // IBS switches the surname and family name of the author
-  QStringList names = entry->fields(QLatin1String("author"), false);
+  QStringList names = FieldFormat::splitValue(entry->field(QLatin1String("author")));
   if(!names.isEmpty() && !names[0].isEmpty()) {
     for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
       if((*it).indexOf(QLatin1Char(',')) > -1) {

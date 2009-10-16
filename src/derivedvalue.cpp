@@ -24,6 +24,7 @@
 
 #include "derivedvalue.h"
 #include "collection.h"
+#include "fieldformat.h"
 #include "utils/stringset.h"
 #include "tellico_debug.h"
 
@@ -157,9 +158,21 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
   QString result;
   if(pos == 0) {
     // insert field value
-    result = entry_->field(field, formatted_);
+    result = formatted_ ? entry_->formattedField(field) : entry_->field(field);
   } else {
-    QStringList values = entry_->fields(field, formatted_);
+    QStringList values;
+    if(field->type() ==  Field::Table) {
+      // for tables, only take first column
+      QStringList rows = FieldFormat::splitTable(formatted_ ? entry_->formattedField(field) : entry_->field(field));
+      foreach(const QString& row, rows) {
+        if(row.isEmpty())  {
+          continue;
+        }
+        values.append(FieldFormat::splitRow(row).at(0));
+      }
+    } else {
+      values = FieldFormat::splitValue(formatted_ ? entry_->formattedField(field) : entry_->field(field));
+    }
     if(pos < 0) {
       pos += values.count();
       if(pos < 0) {

@@ -299,9 +299,11 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;
 
   QString value;
-  bool format = options() & Export::ExportFormatted;
+  Data::FormatValue format = (options() & Export::ExportFormatted ?
+                                                Data::ForceFormat :
+                                                Data::NoFormat);
   foreach(Data::FieldPtr fIt, fields_) {
-    value = entry_.field(fIt->name(), format);
+    value = entry_.formattedField(fIt->name(), format);
     if(value.isEmpty()) {
       continue;
     }

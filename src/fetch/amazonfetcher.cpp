@@ -487,7 +487,7 @@ void AmazonFetcher::slotComplete(KJob*) {
     // amazon is really bad about not putting spaces after periods
     if(coll->type() == Data::Collection::Book) {
       QRegExp rx(QLatin1String("\\.([^\\s])"));
-      QStringList values = entry->fields(QLatin1String("author"), false);
+      QStringList values = FieldFormat::splitValue(entry->field(QLatin1String("author")));
       for(QStringList::Iterator it = values.begin(); it != values.end(); ++it) {
         (*it).replace(rx, QLatin1String(". \\1"));
       }
@@ -583,7 +583,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     case Data::Collection::Bibtex:
       {
         const QString keywords = QLatin1String("keyword");
-        QStringList oldWords = entry->fields(keywords, false);
+        QStringList oldWords = FieldFormat::splitValue(entry->field(keywords));
         StringSet words;
         for(QStringList::Iterator it = oldWords.begin(); it != oldWords.end(); ++it) {
           // the amazon2tellico stylesheet separates keywords with '/'
@@ -608,7 +608,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     case Data::Collection::Video:
       {
         const QString genres = QLatin1String("genre");
-        QStringList oldWords = entry->fields(genres, false);
+        QStringList oldWords = FieldFormat::splitValue(entry->field(genres));
         StringSet words;
         // only care about genres that have "Genres" in the amazon response
         // and take the first word after that
@@ -633,7 +633,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
         entry->setField(genres, words.toList().join(FieldFormat::delimiterString()));
         // language tracks get duplicated, too
         words.clear();
-        words.add(entry->fields(QLatin1String("language"), false));
+        words.add(FieldFormat::splitValue(entry->field(QLatin1String("language"))));
         entry->setField(QLatin1String("language"), words.toList().join(FieldFormat::delimiterString()));
       }
       entry->setField(QLatin1String("plot"), Tellico::decodeHTML(entry->field(QLatin1String("plot"))));
@@ -642,7 +642,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     case Data::Collection::Album:
       {
         const QString genres = QLatin1String("genre");
-        QStringList oldWords = entry->fields(genres, false);
+        QStringList oldWords = FieldFormat::splitValue(entry->field(genres));
         StringSet words;
         // only care about genres that have "Styles" in the amazon response
         // and take the first word after that

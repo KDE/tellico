@@ -160,7 +160,9 @@ bool PilotDBExporter::exec() {
   db.doneWithSchema();
 
   Data::FieldList::ConstIterator fIt, end = outputFields.constEnd();
-  bool format = options() & Export::ExportFormatted;
+  Data::FormatValue format = (options() & Export::ExportFormatted ?
+                                                Data::ForceFormat :
+                                                Data::NoFormat);
 
   QRegExp br(QLatin1String("<br/?>"));
   QRegExp tags(QLatin1String("<.*>"));
@@ -171,7 +173,7 @@ bool PilotDBExporter::exec() {
     PalmLib::FlatFile::Record record;
     unsigned i = 0;
     foreach(Data::FieldPtr fIt, outputFields) {
-      value = entryIt->field(fIt->name(), format);
+      value = entryIt->formattedField(fIt->name(), format);
 
       if(fIt->type() == Data::Field::Date) {
         QStringList s = value.split(QLatin1Char('-'), QString::KeepEmptyParts);

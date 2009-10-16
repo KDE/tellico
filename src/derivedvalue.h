@@ -26,6 +26,7 @@
 #define TELLICO_DATA_DERIVEDVALUE_H
 
 #include "datavectors.h"
+#include "entry.h"
 
 #include <QRegExp>
 

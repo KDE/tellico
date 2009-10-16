@@ -28,9 +28,10 @@
 #include "controller.h"
 #include "field.h"
 #include "entry.h"
+#include "fieldformat.h"
 #include "tellico_kernel.h"
-#include "tellico_debug.h"
 #include "gui/cursorsaver.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -595,24 +596,24 @@ void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
   }
 #endif
 
-  foreach(Data::FieldPtr it, m_currColl->fields()) {
-    if(it->type() != Data::Field::Line
-       || !(it->hasFlag(Data::Field::AllowCompletion))) {
+  foreach(Data::FieldPtr f, m_currColl->fields()) {
+    if(f->type() != Data::Field::Line
+       || !f->hasFlag(Data::Field::AllowCompletion)) {
       continue;
     }
 
-    QString key = QString::number(m_currColl->id()) + it->name();
+    QString key = QString::number(m_currColl->id()) + f->name();
     GUI::FieldWidget* widget = m_widgetDict.value(key);
     if(!widget) {
       continue;
     }
-    if(it->hasFlag(Data::Field::AllowMultiple)) {
-      QStringList items = entry_->fields(it, false);
+    if(f->hasFlag(Data::Field::AllowMultiple)) {
+      QStringList items = FieldFormat::splitValue(entry_->field(f));
       for(QStringList::ConstIterator it = items.constBegin(); it != items.constEnd(); ++it) {
         widget->addCompletionObjectItem(*it);
       }
     } else {
-      widget->addCompletionObjectItem(entry_->field(it->name()));
+      widget->addCompletionObjectItem(entry_->field(f));
     }
   }
 }
