@@ -45,7 +45,7 @@ void hmac_sha224_init(hmac_sha224_ctx *ctx, unsigned char *key,
 
     unsigned char *key_used;
     unsigned char key_temp[SHA224_DIGEST_SIZE];
-    int i;
+    unsigned int i;
 
     if (key_size == SHA224_BLOCK_SIZE) {
         key_used = key;
@@ -131,7 +131,7 @@ void hmac_sha256_init(hmac_sha256_ctx *ctx, unsigned char *key,
 
     unsigned char *key_used;
     unsigned char key_temp[SHA256_DIGEST_SIZE];
-    int i;
+    unsigned int i;
 
     if (key_size == SHA256_BLOCK_SIZE) {
         key_used = key;
@@ -217,7 +217,7 @@ void hmac_sha384_init(hmac_sha384_ctx *ctx, unsigned char *key,
 
     unsigned char *key_used;
     unsigned char key_temp[SHA384_DIGEST_SIZE];
-    int i;
+    unsigned int i;
 
     if (key_size == SHA384_BLOCK_SIZE) {
         key_used = key;
@@ -303,7 +303,7 @@ void hmac_sha512_init(hmac_sha512_ctx *ctx, unsigned char *key,
 
     unsigned char *key_used;
     unsigned char key_temp[SHA512_DIGEST_SIZE];
-    int i;
+    unsigned int i;
 
     if (key_size == SHA512_BLOCK_SIZE) {
         key_used = key;
@@ -390,7 +390,7 @@ void test(unsigned char *vector, unsigned char *digest,
           unsigned int digest_size)
 {
     unsigned char output[2 * SHA512_DIGEST_SIZE + 1];
-    int i;
+    unsigned int i;
 
     output[2 * digest_size] = '\0';
 
@@ -473,7 +473,7 @@ int main()
     unsigned int keys_len[7] = {20, 4, 20, 25, 20, 131, 131};
     unsigned int messages2and3_len = 50;
     unsigned int mac_224_size, mac_256_size, mac_384_size, mac_512_size;
-    int i;
+    unsigned int i;
 
     for (i = 0; i < 7; i++) {
         keys[i] = malloc(keys_len[i]);
