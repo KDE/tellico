@@ -70,7 +70,7 @@ QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
   switch(role_) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
-      return field ? entry->field(field) : entry->title();
+      return field ? entry->field(field) : entry->formattedField(QLatin1String("title"));
 
     case Qt::DecorationRole: {
       QString fieldName = imageField(entry->collection());

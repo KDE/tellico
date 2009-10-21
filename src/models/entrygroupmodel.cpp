@@ -114,7 +114,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
         // it probably points to an entry
         Tellico::Data::EntryPtr e = entry(index_);
         if(e) {
-          return e->title();
+          return e->formattedField(QLatin1String("title"));
         }
       } else {
       // it probably points to a group

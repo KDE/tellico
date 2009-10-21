@@ -779,7 +779,6 @@ void ConfigDialog::saveGeneralConfig() {
 
   Config::setNoCapitalizationString(m_leCapitals->text().replace(semicolon, comma));
   Config::setArticlesString(m_leArticles->text().replace(semicolon, comma));
-  FieldFormat::articlesUpdated();
   Config::setNameSuffixesString(m_leSuffixes->text().replace(semicolon, comma));
   Config::setSurnamePrefixesString(m_lePrefixes->text().replace(semicolon, comma));
 }

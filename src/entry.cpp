@@ -117,7 +117,7 @@ QString Entry::field(Tellico::Data::FieldPtr field_) const {
     return dv.value(EntryPtr(const_cast<Entry*>(this)), false);
   }
 
-  if(!m_fieldValues.isEmpty() && m_fieldValues.contains(field_->name())) {
+  if(m_fieldValues.contains(field_->name())) {
     return m_fieldValues.value(field_->name());
   }
   return QString();
@@ -138,7 +138,7 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FormatValue format
     return field(field_);
   }
 
-  Field::FormatFlag flag = field_->formatFlag();
+  const Field::FormatFlag flag = field_->formatFlag();
   if(field_->hasFlag(Field::Derived)) {
     DerivedValue dv(field_);
     // format sub fields and whole string
@@ -150,7 +150,7 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FormatValue format
     return m_coll->prepareText(field(field_));
   }
 
-  if(m_formattedFields.isEmpty() || !m_formattedFields.contains(field_->name())) {
+  if(!m_formattedFields.contains(field_->name())) {
     QString value = field(field_);
     if(!value.isEmpty()) {
       value = Field::format(m_coll->prepareText(value), flag);

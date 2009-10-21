@@ -115,7 +115,7 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
     case Qt::DisplayRole:
       if(parent.isValid()) {
         // it points to an entry
-        return entry(index_)->title();
+        return entry(index_)->formattedField(QLatin1String("title"));
       }
       // it points to a borrower
       return borrower(index_)->name();

@@ -24,13 +24,10 @@
 
 #include "fieldformat.h"
 #include "core/tellico_config.h"
+#include "tellico_debug.h"
 
 using Tellico::FieldFormat;
 
-//these get overwritten, but are here since they're static
-// calling Config::articleList() has to run QString::split() every time, so save a copy
-QStringList FieldFormat::articles;
-QStringList FieldFormat::articlesApos;
 QRegExp FieldFormat::delimiterRx = QRegExp(QLatin1String("\\s*;\\s*"));
 QRegExp FieldFormat::commaSplitRx = QRegExp(QLatin1String("\\s*,\\s*"));
 
@@ -44,7 +41,7 @@ QRegExp FieldFormat::delimiterRegExp() {
 
 QString FieldFormat::fixupValue(const QString& value_) {
   QString value = value_;
-  value.replace(delimiterRegExp(), delimiterString());
+  value.replace(delimiterRx, delimiterString());
   return value;
 }
 
@@ -58,7 +55,7 @@ QString FieldFormat::rowDelimiterString() {
 
 QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
   return parsing_ == StringSplit ? string_.split(delimiterString(), behavior_)
-                                 : string_.split(delimiterRegExp(), behavior_);
+                                 : string_.split(delimiterRx, behavior_);
 }
 
 QStringList FieldFormat::splitRow(const QString& string_, QString::SplitBehavior behavior_) {
@@ -71,14 +68,15 @@ QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavi
 
 QString FieldFormat::title(const QString& title_) {
   QString newTitle = title_;
-  // special case for multi-column tables, assume user never has column delimiter in a value
   QString tail;
-  if(newTitle.indexOf(columnDelimiterString()) > -1) {
-    tail = columnDelimiterString() + newTitle.section(columnDelimiterString(), 1);
-    newTitle = newTitle.section(columnDelimiterString(), 0, 0);
-  }
-
   if(Config::autoFormat()) {
+    // special case for multi-column tables, assume user never has column delimiter in a value
+    const int pos = newTitle.indexOf(columnDelimiterString());
+    if(pos > -1) {
+      tail = columnDelimiterString() + newTitle.mid(pos + columnDelimiterString().length());
+      newTitle = newTitle.left(pos);
+    }
+
     // arbitrarily impose rule that a space must follow every comma
     // has to come before the capitalization since the space is significant
     newTitle.replace(commaSplitRx, QLatin1String(", "));
@@ -91,7 +89,7 @@ QString FieldFormat::title(const QString& title_) {
   if(Config::autoFormat()) {
     const QString lower = newTitle.toLower();
     // TODO if the title has ",the" at the end, put it at the front
-    foreach(const QString& article, articles) {
+    foreach(const QString& article, Config::articleList()) {
       // assume white space is already stripped
       // the articles are already in lower-case
       if(lower.startsWith(article + QLatin1Char(' '))) {
@@ -117,7 +115,7 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
   QStringList entries;
   if(multiple_) {
     // split by semi-colon, optionally preceded or followed by white spacee
-    entries = name_.split(delimiterRegExp(), QString::SkipEmptyParts);
+    entries = name_.split(delimiterRx, QString::SkipEmptyParts);
   } else {
     entries << name_;
   }
@@ -247,9 +245,9 @@ QString FieldFormat::capitalize(QString str_, bool checkConfig_) {
 
   QString word = str_.mid(0, pos);
   // now check to see if words starts with apostrophe list
-  for(QStringList::ConstIterator it = articlesApos.constBegin(); it != articlesApos.constEnd(); ++it) {
-    if(word.startsWith(*it, Qt::CaseInsensitive)) {
-      uint l = (*it).length();
+  foreach(const QString& aposArticle, Config::articleAposList()) {
+    if(word.startsWith(aposArticle, Qt::CaseInsensitive)) {
+      const uint l = aposArticle.length();
       str_.replace(l, 1, str_.at(l).toUpper());
       break;
     }
@@ -264,9 +262,9 @@ QString FieldFormat::capitalize(QString str_, bool checkConfig_) {
     word = str_.mid(pos+1, nextPos-pos-1);
     bool aposMatch = false;
     // now check to see if words starts with apostrophe list
-    for(QStringList::ConstIterator it = articlesApos.constBegin(); it != articlesApos.constEnd(); ++it) {
-      if(word.startsWith(*it, Qt::CaseInsensitive)) {
-        uint l = (*it).length();
+    foreach(const QString& aposArticle, Config::articleAposList()) {
+      if(word.startsWith(aposArticle, Qt::CaseInsensitive)) {
+        const uint l = aposArticle.length();
         str_.replace(pos+l+1, 1, str_.at(pos+l+1).toUpper());
         aposMatch = true;
         break;
@@ -287,7 +285,7 @@ QString FieldFormat::capitalize(QString str_, bool checkConfig_) {
 
 QString FieldFormat::sortKeyTitle(const QString& title_) {
   const QString lower = title_.toLower();
-  foreach(const QString& article, articles) {
+  foreach(const QString& article, Config::articleList()) {
     // assume white space is already stripped
     // the articles are already in lower-case
     if(lower.startsWith(article + QLatin1Char(' '))) {
@@ -295,7 +293,7 @@ QString FieldFormat::sortKeyTitle(const QString& title_) {
     }
   }
   // check apostrophes, too
-  foreach(const QString& article, articlesApos) {
+  foreach(const QString& article, Config::articleAposList()) {
     if(lower.startsWith(article)) {
       return title_.mid(article.length());
     }
@@ -303,22 +301,8 @@ QString FieldFormat::sortKeyTitle(const QString& title_) {
   return title_;
 }
 
-// articles should all be in lower-case
-void FieldFormat::articlesUpdated() {
-  articles = Config::articleList();
-  articlesApos.clear();
-  foreach(const QString& article, articles) {
-    if(article.endsWith(QLatin1Char('\''))) {
-      articlesApos += article;
-    }
-  }
-}
-
 void FieldFormat::stripArticles(QString& value) {
-  if(Config::articleList().isEmpty()) {
-    return;
-  }
-  foreach(const QString& article, articles) {
+  foreach(const QString& article, Config::articleList()) {
     QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
     value.remove(rx);
   }

@@ -70,12 +70,37 @@ namespace {
 
 using Tellico::Config;
 
+QStringList Config::m_articleList;
+QStringList Config::m_articleAposList;
+
 QStringList Config::noCapitalizationList() {
   return Config::noCapitalizationString().split(commaSplit);
 }
 
+void Config::checkArticleList() {
+  // I don't know of a way to update the list when the string changes
+  // so just keep a cached copy
+  static QString cacheValue;
+  if(cacheValue != Config::articlesString()) {
+    m_articleList = Config::articlesString().split(commaSplit);
+    m_articleAposList.clear();
+    foreach(const QString& article, m_articleList) {
+      if(article.endsWith(QLatin1Char('\''))) {
+        m_articleAposList += article;
+      }
+    }
+  }
+}
+
 QStringList Config::articleList() {
-  return Config::articlesString().split(commaSplit);
+  // articles should all be in lower-case
+  checkArticleList();
+  return m_articleList;
+}
+
+QStringList Config::articleAposList() {
+  checkArticleList();
+  return m_articleAposList;
 }
 
 QStringList Config::nameSuffixList() {

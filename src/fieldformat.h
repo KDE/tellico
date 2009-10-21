@@ -101,13 +101,9 @@ public:
    */
   static QString sortKeyTitle(const QString& title);
 
-  static void articlesUpdated();
   static void stripArticles(QString& value);
 
 private:
-  // need to remember articles with apostrophes for capitalization
-  static QStringList articles; //saved so the Config doesn't have to split the string every time
-  static QStringList articlesApos;
   static QRegExp delimiterRx;
   static QRegExp commaSplitRx;
 };

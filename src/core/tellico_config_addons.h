@@ -27,6 +27,7 @@
 public:
   static QStringList noCapitalizationList();
   static QStringList articleList();
+  static QStringList articleAposList();
   static QStringList nameSuffixList();
   static QStringList surnamePrefixList();
 
@@ -43,3 +44,10 @@ public:
   static void setTemplateTextColor(int type, const QColor& color);
   static void setTemplateHighlightedBaseColor(int type, const QColor& color);
   static void setTemplateHighlightedTextColor(int type, const QColor& color);
+
+private:
+  static void checkArticleList();
+
+  static QStringList m_articleList;
+  // need to remember articles with apostrophes for capitalization
+  static QStringList m_articleAposList;

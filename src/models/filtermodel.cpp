@@ -119,7 +119,7 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
       if(parent.isValid()) {
         // it points to an entry
         Data::EntryPtr e = entry(index_);
-        return e ? e->title() : QString();
+        return e ? e->formattedField(QLatin1String("title")) : QString();
       } else {
         // it points to a filter
         FilterPtr f = filter(index_);

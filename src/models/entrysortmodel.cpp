@@ -70,6 +70,7 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
 
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
   if(sortRole() != EntryPtrRole) {
+    myDebug() << "sort role =" << sortRole();
     return AbstractSortModel::lessThan(left_, right_);
   }
 

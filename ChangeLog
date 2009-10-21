@@ -1,3 +1,7 @@
+2009-10-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that auto-formatting was not always applied.
+
 2009-10-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed grouping to always show group for empty value.

@@ -34,8 +34,6 @@ QTEST_KDEMAIN_CORE( FormatTest )
 
 void FormatTest::initTestCase() {
   Tellico::Config::setArticlesString(QString("the,l'"));
-  // have to update apostrophe list
-  Tellico::FieldFormat::articlesUpdated();
   Tellico::Config::setNoCapitalizationString(QString("the,of,et,de"));
 }
 
