@@ -46,7 +46,16 @@ SET(translators_STAT_SRCS
    )
 
 KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
-TARGET_LINK_LIBRARIES(translators collections models)
+TARGET_LINK_LIBRARIES(translators
+    collections
+    models
+    )
+
+TARGET_LINK_LIBRARIES(translators
+    ${LIBXML2_LIBRARIES}
+    ${LIBXSLT_LIBRARIES}
+    ${LIBEXSLT_LIBRARIES}
+    )
 
 ADD_DEPENDENCIES(translators tellico_config)
 
