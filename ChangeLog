@@ -1,3 +1,7 @@
+2009-10-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with the sort order not being saved.
+
 2009-10-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that auto-formatting was not always applied.

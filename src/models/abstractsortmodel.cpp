@@ -27,7 +27,7 @@
 using Tellico::AbstractSortModel;
 
 AbstractSortModel::AbstractSortModel(QObject* parent) : QSortFilterProxyModel(parent)
-    , m_sortColumn(-1), m_secondarySortColumn(-1), m_tertiarySortColumn(-1) {
+    , m_sortColumn(-1), m_secondarySortColumn(-1), m_tertiarySortColumn(-1), m_sortOrder(Qt::AscendingOrder) {
 }
 
 AbstractSortModel::~AbstractSortModel() {
@@ -57,12 +57,23 @@ void AbstractSortModel::setTertiarySortColumn(int col) {
   m_tertiarySortColumn = col;
 }
 
+Qt::SortOrder AbstractSortModel::sortOrder() const {
+  return m_sortOrder;
+}
+
+void AbstractSortModel::setSortOrder(Qt::SortOrder order_) {
+  if(order_ != m_sortOrder) {
+    sort(m_sortColumn, order_);
+  }
+}
+
 void AbstractSortModel::sort(int col_, Qt::SortOrder order_) {
   if(col_ != m_sortColumn) {
     m_tertiarySortColumn = m_secondarySortColumn;
     m_secondarySortColumn = m_sortColumn;
     m_sortColumn = col_;
   }
+  m_sortOrder = order_;
   QSortFilterProxyModel::sort(col_, order_);
 }
 

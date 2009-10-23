@@ -169,8 +169,11 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   updateHeaderMenu();
   checkHeader();
 
+  sortModel()->setSortColumn(config.readEntry(QLatin1String("SortColumn") + configN, -1));
   sortModel()->setSecondarySortColumn(config.readEntry(QLatin1String("PrevSortColumn") + configN, -1));
   sortModel()->setTertiarySortColumn(config.readEntry(QLatin1String("Prev2SortColumn") + configN, -1));
+  const int order = config.readEntry(QLatin1String("SortOrder") + configN, static_cast<int>(Qt::AscendingOrder));
+  sortModel()->setSortOrder(static_cast<Qt::SortOrder>(order));
 
   setUpdatesEnabled(false);
   m_loadingCollection = true;
@@ -179,6 +182,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   setUpdatesEnabled(true);
 
   sortModel()->invalidate();
+  header()->setSortIndicator(sortModel()->sortColumn(), sortModel()->sortOrder());
 }
 
 void DetailedListView::slotReset() {
@@ -420,6 +424,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
         ci.order     = config.readEntry(QLatin1String("ColumnOrder") + configN, QList<int>());
         ci.prevSort  = config.readEntry(QLatin1String("PrevSortColumn") + configN, 0);
         ci.prev2Sort = config.readEntry(QLatin1String("Prev2SortColumn") + configN, 0);
+        ci.sortOrder = config.readEntry(QLatin1String("SortOrder") + configN, static_cast<int>(Qt::AscendingOrder));
         info.append(ci);
       }
     }
@@ -433,6 +438,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       config.writeEntry(QLatin1String("ColumnOrder")     + configN, info[i].order);
       config.writeEntry(QLatin1String("PrevSortColumn")  + configN, info[i].prevSort);
       config.writeEntry(QLatin1String("Prev2SortColumn") + configN, info[i].prev2Sort);
+      config.writeEntry(QLatin1String("SortOrder")       + configN, info[i].sortOrder);
       // legacy entry item
       config.deleteEntry(QLatin1String("ColumnState")    + configN);
     }
@@ -454,12 +460,14 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
   config.writeEntry(QLatin1String("ColumnWidths") + configN, widths);
   config.writeEntry(QLatin1String("ColumnOrder") + configN, order);
 
-  // the main sort order gets saved in the state
-  // the secondary and tertiary need saving separately
+  const int sortCol1 = sortModel()->sortColumn();
   const int sortCol2 = sortModel()->secondarySortColumn();
   const int sortCol3 = sortModel()->tertiarySortColumn();
+  const int sortOrder = static_cast<int>(sortModel()->sortOrder());
+  config.writeEntry(QLatin1String("SortColumn")      + configN, sortCol1);
   config.writeEntry(QLatin1String("PrevSortColumn")  + configN, sortCol2);
   config.writeEntry(QLatin1String("Prev2SortColumn") + configN, sortCol3);
+  config.writeEntry(QLatin1String("SortOrder")       + configN, sortOrder);
   // remove old entry item
   config.deleteEntry(QLatin1String("ColumnState")    + configN);
 }

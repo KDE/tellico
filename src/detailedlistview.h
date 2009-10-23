@@ -163,6 +163,7 @@ private:
     QList<int> order;
     int prevSort;
     int prev2Sort;
+    int sortOrder;
   };
 
   KMenu* m_headerMenu;

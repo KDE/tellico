@@ -46,12 +46,16 @@ public:
   void setSecondarySortColumn(int col);
   void setTertiarySortColumn(int col);
 
+  Qt::SortOrder sortOrder() const;
+  void setSortOrder(Qt::SortOrder order);
+
   virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
 private:
   int m_sortColumn;
   int m_secondarySortColumn;
   int m_tertiarySortColumn;
+  Qt::SortOrder m_sortOrder;
 };
 
 } // end namespace
