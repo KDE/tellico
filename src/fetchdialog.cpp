@@ -680,7 +680,7 @@ void FetchDialog::slotISBNTextChanged() {
   }
   const QTextCursor cursor = m_isbnTextEdit->textCursor();
   // only try to validate if char before cursor is an eol
-  if(text.at(cursor.position()-1) != QLatin1Char('\n')) {
+  if(cursor.atStart() || text.at(cursor.position()-1) != QLatin1Char('\n')) {
     return;
   }
   QStringList lines = text.left(cursor.position()-1).split(QLatin1String("\n"));

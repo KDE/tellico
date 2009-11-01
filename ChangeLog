@@ -1,3 +1,7 @@
+2009-10-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for loading ISBN list from file.
+
 2009-10-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with the sort order not being saved.
