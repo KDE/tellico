@@ -37,6 +37,7 @@ SET(tellico_SRCS
    entrygroup.cpp
    entryiconview.cpp
    entrycomparison.cpp
+   entrymatchdialog.cpp
    entrymerger.cpp
    entryupdatejob.cpp
    entryupdater.cpp

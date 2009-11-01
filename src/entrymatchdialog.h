@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,55 +22,52 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ENTRYUPDATER_H
-#define TELLICO_ENTRYUPDATER_H
+#ifndef TELLICO_ENTRYMATCHDIALOG_H
+#define TELLICO_ENTRYMATCHDIALOG_H
 
 #include "datavectors.h"
-#include "fetch/fetchmanager.h"
+#include "entryupdater.h"
+#include "fetch/fetcher.h"
 
-#include <QPair>
+#include <kdialog.h>
+
+#include <QHash>
+
+namespace Tellico {
+  class EntryView;
+}
+
+class QTreeWidget;
+class QTreeWidgetItem;
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
  */
-class EntryUpdater : public QObject {
+class EntryMatchDialog : public KDialog {
 Q_OBJECT
+
 public:
-  EntryUpdater(Data::CollPtr coll, Data::EntryList entries, QObject* parent);
-  EntryUpdater(const QString& fetcher, Data::CollPtr coll, Data::EntryList entries, QObject* parent);
-  ~EntryUpdater();
+  /**
+   * Constructor
+   */
+  EntryMatchDialog(QWidget* parent, Data::EntryPtr entryToUpdate,
+                   Fetch::Fetcher::Ptr fetcher, const EntryUpdater::ResultList& matchResults);
 
-  typedef QPair<Fetch::FetchResult*, bool> UpdateResult;
-  typedef QList<UpdateResult> ResultList;
-
-public slots:
-  void slotResult(Tellico::Fetch::FetchResult* result);
-  void slotCancel();
+  EntryUpdater::UpdateResult updateResult() const;
 
 private slots:
-  void slotStartNext();
-  void slotDone();
-  void slotCleanup();
+  void slotShowEntry();
 
 private:
-  void init();
-  void handleResults();
-  UpdateResult askUser(const ResultList& results);
-  void mergeCurrent(Data::EntryPtr entry, bool overwrite);
+  QTreeWidget* m_treeWidget;
+  EntryView* m_entryView;
 
-  Data::CollPtr m_coll;
-  Data::EntryList m_entriesToUpdate;
-  Data::EntryList m_fetchedEntries;
-  Data::EntryList m_matchedEntries;
-  Fetch::FetcherVec m_fetchers;
-  int m_fetchIndex;
-  int m_origEntryCount;
-  ResultList m_results;
-  bool m_cancelled;
+  QHash<QTreeWidgetItem*, EntryUpdater::UpdateResult> m_itemResults;
+  QHash<QTreeWidgetItem*, Data::EntryPtr> m_itemEntries;
 };
 
-} // end namespace
+} //end namespace
 
 #endif

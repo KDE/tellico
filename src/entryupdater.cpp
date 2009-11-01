@@ -27,23 +27,18 @@
 #include "entrycomparison.h"
 #include "collection.h"
 #include "tellico_kernel.h"
-#include "tellico_debug.h"
 #include "progressmanager.h"
 #include "gui/statusbar.h"
 #include "document.h"
-#include "fetch/fetchresult.cpp"
+#include "fetch/fetchresult.h"
+#include "entrymatchdialog.h"
+#include "tellico_debug.h"
 
-#include <kdialog.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kapplication.h>
-#include <KVBox>
-#include <ktextedit.h>
 
 #include <QTimer>
-#include <QLabel>
-#include <QTreeWidget>
-#include <QHeaderView>
 
 namespace {
   static const int CHECK_COLLECTION_IMAGES_STEP_SIZE = 10;
@@ -222,47 +217,13 @@ void EntryUpdater::handleResults() {
 }
 
 Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& results) {
-  KDialog dlg(Kernel::self()->widget());
-  dlg.setModal(true);
-  dlg.setCaption(i18n("Select Match"));
-  dlg.setButtons(KDialog::Ok|KDialog::Cancel);
-
-  KVBox* box = new KVBox(&dlg);
-  box->setSpacing(10);
-  dlg.setMainWidget(box);
-
-  KHBox* hbox = new KHBox(box);
-  hbox->setSpacing(10);
-  QLabel* icon = new QLabel(hbox);
-  icon->setPixmap(KIconLoader::global()->loadIcon(QLatin1String("network-wired"), KIconLoader::Panel, 64));
-  QString s = i18n("<qt><b>%1</b> returned multiple results which could match <b>%2</b>, "
-                   "the entry currently in the collection. Please select the correct match.</qt>",
-                   m_fetchers[m_fetchIndex]->source(),
-                   m_entriesToUpdate.front()->field(QLatin1String("title")));
-  KTextEdit* l = new KTextEdit(hbox);
-  l->setHtml(s);
-  l->setReadOnly(true);
-  hbox->setStretchFactor(l, 100);
-
-  QTreeWidget* view = new QTreeWidget(box);
-  view->header()->setSortIndicatorShown(true);
-  view->setAllColumnsShowFocus(true);
-  view->setMinimumWidth(640);
-  view->setHeaderLabels(QStringList() << i18n("Title") << i18n("Description"));
-  QHash<QTreeWidgetItem*, UpdateResult> map;
-  foreach(const UpdateResult& res, results) {
-    QTreeWidgetItem* item = new QTreeWidgetItem(view, QStringList() << res.first->fetchEntry()->title() << res.first->desc);
-    map.insert(item, res);
-  }
+  EntryMatchDialog dlg(Kernel::self()->widget(), m_entriesToUpdate.front(),
+                       m_fetchers[m_fetchIndex], results);
 
   if(dlg.exec() != QDialog::Accepted) {
     return UpdateResult(0, false);
   }
-  QTreeWidgetItem* item = view->currentItem();
-  if(!item) {
-    return UpdateResult(0, false);
-  }
-  return map[item];
+  return dlg.updateResult();
 }
 
 void EntryUpdater::mergeCurrent(Tellico::Data::EntryPtr entry_, bool overWrite_) {
