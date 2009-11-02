@@ -1,3 +1,7 @@
+2009-11-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.1.
+
 2009-10-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug for loading ISBN list from file.
