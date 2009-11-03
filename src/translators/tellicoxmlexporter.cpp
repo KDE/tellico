@@ -281,7 +281,9 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
         parElem.appendChild(fieldElem);
 
         QStringList columnValues = FieldFormat::splitRow(rowValue);
-        Q_ASSERT(ncols >= columnValues.count());
+        if(ncols < columnValues.count()) {
+          myDebug() << "fewer columns than values!" << ncols << "vs." << columnValues.count();
+        }
         for(int col = 0; col < columnValues.count(); ++col) {
           QDomElement elem = dom_.createElement(QLatin1String("column"));
           elem.appendChild(dom_.createTextNode(columnValues.at(col)));
