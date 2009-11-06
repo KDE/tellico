@@ -30,7 +30,7 @@ Package: tellico-data
 Architecture: all
 Conflicts: tellico (<< 1.1.6-1)
 Replaces: tellico (<< 1.1.6-1)
-Depends: kdelibs-data
+Depends: kdelibs5-data
 Recommends: tellico
 Suggests: python
 Description: collection manager for books, videos, music [data]

@@ -20,6 +20,7 @@ ${build_dir}:
 		cmake $(CURDIR) \
 		$(DEB_CMAKE_KDE4_FLAGS) \
 		$(DEB_CMAKE_CUSTOM_FLAGS) \
+		-DENABLE_WEBCAM=true \
 		-DCMAKE_INSTALL_PREFIX="/usr"
 
 configure: ${build_dir}
