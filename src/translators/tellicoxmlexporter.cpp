@@ -267,13 +267,13 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     }
 
     if(fIt->type() == Data::Field::Table) {
-      // who cares about grammar, just add an QLatin1Char('s') to the name
+      // who cares about grammar, just add an 's' to the name
       QDomElement parElem = dom_.createElement(fieldName + QLatin1Char('s'));
       entryElem.appendChild(parElem);
 
       bool ok;
       int ncols = Tellico::toUInt(fIt->property(QLatin1String("columns")), &ok);
-      if(!ok) {
+      if(!ok || ncols < 1) {
         ncols = 1;
       }
       foreach(const QString& rowValue, FieldFormat::splitTable(fieldValue)) {
@@ -282,7 +282,10 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
 
         QStringList columnValues = FieldFormat::splitRow(rowValue);
         if(ncols < columnValues.count()) {
-          myDebug() << "fewer columns than values!" << ncols << "vs." << columnValues.count();
+          // need to combine all the last values, from ncols-1 to end
+          QString lastValue = QStringList(columnValues.mid(ncols-1)).join(FieldFormat::columnDelimiterString());
+          columnValues = columnValues.mid(0, ncols);
+          columnValues.replace(ncols-1, lastValue);
         }
         for(int col = 0; col < columnValues.count(); ++col) {
           QDomElement elem = dom_.createElement(QLatin1String("column"));

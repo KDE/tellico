@@ -118,7 +118,14 @@ void TableFieldWidget::setTextImpl(const QString& text_) {
   }
   for(int row = 0; row < rows.count(); ++row) {
     QStringList columnValues = FieldFormat::splitRow(rows.at(row));
-    for(int col = 0; col < m_table->columnCount(); ++col) {
+    const int ncols = m_table->columnCount();
+    if(ncols < columnValues.count()) {
+      // need to combine all the last values, from ncols-1 to end
+      QString lastValue = QStringList(columnValues.mid(ncols-1)).join(FieldFormat::columnDelimiterString());
+      columnValues = columnValues.mid(0, ncols);
+      columnValues.replace(ncols-1, lastValue);
+    }
+    for(int col = 0; col < ncols; ++col) {
       QString value = col < columnValues.count() ? columnValues.at(col) : QString();
       QTableWidgetItem* item = new QTableWidgetItem(value);
       m_table->setItem(row, col, item);
