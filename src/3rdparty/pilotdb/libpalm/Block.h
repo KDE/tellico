@@ -55,7 +55,7 @@ namespace PalmLib {
    * buffer of that size. (STL: Sequence: default fill
    * constructor)
    */
-  Block(const size_type size, const value_type value = 0)
+  explicit Block(const size_type size, const value_type value = 0)
       : m_data(0), m_size(0) {
       assign(size, value);
   }
