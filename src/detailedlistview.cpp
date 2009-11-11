@@ -347,6 +347,7 @@ void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
 }
 
 void DetailedListView::slotRefresh() {
+  sortModel()->invalidate();
 }
 
 void DetailedListView::setFilter(Tellico::FilterPtr filter_) {
