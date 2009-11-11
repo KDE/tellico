@@ -49,13 +49,13 @@ Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
       field->setCategory(i18n("Personal"));
       field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
       field->setFlags(Field::Derived);
-      field->setFormatFlag(Field::FormatNone);
+      field->setFormatType(FieldFormat::FormatNone);
       break;
     case TitleField:
       field = new Field(QLatin1String("title"), i18n("Title"));
       field->setCategory(i18n("General"));
       field->setFlags(Field::NoDelete);
-      field->setFormatFlag(Field::FormatTitle);
+      field->setFormatType(FieldFormat::FormatTitle);
       break;
     case CreatedDateField:
       field = new Field(QLatin1String("cdate"), i18n("Date Created"), Field::Date);
@@ -124,7 +124,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   m_fieldByName.insert(field_->name(), field_.data());
   m_fieldByTitle.insert(field_->title(), field_.data());
 
-  if(field_->formatFlag() == Field::FormatName) {
+  if(field_->formatType() == FieldFormat::FormatName) {
     m_peopleFields.append(field_); // list of people attributes
     if(m_peopleFields.count() > 1) {
       // the second time that a person field is added, add a "pseudo-group" for people
@@ -316,7 +316,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   bool resetGroups = false;
 
   // if format is different, go ahead and invalidate all formatted entry values
-  if(oldField->formatFlag() != newField_->formatFlag()) {
+  if(oldField->formatType() != newField_->formatType()) {
     // invalidate cached format strings of all entry attributes of this name
     foreach(EntryPtr entry, m_entries) {
       entry->invalidateFormattedFieldValue(fieldName);
@@ -326,8 +326,8 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
 
   // check to see if the people "pseudo-group" needs to be updated
   // only if only one of the two is a name
-  bool wasPeople = oldField->formatFlag() == Field::FormatName;
-  bool isPeople = newField_->formatFlag() == Field::FormatName;
+  bool wasPeople = oldField->formatType() == FieldFormat::FormatName;
+  bool isPeople = newField_->formatType() == FieldFormat::FormatName;
   if(wasPeople) {
     m_peopleFields.removeAll(oldField);
     if(!isPeople) {
@@ -412,7 +412,7 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
   }
 
   bool success = true;
-  if(field_->formatFlag() == Field::FormatName) {
+  if(field_->formatType() == FieldFormat::FormatName) {
     m_peopleFields.removeAll(field_);
   }
 

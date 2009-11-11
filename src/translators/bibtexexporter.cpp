@@ -299,9 +299,9 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;
 
   QString value;
-  Data::FormatValue format = (options() & Export::ExportFormatted ?
-                                                Data::ForceFormat :
-                                                Data::NoFormat);
+  FieldFormat::Request format = (options() & Export::ExportFormatted ?
+                                                FieldFormat::ForceFormat :
+                                                FieldFormat::AsIsFormat);
   foreach(Data::FieldPtr fIt, fields_) {
     value = entry_.formattedField(fIt->name(), format);
     if(value.isEmpty()) {
@@ -310,7 +310,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
 
     // If the entry is formatted as a name and allows multiple values
     // insert "and" in between them (e.g. author and editor)
-    if(fIt->formatFlag() == Data::Field::FormatName
+    if(fIt->formatType() == FieldFormat::FormatName
        && fIt->hasFlag(Data::Field::AllowMultiple)) {
       value.replace(FieldFormat::delimiterString(), QLatin1String(" and "));
     } else if(fIt->hasFlag(Data::Field::AllowMultiple)) {

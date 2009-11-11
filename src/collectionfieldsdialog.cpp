@@ -274,10 +274,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   valueLayout->addWidget(m_formatCombo, valueRow, 1, 1, 3);
   label->setBuddy(m_formatCombo);
 
-  m_formatCombo->addItem(i18n("No formatting"), Data::Field::FormatNone);
-  m_formatCombo->addItem(i18n("Allow auto-capitalization only"), Data::Field::FormatPlain);
-  m_formatCombo->addItem(i18n("Format as a title"), Data::Field::FormatTitle);
-  m_formatCombo->addItem(i18n("Format as a name"), Data::Field::FormatName);
+  m_formatCombo->addItem(i18n("No formatting"), FieldFormat::FormatNone);
+  m_formatCombo->addItem(i18n("Allow auto-capitalization only"), FieldFormat::FormatPlain);
+  m_formatCombo->addItem(i18n("Format as a title"), FieldFormat::FormatTitle);
+  m_formatCombo->addItem(i18n("Format as a name"), FieldFormat::FormatName);
   connect(m_formatCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotModified()));
 
   QGroupBox* optionsGroup = new QGroupBox(i18n("Field Options"), vbox);
@@ -653,9 +653,9 @@ void CollectionFieldsDialog::updateField() {
   field->setDefaultValue(m_defaultEdit->text());
 
   if(m_formatCombo->isEnabled()) {
-    field->setFormatFlag(static_cast<Data::Field::FormatFlag>(m_formatCombo->currentData().toInt()));
+    field->setFormatType(static_cast<FieldFormat::Type>(m_formatCombo->currentData().toInt()));
   } else {
-    field->setFormatFlag(Data::Field::FormatNone);
+    field->setFormatType(FieldFormat::FormatNone);
   }
 
   int flags = 0;
@@ -940,7 +940,7 @@ void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
   }
   slotDerivedChecked(m_derived->isChecked());
 
-  m_formatCombo->setCurrentData(field_->formatFlag());
+  m_formatCombo->setCurrentData(field_->formatType());
 
   m_complete->setChecked(field_->hasFlag(Data::Field::AllowCompletion));
   m_multiple->setChecked(field_->hasFlag(Data::Field::AllowMultiple));

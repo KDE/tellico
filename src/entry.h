@@ -26,6 +26,7 @@
 #define TELLICO_ENTRY_H
 
 #include "datavectors.h"
+#include "fieldformat.h"
 
 #include <QStringList>
 #include <QHash>
@@ -43,12 +44,6 @@ namespace Tellico {
   namespace Data {
     class Collection;
     class EntryGroup;
-
-    enum FormatValue {
-      NoFormat,
-      AutoFormat,
-      ForceFormat
-    };
 
 /**
  * The Entry class represents a book, a CD, or whatever is the basic entity
@@ -103,8 +98,10 @@ public:
    * @param field The field
    * @return The formatted value of the field
    */
-  QString formattedField(const QString& fieldName, FormatValue formatted=AutoFormat) const;
-  QString formattedField(Data::FieldPtr field, FormatValue formatted=AutoFormat) const;
+  QString formattedField(const QString& fieldName,
+                         FieldFormat::Request formatted = FieldFormat::DefaultFormat) const;
+  QString formattedField(Data::FieldPtr field,
+                         FieldFormat::Request formatted = FieldFormat::DefaultFormat) const;
   /**
    * Sets the value of an field for the entry. The method first verifies that
    * the value is allowed for that particular key.

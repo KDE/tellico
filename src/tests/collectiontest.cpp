@@ -96,7 +96,7 @@ void CollectionTest::testDerived() {
 
   Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"), QLatin1String("Author")));
   aField->setFlags(Tellico::Data::Field::AllowMultiple);
-  aField->setFormatFlag(Tellico::Data::Field::FormatName);
+  aField->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(aField);
 
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
@@ -106,7 +106,7 @@ void CollectionTest::testDerived() {
   Tellico::Data::FieldPtr field(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("Test")));
   field->setProperty(QLatin1String("template"), QLatin1String("%{author}"));
   field->setFlags(Tellico::Data::Field::Derived);
-  field->setFormatFlag(Tellico::Data::Field::FormatName);
+  field->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(field);
 
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein; Niels Bohr"));
@@ -137,7 +137,7 @@ void CollectionTest::testDerived() {
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("ALBERT EINSTEIN"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
-  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::Data::ForceFormat), QLatin1String("Einstein, Albert"));
+  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::FieldFormat::ForceFormat), QLatin1String("Einstein, Albert"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:2}"));
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
@@ -146,7 +146,7 @@ void CollectionTest::testDerived() {
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
-  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::Data::ForceFormat), QLatin1String("Bohr, Niels"));
+  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::FieldFormat::ForceFormat), QLatin1String("Bohr, Niels"));
 
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:-2}"));
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));

@@ -95,7 +95,7 @@ void GroupView::addCollection(Tellico::Data::CollPtr coll_) {
   }
 
   // when the coll gets set for the first time, the pixmaps need to be updated
-  if((m_coll->hasField(m_groupBy) && m_coll->fieldByName(m_groupBy)->formatFlag() == Data::Field::FormatName)
+  if((m_coll->hasField(m_groupBy) && m_coll->fieldByName(m_groupBy)->formatType() == FieldFormat::FormatName)
      || m_groupBy == Data::Collection::s_peopleGroupName) {
     m_groupOpenIconName = QLatin1String("person-open");
     m_groupClosedIconName = QLatin1String("person");
@@ -296,7 +296,7 @@ void GroupView::setGroupField(const QString& groupField_) {
   if(!m_coll) {
     return; // can't do anything yet, but still need to set the variable
   }
-  if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatFlag() == Tellico::Data::Field::FormatName)
+  if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatType() == Tellico::FieldFormat::FormatName)
      || groupField_ == Tellico::Data::Collection::s_peopleGroupName) {
     m_groupOpenIconName = QLatin1String("person-open");
     m_groupClosedIconName = QLatin1String("person");

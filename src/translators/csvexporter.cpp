@@ -89,9 +89,9 @@ bool CSVExporter::exec() {
     text += QLatin1Char('\n');
   }
 
-  Data::FormatValue format = (options() & Export::ExportFormatted ?
-                                                Data::ForceFormat :
-                                                Data::NoFormat);
+  FieldFormat::Request format = (options() & Export::ExportFormatted ?
+                                                FieldFormat::ForceFormat :
+                                                FieldFormat::AsIsFormat);
 
   QString tmp;
   Data::EntryList entries = this->entries();

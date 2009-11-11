@@ -170,7 +170,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       Data::FieldPtr f2(new Data::Field(QString::fromLatin1("track%1").arg(disc),
                                         i18n("Tracks (Disc %1)", disc),
                                         Data::Field::Table));
-      f2->setFormatFlag(Data::Field::FormatTitle);
+      f2->setFormatType(FieldFormat::FormatTitle);
       f2->setProperty(QLatin1String("columns"), QLatin1String("3"));
       f2->setProperty(QLatin1String("column1"), i18n("Title"));
       f2->setProperty(QLatin1String("column2"), i18n("Artist"));

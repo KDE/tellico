@@ -66,10 +66,44 @@ QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavi
   return string_.split(rowDelimiterString(), behavior_);
 }
 
-QString FieldFormat::title(const QString& title_) {
+QString FieldFormat::format(const QString& value_, Type type_, Request request_) {
+  if(value_.isEmpty()) {
+    return value_;
+  }
+
+  Options options;
+  if(request_ == ForceFormat || Config::autoCapitalization()) {
+    options |= FormatCapitalize;
+  }
+  if(request_ == ForceFormat || Config::autoFormat()) {
+    options |= FormatAuto;
+  }
+
+  QString text;
+  switch(type_) {
+    case FormatTitle:
+      text = title(value_, options);
+      break;
+    case FormatName:
+      text = name(value_, options);
+      break;
+    case FormatDate:
+      text = date(value_);
+      break;
+    case FormatPlain:
+      text = Config::autoCapitalization() ? capitalize(value_) : value_;
+      break;
+    case FormatNone:
+      text = value_;
+      break;
+  }
+  return text;
+}
+
+QString FieldFormat::title(const QString& title_, Options opt_) {
   QString newTitle = title_;
   QString tail;
-  if(Config::autoFormat()) {
+  if(opt_.testFlag(FormatAuto)) {
     // special case for multi-column tables, assume user never has column delimiter in a value
     const int pos = newTitle.indexOf(columnDelimiterString());
     if(pos > -1) {
@@ -82,11 +116,11 @@ QString FieldFormat::title(const QString& title_) {
     newTitle.replace(commaSplitRx, QLatin1String(", "));
   }
 
-  if(Config::autoCapitalization()) {
+  if(opt_.testFlag(FormatCapitalize)) {
     newTitle = capitalize(newTitle);
   }
 
-  if(Config::autoFormat()) {
+  if(opt_.testFlag(FormatAuto)) {
     const QString lower = newTitle.toLower();
     // TODO if the title has ",the" at the end, put it at the front
     foreach(const QString& article, Config::articleList()) {
@@ -107,18 +141,13 @@ QString FieldFormat::title(const QString& title_) {
   return newTitle + tail;
 }
 
-QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
+QString FieldFormat::name(const QString& name_, Options opt_) {
   static const QRegExp spaceComma(QLatin1String("[\\s,]"));
   // the ending look-ahead is so that a space is not added at the end
   static const QRegExp periodSpace(QLatin1String("\\.\\s*(?=.)"));
 
-  QStringList entries;
-  if(multiple_) {
-    // split by semi-colon, optionally preceded or followed by white spacee
-    entries = name_.split(delimiterRx, QString::SkipEmptyParts);
-  } else {
-    entries << name_;
-  }
+  // assume that the name can always have multiple values
+  QStringList entries = name_.split(delimiterRx, QString::SkipEmptyParts);
 
   QRegExp lastWord;
   lastWord.setCaseSensitivity(Qt::CaseInsensitive);
@@ -133,7 +162,7 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
       name = name.section(columnDelimiterString(), 0, 0);
     }
     name.replace(periodSpace, QLatin1String(". "));
-    if(Config::autoCapitalization()) {
+    if(opt_.testFlag(FormatCapitalize)) {
       name = capitalize(name);
     }
 
@@ -142,7 +171,8 @@ QString FieldFormat::name(const QString& name_, bool multiple_/*=true*/) {
     lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
 
     // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!Config::autoFormat() || (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
+    if(!opt_.testFlag(FormatAuto) ||
+       (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
       // arbitrarily impose rule that no spaces before a comma and
       // a single space after every comma
       name.replace(commaSplitRx, QLatin1String(", "));
@@ -215,14 +245,12 @@ QString FieldFormat::date(const QString& date_) {
 //  return KGlobal::locale()->formatDate(date, true);
 }
 
-QString FieldFormat::capitalize(QString str_, bool checkConfig_) {
+QString FieldFormat::capitalize(QString str_) {
   if(str_.isEmpty()) {
     return str_;
   }
 
-  if(checkConfig_ && !Config::autoCapitalization()) {
-    return str_;
-  }
+  myDebug() << "Capitalizeing...";
 
   // regexp to split words
   const QRegExp rx(QLatin1String("[-\\s,.;]"));

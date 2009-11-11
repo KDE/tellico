@@ -74,7 +74,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   QStringList region;
@@ -95,7 +95,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field = new Field(QLatin1String("nationality"), i18n("Nationality"));
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   QStringList format;
@@ -109,7 +109,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field->setProperty(QLatin1String("columns"), QLatin1String("2"));
   field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
   field->setProperty(QLatin1String("column2"), i18n("Role"));
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   field->setFlags(Field::AllowGrouped);
   field->setDescription(i18n("A table for the cast members, along with the roles they play"));
   list.append(field);
@@ -117,49 +117,49 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
   field = new Field(QLatin1String("director"), i18n("Director"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("producer"), i18n("Producer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("writer"), i18n("Writer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("composer"), i18n("Composer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("studio"), i18n("Studio"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("language"), i18n("Language Tracks"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("subtitle"), i18n("Subtitle Languages"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("audio-track"), i18n("Audio Tracks"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("running-time"), i18n("Running Time"), Field::Number);
@@ -197,7 +197,7 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(video_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "field.h"
-#include "fieldformat.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
 
@@ -35,7 +34,7 @@ using Tellico::Data::Field;
 // this constructor is for anything but Choice type
 Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
     : QSharedData(), m_name(name_), m_title(title_),  m_category(i18n("General")), m_desc(title_),
-      m_type(type_), m_flags(0), m_formatFlag(FormatNone) {
+      m_type(type_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
 
   Q_ASSERT(m_type != Choice);
   // a paragraph's category is always its title, along with tables
@@ -54,7 +53,7 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
       }
       break;
     case Date:  // hidden from user
-      m_formatFlag = FormatDate;
+      m_formatType = FieldFormat::FormatDate;
       break;
     case Rating:
       setProperty(QLatin1String("minimum"), QLatin1String("1"));
@@ -76,13 +75,13 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
 // if this constructor is called, the type is necessarily Choice
 Field::Field(const QString& name_, const QString& title_, const QStringList& allowed_)
     : QSharedData(), m_name(name_), m_title(title_), m_category(i18n("General")), m_desc(title_),
-      m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatFlag(FormatNone) {
+      m_type(Field::Choice), m_allowed(allowed_), m_flags(0), m_formatType(FieldFormat::FormatNone) {
 }
 
 Field::Field(const Field& field_)
     : QSharedData(field_), m_name(field_.name()), m_title(field_.title()), m_category(field_.category()),
       m_desc(field_.description()), m_type(field_.type()), m_allowed(field_.allowed()),
-      m_flags(field_.flags()), m_formatFlag(field_.formatFlag()),
+      m_flags(field_.flags()), m_formatType(field_.formatType()),
       m_properties(field_.propertyList()) {
 }
 
@@ -97,7 +96,7 @@ Field& Field::operator=(const Field& field_) {
   m_type = field_.type();
   m_allowed = field_.allowed();
   m_flags = field_.flags();
-  m_formatFlag = field_.formatFlag();
+  m_formatType = field_.formatType();
   m_properties = field_.propertyList();
   return *this;
 }
@@ -130,7 +129,7 @@ void Field::setType(Field::Type type_) {
       }
       break;
     case Date:
-      m_formatFlag = FormatDate;
+      m_formatType = FieldFormat::FormatDate;
       break;
     case ReadOnly:
       m_flags |= NoEdit;
@@ -167,10 +166,10 @@ bool Field::hasFlag(FieldFlag flag_) const {
   return m_flags & flag_;
 }
 
-void Field::setFormatFlag(FormatFlag flag_) {
-  // Choice and Data fields are not allowed a format
+void Field::setFormatType(FieldFormat::Type type_) {
+  // Choice and Data fields are not allowed a format type
   if(m_type != Choice && m_type != Date) {
-    m_formatFlag = flag_;
+    m_formatType = type_;
   }
 }
 
@@ -186,32 +185,6 @@ void Field::setDefaultValue(const QString& value_) {
 
 bool Field::isSingleCategory() const {
   return (m_type == Para || m_type == Table || m_type == Image);
-}
-
-QString Field::format(const QString& value_, FormatFlag flag_) {
-  if(value_.isEmpty()) {
-    return value_;
-  }
-
-  QString text;
-  switch(flag_) {
-    case FormatTitle:
-      text = FieldFormat::title(value_);
-      break;
-    case FormatName:
-      text = FieldFormat::name(value_);
-      break;
-    case FormatDate:
-      text = FieldFormat::date(value_);
-      break;
-    case FormatPlain:
-      text = FieldFormat::capitalize(value_, true /*check config */);
-      break;
-    case FormatNone:
-      text = value_;
-      break;
-  }
-  return text;
 }
 
 // if these are changed, then CollectionFieldsDialog should be checked since it

@@ -48,25 +48,25 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field = createDefaultField(TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{vintage} %{producer} %{varietal}"));
   field->setFlags(Field::NoDelete | Field::Derived);
-  field->setFormatFlag(Field::FormatNone);
+  field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
   field = new Field(QLatin1String("producer"), i18nc("Wine Producer", "Producer"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("appellation"), i18n("Appellation"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("varietal"), i18n("Varietal"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("vintage"), i18n("Vintage"), Field::Number);
@@ -84,12 +84,12 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   field = new Field(QLatin1String("country"), i18n("Country"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(wine_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));

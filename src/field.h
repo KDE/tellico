@@ -26,6 +26,7 @@
 #define TELLICO_FIELD_H
 
 #include "datavectors.h"
+#include "fieldformat.h"
 
 #include <QStringList>
 #include <QRegExp>
@@ -231,13 +232,13 @@ public:
    *
    * @return The format flag
    */
-  FormatFlag formatFlag() const { return m_formatFlag; }
+  FieldFormat::Type formatType() const { return m_formatType; }
   /**
    * Sets the formatting flag of the field.
    *
    * @param flag The field flag
    */
-  void setFormatFlag(FormatFlag flag);
+  void setFormatType(FieldFormat::Type flag);
   /**
    * Returns the description for the field.
    *
@@ -296,7 +297,6 @@ public:
   const StringMap& propertyList() const { return m_properties; }
 
   /*************************** STATIC **********************************/
-  static QString format(const QString& value, FormatFlag flag);
   /**
    * Returns a mapping of the FieldType enum to translated titles for the types.
    */
@@ -321,7 +321,7 @@ private:
   Type m_type;
   QStringList m_allowed;
   int m_flags;
-  FormatFlag m_formatFlag;
+  FieldFormat::Type m_formatType;
   StringMap m_properties;
 };
 

@@ -62,10 +62,15 @@ void FormatTest::testTitle() {
   QFETCH(bool, capitalize);
   QFETCH(bool, format);
 
-  Tellico::Config::setAutoCapitalization(capitalize);
-  Tellico::Config::setAutoFormat(format);
+  Tellico::FieldFormat::Options options;
+  if(capitalize) {
+    options |= Tellico::FieldFormat::FormatCapitalize;
+  }
+  if(format) {
+    options |= Tellico::FieldFormat::FormatAuto;
+  }
 
-  QCOMPARE(Tellico::FieldFormat::title(string), formatted);
+  QCOMPARE(Tellico::FieldFormat::title(string, options), formatted);
 }
 
 void FormatTest::testTitle_data() {
@@ -95,10 +100,15 @@ void FormatTest::testName() {
   QFETCH(bool, capitalize);
   QFETCH(bool, format);
 
-  Tellico::Config::setAutoCapitalization(capitalize);
-  Tellico::Config::setAutoFormat(format);
+  Tellico::FieldFormat::Options options;
+  if(capitalize) {
+    options |= Tellico::FieldFormat::FormatCapitalize;
+  }
+  if(format) {
+    options |= Tellico::FieldFormat::FormatAuto;
+  }
 
-   QCOMPARE(Tellico::FieldFormat::name(string), formatted);
+   QCOMPARE(Tellico::FieldFormat::name(string, options), formatted);
 }
 
 void FormatTest::testName_data() {

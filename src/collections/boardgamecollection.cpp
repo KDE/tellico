@@ -51,13 +51,13 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(boardgame_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("mechanism"), i18n("Mechanism"));
   field->setCategory(i18n(boardgame_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("year"), i18n("Release Year"), Field::Number);
@@ -68,13 +68,13 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   field = new Field(QLatin1String("publisher"), i18n("Publisher"));
   field->setCategory(i18n(boardgame_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("designer"), i18n("Designer"));
   field->setCategory(i18n(boardgame_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("num-player"), i18n("Number of Players"), Field::Number);
@@ -92,7 +92,7 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(boardgame_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

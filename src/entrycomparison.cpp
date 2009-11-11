@@ -38,7 +38,8 @@ void EntryComparison::setDocumentUrl(const KUrl& url_) {
   s_documentUrl = url_;
 }
 
-int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, const QString& f, const Tellico::Data::Collection* c) {
+int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2,
+                           const QString& f, const Tellico::Data::Collection* c) {
   return score(e1, e2, c->fieldByName(f));
 }
 
@@ -82,10 +83,10 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
       return 5;
     }
   }
-  if(f->formatFlag() == Data::Field::FormatName) {
-    s1 = e1->formattedField(f, Data::ForceFormat).toLower();
-    s2 = e2->formattedField(f, Data::ForceFormat).toLower();
-    if(s1 == s2) {
+  if(f->formatType() == FieldFormat::FormatName) {
+    const QString s1n = e1->formattedField(f, FieldFormat::ForceFormat);
+    const QString s2n = e2->formattedField(f, FieldFormat::ForceFormat);
+    if(s1n == s2n) {
       return 5;
     }
   }
@@ -120,9 +121,9 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
       matches += sl2.count(*it);
     }
-    if(matches == 0 && f->formatFlag() == Data::Field::FormatName) {
-      sl1 = FieldFormat::splitValue(e1->formattedField(f, Data::ForceFormat));
-      sl2 = FieldFormat::splitValue(e2->formattedField(f, Data::ForceFormat));
+    if(matches == 0 && f->formatType() == FieldFormat::FormatName) {
+      sl1 = FieldFormat::splitValue(e1->formattedField(f, FieldFormat::ForceFormat));
+      sl2 = FieldFormat::splitValue(e2->formattedField(f, FieldFormat::ForceFormat));
       for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
         matches += sl2.count(*it);
       }

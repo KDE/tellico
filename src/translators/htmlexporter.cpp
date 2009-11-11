@@ -694,9 +694,9 @@ bool HTMLExporter::writeEntryFiles() {
   // a-zA-Z0-9 with an underscore. This MUST match the filename template in tellico2html.xsl
   // the id is used so uniqueness is guaranteed
   const QRegExp badChars(QLatin1String("[^-a-zA-Z0-9]"));
-  Data::FormatValue formatted = (options() & Export::ExportFormatted ?
-                                                   Data::ForceFormat :
-                                                   Data::NoFormat);
+  FieldFormat::Request formatted = (options() & Export::ExportFormatted ?
+                                                   FieldFormat::ForceFormat :
+                                                   FieldFormat::AsIsFormat);
 
   KUrl outputFile = fileDir();
 

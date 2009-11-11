@@ -54,7 +54,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   field = new Field(QLatin1String("description"), i18n("Description"));
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("denomination"), i18n("Denomination"));
@@ -64,7 +64,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
 
   field = new Field(QLatin1String("country"), i18n("Country"));
   field->setCategory(i18n(stamp_general));
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
@@ -113,7 +113,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(stamp_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
@@ -123,7 +123,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   field = new Field(QLatin1String("location"), i18n("Location"));
   field->setCategory(i18n(stamp_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

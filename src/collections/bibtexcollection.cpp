@@ -91,7 +91,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QLatin1String("bibtex"), QLatin1String("author"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("bibtex-key"), i18n("Bibtex Key"));
@@ -103,28 +103,28 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field = new Field(QLatin1String("booktitle"), i18n("Book Title"));
   field->setProperty(QLatin1String("bibtex"), QLatin1String("booktitle"));
   field->setCategory(i18n(bibtex_general));
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("editor"), i18n("Editor"));
   field->setProperty(QLatin1String("bibtex"), QLatin1String("editor"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("organization"), i18n("Organization"));
   field->setProperty(QLatin1String("bibtex"), QLatin1String("organization"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
 //  field = new Field(QLatin1String("institution"), i18n("Institution"));
 //  field->setProperty(QLatin1String("bibtex"), QLatin1String("institution"));
 //  field->setCategory(i18n(bibtex_general));
 //  field->setFlags(Field::AllowDelete);
-//  field->setFormatFlag(Field::FormatTitle);
+//  field->setFormatType(FieldFormat::FormatTitle);
 //  list.append(field);
 
 /******************* Publishing ****************************/
@@ -132,7 +132,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QLatin1String("bibtex"), QLatin1String("publisher"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("address"), i18n("Address"));
@@ -169,7 +169,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QLatin1String("bibtex"), QLatin1String("journal"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("doi"), i18n("DOI"));
@@ -212,7 +212,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QLatin1String("bibtex"), QLatin1String("series"));
   field->setCategory(i18n(bibtex_misc));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("volume"), i18n("Volume"), Field::Number);

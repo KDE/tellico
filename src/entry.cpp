@@ -26,11 +26,9 @@
 #include "entrygroup.h"
 #include "collection.h"
 #include "field.h"
-#include "fieldformat.h"
 #include "derivedvalue.h"
 #include "tellico_utils.h"
 #include "utils/stringset.h"
-#include "core/tellico_config.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
@@ -123,37 +121,36 @@ QString Entry::field(Tellico::Data::FieldPtr field_) const {
   return QString();
 }
 
-QString Entry::formattedField(const QString& fieldName_, FormatValue formatted_) const {
-  return formattedField(m_coll->fieldByName(fieldName_), formatted_);
+QString Entry::formattedField(const QString& fieldName_, FieldFormat::Request request_) const {
+  return formattedField(m_coll->fieldByName(fieldName_), request_);
 }
 
-QString Entry::formattedField(Tellico::Data::FieldPtr field_, FormatValue formatted_) const {
+QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Request request_) const {
   if(!field_) {
     return QString();
   }
 
-  // if neither the capitalization or formatting option is turned on, don't format the value
-  if(formatted_ == NoFormat ||
-     (formatted_ == AutoFormat && !Config::autoCapitalization() && !Config::autoFormat())) {
+  // don't format the value unless it's requested to do so
+  if(request_ == FieldFormat::AsIsFormat) {
     return field(field_);
   }
 
-  const Field::FormatFlag flag = field_->formatFlag();
+  const FieldFormat::Type flag = field_->formatType();
   if(field_->hasFlag(Field::Derived)) {
     DerivedValue dv(field_);
     // format sub fields and whole string
-    return Field::format(dv.value(EntryPtr(const_cast<Entry*>(this)), true), flag);
+    return FieldFormat::format(dv.value(EntryPtr(const_cast<Entry*>(this)), true), flag, request_);
   }
 
   // if auto format is not set or FormatNone, then just return the value
-  if(flag == Field::FormatNone) {
+  if(flag == FieldFormat::FormatNone) {
     return m_coll->prepareText(field(field_));
   }
 
   if(!m_formattedFields.contains(field_->name())) {
     QString value = field(field_);
     if(!value.isEmpty()) {
-      value = Field::format(m_coll->prepareText(value), flag);
+      value = FieldFormat::format(m_coll->prepareText(value), flag, request_);
       m_formattedFields.insert(field_->name(), value);
     }
     return value;

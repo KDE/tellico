@@ -720,7 +720,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
       QStringList items2 = e2->fields(field, false);
       foreach(const QString& item2, items2) {
         // possible to have one value formatted and the other one not...
-        if(!items1.contains(item2) && !items1.contains(Field::format(item2, field->formatFlag()))) {
+        if(!items1.contains(item2) && !items1.contains(Field::format(item2, field->formatType()))) {
           items1.append(item2);
         }
       }

@@ -160,9 +160,9 @@ bool PilotDBExporter::exec() {
   db.doneWithSchema();
 
   Data::FieldList::ConstIterator fIt, end = outputFields.constEnd();
-  Data::FormatValue format = (options() & Export::ExportFormatted ?
-                                                Data::ForceFormat :
-                                                Data::NoFormat);
+  FieldFormat::Request format = (options() & Export::ExportFormatted ?
+                                                FieldFormat::ForceFormat :
+                                                FieldFormat::AsIsFormat);
 
   QRegExp br(QLatin1String("<br/?>"));
   QRegExp tags(QLatin1String("<.*>"));

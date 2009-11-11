@@ -755,7 +755,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     Data::FieldPtr f = entry_->collection()->fieldByName(QLatin1String("alttitle"));
     if(!f) {
       f = new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
-      f->setFormatFlag(Data::Field::FormatTitle);
+      f->setFormatType(FieldFormat::FormatTitle);
       entry_->collection()->addField(f);
     }
 

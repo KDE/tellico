@@ -47,7 +47,7 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
 
   field = createDefaultField(TitleField);
   field->setTitle(i18n("Name"));
-  field->setFormatFlag(Field::FormatNone);
+  field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
   field = new Field(QLatin1String("url"), i18n("URL"), Field::URL);

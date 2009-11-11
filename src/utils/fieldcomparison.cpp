@@ -42,11 +42,11 @@ Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_
     return new ValueComparison(field_, new RatingComparison());
   } else if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);
-  } else if(field_->type() == Data::Field::Date || field_->formatFlag() == Data::Field::FormatDate) {
+  } else if(field_->type() == Data::Field::Date || field_->formatType() == FieldFormat::FormatDate) {
     return new ValueComparison(field_, new ISODateComparison());
   } else if(field_->type() == Data::Field::Choice) {
     return new ChoiceComparison(field_);
-  } else if(field_->formatFlag() == Data::Field::FormatTitle) {
+  } else if(field_->formatType() == FieldFormat::FormatTitle) {
     // derived value could be formatted as title, so put this test after derived
     return new ValueComparison(field_, new TitleComparison());
   } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||

@@ -139,9 +139,9 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   }
 
   // do we format?
-  Data::FormatValue format = (options() & Export::ExportFormatted ?
-                                                Data::ForceFormat :
-                                                Data::NoFormat);
+  FieldFormat::Request format = (options() & Export::ExportFormatted ?
+                                                FieldFormat::ForceFormat :
+                                                FieldFormat::AsIsFormat);
 
   QTextStream ts(&file);
   // alexandria uses utf-8 all the time

@@ -38,7 +38,7 @@ const QString Tellico::XML::dtdBibtexml = QLatin1String("bibtexml.dtd");
  * VERSION 2 added namespaces, changed to multiple elements,
  * and changed the "keywords" field to "keyword"
  *
- * VERSION 3 broke out the formatFlag, and changed NoComplete to AllowCompletion
+ * VERSION 3 broke out the formatType, and changed NoComplete to AllowCompletion
  *
  * VERSION 4 added a bibtex-field name for Bibtex collections, element name was
  * changed to 'entry', field elements changed to 'field', and boolean fields are now "true"

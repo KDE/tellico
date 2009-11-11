@@ -75,7 +75,7 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
     }
   } else {
     return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0 ||
-           m_pattern.compare(entry_->formattedField(m_fieldName, Data::ForceFormat), Qt::CaseInsensitive) == 0;
+           m_pattern.compare(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat), Qt::CaseInsensitive) == 0;
   }
 
   return false;
@@ -93,7 +93,7 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
     }
   } else {
     return entry_->field(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0 ||
-           entry_->formattedField(m_fieldName, Data::ForceFormat).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
+           entry_->formattedField(m_fieldName, FieldFormat::ForceFormat).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
   }
 
   return false;
@@ -111,7 +111,7 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
     }
   } else {
     return rx.indexIn(entry_->field(m_fieldName)) >= 0 ||
-           rx.indexIn(entry_->formattedField(m_fieldName, Data::ForceFormat)) >= 0;
+           rx.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0;
   }
 
   return false;

@@ -62,7 +62,7 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("year"), i18n("Release Year"), Field::Number);
@@ -73,13 +73,13 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   field = new Field(QLatin1String("publisher"), i18nc("Games - Publisher", "Publisher"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("developer"), i18n("Developer"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   QStringList cert = i18nc("Video game ratings - "
@@ -105,7 +105,7 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(game_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

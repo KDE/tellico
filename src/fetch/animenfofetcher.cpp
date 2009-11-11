@@ -259,13 +259,13 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_) {
   coll->addField(f);
 
   f = new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
-  f->setFormatFlag(Data::Field::FormatTitle);
+  f->setFormatType(FieldFormat::FormatTitle);
   coll->addField(f);
 
   f = new Data::Field(QLatin1String("distributor"), i18n("Distributor"));
   f->setCategory(i18n("Other People"));
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
-  f->setFormatFlag(Data::Field::FormatPlain);
+  f->setFormatType(FieldFormat::FormatPlain);
   coll->addField(f);
 
   f = new Data::Field(QLatin1String("episodes"), i18n("Episodes"), Data::Field::Number);

@@ -341,9 +341,9 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     field->setFlags(field->flags() | flags);
   }
 
-  QString formatStr = attValue(atts_, "format", QString::number(Data::Field::FormatNone));
-  Data::Field::FormatFlag format = static_cast<Data::Field::FormatFlag>(formatStr.toInt());
-  field->setFormatFlag(format);
+  QString formatStr = attValue(atts_, "format", QString::number(FieldFormat::FormatNone));
+  FieldFormat::Type formatType = static_cast<FieldFormat::Type>(formatStr.toInt());
+  field->setFormatType(formatType);
 
   idx = atts_.index(QLatin1String("description"));
   if(idx > -1) {

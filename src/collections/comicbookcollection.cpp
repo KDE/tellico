@@ -51,25 +51,25 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
 
   field = new Field(QLatin1String("subtitle"), i18n("Subtitle"));
   field->setCategory(i18n(comic_general));
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("writer"), i18n("Writer"));
   field->setCategory(i18n(comic_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("artist"), i18nc("Comic Book Illustrator", "Artist"));
   field->setCategory(i18n(comic_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("series"), i18n("Series"));
   field->setCategory(i18n(comic_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("issue"), i18n("Issue"), Field::Number);
@@ -80,13 +80,13 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   field = new Field(QLatin1String("publisher"), i18n("Publisher"));
   field->setCategory(i18n(comic_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("edition"), i18n("Edition"));
   field->setCategory(i18n(comic_publishing));
   field->setFlags(Field::AllowCompletion);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("pub_year"), i18n("Publication Year"),  Field::Number);
@@ -101,19 +101,19 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   field = new Field(QLatin1String("country"), i18n("Country"));
   field->setCategory(i18n(comic_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("language"), i18n("Language"));
   field->setCategory(i18n(comic_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(comic_classification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("keyword"), i18n("Keywords"));
@@ -131,7 +131,7 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(comic_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));

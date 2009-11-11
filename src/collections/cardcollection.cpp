@@ -48,25 +48,25 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   field = createDefaultField(TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{year} %{brand} %{player}"));
   field->setFlags(Field::NoDelete | Field::Derived);
-  field->setFormatFlag(Field::FormatNone);
+  field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
   field = new Field(QLatin1String("player"), i18n("Player"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("team"), i18n("Team"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("brand"), i18n("Brand"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   // might not be totally numeric!
@@ -82,7 +82,7 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   field = new Field(QLatin1String("series"), i18n("Series"));
   field->setCategory(i18n(card_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("type"), i18n("Card Type"));
@@ -92,7 +92,7 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(card_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));

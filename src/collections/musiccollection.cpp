@@ -60,13 +60,13 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   field = new Field(QLatin1String("artist"), i18n("Artist"));
   field->setCategory(i18n(music_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
-  field->setFormatFlag(Field::FormatTitle); // don't use FormatName
+  field->setFormatType(FieldFormat::FormatTitle); // don't use FormatName
   list.append(field);
 
   field = new Field(QLatin1String("label"), i18n("Label"));
   field->setCategory(i18n(music_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("year"), i18n("Year"), Field::Number);
@@ -77,11 +77,11 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(music_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("track"), i18n("Tracks"), Field::Table);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   field->setProperty(QLatin1String("columns"), QLatin1String("3"));
   field->setProperty(QLatin1String("column1"), i18n("Title"));
   field->setProperty(QLatin1String("column2"), i18n("Artist"));
@@ -95,7 +95,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(music_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

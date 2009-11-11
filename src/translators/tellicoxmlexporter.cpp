@@ -111,9 +111,9 @@ QDomDocument TellicoXMLExporter::exportXML() const {
 
   root.setAttribute(QLatin1String("syntaxVersion"), exportVersion);
 
-  Data::FormatValue format = (options() & Export::ExportFormatted ?
-                                                Data::ForceFormat :
-                                                Data::NoFormat);
+  FieldFormat::Request format = (options() & Export::ExportFormatted ?
+                                                FieldFormat::ForceFormat :
+                                                FieldFormat::AsIsFormat);
 
   exportCollectionXML(dom, root, format);
 
@@ -210,7 +210,7 @@ void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_
   elem.setAttribute(QLatin1String("category"), field_->category());
   elem.setAttribute(QLatin1String("type"),     field_->type());
   elem.setAttribute(QLatin1String("flags"),    field_->flags());
-  elem.setAttribute(QLatin1String("format"),   field_->formatFlag());
+  elem.setAttribute(QLatin1String("format"),   field_->formatType());
 
   if(field_->type() == Data::Field::Choice) {
     elem.setAttribute(QLatin1String("allowed"), field_->allowed().join(QLatin1String(";")));
@@ -245,8 +245,8 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
     QString fieldName = fIt->name();
 
     // Date fields are special, don't format in export
-    QString fieldValue = (format_ == Data::ForceFormat && fIt->type() != Data::Field::Date) ?
-                                                           entry_->formattedField(fieldName, Data::ForceFormat) :
+    QString fieldValue = (format_ == FieldFormat::ForceFormat && fIt->type() != Data::Field::Date) ?
+                                                           entry_->formattedField(fieldName, FieldFormat::ForceFormat) :
                                                            entry_->field(fieldName);
     if(options() & ExportClean) {
       BibtexHandler::cleanText(fieldValue);

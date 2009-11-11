@@ -52,19 +52,19 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
 
   field = new Field(QLatin1String("subtitle"), i18n("Subtitle"));
   field->setCategory(i18n(book_general));
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QLatin1String("author"), i18n("Author"));
   field->setCategory(i18n(book_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("editor"), i18n("Editor"));
   field->setCategory(i18n(book_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   QStringList binding;
@@ -77,7 +77,7 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(book_general));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
@@ -87,13 +87,13 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   field = new Field(QLatin1String("publisher"), i18n("Publisher"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("edition"), i18n("Edition"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("cr_year"), i18n("Copyright Year"), Field::Number);
@@ -123,7 +123,7 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   field = new Field(QLatin1String("translator"), i18n("Translator"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatName);
+  field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QLatin1String("language"), i18n("Language"));

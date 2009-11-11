@@ -48,13 +48,13 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field = createDefaultField(TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{year}%{mintmark} %{type} %{denomination}"));
   field->setFlags(Field::NoDelete | Field::Derived);
-  field->setFormatFlag(Field::FormatNone);
+  field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
   field = new Field(QLatin1String("type"), i18n("Type"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatTitle);
+  field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   /* TRANSLATORS: denomination refers to the monetary value. */
@@ -71,13 +71,13 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field = new Field(QLatin1String("mintmark"), i18n("Mint Mark"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("country"), i18n("Country"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("set"), i18n("Coin Set"), Field::Bool);
@@ -110,7 +110,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
 
   field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(coin_personal));
-  field->setFormatFlag(Field::FormatDate);
+  field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
   field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
@@ -120,7 +120,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field = new Field(QLatin1String("location"), i18n("Location"));
   field->setCategory(i18n(coin_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
-  field->setFormatFlag(Field::FormatPlain);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);

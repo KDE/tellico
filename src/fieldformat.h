@@ -34,6 +34,33 @@ namespace Tellico {
 class FieldFormat {
 public:
   /**
+   * The field formatting flags.
+   *
+   * @li FormatTitle - The field should be formatted as a title
+   * @li FormatName - The field should be formatted as a personal name
+   * @li FormatDate - The field should be formatted as a date.
+   * @li FormatPlain - The field only be formatted with capitalization.
+   * @li FormatNone - The field should not be formatted.
+   */
+  enum Type {
+    FormatPlain     = 0,   // format plain, allows capitalization
+    FormatTitle     = 1,   // format as a title, i.e. shift articles to end
+    FormatName      = 2,   // format as a personal full name
+    FormatDate      = 3,   // format as a date
+    FormatNone      = 4    // no format, i.e. no capitalization allowed
+  };
+  enum Request {
+    AsIsFormat,
+    DefaultFormat,
+    ForceFormat
+  };
+  enum Option {
+    FormatCapitalize     = 1 << 0,
+    FormatAuto           = 1 << 1
+  };
+  Q_DECLARE_FLAGS(Options, Option)
+
+ /**
    * Returns the delimiter used to split field values
    *
    * @return The delimiter string
@@ -65,6 +92,8 @@ public:
   static QStringList splitTable(const QString& string,
                                 QString::SplitBehavior behavior = QString::KeepEmptyParts);
 
+  static QString format(const QString& value, Type type, Request req = DefaultFormat);
+
   /**
    * A convenience function to format a string as a title.
    * At the moment, this means that some articles such as "the" are placed
@@ -72,7 +101,7 @@ public:
    *
    * @param title The string to be formatted
    */
-  static QString title(const QString& title);
+  static QString title(const QString& title, Options options);
   /**
    * A convenience function to format a string as a personal name.
    * At the moment, this means that the name is split at the last white space,
@@ -83,7 +112,7 @@ public:
    * @param name The string to be formatted
    * @param multiple A boolean indicating if the string can contain multiple values
    */
-  static QString name(const QString& name, bool multiple=true);
+  static QString name(const QString& name, Options options);
   /**
    * A convenience function to format a string as a date.
    *
@@ -91,15 +120,15 @@ public:
    */
   static QString date(const QString& date);
   /**
+   * Return the key to be used for sorting titles
+   */
+  static QString sortKeyTitle(const QString& title);
+  /**
    * Helper method to fix capitalization.
    *
    * @param str String to fix
    */
-  static QString capitalize(QString str, bool checkConfig=false);
-  /**
-   * Return the key to be used for sorting titles
-   */
-  static QString sortKeyTitle(const QString& title);
+  static QString capitalize(QString str);
 
   static void stripArticles(QString& value);
 
@@ -107,6 +136,8 @@ private:
   static QRegExp delimiterRx;
   static QRegExp commaSplitRx;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(FieldFormat::Options)
 
 } // namespace
 
