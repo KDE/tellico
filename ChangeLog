@@ -1,3 +1,7 @@
+2009-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting when auto-formatting is on.
+
 2009-11-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug related to some table values.

@@ -61,7 +61,7 @@ Tellico::FieldComparison::FieldComparison(Data::FieldPtr field_) : m_field(field
 }
 
 int Tellico::FieldComparison::compare(Data::EntryPtr entry1_, Data::EntryPtr entry2_) {
-  return compare(entry1_->field(m_field), entry2_->field(m_field));
+  return compare(entry1_->formattedField(m_field), entry2_->formattedField(m_field));
 }
 
 Tellico::ValueComparison::ValueComparison(Data::FieldPtr field, StringComparison* comp)

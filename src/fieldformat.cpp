@@ -250,8 +250,6 @@ QString FieldFormat::capitalize(QString str_) {
     return str_;
   }
 
-  myDebug() << "Capitalizeing...";
-
   // regexp to split words
   const QRegExp rx(QLatin1String("[-\\s,.;]"));
 
