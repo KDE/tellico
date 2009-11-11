@@ -30,7 +30,6 @@
 namespace Tellico {
 
 class StringComparison;
-class FieldComparison;
 
 /**
  * @author Robby Stephenson
@@ -47,7 +46,6 @@ protected:
 
 private:
   StringComparison* m_titleComparison;
-  FieldComparison* m_groupComparison;
 };
 
 } // end namespace

@@ -27,46 +27,59 @@
 #include "../field.h"
 #include "../entrygroup.h"
 #include "../utils/stringcomparison.h"
-#include "../utils/fieldcomparison.h"
+#include "../tellico_debug.h"
 
 using Tellico::GroupSortModel;
 
-GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent), m_titleComparison(new TitleComparison()), m_groupComparison(0) {
+GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent)
+     , m_titleComparison(new TitleComparison()) {
 }
 
 GroupSortModel::~GroupSortModel() {
   delete m_titleComparison;
   m_titleComparison = 0;
-  delete m_groupComparison;
-  m_groupComparison = 0;
 }
 
 bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
-  if(sortRole() != GroupPtrRole) {
-    return AbstractSortModel::lessThan(left_, right_);
-  }
-
   // if the index have parents, then they represent entries, compare by title
   QModelIndex leftParent = left_.parent();
   QModelIndex rightParent = right_.parent();
-  if(leftParent.isValid() && rightParent.isValid()) {
-    return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
+  if(!leftParent.isValid() || !rightParent.isValid()) {
+    // we're dealing with groups
+    Data::EntryGroup* leftGroup = sourceModel()->data(left_, GroupPtrRole).value<Data::EntryGroup*>();
+    Data::EntryGroup* rightGroup = sourceModel()->data(right_, GroupPtrRole).value<Data::EntryGroup*>();
+
+    // no matter what the sortRole is, the empty group is always first
+    const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
+    const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());
+
+    bool reverseOrder = false;
+    // sortOrder() was added in qt 4.5
+#if (QT_VERSION >= QT_VERSION_CHECK(4, 5, 0))
+    if (sortOrder() == Qt::DescendingOrder) reverseOrder = true;
+#endif
+
+    // yeah, I should figure out some bit-wise operations...whatever
+    if(emptyLeft && !emptyRight) {
+      return reverseOrder ? false : true;
+    } else if(!emptyLeft && emptyRight) {
+      return reverseOrder ? true: false;
+    } else if(emptyLeft && emptyRight) {
+      return reverseOrder ? true: false;
+    }
+
+    // now if we're using count, just pass up the line
+    if(sortRole() == RowCountRole) {
+      return AbstractSortModel::lessThan(left_, right_);
+    }
+
+    // for now, just sort case-insensitive, localeAware
+    return left_.data().toString().toUpper().localeAwareCompare(right_.data().toString().toUpper()) < 0;
+//  return AbstractSortModel::lessThan(left_, right_);
   }
 
-  Data::EntryGroup* leftGroup = sourceModel()->data(left_, GroupPtrRole).value<Data::EntryGroup*>();
-  Data::EntryGroup* rightGroup = sourceModel()->data(right_, GroupPtrRole).value<Data::EntryGroup*>();
-
-  const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
-  const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());
-  if(emptyLeft && !emptyRight) {
-    return true;
-  } else if(!emptyLeft && emptyRight) {
-    return false;
-  } else if(emptyLeft && emptyRight) {
-    return false;
-  }
-
-  return AbstractSortModel::lessThan(left_, right_);
+  // for ordinary entries, just compare with title comparison
+  return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
 }
 
 #include "groupsortmodel.moc"

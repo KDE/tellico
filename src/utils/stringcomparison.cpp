@@ -62,8 +62,8 @@ Tellico::TitleComparison::TitleComparison() : StringComparison() {
 }
 
 int Tellico::TitleComparison::compare(const QString& str1_, const QString& str2_) {
-  const QString title1 = FieldFormat::sortKeyTitle(str1_);
-  const QString title2 = FieldFormat::sortKeyTitle(str2_);
+  const QString title1 = FieldFormat::sortKeyTitle(str1_).toLower();
+  const QString title2 = FieldFormat::sortKeyTitle(str2_).toLower();
   return title1.localeAwareCompare(title2);
 }
 

@@ -263,13 +263,16 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
     StringSet groups;
     foreach(const QString& row, FieldFormat::splitTable(field(f))) {
       const QStringList columns = FieldFormat::splitRow(row);
-      groups.add(FieldFormat::splitValue(columns.at(0)));
+      const QStringList values = FieldFormat::splitValue(columns.at(0));
+      foreach(const QString& value, values) {
+        groups.add(FieldFormat::format(value, f->formatType()));
+      }
     }
     return groups.toList();
   }
 
   if(f->hasFlag(Field::AllowMultiple)) {
-    QStringList groups = FieldFormat::splitValue(field(f));
+    QStringList groups = FieldFormat::splitValue(formattedField(f));
     // possible to be empty for no value
     // but we want to populate an empty group
     if(groups.isEmpty()) {
@@ -279,7 +282,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
   }
 
   // easy if not allowing multiple values
-  return QStringList() << field(fieldName_);
+  return QStringList() << formattedField(fieldName_);
 }
 
 bool Entry::isOwned() {
