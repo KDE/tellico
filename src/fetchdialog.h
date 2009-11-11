@@ -111,6 +111,9 @@ private:
   void stopProgress();
   void setStatus(const QString& text);
 
+  void openBarcodePreview();
+  void closeBarcodePreview();
+
   void customEvent(QEvent* event);
 
   class FetchResultItem;
@@ -130,7 +133,6 @@ private:
   QProgressBar* m_progress;
   QTimer* m_timer;
   QPointer<KTextEdit> m_isbnTextEdit;
-  QLabel* m_barcodePreview;
 
   bool m_started;
   int m_resultCount;
@@ -141,6 +143,7 @@ private:
   QList<Fetch::FetchResult*> m_results;
   int m_collType;
 
+  QLabel* m_barcodePreview;
   barcodeRecognition::barcodeRecognitionThread* m_barcodeRecognitionThread;
 };
 

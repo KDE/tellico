@@ -116,8 +116,11 @@ class FetchDialog::FetchResultItem : public QTreeWidgetItem {
 };
 
 FetchDialog::FetchDialog(QWidget* parent_)
-    : KDialog(parent_),
-      m_timer(new QTimer(this)), m_started(false) {
+    : KDialog(parent_)
+    , m_timer(new QTimer(this))
+    , m_started(false)
+    , m_barcodePreview(0)
+    , m_barcodeRecognitionThread(0) {
   setModal(false);
   setCaption(i18n("Internet Search"));
   setButtons(0);
@@ -283,35 +286,21 @@ FetchDialog::FetchDialog(QWidget* parent_)
   KAcceleratorManager::manage(this);
   // initialize combos
   QTimer::singleShot(0, this, SLOT(slotInit()));
-
-#ifdef ENABLE_WEBCAM
-  // barcode recognition
-  m_barcodeRecognitionThread = new barcodeRecognitionThread();
-  if (m_barcodeRecognitionThread->isWebcamAvailable()) {
-    m_barcodePreview = new QLabel(0);
-    m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
-    m_barcodePreview->move(KGlobalSettings::desktopGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
-    m_barcodePreview->show();
-
-    connect( m_barcodeRecognitionThread, SIGNAL(recognized(const QString&)), this, SLOT(slotBarcodeRecognized(const QString&)) );
-    connect( m_barcodeRecognitionThread, SIGNAL(gotImage(const QImage&)), this, SLOT(slotBarcodeGotImage(const QImage&)) );
-//    connect( m_barcodePreview, SIGNAL(destroyed(QObject *)), this, SLOT(slotBarcodeStop()) );
-    m_barcodeRecognitionThread->start();
-  } else {
-    m_barcodePreview = 0;
-  }
-#endif
 }
 
 FetchDialog::~FetchDialog() {
 #ifdef ENABLE_WEBCAM
-  m_barcodeRecognitionThread->stop();
-  if(!m_barcodeRecognitionThread->wait( 1000 )) {
-    m_barcodeRecognitionThread->terminate();
+  if(m_barcodeRecognitionThread) {
+    m_barcodeRecognitionThread->stop();
+    if(!m_barcodeRecognitionThread->wait( 1000 )) {
+      m_barcodeRecognitionThread->terminate();
+    }
+    delete m_barcodeRecognitionThread;
+    m_barcodeRecognitionThread = 0;
   }
-  delete m_barcodeRecognitionThread;
   if(m_barcodePreview) {
     delete m_barcodePreview;
+    m_barcodePreview = 0;
   }
 #endif
 
@@ -583,6 +572,12 @@ void FetchDialog::slotKeyChanged(int idx_) {
 //    slotMultipleISBN(false);
     m_valueLineEdit->setValidator(0);
   }
+
+  if(key == Fetch::ISBN || key == Fetch::UPC) {
+    openBarcodePreview();
+  } else {
+    closeBarcodePreview();
+  }
 }
 
 void FetchDialog::slotSourceChanged(const QString& source_) {
@@ -745,6 +740,39 @@ void FetchDialog::slotBarcodeGotImage(const QImage& img_)  {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
   ImageDataEvent* e = new ImageDataEvent(img_);
   kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+}
+
+void FetchDialog::openBarcodePreview() {
+#ifdef ENABLE_WEBCAM
+  if(m_barcodePreview) {
+    m_barcodePreview->show();
+    m_barcodeRecognitionThread->start();
+    return;
+  }
+
+  // barcode recognition
+  m_barcodeRecognitionThread = new barcodeRecognitionThread();
+  if (m_barcodeRecognitionThread->isWebcamAvailable()) {
+    m_barcodePreview = new QLabel(0);
+    m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
+    m_barcodePreview->move(KGlobalSettings::desktopGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
+    m_barcodePreview->show();
+
+    connect( m_barcodeRecognitionThread, SIGNAL(recognized(const QString&)), this, SLOT(slotBarcodeRecognized(const QString&)) );
+    connect( m_barcodeRecognitionThread, SIGNAL(gotImage(const QImage&)), this, SLOT(slotBarcodeGotImage(const QImage&)) );
+//    connect( m_barcodePreview, SIGNAL(destroyed(QObject *)), this, SLOT(slotBarcodeStop()) );
+    m_barcodeRecognitionThread->start();
+  }
+#endif
+}
+
+void FetchDialog::closeBarcodePreview() {
+  if(!m_barcodePreview) {
+    return;
+  }
+
+  m_barcodePreview->hide();
+  m_barcodeRecognitionThread->stop();
 }
 
 void FetchDialog::customEvent(QEvent* e) {
