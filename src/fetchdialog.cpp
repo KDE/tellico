@@ -767,12 +767,14 @@ void FetchDialog::openBarcodePreview() {
 }
 
 void FetchDialog::closeBarcodePreview() {
+#ifdef ENABLE_WEBCAM
   if(!m_barcodePreview) {
     return;
   }
 
   m_barcodePreview->hide();
   m_barcodeRecognitionThread->stop();
+#endif
 }
 
 void FetchDialog::customEvent(QEvent* e) {
