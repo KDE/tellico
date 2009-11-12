@@ -1,0 +1,90 @@
+Basic instructions for compiling Tellico
+========================================
+
+Also found at http://userbase.kde.org/Tellico/Compiling
+
+These instructions use Tellico  2.0 as  an example. For
+other versions, replace 2.0 in the commands below.
+
+-------------------------------------------------------
+
+Source Package
+=============
+
+If you download the source package, extract all of the
+files, which should create a directory named tellico-2.0/.
+
+% tar xjvf tellico-2.0.tar.bz2
+% cd tellico-2.0
+
+After that, there are three steps to build and install Tellico.
+
+Configure
+=========
+
+The compilation environment must be configured to your
+system first. The tool used to create the configuration
+is CMake. CMake will check that you have all the
+required development libraries and set up the file
+for compiling.
+
+In the tellico-2.0/ directory, create a directory fo
+building, named build/, just to keep things clear.
+
+% mkdir build
+% cd build
+% cmake .. -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix`
+
+Note the backquotes in the cmake command, they are important.
+
+The .. tells CMake to use the top-level tellico-2.0/
+directory as the source directory, and to set the
+application to install in the same place as other
+KDE applications. Later, when you install Tellico,
+you will likely need root access, either through
+the root password or sudo.
+
+If you do not have the necessary libraries for
+building tellico, CMake will fail and show you
+an error, listing which libraries you lack. Some
+libraries are required for building. Some are
+optional for additional functionality. The library
+packages may have different names, depending on your
+distribution.
+
+Compile
+=======
+
+Make is used to actually compile Tellico.
+
+% make
+
+There will likely be some warnings during compilation,
+but if you see something like
+
+[100%] Built target tellico
+
+then the compilation completed successfully.
+
+Install
+=======
+
+To install Tellico alongside other KDE applications,
+you will likely need to use the sudo command.
+
+% sudo make install
+
+Enter your password, and Tellico should be installed
+and should show up in the KDE menu, likely in the
+Office menu. Or, run it from the command-line.
+
+% tellico
+
+Enjoy
+=====
+
+You can send questions to the tellico-users mailing list.
+
+If you need to uninstall Tellico
+
+% sudo make uninstall
