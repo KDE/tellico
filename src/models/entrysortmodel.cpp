@@ -73,6 +73,10 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     return AbstractSortModel::lessThan(left_, right_);
   }
 
+  if(!left_.isValid() || !right_.isValid()) {
+    return AbstractSortModel::lessThan(left_, right_);
+  }
+
   QModelIndex left = left_;
   QModelIndex right = right_;
 
