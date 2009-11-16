@@ -1,3 +1,7 @@
+2009-11-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that kept filters from being saved. BUG#214672.
+
 2009-11-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated script for searching allocine.fr.

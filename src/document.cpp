@@ -221,7 +221,7 @@ bool Document::saveDocument(const KUrl& url_) {
   exporter->setEntries(m_coll->entries());
   exporter->setURL(url_);
   // since we already asked about overwriting the file, force the save
-  long opt = exporter->options() | Export::ExportForce | Export::ExportProgress;
+  long opt = exporter->options() | Export::ExportForce | Export::ExportComplete | Export::ExportProgress;
   // only write the image sizes if they're known already
   opt &= ~Export::ExportImageSize;
   exporter->setOptions(opt);
