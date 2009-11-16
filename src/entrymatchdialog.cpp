@@ -81,6 +81,7 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
 
   m_treeWidget = new QTreeWidget(split);
   m_treeWidget->setAllColumnsShowFocus(true);
+  m_treeWidget->setSortingEnabled(true);
   m_treeWidget->setHeaderLabels(QStringList() << i18n("Title") << i18n("Description"));
   connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
 

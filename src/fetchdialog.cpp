@@ -203,6 +203,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_treeWidget->header()->setSortIndicatorShown(true);
   m_treeWidget->sortItems(1, Qt::AscendingOrder);
   m_treeWidget->setAllColumnsShowFocus(true);
+  m_treeWidget->setSortingEnabled(true);
   m_treeWidget->setSelectionMode(QAbstractItemView::ExtendedSelection);
   m_treeWidget->setHeaderLabels(QStringList() << QString()
                                               << i18n("Title")
