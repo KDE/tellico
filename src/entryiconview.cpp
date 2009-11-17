@@ -66,7 +66,7 @@ EntryIconView::EntryIconView(QWidget* parent_)
 
   EntryTitleModel* baseModel = new EntryTitleModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
-  sortModel()->setSortRole(EntryPtrRole);
+  sortModel->setSortRole(EntryPtrRole);
   sortModel->setSourceModel(baseModel);
   setModel(sortModel);
 
@@ -150,9 +150,8 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
   }
 
   QMenu* sortMenu = menu.addMenu(i18n("&Sort By"));
-  const QStringList titles = Data::Document::self()->collection()->fieldTitles();
-  for(int i = 0; i < titles.count(); ++i) {
-    sortMenu->addAction(titles.at(i))->setData(i);
+  foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
+    sortMenu->addAction(field->title())->setData(qVariantFromValue(field));
   }
   connect(sortMenu, SIGNAL(triggered(QAction*)), SLOT(slotSortMenuActivated(QAction*)));
 
@@ -160,7 +159,21 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
 }
 
 void EntryIconView::slotSortMenuActivated(QAction* action_) {
-  model()->sort(action_->data().toInt());
+  Data::FieldPtr field = action_->data().value<Data::FieldPtr>();
+  Q_ASSERT(field);
+  if(!field) {
+    return;
+  }
+  // could have just put the index of the field in the list as the actionn data
+  // but instead, we need to to iterate over the current fields and find the index since EntryTitleModel
+  // uses the field list index as the column value
+  Data::FieldList fields = Data::Document::self()->collection()->fields();
+  for(int i = 0; i < fields.count(); ++i) {
+    if(fields.at(i)->name() == field->name()) {
+      model()->sort(i);
+      break;
+    }
+  }
 }
 
 #include "entryiconview.moc"

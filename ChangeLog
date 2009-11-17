@@ -1,3 +1,7 @@
+2009-11-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed sorting in icon view.
+
 2009-11-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that kept filters from being saved. BUG#214672.
@@ -17,7 +21,7 @@
 2009-11-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug related to some table values.
-	* FIxed crashing bug related to column sorting.
+	* FIxed crashing bug related to column sorting. BUG#214661.
 
 2009-11-01  Robby Stephenson  <robby@periapsis.org>
 

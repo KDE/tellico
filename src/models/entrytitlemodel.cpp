@@ -46,6 +46,26 @@ int EntryTitleModel::columnCount(const QModelIndex&) const {
   return rowCount() > 0 ? entry(createIndex(0, 0))->collection()->fields().count() : 1;
 }
 
+// TODO: combine this with EntryModel::headerData inso AnstractEntryModel
+QVariant EntryTitleModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
+  if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal) {
+    return QVariant();
+  }
+  Data::FieldList fields = rowCount() > 0 ? entry(createIndex(0, 0))->collection()->fields() : Data::FieldList();
+  if(fields.isEmpty()) {
+    return QVariant();
+  }
+
+  switch(role_) {
+    case Qt::DisplayRole:
+      return fields.at(section_)->title();
+
+    case FieldPtrRole:
+      return qVariantFromValue(fields.at(section_));
+  }
+  return QVariant();
+}
+
 QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
   if(!index_.isValid()) {
     return QVariant();
