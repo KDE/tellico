@@ -73,18 +73,18 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     return AbstractSortModel::lessThan(left_, right_);
   }
 
-  if(!left_.isValid() || !right_.isValid()) {
-    return AbstractSortModel::lessThan(left_, right_);
-  }
-
   QModelIndex left = left_;
   QModelIndex right = right_;
 
   for(int i = 0; i < 3; ++i) {
     FieldComparison* comp = getComparison(left);
+    if(!comp || !left.isValid() || !right.isValid()) {
+      return false;
+    }
+
     Data::EntryPtr leftEntry = left.model()->data(left, EntryPtrRole).value<Data::EntryPtr>();
     Data::EntryPtr rightEntry = right.model()->data(right, EntryPtrRole).value<Data::EntryPtr>();
-    if(comp && leftEntry && rightEntry) {
+    if(leftEntry && rightEntry) {
       int res = comp->compare(leftEntry, rightEntry);
       if(res == 0) {
         switch (i) {
