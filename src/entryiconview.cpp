@@ -66,6 +66,7 @@ EntryIconView::EntryIconView(QWidget* parent_)
 
   EntryTitleModel* baseModel = new EntryTitleModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
+  sortModel()->setSortRole(EntryPtrRole);
   sortModel->setSourceModel(baseModel);
   setModel(sortModel);
 
