@@ -3,7 +3,7 @@ Basic instructions for compiling Tellico
 
 Also found at http://userbase.kde.org/Tellico/Compiling
 
-These instructions use Tellico  2.0 as  an example. For
+These instructions use Tellico 2.0 as an example. For
 other versions, replace 2.0 in the commands below.
 
 -------------------------------------------------------
@@ -42,7 +42,10 @@ directory as the source directory, and to set the
 application to install in the same place as other
 KDE applications. Later, when you install Tellico,
 you will likely need root access, either through
-the root password or sudo.
+the root password or sudo. To install to a different
+location, use change the -DCMAKE_INSTALL_PREFIX
+option. Remember, the KDEDIRS variable must be
+updated if you install in a nonstandard location.
 
 If you do not have the necessary libraries for
 building tellico, CMake will fail and show you
@@ -51,6 +54,23 @@ libraries are required for building. Some are
 optional for additional functionality. The library
 packages may have different names, depending on your
 distribution.
+
+Options
+-------
+In order to include support for using a webcam to
+scan barcodes, you must have the libv4l library installed
+and include -DENABLE_WEBCAM=true when you run cmake.
+
+To include support for debugging Tellico, you should
+pass the -DCMAKE_BUILD_TYPE=debug option to cmake.
+-DCMAKE_BUILD_TYPE=release is for stripped, non-debugging
+compilation.
+
+Tellico has many unit tests for checking some parts of
+the code for problems. The tests can be compiled by
+using -DKDE4_BUILD_TESTS=TRUE and then running
+
+% make test
 
 Compile
 =======
