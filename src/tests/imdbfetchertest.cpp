@@ -60,7 +60,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 
   QCOMPARE(m_results.size(), 1);
 
-  // the first entry had better be the right onw
+  // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = m_results.at(0);
 
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
@@ -69,6 +69,8 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
+  QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
+  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
 }

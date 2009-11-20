@@ -235,6 +235,16 @@ void IMDBFetcher::slotComplete(KJob*) {
     return;
   }
 
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/testimdbresults.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t << m_text;
+  }
+  f.close();
+#endif
+
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
@@ -649,6 +659,16 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
     // be quiet about failure
     results = Tellico::decodeHTML(FileHandler::readTextFile(url, true));
     m_url = url; // needed for processing
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/testimdbresult.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t << results;
+  }
+  f.close();
+#endif
+
 #endif
   }
   if(results.isEmpty()) {
@@ -840,16 +860,19 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
   QRegExp br2Rx(QLatin1String("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
   br2Rx.setMinimal(true);
-  QRegExp divRx(QLatin1String("<[/]*div"), Qt::CaseInsensitive);
+  QRegExp divRx(QLatin1String("</div"), Qt::CaseInsensitive);
   divRx.setMinimal(true);
   QString name = QLatin1String("/name/");
 
   StringSet people;
-  for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos)) {
+  for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos+1)) {
     // loop until repeated <br> tags or </div> tag
     const int endPos1 = br2Rx.indexIn(str_, pos);
     const int endPos2 = divRx.indexIn(str_, pos);
-    const int endPos = qMin(endPos1, endPos2); // ok to be -1
+    const int endPos = endPos1 == -1 ? endPos2
+                                     : (endPos2 == -1 ? -1
+                                                      : qMin(endPos1, endPos2)
+                                       ); // ok to be -1
     pos = s_anchorRx->indexIn(str_, pos+1);
     while(pos > -1 && pos < endPos) {
       if(s_anchorRx->cap(1).indexOf(name) > -1) {
@@ -878,6 +901,16 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
 #endif
   // be quiet about failure and be sure to translate entities
   QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/testimdbcast.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t << castPage;
+  }
+  f.close();
+#endif
+
 
   int pos = -1;
   // the text to search, depends on which page is being read
@@ -932,7 +965,8 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
       const int pos2 = tdRx.indexIn(castText, pos);
       if(pos2 > -1 && tdRx.indexIn(castText, pos2+1) > -1) {
         cast += s_anchorRx->cap(2).trimmed()
-              + FieldFormat::columnDelimiterString() + tdRx.cap(1).simplified().remove(*s_tagRx);
+              + FieldFormat::columnDelimiterString()
+              + tdRx.cap(1).simplified().remove(*s_tagRx);
       } else {
         cast += s_anchorRx->cap(2).trimmed();
       }
@@ -1090,12 +1124,14 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 }
 
 Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString t = entry_->field(QLatin1String("title"));
+  const QString t = entry_->field(QLatin1String("title"));
   KUrl link = entry_->field(QLatin1String("imdb"));
 
   if(!link.isEmpty() && link.isValid()) {
     myWarning() << "IMDb link searching not implemented";
     return FetchRequest(Title, t);
+
+    // TODO: fix this
     // check if we want a different host
     if(link.host() != m_host) {
 //      myLog() << "switching hosts to " << m_host;
