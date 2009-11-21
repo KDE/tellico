@@ -81,6 +81,9 @@ void IsbnTest::testFixup_data() {
   // check german hyphenation
   QTest::newRow("3423071516") << QL1("3423071516") << QL1("3-423-07151-6");
 
+  // check polish hyphenation
+  QTest::newRow("978-83-7436-170-5") << QL1("9788374361705") << QL1("978-83-7436-170-5");
+
   // check keeping middle hyphens
   QTest::newRow("6-18611913-0") << QL1("6-18611913-0") << QL1("6-18611913-0");
   QTest::newRow("6-186119-13-0") << QL1("6-186119-13-0") << QL1("6-186119-13-0");

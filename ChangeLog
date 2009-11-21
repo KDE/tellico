@@ -1,6 +1,7 @@
 2009-11-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed IMDB search to find director and writers.
+	* Fixed Polish ISBN formatting.
 	* Released Tellico 2.1.1.
 
 2009-11-17  Robby Stephenson  <robby@periapsis.org>
