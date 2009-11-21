@@ -1,3 +1,8 @@
+2009-11-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed IMDB search to find director and writers.
+	* Released Tellico 2.1.1.
+
 2009-11-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed sorting in icon view.
