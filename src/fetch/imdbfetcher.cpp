@@ -87,7 +87,7 @@ void IMDBFetcher::initRegExps() {
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(0), m_started(false), m_fetchImages(true), m_host(QLatin1String(IMDB_SERVER)),
-    m_limit(IMDB_MAX_RESULTS), m_countOffset(0) {
+    m_numCast(10), m_limit(IMDB_MAX_RESULTS), m_countOffset(0) {
   if(!s_tagRx) {
     initRegExps();
   }
@@ -958,7 +958,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   // loop until closing table tag
   const int endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
   pos = s_anchorRx->indexIn(castText, pos+1);
-  while(pos > -1 && pos < endPos && static_cast<int>(cast.count()) < m_numCast) {
+  while(pos > -1 && pos < endPos && cast.count() < m_numCast) {
     if(s_anchorRx->cap(1).indexOf(name) > -1) {
       // now search for <td> item with character name
       // there's a column with ellipses then the character
