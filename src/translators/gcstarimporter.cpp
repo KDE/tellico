@@ -53,7 +53,8 @@ bool GCstarImporter::canImport(int type) const {
       || type == Data::Collection::Album
       || type == Data::Collection::Game
       || type == Data::Collection::Wine
-      || type == Data::Collection::Coin;
+      || type == Data::Collection::Coin
+      || type == Data::Collection::BoardGame;
 }
 
 Tellico::Data::CollPtr GCstarImporter::collection() {
