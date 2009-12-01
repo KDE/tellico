@@ -123,8 +123,9 @@ void EntryIconView::removeEntries(Tellico::Data::EntryList entries_) {
 void EntryIconView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
   QAbstractItemView::selectionChanged(selected_, deselected_);
   Data::EntryList entries;
-  foreach(const QModelIndex& index, selected_.indexes()) {
-    Data::EntryPtr tmp = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+  // ignore the selected_ and deselected_, just use selection model
+  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
+    Data::EntryPtr tmp = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
     if(tmp) {
       entries += tmp;
     }

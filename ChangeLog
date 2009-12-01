@@ -2,6 +2,7 @@
 
 	* Enabled JavaScript for report dialog, incase a template wants to use it.
 	* Fixed crashing bug for sorting during HTML export.
+	* Fixed multiple selection in entry view (KDE #216122).
 
 2009-11-20  Robby Stephenson  <robby@periapsis.org>
 
