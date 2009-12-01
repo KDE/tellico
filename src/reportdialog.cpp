@@ -111,7 +111,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   connect(pb3, SIGNAL(clicked()), SLOT(slotPrint()));
 
   m_HTMLPart = new KHTMLPart(mainWidget);
-  m_HTMLPart->setJScriptEnabled(false);
+  m_HTMLPart->setJScriptEnabled(true);
   m_HTMLPart->setJavaEnabled(false);
   m_HTMLPart->setMetaRefreshEnabled(false);
   m_HTMLPart->setPluginsEnabled(false);

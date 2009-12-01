@@ -1,3 +1,8 @@
+2009-11-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled JavaScript for report dialog, incase a template wants to use it.
+	* Fixed crashing bug for sorting during HTML export.
+
 2009-11-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed IMDB search to find director and writers.
