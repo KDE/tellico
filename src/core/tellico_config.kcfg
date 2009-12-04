@@ -116,6 +116,9 @@
     <entry key="Max Custom URL Settings" type="Int">
         <default>9</default>
     </entry>
+    <entry key="Enable Webcam" type="Bool">
+        <default>true</default>
+    </entry>
 </group>
 
 <group name="Printing">

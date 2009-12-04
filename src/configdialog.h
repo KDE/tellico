@@ -174,6 +174,7 @@ private:
   QRadioButton* m_rbImageInLocalDir;
   QCheckBox* m_cbOpenLastFile;
   QCheckBox* m_cbShowTipDay;
+  QCheckBox* m_cbEnableWebcam;
   QCheckBox* m_cbCapitalize;
   QCheckBox* m_cbFormat;
   KLineEdit* m_leCapitals;

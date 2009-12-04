@@ -28,6 +28,7 @@
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
 #include "fetch/fetchresult.h"
+#include "core/tellico_config.h"
 #include "entryview.h"
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"
@@ -744,6 +745,9 @@ void FetchDialog::slotBarcodeGotImage(const QImage& img_)  {
 }
 
 void FetchDialog::openBarcodePreview() {
+  if(!Config::enableWebcam()) {
+    return;
+  }
 #ifdef ENABLE_WEBCAM
   if(m_barcodePreview) {
     m_barcodePreview->show();
@@ -769,7 +773,7 @@ void FetchDialog::openBarcodePreview() {
 
 void FetchDialog::closeBarcodePreview() {
 #ifdef ENABLE_WEBCAM
-  if(!m_barcodePreview) {
+  if(!m_barcodePreview || !m_barcodeRecognitionThread) {
     return;
   }
 

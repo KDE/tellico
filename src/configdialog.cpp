@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "configdialog.h"
 #include "field.h"
 #include "collection.h"
@@ -239,6 +241,12 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                                     "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
   connect(m_cbShowTipDay, SIGNAL(clicked()), SLOT(slotModified()));
+
+  m_cbEnableWebcam = new QCheckBox(i18n("&Enable webcam for barcode scanning"), frame);
+  m_cbEnableWebcam->setWhatsThis(i18n("If checked, the input from a webcam will be used "
+                                      "to scan barcodes for searching."));
+  l->addWidget(m_cbEnableWebcam);
+  connect(m_cbEnableWebcam, SIGNAL(clicked()), SLOT(slotModified()));
 
   QGroupBox* imageGroupBox = new QGroupBox(i18n("Image Storage Options"), frame);
   l->addWidget(imageGroupBox);
@@ -664,6 +672,13 @@ void ConfigDialog::readGeneralConfig() {
 
   m_cbShowTipDay->setChecked(Config::showTipOfDay());
   m_cbOpenLastFile->setChecked(Config::reopenLastFile());
+#ifdef ENABLE_WEBCAM
+  m_cbEnableWebcam->setChecked(Config::enableWebcam());
+#else
+  m_cbEnableWebcam->setChecked(false);
+  m_cbEnableWebcam->setEnabled(false);
+#endif
+
   switch(Config::imageLocation()) {
     case Config::ImagesInFile: m_rbImageInFile->setChecked(true); break;
     case Config::ImagesInAppDir: m_rbImageInAppDir->setChecked(true); break;
@@ -759,6 +774,7 @@ void ConfigDialog::saveConfiguration() {
 
 void ConfigDialog::saveGeneralConfig() {
   Config::setShowTipOfDay(m_cbShowTipDay->isChecked());
+  Config::setEnableWebcam(m_cbEnableWebcam->isChecked());
 
   int imageLocation;
   if(m_rbImageInFile->isChecked()) {

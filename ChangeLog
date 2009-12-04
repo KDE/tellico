@@ -1,3 +1,7 @@
+2009-12-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Added option for turning webcam off.
+
 2009-11-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Enabled JavaScript for report dialog, incase a template wants to use it.
