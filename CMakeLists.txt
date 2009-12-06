@@ -88,6 +88,8 @@ if(ENABLE_WEBCAM)
     macro_log_feature(LIBV4L_FOUND "libv4l" "Support for barcode scanning with a webcam" "http://hansdegoede.livejournal.com/3636.html" FALSE "" "Required for using a webcam")
     if(LIBV4L_FOUND)
         include_directories(${LIBV4L_INCLUDE_DIR})
+    else(LIBV4L_FOUND)
+        set(ENABLE_WEBCAM FALSE)
     endif(LIBV4L_FOUND)
 endif(ENABLE_WEBCAM)
 
