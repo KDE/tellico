@@ -130,6 +130,9 @@ extern "C" {
 #define        cdte_track_address trackStartAddress
 
 #else
+
+#define TELLICO_NO_CDROM_SUPPORT
+
 #endif  /* os selection */
 
 }
@@ -149,13 +152,13 @@ namespace {
 QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& trackLengths_) {
   QList<uint> list;
 
+#ifndef TELLICO_NO_CDROM_SUPPORT
   int drive = KDE_open(drive_.data(), O_RDONLY | O_NONBLOCK);
   CloseDrive closer(drive);
   if(drive < 0) {
     return list;
   }
 
-#ifndef WIN32
   cdrom_tochdr hdr;
 #if defined(__APPLE__)
   dk_cd_read_disc_info_t discInfoParams;
