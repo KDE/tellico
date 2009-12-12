@@ -749,21 +749,27 @@ void AmazonFetcher::initXSLTHandler() {
 }
 
 Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_) {
-  int type = entry_->collection()->type();
+  const int type = entry_->collection()->type();
+  const QString t = entry_->field(QLatin1String("title"));
   if(type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex) {
-    QString isbn = entry_->field(QLatin1String("isbn"));
+    const QString isbn = entry_->field(QLatin1String("isbn"));
     if(!isbn.isEmpty()) {
       return FetchRequest(Fetch::ISBN, isbn);
     }
-  } else if(type == Data::Collection::Album) {
-    QString a = entry_->field(QLatin1String("artist"));
+    const QString a = entry_->field(QLatin1String("author"));
     if(!a.isEmpty()) {
-      return FetchRequest(Fetch::Person, a);
+      return t.isEmpty() ? FetchRequest(Fetch::Person, a)
+                         : FetchRequest(Fetch::Keyword, t + QLatin1Char('-') + a);
+    }
+  } else if(type == Data::Collection::Album) {
+    const QString a = entry_->field(QLatin1String("artist"));
+    if(!a.isEmpty()) {
+      return t.isEmpty() ? FetchRequest(Fetch::Person, a)
+                         : FetchRequest(Fetch::Keyword, t + QLatin1Char('-') + a);
     }
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QLatin1String("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
