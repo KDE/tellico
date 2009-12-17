@@ -68,7 +68,8 @@ enum Type {
   Bibsonomy,
   GoogleScholar,
   Discogs,
-  WineCom
+  WineCom,
+  TheMovieDB
 };
 
   }

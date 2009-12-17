@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "discogsfetcher.h"
+#include "themoviedbfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -45,80 +45,71 @@
 #include <QDomDocument>
 #include <QTextCodec>
 
-//#define DISCOGS_TEST
-
 namespace {
-  static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
-  static const char* DISCOGS_API_URL = "http://www.discogs.com";
-  static const char* DISCOGS_API_KEY = "de6cb96534";
+  static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
+  static const char* THEMOVIEDB_API_URL = "http://api.themoviedb.org";
+  static const char* THEMOVIEDB_API_VERSION = "2.1";
+  static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
 }
 
-using Tellico::Fetch::DiscogsFetcher;
+using Tellico::Fetch::TheMovieDBFetcher;
 
-DiscogsFetcher::DiscogsFetcher(QObject* parent_)
+TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(DISCOGS_MAX_RETURNS_TOTAL),
-      m_job(0), m_started(false) {
+      m_limit(THEMOVIEDB_MAX_RETURNS_TOTAL),
+      m_job(0), m_started(false), m_needPersonId(false) {
 }
 
-DiscogsFetcher::~DiscogsFetcher() {
+TheMovieDBFetcher::~TheMovieDBFetcher() {
   delete m_xsltHandler;
   m_xsltHandler = 0;
 }
 
-QString DiscogsFetcher::defaultName() {
-  return i18n("Discogs Audio Search");
+QString TheMovieDBFetcher::defaultName() {
+  return i18n("TheMovieDB.org");
 }
 
-QString DiscogsFetcher::source() const {
+QString TheMovieDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool DiscogsFetcher::canFetch(int type) const {
-  return type == Data::Collection::Album;
+bool TheMovieDBFetcher::canFetch(int type) const {
+  return type == Data::Collection::Video;
 }
 
-void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key", DISCOGS_API_KEY);
+void TheMovieDBFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString k = config_.readEntry("API Key", THEMOVIEDB_API_KEY);
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
-  m_fetchImages = config_.readEntry("Fetch Images", true);
   m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
-void DiscogsFetcher::search() {
+void TheMovieDBFetcher::search() {
   m_started = true;
-  m_start = 1;
+  m_needPersonId = false;
   m_total = -1;
   doSearch();
 }
 
-void DiscogsFetcher::continueSearch() {
+void TheMovieDBFetcher::continueSearch() {
   m_started = true;
   doSearch();
 }
 
-void DiscogsFetcher::doSearch() {
-  KUrl u(DISCOGS_API_URL);
-  u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+void TheMovieDBFetcher::doSearch() {
+  KUrl u(THEMOVIEDB_API_URL);
+  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
+  QString queryPath;
 
   switch(request().key) {
     case Title:
-      u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("q"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("release"));
+      queryPath = QLatin1String("/Movie.search/en/xml/") + m_apiKey + QLatin1Char('/') + request().value;
       break;
 
     case Person:
-      u.setPath(QString::fromLatin1("/artist/%1").arg(request().value));
-      break;
-
-    case Keyword:
-      u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("q"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
+      queryPath = QLatin1String("/Person.search/en/xml/") + m_apiKey + QLatin1Char('/') + request().value;
+      m_needPersonId = true;
       break;
 
     default:
@@ -127,9 +118,8 @@ void DiscogsFetcher::doSearch() {
       return;
   }
 
-#ifdef DISCOGS_TEST
-  u = KUrl("/home/robby/discogs-results.xml");
-#endif
+  u.addPath(queryPath);
+
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -138,7 +128,7 @@ void DiscogsFetcher::doSearch() {
           SLOT(slotComplete(KJob*)));
 }
 
-void DiscogsFetcher::stop() {
+void TheMovieDBFetcher::stop() {
   if(!m_started) {
     return;
   }
@@ -150,8 +140,7 @@ void DiscogsFetcher::stop() {
   emit signalDone(this);
 }
 
-void DiscogsFetcher::slotComplete(KJob* ) {
-//  myDebug();
+void TheMovieDBFetcher::slotComplete(KJob* ) {
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
     stop();
@@ -165,12 +154,48 @@ void DiscogsFetcher::slotComplete(KJob* ) {
     return;
   }
 
+  if(m_total == -1) {
+    QDomDocument dom;
+    if(!dom.setContent(data, false)) {
+      myWarning() << "server did not return valid XML.";
+      return;
+    }
+    // total is /resp/fetchresults/@numResults
+    QDomNode n = dom.documentElement().namedItem(QLatin1String("opensearch:totalResults"));
+    QDomElement e = n.toElement();
+    if(!e.isNull()) {
+      m_total = e.text().toInt();
+//      myDebug() << "total = " << m_total;
+    }
+
+    if(m_needPersonId) {
+      m_total = -1;
+      m_needPersonId = false;
+      // for now, just do the first person in the result list
+      n = dom.documentElement().namedItem(QLatin1String("people"))
+                               .namedItem(QLatin1String("person"))
+                               .namedItem(QLatin1String("id"));
+      e = n.toElement();
+      if(e.isNull()) {
+        myWarning() << "no person id found";
+        stop();
+        return;
+      }
+      KUrl u(THEMOVIEDB_API_URL);
+      u.setPath(QLatin1String(THEMOVIEDB_API_VERSION) + QLatin1Char('/') +
+                QLatin1String("Person.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
+                e.text());
+      // quiet, utf8, allowCompressed
+      data = FileHandler::readTextFile(u, true, true, true).toUtf8();
+    }
+  }
+
 #if 0
-  myWarning() << "Remove debug from discogsfetcher.cpp";
+  myWarning() << "Remove debug from themoviedbfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << data;
   }
   f.close();
@@ -184,23 +209,7 @@ void DiscogsFetcher::slotComplete(KJob* ) {
     }
   }
 
-  if(m_total == -1) {
-    QDomDocument dom;
-    if(!dom.setContent(data, false)) {
-      myWarning() << "server did not return valid XML.";
-      return;
-    }
-    // total is /resp/fetchresults/@numResults
-    QDomNode n = dom.documentElement().namedItem(QLatin1String("resp"))
-                                      .namedItem(QLatin1String("fetchresults"));
-    QDomElement e = n.toElement();
-    if(!e.isNull()) {
-      m_total = e.attribute(QLatin1String("numResults")).toInt();
-      myDebug() << "total = " << m_total;
-    }
-  }
-
-  // assume discogs is always utf-8
+  // assume always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
@@ -226,47 +235,34 @@ void DiscogsFetcher::slotComplete(KJob* ) {
     emit signalResultFound(r);
     ++count;
   }
-  m_start = m_entries.count() + 1;
+
   // not sure how to specify start in the REST url
   //  m_hasMoreResults = m_start <= m_total;
 
   stop(); // required
 }
 
-Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
     return Data::EntryPtr();
   }
-  // one way we tell if this entry has been fully initialized is to
-  // check for a cover image
-  if(!entry->field(QLatin1String("cover")).isEmpty()) {
-    myLog() << "already downloaded " << entry->title();
-    return entry;
-  }
-
-  QString release = entry->field(QLatin1String("discogs-id"));
+  QString release = entry->field(QLatin1String("tmdb-id"));
   if(release.isEmpty()) {
-    myDebug() << "no discogs release found";
     return entry;
   }
 
-#ifdef DISCOGS_TEST
-  KUrl u("/home/robby/discogs-release.xml");
-#else
-  KUrl u(DISCOGS_API_URL);
-  u.setPath(QString::fromLatin1("/release/%1").arg(release));
-  u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
-#endif
-//  myDebug() << "url: " << u;
+  KUrl u(THEMOVIEDB_API_URL);
+  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION) + QLatin1Char('/') +
+            QLatin1String("Movie.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
+            release);
 
   // quiet, utf8, allowCompressed
   QString output = FileHandler::readTextFile(u, true, true, true);
 #if 0
-  myWarning() << "Remove output debug from discogsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  myWarning() << "Remove output debug from themoviedbfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec(QTextCodec::codecForName("UTF-8"));
@@ -295,17 +291,17 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("discogs-id"));
+  coll->removeField(QLatin1String("tmdb-id"));
 
   entry = coll->entries().front();
   m_entries.insert(uid_, entry); // replaces old value
   return entry;
 }
 
-void DiscogsFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("discogs2tellico.xsl"));
+void TheMovieDBFetcher::initXSLTHandler() {
+  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("tmdb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate discogs2tellico.xsl.";
+    myWarning() << "can not locate tmdb2tellico.xsl.";
     return;
   }
 
@@ -315,33 +311,28 @@ void DiscogsFetcher::initXSLTHandler() {
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
   if(!m_xsltHandler->isValid()) {
-    myWarning() << "error in discogs2tellico.xsl.";
+    myWarning() << "error in tmdb2tellico.xsl.";
     delete m_xsltHandler;
     m_xsltHandler = 0;
     return;
   }
 }
 
-Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug();
 
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
-
-  QString artist = entry_->field(QLatin1String("artist"));
-  if(!artist.isEmpty()) {
-    return FetchRequest(Person, artist);
-  }
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) const {
-  return new DiscogsFetcher::ConfigWidget(parent_, this);
+Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) const {
+  return new TheMovieDBFetcher::ConfigWidget(parent_, this);
 }
 
-DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher_)
+TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDBFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
@@ -353,7 +344,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.")
                                 .arg(preferredName(),
-                                     QLatin1String("http://www.discogs.com/users/api_key")),
+                                     QLatin1String("http://api.themoviedb.org")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
@@ -373,52 +364,41 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
-  m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
-  connect(m_fetchImageCheck, SIGNAL(clicked()), SLOT(slotSetModified()));
-  ++row;
-  l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
-  w = i18n("The cover image may be downloaded as well. However, too many large images in the "
-           "collection may degrade performance.");
-  m_fetchImageCheck->setWhatsThis(w);
-
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(DiscogsFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(TheMovieDBFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
     // only show the key if it is not the default Tellico one...
     // that way the user is prompted to apply for their own
-    if(fetcher_->m_apiKey != QLatin1String(DISCOGS_API_KEY)) {
+    if(fetcher_->m_apiKey != QLatin1String(THEMOVIEDB_API_KEY)) {
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
-    m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
-  } else {
-    m_fetchImageCheck->setChecked(true);
   }
 }
 
-void DiscogsFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void TheMovieDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
-  config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
 
   saveFieldsConfig(config_);
   slotSetModified(false);
 }
 
-QString DiscogsFetcher::ConfigWidget::preferredName() const {
-  return DiscogsFetcher::defaultName();
+QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
+  return TheMovieDBFetcher::defaultName();
 }
 
-Tellico::StringMap DiscogsFetcher::customFields() {
+Tellico::StringMap TheMovieDBFetcher::customFields() {
   StringMap map;
-  map[QLatin1String("producer")] = i18n("Producer");
-  map[QLatin1String("nationality")] = i18n("Nationality");
-  map[QLatin1String("discogs")] = i18n("Discogs Link");
+  map[QLatin1String("tmdb")] = i18n("TMDb Link");
+  map[QLatin1String("imdb")] = i18n("IMDb Link");
+  // FIXME:
+//  map[QLatin1String("alttitle")] = i18n("Alternative Titles");
   return map;
 }
 
-#include "discogsfetcher.moc"
+#include "themoviedbfetcher.moc"

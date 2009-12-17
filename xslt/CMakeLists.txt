@@ -32,6 +32,7 @@ SET(XSLT_FILES
     tellico-by-title.xsl
     tellico-common.xsl
     tellico-printing.xsl
+    tmdb2tellico.xsl
     UNIMARC2MODS3.xsl
     vhs-logo.png
     welcome.html
