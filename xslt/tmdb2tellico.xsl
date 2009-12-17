@@ -27,7 +27,6 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="TMDb ID" category="General" format="4" type="1" name="tmdb-id"/>
-    <field flags="0" title="TMDb ID" category="General" format="4" type="1" name="tmdb-id"/>
     <field flags="0" title="TMDb Link" category="General" format="4" type="7" name="tmdb"/>
     <field flags="0" title="IMDb Link" category="General" format="4" type="7" name="imdb"/>
    </fields>
@@ -77,9 +76,7 @@
   <casts>
    <xsl:for-each select="cast/person[@job='Actor']">
     <cast>
-     <xsl:value-of select="@name"/>
-     <xsl:text>::</xsl:text>
-     <xsl:value-of select="@character"/>
+     <xsl:value-of select="concat(@name,'::',@character)"/>
     </cast>
    </xsl:for-each>
   </casts>
@@ -121,8 +118,7 @@
 
   <xsl:if test="imdb_id">
    <imdb>
-    <xsl:text>http://www.imdb.com/title/</xsl:text>
-    <xsl:value-of select="imdb_id"/>
+    <xsl:value-of select="concat('http://www.imdb.com/title/',imdb_id)"/>
    </imdb>
   </xsl:if>
 
