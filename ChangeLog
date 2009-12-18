@@ -1,3 +1,7 @@
+2009-12-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed setting correct permissions of backup file (BUG #219259).
+
 2009-12-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Added themoviedb.org data source.
