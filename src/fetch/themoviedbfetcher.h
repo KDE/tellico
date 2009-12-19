@@ -69,7 +69,7 @@ public:
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntry(uint uid);
-  virtual Type type() const { return Discogs; }
+  virtual Type type() const { return TheMovieDB; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
