@@ -29,9 +29,18 @@
 #include <QStringList>
 #include <QRegExp>
 
+class FormatTest;
+
 namespace Tellico {
+  namespace Data {
+    class Field;
+    class Entry;
+  }
 
 class FieldFormat {
+friend class FormatTest;
+friend class Tellico::Data::Field;
+friend class Tellico::Data::Entry;
 public:
   /**
    * The field formatting flags.
@@ -56,27 +65,10 @@ public:
   };
   enum Option {
     FormatCapitalize     = 1 << 0,
-    FormatAuto           = 1 << 1
+    FormatAuto           = 1 << 1,
+    SplitMultiple        = 1 << 2
   };
   Q_DECLARE_FLAGS(Options, Option)
-
- /**
-   * Returns the delimiter used to split field values
-   *
-   * @return The delimiter string
-   */
-  static QString delimiterString();
-  /**
-   * Returns the delimiter used to split field values
-   *
-   * @return The delimiter regexp
-   */
-  static QRegExp delimiterRegExp();
-
-  static QString fixupValue(const QString& value);
-
-  static QString columnDelimiterString();
-  static QString rowDelimiterString();
 
   /**
    * Splits a string into multiple values;
@@ -91,8 +83,31 @@ public:
                               QString::SplitBehavior behavior = QString::KeepEmptyParts);
   static QStringList splitTable(const QString& string,
                                 QString::SplitBehavior behavior = QString::KeepEmptyParts);
+ /**
+   * Returns the delimiter used to split field values
+   *
+   * @return The delimiter string
+   */
+  static QString delimiterString();
+  /**
+   * Returns the delimiter used to split field values
+   *
+   * @return The delimiter regexp
+   */
+  static QRegExp delimiterRegExp();
+  static QString columnDelimiterString();
+  static QString rowDelimiterString();
 
-  static QString format(const QString& value, Type type, Request req = DefaultFormat);
+  static QString fixupValue(const QString& value);
+  /**
+   * Return the key to be used for sorting titles
+   */
+  static QString sortKeyTitle(const QString& title);
+
+  static void stripArticles(QString& value);
+
+private:
+  static QString format(const QString& value, Type type, Request req);
 
   /**
    * A convenience function to format a string as a title.
@@ -120,17 +135,11 @@ public:
    */
   static QString date(const QString& date);
   /**
-   * Return the key to be used for sorting titles
-   */
-  static QString sortKeyTitle(const QString& title);
-  /**
    * Helper method to fix capitalization.
    *
    * @param str String to fix
    */
   static QString capitalize(QString str);
-
-  static void stripArticles(QString& value);
 
 private:
   static QRegExp delimiterRx;

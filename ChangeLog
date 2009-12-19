@@ -1,6 +1,7 @@
 2009-12-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed setting correct permissions of backup file (BUG #219259).
+	* Fixed formatting of multiple people with auto-formatting (BUG #219268).
 
 2009-12-16  Robby Stephenson  <robby@periapsis.org>
 

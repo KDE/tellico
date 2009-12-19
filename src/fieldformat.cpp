@@ -66,16 +66,45 @@ QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavi
   return string_.split(rowDelimiterString(), behavior_);
 }
 
+QString FieldFormat::sortKeyTitle(const QString& title_) {
+  const QString lower = title_.toLower();
+  foreach(const QString& article, Config::articleList()) {
+    // assume white space is already stripped
+    // the articles are already in lower-case
+    if(lower.startsWith(article + QLatin1Char(' '))) {
+      return title_.mid(article.length() + 1);
+    }
+  }
+  // check apostrophes, too
+  foreach(const QString& article, Config::articleAposList()) {
+    if(lower.startsWith(article)) {
+      return title_.mid(article.length());
+    }
+  }
+  return title_;
+}
+
+void FieldFormat::stripArticles(QString& value) {
+  foreach(const QString& article, Config::articleList()) {
+    QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
+    value.remove(rx);
+  }
+  value = value.trimmed();
+  value.remove(QRegExp(QLatin1String(",$")));
+}
+
+/***** PRIVATE ************/
+
 QString FieldFormat::format(const QString& value_, Type type_, Request request_) {
   if(value_.isEmpty()) {
     return value_;
   }
 
   Options options;
-  if(request_ == ForceFormat || Config::autoCapitalization()) {
+  if(request_ == ForceFormat || (request_ != AsIsFormat && Config::autoCapitalization())) {
     options |= FormatCapitalize;
   }
-  if(request_ == ForceFormat || Config::autoFormat()) {
+  if(request_ == ForceFormat || (request_ != AsIsFormat && Config::autoFormat())) {
     options |= FormatAuto;
   }
 
@@ -91,7 +120,7 @@ QString FieldFormat::format(const QString& value_, Type type_, Request request_)
       text = date(value_);
       break;
     case FormatPlain:
-      text = Config::autoCapitalization() ? capitalize(value_) : value_;
+      text = options.testFlag(FormatCapitalize) ? capitalize(value_) : value_;
       break;
     case FormatNone:
       text = value_;
@@ -146,70 +175,54 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
   // the ending look-ahead is so that a space is not added at the end
   static const QRegExp periodSpace(QLatin1String("\\.\\s*(?=.)"));
 
-  // assume that the name can always have multiple values
-  QStringList entries = name_.split(delimiterRx, QString::SkipEmptyParts);
-
   QRegExp lastWord;
   lastWord.setCaseSensitivity(Qt::CaseInsensitive);
 
-  QStringList names;
-  for(QStringList::ConstIterator it = entries.constBegin(); it != entries.constEnd(); ++it) {
-    QString name = *it;
-    // special case for 2-column tables, assume user never has '::' in a value
-    QString tail;
-    if(name.indexOf(columnDelimiterString()) > -1) {
-      tail = columnDelimiterString() + name.section(columnDelimiterString(), 1);
-      name = name.section(columnDelimiterString(), 0, 0);
-    }
-    name.replace(periodSpace, QLatin1String(". "));
-    if(opt_.testFlag(FormatCapitalize)) {
-      name = capitalize(name);
-    }
-
-    // split the name by white space and commas
-    QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
-    lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
-
-    // if it contains a comma already and the last word is not a suffix, don't format it
-    if(!opt_.testFlag(FormatAuto) ||
-       (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
-      // arbitrarily impose rule that no spaces before a comma and
-      // a single space after every comma
-      name.replace(commaSplitRx, QLatin1String(", "));
-      names << name + tail;
-      continue;
-    }
-    // otherwise split it by white space, move the last word to the front
-    // but only if there is more than one word
-    if(words.count() > 1) {
-      // if the last word is a suffix, it has to be kept with last name
-      if(Config::nameSuffixList().filter(lastWord).count() > 0) {
-        words.prepend(words.last().append(QLatin1Char(',')));
-        words.removeLast();
-      }
-
-      // now move the word
-      // adding comma here when there had been a suffix is because it was originally split with space or comma
-      words.prepend(words.last().append(QLatin1Char(',')));
-      words.removeLast();
-
-      // update last word regexp
-      lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
-
-      // this is probably just something for me, limited to english
-      while(Config::surnamePrefixList().filter(lastWord).count() > 0) {
-        words.prepend(words.last());
-        words.removeLast();
-        lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
-      }
-
-      names << words.join(QLatin1String(" ")) + tail;
-    } else {
-      names << name + tail;
-    }
+  QString name = name_;
+  name.replace(periodSpace, QLatin1String(". "));
+  if(opt_.testFlag(FormatCapitalize)) {
+    name = capitalize(name);
   }
 
-  return names.join(QLatin1String("; "));
+  // split the name by white space and commas
+  QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
+  lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
+
+  // if it contains a comma already and the last word is not a suffix, don't format it
+  if(!opt_.testFlag(FormatAuto) ||
+      (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
+    // arbitrarily impose rule that no spaces before a comma and
+    // a single space after every comma
+    name.replace(commaSplitRx, QLatin1String(", "));
+  } else if(words.count() > 1) {
+    // otherwise split it by white space, move the last word to the front
+    // but only if there is more than one word
+
+    // if the last word is a suffix, it has to be kept with last name
+    if(Config::nameSuffixList().filter(lastWord).count() > 0) {
+      words.prepend(words.last().append(QLatin1Char(',')));
+      words.removeLast();
+    }
+
+    // now move the word
+    // adding comma here when there had been a suffix is because it was originally split with space or comma
+    words.prepend(words.last().append(QLatin1Char(',')));
+    words.removeLast();
+
+    // update last word regexp
+    lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
+
+    // this is probably just something for me, limited to english
+    while(Config::surnamePrefixList().filter(lastWord).count() > 0) {
+      words.prepend(words.last());
+      words.removeLast();
+      lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
+    }
+
+    name = words.join(QLatin1String(" "));
+  }
+
+  return name;
 }
 
 QString FieldFormat::date(const QString& date_) {
@@ -307,31 +320,4 @@ QString FieldFormat::capitalize(QString str_) {
     pos = rx.indexIn(str_, pos+1);
   }
   return str_;
-}
-
-QString FieldFormat::sortKeyTitle(const QString& title_) {
-  const QString lower = title_.toLower();
-  foreach(const QString& article, Config::articleList()) {
-    // assume white space is already stripped
-    // the articles are already in lower-case
-    if(lower.startsWith(article + QLatin1Char(' '))) {
-      return title_.mid(article.length() + 1);
-    }
-  }
-  // check apostrophes, too
-  foreach(const QString& article, Config::articleAposList()) {
-    if(lower.startsWith(article)) {
-      return title_.mid(article.length());
-    }
-  }
-  return title_;
-}
-
-void FieldFormat::stripArticles(QString& value) {
-  foreach(const QString& article, Config::articleList()) {
-    QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
-    value.remove(rx);
-  }
-  value = value.trimmed();
-  value.remove(QRegExp(QLatin1String(",$")));
 }

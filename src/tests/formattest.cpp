@@ -90,8 +90,6 @@ void FormatTest::testTitle_data() {
   // right now, 'the' is in the no capitalization string
   QTest::newRow("test8") << "title,the" << "Title, the" << true << true;
   QTest::newRow("test9") << "the return of the king" << "Return of the King, The" << true << true;
-  // test the formatting for table rows
-  QTest::newRow("test9") << "the return of the king::Frodo" << "Return of the King, The::Frodo" << true << true;
 }
 
 void FormatTest::testName() {

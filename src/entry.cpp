@@ -148,12 +148,39 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
   }
 
   if(!m_formattedFields.contains(field_->name())) {
-    QString value = field(field_);
-    if(!value.isEmpty()) {
-      value = FieldFormat::format(m_coll->prepareText(value), flag, request_);
-      m_formattedFields.insert(field_->name(), value);
+    QString formattedValue;
+    if(field_->type() == Field::Table) {
+      QStringList rows;
+      // we only format the first column
+      foreach(const QString& row, FieldFormat::splitTable(field(field_->name()))) {
+        QStringList columns = FieldFormat::splitRow(row);
+        QStringList newValues;
+        foreach(const QString& value, FieldFormat::splitValue(columns.at(0))) {
+          newValues << FieldFormat::format(value, field_->formatType(), FieldFormat::DefaultFormat);
+        }
+        if(!columns.isEmpty()) {
+          columns.replace(0, newValues.join(FieldFormat::delimiterString()));
+        }
+        rows << columns.join(FieldFormat::columnDelimiterString());
+      }
+      formattedValue = rows.join(FieldFormat::rowDelimiterString());
+    } else {
+      QStringList values;
+      if(field_->hasFlag(Field::AllowMultiple)) {
+        values = FieldFormat::splitValue(field(field_->name()));
+      } else {
+        values << field(field_->name());
+      }
+      QStringList formattedValues;
+      foreach(const QString& value, values) {
+        formattedValues << FieldFormat::format(m_coll->prepareText(value), flag, request_);
+      }
+      formattedValue = formattedValues.join(FieldFormat::delimiterString());
     }
-    return value;
+    if(!formattedValue.isEmpty()) {
+      m_formattedFields.insert(field_->name(), formattedValue);
+    }
+    return formattedValue;
   }
   // otherwise, just look it up
   return m_formattedFields.value(field_->name());
@@ -258,31 +285,26 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
     return QStringList();
   }
 
+  StringSet groups;
+  // check table before multiple since tables are always multiple
   if(f->type() == Field::Table) {
     // we only take groups from the first column
-    StringSet groups;
     foreach(const QString& row, FieldFormat::splitTable(field(f))) {
       const QStringList columns = FieldFormat::splitRow(row);
       const QStringList values = FieldFormat::splitValue(columns.at(0));
       foreach(const QString& value, values) {
-        groups.add(FieldFormat::format(value, f->formatType()));
+        groups.add(FieldFormat::format(value, f->formatType(), FieldFormat::DefaultFormat));
       }
     }
-    return groups.toList();
+  } else if(f->hasFlag(Field::AllowMultiple)) {
+    groups.add(FieldFormat::splitValue(formattedField(f)));
+  } else {
+    groups.add(formattedField(f));
   }
 
-  if(f->hasFlag(Field::AllowMultiple)) {
-    QStringList groups = FieldFormat::splitValue(formattedField(f));
-    // possible to be empty for no value
-    // but we want to populate an empty group
-    if(groups.isEmpty()) {
-      groups << QString();
-    }
-    return groups;
-  }
-
-  // easy if not allowing multiple values
-  return QStringList() << formattedField(fieldName_);
+  // possible to be empty for no value
+  // but we want to populate an empty group
+  return groups.isEmpty() ? QStringList(QString()) : groups.toList();
 }
 
 bool Entry::isOwned() {

@@ -151,3 +151,46 @@ void CollectionTest::testDerived() {
   field->setProperty(QLatin1String("template"), QLatin1String("%{author:-2}"));
   QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));
 }
+
+void CollectionTest::testValue() {
+  QFETCH(QString, string);
+  QFETCH(QString, formatted);
+  QFETCH(int, typeInt);
+
+  Tellico::FieldFormat::Type type = static_cast<Tellico::FieldFormat::Type>(typeInt);
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
+
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("Test")));
+  field1->setFlags(Tellico::Data::Field::AllowMultiple);
+  field1->setFormatType(type);
+  coll->addField(field1);
+
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QLatin1String("table"), QLatin1String("Table"), Tellico::Data::Field::Table));
+  field2->setFormatType(type);
+  coll->addField(field2);
+
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry);
+
+  entry->setField(field1, string);
+
+  const QString dummy = Tellico::FieldFormat::columnDelimiterString() + QLatin1String("dummy, the; Dummy, The; the dummy");
+  entry->setField(field2, string + dummy);
+
+  QCOMPARE(entry->formattedField(field1, Tellico::FieldFormat::ForceFormat), formatted);
+  QCOMPARE(entry->formattedField(field2, Tellico::FieldFormat::ForceFormat), formatted + dummy);
+}
+
+void CollectionTest::testValue_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("formatted");
+  QTest::addColumn<int>("typeInt");
+
+  QTest::newRow("test1") << "name" << "Name" << int(Tellico::FieldFormat::FormatName);
+  QTest::newRow("test2") << "name1; name2" << "Name1; Name2" << int(Tellico::FieldFormat::FormatName);
+  QTest::newRow("test3") << "Bob Dylan;Randy Quaid" << "Dylan, Bob; Quaid, Randy" << int(Tellico::FieldFormat::FormatName);
+  QTest::newRow("test4") << "the return of the king" << "Return of the King, The" << int(Tellico::FieldFormat::FormatTitle);
+  QTest::newRow("test5") << "the return of the king;the who" << "Return of the King, The; Who, The" << int(Tellico::FieldFormat::FormatTitle);
+}
+
