@@ -332,11 +332,7 @@ void FetchDialog::slotSearchClicked() {
     Fetch::Manager::self()->stop();
     slotFetchDone();
   } else {
-    QString value = m_valueLineEdit->text().simplified();
-    if(value != m_oldSearch) {
-      m_treeWidget->clear();
-      m_entryView->clear();
-    }
+    const QString value = m_valueLineEdit->text().simplified();
     m_resultCount = 0;
     m_oldSearch = value;
     m_started = true;
