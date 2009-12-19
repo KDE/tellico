@@ -29,18 +29,9 @@
 #include <QStringList>
 #include <QRegExp>
 
-class FormatTest;
-
 namespace Tellico {
-  namespace Data {
-    class Field;
-    class Entry;
-  }
 
 class FieldFormat {
-friend class FormatTest;
-friend class Tellico::Data::Field;
-friend class Tellico::Data::Entry;
 public:
   /**
    * The field formatting flags.
@@ -106,7 +97,6 @@ public:
 
   static void stripArticles(QString& value);
 
-private:
   static QString format(const QString& value, Type type, Request req);
 
   /**

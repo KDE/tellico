@@ -93,8 +93,6 @@ void FieldFormat::stripArticles(QString& value) {
   value.remove(QRegExp(QLatin1String(",$")));
 }
 
-/***** PRIVATE ************/
-
 QString FieldFormat::format(const QString& value_, Type type_, Request request_) {
   if(value_.isEmpty()) {
     return value_;
