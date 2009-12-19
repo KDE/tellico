@@ -19,6 +19,7 @@ SET(XSLT_FILES
     MARC21slim2MODS3.xsl
     MARC21slimUtils.xsl
     mods2tellico.xsl
+    musicbrainz2tellico.xsl
     pubmed2tellico.xsl
     record-logo.png
     referencer2tellico.xsl

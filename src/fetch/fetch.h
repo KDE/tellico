@@ -69,7 +69,8 @@ enum Type {
   GoogleScholar,
   Discogs,
   WineCom,
-  TheMovieDB
+  TheMovieDB,
+  MusicBrainz
 };
 
   }

@@ -30,7 +30,7 @@
     <!-- the importer will actually download the image and ignore this field -->
     <field flags="0" title="Discogs ID" category="General" format="4" type="1" name="discogs-id"/>
     <field flags="0" title="Discogs Link" category="General" format="4" type="7" name="discogs"/>
-   <field flags="7" title="Nationality" category="General" format="0" type="1" name="nationality" i18n="true"/>
+    <field flags="7" title="Nationality" category="General" format="0" type="1" name="nationality" i18n="true"/>
     <xsl:if test="contains(resp/release/extraartists/artist/role, 'Producer')">
      <field flags="7" title="Producer" category="General" format="2" type="1" name="producer" i18n="true"/>
     </xsl:if>

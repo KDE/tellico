@@ -1,3 +1,7 @@
+2009-12-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Added MusicBrainz data source.
+
 2009-12-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed setting correct permissions of backup file (BUG #219259).

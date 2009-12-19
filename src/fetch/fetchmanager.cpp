@@ -58,6 +58,7 @@
 #include "discogsfetcher.h"
 #include "winecomfetcher.h"
 #include "themoviedbfetcher.h"
+#include "musicbrainzfetcher.h"
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -352,6 +353,10 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
       f = new TheMovieDBFetcher(this);
       break;
 
+    case MusicBrainz:
+      f = new MusicBrainzFetcher(this);
+      break;
+
     case Unknown:
     default:
       break;
@@ -376,6 +381,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   vec.append(Fetcher::Ptr(new GoogleScholarFetcher(this)));
   vec.append(Fetcher::Ptr(new DiscogsFetcher(this)));
   vec.append(Fetcher::Ptr(new TheMovieDBFetcher(this)));
+  vec.append(Fetcher::Ptr(new MusicBrainzFetcher(this)));
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     vec.append(Fetcher::Ptr(new IBSFetcher(this)));
@@ -458,6 +464,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   map.insert(DiscogsFetcher::defaultName(),      Discogs);
   map.insert(WineComFetcher::defaultName(),      WineCom);
   map.insert(TheMovieDBFetcher::defaultName(),   TheMovieDB);
+  map.insert(MusicBrainzFetcher::defaultName(),MusicBrainz);
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
@@ -573,6 +580,9 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
     case TheMovieDB:
       w = new TheMovieDBFetcher::ConfigWidget(parent_);
       break;
+    case MusicBrainz:
+      w = new MusicBrainzFetcher::ConfigWidget(parent_);
+      break;
     case Unknown:
       myWarning() << "no widget defined for type = " << type_;
   }
@@ -607,6 +617,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
     case Discogs: return DiscogsFetcher::defaultName();
     case WineCom: return WineComFetcher::defaultName();
     case TheMovieDB: return TheMovieDBFetcher::defaultName();
+    case MusicBrainz: return MusicBrainzFetcher::defaultName();
     case Unknown: break;
   }
   myWarning() << "none found for " << type_;
@@ -692,6 +703,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
       name = favIcon("http://www.wine.com"); break;
     case TheMovieDB:
       name = favIcon("http://www.themoviedb.org"); break;
+    case MusicBrainz:
+      name = favIcon("http://www.musicbrainz.org"); break;
     case Unknown:
       myWarning() << "no pixmap defined for type = " << type_;
   }
