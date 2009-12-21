@@ -150,18 +150,21 @@ QImage barcode_v4l::grab_one2()
   if (m_pict.palette == VIDEO_PALETTE_RGB24) {
     // optimized case
     QRgb *scanline;
-    for (y = 0; y < m_win.height; y++) {
+    for (y = 0; y < m_win.height; ++y) {
       scanline = (QRgb*)m_image->scanLine(y);
-      for (x = 0; x < m_win.width; x++) {
-        scanline[x] = qRgb(*(src++),*(src++),*(src++));
+      for (x = 0; x < m_win.width; ++x) {
+        const char src1 = *(src++);
+        const char src2 = *(src++);
+        const char src3 = *(src++);
+        scanline[x] = qRgb(src1,src2,src3);
       }
     }
   } else {
     // generic case
-    for (y = 0; y < m_win.height; y++) {
-      for (x = 0; x < m_win.width; x++) {
-  READ_VIDEO_PIXEL(src, m_pict.palette, src_depth, r, g, b);
-  m_image->setPixel( x, y, qRgb(r>>8,g>>8,b>>8) );
+    for (y = 0; y < m_win.height; ++y) {
+      for (x = 0; x < m_win.width; ++x) {
+        READ_VIDEO_PIXEL(src, m_pict.palette, src_depth, r, g, b);
+        m_image->setPixel( x, y, qRgb(r>>8,g>>8,b>>8) );
       }
     }
   }

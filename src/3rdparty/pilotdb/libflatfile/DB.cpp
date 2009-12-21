@@ -674,7 +674,7 @@ void PalmLib::FlatFile::DB::make_record(PalmLib::Record& pdb_record,
     pi_char_t* offsets = buf;
 
     // Pack the fields into the buffer.
-    for (i = 0; i < getNumOfFields(); i++) {
+    for (i = 0; i < getNumOfFields(); ++i) {
         pi_char_t* noteOffsetOffset = 0;
         bool setNote = false;
         const Field fieldData = record.fields().at(i);
@@ -1346,7 +1346,7 @@ PalmLib::FlatFile::DB::field_argumentf(int i, std::string& format)
     break;
         case PalmLib::FlatFile::Field::LIST:
         format = std::string("");
-        for (j = 0; j < 31; i++) {
+        for (j = 0; j < 31; ++i) {
             format += std::string("%s/");
             std::ostringstream  title;
             title << "item " << j;
