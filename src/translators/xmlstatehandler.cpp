@@ -164,10 +164,18 @@ bool CollectionHandler::start(const QString&, const QString&, const QString&, co
   d->collTitle = attValue(atts_, "title");
   d->collType = attValue(atts_, "type").toInt();
   d->entryName = attValue(atts_, "unit");
+  // for error recovery, assume entry name is default if empty for now
+  if(d->entryName.isEmpty()) {
+    d->entryName = QLatin1String("entry");
+  }
   return true;
 }
 
 bool CollectionHandler::end(const QString&, const QString&, const QString&) {
+  if(!d->coll) {
+    myWarning() << "no collection created";
+    return false;
+  }
   d->coll->addEntries(d->entries);
 
   // a little hidden capability was to just have a local path as an image file name
@@ -470,16 +478,13 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
     // special case for very old versions which did not have user-editable fields
-    if(d->syntaxVersion < 3) {
-      d->defaultFields = true;
-      FieldsHandler handler(d);
-      // fake the end of a fields element, which will add the default fields
-      handler.end(QString(), QString(), QString());
-    } else {
-      myWarning() << "entries must come after fields are defined";
-      d->error = i18n("File format error: entries must come after fields are defined.");
-      return false;
-    }
+    // also maybe a new version has bad formatting, try to recover by assuming default fields
+    d->defaultFields = true;
+    FieldsHandler handler(d);
+    // fake the end of a fields element, which will add the default fields
+    handler.end(QString(), QString(), QString());
+
+    myWarning() << "entries should come after fields are defined, attempting to recover";
   }
   int id = attValue(atts_, "id").toInt();
   Data::EntryPtr entry;
