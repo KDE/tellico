@@ -1,3 +1,8 @@
+2009-12-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated CrossRef data source to allow authentication via email address.
+	* Updated Crossref data source for new schema.
+
 2009-12-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Added MusicBrainz data source.

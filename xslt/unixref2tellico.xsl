@@ -40,7 +40,7 @@
      <field flags="0" title="ISSN" category="Publishing" format="4" type="1" name="issn" i18n="true"/>
     </xsl:if>
    </fields>
-   <xsl:apply-templates select="cr:doi_records/cr:doi_record/cr:crossref"/>
+   <xsl:apply-templates select=".//cr:doi_record/cr:crossref"/>
   </collection>
  </tellico>
 </xsl:template>

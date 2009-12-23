@@ -74,6 +74,7 @@ public:
   private:
     KLineEdit* m_userEdit;
     KLineEdit* m_passEdit;
+    KLineEdit* m_emailEdit;
   };
   friend class ConfigWidget;
 
@@ -94,6 +95,7 @@ private:
   // mutable so they can be changed in readWallet()
   mutable QString m_user;
   mutable QString m_password;
+  QString m_email;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
