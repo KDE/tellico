@@ -131,7 +131,7 @@ void print_error (bt_error *err)
 
 void
 report_error (bt_errclass errclass,
-              char *      filename,
+              const char *      filename,
               int         line,
               const char *      item_desc,
               int         item,
@@ -192,7 +192,7 @@ GEN_ERRFUNC (general_error,
               int         line,
               const char *      item_desc,
               int         item,
-              char *      fmt,
+              const char *      fmt,
               ...),
              errclass, filename, line, item_desc, item, fmt)
 

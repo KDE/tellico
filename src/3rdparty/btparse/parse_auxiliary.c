@@ -29,9 +29,9 @@
 #include "parse_auxiliary.h"
 /*#include "my_dmalloc.h"*/
 
-extern char * InputFilename;            /* from input.c */
+extern const char * InputFilename;            /* from input.c */
 
-GEN_PRIVATE_ERRFUNC (syntax_error, (char * fmt, ...),
+GEN_PRIVATE_ERRFUNC (syntax_error, (const char * fmt, ...),
                      BTERR_SYNTAX, InputFilename, zzline, NULL, -1, fmt)
 
 

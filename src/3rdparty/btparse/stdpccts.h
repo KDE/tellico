@@ -20,7 +20,7 @@
 #include "error.h"
 /*#include "my_dmalloc.h"*/
 
-extern char * InputFilename;            /* for zzcr_ast call in pccts/ast.c */
+extern const char *InputFilename;        /* for zzcr_ast call in pccts/ast.c */
 #define GENAST
 #define zzSET_SIZE 4
 #include "antlr.h"

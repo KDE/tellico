@@ -258,12 +258,12 @@ void  bt_cleanup (void);
 /* input.c */
 void    bt_set_stringopts (bt_metatype metatype, ushort options);
 AST * bt_parse_entry_s (char *    entry_text,
-                        char *    filename,
+                        const char *    filename,
                         int       line,
                         ushort    options,
                         boolean * status);
 AST * bt_parse_entry   (FILE *    infile,
-                        char *    filename,
+                        const char *    filename,
                         ushort    options,
                         boolean * status);
 AST * bt_parse_file    (char *    filename,
@@ -312,7 +312,7 @@ bt_stringlist * bt_split_list (char *   string,
                                char *   delim,
                                char *   filename,
                                int      line,
-                               char *   description);
+                               const char *   description);
 void bt_free_list (bt_stringlist *list);
 bt_name * bt_split_name (char *  name,
                          char *  filename,

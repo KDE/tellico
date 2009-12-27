@@ -96,7 +96,7 @@ bt_split_list (char *   string,
                char *   delim,
                char *   filename,
                int      line,
-               char *   description)
+               const char *   description)
 {
    int    depth;                        /* brace depth */
    int    i, j;                         /* offset into string and delim */

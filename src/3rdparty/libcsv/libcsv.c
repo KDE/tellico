@@ -74,7 +74,7 @@ Copyright (C) 2007  Robert Gamble
 
 #define SUBMIT_CHAR(p, c) ((p)->entry_buf[entry_pos++] = (c))
 
-static char *csv_errors[] = {"success",
+static const char *csv_errors[] = {"success",
                              "error parsing data while strict checking enabled",
                              "memory exhausted while increasing buffer size",
                              "data size too large",

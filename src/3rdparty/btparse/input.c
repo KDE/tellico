@@ -27,7 +27,7 @@
 /*#include "my_dmalloc.h"*/
 
 
-char *   InputFilename;
+const char *InputFilename;
 ushort   StringOptions[NUM_METATYPES] =
 {
    0,                                   /* BTE_UNKNOWN */
@@ -213,7 +213,7 @@ parse_status (int *saved_counts)
 @MODIFIED   :
 -------------------------------------------------------------------------- */
 AST * bt_parse_entry_s (char *    entry_text,
-                        char *    filename,
+                        const char *    filename,
                         int       line,
                         ushort    options,
                         boolean * status)
@@ -279,7 +279,7 @@ AST * bt_parse_entry_s (char *    entry_text,
 @MODIFIED   :
 -------------------------------------------------------------------------- */
 AST * bt_parse_entry (FILE *    infile,
-                      char *    filename,
+                      const char *    filename,
                       ushort    options,
                       boolean * status)
 {

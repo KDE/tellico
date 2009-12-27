@@ -43,7 +43,7 @@
 
 #define DUPE_TEXT 0
 
-extern char * InputFilename;            /* from input.c */
+extern const char * InputFilename;            /* from input.c */
 
 GEN_PRIVATE_ERRFUNC (lexical_warning, (const char * fmt, ...),
                      BTERR_LEXWARN, InputFilename, zzline, NULL, -1, fmt)

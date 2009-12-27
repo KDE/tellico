@@ -48,12 +48,12 @@ static GEN_ERRFUNC(name,params,class,filename,line,item_desc,item,format)
 
 void print_error (bt_error *err);
 void report_error (bt_errclass class, 
-                   char * filename, int line, const char * item_desc, int item,
+                   const char * filename, int line, const char * item_desc, int item,
                    const char * format, va_list arglist);
 
 void general_error (bt_errclass class,
                     char * filename, int line, const char * item_desc, int item,
-                    char * format, ...);
+                    const char * format, ...);
 void error (bt_errclass class, char * filename, int line, char * format, ...);
 void ast_error (bt_errclass class, AST * ast, char * format, ...);
 
