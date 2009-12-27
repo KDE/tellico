@@ -120,7 +120,7 @@ bool barcode_v4l::isOpen()
 QImage barcode_v4l::grab_one2()
 {
   unsigned int bpp = 24, x, y;
-  unsigned int r, g, b;
+  unsigned int r = 0, g = 0, b = 0;
   unsigned int src_depth = 16;
   char *src = m_buffer->data();
 
