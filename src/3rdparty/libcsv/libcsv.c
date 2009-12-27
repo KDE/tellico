@@ -27,7 +27,7 @@ Copyright (C) 2007  Robert Gamble
  *                                                                         *
  ***************************************************************************/
 
-#if ___STDC_VERSION__ >= 199901L
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L)
 #  include <stdint.h>
 #else
 #  define SIZE_MAX ((size_t)-1) /* C89 doesn't have stdint.h or SIZE_MAX */
@@ -86,7 +86,7 @@ csv_error(struct csv_parser *p)
   return p->status;
 }
 
-char *
+const char *
 csv_strerror(int status)
 {
   if (status >= CSV_EINVALID || status < 0)

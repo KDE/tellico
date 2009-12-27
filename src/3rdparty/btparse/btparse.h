@@ -234,7 +234,7 @@ typedef enum
 typedef struct
 {
    bt_errclass errclass;
-   char *      filename;
+   const char *      filename;
    int         line;
    const char *      item_desc;
    int         item;

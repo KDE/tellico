@@ -47,7 +47,7 @@ bibfile(AST**_root)
 	zzBLOCK(zztasp1);
 	zzMake0;
 	{
-	AST *last; (*_root) = NULL;
+	AST *last = NULL; (*_root) = NULL;
 	{
 		zzBLOCK(zztasp2);
 		zzMake0;
