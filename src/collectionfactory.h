@@ -56,10 +56,9 @@ public:
   // public so we can iterate over them
   typedef QHash<int, QString> TypeStringHash;
   TypeStringHash nameRegistry;
-  TypeStringHash titleRegistry;
 
   /**
-   * Classes derived from manufacturedObj call this function once
+   * Classes derived from Collection call this function once
    * per program to register the class ID key, and a pointer to
    * the function that creates the class.
    */
@@ -85,7 +84,6 @@ private:
    */
   typedef QHash<int, CREATE_COLL_FN> FunctionRegistry;
   FunctionRegistry functionRegistry;
-
 };
 
 /**
