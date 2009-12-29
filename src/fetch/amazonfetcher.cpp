@@ -97,11 +97,10 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   return dataVector[site_];
 }
 
-AmazonFetcher::AmazonFetcher(Site site_, QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0), m_site(site_), m_imageSize(MediumImage),
+AmazonFetcher::AmazonFetcher(QObject* parent_)
+    : Fetcher(parent_), m_xsltHandler(0), m_site(Unknown), m_imageSize(MediumImage),
       m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
-  m_name = siteData(site_).title;
   (void)linkText; // just to shut up the compiler
 }
 
@@ -129,6 +128,12 @@ bool AmazonFetcher::canFetch(int type) const {
 }
 
 void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
+  const int site = config_.readEntry("Site", int(Unknown));
+  Q_ASSERT(site != Unknown);
+  m_site = static_cast<Site>(site);
+  if(m_name.isEmpty()) {
+    m_name = siteData(m_site).title;
+  }
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;

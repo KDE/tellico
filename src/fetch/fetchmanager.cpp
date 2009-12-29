@@ -266,14 +266,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   switch(fetchType) {
     case Amazon:
 #ifdef ENABLE_AMAZON
-      {
-        int site = config.readEntry("Site", int(AmazonFetcher::Unknown));
-        if(site == AmazonFetcher::Unknown) {
-          myDebug() << "unknown amazon site" << site << "- skipping";
-        } else {
-          f = new AmazonFetcher(static_cast<AmazonFetcher::Site>(site), this);
-        }
-      }
+      f = new AmazonFetcher(this);
 #endif
       break;
 

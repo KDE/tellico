@@ -79,7 +79,7 @@ public:
     NoImage=3
   };
 
-  AmazonFetcher(Site site, QObject* parent);
+  AmazonFetcher(QObject* parent);
   virtual ~AmazonFetcher();
 
   virtual QString source() const;
