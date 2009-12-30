@@ -35,9 +35,18 @@ SET(fetch_STAT_SRCS
    yahoofetcher.cpp
    z3950connection.cpp
    z3950fetcher.cpp
+   ../importdialog.cpp
    )
 
 KDE4_ADD_LIBRARY(fetch STATIC ${fetch_STAT_SRCS})
+
+TARGET_LINK_LIBRARIES(fetch
+    newstuff
+    btparse
+    )
+IF( YAZ_FOUND )
+  TARGET_LINK_LIBRARIES(fetch ${YAZ_LIBRARIES} btparse)
+ENDIF( YAZ_FOUND )
 
 ########### install files ###############
 

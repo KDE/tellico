@@ -43,12 +43,15 @@ SET(translators_STAT_SRCS
    xsltexporter.cpp
    xslthandler.cpp
    xsltimporter.cpp
+   ../entryupdatejob.cpp
    )
 
 KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     models
+    csv
+    rtf2html
     )
 
 TARGET_LINK_LIBRARIES(translators
@@ -56,6 +59,22 @@ TARGET_LINK_LIBRARIES(translators
     ${LIBXSLT_LIBRARIES}
     ${LIBEXSLT_LIBRARIES}
     )
+
+IF( KCDDB_FOUND )
+  TARGET_LINK_LIBRARIES(translators ${KCDDB_LIBRARIES})
+ENDIF( KCDDB_FOUND)
+
+IF( POPPLER_QT4_FOUND )
+  TARGET_LINK_LIBRARIES(translators ${POPPLER_QT4_LIBRARIES})
+ENDIF( POPPLER_QT4_FOUND )
+
+IF( LIBEXEMPI_FOUND )
+  TARGET_LINK_LIBRARIES(translators ${LIBEXEMPI_LIBRARIES})
+ENDIF( LIBEXEMPI_FOUND )
+
+IF( TAGLIB_FOUND )
+  TARGET_LINK_LIBRARIES(translators ${TAGLIB_LIBRARIES})
+ENDIF( TAGLIB_FOUND )
 
 ADD_DEPENDENCIES(translators tellico_config)
 
