@@ -255,27 +255,36 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   return f;
 }
 
+#define FETCHER_ADD(type) \
+  do { \
+    if(functionRegistry.contains(type)) { \
+      vec.append(functionRegistry.value(type).create(this)); \
+    } \
+  } while(false)
+
 // static
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
 #ifdef ENABLE_IMDB
-  vec.append(functionRegistry.value(IMDB).create(this));
+  FETCHER_ADD(IMDB);
 #endif
   vec.append(SRUFetcher::libraryOfCongress(this));
-  vec.append(functionRegistry.value(ISBNdb).create(this));
-  vec.append(functionRegistry.value(Yahoo).create(this));
-  vec.append(functionRegistry.value(AnimeNfo).create(this));
-  vec.append(functionRegistry.value(Arxiv).create(this));
-  vec.append(functionRegistry.value(GoogleScholar).create(this));
-  vec.append(functionRegistry.value(Discogs).create(this));
-  vec.append(functionRegistry.value(TheMovieDB).create(this));
-  vec.append(functionRegistry.value(MusicBrainz).create(this));
+  FETCHER_ADD(ISBNdb);
+  FETCHER_ADD(Yahoo);
+  FETCHER_ADD(AnimeNfo);
+  FETCHER_ADD(Arxiv);
+  FETCHER_ADD(GoogleScholar);
+  FETCHER_ADD(Discogs);
+  FETCHER_ADD(TheMovieDB);
+  FETCHER_ADD(MusicBrainz);
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
-    vec.append(functionRegistry.value(IBS).create(this));
+    FETCHER_ADD(IBS);
   }
   return vec;
 }
+
+#undef FETCHER_ADD
 
 Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   if(m_loadDefaults) {
