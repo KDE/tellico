@@ -24,10 +24,10 @@
 
 #include "importdialog.h"
 #include "document.h"
-#include "tellico_kernel.h"
 #include "tellico_debug.h"
 #include "collection.h"
 #include "progressmanager.h"
+#include "gui/guiproxy.h"
 
 #include "translators/importer.h"
 #include "translators/tellicoimporter.h"
@@ -86,7 +86,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& ur
                                   "current collection. This is only possible when the "
                                   "collection types match. Entries must match exactly "
                                   "in order to be merged."));
-  if(m_importer->canImport(Kernel::self()->collectionType())) {
+  if(m_importer->canImport(Data::Document::self()->collection()->type())) {
     // append by default?
     m_radioAppend->setChecked(true);
   } else {
@@ -411,7 +411,7 @@ Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, 
 
   Data::CollPtr c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {
-    Kernel::self()->sorry(imp->statusMessage());
+    GUI::Proxy::sorry(imp->statusMessage());
   }
   delete imp;
   return c;
