@@ -27,7 +27,6 @@
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
-#include "../tellico_kernel.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
@@ -84,7 +83,6 @@ void CrossRefFetcher::readConfigHook(const KConfigGroup& config_) {
 void CrossRefFetcher::search() {
   m_started = true;
 
-  readWallet();
   if(m_email.isEmpty() && (m_user.isEmpty() || m_password.isEmpty())) {
     message(i18n("%1 requires a username and password.", source()), MessageHandler::Error);
     stop();
@@ -276,16 +274,6 @@ Tellico::Fetch::FetchRequest CrossRefFetcher::updateRequest(Data::EntryPtr entry
   return FetchRequest();
 }
 
-void CrossRefFetcher::readWallet() const {
-  if(m_user.isEmpty() || m_password.isEmpty()) {
-    QMap<QString, QString> map = Kernel::self()->readWalletMap(QLatin1String("crossref.org"));
-    if(!map.isEmpty()) {
-      m_user = map.value(QLatin1String("username"));
-      m_password = map.value(QLatin1String("password"));
-    }
-  }
-}
-
 Tellico::Fetch::ConfigWidget* CrossRefFetcher::configWidget(QWidget* parent_) const {
   return new CrossRefFetcher::ConfigWidget(parent_, this);
 }
@@ -349,7 +337,6 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label->setBuddy(m_emailEdit);
 
   if(fetcher_) {
-    fetcher_->readWallet(); // make sure that the wallet values are read
     m_userEdit->setText(fetcher_->m_user);
     m_passEdit->setText(fetcher_->m_password);
     m_emailEdit->setText(fetcher_->m_email);

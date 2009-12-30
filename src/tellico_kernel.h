@@ -30,9 +30,6 @@
 
 class KUrl;
 class KUndoStack;
-namespace KWallet {
-  class Wallet;
-}
 
 class QWidget;
 class QString;
@@ -137,9 +134,6 @@ public:
   int askAndMerge(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
                   QString value1 = QString(), QString value2 = QString());
 
-  QByteArray readWalletEntry(const QString& key);
-  QMap<QString, QString> readWalletMap(const QString& key);
-
 private:
   static Kernel* s_self;
 
@@ -149,11 +143,9 @@ private:
   Kernel& operator=(const Kernel&);
 
   void doCommand(QUndoCommand* command);
-  bool prepareWallet();
 
   QWidget* m_widget;
   KUndoStack* m_commandHistory;
-  KWallet::Wallet* m_wallet;
 };
 
 } // end namespace

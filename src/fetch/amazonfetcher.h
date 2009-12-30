@@ -121,7 +121,6 @@ private:
   void doSearch();
   void parseTitle(Data::EntryPtr entry, int collType);
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
-  QString secretKey() const;
 
   XSLTHandler* m_xsltHandler;
   Site m_site;
@@ -129,8 +128,7 @@ private:
 
   QString m_access;
   QString m_assoc;
-  // mutable so that secretKey() can be const
-  mutable QByteArray m_amazonKey;
+  QByteArray m_amazonKey;
   bool m_addLinkField;
   int m_limit;
   int m_countOffset;

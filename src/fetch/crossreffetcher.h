@@ -90,13 +90,11 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
   KUrl searchURL(FetchKey key, const QString& value) const;
-  void readWallet() const;
 
   XSLTHandler* m_xsltHandler;
 
-  // mutable so they can be changed in readWallet()
-  mutable QString m_user;
-  mutable QString m_password;
+  QString m_user;
+  QString m_password;
   QString m_email;
 
   QHash<int, Data::EntryPtr> m_entries;
