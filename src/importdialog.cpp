@@ -347,32 +347,6 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
   }
 }
 
-Tellico::Import::FormatMap ImportDialog::formatMap() {
-  // at one point, these were translated, but after some thought
-  // I decided they were likely to be the same in any language
-  // transliteration is unlikely
-  Import::FormatMap map;
-  map[Import::TellicoXML] = QLatin1String("Tellico");
-  map[Import::Bibtex]     = QLatin1String("Bibtex");
-  map[Import::Bibtexml]   = QLatin1String("Bibtexml");
-//  map[Import::CSV]        = QLatin1String("CSV");
-  map[Import::MODS]       = QLatin1String("MODS");
-  map[Import::RIS]        = QLatin1String("RIS");
-  map[Import::GCstar]     = QLatin1String("GCstar");
-  map[Import::AMC]        = QLatin1String("AMC");
-  map[Import::Griffith]   = QLatin1String("Griffith");
-  map[Import::PDF]        = QLatin1String("PDF");
-  map[Import::Referencer] = QLatin1String("Referencer");
-  map[Import::Delicious ] = QLatin1String("Delicious Library");
-  return map;
-}
-
-bool ImportDialog::formatImportsText(Tellico::Import::Format format_) {
-  return format_ != Import::AMC &&
-         format_ != Import::Griffith &&
-         format_ != Import::PDF;
-}
-
 QString ImportDialog::startDir(Tellico::Import::Format format_) {
   if(format_ == Import::GCstar) {
     QDir dir = QDir::home();

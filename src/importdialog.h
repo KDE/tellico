@@ -41,7 +41,6 @@ class QButtonGroup;
 namespace Tellico {
   namespace Import {
     class Importer;
-    typedef QMap<Import::Format, QString> FormatMap;
   }
 
 /**
@@ -61,8 +60,6 @@ public:
   static QString fileFilter(Import::Format format);
   static Import::Target importTarget(Import::Format format);
   static QString startDir(Import::Format format);
-  static Import::FormatMap formatMap();
-  static bool formatImportsText(Import::Format format);
 
   static Import::Importer* importer(Import::Format format, const KUrl::List& urls);
   static Data::CollPtr importURL(Import::Format format, const KUrl& url);
