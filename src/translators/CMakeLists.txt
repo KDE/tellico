@@ -50,6 +50,7 @@ KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     models
+    btparse
     csv
     rtf2html
     )

@@ -53,10 +53,6 @@ set(TELLICO_TEST_LIBS
    ${QT_QTTEST_LIBRARY}
    ${KDE4_KDEUI_LIBS}
    ${KDE4_KIO_LIBS}
-   ${QIMAGEBLITZ_LIBRARIES}
-   ${LIBXML2_LIBRARIES}
-   ${LIBXSLT_LIBRARIES}
-   ${LIBEXSLT_LIBRARIES}
    tellicotest
    collections
    translators
@@ -80,7 +76,7 @@ KDE4_ADD_UNIT_TEST(amctest NOGUI amctest.cpp)
 TARGET_LINK_LIBRARIES(amctest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(bibtextest NOGUI bibtextest.cpp)
-TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_TEST_LIBS} btparse)
+TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(bibtexmltest NOGUI bibtexmltest.cpp)
 TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
@@ -101,10 +97,10 @@ KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
 TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
-TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS} btparse)
+TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(googlescholarfetchertest NOGUI googlescholarfetchertest.cpp)
-TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS} btparse)
+TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
 TARGET_LINK_LIBRARIES(imdbfetchertest fetch ${TELLICO_TEST_LIBS})
