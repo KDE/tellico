@@ -226,7 +226,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
@@ -330,7 +330,7 @@ MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrai
   l->addStretch();
 }
 
-void MusicBrainzFetcher::ConfigWidget::saveConfig(KConfigGroup&) {
+void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 }
 
 QString MusicBrainzFetcher::ConfigWidget::preferredName() const {

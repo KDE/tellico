@@ -152,7 +152,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr BibsonomyFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr BibsonomyFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 
@@ -183,7 +183,7 @@ BibsonomyFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BibsonomyFe
   l->addStretch();
 }
 
-void BibsonomyFetcher::ConfigWidget::saveConfig(KConfigGroup&) {
+void BibsonomyFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 }
 
 QString BibsonomyFetcher::ConfigWidget::preferredName() const {

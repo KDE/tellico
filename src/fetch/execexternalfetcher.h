@@ -64,7 +64,7 @@ public:
   virtual bool canSearch(FetchKey k) const { return m_args.contains(k) || (m_canUpdate && k == ExecUpdate); }
   virtual bool canUpdate() const { return m_canUpdate; }
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return ExecExternal; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -78,7 +78,7 @@ public:
     ~ConfigWidget();
 
     void readConfig(const KConfigGroup& config);
-    virtual void saveConfig(KConfigGroup& config);
+    virtual void saveConfigHook(KConfigGroup& config);
     virtual void removed();
     virtual QString preferredName() const;
 
@@ -97,7 +97,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields() { return StringHash(); }
+  static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
   void slotData();

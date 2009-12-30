@@ -146,7 +146,6 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
   }
-  m_fields = config_.readEntry("Custom Fields", QStringList() << QLatin1String("keyword"));
 }
 
 void AmazonFetcher::search() {
@@ -562,18 +561,11 @@ void AmazonFetcher::slotComplete(KJob*) {
   }
 }
 
-Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
     return entry;
-  }
-
-  QStringList defaultFields = optionalFields().keys();
-  for(QStringList::Iterator it = defaultFields.begin(); it != defaultFields.end(); ++it) {
-    if(!m_fields.contains(*it)) {
-      entry->setField(*it, QString());
-    }
   }
 
   // do what we can to remove useless keywords
@@ -842,7 +834,7 @@ QString AmazonFetcher::defaultIcon() {
   return favIcon("http://amazon.com");
 }
 
-Tellico::StringHash AmazonFetcher::optionalFields() {
+Tellico::StringHash AmazonFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("keyword")] = i18n("Keywords");
   return hash;
@@ -950,12 +942,12 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
     m_imageCombo->setCurrentData(MediumImage);
   }
 
-  addFieldsWidget(AmazonFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(AmazonFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void AmazonFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   int n = m_siteCombo->currentData().toInt();
   config_.writeEntry("Site", n);
   QString s = m_accessEdit->text().trimmed();
@@ -972,9 +964,6 @@ void AmazonFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   }
   n = m_imageCombo->currentData().toInt();
   config_.writeEntry("Image Size", n);
-
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString AmazonFetcher::ConfigWidget::preferredName() const {

@@ -190,7 +190,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr ArxivFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   // if URL but no cover image, fetch it
   if(!entry->field(QLatin1String("url")).isEmpty()) {
@@ -328,7 +328,7 @@ ArxivFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ArxivFetcher*)
   l->addStretch();
 }
 
-void ArxivFetcher::ConfigWidget::saveConfig(KConfigGroup&) {
+void ArxivFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 }
 
 QString ArxivFetcher::ConfigWidget::preferredName() const {

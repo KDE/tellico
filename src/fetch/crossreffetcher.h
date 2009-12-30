@@ -59,7 +59,7 @@ public:
 
   virtual bool canSearch(FetchKey k) const { return k == DOI; }
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return CrossRef; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -69,7 +69,7 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const CrossRefFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup& config);
+    virtual void saveConfigHook(KConfigGroup& config);
     virtual QString preferredName() const;
   private:
     KLineEdit* m_userEdit;
@@ -80,7 +80,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields() { return StringHash(); }
+  static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);

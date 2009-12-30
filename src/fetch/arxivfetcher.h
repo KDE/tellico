@@ -58,7 +58,7 @@ public:
 
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword || k == ArxivID; }
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Arxiv; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -68,14 +68,14 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const ArxivFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup& config);
+    virtual void saveConfigHook(KConfigGroup& config);
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields() { return StringHash(); }
+  static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);

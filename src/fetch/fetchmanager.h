@@ -102,8 +102,9 @@ public:
   void registerFunction(int type, const FetcherFunction& func);
 
   static QString typeName(Type type);
-  static QPixmap fetcherIcon(Fetch::Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
-  static QPixmap fetcherIcon(Fetch::Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
+  static QPixmap fetcherIcon(Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
+  static QPixmap fetcherIcon(Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
+  static StringHash optionalFields(Type type);
 
 signals:
   void signalStatus(const QString& status);

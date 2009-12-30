@@ -260,7 +260,7 @@ void ExecExternalFetcher::slotProcessExited() {
   stop(); // be sure to call this
 }
 
-Tellico::Data::EntryPtr ExecExternalFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr ExecExternalFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 
@@ -467,7 +467,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
   m_newStuffName = config_.readEntry("NewStuffName");
 }
 
-void ExecExternalFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
         KUrl u = m_pathEdit->url();
   if(!u.isEmpty()) {
     config_.writePathEntry("ExecPath", u.path());

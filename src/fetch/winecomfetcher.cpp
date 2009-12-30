@@ -229,7 +229,7 @@ void WineComFetcher::slotComplete(KJob*) {
   }
 }
 
-Tellico::Data::EntryPtr WineComFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr WineComFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
@@ -315,14 +315,11 @@ WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetche
   }
 }
 
-void WineComFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void WineComFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
-
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString WineComFetcher::ConfigWidget::preferredName() const {

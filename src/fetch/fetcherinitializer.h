@@ -57,7 +57,7 @@ public:
     return Derived::defaultIcon();
   }
   static StringHash getOptionalFields() {
-    return Derived::optionalFields();
+    return Derived::allOptionalFields();
   }
   static Tellico::Fetch::ConfigWidget* createConfigWidget(QWidget* parent) {
     return new typename Derived::ConfigWidget(parent);

@@ -102,7 +102,6 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
     m_path.prepend(QLatin1Char('/'));
   }
   m_format = config_.readEntry("Format", "mods");
-  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
 void SRUFetcher::search() {
@@ -329,13 +328,6 @@ void SRUFetcher::slotComplete(KJob*) {
     return;
   }
 
-  const StringHash optionalFields = SRUFetcher::optionalFields();
-  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
-    if(!m_fields.contains(it.key())) {
-      coll->removeField(it.key());
-    }
-  }
-
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
@@ -345,7 +337,7 @@ void SRUFetcher::slotComplete(KJob*) {
   stop();
 }
 
-Tellico::Data::EntryPtr SRUFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr SRUFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 
@@ -455,7 +447,7 @@ QString SRUFetcher::defaultIcon() {
 }
 
 // static
-Tellico::StringHash SRUFetcher::optionalFields() {
+Tellico::StringHash SRUFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("address")]  = i18n("Address");
   hash[QLatin1String("abstract")] = i18n("Abstract");
@@ -523,7 +515,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   l->setRowStretch(++row, 1);
 
   // now add additional fields widget
-  addFieldsWidget(SRUFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(SRUFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
@@ -534,7 +526,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void SRUFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void SRUFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString s = m_hostEdit->text().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("Host", s);
@@ -551,8 +543,6 @@ void SRUFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   if(!s.isEmpty()) {
     config_.writeEntry("Format", s);
   }
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString SRUFetcher::ConfigWidget::preferredName() const {

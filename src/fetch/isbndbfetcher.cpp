@@ -266,7 +266,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   }
 }
 
-Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
@@ -386,14 +386,11 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   }
 }
 
-void ISBNdbFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void ISBNdbFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
-
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString ISBNdbFetcher::ConfigWidget::preferredName() const {

@@ -165,7 +165,7 @@ void CitebaseFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr CitebaseFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr CitebaseFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   QRegExp versionRx(QLatin1String("v\\d+$"));
   // if the original search was not for a versioned ID, remove it
@@ -233,7 +233,7 @@ CitebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CitebaseFetc
   l->addStretch();
 }
 
-void CitebaseFetcher::ConfigWidget::saveConfig(KConfigGroup&) {
+void CitebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 }
 
 QString CitebaseFetcher::ConfigWidget::preferredName() const {

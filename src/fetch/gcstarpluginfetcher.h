@@ -60,7 +60,7 @@ public:
   virtual bool canSearch(FetchKey k) const { return k == Title; }
 
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return GCstarPlugin; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -71,7 +71,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields() { return StringHash(); }
+  static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
   void slotData();
@@ -112,7 +112,7 @@ public:
   explicit ConfigWidget(QWidget* parent, const GCstarPluginFetcher* fetcher = 0);
   ~ConfigWidget();
 
-  virtual void saveConfig(KConfigGroup& config);
+  virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;
 
 private slots:

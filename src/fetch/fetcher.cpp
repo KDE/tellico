@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "fetcher.h"
+#include "fetchmanager.h" // for calling static optional fields
 #include "../collection.h"
 #include "../entry.h"
 #include "../tellico_debug.h"
@@ -100,8 +101,25 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
     m_name = s;
   }
   m_updateOverwrite = config_.readEntry("UpdateOverwrite", false);
+  // it's called custom fields here, but it's really optional lists
+  m_fields = config_.readEntry("Custom Fields", QStringList());
   // be sure to read config for subclass
   readConfigHook(config_);
+}
+
+Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
+  Data::EntryPtr entry = fetchEntryHook(uid_);
+  if(entry) {
+    // iterate over list of possible optional fields
+    // and if the field is not included in the user-configured list
+    // remove the field from the entry
+    foreach(const QString& field, Manager::optionalFields(type()).keys()) {
+      if(!m_fields.contains(field)) {
+        entry->collection()->removeField(field);
+      }
+    }
+  }
+  return entry;
 }
 
 void Fetcher::message(const QString& message_, int type_) const {

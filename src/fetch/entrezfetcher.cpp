@@ -82,7 +82,6 @@ void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!s.isEmpty()) {
     m_dbname = s;
   }
-  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
 void EntrezFetcher::search() {
@@ -308,7 +307,7 @@ void EntrezFetcher::summaryResults(const QByteArray& data_) {
   stop(); // done searching
 }
 
-Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   // if we already grabbed this one, then just pull it out of the dict
   Data::EntryPtr entry = m_entries[uid_];
   if(entry) {
@@ -372,7 +371,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
   Data::EntryPtr e = coll->entries().front();
 
   // try to get a link, but only if necessary
-  if(m_fields.contains(QLatin1String("url"))) {
+  if(optionalFields().contains(QLatin1String("url"))) {
     KUrl link(ENTREZ_BASE_URL);
     link.addPath(QLatin1String(ENTREZ_LINK_CGI));
     link.addQueryItem(QLatin1String("tool"),   QLatin1String("Tellico"));
@@ -400,13 +399,6 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
         }
         e->setField(QLatin1String("url"), u);
       }
-    }
-  }
-
-  const StringHash optionalFields = EntrezFetcher::optionalFields();
-  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
-    if(!m_fields.contains(it.key())) {
-      coll->removeField(it.key());
     }
   }
 
@@ -463,7 +455,7 @@ QString EntrezFetcher::defaultIcon() {
 }
 
 //static
-Tellico::StringHash EntrezFetcher::optionalFields() {
+Tellico::StringHash EntrezFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("institution")] = i18n("Institution");
   hash[QLatin1String("abstract")]    = i18n("Abstract");
@@ -482,12 +474,7 @@ EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher*
   l->addStretch();
 
   // now add additional fields widget
-  addFieldsWidget(EntrezFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
-}
-
-void EntrezFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
-  saveFieldsConfig(config_);
-  slotSetModified(false);
+  addFieldsWidget(EntrezFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 QString EntrezFetcher::ConfigWidget::preferredName() const {

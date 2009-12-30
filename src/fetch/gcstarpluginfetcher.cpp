@@ -314,7 +314,7 @@ void GCstarPluginFetcher::slotProcessExited() {
   stop(); // be sure to call this
 }
 
-Tellico::Data::EntryPtr GCstarPluginFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr GCstarPluginFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 
@@ -397,7 +397,7 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
 GCstarPluginFetcher::ConfigWidget::~ConfigWidget() {
 }
 
-void GCstarPluginFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void GCstarPluginFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("CollectionType", m_collCombo->currentType());
   config_.writeEntry("Plugin", m_pluginCombo->currentText());
 }

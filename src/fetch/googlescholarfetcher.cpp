@@ -207,7 +207,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntryHook(uint uid_) {
   return m_entries[uid_];
 }
 

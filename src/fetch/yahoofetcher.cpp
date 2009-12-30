@@ -224,7 +224,7 @@ void YahooFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr YahooFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";

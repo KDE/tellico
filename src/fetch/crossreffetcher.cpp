@@ -181,7 +181,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr CrossRefFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr CrossRefFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   // if URL but no cover image, fetch it
   if(!entry->field(QLatin1String("url")).isEmpty()) {
@@ -356,7 +356,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   }
 }
 
-void CrossRefFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void CrossRefFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString s = m_userEdit->text().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("User", s);

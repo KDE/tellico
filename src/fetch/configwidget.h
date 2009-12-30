@@ -55,7 +55,7 @@ public:
    *
    * @param config_ The KConfig pointer
    */
-  virtual void saveConfig(KConfigGroup& config) = 0;
+  void saveConfig(KConfigGroup& config);
   /**
    * Called when a fetcher data source is removed. Useful for any cleanup work necessary.
    * The ExecExternalFetcher might need to remove the script, for example.
@@ -73,9 +73,8 @@ public slots:
 
 protected:
   QWidget* optionsWidget() { return m_optionsWidget; }
-  void addFieldsWidget(const StringMap& customFields, const QStringList& fieldsToAdd);
   void addFieldsWidget(const StringHash& customFields, const QStringList& fieldsToAdd);
-  void saveFieldsConfig(KConfigGroup& config) const;
+  virtual void saveConfigHook(KConfigGroup&) {}
 
 private:
   bool m_modified;

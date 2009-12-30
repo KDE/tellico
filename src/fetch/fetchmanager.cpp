@@ -27,9 +27,9 @@
 #include "fetchmanager.h"
 #include "configwidget.h"
 #include "messagehandler.h"
-#include "../tellico_kernel.h"
 #include "../entry.h"
 #include "../collection.h"
+#include "../document.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -153,7 +153,7 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
     return;
   }
 
-  FetchRequest request(Kernel::self()->collectionType(), key_, value_);
+  FetchRequest request(Data::Document::self()->collection()->type(), key_, value_);
 
   // assume there's only one fetcher match
   int i = 0;
@@ -226,7 +226,7 @@ void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
 
 bool Manager::canFetch() const {
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
-    if(fetcher->canFetch(Kernel::self()->collectionType())) {
+    if(fetcher->canFetch(Data::Document::self()->collection()->type())) {
       return true;
     }
   }
@@ -450,6 +450,13 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
   }
 
   return name.isEmpty() ? QPixmap() : LOAD_ICON(name, group_, size_);
+}
+
+Tellico::StringHash Manager::optionalFields(Type type_) {
+  if(self()->functionRegistry.contains(type_)) {
+    return self()->functionRegistry.value(type_).optionalFields();
+  }
+  return StringHash();
 }
 
 bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& config_) {

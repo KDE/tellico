@@ -111,7 +111,6 @@ void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
   }
   m_numCast = config_.readEntry("Max Cast", 10);
   m_fetchImages = config_.readEntry("Fetch Images", true);
-  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
 // multiple values not supported
@@ -627,7 +626,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   // do not stop() here
 }
 
-Tellico::Data::EntryPtr IMDBFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   // if we already grabbed this one, then just pull it out of the dict
   Data::EntryPtr entry = m_entries[uid_];
   if(entry) {
@@ -703,7 +702,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   }
 
   const QString imdb = QLatin1String("imdb");
-  if(!coll->hasField(imdb) && m_fields.indexOf(imdb) > -1) {
+  if(!coll->hasField(imdb) && allOptionalFields().contains(imdb)) {
     Data::FieldPtr field(new Data::Field(imdb, i18n("IMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -758,7 +757,7 @@ void IMDBFetcher::doAspectRatio(const QString& str_, Tellico::Data::EntryPtr ent
 }
 
 void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(m_fields.indexOf(QLatin1String("alttitle")) == -1) {
+  if(!allOptionalFields().contains(QLatin1String("alttitle"))) {
     return;
   }
 
@@ -976,7 +975,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
 }
 
 void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(m_fields.indexOf(QLatin1String("imdb-rating")) == -1) {
+  if(!allOptionalFields().contains(QLatin1String("imdb-rating"))) {
     return;
   }
 
@@ -1107,7 +1106,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 
     // now add new field for all certifications
     const QString allc = QLatin1String("allcertification");
-    if(m_fields.indexOf(allc) > -1) {
+    if(allOptionalFields().contains(allc)) {
       Data::FieldPtr f = entry_->collection()->fieldByName(allc);
       if(!f) {
         f = new Data::Field(allc, i18n("Certifications"), Data::Field::Table);
@@ -1163,7 +1162,7 @@ QString IMDBFetcher::defaultIcon() {
   return favIcon("http://imdb.com");
 }
 //static
-Tellico::StringHash IMDBFetcher::optionalFields() {
+Tellico::StringHash IMDBFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("imdb")]             = i18n("IMDb Link");
   hash[QLatin1String("imdb-rating")]      = i18n("IMDb Rating");
@@ -1215,7 +1214,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(IMDBFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(IMDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
@@ -1228,16 +1227,13 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   }
 }
 
-void IMDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void IMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString host = m_hostEdit->text().trimmed();
   if(!host.isEmpty()) {
     config_.writeEntry("Host", host);
   }
   config_.writeEntry("Max Cast", m_numCast->value());
   config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
-
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {

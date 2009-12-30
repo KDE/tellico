@@ -80,7 +80,6 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
     m_apiKey = k;
   }
   m_fetchImages = config_.readEntry("Fetch Images", true);
-  m_fields = config_.readEntry("Custom Fields", QStringList());
 }
 
 void DiscogsFetcher::search() {
@@ -229,7 +228,7 @@ void DiscogsFetcher::slotComplete(KJob* ) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
@@ -281,13 +280,6 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
 
   if(coll->entryCount() > 1) {
     myDebug() << "weird, more than one entry found";
-  }
-
-  const StringHash optionalFields = this->optionalFields();
-  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
-    if(!m_fields.contains(it.key())) {
-      coll->removeField(it.key());
-    }
   }
 
   // don't want to include id
@@ -345,7 +337,7 @@ QString DiscogsFetcher::defaultIcon() {
   return favIcon("http://www.discogs.com");
 }
 
-Tellico::StringHash DiscogsFetcher::optionalFields() {
+Tellico::StringHash DiscogsFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("producer")] = i18n("Producer");
   hash[QLatin1String("nationality")] = i18n("Nationality");
@@ -396,7 +388,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(DiscogsFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(DiscogsFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
     // only show the key if it is not the default Tellico one...
@@ -410,15 +402,12 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   }
 }
 
-void DiscogsFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
+void DiscogsFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
   config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
-
-  saveFieldsConfig(config_);
-  slotSetModified(false);
 }
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {

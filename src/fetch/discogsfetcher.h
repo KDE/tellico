@@ -68,7 +68,7 @@ public:
   // amazon can search title or person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Discogs; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -81,7 +81,7 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup&);
+    virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
     KLineEdit* m_apiKeyEdit;
@@ -91,7 +91,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields();
+  static StringHash allOptionalFields();
 
 private slots:
   void slotComplete(KJob* job);
@@ -114,7 +114,6 @@ private:
 
   bool m_fetchImages;
   QString m_apiKey;
-  QStringList m_fields;
 };
 
   } // end namespace

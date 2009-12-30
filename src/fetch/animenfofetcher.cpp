@@ -197,7 +197,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   stop();
 }
 
-Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntry(uint uid_) {
+Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntryHook(uint uid_) {
   // if we already grabbed this one, then just pull it out of the dict
   Data::EntryPtr entry = m_entries[uid_];
   if(entry) {

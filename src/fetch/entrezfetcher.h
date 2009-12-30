@@ -58,7 +58,7 @@ public:
   virtual bool canSearch(FetchKey k) const;
   virtual void continueSearch();
   virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Entrez; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -67,14 +67,13 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=0);
-    virtual void saveConfig(KConfigGroup& config);
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash optionalFields();
+  static StringHash allOptionalFields();
 
 private slots:
   void slotComplete(KJob* job);
@@ -110,7 +109,6 @@ private:
   Step m_step;
 
   bool m_started;
-  QStringList m_fields;
 };
 
   } // end namespace
