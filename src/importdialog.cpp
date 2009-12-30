@@ -358,7 +358,7 @@ Tellico::Import::FormatMap ImportDialog::formatMap() {
 //  map[Import::CSV]        = QLatin1String("CSV");
   map[Import::MODS]       = QLatin1String("MODS");
   map[Import::RIS]        = QLatin1String("RIS");
-  map[Import::GCstar]    = QLatin1String("GCstar");
+  map[Import::GCstar]     = QLatin1String("GCstar");
   map[Import::AMC]        = QLatin1String("AMC");
   map[Import::Griffith]   = QLatin1String("Griffith");
   map[Import::PDF]        = QLatin1String("PDF");
