@@ -93,6 +93,10 @@
     </label>
    </labels>
 
+   <year>
+    <xsl:value-of select="year"/>
+   </year>
+
    <discogs-id>
     <xsl:value-of select="@id"/>
    </discogs-id>
