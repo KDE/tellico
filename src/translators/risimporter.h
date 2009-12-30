@@ -44,6 +44,7 @@ public:
   /**
    */
   RISImporter(const KUrl::List& urls);
+  RISImporter(const QString& text);
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
@@ -65,6 +66,7 @@ private:
 
   Data::FieldPtr fieldByTag(const QString& tag);
   void readURL(const KUrl& url, int n, const QHash<QString, Data::FieldPtr>& risFields);
+  void readText(const QString& text, int n, const QHash<QString, Data::FieldPtr>& risFields);
 
   Data::CollPtr m_coll;
   bool m_cancelled;

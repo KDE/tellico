@@ -123,6 +123,11 @@ RISImporter::RISImporter(const KUrl::List& urls_) : Tellico::Import::Importer(ur
   initTypeMap();
 }
 
+RISImporter::RISImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(0), m_cancelled(false) {
+  initTagMap();
+  initTypeMap();
+}
+
 bool RISImporter::canImport(int type) const {
   return type == Data::Collection::Bibtex;
 }
@@ -159,9 +164,16 @@ Tellico::Data::CollPtr RISImporter::collection() {
   emit signalTotalSteps(this, urls().count() * 100);
 
   int count = 0;
-  KUrl::List urls = this->urls();
-  for(KUrl::List::ConstIterator it = urls.constBegin(); it != urls.constEnd() && !m_cancelled; ++it, ++count) {
-    readURL(*it, count, risFields);
+  if(text().isEmpty()) {
+    foreach(const KUrl& url, urls()) {
+      if(m_cancelled)  {
+        break;
+      }
+      readURL(url, count, risFields);
+      ++count;
+    }
+  } else {
+    readText(text(), 0, risFields);
   }
 
   if(m_cancelled) {
@@ -175,12 +187,16 @@ void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico:
   if(str.isEmpty()) {
     return;
   }
+  readText(str, n, risFields_);
+}
 
+void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tellico::Data::FieldPtr>& risFields_) {
   ISBNValidator isbnval(this);
 
-  QTextStream t(&str);
+  QString text = text_;
+  QTextStream t(&text);
 
-  const uint length = str.length();
+  const uint length = text.length();
   const uint stepSize = qMax(s_stepSize, length/100);
   const bool showProgress = options() & ImportProgress;
 
