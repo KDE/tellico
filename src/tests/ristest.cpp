@@ -36,7 +36,9 @@ QTEST_KDEMAIN_CORE( RisTest )
 
 void RisTest::testImport() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ris");
-  Tellico::Import::RISImporter importer(url);
+  KUrl::List urls;
+  urls << url;
+  Tellico::Import::RISImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());

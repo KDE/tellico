@@ -93,25 +93,25 @@ TARGET_LINK_LIBRARIES(ristest ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
 TARGET_LINK_LIBRARIES(tellicoreadtest models ${TELLICO_TEST_LIBS})
 
-# KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
-# TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
-#
-# KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
-# TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
-#
-# KDE4_ADD_UNIT_TEST(googlescholarfetchertest NOGUI googlescholarfetchertest.cpp)
-# TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})
-#
-# KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
-# TARGET_LINK_LIBRARIES(imdbfetchertest fetch ${TELLICO_TEST_LIBS})
-#
-# KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp)
-# TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
-#
-# IF( YAZ_FOUND )
-#     KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp)
-#     TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})
-# ENDIF( YAZ_FOUND )
+KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
+TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
+TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(googlescholarfetchertest NOGUI googlescholarfetchertest.cpp)
+TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
+TARGET_LINK_LIBRARIES(imdbfetchertest fetch ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp)
+TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
+
+IF( YAZ_FOUND )
+    KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp)
+    TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})
+ENDIF( YAZ_FOUND )
 
 #KDE4_ADD_UNIT_TEST(entryupdatejobtest NOGUI entryupdatejobtest.cpp ../entryupdatejob.cpp ../entrymerger.cpp)
 #TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
