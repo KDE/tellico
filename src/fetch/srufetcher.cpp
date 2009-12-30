@@ -58,7 +58,6 @@ namespace {
 }
 
 using Tellico::Fetch::SRUFetcher;
-using Tellico::Fetch::SRUConfigWidget;
 
 SRUFetcher::SRUFetcher(QObject* parent_)
     : Fetcher(parent_), m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
@@ -78,10 +77,6 @@ SRUFetcher::~SRUFetcher() {
   m_MODSHandler = 0;
   delete m_SRWHandler;
   m_SRWHandler = 0;
-}
-
-QString SRUFetcher::defaultName() {
-  return i18n("SRU Server");
 }
 
 QString SRUFetcher::source() const {
@@ -334,8 +329,8 @@ void SRUFetcher::slotComplete(KJob*) {
     return;
   }
 
-  const StringMap customFields = SRUFetcher::customFields();
-  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+  const StringHash optionalFields = SRUFetcher::optionalFields();
+  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {
       coll->removeField(it.key());
     }
@@ -451,20 +446,28 @@ Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
                                      QLatin1String("voyager"), parent_));
 }
 
+QString SRUFetcher::defaultName() {
+  return i18n("SRU Server");
+}
+
+QString SRUFetcher::defaultIcon() {
+  return QLatin1String("network-workgroup"); // just to be different than z3950
+}
+
 // static
-Tellico::StringMap SRUFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("address")]  = i18n("Address");
-  map[QLatin1String("abstract")] = i18n("Abstract");
-  return map;
+Tellico::StringHash SRUFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("address")]  = i18n("Address");
+  hash[QLatin1String("abstract")] = i18n("Abstract");
+  return hash;
 }
 
 Tellico::Fetch::ConfigWidget* SRUFetcher::configWidget(QWidget* parent_) const {
-  return new SRUConfigWidget(parent_, this);
+  return new ConfigWidget(parent_, this);
 }
 
-SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*=0*/)
-    : ConfigWidget(parent_) {
+SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*=0*/)
+    : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
   l->setSpacing(4);
   l->setColumnStretch(1, 10);
@@ -520,7 +523,7 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   l->setRowStretch(++row, 1);
 
   // now add additional fields widget
-  addFieldsWidget(SRUFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(SRUFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
@@ -531,7 +534,7 @@ SRUConfigWidget::SRUConfigWidget(QWidget* parent_, const SRUFetcher* fetcher_ /*
   KAcceleratorManager::manage(optionsWidget());
 }
 
-void SRUConfigWidget::saveConfig(KConfigGroup& config_) {
+void SRUFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   QString s = m_hostEdit->text().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("Host", s);
@@ -552,12 +555,12 @@ void SRUConfigWidget::saveConfig(KConfigGroup& config_) {
   slotSetModified(false);
 }
 
-QString SRUConfigWidget::preferredName() const {
+QString SRUFetcher::ConfigWidget::preferredName() const {
   QString s = m_hostEdit->text();
   return s.isEmpty() ? SRUFetcher::defaultName() : s;
 }
 
-void SRUConfigWidget::slotCheckHost() {
+void SRUFetcher::ConfigWidget::slotCheckHost() {
   QString s = m_hostEdit->text();
   // someone might be pasting a full URL, check that
   if(s.indexOf(QLatin1Char(':')) > -1 || s.indexOf(QLatin1Char('/')) > -1) {

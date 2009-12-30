@@ -65,10 +65,6 @@ EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler
 EntrezFetcher::~EntrezFetcher() {
 }
 
-QString EntrezFetcher::defaultName() {
-  return i18n("Entrez Database");
-}
-
 QString EntrezFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -407,8 +403,8 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntry(uint uid_) {
     }
   }
 
-  const StringMap customFields = EntrezFetcher::customFields();
-  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+  const StringHash optionalFields = EntrezFetcher::optionalFields();
+  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {
       coll->removeField(it.key());
     }
@@ -458,6 +454,23 @@ Tellico::Fetch::FetchRequest EntrezFetcher::updateRequest(Data::EntryPtr entry_)
   return FetchRequest();
 }
 
+QString EntrezFetcher::defaultName() {
+  return i18n("Entrez Database");
+}
+
+QString EntrezFetcher::defaultIcon() {
+  return favIcon("http://www.ncbi.nlm.nih.gov");
+}
+
+//static
+Tellico::StringHash EntrezFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("institution")] = i18n("Institution");
+  hash[QLatin1String("abstract")]    = i18n("Abstract");
+  hash[QLatin1String("url")]         = i18n("URL");
+  return hash;
+}
+
 Tellico::Fetch::ConfigWidget* EntrezFetcher::configWidget(QWidget* parent_) const {
   return new EntrezFetcher::ConfigWidget(parent_, this);
 }
@@ -469,7 +482,7 @@ EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher*
   l->addStretch();
 
   // now add additional fields widget
-  addFieldsWidget(EntrezFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(EntrezFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 }
 
 void EntrezFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
@@ -479,15 +492,6 @@ void EntrezFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 
 QString EntrezFetcher::ConfigWidget::preferredName() const {
   return EntrezFetcher::defaultName();
-}
-
-//static
-Tellico::StringMap EntrezFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("institution")] = i18n("Institution");
-  map[QLatin1String("abstract")]    = i18n("Abstract");
-  map[QLatin1String("url")]         = i18n("URL");
-  return map;
 }
 
 #include "entrezfetcher.moc"

@@ -79,6 +79,8 @@ public:
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);

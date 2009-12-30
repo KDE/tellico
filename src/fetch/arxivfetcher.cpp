@@ -64,10 +64,6 @@ ArxivFetcher::~ArxivFetcher() {
   m_xsltHandler = 0;
 }
 
-QString ArxivFetcher::defaultName() {
-  return i18n("arXiv.org");
-}
-
 QString ArxivFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -315,6 +311,14 @@ Tellico::Fetch::FetchRequest ArxivFetcher::updateRequest(Data::EntryPtr entry_) 
 
 Tellico::Fetch::ConfigWidget* ArxivFetcher::configWidget(QWidget* parent_) const {
   return new ArxivFetcher::ConfigWidget(parent_, this);
+}
+
+QString ArxivFetcher::defaultName() {
+  return QLatin1String("arXiv.org"); // no translation
+}
+
+QString ArxivFetcher::defaultIcon() {
+  return favIcon("http://arxiv.org");
 }
 
 ArxivFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ArxivFetcher*)

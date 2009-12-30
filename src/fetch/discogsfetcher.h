@@ -78,8 +78,6 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  static StringMap customFields();
-
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher = 0);
@@ -92,6 +90,8 @@ public:
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields();
 
 private slots:
   void slotComplete(KJob* job);

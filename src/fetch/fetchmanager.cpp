@@ -33,37 +33,16 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#ifdef ENABLE_AMAZON
-#include "amazonfetcher.h"
-#endif
-#ifdef ENABLE_IMDB
-#include "imdbfetcher.h"
-#endif
+#include "fetcherinitializer.h"
 #ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
 #include "srufetcher.h"
-#include "entrezfetcher.h"
 #include "execexternalfetcher.h"
-#include "yahoofetcher.h"
-#include "animenfofetcher.h"
-#include "ibsfetcher.h"
-#include "isbndbfetcher.h"
-#include "gcstarpluginfetcher.h"
-#include "crossreffetcher.h"
-#include "arxivfetcher.h"
-#include "citebasefetcher.h"
-#include "bibsonomyfetcher.h"
-#include "googlescholarfetcher.h"
-#include "discogsfetcher.h"
-#include "winecomfetcher.h"
-#include "themoviedbfetcher.h"
-#include "musicbrainzfetcher.h"
 
 #include <kglobal.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kmimetype.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>
 #include <kio/job.h>
@@ -71,8 +50,6 @@
 
 #include <QFileInfo>
 #include <QDir>
-#include <QDBusInterface>
-#include <QDBusReply>
 
 #define LOAD_ICON(name, group, size) \
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
@@ -82,6 +59,10 @@ Manager* Manager::s_self = 0;
 
 Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new ManagerMessage()),
                      m_count(0), m_loadDefaults(false) {
+  // must create static pointer first
+  Q_ASSERT(!s_self);
+  s_self = this;
+  FetcherInitializer init;
   loadFetchers();
 
 //  m_keyMap.insert(FetchFirst, QString());
@@ -100,6 +81,10 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
 
 Manager::~Manager() {
   delete m_messager;
+}
+
+void Manager::registerFunction(int type_, const FetcherFunction& func_) {
+  functionRegistry.insert(type_, func_);
 }
 
 void Manager::loadFetchers() {
@@ -263,98 +248,8 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   }
 
   Fetcher::Ptr f;
-  switch(fetchType) {
-    case Amazon:
-#ifdef ENABLE_AMAZON
-      f = new AmazonFetcher(this);
-#endif
-      break;
-
-    case IMDB:
-#ifdef ENABLE_IMDB
-      f = new IMDBFetcher(this);
-#endif
-      break;
-
-    case Z3950:
-#ifdef HAVE_YAZ
-      f = new Z3950Fetcher(this);
-#endif
-      break;
-
-    case SRU:
-      f = new SRUFetcher(this);
-      break;
-
-    case Entrez:
-      f = new EntrezFetcher(this);
-      break;
-
-    case ExecExternal:
-      f = new ExecExternalFetcher(this);
-      break;
-
-    case Yahoo:
-      f = new YahooFetcher(this);
-      break;
-
-    case AnimeNfo:
-      f = new AnimeNfoFetcher(this);
-      break;
-
-    case IBS:
-      f = new IBSFetcher(this);
-      break;
-
-    case ISBNdb:
-      f = new ISBNdbFetcher(this);
-      break;
-
-    case GCstarPlugin:
-      f = new GCstarPluginFetcher(this);
-      break;
-
-    case CrossRef:
-      f = new CrossRefFetcher(this);
-      break;
-
-    case Arxiv:
-      f = new ArxivFetcher(this);
-      break;
-
-    case Citebase:
-      f = new CitebaseFetcher(this);
-      break;
-
-    case Bibsonomy:
-      f = new BibsonomyFetcher(this);
-      break;
-
-    case GoogleScholar:
-      f = new GoogleScholarFetcher(this);
-      break;
-
-    case Discogs:
-      f = new DiscogsFetcher(this);
-      break;
-
-    case WineCom:
-      f = new WineComFetcher(this);
-      break;
-
-    case TheMovieDB:
-      f = new TheMovieDBFetcher(this);
-      break;
-
-    case MusicBrainz:
-      f = new MusicBrainzFetcher(this);
-      break;
-
-    case Unknown:
-    default:
-      break;
-  }
-  if(f) {
+  if(functionRegistry.contains(fetchType)) {
+    f = functionRegistry.value(fetchType).create(this);
     f->readConfig(config, group_);
   }
   return f;
@@ -364,20 +259,20 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
 #ifdef ENABLE_IMDB
-  vec.append(Fetcher::Ptr(new IMDBFetcher(this)));
+  vec.append(functionRegistry.value(IMDB).create(this));
 #endif
   vec.append(SRUFetcher::libraryOfCongress(this));
-  vec.append(Fetcher::Ptr(new ISBNdbFetcher(this)));
-  vec.append(Fetcher::Ptr(new YahooFetcher(this)));
-  vec.append(Fetcher::Ptr(new AnimeNfoFetcher(this)));
-  vec.append(Fetcher::Ptr(new ArxivFetcher(this)));
-  vec.append(Fetcher::Ptr(new GoogleScholarFetcher(this)));
-  vec.append(Fetcher::Ptr(new DiscogsFetcher(this)));
-  vec.append(Fetcher::Ptr(new TheMovieDBFetcher(this)));
-  vec.append(Fetcher::Ptr(new MusicBrainzFetcher(this)));
+  vec.append(functionRegistry.value(ISBNdb).create(this));
+  vec.append(functionRegistry.value(Yahoo).create(this));
+  vec.append(functionRegistry.value(AnimeNfo).create(this));
+  vec.append(functionRegistry.value(Arxiv).create(this));
+  vec.append(functionRegistry.value(GoogleScholar).create(this));
+  vec.append(functionRegistry.value(Discogs).create(this));
+  vec.append(functionRegistry.value(TheMovieDB).create(this));
+  vec.append(functionRegistry.value(MusicBrainz).create(this));
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
-    vec.append(Fetcher::Ptr(new IBSFetcher(this)));
+    vec.append(functionRegistry.value(IBS).create(this));
   }
   return vec;
 }
@@ -432,32 +327,11 @@ void Manager::updateStatus(const QString& message_) {
 
 Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   Fetch::NameTypeMap map;
-#ifdef ENABLE_AMAZON
-  map.insert(AmazonFetcher::defaultName(),       Amazon);
-#endif
-#ifdef ENABLE_IMDB
-  map.insert(IMDBFetcher::defaultName(),         IMDB);
-#endif
-#ifdef HAVE_YAZ
-  map.insert(Z3950Fetcher::defaultName(),        Z3950);
-#endif
-  map.insert(SRUFetcher::defaultName(),          SRU);
-  map.insert(EntrezFetcher::defaultName(),       Entrez);
-  map.insert(ExecExternalFetcher::defaultName(), ExecExternal);
-  map.insert(YahooFetcher::defaultName(),        Yahoo);
-  map.insert(AnimeNfoFetcher::defaultName(),     AnimeNfo);
-  map.insert(IBSFetcher::defaultName(),          IBS);
-  map.insert(ISBNdbFetcher::defaultName(),       ISBNdb);
-  map.insert(GCstarPluginFetcher::defaultName(), GCstarPlugin);
-  map.insert(CrossRefFetcher::defaultName(),     CrossRef);
-  map.insert(ArxivFetcher::defaultName(),        Arxiv);
-  map.insert(CitebaseFetcher::defaultName(),     Citebase);
-  map.insert(BibsonomyFetcher::defaultName(),    Bibsonomy);
-  map.insert(GoogleScholarFetcher::defaultName(),GoogleScholar);
-  map.insert(DiscogsFetcher::defaultName(),      Discogs);
-  map.insert(WineComFetcher::defaultName(),      WineCom);
-  map.insert(TheMovieDBFetcher::defaultName(),   TheMovieDB);
-  map.insert(MusicBrainzFetcher::defaultName(),MusicBrainz);
+  FunctionRegistry::const_iterator it = functionRegistry.constBegin();
+  while(it != functionRegistry.constEnd()) {
+    map.insert(functionRegistry.value(it.key()).name(), static_cast<Type>(it.key()));
+    ++it;
+  }
 
   // now find all the scripts distributed with tellico
   QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
@@ -485,135 +359,47 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
 // called when creating a new fetcher
 Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::Fetch::Type type_, const QString& name_) {
   ConfigWidget* w = 0;
-  switch(type_) {
-#ifdef ENABLE_AMAZON
-    case Amazon:
-      w = new AmazonFetcher::ConfigWidget(parent_);
-      break;
-#endif
-#ifdef ENABLE_IMDB
-    case IMDB:
-      w = new IMDBFetcher::ConfigWidget(parent_);
-      break;
-#endif
-#ifdef HAVE_YAZ
-    case Z3950:
-      w = new Z3950Fetcher::ConfigWidget(parent_);
-      break;
-#endif
-    case SRU:
-      w = new SRUConfigWidget(parent_);
-      break;
-    case Entrez:
-      w = new EntrezFetcher::ConfigWidget(parent_);
-      break;
-    case ExecExternal:
-      w = new ExecExternalFetcher::ConfigWidget(parent_);
-      if(!name_.isEmpty() && m_scriptMap.contains(name_)) {
-        // bundledScriptHasExecPath() actually needs to write the exec path
-        // back to the config so the configWidget can read it. But if the spec file
-        // is not readable, that doesn't work. So work around it with a copy to a temp file
-        KTemporaryFile tmpFile;
-        tmpFile.setAutoRemove(true);
-        tmpFile.open();
-        KUrl from, to;
-        from.setPath(m_scriptMap[name_]);
-        to.setPath(tmpFile.fileName());
-        // have to overwrite since KTemporaryFile already created it
-        KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
-        if(!KIO::NetAccess::synchronousRun(job, 0)) {
-          myDebug() << KIO::NetAccess::lastErrorString();
-        }
-        KConfig spec(to.path(), KConfig::SimpleConfig);
-        KConfigGroup specConfig(&spec, QString());
-        // pass actual location of spec file
-        if(name_ == specConfig.readEntry("Name") && bundledScriptHasExecPath(m_scriptMap[name_], specConfig)) {
-          static_cast<ExecExternalFetcher::ConfigWidget*>(w)->readConfig(specConfig);
-        } else {
-          myWarning() << "Can't read config file for " << to.path();
-        }
-      }
-      break;
-    case Yahoo:
-      w = new YahooFetcher::ConfigWidget(parent_);
-      break;
-    case AnimeNfo:
-      w = new AnimeNfoFetcher::ConfigWidget(parent_);
-      break;
-    case IBS:
-      w = new IBSFetcher::ConfigWidget(parent_);
-      break;
-    case ISBNdb:
-      w = new ISBNdbFetcher::ConfigWidget(parent_);
-      break;
-    case GCstarPlugin:
-      w = new GCstarPluginFetcher::ConfigWidget(parent_);
-      break;
-    case CrossRef:
-      w = new CrossRefFetcher::ConfigWidget(parent_);
-      break;
-    case Arxiv:
-      w = new ArxivFetcher::ConfigWidget(parent_);
-      break;
-    case Citebase:
-      w = new CitebaseFetcher::ConfigWidget(parent_);
-      break;
-    case Bibsonomy:
-      w = new BibsonomyFetcher::ConfigWidget(parent_);
-      break;
-    case GoogleScholar:
-      w = new GoogleScholarFetcher::ConfigWidget(parent_);
-      break;
-    case Discogs:
-      w = new DiscogsFetcher::ConfigWidget(parent_);
-      break;
-    case WineCom:
-      w = new WineComFetcher::ConfigWidget(parent_);
-      break;
-    case TheMovieDB:
-      w = new TheMovieDBFetcher::ConfigWidget(parent_);
-      break;
-    case MusicBrainz:
-      w = new MusicBrainzFetcher::ConfigWidget(parent_);
-      break;
-    case Unknown:
-      myWarning() << "no widget defined for type = " << type_;
+  if(functionRegistry.contains(type_)) {
+    w = functionRegistry.value(type_).configWidget(parent_);
+  } else {
+    myWarning() << "no widget defined for type =" << type_;
   }
+  if(type_ == ExecExternal) {
+    if(!name_.isEmpty() && m_scriptMap.contains(name_)) {
+      // bundledScriptHasExecPath() actually needs to write the exec path
+      // back to the config so the configWidget can read it. But if the spec file
+      // is not readable, that doesn't work. So work around it with a copy to a temp file
+      KTemporaryFile tmpFile;
+      tmpFile.setAutoRemove(true);
+      tmpFile.open();
+      KUrl from, to;
+      from.setPath(m_scriptMap[name_]);
+      to.setPath(tmpFile.fileName());
+      // have to overwrite since KTemporaryFile already created it
+      KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
+      if(!KIO::NetAccess::synchronousRun(job, 0)) {
+        myDebug() << KIO::NetAccess::lastErrorString();
+      }
+      KConfig spec(to.path(), KConfig::SimpleConfig);
+      KConfigGroup specConfig(&spec, QString());
+      // pass actual location of spec file
+      if(name_ == specConfig.readEntry("Name") && bundledScriptHasExecPath(m_scriptMap[name_], specConfig)) {
+        static_cast<ExecExternalFetcher::ConfigWidget*>(w)->readConfig(specConfig);
+      } else {
+        myWarning() << "Can't read config file for " << to.path();
+      }
+    }
+  }
+
   return w;
 }
 
 // static
 QString Manager::typeName(Tellico::Fetch::Type type_) {
-  switch(type_) {
-#ifdef ENABLE_AMAZON
-    case Amazon: return AmazonFetcher::defaultName();
-#endif
-#ifdef ENABLE_IMDB
-    case IMDB: return IMDBFetcher::defaultName();
-#endif
-#ifdef HAVE_YAZ
-    case Z3950: return Z3950Fetcher::defaultName();
-#endif
-    case SRU: return SRUFetcher::defaultName();
-    case Entrez: return EntrezFetcher::defaultName();
-    case ExecExternal: return ExecExternalFetcher::defaultName();
-    case Yahoo: return YahooFetcher::defaultName();
-    case AnimeNfo: return AnimeNfoFetcher::defaultName();
-    case IBS: return IBSFetcher::defaultName();
-    case ISBNdb: return ISBNdbFetcher::defaultName();
-    case GCstarPlugin: return GCstarPluginFetcher::defaultName();
-    case CrossRef: return CrossRefFetcher::defaultName();
-    case Arxiv: return ArxivFetcher::defaultName();
-    case Citebase: return CitebaseFetcher::defaultName();
-    case Bibsonomy: return BibsonomyFetcher::defaultName();
-    case GoogleScholar: return GoogleScholarFetcher::defaultName();
-    case Discogs: return DiscogsFetcher::defaultName();
-    case WineCom: return WineComFetcher::defaultName();
-    case TheMovieDB: return TheMovieDBFetcher::defaultName();
-    case MusicBrainz: return MusicBrainzFetcher::defaultName();
-    case Unknown: break;
+  if(self()->functionRegistry.contains(type_)) {
+    return self()->functionRegistry.value(type_).name();
   }
-  myWarning() << "none found for " << type_;
+  myWarning() << "none found for" << type_;
   return QString();
 }
 
@@ -624,7 +410,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     KUrl u;
     u.setProtocol(QLatin1String("http"));
     u.setHost(f->host());
-    QString icon = favIcon(u);
+    QString icon = Fetcher::favIcon(u);
     if(u.isValid() && !icon.isEmpty()) {
       return LOAD_ICON(icon, group_, size_);
     }
@@ -646,7 +432,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
       return LOAD_ICON(QLatin1String("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
-      QString icon = favIcon(u);
+      QString icon = Fetcher::favIcon(u);
       if(!icon.isEmpty()) {
         return LOAD_ICON(icon, group_, size_);
       }
@@ -657,69 +443,13 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) {
   QString name;
-  switch(type_) {
-    case Amazon:
-      name = favIcon("http://amazon.com"); break;
-    case IMDB:
-      name = favIcon("http://imdb.com"); break;
-    case Z3950:
-      name = QLatin1String("network-wired"); break; // rather arbitrary
-    case SRU:
-      name = QLatin1String("network-workgroup"); break; // just to be different than z3950
-    case Entrez:
-      name = favIcon("http://www.ncbi.nlm.nih.gov"); break;
-    case ExecExternal:
-      name = QLatin1String("application-x-executable"); break;
-    case Yahoo:
-      name = favIcon("http://yahoo.com"); break;
-    case AnimeNfo:
-      name = favIcon("http://animenfo.com"); break;
-    case IBS:
-      name = favIcon("http://internetbookshop.it"); break;
-    case ISBNdb:
-      name = favIcon("http://isbndb.com"); break;
-    case GCstarPlugin:
-      name = QLatin1String("gcstar"); break;
-    case CrossRef:
-      name = favIcon("http://crossref.org"); break;
-    case Arxiv:
-      name = favIcon("http://arxiv.org"); break;
-    case Citebase:
-      name = favIcon("http://citebase.org"); break;
-    case Bibsonomy:
-      name = favIcon("http://bibsonomy.org"); break;
-    case GoogleScholar:
-      name = favIcon("http://scholar.google.com"); break;
-    case Discogs:
-      name = favIcon("http://www.discogs.com"); break;
-    case WineCom:
-      name = favIcon("http://www.wine.com"); break;
-    case TheMovieDB:
-      name = favIcon("http://www.themoviedb.org"); break;
-    case MusicBrainz:
-      name = favIcon("http://www.musicbrainz.org"); break;
-    case Unknown:
-      myWarning() << "no pixmap defined for type = " << type_;
+  if(self()->functionRegistry.contains(type_)) {
+    name = self()->functionRegistry.value(type_).icon();
+  } else {
+    myWarning() << "no pixmap defined for type =" << type_;
   }
 
   return name.isEmpty() ? QPixmap() : LOAD_ICON(name, group_, size_);
-}
-
-QString Manager::favIcon(const char* url_) {
-  return favIcon(KUrl(url_));
-}
-
-QString Manager::favIcon(const KUrl& url_) {
-  QDBusInterface kded(QLatin1String("org.kde.kded"),
-                      QLatin1String("/modules/favicons"),
-                      QLatin1String("org.kde.FaviconsModule"));
-  QDBusReply<QString> iconName = kded.call(QLatin1String("iconForURL"), url_.url());
-  if(iconName.isValid() && !iconName.value().isEmpty()) {
-    return iconName;
-  }
-  // go ahead and try to download it for later
-  kded.call(QLatin1String("downloadHostIcon"), url_.url());
-  return KMimeType::iconNameForUrl(url_);
 }
 
 bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& config_) {

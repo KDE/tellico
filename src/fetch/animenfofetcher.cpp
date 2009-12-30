@@ -55,8 +55,7 @@ AnimeNfoFetcher::AnimeNfoFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false) {
 }
 
-QString AnimeNfoFetcher::defaultName() {
-  return QLatin1String("AnimeNfo.com");
+AnimeNfoFetcher::~AnimeNfoFetcher() {
 }
 
 QString AnimeNfoFetcher::source() const {
@@ -361,6 +360,14 @@ Tellico::Fetch::FetchRequest AnimeNfoFetcher::updateRequest(Data::EntryPtr entry
 
 Tellico::Fetch::ConfigWidget* AnimeNfoFetcher::configWidget(QWidget* parent_) const {
   return new AnimeNfoFetcher::ConfigWidget(parent_);
+}
+
+QString AnimeNfoFetcher::defaultName() {
+  return QLatin1String("AnimeNfo.com");
+}
+
+QString AnimeNfoFetcher::defaultIcon() {
+  return favIcon("http://animenfo.com");
 }
 
 AnimeNfoFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)

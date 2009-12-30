@@ -196,10 +196,6 @@ GCstarPluginFetcher::~GCstarPluginFetcher() {
   stop();
 }
 
-QString GCstarPluginFetcher::defaultName() {
-  return i18n("GCstar Plugin");
-}
-
 QString GCstarPluginFetcher::source() const {
   return m_name;
 }
@@ -333,6 +329,14 @@ Tellico::Fetch::FetchRequest GCstarPluginFetcher::updateRequest(Data::EntryPtr e
 
 Tellico::Fetch::ConfigWidget* GCstarPluginFetcher::configWidget(QWidget* parent_) const {
   return new GCstarPluginFetcher::ConfigWidget(parent_, this);
+}
+
+QString GCstarPluginFetcher::defaultName() {
+  return i18n("GCstar Plugin");
+}
+
+QString GCstarPluginFetcher::defaultIcon() {
+  return QLatin1String("gcstar");
 }
 
 GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPluginFetcher* fetcher_/*=0*/)

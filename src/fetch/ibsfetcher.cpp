@@ -55,8 +55,7 @@ IBSFetcher::IBSFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false) {
 }
 
-QString IBSFetcher::defaultName() {
-  return i18n("Internet Bookshop (ibs.it)");
+IBSFetcher::~IBSFetcher() {
 }
 
 QString IBSFetcher::source() const {
@@ -397,6 +396,14 @@ Tellico::Fetch::FetchRequest IBSFetcher::updateRequest(Data::EntryPtr entry_) {
 
 Tellico::Fetch::ConfigWidget* IBSFetcher::configWidget(QWidget* parent_) const {
   return new IBSFetcher::ConfigWidget(parent_);
+}
+
+QString IBSFetcher::defaultName() {
+  return i18n("Internet Bookshop (ibs.it)");
+}
+
+QString IBSFetcher::defaultIcon() {
+  return favIcon("http://internetbookshop.it");
 }
 
 IBSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)

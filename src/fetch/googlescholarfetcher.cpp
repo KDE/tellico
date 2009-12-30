@@ -59,11 +59,6 @@ GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
 GoogleScholarFetcher::~GoogleScholarFetcher() {
 }
 
-QString GoogleScholarFetcher::defaultName() {
-  // no i18n
-  return QLatin1String("Google Scholar");
-}
-
 QString GoogleScholarFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -226,6 +221,15 @@ Tellico::Fetch::FetchRequest GoogleScholarFetcher::updateRequest(Data::EntryPtr 
 
 Tellico::Fetch::ConfigWidget* GoogleScholarFetcher::configWidget(QWidget* parent_) const {
   return new GoogleScholarFetcher::ConfigWidget(parent_, this);
+}
+
+QString GoogleScholarFetcher::defaultName() {
+  // no i18n
+  return QLatin1String("Google Scholar");
+}
+
+QString GoogleScholarFetcher::defaultIcon() {
+  return favIcon("http://scholar.google.com");
 }
 
 GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* /*=0*/)

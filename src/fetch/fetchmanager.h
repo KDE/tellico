@@ -42,6 +42,7 @@ namespace Tellico {
 class FetchResult;
 class ConfigWidget;
 class ManagerMessage;
+class FetcherInitializer;
 
 typedef QMap<QString, Type> NameTypeMap; // map fetcher name to type
 typedef QMap<FetchKey, QString> KeyMap; // map key type to name of key
@@ -55,8 +56,25 @@ typedef QList<Fetcher::Ptr> FetcherVec;
 class Manager : public QObject {
 Q_OBJECT
 
+  /**
+   * Keep a hash of all the function pointers to create classes and provide
+   * functions to "fake" static virtual methods
+   */
+  typedef Fetcher::Ptr (*FETCHER_CREATE_FN)(QObject*);
+  typedef QString (*FETCHER_NAME_FN)(void);
+  typedef QString (*FETCHER_ICON_FN)(void);
+  typedef StringHash (*FETCHER_OPTIONALFIELDS_FN)(void);
+  typedef ConfigWidget* (*FETCHER_CONFIGWIDGET_FN)(QWidget*);
+  struct FetcherFunction  {
+    FETCHER_CREATE_FN create;
+    FETCHER_NAME_FN name;
+    FETCHER_ICON_FN icon;
+    FETCHER_OPTIONALFIELDS_FN optionalFields;
+    FETCHER_CONFIGWIDGET_FN configWidget;
+  };
+
 public:
-  static Manager* self() {  if(!s_self) s_self = new Manager(); return s_self; }
+  static Manager* self() { if(!s_self) s_self = new Manager(); return s_self; }
 
   ~Manager();
 
@@ -77,6 +95,12 @@ public:
   FetcherVec createUpdateFetchers(int collType, FetchKey key);
   Fetcher::Ptr createUpdateFetcher(int collType, const QString& source);
 
+  /**
+   * Classes derived from Fetcher call this function once
+   * per program to register the class ID key.
+   */
+  void registerFunction(int type, const FetcherFunction& func);
+
   static QString typeName(Type type);
   static QPixmap fetcherIcon(Fetch::Type type, int iconGroup=3 /*Small*/, int size=0 /* default */);
   static QPixmap fetcherIcon(Fetch::Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
@@ -91,6 +115,7 @@ private slots:
 
 private:
   friend class ManagerMessage;
+  friend class FetcherInitializer;
   static Manager* s_self;
 
   Manager();
@@ -98,9 +123,10 @@ private:
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 
-  static QString favIcon(const char* url_);
-  static QString favIcon(const KUrl& url_);
   static bool bundledScriptHasExecPath(const QString& specFile, KConfigGroup& config);
+
+  typedef QHash<int, FetcherFunction> FunctionRegistry;
+  FunctionRegistry functionRegistry;
 
   FetcherVec m_fetchers;
   int m_currentFetcherIndex;

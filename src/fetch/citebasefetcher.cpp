@@ -56,10 +56,6 @@ CitebaseFetcher::CitebaseFetcher(QObject* parent_)
 CitebaseFetcher::~CitebaseFetcher() {
 }
 
-QString CitebaseFetcher::defaultName() {
-  return QLatin1String("Citebase");
-}
-
 QString CitebaseFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -220,6 +216,14 @@ Tellico::Fetch::FetchRequest CitebaseFetcher::updateRequest(Data::EntryPtr entry
 
 Tellico::Fetch::ConfigWidget* CitebaseFetcher::configWidget(QWidget* parent_) const {
   return new CitebaseFetcher::ConfigWidget(parent_, this);
+}
+
+QString CitebaseFetcher::defaultName() {
+  return QLatin1String("Citebase");
+}
+
+QString CitebaseFetcher::defaultIcon() {
+  return favIcon("http://citebase.org");
 }
 
 CitebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CitebaseFetcher*)

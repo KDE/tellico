@@ -72,6 +72,30 @@ void ConfigWidget::addFieldsWidget(const Tellico::StringMap& customFields_, cons
   KAcceleratorManager::manage(this);
 }
 
+void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, const QStringList& fieldsToAdd_) {
+  if(customFields_.isEmpty()) {
+    return;
+  }
+
+  QGroupBox* gbox = new QGroupBox(i18n("Available Fields"), this);
+  static_cast<QBoxLayout*>(layout())->addWidget(gbox);
+
+  QVBoxLayout* vbox = new QVBoxLayout();
+  for(StringHash::ConstIterator it = customFields_.begin(); it != customFields_.end(); ++it) {
+    QCheckBox* cb = new QCheckBox(it.value(), gbox);
+    m_fields.insert(it.key(), cb);
+    if(fieldsToAdd_.contains(it.key())) {
+      cb->setChecked(true);
+    }
+    connect(cb, SIGNAL(clicked()), SLOT(slotSetModified()));
+    vbox->addWidget(cb);
+  }
+  vbox->addStretch(1);
+  gbox->setLayout(vbox);
+
+  KAcceleratorManager::manage(this);
+}
+
 void ConfigWidget::saveFieldsConfig(KConfigGroup& config_) const {
   QStringList fields;
   QHash<QString, QCheckBox*>::const_iterator it = m_fields.constBegin();

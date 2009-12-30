@@ -104,12 +104,12 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const ;
 
-  static StringMap customFields();
-
   class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields();
 
 private slots:
   void slotComplete(KJob* job);

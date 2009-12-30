@@ -28,6 +28,7 @@
 #include <QList>
 #include <QVector>
 #include <QMap>
+#include <QHash>
 #include <QPair>
 #include <QMetaType>
 
@@ -35,6 +36,7 @@
 
 namespace Tellico {
   typedef QMap<QString, QString> StringMap;
+  typedef QHash<QString, QString> StringHash;
 
   class Filter;
   typedef KSharedPtr<Filter> FilterPtr;

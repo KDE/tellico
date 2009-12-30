@@ -65,10 +65,6 @@ ISBNdbFetcher::~ISBNdbFetcher() {
   m_xsltHandler = 0;
 }
 
-QString ISBNdbFetcher::defaultName() {
-  return i18n("ISBNdb.com");
-}
-
 QString ISBNdbFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -338,6 +334,14 @@ Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_)
 
 Tellico::Fetch::ConfigWidget* ISBNdbFetcher::configWidget(QWidget* parent_) const {
   return new ISBNdbFetcher::ConfigWidget(parent_, this);
+}
+
+QString ISBNdbFetcher::defaultName() {
+  return i18n("ISBNdb.com");
+}
+
+QString ISBNdbFetcher::defaultIcon() {
+  return favIcon("http://isbndb.com");
 }
 
 ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher_)

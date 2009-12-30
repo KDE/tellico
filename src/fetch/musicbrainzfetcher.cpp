@@ -63,10 +63,6 @@ MusicBrainzFetcher::~MusicBrainzFetcher() {
   m_xsltHandler = 0;
 }
 
-QString MusicBrainzFetcher::defaultName() {
-  return i18n("MusicBrainz");
-}
-
 QString MusicBrainzFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -317,6 +313,14 @@ Tellico::Fetch::FetchRequest MusicBrainzFetcher::updateRequest(Data::EntryPtr en
 
 Tellico::Fetch::ConfigWidget* MusicBrainzFetcher::configWidget(QWidget* parent_) const {
   return new MusicBrainzFetcher::ConfigWidget(parent_, this);
+}
+
+QString MusicBrainzFetcher::defaultName() {
+  return QLatin1String("MusicBrainz"); // no translation
+}
+
+QString MusicBrainzFetcher::defaultIcon() {
+  return favIcon("http://www.musicbrainz.org");
 }
 
 MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrainzFetcher*)

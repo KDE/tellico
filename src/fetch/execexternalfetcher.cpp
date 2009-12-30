@@ -83,10 +83,6 @@ ExecExternalFetcher::~ExecExternalFetcher() {
   stop();
 }
 
-QString ExecExternalFetcher::defaultName() {
-  return i18n("External Application");
-}
-
 QString ExecExternalFetcher::source() const {
   return m_name;
 }
@@ -283,6 +279,14 @@ Tellico::Fetch::FetchRequest ExecExternalFetcher::updateRequest(Data::EntryPtr e
 
 Tellico::Fetch::ConfigWidget* ExecExternalFetcher::configWidget(QWidget* parent_) const {
   return new ExecExternalFetcher::ConfigWidget(parent_, this);
+}
+
+QString ExecExternalFetcher::defaultName() {
+  return i18n("External Application");
+}
+
+QString ExecExternalFetcher::defaultIcon() {
+  return QLatin1String("application-x-executable");
 }
 
 ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExternalFetcher* fetcher_/*=0*/)

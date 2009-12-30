@@ -49,7 +49,7 @@ Q_OBJECT
 
 public:
   IBSFetcher(QObject* parent);
-  virtual ~IBSFetcher() {}
+  virtual ~IBSFetcher();
 
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
@@ -72,6 +72,8 @@ public:
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);

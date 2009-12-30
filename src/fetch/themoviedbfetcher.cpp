@@ -65,10 +65,6 @@ TheMovieDBFetcher::~TheMovieDBFetcher() {
   m_xsltHandler = 0;
 }
 
-QString TheMovieDBFetcher::defaultName() {
-  return i18n("TheMovieDB.org");
-}
-
 QString TheMovieDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -283,8 +279,8 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntry(uint uid_) {
     myDebug() << "weird, more than one entry found";
   }
 
-  const StringMap customFields = this->customFields();
-  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+  const StringHash optionalFields = this->optionalFields();
+  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {
       coll->removeField(it.key());
     }
@@ -332,6 +328,23 @@ Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) 
   return new TheMovieDBFetcher::ConfigWidget(parent_, this);
 }
 
+QString TheMovieDBFetcher::defaultName() {
+  return QLatin1String("TheMovieDB.org"); // noo translation
+}
+
+QString TheMovieDBFetcher::defaultIcon() {
+  return favIcon("http://www.themoviedb.org");
+}
+
+Tellico::StringHash TheMovieDBFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("tmdb")] = i18n("TMDb Link");
+  hash[QLatin1String("imdb")] = i18n("IMDb Link");
+  // FIXME:
+//  map[QLatin1String("alttitle")] = i18n("Alternative Titles");
+  return hash;
+}
+
 TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDBFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
@@ -367,7 +380,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(TheMovieDBFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(TheMovieDBFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
     // only show the key if it is not the default Tellico one...
@@ -390,15 +403,6 @@ void TheMovieDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 
 QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
   return TheMovieDBFetcher::defaultName();
-}
-
-Tellico::StringMap TheMovieDBFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("tmdb")] = i18n("TMDb Link");
-  map[QLatin1String("imdb")] = i18n("IMDb Link");
-  // FIXME:
-//  map[QLatin1String("alttitle")] = i18n("Alternative Titles");
-  return map;
 }
 
 #include "themoviedbfetcher.moc"

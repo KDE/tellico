@@ -22,83 +22,58 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_WINECOMFETCHER_H
-#define TELLICO_FETCH_WINECOMFETCHER_H
+#ifndef TELLICO_FETCH_FETCHERINITIALIZER_H
+#define TELLICO_FETCH_FETCHERINITIALIZER_H
 
-#include "fetcher.h"
-#include "configwidget.h"
-
-#include <QPointer>
-
-class KLineEdit;
-class KJob;
-namespace KIO {
-  class StoredTransferJob;
-}
+#include "fetchmanager.h"
 
 namespace Tellico {
-  class XSLTHandler;
   namespace Fetch {
+
+class ConfigWidget;
 
 /**
  * @author Robby Stephenson
  */
-class WineComFetcher : public Fetcher {
-Q_OBJECT
+class FetcherInitializer {
 
 public:
-  WineComFetcher(QObject* parent = 0);
-  ~WineComFetcher();
+  FetcherInitializer();
+};
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntry(uint uid);
-  virtual Type type() const { return WineCom; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
-
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
-
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    explicit ConfigWidget(QWidget* parent_, const WineComFetcher* fetcher = 0);
-    virtual void saveConfig(KConfigGroup&);
-    virtual QString preferredName() const;
-  private:
-    KLineEdit* m_apiKeyEdit;
-  };
-  friend class ConfigWidget;
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash optionalFields() { return StringHash(); }
-
-private slots:
-  void slotComplete(KJob* job);
-
-private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  void initXSLTHandler();
-  void doSearch();
-
-  XSLTHandler* m_xsltHandler;
-  int m_limit;
-  int m_page;
-  int m_total;
-  int m_numResults;
-  int m_offset;
-
-  QHash<int, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
-
-  bool m_started;
-  QString m_apiKey;
+/**
+ * Helper template for registering fetcher classes
+ */
+template <class Derived>
+class RegisterFetcher {
+public:
+  static Tellico::Fetch::Fetcher::Ptr createInstance(QObject* parent) {
+    return Tellico::Fetch::Fetcher::Ptr(new Derived(parent));
+  }
+  static QString getName() {
+    return Derived::defaultName();
+  }
+  static QString getIcon() {
+    return Derived::defaultIcon();
+  }
+  static StringHash getOptionalFields() {
+    return Derived::optionalFields();
+  }
+  static Tellico::Fetch::ConfigWidget* createConfigWidget(QWidget* parent) {
+    return new typename Derived::ConfigWidget(parent);
+  }
+  RegisterFetcher(int type) {
+    Manager::FetcherFunction f;
+    f.create = createInstance;
+    f.name = getName;
+    f.icon = getIcon;
+    f.optionalFields = getOptionalFields;
+    f.configWidget = createConfigWidget;
+    Manager::self()->registerFunction(type, f);
+  }
 };
 
   }
 }
+
 #endif

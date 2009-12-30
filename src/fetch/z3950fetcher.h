@@ -79,14 +79,14 @@ public:
 
   const QString& host() const { return m_host; }
 
-  static StringMap customFields();
-
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
   class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields();
 
 protected:
   virtual void customEvent(QEvent* event);

@@ -65,10 +65,6 @@ WineComFetcher::~WineComFetcher() {
   m_xsltHandler = 0;
 }
 
-QString WineComFetcher::defaultName() {
-  return i18n("Wine.com");
-}
-
 QString WineComFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -274,6 +270,14 @@ Tellico::Fetch::FetchRequest WineComFetcher::updateRequest(Data::EntryPtr entry_
 
 Tellico::Fetch::ConfigWidget* WineComFetcher::configWidget(QWidget* parent_) const {
   return new WineComFetcher::ConfigWidget(parent_, this);
+}
+
+QString WineComFetcher::defaultName() {
+  return QLatin1String("Wine.com"); // no translation
+}
+
+QString WineComFetcher::defaultIcon() {
+  return favIcon("http://www.wine.com");
 }
 
 WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetcher* fetcher_)

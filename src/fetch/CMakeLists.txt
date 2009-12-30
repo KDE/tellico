@@ -15,6 +15,7 @@ SET(fetch_STAT_SRCS
    entrezfetcher.cpp
    execexternalfetcher.cpp
    fetcher.cpp
+   fetcherinitializer.cpp
    fetcherjob.cpp
    fetchmanager.cpp
    fetchresult.cpp
@@ -30,6 +31,7 @@ SET(fetch_STAT_SRCS
    srufetcher.cpp
    themoviedbfetcher.cpp
    winecomfetcher.cpp
+   xmlfetcher.cpp
    yahoofetcher.cpp
    z3950connection.cpp
    z3950fetcher.cpp

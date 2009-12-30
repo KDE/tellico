@@ -78,8 +78,6 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  static StringMap customFields();
-
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher = 0);
@@ -89,6 +87,8 @@ public:
   friend class ConfigWidget;
 
   static QString defaultName();
+  static QString defaultIcon();
+  static StringHash optionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);

@@ -96,10 +96,6 @@ IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
 IMDBFetcher::~IMDBFetcher() {
 }
 
-QString IMDBFetcher::defaultName() {
-  return i18n("Internet Movie Database");
-}
-
 QString IMDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -1159,6 +1155,23 @@ Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
   return FetchRequest();
 }
 
+QString IMDBFetcher::defaultName() {
+  return i18n("Internet Movie Database");
+}
+
+QString IMDBFetcher::defaultIcon() {
+  return favIcon("http://imdb.com");
+}
+//static
+Tellico::StringHash IMDBFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("imdb")]             = i18n("IMDb Link");
+  hash[QLatin1String("imdb-rating")]      = i18n("IMDb Rating");
+  hash[QLatin1String("alttitle")]         = i18n("Alternative Titles");
+  hash[QLatin1String("allcertification")] = i18n("Certifications");
+  return hash;
+}
+
 Tellico::Fetch::ConfigWidget* IMDBFetcher::configWidget(QWidget* parent_) const {
   return new IMDBFetcher::ConfigWidget(parent_, this);
 }
@@ -1202,7 +1215,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(IMDBFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(IMDBFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
     m_hostEdit->setText(fetcher_->m_host);
@@ -1229,16 +1242,6 @@ void IMDBFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {
   return IMDBFetcher::defaultName();
-}
-
-//static
-Tellico::StringMap IMDBFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("imdb")]             = i18n("IMDb Link");
-  map[QLatin1String("imdb-rating")]      = i18n("IMDb Rating");
-  map[QLatin1String("alttitle")]         = i18n("Alternative Titles");
-  map[QLatin1String("allcertification")] = i18n("Certifications");
-  return map;
 }
 
 #include "imdbfetcher.moc"

@@ -109,10 +109,6 @@ AmazonFetcher::~AmazonFetcher() {
   m_xsltHandler = 0;
 }
 
-QString AmazonFetcher::defaultName() {
-  return i18n("Amazon.com Web Services");
-}
-
 QString AmazonFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -573,7 +569,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntry(uint uid_) {
     return entry;
   }
 
-  QStringList defaultFields = customFields().keys();
+  QStringList defaultFields = optionalFields().keys();
   for(QStringList::Iterator it = defaultFields.begin(); it != defaultFields.end(); ++it) {
     if(!m_fields.contains(*it)) {
       entry->setField(*it, QString());
@@ -837,6 +833,21 @@ QString AmazonFetcher::secretKey() const {
   return QString::fromUtf8(m_amazonKey);
 }
 
+//static
+QString AmazonFetcher::defaultName() {
+  return i18n("Amazon.com Web Services");
+}
+
+QString AmazonFetcher::defaultIcon() {
+  return favIcon("http://amazon.com");
+}
+
+Tellico::StringHash AmazonFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("keyword")] = i18n("Keywords");
+  return hash;
+}
+
 Tellico::Fetch::ConfigWidget* AmazonFetcher::configWidget(QWidget* parent_) const {
   return new AmazonFetcher::ConfigWidget(parent_, this);
 }
@@ -939,7 +950,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
     m_imageCombo->setCurrentData(MediumImage);
   }
 
-  addFieldsWidget(AmazonFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(AmazonFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   KAcceleratorManager::manage(optionsWidget());
 }
@@ -972,13 +983,6 @@ QString AmazonFetcher::ConfigWidget::preferredName() const {
 
 void AmazonFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
-}
-
-//static
-Tellico::StringMap AmazonFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("keyword")] = i18n("Keywords");
-  return map;
 }
 
 #include "amazonfetcher.moc"

@@ -116,10 +116,6 @@ Z3950Fetcher::~Z3950Fetcher() {
   }
 }
 
-QString Z3950Fetcher::defaultName() {
-  return i18n("z39.50 Server");
-}
-
 QString Z3950Fetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -451,8 +447,8 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     return;
   }
 
-  const StringMap customFields = Z3950Fetcher::customFields();
-  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+  const StringHash optionalFields = Z3950Fetcher::optionalFields();
+  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {
       coll->removeField(it.key());
     }
@@ -642,7 +638,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   l->setRowStretch(++row, 1);
 
   // now add additional fields widget
-  addFieldsWidget(Z3950Fetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(Z3950Fetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   loadPresets(fetcher_ ? fetcher_->m_preset : QString());
   if(fetcher_) {
@@ -711,13 +707,21 @@ void Z3950Fetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
   slotSetModified(false);
 }
 
+QString Z3950Fetcher::defaultName() {
+  return i18n("z39.50 Server");
+}
+
+QString Z3950Fetcher::defaultIcon() {
+  return QLatin1String("network-wired"); // rather arbitrary
+}
+
 // static
-Tellico::StringMap Z3950Fetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("address")]  = i18n("Address");
-  map[QLatin1String("abstract")] = i18n("Abstract");
-  map[QLatin1String("illustrator")] = i18n("Illustrator");
-  return map;
+Tellico::StringHash Z3950Fetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("address")]  = i18n("Address");
+  hash[QLatin1String("abstract")] = i18n("Abstract");
+  hash[QLatin1String("illustrator")] = i18n("Illustrator");
+  return hash;
 }
 
 void Z3950Fetcher::ConfigWidget::slotTogglePreset(bool on) {

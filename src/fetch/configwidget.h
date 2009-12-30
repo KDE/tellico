@@ -74,6 +74,7 @@ public slots:
 protected:
   QWidget* optionsWidget() { return m_optionsWidget; }
   void addFieldsWidget(const StringMap& customFields, const QStringList& fieldsToAdd);
+  void addFieldsWidget(const StringHash& customFields, const QStringList& fieldsToAdd);
   void saveFieldsConfig(KConfigGroup& config) const;
 
 private:

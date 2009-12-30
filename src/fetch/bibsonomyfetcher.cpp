@@ -54,10 +54,6 @@ BibsonomyFetcher::BibsonomyFetcher(QObject* parent_)
 BibsonomyFetcher::~BibsonomyFetcher() {
 }
 
-QString BibsonomyFetcher::defaultName() {
-  return QLatin1String("Bibsonomy");
-}
-
 QString BibsonomyFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -170,6 +166,14 @@ Tellico::Fetch::FetchRequest BibsonomyFetcher::updateRequest(Data::EntryPtr entr
 
 Tellico::Fetch::ConfigWidget* BibsonomyFetcher::configWidget(QWidget* parent_) const {
   return new BibsonomyFetcher::ConfigWidget(parent_, this);
+}
+
+QString BibsonomyFetcher::defaultName() {
+  return QLatin1String("Bibsonomy");
+}
+
+QString BibsonomyFetcher::defaultIcon() {
+  return favIcon("http://bibsonomy.org");
 }
 
 BibsonomyFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BibsonomyFetcher*)

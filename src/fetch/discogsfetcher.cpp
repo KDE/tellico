@@ -66,10 +66,6 @@ DiscogsFetcher::~DiscogsFetcher() {
   m_xsltHandler = 0;
 }
 
-QString DiscogsFetcher::defaultName() {
-  return i18n("Discogs Audio Search");
-}
-
 QString DiscogsFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -287,8 +283,8 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntry(uint uid_) {
     myDebug() << "weird, more than one entry found";
   }
 
-  const StringMap customFields = this->customFields();
-  for(StringMap::ConstIterator it = customFields.begin(); it != customFields.end(); ++it) {
+  const StringHash optionalFields = this->optionalFields();
+  for(StringHash::ConstIterator it = optionalFields.begin(); it != optionalFields.end(); ++it) {
     if(!m_fields.contains(it.key())) {
       coll->removeField(it.key());
     }
@@ -341,6 +337,22 @@ Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) con
   return new DiscogsFetcher::ConfigWidget(parent_, this);
 }
 
+QString DiscogsFetcher::defaultName() {
+  return i18n("Discogs Audio Search");
+}
+
+QString DiscogsFetcher::defaultIcon() {
+  return favIcon("http://www.discogs.com");
+}
+
+Tellico::StringHash DiscogsFetcher::optionalFields() {
+  StringHash hash;
+  hash[QLatin1String("producer")] = i18n("Producer");
+  hash[QLatin1String("nationality")] = i18n("Nationality");
+  hash[QLatin1String("discogs")] = i18n("Discogs Link");
+  return hash;
+}
+
 DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
@@ -384,7 +396,7 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
-  addFieldsWidget(DiscogsFetcher::customFields(), fetcher_ ? fetcher_->m_fields : QStringList());
+  addFieldsWidget(DiscogsFetcher::optionalFields(), fetcher_ ? fetcher_->m_fields : QStringList());
 
   if(fetcher_) {
     // only show the key if it is not the default Tellico one...
@@ -411,14 +423,6 @@ void DiscogsFetcher::ConfigWidget::saveConfig(KConfigGroup& config_) {
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {
   return DiscogsFetcher::defaultName();
-}
-
-Tellico::StringMap DiscogsFetcher::customFields() {
-  StringMap map;
-  map[QLatin1String("producer")] = i18n("Producer");
-  map[QLatin1String("nationality")] = i18n("Nationality");
-  map[QLatin1String("discogs")] = i18n("Discogs Link");
-  return map;
 }
 
 #include "discogsfetcher.moc"

@@ -35,6 +35,7 @@
 #include <QString>
 
 class KConfigGroup;
+class KUrl;
 
 namespace Tellico {
   namespace Fetch {
@@ -126,6 +127,9 @@ public:
    * Returns a widget for modifying the fetcher's config.
    */
   virtual ConfigWidget* configWidget(QWidget* parent) const = 0;
+
+  static QString favIcon(const char* url);
+  static QString favIcon(const KUrl& url);
 
 signals:
 //  void signalStatus(const QString& status);

@@ -67,10 +67,6 @@ CrossRefFetcher::~CrossRefFetcher() {
   m_xsltHandler = 0;
 }
 
-QString CrossRefFetcher::defaultName() {
-  return QLatin1String("CrossRef");
-}
-
 QString CrossRefFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -292,6 +288,14 @@ void CrossRefFetcher::readWallet() const {
 
 Tellico::Fetch::ConfigWidget* CrossRefFetcher::configWidget(QWidget* parent_) const {
   return new CrossRefFetcher::ConfigWidget(parent_, this);
+}
+
+QString CrossRefFetcher::defaultName() {
+  return QLatin1String("CrossRef"); // no translation
+}
+
+QString CrossRefFetcher::defaultIcon() {
+  return favIcon("http://crossref.org");
 }
 
 CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetcher* fetcher_)
