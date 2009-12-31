@@ -150,7 +150,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   bool changeTrackTitle = true;
   uint j = 0;
   for(QStringList::ConstIterator it = files.constBegin(); !m_cancelled && it != files.constEnd(); ++it, ++j) {
-    TagLib::FileRef f(QFile::encodeName(*it));
+    TagLib::FileRef f(QFile::encodeName(*it).data());
     if(f.isNull() || !f.tag()) {
       if((*it).endsWith(QLatin1String("/.directory"))) {
         directoryFiles += *it;
