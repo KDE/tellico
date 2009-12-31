@@ -37,6 +37,7 @@
 #include "../fieldformat.h"
 #include "../tellico_utils.h"
 #include "../utils/isbnvalidator.h"
+#include "../utils/wallet.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
@@ -164,7 +165,7 @@ void AmazonFetcher::continueSearch() {
 
 void AmazonFetcher::doSearch() {
   // calling secretKey() ensures that we try to read it first
-  if(m_amazonKey.isEmpty() || m_access.isEmpty()) {
+  if(secretKey().isEmpty() || m_access.isEmpty()) {
     // this message is split in two since the first half is reused later
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
@@ -812,6 +813,18 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
   return res;
 }
 
+QString AmazonFetcher::secretKey() const {
+  if(m_amazonKey.isEmpty()) {
+    QByteArray maybeKey = Wallet::self()->readWalletEntry(m_access);
+    if(!maybeKey.isNull()) {
+      m_amazonKey = maybeKey;
+    } else {
+      myDebug() << "no amazon secret key found for" << source();
+    }
+  }
+  return QString::fromUtf8(m_amazonKey);
+}
+
 //static
 QString AmazonFetcher::defaultName() {
   return i18n("Amazon.com Web Services");
@@ -921,7 +934,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   if(fetcher_) {
     m_siteCombo->setCurrentData(fetcher_->m_site);
     m_accessEdit->setText(fetcher_->m_access);
-    m_secretKeyEdit->setText(QString::fromUtf8(fetcher_->m_amazonKey));
+    m_secretKeyEdit->setText(fetcher_->secretKey());
     m_assocEdit->setText(fetcher_->m_assoc);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults

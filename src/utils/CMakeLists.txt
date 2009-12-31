@@ -9,6 +9,7 @@ SET(utils_STAT_SRCS
    lccnvalidator.cpp
    stringcomparison.cpp
    upcvalidator.cpp
+   wallet.cpp
    )
 
 KDE4_ADD_LIBRARY(utils STATIC ${utils_STAT_SRCS})
