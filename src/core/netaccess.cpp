@@ -74,9 +74,11 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   if(KIO::NetAccess::synchronousRun(getJob, window_)) {
     QFile f(target_);
     if(f.open(QIODevice::WriteOnly)) {
-      f.write(getJob->data());
-      return true;
+      if(f.write(getJob->data()) > -1) {
+        return true;
+      }
     }
+    myDebug() << "failed to write to" << target_;
   }
 #endif
   if(getJob->ui()) {
