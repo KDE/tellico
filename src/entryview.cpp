@@ -29,6 +29,7 @@
 #include "translators/tellicoxmlexporter.h"
 #include "collection.h"
 #include "images/imagefactory.h"
+#include "images/imageinfo.h"
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
 #include "core/filehandler.h"
@@ -166,10 +167,13 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
     if(id.isEmpty()) {
       continue;
     }
-    if(Data::Document::self()->allImagesOnDisk()) {
-      ImageFactory::writeCachedImage(id, ImageFactory::cacheDir());
-    } else {
-      ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+    // only write out image if it's not linked only
+    if(!ImageFactory::imageInfo(id).linkOnly) {
+      if(Data::Document::self()->allImagesOnDisk()) {
+        ImageFactory::writeCachedImage(id, ImageFactory::cacheDir());
+      } else {
+        ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+      }
     }
   }
 

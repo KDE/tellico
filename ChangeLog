@@ -1,3 +1,7 @@
+2009-12-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed adding "link-only" files (BUG #220645).
+
 2009-12-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated CrossRef data source to allow authentication via email address.
