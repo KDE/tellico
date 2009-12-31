@@ -244,8 +244,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags"));
 
-  // quiet, utf8, allowCompressed
-  QString output = FileHandler::readTextFile(u, true, true, true);
+  // quiet, utf8
+  QString output = FileHandler::readTextFile(u, true, true);
 #if 0
   myWarning() << "Remove output debug from musicbrainzfetcher.cpp";
   QFile f(QLatin1String("/tmp/test2.xml"));

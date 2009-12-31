@@ -261,10 +261,10 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
 #endif
 //  myDebug() << "url: " << u;
 
-  // quiet, utf8, allowCompressed
+  // quiet, utf8
   QString output = FileHandler::readTextFile(u, true, true);
 
-#if 1
+#if 0
   myWarning() << "Remove output debug from discogsfetcher.cpp";
   QFile f(QLatin1String("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
