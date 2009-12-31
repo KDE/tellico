@@ -164,7 +164,7 @@ void ImageWidget::setImage(const QString& id_) {
   m_pixmap = ImageFactory::pixmap(id_, MAX_UNSCALED_WIDTH, MAX_UNSCALED_HEIGHT);
   const bool link = ImageFactory::imageInfo(id_).linkOnly;
   m_cbLinkOnly->setChecked(link);
-  m_cbLinkOnly->setEnabled(link);
+  m_cbLinkOnly->setEnabled(link); // user can't make a non;-linked image a linked image, so disable if not linked
   // if we're using a link, then the original URL _is_ the id
   m_originalURL = link ? KUrl(id_) : KUrl();
   m_scaled = QPixmap();
@@ -326,9 +326,9 @@ void ImageWidget::slotLinkOnlyClicked() {
     return;
   }
 
-  bool link = m_cbLinkOnly->isChecked();
+  const bool link = m_cbLinkOnly->isChecked();
   // if the user is trying to link and can't before there's no information about the url
-  // the let him know that
+  // then let him know that
   if(link && m_originalURL.isEmpty()) {
     KMessageBox::sorry(this, i18n("Saving a link is only possible for newly added images."));
     m_cbLinkOnly->setChecked(false);

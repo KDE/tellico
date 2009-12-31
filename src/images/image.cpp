@@ -124,7 +124,8 @@ QString Image::idClean(const QString& id_) {
 }
 
 void Image::setID(const QString& id_) {
-  m_id = idClean(id_);
+  // don't clean the id if we're linking only
+  m_id = m_linkOnly ? id_ : idClean(id_);
 }
 
 void Image::calculateID() {
