@@ -57,9 +57,12 @@ using namespace Tellico;
 using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(DISCOGS_MAX_RETURNS_TOTAL),
-      m_job(0), m_started(false) {
+    : Fetcher(parent_)
+    , m_xsltHandler(0)
+    , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
+    , m_job(0)
+    , m_started(false)
+    , m_apiKey(QLatin1String(DISCOGS_API_KEY)) {
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
@@ -104,7 +107,7 @@ void DiscogsFetcher::doSearch() {
     case Title:
       u.setPath(QLatin1String("/search"));
       u.addQueryItem(QLatin1String("q"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("release"));
+      u.addQueryItem(QLatin1String("type"), QLatin1String("releases"));
       break;
 
     case Person:

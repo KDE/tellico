@@ -102,8 +102,8 @@ TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp)
 TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
 
-#KDE4_ADD_UNIT_TEST(discogsfetchertest NOGUI discogsfetchertest.cpp)
-#TARGET_LINK_LIBRARIES(discogsfetchertest fetch ${TELLICO_TEST_LIBS})
+KDE4_ADD_UNIT_TEST(discogsfetchertest NOGUI discogsfetchertest.cpp)
+TARGET_LINK_LIBRARIES(discogsfetchertest fetch ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(googlescholarfetchertest NOGUI googlescholarfetchertest.cpp)
 TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})

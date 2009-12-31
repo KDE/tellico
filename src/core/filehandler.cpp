@@ -66,7 +66,11 @@ FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_, bool allowCompresse
   }
 
   if(allowCompressed_) {
-    m_device = KFilterDev::deviceForFile(m_filename);
+    // a gzip'd temporary file won't have a suffix of .gx
+    // so KFilterDev::deviceForFile won't work
+    // just assume it's always gzip
+    QIODevice* fileDevice = new QFile(m_filename);
+    m_device = KFilterDev::device(fileDevice, QLatin1String("application/x-gzip"));
   } else {
     m_device = new QFile(m_filename);
   }

@@ -42,6 +42,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   if(url_.isLocalFile()) {
     return KIO::NetAccess::download(url_, target_, window_);
   }
+  Q_ASSERT(target_.isEmpty());
   // copied from KIO::NetAccess::download() apidox except for quiet part
   if(target_.isEmpty()) {
     KTemporaryFile tmpFile;
@@ -64,7 +65,9 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   if(KIO::NetAccess::synchronousRun(getJob, window_)) {
     return true;
   }
-  getJob->ui()->showErrorMessage();
+  if(getJob->ui()) {
+    getJob->ui()->showErrorMessage();
+  }
   return false;
 }
 

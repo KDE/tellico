@@ -1,6 +1,7 @@
 2009-12-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed adding "link-only" files (BUG #220645).
+	* Fixed Discogs track download and title search.
 
 2009-12-22  Robby Stephenson  <robby@periapsis.org>
 
