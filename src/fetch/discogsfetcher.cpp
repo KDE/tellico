@@ -161,7 +161,7 @@ void DiscogsFetcher::slotComplete(KJob* ) {
     return;
   }
 
-#if 1
+#if 0
   myWarning() << "Remove debug from discogsfetcher.cpp";
   QFile f(QLatin1String("/tmp/test1.xml"));
   if(f.open(QIODevice::WriteOnly)) {
