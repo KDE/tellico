@@ -61,8 +61,6 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
     flags |= KIO::HideProgressInfo;
   }
   KIO::Job* getJob = KIO::file_copy(url_, dest, -1, flags);
-  // discogs, for one, might return gzip
-  getJob->addMetaData(QLatin1String("Accept-Encoding"), QLatin1String("gzip"));
   if(KIO::NetAccess::synchronousRun(getJob, window_)) {
     return true;
   }

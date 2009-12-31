@@ -36,7 +36,6 @@
 #include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kio/netaccess.h>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -257,22 +256,18 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 #endif
-  myDebug() << "url: " << u;
+//  myDebug() << "url: " << u;
 
   // quiet, utf8, allowCompressed
   QString output = FileHandler::readTextFile(u, true, true, true);
 
-  KIO::StoredTransferJob* getJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  KIO::NetAccess::synchronousRun(getJob, 0);
-  QByteArray outputData = getJob->data();
-
-#if 1
+#if 0
   myWarning() << "Remove output debug from discogsfetcher.cpp";
   QFile f(QLatin1String("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec(QTextCodec::codecForName("UTF-8"));
-    t << outputData;
+    t << output;
   }
   f.close();
 #endif
