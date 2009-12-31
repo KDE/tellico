@@ -78,7 +78,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
         return true;
       }
     }
-    myDebug() << "failed to write to" << target_;
+    myWarning() << "failed to write to" << target_;
   }
 #endif
   if(getJob->ui()) {
