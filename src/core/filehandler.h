@@ -69,7 +69,7 @@ public:
 
   private:
     friend class FileHandler;
-    explicit FileRef(const KUrl& url, bool quiet=false, bool allowCompressed=false);
+    explicit FileRef(const KUrl& url, bool quiet=false);
     QIODevice* m_device;
     QString m_filename;
     bool m_isValid;
@@ -94,7 +94,7 @@ public:
    * @param allowCompressed Whether to check if the file is compressed or not
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KUrl& url, bool quiet=false, bool useUTF8=false, bool allowCompressed=false);
+  static QString readTextFile(const KUrl& url, bool quiet=false, bool useUTF8=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *

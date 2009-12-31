@@ -48,7 +48,7 @@
 
 using Tellico::FileHandler;
 
-FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_, bool allowCompressed_) : m_device(0), m_isValid(false) {
+FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_) : m_device(0), m_isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
@@ -65,15 +65,7 @@ FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_, bool allowCompresse
     return;
   }
 
-  if(allowCompressed_) {
-    // a gzip'd temporary file won't have a suffix of .gx
-    // so KFilterDev::deviceForFile won't work
-    // just assume it's always gzip
-    QIODevice* fileDevice = new QFile(m_filename);
-    m_device = KFilterDev::device(fileDevice, QLatin1String("application/x-gzip"));
-  } else {
-    m_device = new QFile(m_filename);
-  }
+  m_device = new QFile(m_filename);
   m_isValid = true;
 }
 
@@ -111,8 +103,8 @@ FileHandler::FileRef* FileHandler::fileRef(const KUrl& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/, bool compress_/*=false*/) {
-  FileRef f(url_, quiet_, compress_);
+QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {
+  FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QString();
   }

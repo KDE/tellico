@@ -61,10 +61,24 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   if(quiet_) {
     flags |= KIO::HideProgressInfo;
   }
+#if 0
+  // some http files get returned gzip'd and file_copy just copies the gzipd data
+  // but the FileRef can't handlle that  automatically
   KIO::Job* getJob = KIO::file_copy(url_, dest, -1, flags);
   if(KIO::NetAccess::synchronousRun(getJob, window_)) {
     return true;
   }
+#else
+  // KIO::storedGet seems to handle Content-Encoding: gzip ok
+  KIO::StoredTransferJob* getJob = KIO::storedGet(url_, KIO::NoReload, flags);
+  if(KIO::NetAccess::synchronousRun(getJob, window_)) {
+    QFile f(target_);
+    if(f.open(QIODevice::WriteOnly)) {
+      f.write(getJob->data());
+      return true;
+    }
+  }
+#endif
   if(getJob->ui()) {
     getJob->ui()->showErrorMessage();
   }
