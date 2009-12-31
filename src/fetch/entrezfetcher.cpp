@@ -56,6 +56,8 @@ namespace {
   static const char* ENTREZ_DEFAULT_DATABASE = "pubmed";
 }
 
+using namespace Tellico;
+using namespace Tellico::Fetch;
 using Tellico::Fetch::EntrezFetcher;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(0),

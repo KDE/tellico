@@ -52,6 +52,7 @@ namespace {
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::TheMovieDBFetcher;
 
 TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)

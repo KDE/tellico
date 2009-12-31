@@ -50,6 +50,7 @@
 #include <QRegExp>
 #include <QTimer>
 
+using namespace Tellico;
 using Tellico::Data::Document;
 Document* Document::s_self = 0;
 

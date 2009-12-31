@@ -54,6 +54,7 @@
 #include <QGroupBox>
 #include <QGridLayout>
 
+using namespace Tellico;
 using Tellico::Fetch::ExecExternalFetcher;
 
 QStringList ExecExternalFetcher::parseArguments(const QString& str_) {

@@ -41,6 +41,7 @@
 #include <QDateTime>
 #include <QVBoxLayout>
 
+using namespace Tellico;
 using Tellico::Export::PilotDBExporter;
 
 PilotDBExporter::PilotDBExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),

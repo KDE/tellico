@@ -39,6 +39,7 @@
 #include <QGridLayout>
 #include <QVBoxLayout>
 
+using namespace Tellico;
 using Tellico::Export::CSVExporter;
 
 CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),

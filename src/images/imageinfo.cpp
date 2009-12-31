@@ -26,9 +26,10 @@
 #include "image.h"
 #include "imagefactory.h"
 
+using namespace Tellico;
 using Tellico::Data::ImageInfo;
 
-ImageInfo::ImageInfo(const Image& img_)
+ImageInfo::ImageInfo(const Data::Image& img_)
     : id(img_.id())
     , format(img_.format())
     , linkOnly(img_.linkOnly())

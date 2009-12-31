@@ -68,6 +68,7 @@ namespace {
   static const char* linkText = I18N_NOOP("Amazon Link");
 }
 
+using namespace Tellico;
 using Tellico::Fetch::AmazonFetcher;
 
 // static

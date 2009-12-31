@@ -54,6 +54,7 @@
 #include <QHBoxLayout>
 #include <QGridLayout>
 
+using namespace Tellico;
 using Tellico::FieldListItem;
 using Tellico::CollectionFieldsDialog;
 

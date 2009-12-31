@@ -45,6 +45,7 @@
 #include <QShowEvent>
 #include <QGridLayout>
 
+using namespace Tellico;
 using Tellico::Fetch::GCstarPluginFetcher;
 
 GCstarPluginFetcher::CollectionPlugins GCstarPluginFetcher::collectionPlugins;

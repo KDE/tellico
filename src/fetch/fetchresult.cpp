@@ -44,6 +44,8 @@ namespace {
   }
 }
 
+using namespace Tellico;
+using namespace Tellico::Fetch;
 using Tellico::Fetch::FetchResult;
 
 FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)

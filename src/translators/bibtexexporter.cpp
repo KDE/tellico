@@ -43,6 +43,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
+using namespace Tellico;
 using Tellico::Export::BibtexExporter;
 
 BibtexExporter::BibtexExporter(Data::CollPtr coll) : Tellico::Export::Exporter(coll),

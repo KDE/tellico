@@ -68,6 +68,7 @@ namespace {
   static const QString Z3950_DEFAULT_ESN = QLatin1String("F");
 }
 
+using namespace Tellico;
 using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_)

@@ -52,6 +52,7 @@ namespace {
   static const char* WINECOM_BASE_URL = "http://services.wine.com";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::WineComFetcher;
 
 WineComFetcher::WineComFetcher(QObject* parent_)

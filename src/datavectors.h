@@ -71,4 +71,7 @@ namespace Tellico {
   }
 }
 
+#include "collection.h"
+#include "entry.h"
+
 #endif

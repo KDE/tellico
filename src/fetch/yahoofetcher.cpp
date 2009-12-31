@@ -51,6 +51,7 @@ namespace {
   static const char* YAHOO_APP_ID = "tellico-robby";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::YahooFetcher;
 
 YahooFetcher::YahooFetcher(QObject* parent_)

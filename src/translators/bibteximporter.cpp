@@ -42,6 +42,7 @@
 #include <QButtonGroup>
 #include <QFile>
 
+using namespace Tellico;
 using Tellico::Import::BibtexImporter;
 
 int BibtexImporter::s_initCount = 0;

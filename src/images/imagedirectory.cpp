@@ -34,6 +34,7 @@
 #include <QFile>
 #include <QDir>
 
+using namespace Tellico;
 using Tellico::ImageStorage;
 using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;

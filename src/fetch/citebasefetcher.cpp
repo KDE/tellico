@@ -47,6 +47,8 @@ namespace {
   static const char* CITEBASE_BASE_URL = "http://www.citebase.org/openurl/?url_ver=Z39.88-2004&svc_id=bibtex";
 }
 
+using namespace Tellico;
+using namespace Tellico::Fetch;
 using Tellico::Fetch::CitebaseFetcher;
 
 CitebaseFetcher::CitebaseFetcher(QObject* parent_)

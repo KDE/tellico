@@ -45,6 +45,7 @@ namespace {
   static const int BIBSONOMY_MAX_RESULTS = 20;
 }
 
+using namespace Tellico;
 using Tellico::Fetch::BibsonomyFetcher;
 
 BibsonomyFetcher::BibsonomyFetcher(QObject* parent_)

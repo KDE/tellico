@@ -46,6 +46,7 @@ namespace {
   static const char* SCHOLAR_SET_BIBTEX_URL = "http://scholar.google.com/scholar_setprefs?num=100&scis=yes&scisf=4&submit=Save+Preferences";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::GoogleScholarFetcher;
 
 GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)

@@ -31,6 +31,7 @@
 #include <klocale.h>
 #include <kstringhandler.h>
 
+using namespace Tellico;
 using Tellico::Data::BibtexCollection;
 
 namespace {

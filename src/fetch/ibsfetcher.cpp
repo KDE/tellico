@@ -49,6 +49,7 @@ namespace {
   static const char* IBS_BASE_URL = "http://www.internetbookshop.it/ser/serpge.asp";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::IBSFetcher;
 
 IBSFetcher::IBSFetcher(QObject* parent_)

@@ -42,7 +42,7 @@ SRUFetcherTest::SRUFetcherTest() : m_loop(this) {
 }
 
 void SRUFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBibtex(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   // since we use the MODS importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
 }

@@ -29,6 +29,7 @@
 #include <klocale.h>
 #include <kglobal.h>
 
+using namespace Tellico;
 using Tellico::Data::Field;
 
 // this constructor is for anything but Choice type

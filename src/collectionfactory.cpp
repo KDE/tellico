@@ -28,6 +28,7 @@
 
 #include <klocale.h>
 
+using namespace Tellico;
 using Tellico::CollectionFactory;
 
 CollectionFactory::CollectionFactory() {

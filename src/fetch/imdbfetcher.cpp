@@ -59,6 +59,7 @@ namespace {
   static const uint IMDB_MAX_RESULTS = 20;
 }
 
+using namespace Tellico;
 using Tellico::Fetch::IMDBFetcher;
 
 QRegExp* IMDBFetcher::s_tagRx = 0;

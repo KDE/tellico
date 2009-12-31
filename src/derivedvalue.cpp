@@ -30,6 +30,7 @@
 
 #include <QStack>
 
+using namespace Tellico::Data;
 using Tellico::Data::DerivedValue;
 
 DerivedValue::DerivedValue(const QString& valueTemplate_) : m_valueTemplate(valueTemplate_)

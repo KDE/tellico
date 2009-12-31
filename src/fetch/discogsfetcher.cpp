@@ -36,6 +36,7 @@
 #include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <kio/netaccess.h>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -53,6 +54,7 @@ namespace {
   static const char* DISCOGS_API_KEY = "de6cb96534";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
@@ -160,12 +162,12 @@ void DiscogsFetcher::slotComplete(KJob* ) {
     return;
   }
 
-#if 0
+#if 1
   myWarning() << "Remove debug from discogsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test1.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
     t << data;
   }
   f.close();
@@ -255,17 +257,22 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 #endif
-//  myDebug() << "url: " << u;
+  myDebug() << "url: " << u;
 
   // quiet, utf8, allowCompressed
   QString output = FileHandler::readTextFile(u, true, true, true);
-#if 0
+
+  KIO::StoredTransferJob* getJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  KIO::NetAccess::synchronousRun(getJob, 0);
+  QByteArray outputData = getJob->data();
+
+#if 1
   myWarning() << "Remove output debug from discogsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QLatin1String("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec(QTextCodec::codecForName("UTF-8"));
-    t << output;
+    t << outputData;
   }
   f.close();
 #endif

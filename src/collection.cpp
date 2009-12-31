@@ -37,6 +37,7 @@
 
 #include <QRegExp>
 
+using namespace Tellico;
 using Tellico::Data::Collection;
 
 const QString Collection::s_peopleGroupName = QLatin1String("_people");
@@ -773,7 +774,7 @@ void Collection::invalidateGroups() {
   blockSignals(false);
 }
 
-Tellico::Data::EntryPtr Collection::entryById(ID id_) {
+Tellico::Data::EntryPtr Collection::entryById(Data::ID id_) {
   return EntryPtr(m_entryById.value(id_));
 }
 

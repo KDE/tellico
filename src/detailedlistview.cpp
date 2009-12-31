@@ -70,6 +70,7 @@ protected:
 
 }
 
+using namespace Tellico;
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m_selectionChanging(false) {

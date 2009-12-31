@@ -35,6 +35,8 @@
 
 #include <QRegExp>
 
+using namespace Tellico;
+using namespace Tellico::Data;
 using Tellico::Data::Entry;
 
 Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(-1) {
@@ -45,7 +47,7 @@ Entry::Entry(Tellico::Data::CollPtr coll_) : QSharedData(), m_coll(coll_), m_id(
 #endif
 }
 
-Entry::Entry(Tellico::Data::CollPtr coll_, ID id_) : QSharedData(), m_coll(coll_), m_id(id_) {
+Entry::Entry(Tellico::Data::CollPtr coll_, Data::ID id_) : QSharedData(), m_coll(coll_), m_id(id_) {
 #ifndef NDEBUG
   if(!coll_) {
     myWarning() << "null collection pointer!";

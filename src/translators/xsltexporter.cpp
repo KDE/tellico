@@ -38,6 +38,7 @@
 #include <QDomDocument>
 #include <QHBoxLayout>
 
+using namespace Tellico;
 using Tellico::Export::XSLTExporter;
 
 XSLTExporter::XSLTExporter(Data::CollPtr coll_) : Export::Exporter(coll_),

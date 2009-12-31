@@ -52,6 +52,7 @@ namespace {
   static const char* ISBNDB_APP_ID = "3B9S3BQS";
 }
 
+using namespace Tellico;
 using Tellico::Fetch::ISBNdbFetcher;
 
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
