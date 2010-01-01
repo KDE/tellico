@@ -65,10 +65,14 @@ void DiscogsFetcherTest::testTitle() {
   QCOMPARE(m_results.size(), 1);
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
-//  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
+  QVERIFY(!entry->field(QLatin1String("artist")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
 }
 
-void DiscogsFetcherTest::testPeople() {
+void DiscogsFetcherTest::testPerson() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Person,
                                        QLatin1String("Evanescence"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
@@ -86,6 +90,29 @@ void DiscogsFetcherTest::testPeople() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
+}
+
+void DiscogsFetcherTest::testKeyword() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
+                                       QLatin1String("Fallen Evanescence"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
+  QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());

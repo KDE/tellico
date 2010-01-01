@@ -88,7 +88,7 @@ KUrl DiscogsFetcher::searchUrl() {
   switch(request().key) {
     case Title:
       u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      u.addQueryItem(QLatin1String("q"), QLatin1String("title:") + request().value);
       u.addQueryItem(QLatin1String("type"), QLatin1String("releases"));
       break;
 
