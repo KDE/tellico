@@ -14,6 +14,7 @@ SET(XSLT_FILES
     discogs2tellico.xsl
     dvd-logo.png
     gcstar2tellico.xsl
+    giantbomb2tellico.xsl
     hddvd-logo.png
     isbndb2tellico.xsl
     MARC21slim2MODS3.xsl

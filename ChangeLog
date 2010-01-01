@@ -1,3 +1,7 @@
+2010-01-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Giant Bomb data source.
+
 2009-12-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed adding "link-only" files (BUG #220645).

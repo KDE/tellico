@@ -20,6 +20,7 @@ SET(fetch_STAT_SRCS
    fetchmanager.cpp
    fetchresult.cpp
    gcstarpluginfetcher.cpp
+   giantbombfetcher.cpp
    googlescholarfetcher.cpp
    hmac_sha2.c
    ibsfetcher.cpp

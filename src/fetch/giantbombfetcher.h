@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,59 +22,75 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef TELLICO_GIANTBOMBFETCHER_H
+#define TELLICO_GIANTBOMBFETCHER_H
+
+#include "xmlfetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
+
+#include <klineedit.h>
 
 namespace Tellico {
+
   namespace Fetch {
 
 /**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
+ * A fetcher for giantbomb.com
+ *
+ * @author Robby Stephenson
  */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
+class GiantBombFetcher : public XMLFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  GiantBombFetcher(QObject* parent);
+  /**
+   */
+  virtual ~GiantBombFetcher();
+
+  /**
+   */
+  virtual QString source() const;
+  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
+  virtual Type type() const { return GiantBomb; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
+
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const GiantBombFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&);
+    virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+
+private:
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void resetSearch();
+  virtual KUrl searchUrl();
+  virtual void parseData(const QByteArray& data);
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+
+  int m_start;
+  int m_total;
+
+  QString m_apiKey;
 };
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo,
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase,
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb
-};
-
-  }
-}
-
+  } // end namespace
+} // end namespace
 #endif

@@ -45,6 +45,7 @@
 #include "winecomfetcher.h"
 #include "themoviedbfetcher.h"
 #include "musicbrainzfetcher.h"
+#include "giantbombfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -76,4 +77,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::WineComFetcher> registerWine(WineCom);
   RegisterFetcher<Fetch::TheMovieDBFetcher> registerTMDB(TheMovieDB);
   RegisterFetcher<Fetch::MusicBrainzFetcher> registerMB(MusicBrainz);
+  RegisterFetcher<Fetch::GiantBombFetcher> registerBomb(GiantBomb);
 }
