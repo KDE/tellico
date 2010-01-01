@@ -73,7 +73,6 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
-  m_fetchImages = config_.readEntry("Fetch Images", true);
 }
 
 void DiscogsFetcher::resetSearch() {
@@ -254,14 +253,6 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
   m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
-  m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
-  connect(m_fetchImageCheck, SIGNAL(clicked()), SLOT(slotSetModified()));
-  ++row;
-  l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
-  w = i18n("The cover image may be downloaded as well. However, too many large images in the "
-           "collection may degrade performance.");
-  m_fetchImageCheck->setWhatsThis(w);
-
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -273,9 +264,6 @@ DiscogsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DiscogsFetche
     if(fetcher_->m_apiKey != QLatin1String(DISCOGS_API_KEY)) {
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
-    m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
-  } else {
-    m_fetchImageCheck->setChecked(true);
   }
 }
 
@@ -284,7 +272,6 @@ void DiscogsFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
-  config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
 }
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {

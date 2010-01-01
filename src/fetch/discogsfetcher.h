@@ -54,7 +54,6 @@ public:
   /**
    */
   virtual QString source() const;
-  // amazon can search title or person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
   virtual Type type() const { return Discogs; }
   virtual bool canFetch(int type) const;
@@ -72,7 +71,6 @@ public:
     virtual QString preferredName() const;
   private:
     KLineEdit* m_apiKeyEdit;
-    QCheckBox* m_fetchImageCheck;
   };
   friend class ConfigWidget;
 
@@ -90,7 +88,6 @@ private:
   int m_start;
   int m_total;
 
-  bool m_fetchImages;
   QString m_apiKey;
 };
 
