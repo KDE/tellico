@@ -32,7 +32,6 @@ using namespace Tellico;
 using namespace Tellico::Fetch;
 using Tellico::Fetch::FetcherJob;
 
-
 FetcherJob::FetcherJob(QObject* parent_, Fetcher::Ptr fetcher_, const FetchRequest& request_)
     : KJob(parent_), m_fetcher(fetcher_), m_request(request_) {
   connect(m_fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),

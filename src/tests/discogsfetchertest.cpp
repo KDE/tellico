@@ -57,11 +57,12 @@ void DiscogsFetcherTest::testTitle() {
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
 
   job->start();
   m_loop.exec();
 
-  QVERIFY(m_results.size() > 0);
+  QCOMPARE(m_results.size(), 1);
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
 //  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
@@ -75,11 +76,12 @@ void DiscogsFetcherTest::testPeople() {
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
 
   job->start();
   m_loop.exec();
 
-  QVERIFY(m_results.size() > 0);
+  QCOMPARE(m_results.size(), 1);
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));

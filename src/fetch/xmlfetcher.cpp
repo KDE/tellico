@@ -27,11 +27,8 @@
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
-#include "../collection.h"
-#include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
 #include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
@@ -65,7 +62,7 @@ void XMLFetcher::continueSearch() {
 }
 
 void XMLFetcher::doSearch() {
-  KUrl u = searchUrl();
+  const KUrl u = searchUrl();
   Q_ASSERT(!u.isEmpty());
   if(u.isEmpty()) {
     stop();
@@ -98,7 +95,7 @@ void XMLFetcher::slotComplete(KJob* ) {
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -106,7 +103,7 @@ void XMLFetcher::slotComplete(KJob* ) {
   }
 
 #if 0
-  myWarning() << "Remove debug from XMLFetcher.cpp";
+  myWarning() << "Remove debug from xmlfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -155,7 +152,7 @@ void XMLFetcher::slotComplete(KJob* ) {
   stop(); // required
 }
 
-Tellico::Data::EntryPtr XMLFetcher::fetchEntryHookHook(uint uid_) {
+Tellico::Data::EntryPtr XMLFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries[uid_];
   if(!entry) {
     myWarning() << "no entry in dict";
@@ -196,7 +193,7 @@ void XMLFetcher::setXSLTFilename(const QString& filename_) {
 }
 
 void XMLFetcher::setLimit(int limit_) {
-  Q_ASSERT(m_limit > 0);
+  Q_ASSERT(limit_ > 0);
   m_limit = limit_;
 }
 

@@ -25,17 +25,11 @@
 #include "discogsfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
-#include "../collection.h"
-#include "../entry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -57,17 +51,13 @@ using namespace Tellico;
 using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
-    : Fetcher(parent_)
-    , m_xsltHandler(0)
-    , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
-    , m_job(0)
-    , m_started(false)
+    : XMLFetcher(parent_)
     , m_apiKey(QLatin1String(DISCOGS_API_KEY)) {
+  setLimit(DISCOGS_MAX_RETURNS_TOTAL);
+  setXSLTFilename(QLatin1String("discogs2tellico.xsl"));
 }
 
 DiscogsFetcher::~DiscogsFetcher() {
-  delete m_xsltHandler;
-  m_xsltHandler = 0;
 }
 
 QString DiscogsFetcher::source() const {
@@ -86,19 +76,11 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   m_fetchImages = config_.readEntry("Fetch Images", true);
 }
 
-void DiscogsFetcher::search() {
-  m_started = true;
-  m_start = 1;
+void DiscogsFetcher::resetSearch() {
   m_total = -1;
-  doSearch();
 }
 
-void DiscogsFetcher::continueSearch() {
-  m_started = true;
-  doSearch();
-}
-
-void DiscogsFetcher::doSearch() {
+KUrl DiscogsFetcher::searchUrl() {
   KUrl u(DISCOGS_API_URL);
   u.addQueryItem(QLatin1String("f"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
@@ -123,66 +105,19 @@ void DiscogsFetcher::doSearch() {
     default:
       myWarning() << "key not recognized: " << request().key;
       stop();
-      return;
+      return KUrl();
   }
 
 #ifdef DISCOGS_TEST
   u = KUrl("/home/robby/discogs-results.xml");
 #endif
 //  myDebug() << "url: " << u.url();
-
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  return u;
 }
 
-void DiscogsFetcher::stop() {
-  if(!m_started) {
-    return;
-  }
-  if(m_job) {
-    m_job->kill();
-    m_job = 0;
-  }
-  m_started = false;
-  emit signalDone(this);
-}
-
-void DiscogsFetcher::slotComplete(KJob* ) {
-//  myDebug();
-  if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
-    stop();
-    return;
-  }
-
-  QByteArray data = m_job->data();
-  if(data.isEmpty()) {
-    myDebug() << "no data";
-    stop();
-    return;
-  }
-
+void DiscogsFetcher::parseData(const QByteArray& data_) {
+  Q_UNUSED(data_);
 #if 0
-  myWarning() << "Remove debug from discogsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test1.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
-    t << data;
-  }
-  f.close();
-#endif
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
-    }
-  }
-
   if(m_total == -1) {
     QDomDocument dom;
     if(!dom.setContent(data, false)) {
@@ -198,57 +133,19 @@ void DiscogsFetcher::slotComplete(KJob* ) {
       myDebug() << "total = " << m_total;
     }
   }
-
-  // assume discogs is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
-  Import::TellicoImporter imp(str);
-  Data::CollPtr coll = imp.collection();
-  if(!coll) {
-    myDebug() << "no collection pointer";
-    stop();
-    return;
-  }
-
-  int count = 0;
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
-    if(count >= m_limit) {
-      break;
-    }
-    if(!m_started) {
-      // might get aborted
-      break;
-    }
-
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
-    ++count;
-  }
   m_start = m_entries.count() + 1;
   // not sure how to specify start in the REST url
   //  m_hasMoreResults = m_start <= m_total;
-
-  stop(); // required
+#endif
 }
 
-Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
-  Data::EntryPtr entry = m_entries[uid_];
-  if(!entry) {
-    myWarning() << "no entry in dict";
-    return Data::EntryPtr();
-  }
-  // one way we tell if this entry has been fully initialized is to
-  // check for a cover image
-  if(!entry->field(QLatin1String("cover")).isEmpty()) {
-    myLog() << "already downloaded " << entry->title();
-    return entry;
-  }
+Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
+  Q_ASSERT(entry_);
 
-  QString release = entry->field(QLatin1String("discogs-id"));
+  QString release = entry_->field(QLatin1String("discogs-id"));
   if(release.isEmpty()) {
     myDebug() << "no discogs release found";
-    return entry;
+    return entry_;
   }
 
 #ifdef DISCOGS_TEST
@@ -275,12 +172,12 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   f.close();
 #endif
 
-  Import::TellicoImporter imp(m_xsltHandler->applyStylesheet(output));
+  Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
   if(!coll) {
     myWarning() << "no collection pointer";
-    return entry;
+    return entry_;
   }
 
   if(coll->entryCount() > 1) {
@@ -289,35 +186,10 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
 
   // don't want to include id
   coll->removeField(QLatin1String("discogs-id"));
-
-  entry = coll->entries().front();
-  m_entries.insert(uid_, entry); // replaces old value
-  return entry;
-}
-
-void DiscogsFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("discogs2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate discogs2tellico.xsl.";
-    return;
-  }
-
-  KUrl u;
-  u.setPath(xsltfile);
-
-  delete m_xsltHandler;
-  m_xsltHandler = new XSLTHandler(u);
-  if(!m_xsltHandler->isValid()) {
-    myWarning() << "error in discogs2tellico.xsl.";
-    delete m_xsltHandler;
-    m_xsltHandler = 0;
-    return;
-  }
+  return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_) {
-//  myDebug();
-
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);

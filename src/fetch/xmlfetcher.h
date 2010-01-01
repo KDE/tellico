@@ -60,7 +60,7 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
   virtual void stop();
-  virtual Data::EntryPtr fetchEntryHookHook(uint uid);
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
 
 protected:
   void setXSLTFilename(const QString& filename);
