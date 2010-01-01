@@ -2,7 +2,7 @@ Source: tellico
 Section: kde
 Priority: optional
 Maintainer: Regis Boudin <regis@debian.org>
-Build-Depends: debhelper (>= 5.0.51~), pkg-kde-tools, kdelibs5-dev, libxml2-dev, libxslt1-dev, libtag1-dev, libyaz3-dev, libkcddb-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev, libqimageblitz-dev, libv4l-dev | not+linux-gnu
+Build-Depends: debhelper (>= 7), pkg-kde-tools, kdelibs5-dev, libxml2-dev, libxslt1-dev, libtag1-dev, libyaz3-dev, libkcddb-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev, libqimageblitz-dev, libksane-dev, libv4l-dev | not+linux-gnu
 Standards-Version: 3.8.3
 Homepage: http://tellico-project.org/
 Vcs-Svn: svn://anonsvn.kde.org/home/kde/trunk/extragear/office/tellico
@@ -10,7 +10,7 @@ Vcs-Svn: svn://anonsvn.kde.org/home/kde/trunk/extragear/office/tellico
 Package: tellico
 Replaces: tellico-data (<= 1.2.14-1)
 Architecture: any
-Depends: tellico-data (= ${source:Version}), tellico-scripts, ${shlibs:Depends}
+Depends: tellico-data (= ${source:Version}), tellico-scripts, ${shlibs:Depends}, ${misc:Depends}
 Recommends: khelpcenter4
 Description: collection manager for books, videos, music
  Tellico is a collection manager for KDE. It includes default collections for
@@ -30,7 +30,7 @@ Package: tellico-data
 Architecture: all
 Conflicts: tellico (<< 1.1.6-1)
 Replaces: tellico (<< 1.1.6-1)
-Depends: kdelibs5-data
+Depends: kdelibs5-data, ${misc:Depends}
 Recommends: tellico
 Suggests: python
 Description: collection manager for books, videos, music [data]
@@ -52,6 +52,7 @@ Description: collection manager for books, videos, music [data]
 
 Package: tellico-scripts
 Architecture: all
+Depends: ${misc:Depends}
 Conflicts: tellico-data (<= 1.3.1-2)
 Replaces: tellico-data (<= 1.3.1-2)
 Recommends: tellico
