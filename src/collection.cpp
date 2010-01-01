@@ -401,7 +401,7 @@ bool Collection::removeField(const QString& name_, bool force_) {
 bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false*/) {
   if(!field_ || !m_fields.contains(field_)) {
     if(field_) {
-      myDebug() << "false: " << field_->name();
+      myDebug() << "can't delete field:" << field_->name();
     }
     return false;
   }
@@ -410,6 +410,11 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
   // can't delete the title field
   if((field_->hasFlag(Field::NoDelete)) && !force_) {
     return false;
+  }
+
+  foreach(EntryPtr entry, m_entries) {
+    // setting the fields to an empty string removes the value from the entry's list
+    entry->setField(field_, QString());
   }
 
   bool success = true;
@@ -425,11 +430,6 @@ bool Collection::removeField(Tellico::Data::FieldPtr field_, bool force_/*=false
 
   if(fieldsByCategory(field_->category()).count() == 1) {
     m_fieldCategories.removeAll(field_->category());
-  }
-
-  foreach(EntryPtr entry, m_entries) {
-    // setting the fields to an empty string removes the value from the entry's list
-    entry->setField(field_, QString());
   }
 
   if(field_->hasFlag(Field::AllowGrouped)) {

@@ -216,8 +216,8 @@ bool Entry::setFieldImpl(const QString& name_, const QString& value_) {
   if(value_.isEmpty()) {
     if(m_fieldValues.contains(name_)) {
       m_fieldValues.remove(name_);
+      invalidateFormattedFieldValue(name_);
     }
-    invalidateFormattedFieldValue(name_);
     return true;
   }
 
