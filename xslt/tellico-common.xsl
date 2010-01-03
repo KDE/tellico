@@ -46,7 +46,7 @@
  <xsl:variable name="actual-height" select="$image/@height"/>
 
  <xsl:choose>
-  <xsl:when test="$limit-width &gt; 0 and $limit-height &gt; 0 and 
+  <xsl:when test="$limit-width &gt; 0 and $limit-height &gt; 0 and
                   ($actual-width &gt; $limit-width or $actual-height &gt; $limit-height)">
 
    <xsl:choose>
@@ -116,10 +116,14 @@
     <!-- if it's a url, then add a hyperlink -->
     <xsl:when test="$f/@type=7">
      <a href="{$child}">
-      <!-- The Amazon Web Services license requires the link -->
       <xsl:choose>
+       <!-- The Amazon Web Services license requires the link -->
        <xsl:when test="$field = 'amazon'">
         <xsl:text>Buy from Amazon.com</xsl:text>
+       </xsl:when>
+       <!-- Requested by Giant Bomb API documentation -->
+       <xsl:when test="$field = 'giantbomb'">
+        <xsl:text>Find more information on Giant Bomb</xsl:text>
        </xsl:when>
        <xsl:otherwise>
         <xsl:value-of select="$child"/>
@@ -169,10 +173,10 @@
       </img>
      </xsl:if>
      <xsl:if test="not($n)">
-      <xsl:value-of select="$child"/>     
+      <xsl:value-of select="$child"/>
      </xsl:if>
     </xsl:when>
-    
+
     <xsl:otherwise>
      <xsl:value-of select="$child"/>
      <!-- hack for running-time in videos -->
@@ -233,7 +237,7 @@
    <xsl:value-of select="substring($str, $slen - $mid + 3, $mid - 2)"/>
   </xsl:when>
   <xsl:otherwise>
-   <xsl:value-of select="$str"/>   
+   <xsl:value-of select="$str"/>
   </xsl:otherwise>
  </xsl:choose>
 </xsl:template>
