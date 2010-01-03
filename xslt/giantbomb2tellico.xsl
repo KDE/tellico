@@ -7,7 +7,7 @@
    ===================================================================
    Tellico XSLT file - used for importing Giant Bomb search data.
 
-   Copyright (C) 2010 Robby Stephenson - robby@periapsis.org>
+   Copyright (C) 2010 Robby Stephenson - <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
