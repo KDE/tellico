@@ -194,7 +194,8 @@ bool CollectionInterface::setEntryValue(int id_, const QString& fieldName_, cons
   if(!entry->setField(fieldName_, value_)) {
     return false;
   }
-  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);
+  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry,
+                                QStringList() << fieldName_);
   return true;
 }
 
@@ -225,7 +226,7 @@ bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, cons
   if(!entry->setField(fieldName_, newValues.join(del))) {
     return false;
   }
-  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry);
+  Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry, QStringList() << field->name());
   return true;
 }
 

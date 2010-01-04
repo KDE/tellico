@@ -123,6 +123,9 @@ public slots:
    */
   void slotSetModified(bool modified=true);
 
+private slots:
+  void fieldValueChanged(Tellico::Data::FieldPtr field);
+
 private:
   /**
    * Sets the contents of the input controls to match the contents of a entry.
@@ -148,6 +151,7 @@ private:
   ButtonCode m_newBtn;
 
   bool m_modified;
+  Data::FieldList m_modifiedFields;
   bool m_isOrphan;
   bool m_isWorking;
   bool m_needReset;

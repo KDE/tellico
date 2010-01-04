@@ -189,7 +189,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
       if(!widget) {
         continue;
       }
-      connect(widget, SIGNAL(valueChanged()), SLOT(slotSetModified()));
+      connect(widget, SIGNAL(valueChanged(Tellico::Data::FieldPtr)), SLOT(fieldValueChanged(Tellico::Data::FieldPtr)));
       if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
         focusedFirst = true;
@@ -288,7 +288,6 @@ void EntryEditDialog::slotHandleSave() {
   if(!m_currColl || m_isWorking) {
     return;
   }
-//  myDebug();
 
   m_isWorking = true;
 
@@ -317,7 +316,6 @@ void EntryEditDialog::slotHandleSave() {
   GUI::CursorSaver cs;
 
   Data::EntryList oldEntries;
-  Data::FieldList fields = m_currColl->fields();
   Data::FieldList fieldsRequiringValues;
   // boolean to keep track if any field gets changed
   bool modified = false;
@@ -326,20 +324,20 @@ void EntryEditDialog::slotHandleSave() {
     if(entry->isOwned()) {
       oldEntries.append(Data::EntryPtr(new Data::Entry(*entry)));
     }
-    foreach(Data::FieldPtr fIt, fields) {
-      QString key = QString::number(m_currColl->id()) + fIt->name();
+    foreach(Data::FieldPtr field, m_modifiedFields) {
+      QString key = QString::number(m_currColl->id()) + field->name();
       GUI::FieldWidget* widget = m_widgetDict.value(key);
       if(widget && widget->isEnabled()) {
-        QString temp = widget->text();
+        const QString temp = widget->text();
         // ok to set field empty string, just not all of them
-        if(modified == false && entry->field(fIt) != temp) {
+        if(modified == false && entry->field(field) != temp) {
           modified = true;
         }
-        entry->setField(fIt, temp);
+        entry->setField(field, temp);
         if(temp.isEmpty()) {
-          QString prop = fIt->property(QLatin1String("required")).toLower();
+          const QString prop = field->property(QLatin1String("required")).toLower();
           if(prop == QLatin1String("1") || prop == QLatin1String("true")) {
-            fieldsRequiringValues.append(fIt);
+            fieldsRequiringValues.append(field);
           }
         }
       }
@@ -368,7 +366,11 @@ void EntryEditDialog::slotHandleSave() {
     if(oldEntries.isEmpty()) {
       Kernel::self()->addEntries(m_currEntries, false);
     } else {
-      Kernel::self()->modifyEntries(oldEntries, m_currEntries);
+      QStringList fieldNames;
+      foreach(Data::FieldPtr field, m_modifiedFields) {
+        fieldNames << field->name();
+      }
+      Kernel::self()->modifyEntries(oldEntries, m_currEntries, fieldNames);
     }
     if(!m_currEntries.isEmpty() && !m_currEntries[0]->title().isEmpty()) {
       setCaption(i18n("Edit Entry") + QLatin1String(" - ") + m_currEntries[0]->title());
@@ -393,6 +395,7 @@ void EntryEditDialog::clear() {
     widget->clear();
     widget->insertDefault();
   }
+  m_modifiedFields.clear();
 
   setCaption(i18n("Edit Entry"));
 
@@ -721,6 +724,13 @@ void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
     m_needReset = true;
     setContents(m_currEntries);
   }
+}
+
+void EntryEditDialog::fieldValueChanged(Data::FieldPtr field_) {
+  if(!m_modifiedFields.contains(field_)) {
+    m_modifiedFields.append(field_);
+  }
+  slotSetModified();
 }
 
 #include "entryeditdialog.moc"

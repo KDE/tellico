@@ -32,11 +32,13 @@
 
 using Tellico::Command::ModifyEntries;
 
-ModifyEntries::ModifyEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& oldEntries_, const Tellico::Data::EntryList& newEntries_)
+ModifyEntries::ModifyEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& oldEntries_,
+                             const Tellico::Data::EntryList& newEntries_, const QStringList& modifiedFields_)
     : QUndoCommand()
     , m_coll(coll_)
     , m_oldEntries(oldEntries_)
     , m_entries(newEntries_)
+    , m_modifiedFields(modifiedFields_)
     , m_needToSwap(false)
 {
 #ifndef NDEBUG
@@ -50,11 +52,13 @@ ModifyEntries::ModifyEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::
   }
 }
 
-ModifyEntries::ModifyEntries(QUndoCommand* parent, Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& oldEntries_, const Tellico::Data::EntryList& newEntries_)
+ModifyEntries::ModifyEntries(QUndoCommand* parent, Tellico::Data::CollPtr coll_, const Tellico::Data::EntryList& oldEntries_,
+                             const Tellico::Data::EntryList& newEntries_, const QStringList& modifiedFields_)
     : QUndoCommand(parent)
     , m_coll(coll_)
     , m_oldEntries(oldEntries_)
     , m_entries(newEntries_)
+    , m_modifiedFields(modifiedFields_)
     , m_needToSwap(false)
 {
 #ifndef NDEBUG
@@ -80,7 +84,7 @@ void ModifyEntries::redo() {
   // checking in the loan, so verify that. Heavy-handed, yes...
   const QString loaned = QLatin1String("loaned");
   bool hasLoanField = m_coll->hasField(loaned);
-  if(hasLoanField) {
+  if(hasLoanField && m_modifiedFields.contains(loaned)) {
     foreach(Data::EntryPtr entry, m_entries) {
       if(entry->field(loaned).isEmpty()) {
         Data::EntryList notLoaned;
@@ -89,7 +93,7 @@ void ModifyEntries::redo() {
       }
     }
   }
-  m_coll->updateDicts(m_entries);
+  m_coll->updateDicts(m_entries, m_modifiedFields);
   Controller::self()->modifiedEntries(m_entries);
 }
 
@@ -99,7 +103,7 @@ void ModifyEntries::undo() {
   }
   swapValues();
   m_needToSwap = true;
-  m_coll->updateDicts(m_entries);
+  m_coll->updateDicts(m_entries, m_modifiedFields);
   Controller::self()->modifiedEntries(m_entries);
   //TODO: need to tell edit dialog that it's not modified
 }
@@ -110,7 +114,7 @@ void ModifyEntries::swapValues() {
   for(int i = 0; i < m_entries.count(); ++i) {
     // need to swap entry values, not just pointers
     // the id gets reset when copying, so need to keep it
-    Data::ID id = m_entries[i]->id();
+    const Data::ID id = m_entries[i]->id();
     Data::Entry tmp(*m_entries[i]); // tmp id becomes -1
     *m_entries[i] = *m_oldEntries[i]; // id becomes -1
     m_entries[i]->setId(id); // id becomes what was originally

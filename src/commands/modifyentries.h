@@ -38,8 +38,10 @@ namespace Tellico {
 class ModifyEntries : public QUndoCommand {
 
 public:
-  ModifyEntries(Data::CollPtr coll, const Data::EntryList& oldEntries, const Data::EntryList& newEntries);
-  ModifyEntries(QUndoCommand* parent, Data::CollPtr coll, const Data::EntryList& oldEntries, const Data::EntryList& newEntries);
+  ModifyEntries(Data::CollPtr coll, const Data::EntryList& oldEntries,
+                const Data::EntryList& newEntries, const QStringList& modifiedFields);
+  ModifyEntries(QUndoCommand* parent, Data::CollPtr coll, const Data::EntryList& oldEntries,
+                const Data::EntryList& newEntries, const QStringList& modifiedFields);
 
   virtual void redo();
   virtual void undo();
@@ -50,6 +52,7 @@ private:
   Data::CollPtr m_coll;
   Data::EntryList m_oldEntries;
   Data::EntryList m_entries;
+  QStringList m_modifiedFields;
   bool m_needToSwap : 1;
 };
 

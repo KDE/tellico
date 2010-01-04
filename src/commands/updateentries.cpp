@@ -78,15 +78,19 @@ void UpdateEntries::redo() {
     Data::FieldList modifiedFields = p.first;
     Data::FieldList addedFields = p.second;
 
+    QStringList updatedFields;
+
     foreach(Data::FieldPtr field, modifiedFields) {
       if(m_coll->hasField(field->name())) {
         new FieldCommand(this, FieldCommand::FieldModify, m_coll,
                          field, m_coll->fieldByName(field->name()));
       }
+      updatedFields << field->name();
     }
 
     foreach(Data::FieldPtr field, addedFields) {
       new FieldCommand(this, FieldCommand::FieldAdd, m_coll, field);
+      updatedFields << field->name();
     }
 
     // MergeEntries copies values from m_newEntry into m_oldEntry
@@ -98,7 +102,7 @@ void UpdateEntries::redo() {
     // in the ModifyEntries command, the second entry should be owned by the current
     // collection and contain the updated values
     // the first one is not owned by current collection
-    new ModifyEntries(this, m_coll, Data::EntryList() << cmd->oldEntry(), Data::EntryList() << m_oldEntry);
+    new ModifyEntries(this, m_coll, Data::EntryList() << cmd->oldEntry(), Data::EntryList() << m_oldEntry, updatedFields);
   }
   QUndoCommand::redo();
 }

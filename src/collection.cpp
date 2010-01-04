@@ -509,16 +509,20 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     }
   }
   if(m_trackGroups) {
-    populateCurrentDicts(entries_);
+    populateCurrentDicts(entries_, fieldNames());
   }
 }
 
-void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_) {
+void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_, const QStringList& fields_) {
   QList<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
     // need a copy of the vector since it gets changed
     QList<EntryGroup*> groups = entry->groups();
     foreach(EntryGroup* group, groups) {
+      // only clear groups for the modified fields, skip the others
+      if(!fields_.contains(group->fieldName()))  {
+        continue;
+      }
       if(entry->removeFromGroup(group) && !modifiedGroups.contains(group)) {
         modifiedGroups.append(group);
       }
@@ -527,19 +531,25 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
       }
     }
   }
-  emit signalGroupsModified(CollPtr(this), modifiedGroups);
+  if(!modifiedGroups.isEmpty()) {
+    emit signalGroupsModified(CollPtr(this), modifiedGroups);
+  }
 }
 
 // this function gets called whenever an entry is modified. Its purpose is to keep the
 // groupDicts current. It first removes the entry from every group to which it belongs,
 // then it repopulates the dicts with the entry's fields
-void Collection::updateDicts(const Tellico::Data::EntryList& entries_) {
+void Collection::updateDicts(const Tellico::Data::EntryList& entries_, const QStringList& fields_) {
   if(entries_.isEmpty() || !m_trackGroups) {
     return;
   }
-
-  removeEntriesFromDicts(entries_);
-  populateCurrentDicts(entries_);
+  QStringList modifiedFields = fields_;
+  if(modifiedFields.isEmpty()) {
+    myDebug() << "updating all fields";
+    modifiedFields = fieldNames();
+  }
+  removeEntriesFromDicts(entries_, modifiedFields);
+  populateCurrentDicts(entries_, modifiedFields);
   cleanGroups();
 }
 
@@ -549,7 +559,7 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
   }
 
 //  myDebug() << "deleted entry - " << entry_->title();
-  removeEntriesFromDicts(vec_);
+  removeEntriesFromDicts(vec_, fieldNames());
   bool success = true;
   foreach(EntryPtr entry, vec_) {
     m_entryById.remove(entry->id());
@@ -671,7 +681,7 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
 
 void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QString& fieldName_, const Tellico::Data::EntryList& entries_) {
 //  myDebug() << fieldName_;
-  bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
+  const bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
 
   QList<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
@@ -697,10 +707,12 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
       }
     } // end group loop
   } // end entry loop
-  emit signalGroupsModified(CollPtr(this), modifiedGroups);
+  if(!modifiedGroups.isEmpty()) {
+    emit signalGroupsModified(CollPtr(this), modifiedGroups);
+  }
 }
 
-void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_) {
+void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_, const QStringList& fields_) {
   if(m_entryGroupDicts.isEmpty()) {
     return;
   }
@@ -715,6 +727,10 @@ void Collection::populateCurrentDicts(const Tellico::Data::EntryList& entries_) 
   // entry pointer into the dict for each value
   QHash<QString, EntryGroupDict*>::const_iterator dictIt = m_entryGroupDicts.constBegin();
   for( ; dictIt != m_entryGroupDicts.constEnd(); ++dictIt) {
+    // skip dicts for fields not in the modified list
+    if(!fields_.contains(dictIt.key())) {
+      continue;
+    }
     // only populate if it's not empty, since they are
     // populated on demand
     if(!dictIt.value()->isEmpty()) {

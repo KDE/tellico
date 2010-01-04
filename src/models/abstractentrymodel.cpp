@@ -42,6 +42,14 @@ QModelIndex AbstractEntryModel::index(int row_, int column_, const QModelIndex& 
   return hasIndex(row_, column_, parent_) ? createIndex(row_, column_, 0) : QModelIndex();
 }
 
+QModelIndex AbstractEntryModel::indexFromEntry(Data::EntryPtr entry_) const {
+  const int idx = m_entries.indexOf(entry_);
+  if(idx == -1) {
+    return QModelIndex();
+  }
+  return createIndex(idx, 0);
+}
+
 QModelIndex AbstractEntryModel::parent(const QModelIndex&) const {
   return QModelIndex();
 }
@@ -69,9 +77,8 @@ void AbstractEntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
 
 void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
   foreach(Data::EntryPtr entry, entries_) {
-    int idx = m_entries.indexOf(entry);
-    if(idx > -1) {
-      QModelIndex index = createIndex(idx, 0);
+    QModelIndex index = indexFromEntry(entry);
+    if(index.isValid()) {
       emit dataChanged(index, index);
     }
   }

@@ -188,10 +188,10 @@ void FieldWidget::editMultiple(bool show_) {
   // FIXME: maybe valueChanged should only be signaled when the button is toggled on
   if(show_) {
     m_editMultiple->show();
-    connect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(valueChanged()));
+    connect(m_editMultiple, SIGNAL(clicked()), this, SLOT(multipleChecked()));
   } else {
     m_editMultiple->hide();
-    disconnect(m_editMultiple, SIGNAL(clicked()), this, SIGNAL(valueChanged()));
+    disconnect(m_editMultiple, SIGNAL(clicked()), this, SLOT(multipleChecked()));
   }
   // the widget length needs to be updated since it gets shorter
   widget()->updateGeometry();
@@ -232,8 +232,12 @@ void FieldWidget::checkModified() {
   if(value != m_oldValue) {
 //    myDebug() << "old value:" << m_oldValue << "| new value:" << value;
     m_oldValue = value;
-    emit valueChanged();
+    emit valueChanged(m_field);
   }
+}
+
+void FieldWidget::multipleChecked() {
+  emit valueChanged(m_field);
 }
 
 #include "fieldwidget.moc"

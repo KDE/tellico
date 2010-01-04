@@ -174,7 +174,7 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  void updateDicts(const EntryList& entries);
+  void updateDicts(const EntryList& entries, const QStringList& fields);
   /**
    * Deletes a entry from the collection.
    *
@@ -351,9 +351,9 @@ protected:
 
 private:
   QStringList entryGroupNamesByField(EntryPtr entry, const QString& fieldName);
-  void removeEntriesFromDicts(const EntryList& entries);
+  void removeEntriesFromDicts(const EntryList& entries, const QStringList& fields);
   void populateDict(EntryGroupDict* dict, const QString& fieldName, const EntryList& entries);
-  void populateCurrentDicts(const EntryList& entries);
+  void populateCurrentDicts(const EntryList& entries, const QStringList& fields);
   void cleanGroups();
 
   /*

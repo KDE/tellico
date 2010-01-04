@@ -117,7 +117,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
           return e->formattedField(QLatin1String("title"));
         }
       } else {
-      // it probably points to a group
+        // it probably points to a group
         Tellico::Data::EntryGroup* g = group(index_);
         if(g) {
           return g->groupName();
@@ -223,7 +223,7 @@ QModelIndex EntryGroupModel::addGroup(Tellico::Data::EntryGroup* group_) {
 
 QModelIndex EntryGroupModel::modifyGroup(Tellico::Data::EntryGroup* group_) {
   Q_ASSERT(group_);
-  int idx = m_groups.indexOf(group_);
+  const int idx = m_groups.indexOf(group_);
   if(idx < 0) {
     myWarning() << "no group named" << group_->groupName();
     return QModelIndex();
@@ -231,6 +231,7 @@ QModelIndex EntryGroupModel::modifyGroup(Tellico::Data::EntryGroup* group_) {
 
   QModelIndex groupIndex = index(idx, 0);
   Node* groupNode = m_rootNode->child(idx);
+  const int oldCount = groupNode->childCount();
 
   beginRemoveRows(groupIndex, 0, groupNode->childCount() - 1);
   groupNode->removeAll();
@@ -243,7 +244,10 @@ QModelIndex EntryGroupModel::modifyGroup(Tellico::Data::EntryGroup* group_) {
   }
   endInsertRows();
 
-  emit dataChanged(groupIndex, groupIndex);
+  // the only data that might have changed is the count
+  if(oldCount != groupNode->childCount()) {
+    emit dataChanged(groupIndex, groupIndex);
+  }
   return groupIndex;
 }
 

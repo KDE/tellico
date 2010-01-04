@@ -1,3 +1,7 @@
+2010-01-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved performance for modifying many entries at once.
+
 2010-01-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Giant Bomb data source.

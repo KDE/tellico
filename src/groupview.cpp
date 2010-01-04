@@ -226,9 +226,14 @@ void GroupView::slotModifyGroups(Tellico::Data::CollPtr coll_, QList<Tellico::Da
     return;
   }
 
+  /* for each group
+     - remove existing empty ones
+     - modify existing ones
+     - add new ones
+  */
   foreach(Data::EntryGroup* group, groups_) {
     // if the entries aren't grouped by field of the modified group,
-    // we don't care, so return
+    // we don't care, so skip
     if(m_groupBy != group->fieldName()) {
       continue;
     }

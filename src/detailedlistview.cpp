@@ -224,12 +224,12 @@ void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
 }
 
 void DetailedListView::setState(Tellico::Data::EntryList entries_, int state) {
-  for(QModelIndex index = sourceModel()->index(0, 0); index.isValid(); index = index.sibling(index.row()+1, 0)) {
-    foreach(Data::EntryPtr entry, entries_) {
-      Data::EntryPtr tmpEntry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
-      if(tmpEntry == entry) {
-        sourceModel()->setData(index, state, SaveStateRole);
-      }
+  foreach(Data::EntryPtr entry, entries_) {
+    QModelIndex index = sourceModel()->indexFromEntry(entry);
+    if(index.isValid()) {
+      sourceModel()->setData(index, state, SaveStateRole);
+    } else {
+      myWarning() << "no index found for" << entry->id() << entry->title();
     }
   }
 }
@@ -255,9 +255,8 @@ void DetailedListView::contextMenuEvent(QContextMenuEvent* event_) {
 }
 
 // don't shadow QListView::setSelected
-void DetailedListView::setEntriesSelected(Data::EntryList entries) {
-//  DEBUG_LINE;
-  if(entries.count() == 0) {
+void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
+  if(entries_.isEmpty()) {
     // don't move this one outside the block since it calls setCurrentItem(0)
     clearSelection();
     return;
@@ -265,32 +264,23 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries) {
 
   clearSelection();
   EntrySortModel* proxyModel = dynamic_cast<EntrySortModel*>(model());
-  for(QModelIndex index = sourceModel()->index(0, 0); index.isValid();
-      index = index.sibling(index.row()+1, 0)) {
-    foreach(Data::EntryPtr entry_, entries) {
-      Data::EntryPtr tmpEntry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
-      if(tmpEntry == entry_) {
-        if(!proxyModel->mapFromSource(index).isValid()) {
-          Controller::self()->clearFilter();
-          break;
-        }
-      }
+  foreach(Data::EntryPtr entry, entries_) {
+    QModelIndex index = sourceModel()->indexFromEntry(entry);
+    if(!proxyModel->mapFromSource(index).isValid()) {
+      // clear the filter if we're trying to select an entry that is currently filtered out
+      Controller::self()->clearFilter();
+      break;
     }
   }
-  for(QModelIndex index = model()->index(0, 0); index.isValid();
-      index = index.sibling(index.row()+1, 0)) {
-    foreach(Data::EntryPtr entry_, entries) {
-      Data::EntryPtr tmpEntry = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
-      if(tmpEntry == entry_) {
-        blockSignals(true);
-        selectionModel()->select(index, QItemSelectionModel::Select | QItemSelectionModel::Rows);
-        //setCurrentIndex(index);
-        blockSignals(false);
-        scrollTo(index);
-        break;
-      }
-    }
+  blockSignals(true);
+  foreach(Data::EntryPtr entry, entries_) {
+    QModelIndex index = sourceModel()->indexFromEntry(entry);
+    selectionModel()->select(index, QItemSelectionModel::Select | QItemSelectionModel::Rows);
   }
+  //setCurrentIndex(index);
+  blockSignals(false);
+  QModelIndex index = sourceModel()->indexFromEntry(entries_.first());
+  scrollTo(index);
 }
 
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* event_) {

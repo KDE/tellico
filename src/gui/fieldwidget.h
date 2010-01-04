@@ -76,7 +76,7 @@ public slots:
   void setEnabled(bool enabled);
 
 signals:
-  virtual void valueChanged();
+  virtual void valueChanged(Tellico::Data::FieldPtr field);
 
 protected slots:
   void checkModified();
@@ -90,6 +90,9 @@ protected:
 
   // not all widgets have to be updated when the field changes
   virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
+
+private slots:
+  void multipleChecked();
 
 private:
   Data::FieldPtr m_field;

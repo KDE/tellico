@@ -178,12 +178,12 @@ void Kernel::addEntries(Tellico::Data::EntryList entries_, bool checkFields_) {
   }
 }
 
-void Kernel::modifyEntries(Tellico::Data::EntryList oldEntries_, Tellico::Data::EntryList newEntries_) {
+void Kernel::modifyEntries(Tellico::Data::EntryList oldEntries_, Tellico::Data::EntryList newEntries_, const QStringList& modifiedFields_) {
   if(newEntries_.isEmpty()) {
     return;
   }
 
-  doCommand(new Command::ModifyEntries(Data::Document::self()->collection(), oldEntries_, newEntries_));
+  doCommand(new Command::ModifyEntries(Data::Document::self()->collection(), oldEntries_, newEntries_, modifiedFields_));
 }
 
 void Kernel::updateEntry(Tellico::Data::EntryPtr oldEntry_, Tellico::Data::EntryPtr newEntry_, bool overWrite_) {

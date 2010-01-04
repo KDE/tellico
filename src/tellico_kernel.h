@@ -104,7 +104,7 @@ public:
   bool removeField(Data::FieldPtr field);
 
   void addEntries(Data::EntryList entries, bool checkFields);
-  void modifyEntries(Data::EntryList oldEntries, Data::EntryList newEntries);
+  void modifyEntries(Data::EntryList oldEntries, Data::EntryList newEntries, const QStringList& modifiedFields);
   void updateEntry(Data::EntryPtr oldEntry, Data::EntryPtr newEntry, bool overWrite);
   void removeEntries(Data::EntryList entries);
 

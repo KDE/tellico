@@ -457,7 +457,7 @@ void Document::checkOutEntry(Tellico::Data::EntryPtr entry_) {
   entry_->setField(loaned, QLatin1String("true"));
   EntryList vec;
   vec.append(entry_);
-  m_coll->updateDicts(vec);
+  m_coll->updateDicts(vec, QStringList() << loaned);
 }
 
 void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {
@@ -470,7 +470,7 @@ void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
   entry_->setField(loaned, QString());
-  m_coll->updateDicts(EntryList() << entry_);
+  m_coll->updateDicts(EntryList() << entry_, QStringList() << loaned);
 }
 
 void Document::renameCollection(const QString& newTitle_) {
