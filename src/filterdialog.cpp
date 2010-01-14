@@ -230,6 +230,7 @@ namespace {
 FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_)
     : KWidgetLister(FILTER_MIN_RULE_WIDGETS, FILTER_MAX_RULES, parent_) {
 //  slotClear();
+  connect(this, SIGNAL(clearWidgets()), SIGNAL(signalModified()));
 }
 
 void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
@@ -361,30 +362,27 @@ void FilterDialog::init() {
   connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
 }
 
-Tellico::FilterPtr FilterDialog::currentFilter() {
-  if(!m_filter) {
-    m_filter = new Filter(Filter::MatchAny);
-  }
+Tellico::FilterPtr FilterDialog::currentFilter(bool alwaysCreateNew_) {
+  FilterPtr newFilter(new Filter(Filter::MatchAny));
 
   if(m_matchAll->isChecked()) {
-    m_filter->setMatch(Filter::MatchAll);
+    newFilter->setMatch(Filter::MatchAll);
   } else {
-    m_filter->setMatch(Filter::MatchAny);
+    newFilter->setMatch(Filter::MatchAny);
   }
 
-  m_filter->clear(); // deletes all old rules
   foreach(QWidget* widget, m_ruleLister->widgetList()) {
     FilterRuleWidget* rw = static_cast<FilterRuleWidget*>(widget);
     FilterRule* rule = rw->rule();
     if(rule && !rule->isEmpty()) {
-      m_filter->append(rule);
+      newFilter->append(rule);
     }
   }
-  // only set name if it has rules
-  if(!m_filter->isEmpty()) {
-    m_filter->setName(m_filterName->text());
+  newFilter->setName(m_filterName->text());
+  if(!m_filter || !alwaysCreateNew_) {
+    m_filter = newFilter;
   }
-  return m_filter;
+  return newFilter;
 }
 
 void FilterDialog::setFilter(Tellico::FilterPtr filter_) {
@@ -427,13 +425,17 @@ void FilterDialog::slotShrink() {
 }
 
 void FilterDialog::slotFilterChanged() {
-  bool emptyFilter = currentFilter()->isEmpty();
+  const bool hadFilter = m_filter && !m_filter->isEmpty();
+  const bool emptyFilter = currentFilter(true)->isEmpty();
+  // an empty filter can be ok if the filter was originally not empty
+  const bool enableOk = !currentFilter()->isEmpty() || hadFilter;
   if(m_saveFilter) {
     m_saveFilter->setEnabled(!m_filterName->text().isEmpty() && !emptyFilter);
     enableButtonApply(!emptyFilter);
   }
-  enableButtonOk(!emptyFilter);
-  button(Ok)->setDefault(!emptyFilter);
+  enableButtonApply(enableOk);
+  enableButtonOk(enableOk);
+  button(Ok)->setDefault(enableOk);
 }
 
 void FilterDialog::slotSaveFilter() {
@@ -444,7 +446,7 @@ void FilterDialog::slotSaveFilter() {
 
   // in this case, currentFilter() either creates a new filter or
   // updates the current one. If creating a new one, then I want to copy it
-  bool wasEmpty = !m_filter;
+  const bool wasEmpty = !m_filter;
   FilterPtr filter(new Filter(*currentFilter()));
   if(wasEmpty) {
     m_filter = filter;

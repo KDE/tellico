@@ -147,7 +147,7 @@ public:
    */
   FilterDialog(Mode mode, QWidget* parent);
 
-  FilterPtr currentFilter();
+  FilterPtr currentFilter(bool alwaysCreateNew=false);
   void setFilter(FilterPtr filter);
 
 public slots:

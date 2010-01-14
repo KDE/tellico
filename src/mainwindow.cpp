@@ -1594,7 +1594,6 @@ void MainWindow::XSLTError() {
 void MainWindow::slotShowFilterDialog() {
   if(!m_filterDlg) {
     m_filterDlg = new FilterDialog(FilterDialog::CreateFilter, this); // allow saving
-    m_filterDlg->setFilter(m_detailedView->filter());
     m_quickFilter->setEnabled(false);
     connect(m_filterDlg, SIGNAL(signalCollectionModified()),
             Data::Document::self(), SLOT(slotSetModified()));
@@ -1607,6 +1606,7 @@ void MainWindow::slotShowFilterDialog() {
   } else {
     KWindowSystem::activateWindow(m_filterDlg->winId());
   }
+  m_filterDlg->setFilter(m_detailedView->filter());
   m_filterDlg->show();
 }
 
