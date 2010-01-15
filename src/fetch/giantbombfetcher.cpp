@@ -204,9 +204,9 @@ GiantBombFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GiantBombFe
 
   QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
                                "If you agree to the terms and conditions, <a href='%2'>sign "
-                               "up for an account</a>, and enter your information below.")
-                                .arg(preferredName(),
-                                     QLatin1String("http://api.giantbomb.com")),
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("http://api.giantbomb.com")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

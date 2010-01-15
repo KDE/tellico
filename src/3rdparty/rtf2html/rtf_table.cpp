@@ -34,6 +34,8 @@
 #include <functional>
 #include <algorithm>
 
+//krazy:excludeall=doublequote_chars
+
 using namespace rtf;
 
 typedef std::set<int> intset;

@@ -354,9 +354,9 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   int row = -1;
   QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
                                "If you agree to the terms and conditions, <a href='%2'>sign "
-                               "up for an account</a>, and enter your information below.")
-                                .arg(preferredName(),
-                                     QLatin1String("http://isbndb.com/docs/api/30-keys.html")),
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("http://isbndb.com/docs/api/30-keys.html")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

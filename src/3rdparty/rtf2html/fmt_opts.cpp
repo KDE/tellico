@@ -28,6 +28,8 @@
 
 #include "fmt_opts.h"
 
+//krazy:excludeall=doublequote_chars
+
 using namespace rtf;
 
 std::string formatting_options::get_par_str() const

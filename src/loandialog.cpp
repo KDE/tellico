@@ -173,7 +173,7 @@ void LoanDialog::init() {
   m_addEvent->setEnabled(false); // gets enabled when valid due date is entered
   m_addEvent->setWhatsThis(i18n("<qt>Checking this box will add a <em>To-do</em> item "
                                    "to your active calendar, which can be viewed using KOrganizer. "
-                                   "The box is only active if you set a due date."));
+                                   "The box is only active if you set a due date.</qt>"));
 
   KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
   restoreDialogSize(config);

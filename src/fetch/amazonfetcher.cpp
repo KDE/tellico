@@ -855,9 +855,9 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
                                "If you agree to the terms and conditions, <a href='%2'>sign "
-                               "up for an account</a>, and enter your information below.")
-                                .arg(AmazonFetcher::defaultName(),
-                                     QLatin1String("https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html")),
+                               "up for an account</a>, and enter your information below.",
+                                AmazonFetcher::defaultName(),
+                                QLatin1String("https://affiliate-program.amazon.com/gp/flex/advertising/api/sign-in.html")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

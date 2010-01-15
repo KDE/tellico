@@ -348,9 +348,9 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
 
   QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
                                "If you agree to the terms and conditions, <a href='%2'>sign "
-                               "up for an account</a>, and enter your information below.")
-                                .arg(preferredName(),
-                                     QLatin1String("http://api.themoviedb.org")),
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("http://api.themoviedb.org")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
