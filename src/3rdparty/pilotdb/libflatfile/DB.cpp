@@ -92,7 +92,7 @@ void PalmLib::FlatFile::DB::extract_chunks(const PalmLib::Block& appinfo)
             chunk_size = get_short(appinfo.data() + i + 2);
             i += 4;
 
-            // Copy the chunk into seperate storage.
+            // Copy the chunk into separate storage.
             Chunk chunk(appinfo.data() + i, chunk_size);
             chunk.chunk_type = chunk_type;
             m_chunks[chunk.chunk_type].push_back(chunk);

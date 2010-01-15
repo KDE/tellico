@@ -164,7 +164,7 @@ namespace PalmLib {
    */
      void assign(const size_type size, const value_type value = 0);
 
-     // compatiblity functions (remove before final 0.3.0 release)
+     // compatibility functions (remove before final 0.3.0 release)
      const_pointer raw_data() const { return data(); }
      pointer raw_data() { return data(); }
      size_type raw_size() const { return size(); }

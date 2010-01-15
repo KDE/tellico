@@ -604,7 +604,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
       fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
     }
   }
-  // since the modified date value in the entry gets changed everytime we set a new value
+  // since the modified date value in the entry gets changed every time we set a new value
   // we have to save it and set it after changing all the others
   if(fieldName == QLatin1String("mdate")) {
     d->modifiedDate = fieldValue;

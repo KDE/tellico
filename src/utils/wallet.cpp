@@ -85,3 +85,4 @@ QMap<QString, QString> Wallet::readWalletMap(const QString& key_) {
 
   return map;
 }
+

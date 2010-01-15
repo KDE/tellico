@@ -629,7 +629,7 @@ bt_change_case (char   transform,
           * to allow for exact mimicing of BibTeX's behaviour.  I happen
           * to think that this behaviour (capitalize first word of sentences
           * in a title) is better than BibTeX's, but I want to keep my
-          * options open for a future goal of perfect compatability.
+          * options open for a future goal of perfect compatibility.
           */
          case '.':
          case '?':

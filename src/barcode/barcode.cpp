@@ -175,7 +175,7 @@ Barcode_EAN13 barcodeRecognitionThread::recognize( QImage img )
 #ifdef BarcodeDecoder_DEBUG
   fprintf( stderr, "detected digits:\n" );
   printArray( possible_numbers, 0 );
-  fprintf( stderr, "# of their occurence:\n" );
+  fprintf( stderr, "# of their occurrence:\n" );
   printArray( possible_numbers, 1 );
 #endif
 

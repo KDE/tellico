@@ -49,7 +49,7 @@ Copyright (C) 2007  Robert Gamble
 #define CSV_STRICT 1    /* enable strict mode */
 #define CSV_REPALL_NL 2 /* report all unquoted carriage returns and linefeeds */
 #define CSV_STRICT_FINI 4 /* causes csv_fini to return CSV_EPARSE if last
-                             field is quoted and doesn't containg ending
+                             field is quoted and doesn't contain ending
                              quote */
 
 /* Character values */

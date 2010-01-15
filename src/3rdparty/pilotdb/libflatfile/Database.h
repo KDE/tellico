@@ -106,7 +106,7 @@ namespace PalmLib {
       virtual Field::FieldType field_type(int i) const;
 
       /**
-       * Accessor function for the field informations
+       * Accessor function for the field information
        */
       virtual FType field(int i) const;
 

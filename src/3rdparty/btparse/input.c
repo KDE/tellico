@@ -321,7 +321,7 @@ AST * bt_parse_entry (FILE *    infile,
    /*
     * Here we do some nasty poking about the innards of PCCTS in order to
     * enter the parser multiple times on the same input stream.  This code
-    * comes from expanding the macro invokation:
+    * comes from expanding the macro invocation:
     *
     *    ANTLR (entry (top), infile);
     *

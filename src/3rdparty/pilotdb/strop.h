@@ -96,7 +96,7 @@ namespace StrOps {
     }
 
     /**
-     * Parse a string in CSV (comman-seperated values) format and
+     * Parse a string in CSV (comman-separated values) format and
      * return it as a list.
      *
      * @param str The string containing the CSV fields.
