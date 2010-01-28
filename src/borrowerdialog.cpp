@@ -50,7 +50,7 @@ using Tellico::BorrowerDialog;
 #ifdef HAVE_KABC
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const KABC::Addressee& add_)
     : QTreeWidgetItem(parent_), m_uid(add_.uid()) {
-  setData(0, Qt::DisplayRole, add_.realName());
+  setData(0, Qt::DisplayRole, add_.realName().trimmed());
   setData(0, Qt::DecorationRole, KIcon(QLatin1String("kaddressbook")));
 }
 #endif
@@ -75,7 +75,7 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_)
   m_treeWidget = new QTreeWidget(mainWidget);
   topLayout->addWidget(m_treeWidget);
   m_treeWidget->setHeaderLabel(i18n("Name"));
-  connect(m_treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*)),
+  connect(m_treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
           SLOT(accept()));
   connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
           SLOT(updateEdit(QTreeWidgetItem*)));
@@ -109,19 +109,23 @@ void BorrowerDialog::slotLoadAddressBook() {
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
       it != end; ++it) {
     // skip people with no name
-    if((*it).realName().isEmpty()) {
+    const QString name = (*it).realName().trimmed();
+    if(name.isEmpty()) {
       continue;
     }
     Item* item = new Item(m_treeWidget, *it);
-    m_itemHash.insert((*it).realName(), item);
-    m_lineEdit->completionObject()->addItem((*it).realName());
+    m_itemHash.insert(name, item);
+    m_lineEdit->completionObject()->addItem(name);
   }
 #endif
 
   // add current borrowers, too
   Data::BorrowerList borrowers = Data::Document::self()->collection()->borrowers();
   foreach(Data::BorrowerPtr bor, borrowers) {
-    if(m_itemHash[bor->name()]) {
+    if(bor->name().isEmpty()) {
+      continue;
+    }
+    if(m_itemHash.contains(bor->name())) {
       continue; // if an item already exists with this name
     }
     Item* item = new Item(m_treeWidget, *bor);

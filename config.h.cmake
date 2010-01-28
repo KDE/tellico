@@ -18,6 +18,8 @@
 
 #cmakedefine HAVE_EXEMPI
 
+#cmakedefine HAVE_KABC
+
 #cmakedefine HAVE_KCAL
 
 #cmakedefine HAVE_KCDDB

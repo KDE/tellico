@@ -218,7 +218,12 @@ void LoanDialog::slotLoadAddressBook() {
   const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
       it != end; ++it) {
-    m_borrowerEdit->completionObject()->addItem((*it).realName());
+    // skip people with no name
+    const QString name = (*it).realName().trimmed();
+    if(name.isEmpty()) {
+      continue;
+    }
+    m_borrowerEdit->completionObject()->addItem(name);
   }
 #endif
 
