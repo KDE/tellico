@@ -1,5 +1,6 @@
 2010-01-27  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed some hyphenation problems when typing 978 ISBN values.
 	* Enabled KAddressBook integration for borrowers.
 
 2010-01-15  Robby Stephenson  <robby@periapsis.org>

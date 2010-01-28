@@ -31,6 +31,7 @@ class IsbnTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testFixup();
   void testFixup_data();
   void testIsbn10();
@@ -41,6 +42,8 @@ private Q_SLOTS:
   void testComparison_data();
   void testListDifference();
   void testListDifference_data();
+  void testState();
+  void testState_data();
 };
 
 #endif

@@ -31,7 +31,13 @@
 
 QTEST_KDEMAIN_CORE( IsbnTest )
 
+Q_DECLARE_METATYPE(QValidator::State)
+
 #define QL1(x) QString::fromLatin1(x)
+
+void IsbnTest::initTestCase() {
+  qRegisterMetaType<QValidator::State>();
+}
 
 void IsbnTest::testFixup() {
   QFETCH(QString, string);
@@ -71,6 +77,16 @@ void IsbnTest::testFixup_data() {
   QTest::newRow("978-0596000") << QL1("978-0596000") << QL1("978-059600-0");
 
   // normal english-language hyphenation
+  QTest::newRow("0") << QL1("0") << QL1("0");
+  QTest::newRow("05") << QL1("05") << QL1("0-5");
+  QTest::newRow("059") << QL1("059") << QL1("0-59");
+  QTest::newRow("0596") << QL1("0596") << QL1("0-596");
+  QTest::newRow("05960") << QL1("05960") << QL1("0-596-0");
+  QTest::newRow("059600") << QL1("059600") << QL1("0-596-00");
+  QTest::newRow("0596000") << QL1("0596000") << QL1("0-596-000");
+  QTest::newRow("05960005") << QL1("05960005") << QL1("0-596-0005");
+  // checksum gets added
+  QTest::newRow("059600053") << QL1("059600053") << QL1("0-596-00053-7");
   QTest::newRow("0-596-00053") << QL1("0-596-00053") << QL1("0-596-00053-7");
   QTest::newRow("044660098") << QL1("044660098") << QL1("0-446-60098-9");
   QTest::newRow("0446600989") << QL1("0446600989") << QL1("0-446-60098-9");
@@ -161,4 +177,78 @@ void IsbnTest::testListDifference_data() {
   // comparing to a value that matches everything in the list should return empty list
   list2 << QLatin1String("0-940016-75-0");
   QTest::newRow("list2") << list1 << list2 << QStringList();
+}
+
+void IsbnTest::testState() {
+  QFETCH(QValidator::State, expectedState);
+  QFETCH(QString, value);
+  QFETCH(bool, changedValue);
+
+  int pos = value.length() - 1;
+  const QString original = value;
+
+  Tellico::ISBNValidator val(0);
+  QValidator::State state = val.validate(value, pos);
+  if(!changedValue) {
+    QCOMPARE(value, original);
+  }
+  QCOMPARE(state, expectedState);
+}
+
+void IsbnTest::testState_data() {
+  QTest::addColumn<QValidator::State>("expectedState");
+  QTest::addColumn<QString>("value");
+  QTest::addColumn<bool>("changedValue");
+
+  QTest::newRow("0") << QValidator::Intermediate << QL1("0") << false;
+  QTest::newRow("0-") << QValidator::Intermediate << QL1("0-") << false;
+  QTest::newRow("0-3") << QValidator::Intermediate << QL1("0-3") << false;
+  QTest::newRow("0-32") << QValidator::Intermediate << QL1("0-32") << false;
+  QTest::newRow("0-321") << QValidator::Intermediate << QL1("0-321") << false;
+  QTest::newRow("0-321-") << QValidator::Intermediate << QL1("0-321-") << false;
+  QTest::newRow("0-321-1") << QValidator::Intermediate << QL1("0-321-1") << false;
+  QTest::newRow("0-321-11") << QValidator::Intermediate << QL1("0-321-11") << false;
+  QTest::newRow("0-321-113") << QValidator::Intermediate << QL1("0-321-113") << false;
+  QTest::newRow("0-321-1135") << QValidator::Intermediate << QL1("0-321-1135") << false;
+  // checksum is added
+  QTest::newRow("0-321-11358") << QValidator::Acceptable << QL1("0-321-11358") << true;
+  QTest::newRow("0-321-11358-") << QValidator::Acceptable << QL1("0-321-11358-") << true;
+  QTest::newRow("0-321-11358-6") << QValidator::Acceptable << QL1("0-321-11358-6") << false;
+
+  QTest::newRow("0") << QValidator::Intermediate << QL1("0") << true;
+  QTest::newRow("03") << QValidator::Intermediate << QL1("03") << true;
+  QTest::newRow("032") << QValidator::Intermediate << QL1("032") << true;
+  QTest::newRow("0321") << QValidator::Intermediate << QL1("0321") << true;
+  QTest::newRow("03211") << QValidator::Intermediate << QL1("03211") << true;
+  QTest::newRow("032111") << QValidator::Intermediate << QL1("032111") << true;
+  QTest::newRow("0321113") << QValidator::Intermediate << QL1("0321113") << true;
+  QTest::newRow("03211135") << QValidator::Intermediate << QL1("03211135") << true;
+  // checksum is added
+  QTest::newRow("032111358") << QValidator::Acceptable << QL1("032111358") << true;
+  QTest::newRow("0321113586") << QValidator::Acceptable << QL1("0321113586") << true;
+
+  // considered 10-digit ISBNs
+  QTest::newRow("9") << QValidator::Intermediate << QL1("9") << false;
+  QTest::newRow("97") << QValidator::Intermediate << QL1("97") << false;
+  QTest::newRow("978") << QValidator::Intermediate << QL1("978") << false;
+  QTest::newRow("978-") << QValidator::Intermediate << QL1("978-") << false;
+  QTest::newRow("978-0") << QValidator::Intermediate << QL1("978-0") << false;
+  QTest::newRow("978-0-") << QValidator::Intermediate << QL1("978-0-") << false;
+  QTest::newRow("978-0-4") << QValidator::Intermediate << QL1("978-0-4") << false;
+  QTest::newRow("978-0-47") << QValidator::Intermediate << QL1("978-0-47") << false;
+  QTest::newRow("978-0-470") << QValidator::Intermediate << QL1("978-0-470") << false;
+  QTest::newRow("978-0-470-") << QValidator::Intermediate << QL1("978-0-470-") << false;
+  QTest::newRow("978-0-4701") << QValidator::Intermediate << QL1("978-0-4701") << false;
+  QTest::newRow("978-0-470-1") << QValidator::Intermediate << QL1("978-0-470-1") << true;
+  QTest::newRow("978-0-47014") << QValidator::Intermediate << QL1("978-0-47014") << false;
+  QTest::newRow("978-0-470-14") << QValidator::Intermediate << QL1("978-0-470-14") << true;
+  QTest::newRow("978-0-470-147") << QValidator::Intermediate << QL1("978-0-470-147") << true;
+  QTest::newRow("978-0-470147") << QValidator::Intermediate << QL1("978-0-470147") << true;
+  QTest::newRow("978-0-47014-7") << QValidator::Intermediate << QL1("978-0-47014-7") << false;
+  // now considered 13-digit ISBN
+  QTest::newRow("978-0-470-1476") << QValidator::Intermediate << QL1("978-0-470-1476") << false;
+  // checksum is added
+  QTest::newRow("978-0-470-14762") << QValidator::Acceptable << QL1("978-0-470-14762") << true;
+  QTest::newRow("978-0-470-14762-") << QValidator::Acceptable << QL1("978-0-470-14762-") << true;
+  QTest::newRow("978-0-470-14762-7") << QValidator::Acceptable << QL1("978-0-470-14762-7") << false;
 }

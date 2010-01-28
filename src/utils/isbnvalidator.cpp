@@ -255,8 +255,8 @@ void ISBNValidator::fixup10(QString& input_) {
   if(input_.length() > 12
      && (input_.startsWith(QLatin1String("978"))
          || input_.startsWith(QLatin1String("979")))) {
-     // Strip the first 4 characters (the invalid publisher)
-     input_ = input_.right(input_.length() - 3);
+     // Strip the first 3 characters (the invalid publisher)
+//     input_ = input_.right(input_.length() - 3);
   }
 
   // hyphen placement for some languages publishers is well-defined
@@ -265,16 +265,18 @@ void ISBNValidator::fixup10(QString& input_) {
   // the user inserts one, then be sure to put it back
 
   // Find the first hyphen. If there is none,
-  // input_.indexOf('-') returns -1 and hyphen2_position = 0
-  int hyphen2_position = input_.indexOf(QLatin1Char('-')) + 1;
+  // input_.indexOf('-') returns -1 and hyphen1_position = -1
+  int hyphen1_position = input_.indexOf(QLatin1Char('-'));
 
   // Find the second one. If none, hyphen2_position = -2
-  hyphen2_position = input_.indexOf(QLatin1Char('-'), hyphen2_position) - 1;
+  int hyphen2_position = input_.indexOf(QLatin1Char('-'), hyphen1_position+1) - 1;
 
-  // The second hyphen can not be in the last characters
+  // The second hyphen can not be in the last character
   if(hyphen2_position >= 9) {
     hyphen2_position = 0;
   }
+
+  const bool hyphenAtEnd = input_.endsWith(QLatin1Char('-'));
 
   // Remove all existing hyphens. We will insert ours.
   input_.remove(QLatin1Char('-'));
@@ -308,7 +310,7 @@ void ISBNValidator::fixup10(QString& input_) {
     input_.insert(bands[band].First, QLatin1Char('-'));
   }
 
-  //add 1 since one "-" has already been inserted
+  //add 1 since one "-" character has already been inserted
   if(bands[band].Mid != 0) {
     hyphen2_position = bands[band].Mid;
     if(static_cast<int>(input_.length()) > (hyphen2_position + 1)) {
@@ -320,9 +322,11 @@ void ISBNValidator::fixup10(QString& input_) {
   }
 
   // add a "-" before the checkdigit and another one if the middle "-" exists
-  int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
+  const int trueLast = bands[band].Last + 1 + (hyphen2_position > 0 ? 1 : 0);
   if(input_.length() > trueLast) {
     input_.insert(trueLast, QLatin1Char('-'));
+  } else if(hyphenAtEnd && !input_.endsWith(QLatin1Char('-'))) {
+    input_ += QLatin1Char('-');
   }
 }
 
@@ -346,11 +350,11 @@ void ISBNValidator::fixup13(QString& input_) {
   }
 
   // Find the first hyphen. If there is none,
-  // input_.indexOf('-') returns -1 and hyphen2_position = 0
-  int hyphen2_position = after.indexOf(QLatin1Char('-')) + 1;
+  // input_.indexOf('-') returns -1 and hyphen1_position = -1
+  int hyphen1_position = after.indexOf(QLatin1Char('-'));
 
   // Find the second one. If none, hyphen2_position = -2
-  hyphen2_position = after.indexOf(QLatin1Char('-'), hyphen2_position) - 1;
+  int hyphen2_position = after.indexOf(QLatin1Char('-'), hyphen1_position+1) - 1;
 
   // The second hyphen can not be in the last characters
   if(hyphen2_position >= 9) {
