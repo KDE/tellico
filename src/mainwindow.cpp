@@ -1652,39 +1652,39 @@ void MainWindow::setFilter(const QString& text_) {
     QString fieldName; // empty field name means match on any field
     // if the text contains '=' assume it's a field name or title
     if(text.indexOf(QLatin1Char('=')) > -1) {
-        fieldName = text.section(QLatin1Char('='), 0, 0).trimmed();
-        text = text.section(QLatin1Char('='), 1).trimmed();
-        // check that the field name might be a title
-        if(!Data::Document::self()->collection()->hasField(fieldName)) {
+      fieldName = text.section(QLatin1Char('='), 0, 0).trimmed();
+      text = text.section(QLatin1Char('='), 1).trimmed();
+      // check that the field name might be a title
+      if(!Data::Document::self()->collection()->hasField(fieldName)) {
         fieldName = Data::Document::self()->collection()->fieldNameByTitle(fieldName);
-        }
+      }
     }
     // if the text contains any non-word characters, assume it's a regexp
     // but \W in qt is letter, number, or '_', I want to be a bit less strict
     QRegExp rx(QLatin1String("[^\\w\\s-']"));
     if(rx.indexIn(text) == -1) {
-    // split by whitespace, and add rules for each word
-        const QStringList tokens = text.split(QRegExp(QLatin1String("\\s")));
-        foreach(const QString& token, tokens) {
+      // split by whitespace, and add rules for each word
+      const QStringList tokens = text.split(QRegExp(QLatin1String("\\s")));
+      foreach(const QString& token, tokens) {
         // an empty field string means check every field
         filter->append(new FilterRule(fieldName, token, FilterRule::FuncContains));
-        }
+      }
     } else {
-        // if it isn't valid, hold off on applying the filter
-        QRegExp tx(text);
-        if(!tx.isValid()) {
+      // if it isn't valid, hold off on applying the filter
+      QRegExp tx(text);
+      if(!tx.isValid()) {
         text = QRegExp::escape(text);
         tx.setPattern(text);
-        }
-        if(!tx.isValid()) {
+      }
+      if(!tx.isValid()) {
         myDebug() << "invalid regexp:" << text;
         return;
-        }
-        filter->append(new FilterRule(fieldName, text, FilterRule::FuncRegExp));
+      }
+      filter->append(new FilterRule(fieldName, text, FilterRule::FuncRegExp));
     }
     // also want to update the line edit in case the filter was set by DBUS
     if(m_quickFilter->text() != text_) {
-        m_quickFilter->setText(text_);
+      m_quickFilter->setText(text_);
     }
   }
   // only update filter if one exists or did exist
