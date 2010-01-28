@@ -67,8 +67,12 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
 bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
-    foreach(const QString& value, list) {
+    foreach(const QString& value, entry_->fieldValues()) {
+      if(m_pattern.compare(value, Qt::CaseInsensitive) == 0) {
+        return true;
+      }
+    }
+    foreach(const QString& value, entry_->formattedFieldValues()) {
       if(m_pattern.compare(value, Qt::CaseInsensitive) == 0) {
         return true;
       }
@@ -84,9 +88,14 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
 bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
     // match is true if any strings match
-    foreach(const QString& value, list) {
+    foreach(const QString& value, entry_->fieldValues()) {
+      if(value.indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0) {
+        return true;
+      }
+    }
+    // match is true if any strings match
+    foreach(const QString& value, entry_->formattedFieldValues()) {
       if(value.indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0) {
         return true;
       }
@@ -103,8 +112,12 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
   QRegExp rx(m_pattern, Qt::CaseInsensitive);
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
-    QStringList list = entry_->fieldValues() + entry_->formattedFieldValues();
-    foreach(const QString& value, list) {
+    foreach(const QString& value, entry_->fieldValues()) {
+      if(rx.indexIn(value) >= 0) {
+        return true;
+      }
+    }
+    foreach(const QString& value, entry_->formattedFieldValues()) {
       if(rx.indexIn(value) >= 0) {
         return true;
       }
