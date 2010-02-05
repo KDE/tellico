@@ -151,8 +151,10 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
 }
 
 ImageWidget::~ImageWidget() {
-  KConfigGroup config(KGlobal::config(), "EditImage");
-  config.writeEntry("editor", m_editor->name());
+  if(m_editor) {
+    KConfigGroup config(KGlobal::config(), "EditImage");
+    config.writeEntry("editor", m_editor->name());
+  }
 }
 
 void ImageWidget::setImage(const QString& id_) {
@@ -287,7 +289,7 @@ void ImageWidget::slotEditImage() {
     connect(m_editProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
             this, SLOT(slotFinished()));
   }
-  if(m_editProcess->state() == QProcess::NotRunning) {
+  if(m_editor && m_editProcess->state() == QProcess::NotRunning) {
     KTemporaryFile temp;
     temp.setSuffix(QLatin1String(".png"));
     if(temp.open()) {
