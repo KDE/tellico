@@ -1,3 +1,7 @@
+2010-02-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled Korganizer integration for tracking loans.
+
 2010-01-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed some hyphenation problems when typing 978 ISBN values.

@@ -30,18 +30,13 @@
 
 #include <klocale.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <kconfiggroup.h>
 
 #ifdef HAVE_KCAL
-#include <libkcal/calendarresources.h>
-#include <libkcal/todo.h>
-#include <libkcal/resourcelocal.h>
-// #include <libkcal/resourceremote.h> // this file is moving around, API differences
+#include <KSystemTimeZones>
+#include <kcal/todo.h>
+#include <kcal/resourcelocal.h>
 #endif
-
-// needed for ::readlink
-#include <unistd.h>
-#include <limits.h>
 
 // most of this code came from konsolekalendar in kdepim
 
@@ -56,41 +51,45 @@ void CalendarHandler::addLoans(Tellico::Data::LoanList loans_) {
 }
 
 #ifdef HAVE_KCAL
-void CalendarHandler::addLoans(Data::LoanList loans_, KCal::CalendarResources* resources_) {
+void CalendarHandler::addLoans(Data::LoanList loans_, KCal::ResourceCalendar* resource_) {
   if(loans_.isEmpty()) {
     return;
   }
 
-  KCal::CalendarResources* calendarResources;
-  if(resources_) {
-    calendarResources = resources_;
+  StdCalendar* calendar = 0;
+  KCal::ResourceCalendar* resource;
+  if(resource_) {
+    resource = resource_;
   } else {
-    calendarResources = new KCal::CalendarResources(timezone());
-    calendarResources->readConfig();
-    calendarResources->load();
-    if(!checkCalendar(calendarResources)) {
-      return;
-    }
+    calendar = new StdCalendar();
+    resource = calendar->resource();
+  }
+  if(!resource) {
+    myWarning() << " no resource calendar";
+    delete calendar;
+    return;
   }
 
-  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
+  foreach(Data::LoanPtr loan, loans_) {
     // only add loans with a due date
     if(loan->dueDate().isNull()) {
       continue;
     }
 
     KCal::Todo* todo = new KCal::Todo();
-    populateTodo(todo, loan);
+    populateTodo(todo, resource, loan);
 
-    calendarResources->addTodo(todo);
-    loan->setInCalendar(true);
+    if(resource->addTodo(todo)) {
+      loan->setInCalendar(true);
+    } else {
+      myWarning() << "failed to add todo to calendar";
+    }
   }
-  calendarResources->save();
-  // don't close if a pointer was passed
-  if(!resources_) {
-    calendarResources->close();
-    calendarResources->deleteLater();
-  }
+  resource->save();
+  resource->close();
+
+  // ok to delete null
+  delete calendar;
 }
 #endif
 
@@ -103,35 +102,34 @@ void CalendarHandler::modifyLoans(Tellico::Data::LoanList loans_) {
     return;
   }
 
-  KCal::CalendarResources calendarResources(timezone());
-  calendarResources.readConfig();
-  if(!checkCalendar(&calendarResources)) {
+  StdCalendar calendar;
+  KCal::ResourceCalendar* resource = calendar.resource();
+  Q_ASSERT(resource);
+  if(!resource) {
     return;
   }
-  calendarResources.load();
 
-  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
-    KCal::Todo* todo = calendarResources.todo(loan->uid());
+  foreach(Data::LoanPtr loan, loans_) {
+    KCal::Todo* todo = resource->todo(loan->uid());
     if(!todo) {
-//      myDebug() << "couldn't find existing todo, adding a new todo";
+      myDebug() << "couldn't find existing todo, adding a new todo";
       Data::LoanList newLoans;
       newLoans.append(loan);
-      addLoans(newLoans, &calendarResources); // add loan
+      addLoans(newLoans, resource); // add loan
       continue;
     }
     if(loan->dueDate().isNull()) {
       myDebug() << "removing todo";
-      calendarResources.deleteIncidence(todo);
+      resource->deleteIncidence(todo);
       continue;
     }
 
-    populateTodo(todo, loan);
+    populateTodo(todo, resource, loan);
     todo->updated();
 
     loan->setInCalendar(true);
   }
-  calendarResources.save();
-  calendarResources.close();
+  resource->save();
 #endif
 }
 
@@ -144,72 +142,56 @@ void CalendarHandler::removeLoans(Tellico::Data::LoanList loans_) {
     return;
   }
 
-  KCal::CalendarResources calendarResources(timezone());
-  calendarResources.readConfig();
-  if(!checkCalendar(&calendarResources)) {
+  StdCalendar calendar;
+  KCal::ResourceCalendar* resource = calendar.resource();
+  Q_ASSERT(resource);
+  if(!resource) {
     return;
   }
-  calendarResources.load();
 
-  for(Data::LoanList::Iterator loan = loans_.begin(); loan != loans_.end(); ++loan) {
-    KCal::Todo* todo = calendarResources.todo(loan->uid());
+  foreach(Data::LoanPtr loan, loans_) {
+    KCal::Todo* todo = resource->todo(loan->uid());
     if(todo) {
       // maybe this is too much, we could just set the todo as done
-      calendarResources.deleteIncidence(todo);
+      resource->deleteIncidence(todo);
     }
   }
-  calendarResources.save();
-  calendarResources.close();
+  resource->save();
 #endif
 }
 
 #ifdef HAVE_KCAL
-bool CalendarHandler::checkCalendar(KCal::CalendarResources* resources) {
-  KCal::CalendarResourceManager* manager = resources->resourceManager();
-  if(manager->isEmpty()) {
-    myWarning() << "adding default calendar";
-    KConfig config(QLatin1String("korganizerrc"));
-    config.setGroup("General");
-    QString fileName = config.readPathEntry("Active Calendar", QString());
 
-    QString resourceName;
-    KCal::ResourceCalendar* defaultResource = 0;
-    if(fileName.isEmpty()) {
-      fileName = KStandardDirs::locateLocal("appdata", QLatin1String("std.ics"));
-      resourceName = i18n("Default Calendar");
-      defaultResource = new KCal::ResourceLocal(fileName);
-    } else {
-      KUrl url = KUrl::fromPathOrUrl(fileName);
-      if(url.isLocalFile()) {
-        defaultResource = new KCal::ResourceLocal(url.path());
-      } else {
-//        defaultResource = new KCal::ResourceRemote(url);
-        Kernel::self()->sorry(i18n("At the moment, Tellico only supports local calendar resources. "
-                                   "The active calendar is remotely located, so your loans will not "
-                                   "be added."));
-        return false;
-      }
-      resourceName = i18n("Active Calendar");
-    }
+// taken from kpimprefs.cpp
+KDateTime::Spec CalendarHandler::timeSpec() {
+  KTimeZone zone;
 
-    defaultResource->setResourceName(resourceName);
-
-    manager->add(defaultResource);
-    manager->setStandardResource(defaultResource);
+  // Read TimeZoneId from korganizerrc.
+  KConfig korgcfg(KStandardDirs::locate("config", QLatin1String("korganizerrc")));
+  KConfigGroup group(&korgcfg, "Time & Date");
+  QString tz( group.readEntry("TimeZoneId"));
+  if(!tz.isEmpty()) {
+    zone = KSystemTimeZones::zone(tz);
   }
-  return true;
+
+  // If timeSpec not found in KOrg, use the system's default timeSpec.
+  if(!zone.isValid()) {
+    zone = KSystemTimeZones::local();
+  }
+
+  return zone.isValid() ? KDateTime::Spec(zone) : KDateTime::ClockTime;
 }
 
-void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
+void CalendarHandler::populateTodo(KCal::Todo* todo_, KCal::ResourceCalendar* res_, Data::LoanPtr loan_) {
   if(!todo_ || !loan_) {
     return;
   }
 
   todo_->setUid(loan_->uid());
 
-  todo_->setDtStart(loan_->loanDate());
+  todo_->setDtStart(KDateTime(loan_->loanDate(), res_->timeSpec()));
   todo_->setHasStartDate(true);
-  todo_->setDtDue(loan_->dueDate());
+  todo_->setDtDue(KDateTime(loan_->dueDate(), res_->timeSpec()));
   todo_->setHasDueDate(true);
   QString person = loan_->borrower()->name();
   QString summary = i18n("Tellico: %1 is due to return \"%2\"", person, loan_->entry()->title());
@@ -236,28 +218,66 @@ void CalendarHandler::populateTodo(KCal::Todo* todo_, Data::LoanPtr loan_) {
   alarm->setEnabled(true);
 }
 
-// taken from kpimprefs.cpp
-QString CalendarHandler::timezone() {
-  QString zone;
+CalendarHandler::StdCalendar::StdCalendar() : KCal::CalendarResources(CalendarHandler::timeSpec()), m_resource(0) {
+  readConfig();
+  load();
 
-  KConfig korgcfg(locate(QLatin1String("config"), QLatin1String("korganizerrc")));
-  korgcfg.setGroup("Time & Date");
-  QString tz(korgcfg.readEntry("TimeZoneId"));
-  if(!tz.isEmpty()) {
-    zone = tz;
+  // need to find which calendar resource to add loan information to
+  // we're going to require it to be a local file resource
+
+  // first check standard resource
+  KCal::ResourceCalendar* resource = resourceManager()->standardResource();
+  if(resource && resource->type() == QLatin1String("file")) {
+    myDebug() << "found standard resource";
+    m_resource = resource;
   } else {
-    char zonefilebuf[PATH_MAX];
-
-    int len = ::readlink("/etc/localtime", zonefilebuf, PATH_MAX);
-    if(len > 0 && len < PATH_MAX) {
-      zone = QString::fromLocal8Bit(zonefilebuf, len);
-      zone = zone.mid(zone.find(QLatin1String("zoneinfo/")) + 9);
-    } else {
-      tzset();
-      zone = tzname[0];
+    // check active calendar resources and prefer local files
+    KCal::CalendarResourceManager::ActiveIterator it;
+    for(it = resourceManager()->activeBegin(); it != resourceManager()->activeEnd(); ++it) {
+      if((*it)->type() == QLatin1String("file")) {
+        myDebug() << "found local resource";
+        m_resource = *it;
+        break;
+      }
     }
   }
-  return zone;
+  if(m_resource) {
+    m_resource ->load();
+    return;
+  }
+
+  // so now we need to create one;
+  // use the same files and names as konsolekalendar
+  KConfig _config(QLatin1String("korganizerrc"));
+  KConfigGroup config(&_config, "General");
+  QString fileName = config.readPathEntry("Active Calendar", QString());
+  QString resourceName = i18n("Active Calendar");
+  if(fileName.isEmpty()) {
+    fileName = KStandardDirs::locateLocal("data", QLatin1String("korganizer/std.ics"));
+    resourceName = i18n("Default Calendar");
+  }
+
+  resource = resourceManager()->createResource(QLatin1String("file"));
+  if(resource) {
+    myDebug() << "created new local calendar:" << fileName;
+    m_resource = resource;
+    m_resource->setValue(QLatin1String("File"), fileName);
+    m_resource->setTimeSpec(CalendarHandler::timeSpec());
+    m_resource->setResourceName(resourceName);
+    resourceManager()->add(m_resource);
+    resourceManager()->setStandardResource(m_resource);
+    resourceAdded(m_resource);
+    save();
+  } else {
+    myWarning() << "unable to create local calendar";
+  }
+}
+
+CalendarHandler::StdCalendar::~StdCalendar() {
+  if(m_resource) {
+    m_resource->save();
+    m_resource->close();
+  }
 }
 
 #endif

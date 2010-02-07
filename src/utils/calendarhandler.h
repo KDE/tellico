@@ -29,9 +29,15 @@
 #include <config.h>
 #include "../borrower.h"
 
+#include <KDateTime>
+
+#ifdef HAVE_KCAL
+#include <kcal/calendarresources.h>
+#endif
+
 namespace KCal {
-  class CalendarResources;
   class Todo;
+  class ResourceCalendar;
 }
 
 namespace Tellico {
@@ -46,13 +52,23 @@ public:
   static void removeLoans(Data::LoanList loans);
 
 private:
-  static QString timezone();
 
 #ifdef HAVE_KCAL
-  // helper function
-  static void addLoans(Data::LoanList loans, KCal::CalendarResources* resources);
+  // helper class and functions
+
+  class StdCalendar : public KCal::CalendarResources {
+  public:
+    StdCalendar();
+    ~StdCalendar();
+    KCal::ResourceCalendar* resource() { return m_resource; }
+  private:
+    KCal::ResourceCalendar* m_resource;
+  };
+
+  static KDateTime::Spec timeSpec();
+  static void addLoans(Data::LoanList loans, KCal::ResourceCalendar* resource);
   static bool checkCalendar(KCal::CalendarResources* resources);
-  static void populateTodo(KCal::Todo* todo, Data::LoanPtr loan);
+  static void populateTodo(KCal::Todo* todo, KCal::ResourceCalendar* resources, Data::LoanPtr loan);
 #endif
 };
 

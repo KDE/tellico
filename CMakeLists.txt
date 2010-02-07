@@ -51,7 +51,7 @@ macro_log_feature(KABC_FOUND "kabc" "Support for reading address book" "http://p
 macro_optional_find_package(Kcal)
 macro_log_feature(KCAL_FOUND "kcal" "Support for adding loans to calendar" "http://pim.kde.org" FALSE "4.2.0" "")
 # for now, kcal doesn't compile
-set(KCAL_FOUND FALSE)
+#set(KCAL_FOUND FALSE)
 
 macro_optional_find_package(Kcddb)
 macro_log_feature(KCDDB_FOUND "libkcddb" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
