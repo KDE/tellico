@@ -51,7 +51,7 @@ void GiantBombFetcherTest::initTestCase() {
 
 void GiantBombFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Halo"));
+                                       QLatin1String("Halo 3"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GiantBombFetcher(this));
 
   // don't use 'this' as job parent, it crashes

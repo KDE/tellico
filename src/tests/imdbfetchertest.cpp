@@ -65,7 +65,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Drama; Family; Romance; Western"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Adventure; Drama; Family; Romance; Western"));
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
