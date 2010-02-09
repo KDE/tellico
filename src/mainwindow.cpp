@@ -631,8 +631,9 @@ void MainWindow::initActions() {
   m_quickFilter = new GUI::LineEdit(this);
   m_quickFilter->setClickMessage(i18n("Filter here...")); // same text as kdepim and amarok
   m_quickFilter->setClearButtonShown(true);
-  // about 10 characters wide
-  m_quickFilter->setFixedWidth(m_quickFilter->fontMetrics().maxWidth()*10);
+  // same as Dolphin text edit
+  m_quickFilter->setMinimumWidth(150);
+  m_quickFilter->setMaximumWidth(300);
   // want to update every time the filter text changes
   connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
           this, SLOT(slotQueueFilter()));
