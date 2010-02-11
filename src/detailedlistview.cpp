@@ -269,18 +269,19 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
     if(!proxyModel->mapFromSource(index).isValid()) {
       // clear the filter if we're trying to select an entry that is currently filtered out
       Controller::self()->clearFilter();
+      myDebug() << "clearing filter";
       break;
     }
   }
   blockSignals(true);
   foreach(Data::EntryPtr entry, entries_) {
     QModelIndex index = sourceModel()->indexFromEntry(entry);
-    selectionModel()->select(index, QItemSelectionModel::Select | QItemSelectionModel::Rows);
+    selectionModel()->select(proxyModel->mapFromSource(index), QItemSelectionModel::Select | QItemSelectionModel::Rows);
   }
   //setCurrentIndex(index);
   blockSignals(false);
   QModelIndex index = sourceModel()->indexFromEntry(entries_.first());
-  scrollTo(index);
+  scrollTo(proxyModel->mapFromSource(index));
 }
 
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* event_) {
