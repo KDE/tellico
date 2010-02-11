@@ -142,8 +142,11 @@ QString Fetcher::favIcon(const char* url_) {
 QString Fetcher::favIcon(const KUrl& url_) {
   QDBusInterface kded(QLatin1String("org.kde.kded"),
                       QLatin1String("/modules/favicons"),
-                      QLatin1String("org.kde.FaviconsModule"));
-  QDBusReply<QString> iconName = kded.call(QLatin1String("iconForURL"), url_.url());
+                      QLatin1String("org.kde.FavIcon"));
+  if(!kded.isValid()) {
+    myDebug() << "invalid dbus interface";
+  }
+  QDBusReply<QString> iconName = kded.call(QLatin1String("iconForUrl"), url_.url());
   if(iconName.isValid() && !iconName.value().isEmpty()) {
     return iconName;
   }
