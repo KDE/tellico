@@ -269,7 +269,6 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
     if(!proxyModel->mapFromSource(index).isValid()) {
       // clear the filter if we're trying to select an entry that is currently filtered out
       Controller::self()->clearFilter();
-      myDebug() << "clearing filter";
       break;
     }
   }
