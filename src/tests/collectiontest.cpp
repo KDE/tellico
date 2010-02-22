@@ -40,6 +40,7 @@ void CollectionTest::testEmpty() {
 
   Tellico::Data::Collection coll(false, QLatin1String("Title"));
 
+  QCOMPARE(coll.id(), 1);
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QVERIFY(coll.fields().isEmpty());
@@ -49,6 +50,8 @@ void CollectionTest::testEmpty() {
 void CollectionTest::testCollection() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
+  // since it's the second collection created
+  QCOMPARE(coll->id(), 2);
   QCOMPARE(coll->entryCount(), 0);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
   QCOMPARE(coll->fields().count(), 4);
@@ -64,7 +67,7 @@ void CollectionTest::testCollection() {
   coll->addEntries(entry1);
 
   // check derived value
-  QCOMPARE(entry1->field(QLatin1String("id")), QLatin1String("0"));
+  QCOMPARE(entry1->field(QLatin1String("id")), QLatin1String("1"));
   // check created and modified values
   QCOMPARE(entry1->field(QLatin1String("cdate")), QDate::currentDate().toString(Qt::ISODate));
   QCOMPARE(entry1->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
@@ -85,7 +88,7 @@ void CollectionTest::testCollection() {
   coll->addEntries(entry2);
 
   // check derived value
-  QCOMPARE(entry2->field(QLatin1String("id")), QLatin1String("1"));
+  QCOMPARE(entry2->field(QLatin1String("id")), QLatin1String("2"));
   // check created and modified values
   QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
   QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));

@@ -74,12 +74,12 @@ Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
 }
 
 Collection::Collection(const QString& title_)
-    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
+    : QObject(), QSharedData(), m_nextEntryId(1), m_title(title_), m_trackGroups(false) {
   m_id = getID();
 }
 
 Collection::Collection(bool addDefaultFields_, const QString& title_)
-    : QObject(), QSharedData(), m_nextEntryId(0), m_title(title_), m_trackGroups(false) {
+    : QObject(), QSharedData(), m_nextEntryId(1), m_title(title_), m_trackGroups(false) {
   if(m_title.isEmpty()) {
     m_title = i18n("My Collection");
   }
