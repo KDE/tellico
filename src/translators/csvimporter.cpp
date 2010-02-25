@@ -198,7 +198,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   lab = new QLabel(i18n("Delimiter:"), groupBox);
   lab->setWhatsThis(i18n("In addition to a comma, other characters may be used as "
-                                      "a delimiter, separating each value in the file."));
+                         "a delimiter, separating each value in the file."));
   delimiterLayout->addWidget(lab);
 
   m_radioComma = new QRadioButton(groupBox);
@@ -298,7 +298,6 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
   if(m_delimiter == QLatin1String(",")) {
     m_radioComma->setChecked(true);
-    slotDelimiter(); // since the comma box was already checked, the slot won't fire
   } else if(m_delimiter == QLatin1String(";")) {
     m_radioSemicolon->setChecked(true);
   } else if(m_delimiter == QLatin1String("\t")) {
@@ -308,6 +307,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
     m_editOther->setEnabled(true);
     m_editOther->setText(m_delimiter);
   }
+  slotDelimiter(); // since the comma box was already checked, the slot won't fire
 
   return m_widget;
 }
@@ -363,7 +363,10 @@ void CSVImporter::slotTypeChanged() {
 
   updateHeader(true);
   m_comboField->clear();
-  m_comboField->addItems(m_existingCollection ? m_existingCollection->fieldTitles() : m_coll->fieldTitles());
+  const Data::FieldList fields = m_existingCollection ? m_existingCollection->fields() : m_coll->fields();
+  foreach(Data::FieldPtr field, fields) {
+    m_comboField->addItem(field->title());
+  }
   m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
 
   // hack to force a resize
@@ -396,18 +399,18 @@ void CSVImporter::slotDelimiter() {
 }
 
 void CSVImporter::slotCurrentChanged(int, int col_) {
-  int pos = col_+1;
+  const int pos = col_+1;
   m_colSpinBox->setValue(pos); //slotSelectColumn() gets called because of the signal
 }
 
 void CSVImporter::slotHeaderClicked(int col_) {
-  int pos = col_+1;
+  const int pos = col_+1;
   m_colSpinBox->setValue(pos); //slotSelectColumn() gets called because of the signal
 }
 
 void CSVImporter::slotSelectColumn(int pos_) {
   // pos is really the number of the position of the column
-  int col = pos_ - 1;
+  const int col = pos_ - 1;
   m_table->scrollToItem(m_table->item(0, col));
   m_comboField->setCurrentItem(m_table->horizontalHeaderItem(col)->text());
 }
@@ -478,14 +481,16 @@ void CSVImporter::slotFieldChanged(int idx_) {
   }
 
   Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
-  int count = c->fieldTitles().count();
+  const int count = c->fields().count();
   CollectionFieldsDialog dlg(c, m_widget);
 //  dlg.setModal(true);
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
-    m_comboField->addItems(c->fieldTitles());
+    foreach(Data::FieldPtr field, c->fields()) {
+      m_comboField->addItem(field->title());
+    }
     m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
-    if(count != c->fieldTitles().count()) {
+    if(count != c->fields().count()) {
       fillTable();
     }
     m_comboField->setCurrentIndex(0);

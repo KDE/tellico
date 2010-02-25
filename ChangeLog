@@ -1,3 +1,11 @@
+2010-02-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crash in CSV importer.
+
+2010-02-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Tweaked entry ID values to start at 1 instead of 0.
+
 2010-02-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.2.
