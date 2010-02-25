@@ -492,7 +492,7 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     } else if(entry->id() == -1) {
       entry->setId(m_nextEntryId);
       ++m_nextEntryId;
-    } else if(m_entryById.value(entry->id())) {
+    } else if(m_entryById.contains(entry->id())) {
       if(!foster) {
         myDebug() << "the collection already has an entry with id = " << entry->id();
       }

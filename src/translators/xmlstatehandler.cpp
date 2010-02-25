@@ -486,9 +486,10 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
 
     myWarning() << "entries should come after fields are defined, attempting to recover";
   }
-  int id = attValue(atts_, "id").toInt();
+  bool ok;
+  const int id = attValue(atts_, "id").toInt(&ok);
   Data::EntryPtr entry;
-  if(id > 0) {
+  if(ok && id > -1) {
     entry = new Data::Entry(d->coll, id);
   } else {
     entry = new Data::Entry(d->coll);
