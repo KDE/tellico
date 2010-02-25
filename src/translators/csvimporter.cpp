@@ -307,7 +307,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
     m_editOther->setEnabled(true);
     m_editOther->setText(m_delimiter);
   }
-  slotDelimiter(); // since the comma box was already checked, the slot won't fire
+  slotDelimiter(); // initialize the parser and then load the text
 
   return m_widget;
 }
