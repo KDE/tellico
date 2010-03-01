@@ -63,7 +63,7 @@
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
 #include "gui/cursorsaver.h"
-#include "gui/guiproxy.cpp"
+#include "gui/guiproxy.h"
 #include "tellico_debug.h"
 
 #include <kapplication.h>
