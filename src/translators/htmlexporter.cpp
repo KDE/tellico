@@ -313,14 +313,16 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   // but still use "grouped by"
   QString sortString;
   if(m_printGrouped) {
-    QString s;
-    // if more than one, then it's the People pseudo-group
-    if(m_groupBy.count() > 1) {
-      s = i18n("People");
-    } else {
-      s = coll->fieldTitleByName(m_groupBy[0]);
+    if(!m_groupBy.isEmpty()) {
+      QString s;
+      // if more than one, then it's the People pseudo-group
+      if(m_groupBy.count() > 1) {
+        s = i18n("People");
+      } else {
+        s = coll->fieldTitleByName(m_groupBy[0]);
+      }
+      sortString = i18n("(grouped by %1)", s);
     }
-    sortString = i18n("(grouped by %1)", s);
 
     QString groupFields;
     for(QStringList::ConstIterator it = m_groupBy.constBegin(); it != m_groupBy.constEnd(); ++it) {
