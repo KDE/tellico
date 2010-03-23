@@ -145,7 +145,8 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
     m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true),
-    m_dontQueueFilter(false) {
+    m_dontQueueFilter(false),
+    m_savingImageLocationChange(false) {
 
   Controller::init(this); // the only time this is ever called!
   // has to be after controller init
@@ -2052,12 +2053,17 @@ void MainWindow::slotRenameCollection() {
 }
 
 void MainWindow::slotImageLocationChanged() {
+  if(m_savingImageLocationChange) {
+    return;
+  }
+  m_savingImageLocationChange = true;
   Data::Document::self()->slotSetModified();
   KMessageBox::information(this, QLatin1String("<qt>") +
                                  i18n("Some images are not saved in the configured location. The current file "
                                       "must be saved and the images will be transferred to the new location.") +
                                  QLatin1String("</qt>"));
   fileSave();
+  m_savingImageLocationChange = false;
 }
 
 void MainWindow::updateCollectionActions() {

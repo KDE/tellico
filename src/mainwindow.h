@@ -528,6 +528,7 @@ private:
   bool m_newDocument;
   // Don't queue filter if true
   bool m_dontQueueFilter;
+  bool m_savingImageLocationChange;
 };
 
 } // end namespace

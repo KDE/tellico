@@ -1,6 +1,7 @@
 2010-03-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crash in exporting HTML for collections with no grouping field (BUG: 231302).
+	* Fixed bug that showed info dialog multiple times when changing image location.
 
 2010-02-24  Robby Stephenson  <robby@periapsis.org>
 
