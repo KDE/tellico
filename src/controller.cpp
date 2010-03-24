@@ -302,6 +302,7 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
   if(m_widgetWithSelection != m_mainWindow->m_detailedView) {
+    myDebug() <<  "clearing detailled view selection";
     m_mainWindow->m_detailedView->clearSelection();
   }
   if(m_widgetWithSelection != m_mainWindow->m_groupView) {
@@ -445,6 +446,7 @@ void Controller::slotCopySelectedEntries() {
     entries.append(Data::EntryPtr(new Data::Entry(*it)));
   }
   Kernel::self()->addEntries(entries, false);
+  m_widgetWithSelection = 0; // KDE bug 231125: probably should figure out how to really fix it...
   slotUpdateSelection(0, old);
 }
 
