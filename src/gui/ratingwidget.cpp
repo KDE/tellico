@@ -34,6 +34,7 @@
 #include <QBoxLayout>
 #include <QLabel>
 #include <QMouseEvent>
+#include <QToolButton>
 
 namespace {
   static const int RATING_WIDGET_MAX_ICONS = 10; // same as in Field::ratingValues()
@@ -76,9 +77,19 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     l->setFixedSize(w, h);
     m_widgets.append(l);
   }
+
+  m_clearButton = new QToolButton(this);
+  if(layoutDirection() == Qt::LeftToRight) {
+    m_clearButton->setIcon(SmallIcon(QLatin1String("edit-clear-locationbar-rtl")));
+  } else {
+    m_clearButton->setIcon(SmallIcon(QLatin1String("edit-clear-locationbar-ltr")));
+  }
+  m_clearButton->hide();
+  connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearClicked()));
+
   init();
 
-  QBoxLayout* l = dynamic_cast<QBoxLayout*>(layout());
+  QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
   if(l) {
     l->addStretch(1);
   }
@@ -90,6 +101,12 @@ void RatingWidget::init() {
   int i = 0;
   for( ; i < m_total; ++i) {
     m_widgets.at(i)->setPixmap(m_pixOff);
+  }
+  QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
+  if(l) {
+    // move the clear button to right after the last star
+    l->removeWidget(m_clearButton);
+    l->insertWidget(i, m_clearButton);
   }
   for( ; i < m_widgets.count(); ++i) {
     m_widgets.at(i)->setPixmap(QPixmap());
@@ -149,6 +166,16 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
   }
 }
 
+void RatingWidget::enterEvent(QEvent* event_) {
+  Q_UNUSED(event_);
+  m_clearButton->show();
+}
+
+void RatingWidget::leaveEvent(QEvent* event_) {
+  Q_UNUSED(event_);
+  m_clearButton->hide();
+}
+
 void RatingWidget::clear() {
   m_currIndex = -1;
   update();
@@ -178,6 +205,14 @@ void RatingWidget::setText(const QString& text_) {
 void RatingWidget::updateField(Tellico::Data::FieldPtr field_) {
   m_field = field_;
   init();
+}
+
+void RatingWidget::clearClicked() {
+  if(m_currIndex != -1) {
+    m_currIndex = -1;
+    update();
+    emit signalModified();
+  }
 }
 
 #include "ratingwidget.moc"

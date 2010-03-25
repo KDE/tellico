@@ -33,6 +33,8 @@
 #include <QLabel>
 #include <QPixmap>
 
+class QToolButton;
+
 namespace Tellico {
   namespace Data {
     class Field;
@@ -65,6 +67,11 @@ signals:
 
 protected:
   virtual void mousePressEvent(QMouseEvent* e);
+  virtual void enterEvent(QEvent* e);
+  virtual void leaveEvent(QEvent* e);
+
+private slots:
+  void clearClicked();
 
 private:
   void init();
@@ -72,6 +79,7 @@ private:
 
   Data::FieldPtr m_field;
   LabelList m_widgets;
+  QToolButton* m_clearButton;
 
   int m_currIndex;
   int m_total;
