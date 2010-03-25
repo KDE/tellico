@@ -1,6 +1,7 @@
 2010-03-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Control characters are now stripped from all text files on import (BUG: 231302).
+	* Removed local FindKcddb cmake module in favor of system FindKdeMultimedia.
 
 2010-03-23  Robby Stephenson  <robby@periapsis.org>
 
