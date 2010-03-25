@@ -25,12 +25,23 @@
 #include "textimporter.h"
 #include "../core/filehandler.h"
 
+#include <QRegExp>
+
+namespace {
+  QString& cleanXml(QString s) {
+    // remove C0 Control Characters, since we assume we're importing a file
+    // with contents that will be represented  in XML later...
+    static const QRegExp rx(QLatin1String("[\x0000-\x00FF]"));
+    return s.remove(rx);
+  }
+}
+
 using Tellico::Import::TextImporter;
 
 TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
     : Import::Importer(url_) {
   if(url_.isValid()) {
-    setText(FileHandler::readTextFile(url_, false, useUTF8_));
+    setText(cleanXml(FileHandler::readTextFile(url_, false, useUTF8_)));
   }
 }
 

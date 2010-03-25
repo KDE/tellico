@@ -1,3 +1,7 @@
+2010-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Control characters are now stripped from all text files on import (BUG: 231302).
+
 2010-03-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed selection bug when duplicating an entry (BUG: 231125).
