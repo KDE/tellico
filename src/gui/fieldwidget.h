@@ -76,7 +76,7 @@ public slots:
   void setEnabled(bool enabled);
 
 signals:
-  virtual void valueChanged(Tellico::Data::FieldPtr field);
+  void valueChanged(Tellico::Data::FieldPtr field);
 
 protected slots:
   void checkModified();
