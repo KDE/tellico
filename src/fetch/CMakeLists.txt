@@ -28,6 +28,7 @@ SET(fetch_STAT_SRCS
    isbndbfetcher.cpp
    messagehandler.cpp
    musicbrainzfetcher.cpp
+   openlibraryfetcher.cpp
    sha2.c
    srufetcher.cpp
    themoviedbfetcher.cpp

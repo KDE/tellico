@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,60 +22,72 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef TELLICO_OPENLIBRARYFETCHER_H
+#define TELLICO_OPENLIBRARYFETCHER_H
+
+#include "fetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
 
 namespace Tellico {
+
   namespace Fetch {
 
 /**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
+ * A fetcher for discogs.com
+ *
+ * @author Robby Stephenson
  */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
+class OpenLibraryFetcher : public Fetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  OpenLibraryFetcher(QObject* parent);
+  /**
+   */
+  virtual ~OpenLibraryFetcher();
+
+  /**
+   */
+  virtual QString source() const;
+  virtual bool isSearching() const { return m_started; }
+  virtual void continueSearch();
+  virtual bool canSearch(FetchKey k) const { return k == ISBN; }
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
+  virtual Type type() const { return OpenLibrary; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
+
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&);
+    virtual QString preferredName() const;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields() { return StringHash(); }
+
+private:
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  void doSearch();
+
+  QHash<int, Data::EntryPtr> m_entries;
+
+  bool m_started;
 };
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo,
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase,
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary
-};
-
-  }
-}
-
+  } // end namespace
+} // end namespace
 #endif
