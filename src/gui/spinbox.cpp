@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "spinbox.h"
-#include "../tellico_debug.h"
 
 #include <QLineEdit>
 
