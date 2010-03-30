@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "spinbox.h"
+#include "../tellico_debug.h"
 
 #include <QLineEdit>
 
@@ -44,6 +45,13 @@ void SpinBox::checkValue() {
   if(cleanText().isEmpty()) {
     setValue(minimum());
   }
+}
+
+QValidator::State SpinBox::validate(QString& text_, int& pos_) const {
+  if(text_.endsWith(QLatin1Char(' '))) {
+    text_.remove(text_.length()-1, 1);
+  }
+  return QSpinBox::validate(text_, pos_);
 }
 
 #include "spinbox.moc"

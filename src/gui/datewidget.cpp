@@ -194,7 +194,7 @@ void DateWidget::setDate(const QDate& date_) {
   m_monthCombo->blockSignals(true);
   m_yearSpin->blockSignals(true);
 
-  const KCalendarSystem * calendar = KGlobal::locale()->calendar();
+  const KCalendarSystem* calendar = KGlobal::locale()->calendar();
   m_daySpin->setMaximum(calendar->daysInMonth(date_));
   m_daySpin->setValue(calendar->day(date_));
   m_monthCombo->setCurrentIndex(calendar->month(date_)); // don't subtract 1 since there's the blank first item

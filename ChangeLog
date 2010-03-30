@@ -1,3 +1,7 @@
+2010-03-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with cursor position in date field entry.
+
 2010-03-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added basic fetch for Open Llibrary covers.
@@ -5,7 +9,6 @@
 2010-03-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Added clear button for rating widget (BUG: 227982).
-
 	* Control characters are now stripped from all text files on import (BUG: 231302).
 	* Removed local FindKcddb cmake module in favor of system FindKdeMultimedia.
 

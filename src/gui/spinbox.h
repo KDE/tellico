@@ -41,6 +41,9 @@ public:
 
 private slots:
   void checkValue();
+
+private:
+  QValidator::State validate(QString& text, int& pos) const;
 };
 
   } // end namespace
