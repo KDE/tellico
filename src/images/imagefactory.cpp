@@ -116,6 +116,7 @@ Tellico::ImageFactory::CacheDir ImageFactory::cacheDir() {
 }
 
 QString ImageFactory::addImage(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory->addImageImpl(url_, quiet_, refer_, link_).id();
 }
 
