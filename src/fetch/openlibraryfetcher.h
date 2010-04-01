@@ -29,8 +29,14 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-namespace Tellico {
+#include <QPointer>
 
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
+
+namespace Tellico {
   namespace Fetch {
 
 /**
@@ -78,12 +84,17 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields() { return StringHash(); }
 
+private slots:
+  void slotComplete(KJob* job);
+
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
+  void doCoverOnly();
 
   QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
 };

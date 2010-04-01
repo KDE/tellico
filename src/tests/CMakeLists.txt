@@ -114,6 +114,11 @@ TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(imdbfetchertest NOGUI imdbfetchertest.cpp)
 TARGET_LINK_LIBRARIES(imdbfetchertest fetch ${TELLICO_TEST_LIBS})
 
+IF( QJSON_FOUND )
+    KDE4_ADD_UNIT_TEST(openlibraryfetchertest NOGUI openlibraryfetchertest.cpp)
+    TARGET_LINK_LIBRARIES(openlibraryfetchertest fetch ${TELLICO_TEST_LIBS})
+ENDIF( QJSON_FOUND )
+
 KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp)
 TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
 

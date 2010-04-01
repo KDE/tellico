@@ -22,18 +22,18 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "openlibraryfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_utils.h"
-#include "../collection.h"
 #include "../entry.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -42,12 +42,24 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
+#include <QTextCodec>
+
+#ifdef HAVE_QJSON
+#include <qjson/serializer.h>
+#include <qjson/parser.h>
+#endif
+
+namespace {
+  // always bibtex
+  static const char* OPENLIBRARY_THINGS_URL = "http://openlibrary.org/api/things";
+  static const char* OPENLIBRARY_GET_URL = "http://openlibrary.org/api/get";
+}
 
 using namespace Tellico;
 using Tellico::Fetch::OpenLibraryFetcher;
 
 OpenLibraryFetcher::OpenLibraryFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_job(0), m_started(false) {
 }
 
 OpenLibraryFetcher::~OpenLibraryFetcher() {
@@ -75,12 +87,20 @@ void OpenLibraryFetcher::continueSearch() {
 }
 
 void OpenLibraryFetcher::doSearch() {
-  KUrl imageURL;
+#ifndef HAVE_QJSON
+  doCoverOnly();
+  return;
+#else
 
-  QString s = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(ISBNValidator::cleanValue(request().value));
+  KUrl u(OPENLIBRARY_THINGS_URL);
+
+  QVariantMap query;
+  // books are type/edition
+  query.insert(QLatin1String("type"), QLatin1String("/type/edition"));
+
   switch(request().key) {
     case ISBN:
-      imageURL.setUrl(s);
+      query.insert(QLatin1String("isbn_10"), ISBNValidator::cleanValue(request().value));
       break;
 
     default:
@@ -89,9 +109,37 @@ void OpenLibraryFetcher::doSearch() {
       return;
   }
 
-  myDebug() << "url:" << imageURL;
+  QJson::Serializer serializer;
+  QByteArray json = serializer.serialize(query);
+  myDebug() << json;
 
-  const QString id = ImageFactory::addImage(imageURL, true);
+  u.addQueryItem(QLatin1String("query"), QString::fromUtf8(json));
+  myDebug() << "url:" << u;
+
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(GUI::Proxy::widget());
+  connect(m_job, SIGNAL(result(KJob*)),
+          SLOT(slotComplete(KJob*)));
+#endif
+}
+
+void OpenLibraryFetcher::doCoverOnly() {
+  KUrl imageUrl;
+
+  QString s = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(ISBNValidator::cleanValue(request().value));
+
+  switch(request().key) {
+     case ISBN:
+       imageUrl.setUrl(s);
+       break;
+
+    default:
+      myWarning() << "key not recognized: " << request().key;
+      stop();
+      return;
+  }
+
+  const QString id = ImageFactory::addImage(imageUrl, true);
   if(id.isEmpty()) {
     myWarning() << "no image";
     stop();
@@ -115,6 +163,10 @@ void OpenLibraryFetcher::stop() {
   if(!m_started) {
     return;
   }
+  if(m_job) {
+    m_job->kill();
+    m_job = 0;
+  }
   m_started = false;
   emit signalDone(this);
 }
@@ -125,6 +177,22 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
     myWarning() << "no entry in dict";
     return Data::EntryPtr();
   }
+
+  // if the entry is not set, go ahead and try to fetch it
+  if(entry->field(QLatin1String("cover")).isEmpty()) {
+    const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
+    if(!isbn.isEmpty()) {
+      KUrl imageUrl = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn);
+
+      const QString id = ImageFactory::addImage(imageUrl, true);
+      if(id.isEmpty()) {
+        myWarning() << "no image";
+      } else {
+        entry->setField(QLatin1String("cover"), id);
+      }
+    }
+  }
+
   return entry;
 }
 
@@ -134,6 +202,85 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
     return FetchRequest(ISBN, isbn);
   }
   return FetchRequest();
+}
+
+void OpenLibraryFetcher::slotComplete(KJob*) {
+#ifdef HAVE_QJSON
+//  myDebug();
+
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
+    stop();
+    return;
+  }
+
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
+    myDebug() << "no data";
+    stop();
+    return;
+  }
+
+#if 0
+  myWarning() << "Remove debug from openlibraryfetcher.cpp";
+  const QString text = QString::fromUtf8(data, data.size());
+  QFile f(QString::fromLatin1("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
+    t << text;
+  }
+  f.close();
+#endif
+
+  QJson::Parser parser;
+  QVariantMap result = parser.parse(data).toMap();
+  if(result.value(QLatin1String("status"))  != QLatin1String("ok")) {
+    myDebug() << "bad status result:" << result.value(QLatin1String("status"));
+    stop();
+    return;
+  }
+
+  QVariantList resultList = result.value(QLatin1String("result")).toList();
+  if(resultList.isEmpty()) {
+    myDebug() << "no results";
+    stop();
+    return;
+  }
+
+  QString result1 = resultList.at(0).toString();
+//  myDebug() << "found result:" << result1;
+
+  // since the fetch is done, don't worry about holding the job pointer
+  m_job = 0;
+
+  KUrl u(OPENLIBRARY_GET_URL);
+  u.addQueryItem(QLatin1String("key"), result1);
+
+  QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
+  result = parser.parse(output.toUtf8()).toMap();
+  QVariantMap resultMap = result.value(QLatin1String("result")).toMap();
+
+//  myDebug() << resultMap.value(QLatin1String("isbn_10")).toList().at(0);
+
+  Data::CollPtr coll(new Data::BookCollection(true));
+  Data::EntryPtr entry(new Data::Entry(coll));
+
+  entry->setField(QLatin1String("title"), resultMap.value(QLatin1String("title")).toString());
+  entry->setField(QLatin1String("pub_year"), resultMap.value(QLatin1String("publish_date")).toString());
+  entry->setField(QLatin1String("isbn"), resultMap.value(QLatin1String("isbn_10")).toList().at(0).toString());
+  entry->setField(QLatin1String("lccn"), resultMap.value(QLatin1String("lccn")).toList().at(0).toString());
+
+  FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+  m_entries.insert(r->uid, entry);
+  emit signalResultFound(r);
+
+//  m_start = m_entries.count();
+//  m_hasMoreResults = m_start <= m_total;
+  m_hasMoreResults = false; // for now, no continued searches
+
+  stop(); // required
+#endif
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
