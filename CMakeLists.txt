@@ -85,6 +85,9 @@ if(LIBEXEMPI_FOUND)
     include_directories(${LIBEXEMPI_INCLUDE_DIR})
 endif(LIBEXEMPI_FOUND)
 
+macro_optional_find_package(QJSON)
+macro_log_feature(QJSON_FOUND "QJSON" "Support for searching OpenLibrary.org" "http://qjson.sourceforge.net" FALSE "" "")
+
 # once we make webcam support enabled by default, we can remove this logic
 if(ENABLE_WEBCAM)
     macro_optional_find_package(V4l)
@@ -149,6 +152,7 @@ macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
+macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

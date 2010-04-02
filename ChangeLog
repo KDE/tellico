@@ -4,7 +4,7 @@
 
 2010-03-27  Robby Stephenson  <robby@periapsis.org>
 
-	* Added basic fetch for Open Llibrary covers.
+	* Added fetcher for openlibrary.org (requires QJSON lib).
 
 2010-03-24  Robby Stephenson  <robby@periapsis.org>
 

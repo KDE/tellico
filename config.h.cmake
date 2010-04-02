@@ -37,3 +37,5 @@
 #cmakedefine HAVE_KSANE
 
 #cmakedefine HAVE_V4L
+
+#cmakedefine HAVE_QJSON

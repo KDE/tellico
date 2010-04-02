@@ -61,10 +61,17 @@ void OpenLibraryFetcherTest::testIsbn() {
 //  QVERIFY(!m_results.isEmpty());
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("This is Venice"));
+  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("M. Sasek"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0789312239"));
   QCOMPARE(entry->field(QLatin1String("lccn")), QLatin1String("2004110229"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2005"));
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("This is Venice"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Juvenile literature."));
+  QCOMPARE(entry->field(QLatin1String("keyword")), QLatin1String("Venice (Italy) -- Description and travel -- Juvenile literature"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Universe"));
+  QCOMPARE(entry->field(QLatin1String("language")), QLatin1String("English"));
+  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("56"));
+  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
 
 void OpenLibraryFetcherTest::slotResult(KJob* job_) {
