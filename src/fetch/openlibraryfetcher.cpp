@@ -124,13 +124,8 @@ void OpenLibraryFetcher::doSearch() {
 }
 
 void OpenLibraryFetcher::doCoverOnly() {
-  KUrl imageUrl;
-
-  QString s = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(ISBNValidator::cleanValue(request().value));
-
   switch(request().key) {
      case ISBN:
-       imageUrl.setUrl(s);
        break;
 
     default:
@@ -139,22 +134,18 @@ void OpenLibraryFetcher::doCoverOnly() {
       return;
   }
 
-  const QString id = ImageFactory::addImage(imageUrl, true);
-  if(id.isEmpty()) {
-    myWarning() << "no image";
-    stop();
-    return;
+  int pos = 0;
+  QString isbn = request().value;
+  ISBNValidator val(this);
+  if(val.validate(isbn, pos) == QValidator::Acceptable) {
+    Data::CollPtr coll(new Data::BookCollection(true));
+    Data::EntryPtr entry(new Data::Entry(coll));
+    entry->setField(QLatin1String("isbn"), isbn);
+
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    emit signalResultFound(r);
   }
-
-  Data::CollPtr coll(new Data::BookCollection(true));
-
-  Data::EntryPtr entry(new Data::Entry(coll));
-  entry->setField(QLatin1String("isbn"), request().value);
-  entry->setField(QLatin1String("cover"), id);
-
-  FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-  m_entries.insert(r->uid, Data::EntryPtr(entry));
-  emit signalResultFound(r);
 
   stop();
 }
