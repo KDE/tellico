@@ -26,8 +26,8 @@
 #include "openlibraryfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
 #include "../utils/isbnvalidator.h"
+#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../entry.h"
 #include "../core/filehandler.h"
@@ -36,7 +36,6 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KConfigGroup>
 
 #include <QLabel>
 #include <QFile>
@@ -55,7 +54,7 @@ namespace {
   static const char* OPENLIBRARY_SEARCH_URL = "http://openlibrary.org/api/search";
   static const char* OPENLIBRARY_GET_URL = "http://openlibrary.org/api/get";
 
-  inline QString value(const QVariantMap& map, const char* name) {
+  QString value(const QVariantMap& map, const char* name) {
     const QVariant v = map.value(QLatin1String(name));
     if(v.isNull())  {
       return QString();
@@ -68,11 +67,6 @@ namespace {
     } else {
       return QString();
     }
-  }
-
-  inline QString values(const QVariantMap& map, const char* name) {
-    QVariant v = map.value(QLatin1String(name));
-    return v.isNull() ? QString() : v.toString();
   }
 }
 
@@ -123,6 +117,10 @@ void OpenLibraryFetcher::doSearch() {
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("title"), request().value);
+      break;
+
+    case Person:
+      query.insert(QLatin1String("authors"), getAuthorKeys());
       break;
 
     case ISBN:
@@ -214,11 +212,8 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
     const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
     if(!isbn.isEmpty()) {
       KUrl imageUrl = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn);
-
       const QString id = ImageFactory::addImage(imageUrl, true);
-      if(id.isEmpty()) {
-        myWarning() << "no image";
-      } else {
+      if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);
       }
     }
@@ -307,7 +302,13 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     entry->setField(QLatin1String("genre"), value(resultMap, "genres"));
     entry->setField(QLatin1String("keyword"), value(resultMap, "subjects"));
     entry->setField(QLatin1String("edition"), value(resultMap, "edition_name"));
-    entry->setField(QLatin1String("binding"), value(resultMap, "physical_format"));
+    QString binding = value(resultMap, "physical_format");
+    if(binding.toLower() == QLatin1String("hardcover")) {
+      binding = QLatin1String("Hardback");
+    } else if(binding.toLower().contains(QLatin1String("paperback"))) {
+      binding = QLatin1String("Paperback");
+    }
+    entry->setField(QLatin1String("binding"), i18n(binding.toUtf8()));
     entry->setField(QLatin1String("publisher"), value(resultMap, "publishers"));
     entry->setField(QLatin1String("series"), value(resultMap, "series"));
     entry->setField(QLatin1String("pages"), value(resultMap, "number_of_pages"));
@@ -343,7 +344,7 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
         QVariantMap langResult = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toMap();
         const QString name = value(langResult, "name");
         if(!name.isEmpty()) {
-          langs << name;
+          langs << i18n(name.toUtf8());
         }
       }
     }
@@ -362,6 +363,24 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 
   stop(); // required
 #endif
+}
+
+QString OpenLibraryFetcher::getAuthorKeys() {
+  KUrl u(OPENLIBRARY_THINGS_URL);
+
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/type/author"));
+  query.insert(QLatin1String("name"), request().value);
+
+  QJson::Serializer serializer;
+  QByteArray json = serializer.serialize(query);
+
+  u.addQueryItem(QLatin1String("query"), QString::fromUtf8(json));
+  QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
+  QJson::Parser parser;
+  QVariantList results = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toList();
+  // right now, only use the first
+  return results.isEmpty() ? QString() : results.at(0).toString();
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {

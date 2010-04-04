@@ -60,7 +60,7 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == ISBN || k == LCCN || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return OpenLibrary; }
@@ -92,6 +92,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
   void doCoverOnly();
+  QString getAuthorKeys();
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
