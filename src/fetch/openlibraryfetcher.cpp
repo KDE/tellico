@@ -227,6 +227,14 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
+  const QString lccn = entry_->field(QLatin1String("lccn"));
+  if(!lccn.isEmpty()) {
+    return FetchRequest(LCCN, lccn);
+  }
+  const QString title = entry_->field(QLatin1String("title"));
+  if(!title.isEmpty()) {
+    return FetchRequest(Title, title);
+  }
   return FetchRequest();
 }
 
