@@ -50,9 +50,7 @@
 
 namespace {
   // always bibtex
-  static const char* OPENLIBRARY_THINGS_URL = "http://openlibrary.org/api/things";
-  static const char* OPENLIBRARY_SEARCH_URL = "http://openlibrary.org/api/search";
-  static const char* OPENLIBRARY_GET_URL = "http://openlibrary.org/api/get";
+  static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
 
   QString value(const QVariantMap& map, const char* name) {
     const QVariant v = map.value(QLatin1String(name));
@@ -107,34 +105,39 @@ void OpenLibraryFetcher::doSearch() {
   return;
 #else
 
-  KUrl u(OPENLIBRARY_THINGS_URL);
+  KUrl u(OPENLIBRARY_QUERY_URL);
 
-  QVariantMap query;
   // books are type/edition
-  query.insert(QLatin1String("type"), QLatin1String("/type/edition"));
-//  query.insert(QLatin1String("sort"), QLatin1String("-publish_date")); // causes performance hit
+  u.addQueryItem(QLatin1String("type"), QLatin1String("/type/edition"));
+  u.addQueryItem(QLatin1String("*"), QString());
 
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("title"), request().value);
+      u.addQueryItem(QLatin1String("title"), request().value);
       break;
 
     case Person:
-      query.insert(QLatin1String("authors"), getAuthorKeys());
+      {
+      QString author = getAuthorKeys();
+      if(author.isEmpty()) {
+        myWarning() << "no authors found";
+        stop();
+        return;
+      }
+      u.addQueryItem(QLatin1String("authors"), author);
       break;
 
     case ISBN:
-      query.insert(QLatin1String("isbn_10"), ISBNValidator::cleanValue(request().value));
+      u.addQueryItem(QLatin1String("isbn_10"), ISBNValidator::cleanValue(request().value));
       break;
 
     case LCCN:
-      query.insert(QLatin1String("lccn"), request().value);
+      u.addQueryItem(QLatin1String("lccn"), request().value);
       break;
 
     case Keyword:
-      u.setUrl(QLatin1String(OPENLIBRARY_SEARCH_URL));
-      query.clear();
-      query.insert(QLatin1String("query"), request().value);
+      myWarning() <<  "not supported";
+      stop();
       break;
 
     default:
@@ -143,15 +146,6 @@ void OpenLibraryFetcher::doSearch() {
       return;
   }
 
-  QJson::Serializer serializer;
-  QByteArray json = serializer.serialize(query);
-//  myDebug() << json;
-
-  if(request().key  == Keyword) {
-    u.addQueryItem(QLatin1String("q"), QString::fromUtf8(json));
-  } else {
-    u.addQueryItem(QLatin1String("query"), QString::fromUtf8(json));
-  }
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -259,14 +253,7 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
   m_job = 0;
 
   QJson::Parser parser;
-  QVariantMap resultMap = parser.parse(data).toMap();
-  if(resultMap.value(QLatin1String("status")) != QLatin1String("ok")) {
-    myDebug() << "bad status result:" << resultMap.value(QLatin1String("status"));
-    stop();
-    return;
-  }
-
-  QVariantList resultList = resultMap.value(QLatin1String("result")).toList();
+  QVariantList resultList = parser.parse(data).toList();
   if(resultList.isEmpty()) {
     myDebug() << "no results";
     stop();
@@ -275,14 +262,12 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 
   Data::CollPtr coll(new Data::BookCollection(true));
 
+  QString output;
+
+  QVariantMap resultMap;
   foreach(const QVariant& result, resultList) {
   //  myDebug() << "found result:" << result;
-
-    KUrl u(OPENLIBRARY_GET_URL);
-    u.addQueryItem(QLatin1String("key"), result.toString());
-
-    QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
-    resultMap = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toMap();
+    resultMap = result.toMap();
 
 #if 0
   myWarning() << "Remove debug from openlibraryfetcher.cpp";
@@ -326,11 +311,13 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
       const QString key = value(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
-        KUrl authorUrl(OPENLIBRARY_GET_URL);
+        KUrl authorUrl(OPENLIBRARY_QUERY_URL);
+        authorUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
         authorUrl.addQueryItem(QLatin1String("key"), key);
+        authorUrl.addQueryItem(QLatin1String("name"), QString());
 
         output = FileHandler::readTextFile(authorUrl, false /*quiet*/, true /*utf8*/);
-        QVariantMap authorResult = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toMap();
+        QVariantMap authorResult = parser.parse(output.toUtf8()).toList().at(0).toMap();
         const QString name = value(authorResult, "name");
         if(!name.isEmpty()) {
           authors << name;
@@ -345,11 +332,13 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
       const QString key = value(langMap.toMap(), "key");
       if(!key.isEmpty()) {
-        KUrl langUrl(OPENLIBRARY_GET_URL);
+        KUrl langUrl(OPENLIBRARY_QUERY_URL);
+        langUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
         langUrl.addQueryItem(QLatin1String("key"), key);
+        langUrl.addQueryItem(QLatin1String("name"), QString());
 
         output = FileHandler::readTextFile(langUrl, false /*quiet*/, true /*utf8*/);
-        QVariantMap langResult = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toMap();
+        QVariantMap langResult = parser.parse(output.toUtf8()).toList().at(0).toMap();
         const QString name = value(langResult, "name");
         if(!name.isEmpty()) {
           langs << i18n(name.toUtf8());
@@ -374,21 +363,17 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 }
 
 QString OpenLibraryFetcher::getAuthorKeys() {
-  KUrl u(OPENLIBRARY_THINGS_URL);
+  KUrl u(OPENLIBRARY_QUERY_URL);
 
-  QVariantMap query;
-  query.insert(QLatin1String("type"), QLatin1String("/type/author"));
-  query.insert(QLatin1String("name"), request().value);
+  u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
+  u.addQueryItem(QLatin1String("name"), request().value);
 
-  QJson::Serializer serializer;
-  QByteArray json = serializer.serialize(query);
-
-  u.addQueryItem(QLatin1String("query"), QString::fromUtf8(json));
   QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
   QJson::Parser parser;
-  QVariantList results = parser.parse(output.toUtf8()).toMap().value(QLatin1String("result")).toList();
+  QVariantList results = parser.parse(output.toUtf8()).toList();
+  myDebug() << "found" << results.count() << "authors";
   // right now, only use the first
-  return results.isEmpty() ? QString() : results.at(0).toString();
+  return results.isEmpty() ? QString() : value(results.at(0).toMap(), "key");
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
