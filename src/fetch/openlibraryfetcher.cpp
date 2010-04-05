@@ -125,6 +125,7 @@ void OpenLibraryFetcher::doSearch() {
         return;
       }
       u.addQueryItem(QLatin1String("authors"), author);
+      }
       break;
 
     case ISBN:
@@ -357,12 +358,12 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 //  m_start = m_entries.count();
 //  m_hasMoreResults = m_start <= m_total;
   m_hasMoreResults = false; // for now, no continued searches
-
-  stop(); // required
 #endif
+  stop(); // required
 }
 
 QString OpenLibraryFetcher::getAuthorKeys() {
+#ifdef HAVE_QJSON
   KUrl u(OPENLIBRARY_QUERY_URL);
 
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
@@ -374,6 +375,9 @@ QString OpenLibraryFetcher::getAuthorKeys() {
   myDebug() << "found" << results.count() << "authors";
   // right now, only use the first
   return results.isEmpty() ? QString() : value(results.at(0).toMap(), "key");
+#else
+  return QString();
+#endif
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
