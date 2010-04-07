@@ -485,7 +485,7 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     }
 
     m_entries.append(entry);
-//  myDebug() << "added entry (" << entry->title() << ")";
+//    myDebug() << "added entry (" << entry->title() << ")" <<  entry->id();
 
     if(entry->id() >= m_nextEntryId) {
       m_nextEntryId = entry->id() + 1;

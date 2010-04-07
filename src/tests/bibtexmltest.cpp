@@ -50,7 +50,8 @@ void BibtexmlTest::testImport() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
 
-  Tellico::Data::EntryPtr entry = coll->entryById(0);
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QL1("book"));
   QCOMPARE(entry->field("bibtex-key"), QL1("esbensen"));
   QCOMPARE(entry->field("author"), QL1("Kim Esbensen; Tonje Midtgaard"));

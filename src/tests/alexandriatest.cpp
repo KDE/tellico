@@ -59,7 +59,7 @@ void AlexandriaTest::testImport() {
   // should be translated somehow
   QCOMPARE(coll->title(), QL1("My Books"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
   QCOMPARE(entry->field("title"), QL1("Life Together"));
   QCOMPARE(entry->field("author"), QL1("Dietrich Bonhoeffer; My Other Author"));
   // translated

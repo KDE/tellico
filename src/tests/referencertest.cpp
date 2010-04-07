@@ -56,7 +56,7 @@ void ReferencerTest::testImport() {
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(!entry.isNull());
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));

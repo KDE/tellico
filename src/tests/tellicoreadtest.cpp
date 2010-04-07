@@ -86,8 +86,9 @@ void TellicoReadTest::testEntries() {
     }
 
     for(int j = 0; j < m_collections[0]->entryCount(); ++j) {
-      Tellico::Data::EntryPtr entry1 = m_collections[0]->entryById(j);
-      Tellico::Data::EntryPtr entry2 = m_collections[i]->entryById(j);
+      // don't test id values since the inital value has changed from 0 to 1
+      Tellico::Data::EntryPtr entry1 = m_collections[0]->entries().at(j);
+      Tellico::Data::EntryPtr entry2 = m_collections[i]->entries().at(j);
       QVERIFY(!entry1.isNull());
       QVERIFY(!entry2.isNull());
       QCOMPARE(entry1->field(fieldName), entry2->field(fieldName));
