@@ -185,7 +185,7 @@ void AmazonFetcher::doSearch() {
   params.insert(QLatin1String("Operation"),      QLatin1String("ItemSearch"));
   params.insert(QLatin1String("ResponseGroup"),  QLatin1String("Large"));
   params.insert(QLatin1String("ItemPage"),       QString::number(m_page));
-  params.insert(QLatin1String("Version"),        QLatin1String("2007-10-29"));
+  params.insert(QLatin1String("Version"),        QLatin1String("2009-11-02"));
 
   const int type = collectionType();
   switch(type) {
@@ -576,25 +576,24 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       {
-        const QString keywords = QLatin1String("keyword");
-        QStringList oldWords = FieldFormat::splitValue(entry->field(keywords));
-        StringSet words;
-        for(QStringList::Iterator it = oldWords.begin(); it != oldWords.end(); ++it) {
+        StringSet newWords;
+        const QStringList keywords = FieldFormat::splitValue(entry->field(QLatin1String("keyword")));
+        foreach(const QString& keyword, keywords) {
           // the amazon2tellico stylesheet separates keywords with '/'
-          QStringList nodes = (*it).split(QLatin1Char('/'));
-          for(QStringList::Iterator it2 = nodes.begin(); it2 != nodes.end(); ++it2) {
-            if(*it2 == QLatin1String("General") ||
-               *it2 == QLatin1String("Subjects") ||
-               *it2 == QLatin1String("Par prix") || // french stuff
-               *it2 == QLatin1String("Divers") || // french stuff
-               (*it2).startsWith(QLatin1Char('(')) ||
-               (*it2).startsWith(QLatin1String("Authors"))) {
+          const QStringList words = keyword.split(QLatin1Char('/'));
+          foreach(const QString& word, words) {
+            if(word == QLatin1String("General") ||
+               word == QLatin1String("Subjects") ||
+               word == QLatin1String("Par prix") || // french stuff
+               word == QLatin1String("Divers") || // french stuff
+               word.startsWith(QLatin1Char('(')) ||
+               word.startsWith(QLatin1String("Authors"))) {
               continue;
             }
-            words.add(*it2);
+            newWords.add(word);
           }
         }
-        entry->setField(keywords, words.toList().join(FieldFormat::delimiterString()));
+        entry->setField(QLatin1String("keyword"), newWords.toList().join(FieldFormat::delimiterString()));
       }
       entry->setField(QLatin1String("comments"), Tellico::decodeHTML(entry->field(QLatin1String("comments"))));
       break;
