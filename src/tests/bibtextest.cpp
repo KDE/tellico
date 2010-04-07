@@ -62,7 +62,7 @@ void BibtexTest::testImport() {
 
   QCOMPARE(bColl->preamble(), QL1("preamble"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
   QCOMPARE(entry->field("entry-type"), QL1("article"));
   QCOMPARE(entry->field("bibtex-key"), QL1("article-full"));
   QCOMPARE(entry->field("author"), QL1("L[eslie] A. Aamport"));

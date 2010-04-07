@@ -194,12 +194,19 @@ bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
 
 bool Entry::setField(const QString& name_, const QString& value_) {
   if(name_.isEmpty()) {
-    myWarning() << "empty field name for value: " << value_;
+    myWarning() << "empty field name for value:" << value_;
     return false;
   }
 
-  if(m_coll->fields().isEmpty() || !m_coll->hasField(name_)) {
-    myDebug() << "unknown collection entry field -" << name_;
+  if(m_coll->fields().isEmpty()) {
+    myDebug() << "collectionn has no fields, can't add -" << name_;
+    return false;
+  }
+
+  if(!m_coll->hasField(name_)) {
+    myDebug() << "unknown collection entry field -" << name_
+              << "in collection" << m_coll->title();
+    myDebug() <<  "not adding" << value_;
     return false;
   }
 
