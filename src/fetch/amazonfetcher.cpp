@@ -788,6 +788,7 @@ void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry, int collType) {
 }
 
 bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString& token) {
+//  myDebug() << "title token:" << token;
   // if res = true, then the token gets removed from the title
   bool res = false;
   if(token.indexOf(QLatin1String("widescreen"), 0, Qt::CaseInsensitive) > -1 ||
@@ -809,6 +810,19 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
      token.indexOf(i18n("Director's Cut"), 0, Qt::CaseInsensitive) > -1) {
     entry->setField(QLatin1String("directors-cut"), QLatin1String("true"));
     // res = true; leave it in the title
+  }
+  if(token.toLower() == QLatin1String("ntsc")) {
+    entry->setField(QLatin1String("format"), i18n("NTSC"));
+    res = true;
+  }
+  if(token.toLower() == QLatin1String("dvd")) {
+    entry->setField(QLatin1String("medium"), i18n("DVD"));
+    res = true;
+  }
+  static QRegExp regionRx(QLatin1String("Region [1-9]"));
+  if(regionRx.indexIn(token) > -1) {
+    entry->setField(QLatin1String("region"), i18n(regionRx.cap(0).toUtf8()));
+    res = true;
   }
   return res;
 }
