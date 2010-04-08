@@ -45,6 +45,8 @@ private Q_SLOTS:
   void testTitle_data();
   void testIsbn();
   void testIsbn_data();
+  void testUpc();
+  void testUpc_data();
 
   void slotResult(KJob* job);
 
@@ -53,7 +55,7 @@ private:
   Tellico::Data::EntryList m_results;
   bool m_hasConfigFile;
   KConfig m_config;
-  QHash<QString, QString> m_fieldValues;
+  QHash<QString, QHash<QString, QString> > m_fieldValues;
 };
 
 #endif
