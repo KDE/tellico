@@ -38,9 +38,9 @@ EntryUpdateJob::EntryUpdateJob(QObject* parent_, Data::EntryPtr entry_, Fetch::F
     : KJob(parent_), m_entry(entry_), m_fetcher(fetcher_), m_mode(mode_) {
  setCapabilities(KJob::Killable);
  connect(m_fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-          SLOT(slotResult(Tellico::Fetch::FetchResult*)));
-  connect(m_fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-          SLOT(slotDone()));
+         SLOT(slotResult(Tellico::Fetch::FetchResult*)));
+ connect(m_fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
+         SLOT(slotDone()));
 }
 
 void EntryUpdateJob::start() {

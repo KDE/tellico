@@ -38,11 +38,6 @@
 
 QTEST_KDEMAIN_CORE( EntryUpdateJobTest )
 
-namespace {
-  // 5 is BibtexCollection
-  static const int COLLECTION_TYPE = 5;
-}
-
 EntryUpdateJobTest::EntryUpdateJobTest() : m_loop(this) {
 }
 
