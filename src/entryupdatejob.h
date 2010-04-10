@@ -28,8 +28,6 @@
 #include "datavectors.h"
 #include "fetch/fetcher.h"
 
-#include <QMap>
-
 #include <KJob>
 
 namespace Tellico {
@@ -57,7 +55,8 @@ private:
   Data::EntryPtr m_entry;
   Fetch::Fetcher::Ptr m_fetcher;
   Mode m_mode;
-  QMap<int, Data::EntryPtr> m_fetchResults;
+  int m_bestMatchScore;
+  Data::EntryPtr m_bestMatchEntry;
 };
 
 } // end namespace

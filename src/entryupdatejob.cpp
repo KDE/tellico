@@ -35,7 +35,7 @@ using namespace Tellico;
 using Tellico::EntryUpdateJob;
 
 EntryUpdateJob::EntryUpdateJob(QObject* parent_, Data::EntryPtr entry_, Fetch::Fetcher::Ptr fetcher_, Mode mode_)
-    : KJob(parent_), m_entry(entry_), m_fetcher(fetcher_), m_mode(mode_) {
+    : KJob(parent_), m_entry(entry_), m_fetcher(fetcher_), m_mode(mode_), m_bestMatchScore(-1) {
  setCapabilities(KJob::Killable);
  connect(m_fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
          SLOT(slotResult(Tellico::Fetch::FetchResult*)));
@@ -63,22 +63,22 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
   const int match = m_entry->collection()->sameEntry(m_entry, entry);
   // we insert using the negative count, so that the sorting in the map keys
   // allows us to get the best match by taking the first key
-  m_fetchResults.insert(-1 * match, entry);
+  if(match > m_bestMatchScore) {
+    m_bestMatchScore = match;
+    m_bestMatchEntry = entry;
+  }
+  // if perfect match, go ahead and top
   if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
     doKill();
   }
 }
 
 void EntryUpdateJob::slotDone() {
-  QMapIterator<int, Data::EntryPtr> i(m_fetchResults);
-  // we only care about the first one, since they're sorted by negative match score
-  if(i.hasNext()) {
-    i.next();
-    const int match = -1 * i.key();
+  if(m_bestMatchEntry) {
     const int matchToBeat = (m_mode == PerfectMatchOnly ? EntryComparison::ENTRY_PERFECT_MATCH
                                                         : EntryComparison::ENTRY_GOOD_MATCH);
-    if(match > matchToBeat) {
-      Data::Document::mergeEntry(m_entry, i.value(), false /*overwrite*/);
+    if(m_bestMatchScore > matchToBeat) {
+      Data::Document::mergeEntry(m_entry, m_bestMatchEntry, false /*overwrite*/);
     }
   }
   emitResult();
