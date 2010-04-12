@@ -123,10 +123,11 @@ void AmazonFetcherTest::testTitle() {
   QHashIterator<QString, QString> i(m_fieldValues.value(resultName));
   while(i.hasNext()) {
     i.next();
-    // a known bug is CA video titles  resulting in music
-    QEXPECT_FAIL("CA video title", "CA video titles show music results for some reason", Continue);
+    // a known bug is CA video titles result in music results, so only title matches
+    if(i.key() != QLatin1String("title")) {
+      QEXPECT_FAIL("CA video title", "CA video titles show music results for some reason", Continue);
+    }
     QString result = entry->field(i.key()).toLower();
-    // exception for UK label different than US
     // and FR title having edition info
     if(collType == Tellico::Data::Collection::Video && locale == QLatin1String("FR")) {
       QVERIFY(result.contains(i.value(), Qt::CaseInsensitive));
