@@ -58,14 +58,10 @@ void EntryUpdateJobTest::testUpdate() {
 
   // don't use 'this' as job parent, it crashes
   Tellico::EntryUpdateJob* job = new Tellico::EntryUpdateJob(0, entry, fetcher);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  connect(job, SIGNAL(result(KJob*)), &m_loop, SLOT(quit()));
 
   job->start();
   m_loop.exec();
 
   QCOMPARE(entry->field("title"), QLatin1String("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
-}
-
-void EntryUpdateJobTest::slotResult(KJob*) {
-  m_loop.quit();
 }

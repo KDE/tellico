@@ -40,8 +40,6 @@ private Q_SLOTS:
   void initTestCase();
   void testUpdate();
 
-  void slotResult(KJob* job);
-
 private:
   QEventLoop m_loop;
 };
