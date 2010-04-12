@@ -61,8 +61,6 @@ void EntryUpdateJob::slotResult(Tellico::Fetch::FetchResult* result_) {
   Q_ASSERT(entry);
 
   const int match = m_entry->collection()->sameEntry(m_entry, entry);
-  // we insert using the negative count, so that the sorting in the map keys
-  // allows us to get the best match by taking the first key
   if(match > m_bestMatchScore) {
     m_bestMatchScore = match;
     m_bestMatchEntry = entry;
