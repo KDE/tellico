@@ -157,10 +157,12 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool qu
 }
 
 QString ImageFactory::addImage(const QImage& image_, const QString& format_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory->addImageImpl(image_, format_).id();
 }
 
 QString ImageFactory::addImage(const QPixmap& pix_, const QString& format_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory->addImageImpl(pix_.toImage(), format_).id();
 }
 
@@ -183,6 +185,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QImage& image_, con
 }
 
 QString ImageFactory::addImage(const QByteArray& data_, const QString& format_, const QString& id_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory->addImageImpl(data_, format_, id_).id();
 }
 
