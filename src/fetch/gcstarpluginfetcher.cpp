@@ -388,7 +388,7 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
     }
     m_originalPluginName = fetcher_->m_plugin;
   } else {
-    // default o Book for now
+    // default to Book for now
     m_collCombo->setCurrentType(Data::Collection::Book);
   }
 
