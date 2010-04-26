@@ -211,7 +211,7 @@ class DarkHorseParser:
 
 	def run(self, title):
 		"""
-		Runs the allocine.fr parser: fetch movie related links, then fills and prints the DOM tree
+		Runs the parser: fetch movie related links, then fills and prints the DOM tree
 		to stdout (in tellico format) so that tellico can use it.
 		"""
 		self.__getMovie(title)
