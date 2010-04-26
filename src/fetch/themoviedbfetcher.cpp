@@ -322,7 +322,7 @@ Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) 
 }
 
 QString TheMovieDBFetcher::defaultName() {
-  return QLatin1String("TheMovieDB.org"); // noo translation
+  return QLatin1String("TheMovieDB.org"); // no translation
 }
 
 QString TheMovieDBFetcher::defaultIcon() {
