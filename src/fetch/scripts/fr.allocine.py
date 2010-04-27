@@ -14,6 +14,9 @@
 # *                                                                         *
 # ***************************************************************************
 #
+# Version 0.7.1: 2010-04-26
+# * Fixed greedy regexp for genre.  Fixed nationality output. Add studio.
+#
 # Version 0.7: 2009-11-12
 # * Allocine has a brand new website. All regexps were broken.
 #
@@ -26,15 +29,15 @@
 # * Fixed a bug related to parameters encoding
 #
 # Version 0.4:
-# * Fixed parsing errors: some fields in allocine's HTML pages have changed recently. Multiple actors and genres 
+# * Fixed parsing errors: some fields in allocine's HTML pages have changed recently. Multiple actors and genres
 # could not be retrieved. Fixed bad http request error due to some changes in HTML code.
 #
 # Version 0.3:
 # * Fixed parsing: some fields in allocine's HTML pages have changed. Movie's image could not be fetched anymore. Fixed.
-# 
+#
 # Version 0.2:
 # * Fixed parsing: allocine's HTML pages have changed. Movie's image could not be fetched anymore.
-# 
+#
 # Version 0.1:
 # * Initial release.
 
@@ -58,16 +61,16 @@ class BasicTellicoDOM:
 		self.__root = self.__doc.createElement('tellico')
 		self.__root.setAttribute('xmlns', 'http://periapsis.org/tellico/')
 		self.__root.setAttribute('syntaxVersion', '9')
-		
+
 		self.__collection = self.__doc.createElement('collection')
 		self.__collection.setAttribute('title', 'My Movies')
 		self.__collection.setAttribute('type', '3')
-		
+
 		self.__fields = self.__doc.createElement('fields')
 		# Add all default (standard) fields
 		self.__dfltField = self.__doc.createElement('field')
 		self.__dfltField.setAttribute('name', '_default')
-		
+
 		# Add a custom 'Collection' field
 		self.__customField = self.__doc.createElement('field')
 		self.__customField.setAttribute('name', 'titre-original')
@@ -77,7 +80,7 @@ class BasicTellicoDOM:
 		self.__customField.setAttribute('format', '1')
 		self.__customField.setAttribute('type', '1')
 		self.__customField.setAttribute('i18n', 'yes')
-		
+
 		self.__fields.appendChild(self.__dfltField)
 		self.__fields.appendChild(self.__customField)
 		self.__collection.appendChild(self.__fields)
@@ -114,9 +117,15 @@ class BasicTellicoDOM:
 			genreNode.appendChild(self.__doc.createTextNode(g))
 			genresNode.appendChild(genreNode)
 
+		studsNode = self.__doc.createElement('studios')
+		for g in d['studio']:
+			studNode = self.__doc.createElement('studio')
+			studNode.appendChild(self.__doc.createTextNode(g))
+			studsNode.appendChild(studNode)
+
 		natsNode = self.__doc.createElement('nationalitys')
 		for g in d['nat']:
-			natNode = self.__doc.createElement('nat')
+			natNode = self.__doc.createElement('nationality')
 			natNode.appendChild(self.__doc.createTextNode(g))
 			natsNode.appendChild(natNode)
 
@@ -124,7 +133,7 @@ class BasicTellicoDOM:
 		i = 0
 		while i < len(d['actors']):
 			h = d['actors'][i]
-			g = d['actors'][i+1]			
+			g = d['actors'][i+1]
 			castNode = self.__doc.createElement('cast')
 			col1Node = self.__doc.createElement('column')
 			col2Node = self.__doc.createElement('column')
@@ -179,8 +188,8 @@ class BasicTellicoDOM:
 			coverNode = self.__doc.createElement('cover')
 			coverNode.appendChild(self.__doc.createTextNode(d['image'][0]))
 
-		for name in (	'titleNode', 'otitleNode', 'yearNode', 'genresNode', 'natsNode', 
-						'castsNode', 'dirsNode', 'timeNode', 'allocineNode', 'plotNode', 
+		for name in (	'titleNode', 'otitleNode', 'yearNode', 'genresNode', 'studsNode', 'natsNode',
+						'castsNode', 'dirsNode', 'timeNode', 'allocineNode', 'plotNode',
 						'prodsNode', 'compsNode', 'scensNode' ):
 			entryNode.appendChild(eval(name))
 
@@ -210,19 +219,20 @@ class AlloCineParser:
 		self.__castURL = self.__baseURL + self.__castPath
 
 		# Define some regexps
-		self.__regExps = { 	
+		self.__regExps = {
 			'title' 	: '<div class="titlebar">.*?<h1>(?P<title>.+?)</h1>',
 			'dirs'		: """alis.*?par.*?<a.*?>(?P<step1>.+?)</a>""",
 			'nat'		: 'Long-m.*?(?P<nat>.+?)\.',
-			'genres' 	: 'Genre *?:(?P<step1>.+?)<br/>',
-			'time' 		: 'Dur.*?:.*?(?P<hours>[0-9])h *(?P<mins>[0-9]*).*?Ann',
-			'year' 		: 'Ann.*?e de production.*?:.*?<a.*?>(?P<year>[0-9]{4})</a>',
-			'otitle' 	: 'Titre original.*?:.*?<span.*?>(?P<otitle>.+?)</span>',
-			'plot'		: """Synopsis.*?:.*?</span>(?P<plot>.*?)</p>""",
-			'image'		: """<em class="imagecontainer">.*?<a href="/film/fichefilm-.*?/affiches/".*?<img(?P<image>.+?)".?"""
+			'genres' 	: 'Genre :(?P<step1>.+?)<br />',
+			'studio' 	: 'Distributeur :(?P<step1>.+?)<br />',
+			'time' 		: 'Dur.*?e :.*?(?P<hours>[0-9])h *(?P<mins>[0-9]*).*?Ann',
+			'year' 		: 'Ann.*?e de production :.*?<a.*?>(?P<year>[0-9]{4})</a>',
+			'otitle' 	: 'Titre original :.*?<span.*?>(?P<otitle>.+?)</span>',
+			'plot'		: 'Synopsis : </span>(?P<plot>.*?)</p>',
+			'image'		: '<em class="imagecontainer">.*?<a href="/film/fichefilm-.*?/affiches/".*?<img(?P<image>.+?)".?'
 		}
 
-		self.__castRegExps = {	
+		self.__castRegExps = {
 			'roleactor'		: '<div class="contenzone">.*?<a href="/personne/.*?">(.*?)</a>.*?<p>.*?R.*?: (?P<role>.*?)</p>.*?<div class="spacer"',
 			'prods'			: '<td>.*?Producteur.*?</td>.*?<td>.*?<a href="/personne/.*?">(.*?)</a>',
 			'scens'			: '<td>.*?nariste.*?</td>.*?<td>.*?<a href="/personne/.*?">(.*?)</a>',
@@ -294,7 +304,7 @@ class AlloCineParser:
 
 				elif name == 'nat':
 					natList = re.findall(r'<a.*?>(.*?)</a>', matches[name].group(name))
-					data[name] = []				
+					data[name] = []
 					for d in natList:
 						data[name].append(d.strip().capitalize())
 
@@ -303,6 +313,12 @@ class AlloCineParser:
 					data[name] = []
 					for d in genresList:
 						data[name].append(d.strip().capitalize())
+
+				elif name == 'studio':
+					studiosList = re.findall(r'<a.*?>(.*?)</a>', matches[name].group('step1'))
+					data[name] = []
+					for d in studiosList:
+						data[name].append(d.strip())
 
 				elif name == 'time':
 					h, m = matches[name].group('hours'), matches[name].group('mins')
@@ -361,7 +377,7 @@ class AlloCineParser:
 		data['prods'] = []
 		data['scens'] = []
 		data['comps'] = []
-			
+
 		# Actors
 		subset = re.search(r'Acteurs, r.*$', self.__data, re.S | re.I)
 		if not subset: return data

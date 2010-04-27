@@ -39,7 +39,7 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
-  void testKeyword();
+  void testTitle();
 
   void slotResult(KJob* job);
 
