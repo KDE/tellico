@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 
 # ***************************************************************************
-#    copyright            : (C) 2006-2009 by Mathias Monnerville
+#    copyright            : (C) 2006-2010 by Mathias Monnerville
 #    email                : tellico@monnerville.com
 # ***************************************************************************
 #
@@ -14,7 +14,7 @@
 # *                                                                         *
 # ***************************************************************************
 #
-# Version 0.7.1: 2010-04-26
+# Version 0.7.1: 2010-04-26 (Thanks to Romain Henriet <romain-devel@laposte.net>)
 # * Fixed greedy regexp for genre.  Fixed nationality output. Add studio.
 #
 # Version 0.7: 2009-11-12
@@ -49,7 +49,7 @@ import locale
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.6"
+VERSION = "0.7.1"
 
 def genMD5():
 	float = random.random()
