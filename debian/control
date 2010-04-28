@@ -2,8 +2,8 @@ Source: tellico
 Section: kde
 Priority: optional
 Maintainer: Regis Boudin <regis@debian.org>
-Build-Depends: debhelper (>= 7), pkg-kde-tools, kdelibs5-dev, libxml2-dev, libxslt1-dev, libtag1-dev, libyaz3-dev, libkcddb-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev, libqimageblitz-dev, libksane-dev, libv4l-dev | not+linux-gnu
-Standards-Version: 3.8.3
+Build-Depends: debhelper (>= 7), pkg-kde-tools, kdelibs5-dev, libxml2-dev, libxslt1-dev, libtag1-dev, libyaz4-dev, libkcddb-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev, libqimageblitz-dev, libksane-dev, libv4l-dev | not+linux-gnu
+Standards-Version: 3.8.4
 Homepage: http://tellico-project.org/
 Vcs-Svn: svn://anonsvn.kde.org/home/kde/trunk/extragear/office/tellico
 

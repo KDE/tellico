@@ -1,8 +1,25 @@
-tellico (2.1.1-3) unstable; urgency=low
+tellico (2.2-3) unstable; urgency=low
 
+  * Bump build-depends from libyaz3-dev to libyaz4-dev. Don't bother about
+    about backportability for now. Closes: #576780
+
+ -- Regis Boudin <regis@debian.org>  Sun, 11 Apr 2010 23:27:48 +0100
+
+tellico (2.2-2) unstable; urgency=low
+
+  * Install the i18n files again, which were removed by mistake. Thanks to
+    Luigi Toscano. Closes: #572802 
+
+ -- Regis Boudin <regis@debian.org>  Sat, 20 Mar 2010 13:10:30 +0000
+
+tellico (2.2-1) unstable; urgency=low
+
+  * New upstream release.
   * Update debhelper compatibility level to 7.
+  * Bump Standards-Version to 3.8.4.
+  * Stop shipping now unused KDE3 desktop file for mime types.
 
- -- Regis Boudin <regis@debian.org>  Fri, 01 Jan 2010 16:05:18 +0100
+ -- Regis Boudin <regis@debian.org>  Thu, 18 Feb 2010 01:33:48 +0000
 
 tellico (2.1.1-2) unstable; urgency=low
 
