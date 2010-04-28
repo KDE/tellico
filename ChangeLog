@@ -1,3 +1,7 @@
+2010-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated allocine.fr script to version 0.7.1.
+
 2010-03-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with cursor position in date field entry.
