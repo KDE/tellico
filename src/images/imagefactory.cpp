@@ -275,8 +275,9 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   }
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
   ImageDirectory* imgDir = dir_ == DataDir ? &factory->d->dataImageDir :
-                           dir_ == TempDir ? &factory->d->tempImageDir :
-                           &factory->d->localImageDir;
+                          (dir_ == TempDir ? &factory->d->tempImageDir :
+                                             &factory->d->localImageDir);
+  Q_ASSERT(imgDir);
   bool exists = imgDir->hasImage(id_);
   // only write if it doesn't exist
   bool success = (!force_ && exists);
@@ -290,17 +291,20 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
   if(success) {
     // remove from dict and add to cache
     // it might not be in dict though
-    Data::Image* img = factory->d->imageDict.take(id_);
-    if(img && factory->d->imageCache.insert(img->id(), img, img->numBytes())) {
-      s_imageInfoMap.remove(id_);
-    } else if(img) {
+    if(factory->d->imageDict.contains(id_)) {
+      Data::Image* img = factory->d->imageDict.take(id_);
+      Q_ASSERT(img);
+      if(factory->d->imageCache.insert(img->id(), img, img->numBytes())) {
+        s_imageInfoMap.remove(id_);
+      } else {
 //      myLog() << "failed writing image to cache:" << id_;
 //      myLog() << "removed from dict, deleting:" << img->id();
 //      myLog() << "current dict size:" << d->imageDict.count();
       // can't insert it in the cache, so put it back in the dict
       // No, it's written to disk now, so we're safe
 //      d->imageDict.insert(img->id(), img);
-      delete img;
+        delete img;
+      }
     }
   }
   return success;
