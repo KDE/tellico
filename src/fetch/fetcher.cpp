@@ -36,6 +36,7 @@
 
 #include <QDBusInterface>
 #include <QDBusReply>
+#include <QUuid>
 
 using namespace Tellico::Fetch;
 using Tellico::Fetch::Fetcher;
@@ -49,6 +50,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
 
 Fetcher::~Fetcher() {
   KConfigGroup config(KGlobal::config(), m_configGroup);
+  config.writeEntry("Uuid", m_uid);
   saveConfigHook(config);
 }
 
@@ -95,6 +97,7 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
 }
 
 void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {
+  Q_ASSERT(config_.name() == groupName_);
   m_configGroup = groupName_;
 
   QString s = config_.readEntry("Name");
@@ -104,6 +107,11 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
   m_updateOverwrite = config_.readEntry("UpdateOverwrite", false);
   // it's called custom fields here, but it's really optional lists
   m_fields = config_.readEntry("Custom Fields", QStringList());
+  s = config_.readEntry("Uuid");
+  if(s.isEmpty()) {
+    s = QUuid::createUuid().toString();
+  }
+  m_uid = s;
   // be sure to read config for subclass
   readConfigHook(config_);
 }

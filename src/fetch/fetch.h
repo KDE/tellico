@@ -72,7 +72,8 @@ enum Type {
   TheMovieDB,
   MusicBrainz,
   GiantBomb,
-  OpenLibrary
+  OpenLibrary,
+  Multiple
 };
 
   }

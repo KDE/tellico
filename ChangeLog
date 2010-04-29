@@ -1,6 +1,7 @@
 2010-04-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Changed Amazon Japan video search to include DVDs.
+	* Added new fetcher for combining results from multiple sources.
 
 2010-04-27  Robby Stephenson  <robby@periapsis.org>
 
