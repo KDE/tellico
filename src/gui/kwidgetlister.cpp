@@ -61,11 +61,11 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mLayout->addWidget( mButtonBox );
 
   mBtnMore = new KPushButton( KGuiItem( i18nc( "more widgets", "More" ),
-                                        QLatin1String("button_more") ), mButtonBox );
+                                        QLatin1String("list-add") ), mButtonBox );
   mButtonBox->setStretchFactor( mBtnMore, 0 );
 
   mBtnFewer = new KPushButton( KGuiItem( i18nc( "fewer widgets", "Fewer" ),
-                                         QLatin1String("button_fewer") ), mButtonBox );
+                                         QLatin1String("list-remove") ), mButtonBox );
   mButtonBox->setStretchFactor( mBtnFewer, 0 );
 
   QWidget *spacer = new QWidget( mButtonBox );
