@@ -201,7 +201,13 @@ void AmazonFetcher::doSearch() {
       break;
 
     case Data::Collection::Video:
-      params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
+      // JP appears to have a bug where Video only returns VHS results
+      // DVD will return DVD, Blu-ray, etc. so just ignore VHS for JP users
+      if(m_site == JP) {
+        params.insert(QLatin1String("SearchIndex"), QLatin1String("DVD"));
+      } else {
+        params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
+      }
       params.insert(QLatin1String("SortIndex"), QLatin1String("relevancerank"));
       break;
 
@@ -224,16 +230,7 @@ void AmazonFetcher::doSearch() {
       return;
   }
 
-  // I have not been able to find any documentation about what character set to use
-  // when URL encoding the search term in the Amazon REST interface. But I do know
-  // that utf8 DOES NOT WORK. So I'm arbitrarily using iso-8859-1, except for JP.
-  // Why different for JP? Well, I've not received any bug reports from that direction yet
-
-//  QString value = KUrl::decode_string(value_, 106);
-//  QString value = QString::fromLocal8Bit(value_.toUtf8());
   QString value = request().value;
-  // a mibenum of 106 is utf-8, 4 is iso-8859-1, 0 means use user's locale,
-//  int mib = m_site == AmazonFetcher::JP ? 106 : 4;
 
   switch(request().key) {
     case Title:
@@ -798,12 +795,18 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
   } else if(token.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
     // skip, but go ahead and remove from title
     res = true;
+  } else if(token.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
+    // skip, but go ahead and remove from title
+    res = true;
   }
   if(token.indexOf(QLatin1String("blu-ray"), 0, Qt::CaseInsensitive) > -1) {
     entry->setField(QLatin1String("medium"), i18n("Blu-ray"));
     res = true;
   } else if(token.indexOf(QLatin1String("hd dvd"), 0, Qt::CaseInsensitive) > -1) {
     entry->setField(QLatin1String("medium"), i18n("HD DVD"));
+    res = true;
+  } else if(token.indexOf(QLatin1String("vhs"), 0, Qt::CaseInsensitive) > -1) {
+    entry->setField(QLatin1String("medium"), i18n("VHS"));
     res = true;
   }
   if(token.indexOf(QLatin1String("director's cut"), 0, Qt::CaseInsensitive) > -1 ||
