@@ -294,16 +294,9 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
     if(factory->d->imageDict.contains(id_)) {
       Data::Image* img = factory->d->imageDict.take(id_);
       Q_ASSERT(img);
+      // imageCache.insert will delete the image by itself if the cost exceeds the cache size
       if(factory->d->imageCache.insert(img->id(), img, img->numBytes())) {
         s_imageInfoMap.remove(id_);
-      } else {
-//      myLog() << "failed writing image to cache:" << id_;
-//      myLog() << "removed from dict, deleting:" << img->id();
-//      myLog() << "current dict size:" << d->imageDict.count();
-      // can't insert it in the cache, so put it back in the dict
-      // No, it's written to disk now, so we're safe
-//      d->imageDict.insert(img->id(), img);
-        delete img;
       }
     }
   }

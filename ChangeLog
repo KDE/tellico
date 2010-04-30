@@ -1,3 +1,7 @@
+2010-04-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for loading images whose size exceeded the cache size.
+
 2010-04-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Changed Amazon Japan video search to include DVDs.
