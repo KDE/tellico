@@ -86,7 +86,7 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
   // amazon can search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == UPC || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Amazon; }

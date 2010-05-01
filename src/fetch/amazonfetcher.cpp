@@ -124,6 +124,15 @@ bool AmazonFetcher::canFetch(int type) const {
          || type == Data::Collection::BoardGame;
 }
 
+bool AmazonFetcher::canSearch(FetchKey k) const {
+  // no UPC in Canada
+  return k == Title
+         || k == Person
+         || k == ISBN
+         || (k == UPC && m_site != CA)
+         || k == Keyword;
+}
+
 void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   const int site = config_.readEntry("Site", int(Unknown));
   Q_ASSERT(site != Unknown);
@@ -201,9 +210,9 @@ void AmazonFetcher::doSearch() {
       break;
 
     case Data::Collection::Video:
-      // JP appears to have a bug where Video only returns VHS results
-      // DVD will return DVD, Blu-ray, etc. so just ignore VHS for JP users
-      if(m_site == JP) {
+      // CA and JP appear to have a bug where Video only returns VHS or Music results
+      // DVD will return DVD, Blu-ray, etc. so just ignore VHS for those users
+      if(m_site == CA || m_site == JP) {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("DVD"));
       } else {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
