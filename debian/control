@@ -12,6 +12,7 @@ Replaces: tellico-data (<= 1.2.14-1)
 Architecture: any
 Depends: tellico-data (= ${source:Version}), tellico-scripts, ${shlibs:Depends}, ${misc:Depends}
 Recommends: khelpcenter4
+Suggests: kaddressbook, korganizer
 Description: collection manager for books, videos, music
  Tellico is a collection manager for KDE. It includes default collections for
  books, bibliographies, comic books, videos, music, coins, stamps, trading

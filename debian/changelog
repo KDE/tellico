@@ -1,3 +1,12 @@
+tellico (2.2-4) unstable; urgency=low
+
+  * Ignore kdepim-runtime Dependency so tellico doesn't pull the entire
+    Akonadi infrastructure.
+  * Suggest kaddressbook and korganizer, which are needed if someone wants to
+    use the kdepim related features.
+
+ -- Regis Boudin <regis@debian.org>  Sat, 01 May 2010 14:14:31 +0200
+
 tellico (2.2-3) unstable; urgency=low
 
   * Bump build-depends from libyaz3-dev to libyaz4-dev. Don't bother about
