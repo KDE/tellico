@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_OPENLIBRARYFETCHER_H
-#define TELLICO_OPENLIBRARYFETCHER_H
+#ifndef TELLICO_FREEBASEFETCHER_H
+#define TELLICO_FREEBASEFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
@@ -40,30 +40,30 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for openlibrary.org
+ * A fetcher for freebase.com
  *
  * @author Robby Stephenson
  */
-class OpenLibraryFetcher : public Fetcher {
+class FreebaseFetcher : public Fetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  OpenLibraryFetcher(QObject* parent);
+  FreebaseFetcher(QObject* parent);
   /**
    */
-  virtual ~OpenLibraryFetcher();
+  virtual ~FreebaseFetcher();
 
   /**
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return OpenLibrary; }
+  virtual Type type() const { return Freebase; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
@@ -74,7 +74,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const FreebaseFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   };
@@ -91,8 +91,6 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
-  void doCoverOnly();
-  QString getAuthorKeys();
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

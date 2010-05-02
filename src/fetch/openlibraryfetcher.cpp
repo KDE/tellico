@@ -44,7 +44,6 @@
 #include <QTextCodec>
 
 #ifdef HAVE_QJSON
-#include <qjson/serializer.h>
 #include <qjson/parser.h>
 #endif
 

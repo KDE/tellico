@@ -1,3 +1,7 @@
+2010-05-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for Freebase.
+
 2010-04-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug for loading images whose size exceeded the cache size.

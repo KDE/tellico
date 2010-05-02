@@ -19,6 +19,7 @@ SET(fetch_STAT_SRCS
    fetcherjob.cpp
    fetchmanager.cpp
    fetchresult.cpp
+   freebasefetcher.cpp
    gcstarpluginfetcher.cpp
    giantbombfetcher.cpp
    googlescholarfetcher.cpp
@@ -46,6 +47,7 @@ TARGET_LINK_LIBRARIES(fetch
     newstuff
     btparse
     )
+
 IF( YAZ_FOUND )
   TARGET_LINK_LIBRARIES(fetch ${YAZ_LIBRARIES})
 ENDIF( YAZ_FOUND )
