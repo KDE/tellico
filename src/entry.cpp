@@ -199,7 +199,7 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   }
 
   if(m_coll->fields().isEmpty()) {
-    myDebug() << "collectionn has no fields, can't add -" << name_;
+    myDebug() << "collection has no fields, can't add -" << name_;
     return false;
   }
 

@@ -25,6 +25,7 @@
 #include <config.h>
 #include "freebasefetcher.h"
 #include "../collections/bookcollection.h"
+#include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/guiproxy.h"
@@ -52,6 +53,7 @@ namespace {
   // always bibtex
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
   static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
+  static const char* FREEBASE_BLURB_URL = "http://www.freebase.com/api/trans/blurb";
 
   QString value(const QVariantMap& map, const char* name) {
     const QVariant v = map.value(QLatin1String(name));
@@ -96,11 +98,12 @@ QString FreebaseFetcher::source() const {
 }
 
 bool FreebaseFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book;
+  return type == Data::Collection::Book
+         || type == Data::Collection::Game;
 }
 
 bool FreebaseFetcher::canSearch(FetchKey k) const {
-  return k == ISBN;
+  return k == Title || k == ISBN;
 }
 
 void FreebaseFetcher::readConfigHook(const KConfigGroup&) {
@@ -127,35 +130,10 @@ void FreebaseFetcher::doSearch() {
   switch(type) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
-      // null properties for books
       query.insert(QLatin1String("type"), QLatin1String("/book/book_edition"));
-//      query.insert(QLatin1String("publisher"), QVariantList());
-//      query.insert(QLatin1String("publication_date"), QVariantList());
-//      query.insert(QLatin1String("name"), QVariantList());
-//      query.insert(QLatin1String("number_of_pages"), QVariantList());
-//      query.insert(QLatin1String("LCCN"), QVariantList());
-//      query.insert(QLatin1String("binding"), QVariantList());
-      break;
 
-    default:
-      myWarning() << "collection type not available:" << type;
-      stop();
-      return;
-  }
-
-  // grab all properties at the entity level
-  query.insert(QLatin1String("*"), QVariantList());
-  switch(request().key) {
-    case ISBN:
       {
-        QVariantMap isbn_query;
-        // search for both ISBN10 and ISBN13
-        QVariantList isbns;
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
-        isbn_query.insert(QLatin1String("name|="), isbns);
-        query.insert(QLatin1String("isbn"), isbn_query);
-
+        // null properties for books
         QVariantMap book_query;
         book_query.insert(QLatin1String("type"), QLatin1String("/book/book"));
         book_query.insert(QLatin1String("*"), QVariantList());
@@ -175,10 +153,45 @@ void FreebaseFetcher::doSearch() {
         page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
         page_query.insert(QLatin1String("numbered_pages"), QVariantList());
         query.insert(QLatin1String("number_of_pages"), page_query);
+      }
+      break;
 
-        QVariantMap image_query;
-        image_query.insert(QLatin1String("id"), QVariantList());
-        query.insert(QLatin1String("/common/topic/image"), image_query);
+    case Data::Collection::Game:
+      query.insert(QLatin1String("type"), QLatin1String("/cvg/computer_videogame"));
+      break;
+
+    default:
+      myWarning() << "collection type not available:" << type;
+      stop();
+      return;
+  }
+
+  // grab id for every query, for image and article
+  QVariantMap id_query;
+  id_query.insert(QLatin1String("id"), QVariantList());
+  id_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  id_query.insert(QLatin1String("limit"), 1);
+  query.insert(QLatin1String("/common/topic/image"), id_query);
+  query.insert(QLatin1String("/common/topic/article"), id_query);
+
+  // grab all properties at the entity level
+  query.insert(QLatin1String("*"), QVariantList());
+
+  switch(request().key) {
+    case Title:
+      // full wildcard search on both sides of the search string
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case ISBN:
+      {
+        QVariantMap isbn_query;
+        // search for both ISBN10 and ISBN13
+        QVariantList isbns;
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
+        isbn_query.insert(QLatin1String("name|="), isbns);
+        query.insert(QLatin1String("isbn"), isbn_query);
       }
       break;
 
@@ -193,7 +206,7 @@ void FreebaseFetcher::doSearch() {
 
   QJson::Serializer serializer;
   QByteArray query_string = serializer.serialize(map);
-  myDebug() << "query:" << query_string;
+//  myDebug() << "query:" << query_string;
 
   KUrl u(FREEBASE_QUERY_URL);
   u.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
@@ -260,7 +273,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
     return;
   }
 
-#if 1
+#if 0
     myWarning() << "Remove debug from freebasefetcher.cpp";
     QFile f(QString::fromLatin1("/tmp/test.json"));
     if(f.open(QIODevice::WriteOnly)) {
@@ -289,7 +302,23 @@ void FreebaseFetcher::slotComplete(KJob*) {
     return;
   }
 
-  Data::CollPtr coll(new Data::BookCollection(true));
+  const int type = collectionType();
+
+  Data::CollPtr coll;
+  switch(type) {
+    case Data::Collection::Book:
+      coll = Data::CollPtr(new Data::BookCollection(true));
+      break;
+
+    case Data::Collection::Game:
+      coll = Data::CollPtr(new Data::GameCollection(true));
+      break;
+
+    default:
+      myWarning() << "bad type!" << collectionType();
+      stop();
+      return;
+  }
 
   QString output;
 
@@ -301,19 +330,47 @@ void FreebaseFetcher::slotComplete(KJob*) {
     Data::EntryPtr entry(new Data::Entry(coll));
 
     entry->setField(QLatin1String("title"),     value(resultMap, "name"));
-    entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date"));
-    entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn"));
-    entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-    entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
-    entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
-    entry->setField(QLatin1String("binding"),   value(resultMap, "binding"));
-    entry->setField(QLatin1String("genre"),     value(resultMap, "book", "genre"));
-    entry->setField(QLatin1String("author"),    value(resultMap, "work:book", "author"));
-    entry->setField(QLatin1String("editor"),    value(resultMap, "work:book", "editor"));
-    entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date"));
-    entry->setField(QLatin1String("series"),    value(resultMap, "work:book", "part_of_series"));
-    entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
-    entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
+
+    switch(type) {
+      case Data::Collection::Book:
+        // book stuff
+        entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date"));
+        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn"));
+        entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
+        entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
+        entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
+        entry->setField(QLatin1String("binding"),   value(resultMap, "binding"));
+        entry->setField(QLatin1String("genre"),     value(resultMap, "book", "genre"));
+        entry->setField(QLatin1String("author"),    value(resultMap, "work:book", "author"));
+        entry->setField(QLatin1String("editor"),    value(resultMap, "work:book", "editor"));
+        entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date"));
+        entry->setField(QLatin1String("series"),    value(resultMap, "work:book", "part_of_series"));
+        entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
+        entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
+        break;
+
+      case Data::Collection::Game:
+        {
+          // video game stuff
+          entry->setField(QLatin1String("genre"),     value(resultMap, "cvg_genre"));
+          entry->setField(QLatin1String("developer"), value(resultMap, "developer"));
+          entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
+          const QStringList platforms = FieldFormat::splitValue(value(resultMap, "platforms"));
+          if(!platforms.isEmpty()) {
+            // just grab first one
+            entry->setField(QLatin1String("platform"), platforms.at(0));
+          }
+          const QString year = value(resultMap, "release_date");
+          if(year.length() >= 4)  {
+            // assume the year is first 4 characters
+            entry->setField(QLatin1String("year"), year.left(4));
+          }
+        }
+        break;
+
+      default:
+        break;
+    }
 
     const QString image_id = value(resultMap, "/common/topic/image", "id");
     if(!image_id.isEmpty()) {
@@ -325,9 +382,21 @@ void FreebaseFetcher::slotComplete(KJob*) {
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(id.isEmpty()) {
         message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-      } else { // amazon serves up 1x1 gifs occasionally, but that's caught in the image constructor
+      } else {
         // all relevant collection types have cover fields
         entry->setField(QLatin1String("cover"), id);
+      }
+   }
+
+    const QString article_id = value(resultMap, "/common/topic/article", "id");
+    if(!article_id.isEmpty()) {
+      KUrl articleUrl(FREEBASE_BLURB_URL);
+      articleUrl.addPath(article_id);
+      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
+      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+      const QString output = FileHandler::readTextFile(articleUrl, false, true);
+      if(!output.isEmpty()) {
+        entry->setField(QLatin1String("description"), output);
       }
    }
 

@@ -39,6 +39,8 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void testBookTitle();
+  void testGameTitle();
   void testISBN();
 
   void slotResult(KJob* job);
