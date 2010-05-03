@@ -32,11 +32,22 @@ using Tellico::ISBNValidator;
 
 //static
 QString ISBNValidator::isbn10(QString isbn13) {
+  QString original = isbn13;
+  isbn13.remove(QLatin1Char('-'));
+  if(isbn13.length() == 10) {
+    fixup10(isbn13);
+    return isbn13;
+  }
   if(!isbn13.startsWith(QLatin1String("978"))) {
+    myDebug() << "BAD! Trying to isbn10" << isbn13;
+    return original;
+  }
+  if(isbn13.length() < 13) {
+    myDebug() << "BAD! Trying to isbn10" << isbn13;
+    fixup10(isbn13);
     return isbn13;
   }
   isbn13 = isbn13.mid(3);
-  isbn13.remove(QLatin1Char('-'));
   // remove checksum
   isbn13.truncate(isbn13.length()-1);
   // add new checksum
@@ -47,8 +58,13 @@ QString ISBNValidator::isbn10(QString isbn13) {
 
 QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.remove(QLatin1Char('-'));
-  if(isbn10.startsWith(QLatin1String("978")) ||
-     isbn10.startsWith(QLatin1String("979"))) {
+  if(isbn10.length() < 10) {
+    myDebug() << "BAD! Tring to isbn113" << isbn10;
+    return isbn10;
+  }
+  if(isbn10.length() > 10) {
+    // assume it's already an isbn13 value
+    fixup13(isbn10);
     return isbn10;
   }
   // remove checksum

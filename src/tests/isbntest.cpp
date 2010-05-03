@@ -117,6 +117,7 @@ void IsbnTest::testIsbn10_data() {
   QTest::addColumn<QString>("string");
   QTest::addColumn<QString>("expectedIsbn");
 
+  QTest::newRow("0-06-087298-5") << QL1("0-06-087298-5") << QL1("0-06-087298-5");
   QTest::newRow("978-0-06-087298-4") << QL1("978-0-06-087298-4") << QL1("0-06-087298-5");
 }
 
@@ -132,6 +133,7 @@ void IsbnTest::testIsbn13_data() {
   QTest::addColumn<QString>("expectedIsbn");
 
   QTest::newRow("0-06-087298-5") << QL1("0-06-087298-5") << QL1("978-0-06-087298-4");
+  QTest::newRow("9780-06-087298-4") << QL1("9780-06-087298-4") << QL1("978-0-06-087298-4");
 }
 
 void IsbnTest::testComparison() {

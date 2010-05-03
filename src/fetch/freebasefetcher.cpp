@@ -51,6 +51,7 @@
 namespace {
   // always bibtex
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
+  static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
 
   QString value(const QVariantMap& map, const char* name) {
     const QVariant v = map.value(QLatin1String(name));
@@ -170,6 +171,10 @@ void FreebaseFetcher::doSearch() {
         page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
         page_query.insert(QLatin1String("numbered_pages"), QVariantList());
         query.insert(QLatin1String("number_of_pages"), page_query);
+
+        QVariantMap image_query;
+        image_query.insert(QLatin1String("id"), QVariantList());
+        query.insert(QLatin1String("/common/topic/image"), image_query);
       }
       break;
 
@@ -305,6 +310,22 @@ void FreebaseFetcher::slotComplete(KJob*) {
     entry->setField(QLatin1String("series"),    value(resultMap, "work:book", "part_of_series"));
     entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
     entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
+
+    const QString image_id = value(resultMap, "/common/topic/image", "id");
+    if(!image_id.isEmpty()) {
+      // let's set max image size to 200x200
+      KUrl imageUrl(FREEBASE_IMAGE_URL);
+      imageUrl.addPath(image_id);
+      imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
+      imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
+      const QString id = ImageFactory::addImage(imageUrl, true);
+      if(id.isEmpty()) {
+        message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+      } else { // amazon serves up 1x1 gifs occasionally, but that's caught in the image constructor
+        // all relevant collection types have cover fields
+        entry->setField(QLatin1String("cover"), id);
+      }
+   }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);

@@ -69,6 +69,7 @@ void FreebaseFetcherTest::testISBN() {
   QCOMPARE(entry->field(QLatin1String("lccn")), QLatin1String("2004022605"));
   QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Trade Paperback"));
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("220"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
 void FreebaseFetcherTest::slotResult(KJob* job_) {
