@@ -149,7 +149,11 @@ void FreebaseFetcher::doSearch() {
     case ISBN:
       {
         QVariantMap isbn_query;
-        isbn_query.insert(QLatin1String("name"), ISBNValidator::cleanValue(request().value));
+        // search for both ISBN10 and ISBN13
+        QVariantList isbns;
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
+        isbn_query.insert(QLatin1String("name|="), isbns);
         query.insert(QLatin1String("isbn"), isbn_query);
 
         QVariantMap book_query;
