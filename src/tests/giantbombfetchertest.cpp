@@ -51,7 +51,7 @@ void GiantBombFetcherTest::initTestCase() {
 
 void GiantBombFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Halo 3"));
+                                       QLatin1String("Halo 3: ODST"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GiantBombFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -70,7 +70,7 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
   QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Shooter; Action; First-Person Shooter"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Game Studios; 343 Industries"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Game Studios"));
 }
 
 void GiantBombFetcherTest::slotResult(KJob* job_) {

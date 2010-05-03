@@ -249,6 +249,17 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     return;
   }
 
+#if 0
+  myWarning() << "Remove debug from openlibraryfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec(QTextCodec::codecForName("UTF-8"));
+    t << data;
+  }
+  f.close();
+#endif
+
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
@@ -262,23 +273,10 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 
   Data::CollPtr coll(new Data::BookCollection(true));
 
-  QString output;
-
   QVariantMap resultMap;
   foreach(const QVariant& result, resultList) {
   //  myDebug() << "found result:" << result;
     resultMap = result.toMap();
-
-#if 0
-  myWarning() << "Remove debug from openlibraryfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.json"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
-    t << output;
-  }
-  f.close();
-#endif
 
 //  myDebug() << resultMap.value(QLatin1String("isbn_10")).toList().at(0);
 
@@ -316,8 +314,9 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
         authorUrl.addQueryItem(QLatin1String("key"), key);
         authorUrl.addQueryItem(QLatin1String("name"), QString());
 
-        output = FileHandler::readTextFile(authorUrl, false /*quiet*/, true /*utf8*/);
-        QVariantMap authorResult = parser.parse(output.toUtf8()).toList().at(0).toMap();
+        QString output = FileHandler::readTextFile(authorUrl, false /*quiet*/, true /*utf8*/);
+        QVariantList authorList = parser.parse(output.toUtf8()).toList();
+        QVariantMap authorResult = authorList.isEmpty() ? QVariantMap() : authorList.at(0).toMap();
         const QString name = value(authorResult, "name");
         if(!name.isEmpty()) {
           authors << name;
@@ -337,8 +336,9 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
         langUrl.addQueryItem(QLatin1String("key"), key);
         langUrl.addQueryItem(QLatin1String("name"), QString());
 
-        output = FileHandler::readTextFile(langUrl, false /*quiet*/, true /*utf8*/);
-        QVariantMap langResult = parser.parse(output.toUtf8()).toList().at(0).toMap();
+        QString output = FileHandler::readTextFile(langUrl, false /*quiet*/, true /*utf8*/);
+        QVariantList langList = parser.parse(output.toUtf8()).toList();
+        QVariantMap langResult = langList.isEmpty() ? QVariantMap() : langList.at(0).toMap();
         const QString name = value(langResult, "name");
         if(!name.isEmpty()) {
           langs << i18n(name.toUtf8());

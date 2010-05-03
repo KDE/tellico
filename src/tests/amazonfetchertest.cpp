@@ -128,9 +128,10 @@ void AmazonFetcherTest::testTitle() {
       QEXPECT_FAIL("CA video title", "CA video titles show music results for some reason", Continue);
     }
     QString result = entry->field(i.key()).toLower();
-    // and FR title having edition info
-    if(collType == Tellico::Data::Collection::Video && locale == QLatin1String("FR")) {
-      QVERIFY(result.contains(i.value(), Qt::CaseInsensitive));
+    // CA and FR titles have edition info in the title
+    if(collType == Tellico::Data::Collection::Video &&
+       (locale == QLatin1String("FR") || locale == QLatin1String("FR"))) {
+      QVERIFY(result.startsWith(i.value(), Qt::CaseInsensitive));
     } else {
       QCOMPARE(result, i.value().toLower());
     }
@@ -247,7 +248,6 @@ void AmazonFetcherTest::testUpc() {
   job->start();
   m_loop.exec();
 
-  QEXPECT_FAIL("CA movie upc", "CA UPC movie searches fail for an unknown reason", Abort);
   QVERIFY(!m_results.isEmpty());
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
