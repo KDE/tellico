@@ -24,8 +24,7 @@
 
 #include <config.h>
 #include "freebasefetcher.h"
-#include "../collections/bookcollection.h"
-#include "../collections/gamecollection.h"
+#include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/guiproxy.h"
@@ -99,7 +98,8 @@ QString FreebaseFetcher::source() const {
 
 bool FreebaseFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
-         || type == Data::Collection::Game;
+         || type == Data::Collection::Game
+         || type == Data::Collection::BoardGame;
 }
 
 bool FreebaseFetcher::canSearch(FetchKey k) const {
@@ -160,6 +160,18 @@ void FreebaseFetcher::doSearch() {
       query.insert(QLatin1String("type"), QLatin1String("/cvg/computer_videogame"));
       break;
 
+    case Data::Collection::BoardGame:
+      query.insert(QLatin1String("type"), QLatin1String("/games/game"));
+
+      {
+        QVariantMap player_query;
+        player_query.insert(QLatin1String("type"), QLatin1String("/measurement_unit/integer_range"));
+        player_query.insert(QLatin1String("high_value"), QVariantList());
+        player_query.insert(QLatin1String("low_value"), QVariantList());
+        query.insert(QLatin1String("number_of_players"), player_query);
+      }
+      break;
+
     default:
       myWarning() << "collection type not available:" << type;
       stop();
@@ -206,7 +218,7 @@ void FreebaseFetcher::doSearch() {
 
   QJson::Serializer serializer;
   QByteArray query_string = serializer.serialize(map);
-//  myDebug() << "query:" << query_string;
+  myDebug() << "query:" << query_string;
 
   KUrl u(FREEBASE_QUERY_URL);
   u.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
@@ -304,21 +316,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
   const int type = collectionType();
 
-  Data::CollPtr coll;
-  switch(type) {
-    case Data::Collection::Book:
-      coll = Data::CollPtr(new Data::BookCollection(true));
-      break;
-
-    case Data::Collection::Game:
-      coll = Data::CollPtr(new Data::GameCollection(true));
-      break;
-
-    default:
-      myWarning() << "bad type!" << collectionType();
-      stop();
-      return;
-  }
+  Data::CollPtr coll = CollectionFactory::collection(type, true);
 
   QString output;
 
@@ -364,6 +362,25 @@ void FreebaseFetcher::slotComplete(KJob*) {
           if(year.length() >= 4)  {
             // assume the year is first 4 characters
             entry->setField(QLatin1String("year"), year.left(4));
+          }
+        }
+        break;
+
+      case Data::Collection::BoardGame:
+        {
+          // video game stuff
+          entry->setField(QLatin1String("genre"),     value(resultMap, "genre"));
+          entry->setField(QLatin1String("designer"),  value(resultMap, "designer"));
+          entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
+          entry->setField(QLatin1String("year"),      value(resultMap, "introduced"));
+          const int minPlayers = value(resultMap, "number_of_players", "low_value").toInt();
+          const int maxPlayers = value(resultMap, "number_of_players", "high_value").toInt();
+          if(minPlayers > 0 && maxPlayers > 0) {
+            QStringList players;
+            for(int i = minPlayers; i <= maxPlayers; ++i) {
+              players << QString::number(i);
+            }
+            entry->setField(QLatin1String("num-player"), players.join(Tellico::FieldFormat::delimiterString()));
           }
         }
         break;
