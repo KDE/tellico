@@ -103,7 +103,7 @@ bool FreebaseFetcher::canFetch(int type) const {
 }
 
 bool FreebaseFetcher::canSearch(FetchKey k) const {
-  return k == Title || k == ISBN;
+  return k == Title || k == Person || k == ISBN;
 }
 
 void FreebaseFetcher::readConfigHook(const KConfigGroup&) {
@@ -195,6 +195,15 @@ void FreebaseFetcher::doSearch() {
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
       break;
 
+    case Person:
+      // for now just check author, and need to use written_work topic_query
+      {
+        QVariantMap work_query = query.value(QLatin1String("work:book")).toMap();
+        work_query.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        query.insert(QLatin1String("work:book"), work_query);
+      }
+      break;
+
     case ISBN:
       {
         QVariantMap isbn_query;
@@ -213,11 +222,14 @@ void FreebaseFetcher::doSearch() {
       return;
   }
 
-  QVariantMap map;
-  map.insert(QLatin1String("query"), query);
+  QVariantList queryList;
+  queryList.append(query);
+
+  QVariantMap queryMap;
+  queryMap.insert(QLatin1String("query"), queryList);
 
   QJson::Serializer serializer;
-  QByteArray query_string = serializer.serialize(map);
+  QByteArray query_string = serializer.serialize(queryMap);
   myDebug() << "query:" << query_string;
 
   KUrl u(FREEBASE_QUERY_URL);
@@ -306,6 +318,18 @@ void FreebaseFetcher::slotComplete(KJob*) {
     resultList = resultThing.toList();
   } else if(!resultThing.isNull()) {
     resultList.append(resultThing.toMap());
+  } else {
+    QVariantMap top = parser.parse(data).toMap();
+    QVariant msg = top.value(QLatin1String("message"));
+    if(msg.isNull()) {
+      msg = top.value(QLatin1String("messages"));
+      if(!msg.isNull()) {
+        msg = msg.toMap().value(QLatin1String("message"));
+      }
+    }
+    if(!msg.isNull()) {
+      myDebug() << "message:" << msg.toString();
+    }
   }
 
   if(resultList.isEmpty()) {

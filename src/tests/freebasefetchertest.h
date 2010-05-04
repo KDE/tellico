@@ -40,6 +40,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testBookTitle();
+  void testBookAuthor();
   void testGameTitle();
   void testBoardGameTitle();
   void testISBN();
