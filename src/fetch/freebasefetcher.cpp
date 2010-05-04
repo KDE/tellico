@@ -27,6 +27,7 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
+#include "../utils/lccnvalidator.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
 #include "../entry.h"
@@ -49,7 +50,6 @@
 #endif
 
 namespace {
-  // always bibtex
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
   static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
   static const char* FREEBASE_BLURB_URL = "http://www.freebase.com/api/trans/blurb";
@@ -103,7 +103,7 @@ bool FreebaseFetcher::canFetch(int type) const {
 }
 
 bool FreebaseFetcher::canSearch(FetchKey k) const {
-  return k == Title || k == Person || k == ISBN;
+  return k == Title || k == Person || k == ISBN || k == LCCN;
 }
 
 void FreebaseFetcher::readConfigHook(const KConfigGroup&) {
@@ -215,6 +215,11 @@ void FreebaseFetcher::doSearch() {
         query.insert(QLatin1String("isbn"), isbn_query);
       }
       break;
+
+    case LCCN:
+      query.insert(QLatin1String("LCCN"), LCCNValidator::formalize(request().value));
+      break;
+
 
     default:
       myWarning() << "key not recognized: " << request().key;
@@ -356,19 +361,27 @@ void FreebaseFetcher::slotComplete(KJob*) {
     switch(type) {
       case Data::Collection::Book:
         // book stuff
-        entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date"));
+        entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
         entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn"));
         entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
         entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
-        entry->setField(QLatin1String("binding"),   value(resultMap, "binding"));
-        entry->setField(QLatin1String("genre"),     value(resultMap, "book", "genre"));
         entry->setField(QLatin1String("author"),    value(resultMap, "work:book", "author"));
         entry->setField(QLatin1String("editor"),    value(resultMap, "work:book", "editor"));
-        entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date"));
+        entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date").left(4));
         entry->setField(QLatin1String("series"),    value(resultMap, "work:book", "part_of_series"));
         entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
+        entry->setField(QLatin1String("genre"), FieldFormat::capitalize(value(resultMap, "book", "genre")));
+        {
+          QString binding = value(resultMap, "binding");
+          if(binding.toLower() == QLatin1String("hardcover")) {
+            binding = i18n("Hardback");
+          } else {
+            binding = FieldFormat::capitalize(binding);
+          }
+          entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8()));
+        }
         break;
 
       case Data::Collection::Game:
@@ -377,15 +390,11 @@ void FreebaseFetcher::slotComplete(KJob*) {
           entry->setField(QLatin1String("genre"),     value(resultMap, "cvg_genre"));
           entry->setField(QLatin1String("developer"), value(resultMap, "developer"));
           entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
+          entry->setField(QLatin1String("year"),      value(resultMap, "release_date").left(4));
           const QStringList platforms = FieldFormat::splitValue(value(resultMap, "platforms"));
           if(!platforms.isEmpty()) {
             // just grab first one
-            entry->setField(QLatin1String("platform"), platforms.at(0));
-          }
-          const QString year = value(resultMap, "release_date");
-          if(year.length() >= 4)  {
-            // assume the year is first 4 characters
-            entry->setField(QLatin1String("year"), year.left(4));
+            entry->setField(QLatin1String("platform"), i18n(platforms.at(0).toUtf8()));
           }
         }
         break;
@@ -396,7 +405,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
           entry->setField(QLatin1String("genre"),     value(resultMap, "genre"));
           entry->setField(QLatin1String("designer"),  value(resultMap, "designer"));
           entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-          entry->setField(QLatin1String("year"),      value(resultMap, "introduced"));
+          entry->setField(QLatin1String("year"),      value(resultMap, "introduced").left(4));
           const int minPlayers = value(resultMap, "number_of_players", "low_value").toInt();
           const int maxPlayers = value(resultMap, "number_of_players", "high_value").toInt();
           if(minPlayers > 0 && maxPlayers > 0) {

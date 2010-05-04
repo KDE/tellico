@@ -180,6 +180,34 @@ void FreebaseFetcherTest::testISBN() {
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
+void FreebaseFetcherTest::testLCCN() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::LCCN,
+                                       QLatin1String("2004022605"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("c++ coding standards: 101 rules, guidelines, and best practices"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Addison-Wesley"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2004"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("9780321113580"));
+  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Herb Sutter"));
+  QCOMPARE(entry->field(QLatin1String("series")), QLatin1String("C++ In-Depth Series"));
+  QCOMPARE(entry->field(QLatin1String("lccn")), QLatin1String("2004022605"));
+  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Trade Paperback"));
+  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("220"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+}
+
 void FreebaseFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();

@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testGameTitle();
   void testBoardGameTitle();
   void testISBN();
+  void testLCCN();
 
   void slotResult(KJob* job);
 
