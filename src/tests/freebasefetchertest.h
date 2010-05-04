@@ -41,16 +41,18 @@ private Q_SLOTS:
   void initTestCase();
   void testBookTitle();
   void testBookAuthor();
-  void testGameTitle();
-  void testBoardGameTitle();
   void testISBN();
   void testLCCN();
+  void testMovieTitle();
+  void testGameTitle();
+  void testBoardGameTitle();
 
   void slotResult(KJob* job);
 
 private:
   QEventLoop m_loop;
   Tellico::Data::EntryList m_results;
+  QHash<QString, QHash<QString, QString> > m_fieldValues;
 };
 
 #endif

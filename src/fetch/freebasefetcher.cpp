@@ -75,6 +75,9 @@ namespace {
       return QString();
     } else if(v.canConvert(QVariant::Map)) {
       return value(v.toMap(), name);
+    } else if(v.canConvert(QVariant::List)) {
+      QVariantList list = v.toList();
+      return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
     } else {
       return QString();
     }
@@ -98,6 +101,7 @@ QString FreebaseFetcher::source() const {
 
 bool FreebaseFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
+         || type == Data::Collection::Video
          || type == Data::Collection::Game
          || type == Data::Collection::BoardGame;
 }
@@ -133,7 +137,6 @@ void FreebaseFetcher::doSearch() {
       query.insert(QLatin1String("type"), QLatin1String("/book/book_edition"));
 
       {
-        // null properties for books
         QVariantMap book_query;
         book_query.insert(QLatin1String("type"), QLatin1String("/book/book"));
         book_query.insert(QLatin1String("*"), QVariantList());
@@ -153,7 +156,29 @@ void FreebaseFetcher::doSearch() {
         page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
         page_query.insert(QLatin1String("numbered_pages"), QVariantList());
         query.insert(QLatin1String("number_of_pages"), page_query);
+
+        QVariantMap isbn_query;
+        isbn_query.insert(QLatin1String("type"), QLatin1String("/book/isbn"));
+        isbn_query.insert(QLatin1String("isbn"), QVariantList());
+        query.insert(QLatin1String("isbn"), isbn_query);
       }
+      break;
+
+    case Data::Collection::Video:
+      query.insert(QLatin1String("type"), QLatin1String("/film/film"));
+      {
+        QVariantMap time_query;
+        time_query.insert(QLatin1String("type"), QLatin1String("/film/film_cut"));
+        time_query.insert(QLatin1String("runtime"), QVariantList());
+        query.insert(QLatin1String("runtime"), QVariantList() << time_query);
+
+        QVariantMap cast_query;
+        cast_query.insert(QLatin1String("type"), QLatin1String("/film/performance"));
+        cast_query.insert(QLatin1String("actor"), QVariantList());
+        cast_query.insert(QLatin1String("character"), QVariantList());
+        query.insert(QLatin1String("starring"), QVariantList() << cast_query);
+      }
+
       break;
 
     case Data::Collection::Game:
@@ -206,12 +231,12 @@ void FreebaseFetcher::doSearch() {
 
     case ISBN:
       {
-        QVariantMap isbn_query;
+        QVariantMap isbn_query = query.value(QLatin1String("isbn")).toMap();
         // search for both ISBN10 and ISBN13
         QVariantList isbns;
         isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
         isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
-        isbn_query.insert(QLatin1String("name|="), isbns);
+        isbn_query.insert(QLatin1String("isbn|="), isbns);
         query.insert(QLatin1String("isbn"), isbn_query);
       }
       break;
@@ -356,13 +381,13 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
     Data::EntryPtr entry(new Data::Entry(coll));
 
-    entry->setField(QLatin1String("title"),     value(resultMap, "name"));
+    entry->setField(QLatin1String("title"), value(resultMap, "name"));
 
     switch(type) {
       case Data::Collection::Book:
         // book stuff
         entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
-        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn"));
+        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn",  "isbn"));
         entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
         entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
@@ -381,6 +406,35 @@ void FreebaseFetcher::slotComplete(KJob*) {
             binding = FieldFormat::capitalize(binding);
           }
           entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8()));
+        }
+        break;
+
+      case Data::Collection::Video:
+        {
+          entry->setField(QLatin1String("director"),      value(resultMap, "directed_by"));
+          entry->setField(QLatin1String("producer"),      value(resultMap, "produced_by"));
+          entry->setField(QLatin1String("writer"),        value(resultMap, "written_by"));
+          entry->setField(QLatin1String("composer"),      value(resultMap, "music"));
+          entry->setField(QLatin1String("studio"),        value(resultMap, "production_companies"));
+          entry->setField(QLatin1String("genre"),         value(resultMap, "genre"));
+          entry->setField(QLatin1String("nationality"),   value(resultMap, "country"));
+          entry->setField(QLatin1String("certification"), value(resultMap, "rating"));
+          entry->setField(QLatin1String("year"),          value(resultMap, "initial_release_date").left(4));
+          entry->setField(QLatin1String("running-time"),  value(resultMap, "runtime", "runtime"));
+
+          QStringList castList;
+          const QVariantList castResult = resultMap.value(QLatin1String("starring")).toList();
+          foreach(const QVariant& cast, castResult) {
+            QVariantMap castMap = cast.toMap();
+            if(!castMap.isEmpty()) {
+              QVariantList actor = castMap.value(QLatin1String("actor")).toList();
+              QVariantList role = castMap.value(QLatin1String("character")).toList();
+              if(!actor.isEmpty() && !role.isEmpty()) {
+                castList.append(actor.at(0).toString() + FieldFormat::columnDelimiterString() + role.at(0).toString());
+              }
+            }
+          }
+          entry->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
         }
         break;
 
@@ -446,7 +500,11 @@ void FreebaseFetcher::slotComplete(KJob*) {
       articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
       const QString output = FileHandler::readTextFile(articleUrl, false, true);
       if(!output.isEmpty()) {
-        entry->setField(QLatin1String("description"), output);
+        if(type == Data::Collection::Video) {
+          entry->setField(QLatin1String("plot"), output);
+        } else {
+          entry->setField(QLatin1String("description"), output);
+        }
       }
    }
 
