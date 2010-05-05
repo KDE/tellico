@@ -52,7 +52,7 @@ void ParaFieldWidget::setTextImpl(const QString& text_) {
   QRegExp rx(QLatin1String("<br/?>"), Qt::CaseInsensitive);
   QString s = text_;
   s.replace(rx, QLatin1String("\n"));
-  m_textEdit->setText(s);
+  m_textEdit->setPlainText(s);
 }
 
 void ParaFieldWidget::clearImpl() {
