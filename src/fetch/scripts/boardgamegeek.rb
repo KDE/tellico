@@ -65,6 +65,8 @@ class Game
     @id = id
     @publishers = []
     @designers = []
+    @genres = []
+    @mechanisms = []
     @players = []
   end
 
@@ -74,6 +76,14 @@ class Game
 
   def add_designer(designer)
     @designers << designer
+  end
+
+  def add_genre(genre)
+    @genres << genre
+  end
+
+  def add_mechanism(mechanism)
+    @mechanisms << mechanism
   end
 
   def add_players(players)
@@ -89,7 +99,7 @@ class Game
     element.add_element Element.new('title').add_text(@name)
     element.add_element Element.new('description').add_text(@description) if @description
     element.add_element Element.new('year').add_text(@year) if @year
-    element.add_element Element.new('boardgamegeek-link').add_text("http://www.boardgamegeek/game/#{@id}") if @id
+    element.add_element Element.new('boardgamegeek-link').add_text("http://www.boardgamegeek.com/boardgame/#{@id}") if @id
     element.add_element Element.new('bggid').add_text(@id) if @id
     element.add_element Element.new('cover').add_text(@cover) if @cover
 
@@ -101,6 +111,16 @@ class Game
     if @designers.length > 0
       des_elements = Element.new('designers')
       @designers.each {|d| des_elements.add_element Element.new('designer').add_text(d)}
+      element.add_element des_elements
+    end
+    if @genres.length > 0
+      des_elements = Element.new('genres')
+      @genres.each {|d| des_elements.add_element Element.new('genre').add_text(d)}
+      element.add_element des_elements
+    end
+    if @mechanisms.length > 0
+      des_elements = Element.new('mechanisms')
+      @mechanisms.each {|d| des_elements.add_element Element.new('mechanism').add_text(d)}
       element.add_element des_elements
     end
     if @players.length > 0
@@ -131,17 +151,17 @@ def getGameList(query)
   end
   doc = REXML::Document.new(search_result)
 
-  games = XPath.match(doc, "//game")
-  #games.each {|g| puts g.elements['name'].text+g.attributes['gameid']}
   ids = []
-  games.each {|g| ids << g.attributes['gameid']}
+  games = XPath.match(doc, "//boardgame")
+  games.to_a.sort! {|x,y| Integer(x.attributes['objectid']) <=> Integer(y.attributes['objectid'])}
+  games.each {|g| ids << g.attributes['objectid']}
   return ids
 end
 
 def getGameDetails(ids)
   #ids.each {|id| puts id}
 
-  query = "/xmlapi/game/#{ids.join(',')}"
+  query = "/xmlapi/boardgame/#{ids.join(',')}"
   #puts query
   search_result = nil
   Net::HTTP.start('www.boardgamegeek.com', 80) do |http|
@@ -153,29 +173,31 @@ def getGameDetails(ids)
   when Net::HTTPOK then
     doc = REXML::Document.new(search_result.body)
 
-    games_xml = XPath.match(doc, "//game")
+    games_xml = XPath.match(doc, "//boardgame")
     games_xml.each do |g|
       if( g.elements['name'] != nil )
-        game = Game.new(g.elements['name'].text, g.attributes['gameid'])
+        game = Game.new(g.elements['name[@primary=\'true\']'].text, g.attributes['objectid'])
         game.year = g.elements['yearpublished'].text
         game.description = g.elements['description'].text
-        g.elements.each('publisher'){|p| game.add_publisher p.elements['name'].text}
-        g.elements.each('designer'){|d| game.add_designer d.elements['name'].text}
+        g.elements.each('boardgamepublisher'){|p| game.add_publisher p.text}
+        g.elements.each('boardgamedesigner'){|d| game.add_designer d.text}
+        g.elements.each('boardgamecategory'){|c| game.add_genre c.text}
+        g.elements.each('boardgamemechanic'){|m| game.add_mechanism m.text}
         minp = Integer(g.elements['minplayers'].text)
         maxp = Integer(g.elements['maxplayers'].text)
         minp.upto(maxp) {|n| game.add_players(n)}
 
         # retrieve cover
         coverurl = g.elements['thumbnail'] != nil ? g.elements['thumbnail'].text : nil
-        if( coverurl =~ /files.boardgamegeek.com(.*)$/ )
+        if( coverurl =~ /images.boardgamegeek.com(.*)$/ )
           # puts "downloading... " + $1
           cover = nil
-          Net::HTTP.start('files.boardgamegeek.com', 80) do |http|
+          Net::HTTP.start('images.boardgamegeek.com', 80) do |http|
             cover = (http.get($1, {"User-Agent" => "BoardGameGeek plugin for Tellico #{$my_version}"}))
           end
           case cover
           when Net::HTTPOK then
-            game.cover = g.attributes['gameid'] + ".jpg";
+            game.cover = g.attributes['objectid'] + ".jpg";
             game.image = Base64.encode64(cover.body);
           end
         else
@@ -219,7 +241,7 @@ def listToXML(gameList)
   id = 0
   gameList.each do
     |g| element = g.toXML()
-        element.add_attribute('id', id)
+        element.add_attribute('id', String(id))
         id = id + 1
       collection.add_element(element)
       images.add_element(g.image());

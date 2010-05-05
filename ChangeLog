@@ -1,3 +1,7 @@
+2010-05-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated BoardGameGeek fetcher for new API.
+
 2010-05-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for Freebase.
