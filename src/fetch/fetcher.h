@@ -90,7 +90,7 @@ public:
   bool updateOverwrite() const;
   const FetchRequest& request() const;
   QStringList optionalFields() const { return m_fields; }
-  QString uid() const { return m_uid; }
+  QString uuid() const { return m_uuid; }
   /**
    * Starts a search, using a key and value. Calls search()
    */
@@ -158,7 +158,7 @@ private:
   MessageHandler* m_messager;
   QString m_configGroup;
   QStringList m_fields;
-  QString m_uid;
+  QString m_uuid;
 };
 
   } // end namespace

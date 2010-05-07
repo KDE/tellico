@@ -89,6 +89,7 @@ void Manager::registerFunction(int type_, const FetcherFunction& func_) {
 
 void Manager::loadFetchers() {
   m_fetchers.clear();
+  m_uuidHash.clear();
 
   KSharedConfigPtr config = KGlobal::config();
   if(config->hasGroup(QLatin1String("Data Sources"))) {
@@ -100,7 +101,7 @@ void Manager::loadFetchers() {
       if(f) {
         m_fetchers.append(f);
         f->setMessageHandler(m_messager);
-        m_uidHash.insert(f->uid(), f);
+        m_uuidHash.insert(f->uuid(), f);
       }
     }
     m_loadDefaults = false;
@@ -120,8 +121,8 @@ Tellico::Fetch::FetcherVec Manager::fetchers(int type_) {
   return vec;
 }
 
-Tellico::Fetch::Fetcher::Ptr Manager::fetcherByUid(const QString& uid_) {
-  return m_uidHash.contains(uid_) ? m_uidHash[uid_] : Fetcher::Ptr();
+Tellico::Fetch::Fetcher::Ptr Manager::fetcherByUuid(const QString& uuid_) {
+  return m_uuidHash.contains(uuid_) ? m_uuidHash[uuid_] : Fetcher::Ptr();
 }
 
 Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) const {

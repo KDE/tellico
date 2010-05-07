@@ -68,8 +68,8 @@ void MultiFetcher::readSources() const {
   if(!m_fetchers.isEmpty()) {
     return;
   }
-  foreach(const QString& uid, m_uuids) {
-    Fetcher::Ptr fetcher = Manager::self()->fetcherByUid(uid);
+  foreach(const QString& uuid, m_uuids) {
+    Fetcher::Ptr fetcher = Manager::self()->fetcherByUuid(uuid);
     if(fetcher) {
       m_fetchers.append(fetcher);
       connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
@@ -245,12 +245,12 @@ void MultiFetcher::FetcherItemWidget::setFetchers(const QList<Fetcher::Ptr>& fet
     if(fetcher->type() == Multiple) {
       continue;
     }
-    m_fetcherCombo->addItem(Manager::self()->fetcherIcon(fetcher), fetcher->source(), fetcher->uid());
+    m_fetcherCombo->addItem(Manager::self()->fetcherIcon(fetcher), fetcher->source(), fetcher->uuid());
   }
 }
 
 void MultiFetcher::FetcherItemWidget::setSource(Fetcher::Ptr fetcher_) {
-  m_fetcherCombo->setCurrentData(fetcher_->uid());
+  m_fetcherCombo->setCurrentData(fetcher_->uuid())) {
 }
 
 QString MultiFetcher::FetcherItemWidget::fetcherUuid() const {
@@ -287,9 +287,9 @@ QStringList MultiFetcher::FetcherListWidget::uuids() const {
   QStringList uuids;
   foreach(QWidget* widget, mWidgetList) {
     FetcherItemWidget* item = static_cast<FetcherItemWidget*>(widget);
-    QString uid = item->fetcherUuid();
-    if(!uid.isEmpty()) {
-      uuids << uid;
+    QString uuid = item->fetcherUuid();
+    if(!uuid.isEmpty()) {
+      uuids << uuid;
     }
   }
   return uuids;

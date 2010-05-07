@@ -741,7 +741,8 @@ void ConfigDialog::readFetchConfig() {
 
   Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
   foreach(Fetch::Fetcher::Ptr fetcher, fetchers) {
-    GeneralFetcherInfo info(fetcher->type(), fetcher->source(), fetcher->updateOverwrite());
+    GeneralFetcherInfo info(fetcher->type(), fetcher->source(),
+                            fetcher->updateOverwrite(), fetcher->uuid());
     SourceListItem* item = new SourceListItem(m_sourceListWidget, info);
     item->setFetcher(fetcher);
     // grab the config widget, taking ownership
@@ -841,6 +842,7 @@ void ConfigDialog::saveFetchConfig() {
     configGroup.writeEntry("Name", item->data(Qt::DisplayRole).toString());
     configGroup.writeEntry("Type", int(item->fetchType()));
     configGroup.writeEntry("UpdateOverwrite", item->updateOverwrite());
+    configGroup.writeEntry("Uuid", item->uuid());
     cw->saveConfig(configGroup);
     item->setNewSource(false);
     // in case the ordering changed
@@ -860,16 +862,19 @@ void ConfigDialog::saveFetchConfig() {
 
   Config::self()->writeConfig();
 
-  QString s = m_sourceListWidget->currentItem() ? m_sourceListWidget->currentItem()->data(Qt::DisplayRole).toString() : QString();
   if(reloadFetchers) {
     Fetch::Manager::self()->loadFetchers();
     Controller::self()->updatedFetchers();
     // reload fetcher items if OK was not clicked
     // meaning apply was clicked
     if(!m_okClicked) {
+      QString currentSource;
+      if(m_sourceListWidget->currentItem()) {
+        currentSource = m_sourceListWidget->currentItem()->data(Qt::DisplayRole).toString();
+      }
       readFetchConfig();
-      if(!s.isEmpty()) {
-        QList<QListWidgetItem*> items = m_sourceListWidget->findItems(s, Qt::MatchExactly);
+      if(!currentSource.isEmpty()) {
+        QList<QListWidgetItem*> items = m_sourceListWidget->findItems(currentSource, Qt::MatchExactly);
         if(!items.isEmpty()) {
           m_sourceListWidget->setCurrentItem(items.first());
           m_sourceListWidget->scrollToItem(items.first());

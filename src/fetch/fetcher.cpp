@@ -50,7 +50,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
 
 Fetcher::~Fetcher() {
   KConfigGroup config(KGlobal::config(), m_configGroup);
-  config.writeEntry("Uuid", m_uid);
+  config.writeEntry("Uuid", m_uuid);
   saveConfigHook(config);
 }
 
@@ -111,7 +111,7 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
   if(s.isEmpty()) {
     s = QUuid::createUuid().toString();
   }
-  m_uid = s;
+  m_uuid = s;
   // be sure to read config for subclass
   readConfigHook(config_);
 }

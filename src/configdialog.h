@@ -210,10 +210,11 @@ private:
 
 class GeneralFetcherInfo {
 public:
-  GeneralFetcherInfo(Fetch::Type t, const QString& n, bool o) : type(t), name(n), updateOverwrite(o) {}
+  GeneralFetcherInfo(Fetch::Type t, const QString& n, bool o, QString u=QString()) : type(t), name(n), updateOverwrite(o), uuid(u) {}
   Fetch::Type type;
   QString name;
   bool updateOverwrite;
+  QString uuid;
 };
 
 class SourceListItem : public QListWidgetItem {
@@ -230,6 +231,7 @@ public:
   bool updateOverwrite() const { return m_info.updateOverwrite; }
   void setNewSource(bool b) { m_newSource = b; }
   bool isNewSource() const { return m_newSource; }
+  QString uuid() const { return m_info.uuid; }
   void setFetcher(Fetch::Fetcher::Ptr fetcher);
   Fetch::Fetcher::Ptr fetcher() const { return m_fetcher; }
 

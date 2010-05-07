@@ -87,7 +87,7 @@ public:
   void loadFetchers();
   const FetcherVec& fetchers() const { return m_fetchers; }
   FetcherVec fetchers(int type);
-  Fetcher::Ptr fetcherByUid(const QString& uid);
+  Fetcher::Ptr fetcherByUuid(const QString& uuid);
   NameTypeMap nameTypeMap();
   ConfigWidget* configWidget(QWidget* parent, Type type, const QString& name);
 
@@ -133,7 +133,7 @@ private:
   FetcherVec m_fetchers;
   int m_currentFetcherIndex;
   KeyMap m_keyMap;
-  QHash<QString, Fetcher::Ptr> m_uidHash;
+  QHash<QString, Fetcher::Ptr> m_uuidHash;
 
   StringMap m_scriptMap;
   ManagerMessage* m_messager;
