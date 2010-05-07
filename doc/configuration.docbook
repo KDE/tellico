@@ -155,7 +155,7 @@ Entry templates are saved in <filename class="directory">$<envar>KDEHOME</envar>
 
 <para>
 &appname; can use various sources for importing data, which can be configured
-in the Data Sources Dialog. There are several available types of sources:</para>
+in the Data Sources Dialog. There are many available types and sources:</para>
 
 <itemizedlist>
 <listitem><para><link linkend="amazon-web-services">Amazon.com Web Services</link>,</para></listitem>
@@ -172,7 +172,15 @@ in the Data Sources Dialog. There are several available types of sources:</para>
 <listitem><para><link linkend="bib-sources">bibsonomy.org</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">citebase.org</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">crossref.org</link>,</para></listitem>
+<listitem><para><link linkend="discogs">Discogs.com</link>,</para></listitem>
+<listitem><para><link linkend="winecom">Wine.com</link>,</para></listitem>
+<listitem><para><link linkend="tmdb">TheMovieDB.org</link>,</para></listitem>
+<listitem><para><link linkend="musicbrainz">MusicBrainz.org</link>,</para></listitem>
+<listitem><para><link linkend="giantbomb">GiantBomb.com</link>,</para></listitem>
+<listitem><para><link linkend="openlibrary">OpenLibrary.org</link>,</para></listitem>
+<listitem><para><link linkend="freebase">Freebase.com</link>,</para></listitem>
 <listitem><para><link linkend="externalexec">other external scripts or applications</link></para></listitem>
+<listitem><para><link linkend="multiple-sources">combinations of any of the above sources</link>,</para></listitem>
 </itemizedlist>
 
 <screenshot>
@@ -209,7 +217,197 @@ shown on the right of the configuration box. If any of those fields are checked,
 to the collection when an entry is added from that source.
 </para>
 
-<sect2 id="amazon-web-services">
+<!-- start book sources -->
+
+<sect2 id="book-sources">
+<title>Book and Bibliographic Data Sources</title>
+
+<sect3 id="z3950">
+<title>z39.50 Servers</title>
+
+<para>
+The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; comes with
+several preset configurations for major libraries, or you can specify the connection information manually.</para>
+
+<para>&appname;
+is able to read data in the <acronym>MODS</acronym>, <acronym>USMARC</acronym>/<acronym>MARC21</acronym>, or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
+In addition, there is limited support for the <acronym>GRS-1</acronym> format.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+To use one of the preset libraries, check the box and then select the library. The other configuration entries will be disabled. If you need to set the information manually, uncheck the preset box.
+</para>
+
+<para>
+The default port for z39.50 access is 210, but some servers may use a different one. &appname; assumes the server uses the MARC-8 character encoding, unless configured otherwise. If an incorrect character encoding is used, an error message may appear on the program output, or possibly no entries are retrieved.
+</para>
+
+<para>
+Some servers require a username and password for access. &appname; can use and save that password, but be aware that is written to the &appname; configuration file in plain text and is not secure. For most public servers, the username and password fields may be left empty.
+</para>
+
+</sect3>
+
+<sect3 id="sru">
+<title>SRU Servers</title>
+
+<para>
+SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
+Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
+the best known.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="entrez">
+<title>Entrez Databases</title>
+<para>
+<ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> is the integrated, text-based search and retrieval system used at the National Center for Biotechnology Information (NCBI). The most well-known Entrez database is <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>, the database for life science articles from many biological journals. At the moment, the only Entrez database supported by &appname; is PubMed.</para>
+</sect3>
+
+<sect3 id="bib-sources">
+<title>Bibliographic Databases</title>
+<para>
+<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, <ulink url="http://citebase.org">Citebase</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
+</sect3>
+
+<sect3 id="ibs">
+<title>Internet Bookstore Italia</title>
+<para>
+<ulink url="http://ibs.it">IBS, or Internet Bookstore Italia</ulink>, is an online Italian bookstore.
+</para>
+</sect3>
+
+<sect3 id="isbndb">
+<title>ISBNdb.com</title>
+<para>
+<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, with data collection libraries around the world.
+</para>
+</sect3>
+
+<sect3 id="openlibrary">
+<title>OpenLibrary.org</title>
+<para>
+<ulink url="http://openlibrary.org">OpenLibrary.org</ulink> is an online book database that aims to have one page for every book.
+</para>
+</sect3>
+
+</sect2>
+<!-- end of books -->
+
+<!-- start of movie sources -->
+<sect2 id="comicbook-sources">
+<title>Comic Book Data Sources</title>
+
+<sect3 id="animenfo">
+<title>AnimeNfo.com</title>
+<para>
+<ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
+</para>
+</sect3>
+
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="movie-sources">
+<title>Movie Data Sources</title>
+
+<sect3 id="imdb">
+<title>Internet Movie Database</title>
+
+<para>
+The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include setting the web server address and whether images are grabbed or not. Since IMDb can return a large number of cast members, you can limit
+that to a certain number.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect3>
+
+<sect3 id="tmdb">
+<title>TheMovieDB.org</title>
+<para>
+<ulink url="http://themoviedb.org">TheMovieDB.org</ulink> is a free and open online movie database. Registration for a free account is required.
+</para>
+</sect3>
+
+</sect2>
+
+<!-- start of movie sources -->
+<sect2 id="music-sources">
+<title>Music Data Sources</title>
+
+<sect3 id="discogs">
+<title>Discogs.com</title>
+<para>
+<ulink url="http://discogs.com">Discogs.com</ulink> is a user-built music database containing information on artists, labels, and their recordings. Registration for a free account is required.
+</para>
+</sect3>
+
+<sect3 id="musicbrainz">
+<title>MusicBrainz.org</title>
+<para>
+<ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site.
+</para>
+</sect3>
+
+<sect3 id="yahoo">
+<title>Yahoo! Audio Search</title>
+<para>
+The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may be used to search for music album information.  This data source is often unavailable or broken.
+</para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<sect2 id="wine-sources">
+<title>Wine Data Sources</title>
+
+<sect3 id="winecom">
+<title>Wine.com</title>
+<para>
+<ulink url="http://wine.com">Wine.com</ulink> is an online wine seller, and offers access to a database information on wine varietals. Registration for a free account is required.
+</para>
+</sect3>
+
+</sect2>
+
+<!-- start of video game sources -->
+<sect2 id="videogame-sources">
+<title>Video Game Data Sources</title>
+
+<sect3 id="giantbomb">
+<title>GiantBomb.com</title>
+<para>
+<ulink url="http://giantbomb.com">GiantBomb.com</ulink> is a large community-driven video game database. Registration for a free account is required.
+</para>
+</sect3>
+
+</sect2>
+
+<!-- start of wine sources -->
+<sect2 id="variety-type-sources">
+<title>Data Sources for Multiple Collection Types</title>
+
+<sect3 id="amazon-web-services">
 <title>Amazon.com</title>
 
 <para>
@@ -228,122 +426,23 @@ Configuring each Amazon.com source involves three settings: the server location,
 from <ulink url="http://amazon.com">Amazon.com</ulink> may include an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
 </para>
 
-</sect2>
+</sect3>
 
-<sect2 id="imdb">
-<title>Internet Movie Database</title>
-
-<para>
-The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include setting the web server address and whether images are grabbed or not. Since IMDb can return a large number of cast members, you can limit
-that to a certain number.
-</para>
-
-<screenshot>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="imdb-options.png"/></imageobject>
-</mediaobject>
-</screenshot>
-
-</sect2>
-
-<sect2 id="z3950">
-<title>z39.50 Servers</title>
-
-<para>
-The <ulink url="http://www.cni.org/pub/NISO/docs/Z39.50-brochure/50.brochure.toc.html">z39.50 protocol</ulink> is used to access libraries and bibliographic information providers around the world. Lists of public z39.50 servers are <ulink url="http://www.indexdata.dk/targettest/">available from indexdata.dk</ulink>, among others. &appname; comes with
-several preset configurations for major libraries, or you can specify the connection information manually.</para>
-
-<para>&appname;
-is able to read data in the <acronym>MODS</acronym>, <acronym>USMARC</acronym>/<acronym>MARC21</acronym>, or <acronym>UNIMARC</acronym> format, using the <ulink url="http://www.indexdata.dk/yaz/">yaz library</ulink>.
-In addition, there is limited support for the <acronym>GRS-1</acronym> format.
-</para>
-
-<screenshot>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="z3950-options.png"/></imageobject>
-</mediaobject>
-</screenshot>
-
-
-<para>
-To use one of the preset libraries, check the box and then select the library. The other configuration entries will be disabled. If you need to set the information manually, uncheck the preset box.
-</para>
-
-<para>
-The default port for z39.50 access is 210, but some servers may use a different one. &appname; assumes the server uses the MARC-8 character encoding, unless configured otherwise. If an incorrect character encoding is used, an error message may appear on the program output, or possibly no entries are retrieved.
-</para>
-
-<para>
-Some servers require a username and password for access. &appname; can use and save that password, but be aware that is written to the &appname; configuration file in plain text and is not secure. For most public servers, the username and password fields may be left empty.
-</para>
-
-</sect2>
-
-<sect2 id="sru">
-<title>SRU Servers</title>
-
-<para>
-SRU stands for <ulink url="http://www.loc.gov/standards/sru/">Search/Retrieve via &URL;</ulink> and is a standard search protocol for
-Internet searches. Some libraries use it for providing access to their data catalogs. Among them, the <ulink url="http://www.loc.gov/z3950/lcserver.html#oppr">US Library of Congress</ulink> is probably
-the best known.
-</para>
-
-<screenshot>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="sru-options.png"/></imageobject>
-</mediaobject>
-</screenshot>
-
-</sect2>
-
-<sect2 id="entrez">
-<title>Entrez Databases</title>
-<para>
-<ulink url="http://www.ncbi.nlm.nih.gov/Entrez/">Entrez</ulink> is the integrated, text-based search and retrieval system used at the National Center for Biotechnology Information (NCBI). The most well-known Entrez database is <ulink url="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed">PubMed</ulink>, the database for life science articles from many biological journals. At the moment, the only Entrez database supported by &appname; is PubMed.</para>
-</sect2>
-
-<sect2 id="yahoo">
-<title>Yahoo! Audio Search</title>
-<para>
-The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may be used to search for music album information.
-</para>
-</sect2>
-
-<sect2 id="animenfo">
-<title>AnimeNfo.com</title>
-<para>
-<ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
-</para>
-</sect2>
-
-<sect2 id="ibs">
-<title>Internet Bookstore Italia</title>
-<para>
-<ulink url="http://ibs.it">IBS, or Internet Bookstore Italia</ulink>, is an online Italian bookstore.
-</para>
-</sect2>
-
-<sect2 id="isbndb">
-<title>ISBNdb.com</title>
-<para>
-<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, with data collection libraries around the world.
-</para>
-</sect2>
-
-<sect2 id="gcstarplugin">
+<sect3 id="gcstarplugin">
 <title>GCstar Plugins</title>
 <para>
 If <application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is installed, &appname; is able to take advantage of the wide range of search plugins available for GCstar. Depending on the collection type, various online resources are available for usage as a data source in &appname;
 </para>
-</sect2>
+</sect3>
 
-<sect2 id="bib-sources">
-<title>Bibliographic Databases</title>
+<sect3 id="freebase">
+<title>Freebase.com</title>
 <para>
-<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, <ulink url="http://citebase.org">Citebase</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
-</sect2>
+<ulink url="http://freebase.com">Freebase.com</ulink> is an online database, collecting information on any topic. Tellico is able to search Freebase for information on books, comic book, music, movies, video games, and board games.
+</para>
+</sect3>
 
-<sect2 id="externalexec">
+<sect3 id="externalexec">
 <title>External Scripts or Applications</title>
 <para>
 As an easier way for &appname; to integrate with third-party plugins, external scripts or applications may be used as an interface for searching other information sources. &appname; will execute a command, and pass the search terms as command-line options.
@@ -368,6 +467,25 @@ use the <link linkend="file-format">default &appname; &XML; format</link>, but i
 
 <para>
 For updating entries already in the collection, the final check box and edit box are used to determine the command-line options. The entry fields used to find an update must be entered, in the same format as used for <link linkend="derived">derived value</link> fields.
+</para>
+</sect3>
+
+</sect2>
+
+<sect2 id="multiple-sources">
+<title>Multiple Combined Data Sources</title>
+<para>
+Combinations of up to eight existing data sources can be used as a single source, where the search results from all the sources are merged. The collection type to be used must be set before adding sources.
+</para>
+
+<screenshot>
+<mediaobject>
+<imageobject><imagedata format="PNG" fileref="multiple-sources-options.png"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+Only existing data sources can be used in combination. The search request is sent to each source, and the reults are combined. Since the merged results depend on the order of the search results, the combined set may be different depending on network and source speed.
 </para>
 </sect2>
 
