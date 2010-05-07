@@ -286,6 +286,10 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     FETCHER_ADD(IBS);
   }
+#ifdef HAVE_QJSON
+  FETCHER_ADD(OpenLibrary);
+  FETCHER_ADD(Freebase);
+#endif
   return vec;
 }
 
