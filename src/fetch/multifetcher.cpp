@@ -250,7 +250,7 @@ void MultiFetcher::FetcherItemWidget::setFetchers(const QList<Fetcher::Ptr>& fet
 }
 
 void MultiFetcher::FetcherItemWidget::setSource(Fetcher::Ptr fetcher_) {
-  m_fetcherCombo->setCurrentData(fetcher_->uuid())) {
+  m_fetcherCombo->setCurrentData(fetcher_->uuid());
 }
 
 QString MultiFetcher::FetcherItemWidget::fetcherUuid() const {

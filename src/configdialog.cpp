@@ -739,6 +739,7 @@ void ConfigDialog::readFetchConfig() {
   m_sourceListWidget->clear();
   m_configWidgets.clear();
 
+  m_sourceListWidget->setUpdatesEnabled(false);
   Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
   foreach(Fetch::Fetcher::Ptr fetcher, fetchers) {
     GeneralFetcherInfo info(fetcher->type(), fetcher->source(),
@@ -754,6 +755,7 @@ void ConfigDialog::readFetchConfig() {
     }
     kapp->processEvents();
   }
+  m_sourceListWidget->setUpdatesEnabled(true);
 
   if(m_sourceListWidget->count() == 0) {
     m_modifySourceBtn->setEnabled(false);
