@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testISBN();
   void testLCCN();
   void testMovieTitle();
+  void testMusicTitle();
   void testGameTitle();
   void testBoardGameTitle();
 

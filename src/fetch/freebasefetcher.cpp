@@ -102,6 +102,7 @@ QString FreebaseFetcher::source() const {
 bool FreebaseFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
          || type == Data::Collection::Video
+         || type == Data::Collection::Album
          || type == Data::Collection::Game
          || type == Data::Collection::BoardGame;
 }
@@ -135,7 +136,6 @@ void FreebaseFetcher::doSearch() {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       query.insert(QLatin1String("type"), QLatin1String("/book/book_edition"));
-
       {
         QVariantMap book_query;
         book_query.insert(QLatin1String("type"), QLatin1String("/book/book"));
@@ -145,21 +145,29 @@ void FreebaseFetcher::doSearch() {
         QVariantMap work_query;
         work_query.insert(QLatin1String("type"), QLatin1String("/book/written_work"));
         work_query.insert(QLatin1String("*"), QVariantList());
+        if(request().key != Person) {
+          work_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+        }
         query.insert(QLatin1String("work:book"), work_query);
 
         QVariantMap topic_query;
         topic_query.insert(QLatin1String("type"), QLatin1String("/common/topic"));
         topic_query.insert(QLatin1String("*"), QVariantList());
+        topic_query.insert(QLatin1String("optional"), QLatin1String("optional"));
         query.insert(QLatin1String("topic:book"), topic_query);
 
         QVariantMap page_query;
         page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
         page_query.insert(QLatin1String("numbered_pages"), QVariantList());
+        page_query.insert(QLatin1String("optional"), QLatin1String("optional"));
         query.insert(QLatin1String("number_of_pages"), page_query);
 
         QVariantMap isbn_query;
         isbn_query.insert(QLatin1String("type"), QLatin1String("/book/isbn"));
         isbn_query.insert(QLatin1String("isbn"), QVariantList());
+        if(request().key != ISBN) {
+          isbn_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+        }
         query.insert(QLatin1String("isbn"), isbn_query);
       }
       break;
@@ -169,16 +177,37 @@ void FreebaseFetcher::doSearch() {
       {
         QVariantMap time_query;
         time_query.insert(QLatin1String("type"), QLatin1String("/film/film_cut"));
+        time_query.insert(QLatin1String("optional"), QLatin1String("optional"));
         time_query.insert(QLatin1String("runtime"), QVariantList());
         query.insert(QLatin1String("runtime"), QVariantList() << time_query);
 
         QVariantMap cast_query;
         cast_query.insert(QLatin1String("type"), QLatin1String("/film/performance"));
+        cast_query.insert(QLatin1String("optional"), QLatin1String("optional"));
         cast_query.insert(QLatin1String("actor"), QVariantList());
         cast_query.insert(QLatin1String("character"), QVariantList());
         query.insert(QLatin1String("starring"), QVariantList() << cast_query);
+
+        QVariantMap studio_query;
+        studio_query.insert(QLatin1String("type"), QLatin1String("/film/film_film_distributor_relationship"));
+        studio_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+        studio_query.insert(QLatin1String("distributor"), QVariantList());
+        query.insert(QLatin1String("distributors"), QVariantList() << studio_query);
       }
 
+      break;
+
+    case Data::Collection::Album:
+      query.insert(QLatin1String("type"), QLatin1String("/music/album"));
+      {
+        QVariantMap track_query;
+        track_query.insert(QLatin1String("type"), QLatin1String("/music/track"));
+        track_query.insert(QLatin1String("name"), QVariantList());
+        track_query.insert(QLatin1String("length"), QVariantList());
+        track_query.insert(QLatin1String("artist"), QVariantList());
+        track_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+        query.insert(QLatin1String("track"), QVariantList() << track_query);
+      }
       break;
 
     case Data::Collection::Game:
@@ -193,6 +222,7 @@ void FreebaseFetcher::doSearch() {
         player_query.insert(QLatin1String("type"), QLatin1String("/measurement_unit/integer_range"));
         player_query.insert(QLatin1String("high_value"), QVariantList());
         player_query.insert(QLatin1String("low_value"), QVariantList());
+        player_query.insert(QLatin1String("optional"), QLatin1String("optional"));
         query.insert(QLatin1String("number_of_players"), player_query);
       }
       break;
@@ -350,12 +380,9 @@ void FreebaseFetcher::slotComplete(KJob*) {
     resultList.append(resultThing.toMap());
   } else {
     QVariantMap top = parser.parse(data).toMap();
-    QVariant msg = top.value(QLatin1String("message"));
+    QVariant msg = value(top, "message");
     if(msg.isNull()) {
-      msg = top.value(QLatin1String("messages"));
-      if(!msg.isNull()) {
-        msg = msg.toMap().value(QLatin1String("message"));
-      }
+      msg = value(top, "messages", "message");
     }
     if(!msg.isNull()) {
       myDebug() << "message:" << msg.toString();
@@ -415,9 +442,14 @@ void FreebaseFetcher::slotComplete(KJob*) {
           entry->setField(QLatin1String("producer"),      value(resultMap, "produced_by"));
           entry->setField(QLatin1String("writer"),        value(resultMap, "written_by"));
           entry->setField(QLatin1String("composer"),      value(resultMap, "music"));
-          entry->setField(QLatin1String("studio"),        value(resultMap, "production_companies"));
+          QString studio = value(resultMap, "production_companies");
+          if(studio.isEmpty()) {
+            studio = value(resultMap, "distributors", "distributor");
+          }
+          entry->setField(QLatin1String("studio"),        studio);
           entry->setField(QLatin1String("genre"),         value(resultMap, "genre"));
           entry->setField(QLatin1String("nationality"),   value(resultMap, "country"));
+          entry->setField(QLatin1String("keyword"),       value(resultMap, "subjects"));
           entry->setField(QLatin1String("certification"), value(resultMap, "rating"));
           entry->setField(QLatin1String("year"),          value(resultMap, "initial_release_date").left(4));
           entry->setField(QLatin1String("running-time"),  value(resultMap, "runtime", "runtime"));
@@ -435,6 +467,35 @@ void FreebaseFetcher::slotComplete(KJob*) {
             }
           }
           entry->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
+        }
+        break;
+
+      case Data::Collection::Album:
+        {
+          entry->setField(QLatin1String("artist"), value(resultMap, "artist"));
+          entry->setField(QLatin1String("year"),   value(resultMap, "release_date").left(4));
+          entry->setField(QLatin1String("label"),  value(resultMap, "label"));
+          entry->setField(QLatin1String("genre"),  value(resultMap, "genre"));
+
+          QStringList trackList;
+          const QVariantList trackResult = resultMap.value(QLatin1String("track")).toList();
+          foreach(const QVariant& track, trackResult) {
+            QVariantMap trackMap = track.toMap();
+            if(!trackMap.isEmpty()) {
+              QVariantList name = trackMap.value(QLatin1String("name")).toList();
+              QVariantList artist = trackMap.value(QLatin1String("artist")).toList();
+              QVariantList length = trackMap.value(QLatin1String("length")).toList();
+              if(!name.isEmpty()) {
+                int sec = length.isEmpty() ? 0 : static_cast<int>(length.at(0).toString().toFloat() + 0.5);
+                trackList += name.at(0).toString()
+                           + FieldFormat::columnDelimiterString()
+                           + (artist.isEmpty() ? entry->field(QLatin1String("artist")) : artist.at(0).toString())
+                           + FieldFormat::columnDelimiterString()
+                           + Tellico::minutes(sec);
+              }
+            }
+          }
+          entry->setField(QLatin1String("track"), trackList.join(FieldFormat::rowDelimiterString()));
         }
         break;
 
@@ -492,18 +553,21 @@ void FreebaseFetcher::slotComplete(KJob*) {
       }
    }
 
-    const QString article_id = value(resultMap, "/common/topic/article", "id");
-    if(!article_id.isEmpty()) {
-      KUrl articleUrl(FREEBASE_BLURB_URL);
-      articleUrl.addPath(article_id);
-      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
-      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
-      const QString output = FileHandler::readTextFile(articleUrl, false, true);
-      if(!output.isEmpty()) {
-        if(type == Data::Collection::Video) {
-          entry->setField(QLatin1String("plot"), output);
-        } else {
-          entry->setField(QLatin1String("description"), output);
+    // books and music don't have description fields
+    if(type != Data::Collection::Book && type != Data::Collection::Album) {
+      const QString article_id = value(resultMap, "/common/topic/article", "id");
+      if(!article_id.isEmpty()) {
+        KUrl articleUrl(FREEBASE_BLURB_URL);
+        articleUrl.addPath(article_id);
+        articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
+        articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+        const QString output = FileHandler::readTextFile(articleUrl, false, true);
+        if(!output.isEmpty()) {
+          if(type == Data::Collection::Video) {
+            entry->setField(QLatin1String("plot"), output);
+          } else {
+            entry->setField(QLatin1String("description"), output);
+          }
         }
       }
    }
