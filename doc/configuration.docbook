@@ -179,8 +179,8 @@ in the Data Sources Dialog. There are many available types and sources:</para>
 <listitem><para><link linkend="giantbomb">GiantBomb.com</link>,</para></listitem>
 <listitem><para><link linkend="openlibrary">OpenLibrary.org</link>,</para></listitem>
 <listitem><para><link linkend="freebase">Freebase.com</link>,</para></listitem>
-<listitem><para><link linkend="externalexec">other external scripts or applications</link></para></listitem>
-<listitem><para><link linkend="multiple-sources">combinations of any of the above sources</link>,</para></listitem>
+<listitem><para><link linkend="externalexec">other external scripts or applications</link>,</para></listitem>
+<listitem><para><link linkend="multiple-sources">combinations of any of the above sources</link>.</para></listitem>
 </itemizedlist>
 
 <screenshot>
@@ -485,7 +485,7 @@ Combinations of up to eight existing data sources can be used as a single source
 </screenshot>
 
 <para>
-Only existing data sources can be used in combination. The search request is sent to each source, and the reults are combined. Since the merged results depend on the order of the search results, the combined set may be different depending on network and source speed.
+Only existing data sources can be used in combination. The search request is sent to each source, and the results are combined. Since the merged results depend on the order of the search results, the combined set may be different depending on network and source speed.
 </para>
 </sect2>
 
