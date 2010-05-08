@@ -104,7 +104,7 @@ void FreebaseFetcherTest::testBookAuthor() {
   job->start();
   m_loop.exec();
 
-  QCOMPARE(m_results.size(), 4);
+  QCOMPARE(m_results.size(), 3);
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("coding")));

@@ -130,170 +130,67 @@ void FreebaseFetcher::doSearch() {
   return;
 #else
 
-  QVariantMap query;
-  const int type = collectionType();
-  switch(type) {
+  QVariantList queries;
+  switch(collectionType()) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
-      query.insert(QLatin1String("type"), QLatin1String("/book/book_edition"));
-      {
-        QVariantMap book_query;
-        book_query.insert(QLatin1String("type"), QLatin1String("/book/book"));
-        book_query.insert(QLatin1String("*"), QVariantList());
-        query.insert(QLatin1String("book"), book_query);
-
-        QVariantMap work_query;
-        work_query.insert(QLatin1String("type"), QLatin1String("/book/written_work"));
-        work_query.insert(QLatin1String("*"), QVariantList());
-        if(request().key != Person) {
-          work_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        }
-        query.insert(QLatin1String("work:book"), work_query);
-
-        QVariantMap topic_query;
-        topic_query.insert(QLatin1String("type"), QLatin1String("/common/topic"));
-        topic_query.insert(QLatin1String("*"), QVariantList());
-        topic_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        query.insert(QLatin1String("topic:book"), topic_query);
-
-        QVariantMap page_query;
-        page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
-        page_query.insert(QLatin1String("numbered_pages"), QVariantList());
-        page_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        query.insert(QLatin1String("number_of_pages"), page_query);
-
-        QVariantMap isbn_query;
-        isbn_query.insert(QLatin1String("type"), QLatin1String("/book/isbn"));
-        isbn_query.insert(QLatin1String("isbn"), QVariantList());
-        if(request().key != ISBN) {
-          isbn_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        }
-        query.insert(QLatin1String("isbn"), isbn_query);
-      }
+      queries = bookQueries();
       break;
 
     case Data::Collection::Video:
-      query.insert(QLatin1String("type"), QLatin1String("/film/film"));
-      {
-        QVariantMap time_query;
-        time_query.insert(QLatin1String("type"), QLatin1String("/film/film_cut"));
-        time_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        time_query.insert(QLatin1String("runtime"), QVariantList());
-        query.insert(QLatin1String("runtime"), QVariantList() << time_query);
-
-        QVariantMap cast_query;
-        cast_query.insert(QLatin1String("type"), QLatin1String("/film/performance"));
-        cast_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        cast_query.insert(QLatin1String("actor"), QVariantList());
-        cast_query.insert(QLatin1String("character"), QVariantList());
-        query.insert(QLatin1String("starring"), QVariantList() << cast_query);
-
-        QVariantMap studio_query;
-        studio_query.insert(QLatin1String("type"), QLatin1String("/film/film_film_distributor_relationship"));
-        studio_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        studio_query.insert(QLatin1String("distributor"), QVariantList());
-        query.insert(QLatin1String("distributors"), QVariantList() << studio_query);
-      }
-
+      queries = movieQueries();
       break;
 
     case Data::Collection::Album:
-      query.insert(QLatin1String("type"), QLatin1String("/music/album"));
-      {
-        QVariantMap track_query;
-        track_query.insert(QLatin1String("type"), QLatin1String("/music/track"));
-        track_query.insert(QLatin1String("name"), QVariantList());
-        track_query.insert(QLatin1String("length"), QVariantList());
-        track_query.insert(QLatin1String("artist"), QVariantList());
-        track_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        query.insert(QLatin1String("track"), QVariantList() << track_query);
-      }
+      queries = musicQueries();
       break;
 
     case Data::Collection::Game:
-      query.insert(QLatin1String("type"), QLatin1String("/cvg/computer_videogame"));
+      queries = videoGameQueries();
       break;
 
     case Data::Collection::BoardGame:
-      query.insert(QLatin1String("type"), QLatin1String("/games/game"));
-
-      {
-        QVariantMap player_query;
-        player_query.insert(QLatin1String("type"), QLatin1String("/measurement_unit/integer_range"));
-        player_query.insert(QLatin1String("high_value"), QVariantList());
-        player_query.insert(QLatin1String("low_value"), QVariantList());
-        player_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-        query.insert(QLatin1String("number_of_players"), player_query);
-      }
+      queries = boardGameQueries();
       break;
 
     default:
-      myWarning() << "collection type not available:" << type;
-      stop();
-      return;
+      myWarning() << "collection type not available:" << collectionType();
+      break;
   }
 
-  // grab id for every query, for image and article
-  QVariantMap id_query;
-  id_query.insert(QLatin1String("id"), QVariantList());
-  id_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-  id_query.insert(QLatin1String("limit"), 1);
-  query.insert(QLatin1String("/common/topic/image"), id_query);
-  query.insert(QLatin1String("/common/topic/article"), id_query);
-
-  // grab all properties at the entity level
-  query.insert(QLatin1String("*"), QVariantList());
-
-  switch(request().key) {
-    case Title:
-      // full wildcard search on both sides of the search string
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
-      break;
-
-    case Person:
-      // for now just check author, and need to use written_work topic_query
-      {
-        QVariantMap work_query = query.value(QLatin1String("work:book")).toMap();
-        work_query.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
-        query.insert(QLatin1String("work:book"), work_query);
-      }
-      break;
-
-    case ISBN:
-      {
-        QVariantMap isbn_query = query.value(QLatin1String("isbn")).toMap();
-        // search for both ISBN10 and ISBN13
-        QVariantList isbns;
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
-        isbn_query.insert(QLatin1String("isbn|="), isbns);
-        query.insert(QLatin1String("isbn"), isbn_query);
-      }
-      break;
-
-    case LCCN:
-      query.insert(QLatin1String("LCCN"), LCCNValidator::formalize(request().value));
-      break;
-
-
-    default:
-      myWarning() << "key not recognized: " << request().key;
-      stop();
-      return;
+  if(queries.isEmpty()) {
+    stop();
+    return;
   }
 
-  QVariantList queryList;
-  queryList.append(query);
+  QVariantMap httpQuery;
 
-  QVariantMap queryMap;
-  queryMap.insert(QLatin1String("query"), queryList);
+  for(int i = 0; i < queries.size(); ++i) {
+    QVariantMap query = queries.at(i).toMap();
+    Q_ASSERT(!query.isEmpty());
+
+    // grab all properties at the entity level
+    query.insert(QLatin1String("*"), QVariantList());
+
+    // grab id for every query, for image and article
+    QVariantMap id_query;
+    id_query.insert(QLatin1String("id"), QVariantList());
+    id_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+    id_query.insert(QLatin1String("limit"), 1);
+    query.insert(QLatin1String("/common/topic/image"), id_query);
+    query.insert(QLatin1String("/common/topic/article"), id_query);
+
+    QVariantMap innerQuery;
+    innerQuery.insert(QLatin1String("query"), QVariantList() << query);
+    httpQuery.insert(QString::fromLatin1("q%1").arg(i+1), innerQuery);
+  }
 
   QJson::Serializer serializer;
-  QByteArray query_string = serializer.serialize(queryMap);
+  QByteArray query_string = serializer.serialize(httpQuery);
   myDebug() << "query:" << query_string;
 
   KUrl u(FREEBASE_QUERY_URL);
-  u.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
+  u.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
@@ -371,21 +268,40 @@ void FreebaseFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QJson::Parser parser;
-  QVariant resultThing = parser.parse(data).toMap().value(QLatin1String("result"));
   QVariantList resultList;
-  if(resultThing.canConvert(QVariant::List)) {
-    resultList = resultThing.toList();
-  } else if(!resultThing.isNull()) {
-    resultList.append(resultThing.toMap());
-  } else {
-    QVariantMap top = parser.parse(data).toMap();
-    QVariant msg = value(top, "message");
-    if(msg.isNull()) {
-      msg = value(top, "messages", "message");
+
+  QJson::Parser parser;
+  QVariant response = parser.parse(data);
+  if(response.isNull()) {
+    myDebug() << "no response";
+    stop();
+    return;
+  }
+
+  const QVariantMap responseMap = response.toMap();
+  // check response code to see if everything was ok
+  if(value(responseMap, "code") == QLatin1String("/api/status/ok")) {
+    // the result objects are in outer envelopes called q1, q2, q3, etc...
+    int i = 1;
+    QVariant queryResult = responseMap.value(QLatin1String("q1"));
+    while(!queryResult.isNull()) {
+      QVariant resultThing = queryResult.toMap().value(QLatin1String("result"));
+      if(resultThing.canConvert(QVariant::List)) {
+        resultList += resultThing.toList();
+      } else if(!resultThing.isNull()) {
+        resultList += resultThing.toMap();
+      }
+      ++i;
+      queryResult = responseMap.value(QString::fromLatin1("q%1").arg(i));
     }
-    if(!msg.isNull()) {
-      myDebug() << "message:" << msg.toString();
+  } else {
+    // we have an error!!!!!!!!!!!!!
+    QString msg = value(responseMap, "message");
+    if(msg.isEmpty()) {
+      msg = value(responseMap, "messages", "message");
+    }
+    if(!msg.isEmpty()) {
+      myDebug() << "message:" << msg;
     }
   }
 
@@ -401,13 +317,11 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
   QString output;
 
-  QVariantMap resultMap;
   foreach(const QVariant& result, resultList) {
   //  myDebug() << "found result:" << result;
-    resultMap = result.toMap();
+    QVariantMap resultMap = result.toMap();
 
     Data::EntryPtr entry(new Data::Entry(coll));
-
     entry->setField(QLatin1String("title"), value(resultMap, "name"));
 
     switch(type) {
@@ -570,7 +484,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
           }
         }
       }
-   }
+    }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
@@ -594,6 +508,199 @@ QString FreebaseFetcher::defaultName() {
 
 QString FreebaseFetcher::defaultIcon() {
   return favIcon("http://www.freebase.com");
+}
+
+QVariantList FreebaseFetcher::bookQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/book/book_edition"));
+
+  QVariantMap book_query;
+  book_query.insert(QLatin1String("type"), QLatin1String("/book/book"));
+  book_query.insert(QLatin1String("*"), QVariantList());
+  query.insert(QLatin1String("book"), book_query);
+
+  QVariantMap work_query;
+  work_query.insert(QLatin1String("type"), QLatin1String("/book/written_work"));
+  work_query.insert(QLatin1String("*"), QVariantList());
+  // the author is part of the written_work type
+  if(request().key != Person) {
+    work_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  }
+  query.insert(QLatin1String("work:book"), work_query);
+
+  QVariantMap topic_query;
+  topic_query.insert(QLatin1String("type"), QLatin1String("/common/topic"));
+  topic_query.insert(QLatin1String("*"), QVariantList());
+  topic_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  query.insert(QLatin1String("topic:book"), topic_query);
+
+  QVariantMap page_query;
+  page_query.insert(QLatin1String("type"), QLatin1String("/book/pagination"));
+  page_query.insert(QLatin1String("numbered_pages"), QVariantList());
+  page_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  query.insert(QLatin1String("number_of_pages"), page_query);
+
+  QVariantMap isbn_query;
+  isbn_query.insert(QLatin1String("type"), QLatin1String("/book/isbn"));
+  isbn_query.insert(QLatin1String("isbn"), QVariantList());
+  if(request().key != ISBN) {
+    isbn_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  }
+  query.insert(QLatin1String("isbn"), isbn_query);
+
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case Person:
+      // for now just check author, and need to use written_work topic_query
+      {
+        QVariantMap work_query = query.value(QLatin1String("work:book")).toMap();
+        work_query.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        query.insert(QLatin1String("work:book"), work_query);
+      }
+      break;
+
+    case ISBN:
+      {
+        QVariantMap isbn_query = query.value(QLatin1String("isbn")).toMap();
+        // search for both ISBN10 and ISBN13
+        QVariantList isbns;
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
+        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
+        isbn_query.insert(QLatin1String("isbn|="), isbns);
+        query.insert(QLatin1String("isbn"), isbn_query);
+      }
+      break;
+
+    case LCCN:
+      query.insert(QLatin1String("LCCN"), LCCNValidator::formalize(request().value));
+      break;
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      return QVariantList();
+      break;
+  }
+
+  return QVariantList() << query;
+ }
+
+QVariantList FreebaseFetcher::movieQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/film/film"));
+
+  QVariantMap time_query;
+  time_query.insert(QLatin1String("type"), QLatin1String("/film/film_cut"));
+  time_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  time_query.insert(QLatin1String("runtime"), QVariantList());
+  query.insert(QLatin1String("runtime"), QVariantList() << time_query);
+
+  QVariantMap cast_query;
+  cast_query.insert(QLatin1String("type"), QLatin1String("/film/performance"));
+  cast_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  cast_query.insert(QLatin1String("actor"), QVariantList());
+  cast_query.insert(QLatin1String("character"), QVariantList());
+  query.insert(QLatin1String("starring"), QVariantList() << cast_query);
+
+  QVariantMap studio_query;
+  studio_query.insert(QLatin1String("type"), QLatin1String("/film/film_film_distributor_relationship"));
+  studio_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  studio_query.insert(QLatin1String("distributor"), QVariantList());
+  query.insert(QLatin1String("distributors"), QVariantList() << studio_query);
+
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case Person:
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      return QVariantList();
+      break;
+  }
+
+  return QVariantList() << query;
+}
+
+QVariantList FreebaseFetcher::musicQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/music/album"));
+
+  QVariantMap track_query;
+  track_query.insert(QLatin1String("type"), QLatin1String("/music/track"));
+  track_query.insert(QLatin1String("name"), QVariantList());
+  track_query.insert(QLatin1String("length"), QVariantList());
+  track_query.insert(QLatin1String("artist"), QVariantList());
+  track_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  query.insert(QLatin1String("track"), QVariantList() << track_query);
+
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case Person:
+      query.insert(QLatin1String("artist~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      return QVariantList();
+      break;
+  }
+
+  return QVariantList() << query;
+}
+
+QVariantList FreebaseFetcher::videoGameQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/cvg/computer_videogame"));
+
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case Person:
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      return QVariantList();
+      break;
+  }
+
+  return QVariantList() << query;
+}
+
+QVariantList FreebaseFetcher::boardGameQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/games/game"));
+
+  QVariantMap player_query;
+  player_query.insert(QLatin1String("type"), QLatin1String("/measurement_unit/integer_range"));
+  player_query.insert(QLatin1String("high_value"), QVariantList());
+  player_query.insert(QLatin1String("low_value"), QVariantList());
+  player_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  query.insert(QLatin1String("number_of_players"), player_query);
+
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      break;
+
+    case Person:
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      return QVariantList();
+      break;
+  }
+
+  return QVariantList() << query;
 }
 
 FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetcher*)

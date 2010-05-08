@@ -30,6 +30,7 @@
 #include "../datavectors.h"
 
 #include <QPointer>
+#include <QVariantList>
 
 class KJob;
 namespace KIO {
@@ -91,6 +92,12 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
+
+  QVariantList bookQueries() const;
+  QVariantList movieQueries() const;
+  QVariantList musicQueries() const;
+  QVariantList videoGameQueries() const;
+  QVariantList boardGameQueries() const;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
