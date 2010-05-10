@@ -53,6 +53,7 @@ namespace {
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
   static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
   static const char* FREEBASE_BLURB_URL = "http://www.freebase.com/api/trans/blurb";
+  static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 
   QString value(const QVariantMap& map, const char* name) {
     const QVariant v = map.value(QLatin1String(name));
@@ -177,6 +178,7 @@ void FreebaseFetcher::doSearch() {
 
     // grab all properties at the entity level
     query.insert(QLatin1String("*"), QVariantList());
+    query.insert(QLatin1String("limit"), FREEBASE_RETURNS_PER_REQUEST);
 
     // grab id for every query, for image and article
     QVariantMap id_query;
@@ -414,8 +416,12 @@ void FreebaseFetcher::slotComplete(KJob*) {
             if(!castMap.isEmpty()) {
               QVariantList actor = castMap.value(QLatin1String("actor")).toList();
               QVariantList role = castMap.value(QLatin1String("character")).toList();
-              if(!actor.isEmpty() && !role.isEmpty()) {
-                castList.append(actor.at(0).toString() + FieldFormat::columnDelimiterString() + role.at(0).toString());
+              if(!actor.isEmpty()) {
+                QString performance = actor.at(0).toString();
+                if(!role.isEmpty()) {
+                  performance += FieldFormat::columnDelimiterString() + role.at(0).toString();
+                }
+                castList.append(performance);
               }
             }
           }
@@ -715,11 +721,11 @@ QVariantList FreebaseFetcher::movieQueries() const {
         QVariantMap composerQuery = query;
         composerQuery.insert(QLatin1String("music~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
-        QVariantMap castSubquery = query.value(QLatin1String("starring")).toMap();
-        castSubquery.remove(QLatin1String("optional"));
+        QVariantMap castSubquery;
         castSubquery.insert(QLatin1String("actor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
         QVariantMap castQuery = query;
-        castQuery.insert(QLatin1String("starring"), QVariantList() << castSubquery);
+        // have to give it a dummy namespace so we get back all the actors
+        castQuery.insert(QLatin1String("b:starring"), QVariantList() << castSubquery);
 
         queries << directorQuery << castQuery << producerQuery << writerQuery << composerQuery;
       }
