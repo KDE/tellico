@@ -101,6 +101,8 @@ QString FreebaseFetcher::source() const {
 
 bool FreebaseFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
+         || type == Data::Collection::Bibtex
+         || type == Data::Collection::ComicBook
          || type == Data::Collection::Video
          || type == Data::Collection::Album
          || type == Data::Collection::Game
@@ -135,6 +137,10 @@ void FreebaseFetcher::doSearch() {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       queries = bookQueries();
+      break;
+
+    case Data::Collection::ComicBook:
+      queries = comicBookQueries();
       break;
 
     case Data::Collection::Video:
@@ -187,12 +193,16 @@ void FreebaseFetcher::doSearch() {
 
   QJson::Serializer serializer;
   QByteArray query_string = serializer.serialize(httpQuery);
-  myDebug() << "query:" << query_string;
+//  myDebug() << "query:" << query_string;
 
-  KUrl u(FREEBASE_QUERY_URL);
-  u.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
-
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  KUrl url(FREEBASE_QUERY_URL);
+  if(query_string.length() < 2048) {
+    url.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
+    m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+  } else {
+    query_string.prepend("queries=");
+    m_job = KIO::storedHttpPost(query_string, url, KIO::HideProgressInfo);
+  }
   m_job->ui()->setWindow(GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
@@ -326,7 +336,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
     switch(type) {
       case Data::Collection::Book:
-        // book stuff
+      case Data::Collection::Bibtex:
         entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
         entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn",  "isbn"));
         entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
@@ -347,6 +357,35 @@ void FreebaseFetcher::slotComplete(KJob*) {
             binding = FieldFormat::capitalize(binding);
           }
           entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8()));
+        }
+        break;
+
+      case Data::Collection::ComicBook:
+        entry->setField(QLatin1String("writer"),     value(resultMap, "editor"));
+        entry->setField(QLatin1String("issue"),      value(resultMap, "issue_number"));
+        entry->setField(QLatin1String("pub_year"),   value(resultMap, "date_of_publication").left(4));
+        entry->setField(QLatin1String("publisher"),  value(resultMap, "!/comic_books/comic_book_series/issues", "publisher"));
+        entry->setField(QLatin1String("series"),     value(resultMap, "!/comic_books/comic_book_series/issues", "name"));
+        entry->setField(QLatin1String("genre"),      value(resultMap, "!/comic_books/comic_book_series/issues", "genre"));
+        {
+          QStringList artists;
+          QString colors = value(resultMap, "cover_colors");
+          if(!colors.isEmpty()) {
+            artists << colors;
+          }
+          QString inks = value(resultMap, "cover_inks");
+          if(!inks.isEmpty())  {
+            artists << inks;
+          }
+          QString letters = value(resultMap, "cover_letters");
+          if(!letters.isEmpty()) {
+            artists << letters;
+          }
+          QString pencils = value(resultMap, "cover_pencils");
+          if(!pencils.isEmpty()) {
+            artists << pencils;
+          }
+          entry->setField(QLatin1String("artist"),  artists.join(Tellico::FieldFormat::delimiterString()));
         }
         break;
 
@@ -548,44 +587,89 @@ QVariantList FreebaseFetcher::bookQueries() const {
   }
   query.insert(QLatin1String("isbn"), isbn_query);
 
+  QVariantList queries;
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
       break;
 
     case Person:
       // for now just check author, and need to use written_work topic_query
       {
-        QVariantMap work_query = query.value(QLatin1String("work:book")).toMap();
-        work_query.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
-        query.insert(QLatin1String("work:book"), work_query);
+        QVariantMap workQuery = query.value(QLatin1String("work:book")).toMap();
+
+        QVariantMap authorSubQuery = workQuery;
+        authorSubQuery.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap editorSubquery = workQuery;
+        editorSubquery.insert(QLatin1String("editor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap authorQuery = query;
+        authorQuery.insert(QLatin1String("work:book"), authorSubQuery);
+
+        QVariantMap editorQuery = query;
+        editorQuery.insert(QLatin1String("work:book"), editorSubquery);
+
+        queries << authorQuery << editorQuery;
       }
       break;
 
     case ISBN:
       {
-        QVariantMap isbn_query = query.value(QLatin1String("isbn")).toMap();
+        QVariantMap isbnQuery = query.value(QLatin1String("isbn")).toMap();
         // search for both ISBN10 and ISBN13
         QVariantList isbns;
         isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
         isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
-        isbn_query.insert(QLatin1String("isbn|="), isbns);
-        query.insert(QLatin1String("isbn"), isbn_query);
+        isbnQuery.insert(QLatin1String("isbn|="), isbns);
+        query.insert(QLatin1String("isbn"), isbnQuery);
       }
+      queries << query;
       break;
 
     case LCCN:
       query.insert(QLatin1String("LCCN"), LCCNValidator::formalize(request().value));
+      queries << query;
       break;
 
     default:
       myWarning() << "bad request key:" << request().key;
-      return QVariantList();
       break;
   }
 
-  return QVariantList() << query;
- }
+  return queries;
+}
+
+QVariantList FreebaseFetcher::comicBookQueries() const {
+  QVariantMap query;
+  query.insert(QLatin1String("type"), QLatin1String("/comic_books/comic_book_issue"));
+
+  QVariantMap series_query;
+  series_query.insert(QLatin1String("type"), QLatin1String("/comic_books/comic_book_series"));
+  series_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  series_query.insert(QLatin1String("*"), QVariantList());
+  query.insert(QLatin1String("!/comic_books/comic_book_series/issues"), QVariantList() << series_query);
+
+  QVariantList queries;
+  switch(request().key) {
+    case Title:
+      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
+      break;
+
+    case Person:
+      query.insert(QLatin1String("editor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
+      break;
+
+    default:
+      myWarning() << "bad request key:" << request().key;
+      break;
+  }
+
+  return queries;
+}
 
 QVariantList FreebaseFetcher::movieQueries() const {
   QVariantMap query;
@@ -610,20 +694,43 @@ QVariantList FreebaseFetcher::movieQueries() const {
   studio_query.insert(QLatin1String("distributor"), QVariantList());
   query.insert(QLatin1String("distributors"), QVariantList() << studio_query);
 
+  QVariantList queries;
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
       break;
 
     case Person:
+      {
+        QVariantMap directorQuery = query;
+        directorQuery.insert(QLatin1String("directed_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap producerQuery = query;
+        producerQuery.insert(QLatin1String("produced_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap writerQuery = query;
+        writerQuery.insert(QLatin1String("written_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap composerQuery = query;
+        composerQuery.insert(QLatin1String("music~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap castSubquery = query.value(QLatin1String("starring")).toMap();
+        castSubquery.remove(QLatin1String("optional"));
+        castSubquery.insert(QLatin1String("actor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        QVariantMap castQuery = query;
+        castQuery.insert(QLatin1String("starring"), QVariantList() << castSubquery);
+
+        queries << directorQuery << castQuery << producerQuery << writerQuery << composerQuery;
+      }
+      break;
 
     default:
       myWarning() << "bad request key:" << request().key;
-      return QVariantList();
       break;
   }
 
-  return QVariantList() << query;
+  return queries;
 }
 
 QVariantList FreebaseFetcher::musicQueries() const {
@@ -660,20 +767,30 @@ QVariantList FreebaseFetcher::videoGameQueries() const {
   QVariantMap query;
   query.insert(QLatin1String("type"), QLatin1String("/cvg/computer_videogame"));
 
+  QVariantList queries;
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
       break;
 
     case Person:
+      {
+        QVariantMap developerQuery = query;
+        developerQuery.insert(QLatin1String("developer~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap publisherQuery = query;
+        publisherQuery.insert(QLatin1String("publisher~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        queries << developerQuery << publisherQuery;
+      }
+      break;
 
     default:
       myWarning() << "bad request key:" << request().key;
-      return QVariantList();
       break;
   }
 
-  return QVariantList() << query;
+  return queries;
 }
 
 QVariantList FreebaseFetcher::boardGameQueries() const {
@@ -687,20 +804,30 @@ QVariantList FreebaseFetcher::boardGameQueries() const {
   player_query.insert(QLatin1String("optional"), QLatin1String("optional"));
   query.insert(QLatin1String("number_of_players"), player_query);
 
+  QVariantList queries;
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
       break;
 
     case Person:
+      {
+        QVariantMap designerQuery = query;
+        designerQuery.insert(QLatin1String("designer~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        QVariantMap publisherQuery = query;
+        publisherQuery.insert(QLatin1String("publisher~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        queries << designerQuery << publisherQuery;
+      }
+      break;
 
     default:
       myWarning() << "bad request key:" << request().key;
-      return QVariantList();
       break;
   }
 
-  return QVariantList() << query;
+  return queries;
 }
 
 FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetcher*)

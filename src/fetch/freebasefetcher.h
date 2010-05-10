@@ -94,6 +94,7 @@ private:
   void doSearch();
 
   QVariantList bookQueries() const;
+  QVariantList comicBookQueries() const;
   QVariantList movieQueries() const;
   QVariantList musicQueries() const;
   QVariantList videoGameQueries() const;

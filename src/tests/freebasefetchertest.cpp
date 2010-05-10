@@ -31,6 +31,7 @@
 #include "../fetch/fetcherjob.h"
 #include "../fetch/freebasefetcher.h"
 #include "../collections/bookcollection.h"
+#include "../collections/comicbookcollection.h"
 #include "../collections/videocollection.h"
 #include "../collections/musiccollection.h"
 #include "../collections/gamecollection.h"
@@ -41,6 +42,8 @@
 
 QTEST_KDEMAIN( FreebaseFetcherTest, GUI )
 
+#define QL1(x) QString::fromLatin1(x)
+
 FreebaseFetcherTest::FreebaseFetcherTest() : m_loop(this) {
 }
 
@@ -50,6 +53,7 @@ void FreebaseFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
+  Tellico::RegisterCollection<Tellico::Data::ComicBookCollection> registerComic(Tellico::Data::Collection::ComicBook, "comic");
   Tellico::ImageFactory::init();
 
   QHash<QString, QString> coding;
@@ -166,6 +170,32 @@ void FreebaseFetcherTest::testLCCN() {
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
+void FreebaseFetcherTest::testComicBookTitle() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
+                                       QLatin1String("uncanny x-men #142"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QVERIFY(!m_results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Uncanny X-Men #142"));
+  QCOMPARE(entry->field(QLatin1String("writer")), QLatin1String("Louise Jones"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Marvel Comics"));
+  QCOMPARE(entry->field(QLatin1String("series")), QLatin1String("Uncanny X-Men"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("1980"));
+  QCOMPARE(entry->field(QLatin1String("issue")), QLatin1String("142"));
+  QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Glynis Wein; Terry Austin; John Byrne"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+}
+
 void FreebaseFetcherTest::testMovieTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QLatin1String("man from snowy river"));
@@ -206,6 +236,31 @@ void FreebaseFetcherTest::testMovieTitle() {
   QCOMPARE(castList.size(), 4);
 }
 
+void FreebaseFetcherTest::testMoviePerson() {
+  QFETCH(QString, person);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Person,
+                                       person);
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QVERIFY(m_results.size() > 0);
+}
+
+void FreebaseFetcherTest::testMoviePerson_data() {
+  QTest::addColumn<QString>("person");
+  QTest::newRow("director") << QL1("George Miller");
+  QTest::newRow("producer") << QL1("Simon Wincer");
+  QTest::newRow("writer")   << QL1("Banjo Paterson");
+  QTest::newRow("composer") << QL1("Bruce Rowland");
+}
+
 void FreebaseFetcherTest::testMusicTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        QLatin1String("if i left the zoo"));
@@ -231,6 +286,25 @@ void FreebaseFetcherTest::testMusicTitle() {
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(trackList.at(0), QLatin1String("Goodbye, Good Night::Jars of Clay::2:54"));
   QCOMPARE(trackList.size(), 11);
+}
+
+void FreebaseFetcherTest::testMusicPerson() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Person,
+                                       QLatin1String("jars of clay"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QVERIFY(m_results.size() > 0);
+
+  foreach(Tellico::Data::EntryPtr entry, m_results) {
+    QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Jars of Clay"));
+  }
 }
 
 void FreebaseFetcherTest::testGameTitle() {
