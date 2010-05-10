@@ -230,6 +230,52 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+  const QString image_id = entry->field(QLatin1String("cover"));
+  // if it's still a freebase id, then it starts with a slash
+  if(image_id.startsWith(QLatin1Char('/'))) {
+    // let's set max image size to 200x200
+    KUrl imageUrl(FREEBASE_IMAGE_URL);
+    imageUrl.addPath(image_id);
+    imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
+    imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
+    const QString id = ImageFactory::addImage(imageUrl, true);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    } else {
+      // all relevant collection types have cover fields
+      entry->setField(QLatin1String("cover"), id);
+    }
+  }
+
+  QString article_field;
+  const int type = entry->collection()->type();
+  switch(type) {
+    case Data::Collection::Video:
+      article_field = QLatin1String("plot");
+      break;
+    case Data::Collection::Game:
+    case Data::Collection::BoardGame:
+      article_field = QLatin1String("description");
+      break;
+    default:
+      break;
+  }
+
+  if(!article_field.isEmpty()) {
+    const QString article_id = entry->field(article_field);
+    // if it's still a freebase id, then it starts with a slash
+    if(article_id.startsWith(QLatin1Char('/'))) {
+      KUrl articleUrl(FREEBASE_BLURB_URL);
+      articleUrl.addPath(article_id);
+      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
+      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+      const QString output = FileHandler::readTextFile(articleUrl, false, true);
+      if(!output.isEmpty()) {
+        entry->setField(article_field, output);
+      }
+    }
+  }
+
   return entry;
 }
 
@@ -496,39 +542,12 @@ void FreebaseFetcher::slotComplete(KJob*) {
         break;
     }
 
-    const QString image_id = value(resultMap, "/common/topic/image", "id");
-    if(!image_id.isEmpty()) {
-      // let's set max image size to 200x200
-      KUrl imageUrl(FREEBASE_IMAGE_URL);
-      imageUrl.addPath(image_id);
-      imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
-      imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
-      const QString id = ImageFactory::addImage(imageUrl, true);
-      if(id.isEmpty()) {
-        message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-      } else {
-        // all relevant collection types have cover fields
-        entry->setField(QLatin1String("cover"), id);
-      }
-   }
-
-    // books and music don't have description fields
-    if(type != Data::Collection::Book && type != Data::Collection::Album) {
-      const QString article_id = value(resultMap, "/common/topic/article", "id");
-      if(!article_id.isEmpty()) {
-        KUrl articleUrl(FREEBASE_BLURB_URL);
-        articleUrl.addPath(article_id);
-        articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
-        articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
-        const QString output = FileHandler::readTextFile(articleUrl, false, true);
-        if(!output.isEmpty()) {
-          if(type == Data::Collection::Video) {
-            entry->setField(QLatin1String("plot"), output);
-          } else {
-            entry->setField(QLatin1String("description"), output);
-          }
-        }
-      }
+    // the the image and article ids. The actual content gets loaded in fetchEntryHook()
+    entry->setField(QLatin1String("cover"), value(resultMap, "/common/topic/image", "id"));
+    if(type == Data::Collection::Video) {
+      entry->setField(QLatin1String("plot"), value(resultMap, "/common/topic/article", "id"));
+    } else if(type == Data::Collection::Game || type == Data::Collection::BoardGame) {
+      entry->setField(QLatin1String("description"), value(resultMap, "/common/topic/article", "id"));
     }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
