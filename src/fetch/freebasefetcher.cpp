@@ -119,6 +119,7 @@ void FreebaseFetcher::readConfigHook(const KConfigGroup&) {
 
 void FreebaseFetcher::search() {
   m_started = true;
+  m_cursors.clear();
   doSearch();
 }
 
@@ -172,7 +173,18 @@ void FreebaseFetcher::doSearch() {
 
   QVariantMap httpQuery;
 
+  // make sure if we have cursors for every query
+  while(m_cursors.count() < queries.count()) {
+    m_cursors.append(QVariant(true));
+  }
+
   for(int i = 0; i < queries.size(); ++i) {
+    // we skip the query if the cursor is valid and == false
+    if(m_cursors.at(i).type() == QVariant::Bool && !m_cursors.at(i).toBool()) {
+      myDebug() << "skipping query" << i;
+      continue;
+    }
+
     QVariantMap query = queries.at(i).toMap();
     Q_ASSERT(!query.isEmpty());
 
@@ -188,9 +200,10 @@ void FreebaseFetcher::doSearch() {
     query.insert(QLatin1String("/common/topic/image"), id_query);
     query.insert(QLatin1String("/common/topic/article"), id_query);
 
-    QVariantMap innerQuery;
-    innerQuery.insert(QLatin1String("query"), QVariantList() << query);
-    httpQuery.insert(QString::fromLatin1("q%1").arg(i+1), innerQuery);
+    QVariantMap envelope;
+    envelope.insert(QLatin1String("query"), QVariantList() << query);
+    envelope.insert(QLatin1String("cursor"), m_cursors.at(i));
+    httpQuery.insert(QString::fromLatin1("q%1").arg(i), envelope);
   }
 
   QJson::Serializer serializer;
@@ -326,8 +339,6 @@ void FreebaseFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QVariantList resultList;
-
   QJson::Parser parser;
   QVariant response = parser.parse(data);
   if(response.isNull()) {
@@ -336,21 +347,27 @@ void FreebaseFetcher::slotComplete(KJob*) {
     return;
   }
 
+  m_hasMoreResults = false;
+  QVariantList resultList;
+
   const QVariantMap responseMap = response.toMap();
   // check response code to see if everything was ok
   if(value(responseMap, "code") == QLatin1String("/api/status/ok")) {
-    // the result objects are in outer envelopes called q1, q2, q3, etc...
-    int i = 1;
-    QVariant queryResult = responseMap.value(QLatin1String("q1"));
-    while(!queryResult.isNull()) {
-      QVariant resultThing = queryResult.toMap().value(QLatin1String("result"));
-      if(resultThing.canConvert(QVariant::List)) {
-        resultList += resultThing.toList();
-      } else if(!resultThing.isNull()) {
-        resultList += resultThing.toMap();
+    // the result objects are in outer envelopes called q0, q1, q3, etc...
+    for(int i = 0; i < m_cursors.count(); ++i) {
+      QVariant queryResult = responseMap.value(QString::fromLatin1("q%1").arg(i));
+      if(!queryResult.isNull()) {
+        m_cursors[i] = queryResult.toMap().value(QLatin1String("cursor"));
+        // there are more results if the cursor value is a string
+        m_hasMoreResults = m_hasMoreResults || m_cursors.at(i).type() == QVariant::String;
+
+        QVariant resultThing = queryResult.toMap().value(QLatin1String("result"));
+        if(resultThing.canConvert(QVariant::List)) {
+          resultList += resultThing.toList();
+        } else if(!resultThing.isNull()) {
+          resultList += resultThing.toMap();
+        }
       }
-      ++i;
-      queryResult = responseMap.value(QString::fromLatin1("q%1").arg(i));
     }
   } else {
     // we have an error!!!!!!!!!!!!!
@@ -554,10 +571,6 @@ void FreebaseFetcher::slotComplete(KJob*) {
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
-
-//  m_start = m_entries.count();
-//  m_hasMoreResults = m_start <= m_total;
-  m_hasMoreResults = false; // for now, no continued searches
 #endif
   stop(); // required
 }

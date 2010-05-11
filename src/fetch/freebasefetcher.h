@@ -104,6 +104,7 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  QVariantList m_cursors;
 };
 
   } // end namespace
