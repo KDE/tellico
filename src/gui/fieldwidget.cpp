@@ -116,6 +116,10 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_label->setFixedWidth(m_label->sizeHint().width());
   l->addWidget(m_label);
 
+  if(field_->isSingleCategory()) {
+    m_label->hide();
+  }
+
   // expands indicates if the edit widget should expand to full width of widget
   m_expands = (type == Data::Field::Line
                || type == Data::Field::Para
