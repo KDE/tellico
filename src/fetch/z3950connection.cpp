@@ -313,11 +313,25 @@ void Z3950Connection::run() {
 
   const size_t realLimit = qMin(numResults, m_limit);
 
+  bool showError = true;
   for(size_t i = m_start; i < realLimit && !m_aborted; ++i) {
 //    myLog() << "grabbing index" << i;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, i);
     if(!rec) {
       myDebug() << "no record returned for index" << i;
+      errcode = ZOOM_connection_error(d->conn, &errmsg, &addinfo);
+      if(errcode != 0) {
+        QString s = i18n("Connection search error %1: %2", errcode, toString(errmsg));
+        if(!QByteArray(addinfo).isEmpty()) {
+          s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
+        }
+        myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
+        if(showError) {
+          showError = false;
+          m_hasMore = true;
+          done(s, MessageHandler::Error);
+        }
+      }
       continue;
     }
     int len;
