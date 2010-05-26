@@ -87,6 +87,41 @@ void AllocineFetcherTest::testTitle() {
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
+void AllocineFetcherTest::testTitle2() {
+  // searching with and without diacritical marks
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("Operation Tonnerre"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
+
+  KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
+  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  cg.writeEntry("ExecPath", QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py");
+  // don't sync() and save the new path
+  cg.markAsClean();
+  fetcher->readConfig(cg, cg.name());
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                        QLatin1String("Opération Tonnerre"));
+  Tellico::Fetch::FetcherJob* job2 = new Tellico::Fetch::FetcherJob(0, fetcher, request2);
+  connect(job2, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job2->setMaximumResults(1);
+
+  job2->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+}
+
 void AllocineFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();
