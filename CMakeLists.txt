@@ -86,7 +86,7 @@ if(LIBEXEMPI_FOUND)
 endif(LIBEXEMPI_FOUND)
 
 macro_optional_find_package(QJSON)
-macro_log_feature(QJSON_FOUND "QJSON" "Support for searching OpenLibrary.org" "http://qjson.sourceforge.net" FALSE "" "")
+macro_log_feature(QJSON_FOUND "QJSON" "Support for searching OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
 
 # once we make webcam support enabled by default, we can remove this logic
 if(ENABLE_WEBCAM)
