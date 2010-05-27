@@ -109,6 +109,7 @@ void AllocineFetcherTest::testTitle2() {
   m_loop.exec();
 
   QCOMPARE(m_results.size(), 1);
+  Tellico::Data::EntryPtr entry1 = m_results.at(0);
 
   Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                         QLatin1String("Opération Tonnerre"));
@@ -120,6 +121,13 @@ void AllocineFetcherTest::testTitle2() {
   m_loop.exec();
 
   QCOMPARE(m_results.size(), 1);
+  Tellico::Data::EntryPtr entry2 = m_results.at(0);
+
+  foreach(Tellico::Data::FieldPtr f, entry1->collection()->fields()) {
+    if(f->type() != Tellico::Data::Field::Image) {
+     QCOMPARE(entry1->field(f), entry2->field(f));
+    }
+  }
 }
 
 void AllocineFetcherTest::slotResult(KJob* job_) {
