@@ -14,6 +14,11 @@
 # *                                                                         *
 # ***************************************************************************
 #
+# Version 0.7.2: 2010-05-27 (Reported by Romain Henriet)
+# * Fixed bug preventing searches with accent marks
+# * Added post-processing cleanup action to replace raw HTML entities with 
+#   their ISO Latin-1 replacement text
+#
 # Version 0.7.1: 2010-04-26 (Thanks to Romain Henriet <romain-devel@laposte.net>)
 # * Fixed greedy regexp for genre.  Fixed nationality output. Add studio.
 #
@@ -41,15 +46,18 @@
 # Version 0.1:
 # * Initial release.
 
-import sys, os, re, hashlib, random
+import sys, os, re, hashlib, random, types
 import urllib, urllib2, time, base64
 import xml.dom.minidom
 import locale
+try: import htmlentitydefs as htmlents
+except ImportError:
+	raise ImportError, 'Python 2.5+ required'
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.7.1"
+VERSION = "0.7.2"
 
 def genMD5():
 	float = random.random()
@@ -246,14 +254,6 @@ class AlloCineParser:
 		Runs the allocine.fr parser: fetch movie related links, then fills and prints the DOM tree
 		to stdout (in tellico format) so that tellico can use it.
 		"""
-
-		loc = re.search('\.([^\.]*)', locale.setlocale(locale.LC_ALL, ''))
-		if loc:
-			local = loc.group(1)
-		else:
-			local = 'UTF-8'
-		title = unicode(title, local).encode('latin-1')
-
 		self.__getMovie(title)
 		# Print results to stdout
 		self.__domTree.printXML()
@@ -336,6 +336,8 @@ class AlloCineParser:
 
 				elif name == 'plot':
 					data[name] = matches[name].group('plot').strip()
+				# Cleans up any HTML entities
+				data[name] = self.__cleanUp(data[name])
 
 			else:
 				matches[name] = ''
@@ -391,6 +393,21 @@ class AlloCineParser:
 		for kind in ('prods', 'scens', 'comps'):
 			data[kind] = [re.sub(r'([\r\n\t]+)', '', k).strip() for k in re.findall(self.__castRegExps[kind], subset, re.S | re.I)]
 
+		return data
+
+	def __cleanUp(self, data):
+		"""
+		Cleans up the string(s), replacing raw HTML entities with their 
+		ISO Latin-1 replacement text.
+		@param data string or list of strings
+		"""
+		if type(data) == types.ListType:
+			for s in data:
+				for k, v in htmlents.entitydefs.iteritems():
+					s = s.replace("&%s;" % k, v)
+		elif type(data) == types.StringType or type(data) == types.UnicodeType:
+			for k, v in htmlents.entitydefs.iteritems():
+				data = data.replace("&%s;" % k, v)
 		return data
 
 	def __getMovie(self, title):
