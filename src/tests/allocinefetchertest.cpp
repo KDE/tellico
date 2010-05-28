@@ -87,7 +87,7 @@ void AllocineFetcherTest::testTitle() {
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
-void AllocineFetcherTest::testTitle2() {
+void AllocineFetcherTest::testTitleAccented() {
   // searching with and without diacritical marks
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QLatin1String("Operation Tonnerre"));
@@ -128,6 +128,33 @@ void AllocineFetcherTest::testTitle2() {
      QCOMPARE(entry1->field(f), entry2->field(f));
     }
   }
+}
+
+void AllocineFetcherTest::testPlotQuote() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("Goldfinger"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
+
+  KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
+  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  cg.writeEntry("ExecPath", QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py");
+  // don't sync() and save the new path
+  cg.markAsClean();
+  fetcher->readConfig(cg, cg.name());
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Goldfinger"));
+  QVERIFY(!entry->field(QLatin1String("plot")).contains(QLatin1String("&quot;")));
 }
 
 void AllocineFetcherTest::slotResult(KJob* job_) {
