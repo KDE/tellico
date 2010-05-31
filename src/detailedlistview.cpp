@@ -88,8 +88,9 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   header()->setMinimumSectionSize(20);
 
   m_headerMenu = new KMenu(this);
-  connect(m_headerMenu, SIGNAL(triggered(QAction*)),
-          SLOT(slotHeaderMenuActivated(QAction*)));
+  m_columnMenu = new KMenu(this);
+  connect(m_columnMenu, SIGNAL(triggered(QAction*)),
+          SLOT(slotColumnMenuActivated(QAction*)));
 
   EntryModel* entryModel = new EntryModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
@@ -164,6 +165,18 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   const int maxCount = qMin(currentColumnOrder.size(), columnOrder.size());
   for(int i = 0; i < maxCount; ++i) {
     header()->moveSection(header()->visualIndex(currentColumnOrder.at(i)), columnOrder.at(i));
+  }
+
+  // always hide tables and paragraphs
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+    if(field) {
+      if(field->type() == Data::Field::Table || field->type() == Data::Field::Para) {
+        hideColumn(ncol);
+      }
+    } else {
+      myDebug() << "no field for col" << ncol;
+    }
   }
 
   // because some of the fields got hidden...
@@ -314,24 +327,35 @@ void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
   }
 }
 
-void DetailedListView::slotHeaderMenuActivated(QAction* action_) {
+void DetailedListView::slotColumnMenuActivated(QAction* action_) {
   const int col = action_->data().toInt();
-  if(col == -1) { // hide all
-    for(int ncol = 0; ncol < header()->count(); ++ncol) {
-      hideColumn(ncol);
-    }
-    foreach(QAction* action, m_headerMenu->actions()) {
-      if(action->isCheckable()) {
-        action->setChecked(false);
-      }
-    }
-  } else if(col < header()->count()) {
+  if(col > -1) { // only column actions have data
     const bool isChecked = action_->isChecked();
     setColumnHidden(col, !isChecked);
     // if we're showing a column, resize all sections
     if(isChecked) {
       resizeColumnToContents(col);
       adjustColumnWidths();
+    }
+  }
+  checkHeader();
+}
+
+void DetailedListView::showAllColumns() {
+  foreach(QAction* action, m_columnMenu->actions()) {
+    if(action->isCheckable() && !action->isChecked()) {
+      action->trigger();
+    }
+  }
+}
+
+void DetailedListView::hideAllColumns() {
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    hideColumn(ncol);
+  }
+  foreach(QAction* action, m_columnMenu->actions()) {
+    if(action->isCheckable()) {
+      action->setChecked(false);
     }
   }
   checkHeader();
@@ -524,16 +548,31 @@ void DetailedListView::updateHeaderMenu() {
   }
   m_headerMenu->clear();
   m_headerMenu->addTitle(i18n("View Columns"));
+
+  m_columnMenu->clear();
+
   for(int ncol = 0; ncol < header()->count(); ++ncol) {
-//    Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
-    QAction* act = m_headerMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
+    Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+    if(field && (field->type() == Data::Field::Table || field->type() == Data::Field::Para)) {
+      continue;
+    }
+    QAction* act = m_columnMenu->addAction(model()->headerData(ncol, Qt::Horizontal).toString());
     act->setData(ncol);
     act->setCheckable(true);
     act->setChecked(!isColumnHidden(ncol));
   }
+  QAction* columnAction = m_headerMenu->addMenu(m_columnMenu);
+  columnAction->setText(i18nc("Noun, Menu name", "Columns"));
+  columnAction->setIcon(KIcon(QLatin1String("view-file-columns")));
+
   m_headerMenu->addSeparator();
-  QAction* act = m_headerMenu->addAction(i18n("Hide All Columns"));
-  act->setData(-1); // means hide all
+
+  QAction* actShowAll = m_headerMenu->addAction(i18n("Show All Columns"));
+  connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
+  QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
+  connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
+  QAction* actResize = m_headerMenu->addAction(KIcon(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
+  connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 
 void DetailedListView::slotRefreshImages() {
@@ -553,6 +592,14 @@ void DetailedListView::adjustColumnWidths() {
   }
 }
 
+void DetailedListView::resizeColumnsToContents() {
+  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+    if(!isColumnHidden(ncol)) {
+      resizeColumnToContents(ncol);
+    }
+  }
+}
+
 void DetailedListView::checkHeader() {
   // the header disappears if all columns are hidden, so if the user hides all
   // columns, we turn around and show the title
@@ -565,7 +612,7 @@ void DetailedListView::checkHeader() {
   }
   // find title action in menu and activate it
   QAction* action = 0;
-  foreach(QAction* tryAction, m_headerMenu->actions()) {
+  foreach(QAction* tryAction, m_columnMenu->actions()) {
     const int ncol = tryAction->data().toInt();
     if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {
       action = tryAction;
@@ -575,7 +622,7 @@ void DetailedListView::checkHeader() {
   if(action) {
     action->setChecked(true);
     const int col = action->data().toInt();
-    // calling slotHeaderMenuActivated() would be infinite loop
+    // calling slotColumnMenuActivated() would be infinite loop
     setColumnHidden(col, false);
     resizeColumnToContents(col);
   } else {

@@ -146,8 +146,11 @@ public slots:
 private slots:
   void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
   void slotDoubleClicked(const QModelIndex& index);
-  void slotHeaderMenuActivated(QAction* action);
+  void slotColumnMenuActivated(QAction* action);
   void updateHeaderMenu();
+  void showAllColumns();
+  void hideAllColumns();
+  void resizeColumnsToContents();
 //  void slotCacheColumnWidth(int section, int oldSize, int newSize);
 
 private:
@@ -167,6 +170,7 @@ private:
   };
 
   KMenu* m_headerMenu;
+  KMenu* m_columnMenu;
   bool m_loadingCollection;
   bool m_selectionChanging;
 };
