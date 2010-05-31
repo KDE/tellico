@@ -53,6 +53,7 @@ namespace {
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
   static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
   static const char* FREEBASE_BLURB_URL = "http://www.freebase.com/api/trans/blurb";
+  static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 
   QString value(const QVariantMap& map, const char* name) {
@@ -389,6 +390,11 @@ void FreebaseFetcher::slotComplete(KJob*) {
   const int type = collectionType();
 
   Data::CollPtr coll = CollectionFactory::collection(type, true);
+  if(!coll->hasField(QLatin1String("freebase")) && optionalFields().contains(QLatin1String("freebase"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("freebase"), i18n("Freebase Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
 
   QString output;
 
@@ -398,6 +404,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
     Data::EntryPtr entry(new Data::Entry(coll));
     entry->setField(QLatin1String("title"), value(resultMap, "name"));
+    entry->setField(QLatin1String("freebase"), QLatin1String(FREEBASE_VIEW_URL) + value(resultMap, "id"));
 
     switch(type) {
       case Data::Collection::Book:
@@ -585,6 +592,12 @@ QString FreebaseFetcher::defaultName() {
 
 QString FreebaseFetcher::defaultIcon() {
   return favIcon("http://www.freebase.com");
+}
+
+Tellico::StringHash FreebaseFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("freebase")] = i18n("Freebase Link");
+  return hash;
 }
 
 QVariantList FreebaseFetcher::bookQueries() const {
@@ -868,11 +881,14 @@ QVariantList FreebaseFetcher::boardGameQueries() const {
   return queries;
 }
 
-FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetcher*)
+FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+
+  // now add additional fields widget
+  addFieldsWidget(FreebaseFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 void FreebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {

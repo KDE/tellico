@@ -272,6 +272,11 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
   }
 
   Data::CollPtr coll(new Data::BookCollection(true));
+  if(!coll->hasField(QLatin1String("openlibrary")) && optionalFields().contains(QLatin1String("openlibrary"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
 
   QVariantMap resultMap;
   foreach(const QVariant& result, resultList) {
@@ -304,6 +309,8 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     entry->setField(QLatin1String("series"), value(resultMap, "series"));
     entry->setField(QLatin1String("pages"), value(resultMap, "number_of_pages"));
     entry->setField(QLatin1String("comments"), value(resultMap, "notes"));
+
+    entry->setField(QLatin1String("openlibrary"), QLatin1String("http://openlibrary.org") + value(resultMap, "key"));
 
     QStringList authors;
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
@@ -391,11 +398,20 @@ QString OpenLibraryFetcher::defaultIcon() {
   return favIcon("http://www.openlibrary.org");
 }
 
-OpenLibraryFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OpenLibraryFetcher*)
+Tellico::StringHash OpenLibraryFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("openlibrary")] = i18n("OpenLibrary Link");
+  return hash;
+}
+
+OpenLibraryFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OpenLibraryFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+
+  // now add additional fields widget
+  addFieldsWidget(OpenLibraryFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 void OpenLibraryFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {

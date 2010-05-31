@@ -703,7 +703,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   }
 
   const QString imdb = QLatin1String("imdb");
-  if(!coll->hasField(imdb) && allOptionalFields().contains(imdb)) {
+  if(!coll->hasField(imdb) && optionalFields().contains(imdb)) {
     Data::FieldPtr field(new Data::Field(imdb, i18n("IMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -758,7 +758,7 @@ void IMDBFetcher::doAspectRatio(const QString& str_, Tellico::Data::EntryPtr ent
 }
 
 void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(!allOptionalFields().contains(QLatin1String("alttitle"))) {
+  if(!optionalFields().contains(QLatin1String("alttitle"))) {
     return;
   }
 
@@ -976,7 +976,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
 }
 
 void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) {
-  if(!allOptionalFields().contains(QLatin1String("imdb-rating"))) {
+  if(!optionalFields().contains(QLatin1String("imdb-rating"))) {
     return;
   }
 
@@ -1107,7 +1107,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 
     // now add new field for all certifications
     const QString allc = QLatin1String("allcertification");
-    if(allOptionalFields().contains(allc)) {
+    if(optionalFields().contains(allc)) {
       Data::FieldPtr f = entry_->collection()->fieldByName(allc);
       if(!f) {
         f = new Data::Field(allc, i18n("Certifications"), Data::Field::Table);
