@@ -38,6 +38,7 @@
 #include "core/tellico_config.h"
 #include "images/imagefactory.h"
 #include "gui/combobox.h"
+#include "gui/collectiontypecombo.h"
 #include "gui/previewdialog.h"
 #include "newstuff/manager.h"
 #include "fieldformat.h"
@@ -628,6 +629,20 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
+  KHBox* hb2 = new KHBox(frame);
+  leftLayout->addWidget(hb2);
+  m_cbFilterSource = new QCheckBox(i18n("Filter by type:"), hb2);
+  connect(m_cbFilterSource, SIGNAL(clicked()), SLOT(slotSourceFilterChanged()));
+  m_sourceTypeCombo = new GUI::CollectionTypeCombo(hb2);
+  connect(m_sourceTypeCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotSourceFilterChanged()));
+  // we want to remove the item for a custom collection
+  int index = m_sourceTypeCombo->findData(Data::Collection::Base);
+  if(index > -1) {
+    m_sourceTypeCombo->removeItem(index);
+  }
+  // disable until check box is checked
+  m_sourceTypeCombo->setEnabled(false);
+
   // these icons are rather arbitrary, but seem to vaguely fit
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
@@ -991,6 +1006,16 @@ void ConfigDialog::slotMoveDownSourceClicked() {
   m_sourceListWidget->insertItem(row+1, item);
   m_sourceListWidget->setCurrentItem(item);
   slotModified(); // toggle apply button
+}
+
+void ConfigDialog::slotSourceFilterChanged() {
+  m_sourceTypeCombo->setEnabled(m_cbFilterSource->isChecked());
+  const bool showAll = !m_sourceTypeCombo->isEnabled();
+  const int type = m_sourceTypeCombo->currentType();
+  for(int count = 0; count < m_sourceListWidget->count(); ++count) {
+    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(count));
+    item->setHidden(!showAll && item->fetcher() && !item->fetcher()->canFetch(type));
+  }
 }
 
 void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {

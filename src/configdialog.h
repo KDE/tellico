@@ -49,6 +49,7 @@ namespace Tellico {
   }
   namespace GUI {
     class ComboBox;
+    class CollectionTypeCombo;
   }
 
 /**
@@ -119,6 +120,7 @@ private slots:
   void slotSelectedSourceChanged(QListWidgetItem* item);
   void slotMoveUpSourceClicked();
   void slotMoveDownSourceClicked();
+  void slotSourceFilterChanged();
   void slotNewStuffClicked();
   void slotShowTemplatePreview();
   void slotInstallTemplate();
@@ -206,6 +208,8 @@ private:
   KPushButton* m_moveDownSourceBtn;
   KPushButton* m_removeSourceBtn;
   KPushButton* m_newStuffBtn;
+  QCheckBox* m_cbFilterSource;
+  GUI::CollectionTypeCombo* m_sourceTypeCombo;
 };
 
 class GeneralFetcherInfo {

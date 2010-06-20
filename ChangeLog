@@ -1,3 +1,7 @@
+2010-06-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Added filter for data source list.
+
 2010-05-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated BoardGameGeek fetcher for new API.

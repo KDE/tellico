@@ -37,8 +37,10 @@ public:
   void reset();
   void setCurrentType(int type);
   int currentType() const { return currentData().toInt(); }
+  int itemType(int index) const { return itemData(index).toInt(); }
   // this method "hides" the normal addItem from QComboBox
   void addItem(const QString& value, int collType);
+  void insertItem(int index, const QString& value, int collType);
 };
 
   }
