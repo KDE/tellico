@@ -117,6 +117,12 @@
     <xsl:if test=".//mods:identifier[@type='issn']">
      <field flags="0" title="ISSN#" category="Publishing" format="4" type="1" name="issn" description="ISSN#" />
     </xsl:if>
+    <xsl:if test=".//mods:classification[@authority='ddc']">
+     <field title="Dewey Decimal" flags="0" category="Publishing" format="4" type="1" name="dewey" i18n="true"/>
+    </xsl:if>
+    <xsl:if test=".//mods:classification[@authority='lcc']">
+     <field title="LoC Classification" flags="0" category="Publishing" format="4" type="1" name="lcc" i18n="true"/>
+    </xsl:if>
    </fields>
 <!-- for now, go the route of bibliox, and assume only text records
      with an originInfo/publisher or identifier[isbn] elements are actually books -->
@@ -182,6 +188,10 @@
    <xsl:value-of select="mods:titleInfo/mods:nonSort"/>
    <xsl:value-of select="mods:titleInfo/mods:title"/>
   </title>
+
+  <subtitle>
+   <xsl:value-of select="mods:titleInfo/mods:subTitle"/>
+  </subtitle>
 
   <xsl:call-template name="names">
    <xsl:with-param name="elem" select="'author'"/>
@@ -278,6 +288,7 @@
                                mods:relatedItem[@type='series'] |
                                mods:part |
                                mods:identifier |
+                               mods:classification |
                                mods:subTitle |
                                mods:note |
                                mods:abstract |
@@ -385,6 +396,21 @@
   <xsl:text>.</xsl:text>
  </xsl:if>
   <xsl:text> </xsl:text>
+</xsl:template>
+
+<xsl:template match="mods:classification">
+ <xsl:choose>
+  <xsl:when test="@authority='ddc'">
+   <dewey>
+    <xsl:value-of select="."/>
+   </dewey>
+  </xsl:when>
+  <xsl:when test="@authority='lcc'">
+   <lcc>
+    <xsl:value-of select="."/>
+   </lcc>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="mods:identifier">
