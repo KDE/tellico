@@ -414,7 +414,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
       stop();
       return;
     }
-#if 1
+#if 0
     myWarning() << "Remove debug from z3950fetcher.cpp";
     {
       QFile f2(QLatin1String("/tmp/mods.xml"));
