@@ -41,6 +41,7 @@ find_package(Gettext REQUIRED)
 find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
+find_package(Nepomuk REQUIRED)
 
 # The taglib cmake script is broken, this works around the issue
 set(TAGLIB_INCLUDES)

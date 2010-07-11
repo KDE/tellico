@@ -40,6 +40,8 @@
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
+#include <Nepomuk/Types/Property>
+#include <Nepomuk/ResourceManager>
 
 #include <QCheckBox>
 #include <QGroupBox>
@@ -66,13 +68,15 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return m_coll;
   }
 
+  Nepomuk::ResourceManager::instance()->init();
+
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
   ProgressItem::Done done(this);
 
   // going to assume only one volume will ever be imported
-  QString volume = volumeName();
+  const QString volume = volumeName();
 
   m_job = m_recursive->isChecked()
           ? KIO::listRecursive(url(), KIO::DefaultFlags, false)
@@ -83,6 +87,14 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   if(!KIO::NetAccess::synchronousRun(m_job, GUI::Proxy::widget()) || m_cancelled) {
     return Data::CollPtr();
   }
+
+  QStringList metaIgnore = QStringList()
+                         << QLatin1String("mimeType")
+                         << QLatin1String("url")
+                         << QLatin1String("fileName")
+                         << QLatin1String("lastModified")
+                         << QLatin1String("contentSize")
+                         << QLatin1String("type");
 
   const bool usePreview = m_filePreview->isChecked();
 
@@ -97,7 +109,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString owner    = QLatin1String("owner");
   const QString group    = QLatin1String("group");
   const QString created  = QLatin1String("created");
-  const QString modified = QLatin1String("modified");
+  const QString modified  = QLatin1String("modified");
   const QString metainfo = QLatin1String("metainfo");
   const QString icon     = QLatin1String("icon");
 
@@ -137,16 +149,16 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     if(!dt.isNull()) {
       entry->setField(modified, dt.toString(KDateTime::ISODate));
     }
+
     const KFileMetaInfo& meta = item.metaInfo();
     if(meta.isValid()) {
-      const QStringList keys = meta.supportedKeys();
       QStringList strings;
-      foreach(const QString& key, keys) {
-        KFileMetaInfoItem item = meta.item(key);
-        if(item.isValid()) {
-          QString s = item.value().toString();
-          if(!s.isEmpty()) {
-            strings << item.name() + FieldFormat::columnDelimiterString() + s;
+      foreach(const KFileMetaInfoItem& item, meta.items()) {
+        const QString s = item.value().toString();
+        if(!s.isEmpty()) {
+          const QString label = Nepomuk::Types::Property(item.name()).label();
+          if(!metaIgnore.contains(label)) {
+            strings << label + FieldFormat::columnDelimiterString() + item.prefix() + s + item.suffix();
           }
         }
       }
@@ -164,7 +176,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     if(!m_pixmap.isNull()) {
       // is png best option?
-      QString id = ImageFactory::addImage(m_pixmap, QLatin1String("PNG"));
+      const QString id = ImageFactory::addImage(m_pixmap, QLatin1String("PNG"));
       if(!id.isEmpty()) {
         entry->setField(icon, id);
       }
