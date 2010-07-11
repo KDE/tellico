@@ -88,9 +88,8 @@ void AllocineFetcherTest::testTitle() {
 }
 
 void AllocineFetcherTest::testTitleAccented() {
-  // searching with and without diacritical marks
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QLatin1String("Operation Tonnerre"));
+  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                        QLatin1String("Opération Tonnerre"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
@@ -100,19 +99,6 @@ void AllocineFetcherTest::testTitleAccented() {
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
-
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  Tellico::Data::EntryPtr entry1 = m_results.at(0);
-
-  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                        QLatin1String("Opération Tonnerre"));
   Tellico::Fetch::FetcherJob* job2 = new Tellico::Fetch::FetcherJob(0, fetcher, request2);
   connect(job2, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
   job2->setMaximumResults(1);
@@ -121,13 +107,9 @@ void AllocineFetcherTest::testTitleAccented() {
   m_loop.exec();
 
   QCOMPARE(m_results.size(), 1);
-  Tellico::Data::EntryPtr entry2 = m_results.at(0);
 
-  foreach(Tellico::Data::FieldPtr f, entry1->collection()->fields()) {
-    if(f->type() != Tellico::Data::Field::Image) {
-     QCOMPARE(entry1->field(f), entry2->field(f));
-    }
-  }
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Opération Tonnerre"));
 }
 
 void AllocineFetcherTest::testPlotQuote() {

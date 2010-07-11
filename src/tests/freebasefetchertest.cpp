@@ -219,7 +219,7 @@ void FreebaseFetcherTest::testMovieTitle() {
   }
 
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Man From Snowy River"));
-  QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("George T. Miller; George Miller"));
+  QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("George T. Miller"));
   QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Simon Wincer"));
   QCOMPARE(entry->field(QLatin1String("writer")), QLatin1String("Banjo Paterson"));
   QCOMPARE(entry->field(QLatin1String("composer")), QLatin1String("Bruce Rowland"));
