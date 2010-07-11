@@ -1046,9 +1046,9 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   const QString genre = QLatin1String("/Genres/");
   const QString country = QLatin1String("/Countries/");
   const QString lang = QLatin1String("/Languages/");
-  const QString colorInfo = QLatin1String("color-info");
+  const QString colorInfo = QLatin1String("colors=");
   const QString cert = QLatin1String("certificates=");
-  const QString soundMix = QLatin1String("sound-mix=");
+  const QString soundMix = QLatin1String("sound_mixes=");
   const QString year = QLatin1String("/Years/");
   const QString company = QLatin1String("/company/");
 

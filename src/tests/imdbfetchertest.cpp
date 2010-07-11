@@ -69,6 +69,9 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
   QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
+  QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
+  QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
+  QCOMPARE(entry->field("color"), QLatin1String("Color"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
   QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
