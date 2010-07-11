@@ -105,6 +105,7 @@ private:
   bool m_cancelled : 1;
   bool m_parseDOM : 1;
   bool m_checkCreateDir : 1;
+  bool m_checkCommonFile : 1;
   int m_imageWidth;
   int m_imageHeight;
 

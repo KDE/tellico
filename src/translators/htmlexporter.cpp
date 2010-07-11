@@ -36,6 +36,7 @@
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
 #include "../gui/cursorsaver.h"
+#include "../newstuff/manager.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -70,6 +71,7 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_cancelled(false),
     m_parseDOM(true),
     m_checkCreateDir(true),
+    m_checkCommonFile(true),
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
@@ -187,6 +189,12 @@ bool HTMLExporter::loadXSLTFile() {
 
   delete m_handler;
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);
+  if(m_checkCommonFile && !m_handler->isValid()) {
+    NewStuff::Manager::checkCommonFile();
+    m_checkCommonFile = false;
+    delete m_handler;
+    m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);
+  }
   if(!m_handler->isValid()) {
     delete m_handler;
     m_handler = 0;
