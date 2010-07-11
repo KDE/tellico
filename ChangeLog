@@ -1,3 +1,7 @@
+2010-07-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed metadata import for file listing.
+
 2010-07-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Dewey Decimal and LoC Classification to z3950 MODS import.
