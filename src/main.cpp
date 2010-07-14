@@ -55,9 +55,9 @@ int main(int argc, char* argv[]) {
 
   KCmdLineOptions options;
   options.add("nofile", ki18n("Do not reopen the last open file"));
-  options.add("bibtex", ki18n("Import <filename> as a bibtex file"));
-  options.add("mods", ki18n("Import <filename> as a MODS file"));
-  options.add("ris", ki18n("Import <filename> as a RIS file"));
+  options.add("bibtex", ki18n("Import <filename> as a bibtex file")); // krazy:exclude=i18ncheckarg
+  options.add("mods", ki18n("Import <filename> as a MODS file")); // krazy:exclude=i18ncheckarg
+  options.add("ris", ki18n("Import <filename> as a RIS file")); // krazy:exclude=i18ncheckarg
   options.add("+[filename]", ki18n("File to open"));
 
   KCmdLineArgs::init(argc, argv, &aboutData);

@@ -86,7 +86,7 @@ void TellicoReadTest::testEntries() {
     }
 
     for(int j = 0; j < m_collections[0]->entryCount(); ++j) {
-      // don't test id values since the inital value has changed from 0 to 1
+      // don't test id values since the initial value has changed from 0 to 1
       Tellico::Data::EntryPtr entry1 = m_collections[0]->entries().at(j);
       Tellico::Data::EntryPtr entry2 = m_collections[i]->entries().at(j);
       QVERIFY(!entry1.isNull());

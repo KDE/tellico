@@ -63,10 +63,10 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   m_edit2 = new KLineEdit(box);
 
   KDialogButtonBox* bb = new KDialogButtonBox(box);
-  bb->addButton(KGuiItem(i18n("&Set") ,KIcon(QLatin1String("document-new"))),
+  bb->addButton(KGuiItem(i18nn("set a value", "&Set") ,KIcon(QLatin1String("document-new"))),
                 QDialogButtonBox::ActionRole,
                 this, SLOT(slotAdd()));
-  bb->addButton(KGuiItem(i18n("&Delete"), KIcon(QLatin1String("edit-delete"))),
+  bb->addButton(KGuiItem(i18n("delete a value", "&Delete"), KIcon(QLatin1String("edit-delete"))),
                 QDialogButtonBox::ActionRole,
                 this, SLOT(slotDelete()));
 

@@ -28,7 +28,6 @@
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../derivedvalue.h"
-#include "../translators/tellicoimporter.h"
 #include "../tellico_debug.h"
 #include "../gui/combobox.h"
 #include "../gui/lineedit.h"
