@@ -1,11 +1,19 @@
+tellico (2.2-5) unstable; urgency=high
+
+  * pkg-kde-tools has moved documentation to /usr/share/doc/kde/HTML.
+    update the .install file and tighten the build-dependency.
+    (Closes: #584153).
+  * Set urgency high to help with the yaz transition.
+
+ -- Regis Boudin <regis@debian.org>  Tue, 01 Jun 2010 22:27:01 +0100
+
 tellico (2.2-4) unstable; urgency=low
 
-  * Ignore kdepim-runtime Dependency so tellico doesn't pull the entire
-    Akonadi infrastructure.
-  * Suggest kaddressbook and korganizer, which are needed if someone wants to
-    use the kdepim related features.
+  * Add build-depends on cmake. Thanks Felix Geyer ! Closes: #582179
+  * Exclude akonadi-server that libkcal4 and libkabc try to force as
+    depends.
 
- -- Regis Boudin <regis@debian.org>  Sat, 01 May 2010 14:14:31 +0200
+ -- Regis Boudin <regis@debian.org>  Thu, 20 May 2010 00:29:34 +0100
 
 tellico (2.2-3) unstable; urgency=low
 
