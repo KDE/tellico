@@ -74,7 +74,7 @@ if(POPPLER_QT4_FOUND)
 endif(POPPLER_QT4_FOUND)
 
 macro_optional_find_package(KSane)
-macro_log_feature(KSANE_FOUND "libksane" "Support for scanning images" "http://www.kde.org/" FALSE "4.2.0" "")
+macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
 if(KSANE_FOUND)
     include_directories(${KSANE_INCLUDE_DIR})
 endif(KSANE_FOUND)
