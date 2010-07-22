@@ -41,6 +41,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testIsbn();
+  void testIsbn13();
 
   void slotResult(KJob* job);
 

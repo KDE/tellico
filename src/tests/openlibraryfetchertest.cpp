@@ -74,6 +74,25 @@ void OpenLibraryFetcherTest::testIsbn() {
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
 
+void OpenLibraryFetcherTest::testIsbn13() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QLatin1String("9780596004361"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+//  QVERIFY(!m_results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("C Pocket Reference"));
+}
+
 void OpenLibraryFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();

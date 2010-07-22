@@ -117,18 +117,25 @@ void OpenLibraryFetcher::doSearch() {
 
     case Person:
       {
-      QString author = getAuthorKeys();
-      if(author.isEmpty()) {
-        myWarning() << "no authors found";
-        stop();
-        return;
-      }
-      u.addQueryItem(QLatin1String("authors"), author);
+        QString author = getAuthorKeys();
+        if(author.isEmpty()) {
+          myWarning() << "no authors found";
+          stop();
+          return;
+        }
+        u.addQueryItem(QLatin1String("authors"), author);
       }
       break;
 
     case ISBN:
-      u.addQueryItem(QLatin1String("isbn_10"), ISBNValidator::cleanValue(request().value));
+      {
+        const QString isbn = ISBNValidator::cleanValue(request().value);
+        if(isbn.size() > 10) {
+          u.addQueryItem(QLatin1String("isbn_13"), isbn);
+        } else {
+          u.addQueryItem(QLatin1String("isbn_10"), isbn);
+        }
+      }
       break;
 
     case LCCN:
