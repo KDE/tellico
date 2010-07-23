@@ -64,10 +64,6 @@ YahooFetcher::~YahooFetcher() {
   m_xsltHandler = 0;
 }
 
-QString YahooFetcher::defaultName() {
-  return i18n("Yahoo! Audio Search");
-}
-
 QString YahooFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
@@ -373,6 +369,19 @@ Tellico::Fetch::FetchRequest YahooFetcher::updateRequest(Data::EntryPtr entry_) 
     return FetchRequest(Fetch::Raw, value);
   }
   return FetchRequest();
+}
+
+QString YahooFetcher::defaultName() {
+  return i18n("Yahoo! Audio Search");
+}
+
+QString YahooFetcher::defaultIcon() {
+  return favIcon("http://www.yahoo.com");
+}
+
+Tellico::StringHash YahooFetcher::allOptionalFields() {
+  StringHash hash;
+  return hash;
 }
 
 Tellico::Fetch::ConfigWidget* YahooFetcher::configWidget(QWidget* parent_) const {

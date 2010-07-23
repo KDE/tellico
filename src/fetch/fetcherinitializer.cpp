@@ -33,6 +33,7 @@
 #include "entrezfetcher.h"
 #include "execexternalfetcher.h"
 #include "animenfofetcher.h"
+#include "yahoofetcher.h"
 #include "ibsfetcher.h"
 #include "isbndbfetcher.h"
 #include "gcstarpluginfetcher.h"
@@ -70,6 +71,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::EntrezFetcher> registerEntrez(Entrez);
   RegisterFetcher<Fetch::ExecExternalFetcher> registerExternal(ExecExternal);
   RegisterFetcher<Fetch::AnimeNfoFetcher> registerAnimeNfo(AnimeNfo);
+//  RegisterFetcher<Fetch::YahooFetcher> registerYahoo(Yahoo);
   RegisterFetcher<Fetch::IBSFetcher> registerIBS(IBS);
   RegisterFetcher<Fetch::ISBNdbFetcher> registerISBNdb(ISBNdb);
   RegisterFetcher<Fetch::GCstarPluginFetcher> registerGCstar(GCstarPlugin);
