@@ -48,7 +48,6 @@
 #endif
 
 namespace {
-  // always bibtex
   static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
 
   QString value(const QVariantMap& map, const char* name) {
