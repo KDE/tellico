@@ -138,7 +138,8 @@ private:
   QString m_popularTitles;
   QString m_exactTitles;
   QString m_partialTitles;
-  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, SinglePerson = 4};
+  QString m_approxTitles;
+  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, Approx = 4, SinglePerson = 5};
   TitleBlock m_currentTitleBlock;
   int m_countOffset;
 };

@@ -187,7 +187,12 @@ void IMDBFetcher::continueSearch() {
 
   if(m_currentTitleBlock == Partial) {
     parseTitleBlock(m_partialTitles);
-    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Partial;
+    m_currentTitleBlock = m_countOffset == 0 ? Approx : Partial;
+  }
+
+  if(m_currentTitleBlock == Approx) {
+    parseTitleBlock(m_approxTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Approx;
   }
 
   if(m_currentTitleBlock == SinglePerson) {
@@ -227,6 +232,7 @@ void IMDBFetcher::slotComplete(KJob*) {
 
   m_text = Tellico::fromHtmlData(m_job->data());
   if(m_text.isEmpty()) {
+    myDebug() << "No data returned";
     stop();
     return;
   }
@@ -286,13 +292,19 @@ void IMDBFetcher::parseMultipleTitleResults() {
   int pos_popular = output.indexOf(QLatin1String("Popular Titles"),  0,                    Qt::CaseInsensitive);
   int pos_exact   = output.indexOf(QLatin1String("Exact Matches"),   qMax(pos_popular, 0), Qt::CaseInsensitive);
   int pos_partial = output.indexOf(QLatin1String("Partial Matches"), qMax(pos_exact, 0),   Qt::CaseInsensitive);
+  int pos_approx  = output.indexOf(QLatin1String("Approx Matches"),  qMax(pos_partial, 0), Qt::CaseInsensitive);
+
   int end_popular = pos_exact; // keep track of where to end
   if(end_popular == -1) {
-    end_popular = pos_partial == -1 ? output.length() : pos_partial;
+    end_popular = pos_partial == -1 ? (pos_approx == -1 ? output.length() : pos_approx) : pos_partial;
   }
   int end_exact = pos_partial; // keep track of where to end
   if(end_exact == -1) {
-    end_exact = output.length();
+    end_exact = pos_approx == -1 ? output.length() : pos_approx;
+  }
+  int end_partial = pos_approx; // keep track of where to end
+  if(end_partial == -1) {
+    end_partial = output.length();
   }
 
   // if found popular matches
@@ -304,7 +316,10 @@ void IMDBFetcher::parseMultipleTitleResults() {
     m_exactTitles = output.mid(pos_exact, end_exact-pos_exact);
   }
   if(pos_partial > -1) {
-    m_partialTitles = output.mid(pos_partial);
+    m_partialTitles = output.mid(pos_partial-end_partial);
+  }
+  if(pos_approx > -1) {
+    m_approxTitles = output.mid(pos_approx);
   }
 
   parseTitleBlock(m_popularTitles);
@@ -318,7 +333,12 @@ void IMDBFetcher::parseMultipleTitleResults() {
 
   if(m_matches.size() < m_limit) {
     parseTitleBlock(m_partialTitles);
-    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Partial;
+    m_currentTitleBlock = m_countOffset == 0 ? Approx : Partial;
+  }
+
+  if(m_matches.size() < m_limit) {
+    parseTitleBlock(m_approxTitles);
+    m_currentTitleBlock = m_countOffset == 0 ? Unknown : Approx;
   }
 
   if(m_matches.size() == 0) {

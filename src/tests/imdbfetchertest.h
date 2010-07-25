@@ -41,6 +41,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testSnowyRiver();
+  void testAsterix();
 
   void slotResult(KJob* job);
 

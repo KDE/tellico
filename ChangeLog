@@ -1,3 +1,7 @@
+2010-07-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed IMDb matching on partial titles (Bug: 245665).
+
 2010-07-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed IMDb fetching of audio track and color (Bug: 244159).
