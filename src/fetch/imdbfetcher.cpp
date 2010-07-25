@@ -784,7 +784,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
 
   // match until next b tag
 //  QRegExp akaRx(QLatin1String("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QLatin1String("also known as(.*)<(b[>\\s/]|div)"), Qt::CaseInsensitive);
+  QRegExp akaRx(QLatin1String("also known as(.*)<h5[>\\s/]"), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   if(akaRx.indexIn(str_) > -1 && !akaRx.cap(1).isEmpty()) {
@@ -812,7 +812,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       s.remove(*s_tagRx);
       s.remove(brackRx);
       s = s.trimmed();
-      // the first value ends up being or starting with the colon after "Also know as"
+      // the first value ends up being or starting with the colon after "Also known as"
       // I'm too lazy to figure out a better regexp
       if(s.startsWith(QLatin1Char(':'))) {
         s = s.mid(1);
@@ -824,6 +824,8 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     if(!values.isEmpty()) {
       entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
+  } else {
+    myDebug() << "No alternative titles found";
   }
 }
 

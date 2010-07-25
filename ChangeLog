@@ -1,6 +1,7 @@
 2010-07-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed IMDb matching on partial titles (Bug: 245665).
+	* Fixed IMDb fetching of alternative titles.
 
 2010-07-11  Robby Stephenson  <robby@periapsis.org>
 

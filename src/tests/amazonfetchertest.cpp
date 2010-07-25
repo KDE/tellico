@@ -43,7 +43,7 @@
 QTEST_KDEMAIN( AmazonFetcherTest, GUI )
 
 AmazonFetcherTest::AmazonFetcherTest() : m_loop(this), m_hasConfigFile(false)
-    , m_config(QString::fromLatin1(KDESRCDIR)  + "/tellicotestconfig.rc", KConfig::SimpleConfig) {
+    , m_config(QString::fromLatin1(KDESRCDIR)  + "/amazontestconfig.rc", KConfig::SimpleConfig) {
 }
 
 void AmazonFetcherTest::initTestCase() {
@@ -54,7 +54,7 @@ void AmazonFetcherTest::initTestCase() {
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
 
-  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/tellicotestconfig.rc");
+  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/amazontestconfig.rc");
 
   QHash<QString, QString> practicalRdf;
   practicalRdf.insert(QLatin1String("title"), QLatin1String("Practical RDF"));

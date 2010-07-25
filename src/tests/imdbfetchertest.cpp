@@ -36,6 +36,8 @@
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
 
+#include <KConfigGroup>
+
 QTEST_KDEMAIN( ImdbFetcherTest, GUI )
 
 ImdbFetcherTest::ImdbFetcherTest() : m_loop(this) {
@@ -79,8 +81,16 @@ void ImdbFetcherTest::testSnowyRiver() {
 }
 
 void ImdbFetcherTest::testAsterix() {
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotestconfig.rc", KConfig::SimpleConfig);
+  QString groupName = QLatin1String("IMDB");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Astérix aux jeux olympiques");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
@@ -96,6 +106,8 @@ void ImdbFetcherTest::testAsterix() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Astérix aux jeux olympiques"));
+  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
+  QCOMPARE(altTitleList.size(), 15);
 }
 
 void ImdbFetcherTest::slotResult(KJob* job_) {
