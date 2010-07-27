@@ -404,7 +404,9 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
     Data::EntryPtr entry(new Data::Entry(coll));
     entry->setField(QLatin1String("title"), value(resultMap, "name"));
-    entry->setField(QLatin1String("freebase"), QLatin1String(FREEBASE_VIEW_URL) + value(resultMap, "id"));
+    if(optionalFields().contains(QLatin1String("freebase"))) {
+      entry->setField(QLatin1String("freebase"), QLatin1String(FREEBASE_VIEW_URL) + value(resultMap, "id"));
+    }
 
     switch(type) {
       case Data::Collection::Book:

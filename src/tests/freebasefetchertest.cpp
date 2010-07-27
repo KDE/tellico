@@ -233,7 +233,7 @@ void FreebaseFetcherTest::testMovieTitle() {
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
-  QCOMPARE(castList.size(), 4);
+  QCOMPARE(castList.size(), 5);
 }
 
 void FreebaseFetcherTest::testMoviePerson() {
