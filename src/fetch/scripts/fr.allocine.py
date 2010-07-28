@@ -14,9 +14,12 @@
 # *                                                                         *
 # ***************************************************************************
 #
+# Version 0.7.2.1: 2010-07-27 (Reported by Romain Henriet)
+# * Updated title match to allow searching without diacritical marks
+#
 # Version 0.7.2: 2010-05-27 (Reported by Romain Henriet)
 # * Fixed bug preventing searches with accent marks
-# * Added post-processing cleanup action to replace raw HTML entities with 
+# * Added post-processing cleanup action to replace raw HTML entities with
 #   their ISO Latin-1 replacement text
 #
 # Version 0.7.1: 2010-04-26 (Thanks to Romain Henriet <romain-devel@laposte.net>)
@@ -254,6 +257,16 @@ class AlloCineParser:
 		Runs the allocine.fr parser: fetch movie related links, then fills and prints the DOM tree
 		to stdout (in tellico format) so that tellico can use it.
 		"""
+		# the script needs the search string to be encoded in utf-8
+		try:
+			# first try system encoding
+			title = unicode(title, sys.stdin.encoding or sys.getdefaultencoding())
+		except UnicodeDecodeError:
+			# on failure, fallback to 'latin-1'
+			title = unicode(title, 'latin-1')
+
+		# now encode for urllib
+		title = title.encode('utf-8')
 		self.__getMovie(title)
 		# Print results to stdout
 		self.__domTree.printXML()
@@ -276,8 +289,10 @@ class AlloCineParser:
 		matchList = []
 		for match in tmp:
 			name = re.sub(r'([\r\n]+|<b>|</b>)', '', match[1])
+			name = re.sub(r'<.*?>', '', name)
 			name = re.sub(r'^ *', '', name)
-			if re.search(title, name, re.I):
+			#if re.search(title, name, re.I):
+			if len(name) > 0:
 				matchList.append((match[0], name))
 
 		if not matchList: return None
@@ -397,7 +412,7 @@ class AlloCineParser:
 
 	def __cleanUp(self, data):
 		"""
-		Cleans up the string(s), replacing raw HTML entities with their 
+		Cleans up the string(s), replacing raw HTML entities with their
 		ISO Latin-1 replacement text.
 		@param data string or list of strings
 		"""

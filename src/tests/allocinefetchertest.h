@@ -41,6 +41,7 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testTitleAccented();
+  void testTitleAccentRemoved();
   void testPlotQuote();
 
   void slotResult(KJob* job);

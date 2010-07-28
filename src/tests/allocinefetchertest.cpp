@@ -77,7 +77,7 @@ void AllocineFetcherTest::testTitle() {
   QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("Bryan Singer"));
   QCOMPARE(entry->field(QLatin1String("studio")), QLatin1String("Warner Bros. France"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2005"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Fantastique; Action"));
+//  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Fantastique; Action"));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("Américain; Australien"));
   QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("154"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
@@ -90,6 +90,31 @@ void AllocineFetcherTest::testTitle() {
 void AllocineFetcherTest::testTitleAccented() {
   Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                         QLatin1String("Opération Tonnerre"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
+
+  KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
+  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  cg.writeEntry("ExecPath", QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py");
+  // don't sync() and save the new path
+  cg.markAsClean();
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Fetch::FetcherJob* job2 = new Tellico::Fetch::FetcherJob(0, fetcher, request2);
+  connect(job2, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job2->setMaximumResults(1);
+
+  job2->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Opération Tonnerre"));
+}
+
+void AllocineFetcherTest::testTitleAccentRemoved() {
+  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                        QLatin1String("Operation Tonnerre"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
