@@ -142,12 +142,12 @@ void OpenLibraryFetcher::doSearch() {
       break;
 
     case Keyword:
-      myWarning() <<  "not supported";
+      myWarning() << "not supported";
       stop();
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized:" << request().key;
       stop();
       return;
   }
@@ -316,7 +316,9 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
     entry->setField(QLatin1String("pages"), value(resultMap, "number_of_pages"));
     entry->setField(QLatin1String("comments"), value(resultMap, "notes"));
 
-    entry->setField(QLatin1String("openlibrary"), QLatin1String("http://openlibrary.org") + value(resultMap, "key"));
+    if(optionalFields().contains(QLatin1String("openlibrary"))) {
+      entry->setField(QLatin1String("openlibrary"), QLatin1String("http://openlibrary.org") + value(resultMap, "key"));
+    }
 
     QStringList authors;
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
