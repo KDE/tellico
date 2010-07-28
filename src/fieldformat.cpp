@@ -54,16 +54,19 @@ QString FieldFormat::rowDelimiterString() {
 }
 
 QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
+  if(string_.isEmpty()) {
+    return QStringList();
+  }
   return parsing_ == StringSplit ? string_.split(delimiterString(), behavior_)
                                  : string_.split(delimiterRx, behavior_);
 }
 
 QStringList FieldFormat::splitRow(const QString& string_, QString::SplitBehavior behavior_) {
-  return string_.split(columnDelimiterString(), behavior_);
+  return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), behavior_);
 }
 
 QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavior behavior_) {
-  return string_.split(rowDelimiterString(), behavior_);
+  return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), behavior_);
 }
 
 QString FieldFormat::sortKeyTitle(const QString& title_) {
