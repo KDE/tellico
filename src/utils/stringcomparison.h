@@ -64,12 +64,6 @@ private:
   QRegExp m_regexp;
 };
 
-class RatingComparison : public StringComparison {
-public:
-  RatingComparison();
-  virtual int compare(const QString&, const QString&);
-};
-
 class ISODateComparison : public StringComparison {
 public:
   ISODateComparison();

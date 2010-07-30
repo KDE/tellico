@@ -136,13 +136,6 @@ int Tellico::LCCComparison::compareLCC(const QStringList& cap1, const QStringLis
          (res = cap1[7].compare(cap2[7]))                    != 0 ? res : 0;
 }
 
-Tellico::RatingComparison::RatingComparison() : StringComparison() {
-}
-
-int Tellico::RatingComparison::compare(const QString& str1_, const QString& str2_) {
-  return str1_.compare(str2_);
-}
-
 Tellico::ISODateComparison::ISODateComparison() : StringComparison() {
 }
 

@@ -34,12 +34,10 @@
 #include <QDateTime>
 
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
-  if(field_->type() == Data::Field::Number) {
+  if(field_->type() == Data::Field::Number || field_->type() == Data::Field::Rating) {
     return new ValueComparison(field_, new NumberComparison());
   } else if(field_->type() == Data::Field::Bool) {
     return new ValueComparison(field_, new BoolComparison());
-  } else if(field_->type() == Data::Field::Rating) {
-    return new ValueComparison(field_, new RatingComparison());
   } else if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);
   } else if(field_->type() == Data::Field::Date || field_->formatType() == FieldFormat::FormatDate) {
