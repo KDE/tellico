@@ -58,13 +58,13 @@ QString CSVExporter::fileFilter() const {
 
 QString& CSVExporter::escapeText(QString& text_) {
   bool quotes = false;
-  if(text_.indexOf(QLatin1Char('"')) != -1) {
+  if(text_.contains(QLatin1Char('"'))) {
     quotes = true;
     // quotation marks will be escaped by using a double pair
     text_.replace(QLatin1Char('"'), QLatin1String("\"\""));
   }
   // if the text contains quotes or the delimiter, it needs to be surrounded by quotes
-  if(quotes || text_.indexOf(m_delimiter)!= -1) {
+  if(quotes || text_.contains(m_delimiter) || text_.contains(QLatin1Char('\n'))) {
     text_.prepend(QLatin1Char('"'));
     text_.append(QLatin1Char('"'));
   }
@@ -78,11 +78,13 @@ bool CSVExporter::exec() {
 
   QString text;
 
-  Data::FieldList fields = collection()->fields();
-
   if(m_includeTitles) {
-    foreach(Data::FieldPtr fIt, fields) {
+    foreach(Data::FieldPtr fIt, collection()->fields()) {
       QString title = fIt->title();
+      // because of Microsoft Excel bug, http://support.microsoft.com/kb/323626
+      if(text.isEmpty() && title == QLatin1String("ID")) {
+        title = QLatin1String("Id");
+      }
       text += escapeText(title) + m_delimiter;
     }
     // remove last delimiter
@@ -95,9 +97,8 @@ bool CSVExporter::exec() {
                                                 FieldFormat::AsIsFormat);
 
   QString tmp;
-  Data::EntryList entries = this->entries();
-  foreach(Data::EntryPtr entryIt, entries) {
-    foreach(Data::FieldPtr fIt, fields) {
+  foreach(Data::EntryPtr entryIt, entries()) {
+    foreach(Data::FieldPtr fIt, collection()->fields()) {
       tmp = entryIt->formattedField(fIt->name(), format);
       text += escapeText(tmp) + m_delimiter;
     }

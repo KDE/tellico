@@ -73,4 +73,5 @@ void CsvTest::testAll_data() {
   QTest::newRow("tab") << "robby\t\tstephenson" << "\t" << 3 << 0 << "robby" << 1 << "";
   // quotes get swallowed
   QTest::newRow("quotes") << "robby,\"stephenson,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson,is,cool";
+  QTest::newRow("newline") << "robby,\"stephenson\n,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson\n,is,cool";
 }
