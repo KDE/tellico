@@ -1296,15 +1296,15 @@ void MainWindow::slotFileQuit() {
 }
 
 void MainWindow::slotEditCut() {
-  activateEditSlot(SLOT(cut()));
+  activateEditSlot("cut()");
 }
 
 void MainWindow::slotEditCopy() {
-  activateEditSlot(SLOT(copy()));
+  activateEditSlot("copy()");
 }
 
 void MainWindow::slotEditPaste() {
-  activateEditSlot(SLOT(paste()));
+  activateEditSlot("paste()");
 }
 
 void MainWindow::activateEditSlot(const char* slot_) {
@@ -1318,11 +1318,10 @@ void MainWindow::activateEditSlot(const char* slot_) {
 
   if(w && w->isVisible()) {
     const QMetaObject* meta = w->metaObject();
-
-    int idx = meta->indexOfSlot(slot_);
+    const int idx = meta->indexOfSlot(slot_);
     if(idx > -1) {
       myDebug() << "MainWindow invoking" << meta->method(idx).signature();
-      QMetaObject::invokeMethod(w, slot_);
+      meta->method(idx).invoke(w, Qt::DirectConnection);
     }
   }
 }

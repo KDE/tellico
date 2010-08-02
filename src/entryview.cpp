@@ -62,8 +62,7 @@ EntryViewWidget::EntryViewWidget(KHTMLPart* part, QWidget* parent)
 // for the life of me, I could not figure out how to call the actual
 // KHTMLPartBrowserExtension::copy() slot, so this will have to do
 void EntryViewWidget::copy() {
-  QString text = part()->selectedText();
-  QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+  QApplication::clipboard()->setText(part()->selectedText(), QClipboard::Clipboard);
 }
 
 EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_),
