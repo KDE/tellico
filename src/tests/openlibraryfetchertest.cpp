@@ -93,6 +93,21 @@ void OpenLibraryFetcherTest::testIsbn13() {
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("C Pocket Reference"));
 }
 
+void OpenLibraryFetcherTest::testMultipleIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QLatin1String("0789312239; 9780596000486"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 2);
+}
+
 void OpenLibraryFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();

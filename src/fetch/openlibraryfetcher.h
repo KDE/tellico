@@ -59,7 +59,6 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
@@ -90,12 +89,13 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  void doSearch();
-  void doCoverOnly();
-  QString getAuthorKeys();
+  void doSearch(const QString& term);
+  void doCoverOnly(const QString& term);
+  QString getAuthorKeys(const QString& term);
+  void endJob(KIO::StoredTransferJob* job);
 
   QHash<int, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;
 };

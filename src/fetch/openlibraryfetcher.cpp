@@ -70,7 +70,7 @@ using namespace Tellico;
 using Tellico::Fetch::OpenLibraryFetcher;
 
 OpenLibraryFetcher::OpenLibraryFetcher(QObject* parent_)
-    : Fetcher(parent_), m_job(0), m_started(false) {
+    : Fetcher(parent_), m_started(false) {
 }
 
 OpenLibraryFetcher::~OpenLibraryFetcher() {
@@ -89,20 +89,25 @@ void OpenLibraryFetcher::readConfigHook(const KConfigGroup&) {
 
 void OpenLibraryFetcher::search() {
   m_started = true;
-  doSearch();
+  // we only split ISBN and LCCN values
+  QStringList searchTerms;
+  if(request().key == ISBN || request().key == LCCN) {
+    searchTerms = FieldFormat::splitValue(request().value);
+  } else  {
+    searchTerms += request().value;
+  }
+  foreach(const QString& searchTerm, searchTerms) {
+    doSearch(searchTerm);
+  }
+  if(m_jobs.isEmpty()) {
+    stop();
+  }
 }
 
-void OpenLibraryFetcher::continueSearch() {
-  m_started = true;
-  doSearch();
-}
-
-void OpenLibraryFetcher::doSearch() {
+void OpenLibraryFetcher::doSearch(const QString& term_) {
 #ifndef HAVE_QJSON
-  doCoverOnly();
-  return;
+  doCoverOnly(term_);
 #else
-
   KUrl u(OPENLIBRARY_QUERY_URL);
 
   // books are type/edition
@@ -111,15 +116,14 @@ void OpenLibraryFetcher::doSearch() {
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("title"), request().value);
+      u.addQueryItem(QLatin1String("title"), term_);
       break;
 
     case Person:
       {
-        QString author = getAuthorKeys();
+        const QString author = getAuthorKeys(term_);
         if(author.isEmpty()) {
           myWarning() << "no authors found";
-          stop();
           return;
         }
         u.addQueryItem(QLatin1String("authors"), author);
@@ -128,7 +132,7 @@ void OpenLibraryFetcher::doSearch() {
 
     case ISBN:
       {
-        const QString isbn = ISBNValidator::cleanValue(request().value);
+        const QString isbn = ISBNValidator::cleanValue(term_);
         if(isbn.size() > 10) {
           u.addQueryItem(QLatin1String("isbn_13"), isbn);
         } else {
@@ -138,43 +142,40 @@ void OpenLibraryFetcher::doSearch() {
       break;
 
     case LCCN:
-      u.addQueryItem(QLatin1String("lccn"), request().value);
+      u.addQueryItem(QLatin1String("lccn"), term_);
       break;
 
     case Keyword:
       myWarning() << "not supported";
-      stop();
-      break;
+      return;
 
     default:
       myWarning() << "key not recognized:" << request().key;
-      stop();
       return;
   }
 
 //  myDebug() << "url:" << u;
 
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  job->ui()->setWindow(GUI::Proxy::widget());
+  connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  m_jobs << job;
 #endif
 }
 
-void OpenLibraryFetcher::doCoverOnly() {
+void OpenLibraryFetcher::doCoverOnly(const QString& term_) {
   switch(request().key) {
      case ISBN:
        break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      stop();
       return;
   }
 
   int pos = 0;
-  QString isbn = request().value;
   ISBNValidator val(this);
+  QString isbn = term_;
   if(val.validate(isbn, pos) == QValidator::Acceptable) {
     Data::CollPtr coll(new Data::BookCollection(true));
     Data::EntryPtr entry(new Data::Entry(coll));
@@ -184,18 +185,25 @@ void OpenLibraryFetcher::doCoverOnly() {
     m_entries.insert(r->uid, Data::EntryPtr(entry));
     emit signalResultFound(r);
   }
+}
 
-  stop();
+void OpenLibraryFetcher::endJob(KIO::StoredTransferJob* job_) {
+  m_jobs.removeAll(job_);
+  if(m_jobs.isEmpty())  {
+    stop();
+  }
 }
 
 void OpenLibraryFetcher::stop() {
   if(!m_started) {
     return;
   }
-  if(m_job) {
-    m_job->kill();
-    m_job = 0;
+  foreach(QPointer<KIO::StoredTransferJob> job, m_jobs) {
+    if(job) {
+      job->kill();
+    }
   }
+  m_jobs.clear();
   m_started = false;
   emit signalDone(this);
 }
@@ -238,20 +246,21 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
   return FetchRequest();
 }
 
-void OpenLibraryFetcher::slotComplete(KJob*) {
+void OpenLibraryFetcher::slotComplete(KJob* job_) {
 #ifdef HAVE_QJSON
 //  myDebug();
 
-  if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
-    stop();
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
+  if(job->error()) {
+    job->ui()->showErrorMessage();
+    endJob(job);
     return;
   }
 
-  QByteArray data = m_job->data();
+  QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
-    stop();
+    endJob(job);
     return;
   }
 
@@ -266,14 +275,11 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
   QJson::Parser parser;
   QVariantList resultList = parser.parse(data).toList();
   if(resultList.isEmpty()) {
     myDebug() << "no results";
-    stop();
+    endJob(job);
     return;
   }
 
@@ -373,15 +379,15 @@ void OpenLibraryFetcher::slotComplete(KJob*) {
 //  m_hasMoreResults = m_start <= m_total;
   m_hasMoreResults = false; // for now, no continued searches
 #endif
-  stop(); // required
+  endJob(job);
 }
 
-QString OpenLibraryFetcher::getAuthorKeys() {
+QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
 #ifdef HAVE_QJSON
   KUrl u(OPENLIBRARY_QUERY_URL);
 
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
-  u.addQueryItem(QLatin1String("name"), request().value);
+  u.addQueryItem(QLatin1String("name"), term_);
 
   QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
   QJson::Parser parser;
