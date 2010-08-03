@@ -42,6 +42,7 @@ private Q_SLOTS:
   void testBookTitle();
   void testBookAuthor();
   void testISBN();
+  void testMultipleISBN();
   void testLCCN();
   void testComicBookTitle();
   void testMovieTitle();

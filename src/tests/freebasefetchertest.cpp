@@ -128,7 +128,6 @@ void FreebaseFetcherTest::testISBN() {
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
 
   job->start();
   m_loop.exec();
@@ -143,6 +142,21 @@ void FreebaseFetcherTest::testISBN() {
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+}
+
+void FreebaseFetcherTest::testMultipleISBN() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QLatin1String("9780321113580; 1565923928"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 2);
 }
 
 void FreebaseFetcherTest::testLCCN() {

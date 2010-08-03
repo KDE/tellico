@@ -412,7 +412,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
         entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
-        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn",  "isbn"));
+        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn", "isbn"));
         entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
         entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
@@ -673,8 +673,10 @@ QVariantList FreebaseFetcher::bookQueries() const {
         QVariantMap isbnQuery = query.value(QLatin1String("isbn")).toMap();
         // search for both ISBN10 and ISBN13
         QVariantList isbns;
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(request().value));
-        isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(request().value));
+        foreach(const QString& isbn, FieldFormat::splitValue(request().value)) {
+          isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(isbn));
+          isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(isbn));
+        }
         isbnQuery.insert(QLatin1String("isbn|="), isbns);
         query.insert(QLatin1String("isbn"), isbnQuery);
       }
