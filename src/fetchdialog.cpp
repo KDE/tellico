@@ -616,7 +616,11 @@ void FetchDialog::slotEditMultipleISBN() {
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
   (void) new QLabel(s, box);
   m_isbnTextEdit = new KTextEdit(box);
-  m_isbnTextEdit->setText(m_isbnList.join(QLatin1String("\n")));
+  if(m_isbnList.isEmpty()) {
+    m_isbnTextEdit->setText(m_valueLineEdit->text());
+  } else {
+    m_isbnTextEdit->setText(m_isbnList.join(QLatin1String("\n")));
+  }
   m_isbnTextEdit->setWhatsThis(s);
   connect(m_isbnTextEdit, SIGNAL(textChanged()), this, SLOT(slotISBNTextChanged()));
 
