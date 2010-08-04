@@ -247,10 +247,10 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
 }
 
 void OpenLibraryFetcher::slotComplete(KJob* job_) {
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 #ifdef HAVE_QJSON
 //  myDebug();
 
-  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
   if(job->error()) {
     job->ui()->showErrorMessage();
     endJob(job);
@@ -396,6 +396,7 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   // right now, only use the first
   return results.isEmpty() ? QString() : value(results.at(0).toMap(), "key");
 #else
+  Q_UNUSED(term_);
   return QString();
 #endif
 }
