@@ -80,6 +80,15 @@ QString OpenLibraryFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// without QJSON, we can only search on ISBN for covers
+bool OpenLibraryFetcher::canSearch(FetchKey k) const {
+#ifndef HAVE_QJSON
+  return k == ISBN;
+#else
+  return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword;
+#endif
+}
+
 bool OpenLibraryFetcher::canFetch(int type) const {
   return type == Data::Collection::Book;
 }

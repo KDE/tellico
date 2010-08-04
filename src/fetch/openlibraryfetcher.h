@@ -59,7 +59,7 @@ public:
    */
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword; }
+  virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return OpenLibrary; }
