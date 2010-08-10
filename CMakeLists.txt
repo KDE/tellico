@@ -1,5 +1,5 @@
 project(Tellico)
-set(TELLICO_VERSION "2.3")
+set(TELLICO_VERSION "2.3+svn")
 
 cmake_minimum_required(VERSION 2.6.2)
 
@@ -169,8 +169,4 @@ install(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application)
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
     macro_display_feature_log()
 endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-find_package(Msgfmt REQUIRED)
-find_package(Gettext REQUIRED)
-add_subdirectory( po )
-add_subdirectory( doc-translations )
-add_subdirectory( doc )
+
