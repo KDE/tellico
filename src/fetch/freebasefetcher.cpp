@@ -51,8 +51,8 @@
 
 namespace {
   static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
-  static const char* FREEBASE_IMAGE_URL = "http://www.freebase.com/api/trans/image_thumb";
-  static const char* FREEBASE_BLURB_URL = "http://www.freebase.com/api/trans/blurb";
+  static const char* FREEBASE_IMAGE_URL = "http://api.freebase.com/api/trans/image_thumb";
+  static const char* FREEBASE_BLURB_URL = "http://api.freebase.com/api/trans/blurb";
   static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 
