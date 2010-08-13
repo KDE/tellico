@@ -127,7 +127,10 @@ QString FileHandler::readXMLFile(const KUrl& url_, bool quiet_/*=false*/) {
   }
 
   if(f.open(quiet_)) {
-    return XMLHandler::readXMLData(f.file()->readAll());
+    QString text = XMLHandler::readXMLData(f.file()->readAll());
+    // since we always work with utf-8, set the encoding declaration in the text to utf-8
+    XMLHandler::setUtf8XmlEncoding(text);
+    return text;
   }
   return QString();
 }

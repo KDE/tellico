@@ -26,6 +26,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
+#include "../utils/xmlhandler.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -95,6 +96,14 @@ void XMLFetcher::slotComplete(KJob* ) {
     return;
   }
 
+  if(!m_xsltHandler) {
+    initXSLTHandler();
+    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
+      stop();
+      return;
+    }
+  }
+
   const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
@@ -107,24 +116,15 @@ void XMLFetcher::slotComplete(KJob* ) {
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec("utf-8");
     t << data;
   }
   f.close();
 #endif
 
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
-    }
-  }
-
   parseData(data);
 
-  // assume data is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+  QString str = m_xsltHandler->applyStylesheet(XMLHandler::readXMLData(data));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
