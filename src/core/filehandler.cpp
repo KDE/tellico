@@ -29,6 +29,7 @@
 #include "netaccess.h"
 #include "../gui/cursorsaver.h"
 #include "../gui/guiproxy.h"
+#include "../utils/xmlhandler.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -115,6 +116,18 @@ QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool 
       stream.setCodec("UTF-8");
     }
     return stream.readAll();
+  }
+  return QString();
+}
+
+QString FileHandler::readXMLFile(const KUrl& url_, bool quiet_/*=false*/) {
+  FileRef f(url_, quiet_);
+  if(!f.isValid()) {
+    return QString();
+  }
+
+  if(f.open(quiet_)) {
+    return XMLHandler::readXMLData(f.file()->readAll());
   }
   return QString();
 }

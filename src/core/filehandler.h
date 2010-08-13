@@ -91,10 +91,17 @@ public:
    * @param url The URL of the file
    * @param quiet whether the importer should report errors or not
    * @param useUTF8 Whether the file should be read as UTF8 or use user locale
-   * @param allowCompressed Whether to check if the file is compressed or not
    * @return A string containing the contents of a file
    */
   static QString readTextFile(const KUrl& url, bool quiet=false, bool useUTF8=false);
+  /**
+   * Read contents of an XML file into a string, checking for encoding.
+   *
+   * @param url The URL of the file
+   * @param quiet whether the importer should report errors or not
+   * @return A string containing the contents of a file
+   */
+  static QString readXMLFile(const KUrl& url, bool quiet=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *

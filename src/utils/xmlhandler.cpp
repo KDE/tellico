@@ -24,6 +24,7 @@
 
 #include "xmlhandler.h"
 
+#include <QTextStream>
 #include <QXmlInputSource>
 
 using Tellico::XMLHandler;
@@ -43,4 +44,10 @@ bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
     }
   }
   return false;
+}
+
+QString XMLHandler::readXMLData(const QByteArray& data_) {
+  QXmlInputSource source;
+  source.setData(data_);
+  return source.data();
 }
