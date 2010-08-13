@@ -10,6 +10,7 @@ SET(utils_STAT_SRCS
    stringcomparison.cpp
    upcvalidator.cpp
    wallet.cpp
+   xmlhandler.cpp
    )
 
 KDE4_ADD_LIBRARY(utils STATIC ${utils_STAT_SRCS})
