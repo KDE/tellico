@@ -288,7 +288,7 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
   u.addQueryItem(QLatin1String("albumid"), albumid);
 
 //  myDebug() << "url: " << u.url();
-  QDomDocument dom = FileHandler::readXMLFile(u, false /*no namespace*/, true /*quiet*/);
+  QDomDocument dom = FileHandler::readXMLDocument(u, false /*no namespace*/, true /*quiet*/);
   if(dom.isNull()) {
     myDebug() << "null dom returned";
     return;

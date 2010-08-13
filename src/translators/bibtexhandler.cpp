@@ -138,7 +138,7 @@ void BibtexHandler::loadTranslationMaps() {
   KUrl u;
   u.setPath(mapfile);
   // no namespace processing
-  QDomDocument dom = FileHandler::readXMLFile(u, false);
+  QDomDocument dom = FileHandler::readXMLDocument(u, false);
 
   QDomNodeList keyList = dom.elementsByTagName(QLatin1String("key"));
 

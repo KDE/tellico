@@ -100,7 +100,6 @@ public:
    * Processes text through the XSLT transformation.
    *
    * @param text The text to be transformed
-   * @param encodedUTF8 Whether the text is encoded in utf-8 or not
    * @return The transformed text
    */
   QString applyStylesheet(const QString& text);

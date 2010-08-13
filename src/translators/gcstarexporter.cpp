@@ -84,7 +84,7 @@ QString GCstarExporter::text() {
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
   // removes the namespace declaration
-  QDomDocument dom = FileHandler::readXMLFile(u, false);
+  QDomDocument dom = FileHandler::readXMLDocument(u, false);
   if(dom.isNull()) {
     myDebug() << "error loading xslt file: " << xsltfile;
     return QString();

@@ -382,7 +382,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
     link.addQueryItem(QLatin1String("dbfrom"), m_dbname);
     link.addQueryItem(QLatin1String("id"),     QString::number(id));
 
-    QDomDocument linkDom = FileHandler::readXMLFile(link, false /* namespace */, true /* quiet */);
+    QDomDocument linkDom = FileHandler::readXMLDocument(link, false /* namespace */, true /* quiet */);
     // need eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl/Url
     QDomNode linkNode = linkDom.namedItem(QLatin1String("eLinkResult"))
                                .namedItem(QLatin1String("LinkSet"))

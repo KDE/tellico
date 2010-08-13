@@ -103,7 +103,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return A QDomDocument containing the contents of a file
    */
-  static QDomDocument readXMLFile(const KUrl& url, bool processNamespace, bool quiet=false);
+  static QDomDocument readXMLDocument(const KUrl& url, bool processNamespace, bool quiet=false);
   /**
    * Read contents of a data file into a QByteArray.
    *

@@ -32,7 +32,7 @@ using Tellico::Import::XMLImporter;
 
 XMLImporter::XMLImporter(const KUrl& url_) : Import::Importer(url_) {
   if(!url_.isEmpty() && url_.isValid()) {
-    m_dom = FileHandler::readXMLFile(url_, true);
+    m_dom = FileHandler::readXMLDocument(url_, true);
   }
 }
 

@@ -119,7 +119,7 @@ QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool 
   return QString();
 }
 
-QDomDocument FileHandler::readXMLFile(const KUrl& url_, bool processNamespace_, bool quiet_) {
+QDomDocument FileHandler::readXMLDocument(const KUrl& url_, bool processNamespace_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QDomDocument();
