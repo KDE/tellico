@@ -27,8 +27,10 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="TMDb ID" category="General" format="4" type="1" name="tmdb-id"/>
-    <field flags="0" title="TMDb Link" category="General" format="4" type="7" name="tmdb"/>
-    <field flags="0" title="IMDb Link" category="General" format="4" type="7" name="imdb"/>
+    <field flags="0" title="TMDb Link" category="General" format="4" type="7" name="tmdb" i18n="true"/>
+    <field title="Alternative Titles" flags="1" category="Alternative Titles" format="1" type="8" name="alttitle" i18n="true">
+     <prop name="columns">1</prop>
+    </field>
    </fields>
    <xsl:apply-templates select="//movies/movie|//filmography/movie"/>
   </collection>
@@ -41,9 +43,13 @@
    <xsl:value-of select="name|@name"/>
   </title>
 
-  <alttitle>
-   <xsl:value-of select="alternative_name"/>
-  </alttitle>
+  <alttitles>
+   <alttitle>
+    <column>
+     <xsl:value-of select="alternative_name"/>
+    </column>
+   </alttitle>
+  </alttitles>
 
   <year>
    <xsl:value-of select="substring(released, 1, 4)"/>

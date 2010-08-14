@@ -161,7 +161,8 @@ QString DVDFrFetcher::defaultIcon() {
 
 Tellico::StringHash DVDFrFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("dvdfr")] = i18n("DVDFr Link");
+  hash[QLatin1String("dvdfr")]    = i18n("DVDFr Link");
+  hash[QLatin1String("alttitle")] = i18n("Alternative Titles");
   return hash;
 }
 

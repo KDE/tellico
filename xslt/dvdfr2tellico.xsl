@@ -26,6 +26,9 @@
     <field name="_default"/>
     <field flags="0" title="DVDFr ID" category="General" format="4" type="1" name="dvdfr-id"/>
     <field flags="0" title="DVDFr Link" category="General" format="4" type="7" name="dvdfr"/>
+    <field title="Alternative Titles" flags="1" category="Alternative Titles" format="1" type="8" name="alttitle" i18n="true">
+     <prop name="columns">1</prop>
+    </field>
    </fields>
    <!-- initial search has dvds/dvd elements, final detailed is only dvd -->
    <xsl:apply-templates select="/dvds/dvd | /dvd"/>
@@ -50,6 +53,26 @@
     <xsl:value-of select="titres/fr"/>
    </xsl:if>
   </title>
+
+  <alttitles>
+   <xsl:if test="string-length(titres/vo) &gt; 0">
+    <alttitle>
+     <column>
+      <xsl:value-of select="titres/fr"/>
+     </column>
+    </alttitle>
+   </xsl:if>
+   <alttitle>
+    <column>
+     <xsl:value-of select="titres/alternatif"/>
+    </column>
+   </alttitle>
+   <alttitle>
+    <column>
+     <xsl:value-of select="titres/alternatif_vo"/>
+    </column>
+   </alttitle>
+  </alttitles>
 
   <year>
    <xsl:value-of select="annee"/>

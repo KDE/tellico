@@ -1187,9 +1187,9 @@ QString IMDBFetcher::defaultIcon() {
 //static
 Tellico::StringHash IMDBFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("imdb")]             = i18n("IMDb Link");
-  hash[QLatin1String("imdb-rating")]      = i18n("IMDb Rating");
-  hash[QLatin1String("alttitle")]         = i18n("Alternative Titles");
+  hash[QLatin1String("imdb")]            = i18n("IMDb Link");
+  hash[QLatin1String("imdb-rating")]     = i18n("IMDb Rating");
+  hash[QLatin1String("alttitle")]        = i18n("Alternative Titles");
   hash[QLatin1String("allcertification")] = i18n("Certifications");
   return hash;
 }

@@ -217,8 +217,7 @@ Tellico::StringHash TheMovieDBFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("tmdb")] = i18n("TMDb Link");
   hash[QLatin1String("imdb")] = i18n("IMDb Link");
-  // FIXME:
-//  map[QLatin1String("alttitle")] = i18n("Alternative Titles");
+  hash[QLatin1String("alttitle")] = i18n("Alternative Titles");
   return hash;
 }
 
