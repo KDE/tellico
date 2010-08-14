@@ -74,7 +74,8 @@ enum Type {
   GiantBomb,
   OpenLibrary,
   Multiple,
-  Freebase
+  Freebase,
+  DVDFr
 };
 
   }

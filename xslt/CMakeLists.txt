@@ -13,6 +13,7 @@ SET(XSLT_FILES
     delicious2tellico.xsl
     discogs2tellico.xsl
     dvd-logo.png
+    dvdfr2tellico.xsl
     gcstar2tellico.xsl
     giantbomb2tellico.xsl
     hddvd-logo.png

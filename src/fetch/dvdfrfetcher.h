@@ -22,35 +22,69 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "xmlhandler.h"
+#ifndef TELLICO_DVDFRFETCHER_H
+#define TELLICO_DVDFRFETCHER_H
 
-#include <QTextStream>
-#include <QXmlInputSource>
+#include "xmlfetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
 
-using Tellico::XMLHandler;
+namespace Tellico {
 
-bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
-  static const QRegExp rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
-  QTextStream stream(&text_);
-  // at this point, we read the data into a QString and plan to later convert to utf-8
-  // but the xml header might still indicate an encoding other than utf-8
-  // so, just to be safe, if the xml header is the first line, ensure it is set to utf-8
-  QString firstLine = stream.readLine();
-  if(rx.indexIn(firstLine) > -1) {
-    if(rx.cap(1).toLower() != QLatin1String("utf-8")) {
-      firstLine.replace(rx, QLatin1String("encoding=\"utf-8\""));
-      text_ = firstLine + QLatin1Char('\n') + stream.readAll();
-      return true;
-    }
-  }
-  return false;
-}
+  namespace Fetch {
 
-QString XMLHandler::readXMLData(const QByteArray& data_) {
-  QXmlInputSource source;
-  source.setData(data_);
-  QString text = source.data();
-  // since we always process XML files as utf-8, make sure the encoding is set to utf-8
-  setUtf8XmlEncoding(text);
-  return text;
-}
+/**
+ * A fetcher for dvdfr.com
+ *
+ * @author Robby Stephenson
+ */
+class DVDFrFetcher : public XMLFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  DVDFrFetcher(QObject* parent);
+  /**
+   */
+  virtual ~DVDFrFetcher();
+
+  /**
+   */
+  virtual QString source() const;
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == UPC; }
+  virtual Type type() const { return DVDFr; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
+
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const DVDFrFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&);
+    virtual QString preferredName() const;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+
+private:
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void resetSearch();
+  virtual KUrl searchUrl();
+  virtual void parseData(const QByteArray&) {}
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+
+  int m_start;
+  int m_total;
+};
+
+  } // end namespace
+} // end namespace
+#endif

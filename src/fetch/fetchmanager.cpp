@@ -291,6 +291,9 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
 #endif
+  if(KGlobal::locale()->languageList().contains(QLatin1String("fr"))) {
+    FETCHER_ADD(DVDFr);
+  }
   return vec;
 }
 

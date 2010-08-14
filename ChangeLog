@@ -1,3 +1,7 @@
+2010-08-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source fetcher for dvdfr.com.
+
 2010-08-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.

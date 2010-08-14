@@ -52,6 +52,7 @@
 #ifdef HAVE_QJSON
 #include "freebasefetcher.h"
 #endif
+#include "dvdfrfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -90,4 +91,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
 #ifdef HAVE_QJSON
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
 #endif
+  RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
 }

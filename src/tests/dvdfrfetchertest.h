@@ -22,35 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "xmlhandler.h"
+#ifndef DVDFRFETCHERTEST_H
+#define DVDFRFETCHERTEST_H
 
-#include <QTextStream>
-#include <QXmlInputSource>
+#include <QObject>
+#include <QEventLoop>
 
-using Tellico::XMLHandler;
+#include "../datavectors.h"
 
-bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
-  static const QRegExp rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
-  QTextStream stream(&text_);
-  // at this point, we read the data into a QString and plan to later convert to utf-8
-  // but the xml header might still indicate an encoding other than utf-8
-  // so, just to be safe, if the xml header is the first line, ensure it is set to utf-8
-  QString firstLine = stream.readLine();
-  if(rx.indexIn(firstLine) > -1) {
-    if(rx.cap(1).toLower() != QLatin1String("utf-8")) {
-      firstLine.replace(rx, QLatin1String("encoding=\"utf-8\""));
-      text_ = firstLine + QLatin1Char('\n') + stream.readAll();
-      return true;
-    }
-  }
-  return false;
-}
+class KJob;
 
-QString XMLHandler::readXMLData(const QByteArray& data_) {
-  QXmlInputSource source;
-  source.setData(data_);
-  QString text = source.data();
-  // since we always process XML files as utf-8, make sure the encoding is set to utf-8
-  setUtf8XmlEncoding(text);
-  return text;
-}
+class DVDFrFetcherTest : public QObject {
+Q_OBJECT
+public:
+  DVDFrFetcherTest();
+
+private Q_SLOTS:
+  void initTestCase();
+  void testTitle();
+  void testUPC();
+
+  void slotResult(KJob* job);
+
+private:
+  QEventLoop m_loop;
+  Tellico::Data::EntryList m_results;
+  QHash<QString, QString> m_fieldValues;
+};
+
+#endif

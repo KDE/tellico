@@ -19,6 +19,10 @@ ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_con
 
 KDE4_ADD_LIBRARY(core STATIC ${core_STAT_SRCS})
 
+TARGET_LINK_LIBRARIES(core
+    utils
+    )
+
 ########### install files ###############
 
 INSTALL(FILES   tellico_config.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
