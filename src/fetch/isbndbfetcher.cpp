@@ -58,7 +58,7 @@ using Tellico::Fetch::ISBNdbFetcher;
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
       m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_countOffset(0),
-      m_job(0), m_started(false) {
+      m_job(0), m_started(false), m_apiKey(QLatin1String(ISBNDB_APP_ID)) {
 }
 
 ISBNdbFetcher::~ISBNdbFetcher() {
@@ -137,7 +137,7 @@ void ISBNdbFetcher::doSearch() {
       stop();
       return;
   }
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
