@@ -138,8 +138,8 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 //  myDebug() << "url: " << u;
 
-  // quiet, utf8
-  QString output = FileHandler::readTextFile(u, true, true);
+  // quiet
+  QString output = FileHandler::readXMLFile(u, true);
 
 #if 0
   myWarning() << "Remove output debug from giantbombfetcher.cpp";

@@ -344,7 +344,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         authorUrl.addQueryItem(QLatin1String("key"), key);
         authorUrl.addQueryItem(QLatin1String("name"), QString());
 
-        QString output = FileHandler::readTextFile(authorUrl, false /*quiet*/, true /*utf8*/);
+        QString output = FileHandler::readTextFile(authorUrl, false /*quiet*/);
         QVariantList authorList = parser.parse(output.toUtf8()).toList();
         QVariantMap authorResult = authorList.isEmpty() ? QVariantMap() : authorList.at(0).toMap();
         const QString name = value(authorResult, "name");

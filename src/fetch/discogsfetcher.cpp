@@ -157,8 +157,8 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHookData(Data::EntryPtr entry_
 #endif
 //  myDebug() << "url: " << u;
 
-  // quiet, utf8
-  QString output = FileHandler::readTextFile(u, true, true);
+  // quiet
+  QString output = FileHandler::readXMLFile(u, true);
 
 #if 0
   myWarning() << "Remove output debug from discogsfetcher.cpp";

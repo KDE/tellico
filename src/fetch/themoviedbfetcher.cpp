@@ -181,8 +181,8 @@ void TheMovieDBFetcher::slotComplete(KJob* ) {
       u.setPath(QLatin1String(THEMOVIEDB_API_VERSION) + QLatin1Char('/') +
                 QLatin1String("Person.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
                 e.text());
-      // quiet, utf8
-      data = FileHandler::readTextFile(u, true, true).toUtf8();
+      // quiet
+      data = FileHandler::readXMLFile(u, true).toUtf8();
     }
   }
 
@@ -254,8 +254,8 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
             QLatin1String("Movie.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
             release);
 
-  // quiet, utf8
-  QString output = FileHandler::readTextFile(u, true, true);
+  // quiet
+  QString output = FileHandler::readXMLFile(u, true);
 #if 0
   myWarning() << "Remove output debug from themoviedbfetcher.cpp";
   QFile f(QLatin1String("/tmp/test2.xml"));
