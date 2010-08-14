@@ -25,17 +25,10 @@
 #include "themoviedbfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
-#include "../collection.h"
-#include "../entry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -56,14 +49,14 @@ using namespace Tellico;
 using Tellico::Fetch::TheMovieDBFetcher;
 
 TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(THEMOVIEDB_MAX_RETURNS_TOTAL),
-      m_job(0), m_started(false), m_needPersonId(false) {
+    : XMLFetcher(parent_)
+    , m_needPersonId(false)
+    , m_apiKey(QLatin1String(THEMOVIEDB_API_KEY)) {
+  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
+  setXSLTFilename(QLatin1String("tmdb2tellico.xsl"));
 }
 
 TheMovieDBFetcher::~TheMovieDBFetcher() {
-  delete m_xsltHandler;
-  m_xsltHandler = 0;
 }
 
 QString TheMovieDBFetcher::source() const {
@@ -81,19 +74,12 @@ void TheMovieDBFetcher::readConfigHook(const KConfigGroup& config_) {
   }
 }
 
-void TheMovieDBFetcher::search() {
-  m_started = true;
-  m_needPersonId = false;
-  m_total = -1;
-  doSearch();
-}
+KUrl TheMovieDBFetcher::searchUrl() {
+  if(m_apiKey.isEmpty()) {
+    myDebug() << "empty API key";
+    return KUrl();
+  }
 
-void TheMovieDBFetcher::continueSearch() {
-  m_started = true;
-  doSearch();
-}
-
-void TheMovieDBFetcher::doSearch() {
   KUrl u(THEMOVIEDB_API_URL);
   u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
   QString queryPath;
@@ -110,49 +96,24 @@ void TheMovieDBFetcher::doSearch() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      stop();
-      return;
+      return KUrl();
   }
 
   u.addPath(queryPath);
 
-//  myDebug() << "url: " << u.url();
-
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+//  myDebug() << "url:" << u.url();
+  return u;
 }
 
-void TheMovieDBFetcher::stop() {
-  if(!m_started) {
-    return;
-  }
-  if(m_job) {
-    m_job->kill();
-    m_job = 0;
-  }
-  m_started = false;
-  emit signalDone(this);
+void TheMovieDBFetcher::resetSearch() {
+  m_needPersonId = false;
+  m_total = -1;
 }
 
-void TheMovieDBFetcher::slotComplete(KJob* ) {
-  if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
-    stop();
-    return;
-  }
-
-  QByteArray data = m_job->data();
-  if(data.isEmpty()) {
-    myDebug() << "no data";
-    stop();
-    return;
-  }
-
+void TheMovieDBFetcher::parseData(QByteArray& data_) {
   if(m_total == -1) {
     QDomDocument dom;
-    if(!dom.setContent(data, false)) {
+    if(!dom.setContent(data_, false)) {
       myWarning() << "server did not return valid XML.";
       return;
     }
@@ -161,7 +122,7 @@ void TheMovieDBFetcher::slotComplete(KJob* ) {
     QDomElement e = n.toElement();
     if(!e.isNull()) {
       m_total = e.text().toInt();
-//      myDebug() << "total = " << m_total;
+      myDebug() << "total = " << m_total;
     }
 
     if(m_needPersonId) {
@@ -182,71 +143,20 @@ void TheMovieDBFetcher::slotComplete(KJob* ) {
                 QLatin1String("Person.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
                 e.text());
       // quiet
-      data = FileHandler::readXMLFile(u, true).toUtf8();
+      data_ = FileHandler::readXMLFile(u, true).toUtf8();
     }
-  }
-
-#if 0
-  myWarning() << "Remove debug from themoviedbfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
-    t << data;
-  }
-  f.close();
-#endif
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
-    }
-  }
-
-  // assume always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
-  Import::TellicoImporter imp(str);
-  Data::CollPtr coll = imp.collection();
-  if(!coll) {
-    myDebug() << "no collection pointer";
-    stop();
-    return;
-  }
-
-  int count = 0;
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
-    if(count >= m_limit) {
-      break;
-    }
-    if(!m_started) {
-      // might get aborted
-      break;
-    }
-
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
-    ++count;
   }
 
   // not sure how to specify start in the REST url
   //  m_hasMoreResults = m_start <= m_total;
-
-  stop(); // required
 }
 
-Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
-  Data::EntryPtr entry = m_entries[uid_];
-  if(!entry) {
-    myWarning() << "no entry in dict";
-    return Data::EntryPtr();
-  }
-  QString release = entry->field(QLatin1String("tmdb-id"));
+Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
+  Q_ASSERT(entry_);
+
+  QString release = entry_->field(QLatin1String("tmdb-id"));
   if(release.isEmpty()) {
-    return entry;
+    return entry_;
   }
 
   KUrl u(THEMOVIEDB_API_URL);
@@ -261,18 +171,17 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
   QFile f(QLatin1String("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
+    t.setCodec("UTF-8");
     t << output;
   }
   f.close();
 #endif
 
-  Import::TellicoImporter imp(m_xsltHandler->applyStylesheet(output));
+  Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
   Data::CollPtr coll = imp.collection();
-//  getTracks(entry);
   if(!coll) {
     myWarning() << "no collection pointer";
-    return entry;
+    return entry_;
   }
 
   if(coll->entryCount() > 1) {
@@ -281,35 +190,10 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
 
   // don't want to include id
   coll->removeField(QLatin1String("tmdb-id"));
-
-  entry = coll->entries().front();
-  m_entries.insert(uid_, entry); // replaces old value
-  return entry;
-}
-
-void TheMovieDBFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("tmdb2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate tmdb2tellico.xsl.";
-    return;
-  }
-
-  KUrl u;
-  u.setPath(xsltfile);
-
-  delete m_xsltHandler;
-  m_xsltHandler = new XSLTHandler(u);
-  if(!m_xsltHandler->isValid()) {
-    myWarning() << "error in tmdb2tellico.xsl.";
-    delete m_xsltHandler;
-    m_xsltHandler = 0;
-    return;
-  }
+  return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr entry_) {
-//  myDebug();
-
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);

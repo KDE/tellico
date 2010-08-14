@@ -139,6 +139,9 @@ ENDIF( QJSON_FOUND )
 KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp)
 TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(themoviedbfetchertest NOGUI themoviedbfetchertest.cpp)
+TARGET_LINK_LIBRARIES(themoviedbfetchertest fetch ${TELLICO_TEST_LIBS})
+
 IF( YAZ_FOUND )
     KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp)
     TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})

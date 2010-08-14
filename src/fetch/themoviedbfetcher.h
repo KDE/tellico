@@ -25,7 +25,7 @@
 #ifndef TELLICO_THEMOVIEDBFETCHER_H
 #define TELLICO_THEMOVIEDBFETCHER_H
 
-#include "fetcher.h"
+#include "xmlfetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
 
@@ -49,7 +49,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class TheMovieDBFetcher : public Fetcher {
+class TheMovieDBFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
@@ -63,12 +63,7 @@ public:
   /**
    */
   virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
-  // amazon can search title or person
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return TheMovieDB; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
@@ -92,23 +87,15 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
-private slots:
-  void slotComplete(KJob* job);
-
 private:
-  virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  void initXSLTHandler();
-  void doSearch();
+  virtual void resetSearch();
+  virtual KUrl searchUrl();
+  virtual void parseData(QByteArray& data);
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 
-  XSLTHandler* m_xsltHandler;
-  int m_limit;
   int m_total;
 
-  QHash<int, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
-
-  bool m_started;
   bool m_needPersonId;
 
   QString m_apiKey;
