@@ -104,7 +104,7 @@ void XMLFetcher::slotComplete(KJob* ) {
     }
   }
 
-  const QByteArray data = m_job->data();
+  QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();

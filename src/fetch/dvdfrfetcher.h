@@ -55,7 +55,7 @@ public:
   virtual bool canSearch(FetchKey k) const { return k == Title || k == UPC; }
   virtual Type type() const { return DVDFr; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual void readConfigHook(const KConfigGroup&) {}
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -76,13 +76,10 @@ public:
 
 private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
+  virtual void resetSearch() {}
   virtual KUrl searchUrl();
-  virtual void parseData(const QByteArray&) {}
+  virtual void parseData(QByteArray&) {}
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
-
-  int m_start;
-  int m_total;
 };
 
   } // end namespace

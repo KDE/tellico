@@ -66,13 +66,6 @@ bool DVDFrFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void DVDFrFetcher::readConfigHook(const KConfigGroup&) {
-}
-
-void DVDFrFetcher::resetSearch() {
-  m_total = -1;
-}
-
 KUrl DVDFrFetcher::searchUrl() {
 #ifdef DVDFR_TEST
   return KUrl("/home/robby/kde/src/tellico/src/fetch/dvdfr_search2.xml");
@@ -91,7 +84,6 @@ KUrl DVDFrFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      stop();
       return KUrl();
   }
 

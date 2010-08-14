@@ -74,7 +74,7 @@ private:
   virtual void search();
   virtual void resetSearch() = 0;
   virtual KUrl searchUrl() = 0;
-  virtual void parseData(const QByteArray& data) = 0;
+  virtual void parseData(QByteArray& data) = 0;
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) = 0;
 
   void initXSLTHandler();

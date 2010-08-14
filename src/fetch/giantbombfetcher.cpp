@@ -91,7 +91,6 @@ KUrl GiantBombFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      stop();
       return KUrl();
   }
 
@@ -99,7 +98,7 @@ KUrl GiantBombFetcher::searchUrl() {
   return u;
 }
 
-void GiantBombFetcher::parseData(const QByteArray& data_) {
+void GiantBombFetcher::parseData(QByteArray& data_) {
   Q_UNUSED(data_);
 #if 0
   if(m_total == -1) {
