@@ -66,12 +66,14 @@ public:
 
   void setURL(const KUrl& url_) { m_url = url_; }
   void setEntries(const Data::EntryList& entries) { m_entries = entries; }
+  void setFields(const Data::FieldList& fields) { m_fields = fields; }
   void setOptions(long options) { m_options = options; reset(); }
 
   virtual QString formatString() const = 0;
   virtual QString fileFilter() const = 0;
   const KUrl& url() const { return m_url; }
   const Data::EntryList& entries() const { return m_entries; }
+  const Data::FieldList& fields() const;
   long options() const { return m_options; }
 
   /**
@@ -92,6 +94,7 @@ private:
   long m_options;
   Data::CollPtr m_coll;
   Data::EntryList m_entries;
+  Data::FieldList m_fields;
   KUrl m_url;
 };
 

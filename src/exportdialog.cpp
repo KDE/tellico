@@ -83,6 +83,12 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
                                       "be exported."));
   vlay->addWidget(m_exportSelected);
 
+  m_exportFields = new QCheckBox(i18n("Export visible fields only"), group1);
+  m_exportFields->setChecked(false);
+  m_exportFields->setWhatsThis(i18n("If checked, only the fields currently visible in the view will "
+                                    "be exported."));
+  vlay->addWidget(m_exportFields);
+
   QGroupBox* group2 = new QGroupBox(i18n("Encoding"), widget);
   topLayout->addWidget(group2, 0);
 
@@ -243,6 +249,18 @@ bool ExportDialog::exportURL(const KUrl& url_/*=KUrl()*/) const {
     m_exporter->setEntries(Controller::self()->selectedEntries());
   } else {
     m_exporter->setEntries(m_coll->entries());
+  }
+  if(m_exportFields->isChecked()) {
+    Data::FieldList fields;
+    foreach(const QString& title, Controller::self()->visibleColumns()) {
+      Data::FieldPtr field = m_coll->fieldByTitle(title);
+      if(field) {
+        fields << field;
+      }
+    }
+    m_exporter->setFields(fields);
+  } else {
+    m_exporter->setFields(m_coll->fields());
   }
   long opt = Export::ExportImages | Export::ExportComplete | Export::ExportProgress; // for now, always export images
   if(m_formatFields->isChecked()) {

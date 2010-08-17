@@ -154,6 +154,7 @@ QString ONIXExporter::text() {
   // now grab the XML
   TellicoXMLExporter exporter(coll);
   exporter.setEntries(entries());
+  exporter.setFields(fields());
   exporter.setIncludeImages(false); // do not include images in XML
 // yes, this should be in utf8, always
   exporter.setOptions(options() | Export::ExportUTF8);

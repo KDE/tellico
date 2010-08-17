@@ -68,6 +68,7 @@ private:
   Export::Exporter* m_exporter;
   QCheckBox* m_formatFields;
   QCheckBox* m_exportSelected;
+  QCheckBox* m_exportFields;
   QRadioButton* m_encodeUTF8;
   QRadioButton* m_encodeLocale;
 };

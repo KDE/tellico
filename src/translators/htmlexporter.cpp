@@ -256,6 +256,7 @@ QString HTMLExporter::text() {
   TellicoXMLExporter exporter(coll);
   exporter.setURL(url());
   exporter.setEntries(entries());
+  exporter.setFields(fields());
   exporter.setIncludeGroups(m_printGrouped);
 // yes, this should be in utf8, always
   exporter.setOptions(options() | Export::ExportUTF8 | Export::ExportImages);
@@ -406,8 +407,10 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // and so we need to write all of them too.
   if(m_exportEntryFiles || url().isEmpty()) {
     // add all image fields to string list
-    Data::FieldList fields = coll_->imageFields();
-    foreach(Data::FieldPtr field, fields) {
+    Data::FieldList iFields = coll_->imageFields();
+    // take intersection with the fields to be exported
+    iFields = QSet<Data::FieldPtr>::fromList(iFields).intersect(fields().toSet()).toList();
+    foreach(Data::FieldPtr field, iFields) {
       imageFields.add(field->name());
     }
   }
@@ -715,6 +718,7 @@ bool HTMLExporter::writeEntryFiles() {
   HTMLExporter exporter(collection());
   long opt = options() | Export::ExportForce;
   opt &= ~ExportProgress;
+  exporter.setFields(fields());
   exporter.setOptions(opt);
   exporter.setXSLTFile(m_entryXSLTFile);
   exporter.setCollectionURL(url());

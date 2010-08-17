@@ -85,8 +85,7 @@ QString BibtexExporter::text() {
   const QString bibtex = QLatin1String("bibtex");
 // keep a list of all the 'ordinary' fields to iterate through later
   Data::FieldList fields;
-  Data::FieldList vec = coll->fields();
-  foreach(Data::FieldPtr it, vec) {
+  foreach(Data::FieldPtr it, this->fields()) {
     QString bibtexField = it->property(bibtex);
     if(bibtexField == QLatin1String("entry-type")) {
       typeField = it->name();

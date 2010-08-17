@@ -68,6 +68,7 @@ bool XSLTExporter::exec() {
 
   TellicoXMLExporter exporter(collection());
   exporter.setEntries(entries());
+  exporter.setFields(fields());
   exporter.setOptions(options());
   QDomDocument dom = exporter.exportXML();
   return FileHandler::writeTextURL(url(), handler.applyStylesheet(dom.toString()),

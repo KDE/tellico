@@ -94,7 +94,7 @@ bool PilotDBExporter::exec() {
   // except that only one field of type NOTE
   bool hasNote = false;
   Data::FieldList outputFields; // not all fields will be output
-  foreach(Data::FieldPtr fIt, coll->fields()) {
+  foreach(Data::FieldPtr fIt, fields()) {
     switch(fIt->type()) {
       case Data::Field::Choice:
         // the charSeparator is actually defined in DB.h

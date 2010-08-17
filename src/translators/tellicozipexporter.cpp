@@ -71,6 +71,7 @@ bool TellicoZipExporter::exec() {
 
   TellicoXMLExporter exp(coll);
   exp.setEntries(entries());
+  exp.setFields(fields());
   exp.setURL(url()); // needed in case of relative URL values
   long opt = options();
   opt |= Export::ExportUTF8; // always export to UTF-8
@@ -100,6 +101,8 @@ bool TellicoZipExporter::exec() {
     const QString imagesDir = QLatin1String("images/");
     StringSet imageSet;
     Data::FieldList imageFields = coll->imageFields();
+    // take intersection with the fields to be exported
+    imageFields = QSet<Data::FieldPtr>::fromList(imageFields).intersect(fields().toSet()).toList();
     // already took 10%, only 90% left
     const int stepSize = qMax(1, (coll->entryCount() * imageFields.count()) / 90);
     foreach(Data::EntryPtr entry, entries()) {

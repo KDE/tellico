@@ -79,7 +79,7 @@ bool CSVExporter::exec() {
   QString text;
 
   if(m_includeTitles) {
-    foreach(Data::FieldPtr fIt, collection()->fields()) {
+    foreach(Data::FieldPtr fIt, fields()) {
       QString title = fIt->title();
       // because of Microsoft Excel bug, http://support.microsoft.com/kb/323626
       if(text.isEmpty() && title == QLatin1String("ID")) {
@@ -98,7 +98,7 @@ bool CSVExporter::exec() {
 
   QString tmp;
   foreach(Data::EntryPtr entryIt, entries()) {
-    foreach(Data::FieldPtr fIt, collection()->fields()) {
+    foreach(Data::FieldPtr fIt, fields()) {
       tmp = entryIt->formattedField(fIt->name(), format);
       text += escapeText(tmp) + m_delimiter;
     }

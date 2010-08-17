@@ -138,7 +138,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   QDomElement fieldsElem = dom_.createElement(QLatin1String("fields"));
   collElem.appendChild(fieldsElem);
 
-  foreach(Data::FieldPtr field, coll->fields()) {
+  foreach(Data::FieldPtr field, fields()) {
     exportFieldXML(dom_, fieldsElem, field);
   }
 
@@ -241,8 +241,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
   entryElem.setAttribute(QLatin1String("id"), QString::number(entry_->id()));
 
   // iterate through every field for the entry
-  Data::FieldList fields = entry_->collection()->fields();
-  foreach(Data::FieldPtr fIt, fields) {
+  foreach(Data::FieldPtr fIt, fields()) {
     QString fieldName = fIt->name();
 
     // Date fields are special, don't format in export

@@ -27,7 +27,6 @@
 #include "bibtexmlexporter.h"
 #include "bibtexhandler.h"
 #include "../document.h"
-#include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "tellico_xml.h"
@@ -64,7 +63,6 @@ QString BibtexmlExporter::text() {
   if(!c || c->type() != Data::Collection::Bibtex) {
     return QString();
   }
-  const Data::BibtexCollection* coll = static_cast<const Data::BibtexCollection*>(c.data());
 
 // there are some special fields
 // the entry-type specifies the entry type - book, inproceedings, whatever
@@ -75,8 +73,7 @@ QString BibtexmlExporter::text() {
   const QString bibtex = QLatin1String("bibtex");
 // keep a list of all the 'ordinary' fields to iterate through later
   Data::FieldList fields;
-  Data::FieldList vec = coll->fields();
-  foreach(Data::FieldPtr it, vec) {
+  foreach(Data::FieldPtr it, this->fields()) {
     QString bibtexField = it->property(bibtex);
     if(bibtexField == QLatin1String("entry-type")) {
       typeField = it->name();
@@ -119,8 +116,7 @@ QString BibtexmlExporter::text() {
   StringSet usedKeys;
   QString type, key, newKey, value, elemName, parElemName;
   QDomElement btElem, entryElem, parentElem, fieldElem;
-  Data::EntryList entries = this->entries();
-  foreach(Data::EntryPtr entryIt, entries) {
+  foreach(Data::EntryPtr entryIt, entries()) {
     key = entryIt->field(keyField);
     if(key.isEmpty()) {
       key = BibtexHandler::bibtexKey(entryIt);
