@@ -15,4 +15,4 @@ SET(models_STAT_SRCS
    modeltest.cpp
    )
 
-KDE4_ADD_LIBRARY(models STATIC ${models_STAT_SRCS})
+KDE4_ADD_LIBRARY(tellicomodels STATIC ${models_STAT_SRCS})

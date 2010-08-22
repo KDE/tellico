@@ -76,7 +76,7 @@ TARGET_LINK_LIBRARIES(tellico
     translators
     gui
     commands
-    models
+    tellicomodels
     utils
     newstuff
     pilotdb
