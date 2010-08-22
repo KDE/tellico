@@ -50,6 +50,7 @@
 #include "translators/bibtexhandler.h" // needed for bibtex options
 #include "fetchdialog.h"
 #include "reportdialog.h"
+#include "statisticsdialog.h"
 #include "tellico_strings.h"
 #include "filterview.h"
 #include "loanview.h"
@@ -142,6 +143,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
     m_stringMacroDlg(0),
     m_fetchDlg(0),
     m_reportDlg(0),
+    m_statsDlg(0),
     m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true),
@@ -509,12 +511,6 @@ void MainWindow::initActions() {
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
   m_mergeEntry->setEnabled(false); // gets enabled when more than 1 entry is selected
 
-  action = actionCollection()->addAction(QLatin1String("coll_reports"), this, SLOT(slotShowReportDialog()));
-  action->setText(i18n("&Generate Reports..."));
-  action->setIconText(i18n("Reports"));
-  action->setIcon(KIcon(QLatin1String("text-rdf")));
-  action->setToolTip(i18n("Generate collection reports"));
-
   m_checkOutEntry = actionCollection()->addAction(QLatin1String("coll_checkout"), Controller::self(), SLOT(slotCheckOut()));
   m_checkOutEntry->setText(i18n("Check-&out..."));
   m_checkOutEntry->setIcon(KIcon(QLatin1String("arrow-up-double")));
@@ -537,6 +533,18 @@ void MainWindow::initActions() {
   action->setIcon(KIcon(QLatin1String("preferences-other")));
   action->setShortcut(Qt::CTRL + Qt::Key_U);
   action->setToolTip(i18n("Modify the collection fields"));
+
+  action = actionCollection()->addAction(QLatin1String("coll_reports"), this, SLOT(slotShowReportDialog()));
+  action->setText(i18n("&Generate Reports..."));
+  action->setIconText(i18n("Reports"));
+  action->setIcon(KIcon(QLatin1String("text-rdf")));
+  action->setToolTip(i18n("Generate collection reports"));
+
+  action = actionCollection()->addAction(QLatin1String("coll_statistics"), this, SLOT(slotShowStatisticsDialog()));
+  action->setText(i18n("&Show Statistics..."));
+  action->setIconText(i18n("Statistics"));
+  action->setIcon(KIcon(QLatin1String("application-vnd.oasis.opendocument.chart")));
+  action->setToolTip(i18n("Show statistics for collection"));
 
   action = actionCollection()->addAction(QLatin1String("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));
   action->setText(i18n("Convert to &Bibliography"));
@@ -1551,7 +1559,6 @@ void MainWindow::slotChangeGrouping() {
 }
 
 void MainWindow::slotShowReportDialog() {
-//  DEBUG_LINE;
   if(!m_reportDlg) {
     m_reportDlg = new ReportDialog(this);
     connect(m_reportDlg, SIGNAL(finished()),
@@ -1566,6 +1573,24 @@ void MainWindow::slotHideReportDialog() {
   if(m_reportDlg) {
     m_reportDlg->delayedDestruct();
     m_reportDlg = 0;
+  }
+}
+
+void MainWindow::slotShowStatisticsDialog() {
+  if(!m_statsDlg) {
+    m_statsDlg = new StatisticsDialog(Controller::self()->groupBy(), this);
+    connect(m_statsDlg, SIGNAL(finished()),
+            SLOT(slotHideStatisticsDialog()));
+  } else {
+    KWindowSystem::activateWindow(m_statsDlg->winId());
+  }
+  m_statsDlg->show();
+}
+
+void MainWindow::slotHideStatisticsDialog() {
+  if(m_statsDlg) {
+    m_statsDlg->delayedDestruct();
+    m_statsDlg = 0;
   }
 }
 

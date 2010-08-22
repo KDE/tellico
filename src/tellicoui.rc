@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="26" name="tellico">
+<kpartgui version="27" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -87,6 +87,7 @@
    <Action name="coll_rename_collection"/>
    <Action name="coll_fields"/>
    <Action name="coll_reports"/>
+   <Action name="coll_statistics"/>
    <Separator/>
    <Action name="coll_convert_bibliography"/>
    <Action name="coll_string_macros"/>

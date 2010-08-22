@@ -67,6 +67,7 @@ namespace Tellico {
   class EntryItem;
   class FetchDialog;
   class ReportDialog;
+  class StatisticsDialog;
   class StatusBar;
   class DropHandler;
 
@@ -456,11 +457,13 @@ private slots:
    * Show the report window.
    */
   void slotShowReportDialog();
+  void slotShowStatisticsDialog();
   void slotGroupLabelActivated();
   /**
    * Show the report window.
    */
   void slotHideReportDialog();
+  void slotHideStatisticsDialog();
   /**
    * Focus the filter
    */
@@ -516,6 +519,7 @@ private:
   StringMapDialog* m_stringMacroDlg;
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
+  StatisticsDialog* m_statsDlg;
 
   QList<QAction*> m_fetchActions;
 
