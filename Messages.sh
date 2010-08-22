@@ -1,6 +1,7 @@
 #!/bin/sh
 # extract rc, ui and kcfg files to rc.cpp
-$EXTRACTRC `find . -name '*.rc' -o -name '*.ui' -o -name '*.kcfg'` >> rc.cpp
+$EXTRACTRC `find . -name '*.rc' -o -name '*.ui' -o -name '*.kcfg' |
+            grep -v src/tests/tellicotestconfig.rc` >> rc.cpp
 # extract tips
 ./preparetips tellico.tips > tips.cpp
 # extract other translation files
