@@ -10,7 +10,7 @@
  *   the License or (at your option) version 3 or any later version        *
  *   accepted by the membership of KDE e.V. (or its successor approved     *
  *   by the membership of KDE e.V.), which shall act as a proxy            *
- *   defined in Section 14 of version 3 of the license.                    *
+ *   defined in Section 14 of version 3 of the license.                     *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
@@ -728,7 +728,7 @@ void MainWindow::initConnections() {
 
   // let the group view call filters, too
   connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-          Controller::self(), SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+          this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
@@ -1624,9 +1624,7 @@ void MainWindow::slotShowFilterDialog() {
     connect(m_filterDlg, SIGNAL(signalCollectionModified()),
             Data::Document::self(), SLOT(slotSetModified()));
     connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-            this, SLOT(slotClearFilterNow()));
-    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-            Controller::self(), SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+            this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
     connect(m_filterDlg, SIGNAL(finished()),
             SLOT(slotHideFilterDialog()));
   } else {
@@ -1646,7 +1644,7 @@ void MainWindow::slotHideFilterDialog() {
 }
 
 void MainWindow::slotQueueFilter() {
-  if (m_dontQueueFilter) {
+  if(m_dontQueueFilter) {
     return;
   }
   m_queuedFilters++;
@@ -1662,11 +1660,11 @@ void MainWindow::slotUpdateFilter() {
   setFilter(m_quickFilter->text());
 }
 
-void MainWindow::slotClearFilterNow() {
+void MainWindow::slotUpdateFilter(FilterPtr filter_) {
   // Can't just block signals because clear button won't show then
   m_dontQueueFilter = true;
   m_quickFilter->setText(QLatin1String(" ")); // To be able to clear custom filter
-  setFilter(QString());
+  Controller::self()->slotUpdateFilter(filter_);
   m_dontQueueFilter = false;
 }
 
@@ -1996,6 +1994,8 @@ void MainWindow::addFilterView() {
   m_viewTabs->insertTab(1, m_filterView, KIcon(QLatin1String("view-filter")), i18n("Filters"));
   m_filterView->setWhatsThis(i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                   "filter rules.</qt>"));
+  connect(m_filterView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
+          this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
 
   // sort by count if column = 1
   int sortRole = Config::filterViewSortColumn() == 0 ? static_cast<int>(Qt::DisplayRole) : static_cast<int>(RowCountRole);

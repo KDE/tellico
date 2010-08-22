@@ -160,6 +160,7 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
   // ignore the selected and deselected variables
   // we want to grab all the currently selected ones
   QSet<Data::EntryPtr> entries;
+  FilterPtr filter;
   foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
     QModelIndex realIndex = sortModel()->mapToSource(index);
     Data::EntryPtr entry = sourceModel()->entry(realIndex);
@@ -173,7 +174,15 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
           entries += entry;
         }
       }
+      if(filter) {
+        myWarning() << "Only one filter can be applied";
+      } else {
+        filter = sourceModel()->filter(realIndex);
+      }
     }
+  }
+  if(filter) {
+    emit signalUpdateFilter(filter);
   }
   Controller::self()->slotUpdateSelection(this, entries.toList());
 }
@@ -183,6 +192,11 @@ void FilterView::slotDoubleClicked(const QModelIndex& index_) {
   Data::EntryPtr entry = sourceModel()->entry(realIndex);
   if(entry) {
     Controller::self()->editEntry(entry);
+  } else {
+    FilterPtr filter = sourceModel()->filter(realIndex);
+    if(filter) {
+      Kernel::self()->modifyFilter(filter);
+    }
   }
 }
 

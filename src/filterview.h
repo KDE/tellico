@@ -54,6 +54,9 @@ public:
   virtual void modifyFilter(FilterPtr) {}
   virtual void removeFilter(FilterPtr filter);
 
+signals:
+  void signalUpdateFilter(Tellico::FilterPtr filter);
+
 public slots:
   /**
    * Resets the list view, clearing and deleting all items.

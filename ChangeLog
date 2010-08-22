@@ -1,3 +1,7 @@
+2010-08-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed filter view to apply filter when item is selected (Bug: 248657).
+
 2010-08-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved exporter to add option for limiting exported fields (Bug 246390).
