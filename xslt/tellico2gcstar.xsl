@@ -32,7 +32,8 @@
   <a:attribute name="serie">series</a:attribute>
   <a:attribute name="edition">edition</a:attribute>
   <a:attribute name="pages">pages</a:attribute>
-  <a:attribute name="added">pur_date</a:attribute>
+  <a:attribute name="added" skip="GCwines">pur_date</a:attribute>
+  <a:attribute name="purchasedate" type="GCwines">pur_date</a:attribute>
   <a:attribute name="acquisition">pur_date</a:attribute>
   <a:attribute name="location">location</a:attribute>
   <a:attribute name="translator">translator</a:attribute>
@@ -57,6 +58,20 @@
   <a:attribute name="designedby">designer</a:attribute>
   <a:attribute name="players">num-player</a:attribute>
   <a:attribute name="developer">developer</a:attribute>
+  <a:attribute name="designation">appellation</a:attribute>
+  <a:attribute name="vintage">vintage</a:attribute>
+  <a:attribute name="type">type</a:attribute>
+  <a:attribute name="country">country</a:attribute>
+  <a:attribute name="purchaseprice">pur_price</a:attribute>
+  <a:attribute name="quantity">quantity</a:attribute>
+  <a:attribute name="soil">soil</a:attribute>
+  <a:attribute name="alcohol">alcohol</a:attribute>
+  <a:attribute name="volume">volume</a:attribute>
+  <a:attribute name="tasting">description</a:attribute>
+  <a:attribute name="comments">comments</a:attribute>
+  <a:attribute name="medal">distinction</a:attribute>
+  <a:attribute name="tasted" format="bool" type="GCwines">tasted</a:attribute>
+  <a:attribute name="gift" format="bool">gift</a:attribute>
 </a:attributes>
 <xsl:variable name="collType">
  <xsl:choose>
@@ -68,6 +83,9 @@
   </xsl:when>
   <xsl:when test="tc:tellico/tc:collection/@type=4">
    <xsl:text>GCmusics</xsl:text>
+  </xsl:when>
+  <xsl:when test="tc:tellico/tc:collection/@type=7">
+   <xsl:text>GCwines</xsl:text>
   </xsl:when>
   <xsl:when test="tc:tellico/tc:collection/@type=8">
    <xsl:text>GCcoins</xsl:text>
@@ -104,6 +122,7 @@
                                    @type=3 or
                                    @type=4 or
                                    @type=5 or
+                                   @type=7 or
                                    @type=8 or
                                    @type=11 or
                                    @type=13]">
@@ -239,6 +258,13 @@
     <xsl:value-of select="tc:description"/>
    </description>
   </xsl:if>
+
+  <!-- for wines -->
+  <grapes>
+   <xsl:call-template name="multiline">
+    <xsl:with-param name="elem" select="tc:varietals"/>
+   </xsl:call-template>
+  </grapes>
 
  </item>
 </xsl:template>

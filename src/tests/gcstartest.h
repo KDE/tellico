@@ -37,6 +37,7 @@ private Q_SLOTS:
   void testMusic();
   void testVideoGame();
   void testBoardGame();
+  void testWine();
 };
 
 #endif

@@ -1,3 +1,8 @@
+2010-08-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added GCstar export for wine collections.
+	* Improved GCstar import for wine collections.
+
 2010-08-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed filter view to apply filter when item is selected (Bug: 248657).

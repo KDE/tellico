@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2010 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -271,6 +271,60 @@ void GCstarTest::testBoardGame() {
   QCOMPARE(FIELDS(entry, "mechanism").at(1), QLatin1String("Dice Rolling"));
   QCOMPARE(FIELDS(entry, "genre").count(), 1);
   QCOMPARE(FIELDS(entry, "genre").at(0), QLatin1String("Wargame"));
+  QVERIFY(!entry->field("description").isEmpty());
+  QVERIFY(!entry->field("comments").isEmpty());
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
+}
+
+
+void GCstarTest::testWine() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-wine.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Wine);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("vintage"), QLatin1String("1990"));
+  QCOMPARE(entry->field("producer"), QLatin1String("producer"));
+  QCOMPARE(entry->field("type"), QLatin1String("Red Wine"));
+  QCOMPARE(entry->field("country"), QLatin1String("australia"));
+  QCOMPARE(entry->field("quantity"), QLatin1String("1"));
+  QCOMPARE(FIELDS(entry, "varietal").count(), 2);
+  QCOMPARE(FIELDS(entry, "varietal").at(1), QLatin1String("grape2"));
+  QCOMPARE(entry->field("pur_date"), QLatin1String("28/08/2010"));
+  QCOMPARE(entry->field("pur_price"), QLatin1String("12.99"));
+  QCOMPARE(entry->field("appellation"), QLatin1String("designation"));
+  QCOMPARE(entry->field("distinction"), QLatin1String("distinction"));
+  QCOMPARE(entry->field("soil"), QLatin1String("soil"));
+  QCOMPARE(entry->field("alcohol"), QLatin1String("12"));
+  QCOMPARE(entry->field("volume"), QLatin1String("750"));
+  QCOMPARE(entry->field("rating"), QLatin1String("3"));
+  QCOMPARE(entry->field("gift"), QLatin1String("true"));
+  QCOMPARE(entry->field("tasted"), QLatin1String("true"));
   QVERIFY(!entry->field("description").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 

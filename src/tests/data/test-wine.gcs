@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="GCwines" items="1" version="1.6.0">
+ <information>
+  <maxId>2</maxId>
+ </information>
+
+
+
+ <item
+  id="1"
+  name="designation vineyard 1990"
+  designation="designation"
+  vineyard="vineyard"
+  vintage="1990"
+  type="red"
+  soil="soil"
+  producer="producer"
+  country="australia"
+  volume="750"
+  alcohol="12"
+  medal="distinction"
+  location=""
+  shelfindex=""
+  quantity="1"
+  purchasedate="28/08/2010"
+  purchaseprice="12.99"
+  gift="yes"
+  bottlelabel=""
+  website=""
+  tasted="1"
+  rating="6"
+  favourite="0"
+  tags=""
+ >
+  <comments>comments</comments>
+  <serving></serving>
+  <tasting>description</tasting>
+  <grapes>
+   <line>
+    <col>grape1</col>
+   </line>
+   <line>
+    <col>grape2</col>
+   </line>
+  </grapes>
+ </item>
+</collection>
