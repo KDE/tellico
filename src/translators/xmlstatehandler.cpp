@@ -286,7 +286,7 @@ StateHandler* FieldHandler::nextHandlerImpl(const QString&, const QString& local
 }
 
 bool FieldHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
-  // special case: if the i18n attribute equals true, then translate the title, description, and category
+  // special case: if the i18n attribute equals true, then translate the title, description, category, and allowed
   const bool isI18n = attValue(atts_, "i18n") == QLatin1String("true");
 
   QString name = attValue(atts_, "name", "unknown");
