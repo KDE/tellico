@@ -24,6 +24,7 @@
     <text>&amp;Import</text>
     <Action name="file_import_tellico"/>
     <Action name="file_import_csv"/>
+    <Action name="file_import_gcstar"/>
     <Separator/>
     <Action name="file_import_alexandria"/>
     <Action name="file_import_bibtex"/>
@@ -38,7 +39,6 @@
     <Action name="file_import_audiofile"/>
     <Separator/>
     <Action name="file_import_amc"/>
-    <Action name="file_import_gcstar"/>
     <Action name="file_import_griffith"/>
     <Separator/>
     <Action name="file_import_filelisting"/>
@@ -131,7 +131,6 @@
   <Action name="file_export_onix"/>
   <Action name="file_export_bibtex"/>
   <Action name="file_export_bibtexml"/>
-  <Action name="file_export_gcstar"/>
   <Action name="file_export_amc"/>
   <Action name="coll_convert_bibliography"/>
   <Action name="coll_string_macros"/>
@@ -164,7 +163,6 @@
 
 <State name="is_video">
  <Enable>
-  <Action name="file_export_gcstar"/>
   <Action name="file_export_amc"/>
  </Enable>
 </State>
