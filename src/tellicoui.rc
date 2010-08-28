@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="27" name="tellico">
+<kpartgui version="28" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -131,6 +131,7 @@
   <Action name="file_export_onix"/>
   <Action name="file_export_bibtex"/>
   <Action name="file_export_bibtexml"/>
+  <Action name="file_export_gcstar"/>
   <Action name="file_export_amc"/>
   <Action name="coll_convert_bibliography"/>
   <Action name="coll_string_macros"/>
@@ -143,27 +144,55 @@
  <Enable>
   <Action name="file_export_alexandria"/>
   <Action name="file_export_onix"/>
+  <Action name="file_export_gcstar"/>
   <Action name="coll_convert_bibliography"/>
  </Enable>
 </State>
 
-<State name="is_bibliography">
+<State name="is_bibtex">
  <Enable>
   <Action name="file_export_alexandria"/>
   <Action name="file_export_onix"/>
   <Action name="file_export_bibtex"/>
   <Action name="file_export_bibtexml"/>
   <Action name="coll_string_macros"/>
-<!-- cite actions taken care in selection code
-  <Action name="cite_clipboard"/>
-  <Action name="cite_lyxpipe"/>
- -->
  </Enable>
 </State>
 
 <State name="is_video">
  <Enable>
   <Action name="file_export_amc"/>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_album">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_wine">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_coin">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_game">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_boardgame">
+ <Enable>
+  <Action name="file_export_gcstar"/>
  </Enable>
 </State>
 

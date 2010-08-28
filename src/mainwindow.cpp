@@ -277,7 +277,7 @@ void MainWindow::initActions() {
   COLL_ACTION(BoardGame, "new_boardgame_collection", i18n("New Boa&rd Game Collection"),
               i18n("Create a new board game collection"), "boardgame");
 
-  COLL_ACTION(File, "BoardGame", i18n("New &File Catalog"),
+  COLL_ACTION(File, "new_file_catalog", i18n("New &File Catalog"),
               i18n("Create a new file catalog"), "file");
 
   action = actionCollection()->addAction(QLatin1String("new_custom_collection"), collectionMapper, SLOT(map()));
@@ -2096,20 +2096,10 @@ void MainWindow::updateCollectionActions() {
   }
 
   stateChanged(QLatin1String("collection_reset"));
+
   Data::Collection::Type type = Data::Document::self()->collection()->type();
-  switch(type) {
-    case Data::Collection::Book:
-      stateChanged(QLatin1String("is_book"));
-      break;
-    case Data::Collection::Bibtex:
-      stateChanged(QLatin1String("is_bibliography"));
-      break;
-    case Data::Collection::Video:
-      stateChanged(QLatin1String("is_video"));
-      break;
-    default:
-      break;
-  }
+  stateChanged(QLatin1String("is_") + CollectionFactory::typeName(type));
+
   Controller::self()->updateActions();
   // special case when there are no available data sources
   if(m_fetchActions.isEmpty() && m_updateAll) {
