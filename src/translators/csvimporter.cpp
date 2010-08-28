@@ -80,7 +80,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   }
 
   if(!m_coll) {
-    m_coll = CollectionFactory::collection(m_comboColl->currentType(), true);
+    createCollection();
   }
 
   const QStringList existingNames = m_coll->fieldNames();
@@ -89,17 +89,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   QStringList names;
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QString t = m_table->horizontalHeaderItem(col)->text();
-    if(m_existingCollection && m_existingCollection->fieldByTitle(t)) {
-      // the collection might have the right field, but a different title, say for translations
-      Data::FieldPtr f = m_existingCollection->fieldByTitle(t);
-      if(m_coll->hasField(f->name())) {
-        // might have different values settings
-        m_coll->removeField(f->name(), true /* force */);
-      }
-      m_coll->addField(Data::FieldPtr(new Data::Field(*f)));
-      cols << col;
-      names << f->name();
-    } else if(m_coll->fieldByTitle(t)) {
+    if(m_coll->fieldByTitle(t)) {
       cols << col;
       names << m_coll->fieldNameByTitle(t);
     }
@@ -357,14 +347,11 @@ void CSVImporter::fillTable() {
 }
 
 void CSVImporter::slotTypeChanged() {
-  // iterate over the collection names until it matches the text of the combo box
-  Data::Collection::Type type = static_cast<Data::Collection::Type>(m_comboColl->currentType());
-  m_coll = CollectionFactory::collection(type, true);
+  createCollection();
 
   updateHeader(true);
   m_comboField->clear();
-  const Data::FieldList fields = m_existingCollection ? m_existingCollection->fields() : m_coll->fields();
-  foreach(Data::FieldPtr field, fields) {
+  foreach(Data::FieldPtr field, m_coll->fields()) {
     m_comboField->addItem(field->title());
   }
   m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
@@ -449,15 +436,14 @@ void CSVImporter::updateHeader(bool force_) {
     return;
   }
 
-  Data::CollPtr currColl = m_existingCollection ? m_existingCollection : m_coll;
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QTableWidgetItem* item = m_table->item(0, col);
     Data::FieldPtr field;
-    if(item && currColl) {
+    if(item && m_coll) {
       QString itemValue = item->text();
-      field = currColl->fieldByTitle(itemValue);
+      field = m_coll->fieldByTitle(itemValue);
       if(!field) {
-        field = currColl->fieldByName(itemValue);
+        field = m_coll->fieldByName(itemValue);
       }
     }
     QTableWidgetItem* headerItem = m_table->horizontalHeaderItem(col);
@@ -480,21 +466,20 @@ void CSVImporter::slotFieldChanged(int idx_) {
     return;
   }
 
-  Data::CollPtr c = m_existingCollection ? m_existingCollection : m_coll;
-  const int count = c->fields().count();
-  CollectionFieldsDialog dlg(c, m_widget);
-//  dlg.setModal(true);
+  CollectionFieldsDialog dlg(m_coll, m_widget);
+  dlg.setNotifyKernel(false);
+
   if(dlg.exec() == QDialog::Accepted) {
     m_comboField->clear();
-    foreach(Data::FieldPtr field, c->fields()) {
+    foreach(Data::FieldPtr field, m_coll->fields()) {
       m_comboField->addItem(field->title());
     }
     m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
-    if(count != c->fields().count()) {
-      fillTable();
-    }
-    m_comboField->setCurrentIndex(0);
+    fillTable();
   }
+
+  // set the combo to the item before last
+  m_comboField->setCurrentIndex(m_comboField->count()-2);
 }
 
 void CSVImporter::slotActionChanged(int action_) {
@@ -529,6 +514,21 @@ void CSVImporter::slotActionChanged(int action_) {
 
 void CSVImporter::slotCancel() {
   m_cancelled = true;
+}
+
+void CSVImporter::createCollection() {
+  Data::Collection::Type type = static_cast<Data::Collection::Type>(m_comboColl->currentType());
+  m_coll = CollectionFactory::collection(type, true);
+  if(m_existingCollection) {
+    // if we're using the existing collection, then we
+    // want the newly created collection to have the same fields
+    foreach(Data::FieldPtr field, m_coll->fields()) {
+      m_coll->removeField(field, true /* force */);
+    }
+    foreach(Data::FieldPtr field, m_existingCollection->fields()) {
+      m_coll->addField(Data::FieldPtr(new Data::Field(*field)));
+    }
+  }
 }
 
 #include "csvimporter.moc"

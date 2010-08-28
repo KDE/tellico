@@ -77,7 +77,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
       m_modified(false),
       m_updatingValues(false),
       m_reordered(false),
-      m_oldIndex(-1) {
+      m_oldIndex(-1),
+      m_notifyMode(NotifyKernel) {
   setModal(false);
   setCaption(i18n("Collection Fields"));
   setButtons(Help|Default|Ok|Apply|Cancel);
@@ -327,6 +328,14 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 CollectionFieldsDialog::~CollectionFieldsDialog() {
 }
 
+void CollectionFieldsDialog::setNotifyKernel(bool notify_) {
+  if(notify_) {
+    m_notifyMode = NotifyKernel;
+  } else {
+    m_notifyMode = NoNotification;
+  }
+}
+
 void CollectionFieldsDialog::slotSelectInitial() {
   // the accel management is here so that it doesn't cause conflicts with the
   // ones explicitly set in the constructor
@@ -335,12 +344,7 @@ void CollectionFieldsDialog::slotSelectInitial() {
 }
 
 void CollectionFieldsDialog::slotOk() {
-  updateField();
-  if(!checkValues()) {
-    return;
-  }
-
-  applyChanges();
+  slotApply();
   accept();
 }
 
@@ -354,8 +358,10 @@ void CollectionFieldsDialog::slotApply() {
 }
 
 void CollectionFieldsDialog::applyChanges() {
-// start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
-  Kernel::self()->beginCommandGroup(i18n("Modify Fields"));
+  // start a command group, "Modify" is a generic term here since the commands could be add, modify, or delete
+  if(m_notifyMode == NotifyKernel) {
+    Kernel::self()->beginCommandGroup(i18n("Modify Fields"));
+  }
 
   foreach(Data::FieldPtr field, m_copiedFields) {
     // check for Choice fields with removed values to warn user
@@ -385,11 +391,19 @@ void CollectionFieldsDialog::applyChanges() {
         break;
       }
     }
-    Kernel::self()->modifyField(field);
+    if(m_notifyMode == NotifyKernel) {
+      Kernel::self()->modifyField(field);
+    } else {
+      m_coll->modifyField(field);
+    }
   }
 
   foreach(Data::FieldPtr field, m_newFields) {
-    Kernel::self()->addField(field);
+    if(m_notifyMode == NotifyKernel) {
+      Kernel::self()->addField(field);
+    } else {
+      m_coll->addField(field);
+    }
   }
 
   // set all text not to be colored, and get new list
@@ -407,8 +421,7 @@ void CollectionFieldsDialog::applyChanges() {
 
   // if reordering fields, need to add ReadOnly fields since they were not shown
   if(m_reordered) {
-    Data::FieldList allFields = m_coll->fields();
-    foreach(Data::FieldPtr field, allFields) {
+    foreach(Data::FieldPtr field, m_coll->fields()) {
       if(field->hasFlag(Data::Field::NoEdit)) {
         fields.append(field);
       }
@@ -416,11 +429,17 @@ void CollectionFieldsDialog::applyChanges() {
   }
 
   if(fields.count() > 0) {
-    Kernel::self()->reorderFields(fields);
+    if(m_notifyMode == NotifyKernel) {
+      Kernel::self()->reorderFields(fields);
+    } else {
+      m_coll->reorderFields(fields);
+    }
   }
 
   // commit command group
-  Kernel::self()->endCommandGroup();
+  if(m_notifyMode == NotifyKernel) {
+    Kernel::self()->endCommandGroup();
+  }
 
   // now clear copied fields
   m_copiedFields.clear();
@@ -487,8 +506,12 @@ void CollectionFieldsDialog::slotDelete() {
     // remove field from vector before deleting item containing field
     m_newFields.removeAll(m_currentField);
   } else {
-    if(!Kernel::self()->removeField(m_currentField)) {
-      return;
+    if(m_notifyMode == NotifyKernel) {
+      if(!Kernel::self()->removeField(m_currentField)) {
+        return;
+      }
+    } else {
+      m_coll->removeField(m_currentField);
     }
     emit signalCollectionModified();
     enableButtonOk(true);

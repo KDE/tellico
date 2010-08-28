@@ -64,6 +64,8 @@ public:
   CollectionFieldsDialog(Data::CollPtr coll, QWidget* parent);
   ~CollectionFieldsDialog();
 
+  void setNotifyKernel(bool notify);
+
 signals:
   void signalCollectionModified();
 
@@ -102,6 +104,8 @@ private:
   bool m_updatingValues;
   bool m_reordered;
   int m_oldIndex;
+  enum NotifyMode { NotifyKernel, NoNotification };
+  NotifyMode m_notifyMode;
 
   KListWidget* m_fieldsWidget;
   KPushButton* m_btnNew;

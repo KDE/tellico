@@ -85,6 +85,7 @@ private slots:
 private:
   void fillTable();
   void updateHeader(bool force);
+  void createCollection();
 
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
