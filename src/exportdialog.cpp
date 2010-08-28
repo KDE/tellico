@@ -119,12 +119,7 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
 
   setMainWidget(widget);
   readOptions();
-  // bibtex, CSV, and text are forced to locale
-  if(format_ == Export::Bibtex || format_ == Export::CSV || format_ == Export::Text) {
-    m_encodeUTF8->setEnabled(false);
-    m_encodeLocale->setChecked(true);
-//    m_encodeLocale->setEnabled(false);
-  } else if(format_ == Export::Alexandria || format_ == Export::PilotDB) {
+  if(format_ == Export::Alexandria || format_ == Export::PilotDB) {
     // no encoding options enabled
     group2->setEnabled(false);
   }
