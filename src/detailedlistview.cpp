@@ -379,7 +379,7 @@ void DetailedListView::addField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr 
 
 void DetailedListView::modifyField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
   Q_UNUSED(oldField_)
-  sourceModel()->modifyFields(Data::FieldList() << newField_);
+  sourceModel()->modifyField(oldField_, newField_);
 }
 
 void DetailedListView::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr field_) {

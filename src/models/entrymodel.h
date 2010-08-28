@@ -56,7 +56,7 @@ public:
 
   void    setFields(const Data::FieldList& fields);
   void    addFields(const Data::FieldList& fields);
-  void modifyFields(const Data::FieldList& fields);
+  void modifyField(Data::FieldPtr oldField, Data::FieldPtr newField);
   void removeFields(const Data::FieldList& fields);
 
 private:

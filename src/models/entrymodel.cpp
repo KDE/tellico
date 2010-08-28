@@ -212,9 +212,14 @@ void EntryModel::addFields(const Tellico::Data::FieldList& fields_) {
   }
 }
 
-void EntryModel::modifyFields(const Tellico::Data::FieldList& fields_) {
-  Q_UNUSED(fields_);
-  reset();
+void EntryModel::modifyField(Data::FieldPtr oldField_, Data::FieldPtr newField_) {
+  for(int i = 0; i < m_fields.count(); ++i) {
+    if(m_fields.at(i)->name() == oldField_->name()) {
+      m_fields.replace(i, newField_);
+      emit headerDataChanged(Qt::Horizontal, i, i);
+      break;
+    }
+  }
 }
 
 void EntryModel::removeFields(const Tellico::Data::FieldList& fields_) {
