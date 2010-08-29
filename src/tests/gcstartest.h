@@ -32,12 +32,13 @@ Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
+  void testBoardGame();
   void testBook();
+  void testCoin();
   void testComicBook();
-  void testVideo();
   void testMusic();
   void testVideoGame();
-  void testBoardGame();
+  void testVideo();
   void testWine();
 };
 

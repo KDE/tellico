@@ -65,7 +65,7 @@
    <xsl:if test="item/@web or item/@webPage">
     <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </xsl:if>
-   <xsl:if test="item/@location and $coll != 7">
+   <xsl:if test="item/@location and $coll != 7 and $coll != 8">
      <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
    </xsl:if>
    <xsl:if test="item/@composer">
@@ -83,6 +83,15 @@
      <!-- gcstar includes way more coin grades than tellico -->
      <tc:field flags="2" title="Grade" category="General" format="4" type="3" name="grade"
                allowed="Proof-65;Proof-60;Mint State-70;Mint State-69;Mint State-68;Mint State-67;Mint State-66;Mint State-65;Mint State-64;Mint State-63;Mint State-62;Mint State-61;Mint State-60;Almost Uncirculated-58;Almost Uncirculated-55;Almost Uncirculated-53;Almost Uncirculated-50;Extremely Fine-45;Extremely Fine-40;Very Fine-35;Very Fine-30;Very Fine-25;Very Fine-20;Fine-15;Fine-12;Very Good-10;Very Good-8;Good-6;Good-4;Fair"/>
+     <tc:field flags="6" title="Diameter" category="General" format="4" type="1" name="diameter" i18n="true"/>
+     <tc:field flags="0" title="Estimate" category="Personal" format="4" type="1" name="estimate" i18n="true"/>
+     <xsl:if test="item/metal">
+      <tc:field title="Composition" flags="3" category="Composition" format="2" type="8" name="metal">
+       <tc:prop name="column1">Metal</tc:prop>
+       <tc:prop name="column2">Percentage</tc:prop>
+       <tc:prop name="columns">2</tc:prop>
+      </tc:field>
+     </xsl:if>
     </xsl:when>
     <xsl:when test="@type='GCwines'">
      <tc:field title="Varietal" flags="7" category="General" format="0" type="1" name="varietal" i18n="true"/>
@@ -144,7 +153,7 @@
 <xsl:template match="*"/>
 
 <!-- the easy one matches identical local names -->
-<xsl:template match="title|isbn|edition|pages|label|platform|location|vintage|quantity|soil|alcohol|collection|series">
+<xsl:template match="title|isbn|edition|pages|label|platform|location|vintage|quantity|soil|alcohol|collection|series|currency|diameter|estimate">
  <xsl:element name="{concat('tc:',local-name())}">
   <xsl:value-of select="."/>
  </xsl:element>
@@ -516,15 +525,23 @@
  </tc:subtitles>
 </xsl:template>
 
-<xsl:template match="currency">
- <tc:type><xsl:value-of select="."/></tc:type>
+<xsl:template match="metal">
+ <tc:metals>
+  <xsl:for-each select="line">
+   <tc:metal>
+    <tc:column>
+     <xsl:value-of select="col[1]"/>
+    </tc:column>
+   </tc:metal>
+  </xsl:for-each>
+ </tc:metals>
 </xsl:template>
 
 <xsl:template match="value">
  <tc:denomination><xsl:value-of select="."/></tc:denomination>
 </xsl:template>
 
-<xsl:template match="estimate|purchaseprice|cost">
+<xsl:template match="purchaseprice|cost">
  <tc:pur_price><xsl:value-of select="."/></tc:pur_price>
 </xsl:template>
 
@@ -622,6 +639,8 @@
    <xsl:when test=".&lt;4">Fair</xsl:when>
   </xsl:choose>
  </tc:grade>
+ <!-- GCstar defaults to PCGS -->
+ <tc:service>PCGS</tc:service>
 </xsl:template>
 
 <xsl:template match="designation">
@@ -663,6 +682,14 @@
  <xsl:if test="string-length(.) &gt; 0 and . != 'false' and . != '0'">
   <tc:signed>true</tc:signed>
  </xsl:if>
+</xsl:template>
+
+<xsl:template match="front">
+ <tc:obverse><xsl:value-of select="."/></tc:obverse>
+</xsl:template>
+
+<xsl:template match="back">
+ <tc:reverse><xsl:value-of select="."/></tc:reverse>
 </xsl:template>
 
 <xsl:template name="year">

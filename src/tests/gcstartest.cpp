@@ -38,6 +38,7 @@
 #include <kstandarddirs.h>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
+#define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
 
 QTEST_KDEMAIN_CORE( GCstarTest )
 
@@ -354,7 +355,6 @@ void GCstarTest::testBoardGame() {
   }
 }
 
-
 void GCstarTest::testWine() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-wine.gcs");
   Tellico::Import::GCstarImporter importer(url);
@@ -384,6 +384,52 @@ void GCstarTest::testWine() {
   QCOMPARE(entry->field("gift"), QLatin1String("true"));
   QCOMPARE(entry->field("tasted"), QLatin1String("true"));
   QVERIFY(!entry->field("description").isEmpty());
+  QVERIFY(!entry->field("comments").isEmpty());
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
+}
+
+void GCstarTest::testCoin() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-coin.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("denomination"), QLatin1String("0.05"));
+  QCOMPARE(entry->field("year"), QLatin1String("1974"));
+  QCOMPARE(entry->field("currency"), QLatin1String("USD"));
+  QCOMPARE(entry->field("diameter"), QLatin1String("12.7"));
+  QCOMPARE(entry->field("estimate"), QLatin1String("5"));
+  QCOMPARE(entry->field("grade"), QLatin1String("Mint State-65"));
+  QCOMPARE(entry->field("country"), QLatin1String("australia"));
+  QCOMPARE(entry->field("location"), QLatin1String("current"));
+  QCOMPARE(entry->field("service"), QLatin1String("PCGS"));
+  QCOMPARE(TABLES(entry, "metal").count(), 2);
+  QCOMPARE(TABLES(entry, "metal").at(1), QLatin1String("metal2"));
   QVERIFY(!entry->field("comments").isEmpty());
 
   Tellico::Export::GCstarExporter exporter(coll);
