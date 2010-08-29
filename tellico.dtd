@@ -210,6 +210,8 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT service (#PCDATA)>
 <!ELEMENT obverse (#PCDATA)>
 <!ELEMENT reverse (#PCDATA)>
+<!ELEMENT denomination (#PCDATA)>
+<!ELEMENT currency (#PCDATA)>
 
 <!-- comic book -->
 <!ELEMENT issue (#PCDATA)>

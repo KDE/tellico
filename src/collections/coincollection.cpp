@@ -58,7 +58,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   /* TRANSLATORS: denomination refers to the monetary value. */
-  field = new Field(QLatin1String("denomination"), i18n("Denomination"));
+  field = new Field(QLatin1String("denomination"), i18nc("monetary denomination", "Denomination"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
@@ -75,6 +75,12 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   list.append(field);
 
   field = new Field(QLatin1String("country"), i18n("Country"));
+  field->setCategory(i18n(coin_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  field->setFormatType(FieldFormat::FormatPlain);
+  list.append(field);
+
+  field = new Field(QLatin1String("currency"), i18n("Currency"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
