@@ -326,7 +326,7 @@ void MainWindow::initActions() {
   importMapper->setMapping(action, TYPE);
 
   IMPORT_ACTION(Import::TellicoXML, "file_import_tellico", i18n("Import Tellico Data..."),
-                i18n("Import another Tellico data file"), KIcon(QLatin1String("tellico")));
+                i18n("Import another Tellico data file"), BarIcon(QLatin1String("tellico")));
 
   IMPORT_ACTION(Import::CSV, "file_import_csv", i18n("Import CSV Data..."),
                 i18n("Import a CSV file"), mimeIcon("text/csv", "text/x-csv"));
@@ -335,13 +335,13 @@ void MainWindow::initActions() {
                 i18n("Import a MODS data file"), mimeIcon("text/xml"));
 
   IMPORT_ACTION(Import::Alexandria, "file_import_alexandria", i18n("Import Alexandria Data..."),
-                i18n("Import data from the Alexandria book collection manager"), KIcon(QLatin1String("alexandria")));
+                i18n("Import data from the Alexandria book collection manager"), BarIcon(QLatin1String("alexandria")));
 
   IMPORT_ACTION(Import::Delicious, "file_import_delicious", i18n("Import Delicious Library Data..."),
-                i18n("Import data from Delicious Library"), mimeIcon("text/xml"));
+                i18n("Import data from Delicious Library"), BarIcon(QLatin1String("deliciouslibrary")));
 
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
-                i18n("Import data from Referencer"), KIcon(QLatin1String("referencer")));
+                i18n("Import data from Referencer"), BarIcon(QLatin1String("referencer")));
 
   IMPORT_ACTION(Import::Bibtex, "file_import_bibtex", i18n("Import Bibtex Data..."),
                 i18n("Import a bibtex bibliography file"), mimeIcon("text/x-bibtex"));
@@ -350,13 +350,13 @@ void MainWindow::initActions() {
                 i18n("Import a Bibtexml bibliography file"), mimeIcon("text/xml"));
 
   IMPORT_ACTION(Import::RIS, "file_import_ris", i18n("Import RIS Data..."),
-                i18n("Import an RIS reference file"), mimeIcon("application/x-research-info-systems"));
+                i18n("Import an RIS reference file"), BarIcon(QLatin1String("cite")));
 
   IMPORT_ACTION(Import::PDF, "file_import_pdf", i18n("Import PDF File..."),
                 i18n("Import a PDF file"), mimeIcon("application/pdf"));
 
   IMPORT_ACTION(Import::AudioFile, "file_import_audiofile", i18n("Import Audio File Metadata..."),
-                i18n("Import meta-data from audio files"), mimeIcon("audio/mp3", "audioaudio/x-mp3"));
+                i18n("Import meta-data from audio files"), mimeIcon("audio/mp3", "audio/x-mp3"));
 #ifndef HAVE_TAGLIB
   action->setEnabled(false);
 #endif
@@ -368,13 +368,13 @@ void MainWindow::initActions() {
 #endif
 
   IMPORT_ACTION(Import::GCstar, "file_import_gcstar", i18n("Import GCstar Data..."),
-                i18n("Import a GCstar data file"), KIcon(QLatin1String("gcstar")));
+                i18n("Import a GCstar data file"), BarIcon(QLatin1String("gcstar")));
 
   IMPORT_ACTION(Import::Griffith, "file_import_griffith", i18n("Import Griffith Data..."),
-                i18n("Import a Griffith database"), KIcon(QLatin1String("griffith")));
+                i18n("Import a Griffith database"), BarIcon(QLatin1String("griffith")));
 
   IMPORT_ACTION(Import::AMC, "file_import_amc", i18n("Import Ant Movie Catalog Data..."),
-                i18n("Import an Ant Movie Catalog data file"), mimeIcon("application/x-crossover-amc"));
+                i18n("Import an Ant Movie Catalog data file"), BarIcon(QLatin1String("amc")));
 
   IMPORT_ACTION(Import::FileListing, "file_import_filelisting", i18n("Import File Listing..."),
                 i18n("Import information about files in a folder"), mimeIcon("inode/directory"));
@@ -405,10 +405,10 @@ void MainWindow::initActions() {
   exportMapper->setMapping(action, TYPE);
 
   EXPORT_ACTION(Export::TellicoXML, "file_export_xml", i18n("Export to XML..."),
-                i18n("Export to a Tellico XML file"), KIcon(QLatin1String("tellico")));
+                i18n("Export to a Tellico XML file"), BarIcon(QLatin1String("tellico")));
 
   EXPORT_ACTION(Export::TellicoZip, "file_export_zip", i18n("Export to Zip..."),
-                i18n("Export to a Tellico Zip file"), KIcon(QLatin1String("tellico")));
+                i18n("Export to a Tellico Zip file"), BarIcon(QLatin1String("tellico")));
 
   EXPORT_ACTION(Export::HTML, "file_export_html", i18n("Export to HTML..."),
                 i18n("Export to an HTML file"), mimeIcon("text/html"));
@@ -420,7 +420,7 @@ void MainWindow::initActions() {
                 i18n("Export to a PilotDB database"), mimeIcon("application/vnd.palm"));
 
   EXPORT_ACTION(Export::Alexandria, "file_export_alexandria", i18n("Export to Alexandria..."),
-                i18n("Export to an Alexandria library"), KIcon(QLatin1String("alexandria")));
+                i18n("Export to an Alexandria library"), BarIcon(QLatin1String("alexandria")));
 
   EXPORT_ACTION(Export::Bibtex, "file_export_bibtex", i18n("Export to Bibtex..."),
                 i18n("Export to a bibtex file"), mimeIcon("text/x-bibtex"));
@@ -432,7 +432,7 @@ void MainWindow::initActions() {
                 i18n("Export to an ONIX file"), mimeIcon("text/xml"));
 
   EXPORT_ACTION(Export::GCstar, "file_export_gcstar", i18n("Export to GCstar..."),
-                i18n("Export to a GCstar data file"), KIcon(QLatin1String("gcstar")));
+                i18n("Export to a GCstar data file"), BarIcon(QLatin1String("gcstar")));
 
   EXPORT_ACTION(Export::XSLT, "file_export_xslt", i18n("Export XSL Transform..."),
                 i18n("Export using an XSL Transform"), mimeIcon("application/xslt+xml", "text/x-xslt"));

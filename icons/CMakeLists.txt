@@ -2,15 +2,21 @@
 
 set(ICON_FILES
     album.png
+    alexandria.png
+    amc.png
     bibtex.png
     boardgame.png
     book.png
     card.png
     checkmark.png
+    cite.png
     coin.png
     comic.png
+    deliciouslibrary.png
     file.png
     game.png
+    gcstar.png
+    griffith.png
     nocover_album.png
     nocover_bibtex.png
     nocover_boardgame.png
@@ -22,6 +28,7 @@ set(ICON_FILES
     person.png
     README.icons
     README.quesnay
+    referencer.png
     script.png
     script.svg
     stamp.png
