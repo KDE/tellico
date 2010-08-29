@@ -140,12 +140,9 @@
  </Disable>
 </State>
 
-<State name="is_book">
+<State name="is_album">
  <Enable>
-  <Action name="file_export_alexandria"/>
-  <Action name="file_export_onix"/>
   <Action name="file_export_gcstar"/>
-  <Action name="coll_convert_bibliography"/>
  </Enable>
 </State>
 
@@ -159,26 +156,28 @@
  </Enable>
 </State>
 
-<State name="is_video">
- <Enable>
-  <Action name="file_export_amc"/>
-  <Action name="file_export_gcstar"/>
- </Enable>
-</State>
-
-<State name="is_album">
+<State name="is_boardgame">
  <Enable>
   <Action name="file_export_gcstar"/>
  </Enable>
 </State>
 
-<State name="is_wine">
+<State name="is_book">
  <Enable>
+  <Action name="file_export_alexandria"/>
+  <Action name="file_export_onix"/>
   <Action name="file_export_gcstar"/>
+  <Action name="coll_convert_bibliography"/>
  </Enable>
 </State>
 
 <State name="is_coin">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
+<State name="is_comic">
  <Enable>
   <Action name="file_export_gcstar"/>
  </Enable>
@@ -190,13 +189,14 @@
  </Enable>
 </State>
 
-<State name="is_boardgame">
+<State name="is_video">
  <Enable>
+  <Action name="file_export_amc"/>
   <Action name="file_export_gcstar"/>
  </Enable>
 </State>
 
-<State name="is_comic">
+<State name="is_wine">
  <Enable>
   <Action name="file_export_gcstar"/>
  </Enable>
