@@ -100,6 +100,64 @@ void GCstarTest::testBook() {
   }
 }
 
+void GCstarTest::testComicBook() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-comicbook.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::ComicBook);
+  QCOMPARE(coll->entryCount(), 1);
+  // should be translated somehow
+  QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("title"), QLatin1String("title"));
+  QCOMPARE(entry->field("pub_year"), QLatin1String("2010"));
+  QCOMPARE(entry->field("series"), QLatin1String("series"));
+  QCOMPARE(entry->field("issue"), QLatin1String("1"));
+  QCOMPARE(FIELDS(entry, "writer").count(), 2);
+  QCOMPARE(FIELDS(entry, "writer").first(), QLatin1String("writer1"));
+  QCOMPARE(entry->field("isbn"), QLatin1String("1234567890"));
+  QCOMPARE(entry->field("artist"), QLatin1String("illustrator"));
+  QCOMPARE(entry->field("publisher"), QLatin1String("publisher"));
+  QCOMPARE(entry->field("colorist"), QLatin1String("colourist"));
+  QCOMPARE(entry->field("category"), QLatin1String("category"));
+  QCOMPARE(entry->field("format"), QLatin1String("format"));
+  QCOMPARE(entry->field("collection"), QLatin1String("collection"));
+  QCOMPARE(entry->field("pur_date"), QLatin1String("29/08/2010"));
+  QCOMPARE(entry->field("pur_price"), QLatin1String("12.99"));
+  QCOMPARE(entry->field("numberboards"), QLatin1String("1"));
+  QCOMPARE(entry->field("signed"), QLatin1String("true"));
+  // file has rating of 4, Tellico uses half the rating of GCstar, so it should be 2
+  QCOMPARE(entry->field("rating"), QLatin1String("2"));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("comments").isEmpty());
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+
+  QVERIFY(!coll2.isNull());
+  QCOMPARE(coll2->type(), coll->type());
+  QCOMPARE(coll2->entryCount(), coll->entryCount());
+  QCOMPARE(coll2->title(), coll->title());
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
+}
+
 void GCstarTest::testVideo() {
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-video.gcs");
   Tellico::Import::GCstarImporter importer(url);

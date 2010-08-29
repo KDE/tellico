@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection type="GCcomics" items="1" version="1.6.0">
+ <information>
+  <maxId>2</maxId>
+ </information>
+
+
+
+ <item
+  id="1"
+  name="series #001 title"
+  series="series"
+  volume="1"
+  title="title"
+  writer="writer1, writer2"
+  illustrator="illustrator"
+  colourist="colourist"
+  publisher="publisher"
+  collection="collection"
+  publishdate="28/08/2010"
+  printdate=""
+  image=""
+  backpic=""
+  webPage=""
+  added="29/08/2010"
+  isbn="1234567890"
+  type="type"
+  category="category"
+  format="format"
+  numberboards="1"
+  signing="1"
+  cost="12.99"
+  rating="4"
+  file=""
+  borrower="none"
+  lendDate=""
+  borrowings=""
+  favourite="0"
+  tags=""
+ >
+  <synopsis>description</synopsis>
+  <comment>comments</comment>
+ </item>
+</collection>

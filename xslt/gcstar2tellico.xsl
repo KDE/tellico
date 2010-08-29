@@ -33,6 +33,9 @@
   <xsl:when test="/collection[1]/@type='GCmusics'">
    <xsl:text>4</xsl:text>
   </xsl:when>
+  <xsl:when test="/collection[1]/@type='GCcomics'">
+   <xsl:text>6</xsl:text>
+  </xsl:when>
   <xsl:when test="/collection[1]/@type='GCwines'">
    <xsl:text>7</xsl:text>
   </xsl:when>
@@ -50,11 +53,11 @@
 
 <xsl:template match="/">
  <tc:tellico syntaxVersion="11">
-  <xsl:apply-templates select="collection"/>
+  <xsl:apply-templates select="collection" mode="top"/>
  </tc:tellico>
 </xsl:template>
 
-<xsl:template match="collection">
+<xsl:template match="collection" mode="top">
  <tc:collection title="GCstar Import" type="{$coll}">
   <tc:fields>
    <tc:field name="_default"/>
@@ -97,6 +100,15 @@
       </xsl:attribute>
      </tc:field>
     </xsl:when>
+    <xsl:when test="@type='GCcomics'">
+     <tc:field title="ISBN#" flags="0" category="Publishing" format="4" description="International Standard Book Number" type="1" name="isbn" i18n="true"/>
+     <tc:field title="Plot" flags="0" category="Plot" format="4" type="2" name="plot" i18n="true"/>
+     <tc:field flags="7" title="Colorist" category="General" format="2" type="1" name="colorist" i18n="true"/>
+     <tc:field flags="6" title="Format" category="Publishing" format="4" type="1" name="format" i18n="true"/>
+     <tc:field flags="6" title="Category" category="Publishing" format="4" type="1" name="category" i18n="true"/>
+     <tc:field flags="6" title="Collection" category="Personal" format="4" type="1" name="collection" i18n="true"/>
+     <tc:field title="Boards" flags="0" category="Publishing" format="4" type="6" name="numberboards"/>
+    </xsl:when>
    </xsl:choose>
   </tc:fields>
   <xsl:apply-templates select="item"/>
@@ -132,7 +144,7 @@
 <xsl:template match="*"/>
 
 <!-- the easy one matches identical local names -->
-<xsl:template match="title|isbn|edition|pages|label|platform|location|vintage|quantity|soil|alcohol|volume">
+<xsl:template match="title|isbn|edition|pages|label|platform|location|vintage|quantity|soil|alcohol|collection|series">
  <xsl:element name="{concat('tc:',local-name())}">
   <xsl:value-of select="."/>
  </xsl:element>
@@ -142,7 +154,7 @@
  <tc:origtitle><xsl:value-of select="."/></tc:origtitle>
 </xsl:template>
 
-<xsl:template match="author|authors|language|genre|artist|composer|producer|developer|grapes">
+<xsl:template match="author|authors|language|genre|artist|composer|producer|developer|grapes|writer|illustrator|colourist|numberboards">
  <xsl:variable name="tag">
   <xsl:choose>
    <xsl:when test="local-name() = 'authors'">
@@ -150,6 +162,12 @@
    </xsl:when>
    <xsl:when test="local-name() = 'grapes'">
     <xsl:text>varietal</xsl:text>
+   </xsl:when>
+   <xsl:when test="local-name() = 'illustrator'">
+    <xsl:text>artist</xsl:text>
+   </xsl:when>
+   <xsl:when test="local-name() = 'colourist'">
+    <xsl:text>colorist</xsl:text>
    </xsl:when>
    <xsl:otherwise>
     <xsl:value-of select="local-name()"/>
@@ -218,6 +236,9 @@
      </xsl:otherwise>
     </xsl:choose>
    </tc:medium>
+  </xsl:when>
+  <xsl:when test="$coll = 6">
+   <tc:format i18n="true"><xsl:value-of select="."/></tc:format>
   </xsl:when>
  </xsl:choose>
 </xsl:template>
@@ -368,7 +389,7 @@
  </xsl:if>
 </xsl:template>
 
-<xsl:template match="publication">
+<xsl:template match="publication|publishdate">
  <tc:pub_year>
   <xsl:call-template name="year">
    <xsl:with-param name="value" select="."/>
@@ -385,12 +406,17 @@
   <tc:pur_date><xsl:value-of select="."/></tc:pur_date>
  </xsl:if>
  <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
- <xsl:if test="count($numbers)=3">
+ <xsl:if test="count($numbers) = 3">
   <tc:cdate calendar="gregorian" >
-    <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
-    <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
-    <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
-   </tc:cdate>
+   <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
+   <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
+   <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
+  </tc:cdate>
+  <tc:mdate calendar="gregorian" >
+   <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
+   <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
+   <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
+  </tc:mdate>
  </xsl:if>
 </xsl:template>
 
@@ -412,6 +438,15 @@
 <xsl:template match="description|tasting">
  <xsl:if test="$coll != 2">
   <tc:description><xsl:value-of select="."/></tc:description>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="volume">
+ <xsl:if test="$coll != 6">
+  <tc:volume><xsl:value-of select="."/></tc:volume>
+ </xsl:if>
+ <xsl:if test="$coll = 6">
+  <tc:issue><xsl:value-of select="."/></tc:issue>
  </xsl:if>
 </xsl:template>
 
@@ -489,7 +524,7 @@
  <tc:denomination><xsl:value-of select="."/></tc:denomination>
 </xsl:template>
 
-<xsl:template match="estimate|purchaseprice">
+<xsl:template match="estimate|purchaseprice|cost">
  <tc:pur_price><xsl:value-of select="."/></tc:pur_price>
 </xsl:template>
 
@@ -533,13 +568,18 @@
 </xsl:template>
 
 <xsl:template match="category">
- <tc:genres>
-  <xsl:for-each select="line">
-   <tc:genre>
-    <xsl:value-of select="col[1]"/>
-   </tc:genre>
-  </xsl:for-each>
- </tc:genres>
+ <xsl:if test="$coll = 6">
+  <tc:category><xsl:value-of select="."/></tc:category>
+ </xsl:if>
+ <xsl:if test="$coll != 6">
+  <tc:genres>
+   <xsl:for-each select="line">
+    <tc:genre>
+     <xsl:value-of select="col[1]"/>
+    </tc:genre>
+   </xsl:for-each>
+  </tc:genres>
+ </xsl:if>
 </xsl:template>
 
 <!-- coins -->
@@ -616,6 +656,12 @@
 <xsl:template match="tasted">
  <xsl:if test="string-length(.) &gt; 0 and . != 'false' and . != '0'">
   <tc:tasted>true</tc:tasted>
+ </xsl:if>
+</xsl:template>
+
+<xsl:template match="signing">
+ <xsl:if test="string-length(.) &gt; 0 and . != 'false' and . != '0'">
+  <tc:signed>true</tc:signed>
  </xsl:if>
 </xsl:template>
 

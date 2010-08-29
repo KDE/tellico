@@ -1,3 +1,7 @@
+2010-08-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Added GCstar import/export for comic book collections.
+
 2010-08-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with adding new fields during CSV import.

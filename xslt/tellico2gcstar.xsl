@@ -66,12 +66,19 @@
   <a:attribute name="quantity">quantity</a:attribute>
   <a:attribute name="soil">soil</a:attribute>
   <a:attribute name="alcohol">alcohol</a:attribute>
-  <a:attribute name="volume">volume</a:attribute>
+  <a:attribute name="volume" skip="GCcomics">volume</a:attribute>
+  <a:attribute name="volume" type="GCcomics">issue</a:attribute>
   <a:attribute name="tasting">description</a:attribute>
   <a:attribute name="comments">comments</a:attribute>
   <a:attribute name="medal">distinction</a:attribute>
   <a:attribute name="tasted" format="bool" type="GCwines">tasted</a:attribute>
   <a:attribute name="gift" format="bool">gift</a:attribute>
+  <a:attribute name="writer">writer</a:attribute>
+  <a:attribute name="colourist">colorist</a:attribute>
+  <a:attribute name="category">category</a:attribute>
+  <a:attribute name="collection">collection</a:attribute>
+  <a:attribute name="numberboards">numberboards</a:attribute>
+  <a:attribute name="signing" format="bool">signed</a:attribute>
 </a:attributes>
 <xsl:variable name="collType">
  <xsl:choose>
@@ -83,6 +90,9 @@
   </xsl:when>
   <xsl:when test="tc:tellico/tc:collection/@type=4">
    <xsl:text>GCmusics</xsl:text>
+  </xsl:when>
+  <xsl:when test="tc:tellico/tc:collection/@type=6">
+   <xsl:text>GCcomics</xsl:text>
   </xsl:when>
   <xsl:when test="tc:tellico/tc:collection/@type=7">
    <xsl:text>GCwines</xsl:text>
@@ -122,6 +132,7 @@
                                    @type=3 or
                                    @type=4 or
                                    @type=5 or
+                                   @type=6 or
                                    @type=7 or
                                    @type=8 or
                                    @type=11 or

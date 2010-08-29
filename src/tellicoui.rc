@@ -196,6 +196,12 @@
  </Enable>
 </State>
 
+<State name="is_comic">
+ <Enable>
+  <Action name="file_export_gcstar"/>
+ </Enable>
+</State>
+
 <State name="empty_selection">
  <Disable>
   <Action name="coll_edit_entry"/>
