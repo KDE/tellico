@@ -75,7 +75,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
   QCOMPARE(entry->field("color"), QLatin1String("Color"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
+  QCOMPARE(entry->field("writer"), QLatin1String("John Dixon; Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
 }

@@ -51,7 +51,7 @@ void DVDFrFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Le Pacte des loups"));
   m_fieldValues.insert(QLatin1String("studio"), QLatin1String("StudioCanal"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2001"));
-  m_fieldValues.insert(QLatin1String("medium"), QLatin1String("DVD"));
+//  m_fieldValues.insert(QLatin1String("medium"), QLatin1String("DVD"));
   m_fieldValues.insert(QLatin1String("format"), QLatin1String("PAL"));
   m_fieldValues.insert(QLatin1String("aspect-ratio"), QLatin1String("2.35"));
   m_fieldValues.insert(QLatin1String("writer"), QString::fromUtf8("Stéphane Cabel; Christophe Gans"));
