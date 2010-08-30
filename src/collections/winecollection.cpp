@@ -46,7 +46,7 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   FieldPtr field;
 
   field = createDefaultField(TitleField);
-  field->setProperty(QLatin1String("template"), QLatin1String("%{vintage} %{producer} %{varietal}"));
+  field->setProperty(QLatin1String("template"), QLatin1String("%{vintage} %{producer:1} %{varietal:1}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
