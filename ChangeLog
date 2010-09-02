@@ -1,3 +1,7 @@
+2010-09-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated DTD and added unit test for validation.
+
 2010-08-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Added GCstar import/export for comic book collections.

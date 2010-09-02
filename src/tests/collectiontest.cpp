@@ -31,8 +31,21 @@
 #include "../collection.h"
 #include "../field.h"
 #include "../entry.h"
+#include "../collectionfactory.h"
+#include "../collections/collectioninitializer.h"
+#include "../translators/tellicoxmlexporter.h"
+#include "../images/imagefactory.h"
+
+#include <KStandardDirs>
+#include <KProcess>
 
 QTEST_KDEMAIN_CORE( CollectionTest )
+
+void CollectionTest::initTestCase() {
+  Tellico::ImageFactory::init();
+  // need to register the collection types
+  Tellico::CollectionInitializer ci;
+}
 
 void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
@@ -197,3 +210,68 @@ void CollectionTest::testValue_data() {
   QTest::newRow("test5") << "the return of the king;the who" << "Return of the King, The; Who, The" << int(Tellico::FieldFormat::FormatTitle);
 }
 
+void CollectionTest::testDtd() {
+  const QString xmllint = KStandardDirs::findExe(QLatin1String("xmllint"));
+  if(xmllint.isEmpty()) {
+    QSKIP("This test requires xmllint", SkipAll);
+  }
+
+  QFETCH(int, typeInt);
+  Tellico::Data::Collection::Type type = static_cast<Tellico::Data::Collection::Type>(typeInt);
+
+  Tellico::Data::CollPtr coll = Tellico::CollectionFactory::collection(type, true);
+  QVERIFY(coll);
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry1);
+
+  foreach(Tellico::Data::FieldPtr field, coll->fields()) {
+    switch(field->type()) {
+      case Tellico::Data::Field::Line: entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::Para:   entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::URL:    entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::Table:  entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::Image:  entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::Number: entry1->setField(field, QLatin1String("1")); break;
+      case Tellico::Data::Field::Rating: entry1->setField(field, QLatin1String("1")); break;
+      case Tellico::Data::Field::Date:   entry1->setField(field, QLatin1String("2009-01-10")); break;
+      case Tellico::Data::Field::Bool:   entry1->setField(field, QLatin1String("true")); break;
+      case Tellico::Data::Field::Choice: entry1->setField(field, field->allowed().first()); break;
+      default: break;
+    }
+  }
+
+  Tellico::Export::TellicoXMLExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+
+  KProcess proc;
+  proc.setProgram(QLatin1String("xmllint"),
+                  QStringList() << QLatin1String("--noout")
+                                << QLatin1String("--dtdvalid")
+                                << QString::fromLatin1(KDESRCDIR) + QLatin1String("../../tellico.dtd")
+                                << QLatin1String("-"));
+
+  proc.start();
+  proc.write(exporter.text().toUtf8());
+  proc.closeWriteChannel();
+  proc.waitForFinished();
+
+  QCOMPARE(proc.exitCode(), 0);
+}
+
+void CollectionTest::testDtd_data() {
+  QTest::addColumn<int>("typeInt");
+
+  QTest::newRow("book")   << int(Tellico::Data::Collection::Book);
+  QTest::newRow("video")  << int(Tellico::Data::Collection::Video);
+  QTest::newRow("album")  << int(Tellico::Data::Collection::Album);
+  QTest::newRow("bibtex") << int(Tellico::Data::Collection::Bibtex);
+  QTest::newRow("comic")  << int(Tellico::Data::Collection::ComicBook);
+  QTest::newRow("wine")   << int(Tellico::Data::Collection::Wine);
+  QTest::newRow("coin")   << int(Tellico::Data::Collection::Coin);
+  QTest::newRow("stamp")  << int(Tellico::Data::Collection::Stamp);
+  QTest::newRow("card")   << int(Tellico::Data::Collection::Card);
+  QTest::newRow("game")   << int(Tellico::Data::Collection::Game);
+  QTest::newRow("file")    << int(Tellico::Data::Collection::File);
+  QTest::newRow("board")  << int(Tellico::Data::Collection::BoardGame);
+}

@@ -26,10 +26,10 @@ images | borrowers | filters)+>
 
 <!ELEMENT images (image+)>
 <!ELEMENT image (#PCDATA)>
-<!ATTLIST image id CDATA #REQUIRED>
-<!ATTLIST image format CDATA #REQUIRED>
-<!ATTLIST image width CDATA #REQUIRED>
-<!ATTLIST image height CDATA #REQUIRED>
+<!ATTLIST image id CDATA #IMPLIED>
+<!ATTLIST image format CDATA #IMPLIED>
+<!ATTLIST image width CDATA #IMPLIED>
+<!ATTLIST image height CDATA #IMPLIED>
 
 <!ELEMENT fields (field+)>
 <!ELEMENT field (prop*)>
@@ -84,28 +84,31 @@ images | borrowers | filters)+>
 pur_price | publisher | edition | cr_years | pub_year | isbn | lccn |
 pages | languages | genres | keywords | series | series_num |
 condition | signed | read | gift | loaned | rating | comments |
-entry-type | bibtex-key | booktitle | editors | organization | year |
-journal | month | number | howpublished | chapter | volume | crossref
-| note | medium | artists | album | label | tracks | certification |
+entry-type | bibtex-key | booktitle | editors | organization | years | year |
+journal | month | number | howpublished | chapter | volume | crossref |
+note | medium | artists | album | labels | label | tracks | certification |
 region | nationalitys | format | casts | directors | producers |
 writers | composers | studios | subtitles | audio-tracks |
 running-time | aspect-ratios | widescreen | color | directors-cut |
 plot | player | team | brand | location | quantity | front | back |
-mintmark | set | grade | service | obverse | reverse | issue | cover |
+mintmark | set | grade | service | obverse | reverse | issues| issue | cover |
 description | scott | cancelled | hinged | centering | gummed |
 producer | appellation | varietal | vintage | type | drink-by |
-platform | publishers | developers | completed |url |
+platform | publishers | developers | completed | url |
 mimetype | size | permissions | owner | group | created | modified |
-metainfos | icon | amazon | imdb | imdb-rating | alttitle |
-allcertification | address | abstract | designer | bggid |
-mechanism | num-players | cdate | mdate )+>
+metainfos | icon | amazon | imdb | imdb-rating | alttitles |
+allcertifications | address | abstract | designers | designer | bggid |
+mechanisms | num-players | cdate | mdate | translators | currency |
+countrys | country | doi | folder | denomination | image)+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
 <!-- general -->
 <!ELEMENT id (#PCDATA)>
 <!ELEMENT title (#PCDATA)>
-<!ELEMENT mdate (#PCDATA)>
-<!ELEMENT cdate (#PCDATA)>
+<!ELEMENT mdate (year, month, day)>
+<!ATTLIST mdate calendar CDATA #REQUIRED>
+<!ELEMENT cdate (year, month, day)>
+<!ATTLIST cdate calendar CDATA #REQUIRED>
 
 <!-- books -->
 <!ELEMENT subtitle (#PCDATA)>
@@ -137,6 +140,8 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT rating (#PCDATA)>
 <!ELEMENT loaned (#PCDATA)>
 <!ELEMENT comments (#PCDATA)>
+<!ELEMENT translators (translator+)>
+<!ELEMENT translator (#PCDATA)>
 
 <!-- bibtex -->
 <!ELEMENT entry-type (#PCDATA)>
@@ -154,15 +159,17 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT note (#PCDATA)>
 <!ELEMENT address (#PCDATA)>
 <!ELEMENT abstract (#PCDATA)>
+<!ELEMENT doi (#PCDATA)>
 
 <!-- music -->
 <!ELEMENT medium (#PCDATA)>
 <!ELEMENT artists (artist+)>
 <!ELEMENT artist (#PCDATA)>
 <!ELEMENT album (#PCDATA)>
+<!ELEMENT labels (label+)>
 <!ELEMENT label (#PCDATA)>
 <!ELEMENT tracks (track+)>
-<!ELEMENT track (#PCDATA)>
+<!ELEMENT track (column+)>
 
 <!-- video -->
 <!ELEMENT certification (#PCDATA)>
@@ -171,7 +178,7 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT nationality (#PCDATA)>
 <!ELEMENT format (#PCDATA)>
 <!ELEMENT casts (cast+)>
-<!ELEMENT cast (column, column)>
+<!ELEMENT cast (column+)>
 <!ELEMENT directors (director+)>
 <!ELEMENT director (#PCDATA)>
 <!ELEMENT producers (producer+)>
@@ -211,9 +218,12 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT obverse (#PCDATA)>
 <!ELEMENT reverse (#PCDATA)>
 <!ELEMENT denomination (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
 <!ELEMENT currency (#PCDATA)>
 
 <!-- comic book -->
+<!ELEMENT countrys (country+)>
+<!ELEMENT issues (issue+)>
 <!ELEMENT issue (#PCDATA)>
 <!ELEMENT cover (#PCDATA)>
 
@@ -224,6 +234,7 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT hinged (#PCDATA)>
 <!ELEMENT centering (#PCDATA)>
 <!ELEMENT gummed (#PCDATA)>
+<!ELEMENT years (year+)>
 
 <!-- wine -->
 <!ELEMENT appellation (#PCDATA)>
@@ -243,6 +254,7 @@ mechanism | num-players | cdate | mdate )+>
 <!-- file catalogs -->
 <!-- description is above -->
 <!ELEMENT url (#PCDATA)>
+<!ELEMENT folder (#PCDATA)>
 <!ELEMENT mimetype (#PCDATA)>
 <!ELEMENT size (#PCDATA)>
 <!ELEMENT permissions (#PCDATA)>
@@ -251,7 +263,7 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT created (#PCDATA)>
 <!ELEMENT modified (#PCDATA)>
 <!ELEMENT metainfos (metainfo+)>
-<!ELEMENT metainfo (#PCDATA)>
+<!ELEMENT metainfo (column+)>
 <!ELEMENT icon (#PCDATA)>
 
 <!-- boardgames -->
@@ -269,5 +281,7 @@ mechanism | num-players | cdate | mdate )+>
 <!ELEMENT amazon (#PCDATA)>
 <!ELEMENT imdb (#PCDATA)>
 <!ELEMENT imdb-rating (#PCDATA)>
-<!ELEMENT alttitle (#PCDATA)>
-<!ELEMENT allcertification (#PCDATA)>
+<!ELEMENT alttitles (alttitle+)>
+<!ELEMENT alttitle (column)>
+<!ELEMENT altcertifications (altcertification+)>
+<!ELEMENT altcertification (column)>

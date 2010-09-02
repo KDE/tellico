@@ -31,11 +31,14 @@ class CollectionTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testEmpty();
   void testCollection();
   void testDerived();
   void testValue();
   void testValue_data();
+  void testDtd();
+  void testDtd_data();
 };
 
 #endif
