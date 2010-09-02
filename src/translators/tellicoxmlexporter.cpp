@@ -170,10 +170,12 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
 
   if(!m_images.isEmpty() && (options() & Export::ExportImages)) {
     QDomElement imgsElem = dom_.createElement(QLatin1String("images"));
-    collElem.appendChild(imgsElem);
     const QStringList imageIds = m_images.toList();
-    for(QStringList::ConstIterator it = imageIds.begin(); it != imageIds.end(); ++it) {
-      exportImageXML(dom_, imgsElem, *it);
+    foreach(const QString& id, m_images) {
+      exportImageXML(dom_, imgsElem, id);
+    }
+    if(imgsElem.hasChildNodes()) {
+      collElem.appendChild(imgsElem);
     }
   }
 
