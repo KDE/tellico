@@ -304,7 +304,8 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
 }
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
-  if(id_.isEmpty()) {
+  Q_ASSERT(factory);
+  if(id_.isEmpty() || !factory) {
     return Data::Image::null;
   }
 //  myLog() << id_;
