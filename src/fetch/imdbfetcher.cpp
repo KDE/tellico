@@ -878,25 +878,22 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
                            const QString& imdbHeader_, const QString& fieldName_) {
   QRegExp br2Rx(QLatin1String("<br[\\s/]*>\\s*<br[\\s/]*>"), Qt::CaseInsensitive);
   br2Rx.setMinimal(true);
-  QRegExp divRx(QLatin1String("</div"), Qt::CaseInsensitive);
+  QRegExp divRx(QLatin1String("<div\\s[^>]*class\\s*=\\s*\"info\"[^>]*>(.*)</div"), Qt::CaseInsensitive);
   divRx.setMinimal(true);
   QString name = QLatin1String("/name/");
 
   StringSet people;
-  for(int pos = str_.indexOf(imdbHeader_); pos > 0; pos = str_.indexOf(imdbHeader_, pos+1)) {
-    // loop until repeated <br> tags or </div> tag
-    const int endPos1 = br2Rx.indexIn(str_, pos);
-    const int endPos2 = divRx.indexIn(str_, pos);
-    const int endPos = endPos1 == -1 ? endPos2
-                                     : (endPos2 == -1 ? -1
-                                                      : qMin(endPos1, endPos2)
-                                       ); // ok to be -1
-    pos = s_anchorRx->indexIn(str_, pos+1);
-    while(pos > -1 && pos < endPos) {
-      if(s_anchorRx->cap(1).indexOf(name) > -1) {
-        people.add(s_anchorRx->cap(2).trimmed());
+  for(int pos = str_.indexOf(divRx); pos > 0; pos = str_.indexOf(divRx, pos+1)) {
+    const QString infoBlock = divRx.cap(1);
+    if(infoBlock.contains(imdbHeader_, Qt::CaseInsensitive)) {
+      int pos2 = s_anchorRx->indexIn(infoBlock);
+      while(pos2 > -1) {
+        if(s_anchorRx->cap(1).indexOf(name) > -1) {
+          people.add(s_anchorRx->cap(2).trimmed());
+        }
+        pos2 = s_anchorRx->indexIn(infoBlock, pos2+1);
       }
-      pos = s_anchorRx->indexIn(str_, pos+1);
+      break;
     }
   }
   if(!people.isEmpty()) {

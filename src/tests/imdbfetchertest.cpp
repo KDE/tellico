@@ -106,8 +106,53 @@ void ImdbFetcherTest::testAsterix() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Astérix aux jeux olympiques"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Thomas Langmann; Frédéric Forestier"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("Thomas Langmann; René Goscinny; Albert Uderzo"));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
   QVERIFY(altTitleList.size() > 1);
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=249096
+void ImdbFetcherTest::testBodyDouble() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Body Double");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  job->setMaximumResults(1);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Body Double"));
+  QCOMPARE(entry->field("director"), QLatin1String("Brian De Palma"));
+  QCOMPARE(entry->field("writer"), QLatin1String("Brian De Palma; Robert J. Avrech"));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=249096
+void ImdbFetcherTest::testMary() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "There's Something About Mary");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  job->setMaximumResults(1);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+
+  QCOMPARE(entry->field("director"), QLatin1String("Peter Farrelly; Bobby Farrelly"));
+  QCOMPARE(entry->field("writer"), QLatin1String("John J. Strauss; Ed Decter"));
 }
 
 void ImdbFetcherTest::slotResult(KJob* job_) {

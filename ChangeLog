@@ -1,3 +1,7 @@
+2010-09-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed parsing for director and writer in IMDB fetcher (Bug: 249096).
+
 2010-09-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated DTD and added unit test for validation.
