@@ -89,7 +89,7 @@ QString RTF2HTML::toHTML() const {
             {
                std::string stmp(1,*buf_in++);
                stmp+=*buf_in++;
-               int code=std::strtol(stmp.c_str(), NULL, 16);
+               long int code=std::strtol(stmp.c_str(), NULL, 16);
                switch (code)
                {
                   case 167:
