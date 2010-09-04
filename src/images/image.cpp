@@ -87,7 +87,7 @@ QPixmap Image::convertToPixmap() const {
 
 QPixmap Image::convertToPixmap(int w_, int h_) const {
   if(w_ < width() || h_ < height()) {
-    return QPixmap::fromImage(this->scaled(w_, h_, Qt::KeepAspectRatio));
+    return QPixmap::fromImage(*this).scaled(w_, h_, Qt::KeepAspectRatio);
   } else {
     return QPixmap::fromImage(*this);
   }
