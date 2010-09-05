@@ -249,9 +249,9 @@ void TableFieldWidget::verticalHeaderContextMenu(const QPoint& point_) {
 
 void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
   KMenu menu(this);
-  menu.addAction(KIcon(QLatin1String("insrow")), i18n("Insert Row"),
+  menu.addAction(KIcon(QLatin1String("edit-table-insert-row-below")), i18n("Insert Row"),
                  this, SLOT(slotInsertRow()));
-  menu.addAction(KIcon(QLatin1String("remrow")), i18n("Remove Row"),
+  menu.addAction(KIcon(QLatin1String("edit-table-delete-row")), i18n("Remove Row"),
                  this, SLOT(slotRemoveRow()));
   QAction* act = menu.addAction(KIcon(QLatin1String("arrow-up")), i18n("Move Row Up"),
                                 this, SLOT(slotMoveRowUp()));
