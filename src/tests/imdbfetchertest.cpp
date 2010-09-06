@@ -81,7 +81,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 }
 
 void ImdbFetcherTest::testAsterix() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotestconfig.rc", KConfig::SimpleConfig);
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
