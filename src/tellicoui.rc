@@ -87,7 +87,6 @@
    <Action name="coll_rename_collection"/>
    <Action name="coll_fields"/>
    <Action name="coll_reports"/>
-   <Action name="coll_statistics"/>
    <Separator/>
    <Action name="coll_convert_bibliography"/>
    <Action name="coll_string_macros"/>
