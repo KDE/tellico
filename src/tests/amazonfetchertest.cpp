@@ -39,7 +39,6 @@
 
 #include <KStandardDirs>
 #include <KConfigGroup>
-#include <KDebug>
 
 QTEST_KDEMAIN( AmazonFetcherTest, GUI )
 
@@ -132,7 +131,6 @@ void AmazonFetcherTest::testTitle() {
     // CA and FR titles have edition info in the title
     if(collType == Tellico::Data::Collection::Video &&
        (locale == QLatin1String("CA") || locale == QLatin1String("FR"))) {
-      kDebug() << result << i.value();
       QVERIFY(result.contains(i.value(), Qt::CaseInsensitive));
     } else {
       QCOMPARE(result, i.value().toLower());
