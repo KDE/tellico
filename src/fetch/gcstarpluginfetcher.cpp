@@ -179,10 +179,11 @@ QString GCstarPluginFetcher::gcstarType(int collType_) {
   switch(collType_) {
     case Data::Collection::Book:      return QLatin1String("GCbooks");
     case Data::Collection::Video:     return QLatin1String("GCfilms");
-    case Data::Collection::Game:      return QLatin1String("GCgames");
     case Data::Collection::Album:     return QLatin1String("GCmusics");
-    case Data::Collection::Coin:      return QLatin1String("GCcoins");
+    case Data::Collection::ComicBook: return QLatin1String("GCcomics");
     case Data::Collection::Wine:      return QLatin1String("GCwines");
+    case Data::Collection::Coin:      return QLatin1String("GCcoins");
+    case Data::Collection::Game:      return QLatin1String("GCgames");
     case Data::Collection::BoardGame: return QLatin1String("GCboardgames");
     default: break;
   }
@@ -240,7 +241,7 @@ void GCstarPluginFetcher::search() {
        << QLatin1String("--export")     << QLatin1String("Tellico")
        << QLatin1String("--website")    << m_plugin
        << QLatin1String("--download")   << KShell::quoteArg(request().value);
-  myLog() << args.join(QLatin1String(" "));
+  myLog() << args;
   m_process->setProgram(gcstar, args);
   if(!m_process->execute()) {
     myDebug() << "process failed to start";
