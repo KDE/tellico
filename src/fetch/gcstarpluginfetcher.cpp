@@ -71,7 +71,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
             int x = versionRx.cap(1).toInt();
             int y = versionRx.cap(2).toInt();
             int z = versionRx.cap(3).toInt(); // ok to be empty
-            myDebug() << QString::fromLatin1("GCstarPluginFetcher() - found %1.%2.%3").arg(x).arg(y).arg(z);
+            myDebug() << QString::fromLatin1("found %1.%2.%3").arg(x).arg(y).arg(z);
             // --list-plugins argument was added for 1.3 release
             pluginParse = (x >= 1 && y >=3) ? New : Old;
           }
@@ -212,6 +212,12 @@ void GCstarPluginFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void GCstarPluginFetcher::search() {
+  if(m_plugin.isEmpty() || m_collType == -1) {
+    myWarning() << "no plugin information!";
+    stop();
+    return;
+  }
+
   m_started = true;
   m_data.clear();
 
@@ -223,12 +229,6 @@ void GCstarPluginFetcher::search() {
   }
 
   QString gcstarCollection = gcstarType(m_collType);
-
-  if(m_plugin.isEmpty()) {
-    myWarning() << "no plugin name! ";
-    stop();
-    return;
-  }
 
   m_process = new KProcess(this);
   connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));

@@ -122,6 +122,9 @@ IF( QJSON_FOUND )
     TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
 ENDIF( QJSON_FOUND )
 
+KDE4_ADD_UNIT_TEST(gcstarfetchertest NOGUI gcstarfetchertest.cpp)
+TARGET_LINK_LIBRARIES(gcstarfetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(giantbombfetchertest NOGUI giantbombfetchertest.cpp)
 TARGET_LINK_LIBRARIES(giantbombfetchertest fetch ${TELLICO_TEST_LIBS})
 
