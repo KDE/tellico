@@ -33,7 +33,6 @@
 #include <QList>
 
 class QLabel;
-class KProcess;
 
 namespace Tellico {
   namespace GUI {
@@ -41,6 +40,8 @@ namespace Tellico {
     class CollectionTypeCombo;
   }
   namespace Fetch {
+
+  class GCstarThread;
 
 /**
  * @author Robby Stephenson
@@ -74,8 +75,8 @@ public:
   static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
-  void slotData();
-  void slotError();
+  void slotData(const QByteArray& data);
+  void slotError(const QByteArray& data);
   void slotProcessExited();
 
 private:
@@ -83,7 +84,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
 
   // map Author, Name, Lang, etc...
-  typedef QMap<QString, QVariant> PluginInfo;
+  typedef QHash<QString, QVariant> PluginInfo;
   typedef QList<PluginInfo> PluginList;
   // map collection type to all available plugins
   typedef QHash<int, PluginList> CollectionPlugins;
@@ -99,7 +100,8 @@ private:
   bool m_started;
   int m_collType;
   QString m_plugin;
-  KProcess* m_process;
+
+  GCstarThread* m_thread;
   QByteArray m_data;
   QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;

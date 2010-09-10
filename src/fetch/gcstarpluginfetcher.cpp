@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "gcstarpluginfetcher.h"
+#include "gcstarthread.cpp"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
@@ -96,7 +97,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
 void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) {
   PluginList plugins;
 
-  QString gcstarCollection = gcstarType(collType_);
+  const QString gcstarCollection = gcstarType(collType_);
   if(gcstarCollection.isEmpty()) {
     collectionPlugins.insert(collType_, plugins);
     return;
@@ -151,14 +152,13 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
 
   PluginList plugins;
 
-  QString dirName = gcstarType(collType_);
+  const QString dirName = gcstarType(collType_);
   if(dirName.isEmpty()) {
     collectionPlugins.insert(collType_, plugins);
     return;
   }
 
-  QStringList files = dir.entryList();
-  foreach(const QString& file, files) {
+  foreach(const QString& file, dir.entryList()) {
     KUrl u;
     u.setPath(dir.filePath(file));
     PluginInfo info;
@@ -183,6 +183,7 @@ QString GCstarPluginFetcher::gcstarType(int collType_) {
     case Data::Collection::ComicBook: return QLatin1String("GCcomics");
     case Data::Collection::Wine:      return QLatin1String("GCwines");
     case Data::Collection::Coin:      return QLatin1String("GCcoins");
+    case Data::Collection::Stamp:     return QLatin1String("GCstamps");
     case Data::Collection::Game:      return QLatin1String("GCgames");
     case Data::Collection::BoardGame: return QLatin1String("GCboardgames");
     default: break;
@@ -191,7 +192,7 @@ QString GCstarPluginFetcher::gcstarType(int collType_) {
 }
 
 GCstarPluginFetcher::GCstarPluginFetcher(QObject* parent_) : Fetcher(parent_),
-    m_started(false), m_collType(-1), m_process(0) {
+    m_started(false), m_collType(-1), m_thread(0) {
 }
 
 GCstarPluginFetcher::~GCstarPluginFetcher() {
@@ -212,51 +213,50 @@ void GCstarPluginFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void GCstarPluginFetcher::search() {
+  m_started = true;
   if(m_plugin.isEmpty() || m_collType == -1) {
     myWarning() << "no plugin information!";
+    myDebug() << m_collType << m_plugin;
     stop();
     return;
   }
 
-  m_started = true;
   m_data.clear();
 
-  QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+  const QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
     myWarning() << "gcstar not found!";
     stop();
     return;
   }
 
-  QString gcstarCollection = gcstarType(m_collType);
-
-  m_process = new KProcess(this);
-  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
-  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
-  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
-  m_process->setOutputChannelMode(KProcess::SeparateChannels);
   QStringList args;
   args << QLatin1String("-x")
-       << QLatin1String("--collection") << gcstarCollection
+       << QLatin1String("--collection") << gcstarType(m_collType)
        << QLatin1String("--export")     << QLatin1String("Tellico")
        << QLatin1String("--website")    << m_plugin
        << QLatin1String("--download")   << KShell::quoteArg(request().value);
   myLog() << args;
-  m_process->setProgram(gcstar, args);
-  if(!m_process->execute()) {
-    myDebug() << "process failed to start";
-    stop();
-  }
+
+  m_thread = new GCstarThread(this);
+  m_thread->setProgram(gcstar, args);
+  connect(m_thread, SIGNAL(standardOutput(const QByteArray&)), SLOT(slotData(const QByteArray&)));
+  connect(m_thread, SIGNAL(standardError(const QByteArray&)), SLOT(slotError(const QByteArray&)));
+  connect(m_thread, SIGNAL(finished()), SLOT(slotProcessExited()));
+  m_thread->start();
 }
 
 void GCstarPluginFetcher::stop() {
   if(!m_started) {
     return;
   }
-  if(m_process) {
-    m_process->kill();
-    delete m_process;
-    m_process = 0;
+  if(m_thread) {
+    if(m_thread->isRunning()) {
+      m_thread->terminate();
+      m_thread->wait();
+    }
+    delete m_thread;
+    m_thread = 0;
   }
   m_data.clear();
   m_started = false;
@@ -264,27 +264,24 @@ void GCstarPluginFetcher::stop() {
   emit signalDone(this);
 }
 
-void GCstarPluginFetcher::slotData() {
-  m_data.append(m_process->readAllStandardOutput());
+void GCstarPluginFetcher::slotData(const QByteArray& data_) {
+  m_data.append(data_);
 }
 
-void GCstarPluginFetcher::slotError() {
-  QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
+void GCstarPluginFetcher::slotError(const QByteArray& data_) {
+  QString msg = QString::fromLocal8Bit(data_);
   msg.prepend(source() + QLatin1String(": "));
   myDebug() << msg;
   m_errors << msg;
 }
 
 void GCstarPluginFetcher::slotProcessExited() {
-//  myDebug();
-  if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << source() << ": process did not exit successfully";
-    if(!m_errors.isEmpty()) {
-      message(m_errors.join(QLatin1String("\n")), MessageHandler::Error);
-    }
-    stop();
+  // if stop() is called and the thread terminated
+  // the finished() signal will still fire
+  if(!m_started) {
     return;
   }
+
   if(!m_errors.isEmpty()) {
     message(m_errors.join(QLatin1String("\n")), MessageHandler::Warning);
   }
@@ -307,8 +304,7 @@ void GCstarPluginFetcher::slotProcessExited() {
     return;
   }
 
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
@@ -423,7 +419,7 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
 }
 
 void GCstarPluginFetcher::ConfigWidget::slotPluginChanged() {
-  PluginInfo info = m_pluginCombo->currentData().toMap();
+  PluginInfo info = m_pluginCombo->currentData().toHash();
   m_authorLabel->setText(info[QLatin1String("author")].toString());
 //  m_langLabel->setText(info[QLatin1String("lang")].toString());
   emit signalName(preferredName());

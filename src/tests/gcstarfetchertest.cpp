@@ -52,6 +52,8 @@ void GCstarFetcherTest::initTestCase() {
 
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
+
+  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
 }
 
 void GCstarFetcherTest::testSnowyRiver() {
@@ -66,7 +68,6 @@ void GCstarFetcherTest::testSnowyRiver() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GCstarPluginFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
   job->setMaximumResults(1);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));

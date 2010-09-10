@@ -22,6 +22,7 @@ SET(fetch_STAT_SRCS
    fetchresult.cpp
    freebasefetcher.cpp
    gcstarpluginfetcher.cpp
+   gcstarthread.cpp
    giantbombfetcher.cpp
    googlescholarfetcher.cpp
    hmac_sha2.c
