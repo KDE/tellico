@@ -49,7 +49,10 @@ using Tellico::EntryUpdater;
 // for each entry, we loop over all available fetchers
 // then we loop over all entries
 EntryUpdater::EntryUpdater(Tellico::Data::CollPtr coll_, Tellico::Data::EntryList entries_, QObject* parent_)
-    : QObject(parent_), m_coll(coll_), m_entriesToUpdate(entries_), m_cancelled(false) {
+    : QObject(parent_)
+    , m_coll(coll_)
+    , m_entriesToUpdate(entries_)
+    , m_cancelled(false) {
   // for now, we're assuming all entries are same collection type
   m_fetchers = Fetch::Manager::self()->createUpdateFetchers(m_coll->type());
   foreach(Fetch::Fetcher::Ptr fetcher, m_fetchers) {
@@ -165,7 +168,6 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
 }
 
 void EntryUpdater::slotCancel() {
-//  myDebug();
   m_cancelled = true;
   Fetch::Fetcher::Ptr f = m_fetchers[m_fetchIndex];
   if(f) {

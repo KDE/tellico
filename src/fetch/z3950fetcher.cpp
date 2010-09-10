@@ -273,7 +273,6 @@ void Z3950Fetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug();
   m_started = false;
   if(m_conn) {
    // give it a second to cleanup
@@ -377,6 +376,11 @@ void Z3950Fetcher::process() {
 void Z3950Fetcher::handleResult(const QString& result_) {
   if(result_.isEmpty()) {
     myDebug() << "empty record found, maybe the character encoding or record format is wrong?";
+    return;
+  }
+  // possible to get a race condition where the fetcher has been stopped
+  // even as new results come in
+  if(!m_started) {
     return;
   }
 

@@ -1,6 +1,11 @@
+2010-09-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated GCstar plugin fetcher to use a separate thread.
+	* Fixed crash with z39.50 fetcher (Bug: 250795).
+
 2010-09-07  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated GCstar pluging fetcher to work with comic books.
+	* Updated GCstar plugin fetcher to work with comic books.
 
 2010-09-03  Robby Stephenson  <robby@periapsis.org>
 
