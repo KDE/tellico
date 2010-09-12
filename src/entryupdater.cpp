@@ -159,7 +159,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
   Data::EntryPtr e = result_->fetchEntry();
   if(e) {
     m_fetchedEntries.append(e);
-    int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
+    const int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
     if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
       result_->fetcher->stop();
     }
