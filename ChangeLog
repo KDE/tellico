@@ -1,3 +1,7 @@
+2010-09-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed updating match algorithm to try to improve results when having multiple good matches (Bug: 250886).
+
 2010-09-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated GCstar plugin fetcher to use a separate thread.

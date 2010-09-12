@@ -189,19 +189,30 @@ void EntryUpdater::handleResults() {
     m_fetchedEntries.append(e);
     int match = m_coll->sameEntry(entry, e);
     if(match) {
-//      myDebug() << e->title() << " matches by " << match;
+//      myDebug() << e->title() << "matches by" << match;
     }
-    if(match > best) {
+    // if the match is GOOD but not PERFECT, keep all of them
+    if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
+      if(match > best) {
+        best = match;
+        matches.clear();
+        matches.append(res);
+      } else if(match == best) {
+        matches.append(res);
+      }
+    } else if(match >= EntryComparison::ENTRY_GOOD_MATCH) {
+      best = qMax(best, match);
+      // keep all the results that don't exceed the perfect match
+      matches.append(res);
+    } else if(match > best) {
       best = match;
       matches.clear();
-      matches.append(res);
-    } else if(match == best && best > 0) {
       matches.append(res);
     }
   }
   if(best < EntryComparison::ENTRY_GOOD_MATCH) {
     if(best > 0) {
-      myDebug() << "no good match (score > 10), best match = " << best << " (" << matches.count() << " matches)";
+      myDebug() << "no good match (score > 10), best match =" << best << "(" << matches.count() << "matches)";
     }
     return;
   }
