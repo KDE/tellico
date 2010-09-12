@@ -329,7 +329,7 @@ void IMDBFetcher::parseMultipleTitleResults() {
     m_exactTitles = output.mid(pos_exact, end_exact-pos_exact);
   }
   if(pos_partial > -1) {
-    m_partialTitles = output.mid(pos_partial-end_partial);
+    m_partialTitles = output.mid(pos_partial, end_partial-pos_partial);
   }
   if(pos_approx > -1) {
     m_approxTitles = output.mid(pos_approx);
