@@ -62,7 +62,7 @@ public:
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
   // imdb can search title, person
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
+  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Raw; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return IMDB; }

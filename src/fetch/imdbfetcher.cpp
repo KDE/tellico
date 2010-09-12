@@ -140,6 +140,9 @@ void IMDBFetcher::search() {
   m_url.setHost(m_host.isEmpty() ? QLatin1String(IMDB_SERVER) : m_host);
   m_url.setPath(QLatin1String("/find"));
 
+  // as far as I can tell, the url encoding should always be iso-8859-1?
+  m_url.addQueryItem(QLatin1String("q"), request().value);
+
   switch(request().key) {
     case Title:
       m_url.addQueryItem(QLatin1String("s"), QLatin1String("tt"));
@@ -149,14 +152,16 @@ void IMDBFetcher::search() {
       m_url.addQueryItem(QLatin1String("s"), QLatin1String("nm"));
       break;
 
+    case Raw:
+      m_url = request().value;
+      myDebug() << "using url raw value";
+      break;
+
     default:
-      myWarning() << "FetchKey not supported";
+      myWarning() << "not supported:" << request().key;
       stop();
       return;
   }
-
-  // as far as I can tell, the url encoding should always be iso-8859-1?
-  m_url.addQueryItem(QLatin1String("q"), request().value);
 
 //  myDebug() << "url =" << m_url;
 #endif
@@ -251,18 +256,26 @@ void IMDBFetcher::slotComplete(KJob*) {
   m_job = 0;
 
   // a single result was found if we got redirected
-  if(request().key == Title) {
-    if(m_redirected) {
+  switch(request().key) {
+    case Title:
+      if(m_redirected) {
+        parseSingleTitleResult();
+      } else {
+        parseMultipleTitleResults();
+      }
+      break;
+
+    case Person:
+      if(m_redirected) {
+        parseSingleNameResult();
+      } else {
+        parseMultipleNameResults();
+      }
+      break;
+
+    case Raw:
       parseSingleTitleResult();
-    } else {
-      parseMultipleTitleResults();
-    }
-  } else {
-    if(m_redirected) {
-      parseSingleNameResult();
-    } else {
-      parseMultipleNameResults();
-    }
+      break;
   }
 }
 
@@ -824,8 +837,6 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     if(!values.isEmpty()) {
       entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
-  } else {
-    myDebug() << "No alternative titles found";
   }
 }
 
@@ -1143,28 +1154,11 @@ Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
   KUrl link = entry_->field(QLatin1String("imdb"));
 
   if(!link.isEmpty() && link.isValid()) {
-    myWarning() << "IMDb link searching not implemented";
-    return FetchRequest(Title, t);
-
-    // TODO: fix this
-    // check if we want a different host
     if(link.host() != m_host) {
 //      myLog() << "switching hosts to " << m_host;
       link.setHost(m_host);
     }
-//    request().key = Fetch::Title;
-//    request().value = t;
-    m_started = true;
-    m_text.clear();
-    m_matches.clear();
-    m_url = link;
-    m_redirected = true; // m_redirected is used as a flag later to tell if we get a single result
-    m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-    m_job->ui()->setWindow(GUI::Proxy::widget());
-    connect(m_job, SIGNAL(result(KJob*)),
-            SLOT(slotComplete(KJob*)));
-    connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
-            SLOT(slotRedirection(KIO::Job*, const KUrl&)));
+    return FetchRequest(Fetch::Raw, link.url());
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
