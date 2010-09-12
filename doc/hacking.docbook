@@ -270,14 +270,14 @@ These settings should be placed in the <emphasis>General Options</emphasis> grou
 <title>Max Icon Size</title>
 
 <para>
-The maximum size of the icons in the <interface>Icon View</interface> may be changed with this setting. The default value is 96. The size must be in the range of 32 to 128.
+The maximum size of the icons in the <interface>Icon View</interface> may be changed with this setting. The default value is 96. The size must be in the range of 32 to 256.
 </para>
 </sect3>
 
 <sect3>
 <title>Example</title>
 <informalexample>
-<para><userinput>Max Icon Size=72</userinput></para>
+<para><userinput>Max Icon Size=128</userinput></para>
 </informalexample>
 </sect3>
 

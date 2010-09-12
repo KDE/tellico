@@ -45,7 +45,7 @@
 
 namespace {
   static const int MIN_ENTRY_ICON_SIZE = 32;
-  static const int MAX_ENTRY_ICON_SIZE = 128;
+  static const int MAX_ENTRY_ICON_SIZE = 256;
   static const int ENTRY_ICON_SIZE_PAD = 6;
   static const int ENTRY_ICON_SHADOW_RIGHT = 1;
   static const int ENTRY_ICON_SHADOW_BOTTOM = 1;
