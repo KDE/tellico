@@ -74,7 +74,11 @@ $(function () {
           },
           label: {
             show: true,
-            radius: 0.97
+            radius: 0.97,
+            formatter: function(label, slice) {
+              return '&lt;div style="font-size:x-small;text-align:center;padding:2px;color:'+slice.color+';"&gt;'
+                     +label+'&lt;br/&gt;'+slice.data[0][1]+' ('+Math.round(slice.percent)+'%)&lt;'+'/div&gt;';
+            },
           }
         }
       },
@@ -94,27 +98,39 @@ $(function () {
         background-color: #fff;
         color: #000;
    }
-   #header-left {
-        margin-top: 0;
-        float: left;
-        font-size: 80%;
-        font-style: italic;
-   }
-   #header-right {
-        margin-top: 0;
-        float: right;
-        font-size: 80%;
-        font-style: italic;
-   }
    h1.colltitle {
         margin: 0px;
         padding-bottom: 5px;
         font-size: 2em;
         text-align: center;
    }
+   h2 {
+        text-align: center;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+   }
+   h3.header {
+        margin-top: 0;
+        font-size: 80%;
+        font-style: italic;
+        text-align: center;
+   }
    div.graph {
-        width: 500px;
+        width: 400px;
         height: 400px;
+   }
+   div.block {
+        float: left;
+        background: #EEE;
+        margin: 10px;
+        -moz-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+        -moz-box-shadow: 4px 4px 8px #666666;
+        -webkit-box-shadow: 4px 4px 8px #666666;
+        -khtml-box-shadow: 4px 4px 8px #666666;
+        box-shadow: 4px 4px 8px #666666;
    }
    .pieLabel {
        font-weight: bold;
@@ -132,17 +148,19 @@ $(function () {
 </xsl:template>
 
 <xsl:template match="tc:collection">
- <p id="header-left"><xsl:value-of select="$filename"/></p>
- <p id="header-right"><xsl:value-of select="$cdate"/></p>
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
-  <i18n>: Group Summary</i18n>
  </h1>
+ <h3 class="header">
+  <xsl:value-of select="$filename"/> - <xsl:value-of select="$cdate"/>
+ </h3>
 
  <!-- same field selection as done previously above -->
  <xsl:for-each select="tc:fields/tc:field[@type != 4 and boolean(floor(@flags div 2) mod 2)]">
-  <h2><xsl:value-of select="@title"/></h2>
-  <div class="graph" id="{concat('graph',position()-1)}"></div>
+  <div class="block">
+   <h2><xsl:value-of select="@title"/></h2>
+   <div class="graph" id="{concat('graph',position()-1)}"></div>
+  </div>
  </xsl:for-each>
 
 </xsl:template>
