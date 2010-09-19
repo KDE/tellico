@@ -47,11 +47,10 @@
    <script language="javascript" type="text/javascript" src="jquery.min.js"></script>
    <script language="javascript" type="text/javascript" src="jquery.flot.js"></script>
    <script language="javascript" type="text/javascript" src="jquery.flot.pie.js"></script>
-   <script id="source" language="javascript" type="text/javascript">
+   <script language="javascript" type="text/javascript">
 $(function () {
 
   var data = { items: [] };
-  var groups = [];
 
  <xsl:variable name="coll" select="tc:collection"/>
  <!-- grouping flag is second bit from right -->
@@ -61,12 +60,6 @@ $(function () {
    <xsl:with-param name="field" select="."/>
   </xsl:call-template>
  </xsl:for-each>
-
- var divs='';
- for(i=0; i &lt; data.items.length; i++) {
-   divs += "&lt;h2&gt;"+groups[i]+"&lt;/h2&gt;&lt;div class='graph' id='graph"+i+"'&gt;&lt;/div&gt;";
- }
- $("#body").append(divs);
 
  for(i=0; i &lt; data.items.length; i++) {
    $.plot($("#graph"+i), data.items[i],
@@ -146,6 +139,11 @@ $(function () {
   <i18n>: Group Summary</i18n>
  </h1>
 
+ <xsl:for-each select="tc:fields/tc:field[@type != 4 and boolean(floor(@flags div 2) mod 2)]">
+  <h2><xsl:value-of select="@title"/></h2>
+  <div class="graph" id="{concat('graph',position()-1)}"></div>
+ </xsl:for-each>
+
 </xsl:template>
 
 <xsl:template name="data-items">
@@ -218,7 +216,6 @@ $(function () {
   <xsl:text>];
   data.items.push(item);
   </xsl:text>
-  <xsl:value-of select="concat('groups.push(',$apos,$field/@title,$apos,');')"/>
  </xsl:if>
 </xsl:template>
 
