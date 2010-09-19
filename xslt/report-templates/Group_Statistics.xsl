@@ -139,6 +139,7 @@ $(function () {
   <i18n>: Group Summary</i18n>
  </h1>
 
+ <!-- same field selection as done previously above -->
  <xsl:for-each select="tc:fields/tc:field[@type != 4 and boolean(floor(@flags div 2) mod 2)]">
   <h2><xsl:value-of select="@title"/></h2>
   <div class="graph" id="{concat('graph',position()-1)}"></div>
