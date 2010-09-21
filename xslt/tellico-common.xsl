@@ -125,6 +125,9 @@
        <xsl:when test="$field = 'giantbomb'">
         <xsl:text>Find more information on Giant Bomb</xsl:text>
        </xsl:when>
+       <xsl:when test="string-length($child) &gt; 30">
+        <xsl:value-of select="concat(substring($child,1,15),'...',substring($child,string-length($child)-15,15))"/>
+       </xsl:when>
        <xsl:otherwise>
         <xsl:value-of select="$child"/>
        </xsl:otherwise>

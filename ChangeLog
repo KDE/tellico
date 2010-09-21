@@ -1,3 +1,7 @@
+2010-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed URL field output to truncate link text to 30 letters (Bug: 250880).
+
 2010-09-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Increased max icon size to 256.
