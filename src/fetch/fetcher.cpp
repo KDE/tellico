@@ -122,9 +122,11 @@ Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
     // iterate over list of possible optional fields
     // and if the field is not included in the user-configured list
     // remove the field from the entry
-    foreach(const QString& field, Manager::optionalFields(type()).keys()) {
-      if(!m_fields.contains(field)) {
-        entry->collection()->removeField(field);
+    QHashIterator<QString, QString> i(Manager::optionalFields(type()));
+    while(i.hasNext()) {
+      i.next();
+      if(!m_fields.contains(i.key())) {
+        entry->collection()->removeField(i.key());
       }
     }
   }
