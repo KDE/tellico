@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "fieldtest.h"
 #include "fieldtest.moc"
+#include "qtest_kde.h"
 
 #include "../field.h"
 

@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "entryupdatejobtest.h"
 #include "entryupdatejobtest.moc"
+#include "qtest_kde.h"
 
 #include "../entryupdatejob.h"
 #include "../fetch/arxivfetcher.h"

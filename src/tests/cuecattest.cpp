@@ -24,9 +24,10 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "cuecattest.h"
 #include "cuecattest.moc"
+#include "qtest_kde.h"
+
 #include "../utils/upcvalidator.h"
 
 QTEST_KDEMAIN_CORE( CueCatTest )

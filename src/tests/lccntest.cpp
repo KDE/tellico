@@ -24,9 +24,10 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "lccntest.h"
 #include "lccntest.moc"
+#include "qtest_kde.h"
+
 #include "../utils/lccnvalidator.h"
 
 // see http://www.loc.gov/marc/lccn_structure.html

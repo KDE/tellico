@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "gcstartest.h"
 #include "gcstartest.moc"
+#include "qtest_kde.h"
 
 #include "../translators/gcstarimporter.h"
 #include "../translators/gcstarexporter.h"

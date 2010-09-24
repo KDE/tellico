@@ -24,9 +24,10 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "isbntest.h"
 #include "isbntest.moc"
+#include "qtest_kde.h"
+
 #include "../utils/isbnvalidator.h"
 
 QTEST_KDEMAIN_CORE( IsbnTest )

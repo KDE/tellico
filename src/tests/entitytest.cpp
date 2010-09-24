@@ -24,9 +24,10 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "entitytest.h"
 #include "entitytest.moc"
+#include "qtest_kde.h"
+
 #include "../tellico_utils.h"
 
 QTEST_KDEMAIN_CORE( EntityTest )

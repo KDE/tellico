@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "gcstarfetchertest.h"
 #include "gcstarfetchertest.moc"
+#include "qtest_kde.h"
 
 #include "../fetch/fetcherjob.h"
 #include "../fetch/gcstarpluginfetcher.h"

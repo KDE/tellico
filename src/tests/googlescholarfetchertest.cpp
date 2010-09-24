@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "googlescholarfetchertest.h"
 #include "googlescholarfetchertest.moc"
+#include "qtest_kde.h"
 
 #include "../fetch/fetcherjob.h"
 #include "../fetch/googlescholarfetcher.h"

@@ -24,9 +24,10 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "formattest.h"
 #include "formattest.moc"
+#include "qtest_kde.h"
+
 #include "../fieldformat.h"
 #include "../core/tellico_config.h"
 

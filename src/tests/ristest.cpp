@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "ristest.h"
 #include "ristest.moc"
+#include "qtest_kde.h"
 
 #include "../translators/risimporter.h"
 #include "../collections/bibtexcollection.h"

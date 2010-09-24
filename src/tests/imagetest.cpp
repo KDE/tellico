@@ -24,9 +24,9 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "qtest_kde.h"
 #include "imagetest.h"
 #include "imagetest.moc"
+#include "qtest_kde.h"
 
 #include "../images/imagefactory.h"
 
