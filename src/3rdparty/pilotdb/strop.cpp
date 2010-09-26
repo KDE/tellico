@@ -17,13 +17,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifh Floor, Boston, MA  02110-1301  USA
  */
 
+#include "strop.h"
+
 #include <string>
 #include <vector>
 #include <algorithm>
 #include <cctype>
 #include <sstream>
 
-#include "strop.h"
 #include "../../tellico_debug.h"
 
 extern std::ostream* err;

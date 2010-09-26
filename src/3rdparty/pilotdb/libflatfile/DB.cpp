@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifh Floor, Boston, MA  02111-1307  USA
  */
 
+#include "DB.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -27,8 +29,6 @@
 #include <cstring>
 
 #include "../strop.h"
-
-#include "DB.h"
 
 #include <kdebug.h>
 

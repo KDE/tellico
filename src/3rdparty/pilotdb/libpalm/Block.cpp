@@ -6,9 +6,9 @@
  * used to simplify passing arrays of pi_char_t around.
  */
 
-#include <cstring>
-
 #include "Block.h"
+
+#include <cstring>
 
 void PalmLib::Block::reserve(PalmLib::Block::size_type new_size)
 {

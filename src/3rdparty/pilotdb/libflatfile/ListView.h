@@ -1,5 +1,5 @@
-#ifndef __PALMOS__FLATFILE__VIEW_H__
-#define __PALMOS__FLATFILE__VIEW_H__
+#ifndef FLATFILE_LISTVIEW_H__
+#define FLATFILE_LISTVIEW_H__
 
 #include <string>
 #include <vector>

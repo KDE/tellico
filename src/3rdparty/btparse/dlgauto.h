@@ -27,8 +27,8 @@
  * 1989-1995
  */
 
-#ifndef ZZDEFAUTO_H
-#define ZZDEFAUTO_H
+#ifndef DLGAUTO_H
+#define DLGAUTO_H
 
 zzchar_t	*zzlextext;	/* text of most recently matched token */
 zzchar_t	*zzbegexpr;	/* beginning of last reg expr recogn. */

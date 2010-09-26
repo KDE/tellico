@@ -26,6 +26,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef RTF2HTML_DBGITER_H
+#define RTF2HTML_DBGITER_H
+
 namespace rtf {
 
 template <class T>
@@ -77,3 +80,5 @@ class dbg_iter<std::istreambuf_iterator<T> > :
 };
 
 }
+
+#endif

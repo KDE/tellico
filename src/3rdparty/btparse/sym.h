@@ -1,7 +1,10 @@
+#ifndef BT_SYM_H
+#define BT_SYM_H
+
 #include <ctype.h>
 
-/* 
- * Declarations for symbol table in sym.c 
+/*
+ * Declarations for symbol table in sym.c
  */
 
 /* define some hash function */
@@ -10,7 +13,7 @@
 #endif
 
 /* minimum symbol table record */
-typedef struct _sym 
+typedef struct _sym
 {
    char        *symbol;         /* the macro name */
    char        *text;           /* its expansion */
@@ -31,3 +34,5 @@ void zzs_stat(void);
 Sym *zzs_new(char *);
 Sym *zzs_newadd(char *);
 char *zzs_strdup(char *);
+
+#endif

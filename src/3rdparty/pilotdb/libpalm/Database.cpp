@@ -8,9 +8,9 @@
  * protocols.
  */
 
+#include "Database.h"
 #include "palmtypes.h"
 #include "Record.h"
-#include "Database.h"
 
 #ifndef __GNUG__
 

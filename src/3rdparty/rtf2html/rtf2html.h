@@ -22,6 +22,9 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef RTF2HTML_H
+#define RTF2HTML_H
+
 #include <QString>
 
 namespace Tellico {
@@ -37,3 +40,5 @@ private:
 };
 
 }
+
+#endif
