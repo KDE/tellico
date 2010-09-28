@@ -23,6 +23,8 @@
  ***************************************************************************/
 
 // this file gets included by tellico_config.h
+#ifndef TELLICO_CONFIG_ADDONS_H
+#define TELLICO_CONFIG_ADDONS_H
 
 public:
   static QStringList noCapitalizationList();
@@ -51,3 +53,5 @@ private:
   static QStringList m_articleList;
   // need to remember articles with apostrophes for capitalization
   static QStringList m_articleAposList;
+
+#endif

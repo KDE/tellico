@@ -6,7 +6,6 @@
 #include "Database.h"
 
 #include <iostream>
-#include <sstream>
 #include <stdexcept>
 #include <sstream>
 #include <utility>
