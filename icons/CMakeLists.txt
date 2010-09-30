@@ -24,6 +24,7 @@ set(ICON_FILES
     nocover_comic.png
     nocover_game.png
     nocover_video.png
+    palm.png
     person-open.png
     person.png
     README.icons
