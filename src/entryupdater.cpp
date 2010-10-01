@@ -157,7 +157,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
 //  myDebug() << result_->title << " [" << result_->fetcher->source() << "]";
   m_results.append(UpdateResult(result_, m_fetchers[m_fetchIndex]->updateOverwrite()));
   Data::EntryPtr e = result_->fetchEntry();
-  if(e) {
+  if(e && !m_entriesToUpdate.isEmpty()) {
     m_fetchedEntries.append(e);
     const int match = m_coll->sameEntry(m_entriesToUpdate.front(), e);
     if(match > EntryComparison::ENTRY_PERFECT_MATCH) {
