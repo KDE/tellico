@@ -41,10 +41,10 @@
 
 using Tellico::Import::GCstarImporter;
 
-GCstarImporter::GCstarImporter(const KUrl& url_) : TextImporter(url_), m_cancelled(false) {
+GCstarImporter::GCstarImporter(const KUrl& url_) : TextImporter(url_, true), m_cancelled(false), m_relativeImageLinks(false) {
 }
 
-GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false) {
+GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false), m_relativeImageLinks(false) {
 }
 
 bool GCstarImporter::canImport(int type) const {
@@ -92,7 +92,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   }
 
   bool convertUTF8 = false;
-  QMap<QString, Data::BorrowerPtr> borrowers;
+  QHash<QString, Data::BorrowerPtr> borrowers;
   const QRegExp rx(QLatin1String("\\s*,\\s*"));
   QRegExp year(QLatin1String("\\d{4}"));
   QRegExp runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
@@ -250,7 +250,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     return;
   }
 
-  for(QMap<QString, Data::BorrowerPtr>::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
+  for(QHash<QString, Data::BorrowerPtr>::Iterator it = borrowers.begin(); it != borrowers.end(); ++it) {
     if(!it.value()->isEmpty()) {
       m_coll->addBorrower(it.value());
     }
@@ -265,7 +265,11 @@ void GCstarImporter::readGCstar(const QString& text_) {
     return;
   }
 
-  QString str = handler.applyStylesheet(text_);
+  if(m_relativeImageLinks) {
+    handler.addStringParam("baseDir", url().directory(KUrl::AppendTrailingSlash).toLocal8Bit());
+  }
+
+  const QString str = handler.applyStylesheet(text_);
 
   if(str.isEmpty()) {
     setStatusMessage(i18n("<qt>The file is not a valid GCstar data file.</qt>"));

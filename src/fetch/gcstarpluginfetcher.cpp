@@ -27,7 +27,7 @@
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"
-#include "../translators/tellicoimporter.h"
+#include "../translators/gcstarimporter.h"
 #include "../gui/combobox.h"
 #include "../gui/collectiontypecombo.h"
 #include "../gui/cursorsaver.h"
@@ -40,11 +40,17 @@
 #include <kstandarddirs.h>
 #include <kacceleratormanager.h>
 #include <kshell.h>
+#include <KFilterDev>
+#include <KTar>
+#include <KTempDir>
 
 #include <QDir>
 #include <QLabel>
 #include <QShowEvent>
 #include <QGridLayout>
+#include <QBuffer>
+
+#include <memory>
 
 using namespace Tellico;
 using Tellico::Fetch::GCstarPluginFetcher;
@@ -104,7 +110,7 @@ void GCstarPluginFetcher::readPluginsNew(int collType_, const QString& gcstar_) 
   }
 
   QStringList args;
-  args << QLatin1String("-x")
+  args << QLatin1String("--execute")
        << QLatin1String("--list-plugins")
        << QLatin1String("--collection")
        << gcstarCollection;
@@ -231,11 +237,12 @@ void GCstarPluginFetcher::search() {
   }
 
   QStringList args;
-  args << QLatin1String("-x")
-       << QLatin1String("--collection") << gcstarType(m_collType)
-       << QLatin1String("--export")     << QLatin1String("Tellico")
-       << QLatin1String("--website")    << m_plugin
-       << QLatin1String("--download")   << KShell::quoteArg(request().value);
+  args << QLatin1String("--execute")
+       << QLatin1String("--collection")  << gcstarType(m_collType)
+       << QLatin1String("--export")      << QLatin1String("TarGz")
+       << QLatin1String("--exportprefs") << QLatin1String("collection=>/tmp/test.gcs,file=>/tmp/test1.tar.gz")
+       << QLatin1String("--website")     << m_plugin
+       << QLatin1String("--download")    << KShell::quoteArg(request().value);
   myLog() << args;
 
   m_thread = new GCstarThread(this);
@@ -292,14 +299,54 @@ void GCstarPluginFetcher::slotProcessExited() {
     return;
   }
 
-  Import::TellicoImporter imp(QString::fromUtf8(m_data, m_data.size()));
+  QBuffer filterBuffer(&m_data);
+  std::auto_ptr<QIODevice> filter(KFilterDev::device(&filterBuffer, QLatin1String("application/x-gzip"), false));
+  if(!filter->open(QIODevice::ReadOnly)) {
+    myWarning() << "unable to open gzip filter";
+    stop();
+    return;
+  }
+
+  QByteArray tarData = filter->readAll();
+  QBuffer buffer(&tarData);
+
+  KTar tar(&buffer);
+  if(!tar.open(QIODevice::ReadOnly)) {
+    myWarning() << "unable to open tar file";
+    stop();
+    return;
+  }
+
+  const KArchiveDirectory* dir = tar.directory();
+  if(!dir) {
+    myWarning() << "unable to open tar directory";
+    stop();
+    return;
+  }
+
+  KTempDir tempDir;
+  dir->copyTo(tempDir.name());
+
+  // KDE seems to have abug (#252821) for gcstar files where the images are not in the images/ directory
+  foreach(const QString& filename, dir->entries()) {
+    if(dir->entry(filename)->isFile() && filename != QLatin1String("collection.gcs")) {
+      const KArchiveFile* f = static_cast<const KArchiveFile*>(dir->entry(filename));
+      f->copyTo(tempDir.name() + QLatin1String("images"));
+    }
+  }
+
+  KUrl gcsUrl(tempDir.name());
+  gcsUrl.addPath(QLatin1String("collection.gcs"));
+
+  Import::GCstarImporter imp(gcsUrl);
+  imp.setHasRelativeImageLinks(true);
 
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     if(!imp.statusMessage().isEmpty()) {
       message(imp.statusMessage(), MessageHandler::Status);
     }
-    myDebug() << source() << ": no collection pointer";
+    myWarning() << "no collection pointer";
     stop();
     return;
   }
@@ -308,6 +355,9 @@ void GCstarPluginFetcher::slotProcessExited() {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
+    if(!m_started) {
+      return;
+    }
   }
   stop(); // be sure to call this
 }

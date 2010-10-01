@@ -34,6 +34,7 @@
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 #include "../fieldformat.h"
 
 #include <KConfigGroup>
@@ -82,6 +83,8 @@ void GCstarFetcherTest::testSnowyRiver() {
 
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
 }
 
 void GCstarFetcherTest::slotResult(KJob* job_) {

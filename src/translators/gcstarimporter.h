@@ -46,13 +46,14 @@ public:
   GCstarImporter(const QString& text);
 
   /**
-   *
    */
   virtual Data::CollPtr collection();
   /**
    */
   virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
+
+  void setHasRelativeImageLinks(bool b) { m_relativeImageLinks = b; }
 
 public slots:
   void slotCancel();
@@ -65,6 +66,7 @@ private:
 
   Data::CollPtr m_coll;
   bool m_cancelled;
+  bool m_relativeImageLinks;
 };
 
   } // end namespace
