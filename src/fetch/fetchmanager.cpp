@@ -145,7 +145,7 @@ Tellico::Fetch::KeyMap Manager::keyMap(const QString& source_) const {
   }
 
   KeyMap map;
-  for(KeyMap::ConstIterator it = m_keyMap.begin(); it != m_keyMap.end(); ++it) {
+  for(KeyMap::ConstIterator it = m_keyMap.constBegin(); it != m_keyMap.constEnd(); ++it) {
     if(foundFetcher->canSearch(it.key())) {
       map.insert(it.key(), it.value());
     }
@@ -442,15 +442,15 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
     KUrl u;
-    if(p.indexOf(QLatin1String("allocine")) > -1) {
+    if(p.contains(QLatin1String("allocine"))) {
       u = QLatin1String("http://www.allocine.fr");
-    } else if(p.indexOf(QLatin1String("ministerio_de_cultura")) > -1) {
+    } else if(p.contains(QLatin1String("ministerio_de_cultura"))) {
       u = QLatin1String("http://www.mcu.es");
-    } else if(p.indexOf(QLatin1String("dark_horse_comics")) > -1) {
+    } else if(p.contains(QLatin1String("dark_horse_comics"))) {
       u = QLatin1String("http://www.darkhorse.com");
-    } else if(p.indexOf(QLatin1String("boardgamegeek")) > -1) {
+    } else if(p.contains(QLatin1String("boardgamegeek"))) {
       u = QLatin1String("http://www.boardgamegeek.com");
-    } else if(f->source().indexOf(QLatin1String("amarok"), 0, Qt::CaseInsensitive) > -1) {
+    } else if(f->source().contains(QLatin1String("amarok"), Qt::CaseInsensitive)) {
       return LOAD_ICON(QLatin1String("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
@@ -460,7 +460,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
       }
     }
   }
-  return fetcherIcon(fetcher_->type(), group_);
+  return fetcherIcon(fetcher_->type(), group_, size_);
 }
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) {
@@ -471,7 +471,17 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     myWarning() << "no pixmap defined for type =" << type_;
   }
 
-  return name.isEmpty() ? QPixmap() : LOAD_ICON(name, group_, size_);
+  if(name.isEmpty()) {
+    return QPixmap();
+  }
+
+  QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
+                                                size_, KIconLoader::DefaultState,
+                                                QStringList(), 0L, true);
+  if(pix.isNull()) {
+    pix = BarIcon(name);
+  }
+  return pix;
 }
 
 Tellico::StringHash Manager::optionalFields(Type type_) {
