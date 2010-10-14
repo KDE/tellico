@@ -91,6 +91,8 @@ private:
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
   bool m_firstRowHeader;
   QString m_delimiter;
+  QString m_colDelimiter;
+  QString m_rowDelimiter;
   bool m_cancelled;
 
   QWidget* m_widget;
@@ -101,6 +103,8 @@ private:
   QRadioButton* m_radioTab;
   QRadioButton* m_radioOther;
   KLineEdit* m_editOther;
+  KLineEdit* m_editColDelimiter;
+  KLineEdit* m_editRowDelimiter;
   QTableWidget* m_table;
   KIntSpinBox* m_colSpinBox;
   KComboBox* m_comboField;

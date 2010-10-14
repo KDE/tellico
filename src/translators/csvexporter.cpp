@@ -38,6 +38,7 @@
 #include <QRadioButton>
 #include <QGridLayout>
 #include <QVBoxLayout>
+#include <QLabel>
 
 using namespace Tellico;
 using Tellico::Export::CSVExporter;
@@ -45,6 +46,8 @@ using Tellico::Export::CSVExporter;
 CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_includeTitles(true),
     m_delimiter(QLatin1String(",")),
+    m_colDelimiter(QLatin1String(":")),
+    m_rowDelimiter(QLatin1String("|")),
     m_widget(0) {
 }
 
@@ -96,15 +99,22 @@ bool CSVExporter::exec() {
                                                 FieldFormat::ForceFormat :
                                                 FieldFormat::AsIsFormat);
 
-  QString tmp;
+  const bool replaceColDelimiter = (m_colDelimiter != FieldFormat::columnDelimiterString());
+  const bool replaceRowDelimiter = (m_rowDelimiter != FieldFormat::rowDelimiterString());
+
   foreach(Data::EntryPtr entryIt, entries()) {
+    QStringList values;
     foreach(Data::FieldPtr fIt, fields()) {
-      tmp = entryIt->formattedField(fIt->name(), format);
-      text += escapeText(tmp) + m_delimiter;
+      QString value = entryIt->formattedField(fIt->name(), format);
+      if(replaceColDelimiter) {
+        value.replace(FieldFormat::columnDelimiterString(), m_colDelimiter);
+      }
+      if(replaceRowDelimiter) {
+        value.replace(FieldFormat::rowDelimiterString(), m_rowDelimiter);
+      }
+      values += value;
     }
-    // remove last delimiter
-    text.truncate(text.length() - m_delimiter.length());
-    text += QLatin1Char('\n');
+    text += values.join(m_delimiter) + QLatin1Char('\n');
   }
 
   return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
@@ -172,6 +182,24 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
     m_editOther->setText(m_delimiter);
   }
 
+  QLabel* label = new QLabel(i18n("Table column delimiter:"), gbox);
+  m_colDelimiterEdit = new KLineEdit(gbox);
+  m_colDelimiterEdit->setText(m_colDelimiter);
+  m_delimiterGroupLayout->addWidget(label, 2, 0, 1, 2);
+  m_delimiterGroupLayout->addWidget(m_colDelimiterEdit, 2, 2);
+  QString w = i18n("The column delimiter separates values in each column of a <i>Table</i> field.");
+  label->setWhatsThis(w);
+  m_colDelimiterEdit->setWhatsThis(w);
+
+  label = new QLabel(i18n("Table row delimiter:"), gbox);
+  m_rowDelimiterEdit = new KLineEdit(gbox);
+  m_rowDelimiterEdit->setText(m_rowDelimiter);
+  m_delimiterGroupLayout->addWidget(label, 3, 0, 1, 2);
+  m_delimiterGroupLayout->addWidget(m_rowDelimiterEdit, 3, 2);
+  w = i18n("The row delimiter separates values in each row of a <i>Table</i> field.");
+  label->setWhatsThis(w);
+  m_rowDelimiterEdit->setWhatsThis(w);
+
   vlay->addWidget(m_checkIncludeTitles);
   vlay->addWidget(delimiterGroup);
 
@@ -184,6 +212,8 @@ void CSVExporter::readOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   m_includeTitles = group.readEntry("Include Titles", m_includeTitles);
   m_delimiter = group.readEntry("Delimiter", m_delimiter);
+  m_rowDelimiter = group.readEntry("RowDelimiter", m_rowDelimiter);
+  m_colDelimiter = group.readEntry("ColumnDelimiter", m_colDelimiter);
 }
 
 void CSVExporter::saveOptions(KSharedConfigPtr config_) {
@@ -198,9 +228,21 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
     m_delimiter = m_editOther->text();
   }
 
+  QString s = m_colDelimiterEdit->text();
+  if(!s.isEmpty()) {
+    m_colDelimiter = s;
+  }
+
+  s = m_rowDelimiterEdit->text();
+  if(!s.isEmpty()) {
+    m_rowDelimiter = s;
+  }
+
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Titles", m_includeTitles);
   group.writeEntry("Delimiter", m_delimiter);
+  group.writeEntry("RowDelimiter", m_rowDelimiter);
+  group.writeEntry("ColumnDelimiter", m_colDelimiter);
 }
 
 #include "csvexporter.moc"

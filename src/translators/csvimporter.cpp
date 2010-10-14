@@ -111,6 +111,10 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   const uint stepSize = qMax(s_stepSize, numChars/100);
   const bool showProgress = options() & ImportProgress;
 
+  // do we need to replace column or row delimiters
+  const bool replaceColDelimiter = (!m_colDelimiter.isEmpty() && m_colDelimiter != FieldFormat::columnDelimiterString());
+  const bool replaceRowDelimiter = (!m_rowDelimiter.isEmpty() && m_rowDelimiter != FieldFormat::rowDelimiterString());
+
   uint j = 0;
   while(!m_cancelled && m_parser->hasNext()) {
     bool empty = true;
@@ -119,6 +123,12 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     for(int i = 0; i < names.size(); ++i) {
 //      QString value = values[cols[i]].simplified();
       QString value = values[cols[i]].trimmed();
+      if(replaceColDelimiter) {
+        value.replace(m_colDelimiter, FieldFormat::columnDelimiterString());
+      }
+      if(replaceRowDelimiter) {
+        value.replace(m_rowDelimiter, FieldFormat::rowDelimiterString());
+      }
       bool success = entry->setField(names[i], value);
       // we might need to add a new allowed value
       // assume that if the user is importing the value, it should be allowed
@@ -149,6 +159,8 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   {
     KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
     config.writeEntry("Delimiter", m_delimiter);
+    config.writeEntry("ColumnDelimiter", m_colDelimiter);
+    config.writeEntry("RowDelimiter", m_rowDelimiter);
     config.writeEntry("First Row Titles", m_firstRowHeader);
   }
 
@@ -231,6 +243,33 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   buttonGroup->addButton(m_radioOther);
   connect(buttonGroup, SIGNAL(buttonClicked(int)), SLOT(slotDelimiter()));
 
+  QHBoxLayout* delimiterLayout2 = new QHBoxLayout();
+  vlay->addLayout(delimiterLayout2);
+
+  QString w = i18n("The column delimiter separates values in each column of a <i>Table</i> field.");
+  lab = new QLabel(i18n("Table column delimiter:"), groupBox);
+  lab->setWhatsThis(w);
+  delimiterLayout2->addWidget(lab);
+  m_editColDelimiter = new KLineEdit(groupBox);
+  m_editColDelimiter->setWhatsThis(w);
+  m_editColDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
+  m_editColDelimiter->setMaxLength(1);
+  delimiterLayout2->addWidget(m_editColDelimiter);
+  connect(m_editColDelimiter, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+
+  w = i18n("The row delimiter separates values in each row of a <i>Table</i> field.");
+  lab = new QLabel(i18n("Table row delimiter:"), groupBox);
+  lab->setWhatsThis(w);
+  delimiterLayout2->addWidget(lab);
+  m_editRowDelimiter = new KLineEdit(groupBox);
+  m_editRowDelimiter->setWhatsThis(w);
+  m_editRowDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
+  m_editRowDelimiter->setMaxLength(1);
+  delimiterLayout2->addWidget(m_editRowDelimiter);
+  connect(m_editRowDelimiter, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+
+  delimiterLayout2->addStretch(10);
+
   m_table = new QTableWidget(5, 0, groupBox);
   vlay->addWidget(m_table);
   m_table->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -283,6 +322,8 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
+  m_colDelimiter = config.readEntry("ColumnDelimiter", m_colDelimiter);
+  m_rowDelimiter = config.readEntry("RowDelimiter", m_rowDelimiter);
   m_firstRowHeader = config.readEntry("First Row Titles", m_firstRowHeader);
 
   m_checkFirstRowHeader->setChecked(m_firstRowHeader);
@@ -378,6 +419,8 @@ void CSVImporter::slotDelimiter() {
     m_editOther->setFocus();
     m_delimiter = m_editOther->text();
   }
+  m_colDelimiter = m_editColDelimiter->text();
+  m_rowDelimiter = m_editRowDelimiter->text();
   if(!m_delimiter.isEmpty()) {
     m_parser->setDelimiter(m_delimiter);
     fillTable();

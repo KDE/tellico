@@ -58,6 +58,8 @@ private:
 
   bool m_includeTitles;
   QString m_delimiter;
+  QString m_colDelimiter;
+  QString m_rowDelimiter;
 
   QWidget* m_widget;
   QCheckBox* m_checkIncludeTitles;
@@ -66,6 +68,8 @@ private:
   QRadioButton* m_radioTab;
   QRadioButton* m_radioOther;
   KLineEdit* m_editOther;
+  KLineEdit* m_colDelimiterEdit;
+  KLineEdit* m_rowDelimiterEdit;
 };
 
   } // end namespace
