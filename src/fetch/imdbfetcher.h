@@ -107,6 +107,7 @@ private:
   void doAspectRatio(const QString& s, Data::EntryPtr e);
   void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
   void doPlot(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);
+  void doStudio(const QString& s, Data::EntryPtr e);
   void doPerson(const QString& s, Data::EntryPtr e,
                 const QString& imdbHeader, const QString& fieldName);
   void doCast(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);

@@ -69,13 +69,13 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
   QCOMPARE(entry->field("genre"), QLatin1String("Adventure; Drama; Family; Romance; Western"));
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
-  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions"));
+  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
   QCOMPARE(entry->field("color"), QLatin1String("Color"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
-  QCOMPARE(entry->field("writer"), QLatin1String("John Dixon; Cul Cullen; A.B. 'Banjo' Paterson"));
+  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
 }
@@ -107,7 +107,7 @@ void ImdbFetcherTest::testAsterix() {
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Astérix aux jeux olympiques"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Thomas Langmann; Frédéric Forestier"));
-  QCOMPARE(entry->field("writer"), QString::fromUtf8("Thomas Langmann; René Goscinny; Albert Uderzo"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("René Goscinny; Albert Uderzo"));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
   QVERIFY(altTitleList.size() > 1);
 }
