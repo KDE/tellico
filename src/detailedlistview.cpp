@@ -102,6 +102,7 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   ModelManager::self()->setEntryModel(sortModel);
 
   connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateHeaderMenu()));
+  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)), SLOT(hideNewColumn(const QModelIndex&, int, int)));
   connect(header(), SIGNAL(sectionCountChanged(int, int)), SLOT(updateHeaderMenu()));
 }
 
@@ -598,6 +599,14 @@ void DetailedListView::resizeColumnsToContents() {
       resizeColumnToContents(ncol);
     }
   }
+}
+
+void DetailedListView::hideNewColumn(const QModelIndex& index_, int start_, int end_) {
+  Q_UNUSED(index_);
+  for(int ncol = start_; ncol <= end_; ++ncol) {
+    hideColumn(ncol);
+  }
+  updateHeaderMenu(); // make sure to update checkable actions
 }
 
 void DetailedListView::checkHeader() {

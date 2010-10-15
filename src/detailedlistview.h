@@ -151,6 +151,7 @@ private slots:
   void showAllColumns();
   void hideAllColumns();
   void resizeColumnsToContents();
+  void hideNewColumn(const QModelIndex& index, int start, int end);
 //  void slotCacheColumnWidth(int section, int oldSize, int newSize);
 
 private:

@@ -648,8 +648,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, bool overwrite_,
     return false;
   }
   bool ret = true;
-  FieldList fields = e1->collection()->fields();
-  foreach(FieldPtr field, fields) {
+  foreach(FieldPtr field, e1->collection()->fields()) {
     if(e2->field(field).isEmpty()) {
       continue;
     }
