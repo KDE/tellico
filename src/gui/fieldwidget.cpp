@@ -44,7 +44,6 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QStyle>
-#include <QTimer>
 #include <QHBoxLayout>
 
 namespace {
@@ -137,8 +136,6 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   l->addWidget(m_editMultiple);
 
   setWhatsThis(field_->description());
-  // after letting the subclass get created, insert default value
-  QTimer::singleShot(0, this, SLOT(insertDefault()));
 }
 
 void FieldWidget::insertDefault() {

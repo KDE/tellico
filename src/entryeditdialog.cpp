@@ -189,6 +189,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
       if(!widget) {
         continue;
       }
+      widget->insertDefault();
       connect(widget, SIGNAL(valueChanged(Tellico::Data::FieldPtr)), SLOT(fieldValueChanged(Tellico::Data::FieldPtr)));
       if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
@@ -420,7 +421,6 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   }
 
   if(entries_.isEmpty()) {
-//    myDebug() << "empty list";
     if(queryModified()) {
       blockSignals(true);
       slotHandleNew();
@@ -428,8 +428,6 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
     }
     return;
   }
-
-//  myDebug() << entries_.count() << " entries";
 
   // if some entries get selected in one view, then in another, don't reset
   if(!m_needReset && entries_ == m_currEntries) {
@@ -520,7 +518,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
     setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
     slotSetModified(false);
   } else {
-    // saving is necessary for unoqnwed entries
+    // saving is necessary for unowned entries
     slotSetModified(true);
   }
   m_isWorking = false;
@@ -713,6 +711,7 @@ void EntryEditDialog::addEntries(Tellico::Data::EntryList entries_) {
 }
 
 void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
+  DEBUG_BLOCK;
   bool updateContents = false;
   foreach(Data::EntryPtr entry, entries_) {
     updateCompletions(entry);
