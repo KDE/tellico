@@ -40,19 +40,27 @@ class MergeEntries : public QUndoCommand {
 public:
   MergeEntries(QUndoCommand* updater, Data::EntryPtr currEntry_, Data::EntryPtr newEntry_, bool overWrite_)
     : QUndoCommand(updater)
-    , m_oldEntry(new Data::Entry(*currEntry_)) {
+    , m_currEntry(currEntry_)
+    , m_newEntry(newEntry_)
+    , m_orphanEntry(new Data::Entry(*currEntry_))
+    , m_overWrite(overWrite_) {
     // we merge the entries here instead of in redo() because this
     // command is never called without also calling ModifyEntries()
     // which takes care of copying the entry values
-    Data::Document::mergeEntry(currEntry_, newEntry_, overWrite_);
+//    Data::Document::mergeEntry(currEntry_, newEntry_, overWrite_);
   }
 
-  virtual void redo() {} // does nothing
+  virtual void redo() {
+    Data::Document::mergeEntry(m_currEntry, m_newEntry, m_overWrite);
+  }
   virtual void undo() {} // does nothing
-  Data::EntryPtr oldEntry() const { return m_oldEntry; }
+  Data::EntryPtr orphanEntry() const { return m_orphanEntry; }
 
 private:
-  Data::EntryPtr m_oldEntry;
+  Data::EntryPtr m_currEntry;
+  Data::EntryPtr m_newEntry;
+  Data::EntryPtr m_orphanEntry;
+  bool m_overWrite;
 };
   }
 }
@@ -97,12 +105,13 @@ void UpdateEntries::redo() {
     // m_oldEntry is in the current collection
     // m_newEntry isn't...
     MergeEntries* cmd = new MergeEntries(this, m_oldEntry, m_newEntry, m_overWrite);
-    // cmd->oldEntry() returns a copy of m_oldEntry before values were merged
+    // cmd->orphanEntry() returns a copy of m_oldEntry before values were merged
     // m_oldEntry has new values
     // in the ModifyEntries command, the second entry should be owned by the current
     // collection and contain the updated values
     // the first one is not owned by current collection
-    new ModifyEntries(this, m_coll, Data::EntryList() << cmd->oldEntry(), Data::EntryList() << m_oldEntry, updatedFields);
+    new ModifyEntries(this, m_coll, Data::EntryList() << cmd->orphanEntry(), Data::EntryList() << m_oldEntry, updatedFields);
   }
+  // calls redo() on all child command
   QUndoCommand::redo();
 }

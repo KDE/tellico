@@ -80,7 +80,7 @@ public:
   virtual void    addEntries(Data::EntryList entries);
   virtual void modifyEntries(Data::EntryList entries);
 
-  virtual void    addField(Data::CollPtr coll, Data::FieldPtr) { setLayout(coll); }
+  virtual void    addField(Data::CollPtr coll, Data::FieldPtr field);
   /**
    * Updates a widget when its field has been modified. The category may have changed, completions may have
    * been added or removed, or what-have-you.

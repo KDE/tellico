@@ -657,6 +657,12 @@ bool EntryEditDialog::queryModified() {
   return ok;
 }
 
+void EntryEditDialog::addField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr field_) {
+  Q_ASSERT(coll_ == m_currColl);
+  Q_UNUSED(field_);
+  setLayout(coll_);
+}
+
 // modified fields will always have the same name
 void EntryEditDialog::modifyField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr oldField_, Tellico::Data::FieldPtr newField_) {
 //  myDebug() << newField_->name();
@@ -711,7 +717,6 @@ void EntryEditDialog::addEntries(Tellico::Data::EntryList entries_) {
 }
 
 void EntryEditDialog::modifyEntries(Tellico::Data::EntryList entries_) {
-  DEBUG_BLOCK;
   bool updateContents = false;
   foreach(Data::EntryPtr entry, entries_) {
     updateCompletions(entry);

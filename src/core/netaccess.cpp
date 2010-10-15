@@ -63,7 +63,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   }
 #if 0
   // some http files get returned gzip'd and file_copy just copies the gzipd data
-  // but the FileRef can't handlle that  automatically
+  // but the FileRef can't handle that automatically
   KIO::Job* getJob = KIO::file_copy(url_, dest, -1, flags);
   if(KIO::NetAccess::synchronousRun(getJob, window_)) {
     return true;
@@ -81,7 +81,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
     myWarning() << "failed to write to" << target_;
   }
 #endif
-  if(getJob->ui()) {
+  if(!quiet_ && getJob->ui()) {
     getJob->ui()->showErrorMessage();
   }
   return false;
