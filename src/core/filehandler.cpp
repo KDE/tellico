@@ -56,12 +56,12 @@ FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_) : m_device(0), m_is
 
   if(!Tellico::NetAccess::download(url_, m_filename, GUI::Proxy::widget(), quiet_)) {
     myDebug() << "can't download" << url_;
-    QString s = KIO::NetAccess::lastErrorString();
+    QString s = Tellico::NetAccess::lastErrorString();
     if(!s.isEmpty()) {
       myDebug() << s;
     }
     if(!quiet_) {
-      GUI::Proxy::sorry(i18n(errorLoad, url_.fileName()));
+      GUI::Proxy::sorry(s.isEmpty() ? i18n(errorLoad, url_.fileName()) : s);
     }
     return;
   }

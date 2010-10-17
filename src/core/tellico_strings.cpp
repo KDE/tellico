@@ -26,6 +26,7 @@
 
 #include <klocale.h>
 
+const char* Tellico::errorOpen = I18N_NOOP("Tellico is unable to open the file - %1.");
 const char* Tellico::errorLoad = I18N_NOOP("Tellico is unable to load the file - %1.");
 const char* Tellico::errorWrite = I18N_NOOP("Tellico is unable to write the file - %1.");
 const char* Tellico::errorUpload = I18N_NOOP("Tellico is unable to upload the file - %1.");

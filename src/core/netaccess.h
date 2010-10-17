@@ -42,11 +42,14 @@ public:
   static QPixmap filePreview(const KFileItem& item, int size=196);
   static void removeTempFile(const QString& name);
 
+  static QString lastErrorString();
+
 private slots:
   void slotPreview(const KFileItem& item, const QPixmap& pix);
 
 private:
   QPixmap m_preview;
+  static QString s_lastErrorMessage;
 };
 
 }

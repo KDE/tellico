@@ -26,6 +26,7 @@
 #define TELLICO_STRINGS_H
 
 namespace Tellico {
+  extern const char* errorOpen;
   extern const char* errorLoad;
   extern const char* errorWrite;
   extern const char* errorUpload;
