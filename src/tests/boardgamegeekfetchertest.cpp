@@ -38,7 +38,7 @@
 #include <KStandardDirs>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( BoardGameGeekFetcherTest, GUI )
+QTEST_KDEMAIN( BoardGameGeekFetcherTest, NoGUI )
 
 BoardGameGeekFetcherTest::BoardGameGeekFetcherTest() : m_loop(this) {
 }

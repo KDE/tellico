@@ -189,11 +189,11 @@ def getGameDetails(ids)
 
         # retrieve cover
         coverurl = g.elements['thumbnail'] != nil ? g.elements['thumbnail'].text : nil
-        if( coverurl =~ /images.boardgamegeek.com(.*)$/ )
-          # puts "downloading... " + $1
+        if( coverurl =~ /http:\/\/([^\/]*)\/(.*)$/ )
+          # puts "downloading... " + $2
           cover = nil
-          Net::HTTP.start('images.boardgamegeek.com', 80) do |http|
-            cover = (http.get($1, {"User-Agent" => "BoardGameGeek plugin for Tellico #{$my_version}"}))
+          Net::HTTP.start($1, 80) do |http|
+            cover = (http.get("/"+$2, {"User-Agent" => "BoardGameGeek plugin for Tellico #{$my_version}"}))
           end
           case cover
           when Net::HTTPOK then
