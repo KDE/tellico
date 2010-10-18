@@ -283,7 +283,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
       articleUrl.addPath(article_id);
       articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
       articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
-      const QString output = FileHandler::readTextFile(articleUrl, false, true);
+      const QString output = FileHandler::readTextFile(articleUrl, true, true);
       if(!output.isEmpty()) {
         entry->setField(article_field, output);
       }
@@ -504,9 +504,12 @@ void FreebaseFetcher::slotComplete(KJob*) {
       case Data::Collection::Album:
         {
           entry->setField(QLatin1String("artist"), value(resultMap, "artist"));
+          if(entry->field(QLatin1String("artist")).isEmpty()) {
+            entry->setField(QLatin1String("artist"), value(resultMap, "credited_as"));
+          }
           entry->setField(QLatin1String("year"),   value(resultMap, "release_date").left(4));
-          entry->setField(QLatin1String("label"),  value(resultMap, "label"));
-          entry->setField(QLatin1String("genre"),  value(resultMap, "genre"));
+          entry->setField(QLatin1String("label"),  value(resultMap, "album", "label"));
+          entry->setField(QLatin1String("genre"),  value(resultMap, "album", "genre"));
 
           QStringList trackList;
           const QVariantList trackResult = resultMap.value(QLatin1String("track")).toList();
@@ -570,6 +573,14 @@ void FreebaseFetcher::slotComplete(KJob*) {
 
     // the the image and article ids. The actual content gets loaded in fetchEntryHook()
     entry->setField(QLatin1String("cover"), value(resultMap, "/common/topic/image", "id"));
+    if(type == Data::Collection::Album && entry->field(QLatin1String("cover")).isEmpty()) {
+      // musical releases can have the image from the album
+      QVariantList albumList = resultMap.value(QLatin1String("album")).toList();
+      if(!albumList.isEmpty()) {
+        QVariantMap albumMap = albumList.at(0).toMap();
+        entry->setField(QLatin1String("cover"), value(albumMap, "/common/topic/image", "id"));
+      }
+    }
     if(type == Data::Collection::Video) {
       entry->setField(QLatin1String("plot"), value(resultMap, "/common/topic/article", "id"));
     } else if(type == Data::Collection::Game || type == Data::Collection::BoardGame) {
@@ -790,7 +801,7 @@ QVariantList FreebaseFetcher::movieQueries() const {
 
 QVariantList FreebaseFetcher::musicQueries() const {
   QVariantMap query;
-  query.insert(QLatin1String("type"), QLatin1String("/music/album"));
+  query.insert(QLatin1String("type"), QLatin1String("/music/release"));
 
   QVariantMap track_query;
   track_query.insert(QLatin1String("type"), QLatin1String("/music/track"));
@@ -800,22 +811,47 @@ QVariantList FreebaseFetcher::musicQueries() const {
   track_query.insert(QLatin1String("optional"), QLatin1String("optional"));
   query.insert(QLatin1String("track"), QVariantList() << track_query);
 
+  QVariantMap album_query;
+//  album_query.insert(QLatin1String("type"), QLatin1String("/music/album"));
+  album_query.insert(QLatin1String("label"), QVariantList());
+  album_query.insert(QLatin1String("genre"), QVariantList());
+  album_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+
+  // the image and article can be under the album attribute instead of release
+  QVariantMap id_query;
+  id_query.insert(QLatin1String("id"), QVariantList());
+  id_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  id_query.insert(QLatin1String("limit"), 1);
+  album_query.insert(QLatin1String("/common/topic/image"), id_query);
+  album_query.insert(QLatin1String("/common/topic/article"), id_query);
+  query.insert(QLatin1String("album"), QVariantList() << album_query);
+
+  QVariantList queries;
   switch(request().key) {
     case Title:
       query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      queries << query;
       break;
 
     case Person:
-      query.insert(QLatin1String("artist~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      {
+        //release/artist and //release/credited_as are both rawstrings, so they're case sensitive
+        // match against album artist instead
+        QVariantMap albumQuery = query.value(QLatin1String("album")).toList().at(0).toMap();
+        albumQuery.remove(QLatin1String("optional"));
+        albumQuery.insert(QLatin1String("artist~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+
+        query.insert(QLatin1String("album"), QVariantList() << albumQuery);
+        queries << query;
+      }
       break;
 
     default:
       myWarning() << "bad request key:" << request().key;
-      return QVariantList();
       break;
   }
 
-  return QVariantList() << query;
+  return queries;
 }
 
 QVariantList FreebaseFetcher::videoGameQueries() const {

@@ -1,3 +1,7 @@
+2010-10-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Freebase source for adapted /music/release schema.
+
 2010-10-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDb data source for new layout (Bug: 253549).
