@@ -121,7 +121,9 @@ Tellico::Data::CollPtr CSVImporter::collection() {
     Data::EntryPtr entry(new Data::Entry(m_coll));
     QStringList values = m_parser->nextTokens();
     for(int i = 0; i < names.size(); ++i) {
-//      QString value = values[cols[i]].simplified();
+      if(cols[i] >= values.size()) {
+        break;
+      }
       QString value = values[cols[i]].trimmed();
       if(replaceColDelimiter) {
         value.replace(m_colDelimiter, FieldFormat::columnDelimiterString());
