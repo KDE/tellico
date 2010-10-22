@@ -36,6 +36,7 @@
 #include <QRegExp>
 #include <QDir>
 #include <QTextCodec>
+#include <QTextDocument>
 
 namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
@@ -46,17 +47,7 @@ QString Tellico::decodeHTML(const QByteArray& data_) {
 }
 
 QString Tellico::decodeHTML(QString text) {
-  QRegExp rx(QLatin1String("&(.+);"));
-  rx.setMinimal(true);
-  int pos = rx.indexIn(text);
-  while(pos > -1) {
-    QChar c = KCharsets::fromEntity(rx.cap(1));
-    if(!c.isNull()) {
-      text.replace(pos, rx.matchedLength(), c);
-    }
-    pos = rx.indexIn(text, pos+1);
-  }
-  return text;
+  return KCharsets::resolveEntities(text);
 }
 
 QString Tellico::uid(int l, bool prefix) {
@@ -94,7 +85,8 @@ QString Tellico::i18nReplace(QString text) {
   static QRegExp rx(QLatin1String("(?:\\n+ *)*<i18n>([^<]*)</i18n>(?: *\\n+)*"));
   int pos = rx.indexIn(text);
   while(pos > -1) {
-    text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).toUtf8()));
+    // KDE bug 254863, be sure to escape just in case of spurious & entities
+    text.replace(pos, rx.matchedLength(), Qt::escape(i18n(rx.cap(1).toUtf8())));
     pos = rx.indexIn(text, pos+rx.matchedLength());
   }
   return text;

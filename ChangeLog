@@ -1,3 +1,7 @@
+2010-10-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed error in Italian translation that caused HTML error and add workaround for future problems (Bug: 254863).
+
 2010-10-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Freebase source for adapted /music/release schema.
