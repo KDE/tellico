@@ -949,7 +949,7 @@ void ConfigDialog::slotModifySourceClicked() {
   if(!cw) {
     // no config widget for this one
     // might be because support was compiled out
-    myDebug() << "no config widget for source" << item->data(Qt::DisplayRole);
+    myDebug() << "no config widget for source" << item->data(Qt::DisplayRole).toString();
     return;
   }
   FetcherConfigDialog dlg(item->data(Qt::DisplayRole).toString(), item->fetchType(), item->updateOverwrite(), cw, this);
