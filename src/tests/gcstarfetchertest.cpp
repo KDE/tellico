@@ -65,7 +65,7 @@ void GCstarFetcherTest::testSnowyRiver() {
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "The Man From Snowy River");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Superman Returns");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GCstarPluginFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -81,8 +81,8 @@ void GCstarFetcherTest::testSnowyRiver() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = m_results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
-  QCOMPARE(entry->field("year"), QLatin1String("1982"));
+  QCOMPARE(entry->field("title"), QLatin1String("Superman Returns"));
+  QCOMPARE(entry->field("year"), QLatin1String("2006"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
 }
