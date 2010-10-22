@@ -98,6 +98,8 @@ QString XMPHandler::extractXMP(const QString& file) {
   } else {
     myDebug() << "unable to parse " << file;
   }
+#else
+  Q_UNUSED(file);
 #endif
   return result;
 }

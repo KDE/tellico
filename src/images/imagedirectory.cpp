@@ -133,6 +133,7 @@ QString TemporaryImageDirectory::path() {
 }
 
 void TemporaryImageDirectory::setPath(const QString& path) {
+  Q_UNUSED(path);
   Q_ASSERT(path.isEmpty()); // should never be called, that's why it's private
 }
 
