@@ -67,11 +67,14 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   }
 
   // KIO::storedGet seems to handle Content-Encoding: gzip ok
-  KIO::StoredTransferJob* getJob = KIO::storedGet(url_, KIO::NoReload, flags);
-  if(KIO::NetAccess::synchronousRun(getJob, window_)) {
+  QByteArray data;
+//  KIO::StoredTransferJob* getJob = KIO::storedGet(url_, KIO::NoReload, flags);
+  KIO::TransferJob* getJob = KIO::get(url_, KIO::NoReload, flags);
+  if(KIO::NetAccess::synchronousRun(getJob, window_, &data)) {
     QFile f(target_);
     if(f.open(QIODevice::WriteOnly)) {
-      if(f.write(getJob->data()) > -1) {
+//      if(f.write(getJob->data()) > -1) {
+      if(f.write(data) > -1) {
         return true;
       } else {
         s_lastErrorMessage = i18n(errorWrite, target_);

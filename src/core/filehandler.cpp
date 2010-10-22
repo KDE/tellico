@@ -23,13 +23,13 @@
  ***************************************************************************/
 
 #include "filehandler.h"
-#include "../images/image.h"
 #include "tellico_strings.h"
-#include "../tellico_debug.h"
 #include "netaccess.h"
+#include "../images/image.h"
 #include "../gui/cursorsaver.h"
 #include "../gui/guiproxy.h"
 #include "../utils/xmlhandler.h"
+#include "../tellico_debug.h"
 
 #include <kurl.h>
 #include <klocale.h>
@@ -178,7 +178,6 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, 
   tempFile.setAutoRemove(true);
   KUrl tempURL;
   tempURL.setPath(tempFile.fileName());
-  myDebug() << "Temp file:" << tempURL;
 
   KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
   job->addMetaData(QLatin1String("referrer"), referrer_.url());
