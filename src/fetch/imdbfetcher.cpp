@@ -751,7 +751,12 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   }
   if(coll->hasField(imdb) && coll->fieldByName(imdb)->type() == Data::Field::URL) {
     m_url.setQuery(QString());
-    entry->setField(imdb, m_url.url());
+    // we want to strip the "/combined" fromt he url
+    QString url = m_url.url();
+    if(url.endsWith(QLatin1String("/combined"))) {
+      url = m_url.upUrl().url();
+    }
+    entry->setField(imdb, url);
   }
   return entry;
 }
@@ -1113,7 +1118,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
 void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
   const QString genre = QLatin1String("/Genres/");
   const QString country = QLatin1String("/country/");
-  const QString lang = QLatin1String("/Languages/");
+  const QString lang = QLatin1String("/language/");
   const QString colorInfo = QLatin1String("colors=");
   const QString cert = QLatin1String("certificates=");
   const QString soundMix = QLatin1String("sound_mixes=");
