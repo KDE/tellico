@@ -255,6 +255,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     const QString id = ImageFactory::addImage(imageUrl, true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+      entry->setField(QLatin1String("cover"), QString());
     } else {
       // all relevant collection types have cover fields
       entry->setField(QLatin1String("cover"), id);
@@ -262,8 +263,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
   }
 
   QString article_field;
-  const int type = entry->collection()->type();
-  switch(type) {
+  switch(entry->collection()->type()) {
     case Data::Collection::Video:
       article_field = QLatin1String("plot");
       break;
@@ -284,7 +284,9 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
       articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
       articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
       const QString output = FileHandler::readTextFile(articleUrl, true, true);
-      if(!output.isEmpty()) {
+      if(output.isEmpty()) {
+        entry->setField(article_field, QString());
+      } else {
         entry->setField(article_field, output);
       }
     }
