@@ -545,7 +545,7 @@ void Collection::updateDicts(const Tellico::Data::EntryList& entries_, const QSt
   }
   QStringList modifiedFields = fields_;
   if(modifiedFields.isEmpty()) {
-    myDebug() << "updating all fields";
+//    myDebug() << "updating all fields";
     modifiedFields = fieldNames();
   }
   removeEntriesFromDicts(entries_, modifiedFields);
