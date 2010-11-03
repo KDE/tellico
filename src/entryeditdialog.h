@@ -123,6 +123,9 @@ public slots:
    */
   void slotSetModified(bool modified=true);
 
+protected slots:
+  virtual void slotButtonClicked(int button);
+
 private slots:
   void fieldValueChanged(Tellico::Data::FieldPtr field);
 
@@ -141,6 +144,7 @@ private:
    * @param entry A pointer to the entry
    */
   void updateCompletions(Data::EntryPtr entry);
+  virtual void closeEvent(QCloseEvent* event);
 
   Data::CollPtr m_currColl;
   Data::EntryList m_currEntries;

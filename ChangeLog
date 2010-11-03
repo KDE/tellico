@@ -1,3 +1,7 @@
+2010-11-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed edit dialog behavior when closing to be consistent with discarding data (Bug: 255938).
+
 2010-10-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed error in Italian translation that caused HTML error and add workaround for future problems (Bug: 254863).

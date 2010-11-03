@@ -45,6 +45,7 @@
 #include <QStyle>
 #include <QApplication>
 #include <QGridLayout>
+#include <QCloseEvent>
 
 namespace {
   // must be an even number
@@ -74,7 +75,8 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   setButtonGuiItem(m_saveBtn, save);
   enableButton(m_saveBtn, false);
 
-  connect(this, SIGNAL(closeClicked()), SLOT(slotClose()));
+  // close is handled by slotButtonClicked()
+//  connect(this, SIGNAL(closeClicked()), SLOT(slotClose()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
   connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
 
@@ -84,14 +86,24 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   restoreDialogSize(config);
 }
 
+// we want to try the close button
+void EntryEditDialog::slotButtonClicked(int button_) {
+  if(button_ == KDialog::Close) {
+    slotClose();
+  } else {
+    KDialog::slotButtonClicked(button_);
+  }
+}
+
 void EntryEditDialog::slotClose() {
   // check to see if an entry should be saved before hiding
   // block signals so the entry view and selection isn't cleared
   if(queryModified()) {
     hide();
-//    blockSignals(true);
-//    slotHandleNew();
-//    blockSignals(false);
+    // make sure to reset values in the dialog
+    m_needReset = true;
+    setContents(m_currEntries);
+    slotSetModified(false);
     KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
     saveDialogSize(config);
   }
@@ -625,7 +637,7 @@ void EntryEditDialog::slotSetModified(bool mod_/*=true*/) {
 }
 
 bool EntryEditDialog::queryModified() {
-//  myDebug() << "modified is " << (m_modified?"true":"false");
+//  myDebug() << "modified is" << m_modified;
   bool ok = true;
   // assume that if the dialog is hidden, we shouldn't ask the user to modify changes
   if(!isVisible()) {
@@ -735,6 +747,16 @@ void EntryEditDialog::fieldValueChanged(Data::FieldPtr field_) {
     m_modifiedFields.append(field_);
   }
   slotSetModified();
+}
+
+void EntryEditDialog::closeEvent(QCloseEvent* event_) {
+  // check to see if an entry should be saved before hiding
+  // block signals so the entry view and selection isn't cleared
+  if(queryModified()) {
+    KDialog::closeEvent(event_);
+  } else {
+    event_->ignore();
+  }
 }
 
 #include "entryeditdialog.moc"
