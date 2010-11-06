@@ -479,7 +479,9 @@ void FreebaseFetcher::slotComplete(KJob*) {
           entry->setField(QLatin1String("genre"),         value(resultMap, "genre"));
           entry->setField(QLatin1String("nationality"),   value(resultMap, "country"));
           entry->setField(QLatin1String("keyword"),       value(resultMap, "subjects"));
-          entry->setField(QLatin1String("certification"), value(resultMap, "rating"));
+          // sometimes the rating comes back with multiple values
+          const QStringList certs = FieldFormat::splitValue(value(resultMap, "rating"));
+          entry->setField(QLatin1String("certification"), certs.isEmpty() ? QString() : certs.first());
           entry->setField(QLatin1String("year"),          value(resultMap, "initial_release_date").left(4));
           entry->setField(QLatin1String("running-time"),  value(resultMap, "runtime", "runtime"));
 
@@ -510,7 +512,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
             entry->setField(QLatin1String("artist"), value(resultMap, "credited_as"));
           }
           entry->setField(QLatin1String("year"),   value(resultMap, "release_date").left(4));
-          entry->setField(QLatin1String("label"),  value(resultMap, "album", "label"));
+          entry->setField(QLatin1String("label"),  value(resultMap, "label"));
           entry->setField(QLatin1String("genre"),  value(resultMap, "album", "genre"));
 
           QStringList trackList;
@@ -815,7 +817,7 @@ QVariantList FreebaseFetcher::musicQueries() const {
 
   QVariantMap album_query;
 //  album_query.insert(QLatin1String("type"), QLatin1String("/music/album"));
-  album_query.insert(QLatin1String("label"), QVariantList());
+//  album_query.insert(QLatin1String("label"), QVariantList());
   album_query.insert(QLatin1String("genre"), QVariantList());
   album_query.insert(QLatin1String("optional"), QLatin1String("optional"));
 
@@ -826,6 +828,7 @@ QVariantList FreebaseFetcher::musicQueries() const {
   id_query.insert(QLatin1String("limit"), 1);
   album_query.insert(QLatin1String("/common/topic/image"), id_query);
   album_query.insert(QLatin1String("/common/topic/article"), id_query);
+
   query.insert(QLatin1String("album"), QVariantList() << album_query);
 
   QVariantList queries;

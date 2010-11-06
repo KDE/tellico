@@ -40,6 +40,8 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
+#include <QDebug>
+
 QTEST_KDEMAIN( FreebaseFetcherTest, GUI )
 
 #define QL1(x) QString::fromLatin1(x)
@@ -222,17 +224,22 @@ void FreebaseFetcherTest::testMovieTitle() {
   job->start();
   m_loop.exec();
 
-  QVERIFY(!m_results.isEmpty());
+  QVERIFY(m_results.size() > 0);
 
-  Tellico::Data::EntryPtr entry;  // freebase results can be randomly ordered, loop until we know we found the one we want
+  Tellico::Data::EntryPtr entry;  // freebase results can be randomly ordered, loop until wee find the one we want
   for(int i = 0; i < m_results.size(); ++i) {
-    entry = m_results.at(i);
-    if(entry->field(QLatin1String("title")) == QLatin1String("The Man From Snowy River")) {
+    Tellico::Data::EntryPtr test = m_results.at(i);
+    if(test->field(QLatin1String("title")).toLower() == QLatin1String("the man from snowy river") &&
+       test->field(QLatin1String("director")) == QLatin1String("George T. Miller")) {
+      entry = test;
       break;
+    } else {
+      qDebug() << "skipping" << test->title();
     }
   }
+  QVERIFY(entry);
 
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Man From Snowy River"));
+  QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("the man from snowy river"));
   QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("George T. Miller"));
   QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Simon Wincer"));
   QCOMPARE(entry->field(QLatin1String("writer")), QLatin1String("Banjo Paterson"));
@@ -293,7 +300,8 @@ void FreebaseFetcherTest::testMusicTitle() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("If I Left the Zoo"));
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Jars of Clay"));
-  QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("Essential Records"));
+// as of Tellico 2.3.1, freebase was updating to musicbrainz data and label wasn't working
+//  QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("Essential Records"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1999"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Folk rock; Pop music; Christian music"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
