@@ -122,7 +122,7 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
     QDomElement e = n.toElement();
     if(!e.isNull()) {
       m_total = e.text().toInt();
-      myDebug() << "total = " << m_total;
+//      myDebug() << "total = " << m_total;
     }
 
     if(m_needPersonId) {
