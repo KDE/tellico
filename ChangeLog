@@ -1,3 +1,7 @@
+2010-11-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with list view settings not being saved between sessions (Bug 256373).
+
 2010-11-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.1.

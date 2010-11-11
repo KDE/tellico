@@ -133,8 +133,13 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     }
   }
 
+  // we don't want to immediately hide all these columns when adding fields
+  disconnect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)),
+             this, SLOT(hideNewColumn(const QModelIndex&, int, int)));
   sourceModel()->setImagesAreAvailable(false);
   sourceModel()->setFields(coll_->fields());
+  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)),
+          this, SLOT(hideNewColumn(const QModelIndex&, int, int)));
 
   // we're not using saveState() and restoreState() since our columns are variable
   QStringList columnNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
