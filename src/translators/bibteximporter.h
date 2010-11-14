@@ -34,8 +34,8 @@ extern "C" {
 #include <btparse.h>
 #else
 #include "btparse/btparse.h"
-}
 #endif
+}
 
 #include <QList>
 #include <QHash>
