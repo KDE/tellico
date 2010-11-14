@@ -35,7 +35,7 @@ class Image;
 
 class ImageInfo {
 public:
-  ImageInfo() {}
+  ImageInfo() : linkOnly(false), m_width(0), m_height(0) {}
   explicit ImageInfo(const Image& img);
   ImageInfo(const QString& id, const QByteArray& format, int w, int h, bool link);
   bool isNull() const { return id.isEmpty(); }
