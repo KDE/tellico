@@ -163,8 +163,8 @@ Tellico::Data::CollPtr RISImporter::collection() {
   }
   emit signalTotalSteps(this, urls().count() * 100);
 
-  int count = 0;
   if(text().isEmpty()) {
+    int count = 0;
     foreach(const KUrl& url, urls()) {
       if(m_cancelled)  {
         break;
