@@ -1,3 +1,7 @@
+2010-11-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with updating groups for derived values (Bug 256374).
+
 2010-11-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with list view settings not being saved between sessions (Bug 256373).

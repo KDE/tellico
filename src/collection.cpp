@@ -380,7 +380,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   }
 
   if(resetGroups) {
-    myLog() << "invalidating groups";
+//    myLog() << "invalidating groups";
     invalidateGroups();
   }
 
@@ -514,17 +514,18 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
 }
 
 void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_, const QStringList& fields_) {
-  QList<EntryGroup*> modifiedGroups;
+  QSet<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
     // need a copy of the vector since it gets changed
     QList<EntryGroup*> groups = entry->groups();
     foreach(EntryGroup* group, groups) {
       // only clear groups for the modified fields, skip the others
-      if(!fields_.contains(group->fieldName()))  {
+      // also clear for all derived values, just in case
+      if(!fields_.contains(group->fieldName()) && !fieldByName(group->fieldName())->hasFlag(Field::Derived))  {
         continue;
       }
-      if(entry->removeFromGroup(group) && !modifiedGroups.contains(group)) {
-        modifiedGroups.append(group);
+      if(entry->removeFromGroup(group)) {
+        modifiedGroups.insert(group);
       }
       if(group->isEmpty() && !m_groupsToDelete.contains(group)) {
         m_groupsToDelete.push_back(group);
@@ -532,7 +533,7 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
     }
   }
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups);
+    emit signalGroupsModified(CollPtr(this), modifiedGroups.toList());
   }
 }
 
