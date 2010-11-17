@@ -285,7 +285,7 @@
   </tr>
  </table>
 
- <!-- doo all the track fields first -->
+ <!-- do all the track fields first -->
  <xsl:variable name="artist" select="tc:artists/tc:artist[1]"/>
  <xsl:for-each select="$tracks">
   <xsl:variable name="fieldName" select="current()/@name"/>
@@ -325,7 +325,7 @@
      <xsl:value-of select="."/>
     </td>
    </tr>
-   <xsl:for-each select="$fields">
+   <xsl:for-each select="$fields[@name != 'id' and @name != 'cdate' and @name != 'mdate']">
     <xsl:if test="$entry//*[local-name(.)=current()/@name]">
      <tr>
       <xsl:choose>

@@ -429,8 +429,8 @@
      <table>
       <tbody>
        <!-- already used title, so skip it -->
-       <!-- don't show id either -->
-       <xsl:for-each select="$fields[@name != 'title' and @name != 'id']">
+       <!-- don't show id or internal dates either -->
+       <xsl:for-each select="$fields[@name != 'title' and @name != 'id' and @name != 'cdate' and @name != 'mdate']">
         <tr>
          <th class="fieldName" valign="top">
           <xsl:value-of select="@title"/>

@@ -425,7 +425,10 @@
     </thead>
     <tbody>
     <xsl:for-each select="key('fieldsByCat', .)[@name != 'directors-cut' and
-                          @name != 'widescreen']">
+                                                @name != 'widescreen' and
+                                                @name != 'id' and
+                                                @name != 'cdate' and
+                                                @name != 'mdate']">
      <tr>
       <xsl:choose>
        <!-- paragraphs -->

@@ -259,7 +259,7 @@
      <xsl:value-of select="."/>
     </td>
    </tr>
-   <xsl:for-each select="key('fieldsByCat', .)">
+   <xsl:for-each select="key('fieldsByCat', .)[@name != 'id' and @name != 'cdate' and @name != 'mdate']">
     <tr>
      <xsl:choose>
       <!-- paragraphs -->
