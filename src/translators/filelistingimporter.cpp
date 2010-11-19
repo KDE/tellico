@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "filelistingimporter.h"
 #include "../collections/filecatalog.h"
 #include "../entry.h"
@@ -40,8 +42,11 @@
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
+
+#ifdef HAVE_NEPOMUK
 #include <Nepomuk/Types/Property>
 #include <Nepomuk/ResourceManager>
+#endif
 
 #include <QCheckBox>
 #include <QGroupBox>
@@ -68,7 +73,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return m_coll;
   }
 
+#ifdef HAVE_NEPOMUK
   Nepomuk::ResourceManager::instance()->init();
+#endif
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
@@ -155,12 +162,14 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
       QStringList strings;
       foreach(const KFileMetaInfoItem& item, meta.items()) {
         const QString s = item.value().toString();
+#ifdef HAVE_NEPOMUK
         if(!s.isEmpty()) {
           const QString label = Nepomuk::Types::Property(item.name()).label();
           if(!metaIgnore.contains(label)) {
             strings << label + FieldFormat::columnDelimiterString() + item.prefix() + s + item.suffix();
           }
         }
+#endif
       }
       entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
     }

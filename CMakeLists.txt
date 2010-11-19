@@ -41,18 +41,9 @@ find_package(Gettext REQUIRED)
 find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
-find_package(Nepomuk REQUIRED)
 
-# The taglib cmake script is broken for older taglib versions, this works around the issue
-set(TAGLIB_INCLUDES)
-
-# Tellico used to use its own FindKcal and FindKabs cmake modules
-# now we just ust the kdepimlibs one
-#macro_optional_find_package(Kabc)
-#macro_log_feature(KABC_FOUND "kabc" "Support for reading address book" "http://pim.kde.org" FALSE "4.2.0" "")
-
-#macro_optional_find_package(Kcal)
-#macro_log_feature(KCAL_FOUND "kcal" "Support for adding loans to calendar" "http://pim.kde.org" FALSE "4.2.0" "")
+macro_optional_find_package(Nepomuk)
+macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
 
 macro_optional_find_package(KdepimLibs)
 macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.2.0" "")
@@ -60,6 +51,8 @@ macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address b
 macro_optional_find_package(KdeMultimedia)
 macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
 
+# The taglib cmake script is broken for older taglib versions, this works around the issue
+set(TAGLIB_INCLUDES)
 macro_optional_find_package(Taglib)
 macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
 if(TAGLIB_FOUND)
@@ -156,6 +149,7 @@ macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
+macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

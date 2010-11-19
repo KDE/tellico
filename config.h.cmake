@@ -39,3 +39,5 @@
 #cmakedefine HAVE_V4L
 
 #cmakedefine HAVE_QJSON
+
+#cmakedefine HAVE_NEPOMUK
