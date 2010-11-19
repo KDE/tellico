@@ -198,7 +198,7 @@ QString RTF2HTML::toHTML() const {
                case rtf_keyword::rkw_fonttbl:
                {
                   font fnt;
-                  int font_num;
+                  int font_num=0;
                   bool full_name=false;
                   bool in_font=false;
                   while (! (*buf_in=='}' && !in_font))

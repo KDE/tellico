@@ -56,7 +56,7 @@ std::string table::make()
    table_cell_defs::iterator cell_def, prev_cell_def, cell_def_2;
    table_cells::iterator cell;
    intset::iterator pt, ptp;
-   int left, right, colspan;
+   int left, right, colspan=0;
    bool btop, bbottom, bleft, bright;
    std::string style;
    for (row=begin(); row!=end();)

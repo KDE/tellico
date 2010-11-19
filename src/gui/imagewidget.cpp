@@ -280,6 +280,12 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
     loadImage(temp.fileName());
   }
   m_saneDlg->close();
+#else
+  Q_UNUSED(data);
+  Q_UNUSED(w);
+  Q_UNUSED(h);
+  Q_UNUSED(bpl);
+  Q_UNUSED(f);
 #endif
 }
 
