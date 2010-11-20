@@ -1,3 +1,7 @@
+2010-11-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Switched Nepomuk requirement to optional for file metadata. 
+
 2010-11-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with updating groups for derived values (Bug 256374).
