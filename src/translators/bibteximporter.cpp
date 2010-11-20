@@ -151,6 +151,11 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
   const uint stepSize = qMax(s_stepSize, count/100);
   const bool showProgress = options() & ImportProgress;
 
+  Data::CollPtr currentColl = currentCollection();
+  if(!currentColl) {
+    currentColl = ptr;
+  }
+
   uint j = 0;
   for(int i = 0; !m_cancelled && i < m_nodes.count(); ++i, ++j) {
     AST* node = m_nodes[i];
@@ -182,11 +187,11 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
     str = QString::fromUtf8(bt_entry_type(node));
 //    myDebug() << "entry type: " << str;
     // text is automatically put into lower-case by btparse
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str, currentCollection());
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str, currentColl);
 
     str = QString::fromUtf8(bt_entry_key(node));
 //    myDebug() << "entry key: " << str;
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str, currentCollection());
+    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str, currentColl);
 
     char* name;
     AST* field = 0;
@@ -227,7 +232,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
       if(fieldName == QLatin1String("key")) {
         myLog() << "skipping bibtex 'key' field for" << str;
       } else {
-        Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentCollection());
+        Data::BibtexCollection::setFieldValue(entry, fieldName, str, currentColl);
       }
     }
 
