@@ -295,4 +295,8 @@
   <key char="%">
     <string>\%</string>
   </key>
+  <key char="—">
+    <string>{\mdash}</string>
+    <string>---</string>
+  </key>
 </keymap>
