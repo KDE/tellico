@@ -138,6 +138,9 @@ TARGET_LINK_LIBRARIES(imdbfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(isbndbfetchertest NOGUI isbndbfetchertest.cpp)
 TARGET_LINK_LIBRARIES(isbndbfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(musicbrainzfetchertest NOGUI musicbrainzfetchertest.cpp)
+TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetch ${TELLICO_TEST_LIBS})
+
 IF( QJSON_FOUND )
     KDE4_ADD_UNIT_TEST(openlibraryfetchertest NOGUI openlibraryfetchertest.cpp)
     TARGET_LINK_LIBRARIES(openlibraryfetchertest fetch ${TELLICO_TEST_LIBS})

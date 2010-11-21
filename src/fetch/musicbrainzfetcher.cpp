@@ -171,7 +171,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
     QDomElement e = n.toElement();
     if(!e.isNull()) {
       m_total = e.attribute(QLatin1String("count")).toInt();
-      myDebug() << "total = " << m_total;
+//      myDebug() << "total = " << m_total;
     }
   }
 
