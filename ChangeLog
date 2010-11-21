@@ -1,3 +1,7 @@
+2010-11-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added cover art to MusicBrainz fetcher.
+
 2010-11-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Switched Nepomuk requirement to optional for file metadata. 

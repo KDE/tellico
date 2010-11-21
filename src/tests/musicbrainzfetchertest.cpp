@@ -78,7 +78,7 @@ void MusicBrainzFetcherTest::testTitle() {
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
 void MusicBrainzFetcherTest::testKeyword() {
@@ -104,7 +104,7 @@ void MusicBrainzFetcherTest::testKeyword() {
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
 void MusicBrainzFetcherTest::testPerson() {
@@ -139,7 +139,7 @@ void MusicBrainzFetcherTest::testPerson() {
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
 void MusicBrainzFetcherTest::slotResult(KJob* job_) {

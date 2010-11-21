@@ -39,7 +39,8 @@ class QWidget;
 namespace Tellico {
   namespace Import {
     enum Options {
-      ImportProgress = 1 << 5   // show progress bar
+      ImportProgress        = 1 << 0,   // show progress bar
+      ImportShowImageErrors = 1 << 1
     };
 
 /**

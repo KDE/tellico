@@ -107,6 +107,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   TellicoXMLHandler handler;
   handler.setLoadImages(loadImages_);
+  handler.setShowImageLoadErrors(options() & ImportShowImageErrors);
 
   QXmlSimpleReader reader;
   reader.setContentHandler(&handler);

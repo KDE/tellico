@@ -32,16 +32,16 @@ using Tellico::Import::Importer;
 // really according to taste or computer speed
 const unsigned Importer::s_stepSize = 20;
 
-Importer::Importer() : QObject(), m_options(ImportProgress) {
+Importer::Importer() : QObject(), m_options(ImportProgress | ImportShowImageErrors) {
 }
 
-Importer::Importer(const KUrl& url) : QObject(), m_options(ImportProgress), m_urls(url) {
+Importer::Importer(const KUrl& url) : QObject(), m_options(ImportProgress | ImportShowImageErrors), m_urls(url) {
 }
 
-Importer::Importer(const KUrl::List& urls) : QObject(), m_options(ImportProgress), m_urls(urls) {
+Importer::Importer(const KUrl::List& urls) : QObject(), m_options(ImportProgress | ImportShowImageErrors), m_urls(urls) {
 }
 
-Importer::Importer(const QString& text) : QObject(), m_options(ImportProgress), m_text(text) {
+Importer::Importer(const QString& text) : QObject(), m_options(ImportProgress | ImportShowImageErrors), m_text(text) {
 }
 
 Tellico::Data::CollPtr Importer::currentCollection() const {

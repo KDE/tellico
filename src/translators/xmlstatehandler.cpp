@@ -201,7 +201,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
         KUrl u(value);
         // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
-          QString result = ImageFactory::addImage(u, imageWarnings >= maxImageWarnings /* quiet */);
+          QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
           if(result.isEmpty()) {
             // clear value for the field in this case
             value.clear();

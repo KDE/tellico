@@ -49,6 +49,7 @@ public:
   bool hasImages() const;
 
   void setLoadImages(bool loadImages);
+  void setShowImageLoadErrors(bool showImageErrors);
 
 private:
   QStack<SAX::StateHandler*> m_handlers;

@@ -83,7 +83,7 @@
    </xsl:if>
   </genres>
 
-  <!-- tags are too random, don't used them -->
+  <!-- tags are too random, don't use them -->
   <!--
   <keywords>
    <xsl:for-each select="mb:tag-list/mb:tag">
@@ -98,8 +98,10 @@
   <tracks>
    <xsl:for-each select="mb:track-list/mb:track">
     <track>
+     <column>
      <xsl:value-of select="mb:title"/>
-     <xsl:text>::</xsl:text>
+     </column>
+     <column>
      <xsl:choose>
       <xsl:when test="mb:artist">
        <!-- some combinationss are separated by &,but some artists use & -->
@@ -111,13 +113,29 @@
        <xsl:value-of select="$release/mb:artist/mb:name"/>
       </xsl:otherwise>
      </xsl:choose>
-     <xsl:text>::</xsl:text>
+     </column>
+     <column>
      <xsl:call-template name="time">
       <xsl:with-param name="duration" select="mb:duration"/>
      </xsl:call-template>
+     </column>
     </track>
    </xsl:for-each>
   </tracks>
+
+  <cover>
+   <xsl:choose>
+    <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink']">
+     <xsl:value-of select="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink'][1]/@target"/>
+    </xsl:when>
+    <!-- most musicbrainz items have Amazon  ASIN values, but not all point got valid images
+         if the AmazonAsin Url is set, then it likely does -->
+    <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='AmazonAsin']">
+     <xsl:value-of select="concat('http://ecx.images-amazon.com/images/P/',mb:asin,'.01.MZZZZZZZ.jpg')"/>
+    </xsl:when>
+   </xsl:choose>
+  </cover>
+
  </entry>
 </xsl:template>
 

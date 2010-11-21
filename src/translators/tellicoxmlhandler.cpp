@@ -84,3 +84,7 @@ bool TellicoXMLHandler::hasImages() const {
 void TellicoXMLHandler::setLoadImages(bool loadImages_) {
   m_data->loadImages = loadImages_;
 }
+
+void TellicoXMLHandler::setShowImageLoadErrors(bool showImageErrors_) {
+  m_data->showImageLoadErrors = showImageErrors_;
+}
