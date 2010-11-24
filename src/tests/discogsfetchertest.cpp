@@ -57,14 +57,23 @@ void DiscogsFetcherTest::testTitle() {
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
   connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
 
   job->start();
   m_loop.exec();
 
-  QCOMPARE(m_results.size(), 1);
+  QVERIFY(m_results.size() > 0);
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
+  for(int i = 0; i < m_results.size(); ++i) {
+    Tellico::Data::EntryPtr test = m_results.at(i);
+    if(test->field(QLatin1String("artist")).toLower() == QLatin1String("evanescence")) {
+      entry = test;
+      break;
+    } else {
+      qDebug() << "skipping" << test->title();
+    }
+  }
+  QVERIFY(entry);
 
-  Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
   QVERIFY(!entry->field(QLatin1String("artist")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());

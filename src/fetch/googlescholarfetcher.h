@@ -92,6 +92,7 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
+  void setBibtexCookie();
 
   int m_limit;
   int m_start;

@@ -74,9 +74,7 @@ void GoogleScholarFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void GoogleScholarFetcher::search() {
   if(!m_cookieIsSet) {
-    // have to set preferences to have bibtex output
-    FileHandler::readTextFile(KUrl(SCHOLAR_SET_BIBTEX_URL), true);
-    m_cookieIsSet = true;
+    setBibtexCookie();
   }
   m_started = true;
   m_start = 0;
@@ -231,6 +229,36 @@ QString GoogleScholarFetcher::defaultName() {
 
 QString GoogleScholarFetcher::defaultIcon() {
   return favIcon("http://scholar.google.com");
+}
+
+void GoogleScholarFetcher::setBibtexCookie() {
+  // have to set preferences to have bibtex output
+  const QString text = FileHandler::readTextFile(KUrl(SCHOLAR_SET_BIBTEX_URL), true);
+  // find hidden input variables
+  QRegExp inputRx(QLatin1String("<input\\s+.*\\s+type\\s*=\\s*hidden\\s+.*>"));
+  inputRx.setMinimal(true);
+  QRegExp pairRx(QLatin1String("([^=\\s<]+)\\s*=\\s*\"?([^=\\s\">]+)\"?"));
+  QHash<QString, QString> nameValues;
+  for(int pos = inputRx.indexIn(text); pos > -1; pos = inputRx.indexIn(text, pos+inputRx.matchedLength())) {
+    const QString input = inputRx.cap(0);
+    QString name, value;
+    for(int pos2 = pairRx.indexIn(input); pos2 > -1; pos2 = pairRx.indexIn(input, pos2+pairRx.matchedLength())) {
+      if(pairRx.cap(1).toLower() == QLatin1String("name")) {
+        name = pairRx.cap(2);
+      } else if(pairRx.cap(1).toLower() == QLatin1String("value")) {
+        value = pairRx.cap(2);
+      }
+    }
+    if(!name.isEmpty() && !value.isEmpty()) {
+      nameValues.insert(name, value);
+    }
+  }
+  QString newUrl = QLatin1String(SCHOLAR_SET_BIBTEX_URL);
+  for(QHash<QString, QString>::const_iterator i = nameValues.constBegin(); i != nameValues.constEnd(); ++i) {
+    newUrl += QLatin1Char('&') + i.key() + QLatin1Char('=') + i.value();
+  }
+  FileHandler::readTextFile(KUrl(newUrl), true);
+  m_cookieIsSet = true;
 }
 
 GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleScholarFetcher* /*=0*/)

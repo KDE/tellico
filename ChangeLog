@@ -1,3 +1,7 @@
+2010-11-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Google Scholar fetcher to properly set bibtex cookie.
+
 2010-11-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Added cover art to MusicBrainz fetcher.

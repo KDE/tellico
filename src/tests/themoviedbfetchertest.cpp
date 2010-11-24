@@ -49,7 +49,7 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Superman Returns"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros. Pictures; Dark Castle"));
+  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros. Pictures"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2006"));
   m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action"));
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("Bryan Singer"));
@@ -75,7 +75,7 @@ void TheMovieDBFetcherTest::testTitle() {
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
-    QCOMPARE(result, i.value().toLower());
+    QVERIFY(result.contains(i.value().toLower()));
   }
   QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
