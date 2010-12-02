@@ -131,6 +131,7 @@ void FreeDBImporter::readCDROM() {
     << 278203   // Last track start.
     << 316732;  // Disc end.
 */
+/*
   list
     << 150      // First track start.
     << 3296
@@ -161,7 +162,6 @@ void FreeDBImporter::readCDROM() {
     << 206451
     << 217303   // Last track start.
     << 224925;  // Disc end.
-/*
   list
     << 150
     << 106965
@@ -275,7 +275,9 @@ void FreeDBImporter::readCDROM() {
 
   QStringList trackList;
   for(int i = 0; i < info.numberOfTracks(); ++i) {
-    QString s = info.track(i).get(KCDDB::Title).toString() + FieldFormat::columnDelimiterString() + info.get(KCDDB::Artist).toString();
+    QString s = info.track(i).get(KCDDB::Title).toString() + FieldFormat::columnDelimiterString();
+    const QString trackArtist = info.track(i).get(KCDDB::Artist).toString().trimmed();
+    s += trackArtist.isEmpty() ? info.get(KCDDB::Artist).toString() : trackArtist;
     if(i < lengths.count()) {
       s += FieldFormat::columnDelimiterString() + Tellico::minutes(lengths[i]);
     }
