@@ -152,7 +152,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
   const bool showProgress = options() & ImportProgress;
 
   Data::CollPtr currentColl = currentCollection();
-  if(!currentColl) {
+  if(!currentColl || currentColl->type() != Data::Collection::Bibtex) {
     currentColl = ptr;
   }
 
