@@ -54,7 +54,7 @@ public:
   virtual Type type() const { return Bibtex; }
   virtual bool addField(FieldPtr field);
   virtual bool modifyField(FieldPtr field);
-  virtual bool deleteField(FieldPtr field, bool force=false);
+  virtual bool removeField(FieldPtr field, bool force=false);
 
   FieldPtr fieldByBibtexName(const QString& name) const;
   EntryPtr entryByBibtexKey(const QString& key) const;

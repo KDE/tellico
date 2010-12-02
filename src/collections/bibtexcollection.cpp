@@ -299,7 +299,7 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
   return success;
 }
 
-bool BibtexCollection::deleteField(Tellico::Data::FieldPtr field_, bool force_) {
+bool BibtexCollection::removeField(Tellico::Data::FieldPtr field_, bool force_) {
   if(!field_) {
     return false;
   }
@@ -313,7 +313,7 @@ bool BibtexCollection::deleteField(Tellico::Data::FieldPtr field_, bool force_) 
 }
 
 Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
-  return FieldPtr(m_bibtexFieldDict.isEmpty() ? 0 : m_bibtexFieldDict[bibtex_]);
+  return FieldPtr(m_bibtexFieldDict.contains(bibtex_) ? m_bibtexFieldDict.value(bibtex_) : 0);
 }
 
 Tellico::Data::EntryPtr BibtexCollection::entryByBibtexKey(const QString& key_) const {
@@ -436,6 +436,8 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
 }
 
 bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_, Data::CollPtr existingColl_) {
+  Q_ASSERT(entry_->collection()->type() == Collection::Bibtex);
+  myDebug() << bibtexField_ << value_;
   BibtexCollection* c = static_cast<BibtexCollection*>(entry_->collection().data());
   FieldPtr field = c->fieldByBibtexName(bibtexField_);
   if(!field) {
@@ -446,7 +448,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
     // use it instead of creating a new one
     BibtexCollection* existingColl = dynamic_cast<BibtexCollection*>(existingColl_.data());
     FieldPtr existingField;
-    if(existingColl) {
+    if(existingColl && existingColl->type() == Collection::Bibtex) {
       existingField = existingColl->fieldByBibtexName(bibtexField_);
     }
     if(existingField) {
@@ -455,7 +457,6 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
       // arbitrarily say if the value has more than 100 chars, then it's a paragraph
       QString vlower = value_.toLower();
       // special case, try to detect URLs
-      // In qt 3.1, QString::startsWith() is always case-sensitive
       if(bibtexField_ == QLatin1String("url")
          || vlower.startsWith(QLatin1String("http")) // may also be https
          || vlower.startsWith(QLatin1String("ftp:/"))
@@ -475,6 +476,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   }
   // special case keywords, replace commas with semi-colons so they get separated
   QString value = value_;
+  Q_ASSERT(field);
   if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
     value.replace(QRegExp(QLatin1String("\\s*,\\s*")), FieldFormat::delimiterString());
     // special case refbase bibtex export, with multiple keywords fields

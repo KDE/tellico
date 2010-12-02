@@ -1,3 +1,7 @@
+2010-12-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with importing Bibtex file with keyword and keywords fields (Bug 258269);
+
 2010-11-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed Google Scholar fetcher to properly set bibtex cookie.
