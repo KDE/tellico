@@ -55,6 +55,7 @@ public:
   virtual bool addField(FieldPtr field);
   virtual bool modifyField(FieldPtr field);
   virtual bool removeField(FieldPtr field, bool force=false);
+  virtual bool removeField(const QString& name, bool force=false);
 
   FieldPtr fieldByBibtexName(const QString& name) const;
   EntryPtr entryByBibtexKey(const QString& key) const;

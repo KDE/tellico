@@ -312,6 +312,10 @@ bool BibtexCollection::removeField(Tellico::Data::FieldPtr field_, bool force_) 
   return success && Collection::removeField(field_, force_);
 }
 
+bool BibtexCollection::removeField(const QString& name_, bool force_) {
+  return removeField(fieldByName(name_), force_);
+}
+
 Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
   return FieldPtr(m_bibtexFieldDict.contains(bibtex_) ? m_bibtexFieldDict.value(bibtex_) : 0);
 }
@@ -437,9 +441,12 @@ Tellico::Data::CollPtr BibtexCollection::convertBookCollection(Tellico::Data::Co
 
 bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibtexField_, const QString& value_, Data::CollPtr existingColl_) {
   Q_ASSERT(entry_->collection()->type() == Collection::Bibtex);
-  myDebug() << bibtexField_ << value_;
   BibtexCollection* c = static_cast<BibtexCollection*>(entry_->collection().data());
   FieldPtr field = c->fieldByBibtexName(bibtexField_);
+  // special-case: "keyword" and "keywords" should be the same field.
+  if(!field && bibtexField_ == QLatin1String("keyword")) {
+    field = c->fieldByBibtexName(QLatin1String("keywords"));
+  }
   if(!field) {
     // it was the case that the default bibliography did not have a bibtex property for keywords
     // so a "keywords" field would get created in the imported collection
@@ -462,13 +469,15 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
          || vlower.startsWith(QLatin1String("ftp:/"))
          || vlower.startsWith(QLatin1String("file:/"))
          || vlower.startsWith(QLatin1String("/"))) { // assume this indicates a local path
-        myDebug() << "creating a URL field for " << bibtexField_;
+        myDebug() << "creating a URL field for" << bibtexField_;
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::URL);
       } else {
+        myDebug() << "creating a LINE field for" << bibtexField_;
         field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Line);
       }
       field->setCategory(i18n("Unknown"));
     } else {
+      myDebug() << "creating a PARA field for" << bibtexField_;
       field = new Field(bibtexField_, KStringHandler::capwords(bibtexField_), Field::Para);
     }
     field->setProperty(QLatin1String("bibtex"), bibtexField_);
@@ -477,7 +486,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   // special case keywords, replace commas with semi-colons so they get separated
   QString value = value_;
   Q_ASSERT(field);
-  if(field->property(QLatin1String("bibtex")).startsWith(QLatin1String("keyword"))) {
+  if(bibtexField_.startsWith(QLatin1String("keyword"))) {
     value.replace(QRegExp(QLatin1String("\\s*,\\s*")), FieldFormat::delimiterString());
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
