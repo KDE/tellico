@@ -243,6 +243,10 @@ void Field::setPropertyList(const Tellico::StringMap& props_) {
   m_properties = props_;
 }
 
+QString Field::property(const QString& key_) const {
+  return m_properties.contains(key_) ? m_properties.value(key_) : QString();
+}
+
 void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   if(field_->type() != Data::Field::Choice) {
     return; // nothing to do

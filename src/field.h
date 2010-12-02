@@ -288,7 +288,7 @@ public:
    * @param key The property key
    * @returnThe property value
    */
-  QString property(const QString& key) const { return m_properties[key]; }
+  QString property(const QString& key) const;
   /**
    * Return the list of properties.
    *
