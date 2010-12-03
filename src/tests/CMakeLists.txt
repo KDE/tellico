@@ -28,6 +28,9 @@ TARGET_LINK_LIBRARIES(formattest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} 
 KDE4_ADD_UNIT_TEST(fieldtest NOGUI fieldtest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(fieldtest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
+KDE4_ADD_UNIT_TEST(comparisontest NOGUI comparisontest.cpp ../fieldformat.cpp)
+TARGET_LINK_LIBRARIES(comparisontest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
+
 KDE4_ADD_UNIT_TEST(imagetest NOGUI imagetest.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(imagetest images core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
