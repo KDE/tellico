@@ -71,8 +71,6 @@ Tellico::NumberComparison::NumberComparison() : StringComparison() {
 }
 
 int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2_) {
-  // by default, an empty string would get sorted before "1" because toFloat() turns it into "0"
-  // I want the empty strings to be at the end
   bool ok1, ok2;
   float num1, num2;
 
