@@ -49,8 +49,8 @@ void ComparisonTest::testNumber_data() {
 
   QTest::newRow("null") << QString() << QString() << 0;
   QTest::newRow("empty") << QString("") << QString("") << 0;
-  QTest::newRow("< 0") << QString("") << QString("0") << 1;
-  QTest::newRow("> 0") << QString("0") << QString("") << -1;
+  QTest::newRow("< 0") << QString("") << QString("0") << -1;
+  QTest::newRow("> 0") << QString("0") << QString("") << 1;
   QTest::newRow("=1 1") << QString("1") << QString("1") << 0;
   QTest::newRow("< 1") << QString("0") << QString("1") << -1;
   QTest::newRow("> 1") << QString("1") << QString("0") << 1;
@@ -60,6 +60,7 @@ void ComparisonTest::testNumber_data() {
   QTest::newRow("< 10") << QString("5") << QString("10") << -5;
   QTest::newRow("multiple1") << QString("1; 2") << QString("2") << -1;
   QTest::newRow("multiple2") << QString("3; 2") << QString("2") << 1;
-  QTest::newRow("multiple3") << QString("1; 2") << QString("1; 3") << -1;
+  QTest::newRow("multiple3") << QString("2") << QString("2; 3") << -1;
+  QTest::newRow("multiple4") << QString("1; 2") << QString("1; 3") << -1;
 }
 
