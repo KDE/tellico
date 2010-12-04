@@ -27,6 +27,8 @@
 
 #include <QRegExp>
 
+#include "../datavectors.h"
+
 namespace Tellico {
 
 class StringComparison {
@@ -34,6 +36,8 @@ public:
   StringComparison();
   virtual ~StringComparison() {}
   virtual int compare(const QString& str1, const QString& str2);
+
+  static StringComparison* create(Data::FieldPtr field);
 };
 
 class BoolComparison : public StringComparison {

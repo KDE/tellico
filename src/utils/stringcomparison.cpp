@@ -43,6 +43,26 @@ namespace {
   }
 }
 
+Tellico::StringComparison* Tellico::StringComparison::create(Data::FieldPtr field_) {
+  if(!field_) {
+    return 0;
+  }
+  if(field_->type() == Data::Field::Number || field_->type() == Data::Field::Rating) {
+    return new NumberComparison();
+  } else if(field_->type() == Data::Field::Bool) {
+    return new BoolComparison();
+  } else if(field_->type() == Data::Field::Date || field_->formatType() == FieldFormat::FormatDate) {
+    return new ISODateComparison();
+  } else if(field_->formatType() == FieldFormat::FormatTitle) {
+    return new TitleComparison();
+  } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||
+            field_->name() == QLatin1String("lcc")) {
+    // allow LCC comparison if LCC property is set, or if the name is lcc
+    return new LCCComparison();
+  }
+  return new StringComparison();
+}
+
 Tellico::StringComparison::StringComparison() {
 }
 

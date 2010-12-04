@@ -28,6 +28,9 @@
 #include "abstractsortmodel.h"
 
 namespace Tellico {
+  namespace Data {
+    class EntryGroup;
+  }
 
 class StringComparison;
 
@@ -41,11 +44,19 @@ public:
   GroupSortModel(QObject* parent);
   virtual ~GroupSortModel();
 
+  virtual void setSourceModel(QAbstractItemModel* sourceModel);
+
 protected:
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
+private slots:
+  void clearGroupComparison();
+
 private:
+  StringComparison* getComparison(Data::EntryGroup* group) const;
+
   StringComparison* m_titleComparison;
+  mutable StringComparison* m_groupComparison;
 };
 
 } // end namespace

@@ -27,17 +27,29 @@
 #include "../field.h"
 #include "../entrygroup.h"
 #include "../utils/stringcomparison.h"
+#include "../document.h"
 #include "../tellico_debug.h"
 
 using Tellico::GroupSortModel;
 
 GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent)
-     , m_titleComparison(new TitleComparison()) {
+     , m_titleComparison(new TitleComparison())
+     , m_groupComparison(0) {
 }
 
 GroupSortModel::~GroupSortModel() {
   delete m_titleComparison;
   m_titleComparison = 0;
+  delete m_groupComparison;
+  m_groupComparison = 0;
+}
+
+void GroupSortModel::setSourceModel(QAbstractItemModel* sourceModel_) {
+  AbstractSortModel::setSourceModel(sourceModel_);
+  if(sourceModel_) {
+    connect(sourceModel_, SIGNAL(modelReset()),
+            this, SLOT(clearGroupComparison()));
+  }
 }
 
 bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
@@ -73,13 +85,41 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
       return AbstractSortModel::lessThan(left_, right_);
     }
 
-    // for now, just sort case-insensitive, localeAware
+   // if we can get the fields' type, then for certain non-text-only
+    // types use the sort defined for that type.
+    if(!m_groupComparison) {
+      m_groupComparison = getComparison(leftGroup);
+    }
+    if(m_groupComparison) {
+      QString leftEntry = leftGroup->groupName();
+      QString rightEntry = rightGroup->groupName();
+      return m_groupComparison->compare(leftEntry, rightEntry) < 0;
+    }
+    // couldn't determine the type or it's a type we want to sort
+    // alphabetically, so sort case-insensitive, localeAware
     return left_.data().toString().toUpper().localeAwareCompare(right_.data().toString().toUpper()) < 0;
-//  return AbstractSortModel::lessThan(left_, right_);
   }
 
   // for ordinary entries, just compare with title comparison
   return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
+}
+
+void GroupSortModel::clearGroupComparison() {
+  delete m_groupComparison;
+  m_groupComparison = 0;
+}
+
+// if 'group_' contains a type of field that merits a non-alphabetic
+// sort, return a pointer to the proper sort function.
+Tellico::StringComparison* GroupSortModel::getComparison(Data::EntryGroup* group_) const {
+  StringComparison* comp = 0;
+  if(group_) {
+    Data::CollPtr coll = Data::Document::self()->collection();
+    if(coll && coll->hasField(group_->fieldName())) {
+      comp = StringComparison::create(coll->fieldByName(group_->fieldName()));
+    }
+  }
+  return comp;
 }
 
 #include "groupsortmodel.moc"

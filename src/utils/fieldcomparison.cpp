@@ -34,25 +34,15 @@
 #include <QDateTime>
 
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
-  if(field_->type() == Data::Field::Number || field_->type() == Data::Field::Rating) {
-    return new ValueComparison(field_, new NumberComparison());
-  } else if(field_->type() == Data::Field::Bool) {
-    return new ValueComparison(field_, new BoolComparison());
-  } else if(field_->type() == Data::Field::Image) {
+  if(!field_) {
+    return 0;
+  }
+  if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);
-  } else if(field_->type() == Data::Field::Date || field_->formatType() == FieldFormat::FormatDate) {
-    return new ValueComparison(field_, new ISODateComparison());
   } else if(field_->type() == Data::Field::Choice) {
     return new ChoiceComparison(field_);
-  } else if(field_->formatType() == FieldFormat::FormatTitle) {
-    // derived value could be formatted as title, so put this test after derived
-    return new ValueComparison(field_, new TitleComparison());
-  } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||
-            field_->name() == QLatin1String("lcc")) {
-    // allow LCC comparison if LCC property is set, or if the name is lcc
-    return new ValueComparison(field_, new LCCComparison());
   }
-  return new ValueComparison(field_, new StringComparison());
+  return new ValueComparison(field_, StringComparison::create(field_));
 }
 
 Tellico::FieldComparison::FieldComparison(Data::FieldPtr field_) : m_field(field_) {
