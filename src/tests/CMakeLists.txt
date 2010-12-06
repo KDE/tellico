@@ -16,7 +16,7 @@ TARGET_LINK_LIBRARIES(isbntest utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} $
 KDE4_ADD_UNIT_TEST(lccntest NOGUI lccntest.cpp)
 TARGET_LINK_LIBRARIES(lccntest utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../fieldformat.cpp)
+KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(lcctest utils core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
 KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp)
@@ -28,7 +28,7 @@ TARGET_LINK_LIBRARIES(formattest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} 
 KDE4_ADD_UNIT_TEST(fieldtest NOGUI fieldtest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(fieldtest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-KDE4_ADD_UNIT_TEST(comparisontest NOGUI comparisontest.cpp ../fieldformat.cpp)
+KDE4_ADD_UNIT_TEST(comparisontest NOGUI comparisontest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(comparisontest utils core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
 KDE4_ADD_UNIT_TEST(imagetest NOGUI imagetest.cpp ../tellico_utils.cpp)

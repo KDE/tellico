@@ -1,6 +1,7 @@
 2010-12-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed sorting multiple numeric values in column view.
+	* Fixed sorting for numeric values in group view.
 
 2010-12-01  Robby Stephenson  <robby@periapsis.org>
 
