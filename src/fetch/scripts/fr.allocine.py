@@ -14,6 +14,10 @@
 # *                                                                         *
 # ***************************************************************************
 #
+# Version 0.7.3: 2010-12-07 (Reported by Romain Henriet)
+# * Fixed some regexp issues
+# * Better handling of image parsing/fetching errors
+#
 # Version 0.7.2.1: 2010-07-27 (Reported by Romain Henriet)
 # * Updated title match to allow searching without diacritical marks
 #
@@ -60,7 +64,7 @@ except ImportError:
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
 
-VERSION = "0.7.2"
+VERSION = "0.7.3"
 
 def genMD5():
 	float = random.random()
@@ -231,7 +235,7 @@ class AlloCineParser:
 
 		# Define some regexps
 		self.__regExps = {
-			'title' 	: '<div class="titlebar">.*?<h1>(?P<title>.+?)</h1>',
+			'title' 	: '<div class="titlebar">.*?<h1.*?>(?P<title>.+?)</h1>',
 			'dirs'		: """alis.*?par.*?<a.*?>(?P<step1>.+?)</a>""",
 			'nat'		: 'Long-m.*?(?P<nat>.+?)\.',
 			'genres' 	: 'Genre :(?P<step1>.+?)<br />',
@@ -240,7 +244,7 @@ class AlloCineParser:
 			'year' 		: 'Ann.*?e de production :.*?<a.*?>(?P<year>[0-9]{4})</a>',
 			'otitle' 	: 'Titre original :.*?<span.*?>(?P<otitle>.+?)</span>',
 			'plot'		: 'Synopsis : </span>(?P<plot>.*?)</p>',
-			'image'		: '<em class="imagecontainer">.*?<a href="/film/fichefilm-.*?/affiches/".*?<img(?P<image>.+?)".?'
+			'image'		: '<em class="imagecontainer">.*?<img src=\'(?P<image>http://images.allocine.fr/.+?)\'.?',
 		}
 
 		self.__castRegExps = {
@@ -358,32 +362,27 @@ class AlloCineParser:
 				matches[name] = ''
 
 		# Image check
-		imgtmp = re.findall(self.__regExps['image'], self.__data, re.S | re.I)
-		matches['image'] = re.search(r"""src=['"](.*?)['"]""", imgtmp[0]).group(1)
-
-		# Save image to a temporary folder
-		md5 = genMD5()
-		imObj = urllib2.urlopen(matches['image'].strip())
-		img = imObj.read()
-		imObj.close()
-		imgPath = "/tmp/%s.jpeg" % md5
 		try:
+			imgtmp = re.findall(self.__regExps['image'], self.__data, re.S | re.I)
+			matches['image'] = imgtmp[0]
+
+			# Save image to a temporary folder
+			md5 = genMD5()
+			imObj = urllib2.urlopen(matches['image'].strip())
+			img = imObj.read()
+			imObj.close()
+			imgPath = "/tmp/%s.jpeg" % md5
 			f = open(imgPath, 'w')
 			f.write(img)
 			f.close()
-		except:
-			# Could be great if we can pass exit code and some message
-			# to tellico in case of failure...
-			pass
 
-		data['image'] = (md5 + '.jpeg', base64.encodestring(img))
-		# Delete temporary image
-		try:
+			# Base64 encoding
+			data['image'] = (md5 + '.jpeg', base64.encodestring(img))
+
+			# Delete temporary image
 			os.remove(imgPath)
 		except:
-			# Could be great if we can pass exit code and some msg
-			# to tellico in case of failure...
-			pass
+			data['image'] = None
 
 		# Now looks for casting information
 		self.__getHTMLContent(url2)
