@@ -1,3 +1,7 @@
+2010-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Allocine script to version 0.7.3 (Bug 258281).
+
 2010-12-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed sorting multiple numeric values in column view.
