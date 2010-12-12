@@ -306,7 +306,7 @@ void FreebaseFetcherTest::testMusicTitle() {
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Folk rock; Pop music; Christian music"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
-  QCOMPARE(trackList.at(0), QLatin1String("Goodbye, Good Night::Jars of Clay::2:54"));
+  QCOMPARE(trackList.at(0), QLatin1String("Goodbye, Goodnight::Jars of Clay::2:54"));
   QCOMPARE(trackList.size(), 11);
 }
 

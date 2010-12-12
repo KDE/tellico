@@ -50,8 +50,9 @@ void CitebaseFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("arxiv"), QLatin1String("hep-lat/0110180"));
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("M. Hasenbusch; K. Jansen"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Nuclear Physics B - Proceedings Supplements"));
+  m_fieldValues.insert(QLatin1String("author"), QString::fromUtf8("M.  Hasenbusch; K.  Jansen"));
+//  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Nuclear Physics B - Proceedings Supplements"));
+  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("NUCL.PHYS.PROC."));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2002"));
   m_fieldValues.insert(QLatin1String("volume"), QLatin1String("106"));
   // should really be 1076-1078, but citebase seems to have it wrong
