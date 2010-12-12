@@ -1,3 +1,7 @@
+2010-12-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.3.2.
+
 2010-12-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Bibtex handler to translate ~ to non-breaking space.
