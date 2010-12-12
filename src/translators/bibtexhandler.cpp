@@ -239,7 +239,6 @@ QString& BibtexHandler::cleanText(QString& text_) {
   rx.setMinimal(true);
   text_.remove(rx);
   text_.remove(QRegExp(QLatin1String("[{}]")));
-  text_.replace(QLatin1Char('~'), QLatin1Char(' '));
   return text_;
 }
 

@@ -33,7 +33,8 @@
 #include "../translators/bibtexexporter.h"
 #include "../translators/bibtexhandler.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
+#include <KConfig>
 
 QTEST_KDEMAIN_CORE( BibtexTest )
 
@@ -45,6 +46,8 @@ void BibtexTest::initTestCase() {
 }
 
 void BibtexTest::testImport() {
+  KSharedConfigPtr config = KSharedConfig::openConfig(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+
   KUrl::List urls;
   urls << KUrl(QString::fromLatin1(KDESRCDIR) + "/data/test.bib");
 
@@ -65,8 +68,9 @@ void BibtexTest::testImport() {
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QCOMPARE(entry->field("entry-type"), QL1("article"));
   QCOMPARE(entry->field("bibtex-key"), QL1("article-full"));
-  QCOMPARE(entry->field("author"), QL1("L[eslie] A. Aamport"));
+  QCOMPARE(entry->field("author"), QString::fromUtf8("L[eslie] A. Aamport"));
   QCOMPARE(entry->field("month"), QL1("jul"));
+  QCOMPARE(entry->field("url"), QL1("http://example.com/~user/"));
   QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
   QCOMPARE(bColl->macroList().value("ACM"), QL1("The OX Association for Computing Machinery"));
 
@@ -74,6 +78,7 @@ void BibtexTest::testImport() {
 
   Tellico::Export::BibtexExporter exporter(coll);
   exporter.setEntries(coll->entries());
+  exporter.readOptions(config);
   Tellico::Import::BibtexImporter importer2(exporter.text());
   importer2.setCurrentCollection(tmpColl);
   Tellico::Data::CollPtr coll2 = importer2.collection();

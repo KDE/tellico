@@ -333,12 +333,17 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
     if(m_packageURL && fIt->type() == Data::Field::URL) {
       bool b = BibtexHandler::s_quoteStyle == BibtexHandler::BRACES;
       value = (b ? QLatin1Char('{') : QLatin1Char('"'))
-            + QLatin1String("\\url{") + BibtexHandler::exportText(value, macros) + QLatin1Char('}')
+            + QLatin1String("\\url{") + value + QLatin1Char('}')
             + (b ? QLatin1Char('}') : QLatin1Char('"'));
     } else if(numberRx.indexIn(value) == -1) {
       // numbers aren't escaped, nor will they have macros
       // if m_expandMacros is true, then macros is empty, so this is ok even then
       value = BibtexHandler::exportText(value, macros);
+      // special case for tilde, since it's a non-breaking space in LateX
+      // replace it EXCEPT for URL or DOI fields
+      if(fIt->property(bibtex) != QLatin1String("doi") && fIt->type() != Data::Field::URL) {
+        value.replace(QChar(0xA0), QLatin1Char('~'));
+      }
     }
     text_ += QLatin1String(",\n  ")
            + fIt->property(bibtex)

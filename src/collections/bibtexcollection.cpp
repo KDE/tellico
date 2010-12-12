@@ -493,6 +493,15 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
     if(!oValue.isEmpty()) {
       value = oValue + FieldFormat::delimiterString() + value;
     }
+  // special case for tilde, since it's a non-breaking space in LateX
+  // replace it EXCEPT for URL or DOI fields
+  } else if(bibtexField_ != QLatin1String("doi") && field->type() != Field::URL) {
+    value.replace(QLatin1Char('~'), QChar(0xA0));
+  } else if(field->type() == Field::URL || bibtexField_ == QLatin1String("url")) {
+    // special case for url package
+    if(value.startsWith(QLatin1String("\\url{")) && value.endsWith(QLatin1Char('}'))) {
+      value.remove(0, 5).chop(1);
+    }
   }
   return entry_->setField(field, value);
 }
