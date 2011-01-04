@@ -167,7 +167,7 @@ void ImdbFetcherTest::testMary() {
   QCOMPARE(entry->field("writer"), QLatin1String("John J. Strauss; Ed Decter"));
 }
 
-// https://bugs.kde.org/show_bug.cgi?id=249096
+// https://bugs.kde.org/show_bug.cgi?id=262036
 void ImdbFetcherTest::testOkunen() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "46-okunen no koi");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
