@@ -88,6 +88,8 @@ void ImdbFetcherTest::testSnowyRiver() {
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("http://akas.imdb.com/title/tt0084296/"));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("cover").isEmpty());
 }
 
 void ImdbFetcherTest::testAsterix() {
@@ -163,6 +165,28 @@ void ImdbFetcherTest::testMary() {
 
   QCOMPARE(entry->field("director"), QLatin1String("Peter Farrelly; Bobby Farrelly"));
   QCOMPARE(entry->field("writer"), QLatin1String("John J. Strauss; Ed Decter"));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=249096
+void ImdbFetcherTest::testOkunen() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "46-okunen no koi");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  job->setMaximumResults(1);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+
+  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Drama"));
+  QCOMPARE(entry->field("director"), QLatin1String("Takashi Miike"));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("cover").isEmpty());
 }
 
 void ImdbFetcherTest::slotResult(KJob* job_) {

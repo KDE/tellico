@@ -1,3 +1,7 @@
+2011-01-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed parsing bug with IMDb results (Bug 262036).
+
 2010-12-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.2.

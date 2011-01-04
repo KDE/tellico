@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testAsterix();
   void testBodyDouble();
   void testMary();
+  void testOkunen();
 
   void slotResult(KJob* job);
 

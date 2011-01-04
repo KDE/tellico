@@ -294,7 +294,11 @@ void IMDBFetcher::parseSingleTitleResult() {
   FetchResult* r = new FetchResult(Fetcher::Ptr(this),
                                    pPos == -1 ? cap1 : cap1.left(pPos),
                                    pPos == -1 ? QString() : cap1.mid(pPos));
-  m_matches.insert(r->uid, m_url);
+  // IMDB returns different HTML for single title results and has a query in the url
+  // clear the query so we download the "canonical" page for the title
+  KUrl url(m_url);
+  url.setEncodedQuery(QByteArray());
+  m_matches.insert(r->uid, url);
   emit signalResultFound(r);
 
   m_hasMoreResults = false;
@@ -907,7 +911,6 @@ void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) 
 
   const int pos1 = str_.indexOf(productionRx);
   if(pos1 == -1) {
-    myDebug() << "no studios found";
     return;
   }
 
