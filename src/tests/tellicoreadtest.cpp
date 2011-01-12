@@ -139,7 +139,7 @@ void TellicoReadTest::testTableData() {
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
-  QCOMPARE(coll->entryCount(), 2);
+  QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Export::TellicoXMLExporter exporter(coll);
   exporter.setEntries(coll->entries());
@@ -171,4 +171,12 @@ void TellicoReadTest::testTableData() {
   QStringList groups = e3->groupNamesByFieldName("table");
   QCOMPARE(groups.count(), 3);
   QCOMPARE(groups.at(0), QL1("11a"));
+
+  // test having empty value in table
+  Tellico::Data::EntryPtr e = coll2->entryById(2);
+  QVERIFY(e);
+  const QStringList rows = Tellico::FieldFormat::splitTable(e->field("table"));
+  QCOMPARE(rows.count(), 1);
+  const QStringList cols = Tellico::FieldFormat::splitRow(rows.at(0));
+  QCOMPARE(cols.count(), 3);
 }

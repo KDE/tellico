@@ -576,6 +576,10 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     }
 #endif
     fieldValue = d->textBuffer;
+    // the text buffer has the column delimiter at the end, remove it
+    if(f->type() == Data::Field::Table) {
+      fieldValue.chop(FieldFormat::columnDelimiterString().length());
+    }
     d->textBuffer.clear();
   }
   // this is not an else branch, the data may be in the textBuffer
@@ -655,10 +659,7 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
     }
   }
 
-  if(!d->textBuffer.isEmpty()) {
-    d->textBuffer += FieldFormat::columnDelimiterString();
-  }
-  d->textBuffer += d->text;
+  d->textBuffer += d->text + FieldFormat::columnDelimiterString();
   return true;
 }
 

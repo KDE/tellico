@@ -1,3 +1,7 @@
+2011-01-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with parsing empty table values (Bug 261108).
+
 2011-01-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed parsing bug with IMDb results (Bug 262036).

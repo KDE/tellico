@@ -1,27 +1,27 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
-<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11" >
- <collection title="My Collection" type="1" >
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Collection" type="1">
   <fields>
-   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id" >
-    <prop name="template" >%{@id}</prop>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template">%{@id}</prop>
    </field>
-   <field title="Title" flags="8" category="General" format="1" type="1" name="title" />
-   <field title="Date Created" flags="16" category="Personal" format="3" type="12" name="cdate" />
-   <field title="Date Modified" flags="16" category="Personal" format="3" type="12" name="mdate" />
-   <field title="Table" flags="3" category="Table" format="0" type="8" name="table" >
-    <prop name="columns" >3</prop>
+   <field title="Title" flags="8" category="General" format="1" type="1" name="title"/>
+   <field title="Date Created" flags="16" category="Personal" format="3" type="12" name="cdate"/>
+   <field title="Date Modified" flags="16" category="Personal" format="3" type="12" name="mdate"/>
+   <field title="Table" flags="3" category="Table" format="0" type="8" name="table">
+    <prop name="columns">3</prop>
    </field>
   </fields>
-  <entry id="0" >
+  <entry id="0">
    <id>0</id>
    <title>Easy Table</title>
-   <cdate calendar="gregorian" >
+   <cdate calendar="gregorian">
     <year>2009</year>
     <month>10</month>
     <day>03</day>
    </cdate>
-   <mdate calendar="gregorian" >
+   <mdate calendar="gregorian">
     <year>2009</year>
     <month>10</month>
     <day>03</day>
@@ -44,15 +44,15 @@
     </table>
    </tables>
   </entry>
-  <entry id="1" >
+  <entry id="1">
    <id>1</id>
    <title>Hard Table</title>
-   <cdate calendar="gregorian" >
+   <cdate calendar="gregorian">
     <year>2009</year>
     <month>10</month>
     <day>03</day>
    </cdate>
-   <mdate calendar="gregorian" >
+   <mdate calendar="gregorian">
     <year>2009</year>
     <month>10</month>
     <day>03</day>
@@ -72,6 +72,27 @@
      <column>value31</column>
      <column>value32</column>
      <column>value33</column>
+    </table>
+   </tables>
+  </entry>
+  <entry id="2">
+   <id>2</id>
+   <title>Table with empty</title>
+   <cdate calendar="gregorian">
+    <year>2011</year>
+    <month>01</month>
+    <day>11</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2011</year>
+    <month>01</month>
+    <day>11</day>
+   </mdate>
+   <tables>
+    <table>
+     <column></column>
+     <column>value12</column>
+     <column>value13</column>
     </table>
    </tables>
   </entry>
