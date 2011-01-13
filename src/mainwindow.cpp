@@ -690,6 +690,7 @@ void MainWindow::initView() {
 
   m_viewTabs = new KTabWidget(m_split);
   m_viewTabs->setTabBarHidden(true);
+  m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);
   Controller::self()->addObserver(m_groupView);
   m_viewTabs->addTab(m_groupView, KIcon(QLatin1String("folder")), i18n("Groups"));
