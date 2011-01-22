@@ -1,3 +1,23 @@
+tellico (2.3.2-1) experimental; urgency=low
+
+  * New upstream release (Closes: #601502).
+  * Drop webcam support and remove type-handling dependency (Closes: #587868).
+  * Should fix the crash when using filters (Closes: #549958).
+  * Permissions for backup files should be fixed as well (Closes: #561238).
+
+ -- Regis Boudin <regis@debian.org>  Mon, 03 Jan 2011 18:42:57 +0000
+
+tellico (2.3-1) experimental; urgency=low
+
+  * New upstream release.
+  * Build-depend on shared-desktop-ontologies and libqjson-dev.
+  * Force a check in /usr/share/apps/cmake/modules to find FindQJSON.cmake.
+  * Bump Standards-Version to 3.9.1.
+  * Follow Policy section 7.4 and use Breaks plus Replaces instead of Conflicts
+    plus Replaces.
+
+ -- Regis Boudin <regis@debian.org>  Thu, 19 Aug 2010 12:52:35 +0100
+
 tellico (2.2-5) unstable; urgency=high
 
   * pkg-kde-tools has moved documentation to /usr/share/doc/kde/HTML.
