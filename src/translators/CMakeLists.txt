@@ -2,6 +2,7 @@
 ########### next target ###############
 
 SET(translators_STAT_SRCS
+   adsimporter.cpp
    alexandriaexporter.cpp
    alexandriaimporter.cpp
    amcimporter.cpp

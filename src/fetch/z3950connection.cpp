@@ -227,6 +227,13 @@ void Z3950Connection::run() {
   if(numResults > 0) {
     myLog() << "current syntax is " << m_syntax << " (" << numResults << " results)";
     // so now we know that results exist, might have to check syntax
+ 
+    if(m_syntax == QLatin1String("ads")) {
+      // ads syntax is really 1.2.840.10003.5.1000.147.1
+      // see http://adsabs.harvard.edu/abs_doc/ads_server.html
+      ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", "1.2.840.10003.5.1000.147.1");
+    }
+
     int len;
     ZOOM_record rec = ZOOM_resultset_record(resultSet, 0);
     // want raw unless it's mods
@@ -243,12 +250,12 @@ void Z3950Connection::run() {
         newSyntax.clear();
       }
     }
-    // right now, we just understand mods, unimarc, marc21/usmarc, and grs-1
     if(newSyntax != QLatin1String("xml") &&
        newSyntax != QLatin1String("usmarc") &&
        newSyntax != QLatin1String("marc21") &&
        newSyntax != QLatin1String("unimarc") &&
-       newSyntax != QLatin1String("grs-1")) {
+       newSyntax != QLatin1String("grs-1") &&
+       newSyntax != QLatin1String("ads")) {
       myLog() << "changing z39.50 syntax to MODS";
       newSyntax = QLatin1String("xml");
       ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
@@ -338,9 +345,14 @@ void Z3950Connection::run() {
     QString data;
     if(m_syntax == QLatin1String("mods")) {
       data = toString(ZOOM_record_get(rec, "xml", &len));
-    } else if(m_syntax == QLatin1String("grs-1")) { // grs-1
-      // we're going to parse the rendered data, very ugly...
+    } else if(m_syntax == QLatin1String("grs-1")) {
+      // grs-1 means we have to try to parse the rendered data, very ugly...
       data = toString(ZOOM_record_get(rec, "render", &len));
+    } else if(m_syntax == QLatin1String("ads")) {
+      data = toString(ZOOM_record_get(rec, "raw", &len));
+      // haven't been able to figure out how to include line endings
+      // just mangle the result by replacing % with \n%
+      data.replace(QLatin1Char('%'), QLatin1String("\n%"));
     } else {
 #if 0
       myWarning() << "Remove debug from z3950connection.cpp";
@@ -440,7 +452,7 @@ QString Z3950Connection::toString(const QByteArray& text_) {
 // static
 QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fromCharSet_, const QString& toCharSet_) {
 #ifdef HAVE_YAZ
-  if(text_.isEmpty()) {
+  if(text_.isEmpty() || toCharSet_.isEmpty()) {
     return text_;
   }
 

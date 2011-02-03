@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,32 +22,55 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef Z3950FETCHERTEST_H
-#define Z3950FETCHERTEST_H
+#ifndef TELLICO_ADSIMPORTER_H
+#define TELLICO_ADSIMPORTER_H
 
-#include <QObject>
-#include <QEventLoop>
-
+#include "importer.h"
 #include "../datavectors.h"
 
-class KJob;
+#include <QString>
+#include <QHash>
 
-class Z3950FetcherTest : public QObject {
+namespace Tellico {
+  namespace Import {
+
+/**
+ * @author Robby Stephenson
+ */
+class ADSImporter : public Importer {
 Q_OBJECT
+
 public:
-  Z3950FetcherTest();
+  /**
+   */
+  ADSImporter(const KUrl::List& urls);
+  ADSImporter(const QString& text);
 
-private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testIsbn();
-  void testADS();
+  /**
+   * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
+   */
+  virtual Data::CollPtr collection();
+  /**
+   */
+  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual bool canImport(int type) const;
 
-  void slotResult(KJob* job);
+public slots:
+  void slotCancel();
 
 private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
+  static void initTagMap();
+
+  Data::FieldPtr fieldByTag(const QString& tag);
+  void readURL(const KUrl& url, int n);
+  void readText(const QString& text, int n);
+
+  Data::CollPtr m_coll;
+  bool m_cancelled;
+
+  static QHash<QString, QString>* s_tagMap;
 };
 
+  } // end namespace
+} // end namespace
 #endif

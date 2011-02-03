@@ -75,6 +75,9 @@ set(TELLICO_TEST_LIBS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp)
 TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(adstest NOGUI adstest.cpp)
+TARGET_LINK_LIBRARIES(adstest ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(alexandriatest NOGUI alexandriatest.cpp ../progressmanager.cpp)
 TARGET_LINK_LIBRARIES(alexandriatest ${TELLICO_TEST_LIBS})
 

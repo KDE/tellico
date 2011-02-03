@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,32 +22,39 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef Z3950FETCHERTEST_H
-#define Z3950FETCHERTEST_H
+#undef QT_NO_CAST_FROM_ASCII
 
-#include <QObject>
-#include <QEventLoop>
+#include "adstest.h"
+#include "adstest.moc"
+#include "qtest_kde.h"
 
-#include "../datavectors.h"
+#include "../translators/adsimporter.h"
+#include "../collections/bibtexcollection.h"
+#include "../fieldformat.h"
 
-class KJob;
+QTEST_KDEMAIN_CORE( AdsTest )
 
-class Z3950FetcherTest : public QObject {
-Q_OBJECT
-public:
-  Z3950FetcherTest();
+void AdsTest::testImport() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ads");
+  KUrl::List urls;
+  urls << url;
+  Tellico::Import::ADSImporter importer(urls);
+  Tellico::Data::CollPtr coll = importer.collection();
 
-private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testIsbn();
-  void testADS();
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
+  QCOMPARE(coll->entryCount(), 1);
+  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
-};
-
-#endif
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("title"), QLatin1String("Distant clusters of galaxies detected by X-rays"));
+  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
+  QCOMPARE(entry->field("year"), QLatin1String("1993"));
+  QCOMPARE(entry->field("pages"), QLatin1String("50-57"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("Cavaliere, A."));
+  QVERIFY(!entry->field("abstract").isEmpty());
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("keyword")).count(), 7);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("keyword")).first(), QLatin1String("Cosmic Plasma"));
+}

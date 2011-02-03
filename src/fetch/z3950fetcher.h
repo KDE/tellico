@@ -62,6 +62,7 @@ Q_OBJECT
 public:
   Z3950Fetcher(QObject* parent);
   Z3950Fetcher(QObject* parent, const QString& preset);
+  Z3950Fetcher(QObject* parent, const QString& host, int port, const QString& dbName, const QString& syntax);
 
   virtual ~Z3950Fetcher();
 

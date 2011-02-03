@@ -41,6 +41,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/grs1importer.h"
+#include "../translators/adsimporter.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../utils/isbnvalidator.h"
@@ -100,6 +101,14 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
   } else {
     myDebug() << "z3950-servers.cfg not found";
   }
+}
+
+Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& host_, int port_,
+                           const QString& dbName_, const QString& syntax_)
+    : Fetcher(parent_), m_conn(0), m_host(host_), m_port(port_), m_dbname(dbName_)
+    , m_syntax(syntax_), m_esn(Z3950_DEFAULT_ESN)
+    , m_started(false), m_done(true), m_MARC21XMLHandler(0)
+    , m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
 }
 
 Z3950Fetcher::~Z3950Fetcher() {
@@ -387,7 +396,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 #if 0
   myWarning() << "Remove debug from z3950fetcher.cpp";
   {
-    QFile f1(QLatin1String("/tmp/marc.xml"));
+    QFile f1(QLatin1String("/tmp/z3950.txt"));
     if(f1.open(QIODevice::WriteOnly)) {
 //      if(f1.open(QIODevice::WriteOnly | QIODevice::Append)) {
       QTextStream t(&f1);
@@ -403,6 +412,10 @@ void Z3950Fetcher::handleResult(const QString& result_) {
   // not marc, has to be grs-1
   if(m_syntax == QLatin1String("grs-1")) {
     Import::GRS1Importer imp(result_);
+    coll = imp.collection();
+    msg = imp.statusMessage();
+  } else if(m_syntax == QLatin1String("ads")) {
+    Import::ADSImporter imp(result_);
     coll = imp.collection();
     msg = imp.statusMessage();
   } else { // now the MODS stuff
@@ -615,6 +628,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_syntaxCombo->addItem(QLatin1String("MARC21"), QLatin1String("marc21"));
   m_syntaxCombo->addItem(QLatin1String("UNIMARC"), QLatin1String("unimarc"));
   m_syntaxCombo->addItem(QLatin1String("USMARC"), QLatin1String("usmarc"));
+  m_syntaxCombo->addItem(QLatin1String("ADS"), QLatin1String("ads"));
   m_syntaxCombo->addItem(QLatin1String("GRS-1"), QLatin1String("grs-1"));
   connect(m_syntaxCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_syntaxCombo, row, 1);

@@ -90,6 +90,37 @@ void Z3950FetcherTest::testIsbn() {
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-59059-831-8"));
 }
 
+void Z3950FetcherTest::testADS() {
+  // also testing multiple values
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Raw,
+                                       QLatin1String("@and @attr 1=4 \"Particle creation by black holes\" "
+                                                     "@and @attr 1=1003 Hawking @attr 1=62 Generalized"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this,
+                                                                        QLatin1String("z3950.adsabs.harvard.edu"),
+                                                                        210,
+                                                                        QLatin1String("AST"),
+                                                                        QLatin1String("ads")));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Particle creation by black holes"));
+  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Hawking, S. W."));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1975"));
+  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1007/BF02345020"));
+  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("199-220"));
+  QCOMPARE(entry->field(QLatin1String("volume")), QLatin1String("43"));
+  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("Communications In Mathematical Physics"));
+  QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
+}
+
 void Z3950FetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();

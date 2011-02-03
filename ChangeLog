@@ -1,3 +1,7 @@
+2011-02-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added capability to import ADS format for z39.50 sources.
+
 2011-01-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with parsing empty table values (Bug 261108).
