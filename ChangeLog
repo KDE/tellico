@@ -1,3 +1,7 @@
+2011-02-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Added check for duplicate bibtex keys (Bug 245225).
+
 2011-02-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Added capability to import ADS format for z39.50 sources.

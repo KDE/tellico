@@ -22,6 +22,7 @@ ENDIF( ENABLE_WEBCAM )
 ########### next target ###############
 
 SET(tellico_SRCS
+   bibtexkeydialog.cpp
    borrower.cpp
    borrowerdialog.cpp
    collection.cpp

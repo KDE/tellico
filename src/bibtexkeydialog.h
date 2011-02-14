@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,18 +22,44 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef BIBTEXTEST_H
-#define BIBTEXTEST_H
+#ifndef TELLICO_BIBTEXKEYDIALOG_H
+#define TELLICO_BIBTEXKEYDIALOG_H
 
-#include <QObject>
+#include <kdialog.h>
 
-class BibtexTest : public QObject {
+#include "datavectors.h"
+#include "filter.h"
+
+class KTitleWidget;
+
+namespace Tellico {
+
+/**
+ * @author Robby Stephenson
+ */
+class BibtexKeyDialog : public KDialog {
 Q_OBJECT
 
-private Q_SLOTS:
-  void initTestCase();
-  void testImport();
-  void testDuplicateKeys();
+public:
+  BibtexKeyDialog(Data::CollPtr coll, QWidget* parent);
+  virtual ~BibtexKeyDialog();
+
+signals:
+  void signalUpdateFilter(Tellico::FilterPtr);
+
+public slots:
+  void slotCheckDuplicates();
+
+private slots:
+  void slotCheckDuplicatesImpl();
+  void slotFilterDuplicates();
+
+private:
+  Data::CollPtr m_coll;
+  Data::EntryList m_dupes;
+  
+  KTitleWidget* m_dupeLabel;
 };
 
+} // end namespace
 #endif

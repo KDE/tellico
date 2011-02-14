@@ -64,6 +64,7 @@ namespace Tellico {
   class ConfigDialog;
   class CollectionFieldsDialog;
   class StringMapDialog;
+  class BibtexKeyDialog;
   class EntryItem;
   class FetchDialog;
   class ReportDialog;
@@ -306,6 +307,14 @@ public slots:
    */
   void slotHideStringMacroDialog();
   /**
+   * Shows the citation key dialog
+   */
+  void slotShowBibtexKeyDialog();
+  /**
+   * Hides the citation key dialog
+   */
+  void slotHideBibtexKeyDialog();
+  /**
    * Handle a url that indicates some actino should be taken
    */
   void slotURLAction(const KUrl& url);
@@ -514,6 +523,7 @@ private:
   FilterDialog* m_filterDlg;
   CollectionFieldsDialog* m_collFieldsDlg;
   StringMapDialog* m_stringMacroDlg;
+  BibtexKeyDialog* m_bibtexKeyDlg;
   FetchDialog* m_fetchDlg;
   ReportDialog* m_reportDlg;
 

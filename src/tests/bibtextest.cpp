@@ -99,3 +99,34 @@ void BibtexTest::testImport() {
     }
   }
 }
+
+void BibtexTest::testDuplicateKeys() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
+  Tellico::Data::BibtexCollection* bColl = static_cast<Tellico::Data::BibtexCollection*>(coll.data());
+  
+  Tellico::Data::EntryList dupes = bColl->duplicateBibtexKeys();
+  QVERIFY(dupes.isEmpty());
+  
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
+  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
+  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  
+  Tellico::Data::EntryPtr entry3(new Tellico::Data::Entry(coll));
+  entry3->setField(QLatin1String("title"), QLatin1String("Title 3"));
+  entry3->setField(QLatin1String("bibtex-key"), QLatin1String("title3"));
+
+  coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2 << entry3);
+
+  QCOMPARE(coll->entries().count(), 3);
+  
+  dupes = bColl->duplicateBibtexKeys();
+  QCOMPARE(dupes.count(), 2);
+
+  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title2"));
+  dupes = bColl->duplicateBibtexKeys();
+  QCOMPARE(dupes.count(), 0);
+}

@@ -67,6 +67,8 @@ public:
 
   virtual QString prepareText(const QString& text) const;
   virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
+  
+  EntryList duplicateBibtexKeys() const;
 
   static FieldList defaultFields();
   static CollPtr convertBookCollection(CollPtr coll);

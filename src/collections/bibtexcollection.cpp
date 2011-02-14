@@ -322,6 +322,7 @@ Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibte
 
 Tellico::Data::EntryPtr BibtexCollection::entryByBibtexKey(const QString& key_) const {
   EntryPtr entry;
+  // we do assume unique keys
   foreach(EntryPtr e, entries()) {
     if(e->field(QLatin1String("bibtex-key")) == key_) {
       entry = e;
@@ -504,6 +505,23 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
     }
   }
   return entry_->setField(field, value);
+}
+
+Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
+  QSet<EntryPtr> dupes;
+  QHash<QString, EntryPtr> keyHash;
+  
+  const QString keyField = QLatin1String("bibtex-key");
+  QString keyValue;
+  foreach(EntryPtr entry, entries()) {
+    keyValue = entry->field(keyField);
+    if(keyHash.contains(keyValue)) {
+      dupes << keyHash.value(keyValue) << entry;
+     } else {
+       keyHash.insert(keyValue, entry);
+     }
+  }
+  return dupes.toList();
 }
 
 #include "bibtexcollection.moc"

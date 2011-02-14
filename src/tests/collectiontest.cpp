@@ -227,7 +227,7 @@ void CollectionTest::testDtd() {
 
   foreach(Tellico::Data::FieldPtr field, coll->fields()) {
     switch(field->type()) {
-      case Tellico::Data::Field::Line: entry1->setField(field, field->title()); break;
+      case Tellico::Data::Field::Line:   entry1->setField(field, field->title()); break;
       case Tellico::Data::Field::Para:   entry1->setField(field, field->title()); break;
       case Tellico::Data::Field::URL:    entry1->setField(field, field->title()); break;
       case Tellico::Data::Field::Table:  entry1->setField(field, field->title()); break;
@@ -272,6 +272,6 @@ void CollectionTest::testDtd_data() {
   QTest::newRow("stamp")  << int(Tellico::Data::Collection::Stamp);
   QTest::newRow("card")   << int(Tellico::Data::Collection::Card);
   QTest::newRow("game")   << int(Tellico::Data::Collection::Game);
-  QTest::newRow("file")    << int(Tellico::Data::Collection::File);
+  QTest::newRow("file")   << int(Tellico::Data::Collection::File);
   QTest::newRow("board")  << int(Tellico::Data::Collection::BoardGame);
 }
