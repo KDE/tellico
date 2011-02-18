@@ -11,6 +11,7 @@
 #ifndef __PALMLIB_BLOCK_H__
 #define __PALMLIB_BLOCK_H__
 
+#include <cstddef>
 #include <algorithm>
 #include <iterator>
 

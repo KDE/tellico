@@ -428,7 +428,7 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
 #ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
-    Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
+    const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
     KUrl u;
     u.setProtocol(QLatin1String("http"));
     u.setHost(f->host());
