@@ -185,6 +185,7 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
   QCOMPARE(entry->field("genre"), QLatin1String("Drama"));
   QCOMPARE(entry->field("director"), QLatin1String("Takashi Miike"));
+  QCOMPARE(entry->field("writer"), QLatin1String("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }

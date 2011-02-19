@@ -51,7 +51,7 @@ void DiscogsFetcherTest::initTestCase() {
 
 void DiscogsFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
-                                       QLatin1String("Fallen"));
+                                       QLatin1String("Anywhere But Home"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
 
   // don't use 'this' as job parent, it crashes
@@ -69,12 +69,12 @@ void DiscogsFetcherTest::testTitle() {
       entry = test;
       break;
     } else {
-      qDebug() << "skipping" << test->title();
+      qDebug() << "skipping" << test->title() << test->field(QLatin1String("artist"));
     }
   }
   QVERIFY(entry);
 
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Anywhere But Home"));
   QVERIFY(!entry->field(QLatin1String("artist")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
@@ -100,7 +100,6 @@ void DiscogsFetcherTest::testPerson() {
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
 }
 
