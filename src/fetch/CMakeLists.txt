@@ -20,6 +20,7 @@ SET(fetch_STAT_SRCS
    fetcherjob.cpp
    fetchmanager.cpp
    fetchresult.cpp
+   filmasterfetcher.cpp
    freebasefetcher.cpp
    gcstarpluginfetcher.cpp
    gcstarthread.cpp

@@ -51,6 +51,7 @@
 #include "multifetcher.h"
 #ifdef HAVE_QJSON
 #include "freebasefetcher.h"
+#include "filmasterfetcher.h"
 #endif
 #include "dvdfrfetcher.h"
 
@@ -90,6 +91,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::MultiFetcher> registerMulti(Multiple);
 #ifdef HAVE_QJSON
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
+  RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
 }
