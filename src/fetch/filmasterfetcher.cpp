@@ -263,6 +263,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 }
 
 void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_) {
+#ifdef HAVE_QJSON
   entry_->setField(QLatin1String("title"), value(result_, "title"));
   entry_->setField(QLatin1String("year"), value(result_, "release_year"));
   entry_->setField(QLatin1String("genre"), value(result_, "tags"));
@@ -302,6 +303,7 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
   if(optionalFields().contains(QLatin1String("filmaster"))) {
     entry_->setField(QLatin1String("filmaster"), QLatin1String("http://filmaster.com/film/") + value(result_, "permalink"));
   }
+#endif
 }
 
 Tellico::Fetch::ConfigWidget* FilmasterFetcher::configWidget(QWidget* parent_) const {
