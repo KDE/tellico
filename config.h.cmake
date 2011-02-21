@@ -12,6 +12,8 @@
 #cmakedefine HAVE_STRLWR 1
 #cmakedefine HAVE_STRUPR 1
 
+#cmakedefine ENABLE_KNEWSTUFF3
+
 #cmakedefine HAVE_TAGLIB
 
 #cmakedefine HAVE_POPPLER

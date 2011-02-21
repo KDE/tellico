@@ -115,6 +115,12 @@ include_directories(${KDE4_INCLUDES}
                     ${Tellico_SOURCE_DIR}/src/core
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
 
+if(KDE_VERSION VERSION_GREATER 4.4)
+    set(ENABLE_KNEWSTUFF3 TRUE)
+else(KDE_VERSION VERSION_GREATER 4.4)
+    set(ENABLE_KNEWSTUFF3 FALSE)
+endif(KDE_VERSION VERSION_GREATER 4.4)
+
 # is there a better way to disable qt3support library?
 get_directory_property(include_dirs INCLUDE_DIRECTORIES)
 if(QT_QT3SUPPORT_FOUND)
@@ -150,6 +156,7 @@ macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
+macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

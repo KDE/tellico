@@ -59,7 +59,12 @@
 #include <kapplication.h>
 #include <kvbox.h>
 #include <khbox.h>
+
+#ifdef ENABLE_KNEWSTUFF3
+#include <KNS3/DownloadDialog>
+#else
 #include <KNS/Engine>
+#endif
 
 #include <QSize>
 #include <QLayout>
@@ -1025,9 +1030,16 @@ void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {
 }
 
 void ConfigDialog::slotNewStuffClicked() {
+#ifdef ENABLE_KNEWSTUFF3
+  KNS3::DownloadDialog dialog(QLatin1String("tellico-script.knsrc"), this);
+  dialog.exec();
+  {
+    KNS3::Entry::List entries = dialog.installedEntries();
+#else
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-script.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
+#endif
     if(!entries.isEmpty()) {
       Fetch::Manager::self()->loadFetchers();
       readFetchConfig();
@@ -1135,9 +1147,16 @@ void ConfigDialog::slotInstallTemplate() {
 }
 
 void ConfigDialog::slotDownloadTemplate() {
+#ifdef ENABLE_KNEWSTUFF3
+  KNS3::DownloadDialog dialog(QLatin1String("tellico-template.knsrc"), this);
+  dialog.exec();
+  {
+    KNS3::Entry::List entries = dialog.installedEntries();
+#else
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-template.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
+#endif
     if(!entries.isEmpty()) {
       loadTemplateList();
     }
