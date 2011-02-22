@@ -76,7 +76,8 @@ enum Type {
   Multiple,
   Freebase,
   DVDFr,
-  Filmaster
+  Filmaster,
+  Douban
 };
 
   }

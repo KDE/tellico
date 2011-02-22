@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,30 +22,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XMLHANDLER_H
-#define TELLICO_XMLHANDLER_H
+#ifndef DOUBANFETCHERTEST_H
+#define DOUBANFETCHERTEST_H
 
-#include <QString>
+#include <QObject>
+#include <QEventLoop>
 
-namespace Tellico {
+#include "../datavectors.h"
 
-/**
- * The XMLHandler class contains some utility functions for working with XML.
- *
- * @author Robby Stephenson
- */
-class XMLHandler {
+class KJob;
 
+class DoubanFetcherTest : public QObject {
+Q_OBJECT
 public:
-  /**
-   * Sets the value of the encoding declaration in the XML text
-   */
-  static bool setUtf8XmlEncoding(QString& text);
-  /**
-   * Read XML data into a string, respecting the encoding in the string
-   */
-  static QString readXMLData(const QByteArray& data);
+  DoubanFetcherTest();
+
+private Q_SLOTS:
+  void initTestCase();
+  void testBookTitle();
+  void testISBN();
+  void testVideo();
+  void testMusic();
+
+  void slotResult(KJob* job);
+
+private:
+  QEventLoop m_loop;
+  Tellico::Data::EntryList m_results;
 };
 
-} // end namespace
 #endif

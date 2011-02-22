@@ -54,6 +54,7 @@
 #include "filmasterfetcher.h"
 #endif
 #include "dvdfrfetcher.h"
+#include "doubanfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -94,4 +95,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
+  RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
 }

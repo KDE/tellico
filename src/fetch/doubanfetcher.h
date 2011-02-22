@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,30 +22,76 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XMLHANDLER_H
-#define TELLICO_XMLHANDLER_H
+#ifndef TELLICO_DOUBANFETCHER_H
+#define TELLICO_DOUBANFETCHER_H
 
-#include <QString>
+#include "xmlfetcher.h"
+#include "configwidget.h"
+#include "../datavectors.h"
+
+#include <QPointer>
+#include <QVariantMap>
+
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
+class KLineEdit;
 
 namespace Tellico {
+  namespace Fetch {
 
 /**
- * The XMLHandler class contains some utility functions for working with XML.
- *
  * @author Robby Stephenson
  */
-class XMLHandler {
+class DoubanFetcher : public XMLFetcher {
+Q_OBJECT
 
 public:
   /**
-   * Sets the value of the encoding declaration in the XML text
    */
-  static bool setUtf8XmlEncoding(QString& text);
+  DoubanFetcher(QObject* parent);
   /**
-   * Read XML data into a string, respecting the encoding in the string
    */
-  static QString readXMLData(const QByteArray& data);
+  virtual ~DoubanFetcher();
+
+  /**
+   */
+  virtual QString source() const;
+  virtual bool canSearch(FetchKey k) const;
+  virtual Type type() const { return Douban; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
+
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const DoubanFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&);
+    virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+
+private:
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void resetSearch() {}
+  virtual KUrl searchUrl();
+  virtual void parseData(QByteArray&) {}
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+  
+  QString m_apiKey;
 };
 
+  } // end namespace
 } // end namespace
 #endif

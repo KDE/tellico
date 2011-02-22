@@ -12,6 +12,7 @@ SET(fetch_STAT_SRCS
    configwidget.cpp
    crossreffetcher.cpp
    discogsfetcher.cpp
+   doubanfetcher.cpp
    dvdfrfetcher.cpp
    entrezfetcher.cpp
    execexternalfetcher.cpp
