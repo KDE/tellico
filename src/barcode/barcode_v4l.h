@@ -30,8 +30,7 @@
 #include <QString>
 #include <QImage>
 
-#include <linux/types.h>
-#include <linux/videodev.h>
+#include <libv4l1-videodev.h>
 
 namespace barcodeRecognition {
 
