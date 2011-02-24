@@ -1,3 +1,7 @@
+2011-02-23  Regis Boudin
+
+	* Updated videodev innclude for compatibility with Linux kernel 2.6.38+.
+
 2011-02-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for douban.com.
