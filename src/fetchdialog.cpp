@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -42,6 +42,7 @@
 #include "gui/combobox.h"
 #include "gui/cursorsaver.h"
 #include "utils/stringset.h"
+#include "images/image.h"
 #include "tellico_debug.h"
 
 #ifdef ENABLE_WEBCAM
@@ -62,6 +63,7 @@
 #include <kapplication.h>
 #include <KHBox>
 #include <KVBox>
+#include <KCodecs>
 
 #include <QGroupBox>
 #include <QSplitter>
@@ -451,6 +453,9 @@ void FetchDialog::slotAddEntry() {
       stopProgress();
       setStatus(i18n("Ready."));
     }
+    if(entry->collection()->hasField(QLatin1String("fetchdialog_source"))) {
+      entry->collection()->removeField(QLatin1String("fetchdialog_source"));
+    }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(Data::EntryPtr(new Data::Entry(*entry)));
     item->setData(0, Qt::DecorationRole, KIcon(QLatin1String("checkmark")));
@@ -504,6 +509,17 @@ void FetchDialog::slotShowEntry() {
     }
     stopProgress();
   }
+  if(!entry->collection()->hasField(QLatin1String("fetchdialog_source"))) {
+    Data::FieldPtr f(new Data::Field(QLatin1String("fetchdialog_source"), i18n("Attribution"), Data::Field::Para));
+    entry->collection()->addField(f);
+  }
+
+  const QPixmap sourceIcon = Fetch::Manager::self()->fetcherIcon(r->fetcher);
+  const QByteArray ba = Data::Image::byteArray(sourceIcon.toImage(), "PNG");
+  QString text = QString::fromLatin1("<qt><img src='data:image/png;base64,%1'/> %2<br/>%3</qt>")
+                 .arg(QLatin1String(KCodecs::base64Encode(ba)), r->fetcher->source(), r->fetcher->attribution());
+  entry->setField(QLatin1String("fetchdialog_source"), text);
+
   setStatus(i18n("Ready."));
 
   m_entryView->showEntry(entry);

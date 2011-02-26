@@ -80,6 +80,7 @@ public:
    * Returns the name of the data source, as defined by the user.
    */
   virtual QString source() const = 0;
+  virtual QString attribution() const { return QString(); }
   /**
    * Returns the collection type of the most recent search
    */

@@ -80,7 +80,11 @@ QString FilmasterFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-// without QJSON, we can only search on ISBN for covers
+QString FilmasterFetcher::attribution() const {
+  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.")
+         .arg(QLatin1String("http://filmaster.com/license/"));
+}
+
 bool FilmasterFetcher::canSearch(FetchKey k) const {
 #ifndef HAVE_QJSON
   return false;

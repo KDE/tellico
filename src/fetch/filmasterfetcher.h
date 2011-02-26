@@ -57,6 +57,7 @@ public:
   /**
    */
   virtual QString source() const;
+  virtual QString attribution() const;
   virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const;
   virtual void stop();

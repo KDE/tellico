@@ -83,6 +83,7 @@ public:
   virtual ~AmazonFetcher();
 
   virtual QString source() const;
+  virtual QString attribution() const;
   virtual bool isSearching() const { return m_started; }
   virtual void continueSearch();
   // amazon can search title, person, isbn, or keyword. No Raw for now.
