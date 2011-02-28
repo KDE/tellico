@@ -65,7 +65,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_);
+    explicit ConfigWidget(QWidget* parent, const AnimeNfoFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&) {}
     virtual QString preferredName() const;
   };
@@ -73,7 +73,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash allOptionalFields() { return StringHash(); }
+  static StringHash allOptionalFields();
 
 private slots:
   void slotComplete(KJob* job);

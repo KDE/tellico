@@ -108,6 +108,9 @@ TARGET_LINK_LIBRARIES(allocinefetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(amazonfetchertest NOGUI amazonfetchertest.cpp)
 TARGET_LINK_LIBRARIES(amazonfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(animenfofetchertest NOGUI animenfofetchertest.cpp)
+TARGET_LINK_LIBRARIES(animenfofetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp)
 TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
 

@@ -1,6 +1,10 @@
+2011-02-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed parsing bug with AnimeNfo results.
+
 2011-02-23  Regis Boudin
 
-	* Updated videodev innclude for compatibility with Linux kernel 2.6.38+.
+	* Updated videodev include for compatibility with Linux kernel 2.6.38+.
 
 2011-02-21  Robby Stephenson  <robby@periapsis.org>
 
