@@ -30,7 +30,15 @@
 #include <QString>
 #include <QImage>
 
+// since this directory only gets built if ENABLE_WEBCAM is true
+// we know that either libv4l >= 0.8.3 or Linux < 2.6.38
+#include <linux/version.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(2,6,38)
+#include <linux/types.h>
+#include <linux/videodev.h>
+#else
 #include <libv4l1-videodev.h>
+#endif
 
 namespace barcodeRecognition {
 
