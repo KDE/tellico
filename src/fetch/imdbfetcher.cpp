@@ -1259,6 +1259,7 @@ QString IMDBFetcher::defaultName() {
 QString IMDBFetcher::defaultIcon() {
   return favIcon("http://imdb.com");
 }
+
 //static
 Tellico::StringHash IMDBFetcher::allOptionalFields() {
   StringHash hash;

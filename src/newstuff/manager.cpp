@@ -324,7 +324,7 @@ bool Manager::installScript(const QString& file_) {
 }
 
 bool Manager::removeScriptByName(const QString& name_) {
-  DEBUG_BLOCK;
+//  DEBUG_BLOCK;
   if(name_.isEmpty()) {
     return false;
   }
