@@ -78,7 +78,7 @@ void AnimenfoFetcherTest::testMegami() {
   QCOMPARE(entry->field("episodes"), QLatin1String("2"));
   QCOMPARE(entry->field("studio"), QLatin1String("AIC (Anime International Company)"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ああっ女神さまっ (2011)"));
-  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(entry->field("plot").startsWith(QLatin1String("Keiichi finds out")));
   QVERIFY(!entry->field("cover").isEmpty());
 }
 
@@ -114,9 +114,16 @@ void AnimenfoFetcherTest::testHachimitsu() {
   QCOMPARE(entry->field("genre"), QLatin1String("Comedy; Drama; Romance"));
   QCOMPARE(entry->field("studio"), QLatin1String("J.C.STAFF"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ハチミツとクローバー"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Kasai Kenichi (カサヰ ケンイチ)"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("Kuroda Yosuke (黒田洋介)"));
   QCOMPARE(entry->field("alttitle"), QLatin1String("Honey and Clover"));
-  QVERIFY(!entry->field("plot").isEmpty());
+  QCOMPARE(entry->field("animenfo-rating"), QLatin1String("9"));
+  QVERIFY(entry->field("plot").startsWith(QLatin1String("Takemoto, Mayama, and Morita are students")));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("animenfo").isEmpty());
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(castList.count(), 7);
+  QCOMPARE(castList.at(0), QString::fromUtf8("Kudo Haruka (工藤晴香)::Hanamoto Hagumi"));
 }
 
 void AnimenfoFetcherTest::slotResult(KJob* job_) {

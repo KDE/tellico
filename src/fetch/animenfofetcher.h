@@ -81,7 +81,7 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  Data::EntryPtr parseEntry(const QString& str);
+  Data::EntryPtr parseEntry(const QString& str, const KUrl& url);
 
   QByteArray m_data;
   int m_total;
