@@ -283,6 +283,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
   fieldMap.insert(QLatin1String("US Distribution"), QLatin1String("distributor"));
   fieldMap.insert(QLatin1String("Director"), QLatin1String("director"));
   fieldMap.insert(QLatin1String("Script"), QLatin1String("writer"));
+  fieldMap.insert(QLatin1String("Music"), QLatin1String("composer"));
   fieldMap.insert(QLatin1String("User Rating"), QLatin1String("animenfo-rating"));
 
   Data::EntryPtr entry(new Data::Entry(coll));
@@ -296,25 +297,38 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
       if(fieldMap.contains(key)) {
         value = value.simplified();
         if(value != QLatin1String("-")) {
-          if(key == QLatin1String("Genres")) {
-            entry->setField(fieldMap[key], value.split(QRegExp(QLatin1String("\\s*,\\s*"))).join(FieldFormat::delimiterString()));
-          } else if(key == QLatin1String("Title")) {
+          const QString fieldName = fieldMap.value(key);
+          if(key == QLatin1String("Title")) {
             // strip possible trailing year, etc.
             fullTitle = value;
             value.remove(QRegExp(QLatin1String("\\s*\\([^)]*\\)$")));
-            entry->setField(fieldMap[key], value);
+            entry->setField(fieldName, value);
           } else if(key == QLatin1String("Total Episodes")) {
             // strip possible trailing text
             value.remove(QRegExp(QLatin1String("[\\D].*$")));
-            entry->setField(fieldMap[key], value);
+            entry->setField(fieldName, value);
           } else if(key == QLatin1String("User Rating")) {
             QRegExp rating(QLatin1String("^(.*)/10"));
             if(rating.indexIn(value) > -1) {
               const double d = rating.cap(1).toDouble();
-              entry->setField(fieldMap[key], QString::number(static_cast<int>(d+0.5)));
+              entry->setField(fieldName, QString::number(static_cast<int>(d+0.5)));
             }
+          } else if(key == QLatin1String("Studio")) {
+            // strip possible trailing text
+            value.remove(QRegExp(QLatin1String("[\\D].*$")));
+            entry->setField(fieldName, value);
           } else {
-            entry->setField(fieldMap[key], value);
+            entry->setField(fieldName, value);
+          }
+          if(fieldName == QLatin1String("studio") ||
+             fieldName == QLatin1String("genre") ||
+             fieldName == QLatin1String("script") ||
+             fieldName == QLatin1String("distributor") ||
+             fieldName == QLatin1String("director") ||
+             fieldName == QLatin1String("writer") ||
+             fieldName == QLatin1String("composer")) {
+            QStringList values = entry->field(fieldName).split(QRegExp(QLatin1String("\\s*,\\s*")));
+            entry->setField(fieldName, values.join(FieldFormat::delimiterString()));
           }
         }
       }
@@ -326,7 +340,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
         key = infoRx.cap(1).remove(tagRx);
         break;
       case 1:
-        value = infoRx.cap(1).remove(tagRx);
+        value = infoRx.cap(1).replace(QLatin1String("<br />"), QLatin1String("; ")).remove(tagRx);
         break;
     }
     n = (n+1)%2;
@@ -355,9 +369,11 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
     pos += a.length();
     int pos2 = s.indexOf(QLatin1String("<td class=\"anime_cat_left"), pos+1);
     if(pos2 > -1) {
-      value = s.mid(pos, pos2-pos);
+      value = s.mid(pos, pos2-pos).simplified();
       value.replace(QLatin1String("<br />"), FieldFormat::rowDelimiterString());
-      value = value.remove(tagRx).simplified();
+      myDebug() << value;
+      value = value.remove(tagRx).trimmed();
+      myDebug() << value;
       entry->setField(QLatin1String("alttitle"), value);
     }
   }
@@ -368,7 +384,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
     descRx.setMinimal(true);
     pos = descRx.indexIn(s, pos+1);
     if(pos > -1) {
-      entry->setField(QLatin1String("plot"), descRx.cap(1).simplified());
+      entry->setField(QLatin1String("plot"), descRx.cap(1).remove(tagRx).simplified());
     }
   }
 
