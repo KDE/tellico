@@ -42,7 +42,8 @@ private Q_SLOTS:
   void initTestCase();
   void testMegami();
   void testHachimitsu();
-
+  void testGhost();
+ 
   void slotResult(KJob* job);
 
 private:

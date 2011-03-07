@@ -25,6 +25,7 @@
 #include "animenfofetcher.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
+#include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
@@ -62,7 +63,8 @@ QString AnimeNfoFetcher::source() const {
 }
 
 bool AnimeNfoFetcher::canFetch(int type) const {
-  return type == Data::Collection::Video;
+  return type == Data::Collection::Book ||
+         type == Data::Collection::Video;
 }
 
 void AnimeNfoFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -76,7 +78,21 @@ void AnimeNfoFetcher::search() {
   KUrl u(ANIMENFO_BASE_URL);
   u.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
   u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
-  u.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
+
+  switch(request().collectionType) {
+    case Data::Collection::Book:
+      u.addQueryItem(QLatin1String("queryin"),  QLatin1String("manga_titles"));
+      break;
+
+    case Data::Collection::Video:
+      u.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
+      break;
+      
+    default:
+      myWarning() << "collection type not valid:" << request().collectionType;
+      stop();
+      return;
+  }
 
   switch(request().key) {
     case Keyword:
@@ -242,8 +258,20 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
   QString s = str_;
   s.remove(jsRx);
 
-  Data::CollPtr coll(new Data::VideoCollection(true));
+  Data::CollPtr coll;
+  switch(request().collectionType) {
+    case Data::Collection::Book:
+      coll = Data::CollPtr(new Data::BookCollection(true));
+      break;
 
+    case Data::Collection::Video:
+      coll = Data::CollPtr(new Data::VideoCollection(true));
+      break;
+
+    default:
+      return Data::EntryPtr();   
+  }
+     
   // add new fields
   Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
   coll->addField(f);
@@ -278,13 +306,26 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
   fieldMap.insert(QLatin1String("Total Episodes"), QLatin1String("episodes"));
   fieldMap.insert(QLatin1String("Category"), QLatin1String("keyword"));
   fieldMap.insert(QLatin1String("Genres"), QLatin1String("genre"));
-  fieldMap.insert(QLatin1String("Year Published"), QLatin1String("year"));
+  fieldMap.insert(QLatin1String("Genre"), QLatin1String("genre"));
   fieldMap.insert(QLatin1String("Studio"), QLatin1String("studio"));
   fieldMap.insert(QLatin1String("US Distribution"), QLatin1String("distributor"));
+  fieldMap.insert(QLatin1String("Author"), QLatin1String("author"));
+  fieldMap.insert(QLatin1String("Publisher"), QLatin1String("publisher"));
   fieldMap.insert(QLatin1String("Director"), QLatin1String("director"));
   fieldMap.insert(QLatin1String("Script"), QLatin1String("writer"));
   fieldMap.insert(QLatin1String("Music"), QLatin1String("composer"));
   fieldMap.insert(QLatin1String("User Rating"), QLatin1String("animenfo-rating"));
+
+  switch(request().collectionType) {
+    case Data::Collection::Book:
+      fieldMap.insert(QLatin1String("Year Published"), QLatin1String("pub_year"));
+      break;
+    case Data::Collection::Video:
+      fieldMap.insert(QLatin1String("Year Published"), QLatin1String("year"));
+      break;
+    default:
+      break;   
+  }
 
   Data::EntryPtr entry(new Data::Entry(coll));
 
@@ -296,7 +337,10 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
     if(n == 0 && !key.isEmpty()) {
       if(fieldMap.contains(key)) {
         value = value.simplified();
-        if(value != QLatin1String("-")) {
+        if(value.endsWith(QLatin1Char(';'))) {
+          value.chop(1);
+        }
+        if(!value.isEmpty() && value != QLatin1String("-")) {
           const QString fieldName = fieldMap.value(key);
           if(key == QLatin1String("Title")) {
             // strip possible trailing year, etc.
@@ -313,9 +357,9 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
               const double d = rating.cap(1).toDouble();
               entry->setField(fieldName, QString::number(static_cast<int>(d+0.5)));
             }
-          } else if(key == QLatin1String("Studio")) {
+          } else if(key == QLatin1String("Year Published")) {
             // strip possible trailing text
-            value.remove(QRegExp(QLatin1String("[\\D].*$")));
+            value.remove(QRegExp(QLatin1String("[\\D;].*$")));
             entry->setField(fieldName, value);
           } else {
             entry->setField(fieldName, value);
@@ -326,6 +370,8 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
              fieldName == QLatin1String("distributor") ||
              fieldName == QLatin1String("director") ||
              fieldName == QLatin1String("writer") ||
+             fieldName == QLatin1String("author") ||
+             fieldName == QLatin1String("publisher") ||
              fieldName == QLatin1String("composer")) {
             QStringList values = entry->field(fieldName).split(QRegExp(QLatin1String("\\s*,\\s*")));
             entry->setField(fieldName, values.join(FieldFormat::delimiterString()));
@@ -371,9 +417,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
     if(pos2 > -1) {
       value = s.mid(pos, pos2-pos).simplified();
       value.replace(QLatin1String("<br />"), FieldFormat::rowDelimiterString());
-      myDebug() << value;
       value = value.remove(tagRx).trimmed();
-      myDebug() << value;
       entry->setField(QLatin1String("alttitle"), value);
     }
   }

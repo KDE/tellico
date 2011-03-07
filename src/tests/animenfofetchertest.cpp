@@ -45,7 +45,7 @@ AnimenfoFetcherTest::AnimenfoFetcherTest() : m_loop(this) {
 
 void AnimenfoFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
-  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
+//  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
 }
 
 void AnimenfoFetcherTest::testMegami() {
@@ -73,11 +73,11 @@ void AnimenfoFetcherTest::testMegami() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Aa! Megami-sama!"));
+  QCOMPARE(entry->field("title"), QLatin1String("Aa! Megami-sama!: Together Forever"));
   QCOMPARE(entry->field("year"), QLatin1String("2011"));
   QCOMPARE(entry->field("episodes"), QLatin1String("2"));
   QCOMPARE(entry->field("studio"), QLatin1String("AIC (Anime International Company)"));
-  QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ああっ女神さまっ (2011)"));
+  QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ああっ女神さまっ ~ いつも二人で"));
   QVERIFY(entry->field("plot").startsWith(QLatin1String("Keiichi finds out")));
   QVERIFY(!entry->field("cover").isEmpty());
 }
@@ -124,6 +124,42 @@ void AnimenfoFetcherTest::testHachimitsu() {
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.count(), 7);
   QCOMPARE(castList.at(0), QString::fromUtf8("Kudo Haruka (工藤晴香)::Hanamoto Hagumi"));
+}
+
+void AnimenfoFetcherTest::testGhost() {
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  QString groupName = QLatin1String("AnimeNfo.com");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword, "Ghost in the Shell");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  job->setMaximumResults(1);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Kokaku Kido Tai"));
+  QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Action; Science-Fiction"));
+  QCOMPARE(entry->field("publisher"), QLatin1String("Kodansha"));
+  QCOMPARE(entry->field("origtitle"), QString::fromUtf8("攻殻機動隊"));
+  QCOMPARE(entry->field("author"), QString::fromUtf8("Shiro Masamune (士郎 正宗)"));
+  QCOMPARE(entry->field("alttitle"), QLatin1String("Ghost in the Shell"));
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field("animenfo").isEmpty());
 }
 
 void AnimenfoFetcherTest::slotResult(KJob* job_) {

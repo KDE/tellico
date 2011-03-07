@@ -1,3 +1,7 @@
+2011-03-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Manga search for AnimeNfo.
+
 2011-02-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed parsing bug with AnimeNfo results.
