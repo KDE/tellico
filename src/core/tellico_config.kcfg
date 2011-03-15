@@ -96,16 +96,16 @@
     </entry>
     <entry key="Last Open File" type="String"/>
     <entry key="No Capitalization" name="noCapitalizationString" type="String">
-        <default code="true">i18n("a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with")</default>
+        <default code="true">i18nc("comma-separated list of words ignored by auto-capitalize", "a,an,and,as,at,but,by,for,from,in,into,nor,of,off,on,onto,or,out,over,the,to,up,with")</default>
     </entry>
     <entry key="Articles" name="articlesString" type="String">
-        <default code="true">i18n("the")</default>
+        <default code="true">i18nc("comma-separated list of articles ignored for title sorting", "the")</default>
     </entry>
     <entry key="Name Suffixes" name="nameSuffixesString" type="String">
-        <default code="true">i18n("jr.,jr,iii,iv")</default>
+        <default code="true">i18nc("comma-separated list of common surname suffixes, used for sorting", "jr.,jr,iii,iv")</default>
     </entry>
     <entry key="Surname Prefixes" name="surnamePrefixesString" type="String">
-        <default code="true">i18n("de,van,der,van der,von")</default>
+        <default code="true">i18nc("comma-separated list of common surname prefixes, used for sorting", "de,van,der,van der,von")</default>
     </entry>
     <entry key="Max Icon Size" type="Int">
         <default>96</default>
