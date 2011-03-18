@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "gcstarpluginfetcher.h"
-#include "gcstarthread.cpp"
+#include "gcstarthread.h"
 #include "fetchmanager.h"
 #include "../collection.h"
 #include "../entry.h"

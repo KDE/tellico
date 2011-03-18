@@ -49,21 +49,6 @@
 namespace {
   static const char* FILMASTER_API_URL = "http://api.filmaster.com";
   static const char* FILMASTER_QUERY_URL = "http://api.filmaster.com/1.0/search/";
-
-  QString value(const QVariantMap& map, const char* name) {
-    const QVariant v = map.value(QLatin1String(name));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert(QVariant::String)) {
-      return v.toString();
-    } else if(v.canConvert(QVariant::StringList)) {
-      return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-    } else if(v.canConvert(QVariant::Map)) {
-      return v.toMap().value(QLatin1String("value")).toString();
-    } else {
-      return QString();
-    }
-  }
 }
 
 using namespace Tellico;
@@ -343,6 +328,21 @@ void FilmasterFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString FilmasterFetcher::ConfigWidget::preferredName() const {
   return FilmasterFetcher::defaultName();
+}
+
+QString FilmasterFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else if(v.canConvert(QVariant::Map)) {
+    return v.toMap().value(QLatin1String("value")).toString();
+  } else {
+    return QString();
+  }
 }
 
 #include "filmasterfetcher.moc"

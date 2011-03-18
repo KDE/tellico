@@ -81,7 +81,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   m_label = new QLabel(this);
   m_label->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
   m_label->setFrameStyle(QFrame::Panel | QFrame::Sunken);
-  m_label->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+  m_label->setAlignment(Qt::AlignCenter);
   l->addWidget(m_label, 1);
   l->addSpacing(IMAGE_WIDGET_BUTTON_MARGIN);
 

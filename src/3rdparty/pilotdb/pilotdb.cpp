@@ -30,7 +30,7 @@
 #include <QBuffer>
 
 using namespace PalmLib;
-using Tellico::Export::PilotDB;
+using Tellico::Export::PilotDatabase;
 
 namespace {
   static const int PI_HDR_SIZE          = 78;
@@ -38,7 +38,7 @@ namespace {
   static const int PI_RECORD_ENT_SIZE   = 8;
 }
 
-PilotDB::PilotDB() : Database(false), m_app_info(), m_sort_info(),
+PilotDatabase::PilotDatabase() : Database(false), m_app_info(), m_sort_info(),
     m_next_record_list_id(0) {
   pi_int32_t now = StrOps::get_current_time();
   creation_time(now);
@@ -46,13 +46,13 @@ PilotDB::PilotDB() : Database(false), m_app_info(), m_sort_info(),
   backup_time(now);
 }
 
-PilotDB::~PilotDB() {
+PilotDatabase::~PilotDatabase() {
   for(record_list_t::iterator i = m_records.begin(); i != m_records.end(); ++i) {
     delete (*i);
   }
 }
 
-QByteArray PilotDB::data() {
+QByteArray PilotDatabase::data() {
   QBuffer b;
   b.open(QIODevice::WriteOnly);
 
@@ -131,21 +131,21 @@ QByteArray PilotDB::data() {
 
 // Return the record identified by the given index. The caller owns
 // the returned RawRecord object.
-Record PilotDB::getRecord(unsigned index) const
+Record PilotDatabase::getRecord(unsigned index) const
 {
     if (index >= m_records.size()) myDebug() << "invalid index";
     return *(reinterpret_cast<Record *> (m_records[index]));
 }
 
 // Set the record identified by the given index to the given record.
-void PilotDB::setRecord(unsigned index, const Record& rec)
+void PilotDatabase::setRecord(unsigned index, const Record& rec)
 {
 //    if (index >= m_records.size()) myDebug() << "invalid index");
     *(reinterpret_cast<Record *> (m_records[index])) = rec;
 }
 
 // Append the given record to the database.
-void PilotDB::appendRecord(const Record& rec)
+void PilotDatabase::appendRecord(const Record& rec)
 {
     Record* record = new Record(rec);
 
@@ -165,7 +165,7 @@ void PilotDB::appendRecord(const Record& rec)
 }
 
 
-void PilotDB::clearRecords()
+void PilotDatabase::clearRecords()
 {
   m_records.erase(m_records.begin(), m_records.end());
 }
@@ -173,7 +173,7 @@ void PilotDB::clearRecords()
 // Return the resource with the given type and ID. NULL is returned if
 // the specified (type, ID) combination is not present in the
 // database. The caller owns the returned RawRecord object.
-Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
+Resource PilotDatabase::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
 {
     for (record_list_t::const_iterator i = m_records.begin();
          i != m_records.end(); ++i) {
@@ -189,20 +189,20 @@ Resource PilotDB::getResourceByType(pi_uint32_t type, pi_uint32_t id) const
 // Return the resource present at the given index. NULL is returned if
 // the index is invalid. The caller owns the returned RawRecord
 // object.
-Resource PilotDB::getResourceByIndex(unsigned index) const
+Resource PilotDatabase::getResourceByIndex(unsigned index) const
 {
     if (index >= m_records.size()) myDebug() << "invalid index";
     return *(reinterpret_cast<Resource *> (m_records[index]));
 }
 
 // Set the resouce at given index to passed RawResource object.
-void PilotDB::setResource(unsigned index, const Resource& resource)
+void PilotDatabase::setResource(unsigned index, const Resource& resource)
 {
     if (index >= m_records.size()) myDebug() << "invalid index";
     *(reinterpret_cast<Resource *> (m_records[index])) = resource;
 }
 
-FlatFile::Field PilotDB::string2field(FlatFile::Field::FieldType type, const std::string& fldstr) {
+FlatFile::Field PilotDatabase::string2field(FlatFile::Field::FieldType type, const std::string& fldstr) {
   FlatFile::Field field;
 
   switch (type) {

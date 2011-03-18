@@ -34,7 +34,7 @@
 #include "libpalm/Database.h"
 #include "libflatfile/Field.h"
 
-#include <QByteArray>
+class QByteArray;
 
 namespace Tellico {
   namespace Export {
@@ -42,10 +42,10 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class PilotDB : public PalmLib::Database {
+class PilotDatabase : public PalmLib::Database {
 public:
-  PilotDB();
-  ~PilotDB();
+  PilotDatabase();
+  ~PilotDatabase();
 
   QByteArray data();
 

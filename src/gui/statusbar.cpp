@@ -47,12 +47,12 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
 
   // don't care about text and id
   m_mainLabel = new QLabel(this);
-  m_mainLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+  m_mainLabel->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::Alignment(Qt::AlignVCenter));
   m_mainLabel->setIndent(4);
   insertPermanentWidget(0, m_mainLabel, 3 /*stretch*/);
 
   m_countLabel = new QLabel(this);
-  m_countLabel->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+  m_countLabel->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::Alignment(Qt::AlignVCenter));
   m_countLabel->setIndent(4);
   insertPermanentWidget(1, m_countLabel, 0);
 

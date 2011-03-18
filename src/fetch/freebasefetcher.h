@@ -89,6 +89,9 @@ private slots:
   void slotComplete(KJob* job);
 
 private:
+  static QString value(const QVariantMap& map, const char* name);
+  static QString value(const QVariantMap& map, const char* object, const char* name);
+
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();

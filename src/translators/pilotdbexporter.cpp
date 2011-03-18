@@ -198,7 +198,7 @@ bool PilotDBExporter::exec() {
         value.remove(tags);
       }
       // the number of fields in the record must match the number of fields in the database
-      record.appendField(PilotDB::string2field(db.field_type(i),
+      record.appendField(PilotDatabase::string2field(db.field_type(i),
                          value.isEmpty() ? std::string() : codec->fromUnicode(value).data()));
       ++i;
     }
@@ -206,7 +206,7 @@ bool PilotDBExporter::exec() {
     db.appendRecord(record);
   }
 
-  PilotDB pdb;
+  PilotDatabase pdb;
   db.outputPDB(pdb);
 
   return FileHandler::writeDataURL(url(), pdb.data(), options() & Export::ExportForce);

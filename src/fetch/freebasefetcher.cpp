@@ -55,36 +55,6 @@ namespace {
   static const char* FREEBASE_BLURB_URL = "http://api.freebase.com/api/trans/blurb";
   static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
-
-  QString value(const QVariantMap& map, const char* name) {
-    const QVariant v = map.value(QLatin1String(name));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert(QVariant::String)) {
-      return v.toString();
-    } else if(v.canConvert(QVariant::StringList)) {
-      return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-    } else if(v.canConvert(QVariant::Map)) {
-      return v.toMap().value(QLatin1String("name")).toString();
-    } else {
-      return QString();
-    }
-  }
-
-  QString value(const QVariantMap& map, const char* object, const char* name) {
-    const QVariant v = map.value(QLatin1String(object));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert(QVariant::Map)) {
-      return value(v.toMap(), name);
-    } else if(v.canConvert(QVariant::List)) {
-      QVariantList list = v.toList();
-      return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
-    } else {
-      return QString();
-    }
-  }
-
 }
 
 using namespace Tellico;
@@ -941,6 +911,35 @@ void FreebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString FreebaseFetcher::ConfigWidget::preferredName() const {
   return FreebaseFetcher::defaultName();
+}
+
+QString FreebaseFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else if(v.canConvert(QVariant::Map)) {
+    return v.toMap().value(QLatin1String("name")).toString();
+  } else {
+    return QString();
+  }
+}
+
+QString FreebaseFetcher::value(const QVariantMap& map, const char* object, const char* name) {
+  const QVariant v = map.value(QLatin1String(object));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::Map)) {
+    return value(v.toMap(), name);
+  } else if(v.canConvert(QVariant::List)) {
+    QVariantList list = v.toList();
+    return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
+  } else {
+    return QString();
+  }
 }
 
 #include "freebasefetcher.moc"

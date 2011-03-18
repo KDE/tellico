@@ -44,7 +44,6 @@ SET(translators_STAT_SRCS
    xsltexporter.cpp
    xslthandler.cpp
    xsltimporter.cpp
-   ../entryupdatejob.cpp
    )
 
 KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
