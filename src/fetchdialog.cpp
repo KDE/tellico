@@ -203,7 +203,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   topLayout->addWidget(split);
 
   m_treeWidget = new QTreeWidget(split);
-  m_treeWidget->header()->setSortIndicatorShown(true);
   m_treeWidget->sortItems(1, Qt::AscendingOrder);
   m_treeWidget->setAllColumnsShowFocus(true);
   m_treeWidget->setSortingEnabled(true);
@@ -215,6 +214,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_treeWidget->setColumnWidth(0, 20); // will show a check mark when added
   m_treeWidget->model()->setHeaderData(0, Qt::Horizontal, Qt::AlignHCenter, Qt::TextAlignmentRole); // align checkmark in middle
   m_treeWidget->viewport()->installEventFilter(this);
+  m_treeWidget->header()->setSortIndicatorShown(true);
+  m_treeWidget->header()->setResizeMode(QHeaderView::Stretch);
+  m_treeWidget->header()->setResizeMode(0, QHeaderView::ResizeToContents);
 
   connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
   // double clicking should add the entry
