@@ -73,10 +73,10 @@ void FilterCommand::redo() {
       break;
 
     case FilterModify:
-      Data::Document::self()->collection()->removeFilter(m_oldFilter);
-      Controller::self()->removedFilter(m_oldFilter);
       Data::Document::self()->collection()->addFilter(m_activeFilter);
       Controller::self()->addedFilter(m_activeFilter);
+      Data::Document::self()->collection()->removeFilter(m_oldFilter);
+      Controller::self()->removedFilter(m_oldFilter);
       break;
 
     case FilterRemove:

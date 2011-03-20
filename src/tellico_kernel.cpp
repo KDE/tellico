@@ -268,6 +268,7 @@ bool Kernel::modifyFilter(Tellico::FilterPtr filter_) {
     return false;
   }
 
+  newFilter = filterDlg.currentFilter();
   doCommand(new Command::FilterCommand(Command::FilterCommand::FilterModify, newFilter, filter_));
   return true;
 }

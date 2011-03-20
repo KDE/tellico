@@ -62,21 +62,6 @@ FilterView::FilterView(QWidget* parent_)
   setItemDelegate(new GUI::CountDelegate(this));
 }
 
-/*
-bool FilterView::isSelectable(GUI::ListViewItem* item_) const {
-  if(!GUI::ListView::isSelectable(item_)) {
-    return false;
-  }
-
-  // because the popup menu has modify and delete, only
-  // allow one filter item to get selected
-  if(item_->isFilterItem()) {
-    return selectedItems().isEmpty();
-  }
-
-  return true;
-}
-*/
 Tellico::FilterModel* FilterView::sourceModel() const {
   return static_cast<FilterModel*>(sortModel()->sourceModel());
 }

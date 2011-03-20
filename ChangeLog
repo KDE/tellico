@@ -1,3 +1,7 @@
+2011-03-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed editing existing filters (Bug 268829).
+
 2011-03-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Manga search for AnimeNfo.
