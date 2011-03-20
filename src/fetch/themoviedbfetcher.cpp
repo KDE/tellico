@@ -63,6 +63,11 @@ QString TheMovieDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// http://api.themoviedb.org/2.1/terms-of-use
+QString TheMovieDBFetcher::attribution() const {
+  return QString::fromLatin1("This product uses the TMDb API but is not endorsed or certified by TMDb.");
+}
+
 bool TheMovieDBFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }

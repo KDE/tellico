@@ -63,6 +63,7 @@ public:
   /**
    */
   virtual QString source() const;
+  virtual QString attribution() const;
   virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
   virtual Type type() const { return TheMovieDB; }
   virtual bool canFetch(int type) const;
