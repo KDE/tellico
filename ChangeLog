@@ -1,3 +1,7 @@
+2011-03-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug for editing some values (Bug 269044).
+
 2011-03-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed editing existing filters (Bug 268829).

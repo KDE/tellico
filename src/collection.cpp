@@ -521,7 +521,7 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
     foreach(EntryGroup* group, groups) {
       // only clear groups for the modified fields, skip the others
       // also clear for all derived values, just in case
-      if(!fields_.contains(group->fieldName()) && !fieldByName(group->fieldName())->hasFlag(Field::Derived))  {
+      if(!fields_.contains(group->fieldName()) && hasField(group->fieldName()) && !fieldByName(group->fieldName())->hasFlag(Field::Derived))  {
         continue;
       }
       if(entry->removeFromGroup(group)) {
