@@ -24,15 +24,15 @@ typedef struct _sym
 void zzs_init(int, int);
 void zzs_free(void);
 void zzs_done(void);
-void zzs_add(char *, Sym *);
-Sym *zzs_get(char *);
+void zzs_add(const char *, Sym *);
+Sym *zzs_get(const char *);
 void zzs_del(Sym *);
 void zzs_keydel(char *);
 Sym **zzs_scope(Sym **);
 Sym *zzs_rmscope(Sym **);
 void zzs_stat(void);
-Sym *zzs_new(char *);
-Sym *zzs_newadd(char *);
-char *zzs_strdup(char *);
+Sym *zzs_new(const char *);
+Sym *zzs_newadd(const char *);
+char *zzs_strdup(const char *);
 
 #endif

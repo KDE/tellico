@@ -284,11 +284,11 @@ ushort bt_error_status (int *saved_counts);
 
 /* macros.c */
 void bt_add_macro_value (AST *assignment, ushort options);
-void bt_add_macro_text (char * macro, char * text, char * filename, int line);
-void bt_delete_macro (char * macro);
+void bt_add_macro_text (const char * macro, const char * text, const char * filename, int line);
+void bt_delete_macro (const char * macro);
 void bt_delete_all_macros (void);
-int bt_macro_length (char *macro);
-char * bt_macro_text (char * macro, char * filename, int line);
+int bt_macro_length (const char *macro);
+char * bt_macro_text (const char * macro, const char * filename, int line);
 
 /* traversal.c */
 AST *bt_next_entry (AST *entry_list, AST *prev_entry);

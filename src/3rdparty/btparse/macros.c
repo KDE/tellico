@@ -47,7 +47,7 @@ Sym *AllMacros = NULL;                  /* `scope' so we can get back list */
 
 
 GEN_PRIVATE_ERRFUNC (macro_warning,
-                     (char * filename, int line, const char * fmt, ...),
+                     (const char * filename, int line, const char * fmt, ...),
                      BTERR_CONTENT, filename, line, NULL, -1, fmt)
 
 
@@ -220,7 +220,7 @@ bt_add_macro_value (AST *assignment, ushort options)
 @MODIFIED   : 
 -------------------------------------------------------------------------- */
 void
-bt_add_macro_text (char * macro, char * text, char * filename, int line)
+bt_add_macro_text (const char * macro, const char * text, const char * filename, int line)
 {
    Sym * sym;
    Sym * new_rec;
@@ -260,7 +260,7 @@ bt_add_macro_text (char * macro, char * text, char * filename, int line)
 @MODIFIED   : 
 -------------------------------------------------------------------------- */
 void
-bt_delete_macro (char * macro)
+bt_delete_macro (const char * macro)
 {
    Sym * sym;
 
@@ -320,7 +320,7 @@ bt_delete_all_macros (void)
 @CREATED    : Jan 1997, GPW
 -------------------------------------------------------------------------- */
 int
-bt_macro_length (char *macro)
+bt_macro_length (const char *macro)
 {
    Sym   *sym;
 
@@ -349,7 +349,7 @@ bt_macro_length (char *macro)
 @CREATED    : Jan 1997, GPW
 -------------------------------------------------------------------------- */
 char *
-bt_macro_text (char * macro, char * filename, int line)
+bt_macro_text (const char * macro, const char * filename, int line)
 {
    Sym *  sym;
 

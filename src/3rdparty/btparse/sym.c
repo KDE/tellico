@@ -175,10 +175,10 @@ zzs_done(void)
 }
 
 void
-zzs_add(char *key, register Sym *rec)
+zzs_add(const char *key, register Sym *rec)
 {
     register unsigned int h=0;
-    register char *p=key;
+    const char *p=key;
     
     HASH_FUN(p, h);
     rec->hash = h;                  /* save hash code for fast comp later */
@@ -193,10 +193,10 @@ zzs_add(char *key, register Sym *rec)
 }
 
 Sym *
-zzs_get(char *key)
+zzs_get(const char *key)
 {
     register unsigned int h=0;
-    register char *p=key;
+    const char *p=key;
     register Sym *q;
     
     HASH_FUN(p, h);
@@ -288,7 +288,7 @@ zzs_stat(void)
         
         if ( q != NULL && low==0 ) low = p-table;
         len = 0;
-        if ( q != NULL ) printf("[%d]", p-table);
+        if ( q != NULL ) printf("[%ld]", p-table);
         while ( q != NULL )
         {
             len++;
@@ -325,10 +325,9 @@ zzs_stat(void)
  * in the string table.
  */
 Sym *
-zzs_new(char *text)
+zzs_new(const char *text)
 {
     Sym *p;
-    char *zzs_strdup(register char *s);
     
     if ( (p = (Sym *) calloc(1,sizeof(Sym))) == 0 )
     {
@@ -342,7 +341,7 @@ zzs_new(char *text)
 
 /* create a new symbol table entry and add it to the symbol table */
 Sym *
-zzs_newadd(char *text)
+zzs_newadd(const char *text)
 {
     Sym *p = zzs_new(text);
     if ( p != NULL ) zzs_add(text, p);
@@ -353,7 +352,7 @@ zzs_newadd(char *text)
  * Bump the pointer into the string table to next avail position.
  */
 char *
-zzs_strdup(register char *s)
+zzs_strdup(const char *s)
 {
     register char *start=strp;
 
