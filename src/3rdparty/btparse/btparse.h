@@ -145,7 +145,7 @@ typedef enum
 typedef struct _ast
 {
    struct _ast *right, *down;
-   char *           filename;
+   const char *     filename;
    int              line;
    int              offset;
    bt_nodetype    nodetype;
@@ -238,7 +238,7 @@ typedef struct
    int         line;
    const char *      item_desc;
    int         item;
-   char *      message;
+   const char *message;
 } bt_error;
 
 typedef void (*bt_err_handler) (bt_error *);
