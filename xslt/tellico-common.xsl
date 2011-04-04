@@ -230,25 +230,6 @@
  </xsl:choose>
 </xsl:template>
 
-<xsl:template name="msqueeze">
- <xsl:param name="str"/>
- <xsl:param name="len"/>
-
- <xsl:variable name="slen" select="string-length($str)"/>
- <xsl:variable name="mid" select="floor($len div 2)"/>
-
- <xsl:choose>
-  <xsl:when test="$slen &gt; $len">
-   <xsl:value-of select="substring($str, 0, $mid - 2)"/>
-   <xsl:text>[...]</xsl:text>
-   <xsl:value-of select="substring($str, $slen - $mid + 3, $mid - 2)"/>
-  </xsl:when>
-  <xsl:otherwise>
-   <xsl:value-of select="$str"/>
-  </xsl:otherwise>
- </xsl:choose>
-</xsl:template>
-
 <!-- sums all nodes, assuming they are in MM:SS format -->
 <xsl:template name="sumTime">
  <xsl:param name="nodes" select="/.."/>
