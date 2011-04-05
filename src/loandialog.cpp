@@ -262,9 +262,9 @@ QUndoCommand* LoanDialog::addLoansCommand() {
   // see if there's a borrower with this name already
   m_borrower = 0;
   Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
-  foreach(Data::BorrowerPtr it, borrowers) {
-    if(it->name() == name) {
-      m_borrower = it;
+  foreach(Data::BorrowerPtr borrower, borrowers) {
+    if(borrower->name() == name) {
+      m_borrower = borrower;
       break;
     }
   }
