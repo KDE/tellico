@@ -23,8 +23,10 @@
  ***************************************************************************/
 
 #include "removeentries.h"
+#include "removeloans.h"
 #include "../collection.h"
 #include "../controller.h"
+#include "../tellico_debug.h"
 
 #include <klocale.h>
 
@@ -39,6 +41,20 @@ RemoveEntries::RemoveEntries(Tellico::Data::CollPtr coll_, const Tellico::Data::
     setText(m_entries.count() > 1 ? i18n("Delete Entries")
                                   : i18nc("Delete (Entry Title)", "Delete %1", m_entries[0]->title()));
   }
+
+  // also need to allow for removing entries that might be loaned out
+  // nothing for it but to do full-blown iterative search
+  Data::LoanList loans;
+  foreach(Data::BorrowerPtr borrower, m_coll->borrowers()) {
+    foreach(Data::EntryPtr entry, m_entries) {
+      if(borrower->hasEntry(entry)) {
+        loans += borrower->loan(entry);
+      }
+    }
+  }
+  if(!loans.isEmpty()) {
+    new RemoveLoans(loans, this);
+  }
 }
 
 void RemoveEntries::redo() {
@@ -48,6 +64,8 @@ void RemoveEntries::redo() {
 
   m_coll->removeEntries(m_entries);
   Controller::self()->removedEntries(m_entries);
+  
+  QUndoCommand::redo();
 }
 
 void RemoveEntries::undo() {
@@ -57,4 +75,6 @@ void RemoveEntries::undo() {
 
   m_coll->addEntries(m_entries);
   Controller::self()->addedEntries(m_entries);
+
+  QUndoCommand::undo();
 }

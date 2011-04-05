@@ -96,6 +96,8 @@ public:
   void addLoan(Data::LoanPtr loan);
   bool removeLoan(Data::LoanPtr loan);
 
+  bool hasEntry(Data::EntryPtr entry);
+
 private:
   QString m_name;
   QString m_uid; // uid used by KABC

@@ -33,8 +33,8 @@
 
 using Tellico::Command::RemoveLoans;
 
-RemoveLoans::RemoveLoans(Tellico::Data::LoanList loans_)
-    : QUndoCommand()
+RemoveLoans::RemoveLoans(Tellico::Data::LoanList loans_, QUndoCommand* parent_)
+    : QUndoCommand(parent_)
     , m_loans(loans_)
 {
   if(!m_loans.isEmpty()) {
@@ -78,12 +78,19 @@ void RemoveLoans::undo() {
     if(loan->inCalendar()) {
       calLoans.append(loan);
     }
+    // if the removeed loan was the only one by the borrower
+    // then instead of modifying the borrower, it has to be added back to the model
+    const bool emptyBorrower = loan->borrower()->isEmpty();
     loan->borrower()->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
     Data::EntryList vec;
     vec.append(loan->entry());
     Controller::self()->modifiedEntries(vec);
-    Controller::self()->modifiedBorrower(loan->borrower());
+    if(emptyBorrower) {
+      Controller::self()->addedBorrower(loan->borrower());
+    } else {
+      Controller::self()->modifiedBorrower(loan->borrower());
+    }
   }
   if(!calLoans.isEmpty()) {
     CalendarHandler::addLoans(calLoans);
