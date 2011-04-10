@@ -262,18 +262,15 @@ bool Entry::addToGroup(EntryGroup* group_) {
 
   m_groups.push_back(group_);
   group_->append(EntryPtr(this));
-//  m_coll->groupModified(group_);
   return true;
 }
 
 bool Entry::removeFromGroup(EntryGroup* group_) {
   // if the removal isn't successful, just return
-  bool success = m_groups.removeAll(group_);
-  success = success && group_->removeAll(EntryPtr(this));
+  bool success = m_groups.removeOne(group_);
+  success = group_->removeOne(EntryPtr(this)) && success;
 //  myDebug() << "removing from group - " << group_->fieldName() << "--" << group_->groupName();
-  if(success) {
-//    m_coll->groupModified(group_);
-  } else {
+  if(!success) {
     myDebug() << "failed!";
   }
   return success;
@@ -306,7 +303,8 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
       }
     }
   } else if(f->hasFlag(Field::AllowMultiple)) {
-    groups.add(FieldFormat::splitValue(formattedField(f)));
+    // use a string split instead of regexp split. since we've already enforced the space after the semi-comma
+    groups.add(FieldFormat::splitValue(formattedField(f), FieldFormat::StringSplit));
   } else {
     groups.add(formattedField(f));
   }

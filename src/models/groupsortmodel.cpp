@@ -54,9 +54,16 @@ void GroupSortModel::setSourceModel(QAbstractItemModel* sourceModel_) {
 
 bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
   // if the index have parents, then they represent entries, compare by title
-  QModelIndex leftParent = left_.parent();
-  QModelIndex rightParent = right_.parent();
-  if(!leftParent.isValid() || !rightParent.isValid()) {
+  // calling index.parent() is expensive for the EntryGroupModel
+  /// all we really need to know is whether the parent is valid
+  const bool leftParentValid = sourceModel()->data(left_, ValidParentRole).toBool();
+  const bool rightParentValid = sourceModel()->data(right_, ValidParentRole).toBool();
+  if(!leftParentValid || !rightParentValid) {
+    // now if we're using count, just pass up the line
+    if(sortRole() == RowCountRole) {
+      return AbstractSortModel::lessThan(left_, right_);
+    }
+
     // we're dealing with groups
     Data::EntryGroup* leftGroup = sourceModel()->data(left_, GroupPtrRole).value<Data::EntryGroup*>();
     Data::EntryGroup* rightGroup = sourceModel()->data(right_, GroupPtrRole).value<Data::EntryGroup*>();
@@ -75,14 +82,9 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     if(emptyLeft && !emptyRight) {
       return reverseOrder ? false : true;
     } else if(!emptyLeft && emptyRight) {
-      return reverseOrder ? true: false;
+      return reverseOrder ? true : false;
     } else if(emptyLeft && emptyRight) {
-      return reverseOrder ? true: false;
-    }
-
-    // now if we're using count, just pass up the line
-    if(sortRole() == RowCountRole) {
-      return AbstractSortModel::lessThan(left_, right_);
+      return reverseOrder ? true : false;
     }
 
    // if we can get the fields' type, then for certain non-text-only
@@ -91,13 +93,11 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
       m_groupComparison = getComparison(leftGroup);
     }
     if(m_groupComparison) {
-      QString leftEntry = leftGroup->groupName();
-      QString rightEntry = rightGroup->groupName();
-      return m_groupComparison->compare(leftEntry, rightEntry) < 0;
+      return m_groupComparison->compare(leftGroup->groupName(), rightGroup->groupName()) < 0;
     }
     // couldn't determine the type or it's a type we want to sort
-    // alphabetically, so sort case-insensitive, localeAware
-    return left_.data().toString().toUpper().localeAwareCompare(right_.data().toString().toUpper()) < 0;
+    // alphabetically, so sort by locale
+    return left_.data().toString().localeAwareCompare(right_.data().toString()) < 0;
   }
 
   // for ordinary entries, just compare with title comparison

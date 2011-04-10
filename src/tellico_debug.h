@@ -89,7 +89,7 @@ public:
   ~Block() {
     std::clock_t finish = std::clock();
     const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
-    KDebug(QtDebugMsg)() << " END:" << m_label << "- duration =" << duration;
+    KDebug(QtDebugMsg)() << "  END:" << m_label << "- duration =" << duration;
   }
 
 private :

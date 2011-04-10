@@ -114,6 +114,7 @@ bool Document::newDocument(int type_) {
 }
 
 bool Document::openDocument(const KUrl& url_) {
+  MARK;
   m_loadAllImages = false;
   // delayed image loading only works for local files
   if(!url_.isLocalFile()) {

@@ -176,9 +176,6 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
   // the ending look-ahead is so that a space is not added at the end
   static const QRegExp periodSpace(QLatin1String("\\.\\s*(?=.)"));
 
-  QRegExp lastWord;
-  lastWord.setCaseSensitivity(Qt::CaseInsensitive);
-
   QString name = name_;
   name.replace(periodSpace, QLatin1String(". "));
   if(opt_.testFlag(FormatCapitalize)) {
@@ -187,11 +184,10 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
 
   // split the name by white space and commas
   QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
-  lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
 
   // if it contains a comma already and the last word is not a suffix, don't format it
   if(!opt_.testFlag(FormatAuto) ||
-      (name.indexOf(QLatin1Char(',')) > -1 && Config::nameSuffixList().filter(lastWord).isEmpty())) {
+      (name.indexOf(QLatin1Char(',')) > -1 && !Config::nameSuffixList().contains(words.last(), Qt::CaseInsensitive))) {
     // arbitrarily impose rule that no spaces before a comma and
     // a single space after every comma
     name.replace(commaSplitRx, QLatin1String(", "));
@@ -200,7 +196,7 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
     // but only if there is more than one word
 
     // if the last word is a suffix, it has to be kept with last name
-    if(Config::nameSuffixList().filter(lastWord).count() > 0) {
+    if(Config::nameSuffixList().contains(words.last(), Qt::CaseInsensitive)) {
       words.prepend(words.last().append(QLatin1Char(',')));
       words.removeLast();
     }
@@ -210,14 +206,10 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
     words.prepend(words.last().append(QLatin1Char(',')));
     words.removeLast();
 
-    // update last word regexp
-    lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
-
     // this is probably just something for me, limited to english
-    while(Config::surnamePrefixList().filter(lastWord).count() > 0) {
+    while(Config::surnamePrefixList().contains(words.last(), Qt::CaseInsensitive)) {
       words.prepend(words.last());
       words.removeLast();
-      lastWord.setPattern(QLatin1Char('^') + QRegExp::escape(words.last()) + QLatin1Char('$'));
     }
 
     name = words.join(QLatin1String(" "));
@@ -275,14 +267,6 @@ QString FieldFormat::capitalize(QString str_) {
   int pos = rx.indexIn(str_, 1);
   int nextPos;
 
-  QRegExp wordRx;
-  wordRx.setCaseSensitivity(Qt::CaseInsensitive);
-
-  QStringList notCap = Config::noCapitalizationList();
-  // don't capitalize the surname prefixes
-  // does this hold true everywhere other than english?
-  notCap += Config::surnamePrefixList();
-
   QString word = str_.mid(0, pos);
   // now check to see if words starts with apostrophe list
   foreach(const QString& aposArticle, Config::articleAposList()) {
@@ -312,8 +296,11 @@ QString FieldFormat::capitalize(QString str_) {
     }
 
     if(!aposMatch) {
-      wordRx.setPattern(QLatin1Char('^') + QRegExp::escape(word) + QLatin1Char('$'));
-      if(notCap.filter(wordRx).isEmpty() && nextPos-pos > 1) {
+      // check against the noCapitalization list AND the surnamePrefix list
+      // does this hold true everywhere other than english?
+      if(!Config::noCapitalizationList().contains(word, Qt::CaseInsensitive) && 
+         !Config::surnamePrefixList().contains(word, Qt::CaseInsensitive) &&
+         nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).toUpper());
       }
     }

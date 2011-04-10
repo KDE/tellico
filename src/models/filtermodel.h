@@ -60,9 +60,11 @@ public:
   bool indexContainsEntry(const QModelIndex& parent, Data::EntryPtr entry) const;
 
 private:
+  class Node;
+  void populateFilterNode(Node* node, const FilterPtr filter) const;
+
   FilterList m_filters;
   QString m_header;
-  class Node;
   Node* m_rootNode;
 };
 

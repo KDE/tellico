@@ -109,6 +109,7 @@ Tellico::Data::EntryList Controller::visibleEntries() {
 }
 
 void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
+  MARK;
   // at start-up, this might get called too early, so check and bail
   if(!m_mainWindow->m_groupView) {
     return;

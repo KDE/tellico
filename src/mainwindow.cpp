@@ -195,6 +195,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::slotInit() {
+  MARK;
   if(m_editDialog) {
     return;
   }
@@ -1098,6 +1099,7 @@ void MainWindow::openFile(const QString& file_) {
 }
 
 bool MainWindow::openURL(const KUrl& url_) {
+  MARK;
   // try to open document
   GUI::CursorSaver cs(Qt::WaitCursor);
 
@@ -1543,7 +1545,6 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
 }
 
 void MainWindow::slotChangeGrouping() {
-//  DEBUG_LINE;
   QString title = m_entryGrouping->currentText();
 
   QString groupName = Kernel::self()->fieldNameByTitle(title);

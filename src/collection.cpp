@@ -682,9 +682,10 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
 
 void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QString& fieldName_, const Tellico::Data::EntryList& entries_) {
 //  myDebug() << fieldName_;
+  Q_ASSERT(dict_);
   const bool isBool = hasField(fieldName_) && fieldByName(fieldName_)->type() == Field::Bool;
 
-  QList<EntryGroup*> modifiedGroups;
+  QSet<EntryGroup*> modifiedGroups;
   foreach(EntryPtr entry, entries_) {
     const QStringList groups = entryGroupNamesByField(entry, fieldName_);
     foreach(QString groupTitle, groups) { // krazy:exclude=foreach
@@ -693,23 +694,23 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
       if(isBool && !groupTitle.isEmpty()) {
         groupTitle = fieldTitleByName(fieldName_);
       }
-      EntryGroup* group = (*dict_).value(groupTitle);
+      EntryGroup* group = dict_->value(groupTitle);
       // if the group doesn't exist, create it
       if(!group) {
         group = new EntryGroup(groupTitle, fieldName_);
         dict_->insert(groupTitle, group);
       } else if(group->isEmpty()) {
-        // if it's empty, then it was added to the vector of groups to delete
+        // if it's empty, then it was previously added to the vector of groups to delete
         // remove it from that vector now that we're adding to it
-        m_groupsToDelete.removeAll(group);
+        m_groupsToDelete.removeOne(group);
       }
       if(entry->addToGroup(group)) {
-        modifiedGroups.push_back(group);
+        modifiedGroups.insert(group);
       }
     } // end group loop
   } // end entry loop
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups);
+    emit signalGroupsModified(CollPtr(this), modifiedGroups.toList());
   }
 }
 
@@ -763,13 +764,14 @@ QStringList Collection::entryGroupNamesByField(Tellico::Data::EntryPtr entry_, c
   bool allEmpty = true;
   StringSet values;
   foreach(FieldPtr field, m_peopleFields) {
-    QStringList groups = entry_->groupNamesByFieldName(field->name());
-    if(groups.count() != 1 || !groups.at(0).isEmpty()) {
+    const QStringList groups = entry_->groupNamesByFieldName(field->name());
+    if(allEmpty && (groups.count() != 1 || !groups.at(0).isEmpty())) {
       allEmpty = false;
     }
     values.add(groups);
   }
   if(!allEmpty) {
+    // we don't want the empty string
     values.remove(QString());
   }
   return values.toList();

@@ -64,6 +64,8 @@ public:
   QModelIndex indexFromGroup(Data::EntryGroup* group) const;
 
 private:
+  bool hasValidParent(const QModelIndex& index) const;
+ 
   QList<Data::EntryGroup*> m_groups;
   class Node;
   Node* m_rootNode;

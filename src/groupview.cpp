@@ -103,8 +103,6 @@ void GroupView::addCollection(Tellico::Data::CollPtr coll_) {
 
   updateHeader();
   populateCollection();
-
-  collapseAll();
 }
 
 void GroupView::removeCollection(Tellico::Data::CollPtr coll_) {

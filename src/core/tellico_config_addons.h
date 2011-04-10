@@ -50,8 +50,11 @@ public:
 private:
   static void checkArticleList();
 
+  static QStringList m_noCapitalizationList;
   static QStringList m_articleList;
   // need to remember articles with apostrophes for capitalization
   static QStringList m_articleAposList;
+  static QStringList m_nameSuffixList;
+  static QStringList m_surnamePrefixList;
 
 #endif

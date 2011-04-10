@@ -70,11 +70,19 @@ namespace {
 
 using Tellico::Config;
 
+QStringList Config::m_noCapitalizationList;
 QStringList Config::m_articleList;
 QStringList Config::m_articleAposList;
+QStringList Config::m_nameSuffixList;
+QStringList Config::m_surnamePrefixList;
 
 QStringList Config::noCapitalizationList() {
-  return Config::noCapitalizationString().split(commaSplit);
+  static QString cacheValue;
+  if(cacheValue != Config::noCapitalizationString()) {
+    cacheValue = Config::noCapitalizationString();
+    m_noCapitalizationList = cacheValue.split(commaSplit);
+  }
+  return m_noCapitalizationList;
 }
 
 void Config::checkArticleList() {
@@ -82,7 +90,8 @@ void Config::checkArticleList() {
   // so just keep a cached copy
   static QString cacheValue;
   if(cacheValue != Config::articlesString()) {
-    m_articleList = Config::articlesString().split(commaSplit);
+    cacheValue = Config::articlesString();
+    m_articleList = cacheValue.split(commaSplit);
     m_articleAposList.clear();
     foreach(const QString& article, m_articleList) {
       if(article.endsWith(QLatin1Char('\''))) {
@@ -104,11 +113,21 @@ QStringList Config::articleAposList() {
 }
 
 QStringList Config::nameSuffixList() {
-  return Config::nameSuffixesString().split(commaSplit);
+  static QString cacheValue;
+  if(cacheValue != Config::nameSuffixesString()) {
+    cacheValue = Config::nameSuffixesString();
+    m_nameSuffixList = cacheValue.split(commaSplit);
+  }
+  return m_nameSuffixList;
 }
 
 QStringList Config::surnamePrefixList() {
-  return Config::surnamePrefixesString().split(commaSplit);
+  static QString cacheValue;
+  if(cacheValue != Config::surnamePrefixesString()) {
+    cacheValue = Config::surnamePrefixesString();
+    m_surnamePrefixList = cacheValue.split(commaSplit);
+  }
+  return m_surnamePrefixList;
 }
 
 QString Config::templateName(int type_) {

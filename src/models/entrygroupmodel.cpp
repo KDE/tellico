@@ -36,22 +36,32 @@ using Tellico::EntryGroupModel;
 
 class EntryGroupModel::Node {
 public:
-  Node(Node* parent_) : m_parent(parent_) { }
+  Node(Node* parent_) : m_parent(parent_), m_row(-1) { }
   ~Node() { qDeleteAll(m_children); }
 
   Node* parent() const { return m_parent; }
   Node* child(int row) const { return row < m_children.count() ? m_children.at(row) : 0; }
-  int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : -1; }
+  int row() const { return m_row; }
   int childCount() const { return m_children.count(); };
 
-  void addChild(Node* child) { m_children.append(child); }
-  void replaceChild(int i, Node* child) { m_children.replace(i, child); }
-  void removeChild(int i) { delete m_children.takeAt(i); }
-  void removeAll() { qDeleteAll(m_children); m_children.clear(); }
+  void addChild(Node* child) {
+    child->m_row = m_children.count();
+    m_children.append(child);
+  }
+  void removeChild(int i) {
+    delete m_children.takeAt(i);
+    // all subsequent children move up a row
+    for(int j = i; j < m_children.count(); ++j) { --m_children.at(j)->m_row; }
+  }
+  void removeAll() {
+    qDeleteAll(m_children);
+    m_children.clear();
+  }
 
 private:
   Node* m_parent;
   QList<Node*> m_children;
+  int m_row;
 };
 
 EntryGroupModel::EntryGroupModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)) {
@@ -102,15 +112,9 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
     return QVariant();
   }
 
-  QModelIndex parent = index_.parent();
-
-  if(index_.row() >= rowCount(parent)) {
-    return QVariant();
-  }
-
   switch(role_) {
     case Qt::DisplayRole:
-      if(parent.isValid()) {
+      if(hasValidParent(index_)) {
         // it probably points to an entry
         Tellico::Data::EntryPtr e = entry(index_);
         if(e) {
@@ -125,14 +129,25 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
       }
       return QString(); // DisplayRole should get an empty string, supposedly...
     case Qt::DecorationRole:
-      return parent.isValid() ? KIcon(CollectionFactory::typeName(entry(index_)->collection()))
-                              : KIcon(m_groupIconNames.at(index_.row()));
+      if(hasValidParent(index_)) {
+        // assume all the entries have the same icon
+        // so no need to lookup the entry(index_), just use first one we find
+        foreach(Data::EntryGroup* group, m_groups) {
+          if(!group->isEmpty()) {
+            return KIcon(CollectionFactory::typeName(group->first()->collection()));
+          }
+        }
+      }
+      // for groups, check the icon name list
+      return KIcon(m_groupIconNames.at(index_.row()));
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
       return qVariantFromValue(entry(index_));
     case GroupPtrRole:
       return qVariantFromValue(group(index_));
+    case ValidParentRole:
+      return hasValidParent(index_);
   }
 
   return QVariant();
@@ -140,7 +155,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
 
 bool EntryGroupModel::setData(const QModelIndex& index_, const QVariant& value_, int role_) {
   // if the index has a parent, then it's not a group
-  if(!index_.isValid() || index_.parent().isValid() || index_.row() >= rowCount() || role_ != Qt::DecorationRole) {
+  if(!index_.isValid() || hasValidParent(index_) || index_.row() >= rowCount() || role_ != Qt::DecorationRole) {
     return false;
   }
   m_groupIconNames.replace(index_.row(), value_.toString());
@@ -268,7 +283,7 @@ void EntryGroupModel::removeGroup(Tellico::Data::EntryGroup* group_) {
 
 Tellico::Data::EntryGroup* EntryGroupModel::group(const QModelIndex& index_) const {
   // if the parent isn't invalid, then it's not a top-level group
-  if(!index_.isValid() || index_.parent().isValid() || index_.row() >= m_groups.count()) {
+  if(!index_.isValid() || hasValidParent(index_) || index_.row() >= m_groups.count()) {
     return 0;
   }
   return m_groups.at(index_.row());
@@ -276,7 +291,7 @@ Tellico::Data::EntryGroup* EntryGroupModel::group(const QModelIndex& index_) con
 
 Tellico::Data::EntryPtr EntryGroupModel::entry(const QModelIndex& index_) const {
   // if there's not a parent, then it's a top-level item, no entry
-  if(!index_.parent().isValid()) {
+  if(!hasValidParent(index_)) {
     return Tellico::Data::EntryPtr();
   }
   Tellico::Data::EntryPtr entry;
@@ -297,4 +312,21 @@ QModelIndex EntryGroupModel::indexFromGroup(Tellico::Data::EntryGroup* group_) c
   return idx < 0 ? QModelIndex() : index(idx, 0);
 }
 
+// quick parent check for when we don't actually need to know the parent
+// just that the parent is valid
+// since calling parent() does the node indexOf(), which turns out to be slightly expensive
+bool EntryGroupModel::hasValidParent(const QModelIndex& index_) const {
+  if(!index_.isValid()) {
+    return false;
+  }
+
+  Node* node = static_cast<Node*>(index_.internalPointer());
+  Q_ASSERT(node);
+  Node* parentNode = node->parent();
+  Q_ASSERT(parentNode);
+
+  // if it's top-level, it has no parent
+  return parentNode && parentNode != m_rootNode;
+}
+ 
 #include "entrygroupmodel.moc"
