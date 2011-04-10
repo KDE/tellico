@@ -215,7 +215,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_treeWidget->model()->setHeaderData(0, Qt::Horizontal, Qt::AlignHCenter, Qt::TextAlignmentRole); // align checkmark in middle
   m_treeWidget->viewport()->installEventFilter(this);
   m_treeWidget->header()->setSortIndicatorShown(true);
-  m_treeWidget->header()->setResizeMode(QHeaderView::Stretch);
   m_treeWidget->header()->setResizeMode(0, QHeaderView::ResizeToContents);
 
   connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
