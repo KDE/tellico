@@ -1,5 +1,5 @@
 project(Tellico)
-set(TELLICO_VERSION "2.3.3")
+set(TELLICO_VERSION "2.3.3+git")
 
 cmake_minimum_required(VERSION 2.6.2)
 
@@ -145,6 +145,7 @@ set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 add_subdirectory(src)
 add_subdirectory(icons)
 add_subdirectory(xslt)
+add_subdirectory(doc)
 
 if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
     message("WARNING: CDDB Lookup is not supported on your platform")
