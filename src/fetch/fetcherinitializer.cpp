@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -55,6 +55,7 @@
 #endif
 #include "dvdfrfetcher.h"
 #include "doubanfetcher.h"
+#include "bibliosharefetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -96,4 +97,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
+  RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
 }

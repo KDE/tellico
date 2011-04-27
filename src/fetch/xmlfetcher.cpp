@@ -124,13 +124,28 @@ void XMLFetcher::slotComplete(KJob* ) {
 
   parseData(data);
 
-  QString str = m_xsltHandler->applyStylesheet(XMLHandler::readXMLData(data));
+  const QString str = m_xsltHandler->applyStylesheet(XMLHandler::readXMLData(data));
+#if 0
+  myWarning() << "Remove debug from xmlfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test-tellico.xml"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("utf-8");
+    t << str;
+  }
+  f.close();
+#endif
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     myDebug() << "no collection pointer";
     stop();
     return;
+  }
+
+  if(m_limit < 1) {
+    myDebug() << "Limit < 1, changing to 1";
+    m_limit = 1;
   }
 
   int count = 0;
