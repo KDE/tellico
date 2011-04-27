@@ -3,9 +3,10 @@ Section: kde
 Priority: optional
 Maintainer: Regis Boudin <regis@debian.org>
 Build-Depends: debhelper (>= 7), cmake, pkg-kde-tools (>= 0.9), kdelibs5-dev (>=4:4.4.4), libxml2-dev, libxslt1-dev, libtag1-dev, libyaz4-dev, libkcddb-dev, kdepimlibs5-dev, libpoppler-qt4-dev, libexempi-dev, libqimageblitz-dev, libksane-dev, shared-desktop-ontologies, libqjson-dev
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Homepage: http://tellico-project.org/
-Vcs-Svn: svn://anonsvn.kde.org/home/kde/trunk/extragear/office/tellico
+Vcs-Git: git://anongit.kde.org/tellico.git
+Vcs-Browser: http://quickgit.kde.org/?p=tellico.git
 
 Package: tellico
 Replaces: tellico-data (<= 1.2.14-1)
