@@ -71,7 +71,7 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
 
   KUrl imgUrl;
   imgUrl.setPath(path() + id_);
-  Data::Image* img = FileHandler::readImageFile(imgUrl, true /* quiet */);
+  Data::Image* img = FileHandler::readImageFile(imgUrl, id_, true /* quiet */);
   if(!img) {
     myLog() << "image not found:" << imgUrl;
     return 0;
@@ -81,9 +81,6 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
     delete img;
     return 0;
   }
-  // the image id gets calculated from the image
-  // but we want to reset it to the id that was asked for
-  img->setID(id_);
   return img;
 }
 

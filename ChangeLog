@@ -1,3 +1,7 @@
+2011-05-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed image loading to use known id instead of recalculating, improves performance.
+
 2011-04-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved performance for loading and sorting large collections.

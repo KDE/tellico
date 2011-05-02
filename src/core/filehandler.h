@@ -165,8 +165,8 @@ private:
    * @param quiet If errors should be quiet
    * @return The image
    */
-  static Data::Image* readImageFile(const KUrl& url, bool quiet=false);
-  static Data::Image* readImageFile(const KUrl& url, bool quiet, const KUrl& referrer);
+  static Data::Image* readImageFile(const KUrl& url, const QString& id = QString(), bool quiet=false);
+  static Data::Image* readImageFile(const KUrl& url, const QString& id, bool quiet, const KUrl& referrer);
   /**
    * Writes the contents of a string to a file.
    *

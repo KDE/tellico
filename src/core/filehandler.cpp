@@ -168,9 +168,9 @@ QByteArray FileHandler::readDataFile(const KUrl& url_, bool quiet_) {
   return f.file()->readAll();
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, const KUrl& referrer_) {
+Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString& id_, bool quiet_, const KUrl& referrer_) {
   if(referrer_.isEmpty() || url_.isLocalFile()) {
-    return readImageFile(url_, quiet_);
+    return readImageFile(url_, id_, quiet_);
   }
 
   KTemporaryFile tempFile;
@@ -189,16 +189,16 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_, 
     }
     return 0;
   }
-  return readImageFile(tempURL, quiet_);
+  return readImageFile(tempURL, id_, quiet_);
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_) {
+Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString& id_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return 0;
   }
 
-  Data::Image* img = new Data::Image(f.fileName());
+  Data::Image* img = new Data::Image(f.fileName(), id_);
   if(img->isNull() && !quiet_) {
     QString str = i18n("Tellico is unable to load the image - %1.", url_.fileName());
     GUI::Proxy::sorry(str);
@@ -206,7 +206,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, bool quiet_) 
   return img;
 }
 
-// really, this hsould be decoupled from the writeBackupFile() function
+// really, this should be decoupled from the writeBackupFile() function
 // but every other function that calls it would need to be updated
 bool FileHandler::queryExists(const KUrl& url_) {
   if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
