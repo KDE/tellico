@@ -99,7 +99,7 @@ QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
         return defaultIcon(entry->collection());
       }
       const QString id = entry->field(fieldName);
-      KIcon* icon = m_iconCache.object( id );
+      KIcon* icon = m_iconCache.object(id);
       if(icon) {
         return KIcon(*icon);
       }
