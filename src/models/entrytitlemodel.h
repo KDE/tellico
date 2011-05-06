@@ -1,5 +1,6 @@
 /***************************************************************************
     Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,9 +28,10 @@
 
 #include "abstractentrymodel.h"
 
-#include <QHash>
+#include <KIcon>
 
-class KIcon;
+#include <QHash>
+#include <QCache>
 
 namespace Tellico {
 
@@ -47,12 +49,15 @@ public:
   virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
   virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
+  virtual void clear();
+
 private:
   const KIcon& defaultIcon(Data::CollPtr coll) const;
   QString imageField(Data::CollPtr coll) const;
 
   mutable QHash<int, KIcon*> m_defaultIcons;
   mutable QHash<long, QString> m_imageFields;
+  mutable QCache<QString, KIcon> m_iconCache;
 };
 
 } // end namespace

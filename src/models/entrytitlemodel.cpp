@@ -1,5 +1,6 @@
 /***************************************************************************
     Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,13 +30,13 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../images/image.h"
+#include "../core/tellico_config.h"
 #include "../tellico_debug.h"
-
-#include <kicon.h>
 
 using Tellico::EntryTitleModel;
 
 EntryTitleModel::EntryTitleModel(QObject* parent) : AbstractEntryModel(parent) {
+  m_iconCache.setMaxCost(Config::iconCacheSize());
 }
 
 EntryTitleModel::~EntryTitleModel() {
@@ -46,7 +47,7 @@ int EntryTitleModel::columnCount(const QModelIndex&) const {
   return rowCount() > 0 ? entry(createIndex(0, 0))->collection()->fields().count() : 1;
 }
 
-// TODO: combine this with EntryModel::headerData inso AnstractEntryModel
+// TODO: combine this with EntryModel::headerData into AnstractEntryModel
 QVariant EntryTitleModel::headerData(int section_, Qt::Orientation orientation_, int role_) const {
   if(section_ < 0 || section_ >= columnCount() || orientation_ != Qt::Horizontal) {
     return QVariant();
@@ -96,14 +97,20 @@ QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
       QString fieldName = imageField(entry->collection());
       if(fieldName.isEmpty()) {
         return defaultIcon(entry->collection());
-      } else {
-        const Data::Image& img = ImageFactory::imageById(entry->field(fieldName));
-        if(img.isNull()) {
-          return defaultIcon(entry->collection());
-        }
-        return KIcon(QPixmap::fromImage(img));
       }
-      return QVariant();
+      const QString id = entry->field(fieldName);
+      KIcon* icon = m_iconCache.object( id );
+      if(icon) {
+        return KIcon(*icon);
+      }
+      const Data::Image& img = ImageFactory::imageById(id);
+      if(img.isNull()) {
+        return defaultIcon(entry->collection());
+      }
+
+      icon = new KIcon(QPixmap::fromImage(img));
+      m_iconCache.insert(id, icon);
+      return KIcon(*icon);
     }
     case EntryPtrRole:
       return qVariantFromValue(entry);
@@ -135,6 +142,11 @@ QString EntryTitleModel::imageField(Tellico::Data::CollPtr coll_) const {
     }
   }
   return m_imageFields.value(coll_->id());
+}
+
+void EntryTitleModel::clear() {
+  m_iconCache.clear();
+  AbstractEntryModel::clear();
 }
 
 #include "entrytitlemodel.moc"

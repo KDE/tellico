@@ -1,3 +1,8 @@
+2011-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added icon cache to improve performance with large images
+	  (Patch from Pedro Miguel Carvalho, Bug 272583).
+
 2011-05-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Changed image loading to use known id instead of recalculating, improves performance.
