@@ -1,5 +1,6 @@
 /***************************************************************************
     Copyright (C) 2002-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
 /***************************************************************************
@@ -31,6 +32,13 @@
 
 class KIcon;
 
+namespace {
+  static const int MIN_ENTRY_ICON_SIZE = 32;
+  static const int MAX_ENTRY_ICON_SIZE = 512;
+  static const int SMALL_INCREMENT_ICON_SIZE = 1;
+  static const int LARGE_INCREMENT_ICON_SIZE = 8;
+}
+
 namespace Tellico {
 
 class AbstractEntryModel;
@@ -61,8 +69,10 @@ public:
   virtual void modifyEntries(Data::EntryList entries);
   virtual void removeEntries(Data::EntryList entries);
 
-  void setMaxAllowedIconWidth(int width);
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
+
+public slots:
+  void setMaxAllowedIconWidth(int width);
 
 protected:
   void contextMenuEvent(QContextMenuEvent* event);

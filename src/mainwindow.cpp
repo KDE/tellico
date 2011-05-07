@@ -1,5 +1,6 @@
 /***************************************************************************
     Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
 /***************************************************************************
@@ -718,6 +719,10 @@ void MainWindow::initView() {
   Controller::self()->addObserver(m_viewStack->iconView());
   connect(m_viewStack->entryView(), SIGNAL(signalAction(const KUrl&)),
           SLOT(slotURLAction(const KUrl&)));
+
+  connect(m_statusBar, SIGNAL(requestIconSizeChange(int)),
+          m_viewStack->iconView(), SLOT(setMaxAllowedIconWidth(int)));
+  connect(m_viewStack, SIGNAL(currentChanged(int)), SLOT(slotCurrentViewWidgetChanged()));
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 }
@@ -2094,6 +2099,10 @@ void MainWindow::slotImageLocationChanged() {
                                  QLatin1String("</qt>"));
   fileSave();
   m_savingImageLocationChange = false;
+}
+
+void MainWindow::slotCurrentViewWidgetChanged() {
+  m_statusBar->setIconSizeInterfaceVisible(m_viewStack->currentWidget() == m_viewStack->iconView());
 }
 
 void MainWindow::updateCollectionActions() {

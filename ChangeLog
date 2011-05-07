@@ -1,3 +1,7 @@
+2011-05-07  Pedro Miguel Carvalho <kde@pmc.com.pt>
+
+	* Add UI controls for changing icon size (Bug 250907).
+
 2011-05-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with image link in Tri-Column report template (Bug 272744).
