@@ -915,7 +915,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_secretKeyEdit->setWhatsThis(w);
   label->setBuddy(m_secretKeyEdit);
 
-  label = new QLabel(i18n("Co&untry: "), optionsWidget());
+  label = new QLabel(i18n("Country: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_siteCombo = new GUI::ComboBox(optionsWidget());
   m_siteCombo->addItem(i18n("United States"), US);

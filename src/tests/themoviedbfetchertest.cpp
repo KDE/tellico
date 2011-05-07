@@ -35,7 +35,8 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
+#include <KConfigGroup>
 
 QTEST_KDEMAIN( TheMovieDBFetcherTest, GUI )
 
@@ -59,6 +60,41 @@ void TheMovieDBFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QLatin1String("superman returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheMovieDBFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QHashIterator<QString, QString> i(m_fieldValues);
+  while(i.hasNext()) {
+    i.next();
+    QString result = entry->field(i.key()).toLower();
+    QVERIFY(result.contains(i.value().toLower()));
+  }
+  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+}
+
+void TheMovieDBFetcherTest::testTitleFr() {
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  QString groupName = QLatin1String("TMDB FR");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("superman returns"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheMovieDBFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);

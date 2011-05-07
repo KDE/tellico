@@ -40,7 +40,9 @@ namespace KIO {
 
 namespace Tellico {
 
-  class XSLTHandler;
+  namespace GUI {
+    class ComboBox;
+  }
 
   namespace Fetch {
 
@@ -74,14 +76,7 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  class ConfigWidget : public Fetch::ConfigWidget {
-  public:
-    explicit ConfigWidget(QWidget* parent_, const TheMovieDBFetcher* fetcher = 0);
-    virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
-  private:
-    KLineEdit* m_apiKeyEdit;
-  };
+  class ConfigWidget;
   friend class ConfigWidget;
 
   static QString defaultName();
@@ -96,10 +91,27 @@ private:
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 
   int m_total;
+  QString m_locale;
 
   bool m_needPersonId;
 
   QString m_apiKey;
+};
+
+class TheMovieDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
+Q_OBJECT
+
+public:
+  explicit ConfigWidget(QWidget* parent_, const TheMovieDBFetcher* fetcher = 0);
+  virtual void saveConfigHook(KConfigGroup&);
+  virtual QString preferredName() const;
+
+private slots:
+  void slotLangChanged();
+
+private:
+  KLineEdit* m_apiKeyEdit;
+  GUI::ComboBox* m_langCombo;
 };
 
   } // end namespace

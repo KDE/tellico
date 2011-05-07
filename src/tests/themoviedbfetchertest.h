@@ -40,6 +40,7 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testTitle();
+  void testTitleFr();
   void testPerson();
 
   void slotResult(KJob* job);

@@ -25,6 +25,7 @@
 #include "themoviedbfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
+#include "../gui/combobox.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
@@ -50,6 +51,7 @@ using Tellico::Fetch::TheMovieDBFetcher;
 
 TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
     : XMLFetcher(parent_)
+    , m_locale(QLatin1String("en"))
     , m_needPersonId(false)
     , m_apiKey(QLatin1String(THEMOVIEDB_API_KEY)) {
   setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
@@ -77,6 +79,10 @@ void TheMovieDBFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+  k = config_.readEntry("Locale", "en");
+  if(!k.isEmpty()) {
+    m_locale = k.toLower();
+  }
 }
 
 KUrl TheMovieDBFetcher::searchUrl() {
@@ -91,11 +97,11 @@ KUrl TheMovieDBFetcher::searchUrl() {
 
   switch(request().key) {
     case Title:
-      queryPath = QLatin1String("/Movie.search/en/xml/") + m_apiKey + QLatin1Char('/') + request().value;
+      queryPath = QString::fromLatin1("/Movie.search/%1/xml/%2/%3").arg(m_locale, m_apiKey, request().value);
       break;
 
     case Person:
-      queryPath = QLatin1String("/Person.search/en/xml/") + m_apiKey + QLatin1Char('/') + request().value;
+      queryPath = QString::fromLatin1("/Person.search/%1/xml/%2/%3").arg(m_locale, m_apiKey, request().value);
       m_needPersonId = true;
       break;
 
@@ -144,9 +150,8 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
         return;
       }
       KUrl u(THEMOVIEDB_API_URL);
-      u.setPath(QLatin1String(THEMOVIEDB_API_VERSION) + QLatin1Char('/') +
-                QLatin1String("Person.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
-                e.text());
+      u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
+      u.addPath(QString::fromLatin1("/Person.getInfo/%1/xml/%2/%3").arg(m_locale, m_apiKey, e.text()));
       // quiet
       data_ = FileHandler::readXMLFile(u, true).toUtf8();
     }
@@ -165,9 +170,8 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHookData(Data::EntryPtr ent
   }
 
   KUrl u(THEMOVIEDB_API_URL);
-  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION) + QLatin1Char('/') +
-            QLatin1String("Movie.getInfo/en/xml/") + m_apiKey + QLatin1Char('/') +
-            release);
+  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
+  u.addPath(QString::fromLatin1("/Movie.getInfo/%1/xml/%2/%3").arg(m_locale, m_apiKey, release));
 
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
@@ -211,7 +215,7 @@ Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) 
 }
 
 QString TheMovieDBFetcher::defaultName() {
-  return QLatin1String("TheMovieDB.org"); // no translation
+  return QLatin1String("TheMovieDB.org");
 }
 
 QString TheMovieDBFetcher::defaultIcon() {
@@ -237,7 +241,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
-                                preferredName(),
+                                TheMovieDBFetcher::defaultName(),
                                 QLatin1String("http://api.themoviedb.org")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
@@ -258,6 +262,18 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
+  label = new QLabel(i18n("Language: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_langCombo = new GUI::ComboBox(optionsWidget());
+  m_langCombo->addItem(i18nc("Language", "English"), QLatin1String("en"));
+  m_langCombo->addItem(i18nc("Language", "French"), QLatin1String("fr"));
+  m_langCombo->addItem(i18nc("Language", "German"), QLatin1String("de"));
+  m_langCombo->addItem(i18nc("Language", "Spanish"), QLatin1String("es"));
+  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotLangChanged()));
+  l->addWidget(m_langCombo, row, 1);
+  label->setBuddy(m_langCombo);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -269,18 +285,25 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
     if(fetcher_->m_apiKey != QLatin1String(THEMOVIEDB_API_KEY)) {
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
+    m_langCombo->setCurrentData(fetcher_->m_locale);
   }
 }
 
 void TheMovieDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  QString apiKey = m_apiKeyEdit->text().trimmed();
+  const QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
+  const QString lang = m_langCombo->currentData().toString();
+  config_.writeEntry("Locale", lang);
 }
 
 QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
-  return TheMovieDBFetcher::defaultName();
+  return i18n("TheMovieDB (%1)").arg(m_langCombo->currentText());
+}
+
+void TheMovieDBFetcher::ConfigWidget::slotLangChanged() {
+  emit signalName(preferredName());
 }
 
 #include "themoviedbfetcher.moc"

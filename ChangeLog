@@ -1,5 +1,6 @@
 2011-05-06  Robby Stephenson  <robby@periapsis.org>
 
+	* Added French, Spanish, and German codes for TheMovieDB.
 	* Added icon cache to improve performance with large images
 	  (Patch from Pedro Miguel Carvalho, Bug 272583).
 
