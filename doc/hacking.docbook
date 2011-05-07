@@ -298,6 +298,43 @@ The maximum size of the icons in the <interface>Icon View</interface> may be cha
 </informalexample>
 </sect3>
 
+<sect3>
+<title>Icon Cache Size</title>
+
+<para>
+The maximum numbers of icons cached in memory may be changed with this setting. The default value is 1000.
+</para>
+</sect3>
+
+<sect3>
+<title>Example</title>
+<informalexample>
+<para><userinput>Icon Cache Size=100</userinput></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title>Example</title>
+<informalexample>
+<para><userinput>Max Icon Size=128</userinput></para>
+</informalexample>
+</sect3>
+
+<sect3>
+<title>Image Cache Size</title>
+
+<para>
+The maximum amount of memory in bytes used for caching all the images may be changed with this setting. The default value is 67108864.
+</para>
+</sect3>
+
+<sect3>
+<title>Example</title>
+<informalexample>
+<para><userinput>Image Cache Size=256000000</userinput></para>
+</informalexample>
+</sect3>
+
 </sect2>
 
 <sect2 id="hidden-bibtex-options">
