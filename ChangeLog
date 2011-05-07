@@ -1,3 +1,7 @@
+2011-05-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with image link in Tri-Column report template (Bug 272744).
+
 2011-05-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Added French, Spanish, and German codes for TheMovieDB.

@@ -191,22 +191,19 @@
   <tbody>
    <tr>
     <td>
-     <xsl:variable name="id" select="./*[local-name() = $image-field]"/>
-     <xsl:if test="$id">
-      <img class="float" alt=" ">
-       <xsl:attribute name="src">
-        <xsl:call-template name="image-link">
-         <xsl:with-param name="image" select="key('imagesById', $id)"/>
-         <xsl:with-param name="dir" select="$imgdir"/>
-        </xsl:call-template>
-       </xsl:attribute>
-       <xsl:call-template name="image-size">
-        <xsl:with-param name="limit-width" select="$image-width"/>
-        <xsl:with-param name="limit-height" select="$image-height"/>
+     <img class="float" alt=" ">
+      <xsl:attribute name="src">
+       <xsl:call-template name="image-link">
         <xsl:with-param name="image" select="$img"/>
+        <xsl:with-param name="dir" select="$imgdir"/>
        </xsl:call-template>
-      </img>
-     </xsl:if>
+      </xsl:attribute>
+      <xsl:call-template name="image-size">
+       <xsl:with-param name="limit-width" select="$image-width"/>
+       <xsl:with-param name="limit-height" select="$image-height"/>
+       <xsl:with-param name="image" select="$img"/>
+      </xsl:call-template>
+     </img>
     </td>
     <td>
      <span class="title">
