@@ -46,7 +46,7 @@ switch (s[offs])                                \
  */
 typedef struct
 {
-   char * filename;
+   const char * filename;
    int    line;
    int    name_num;
 } name_loc;
@@ -768,11 +768,12 @@ split_general_name (name_loc * loc,
               check/correct for all of them.
 -------------------------------------------------------------------------- */
 bt_name *
-bt_split_name (char *  name,
-               char *  filename,
+bt_split_name (const char *  name,
+               const char *  filename,
                int     line,
                int     name_num)
 {
+   char *localname;
    name_loc loc;
    bt_stringlist *
           tokens;
@@ -804,18 +805,18 @@ bt_split_name (char *  name,
       return split_name;
    }
 
-   name = strdup (name);             /* private copy that we may clobber */
+   localname = strdup (name);             /* private copy that we may clobber */
 
    loc.filename = filename;             /* so called functions can generate */
    loc.line = line;                     /* decent warning messages */
    loc.name_num = name_num;
 
-   num_commas = find_commas (&loc, name, MAX_COMMAS);
+   num_commas = find_commas (&loc, localname, MAX_COMMAS);
    assert (num_commas <= MAX_COMMAS);
 
    DBG_ACTION (1, printf ("found %d commas: ", num_commas))
 
-   tokens = find_tokens (name, comma_token);
+   tokens = find_tokens (localname, comma_token);
 
 #if DEBUG
    printf ("found %d tokens:\n", tokens->num_items);
@@ -870,6 +871,8 @@ bt_split_name (char *  name,
                              first_lc, last_lc);
       }
    }
+
+   free(localname);
 
 #if DEBUG
    printf ("bt_split_name(): returning structure %p\n", split_name);

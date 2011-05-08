@@ -314,8 +314,8 @@ bt_stringlist * bt_split_list (char *   string,
                                int      line,
                                const char *   description);
 void bt_free_list (bt_stringlist *list);
-bt_name * bt_split_name (char *  name,
-                         char *  filename,
+bt_name * bt_split_name (const char *  name,
+                         const char *  filename,
                          int     line,
                          int     name_num);
 void bt_free_name (bt_name * name);
