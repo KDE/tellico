@@ -490,10 +490,8 @@ find_lc_tokens (bt_stringlist * tokens,
                 int *           last_lc)
 {
    int    i;                            /* iterate over token list this time */
-   int    in_lc_sequence;               /* in contig. sequence of lc tokens? */
 
    *first_lc = *last_lc = -1;           /* haven't found either yet */
-   in_lc_sequence = 0;
 
    i = 0;
    while (i < tokens->num_items)
@@ -580,7 +578,7 @@ resolve_token_range (bt_stringlist *tokens,
 @MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
-split_simple_name (name_loc * loc,
+split_simple_name (name_loc * loc __attribute__((unused)),
                    bt_name * name,
                    int       first_lc,
                    int       last_lc)
@@ -609,9 +607,6 @@ split_simple_name (name_loc * loc,
                        "using \"%s\" as lastname",
                        name->tokens->items[end]);
 #else
-# ifndef ALLOW_WARNINGS
-         loc = NULL;                    /* avoid "unused parameter" warning */
-# endif
 #endif
       }
 
@@ -782,7 +777,7 @@ bt_split_name (char *  name,
    bt_stringlist *
           tokens;
    int    comma_token[MAX_COMMAS];
-   int    len;
+   int    len = 0;
    int    num_commas;
    int    first_lc, last_lc;
    bt_name * split_name;
@@ -791,13 +786,8 @@ bt_split_name (char *  name,
    DBG_ACTION (1, printf ("bt_split_name(): name=%p (%s)\n", name, name))
 
    split_name = (bt_name *) malloc (sizeof (bt_name));
-   if (name == NULL)
+   if (name != NULL)
    {
-      len = 0;
-   }
-   else
-   {
-      name = strdup (name);             /* private copy that we may clobber */
       len = strlen (name);
    }
 
@@ -813,6 +803,8 @@ bt_split_name (char *  name,
       }
       return split_name;
    }
+
+   name = strdup (name);             /* private copy that we may clobber */
 
    loc.filename = filename;             /* so called functions can generate */
    loc.line = line;                     /* decent warning messages */
