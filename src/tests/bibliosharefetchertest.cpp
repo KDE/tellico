@@ -68,7 +68,7 @@ void BiblioShareFetcherTest::testIsbn() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked The Hornet`s Nest"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
-  QCOMPARE(entry->field(QLatin1String("binding")), i18n("Hardback"));
+  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking Canada"));
@@ -93,7 +93,7 @@ void BiblioShareFetcherTest::testIsbn13() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked The Hornet`s Nest"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
-  QCOMPARE(entry->field(QLatin1String("binding")), i18n("Hardback"));
+  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking Canada"));
