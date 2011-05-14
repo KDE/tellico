@@ -622,7 +622,7 @@ void MainWindow::initActions() {
   /*************************************************
    * Short cuts
    *************************************************/
-  KAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this
+  KAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this,
                                                             SLOT(slotToggleFullScreen()), this);
   actionCollection()->addAction(toggleFullScreenAction->text(), toggleFullScreenAction);
 
