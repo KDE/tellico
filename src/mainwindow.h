@@ -483,6 +483,14 @@ private slots:
    * Called when the viewStack's current widget changes
    */
   void slotCurrentViewWidgetChanged();
+  /**
+   * Toggle full screen mode
+   */
+  void slotToggleFullScreen();
+  /**
+   * Toggle menubar visibility
+   */
+  void slotToggleMenuBarVisibility();
 
 private:
   void importFile(Import::Format format, const KUrl::List& kurls);

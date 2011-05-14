@@ -462,7 +462,7 @@ void MainWindow::initActions() {
   action->setText(i18n("Internet Search..."));
   action->setIconText(i18n("Search"));  // find a better word for this?
   action->setIcon(KIcon(QLatin1String("tools-wizard")));
-  action->setShortcut(Qt::CTRL + Qt::Key_M);
+  action->setShortcut(Qt::CTRL + Qt::Key_I);
   action->setToolTip(i18n("Search the internet..."));
 
   action = actionCollection()->addAction(QLatin1String("filter_dialog"), this, SLOT(slotShowFilterDialog()));
@@ -618,6 +618,17 @@ void MainWindow::initActions() {
    * Help menu
    *************************************************/
   KStandardAction::tipOfDay(this, SLOT(slotShowTipOfDay()), actionCollection());
+
+  /*************************************************
+   * Short cuts
+   *************************************************/
+  KAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this
+                                                            SLOT(slotToggleFullScreen()), this);
+  actionCollection()->addAction(toggleFullScreenAction->text(), toggleFullScreenAction);
+
+  KAction* toggleMenubarAction = KStandardAction::create(KStandardAction::ShowMenubar, this,
+                                                         SLOT(slotToggleMenuBarVisibility()), this );
+  actionCollection()->addAction(toggleMenubarAction->text(), toggleMenubarAction);
 
   /*************************************************
    * Collection Toolbar
@@ -2244,6 +2255,16 @@ bool MainWindow::eventFilter(QObject* obj_, QEvent* ev_) {
     }
   }
   return false;
+}
+
+void MainWindow::slotToggleFullScreen() {
+  Qt::WindowStates ws = windowState();
+  setWindowState((ws & Qt::WindowFullScreen) ? (ws & ~Qt::WindowFullScreen) : (ws | Qt::WindowFullScreen));
+}
+
+void MainWindow::slotToggleMenuBarVisibility() {
+  KMenuBar* mb = menuBar();
+  mb->isHidden() ? mb->show() : mb->hide();
 }
 
 #include "mainwindow.moc"
