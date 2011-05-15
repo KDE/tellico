@@ -61,7 +61,7 @@ void CollectionTest::testEmpty() {
 }
 
 void CollectionTest::testCollection() {
-  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
 
   // since it's the second collection created
   QCOMPARE(coll->id(), 2);
@@ -107,10 +107,108 @@ void CollectionTest::testCollection() {
   QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));
 }
 
+void CollectionTest::testFields() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
+
+  QCOMPARE(coll->fields().count(), 4);
+  QVERIFY(coll->peopleFields().isEmpty());
+  QVERIFY(coll->imageFields().isEmpty());
+
+  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"),
+                                                          QLatin1String("Author")));
+  aField->setFlags(Tellico::Data::Field::AllowMultiple | Tellico::Data::Field::AllowGrouped);
+  aField->setFormatType(Tellico::FieldFormat::FormatName);
+  QCOMPARE(coll->addField(aField), true);
+  QVERIFY(coll->hasField(QLatin1String("author")));
+  QCOMPARE(coll->defaultGroupField(), QLatin1String("author"));
+
+  QCOMPARE(coll->fields().count(), 5);
+  QCOMPARE(coll->peopleFields().count(), 1);
+  QVERIFY(coll->imageFields().isEmpty());
+  QVERIFY(!coll->hasImages());
+  QCOMPARE(coll->fieldsByCategory(QLatin1String("General")).size(), 2);
+
+  Tellico::Data::FieldPtr bField(new Tellico::Data::Field(QLatin1String("cover"),
+                                                          QLatin1String("Cover"),
+                                                          Tellico::Data::Field::Image));
+  QCOMPARE(coll->addField(bField), true);
+  QVERIFY(coll->hasField(QLatin1String("cover")));
+  QVERIFY(!coll->hasField(QLatin1String("Ccover")));
+
+  QCOMPARE(coll->fields().count(), 6);
+  QCOMPARE(coll->peopleFields().count(), 1);
+  QCOMPARE(coll->imageFields().count(), 1);
+  QVERIFY(coll->hasImages());
+
+  QStringList cats = coll->fieldCategories();
+  QCOMPARE(cats.size(), 3);
+  QVERIFY(cats.contains(QLatin1String("General")));
+  QVERIFY(cats.contains(QLatin1String("Personal")));
+  QVERIFY(cats.contains(QLatin1String("Cover")));
+
+  const QStringList names = coll->fieldNames();
+  QCOMPARE(names.size(), 6);
+  QVERIFY(names.contains(QLatin1String("author")));
+  QVERIFY(names.contains(QLatin1String("cover")));
+
+  const QStringList titles = coll->fieldTitles();
+  QCOMPARE(titles.size(), 6);
+  QVERIFY(titles.contains(QLatin1String("Author")));
+  QVERIFY(titles.contains(QLatin1String("Cover")));
+
+  QCOMPARE(coll->fieldByName(QLatin1String("author")), aField);
+  QCOMPARE(coll->fieldByTitle(QLatin1String("Author")), aField);
+  QCOMPARE(coll->fieldNameByTitle(QLatin1String("Author")), QLatin1String("author"));
+  QCOMPARE(coll->fieldNameByTitle(QLatin1String("author")), QString());
+  QCOMPARE(coll->fieldTitleByName(QLatin1String("Author")), QString());
+  QCOMPARE(coll->fieldTitleByName(QLatin1String("author")), QLatin1String("Author"));
+
+  QVERIFY(coll->removeField(QLatin1String("cover")));
+  QVERIFY(!coll->hasField(QLatin1String("cover")));
+  QCOMPARE(coll->fields().count(), 5);
+  QVERIFY(!coll->hasImages());
+  QCOMPARE(coll->fieldTitleByName(QLatin1String("cover")), QString());
+  QCOMPARE(coll->fieldCategories().size(), 2);
+
+  Tellico::Data::FieldPtr cField(new Tellico::Data::Field(QLatin1String("editor"),
+                                                          QLatin1String("Editor")));
+  cField->setFlags(Tellico::Data::Field::AllowGrouped);
+  cField->setFormatType(Tellico::FieldFormat::FormatName);
+  cField->setCategory(QLatin1String("People"));
+
+  // since the field name does not match an existing field, modifying should fail
+  QVERIFY(!coll->modifyField(cField));
+  cField->setName(QLatin1String("author"));
+  QVERIFY(coll->modifyField(cField));
+  QCOMPARE(coll->fieldByName(QLatin1String("author")), cField);
+  QCOMPARE(coll->fieldByTitle(QLatin1String("Author")), Tellico::Data::FieldPtr());
+  QCOMPARE(coll->fieldByTitle(QLatin1String("Editor")), cField);
+  QCOMPARE(coll->peopleFields().count(), 1);
+
+  cats = coll->fieldCategories();
+  QCOMPARE(cats.size(), 3);
+  QVERIFY(cats.contains(QLatin1String("General")));
+  QVERIFY(cats.contains(QLatin1String("Personal")));
+  QVERIFY(cats.contains(QLatin1String("People")));
+
+  QCOMPARE(coll->fieldsByCategory(QLatin1String("General")).size(), 1);
+  QCOMPARE(coll->fieldsByCategory(QLatin1String("People")).size(), 1);
+
+  coll->clear();
+  QVERIFY(coll->fields().isEmpty());
+  QVERIFY(coll->peopleFields().isEmpty());
+  QVERIFY(coll->imageFields().isEmpty());
+  QVERIFY(coll->fieldCategories().isEmpty());
+  QVERIFY(coll->defaultGroupField().isEmpty());
+  QCOMPARE(coll->fieldByName(QLatin1String("author")), Tellico::Data::FieldPtr());
+  QCOMPARE(coll->fieldByTitle(QLatin1String("Editor")), Tellico::Data::FieldPtr());
+}
+
 void CollectionTest::testDerived() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
-  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"), QLatin1String("Author")));
+  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"),
+                                                          QLatin1String("Author")));
   aField->setFlags(Tellico::Data::Field::AllowMultiple);
   aField->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(aField);

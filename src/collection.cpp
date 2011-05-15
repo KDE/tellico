@@ -646,14 +646,14 @@ bool Collection::hasField(const QString& name_) const {
   return m_fieldByName.contains(name_);
 }
 
-bool Collection::isAllowed(const QString& key_, const QString& value_) const {
+bool Collection::isAllowed(const QString& field_, const QString& value_) const {
   // empty string is always allowed
   if(value_.isEmpty()) {
     return true;
   }
 
   // find the field with a name of 'key_'
-  FieldPtr field = fieldByName(key_);
+  FieldPtr field = fieldByName(field_);
 
   // if the type is not multiple choice or if value_ is allowed, return true
   if(field && (field->type() != Field::Choice || field->allowed().contains(value_))) {
@@ -828,8 +828,10 @@ void Collection::clear() {
   m_fields.clear();
   m_peopleFields.clear();
   m_imageFields.clear();
+  m_fieldCategories.clear();
   m_fieldByName.clear();
   m_fieldByTitle.clear();
+  m_defaultGroupField.clear();
 
   m_entries.clear();
   m_entryById.clear();
@@ -838,6 +840,7 @@ void Collection::clear() {
   }
   qDeleteAll(m_entryGroupDicts);
   m_entryGroupDicts.clear();
+  m_entryGroups.clear();
   m_groupsToDelete.clear();
   m_filters.clear();
   m_borrowers.clear();

@@ -34,6 +34,7 @@ private Q_SLOTS:
   void initTestCase();
   void testEmpty();
   void testCollection();
+  void testFields();
   void testDerived();
   void testValue();
   void testValue_data();

@@ -213,11 +213,11 @@ public:
   /**
    * Determines whether or not a certain value is allowed for an field.
    *
-   * @param key The name of the field
+   * @param field The name of the field
    * @param value The desired value
    * @return A boolean indicating if the value is an allowed value for that field
    */
-  bool isAllowed(const QString& key, const QString& value) const;
+  bool isAllowed(const QString& field, const QString& value) const;
   /**
    * Returns a list of all the field names.
    *
@@ -387,7 +387,7 @@ private:
   FilterList m_filters;
   BorrowerList m_borrowers;
 
-  bool m_trackGroups : 1;
+  bool m_trackGroups;
 };
 
   } // end namespace
