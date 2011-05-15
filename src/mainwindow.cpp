@@ -627,7 +627,7 @@ void MainWindow::initActions() {
   actionCollection()->addAction(toggleFullScreenAction->text(), toggleFullScreenAction);
 
   KAction* toggleMenubarAction = KStandardAction::create(KStandardAction::ShowMenubar, this,
-                                                         SLOT(slotToggleMenuBarVisibility()), this );
+                                                         SLOT(slotToggleMenuBarVisibility()), this);
   actionCollection()->addAction(toggleMenubarAction->text(), toggleMenubarAction);
 
   /*************************************************
