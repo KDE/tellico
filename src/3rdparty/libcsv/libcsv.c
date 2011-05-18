@@ -151,15 +151,14 @@ csv_free(struct csv_parser *p)
 int
 csv_fini(struct csv_parser *p, void (*cb1)(char *, size_t, void *), void (*cb2)(char c, void *), void *data)
 {
+  if (p == NULL)
+    return -1;
+
   /* Finalize parsing.  Needed, for example, when file does not end in a newline */
   int quoted = p->quoted;
   int pstate = p->pstate;
   size_t spaces = p->spaces;
   size_t entry_pos = p->entry_pos;
-
-  if (p == NULL)
-    return -1;
-
 
   if (p->pstate == FIELD_BEGUN && p->quoted && p->options & CSV_STRICT && p->options & CSV_STRICT_FINI) {
     p->status = CSV_EPARSE;
