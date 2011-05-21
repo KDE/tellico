@@ -1,11 +1,15 @@
+2011-05-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for Goodreads collections.
+
 2011-05-13  Pedro Miguel Carvalho <kde@pmc.com.pt>
 
-	* Add shortcut key to switch main window to/from full screen state.
-	* Add shortcut key to show/hide menubar (Bug 251157).
+	* Added shortcut key to switch main window to/from full screen state.
+	* Added shortcut key to show/hide menubar (Bug 251157).
 
 2011-05-07  Pedro Miguel Carvalho <kde@pmc.com.pt>
 
-	* Add UI controls for changing icon size (Bug 250907).
+	* Added UI controls for changing icon size (Bug 250907).
 
 2011-05-07  Robby Stephenson  <robby@periapsis.org>
 

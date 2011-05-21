@@ -17,6 +17,7 @@ set(ICON_FILES
     game.png
     gcstar.png
     griffith.png
+    goodreads.png
     nocover_album.png
     nocover_bibtex.png
     nocover_boardgame.png

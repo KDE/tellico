@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="30" name="tellico">
+<kpartgui version="32" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -34,6 +34,7 @@
     <Action name="file_import_pdf"/>
     <Action name="file_import_referencer"/>
     <Action name="file_import_ris"/>
+    <Action name="file_import_goodreads"/>
     <Separator/>
     <Action name="file_import_freedb"/>
     <Action name="file_import_audiofile"/>

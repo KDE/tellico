@@ -354,6 +354,9 @@ void MainWindow::initActions() {
   IMPORT_ACTION(Import::RIS, "file_import_ris", i18n("Import RIS Data..."),
                 i18n("Import an RIS reference file"), BarIcon(QLatin1String("cite")));
 
+  IMPORT_ACTION(Import::Goodreads, "file_import_goodreads", i18n("Import Goodreads Collection..."),
+                i18n("Import a collection from Goodreads.com"), BarIcon(QLatin1String("goodreads")));
+
   IMPORT_ACTION(Import::PDF, "file_import_pdf", i18n("Import PDF File..."),
                 i18n("Import a PDF file"), mimeIcon("application/pdf"));
 

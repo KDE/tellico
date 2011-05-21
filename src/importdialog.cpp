@@ -46,6 +46,7 @@
 #include "translators/pdfimporter.h"
 #include "translators/referencerimporter.h"
 #include "translators/deliciousimporter.h"
+#include "translators/goodreadsimporter.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -257,6 +258,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       importer = new Import::DeliciousImporter(firstURL);
       break;
 
+    case Import::Goodreads:
+      CHECK_SIZE;
+      importer = new Import::GoodreadsImporter();
+      break;
+
     case Import::GRS1:
       myDebug() << "GRS1 not implemented";
       break;
@@ -324,6 +330,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::FileListing:
     case Import::GRS1:
     case Import::Griffith:
+    case Import::Goodreads:
       break;
   }
 
@@ -341,6 +348,7 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
     case Import::Griffith:
     case Import::Alexandria:
     case Import::FreeDB:
+    case Import::Goodreads:
       return Import::None;
     default:
       return Import::File;
