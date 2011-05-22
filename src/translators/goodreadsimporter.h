@@ -58,7 +58,6 @@ private:
   Data::CollPtr m_coll;
   QWidget* m_widget;
   KLineEdit* m_userEdit;
-  KLineEdit* m_keyEdit;
 
   KUrl m_xsltURL;
   QString m_user;

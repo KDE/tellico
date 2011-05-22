@@ -37,7 +37,6 @@
 #include <QGroupBox>
 #include <QDomDocument>
 #include <QRegExp>
-#include <QFontMetrics>
 
 namespace {
   static const char* GOODREADS_LIST_URL = "http://www.goodreads.com/review/list.xml";
@@ -88,9 +87,8 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
   if(!QRegExp(QLatin1String("\\d")).exactMatch(m_user)) {
     m_user = idFromName(m_user);
   }
-  m_key = m_keyEdit->text().trimmed();
-  if(m_user.isEmpty() || m_key.isEmpty()) {
-    setStatusMessage(i18n("Both the user ID and developer key must be entered."));
+  if(m_user.isEmpty()) {
+    setStatusMessage(i18n("A valid Goodreads user ID must be entered."));
     return Data::CollPtr();
   }
 
@@ -128,12 +126,7 @@ QWidget* GoodreadsImporter::widget(QWidget* parent_) {
   m_userEdit = new KLineEdit(gbox);
   m_userEdit->setText(m_user);
 
-  m_keyEdit = new KLineEdit(gbox);
-  m_keyEdit->setText(m_key);
-  m_keyEdit->setMinimumWidth(m_widget->fontMetrics().width(m_key));
-
   lay->addRow(i18n("User ID"), m_userEdit);
-  lay->addRow(i18n("Developer Key"), m_keyEdit);
 
   l->addWidget(gbox);
   l->addStretch(1);

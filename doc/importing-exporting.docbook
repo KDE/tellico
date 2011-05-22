@@ -198,6 +198,13 @@ If &appname; was compiled with <emphasis>exempi</emphasis> or <emphasis>poppler<
 </para>
 </sect2>
 
+<sect2 id="importing-referencer">
+<title>Importing Referencer Data</title>
+<para>
+<application><ulink url="http://icculus.org/referencer/">Referencer</ulink></application> is a document organizer and bibliography manager for the GNOME desktop. &appname; will import most of the data found in a Referencer database.
+</para>
+</sect2>
+
 <sect2 id="importing-ris">
 <title>Importing RIS Data</title>
 <para>
@@ -205,10 +212,10 @@ The <ulink url="http://www.adeptscience.co.uk/kb/article/A626"><acronym>RIS</acr
 </para>
 </sect2>
 
-<sect2 id="importing-referencer">
-<title>Importing Referencer Data</title>
+<sect2 id="importing-goodreads">
+<title>Importing Goodreads Collection</title>
 <para>
-<application><ulink url="http://icculus.org/referencer/">Referencer</ulink></application> is a document organizer and bibliography manager for the GNOME desktop. &appname; will import most of the data found in a Referencer database.
+<ulink url="http://www.goodreads.com">Goodreads</ulink> is an online social network for readers to track book collections. &appname; can import the list of books in a user's collection, given either the user name or user ID, as long as the collection is set to be publicly accessible.
 </para>
 </sect2>
 
