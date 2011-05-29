@@ -57,6 +57,8 @@ namespace Tellico {
   class Controller;
   class ViewStack;
   class DetailedListView;
+  class EntryIconView;
+  class EntryView;
   class FilterDialog;
   class EntryEditDialog;
   class GroupView;
@@ -480,10 +482,6 @@ private slots:
   void slotRenameCollection();
   void slotImageLocationChanged();
   /**
-   * Called when the viewStack's current widget changes
-   */
-  void slotCurrentViewWidgetChanged();
-  /**
    * Toggle full screen mode
    */
   void slotToggleFullScreen();
@@ -530,6 +528,8 @@ private:
   FilterView* m_filterView;
   LoanView* m_loanView;
   ViewStack* m_viewStack;
+  EntryView* m_entryView;
+  EntryIconView* m_iconView;
   QSignalMapper* m_updateMapper;
 
   ConfigDialog* m_configDlg;

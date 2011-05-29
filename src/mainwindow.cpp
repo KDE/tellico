@@ -722,21 +722,23 @@ void MainWindow::initView() {
 
   m_rightSplit = new QSplitter(Qt::Vertical, m_split);
 
-  m_detailedView = new DetailedListView(m_rightSplit);
+  m_viewStack = new ViewStack(m_rightSplit);
+
+  m_detailedView = m_viewStack->listView();
   Controller::self()->addObserver(m_detailedView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
   connect(Data::Document::self(), SIGNAL(signalCollectionImagesLoaded(Tellico::Data::CollPtr)),
           m_detailedView, SLOT(slotRefreshImages()));
 
-  m_viewStack = new ViewStack(m_rightSplit);
-  Controller::self()->addObserver(m_viewStack->iconView());
-  connect(m_viewStack->entryView(), SIGNAL(signalAction(const KUrl&)),
-          SLOT(slotURLAction(const KUrl&)));
+  m_iconView = m_viewStack->iconView();
+  Controller::self()->addObserver(m_iconView);
+  m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
+                                       "for each entry.</qt>"));
 
-  connect(m_statusBar, SIGNAL(requestIconSizeChange(int)),
-          m_viewStack->iconView(), SLOT(setMaxAllowedIconWidth(int)));
-  connect(m_viewStack, SIGNAL(currentChanged(int)), SLOT(slotCurrentViewWidgetChanged()));
+  m_entryView = new EntryView(m_rightSplit);
+  connect(m_entryView, SIGNAL(signalAction(const KUrl&)),
+          SLOT(slotURLAction(const KUrl&)));
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 }
@@ -791,7 +793,7 @@ void MainWindow::initFileOpen(bool nofile_) {
                       "<a href=\"tc:///coll_new_entry\">entering data manually</a> or by "
                       "<a href=\"tc:///edit_search_internet\">downloading data</a> from "
                       "various Internet sources.</h3>"));
-    m_viewStack->entryView()->showText(text);
+    m_entryView->showText(text);
   }
   m_initialized = true;
 }
@@ -879,7 +881,7 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   if(entryXSLTFile.isEmpty()) {
     entryXSLTFile = QLatin1String("Fancy"); // should never happen, but just in case
   }
-  m_viewStack->entryView()->setXSLTFile(entryXSLTFile + QLatin1String(".xsl"));
+  m_entryView->setXSLTFile(entryXSLTFile + QLatin1String(".xsl"));
 
   // make sure the right combo element is selected
   slotUpdateCollectionToolBar(coll_);
@@ -949,7 +951,7 @@ void MainWindow::readOptions() {
   }
   m_rightSplit->setSizes(splitList);
 
-  m_viewStack->iconView()->setMaxAllowedIconWidth(Config::maxIconSize());
+  m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
 
   connect(toolBar(QLatin1String("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
 
@@ -1518,7 +1520,7 @@ void MainWindow::slotHandleConfigChange() {
   }
 
   QString entryXSLTFile = Config::templateName(Kernel::self()->collectionType());
-  m_viewStack->entryView()->setXSLTFile(entryXSLTFile + QLatin1String(".xsl"));
+  m_entryView->setXSLTFile(entryXSLTFile + QLatin1String(".xsl"));
 }
 
 void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
@@ -2004,7 +2006,7 @@ bool MainWindow::exportCollection(Tellico::Export::Format format_, const KUrl& u
 bool MainWindow::showEntry(Data::ID id) {
   Data::EntryPtr entry = Data::Document::self()->collection()->entryById(id);
   if(entry) {
-    m_viewStack->showEntry(entry);
+    m_entryView->showEntry(entry);
   }
   return entry;
 }
@@ -2113,10 +2115,6 @@ void MainWindow::slotImageLocationChanged() {
                                  QLatin1String("</qt>"));
   fileSave();
   m_savingImageLocationChange = false;
-}
-
-void MainWindow::slotCurrentViewWidgetChanged() {
-  m_statusBar->setIconSizeInterfaceVisible(m_viewStack->currentWidget() == m_viewStack->iconView());
 }
 
 void MainWindow::updateCollectionActions() {

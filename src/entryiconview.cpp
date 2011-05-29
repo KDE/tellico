@@ -69,6 +69,9 @@ EntryIconView::EntryIconView(QWidget* parent_)
   setModel(sortModel);
 
   connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
+
+  setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
+                    "an icon, which may be an image in the entry.</qt>"));
 }
 
 EntryIconView::~EntryIconView() {

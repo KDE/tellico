@@ -27,7 +27,6 @@
 #include "groupview.h"
 #include "detailedlistview.h"
 #include "entryeditdialog.h"
-#include "viewstack.h"
 #include "entryview.h"
 #include "entryiconview.h"
 #include "entry.h"
@@ -176,7 +175,8 @@ void Controller::slotCollectionDeleted(Tellico::Data::CollPtr coll_) {
     m_mainWindow->m_loanView->slotReset();
   }
   m_mainWindow->m_detailedView->removeCollection(coll_);
-  m_mainWindow->m_viewStack->clear();
+  m_mainWindow->m_iconView->clear();
+  m_mainWindow->m_entryView->clear();
   blockAllSignals(false);
 
   // disconnect all signals from the collection
@@ -209,7 +209,7 @@ void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
   foreach(Observer* obs, m_observers) {
     obs->modifyEntries(entries_);
   }
-  m_mainWindow->m_viewStack->entryView()->slotRefresh(); // special case
+  m_mainWindow->m_entryView->slotRefresh(); // special case
   m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
@@ -224,7 +224,7 @@ void Controller::removedEntries(Tellico::Data::EntryList entries_) {
     m_currentEntries.removeAll(entry);
   }
   if(m_currentEntries.isEmpty()) {
-    m_mainWindow->m_viewStack->entryView()->clear();
+    m_mainWindow->m_entryView->clear();
     m_mainWindow->m_editDialog->clear();
   }
   m_mainWindow->slotEntryCount();
@@ -236,7 +236,8 @@ void Controller::addedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPt
   foreach(Observer* obs, m_observers) {
     obs->addField(coll_, field_);
   }
-  m_mainWindow->m_viewStack->refresh();
+  m_mainWindow->m_iconView->refresh();
+  m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
 }
@@ -245,7 +246,8 @@ void Controller::removedField(Tellico::Data::CollPtr coll_, Tellico::Data::Field
   foreach(Observer* obs, m_observers) {
     obs->removeField(coll_, field_);
   }
-  m_mainWindow->m_viewStack->refresh();
+  m_mainWindow->m_iconView->refresh();
+  m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
 }
@@ -254,7 +256,8 @@ void Controller::modifiedField(Tellico::Data::CollPtr coll_, Tellico::Data::Fiel
   foreach(Observer* obs, m_observers) {
     obs->modifyField(coll_, oldField_, newField_);
   }
-  m_mainWindow->m_viewStack->refresh();
+  m_mainWindow->m_iconView->refresh();
+  m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
 }
@@ -263,7 +266,8 @@ void Controller::reorderedFields(Tellico::Data::CollPtr coll_) {
   m_mainWindow->m_editDialog->setLayout(coll_);
   m_mainWindow->m_detailedView->reorderFields(coll_->fields());
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
-  m_mainWindow->m_viewStack->refresh();
+  m_mainWindow->m_iconView->refresh();
+  m_mainWindow->m_entryView->slotRefresh();
 }
 
 void Controller::slotClearSelection() {
@@ -318,11 +322,10 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
     m_mainWindow->m_editDialog->setContents(entries_);
   }
   // only show first one
-  if(m_widgetWithSelection && m_widgetWithSelection != m_mainWindow->m_viewStack->iconView()) {
-    if(entries_.count() > 1) {
-      m_mainWindow->m_viewStack->showEntries(entries_);
-    } else if(entries_.count() > 0) {
-      m_mainWindow->m_viewStack->showEntry(entries_[0]);
+  if(m_widgetWithSelection && m_widgetWithSelection != m_mainWindow->m_iconView) {
+    if(!entries_.isEmpty()) {
+      m_mainWindow->m_iconView->showEntries(entries_);
+      m_mainWindow->m_entryView->showEntry(entries_.at(0));
     }
   }
   blockAllSignals(false);
@@ -340,7 +343,7 @@ void Controller::slotUpdateCurrent(const Tellico::Data::EntryList& entries_) {
   m_working = true;
 
   blockAllSignals(true);
-  m_mainWindow->m_viewStack->showEntries(entries_);
+  m_mainWindow->m_iconView->showEntries(entries_);
   blockAllSignals(false);
 
   m_currentEntries = entries_;
@@ -428,7 +431,8 @@ void Controller::slotRefreshField(Tellico::Data::FieldPtr field_) {
     m_mainWindow->m_groupView->populateCollection();
   }
   m_mainWindow->m_detailedView->slotRefresh();
-  m_mainWindow->m_viewStack->refresh();
+  m_mainWindow->m_iconView->refresh();
+  m_mainWindow->m_entryView->slotRefresh();
 }
 
 void Controller::slotCopySelectedEntries() {
@@ -465,7 +469,7 @@ void Controller::blockAllSignals(bool block_) const {
     m_mainWindow->m_filterView->blockSignals(block_);
   }
   m_mainWindow->m_editDialog->blockSignals(block_);
-  m_mainWindow->m_viewStack->iconView()->blockSignals(block_);
+  m_mainWindow->m_iconView->blockSignals(block_);
 }
 
 void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
@@ -475,7 +479,7 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   if(filter_ && !filter_->isEmpty()) {
     // clear the icon view selection only
     // the detailed view takes care of itself
-    m_mainWindow->m_viewStack->iconView()->clearSelection();
+    m_mainWindow->m_iconView->clearSelection();
     m_selectedEntries.clear();
   }
   updateActions();

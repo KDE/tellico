@@ -80,6 +80,8 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
   connect(browserExtension(), SIGNAL(openUrlRequestDelayed(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
           SLOT(slotOpenURL(const KUrl&)));
   connect(KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), SLOT(slotResetColors()));
+
+  view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 }
 
 EntryView::~EntryView() {

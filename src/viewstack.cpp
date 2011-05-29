@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2002-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2002-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,46 +23,107 @@
  ***************************************************************************/
 
 #include "viewstack.h"
-#include "entryview.h"
+#include "detailedlistview.h"
 #include "entryiconview.h"
-#include "tellico_debug.h"
-#include "images/imagefactory.h"
-#include "entry.h"
+#include "core/tellico_config.h"
 
-#include <khtmlview.h>
-#include <klocale.h>
+#include <KIcon>
+#include <KLocale>
+
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QToolButton>
+#include <QStackedWidget>
+#include <QSlider>
 
 using Tellico::ViewStack;
 
-ViewStack::ViewStack(QWidget* parent_) : QStackedWidget(parent_),
-                     m_entryView(new EntryView(this)), m_iconView(new EntryIconView(this)) {
-  addWidget(m_entryView->view());
-  addWidget(m_iconView);
+ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_),
+                     m_listView(new DetailedListView(this)), m_iconView(new EntryIconView(this)) {
+  QBoxLayout* lay = new QVBoxLayout();
+  lay->setMargin(0);
+  lay->setSpacing(0);
 
-  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's "
-                                         "contents.</qt>"));
-  m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
-                                "an icon, which may be an image in the entry.</qt>"));
+  QBoxLayout* hlay = new QHBoxLayout();
+  lay->addLayout(hlay);
+  hlay->setMargin(0);
+  hlay->setSpacing(0);
+
+  QToolButton* listBtn = new QToolButton(this);
+  listBtn->setIcon(KIcon(QLatin1String("view-list-details")));
+  connect(listBtn, SIGNAL(clicked(bool)), SLOT(showListView()));
+
+  QToolButton* iconBtn = new QToolButton(this);
+  iconBtn->setIcon(KIcon(QLatin1String("view-list-icons")));
+  connect(iconBtn, SIGNAL(clicked(bool)), SLOT(showIconView()));
+
+  hlay->addWidget(listBtn);
+  hlay->addWidget(iconBtn);
+  hlay->addStretch(10);
+
+  m_decreaseIconSizeButton = new QToolButton(this);
+  m_decreaseIconSizeButton->setIcon(KIcon(QLatin1String("zoom-out")));
+  m_decreaseIconSizeButton->setToolTip(i18n("Decrease the maximum icon size in the icon list view"));
+  hlay->addWidget(m_decreaseIconSizeButton);
+  connect(m_decreaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotDecreaseIconSizeButtonClicked()));
+
+  m_iconSizeSlider = new QSlider(Qt::Horizontal, this);
+  m_iconSizeSlider->setMinimum(MIN_ENTRY_ICON_SIZE);
+  m_iconSizeSlider->setMaximum(MAX_ENTRY_ICON_SIZE);
+  m_iconSizeSlider->setSingleStep(SMALL_INCREMENT_ICON_SIZE);
+  m_iconSizeSlider->setPageStep(LARGE_INCREMENT_ICON_SIZE);
+  m_iconSizeSlider->setValue(Config::maxIconSize());
+  m_iconSizeSlider->setTracking(true);
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(Config::maxIconSize()));
+  hlay->addWidget(m_iconSizeSlider);
+  connect(m_iconSizeSlider, SIGNAL(valueChanged(int)), SLOT(slotIconSizeSliderChanged(int)));
+
+  m_increaseIconSizeButton = new QToolButton(this);
+  m_increaseIconSizeButton->setIcon(KIcon(QLatin1String("zoom-in")));
+  m_increaseIconSizeButton->setToolTip(i18n("Increase the maximum icon size in the icon list view"));
+  hlay->addWidget(m_increaseIconSizeButton, 0);
+  connect(m_increaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotIncreaseIconSizeButtonClicked()));
+
+  setIconSizeInterfaceVisible(false);
+
+  m_stack = new QStackedWidget(this);
+  lay->addWidget(m_stack);
+  m_stack->addWidget(m_listView);
+  m_stack->addWidget(m_iconView);
+
+  setLayout(lay);
 }
 
-void ViewStack::clear() {
-  m_entryView->clear();
-  m_iconView->clear();
+void ViewStack::showListView() {
+  setIconSizeInterfaceVisible(false);
+  m_stack->setCurrentWidget(m_listView);
 }
 
-void ViewStack::refresh() {
-  m_entryView->slotRefresh();
-  m_iconView->refresh();
+void ViewStack::showIconView() {
+  m_stack->setCurrentWidget(m_iconView);
+  setIconSizeInterfaceVisible(true);
 }
 
-void ViewStack::showEntry(Tellico::Data::EntryPtr entry_) {
-  m_entryView->showEntry(entry_);
-  setCurrentWidget(m_entryView->view());
+void ViewStack::slotDecreaseIconSizeButtonClicked() {
+  m_iconSizeSlider->setValue(m_iconSizeSlider->value() - LARGE_INCREMENT_ICON_SIZE);
 }
 
-void ViewStack::showEntries(const Tellico::Data::EntryList& entries_) {
-  m_iconView->showEntries(entries_);
-  setCurrentWidget(m_iconView);
+void ViewStack::slotIncreaseIconSizeButtonClicked() {
+  m_iconSizeSlider->setValue(m_iconSizeSlider->value() + LARGE_INCREMENT_ICON_SIZE);
+}
+
+void ViewStack::slotIconSizeSliderChanged(int size) {
+  m_decreaseIconSizeButton->setEnabled(size > MIN_ENTRY_ICON_SIZE);
+  m_increaseIconSizeButton->setEnabled(size < MAX_ENTRY_ICON_SIZE);
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(size));
+  Config::setMaxIconSize(size);
+  m_iconView->setMaxAllowedIconWidth(size);
+}
+
+void ViewStack::setIconSizeInterfaceVisible(bool visible) {
+  m_decreaseIconSizeButton->setVisible(visible);
+  m_increaseIconSizeButton->setVisible(visible);
+  m_iconSizeSlider->setVisible(visible);
 }
 
 #include "viewstack.moc"

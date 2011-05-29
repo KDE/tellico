@@ -27,32 +27,56 @@
 
 #include "datavectors.h"
 
-#include <QStackedWidget>
+#include <QWidget>
+
+class QStackedWidget;
+class QSlider;
+class QToolButton;
 
 namespace Tellico {
-  class EntryView;
+  class DetailedListView;
   class EntryIconView;
 
 /**
  * @author Robby Stephenson
  */
-class ViewStack : public QStackedWidget {
+class ViewStack : public QWidget {
 Q_OBJECT
 
 public:
   ViewStack(QWidget* parent);
 
-  EntryView* entryView() { return m_entryView; }
+  DetailedListView* listView() { return m_listView; }
   EntryIconView* iconView() { return m_iconView; }
 
-  void clear();
-  void refresh();
-  void showEntry(Data::EntryPtr entry);
-  void showEntries(const Data::EntryList& entries);
+private slots:
+  void showListView();
+  void showIconView();
+  /**
+    * Called when the "Decrease Icon Size" button is clicked.
+    */
+  void slotDecreaseIconSizeButtonClicked();
+  /**
+    * Called when the "Increase Icon Size" button is clicked.
+    */
+  void slotIncreaseIconSizeButtonClicked();
+  /**
+    * Called when the "Icon Size" slider value changes.
+    */
+  void slotIconSizeSliderChanged(int);
 
 private:
-  EntryView* m_entryView;
+  /**
+   * Sets the visibility of the icon size GUI controls
+   */
+  void setIconSizeInterfaceVisible(bool);
+
+  DetailedListView* m_listView;
   EntryIconView* m_iconView;
+  QStackedWidget* m_stack;
+  QSlider* m_iconSizeSlider;
+  QToolButton* m_increaseIconSizeButton;
+  QToolButton* m_decreaseIconSizeButton;
 };
 
 } // end namespace
