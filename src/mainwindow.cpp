@@ -717,16 +717,16 @@ void MainWindow::initView() {
 
   m_rightSplit = new QSplitter(Qt::Vertical, m_split);
 
-  ViewStack* viewStack = new ViewStack(m_rightSplit);
+  m_viewStack = new ViewStack(m_rightSplit);
 
-  m_detailedView = viewStack->listView();
+  m_detailedView = m_viewStack->listView();
   Controller::self()->addObserver(m_detailedView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
   connect(Data::Document::self(), SIGNAL(signalCollectionImagesLoaded(Tellico::Data::CollPtr)),
           m_detailedView, SLOT(slotRefreshImages()));
 
-  m_iconView = viewStack->iconView();
+  m_iconView = m_viewStack->iconView();
   Controller::self()->addObserver(m_iconView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
@@ -813,6 +813,7 @@ void MainWindow::saveOptions() {
     Config::setMainSplitterSizes(m_split->sizes());
   }
   Config::setSecondarySplitterSizes(m_rightSplit->sizes());
+  Config::setViewWidget(m_viewStack->currentWidget());
 
   // historical reasons
   // sorting by count was faked by sorting by phantom second column
@@ -942,6 +943,7 @@ void MainWindow::readOptions() {
   }
   m_rightSplit->setSizes(splitList);
 
+  m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
 
   connect(toolBar(QLatin1String("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));

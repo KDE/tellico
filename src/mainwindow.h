@@ -55,6 +55,7 @@ namespace Tellico {
     class LineEdit;
   }
   class Controller;
+  class ViewStack;
   class DetailedListView;
   class EntryIconView;
   class EntryView;
@@ -523,6 +524,7 @@ private:
   LoanView* m_loanView;
   EntryView* m_entryView;
   EntryIconView* m_iconView;
+  ViewStack* m_viewStack;
   QSignalMapper* m_updateMapper;
 
   ConfigDialog* m_configDlg;

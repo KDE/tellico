@@ -94,6 +94,25 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_),
   setLayout(lay);
 }
 
+int ViewStack::currentWidget() const {
+  if(m_stack->currentWidget() == m_listView) {
+    return Config::ListView;
+  } else {
+    return Config::IconView;
+  }
+}
+
+void ViewStack::setCurrentWidget(int widget_) {
+  switch(widget_) {
+    case Config::ListView:
+      showListView();
+      break;
+    case Config::IconView:
+      showIconView();
+      break;
+  }
+}
+
 void ViewStack::showListView() {
   setIconSizeInterfaceVisible(false);
   m_stack->setCurrentWidget(m_listView);

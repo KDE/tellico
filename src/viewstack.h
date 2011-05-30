@@ -49,6 +49,9 @@ public:
   DetailedListView* listView() { return m_listView; }
   EntryIconView* iconView() { return m_iconView; }
 
+  int currentWidget() const;
+  void setCurrentWidget(int widget);
+
 private slots:
   void showListView();
   void showIconView();
