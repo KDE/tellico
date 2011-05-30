@@ -36,6 +36,7 @@
 #include <QToolButton>
 #include <QStackedWidget>
 #include <QSlider>
+#include <QButtonGroup>
 
 using Tellico::ViewStack;
 
@@ -51,16 +52,22 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   hlay->setMargin(0);
   hlay->setSpacing(0);
 
-  QToolButton* listBtn = new QToolButton(this);
-  listBtn->setIcon(KIcon(QLatin1String("view-list-details")));
-  connect(listBtn, SIGNAL(clicked(bool)), SLOT(showListView()));
+  m_listButton = new QToolButton(this);
+  m_listButton->setCheckable(true);
+  m_listButton->setIcon(KIcon(QLatin1String("view-list-details")));
+  connect(m_listButton, SIGNAL(clicked(bool)), SLOT(showListView()));
 
-  QToolButton* iconBtn = new QToolButton(this);
-  iconBtn->setIcon(KIcon(QLatin1String("view-list-icons")));
-  connect(iconBtn, SIGNAL(clicked(bool)), SLOT(showIconView()));
+  m_iconButton = new QToolButton(this);
+  m_iconButton->setCheckable(true);
+  m_iconButton->setIcon(KIcon(QLatin1String("view-list-icons")));
+  connect(m_iconButton, SIGNAL(clicked(bool)), SLOT(showIconView()));
 
-  hlay->addWidget(listBtn);
-  hlay->addWidget(iconBtn);
+  QButtonGroup* bg = new QButtonGroup(this);
+  bg->addButton(m_listButton);
+  bg->addButton(m_iconButton);
+
+  hlay->addWidget(m_listButton);
+  hlay->addWidget(m_iconButton);
   hlay->addStretch(10);
 
   m_decreaseIconSizeButton = new QToolButton(this);
@@ -107,9 +114,11 @@ int ViewStack::currentWidget() const {
 void ViewStack::setCurrentWidget(int widget_) {
   switch(widget_) {
     case Config::ListView:
+      m_listButton->setChecked(true);
       showListView();
       break;
     case Config::IconView:
+      m_iconButton->setChecked(true);
       showIconView();
       break;
   }

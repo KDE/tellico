@@ -77,6 +77,8 @@ private:
   DetailedListView* m_listView;
   EntryIconView* m_iconView;
   QStackedWidget* m_stack;
+  QToolButton* m_listButton;
+  QToolButton* m_iconButton;
   QSlider* m_iconSizeSlider;
   QToolButton* m_increaseIconSizeButton;
   QToolButton* m_decreaseIconSizeButton;
