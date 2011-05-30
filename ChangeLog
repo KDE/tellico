@@ -1,7 +1,7 @@
 2011-05-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Made Entry View always visible.
-	* Moved icon view to share space with the list view.
+	* Moved icon view to share space with the list view (Bug 250912).
 
 2011-05-20  Robby Stephenson  <robby@periapsis.org>
 
