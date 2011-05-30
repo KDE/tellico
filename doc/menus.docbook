@@ -610,19 +610,6 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Show Entry View</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>toggles the display of the <interface>Entry View</interface></action>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
   <guimenuitem>Group Selection</guimenuitem>
  </menuchoice>
 </term>

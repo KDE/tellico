@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="32" name="tellico">
+<kpartgui version="33" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -102,7 +102,6 @@
    <Action append="show_merge" name="toggle_collection_bar"/>
    <Action append="show_merge" name="toggle_group_widget"/>
    <Action append="show_merge" name="toggle_edit_widget"/>
-   <Action append="show_merge" name="toggle_entry_view"/>
    <Action append="show_merge" name="change_entry_grouping"/>
   </Menu>
   <Menu name="help">

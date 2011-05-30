@@ -610,11 +610,6 @@ void MainWindow::initActions() {
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
   actionCollection()->addAction(QLatin1String("toggle_edit_widget"), m_toggleEntryEditor);
 
-  m_toggleEntryView = new KToggleAction(i18n("Show Entry &View"), this);
-  m_toggleEntryView->setToolTip(i18n("Enable/disable the entry view"));
-  connect(m_toggleEntryView, SIGNAL(triggered()), SLOT(slotToggleEntryView()));
-  actionCollection()->addAction(QLatin1String("toggle_entry_view"), m_toggleEntryView);
-
   KStandardAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 
   /*************************************************
@@ -722,16 +717,16 @@ void MainWindow::initView() {
 
   m_rightSplit = new QSplitter(Qt::Vertical, m_split);
 
-  m_viewStack = new ViewStack(m_rightSplit);
+  ViewStack* viewStack = new ViewStack(m_rightSplit);
 
-  m_detailedView = m_viewStack->listView();
+  m_detailedView = viewStack->listView();
   Controller::self()->addObserver(m_detailedView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
   connect(Data::Document::self(), SIGNAL(signalCollectionImagesLoaded(Tellico::Data::CollPtr)),
           m_detailedView, SLOT(slotRefreshImages()));
 
-  m_iconView = m_viewStack->iconView();
+  m_iconView = viewStack->iconView();
   Controller::self()->addObserver(m_iconView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
@@ -807,7 +802,6 @@ void MainWindow::saveOptions() {
 
   Config::setShowGroupWidget(m_toggleGroupWidget->isChecked());
   Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
-  Config::setShowEntryView(m_toggleEntryView->isChecked());
 
   KConfigGroup filesConfig(KGlobal::config(), "Recent Files");
   m_fileOpenRecent->saveEntries(filesConfig);
@@ -818,10 +812,7 @@ void MainWindow::saveOptions() {
   if(!m_groupView->isHidden()) {
     Config::setMainSplitterSizes(m_split->sizes());
   }
-  if(!m_viewStack->isHidden()) {
-    // badly named option, but no need to change
-    Config::setSecondarySplitterSizes(m_rightSplit->sizes());
-  }
+  Config::setSecondarySplitterSizes(m_rightSplit->sizes());
 
   // historical reasons
   // sorting by count was faked by sorting by phantom second column
@@ -957,9 +948,6 @@ void MainWindow::readOptions() {
 
   m_toggleGroupWidget->setChecked(Config::showGroupWidget());
   slotToggleGroupWidget();
-
-  m_toggleEntryView->setChecked(Config::showEntryView());
-  slotToggleEntryView();
 
   // initialize the recent file list
   KConfigGroup filesConfig(KGlobal::config(), "Recent Files");
@@ -1404,14 +1392,6 @@ void MainWindow::slotToggleEntryEditor() {
     m_editDialog->show();
   } else {
     m_editDialog->hide();
-  }
-}
-
-void MainWindow::slotToggleEntryView() {
-  if(m_toggleEntryView->isChecked()) {
-    m_viewStack->show();
-  } else {
-    m_viewStack->hide();
   }
 }
 

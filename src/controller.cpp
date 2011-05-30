@@ -283,8 +283,6 @@ void Controller::slotClearSelection() {
   if(m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->clearSelection();
   }
-//  m_mainWindow->m_editDialog->clear(); let this stay
-//  m_mainWindow->m_viewStack->clear(); let this stay
 
   blockAllSignals(false);
 

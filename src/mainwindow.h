@@ -55,7 +55,6 @@ namespace Tellico {
     class LineEdit;
   }
   class Controller;
-  class ViewStack;
   class DetailedListView;
   class EntryIconView;
   class EntryView;
@@ -212,10 +211,6 @@ public slots:
    * Toggles the edit widget.
    */
   void slotToggleEntryEditor();
-  /**
-   * Toggles the edit widget.
-   */
-  void slotToggleEntryView();
   /**
    * Shows the configuration dialog for the application.
    */
@@ -509,7 +504,6 @@ private:
   KAction* m_checkOutEntry;
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
-  KToggleAction* m_toggleEntryView;
 
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;
@@ -527,7 +521,6 @@ private:
   GroupView* m_groupView;
   FilterView* m_filterView;
   LoanView* m_loanView;
-  ViewStack* m_viewStack;
   EntryView* m_entryView;
   EntryIconView* m_iconView;
   QSignalMapper* m_updateMapper;
