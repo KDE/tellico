@@ -96,6 +96,7 @@
 #include <KShortcutsDialog>
 #include <kundostack.h>
 #include <KTabWidget>
+#include <klinkitemselectionmodel.h>
 
 #include <QSplitter>
 //#include <QPainter>
@@ -727,6 +728,7 @@ void MainWindow::initView() {
           m_detailedView, SLOT(slotRefreshImages()));
 
   m_iconView = m_viewStack->iconView();
+  m_iconView->setModel(m_detailedView->model());
   Controller::self()->addObserver(m_iconView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
@@ -736,6 +738,10 @@ void MainWindow::initView() {
           SLOT(slotURLAction(const KUrl&)));
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
+
+  KLinkItemSelectionModel* proxySelect = new KLinkItemSelectionModel(m_iconView->model(),
+                                                                     m_detailedView->selectionModel());
+  m_iconView->setSelectionModel(proxySelect);
 }
 
 void MainWindow::initConnections() {

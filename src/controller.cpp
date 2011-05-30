@@ -304,7 +304,8 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
 
   blockAllSignals(true);
 // in the list view and group view, if entries are selected in one, clear selection in other
-  if(m_widgetWithSelection != m_mainWindow->m_detailedView) {
+  if(m_widgetWithSelection != m_mainWindow->m_detailedView &&
+     m_widgetWithSelection != m_mainWindow->m_iconView) {
     m_mainWindow->m_detailedView->clearSelection();
   }
   if(m_widgetWithSelection != m_mainWindow->m_groupView) {
@@ -322,7 +323,6 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
   // only show first one
   if(m_widgetWithSelection && m_widgetWithSelection != m_mainWindow->m_iconView) {
     if(!entries_.isEmpty()) {
-      m_mainWindow->m_iconView->showEntries(entries_);
       m_mainWindow->m_entryView->showEntry(entries_.at(0));
     }
   }

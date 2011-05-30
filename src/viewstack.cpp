@@ -25,6 +25,7 @@
 #include "viewstack.h"
 #include "detailedlistview.h"
 #include "entryiconview.h"
+#include "models/entrymodel.h"
 #include "core/tellico_config.h"
 
 #include <KIcon>
@@ -38,8 +39,9 @@
 
 using Tellico::ViewStack;
 
-ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_),
-                     m_listView(new DetailedListView(this)), m_iconView(new EntryIconView(this)) {
+ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
+    , m_listView(new DetailedListView(this))
+    , m_iconView(new EntryIconView(m_listView->sourceModel(), this)) {
   QBoxLayout* lay = new QVBoxLayout();
   lay->setMargin(0);
   lay->setSpacing(0);

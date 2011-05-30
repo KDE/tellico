@@ -32,7 +32,7 @@
 #include "document.h"
 #include "tellico_utils.h"
 #include "tellico_debug.h"
-#include "models/entrytitlemodel.h"
+#include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
 
 #include <kmenu.h>
@@ -51,7 +51,7 @@ namespace {
 
 using Tellico::EntryIconView;
 
-EntryIconView::EntryIconView(QWidget* parent_)
+EntryIconView::EntryIconView(QAbstractItemModel* model_, QWidget* parent_)
     : QListView(parent_), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE) {
   setViewMode(QListView::IconMode);
   setMovement(QListView::Static);
@@ -62,10 +62,10 @@ EntryIconView::EntryIconView(QWidget* parent_)
   setWordWrap(true);
   setSpacing(ENTRY_ICON_SIZE_PAD);
 
-  EntryTitleModel* baseModel = new EntryTitleModel(this);
+  Q_ASSERT(::qobject_cast<EntryModel*>(model_));
   EntrySortModel* sortModel = new EntrySortModel(this);
   sortModel->setSortRole(EntryPtrRole);
-  sortModel->setSourceModel(baseModel);
+  sortModel->setSourceModel(model_);
   setModel(sortModel);
 
   connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
@@ -81,8 +81,8 @@ Tellico::EntrySortModel* EntryIconView::sortModel() const {
   return static_cast<EntrySortModel*>(model());
 }
 
-Tellico::AbstractEntryModel* EntryIconView::sourceModel() const {
-  return static_cast<AbstractEntryModel*>(sortModel()->sourceModel());
+Tellico::EntryModel* EntryIconView::sourceModel() const {
+  return static_cast<EntryModel*>(sortModel()->sourceModel());
 }
 
 void EntryIconView::setMaxAllowedIconWidth(int width_) {

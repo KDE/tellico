@@ -65,6 +65,11 @@ protected:
       opt->font.setBold(true);
       opt->font.setItalic(true);
     }
+    // since the model returns an icon for the title, turn it off for the list view
+    // here we assume that column 0 is always the title field
+    if(index.column() == 0) {
+      opt->features ^= QStyleOptionViewItemV2::HasDecoration;
+    }
   }
 };
 
@@ -282,7 +287,7 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
   }
 
   clearSelection();
-  EntrySortModel* proxyModel = dynamic_cast<EntrySortModel*>(model());
+  EntrySortModel* proxyModel = static_cast<EntrySortModel*>(model());
   foreach(Data::EntryPtr entry, entries_) {
     QModelIndex index = sourceModel()->indexFromEntry(entry);
     if(!proxyModel->mapFromSource(index).isValid()) {
@@ -327,7 +332,8 @@ void DetailedListView::selectionChanged(const QItemSelection& selected_, const Q
 }
 
 void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
-  Data::EntryPtr entry = sourceModel()->data(index_, EntryPtrRole).value<Data::EntryPtr>();
+  DEBUG_BLOCK;
+  Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
     Controller::self()->editEntry(entry);
   }

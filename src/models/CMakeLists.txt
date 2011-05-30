@@ -1,13 +1,11 @@
 ########### next target ###############
 
 SET(models_STAT_SRCS
-   abstractentrymodel.cpp
    abstractsortmodel.cpp
    borrowermodel.cpp
    entrygroupmodel.cpp
    entrymodel.cpp
    entrysortmodel.cpp
-   entrytitlemodel.cpp
    filtermodel.cpp
    groupsortmodel.cpp
    modeliterator.cpp

@@ -25,26 +25,31 @@
 #ifndef TELLICO_ENTRYMODEL_H
 #define TELLICO_ENTRYMODEL_H
 
-#include "abstractentrymodel.h"
 #include "../datavectors.h"
+#include "models.h"
 
 #include <KIcon>
 
+#include <QAbstractItemModel>
 #include <QHash>
+#include <QCache>
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
  */
-class EntryModel : public AbstractEntryModel {
+class EntryModel : public QAbstractItemModel {
 Q_OBJECT
 
 public:
   EntryModel(QObject* parent);
   virtual ~EntryModel();
 
+  virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
   virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
+  virtual QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const;
+  virtual QModelIndex parent(const QModelIndex& index) const;
   virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
   virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
 
@@ -52,20 +57,36 @@ public:
 
   void clear();
   void clearSaveState();
+  void reset();
   void setImagesAreAvailable(bool b);
+
+  void    setEntries(const Data::EntryList& entries);
+  void    addEntries(const Data::EntryList& entries);
+  void modifyEntries(const Data::EntryList& entries);
+  void removeEntries(const Data::EntryList& entries);
 
   void    setFields(const Data::FieldList& fields);
   void    addFields(const Data::FieldList& fields);
   void modifyField(Data::FieldPtr oldField, Data::FieldPtr newField);
   void removeFields(const Data::FieldList& fields);
 
-private:
-  Data::FieldPtr field(const QModelIndex& index) const;
+  QModelIndex indexFromEntry(Data::EntryPtr entry) const;
 
+private:
+  Data::EntryPtr entry(const QModelIndex& index) const;
+  Data::FieldPtr field(const QModelIndex& index) const;
+  const KIcon& defaultIcon(Data::CollPtr coll) const;
+  QString imageField(Data::CollPtr coll) const;
+
+  Data::EntryList m_entries;
   Data::FieldList m_fields;
   KIcon m_checkPix;
   QHash<int, int> m_saveStates;
   bool m_imagesAreAvailable;
+
+  mutable QHash<int, KIcon*> m_defaultIcons;
+  mutable QHash<long, QString> m_imageFields;
+  mutable QCache<QString, KIcon> m_iconCache;
 };
 
 } // end namespace

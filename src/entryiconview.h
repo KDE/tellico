@@ -41,7 +41,7 @@ namespace {
 
 namespace Tellico {
 
-class AbstractEntryModel;
+class EntryModel;
 class EntrySortModel;
 
 /**
@@ -51,11 +51,11 @@ class EntryIconView : public QListView, public Observer {
 Q_OBJECT
 
 public:
-  EntryIconView(QWidget* parent);
+  EntryIconView(QAbstractItemModel* model, QWidget* parent);
   ~EntryIconView();
 
   EntrySortModel* sortModel() const;
-  AbstractEntryModel* sourceModel() const;
+  EntryModel* sourceModel() const;
 
   void clear();
   void refresh();
