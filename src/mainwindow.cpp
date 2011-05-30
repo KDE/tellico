@@ -715,7 +715,7 @@ void MainWindow::initView() {
   m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
                                     "based on a selected field.</qt>"));
 
-  m_rightSplit = new QSplitter(Qt::Vertical, m_split);
+  m_rightSplit = new QSplitter(Qt::Horizontal, m_split);
 
   m_viewStack = new ViewStack(m_rightSplit);
 
@@ -938,8 +938,8 @@ void MainWindow::readOptions() {
 
   splitList = Config::secondarySplitterSizes();
   if(splitList.empty()) {
-    const int th = height()/3;
-    splitList << th << 2*th;
+    const int th = 2*width()/5;
+    splitList << th << th;
   }
   m_rightSplit->setSizes(splitList);
 
