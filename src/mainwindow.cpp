@@ -61,6 +61,7 @@
 #include "core/drophandler.h"
 #include "core/dbusinterface.h"
 #include "models/models.h"
+#include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
@@ -96,7 +97,6 @@
 #include <KShortcutsDialog>
 #include <kundostack.h>
 #include <KTabWidget>
-#include <klinkitemselectionmodel.h>
 
 #include <QSplitter>
 //#include <QPainter>
@@ -739,8 +739,9 @@ void MainWindow::initView() {
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 
-  KLinkItemSelectionModel* proxySelect = new KLinkItemSelectionModel(m_iconView->model(),
-                                                                     m_detailedView->selectionModel());
+  EntrySelectionModel* proxySelect = new EntrySelectionModel(m_iconView->model(),
+                                                             m_detailedView->selectionModel(),
+                                                             this);
   m_iconView->setSelectionModel(proxySelect);
 }
 
@@ -749,9 +750,19 @@ void MainWindow::initConnections() {
   connect(m_editDialog, SIGNAL(finished()),
           this, SLOT(slotEditDialogFinished()));
 
+  EntrySelectionModel* proxySelect = static_cast<EntrySelectionModel*>(m_iconView->selectionModel());
+  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
+          m_editDialog, SLOT(setContents(Tellico::Data::EntryList)));
+
+  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
+          m_entryView, SLOT(showEntries(Tellico::Data::EntryList)));
+
   // let the group view call filters, too
   connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+  // whenever the list view and icon view slect entries, clear the selection in the group view
+  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
+          m_groupView, SLOT(clearSelection()));
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
@@ -2007,8 +2018,12 @@ void MainWindow::addFilterView() {
   m_viewTabs->insertTab(1, m_filterView, KIcon(QLatin1String("view-filter")), i18n("Filters"));
   m_filterView->setWhatsThis(i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                   "filter rules.</qt>"));
+
   connect(m_filterView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+  // whenever the list view and icon view slect entries, clear the selection in the filter view
+  connect(m_iconView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+          m_filterView, SLOT(clearSelection()));
 
   // sort by count if column = 1
   int sortRole = Config::filterViewSortColumn() == 0 ? static_cast<int>(Qt::DisplayRole) : static_cast<int>(RowCountRole);
@@ -2026,6 +2041,10 @@ void MainWindow::addLoanView() {
   m_viewTabs->insertTab(2, m_loanView, KIcon(QLatin1String("kaddressbook")), i18n("Loans"));
   m_loanView->setWhatsThis(i18n("<qt>The <i>Loan View</i> shows a list of all the people who "
                                 "have borrowed items from your collection.</qt>"));
+
+  // whenever the list view and icon view slect entries, clear the selection in the loan view
+  connect(m_iconView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+          m_loanView, SLOT(clearSelection()));
 
   // sort by count if column = 1
   int sortRole = Config::loanViewSortColumn() == 0 ? static_cast<int>(Qt::DisplayRole) : static_cast<int>(RowCountRole);

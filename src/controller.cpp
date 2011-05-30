@@ -308,43 +308,11 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
      m_widgetWithSelection != m_mainWindow->m_iconView) {
     m_mainWindow->m_detailedView->clearSelection();
   }
-  if(m_widgetWithSelection != m_mainWindow->m_groupView) {
-    m_mainWindow->m_groupView->clearSelection();
-  }
-  if(m_mainWindow->m_filterView && m_widgetWithSelection != m_mainWindow->m_filterView) {
-    m_mainWindow->m_filterView->clearSelection();
-  }
-  if(m_mainWindow->m_loanView && m_widgetWithSelection != m_mainWindow->m_loanView) {
-    m_mainWindow->m_loanView->clearSelection();
-  }
-  if(m_widgetWithSelection != m_mainWindow->m_editDialog) {
-    m_mainWindow->m_editDialog->setContents(entries_);
-  }
-  // only show first one
-  if(m_widgetWithSelection && m_widgetWithSelection != m_mainWindow->m_iconView) {
-    if(!entries_.isEmpty()) {
-      m_mainWindow->m_entryView->showEntry(entries_.at(0));
-    }
-  }
   blockAllSignals(false);
 
   m_selectedEntries = entries_;
   updateActions();
   m_mainWindow->slotEntryCount();
-  m_working = false;
-}
-
-void Controller::slotUpdateCurrent(const Tellico::Data::EntryList& entries_) {
-  if(m_working) {
-    return;
-  }
-  m_working = true;
-
-  blockAllSignals(true);
-  m_mainWindow->m_iconView->showEntries(entries_);
-  blockAllSignals(false);
-
-  m_currentEntries = entries_;
   m_working = false;
 }
 

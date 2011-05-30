@@ -140,7 +140,6 @@ public slots:
    * @param entries The list of selected entries
    */
   void slotUpdateSelection(QWidget* widget, const Tellico::Data::EntryList& entries);
-  void slotUpdateCurrent(const Tellico::Data::EntryList& entries);
   void slotCopySelectedEntries();
   void slotUpdateSelectedEntries(const QString& source);
   void slotDeleteSelectedEntries();

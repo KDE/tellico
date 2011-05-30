@@ -317,12 +317,15 @@ bool DetailedListView::eventFilter(QObject* obj_, QEvent* event_) {
 }
 
 void DetailedListView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
+  if(m_selectionChanging) {
+    // the list view and icon view update each other's selections
+    return;
+  }
   m_selectionChanging = true;
   GUI::TreeView::selectionChanged(selected_, deselected_);
   Data::EntryList entries;
   foreach(const QModelIndex& index, selectionModel()->selectedRows()) {
-    QModelIndex realIndex = sortModel()->mapToSource(index);
-    Data::EntryPtr tmp = sourceModel()->data(realIndex, EntryPtrRole).value<Data::EntryPtr>();
+    Data::EntryPtr tmp = index.data(EntryPtrRole).value<Data::EntryPtr>();
     if(tmp) {
       entries += tmp;
     }
@@ -332,7 +335,6 @@ void DetailedListView::selectionChanged(const QItemSelection& selected_, const Q
 }
 
 void DetailedListView::slotDoubleClicked(const QModelIndex& index_) {
-  DEBUG_BLOCK;
   Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
     Controller::self()->editEntry(entry);

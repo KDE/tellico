@@ -88,6 +88,7 @@ public slots:
    * Helper function to refresh view.
    */
   void slotRefresh();
+  void showEntries(Tellico::Data::EntryList entries);
 
 private slots:
   /**

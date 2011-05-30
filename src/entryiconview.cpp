@@ -126,7 +126,7 @@ void EntryIconView::selectionChanged(const QItemSelection& selected_, const QIte
   Data::EntryList entries;
   // ignore the selected_ and deselected_, just use selection model
   foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
-    Data::EntryPtr tmp = model()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+    Data::EntryPtr tmp = index.data(EntryPtrRole).value<Data::EntryPtr>();
     if(tmp) {
       entries += tmp;
     }
@@ -135,7 +135,7 @@ void EntryIconView::selectionChanged(const QItemSelection& selected_, const QIte
 }
 
 void EntryIconView::slotDoubleClicked(const QModelIndex& index_) {
-  Data::EntryPtr entry = sourceModel()->data(index_, EntryPtrRole).value<Data::EntryPtr>();
+  Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
     Controller::self()->editEntry(entry);
   }

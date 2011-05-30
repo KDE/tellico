@@ -399,7 +399,6 @@ void EntryEditDialog::clear() {
   if(m_isWorking) {
     return;
   }
-//  myDebug();
 
   m_isWorking = true;
   // clear the widgets

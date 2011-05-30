@@ -65,13 +65,6 @@ public:
    */
   void setLayout(Data::CollPtr coll);
   /**
-   * Sets the contents of the input controls to match the contents of a list of entries.
-   *
-   * @param list A list of the entries. The data in the first one will be inserted in the controls, and
-   * the widgets will be enabled or not, depending on whether the rest of the entries match the first one.
-   */
-  void setContents(Data::EntryList entries);
-  /**
    * Clears all of the input controls in the widget. The pointer to the
    * current entry is nullified, but not the pointer to the current collection.
    */
@@ -122,6 +115,13 @@ public slots:
    * from a @ref FieldEditWidget.
    */
   void slotSetModified(bool modified=true);
+  /**
+   * Sets the contents of the input controls to match the contents of a list of entries.
+   *
+   * @param list A list of the entries. The data in the first one will be inserted in the controls, and
+   * the widgets will be enabled or not, depending on whether the rest of the entries match the first one.
+   */
+  void setContents(Tellico::Data::EntryList entries);
 
 protected slots:
   virtual void slotButtonClicked(int button);

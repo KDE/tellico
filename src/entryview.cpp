@@ -106,6 +106,11 @@ void EntryView::clear() {
   view()->layout(); // I need this because some of the margins and widths may get messed up
 }
 
+void EntryView::showEntries(Tellico::Data::EntryList entries_) {
+  Q_ASSERT(!entries_.isEmpty());
+  showEntry(entries_.first());
+}
+
 void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   if(!entry_) {
     clear();

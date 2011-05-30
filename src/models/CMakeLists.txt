@@ -5,6 +5,7 @@ SET(models_STAT_SRCS
    borrowermodel.cpp
    entrygroupmodel.cpp
    entrymodel.cpp
+   entryselectionmodel.cpp
    entrysortmodel.cpp
    filtermodel.cpp
    groupsortmodel.cpp
