@@ -22,15 +22,6 @@
     <entry key="Secondary Splitter Sizes" type="IntList"/>
 </group>
 
-<group name="Detailed View Options">
-    <entry key="MaxPixmapWidth" type="Int">
-        <default>50</default>
-    </entry>
-    <entry key="MaxPixmapHeight" type="Int">
-        <default>50</default>
-    </entry>
-</group>
-
 <group name="Group View Options">
     <entry key="SortColumn" type="Int" name="groupViewSortColumn">
         <default>0</default>

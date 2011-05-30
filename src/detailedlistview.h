@@ -123,13 +123,6 @@ public:
    */
   void selectAllVisible();
   int visibleItems() const;
-  /**
-   * Set max size of pixmaps.
-   *
-   * @param width Width
-   * @param height Height
-   */
-  void setPixmapSize(int width, int height) { Q_UNUSED(width) Q_UNUSED(height) }
   void resetEntryStatus();
 
 public slots:

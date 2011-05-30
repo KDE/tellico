@@ -966,8 +966,6 @@ void MainWindow::readOptions() {
   Qt::SortOrder sortOrder = Config::groupViewSortAscending() ? Qt::AscendingOrder : Qt::DescendingOrder;
   m_groupView->setSorting(sortOrder, sortRole);
 
-  m_detailedView->setPixmapSize(Config::maxPixmapWidth(), Config::maxPixmapHeight());
-
   bool useBraces = Config::useBraces();
   if(useBraces) {
     BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;

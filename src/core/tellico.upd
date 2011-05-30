@@ -29,3 +29,4 @@ Id=tellico-3.0
 File=tellicorc
 Group=General Options
 RemoveKey=Show Entry View
+RemoveGroup=Detailed View Options
