@@ -27,6 +27,9 @@
 
 #include "../datavectors.h"
 
+#include <QList>
+#include <QWeakPointer>
+
 #include <klinkitemselectionmodel.h>
 
 namespace Tellico {
@@ -42,11 +45,18 @@ public:
                       QItemSelectionModel* selModel,
                       QObject* parent=0);
 
+  void addSelectionProxy(QItemSelectionModel* selModel);
+
 signals:
   void entriesSelected(Tellico::Data::EntryList entries);
 
 private slots:
   void selectedEntriesChanged();
+
+private:
+  Data::EntryList m_selectedEntries;
+  QList< QWeakPointer<QItemSelectionModel> > m_modelList;
+  bool m_processing;
 };
 
 } // end namespace

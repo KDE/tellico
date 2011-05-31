@@ -760,9 +760,9 @@ void MainWindow::initConnections() {
   // let the group view call filters, too
   connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
-  // whenever the list view and icon view slect entries, clear the selection in the group view
-  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
-          m_groupView, SLOT(clearSelection()));
+  // use the EntrySelectionModel as a proxy so when entries get selected in the group view
+  // the edit dialog and entry view are updated
+  static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_groupView->selectionModel());
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
@@ -2021,9 +2021,9 @@ void MainWindow::addFilterView() {
 
   connect(m_filterView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
-  // whenever the list view and icon view slect entries, clear the selection in the filter view
-  connect(m_iconView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
-          m_filterView, SLOT(clearSelection()));
+  // use the EntrySelectionModel as a proxy so when entries get selected in the filter view
+  // the edit dialog and entry view are updated
+  static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_filterView->selectionModel());
 
   // sort by count if column = 1
   int sortRole = Config::filterViewSortColumn() == 0 ? static_cast<int>(Qt::DisplayRole) : static_cast<int>(RowCountRole);
@@ -2042,9 +2042,9 @@ void MainWindow::addLoanView() {
   m_loanView->setWhatsThis(i18n("<qt>The <i>Loan View</i> shows a list of all the people who "
                                 "have borrowed items from your collection.</qt>"));
 
-  // whenever the list view and icon view slect entries, clear the selection in the loan view
-  connect(m_iconView->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
-          m_loanView, SLOT(clearSelection()));
+  // use the EntrySelectionModel as a proxy so when entries get selected in the loan view
+  // the edit dialog and entry view are updated
+  static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_loanView->selectionModel());
 
   // sort by count if column = 1
   int sortRole = Config::loanViewSortColumn() == 0 ? static_cast<int>(Qt::DisplayRole) : static_cast<int>(RowCountRole);

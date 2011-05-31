@@ -137,7 +137,6 @@ public slots:
   void slotRefreshImages();
 
 private slots:
-  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
   void slotDoubleClicked(const QModelIndex& index);
   void slotColumnMenuActivated(QAction* action);
   void updateHeaderMenu();

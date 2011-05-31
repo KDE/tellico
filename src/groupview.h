@@ -146,7 +146,6 @@ private slots:
    * Filter by group
    */
   void slotFilterGroup();
-  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortingChanged(int column, Qt::SortOrder order);
 

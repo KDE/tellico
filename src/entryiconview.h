@@ -78,7 +78,6 @@ protected:
   void contextMenuEvent(QContextMenuEvent* event);
 
 private slots:
-  void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortMenuActivated(QAction* action);
 

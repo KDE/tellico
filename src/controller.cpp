@@ -221,11 +221,6 @@ void Controller::removedEntries(Tellico::Data::EntryList entries_) {
   }
   foreach(Data::EntryPtr entry, entries_) {
     m_selectedEntries.removeAll(entry);
-    m_currentEntries.removeAll(entry);
-  }
-  if(m_currentEntries.isEmpty()) {
-    m_mainWindow->m_entryView->clear();
-    m_mainWindow->m_editDialog->clear();
   }
   m_mainWindow->slotEntryCount();
   m_mainWindow->slotQueueFilter();
@@ -301,14 +296,6 @@ void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::Entr
   if(widget_) {
     m_widgetWithSelection = widget_;
   }
-
-  blockAllSignals(true);
-// in the list view and group view, if entries are selected in one, clear selection in other
-  if(m_widgetWithSelection != m_mainWindow->m_detailedView &&
-     m_widgetWithSelection != m_mainWindow->m_iconView) {
-    m_mainWindow->m_detailedView->clearSelection();
-  }
-  blockAllSignals(false);
 
   m_selectedEntries = entries_;
   updateActions();

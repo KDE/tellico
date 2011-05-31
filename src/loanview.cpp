@@ -122,30 +122,6 @@ void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
   }
 }
 
-void LoanView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
-//  DEBUG_BLOCK;
-  QAbstractItemView::selectionChanged(selected_, deselected_);
-  // ignore the selected and deselected variables
-  // we want to grab all the currently selected ones
-  QSet<Data::EntryPtr> entries;
-  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
-    QModelIndex realIndex = sortModel()->mapToSource(index);
-    Data::EntryPtr entry = sourceModel()->entry(realIndex);
-    if(entry) {
-      entries += entry;
-    } else {
-      QModelIndex child = realIndex.child(0, 0);
-      for( ; child.isValid(); child = child.sibling(child.row()+1, 0)) {
-        entry = sourceModel()->entry(child);
-        if(entry) {
-          entries += entry;
-        }
-      }
-    }
-  }
-  Controller::self()->slotUpdateSelection(this, entries.toList());
-}
-
 void LoanView::slotDoubleClicked(const QModelIndex& index_) {
   QModelIndex realIndex = sortModel()->mapToSource(index_);
   Data::LoanPtr loan = sourceModel()->loan(realIndex);

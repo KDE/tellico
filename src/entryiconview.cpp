@@ -121,19 +121,6 @@ void EntryIconView::removeEntries(Tellico::Data::EntryList entries_) {
   sourceModel()->removeEntries(entries_);
 }
 
-void EntryIconView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
-  QAbstractItemView::selectionChanged(selected_, deselected_);
-  Data::EntryList entries;
-  // ignore the selected_ and deselected_, just use selection model
-  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
-    Data::EntryPtr tmp = index.data(EntryPtrRole).value<Data::EntryPtr>();
-    if(tmp) {
-      entries += tmp;
-    }
-  }
-  Controller::self()->slotUpdateSelection(this, entries);
-}
-
 void EntryIconView::slotDoubleClicked(const QModelIndex& index_) {
   Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {

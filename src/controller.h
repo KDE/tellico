@@ -171,7 +171,6 @@ private:
    * Keep track of the selected entries so that a top-level delete has something for reference
    */
   Data::EntryList m_selectedEntries;
-  Data::EntryList m_currentEntries;
   QWidget* m_widgetWithSelection;
 };
 

@@ -350,27 +350,6 @@ void GroupView::slotFilterGroup() {
   }
 }
 
-void GroupView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
-//  DEBUG_BLOCK;
-  QAbstractItemView::selectionChanged(selected_, deselected_);
-  // ignore the selected and deselected variables
-  // we want to grab all the currently selected ones
-  QSet<Data::EntryPtr> entries;
-  foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
-    QModelIndex realIndex = sortModel()->mapToSource(index);
-    Data::EntryPtr entry = sourceModel()->entry(realIndex);
-    if(entry) {
-      entries += entry;
-    } else {
-      Data::EntryGroup* group = sourceModel()->group(realIndex);
-      if(group) {
-        entries += QSet<Data::EntryPtr>::fromList(*group);
-      }
-    }
-  }
-  Controller::self()->slotUpdateSelection(this, entries.toList());
-}
-
 void GroupView::slotDoubleClicked(const QModelIndex& index_) {
   QModelIndex realIndex = sortModel()->mapToSource(index_);
   Data::EntryPtr entry = sourceModel()->entry(realIndex);
