@@ -77,33 +77,44 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
     return QVariant();
   }
 
-  Data::EntryPtr entry = this->entry(index_);
-  if(!entry) {
-    return QVariant();
-  }
-
-  Data::FieldPtr field = this->field(index_);
-  if(!field) {
-    return QVariant();
-  }
+  Data::EntryPtr entry;
+  Data::FieldPtr field;
 
   QString value;
 
   switch(role_) {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
-      if(field->type() == Data::Field::Image ||
+      field = this->field(index_);
+      if(!field ||
+         field->type() == Data::Field::Image ||
          field->type() == Data::Field::Bool ||
          field->type() == Data::Field::Rating) {
         return QVariant();
       }
-      value = entry->formattedField(field);
-      if(value.isEmpty()) {
+      entry = this->entry(index_);
+      if(!entry) {
         return QVariant();
       }
-      return value;
+      value = entry->formattedField(field);
+      return value.isEmpty() ? QVariant() : value;
 
     case Qt::DecorationRole:
+      field = this->field(index_);
+      if(!field) {
+        return QVariant();
+      }
+      if(field->type() == Data::Field::Bool) {
+        return m_checkPix;
+      } else if(field->type() == Data::Field::Rating) {
+        return GUI::RatingWidget::pixmap(value);
+      }
+
+      entry = this->entry(index_);
+      if(!entry) {
+        return QVariant();
+      }
+
       // we don't need a formatted value for image id
       value = entry->field(field);
       if(value.isEmpty()) {
@@ -112,20 +123,23 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {
-//          return KIcon(QPixmap::fromImage(img));
           return QPixmap::fromImage(img).scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
         }
-      } else if(field->type() == Data::Field::Bool) {
-        return m_checkPix;
-      } else if(field->type() == Data::Field::Rating) {
-        return GUI::RatingWidget::pixmap(value);
       }
       return QVariant();
 
     case EntryPtrRole:
+      entry = this->entry(index_);
+      if(!entry) {
+        return QVariant();
+      }
       return qVariantFromValue(entry);
 
     case FieldPtrRole:
+      field = this->field(index_);
+      if(!field) {
+        return QVariant();
+      }
       return qVariantFromValue(field);
 
     case SaveStateRole:
@@ -135,6 +149,10 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       return m_saveStates.value(index_.row());
 
     case Qt::TextAlignmentRole:
+      field = this->field(index_);
+      if(!field) {
+        return QVariant();
+      }
       // special-case a few types to align center, default otherwise
       if(field->type() == Data::Field::Bool ||
          field->type() == Data::Field::Number ||
@@ -145,7 +163,8 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       return QVariant();
 
     case Qt::SizeHintRole:
-      if(field->type() == Data::Field::Image) {
+      field = this->field(index_);
+      if(field && field->type() == Data::Field::Image) {
         return QSize(0, ENTRYMODEL_IMAGE_HEIGHT+4);
       }
       return QVariant();
