@@ -1,3 +1,7 @@
+2011-06-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug with CSV importer and changing delimiters.
+
 2011-05-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Made Entry View always visible.

@@ -275,6 +275,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_table = new QTableWidget(5, 0, groupBox);
   vlay->addWidget(m_table);
   m_table->setSelectionMode(QAbstractItemView::SingleSelection);
+  m_table->setSelectionBehavior(QAbstractItemView::SelectColumns);
   m_table->verticalHeader()->hide();
   m_table->horizontalHeader()->setClickable(true);
   m_table->setMinimumHeight(m_widget->fontMetrics().lineSpacing() * 8);
@@ -392,7 +393,7 @@ void CSVImporter::fillTable() {
 void CSVImporter::slotTypeChanged() {
   createCollection();
 
-  updateHeader(true);
+  updateHeader();
   m_comboField->clear();
   foreach(Data::FieldPtr field, m_coll->fields()) {
     m_comboField->addItem(field->title());
@@ -406,7 +407,7 @@ void CSVImporter::slotTypeChanged() {
 
 void CSVImporter::slotFirstRowHeader(bool b_) {
   m_firstRowHeader = b_;
-  updateHeader(false);
+  updateHeader();
   fillTable();
 }
 
@@ -426,7 +427,7 @@ void CSVImporter::slotDelimiter() {
   if(!m_delimiter.isEmpty()) {
     m_parser->setDelimiter(m_delimiter);
     fillTable();
-    updateHeader(false);
+    updateHeader();
   }
 }
 
@@ -444,6 +445,7 @@ void CSVImporter::slotSelectColumn(int pos_) {
   // pos is really the number of the position of the column
   const int col = pos_ - 1;
   m_table->scrollToItem(m_table->item(0, col));
+  m_table->selectColumn(col);
   m_comboField->setCurrentItem(m_table->horizontalHeaderItem(col)->text());
 }
 
@@ -473,15 +475,18 @@ void CSVImporter::slotSetColumnTitle() {
   }
 }
 
-void CSVImporter::updateHeader(bool force_) {
+void CSVImporter::updateHeader() {
   if(!m_table) {
-    return;
-  }
-  if(!m_firstRowHeader && !force_) {
     return;
   }
 
   for(int col = 0; col < m_table->columnCount(); ++col) {
+    QTableWidgetItem* headerItem = m_table->horizontalHeaderItem(col);
+    if(!headerItem) {
+      headerItem = new QTableWidgetItem();
+      m_table->setHorizontalHeaderItem(col, headerItem);
+    }
+
     QTableWidgetItem* item = m_table->item(0, col);
     Data::FieldPtr field;
     if(item && m_coll) {
@@ -490,11 +495,6 @@ void CSVImporter::updateHeader(bool force_) {
       if(!field) {
         field = m_coll->fieldByName(itemValue);
       }
-    }
-    QTableWidgetItem* headerItem = m_table->horizontalHeaderItem(col);
-    if(!headerItem) {
-      headerItem = new QTableWidgetItem();
-      m_table->setHorizontalHeaderItem(col, headerItem);
     }
     if(m_firstRowHeader && field) {
       headerItem->setText(field->title());
