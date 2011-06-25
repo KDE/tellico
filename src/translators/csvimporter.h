@@ -84,7 +84,7 @@ private slots:
 
 private:
   void fillTable();
-  void updateHeader(bool force);
+  void updateHeader();
   void createCollection();
 
   Data::CollPtr m_coll;
