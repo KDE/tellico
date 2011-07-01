@@ -229,7 +229,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
   m_checkSkipEmpty->setWhatsThis(i18n("If checked, any entries without a bibtex citation key "
                                       "will be skipped."));
 
-  QHBoxLayout* hlay = new QHBoxLayout(gbox);
+  QHBoxLayout* hlay = new QHBoxLayout();
   vlay->addLayout(hlay);
 
   QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + QLatin1Char(' '), gbox); // add a space for asthetics
