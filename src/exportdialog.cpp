@@ -105,6 +105,11 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
   m_encodeLocale->setWhatsThis(i18n("Encode the exported file in the local encoding."));
   vlay2->addWidget(m_encodeLocale);
 
+  if(QTextCodec::codecForLocale()->name() == "UTF-8") {
+    m_encodeUTF8->setEnabled(false);
+    m_encodeLocale->setChecked(true);
+  }
+
   QButtonGroup* bg = new QButtonGroup(widget);
   bg->addButton(m_encodeUTF8);
   bg->addButton(m_encodeLocale);
@@ -142,7 +147,7 @@ void ExportDialog::readOptions() {
   bool selected = config.readEntry("ExportSelectedOnly", false);
   m_exportSelected->setChecked(selected);
   bool encode = config.readEntry("EncodeUTF8", true);
-  if(encode) {
+  if(encode && m_encodeUTF8->isEnabled()) {
     m_encodeUTF8->setChecked(true);
   } else {
     m_encodeLocale->setChecked(true);
