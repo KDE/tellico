@@ -33,6 +33,7 @@ SET(fetch_STAT_SRCS
    imdbfetcher.cpp
    isbndbfetcher.cpp
    messagehandler.cpp
+   moviemeterfetcher.cpp
    multifetcher.cpp
    musicbrainzfetcher.cpp
    openlibraryfetcher.cpp

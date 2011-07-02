@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,67 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef MOVIEMETERFETCHERTEST_H
+#define MOVIEMETERFETCHERTEST_H
 
-namespace Tellico {
-  namespace Fetch {
+#include <QObject>
+#include <QEventLoop>
 
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
+#include "../datavectors.h"
+
+class KJob;
+
+class MovieMeterFetcherTest : public QObject {
+Q_OBJECT
+public:
+  MovieMeterFetcherTest();
+
+private Q_SLOTS:
+  void initTestCase();
+  void testPerson();
+  void testKeyword();
+
+  void slotResult(KJob* job);
+
+private:
+  QEventLoop m_loop;
+  Tellico::Data::EntryList m_results;
+  QHash<QString, QString> m_fieldValues;
 };
-
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo,
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase,
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase,
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter
-};
-
-  }
-}
 
 #endif

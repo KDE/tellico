@@ -755,7 +755,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
   }
   if(coll->hasField(imdb) && coll->fieldByName(imdb)->type() == Data::Field::URL) {
     m_url.setQuery(QString());
-    // we want to strip the "/combined" fromt he url
+    // we want to strip the "/combined" from the url
     QString url = m_url.url();
     if(url.endsWith(QLatin1String("/combined"))) {
       url = m_url.upUrl().url();
@@ -1119,7 +1119,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
     }
     pos = imgRx.indexIn(str_, pos+imgRx.matchedLength());
   }
-  
+
   // also check for <link rel='image_src'
   QRegExp linkRx(QLatin1String("<link (.*)>"), Qt::CaseInsensitive);
   linkRx.setMinimal(true);

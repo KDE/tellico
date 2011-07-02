@@ -37,7 +37,6 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kcodecs.h>
 #include <kzip.h>
 #include <kapplication.h>
 

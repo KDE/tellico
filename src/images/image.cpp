@@ -133,8 +133,12 @@ void Image::setID(const QString& id_) {
 void Image::calculateID() {
   // the id will eventually be used as a filename
   if(!isNull()) {
-    KMD5 md5(byteArray());
-    m_id = QLatin1String(md5.hexDigest()) + QLatin1Char('.') + QLatin1String(m_format.toLower());
-    m_id = idClean(m_id);
+    m_id = calculateID(byteArray(), QLatin1String(m_format));
   }
+}
+
+QString Image::calculateID(const QByteArray& data_, const QString& format_) {
+  KMD5 md5(data_);
+  QString id = QLatin1String(md5.hexDigest()) + QLatin1Char('.') + format_.toLower();
+  return idClean(id);
 }
