@@ -92,6 +92,7 @@ private slots:
 
 private:
   virtual void search();
+  void checkSession();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
 
   QHash<int, int> m_films;
