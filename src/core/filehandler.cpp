@@ -216,11 +216,15 @@ bool FileHandler::queryExists(const KUrl& url_) {
   // no need to check if we're actually overwriting the current url
   // the TellicoImporter forces the write
   GUI::CursorSaver cs(Qt::ArrowCursor);
+  KGuiItem guiItem(i18n("Overwrite"));
+  guiItem.setIcon(KIcon(QLatin1String("document-save-as"),
+                                      KIconLoader::global(),
+                                      QStringList() << QLatin1String("emblem-important")));
   QString str = i18n("A file named \"%1\" already exists. "
                      "Are you sure you want to overwrite it?", url_.fileName());
   int want_continue = KMessageBox::warningContinueCancel(GUI::Proxy::widget(), str,
                                                          i18n("Overwrite File?"),
-                                                         KGuiItem(i18n("Overwrite")));
+                                                         guiItem);
 
   if(want_continue == KMessageBox::Cancel) {
     return false;
