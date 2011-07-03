@@ -1,6 +1,7 @@
 ADD_SUBDIRECTORY( scripts )
 
 ########### next target ###############
+ADD_SUBDIRECTORY( xmlrpc )
 
 SET(fetch_STAT_SRCS
    amazonfetcher.cpp
@@ -52,6 +53,7 @@ KDE4_ADD_LIBRARY(fetch STATIC ${fetch_STAT_SRCS})
 TARGET_LINK_LIBRARIES(fetch
     newstuff
     btparse
+    xmlrpc
     )
 
 IF( YAZ_FOUND )

@@ -22,7 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "moviemeterfetcher.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
@@ -39,9 +38,9 @@
 #include <QGridLayout>
 #include <QTextCodec>
 
-#ifdef HAVE_KDEPIMLIBS
-#include <kxmlrpcclient/client.h>
-#endif
+// we use an internal copy of kxmlrpc since it doesn't handle character encoding correctly
+// see https://git.reviewboard.kde.org/r/101838/
+#include "xmlrpc/client.h"
 
 namespace {
   static const char* MOVIEMETER_API_KEY = "t80a06uf736d0yd00jpynpdsgea255yk";
@@ -53,10 +52,8 @@ using Tellico::Fetch::MovieMeterFetcher;
 
 MovieMeterFetcher::MovieMeterFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false), m_client(0) {
-#ifdef HAVE_KDEPIMLIBS
   m_client = new KXmlRpc::Client(KUrl(MOVIEMETER_URL), this);
   m_client->setUserAgent(QLatin1String("Tellico"));
-#endif
 }
 
 MovieMeterFetcher::~MovieMeterFetcher() {
@@ -74,11 +71,7 @@ QString MovieMeterFetcher::attribution() const {
 }
 
 bool MovieMeterFetcher::canSearch(FetchKey k) const {
-#ifndef HAVE_KDEPIMLIBS
-  return false;
-#else
   return k == Person || k == Keyword;
-#endif
 }
 
 bool MovieMeterFetcher::canFetch(int type) const {
@@ -91,13 +84,9 @@ void MovieMeterFetcher::readConfigHook(const KConfigGroup&) {
 void MovieMeterFetcher::search() {
   m_started = true;
 
-#ifdef HAVE_KDEPIMLIBS
   m_client->call(QLatin1String("api.startSession"), QString::fromLatin1(MOVIEMETER_API_KEY),
                  this, SLOT(gotSession(const QList<QVariant>&, const QVariant&)),
                  this, SLOT(gotError(int, const QString&, const QVariant&)));
-#else
-  stop();
-#endif
 }
 
 void MovieMeterFetcher::stop() {
@@ -110,7 +99,6 @@ void MovieMeterFetcher::stop() {
 }
 
 Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
-#ifdef HAVE_KDEPIMLIBS
  // if the entry is not in the hash yet, we need to fetch it
   if(!m_entries.contains(uid_)) {
     if(!m_films.contains(uid_)) {
@@ -132,7 +120,6 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
                    this, SLOT(gotError(int, const QString&, const QVariant&)));
     m_loop.exec();
   }
-#endif
   return m_entries.value(uid_);
 }
 
@@ -145,7 +132,6 @@ Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr ent
 }
 
 void MovieMeterFetcher::gotSession(const QList<QVariant>& args_, const QVariant& result_) {
-#ifdef HAVE_KDEPIMLIBS
   Q_UNUSED(result_);
   if(args_.isEmpty()) {
     stop();
@@ -176,7 +162,6 @@ void MovieMeterFetcher::gotSession(const QList<QVariant>& args_, const QVariant&
       stop();
       break;
   }
-#endif
 }
 
 void MovieMeterFetcher::gotFilmSearch(const QList<QVariant>& args_, const QVariant& result_) {
@@ -288,7 +273,6 @@ void MovieMeterFetcher::gotFilmImage(const QList<QVariant>& args_, const QVarian
 }
 
 void MovieMeterFetcher::gotDirectorSearch(const QList<QVariant>& args_, const QVariant& result_) {
-#ifdef HAVE_KDEPIMLIBS
   Q_UNUSED(result_);
   if(args_.isEmpty()) {
     stop();
@@ -302,7 +286,6 @@ void MovieMeterFetcher::gotDirectorSearch(const QList<QVariant>& args_, const QV
     m_loop.exec();
   }
   stop();
-#endif
 }
 
 void MovieMeterFetcher::gotDirectorFilms(const QList<QVariant>& args_, const QVariant& result_) {

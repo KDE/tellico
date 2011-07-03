@@ -99,7 +99,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
-#ifdef HAVE_KDEPIMLIBS
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
-#endif
 }

@@ -24,8 +24,6 @@
 
 #cmakedefine HAVE_KCAL
 
-#cmakedefine HAVE_KDEPIMLIBS
-
 #cmakedefine HAVE_KCDDB
 
 #cmakedefine ENABLE_AMAZON
