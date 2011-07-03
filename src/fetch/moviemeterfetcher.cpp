@@ -84,9 +84,39 @@ void MovieMeterFetcher::readConfigHook(const KConfigGroup&) {
 void MovieMeterFetcher::search() {
   m_started = true;
 
-  m_client->call(QLatin1String("api.startSession"), QString::fromLatin1(MOVIEMETER_API_KEY),
-                 this, SLOT(gotSession(const QList<QVariant>&, const QVariant&)),
-                 this, SLOT(gotError(int, const QString&, const QVariant&)));
+  checkSession();
+  Q_ASSERT(!m_session.isEmpty());
+
+  QList<QVariant> args;
+  args << m_session << request().value;
+
+  switch(request().key) {
+    case Title:
+    case Keyword:
+      m_client->call(QLatin1String("film.search"), QVariantList() << args,
+                     this, SLOT(gotFilmSearch(const QList<QVariant>&, const QVariant&)),
+                     this, SLOT(gotError(int, const QString&, const QVariant&)));
+      break;
+
+    case Person:
+      m_client->call(QLatin1String("director.search"), args,
+                     this, SLOT(gotDirectorSearch(const QList<QVariant>&, const QVariant&)),
+                     this, SLOT(gotError(int, const QString&, const QVariant&)));
+      break;
+
+    default:
+      stop();
+      break;
+  }
+}
+
+void MovieMeterFetcher::checkSession() {
+  if(m_session.isEmpty() || QDateTime::currentDateTime().secsTo(m_validTill) < 5*60) {
+    m_client->call(QLatin1String("api.startSession"), QString::fromLatin1(MOVIEMETER_API_KEY),
+                   this, SLOT(gotSession(const QList<QVariant>&, const QVariant&)),
+                   this, SLOT(gotError(int, const QString&, const QVariant&)));
+    m_loop.exec();
+  }
 }
 
 void MovieMeterFetcher::stop() {
@@ -133,35 +163,16 @@ Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr ent
 
 void MovieMeterFetcher::gotSession(const QList<QVariant>& args_, const QVariant& result_) {
   Q_UNUSED(result_);
-  if(args_.isEmpty()) {
-    stop();
-    return;
+  Q_ASSERT(m_loop.isRunning());
+  if(!args_.isEmpty()) {
+//    myDebug() << args_;
+    const QVariantMap map = args_.first().toMap();
+    m_session = map.value(QLatin1String("session_key")).toString();
+//    myDebug() << m_session;
+    const int valid_till = map.value(QLatin1String("valid_till")).toInt();
+    m_validTill.setTime_t(valid_till);
   }
-//  myDebug() << args_;
-  const QVariantMap map = args_.first().toMap();
-  m_session = map.value(QLatin1String("session_key")).toString();
-//  myDebug() << m_session;
-  const int valid_till = map.value(QLatin1String("valid_till")).toInt();
-  m_validTill.setTime_t(valid_till);
-
-  switch(request().key) {
-    case Title:
-    case Keyword:
-      m_client->call(QLatin1String("film.search"), QVariantList() << m_session << request().value,
-                     this, SLOT(gotFilmSearch(const QList<QVariant>&, const QVariant&)),
-                     this, SLOT(gotError(int, const QString&, const QVariant&)));
-      break;
-
-    case Person:
-      m_client->call(QLatin1String("director.search"), QVariantList() << m_session << request().value,
-                     this, SLOT(gotDirectorSearch(const QList<QVariant>&, const QVariant&)),
-                     this, SLOT(gotError(int, const QString&, const QVariant&)));
-      break;
-
-    default:
-      stop();
-      break;
-  }
+  m_loop.quit();
 }
 
 void MovieMeterFetcher::gotFilmSearch(const QList<QVariant>& args_, const QVariant& result_) {
