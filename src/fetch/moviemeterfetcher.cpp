@@ -139,7 +139,7 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
 Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr entry_) {
   const QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
-    return FetchRequest(Title, title);
+    return FetchRequest(Keyword, title);
   }
   return FetchRequest();
 }
