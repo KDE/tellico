@@ -51,7 +51,7 @@ void MovieMeterFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("George Miller"));
   m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("102"));
   m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Western"));
-//  m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("AustraliÃ«"));
+  m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("Australië"));
 }
 
 void MovieMeterFetcherTest::testPerson() {
@@ -92,7 +92,6 @@ void MovieMeterFetcherTest::testPerson() {
 }
 
 void MovieMeterFetcherTest::testKeyword() {
-  return;
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QLatin1String("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
