@@ -2,7 +2,7 @@ In this file:
 
 * About kxmlrpcclient
 * Licensing
-
+* Tellico changes
 
 About kxmlrpcclient
 ----------------
@@ -39,5 +39,9 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+Tellico Changes
+---------------
+This copy of Client and Query is identical to the one in KDEPIMLIBS 4.7.
+A character encoding bug was fixed in 4.7, right before release.
 
 
