@@ -27,6 +27,7 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../entry.h"
+#include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocale>
@@ -87,8 +88,9 @@ void MovieMeterFetcher::search() {
   checkSession();
   Q_ASSERT(!m_session.isEmpty());
 
+  // MovieMeter can handle searches with no accent marks, go ahead and remove them always
   QList<QVariant> args;
-  args << m_session << request().value;
+  args << m_session << removeAccents(request().value);
 
   switch(request().key) {
     case Title:
@@ -129,7 +131,7 @@ void MovieMeterFetcher::stop() {
 }
 
 Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
- // if the entry is not in the hash yet, we need to fetch it
+  // if the entry is not in the hash yet, we need to fetch it
   if(!m_entries.contains(uid_)) {
     if(!m_films.contains(uid_)) {
       myWarning() << "no entry in dict";
@@ -188,7 +190,7 @@ void MovieMeterFetcher::gotFilmSearch(const QList<QVariant>& args_, const QVaria
       break;
     }
     FetchResult* r = new FetchResult(Fetcher::Ptr(this),
-                                     map.value(QLatin1String("title")).toString(),
+                                     decodeHTML(map.value(QLatin1String("title")).toString()),
                                      map.value(QLatin1String("year")).toString());
     m_films.insert(r->uid, map.value(QLatin1String("filmId")).toInt());
 //    myDebug() << m_films.value(r->uid);
@@ -207,28 +209,28 @@ void MovieMeterFetcher::gotFilmDetails(const QList<QVariant>& args_, const QVari
   }
 
   const QVariantMap map = args_.first().toMap();
-  m_currEntry->setField(QLatin1String("title"), map.value(QLatin1String("title")).toString());
+  m_currEntry->setField(QLatin1String("title"), decodeHTML(map.value(QLatin1String("title")).toString()));
   m_currEntry->setField(QLatin1String("year"), map.value(QLatin1String("year")).toString());
   QStringList genres;
   foreach(const QVariant& v, map.value(QLatin1String("genres")).toList()) {
-    genres << v.toString();
+    genres << decodeHTML(v.toString());
   }
   m_currEntry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
   QStringList actors;
   foreach(const QVariant& v, map.value(QLatin1String("actors")).toList()) {
-    actors << v.toMap().value(QLatin1String("name")).toString();
+    actors << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
   }
   m_currEntry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
   QStringList directors;
   foreach(const QVariant& v, map.value(QLatin1String("directors")).toList()) {
-    directors << v.toMap().value(QLatin1String("name")).toString();
+    directors << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
   }
   m_currEntry->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
   m_currEntry->setField(QLatin1String("running-time"), map.value(QLatin1String("duration")).toString());
-  m_currEntry->setField(QLatin1String("plot"), map.value(QLatin1String("plot")).toString());
+  m_currEntry->setField(QLatin1String("plot"), decodeHTML(map.value(QLatin1String("plot")).toString()));
   QStringList countries;
   foreach(const QVariant& v, map.value(QLatin1String("countries")).toList()) {
-    countries << v.toMap().value(QLatin1String("name")).toString();
+    countries << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
   }
   m_currEntry->setField(QLatin1String("nationality"), countries.join(FieldFormat::rowDelimiterString()));
 
@@ -246,7 +248,7 @@ void MovieMeterFetcher::gotFilmDetails(const QList<QVariant>& args_, const QVari
     m_coll->addField(field);
     QStringList alts;
     foreach(const QVariant& v, map.value(QLatin1String("alternative_titles")).toList()) {
-      alts << v.toMap().value(QLatin1String("title")).toString();
+      alts << decodeHTML(v.toMap().value(QLatin1String("title")).toString());
     }
     m_currEntry->setField(alttitle, alts.join(FieldFormat::rowDelimiterString()));
   }
@@ -313,7 +315,7 @@ void MovieMeterFetcher::gotDirectorFilms(const QList<QVariant>& args_, const QVa
       break;
     }
     FetchResult* r = new FetchResult(Fetcher::Ptr(this),
-                                     map.value(QLatin1String("title")).toString(),
+                                     decodeHTML(map.value(QLatin1String("title")).toString()),
                                      map.value(QLatin1String("year")).toString());
     m_films.insert(r->uid, map.value(QLatin1String("filmId")).toInt());
 //    myDebug() << m_films.value(r->uid);
