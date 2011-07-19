@@ -220,3 +220,12 @@ QString Tellico::fromHtmlData(const QByteArray& data_) {
   QTextCodec* codec = QTextCodec::codecForHtml(data_);
   return codec->toUnicode(data_);
 }
+
+QString Tellico::removeAccents(const QString& value_) {
+  QString value2 = value_.normalized(QString::NormalizationForm_D);
+  // remove accents from table "Combining Diacritical Marks"
+  for(int i = 0x0300; i <= 0x036F; ++i) {
+    value2.remove(QChar(i));
+  }
+  return value2;
+}

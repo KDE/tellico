@@ -51,7 +51,7 @@ void MovieMeterFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("George Miller"));
   m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("102"));
   m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Western"));
-  m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("Australi�"));
+  m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("Australië"));
 }
 
 void MovieMeterFetcherTest::testPerson() {
@@ -118,6 +118,27 @@ void MovieMeterFetcherTest::testKeyword() {
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+}
+
+void MovieMeterFetcherTest::testKeywordCzech() {
+  QString tmav = QString::fromUtf8("Tmavomodrý Svět");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
+                                       tmav);
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(2);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->title(), tmav);
 }
 
 void MovieMeterFetcherTest::slotResult(KJob* job_) {

@@ -57,6 +57,7 @@ namespace Tellico {
   QString i18nReplace(QString text);
   // copy the KDE 4.2 function to remove accelerators
   QString removeAcceleratorMarker(const QString& label);
+  QString removeAccents(const QString& value);
 
   /**
    * Returns a list of the subdirectories in @param dir
