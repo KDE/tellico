@@ -127,13 +127,13 @@ void XMLFetcher::slotComplete(KJob* ) {
   const QString str = m_xsltHandler->applyStylesheet(XMLHandler::readXMLData(data));
 #if 0
   myWarning() << "Remove debug from xmlfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test-tellico.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
+  QFile f2(QLatin1String("/tmp/test-tellico.xml"));
+  if(f2.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f2);
     t.setCodec("utf-8");
     t << str;
   }
-  f.close();
+  f2.close();
 #endif
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();

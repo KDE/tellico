@@ -106,7 +106,7 @@ KUrl TheMovieDBFetcher::searchUrl() {
       break;
 
     default:
-      myWarning() << "key not recognized: " << request().key;
+      myWarning() << "key not recognized:" << request().key;
       return KUrl();
   }
 
@@ -139,10 +139,25 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
     if(m_needPersonId) {
       m_total = -1;
       m_needPersonId = false;
-      // for now, just do the first person in the result list
-      n = dom.documentElement().namedItem(QLatin1String("people"))
-                               .namedItem(QLatin1String("person"))
-                               .namedItem(QLatin1String("id"));
+
+      // for now, find the person with the highest popularity and "lowest" score
+      QDomNode finalPerson;
+      int bestTotal = 0;
+
+      QDomNode person = dom.documentElement().namedItem(QLatin1String("people"))
+                                             .namedItem(QLatin1String("person"));
+      while(!person.isNull()) {
+        const int pop = person.namedItem(QLatin1String("popularity")).toElement().text().toInt();
+        const int score = person.namedItem(QLatin1String("score")).toElement().text().toInt();
+        const int total = 100*pop + 100-score;
+        if(total > bestTotal) {
+          bestTotal = total;
+          finalPerson = person;
+          myDebug() << "New total:" << total;
+        }
+        person = person.nextSibling();
+      }
+      n = finalPerson.namedItem(QLatin1String("id"));
       e = n.toElement();
       if(e.isNull()) {
         myWarning() << "no person id found";
@@ -152,6 +167,7 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
       KUrl u(THEMOVIEDB_API_URL);
       u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
       u.addPath(QString::fromLatin1("/Person.getInfo/%1/xml/%2/%3").arg(m_locale, m_apiKey, e.text()));
+//      myDebug() << u.url();
       // quiet
       data_ = FileHandler::readXMLFile(u, true).toUtf8();
     }

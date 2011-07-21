@@ -1,6 +1,7 @@
 2011-07-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug in year from Douban.com data source.
+	* Fixed TMDB search for multiple person results.
 
 2011-07-01  Robby Stephenson  <robby@periapsis.org>
 
