@@ -139,8 +139,14 @@
   </pub_year>
 
   <year>
-   <xsl:value-of select="db:attribute[@name='year']"/>
-   <xsl:value-of select="substring(db:attribute[@name='pubdate'],1,4)"/>
+   <xsl:choose>
+    <xsl:when test="db:attribute[@name='year']">
+     <xsl:value-of select="db:attribute[@name='year']"/>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="substring(db:attribute[@name='pubdate'],1,4)"/>
+    </xsl:otherwise>
+   </xsl:choose>
   </year>
 
   <pages>

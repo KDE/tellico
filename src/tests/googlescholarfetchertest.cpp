@@ -101,16 +101,23 @@ void GoogleScholarFetcherTest::testAuthor() {
 //  QCOMPARE(m_results.size(), 1);
   QVERIFY(!m_results.isEmpty());
 
-  if(!m_results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = m_results.at(0);
-
-    QHashIterator<QString, QString> i(m_fieldValues);
-    while(i.hasNext()) {
-      i.next();
-      QString result = entry->field(i.key()).toLower();
-      Tellico::BibtexHandler::cleanText(result);
-      QCOMPARE(result, i.value().toLower());
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr test, m_results) {
+    if(test->title().toLower() == m_fieldValues.value(QLatin1String("title")).toLower()) {
+      entry = test;
+      break;
+    } else {
+      qDebug() << "Skipping" << test->title();
     }
+  }
+  QVERIFY(entry);
+
+  QHashIterator<QString, QString> i(m_fieldValues);
+  while(i.hasNext()) {
+    i.next();
+    QString result = entry->field(i.key()).toLower();
+    Tellico::BibtexHandler::cleanText(result);
+    QCOMPARE(result, i.value().toLower());
   }
 }
 

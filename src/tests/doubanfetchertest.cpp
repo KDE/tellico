@@ -135,7 +135,7 @@ void DoubanFetcherTest::testVideo() {
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QVERIFY(entry);
-  
+
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Video);
 
   QCOMPARE(entry->field("title"), QLatin1String("Iron Man"));
@@ -153,7 +153,7 @@ void DoubanFetcherTest::testVideo() {
 
 void DoubanFetcherTest::testMusic() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QString::fromUtf8("Top Gun"));
+                                       QString::fromUtf8("Top Gun Original Motion Picture"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
@@ -170,13 +170,13 @@ void DoubanFetcherTest::testMusic() {
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Album);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Top Gun"));
-  QCOMPARE(entry->field("year"), QLatin1String("2001"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Kenny Loggins; Berlin; Various Artists Otis Redding"));
+  QCOMPARE(entry->field("title"), QLatin1String("Top Gun: Original Motion Picture Soundtrack"));
+  QCOMPARE(entry->field("year"), QLatin1String("1990"));
+  QCOMPARE(entry->field("artist"), QLatin1String("Various Artists"));
   QCOMPARE(entry->field("label"), QLatin1String("Sony"));
   QCOMPARE(entry->field("medium"), QLatin1String("Compact Disc"));
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
-  QCOMPARE(trackList.count(), 16);
+  QCOMPARE(trackList.count(), 10);
   QCOMPARE(trackList.front(), QLatin1String("Danger Zone::Kenny Loggins"));
   QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());

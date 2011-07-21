@@ -70,7 +70,7 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
   QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-Person Shooter; Action"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Game Studios"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
 }
 
 void GiantBombFetcherTest::slotResult(KJob* job_) {

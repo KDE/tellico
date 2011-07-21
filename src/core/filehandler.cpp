@@ -179,7 +179,12 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString
   KUrl tempURL;
   tempURL.setPath(tempFile.fileName());
 
-  KIO::Job* job = KIO::file_copy(url_, tempURL, -1, KIO::Overwrite);
+  KIO::JobFlags flags = KIO::Overwrite;
+  if(quiet_) {
+    flags |= KIO::HideProgressInfo;
+  }
+
+  KIO::Job* job = KIO::file_copy(url_, tempURL, -1, flags);
   job->addMetaData(QLatin1String("referrer"), referrer_.url());
 
   if(!KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget())) {

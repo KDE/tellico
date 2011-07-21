@@ -150,16 +150,16 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHookData(Data::EntryPtr entry_)
     entry_->collection()->removeField(QLatin1String("douban-id"));
     return entry_;
   }
-  
+
   const QString id = entry_->field(QLatin1String("douban-id"));
   if(id.isEmpty()) {
     // don't want to include id
     entry_->collection()->removeField(QLatin1String("douban-id"));
     return entry_;
   }
-  
+
 //  myDebug() << id;
-  
+
   // quiet
   const QString output = FileHandler::readXMLFile(KUrl(id), true);
   Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));

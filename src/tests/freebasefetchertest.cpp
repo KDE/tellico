@@ -248,7 +248,9 @@ void FreebaseFetcherTest::testMovieTitle() {
   QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("PG (USA)"));
   QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("102"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1982"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Western; Drama"));
+  QStringList genres = Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre")));
+  QVERIFY(genres.contains(QLatin1String("Western")));
+  QVERIFY(genres.contains(QLatin1String("Drama")));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("Australia"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
@@ -303,7 +305,8 @@ void FreebaseFetcherTest::testMusicTitle() {
 // as of Tellico 2.3.1, freebase was updating to musicbrainz data and label wasn't working
 //  QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("Essential Records"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1999"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Folk rock; Pop music; Christian music"));
+  QStringList genres = Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre")));
+  QVERIFY(genres.contains(QLatin1String("Christian music")));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(trackList.at(0), QLatin1String("Goodbye, Goodnight::Jars of Clay::2:54"));
