@@ -24,7 +24,7 @@
 
 #include "filter.h"
 #include "entry.h"
-
+#include "tellico_utils.h"
 #include "tellico_debug.h"
 
 #include <QRegExp>
@@ -37,6 +37,9 @@ FilterRule::FilterRule() : m_function(FuncEquals) {
 
 FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Function func_)
     : m_fieldName(fieldName_), m_function(func_), m_pattern(pattern_) {
+  if(m_function == FuncRegExp || m_function == FuncNotRegExp) {
+    m_patternRx = QRegExp(m_pattern, Qt::CaseInsensitive);
+  }
 }
 
 bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
@@ -88,48 +91,76 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
 bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
+    QString value2;
     // match is true if any strings match
     foreach(const QString& value, entry_->fieldValues()) {
-      if(value.indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0) {
+      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+        return true;
+      }
+      value2 = removeAccents(value);
+      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
     // match is true if any strings match
     foreach(const QString& value, entry_->formattedFieldValues()) {
-      if(value.indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0) {
+      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+        return true;
+      }
+      value2 = removeAccents(value);
+      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
   } else {
-    return entry_->field(m_fieldName).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0 ||
-           entry_->formattedField(m_fieldName, FieldFormat::ForceFormat).indexOf(m_pattern, 0, Qt::CaseInsensitive) >= 0;
+    QString value = entry_->field(m_fieldName);
+    if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+        return true;
+    }
+    QString value2 = removeAccents(value);
+    if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      return true;
+    }
+    value = entry_->formattedField(m_fieldName);
+    if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+      return true;
+    }
+    value2 = removeAccents(value);
+    if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      return true;
+    }
   }
 
   return false;
 }
 
 bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
-  QRegExp rx(m_pattern, Qt::CaseInsensitive);
   // empty field name means search all
   if(m_fieldName.isEmpty()) {
     foreach(const QString& value, entry_->fieldValues()) {
-      if(rx.indexIn(value) >= 0) {
+      if(m_patternRx.indexIn(value) >= 0) {
         return true;
       }
     }
     foreach(const QString& value, entry_->formattedFieldValues()) {
-      if(rx.indexIn(value) >= 0) {
+      if(m_patternRx.indexIn(value) >= 0) {
         return true;
       }
     }
   } else {
-    return rx.indexIn(entry_->field(m_fieldName)) >= 0 ||
-           rx.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0;
+    return m_patternRx.indexIn(entry_->field(m_fieldName)) >= 0 ||
+           m_patternRx.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0;
   }
 
   return false;
 }
 
+void FilterRule::setFunction(Function func_) {
+  m_function = func_;
+  if(m_function == FuncRegExp || m_function == FuncNotRegExp) {
+    m_patternRx = QRegExp(m_pattern, Qt::CaseInsensitive);
+  }
+}
 
 /*******************************************************/
 

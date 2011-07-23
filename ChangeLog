@@ -1,3 +1,8 @@
+2011-07-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated filter rules to match against values without diacritics
+	  for "Contains" criters (Bug 222400).
+
 2011-07-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug in year from Douban.com data source.
