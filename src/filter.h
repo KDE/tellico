@@ -76,7 +76,7 @@ public:
   /**
    * Set filter function.
    */
-  void setFunction(Function func) { m_function = func; }
+  void setFunction(Function func);
   /**
    * Return field name
    */
@@ -102,6 +102,7 @@ private:
   QString m_fieldName;
   Function m_function;
   QString m_pattern;
+  QRegExp m_patternRx;
 };
 
 /**
