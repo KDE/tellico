@@ -1,7 +1,6 @@
 ADD_SUBDIRECTORY( scripts )
 
 ########### next target ###############
-ADD_SUBDIRECTORY( xmlrpc )
 
 SET(fetch_STAT_SRCS
    amazonfetcher.cpp
@@ -53,8 +52,16 @@ KDE4_ADD_LIBRARY(fetch STATIC ${fetch_STAT_SRCS})
 TARGET_LINK_LIBRARIES(fetch
     newstuff
     btparse
-    xmlrpc
     )
+
+# Versions of KDE prior to 4.7 have a character encoding bug in libkxmlrpc
+# Use internal version of libkxmlrpc if so
+IF (${KDE_VERSION} VERSION_GREATER "4.6.99")
+  TARGET_LINK_LIBRARIES(fetch ${KDEPIMLIBS_KXMLRPCCLIENT_LIBS})
+ELSE (${KDE_VERSION} VERSION_GREATER "4.6.99")
+  ADD_SUBDIRECTORY(xmlrpc)
+  TARGET_LINK_LIBRARIES(fetch xmlrpc)
+ENDIF (${KDE_VERSION} VERSION_GREATER "4.6.99")
 
 IF( YAZ_FOUND )
   TARGET_LINK_LIBRARIES(fetch ${YAZ_LIBRARIES})
