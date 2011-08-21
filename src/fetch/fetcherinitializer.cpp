@@ -57,6 +57,7 @@
 #include "doubanfetcher.h"
 #include "bibliosharefetcher.h"
 #include "moviemeterfetcher.h"
+#include "googlebookfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -100,4 +101,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
+  RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
 }

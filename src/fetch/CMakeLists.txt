@@ -27,6 +27,7 @@ SET(fetch_STAT_SRCS
    gcstarpluginfetcher.cpp
    gcstarthread.cpp
    giantbombfetcher.cpp
+   googlebookfetcher.cpp
    googlescholarfetcher.cpp
    hmac_sha2.c
    ibsfetcher.cpp

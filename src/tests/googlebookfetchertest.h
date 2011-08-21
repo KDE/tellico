@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,75 +22,30 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XMLFETCHER_H
-#define TELLICO_XMLFETCHER_H
+#ifndef GOOGLEBOOKFETCHERTEST_H
+#define GOOGLEBOOKFETCHERTEST_H
 
-#include "fetcher.h"
+#include <QObject>
+#include <QEventLoop>
+
 #include "../datavectors.h"
 
-#include <QPointer>
-#include <QHash>
-
-class KUrl;
 class KJob;
-namespace KIO {
-  class StoredTransferJob;
-}
 
-namespace Tellico {
-
-  class XSLTHandler;
-
-  namespace Fetch {
-
-/**
- * @author Robby Stephenson
- */
-class XMLFetcher : public Fetcher {
+class GoogleBookFetcherTest : public QObject {
 Q_OBJECT
-
 public:
-  /**
-   */
-  XMLFetcher(QObject* parent);
-  /**
-   */
-  virtual ~XMLFetcher();
+  GoogleBookFetcherTest();
 
-  virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
+private Q_SLOTS:
+  void initTestCase();
+  void testKeyword();
 
-protected:
-  void setXSLTFilename(const QString& filename);
-  int limit() const { return m_limit; }
-  void setLimit(int limit);
-  XSLTHandler* xsltHandler();
-
-private slots:
-  void slotComplete(KJob* job);
+  void slotResult(KJob* job);
 
 private:
-  virtual void search();
-  virtual void resetSearch() = 0;
-  virtual KUrl searchUrl() = 0;
-  virtual void parseData(QByteArray& data) = 0;
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) = 0;
-
-  void initXSLTHandler();
-  void doSearch();
-
-  QString m_xsltFilename;
-  XSLTHandler* m_xsltHandler;
-
-  QPointer<KIO::StoredTransferJob> m_job;
-  QHash<int, Data::EntryPtr> m_entries;
-
-  bool m_started;
-  int m_limit;
+  QEventLoop m_loop;
+  Tellico::Data::EntryList m_results;
 };
 
-  } // end namespace
-} // end namespace
 #endif

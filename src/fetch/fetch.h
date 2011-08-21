@@ -79,7 +79,8 @@ enum Type {
   Filmaster,
   Douban,
   BiblioShare,
-  MovieMeter
+  MovieMeter,
+  GoogleBook
 };
 
   }

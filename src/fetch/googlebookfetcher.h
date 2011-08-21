@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,73 +22,68 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XMLFETCHER_H
-#define TELLICO_XMLFETCHER_H
+#ifndef TELLICO_GOOGLEBOOKFETCHER_H
+#define TELLICO_GOOGLEBOOKFETCHER_H
 
-#include "fetcher.h"
+#include "xmlfetcher.h"
+#include "configwidget.h"
 #include "../datavectors.h"
 
-#include <QPointer>
-#include <QHash>
-
-class KUrl;
-class KJob;
-namespace KIO {
-  class StoredTransferJob;
-}
-
 namespace Tellico {
-
-  class XSLTHandler;
 
   namespace Fetch {
 
 /**
+ * A fetcher for Google Book Search
+ *
  * @author Robby Stephenson
  */
-class XMLFetcher : public Fetcher {
+class GoogleBookFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  XMLFetcher(QObject* parent);
+  GoogleBookFetcher(QObject* parent);
   /**
    */
-  virtual ~XMLFetcher();
+  virtual ~GoogleBookFetcher();
 
-  virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
+  /**
+   */
+  virtual QString source() const;
+  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
+  virtual Type type() const { return GoogleBook; }
+  virtual bool canFetch(int type) const;
+  virtual void readConfigHook(const KConfigGroup& config);
 
-protected:
-  void setXSLTFilename(const QString& filename);
-  int limit() const { return m_limit; }
-  void setLimit(int limit);
-  XSLTHandler* xsltHandler();
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-private slots:
-  void slotComplete(KJob* job);
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const GoogleBookFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&);
+    virtual QString preferredName() const;
+  private:
+  };
+  friend class ConfigWidget;
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
 
 private:
-  virtual void search();
-  virtual void resetSearch() = 0;
-  virtual KUrl searchUrl() = 0;
-  virtual void parseData(QByteArray& data) = 0;
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) = 0;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void resetSearch();
+  virtual KUrl searchUrl();
+  virtual void parseData(QByteArray& data);
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 
-  void initXSLTHandler();
-  void doSearch();
-
-  QString m_xsltFilename;
-  XSLTHandler* m_xsltHandler;
-
-  QPointer<KIO::StoredTransferJob> m_job;
-  QHash<int, Data::EntryPtr> m_entries;
-
-  bool m_started;
-  int m_limit;
+  int m_start;
+  int m_total;
 };
 
   } // end namespace
