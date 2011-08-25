@@ -66,7 +66,7 @@ void GiantBombFetcherTest::testKeyword() {
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Halo 3: ODST"));
-  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie Studios"));
+  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
   QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-Person Shooter; Action"));
