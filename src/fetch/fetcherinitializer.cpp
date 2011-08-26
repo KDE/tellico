@@ -96,10 +96,10 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
 #ifdef HAVE_QJSON
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
   RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
+  RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
-  RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
 }

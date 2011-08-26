@@ -25,9 +25,16 @@
 #ifndef TELLICO_GOOGLEBOOKFETCHER_H
 #define TELLICO_GOOGLEBOOKFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
+#include <QPointer>
+
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
 
@@ -38,7 +45,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class GoogleBookFetcher : public XMLFetcher {
+class GoogleBookFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -52,10 +59,14 @@ public:
   /**
    */
   virtual QString source() const;
-  virtual bool canSearch(FetchKey k) const { return k == Keyword; }
+  virtual bool isSearching() const { return m_started; }
+  virtual bool canSearch(FetchKey k) const;
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return GoogleBook; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
+  virtual void continueSearch();
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -75,12 +86,19 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
+private slots:
+  void slotComplete(KJob* job);
+
 private:
+  virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
-  virtual KUrl searchUrl();
-  virtual void parseData(QByteArray& data);
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+  void doSearch(const QString& term);
+  void endJob(KIO::StoredTransferJob* job);
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
+
+  bool m_started;
 
   int m_start;
   int m_total;

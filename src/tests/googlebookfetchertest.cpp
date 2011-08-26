@@ -30,12 +30,8 @@
 
 #include "../fetch/fetcherjob.h"
 #include "../fetch/googlebookfetcher.h"
-#include "../collections/bookcollection.h"
-#include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
-
-#include <kstandarddirs.h>
 
 QTEST_KDEMAIN( GoogleBookFetcherTest, GUI )
 
@@ -43,10 +39,63 @@ GoogleBookFetcherTest::GoogleBookFetcherTest() : m_loop(this) {
 }
 
 void GoogleBookFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
-  // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
+}
+
+void GoogleBookFetcherTest::testTitle() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QLatin1String("Practical RDF"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+  compareEntry(m_results.at(0));
+}
+
+void GoogleBookFetcherTest::testIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QLatin1String("0-596-00263-7"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  job->setMaximumResults(1);
+
+  job->start();
+  m_loop.exec();
+
+  QCOMPARE(m_results.size(), 1);
+  compareEntry(m_results.at(0));
+}
+
+void GoogleBookFetcherTest::testAuthor() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
+                                       QLatin1String("Shelley Powers"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+
+  job->start();
+  m_loop.exec();
+
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr testEntry, m_results) {
+    if(testEntry->title() == QLatin1String("Practical RDF")) {
+      entry = testEntry;
+      break;
+    }
+  }
+  QVERIFY(entry);
 }
 
 void GoogleBookFetcherTest::testKeyword() {
@@ -63,8 +112,10 @@ void GoogleBookFetcherTest::testKeyword() {
   m_loop.exec();
 
   QCOMPARE(m_results.size(), 1);
+  compareEntry(m_results.at(0));
+}
 
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical RDF"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-00263-7"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
@@ -72,10 +123,10 @@ void GoogleBookFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("331"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
   QCOMPARE(entry->field(QLatin1String("keyword")), QLatin1String("Computers"));
-  QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
+
 
 void GoogleBookFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
