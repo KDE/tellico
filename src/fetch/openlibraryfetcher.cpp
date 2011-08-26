@@ -311,9 +311,14 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     entry->setField(QLatin1String("title"), value(resultMap, "title"));
     entry->setField(QLatin1String("subtitle"), value(resultMap, "subtitle"));
     entry->setField(QLatin1String("pub_year"), value(resultMap, "publish_date"));
-    entry->setField(QLatin1String("isbn"), value(resultMap, "isbn_10"));
-    if(entry->field(QLatin1String("isbn")).isEmpty()) {
-      entry->setField(QLatin1String("isbn"), value(resultMap, "isbn_13"));
+    QString isbn = value(resultMap, "isbn_10");
+    if(isbn.isEmpty()) {
+      isbn = value(resultMap, "isbn_13");
+    }
+    if(!isbn.isEmpty()) {
+      ISBNValidator val(this);
+      val.fixup(isbn);
+      entry->setField(QLatin1String("isbn"), isbn);
     }
     entry->setField(QLatin1String("lccn"), value(resultMap, "lccn"));
     entry->setField(QLatin1String("genre"), value(resultMap, "genres"));

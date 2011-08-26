@@ -31,8 +31,6 @@
 #include "../fetch/fetcherjob.h"
 #include "../fetch/openlibraryfetcher.h"
 #include "../entry.h"
-#include "../collections/bookcollection.h"
-#include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
 QTEST_KDEMAIN( OpenLibraryFetcherTest, GUI )
@@ -42,7 +40,6 @@ OpenLibraryFetcherTest::OpenLibraryFetcherTest() : m_loop(this) {
 
 void OpenLibraryFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 
 void OpenLibraryFetcherTest::testIsbn() {
@@ -63,7 +60,7 @@ void OpenLibraryFetcherTest::testIsbn() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("This is Venice"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("M. Sasek"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0789312239"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-7893-1223-9"));
   QCOMPARE(entry->field(QLatin1String("lccn")), QLatin1String("2004110229"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2005"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Juvenile literature."));
