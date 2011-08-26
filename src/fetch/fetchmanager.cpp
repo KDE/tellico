@@ -283,7 +283,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(Discogs);
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(MusicBrainz);
-  FETCHER_ADD(GoogleBook);
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     FETCHER_ADD(IBS);
@@ -291,6 +290,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 #ifdef HAVE_QJSON
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
+  FETCHER_ADD(GoogleBook);
 #endif
   if(KGlobal::locale()->languageList().contains(QLatin1String("fr"))) {
     FETCHER_ADD(DVDFr);

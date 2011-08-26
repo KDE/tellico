@@ -39,11 +39,16 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void testTitle();
+  void testIsbn();
+  void testAuthor();
   void testKeyword();
 
   void slotResult(KJob* job);
 
 private:
+  void compareEntry(Tellico::Data::EntryPtr entry);
+
   QEventLoop m_loop;
   Tellico::Data::EntryList m_results;
 };
