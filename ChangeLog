@@ -1,3 +1,7 @@
+2011-08-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for Google Book search.
+
 2011-07-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated filter rules to match against values without diacritics
