@@ -48,7 +48,6 @@ public:
   int childCount() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
-  void replaceChild(int i, Node* child) {  m_children.replace(i, child); }
   void removeChild(int i) {  delete m_children.takeAt(i); }
   void removeAll() { qDeleteAll(m_children); m_children.clear(); }
 
@@ -58,7 +57,7 @@ private:
   Data::ID m_id;
 };
 
-FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)) {
+FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)), m_beingInvalidated(false) {
 }
 
 FilterModel::~FilterModel() {
@@ -76,8 +75,8 @@ int FilterModel::rowCount(const QModelIndex& index_) const {
   }
   Node* node = static_cast<Node*>(index_.internalPointer());
   Q_ASSERT(node);
-  // node may not be populated yet
-  if(node->childCount() == 0) {
+  // node may not be populated yet, do so unless we're in the middle of invalidating the node
+  if(!m_beingInvalidated && node->childCount() == 0) {
     populateFilterNode(node, m_filters.at(index_.row()));
   }
   return node->childCount();
@@ -247,6 +246,8 @@ void FilterModel::invalidate(const QModelIndex& index_) {
     return;
   }
 
+  m_beingInvalidated = true;
+
   Node* filterNode = static_cast<Node*>(index_.internalPointer());
   Q_ASSERT(filterNode);
 
@@ -263,6 +264,7 @@ void FilterModel::invalidate(const QModelIndex& index_) {
   endInsertRows();
 
   emit dataChanged(index_, index_);
+  m_beingInvalidated = false;
 }
 
 bool FilterModel::indexContainsEntry(const QModelIndex& parent_, Data::EntryPtr entry_) const {
@@ -288,7 +290,7 @@ void FilterModel::populateFilterNode(Node* node_, const FilterPtr filter_) const
   if(!node_ || !filter_) {
     return;
   }
-  
+
   Data::EntryList entries = Data::Document::self()->filteredEntries(filter_);
   foreach(Data::EntryPtr entry, entries) {
     Node* childNode = new Node(node_, entry->id());

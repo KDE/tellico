@@ -66,6 +66,7 @@ private:
   FilterList m_filters;
   QString m_header;
   Node* m_rootNode;
+  bool m_beingInvalidated;
 };
 
 } // end namespace
