@@ -92,7 +92,6 @@ public:
   virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Amazon; }
   virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
 
   struct SiteData {
     QString title;
@@ -118,6 +117,8 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void readConfigHook(const KConfigGroup& config);
+  virtual void saveConfigHook(KConfigGroup& config);
   void initXSLTHandler();
   void doSearch();
   void parseTitle(Data::EntryPtr entry, int collType);
@@ -143,6 +144,7 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  mutable bool m_keyFoundInWallet;
 };
 
 class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
