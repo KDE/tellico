@@ -456,7 +456,7 @@ Coin collections have 16 default fields:
 <sect2 id="stamp-collection">
 <title>Stamp Collections</title>
 <para>
-Stamp ollections have 18 default fields:
+Stamp collections have 18 default fields:
 <emphasis>Title</emphasis>,
 <emphasis>Description</emphasis>,
 <emphasis>Denomination</emphasis>,
