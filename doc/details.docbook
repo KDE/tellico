@@ -532,7 +532,7 @@ File catalogs have 13 default fields.
 <emphasis>Name</emphasis>,
 <emphasis>&URL;</emphasis>,
 <emphasis>Description</emphasis>,
-<emphasis>Volume</emphasis>,
+<emphasis>Folder</emphasis>,
 <emphasis>Mimetype</emphasis>,
 <emphasis>Size</emphasis>,
 <emphasis>Permissions</emphasis>,
