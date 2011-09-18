@@ -148,6 +148,8 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
     m_access = s;
+  } else {
+    myWarning() << "No Amazon access key";
   }
   s = config_.readEntry("AssocToken");
   if(!s.isEmpty()) {
@@ -156,6 +158,8 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   s = config_.readEntry("SecretKey");
   if(!s.isEmpty()) {
     m_amazonKey = s.toUtf8();
+  } else {
+    myWarning() << "No Amazon secret key";
   }
   int imageSize = config_.readEntry("Image Size", -1);
   if(imageSize > -1) {
@@ -190,6 +194,9 @@ void AmazonFetcher::continueSearch() {
 void AmazonFetcher::doSearch() {
   // calling secretKey() ensures that we try to read it first
   if(secretKey().isEmpty() || m_access.isEmpty()) {
+    if(m_access.isEmpty()) {
+      myWarning() << "No Amazon access key";
+    }
     // this message is split in two since the first half is reused later
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
@@ -854,13 +861,13 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
 
 QString AmazonFetcher::secretKey() const {
   if(m_amazonKey.isEmpty()) {
-    myDebug() << "Looking for the Amazon key in kwallet";
+    myWarning() << "Looking for the Amazon key in kwallet...";
     QByteArray maybeKey = Wallet::self()->readWalletEntry(m_access);
     if(!maybeKey.isEmpty()) {
       m_amazonKey = maybeKey;
       m_keyFoundInWallet = true;
     } else {
-      myDebug() << "no amazon secret key found for" << source();
+      myWarning() << "No Amazon secret key found for" << source();
     }
   }
   return QString::fromUtf8(m_amazonKey);
