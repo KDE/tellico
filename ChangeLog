@@ -1,3 +1,7 @@
+2011-09-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug when editing month in the date widget in KDE 4.7 (Bug 281365).
+
 2011-08-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed showing a doubled filter count (Bug 281082).
