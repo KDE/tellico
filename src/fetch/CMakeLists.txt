@@ -69,7 +69,7 @@ IF( YAZ_FOUND )
 ENDIF( YAZ_FOUND )
 
 IF( QJSON_FOUND )
-  TARGET_LINK_LIBRARIES(fetch ${QJSON_LIBRARIES})
+  TARGET_LINK_LIBRARIES(fetch ${QJSON_LIBRARIES} ${qjson_LIBRARIES})
 ENDIF( QJSON_FOUND )
 
 ########### install files ###############
