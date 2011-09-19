@@ -91,7 +91,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   l->setStretchFactor(m_monthCombo, 1);
   // allow empty item
   m_monthCombo->addItem(QString());
-  QDate d;
+  QDate d = QDate::currentDate();
   for(int i = 1; ; ++i) {
     QString str = locale->calendar()->monthName(i, locale->calendar()->year(d));
     if(str.isEmpty()) {
