@@ -92,6 +92,15 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
     }, {
       i18n("Amazon (Canada)"),
       KUrl("http://webservices.amazon.ca/onca/xml")
+#if 0
+      // TODO: update after string freeze
+    }, {
+      KUrl("http://webservices.amazon.cn/onca/xml")
+    }, {
+      KUrl("http://webservices.amazon.es/onca/xml")
+    }, {
+      KUrl("http://webservices.amazon.it/onca/xml")
+#endif
     }
   };
 
@@ -215,7 +224,8 @@ void AmazonFetcher::doSearch() {
   params.insert(QLatin1String("Operation"),      QLatin1String("ItemSearch"));
   params.insert(QLatin1String("ResponseGroup"),  QLatin1String("Large"));
   params.insert(QLatin1String("ItemPage"),       QString::number(m_page));
-  params.insert(QLatin1String("Version"),        QLatin1String("2009-11-02"));
+  // this should match the namespace in amazon2tellico.xsl
+  params.insert(QLatin1String("Version"),        QLatin1String("2011-08-01"));
 
   const int type = collectionType();
   switch(type) {
@@ -234,6 +244,7 @@ void AmazonFetcher::doSearch() {
       // CA and JP appear to have a bug where Video only returns VHS or Music results
       // DVD will return DVD, Blu-ray, etc. so just ignore VHS for those users
       if(m_site == CA || m_site == JP) {
+//      if(m_site == CA || m_site == JP || m_site == IT || m_site == ES) {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("DVD"));
       } else {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
@@ -340,7 +351,7 @@ void AmazonFetcher::doSearch() {
         }
         QString cleanValue = value;
         cleanValue.remove(QLatin1Char('-'));
-        // limit to first 10
+        // limit to first 10 values
         cleanValue.replace(FieldFormat::delimiterString(), QLatin1String(","));
         cleanValue = cleanValue.section(QLatin1Char(','), 0, 9);
         params.insert(QLatin1String("ItemId"), cleanValue);
