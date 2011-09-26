@@ -48,19 +48,6 @@
 namespace {
   static const int GOOGLEBOOK_MAX_RETURNS = 20;
   static const char* GOOGLEBOOK_API_URL = "https://www.googleapis.com/books/v1/volumes";
-
-  QString value(const QVariantMap& map, const char* name) {
-    const QVariant v = map.value(QLatin1String(name));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert(QVariant::String)) {
-      return v.toString();
-    } else if(v.canConvert(QVariant::StringList)) {
-      return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-    } else {
-      return QString();
-    }
-  }
 }
 
 using namespace Tellico;
@@ -339,6 +326,20 @@ void GoogleBookFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString GoogleBookFetcher::ConfigWidget::preferredName() const {
   return GoogleBookFetcher::defaultName();
+}
+
+// static
+QString GoogleBookFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else {
+    return QString();
+  }
 }
 
 #include "googlebookfetcher.moc"

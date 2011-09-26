@@ -30,6 +30,7 @@
 #include "../datavectors.h"
 
 #include <QPointer>
+#include <QVariantMap>
 
 class KJob;
 namespace KIO {
@@ -93,6 +94,8 @@ private:
   void doCoverOnly(const QString& term);
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
+
+  static QString value(const QVariantMap& map, const char* name);
 
   QHash<int, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;

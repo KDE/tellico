@@ -49,21 +49,6 @@
 
 namespace {
   static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
-
-  QString value(const QVariantMap& map, const char* name) {
-    const QVariant v = map.value(QLatin1String(name));
-    if(v.isNull())  {
-      return QString();
-    } else if(v.canConvert(QVariant::String)) {
-      return v.toString();
-    } else if(v.canConvert(QVariant::StringList)) {
-      return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-    } else if(v.canConvert(QVariant::Map)) {
-      return v.toMap().value(QLatin1String("value")).toString();
-    } else {
-      return QString();
-    }
-  }
 }
 
 using namespace Tellico;
@@ -448,6 +433,22 @@ void OpenLibraryFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString OpenLibraryFetcher::ConfigWidget::preferredName() const {
   return OpenLibraryFetcher::defaultName();
+}
+
+// static
+QString OpenLibraryFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else if(v.canConvert(QVariant::Map)) {
+    return v.toMap().value(QLatin1String("value")).toString();
+  } else {
+    return QString();
+  }
 }
 
 #include "openlibraryfetcher.moc"
