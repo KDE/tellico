@@ -92,7 +92,7 @@ Tellico::NumberComparison::NumberComparison() : StringComparison() {
 
 int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2_) {
   bool ok1, ok2;
-  float num1, num2;
+  float num1 = 0, num2 = 0;
 
   const QStringList values1 = FieldFormat::splitValue(str1_);
   const QStringList values2 = FieldFormat::splitValue(str2_);
