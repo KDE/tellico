@@ -1,3 +1,22 @@
+tellico (2.3.4+dfsg.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Repack to remove the local KXmlRpc local copy.
+  * Drop patch for QJson, applied upstream.
+  * Convert debian/rules to dh.
+  * Bump debian/compat to 8, and update build-dependency accordingly.
+
+ -- Regis Boudin <regis@debian.org>  Tue, 27 Sep 2011 21:58:23 +0100
+
+tellico (2.3.3-2) unstable; urgency=low
+
+  * Add 0001-Use-the-new-qjson-naming.patch to build with the new QJson cmake
+    naming scheme.
+  * Add build-arch and build-indep targets to debian/rules, to make lintian
+    happier.
+
+ -- Regis Boudin <regis@debian.org>  Wed, 14 Sep 2011 21:49:51 +0100
+
 tellico (2.3.3-1) unstable; urgency=low
 
   * New upstream release. Fixes FTBFS with kernel 2.6.38 (Closes: #622047) 
