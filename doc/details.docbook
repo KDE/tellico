@@ -528,10 +528,11 @@ Board game collections have 15 default fields.
 <sect2 id="file-catalog">
 <title>File Catalogs</title>
 <para>
-File catalogs have 13 default fields.
+File catalogs have 14 default fields.
 <emphasis>Name</emphasis>,
 <emphasis>&URL;</emphasis>,
 <emphasis>Description</emphasis>,
+<emphasis>Volume</emphasis>,
 <emphasis>Folder</emphasis>,
 <emphasis>Mimetype</emphasis>,
 <emphasis>Size</emphasis>,
