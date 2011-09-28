@@ -69,7 +69,10 @@ public:
     DE = 2,
     JP = 3,
     FR = 4,
-    CA = 5
+    CA = 5,
+    CN = 6,
+    ES = 7,
+    IT = 8
   };
 
   enum ImageSize {

@@ -73,7 +73,9 @@ using Tellico::Fetch::AmazonFetcher;
 
 // static
 const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
-  static SiteData dataVector[6] = {
+  Q_ASSERT(site_>= 0);
+  Q_ASSERT(site_< 10);
+  static SiteData dataVector[9] = {
     {
       i18n("Amazon (US)"),
       KUrl("http://webservices.amazon.com/onca/xml")
@@ -92,19 +94,19 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
     }, {
       i18n("Amazon (Canada)"),
       KUrl("http://webservices.amazon.ca/onca/xml")
-#if 0
-      // TODO: update after string freeze
     }, {
+      i18n("Amazon (China)"),
       KUrl("http://webservices.amazon.cn/onca/xml")
     }, {
+      i18n("Amazon (Spain)"),
       KUrl("http://webservices.amazon.es/onca/xml")
     }, {
+      i18n("Amazon (Italy)"),
       KUrl("http://webservices.amazon.it/onca/xml")
-#endif
     }
   };
 
-  return dataVector[site_];
+  return dataVector[qBound(0, site_, static_cast<int>(sizeof(dataVector)/sizeof(SiteData)))];
 }
 
 AmazonFetcher::AmazonFetcher(QObject* parent_)
@@ -243,8 +245,7 @@ void AmazonFetcher::doSearch() {
     case Data::Collection::Video:
       // CA and JP appear to have a bug where Video only returns VHS or Music results
       // DVD will return DVD, Blu-ray, etc. so just ignore VHS for those users
-      if(m_site == CA || m_site == JP) {
-//      if(m_site == CA || m_site == JP || m_site == IT || m_site == ES) {
+      if(m_site == CA || m_site == JP || m_site == IT || m_site == ES) {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("DVD"));
       } else {
         params.insert(QLatin1String("SearchIndex"), QLatin1String("Video"));
@@ -953,6 +954,9 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_siteCombo->addItem(i18n("Japan"), JP);
   m_siteCombo->addItem(i18n("France"), FR);
   m_siteCombo->addItem(i18n("Canada"), CA);
+  m_siteCombo->addItem(i18n("China"), CN);
+  m_siteCombo->addItem(i18n("Spain"), ES);
+  m_siteCombo->addItem(i18n("Italy"), IT);
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
   l->addWidget(m_siteCombo, row, 1);
