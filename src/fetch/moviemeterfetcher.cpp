@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include "config.h"
 #include "moviemeterfetcher.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
@@ -43,7 +44,7 @@
 // since it doesn't handle character encoding correctly
 // see https://git.reviewboard.kde.org/r/101838/
 #include <kdeversion.h>
-#if KDE_IS_VERSION(4,7,0)
+#if HAVE_KXMLRPC && KDE_IS_VERSION(4,7,0)
 #include <kxmlrpcclient/client.h>
 #else
 #include "xmlrpc/client.h"
