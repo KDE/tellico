@@ -59,7 +59,7 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("volume"), i18n("Volume"));
+  field = new Field(QLatin1String("volume"), i18nc("File catalog", "Volume"));
   field->setCategory(i18n(file_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);

@@ -216,7 +216,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
-  field = new Field(QLatin1String("volume"), i18n("Volume"), Field::Number);
+  field = new Field(QLatin1String("volume"), i18nc("A number field in a bibliography", "Volume"), Field::Number);
   field->setProperty(QLatin1String("bibtex"), QLatin1String("volume"));
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
