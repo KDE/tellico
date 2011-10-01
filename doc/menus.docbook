@@ -283,7 +283,7 @@ modified.</para>
 <term>
  <menuchoice>
   <shortcut>
-   <keycombo>&Ctrl;<keycap>M</keycap></keycombo>
+   <keycombo>&Ctrl;<keycap>I</keycap></keycombo>
   </shortcut>
   <guimenu>Edit</guimenu>
   <guimenuitem>Internet Search...</guimenuitem>
@@ -558,7 +558,7 @@ source and <action>update the selected entries</action>.</para>
 <term>
  <menuchoice>
   <guimenu>Settings</guimenu>
-  <guimenuitem>Toolbars</guimenuitem>
+  <guimenuitem>Toolbars Shown</guimenuitem>
  </menuchoice>
 </term>
 

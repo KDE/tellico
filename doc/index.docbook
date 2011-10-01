@@ -219,7 +219,7 @@ template is available for any other type of collectibles or lists.
 <para>
 Each collection may have an unlimited number of fields. &appname; supports eleven types of fields,
 which allow for a range of different data. The fields can be edited with the
-<link linkend="fields-dialog"><interface>Collection Fields Dialog</interface>"</link> and are explained further in the
+<link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link> and are explained further in the
 <link linkend="field-types">Field Types</link> section.
 </para>
 </sect2>
