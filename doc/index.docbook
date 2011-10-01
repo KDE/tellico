@@ -191,9 +191,9 @@ all the capabilities of a full-fledged relational database.
 
 <para>
 As somewhat of a disclaimer, &appname; is a hobby for the author, and no
-guarantees are made about its functionality, usefullness, or otherwise. It's
-very far from being a professional software package. More information is included
-in the <link linkend="gnu-fdl">license declaration</link>.
+guarantees are made about its functionality, usefullness, or otherwise.
+More information is included in the
+<link linkend="gnu-fdl">license declaration</link>.
 </para>
 
 </sect2>
