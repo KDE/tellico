@@ -37,10 +37,10 @@ def get_xsl_files(dir):
     return files
 
 def print_output(dir):
-    files = get_xsl_files(dir) 
+    files = get_xsl_files(dir)
     for f in files:
         name = os.path.basename(f)[:-4].replace('_', ' ')
-        sys.stdout.write("\ni18n(\"")
+        sys.stdout.write("\ni18nc(\"")
         sys.stdout.write(name + " XSL Template\", \"" + name)
         sys.stdout.write("\");\n")
         extract_i18n(f)
