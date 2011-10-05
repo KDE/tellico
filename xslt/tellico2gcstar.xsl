@@ -83,6 +83,10 @@
   <a:attribute name="currency">currency</a:attribute>
   <a:attribute name="diameter">diameter</a:attribute>
   <a:attribute name="value">denomination</a:attribute>
+  <a:attribute name="cover"   format="image" type="GCbooks, GCmusics">cover</a:attribute>
+  <a:attribute name="image"   format="image" type="GCfilms, GCcomics">cover</a:attribute>
+  <a:attribute name="boxpic"  format="image" type="GCgames, GCboardgames">cover</a:attribute>
+  <a:attribute name="picture" format="image" type="GCcoins">obverse</a:attribute>
 </a:attributes>
 <xsl:variable name="collType">
  <xsl:choose>
@@ -116,6 +120,7 @@
 <xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[(contains(@type, $collType) or not(@type)) and
                                                                                  not(contains(@skip, $collType))]"/>
 
+<xsl:param name="imageDir"/> <!-- dir where field images are located -->
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
 <xsl:template match="/">
@@ -379,6 +384,13 @@
    <xsl:attribute name="{$att/@name}">
     <xsl:value-of select="number($values[1]='true')"/>
    </xsl:attribute>
+  </xsl:when>
+  <xsl:when test="$att/@format='image'">
+   <xsl:if test="string-length($imageDir) &gt; 0">
+    <xsl:attribute name="{$att/@name}">
+     <xsl:value-of select="concat($imageDir, $values[1])"/>
+    </xsl:attribute>
+   </xsl:if>
   </xsl:when>
   <xsl:otherwise>
    <xsl:if test="count($values)">

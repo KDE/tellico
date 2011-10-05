@@ -27,10 +27,14 @@
 #include "tellicoxmlexporter.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
+#include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
 #include <klocale.h>
+#include <kapplication.h>
 
 #include <QDomDocument>
 #include <QFile>
@@ -58,7 +62,44 @@ QString GCstarExporter::fileFilter() const {
 
 bool GCstarExporter::exec() {
   const QString text = this->text();
-  return !text.isEmpty() && FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
+
+  bool success = true;
+  if(options() & ExportImages) {
+    const QString imgDir = KGlobal::dirs()->localxdgdatadir() + QLatin1String("gcstar/images/");
+    ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
+    item.setTotalSteps(entries().count());
+    ProgressItem::Done done(this);
+    const uint stepSize = qMax(1, entries().count()/100);
+    const bool showProgress = options() & ExportProgress;
+
+    uint j = 0;
+    foreach(const Data::EntryPtr& entry, entries()) {
+      foreach(Data::FieldPtr field, entry->collection()->imageFields()) {
+        if(entry->field(field).isEmpty()) {
+          break;
+        }
+
+        const Data::Image& img = ImageFactory::self()->imageById(entry->field(field));
+        if(img.isNull()) {
+          break;
+        }
+
+        KUrl target;
+        target.setPath(imgDir);
+        target.setFileName(img.id());
+//        myDebug() << "Writing" << target.url();
+        success &= FileHandler::writeDataURL(target, img.byteArray(), true /* force */);
+      }
+      if(showProgress && j%stepSize == 0) {
+        item.setProgress(j);
+        kapp->processEvents();
+      }
+      ++j;
+    }
+  }
+  return !text.isEmpty() &&
+         FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce) &&
+         success;
 }
 
 QString GCstarExporter::text() {
@@ -100,6 +141,10 @@ QString GCstarExporter::text() {
   if(!m_handler || !m_handler->isValid()) {
     myDebug() << "bad handler";
     return QString();
+  }
+
+  if(options() & ExportImages) {
+    m_handler->addStringParam("imageDir", KGlobal::dirs()->localxdgdatadir().toLocal8Bit() + "gcstar/images/");
   }
 
   // now grab the XML
