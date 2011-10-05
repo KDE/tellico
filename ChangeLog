@@ -1,3 +1,7 @@
+2011-10-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated GCstar exporter to include images.
+
 2011-09-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Amazon data sources for China, Spain, and Italy.
