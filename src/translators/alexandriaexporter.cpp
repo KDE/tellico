@@ -120,6 +120,7 @@ bool AlexandriaExporter::exec() {
       item.setProgress(j);
       kapp->processEvents();
     }
+    ++j;
   }
   return success;
 }
