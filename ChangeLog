@@ -1,3 +1,7 @@
+2011-10-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that always showed checkmark for boolean field values (Bug 283444).
+
 2011-10-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated GCstar exporter to include images.

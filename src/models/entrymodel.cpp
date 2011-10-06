@@ -104,22 +104,23 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(!field) {
         return QVariant();
       }
+      entry = this->entry(index_);
+      if(!entry) {
+        return QVariant();
+      }
+      // we don't need a formatted value for any pixmaps
+      value = entry->field(field);
+      if(value.isEmpty()) {
+        return QVariant();
+      }
+
       if(field->type() == Data::Field::Bool) {
+        // assume any non-empty value equals true
         return m_checkPix;
       } else if(field->type() == Data::Field::Rating) {
         return GUI::RatingWidget::pixmap(value);
       }
 
-      entry = this->entry(index_);
-      if(!entry) {
-        return QVariant();
-      }
-
-      // we don't need a formatted value for image id
-      value = entry->field(field);
-      if(value.isEmpty()) {
-        return QVariant();
-      }
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {
