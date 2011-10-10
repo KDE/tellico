@@ -89,7 +89,7 @@ Only the first five lines of the imported CSV file are shown in the dialog.
 <para>
 &appname; is able to use the <ulink url="http://freedb.org">freedb.org</ulink> service to lookup
 information about a &CD;, including the track list. Depending on your distribution,
-settings for access to the service may be set in the &kde; Control Center. The &CD; artist, title, genre,
+settings for access to the service may be set in the &kde; &systemsettings;. The &CD; artist, title, genre,
 year, and track listing are all added.
 </para>
 
