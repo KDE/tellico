@@ -448,7 +448,7 @@ If <application><ulink url="http://www.gcstar.org">GCstar</ulink></application> 
 As an easier way for &appname; to integrate with third-party plugins, external scripts or applications may be used as an interface for searching other information sources. &appname; will execute a command, and pass the search terms as command-line options.
 </para>
 
-<para>Some scripts are distributed with &appname; itself. <ulink url="http://www.allocine.fr">Allocine.fr</ulink> is an online French bookstore. This data source requires <ulink url="http://python.org">Python</ulink> to be installed. The <ulink url="http://www.mcu.es">Spanish Ministry of Culture</ulink> is an online Spanish book database. This data source also requires <ulink url="http://python.org">Python</ulink> to be installed. <ulink url="http://darkhorse.com">Dark Horse Comics</ulink> is a comic book publisher. This data source also requires <ulink url="http://python.org">Python</ulink>. <ulink url="http://boardgamegeek.com">BoardGameGeek</ulink> is a website with extensive data for board games, and the script requires <ulink url="http://www.ruby-lang.org">ruby</ulink>.
+<para>Some scripts are distributed with &appname; itself. <ulink url="http://www.allocine.fr">Allocine.fr</ulink> is an French website for movies. The <ulink url="http://www.mcu.es">Spanish Ministry of Culture</ulink> is an online Spanish book database. <ulink url="http://darkhorse.com">Dark Horse Comics</ulink> is a comic book publisher. All three of those data sources require <ulink url="http://python.org">Python</ulink>. <ulink url="http://boardgamegeek.com">BoardGameGeek</ulink> is a website with extensive data for board games, and the script requires <ulink url="http://www.ruby-lang.org">ruby</ulink>.
 </para>
 
 <screenshot>
