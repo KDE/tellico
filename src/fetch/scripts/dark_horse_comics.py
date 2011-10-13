@@ -78,6 +78,14 @@ class BasicTellicoDOM:
 		self.__collection.setAttribute('title', 'My Comics')
 		self.__collection.setAttribute('type', '6')
 
+		self.__fields = self.__doc.createElement('fields')
+		# Add all default (standard) fields
+		self.__dfltField = self.__doc.createElement('field')
+		self.__dfltField.setAttribute('name', '_default')
+
+		self.__fields.appendChild(self.__dfltField)
+		self.__collection.appendChild(self.__fields)
+
 		self.__images = self.__doc.createElement('images')
 
 		self.__root.appendChild(self.__collection)
@@ -98,48 +106,66 @@ class BasicTellicoDOM:
 
 		titleNode = self.__doc.createElement('title')
 		titleNode.appendChild(self.__doc.createTextNode(unicode(d['title'], 'latin-1').encode('utf-8')))
+		entryNode.appendChild(titleNode)
 
 		yearNode = self.__doc.createElement('pub_year')
 		yearNode.appendChild(self.__doc.createTextNode(d['pub_year']))
+		entryNode.appendChild(yearNode)
 
 		countryNode = self.__doc.createElement('country')
 		countryNode.appendChild(self.__doc.createTextNode(d['country']))
+		entryNode.appendChild(countryNode)
 		pubNode = self.__doc.createElement('publisher')
 		pubNode.appendChild(self.__doc.createTextNode(d['publisher']))
+		entryNode.appendChild(pubNode)
 		langNode = self.__doc.createElement('language')
 		langNode.appendChild(self.__doc.createTextNode(d['language']))
+		entryNode.appendChild(langNode)
 
 		writersNode = self.__doc.createElement('writers')
 		for g in d['writer']:
 			writerNode = self.__doc.createElement('writer')
 			writerNode.appendChild(self.__doc.createTextNode(unicode(g, 'latin-1').encode('utf-8')))
 			writersNode.appendChild(writerNode)
+		entryNode.appendChild(writersNode)
 
 		genresNode = self.__doc.createElement('genres')
 		for g in d['genre']:
 			genreNode = self.__doc.createElement('genre')
 			genreNode.appendChild(self.__doc.createTextNode(unicode(g, 'latin-1').encode('utf-8')))
 			genresNode.appendChild(genreNode)
+		entryNode.appendChild(genresNode)
 
 		commentsNode = self.__doc.createElement('comments')
 		#for g in d['comments']:
 		#	commentsNode.appendChild(self.__doc.createTextNode(unicode("%s\n\n" % g, 'latin-1').encode('utf-8')))
 		commentsData = string.join(d['comments'], '\n\n')
 		commentsNode.appendChild(self.__doc.createTextNode(unicode(commentsData, 'latin-1').encode('utf-8')))
+		entryNode.appendChild(commentsNode)
 
 		artistsNode = self.__doc.createElement('artists')
 		for k, v in d['artist'].iteritems():
 			artistNode = self.__doc.createElement('artist')
 			artistNode.appendChild(self.__doc.createTextNode(unicode(v, 'latin-1').encode('utf-8')))
 			artistsNode.appendChild(artistNode)
+		entryNode.appendChild(artistsNode)
 
-		pagesNode = self.__doc.createElement('pages')
-		pagesNode.appendChild(self.__doc.createTextNode(d['pages']))
+		if 'pages' in d:
+			pagesNode = self.__doc.createElement('pages')
+			pagesNode.appendChild(self.__doc.createTextNode(d['pages']))
+			entryNode.appendChild(pagesNode)
 
-		issueNode = self.__doc.createElement('issue')
-		issueNode.appendChild(self.__doc.createTextNode(d['issue']))
+		if 'isbn' in d:
+			isbnNode = self.__doc.createElement('isbn')
+			isbnNode.appendChild(self.__doc.createTextNode(d['isbn']))
+			entryNode.appendChild(isbnNode)
 
-		if d['image']:
+		if 'issue' in d:
+			issueNode = self.__doc.createElement('issue')
+			issueNode.appendChild(self.__doc.createTextNode(d['issue']))
+			entryNode.appendChild(issueNode)
+
+		if 'image' in d:
 			imageNode = self.__doc.createElement('image')
 			imageNode.setAttribute('format', 'JPEG')
 			imageNode.setAttribute('id', d['image'][0])
@@ -147,13 +173,9 @@ class BasicTellicoDOM:
 
 			coverNode = self.__doc.createElement('cover')
 			coverNode.appendChild(self.__doc.createTextNode(d['image'][0]))
+			entryNode.appendChild(coverNode)
 
-		for name in (	'writersNode', 'genresNode', 'artistsNode', 'pagesNode', 'yearNode',
-						'titleNode', 'issueNode', 'commentsNode', 'pubNode', 'langNode',
-						'countryNode' ):
-			entryNode.appendChild(eval(name))
-
-		if d['image']:
+		if 'image' in d:
 			entryNode.appendChild(coverNode)
 			self.__images.appendChild(imageNode)
 
@@ -183,29 +205,30 @@ class BasicTellicoDOM:
 class DarkHorseParser:
 	def __init__(self):
 		self.__baseURL 	 = 'http://www.darkhorse.com'
-		self.__basePath  = '/profile/profile.php?sku='
-		self.__searchURL = '/search/search.php?frompage=userinput&sstring=%s&x=0&y=0'
+		self.__basePath  = '/Comics/'
+		self.__searchURL = '/Search/%s'
 		self.__coverPath = 'http://images.darkhorse.com/covers/'
 		self.__movieURL  = self.__baseURL + self.__basePath
 
 		# Define some regexps
-		self.__regExps = { 	'title' 		: '<font size="\+2"><b>(?P<title>.*?)</b></font>',
-							'pub_date'		: '<b>Pub.* Date:</b> *<a.*>(?P<pub_date>.*)</a>',
-							'desc'			: '<p>(?P<desc>.*?)<br>',
-							'writer'		: '<b>Writer: *</b> *<a.*?>(?P<writer>.*)</a>',
-							'cover_artist'	: '<b>Cover Artist: *</b> *<a.*>(?P<cover_artist>.*)</a>',
-							'penciller'		: '<b>Penciller: *</b> *<a.*>(?P<penciller>.*)</a>',
-							'inker'			: '<b>Inker: *</b> *<a.*>(?P<inker>.*)</a>',
-							'letterer'		: '<b>Letterer: *</b> *<a.*>(?P<letterer>.*)</a>',
-							'colorist'		: '<b>Colorist: *</b> *<a.*>(?P<colorist>.*)</a>',
-							'genre'			: '<b>Genre: *</b> *<a.*?>(?P<genre>.*?)</a><br>',
-							'format'		: '<b>Format: *</b> *(?P<format>.*?)<br>',
+		self.__regExps = { 	'title' 		: '<h2 class="title">(?P<title>.*?)</h2>',
+							'pub_date'			: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*)</dd>',
+							'isbn'					: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*)</dd>',
+							'desc'					: '<div class="product-description">(?P<desc>.*?)</div>',
+							'writer'				: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*)</a></dd>',
+							'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*>(?P<cover_artist>.*)</a></dd>',
+							'penciller'			: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*)</a></dd>',
+							'inker'					: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*)</a></dd>',
+							'letterer'			: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*)</a></dd>',
+							'colorist'			: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*)</a></dd>',
+							'genre'					: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a></div>',
+							'format'				: '<dt>Format: *</dt> *(?P<format>.*?)<dt>',
 						}
 
 		# Compile patterns objects
 		self.__regExpsPO = {}
 		for k, pattern in self.__regExps.iteritems():
-			self.__regExpsPO[k] = re.compile(pattern)
+			self.__regExpsPO[k] = re.compile(pattern, re.DOTALL)
 
 		self.__domTree = BasicTellicoDOM()
 
@@ -231,10 +254,10 @@ class DarkHorseParser:
 		Retrieve all links related to the search. self.__data contains HTML content fetched by self.__getHTMLContent()
 		that need to be parsed.
 		"""
-		matchList = re.findall("""<a *href="%s(?P<page>.*?)">(?P<title>.*?)</a>""" % self.__basePath.replace('?', '\?'), self.__data)
+		matchList = re.findall("""<a *href="%s(?P<page>.*?)" class="product_link">.*?</a>""" % self.__basePath.replace('?', '\?'), self.__data)
 		if not matchList: return None
 
-		return matchList
+		return list(set(matchList))
 
 	def __fetchCover(self, path, delete = True):
 		"""
@@ -272,7 +295,7 @@ class DarkHorseParser:
 
 		# First grab picture data
 		imgMatch = re.search("""<img src="%s(?P<imgpath>.*?)".*>""" % self.__coverPath, self.__data)
-		if imgMatch:
+		if False and imgMatch:
 			imgPath = self.__coverPath + imgMatch.group('imgpath')
 			# Fetch cover and gets its base64 encoded data
 			b64img = self.__fetchCover(imgPath)
@@ -280,9 +303,12 @@ class DarkHorseParser:
 			b64img = None
 
 		# Now isolate data between <div class="bodytext">...</div> elements
-		# re.S sets DOTALL; it makes the "." special character match any character at all, including a newline
-		m = re.search("""<div class="bodytext">(?P<part>.*)</div>""", self.__data, re.S)
-		self.__data = m.group('part')
+		# re.DOTALL makes the "." special character match any character at all, including a newline
+		m = re.search("""<div id="inner_content">(?P<part>.*)end #inner_content""", self.__data, re.DOTALL)
+		try:
+			self.__data = m.group('part')
+		except AttributeError:
+			self.__data = ""
 
 		matches = {}
 		data = {}
@@ -294,7 +320,8 @@ class DarkHorseParser:
 		data['language'] 	= 'English'
 		data['country'] 	= 'USA'
 
-		data['image'] 		= b64img
+		if b64img is not None:
+			data['image'] 		= b64img
 		data['pub_year']	= NULLSTRING
 
 		for name, po in self.__regExpsPO.iteritems():
@@ -320,6 +347,10 @@ class DarkHorseParser:
 					data['pub_year'] = pub_date[-4:]
 					# Add this to comments field
 					data['comments'].insert(0, "Pub. Date: %s" % pub_date)
+
+				elif name == 'isbn':
+					isbn = matches[name].group('isbn').strip()
+					data[name] = isbn
 
 				elif name == 'desc':
 					# Find biggest size
@@ -382,9 +413,9 @@ class DarkHorseParser:
 		# Now retrieve infos
 		if links:
 			for entry in links:
-				data = self.__fetchMovieInfo( url = self.__movieURL + entry[0] )
+				data = self.__fetchMovieInfo( url = self.__movieURL + entry )
 				# Add DC link (custom field)
-				data['darkhorse'] = "%s%s" % (self.__movieURL, entry[0])
+				data['darkhorse'] = "%s%s" % (self.__movieURL, entry)
 				node = self.__domTree.addEntry(data)
 				# Print entries on-the-fly
 				#self.__domTree.printEntry(node)
