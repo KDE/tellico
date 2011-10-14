@@ -44,6 +44,11 @@ BoardGameGeekFetcherTest::BoardGameGeekFetcherTest() : m_loop(this) {
 }
 
 void BoardGameGeekFetcherTest::initTestCase() {
+  const QString ruby = KStandardDirs::findExe(QLatin1String("ruby"));
+  if(ruby.isEmpty()) {
+    QSKIP("This test requires ruby", SkipAll);
+  }
+
   Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
   Tellico::ImageFactory::init();
 }
