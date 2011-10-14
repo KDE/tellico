@@ -145,6 +145,8 @@ class BasicTellicoDOM:
 
 		artistsNode = self.__doc.createElement('artists')
 		for k, v in d['artist'].iteritems():
+			if v == 'various':
+				continue
 			artistNode = self.__doc.createElement('artist')
 			artistNode.appendChild(self.__doc.createTextNode(unicode(v, 'latin-1').encode('utf-8')))
 			artistsNode.appendChild(artistNode)
@@ -212,16 +214,16 @@ class DarkHorseParser:
 
 		# Define some regexps
 		self.__regExps = { 	'title' 		: '<h2 class="title">(?P<title>.*?)</h2>',
-							'pub_date'			: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*)</dd>',
-							'isbn'					: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*)</dd>',
+							'pub_date'			: '<dt>Pub.* Date:</dt>.*?<dd>(?P<pub_date>.*?)</dd>',
+							'isbn'					: '<dt>ISBN-10:</dt><dd>(?P<isbn>.*?)</dd>',
 							'desc'					: '<div class="product-description">(?P<desc>.*?)</div>',
-							'writer'				: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*)</a></dd>',
-							'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*>(?P<cover_artist>.*)</a></dd>',
-							'penciller'			: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*)</a></dd>',
-							'inker'					: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*)</a></dd>',
-							'letterer'			: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*)</a></dd>',
-							'colorist'			: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*)</a></dd>',
-							'genre'					: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a></div>',
+							'writer'				: '<dt>Writer: *</dt> *<dd><a.*?>(?P<writer>.*?)</a> *</dd>',
+							'cover_artist'	: '<dt>Artist: *</dt> *<dd><a.*>(?P<cover_artist>.*?)</a> *</dd>',
+							'penciller'			: '<dt>Penciller: *</dt> *<dd><a.*>(?P<penciller>.*?)</a> *</dd>',
+							'inker'					: '<dt>Inker: *</dt> *<dd><a.*>(?P<inker>.*?)</a> *</dd>',
+							'letterer'			: '<dt>Letterer: *</dt> *<dd><a.*>(?P<letterer>.*?)</a> *</dd>',
+							'colorist'			: '<dt>Colorist: *</dt> *<dd><a.*>(?P<colorist>.*?)</a> *</dd>',
+							'genre'					: '<strong>Genre: *</strong> *<a.*?>(?P<genre>.*?)</a> *</div>',
 							'format'				: '<dt>Format: *</dt> *(?P<format>.*?)<dt>',
 						}
 
@@ -295,7 +297,7 @@ class DarkHorseParser:
 
 		# First grab picture data
 		imgMatch = re.search("""<img src="%s(?P<imgpath>.*?)".*>""" % self.__coverPath, self.__data)
-		if False and imgMatch:
+		if imgMatch:
 			imgPath = self.__coverPath + imgMatch.group('imgpath')
 			# Fetch cover and gets its base64 encoded data
 			b64img = self.__fetchCover(imgPath)

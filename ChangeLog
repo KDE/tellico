@@ -1,3 +1,7 @@
+2011-10-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed broken script for searching Dark Horse Comics.
+
 2011-10-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that always showed checkmark for boolean field values (Bug 283444).
