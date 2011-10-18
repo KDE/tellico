@@ -65,7 +65,7 @@ Any of the fields in the collections may be shown in the <interface>Column View<
 
 <para>
 The <interface>Group View</interface> groups the entries in a tree-view by any field which <link linkend="field-options">allows grouping</link>.
-The number of entries in each group is shown next to the group name. Groups may be expanded or collapsed by clicking the plus sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click context menu. The tree may be sorted either by the group name, or by the count, by clicking on the header. A group may also be used as a filter for the <link linkend="detailed-view"><interface>Column View</interface></link>, by right-clicking on the group item.
+The number of entries in each group is shown next to the group name. Groups may be expanded or collapsed by clicking the arrow sign, or by double-clicking the item. Expanding and contracting all the groups are options in the right-click context menu. The tree may be sorted either by the group name, or by the count, by clicking on the header. A group may also be used as a filter for the <link linkend="detailed-view"><interface>Column View</interface></link>, by right-clicking on the group item.
 </para>
 
 <para id="people-group">
