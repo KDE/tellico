@@ -69,7 +69,7 @@ The number of entries in each group is shown next to the group name. Groups may 
 </para>
 
 <para id="people-group">
-When more than one field in the collection has the <emphasis><link linkend="fields-dialog"><guilabel>Format as name</guilabel></link></emphasis> option turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
+When more than one field in the collection has the <emphasis><link linkend="fields-dialog"><guilabel>Format as a name</guilabel></link></emphasis> option turned on, an additional group is added to combine all those fields into one single <emphasis>People</emphasis> pseudo-group.
 </para>
 
 <para>
