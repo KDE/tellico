@@ -148,10 +148,6 @@ The status bar is used to show you what &appname; is currently doing. It also in
 <para>
 The <interface>Entry Editor</interface> is used to add and modify entries in the collection. Double-clicking on an entry in either the <interface>Group View</interface> or the <interface>Column View</interface> opens the <interface>Entry Editor</interface> with that entry. New entries may be created using the <menuchoice><guimenu>Collection</guimenu></menuchoice> menu, the toolbar icon, or the button in the <interface>Entry Editor</interface> itself.</para>
 
-<para>
-The arrow buttons on the bottom will move to the previous or next entries in the current list.
-</para>
-
 <para>Closing the <interface>Entry Editor</interface> when changes have been made but not saved will cause a warning message to appear. The fields are grouped by category and appear in the order that they appear in the <link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link>. They may also be reordered.
 </para>
 
