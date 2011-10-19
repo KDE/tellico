@@ -181,9 +181,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_multipleISBN->setWhatsThis(i18n("Check this box to search for multiple ISBN or UPC values."));
   connect(m_multipleISBN, SIGNAL(toggled(bool)), SLOT(slotMultipleISBN(bool)));
 
-  m_editISBN = new KPushButton(KGuiItem(i18n("Edit List..."), KIcon(QLatin1String("format-justify-fill"))), box2);
+  m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), KIcon(QLatin1String("format-justify-fill"))), box2);
   m_editISBN->setEnabled(false);
-  m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN values."));
+  m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN or UPC values."));
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
 
   // add for spacing
