@@ -9,7 +9,7 @@ same way, with a semi-colon (;) separating each value.</p>
 </tip>
 <tip category="Tellico">
 <html>
-<p>...that you can change which fields are shown in the list view by
+<p>...that you can change which fields are shown in the column view by
 right-clicking on the column header.
 </html>
 </tip>
@@ -90,8 +90,8 @@ outputs a valid Tellico XML file.</p>
 </tip>
 <tip category="Tellico">
 <html>
-<p>...that in the Detailed View, you can press a letter on the
-keyboard to skip to the next entry that starts with that letter.</p>
+<p>...that when the Column View is focused, you can press a letter on the
+keyboard to scroll to the next entry that starts with that letter.</p>
 </html>
 </tip>
 <tip category="Tellico">
