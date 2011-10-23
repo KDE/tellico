@@ -400,7 +400,7 @@ find those that meet any of them. The <interface>Advanced Filter Dialog</interfa
 </screenshot>
 
 <para>
-Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton>Edit...</guibutton> button becomes active for editing the expression. Finally, the word or string to match should be entered in the text box.
+Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton>Edit...</guibutton> button becomes active for editing the expression, if &kregexpeditor; is installed on your computer. Finally, the word or string to match should be entered in the text box.
 </para>
 
 <para>

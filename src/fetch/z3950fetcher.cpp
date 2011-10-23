@@ -463,6 +463,19 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     return;
   }
 
+  // since the Dewey and LoC field titles have a context in their i18n call here
+  // but not in the mods2tellico.xsl stylesheet where the field is actually created
+  // update the field titles here
+  QHashIterator<QString, QString> i(allOptionalFields());
+  while(i.hasNext()) {
+    i.next();
+    Data::FieldPtr field = coll->fieldByName(i.key());
+    if(field) {
+      field->setTitle(i.value());
+      coll->modifyField(field);
+    }
+  }
+
   Data::EntryList entries = coll->entries();
   foreach(Data::EntryPtr entry, entries) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
