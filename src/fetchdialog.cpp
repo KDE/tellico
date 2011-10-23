@@ -199,6 +199,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   connect(m_sourceCombo, SIGNAL(activated(const QString&)), SLOT(slotSourceChanged(const QString&)));
   m_sourceCombo->setWhatsThis(i18n("Select the database to search"));
 
+  // for whatever reason, the dialog window could get shrunk and truncate the text
+  box2->setMinimumWidth(box2->minimumSizeHint().width());
+
   QSplitter* split = new QSplitter(Qt::Vertical, mainWidget);
   topLayout->addWidget(split);
 
@@ -269,7 +272,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
 
-  setMinimumWidth(qMax(minimumWidth(), FETCH_MIN_WIDTH));
+  setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
   KConfigGroup sizeGroup(KGlobal::config(), QLatin1String("Fetch Dialog Options"));
