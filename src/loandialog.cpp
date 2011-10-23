@@ -162,7 +162,7 @@ void LoanDialog::init() {
   topLayout->addWidget(l, ++row, 0);
   m_note = new KTextEdit(mainWidget);
   l->setBuddy(m_note);
-  topLayout->addWidget(m_note, row, 0, 1, 2);
+  topLayout->addWidget(m_note, row, 1, 1, 2);
   topLayout->setRowStretch(row, 1);
   whats = i18n("You can add notes about the loan.");
   l->setWhatsThis(whats);
