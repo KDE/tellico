@@ -9,7 +9,7 @@
   <!ENTITY robby "Robby Stephenson">
   <!ENTITY email "robby@periapsis.org">
   <!ENTITY homepage "http://tellico-project.org">
-  <!ENTITY maillist "http://forge.novell.com/mailman/listinfo/tellico-users">
+  <!ENTITY maillist "http://tellico-project.org/mailing-list">
   <!ENTITY xslt "<acronym>XSLT</acronym>">
 
   <!ENTITY fundamentals-chapter SYSTEM "fundamentals.docbook">
