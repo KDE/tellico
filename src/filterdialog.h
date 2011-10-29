@@ -44,6 +44,9 @@ class QRadioButton;
 class QDialog;
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
   class FilterDialog;
 
 /**
@@ -97,14 +100,14 @@ protected slots:
 private:
   void initLists();
   void initWidget();
+  void updateFunctionList(Data::FieldPtr field = Data::FieldPtr());
 
   KComboBox* m_ruleField;
-  KComboBox* m_ruleFunc;
+  GUI::ComboBox* m_ruleFunc;
   KLineEdit* m_ruleValue;
   KPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;  //krazy:exclude=qclasses
   QStringList m_ruleFieldList;
-  QStringList m_ruleFuncList;
 };
 
 class FilterRuleWidgetLister : public KWidgetLister {

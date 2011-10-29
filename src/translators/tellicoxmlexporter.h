@@ -77,6 +77,7 @@ private:
   void exportBorrowerXML(QDomDocument& doc, QDomElement& parent, Data::BorrowerPtr borrower) const;
 
   Data::EntryList sortEntries(const Data::EntryList& entries) const;
+  bool version12Needed() const;
 
   // keep track of which images were written, since some entries could have same image
   mutable StringSet m_images;

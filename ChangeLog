@@ -1,3 +1,7 @@
+2011-10-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Added filter rules for dates before and after.
+
 2011-10-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed broken script for searching Dark Horse Comics.
