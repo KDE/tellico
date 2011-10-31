@@ -270,7 +270,7 @@ Documentation copyright 2001-2011 &robby; <email>&email;</email>
 &underFDL;
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
-url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
+url="http://www.freebsd.org/copyright/freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
 
 </chapter>
 
