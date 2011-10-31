@@ -73,36 +73,13 @@ Do NOT change these in the translation. -->
 </copyright>
 
 <!-- Translators: put here the copyright notice of the translation -->
-<!-- Put here the FDL notice.  Read the explanation in fdl-notice.docbook
-     and in the FDL itself on how to use it. -->
-<legalnotice>
-&FDLNotice;
-
-<para>The author of this documentation has also granted you permission to use
-the content under the terms of the <ulink
-url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose.
-See the notice in the <link linkend="gnu-fdl">licensing section</link>.</para>
-</legalnotice>
 
 <legalnotice>
-<para>This program is free software; you can redistribute it and/or
-modify it under the terms of the &GNU; General Public
-License as published by the Free Software Foundation; either version 2 of
-the License or (at your option) version 3 or any later version
-accepted by the membership of KDE e.V. (or its successor approved
-by the membership of KDE e.V.), which shall act as a proxy
-defined in Section 14 of version 3 of the license. </para>
-
-<para>This program is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty
-of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the &GNU;
-General Public License for more details.</para>
-
-<para>You should have received a copy of the &GNU; General Public
-License along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</para>
+<para>
+For licensing information of both the software and this documentation, please refer to the
+<link linkend="credits">final section</link>.
+</para>
 </legalnotice>
-<!--<legalnotice>&GPLNotice;</legalnotice>-->
 
 <!-- Abstract about this handbook -->
 
@@ -195,7 +172,7 @@ all the capabilities of a full-fledged relational database.
 As somewhat of a disclaimer, &appname; is a hobby for the author, and no
 guarantees are made about its functionality, usefullness, or otherwise.
 More information is included in the
-<link linkend="gnu-fdl">license declaration</link>.
+<link linkend="credits">license declaration</link>.
 </para>
 
 </sect2>
@@ -279,17 +256,18 @@ file included in the KDE distribution. -->
 &appname;
 </para>
 <para>
-Program copyright 2001-2009 &robby; <email>&email;</email>
+Program copyright 2001-2011 &robby; <email>&email;</email>
 </para>
 
+&underGPL;
+
 <para>
-Documentation copyright 2001-2009 &robby; <email>&email;</email>
+Documentation copyright 2001-2011 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
 &underFDL;
-&underGPL;
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
 url="freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
