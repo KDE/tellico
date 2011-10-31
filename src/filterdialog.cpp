@@ -30,7 +30,8 @@
 #include "document.h"
 #include "collection.h"
 #include "fieldcompletion.h"
-#include "../tellico_debug.h"
+#include "gui/combobox.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <kcombobox.h>
@@ -75,17 +76,6 @@ void FilterRuleWidget::initLists() {
     m_ruleFieldList += titles;
   }
 
-  //---------- initialize list of filter operators
-  if(m_ruleFuncList.isEmpty()) {
-    // also see FilterRule::matches() and FilterRule::Function
-    // if you change the following strings!
-    m_ruleFuncList.append(i18n("contains"));
-    m_ruleFuncList.append(i18n("does not contain"));
-    m_ruleFuncList.append(i18n("equals"));
-    m_ruleFuncList.append(i18n("does not equal"));
-    m_ruleFuncList.append(i18n("matches regexp"));
-    m_ruleFuncList.append(i18n("does not match regexp"));
-  }
 }
 
 void FilterRuleWidget::initWidget() {
@@ -95,7 +85,7 @@ void FilterRuleWidget::initWidget() {
   connect(m_ruleField, SIGNAL(activated(int)), SIGNAL(signalModified()));
   connect(m_ruleField, SIGNAL(activated(int)), SLOT(slotRuleFieldChanged(int)));
 
-  m_ruleFunc = new KComboBox(this);
+  m_ruleFunc = new GUI::ComboBox(this);
   connect(m_ruleFunc, SIGNAL(activated(int)), SIGNAL(signalModified()));
   m_ruleValue = new KLineEdit(this);
   connect(m_ruleValue, SIGNAL(textChanged(const QString&)), SIGNAL(signalModified()));
@@ -108,17 +98,8 @@ void FilterRuleWidget::initWidget() {
   }
 
   m_ruleField->addItems(m_ruleFieldList);
-  // don't show sliders when popping up this menu
-//  m_ruleField->setSizeLimit(m_ruleField->count());
-//  m_ruleField->adjustSize();
 
-  m_ruleFunc->addItems(m_ruleFuncList);
-//  m_ruleFunc->adjustSize();
-
-//  connect(m_ruleField, SIGNAL(textChanged(const QString &)),
-//          this, SIGNAL(fieldChanged(const QString &)));
-//  connect(m_ruleValue, SIGNAL(textChanged(const QString &)),
-//          this, SIGNAL(contentsChanged(const QString &)));
+  updateFunctionList();
 }
 
 void FilterRuleWidget::slotEditRegExp() {
@@ -146,6 +127,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   QString fieldTitle = m_ruleField->currentText();
   if(fieldTitle.isEmpty() || fieldTitle[0] == QLatin1Char('<')) {
     m_ruleValue->setCompletionObject(0);
+    updateFunctionList();
     return;
   }
   Data::FieldPtr field = Data::Document::self()->collection()->fieldByTitle(fieldTitle);
@@ -158,6 +140,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   } else {
     m_ruleValue->setCompletionObject(0);
   }
+  updateFunctionList(field);
 }
 
 void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
@@ -175,13 +158,16 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
 
   if(rule_->fieldName().isEmpty()) {
     m_ruleField->setCurrentIndex(0); // "All Fields"
+    updateFunctionList();
   } else {
-    int idx = m_ruleField->findText(Kernel::self()->fieldTitleByName(rule_->fieldName()));
+    Data::FieldPtr field = Data::Document::self()->collection()->fieldByName(rule_->fieldName());
+    int idx = m_ruleField->findText(field ? field->title() : QString());
     m_ruleField->setCurrentIndex(idx);
+    updateFunctionList(field);
   }
 
   //--------------set function and contents
-  m_ruleFunc->setCurrentIndex(static_cast<int>(rule_->function()));
+  m_ruleFunc->setCurrentData(rule_->function());
   m_ruleValue->setText(rule_->pattern());
 
   if(m_editRegExp) {
@@ -198,7 +184,7 @@ Tellico::FilterRule* FilterRuleWidget::rule() const {
   }
 
   return new FilterRule(field, m_ruleValue->text().trimmed(),
-                        static_cast<FilterRule::Function>(m_ruleFunc->currentIndex()));
+                        static_cast<FilterRule::Function>(m_ruleFunc->currentData().toInt()));
 }
 
 void FilterRuleWidget::reset() {
@@ -218,6 +204,28 @@ void FilterRuleWidget::reset() {
 
 void FilterRuleWidget::setFocus() {
   m_ruleValue->setFocus();
+}
+
+void FilterRuleWidget::updateFunctionList(Data::FieldPtr field_) {
+  Q_ASSERT(m_ruleFunc);
+  const QVariant data = m_ruleFunc->currentData();
+  m_ruleFunc->clear();
+  if(field_ && field_->type() == Data::Field::Date) {
+    m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+    m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
+    m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
+    m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+    m_ruleFunc->addItem(i18nc("is before a date", "is before"), FilterRule::FuncBefore);
+    m_ruleFunc->addItem(i18nc("is after a date", "is after"), FilterRule::FuncAfter);
+  } else {
+    m_ruleFunc->addItem(i18n("contains"), FilterRule::FuncContains);
+    m_ruleFunc->addItem(i18n("does not contain"), FilterRule::FuncNotContains);
+    m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+    m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
+    m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
+    m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+  }
+  m_ruleFunc->setCurrentData(data);
 }
 
 /***************************************************************/

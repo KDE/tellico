@@ -51,7 +51,8 @@ public:
   enum Function {
     FuncContains=0, FuncNotContains,
     FuncEquals, FuncNotEquals,
-    FuncRegExp, FuncNotRegExp
+    FuncRegExp, FuncNotRegExp,
+    FuncBefore, FuncAfter
   };
 
   FilterRule();
@@ -98,6 +99,8 @@ private:
   bool equals(Data::EntryPtr entry) const;
   bool contains(Data::EntryPtr entry) const;
   bool matchesRegExp(Data::EntryPtr entry) const;
+  bool before(Data::EntryPtr entry) const;
+  bool after(Data::EntryPtr entry) const;
 
   QString m_fieldName;
   Function m_function;

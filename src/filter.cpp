@@ -60,6 +60,10 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
       return matchesRegExp(entry_);
     case FuncNotRegExp:
       return !matchesRegExp(entry_);
+    case FuncBefore:
+      return before(entry_);
+    case FuncAfter:
+      return after(entry_);
     default:
       myWarning() << "invalid function!";
       break;
@@ -153,6 +157,28 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
   }
 
   return false;
+}
+
+bool FilterRule::before(Tellico::Data::EntryPtr entry_) const {
+  // empty field name means search all
+  // but the rule widget should limit this function to date fields only
+  if(m_fieldName.isEmpty()) {
+    return false;
+  }
+  const QDate pattern = QDate::fromString(m_pattern, Qt::ISODate);
+  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
+  return value.isValid() && value < pattern;
+}
+
+bool FilterRule::after(Tellico::Data::EntryPtr entry_) const {
+  // empty field name means search all
+  // but the rule widget should limit this function to date fields only
+  if(m_fieldName.isEmpty()) {
+    return false;
+  }
+  const QDate pattern = QDate::fromString(m_pattern, Qt::ISODate);
+  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
+  return value.isValid() && value > pattern;
 }
 
 void FilterRule::setFunction(Function func_) {

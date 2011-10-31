@@ -776,6 +776,10 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
     func = FilterRule::FuncRegExp;
   } else if(function == QLatin1String("notregexp")) {
     func = FilterRule::FuncNotRegExp;
+  } else if(function == QLatin1String("before")) {
+    func = FilterRule::FuncBefore;
+  } else if(function == QLatin1String("after")) {
+    func = FilterRule::FuncAfter;
   } else {
     myWarning() << "invalid rule function:" << function;
     return true;
