@@ -258,15 +258,13 @@ file included in the KDE distribution. -->
 <para>
 Program copyright 2001-2011 &robby; <email>&email;</email>
 </para>
-
-&underGPL;
-
 <para>
 Documentation copyright 2001-2011 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
 
+&underGPL;
 &underFDL;
 
 <para>The author of this documentation has also granted you permission to use the content under the terms of the <ulink
