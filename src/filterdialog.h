@@ -39,9 +39,11 @@
 class KComboBox;
 class KLineEdit;
 class KPushButton;
+class KDateComboBox;
 
 class QRadioButton;
 class QDialog;
+class QStackedWidget;
 
 namespace Tellico {
   namespace GUI {
@@ -100,14 +102,17 @@ protected slots:
 private:
   void initLists();
   void initWidget();
-  void updateFunctionList(Data::FieldPtr field = Data::FieldPtr());
+  void updateFunctionList();
 
   KComboBox* m_ruleField;
   GUI::ComboBox* m_ruleFunc;
+  QStackedWidget* m_valueStack;
   KLineEdit* m_ruleValue;
+  KDateComboBox* m_ruleDate;
   KPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;  //krazy:exclude=qclasses
   QStringList m_ruleFieldList;
+  bool m_isDate;
 };
 
 class FilterRuleWidgetLister : public KWidgetLister {
