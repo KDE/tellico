@@ -44,6 +44,10 @@ void FilterTest::testFilter() {
   Tellico::FilterRule* rule1 = new Tellico::FilterRule(QLatin1String("title"),
                                                        QLatin1String("Star Wars"),
                                                        Tellico::FilterRule::FuncEquals);
+  QCOMPARE(rule1->fieldName(), QLatin1String("title"));
+  QCOMPARE(rule1->pattern(), QLatin1String("Star Wars"));
+  QCOMPARE(rule1->function(), Tellico::FilterRule::FuncEquals);
+
   Tellico::Filter filter(Tellico::Filter::MatchAny);
   filter.append(rule1);
   QVERIFY(filter.matches(entry));
@@ -84,6 +88,7 @@ void FilterTest::testFilter() {
   Tellico::FilterRule* rule3 = new Tellico::FilterRule(QLatin1String("title"),
                                                        QLatin1String("Sta[rt]"),
                                                        Tellico::FilterRule::FuncRegExp);
+  QCOMPARE(rule3->pattern(), QLatin1String("Sta[rt]"));
   filter.clear();
   filter.append(rule3);
   QVERIFY(filter.matches(entry));
@@ -137,6 +142,7 @@ void FilterTest::testFilter() {
   Tellico::FilterRule* rule6 = new Tellico::FilterRule(QLatin1String("date"),
                                                        QLatin1String("2011-10-24"),
                                                        Tellico::FilterRule::FuncAfter);
+  QCOMPARE(rule6->pattern(), QLatin1String("2011-10-24"));
   filter.clear();
   filter.append(rule6);
   QVERIFY(filter.matches(entry));
