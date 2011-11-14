@@ -59,15 +59,6 @@ public:
 
   void clear();
   void refresh();
-  void showEntries(const Data::EntryList& entries);
-  /**
-   * Adds a new list item showing the details for a entry.
-   *
-   * @param entry A pointer to the entry
-   */
-  virtual void    addEntries(Data::EntryList entries);
-  virtual void modifyEntries(Data::EntryList entries);
-  virtual void removeEntries(Data::EntryList entries);
 
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 

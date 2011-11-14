@@ -105,22 +105,6 @@ void EntryIconView::refresh() {
   sourceModel()->reset();
 }
 
-void EntryIconView::showEntries(const Tellico::Data::EntryList& entries_) {
-  sourceModel()->setEntries(entries_);
-}
-
-void EntryIconView::addEntries(Tellico::Data::EntryList entries_) {
-  sourceModel()->addEntries(entries_);
-}
-
-void EntryIconView::modifyEntries(Tellico::Data::EntryList entries_) {
-  sourceModel()->modifyEntries(entries_);
-}
-
-void EntryIconView::removeEntries(Tellico::Data::EntryList entries_) {
-  sourceModel()->removeEntries(entries_);
-}
-
 void EntryIconView::slotDoubleClicked(const QModelIndex& index_) {
   Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
   if(entry) {
