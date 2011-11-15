@@ -179,7 +179,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   }
 
   // always hide tables and paragraphs
-  for(int ncol = 0; ncol < header()->count(); ++ncol) {
+  for(int ncol = 0; ncol < coll_->fields().count(); ++ncol) {
     Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     if(field) {
       if(field->type() == Data::Field::Table || field->type() == Data::Field::Para) {
