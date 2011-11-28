@@ -40,7 +40,15 @@
 #include <kparts/componentfactory.h>
 #include <kregexpeditorinterface.h>
 #include <kiconloader.h>
+
+// KDateComboBox was new in KDE 4.7
+// use a local copy if building in an earlier version
+#include <kdeversion.h>
+#if KDE_IS_VERSION(4,7,0)
 #include <kdatecombobox.h>
+#else
+#include "../gui/kdatecombobox.h"
+#endif
 
 #include <QLayout>
 #include <QGroupBox>
