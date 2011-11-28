@@ -31,7 +31,7 @@ include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
-find_package(KDE4 4.7.0 REQUIRED)
+find_package(KDE4 4.2.0 REQUIRED)
 include(KDE4Defaults)
 include(MacroLibrary)
 include(MacroBoolTo01)
