@@ -125,9 +125,11 @@ void KDateComboBoxPrivate::initDateWidget()
         q->setMaxVisibleItems(0);
     }
 
+    q->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     q->addItem(m_date.formatDate(m_displayFormat));
     q->setCurrentIndex(0);
-    q->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    q->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    q->blockSignals(false);
 
     m_dateMenu->clear();
 
@@ -216,6 +218,15 @@ void KDateComboBoxPrivate::parseDate()
 void KDateComboBoxPrivate::enterDate(const QDate &date)
 {
     q->setDate(date);
+    // Re-add the combo box item in order to retain the correct widget width
+    q->blockSignals(true);
+    q->clear();
+    q->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+    q->addItem(m_date.formatDate(m_displayFormat));
+    q->setCurrentIndex(0);
+    q->setSizeAdjustPolicy(QComboBox::AdjustToContentsOnFirstShow);
+    q->blockSignals(false);
+
     m_dateMenu->hide();
     warnDate();
     emit q->dateEntered(m_date.date());
@@ -256,7 +267,6 @@ KDateComboBox::KDateComboBox(QWidget *parent)
     setEditable(true);
     setMaxVisibleItems(1);
     setInsertPolicy(QComboBox::NoInsert);
-    setSizeAdjustPolicy(QComboBox::AdjustToContents);
     d->m_datePicker->installEventFilter(this);
     d->initDateWidget();
     d->updateDateWidget();
@@ -456,7 +466,7 @@ void KDateComboBox::keyPressEvent(QKeyEvent *keyEvent)
         break;
     default:
         KComboBox::keyPressEvent(keyEvent);
-	return;
+        return;
     }
     if (temp.isValid() && temp >= d->m_minDate && temp <= d->m_maxDate) {
         d->enterDate(temp);
