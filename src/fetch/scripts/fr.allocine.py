@@ -235,23 +235,23 @@ class AlloCineParser:
 
 		# Define some regexps
 		self.__regExps = {
-			'title' 	: '<div class="titlebar">.*?<h1.*?>(?P<title>.+?)</h1>',
-			'dirs'		: """alis.*?par.*?<a.*?>(?P<step1>.+?)</a>""",
-			'nat'		: 'Long-m.*?(?P<nat>.+?)\.',
-			'genres' 	: 'Genre :(?P<step1>.+?)<br />',
-			'studio' 	: 'Distributeur :(?P<step1>.+?)<br />',
-			'time' 		: 'Dur.*?e :.*?(?P<hours>[0-9])h *(?P<mins>[0-9]*).*?Ann',
-			'year' 		: 'Ann.*?e de production :.*?<a.*?>(?P<year>[0-9]{4})</a>',
-			'otitle' 	: 'Titre original :.*?<span.*?>(?P<otitle>.+?)</span>',
-			'plot'		: 'Synopsis : </span>(?P<plot>.*?)</p>',
-			'image'		: '<em class="imagecontainer">.*?<img src=\'(?P<image>http://images.allocine.fr/.+?)\'.?',
+			'title' 	: '<div class="titlebar.*?<span.*?>(?P<title>.+?)</span>',
+			'dirs'		: """alis.*?par.*?<a.*?><span.*?>(?P<step1>.+?)</span></a>""",
+			'nat'		: 'Nationalit.*?</span>(?P<nat>.+?)</div',
+			'genres' 	: 'Genre</span>(?P<step1>.+?)</div>',
+			'studio' 	: 'Distributeur</th>(?P<step1>.+?)<td',
+			'time' 		: 'Dur.*?e *?:*?.*?(?P<hours>[0-9])h *(?P<mins>[0-9]*).*?Ann',
+			'year' 		: 'Ann.*?e de production.*?<span.*?>(?P<year>[0-9]{4})</span>',
+			'otitle' 	: 'Titre original *?:*?.*?<td>(?P<otitle>.+?)</td>',
+			'plot'		: '<p itemprop="description">(?P<plot>.*?)</p>',
+			'image'		: '<div class="poster">.*?<img src=\'(?P<image>http://images.allocine.fr/.+?)\'.?',
 		}
 
 		self.__castRegExps = {
-			'roleactor'		: '<div class="contenzone">.*?<a href="/personne/.*?">(.*?)</a>.*?<p>.*?R.*?: (?P<role>.*?)</p>.*?<div class="spacer"',
-			'prods'			: '<td>.*?Producteur.*?</td>.*?<td>.*?<a href="/personne/.*?">(.*?)</a>',
-			'scens'			: '<td>.*?nariste.*?</td>.*?<td>.*?<a href="/personne/.*?">(.*?)</a>',
-			'comps'			: '<td>.*?Compositeur.*?</td>.*?<td>.*?<a href="/personne/.*?">(.*?)</a>',
+			'roleactor'		: '<li.*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p>.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
+			'prods'			  : '<td>[\r\n\t]*Producteur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
+			'scens'			  : '<td>[\r\n\t]*Sc.*?nariste[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
+			'comps'			  : '<td>[\r\n\t]*Compositeur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
 		}
 
 		self.__domTree = BasicTellicoDOM()
@@ -322,19 +322,19 @@ class AlloCineParser:
 						data[name].append(d.strip())
 
 				elif name == 'nat':
-					natList = re.findall(r'<a.*?>(.*?)</a>', matches[name].group(name))
+					natList = re.findall(r'<span class=".*?">(.*?)</span>', matches[name].group('nat'))
 					data[name] = []
 					for d in natList:
 						data[name].append(d.strip().capitalize())
 
 				elif name == 'genres':
-					genresList = re.findall(r'<a.*?>(.*?)</a>', matches[name].group('step1'))
+					genresList = re.findall(r'<span itemprop="genre">(.*?)</span>', matches[name].group('step1'))
 					data[name] = []
 					for d in genresList:
 						data[name].append(d.strip().capitalize())
 
 				elif name == 'studio':
-					studiosList = re.findall(r'<a.*?>(.*?)</a>', matches[name].group('step1'))
+					studiosList = re.findall(r'<span itemprop="productionCompany">(.*?)</span>', matches[name].group('step1'))
 					data[name] = []
 					for d in studiosList:
 						data[name].append(d.strip())
@@ -395,11 +395,11 @@ class AlloCineParser:
 		data['comps'] = []
 
 		# Actors
-		subset = re.search(r'Acteurs, r.*$', self.__data, re.S | re.I)
+		subset = re.search(r'Acteurs et actrices.*$', self.__data, re.S | re.I)
 		if not subset: return data
 		subset = subset.group(0)
 		roleactor = re.findall(self.__castRegExps['roleactor'], subset, re.S | re.I)
-		for ra in roleactor[:-1]:
+		for ra in roleactor:
 			data['actors'].append(ra[0])
 			data['actors'].append(re.sub(r'([\r\n\t]+)', '', ra[1]))
 
