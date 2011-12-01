@@ -1,3 +1,7 @@
+2011-11-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated fetcher for Allocine.fr.
+
 2011-10-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Added filter rules for dates before and after.

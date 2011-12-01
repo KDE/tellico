@@ -75,14 +75,16 @@ void AllocineFetcherTest::testTitle() {
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Superman Returns"));
   QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("Bryan Singer"));
+  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Jon Peters; Gilbert Adler; Bryan Singer; Lorne Orleans"));
   QCOMPARE(entry->field(QLatin1String("studio")), QLatin1String("Warner Bros. France"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2006"));
-//  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Fantastique; Action"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Fantastique; Action"));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("Américain; Australien"));
   QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("154"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Clark Kent / Superman::Brandon Routh"));
-  QCOMPARE(castList.size(), 10);
+  QCOMPARE(castList.size(), 8);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
@@ -110,6 +112,8 @@ void AllocineFetcherTest::testTitleAccented() {
 
   Tellico::Data::EntryPtr entry = m_results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Opération Tonnerre"));
+  QCOMPARE(entry->field(QLatin1String("titre-original")), QLatin1String("Thunderball"));
+  QCOMPARE(entry->field(QLatin1String("studio")), QLatin1String(""));
 }
 
 void AllocineFetcherTest::testTitleAccentRemoved() {
