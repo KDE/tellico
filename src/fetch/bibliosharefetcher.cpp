@@ -37,7 +37,7 @@
 #include <QVBoxLayout>
 
 namespace {
-  static const char* BIBLIOSHARE_BASE_URL = "http://www.biblioshare.org//BNCServices/BNCServices.asmx/";
+  static const char* BIBLIOSHARE_BASE_URL = "http://www.biblioshare.org/BNCServices/BNCServices.asmx/";
   static const char* BIBLIOSHARE_TOKEN = "nsnqwebh87kstlty";
 }
 
@@ -107,7 +107,7 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
     if(!isbn.isEmpty()) {
       isbn = ISBNValidator::isbn13(isbn);
       isbn.remove(QLatin1Char('-'));
-      
+
       KUrl imageUrl(BIBLIOSHARE_BASE_URL);
       imageUrl.addPath(QLatin1String("Images"));
       imageUrl.addQueryItem(QLatin1String("Token"), m_token);
