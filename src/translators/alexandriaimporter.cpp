@@ -128,7 +128,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       QString alexValue = line.section(QLatin1Char(':'), 1).trimmed();
       clean(alexValue);
 
-      // Alexandria uses "n/a for empty values, and it is translated
+      // Alexandria uses "n/a" for empty values, and it is translated
       // only thing we can do is check for english value and continue
       if(alexValue == QLatin1String("n/a") || alexValue == QLatin1String("false")) {
         continue;
@@ -182,6 +182,24 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
           }
         }
       } else if(alexField == QLatin1String("notes")) {
+        if(alexValue.startsWith(QLatin1Char('|'))) {
+          QRegExp spaces(QLatin1String("^ +"));
+          line = ts.readLine();
+          if(line.indexOf(spaces) > -1) {
+            alexValue.clear();
+            int spaceCount = spaces.matchedLength();
+            QRegExp begin(QString::fromLatin1("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
+            while(!line.isNull() && line.indexOf(begin) > -1) {
+              line.remove(begin);
+              alexValue += clean(line) + QLatin1Char('\n');
+              line = ts.readLine();
+            }
+            alexValue.chop(1); // remove last newline char
+            alexValue.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
+          }
+          readNextLine = false;
+        }
+
         entry->setField(comments, alexValue);
 
       // now try by name then title

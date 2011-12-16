@@ -1,3 +1,7 @@
+2011-12-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed importing of multi-line notes from Alexandria (Bug 289022).
+
 2011-11-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated fetcher for Allocine.fr.

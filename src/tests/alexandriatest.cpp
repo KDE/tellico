@@ -59,7 +59,11 @@ void AlexandriaTest::testImport() {
   // should be translated somehow
   QCOMPARE(coll->title(), QL1("My Books"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QCOMPARE(entry->field("title"), QL1("The Hallowed Hunt"));
+  QCOMPARE(entry->field("comments"), QL1("first line<br/>second line"));
+
+  entry = coll->entryById(2);
   QCOMPARE(entry->field("title"), QL1("Life Together"));
   QCOMPARE(entry->field("author"), QL1("Dietrich Bonhoeffer; My Other Author"));
   // translated
@@ -70,6 +74,7 @@ void AlexandriaTest::testImport() {
   QCOMPARE(entry->field("rating"), QL1("3"));
   QCOMPARE(entry->field("read"), QL1("true"));
   QCOMPARE(entry->field("loaned"), QL1(""));
+  QVERIFY(!entry->field("comments").isEmpty());
 
   KTempDir outputDir;
 

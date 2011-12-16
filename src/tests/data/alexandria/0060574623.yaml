@@ -4,7 +4,9 @@ authors:
 title: "The Hallowed Hunt"
 edition: "Hardback"
 isbn: "0060574623"
-notes: ""
+notes: |-
+  first line
+  second line
 publisher: "Eos"
 publishing_year: "2005"
 rating: 4
