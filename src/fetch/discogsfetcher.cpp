@@ -43,7 +43,7 @@
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
-  static const char* DISCOGS_API_URL = "http://www.discogs.com";
+  static const char* DISCOGS_API_URL = "http://api.discogs.com";
   static const char* DISCOGS_API_KEY = "de6cb96534";
 }
 
@@ -93,6 +93,7 @@ KUrl DiscogsFetcher::searchUrl() {
 
     case Person:
       u.setPath(QString::fromLatin1("/artist/%1").arg(request().value));
+      u.addQueryItem(QLatin1String("releases"), QLatin1String("1"));
       break;
 
     case Keyword:
@@ -161,7 +162,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHookData(Data::EntryPtr entry_
 
 #if 0
   myWarning() << "Remove output debug from discogsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test2.xml"));
+  QFile f(QLatin1String("/tmp/test-discogs2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec(QTextCodec::codecForName("UTF-8"));
