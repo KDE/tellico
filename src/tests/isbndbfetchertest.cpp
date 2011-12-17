@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,18 +28,17 @@
 #include "isbndbfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/isbndbfetcher.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( ISBNdbFetcherTest, GUI )
 
-ISBNdbFetcherTest::ISBNdbFetcherTest() : m_loop(this) {
+ISBNdbFetcherTest::ISBNdbFetcherTest() : AbstractFetcherTest() {
 }
 
 void ISBNdbFetcherTest::initTestCase() {
@@ -53,17 +52,11 @@ void ISBNdbFetcherTest::testIsbn() {
                                        QLatin1String("0789312239"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-//  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("this is venice"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Miroslav Sasek"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-7893-1223-9"));
@@ -78,17 +71,11 @@ void ISBNdbFetcherTest::testIsbn13() {
                                        QLatin1String("9780596004361"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-//  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("C Pocket Reference"));
 }
 
@@ -97,18 +84,8 @@ void ISBNdbFetcherTest::testMultipleIsbn() {
                                        QLatin1String("0789312239; 9780596000486"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-
-  job->start();
-  m_loop.exec();
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QEXPECT_FAIL("", "ISBNdb fetcher does not yet support searching for multiple ISBNs", Continue);
-  QCOMPARE(m_results.size(), 2);
-}
-
-void ISBNdbFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
+  QCOMPARE(results.size(), 2);
 }

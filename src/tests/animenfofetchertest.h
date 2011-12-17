@@ -25,15 +25,9 @@
 #ifndef ANIMENFOFETCHERTEST_H
 #define ANIMENFOFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
-#include <QHash>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class AnimenfoFetcherTest : public QObject {
+class AnimenfoFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   AnimenfoFetcherTest();
@@ -43,12 +37,6 @@ private Q_SLOTS:
   void testMegami();
   void testHachimitsu();
   void testGhost();
- 
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

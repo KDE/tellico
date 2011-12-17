@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,26 +22,43 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CITEBASEFETCHERTEST_H
-#define CITEBASEFETCHERTEST_H
+#undef QT_NO_CAST_FROM_ASCII
 
 #include "abstractfetchertest.h"
+#include "abstractfetchertest.moc"
 
-#include <QHash>
+#include "../fetch/fetcherjob.h"
 
-class KJob;
+#include <QDebug>
+#include <QNetworkInterface>
 
-class CitebaseFetcherTest : public AbstractFetcherTest {
-Q_OBJECT
-public:
-  CitebaseFetcherTest();
+AbstractFetcherTest::AbstractFetcherTest() : QObject(), m_loop(this), m_hasNetwork(false) {
+  foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
+    if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
+//      qDebug() << net.humanReadableName();
+      m_hasNetwork = true;
+      break;
+    }
+  }
+}
 
-private Q_SLOTS:
-  void initTestCase();
-  void testArxivID();
+Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,
+                                                      const Tellico::Fetch::FetchRequest& request,
+                                                      int maxResults) {
+  // don't use 'this' as job parent, it crashes
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  connect(job, SIGNAL(result(KJob*)), SLOT(slotResult(KJob*)));
 
-private:
-  QHash<QString, QString> m_fieldValues;
-};
+  if(maxResults > 0) {
+    job->setMaximumResults(maxResults);
+  }
 
-#endif
+  job->start();
+  m_loop.exec();
+  return m_results;
+}
+
+void AbstractFetcherTest::slotResult(KJob* job_) {
+  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
+  m_loop.quit();
+}

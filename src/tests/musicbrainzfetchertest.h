@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,11 @@
 #ifndef MUSICBRAINZFETCHERTEST_H
 #define MUSICBRAINZFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
+#include <QHash>
 
-class KJob;
-
-class MusicBrainzFetcherTest : public QObject {
+class MusicBrainzFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   MusicBrainzFetcherTest();
@@ -43,11 +40,7 @@ private Q_SLOTS:
   void testPerson();
   void testKeyword();
 
-  void slotResult(KJob* job);
-
 private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
   QHash<QString, QString> m_fieldValues;
 };
 

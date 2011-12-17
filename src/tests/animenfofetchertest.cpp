@@ -28,7 +28,6 @@
 #include "animenfofetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/animenfofetcher.h"
 #include "../entry.h"
 #include "../collections/videocollection.h"
@@ -40,7 +39,7 @@
 
 QTEST_KDEMAIN( AnimenfoFetcherTest, GUI )
 
-AnimenfoFetcherTest::AnimenfoFetcherTest() : m_loop(this) {
+AnimenfoFetcherTest::AnimenfoFetcherTest() : AbstractFetcherTest() {
 }
 
 void AnimenfoFetcherTest::initTestCase() {
@@ -60,17 +59,12 @@ void AnimenfoFetcherTest::testMegami() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->field("title"), QLatin1String("Aa! Megami-sama!: Together Forever"));
@@ -94,17 +88,12 @@ void AnimenfoFetcherTest::testHachimitsu() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->field("title"), QLatin1String("Hachimitsu to Clover"));
@@ -138,17 +127,12 @@ void AnimenfoFetcherTest::testGhost() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->field("title"), QLatin1String("Kokaku Kido Tai"));
@@ -160,9 +144,4 @@ void AnimenfoFetcherTest::testGhost() {
   QCOMPARE(entry->field("alttitle"), QLatin1String("Ghost in the Shell"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field("animenfo").isEmpty());
-}
-
-void AnimenfoFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

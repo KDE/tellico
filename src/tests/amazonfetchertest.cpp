@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,7 +28,6 @@
 #include "amazonfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/amazonfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
@@ -42,7 +41,7 @@
 
 QTEST_KDEMAIN( AmazonFetcherTest, GUI )
 
-AmazonFetcherTest::AmazonFetcherTest() : m_loop(this), m_hasConfigFile(false)
+AmazonFetcherTest::AmazonFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
     , m_config(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config", KConfig::SimpleConfig) {
 }
 
@@ -116,16 +115,11 @@ void AmazonFetcherTest::testTitle() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QVERIFY(!results.isEmpty());
 
-  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues.value(resultName));
   while(i.hasNext()) {
     i.next();
@@ -214,16 +208,11 @@ void AmazonFetcherTest::testIsbn() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 2);
 
-  QCOMPARE(m_results.size(), 2);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues.value(resultName));
   while(i.hasNext()) {
     i.next();
@@ -273,16 +262,11 @@ void AmazonFetcherTest::testUpc() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QVERIFY(!results.isEmpty());
 
-  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues.value(resultName));
   while(i.hasNext()) {
     i.next();
@@ -340,9 +324,4 @@ void AmazonFetcherTest::testUpc_data() {
                                 << static_cast<int>(Tellico::Data::Collection::Video)
                                 << QString::fromLatin1("5050582560985")
                                 << QString::fromLatin1("pacteDesLoups");
-}
-
-void AmazonFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

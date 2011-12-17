@@ -28,7 +28,6 @@
 #include "doubanfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/doubanfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
@@ -37,11 +36,11 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( DoubanFetcherTest, GUI )
 
-DoubanFetcherTest::DoubanFetcherTest() : m_loop(this) {
+DoubanFetcherTest::DoubanFetcherTest() : AbstractFetcherTest() {
 }
 
 void DoubanFetcherTest::initTestCase() {
@@ -58,16 +57,11 @@ void DoubanFetcherTest::testBookTitle() {
                                        QString::fromUtf8("大设计 列纳德·蒙洛迪诺"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Book);
@@ -91,16 +85,11 @@ void DoubanFetcherTest::testISBN() {
                                        QLatin1String("9787535765444"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Book);
@@ -124,16 +113,11 @@ void DoubanFetcherTest::testVideo() {
                                        QString::fromUtf8("钢铁侠"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Video);
@@ -156,16 +140,11 @@ void DoubanFetcherTest::testMusic() {
                                        QString::fromUtf8("Top Gun Original Motion Picture"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Album);
@@ -181,9 +160,4 @@ void DoubanFetcherTest::testMusic() {
   QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 //  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
-}
-
-void DoubanFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

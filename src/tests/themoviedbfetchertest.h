@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,11 @@
 #ifndef THEMOVIEDBFETCHERTEST_H
 #define THEMOVIEDBFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
+#include <QHash>
 
-class KJob;
-
-class TheMovieDBFetcherTest : public QObject {
+class TheMovieDBFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   TheMovieDBFetcherTest();
@@ -43,11 +40,7 @@ private Q_SLOTS:
   void testTitleFr();
   void testPerson();
 
-  void slotResult(KJob* job);
-
 private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
   QHash<QString, QString> m_fieldValues;
 };
 

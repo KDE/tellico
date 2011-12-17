@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,14 +28,13 @@
 #include "openlibraryfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/openlibraryfetcher.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
 QTEST_KDEMAIN( OpenLibraryFetcherTest, GUI )
 
-OpenLibraryFetcherTest::OpenLibraryFetcherTest() : m_loop(this) {
+OpenLibraryFetcherTest::OpenLibraryFetcherTest() : AbstractFetcherTest() {
 }
 
 void OpenLibraryFetcherTest::initTestCase() {
@@ -47,17 +46,11 @@ void OpenLibraryFetcherTest::testIsbn() {
                                        QLatin1String("0789312239"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-//  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("This is Venice"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("M. Sasek"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-7893-1223-9"));
@@ -76,17 +69,11 @@ void OpenLibraryFetcherTest::testIsbn13() {
                                        QLatin1String("9780596004361"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-//  QVERIFY(!m_results.isEmpty());
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("C Pocket Reference"));
 }
 
@@ -95,17 +82,7 @@ void OpenLibraryFetcherTest::testMultipleIsbn() {
                                        QLatin1String("0789312239; 9780596000486"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OpenLibraryFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 2);
-}
-
-void OpenLibraryFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
+  QCOMPARE(results.size(), 2);
 }

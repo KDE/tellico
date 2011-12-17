@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,18 +28,17 @@
 #include "discogsfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/discogsfetcher.h"
 #include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( DiscogsFetcherTest, GUI )
 
-DiscogsFetcherTest::DiscogsFetcherTest() : m_loop(this) {
+DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest() {
 }
 
 void DiscogsFetcherTest::initTestCase() {
@@ -54,17 +53,12 @@ void DiscogsFetcherTest::testTitle() {
                                        QLatin1String("Anywhere But Home"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QVERIFY(m_results.size() > 0);
+  QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
-  for(int i = 0; i < m_results.size(); ++i) {
-    Tellico::Data::EntryPtr test = m_results.at(i);
+  for(int i = 0; i < results.size(); ++i) {
+    Tellico::Data::EntryPtr test = results.at(i);
     if(test->field(QLatin1String("artist")).toLower() == QLatin1String("evanescence")) {
       entry = test;
       break;
@@ -86,17 +80,11 @@ void DiscogsFetcherTest::testPerson() {
                                        QLatin1String("Evanescence"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
@@ -108,25 +96,14 @@ void DiscogsFetcherTest::testKeyword() {
                                        QLatin1String("Fallen Evanescence"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Fallen"));
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
-}
-
-void DiscogsFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

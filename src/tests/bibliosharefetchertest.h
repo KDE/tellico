@@ -25,15 +25,11 @@
 #ifndef BIBLIOSHAREFETCHERTEST_H
 #define BIBLIOSHAREFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
+
 #include <QHash>
 
-#include "../datavectors.h"
-
-class KJob;
-
-class BiblioShareFetcherTest : public QObject {
+class BiblioShareFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   BiblioShareFetcherTest();
@@ -43,12 +39,8 @@ private Q_SLOTS:
   void testIsbn();
   void testIsbn13();
 
-  void slotResult(KJob* job);
-
 private:
-  QEventLoop m_loop;
   QHash<QString, QString> m_fieldValues;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

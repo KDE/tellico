@@ -25,15 +25,9 @@
 #ifndef DARKHORSEFETCHERTEST_H
 #define DARKHORSEFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
-#include <QHash>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class DarkHorseFetcherTest : public QObject {
+class DarkHorseFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   DarkHorseFetcherTest();
@@ -41,12 +35,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testComic();
-
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

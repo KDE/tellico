@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,11 @@
 #ifndef FREEBASEFETCHERTEST_H
 #define FREEBASEFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
+#include <QHash>
 
-class KJob;
-
-class FreebaseFetcherTest : public QObject {
+class FreebaseFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   FreebaseFetcherTest();
@@ -53,11 +50,7 @@ private Q_SLOTS:
   void testGameTitle();
   void testBoardGameTitle();
 
-  void slotResult(KJob* job);
-
 private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
   QHash<QString, QHash<QString, QString> > m_fieldValues;
 };
 

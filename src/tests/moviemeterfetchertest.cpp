@@ -28,18 +28,17 @@
 #include "moviemeterfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/moviemeterfetcher.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( MovieMeterFetcherTest, GUI )
 
-MovieMeterFetcherTest::MovieMeterFetcherTest() : m_loop(this) {
+MovieMeterFetcherTest::MovieMeterFetcherTest() : AbstractFetcherTest() {
 }
 
 void MovieMeterFetcherTest::initTestCase() {
@@ -59,17 +58,12 @@ void MovieMeterFetcherTest::testPerson() {
                                        QLatin1String("George Miller"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  qDebug() << "found" << m_results.size();
-  QVERIFY(m_results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
-  for(int i = 0; i < m_results.size(); ++i) {
-    Tellico::Data::EntryPtr test = m_results.at(i);
+//  qDebug() << "found" << m_results.size();
+  QVERIFY(results.size() > 0);
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
+  foreach(Tellico::Data::EntryPtr test, results) {
     if(test->field(QLatin1String("title")).toLower().contains(QLatin1String("man from snowy river"))) {
       entry = test;
       break;
@@ -96,16 +90,11 @@ void MovieMeterFetcherTest::testKeyword() {
                                        QLatin1String("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(2);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 2);
 
-  QCOMPARE(m_results.size(), 2);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QHashIterator<QString, QString> i(m_fieldValues);
@@ -126,22 +115,12 @@ void MovieMeterFetcherTest::testKeywordCzech() {
                                        tmav);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(2);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
   QCOMPARE(entry->title(), tmav);
-}
-
-void MovieMeterFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }
