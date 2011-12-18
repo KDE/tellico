@@ -97,11 +97,16 @@ void WineComFetcher::continueSearch() {
 }
 
 void WineComFetcher::doSearch() {
+  if(m_apiKey.isEmpty()) {
+    myDebug() << "No API key";
+    stop();
+    return;
+  }
+
 //  myDebug() << "value = " << value_;
 
   KUrl u(WINECOM_BASE_URL);
-  // change beta for a different versionn
-  u.setPath(QLatin1String("/api/beta/service.svc/XML/catalog"));
+  u.setPath(QLatin1String("/api/beta2/service.svc/XML/catalog"));
   u.addQueryItem(QLatin1String("apikey"), m_apiKey);
   u.addQueryItem(QLatin1String("offset"), QString::number((m_page-1) * WINECOM_RETURNS_PER_REQUEST));
   u.addQueryItem(QLatin1String("size"), QString::number(WINECOM_RETURNS_PER_REQUEST));
@@ -195,11 +200,11 @@ void WineComFetcher::slotComplete(KJob*) {
   // assume result is always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
+  imp.setOptions(imp.options() & ~Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
 
   int count = 0;
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     if(m_numResults >= m_limit) {
       break;
     }

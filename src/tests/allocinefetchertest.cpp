@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,7 +28,6 @@
 #include "allocinefetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/execexternalfetcher.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
@@ -40,7 +39,7 @@
 
 QTEST_KDEMAIN( AllocineFetcherTest, GUI )
 
-AllocineFetcherTest::AllocineFetcherTest() : m_loop(this) {
+AllocineFetcherTest::AllocineFetcherTest() : AbstractFetcherTest() {
 }
 
 void AllocineFetcherTest::initTestCase() {
@@ -62,17 +61,11 @@ void AllocineFetcherTest::testTitle() {
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Superman Returns"));
   QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("Bryan Singer"));
   QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Jon Peters; Gilbert Adler; Bryan Singer; Lorne Orleans"));
@@ -90,8 +83,8 @@ void AllocineFetcherTest::testTitle() {
 }
 
 void AllocineFetcherTest::testTitleAccented() {
-  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                        QLatin1String("Opération Tonnerre"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("Opération Tonnerre"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
@@ -101,24 +94,19 @@ void AllocineFetcherTest::testTitleAccented() {
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Fetch::FetcherJob* job2 = new Tellico::Fetch::FetcherJob(0, fetcher, request2);
-  connect(job2, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job2->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job2->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Opération Tonnerre"));
   QCOMPARE(entry->field(QLatin1String("titre-original")), QLatin1String("Thunderball"));
   QCOMPARE(entry->field(QLatin1String("studio")), QLatin1String(""));
 }
 
 void AllocineFetcherTest::testTitleAccentRemoved() {
-  Tellico::Fetch::FetchRequest request2(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                        QLatin1String("Operation Tonnerre"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("Operation Tonnerre"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/fr.allocine.py.spec", KConfig::SimpleConfig);
@@ -128,16 +116,11 @@ void AllocineFetcherTest::testTitleAccentRemoved() {
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Fetch::FetcherJob* job2 = new Tellico::Fetch::FetcherJob(0, fetcher, request2);
-  connect(job2, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job2->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job2->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Opération Tonnerre"));
 }
 
@@ -153,22 +136,11 @@ void AllocineFetcherTest::testPlotQuote() {
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Goldfinger"));
   QVERIFY(!entry->field(QLatin1String("plot")).contains(QLatin1String("&quot;")));
-}
-
-void AllocineFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

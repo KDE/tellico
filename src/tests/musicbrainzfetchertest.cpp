@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,18 +28,17 @@
 #include "musicbrainzfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/musicbrainzfetcher.h"
 #include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( MusicBrainzFetcherTest, GUI )
 
-MusicBrainzFetcherTest::MusicBrainzFetcherTest() : m_loop(this) {
+MusicBrainzFetcherTest::MusicBrainzFetcherTest() : AbstractFetcherTest() {
 }
 
 void MusicBrainzFetcherTest::initTestCase() {
@@ -60,17 +59,11 @@ void MusicBrainzFetcherTest::testTitle() {
                                        m_fieldValues.value(QLatin1String("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();
@@ -86,17 +79,11 @@ void MusicBrainzFetcherTest::testKeyword() {
                                        m_fieldValues.value(QLatin1String("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();
@@ -112,17 +99,11 @@ void MusicBrainzFetcherTest::testPerson() {
                                        m_fieldValues.value(QLatin1String("artist")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QVERIFY(m_results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
-  for(int i = 0; i < m_results.size(); ++i) {
-    Tellico::Data::EntryPtr test = m_results.at(i);
+  QVERIFY(results.size() > 0);
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
+  foreach(Tellico::Data::EntryPtr test, results) {
     if(test->field(QLatin1String("title")).toLower() == m_fieldValues.value(QLatin1String("title"))) {
       entry = test;
       break;
@@ -140,9 +121,4 @@ void MusicBrainzFetcherTest::testPerson() {
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-}
-
-void MusicBrainzFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

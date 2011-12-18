@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,9 @@
 #ifndef BOARDGAMEGEEKFETCHERTEST_H
 #define BOARDGAMEGEEKFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class BoardGameGeekFetcherTest : public QObject {
+class BoardGameGeekFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   BoardGameGeekFetcherTest();
@@ -40,12 +35,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testTitle();
-
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

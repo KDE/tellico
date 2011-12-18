@@ -28,14 +28,13 @@
 #include "googlebookfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/googlebookfetcher.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
 QTEST_KDEMAIN( GoogleBookFetcherTest, GUI )
 
-GoogleBookFetcherTest::GoogleBookFetcherTest() : m_loop(this) {
+GoogleBookFetcherTest::GoogleBookFetcherTest() : AbstractFetcherTest() {
 }
 
 void GoogleBookFetcherTest::initTestCase() {
@@ -47,16 +46,10 @@ void GoogleBookFetcherTest::testTitle() {
                                        QLatin1String("Practical RDF"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  compareEntry(m_results.at(0));
+  QCOMPARE(results.size(), 1);
+  compareEntry(results.at(0));
 }
 
 void GoogleBookFetcherTest::testIsbn() {
@@ -64,16 +57,10 @@ void GoogleBookFetcherTest::testIsbn() {
                                        QLatin1String("0-596-00263-7"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  compareEntry(m_results.at(0));
+  QCOMPARE(results.size(), 1);
+  compareEntry(results.at(0));
 }
 
 void GoogleBookFetcherTest::testAuthor() {
@@ -81,21 +68,17 @@ void GoogleBookFetcherTest::testAuthor() {
                                        QLatin1String("Shelley Powers"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-
-  job->start();
-  m_loop.exec();
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   Tellico::Data::EntryPtr entry;
-  foreach(Tellico::Data::EntryPtr testEntry, m_results) {
+  foreach(Tellico::Data::EntryPtr testEntry, results) {
     if(testEntry->title() == QLatin1String("Practical RDF")) {
       entry = testEntry;
       break;
     }
   }
   QVERIFY(entry);
+  compareEntry(entry);
 }
 
 void GoogleBookFetcherTest::testKeyword() {
@@ -103,16 +86,10 @@ void GoogleBookFetcherTest::testKeyword() {
                                        QLatin1String("Practical RDF"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  compareEntry(m_results.at(0));
+  QCOMPARE(results.size(), 1);
+  compareEntry(results.at(0));
 }
 
 void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
@@ -125,10 +102,4 @@ void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field(QLatin1String("keyword")), QLatin1String("Computers"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
-}
-
-
-void GoogleBookFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

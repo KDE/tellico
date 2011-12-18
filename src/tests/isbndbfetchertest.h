@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,15 +25,11 @@
 #ifndef ISBNDBFETCHERTEST_H
 #define ISBNDBFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
+
 #include <QHash>
 
-#include "../datavectors.h"
-
-class KJob;
-
-class ISBNdbFetcherTest : public QObject {
+class ISBNdbFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   ISBNdbFetcherTest();
@@ -44,12 +40,8 @@ private Q_SLOTS:
   void testIsbn13();
   void testMultipleIsbn();
 
-  void slotResult(KJob* job);
-
 private:
-  QEventLoop m_loop;
   QHash<QString, QString> m_fieldValues;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

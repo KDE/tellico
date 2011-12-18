@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,7 +28,6 @@
 #include "imdbfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/imdbfetcher.h"
 #include "../entry.h"
 #include "../collections/videocollection.h"
@@ -40,7 +39,7 @@
 
 QTEST_KDEMAIN( ImdbFetcherTest, GUI )
 
-ImdbFetcherTest::ImdbFetcherTest() : m_loop(this) {
+ImdbFetcherTest::ImdbFetcherTest() : AbstractFetcherTest() {
 }
 
 void ImdbFetcherTest::initTestCase() {
@@ -60,18 +59,12 @@ void ImdbFetcherTest::testSnowyRiver() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
@@ -104,18 +97,12 @@ void ImdbFetcherTest::testAsterix() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Astérix aux jeux olympiques"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Thomas Langmann; Frédéric Forestier"));
@@ -129,17 +116,12 @@ void ImdbFetcherTest::testBodyDouble() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Body Double");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QLatin1String("Body Double"));
   QCOMPARE(entry->field("director"), QLatin1String("Brian De Palma"));
@@ -151,17 +133,12 @@ void ImdbFetcherTest::testMary() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "There's Something About Mary");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
   // the first entry had better be the right one
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("director"), QLatin1String("Peter Farrelly; Bobby Farrelly"));
   QCOMPARE(entry->field("writer"), QLatin1String("John J. Strauss; Ed Decter"));
@@ -172,15 +149,10 @@ void ImdbFetcherTest::testOkunen() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "46-okunen no koi");
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->setMaximumResults(1);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
   QCOMPARE(entry->field("genre"), QLatin1String("Drama"));
@@ -188,9 +160,4 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(entry->field("writer"), QLatin1String("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-}
-
-void ImdbFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

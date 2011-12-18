@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,26 +22,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CITEBASEFETCHERTEST_H
-#define CITEBASEFETCHERTEST_H
+#ifndef WINECOMFETCHERTEST_H
+#define WINECOMFETCHERTEST_H
 
 #include "abstractfetchertest.h"
 
-#include <QHash>
+#include <KConfig>
 
-class KJob;
-
-class CitebaseFetcherTest : public AbstractFetcherTest {
+class WineComFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
-  CitebaseFetcherTest();
+  WineComFetcherTest();
 
 private Q_SLOTS:
   void initTestCase();
-  void testArxivID();
+  void testKeyword();
 
 private:
-  QHash<QString, QString> m_fieldValues;
+  bool m_hasConfigFile;
+  KConfig m_config;
 };
 
 #endif

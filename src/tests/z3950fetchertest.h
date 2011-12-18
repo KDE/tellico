@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,9 @@
 #ifndef Z3950FETCHERTEST_H
 #define Z3950FETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class Z3950FetcherTest : public QObject {
+class Z3950FetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   Z3950FetcherTest();
@@ -42,12 +37,6 @@ private Q_SLOTS:
   void testTitle();
   void testIsbn();
   void testADS();
-
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

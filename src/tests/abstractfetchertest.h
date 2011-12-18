@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,26 +22,44 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef CITEBASEFETCHERTEST_H
-#define CITEBASEFETCHERTEST_H
+#ifndef ABSTRACTFETCHERTEST_H
+#define ABSTRACTFETCHERTEST_H
 
-#include "abstractfetchertest.h"
+#include <QObject>
+#include <QEventLoop>
 
-#include <QHash>
+#include "../datavectors.h"
+#include "../fetch/fetcher.h"
+#include "../fetch/fetchrequest.h"
 
 class KJob;
 
-class CitebaseFetcherTest : public AbstractFetcherTest {
+class AbstractFetcherTest : public QObject {
 Q_OBJECT
 public:
-  CitebaseFetcherTest();
+  AbstractFetcherTest();
+
+protected:
+  bool hasNetwork() const { return m_hasNetwork; }
+  Tellico::Data::EntryList doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,
+                                   const Tellico::Fetch::FetchRequest& request,
+                                   int maxResults = 0 /* means no limit */);
 
 private Q_SLOTS:
-  void initTestCase();
-  void testArxivID();
+  void slotResult(KJob* job);
 
 private:
-  QHash<QString, QString> m_fieldValues;
+  QEventLoop m_loop;
+  bool m_hasNetwork;
+  Tellico::Data::EntryList m_results;
 };
+
+#define DO_FETCH(fetcher, request) \
+  hasNetwork() ? doFetch(fetcher, request) : Tellico::Data::EntryList(); \
+    if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
+
+#define DO_FETCH1(fetcher, request, limit) \
+  hasNetwork() ? doFetch(fetcher, request, limit) : Tellico::Data::EntryList(); \
+    if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
 #endif

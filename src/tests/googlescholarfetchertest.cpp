@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,18 +28,17 @@
 #include "googlescholarfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/googlescholarfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../translators/bibtexhandler.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( GoogleScholarFetcherTest, GUI )
 
-GoogleScholarFetcherTest::GoogleScholarFetcherTest() : m_loop(this) {
+GoogleScholarFetcherTest::GoogleScholarFetcherTest() : AbstractFetcherTest() {
 }
 
 void GoogleScholarFetcherTest::initTestCase() {
@@ -63,26 +62,18 @@ void GoogleScholarFetcherTest::testTitle() {
                                        QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
+  QVERIFY(!results.isEmpty());
 
-//  QCOMPARE(m_results.size(), 1);
-  QVERIFY(!m_results.isEmpty());
+  Tellico::Data::EntryPtr entry = results.at(0);
 
-  if(!m_results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = m_results.at(0);
-
-    QHashIterator<QString, QString> i(m_fieldValues);
-    while(i.hasNext()) {
-      i.next();
-      QString result = entry->field(i.key()).toLower();
-      Tellico::BibtexHandler::cleanText(result);
-      QCOMPARE(result, i.value().toLower());
-    }
+  QHashIterator<QString, QString> i(m_fieldValues);
+  while(i.hasNext()) {
+    i.next();
+    QString result = entry->field(i.key()).toLower();
+    Tellico::BibtexHandler::cleanText(result);
+    QCOMPARE(result, i.value().toLower());
   }
 }
 
@@ -91,18 +82,12 @@ void GoogleScholarFetcherTest::testAuthor() {
                                        QLatin1Char('"') + m_fieldValues.value("author") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-//  QCOMPARE(m_results.size(), 1);
-  QVERIFY(!m_results.isEmpty());
+  QVERIFY(!results.isEmpty());
 
   Tellico::Data::EntryPtr entry;
-  foreach(Tellico::Data::EntryPtr test, m_results) {
+  foreach(Tellico::Data::EntryPtr test, results) {
     if(test->title().toLower() == m_fieldValues.value(QLatin1String("title")).toLower()) {
       entry = test;
       break;
@@ -119,9 +104,4 @@ void GoogleScholarFetcherTest::testAuthor() {
     Tellico::BibtexHandler::cleanText(result);
     QCOMPARE(result, i.value().toLower());
   }
-}
-
-void GoogleScholarFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

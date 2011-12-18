@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,44 +24,55 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "giantbombfetchertest.h"
-#include "giantbombfetchertest.moc"
+#include "winecomfetchertest.h"
+#include "winecomfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/giantbombfetcher.h"
-#include "../collections/gamecollection.h"
+#include "../fetch/winecomfetcher.h"
+#include "../collections/winecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
 #include <KStandardDirs>
+#include <KConfigGroup>
 
-QTEST_KDEMAIN( GiantBombFetcherTest, GUI )
+QTEST_KDEMAIN( WineComFetcherTest, GUI )
 
-GiantBombFetcherTest::GiantBombFetcherTest() : AbstractFetcherTest() {
+WineComFetcherTest::WineComFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
+    , m_config(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config", KConfig::SimpleConfig) {
 }
 
-void GiantBombFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
+void WineComFetcherTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::WineCollection> registerWine(Tellico::Data::Collection::Wine, "wine");
   // since we use the importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
+
+  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config");
 }
 
-void GiantBombFetcherTest::testKeyword() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Halo 3: ODST"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GiantBombFetcher(this));
+void WineComFetcherTest::testKeyword() {
+  const QString groupName = QLatin1String("WineCom");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Wine.com settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Wine, Tellico::Fetch::Keyword,
+                                       QLatin1String("1999 Eola Hills Pinot Noir"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::WineComFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Halo 3: ODST"));
-  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
-  QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-Person Shooter; Action"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
+  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Eola Hills Wine Cellars"));
+  QCOMPARE(entry->field(QLatin1String("appellation")), QLatin1String("Willamette Valley"));
+  QCOMPARE(entry->field(QLatin1String("vintage")), QLatin1String("1999"));
+  QCOMPARE(entry->field(QLatin1String("varietal")), QLatin1String("Pinot Noir"));
+  QCOMPARE(entry->field(QLatin1String("type")), QLatin1String("Red Wine"));
+  QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
 }

@@ -1,3 +1,8 @@
+2011-12-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Refactored fetcher tests to check for network access before running
+	* Updated Discogs fetcher to use API v2
+
 2011-12-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed importing of multi-line notes from Alexandria (Bug 289022).

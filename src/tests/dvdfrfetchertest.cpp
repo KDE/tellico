@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,18 +28,17 @@
 #include "dvdfrfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/dvdfrfetcher.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( DVDFrFetcherTest, GUI )
 
-DVDFrFetcherTest::DVDFrFetcherTest() : m_loop(this) {
+DVDFrFetcherTest::DVDFrFetcherTest() : AbstractFetcherTest() {
 }
 
 void DVDFrFetcherTest::initTestCase() {
@@ -65,17 +64,11 @@ void DVDFrFetcherTest::testTitle() {
                                        QLatin1String("Le Pacte des loups"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-  job->setMaximumResults(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();
@@ -93,16 +86,11 @@ void DVDFrFetcherTest::testUPC() {
                                        QLatin1String("3259119636120"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  job->start();
-  m_loop.exec();
+  QCOMPARE(results.size(), 1);
 
-  QCOMPARE(m_results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(0);
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();
@@ -113,9 +101,4 @@ void DVDFrFetcherTest::testUPC() {
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
-}
-
-void DVDFrFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

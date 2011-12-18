@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,15 +25,9 @@
 #ifndef GCSTARFETCHERTEST_H
 #define GCSTARFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
-#include <QHash>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class GCstarFetcherTest : public QObject {
+class GCstarFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   GCstarFetcherTest();
@@ -41,12 +35,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testSnowyRiver();
-
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif

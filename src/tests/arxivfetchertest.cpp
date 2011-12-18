@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,17 +28,16 @@
 #include "arxivfetchertest.moc"
 #include "qtest_kde.h"
 
-#include "../fetch/fetcherjob.h"
 #include "../fetch/arxivfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 
 QTEST_KDEMAIN( ArxivFetcherTest, GUI )
 
-ArxivFetcherTest::ArxivFetcherTest() : m_loop(this) {
+ArxivFetcherTest::ArxivFetcherTest() : AbstractFetcherTest() {
 }
 
 void ArxivFetcherTest::initTestCase() {
@@ -60,18 +59,13 @@ void ArxivFetcherTest::testArxivTitle() {
                                        QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
-
-  job->start();
-  m_loop.exec();
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QEXPECT_FAIL("", "Exact title searches are currently failing", Continue);
-  QCOMPARE(m_results.size(), 1);
+  QCOMPARE(results.size(), 1);
 
-  if(!m_results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = m_results.at(0);
+  if(!results.isEmpty()) {
+    Tellico::Data::EntryPtr entry = results.at(0);
 
     QHashIterator<QString, QString> i(m_fieldValues);
     while(i.hasNext()) {
@@ -86,15 +80,10 @@ void ArxivFetcherTest::testArxivID() {
                                        "arxiv:" + m_fieldValues.value("arxiv"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
 
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
@@ -108,15 +97,10 @@ void ArxivFetcherTest::testArxivIDVersioned() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID, arxivVersioned);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
-  // don't use 'this' as job parent, it crashes
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), this, SLOT(slotResult(KJob*)));
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  job->start();
-  m_loop.exec();
-
-  QCOMPARE(m_results.size(), 1);
-  Tellico::Data::EntryPtr entry = m_results.at(0);
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
   // id has version since original search included it
   QCOMPARE(entry->field("arxiv"), arxivVersioned);
 
@@ -126,9 +110,4 @@ void ArxivFetcherTest::testArxivIDVersioned() {
     if(i.key() == "arxiv") continue;
     QCOMPARE(entry->field(i.key()), i.value());
   }
-}
-
-void ArxivFetcherTest::slotResult(KJob* job_) {
-  m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
-  m_loop.quit();
 }

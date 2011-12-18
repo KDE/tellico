@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,14 +25,9 @@
 #ifndef GIANTBOMBFETCHERTEST_H
 #define GIANTBOMBFETCHERTEST_H
 
-#include <QObject>
-#include <QEventLoop>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class KJob;
-
-class GiantBombFetcherTest : public QObject {
+class GiantBombFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
   GiantBombFetcherTest();
@@ -40,12 +35,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testKeyword();
-
-  void slotResult(KJob* job);
-
-private:
-  QEventLoop m_loop;
-  Tellico::Data::EntryList m_results;
 };
 
 #endif
