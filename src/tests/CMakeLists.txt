@@ -187,6 +187,9 @@ TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(themoviedbfetchertest NOGUI themoviedbfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(themoviedbfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(winecomfetchertest NOGUI winecomfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(winecomfetchertest fetch ${TELLICO_TEST_LIBS})
+
 IF( YAZ_FOUND )
     KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})

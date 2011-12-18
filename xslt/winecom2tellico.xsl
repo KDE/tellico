@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:wine="http://schemas.datacontract.org/2004/07/"
                 xmlns:str="http://exslt.org/strings"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="str exsl"
@@ -30,62 +29,66 @@
     <field name="_default"/>
     <field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </fields>
-   <xsl:apply-templates select="wine:Catalog/wine:Products/wine:List/wine:Product[wine:Type='Wine']"/>
+   <xsl:apply-templates select="Catalog/Products/List/Product[Type='Wine']"/>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="wine:Product">
+<xsl:template match="Product">
  <entry>
 
   <appellation>
-   <xsl:value-of select="wine:Appellation/wine:Name"/>
+   <xsl:value-of select="Appellation/Name"/>
   </appellation>
 
   <url>
-   <xsl:value-of select="wine:Url"/>
+   <xsl:value-of select="Url"/>
   </url>
 
   <vintage>
-   <xsl:value-of select="wine:Vintage"/>
+   <xsl:value-of select="Vintage"/>
+   <xsl:if test="string-length(Vintage) = 0">
+     <!-- guess and grab first 4 digits in name -->
+    <xsl:value-of select="substring(translate(Name, translate(Name, '0123456789', ''), ''), 0, 5)"/>
+   </xsl:if>
   </vintage>
 
   <producer>
-   <xsl:value-of select="wine:Vineyard/wine:Name"/>
+   <xsl:value-of select="Vineyard/Name"/>
   </producer>
 
   <varietal>
-   <xsl:value-of select="wine:Varietal/wine:Name"/>
+   <xsl:value-of select="Varietal/Name"/>
   </varietal>
 
   <description>
-   <xsl:value-of select="wine:Description"/>
+   <xsl:value-of select="Description"/>
   </description>
 
   <type i18n="true">
    <xsl:choose>
-    <xsl:when test="wine:Varietal/wine:wineType/wine:Id = 123">
+    <xsl:when test="Varietal/WineType/Id = 123">
      <xsl:text>Sparkling Wine</xsl:text>
     </xsl:when>
-    <xsl:when test="wine:Varietal/wine:wineType/wine:Id = 124">
+    <xsl:when test="Varietal/WineType/Id = 124">
      <xsl:text>Red Wine</xsl:text>
     </xsl:when>
-    <xsl:when test="wine:Varietal/wine:wineType/wine:Id = 125">
+    <xsl:when test="Varietal/WineType/Id = 125">
      <xsl:text>White Wine</xsl:text>
     </xsl:when>
    </xsl:choose>
   </type>
 
   <keywords>
-   <xsl:for-each select="wine:ProductAttributes/wine:ProductAttribute">
+   <xsl:for-each select="ProductAttributes/ProductAttribute">
     <keyword>
-     <xsl:value-of select="wine:Name"/>
+     <xsl:value-of select="Name"/>
     </keyword>
    </xsl:for-each>
   </keywords>
 
   <label>
-   <xsl:value-of select="wine:Labels/wine:Label[1]/wine:Url"/>
+   <xsl:value-of select="Labels/Label[1]/Url"/>
   </label>
 
  </entry>
