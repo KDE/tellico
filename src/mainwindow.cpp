@@ -103,6 +103,8 @@
 #include <QTimer>
 #include <QMetaObject> // needed for copy, cut, paste slots
 
+#include <unistd.h>
+
 namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
