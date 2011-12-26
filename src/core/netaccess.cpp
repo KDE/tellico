@@ -36,6 +36,8 @@
 
 #include <QEventLoop>
 
+#include <unistd.h>
+
 static QStringList* tmpfiles = 0;
 
 QString Tellico::NetAccess::s_lastErrorMessage;
