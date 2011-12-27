@@ -373,3 +373,22 @@ void CollectionTest::testDtd_data() {
   QTest::newRow("file")   << int(Tellico::Data::Collection::File);
   QTest::newRow("board")  << int(Tellico::Data::Collection::BoardGame);
 }
+
+void CollectionTest::testDuplicate() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+
+  QCOMPARE(coll->entryCount(), 0);
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QLatin1String("title"), QLatin1String("title1"));
+  coll->addEntries(entry1);
+  QCOMPARE(coll->entryCount(), 1);
+
+  // this is how Controller::slotCopySelectedEntries() does it
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(*entry1));
+  coll->addEntries(entry2);
+  QCOMPARE(coll->entryCount(), 2);
+
+  QCOMPARE(entry1->title(), entry2->title());
+  QVERIFY(entry1->id() != entry2->id());
+}
