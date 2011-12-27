@@ -35,11 +35,27 @@
 #include "../collections/collectioninitializer.h"
 #include "../translators/tellicoxmlexporter.h"
 #include "../images/imagefactory.h"
+#include "../document.h"
 
 #include <KStandardDirs>
 #include <KProcess>
 
 QTEST_KDEMAIN_CORE( CollectionTest )
+
+class TestResolver : public Tellico::MergeConflictResolver {
+public:
+  TestResolver(Tellico::MergeConflictResolver::Result ret) : m_ret(ret) {};
+  Tellico::MergeConflictResolver::Result resolve(Tellico::Data::EntryPtr,
+                                                 Tellico::Data::EntryPtr,
+                                                 Tellico::Data::FieldPtr,
+                                                 const QString& value1 = QString(),
+                                                 const QString& value2 = QString()) {
+    return m_ret;
+  }
+
+private:
+  Tellico::MergeConflictResolver::Result m_ret;
+};
 
 void CollectionTest::initTestCase() {
   Tellico::ImageFactory::init();
@@ -391,4 +407,41 @@ void CollectionTest::testDuplicate() {
 
   QCOMPARE(entry1->title(), entry2->title());
   QVERIFY(entry1->id() != entry2->id());
+
+  bool ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
+  QCOMPARE(ret, true);
+
+  TestResolver cancelMerge(Tellico::MergeConflictResolver::CancelMerge);
+  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
+  QCOMPARE(ret, true);
+
+  entry2->setField(QLatin1String("title"), QLatin1String("title2"));
+
+  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
+  QCOMPARE(ret, false);
+  QCOMPARE(entry1->title(), QLatin1String("title1"));
+  QCOMPARE(entry2->title(), QLatin1String("title2"));
+
+  TestResolver keepFirst(Tellico::MergeConflictResolver::KeepFirst);
+  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepFirst);
+  QCOMPARE(ret, true);
+  QCOMPARE(entry1->title(), QLatin1String("title1"));
+  // the second entry never gets changed
+  QCOMPARE(entry2->title(), QLatin1String("title2"));
+
+  entry2->setField(QLatin1String("title"), QLatin1String("title2"));
+
+  TestResolver keepSecond(Tellico::MergeConflictResolver::KeepSecond);
+  ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepSecond);
+  QCOMPARE(ret, true);
+  QCOMPARE(entry1->title(), QLatin1String("title2"));
+  QCOMPARE(entry2->title(), QLatin1String("title2"));
+
+  entry1->setField(QLatin1String("title"), QLatin1String("title1"));
+
+  // returns true, ("merge successful") even if values were not merged
+  ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
+  QCOMPARE(ret, true);
+  QCOMPARE(entry1->title(), QLatin1String("title1"));
+  QCOMPARE(entry2->title(), QLatin1String("title2"));
 }

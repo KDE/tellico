@@ -82,10 +82,10 @@ void EntryMerger::slotStartNext() {
     bool match = cleanMerge(baseEntry, it);
     if(!match) {
       int score = baseEntry->collection()->sameEntry(baseEntry, it);
-      match = score >= EntryComparison::ENTRY_PERFECT_MATCH;
+      match = score >= EntryComparison::ENTRY_GOOD_MATCH;
     }
     if(match) {
-      bool merge_ok = Data::Document::mergeEntry(baseEntry, it, false /*overwrite*/, m_resolver);
+      bool merge_ok = Data::Document::mergeEntry(baseEntry, it, m_resolver);
       if(merge_ok) {
         m_entriesToRemove.append(it);
         m_entriesLeft.removeAll(it);
@@ -116,9 +116,15 @@ void EntryMerger::slotCleanup() {
 
 bool EntryMerger::cleanMerge(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2) const {
   // figure out if there's a clean merge possible
-  foreach(Data::FieldPtr it, e1->collection()->fields()) {
-    QString val1 = e1->field(it);
-    QString val2 = e2->field(it);
+  foreach(Data::FieldPtr field, e1->collection()->fields()) {
+    // do not care about id and dates
+    if(field->name() == QLatin1String("id") ||
+       field->name() == QLatin1String("cdate") ||
+       field->name() == QLatin1String("mdate")) {
+      continue;
+    }
+    QString val1 = e1->field(field);
+    QString val2 = e2->field(field);
     if(val1 != val2 && !val1.isEmpty() && !val2.isEmpty()) {
       return false;
     }
