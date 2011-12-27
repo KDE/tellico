@@ -1,3 +1,9 @@
+2011-12-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with merging entries. Entry IDs will never be different
+	so don't warn the user (Bug 289346).
+	* Fixed bug with Cancel not working in the Entry Merge dialog.
+
 2011-12-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Refactored fetcher tests to check for network access before running

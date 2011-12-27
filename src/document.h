@@ -177,7 +177,7 @@ public:
   void removeImagesNotInCollection(EntryList entries, EntryList entriesToKeep);
   void cancelImageWriting() { m_cancelImageWriting = true; }
 
-  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, bool overwrite, MergeConflictResolver* resolver=0);
+  static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, MergeConflictResolver* resolver=0);
 
 public slots:
   /**
