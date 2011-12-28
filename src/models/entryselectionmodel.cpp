@@ -24,6 +24,7 @@
 
 #include "entryselectionmodel.h"
 #include "models.h"
+#include "../tellico_debug.h"
 
 #include <QSet>
 
