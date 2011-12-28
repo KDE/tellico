@@ -766,7 +766,7 @@ void MainWindow::initConnections() {
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
   // use the EntrySelectionModel as a proxy so when entries get selected in the group view
   // the edit dialog and entry view are updated
-  static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_groupView->selectionModel());
+  proxySelect->addSelectionProxy(m_groupView->selectionModel());
 }
 
 void MainWindow::initFileOpen(bool nofile_) {
