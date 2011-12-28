@@ -60,7 +60,7 @@ using Tellico::Controller;
 Controller* Controller::s_self = 0;
 
 Controller::Controller(Tellico::MainWindow* parent_)
-    : QObject(parent_), m_mainWindow(parent_), m_working(false), m_widgetWithSelection(0) {
+    : QObject(parent_), m_mainWindow(parent_), m_working(false) {
 }
 
 void Controller::addObserver(Tellico::Observer* obs) {
@@ -289,15 +289,11 @@ void Controller::slotClearSelection() {
   m_working = false;
 }
 
-void Controller::slotUpdateSelection(QWidget* widget_, const Tellico::Data::EntryList& entries_) {
+void Controller::slotUpdateSelection(const Tellico::Data::EntryList& entries_) {
   if(m_working) {
     return;
   }
   m_working = true;
-
-  if(widget_) {
-    m_widgetWithSelection = widget_;
-  }
 
   m_selectedEntries = entries_;
   updateActions();
@@ -405,8 +401,7 @@ void Controller::slotCopySelectedEntries() {
     entries.append(Data::EntryPtr(new Data::Entry(*it)));
   }
   Kernel::self()->addEntries(entries, false);
-  m_widgetWithSelection = 0; // KDE bug 231125: probably should figure out how to really fix it...
-  slotUpdateSelection(0, old);
+  slotUpdateSelection(old);
 }
 
 void Controller::blockAllSignals(bool block_) const {
@@ -516,14 +511,14 @@ void Controller::plugUpdateMenu(KMenu* popup_) {
 }
 
 void Controller::updateActions() const {
-  bool emptySelection = m_selectedEntries.isEmpty();
+  const bool emptySelection = m_selectedEntries.isEmpty();
   m_mainWindow->stateChanged(QLatin1String("empty_selection"),
                              emptySelection ? KXMLGUIClient::StateNoReverse : KXMLGUIClient::StateReverse);
   foreach(QAction* action, m_mainWindow->m_fetchActions) {
     action->setEnabled(!emptySelection);
   }
   //only enable citation items when it's a bibliography
-  bool isBibtex = Kernel::self()->collectionType() == Data::Collection::Bibtex;
+  const bool isBibtex = Kernel::self()->collectionType() == Data::Collection::Bibtex;
   if(isBibtex) {
     m_mainWindow->action("cite_clipboard")->setEnabled(!emptySelection);
     m_mainWindow->action("cite_lyxpipe")->setEnabled(!emptySelection);

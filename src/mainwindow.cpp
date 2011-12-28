@@ -754,6 +754,8 @@ void MainWindow::initConnections() {
 
   EntrySelectionModel* proxySelect = static_cast<EntrySelectionModel*>(m_iconView->selectionModel());
   connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
+          Controller::self(), SLOT(slotUpdateSelection(Tellico::Data::EntryList)));
+  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
           m_editDialog, SLOT(setContents(Tellico::Data::EntryList)));
 
   connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
@@ -1369,7 +1371,7 @@ void MainWindow::slotEditSelectAll() {
 }
 
 void MainWindow::slotEditDeselect() {
-  Controller::self()->slotUpdateSelection(0, Data::EntryList());
+  Controller::self()->slotUpdateSelection(Data::EntryList());
 }
 
 void MainWindow::slotConfigToolbar() {
