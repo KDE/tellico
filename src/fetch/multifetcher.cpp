@@ -114,7 +114,7 @@ void MultiFetcher::slotResult(Tellico::Fetch::FetchResult* result) {
   foreach(Data::EntryPtr entry, m_entries) {
     if(entry->collection()->sameEntry(entry, newEntry) > EntryComparison::ENTRY_GOOD_MATCH) {
       // same entry, so instead of adding a new result, just merge it
-      Data::Document::mergeEntry(entry, newEntry, false);
+      Data::Document::mergeEntry(entry, newEntry);
       alreadyFound = true;
       break;
     }
