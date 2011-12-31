@@ -27,17 +27,13 @@
 #include "../utils/fieldcomparison.h"
 #include "../field.h"
 #include "../entry.h"
-#include "../tellico_debug.h"
 
 using Tellico::EntrySortModel;
 
 EntrySortModel::EntrySortModel(QObject* parent) : AbstractSortModel(parent) {
   setDynamicSortFilter(true);
   setSortLocaleAware(true);
-}
-
-EntrySortModel::~EntrySortModel() {
-  clear();
+  connect(this, SIGNAL(modelReset()), SLOT(clearData()));
 }
 
 void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {
@@ -51,19 +47,13 @@ Tellico::FilterPtr EntrySortModel::filter() const {
   return m_filter;
 }
 
-void EntrySortModel::clear() {
-  m_filter = FilterPtr();
-  qDeleteAll(m_comparisons);
-  m_comparisons.clear();
-}
-
 bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) const {
   if(!m_filter) {
     return true;
   }
   QModelIndex index = sourceModel()->index(row_, 0, parent_);
   Q_ASSERT(index.isValid());
-  Data::EntryPtr entry = sourceModel()->data(index, EntryPtrRole).value<Data::EntryPtr>();
+  Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
   Q_ASSERT(entry);
   return m_filter->matches(entry);
 }
@@ -71,6 +61,17 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
   if(sortRole() != EntryPtrRole) {
     return AbstractSortModel::lessThan(left_, right_);
+  }
+  Data::EntryPtr leftEntry = left_.data(EntryPtrRole).value<Data::EntryPtr>();
+  Data::EntryPtr rightEntry = right_.data(EntryPtrRole).value<Data::EntryPtr>();
+  if(leftEntry.isNull()) {
+    if(!rightEntry.isNull()) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if(!leftEntry.isNull() && rightEntry.isNull()) {
+    return false;
   }
 
   QModelIndex left = left_;
@@ -82,35 +83,31 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
       return false;
     }
 
-    Data::EntryPtr leftEntry = left.model()->data(left, EntryPtrRole).value<Data::EntryPtr>();
-    Data::EntryPtr rightEntry = right.model()->data(right, EntryPtrRole).value<Data::EntryPtr>();
-    if(leftEntry && rightEntry) {
-      int res = comp->compare(leftEntry, rightEntry);
-      if(res == 0) {
-        switch (i) {
-          case 0:
-            left = left.model()->index(left.row(), secondarySortColumn());
-            right = right.model()->index(right.row(), secondarySortColumn());
-            break;
-          case 1:
-            left = left.model()->index(left.row(), tertiarySortColumn());
-            right = right.model()->index(right.row(), tertiarySortColumn());
-            break;
-          case 2:
-            return false;
-        }
-      } else {
-        return res < 0;
+    const int res = comp->compare(leftEntry, rightEntry);
+    if(res == 0) {
+      switch (i) {
+        case 0:
+          left = left.model()->index(left.row(), secondarySortColumn());
+          right = right.model()->index(right.row(), secondarySortColumn());
+          break;
+        case 1:
+          left = left.model()->index(left.row(), tertiarySortColumn());
+          right = right.model()->index(right.row(), tertiarySortColumn());
+          break;
+        case 2:
+          return false;
       }
     } else {
-      if(leftEntry.isNull() && !rightEntry.isNull()) {
-        return true;
-      } else {
-        return false;
-      }
+      return res < 0;
     }
   }
   return AbstractSortModel::lessThan(left_, right_);
+}
+
+void EntrySortModel::clearData() {
+  m_filter = FilterPtr();
+  qDeleteAll(m_comparisons);
+  m_comparisons.clear();
 }
 
 Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index_) const {

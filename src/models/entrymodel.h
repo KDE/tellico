@@ -57,7 +57,6 @@ public:
 
   void clear();
   void clearSaveState();
-  void reset();
   void setImagesAreAvailable(bool b);
 
   void    setEntries(const Data::EntryList& entries);

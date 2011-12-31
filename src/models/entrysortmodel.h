@@ -43,16 +43,16 @@ Q_OBJECT
 
 public:
   EntrySortModel(QObject* parent);
-  virtual ~EntrySortModel();
 
   void setFilter(FilterPtr filter);
   FilterPtr filter() const;
 
-  void clear();
-
 protected:
   virtual bool filterAcceptsRow(int source_row, const QModelIndex& source_parent) const;
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
+
+private slots:
+  void clearData();
 
 private:
   FieldComparison* getComparison(const QModelIndex& index) const;

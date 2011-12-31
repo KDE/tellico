@@ -77,14 +77,6 @@ EntryIconView::EntryIconView(QAbstractItemModel* model_, QWidget* parent_)
 EntryIconView::~EntryIconView() {
 }
 
-Tellico::EntrySortModel* EntryIconView::sortModel() const {
-  return static_cast<EntrySortModel*>(model());
-}
-
-Tellico::EntryModel* EntryIconView::sourceModel() const {
-  return static_cast<EntryModel*>(sortModel()->sourceModel());
-}
-
 void EntryIconView::setMaxAllowedIconWidth(int width_) {
   m_maxAllowedIconWidth = qBound(MIN_ENTRY_ICON_SIZE, width_, MAX_ENTRY_ICON_SIZE);
   QSize iconSize(m_maxAllowedIconWidth, m_maxAllowedIconWidth);
@@ -93,16 +85,6 @@ void EntryIconView::setMaxAllowedIconWidth(int width_) {
   QSize gridSize(m_maxAllowedIconWidth + 2*ENTRY_ICON_SIZE_PAD,
                  m_maxAllowedIconWidth + 3*(fontMetrics().lineSpacing() + ENTRY_ICON_SIZE_PAD));
   setGridSize(gridSize);
-
-  refresh();
-}
-
-void EntryIconView::clear() {
-  sourceModel()->clear();
-}
-
-void EntryIconView::refresh() {
-  sourceModel()->reset();
 }
 
 void EntryIconView::slotDoubleClicked(const QModelIndex& index_) {

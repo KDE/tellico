@@ -29,12 +29,14 @@
 #include "../document.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
+#include "../tellico_debug.h"
 
 #include <QPixmap>
 #include <QDateTime>
 
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
   if(!field_) {
+    myWarning() << "No field for creating a field comparison";
     return 0;
   }
   if(field_->type() == Data::Field::Image) {

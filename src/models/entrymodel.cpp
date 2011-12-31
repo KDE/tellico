@@ -257,25 +257,24 @@ bool EntryModel::setData(const QModelIndex& index_, const QVariant& value_, int 
 }
 
 void EntryModel::clear() {
+  beginResetModel();
   m_entries.clear();
   m_fields.clear();
   m_saveStates.clear();
   m_iconCache.clear();
+  endResetModel();
 }
 
 void EntryModel::clearSaveState() {
+  beginResetModel();
   m_saveStates.clear();
-  reset();
-}
-
-// make it public
-void EntryModel::reset() {
-  QAbstractItemModel::reset();
+  endResetModel();
 }
 
 void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
+  beginResetModel();
   m_entries = entries_;
-  reset();
+  endResetModel();
 }
 
 void EntryModel::addEntries(const Tellico::Data::EntryList& entries_) {
@@ -307,13 +306,12 @@ void EntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
 void EntryModel::setFields(const Tellico::Data::FieldList& fields_) {
   if(!m_fields.isEmpty()) {
     beginRemoveColumns(QModelIndex(), 0, m_fields.size()-1);
+    m_fields.clear();
     endRemoveColumns();
   }
   if(!fields_.isEmpty()) {
     beginInsertColumns(QModelIndex(), 0, fields_.size()-1);
-  }
-  m_fields = fields_;
-  if(!fields_.isEmpty()) {
+    m_fields = fields_;
     endInsertColumns();
   }
 }
@@ -349,8 +347,9 @@ void EntryModel::removeFields(const Tellico::Data::FieldList& fields_) {
 
 void EntryModel::setImagesAreAvailable(bool available_) {
   if(m_imagesAreAvailable != available_) {
+    beginResetModel();
     m_imagesAreAvailable = available_;
-    reset();
+    endResetModel();
   }
 }
 

@@ -177,7 +177,6 @@ void Controller::slotCollectionDeleted(Tellico::Data::CollPtr coll_) {
     m_mainWindow->m_loanView->slotReset();
   }
   m_mainWindow->m_detailedView->removeCollection(coll_);
-  m_mainWindow->m_iconView->clear();
   m_mainWindow->m_entryView->clear();
   blockAllSignals(false);
 
@@ -233,7 +232,6 @@ void Controller::addedField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPt
   foreach(Observer* obs, m_observers) {
     obs->addField(coll_, field_);
   }
-  m_mainWindow->m_iconView->refresh();
   m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
@@ -243,7 +241,6 @@ void Controller::removedField(Tellico::Data::CollPtr coll_, Tellico::Data::Field
   foreach(Observer* obs, m_observers) {
     obs->removeField(coll_, field_);
   }
-  m_mainWindow->m_iconView->refresh();
   m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
@@ -253,7 +250,6 @@ void Controller::modifiedField(Tellico::Data::CollPtr coll_, Tellico::Data::Fiel
   foreach(Observer* obs, m_observers) {
     obs->modifyField(coll_, oldField_, newField_);
   }
-  m_mainWindow->m_iconView->refresh();
   m_mainWindow->m_entryView->slotRefresh();
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->slotQueueFilter();
@@ -263,7 +259,6 @@ void Controller::reorderedFields(Tellico::Data::CollPtr coll_) {
   m_mainWindow->m_editDialog->setLayout(coll_);
   m_mainWindow->m_detailedView->reorderFields(coll_->fields());
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
-  m_mainWindow->m_iconView->refresh();
   m_mainWindow->m_entryView->slotRefresh();
 }
 
@@ -382,7 +377,6 @@ void Controller::slotRefreshField(Tellico::Data::FieldPtr field_) {
     m_mainWindow->m_groupView->populateCollection();
   }
   m_mainWindow->m_detailedView->slotRefresh();
-  m_mainWindow->m_iconView->refresh();
   m_mainWindow->m_entryView->slotRefresh();
 }
 

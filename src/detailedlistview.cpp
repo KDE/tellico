@@ -206,14 +206,12 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   m_loadingCollection = false;
   setUpdatesEnabled(true);
 
-  sortModel()->invalidate();
   header()->setSortIndicator(sortModel()->sortColumn(), sortModel()->sortOrder());
 }
 
 void DetailedListView::slotReset() {
   //clear() does not remove columns
   sourceModel()->clear();
-  sortModel()->clear();
 }
 
 void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {

@@ -41,9 +41,6 @@ namespace {
 
 namespace Tellico {
 
-class EntryModel;
-class EntrySortModel;
-
 /**
  * @author Robby Stephenson
  */
@@ -53,12 +50,6 @@ Q_OBJECT
 public:
   EntryIconView(QAbstractItemModel* model, QWidget* parent);
   ~EntryIconView();
-
-  EntrySortModel* sortModel() const;
-  EntryModel* sourceModel() const;
-
-  void clear();
-  void refresh();
 
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 

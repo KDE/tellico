@@ -45,6 +45,7 @@ namespace {
 
 Tellico::StringComparison* Tellico::StringComparison::create(Data::FieldPtr field_) {
   if(!field_) {
+    myWarning() << "No field for creating a string comparison";
     return 0;
   }
   if(field_->type() == Data::Field::Number || field_->type() == Data::Field::Rating) {
