@@ -59,7 +59,7 @@ void AnimenfoFetcherTest::testMegami() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
 
@@ -88,7 +88,7 @@ void AnimenfoFetcherTest::testHachimitsu() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
 
