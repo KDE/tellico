@@ -390,7 +390,6 @@ void CollectionTest::testDtd_data() {
   QTest::newRow("board")  << int(Tellico::Data::Collection::BoardGame);
 }
 
-
 void CollectionTest::testDuplicate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
 
