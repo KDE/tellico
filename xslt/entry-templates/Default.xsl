@@ -253,6 +253,7 @@
  <!-- write categories other than general and images -->
  <xsl:for-each select="$categories[. != $cat1 and
                        key('fieldsByCat',.)[1]/@type!=10]">
+  <xsl:if test="key('fieldsByCat', .)[@name != 'id' and @name != 'cdate' and @name != 'mdate']">
   <table width="50%" class="category">
    <tr class="category">
     <td colspan="2">
@@ -340,6 +341,7 @@
     </tr>
    </xsl:for-each>
   </table>
+  </xsl:if>
  </xsl:for-each>
 </xsl:template>
 
