@@ -84,15 +84,15 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   } else {
     m_clearButton->setIcon(SmallIcon(QLatin1String("edit-clear-locationbar-ltr")));
   }
-  m_clearButton->hide();
   connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearClicked()));
 
-  init();
+  // to keep the widget from resizing when the clear button is shown/hidden
+  // have a fixed width spacer to swap with
+  const int mw = m_clearButton->minimumSizeHint().width();
+  m_clearButton->setFixedWidth(mw);
+  m_clearSpacer = new QSpacerItem(mw, mw, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-  QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
-  if(l) {
-    l->addStretch(1);
-  }
+  init();
 }
 
 void RatingWidget::init() {
@@ -102,12 +102,18 @@ void RatingWidget::init() {
   for( ; i < m_total; ++i) {
     m_widgets.at(i)->setPixmap(m_pixOff);
   }
+  setUpdatesEnabled(false);
+
   QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
-  if(l) {
-    // move the clear button to right after the last star
-    l->removeWidget(m_clearButton);
-    l->insertWidget(i, m_clearButton);
-  }
+  // move the clear button to right after the last star
+  l->removeWidget(m_clearButton);
+  l->insertWidget(i, m_clearButton);
+  l->removeItem(m_clearSpacer);
+  l->insertSpacerItem(i+1, m_clearSpacer);
+  m_clearButton->hide();
+
+  setUpdatesEnabled(true);
+
   for( ; i < m_widgets.count(); ++i) {
     m_widgets.at(i)->setPixmap(QPixmap());
   }
@@ -168,12 +174,20 @@ void RatingWidget::mousePressEvent(QMouseEvent* event_) {
 
 void RatingWidget::enterEvent(QEvent* event_) {
   Q_UNUSED(event_);
+  setUpdatesEnabled(false);
   m_clearButton->show();
+  QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
+  l->removeItem(m_clearSpacer);
+  setUpdatesEnabled(true);
 }
 
 void RatingWidget::leaveEvent(QEvent* event_) {
   Q_UNUSED(event_);
+  setUpdatesEnabled(false);
   m_clearButton->hide();
+  QBoxLayout* l = ::qobject_cast<QBoxLayout*>(layout());
+  l->insertSpacerItem(m_total+1, m_clearSpacer);
+  setUpdatesEnabled(true);
 }
 
 void RatingWidget::clear() {
