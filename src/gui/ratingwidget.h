@@ -34,6 +34,7 @@
 #include <QPixmap>
 
 class QToolButton;
+class QSpacerItem;
 
 namespace Tellico {
   namespace Data {
@@ -80,6 +81,7 @@ private:
   Data::FieldPtr m_field;
   LabelList m_widgets;
   QToolButton* m_clearButton;
+  QSpacerItem* m_clearSpacer;
 
   int m_currIndex;
   int m_total;
