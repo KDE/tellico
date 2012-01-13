@@ -1,3 +1,7 @@
+2012-01-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.3.5.
+
 2011-12-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with merging entries. Entry IDs will never be different
