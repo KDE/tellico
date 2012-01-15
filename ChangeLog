@@ -1,5 +1,6 @@
-2012-01-13  Robby Stephenson  <robby@periapsis.org>
+2012-01-15  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed a crashing bug when using the scanner dialog.
 	* Released Tellico 2.3.5.
 
 2011-12-26  Robby Stephenson  <robby@periapsis.org>
