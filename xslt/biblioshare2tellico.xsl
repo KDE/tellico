@@ -66,7 +66,7 @@
 
   <binding i18n="true">
    <xsl:choose>
-    <xsl:when test="Format='Hardcover'">
+    <xsl:when test="contains(Format, 'Hardcover') or contains(Format, 'Hardback')">
      <xsl:text>Hardback</xsl:text>
     </xsl:when>
     <xsl:when test="contains(Format, 'Paperback')">
