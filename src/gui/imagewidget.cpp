@@ -55,6 +55,7 @@
 #include <QToolButton>
 #include <QActionGroup>
 #include <QTimer>
+#include <QSet>
 
 #ifdef HAVE_KSANE
 #include <libksane/ksane.h>
@@ -119,9 +120,13 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   QAction* selectedAction = 0;
   KService::List offers = KMimeTypeTrader::self()->query(QLatin1String("image/png"),
                                                          QLatin1String("Application"));
+  QSet<QString> offerNames;
   foreach(KService::Ptr service, offers) {
+    if(offerNames.contains(service->name())) {
+      continue;
+    }
+    offerNames.insert(service->name());
     QAction* action = m_editMenu->addAction(KIcon(service->icon()), service->name());
-    action->setCheckable(true);
     action->setData(QVariant::fromValue(service));
     grp->addAction(action);
     if(!selectedAction || editor == service->name()) {
@@ -129,7 +134,6 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
     }
   }
   if(selectedAction) {
-    selectedAction->setChecked(true);
     slotEditMenu(selectedAction);
     m_edit->setMenu(m_editMenu);
     connect(m_editMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotEditMenu(QAction*)));
