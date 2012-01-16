@@ -83,7 +83,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_iconSizeSlider->setPageStep(LARGE_INCREMENT_ICON_SIZE);
   m_iconSizeSlider->setValue(Config::maxIconSize());
   m_iconSizeSlider->setTracking(true);
-  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(Config::maxIconSize()));
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.", Config::maxIconSize()));
   hlay->addWidget(m_iconSizeSlider);
   connect(m_iconSizeSlider, SIGNAL(valueChanged(int)), SLOT(slotIconSizeSliderChanged(int)));
 
@@ -145,7 +145,7 @@ void ViewStack::slotIncreaseIconSizeButtonClicked() {
 void ViewStack::slotIconSizeSliderChanged(int size) {
   m_decreaseIconSizeButton->setEnabled(size > MIN_ENTRY_ICON_SIZE);
   m_increaseIconSizeButton->setEnabled(size < MAX_ENTRY_ICON_SIZE);
-  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(size));
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.", size));
   Config::setMaxIconSize(size);
   m_iconView->setMaxAllowedIconWidth(size);
 }

@@ -315,7 +315,7 @@ void TheMovieDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 }
 
 QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
-  return i18n("TheMovieDB (%1)").arg(m_langCombo->currentText());
+  return i18n("TheMovieDB (%1)", m_langCombo->currentText());
 }
 
 void TheMovieDBFetcher::ConfigWidget::slotLangChanged() {

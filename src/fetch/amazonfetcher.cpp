@@ -126,8 +126,8 @@ QString AmazonFetcher::source() const {
 }
 
 QString AmazonFetcher::attribution() const {
-  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.")
-         .arg(QLatin1String("https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html"));
+  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.",
+              QLatin1String("https://affiliate-program.amazon.com/gp/advertising/api/detail/agreement.html"));
 }
 
 bool AmazonFetcher::canFetch(int type) const {
