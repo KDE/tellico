@@ -122,4 +122,4 @@ GenericName[x-test]=xxCollection Managerxx
 GenericName[zh_CN]=收藏管理器
 GenericName[zh_TW]=收藏管理員
 MimeType=application/x-tellico;
-Categories=KDE;Office;Database;
+Categories=KDE;Qt;Office;Database;
