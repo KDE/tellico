@@ -82,7 +82,7 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
   m_iconSizeSlider->setPageStep(LARGE_INCREMENT_ICON_SIZE);
   m_iconSizeSlider->setValue(Config::maxIconSize());
   m_iconSizeSlider->setTracking(true);
-  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(Config::maxIconSize()));
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.", Config::maxIconSize()));
   addPermanentWidget(m_iconSizeSlider, 0);
   connect(m_iconSizeSlider, SIGNAL(valueChanged(int)), SLOT(slotIconSizeSliderChanged(int)));
 
@@ -173,7 +173,7 @@ void StatusBar::slotIncreaseIconSizeButtonClicked() {
 void StatusBar::slotIconSizeSliderChanged(int size) {
   m_decreaseIconSizeButton->setEnabled(size > MIN_ENTRY_ICON_SIZE);
   m_increaseIconSizeButton->setEnabled(size < MAX_ENTRY_ICON_SIZE);
-  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.").arg(size));
+  m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.", size));
   Config::setMaxIconSize(size);
   emit requestIconSizeChange(size);
 }

@@ -66,8 +66,8 @@ QString FilmasterFetcher::source() const {
 }
 
 QString FilmasterFetcher::attribution() const {
-  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.")
-         .arg(QLatin1String("http://filmaster.com/license/"));
+  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.",
+              QLatin1String("http://filmaster.com/license/"));
 }
 
 bool FilmasterFetcher::canSearch(FetchKey k) const {
