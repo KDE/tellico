@@ -119,16 +119,6 @@ void StatusBar::slotProgress(qulonglong progress_) {
 }
 
 void StatusBar::slotUpdate() {
-/*
-  myDebug() << m_progress->isShown();
-  if(m_progressBox->isEmpty()) {
-    QTimer::singleShot(0, m_progress, SLOT(hide()));
-//    m_progressBox->hide();
-  } else {
-    QTimer::singleShot(0, m_progress, SLOT(show()));
-//    m_progressBox->show();
-  }
-*/
 }
 
 #include "statusbar.moc"
