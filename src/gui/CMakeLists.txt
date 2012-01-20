@@ -34,9 +34,9 @@ SET(gui_STAT_SRCS
    )
 
 # The KDateComboBox class was added to KDE in version 4.7
-# If we're building under an earlier version, use a local copy
-IF(${KDE_VERSION} VERSION_LESS "4.6.99")
+# If we're building under KDE 4.6, use a local copy
+IF(${KDE_VERSION} VERSION_LESS "4.6.99" AND ${KDE_VERSION} VERSION_GREATER "4.5.99")
   LIST(APPEND gui_STAT_SRCS kdatecombobox.cpp)
-ENDIF(${KDE_VERSION} VERSION_LESS "4.6.99")
+ENDIF(${KDE_VERSION} VERSION_LESS "4.6.99" AND ${KDE_VERSION} VERSION_GREATER "4.5.99")
 
 KDE4_ADD_LIBRARY(gui STATIC ${gui_STAT_SRCS})
