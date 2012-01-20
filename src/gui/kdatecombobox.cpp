@@ -28,7 +28,7 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include "klocalizeddate.h"
+#include <klocalizeddate.h>
 #include <kcombobox.h>
 #include <kdatepicker.h>
 #include <kmessagebox.h>
