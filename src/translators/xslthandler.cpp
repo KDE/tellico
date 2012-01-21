@@ -162,10 +162,10 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
   bool utf8 = true; // XML defaults to utf-8
 
   // need to find out if utf-8 or not
-  const QDomNodeList childs = dom_.childNodes();
-  for(int j = 0; j < childs.count(); ++j) {
-    if(childs.item(j).isProcessingInstruction()) {
-      QDomProcessingInstruction pi = childs.item(j).toProcessingInstruction();
+  const QDomNodeList children = dom_.childNodes();
+  for(int j = 0; j < children.count(); ++j) {
+    if(children.item(j).isProcessingInstruction()) {
+      QDomProcessingInstruction pi = children.item(j).toProcessingInstruction();
       if(pi.data().toLower().contains(QLatin1String("encoding"))) {
         if(!pi.data().toLower().contains(QLatin1String("utf-8"))) {
           utf8 = false;
@@ -273,10 +273,10 @@ QString XSLTHandler::process() {
 
 //static
 QDomDocument& XSLTHandler::setLocaleEncoding(QDomDocument& dom_) {
-  const QDomNodeList childs = dom_.documentElement().childNodes();
-  for(int j = 0; j < childs.count(); ++j) {
-    if(childs.item(j).isElement() && childs.item(j).nodeName() == QLatin1String("xsl:output")) {
-      QDomElement e = childs.item(j).toElement();
+  const QDomNodeList children = dom_.documentElement().childNodes();
+  for(int j = 0; j < children.count(); ++j) {
+    if(children.item(j).isElement() && children.item(j).nodeName() == QLatin1String("xsl:output")) {
+      QDomElement e = children.item(j).toElement();
       const QString encoding = QLatin1String(QTextCodec::codecForLocale()->name());
       e.setAttribute(QLatin1String("encoding"), encoding);
       break;

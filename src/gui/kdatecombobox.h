@@ -305,7 +305,7 @@ public Q_SLOTS:
      * The @p dateMap is keyed by the date to be listed and the value is the
      * string to be displayed.  If you want the date to be displayed in the
      * default date format then the string should be null.  If you want a
-     * separator to be displayed then set the string to "seperator".
+     * separator to be displayed then set the string to "separator".
      *
      * @see dateMap()
      * @param dateMap the map of dates able to be selected

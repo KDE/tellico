@@ -576,7 +576,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("cite_lyxpipe"), citeMapper, SLOT(map()));
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
-  action->setIcon(KIcon(QLatin1String("lyx")));
+  action->setIcon(KIcon(QLatin1String("lyx"))); // krazy:exclude=iconnames
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
