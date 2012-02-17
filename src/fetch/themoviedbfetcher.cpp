@@ -135,6 +135,11 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
       m_total = e.text().toInt();
 //      myDebug() << "total = " << m_total;
     }
+    if(m_total == 0) {
+      myDebug() << "no results";
+      stop();
+      return;
+    }
 
     if(m_needPersonId) {
       m_total = -1;
@@ -153,7 +158,7 @@ void TheMovieDBFetcher::parseData(QByteArray& data_) {
         if(total > bestTotal) {
           bestTotal = total;
           finalPerson = person;
-          myDebug() << "New total:" << total;
+//          myDebug() << "New total:" << total;
         }
         person = person.nextSibling();
       }

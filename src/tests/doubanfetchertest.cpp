@@ -122,10 +122,10 @@ void DoubanFetcherTest::testVideo() {
 
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Video);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Iron Man"));
-  QCOMPARE(entry->field("year"), QLatin1String("2008"));
+  QCOMPARE(entry->field("title"), QLatin1String("Iron Man 2"));
+  QCOMPARE(entry->field("year"), QLatin1String("2010"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("乔恩·费儒"));
-  QCOMPARE(entry->field("running-time"), QLatin1String("126"));
+  QCOMPARE(entry->field("running-time"), QLatin1String("124"));
   QVERIFY(!entry->field(QLatin1String("genre")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("nationality")).isEmpty());
