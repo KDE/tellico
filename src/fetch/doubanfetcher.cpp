@@ -139,7 +139,7 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHookData(Data::EntryPtr entry_)
 
   const QString image = entry_->field(QLatin1String("cover"));
   if(image.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(KUrl(image), true);
+    const QString id = ImageFactory::addImage(KUrl(image), true /* quiet */);
     if(!id.isEmpty()) {
       entry_->setField(QLatin1String("cover"), id);
     }
