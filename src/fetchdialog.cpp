@@ -687,6 +687,9 @@ void FetchDialog::slotLoadISBNList() {
 }
 
 void FetchDialog::slotISBNTextChanged() {
+  if(!m_isbnTextEdit) {
+    return;
+  }
   const QValidator* val = m_valueLineEdit->validator();
   if(!val) {
     return;
