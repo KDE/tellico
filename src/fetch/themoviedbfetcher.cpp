@@ -208,6 +208,8 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHookData(Data::EntryPtr ent
 #endif
 
   Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     myWarning() << "no collection pointer";
