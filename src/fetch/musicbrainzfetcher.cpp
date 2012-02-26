@@ -197,6 +197,8 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   // assume always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     myDebug() << "no collection pointer";
@@ -258,8 +260,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 #endif
 
   Import::TellicoImporter imp(m_xsltHandler->applyStylesheet(output));
-  // hide image errors
-  imp.setOptions(imp.options() & ~Import::ImportShowImageErrors);
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
   if(!coll) {

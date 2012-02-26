@@ -163,6 +163,8 @@ Tellico::Data::EntryPtr DoubanFetcher::fetchEntryHookData(Data::EntryPtr entry_)
   // quiet
   const QString output = FileHandler::readXMLFile(KUrl(id), true /* true */);
   Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
   if(!coll) {

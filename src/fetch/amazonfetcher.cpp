@@ -499,6 +499,8 @@ void AmazonFetcher::slotComplete(KJob*) {
   // assume amazon is always utf-8
   QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
   Import::TellicoImporter imp(str);
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
     myDebug() << "no collection pointer";

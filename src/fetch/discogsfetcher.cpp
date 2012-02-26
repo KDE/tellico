@@ -172,6 +172,8 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHookData(Data::EntryPtr entry_
 #endif
 
   Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
+  // be quiet when loading images
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
   if(!coll) {

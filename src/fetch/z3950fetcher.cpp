@@ -445,7 +445,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     }
 #endif
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(str));
-    imp.setOptions(imp.options() & ~Import::ImportProgress); // no progress needed
+    imp.setOptions(imp.options() ^ Import::ImportProgress); // no progress needed
     coll = imp.collection();
     msg = imp.statusMessage();
   }
