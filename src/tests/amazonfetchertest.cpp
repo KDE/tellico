@@ -299,7 +299,12 @@ void AmazonFetcherTest::testUpc_data() {
                                 << static_cast<int>(Tellico::Data::Collection::Album)
                                 << QString::fromLatin1("602341013727")
                                 << QString::fromLatin1("gloryRevealed");
-  QTest::newRow("UK music upc") << QString::fromLatin1("UK")
+  // non-US should work with or without the initial 0 country code
+  QTest::newRow("UK music upc1") << QString::fromLatin1("UK")
+                                << static_cast<int>(Tellico::Data::Collection::Album)
+                                << QString::fromLatin1("602341013727")
+                                << QString::fromLatin1("gloryRevealed");
+  QTest::newRow("UK music upc2") << QString::fromLatin1("UK")
                                 << static_cast<int>(Tellico::Data::Collection::Album)
                                 << QString::fromLatin1("0602341013727")
                                 << QString::fromLatin1("gloryRevealed");
