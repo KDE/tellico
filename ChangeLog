@@ -1,3 +1,8 @@
+2012-02-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a crashing bug when entering multiple ISBN values in search.
+	* Improved Amazon search for US UPC values from non-UPC sites.
+
 2012-01-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a crashing bug when using the scanner dialog.

@@ -343,6 +343,23 @@ void AmazonFetcher::doSearch() {
 
     case UPC:
       {
+        QString cleanValue = value;
+        cleanValue.remove(QLatin1Char('-'));
+        // for EAN values, add 0 to begining if not 13 characters
+        // in order to assume US country code from UPC value
+        QStringList values;
+        foreach(const QString& splitValue, cleanValue.split(FieldFormat::delimiterString())) {
+          QString tmpValue = splitValue;
+          if(m_site != US && tmpValue.length() == 12) {
+            tmpValue.prepend(QLatin1Char('0'));
+          }
+          values << tmpValue;
+          // limit to first 10 values
+          if(values.length() >= 10) {
+            break;
+          }
+        }
+
         params.insert(QLatin1String("Operation"), QLatin1String("ItemLookup"));
         // US allows UPC, all others are EAN
         if(m_site == US) {
@@ -350,12 +367,7 @@ void AmazonFetcher::doSearch() {
         } else {
           params.insert(QLatin1String("IdType"), QLatin1String("EAN"));
         }
-        QString cleanValue = value;
-        cleanValue.remove(QLatin1Char('-'));
-        // limit to first 10 values
-        cleanValue.replace(FieldFormat::delimiterString(), QLatin1String(","));
-        cleanValue = cleanValue.section(QLatin1Char(','), 0, 9);
-        params.insert(QLatin1String("ItemId"), cleanValue);
+        params.insert(QLatin1String("ItemId"), values.join(QLatin1String(",")));
       }
       break;
 
