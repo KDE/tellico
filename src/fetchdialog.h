@@ -102,6 +102,7 @@ private slots:
   void slotLoadISBNList();
   void slotISBNTextChanged();
   void slotUPC2ISBN();
+  void columnResized(int column);
 
   void slotBarcodeRecognized(const QString&);
   void slotBarcodeGotImage(const QImage&);
@@ -142,6 +143,7 @@ private:
   QHash<int, Data::EntryPtr> m_entries;
   QList<Fetch::FetchResult*> m_results;
   int m_collType;
+  bool m_treeWasResized;
 
   QLabel* m_barcodePreview;
   barcodeRecognition::barcodeRecognitionThread* m_barcodeRecognitionThread;
