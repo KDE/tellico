@@ -429,7 +429,9 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
     }
     const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
     if(!valuesNotFound.isEmpty()) {
-      KMessageBox::informationList(this, i18n("No results were found for the following ISBN values:"), valuesNotFound,
+      KMessageBox::informationList(this,
+                                   i18n("No results were found for the following ISBN values:"),
+                                   valuesNotFound,
                                    i18n("No Results"));
     }
   }
