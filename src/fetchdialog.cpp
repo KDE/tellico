@@ -122,6 +122,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
     : KDialog(parent_)
     , m_timer(new QTimer(this))
     , m_started(false)
+    , m_treeWasResized(false)
     , m_barcodePreview(0)
     , m_barcodeRecognitionThread(0) {
   setModal(false);
@@ -224,6 +225,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
   // double clicking should add the entry
   connect(m_treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), SLOT(slotAddEntry()));
+  connect(m_treeWidget->header(), SIGNAL(sectionResized(int, int, int)), SLOT(columnResized(int)));
   m_treeWidget->setWhatsThis(i18n("As results are found, they are added to this list. Selecting one "
                                   "will fetch the complete entry and show it in the view below."));
 
@@ -436,6 +438,34 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
 void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
   m_results.append(result_);
   (void) new FetchResultItem(m_treeWidget, result_);
+  // resize final column to size of contents if the user has never resized anything before
+  if(!m_treeWasResized) {
+    m_treeWidget->header()->setStretchLastSection(false);
+
+    // we'd like to make the view look nice by resizing column 3, the final one
+    // but calling resizeColumnToContents(3) doesn't work since it's the final column
+    const int w0 = m_treeWidget->columnWidth(0);
+    const int w1 = m_treeWidget->columnWidth(1);
+    const int w2 = m_treeWidget->columnWidth(2);
+    const int w3 = m_treeWidget->columnWidth(3);
+    const int wt = w0 + w1 + w2 + w3;
+
+    m_treeWidget->resizeColumnToContents(3);
+    const int w3new = m_treeWidget->columnWidth(3);
+
+    // whatever is leftover from resizing 3, split between 1 and 2
+    if(wt > w0 + w1 + w2 + w3new) {
+      const int diff = wt - w0 - w1 - w2 - w3new;
+      const int w1new = w1 + diff/2;
+      const int w2new = w2 + diff/2;
+      m_treeWidget->setColumnWidth(1, w1new);
+      m_treeWidget->setColumnWidth(2, w2new);
+      m_treeWidget->setColumnWidth(3, w3new);
+    }
+    m_treeWidget->header()->setStretchLastSection(true);
+    // because calling setColumnWidth() will change this
+    m_treeWasResized = false;
+  }
   ++m_resultCount;
 }
 
@@ -732,6 +762,12 @@ void FetchDialog::slotUPC2ISBN() {
   if(key == Fetch::UPC) {
     m_keyCombo->setCurrentData(Fetch::ISBN);
     slotKeyChanged(m_keyCombo->currentIndex());
+  }
+}
+
+void FetchDialog::columnResized(int column_) {
+  if(column_ == 1 || column_ == 2) {
+    m_treeWasResized = true;
   }
 }
 
