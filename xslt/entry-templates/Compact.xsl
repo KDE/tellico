@@ -217,7 +217,8 @@
     <xsl:for-each select="../tc:fields/tc:field[@type!=10 and not(contains($skip-list, concat(',',@name,',')))]">
      <xsl:variable name="field" select="."/>
 
-     <xsl:if test="$entry//*[local-name(.) = $field/@name]">
+     <xsl:if test="$entry/*[local-name(.) = $field/@name] or
+                   $entry//*[local-name(.) = $field/@name and starts-with(local-name(..), $field/@name)]">
       <tr>
       <th class="fieldName" valign="top">
        <xsl:value-of select="@title"/>
