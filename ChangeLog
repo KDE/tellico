@@ -1,3 +1,7 @@
+2012-03-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for the Microsoft Academic Search.
+
 2012-02-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a crashing bug when entering multiple ISBN values in search.

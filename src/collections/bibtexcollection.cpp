@@ -148,7 +148,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setFlags(Field::AllowCompletion);
   list.append(field);
 
-  // don't make it a nuumber, it could have latex processing commands in it
+  // don't make it a number, it could have latex processing commands in it
   field = new Field(QLatin1String("pages"), i18n("Pages"));
   field->setProperty(QLatin1String("bibtex"), QLatin1String("pages"));
   field->setCategory(i18n(bibtex_publishing));

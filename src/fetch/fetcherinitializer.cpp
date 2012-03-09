@@ -52,6 +52,7 @@
 #ifdef HAVE_QJSON
 #include "freebasefetcher.h"
 #include "filmasterfetcher.h"
+#include "masfetcher.h"
 #endif
 #include "dvdfrfetcher.h"
 #include "doubanfetcher.h"
@@ -97,6 +98,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
   RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
   RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
+  RegisterFetcher<Fetch::MASFetcher> registerMAS(MAS);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
