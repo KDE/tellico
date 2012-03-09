@@ -208,7 +208,7 @@ void SRUFetcher::search() {
       stop();
       break;
   }
-  myDebug() << u.url();
+//  myDebug() << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->ui()->setWindow(GUI::Proxy::widget());
