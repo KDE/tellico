@@ -7,9 +7,9 @@
               and their helpers:
                 foreign_letter()
                 purify_special_char()
-@GLOBALS    : 
-@CALLS      : 
-@CALLERS    : 
+@GLOBALS    :
+@CALLS      :
+@CALLERS    :
 @CREATED    : 1997/10/19, Greg Ward
 @MODIFIED   : 1997/11/25, GPW: renamed to from purify.c to string_util.c
                                added bt_change_case() and friends
@@ -25,8 +25,8 @@
 #include "bt_debug.h"
 
 
-/* 
- * These definitions should be fixed to be consistent with HTML 
+/*
+ * These definitions should be fixed to be consistent with HTML
  * entities, just for fun.  And perhaps I should add entries for
  * accented letters (at least those supported by TeX and HTML).
  */
@@ -50,7 +50,7 @@ typedef enum
 } bt_letter;
 
 
-static const char * uc_version[] = 
+static const char * uc_version[] =
 {
    NULL,                                /* L_OTHER */
    "\\O",                               /* L_OSLASH_L */
@@ -69,7 +69,7 @@ static const char * uc_version[] =
    "J"                                  /* L_JNODOT_L */
 };
 
-static const char * lc_version[] = 
+static const char * lc_version[] =
 {
    NULL,                                /* L_OTHER */
    "\\o",                               /* L_OSLASH_L */
@@ -86,7 +86,7 @@ static const char * lc_version[] =
    "\\aa",                              /* L_ACIRCLE_U */
    "\\i",                               /* L_INODOT_L */
    "\\j"                                /* L_JNODOT_L */
-};      
+};
 
 
 
@@ -102,10 +102,10 @@ static const char * lc_version[] =
               "foreign letter" control sequences (l, o, ae, oe, aa, ss, plus
               uppercase versions).  If `letter' is non-NULL, returns which
               letter was found in it (as a bt_letter value).
-@CALLS      : 
+@CALLS      :
 @CALLERS    : purify_special_char()
 @CREATED    : 1997/10/19, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static boolean
 foreign_letter (char *str, int start, int stop, bt_letter * letter)
@@ -114,10 +114,10 @@ foreign_letter (char *str, int start, int stop, bt_letter * letter)
    bt_letter dummy;
 
 
-   /* 
+   /*
     * This is written for speed, not flexibility -- adding new foreign
     * letters would be trying and vexatious.
-    * 
+    *
     * N.B. my gold standard list of foreign letters is Kopka and Daly's
     * *A Guide to LaTeX 2e*, section 2.5.6.
     */
@@ -140,7 +140,7 @@ foreign_letter (char *str, int start, int stop, bt_letter * letter)
                *letter = L_OSLASH_U; return TRUE;
             case 'l':
                *letter = L_LSLASH_L; return TRUE;
-            case 'L': 
+            case 'L':
                *letter = L_LSLASH_L; return TRUE;
             case 'i':
                *letter = L_INODOT_L; return TRUE;
@@ -180,12 +180,12 @@ foreign_letter (char *str, int start, int stop, bt_letter * letter)
             case 's':
                if (c2 == 's')
                   { *letter = L_SSHARP_L; return TRUE; }
-               else 
+               else
                   return FALSE;
             case 'S':
                if (c2 == 'S')
                   { *letter = L_SSHARP_U; return TRUE; }
-               else 
+               else
                   return FALSE;
          }
          break;
@@ -202,11 +202,11 @@ foreign_letter (char *str, int start, int stop, bt_letter * letter)
 /* ------------------------------------------------------------------------
 @NAME       : purify_special_char()
 @INPUT      : *src, *dst - pointers into the input and output strings
-@OUTPUT     : *src       - updated to point to the closing brace of the 
+@OUTPUT     : *src       - updated to point to the closing brace of the
                            special char
               *dst       - updated to point to the next available spot
                            for copying text to
-@RETURNS    : 
+@RETURNS    :
 @DESCRIPTION: "Purifies" a BibTeX special character.  On input, *src should
               point to the opening brace of a special character (ie. the
               brace must be at depth 0 of the whole string, and the
@@ -223,7 +223,7 @@ foreign_letter (char *str, int start, int stop, bt_letter * letter)
 @CALLS      : foreign_letter()
 @CALLERS    : bt_purify_string()
 @CREATED    : 1997/10/19, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
 purify_special_char (char *str, int * src, int * dst)
@@ -274,7 +274,7 @@ purify_special_char (char *str, int * src, int * dst)
       }
    }
 
-   /* 
+   /*
     * If we get here, we have unbalanced braces -- the '}' case should
     * always hit a depth == 0 point if braces are balanced.  No warning,
     * though, because a) BibTeX doesn't warn about purifying unbalanced
@@ -289,7 +289,7 @@ purify_special_char (char *str, int * src, int * dst)
 @NAME       : bt_purify_string()
 @INOUT      : instr
 @INPUT      : options
-@OUTPUT     : 
+@OUTPUT     :
 @RETURNS    : instr   - same as input string, but modified in place
 @DESCRIPTION: "Purifies" a BibTeX string.  This consists of copying
               alphanumeric characters, converting hyphens and ties to
@@ -300,19 +300,19 @@ purify_special_char (char *str, int * src, int * dst)
               sequence preserved in a reasonable manner.  See
               purify_special_char() for details.)
 @CALLS      : purify_special_char()
-@CALLERS    : 
+@CALLERS    :
 @CREATED    : 1997/10/19, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void
 bt_purify_string (char * string, ushort options)
 {
-   int    src,                          /* both indeces into string */
+   int    src,                          /* both indices into string */
           dst;
    int    depth;                        /* brace depth in string */
    unsigned orig_len;
 
-   /* 
+   /*
     * Since purification always copies or deletes chars, outstr will
     * be no longer than string -- so nothing fancy is required to put
     * an upper bound on its eventual size.
@@ -323,7 +323,7 @@ bt_purify_string (char * string, ushort options)
    dst = 0;
    orig_len = strlen (string);
 
-   DBG_ACTION (1, printf ("bt_purify_string(): input = %p (%s)\n", 
+   DBG_ACTION (1, printf ("bt_purify_string(): input = %p (%s)\n",
                           string, string));
 
    while (string[src] != (char) 0)
@@ -393,19 +393,19 @@ bt_purify_string (char * string, ushort options)
               dst
               start_sentence
               after_colon
-@RETURNS    : 
+@RETURNS    :
 @DESCRIPTION: Does case conversion on a special character.
-@GLOBALS    : 
-@CALLS      : 
-@CALLERS    : 
+@GLOBALS    :
+@CALLS      :
+@CALLERS    :
 @CREATED    : 1997/11/25, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
-convert_special_char (char transform, 
+convert_special_char (char transform,
                       char * string,
                       int * src,
-                      int * dst, 
+                      int * dst,
                       boolean * start_sentence,
                       boolean * after_colon)
 {
@@ -425,7 +425,7 @@ convert_special_char (char transform,
    /* First, copy just the opening brace */
    string[(*dst)++] = string[(*src)++];
 
-   /* 
+   /*
     * Now loop over characters inside the braces -- stop when we reach
     * the matching close brace, or when the string ends.
     */
@@ -439,10 +439,10 @@ convert_special_char (char transform,
          case '\\':                     /* a control sequence */
          {
             cs_end = *src+1;            /* scan over chars of c.s. */
-            while (isalpha (string[cs_end])) 
+            while (isalpha (string[cs_end]))
                cs_end++;
 
-            /* 
+            /*
              * OK, now *src points to the backslash (so src+*1 points to
              * first char. of control sequence), and cs_end points to
              * character immediately following end of control sequence.
@@ -525,7 +525,7 @@ convert_special_char (char transform,
          {
             switch (transform)
             {
-               /* 
+               /*
                 * Inside special chars, lowercase and title caps are same.
                 * (At least, that's bibtex's convention.  I might change this
                 * at some point to be a bit smarter.)
@@ -552,16 +552,16 @@ convert_special_char (char transform,
 
 /* ------------------------------------------------------------------------
 @NAME       : bt_change_case()
-@INPUT      : 
-@OUTPUT     : 
-@RETURNS    : 
+@INPUT      :
+@OUTPUT     :
+@RETURNS    :
 @DESCRIPTION: Converts a string (in-place) to either uppercase, lowercase,
               or "title capitalization">
-@GLOBALS    : 
-@CALLS      : 
-@CALLERS    : 
+@GLOBALS    :
+@CALLS      :
+@CALLERS    :
 @CREATED    : 1997/11/25, GPW
-@MODIFIED   : 
+@MODIFIED   :
 -------------------------------------------------------------------------- */
 void
 bt_change_case (char   transform,
@@ -570,7 +570,7 @@ bt_change_case (char   transform,
 {
    int    len;
    int    depth;
-   int    src, dst;                     /* indeces into string */
+   int    src, dst;                     /* indices into string */
    boolean start_sentence;
    boolean after_colon;
 
@@ -585,9 +585,9 @@ bt_change_case (char   transform,
    {
       switch (string[src])
       {
-         case '{': 
+         case '{':
 
-            /* 
+            /*
              * At start of special character?  The entire special char.
              * will be handled here, as follows:
              *   - text at any brace-depth within the s.c. is case-mangled;
@@ -599,7 +599,7 @@ bt_change_case (char   transform,
              */
             if (depth == 0 && string[src+1] == '\\')
             {
-               convert_special_char (transform, string, &src, &dst, 
+               convert_special_char (transform, string, &src, &dst,
                                      &start_sentence, &after_colon);
             }
 
@@ -663,7 +663,7 @@ bt_change_case (char   transform,
                      case 't':
                         if (start_sentence || after_colon)
                         {
-                           /* 
+                           /*
                             * XXX BibTeX only preserves case of character
                             * immediately after a colon; I do two things
                             * differently: first, I pay attention to sentence
@@ -689,7 +689,7 @@ bt_change_case (char   transform,
                }
             } /* not blank */
       } /* switch on current character */
-                                  
+
    } /* while not at end of string */
 
 } /* bt_change_case */

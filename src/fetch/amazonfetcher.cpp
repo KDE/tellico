@@ -345,7 +345,7 @@ void AmazonFetcher::doSearch() {
       {
         QString cleanValue = value;
         cleanValue.remove(QLatin1Char('-'));
-        // for EAN values, add 0 to begining if not 13 characters
+        // for EAN values, add 0 to beginning if not 13 characters
         // in order to assume US country code from UPC value
         QStringList values;
         foreach(const QString& splitValue, cleanValue.split(FieldFormat::delimiterString())) {
