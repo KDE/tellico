@@ -78,7 +78,12 @@ void FetcherJob::slotResult(Tellico::Fetch::FetchResult* result_) {
 }
 
 void FetcherJob::slotDone() {
-  emitResult();
+  // only continue if more results were specifically asked for
+  if(m_fetcher->hasMoreResults() && m_results.count() < m_maximumResults) {
+    m_fetcher->continueSearch();
+  } else {
+    emitResult();
+  }
 }
 
 bool FetcherJob::doKill() {

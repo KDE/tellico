@@ -117,3 +117,15 @@ void MASFetcherTest::testKeyword() {
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Surface Temperature")));
 }
 
+void MASFetcherTest::testContinueSearch() {
+  // since the fetcher only grabs the first 20 results by default
+  // verify that the continueSearch() works
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex,
+                                       Tellico::Fetch::Keyword,
+                                       QLatin1String("Surface Temperature"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MASFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 21);
+
+  QCOMPARE(results.size(), 21);
+}
