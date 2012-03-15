@@ -33,7 +33,7 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::FetcherJob;
 
 FetcherJob::FetcherJob(QObject* parent_, Fetcher::Ptr fetcher_, const FetchRequest& request_)
-    : KJob(parent_), m_fetcher(fetcher_), m_request(request_) {
+    : KJob(parent_), m_fetcher(fetcher_), m_request(request_), m_maximumResults(0) {
   connect(m_fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
           SLOT(slotResult(Tellico::Fetch::FetchResult*)));
   connect(m_fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),

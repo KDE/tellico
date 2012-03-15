@@ -166,6 +166,7 @@ void XMLFetcher::slotComplete(KJob* ) {
     ++count;
   }
 
+  checkMoreResults(m_entries.count());
   stop(); // required
 }
 
