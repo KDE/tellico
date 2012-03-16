@@ -63,6 +63,7 @@ public:
   virtual QString source() const;
   virtual QString attribution() const;
   virtual bool isSearching() const { return m_started; }
+  virtual void continueSearch();
   virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
@@ -95,7 +96,8 @@ private:
 
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  
+
+  void doSearch();
   void populateEntry(Data::EntryPtr entry, const QVariantMap& result);
 
   QPointer<KIO::StoredTransferJob> m_job;
@@ -104,6 +106,9 @@ private:
   bool m_started;
   QJson::Parser* m_parser;
   QHash<QString, QString> m_keywordHash;
+
+  int m_start;
+  int m_total;
 };
 
   } // end namespace

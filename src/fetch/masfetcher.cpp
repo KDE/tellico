@@ -47,7 +47,7 @@
 #endif
 
 namespace {
-  static const int MAS_MAX_RETURNS_TOTAL = 20;
+  static const int MAS_MAX_RETURNS = 20;
   static const char* MAS_API_URL = "http://academic.research.microsoft.com/json.svc/search";
   static const char* MAS_API_ID = "77aed835-28ad-45c3-abd2-bcd4ae3dbc2f";
 }
@@ -92,13 +92,23 @@ void MASFetcher::readConfigHook(const KConfigGroup&) {
 
 void MASFetcher::search() {
   m_started = true;
+  m_start = 0;
+  m_total = -1;
+  doSearch();
+}
 
+void MASFetcher::continueSearch() {
+  m_started = true;
+  doSearch();
+}
+
+void MASFetcher::doSearch() {
 #ifdef HAVE_QJSON
   KUrl u(MAS_API_URL);
   u.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
   u.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
-  u.addQueryItem(QLatin1String("StartIdx"), QLatin1String("1"));
-  u.addQueryItem(QLatin1String("EndIdx"), QString::number(MAS_MAX_RETURNS_TOTAL));
+  u.addQueryItem(QLatin1String("StartIdx"), QString::number(m_start+1));
+  u.addQueryItem(QLatin1String("EndIdx"), QString::number(m_start+MAS_MAX_RETURNS));
   u.addQueryItem(QLatin1String("ResultObjects"), QLatin1String("Publication"));
   u.addQueryItem(QLatin1String("PublicationContent"), QLatin1String("AllInfo"));
 
@@ -193,6 +203,13 @@ void MASFetcher::slotComplete(KJob* job_) {
     m_parser = new QJson::Parser();
   }
   const QVariantMap resultsMap = m_parser->parse(data).toMap();
+
+  if(m_total == -1) {
+    m_total = resultsMap.value(QLatin1String("d")).toMap()
+                               .value(QLatin1String("Publication")).toMap()
+                               .value(QLatin1String("TotalItem")).toInt();
+  }
+
   const QVariantList resultList = resultsMap.value(QLatin1String("d")).toMap()
                                  .value(QLatin1String("Publication")).toMap()
                                  .value(QLatin1String("Result")).toList();
@@ -214,9 +231,8 @@ void MASFetcher::slotComplete(KJob* job_) {
     emit signalResultFound(r);
   }
 
-//  m_start = m_entries.count();
-//  m_hasMoreResults = m_start <= m_total;
-  m_hasMoreResults = false; // for now, no continued searches
+  m_start = m_entries.count();
+  m_hasMoreResults = m_start < m_total;
   stop();
 #endif
 }

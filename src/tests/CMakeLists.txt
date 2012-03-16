@@ -184,6 +184,9 @@ IF( QJSON_FOUND )
     TARGET_LINK_LIBRARIES(openlibraryfetchertest fetch ${TELLICO_TEST_LIBS})
 ENDIF( QJSON_FOUND )
 
+KDE4_ADD_UNIT_TEST(springerfetchertest NOGUI springerfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(springerfetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
 

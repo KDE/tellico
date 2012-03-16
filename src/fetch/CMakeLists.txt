@@ -40,6 +40,7 @@ SET(fetch_STAT_SRCS
    musicbrainzfetcher.cpp
    openlibraryfetcher.cpp
    sha2.c
+   springerfetcher.cpp
    srufetcher.cpp
    themoviedbfetcher.cpp
    winecomfetcher.cpp
