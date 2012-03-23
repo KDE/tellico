@@ -56,6 +56,7 @@
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
 #include <kseparator.h>
+#include <KIcon>
 
 #include <QFile>
 #include <QLabel>
@@ -788,7 +789,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
 
   KConfig serverConfig(serverFile, KConfig::SimpleConfig);
   const QStringList servers = serverConfig.groupList();
-  // I want the list of servers sorted by name
+  // I want the list of servers sorted by name so use QMap instead of QHash
   QMap<QString, QString> serverNameMap;
   for(QStringList::ConstIterator server = servers.constBegin(); server != servers.constEnd(); ++server) {
     if((*server).isEmpty()) {
@@ -805,8 +806,16 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     const QString name = it.key();
     const QString group = it.value();
     KConfigGroup cfg(&serverConfig, group);
+    const QString country = cfg.readEntry("Country", QString());
 
-    m_serverCombo->addItem(i18n(name.toUtf8()), group);
+    if(country.isEmpty()) {
+      m_serverCombo->addItem(i18n(name.toUtf8()), group);
+    } else {
+      const QString flag = KStandardDirs::locate("locale",
+                                                 QString::fromLatin1("l10n/%1/flag.png").arg(country));
+      m_serverCombo->addItem(KIcon(flag), i18n(name.toUtf8()), group);
+    }
+
     if(current_.isEmpty() && idx == -1) {
       // set the initial selection to something depending on the language
       const QStringList locales = cfg.readEntry("Locale", QStringList());
