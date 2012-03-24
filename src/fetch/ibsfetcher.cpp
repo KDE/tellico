@@ -67,6 +67,11 @@ bool IBSFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
+// No UPC or Raw for now.
+bool IBSFetcher::canSearch(FetchKey k) const {
+  return k == Title || k == Person || k == ISBN;
+}
+
 void IBSFetcher::readConfigHook(const KConfigGroup& config_) {
   Q_UNUSED(config_);
 }
@@ -169,16 +174,15 @@ void IBSFetcher::slotComplete(KJob*) {
   int pos2;
   for(int pos = anchorRx.indexIn(s); m_started && pos > -1; pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
     if(!u.isEmpty()) {
-      FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
-      emit signalResultFound(r);
-
 #ifdef IBS_TEST
       KUrl url = KUrl(QLatin1String("/home/robby/ibs2.html"));
 #else
       // the url probable contains &amp; so be careful
       KUrl url = u.replace(QLatin1String("&amp;"), QLatin1String("&"));
 #endif
+      FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
       m_matches.insert(r->uid, url);
+      emit signalResultFound(r);
 
       u.clear();
       t.clear();
@@ -197,8 +201,8 @@ void IBSFetcher::slotComplete(KJob*) {
 #ifndef IBS_TEST
   if(!u.isEmpty()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
-    emit signalResultFound(r);
     m_matches.insert(r->uid, u.replace(QLatin1String("&amp;"), QLatin1String("&")));
+    emit signalResultFound(r);
   }
 #endif
 
@@ -232,8 +236,8 @@ void IBSFetcher::slotCompleteISBN(KJob* job_) {
     QString desc = entry->field(QLatin1String("author"))
                  + QLatin1Char('/') + entry->field(QLatin1String("publisher"));
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry->title(), desc, entry->field(QLatin1String("isbn")));
+    m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url());
     emit signalResultFound(r);
-    m_matches.insert(r->uid, static_cast<KIO::TransferJob*>(job_)->url().url());
   }
 
   stop();
@@ -252,7 +256,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString results = Tellico::decodeHTML(FileHandler::readTextFile(url, true));
+  QString results = Tellico::decodeHTML(FileHandler::readDataFile(url, true));
   if(results.isEmpty()) {
     myDebug() << "no text results";
     return Data::EntryPtr();
@@ -280,16 +284,8 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
- // myDebug();
- // class might be anime_info_top
-  QString pat = QLatin1String("%1(?:<[^>]+>)+([^<>\\s][^<>]+)");
-
-  QRegExp isbnRx(QLatin1String("isbn=([\\dxX]{13})"), Qt::CaseInsensitive);
-  QString isbn;
-  int pos = isbnRx.indexIn(str_);
-  if(pos > -1) {
-    isbn = isbnRx.cap(1);
-  }
+//  QString pat = QLatin1String("%1(?:<[^>]+>)+([^<>\\s][^<>]+)");
+  QString pat = QLatin1String("%1(?:<[^>]+>)+(.+)</td.*>");
 
   Data::CollPtr coll(new Data::BookCollection(true));
 
@@ -302,34 +298,65 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   fieldMap.insert(QLatin1String("Rilegatura"), QLatin1String("binding"));
   fieldMap.insert(QLatin1String("Editore"), QLatin1String("publisher"));
   fieldMap.insert(QLatin1String("Dati"), QLatin1String("edition"));
+  fieldMap.insert(QLatin1String("Traduttore"), QLatin1String("translator"));
+  fieldMap.insert(QLatin1String("Curatore"), QLatin1String("editor"));
 
-  QRegExp pagesRx(QLatin1String("(\\d+) p\\.(\\s*,\\s*)?"));
+  QRegExp tagRx(QLatin1String("<.*>"));
+  tagRx.setMinimal(true);
+
+  QRegExp pagesRx(QLatin1String("\\s*(\\d+) p\\.(\\s*,\\s*)?"));
+  QRegExp yearRx(QLatin1String("^\\d{4}"));
+
   Data::EntryPtr entry(new Data::Entry(coll));
 
   for(QHash<QString, QString>::Iterator it = fieldMap.begin(); it != fieldMap.end(); ++it) {
     QRegExp infoRx(pat.arg(it.key()));
-    pos = infoRx.indexIn(str_);
+    infoRx.setMinimal(true);
+    int pos = infoRx.indexIn(str_);
     if(pos > -1) {
       if(it.value() == QLatin1String("edition")) {
-        int pos2 = pagesRx.indexIn(infoRx.cap(1));
+        QString data = infoRx.cap(1).remove(tagRx).trimmed();
+        int pos2 = pagesRx.indexIn(data);
         if(pos2 > -1) {
           entry->setField(QLatin1String("pages"), pagesRx.cap(1));
-          entry->setField(it.value(), infoRx.cap(1).remove(pagesRx));
+          data = data.remove(pagesRx);
+        }
+        // assume that if the value starts with 4 digits, then it's a year
+        pos2 = yearRx.indexIn(data);
+        if(pos2 > -1) {
+          entry->setField(QLatin1String("pub_year"), yearRx.cap(0));
+          data = data.remove(yearRx).trimmed();
+          // might start with a comma now
+          if(data.startsWith(QLatin1String(","))) {
+            data = data.mid(1).trimmed();
+          }
+        }
+        // now it might be the binding
+        if(data == QLatin1String("brossura")) {
+          entry->setField(QLatin1String("binding"), i18n("Paperback"));
+        } else if(data == QLatin1String("rilegato")) {
+          entry->setField(QLatin1String("binding"), i18n("Hardback"));
         } else {
-          entry->setField(it.value(), infoRx.cap(1));
+          entry->setField(it.value(), data);
         }
       } else {
-        entry->setField(it.value(), infoRx.cap(1));
+        entry->setField(it.value(), infoRx.cap(1).remove(tagRx).trimmed());
       }
     }
   }
 
+  QRegExp isbnRx(QLatin1String("isbn=([\\dxX]{13})"), Qt::CaseInsensitive);
+  QString isbn;
+  int pos = isbnRx.indexIn(str_);
+  if(pos > -1) {
+    isbn = isbnRx.cap(1);
+  }
   // image
   if(!isbn.isEmpty()) {
     entry->setField(QLatin1String("isbn"), isbn);
 #if 1
     KUrl imgURL = QString::fromLatin1("http://giotto.ibs.it/cop/copt13.asp?f=%1").arg(isbn);
-    myLog() << "cover = " << imgURL;
+//    myLog() << "cover = " << imgURL;
     QString id = ImageFactory::addImage(imgURL, true, KUrl("http://internetbookshop.it"));
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);
@@ -339,7 +366,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     imgRx.setMinimal(true);
     pos = imgRx.indexIn(str_);
     if(pos > -1) {
-      myLog() << "cover = " << imgRx.cap(1);
+//      myLog() << "cover = " << imgRx.cap(1);
       QString id = ImageFactory::addImage(imgRx.cap(1), true, KUrl("http://internetbookshop.it"));
       if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);
@@ -362,23 +389,28 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     entry->setField(f, descRx.cap(1).simplified());
   }
 
-  // IBS switches the surname and family name of the author
-  QStringList names = FieldFormat::splitValue(entry->field(QLatin1String("author")));
-  if(!names.isEmpty() && !names[0].isEmpty()) {
-    for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
-      if((*it).indexOf(QLatin1Char(',')) > -1) {
-        continue; // skip if it has a comma
+  // IBS switches the surname and family name of the author and translator
+  const QStringList peopleFields = QStringList() << QLatin1String("author")
+                                                 << QLatin1String("editor")
+                                                 << QLatin1String("translator");
+  foreach(const QString& fieldName, peopleFields) {
+    QStringList names = FieldFormat::splitValue(entry->field(fieldName));
+    if(!names.isEmpty() && !names[0].isEmpty()) {
+      for(QStringList::Iterator it = names.begin(); it != names.end(); ++it) {
+        if((*it).indexOf(QLatin1Char(',')) > -1) {
+          continue; // skip if it has a comma
+        }
+        QStringList words = (*it).split(QLatin1Char(' '));
+        if(words.isEmpty()) {
+          continue;
+        }
+        // put first word in back
+        words.append(words[0]);
+        words.pop_front();
+        *it = words.join(QLatin1String(" "));
       }
-      QStringList words = (*it).split(QLatin1Char(' '));
-      if(words.isEmpty()) {
-        continue;
-      }
-      // put first word in back
-      words.append(words[0]);
-      words.pop_front();
-      *it = words.join(QLatin1String(" "));
+      entry->setField(fieldName, names.join(FieldFormat::delimiterString()));
     }
-    entry->setField(QLatin1String("author"), names.join(FieldFormat::delimiterString()));
   }
   return entry;
 }
