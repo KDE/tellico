@@ -48,7 +48,10 @@ FetcherJob::~FetcherJob() {
 Tellico::Data::EntryList FetcherJob::entries() {
   Data::EntryList list;
   foreach(FetchResult* result, m_results) {
-    list << result->fetchEntry();
+    Data::EntryPtr entry = result->fetchEntry();
+    if(entry) {
+      list << entry;
+    }
   }
   return list;
 }

@@ -1,3 +1,7 @@
+2012-03-23  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bugs in IBS.it data source.
+
 2012-03-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for Springer Link.
