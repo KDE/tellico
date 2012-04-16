@@ -122,7 +122,7 @@ on an entry item has an option for modifying the loan using the <interface>Loan 
 <para>
 A formatted representation of the entry's values is shown in the <interface>Entry View</interface>. Templates are used for the layout and any additional graphics. Separate templates for each type of collection may be specified in the <link linkend="template-options"><interface>Configuration Dialog</interface></link>, along with custom colors and fonts.</para>
 
-<para>All of the default templates honor the color and font selection, but other custom templates might now.
+<para>All of the default templates honor the color and font selection, but other custom templates might not.
 The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &HTML;, the current template is used for exporting the individual entry files.
 </para>
 
