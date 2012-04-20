@@ -108,4 +108,8 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
   RegisterFetcher<Fetch::SpringerFetcher> registerSpringer(Springer);
   RegisterFetcher<Fetch::AllocineFetcher> registerAllocine(Allocine);
+  RegisterFetcher<Fetch::ScreenRushFetcher> registerScreenRush(ScreenRush);
+  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
+  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
+  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
 }

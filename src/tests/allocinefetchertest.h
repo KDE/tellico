@@ -41,6 +41,12 @@ private Q_SLOTS:
 
   void testTitleAPI();
   void testTitleAPIAccented();
+
+  void testTitleScreenRush();
+  void testTitleFilmStarts();
+  void testTitleFilmStartsGerman();
+  void testTitleSensaCineSpanish();
+  void testTitleBeyazperdeTurkish();
 };
 
 #endif

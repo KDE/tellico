@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ALLOCINEFETCHER_H
-#define TELLICO_ALLOCINEFETCHER_H
+#ifndef TELLICO_ABSTRACTALLOCINEFETCHER_H
+#define TELLICO_ABSTRACTALLOCINEFETCHER_H
 
 #include "xmlfetcher.h"
 #include "configwidget.h"
@@ -34,26 +34,22 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for allocine.com
+ * An abstract fetcher for the Allocine family of web sites
  *
  * @author Robby Stephenson
  */
-class AllocineFetcher : public XMLFetcher {
+class AbstractAllocineFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  AllocineFetcher(QObject* parent);
+  AbstractAllocineFetcher(QObject* parent, const QString& baseUrl);
   /**
    */
-  virtual ~AllocineFetcher();
+  virtual ~AbstractAllocineFetcher();
 
-  /**
-   */
-  virtual QString source() const;
   virtual bool canSearch(FetchKey k) const;
-  virtual Type type() const { return Allocine; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
@@ -64,15 +60,11 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const AllocineFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
 
 private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
@@ -81,10 +73,113 @@ private:
   virtual void parseData(QByteArray& data);
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 
-  int m_start;
-  int m_total;
-
   QString m_apiKey;
+  QString m_baseUrl;
+};
+
+/**
+ * A fetcher for allocine.fr
+ *
+ * @author Robby Stephenson
+ */
+class AllocineFetcher : public AbstractAllocineFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  AllocineFetcher(QObject* parent);
+
+  virtual QString source() const;
+  virtual Type type() const { return Allocine; }
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+};
+
+/**
+ * A fetcher for screenrush.co.uk
+ *
+ * @author Robby Stephenson
+ */
+class ScreenRushFetcher : public AbstractAllocineFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  ScreenRushFetcher(QObject* parent);
+
+  virtual QString source() const;
+  virtual Type type() const { return ScreenRush; }
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+};
+
+/**
+ * A fetcher for filmstarts.de
+ *
+ * @author Robby Stephenson
+ */
+class FilmStartsFetcher : public AbstractAllocineFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  FilmStartsFetcher(QObject* parent);
+
+  virtual QString source() const;
+  virtual Type type() const { return FilmStarts; }
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+};
+
+/**
+ * A fetcher for sensacine.com
+ *
+ * @author Robby Stephenson
+ */
+class SensaCineFetcher : public AbstractAllocineFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  SensaCineFetcher(QObject* parent);
+
+  virtual QString source() const;
+  virtual Type type() const { return SensaCine; }
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
+};
+
+/**
+ * A fetcher for beyazperde.com
+ *
+ * @author Robby Stephenson
+ */
+class BeyazperdeFetcher : public AbstractAllocineFetcher {
+Q_OBJECT
+
+public:
+  /**
+   */
+  BeyazperdeFetcher(QObject* parent);
+
+  virtual QString source() const;
+  virtual Type type() const { return Beyazperde; }
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
 };
 
   } // end namespace
