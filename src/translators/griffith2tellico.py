@@ -75,7 +75,7 @@ class BasicTellicoDOM:
 
 		# Add a custom 'Original Title' field
 		self.__titleField = self.__doc.createElement('field')
-		self.__titleField.setAttribute('name', 'orig-title')
+		self.__titleField.setAttribute('name', 'origtitle')
 		self.__titleField.setAttribute('title', 'Original Title')
 		self.__titleField.setAttribute('flags', '8')
 		self.__titleField.setAttribute('category', 'General')
@@ -115,7 +115,7 @@ class BasicTellicoDOM:
 		self.__fieldsMap = dict(country='nationality',
 		                     classification='certification',
 							 runtime='running-time',
-							 o_title='orig-title',
+							 o_title='origtitle',
 							 notes='comments',
 							 image='cover',
 							 tag='keyword',
