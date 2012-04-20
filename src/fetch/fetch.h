@@ -83,7 +83,11 @@ enum Type {
   GoogleBook,
   MAS,
   Springer,
-  Allocine
+  Allocine,
+  ScreenRush,
+  FilmStarts,
+  SensaCine,
+  Beyazperde
 };
 
   }

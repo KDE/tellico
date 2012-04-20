@@ -1,6 +1,6 @@
 2012-04-20  Robby Stephenson  <robby@periapsis.org>
 
-	* Added data source for Allocine API.
+	* Added API data sources for Allocine, ScreenRush, FilmStarts, SensaCine, and Beyazperde.
 
 2012-03-23  Robby Stephenson  <robby@periapsis.org>
 

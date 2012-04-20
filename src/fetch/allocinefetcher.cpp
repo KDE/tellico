@@ -41,48 +41,54 @@
 
 namespace {
   static const int ALLOCINE_MAX_RETURNS_TOTAL = 20;
-  static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
   static const char* ALLOCINE_API_KEY = "YW5kcm9pZC12M3M";
+  static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
+  static const char* SCREENRUSH_API_URL = "http://api.screenrush.co.uk/rest/v3/";
+  static const char* FILMSTARTS_API_URL = "http://api.filmstarts.de/rest/v3/";
+  static const char* SENSACINE_API_URL = "http://api.sensacine.com/rest/v3/";
+  static const char* BEYAZPERDE_API_URL = "http://api.beyazperde.com/rest/v3/";
 }
 
 using namespace Tellico;
+using Tellico::Fetch::AbstractAllocineFetcher;
 using Tellico::Fetch::AllocineFetcher;
+using Tellico::Fetch::ScreenRushFetcher;
+using Tellico::Fetch::FilmStartsFetcher;
+using Tellico::Fetch::SensaCineFetcher;
+using Tellico::Fetch::BeyazperdeFetcher;
 
-AllocineFetcher::AllocineFetcher(QObject* parent_)
+AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString& baseUrl_)
     : XMLFetcher(parent_)
-    , m_apiKey(QLatin1String(ALLOCINE_API_KEY)) {
+    , m_apiKey(QLatin1String(ALLOCINE_API_KEY))
+    , m_baseUrl(baseUrl_) {
   setLimit(ALLOCINE_MAX_RETURNS_TOTAL);
   setXSLTFilename(QLatin1String("allocine2tellico.xsl"));
+  Q_ASSERT(!m_baseUrl.isEmpty());
 }
 
-AllocineFetcher::~AllocineFetcher() {
+AbstractAllocineFetcher::~AbstractAllocineFetcher() {
 }
 
-QString AllocineFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-bool AllocineFetcher::canFetch(int type) const {
+bool AbstractAllocineFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-bool AllocineFetcher::canSearch(FetchKey k) const {
+bool AbstractAllocineFetcher::canSearch(FetchKey k) const {
   return k == Keyword;
 }
 
-void AllocineFetcher::readConfigHook(const KConfigGroup& config_) {
+void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
   QString k = config_.readEntry("API Key", ALLOCINE_API_KEY);
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
 }
 
-void AllocineFetcher::resetSearch() {
-  m_total = -1;
+void AbstractAllocineFetcher::resetSearch() {
 }
 
-KUrl AllocineFetcher::searchUrl() {
-  KUrl u(ALLOCINE_API_URL);
+KUrl AbstractAllocineFetcher::searchUrl() {
+  KUrl u(m_baseUrl);
   u.addPath(QLatin1String("search"));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("partner"), m_apiKey);
@@ -102,11 +108,11 @@ KUrl AllocineFetcher::searchUrl() {
   return u;
 }
 
-void AllocineFetcher::parseData(QByteArray& data_) {
+void AbstractAllocineFetcher::parseData(QByteArray& data_) {
   Q_UNUSED(data_);
 }
 
-Tellico::Data::EntryPtr AllocineFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
+Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
   QString code = entry_->field(QLatin1String("allocine-code"));
@@ -115,7 +121,7 @@ Tellico::Data::EntryPtr AllocineFetcher::fetchEntryHookData(Data::EntryPtr entry
     return entry_;
   }
 
-  KUrl u(ALLOCINE_API_URL);
+  KUrl u(m_baseUrl);
   u.addPath(QLatin1String("movie"));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("profile"), QLatin1String("large"));
@@ -142,7 +148,6 @@ Tellico::Data::EntryPtr AllocineFetcher::fetchEntryHookData(Data::EntryPtr entry
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
-//  getTracks(entry);
   if(!coll || coll->entryCount() == 0) {
     myWarning() << "no collection pointer";
     return entry_;
@@ -157,7 +162,7 @@ Tellico::Data::EntryPtr AllocineFetcher::fetchEntryHookData(Data::EntryPtr entry
   return coll->entries().front();
 }
 
-Tellico::Fetch::FetchRequest AllocineFetcher::updateRequest(Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryPtr entry_) {
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
@@ -165,12 +170,36 @@ Tellico::Fetch::FetchRequest AllocineFetcher::updateRequest(Data::EntryPtr entry
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* AllocineFetcher::configWidget(QWidget* parent_) const {
-  return new AllocineFetcher::ConfigWidget(parent_, this);
+Tellico::Fetch::ConfigWidget* AbstractAllocineFetcher::configWidget(QWidget* parent_) const {
+  return new AbstractAllocineFetcher::ConfigWidget(parent_, this);
+}
+
+AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher*)
+    : Fetch::ConfigWidget(parent_) {
+  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
+  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
+  l->addStretch();
+}
+
+void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+}
+
+QString AbstractAllocineFetcher::ConfigWidget::preferredName() const {
+  return AllocineFetcher::defaultName();
+}
+
+/**********************************************************************************************/
+
+AllocineFetcher::AllocineFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(ALLOCINE_API_URL)) {
+}
+
+QString AllocineFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
 }
 
 QString AllocineFetcher::defaultName() {
-  return QString::fromUtf8("AlloCiné");
+  return QString::fromUtf8("AlloCiné.fr");
 }
 
 QString AllocineFetcher::defaultIcon() {
@@ -184,18 +213,100 @@ Tellico::StringHash AllocineFetcher::allOptionalFields() {
   return hash;
 }
 
-AllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AllocineFetcher*)
-    : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+/**********************************************************************************************/
+
+ScreenRushFetcher::ScreenRushFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(SCREENRUSH_API_URL)) {
 }
 
-void AllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+QString ScreenRushFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-QString AllocineFetcher::ConfigWidget::preferredName() const {
-  return AllocineFetcher::defaultName();
+QString ScreenRushFetcher::defaultName() {
+  return QLatin1String("Screenrush.co.uk");
+}
+
+QString ScreenRushFetcher::defaultIcon() {
+  return favIcon("http://www.screenrush.co.uk");
+}
+
+Tellico::StringHash ScreenRushFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
+}
+
+/**********************************************************************************************/
+
+FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(FILMSTARTS_API_URL)) {
+}
+
+QString FilmStartsFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+QString FilmStartsFetcher::defaultName() {
+  return QLatin1String("FILMSTARTS.de");
+}
+
+QString FilmStartsFetcher::defaultIcon() {
+  return favIcon("http://www.filmstarts.de");
+}
+
+Tellico::StringHash FilmStartsFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
+}
+
+/**********************************************************************************************/
+
+SensaCineFetcher::SensaCineFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(SENSACINE_API_URL)) {
+}
+
+QString SensaCineFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+QString SensaCineFetcher::defaultName() {
+  return QLatin1String("SensaCine.com");
+}
+
+QString SensaCineFetcher::defaultIcon() {
+  return favIcon("http://www.sensacine.com");
+}
+
+Tellico::StringHash SensaCineFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
+}
+
+/**********************************************************************************************/
+
+BeyazperdeFetcher::BeyazperdeFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(BEYAZPERDE_API_URL)) {
+}
+
+QString BeyazperdeFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+QString BeyazperdeFetcher::defaultName() {
+  return QString::fromUtf8("Beyazperde");
+}
+
+QString BeyazperdeFetcher::defaultIcon() {
+  return favIcon("http://www.beyazperde.com");
+}
+
+Tellico::StringHash BeyazperdeFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
 }
 
 #include "allocinefetcher.moc"
