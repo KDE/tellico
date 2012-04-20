@@ -170,7 +170,7 @@ Tellico::Fetch::ConfigWidget* AllocineFetcher::configWidget(QWidget* parent_) co
 }
 
 QString AllocineFetcher::defaultName() {
-  return QLatin1String("Allocine");
+  return QString::fromUtf8("AlloCiné");
 }
 
 QString AllocineFetcher::defaultIcon() {
