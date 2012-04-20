@@ -1,3 +1,7 @@
+2012-04-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for Allocine API.
+
 2012-03-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bugs in IBS.it data source.

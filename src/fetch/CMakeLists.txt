@@ -3,6 +3,7 @@ ADD_SUBDIRECTORY( scripts )
 ########### next target ###############
 
 SET(fetch_STAT_SRCS
+   allocinefetcher.cpp
    amazonfetcher.cpp
    amazonrequest.cpp
    animenfofetcher.cpp
