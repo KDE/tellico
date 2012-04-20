@@ -38,6 +38,9 @@ private Q_SLOTS:
   void testTitleAccented();
   void testTitleAccentRemoved();
   void testPlotQuote();
+
+  void testTitleAPI();
+  void testTitleAPIAccented();
 };
 
 #endif
