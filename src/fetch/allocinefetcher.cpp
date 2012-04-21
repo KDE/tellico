@@ -31,6 +31,7 @@
 
 #include <klocale.h>
 #include <KConfigGroup>
+#include <KIntSpinBox>
 
 #include <QLabel>
 #include <QFile>
@@ -60,7 +61,8 @@ using Tellico::Fetch::BeyazperdeFetcher;
 AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString& baseUrl_)
     : XMLFetcher(parent_)
     , m_apiKey(QLatin1String(ALLOCINE_API_KEY))
-    , m_baseUrl(baseUrl_) {
+    , m_baseUrl(baseUrl_)
+    , m_numCast(10) {
   setLimit(ALLOCINE_MAX_RETURNS_TOTAL);
   setXSLTFilename(QLatin1String("allocine2tellico.xsl"));
   Q_ASSERT(!m_baseUrl.isEmpty());
@@ -82,6 +84,7 @@ void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+  m_numCast = config_.readEntry("Max Cast", 10);
 }
 
 void AbstractAllocineFetcher::resetSearch() {
@@ -159,7 +162,13 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHookData(Data::EntryP
 
   // don't want to include id
   coll->removeField(QLatin1String("allocine-code"));
-  return coll->entries().front();
+  Data::EntryPtr entry = coll->entries().front();
+  QStringList castRows = FieldFormat::splitTable(entry->field(QLatin1String("cast")));
+  while(castRows.count() > m_numCast) {
+    castRows.removeLast();
+  }
+  entry->setField(QLatin1String("cast"), FieldFormat::rowDelimiterString());
+  return entry;
 }
 
 Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -174,14 +183,38 @@ Tellico::Fetch::ConfigWidget* AbstractAllocineFetcher::configWidget(QWidget* par
   return new AbstractAllocineFetcher::ConfigWidget(parent_, this);
 }
 
-AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher*)
+AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_numCast = new KIntSpinBox(0, 99, 1, 10, optionsWidget());
+  connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_numCast, row, 1);
+  QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
+  label->setWhatsThis(w);
+  m_numCast->setWhatsThis(w);
+  label->setBuddy(m_numCast);
+
+  l->setRowStretch(++row, 10);
+
+  // now add additional fields widget
+//  addFieldsWidget(fetcher_->allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_numCast->setValue(fetcher_->m_numCast);
+  } else { //defaults
+    m_numCast->setValue(10);
+  }
 }
 
-void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Max Cast", m_numCast->value());
 }
 
 QString AbstractAllocineFetcher::ConfigWidget::preferredName() const {

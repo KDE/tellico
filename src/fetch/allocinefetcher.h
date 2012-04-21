@@ -29,6 +29,8 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
+class KIntSpinBox;
+
 namespace Tellico {
 
   namespace Fetch {
@@ -63,6 +65,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
+  private:
+    KIntSpinBox* m_numCast;
   };
   friend class ConfigWidget;
 
@@ -75,6 +79,7 @@ private:
 
   QString m_apiKey;
   QString m_baseUrl;
+  int m_numCast;
 };
 
 /**

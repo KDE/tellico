@@ -147,9 +147,17 @@ void AllocineFetcherTest::testPlotQuote() {
 }
 
 void AllocineFetcherTest::testTitleAPI() {
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  QString groupName = QLatin1String("allocine");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QLatin1String("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AllocineFetcher(this));
+  fetcher->readConfig(cg, cg.name());
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -166,7 +174,7 @@ void AllocineFetcherTest::testTitleAPI() {
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Clark Kent / Superman::Brandon Routh"));
-  QCOMPARE(castList.size(), 10);
+  QCOMPARE(castList.size(), 5);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
