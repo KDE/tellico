@@ -29,7 +29,7 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocale>
 #include <KConfigGroup>
 #include <KIntSpinBox>
 
@@ -37,26 +37,17 @@
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QDomDocument>
 #include <QTextCodec>
 
 namespace {
   static const int ALLOCINE_MAX_RETURNS_TOTAL = 20;
   static const char* ALLOCINE_API_KEY = "YW5kcm9pZC12M3M";
   static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
-  static const char* SCREENRUSH_API_URL = "http://api.screenrush.co.uk/rest/v3/";
-  static const char* FILMSTARTS_API_URL = "http://api.filmstarts.de/rest/v3/";
-  static const char* SENSACINE_API_URL = "http://api.sensacine.com/rest/v3/";
-  static const char* BEYAZPERDE_API_URL = "http://api.beyazperde.com/rest/v3/";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::AbstractAllocineFetcher;
 using Tellico::Fetch::AllocineFetcher;
-using Tellico::Fetch::ScreenRushFetcher;
-using Tellico::Fetch::FilmStartsFetcher;
-using Tellico::Fetch::SensaCineFetcher;
-using Tellico::Fetch::BeyazperdeFetcher;
 
 AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString& baseUrl_)
     : XMLFetcher(parent_)
@@ -243,158 +234,6 @@ AllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllo
 
 QString AllocineFetcher::ConfigWidget::preferredName() const {
   return AllocineFetcher::defaultName();
-}
-
-/**********************************************************************************************/
-
-ScreenRushFetcher::ScreenRushFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(SCREENRUSH_API_URL)) {
-}
-
-QString ScreenRushFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-Tellico::Fetch::ConfigWidget* ScreenRushFetcher::configWidget(QWidget* parent_) const {
-  return new ScreenRushFetcher::ConfigWidget(parent_, this);
-}
-
-QString ScreenRushFetcher::defaultName() {
-  return QLatin1String("Screenrush.co.uk");
-}
-
-QString ScreenRushFetcher::defaultIcon() {
-  return favIcon("http://www.screenrush.co.uk");
-}
-
-Tellico::StringHash ScreenRushFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-ScreenRushFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
-    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
-  // now add additional fields widget
-  addFieldsWidget(ScreenRushFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
-}
-
-QString ScreenRushFetcher::ConfigWidget::preferredName() const {
-  return ScreenRushFetcher::defaultName();
-}
-
-/**********************************************************************************************/
-
-FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(FILMSTARTS_API_URL)) {
-}
-
-QString FilmStartsFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-Tellico::Fetch::ConfigWidget* FilmStartsFetcher::configWidget(QWidget* parent_) const {
-  return new FilmStartsFetcher::ConfigWidget(parent_, this);
-}
-
-QString FilmStartsFetcher::defaultName() {
-  return QLatin1String("FILMSTARTS.de");
-}
-
-QString FilmStartsFetcher::defaultIcon() {
-  return favIcon("http://www.filmstarts.de");
-}
-
-Tellico::StringHash FilmStartsFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-FilmStartsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
-    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
-  // now add additional fields widget
-  addFieldsWidget(FilmStartsFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
-}
-
-QString FilmStartsFetcher::ConfigWidget::preferredName() const {
-  return FilmStartsFetcher::defaultName();
-}
-
-/**********************************************************************************************/
-
-SensaCineFetcher::SensaCineFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(SENSACINE_API_URL)) {
-}
-
-QString SensaCineFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-Tellico::Fetch::ConfigWidget* SensaCineFetcher::configWidget(QWidget* parent_) const {
-  return new SensaCineFetcher::ConfigWidget(parent_, this);
-}
-
-QString SensaCineFetcher::defaultName() {
-  return QLatin1String("SensaCine.com");
-}
-
-QString SensaCineFetcher::defaultIcon() {
-  return favIcon("http://www.sensacine.com");
-}
-
-Tellico::StringHash SensaCineFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-SensaCineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
-    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
-  // now add additional fields widget
-  addFieldsWidget(SensaCineFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
-}
-
-QString SensaCineFetcher::ConfigWidget::preferredName() const {
-  return SensaCineFetcher::defaultName();
-}
-
-/**********************************************************************************************/
-
-BeyazperdeFetcher::BeyazperdeFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(BEYAZPERDE_API_URL)) {
-}
-
-Tellico::Fetch::ConfigWidget* BeyazperdeFetcher::configWidget(QWidget* parent_) const {
-  return new BeyazperdeFetcher::ConfigWidget(parent_, this);
-}
-
-QString BeyazperdeFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-QString BeyazperdeFetcher::defaultName() {
-  return QString::fromUtf8("Beyazperde");
-}
-
-QString BeyazperdeFetcher::defaultIcon() {
-  return favIcon("http://www.beyazperde.com");
-}
-
-Tellico::StringHash BeyazperdeFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-BeyazperdeFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
-    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
-  // now add additional fields widget
-  addFieldsWidget(BeyazperdeFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
-}
-
-QString BeyazperdeFetcher::ConfigWidget::preferredName() const {
-  return BeyazperdeFetcher::defaultName();
 }
 
 #include "allocinefetcher.moc"

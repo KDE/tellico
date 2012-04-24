@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,6 +30,10 @@
 
 #include "../fetch/execexternalfetcher.h"
 #include "../fetch/allocinefetcher.h"
+#include "../fetch/filmstartsfetcher.h"
+#include "../fetch/sensacinefetcher.h"
+#include "../fetch/beyazperdefetcher.h"
+#include "../fetch/screenrushfetcher.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
