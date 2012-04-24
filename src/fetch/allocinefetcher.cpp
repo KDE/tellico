@@ -179,10 +179,6 @@ Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryP
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* AbstractAllocineFetcher::configWidget(QWidget* parent_) const {
-  return new AbstractAllocineFetcher::ConfigWidget(parent_, this);
-}
-
 AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
@@ -203,22 +199,11 @@ AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Abst
 
   l->setRowStretch(++row, 10);
 
-  // now add additional fields widget
-//  addFieldsWidget(fetcher_->allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
-
-  if(fetcher_) {
-    m_numCast->setValue(fetcher_->m_numCast);
-  } else { //defaults
-    m_numCast->setValue(10);
-  }
+  m_numCast->setValue(fetcher_ ? fetcher_->m_numCast : 10);
 }
 
 void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("Max Cast", m_numCast->value());
-}
-
-QString AbstractAllocineFetcher::ConfigWidget::preferredName() const {
-  return AllocineFetcher::defaultName();
 }
 
 /**********************************************************************************************/
@@ -229,6 +214,10 @@ AllocineFetcher::AllocineFetcher(QObject* parent_)
 
 QString AllocineFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+Tellico::Fetch::ConfigWidget* AllocineFetcher::configWidget(QWidget* parent_) const {
+  return new AllocineFetcher::ConfigWidget(parent_, this);
 }
 
 QString AllocineFetcher::defaultName() {
@@ -246,6 +235,16 @@ Tellico::StringHash AllocineFetcher::allOptionalFields() {
   return hash;
 }
 
+AllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(AllocineFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString AllocineFetcher::ConfigWidget::preferredName() const {
+  return AllocineFetcher::defaultName();
+}
+
 /**********************************************************************************************/
 
 ScreenRushFetcher::ScreenRushFetcher(QObject* parent_)
@@ -254,6 +253,10 @@ ScreenRushFetcher::ScreenRushFetcher(QObject* parent_)
 
 QString ScreenRushFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+Tellico::Fetch::ConfigWidget* ScreenRushFetcher::configWidget(QWidget* parent_) const {
+  return new ScreenRushFetcher::ConfigWidget(parent_, this);
 }
 
 QString ScreenRushFetcher::defaultName() {
@@ -270,6 +273,16 @@ Tellico::StringHash ScreenRushFetcher::allOptionalFields() {
   return hash;
 }
 
+ScreenRushFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(ScreenRushFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString ScreenRushFetcher::ConfigWidget::preferredName() const {
+  return ScreenRushFetcher::defaultName();
+}
+
 /**********************************************************************************************/
 
 FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
@@ -278,6 +291,10 @@ FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
 
 QString FilmStartsFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+Tellico::Fetch::ConfigWidget* FilmStartsFetcher::configWidget(QWidget* parent_) const {
+  return new FilmStartsFetcher::ConfigWidget(parent_, this);
 }
 
 QString FilmStartsFetcher::defaultName() {
@@ -294,6 +311,16 @@ Tellico::StringHash FilmStartsFetcher::allOptionalFields() {
   return hash;
 }
 
+FilmStartsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(FilmStartsFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString FilmStartsFetcher::ConfigWidget::preferredName() const {
+  return FilmStartsFetcher::defaultName();
+}
+
 /**********************************************************************************************/
 
 SensaCineFetcher::SensaCineFetcher(QObject* parent_)
@@ -302,6 +329,10 @@ SensaCineFetcher::SensaCineFetcher(QObject* parent_)
 
 QString SensaCineFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+Tellico::Fetch::ConfigWidget* SensaCineFetcher::configWidget(QWidget* parent_) const {
+  return new SensaCineFetcher::ConfigWidget(parent_, this);
 }
 
 QString SensaCineFetcher::defaultName() {
@@ -318,10 +349,24 @@ Tellico::StringHash SensaCineFetcher::allOptionalFields() {
   return hash;
 }
 
+SensaCineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(SensaCineFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString SensaCineFetcher::ConfigWidget::preferredName() const {
+  return SensaCineFetcher::defaultName();
+}
+
 /**********************************************************************************************/
 
 BeyazperdeFetcher::BeyazperdeFetcher(QObject* parent_)
     : AbstractAllocineFetcher(parent_, QLatin1String(BEYAZPERDE_API_URL)) {
+}
+
+Tellico::Fetch::ConfigWidget* BeyazperdeFetcher::configWidget(QWidget* parent_) const {
+  return new BeyazperdeFetcher::ConfigWidget(parent_, this);
 }
 
 QString BeyazperdeFetcher::source() const {
@@ -340,6 +385,16 @@ Tellico::StringHash BeyazperdeFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("origtitle")] = i18n("Original Title");
   return hash;
+}
+
+BeyazperdeFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(BeyazperdeFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString BeyazperdeFetcher::ConfigWidget::preferredName() const {
+  return BeyazperdeFetcher::defaultName();
 }
 
 #include "allocinefetcher.moc"

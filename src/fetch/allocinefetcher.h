@@ -55,16 +55,11 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  /**
-   * Returns a widget for modifying the fetcher's config.
-   */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
-
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
+    virtual QString preferredName() const = 0;
   private:
     KIntSpinBox* m_numCast;
   };
@@ -98,6 +93,17 @@ public:
   virtual QString source() const;
   virtual Type type() const { return Allocine; }
 
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
+
   static QString defaultName();
   static QString defaultIcon();
   static StringHash allOptionalFields();
@@ -118,6 +124,17 @@ public:
 
   virtual QString source() const;
   virtual Type type() const { return ScreenRush; }
+
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
 
   static QString defaultName();
   static QString defaultIcon();
@@ -140,6 +157,17 @@ public:
   virtual QString source() const;
   virtual Type type() const { return FilmStarts; }
 
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
+
   static QString defaultName();
   static QString defaultIcon();
   static StringHash allOptionalFields();
@@ -161,6 +189,17 @@ public:
   virtual QString source() const;
   virtual Type type() const { return SensaCine; }
 
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
+
   static QString defaultName();
   static QString defaultIcon();
   static StringHash allOptionalFields();
@@ -181,6 +220,17 @@ public:
 
   virtual QString source() const;
   virtual Type type() const { return Beyazperde; }
+
+    /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
 
   static QString defaultName();
   static QString defaultIcon();
