@@ -158,7 +158,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHookData(Data::EntryP
   while(castRows.count() > m_numCast) {
     castRows.removeLast();
   }
-  entry->setField(QLatin1String("cast"), FieldFormat::rowDelimiterString());
+  entry->setField(QLatin1String("cast"), castRows.join(FieldFormat::rowDelimiterString()));
   return entry;
 }
 
