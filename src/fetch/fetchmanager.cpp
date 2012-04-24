@@ -293,8 +293,19 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
 #endif
-  if(KGlobal::locale()->languageList().contains(QLatin1String("fr"))) {
+  const QStringList langs = KGlobal::locale()->languageList();
+  if(langs.contains(QLatin1String("fr"))) {
     FETCHER_ADD(DVDFr);
+    FETCHER_ADD(Allocine);
+  }
+  if(langs.contains(QLatin1String("de"))) {
+    FETCHER_ADD(FilmStarts);
+  }
+  if(langs.contains(QLatin1String("es"))) {
+    FETCHER_ADD(SensaCine);
+  }
+  if(langs.contains(QLatin1String("tr"))) {
+    FETCHER_ADD(Beyazperde);
   }
   return vec;
 }
