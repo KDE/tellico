@@ -40,14 +40,16 @@ using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;
 using Tellico::ImageZipArchive;
 
-ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false) {
+ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_dir(0) {
 }
 
-ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() {
+ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() , m_dir(0) {
   setPath(path_);
 }
 
 ImageDirectory::~ImageDirectory() {
+  delete m_dir;
+  m_dir = 0;
 }
 
 QString ImageDirectory::path() {
@@ -88,8 +90,12 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
   const QString path = this->path(); // virtual function, so don't assume m_path is correct
   if(!m_pathExists) {
     if(path.isEmpty()) {
-      myWarning() << "trying to write to empty path:" << img_.id();
-      return false;
+      // an empty path means the file hasn't been saved yet
+      if(!m_dir) {
+        m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
+        ImageDirectory::setPath(m_dir->name());
+      }
+      return writeImage(img_);
     }
     QDir dir(path);
     if(dir.mkdir(path)) {

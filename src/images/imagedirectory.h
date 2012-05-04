@@ -64,6 +64,8 @@ public:
 private:
   QString m_path;
   bool m_pathExists;
+  // until the file gets saved, the local directory is temporary
+  KTempDir* m_dir;
 };
 
 class TemporaryImageDirectory : public ImageDirectory {

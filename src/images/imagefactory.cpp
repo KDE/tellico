@@ -485,6 +485,12 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
   factory->d->pixmapCache.clear();
   if(purgeTempDirectory_) {
     factory->d->tempImageDir.purge();
+    // just to make sure all the image locations clean themselves up
+    // delete the factory (which deletes the storage objects) and
+    // then recreate the factory, in case anything else needs it
+    delete factory;
+    factory = 0;
+    ImageFactory::init();
   }
 }
 
