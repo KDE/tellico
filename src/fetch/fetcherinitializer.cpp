@@ -61,6 +61,10 @@
 #include "googlebookfetcher.h"
 #include "springerfetcher.h"
 #include "allocinefetcher.h"
+#include "screenrushfetcher.h"
+#include "filmstartsfetcher.h"
+#include "sensacinefetcher.h"
+#include "beyazperdefetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type

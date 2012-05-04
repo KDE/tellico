@@ -22,12 +22,14 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ABSTRACTALLOCINEFETCHER_H
-#define TELLICO_ABSTRACTALLOCINEFETCHER_H
+#ifndef TELLICO_ALLOCINEFETCHER_H
+#define TELLICO_ALLOCINEFETCHER_H
 
 #include "xmlfetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
+class KIntSpinBox;
 
 namespace Tellico {
 
@@ -53,16 +55,13 @@ public:
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
-  /**
-   * Returns a widget for modifying the fetcher's config.
-   */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
-
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
+    virtual QString preferredName() const = 0;
+  private:
+    KIntSpinBox* m_numCast;
   };
   friend class ConfigWidget;
 
@@ -75,6 +74,7 @@ private:
 
   QString m_apiKey;
   QString m_baseUrl;
+  int m_numCast;
 };
 
 /**
@@ -93,89 +93,16 @@ public:
   virtual QString source() const;
   virtual Type type() const { return Allocine; }
 
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
-};
-
-/**
- * A fetcher for screenrush.co.uk
- *
- * @author Robby Stephenson
- */
-class ScreenRushFetcher : public AbstractAllocineFetcher {
-Q_OBJECT
-
-public:
   /**
+   * Returns a widget for modifying the fetcher's config.
    */
-  ScreenRushFetcher(QObject* parent);
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  virtual QString source() const;
-  virtual Type type() const { return ScreenRush; }
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
-};
-
-/**
- * A fetcher for filmstarts.de
- *
- * @author Robby Stephenson
- */
-class FilmStartsFetcher : public AbstractAllocineFetcher {
-Q_OBJECT
-
-public:
-  /**
-   */
-  FilmStartsFetcher(QObject* parent);
-
-  virtual QString source() const;
-  virtual Type type() const { return FilmStarts; }
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
-};
-
-/**
- * A fetcher for sensacine.com
- *
- * @author Robby Stephenson
- */
-class SensaCineFetcher : public AbstractAllocineFetcher {
-Q_OBJECT
-
-public:
-  /**
-   */
-  SensaCineFetcher(QObject* parent);
-
-  virtual QString source() const;
-  virtual Type type() const { return SensaCine; }
-
-  static QString defaultName();
-  static QString defaultIcon();
-  static StringHash allOptionalFields();
-};
-
-/**
- * A fetcher for beyazperde.com
- *
- * @author Robby Stephenson
- */
-class BeyazperdeFetcher : public AbstractAllocineFetcher {
-Q_OBJECT
-
-public:
-  /**
-   */
-  BeyazperdeFetcher(QObject* parent);
-
-  virtual QString source() const;
-  virtual Type type() const { return Beyazperde; }
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
 
   static QString defaultName();
   static QString defaultIcon();

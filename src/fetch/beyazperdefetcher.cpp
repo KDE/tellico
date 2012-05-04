@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,31 +22,51 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALLOCINEFETCHERTEST_H
-#define ALLOCINEFETCHERTEST_H
+#include "beyazperdefetcher.h"
 
-#include "abstractfetchertest.h"
+#include <KLocale>
 
-class AllocineFetcherTest : public AbstractFetcherTest {
-Q_OBJECT
-public:
-  AllocineFetcherTest();
+namespace {
+  static const char* BEYAZPERDE_API_URL = "http://api.beyazperde.com/rest/v3/";
+}
 
-private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testTitleAccented();
-  void testTitleAccentRemoved();
-  void testPlotQuote();
+using namespace Tellico;
+using Tellico::Fetch::BeyazperdeFetcher;
 
-  void testTitleAPI();
-  void testTitleAPIAccented();
+BeyazperdeFetcher::BeyazperdeFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(BEYAZPERDE_API_URL)) {
+}
 
-  void testTitleScreenRush();
-  void testTitleFilmStarts();
-  void testTitleFilmStartsGerman();
-  void testTitleSensaCineSpanish();
-  void testTitleBeyazperdeTurkish();
-};
+Tellico::Fetch::ConfigWidget* BeyazperdeFetcher::configWidget(QWidget* parent_) const {
+  return new BeyazperdeFetcher::ConfigWidget(parent_, this);
+}
 
-#endif
+QString BeyazperdeFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+QString BeyazperdeFetcher::defaultName() {
+  return QLatin1String("Beyazperde");
+}
+
+QString BeyazperdeFetcher::defaultIcon() {
+  return favIcon("http://www.beyazperde.com");
+}
+
+Tellico::StringHash BeyazperdeFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
+}
+
+BeyazperdeFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(BeyazperdeFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString BeyazperdeFetcher::ConfigWidget::preferredName() const {
+  return BeyazperdeFetcher::defaultName();
+}
+
+#include "beyazperdefetcher.moc"

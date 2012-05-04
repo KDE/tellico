@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,31 +22,51 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALLOCINEFETCHERTEST_H
-#define ALLOCINEFETCHERTEST_H
+#include "filmstartsfetcher.h"
 
-#include "abstractfetchertest.h"
+#include <KLocale>
 
-class AllocineFetcherTest : public AbstractFetcherTest {
-Q_OBJECT
-public:
-  AllocineFetcherTest();
+namespace {
+  static const char* FILMSTARTS_API_URL = "http://api.filmstarts.de/rest/v3/";
+}
 
-private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testTitleAccented();
-  void testTitleAccentRemoved();
-  void testPlotQuote();
+using namespace Tellico;
+using Tellico::Fetch::FilmStartsFetcher;
 
-  void testTitleAPI();
-  void testTitleAPIAccented();
+FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
+    : AbstractAllocineFetcher(parent_, QLatin1String(FILMSTARTS_API_URL)) {
+}
 
-  void testTitleScreenRush();
-  void testTitleFilmStarts();
-  void testTitleFilmStartsGerman();
-  void testTitleSensaCineSpanish();
-  void testTitleBeyazperdeTurkish();
-};
+QString FilmStartsFetcher::source() const {
+  return m_name.isEmpty() ? defaultName() : m_name;
+}
 
-#endif
+Tellico::Fetch::ConfigWidget* FilmStartsFetcher::configWidget(QWidget* parent_) const {
+  return new FilmStartsFetcher::ConfigWidget(parent_, this);
+}
+
+QString FilmStartsFetcher::defaultName() {
+  return QLatin1String("FILMSTARTS.de");
+}
+
+QString FilmStartsFetcher::defaultIcon() {
+  return favIcon("http://www.filmstarts.de");
+}
+
+Tellico::StringHash FilmStartsFetcher::allOptionalFields() {
+  StringHash hash;
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
+  return hash;
+}
+
+FilmStartsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(FilmStartsFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+}
+
+QString FilmStartsFetcher::ConfigWidget::preferredName() const {
+  return FilmStartsFetcher::defaultName();
+}
+
+#include "filmstartsfetcher.moc"

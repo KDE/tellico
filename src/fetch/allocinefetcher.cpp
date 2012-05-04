@@ -29,38 +29,31 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocale>
 #include <KConfigGroup>
+#include <KIntSpinBox>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QDomDocument>
 #include <QTextCodec>
 
 namespace {
   static const int ALLOCINE_MAX_RETURNS_TOTAL = 20;
   static const char* ALLOCINE_API_KEY = "YW5kcm9pZC12M3M";
   static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
-  static const char* SCREENRUSH_API_URL = "http://api.screenrush.co.uk/rest/v3/";
-  static const char* FILMSTARTS_API_URL = "http://api.filmstarts.de/rest/v3/";
-  static const char* SENSACINE_API_URL = "http://api.sensacine.com/rest/v3/";
-  static const char* BEYAZPERDE_API_URL = "http://api.beyazperde.com/rest/v3/";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::AbstractAllocineFetcher;
 using Tellico::Fetch::AllocineFetcher;
-using Tellico::Fetch::ScreenRushFetcher;
-using Tellico::Fetch::FilmStartsFetcher;
-using Tellico::Fetch::SensaCineFetcher;
-using Tellico::Fetch::BeyazperdeFetcher;
 
 AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString& baseUrl_)
     : XMLFetcher(parent_)
     , m_apiKey(QLatin1String(ALLOCINE_API_KEY))
-    , m_baseUrl(baseUrl_) {
+    , m_baseUrl(baseUrl_)
+    , m_numCast(10) {
   setLimit(ALLOCINE_MAX_RETURNS_TOTAL);
   setXSLTFilename(QLatin1String("allocine2tellico.xsl"));
   Q_ASSERT(!m_baseUrl.isEmpty());
@@ -82,6 +75,7 @@ void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+  m_numCast = config_.readEntry("Max Cast", 10);
 }
 
 void AbstractAllocineFetcher::resetSearch() {
@@ -159,7 +153,13 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHookData(Data::EntryP
 
   // don't want to include id
   coll->removeField(QLatin1String("allocine-code"));
-  return coll->entries().front();
+  Data::EntryPtr entry = coll->entries().front();
+  QStringList castRows = FieldFormat::splitTable(entry->field(QLatin1String("cast")));
+  while(castRows.count() > m_numCast) {
+    castRows.removeLast();
+  }
+  entry->setField(QLatin1String("cast"), castRows.join(FieldFormat::rowDelimiterString()));
+  return entry;
 }
 
 Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -170,22 +170,31 @@ Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryP
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* AbstractAllocineFetcher::configWidget(QWidget* parent_) const {
-  return new AbstractAllocineFetcher::ConfigWidget(parent_, this);
-}
-
-AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher*)
+AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_numCast = new KIntSpinBox(0, 99, 1, 10, optionsWidget());
+  connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_numCast, row, 1);
+  QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
+  label->setWhatsThis(w);
+  m_numCast->setWhatsThis(w);
+  label->setBuddy(m_numCast);
+
+  l->setRowStretch(++row, 10);
+
+  m_numCast->setValue(fetcher_ ? fetcher_->m_numCast : 10);
 }
 
-void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
-}
-
-QString AbstractAllocineFetcher::ConfigWidget::preferredName() const {
-  return AllocineFetcher::defaultName();
+void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  config_.writeEntry("Max Cast", m_numCast->value());
 }
 
 /**********************************************************************************************/
@@ -196,6 +205,10 @@ AllocineFetcher::AllocineFetcher(QObject* parent_)
 
 QString AllocineFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+Tellico::Fetch::ConfigWidget* AllocineFetcher::configWidget(QWidget* parent_) const {
+  return new AllocineFetcher::ConfigWidget(parent_, this);
 }
 
 QString AllocineFetcher::defaultName() {
@@ -213,100 +226,14 @@ Tellico::StringHash AllocineFetcher::allOptionalFields() {
   return hash;
 }
 
-/**********************************************************************************************/
-
-ScreenRushFetcher::ScreenRushFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(SCREENRUSH_API_URL)) {
+AllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher_)
+    : AbstractAllocineFetcher::ConfigWidget(parent_, fetcher_) {
+  // now add additional fields widget
+  addFieldsWidget(AllocineFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
-QString ScreenRushFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-QString ScreenRushFetcher::defaultName() {
-  return QLatin1String("Screenrush.co.uk");
-}
-
-QString ScreenRushFetcher::defaultIcon() {
-  return favIcon("http://www.screenrush.co.uk");
-}
-
-Tellico::StringHash ScreenRushFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-/**********************************************************************************************/
-
-FilmStartsFetcher::FilmStartsFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(FILMSTARTS_API_URL)) {
-}
-
-QString FilmStartsFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-QString FilmStartsFetcher::defaultName() {
-  return QLatin1String("FILMSTARTS.de");
-}
-
-QString FilmStartsFetcher::defaultIcon() {
-  return favIcon("http://www.filmstarts.de");
-}
-
-Tellico::StringHash FilmStartsFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-/**********************************************************************************************/
-
-SensaCineFetcher::SensaCineFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(SENSACINE_API_URL)) {
-}
-
-QString SensaCineFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-QString SensaCineFetcher::defaultName() {
-  return QLatin1String("SensaCine.com");
-}
-
-QString SensaCineFetcher::defaultIcon() {
-  return favIcon("http://www.sensacine.com");
-}
-
-Tellico::StringHash SensaCineFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
-}
-
-/**********************************************************************************************/
-
-BeyazperdeFetcher::BeyazperdeFetcher(QObject* parent_)
-    : AbstractAllocineFetcher(parent_, QLatin1String(BEYAZPERDE_API_URL)) {
-}
-
-QString BeyazperdeFetcher::source() const {
-  return m_name.isEmpty() ? defaultName() : m_name;
-}
-
-QString BeyazperdeFetcher::defaultName() {
-  return QString::fromUtf8("Beyazperde");
-}
-
-QString BeyazperdeFetcher::defaultIcon() {
-  return favIcon("http://www.beyazperde.com");
-}
-
-Tellico::StringHash BeyazperdeFetcher::allOptionalFields() {
-  StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  return hash;
+QString AllocineFetcher::ConfigWidget::preferredName() const {
+  return AllocineFetcher::defaultName();
 }
 
 #include "allocinefetcher.moc"

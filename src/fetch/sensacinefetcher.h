@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010-2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,31 +22,47 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef ALLOCINEFETCHERTEST_H
-#define ALLOCINEFETCHERTEST_H
+#ifndef TELLICO_SENSACINEFETCHER_H
+#define TELLICO_SENSACINEFETCHER_H
 
-#include "abstractfetchertest.h"
+#include "allocinefetcher.h"
 
-class AllocineFetcherTest : public AbstractFetcherTest {
+namespace Tellico {
+
+  namespace Fetch {
+
+/**
+ * A fetcher for sensacine.com
+ *
+ * @author Robby Stephenson
+ */
+class SensaCineFetcher : public AbstractAllocineFetcher {
 Q_OBJECT
+
 public:
-  AllocineFetcherTest();
+  /**
+   */
+  SensaCineFetcher(QObject* parent);
 
-private Q_SLOTS:
-  void initTestCase();
-  void testTitle();
-  void testTitleAccented();
-  void testTitleAccentRemoved();
-  void testPlotQuote();
+  virtual QString source() const;
+  virtual Type type() const { return SensaCine; }
 
-  void testTitleAPI();
-  void testTitleAPIAccented();
+  /**
+   * Returns a widget for modifying the fetcher's config.
+   */
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  void testTitleScreenRush();
-  void testTitleFilmStarts();
-  void testTitleFilmStartsGerman();
-  void testTitleSensaCineSpanish();
-  void testTitleBeyazperdeTurkish();
+  class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    virtual QString preferredName() const;
+  };
+
+  static QString defaultName();
+  static QString defaultIcon();
+  static StringHash allOptionalFields();
 };
 
+  } // end namespace
+} // end namespace
 #endif
