@@ -1,3 +1,11 @@
+2012-05-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug with loading images from Google Book search (Bug 299789).
+
+2012-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added API data source for HathiTrust.
+
 2012-05-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a bug when using a local image directory for a file that has not yet been saved (Bug 299130).
