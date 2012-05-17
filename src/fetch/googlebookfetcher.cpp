@@ -26,6 +26,7 @@
 #include "googlebookfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
+#include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
@@ -173,6 +174,19 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     myWarning() << "no entry in dict";
     return Data::EntryPtr();
   }
+
+  const QString image_id = entry->field(QLatin1String("cover"));
+  // if it's still a url, we need to load it
+  if(image_id.startsWith(QLatin1String("http"))) {
+    const QString id = ImageFactory::addImage(image_id, true);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+      entry->setField(QLatin1String("cover"), QString());
+    } else {
+      entry->setField(QLatin1String("cover"), id);
+    }
+  }
+
   return entry;
 }
 

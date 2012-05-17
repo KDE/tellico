@@ -563,7 +563,6 @@ void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPt
       QVector<int> maxWidth(NCOLS, 0);
 
       Data::FieldList vec = m_currColl->fieldsByCategory(field_->category());
-      Data::FieldList::Iterator it = vec.begin();
       int count = 0;
       foreach(Data::FieldPtr field, vec) {
         GUI::FieldWidget* widget = m_widgetDict.value(QString::number(m_currColl->id()) + field->name());

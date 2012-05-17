@@ -32,6 +32,7 @@ SET(fetch_STAT_SRCS
    giantbombfetcher.cpp
    googlebookfetcher.cpp
    googlescholarfetcher.cpp
+   hathitrustfetcher.cpp
    hmac_sha2.c
    ibsfetcher.cpp
    imdbfetcher.cpp

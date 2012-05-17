@@ -53,6 +53,13 @@ ImageDirectory::~ImageDirectory() {
 }
 
 QString ImageDirectory::path() {
+  if(m_path.isEmpty()) {
+    // an empty path means the file hasn't been saved yet
+    if(!m_dir) {
+      m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
+    }
+    setPath(m_dir->name());
+  }
   return m_path;
 }
 

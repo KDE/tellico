@@ -87,7 +87,8 @@ enum Type {
   ScreenRush,
   FilmStarts,
   SensaCine,
-  Beyazperde
+  Beyazperde,
+  HathiTrust
 };
 
   }
