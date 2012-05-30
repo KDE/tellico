@@ -1,3 +1,7 @@
+2012-05-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data sources for IMDB in French, Spanish, German, Italian, and Portuguese.
+
 2012-05-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a bug with loading images from Google Book search (Bug 299789).
