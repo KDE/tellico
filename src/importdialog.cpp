@@ -47,6 +47,7 @@
 #include "translators/referencerimporter.h"
 #include "translators/deliciousimporter.h"
 #include "translators/goodreadsimporter.h"
+#include "translators/ciwimporter.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -266,6 +267,10 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
     case Import::GRS1:
       myDebug() << "GRS1 not implemented";
       break;
+
+    case Import::CIW:
+      importer = new Import::CIWImporter(urls_);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -322,6 +327,10 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
 
     case Import::Referencer:
       text = i18n("*.reflib|Referencer Files (*.reflib)") + QLatin1Char('\n');
+      break;
+
+    case Import::CIW:
+      text = i18n("*.ciw|CIW Files (*.ciw)") + QLatin1Char('\n');
       break;
 
     case Import::AudioFile:

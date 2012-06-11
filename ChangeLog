@@ -1,3 +1,7 @@
+2012-06-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added simple importer for CIW files from ISI.
+
 2012-05-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data sources for IMDB in French, Spanish, German, Italian, and Portuguese.

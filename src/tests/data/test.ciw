@@ -1,0 +1,309 @@
+﻿FN Thomson Reuters Web of Knowledge
+VR 1.0
+PT J
+AU Zelle, Rintze M.
+   Harrison, Jacob C.
+   Pronk, Jack T.
+   van Maris, Antonius J. A.
+TI Anaplerotic Role for Cytosolic Malic Enzyme in Engineered Saccharomyces
+   cerevisiae Strains
+SO APPLIED AND ENVIRONMENTAL MICROBIOLOGY
+VL 77
+IS 3
+BP 732
+EP 738
+DI 10.1128/AEM.02132-10
+PD FEB 2011
+PY 2011
+AB Malic enzyme catalyzes the reversible oxidative decarboxylation of
+   malate to pyruvate and CO(2). The Saccharomyces cerevisiae MAE1 gene
+   encodes a mitochondrial malic enzyme whose proposed physiological roles
+   are related to the oxidative, malate-decarboxylating reaction. Hitherto,
+   the inability of pyruvate carboxylase-negative (Pyc(-)) S. cerevisiae
+   strains to grow on glucose suggested that Mae1p cannot act as a
+   pyruvate-carboxylating, anaplerotic enzyme. In this study, relocation of
+   malic enzyme to the cytosol and creation of thermodynamically favorable
+   conditions for pyruvate carboxylation by metabolic engineering, process
+   design, and adaptive evolution, enabled malic enzyme to act as the sole
+   anaplerotic enzyme in S. cerevisiae. The Escherichia coli NADH-dependent
+   sfcA malic enzyme was expressed in a Pyc(-) S. cerevisiae background.
+   When PDC2, a transcriptional regulator of pyruvate decarboxylase genes,
+   was deleted to increase intracellular pyruvate levels and cells were
+   grown under a CO(2) atmosphere to favor carboxylation, adaptive
+   evolution yielded a strain that grew on glucose (specific growth rate,
+   0.06 +/- 0.01 h(-1)). Growth of the evolved strain was enabled by a
+   single point mutation (Asp336Gly) that switched the cofactor preference
+   of E. coli malic enzyme from NADH to NADPH. Consistently, cytosolic
+   relocalization of the native Mae1p, which can use both NADH and NADPH,
+   in a pyc1,2 Delta pdc2 Delta strain grown under a CO(2) atmosphere, also
+   enabled slow-growth on glucose. Although growth rates of these strains
+   are still low, the higher ATP efficiency of carboxylation via malic
+   enzyme, compared to the pyruvate carboxylase pathway, may contribute to
+   metabolic engineering of S. cerevisiae for anaerobic, high-yield
+   C(4)-dicarboxylic acid production.
+TC 0
+Z9 0
+SN 0099-2240
+UT WOS:000286597100004
+ER
+
+PT J
+AU Zelle, Rintze M.
+   Trueheart, Josh
+   Harrison, Jacob C.
+   Pronk, Jack T.
+   van Maris, Antonius J. A.
+TI Phosphoenolpyruvate Carboxykinase as the Sole Anaplerotic Enzyme in
+   Saccharomyces cerevisiae
+SO APPLIED AND ENVIRONMENTAL MICROBIOLOGY
+VL 76
+IS 16
+BP 5383
+EP 5389
+DI 10.1128/AEM.01077-10
+PD AUG 2010
+PY 2010
+AB Pyruvate carboxylase is the sole anaplerotic enzyme in glucose-grown
+   cultures of wild-type Saccharomyces cerevisiae. Pyruvate
+   carboxylase-negative (Pyc(-)) S. cerevisiae strains cannot grow on
+   glucose unless media are supplemented with C(4) compounds, such as
+   aspartic acid. In several succinate-producing prokaryotes,
+   phosphoenolpyruvate carboxykinase (PEPCK) fulfills this anaplerotic
+   role. However, the S. cerevisiae PEPCK encoded by PCK1 is repressed by
+   glucose and is considered to have a purely decarboxylating and
+   gluconeogenic function. This study investigates whether and under which
+   conditions PEPCK can replace the anaplerotic function of pyruvate
+   carboxylase in S. cerevisiae. Pyc(-) S. cerevisiae strains
+   constitutively overexpressing the PEPCK either from S. cerevisiae or
+   from Actinobacillus succinogenes did not grow on glucose as the sole
+   carbon source. However, evolutionary engineering yielded mutants able to
+   grow on glucose as the sole carbon source at a maximum specific growth
+   rate of ca. 0.14 h(-1), one-half that of the (pyruvate
+   carboxylase-positive) reference strain grown under the same conditions.
+   Growth was dependent on high carbon dioxide concentrations, indicating
+   that the reaction catalyzed by PEPCK operates near thermodynamic
+   equilibrium. Analysis and reverse engineering of two independently
+   evolved strains showed that single point mutations in pyruvate kinase,
+   which competes with PEPCK for phosphoenolpyruvate, were sufficient to
+   enable the use of PEPCK as the sole anaplerotic enzyme. The PEPCK
+   reaction produces one ATP per carboxylation event, whereas the original
+   route through pyruvate kinase and pyruvate carboxylase is ATP neutral.
+   This increased ATP yield may prove crucial for engineering of efficient
+   and low-cost anaerobic production of C(4) dicarboxylic acids in S.
+   cerevisiae.
+TC 1
+Z9 1
+SN 0099-2240
+UT WOS:000280633400006
+ER
+
+PT J
+AU Zelle, Rintze M.
+   De Hulster, Erik
+   Kloezen, Wendy
+   Pronk, Jack T.
+   van Maris, Antonius J. A.
+TI Key Process Conditions for Production of C(4) Dicarboxylic Acids in
+   Bioreactor Batch Cultures of an Engineered Saccharomyces cerevisiae
+   Strain
+SO APPLIED AND ENVIRONMENTAL MICROBIOLOGY
+VL 76
+IS 3
+BP 744
+EP 750
+DI 10.1128/AEM.02396-09
+PD FEB 2010
+PY 2010
+AB A recent effort to improve malic acid production by Saccharomyces
+   cerevisiae by means of metabolic engineering resulted in a strain that
+   produced up to 59 g liter(-1) of malate at a yield of 0.42 mol (mol
+   glucose)(-1) in calcium carbonate-buffered shake flask cultures. With
+   shake flasks, process parameters that are important for scaling up this
+   process cannot be controlled independently. In this study, growth and
+   product formation by the engineered strain were studied in bioreactors
+   in order to separately analyze the effects of pH, calcium, and carbon
+   dioxide and oxygen availability. A near-neutral pH, which in shake
+   flasks was achieved by adding CaCO(3), was required for efficient C(4)
+   dicarboxylic acid production. Increased calcium concentrations, a side
+   effect of CaCO(3) dissolution, had a small positive effect on malate
+   formation. Carbon dioxide enrichment of the sparging gas (up to 15%
+   [vol/vol]) improved production of both malate and succinate. At higher
+   concentrations, succinate titers further increased, reaching 0.29 mol
+   (mol glucose)(-1), whereas malate formation strongly decreased. Although
+   fully aerobic conditions could be achieved, it was found that moderate
+   oxygen limitation benefitted malate production. In conclusion, malic
+   acid production with the engineered S. cerevisiae strain could be
+   successfully transferred from shake flasks to 1-liter batch bioreactors
+   by simultaneous optimization of four process parameters (pH and
+   concentrations of CO(2), calcium, and O(2)). Under optimized conditions,
+   a malate yield of 0.48 +/- 0.01 mol (mol glucose)(-1) was obtained in
+   bioreactors, a 19% increase over yields in shake flask experiments.
+TC 2
+Z9 2
+SN 0099-2240
+UT WOS:000274017400015
+ER
+
+PT J
+AU Abbott, Derek A.
+   Zelle, Rintze M.
+   Pronk, Jack T.
+   van Maris, Antonius J. A.
+TI Metabolic engineering of Saccharomyces cerevisiae for production of
+   carboxylic acids: current status and challenges
+SO FEMS YEAST RESEARCH
+VL 9
+IS 8
+BP 1123
+EP 1136
+DI 10.1111/j.1567-1364.2009.00537.x
+PD DEC 2009
+PY 2009
+AB To meet the demands of future generations for chemicals and energy and
+   to reduce the environmental footprint of the chemical industry,
+   alternatives for petrochemistry are required. Microbial conversion of
+   renewable feedstocks has a huge potential for cleaner, sustainable
+   industrial production of fuels and chemicals. Microbial production of
+   organic acids is a promising approach for production of chemical
+   building blocks that can replace their petrochemically derived
+   equivalents. Although Saccharomyces cerevisiae does not naturally
+   produce organic acids in large quantities, its robustness, pH tolerance,
+   simple nutrient requirements and long history as an industrial workhorse
+   make it an excellent candidate biocatalyst for such processes. Genetic
+   engineering, along with evolution and selection, has been successfully
+   used to divert carbon from ethanol, the natural endproduct of S.
+   cerevisiae, to pyruvate. Further engineering, which included expression
+   of heterologous enzymes and transporters, yielded strains capable of
+   producing lactate and malate from pyruvate. Besides these metabolic
+   engineering strategies, this review discusses the impact of transport
+   and energetics as well as the tolerance towards these organic acids. In
+   addition to recent progress in engineering S. cerevisiae for organic
+   acid production, the key limitations and challenges are discussed in the
+   context of sustainable industrial production of organic acids from
+   renewable feedstocks.
+TC 11
+Z9 11
+SN 1567-1356
+UT WOS:000271264400001
+ER
+
+PT J
+AU Zelle, Rintze M.
+   de Hulster, Erik
+   van Winden, WoUter A.
+   de Waard, Pieter
+   Dijkema, Cor
+   Winkler, Aaron A.
+   Geertman, Jan-Maarten A.
+   van Dijken, Johannes P.
+   Pronk, Jack T.
+   van Maris, Antonius J. A.
+TI Malic acid production by Saccharomyces cerevisiae: Engineering of
+   pyruvate carboxylation, oxaloacetate reduction, and malate export
+SO APPLIED AND ENVIRONMENTAL MICROBIOLOGY
+VL 74
+IS 9
+BP 2766
+EP 2777
+DI 10.1128/AEM.02591-07
+PD MAY 2008
+PY 2008
+AB Malic acid is a potential biomass-derivable "building block" for
+   chemical synthesis. Since wild-type Saccharomyces cerevisiae strains
+   produce only low levels of malate, metabolic engineering is required to
+   achieve efficient malate production with this yeast. A promising pathway
+   for malate production from glucose proceeds via carboxylation of
+   pyruvate, followed by reduction of oxaloacetate to malate. This redox-
+   and ATP-neutral, CO2-fixing pathway has a theoretical maximum yield of 2
+   mol malate (mol glucose)(-1). A previously engineered glucose-tolerant,
+   C-2-independent pyruvate decarboxylase-negative S. cerevisiae strain was
+   used as the platform to evaluate the impact of individual and combined
+   introduction of three genetic modifications: (i) overexpression of the
+   native pyruvate carboxylase encoded by PYC2, (ii) high-level expression
+   of an allele of the MDH3 gene, of which the encoded malate dehydrogenase
+   was retargeted to the cytosol by deletion of the C-terminal peroxisomal
+   targeting sequence, and (iii) functional expression of the
+   Schizosaccharomyces pombe malate transporter gene SpMAE1. While single
+   or double modifications improved malate production, the highest malate
+   yields and titers were obtained with the simultaneous introduction of
+   all three modifications. In glucose-grown batch cultures, the resulting
+   engineered strain produced malate at titers of up to 59 g liter(-1) at a
+   malate yield of 0.42 mol (mol glucose)(-1). Metabolic flux analysis
+   showed that metabolite labeling patterns observed upon nuclear magnetic
+   resonance analyses of cultures grown on C-13-labeled glucose were
+   consistent with the envisaged nonoxidative, fermentative pathway for
+   malate production. The engineered strains still produced substantial
+   amounts of pyruvate, indicating that the pathway efficiency can be
+   further improved.
+TC 15
+Z9 17
+SN 0099-2240
+UT WOS:000255567900024
+ER
+
+PT S
+AU McCormick, MC
+   Litt, JS
+   Smith, VC
+   Zupancic, JAF
+AF McCormick, Marie C.
+   Litt, Jonathan S.
+   Smith, Vincent C.
+   Zupancic, John A. F.
+BE Fielding, JE
+   Brownson, RC
+   Green, LW
+TI Prematurity: An Overview and Public Health Implications
+SO ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32
+SE Annual Review of Public Health
+LA English
+DT Review
+DE infant mortality; childhood morbidity; prevention
+ID LOW-BIRTH-WEIGHT; NEONATAL INTENSIVE-CARE; QUALITY-OF-LIFE; EXTREMELY
+   PRETERM BIRTH; YOUNG-ADULTS BORN; AGE 8 YEARS; CHILDREN BORN;
+   BRONCHOPULMONARY DYSPLASIA; LEARNING-DISABILITIES; EXTREME PREMATURITY
+AB The high rate of premature births in the United States remains a public
+   health concern. These infants experience substantial morbidity and
+   mortality in the newborn period, which translate into significant
+   medical costs. In early childhood, survivors are characterized by a
+   variety of health problems, including motor delay and/or cerebral palsy,
+   lower IQs, behavior problems, and respiratory illness, especially
+   asthma. Many experience difficulty with school work, lower
+   health-related quality of life, and family stress. Emerging information
+   in adolescence and young adulthood paints a more optimistic picture,
+   with persistence of many problems but with better adaptation and more
+   positive expectations by the young adults. Few opportunities for
+   prevention have been identified; therefore, public health approaches to
+   prematurity include assurance of delivery in a facility capable of
+   managing neonatal complications, quality improvement to minimize
+   interinstitutional variations, early developmental support for such
+   infants, and attention to related family health issues.
+C1 [McCormick, MC] Harvard Univ, Dept Soc Human Dev & Hlth, Sch Publ Hlth, Boston, MA 02115 USA
+   [McCormick, MC; Litt, JS; Smith, VC; Zupancic, JAF] Beth Israel Deaconess Med Ctr, Dept Neonatol, Boston, MA 02215 USA
+   [Litt, JS] Childrens Hosp Boston, Div Newborn Med, Boston, MA 02115 USA
+RP McCormick, MC (reprint author), Harvard Univ, Dept Soc Human Dev & Hlth, Sch Publ Hlth, Boston, MA 02115 USA
+EM mmccormi@hsph.harvard.edu
+   vsmith1@bidmc.harvard.edu
+   jzupanci@bidmc.harvard.edu
+   Jonathan.Litt@childrens.harvard.edu
+NR 91
+TC 1
+Z9 1
+PU ANNUAL REVIEWS
+PI PALO ALTO
+PA 4139 EL CAMINO WAY, PO BOX 10139, PALO ALTO, CA 94303-0897 USA
+SN 0163-7525
+BN 978-0-8243-2732-3
+J9 ANNU REV PUBL HEALTH
+JI Annu. Rev. Public Health
+PY 2011
+VL 32
+BP 367
+EP 379
+DI 10.1146/annurev-publhealth-090810-182459
+PG 13
+GA BUZ33
+UT WOS:000290776200020
+ER
+
+EF
