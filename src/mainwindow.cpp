@@ -2167,6 +2167,7 @@ void MainWindow::importFile(Tellico::Import::Format format_, const KUrl::List& u
   if(urls_.count() > 1 &&
      format_ != Import::Bibtex &&
      format_ != Import::RIS &&
+     format_ != Import::CIW &&
      format_ != Import::PDF) {
     KUrl u = urls_.front();
     QString url = u.isLocalFile() ? u.path() : u.prettyUrl();
