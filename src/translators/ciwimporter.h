@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,69 +22,57 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_CIWIMPORTER_H
+#define TELLICO_CIWIMPORTER_H
+
+#include "importer.h"
+#include "../datavectors.h"
+
+#include <QString>
+#include <QHash>
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+ */
+class CIWImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  CIWImporter(const KUrl::List& urls);
+  CIWImporter(const QString& text);
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB,
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  /**
+   * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
+   */
+  virtual Data::CollPtr collection();
+  /**
+   */
+  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual bool canImport(int type) const;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+  static bool maybeCIW(const KUrl& url);
 
+public slots:
+  void slotCancel();
+
+private:
+  static void initTagMap();
+
+  Data::FieldPtr fieldByTag(const QString& tag);
+  void readURL(const KUrl& url, int n);
+  void readText(const QString& text, int n);
+
+  Data::CollPtr m_coll;
+  bool m_cancelled;
+
+  static QHash<QString, QString>* s_tagMap;
+};
+
+  } // end namespace
+} // end namespace
 #endif

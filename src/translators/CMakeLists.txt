@@ -12,6 +12,7 @@ SET(translators_STAT_SRCS
    bibteximporter.cpp
    bibtexmlexporter.cpp
    bibtexmlimporter.cpp
+   ciwimporter.cpp
    csvexporter.cpp
    csvimporter.cpp
    csvparser.cpp

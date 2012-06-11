@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2007-2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,7 @@
 #include "../gui/guiproxy.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/risimporter.h"
+#include "../translators/ciwimporter.h"
 #include "../tellico_debug.h"
 
 #include <kmimetype.h>
@@ -76,7 +77,7 @@ bool DropHandler::drop(QDropEvent* event_) {
 
 bool DropHandler::handleURL(const KUrl::List& urls_) {
   bool hasUnknown = false;
-  KUrl::List tc, pdf, bib, ris;
+  KUrl::List tc, pdf, bib, ris, ciw;
   foreach(const KUrl& url, urls_) {
     KMimeType::Ptr ptr;
     // findByURL doesn't work for http, so actually query
@@ -102,10 +103,14 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
       bib << url;
     } else if(url.fileName().endsWith(QLatin1String(".ris"))) {
       ris << url;
+    } else if(url.fileName().endsWith(QLatin1String(".ciw"))) {
+      ciw << url;
     } else if(ptr->is(QLatin1String("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
       bib << url;
     } else if(ptr->is(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
       ris << url;
+    } else if(ptr->is(QLatin1String("text/plain")) && Import::CIWImporter::maybeCIW(url)) {
+      ciw << url;
     } else {
       myDebug() << "unrecognized type: " << ptr->name() << " (" << url << ")";
       hasUnknown = true;
@@ -127,6 +132,9 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
   }
   if(!ris.isEmpty()) {
     mainWindow->importFile(Import::RIS, ris);
+  }
+  if(!ciw.isEmpty()) {
+    mainWindow->importFile(Import::CIW, ciw);
   }
   // any unknown urls get passed
   return !hasUnknown;
