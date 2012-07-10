@@ -99,7 +99,6 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   QRegExp runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
-  uint total = 0;
 
   QString tmp = text_;
   QTextStream t(&tmp);
@@ -127,7 +126,6 @@ void GCstarImporter::readGCfilms(const QString& text_) {
         m_coll = 0;
         return;
       }
-      total = Tellico::toUInt(values[1], 0)+1; // number of lines really
       if(values.size() > 2 && values[2] == QLatin1String("UTF8")) {
         // if locale encoding isn't utf8, need to do a reconversion
         QTextCodec* codec = QTextCodec::codecForLocale();
