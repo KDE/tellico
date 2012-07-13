@@ -1,5 +1,5 @@
 project(Tellico)
-set(TELLICO_VERSION "2.3.6+git")
+set(TELLICO_VERSION "2.3.6")
 
 cmake_minimum_required(VERSION 2.6.2)
 
