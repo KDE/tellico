@@ -222,6 +222,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     imageUrl.addPath(image_id);
     imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
     imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
+//    myDebug() << "image url:" << imageUrl;
     const QString id = ImageFactory::addImage(imageUrl, true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
@@ -371,7 +372,6 @@ void FreebaseFetcher::slotComplete(KJob*) {
   QString output;
 
   foreach(const QVariant& result, resultList) {
-  //  myDebug() << "found result:" << result;
     QVariantMap resultMap = result.toMap();
 
     Data::EntryPtr entry(new Data::Entry(coll));

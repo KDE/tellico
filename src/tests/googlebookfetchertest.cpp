@@ -43,7 +43,7 @@ void GoogleBookFetcherTest::initTestCase() {
 
 void GoogleBookFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       QLatin1String("Practical RDF"));
+                                       QLatin1String("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -72,7 +72,7 @@ void GoogleBookFetcherTest::testAuthor() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->title() == QLatin1String("Practical RDF")) {
+    if(testEntry->title() == QLatin1String("Practical Rdf")) {
       entry = testEntry;
       break;
     }
@@ -83,7 +83,7 @@ void GoogleBookFetcherTest::testAuthor() {
 
 void GoogleBookFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
-                                       QLatin1String("Practical RDF"));
+                                       QLatin1String("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -93,7 +93,7 @@ void GoogleBookFetcherTest::testKeyword() {
 }
 
 void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical RDF"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical Rdf"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-00263-7"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media"));
