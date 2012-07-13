@@ -106,11 +106,11 @@ void IBSFetcherTest::testEditor() {
 }
 
 void IBSFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
-  QCOMPARE(entry->field("title"), QLatin1String("Vino & cucina"));
+  QVERIFY(entry->field("title").startsWith(QLatin1String("Vino & cucina")));
   QCOMPARE(entry->field("isbn"), QLatin1String("9788804620372"));
-  QCOMPARE(entry->field("author"), QLatin1String("Bruno Vespa; Antonella Clerici"));
+  QCOMPARE(entry->field("author"), QLatin1String("Antonella Clerici; Bruno Vespa"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2012"));
-  QCOMPARE(entry->field("pages"), QLatin1String("240"));
+  QCOMPARE(entry->field("pages"), QLatin1String("225"));
   QCOMPARE(entry->field("publisher"), QLatin1String("Mondadori"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
