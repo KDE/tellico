@@ -757,7 +757,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
   }
 //  myDebug() << "grabbing " << imageURL.prettyUrl();
   if(!imageURL.isEmpty()) {
-    QString id = ImageFactory::addImage(imageURL, false);
+    QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     } else { // amazon serves up 1x1 gifs occasionally, but that's caught in the image constructor
