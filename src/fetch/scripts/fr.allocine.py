@@ -235,7 +235,7 @@ class AlloCineParser:
 
 		# Define some regexps
 		self.__regExps = {
-			'title' 	: '<div class="titlebar.*?<span.*?>(?P<title>.+?)</span>',
+			'title' 	: '<div id="title.*?<span.*?>(?P<title>.+?)</span>',
 			'dirs'		: """alis.*?par.*?<a.*?><span.*?>(?P<step1>.+?)</span></a>""",
 			'nat'		: 'Nationalit.*?</span>(?P<nat>.+?)</div',
 			'genres' 	: 'Genre</span>(?P<step1>.+?)</div>',
@@ -248,7 +248,8 @@ class AlloCineParser:
 		}
 
 		self.__castRegExps = {
-			'roleactor'		: '<li.*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p>.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
+#			'roleactor'		: '<li.*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p>.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
+			'roleactor'		: '<li[^>]*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p>.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
 			'prods'			  : '<td>[\r\n\t]*Producteur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
 			'scens'			  : '<td>[\r\n\t]*Sc.*?nariste[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
 			'comps'			  : '<td>[\r\n\t]*Compositeur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
