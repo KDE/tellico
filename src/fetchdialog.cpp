@@ -450,19 +450,16 @@ void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
     const int w1 = m_treeWidget->columnWidth(1);
     const int w2 = m_treeWidget->columnWidth(2);
     const int w3 = m_treeWidget->columnWidth(3);
-    const int wt = w0 + w1 + w2 + w3;
-
-    m_treeWidget->resizeColumnToContents(3);
-    const int w3new = m_treeWidget->columnWidth(3);
+    const int wt = m_treeWidget->width();
+//    myDebug() << w0 << w1 << w2 << w3 << wt;
 
     // whatever is leftover from resizing 3, split between 1 and 2
-    if(wt > w0 + w1 + w2 + w3new) {
-      const int diff = wt - w0 - w1 - w2 - w3new;
-      const int w1new = w1 + diff/2;
-      const int w2new = w2 + diff/2;
+    if(wt > w0 + w1 + w2 + w3) {
+      const int diff = wt - w0 - w1 - w2 - w3;
+      const int w1new = w1 + diff/2 - 4; // extra padding
+      const int w2new = w2 + diff/2 - 4; // extra padding
       m_treeWidget->setColumnWidth(1, w1new);
       m_treeWidget->setColumnWidth(2, w2new);
-      m_treeWidget->setColumnWidth(3, w3new);
     }
     m_treeWidget->header()->setStretchLastSection(true);
     // because calling setColumnWidth() will change this
