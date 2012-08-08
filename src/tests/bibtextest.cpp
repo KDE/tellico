@@ -62,6 +62,7 @@ void BibtexTest::testImport() {
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 36);
+  QVERIFY(coll->hasField(QLatin1String("issn")));
 
   QCOMPARE(bColl->preamble(), QL1("preamble"));
 
@@ -72,6 +73,7 @@ void BibtexTest::testImport() {
   QCOMPARE(entry->field("month"), QL1("jul"));
   QCOMPARE(entry->field("url"), QL1("http://example.com/~user/"));
   QCOMPARE(entry->field("keyword"), QL1("keyword1; keyword2; keyword3"));
+  QCOMPARE(entry->field("issn"), QL1("1334-2345"));
   QCOMPARE(bColl->macroList().value("ACM"), QL1("The OX Association for Computing Machinery"));
 
   Tellico::BibtexHandler::s_quoteStyle = Tellico::BibtexHandler::QUOTES;
@@ -103,10 +105,10 @@ void BibtexTest::testImport() {
 void BibtexTest::testDuplicateKeys() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
   Tellico::Data::BibtexCollection* bColl = static_cast<Tellico::Data::BibtexCollection*>(coll.data());
-  
+
   Tellico::Data::EntryList dupes = bColl->duplicateBibtexKeys();
   QVERIFY(dupes.isEmpty());
-  
+
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
   entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
@@ -114,7 +116,7 @@ void BibtexTest::testDuplicateKeys() {
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
   entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
   entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
-  
+
   Tellico::Data::EntryPtr entry3(new Tellico::Data::Entry(coll));
   entry3->setField(QLatin1String("title"), QLatin1String("Title 3"));
   entry3->setField(QLatin1String("bibtex-key"), QLatin1String("title3"));
@@ -122,7 +124,7 @@ void BibtexTest::testDuplicateKeys() {
   coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2 << entry3);
 
   QCOMPARE(coll->entries().count(), 3);
-  
+
   dupes = bColl->duplicateBibtexKeys();
   QCOMPARE(dupes.count(), 2);
 

@@ -402,6 +402,10 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
   Data::BibtexCollection* mainColl = static_cast<Data::BibtexCollection*>(m_coll.data());
   Data::BibtexCollection* newColl = static_cast<Data::BibtexCollection*>(coll_.data());
 
+  foreach(Data::FieldPtr field, coll_->fields()) {
+    m_coll->mergeField(field);
+  }
+
   mainColl->addEntries(newColl->entries());
   // append the preamble and macro lists
   if(!newColl->preamble().isEmpty()) {

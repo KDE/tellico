@@ -1,3 +1,7 @@
+2012-08-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug with adding new fields when importing bibtex (Bug 304767).
+
 2012-07-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.6.
