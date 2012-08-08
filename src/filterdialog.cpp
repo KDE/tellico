@@ -38,6 +38,7 @@
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kparts/componentfactory.h>
+#include <kservicetypetrader.h>
 #include <kregexpeditorinterface.h>
 #include <kiconloader.h>
 
