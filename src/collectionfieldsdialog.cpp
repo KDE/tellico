@@ -58,7 +58,7 @@ using namespace Tellico;
 using Tellico::FieldListItem;
 using Tellico::CollectionFieldsDialog;
 
-class FieldListItem : public Tellico::GUI::ListWidgetItem {
+class Tellico::FieldListItem : public Tellico::GUI::ListWidgetItem {
 public:
   FieldListItem(QListWidget* parent_, Data::FieldPtr field_) : GUI::ListWidgetItem(field_->title(), parent_), m_field(field_) {}
 

@@ -65,6 +65,8 @@ Q_OBJECT
   typedef QString (*FETCHER_ICON_FN)(void);
   typedef StringHash (*FETCHER_OPTIONALFIELDS_FN)(void);
   typedef ConfigWidget* (*FETCHER_CONFIGWIDGET_FN)(QWidget*);
+
+public:
   struct FetcherFunction  {
     FETCHER_CREATE_FN create;
     FETCHER_NAME_FN name;
@@ -72,8 +74,6 @@ Q_OBJECT
     FETCHER_OPTIONALFIELDS_FN optionalFields;
     FETCHER_CONFIGWIDGET_FN configWidget;
   };
-
-public:
   static Manager* self() { if(!s_self) s_self = new Manager(); return s_self; }
 
   ~Manager();

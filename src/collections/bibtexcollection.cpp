@@ -269,7 +269,6 @@ bool BibtexCollection::addField(Tellico::Data::FieldPtr field_) {
   if(!field_) {
     return false;
   }
-//  myDebug();
   bool success = Collection::addField(field_);
   if(success) {
     QString bibtex = field_->property(QLatin1String("bibtex"));
@@ -510,7 +509,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
 Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
   QSet<EntryPtr> dupes;
   QHash<QString, EntryPtr> keyHash;
-  
+
   const QString keyField = QLatin1String("bibtex-key");
   QString keyValue;
   foreach(EntryPtr entry, entries()) {
