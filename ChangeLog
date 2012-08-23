@@ -1,6 +1,8 @@
 2012-08-22  Robby Stephenson  <robby@periapsis.org>
 
-	* Corrected actor and role order in Allocine API fetcher.
+	* Corrected character encoding for DVDfr search.
+	* Corrected title vs. original title in DVDfr results.
+	* Corrected actor and role order in Allocine fetcher.
 
 2012-08-07  Robby Stephenson  <robby@periapsis.org>
 

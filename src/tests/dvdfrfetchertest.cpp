@@ -50,7 +50,6 @@ void DVDFrFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Le Pacte des loups"));
   m_fieldValues.insert(QLatin1String("studio"), QLatin1String("StudioCanal"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2001"));
-//  m_fieldValues.insert(QLatin1String("medium"), QLatin1String("DVD"));
   m_fieldValues.insert(QLatin1String("format"), QLatin1String("PAL"));
   m_fieldValues.insert(QLatin1String("aspect-ratio"), QLatin1String("2.35"));
   m_fieldValues.insert(QLatin1String("writer"), QString::fromUtf8("Stéphane Cabel; Christophe Gans"));
@@ -81,6 +80,16 @@ void DVDFrFetcherTest::testTitle() {
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
 
+void DVDFrFetcherTest::testTitleAccented() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QString::fromUtf8("La Communauté de l'Anneau"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+}
+
 void DVDFrFetcherTest::testUPC() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::UPC,
                                        QLatin1String("3259119636120"));
@@ -97,6 +106,7 @@ void DVDFrFetcherTest::testUPC() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
+  QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("DVD"));
   QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());

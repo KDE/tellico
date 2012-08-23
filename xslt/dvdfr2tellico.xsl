@@ -24,6 +24,7 @@
   <collection title="Search Results" type="3"> <!-- 11 is video -->
    <fields>
     <field name="_default"/>
+    <field flags="0" title="Original Title" category="General" format="1" type="1" name="origtitle" i18n="yes"/>
     <field flags="0" title="DVDFr ID" category="General" format="4" type="1" name="dvdfr-id"/>
     <field flags="0" title="DVDFr Link" category="General" format="4" type="7" name="dvdfr"/>
     <field title="Alternative Titles" flags="1" category="Alternative Titles" format="1" type="8" name="alttitle" i18n="true">
@@ -47,21 +48,17 @@
   </dvdfr-id>
 
   <title>
-   <!-- do we show the original title or the french one? -->
-   <xsl:value-of select="titres/vo"/>
-   <xsl:if test="string-length(titres/vo) = 0">
-    <xsl:value-of select="titres/fr"/>
+   <xsl:value-of select="titres/fr"/>
+   <xsl:if test="not(titres/fr)">
+    <xsl:value-of select="titres/vo"/>
    </xsl:if>
   </title>
 
+  <origtitle>
+   <xsl:value-of select="titres/vo"/>
+  </origtitle>
+
   <alttitles>
-   <xsl:if test="string-length(titres/vo) &gt; 0">
-    <alttitle>
-     <column>
-      <xsl:value-of select="titres/fr"/>
-     </column>
-    </alttitle>
-   </xsl:if>
    <alttitle>
     <column>
      <xsl:value-of select="titres/alternatif"/>
