@@ -227,7 +227,7 @@ void AllocineFetcherTest::testTitleScreenRush() {
   QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("154"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Clark Kent / Superman"));
+  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Clark Kent/Superman"));
   QCOMPARE(castList.size(), 10);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
@@ -252,7 +252,7 @@ void AllocineFetcherTest::testTitleFilmStarts() {
   QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("154"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Clark Kent / Superman"));
+  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Clark Kent/Superman"));
   QCOMPARE(castList.size(), 10);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
