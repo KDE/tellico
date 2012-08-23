@@ -77,10 +77,10 @@
      <xsl:if test="position() &lt; 11">
       <cast>
        <column>
-        <xsl:value-of select="ac:role"/>
+        <xsl:value-of select="ac:person/ac:name"/>
        </column>
        <column>
-        <xsl:value-of select="ac:person/ac:name"/>
+        <xsl:value-of select="ac:role"/>
        </column>
       </cast>
      </xsl:if>

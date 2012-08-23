@@ -147,8 +147,8 @@ class BasicTellicoDOM:
 		castsNode = self.__doc.createElement('casts')
 		i = 0
 		while i < len(d['actors']):
-			h = d['actors'][i]
-			g = d['actors'][i+1]
+			g = d['actors'][i]
+			h = d['actors'][i+1]
 			castNode = self.__doc.createElement('cast')
 			col1Node = self.__doc.createElement('column')
 			col2Node = self.__doc.createElement('column')
