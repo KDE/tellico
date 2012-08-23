@@ -41,6 +41,9 @@
  <entry>
   <title>
    <xsl:value-of select="ac:title"/>
+   <xsl:if test="not(ac:title)">
+    <xsl:value-of select="ac:originalTitle"/>
+   </xsl:if>
   </title>
 
   <origtitle>
