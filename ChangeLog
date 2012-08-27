@@ -1,3 +1,7 @@
+2012-08-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed API key configuration for Discogs since it's no longer needed.
+
 2012-08-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Corrected character encoding for DVDfr search.

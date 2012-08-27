@@ -29,8 +29,6 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <klineedit.h>
-
 namespace Tellico {
 
   namespace Fetch {
@@ -67,10 +65,8 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher = 0);
-    virtual void saveConfigHook(KConfigGroup&);
+    virtual void saveConfigHook(KConfigGroup&) {}
     virtual QString preferredName() const;
-  private:
-    KLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -87,8 +83,6 @@ private:
 
   int m_start;
   int m_total;
-
-  QString m_apiKey;
 };
 
   } // end namespace
