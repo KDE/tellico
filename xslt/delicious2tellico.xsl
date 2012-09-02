@@ -470,7 +470,7 @@
   </tc:running-time>
 
   <tc:certification>
-   <xsl:value-of select="concat(@mpaarating, ' (US)')"/>
+   <xsl:value-of select="concat(@mpaarating, ' (USA)')"/>
   </tc:certification>
 
   <tc:year>
