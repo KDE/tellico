@@ -34,6 +34,10 @@
 <xsl:key name="ccodes" match="cc:code" use="@id"/>
 <xsl:variable name="ccodes-top" select="document('')/*/cc:codes"/>
 
+<!-- for lower-casing -->
+<xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
+<xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
+
 <!-- DL libraries can contain mixed types and right now, there's no way to do that in Tellico -->
 <!-- so we're going to limit the export to whatever the type of the first item is -->
 <xsl:variable name="item">
@@ -45,7 +49,8 @@
    <xsl:value-of select="local-name(library/items/child::*[1])"/>
   </xsl:when>
   <xsl:otherwise>
-   <xsl:value-of select="plist/array/dict[1]/key[.='type']/following-sibling::string[1]"/>
+   <!-- case has been inconsistent, make sure it's lower-case -->
+   <xsl:value-of select="translate(plist/array/dict[1]/key[.='type']/following-sibling::string[1],$ucletters,$lcletters)"/>
   </xsl:otherwise>
  </xsl:choose>
 </xsl:variable>
@@ -58,8 +63,7 @@
    <xsl:choose>
     <xsl:when test="$item='book'">2</xsl:when>
     <xsl:when test="$item='movie'">3</xsl:when>
-    <xsl:when test="$item='Movie'">3</xsl:when>
-    <xsl:when test="$item='Music'">4</xsl:when>
+    <xsl:when test="$item='music'">4</xsl:when>
     <xsl:when test="$item='game'">11</xsl:when>
     <xsl:otherwise>0</xsl:otherwise>
    </xsl:choose>
@@ -77,13 +81,30 @@
  </tc:tellico>
 </xsl:template>
 
+<xsl:template match="book">
+ <tc:entry>
+  <!-- For simplicity, convert all attributes to elements -->
+  <xsl:for-each select="@*">
+   <xsl:variable name="dummies">
+    <xsl:element name="{name()}">
+     <xsl:value-of select="."/>
+    </xsl:element>
+   </xsl:variable>
+   <xsl:for-each select="exsl:node-set($dummies)/*">
+    <xsl:apply-templates select="."/>
+   </xsl:for-each>
+  </xsl:for-each>
+  <xsl:apply-templates select="*"/>
+ </tc:entry>
+</xsl:template>
+
 <xsl:template match="dict">
  <tc:entry>
   <xsl:apply-templates select="key"/>
  </tc:entry>
 </xsl:template>
 
-<xsl:template match="dict/key">
+<xsl:template match="key">
  <!-- For simplicity, convert all keys to elements -->
  <xsl:variable name="dummies">
   <xsl:element name="{text()}">
@@ -95,13 +116,26 @@
  </xsl:for-each>
 </xsl:template>
 
+<!-- All the real data gets handled below -->
+
 <xsl:template match="title">
  <tc:title>
-  <xsl:value-of select="."/>
+  <xsl:choose>
+   <xsl:when test="contains(., ':')">
+    <xsl:value-of select="substring-before(.,':')"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="."/>
+   </xsl:otherwise>
+  </xsl:choose>
  </tc:title>
+ 
+ <tc:subtitle>
+  <xsl:value-of select="substring-after(.,':')"/>
+ </tc:subtitle>
 </xsl:template>
 
-<xsl:template match="uuidString">
+<xsl:template match="uuidString|uuid">
  <tc:uuid>
   <xsl:value-of select="."/>
  </tc:uuid>
@@ -111,6 +145,25 @@
  <tc:amazon>
   <xsl:value-of select="concat('http://www.amazon.com/dp/',text(),'/?tag=tellico-20')"/>
  </tc:amazon>
+
+ <tc:isbn>
+  <xsl:value-of select="."/>
+ </tc:isbn>
+</xsl:template>
+
+<xsl:template match="isbn">
+ <tc:isbn>
+  <xsl:value-of select="."/>
+ </tc:isbn>
+</xsl:template>
+
+<!-- publishDate is handled farther below -->
+<xsl:template match="published">
+ <tc:pub_year>
+  <xsl:call-template name="year">
+   <xsl:with-param name="value" select="."/>
+  </xsl:call-template>
+ </tc:pub_year>
 </xsl:template>
 
 <xsl:template match="creationDate">
@@ -125,10 +178,45 @@
  </tc:mdate>
 </xsl:template>
 
+<xsl:template match="pages">
+ <tc:pages>
+  <xsl:value-of select="."/>
+ </tc:pages>
+</xsl:template>
+
+<!-- we don't include genresCompositeString since it's crap with no way to
+     determine how to split with spaces -->
+<xsl:template match="genre">
+ <xsl:call-template name="split">
+  <xsl:with-param name="name" select="'tc:genre'"/>
+  <xsl:with-param name="value" select="."/>
+  <xsl:with-param name="i18n" select="true()"/>
+ </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="netrating|netRating">
+ <tc:rating>
+  <xsl:value-of select="."/>
+ </tc:rating>
+</xsl:template>
+
+<xsl:template match="price">
+ <tc:pur_price>
+  <xsl:value-of select="."/>
+ </tc:pur_price>
+</xsl:template>
+
 <xsl:template match="purchaseDate">
  <tc:pur_date>
   <xsl:value-of select="substring(.,1,10)"/>
  </tc:pur_date>
+</xsl:template>
+
+<xsl:template match="description">
+ <tc:comments>
+  <!-- RTF gets cleaned up inside of Tellico -->
+  <xsl:value-of select="."/>
+ </tc:comments>
 </xsl:template>
 
 <xsl:template match="minutes">
@@ -137,28 +225,69 @@
  </tc:running-time>
 </xsl:template>
 
-<xsl:template match="theatricalDate|publishDate">
- <tc:year>
-  <xsl:value-of select="substring(.,1,4)"/>
- </tc:year>
+<xsl:template match="isSigned">
+ <tc:signed>
+  <xsl:value-of select="boolean(number(.))"/>
+ </tc:signed>
 </xsl:template>
 
-<xsl:template match="formatSingularString">
- <tc:medium i18n="true">
-  <xsl:choose>
-   <xsl:when test="$item = 'Music' and contains(., 'CD')">
-    <xsl:text>Compact Disc</xsl:text>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="."/>
-   </xsl:otherwise>
-  </xsl:choose>
- </tc:medium>
+<!-- don't set condition new, only used -->
+<xsl:template match="used[text()='1']">
+ <tc:condition i18n="true">
+  <xsl:text>Used</xsl:text>
+ </tc:condition>
+</xsl:template>
+
+<xsl:template match="theatricalDate|publishDate">
+ <xsl:choose>
+  <xsl:when test="$item = 'book'">
+   <tc:pub_year>
+    <xsl:value-of select="substring(.,1,4)"/>
+   </tc:pub_year>
+  </xsl:when>
+  <xsl:otherwise>
+   <tc:year>
+    <xsl:value-of select="substring(.,1,4)"/>
+   </tc:year>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+<xsl:template match="formatSingularString|aspect">
+ <xsl:choose>
+  <xsl:when test="$item = 'book'">
+   <tc:binding i18n="true">
+    <xsl:choose>
+     <xsl:when test="contains(., 'Hardcover')">
+      <xsl:text>Hardback</xsl:text>
+     </xsl:when>
+     <xsl:when test="contains(., 'Paperback')">
+      <xsl:text>Paperback</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
+   </tc:binding>
+  </xsl:when>
+  <xsl:when test="$item = 'music'">
+   <tc:medium i18n="true">
+    <xsl:choose>
+     <xsl:when test="contains(., 'CD')">
+      <xsl:text>Compact Disc</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
+   </tc:medium>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="actorsCompositeString">
  <xsl:choose>
-  <xsl:when test="$item = 'Music'">
+  <xsl:when test="$item = 'music'">
    <tc:artists>
     <tc:artist>
      <xsl:value-of select="."/>
@@ -169,16 +298,23 @@
 </xsl:template>
 
 
-<xsl:template match="publishersCompositeString">
+<xsl:template match="publishersCompositeString|publisher">
  <xsl:choose>
-  <xsl:when test="$item = 'Movie'">
+  <xsl:when test="$item = 'book'">
+   <tc:publishers>
+    <tc:publisher>
+     <xsl:value-of select="."/>
+    </tc:publisher>
+   </tc:publishers>
+  </xsl:when>
+  <xsl:when test="$item = 'movie'">
    <tc:studios>
     <tc:studio>
      <xsl:value-of select="."/>
     </tc:studio>
    </tc:studios>
   </xsl:when>
-  <xsl:when test="$item = 'Music'">
+  <xsl:when test="$item = 'music'">
    <tc:labels>
     <tc:label>
      <xsl:value-of select="."/>
@@ -188,22 +324,41 @@
  </xsl:choose>
 </xsl:template>
 
+<xsl:template match="author">
+ <xsl:call-template name="split">
+  <xsl:with-param name="name" select="'tc:author'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
+</xsl:template>
+
 <xsl:template match="creatorsCompositeString">
  <xsl:choose>
-  <xsl:when test="$item = 'Movie'">
+  <xsl:when test="$item = 'book'">
+   <tc:authors>
+    <tc:author>
+     <xsl:value-of select="."/>
+    </tc:author>
+   </tc:authors>
+  </xsl:when>
+  <xsl:when test="$item = 'movie'">
    <tc:directors>
     <tc:director>
      <xsl:value-of select="."/>
     </tc:director>
    </tc:directors>
   </xsl:when>
-  <xsl:when test="$item = 'Music'">
+  <xsl:when test="$item = 'music'">
    <tc:artists>
     <tc:artist>
      <xsl:value-of select="."/>
     </tc:artist>
    </tc:artists>
   </xsl:when>
+  <xsl:otherwise>
+   <xsl:comment>
+    <xsl:value-of select="concat('creator is', text())"/>
+   </xsl:comment>
+  </xsl:otherwise>
  </xsl:choose>
 </xsl:template>
 
@@ -252,102 +407,6 @@
  <xsl:if test="contains(., 'NTSC')"><tc:format i18n="true">NTSC</tc:format></xsl:if>
  <xsl:if test="contains(., 'SECAM')"><tc:format i18n="true">SECAM</tc:format></xsl:if>
  <xsl:if test="contains(., 'PAL')"><tc:format i18n="true">PAL</tc:format></xsl:if>
-</xsl:template>
-
-<xsl:template match="book">
- <tc:entry>
-  <tc:uuid>
-   <xsl:value-of select="@uuid"/>
-  </tc:uuid>
-
-  <tc:amazon>
-   <xsl:if test="@asin">
-    <xsl:value-of select="concat('http://www.amazon.com/dp/',@asin,'/?tag=tellico-20')"/>
-   </xsl:if>
-  </tc:amazon>
-
-  <tc:title>
-   <xsl:choose>
-    <xsl:when test="contains(@title, ':')">
-     <xsl:value-of select="substring-before(@title,':')"/>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:value-of select="@title"/>
-    </xsl:otherwise>
-   </xsl:choose>
-  </tc:title>
-
-  <tc:subtitle>
-   <xsl:value-of select="substring-after(@title,':')"/>
-  </tc:subtitle>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:author'"/>
-   <xsl:with-param name="value" select="@author"/>
-  </xsl:call-template>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:genre'"/>
-   <xsl:with-param name="value" select="@genre"/>
-   <xsl:with-param name="i18n" select="true()"/>
-  </xsl:call-template>
-
-  <tc:publisher>
-   <xsl:value-of select="@publisher"/>
-  </tc:publisher>
-
-  <tc:isbn>
-   <xsl:value-of select="@asin"/>
-  </tc:isbn>
-
-  <tc:binding i18n="true">
-   <xsl:choose>
-    <xsl:when test="contains(@aspect, 'Hardcover')">
-     <xsl:text>Hardback</xsl:text>
-    </xsl:when>
-    <xsl:when test="contains(@aspect, 'Paperback')">
-     <xsl:text>Paperback</xsl:text>
-    </xsl:when>
-    <xsl:otherwise>
-     <xsl:value-of select="@aspect"/>
-    </xsl:otherwise>
-   </xsl:choose>
-  </tc:binding>
-
-  <tc:pub_year>
-   <xsl:call-template name="year">
-    <xsl:with-param name="value" select="@published"/>
-   </xsl:call-template>
-  </tc:pub_year>
-
-  <tc:pages>
-   <xsl:value-of select="@pages"/>
-  </tc:pages>
-
-  <tc:pur_price>
-   <xsl:value-of select="@price"/>
-  </tc:pur_price>
-
-  <tc:pur_date>
-   <xsl:value-of select="@purchaseDate"/>
-  </tc:pur_date>
-
-  <tc:rating>
-   <!-- tellico automatically rounds down  -->
-   <xsl:value-of select="@netrating"/>
-  </tc:rating>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:nationality'"/>
-   <xsl:with-param name="value" select="@country"/>
-  </xsl:call-template>
-
-  <tc:comments>
-   <!-- it gets cleaned up inside of Tellico -->
-   <xsl:value-of select="description"/>
-  </tc:comments>
-
- </tc:entry>
 </xsl:template>
 
 <xsl:template match="movie">
@@ -589,7 +648,15 @@
   <xsl:value-of select="translate($value, translate($value, '0123456789', ''), '')"/>
  </xsl:variable>
  <!-- assume that Amazon always encodes the date with the 4-digit year last -->
- <xsl:value-of select="substring($numbers, string-length($numbers)-3, 4)"/>
+ <!-- unless there's a T or a Z indicating an ISO date string, when use first -->
+ <xsl:choose>
+  <xsl:when test="contains($value, 'T') or contains($value, 'Z')">
+   <xsl:value-of select="substring($numbers, 1, 4)"/>
+  </xsl:when>
+  <xsl:otherwise> 
+   <xsl:value-of select="substring($numbers, string-length($numbers)-3, 4)"/>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template name="strip-title">
@@ -638,6 +705,6 @@
 </xsl:template>
 
 <!-- ignore anything not explicit -->
-<xsl:template match="*"/>
+<xsl:template match="*|@*"/>
 
 </xsl:stylesheet>

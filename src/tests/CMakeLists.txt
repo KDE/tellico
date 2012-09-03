@@ -96,6 +96,9 @@ TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(ciwtest NOGUI ciwtest.cpp)
 TARGET_LINK_LIBRARIES(ciwtest ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(delicioustest NOGUI delicioustest.cpp)
+TARGET_LINK_LIBRARIES(delicioustest ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(gcstartest NOGUI gcstartest.cpp)
 TARGET_LINK_LIBRARIES(gcstartest ${TELLICO_TEST_LIBS})
 
