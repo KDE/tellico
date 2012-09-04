@@ -49,6 +49,7 @@ DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
 bool DeliciousImporter::canImport(int type) const {
   return type == Data::Collection::Book ||
          type == Data::Collection::Video ||
+         type == Data::Collection::Album ||
          type == Data::Collection::Game;
 }
 
@@ -68,6 +69,7 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   QString commField;
   switch(coll->type()) {
     case Data::Collection::Book:
+    case Data::Collection::Album:
       commField = QLatin1String("comments"); break;
     case Data::Collection::Video:
       commField = QLatin1String("plot"); break;

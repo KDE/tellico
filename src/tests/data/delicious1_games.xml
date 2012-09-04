@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library uuid="2C0BA7BA-F689-4C34-B1BE-A1A6E7C78F46" version="1">
+  <items>
+    <game asin="B0001B167O" country="us" created="165025280" currentValue="$9.20" esrbrating="Teen" fullTitle="Spider-Man 2: The Movie 2" genre="GameCube&#x000a;Games&#x000a;Fantasy&#x000a;Adventure&#x000a;Video Games&#x000a;Electronics&#x000a;Activision Games&#x000a;Select GameCube Games" lastLookupTime="165025280" netrating="4.5" platform="GameCube" price="$49.99" published="29-06-2004" publisher="Activision" purchaseDate="25-03-2006" title="Spider-Man 2: The Movie 2" upc="0047875805897" uuid="6ED6C1E2-BC5E-11DA-B0EB-000D934D1310">
+    </game>
+    <game asin="B00009XS6K" aspect="Video Game" country="us" created="185255680" currentValue="$3.60" esrbrating="Teen" fullTitle="Sphinx And The Cursed Mummy for PlayStation 2" genre="PlayStation2&#x000a;Fantasy&#x000a;Adventure&#x000a;Electronics&#x000a;Video Games" lastLookupTime="185255680" netrating="4.5" platform="PlayStation2" price="$12.99" publisher="THQ" purchaseDate="14-11-2006" title="Sphinx And The Cursed Mummy for PlayStation 2" upc="0752919460351" uuid="0951CAEE-745D-11DB-8408-000D934D1310">
+    </game>
+  </items>
+</library>

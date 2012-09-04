@@ -34,6 +34,8 @@
 <xsl:key name="ccodes" match="cc:code" use="@id"/>
 <xsl:variable name="ccodes-top" select="document('')/*/cc:codes"/>
 
+<xsl:key name="shelflinks" match="shelf" use="linkto/@uuid"/>
+
 <!-- for lower-casing -->
 <xsl:variable name="lcletters">abcdefghijklmnopqrstuvwxyz</xsl:variable>
 <xsl:variable name="ucletters">ABCDEFGHIJKLMNOPQRSTUVWXYZ</xsl:variable>
@@ -69,7 +71,9 @@
    </xsl:choose>
   </xsl:variable>
   <tc:collection title="Delicious Library Import">
-   <xsl:attribute name="type"><xsl:value-of select="$type"/></xsl:attribute>
+   <xsl:attribute name="type">
+    <xsl:value-of select="$type"/>
+   </xsl:attribute>
    <tc:fields>
     <tc:field name="_default"/>
     <tc:field flags="0" title="Amazon Link" category="General" format="4" type="7" name="amazon" i18n="true"/>
@@ -81,7 +85,7 @@
  </tc:tellico>
 </xsl:template>
 
-<xsl:template match="book">
+<xsl:template match="book|movie|music|game">
  <tc:entry>
   <!-- For simplicity, convert all attributes to elements -->
   <xsl:for-each select="@*">
@@ -94,6 +98,13 @@
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </xsl:for-each>
+  <!-- we can't do this in the uuid template because of context change -->
+  <tc:keywords>
+   <tc:keyword>
+    <xsl:value-of select="key('shelflinks', @uuid)/@name"/>
+   </tc:keyword>
+  </tc:keywords>
+  <!-- catch the description too -->
   <xsl:apply-templates select="*"/>
  </tc:entry>
 </xsl:template>
@@ -101,6 +112,12 @@
 <xsl:template match="dict">
  <tc:entry>
   <xsl:apply-templates select="key"/>
+  <!-- we can't do this in the uuid template because of context change -->
+  <tc:keywords>
+   <tc:keyword>
+    <xsl:value-of select="key('shelflinks', key[text()='uuid']/following-sibling::*[1])/@name"/>
+   </tc:keyword>
+  </tc:keywords>
  </tc:entry>
 </xsl:template>
 
@@ -119,20 +136,33 @@
 <!-- All the real data gets handled below -->
 
 <xsl:template match="title">
- <tc:title>
-  <xsl:choose>
-   <xsl:when test="contains(., ':')">
-    <xsl:value-of select="substring-before(.,':')"/>
-   </xsl:when>
-   <xsl:otherwise>
-    <xsl:value-of select="."/>
-   </xsl:otherwise>
-  </xsl:choose>
- </tc:title>
+ <xsl:choose>
+  <xsl:when test="$item = 'book'">
+   <tc:title>
+    <xsl:choose>
+     <xsl:when test="contains(., ':')">
+      <xsl:value-of select="substring-before(.,':')"/>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
+   </tc:title>
+   
+   <tc:subtitle>
+    <xsl:value-of select="substring-after(.,':')"/>
+   </tc:subtitle>
+  </xsl:when>
+  
+  <xsl:otherwise>
+   <tc:title>
+    <xsl:call-template name="strip-title">
+     <xsl:with-param name="title" select="."/>
+    </xsl:call-template>
+   </tc:title>
+  </xsl:otherwise>
+ </xsl:choose>
  
- <tc:subtitle>
-  <xsl:value-of select="substring-after(.,':')"/>
- </tc:subtitle>
 </xsl:template>
 
 <xsl:template match="uuidString|uuid">
@@ -159,11 +189,22 @@
 
 <!-- publishDate is handled farther below -->
 <xsl:template match="published">
- <tc:pub_year>
-  <xsl:call-template name="year">
-   <xsl:with-param name="value" select="."/>
-  </xsl:call-template>
- </tc:pub_year>
+ <xsl:choose>
+  <xsl:when test="$item = 'book'">
+   <tc:pub_year>
+    <xsl:call-template name="year">
+     <xsl:with-param name="value" select="."/>
+    </xsl:call-template>
+   </tc:pub_year>
+  </xsl:when>
+  <xsl:when test="$item = 'music' or $item = 'game'">
+   <tc:year>
+    <xsl:call-template name="year">
+     <xsl:with-param name="value" select="."/>
+    </xsl:call-template>
+   </tc:year>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="creationDate">
@@ -184,14 +225,54 @@
  </tc:pages>
 </xsl:template>
 
-<!-- we don't include genresCompositeString since it's crap with no way to
-     determine how to split with spaces -->
+<xsl:template match="genresCompositeString">
+ <!-- we don't include genresCompositeString since it's crap with no way to
+      determine how to split with spaces -->
+ <!-- but if it includes a newline, assume that's the delimiter -->
+ <xsl:if test="contains(., '&#10;')">
+  <xsl:call-template name="split">
+   <xsl:with-param name="name" select="'tc:keyword'"/>
+   <xsl:with-param name="value" select="."/>
+   <xsl:with-param name="i18n" select="true()"/>
+  </xsl:call-template>
+ </xsl:if>
+</xsl:template>
+
 <xsl:template match="genre">
  <xsl:call-template name="split">
-  <xsl:with-param name="name" select="'tc:genre'"/>
+  <xsl:with-param name="name" select="'tc:keyword'"/>
   <xsl:with-param name="value" select="."/>
   <xsl:with-param name="i18n" select="true()"/>
  </xsl:call-template>
+ 
+ <xsl:if test="$item = 'movie'">
+  <xsl:choose>
+   <xsl:when test="contains(., 'Region 1')">
+    <tc:region i18n="true">Region 1</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 2')">
+    <tc:region i18n="true">Region 2</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 3')">
+    <tc:region i18n="true">Region 3</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 4')">
+    <tc:region i18n="true">Region 4</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 5')">
+    <tc:region i18n="true">Region 5</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 6')">
+    <tc:region i18n="true">Region 6</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 7')">
+    <tc:region i18n="true">Region 7</tc:region>
+   </xsl:when>
+   <xsl:when test="contains(., 'Region 8')">
+    <tc:region i18n="true">Region 8</tc:region>
+   </xsl:when>
+  </xsl:choose>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template match="netrating|netRating">
@@ -213,16 +294,32 @@
 </xsl:template>
 
 <xsl:template match="description">
- <tc:comments>
-  <!-- RTF gets cleaned up inside of Tellico -->
-  <xsl:value-of select="."/>
- </tc:comments>
+ <xsl:choose>
+  <xsl:when test="$item = 'book'">
+   <tc:comments>
+    <!-- RTF gets cleaned up inside of Tellico -->
+    <xsl:value-of select="."/>
+   </tc:comments>
+  </xsl:when>
+  <xsl:when test="$item = 'movie'">
+   <tc:plot>
+    <!-- RTF gets cleaned up inside of Tellico -->
+    <xsl:value-of select="."/>
+   </tc:plot>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="minutes">
  <tc:running-time>
   <xsl:value-of select="."/>
  </tc:running-time>
+</xsl:template>
+
+<xsl:template match="artist">
+ <tc:artist>
+  <xsl:value-of select="."/>
+ </tc:artist>
 </xsl:template>
 
 <xsl:template match="isSigned">
@@ -247,7 +344,9 @@
   </xsl:when>
   <xsl:otherwise>
    <tc:year>
-    <xsl:value-of select="substring(.,1,4)"/>
+    <xsl:call-template name="year">
+     <xsl:with-param name="value" select="."/>
+    </xsl:call-template>
    </tc:year>
   </xsl:otherwise>
  </xsl:choose>
@@ -282,6 +381,11 @@
     </xsl:choose>
    </tc:medium>
   </xsl:when>
+  <xsl:otherwise>
+   <tc:medium i18n="true">
+    <xsl:value-of select="."/>
+   </tc:medium>
+  </xsl:otherwise>
  </xsl:choose>
 </xsl:template>
 
@@ -297,10 +401,9 @@
  </xsl:choose>
 </xsl:template>
 
-
 <xsl:template match="publishersCompositeString|publisher">
  <xsl:choose>
-  <xsl:when test="$item = 'book'">
+  <xsl:when test="$item = 'book' or $item = 'game'">
    <tc:publishers>
     <tc:publisher>
      <xsl:value-of select="."/>
@@ -327,6 +430,27 @@
 <xsl:template match="author">
  <xsl:call-template name="split">
   <xsl:with-param name="name" select="'tc:author'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="director">
+ <xsl:call-template name="split">
+  <xsl:with-param name="name" select="'tc:director'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="stars">
+ <xsl:call-template name="split">
+  <xsl:with-param name="name" select="'tc:cast'"/>
+  <xsl:with-param name="value" select="."/>
+ </xsl:call-template>
+</xsl:template>
+
+<xsl:template match="tracklisting">
+ <xsl:call-template name="split">
+  <xsl:with-param name="name" select="'tc:track'"/>
   <xsl:with-param name="value" select="."/>
  </xsl:call-template>
 </xsl:template>
@@ -362,7 +486,7 @@
  </xsl:choose>
 </xsl:template>
 
-<xsl:template match="audienceRecommendedAgeSingularString">
+<xsl:template match="mpaarating|audienceRecommendedAgeSingularString">
  <tc:certification i18n="true">
   <xsl:choose>
    <xsl:when test="starts-with(., 'R')">R (USA)</xsl:when>
@@ -381,17 +505,17 @@
  </xsl:call-template>
 </xsl:template>
 
-<xsl:template match="countryCode">
+<xsl:template match="country|countryCode">
  <tc:nationalitys>
   <tc:nationality>
    <xsl:apply-templates select="$ccodes-top">
-    <xsl:with-param name="ccode-id" select="text()"/>
+    <xsl:with-param name="ccode-id" select="."/>
    </xsl:apply-templates>
   </tc:nationality>
  </tc:nationalitys>
 </xsl:template>
 
-<xsl:template match="featuresCompositeString">
+<xsl:template match="features|featuresCompositeString">
  <xsl:if test="contains(., 'Widescreen')"><tc:widescreen>true</tc:widescreen></xsl:if>
  <xsl:if test='contains(., "Director&apos;s Cut")'><tc:directors-cut>true</tc:directors-cut></xsl:if>
  <xsl:if test="contains(., 'Region 1')"><tc:region i18n="true">Region 1</tc:region></xsl:if>
@@ -407,221 +531,29 @@
  <xsl:if test="contains(., 'NTSC')"><tc:format i18n="true">NTSC</tc:format></xsl:if>
  <xsl:if test="contains(., 'SECAM')"><tc:format i18n="true">SECAM</tc:format></xsl:if>
  <xsl:if test="contains(., 'PAL')"><tc:format i18n="true">PAL</tc:format></xsl:if>
+ <tc:aspect-ratios>
+  <xsl:if test="contains(., '1.33:1')"><tc:aspect-ratio>1.33:1</tc:aspect-ratio></xsl:if>
+  <xsl:if test="contains(., '1.85:1')"><tc:aspect-ratio>1.85:1</tc:aspect-ratio></xsl:if>
+  <xsl:if test="contains(., '2.35:1')"><tc:aspect-ratio>2.35:1</tc:aspect-ratio></xsl:if>
+ </tc:aspect-ratios>
+ <tc:audio-tracks>
+  <xsl:if test="contains(., 'Dolby')"><tc:audio-track i18n="true">Dolby</tc:audio-track></xsl:if>
+  <xsl:if test="contains(., 'DTS')"><tc:audio-track i18n="true">DTS</tc:audio-track></xsl:if>
+ </tc:audio-tracks>
 </xsl:template>
 
-<xsl:template match="movie">
- <tc:entry>
-  <tc:uuid>
-   <xsl:value-of select="@uuid"/>
-  </tc:uuid>
-
-  <tc:amazon>
-   <xsl:if test="@asin">
-    <xsl:value-of select="concat('http://www.amazon.com/dp/',@asin,'/?tag=tellico-20')"/>
-   </xsl:if>
-  </tc:amazon>
-
-  <tc:title>
-   <xsl:call-template name="strip-title">
-    <xsl:with-param name="title" select="@title"/>
-   </xsl:call-template>
-  </tc:title>
-
-  <tc:medium>
-   <xsl:value-of select="@aspect"/>
-  </tc:medium>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:director'"/>
-   <xsl:with-param name="value" select="@director"/>
-  </xsl:call-template>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:cast'"/>
-   <xsl:with-param name="value" select="@stars"/>
-  </xsl:call-template>
-
-  <xsl:if test="contains(@features, 'Widescreen')">
-   <tc:widescreen>true</tc:widescreen>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, 'NTSC')">
-   <tc:format i18n="true">NTSC</tc:format>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, 'PAL')">
-   <tc:format i18n="true">PAL</tc:format>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, 'SECAM')">
-   <tc:format i18n="true">SECAM</tc:format>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, 'Color')">
-   <tc:color i18n="true">Color</tc:color>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, 'Black &amp; White')">
-   <tc:color i18n="true">Black &amp; White</tc:color>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, '1.33:1')">
-   <tc:aspect-ratios>
-    <tc:aspect-ratio>1.33:1</tc:aspect-ratio>
-   </tc:aspect-ratios>
-  </xsl:if>
-
-  <xsl:if test="contains(@features, '1.85:1')">
-   <tc:aspect-ratios>
-    <tc:aspect-ratio>1.85:1</tc:aspect-ratio>
-   </tc:aspect-ratios>
-  </xsl:if>
-
-  <tc:audio-tracks>
-   <xsl:if test="contains(@features, 'Dolby')">
-    <tc:audio-track i18n="true">Dolby</tc:audio-track>
-   </xsl:if>
-   <xsl:if test="contains(@features, 'DTS')">
-    <tc:audio-track i18n="true">DTS</tc:audio-track>
-   </xsl:if>
-  </tc:audio-tracks>
-
-  <xsl:choose>
-   <xsl:when test="contains(@genre, 'Region 1')">
-    <tc:region i18n="true">Region 1</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 2')">
-    <tc:region i18n="true">Region 2</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 3')">
-    <tc:region i18n="true">Region 3</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 4')">
-    <tc:region i18n="true">Region 4</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 5')">
-    <tc:region i18n="true">Region 5</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 6')">
-    <tc:region i18n="true">Region 6</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 7')">
-    <tc:region i18n="true">Region 7</tc:region>
-   </xsl:when>
-   <xsl:when test="contains(@genre, 'Region 8')">
-    <tc:region i18n="true">Region 8</tc:region>
-   </xsl:when>
-  </xsl:choose>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:genre'"/>
-   <xsl:with-param name="value" select="@genre"/>
-   <xsl:with-param name="i18n" select="true()"/>
-  </xsl:call-template>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:studio'"/>
-   <xsl:with-param name="value" select="@publisher"/>
-  </xsl:call-template>
-
-  <tc:running-time>
-   <xsl:value-of select="@minutes"/>
-  </tc:running-time>
-
-  <tc:certification>
-   <xsl:value-of select="concat(@mpaarating, ' (USA)')"/>
-  </tc:certification>
-
-  <tc:year>
-   <xsl:call-template name="year">
-    <xsl:with-param name="value" select="@theatricalDate"/>
-   </xsl:call-template>
-  </tc:year>
-
-  <tc:pur_price>
-   <xsl:value-of select="@price"/>
-  </tc:pur_price>
-
-  <tc:pur_date>
-   <xsl:value-of select="@purchaseDate"/>
-  </tc:pur_date>
-
-  <tc:rating>
-   <!-- tellico automatically rounds down  -->
-   <xsl:value-of select="@netrating"/>
-  </tc:rating>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:nationality'"/>
-   <xsl:with-param name="value" select="@country"/>
-  </xsl:call-template>
-
-  <tc:plot>
-   <xsl:value-of select="description"/>
-  </tc:plot>
- </tc:entry>
-</xsl:template>
-
-<xsl:template match="game">
- <tc:entry>
-  <tc:uuid>
-   <xsl:value-of select="@uuid"/>
-  </tc:uuid>
-
-  <tc:amazon>
-   <xsl:if test="@asin">
-    <xsl:value-of select="concat('http://www.amazon.com/dp/',@asin,'/?tag=tellico-20')"/>
-   </xsl:if>
-  </tc:amazon>
-
-  <tc:title>
-   <xsl:value-of select="@title"/>
-  </tc:title>
-
-  <tc:platform>
-   <xsl:value-of select="@platform"/>
+<xsl:template match="platform">
+ <tc:platform>
+   <xsl:value-of select="."/>
   </tc:platform>
+ </xsl:template>
 
-  <tc:certification>
-   <xsl:value-of select="@esrbrating"/>
-  </tc:certification>
-
-  <xsl:call-template name="split">
-   <xsl:with-param name="name" select="'tc:genre'"/>
-   <xsl:with-param name="value" select="@genre"/>
-   <xsl:with-param name="i18n" select="true()"/>
-  </xsl:call-template>
-
-  <tc:pur_price>
-   <xsl:value-of select="@price"/>
-  </tc:pur_price>
-
-  <tc:pur_date>
-   <xsl:value-of select="@purchaseDate"/>
-  </tc:pur_date>
-
-  <tc:year>
-   <xsl:call-template name="year">
-    <xsl:with-param name="value" select="@published"/>
-   </xsl:call-template>
-  </tc:year>
-
-  <tc:rating>
-   <!-- tellico automatically rounds down  -->
-   <xsl:value-of select="@netrating"/>
-  </tc:rating>
-
-  <tc:publisher>
-   <xsl:value-of select="@publisher"/>
-  </tc:publisher>
-
-  <tc:description>
-   <xsl:value-of select="description"/>
-  </tc:description>
-
- </tc:entry>
+<xsl:template match="esrbrating">
+ <tc:certification>
+  <xsl:value-of select="."/>
+ </tc:certification>
 </xsl:template>
-
+ 
 <xsl:template name="split">
  <xsl:param name="name"/>
  <xsl:param name="value"/>
@@ -696,6 +628,12 @@
 <xsl:template match="cc:codes">
   <xsl:param name="ccode-id"/>
   <xsl:variable name="c" select="key('ccodes', $ccode-id)"/>
+  <xsl:comment>
+   <xsl:value-of select="$ccode-id"/>
+  </xsl:comment>
+  <xsl:comment>
+   <xsl:value-of select="$c"/>
+  </xsl:comment>
   <xsl:if test="$c">
     <xsl:value-of select="$c"/>
   </xsl:if>

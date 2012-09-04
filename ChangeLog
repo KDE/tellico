@@ -1,3 +1,7 @@
+2012-09-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Delicious Library importer.
+
 2012-08-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed API key configuration for Discogs since it's no longer needed.
