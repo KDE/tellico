@@ -383,7 +383,14 @@
   </xsl:when>
   <xsl:otherwise>
    <tc:medium i18n="true">
-    <xsl:value-of select="."/>
+    <xsl:choose>
+     <xsl:when test="contains(., 'VHS')">
+      <xsl:text>VHS</xsl:text>
+     </xsl:when>
+     <xsl:otherwise>
+      <xsl:value-of select="."/>
+     </xsl:otherwise>
+    </xsl:choose>
    </tc:medium>
   </xsl:otherwise>
  </xsl:choose>
