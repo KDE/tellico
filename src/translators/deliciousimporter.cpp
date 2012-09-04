@@ -49,6 +49,7 @@ DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
 bool DeliciousImporter::canImport(int type) const {
   return type == Data::Collection::Book ||
          type == Data::Collection::Video ||
+         type == Data::Collection::Album ||
          type == Data::Collection::Game;
 }
 
@@ -68,6 +69,7 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   QString commField;
   switch(coll->type()) {
     case Data::Collection::Book:
+    case Data::Collection::Album:
       commField = QLatin1String("comments"); break;
     case Data::Collection::Video:
       commField = QLatin1String("plot"); break;
@@ -77,20 +79,21 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
       myWarning() << "bad collection type:" << coll->type();
   }
 
+  const QString mdateField = QLatin1String("mdate");
   const QString uuidField = QLatin1String("uuid");
   const QString coverField = QLatin1String("cover");
   const bool isLocal = url().isLocalFile();
 
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
-    QString comments = entry->field(commField);
+  foreach(Data::EntryPtr entry, coll->entries()) {
+    const QString mdate = entry->field(mdateField);
+    const QString comments = entry->field(commField);
     if(!comments.isEmpty()) {
       RTF2HTML rtf2html(comments);
       entry->setField(commField, rtf2html.toHTML());
     }
 
     //try to add images
-    QString uuid = entry->field(uuidField);
+    const QString uuid = entry->field(uuidField);
     if(!uuid.isEmpty() && isLocal) {
       foreach(const QString& imageDir, imageDirs) {
         QString imgPath = libraryDir.path() + imageDir + uuid;
@@ -104,8 +107,12 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
         break;
       }
     }
+    //reset mdate value
+    entry->setField(mdateField, mdate);
   }
+
   coll->removeField(uuidField);
+
   return coll;
 }
 

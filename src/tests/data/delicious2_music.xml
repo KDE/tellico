@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>boxHeightInInches</key>
+		<real>0.0</real>
+		<key>boxLengthInInches</key>
+		<real>0.0</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>0.0</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2007-12-25T17:19:28Z</date>
+		<key>formatSingularString</key>
+		<string>Audio CD</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>0</integer>
+		<key>netRating</key>
+		<real>0.0</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>3</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishersCompositeString</key>
+		<string>Master Tone Inc.</string>
+		<key>purchaseDate</key>
+		<date>2007-12-25T08:00:00Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>title</key>
+		<string>Relaxation</string>
+		<key>type</key>
+		<string>Music</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>C73D5C7F-DE8B-4ADC-B8A3-D7C4C80980E1</string>
+	</dict>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Ozzy Osbourne</string>
+		<key>asin</key>
+		<string>B00006I8RI</string>
+		<key>boxHeightInInches</key>
+		<real>0.54000002145767212</real>
+		<key>boxLengthInInches</key>
+		<real>5.5500001907348633</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>4.9699997901916504</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2009-01-17T16:14:58Z</date>
+		<key>currentValue</key>
+		<string>$6.99</string>
+		<key>deweyDecimal</key>
+		<string></string>
+		<key>ean</key>
+		<string>9399702640425</string>
+		<key>featuresCompositeString</key>
+		<string>Import</string>
+		<key>formatSingularString</key>
+		<string>Audio CD</string>
+		<key>genresCompositeString</key>
+		<string>Hard Rock &amp; Metal
+Rock</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>isbn</key>
+		<string></string>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>0</integer>
+		<key>netRating</key>
+		<real>3.5</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>1</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$15.98</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>1987-06-29T07:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Epic Aus/Zoom</string>
+		<key>purchaseDate</key>
+		<date>2009-01-17T16:14:58Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>title</key>
+		<string>The Ultimate Sin</string>
+		<key>type</key>
+		<string>Music</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>BE16C425-9B2D-40DB-8D9A-D0C67A1A6296</string>
+	</dict>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Native North America</string>
+		<key>asin</key>
+		<string>B0000251LZ</string>
+		<key>boxHeightInInches</key>
+		<real>0.54000002145767212</real>
+		<key>boxLengthInInches</key>
+		<real>5.5500001907348633</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>4.9699997901916504</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2007-12-19T05:10:56Z</date>
+		<key>currentValue</key>
+		<string>$29.90</string>
+		<key>ean</key>
+		<string>5016073331724</string>
+		<key>featuresCompositeString</key>
+		<string>Import</string>
+		<key>formatSingularString</key>
+		<string>Audio CD Import</string>
+		<key>genresCompositeString</key>
+		<string>CD Album</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>0</integer>
+		<key>netRating</key>
+		<real>5</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>3</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$17.98</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>2005-11-15T08:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Castle Pulse/Wave</string>
+		<key>purchaseDate</key>
+		<date>2007-12-18T08:00:00Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>title</key>
+		<string>Native North American...</string>
+		<key>tracksCompositeString</key>
+		<string>Night Song Crying Rabbit Eye Of The Sun The Caller Flying Eagle Harvest Dreams Harvest Dreams(Part 2) Cry For Rain Cry For Rain(Part 2) Dancing Squaws War Song Like A Snake Spot Song Hungry Dog Intro And Prelude Top-Cheney-Nahana Ly-O-Lay Ale Loya Ya-Na-Hana Dawa Gitchi-Manidoo Yeha-Noha Ta-Was-Ne Heya-Hee Canto Chamamico Yo-Hey-O-Hee Horse Dance Dog Dance Death Dance Tree Dance Thunder Dance Light Dance Cry Dance White Dance Spring Dance Travel Dance Squabble Dance Child Dance Wolf Dance Freedom Dance</string>
+		<key>type</key>
+		<string>Music</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>D423A2D3-C94F-4B0A-B6DB-1C458E1BA859</string>
+	</dict>
+</array>
+</plist>

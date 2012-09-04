@@ -88,7 +88,7 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
     return Data::CollPtr();
   }
 //  myDebug() << text();
-  QString str = handler.applyStylesheet(text());
+  const QString str = handler.applyStylesheet(text());
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);

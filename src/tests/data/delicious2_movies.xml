@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Nicolas Cage Joaquin Phoenix James Gandolfini Peter Stormare Anthony Heald</string>
+		<key>asin</key>
+		<string>0767821823</string>
+		<key>audienceRecommendedAgeSingularString</key>
+		<string>R</string>
+		<key>boxHeightInInches</key>
+		<real>0.0</real>
+		<key>boxLengthInInches</key>
+		<real>0.0</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>0.0</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2007-12-20T01:23:28Z</date>
+		<key>creatorsCompositeString</key>
+		<string>Joel Schumacher</string>
+		<key>currentValue</key>
+		<string>$1.02</string>
+		<key>ean</key>
+		<string>9780767821827</string>
+		<key>featuresCompositeString</key>
+		<string>Anamorphic Closed-captioned Color Dolby DVD-Video Full Screen Widescreen NTSC 2.35:1</string>
+		<key>formatSingularString</key>
+		<string>DVD</string>
+		<key>genresCompositeString</key>
+		<string>Crime Nicolas Cage Suspense Thrillers Private Eyes Mystery &amp; Suspense DVD Full Screen Widescreen</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>isbn</key>
+		<string>0767821823</string>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>123</integer>
+		<key>netRating</key>
+		<real>3.5</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>1</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$14.94</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>1999-09-14T07:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Sony Pictures</string>
+		<key>purchaseDate</key>
+		<date>2007-12-19T08:00:00Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>theatricalDate</key>
+		<date>1999-02-26T08:00:00Z</date>
+		<key>title</key>
+		<string>8MM</string>
+		<key>type</key>
+		<string>Movie</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>F2870F9E-3E12-4F6B-B6F5-07E9FEBF3C48</string>
+	</dict>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Keir Dullea Gary Lockwood William Sylvester Daniel Richter Leonard Rossiter</string>
+		<key>asin</key>
+		<string>B00005ASUM</string>
+		<key>audienceRecommendedAgeSingularString</key>
+		<string>G</string>
+		<key>boxHeightInInches</key>
+		<real>0.5</real>
+		<key>boxLengthInInches</key>
+		<real>7.4000000953674316</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>5.6999998092651367</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2007-12-20T01:23:44Z</date>
+		<key>creatorsCompositeString</key>
+		<string>Stanley Kubrick</string>
+		<key>currentValue</key>
+		<string>$8.50</string>
+		<key>ean</key>
+		<string>9780790760117</string>
+		<key>featuresCompositeString</key>
+		<string>Anamorphic Closed-captioned Color Dolby DVD-Video Original recording remastered Widescreen NTSC 2.35:1</string>
+		<key>formatSingularString</key>
+		<string>DVD</string>
+		<key>genresCompositeString</key>
+		<string>Computer Paranoia Futuristic Space Adventure Aliens Horror DVD Widescreen</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>isbn</key>
+		<string>0790760118</string>
+		<key>languagesCompositeString</key>
+		<string>English (Original Language)</string>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>148</integer>
+		<key>netRating</key>
+		<real>4</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>1</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$19.98</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>2001-06-12T07:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Warner Home Video</string>
+		<key>purchaseDate</key>
+		<date>2007-12-19T08:00:00Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>theatricalDate</key>
+		<date>1968-04-06T08:00:00Z</date>
+		<key>title</key>
+		<string>2001 - A Space Odyssey</string>
+		<key>type</key>
+		<string>Movie</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>ADA2047F-0D70-4FDE-BE5E-216B7CE2D8B5</string>
+	</dict>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Jack Angel Keith Campbell Vito Carenzo Brendan Gleeson Clark Gregg</string>
+		<key>asin</key>
+		<string>B00003CXXP</string>
+		<key>audienceRecommendedAgeSingularString</key>
+		<string>PG-13</string>
+		<key>boxHeightInInches</key>
+		<real>0.0</real>
+		<key>boxLengthInInches</key>
+		<real>0.0</real>
+		<key>boxWeightInPounds</key>
+		<real>0.0</real>
+		<key>boxWidthInInches</key>
+		<real>0.0</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2007-12-20T01:25:36Z</date>
+		<key>creatorsCompositeString</key>
+		<string>Steven Spielberg</string>
+		<key>currentValue</key>
+		<string>$2.21</string>
+		<key>ean</key>
+		<string>9780783265636</string>
+		<key>editionsCompositeString</key>
+		<string>Two-Disc Special</string>
+		<key>featuresCompositeString</key>
+		<string>Closed-captioned Color Dolby DTS Surround Sound DVD-Video Subtitled Widescreen NTSC 1.85:1</string>
+		<key>formatSingularString</key>
+		<string>DVD</string>
+		<key>genresCompositeString</key>
+		<string>Steven Spielberg Robots &amp; Androids Futuristic DTS Special Editions Action &amp; Adventure Drama DreamWorks 4-for-3 Action &amp; Adventure 4-for-3 Science Fiction &amp; Fantasy DVD Widescreen</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>lastModificationDate</key>
+		<date>2009-06-11T15:50:41Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>145</integer>
+		<key>netRating</key>
+		<real>3.5</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>2</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$9.98</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>2002-03-05T08:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Dreamworks Video</string>
+		<key>purchaseDate</key>
+		<date>2007-12-19T08:00:00Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>theatricalDate</key>
+		<date>2001-12-19T08:00:00Z</date>
+		<key>title</key>
+		<string>A.I. - Artificial Intelligence</string>
+		<key>type</key>
+		<string>Movie</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>8347A3DB-B0D4-4274-BBA1-6B5520F49B9B</string>
+	</dict>
+	<dict>
+		<key>actorsCompositeString</key>
+		<string>Denise Poirier
+John Rafter Lee
+Julia Fletcher
+Steffan Chirazi
+Alex Fernandez</string>
+		<key>asin</key>
+		<string>B000B8I9XQ</string>
+		<key>audienceRecommendedAgeSingularString</key>
+		<string>NR (Not Rated)</string>
+		<key>boxHeightInInches</key>
+		<real>1</real>
+		<key>boxLengthInInches</key>
+		<real>7.5</real>
+		<key>boxWeightInPounds</key>
+		<real>0.69999998807907104</real>
+		<key>boxWidthInInches</key>
+		<real>5.5999999046325684</real>
+		<key>countryCode</key>
+		<string>us</string>
+		<key>creationDate</key>
+		<date>2012-05-23T20:45:08Z</date>
+		<key>currentValue</key>
+		<string>$2.50</string>
+		<key>deweyDecimal</key>
+		<string></string>
+		<key>ean</key>
+		<string>9781415714164</string>
+		<key>featuresCompositeString</key>
+		<string>1.33:1
+Animated
+Box set
+Color
+Dolby
+DVD
+Full Screen
+NTSC
+Region 1</string>
+		<key>formatSingularString</key>
+		<string>DVD</string>
+		<key>genresCompositeString</key>
+		<string>All product
+Blu-ray &amp; DVD
+TV</string>
+		<key>hasExperienced</key>
+		<integer>0</integer>
+		<key>isSigned</key>
+		<integer>0</integer>
+		<key>isbn</key>
+		<string>1415714169</string>
+		<key>languagesCompositeString</key>
+		<string>English (Unknown)
+English (Original Language)</string>
+		<key>lastModificationDate</key>
+		<date>2012-05-23T20:45:09Z</date>
+		<key>maximumPlayers</key>
+		<integer>0</integer>
+		<key>minimumPlayers</key>
+		<integer>0</integer>
+		<key>minutes</key>
+		<integer>224</integer>
+		<key>netRating</key>
+		<real>0.0</real>
+		<key>numberInSeries</key>
+		<integer>0</integer>
+		<key>numberOfMedia</key>
+		<integer>3</integer>
+		<key>pages</key>
+		<integer>0</integer>
+		<key>price</key>
+		<string>$39.98</string>
+		<key>privateCollection</key>
+		<integer>0</integer>
+		<key>publishDate</key>
+		<date>2005-11-22T05:00:00Z</date>
+		<key>publishersCompositeString</key>
+		<string>Paramount / MTV</string>
+		<key>purchaseDate</key>
+		<date>2012-05-23T20:45:08Z</date>
+		<key>rare</key>
+		<integer>0</integer>
+		<key>rating</key>
+		<real>0.0</real>
+		<key>title</key>
+		<string>Aeon Flux - The Complete Animated Collection</string>
+		<key>type</key>
+		<string>Movie</string>
+		<key>used</key>
+		<integer>0</integer>
+		<key>uuidString</key>
+		<string>5F8EC08D-9484-4BBB-B1E0-96316BBD1693</string>
+	</dict>
+</array>
+</plist>
