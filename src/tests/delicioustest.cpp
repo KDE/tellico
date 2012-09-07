@@ -34,6 +34,7 @@
 #include "../collections/musiccollection.h"
 #include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
+#include "../filter.h"
 #include "../fieldformat.h"
 
 #include <kstandarddirs.h>
@@ -147,6 +148,14 @@ void DeliciousTest::testMovies1() {
   QCOMPARE(entry->field("director"), QLatin1String("Trey Parker; Matt Stone"));
   // the shelf name gets added to keyword list
   QVERIFY(entry->field("keyword").contains(QLatin1String("TV Shows")));
+
+  Tellico::FilterList filters = coll->filters();
+  QCOMPARE(filters.count(), 1);
+
+  Tellico::FilterPtr filter = filters.first();
+  QVERIFY(filter);
+  QCOMPARE(filter->name(), QLatin1String("TV Shows"));
+  QVERIFY(filter->matches(entry));
 }
 
 void DeliciousTest::testMovies2() {

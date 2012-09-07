@@ -82,6 +82,9 @@
    <xsl:apply-templates select="library/items/child::*[local-name()=$item]"/>
    <xsl:apply-templates select="plist/array/dict"/>
   </tc:collection>
+  <tc:filters>
+   <xsl:apply-templates select="library/shelves/shelf"/>
+  </tc:filters>
  </tc:tellico>
 </xsl:template>
 
@@ -107,6 +110,12 @@
   <!-- catch the description too -->
   <xsl:apply-templates select="*"/>
  </tc:entry>
+</xsl:template>
+
+<xsl:template match="shelf">
+ <tc:filter match="any" name="{@name}">
+  <tc:rule pattern="{@name}" field="keyword" function="contains"/>
+ </tc:filter>
 </xsl:template>
 
 <xsl:template match="dict">
@@ -148,12 +157,12 @@
      </xsl:otherwise>
     </xsl:choose>
    </tc:title>
-   
+
    <tc:subtitle>
     <xsl:value-of select="substring-after(.,':')"/>
    </tc:subtitle>
   </xsl:when>
-  
+
   <xsl:otherwise>
    <tc:title>
     <xsl:call-template name="strip-title">
@@ -162,7 +171,7 @@
    </tc:title>
   </xsl:otherwise>
  </xsl:choose>
- 
+
 </xsl:template>
 
 <xsl:template match="uuidString|uuid">
@@ -244,7 +253,7 @@
   <xsl:with-param name="value" select="."/>
   <xsl:with-param name="i18n" select="true()"/>
  </xsl:call-template>
- 
+
  <xsl:if test="$item = 'movie'">
   <xsl:choose>
    <xsl:when test="contains(., 'Region 1')">
@@ -560,7 +569,7 @@
   <xsl:value-of select="."/>
  </tc:certification>
 </xsl:template>
- 
+
 <xsl:template name="split">
  <xsl:param name="name"/>
  <xsl:param name="value"/>
@@ -592,7 +601,7 @@
   <xsl:when test="contains($value, 'T') or contains($value, 'Z')">
    <xsl:value-of select="substring($numbers, 1, 4)"/>
   </xsl:when>
-  <xsl:otherwise> 
+  <xsl:otherwise>
    <xsl:value-of select="substring($numbers, string-length($numbers)-3, 4)"/>
   </xsl:otherwise>
  </xsl:choose>
