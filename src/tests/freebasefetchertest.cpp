@@ -297,7 +297,7 @@ void FreebaseFetcherTest::testGameTitle() {
   QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie Studios"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Game Studios"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game; Racing game"));
   // freebase cover went missing
   //   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());

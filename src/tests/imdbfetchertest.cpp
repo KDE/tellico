@@ -236,7 +236,7 @@ void ImdbFetcherTest::testOkunen() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Drama"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Drama; Fantasy"));
   QCOMPARE(entry->field("director"), QLatin1String("Takashi Miike"));
   QCOMPARE(entry->field("writer"), QLatin1String("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
