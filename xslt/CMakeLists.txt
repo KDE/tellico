@@ -20,6 +20,7 @@ SET(XSLT_FILES
     gcstar2tellico.xsl
     giantbomb2tellico.xsl
     goodreads2tellico.xsl
+    griffith2tellico.xsl
     hddvd-logo.png
     isbndb2tellico.xsl
     MARC21slim2MODS3.xsl

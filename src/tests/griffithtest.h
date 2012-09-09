@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,52 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_XSLTIMPORTER_H
-#define TELLICO_XSLTIMPORTER_H
+#ifndef GRIFFITHTEST_H
+#define GRIFFITHTEST_H
 
-class KUrlRequester;
+#include <QObject>
 
-#include "textimporter.h"
-#include "../datavectors.h"
-
-namespace Tellico {
-  class XSLTHandler;
-
-  namespace Import {
-
-/**
- * The XSLTImporter class takes care of transforming XML data using an XSL stylesheet.
- *
- * @author Robby Stephenson
- */
-class XSLTImporter : public TextImporter {
+class GriffithTest : public QObject {
 Q_OBJECT
 
-public:
-  /**
-   */
-  XSLTImporter(const KUrl& url);
-
-  /**
-   */
-  virtual Data::CollPtr collection();
-  /**
-   */
-  virtual QWidget* widget(QWidget* parent);
-  virtual void beginXSLTHandler(XSLTHandler*) {}
-  void setXSLTURL(const KUrl& url) { m_xsltURL = url; }
-
-public slots:
-  void slotCancel();
-
-private:
-  Data::CollPtr m_coll;
-
-  QWidget* m_widget;
-  KUrlRequester* m_URLRequester;
-  KUrl m_xsltURL;
+private Q_SLOTS:
+  void initTestCase();
+  void testMovies();
 };
 
-  } // end namespace
-} // end namespace
 #endif

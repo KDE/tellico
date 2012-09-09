@@ -87,6 +87,7 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return Data::CollPtr();
   }
+  beginXSLTHandler(&handler);
 //  myDebug() << text();
   const QString str = handler.applyStylesheet(text());
 //  myDebug() << str;

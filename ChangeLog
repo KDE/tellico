@@ -1,3 +1,7 @@
+2012-09-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Changed Griffith importer to use XML files instead of python script and assuming a sqlite3 database.
+
 2012-09-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Delicious Library importer.

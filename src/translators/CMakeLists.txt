@@ -88,5 +88,4 @@ ADD_DEPENDENCIES(translators tellico_config)
 
 ########### install files ###############
 
-INSTALL(PROGRAMS   griffith2tellico.py DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
 INSTALL(FILES   bibtex-translation.xml DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
