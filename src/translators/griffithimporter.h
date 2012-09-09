@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2007-2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,9 +25,7 @@
 #ifndef TELLICO_GRIFFITHIMPORTER_H
 #define TELLICO_GRIFFITHIMPORTER_H
 
-#include "importer.h"
-
-class KProcess;
+#include "xsltimporter.h"
 
 namespace Tellico {
   namespace Import {
@@ -35,37 +33,29 @@ namespace Tellico {
 /**
  * An importer for importing collections used by Griffith, a movie collection manager.
  *
- * The database is assumed to be $HOME/.griffith/griffith.db. The file format is sqlite3,
+ * Unless the XML file is passed to the constructor, the database is assumed to be
+ * $HOME/.griffith/griffith.db. The file format is sqlite3,
  * and a python script, depending on pysqlite, is used to import the database
  *
  * @author Robby Stephenson
  */
-class GriffithImporter : public Importer {
+class GriffithImporter : public XSLTImporter {
 Q_OBJECT
 
 public:
   /**
    */
-  GriffithImporter() : Importer(), m_process(0) {}
+  GriffithImporter(const KUrl& url);
   /**
    */
   virtual ~GriffithImporter();
 
-  /**
-   */
-  virtual Data::CollPtr collection();
   virtual bool canImport(int type) const;
-
-private slots:
-  void slotData();
-  void slotError();
-  void slotProcessExited();
+  virtual void beginXSLTHandler(XSLTHandler* handler);
+  virtual QWidget* widget(QWidget*) { return 0; }
 
 private:
   Data::CollPtr m_coll;
-
-  KProcess* m_process;
-  QByteArray m_data;
 };
 
   } // end namespace

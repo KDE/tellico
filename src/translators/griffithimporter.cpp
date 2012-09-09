@@ -23,92 +23,35 @@
  ***************************************************************************/
 
 #include "griffithimporter.h"
+#include "xslthandler.h"
 #include "../collections/videocollection.h"
-#include "tellicoimporter.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h>
 #include <kstandarddirs.h>
-#include <kprocess.h>
 
 #include <QDir>
 #include <QFile>
 
 using Tellico::Import::GriffithImporter;
 
-GriffithImporter::~GriffithImporter() {
-  if(m_process) {
-    m_process->kill();
-    delete m_process;
-    m_process = 0;
-  }
-}
-
-Tellico::Data::CollPtr GriffithImporter::collection() {
-  QString filename = QDir::homePath() + QLatin1String("/.griffith/griffith.db");
-  if(!QFile::exists(filename)) {
-    myWarning() << "database not found: " << filename;
-    return Data::CollPtr();
-  }
-
-  QString python = KStandardDirs::findExe(QLatin1String("python"));
-  if(python.isEmpty()) {
-    myWarning() << "python not found!";
-    return Data::CollPtr();
-  }
-
-  QString griffith = KGlobal::dirs()->findResource("appdata", QLatin1String("griffith2tellico.py"));
-  if(griffith.isEmpty()) {
-    myWarning() << "griffith2tellico.py not found!";
-    return Data::CollPtr();
-  }
-
-  m_process = new KProcess();
-  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
-  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
-  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
-  m_process->setProgram(python, QStringList() << griffith);
-  m_process->setOutputChannelMode(KProcess::SeparateChannels);
-  if(!m_process->execute()) {
-    myDebug() << "process failed to start";
-    return Data::CollPtr();
-  }
-
-  return m_coll;
-}
-
-void GriffithImporter::slotData() {
-  m_data.append(m_process->readAllStandardOutput());
-}
-
-void GriffithImporter::slotError() {
-  QString msg = QString::fromLocal8Bit(m_process->readAllStandardError());
-  myDebug() << msg;
-  setStatusMessage(msg);
-}
-
-
-void GriffithImporter::slotProcessExited() {
-//  myDebug();
-  if(m_process->exitStatus() != QProcess::NormalExit || m_process->exitCode() != 0) {
-    myDebug() << "process did not exit successfully";
-    return;
-  }
-
-  if(m_data.isEmpty()) {
-    myDebug() << "no data";
-    return;
-  }
-
-  QString text = QString::fromUtf8(m_data, m_data.size());
-  TellicoImporter imp(text);
-
-  m_coll = imp.collection();
-  if(!m_coll) {
-    myDebug() << "no collection pointer";
+GriffithImporter::GriffithImporter(const KUrl& url_) : XSLTImporter(url_) {
+  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("griffith2tellico.xsl"));
+  if(!xsltFile.isEmpty()) {
+    KUrl u;
+    u.setPath(xsltFile);
+    setXSLTURL(u);
   } else {
-    myLog() << "results found: " << m_coll->entryCount();
+    myWarning() << "unable to find griffith2tellico.xsl!";
   }
+}
+
+
+GriffithImporter::~GriffithImporter() {
+}
+
+void GriffithImporter::beginXSLTHandler(XSLTHandler* handler_) {
+  Q_ASSERT(handler_);
+  handler_->addStringParam("imgdir", QFile::encodeName(QDir::homePath() + QLatin1String("/.griffith/")));
 }
 
 bool GriffithImporter::canImport(int type) const {

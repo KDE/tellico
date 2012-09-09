@@ -102,6 +102,9 @@ TARGET_LINK_LIBRARIES(delicioustest ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(gcstartest NOGUI gcstartest.cpp)
 TARGET_LINK_LIBRARIES(gcstartest ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(griffithtest NOGUI griffithtest.cpp)
+TARGET_LINK_LIBRARIES(griffithtest ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(referencertest NOGUI referencertest.cpp)
 TARGET_LINK_LIBRARIES(referencertest ${TELLICO_TEST_LIBS})
 
