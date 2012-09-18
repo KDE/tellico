@@ -48,6 +48,7 @@ SET(fetch_STAT_SRCS
    sha2.c
    springerfetcher.cpp
    srufetcher.cpp
+   thegamesdbfetcher.cpp
    themoviedbfetcher.cpp
    winecomfetcher.cpp
    xmlfetcher.cpp

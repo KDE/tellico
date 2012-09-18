@@ -199,6 +199,9 @@ TARGET_LINK_LIBRARIES(springerfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(srufetchertest NOGUI srufetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(thegamesdbfetchertest NOGUI thegamesdbfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(themoviedbfetchertest NOGUI themoviedbfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(themoviedbfetchertest fetch ${TELLICO_TEST_LIBS})
 

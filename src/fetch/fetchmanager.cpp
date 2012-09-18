@@ -284,6 +284,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(MusicBrainz);
   FETCHER_ADD(BiblioShare);
+  FETCHER_ADD(TheGamesDB);
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     FETCHER_ADD(IBS);
