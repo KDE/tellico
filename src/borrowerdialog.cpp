@@ -104,22 +104,9 @@ void BorrowerDialog::slotLoadAddressBook() {
   m_itemHash.clear();
   m_lineEdit->completionObject()->clear();
 
-#ifdef HAVE_KABC
-  const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
-  for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
-      it != end; ++it) {
-    // skip people with no name
-    const QString name = (*it).realName().trimmed();
-    if(name.isEmpty()) {
-      continue;
-    }
-    Item* item = new Item(m_treeWidget, *it);
-    m_itemHash.insert(name, item);
-    m_lineEdit->completionObject()->addItem(name);
-  }
-#endif
-
-  // add current borrowers, too
+  // Bug 307958 - KABC::Addressee uids are not constant
+  // so populate the borrower list with the existing borrowers
+  // before adding ones from address book
   Data::BorrowerList borrowers = Data::Document::self()->collection()->borrowers();
   foreach(Data::BorrowerPtr bor, borrowers) {
     if(bor->name().isEmpty()) {
@@ -132,6 +119,25 @@ void BorrowerDialog::slotLoadAddressBook() {
     m_itemHash.insert(bor->name(), item);
     m_lineEdit->completionObject()->addItem(bor->name());
   }
+
+#ifdef HAVE_KABC
+  const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
+  for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
+      it != end; ++it) {
+    // skip people with no name
+    const QString name = (*it).realName().trimmed();
+    if(name.isEmpty()) {
+      continue;
+    }
+    if(m_itemHash.contains(name)) {
+      continue; // if an item already exists with this name
+    }
+    Item* item = new Item(m_treeWidget, *it);
+    m_itemHash.insert(name, item);
+    m_lineEdit->completionObject()->addItem(name);
+  }
+#endif
+
   m_treeWidget->sortItems(0, Qt::AscendingOrder);
 }
 

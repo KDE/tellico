@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="My Books" type="2">
+  <fields>
+   <field title="Title" flags="8" category="General" format="1" type="1" name="title"/>
+   <field title="Subtitle" flags="0" category="General" format="1" type="1" name="subtitle"/>
+   <field title="Author" flags="7" category="General" format="2" type="1" name="author"/>
+   <field title="Editor" flags="7" category="General" format="2" type="1" name="editor"/>
+   <field title="Binding" flags="2" category="General" format="4" type="3" allowed="Hardback;Paperback;Trade Paperback;E-Book;Magazine;Journal" name="binding"/>
+   <field title="Purchase Date" flags="0" category="General" format="3" type="1" name="pur_date"/>
+   <field title="Purchase Price" flags="0" category="General" format="4" type="1" name="pur_price"/>
+   <field title="Publisher" flags="6" category="Publishing" format="0" type="1" name="publisher"/>
+   <field title="Edition" flags="4" category="Publishing" format="0" type="1" name="edition"/>
+   <field title="Copyright Year" flags="3" category="Publishing" format="4" type="6" name="cr_year"/>
+   <field title="Publication Year" flags="2" category="Publishing" format="4" type="6" name="pub_year"/>
+   <field title="ISBN#" flags="0" category="Publishing" format="4" description="International Standard Book Number" type="1" name="isbn"/>
+   <field title="LCCN#" flags="0" category="Publishing" format="4" description="Library of Congress Control Number" type="1" name="lccn"/>
+   <field title="Pages" flags="0" category="Publishing" format="4" type="6" name="pages"/>
+   <field title="Translator" flags="7" category="Publishing" format="2" type="1" name="translator"/>
+   <field title="Language" flags="7" category="Publishing" format="4" type="1" name="language"/>
+   <field title="Genre" flags="7" category="Classification" format="4" type="1" name="genre"/>
+   <field title="Keywords" flags="7" category="Classification" format="4" type="1" name="keyword"/>
+   <field title="Series" flags="6" category="Classification" format="4" type="1" name="series"/>
+   <field title="Series Number" flags="0" category="Classification" format="4" type="6" name="series_num"/>
+   <field title="Condition" flags="0" category="Classification" format="4" type="3" allowed="New;Used" name="condition"/>
+   <field title="Signed" flags="0" category="Personal" format="4" type="4" name="signed"/>
+   <field title="Read" flags="0" category="Personal" format="4" type="4" name="read"/>
+   <field title="Gift" flags="0" category="Personal" format="4" type="4" name="gift"/>
+   <field title="Loaned" flags="0" category="Personal" format="4" type="4" name="loaned"/>
+   <field title="Rating" flags="2" category="Personal" format="4" type="14" name="rating">
+    <prop name="maximum">5</prop>
+    <prop name="minimum">1</prop>
+   </field>
+   <field title="Front Cover" flags="0" category="Front Cover" format="4" type="10" name="cover"/>
+   <field title="Comments" flags="0" category="Comments" format="4" type="2" name="comments"/>
+   <field title="ID" flags="32" category="Personal" format="4" type="6" name="id">
+    <prop name="template">%{@id}</prop>
+   </field>
+   <field title="Date Created" flags="16" category="Personal" format="3" type="12" name="cdate"/>
+   <field title="Date Modified" flags="16" category="Personal" format="3" type="12" name="mdate"/>
+  </fields>
+  <entry id="1">
+   <title>book1</title>
+   <loaned>true</loaned>
+   <id>1</id>
+   <cdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>07</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>12</day>
+   </mdate>
+  </entry>
+  <entry id="2">
+   <title>book2</title>
+   <id>2</id>
+   <cdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>07</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>12</day>
+   </mdate>
+  </entry>
+  <entry id="3">
+   <title>book3</title>
+   <id>3</id>
+   <cdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>07</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>12</day>
+   </mdate>
+  </entry>
+  <entry id="4">
+   <title>book4</title>
+   <id>4</id>
+   <cdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>07</day>
+   </cdate>
+   <mdate calendar="gregorian">
+    <year>2012</year>
+    <month>10</month>
+    <day>12</day>
+   </mdate>
+  </entry>
+ </collection>
+ <borrowers>
+  <borrower uid="ZnpWj3co6o" name="Ashley Stephenson">
+   <loan loanDate="2012-10-12" dueDate="" uid="Tellico5oLyJpEvpoX24" entryRef="1"></loan>
+  </borrower>
+  <borrower uid="ZnpWj3co6o" name="Ashley Stephenson">
+   <loan loanDate="2012-10-12" dueDate="" uid="Tellico5oLyJpEvpoX25" entryRef="2"></loan>
+  </borrower>
+ </borrowers>
+</tellico>

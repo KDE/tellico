@@ -30,6 +30,7 @@
 #include "collection.h"
 #include "commands/addloans.h"
 #include "commands/modifyloans.h"
+#include "tellico_utils.h"
 
 #include <klocale.h>
 #include <klineedit.h>
@@ -214,6 +215,12 @@ void LoanDialog::slotGetBorrower() {
 void LoanDialog::slotLoadAddressBook() {
   m_borrowerEdit->completionObject()->clear();
 
+  // add current borrowers
+  Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
+  foreach(Data::BorrowerPtr borrower, borrowers) {
+    m_borrowerEdit->completionObject()->addItem(borrower->name());
+  }
+
 #ifdef HAVE_KABC
   const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
   for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
@@ -226,15 +233,6 @@ void LoanDialog::slotLoadAddressBook() {
     m_borrowerEdit->completionObject()->addItem(name);
   }
 #endif
-
-  // add current borrowers, too
-  QStringList items = m_borrowerEdit->completionObject()->items();
-  Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
-  foreach(Data::BorrowerPtr borrower, borrowers) {
-    if(!items.contains(borrower->name())) {
-      m_borrowerEdit->completionObject()->addItem(borrower->name());
-    }
-  }
 }
 
 QUndoCommand* LoanDialog::createCommand() {
@@ -270,6 +268,9 @@ QUndoCommand* LoanDialog::addLoansCommand() {
   }
 
   if(!m_borrower) {
+    if(m_uid.isEmpty()) {
+      m_uid = Tellico::uid();
+    }
     m_borrower = new Data::Borrower(name, m_uid);
   }
 
