@@ -28,7 +28,7 @@
 
 <!-- The language must NOT be changed here. -->
 
-<book lang="&language;">
+<book id="tellico" lang="&language;">
 
 <!-- This header contains all of the meta-information for the document such
 as Authors, publish date, the abstract, and Keywords -->
