@@ -56,6 +56,7 @@ void AddLoans::redo() {
   }
 
   // if the borrower is empty, assume it's getting added, otherwise it's being modified
+  // the collection actually does the real check in addBorrower
   bool wasEmpty = m_borrower->isEmpty();
 
   // if there's no loaned field, we'll add one

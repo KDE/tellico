@@ -801,7 +801,17 @@ void Collection::addBorrower(Tellico::Data::BorrowerPtr borrower_) {
   if(!borrower_) {
     return;
   }
-  m_borrowers.append(borrower_);
+  // check against existing borrower uid
+  bool existsAlready = false;
+  foreach(BorrowerPtr bor, m_borrowers) {
+    if(bor->uid() == borrower_->uid()) {
+      existsAlready = true;
+      break;
+    }
+  }
+  if(!existsAlready) {
+    m_borrowers.append(borrower_);
+  }
 }
 
 void Collection::addFilter(Tellico::FilterPtr filter_) {
