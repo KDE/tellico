@@ -121,7 +121,7 @@ void TellicoReadTest::testCoinCollection() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
 
   Tellico::Data::FieldPtr field = coll->fieldByName("title");
-  // old fiend has Dependent value, now is Line
+  // old field has Dependent value, now is Line
   QVERIFY(!field.isNull());
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
   QCOMPARE(field->title(), QL1("Title"));
@@ -179,4 +179,36 @@ void TellicoReadTest::testTableData() {
   QCOMPARE(rows.count(), 1);
   const QStringList cols = Tellico::FieldFormat::splitRow(rows.at(0));
   QCOMPARE(cols.count(), 3);
+}
+
+void TellicoReadTest::testDuplicateLoans() {
+  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_loan.xml"));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+
+  QCOMPARE(coll->borrowers().count(), 1);
+
+  Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
+  QVERIFY(!bor.isNull());
+
+  QCOMPARE(bor->loans().count(), 1);
+}
+
+void TellicoReadTest::testDuplicateBorrowers() {
+  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_borrower.xml"));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+
+  QCOMPARE(coll->borrowers().count(), 1);
+
+  Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
+  QVERIFY(!bor.isNull());
+
+  QCOMPARE(bor->loans().count(), 2);
 }
