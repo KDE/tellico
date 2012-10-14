@@ -76,7 +76,7 @@ bool GoogleBookFetcher::canSearch(FetchKey k) const {
 }
 
 bool GoogleBookFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book;
+  return type == Data::Collection::Book || Data::Collection::Bibtex;
 }
 
 void GoogleBookFetcher::readConfigHook(const KConfigGroup&) {

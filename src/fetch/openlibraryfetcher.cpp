@@ -75,7 +75,7 @@ bool OpenLibraryFetcher::canSearch(FetchKey k) const {
 }
 
 bool OpenLibraryFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book;
+  return type == Data::Collection::Book || Data::Collection::Bibtex;
 }
 
 void OpenLibraryFetcher::readConfigHook(const KConfigGroup&) {
