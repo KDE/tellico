@@ -93,7 +93,7 @@ void DiscogsFetcherTest::testPerson() {
 
 void DiscogsFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
-                                       QLatin1String("Fallen Evanescence"));
+                                       QLatin1String("Fallen Evanescence US"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
