@@ -64,6 +64,7 @@ QString AnimeNfoFetcher::source() const {
 
 bool AnimeNfoFetcher::canFetch(int type) const {
   return type == Data::Collection::Book ||
+         type == Data::Collection::Bibtex ||
          type == Data::Collection::Video;
 }
 
@@ -87,7 +88,7 @@ void AnimeNfoFetcher::search() {
     case Data::Collection::Video:
       u.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
       break;
-      
+
     default:
       myWarning() << "collection type not valid:" << request().collectionType;
       stop();
@@ -261,6 +262,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
   Data::CollPtr coll;
   switch(request().collectionType) {
     case Data::Collection::Book:
+    case Data::Collection::Bibtex:
       coll = Data::CollPtr(new Data::BookCollection(true));
       break;
 
@@ -269,9 +271,9 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
       break;
 
     default:
-      return Data::EntryPtr();   
+      return Data::EntryPtr();
   }
-     
+
   // add new fields
   Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
   coll->addField(f);
@@ -318,19 +320,20 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
 
   switch(request().collectionType) {
     case Data::Collection::Book:
+    case Data::Collection::Bibtex:
       fieldMap.insert(QLatin1String("Year Published"), QLatin1String("pub_year"));
       break;
     case Data::Collection::Video:
       fieldMap.insert(QLatin1String("Year Published"), QLatin1String("year"));
       break;
     default:
-      break;   
+      break;
   }
 
   Data::EntryPtr entry(new Data::Entry(coll));
 
   QString fullTitle;
-  
+
   int n = 0;
   QString key, value;
   for(int pos = infoRx.indexIn(s); pos > -1; pos = infoRx.indexIn(s, pos+1)) {

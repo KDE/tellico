@@ -69,6 +69,7 @@ bool DoubanFetcher::canSearch(FetchKey k) const {
 
 bool DoubanFetcher::canFetch(int type) const {
   return type == Data::Collection::Book
+      || type == Data::Collection::Bibtex
       || type == Data::Collection::Video
       || type == Data::Collection::Album;
 }
@@ -85,6 +86,7 @@ KUrl DoubanFetcher::searchUrl() {
 
   switch(request().collectionType) {
     case Data::Collection::Book:
+    case Data::Collection::Bibtex:
       u.addPath(QString::fromLatin1("book/"));
       break;
 
