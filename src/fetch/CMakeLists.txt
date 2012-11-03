@@ -14,6 +14,7 @@ SET(fetch_STAT_SRCS
    citebasefetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp
+   dblpfetcher.cpp
    discogsfetcher.cpp
    doubanfetcher.cpp
    dvdfrfetcher.cpp
