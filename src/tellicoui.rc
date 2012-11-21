@@ -42,6 +42,8 @@
     <Action name="file_import_amc"/>
     <Action name="file_import_griffith"/>
     <Separator/>
+    <Action name="file_import_vinoxml"/>
+    <Separator/>
     <Action name="file_import_filelisting"/>
     <Separator/>
     <Action name="file_import_xslt"/>

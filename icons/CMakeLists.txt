@@ -51,6 +51,7 @@ set(ICON_FILES
     tellico.svg
     tellico.svg
     video.png
+    vinoxml.png
     wine.png
     )
 

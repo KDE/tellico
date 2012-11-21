@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,70 +22,39 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_VINOXMLIMPORTER_H
+#define TELLICO_VINOXMLIMPORTER_H
+
+#include "xsltimporter.h"
+#include "../datavectors.h"
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ *@author Robby Stephenson
+ */
+class VinoXMLImporter : public XSLTImporter {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  VinoXMLImporter(const KUrl& url);
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB,
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  /**
+   */
+  virtual Data::CollPtr collection();
+  /**
+   */
+  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual bool canImport(int type) const;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+private:
+  // private so it can't be changed accidently
+  void setXSLTURL(const KUrl& url);
+};
 
+  } // end namespace
+} // end namespace
 #endif

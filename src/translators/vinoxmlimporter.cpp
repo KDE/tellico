@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,70 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#include "vinoxmlimporter.h"
+#include "../collection.h"
+#include "../images/imagefactory.h"
+#include "../tellico_debug.h"
 
-namespace Tellico {
-  namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML
-    };
+#include <KStandardDirs>
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+using Tellico::Import::VinoXMLImporter;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB,
-      Alexandria,
-      ONIX,
-      GCstar
-    };
-
-    enum Target {
-      None,
-      File,
-      Dir
-    };
+VinoXMLImporter::VinoXMLImporter(const KUrl& url_) : XSLTImporter(url_) {
+  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("vinoxml2tellico.xsl"));
+  if(!xsltFile.isEmpty()) {
+    KUrl u;
+    u.setPath(xsltFile);
+    XSLTImporter::setXSLTURL(u);
+  } else {
+    myWarning() << "unable to find vinoxml2tellico.xsl!";
   }
 }
 
-#endif
+bool VinoXMLImporter::canImport(int type) const {
+  return type == Data::Collection::Wine;
+}
+
+Tellico::Data::CollPtr VinoXMLImporter::collection() {
+  return XSLTImporter::collection();
+}
+
+#include "vinoxmlimporter.moc"
