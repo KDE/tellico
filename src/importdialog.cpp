@@ -243,7 +243,8 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       break;
 
     case Import::Griffith:
-      importer = new Import::GriffithImporter();
+      CHECK_SIZE;
+      importer = new Import::GriffithImporter(firstURL);
       break;
 
     case Import::PDF:
@@ -305,13 +306,10 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       break;
 
     case Import::Bibtexml:
-    case Import::VinoXML:
     case Import::XSLT:
-      text = i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
-      break;
-
     case Import::MODS:
     case Import::Delicious:
+    case Import::Griffith:
       text = i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
 
@@ -340,12 +338,16 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       text = i18n("*.ciw|CIW Files (*.ciw)") + QLatin1Char('\n');
       break;
 
+    case Import::VinoXML:
+      text = i18n("*.vinoxml|VinoXML Data Files (*.vinoxml)") + QLatin1Char('\n');
+      text += i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
+      break;
+
     case Import::AudioFile:
     case Import::Alexandria:
     case Import::FreeDB:
     case Import::FileListing:
     case Import::GRS1:
-    case Import::Griffith:
     case Import::Goodreads:
       break;
   }
@@ -361,7 +363,6 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
     case Import::AudioFile:
     case Import::FileListing:
       return Import::Dir;
-    case Import::Griffith:
     case Import::Alexandria:
     case Import::FreeDB:
     case Import::Goodreads:
