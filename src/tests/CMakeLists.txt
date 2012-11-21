@@ -143,6 +143,9 @@ TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(darkhorsefetchertest NOGUI darkhorsefetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(darkhorsefetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(dblpfetchertest NOGUI dblpfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(dblpfetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(discogsfetchertest NOGUI discogsfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(discogsfetchertest fetch ${TELLICO_TEST_LIBS})
 

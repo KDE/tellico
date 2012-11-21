@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,78 +22,41 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#include "dbtest.h"
+#include "dbtest.moc"
+#include "qtest_kde.h"
 
-namespace Tellico {
-  namespace Fetch {
+#include "../datastore/sqlitedb.h"
+#include "../datastore/dbimporter.h"
+#include "../datastore/dbfieldreader.h"
+#include "../collections/bookcollection.h"
 
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
-};
+QTEST_KDEMAIN_CORE( DBTest )
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo,
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase,
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase,
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS,
-  Springer,
-  Allocine,
-  ScreenRush,
-  FilmStarts,
-  SensaCine,
-  Beyazperde,
-  HathiTrust,
-  TheGamesDB,
-  DBLP
-};
-
-  }
+void DBTest::initTestCase() {
 }
 
-#endif
+void DBTest::testTables() {
+  Tellico::SqliteDB db;
+  QVERIFY(db.createTables());
+}
+
+void DBTest::testImport() {
+  Tellico::SqliteDB db;
+  QVERIFY(db.createTables());
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  QVERIFY(coll);
+
+  Tellico::DBImporter importer(&db);
+  QVERIFY(importer.import(coll));
+
+  Tellico::DBFieldReader reader(&db);
+  QList<Tellico::Data::FieldRef> fields = reader.allFields();
+  QCOMPARE(coll->fields().count(), fields.count());
+  foreach(const Tellico::Data::FieldRef& ref, fields) {
+    Tellico::Data::FieldPtr ptr = coll->fieldByName(ref.name());
+    QVERIFY(ptr);
+    QCOMPARE(ref.name(), ptr->name());
+  }
+}

@@ -12,7 +12,7 @@
 </para>
 
 <para>
-Searches may use different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, <guilabel>UPC/EAN</guilabel>, <guilabel>LCCN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources. <acronym>ISBN</acronym> and <acronym>LCCN></acronym> values are for books only, while <acronym>UPC</acronym> or <acronym>EAN</acronym> values can apply to any type of item.</para>
+Searches may use different criteria: <guilabel>Title</guilabel>, <guilabel>Person</guilabel>, <guilabel>ISBN</guilabel>, <guilabel>UPC/EAN</guilabel>, <guilabel>LCCN</guilabel>, or <guilabel>Keyword</guilabel>. Not all criteria are available for certain data sources. <acronym>ISBN</acronym> and <acronym>LCCN</acronym> values are for books only, while <acronym>UPC</acronym> or <acronym>EAN</acronym> values can apply to any type of item.</para>
 
 <para>Once a search is initiated, the <guibutton>Search</guibutton> button becomes <guibutton>Stop</guibutton> which will end a search. As results are found, they are added to the list directly under the search box, where selecting an item will show the result without adding it to the collection. Clicking the <guibutton>Add Entry</guibutton> button will add all the selected items to your collection. If the data source has more results than were initially requested, the <guibutton>Get More Results</guibutton> button becomes active. Clicking <guibutton>Clear</guibutton> will remove all the current results and reset the search.
 </para>
