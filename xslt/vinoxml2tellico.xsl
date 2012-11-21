@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
+                xmlns:vino="http://www.vinoxml.org/XMLschema"
                 version="1.0">
 
 <!--
@@ -25,99 +26,99 @@
    <fields>
     <field name="_default"/>
    </fields>
-   <xsl:apply-templates select="wine|wineCollection/collectionitem"/>
+   <xsl:apply-templates select="vino:wine"/>
    <images>
-    <xsl:apply-templates select="wine/vintage/bottlelabel/imageembedded"/>
+    <xsl:apply-templates select="vino:wine/vino:vintage/vino:bottlelabel/vino:imageembedded"/>
    </images>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="wine|collectionitem">
+<xsl:template match="vino:wine">
  <entry>
 
   <producer>
-   <xsl:value-of select="producer/name"/>
+   <xsl:value-of select="vino:producer/vino:name"/>
   </producer>
 
   <varietal>
    <!-- The Wine Cellar Book seems to use additionalname
          instead of variety so check for both -->
    <xsl:choose>
-    <xsl:when test="string-length(variety) &gt; 0">
-     <xsl:value-of select="variety"/>
+    <xsl:when test="string-length(vino:variety) &gt; 0">
+     <xsl:value-of select="vino:variety"/>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:value-of select="additionalname"/>
+     <xsl:value-of select="vino:additionalname"/>
     </xsl:otherwise>
    </xsl:choose>
   </varietal>
 
   <vintage>
-   <xsl:value-of select="vintage/year"/>
+   <xsl:value-of select="vino:vintage/vino:year"/>
   </vintage>
 
   <appellation>
-   <xsl:value-of select="origin/wineregion"/>
+   <xsl:value-of select="vino:origin/vino:wineregion"/>
   </appellation>
 
   <country>
-   <xsl:value-of select="origin/country/name"/>
+   <xsl:value-of select="vino:origin/vino:country/vino:name"/>
   </country>
 
   <type i18n="true">
    <xsl:choose>
-    <xsl:when test="winetype/winetype = 'Red wine'">
+    <xsl:when test="vino:winetype/vino:winetype = 'Red wine'">
      <xsl:text>Red Wine</xsl:text>
     </xsl:when>
-    <xsl:when test="winetype/winetype = 'White wine'">
+    <xsl:when test="vino:winetype/vino:winetype = 'White wine'">
      <xsl:text>White Wine</xsl:text>
     </xsl:when>
-    <xsl:when test="contains(winetype/winetype, 'Champagne') or
-                    contains(winetype/winetype, 'Sparkling')">
+    <xsl:when test="contains(vino:winetype/vino:winetype, 'Champagne') or
+                    contains(vino:winetype/vino:winetype, 'Sparkling')">
      <xsl:text>Sparkling Wine</xsl:text>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:value-of select="winetype/winetype"/>
+     <xsl:value-of select="vino:winetype/vino:winetype"/>
     </xsl:otherwise>
    </xsl:choose>
   </type>
 
   <label>
    <xsl:choose>
-    <xsl:when test="vintage/bottlelabel/imageurl">
-     <xsl:value-of select="vintage/bottlelabel/imageurl"/>
+    <xsl:when test="vino:vintage/vino:bottlelabel/vino:imageurl">
+     <xsl:value-of select="vino:vintage/vino:bottlelabel/vino:imageurl"/>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:value-of select="vintage/bottlelabel/imageembedded/imagefilename"/>
+     <xsl:value-of select="vino:vintage/vino:bottlelabel/vino:imageembedded/vino:imagefilename"/>
     </xsl:otherwise>
    </xsl:choose>
   </label>
 
   <pur_date>
-   <xsl:value-of select="vintage/bottle/purchases[1]/date"/>
+   <xsl:value-of select="vino:vintage/vino:bottle/vino:purchases[1]/vino:date"/>
   </pur_date>
 
   <pur_price>
    <!-- broken, but we'll ignore currency code -->
-   <xsl:value-of select="vintage/bottle/price/pricevalue"/>
+   <xsl:value-of select="vino:vintage/vino:bottle/vino:price/vino:pricevalue"/>
   </pur_price>
 
   <!-- for now, the quantitye is just how many bottles are left -->
   <quantity>
-   <xsl:value-of select="sum(vintage/bottle/purchases/quantity) - sum(vintage/bottle/consumptions/quantity)"/>
+   <xsl:value-of select="sum(vino:vintage/vino:bottle/vino:purchases/vino:quantity) - sum(vino:vintage/vino:bottle/vino:consumptions/vino:quantity)"/>
   </quantity>
 
   <description>
-   <xsl:value-of select="concat(notes, '&lt;br/&gt;&lt;br/&gt;', vintage/notes)"/>
+   <xsl:value-of select="concat(vino:notes, '&lt;br/&gt;&lt;br/&gt;', vino:vintage/vino:notes)"/>
   </description>
 
  </entry>
 </xsl:template>
 
-<xsl:template match="imageembedded">
- <image format="{imageformat}" id="{imagefilename}">
-  <xsl:value-of select="imagedata"/>
+<xsl:template match="vino:imageembedded">
+ <image format="{vino:imageformat}" id="{vino:imagefilename}">
+  <xsl:value-of select="vino:imagedata"/>
  </image>
 </xsl:template>
 

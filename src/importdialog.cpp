@@ -306,7 +306,6 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       break;
 
     case Import::Bibtexml:
-    case Import::VinoXML:
     case Import::XSLT:
     case Import::MODS:
     case Import::Delicious:
@@ -337,6 +336,11 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
 
     case Import::CIW:
       text = i18n("*.ciw|CIW Files (*.ciw)") + QLatin1Char('\n');
+      break;
+
+    case Import::VinoXML:
+      text = i18n("*.vinoxml|VinoXML Data Files (*.vinoxml)") + QLatin1Char('\n');
+      text += i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
 
     case Import::AudioFile:
