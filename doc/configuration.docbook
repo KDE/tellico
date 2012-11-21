@@ -329,8 +329,7 @@ the best known.
 <title>Internet Movie Database</title>
 
 <para>
-The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include setting the web server address and whether images are grabbed or not. Since IMDb can return a large number of cast members, you can limit
-that to a certain number.
+The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides information about movies and videos. When a search is conducted for a <emphasis>Person</emphasis>, if more than one possible result is returned, a dialog box is opened to allow you to select the correct person. The configuration options include selecting which IMDb nationality to use and whether images are fetched or not. Since IMDb can return a large number of cast members, you can limit that to a certain number.
 </para>
 
 <screenshot>
