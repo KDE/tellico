@@ -383,6 +383,9 @@ void MainWindow::initActions() {
   IMPORT_ACTION(Import::AMC, "file_import_amc", i18n("Import Ant Movie Catalog Data..."),
                 i18n("Import an Ant Movie Catalog data file"), BarIcon(QLatin1String("amc")));
 
+  IMPORT_ACTION(Import::VinoXML, "file_import_vinoxml", i18n("Import VinoXML..."),
+                i18n("Import VinoXML data"), BarIcon(QLatin1String("vinoxml")));
+
   IMPORT_ACTION(Import::FileListing, "file_import_filelisting", i18n("Import File Listing..."),
                 i18n("Import information about files in a folder"), mimeIcon("inode/directory"));
 

@@ -45,6 +45,7 @@ SET(XSLT_FILES
     tmdb2tellico.xsl
     UNIMARC2MODS3.xsl
     vhs-logo.png
+    vinoxml2tellico.xsl
     welcome.html
     winecom2tellico.xsl
     xmp2tellico.xsl

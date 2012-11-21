@@ -48,6 +48,7 @@
 #include "translators/deliciousimporter.h"
 #include "translators/goodreadsimporter.h"
 #include "translators/ciwimporter.h"
+#include "translators/vinoxmlimporter.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -271,6 +272,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
     case Import::CIW:
       importer = new Import::CIWImporter(urls_);
       break;
+
+    case Import::VinoXML:
+      CHECK_SIZE;
+      importer = new Import::VinoXMLImporter(firstURL);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -299,6 +305,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       break;
 
     case Import::Bibtexml:
+    case Import::VinoXML:
     case Import::XSLT:
       text = i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n');
       break;
