@@ -383,11 +383,11 @@ may enclose the field values with the <literal>\url{...}</literal> tag. Finally,
 
 </sect2>
 
-<sect2 id="exporting-gcfilms">
-<title>Exporting GCfilms</title>
+<sect2 id="exporting-gcstar">
+<title>Exporting GCstar</title>
 
 <para>
-<application><ulink url="http://home.gna.org/gcfilms/">GCfilms</ulink></application> is another movie collection manager. &appname; is able to export a limited subset of video collection fields to a GCfilms data file.
+<application><ulink url="http://www.gcstar.org">GCstar</ulink></application> is another movie collection manager. &appname; is able to export most collection types to a GCstar data file.
 </para>
 
 </sect2>
