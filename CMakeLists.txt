@@ -121,8 +121,10 @@ remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
 include_directories(${KDE4_INCLUDES}
                     ${QT_INCLUDES}
+                    ${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
+                    ${KDEPIMLIBS_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${Tellico_SOURCE_DIR}/src/core
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
