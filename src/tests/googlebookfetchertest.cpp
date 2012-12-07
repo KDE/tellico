@@ -72,7 +72,7 @@ void GoogleBookFetcherTest::testAuthor() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->title() == QLatin1String("Practical Rdf")) {
+    if(testEntry->title() == QLatin1String("Practical RDF")) {
       entry = testEntry;
       break;
     }
@@ -93,11 +93,11 @@ void GoogleBookFetcherTest::testKeyword() {
 }
 
 void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical Rdf"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical RDF"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-00263-7"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("331"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media, Incorporated"));
+  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("350"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
   QCOMPARE(entry->field(QLatin1String("keyword")), QLatin1String("Computers"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());

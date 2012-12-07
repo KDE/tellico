@@ -174,7 +174,7 @@ void ImdbFetcherTest::testAsterix() {
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Astérix aux jeux olympiques");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QString::fromUtf8("Astérix aux jeux olympiques"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -189,7 +189,7 @@ void ImdbFetcherTest::testAsterix() {
   QCOMPARE(entry->field("director"), QString::fromUtf8("Thomas Langmann; Frédéric Forestier"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("René Goscinny; Albert Uderzo"));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
-  QVERIFY(altTitleList.size() > 1);
+  QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los juegos olímpicos")));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096

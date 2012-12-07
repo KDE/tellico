@@ -95,11 +95,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     {
       i18n("Internet Movie Database"),
       QLatin1String("akas.imdb.com"),
-      QLatin1String("Popular Titles"),
+      QLatin1String("findSectionHeader"),
       QLatin1String("Exact Matches"),
       QLatin1String("Partial Matches"),
       QLatin1String("Approx Matches"),
-      QLatin1String("Popular Results"),
+      QLatin1String("findSectionHeader"),
       QLatin1String("Other Results"),
       QLatin1String("aka"),
       QLatin1String("Director"),
@@ -107,7 +107,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QLatin1String("runtime:.*(\\d+)\\s+min"),
       QLatin1String("aspect ratio:"),
       QLatin1String("also known as"),
-      QLatin1String("Production Companies"),
+      QLatin1String("Production Co"),
       QLatin1String("cast"),
       QLatin1String("cast overview"),
       QLatin1String("credited cast"),
@@ -122,11 +122,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     }, {
       i18n("Internet Movie Database (French)"),
       QLatin1String("www.imdb.fr"),
-      QLatin1String("Titres Populaires"),
+      QLatin1String("findSectionHeader"),
       QString::fromUtf8("Résultats Exacts"),
       QString::fromUtf8("Résultats Partiels"),
       QString::fromUtf8("Résultats Approximatif"),
-      QString::fromUtf8("Résultats Populaires"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Résultats Autres"),
       QLatin1String("autre titre"),
       QString::fromUtf8("Réalisateur"),
@@ -149,11 +149,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     }, {
       i18n("Internet Movie Database (Spanish)"),
       QLatin1String("www.imdb.es"),
-      QString::fromUtf8("Títulos Populares"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Resultados Exactos"),
       QString::fromUtf8("Resultados Parciales"),
       QString::fromUtf8("Resultados Aproximados"),
-      QString::fromUtf8("Resultados Populares"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Resultados Otros"),
       QString::fromUtf8("otro título"),
       QLatin1String("Director"),
@@ -176,11 +176,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     }, {
       i18n("Internet Movie Database (German)"),
       QLatin1String("www.imdb.de"),
-      QString::fromUtf8("Meistgesuchte Titel"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("genaue Übereinstimmung"),
       QString::fromUtf8("teilweise Übereinstimmung"),
       QString::fromUtf8("näherungsweise Übereinstimmung"),
-      QString::fromUtf8("Meistgesuchte Übereinstimmung"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("andere Übereinstimmung"),
       QString::fromUtf8("andere titel"),
       QLatin1String("Regisseur"),
@@ -203,11 +203,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     }, {
       i18n("Internet Movie Database (Italian)"),
       QLatin1String("www.imdb.it"),
-      QString::fromUtf8("Titoli popolari"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("risultati esatti"),
       QString::fromUtf8("risultati parziali"),
       QString::fromUtf8("risultati approssimati"),
-      QString::fromUtf8("risultati popolari"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Resultados Otros"),
       QString::fromUtf8("otro título"),
       QLatin1String("Regista"),
@@ -230,11 +230,11 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
     }, {
       i18n("Internet Movie Database (Portuguese)"),
       QLatin1String("www.imdb.pt"),
-      QString::fromUtf8("Títulos Populares"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Exato"),
       QString::fromUtf8("Combinação Parcial"),
       QString::fromUtf8("Combinação Aproximada"),
-      QString::fromUtf8("Combinação Populares"),
+      QString::fromUtf8("findSectionHeader"),
       QString::fromUtf8("Combinação Otros"),
       QString::fromUtf8("otro título"),
       QLatin1String("Diretor"),
@@ -349,7 +349,7 @@ void IMDBFetcher::search() {
       return;
   }
 
-//  myDebug() << "url =" << m_url;
+//  myDebug() << m_url;
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
@@ -744,7 +744,7 @@ void IMDBFetcher::parseMultipleNameResults() {
     }
   }
 
-  QHash<QString, KUrl> map;
+  QMap<QString, KUrl> map;
   QHash<QString, int> nameMap;
 
   QString s;
@@ -796,6 +796,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   }
 
   if(map.count() == 0) {
+    myLog() << "no name matches found.";
     stop();
     return;
   }
@@ -812,8 +813,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   KListWidget* listWidget = new KListWidget(box);
   listWidget->setMinimumWidth(400);
   listWidget->setWrapping(true);
-  const QStringList values = map.keys();
-  foreach(const QString& value, values) {
+  foreach(const QString& value, map.keys()) {
     if(value.endsWith(QLatin1Char(' '))) {
       GUI::ListWidgetItem* box = new GUI::ListWidgetItem(value, listWidget);
       box->setColored(true);
@@ -1007,7 +1007,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
 
   // match until next b tag
 //  QRegExp akaRx(QLatin1String("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QString::fromLatin1("%1(.*)<h5[>\\s/]").arg(langData(m_lang).also_known_as), Qt::CaseInsensitive);
+  QRegExp akaRx(QString::fromLatin1("%1(.*)<span[>\\s/]").arg(langData(m_lang).also_known_as), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   if(akaRx.indexIn(str_) > -1 && !akaRx.cap(1).isEmpty()) {
@@ -1039,6 +1039,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       // I'm too lazy to figure out a better regexp
       if(s.startsWith(QLatin1Char(':'))) {
         s = s.mid(1);
+        s = s.trimmed();
       }
       if(!s.isEmpty()) {
         values += s;
@@ -1047,6 +1048,8 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     if(!values.isEmpty()) {
       entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
+  } else {
+    myLog() << "'Also Known As' not found";
   }
 }
 
