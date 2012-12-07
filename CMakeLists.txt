@@ -44,9 +44,15 @@ find_package(LibXslt REQUIRED)
 
 macro_optional_find_package(Nepomuk)
 macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
+if(NEPOMUK_FOUND)
+    include_directories(${NEPOMUK_INCLUDE_DIRS})
+endif(NEPOMUK_FOUND)
 
 macro_optional_find_package(KdepimLibs)
 macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.2.0" "")
+if(KDEPIMLIBS_FOUND)
+    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
+endif(KDEPIMLIBS_FOUND)
 
 macro_optional_find_package(KdeMultimedia)
 macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
@@ -85,6 +91,9 @@ endif(LIBEXEMPI_FOUND)
 
 macro_optional_find_package(QJSON)
 macro_log_feature(QJSON_FOUND "QJSON" "Support for searching OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
+if(QJSON_FOUND)
+    include_directories(${QJSON_INCLUDE_DIR})
+endif(QJSON_FOUND)
 
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
@@ -124,7 +133,6 @@ include_directories(${KDE4_INCLUDES}
                     ${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
-                    ${KDEPIMLIBS_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${Tellico_SOURCE_DIR}/src/core
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
