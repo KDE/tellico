@@ -35,6 +35,7 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KLineEdit>
 
 #include <QLabel>
 #include <QFile>
@@ -49,6 +50,7 @@
 namespace {
   static const int GOOGLEBOOK_MAX_RETURNS = 20;
   static const char* GOOGLEBOOK_API_URL = "https://www.googleapis.com/books/v1/volumes";
+  static const char* GOOGLEBOOK_API_KEY = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
 }
 
 using namespace Tellico;
@@ -57,7 +59,8 @@ using Tellico::Fetch::GoogleBookFetcher;
 GoogleBookFetcher::GoogleBookFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
-    , m_start(0) {
+    , m_start(0)
+    , m_apiKey(QLatin1String(GOOGLEBOOK_API_KEY)) {
 }
 
 GoogleBookFetcher::~GoogleBookFetcher() {
@@ -79,7 +82,9 @@ bool GoogleBookFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || Data::Collection::Bibtex;
 }
 
-void GoogleBookFetcher::readConfigHook(const KConfigGroup&) {
+void GoogleBookFetcher::readConfigHook(const KConfigGroup& config_) {
+  // allow an empty key if the config key does exist
+  m_apiKey = config_.readEntry("API Key", GOOGLEBOOK_API_KEY);
 }
 
 void GoogleBookFetcher::search() {
@@ -112,6 +117,10 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
   u.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
   u.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));
   u.addQueryItem(QLatin1String("printType"), QLatin1String("books"));
+  // we don't require a key, cause it might work without it
+  if(!m_apiKey.isEmpty()) {
+    u.addQueryItem(QLatin1String("key"), m_apiKey);
+  }
 
   switch(request().key) {
     case Title:
@@ -328,14 +337,54 @@ Tellico::StringHash GoogleBookFetcher::allOptionalFields() {
   return hash;
 }
 
-GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBookFetcher*)
+GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBookFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("https://code.google.com/apis/console")),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_apiKeyEdit, row, 1);
+  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
+  label->setWhatsThis(w);
+  m_apiKeyEdit->setWhatsThis(w);
+  label->setBuddy(m_apiKeyEdit);
+
+  l->setRowStretch(++row, 10);
+
+  // now add additional fields widget
+  addFieldsWidget(GoogleBookFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_ && fetcher_->m_apiKey != QLatin1String(GOOGLEBOOK_API_KEY)) {
+    // only show the key if it is not the default Tellico one...
+    // that way the user is prompted to apply for their own
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+  }
 }
 
-void GoogleBookFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void GoogleBookFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty()) {
+    config_.writeEntry("API Key", apiKey);
+  }
 }
 
 QString GoogleBookFetcher::ConfigWidget::preferredName() const {

@@ -32,9 +32,13 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
+#include <KConfigGroup>
+
 QTEST_KDEMAIN( GoogleBookFetcherTest, GUI )
 
-GoogleBookFetcherTest::GoogleBookFetcherTest() : AbstractFetcherTest() {
+GoogleBookFetcherTest::GoogleBookFetcherTest() : AbstractFetcherTest()
+    , m_config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig) {
+  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config");
 }
 
 void GoogleBookFetcherTest::initTestCase() {
@@ -45,6 +49,10 @@ void GoogleBookFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        QLatin1String("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+  if(m_hasConfigFile) {
+    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    fetcher->readConfig(cg, cg.name());
+  }
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -56,6 +64,10 @@ void GoogleBookFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QLatin1String("0-596-00263-7"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+  if(m_hasConfigFile) {
+    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    fetcher->readConfig(cg, cg.name());
+  }
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -67,6 +79,10 @@ void GoogleBookFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
                                        QLatin1String("Shelley Powers"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+  if(m_hasConfigFile) {
+    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    fetcher->readConfig(cg, cg.name());
+  }
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -85,6 +101,10 @@ void GoogleBookFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
                                        QLatin1String("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
+  if(m_hasConfigFile) {
+    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    fetcher->readConfig(cg, cg.name());
+  }
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
