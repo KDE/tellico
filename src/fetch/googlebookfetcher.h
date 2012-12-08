@@ -36,6 +36,7 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
+class KLineEdit;
 
 namespace Tellico {
 
@@ -80,6 +81,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
+    KLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -105,6 +107,7 @@ private:
 
   int m_start;
   int m_total;
+  QString m_apiKey;
 };
 
   } // end namespace
