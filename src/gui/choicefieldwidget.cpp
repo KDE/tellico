@@ -34,9 +34,11 @@ ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
 
   m_comboBox = new KComboBox(this);
   connect(m_comboBox, SIGNAL(activated(int)), SLOT(checkModified()));
-  // always have empty choice
+  // always have empty choice, but don't show two empty values
   m_comboBox->addItem(QString());
-  m_comboBox->addItems(field_->allowed());
+  QStringList values = field_->allowed();
+  values.removeAll(QString());
+  m_comboBox->addItems(values);
   m_comboBox->setMinimumWidth(5*fontMetrics().maxWidth());
 
   registerWidget();
@@ -66,7 +68,9 @@ void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
   m_comboBox->clear();
   // always have empty choice
   m_comboBox->addItem(QString());
-  m_comboBox->addItems(newField_->allowed());
+  QStringList values = newField_->allowed();
+  values.removeAll(QString());
+  m_comboBox->addItems(values);
   m_comboBox->setCurrentIndex(idx);
 }
 

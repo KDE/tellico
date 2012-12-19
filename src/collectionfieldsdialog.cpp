@@ -648,7 +648,7 @@ void CollectionFieldsDialog::updateField() {
 
   if(field->type() == Data::Field::Choice) {
     const QRegExp rx(QLatin1String("\\s*;\\s*"));
-    field->setAllowed(m_allowEdit->text().split(rx));
+    field->setAllowed(m_allowEdit->text().split(rx, QString::SkipEmptyParts));
     field->setProperty(QLatin1String("minimum"), QString());
     field->setProperty(QLatin1String("maximum"), QString());
   } else if(field->type() == Data::Field::Rating) {
