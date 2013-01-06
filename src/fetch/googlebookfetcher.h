@@ -97,6 +97,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
   static QString value(const QVariantMap& map, const char* name);
 
