@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
-                xmlns:dblp="dblp"
                 xmlns:exsl="http://exslt.org/common"
                 extension-element-prefixes="exsl"
                 version="1.0">
@@ -28,12 +27,12 @@
    <fields>
     <field name="_default"/>
    </fields>
-   <xsl:apply-templates select="result/hits/hit/title"/>
+   <xsl:apply-templates select="result/hits/hit/info"/>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="title">
+<xsl:template match="info">
  <entry>
 
   <title>
@@ -47,7 +46,7 @@
   <entry-type>
    <xsl:value-of select="type"/>
   </entry-type>
-  
+
   <year>
    <xsl:value-of select="year"/>
   </year>
