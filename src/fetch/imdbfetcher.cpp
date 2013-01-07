@@ -1025,6 +1025,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
     // lang could be included with [fr]
 //    const QRegExp parRx(QLatin1String("\\(.+\\)"));
     const QRegExp brackRx(QLatin1String("\\[\\w+\\]"));
+    const QRegExp dashEndRx(QLatin1String("\\s*-\\s+.+$"));
     QStringList values;
     for(QStringList::Iterator it = list.begin(); it != list.end(); ++it) {
       QString s = *it;
@@ -1034,6 +1035,9 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       }
       s.remove(*s_tagRx);
       s.remove(brackRx);
+      // remove country
+      s.remove(dashEndRx);
+      s.remove(QLatin1Char('"'));
       s = s.trimmed();
       // the first value ends up being or starting with the colon after "Also known as"
       // I'm too lazy to figure out a better regexp
