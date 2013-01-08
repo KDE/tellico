@@ -602,9 +602,6 @@ void MainWindow::initActions() {
   setStandardToolBarMenuEnabled(true);
   createStandardStatusBarAction();
 
-  KStandardAction::configureToolbars(this, SLOT(slotConfigToolbar()), actionCollection());
-  KStandardAction::keyBindings(this, SLOT(slotConfigKeys()), actionCollection());
-
   m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), this);
   m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
   connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
@@ -676,6 +673,7 @@ void MainWindow::initActions() {
   action->setShortcutConfigurable(false);
   actionCollection()->addAction(QLatin1String("quick_filter"), action);
 
+  setupGUI(Keys | ToolBar);
 #ifdef UIFILE
   myWarning() << "call!";
   createGUI(UIFILE);
@@ -1366,32 +1364,6 @@ void MainWindow::slotEditSelectAll() {
 
 void MainWindow::slotEditDeselect() {
   Controller::self()->slotUpdateSelection(0, Data::EntryList());
-}
-
-void MainWindow::slotConfigToolbar() {
-  KConfigGroup config(KGlobal::config(), QLatin1String("Main Window Options"));
-  saveMainWindowSettings(config);
-#ifdef UIFILE
-  KEditToolBar dlg(actionCollection(), UIFILE);
-#else
-  KEditToolBar dlg(actionCollection());
-#endif
-  connect(&dlg, SIGNAL(newToolbarConfig()), this, SLOT(slotNewToolbarConfig()));
-  dlg.exec();
-}
-
-void MainWindow::slotNewToolbarConfig() {
-  KConfigGroup config(KGlobal::config(), QLatin1String("Main Window Options"));
-  applyMainWindowSettings(config);
-#ifdef UIFILE
-  createGUI(UIFILE);
-#else
-  createGUI();
-#endif
-}
-
-void MainWindow::slotConfigKeys() {
-  KShortcutsDialog::configure(actionCollection());
 }
 
 void MainWindow::slotToggleGroupWidget() {
