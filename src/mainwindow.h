@@ -237,18 +237,6 @@ public slots:
   void slotStatusMsg(const QString& text);
   void slotClearStatus();
   /**
-   * Shows the configuration window for the toolbars.
-   */
-  void slotConfigToolbar();
-  /**
-   * Updates the toolbars;
-   */
-  void slotNewToolbarConfig();
-  /**
-   * Shows the configuration window for the key bindgins.
-   */
-  void slotConfigKeys();
-  /**
    * Updates the entry count in the status bar.
    */
   void slotEntryCount();

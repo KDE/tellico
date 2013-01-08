@@ -68,10 +68,16 @@ void IBSFetcherTest::testAuthor() {
                                        QLatin1String("Bruno Vespa"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
-
-  QCOMPARE(results.size(), 1);
-  compareEntry(results.first());
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr testEntry, results) {
+    if(testEntry->field("title").startsWith(QLatin1String("Vino & cucina"))) {
+      entry = testEntry;
+      break;
+    }
+  }
+  QVERIFY(entry);
+  compareEntry(entry);
 }
 
 void IBSFetcherTest::testTranslator() {
