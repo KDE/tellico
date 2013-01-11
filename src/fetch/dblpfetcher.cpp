@@ -85,9 +85,9 @@ void DBLPFetcher::resetSearch() {
 void DBLPFetcher::parseData(QByteArray& data_) {
   // weird XML
   // remove the CDATA and the dblp:: namespace
-  data_.replace("<![CDATA[", "");
-  data_.replace("]]", "");
-  data_.replace("dblp:", "");
+  data_.replace("<![CDATA[", ""); // krazy:exclude=doublequote_chars
+  data_.replace("]]", ""); // krazy:exclude=doublequote_chars
+  data_.replace("dblp:", ""); // krazy:exclude=doublequote_chars
 }
 
 Tellico::Data::EntryPtr DBLPFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
