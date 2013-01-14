@@ -28,12 +28,13 @@
 #include "borrower.h"
 #include <config.h>
 
-#include <kdialog.h>
+#include <KDialog>
 
 #include <QHash>
 #include <QTreeWidget>
 
 class KLineEdit;
+class KJob;
 #ifdef HAVE_KABC
 namespace KABC {
   class Addressee;
@@ -54,7 +55,7 @@ public:
 private slots:
   void selectItem(const QString& name);
   void updateEdit(QTreeWidgetItem* item);
-  void slotLoadAddressBook();
+  void akonadiSearchResult(KJob*);
 
 private:
   /**
@@ -64,6 +65,7 @@ private:
    */
   BorrowerDialog(QWidget* parent);
   Data::BorrowerPtr borrower();
+  void populateBorrowerList();
 
   QString m_uid;
   QTreeWidget* m_treeWidget;

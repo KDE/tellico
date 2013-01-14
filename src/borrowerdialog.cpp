@@ -30,12 +30,14 @@
 #include "borrowerdialog.h"
 #include "document.h"
 #include "collection.h"
+#include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <klineedit.h>
+#include <KLocale>
+#include <KLineEdit>
+
 #ifdef HAVE_KABC
 #include <kabc/addressee.h>
-#include <kabc/stdaddressbook.h>
+#include <Akonadi/Contact/ContactSearchJob>
 #endif
 
 #include <QVBoxLayout>
@@ -88,18 +90,47 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_)
   m_lineEdit->completionObject()->setIgnoreCase(true);
 
 #ifdef HAVE_KABC
-  KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
-  connect(abook, SIGNAL(addressBookChanged(AddressBook*)),
-          SLOT(slotLoadAddressBook()));
-  connect(abook, SIGNAL(loadingFinished(Resource*)),
-          SLOT(slotLoadAddressBook()));
+  // Search for all existing contacts
+  Akonadi::ContactSearchJob* job = new Akonadi::ContactSearchJob();
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(akonadiSearchResult(KJob*)));
 #endif
-  slotLoadAddressBook();
+
+  populateBorrowerList();
 
   setMinimumWidth(400);
 }
 
-void BorrowerDialog::slotLoadAddressBook() {
+void BorrowerDialog::akonadiSearchResult(KJob* job_) {
+  if(job_->error() != 0) {
+    myDebug() << job_->errorString();
+    return;
+  }
+
+#ifdef HAVE_KABC
+  Akonadi::ContactSearchJob* searchJob = qobject_cast<Akonadi::ContactSearchJob*>(job_);
+  Q_ASSERT(searchJob);
+
+  populateBorrowerList();
+
+  foreach(const KABC::Addressee& addressee, searchJob->contacts()) {
+    // skip people with no name
+    const QString name = addressee.realName().trimmed();
+    if(name.isEmpty()) {
+      continue;
+    }
+    if(m_itemHash.contains(name)) {
+      continue; // if an item already exists with this name
+    }
+    Item* item = new Item(m_treeWidget, addressee);
+    m_itemHash.insert(name, item);
+    m_lineEdit->completionObject()->addItem(name);
+  }
+#endif
+
+  m_treeWidget->sortItems(0, Qt::AscendingOrder);
+}
+
+void BorrowerDialog::populateBorrowerList() {
   m_treeWidget->clear();
   m_itemHash.clear();
   m_lineEdit->completionObject()->clear();
@@ -119,25 +150,6 @@ void BorrowerDialog::slotLoadAddressBook() {
     m_itemHash.insert(bor->name(), item);
     m_lineEdit->completionObject()->addItem(bor->name());
   }
-
-#ifdef HAVE_KABC
-  const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
-  for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
-      it != end; ++it) {
-    // skip people with no name
-    const QString name = (*it).realName().trimmed();
-    if(name.isEmpty()) {
-      continue;
-    }
-    if(m_itemHash.contains(name)) {
-      continue; // if an item already exists with this name
-    }
-    Item* item = new Item(m_treeWidget, *it);
-    m_itemHash.insert(name, item);
-    m_lineEdit->completionObject()->addItem(name);
-  }
-#endif
-
   m_treeWidget->sortItems(0, Qt::AscendingOrder);
 }
 

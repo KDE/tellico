@@ -31,6 +31,7 @@
 #include "commands/addloans.h"
 #include "commands/modifyloans.h"
 #include "tellico_utils.h"
+#include "tellico_debug.h"
 
 #include <klocale.h>
 #include <klineedit.h>
@@ -38,7 +39,8 @@
 #include <ktextedit.h>
 #include <kiconloader.h>
 #ifdef HAVE_KABC
-#include <kabc/stdaddressbook.h>
+#include <kabc/addressee.h>
+#include <Akonadi/Contact/ContactSearchJob>
 #endif
 
 #include <QLabel>
@@ -180,13 +182,11 @@ void LoanDialog::init() {
   restoreDialogSize(config);
 
 #ifdef HAVE_KABC
-  KABC::AddressBook* abook = KABC::StdAddressBook::self(true);
-  connect(abook, SIGNAL(addressBookChanged(AddressBook*)),
-          SLOT(slotLoadAddressBook()));
-  connect(abook, SIGNAL(loadingFinished(Resource*)),
-          SLOT(slotLoadAddressBook()));
+  // Search for all existing contacts
+  Akonadi::ContactSearchJob* job = new Akonadi::ContactSearchJob();
+  connect(job, SIGNAL(result(KJob*)), this, SLOT(akonadiSearchResult(KJob*)));
 #endif
-  slotLoadAddressBook();
+  populateBorrowerList();
 }
 
 LoanDialog::~LoanDialog() {
@@ -212,7 +212,30 @@ void LoanDialog::slotGetBorrower() {
   }
 }
 
-void LoanDialog::slotLoadAddressBook() {
+void LoanDialog::akonadiSearchResult(KJob* job_) {
+  if(job_->error() != 0) {
+    myDebug() << job_->errorString();
+    return;
+  }
+
+#ifdef HAVE_KABC
+  Akonadi::ContactSearchJob* searchJob = qobject_cast<Akonadi::ContactSearchJob*>(job_);
+  Q_ASSERT(searchJob);
+
+  populateBorrowerList();
+
+  foreach(const KABC::Addressee& addressee, searchJob->contacts()) {
+    // skip people with no name
+    const QString name = addressee.realName().trimmed();
+    if(name.isEmpty()) {
+      continue;
+    }
+    m_borrowerEdit->completionObject()->addItem(name);
+  }
+#endif
+}
+
+void LoanDialog::populateBorrowerList() {
   m_borrowerEdit->completionObject()->clear();
 
   // add current borrowers
@@ -220,19 +243,6 @@ void LoanDialog::slotLoadAddressBook() {
   foreach(Data::BorrowerPtr borrower, borrowers) {
     m_borrowerEdit->completionObject()->addItem(borrower->name());
   }
-
-#ifdef HAVE_KABC
-  const KABC::AddressBook* const abook = KABC::StdAddressBook::self(true);
-  for(KABC::AddressBook::ConstIterator it = abook->begin(), end = abook->end();
-      it != end; ++it) {
-    // skip people with no name
-    const QString name = (*it).realName().trimmed();
-    if(name.isEmpty()) {
-      continue;
-    }
-    m_borrowerEdit->completionObject()->addItem(name);
-  }
-#endif
 }
 
 QUndoCommand* LoanDialog::createCommand() {

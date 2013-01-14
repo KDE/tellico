@@ -32,6 +32,7 @@
 
 class KLineEdit;
 class KTextEdit;
+class KJob;
 
 class QUndoCommand;
 class QCheckBox;
@@ -63,13 +64,14 @@ public:
 private slots:
   void slotBorrowerNameChanged(const QString& str);
   void slotGetBorrower();
-  void slotLoadAddressBook();
   void slotDueDateChanged();
+  void akonadiSearchResult(KJob*);
 
 private:
   void init();
   QUndoCommand* addLoansCommand();
   QUndoCommand* modifyLoansCommand();
+  void populateBorrowerList();
 
   enum Mode {
     Add,
