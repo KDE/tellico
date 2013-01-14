@@ -70,8 +70,8 @@ QString RTF2HTML::toHTML() const {
    std::string t_str;
 
    bool bInTable=false;
-   int iDocWidth=12240;
-   int iMarginLeft=1800;
+//   int iDocWidth=12240;
+//   int iMarginLeft=1800;
    while(buf_in!=buf_in_end)
    {
       switch (*buf_in)
@@ -487,10 +487,10 @@ QString RTF2HTML::toHTML() const {
                   break;
                // page formatting
                case rtf_keyword::rkw_paperw:
-                  iDocWidth=kw.parameter();
+//                  iDocWidth=kw.parameter();
                   break;
                case rtf_keyword::rkw_margl:
-                  iMarginLeft=kw.parameter();
+//                  iMarginLeft=kw.parameter();
                   break;
                default: break;
                }
