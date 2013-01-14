@@ -643,9 +643,6 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
   int middle_guard_i;
   int right_numbers_i;
 
-  // relevant parameters:
-  float unit_length;
-
   // results:
   QVector<int> numbers( 13, -1 ); // the java source does no initialization
 
@@ -687,9 +684,9 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
   int field_amount = (end_sentinel_i - start_sentinel_i + 3);
   for (int i = start_sentinel_i; i < start_sentinel_i + field_amount; i++)
           temp_length += fields[i][1];
-  unit_length = (float) ((float) temp_length / 95.0f);
 
 #ifdef Decoder_EAN13_DEBUG
+  float unit_length = (float) ((float) temp_length / 95.0f);
   fprintf( stderr, "unit_width: %f\n", unit_length );
 #endif
 
