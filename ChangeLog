@@ -1,3 +1,7 @@
+2013-01-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug with the number field not catching a modified value (Bug 313304).
+
 2013-01-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a bug with editing the toolbar config in KDE 4.9.2+.

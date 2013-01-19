@@ -77,6 +77,10 @@ QString NumberFieldWidget::text() const {
 
 void NumberFieldWidget::setTextImpl(const QString& text_) {
   if(isSpinBox()) {
+    if(text_.isEmpty()) {
+      m_spinBox->clear();
+      return;
+    }
     bool ok;
     int n = text_.toInt(&ok);
     if(ok) {
