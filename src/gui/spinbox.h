@@ -42,7 +42,7 @@ public:
   virtual void stepBy(int steps);
 
 private slots:
-  void checkValue();
+  void checkValue(const QString&);
 
 private:
   QValidator::State validate(QString& text, int& pos) const;
