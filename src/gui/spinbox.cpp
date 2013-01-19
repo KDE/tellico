@@ -35,10 +35,11 @@ SpinBox::SpinBox(int min_, int max_, QWidget * parent_) : QSpinBox(parent_) {
   // I want to be able to have an empty value
   // an empty string just removes the special value, so set white space
   setSpecialValueText(QLatin1String(" "));
-  connect(lineEdit(), SIGNAL(textEdited(const QString&)), SLOT(checkValue()));
+  connect(lineEdit(), SIGNAL(textChanged(const QString&)), SLOT(checkValue(const QString&)));
 }
 
-void SpinBox::checkValue() {
+void SpinBox::checkValue(const QString& text_) {
+  Q_UNUSED(text_);
   // if we delete everything in the lineedit, then we want to have an empty value
   // which is equivalent to the minimum, or special value text
   if(cleanText().isEmpty()) {
