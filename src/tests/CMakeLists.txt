@@ -118,6 +118,7 @@ KDE4_ADD_UNIT_TEST(entryupdatejobtest NOGUI entryupdatejobtest.cpp ../entryupdat
 TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
 
 # fetcher tests from here down
+IF(BUILD_FETCHER_TESTS)
 
 KDE4_ADD_UNIT_TEST(allocinefetchertest NOGUI allocinefetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(allocinefetchertest fetch ${TELLICO_TEST_LIBS})
@@ -218,3 +219,5 @@ IF( YAZ_FOUND )
     KDE4_ADD_UNIT_TEST(z3950fetchertest NOGUI z3950fetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})
 ENDIF( YAZ_FOUND )
+
+ENDIF(BUILD_FETCHER_TESTS)

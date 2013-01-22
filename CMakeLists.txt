@@ -17,6 +17,7 @@ option(ENABLE_AMAZON "Enable Amazon.com searching" TRUE)
 option(ENABLE_IMDB "Enable IMDb searching" TRUE)
 option(ENABLE_CDTEXT "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM "Enable support for webcams" FALSE)
+option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
 
 include(CheckTypeSize)
 check_type_size("unsigned char" SIZEOF_UNSIGNED_CHAR)
