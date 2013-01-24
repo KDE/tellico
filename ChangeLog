@@ -9,6 +9,7 @@
 2012-12-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Added a config setting for using a Google API key for book searches.
+	* Updated fetcher for IMDb.
 
 2012-11-21  Robby Stephenson  <robby@periapsis.org>
 
@@ -17,6 +18,14 @@
 2012-11-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Added fetcher for DBLP.org.
+
+2012-10-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug that caused loans to fail to get checked-in (Bug 307958).
+
+2012-09-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Added fetcher for thegamesdb.net.
 
 2012-09-09  Robby Stephenson  <robby@periapsis.org>
 
