@@ -150,7 +150,7 @@ void EntryUpdater::slotDone() {
 }
 
 void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
-  if(!result_ || m_cancelled) {
+  if(!result_ || m_cancelled || !result_->fetcher->isSearching()) {
     return;
   }
 
