@@ -272,7 +272,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   QJson::Parser parser;
   QVariantList resultList = parser.parse(data).toList();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
+//    myDebug() << "no results";
     endJob(job);
     return;
   }
