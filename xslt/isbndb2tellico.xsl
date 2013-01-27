@@ -12,7 +12,7 @@
    ===================================================================
    Tellico XSLT file - used for importing data from isbndb.com
 
-   Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+   Copyright (C) 2006-2013 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -63,6 +63,8 @@
     <field name="_default"/>
     <!-- Here so that we can retrive the real publisher name later, gets removed inside Tellico -->
     <field name="pub_id" flags="0" title="Publisher Key" category="Publishing" format="0" type="1"/>
+    <field title="Dewey Decimal" flags="0" category="Publishing" format="4" type="1" name="dewey" i18n="true"/>
+     <field title="LoC Classification" flags="0" category="Publishing" format="4" type="1" name="lcc" i18n="true"/>
    </fields>
    <xsl:apply-templates select="ISBNdb/BookList/BookData"/>
   </collection>
@@ -151,6 +153,21 @@
     </xsl:apply-templates>
    </language>
   </languages>
+
+  <dewey>
+   <xsl:choose>
+    <xsl:when test="Details/@dewey_decimal_normalized">
+     <xsl:value-of select="Details/@dewey_decimal_normalized"/>
+    </xsl:when>
+    <xsl:when test="Details/@dewey_decimal">
+     <xsl:value-of select="Details/@dewey_decimal"/>
+    </xsl:when>
+   </xsl:choose>
+  </dewey>
+
+  <lcc>
+   <xsl:value-of select="Details/@lcc_number"/>
+  </lcc>
 
  </entry>
 </xsl:template>
