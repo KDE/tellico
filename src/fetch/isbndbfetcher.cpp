@@ -229,9 +229,21 @@ void ISBNdbFetcher::slotComplete(KJob*) {
     }
   }
 
+  // since the Dewey and LoC field titles have a context in their i18n call here
+  // but not in the isbndb2tellico.xsl stylesheet where the field is actually created
+  // update the field titles here
+  QHashIterator<QString, QString> i(allOptionalFields());
+  while(i.hasNext()) {
+    i.next();
+    Data::FieldPtr field = coll->fieldByName(i.key());
+    if(field) {
+      field->setTitle(i.value());
+      coll->modifyField(field);
+    }
+  }
+
   int count = 0;
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(Data::EntryPtr entry, coll->entries()) {
     if(m_numResults >= m_limit) {
       break;
     }
@@ -347,6 +359,14 @@ QString ISBNdbFetcher::defaultIcon() {
   return favIcon("http://isbndb.com");
 }
 
+Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
+  // same ones as z3950fetcher
+  StringHash hash;
+  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QLatin1String("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
+  return hash;
+}
+
 ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
@@ -387,6 +407,9 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
       m_apiKeyEdit->setText(fetcher_->m_apiKey);
     }
   }
+
+  // now add additional fields widget
+  addFieldsWidget(ISBNdbFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 void ISBNdbFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {

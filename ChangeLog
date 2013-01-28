@@ -1,3 +1,11 @@
+2013-01-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Dewey Decimal and LCC to ISBNdb.org results.
+
+2013-01-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug with OpenLibrary fetcher.
+
 2013-01-23  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.7.
