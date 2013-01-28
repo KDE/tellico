@@ -230,7 +230,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   }
 
   // since the Dewey and LoC field titles have a context in their i18n call here
-  // but not in the mods2tellico.xsl stylesheet where the field is actually created
+  // but not in the isbndb2tellico.xsl stylesheet where the field is actually created
   // update the field titles here
   QHashIterator<QString, QString> i(allOptionalFields());
   while(i.hasNext()) {

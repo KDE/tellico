@@ -329,8 +329,20 @@ void SRUFetcher::slotComplete(KJob*) {
     return;
   }
 
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  // since the Dewey and LoC field titles have a context in their i18n call here
+  // but not in the stylesheet where the field is actually created
+  // update the field titles here
+  QHashIterator<QString, QString> i(allOptionalFields());
+  while(i.hasNext()) {
+    i.next();
+    Data::FieldPtr field = coll->fieldByName(i.key());
+    if(field) {
+      field->setTitle(i.value());
+      coll->modifyField(field);
+    }
+  }
+
+  foreach(Data::EntryPtr entry, coll->entries()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
@@ -452,6 +464,8 @@ Tellico::StringHash SRUFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("address")]  = i18n("Address");
   hash[QLatin1String("abstract")] = i18n("Abstract");
+  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QLatin1String("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
 }
 
