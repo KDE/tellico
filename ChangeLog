@@ -1,3 +1,7 @@
+2013-02-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Added fetcher for VNDB.org.
+
 2013-01-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Dewey Decimal and LCC to ISBNdb.org results.
