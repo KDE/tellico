@@ -261,6 +261,7 @@ void VNDBFetcher::slotComplete() {
     Data::EntryPtr entry(new Data::Entry(coll));
     entry->setField(QLatin1String("title"), value(resultMap, "title"));
     entry->setField(QLatin1String("year"), value(resultMap, "released").left(4));
+    entry->setField(QLatin1String("genre"), i18n("Visual Novel"));
     entry->setField(QLatin1String("description"), value(resultMap, "description"));
     entry->setField(QLatin1String("cover"), value(resultMap, "image"));
     if(optionalFields().contains(QLatin1String("origtitle"))) {
