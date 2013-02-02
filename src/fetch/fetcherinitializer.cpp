@@ -54,6 +54,7 @@
 #include "filmasterfetcher.h"
 #include "masfetcher.h"
 #include "hathitrustfetcher.h"
+#include "vndbfetcher.h"
 #endif
 #include "dvdfrfetcher.h"
 #include "doubanfetcher.h"
@@ -109,6 +110,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
   RegisterFetcher<Fetch::MASFetcher> registerMAS(MAS);
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);
+  RegisterFetcher<Fetch::VNDBFetcher> registerVNDB(VNDB);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
