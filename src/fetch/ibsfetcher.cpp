@@ -268,7 +268,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
   QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec("UTF-8");
     t << results;
   }
   f.close();
