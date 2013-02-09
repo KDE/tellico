@@ -43,6 +43,7 @@ public:
 
   virtual void start();
 
+  QList<Tellico::Fetch::FetchResult*> results() { return m_results; }
   Data::EntryList entries();
   void setMaximumResults(int count);
 

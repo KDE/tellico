@@ -216,8 +216,9 @@ QString Tellico::saveLocation(const QString& dir_) {
   return KGlobal::dirs()->saveLocation("appdata", dir_, true);
 }
 
-QString Tellico::fromHtmlData(const QByteArray& data_) {
-  QTextCodec* codec = QTextCodec::codecForHtml(data_);
+QString Tellico::fromHtmlData(const QByteArray& data_, const char* codecName) {
+  QTextCodec* codec = codecName ? QTextCodec::codecForHtml(data_, QTextCodec::codecForName(codecName))
+                                : QTextCodec::codecForHtml(data_);
   return codec->toUnicode(data_);
 }
 

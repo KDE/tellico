@@ -157,7 +157,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
-    t.setCodec(QTextCodec::codecForName("UTF-8"));
+    t.setCodec("UTF-8");
     t << text;
   }
   f.close();

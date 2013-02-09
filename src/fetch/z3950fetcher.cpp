@@ -401,7 +401,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
     if(f1.open(QIODevice::WriteOnly)) {
 //      if(f1.open(QIODevice::WriteOnly | QIODevice::Append)) {
       QTextStream t(&f1);
-      t.setCodec(QTextCodec::codecForName("UTF-8"));
+      t.setCodec("UTF-8");
       t << result_;
     }
     f1.close();
@@ -439,7 +439,7 @@ void Z3950Fetcher::handleResult(const QString& result_) {
 //      if(f2.open(QIODevice::WriteOnly)) {
       if(f2.open(QIODevice::WriteOnly | QIODevice::Append)) {
         QTextStream t(&f2);
-        t.setCodec(QTextCodec::codecForName("UTF-8"));
+        t.setCodec("UTF-8");
         t << str;
       }
       f2.close();
