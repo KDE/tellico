@@ -424,7 +424,7 @@ void IMDBFetcher::slotComplete(KJob*) {
     return;
   }
 
-  m_text = Tellico::fromHtmlData(m_job->data());
+  m_text = Tellico::fromHtmlData(m_job->data(), "UTF-8");
   if(m_text.isEmpty()) {
     myLog() << "No data returned";
     stop();
@@ -436,6 +436,7 @@ void IMDBFetcher::slotComplete(KJob*) {
   QFile f(QString::fromLatin1("/tmp/testimdbresults.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
+    t.setCodec("UTF-8");
     t << m_text;
   }
   f.close();

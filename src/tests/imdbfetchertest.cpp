@@ -34,6 +34,7 @@
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
+#include "../fetch/fetcherjob.h"
 
 #include <KConfigGroup>
 
@@ -242,4 +243,25 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(entry->field("writer"), QLatin1String("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=314113
+void ImdbFetcherTest::testFetchResultEncoding() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QString::fromUtf8("jôbafuku onna harakiri"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  if(!hasNetwork()) {
+    QSKIP("This test requires network access", SkipSingle);
+    return;
+  }
+
+  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
+  job->exec();
+  QList<Tellico::Fetch::FetchResult*> results = job->results();
+  QCOMPARE(results.count(), 1);
+  Tellico::Fetch::FetchResult* result = results.front();
+  QVERIFY(result);
+
+  QCOMPARE(result->title, QString::fromUtf8("'Shitsurakuen': jôbafuku onna harakiri"));
 }
