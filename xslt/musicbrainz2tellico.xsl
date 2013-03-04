@@ -133,6 +133,11 @@
     <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='AmazonAsin']">
      <xsl:value-of select="concat('http://ecx.images-amazon.com/images/P/',mb:asin,'.01.MZZZZZZZ.jpg')"/>
     </xsl:when>
+    <!-- TODO: when switching to ws/2, check cover-art-archive element for existence of front cover art
+               before setting the value, so an extra http call is not done -->
+    <xsl:otherwise>
+     <xsl:value-of select="concat('http://coverartarchive.org/release/',@id,'/front')"/>
+    </xsl:otherwise>
    </xsl:choose>
   </cover>
 
