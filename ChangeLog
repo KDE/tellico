@@ -1,3 +1,7 @@
+2013-03-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Add coverartarchive.org to MusicBrainz data source.
+
 2013-02-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed character encoding in IMDB results list (Bug 314113).

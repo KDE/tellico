@@ -122,3 +122,18 @@ void MusicBrainzFetcherTest::testPerson() {
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
+
+// test grabbing cover art from coverartarchive.org
+void MusicBrainzFetcherTest::testCoverArt() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
+                                       QLatin1String("Laulut ja tarinat"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QLatin1String("Laulut ja tarinat"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+}
