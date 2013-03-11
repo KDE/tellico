@@ -150,6 +150,8 @@ void AllocineFetcherTest::testPlotQuote() {
   QVERIFY(!entry->field(QLatin1String("plot")).contains(QLatin1String("&quot;")));
 }
 
+#ifdef HAVE_QJSON
+
 void AllocineFetcherTest::testTitleAPI() {
   KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
   QString groupName = QLatin1String("allocine");
@@ -334,3 +336,5 @@ void AllocineFetcherTest::testTitleBeyazperdeTurkish() {
   QCOMPARE(castList.at(0), QLatin1String("Jennifer Lawrence::Katniss Everdeen"));
 }
 
+// endif HAVE_QJSON
+#endif

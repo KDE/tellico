@@ -165,6 +165,10 @@ IF( QJSON_FOUND )
 
     KDE4_ADD_UNIT_TEST(masfetchertest NOGUI masfetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
+
+    KDE4_ADD_UNIT_TEST(googlebookfetchertest NOGUI googlebookfetchertest.cpp abstractfetchertest.cpp)
+    TARGET_LINK_LIBRARIES(googlebookfetchertest fetch ${TELLICO_TEST_LIBS})
+
 ENDIF( QJSON_FOUND )
 
 # running gcstar in the fetcher is really unreliable
@@ -173,9 +177,6 @@ ENDIF( QJSON_FOUND )
 
 KDE4_ADD_UNIT_TEST(giantbombfetchertest NOGUI giantbombfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(giantbombfetchertest fetch ${TELLICO_TEST_LIBS})
-
-KDE4_ADD_UNIT_TEST(googlebookfetchertest NOGUI googlebookfetchertest.cpp abstractfetchertest.cpp)
-TARGET_LINK_LIBRARIES(googlebookfetchertest fetch ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(googlescholarfetchertest NOGUI googlescholarfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})

@@ -49,13 +49,11 @@
 #include "giantbombfetcher.h"
 #include "openlibraryfetcher.h"
 #include "multifetcher.h"
-#ifdef HAVE_QJSON
 #include "freebasefetcher.h"
 #include "filmasterfetcher.h"
 #include "masfetcher.h"
 #include "hathitrustfetcher.h"
 #include "vndbfetcher.h"
-#endif
 #include "dvdfrfetcher.h"
 #include "doubanfetcher.h"
 #include "bibliosharefetcher.h"
@@ -111,17 +109,17 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::MASFetcher> registerMAS(MAS);
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);
   RegisterFetcher<Fetch::VNDBFetcher> registerVNDB(VNDB);
+  RegisterFetcher<Fetch::AllocineFetcher> registerAllocine(Allocine);
+  RegisterFetcher<Fetch::ScreenRushFetcher> registerScreenRush(ScreenRush);
+  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
+  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
+  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
   RegisterFetcher<Fetch::MovieMeterFetcher> registerMovieMeter(MovieMeter);
   RegisterFetcher<Fetch::SpringerFetcher> registerSpringer(Springer);
-  RegisterFetcher<Fetch::AllocineFetcher> registerAllocine(Allocine);
-  RegisterFetcher<Fetch::ScreenRushFetcher> registerScreenRush(ScreenRush);
-  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
-  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
-  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
   RegisterFetcher<Fetch::TheGamesDBFetcher> registerTheGamesDB(TheGamesDB);
   RegisterFetcher<Fetch::DBLPFetcher> registerDBLP(DBLP);
 }

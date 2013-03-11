@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012-2013 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,15 +22,20 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "allocinefetcher.h"
-#include "../translators/xslthandler.h"
-#include "../translators/tellicoimporter.h"
+#include "../collections/videocollection.h"
+#include "../entry.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_utils.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
 #include <KLocale>
 #include <KConfigGroup>
+#include <KLineEdit>
 #include <KIntSpinBox>
 
 #include <QLabel>
@@ -39,8 +44,11 @@
 #include <QGridLayout>
 #include <QTextCodec>
 
+#ifdef HAVE_QJSON
+#include <qjson/parser.h>
+#endif
+
 namespace {
-  static const int ALLOCINE_MAX_RETURNS_TOTAL = 20;
   static const char* ALLOCINE_API_KEY = "YW5kcm9pZC12M3M";
   static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
 }
@@ -50,24 +58,27 @@ using Tellico::Fetch::AbstractAllocineFetcher;
 using Tellico::Fetch::AllocineFetcher;
 
 AbstractAllocineFetcher::AbstractAllocineFetcher(QObject* parent_, const QString& baseUrl_)
-    : XMLFetcher(parent_)
+    : Fetcher(parent_)
+    , m_started(false)
     , m_apiKey(QLatin1String(ALLOCINE_API_KEY))
     , m_baseUrl(baseUrl_)
     , m_numCast(10) {
-  setLimit(ALLOCINE_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("allocine2tellico.xsl"));
   Q_ASSERT(!m_baseUrl.isEmpty());
 }
 
 AbstractAllocineFetcher::~AbstractAllocineFetcher() {
 }
 
-bool AbstractAllocineFetcher::canFetch(int type) const {
-  return type == Data::Collection::Video;
+bool AbstractAllocineFetcher::canSearch(FetchKey k) const {
+#ifdef HAVE_QJSON
+  return k == Keyword;
+#else
+  return false;
+#endif
 }
 
-bool AbstractAllocineFetcher::canSearch(FetchKey k) const {
-  return k == Keyword;
+bool AbstractAllocineFetcher::canFetch(int type) const {
+  return type == Data::Collection::Video;
 }
 
 void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -78,13 +89,13 @@ void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
   m_numCast = config_.readEntry("Max Cast", 10);
 }
 
-void AbstractAllocineFetcher::resetSearch() {
-}
+void AbstractAllocineFetcher::search() {
+  m_started = true;
 
-KUrl AbstractAllocineFetcher::searchUrl() {
+#ifdef HAVE_QJSON
   KUrl u(m_baseUrl);
   u.addPath(QLatin1String("search"));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("format"), QLatin1String("json"));
   u.addQueryItem(QLatin1String("partner"), m_apiKey);
 
   switch(request().key) {
@@ -95,71 +106,230 @@ KUrl AbstractAllocineFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return;
   }
 
-//  myDebug() << "url: " << u.url();
-  return u;
+//  myDebug() << "url:" << u;
+
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(GUI::Proxy::widget());
+  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+#else
+  stop();
+#endif
 }
 
-void AbstractAllocineFetcher::parseData(QByteArray& data_) {
-  Q_UNUSED(data_);
+void AbstractAllocineFetcher::stop() {
+  if(!m_started) {
+    return;
+  }
+  if(m_job) {
+    m_job->kill();
+  }
+  m_started = false;
+  emit signalDone(this);
 }
 
-Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
-  Q_ASSERT(entry_);
+Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
+  Data::EntryPtr entry = m_entries.value(uid_);
+  if(!entry) {
+    myWarning() << "no entry in dict";
+    return Data::EntryPtr();
+  }
 
-  QString code = entry_->field(QLatin1String("allocine-code"));
+  QString code = entry->field(QLatin1String("allocine-code"));
   if(code.isEmpty()) {
     myWarning() << "no allocine release found";
-    return entry_;
+    return entry;
   }
 
   KUrl u(m_baseUrl);
   u.addPath(QLatin1String("movie"));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  u.addQueryItem(QLatin1String("format"), QLatin1String("json"));
   u.addQueryItem(QLatin1String("profile"), QLatin1String("large"));
   u.addQueryItem(QLatin1String("filter"), QLatin1String("movie"));
   u.addQueryItem(QLatin1String("partner"), m_apiKey);
   u.addQueryItem(QLatin1String("code"), code);
-//  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u;
 
   // quiet
-  QString output = FileHandler::readXMLFile(u, true);
+  QByteArray data = FileHandler::readDataFile(u, true);
 
 #if 0
-  myWarning() << "Remove output debug from allocinefetcher.cpp";
-  QFile f(QLatin1String("/tmp/test-allocine.xml"));
+  myWarning() << "Remove debug from allocinefetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test2.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
-    t << output;
+    t << data;
   }
   f.close();
 #endif
 
-  Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
-  // be quiet when loading images
-  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
-  Data::CollPtr coll = imp.collection();
-  if(!coll || coll->entryCount() == 0) {
-    myWarning() << "no collection pointer";
-    return entry_;
-  }
-
-  if(coll->entryCount() > 1) {
-    myDebug() << "weird, more than one entry found";
-  }
+#ifdef HAVE_QJSON
+  QJson::Parser parser;
+  QVariantMap result = parser.parse(data).toMap().value(QLatin1String("movie")).toMap();
+  populateEntry(entry, result);
+#endif
 
   // don't want to include id
-  coll->removeField(QLatin1String("allocine-code"));
-  Data::EntryPtr entry = coll->entries().front();
+  entry->collection()->removeField(QLatin1String("allocine-code"));
   QStringList castRows = FieldFormat::splitTable(entry->field(QLatin1String("cast")));
   while(castRows.count() > m_numCast) {
     castRows.removeLast();
   }
   entry->setField(QLatin1String("cast"), castRows.join(FieldFormat::rowDelimiterString()));
   return entry;
+}
+
+void AbstractAllocineFetcher::slotComplete(KJob*) {
+#ifdef HAVE_QJSON
+//  myDebug();
+
+  if(m_job->error()) {
+    m_job->ui()->showErrorMessage();
+    stop();
+    return;
+  }
+
+  QByteArray data = m_job->data();
+  if(data.isEmpty()) {
+    myDebug() << "no data";
+    stop();
+    return;
+  }
+
+#if 0
+  myWarning() << "Remove debug from allocinefetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
+
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  // always add the gbs-link for fetchEntryHook
+  Data::FieldPtr field(new Data::Field(QLatin1String("allocine-code"), QLatin1String("Allocine Code"), Data::Field::URL));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
+
+  // add new fields
+  if(optionalFields().contains(QLatin1String("allocine"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("allocine"), i18n("Allocine Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QLatin1String("origtitle"))) {
+    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
+    f->setFormatType(FieldFormat::FormatTitle);
+    coll->addField(f);
+  }
+
+
+  QJson::Parser parser;
+  QVariantMap result = parser.parse(data).toMap().value(QLatin1String("feed")).toMap();
+//  myDebug() << "total:" << result.value(QLatin1String("totalResults"));
+
+  QVariantList resultList = result.value(QLatin1String("movie")).toList();
+  if(resultList.isEmpty()) {
+    myDebug() << "no results";
+    stop();
+    return;
+  }
+
+  foreach(const QVariant& result, resultList) {
+  //  myDebug() << "found result:" << result;
+
+    Data::EntryPtr entry(new Data::Entry(coll));
+    populateEntry(entry, result.toMap());
+
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    m_entries.insert(r->uid, entry);
+    emit signalResultFound(r);
+  }
+
+  m_hasMoreResults = false;
+#endif
+  stop();
+}
+
+void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap) {
+  if(entry->collection()->hasField(QLatin1String("allocine-code"))) {
+    entry->setField(QLatin1String("allocine-code"), value(resultMap, "code"));
+  }
+
+  entry->setField(QLatin1String("title"), value(resultMap, "title"));
+  if(optionalFields().contains(QLatin1String("origtitle"))) {
+    entry->setField(QLatin1String("origtitle"), value(resultMap, "originalTitle"));
+  }
+  if(entry->title().isEmpty()) {
+    entry->setField(QLatin1String("title"), value(resultMap,  "originalTitle"));
+  }
+  entry->setField(QLatin1String("year"), value(resultMap, "productionYear"));
+  entry->setField(QLatin1String("plot"), value(resultMap, "synopsis"));
+
+  const int runTime = value(resultMap, "runtime").toInt();
+  entry->setField(QLatin1String("running-time"), QString::number(runTime/60));
+
+  const QVariantList castList = resultMap.value(QLatin1String("castMember")).toList();
+  QStringList actors, directors, producers, composers;
+  foreach(const QVariant& castVariant, castList) {
+    const QVariantMap castMap = castVariant.toMap();
+    const int code = value(castMap, "activity", "code").toInt();
+    switch(code) {
+      case 8001:
+        actors << (value(castMap, "person", "name") + FieldFormat::columnDelimiterString() + value(castMap, "role"));
+        break;
+      case 8002:
+        directors << value(castMap, "person", "name");
+        break;
+      case 8029:
+        producers << value(castMap, "person", "name");
+        break;
+      case 8003:
+        composers << value(castMap, "person", "name");
+        break;
+    }
+  }
+  entry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
+  entry->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
+  entry->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
+  entry->setField(QLatin1String("composer"), composers.join(FieldFormat::delimiterString()));
+
+  const QVariantMap releaseMap = resultMap.value(QLatin1String("release")).toMap();
+  entry->setField(QLatin1String("studio"), value(releaseMap, "distributor", "name"));
+
+  QStringList genres;
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("genre")).toList()) {
+    genres << i18n(value(variant.toMap(), "$").toUtf8());
+  }
+  entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
+
+  QStringList nats;
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("nationality")).toList()) {
+    nats << value(variant.toMap(), "$");
+  }
+  entry->setField(QLatin1String("nationality"), nats.join(FieldFormat::delimiterString()));
+
+  QStringList langs;
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("language")).toList()) {
+    langs << value(variant.toMap(), "$");
+  }
+  entry->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
+
+  const QVariantMap colorMap = resultMap.value(QLatin1String("color")).toMap();
+  if(colorMap.value(QLatin1String("code")) == QLatin1String("12001")) {
+    entry->setField(QLatin1String("color"), i18n("Color"));
+  }
+
+  entry->setField(QLatin1String("cover"), value(resultMap, "poster", "href"));
+
+  if(optionalFields().contains(QLatin1String("allocine"))) {
+    entry->setField(QLatin1String("allocine"), value(resultMap, "link", "href"));
+  }
 }
 
 Tellico::Fetch::FetchRequest AbstractAllocineFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -195,6 +365,34 @@ AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Abst
 
 void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("Max Cast", m_numCast->value());
+}
+
+// static
+QString AbstractAllocineFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else {
+    return QString();
+  }
+}
+
+QString AbstractAllocineFetcher::value(const QVariantMap& map, const char* object, const char* name) {
+  const QVariant v = map.value(QLatin1String(object));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::Map)) {
+    return value(v.toMap(), name);
+  } else if(v.canConvert(QVariant::List)) {
+    QVariantList list = v.toList();
+    return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
+  } else {
+    return QString();
+  }
 }
 
 /**********************************************************************************************/
