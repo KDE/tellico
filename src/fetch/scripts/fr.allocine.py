@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
-
+# kate: replace-tabs off;
 # ***************************************************************************
 #    copyright            : (C) 2006-2010 by Mathias Monnerville
 #    email                : tellico@monnerville.com
@@ -323,13 +323,13 @@ class AlloCineParser:
 						data[name].append(d.strip())
 
 				elif name == 'nat':
-					natList = re.findall(r'<span class=".*?">(.*?)</span>', matches[name].group('nat'))
+					natList = re.findall(r'<span class=".*?">(.*?)</span>', matches[name].group('nat'), re.DOTALL)
 					data[name] = []
 					for d in natList:
 						data[name].append(d.strip().capitalize())
 
 				elif name == 'genres':
-					genresList = re.findall(r'<span itemprop="genre">(.*?)</span>', matches[name].group('step1'))
+					genresList = re.findall(r'<span itemprop="genre">(.*?)</span>', matches[name].group('step1'), re.DOTALL)
 					data[name] = []
 					for d in genresList:
 						data[name].append(d.strip().capitalize())
