@@ -1,3 +1,7 @@
+2013-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Update Allocine API to use JSONn instead of XML.
+
 2013-03-03  Robby Stephenson  <robby@periapsis.org>
 
 	* Add coverartarchive.org to MusicBrainz data source.

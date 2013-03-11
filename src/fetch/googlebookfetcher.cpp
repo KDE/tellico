@@ -185,6 +185,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+#ifdef HAVE_QJSON
   QString gbs = entry->field(QLatin1String("gbs-link"));
   if(!gbs.isEmpty()) {
     // quiet
@@ -192,6 +193,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     QJson::Parser parser;
     populateEntry(entry, parser.parse(data).toMap());
   }
+#endif
 
   const QString image_id = entry->field(QLatin1String("cover"));
   // if it's still a url, we need to load it

@@ -29,7 +29,13 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
+#include <QPointer>
+
 class KIntSpinBox;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
 
@@ -40,7 +46,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class AbstractAllocineFetcher : public XMLFetcher {
+class AbstractAllocineFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -51,7 +57,10 @@ public:
    */
   virtual ~AbstractAllocineFetcher();
 
+  virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const;
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
@@ -65,13 +74,21 @@ public:
   };
   friend class ConfigWidget;
 
-private:
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
-  virtual KUrl searchUrl();
-  virtual void parseData(QByteArray& data);
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+private slots:
+  void slotComplete(KJob* job);
 
+private:
+  static QString value(const QVariantMap& map, const char* name);
+  static QString value(const QVariantMap& map, const char* object, const char* name);
+
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
+
+  bool m_started;
   QString m_apiKey;
   QString m_baseUrl;
   int m_numCast;
