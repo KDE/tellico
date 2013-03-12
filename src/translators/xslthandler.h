@@ -108,11 +108,9 @@ public:
 
 private:
   void init();
-  QString process();
+  QString process(xmlDocPtr docIn);
 
   xsltStylesheetPtr m_stylesheet;
-  xmlDocPtr m_docIn;
-  xmlDocPtr m_docOut;
 
   QHash<QByteArray, QByteArray> m_params;
 
