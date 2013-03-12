@@ -48,7 +48,7 @@ void GoogleScholarFetcherTest::initTestCase() {
 
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Speeding up the Hybrid Monte Carlo algorithm for dynamical fermions"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("Hasenbusch, M."));
+  m_fieldValues.insert(QLatin1String("author"), QLatin1String("Hasenbusch, Martin"));
   m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Elsevier"));
   m_fieldValues.insert(QLatin1String("journal"), QLatin1String("physics letters b"));
   m_fieldValues.insert(QLatin1String("volume"), QLatin1String("519"));
