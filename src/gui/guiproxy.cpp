@@ -45,7 +45,9 @@ void Proxy::sorry(const QString& text_, QWidget* widget_/* =0 */) {
   if(text_.isEmpty()) {
     return;
   }
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  KMessageBox::sorry(widget_ ? widget_ : s_widget, text_);
+  if(widget_ || s_widget) {
+    GUI::CursorSaver cs(Qt::ArrowCursor);
+    KMessageBox::sorry(widget_ ? widget_ : s_widget, text_);
+  }
 }
 

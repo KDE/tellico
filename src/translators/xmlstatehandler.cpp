@@ -141,7 +141,6 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
 }
 
 bool DocumentHandler::end(const QString&, const QString&, const QString&) {
-  qDebug() << "ending document";
   return true;
 }
 
@@ -177,9 +176,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
     myWarning() << "no collection created";
     return false;
   }
-  qDebug() << "ending collection1";
   d->coll->addEntries(d->entries);
-  qDebug() << "added entries";
 
   // a little hidden capability was to just have a local path as an image file name
   // and on reading the xml file, Tellico would load the image file, too
@@ -190,10 +187,8 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   const int maxImageWarnings = 3;
   int imageWarnings = 0;
 
-  int i = 0;
   Data::FieldList fields = d->coll->imageFields();
   foreach(Data::EntryPtr entry, d->entries) {
-    qDebug() << "ping" << ++i;
     foreach(Data::FieldPtr field, fields) {
       QString value = entry->field(field);
       if(value.isEmpty()) {
@@ -208,17 +203,14 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
           QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
           if(result.isEmpty()) {
-            qDebug() << "empty image name";
             // clear value for the field in this case
             value.clear();
             ++imageWarnings;
           } else {
-            qDebug() << "image name:" << result;
             value = result;
           }
         } else {
           value = Data::Image::idClean(value);
-          qDebug() << "existing image name:" << value;
         }
         if(hasMDate) {
           // since the modified date gets reset, keep a copy
@@ -231,7 +223,6 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
       }
     }
   }
-  qDebug() << "ending collection2";
   return true;
 }
 

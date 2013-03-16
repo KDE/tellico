@@ -84,7 +84,6 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 
   XSLTHandler handler(m_xsltURL);
   if(!handler.isValid()) {
-    myDebug() << "invalid xslt handler";
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return Data::CollPtr();
   }
@@ -94,9 +93,8 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 //  qDebug() << str;
 
   Import::TellicoImporter imp(str);
-  qDebug() << "grabbing collection";
+  imp.setOptions(options());
   m_coll = imp.collection();
-  qDebug() << "...done";
   setStatusMessage(imp.statusMessage());
   return m_coll;
 }
