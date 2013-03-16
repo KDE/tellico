@@ -33,6 +33,7 @@ TellicoXMLHandler::TellicoXMLHandler() : QXmlDefaultHandler(), m_data(new SAX::S
 }
 
 TellicoXMLHandler::~TellicoXMLHandler() {
+  qDebug() << "~TellicoXMLHandler";
   delete m_data;
   m_data = 0;
   qDeleteAll(m_handlers);

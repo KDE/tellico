@@ -102,32 +102,27 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
 }
 
 void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
-  qDebug() << "starting XML load";
   const bool showProgress = options() & ImportProgress;
 
   TellicoXMLHandler handler;
   handler.setLoadImages(loadImages_);
   handler.setShowImageLoadErrors(options() & ImportShowImageErrors);
 
-  qDebug() << "creating reader";
   QXmlSimpleReader reader;
   reader.setContentHandler(&handler);
 
-  qDebug() << "creating source";
   QXmlInputSource source;
   source.setData(QByteArray()); // necessary
   bool success = reader.parse(&source, true);
 
   const int blockSize = data_.size()/100 + 1;
   int pos = 0;
-  qDebug() <<  "signalling";
   emit signalTotalSteps(this, data_.size());
 
   while(success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
-    qDebug() <<  "parseContinue" << pos;
     success = reader.parseContinue();
     pos += blockSize;
     if(showProgress) {
@@ -135,9 +130,9 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
       kapp->processEvents();
     }
   }
+  qDebug() << "done reading xml";
 
   if(!success) {
-    qDebug() <<  "error";
     m_format = Error;
     QString error;
     if(!url().isEmpty()) {
@@ -149,11 +144,13 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     return;
   }
 
+  qDebug() << "cancelled?" << m_cancelled;
   if(!m_cancelled) {
     m_hasImages = handler.hasImages();
     qDebug() << "Grabbing handler collection";
     m_coll = handler.collection();
   }
+  qDebug() << "done with xml";
 }
 
 void TellicoImporter::loadZipData() {
