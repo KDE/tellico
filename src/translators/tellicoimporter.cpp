@@ -118,10 +118,15 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   const int blockSize = data_.size()/100 + 1;
   int pos = 0;
   emit signalTotalSteps(this, data_.size());
+  qDebug() << "blocksize ="  << blockSize;
 
   while(success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
+    qDebug() << "processing..." << pos << size << data_.size();
+    if(pos == 15147) {
+      qDebug() << block <<  "***";
+    }
     source.setData(block);
     success = reader.parseContinue();
     qDebug() << "processing" << pos;
@@ -129,7 +134,6 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if(showProgress) {
       emit signalProgress(this, pos);
       kapp->processEvents();
-      qDebug() << "...emitting" << pos;
     }
   }
   qDebug() << "done reading xml";
