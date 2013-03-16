@@ -131,6 +131,9 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     }
     source.setData(block);
     success = reader.parseContinue();
+    if(!success) {
+      qDebug() << "parsing failed!";
+    }
     pos += blockSize;
     if(showProgress) {
       emit signalProgress(this, pos);
