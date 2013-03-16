@@ -50,8 +50,10 @@ GriffithImporter::~GriffithImporter() {
 }
 
 void GriffithImporter::beginXSLTHandler(XSLTHandler* handler_) {
+  qDebug() << "add image directory";
   Q_ASSERT(handler_);
   handler_->addStringParam("imgdir", QFile::encodeName(QDir::homePath() + QLatin1String("/.griffith/")));
+  qDebug() << "done";
 }
 
 bool GriffithImporter::canImport(int type) const {
