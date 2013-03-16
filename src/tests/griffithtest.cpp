@@ -49,29 +49,48 @@ void GriffithTest::initTestCase() {
 }
 
 void GriffithTest::testMovies() {
+  int i = 0;
   KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/griffith.xml");
   Tellico::Import::GriffithImporter importer(url);
+  qDebug() << ++i;
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 5);
+  qDebug() << ++i;
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(!entry.isNull());
+  qDebug() << ++i;
   QCOMPARE(entry->field("title"), QLatin1String("Serendipity"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("origtitle"), QLatin1String("Serendipity"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("director"), QLatin1String("Peter Chelsom"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("year"), QLatin1String("2001"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("certification"), QLatin1String("PG-13 (USA)"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("genre"), QLatin1String("Comedy; Romance; Fantasy"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("rating"), QLatin1String("6"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("running-time"), QLatin1String("90"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("studio"), QLatin1String("studio"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("seen"), QLatin1String("true"));
+  qDebug() << ++i;
   QCOMPARE(entry->field("medium"), QLatin1String("DVD"));
+  qDebug() << ++i;
   QCOMPARE(ROWS(entry, "cast").first(), QLatin1String("John Cusack::Jonathan Trager"));
+  qDebug() << ++i;
   QVERIFY(!entry->field("plot").isEmpty());
+  qDebug() << ++i;
   QCOMPARE(entry->field("cover"), QLatin1String("44eef3923347d7aea618ae7e264d4fbb.jpeg"));
+  qDebug() << ++i;
 }
