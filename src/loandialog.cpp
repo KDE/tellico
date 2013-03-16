@@ -38,6 +38,7 @@
 #include <kpushbutton.h>
 #include <ktextedit.h>
 #include <kiconloader.h>
+#include <KJob>
 #ifdef HAVE_KABC
 #include <kabc/addressee.h>
 #include <Akonadi/Contact/ContactSearchJob>

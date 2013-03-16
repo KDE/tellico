@@ -34,6 +34,7 @@
 
 #include <KLocale>
 #include <KLineEdit>
+#include <KJob>
 
 #ifdef HAVE_KABC
 #include <kabc/addressee.h>
