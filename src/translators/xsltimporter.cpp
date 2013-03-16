@@ -81,25 +81,22 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
     setStatusMessage(i18n("A valid XSLT file is needed to import the file."));
     return Data::CollPtr();
   }
-  qDebug() << "starting";
 
   XSLTHandler handler(m_xsltURL);
   if(!handler.isValid()) {
-    qDebug() << "invalid xslt handler";
+    myDebug() << "invalid xslt handler";
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return Data::CollPtr();
   }
   beginXSLTHandler(&handler);
 //  qDebug() << text();
-  qDebug() << "applying";
   const QString str = handler.applyStylesheet(text());
 //  qDebug() << str;
 
-  qDebug() << "creating tellico importer";
   Import::TellicoImporter imp(str);
   qDebug() << "grabbing collection";
   m_coll = imp.collection();
-  qDebug() << "Returning";
+  qDebug() << "...done";
   setStatusMessage(imp.statusMessage());
   return m_coll;
 }

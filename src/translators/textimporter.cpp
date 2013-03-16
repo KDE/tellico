@@ -26,7 +26,6 @@
 #include "../core/filehandler.h"
 
 #include <QRegExp>
-#include <QDebug>
 
 namespace {
   QString& cleanXml(QString s) {
@@ -42,9 +41,7 @@ using Tellico::Import::TextImporter;
 TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
     : Import::Importer(url_) {
   if(url_.isValid()) {
-    qDebug() << "reading";
     setText(cleanXml(FileHandler::readTextFile(url_, false, useUTF8_)));
-    qDebug() << "done";
   }
 }
 
