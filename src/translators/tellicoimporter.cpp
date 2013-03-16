@@ -123,13 +123,14 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   while(success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
-    qDebug() << "processing..." << pos << size << data_.size();
+    if(pos > 15000) {
+      qDebug() << "processing..." << pos << size << data_.size();
+    }
     if(pos == 15147) {
       qDebug() << block <<  "***";
     }
     source.setData(block);
     success = reader.parseContinue();
-    qDebug() << "processing" << pos;
     pos += blockSize;
     if(showProgress) {
       emit signalProgress(this, pos);

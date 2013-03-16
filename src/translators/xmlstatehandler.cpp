@@ -141,6 +141,7 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
 }
 
 bool DocumentHandler::end(const QString&, const QString&, const QString&) {
+  qDebug() << "ending document";
   return true;
 }
 
@@ -176,6 +177,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
     myWarning() << "no collection created";
     return false;
   }
+  qDebug() << "ending collection1";
   d->coll->addEntries(d->entries);
 
   // a little hidden capability was to just have a local path as an image file name
@@ -223,6 +225,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
       }
     }
   }
+  qDebug() << "ending collection2";
   return true;
 }
 

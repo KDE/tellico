@@ -59,6 +59,9 @@ bool TellicoXMLHandler::endElement(const QString& nsURI_, const QString& localNa
 
   SAX::StateHandler* handler = m_handlers.pop();
   bool res = handler->end(nsURI_, localName_, qName_);
+  if(!res) {
+    qDebug() << localName_;
+  }
   // need to reset character data, too
   m_data->text.clear();
   delete handler;
