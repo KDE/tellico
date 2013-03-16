@@ -84,13 +84,14 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 
   XSLTHandler handler(m_xsltURL);
   if(!handler.isValid()) {
+    myDebug() << "invalid xslt handler";
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return Data::CollPtr();
   }
   beginXSLTHandler(&handler);
-//  qDebug() << text();
+//  myDebug() << text();
   const QString str = handler.applyStylesheet(text());
-//  qDebug() << str;
+//  myDebug() << str;
 
   Import::TellicoImporter imp(str);
   imp.setOptions(options());
@@ -128,7 +129,7 @@ QWidget* XSLTImporter::widget(QWidget* parent_) {
 }
 
 void XSLTImporter::slotCancel() {
-  qDebug() << "unimplemented";
+  myDebug() << "unimplemented";
 }
 
 #include "xsltimporter.moc"
