@@ -124,10 +124,12 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
     success = reader.parseContinue();
+    qDebug() << "processing" << pos;
     pos += blockSize;
     if(showProgress) {
       emit signalProgress(this, pos);
       kapp->processEvents();
+      qDebug() << "...emitting" << pos;
     }
   }
   qDebug() << "done reading xml";
