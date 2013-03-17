@@ -126,7 +126,7 @@ void VNDBFetcher::search() {
   QJson::Serializer serializer;
   switch(request().key) {
     case Title:
-      get += "(title ~ " + serializer.serialize(request().value) + ")";
+      get += "(title ~ " + serializer.serialize(request().value) + ')';
 //      u.addQueryItem(QLatin1String("title"), term_);
       break;
 
