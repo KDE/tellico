@@ -92,6 +92,7 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);
+  imp.setOptions(options());
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
   return m_coll;
