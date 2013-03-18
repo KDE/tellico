@@ -1,3 +1,7 @@
+2013-03-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed regexp in Google Scholar fetcher to set cookie (Bug 316550).
+
 2013-03-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Update Allocine API to use JSONn instead of XML.
