@@ -519,6 +519,8 @@ void Document::slotLoadAllImages() {
   }
 
   m_cancelImageWriting = false;
+  m_importer->deleteLater();
+  m_importer = 0;
 }
 
 void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
