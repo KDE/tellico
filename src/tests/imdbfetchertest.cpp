@@ -106,6 +106,8 @@ void ImdbFetcherTest::testSnowyRiverFr() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
+  // IMDB started redirecting international sites back to main imdb.com
+  QEXPECT_FAIL("", "IMDB.fr now redirects to imdb.com", Abort);
   QCOMPARE(entry->field("title"), QString::fromUtf8("L'homme de la rivière d'argent"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
   QCOMPARE(entry->field("genre"), QLatin1String("Aventure; Drame; Famille; Romance; Western"));
@@ -146,6 +148,8 @@ void ImdbFetcherTest::testSnowyRiverEs() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
+  // IMDB started redirecting international sites back to main imdb.com
+  QEXPECT_FAIL("", "IMDB.es now redirects to imdb.com", Abort);
   QCOMPARE(entry->field("title"), QString::fromUtf8("El hombre de río Nevado"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
   QCOMPARE(entry->field("genre"), QLatin1String("Aventura; Drama; Familia; Romance; Del Oeste"));
