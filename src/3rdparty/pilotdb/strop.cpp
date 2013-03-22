@@ -27,7 +27,7 @@
 
 #include "../../tellico_debug.h"
 
-extern std::ostream* err;
+std::ostream* err;
 
 void StrOps::lower(std::string& str)
 {
