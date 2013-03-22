@@ -814,7 +814,11 @@ void IMDBFetcher::parseMultipleNameResults() {
   KListWidget* listWidget = new KListWidget(box);
   listWidget->setMinimumWidth(400);
   listWidget->setWrapping(true);
-  foreach(const QString& value, map.keys()) {
+
+  QMapIterator<QString, KUrl> i(map);
+  while(i.hasNext()) {
+    i.next();
+    const QString& value = i.key();
     if(value.endsWith(QLatin1Char(' '))) {
       GUI::ListWidgetItem* box = new GUI::ListWidgetItem(value, listWidget);
       box->setColored(true);
