@@ -37,6 +37,7 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KLineEdit>
 
 #include <QLabel>
 #include <QFile>
@@ -50,10 +51,11 @@
 #endif
 
 namespace {
-  static const char* FREEBASE_QUERY_URL = "http://api.freebase.com/api/service/mqlread";
-  static const char* FREEBASE_IMAGE_URL = "http://api.freebase.com/api/trans/image_thumb";
-  static const char* FREEBASE_BLURB_URL = "http://api.freebase.com/api/trans/blurb";
+  static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread";
+  static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image";
+  static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic";
   static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
+  static const char* FREEBASE_API_KEY =   "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 }
 
@@ -61,7 +63,9 @@ using namespace Tellico;
 using Tellico::Fetch::FreebaseFetcher;
 
 FreebaseFetcher::FreebaseFetcher(QObject* parent_)
-    : Fetcher(parent_), m_job(0), m_started(false) {
+    : Fetcher(parent_)
+    , m_started(false)
+    , m_apiKey(QLatin1String(FREEBASE_API_KEY)) {
 }
 
 FreebaseFetcher::~FreebaseFetcher() {
@@ -85,18 +89,22 @@ bool FreebaseFetcher::canSearch(FetchKey k) const {
   return k == Title || k == Person || k == ISBN || k == LCCN;
 }
 
-void FreebaseFetcher::readConfigHook(const KConfigGroup&) {
+void FreebaseFetcher::readConfigHook(const KConfigGroup& config_) {
+  m_apiKey = config_.readEntry("API Key", FREEBASE_API_KEY);
 }
 
 void FreebaseFetcher::search() {
-  m_started = true;
   m_cursors.clear();
-  doSearch();
+  continueSearch();
 }
 
 void FreebaseFetcher::continueSearch() {
   m_started = true;
+  m_hasMoreResults = false;
   doSearch();
+  if(m_jobs.isEmpty()) {
+    stop();
+  }
 }
 
 void FreebaseFetcher::doSearch() {
@@ -142,22 +150,17 @@ void FreebaseFetcher::doSearch() {
     return;
   }
 
-  QVariantMap httpQuery;
+  QJson::Serializer serializer;
+  foreach(const QVariant& queryVariant, queries) {
+    QVariantMap query = queryVariant.toMap();
+    Q_ASSERT(!query.isEmpty());
 
-  // make sure if we have cursors for every query
-  while(m_cursors.count() < queries.count()) {
-    m_cursors.append(QVariant(true));
-  }
-
-  for(int i = 0; i < queries.size(); ++i) {
+    const uint queryHash = qHash(serializer.serialize(query));
     // we skip the query if the cursor is valid and == false
-    if(m_cursors.at(i).type() == QVariant::Bool && !m_cursors.at(i).toBool()) {
-      myDebug() << "skipping query" << i;
+    const QVariant cursor = m_cursors.value(queryHash);
+    if(cursor.type() == QVariant::Bool && !cursor.toBool()) {
       continue;
     }
-
-    QVariantMap query = queries.at(i).toMap();
-    Q_ASSERT(!query.isEmpty());
 
     // grab all properties at the entity level
     query.insert(QLatin1String("*"), QVariantList());
@@ -171,38 +174,52 @@ void FreebaseFetcher::doSearch() {
     query.insert(QLatin1String("/common/topic/image"), id_query);
     query.insert(QLatin1String("/common/topic/article"), id_query);
 
-    QVariantMap envelope;
-    envelope.insert(QLatin1String("query"), QVariantList() << query);
-    envelope.insert(QLatin1String("cursor"), m_cursors.at(i));
-    httpQuery.insert(QString::fromLatin1("q%1").arg(i), envelope);
-  }
+    const QByteArray query_string = serializer.serialize(QVariantList() << query);
+//    myDebug() << "query:" << query_string;
 
-  QJson::Serializer serializer;
-  QByteArray query_string = serializer.serialize(httpQuery);
-//  myDebug() << "query:" << query_string;
-
-  KUrl url(FREEBASE_QUERY_URL);
-  if(query_string.length() < 2048) {
-    url.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
-    m_job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
-  } else {
-    query_string.prepend("queries=");
-    m_job = KIO::storedHttpPost(query_string, url, KIO::HideProgressInfo);
-  }
-  m_job->ui()->setWindow(GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
+    KUrl url(FREEBASE_QUERY_URL);
+    url.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
+    if(cursor.type() == QVariant::String) {
+      url.addQueryItem(QLatin1String("cursor"), cursor.toString());
+//      myDebug() << "using cursor" << cursor;
+    } else {
+      url.addQueryItem(QLatin1String("cursor"), QString());
+    }
+//    if(query_string.length() < 2048) {
+//    url.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
+      url.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
+      QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+//    } else {
+//      query_string.prepend("queries=");
+//      job = KIO::storedHttpPost(query_string, url, KIO::HideProgressInfo);
+//    }
+//    myDebug() << url.url();
+    job->setProperty("freebase_query", queryHash);
+    job->ui()->setWindow(GUI::Proxy::widget());
+    connect(job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
+    m_jobs << job;
+  }
 #endif
+}
+
+void FreebaseFetcher::endJob(KIO::StoredTransferJob* job_) {
+  m_jobs.removeOne(job_);
+  if(m_jobs.isEmpty())  {
+    stop();
+  }
 }
 
 void FreebaseFetcher::stop() {
   if(!m_started) {
     return;
   }
-  if(m_job) {
-    m_job->kill();
-    m_job = 0;
+  foreach(QPointer<KIO::StoredTransferJob> job, m_jobs) {
+    if(job) {
+      job->kill();
+    }
   }
+  m_jobs.clear();
   m_started = false;
   emit signalDone(this);
 }
@@ -252,13 +269,24 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     if(article_id.startsWith(QLatin1Char('/'))) {
       KUrl articleUrl(FREEBASE_BLURB_URL);
       articleUrl.addPath(article_id);
-      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
-      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
-      const QString output = FileHandler::readTextFile(articleUrl, true, true);
-      if(output.isEmpty()) {
+      articleUrl.addQueryItem(QLatin1String("limit"), QLatin1String("1"));
+      articleUrl.addQueryItem(QLatin1String("filter"), QLatin1String("/common/document/text"));
+      articleUrl.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
+//      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
+//      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+      const QByteArray data = FileHandler::readDataFile(articleUrl, true);
+      if(data.isEmpty()) {
         entry->setField(article_field, QString());
       } else {
-        entry->setField(article_field, output);
+        QJson::Parser parser;
+        const QVariant response = parser.parse(data);
+        const QVariantMap articleMap = response.toMap()
+              .value(QLatin1String("property")).toMap()
+              .value(QLatin1String("/common/document/text")).toMap();
+        const QVariantList valueList = articleMap.value(QLatin1String("values")).toList();
+        if(!valueList.isEmpty()) {
+          entry->setField(article_field, value(valueList.first().toMap(), "value"));
+        }
       }
     }
   }
@@ -282,20 +310,21 @@ Tellico::Fetch::FetchRequest FreebaseFetcher::updateRequest(Data::EntryPtr entry
   return FetchRequest();
 }
 
-void FreebaseFetcher::slotComplete(KJob*) {
+void FreebaseFetcher::slotComplete(KJob* job_) {
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 #ifdef HAVE_QJSON
 //  myDebug();
 
-  if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
-    stop();
+  if(job->error()) {
+    job->ui()->showErrorMessage();
+    endJob(job);
     return;
   }
 
-  QByteArray data = m_job->data();
+  QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
-    stop();
+    endJob(job);
     return;
   }
 
@@ -310,53 +339,44 @@ void FreebaseFetcher::slotComplete(KJob*) {
     f.close();
 #endif
 
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
-
   QJson::Parser parser;
   QVariant response = parser.parse(data);
   if(response.isNull()) {
     myDebug() << "no response";
-    stop();
+    endJob(job);
     return;
   }
 
-  m_hasMoreResults = false;
+  const uint queryHash = job->property("freebase_query").toUInt();
+
   QVariantList resultList;
 
   const QVariantMap responseMap = response.toMap();
   // check response code to see if everything was ok
-  if(value(responseMap, "code") == QLatin1String("/api/status/ok")) {
-    // the result objects are in outer envelopes called q0, q1, q3, etc...
-    for(int i = 0; i < m_cursors.count(); ++i) {
-      QVariant queryResult = responseMap.value(QString::fromLatin1("q%1").arg(i));
-      if(!queryResult.isNull()) {
-        m_cursors[i] = queryResult.toMap().value(QLatin1String("cursor"));
-        // there are more results if the cursor value is a string
-        m_hasMoreResults = m_hasMoreResults || m_cursors.at(i).type() == QVariant::String;
+  if(responseMap.contains(QLatin1String("result"))) {
+    m_cursors[queryHash] = responseMap.value(QLatin1String("cursor"));
+    // there are more results if the cursor value is a string
+    m_hasMoreResults = m_hasMoreResults || m_cursors.value(queryHash).type() == QVariant::String;
+//    myDebug() << m_hasMoreResults << queryHash;
 
-        QVariant resultThing = queryResult.toMap().value(QLatin1String("result"));
-        if(resultThing.canConvert(QVariant::List)) {
-          resultList += resultThing.toList();
-        } else if(!resultThing.isNull()) {
-          resultList += resultThing.toMap();
-        }
-      }
+    const QVariant resultThing = responseMap.value(QLatin1String("result"));
+    if(resultThing.canConvert(QVariant::List)) {
+      resultList += resultThing.toList();
+    } else if(!resultThing.isNull()) {
+      resultList += resultThing.toMap();
     }
-  } else {
+  } else if(responseMap.contains(QLatin1String("error"))) {
     // we have an error!!!!!!!!!!!!!
-    QString msg = value(responseMap, "message");
-    if(msg.isEmpty()) {
-      msg = value(responseMap, "messages", "message");
-    }
+    const QString msg = value(responseMap, "error", "message");
     if(!msg.isEmpty()) {
       myDebug() << "message:" << msg;
+      message(msg, MessageHandler::Error);
     }
   }
 
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
-    stop();
+//    myDebug() << "no results";
+    endJob(job);
     return;
   }
 
@@ -566,7 +586,7 @@ void FreebaseFetcher::slotComplete(KJob*) {
     emit signalResultFound(r);
   }
 #endif
-  stop(); // required
+  endJob(job);
 }
 
 Tellico::Fetch::ConfigWidget* FreebaseFetcher::configWidget(QWidget* parent_) const {
@@ -898,15 +918,52 @@ QVariantList FreebaseFetcher::boardGameQueries() const {
 
 FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("http://wiki.freebase.com/wiki/How_to_obtain_an_API_key")),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_apiKeyEdit, row, 1);
+  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
+  label->setWhatsThis(w);
+  m_apiKeyEdit->setWhatsThis(w);
+  label->setBuddy(m_apiKeyEdit);
+
+  l->setRowStretch(++row, 10);
 
   // now add additional fields widget
   addFieldsWidget(FreebaseFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_ && fetcher_->m_apiKey != QLatin1String(FREEBASE_API_KEY)) {
+    // only show the key if it is not the default Tellico one...
+    // that way the user is prompted to apply for their own
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+  }
 }
 
-void FreebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void FreebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty()) {
+    config_.writeEntry("API Key", apiKey);
+  }
 }
 
 QString FreebaseFetcher::ConfigWidget::preferredName() const {

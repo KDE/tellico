@@ -36,6 +36,7 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
+class KLineEdit;
 
 namespace Tellico {
   namespace Fetch {
@@ -78,6 +79,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const FreebaseFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -95,6 +98,7 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void doSearch();
+  void endJob(KIO::StoredTransferJob* job);
 
   QVariantList bookQueries() const;
   QVariantList comicBookQueries() const;
@@ -104,10 +108,11 @@ private:
   QVariantList boardGameQueries() const;
 
   QHash<int, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;
-  QVariantList m_cursors;
+  QMap<uint, QVariant> m_cursors;
+  QString m_apiKey;
 };
 
   } // end namespace
