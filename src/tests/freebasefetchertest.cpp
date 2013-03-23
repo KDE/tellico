@@ -136,7 +136,7 @@ void FreebaseFetcherTest::testMultipleISBN() {
                                        QLatin1String("9780321113580; 1565923928"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
 
   QCOMPARE(results.size(), 2);
 }
@@ -295,9 +295,9 @@ void FreebaseFetcherTest::testGameTitle() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("halo 3: odst"));
   QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie Studios"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Game Studios"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game; Racing game"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game; Racing video game"));
   // freebase cover went missing
   //   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
@@ -313,7 +313,7 @@ void FreebaseFetcherTest::testBoardGameTitle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("settlers of catan"));
+  QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("the settlers of catan"));
   QCOMPARE(entry->field(QLatin1String("designer")), QLatin1String("Klaus Teuber"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("999 Games; Mayfair Games; Kosmos; Capcom"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1995"));
