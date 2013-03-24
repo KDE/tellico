@@ -65,6 +65,7 @@ void CitebaseFetcherTest::testArxivID() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
+  QEXPECT_FAIL("", "Citebase has gone away and redirects to ADS", Abort);
   QCOMPARE(results.size(), 1);
 
   if(!results.isEmpty()) {
