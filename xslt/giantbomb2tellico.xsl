@@ -49,6 +49,9 @@
 
   <year>
    <xsl:value-of select="expected_release_year"/>
+   <xsl:if test="string-length(expected_release_year)=0">
+    <xsl:value-of select="substring(original_release_date, 1, 4)"/>
+   </xsl:if>
   </year>
 
   <description>
@@ -72,7 +75,7 @@
   </genres>
 
   <publishers>
-   <xsl:for-each select="publishers/company">
+   <xsl:for-each select="publishers/company|publishers/publisher">
     <publisher>
      <xsl:value-of select="name"/>
     </publisher>
@@ -80,7 +83,7 @@
   </publishers>
 
   <developers>
-   <xsl:for-each select="developers/company">
+   <xsl:for-each select="developers/company|developers/developer">
     <developer>
      <xsl:value-of select="name"/>
     </developer>
