@@ -244,7 +244,7 @@ class AlloCineParser:
 			'year' 		: 'Ann.*?e de production.*?<span.*?>(?P<year>[0-9]{4})</span>',
 			'otitle' 	: 'Titre original *?:*?.*?<td>(?P<otitle>.+?)</td>',
 			'plot'		: '<p itemprop="description">(?P<plot>.*?)</p>',
-			'image'		: '<div class="poster">.*?<img src=\'(?P<image>http://images.allocine.fr/.+?)\'.?',
+			'image'		: '<div class="poster">.*?<img src=\'(?P<image>http://.+?)\'.?',
 		}
 
 		self.__castRegExps = {
