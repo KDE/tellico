@@ -1,10 +1,14 @@
+2013-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated GiantBombFetcher for XML changes in responses.
+
 2013-03-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed regexp in Google Scholar fetcher to set cookie (Bug 316550).
 
 2013-03-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Update Allocine API to use JSONn instead of XML.
+	* Update Allocine API to use JSON instead of XML.
 
 2013-03-03  Robby Stephenson  <robby@periapsis.org>
 
