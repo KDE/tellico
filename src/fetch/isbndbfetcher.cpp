@@ -297,7 +297,7 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
     u.addQueryItem(QLatin1String("index1"), QLatin1String("publisher_id"));
     u.addQueryItem(QLatin1String("value1"), id);
 
-    QDomDocument dom = FileHandler::readXMLDocument(u, true);
+    QDomDocument dom = FileHandler::readXMLDocument(u, true, true);
     if(!dom.isNull()) {
       QString pub = dom.documentElement().namedItem(QLatin1String("PublisherList"))
                                          .namedItem(QLatin1String("PublisherData"))
