@@ -59,7 +59,7 @@ QString CSVExporter::fileFilter() const {
   return i18n("*.csv|CSV Files (*.csv)") + QLatin1Char('\n') + i18n("*|All Files");
 }
 
-QString& CSVExporter::escapeText(QString& text_) {
+QString& CSVExporter::escapeText(QString& text_) const {
   bool quotes = false;
   if(text_.contains(QLatin1Char('"'))) {
     quotes = true;
@@ -79,6 +79,10 @@ bool CSVExporter::exec() {
     return false;
   }
 
+  return FileHandler::writeTextURL(url(), text(), options() & ExportUTF8, options() & Export::ExportForce);
+}
+
+QString CSVExporter::text() const {
   QString text;
 
   if(m_includeTitles) {
@@ -112,12 +116,11 @@ bool CSVExporter::exec() {
       if(replaceRowDelimiter) {
         value.replace(FieldFormat::rowDelimiterString(), m_rowDelimiter);
       }
-      values += value;
+      values += escapeText(value);
     }
     text += values.join(m_delimiter) + QLatin1Char('\n');
   }
-
-  return FileHandler::writeTextURL(url(), text, options() & ExportUTF8, options() & Export::ExportForce);
+  return text;
 }
 
 QWidget* CSVExporter::widget(QWidget* parent_) {

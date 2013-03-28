@@ -48,13 +48,14 @@ public:
   virtual bool exec();
   virtual QString formatString() const;
   virtual QString fileFilter() const;
+  QString text() const;
 
   virtual QWidget* widget(QWidget* parent);
   virtual void readOptions(KSharedConfigPtr config);
   virtual void saveOptions(KSharedConfigPtr config);
 
 private:
-  QString& escapeText(QString& text);
+  QString& escapeText(QString& text) const;
 
   bool m_includeTitles;
   QString m_delimiter;

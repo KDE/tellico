@@ -1,3 +1,7 @@
+2013-03-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with not properly escaping text in CSV exporter (Bug 317473).
+
 2013-03-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated GiantBombFetcher for XML changes in responses.

@@ -19,9 +19,6 @@ TARGET_LINK_LIBRARIES(lccntest utils ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} $
 KDE4_ADD_UNIT_TEST(lcctest NOGUI lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 TARGET_LINK_LIBRARIES(lcctest utils core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
-KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp ../translators/csvparser.cpp)
-TARGET_LINK_LIBRARIES(csvtest csv ${QT_AND_KDECORE_LIBS} ${QT_QTCORE_LIBRARY} ${QT_QTTEST_LIBRARY} )
-
 KDE4_ADD_UNIT_TEST(formattest NOGUI formattest.cpp ../fieldformat.cpp)
 TARGET_LINK_LIBRARIES(formattest core ${QT_AND_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${QT_QTTEST_LIBRARY} )
 
@@ -95,6 +92,9 @@ TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(ciwtest NOGUI ciwtest.cpp)
 TARGET_LINK_LIBRARIES(ciwtest ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(csvtest NOGUI csvtest.cpp)
+TARGET_LINK_LIBRARIES(csvtest csv ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(delicioustest NOGUI delicioustest.cpp)
 TARGET_LINK_LIBRARIES(delicioustest ${TELLICO_TEST_LIBS})

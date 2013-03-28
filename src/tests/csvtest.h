@@ -38,9 +38,9 @@ private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 
-  void init();
   void testAll();
   void testAll_data();
+  void testEntry();
 
 private:
   Tellico::CSVParser* p;
