@@ -27,6 +27,7 @@
 #include "qtest_kde.h"
 
 #include "../translators/csvparser.h"
+#include "../translators/csvexporter.h"
 
 QTEST_MAIN( CsvTest )
 
@@ -40,17 +41,14 @@ void CsvTest::cleanupTestCase() {
   delete p;
 }
 
-void CsvTest::init() {
-  QFETCH(QString, delim);
-  p->setDelimiter(delim);
-}
-
 void CsvTest::testAll() {
   QFETCH(QString, line);
   QFETCH(int, pos1);
   QFETCH(QString, token1);
   QFETCH(int, pos2);
   QFETCH(QString, token2);
+  QFETCH(QString, delim);
+  p->setDelimiter(delim);
 
   p->reset(line);
   QStringList tokens = p->nextTokens();
@@ -76,3 +74,21 @@ void CsvTest::testAll_data() {
   QTest::newRow("quotes") << "robby,\"stephenson,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson,is,cool";
   QTest::newRow("newline") << "robby,\"stephenson\n,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson\n,is,cool";
 }
+
+void CsvTest::testEntry() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QLatin1String("title"), QLatin1String("title, with comma"));
+  coll->addEntries(entry);
+
+  Tellico::Export::CSVExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  exporter.setFields(Tellico::Data::FieldList() << coll->fieldByName(QLatin1String("title")));
+
+  QString output = exporter.text();
+  // the header line has the field titles, skip that
+  output = output.section(QLatin1Char('\n'), 1);
+  output.chop(1);
+  QCOMPARE(output, QLatin1String("\"title, with comma\""));
+}
+
