@@ -96,8 +96,7 @@ void BibtexKeyDialog::slotCheckDuplicatesImpl() {
     m_dupeLabel->setComment(i18n("There are no duplicate citation keys."));
     enableButton(User1, false);
   } else {
-    // the count will never be singular, since there are at least 2 duplicates 
-    m_dupeLabel->setComment(i18n("There are %1 duplicate citation keys.", m_dupes.count()));
+    m_dupeLabel->setComment(i18nc("There is %1 duplicate citation key.", "There are %1 duplicate citation keys.", m_dupes.count()));
     enableButton(User1, true);
   }
 }
