@@ -80,7 +80,7 @@ bool GoogleBookFetcher::canSearch(FetchKey k) const {
 }
 
 bool GoogleBookFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book || Data::Collection::Bibtex;
+  return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
 void GoogleBookFetcher::readConfigHook(const KConfigGroup& config_) {
