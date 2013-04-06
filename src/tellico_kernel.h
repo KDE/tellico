@@ -122,12 +122,6 @@ public:
   void mergeCollection(Data::CollPtr coll);
   void replaceCollection(Data::CollPtr coll);
 
-  // adds new fields into collection if any values in entries are not empty
-  // first object is modified fields, second is new fields
-  QPair<Data::FieldList, Data::FieldList> mergeFields(Data::CollPtr coll,
-                                                      Data::FieldList fields,
-                                                      Data::EntryList entries);
-
   void renameCollection();
   KUndoStack* commandHistory() { return m_commandHistory; }
 

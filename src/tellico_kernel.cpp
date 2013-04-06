@@ -157,7 +157,7 @@ void Kernel::addEntries(Tellico::Data::EntryList entries_, bool checkFields_) {
     Tellico::Data::CollPtr c = Data::Document::self()->collection();
     Tellico::Data::FieldList fields = entries_[0]->collection()->fields();
 
-    QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = mergeFields(c, fields, entries_);
+    QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Data::Document::mergeFields(c, fields, entries_);
     Data::FieldList modifiedFields = p.first;
     Data::FieldList addedFields = p.second;
 
@@ -325,39 +325,6 @@ void Kernel::renameCollection() {
 
 void Kernel::doCommand(QUndoCommand* command_) {
   m_commandHistory->push(command_);
-}
-
-QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Kernel::mergeFields(Tellico::Data::CollPtr coll_,
-                                                                            Tellico::Data::FieldList fields_,
-                                                                            Tellico::Data::EntryList entries_) {
-  Data::FieldList modified, created;
-  foreach(Data::FieldPtr field, fields_) {
-    // don't add a field if it's a default field and not in the current collection
-    if(coll_->hasField(field->name()) || CollectionFactory::isDefaultField(coll_->type(), field->name())) {
-      // special case for choice fields, since we might want to add a value
-      if(field->type() == Data::Field::Choice && coll_->hasField(field->name())) {
-        QStringList a1 = field->allowed();
-        QStringList a2 = coll_->fieldByName(field->name())->allowed();
-        if(a1 != a2) {
-          StringSet a;
-          a.add(a1);
-          a.add(a2);
-          Data::FieldPtr f(new Data::Field(*coll_->fieldByName(field->name())));
-          f->setAllowed(a.toList());
-          modified.append(f);
-        }
-      }
-      continue;
-    }
-    // add field if any values are not empty
-    foreach(Data::EntryPtr entry, entries_) {
-      if(!entry->field(field).isEmpty()) {
-        created.append(Data::FieldPtr(new Data::Field(*field)));
-        break;
-      }
-    }
-  }
-  return qMakePair(modified, created);
 }
 
 int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_, Tellico::Data::FieldPtr field_,
