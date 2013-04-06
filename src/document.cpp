@@ -755,4 +755,47 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, MergeConflictRes
   return ret;
 }
 
+//static
+QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Document::mergeFields(Data::CollPtr coll_,
+                                                                                Data::FieldList fields_,
+                                                                                Data::EntryList entries_) {
+  Data::FieldList modified, created;
+  foreach(Data::FieldPtr field, fields_) {
+    // don't add a field if it's a default field and not in the current collection
+    if(coll_->hasField(field->name()) || CollectionFactory::isDefaultField(coll_->type(), field->name())) {
+      // special case for choice fields, since we might want to add a value
+      if(field->type() == Data::Field::Choice && coll_->hasField(field->name())) {
+        // a2 are the existing fields in the collection, keep them in the same order
+        QStringList a1 = coll_->fieldByName(field->name())->allowed();
+        foreach(const QString& newAllowedValue, field->allowed()) {
+          if(!a1.contains(newAllowedValue)) {
+            // could be slow for large merges, but we do only want to add new value
+            // IF that value is actually used by an entry
+            foreach(Data::EntryPtr entry, entries_) {
+              if(entry->field(field->name()) == newAllowedValue) {
+                a1 += newAllowedValue;
+                break;
+              }
+            }
+          }
+        }
+        if(a1.count() != coll_->fieldByName(field->name())->allowed().count()) {
+          Data::FieldPtr f(new Data::Field(*coll_->fieldByName(field->name())));
+          f->setAllowed(a1);
+          modified.append(f);
+        }
+      }
+      continue;
+    }
+    // add field if any values are not empty
+    foreach(Data::EntryPtr entry, entries_) {
+      if(!entry->field(field).isEmpty()) {
+        created.append(Data::FieldPtr(new Data::Field(*field)));
+        break;
+      }
+    }
+  }
+  return qMakePair(modified, created);
+}
+
 #include "document.moc"

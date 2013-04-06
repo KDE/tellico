@@ -178,6 +178,11 @@ public:
   void cancelImageWriting() { m_cancelImageWriting = true; }
 
   static bool mergeEntry(EntryPtr entry1, EntryPtr entry2, MergeConflictResolver* resolver=0);
+  // adds new fields into collection if any values in entries are not empty
+  // first object is modified fields, second is new fields
+  static QPair<Data::FieldList, Data::FieldList> mergeFields(Data::CollPtr coll,
+                                                             Data::FieldList fields,
+                                                             Data::EntryList entries);
 
 public slots:
   /**

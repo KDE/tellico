@@ -447,3 +447,36 @@ void CollectionTest::testDuplicate() {
   QCOMPARE(entry1->title(), QLatin1String("title1"));
   QCOMPARE(entry2->title(), QLatin1String("title2"));
 }
+
+void CollectionTest::testMergeFields() {
+  // here, we want to verify that when entries and fields from outside a collection are merged in
+  // the allowed values for the Choice fields are retained in the same order, and new values are only
+  // added if they are used
+  Tellico::Data::CollPtr coll1 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
+  Tellico::Data::CollPtr coll2 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
+
+  // modify the allowed values for  "platform" in collection 1
+  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QLatin1String("platform"));
+  QVERIFY(platform1);
+  QStringList newValues1 = QStringList() << QLatin1String("PSP") << QLatin1String("Xbox 360");
+  platform1->setAllowed(newValues1);
+  QVERIFY(coll1->modifyField(platform1));
+  QCOMPARE(platform1->allowed(), newValues1);
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll2));
+  entry2->setField(QLatin1String("platform"), QLatin1String("PlayStation"));
+  coll2->addEntries(entry2);
+
+  QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Tellico::Data::Document::mergeFields(coll1,
+                                       Tellico::Data::FieldList() << coll2->fieldByName(QLatin1String("platform")),
+                                       Tellico::Data::EntryList() << entry2);
+
+  Tellico::Data::FieldList modifiedFields = p.first;
+  QCOMPARE(modifiedFields.count(), 1);
+  // this is the zinger right here. The list of allowed values should be the original
+  // with only the new existing value tacked on the end
+  QCOMPARE(modifiedFields.first()->allowed(), newValues1 << entry2->field(QLatin1String("platform")));
+
+  Tellico::Data::FieldList addedFields = p.second;
+  QVERIFY(addedFields.isEmpty());
+}

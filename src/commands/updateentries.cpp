@@ -102,7 +102,7 @@ void UpdateEntries::redo() {
     // do this here instead of the constructor because several UpdateEntries may be in one command
     // and I don't want to add new fields multiple times
 
-    QPair<Data::FieldList, Data::FieldList> p = Kernel::self()->mergeFields(m_coll,
+    QPair<Data::FieldList, Data::FieldList> p = Data::Document::mergeFields(m_coll,
                                                                             m_newEntry->collection()->fields(),
                                                                             Data::EntryList() << m_newEntry);
     Data::FieldList modifiedFields = p.first;
