@@ -291,7 +291,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>opens the <interface>Collection Fields Dialog</interface></action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
+<para>This command <action>opens the <interface>Internet Search Dialog</interface></action> to search for and import entries from various Internet sites, including <ulink url="http://amazon.com">Amazon.com</ulink>.</para>
 </listitem>
 </varlistentry>
 
