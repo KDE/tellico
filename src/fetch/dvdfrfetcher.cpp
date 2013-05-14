@@ -136,6 +136,10 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
     myWarning() << "no collection pointer";
     return entry_;
   }
+  if(coll->entryCount() == 0) {
+    myWarning() << "no entries";
+    return entry_;
+  }
 
   if(coll->entryCount() > 1) {
     myDebug() << "weird, more than one entry found";
