@@ -95,7 +95,7 @@ class KWidgetLister : public QWidget
     /** Adds a single widget. Doesn't care if there are already @ref
         mMaxWidgets on screen and whether it should enable/disable any
         controls. It simply does what it is asked to do.  You want to
-        reimplement this method if you want to initialize the the widget
+        reimplement this method if you want to initialize the widget
         when showing it on screen. Make sure you call this
         implementaion, though, since you cannot put the widget on screen
         from derived classes (@p mLayout is private).
@@ -106,7 +106,7 @@ class KWidgetLister : public QWidget
         are still only @ref mMinWidgets left on screen and whether it
         should enable/disable any controls. It simply does what it is
         asked to do. You want to reimplement this method if you want to
-        save the the widget's state before removing it from screen. Make
+        save the widget's state before removing it from screen. Make
         sure you call this implementaion, though, since you should not
         remove the widget from screen from derived classes. */
     virtual void removeLastWidget();

@@ -565,7 +565,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
         break;
     }
 
-    // the the image and article ids. The actual content gets loaded in fetchEntryHook()
+    // set the image and article ids. The actual content gets loaded in fetchEntryHook()
     entry->setField(QLatin1String("cover"), value(resultMap, "/common/topic/image", "id"));
     if(type == Data::Collection::Album && entry->field(QLatin1String("cover")).isEmpty()) {
       // musical releases can have the image from the album

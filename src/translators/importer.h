@@ -59,7 +59,7 @@ public:
   Importer();
   /**
    * The constructor should immediately load the contents of the file to be imported.
-   * Any warnings or errors should be added the the status message queue.
+   * Any warnings or errors should be added to the status message queue.
    *
    * @param url The URL of the file to import
    */
