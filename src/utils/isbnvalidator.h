@@ -69,6 +69,8 @@ public:
    * @li Part 4: The check digit
    * For details
    * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
+   * For details on ranges
+   * @see http://www.isbn-international.org/page/ranges
    * For info on group codes
    * @see http://www.isbn.spk-berlin.de/html/prefix/allpref.htm
    * For info on French language publisher codes
