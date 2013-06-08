@@ -341,7 +341,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   u.addQueryItem(QLatin1String("id"),         QString::number(id));
 #endif
   // now it's sychronous
-  QString xmlOutput = FileHandler::readXMLFile(u, false /*quiet*/);
+  QString xmlOutput = FileHandler::readXMLFile(u, true /*quiet*/);
   if(xmlOutput.isEmpty()) {
     myWarning() << "unable to download " << u;
     return Data::EntryPtr();
