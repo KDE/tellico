@@ -37,20 +37,23 @@
 #include <KConfigGroup>
 #include <KLineEdit>
 #include <KIntSpinBox>
+#include <KCodecs>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
+#include <QCryptographicHash>
 
 #ifdef HAVE_QJSON
 #include <qjson/parser.h>
 #endif
 
 namespace {
-  static const char* ALLOCINE_API_KEY = "YW5kcm9pZC12M3M";
+  static const char* ALLOCINE_API_KEY = "100043982026";
   static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
+  static const char* ALLOCINE_PARTNER_KEY = "29d185d98c984a359e6e6f26a0474269";
 }
 
 using namespace Tellico;
@@ -95,13 +98,16 @@ void AbstractAllocineFetcher::search() {
 #ifdef HAVE_QJSON
   KUrl u(m_baseUrl);
   u.addPath(QLatin1String("search"));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("json"));
-  u.addQueryItem(QLatin1String("partner"), m_apiKey);
 
+  // the order of the parameters appears to matter
+  QList<QPair<QString, QString> > params;
+  params.append(qMakePair(QString::fromLatin1("partner"), m_apiKey));
+
+  QString q = request().value;
+  q.replace(QLatin1Char(' '), QLatin1Char('+'));
   switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), request().value);
-      u.addQueryItem(QLatin1String("filter"), QLatin1String("movie"));
+      params.append(qMakePair(QString::fromLatin1("q"), q));
       break;
 
     default:
@@ -109,6 +115,16 @@ void AbstractAllocineFetcher::search() {
       return;
   }
 
+  params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
+  params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
+
+  const QString sed = QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyyMMdd"));
+  params.append(qMakePair(QString::fromLatin1("sed"), sed));
+
+  const QByteArray sig = calculateSignature(params);
+
+  u.setQueryItems(params);
+  u.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -145,13 +161,23 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
   KUrl u(m_baseUrl);
   u.addPath(QLatin1String("movie"));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("json"));
-  u.addQueryItem(QLatin1String("profile"), QLatin1String("large"));
-  u.addQueryItem(QLatin1String("filter"), QLatin1String("movie"));
-  u.addQueryItem(QLatin1String("partner"), m_apiKey);
-  u.addQueryItem(QLatin1String("code"), code);
-//  myDebug() << "url: " << u;
 
+  // the order of the parameters appears to matter
+  QList<QPair<QString, QString> > params;
+  params.append(qMakePair(QString::fromLatin1("partner"), m_apiKey));
+  params.append(qMakePair(QString::fromLatin1("code"), code));
+  params.append(qMakePair(QString::fromLatin1("profile"), QString::fromLatin1("large")));
+  params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
+  params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
+
+  const QString sed = QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyyMMdd"));
+  params.append(qMakePair(QString::fromLatin1("sed"), sed));
+
+  const QByteArray sig = calculateSignature(params);
+
+  u.setQueryItems(params);
+  u.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
+//  myDebug() << "url: " << u;
   // quiet
   QByteArray data = FileHandler::readDataFile(u, true);
 
@@ -168,7 +194,12 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
 #ifdef HAVE_QJSON
   QJson::Parser parser;
-  QVariantMap result = parser.parse(data).toMap().value(QLatin1String("movie")).toMap();
+  bool ok;
+  QVariantMap result = parser.parse(data, &ok).toMap().value(QLatin1String("movie")).toMap();
+  if(!ok) {
+    myDebug() << "Bad JSON results";
+    return entry;
+  }
   populateEntry(entry, result);
 #endif
 
@@ -393,6 +424,24 @@ QString AbstractAllocineFetcher::value(const QVariantMap& map, const char* objec
   } else {
     return QString();
   }
+}
+
+QByteArray AbstractAllocineFetcher::calculateSignature(const QList<QPair<QString, QString> >& params_) {
+  typedef QPair<QString, QString> StringPair;
+  QByteArray queryString;
+  foreach(const StringPair& pair, params_) {
+    queryString.append(pair.first.toUtf8().toPercentEncoding("+"));
+    queryString.append('=');
+    queryString.append(pair.second.toUtf8().toPercentEncoding("+"));
+    queryString.append('&');
+  }
+  // remove final '&'
+  queryString.chop(1);
+
+  const QByteArray toSign = ALLOCINE_PARTNER_KEY + queryString;
+  const QByteArray hash = QCryptographicHash::hash(toSign, QCryptographicHash::Sha1);
+  const QByteArray sig = KCodecs::base64Encode(hash);
+  return sig;
 }
 
 /**********************************************************************************************/

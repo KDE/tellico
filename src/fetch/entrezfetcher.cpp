@@ -243,7 +243,9 @@ void EntrezFetcher::doSummary() {
   u.addPath(QLatin1String(ENTREZ_SUMMARY_CGI));
   u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
   u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("retstart"),   QString::number(m_start));
+  if(m_start > 1) {
+    u.addQueryItem(QLatin1String("retstart"),   QString::number(m_start));
+  }
   u.addQueryItem(QLatin1String("retmax"),     QString::number(qMin(m_total-m_start-1, ENTREZ_MAX_RETURNS_TOTAL)));
   u.addQueryItem(QLatin1String("usehistory"), QLatin1String("y"));
   u.addQueryItem(QLatin1String("db"),         m_dbname);
@@ -341,7 +343,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   u.addQueryItem(QLatin1String("id"),         QString::number(id));
 #endif
   // now it's sychronous
-  QString xmlOutput = FileHandler::readXMLFile(u, false /*quiet*/);
+  QString xmlOutput = FileHandler::readXMLFile(u, true /*quiet*/);
   if(xmlOutput.isEmpty()) {
     myWarning() << "unable to download " << u;
     return Data::EntryPtr();
