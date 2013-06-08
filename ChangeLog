@@ -1,3 +1,7 @@
+2013-06-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Entrex/Pubmed fetcher for summary requests (Bug 319501).
+
 2013-04-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with retaining allowed values when adding entries from data sources (Bug 317905).

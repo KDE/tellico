@@ -156,6 +156,9 @@ TARGET_LINK_LIBRARIES(doubanfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(dvdfrfetchertest NOGUI dvdfrfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(dvdfrfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(entrezfetchertest NOGUI entrezfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(entrezfetchertest fetch ${TELLICO_TEST_LIBS})
+
 IF( QJSON_FOUND )
     KDE4_ADD_UNIT_TEST(freebasefetchertest NOGUI freebasefetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
