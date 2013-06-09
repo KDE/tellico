@@ -6,6 +6,10 @@
 
 	* Added Bibtex importing for drag/drop text (Bug 319182).
 
+2013-06-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added Bibtex importing for drag/drop text (Bug 319182).
+
 2013-06-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed Entrex/Pubmed fetcher for summary requests (Bug 319501).
