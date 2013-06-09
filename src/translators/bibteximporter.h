@@ -78,6 +78,7 @@ public:
   virtual bool canImport(int type) const;
 
   static bool maybeBibtex(const KUrl& url);
+  static bool maybeBibtex(const QString& text, const KUrl& url = KUrl());
 
 public slots:
   void slotCancel();

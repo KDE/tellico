@@ -48,6 +48,7 @@ private:
   bool dragEnter(QDragEnterEvent* event);
   bool drop(QDropEvent* event);
   bool handleURL(const KUrl::List& urls);
+  bool handleText(const QString& text);
 };
 
 }

@@ -288,6 +288,26 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
 #undef CHECK_SIZE
 }
 
+//static
+Tellico::Import::Importer* ImportDialog::importerForText(Tellico::Import::Format format_, const QString& text_) {
+  Import::Importer* importer = 0;
+  switch(format_) {
+    case Import::Bibtex:
+      importer = new Import::BibtexImporter(text_);
+      break;
+
+    default:
+      break;
+  }
+
+  if(!importer) {
+    myWarning() << "importer not created!";
+    return 0;
+  }
+  importer->setCurrentCollection(Data::Document::self()->collection());
+  return importer;
+}
+
 // static
 QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
   QString text;
@@ -399,6 +419,9 @@ void ImportDialog::slotUpdateAction() {
 // static
 Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const KUrl& url_) {
   Import::Importer* imp = importer(format_, url_);
+  if(!imp) {
+    return Data::CollPtr();
+  }
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
   connect(imp, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
@@ -416,5 +439,28 @@ Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, 
   return c;
 }
 
+Tellico::Data::CollPtr ImportDialog::importText(Tellico::Import::Format format_, const QString& text_) {
+  Import::Importer* imp = importerForText(format_, text_);
+  if(!imp) {
+    return Data::CollPtr();
+  }
+
+  // the Done() constructor crashes for some reason, so just don't use it
+/*
+  ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
+  connect(imp, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
+  connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
+          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
+  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), imp, SLOT(slotCancel()));
+  ProgressItem::Done done(imp);
+*/
+  Data::CollPtr c = imp->collection();
+  if(!c && !imp->statusMessage().isEmpty()) {
+    GUI::Proxy::sorry(imp->statusMessage());
+  }
+  delete imp;
+  return c;
+}
 
 #include "importdialog.moc"
