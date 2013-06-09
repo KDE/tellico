@@ -2172,6 +2172,16 @@ void MainWindow::importFile(Tellico::Import::Format format_, const KUrl::List& u
   }
 }
 
+void MainWindow::importText(Tellico::Import::Format format_, const QString& text_) {
+  if(text_.isEmpty()) {
+    return;
+  }
+  Data::CollPtr coll = ImportDialog::importText(format_, text_);
+  if(coll) {
+    importCollection(coll, Import::Merge);
+  }
+}
+
 bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import::Action action_) {
   bool failed = false;
   switch(action_) {

@@ -120,7 +120,7 @@ public:
    */
   bool isNewDocument() const { return m_newDocument; }
   /**
-   * Used by main() and DCOP to import file.
+   * Used by main() and DBUS to import file.
    *
    * @param format The file format
    * @param url The url
@@ -482,6 +482,7 @@ private slots:
 
 private:
   void importFile(Import::Format format, const KUrl::List& kurls);
+  void importText(Import::Format format, const QString& text);
   bool importCollection(Data::CollPtr coll, Import::Action action);
 
   // the reason that I have to keep pointers to all these

@@ -70,7 +70,12 @@ bool DropHandler::drop(QDropEvent* event_) {
   KUrl::List urls = KUrl::List::fromMimeData(event_->mimeData());
 
   if(urls.isEmpty() && event_->mimeData()->hasText()) {
-    urls << KUrl(event_->mimeData()->text());
+    KUrl u(event_->mimeData()->text());
+    if(!u.isRelative() && (u.isLocalFile() || !u.host().isEmpty())) {
+      urls << u;
+    } else {
+      return handleText(event_->mimeData()->text());
+    }
   }
   return !urls.isEmpty() && handleURL(urls);
 }
@@ -138,6 +143,20 @@ bool DropHandler::handleURL(const KUrl::List& urls_) {
   }
   // any unknown urls get passed
   return !hasUnknown;
+}
+
+bool DropHandler::handleText(const QString& text_) {
+  MainWindow* mainWindow = ::qobject_cast<MainWindow*>(GUI::Proxy::widget());
+  if(!mainWindow) {
+    myDebug() << "no main window!";
+    return false;
+  }
+
+  //TODO: handle TellicoXML, RIS, and CIW too
+  if(Import::BibtexImporter::maybeBibtex(text_)) {
+    mainWindow->importText(Import::Bibtex, text_);
+  }
+  return true;
 }
 
 #include "drophandler.moc"

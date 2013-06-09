@@ -107,6 +107,10 @@ void ProgressManager::setTotalSteps(QObject* owner_, qulonglong steps_) {
 }
 
 void ProgressManager::setDone(QObject* owner_) {
+  Q_ASSERT(owner_);
+  if(!owner_) {
+    return;
+  }
   if(!m_items.contains(owner_)) {
     return;
   }

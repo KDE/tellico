@@ -360,7 +360,10 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   if(text.isEmpty()) {
     return false;
   }
+  return maybeBibtex(text, url_);
+}
 
+bool BibtexImporter::maybeBibtex(const QString& text, const KUrl& url_) {
   bt_initialize();
   QRegExp rx(QLatin1String("[{}]"));
 

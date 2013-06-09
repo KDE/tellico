@@ -63,12 +63,15 @@ public:
 
   static Import::Importer* importer(Import::Format format, const KUrl::List& urls);
   static Data::CollPtr importURL(Import::Format format, const KUrl& url);
+  static Data::CollPtr importText(Import::Format format, const QString& text);
 
 private slots:
   virtual void slotOk();
   void slotUpdateAction();
 
 private:
+  // TODO: update to use every importer that allows text importing
+  static Import::Importer* importerForText(Import::Format format, const QString& text);
   Data::CollPtr m_coll;
   Import::Importer* m_importer;
   QRadioButton* m_radioAppend;
