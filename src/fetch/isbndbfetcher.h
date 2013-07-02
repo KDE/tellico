@@ -61,6 +61,7 @@ public:
   virtual void readConfigHook(const KConfigGroup& config);
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  void setLimit(int limit_) { m_limit = limit_; }
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:

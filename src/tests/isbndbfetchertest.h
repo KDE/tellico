@@ -39,6 +39,8 @@ private Q_SLOTS:
   void testIsbn();
   void testIsbn13();
   void testMultipleIsbn();
+  void testTitle();
+  void testAuthor();
 
 private:
   QHash<QString, QString> m_fieldValues;
