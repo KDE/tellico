@@ -1,3 +1,7 @@
+2013-07-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Update ISBNdb.com fetcher to use v2 of API.
+
 2013-06-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Added Bibtex importing for drag/drop text (Bug 319182).

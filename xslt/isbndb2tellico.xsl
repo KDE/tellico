@@ -61,39 +61,33 @@
   <collection title="ISBNdb.com Import" type="2">
    <fields>
     <field name="_default"/>
-    <!-- Here so that we can retrive the real publisher name later, gets removed inside Tellico -->
-    <field name="pub_id" flags="0" title="Publisher Key" category="Publishing" format="0" type="1"/>
     <field title="Dewey Decimal" flags="0" category="Publishing" format="4" type="1" name="dewey" i18n="true"/>
      <field title="LoC Classification" flags="0" category="Publishing" format="4" type="1" name="lcc" i18n="true"/>
    </fields>
-   <xsl:apply-templates select="ISBNdb/BookList/BookData"/>
+   <xsl:apply-templates select="isbndb/data"/>
   </collection>
  </tellico>
 </xsl:template>
 
-<xsl:template match="BookData">
+<xsl:template match="data">
  <entry>
 
   <title>
-   <xsl:value-of select="Title"/>
+   <xsl:value-of select="title"/>
   </title>
 
   <isbn>
-   <xsl:value-of select="@isbn"/>
+   <xsl:value-of select="(isbn10|isbn13)[1]"/>
   </isbn>
 
-  <pub_id>
-   <xsl:value-of select="PublisherText/@publisher_id"/>
-  </pub_id>
-
   <publisher>
-   <xsl:value-of select="PublisherText"/>
+   <xsl:value-of select="publisher_name"/>
   </publisher>
 
   <authors>
-   <xsl:for-each select="Authors/Person">
+   <xsl:for-each select="author_data">
     <author>
-     <xsl:value-of select="."/>
+     <xsl:value-of select="name"/>
     </author>
    </xsl:for-each>
   </authors>
@@ -120,17 +114,17 @@
   </keywords>
 
   <comments>
-   <xsl:value-of select="Details/@physical_description_text"/>
+   <xsl:value-of select="physical_description_text"/>
    <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>
-   <xsl:value-of select="Summary"/>
-   <xsl:if test="string-length(Summary) &gt; 0 and string-length(Notes) &gt; 0">
+   <xsl:value-of select="summary"/>
+   <xsl:if test="string-length(summary) &gt; 0 and string-length(notes) &gt; 0">
     <xsl:text>&lt;br/&gt;&lt;br/&gt;</xsl:text>
    </xsl:if>
-   <xsl:value-of select="Notes"/>
+   <xsl:value-of select="notes"/>
   </comments>
 
   <xsl:variable name="binding">
-   <xsl:value-of select="substring-before(Details/@edition_info, ';')"/>
+   <xsl:value-of select="substring-before(edition_info, ';')"/>
   </xsl:variable>
   <binding i18n="true">
    <xsl:choose>
@@ -146,27 +140,35 @@
    </xsl:choose>
   </binding>
 
+  <xsl:variable name="datestr">
+   <xsl:value-of select="substring-after(edition_info, '; ')"/>
+  </xsl:variable>
+
+  <pub_year>
+   <xsl:value-of select="substring($datestr, 1, 4)"/>
+  </pub_year>
+
   <languages i18n="true">
    <language>
     <xsl:apply-templates select="$langs-top">
-     <xsl:with-param name="lang-id" select="Details/@language"/>
+     <xsl:with-param name="lang-id" select="language"/>
     </xsl:apply-templates>
    </language>
   </languages>
 
   <dewey>
    <xsl:choose>
-    <xsl:when test="Details/@dewey_decimal_normalized">
-     <xsl:value-of select="Details/@dewey_decimal_normalized"/>
+    <xsl:when test="dewey_normal">
+     <xsl:value-of select="dewey_normal"/>
     </xsl:when>
-    <xsl:when test="Details/@dewey_decimal">
-     <xsl:value-of select="Details/@dewey_decimal"/>
+    <xsl:when test="dewey_decimal">
+     <xsl:value-of select="dewey_decimal"/>
     </xsl:when>
    </xsl:choose>
   </dewey>
 
   <lcc>
-   <xsl:value-of select="Details/@lcc_number"/>
+   <xsl:value-of select="lcc_number"/>
   </lcc>
 
  </entry>
