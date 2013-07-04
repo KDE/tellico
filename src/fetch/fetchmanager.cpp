@@ -383,7 +383,8 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
       continue;
     }
 
-    if(!bundledScriptHasExecPath(file, specConfig)) { // no available exec
+    bool enabled = specConfig.readEntry("Enabled", true);
+    if(!enabled || !bundledScriptHasExecPath(file, specConfig)) { // no available exec
       continue;
     }
 

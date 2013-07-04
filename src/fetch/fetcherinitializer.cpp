@@ -110,10 +110,11 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);
   RegisterFetcher<Fetch::VNDBFetcher> registerVNDB(VNDB);
   RegisterFetcher<Fetch::AllocineFetcher> registerAllocine(Allocine);
-  RegisterFetcher<Fetch::ScreenRushFetcher> registerScreenRush(ScreenRush);
-  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
-  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
-  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
+  // add these back if the API gets updated
+//  RegisterFetcher<Fetch::ScreenRushFetcher> registerScreenRush(ScreenRush);
+//  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
+//  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
+//  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
 #endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);

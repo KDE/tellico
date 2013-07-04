@@ -5,3 +5,4 @@ Arguments=-t %1,-a %1,-i %1,-i %1
 CollectionType=2
 FormatType=0
 UpdateArgs=-t %{title}
+Enabled=false

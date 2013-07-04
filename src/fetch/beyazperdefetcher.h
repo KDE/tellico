@@ -44,6 +44,8 @@ public:
    */
   BeyazperdeFetcher(QObject* parent);
 
+  // change this if/when the api is updated again
+  virtual bool canSearch(FetchKey) const  { return false; }
   virtual QString source() const;
   virtual Type type() const { return Beyazperde; }
 
