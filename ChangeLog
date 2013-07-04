@@ -1,3 +1,7 @@
+2013-07-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Disabled fetchers for Spanish Ministry of Culture, Beyazperde, Filmstarts, ScreenRush, and Sensacine.
+
 2013-07-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Update ISBNdb.com fetcher to use v2 of API.
