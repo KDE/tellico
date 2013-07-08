@@ -277,6 +277,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
       const QByteArray data = FileHandler::readDataFile(articleUrl, true);
       if(data.isEmpty()) {
         entry->setField(article_field, QString());
+#ifdef HAVE_QJSON
       } else {
         QJson::Parser parser;
         const QVariant response = parser.parse(data);
@@ -287,6 +288,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
         if(!valueList.isEmpty()) {
           entry->setField(article_field, value(valueList.first().toMap(), "value"));
         }
+#endif
       }
     }
   }
