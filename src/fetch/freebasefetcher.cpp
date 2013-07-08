@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2013 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -55,7 +55,7 @@ namespace {
   static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image";
   static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic";
   static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
-  static const char* FREEBASE_API_KEY =   "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
+  static const char* FREEBASE_API_KEY   = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 }
 
