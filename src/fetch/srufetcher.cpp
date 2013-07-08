@@ -464,8 +464,8 @@ Tellico::StringHash SRUFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("address")]  = i18n("Address");
   hash[QLatin1String("abstract")] = i18n("Abstract");
-  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
-  hash[QLatin1String("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
+  hash[QLatin1String("dewey")]    = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QLatin1String("lcc")]      = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
 }
 
