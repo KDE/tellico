@@ -427,12 +427,17 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
       resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
     }
-    const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
-    if(!valuesNotFound.isEmpty()) {
-      KMessageBox::informationList(this,
-                                   i18n("No results were found for the following ISBN values:"),
-                                   valuesNotFound,
-                                   i18n("No Results"));
+    // Google Book Search can have an error, returning a different ISBN in the initial search
+    // than the one returned by fetchEntryHook(). As a small workaround, if only a single ISBN value
+    // is in the search term, then don't show
+    if(searchValues.count() > 1) {
+      const QStringList valuesNotFound = ISBNValidator::listDifference(searchValues, resultValues);
+      if(!valuesNotFound.isEmpty()) {
+        KMessageBox::informationList(this,
+                                     i18n("No results were found for the following ISBN values:"),
+                                     valuesNotFound,
+                                     i18n("No Results"));
+      }
     }
   }
 }
