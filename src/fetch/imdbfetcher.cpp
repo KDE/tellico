@@ -74,13 +74,13 @@ void IMDBFetcher::initRegExps() {
   s_tagRx = new QRegExp(QLatin1String("<.*>"));
   s_tagRx->setMinimal(true);
 
-  s_anchorRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
+  s_anchorRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]+)\"[^<]*>([^<]+)</a>"), Qt::CaseInsensitive);
   s_anchorRx->setMinimal(true);
 
   s_anchorTitleRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/title/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
   s_anchorTitleRx->setMinimal(true);
 
-  s_anchorNameRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>([^<]*)</a>"), Qt::CaseInsensitive);
+  s_anchorNameRx = new QRegExp(QLatin1String("<a\\s+[^>]*href\\s*=\\s*\"([^\"]*/name/[^\"]*)\"[^<]*>(.+)</a>"), Qt::CaseInsensitive);
   s_anchorNameRx->setMinimal(true);
 
   s_titleRx = new QRegExp(QLatin1String("<title>(.*)</title>"), Qt::CaseInsensitive);
@@ -1219,7 +1219,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     QRegExp castAnchorRx(QLatin1String("<a\\s+name\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
     pos = castAnchorRx.indexIn(castText);
     if(pos < 0) {
-      QRegExp tableClassRx(QLatin1String("<table\\s+class\\s*=\\s*\"cast\""), Qt::CaseInsensitive);
+      QRegExp tableClassRx(QLatin1String("<table\\s+class\\s*=\\s*\"cast_list\""), Qt::CaseInsensitive);
       pos = tableClassRx.indexIn(castText);
       if(pos < 0) {
         // fragile, the word "cast" appears in the title, but need to find
@@ -1247,24 +1247,26 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   QRegExp tdRx(QLatin1String("<td[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   tdRx.setMinimal(true);
 
+  QRegExp tdActorRx(QLatin1String("<td\\s+[^>]*itemprop=\"actor\"[^>]*>(.*)</td>"), Qt::CaseInsensitive);
+  tdActorRx.setMinimal(true);
+
+  QRegExp tdCharRx(QLatin1String("<td\\s+[^>]*class=\"character\"[^>]*>(.*)</td>"), Qt::CaseInsensitive);
+  tdCharRx.setMinimal(true);
+
   QStringList cast;
   // loop until closing table tag
   const int endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
-  pos = s_anchorRx->indexIn(castText, pos+1);
-  while(pos > -1 && pos < endPos && cast.count() < m_numCast) {
-    if(s_anchorRx->cap(1).contains(name)) {
-      // now search for <td> item with character name
-      // there's a column with ellipses then the character
-      const int pos2 = tdRx.indexIn(castText, pos);
-      if(pos2 > -1 && tdRx.indexIn(castText, pos2+tdRx.matchedLength()) > -1) {
-        cast += s_anchorRx->cap(2).trimmed()
-              + FieldFormat::columnDelimiterString()
-              + tdRx.cap(1).simplified().remove(*s_tagRx);
-      } else {
-        cast += s_anchorRx->cap(2).trimmed();
-      }
+  castText = castText.mid(pos, endPos-pos+1);
+  pos = tdActorRx.indexIn(castText);
+  while(pos > -1 && cast.count() < m_numCast) {
+    QString actorText = tdActorRx.cap(1).remove(*s_tagRx).simplified();
+    const int pos2 = tdCharRx.indexIn(castText, pos+1);
+    if(pos2 > -1) {
+      cast += actorText
+            + FieldFormat::columnDelimiterString()
+            + tdCharRx.cap(1).remove(*s_tagRx).simplified();
     }
-    pos = s_anchorRx->indexIn(castText, pos+1);
+    pos = tdActorRx.indexIn(castText, qMax(pos+1, pos2));
   }
 
   if(!cast.isEmpty()) {
