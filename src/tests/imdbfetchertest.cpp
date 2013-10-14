@@ -81,6 +81,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
   QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("http://akas.imdb.com/title/tt0084296/"));
   QVERIFY(!entry->field("plot").isEmpty());
