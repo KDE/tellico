@@ -73,6 +73,16 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
       return 5;
     }
   }
+  if (f->name() == QLatin1String("imdb")) {
+    // imdb might be a different host since we query akas.imdb.com and normally it is www.imdb.com
+    KUrl us1 = KUrl(s1);
+    KUrl us2 = KUrl(s2);
+    us1.setHost(QLatin1String(""));
+    us2.setHost(QLatin1String(""));
+    if(us1 == us2) {
+      return 5;
+    }
+  }
   if(f->name() == QLatin1String("arxiv")) {
     // normalize and unVersion arxiv ID
     s1.remove(QRegExp(QLatin1String("^arxiv:")));
