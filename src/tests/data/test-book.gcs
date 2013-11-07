@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<collection type="GCbooks" items="1" version="1.4.1">
+<collection type="GCbooks" items="2" version="1.7.0">
  <information>
-  <maxId>1</maxId>
+  <maxId>3</maxId>
  </information>
+<userCollection>
+  <fields>
+    <field displayed="New boolean" group="User fields" init="true" label="New boolean" type="yesno" value="gcsfield1" />
+    <field displayed="New choice" group="User fields" init="" label="New choice" type="options" value="gcsfield2" values="yes,no,maybe" />
+    <field displayas="graphical" displayed="New rating" group="User fields" init="" label="New rating" max="5" min="1" step="1" type="number" value="gcsfield3" />
+    <field displayed="New field" group="User fields" init="" label="New field" type="short text" value="gcsfield4" />
+    <field default="view" displayed="New image" group="User fields" init="" label="New image" type="image" value="gcsfield5" />
+    <field displayed="New long field" group="User fields" init="" label="New long field" type="long text" value="gcsfield6" />
+    <field displayed="New date" group="User fields" init="" label="New date" type="date" value="gcsfield7" />
+    <field displayas="text" displayed="New number" group="User fields" init="2" label="New number" max="6" min="1" step="1" type="number" value="gcsfield8" />
+    <field displayed="dependency" group="User fields" init="%gcsfield1%,%gcsfield2%" label="dependency" type="formatted" value="gcsfield9" />
+    <field displayed="list" flat="false" group="User fields" history="true" init="" label="list" type="single list" value="gcsfield10" />
+  </fields>
+  <filters>
+  </filters>
+  <groups>
+    <group id="User fields" label="User fields" />
+  </groups>
+  <panels>
+    <panel editable="true" label="PanelForm" name="form">
+      <userItem expand="true" title="User fields" type="tab" userDefined="1" value="bla">
+        <userItem cols="4" expand="true" rows="10" type="table">
+          <userItem col="0" colspan="2" expand="default" for="gcsfield1" row="0" type="value" />
+          <userItem col="0" expand="default" for="gcsfield2" row="1" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield2" row="1" type="value" />
+          <userItem col="0" expand="default" for="gcsfield3" row="2" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield3" row="2" type="value" />
+          <userItem col="0" expand="default" for="gcsfield4" row="3" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield4" row="3" type="value" />
+          <userItem col="0" expand="default" for="gcsfield5" row="4" type="label" />
+          <userItem col="1" colspan="3" expand="true" for="gcsfield5" row="4" type="value" />
+          <userItem col="0" expand="default" for="gcsfield6" row="5" type="label" />
+          <userItem col="1" colspan="3" expand="true" for="gcsfield6" row="5" type="value" />
+          <userItem col="0" expand="default" for="gcsfield7" row="6" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield7" row="6" type="value" />
+          <userItem col="0" expand="default" for="gcsfield8" row="7" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield8" row="7" type="value" />
+          <userItem col="0" expand="default" for="gcsfield9" row="8" type="label" />
+          <userItem col="1" colspan="1" expand="default" for="gcsfield9" row="8" type="value" />
+          <userItem col="0" expand="default" for="gcsfield10" row="9" type="label" />
+          <userItem col="1" colspan="3" expand="true" for="gcsfield10" row="9" type="value" />
+        </userItem>
+      </userItem>
+    </panel>
+    <panel editable="false" label="PanelReadOnly" name="readonly">
+      <userItem title="User fields" type="expander" userDefined="1">
+        <userItem cols="2" expand="true" rows="10" type="table">
+          <userItem col="0" for="gcsfield1" row="0" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield1" row="0" type="value" />
+          <userItem col="0" for="gcsfield2" row="1" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield2" row="1" type="value" />
+          <userItem col="0" for="gcsfield3" row="2" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield3" row="2" type="value" />
+          <userItem col="0" for="gcsfield4" row="3" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield4" row="3" type="value" />
+          <userItem col="0" for="gcsfield5" row="4" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield5" row="4" type="value" />
+          <userItem col="0" for="gcsfield6" row="5" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield6" row="5" type="value" />
+          <userItem col="0" for="gcsfield7" row="6" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield7" row="6" type="value" />
+          <userItem col="0" for="gcsfield8" row="7" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield8" row="7" type="value" />
+          <userItem col="0" for="gcsfield9" row="8" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield9" row="8" type="value" />
+          <userItem col="0" for="gcsfield10" row="9" type="label" />
+          <userItem col="1" colspan="1" expand="true" flat="false" for="gcsfield10" row="9" type="value" />
+        </userItem>
+      </userItem>
+    </panel>
+  </panels>
+</userCollection>
 
 
 
@@ -16,27 +88,42 @@
   publication="2008"
   language="English"
   serie="Series"
+  rank=""
   edition="edition"
   format=""
   pages="320"
   web="http://www.amazon.com/Reason-God-Belief-Age-Skepticism/dp/0525950494/ref=pd_bbs_sr_1/104-1347196-5229502?ie=UTF8&amp;s=books&amp;qid=1217426174&amp;sr=1-1##Amazon (US)"
   read="1"
-  added="current"
+  added="02/10/2013"
   rating="4"
-  acquisition="current"
+  acquisition="02/10/2013"
   location="location"
   translator="translator"
   artist=""
-  borrower=""
+  digitalfile=""
+  borrower="none"
   lendDate=""
   borrowings=""
   favourite="1"
+  gcsfield1="1"
+  gcsfield2=""
+  gcsfield3="2"
+  gcsfield4="some text"
+  gcsfield5=""
+  gcsfield7="16/10/2013"
+  gcsfield8=""
+  gcsfield9="1,yes"
  >
   <description></description>
   <comments>&lt;br/&gt;
    my description
    &lt;br/&gt;
   my comments</comments>
+  <gcsfield6>g
+g
+g
+g
+</gcsfield6>
   <authors>
    <line>
     <col>Timothy Keller</col>
@@ -61,5 +148,70 @@
     <col>tag2</col>
    </line>
   </tags>
+  <gcsfield10>
+   <line>
+    <col>list1</col>
+   </line>
+   <line>
+    <col>list2</col>
+   </line>
+  </gcsfield10>
+ </item>
+ <item
+  id="2"
+  isbn=""
+  title="Test Book"
+  cover=""
+  backpic=""
+  publisher="Dutton Adult"
+  publication=""
+  language=""
+  serie=""
+  rank="1"
+  edition=""
+  format=""
+  genre=""
+  pages=""
+  web=""
+  read="0"
+  added="02/10/2013"
+  rating="0"
+  acquisition=""
+  location=""
+  translator=""
+  artist=""
+  digitalfile=""
+  borrower="none"
+  lendDate=""
+  borrowings=""
+  favourite="0"
+  tags=""
+  gcsfield1="1"
+  gcsfield2="maybe"
+  gcsfield3="3"
+  gcsfield4="random value"
+  gcsfield5=""
+  gcsfield7="31/03/2013"
+  gcsfield8=""
+  gcsfield9="1,maybe"
+ >
+  <description></description>
+  <comments></comments>
+  <gcsfield6>all
+the best 
+stuff</gcsfield6>
+  <authors>
+   <line>
+    <col>Robby Stephenson</col>
+   </line>
+  </authors>
+  <gcsfield10>
+   <line>
+    <col>list1</col>
+   </line>
+   <line>
+    <col>list2</col>
+   </line>
+  </gcsfield10>
  </item>
 </collection>

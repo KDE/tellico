@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testVideoGame();
   void testVideo();
   void testWine();
+  void testCustomFields();
 };
 
 #endif

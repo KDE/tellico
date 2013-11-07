@@ -56,7 +56,7 @@ void GCstarTest::testBook() {
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
-  QCOMPARE(coll->entryCount(), 1);
+  QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
 
@@ -449,6 +449,129 @@ void GCstarTest::testCoin() {
       // skip images
       if(f->type() != Tellico::Data::Field::Image) {
         QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      }
+    }
+  }
+}
+
+void GCstarTest::testCustomFields() {
+  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
+  Tellico::Import::GCstarImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll.isNull());
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 2);
+  // should be translated somehow
+  QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
+
+  // test custom fields
+  Tellico::Data::FieldPtr field = coll->fieldByName(QLatin1String("gcsfield1"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->name(), QLatin1String("gcsfield1"));
+  QCOMPARE(field->title(), QLatin1String("New boolean"));
+  QCOMPARE(field->category(), QLatin1String("User fields"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Bool);
+
+  field = coll->fieldByName(QLatin1String("gcsfield2"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New choice"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Choice);
+  QCOMPARE(field->allowed(), QStringList() << QLatin1String("yes")
+                                           << QLatin1String("no")
+                                           << QLatin1String("maybe"));
+
+  field = coll->fieldByName(QLatin1String("gcsfield3"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New rating"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Rating);
+  QCOMPARE(field->property(QLatin1String("minimum")), QLatin1String("1"));
+  QCOMPARE(field->property(QLatin1String("maximum")), QLatin1String("5"));
+
+  field = coll->fieldByName(QLatin1String("gcsfield4"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New field"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Line);
+
+  field = coll->fieldByName(QLatin1String("gcsfield5"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New image"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Image);
+
+  field = coll->fieldByName(QLatin1String("gcsfield6"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New long field"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Para);
+
+  field = coll->fieldByName(QLatin1String("gcsfield7"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New date"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Date);
+
+  field = coll->fieldByName(QLatin1String("gcsfield8"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("New number"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Number);
+  QCOMPARE(field->defaultValue(), QLatin1String("2"));
+
+  field = coll->fieldByName(QLatin1String("gcsfield9"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("dependency"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Line);
+  QCOMPARE(field->property(QLatin1String("template")), QLatin1String("%{gcsfield1},%{gcsfield2}"));
+
+  field = coll->fieldByName(QLatin1String("gcsfield10"));
+  QVERIFY(!field.isNull());
+  QCOMPARE(field->title(), QLatin1String("list"));
+  QCOMPARE(field->type(), Tellico::Data::Field::Table);
+  QCOMPARE(field->property(QLatin1String("columns")), QLatin1String("1"));
+
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  QVERIFY(!entry.isNull());
+  QCOMPARE(entry->field("gcsfield1"), QLatin1String("true"));
+  QCOMPARE(entry->field("gcsfield2"), QLatin1String("maybe"));
+  QCOMPARE(entry->field("gcsfield3"), QLatin1String("3"));
+  QCOMPARE(entry->field("gcsfield4"), QLatin1String("random value"));
+  QCOMPARE(entry->field("gcsfield6"), QLatin1String("all\nthe best \nstuff"));
+  QCOMPARE(entry->field("gcsfield7"), QLatin1String("2013-03-31"));
+  QCOMPARE(entry->field("gcsfield9"), QLatin1String("true,maybe"));
+  QCOMPARE(TABLES(entry, "gcsfield10").count(), 2);
+  QCOMPARE(TABLES(entry, "gcsfield10").at(1), QLatin1String("list2"));
+
+  Tellico::Export::GCstarExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+
+  Tellico::Import::GCstarImporter importer2(exporter.text());
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  QVERIFY(!coll2.isNull());
+
+  foreach(Tellico::Data::FieldPtr f1, coll->fields()) {
+    Tellico::Data::FieldPtr f2 = coll2->fieldByName(f1->name());
+    QVERIFY2(f2, f1->name().toLatin1());
+    QCOMPARE(f1->name(), f2->name());
+    QCOMPARE(f1->title(), f2->title());
+    QCOMPARE(f1->category(), f2->category());
+    QCOMPARE(f1->allowed(), f2->allowed());
+    QCOMPARE(f1->type(), f2->type());
+    QCOMPARE(f1->flags(), f2->flags());
+    QCOMPARE(f1->formatType(), f2->formatType());
+    QCOMPARE(f1->description(), f2->description());
+    QCOMPARE(f1->defaultValue(), f2->defaultValue());
+    QCOMPARE(f1->property(QLatin1String("minimum")), f2->property(QLatin1String("minimum")));
+    QCOMPARE(f1->property(QLatin1String("maximum")), f2->property(QLatin1String("maximum")));
+    QCOMPARE(f1->property(QLatin1String("columns")), f2->property(QLatin1String("columns")));
+    QCOMPARE(f1->property(QLatin1String("template")), f2->property(QLatin1String("template")));
+  }
+
+  foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
+    Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
+    QVERIFY(e2);
+    QCOMPARE(TABLES(e2, "gcsfield10").count(), 2);
+    QCOMPARE(TABLES(e2, "gcsfield10").at(1), QLatin1String("list2"));
+    foreach(Tellico::Data::FieldPtr f, coll->fields()) {
+      // skip images
+      if(f->type() != Tellico::Data::Field::Image) {
+        QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
       }
     }
   }

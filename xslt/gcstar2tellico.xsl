@@ -10,7 +10,7 @@
    ===================================================================
    Tellico XSLT file - used for importing GCstar data.
 
-   Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+   Copyright (C) 2007-2013 Robby Stephenson <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -53,6 +53,8 @@
   </xsl:when>
  </xsl:choose>
 </xsl:variable>
+
+<xsl:key name="fieldsByName" match="field" use="@value"/>
 
 <xsl:template match="/">
  <tc:tellico syntaxVersion="11">
@@ -122,9 +124,61 @@
      <tc:field title="Boards" flags="0" category="Publishing" format="4" type="6" name="numberboards"/>
     </xsl:when>
    </xsl:choose>
+   <xsl:apply-templates select="userCollection/fields/field"/>
   </tc:fields>
   <xsl:apply-templates select="item"/>
  </tc:collection>
+</xsl:template>
+
+<xsl:template match="field">
+ <tc:field name="{@value}" title="{@label}" category="{@group}" i18n="true">
+  <xsl:attribute name="type">
+   <xsl:choose>
+    <xsl:when test="@type = 'short text'"><xsl:text>1</xsl:text></xsl:when>
+    <xsl:when test="@type = 'formatted'"><xsl:text>1</xsl:text></xsl:when>
+    <xsl:when test="@type = 'long text'"><xsl:text>2</xsl:text></xsl:when>
+    <xsl:when test="@type = 'options'"><xsl:text>3</xsl:text></xsl:when>
+    <xsl:when test="@type = 'yesno'"><xsl:text>4</xsl:text></xsl:when>
+    <xsl:when test="@type = 'number' and @displayas = 'text'"><xsl:text>6</xsl:text></xsl:when>
+    <xsl:when test="@type = 'number' and @displayas = 'graphical'"><xsl:text>14</xsl:text></xsl:when>
+    <xsl:when test="@type = 'single list'"><xsl:text>8</xsl:text></xsl:when>
+    <xsl:when test="@type = 'image'"><xsl:text>10</xsl:text></xsl:when>
+    <xsl:when test="@type = 'date'"><xsl:text>12</xsl:text></xsl:when>
+   </xsl:choose>
+  </xsl:attribute>
+  <xsl:if test="string-length(@values)">
+   <xsl:attribute name="allowed">
+    <xsl:value-of select="translate(@values, ',', ';')"/>
+   </xsl:attribute>
+  </xsl:if>
+  <xsl:if test="string-length(@init) and not(@type='formatted')">
+   <tc:prop name="default">
+    <xsl:value-of select="@init"/>
+   </tc:prop>
+  </xsl:if>
+  <xsl:if test="string-length(@max)">
+   <tc:prop name="maximum">
+    <xsl:value-of select="@max"/>
+   </tc:prop>
+  </xsl:if>
+  <xsl:if test="string-length(@min)">
+   <tc:prop name="minimum">
+    <xsl:value-of select="@min"/>
+   </tc:prop>
+  </xsl:if>
+  <xsl:if test="@type='formatted'">
+   <xsl:attribute name="flags">32</xsl:attribute>
+   <xsl:variable name="tokens" select="str:tokenize(@init, '%')"/>
+   <tc:prop name="template">
+    <xsl:for-each select="$tokens[position() mod 2 = 1]">
+     <xsl:value-of select="concat('%{', ., '}', following-sibling::*)"/>
+    </xsl:for-each>
+   </tc:prop>
+  </xsl:if>
+  <xsl:if test="@type='simple list'">
+   <tc:prop name="columns">1</tc:prop>
+  </xsl:if>
+ </tc:field>
 </xsl:template>
 
 <xsl:template match="item">
@@ -141,7 +195,7 @@
  </tc:entry>
 </xsl:template>
 
-<xsl:template match="item/@*">
+<xsl:template match="item/@*[not(starts-with(local-name(), 'gcsfield'))]">
  <xsl:variable name="dummies">
   <xsl:element name="{local-name(.)}">
    <xsl:value-of select="."/>
@@ -150,6 +204,27 @@
  <xsl:for-each select="exsl:node-set($dummies)/*">
   <xsl:apply-templates select="."/>
  </xsl:for-each>
+</xsl:template>
+
+<xsl:template match="item/@*[starts-with(local-name(), 'gcsfield')]">
+ <xsl:element name="{local-name()}" namespace="http://periapsis.org/tellico/">
+  <xsl:choose>
+   <xsl:when test="key('fieldsByName', local-name())/@type = 'date'">
+    <xsl:variable name="numbers" select="str:tokenize(., '/-')"/>
+    <xsl:if test="count($numbers) = 3">
+     <tc:year><xsl:value-of select="$numbers[3]"/></tc:year>
+     <tc:month><xsl:value-of select="$numbers[2]"/></tc:month>
+     <tc:day><xsl:value-of select="$numbers[1]"/></tc:day>
+    </xsl:if>
+   </xsl:when>
+   <xsl:when test="key('fieldsByName', local-name())/@type = 'yesno'">
+    <xsl:if test=". = '1'">true</xsl:if>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="."/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:element>
 </xsl:template>
 
 <!-- ignore anything not explicit -->
@@ -706,6 +781,27 @@
 
 <xsl:template match="back">
  <tc:reverse><xsl:value-of select="."/></tc:reverse>
+</xsl:template>
+
+<xsl:template match="*[starts-with(local-name(), 'gcsfield')]">
+  <xsl:choose>
+   <xsl:when test="key('fieldsByName', local-name())/@type = 'single list'">
+    <xsl:element name="{concat(local-name(), 's')}">
+     <xsl:for-each select="line">
+      <xsl:element name="{local-name(..)}">
+       <tc:column>
+        <xsl:value-of select="col"/>
+       </tc:column>
+      </xsl:element>
+     </xsl:for-each>
+    </xsl:element>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:element name="{local-name()}">
+     <xsl:value-of select="."/>
+    </xsl:element>
+   </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 <xsl:template name="year">

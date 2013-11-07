@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:tc="http://periapsis.org/tellico/"
                 xmlns:math="http://exslt.org/math"
+                xmlns:str="http://exslt.org/strings"
                 xmlns:a="uri:attribute"
                 exclude-result-prefixes="tc a"
                 extension-element-prefixes="math"
@@ -120,6 +121,8 @@
 <xsl:variable name="attributes" select="document('')/*/a:attributes/a:attribute[(contains(@type, $collType) or not(@type)) and
                                                                                  not(contains(@skip, $collType))]"/>
 
+<xsl:key name="fieldsByName" match="tc:field" use="@name"/>
+
 <xsl:param name="imageDir"/> <!-- dir where field images are located -->
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 
@@ -152,17 +155,78 @@
     <xsl:value-of select="math:max(tc:entry/@id)"/>
    </maxId>
   </information>
+  <xsl:apply-templates select="tc:fields"/>
   <xsl:apply-templates select="tc:entry"/>
  </collection>
 </xsl:template>
 
-<!-- no output for fields or images -->
-<xsl:template match="tc:fields"/>
+<!-- output only custom fields -->
+<xsl:template match="tc:fields">
+ <userCollection>
+  <fields>
+   <xsl:for-each select="tc:field[substring(@name, 1, 8) = 'gcsfield']">
+    <field group="User fields" label="{@title}" value="{@name}" 
+           init="{tc:prop[@name='default']}"
+           min="{tc:prop[@name='minimum']}"
+           max="{tc:prop[@name='maximum']}"
+           values="{translate(@allowed, ';', ',')}">
+     <xsl:attribute name="type">
+      <xsl:choose>
+       <xsl:when test="@type = '1' and not(@flags = '32')"><xsl:text>short text</xsl:text></xsl:when>
+       <xsl:when test="@type = '1' and @flags = '32'"><xsl:text>formatted</xsl:text></xsl:when>
+       <xsl:when test="@type = '2'"><xsl:text>long text</xsl:text></xsl:when>
+       <xsl:when test="@type = '3'"><xsl:text>options</xsl:text></xsl:when>
+       <xsl:when test="@type = '4'"><xsl:text>yesno</xsl:text></xsl:when>
+       <xsl:when test="@type = '6'"><xsl:text>number</xsl:text></xsl:when>
+       <xsl:when test="@type = '8'"><xsl:text>single list</xsl:text></xsl:when>
+       <xsl:when test="@type = '10'"><xsl:text>image</xsl:text></xsl:when>
+       <xsl:when test="@type = '12'"><xsl:text>date</xsl:text></xsl:when>
+       <xsl:when test="@type = '14'"><xsl:text>number</xsl:text></xsl:when>
+      </xsl:choose>
+     </xsl:attribute>
+     <xsl:if test="@type='6' or @type='14'">
+      <xsl:attribute name="displayas">
+       <xsl:if test="@type='6'"><xsl:text>text</xsl:text></xsl:if>
+       <xsl:if test="@type='14'"><xsl:text>graphical</xsl:text></xsl:if>
+      </xsl:attribute>
+     </xsl:if>
+     <xsl:if test="@type = '1' and @flags = '32'">
+      <xsl:attribute name="init">
+       <xsl:variable name="tokens" select="str:tokenize(tc:prop[@name = 'template'], '%')"/>
+       <xsl:for-each select="$tokens">
+        <xsl:choose>
+         <xsl:when test="starts-with(., '{')">
+          <xsl:variable name="tokens2" select="str:tokenize(., '}')"/>
+          <xsl:for-each select="$tokens2">
+           <xsl:if test="position() = 1">
+            <!-- chop-off the beginning character '{' -->
+            <xsl:value-of select="concat('%', substring(., 2, string-length(.)-1), '%')"/>
+           </xsl:if>
+           <xsl:if test="position() &gt; 1">
+            <xsl:value-of select="."/>
+           </xsl:if>
+          </xsl:for-each>
+         </xsl:when>
+         <xsl:otherwise>
+          <xsl:value-of select="."/>
+         </xsl:otherwise>
+        </xsl:choose>
+       </xsl:for-each>
+      </xsl:attribute>
+     </xsl:if>
+    </field>
+   </xsl:for-each>
+  </fields>
+ </userCollection>
+</xsl:template>
+
+<!-- no output for images -->
 <xsl:template match="tc:images"/>
 
 <xsl:template match="tc:entry">
  <xsl:variable name="entry" select="."/>
  <item id="{@id}">
+  <xsl:apply-templates select="*[starts-with(local-name(), 'gcsfield')]" mode="attributes"/>
   <xsl:if test="tc:rating">
    <xsl:attribute name="rating">
     <xsl:value-of select="2*tc:rating"/>
@@ -190,6 +254,7 @@
     </xsl:for-each>
    </xsl:attribute>
   </xsl:if>
+
   <xsl:if test="tc:certification">
    <xsl:attribute name="age">
     <xsl:choose>
@@ -211,6 +276,7 @@
     </xsl:choose>
    </xsl:attribute>
   </xsl:if>
+
   <!-- for coin grade, GCstar uses numbers only -->
   <xsl:if test="tc:grade">
    <xsl:attribute name="condition">
@@ -299,6 +365,8 @@
   <!-- for coins -->
   <xsl:apply-templates select="tc:metals"/>
 
+  <xsl:apply-templates select="*[starts-with(local-name(), 'gcsfield')]" mode="elements"/>
+
  </item>
 </xsl:template>
 
@@ -346,6 +414,54 @@
    </line>
   </xsl:for-each>
  </metal>
+</xsl:template>
+
+<xsl:template match="*[starts-with(local-name(), 'gcsfield')]" mode="attributes">
+ <xsl:choose>
+  <xsl:when test="key('fieldsByName', local-name())/@type = '2'"/>
+  <xsl:when test="key('fieldsByName', substring(local-name(), 1, string-length(local-name())-1))/@type = '8'"/>
+  <xsl:when test="key('fieldsByName', local-name())/@type = '12'">
+   <xsl:attribute name="{local-name()}">
+    <xsl:value-of select="concat(tc:day, '/', tc:month, '/', tc:year)"/>
+   </xsl:attribute>
+  </xsl:when>
+  <xsl:when test="key('fieldsByName', local-name())/@type = '4'">
+   <xsl:if test=". = 'true'">
+    <xsl:attribute name="{local-name()}">1</xsl:attribute>
+   </xsl:if>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:attribute name="{local-name()}">
+    <xsl:value-of select="."/>
+   </xsl:attribute>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+<xsl:template match="*[starts-with(local-name(), 'gcsfield')]" mode="elements">
+ <xsl:variable name="shortname">
+  <xsl:value-of select="substring(local-name(), 1, string-length(local-name())-1)"/>
+ </xsl:variable>
+ <xsl:choose>
+  <xsl:when test="key('fieldsByName', local-name())/@type = '12'"/>
+  <xsl:when test="key('fieldsByName', local-name())/@type = '2'">
+   <xsl:element name="{local-name()}">
+    <xsl:value-of select="."/>
+   </xsl:element>
+  </xsl:when>
+  <xsl:when test="key('fieldsByName', $shortname)/@type = '8'">
+   <xsl:element name="{$shortname}">
+    <xsl:for-each select="child::*">
+     <line>
+      <col>
+       <xsl:value-of select="tc:column"/>
+      </col>
+     </line>
+    </xsl:for-each>
+   </xsl:element>
+  </xsl:when>
+  <xsl:otherwise/>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template name="multiline">
