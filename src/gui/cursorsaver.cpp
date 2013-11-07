@@ -27,16 +27,20 @@
 #include <kapplication.h>
 
 Tellico::GUI::CursorSaver::CursorSaver(const QCursor& cursor_) : m_restored(false) {
-  kapp->setOverrideCursor(cursor_);
+  if(kapp) {
+    kapp->setOverrideCursor(cursor_);
+  }
 }
 
 Tellico::GUI::CursorSaver::~CursorSaver() {
-  if(!m_restored) {
+  if(!m_restored && kapp) {
     kapp->restoreOverrideCursor();
   }
 }
 
 void Tellico::GUI::CursorSaver::restore() {
-  kapp->restoreOverrideCursor();
+  if(kapp) {
+    kapp->restoreOverrideCursor();
+  }
   m_restored = true;
 }
