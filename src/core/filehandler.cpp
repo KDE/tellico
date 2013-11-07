@@ -151,7 +151,9 @@ QDomDocument FileHandler::readXMLDocument(const KUrl& url_, bool processNamespac
       details += i18n("The error message from Qt is:");
       details += QLatin1String("\n\t") + errorMsg;
       GUI::CursorSaver cs(Qt::ArrowCursor);
-      KMessageBox::detailedSorry(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
+      if(GUI::Proxy::widget()) {
+        KMessageBox::detailedSorry(GUI::Proxy::widget(), i18n(errorLoad, url_.fileName()), details);
+      }
     }
     return QDomDocument();
   }
