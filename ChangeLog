@@ -1,3 +1,7 @@
+2013-11-07  Robby Stephenson <robby@periapsis.org>
+
+	* Fixed error in setting modified date for entry in certain cases (Bug 326911).
+
 2013-11-06  Robby Stephenson <robby@periapsis.org>
 
 	* Improved GCstar import and export to handle custom GCstar fields.
@@ -16,7 +20,7 @@
 
 2013-07-01  Robby Stephenson  <robby@periapsis.org>
 
-	* Update ISBNdb.com fetcher to use v2 of API.
+	* Updated ISBNdb.com fetcher to use v2 of API.
 
 2013-06-09  Robby Stephenson  <robby@periapsis.org>
 
