@@ -81,8 +81,6 @@ void CollectionTest::testEmpty() {
 void CollectionTest::testCollection() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
 
-  // since it's the second collection created
-  QCOMPARE(coll->id(), 2);
   QCOMPARE(coll->entryCount(), 0);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
   QCOMPARE(coll->fields().count(), 4);
@@ -123,6 +121,11 @@ void CollectionTest::testCollection() {
   // check created and modified values
   QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
   QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));
+
+  // check that mdate gets updates
+  entry2->setField(QLatin1String("title"), QLatin1String("new title"));
+  QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
+  QCOMPARE(entry2->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
 }
 
 void CollectionTest::testFields() {
