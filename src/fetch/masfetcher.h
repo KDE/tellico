@@ -67,7 +67,7 @@ public:
   virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return Filmaster; }
+  virtual Type type() const { return MAS; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
 
