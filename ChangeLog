@@ -1,3 +1,7 @@
+2013-11-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed type error in Microsoft Academic Search fetcher.
+
 2013-11-07  Robby Stephenson <robby@periapsis.org>
 
 	* Fixed error in setting modified date for entry in certain cases (Bug 326911).

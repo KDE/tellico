@@ -210,11 +210,10 @@ bool Entry::setField(const QString& name_, const QString& value_) {
     return false;
   }
 
-  const bool wasSame = field(name_) != value_;;
+  const bool wasDifferent = field(name_) != value_;;
   const bool res = setFieldImpl(name_, value_);
-  qDebug() << res;
   // returning true means entry was successfully modified
-  if(res && wasSame && name_ != QLatin1String("mdate") && m_coll->hasField(QLatin1String("mdate"))) {
+  if(res && wasDifferent && name_ != QLatin1String("mdate") && m_coll->hasField(QLatin1String("mdate"))) {
     setFieldImpl(QLatin1String("mdate"), QDate::currentDate().toString(Qt::ISODate));
   }
   return res;
