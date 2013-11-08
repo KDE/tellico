@@ -106,6 +106,8 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
         }
         break;
       }
+      // not needed anymore
+      entry->setField(uuidField, QString());
     }
     //reset mdate value
     entry->setField(mdateField, mdate);
