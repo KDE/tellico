@@ -142,6 +142,7 @@ void TableFieldWidget::clearImpl() {
   m_table->setRowCount(MIN_TABLE_ROWS);
   labelColumns(m_field);
   editMultiple(false);
+  checkModified();
 }
 
 QWidget* TableFieldWidget::widget() {
