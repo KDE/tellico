@@ -50,7 +50,7 @@ public:
     Done(QObject* obj) : m_object(obj) {}
     ~Done();
   private:
-    QObject* m_object;
+    QPointer<QObject> m_object;
   };
 
   bool canCancel() const { return m_canCancel; }

@@ -1,3 +1,7 @@
+2013-11-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in command-line importing (Debian bug 729499).
+
 2013-11-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed type error in Microsoft Academic Search fetcher.

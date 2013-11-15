@@ -38,7 +38,10 @@ uint qHash(const QPointer<T>& pointer_) {
 }
 
 ProgressItem::Done::~Done() {
-  ProgressManager::self()->setDone(m_object);
+  // m_object might have been deleted, so check for existence
+  if(m_object) {
+    ProgressManager::self()->setDone(m_object);
+  }
 }
 
 ProgressItem::ProgressItem(const QString& label_, bool canCancel_)
