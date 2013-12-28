@@ -79,10 +79,10 @@ TARGET_LINK_LIBRARIES(tellico
     tellicomodels
     utils
     newstuff
-    pilotdb
-    rtf2html
-    btparse
-    csv
+    pilotdb-tellico
+    rtf2html-tellico
+    btparse-tellico
+    csv-tellico
     )
 
 TARGET_LINK_LIBRARIES(tellico

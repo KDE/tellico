@@ -24,4 +24,4 @@ SET(btparse_STAT_SRCS
    init.c
    )
 
-ADD_LIBRARY(btparse STATIC ${btparse_STAT_SRCS})
+ADD_LIBRARY(btparse-tellico STATIC ${btparse_STAT_SRCS})

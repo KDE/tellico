@@ -8,4 +8,4 @@ SET(rtf2html_STAT_SRCS
    rtf_table.cpp
    )
 
-ADD_LIBRARY(rtf2html STATIC ${rtf2html_STAT_SRCS})
+ADD_LIBRARY(rtf2html-tellico STATIC ${rtf2html_STAT_SRCS})

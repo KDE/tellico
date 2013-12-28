@@ -6,4 +6,4 @@ SET(libpalm_STAT_SRCS
    Block.cpp
    )
 
-ADD_LIBRARY(libpalm STATIC ${libpalm_STAT_SRCS})
+ADD_LIBRARY(libpalm-tellico STATIC ${libpalm_STAT_SRCS})
