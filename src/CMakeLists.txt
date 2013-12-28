@@ -81,7 +81,7 @@ TARGET_LINK_LIBRARIES(tellico
     newstuff
     pilotdb-tellico
     rtf2html-tellico
-    btparse-tellico
+    ${TELLICO_BTPARSE_LIBS}
     csv-tellico
     )
 

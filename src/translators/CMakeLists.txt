@@ -53,7 +53,7 @@ KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     tellicomodels
-    btparse-tellico
+    ${TELLICO_BTPARSE_LIBS}
     csv-tellico
     rtf2html-tellico
     )

@@ -96,6 +96,15 @@ if(QJSON_FOUND)
     include_directories(${QJSON_INCLUDE_DIR})
 endif(QJSON_FOUND)
 
+macro_optional_find_package(Btparse)
+macro_log_feature(BTPARSE_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
+if(BTPARSE_FOUND)
+    include_directories(${BTPARSE_INCLUDE_DIR})
+    set(TELLICO_BTPARSE_LIBS ${BTPARSE_LIBRARIES})
+else(BTPARSE_FOUND)
+    set(TELLICO_BTPARSE_LIBS btparse-tellico)
+endif(BTPARSE_FOUND)
+
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
 # libv4l 0.8.3 includes a compat header for videodev.h
@@ -177,6 +186,7 @@ macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
+macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

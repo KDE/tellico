@@ -31,7 +31,10 @@
 #include <config.h>
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
+/* btparse has a struct member 'class' */
+#define class errclass
 #include <btparse.h>
+#undef class
 #else
 #include "btparse/btparse.h"
 #endif

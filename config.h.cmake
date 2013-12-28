@@ -45,3 +45,5 @@
 #cmakedefine HAVE_QJSON
 
 #cmakedefine HAVE_NEPOMUK
+
+#cmakedefine HAVE_LIBBTPARSE
