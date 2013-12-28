@@ -63,7 +63,7 @@ KDE4_ADD_LIBRARY(fetch STATIC ${fetch_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(fetch
     newstuff
-    btparse
+    btparse-tellico
     )
 
 # Versions of KDE prior to 4.7 have a character encoding bug in libkxmlrpc
