@@ -237,7 +237,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
   m_cbBibtexStyle->addItem(i18n("Braces"));
   m_cbBibtexStyle->addItem(i18n("Quotes"));
   QString whats = i18n("<qt>The quotation style used when exporting bibtex. All field values will "
-                       " be escaped with either braces or quotation marks.</qt>");
+                       "be escaped with either braces or quotation marks.</qt>");
   l1->setWhatsThis(whats);
   m_cbBibtexStyle->setWhatsThis(whats);
   if(BibtexHandler::s_quoteStyle == BibtexHandler::BRACES) {
