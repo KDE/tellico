@@ -27,7 +27,7 @@ editor.</p>
 "true" should be used. If you'd like to filter to
 show only the science fiction books which you've not read, for
 example, check the <em>Match all of the
-following</em> button,  set the first rule to have "Genre"
+following</em> button, set the first rule to have "Genre"
 "contains" "Science Fiction" (no quotes) and the second rule to
 have "Read" "does not contain" "true" (no quotes).</p>
 </html>
