@@ -261,12 +261,11 @@ void ImdbFetcherTest::testFetchResultEncoding() {
     return;
   }
 
-  Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(0, fetcher, request);
-  job->exec();
-  QList<Tellico::Fetch::FetchResult*> results = job->results();
-  QCOMPARE(results.count(), 1);
-  Tellico::Fetch::FetchResult* result = results.front();
-  QVERIFY(result);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  QCOMPARE(result->title, QString::fromUtf8("'Shitsurakuen': jôbafuku onna harakiri"));
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->title(), QString::fromUtf8("'Shitsurakuen': jôbafuku onna harakiri"));
 }
