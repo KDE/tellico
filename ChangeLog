@@ -1,3 +1,7 @@
+2014-01-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug in IMDB fetcher (Bug 330591).
+
 2013-11-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug in command-line importing (Debian bug 729499).

@@ -548,6 +548,11 @@ void FetchDialog::slotShowEntry() {
     }
     stopProgress();
   }
+  if(!entry || !entry->collection())  {
+    myDebug() << "no entry or collection pointer";
+    setStatus(i18n("Ready."));
+    return;
+  }
   if(!entry->collection()->hasField(QLatin1String("fetchdialog_source"))) {
     Data::FieldPtr f(new Data::Field(QLatin1String("fetchdialog_source"), i18n("Attribution"), Data::Field::Para));
     entry->collection()->addField(f);

@@ -487,6 +487,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   KUrl url(m_url);
   url.setEncodedQuery(QByteArray());
   m_matches.insert(r->uid, url);
+  m_allMatches.insert(r->uid, url);
   emit signalResultFound(r);
 
   m_hasMoreResults = false;
@@ -631,6 +632,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     KUrl u(m_url, cap1);
     u.setQuery(QString());
     m_matches.insert(r->uid, u);
+    m_allMatches.insert(r->uid, u);
     emit signalResultFound(r);
     ++count;
   }
@@ -710,6 +712,7 @@ void IMDBFetcher::parseSingleNameResult() {
     KUrl u(m_url, s_anchorTitleRx->cap(1)); // relative URL constructor
     u.setQuery(QString());
     m_matches.insert(r->uid, u);
+    m_allMatches.insert(r->uid, u);
 //    myDebug() << u;
 //    myDebug() << cap2;
     emit signalResultFound(r);
@@ -869,11 +872,12 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 
-  if(!m_matches.contains(uid_)) {
+  if(!m_matches.contains(uid_) && !m_allMatches.contains(uid_)) {
     myLog() << "no url found";
     return Data::EntryPtr();
   }
-  KUrl url = m_matches[uid_];
+  KUrl url = m_matches.contains(uid_) ? m_matches[uid_]
+                                      : m_allMatches[uid_];
   if(url.path().contains(QRegExp(QLatin1String("/tt\\d+/$"))))  {
     url.setPath(url.path() + QLatin1String("combined"));
   }
