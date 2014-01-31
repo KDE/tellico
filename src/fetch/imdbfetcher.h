@@ -157,6 +157,9 @@ private:
   QString m_text;
   QHash<int, Data::EntryPtr> m_entries;
   QHash<int, KUrl> m_matches;
+  // if a new search is started, m_matches is cleared
+  // but we might still need to recover an entry by uid
+  QHash<int, KUrl> m_allMatches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
