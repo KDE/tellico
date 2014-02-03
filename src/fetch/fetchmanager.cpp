@@ -211,6 +211,7 @@ void Manager::stop() {
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
     if(fetcher->isSearching()) {
       fetcher->stop();
+      fetcher->saveConfig();
     }
   }
 #ifndef NDEBUG
@@ -224,6 +225,7 @@ void Manager::stop() {
 void Manager::slotFetcherDone(Tellico::Fetch::Fetcher* fetcher_) {
 //  myDebug() << (fetcher_ ? fetcher_->source() : QString()) << ":" << m_count;
   fetcher_->disconnect(); // disconnect all signals
+  fetcher_->saveConfig();
   --m_count;
   if(m_count <= 0) {
     emit signalDone();
@@ -281,7 +283,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(Arxiv);
   FETCHER_ADD(GoogleScholar);
   FETCHER_ADD(Discogs);
-  FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(MusicBrainz);
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(TheGamesDB);
@@ -290,6 +291,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
     FETCHER_ADD(IBS);
   }
 #ifdef HAVE_QJSON
+  FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);

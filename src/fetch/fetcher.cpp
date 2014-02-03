@@ -49,9 +49,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
 }
 
 Fetcher::~Fetcher() {
-  KConfigGroup config(KGlobal::config(), m_configGroup);
-  config.writeEntry("Uuid", m_uuid);
-  saveConfigHook(config);
+  saveConfig();
 }
 
 int Fetcher::collectionType() const {
@@ -114,6 +112,15 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
   m_uuid = s;
   // be sure to read config for subclass
   readConfigHook(config_);
+}
+
+void Fetcher::saveConfig() {
+  if(m_configGroup.isEmpty()) {
+    return;
+  }
+  KConfigGroup config(KGlobal::config(), m_configGroup);
+  config.writeEntry("Uuid", m_uuid);
+  saveConfigHook(config);
 }
 
 Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {

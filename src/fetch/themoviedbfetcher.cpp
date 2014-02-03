@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2014 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,27 +22,35 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "themoviedbfetcher.h"
-#include "../translators/xslthandler.h"
-#include "../translators/tellicoimporter.h"
+#include "../collections/videocollection.h"
 #include "../gui/combobox.h"
+#include "../gui/guiproxy.h"
+#include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
 #include <KConfigGroup>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
-#include <QDomDocument>
 #include <QTextCodec>
+
+#ifdef HAVE_QJSON
+#include <qjson/serializer.h>
+#include <qjson/parser.h>
+#endif
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
   static const char* THEMOVIEDB_API_URL = "http://api.themoviedb.org";
-  static const char* THEMOVIEDB_API_VERSION = "2.1";
+  static const char* THEMOVIEDB_API_VERSION = "3";
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
 }
 
@@ -50,12 +58,11 @@ using namespace Tellico;
 using Tellico::Fetch::TheMovieDBFetcher;
 
 TheMovieDBFetcher::TheMovieDBFetcher(QObject* parent_)
-    : XMLFetcher(parent_)
+    : Fetcher(parent_)
+    , m_started(false)
     , m_locale(QLatin1String("en"))
-    , m_needPersonId(false)
     , m_apiKey(QLatin1String(THEMOVIEDB_API_KEY)) {
-  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("tmdb2tellico.xsl"));
+  //  setLimit(THEMOVIEDB_MAX_RETURNS_TOTAL);
 }
 
 TheMovieDBFetcher::~TheMovieDBFetcher() {
@@ -65,9 +72,17 @@ QString TheMovieDBFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-// http://api.themoviedb.org/2.1/terms-of-use
+// https://www.themoviedb.org/about/api-terms
 QString TheMovieDBFetcher::attribution() const {
   return QString::fromLatin1("This product uses the TMDb API but is not endorsed or certified by TMDb.");
+}
+
+bool TheMovieDBFetcher::canSearch(FetchKey k) const {
+#ifdef HAVE_QJSON
+  return k == Title;
+#else
+  return false;
+#endif
 }
 
 bool TheMovieDBFetcher::canFetch(int type) const {
@@ -83,146 +98,113 @@ void TheMovieDBFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_locale = k.toLower();
   }
+  k = config_.readEntry("ImageBase");
+  if(!k.isEmpty()) {
+    m_imageBase = k;
+  }
+  m_serverConfigDate = config_.readEntry("ServerConfigDate", QDate());
 }
 
-KUrl TheMovieDBFetcher::searchUrl() {
+void TheMovieDBFetcher::saveConfigHook(KConfigGroup& config_) {
+  if(!m_serverConfigDate.isNull()) {
+    config_.writeEntry("ServerConfigDate", m_serverConfigDate);
+  }
+  config_.writeEntry("ImageBase", m_imageBase);
+  config_.sync();
+}
+
+void TheMovieDBFetcher::search() {
+  if(m_imageBase.isEmpty() || m_serverConfigDate.daysTo(QDate::currentDate()) > 7) {
+    readConfiguration();
+  }
+  continueSearch();
+}
+
+void TheMovieDBFetcher::continueSearch() {
+#ifdef HAVE_QJSON
+  m_started = true;
+
   if(m_apiKey.isEmpty()) {
     myDebug() << "empty API key";
-    return KUrl();
+    stop();
+    return;
   }
 
   KUrl u(THEMOVIEDB_API_URL);
   u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
-  QString queryPath;
 
   switch(request().key) {
     case Title:
-      queryPath = QString::fromLatin1("/Movie.search/%1/xml/%2/%3").arg(m_locale, m_apiKey, request().value);
-      break;
-
-    case Person:
-      queryPath = QString::fromLatin1("/Person.search/%1/xml/%2/%3").arg(m_locale, m_apiKey, request().value);
-      m_needPersonId = true;
+      u.addPath(QLatin1String("/search/movie"));
+      u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+      u.addQueryItem(QLatin1String("language"), m_locale);
+      u.addQueryItem(QLatin1String("query"), request().value);
       break;
 
     default:
       myWarning() << "key not recognized:" << request().key;
-      return KUrl();
-  }
-
-  u.addPath(queryPath);
-
-//  myDebug() << "url:" << u.url();
-  return u;
-}
-
-void TheMovieDBFetcher::resetSearch() {
-  m_needPersonId = false;
-  m_total = -1;
-}
-
-void TheMovieDBFetcher::parseData(QByteArray& data_) {
-  if(m_total == -1) {
-    QDomDocument dom;
-    if(!dom.setContent(data_, false)) {
-      myWarning() << "server did not return valid XML.";
-      return;
-    }
-    // total is /resp/fetchresults/@numResults
-    QDomNode n = dom.documentElement().namedItem(QLatin1String("opensearch:totalResults"));
-    QDomElement e = n.toElement();
-    if(!e.isNull()) {
-      m_total = e.text().toInt();
-//      myDebug() << "total = " << m_total;
-    }
-    if(m_total == 0) {
-      myDebug() << "no results";
       stop();
       return;
-    }
-
-    if(m_needPersonId) {
-      m_total = -1;
-      m_needPersonId = false;
-
-      // for now, find the person with the highest popularity and "lowest" score
-      QDomNode finalPerson;
-      int bestTotal = 0;
-
-      QDomNode person = dom.documentElement().namedItem(QLatin1String("people"))
-                                             .namedItem(QLatin1String("person"));
-      while(!person.isNull()) {
-        const int pop = person.namedItem(QLatin1String("popularity")).toElement().text().toInt();
-        const int score = person.namedItem(QLatin1String("score")).toElement().text().toInt();
-        const int total = 100*pop + 100-score;
-        if(total > bestTotal) {
-          bestTotal = total;
-          finalPerson = person;
-//          myDebug() << "New total:" << total;
-        }
-        person = person.nextSibling();
-      }
-      n = finalPerson.namedItem(QLatin1String("id"));
-      e = n.toElement();
-      if(e.isNull()) {
-        myWarning() << "no person id found";
-        stop();
-        return;
-      }
-      KUrl u(THEMOVIEDB_API_URL);
-      u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
-      u.addPath(QString::fromLatin1("/Person.getInfo/%1/xml/%2/%3").arg(m_locale, m_apiKey, e.text()));
-//      myDebug() << u.url();
-      // quiet
-      data_ = FileHandler::readXMLFile(u, true).toUtf8();
-    }
   }
 
-  // not sure how to specify start in the REST url
-  //  m_hasMoreResults = m_start <= m_total;
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(GUI::Proxy::widget());
+  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+#else
+  stop();
+#endif
 }
 
-Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
-  Q_ASSERT(entry_);
+void TheMovieDBFetcher::stop() {
+  if(!m_started) {
+    return;
+  }
+  if(m_job) {
+    m_job->kill();
+    m_job = 0;
+  }
+  m_started = false;
+  emit signalDone(this);
+}
 
-  QString release = entry_->field(QLatin1String("tmdb-id"));
-  if(release.isEmpty()) {
-    return entry_;
+Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
+  Data::EntryPtr entry = m_entries.value(uid_);
+  if(!entry) {
+    myWarning() << "no entry in dict";
+    return Data::EntryPtr();
   }
 
-  KUrl u(THEMOVIEDB_API_URL);
-  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
-  u.addPath(QString::fromLatin1("/Movie.getInfo/%1/xml/%2/%3").arg(m_locale, m_apiKey, release));
-
-  // quiet
-  QString output = FileHandler::readXMLFile(u, true);
+#ifdef HAVE_QJSON
+  QString id = entry->field(QLatin1String("tmdb-id"));
+  if(!id.isEmpty()) {
+    // quiet
+    KUrl u(THEMOVIEDB_API_URL);
+    u.setPath(QString::fromLatin1("%1/movie/%2")
+              .arg(QLatin1String(THEMOVIEDB_API_VERSION), id));
+    u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+    u.addQueryItem(QLatin1String("language"), m_locale);
+    u.addQueryItem(QLatin1String("append_to_response"),
+                   QLatin1String("alternative_titles,credits"));
+    QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
-  myWarning() << "Remove output debug from themoviedbfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test2.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t.setCodec("UTF-8");
-    t << output;
+    myWarning() << "Remove debug2 from themoviedbfetcher.cpp";
+    QFile f(QString::fromLatin1("/tmp/test2.json"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t.setCodec("UTF-8");
+      t << data;
+    }
+    f.close();
+#endif
+    QJson::Parser parser;
+    populateEntry(entry, parser.parse(data).toMap(), true);
   }
-  f.close();
 #endif
 
-  Import::TellicoImporter imp(xsltHandler()->applyStylesheet(output));
-  // be quiet when loading images
-  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
-  Data::CollPtr coll = imp.collection();
-  if(!coll) {
-    myWarning() << "no collection pointer";
-    return entry_;
-  }
+  // don't want to include TMDb ID field
+  entry->setField(QLatin1String("tmdb-id"), QString());
 
-  if(coll->entryCount() > 1) {
-    myDebug() << "weird, more than one entry found";
-  }
-
-  // don't want to include id
-  coll->removeField(QLatin1String("tmdb-id"));
-  return coll->entries().front();
+  return entry;
 }
 
 Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -231,6 +213,194 @@ Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr ent
     return FetchRequest(Title, title);
   }
   return FetchRequest();
+}
+
+void TheMovieDBFetcher::slotComplete(KJob* job_) {
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
+#ifdef HAVE_QJSON
+//  myDebug();
+
+  if(job->error()) {
+    job->ui()->showErrorMessage();
+    stop();
+    return;
+  }
+
+  QByteArray data = job->data();
+  if(data.isEmpty()) {
+    myDebug() << "no data";
+    stop();
+    return;
+  }
+
+#if 0
+  myWarning() << "Remove debug from themoviedbfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
+
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  // always add the tmdb-id for fetchEntryHook
+  Data::FieldPtr field(new Data::Field(QLatin1String("tmdb-id"), QLatin1String("TMDb ID"), Data::Field::Line));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
+
+  if(optionalFields().contains(QLatin1String("tmdb"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("tmdb"), i18n("TMDb Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QLatin1String("imdb"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QLatin1String("alttitle"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
+    field->setFormatType(FieldFormat::FormatTitle);
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QLatin1String("origtitle"))) {
+    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
+    f->setFormatType(FieldFormat::FormatTitle);
+    coll->addField(f);
+  }
+
+  QJson::Parser parser;
+  QVariantMap result = parser.parse(data).toMap();
+
+  QVariantList resultList = result.value(QLatin1String("results")).toList();
+  if(resultList.isEmpty()) {
+    myDebug() << "no results";
+    stop();
+    return;
+  }
+
+  foreach(const QVariant& result, resultList) {
+  //  myDebug() << "found result:" << result;
+
+    Data::EntryPtr entry(new Data::Entry(coll));
+    populateEntry(entry, result.toMap(), false);
+
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    m_entries.insert(r->uid, entry);
+    emit signalResultFound(r);
+  }
+
+#endif
+  stop();
+}
+
+void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
+  entry_->setField(QLatin1String("tmdb-id"), value(resultMap_, "id"));
+  entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
+  entry_->setField(QLatin1String("year"),  value(resultMap_, "release_date").left(4));
+
+  QVariantList crewList = resultMap_.value(QLatin1String("credits")).toMap()
+                                    .value(QLatin1String("crew")).toList();
+  foreach(const QVariant& crew, crewList) {
+    QVariantMap crewMap = crew.toMap();
+    const QString job = value(crewMap, "job");
+    if(job == QLatin1String("Director")) {
+      entry_->setField(QLatin1String("director"), value(crewMap, "name"));
+    } else if(job == QLatin1String("Producer")) {
+      entry_->setField(QLatin1String("producer"), value(crewMap, "name"));
+    } else if(job == QLatin1String("Screenplay")) {
+      entry_->setField(QLatin1String("writer"), value(crewMap, "name"));
+    } else if(job == QLatin1String("Original Music Composer")) {
+      entry_->setField(QLatin1String("composer"), value(crewMap, "name"));
+    }
+  }
+
+  // if we only need cursory data, then we're done
+  if(!fullData_) {
+    return;
+  }
+
+  if(entry_->collection()->hasField(QLatin1String("tmdb"))) {
+    entry_->setField(QLatin1String("tmdb"), QLatin1String("http://www.themoviedb.org/movie/") + value(resultMap_, "id"));
+  }
+  if(entry_->collection()->hasField(QLatin1String("imdb"))) {
+    entry_->setField(QLatin1String("imdb"), QLatin1String("http://www.imdb.com/title/") + value(resultMap_, "imdb_id"));
+  }
+  if(entry_->collection()->hasField(QLatin1String("origtitle"))) {
+    entry_->setField(QLatin1String("origtitle"), value(resultMap_, "original_title"));
+  }
+  if(entry_->collection()->hasField(QLatin1String("alttitle"))) {
+    QStringList atitles;
+    foreach(const QVariant& atitle, resultMap_.value(QLatin1String("alternative_titles")).toMap()
+                                               .value(QLatin1String("titles")).toList()) {
+      atitles << value(atitle.toMap(), "title");
+    }
+    entry_->setField(QLatin1String("alttitle"), atitles.join(FieldFormat::rowDelimiterString()));
+  }
+
+  QStringList actors;
+  QVariantList castList = resultMap_.value(QLatin1String("credits")).toMap()
+                                    .value(QLatin1String("cast")).toList();
+  foreach(const QVariant& cast, castList) {
+    QVariantMap castMap = cast.toMap();
+    actors << value(castMap, "name") + FieldFormat::columnDelimiterString() + value(castMap, "character");
+  }
+  entry_->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
+
+  QStringList studios;
+  foreach(const QVariant& studio, resultMap_.value(QLatin1String("production_companies")).toList()) {
+    studios << value(studio.toMap(), "name");
+  }
+  entry_->setField(QLatin1String("studio"), studios.join(FieldFormat::delimiterString()));
+
+  QStringList countries;
+  foreach(const QVariant& country, resultMap_.value(QLatin1String("production_countries")).toList()) {
+    QString name = value(country.toMap(), "name");
+    if(name == QLatin1String("United States of America")) {
+      name = QLatin1String("USA");
+    }
+    countries << name;
+  }
+  entry_->setField(QLatin1String("nationality"), countries.join(FieldFormat::delimiterString()));
+
+  QStringList genres;
+  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
+    genres << value(genre.toMap(), "name");
+  }
+  entry_->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
+
+  // hard-coded poster size for now
+  QString cover = m_imageBase + QLatin1String("w342") + value(resultMap_, "poster_path");
+  entry_->setField(QLatin1String("cover"), cover);
+
+  entry_->setField(QLatin1String("running-time"), value(resultMap_, "runtime"));
+  entry_->setField(QLatin1String("plot"), value(resultMap_, "overview"));
+}
+
+void TheMovieDBFetcher::readConfiguration() {
+  KUrl u(THEMOVIEDB_API_URL);
+  u.setPath(QString::fromLatin1("%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
+  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+
+  QByteArray data = FileHandler::readDataFile(u, true);
+#if 0
+  myWarning() << "Remove debug3 from themoviedbfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test3.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
+
+  QJson::Parser parser;
+  QVariantMap resultMap = parser.parse(data).toMap();
+
+  m_imageBase = value(resultMap.value(QLatin1String("images")).toMap(), "base_url");
+  m_serverConfigDate = QDate::currentDate();
 }
 
 Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) const {
@@ -250,6 +420,7 @@ Tellico::StringHash TheMovieDBFetcher::allOptionalFields() {
   hash[QLatin1String("tmdb")] = i18n("TMDb Link");
   hash[QLatin1String("imdb")] = i18n("IMDb Link");
   hash[QLatin1String("alttitle")] = i18n("Alternative Titles");
+  hash[QLatin1String("origtitle")] = i18n("Original Title");
   return hash;
 }
 
@@ -327,6 +498,20 @@ QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
 
 void TheMovieDBFetcher::ConfigWidget::slotLangChanged() {
   emit signalName(preferredName());
+}
+
+// static
+QString TheMovieDBFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else {
+    return QString();
+  }
 }
 
 #include "themoviedbfetcher.moc"

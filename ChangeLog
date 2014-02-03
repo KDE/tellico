@@ -1,3 +1,7 @@
+2014-01-31  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated TheMovieDB fetcher to API version 3.
+
 2014-01-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug in IMDB fetcher (Bug 330591).

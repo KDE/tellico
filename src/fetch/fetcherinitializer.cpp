@@ -97,12 +97,12 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GoogleScholarFetcher> registerGoogle(GoogleScholar);
   RegisterFetcher<Fetch::DiscogsFetcher> registerDiscogs(Discogs);
   RegisterFetcher<Fetch::WineComFetcher> registerWine(WineCom);
-  RegisterFetcher<Fetch::TheMovieDBFetcher> registerTMDB(TheMovieDB);
   RegisterFetcher<Fetch::MusicBrainzFetcher> registerMB(MusicBrainz);
   RegisterFetcher<Fetch::GiantBombFetcher> registerBomb(GiantBomb);
   RegisterFetcher<Fetch::OpenLibraryFetcher> registerOpenLibrary(OpenLibrary);
   RegisterFetcher<Fetch::MultiFetcher> registerMulti(Multiple);
 #ifdef HAVE_QJSON
+  RegisterFetcher<Fetch::TheMovieDBFetcher> registerTMDB(TheMovieDB);
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
   RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
   RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
