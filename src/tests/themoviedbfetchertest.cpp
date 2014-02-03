@@ -49,10 +49,13 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Superman Returns"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros. Pictures"));
+  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros. Pictures; Dark Castle"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2006"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action"));
+  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action; adventure; fantasy; science fiction"));
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("Bryan Singer"));
+  m_fieldValues.insert(QLatin1String("producer"), QLatin1String("Bryan Singer"));
+  m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("154"));
+  m_fieldValues.insert(QLatin1String("nationality"), QLatin1String("USA"));
 }
 
 void TheMovieDBFetcherTest::testTitle() {
@@ -69,9 +72,12 @@ void TheMovieDBFetcherTest::testTitle() {
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
-    QVERIFY(result.contains(i.value().toLower()));
+    //    QVERIFY(result.contains(i.value().toLower()));
+    QCOMPARE(result, i.value().toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QVERIFY(!castList.isEmpty());
+  QCOMPARE(castList.at(0), QLatin1String("Kevin Spacey::Lex Luthor"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
@@ -94,29 +100,18 @@ void TheMovieDBFetcherTest::testTitleFr() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QHashIterator<QString, QString> i(m_fieldValues);
-  while(i.hasNext()) {
-    i.next();
-    QString result = entry->field(i.key()).toLower();
-    QVERIFY(result.contains(i.value().toLower()));
+  QStringList fields = QStringList() << QLatin1String("title")
+                                     << QLatin1String("studio")
+                                     << QLatin1String("year")
+                                     << QLatin1String("title");
+  foreach(const QString& field, fields) {
+    QString result = entry->field(field).toLower();
+    QCOMPARE(result, m_fieldValues.value(field).toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QVERIFY(!castList.isEmpty());
+  QCOMPARE(castList.at(0), QLatin1String("Kevin Spacey::Lex Luthor"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 
-void TheMovieDBFetcherTest::testPerson() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Person,
-                                       QLatin1String("bryan singer"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheMovieDBFetcher(this));
-
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
-
-  QVERIFY(results.size() > 0);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
-  QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
-}

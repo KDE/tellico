@@ -127,6 +127,7 @@ public:
    * Reads the config for the widget, given a config group.
    */
   void readConfig(const KConfigGroup& config, const QString& groupName);
+  void saveConfig();
   /**
    * Returns a widget for modifying the fetcher's config.
    */

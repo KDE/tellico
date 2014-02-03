@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2014 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,13 +25,14 @@
 #ifndef TELLICO_THEMOVIEDBFETCHER_H
 #define TELLICO_THEMOVIEDBFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
 
 #include <klineedit.h>
 
 #include <QPointer>
+#include <QDate>
 
 class KJob;
 namespace KIO {
@@ -51,7 +52,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class TheMovieDBFetcher : public XMLFetcher {
+class TheMovieDBFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -66,10 +67,15 @@ public:
    */
   virtual QString source() const;
   virtual QString attribution() const;
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person; }
+  virtual bool isSearching() const { return m_started; }
+  virtual bool canSearch(FetchKey k) const;
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return TheMovieDB; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
+  virtual void saveConfigHook(KConfigGroup& config);
+  virtual void continueSearch();
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -83,19 +89,26 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
+private slots:
+  void slotComplete(KJob* job);
+
 private:
+  virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
-  virtual KUrl searchUrl();
-  virtual void parseData(QByteArray& data);
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
+  void readConfiguration();
 
-  int m_total;
+  static QString value(const QVariantMap& map, const char* name);
+
+  bool m_started;
+
   QString m_locale;
-
-  bool m_needPersonId;
-
+  QDate m_serverConfigDate;
   QString m_apiKey;
+  QString m_imageBase;
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
 };
 
 class TheMovieDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
