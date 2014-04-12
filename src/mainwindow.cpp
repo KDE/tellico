@@ -1024,13 +1024,12 @@ bool MainWindow::querySaveModified() {
 bool MainWindow::queryClose() {
   // in case we're still loading the images, cancel that
   Data::Document::self()->cancelImageWriting();
-  return m_editDialog->queryModified() && querySaveModified();
-}
-
-bool MainWindow::queryExit() {
-  ImageFactory::clean(true);
-  saveOptions();
-  return true;
+  const bool willClose = m_editDialog->queryModified() && querySaveModified();
+  if (willClose) {
+    ImageFactory::clean(true);
+    saveOptions();
+  }
+  return willClose;
 }
 
 void MainWindow::slotFileNew(int type_) {
@@ -1329,9 +1328,7 @@ void MainWindow::slotFilePrint() {
 void MainWindow::slotFileQuit() {
   slotStatusMsg(i18n("Exiting..."));
 
-  // this gets called in queryExit() anyway
-  //saveOptions();
-  close();
+  close(); // will call queryClose()
 
   StatusBar::self()->clearStatus();
 }

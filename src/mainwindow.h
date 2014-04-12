@@ -350,12 +350,6 @@ private:
    */
   bool queryClose();
   /**
-   * Called before the very last window is closed, either by the user
-   * or indirectly by the session manager.
-   * @see KMainWindow::queryExit
-   */
-  bool queryExit();
-  /**
    * Actual method used when opening a URL. Updating for the list views is turned off
    * as well as sorting, in order to more quickly load the document.
    *
