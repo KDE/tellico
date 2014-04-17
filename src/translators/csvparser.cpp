@@ -53,6 +53,7 @@ public:
   }
 
   struct csv_parser* parser;
+  QString str;
   QTextStream* stream;
   QStringList tokens;
   bool done;
@@ -75,7 +76,8 @@ void CSVParser::setDelimiter(const QString& s) {
 
 void CSVParser::reset(QString str) {
   delete d->stream;
-  d->stream = new QTextStream(&str);
+  d->str = str;
+  d->stream = new QTextStream(&d->str);
 }
 
 bool CSVParser::hasNext() const {
