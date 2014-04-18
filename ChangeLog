@@ -1,3 +1,7 @@
+2014-04-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed CSV importer bug, causing a hang (Bug 329677, Debian Bug 729503)
+
 2014-01-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated TheMovieDB fetcher to API version 3.

@@ -33,6 +33,7 @@
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 
 #include <KStandardDirs>
 
@@ -73,6 +74,9 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
+  QVERIFY(!img.isNull());
 }
 
 void DiscogsFetcherTest::testPerson() {
@@ -89,6 +93,9 @@ void DiscogsFetcherTest::testPerson() {
   QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
+  QVERIFY(!img.isNull());
 }
 
 void DiscogsFetcherTest::testKeyword() {
@@ -106,4 +113,7 @@ void DiscogsFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
+  QVERIFY(!img.isNull());
 }
