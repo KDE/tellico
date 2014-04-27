@@ -77,7 +77,7 @@ void TheMovieDBFetcherTest::testTitle() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Kevin Spacey::Lex Luthor"));
+  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Superman / Clark Kent"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
@@ -110,7 +110,7 @@ void TheMovieDBFetcherTest::testTitleFr() {
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Kevin Spacey::Lex Luthor"));
+  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Superman / Clark Kent"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
