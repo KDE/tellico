@@ -1,3 +1,7 @@
+2014-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Disabled Discogs image fetching since OAuth is now required.
+
 2014-04-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed CSV importer bug, causing a hang (Bug 329677, Debian Bug 729503)

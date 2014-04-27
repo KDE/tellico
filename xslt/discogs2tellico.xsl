@@ -193,16 +193,17 @@
    </nationality>
   </nationalitys>
 
+  <!-- Discogs now requires OAuth and user accounts for images
   <cover>
    <xsl:for-each select="images/image">
-    <xsl:sort select="type"/> <!-- 'primary' before 'secondary' -->
+    <xsl:sort select="type"/>
     <xsl:sort select="height*width" data-type="number" order="descending"/>
     <xsl:if test="position() = 1">
-     <xsl:value-of select="@uri150"/><!-- I wish I could put a 'break' statement here -->
-     <!-- use small image -->
+     <xsl:value-of select="@uri150"/>
     </xsl:if>
    </xsl:for-each>
   </cover>
+  -->
 
  </entry>
 </xsl:template>
