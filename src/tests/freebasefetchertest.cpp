@@ -62,26 +62,46 @@ void FreebaseFetcherTest::initTestCase() {
   coding.insert(QLatin1String("publisher"), QLatin1String("Addison-Wesley"));
   coding.insert(QLatin1String("pub_year"), QLatin1String("2004"));
   coding.insert(QLatin1String("isbn"), QLatin1String("9780321113580"));
-  coding.insert(QLatin1String("author"), QLatin1String("Herb Sutter"));
+  // how does Freebase lose the author????
+//  coding.insert(QLatin1String("author"), QLatin1String("Herb Sutter"));
   coding.insert(QLatin1String("series"), QLatin1String("C++ In-Depth Series"));
   coding.insert(QLatin1String("lccn"), QLatin1String("2004022605"));
   coding.insert(QLatin1String("binding"), QLatin1String("Trade Paperback"));
   coding.insert(QLatin1String("pages"), QLatin1String("220"));
 
   m_fieldValues.insert(QLatin1String("coding"), coding);
+
+  QHash<QString, QString> amol;
+  amol.insert(QLatin1String("title"), QLatin1String("a memory of light"));
+  amol.insert(QLatin1String("publisher"), QLatin1String("Tor Books"));
+  amol.insert(QLatin1String("pub_year"), QLatin1String("2013"));
+  amol.insert(QLatin1String("isbn"), QLatin1String("9780765325952"));
+  amol.insert(QLatin1String("author"), QLatin1String("Robert Jordan; Brandon Sanderson"));
+  amol.insert(QLatin1String("series"), QLatin1String("The Wheel of Time"));
+  amol.insert(QLatin1String("binding"), QLatin1String("Hardback"));
+
+  m_fieldValues.insert(QLatin1String("amol"), amol);
 }
 
 void FreebaseFetcherTest::testBookTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       QLatin1String("c++ coding standards"));
+                                       QLatin1String("a memory of light"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
 
-  QCOMPARE(results.size(), 1);
+  QVERIFY(!results.isEmpty());
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr testEntry, results) {
+    if(!testEntry->field(QLatin1String("pub_year")).isEmpty()) {
+      entry = testEntry;
+      break;
+    }
+  }
+  QVERIFY(entry);
 
-  Tellico::Data::EntryPtr entry = results.at(0);
-  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("coding")));
+  //  Tellico::Data::EntryPtr entry = results.at(0);
+  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("amol")));
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
@@ -93,15 +113,24 @@ void FreebaseFetcherTest::testBookTitle() {
 
 void FreebaseFetcherTest::testBookAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
-                                       QLatin1String("herb sutter"));
+                                       QLatin1String("brandon sanderson"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 4);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 10);
 
-  QCOMPARE(results.size(), 3);
+  QCOMPARE(results.size(), 10);
 
-  Tellico::Data::EntryPtr entry = results.at(0);
-  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("coding")));
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr testEntry, results) {
+    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("9780765325952")) {
+      entry = testEntry;
+      break;
+    }
+  }
+  QVERIFY(entry);
+
+  //Tellico::Data::EntryPtr entry = results.at(0);
+  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("amol")));
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
@@ -113,7 +142,7 @@ void FreebaseFetcherTest::testBookAuthor() {
 
 void FreebaseFetcherTest::testISBN() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("9780321113580"));
+                                       QLatin1String("9780765325952"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FreebaseFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -121,7 +150,7 @@ void FreebaseFetcherTest::testISBN() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("coding")));
+  QHashIterator<QString, QString> i(m_fieldValues.value(QLatin1String("amol")));
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
@@ -206,7 +235,7 @@ void FreebaseFetcherTest::testMovieTitle() {
 
   QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("the man from snowy river"));
   QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("George T. Miller"));
-  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Simon Wincer"));
+  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Geoff Burrowes"));
   QCOMPARE(entry->field(QLatin1String("writer")), QLatin1String("Cul Cullen; John Dixon"));
   QCOMPARE(entry->field(QLatin1String("composer")), QLatin1String("Bruce Rowland"));
   QCOMPARE(entry->field(QLatin1String("studio")), QLatin1String("20th Century Fox"));
@@ -215,7 +244,7 @@ void FreebaseFetcherTest::testMovieTitle() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1982"));
   QStringList genres = Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre")));
   QVERIFY(genres.contains(QLatin1String("Western")));
-  QVERIFY(genres.contains(QLatin1String("Action/Adventure")));
+  QVERIFY(genres.contains(QLatin1String("Adventure Film")));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("Australia"));
   // freebase cover went missing
   //   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
@@ -241,8 +270,8 @@ void FreebaseFetcherTest::testMoviePerson_data() {
   QTest::addColumn<QString>("person");
   QTest::newRow("director") << QL1("George Miller");
   QTest::newRow("producer") << QL1("Simon Wincer");
-  QTest::newRow("writer")   << QL1("Banjo Paterson");
   QTest::newRow("composer") << QL1("Bruce Rowland");
+  QTest::newRow("writer")   << QL1("Cul Cullen");
 }
 
 void FreebaseFetcherTest::testMusicTitle() {
@@ -297,7 +326,7 @@ void FreebaseFetcherTest::testGameTitle() {
   QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie Studios"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game; Racing video game"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game"));
   // freebase cover went missing
   //   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
