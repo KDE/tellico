@@ -30,6 +30,7 @@
 #include "../core/filehandler.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
+#include "../images/imageinfo.h"
 #include "../tellico_kernel.h"
 #include "../tellico_utils.h"
 #include "../progressmanager.h"
@@ -456,7 +457,8 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
       // try writing
       bool success = false;
       if(useTemp) {
-        success = ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
+        // for link-only images, no need to write it out
+        success = ImageFactory::imageInfo(id).linkOnly || ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
       } else {
         const Data::Image& img = ImageFactory::imageById(id);
         KUrl target = imgDir;

@@ -1,6 +1,11 @@
+2014-05-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fix bug with writing out link-only images in HTML exporter (Bug 330649).
+
 2014-05-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed character encoding in Allocine fetcher (Bug 334527).
+	* Removed IMDb country choice since it's now unavailable (Bug 330641).
 
 2014-04-27  Robby Stephenson  <robby@periapsis.org>
 

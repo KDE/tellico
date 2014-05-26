@@ -195,7 +195,7 @@ private slots:
 
 private:
   KLineEdit* m_hostEdit;
-  GUI::ComboBox* m_langCombo;
+  //GUI::ComboBox* m_langCombo;
   QCheckBox* m_fetchImageCheck;
   KIntSpinBox* m_numCast;
 };

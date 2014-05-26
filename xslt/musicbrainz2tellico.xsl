@@ -128,16 +128,18 @@
     <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink']">
      <xsl:value-of select="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink'][1]/@target"/>
     </xsl:when>
-    <!-- most musicbrainz items have Amazon  ASIN values, but not all point got valid images
+    <!-- most musicbrainz items have Amazon ASIN values, but not all point got valid images
          if the AmazonAsin Url is set, then it likely does -->
     <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='AmazonAsin']">
      <xsl:value-of select="concat('http://ecx.images-amazon.com/images/P/',mb:asin,'.01.MZZZZZZZ.jpg')"/>
     </xsl:when>
     <!-- TODO: when switching to ws/2, check cover-art-archive element for existence of front cover art
                before setting the value, so an extra http call is not done -->
+    <!--
     <xsl:otherwise>
      <xsl:value-of select="concat('http://coverartarchive.org/release/',@id,'/front')"/>
     </xsl:otherwise>
+    -->
    </xsl:choose>
   </cover>
 

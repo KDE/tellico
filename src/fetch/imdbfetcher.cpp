@@ -286,8 +286,10 @@ bool IMDBFetcher::canSearch(FetchKey k) const {
 }
 
 void IMDBFetcher::readConfigHook(const KConfigGroup& config_) {
+  /*
   const int lang = config_.readEntry("Lang", int(EN));
   m_lang = static_cast<Lang>(lang);
+  */
   if(m_name.isEmpty()) {
     m_name = langData(m_lang).siteTitle;
   }
@@ -1581,6 +1583,8 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   l->setColumnStretch(1, 10);
 
   int row = -1;
+  /*
+  IMDB.fr and others now redirects to imdb.com
   QLabel* label = new QLabel(i18n("Country: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
@@ -1598,13 +1602,14 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   label->setWhatsThis(w);
   m_langCombo->setWhatsThis(w);
   label->setBuddy(m_langCombo);
-
-  label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
+  */
+  
+  QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_numCast = new KIntSpinBox(0, 99, 1, 10, optionsWidget());
   connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_numCast, row, 1);
-  w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
+  QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
   label->setWhatsThis(w);
   m_numCast->setWhatsThis(w);
   label->setBuddy(m_numCast);
@@ -1624,26 +1629,27 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   KAcceleratorManager::manage(optionsWidget());
 
   if(fetcher_) {
-    m_langCombo->setCurrentData(fetcher_->m_lang);
+    // m_langCombo->setCurrentData(fetcher_->m_lang);
     m_numCast->setValue(fetcher_->m_numCast);
     m_fetchImageCheck->setChecked(fetcher_->m_fetchImages);
   } else { //defaults
-    m_langCombo->setCurrentData(EN);
+    // m_langCombo->setCurrentData(EN);
     m_numCast->setValue(10);
     m_fetchImageCheck->setChecked(true);
   }
 }
 
 void IMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  int n = m_langCombo->currentData().toInt();
-  config_.writeEntry("Lang", n);
+  // int n = m_langCombo->currentData().toInt();
+  // config_.writeEntry("Lang", n);
   config_.writeEntry("Host", QString()); // clear old host entry
   config_.writeEntry("Max Cast", m_numCast->value());
   config_.writeEntry("Fetch Images", m_fetchImageCheck->isChecked());
 }
 
 QString IMDBFetcher::ConfigWidget::preferredName() const {
-  return IMDBFetcher::langData(m_langCombo->currentData().toInt()).siteTitle;
+  // return IMDBFetcher::langData(m_langCombo->currentData().toInt()).siteTitle;
+  return IMDBFetcher::langData(EN).siteTitle;
 }
 
 void IMDBFetcher::ConfigWidget::slotSiteChanged() {
