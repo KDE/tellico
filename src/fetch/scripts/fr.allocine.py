@@ -237,8 +237,8 @@ class AlloCineParser:
 		self.__regExps = {
 			'title' 	: '<div id="title.*?<span.*?>(?P<title>.+?)</span>',
 			'dirs'		: """alis.*?par.*?<a.*?><span.*?>(?P<step1>.+?)</span></a>""",
-			'nat'		: 'Nationalit.*?</span>(?P<nat>.+?)</div',
-			'genres' 	: 'Genre</span>(?P<step1>.+?)</div>',
+			'nat'		: 'Nationalit.*?</span>(?P<nat>.+?)</td',
+			'genres' 	: '<span class="lighten">.*?Genre.*?</span>(?P<step1>.+?)</td',
 			'studio' 	: 'Distributeur</div>(?P<step1>.+?)</td',
 			'time' 		: 'Dur.*?e *?:*?.*?(?P<hours>[0-9])h *(?P<mins>[0-9]*).*?Ann',
 			'year' 		: 'Ann.*?e de production.*?<span.*?>(?P<year>[0-9]{4})</span>',
@@ -249,7 +249,7 @@ class AlloCineParser:
 
 		self.__castRegExps = {
 #			'roleactor'		: '<li.*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p>.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
-			'roleactor'		: '<li[^>]*?itemprop="actors".*?>.*?<span itemprop="name">(.*?)</span>.*?<p.*?R.*?le : (?P<role>.*?)</p>.*?</li>',
+			'roleactor'		: '<li.*?\/personne\/.*?">(.*?)</span>.*?<p.*?R.*?le : (?P<role>.*?)</p>.*?</li',
 			'prods'			  : '<td>[\r\n\t]*Producteur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
 			'scens'			  : '<td>[\r\n\t]*Sc.*?nariste[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
 			'comps'			  : '<td>[\r\n\t]*Compositeur[\r\n\t]*</td>.*?<span.*?>(.*?)</span>',
@@ -399,9 +399,11 @@ class AlloCineParser:
 		subset = re.search(r'Acteurs et actrices.*$', self.__data, re.S | re.I)
 		if not subset: return data
 		subset = subset.group(0)
+                #print subset
 		roleactor = re.findall(self.__castRegExps['roleactor'], subset, re.S | re.I)
 		for ra in roleactor:
-			data['actors'].append(ra[0])
+                        #print ra
+			data['actors'].append(re.sub(r'([\r\n\t]+)', '', ra[0]))
 			data['actors'].append(re.sub(r'([\r\n\t]+)', '', ra[1]))
 
 		# Producers, Scenarists, Composers

@@ -406,14 +406,32 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
         entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
-        entry->setField(QLatin1String("isbn"),      value(resultMap, "isbn", "isbn"));
+        {
+          QString isbn = value(resultMap, "isbn", "isbn");
+          if(isbn.isEmpty()) {
+            isbn = value(resultMap, "/media_common/cataloged_instance/isbn13", "value");
+          }
+          entry->setField(QLatin1String("isbn"), isbn);
+        }
         entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
-        entry->setField(QLatin1String("lccn"),      value(resultMap, "LCCN"));
+        {
+          QString lccn = value(resultMap, "LCCN");
+          if(lccn.isEmpty()) {
+            lccn = value(resultMap, "/media_common/cataloged_instance/lccn", "value");
+          }
+          entry->setField(QLatin1String("lccn"), lccn);
+        }
         entry->setField(QLatin1String("author"),    value(resultMap, "work:book", "author"));
         entry->setField(QLatin1String("editor"),    value(resultMap, "work:book", "editor"));
         entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date").left(4));
-        entry->setField(QLatin1String("series"),    value(resultMap, "work:book", "part_of_series"));
+        {
+          const QString series = value(resultMap, "work:book", "part_of_series");
+          // some have duplicate values?
+          QStringList seriesList = FieldFormat::splitValue(series);
+          seriesList.removeDuplicates();
+          entry->setField(QLatin1String("series"), seriesList.join(FieldFormat::delimiterString()));
+        }
         entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
         entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
         entry->setField(QLatin1String("genre"), FieldFormat::capitalize(value(resultMap, "book", "genre")));
@@ -421,6 +439,8 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
           QString binding = value(resultMap, "binding");
           if(binding.toLower() == QLatin1String("hardcover")) {
             binding = i18n("Hardback");
+          } else if(binding.toLower() == QLatin1String("mass market paperback")) {
+            binding = i18n("Paperback");
           } else {
             binding = FieldFormat::capitalize(binding);
           }
@@ -639,13 +659,10 @@ QVariantList FreebaseFetcher::bookQueries() const {
   page_query.insert(QLatin1String("optional"), QLatin1String("optional"));
   query.insert(QLatin1String("number_of_pages"), page_query);
 
-  QVariantMap isbn_query;
-  isbn_query.insert(QLatin1String("type"), QLatin1String("/book/isbn"));
-  isbn_query.insert(QLatin1String("isbn"), QVariantList());
-  if(request().key != ISBN) {
-    isbn_query.insert(QLatin1String("optional"), QLatin1String("optional"));
-  }
-  query.insert(QLatin1String("isbn"), isbn_query);
+  QVariantMap media_query;
+  media_query.insert(QLatin1String("*"), QVariantList());
+  media_query.insert(QLatin1String("optional"), QLatin1String("optional"));
+  query.insert(QLatin1String("/media_common/cataloged_instance/isbn13"), media_query);
 
   QVariantList queries;
   switch(request().key) {
@@ -658,18 +675,22 @@ QVariantList FreebaseFetcher::bookQueries() const {
       // for now just check author, and need to use written_work topic_query
       {
         QVariantMap workQuery = query.value(QLatin1String("work:book")).toMap();
-
+        workQuery.remove(QLatin1String("*"));
+        
         QVariantMap authorSubQuery = workQuery;
         authorSubQuery.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
         QVariantMap editorSubquery = workQuery;
         editorSubquery.insert(QLatin1String("editor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
+        // create dummy namespaces so as not to clobber full request
+        // for books with multiple authors, for example, not doing
+        // this results in onlyone author being returned
         QVariantMap authorQuery = query;
-        authorQuery.insert(QLatin1String("work:book"), authorSubQuery);
+        authorQuery.insert(QLatin1String("work2:book"), authorSubQuery);
 
         QVariantMap editorQuery = query;
-        editorQuery.insert(QLatin1String("work:book"), editorSubquery);
+        editorQuery.insert(QLatin1String("work2:book"), editorSubquery);
 
         queries << authorQuery << editorQuery;
       }
@@ -677,21 +698,25 @@ QVariantList FreebaseFetcher::bookQueries() const {
 
     case ISBN:
       {
-        QVariantMap isbnQuery = query.value(QLatin1String("isbn")).toMap();
+        QVariantMap isbnQuery = query.value(QLatin1String("/media_common/cataloged_instance/isbn13")).toMap();
         // search for both ISBN10 and ISBN13
         QVariantList isbns;
         foreach(const QString& isbn, FieldFormat::splitValue(request().value)) {
           isbns << ISBNValidator::cleanValue(ISBNValidator::isbn10(isbn));
           isbns << ISBNValidator::cleanValue(ISBNValidator::isbn13(isbn));
         }
-        isbnQuery.insert(QLatin1String("isbn|="), isbns);
-        query.insert(QLatin1String("isbn"), isbnQuery);
+        isbnQuery.insert(QLatin1String("value|="), isbns);
+        //remove the wildcard and optional since the ISBN is known
+        isbnQuery.remove(QLatin1String("*"));
+        isbnQuery.remove(QLatin1String("optional"));
+        //insert with a different "namespace" to avoid clobbering the request
+        query.insert(QLatin1String("isbn:/media_common/cataloged_instance/isbn13"), isbnQuery);
       }
       queries << query;
       break;
 
     case LCCN:
-      query.insert(QLatin1String("LCCN"), LCCNValidator::formalize(request().value));
+      query.insert(QLatin1String("/media_common/cataloged_instance/lccn"), LCCNValidator::formalize(request().value));
       queries << query;
       break;
 
@@ -765,22 +790,23 @@ QVariantList FreebaseFetcher::movieQueries() const {
 
     case Person:
       {
+        // use a dummy namespace for all of these
         QVariantMap directorQuery = query;
-        directorQuery.insert(QLatin1String("directed_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        directorQuery.insert(QLatin1String("b:directed_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
         QVariantMap producerQuery = query;
-        producerQuery.insert(QLatin1String("produced_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        producerQuery.insert(QLatin1String("b:produced_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
         QVariantMap writerQuery = query;
-        writerQuery.insert(QLatin1String("written_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        writerQuery.insert(QLatin1String("b:written_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
         QVariantMap composerQuery = query;
-        composerQuery.insert(QLatin1String("music~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        composerQuery.insert(QLatin1String("b:music~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
 
         QVariantMap castSubquery;
         castSubquery.insert(QLatin1String("actor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
         QVariantMap castQuery = query;
-        // have to give it a dummy namespace so we get back all the actors
+        // have to give it a dummy namespace so we get back all the people
         castQuery.insert(QLatin1String("b:starring"), QVariantList() << castSubquery);
 
         queries << directorQuery << castQuery << producerQuery << writerQuery << composerQuery;

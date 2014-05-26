@@ -1,6 +1,14 @@
+2014-05-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed character encoding in Allocine fetcher (Bug 334527).
+
+2014-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Disabled Discogs image fetching since OAuth is now required.
+
 2014-04-17  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed CSV importer bug, causing a hang (Bug 329677, Debian Bug 729503)
+	* Fixed CSV importer bug, causing a hang (Bug 329677, Debian Bug 729503).
 
 2014-01-31  Robby Stephenson  <robby@periapsis.org>
 

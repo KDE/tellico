@@ -48,7 +48,7 @@ AllocineFetcherTest::AllocineFetcherTest() : AbstractFetcherTest() {
 }
 
 void AllocineFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerGame(Tellico::Data::Collection::Video, "video");
+  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   // since we use the importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
