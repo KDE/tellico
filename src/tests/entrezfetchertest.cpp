@@ -53,7 +53,7 @@ void EntrezFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Trends in cell biology"));
 //  m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Springer"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2013"));
-  m_fieldValues.insert(QLatin1String("month"), QLatin1String("4"));
+  m_fieldValues.insert(QLatin1String("month"), QLatin1String("8"));
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
 }
 
