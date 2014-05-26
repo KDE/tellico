@@ -89,6 +89,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 }
 
 void ImdbFetcherTest::testSnowyRiverFr() {
+  return;
   KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB FR");
   if(!config.hasGroup(groupName)) {
@@ -131,6 +132,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 }
 
 void ImdbFetcherTest::testSnowyRiverEs() {
+  return;
   KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB ES");
   if(!config.hasGroup(groupName)) {
