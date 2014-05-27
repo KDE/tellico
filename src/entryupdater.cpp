@@ -121,7 +121,7 @@ void EntryUpdater::slotStartNext() {
 
 void EntryUpdater::slotDone() {
   if(m_cancelled) {
-    myLog() << "cancelled";
+    //    myLog() << "already cancelled";
     QTimer::singleShot(500, this, SLOT(slotCleanup()));
     return;
   }

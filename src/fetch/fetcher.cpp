@@ -37,6 +37,7 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QUuid>
+#include <QPointer>
 
 using namespace Tellico::Fetch;
 using Tellico::Fetch::Fetcher;
@@ -124,8 +125,10 @@ void Fetcher::saveConfig() {
 }
 
 Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
+  QPointer<Fetcher> ptr(this);
   Data::EntryPtr entry = fetchEntryHook(uid_);
-  if(entry) {
+  // could be cancelled after fetching entry, check isSearching
+  if(ptr && entry && isSearching()) {
     // iterate over list of possible optional fields
     // and if the field is not included in the user-configured list
     // remove the field from the entry

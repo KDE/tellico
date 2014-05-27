@@ -159,6 +159,9 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
     stop();
     return;
   }
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
+  m_job = 0;
 
   if(m_total == -1) {
     QDomDocument dom;
