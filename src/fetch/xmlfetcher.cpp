@@ -89,7 +89,7 @@ void XMLFetcher::stop() {
 }
 
 void XMLFetcher::slotComplete(KJob* ) {
-//  myDebug();
+  Q_ASSERT(m_job);
   if(m_job->error()) {
     m_job->ui()->showErrorMessage();
     stop();
@@ -110,6 +110,9 @@ void XMLFetcher::slotComplete(KJob* ) {
     stop();
     return;
   }
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
+  m_job = 0;
 
 #if 0
   myWarning() << "Remove debug from xmlfetcher.cpp";

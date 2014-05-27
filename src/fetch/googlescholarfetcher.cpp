@@ -146,8 +146,8 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
-
-  // since the fetch is done, don't worry about holding the job pointer
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
   m_job = 0;
 
   const QString text = QString::fromUtf8(data, data.size());

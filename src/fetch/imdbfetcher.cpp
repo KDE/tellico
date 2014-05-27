@@ -432,6 +432,9 @@ void IMDBFetcher::slotComplete(KJob*) {
     stop();
     return;
   }
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
+  m_job = 0;
 
 #if 0
   myWarning() << "Remove debug from imdbfetcher.cpp";
@@ -443,9 +446,6 @@ void IMDBFetcher::slotComplete(KJob*) {
   }
   f.close();
 #endif
-
-  // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
 
   // a single result was found if we got redirected
   switch(request().key) {

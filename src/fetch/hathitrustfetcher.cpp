@@ -216,6 +216,9 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
     stop();
     return;
   }
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
+  m_job = 0;
 
 #if 0
   myWarning() << "Remove debug from hathitrustfetcher.cpp";
