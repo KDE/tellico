@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+  <id>tellico.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL_V2</project_license>
+  <name>Tellico</name>
+  <summary>Collection Manager</summary>
+  <description>
+    <p>Tellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc. </p>
+    <p>Features:</p>
+    <ul>
+      <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
+      <li>Supports user-defined custom collections</li>
+      <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
+      <li>Handles entries with multiple authors, genres, keywords, etc</li>
+      <li>Automatically formats titles and names</li>
+      <li>Supports collection searching and view filtering</li>
+      <li>Sorts and groups collection by various properties</li>
+      <li>Allows customizable entry templates through XSLT</li>
+      <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
+      <li>Exports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formats</li>
+      <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
+      <li>Imports CDDB data for cataloging audio CDs</li>
+      <li>Scans and imports audio file collections, such as mp3 or ogg</li>
+    </ul>
+  </description>
+  <url type="homepage">http://tellico-project.org/</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=tellico</url>
+  <url type="faq">http://tellico-project.org/faq</url>
+  <url type="help">http://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
+  <screenshots>
+    <screenshot type="default" width="867" height="627">
+      <image>http://kde.org/images/screenshots/tellico.png</image>
+    </screenshot>
+  </screenshots>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>tellico</binary>
+  </provides>
+</component>
