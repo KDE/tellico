@@ -2,11 +2,15 @@
 <component type="desktop">
   <id>tellico.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>GPL_V2</project_license>
+  <project_license>GPL-2.0+</project_license>
   <name>Tellico</name>
   <summary>Collection Manager</summary>
   <description>
-    <p>Tellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc. </p>
+    <p>
+      Tellico is an application for organizing your collections.
+      It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines.
+      It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.
+    </p>
     <p>Features:</p>
     <ul>
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
