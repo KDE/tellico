@@ -5,6 +5,7 @@
   <project_license>GPL-2.0+</project_license>
   <name>Tellico</name>
   <name xml:lang="ca">Tellico</name>
+  <name xml:lang="cs">Tellico</name>
   <name xml:lang="en-GB">Tellico</name>
   <name xml:lang="et">Tellico</name>
   <name xml:lang="nl">Tellico</name>
@@ -17,6 +18,7 @@
   <name xml:lang="x-test">xxTellicoxx</name>
   <summary>Collection Manager</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
+  <summary xml:lang="cs">Správce sbírek</summary>
   <summary xml:lang="en-GB">Collection Manager</summary>
   <summary xml:lang="et">Kogude haldur</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
@@ -46,6 +48,7 @@
     <p xml:lang="x-test">xxTellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.xx</p>
     <p>Features:</p>
     <p xml:lang="ca">Característiques:</p>
+    <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="et">Omadused:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
