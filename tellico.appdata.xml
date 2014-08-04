@@ -6,6 +6,7 @@
   <name>Tellico</name>
   <name xml:lang="ca">Tellico</name>
   <name xml:lang="cs">Tellico</name>
+  <name xml:lang="de">Tellico</name>
   <name xml:lang="en-GB">Tellico</name>
   <name xml:lang="et">Tellico</name>
   <name xml:lang="nl">Tellico</name>
@@ -19,6 +20,7 @@
   <summary>Collection Manager</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
   <summary xml:lang="cs">Správce sbírek</summary>
+  <summary xml:lang="de">Sammlungsverwaltung</summary>
   <summary xml:lang="en-GB">Collection Manager</summary>
   <summary xml:lang="et">Kogude haldur</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
