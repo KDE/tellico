@@ -195,7 +195,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY
 install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
 install(PROGRAMS tellico.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${XDG_MIME_INSTALL_DIR})
-install(FILES x-tellico.desktop DESTINATION ${MIME_INSTALL_DIR}/application)
 install(FILES tellico.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata )
 
 if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
