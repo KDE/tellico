@@ -3,9 +3,6 @@
   <mime-type type="application/x-tellico">
     <sub-class-of type="application/zip"/>
     <comment>Tellico Data File</comment>
-    <comment xml:lang="cs">Datový soubor Tellico</comment>
-    <comment xml:lang="fr">Fichier Tellico</comment>
-    <comment xml:lang="ru">Файл Tellico</comment>
     <glob pattern="*.tc"/>
     <glob pattern="*.bc"/>
   </mime-type>
