@@ -4,6 +4,7 @@
     <sub-class-of type="application/zip"/>
     <comment>Tellico Data File</comment>
     <comment xml:lang="ca">Fitxer de dades del Tellico</comment>
+    <comment xml:lang="cs">Datový soubor Tellico</comment>
     <comment xml:lang="en_GB">Tellico Data File</comment>
     <comment xml:lang="nl">Tellico-gegevensbestand</comment>
     <comment xml:lang="pl">Plik danych Tellico</comment>
