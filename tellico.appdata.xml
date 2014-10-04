@@ -92,6 +92,7 @@
       <li>Supports user-defined custom collections</li>
       <li xml:lang="ca">Funciona amb col·leccions personalitzades definides per l'usuari</li>
       <li xml:lang="da">Understøtter brugerdefinerede tilpassede samlinger</li>
+      <li xml:lang="de">Unterstützt benutzerdefinierte Sammlungen</li>
       <li xml:lang="en-GB">Supports user-defined custom collections</li>
       <li xml:lang="es">Soporta colecciones personalizadas definidas por el usuario</li>
       <li xml:lang="et">Toetatud on ka kasutaja loodud kohandatud kogud</li>
@@ -137,6 +138,7 @@
       <li>Automatically formats titles and names</li>
       <li xml:lang="ca">Formata automàticament els títols i els noms</li>
       <li xml:lang="da">Formaterer titler og navne automatisk</li>
+      <li xml:lang="de">Automatische Formatierung von Titeln und Namen</li>
       <li xml:lang="en-GB">Automatically formats titles and names</li>
       <li xml:lang="es">Formatea títulos y nombres automáticamente</li>
       <li xml:lang="et">Pealkirjasid ja nimesid saab lasta automaatselt vormindada</li>
