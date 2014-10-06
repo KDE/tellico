@@ -127,6 +127,7 @@
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="ca">Gestiona entrades amb diversos autors, gèneres, paraules clau, etc</li>
       <li xml:lang="da">Kan håndtere indgange med flere forfattere, genrer, nøgleord osv.</li>
+      <li xml:lang="de">Verarbeitet Einträge mit mehreren Autoren, Genres, Stichwörtern usw.</li>
       <li xml:lang="en-GB">Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="es">Maneja entradas con varios autores, géneros, palabras clave, etc</li>
       <li xml:lang="et">Raskusi ei valmista ka kirjed, mis sisaldavad mitut autorit, žanri, võtmesõna jne.</li>
@@ -158,6 +159,7 @@
       <li>Supports collection searching and view filtering</li>
       <li xml:lang="ca">Admet la cerca de col·leccions i filtratge de vista</li>
       <li xml:lang="da">Understøtter søgning i samlinger og filtrering af visning</li>
+      <li xml:lang="de">Unterstützt das Durchsuchen von Sammlungen und Filterung der Ansichten</li>
       <li xml:lang="en-GB">Supports collection searching and view filtering</li>
       <li xml:lang="es">Soporta búsqueda de colecciones y filtrado de la vista</li>
       <li xml:lang="et">Toetatud on kogudes otsimine ja vaate filtreerimine</li>
@@ -173,6 +175,7 @@
       <li>Sorts and groups collection by various properties</li>
       <li xml:lang="ca">Ordena i agrupa les col·leccions per diverses propietats</li>
       <li xml:lang="da">Sorterer og grupperer samling efter diverse egenskaber</li>
+      <li xml:lang="de">Sortiert und Gruppiert Sammlungen nach verschiedenen Eigenschaften</li>
       <li xml:lang="en-GB">Sorts and groups collection by various properties</li>
       <li xml:lang="es">Ordena y agrupa las colecciones en función de diversas propiedades</li>
       <li xml:lang="et">Kogusid saab sortida ja rühmitada eri omaduste järgi</li>
@@ -188,6 +191,7 @@
       <li>Allows customizable entry templates through XSLT</li>
       <li xml:lang="ca">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
       <li xml:lang="da">Muliggør indgangsskabeloner som kan tilpasses via XSLT</li>
+      <li xml:lang="de">Erlaubt anpassbare Vorlagen für Einträge mittels XSLT</li>
       <li xml:lang="en-GB">Allows customisable entry templates through XSLT</li>
       <li xml:lang="es">Permite plantillas personalizadas de entradas a través de XSLT </li>
       <li xml:lang="et">XSLT abil on võimalik luua kohandatud kirjemalle</li>
@@ -203,6 +207,7 @@
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
       <li xml:lang="da">Importerer MODS, Bibtex, RIS, CSV, PDF-metadata og mange andre formater</li>
+      <li xml:lang="de">Import von MODS-, Bibtex-, RIS-, CSV-, PDF-Metadaten und vielen anderen Formaten</li>
       <li xml:lang="en-GB">Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="es">Importa MODS, Bibtex, RIS, CSV, metadatos PDF y muchos otros formatos</li>
       <li xml:lang="et">MODS-i, Bibtexi, RIS-i, CSV, PDF-i metaandmete ja veel paljude vormingute import</li>
@@ -234,6 +239,7 @@
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des d'scripts externs</li>
       <li xml:lang="da">Importerer information direkte fra Amazon.com, IMDb, z39.50 servers, PubMed, SRU-servere, CrossRef.org, diverse andre websider og fra eksterne scripts</li>
+      <li xml:lang="de">Importiert Informationen direkt von Amazon.com, IMDb, z39.50-Servern, PubMed, SRU-Servern, CrossRef.org, verschiedenen anderen Webseiten und von externen Skripten</li>
       <li xml:lang="en-GB">Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="es">Importa información directamente de Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, y más sitios web, además de hacerlo desde scripts externos</li>
       <li xml:lang="et">Teabe importimine otse Amazon.com-ist, IMDb-st, z39.50 serveritest, PubMed-ist, SRU serveritest, CrossRef.org-ist, veel paljudelt veebilehekülgedelt ja väliste skriptide kaudu</li>
@@ -249,6 +255,7 @@
       <li>Imports CDDB data for cataloging audio CDs</li>
       <li xml:lang="ca">Importa dades CDDB per la catalogació de CD d'àudio</li>
       <li xml:lang="da">Importerer CDDB-data til katalogisering af lyd-cd'er</li>
+      <li xml:lang="de">Importiert CDDB-Daten für die Katalogisierung von Audi-CDs</li>
       <li xml:lang="en-GB">Imports CDDB data for cataloguing audio CDs</li>
       <li xml:lang="es">Importa datos CDDB para catalogar CD de audio</li>
       <li xml:lang="et">CDDB andmete import audio-CD-de kataloogimiseks</li>
@@ -264,6 +271,7 @@
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="ca">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
       <li xml:lang="da">Scanner og importerer lydfilsamlinger såsom mp3 eller ogg</li>
+      <li xml:lang="de">Durchsucht und importiert Sammlungen von Audio-Dateien wie zum Beispiel mp3 oder ogg</li>
       <li xml:lang="en-GB">Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="es">Escanea e importa colecciones de archivos de audio, como por ejemplo mp3 u ogg</li>
       <li xml:lang="et">Helifailide (näiteks mp3 või ogg) kogude läbiuurimine ja import</li>
