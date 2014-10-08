@@ -44,14 +44,6 @@ extern "C" {
 #include <fcntl.h>
 #include <sys/ioctl.h>
 
-/* Porting credits:
- * Solaris: David Champion <dgc@uchicago.edu>
- * FreeBSD: Niels Bakker <niels@bakker.net>
- * OpenBSD: Marcus Daniel <danielm@uni-muenster.de>
- * NetBSD: Chris Gilbert <chris@NetBSD.org>
- * MacOSX: Evan Jones <ejones@uwaterloo.ca> http://www.eng.uwaterloo.ca/~ejones/
- */
-
 #if defined(__linux__)
 
 // see http://bugs.kde.org/show_bug.cgi?id=86188
@@ -69,75 +61,15 @@ extern "C" {
 #endif
 #define         cdte_track_address      cdte_addr.lba
 
-#elif defined(sun) && defined(unix) && defined(__SVR4)
-
-#include <sys/cdio.h>
-#define CD_MSF_OFFSET   150
-#define CD_FRAMES       75
-/* According to David Schweikert <dws@ee.ethz.ch>, cd-discid needs this
- * to compile on Solaris */
-#define cdte_track_address cdte_addr.lba
-
-#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
-
-#include <netinet/in.h>
-#include <sys/cdio.h>
-#define        CDROM_LBA       CD_LBA_FORMAT   /* first frame is 0 */
-#define        CD_MSF_OFFSET   150     /* MSF offset of first frame */
-#define        CD_FRAMES       75      /* per second */
-#define        CDROM_LEADOUT   0xAA    /* leadout track */
-#define        CDROMREADTOCHDR         CDIOREADTOCHEADER
-#define        CDROMREADTOCENTRY       CDIOREADTOCENTRY
-#define        cdrom_tochdr    ioc_toc_header
-#define        cdth_trk0       starting_track
-#define        cdth_trk1       ending_track
-#define        cdrom_tocentry  ioc_read_toc_single_entry
-#define        cdte_track      track
-#define        cdte_format     address_format
-#define        cdte_track_address       entry.addr.lba
-
-#elif defined(__OpenBSD__) || defined(__NetBSD__)
-
-#include <netinet/in.h>
-#include <sys/cdio.h>
-#define        CDROM_LBA       CD_LBA_FORMAT   /* first frame is 0 */
-#define        CD_MSF_OFFSET   150     /* MSF offset of first frame */
-#define        CD_FRAMES       75      /* per second */
-#define        CDROM_LEADOUT   0xAA    /* leadout track */
-#define        CDROMREADTOCHDR         CDIOREADTOCHEADER
-#define        cdrom_tochdr    ioc_toc_header
-#define        cdth_trk0       starting_track
-#define        cdth_trk1       ending_track
-#define        cdrom_tocentry  cd_toc_entry
-#define        cdte_track      track
-#define        cdte_track_address       addr.lba
-
-#elif defined(__APPLE__)
-
-#include <sys/types.h>
-#include <IOKit/storage/IOCDTypes.h>
-#include <IOKit/storage/IOCDMediaBSDClient.h>
-#define        CD_FRAMES       75      /* per second */
-#define        CD_MSF_OFFSET   150     /* MSF offset of first frame */
-#define        cdrom_tochdr    CDDiscInfo
-#define        cdth_trk0       numberOfFirstTrack
-/* NOTE: Judging by the name here, we might have to do this:
- * hdr.lastTrackNumberInLastSessionMSB << 8 *
- * sizeof(hdr.lastTrackNumberInLastSessionLSB)
- * | hdr.lastTrackNumberInLastSessionLSB; */
-#define        cdth_trk1       lastTrackNumberInLastSessionLSB
-#define        cdrom_tocentry  CDTrackInfo
-#define        cdte_track_address trackStartAddress
-
-#else
-
-#define TELLICO_NO_CDROM_SUPPORT
-
 #endif  /* os selection */
 
 }
 
 #include <config.h>
+
+#ifdef HAVE_DISCID
+#include <discid/discid.h>
+#endif
 
 namespace {
   class CloseDrive {
@@ -147,103 +79,47 @@ namespace {
   private:
     int drive;
   };
+
+#ifdef HAVE_DISCID
+  class CloseDiscId {
+  public:
+    CloseDiscId(DiscId* d) : disc(d) {}
+    ~CloseDiscId() { discid_free(disc); }
+  private:
+    DiscId* disc;
+  };
+#endif
 }
 
 QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& trackLengths_) {
   QList<uint> list;
 
-#ifndef TELLICO_NO_CDROM_SUPPORT
-  int drive = KDE_open(drive_.data(), O_RDONLY | O_NONBLOCK);
-  CloseDrive closer(drive);
-  if(drive < 0) {
+#ifdef HAVE_DISCID
+  DiscId* disc = discid_new();
+  if (!disc) {
     return list;
   }
 
-  cdrom_tochdr hdr;
-#if defined(__APPLE__)
-  dk_cd_read_disc_info_t discInfoParams;
-  ::memset(&discInfoParams, 0, sizeof(discInfoParams));
-  discInfoParams.buffer = &hdr;
-  discInfoParams.bufferLength = sizeof(hdr);
-  if(ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
-     || discInfoParams.bufferLength != sizeof(hdr)) {
-    return list;
-  }
+  const CloseDiscId closer(disc);
+
+#ifdef DISCID_HAVE_SPARSE_READ
+  int res = discid_read_sparse(disc, drive_.constData(), 0);
 #else
-  if(ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
+  int res = discid_read(disc, drive_.constData());
+#endif
+  if (!res) {
     return list;
   }
-#endif
 
-//  uchar first = hdr.cdth_trk0;
-  uchar last = hdr.cdth_trk1;
+  const int first = discid_get_first_track_num(disc);
+  const int last = discid_get_last_track_num(disc);
 
-  cdrom_tocentry* TocEntry = new cdrom_tocentry[last+1];
-#if defined(__OpenBSD__)
-  ioc_read_toc_entry t;
-  t.starting_track = 0;
-#elif defined(__NetBSD__)
-  ioc_read_toc_entry t;
-  t.starting_track = 1;
-#endif
-#if defined(__OpenBSD__) || defined(__NetBSD__)
-  t.address_format = CDROM_LBA;
-  t.data_len = (last + 1) * sizeof(cdrom_tocentry);
-  t.data = TocEntry;
-
-  if (::ioctl(drive, CDIOREADTOCENTRYS, (char *) &t) < 0)
-       return list;
-
-#elif defined(__APPLE__)
-  dk_cd_read_track_info_t trackInfoParams;
-  ::memset(&trackInfoParams, 0, sizeof(trackInfoParams));
-  trackInfoParams.addressType = kCDTrackInfoAddressTypeTrackNumber;
-  trackInfoParams.bufferLength = sizeof(*TocEntry);
-
-  for(int i = 0; i < last; ++i) {
-    trackInfoParams.address = i + 1;
-    trackInfoParams.buffer = &TocEntry[i];
-    ::ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams);
-  }
-
-  /* MacOS X on G5-based systems does not report valid info for
-   * TocEntry[last-1].lastRecordedAddress + 1, so we compute the start
-   * of leadout from the start+length of the last track instead
-   */
-  TocEntry[last].cdte_track_address = TocEntry[last-1].trackSize + TocEntry[last-1].trackStartAddress;
-#else /* FreeBSD, Linux, Solaris */
-  for(uint i = 0; i < last; ++i) {
-    /* tracks start with 1, but I must start with 0 on OpenBSD */
-    TocEntry[i].cdte_track = i + 1;
-    TocEntry[i].cdte_format = CDROM_LBA;
-    ::ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]);
-  }
-
-  TocEntry[last].cdte_track = CDROM_LEADOUT;
-  TocEntry[last].cdte_format = CDROM_LBA;
-  ::ioctl(drive, CDROMREADTOCENTRY, &TocEntry[last]);
-#endif
-
-#if defined(__FreeBSD__)
-  TocEntry[last].cdte_track_address = ntohl(TocEntry[last].cdte_track_address);
-#endif
-
-  for(uint i = 0; i < last; ++i) {
-#if defined(__FreeBSD__)
-    TocEntry[i].cdte_track_address = ntohl(TocEntry[i].cdte_track_address);
-#endif
-    list.append(TocEntry[i].cdte_track_address + CD_MSF_OFFSET);
-  }
-
-  list.append(TocEntry[last].cdte_track_address + CD_MSF_OFFSET);
-
-  // hey, these are track lengths! :P
   trackLengths_.clear();
-  for(uint i = 0; i < last; ++i) {
-    trackLengths_.append((TocEntry[i+1].cdte_track_address - TocEntry[i].cdte_track_address) / CD_FRAMES);
+  for (int i = first; i <= last; ++i) {
+    list.append(discid_get_track_offset(disc, i));
+    trackLengths_.append(discid_get_track_length(disc, i));
   }
-
-  delete[] TocEntry;
+  list.append(discid_get_sectors(disc));
 #endif
   return list;
 }

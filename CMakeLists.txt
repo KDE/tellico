@@ -105,6 +105,12 @@ else(BTPARSE_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
 endif(BTPARSE_FOUND)
 
+macro_optional_find_package(DiscID)
+macro_log_feature(DISCID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
+if(DISCID_FOUND)
+    include_directories(${DISCID_INCLUDE_DIR})
+endif(DISCID_FOUND)
+
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
 # libv4l 0.8.3 includes a compat header for videodev.h
@@ -187,6 +193,7 @@ macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
+macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

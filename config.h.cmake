@@ -47,3 +47,5 @@
 #cmakedefine HAVE_NEPOMUK
 
 #cmakedefine HAVE_LIBBTPARSE
+
+#cmakedefine HAVE_DISCID

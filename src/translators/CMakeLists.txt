@@ -85,6 +85,10 @@ IF( TAGLIB_FOUND )
   TARGET_LINK_LIBRARIES(translators ${TAGLIB_LIBRARIES})
 ENDIF( TAGLIB_FOUND )
 
+IF( DISCID_FOUND )
+  TARGET_LINK_LIBRARIES(translators ${DISCID_LIBRARIES})
+ENDIF( DISCID_FOUND )
+
 ADD_DEPENDENCIES(translators tellico_config)
 
 ########### install files ###############
