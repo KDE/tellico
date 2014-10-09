@@ -43,8 +43,8 @@ using Tellico::CSVParser;
 
 class CSVParser::Private {
 public:
-  Private(QString str) {
-    stream = new QTextStream(&str);
+  Private() {
+    stream = 0;
     csv_init(&parser, 0);
   }
   ~Private() {
@@ -59,7 +59,8 @@ public:
   bool done;
 };
 
-CSVParser::CSVParser(QString str) : d(new Private(str)) {
+CSVParser::CSVParser(QString str) : d(new Private()) {
+  reset(str);
 }
 
 CSVParser::~CSVParser() {
