@@ -16,7 +16,7 @@
 
 2014-05-26  Robby Stephenson  <robby@periapsis.org>
 
-	* Fix bug with writing out link-only images in HTML exporter (Bug 330649).
+	* Fixed bug with writing out link-only images in HTML exporter (Bug 330649).
 
 2014-05-25  Robby Stephenson  <robby@periapsis.org>
 
