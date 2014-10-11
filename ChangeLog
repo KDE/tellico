@@ -1,5 +1,6 @@
 2014-10-11  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed crashing bug with some ISBNdb results (Bug 339063).
 	* Updated Producer results for IMDb and TheMovieDB fetchers (Bug 336765).
 
 2014-06-22  Robby Stephenson  <robby@periapsis.org>
