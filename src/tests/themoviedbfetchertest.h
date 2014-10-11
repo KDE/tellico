@@ -38,6 +38,7 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testTitleFr();
+  void testBabel();
 
 private:
   QHash<QString, QString> m_fieldValues;

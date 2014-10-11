@@ -1,3 +1,7 @@
+2014-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Producer results for IMDb and TheMovieDB fetchers (Bug 336765).
+
 2014-10-11  Pino Toscano  <pino@kde.org>
 
 	* Update internal libcsv copy to 3.0.3.

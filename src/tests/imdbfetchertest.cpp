@@ -216,6 +216,7 @@ void ImdbFetcherTest::testBodyDouble() {
   QCOMPARE(entry->field("title"), QLatin1String("Body Double"));
   QCOMPARE(entry->field("director"), QLatin1String("Brian De Palma"));
   QCOMPARE(entry->field("writer"), QLatin1String("Brian De Palma; Robert J. Avrech"));
+  QCOMPARE(entry->field("producer"), QLatin1String("Brian De Palma"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
@@ -270,4 +271,24 @@ void ImdbFetcherTest::testFetchResultEncoding() {
   QVERIFY(entry);
 
   QCOMPARE(entry->title(), QString::fromUtf8("'Shitsurakuen': jôbafuku onna harakiri"));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=336765
+void ImdbFetcherTest::testBabel() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Babel");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Babel"));
+  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
+  QCOMPARE(entry->field("writer"), QLatin1String("Guillermo Arriaga"));
+  // I can't figure out why this test has to use fromLocal8Bit instead of fromUtf8. The actual Tellico output is the same.
+  QCOMPARE(entry->field("producer"), QString::fromLocal8Bit("Steve Golin; Alejandro González Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber"));
 }

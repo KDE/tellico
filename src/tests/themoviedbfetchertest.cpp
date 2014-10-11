@@ -49,7 +49,7 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Superman Returns"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros. Pictures; Dark Castle"));
+  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("DC Comics; Warner Bros. Pictures; Dark Castle"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2006"));
   m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action; adventure; fantasy; science fiction"));
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("Bryan Singer"));
@@ -113,5 +113,22 @@ void TheMovieDBFetcherTest::testTitleFr() {
   QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Superman / Clark Kent"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+}
+
+// see https://bugs.kde.org/show_bug.cgi?id=336765
+void TheMovieDBFetcherTest::testBabel() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
+                                       QLatin1String("babel"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheMovieDBFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field("title"), QLatin1String("Babel"));
+  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
+  QCOMPARE(entry->field("producer"), QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber"));
 }
 
