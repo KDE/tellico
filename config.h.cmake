@@ -49,3 +49,5 @@
 #cmakedefine HAVE_LIBBTPARSE
 
 #cmakedefine HAVE_DISCID
+
+#cmakedefine HAVE_LIBCSV

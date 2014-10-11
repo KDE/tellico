@@ -82,7 +82,7 @@ TARGET_LINK_LIBRARIES(tellico
     pilotdb-tellico
     rtf2html-tellico
     ${TELLICO_BTPARSE_LIBS}
-    csv-tellico
+    ${TELLICO_CSV_LIBS}
     )
 
 TARGET_LINK_LIBRARIES(tellico

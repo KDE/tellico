@@ -54,7 +54,7 @@ TARGET_LINK_LIBRARIES(translators
     collections
     tellicomodels
     ${TELLICO_BTPARSE_LIBS}
-    csv-tellico
+    ${TELLICO_CSV_LIBS}
     rtf2html-tellico
     )
 

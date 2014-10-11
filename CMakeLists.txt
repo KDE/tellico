@@ -111,6 +111,15 @@ if(DISCID_FOUND)
     include_directories(${DISCID_INCLUDE_DIR})
 endif(DISCID_FOUND)
 
+macro_optional_find_package(Csv 3.0)
+macro_log_feature(CSV_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
+if(CSV_FOUND)
+    include_directories(${CSV_INCLUDE_DIR})
+    set(TELLICO_CSV_LIBS ${CSV_LIBRARIES})
+else(CSV_FOUND)
+    set(TELLICO_CSV_LIBS csv-tellico)
+endif(CSV_FOUND)
+
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
 # libv4l 0.8.3 includes a compat header for videodev.h
@@ -194,6 +203,7 @@ macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
+macro_bool_to_01(CSV_FOUND HAVE_LIBCSV)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

@@ -27,8 +27,14 @@
 #include <QTextStream>
 #include <QStringList>
 
+#include <config.h>
+
 extern "C" {
+#ifdef HAVE_LIBCSV
+#include <csv.h>
+#else
 #include "libcsv/libcsv.h"
+#endif
 }
 
 typedef int(*SpaceFunc)(char);
