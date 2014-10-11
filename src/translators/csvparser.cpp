@@ -33,11 +33,11 @@ extern "C" {
 
 typedef int(*SpaceFunc)(char);
 
-static void writeToken(char* buffer, size_t len, void* data);
-static void writeRow(char buffer, void* data);
-static int isSpace(char c);
-static int isSpaceOrTab(char c);
-static int isTab(char c);
+static void writeToken(void* buffer, size_t len, void* data);
+static void writeRow(int buffer, void* data);
+static int isSpace(unsigned char c);
+static int isSpaceOrTab(unsigned char c);
+static int isTab(unsigned char c);
 
 using Tellico::CSVParser;
 
@@ -48,11 +48,11 @@ public:
     csv_init(&parser, 0);
   }
   ~Private() {
-    csv_free(parser);
+    csv_free(&parser);
     delete stream;
   }
 
-  struct csv_parser* parser;
+  struct csv_parser parser;
   QString str;
   QTextStream* stream;
   QStringList tokens;
@@ -69,10 +69,10 @@ CSVParser::~CSVParser() {
 
 void CSVParser::setDelimiter(const QString& s) {
   Q_ASSERT(s.length() == 1);
-  csv_set_delim(d->parser, s[0].toLatin1());
-  if(s[0] == QLatin1Char('\t'))     csv_set_space_func(d->parser, isSpace);
-  else if(s[0] == QLatin1Char(' ')) csv_set_space_func(d->parser, isTab);
-  else                              csv_set_space_func(d->parser, isSpaceOrTab);
+  csv_set_delim(&d->parser, s[0].toLatin1());
+  if(s[0] == QLatin1Char('\t'))     csv_set_space_func(&d->parser, isSpace);
+  else if(s[0] == QLatin1Char(' ')) csv_set_space_func(&d->parser, isTab);
+  else                              csv_set_space_func(&d->parser, isSpaceOrTab);
 }
 
 void CSVParser::reset(QString str) {
@@ -102,34 +102,34 @@ QStringList CSVParser::nextTokens() {
   d->done = false;
   while(hasNext() && !d->done) {
     QByteArray line = d->stream->readLine().toUtf8() + '\n'; // need the eol char
-    csv_parse(d->parser, line, line.length(), &writeToken, &writeRow, this);
+    csv_parse(&d->parser, line, line.length(), &writeToken, &writeRow, this);
   }
-  csv_fini(d->parser, &writeToken, &writeRow, this);
+  csv_fini(&d->parser, &writeToken, &writeRow, this);
   return d->tokens;
 }
 
-static void writeToken(char* buffer, size_t len, void* data) {
+static void writeToken(void* buffer, size_t len, void* data) {
   CSVParser* p = static_cast<CSVParser*>(data);
-  p->addToken(QString::fromUtf8(buffer, len));
+  p->addToken(QString::fromUtf8((char *)buffer, len));
 }
 
-static void writeRow(char c, void* data) {
+static void writeRow(int c, void* data) {
   Q_UNUSED(c);
   CSVParser* p = static_cast<CSVParser*>(data);
   p->setRowDone(true);
 }
 
-static int isSpace(char c) {
+static int isSpace(unsigned char c) {
   if (c == CSV_SPACE) return 1;
   return 0;
 }
 
-static int isSpaceOrTab(char c) {
+static int isSpaceOrTab(unsigned char c) {
   if (c == CSV_SPACE || c == CSV_TAB) return 1;
   return 0;
 }
 
-static int isTab(char c) {
+static int isTab(unsigned char c) {
   if (c == CSV_TAB) return 1;
   return 0;
 }

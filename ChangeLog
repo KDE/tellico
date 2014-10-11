@@ -1,3 +1,7 @@
+2014-10-11  Pino Toscano  <pino@kde.org>
+
+	* Update internal libcsv copy to 3.0.3.
+
 2014-10-09  Pino Toscano  <pino@kde.org>
 
 	* Switch to using libdiscid for reading audio CD info.
