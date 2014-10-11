@@ -104,6 +104,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QLatin1String("aka"),
       QLatin1String("Director"),
       QLatin1String("Writer"),
+      QLatin1String("Produced by"),
       QLatin1String("runtime:.*(\\d+)\\s+min"),
       QLatin1String("aspect ratio:"),
       QLatin1String("also known as"),
@@ -131,6 +132,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QLatin1String("autre titre"),
       QString::fromUtf8("Réalisateur"),
       QString::fromUtf8("Scénarist"),
+      QString(),
       QString::fromUtf8("Durée:.*(\\d+)\\s+min"),
       QLatin1String("Format :"),
       QLatin1String("Alias"),
@@ -158,6 +160,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QString::fromUtf8("otro título"),
       QLatin1String("Director"),
       QLatin1String("Escritores"),
+      QString(),
       QString::fromUtf8("Duración:.*(\\d+)\\s+min"),
       QString::fromUtf8("Relación de Aspecto:"),
       QLatin1String("Conocido como"),
@@ -185,6 +188,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QString::fromUtf8("andere titel"),
       QLatin1String("Regisseur"),
       QLatin1String("Drehbuchautoren"),
+      QString(),
       QString::fromUtf8("Länge:.*(\\d+)\\s+min"),
       QString::fromUtf8("Seitenverhältnis:"),
       QLatin1String("Auch bekannt als"),
@@ -212,6 +216,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QString::fromUtf8("otro título"),
       QLatin1String("Regista"),
       QLatin1String("Sceneggiatori"),
+      QString(),
       QString::fromUtf8("Durata:.*(\\d+)\\s+min"),
       QString::fromUtf8("Aspect Ratio:"),
       QLatin1String("Alias"),
@@ -239,6 +244,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QString::fromUtf8("otro título"),
       QLatin1String("Diretor"),
       QLatin1String("Escritores"),
+      QString(),
       QString::fromUtf8("Duração:.*(\\d+)\\s+min"),
       QString::fromUtf8("Resolução:"),
       QString::fromUtf8("Também Conhecido Como"),
@@ -1197,7 +1203,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   castURL.setPath(QLatin1String("/title/") + idRx.cap(1) + QLatin1String("/fullcredits"));
 #endif
   // be quiet about failure and be sure to translate entities
-  QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
+  const QString castPage = Tellico::decodeHTML(FileHandler::readTextFile(castURL, true));
 #if 0
   myWarning() << "Remove debug from imdbfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/testimdbcast.html"));
@@ -1261,7 +1267,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
 
   QStringList cast;
   // loop until closing table tag
-  const int endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
+  int endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
   castText = castText.mid(pos, endPos-pos+1);
   pos = tdActorRx.indexIn(castText);
   while(pos > -1 && cast.count() < m_numCast) {
@@ -1278,6 +1284,44 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   if(!cast.isEmpty()) {
     entry_->setField(QLatin1String("cast"), cast.join(FieldFormat::rowDelimiterString()));
   }
+
+  // also do other items from fullcredits page, like producer
+  QStringList producers;
+  pos = castPage.indexOf(data.producer, 0, Qt::CaseInsensitive);
+  if(pos > -1) {
+    endPos = castText.indexOf(QLatin1String("</table"), pos, Qt::CaseInsensitive);
+    if(endPos == -1) {
+      endPos = castText.length();
+    }
+    const QString prodText = castPage.mid(pos, endPos-pos+1);
+    tdCharRx.setPattern(QLatin1String("<td\\s+[^>]*class=\"credit\"[^>]*>(.*)</td>"));
+
+    pos = s_anchorNameRx->indexIn(prodText);
+    while(pos > -1) {
+      const int pos2 = tdCharRx.indexIn(prodText, pos+1);
+      const QString credit = tdCharRx.cap(1).trimmed();
+      if(pos2 > -1 && (credit == QLatin1String("producer") ||
+                       credit == QLatin1String("co-producer") ||
+                       credit == QLatin1String("associate producer"))) {
+        producers += s_anchorNameRx->cap(2).trimmed();
+      }
+      pos = s_anchorNameRx->indexIn(prodText, pos+1);
+    }
+  }
+
+  if(!producers.isEmpty()) {
+    entry_->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
+  }
+#if 0
+  myWarning() << "Remove debug from imdbfetcher.cpp";
+  QFile f2(QString::fromLatin1("/tmp/testimdbcast2.html"));
+  if(f2.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << producers.join(FieldFormat::delimiterString());
+  }
+  f2.close();
+#endif
 }
 
 void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) {

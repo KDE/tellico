@@ -42,6 +42,7 @@ private Q_SLOTS:
   void testMary();
   void testOkunen();
   void testFetchResultEncoding();
+  void testBabel();
 };
 
 #endif

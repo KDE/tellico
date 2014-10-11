@@ -304,21 +304,26 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
   entry_->setField(QLatin1String("year"),  value(resultMap_, "release_date").left(4));
 
+  QStringList directors, producers, writers, composers;
   QVariantList crewList = resultMap_.value(QLatin1String("credits")).toMap()
                                     .value(QLatin1String("crew")).toList();
   foreach(const QVariant& crew, crewList) {
-    QVariantMap crewMap = crew.toMap();
+    const QVariantMap crewMap = crew.toMap();
     const QString job = value(crewMap, "job");
     if(job == QLatin1String("Director")) {
-      entry_->setField(QLatin1String("director"), value(crewMap, "name"));
+      directors += value(crewMap, "name");
     } else if(job == QLatin1String("Producer")) {
-      entry_->setField(QLatin1String("producer"), value(crewMap, "name"));
+      producers += value(crewMap, "name");
     } else if(job == QLatin1String("Screenplay")) {
-      entry_->setField(QLatin1String("writer"), value(crewMap, "name"));
+      writers += value(crewMap, "name");
     } else if(job == QLatin1String("Original Music Composer")) {
-      entry_->setField(QLatin1String("composer"), value(crewMap, "name"));
+      composers += value(crewMap, "name");
     }
   }
+  entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("writer"),     writers.join(FieldFormat::delimiterString()));
+  entry_->setField(QLatin1String("composer"), composers.join(FieldFormat::delimiterString()));
 
   // if we only need cursory data, then we're done
   if(!fullData_) {

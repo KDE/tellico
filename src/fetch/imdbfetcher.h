@@ -92,6 +92,7 @@ public:
     QString aka;
     QString director;
     QString writer;
+    QString producer;
     QString runtime;
     QString aspect_ratio;
     QString also_known_as;

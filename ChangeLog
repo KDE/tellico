@@ -1,3 +1,7 @@
+2014-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Producer results for IMDb and TheMovieDB fetchers (Bug 336765).
+
 2014-06-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.9.
