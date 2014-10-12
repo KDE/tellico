@@ -196,6 +196,9 @@ TARGET_LINK_LIBRARIES(isbndbfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(moviemeterfetchertest NOGUI moviemeterfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(moviemeterfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(mrlookupfetchertest NOGUI mrlookupfetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(mrlookupfetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(musicbrainzfetchertest NOGUI musicbrainzfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetch ${TELLICO_TEST_LIBS})
 

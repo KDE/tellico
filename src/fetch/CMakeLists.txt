@@ -41,6 +41,7 @@ SET(fetch_STAT_SRCS
    masfetcher.cpp
    messagehandler.cpp
    moviemeterfetcher.cpp
+   mrlookupfetcher.cpp
    multifetcher.cpp
    musicbrainzfetcher.cpp
    openlibraryfetcher.cpp
