@@ -31,48 +31,43 @@
 
 QTEST_MAIN( CsvTest )
 
+#define QL1(x) QString::fromLatin1(x)
+
 void CsvTest::initTestCase() {
-  QString dummy;
-  p = new Tellico::CSVParser(dummy);
-  p->setDelimiter(QLatin1String(","));
 }
 
 void CsvTest::cleanupTestCase() {
-  delete p;
 }
 
 void CsvTest::testAll() {
   QFETCH(QString, line);
-  QFETCH(int, pos1);
-  QFETCH(QString, token1);
-  QFETCH(int, pos2);
-  QFETCH(QString, token2);
+  QFETCH(QStringList, tokens);
   QFETCH(QString, delim);
-  p->setDelimiter(delim);
 
-  p->reset(line);
-  QStringList tokens = p->nextTokens();
+  Tellico::CSVParser p(line);
+  p.setDelimiter(delim);
 
-  QTEST(tokens.count(), "count");
-  QTEST(tokens[pos1], "token1");
-  QTEST(tokens[pos2], "token2");
+  QStringList tokensNew = p.nextTokens();
+
+  QCOMPARE(tokensNew, tokens);
 }
 
 void CsvTest::testAll_data() {
   QTest::addColumn<QString>("line");
   QTest::addColumn<QString>("delim");
-  QTest::addColumn<int>("count");
-  QTest::addColumn<int>("pos1");
-  QTest::addColumn<QString>("token1");
-  QTest::addColumn<int>("pos2");
-  QTest::addColumn<QString>("token2");
+  QTest::addColumn<QStringList>("tokens");
 
-  QTest::newRow("basic") << "robby,stephenson is cool\t,," << "," << 4 << 0 << "robby" << 2 << "";
-  QTest::newRow("space") << "robby,stephenson is cool\t,," << " " << 3 << 0 << "robby,stephenson" << 2 << "cool\t,,";
-  QTest::newRow("tab") << "robby\t\tstephenson" << "\t" << 3 << 0 << "robby" << 1 << "";
+  QTest::newRow("basic") << "robby,stephenson is cool\t,," << ","
+    << (QStringList() << QL1("robby") << QL1("stephenson is cool") << QString() << QString());
+  QTest::newRow("space") << "robby,stephenson is cool\t,," << " "
+    << (QStringList() << QL1("robby,stephenson") << QL1("is") << QL1("cool\t,,"));
+  QTest::newRow("tab") << "robby\t\tstephenson" << "\t"
+    << (QStringList() << QL1("robby") << QString() << QL1("stephenson"));
   // quotes get swallowed
-  QTest::newRow("quotes") << "robby,\"stephenson,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson,is,cool";
-  QTest::newRow("newline") << "robby,\"stephenson\n,is,cool\"" << "," << 2 << 0 << "robby" << 1 << "stephenson\n,is,cool";
+  QTest::newRow("quotes") << "robby,\"stephenson,is,cool\"" << ","
+    << (QStringList() << QL1("robby") << QL1("stephenson,is,cool"));
+  QTest::newRow("newline") << "robby,\"stephenson\n,is,cool\"" << ","
+    << (QStringList() << QL1("robby") << QL1("stephenson\n,is,cool"));
 }
 
 void CsvTest::testEntry() {

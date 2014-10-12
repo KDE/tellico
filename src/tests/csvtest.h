@@ -27,10 +27,6 @@
 
 #include <QObject>
 
-namespace Tellico {
-  class CSVParser;
-}
-
 class CsvTest : public QObject {
 Q_OBJECT
 
@@ -41,9 +37,6 @@ private Q_SLOTS:
   void testAll();
   void testAll_data();
   void testEntry();
-
-private:
-  Tellico::CSVParser* p;
 };
 
 #endif
