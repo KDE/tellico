@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2014 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2014 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,14 +22,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_THEMOVIEDBFETCHER_H
-#define TELLICO_THEMOVIEDBFETCHER_H
+#ifndef TELLICO_MRLOOKUPFETCHER_H
+#define TELLICO_MRLOOKUPFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
-
-#include <klineedit.h>
 
 #include <QPointer>
 #include <QDate>
@@ -40,54 +38,51 @@ namespace KIO {
 }
 
 namespace Tellico {
-
-  namespace GUI {
-    class ComboBox;
-  }
-
   namespace Fetch {
 
 /**
- * A fetcher for themoviedb.org
+ * A fetcher for MR Lookup, http://www.ams.org/mrlookup
  *
  * @author Robby Stephenson
  */
-class TheMovieDBFetcher : public Fetcher {
+class MRLookupFetcher : public Fetcher {
 Q_OBJECT
 
 public:
   /**
    */
-  TheMovieDBFetcher(QObject* parent);
+  MRLookupFetcher(QObject* parent);
   /**
    */
-  virtual ~TheMovieDBFetcher();
+  virtual ~MRLookupFetcher();
 
   /**
    */
   virtual QString source() const;
-  virtual QString attribution() const;
   virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const;
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return TheMovieDB; }
+  virtual Type type() const { return MRLookup; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
-  virtual void saveConfigHook(KConfigGroup& config);
-  virtual void continueSearch();
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-  class ConfigWidget;
+  class ConfigWidget : public Fetch::ConfigWidget {
+  public:
+    explicit ConfigWidget(QWidget* parent_, const MRLookupFetcher* fetcher = 0);
+    virtual void saveConfigHook(KConfigGroup&) {}
+    virtual QString preferredName() const;
+  };
   friend class ConfigWidget;
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash allOptionalFields();
+  static StringHash allOptionalFields() { return StringHash(); }
 
 private slots:
   void slotComplete(KJob* job);
@@ -95,36 +90,11 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
-  void readConfiguration();
-
-  static QString value(const QVariantMap& map, const char* name);
 
   bool m_started;
 
-  QString m_locale;
-  QDate m_serverConfigDate;
-  QString m_apiKey;
-  QString m_imageBase;
-
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
-};
-
-class TheMovieDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
-Q_OBJECT
-
-public:
-  explicit ConfigWidget(QWidget* parent_, const TheMovieDBFetcher* fetcher = 0);
-  virtual void saveConfigHook(KConfigGroup&);
-  virtual QString preferredName() const;
-
-private slots:
-  void slotLangChanged();
-
-private:
-  KLineEdit* m_apiKeyEdit;
-  GUI::ComboBox* m_langCombo;
 };
 
   } // end namespace
