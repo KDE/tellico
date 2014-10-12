@@ -48,7 +48,7 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for discogs.com
+ * A fetcher for themoviedb.org
  *
  * @author Robby Stephenson
  */
