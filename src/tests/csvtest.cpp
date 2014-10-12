@@ -32,13 +32,9 @@
 QTEST_MAIN( CsvTest )
 
 void CsvTest::initTestCase() {
-  QString dummy;
-  p = new Tellico::CSVParser(dummy);
-  p->setDelimiter(QLatin1String(","));
 }
 
 void CsvTest::cleanupTestCase() {
-  delete p;
 }
 
 void CsvTest::testAll() {
@@ -48,10 +44,11 @@ void CsvTest::testAll() {
   QFETCH(int, pos2);
   QFETCH(QString, token2);
   QFETCH(QString, delim);
-  p->setDelimiter(delim);
 
-  p->reset(line);
-  QStringList tokens = p->nextTokens();
+  Tellico::CSVParser p(line);
+  p.setDelimiter(delim);
+
+  QStringList tokens = p.nextTokens();
 
   QTEST(tokens.count(), "count");
   QTEST(tokens[pos1], "token1");
