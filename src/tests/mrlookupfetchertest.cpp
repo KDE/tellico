@@ -47,7 +47,7 @@ void MRLookupFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("An elementary view of Weyl's theory of equal distribution"));
   m_fieldValues.insert(QLatin1String("author"), QLatin1String("Trench, William F."));
   m_fieldValues.insert(QLatin1String("volume"), QLatin1String("119"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Amer. Math. Monthly"));
+  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("American Mathematical Monthly"));
   m_fieldValues.insert(QLatin1String("number"), QLatin1String("10"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2012"));
   m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("852–861"));

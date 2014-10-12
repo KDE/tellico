@@ -176,8 +176,17 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  Data::EntryList entries = coll->entries();
-  foreach(Data::EntryPtr entry, entries) {
+  // switch the FJournal field with the Journal field
+  foreach(Data::EntryPtr entry, coll->entries()) {
+    entry->setField(QLatin1String("journal"), entry->field(QLatin1String("fjournal")));
+  }
+  coll->removeField(QLatin1String("fjournal"));
+  // unnecessary fields
+  coll->removeField(QLatin1String("mrclass"));
+  coll->removeField(QLatin1String("mrnumber"));
+  coll->removeField(QLatin1String("mrreviewer"));
+
+  foreach(Data::EntryPtr entry, coll->entries()) {
     if(!m_started) {
       // might get aborted
       break;
