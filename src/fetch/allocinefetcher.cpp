@@ -106,7 +106,9 @@ void AbstractAllocineFetcher::search() {
   // I can't figure out how to encode accent marks, but they don't
   // seem to be necessary
   QString q = removeAccents(request().value);
-  q.remove(QLatin1Char(','));
+  // should I just remove all non alphabetical characters?
+  // see https://bugs.kde.org/show_bug.cgi?id=337432
+  q.remove(QRegExp(QLatin1String("[,:!?;\\(\\)]")));
   q.replace(QLatin1Char('\''), QLatin1Char('+'));
   q.replace(QLatin1Char(' '), QLatin1Char('+'));
 
@@ -203,6 +205,16 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   QVariantMap result = parser.parse(data, &ok).toMap().value(QLatin1String("movie")).toMap();
   if(!ok) {
     myDebug() << "Bad JSON results";
+#if 0
+    myWarning() << "Remove debug from allocinefetcher.cpp";
+    QFile f2(QString::fromLatin1("/tmp/test3.json"));
+    if(f2.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f2);
+      t.setCodec("UTF-8");
+      t << data;
+    }
+    f2.close();
+#endif
     return entry;
   }
   populateEntry(entry, result);
@@ -267,9 +279,12 @@ void AbstractAllocineFetcher::slotComplete(KJob*) {
     coll->addField(f);
   }
 
-
   QJson::Parser parser;
-  QVariantMap result = parser.parse(data).toMap().value(QLatin1String("feed")).toMap();
+  bool ok;
+  QVariantMap result = parser.parse(data, &ok).toMap().value(QLatin1String("feed")).toMap();
+  if(!ok) {
+    myDebug() << "Bad JSON results";
+  }
 //  myDebug() << "total:" << result.value(QLatin1String("totalResults"));
 
   QVariantList resultList = result.value(QLatin1String("movie")).toList();
