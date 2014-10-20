@@ -132,3 +132,11 @@ void BibtexTest::testDuplicateKeys() {
   dupes = bColl->duplicateBibtexKeys();
   QCOMPARE(dupes.count(), 0);
 }
+
+void BibtexTest::testMapping() {
+  // test a few strings from the bibtex mapping file
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("™"), QStringList()), QLatin1String("{{\\texttrademark}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("ß"), QStringList()), QLatin1String("{{\\ss}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("…"), QStringList()), QLatin1String("{{\\ldots}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("°"), QStringList()), QLatin1String("{$^{\\circ}$}"));
+}
