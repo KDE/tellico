@@ -43,6 +43,7 @@ private Q_SLOTS:
 #ifdef HAVE_QJSON
   void testTitleAPI();
   void testTitleAPIAccented();
+  void testGhostDog();
 
   void testTitleScreenRush();
   void testTitleFilmStarts();

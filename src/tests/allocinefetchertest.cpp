@@ -210,6 +210,27 @@ void AllocineFetcherTest::testTitleAPIAccented() {
   QVERIFY(!entry->field(QLatin1String("allocine")).isEmpty());
 }
 
+// mentioned in https://bugs.kde.org/show_bug.cgi?id=337432
+void AllocineFetcherTest::testGhostDog() {
+  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  QString groupName = QLatin1String("allocine");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
+                                       QLatin1String("Ghost Dog: la voie du samourai"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AllocineFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Ghost Dog: la voie du samourai"));
+}
+
 void AllocineFetcherTest::testTitleScreenRush() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QLatin1String("Superman Returns"));
