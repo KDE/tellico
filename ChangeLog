@@ -1,3 +1,7 @@
+2014-10-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated CSV importer to recognize LibraryThing files.
+
 2014-10-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fix bug with Allocine API search using punctuation (Bug 337432).

@@ -64,6 +64,7 @@ CSVImporter::CSVImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_)
     m_widget(0),
     m_table(0),
     m_hasAssignedFields(false),
+    m_isLibraryThing(false),
     m_parser(new CSVParser(text())) {
   m_parser->setDelimiter(m_delimiter);
 }
@@ -130,6 +131,19 @@ Tellico::Data::CollPtr CSVImporter::collection() {
       }
       if(replaceRowDelimiter) {
         value.replace(m_rowDelimiter, FieldFormat::rowDelimiterString());
+      }
+      if(m_isLibraryThing) {
+        // special cases for LibraryThing import
+        if(names[i] == QLatin1String("isbn")) {
+          // ISBN values are enclosed by brackets
+          value.remove(QLatin1Char('[')).remove(QLatin1Char(']'));
+        } else if(names[i] == QLatin1String("keyword")) {
+          // LT values are comma-separated
+          value.replace(QLatin1String(","), FieldFormat::delimiterString());
+        } else if(names[i] == QLatin1String("cdate")) {
+          // only want date, not time. 10 characters since it's zero-padded
+          value.truncate(10);
+        }
       }
       bool success = entry->setField(names[i], value);
       // we might need to add a new allowed value
@@ -380,6 +394,17 @@ void CSVImporter::fillTable() {
     if(col > maxCols) {
       maxCols = col;
     }
+    // special case, check if the header row matches LibraryThing CSV export
+    // assume LT export always uses identical header row and verify against first 7 columns
+    if(row == 0 && values.count() > 7) {
+      m_isLibraryThing = (values.at(0) == QLatin1String("'TITLE'") &&
+                          values.at(1) == QLatin1String("'AUTHOR (first, last)'") &&
+                          values.at(2) == QLatin1String("'AUTHOR (last, first)'") &&
+                          values.at(3) == QLatin1String("'DATE'") &&
+                          values.at(4) == QLatin1String("'LCC'") &&
+                          values.at(5) == QLatin1String("'DDC'") &&
+                          values.at(6) == QLatin1String("'ISBNs'"));
+    }
   }
   for( ; row < m_table->rowCount(); ++row) {
     for(int col = 0; col < m_table->columnCount(); ++col) {
@@ -388,17 +413,19 @@ void CSVImporter::fillTable() {
   }
 
   m_table->setColumnCount(maxCols);
+
+  if(m_isLibraryThing) {
+    // do not call slotFirstRowHeader since it will loop
+    m_firstRowHeader = true;
+    updateHeader();
+  }
 }
 
 void CSVImporter::slotTypeChanged() {
   createCollection();
 
   updateHeader();
-  m_comboField->clear();
-  foreach(Data::FieldPtr field, m_coll->fields()) {
-    m_comboField->addItem(field->title());
-  }
-  m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
+  updateFieldCombo();
 
   // hack to force a resize
   m_comboField->setFont(m_comboField->font());
@@ -491,6 +518,32 @@ void CSVImporter::updateHeader() {
     Data::FieldPtr field;
     if(item && m_coll) {
       QString itemValue = item->text();
+      // check against LibraryThing import
+      if(m_isLibraryThing && m_coll->type() == Data::Collection::Book) {
+        static QHash<QString, QString> ltFields;
+        if(ltFields.isEmpty()) {
+          ltFields[QLatin1String("TITLE")]                = QLatin1String("title");
+          ltFields[QLatin1String("AUTHOR (first, last)")] = QLatin1String("author");
+          ltFields[QLatin1String("DATE")]                 = QLatin1String("pub_year");
+          ltFields[QLatin1String("ISBNs")]                = QLatin1String("isbn");
+          ltFields[QLatin1String("RATINGS")]              = QLatin1String("rating");
+          ltFields[QLatin1String("ENTRY DATE")]           = QLatin1String("cdate");
+          ltFields[QLatin1String("TAGS")]                 = QLatin1String("keyword");
+          ltFields[QLatin1String("COMMENT")]              = QLatin1String("comments");
+          ltFields[QLatin1String("REVIEWS")]              = QLatin1String("review");
+        }
+        // strip leading and trailing single quotes
+        itemValue.remove(0,1).chop(1);
+        itemValue = ltFields.value(itemValue);
+
+        // review is a new field, we're going to add it by default
+        if(itemValue == QLatin1String("review") && !m_coll->hasField(itemValue)) {
+          Data::FieldPtr field(new Data::Field(QLatin1String("review"), i18n("Review"), Data::Field::Para));
+          m_coll->addField(field);
+          updateFieldCombo();
+          m_comboField->setCurrentIndex(m_comboField->count()-2);
+        }
+      }
       field = m_coll->fieldByTitle(itemValue);
       if(!field) {
         field = m_coll->fieldByName(itemValue);
@@ -515,11 +568,7 @@ void CSVImporter::slotFieldChanged(int idx_) {
   dlg.setNotifyKernel(false);
 
   if(dlg.exec() == QDialog::Accepted) {
-    m_comboField->clear();
-    foreach(Data::FieldPtr field, m_coll->fields()) {
-      m_comboField->addItem(field->title());
-    }
-    m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
+    updateFieldCombo();
     fillTable();
   }
 
@@ -574,6 +623,14 @@ void CSVImporter::createCollection() {
       m_coll->addField(Data::FieldPtr(new Data::Field(*field)));
     }
   }
+}
+
+void CSVImporter::updateFieldCombo() {
+  m_comboField->clear();
+  foreach(Data::FieldPtr field, m_coll->fields()) {
+    m_comboField->addItem(field->title());
+  }
+  m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
 }
 
 #include "csvimporter.moc"

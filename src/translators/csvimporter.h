@@ -86,6 +86,7 @@ private:
   void fillTable();
   void updateHeader();
   void createCollection();
+  void updateFieldCombo();
 
   Data::CollPtr m_coll;
   Data::CollPtr m_existingCollection; // used to grab fields from current collection in window
@@ -110,6 +111,7 @@ private:
   KComboBox* m_comboField;
   KPushButton* m_setColumnBtn;
   bool m_hasAssignedFields;
+  bool m_isLibraryThing;
 
   CSVParser* m_parser;
 };
