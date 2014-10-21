@@ -630,7 +630,7 @@ void CSVImporter::updateFieldCombo() {
   foreach(Data::FieldPtr field, m_coll->fields()) {
     m_comboField->addItem(field->title());
   }
-  m_comboField->addItem(QLatin1Char('<') + i18n("New Field") + QLatin1Char('>'));
+  m_comboField->addItem(i18n("<New Field>"));
 }
 
 #include "csvimporter.moc"
