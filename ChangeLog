@@ -4,7 +4,7 @@
 
 2014-10-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Fix bug with Allocine API search using punctuation (Bug 337432).
+	* Fixed bug with Allocine API search using punctuation (Bug 337432).
 
 2014-10-11  Robby Stephenson  <robby@periapsis.org>
 
