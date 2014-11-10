@@ -1,3 +1,7 @@
+2014-11-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added workaround for incorrect cover thumbnail in BoardGameGeek fetcher.
+
 2014-10-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated CSV importer to recognize LibraryThing files.

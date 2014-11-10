@@ -123,9 +123,9 @@ void ISBNdbFetcherTest::testAuthor() {
   Tellico::Data::EntryPtr entry= results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Moonwalking with Einstein"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Joshua Foer"));
-  QCOMPARE(entry->field(QLatin1String("isbn")).remove('-'), QLatin1String("159420229X"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2011"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Penguin Press HC, The"));
-  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
+  QCOMPARE(entry->field(QLatin1String("isbn")).remove('-'), QLatin1String("0143120530"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2012"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Penguin (Non-Classics)"));
+  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Paperback"));
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }

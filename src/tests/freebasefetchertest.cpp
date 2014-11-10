@@ -220,7 +220,7 @@ void FreebaseFetcherTest::testMovieTitle() {
 
   QVERIFY(results.size() > 0);
 
-  Tellico::Data::EntryPtr entry;  // freebase results can be randomly ordered, loop until wee find the one we want
+  Tellico::Data::EntryPtr entry;  // freebase results can be randomly ordered, loop until we find the one we want
   for(int i = 0; i < results.size(); ++i) {
     Tellico::Data::EntryPtr test = results.at(i);
     if(test->field(QLatin1String("title")).toLower() == QLatin1String("the man from snowy river") &&
@@ -323,7 +323,7 @@ void FreebaseFetcherTest::testGameTitle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")).toLower(), QLatin1String("halo 3: odst"));
-  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie Studios"));
+  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("First-person Shooter; Shooter game; Action game"));

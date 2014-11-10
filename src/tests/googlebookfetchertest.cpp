@@ -118,7 +118,7 @@ void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media, Inc."));
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("352"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2009"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Computers")));
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("XML")));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());

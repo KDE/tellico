@@ -305,7 +305,13 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QLatin1String("subtitle"),  value(volumeMap, "subtitle"));
   entry->setField(QLatin1String("pub_year"),  value(volumeMap, "publishedDate").left(4));
   entry->setField(QLatin1String("author"),    value(volumeMap, "authors"));
-  entry->setField(QLatin1String("publisher"), value(volumeMap, "publisher"));
+  // workaround for bug, where publisher can be enclosed in quotes
+  QString pub = value(volumeMap, "publisher");
+  if(pub.startsWith(QLatin1Char('"')) && pub.endsWith(QLatin1Char('"'))) {
+    pub.chop(1);
+    pub = pub.remove(0, 1);
+  }
+  entry->setField(QLatin1String("publisher"), pub);
   entry->setField(QLatin1String("pages"),     value(volumeMap, "pageCount"));
   entry->setField(QLatin1String("language"),  value(volumeMap, "language"));
   entry->setField(QLatin1String("comments"),  value(volumeMap, "description"));

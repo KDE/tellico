@@ -339,7 +339,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         authorUrl.addQueryItem(QLatin1String("key"), key);
         authorUrl.addQueryItem(QLatin1String("name"), QString());
 
-        QString output = FileHandler::readTextFile(authorUrl, false /*quiet*/);
+        QString output = FileHandler::readTextFile(authorUrl, true /*quiet*/);
         QVariantList authorList = parser.parse(output.toUtf8()).toList();
         QVariantMap authorResult = authorList.isEmpty() ? QVariantMap() : authorList.at(0).toMap();
         const QString name = value(authorResult, "name");
@@ -361,7 +361,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         langUrl.addQueryItem(QLatin1String("key"), key);
         langUrl.addQueryItem(QLatin1String("name"), QString());
 
-        QString output = FileHandler::readTextFile(langUrl, false /*quiet*/, true /*utf8*/);
+        QString output = FileHandler::readTextFile(langUrl, true /*quiet*/, true /*utf8*/);
         QVariantList langList = parser.parse(output.toUtf8()).toList();
         QVariantMap langResult = langList.isEmpty() ? QVariantMap() : langList.at(0).toMap();
         const QString name = value(langResult, "name");
@@ -393,7 +393,7 @@ QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
   u.addQueryItem(QLatin1String("name"), term_);
 
-  QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
+  QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
   QJson::Parser parser;
   QVariantList results = parser.parse(output.toUtf8()).toList();
   myDebug() << "found" << results.count() << "authors";
