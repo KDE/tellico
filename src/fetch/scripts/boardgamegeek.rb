@@ -189,6 +189,9 @@ def getGameDetails(ids)
 
         # retrieve cover
         coverurl = g.elements['thumbnail'] != nil ? g.elements['thumbnail'].text : nil
+        if( coverurl =~ /^\/\/cf/ )
+          coverurl.prepend("http:")
+        end
         if( coverurl =~ /http:\/\/([^\/]*)\/(.*)$/ )
           # puts "downloading... " + $2
           cover = nil

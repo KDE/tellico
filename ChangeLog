@@ -1,3 +1,7 @@
+2014-11-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Added workaround for incorrect cover thumbnail in BoardGameGeek fetcher.
+
 2014-10-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with Allocine API search using punctuation (Bug 337432).
