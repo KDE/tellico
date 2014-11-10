@@ -111,7 +111,8 @@ void MovieMeterFetcherTest::testKeyword() {
 
 void MovieMeterFetcherTest::testKeywordCzech() {
 //  QString tmav = QString::fromUtf8("Tmavomodrý Svět");
-  QString tmav = QString::fromUtf8("Tmavomodrý svet");
+  QString tmav = QString::fromUtf8("Tmavomodrý Svet");
+//  QString tmav = QString::fromUtf8("Tmavomodrý svet");
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        tmav);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
