@@ -18,6 +18,7 @@
   <name xml:lang="sk">Tellico</name>
   <name xml:lang="sl">Tellico</name>
   <name xml:lang="sv">Tellico</name>
+  <name xml:lang="tr">Tellico</name>
   <name xml:lang="uk">Tellico</name>
   <name xml:lang="x-test">xxTellicoxx</name>
   <summary>Collection Manager</summary>
@@ -35,6 +36,7 @@
   <summary xml:lang="sk">Správca zbierok</summary>
   <summary xml:lang="sl">Upravljalnik zbirk</summary>
   <summary xml:lang="sv">Samlingshanterare</summary>
+  <summary xml:lang="tr">Koleksiyon Yöneticisi</summary>
   <summary xml:lang="uk">Програма для керування збірками</summary>
   <summary xml:lang="x-test">xxCollection Managerxx</summary>
   <description>
@@ -72,6 +74,7 @@
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sl">Zmožnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
+    <p xml:lang="tr">Özellikleri:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
@@ -104,6 +107,7 @@
       <li xml:lang="sk">Podporuje používateľom definované vlastné zbierky</li>
       <li xml:lang="sl">Podpira uporabniško določene zbirke</li>
       <li xml:lang="sv">Stöder användardefinierade anpassade samlingar</li>
+      <li xml:lang="tr">Kullanıcı tanımlı özel koleksiyonları destekler</li>
       <li xml:lang="uk">Підтримка визначених користувачем нетипових збірок.</li>
       <li xml:lang="x-test">xxSupports user-defined custom collectionsxx</li>
       <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
@@ -151,6 +155,7 @@
       <li xml:lang="sk">Automaticky formátuje tituly a názvy</li>
       <li xml:lang="sl">Samodejno oblikuje naslove in imena</li>
       <li xml:lang="sv">Formaterar automatiskt titlar och namn</li>
+      <li xml:lang="tr">Başlık ve isimleri otomatik biçimlendirir</li>
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
       <li xml:lang="x-test">xxAutomatically formats titles and namesxx</li>
       <li>Supports collection searching and view filtering</li>
