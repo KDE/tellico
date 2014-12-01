@@ -184,6 +184,10 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
 
   // split the name by white space and commas
   QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
+  // psycho case where name == ","
+  if(words.isEmpty()) {
+    return name;
+  }
 
   // if it contains a comma already and the last word is not a suffix, don't format it
   if(!opt_.testFlag(FormatAuto) ||

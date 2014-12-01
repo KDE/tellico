@@ -131,6 +131,7 @@ void FormatTest::testName_data() {
   QTest::newRow("test11") << "lector smith, hannibal" << "Lector Smith, Hannibal" << true << true;
   QTest::newRow("test12") << "john  van der graf" << "van der Graf, John" << true << true;
   QTest::newRow("test13") << "john  Van Der graf" << "Van Der Graf, John" << true << true;
+  QTest::newRow("single comma") << "," << "," << false << true;
 }
 
 void FormatTest::testSplit() {
