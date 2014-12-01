@@ -349,16 +349,39 @@
 
 <xsl:template match="actors">
  <tc:casts>
-  <xsl:for-each select="line">
-   <tc:cast>
-    <tc:column>
-     <xsl:value-of select="col[1]"/>
-    </tc:column>
-    <tc:column>
-     <xsl:value-of select="col[2]"/>
-    </tc:column>
-   </tc:cast>
-  </xsl:for-each>
+  <xsl:if test="line">
+   <xsl:for-each select="line">
+    <tc:cast>
+     <tc:column>
+      <xsl:value-of select="col[1]"/>
+     </tc:column>
+     <tc:column>
+      <xsl:value-of select="col[2]"/>
+     </tc:column>
+    </tc:cast>
+   </xsl:for-each>
+  </xsl:if>
+  <xsl:if test="not(line)">
+   <xsl:for-each select="str:tokenize(., ',/;')">
+    <tc:cast>
+     <!-- could have role name in parentheses -->
+     <xsl:if test="contains(., '(')">
+      <tc:column>
+       <xsl:value-of select="normalize-space(substring-before(., '('))"/>
+      </tc:column>
+      <tc:column>
+       <xsl:value-of select="normalize-space(substring-before(substring-after(., '('), ')'))"/>
+      </tc:column>
+     </xsl:if>
+     <xsl:if test="not(contains(., '('))">
+      <tc:column>
+       <xsl:value-of select="normalize-space(.)"/>
+      </tc:column>
+      <tc:column/>
+     </xsl:if>
+    </tc:cast>
+   </xsl:for-each>
+  </xsl:if>
  </tc:casts>
 </xsl:template>
 
@@ -445,7 +468,7 @@
    <xsl:when test=". &lt; 14">
     <xsl:text>PG-13 (USA)</xsl:text>
    </xsl:when>
-   <xsl:when test=". &lt; 18">
+   <xsl:when test=". &lt; 19">
     <xsl:text>R (USA)</xsl:text>
    </xsl:when>
   </xsl:choose>
