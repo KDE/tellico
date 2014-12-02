@@ -196,6 +196,7 @@ void GCstarTest::testVideo() {
   castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.count(), 11);
   QCOMPARE(castList.at(0), QLatin1String("Famke Janssen::Marnie Watson"));
+  QCOMPARE(entry->field("location"), QLatin1String("On Hard Drive"));
 
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());

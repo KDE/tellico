@@ -70,7 +70,7 @@
    <xsl:if test="item/@web or item/@webPage">
     <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </xsl:if>
-   <xsl:if test="item/@location and $coll != 7 and $coll != 8">
+   <xsl:if test="(item/@location or item/@place) and $coll != 7 and $coll != 8">
      <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
    </xsl:if>
    <xsl:if test="item/@composer">
@@ -430,6 +430,10 @@
 
 <xsl:template match="comment">
  <tc:comments><xsl:value-of select="."/></tc:comments>
+</xsl:template>
+
+<xsl:template match="place">
+ <tc:location><xsl:value-of select="."/></tc:location>
 </xsl:template>
 
 <xsl:template match="image|boxpic">
