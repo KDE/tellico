@@ -370,7 +370,13 @@
        <xsl:value-of select="normalize-space(substring-before(., '('))"/>
       </tc:column>
       <tc:column>
-       <xsl:value-of select="normalize-space(substring-before(substring-after(., '('), ')'))"/>
+       <xsl:variable name="role">
+        <xsl:call-template name="substring-before-last">
+         <xsl:with-param name="input" select="substring-after(., '(')"/>
+         <xsl:with-param name="substr" select="')'"/>
+        </xsl:call-template>
+       </xsl:variable>
+       <xsl:value-of select="normalize-space($role)"/>
       </tc:column>
      </xsl:if>
      <xsl:if test="not(contains(., '('))">
@@ -825,6 +831,22 @@
     </xsl:element>
    </xsl:otherwise>
   </xsl:choose>
+</xsl:template>
+
+<xsl:template name="substring-before-last">
+ <xsl:param name="input"/>
+ <xsl:param name="substr"/>
+ <xsl:if test="$substr and contains($input, $substr)">
+  <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+  <xsl:value-of select="substring-before($input, $substr)"/>
+  <xsl:if test="contains($temp, $substr)">
+   <xsl:value-of select="$substr"/>
+   <xsl:call-template name="substring-before-last">
+    <xsl:with-param name="input" select="$temp"/>
+    <xsl:with-param name="substr" select="$substr"/>
+   </xsl:call-template>
+  </xsl:if>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template name="year">
