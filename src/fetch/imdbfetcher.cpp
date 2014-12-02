@@ -1070,7 +1070,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
       entry_->setField(QLatin1String("alttitle"), values.join(FieldFormat::rowDelimiterString()));
     }
   } else {
-    myLog() << "'Also Known As' not found";
+//    myLog() << "'Also Known As' not found";
   }
 }
 
@@ -1140,7 +1140,7 @@ void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) 
 
   const int pos1 = str_.indexOf(productionRx);
   if(pos1 == -1) {
-    myDebug() << "No studio found";
+//    myLog() << "No studio found";
     return;
   }
 

@@ -30,7 +30,7 @@
 
 <xsl:param name="version"/>
 
-<xsl:key name="books" match="tc:book" use=".//tc:author"/>
+<xsl:key name="books" match="tc:entry" use=".//tc:author"/>
 <xsl:key name="authors" match="tc:author" use="."/>
 
 <!-- more efficient to specify complete XPath like this than to use //tc:author -->

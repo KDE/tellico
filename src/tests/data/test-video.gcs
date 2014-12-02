@@ -192,4 +192,49 @@
    </line>
   </actors>
  </item>
+  <item
+  id="4"
+  title="100 Feet"
+  date="2008"
+  time="105"
+  director="Eric Red"
+  country="USA"
+  backpic=""
+  actors="Famke Janssen (Marnie Watson), Bobby Cannavale (Shanks), Ed Westwick (Joey), Michael Pare (Mike Watson), John Fallon (Jimmy), Patricia Charbonneau (Frances), Kevin Geer (Father Pritchet), Evelyne Kandech (Patrolwoman), Kembe Sorel (Patrolman), Tibor Palffy (Homeless man), Ken Kelsch (Garbage Man)"
+  original=""
+  webPage=""
+  seen="0"
+  added=""
+  region=""
+  format=""
+  number=""
+  identifier=""
+  place="On Hard Drive"
+  rating="5"
+  ratingpress=""
+  audio="English "
+  subt=""
+  age="17"
+  video=""
+  serie=""
+  rank=""
+  trailer=""
+  borrower=""
+  lendDate=""
+  borrowings=""
+  favourite=""
+  tags=""
+  gcsfield2="0"
+  gcsfield1="0"
+  gcsfield3="avi"
+  gcsfield4="1"
+ >
+  <synopsis>A young woman, Marnie Watson, is granted early release from her prison sentence for manslaughter (killing her husband - a violent NYC cop - in self defense) on condition she wear an electronic ankle bracelet and remain within her home, effectively under house arrest, for the remainder of her sentence. Her late husband's partner keeps tabs on her from a patrol car parked across the street, hoping she'll violate probation and he can send her back to prison. But the 100-foot radius her ankle bracelet allows isn't the worst of her problems. Her dead husband --now a malevolent ghost--is still in the house, where he died -- intent on savage revenge.</synopsis>
+  <comment></comment>
+  <genre>
+   <line>
+    <col>Science Fiction</col>
+   </line>
+  </genre>
+ </item>
 </collection>

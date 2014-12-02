@@ -166,7 +166,7 @@ void GCstarTest::testVideo() {
 
   QVERIFY(!coll.isNull());
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
-  QCOMPARE(coll->entryCount(), 2);
+  QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(!entry.isNull());
@@ -191,6 +191,13 @@ void GCstarTest::testVideo() {
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("comments").isEmpty());
 
+  entry = coll->entryById(4);
+  QVERIFY(!entry.isNull());
+  castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(castList.count(), 11);
+  QCOMPARE(castList.at(0), QLatin1String("Famke Janssen::Marnie Watson"));
+  QCOMPARE(entry->field("location"), QLatin1String("On Hard Drive"));
+
   Tellico::Export::GCstarExporter exporter(coll);
   exporter.setEntries(coll->entries());
   Tellico::Import::GCstarImporter importer2(exporter.text());
@@ -205,9 +212,17 @@ void GCstarTest::testVideo() {
     Tellico::Data::EntryPtr e2 = coll2->entryById(e1->id());
     QVERIFY(e2);
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
-      // skip images
-      if(f->type() != Tellico::Data::Field::Image) {
+      // skip images and tables
+      if(f->type() != Tellico::Data::Field::Image &&
+         f->type() != Tellico::Data::Field::Table) {
         QCOMPARE(f->name() + e2->field(f), f->name() + e1->field(f));
+      } else if(f->type() == Tellico::Data::Field::Table) {
+        QStringList rows1 = Tellico::FieldFormat::splitTable(e1->field(f));
+        QStringList rows2 = Tellico::FieldFormat::splitTable(e2->field(f));
+        QCOMPARE(rows1.count(), rows2.count());
+        for(int i = 0; i < rows1.count(); ++i) {
+          QCOMPARE(f->name() + rows2.at(i), f->name() + rows1.at(i));
+        }
       }
     }
   }

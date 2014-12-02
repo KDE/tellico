@@ -70,7 +70,7 @@
    <xsl:if test="item/@web or item/@webPage">
     <tc:field flags="0" title="URL" category="General" format="4" type="7" name="url" i18n="true"/>
    </xsl:if>
-   <xsl:if test="item/@location and $coll != 7 and $coll != 8">
+   <xsl:if test="(item/@location or item/@place) and $coll != 7 and $coll != 8">
      <tc:field flags="6" title="Location" category="Personal" format="4" type="1" name="location" i18n="true"/>
    </xsl:if>
    <xsl:if test="item/@composer">
@@ -349,16 +349,45 @@
 
 <xsl:template match="actors">
  <tc:casts>
-  <xsl:for-each select="line">
-   <tc:cast>
-    <tc:column>
-     <xsl:value-of select="col[1]"/>
-    </tc:column>
-    <tc:column>
-     <xsl:value-of select="col[2]"/>
-    </tc:column>
-   </tc:cast>
-  </xsl:for-each>
+  <xsl:if test="line">
+   <xsl:for-each select="line">
+    <tc:cast>
+     <tc:column>
+      <xsl:value-of select="col[1]"/>
+     </tc:column>
+     <tc:column>
+      <xsl:value-of select="col[2]"/>
+     </tc:column>
+    </tc:cast>
+   </xsl:for-each>
+  </xsl:if>
+  <xsl:if test="not(line)">
+   <xsl:for-each select="str:tokenize(., ',/;')">
+    <tc:cast>
+     <!-- could have role name in parentheses -->
+     <xsl:if test="contains(., '(')">
+      <tc:column>
+       <xsl:value-of select="normalize-space(substring-before(., '('))"/>
+      </tc:column>
+      <tc:column>
+       <xsl:variable name="role">
+        <xsl:call-template name="substring-before-last">
+         <xsl:with-param name="input" select="substring-after(., '(')"/>
+         <xsl:with-param name="substr" select="')'"/>
+        </xsl:call-template>
+       </xsl:variable>
+       <xsl:value-of select="normalize-space($role)"/>
+      </tc:column>
+     </xsl:if>
+     <xsl:if test="not(contains(., '('))">
+      <tc:column>
+       <xsl:value-of select="normalize-space(.)"/>
+      </tc:column>
+      <tc:column/>
+     </xsl:if>
+    </tc:cast>
+   </xsl:for-each>
+  </xsl:if>
  </tc:casts>
 </xsl:template>
 
@@ -403,6 +432,10 @@
  <tc:comments><xsl:value-of select="."/></tc:comments>
 </xsl:template>
 
+<xsl:template match="place">
+ <tc:location><xsl:value-of select="."/></tc:location>
+</xsl:template>
+
 <xsl:template match="image|boxpic">
  <tc:cover>
   <xsl:choose>
@@ -445,7 +478,7 @@
    <xsl:when test=". &lt; 14">
     <xsl:text>PG-13 (USA)</xsl:text>
    </xsl:when>
-   <xsl:when test=". &lt; 18">
+   <xsl:when test=". &lt; 19">
     <xsl:text>R (USA)</xsl:text>
    </xsl:when>
   </xsl:choose>
@@ -802,6 +835,22 @@
     </xsl:element>
    </xsl:otherwise>
   </xsl:choose>
+</xsl:template>
+
+<xsl:template name="substring-before-last">
+ <xsl:param name="input"/>
+ <xsl:param name="substr"/>
+ <xsl:if test="$substr and contains($input, $substr)">
+  <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+  <xsl:value-of select="substring-before($input, $substr)"/>
+  <xsl:if test="contains($temp, $substr)">
+   <xsl:value-of select="$substr"/>
+   <xsl:call-template name="substring-before-last">
+    <xsl:with-param name="input" select="$temp"/>
+    <xsl:with-param name="substr" select="$substr"/>
+   </xsl:call-template>
+  </xsl:if>
+ </xsl:if>
 </xsl:template>
 
 <xsl:template name="year">
