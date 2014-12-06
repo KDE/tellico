@@ -1,3 +1,7 @@
+2014-12-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with importing Goodreads collection.
+
 2014-11-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Added workaround for incorrect cover thumbnail in BoardGameGeek fetcher.
