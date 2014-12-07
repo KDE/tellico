@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2014 Robby Stephenson <robby@periapsis.org>
     Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
@@ -383,6 +383,9 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::AMC, "file_import_amc", i18n("Import Ant Movie Catalog Data..."),
                 i18n("Import an Ant Movie Catalog data file"), BarIcon(QLatin1String("amc")));
+
+  IMPORT_ACTION(Import::BoardGameGeek, "file_import_boardgamegeek", i18n("Import BoardGameGeek Collection..."),
+                i18n("Import a collection from BoardGameGeek.com"), BarIcon(QLatin1String("boardgamegeek")));
 
   IMPORT_ACTION(Import::VinoXML, "file_import_vinoxml", i18n("Import VinoXML..."),
                 i18n("Import VinoXML data"), BarIcon(QLatin1String("vinoxml")));

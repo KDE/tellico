@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2014 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -49,6 +49,7 @@
 #include "translators/goodreadsimporter.h"
 #include "translators/ciwimporter.h"
 #include "translators/vinoxmlimporter.h"
+#include "translators/boardgamegeekimporter.h"
 
 #include <klocale.h>
 #include <kstandarddirs.h>
@@ -278,6 +279,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::VinoXMLImporter(firstURL);
       break;
+
+    case Import::BoardGameGeek:
+      CHECK_SIZE;
+      importer = new Import::BoardGameGeekImporter();
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -369,6 +375,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::FileListing:
     case Import::GRS1:
     case Import::Goodreads:
+    case Import::BoardGameGeek:
       break;
   }
 
@@ -386,6 +393,7 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
     case Import::Alexandria:
     case Import::FreeDB:
     case Import::Goodreads:
+    case Import::BoardGameGeek:
       return Import::None;
     default:
       return Import::File;
