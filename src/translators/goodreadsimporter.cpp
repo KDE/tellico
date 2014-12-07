@@ -88,7 +88,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
     m_user = idFromName(m_user);
   }
   if(m_user.isEmpty()) {
-    setStatusMessage(i18n("A valid Goodreads user ID must be entered."));
+    setStatusMessage(i18n("A valid user ID must be entered."));
     return Data::CollPtr();
   }
 
@@ -103,6 +103,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);
+  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
 

@@ -6,6 +6,7 @@ set(ICON_FILES
     amc.png
     bibtex.png
     boardgame.png
+    boardgamegeek.png
     book.png
     card.png
     checkmark.png

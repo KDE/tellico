@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2014 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,71 +22,52 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_IMPORT_BOARDGAMEGEEKIMPORTER_H
+#define TELLICO_IMPORT_BOARDGAMEGEEKIMPORTER_H
+
+#include "importer.h"
+
+class QCheckBox;
+
+class KLineEdit;
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+*/
+class BoardGameGeekImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  BoardGameGeekImporter();
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB,
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  virtual Data::CollPtr collection();
+  virtual bool canImport(int type) const;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+  virtual QWidget* widget(QWidget* parent);
 
+public slots:
+  void slotCancel();
+
+private:
+  QString text(const QStringList& idList) const;
+
+  Data::CollPtr m_coll;
+  bool m_cancelled;
+
+  QWidget* m_widget;
+  KLineEdit* m_userEdit;
+  QCheckBox* m_checkOwned;
+
+  KUrl m_xsltURL;
+  QString m_user;
+  bool m_ownedOnly;
+};
+
+  } // end namespace
+} // end namespace
 #endif
