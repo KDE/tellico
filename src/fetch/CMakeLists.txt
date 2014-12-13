@@ -11,6 +11,7 @@ SET(fetch_STAT_SRCS
    beyazperdefetcher.cpp
    bibliosharefetcher.cpp
    bibsonomyfetcher.cpp
+   boardgamegeekfetcher.cpp
    citebasefetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp

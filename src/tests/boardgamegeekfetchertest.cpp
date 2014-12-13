@@ -29,6 +29,7 @@
 #include "qtest_kde.h"
 
 #include "../fetch/execexternalfetcher.h"
+#include "../fetch/boardgamegeekfetcher.h"
 #include "../collections/boardgamecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
@@ -43,16 +44,17 @@ BoardGameGeekFetcherTest::BoardGameGeekFetcherTest() : AbstractFetcherTest() {
 }
 
 void BoardGameGeekFetcherTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
+  Tellico::ImageFactory::init();
+  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+}
+
+void BoardGameGeekFetcherTest::testTitle() {
   const QString ruby = KStandardDirs::findExe(QLatin1String("ruby"));
   if(ruby.isEmpty()) {
     QSKIP("This test requires ruby", SkipAll);
   }
 
-  Tellico::RegisterCollection<Tellico::Data::BoardGameCollection> registerBoard(Tellico::Data::Collection::BoardGame, "boardgame");
-  Tellico::ImageFactory::init();
-}
-
-void BoardGameGeekFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Title,
                                        QLatin1String("settlers of catan"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
@@ -78,4 +80,35 @@ void BoardGameGeekFetcherTest::testTitle() {
   QCOMPARE(entry->field(QLatin1String("num-player")), QLatin1String("3; 4"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
+}
+
+void BoardGameGeekFetcherTest::testTitleAPI() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Title,
+                                       QLatin1String("The Settlers of Catan"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Settlers of Catan"));
+  QCOMPARE(entry->field(QLatin1String("designer")), QLatin1String("Klaus Teuber"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("publisher"))).at(0), QLatin1String("999 Games"));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1995"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre"))).at(0), QLatin1String("Civilization"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("mechanism"))).at(0), QLatin1String("Dice Rolling"));
+  QCOMPARE(entry->field(QLatin1String("num-player")), QLatin1String("3; 4"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
+}
+
+void BoardGameGeekFetcherTest::testKeywordAPI() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Keyword,
+                                       QLatin1String("The Settlers of Catan"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 10);
 }
