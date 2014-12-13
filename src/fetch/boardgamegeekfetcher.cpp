@@ -80,6 +80,12 @@ KUrl BoardGameGeekFetcher::searchUrl() {
       u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
       break;
 
+    case Raw:
+      u.setUrl(QLatin1String(BGG_THING_URL));
+      u.addQueryItem(QLatin1String("id"), request().value);
+      u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      break;
+
     default:
       myWarning() << "key not recognized: " << request().key;
       return KUrl();
@@ -141,6 +147,11 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
 }
 
 Tellico::Fetch::FetchRequest BoardGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
+  QString bggid = entry_->field(QLatin1String("bggid"));
+  if(!bggid.isEmpty()) {
+    return FetchRequest(Raw, bggid);
+  }
+
   QString title = entry_->field(QLatin1String("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
