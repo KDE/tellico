@@ -98,7 +98,7 @@
 
   <cover>
    <xsl:if test="starts-with(thumbnail, '//')">
-    <xsl:text>http:</xsl:text>
+    <xsl:text>https:</xsl:text>
    </xsl:if>
    <xsl:value-of select="thumbnail"/>
   </cover>
