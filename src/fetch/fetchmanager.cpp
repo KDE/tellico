@@ -255,6 +255,18 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
     return Fetcher::Ptr();
   }
 
+  // special case: the BoardGameGeek fetcher was originally implemented as a Ruby script
+  // now, it's availavle with an XML API, so prefer the new version
+  // so check for fetcher version and switch to the XML if version is missing or lower
+  if(fetchType == Fetch::ExecExternal &&
+     config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("boardgamegeek.rb"))) {
+    KConfigGroup generalConfig(config_, QLatin1String("General Options"));
+    if(generalConfig.readEntry("FetchVersion", 0) < 1) {
+      fetchType = Fetch::BoardGameGeek;
+      generalConfig.writeEntry("FetchVersion", 1);
+    }
+  }
+
   Fetcher::Ptr f;
   if(functionRegistry.contains(fetchType)) {
     f = functionRegistry.value(fetchType).create(this);
@@ -286,6 +298,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(MusicBrainz);
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(TheGamesDB);
+  FETCHER_ADD(BoardGameGeek);
 // only add IBS if user includes italian
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     FETCHER_ADD(IBS);

@@ -11,7 +11,6 @@ SET(SCRIPT_FILES
 
 SET(SPEC_FILES
     bedetheque.py.spec
-    boardgamegeek.rb.spec
     dark_horse_comics.py.spec
     fr.allocine.py.spec
     ministerio_de_cultura.py.spec

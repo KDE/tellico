@@ -1,3 +1,7 @@
+2014-12-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Converted the BoardGameGeek fetcher from a script to the XML API.
+
 2014-12-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Added importer for BoardGameGeek collections.

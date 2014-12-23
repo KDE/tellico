@@ -127,8 +127,8 @@ void Fetcher::saveConfig() {
 Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
   QPointer<Fetcher> ptr(this);
   Data::EntryPtr entry = fetchEntryHook(uid_);
-  // could be cancelled after fetching entry, check isSearching
-  if(ptr && entry && isSearching()) {
+  // could be cancelled and killed after fetching entry, check ptr
+  if(ptr && entry) {
     // iterate over list of possible optional fields
     // and if the field is not included in the user-configured list
     // remove the field from the entry
