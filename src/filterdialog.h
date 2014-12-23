@@ -112,7 +112,13 @@ private:
   KPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;  //krazy:exclude=qclasses
   QStringList m_ruleFieldList;
-  bool m_isDate;
+  enum RuleType {
+    General,
+    Date,
+    Number
+  };
+  RuleType m_ruleType;
+
 };
 
 class FilterRuleWidgetLister : public KWidgetLister {

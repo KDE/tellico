@@ -1,3 +1,7 @@
+2014-12-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added filter rules for numbers less than and greater.
+
 2014-12-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Converted the BoardGameGeek fetcher from a script to the XML API.
