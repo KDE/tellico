@@ -62,6 +62,10 @@ bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
       return before(entry_);
     case FuncAfter:
       return after(entry_);
+    case FuncLess:
+      return lessThan(entry_);
+    case FuncGreater:
+      return greaterThan(entry_);
     default:
       myWarning() << "invalid function!";
       break;
@@ -180,11 +184,37 @@ bool FilterRule::after(Tellico::Data::EntryPtr entry_) const {
   return value.isValid() && value > pattern;
 }
 
+bool FilterRule::lessThan(Tellico::Data::EntryPtr entry_) const {
+  // empty field name means search all
+  // but the rule widget should limit this function to number fields only
+  if(m_fieldName.isEmpty()) {
+    return false;
+  }
+  const double pattern = m_patternVariant.toDouble();
+  bool ok = false;
+  const double value = entry_->field(m_fieldName).toDouble(&ok);
+  return ok && value < pattern;
+}
+
+bool FilterRule::greaterThan(Tellico::Data::EntryPtr entry_) const {
+  // empty field name means search all
+  // but the rule widget should limit this function to number fields only
+  if(m_fieldName.isEmpty()) {
+    return false;
+  }
+  const double pattern = m_patternVariant.toDouble();
+  bool ok = false;
+  const double value = entry_->field(m_fieldName).toDouble(&ok);
+  return ok && value > pattern;
+}
+
 void FilterRule::updatePattern() {
   if(m_function == FuncRegExp || m_function == FuncNotRegExp) {
     m_patternVariant = QRegExp(m_pattern, Qt::CaseInsensitive);
   } else if(m_function == FuncBefore || m_function == FuncAfter)  {
     m_patternVariant = QDate::fromString(m_pattern, Qt::ISODate);
+  } else if(m_function == FuncLess || m_function == FuncGreater)  {
+    m_patternVariant = m_pattern.toDouble();
   } else {
     // we don't even use it
     m_patternVariant = QVariant();

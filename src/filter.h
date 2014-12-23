@@ -53,7 +53,8 @@ public:
     FuncContains=0, FuncNotContains,
     FuncEquals, FuncNotEquals,
     FuncRegExp, FuncNotRegExp,
-    FuncBefore, FuncAfter
+    FuncBefore, FuncAfter,
+    FuncLess, FuncGreater
   };
 
   FilterRule();
@@ -102,6 +103,8 @@ private:
   bool matchesRegExp(Data::EntryPtr entry) const;
   bool before(Data::EntryPtr entry) const;
   bool after(Data::EntryPtr entry) const;
+  bool lessThan(Data::EntryPtr entry) const;
+  bool greaterThan(Data::EntryPtr entry) const;
   void updatePattern();
 
   QString m_fieldName;

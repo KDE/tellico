@@ -66,7 +66,7 @@ using Tellico::FilterRuleWidgetLister;
 using Tellico::FilterDialog;
 
 FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
-    : KHBox(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_isDate(false) {
+    : KHBox(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_ruleType(General) {
   initLists();
   initWidget();
 
@@ -142,7 +142,7 @@ void FilterRuleWidget::slotEditRegExp() {
 
 void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   Q_UNUSED(which_);
-  m_isDate = false;
+  m_ruleType = General;
   QString fieldTitle = m_ruleField->currentText();
   if(fieldTitle.isEmpty() || fieldTitle[0] == QLatin1Char('<')) {
     m_ruleValue->setCompletionObject(0);
@@ -160,7 +160,13 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
     m_ruleValue->setCompletionObject(0);
   }
 
-  m_isDate = field && field->type() == Data::Field::Date;
+  if(field) {
+    if(field->type() == Data::Field::Date) {
+      m_ruleType = Date;
+    } else if(field->type() == Data::Field::Number) {
+      m_ruleType = Number;
+    }
+  }
   updateFunctionList();
 }
 
@@ -172,7 +178,7 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
   }
 
   // don't show the date picker if we're using regular expressions
-  if(m_isDate && data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp) {
+  if(m_ruleType == Date && data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp) {
 #if KDE_IS_VERSION(4,6,0)
     m_valueStack->setCurrentWidget(m_ruleDate);
 #else
@@ -182,6 +188,11 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
 } else {
     m_valueStack->setCurrentWidget(m_ruleValue);
     m_ruleValue->setClickMessage(QString());
+    if(m_ruleType == Number) {
+      m_ruleValue->setValidator(new QIntValidator(this));
+    } else {
+      m_ruleValue->setValidator(0);
+    }
   }
 }
 
@@ -193,13 +204,13 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
 
   blockSignals(true);
 
-  m_isDate = false;
+  m_ruleType = General;
   if(rule_->fieldName().isEmpty()) {
     m_ruleField->setCurrentIndex(0); // "All Fields"
   } else {
     Data::FieldPtr field = Data::Document::self()->collection()->fieldByName(rule_->fieldName());
     if(field && field->type() == Data::Field::Date) {
-      m_isDate = true;
+      m_ruleType = Date;
       const QDate date = QDate::fromString(rule_->pattern(), Qt::ISODate);
       if(date.isValid()) {
 #if KDE_IS_VERSION(4,6,0)
@@ -213,11 +224,13 @@ void FilterRuleWidget::setRule(const Tellico::FilterRule* rule_) {
     m_ruleField->setCurrentIndex(idx);
   }
 
+  // update the rulle fields first, before possible values
+  slotRuleFieldChanged(m_ruleField->currentIndex());
+
   //--------------set function and contents
   m_ruleFunc->setCurrentData(rule_->function());
   m_ruleValue->setText(rule_->pattern());
 
-  slotRuleFieldChanged(m_ruleField->currentIndex());
   slotRuleFunctionChanged(m_ruleFunc->currentIndex());
   blockSignals(false);
 }
@@ -266,20 +279,31 @@ void FilterRuleWidget::updateFunctionList() {
   Q_ASSERT(m_ruleFunc);
   const QVariant data = m_ruleFunc->currentData();
   m_ruleFunc->clear();
-  if(m_isDate) {
-    m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
-    m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
-    m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
-    m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
-    m_ruleFunc->addItem(i18nc("is before a date", "is before"), FilterRule::FuncBefore);
-    m_ruleFunc->addItem(i18nc("is after a date", "is after"), FilterRule::FuncAfter);
-  } else {
-    m_ruleFunc->addItem(i18n("contains"), FilterRule::FuncContains);
-    m_ruleFunc->addItem(i18n("does not contain"), FilterRule::FuncNotContains);
-    m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
-    m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
-    m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
-    m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+  switch(m_ruleType) {
+    case Date:
+      m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+      m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
+      m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
+      m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+      m_ruleFunc->addItem(i18nc("is before a date", "is before"), FilterRule::FuncBefore);
+      m_ruleFunc->addItem(i18nc("is after a date", "is after"), FilterRule::FuncAfter);
+      break;
+    case Number:
+      m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+      m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
+      m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
+      m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+      m_ruleFunc->addItem(i18nc("is less than a number", "is less than"), FilterRule::FuncLess);
+      m_ruleFunc->addItem(i18nc("is greater than a number", "is greater than"), FilterRule::FuncGreater);
+      break;
+    case General:
+      m_ruleFunc->addItem(i18n("contains"), FilterRule::FuncContains);
+      m_ruleFunc->addItem(i18n("does not contain"), FilterRule::FuncNotContains);
+      m_ruleFunc->addItem(i18n("equals"), FilterRule::FuncEquals);
+      m_ruleFunc->addItem(i18n("does not equal"), FilterRule::FuncNotEquals);
+      m_ruleFunc->addItem(i18n("matches regexp"), FilterRule::FuncRegExp);
+      m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
+      break;
   }
   m_ruleFunc->setCurrentData(data);
   slotRuleFunctionChanged(m_ruleFunc->currentIndex());

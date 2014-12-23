@@ -163,4 +163,24 @@ void FilterTest::testFilter() {
   QVERIFY(!filter.matches(entry));
   rule6->setFunction(Tellico::FilterRule::FuncBefore);
   QVERIFY(!filter.matches(entry));
+
+  Tellico::Data::FieldPtr number(new Tellico::Data::Field(QLatin1String("number"),
+                                                          QLatin1String("Number"),
+                                                          Tellico::Data::Field::Number));
+  coll->addField(number);
+  entry->setField(QLatin1String("number"), QLatin1String("3"));
+
+  Tellico::FilterRule* rule7 = new Tellico::FilterRule(QLatin1String("number"),
+                                                       QLatin1String("5.0"),
+                                                       Tellico::FilterRule::FuncLess);
+  QCOMPARE(rule7->pattern(), QLatin1String("5.0"));
+  filter.clear();
+  filter.append(rule7);
+  QVERIFY(filter.matches(entry));
+
+  rule7->setFunction(Tellico::FilterRule::FuncGreater);
+  QVERIFY(!filter.matches(entry));
+
+  entry->setField(QLatin1String("number"), QLatin1String("6"));
+  QVERIFY(filter.matches(entry));
 }
