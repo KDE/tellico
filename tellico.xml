@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+q<?xml version="1.0" encoding="UTF-8"?>
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/x-tellico">
     <sub-class-of type="application/zip"/>
@@ -12,7 +12,7 @@
     <comment xml:lang="et">Tellico andmefail</comment>
     <comment xml:lang="fi">Tellico-tiedosto</comment>
     <comment xml:lang="fr">Fichier de données de Tellico</comment>
-    <comment xml:lang="nl">Tellico-gegevensbestand</comment>
+    <comment xml:lang="nl">Tellico gegevensbestand</comment>
     <comment xml:lang="pl">Plik danych Tellico</comment>
     <comment xml:lang="pt">Ficheiro de Dados do Tellico</comment>
     <comment xml:lang="pt_BR">Arquivo de dados do Tellico</comment>
