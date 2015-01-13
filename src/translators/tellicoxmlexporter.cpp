@@ -463,6 +463,12 @@ void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent
       case FilterRule::FuncAfter:
         ruleElem.setAttribute(QLatin1String("function"), QLatin1String("after"));
         break;
+      case FilterRule::FuncGreater:
+        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("greaterthan"));
+        break;
+      case FilterRule::FuncLess:
+        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("lessthan"));
+        break;
     }
     filterElem.appendChild(ruleElem);
   }
@@ -578,7 +584,9 @@ bool TellicoXMLExporter::version12Needed() const {
   foreach(FilterPtr filter, collection()->filters()) {
     foreach(FilterRule* rule, *filter) {
       if(rule->function() == FilterRule::FuncBefore ||
-         rule->function() == FilterRule::FuncAfter) {
+         rule->function() == FilterRule::FuncAfter ||
+         rule->function() == FilterRule::FuncGreater ||
+         rule->function() == FilterRule::FuncLess) {
         return true;
       }
     }
