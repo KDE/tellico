@@ -762,6 +762,7 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
     myWarning() << "empty rule!";
     return true;
   }
+  /* If anything is updated here, be sure to update tellicoxmlexporter */
   QString function = attValue(atts_, "function").toLower();
   FilterRule::Function func;
   if(function == QLatin1String("contains")) {
@@ -780,6 +781,10 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
     func = FilterRule::FuncBefore;
   } else if(function == QLatin1String("after")) {
     func = FilterRule::FuncAfter;
+  } else if(function == QLatin1String("greaterthan")) {
+    func = FilterRule::FuncGreater;
+  } else if(function == QLatin1String("lessthan")) {
+    func = FilterRule::FuncLess;
   } else {
     myWarning() << "invalid rule function:" << function;
     return true;
