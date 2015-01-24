@@ -1,3 +1,7 @@
+2015-01-23  Robby Stephenson  <robby@homebase.mars>
+
+	* Updated the Discogs data source to use the new JSON API.
+
 2014-12-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Added filter rules for numbers less than and greater.

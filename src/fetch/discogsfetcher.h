@@ -25,9 +25,17 @@
 #ifndef TELLICO_DISCOGSFETCHER_H
 #define TELLICO_DISCOGSFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
+#include <QPointer>
+
+class KLineEdit;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
 
@@ -38,7 +46,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class DiscogsFetcher : public XMLFetcher {
+class DiscogsFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -52,10 +60,14 @@ public:
   /**
    */
   virtual QString source() const;
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == Keyword; }
+  virtual bool isSearching() const { return m_started; }
+  virtual bool canSearch(FetchKey k) const;
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual Type type() const { return Discogs; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
+  virtual void saveConfigHook(KConfigGroup&) {}
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -65,8 +77,10 @@ public:
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DiscogsFetcher* fetcher = 0);
-    virtual void saveConfigHook(KConfigGroup&) {}
+    virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
+  private:
+    KLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -74,15 +88,22 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
-private:
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
-  virtual KUrl searchUrl();
-  virtual void parseData(QByteArray& data);
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+private slots:
+  void slotComplete(KJob* job);
 
-  int m_start;
-  int m_total;
+private:
+  virtual void search();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
+
+  static QString value(const QVariantMap& map, const char* name);
+
+  bool m_started;
+
+  QString m_apiKey;
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
 };
 
   } // end namespace

@@ -469,6 +469,7 @@ void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent
       case FilterRule::FuncLess:
         ruleElem.setAttribute(QLatin1String("function"), QLatin1String("lessthan"));
         break;
+      /* If anything is updated here, be sure to update xmlstatehandler */
     }
     filterElem.appendChild(ruleElem);
   }

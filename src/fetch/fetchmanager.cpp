@@ -294,7 +294,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Arxiv);
   FETCHER_ADD(GoogleScholar);
-  FETCHER_ADD(Discogs);
   FETCHER_ADD(MusicBrainz);
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(TheGamesDB);
