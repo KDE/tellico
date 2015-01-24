@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfig>
+
 class DiscogsFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -37,6 +39,11 @@ private Q_SLOTS:
   void testTitle();
   void testPerson();
   void testKeyword();
+  void testRawData();
+
+private:
+  bool m_hasConfigFile;
+  KConfig m_config;
 };
 
 #endif

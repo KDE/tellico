@@ -14,7 +14,6 @@ SET(XSLT_FILES
     crossref2tellico.xsl
     dblp2tellico.xsl
     delicious2tellico.xsl
-    discogs2tellico.xsl
     douban2tellico.xsl
     dvd-logo.png
     dvdfr2tellico.xsl
