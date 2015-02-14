@@ -29,10 +29,11 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <QEventLoop>
+#include <QPointer>
 
-namespace KXmlRpc {
-  class Client;
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
 }
 
 namespace Tellico {
@@ -82,29 +83,19 @@ public:
   static StringHash allOptionalFields();
 
 private slots:
-  void gotSession(const QList<QVariant>&, const QVariant&);
-  void gotFilmSearch(const QList<QVariant>&, const QVariant&);
-  void gotFilmDetails(const QList<QVariant>&, const QVariant&);
-  void gotFilmImage(const QList<QVariant>&, const QVariant&);
-  void gotDirectorSearch(const QList<QVariant>&, const QVariant&);
-  void gotDirectorFilms(const QList<QVariant>&, const QVariant&);
-  void gotError(int code, const QString&, const QVariant&);
+  void slotComplete(KJob* job);
 
 private:
   virtual void search();
-  void checkSession();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
 
-  QHash<int, int> m_films;
-  QHash<int, Data::EntryPtr> m_entries;
+  static QString value(const QVariantMap& map, const char* name);
 
   bool m_started;
-  KXmlRpc::Client* m_client;
-  QString m_session;
-  QDateTime m_validTill;
-  QEventLoop m_loop;
-  Data::CollPtr m_coll;
-  Data::EntryPtr m_currEntry;
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
 };
 
   } // end namespace
