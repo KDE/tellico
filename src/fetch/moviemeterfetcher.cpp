@@ -25,14 +25,14 @@
 #include <config.h>
 #include "moviemeterfetcher.h"
 #include "../collections/videocollection.h"
-#include "../images/imagefactory.h"
-#include "../images/image.h"
-#include "../entry.h"
+#include "../gui/guiproxy.h"
+#include "../core/filehandler.h"
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocale>
-#include <KCodecs>
+#include <kio/job.h>
+#include <kio/jobuidelegate.h>
 
 #include <QLabel>
 #include <QFile>
@@ -40,28 +40,22 @@
 #include <QGridLayout>
 #include <QTextCodec>
 
-// we use an internal copy of kxmlrpc for versions before 4.7
-// since it doesn't handle character encoding correctly
-// see https://git.reviewboard.kde.org/r/101838/
-#include <kdeversion.h>
-#if defined(HAVE_KXMLRPC) && KDE_IS_VERSION(4,7,0)
-#include <kxmlrpcclient/client.h>
-#else
-#include "xmlrpc/client.h"
+#ifdef HAVE_QJSON
+#include <qjson/serializer.h>
+#include <qjson/parser.h>
 #endif
 
 namespace {
   static const char* MOVIEMETER_API_KEY = "t80a06uf736d0yd00jpynpdsgea255yk";
-  static const char* MOVIEMETER_URL = "http://www.moviemeter.nl/ws";
+  static const char* MOVIEMETER_API_URL = "http://www.moviemeter.nl/api/film/";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::MovieMeterFetcher;
 
 MovieMeterFetcher::MovieMeterFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_client(0) {
-  m_client = new KXmlRpc::Client(KUrl(MOVIEMETER_URL), this);
-  m_client->setUserAgent(QLatin1String("Tellico"));
+    : Fetcher(parent_)
+    , m_started(false) {
 }
 
 MovieMeterFetcher::~MovieMeterFetcher() {
@@ -72,14 +66,15 @@ QString MovieMeterFetcher::source() const {
 }
 
 QString MovieMeterFetcher::attribution() const {
-//  return i18n("This data is licensed under <a href=""%1"">specific terms</a>.")
-//         .arg(QLatin1String("http://filmaster.com/license/"));
-//  return QLatin1String("<a href=\"http://www.moviemeter.nl\">MovieMeter</a>");
-  return QString();
+  return QLatin1String("<a href=\"http://www.moviemeter.nl\">MovieMeter</a>");
 }
 
 bool MovieMeterFetcher::canSearch(FetchKey k) const {
-  return k == Person || k == Keyword;
+#ifdef HAVE_QJSON
+  return k == Keyword;
+#else
+  return false;
+#endif
 }
 
 bool MovieMeterFetcher::canFetch(int type) const {
@@ -90,76 +85,86 @@ void MovieMeterFetcher::readConfigHook(const KConfigGroup&) {
 }
 
 void MovieMeterFetcher::search() {
+#ifdef HAVE_QJSON
   m_started = true;
 
-  checkSession();
-  Q_ASSERT(!m_session.isEmpty());
-
-  // MovieMeter can handle searches with no accent marks, go ahead and remove them always
-  QList<QVariant> args;
-  args << m_session << removeAccents(request().value);
+  KUrl u(MOVIEMETER_API_URL);
+  u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
   switch(request().key) {
-    case Title:
     case Keyword:
-      m_client->call(QLatin1String("film.search"), QVariantList() << args,
-                     this, SLOT(gotFilmSearch(const QList<QVariant>&, const QVariant&)),
-                     this, SLOT(gotError(int, const QString&, const QVariant&)));
+      u.addQueryItem(QLatin1String("q"), request().value);
+      //u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
-    case Person:
-      m_client->call(QLatin1String("director.search"), args,
-                     this, SLOT(gotDirectorSearch(const QList<QVariant>&, const QVariant&)),
-                     this, SLOT(gotError(int, const QString&, const QVariant&)));
+    case Raw:
+      u.setEncodedQuery(request().value.toUtf8());
       break;
 
     default:
+      myWarning() << "key not recognized:" << request().key;
       stop();
-      break;
+      return;
   }
-}
 
-void MovieMeterFetcher::checkSession() {
-  if(m_session.isEmpty() || QDateTime::currentDateTime().secsTo(m_validTill) < 5*60) {
-    m_client->call(QLatin1String("api.startSession"), QString::fromLatin1(MOVIEMETER_API_KEY),
-                   this, SLOT(gotSession(const QList<QVariant>&, const QVariant&)),
-                   this, SLOT(gotError(int, const QString&, const QVariant&)));
-    m_loop.exec();
-  }
+//  myDebug() << "url: " << u.url();
+
+  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  m_job->ui()->setWindow(GUI::Proxy::widget());
+  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+#else
+  stop();
+#endif
 }
 
 void MovieMeterFetcher::stop() {
   if(!m_started) {
     return;
   }
+  if(m_job) {
+    m_job->kill();
+    m_job = 0;
+  }
   m_started = false;
-  m_currEntry.clear();
   emit signalDone(this);
 }
 
 Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
-  // if the entry is not in the hash yet, we need to fetch it
-  if(!m_entries.contains(uid_)) {
-    if(!m_films.contains(uid_)) {
-      myWarning() << "no entry in dict";
-      return Data::EntryPtr();
-    }
-    if(!m_coll) {
-      m_coll = new Data::VideoCollection(true);
-    }
-    m_currEntry = new Data::Entry(m_coll);
-    m_coll->addEntries(m_currEntry);
-    m_entries.insert(uid_, m_currEntry);
-    m_client->call(QLatin1String("film.retrieveDetails"), QVariantList() << m_session << m_films[uid_],
-                   this, SLOT(gotFilmDetails(const QList<QVariant>&, const QVariant&)),
-                   this, SLOT(gotError(int, const QString&, const QVariant&)));
-    m_loop.exec();
-    m_client->call(QLatin1String("film.retrieveImage"), QVariantList() << m_session << m_films[uid_],
-                   this, SLOT(gotFilmImage(const QList<QVariant>&, const QVariant&)),
-                   this, SLOT(gotError(int, const QString&, const QVariant&)));
-    m_loop.exec();
+  Data::EntryPtr entry = m_entries.value(uid_);
+  if(!entry) {
+    myWarning() << "no entry in dict";
+    return Data::EntryPtr();
   }
-  return m_entries.value(uid_);
+
+#ifdef HAVE_QJSON
+  QString id = entry->field(QLatin1String("moviemeter-id"));
+  if(!id.isEmpty()) {
+    KUrl u(MOVIEMETER_API_URL);
+    u.addPath(id);
+    u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+    // quiet
+    QByteArray data = FileHandler::readDataFile(u, true);
+
+#if 0
+    myWarning() << "Remove debug2 from moviemeterfetcher.cpp";
+    QFile f(QString::fromLatin1("/tmp/test2.json"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t.setCodec("UTF-8");
+      t << data;
+    }
+    f.close();
+#endif
+
+    QJson::Parser parser;
+    populateEntry(entry, parser.parse(data).toMap(), true);
+  }
+#endif
+
+  // don't want to include ID field
+  entry->setField(QLatin1String("moviemeter-id"), QString());
+
+  return entry;
 }
 
 Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -170,176 +175,105 @@ Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr ent
   return FetchRequest();
 }
 
-void MovieMeterFetcher::gotSession(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_UNUSED(result_);
-  Q_ASSERT(m_loop.isRunning());
-  if(!args_.isEmpty()) {
-//    myDebug() << args_;
-    const QVariantMap map = args_.first().toMap();
-    m_session = map.value(QLatin1String("session_key")).toString();
-//    myDebug() << m_session;
-    const int valid_till = map.value(QLatin1String("valid_till")).toInt();
-    m_validTill.setTime_t(valid_till);
-  }
-  m_loop.quit();
-}
+void MovieMeterFetcher::slotComplete(KJob* job_) {
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
+#ifdef HAVE_QJSON
+//  myDebug();
 
-void MovieMeterFetcher::gotFilmSearch(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_UNUSED(result_);
-  if(args_.isEmpty()) {
+  if(job->error()) {
+    job->ui()->showErrorMessage();
     stop();
     return;
   }
-  foreach(const QVariant& v, args_.first().toList()) {
-    const QVariantMap map = v.toMap();
-    if(map.isEmpty()) {
-      myDebug() << "empty map";
-      break;
-    }
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this),
-                                     decodeHTML(map.value(QLatin1String("title")).toString()),
-                                     map.value(QLatin1String("year")).toString());
-    m_films.insert(r->uid, map.value(QLatin1String("filmId")).toInt());
-//    myDebug() << m_films.value(r->uid);
-    emit signalResultFound(r);
-  }
-  stop();
-}
 
-void MovieMeterFetcher::gotFilmDetails(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_ASSERT(m_coll);
-  Q_ASSERT(m_currEntry);
-  Q_UNUSED(result_);
-  if(args_.isEmpty() || !m_currEntry) {
-    m_loop.quit();
+  QByteArray data = job->data();
+  if(data.isEmpty()) {
+    myDebug() << "no data";
+    stop();
     return;
   }
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
+  m_job = 0;
 
-  const QVariantMap map = args_.first().toMap();
-  m_currEntry->setField(QLatin1String("title"), decodeHTML(map.value(QLatin1String("title")).toString()));
-  m_currEntry->setField(QLatin1String("year"), map.value(QLatin1String("year")).toString());
-  QStringList genres;
-  foreach(const QVariant& v, map.value(QLatin1String("genres")).toList()) {
-    genres << decodeHTML(v.toString());
+#if 0
+  myWarning() << "Remove debug from moviemeterfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
   }
-  m_currEntry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
-  QStringList actors;
-  foreach(const QVariant& v, map.value(QLatin1String("actors")).toList()) {
-    actors << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
-  }
-  m_currEntry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
-  QStringList directors;
-  foreach(const QVariant& v, map.value(QLatin1String("directors")).toList()) {
-    directors << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
-  }
-  m_currEntry->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
-  m_currEntry->setField(QLatin1String("running-time"), map.value(QLatin1String("duration")).toString());
-  m_currEntry->setField(QLatin1String("plot"), decodeHTML(map.value(QLatin1String("plot")).toString()));
-  QStringList countries;
-  foreach(const QVariant& v, map.value(QLatin1String("countries")).toList()) {
-    countries << decodeHTML(v.toMap().value(QLatin1String("name")).toString());
-  }
-  m_currEntry->setField(QLatin1String("nationality"), countries.join(FieldFormat::rowDelimiterString()));
+  f.close();
+#endif
 
-  const QString mm = QLatin1String("moviemeter");
-  if(!m_coll->hasField(mm) && optionalFields().contains(mm)) {
-    Data::FieldPtr field(new Data::Field(mm, i18n("MovieMeter Link"), Data::Field::URL));
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  // always add ID for fetchEntryHook
+  Data::FieldPtr field(new Data::Field(QLatin1String("moviemeter-id"), QLatin1String("MovieMeter ID"), Data::Field::Line));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
+
+  if(optionalFields().contains(QLatin1String("moviemeter"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("moviemeter"), i18n("MovieMeter Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
-    m_coll->addField(field);
-    m_currEntry->setField(mm, map.value(QLatin1String("url")).toString());
+    coll->addField(field);
   }
-  const QString alttitle = QLatin1String("alttitle");
-  if(!m_coll->hasField(alttitle) && optionalFields().contains(alttitle)) {
-    Data::FieldPtr field(new Data::Field(alttitle, i18n("Alternative Titles"), Data::Field::Table));
+  if(optionalFields().contains(QLatin1String("alttitle"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
-    m_coll->addField(field);
-    QStringList alts;
-    foreach(const QVariant& v, map.value(QLatin1String("alternative_titles")).toList()) {
-      alts << decodeHTML(v.toMap().value(QLatin1String("title")).toString());
-    }
-    m_currEntry->setField(alttitle, alts.join(FieldFormat::rowDelimiterString()));
+    coll->addField(field);
   }
 
-//  QMapIterator<QString, QVariant> i(map);
-//  while(i.hasNext()) {
-//    i.next();
-//    myDebug() << i.key() << ":" << i.value();
-//  }
-  m_loop.quit();
-}
+  QJson::Parser parser;
+  const QVariant result = parser.parse(data);
 
-void MovieMeterFetcher::gotFilmImage(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_ASSERT(m_coll);
-  Q_ASSERT(m_currEntry);
-  Q_UNUSED(result_);
-  if(args_.isEmpty() || !m_currEntry) {
-    m_loop.quit();
-    return;
-  }
-  const QVariantMap map = args_.first().toMap().value(QLatin1String("image")).toMap();
-  const QString base64 = map.value(QLatin1String("base64_encoded_contents")).toString();
+  foreach(const QVariant& result, result.toList()) {
+  //  myDebug() << "found result:" << result;
 
-  QByteArray ba;
-  KCodecs::base64Decode(QByteArray(base64.toLatin1()), ba);
-  if(!ba.isEmpty()) {
-    QString result = ImageFactory::addImage(ba, QLatin1String("JPG"),
-                                            Data::Image::calculateID(ba, QLatin1String("JPG")));
-    if(!result.isEmpty()) {
-      m_currEntry->setField(QLatin1String("cover"), result);
-    }
+    Data::EntryPtr entry(new Data::Entry(coll));
+    populateEntry(entry, result.toMap(), false);
+
+    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
+    m_entries.insert(r->uid, entry);
+    emit signalResultFound(r);
   }
 
-  m_loop.quit();
-}
-
-void MovieMeterFetcher::gotDirectorSearch(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_UNUSED(result_);
-  if(args_.isEmpty()) {
-    stop();
-    return;
-  }
-  foreach(const QVariant& v, args_.first().toList()) {
-    m_client->call(QLatin1String("director.retrieveFilms"),
-                   QVariantList() << m_session << v.toMap().value(QLatin1String("directorId")).toInt(),
-                   this, SLOT(gotDirectorFilms(const QList<QVariant>&, const QVariant&)),
-                   this, SLOT(gotError(int, const QString&, const QVariant&)));
-    m_loop.exec();
-  }
+#endif
   stop();
 }
 
-void MovieMeterFetcher::gotDirectorFilms(const QList<QVariant>& args_, const QVariant& result_) {
-  Q_ASSERT(m_loop.isRunning());
-  Q_UNUSED(result_);
-  if(args_.isEmpty()) {
-    m_loop.quit();
+void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
+  entry_->setField(QLatin1String("moviemeter-id"), value(resultMap_, "id"));
+  entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
+  entry_->setField(QLatin1String("year"),  value(resultMap_, "year"));
+
+  // if we only need cursory data, then we're done
+  if(!fullData_) {
     return;
   }
-  foreach(const QVariant& v, args_.first().toList()) {
-    const QVariantMap map = v.toMap();
-    if(map.isEmpty()) {
-      myDebug() << "empty map";
-      break;
-    }
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this),
-                                     decodeHTML(map.value(QLatin1String("title")).toString()),
-                                     map.value(QLatin1String("year")).toString());
-    m_films.insert(r->uid, map.value(QLatin1String("filmId")).toInt());
-//    myDebug() << m_films.value(r->uid);
-    emit signalResultFound(r);
-  }
-  m_loop.quit();
-}
 
-void MovieMeterFetcher::gotError(int err_, const QString& msg_, const QVariant& result_) {
-  Q_UNUSED(err_);
-  myDebug() << msg_;
-  myDebug() << result_;
-  if(m_loop.isRunning()) {
-    m_loop.quit();
-  } else {
-    stop();
+  entry_->setField(QLatin1String("genre"),  value(resultMap_, "genres"));
+  entry_->setField(QLatin1String("plot"),  value(resultMap_, "plot"));
+  entry_->setField(QLatin1String("running-time"),  value(resultMap_, "duration"));
+  entry_->setField(QLatin1String("director"),  value(resultMap_, "directors"));
+  entry_->setField(QLatin1String("nationality"),  value(resultMap_, "countries"));
+
+  QStringList castList;
+  foreach(const QVariant& actor, resultMap_.value(QLatin1String("actors")).toList()) {
+    castList << value(actor.toMap(), "name");
   }
+  entry_->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
+
+
+  if(entry_->collection()->hasField(QLatin1String("moviemeter"))) {
+    entry_->setField(QLatin1String("moviemeter"), value(resultMap_, "url"));
+  }
+
+  if(entry_->collection()->hasField(QLatin1String("alttitle"))) {
+    entry_->setField(QLatin1String("alttitle"), value(resultMap_, "alternative_title"));
+  }
+
+  entry_->setField(QLatin1String("cover"), value(resultMap_.value(QLatin1String("posters")).toMap(), "small"));
 }
 
 Tellico::Fetch::ConfigWidget* MovieMeterFetcher::configWidget(QWidget* parent_) const {
@@ -376,6 +310,20 @@ void MovieMeterFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString MovieMeterFetcher::ConfigWidget::preferredName() const {
   return MovieMeterFetcher::defaultName();
+}
+
+// static
+QString MovieMeterFetcher::value(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
+  } else {
+    return QString();
+  }
 }
 
 #include "moviemeterfetcher.moc"

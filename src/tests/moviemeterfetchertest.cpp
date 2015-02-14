@@ -53,38 +53,6 @@ void MovieMeterFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("Australië"));
 }
 
-void MovieMeterFetcherTest::testPerson() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Person,
-                                       QLatin1String("George Miller"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
-
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
-
-//  qDebug() << "found" << m_results.size();
-  QVERIFY(results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
-  foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->field(QLatin1String("title")).toLower().contains(QLatin1String("man from snowy river"))) {
-      entry = test;
-      break;
-    } else {
-      qDebug() << "skipping" << test->title();
-    }
-  }
-  QVERIFY(entry);
-
-  QHashIterator<QString, QString> i(m_fieldValues);
-  while(i.hasNext()) {
-    i.next();
-    QString result = entry->field(i.key()).toLower();
-    QCOMPARE(result, i.value().toLower());
-  }
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
-}
-
 void MovieMeterFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QLatin1String("Man From Snowy River"));
@@ -104,6 +72,7 @@ void MovieMeterFetcherTest::testKeyword() {
     QCOMPARE(result, i.value().toLower());
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());

@@ -379,7 +379,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   entry_->setField(QLatin1String("comments"),  value(resultMap_, "notes"));
 
 
-  /* cover image authenticationn with personal tokenn does not work yet
+  /* cover image authentication with personal token does not work yet
   QUrl coverUrl = value(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
     // also need authentication
