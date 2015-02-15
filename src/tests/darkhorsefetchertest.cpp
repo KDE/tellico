@@ -56,7 +56,7 @@ void DarkHorseFetcherTest::initTestCase() {
 
 void DarkHorseFetcherTest::testComic() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
-                                       QLatin1String("axe cop: bad guy earth"));
+                                       QLatin1String("axe cop: bad guy earth #1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/dark_horse_comics.py.spec", KConfig::SimpleConfig);

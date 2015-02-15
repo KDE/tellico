@@ -2,6 +2,7 @@
 
 	* Updated the Moviemeter data source to use the new JSON API.
 	* Removed the local KXmlRpc copy since it is no longer needed.
+	* Updated cover path in DarkHorse fetcher.
 
 2015-01-23  Robby Stephenson  <robby@homebase.mars>
 
