@@ -60,7 +60,7 @@ void DBLPFetcherTest::testProceedings() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("433-446"));
   QCOMPARE(entry->field(QLatin1String("booktitle")), QLatin1String("IEEE Symposium on Security and Privacy"));
-  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://doi.ieeecomputersociety.org/10.1109/SP.2010.33"));
+  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dx.doi.org/10.1109/SP.2010.33"));
   QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1109/SP.2010.33"));
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("inproceedings"));
   QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("MurdochDAB10"));
