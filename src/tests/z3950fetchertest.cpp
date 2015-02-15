@@ -80,6 +80,8 @@ void Z3950FetcherTest::testIsbn() {
 }
 
 void Z3950FetcherTest::testADS() {
+  // ADS has disappeared with no warning
+  return;
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Raw,
                                        QLatin1String("@and @attr 1=4 \"Particle creation by black holes\" "
