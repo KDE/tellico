@@ -1,3 +1,7 @@
+2015-02-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.3.10.
+
 2015-02-14  Robby Stephenson  <robby@homebase.mars>
 
 	* Updated the Moviemeter data source to use the new JSON API.

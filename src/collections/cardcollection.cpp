@@ -53,7 +53,7 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
 
   field = new Field(QLatin1String("player"), i18n("Player"));
   field->setCategory(i18n(card_general));
-  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 

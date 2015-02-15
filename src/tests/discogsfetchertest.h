@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testPerson();
   void testKeyword();
   void testRawData();
+  void testRawDataVinyl();
 
 private:
   bool m_hasConfigFile;

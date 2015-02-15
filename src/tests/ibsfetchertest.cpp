@@ -51,12 +51,10 @@ void IBSFetcherTest::testTitle() {
 
   QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
-  foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
-      entry = test;
+  foreach(Tellico::Data::EntryPtr testEntry, results) {
+    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
+      entry = testEntry;
       break;
-    } else {
-      qDebug() << "skipping" << test->title();
     }
   }
   QVERIFY(entry);
@@ -80,10 +78,10 @@ void IBSFetcherTest::testAuthor() {
                                        QLatin1String("Bruno Vespa"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 10);
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->field("title").startsWith(QLatin1String("Vino & cucina"))) {
+    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
       entry = testEntry;
       break;
     }
