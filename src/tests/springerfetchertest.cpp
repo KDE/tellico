@@ -58,7 +58,7 @@ void SpringerFetcherTest::initTestCase() {
 
 void SpringerFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       m_fieldValues.value("title"));
+                                       QLatin1String("roughening transition of the three-dimensional Ising interface"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
