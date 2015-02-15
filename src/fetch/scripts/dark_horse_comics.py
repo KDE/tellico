@@ -209,7 +209,7 @@ class DarkHorseParser:
 		self.__baseURL 	 = 'http://www.darkhorse.com'
 		self.__basePath  = '/Comics/'
 		self.__searchURL = '/Search/%s'
-		self.__coverPath = 'http://images.darkhorse.com/covers/'
+		self.__coverPath = '/covers/'
 		self.__movieURL  = self.__baseURL + self.__basePath
 
 		# Define some regexps
@@ -296,9 +296,9 @@ class DarkHorseParser:
 		self.__getHTMLContent(url)
 
 		# First grab picture data
-		imgMatch = re.search("""<img src="%s(?P<imgpath>.*?)".*>""" % self.__coverPath, self.__data)
+		imgMatch = re.search("""<img src="(?P<imgpath>.*%s.*?)".*>""" % self.__coverPath, self.__data)
 		if imgMatch:
-			imgPath = self.__coverPath + imgMatch.group('imgpath')
+			imgPath = "http:" + imgMatch.group('imgpath')
 			# Fetch cover and gets its base64 encoded data
 			b64img = self.__fetchCover(imgPath)
 		else:

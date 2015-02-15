@@ -40,7 +40,7 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for animenfo.com
+ * A fetcher for www.ibs.it
  *
  * @author Robby Stephenson
  */

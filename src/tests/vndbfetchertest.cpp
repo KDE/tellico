@@ -46,7 +46,7 @@ void VNDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("G-senjou no Maou"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2008"));
 //  m_fieldValues.insert(QLatin1String("developer"), QLatin1String("Akabei Soft2"));
-  m_fieldValues.insert(QLatin1String("origtitle"), QString::fromUtf8("G-線上の魔王"));
+  m_fieldValues.insert(QLatin1String("origtitle"), QString::fromUtf8("G線上の魔王"));
   m_fieldValues.insert(QLatin1String("alias"), QLatin1String("The Devil on G-String"));
 }
 

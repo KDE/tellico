@@ -46,10 +46,22 @@ void IBSFetcherTest::testTitle() {
                                        QLatin1String("Vino & cucina"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  // the one we want should be in the first 5
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
 
-  QCOMPARE(results.size(), 1);
-  compareEntry(results.first());
+  QVERIFY(results.size() > 0);
+  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
+  foreach(Tellico::Data::EntryPtr test, results) {
+    if(test->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
+      entry = test;
+      break;
+    } else {
+      qDebug() << "skipping" << test->title();
+    }
+  }
+  QVERIFY(entry);
+
+  compareEntry(entry);
 }
 
 void IBSFetcherTest::testIsbn() {
