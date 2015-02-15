@@ -323,8 +323,15 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   bool hasCD = false;
   foreach(const QVariant& format, resultMap_.value(QLatin1String("formats")).toList()) {
     if(value(format.toMap(), "name") == QLatin1String("CD")) {
+      entry_->setField(QLatin1String("medium"), i18n("Compact Disc"));
       hasCD = true;
-      break;
+    } else if(value(format.toMap(), "name") == QLatin1String("Vinyl")) {
+      entry_->setField(QLatin1String("medium"), i18n("Vinyl"));
+    } else if(value(format.toMap(), "name") == QLatin1String("Cassette")) {
+      entry_->setField(QLatin1String("medium"), i18n("Cassette"));
+    } else if(!hasCD && value(format.toMap(), "name") == QLatin1String("DVD")) {
+      // sometimes a CD and DVD both are included. If we're using the CD, ignore the DVD
+      entry_->setField(QLatin1String("medium"), i18n("DVD"));
     }
   }
 

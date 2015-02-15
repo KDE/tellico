@@ -176,6 +176,7 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Rock"));
   QCOMPARE(entry->field(QLatin1String("discogs")), QLatin1String("https://www.discogs.com/Evanescence-Anywhere-But-Home/release/1588789"));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("Australia"));
+  QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("Compact Disc"));
 
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(trackList.count(), 14);
@@ -187,4 +188,36 @@ void DiscogsFetcherTest::testRawData() {
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
   QVERIFY(!img.isNull());
 */
+}
+
+// do another check to make sure the Vinyl format is captured
+void DiscogsFetcherTest::testRawDataVinyl() {
+  QString groupName = QLatin1String("Discogs");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Discogs settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Raw,
+                                       QLatin1String("q=r456552"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Clash"));
+  QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Clash, The"));
+  QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("CBS; CBS"));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1977"));
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Rock"));
+  QCOMPARE(entry->field(QLatin1String("discogs")), QLatin1String("https://www.discogs.com/Clash-The-Clash/release/456552"));
+  QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("UK"));
+  QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("Vinyl"));
+
+  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QCOMPARE(trackList.count(), 14);
+  QCOMPARE(trackList.at(0), QLatin1String("Janie Jones::Clash, The::2:05"));
 }
