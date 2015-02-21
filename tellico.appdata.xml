@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Tellico</name>
+  <name xml:lang="bs">Tellico</name>
   <name xml:lang="ca">Tellico</name>
   <name xml:lang="cs">Tellico</name>
   <name xml:lang="da">Tellico</name>
@@ -25,6 +26,7 @@
   <name xml:lang="uk">Tellico</name>
   <name xml:lang="x-test">xxTellicoxx</name>
   <summary>Collection Manager</summary>
+  <summary xml:lang="bs">Menadžer kolekcija</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
   <summary xml:lang="cs">Správce sbírek</summary>
   <summary xml:lang="da">Samlingshåndtering</summary>
@@ -51,6 +53,7 @@
       It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines.
       It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.
     </p>
+    <p xml:lang="bs">Tellico je aplikacija za organiziranje vaše kolekcije. Omogućava početne predloške za knjige, bibliografije, videa, muziku, video igrice, kovanice, markice, kartice za razmjenu, stripove i vina. Dopušta vam ulaz u vašu kolekiju u katalošku bazu podataka, snimajući mnogo različitih osobina kao što su naslov, autor, itd.</p>
     <p xml:lang="ca">El Tellico és una aplicació per organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
     <p xml:lang="da">Tellico er et program til at organisere dine samlinger. Det giver standardskabeloner til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier og vine. Det lader dig angive din samling i en katalogdatabase, som gemmer mange forskellige egenskaber, såsom titel, forfatter osv.</p>
     <p xml:lang="en-GB">Tellico is an application for organising your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.</p>
@@ -69,6 +72,7 @@
     <p xml:lang="uk">Tellico — програма для упорядковування ваших збірок. У ній передбачено типові шаблони для збірок книг, бібліографій, відео, музичних творів, відеоігор, нумізматики, марок, карток, коміксів та вин. За її допомогою ви зможете вести записи у форматі бази даних, зберігаючи різноманітні дані щодо елементів збірки, зокрема дані щодо назви, автора тощо.</p>
     <p xml:lang="x-test">xxTellico is an application for organizing your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.xx</p>
     <p>Features:</p>
+    <p xml:lang="bs">Svojstva:</p>
     <p xml:lang="ca">Característiques:</p>
     <p xml:lang="cs">Vlastnosti:</p>
     <p xml:lang="da">Funktioner:</p>
@@ -91,6 +95,7 @@
     <p xml:lang="x-test">xxFeatures:xx</p>
     <ul>
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
+      <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
       <li xml:lang="ca">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades bibliografies, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
       <li xml:lang="da">Understøtter standardsamlinger til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier, vine, brætspil og filkataloger</li>
       <li xml:lang="en-GB">Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogues</li>
@@ -109,6 +114,7 @@
       <li xml:lang="uk">Підтримка типових збірок книг, бібліографічних записів, відео, музики, відеоігор, коміксів, нумізматики, марок, карток, вин, настільних ігор та каталогів файлів.</li>
       <li xml:lang="x-test">xxSupports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogsxx</li>
       <li>Supports user-defined custom collections</li>
+      <li xml:lang="bs">Podržava korisnički definisane prilagođene kolekcije</li>
       <li xml:lang="ca">Funciona amb col·leccions personalitzades definides per l'usuari</li>
       <li xml:lang="da">Understøtter brugerdefinerede tilpassede samlinger</li>
       <li xml:lang="de">Unterstützt benutzerdefinierte Sammlungen</li>
@@ -128,6 +134,7 @@
       <li xml:lang="uk">Підтримка визначених користувачем нетипових збірок.</li>
       <li xml:lang="x-test">xxSupports user-defined custom collectionsxx</li>
       <li>Supports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinations</li>
+      <li xml:lang="bs">Podržava bilo koji broj korisnički definisanih polja, nekoliko različitih tipova: tekst, paragraf, lista, kvadtratić za označavanje, broj, URL, datum, slike i kombinacije.</li>
       <li xml:lang="ca">Funciona amb qualsevol nombre de camps definits per l'usuari, de molts tipus diferents: text, paràgraf, llista, caselles de selecció, nombre, URL, data, imatges i combinacions</li>
       <li xml:lang="da">Understøtter brugerdefinerede felter af mange forskellige typer, tekst, afsnit, liste, afkrydsningsfelt, nummer, URL, dato, billeder og kombinationer</li>
       <li xml:lang="en-GB">Supports any number of user-defined fields, of several different types: text, paragraph, list, tickbox, number, URL, date, images, and combinations</li>
@@ -146,6 +153,7 @@
       <li xml:lang="uk">Підтримка довільної кількості визначених користувачем полів записів: текст, абзац, список, поле для позначки, номер, адреса, дата, зображення та будь-які інші комбінації.</li>
       <li xml:lang="x-test">xxSupports any number of user-defined fields, of several different types: text, paragraph, list, checkbox, number, URL, date, images, and combinationsxx</li>
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
+      <li xml:lang="bs">Upravlja ulazima sa više autora, žanrova, ključnih riječi, itd.</li>
       <li xml:lang="ca">Gestiona entrades amb diversos autors, gèneres, paraules clau, etc.</li>
       <li xml:lang="da">Kan håndtere indgange med flere forfattere, genrer, nøgleord osv.</li>
       <li xml:lang="de">Verarbeitet Einträge mit mehreren Autoren, Genres, Stichwörtern usw.</li>
@@ -165,6 +173,7 @@
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
       <li xml:lang="x-test">xxHandles entries with multiple authors, genres, keywords, etcxx</li>
       <li>Automatically formats titles and names</li>
+      <li xml:lang="bs">Automatski formatira naslove i imena</li>
       <li xml:lang="ca">Formata automàticament els títols i els noms</li>
       <li xml:lang="da">Formaterer titler og navne automatisk</li>
       <li xml:lang="de">Automatische Formatierung von Titeln und Namen</li>
@@ -184,6 +193,7 @@
       <li xml:lang="uk">Автоматичне форматування заголовків та назв.</li>
       <li xml:lang="x-test">xxAutomatically formats titles and namesxx</li>
       <li>Supports collection searching and view filtering</li>
+      <li xml:lang="bs">Podržava pretragu kolekcije i filter pregleda</li>
       <li xml:lang="ca">Admet la cerca de col·leccions i filtratge de la vista</li>
       <li xml:lang="da">Understøtter søgning i samlinger og filtrering af visning</li>
       <li xml:lang="de">Unterstützt das Durchsuchen von Sammlungen und Filterung der Ansichten</li>
@@ -203,6 +213,7 @@
       <li xml:lang="uk">Підтримка пошуку у збірці та фільтрування даних для перегляду.</li>
       <li xml:lang="x-test">xxSupports collection searching and view filteringxx</li>
       <li>Sorts and groups collection by various properties</li>
+      <li xml:lang="bs">Sortira i grupira kolekcije po različitim osobinama</li>
       <li xml:lang="ca">Ordena i agrupa les col·leccions per diverses propietats</li>
       <li xml:lang="da">Sorterer og grupperer samling efter diverse egenskaber</li>
       <li xml:lang="de">Sortiert und Gruppiert Sammlungen nach verschiedenen Eigenschaften</li>
@@ -222,6 +233,7 @@
       <li xml:lang="uk">Упорядковування та групування збірки за різноманітними властивостями.</li>
       <li xml:lang="x-test">xxSorts and groups collection by various propertiesxx</li>
       <li>Allows customizable entry templates through XSLT</li>
+      <li xml:lang="bs">Dopušta prilagođene ulazne predloške preko XSLT</li>
       <li xml:lang="ca">Admet plantilles d'entrades personalitzades mitjançant XSLT</li>
       <li xml:lang="da">Muliggør indgangsskabeloner som kan tilpasses via XSLT</li>
       <li xml:lang="de">Erlaubt anpassbare Vorlagen für Einträge mittels XSLT</li>
@@ -241,6 +253,7 @@
       <li xml:lang="uk">Придатні до налаштовування шаблони записів на основі XSLT.</li>
       <li xml:lang="x-test">xxAllows customizable entry templates through XSLTxx</li>
       <li>Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
+      <li xml:lang="bs">Uvozi iz MODS, Bibtex, RIS, CSV, PDF metapodatke, i mnogih drugih formata</li>
       <li xml:lang="ca">Importa MODS, Bibtex, RIS, CSV, metadades de PDF, i molts altres formats</li>
       <li xml:lang="da">Importerer MODS, Bibtex, RIS, CSV, PDF-metadata og mange andre formater</li>
       <li xml:lang="de">Import von MODS-, Bibtex-, RIS-, CSV-, PDF-Metadaten und vielen anderen Formaten</li>
@@ -260,6 +273,7 @@
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
       <li xml:lang="x-test">xxImports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formatsxx</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formats</li>
+      <li xml:lang="bs">Izvozi u Bibtex, ONIX, CSV, HTML, PilotDB, i druge formate</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML, PilotDB i altres formats</li>
       <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML, PilotDB og andre formater</li>
       <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, PilotDB, und andere Formate</li>
@@ -279,6 +293,7 @@
       <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML, PilotDB тощо.</li>
       <li xml:lang="x-test">xxExports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formatsxx</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
+      <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des d'scripts externs</li>
       <li xml:lang="da">Importerer information direkte fra Amazon.com, IMDb, z39.50 servers, PubMed, SRU-servere, CrossRef.org, diverse andre websider og fra eksterne scripts</li>
       <li xml:lang="de">Importiert Informationen direkt von Amazon.com, IMDb, z39.50-Servern, PubMed, SRU-Servern, CrossRef.org, verschiedenen anderen Webseiten und von externen Skripten</li>
@@ -298,6 +313,7 @@
       <li xml:lang="uk">Імпортування даних безпосередньо із серверів Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org, інших сайтів та на основі зовнішніх скриптів.</li>
       <li xml:lang="x-test">xxImports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scriptsxx</li>
       <li>Imports CDDB data for cataloging audio CDs</li>
+      <li xml:lang="bs">Uvozi CDDB podatke za popisivanje muzičkih CD-ova</li>
       <li xml:lang="ca">Importa dades CDDB per la catalogació dels CD d'àudio</li>
       <li xml:lang="da">Importerer CDDB-data til katalogisering af lyd-cd'er</li>
       <li xml:lang="de">Importiert CDDB-Daten für die Katalogisierung von Audi-CDs</li>
@@ -317,6 +333,7 @@
       <li xml:lang="uk">Імпортування даних CDDB для каталогізації звукових компакт-дисків.</li>
       <li xml:lang="x-test">xxImports CDDB data for cataloging audio CDsxx</li>
       <li>Scans and imports audio file collections, such as mp3 or ogg</li>
+      <li xml:lang="bs">Pretražuje i uvozi kolekcije muzičkih datoteka kao što su mp3 ili ogg</li>
       <li xml:lang="ca">Explora i importa col·leccions de fitxers d'àudio, com MP3 o OGG</li>
       <li xml:lang="da">Scanner og importerer lydfilsamlinger såsom mp3 eller ogg</li>
       <li xml:lang="de">Durchsucht und importiert Sammlungen von Audio-Dateien wie zum Beispiel mp3 oder ogg</li>
