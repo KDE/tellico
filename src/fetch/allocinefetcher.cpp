@@ -162,7 +162,8 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
   QString code = entry->field(QLatin1String("allocine-code"));
   if(code.isEmpty()) {
-    myWarning() << "no allocine release found";
+    // could mean we already updated the entry
+    myDebug() << "no allocine release found";
     return entry;
   }
 
@@ -261,24 +262,6 @@ void AbstractAllocineFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  Data::CollPtr coll(new Data::VideoCollection(true));
-  // always add the gbs-link for fetchEntryHook
-  Data::FieldPtr field(new Data::Field(QLatin1String("allocine-code"), QLatin1String("Allocine Code"), Data::Field::URL));
-  field->setCategory(i18n("General"));
-  coll->addField(field);
-
-  // add new fields
-  if(optionalFields().contains(QLatin1String("allocine"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("allocine"), i18n("Allocine Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
-    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
-    f->setFormatType(FieldFormat::FormatTitle);
-    coll->addField(f);
-  }
-
   QJson::Parser parser;
   bool ok;
   QVariantMap result = parser.parse(data, &ok).toMap().value(QLatin1String("feed")).toMap();
@@ -297,7 +280,9 @@ void AbstractAllocineFetcher::slotComplete(KJob*) {
   foreach(const QVariant& result, resultList) {
   //  myDebug() << "found result:" << result;
 
-    Data::EntryPtr entry(new Data::Entry(coll));
+    //create a new collection for every result since we end up removing the allocine code field
+    // when fetchEntryHook is called. See bug 338389
+    Data::EntryPtr entry(new Data::Entry(createCollection()));
     populateEntry(entry, result.toMap());
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
@@ -308,6 +293,28 @@ void AbstractAllocineFetcher::slotComplete(KJob*) {
   m_hasMoreResults = false;
 #endif
   stop();
+}
+
+Tellico::Data::CollPtr AbstractAllocineFetcher::createCollection() const {
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  // always add the allocine release code for fetchEntryHook
+  Data::FieldPtr field(new Data::Field(QLatin1String("allocine-code"), QLatin1String("Allocine Code"), Data::Field::Number));
+  field->setCategory(i18n("General"));
+  coll->addField(field);
+
+  // add new fields
+  if(optionalFields().contains(QLatin1String("allocine"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("allocine"), i18n("Allocine Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+  if(optionalFields().contains(QLatin1String("origtitle"))) {
+    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
+    f->setFormatType(FieldFormat::FormatTitle);
+    coll->addField(f);
+  }
+
+  return coll;
 }
 
 void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap) {

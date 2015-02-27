@@ -84,6 +84,7 @@ private:
 
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  Data::CollPtr createCollection() const;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
   QHash<int, Data::EntryPtr> m_entries;
