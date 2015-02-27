@@ -388,6 +388,7 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 }
 
 void TheMovieDBFetcher::readConfiguration() {
+#ifdef HAVE_QJSON
   KUrl u(THEMOVIEDB_API_URL);
   u.setPath(QString::fromLatin1("%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
@@ -409,6 +410,7 @@ void TheMovieDBFetcher::readConfiguration() {
 
   m_imageBase = value(resultMap.value(QLatin1String("images")).toMap(), "base_url");
   m_serverConfigDate = QDate::currentDate();
+#endif
 }
 
 Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) const {
