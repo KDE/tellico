@@ -265,9 +265,9 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
   }
 
   QJson::Parser parser;
-  const QVariantMap result = parser.parse(data).toMap();
+  const QVariantMap resultMap = parser.parse(data).toMap();
 
-  if(value(result, "message").startsWith(QLatin1String("Invalid consumer token"))) {
+  if(value(resultMap, "message").startsWith(QLatin1String("Invalid consumer token"))) {
     message(i18n("The Discogs.com server reports a token error."),
             MessageHandler::Error);
     stop();
@@ -275,7 +275,7 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
   }
 
   int count = 0;
-  foreach(const QVariant& result, result.value(QLatin1String("results")).toList()) {
+  foreach(const QVariant& result, resultMap.value(QLatin1String("results")).toList()) {
     if(count >= DISCOGS_MAX_RETURNS_TOTAL) {
       break;
     }
