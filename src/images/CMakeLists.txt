@@ -5,7 +5,7 @@ SET(images_STAT_SRCS
    imageinfo.cpp
    )
 
-KDE4_ADD_LIBRARY(images STATIC ${images_STAT_SRCS})
+add_library(images STATIC ${images_STAT_SRCS})
 TARGET_LINK_LIBRARIES(images
     core
     gui
@@ -13,7 +13,7 @@ TARGET_LINK_LIBRARIES(images
 # the following linking seems to be necessary for the KDE build dashboard to succeed
 TARGET_LINK_LIBRARIES(images
     ${QIMAGEBLITZ_LIBRARIES}
-    ${KDE4_KIO_LIBS}
+    KF5::KIOCore
 )
 
 ADD_DEPENDENCIES(images tellico_config)

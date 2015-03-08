@@ -13,4 +13,4 @@ SET(utils_STAT_SRCS
    xmlhandler.cpp
    )
 
-KDE4_ADD_LIBRARY(utils STATIC ${utils_STAT_SRCS})
+add_library(utils STATIC ${utils_STAT_SRCS})

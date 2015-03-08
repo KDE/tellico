@@ -13,11 +13,11 @@ SET(core_KCFG_SRCS
    tellico_config.kcfgc
    )
 
-KDE4_ADD_KCFG_FILES(core_STAT_SRCS ${core_KCFG_SRCS})
+kconfig_add_kcfg_files(core_STAT_SRCS ${core_KCFG_SRCS})
 
 ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_config.h)
 
-KDE4_ADD_LIBRARY(core STATIC ${core_STAT_SRCS})
+add_library(core STATIC ${core_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(core
     utils

@@ -50,7 +50,7 @@ SET(translators_STAT_SRCS
    xsltimporter.cpp
    )
 
-KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
+add_library(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     tellicomodels

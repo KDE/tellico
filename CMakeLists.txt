@@ -1,7 +1,11 @@
 project(Tellico)
-set(TELLICO_VERSION "2.4+git")
+set(TELLICO_VERSION "2.9.90+git")
 
-cmake_minimum_required(VERSION 2.6.2)
+# Version 2.8.12 seems to be a minimum version in several KDE apps
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+set(QT_MIN_VERSION "5.3.0")
+
+find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 
 # http://www.cmake.org/Wiki/CMake_Useful_Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
@@ -9,14 +13,20 @@ cmake_minimum_required(VERSION 2.6.2)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${ECM_MODULE_PATH}
                       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(FeatureSummary)
 
 ############# Options #################
 
-option(ENABLE_AMAZON "Enable Amazon.com searching" TRUE)
-option(ENABLE_IMDB "Enable IMDb searching" TRUE)
-option(ENABLE_CDTEXT "Enable cdtext" TRUE)
-option(ENABLE_WEBCAM "Enable support for webcams" FALSE)
+option(ENABLE_AMAZON       "Enable Amazon.com searching" TRUE)
+option(ENABLE_IMDB         "Enable IMDb searching" TRUE)
+option(ENABLE_CDTEXT       "Enable cdtext" TRUE)
+option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
 
 include(CheckTypeSize)
@@ -32,72 +42,131 @@ include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 
-find_package(KDE4 4.2.0 REQUIRED)
-include(KDE4Defaults)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
+    Core
+    Widgets
+)
+
+find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
+             WidgetsAddons XmlGui JobWidgets KDELibs4Support)
+
+#find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
+#             Notifications WidgetsAddons WindowSystem Parts Solid DocTools XmlGui JobWidgets)
+
+#find_package(KDE4 4.2.0 REQUIRED)
+#include(KDE4Defaults)
 include(MacroLibrary)
 include(MacroBoolTo01)
-include(MacroLogFeature)
+#include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
 find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
-macro_optional_find_package(Nepomuk)
-macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
+#macro_optional_find_package(Nepomuk)
+find_package(Nepomuk)
+#macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
+set_package_properties(Nepomuk PROPERTIES
+    DESCRIPTION "Support for reading file metadata"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
 if(NEPOMUK_FOUND)
     include_directories(${NEPOMUK_INCLUDE_DIRS})
 endif(NEPOMUK_FOUND)
 
-macro_optional_find_package(KdepimLibs 4.5)
-macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.5.0" "")
+#macro_optional_find_package(KdepimLibs 4.5)
+#macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.5.0" "")
+find_package(KdepimLibs 4.5)
+set_package_properties(KdepimLibs PROPERTIES
+    DESCRIPTION "Support for using the address book and calendar for loans"
+    URL "http://pim.kde.org"
+    TYPE OPTIONAL)
 if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
 endif(KDEPIMLIBS_FOUND)
 
-macro_optional_find_package(KdeMultimedia)
-macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
+#macro_optional_find_package(KdeMultimedia)
+#macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
+find_package(KdeMultimedia 4.2)
+set_package_properties(KdeMultimedia PROPERTIES
+    DESCRIPTION "Support for CDDB searches"
+    URL "http://multimedia.kde.org"
+    TYPE OPTIONAL)
 
-# The taglib cmake script is broken for older taglib versions, this works around the issue
-set(TAGLIB_INCLUDES)
-macro_optional_find_package(Taglib)
-macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
+#macro_optional_find_package(Taglib)
+#macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
+find_package(Taglib)
+set_package_properties(Taglib PROPERTIES
+    DESCRIPTION "Support for reading multimedia files"
+    URL "http://taglib.github.io"
+    TYPE OPTIONAL)
 if(TAGLIB_FOUND)
     add_definitions(${TAGLIB_CFLAGS})
     include_directories(${TAGLIB_INCLUDES})
 endif(TAGLIB_FOUND)
 
-macro_optional_find_package(Yaz 2.0)
-macro_log_feature(YAZ_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
+#macro_optional_find_package(Yaz 2.0)
+#macro_log_feature(YAZ_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
+find_package(Yaz 2.0)
+set_package_properties(Yaz PROPERTIES
+    DESCRIPTION "Support for searching z39.50 databases"
+    URL "http://www.indexdata.dk/yaz/"
+    TYPE OPTIONAL)
 
-macro_optional_find_package(PopplerQt4)
-macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
+#macro_optional_find_package(PopplerQt4)
+#macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
+find_package(PopplerQt4)
+set_package_properties(PopplerQt4 PROPERTIES
+    DESCRIPTION "Support for reading PDF files"
+    URL "http://poppler.freedesktop.org"
+    TYPE OPTIONAL)
 if(POPPLER_QT4_FOUND)
     add_definitions(${POPPLER_QT4_DEFINITIONS})
     include_directories(${POPPLER_QT4_INCLUDE_DIR})
 endif(POPPLER_QT4_FOUND)
 
-macro_optional_find_package(KSane)
-macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
+#macro_optional_find_package(KSane)
+#macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
+find_package(KSane)
+set_package_properties(KSane PROPERTIES
+    DESCRIPTION "Support for adding scanned images to a collection"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
 if(KSANE_FOUND)
     include_directories(${KSANE_INCLUDE_DIR})
 endif(KSANE_FOUND)
 
-macro_optional_find_package(Exempi 2.0)
-macro_log_feature(LIBEXEMPI_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
+#macro_optional_find_package(Exempi 2.0)
+#macro_log_feature(LIBEXEMPI_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
+find_package(Exempi 2.0)
+set_package_properties(Exempi PROPERTIES
+    DESCRIPTION "Support for reading PDF/XMP metadata"
+    URL "http://libopenraw.freedesktop.org/wiki/Exempi/"
+    TYPE OPTIONAL)
 if(LIBEXEMPI_FOUND)
     add_definitions(${LIBEXEMPI_CFLAGS})
     include_directories(${LIBEXEMPI_INCLUDE_DIR})
 endif(LIBEXEMPI_FOUND)
 
-macro_optional_find_package(QJSON)
-macro_log_feature(QJSON_FOUND "QJSON" "Support for searching additional data sources, such as OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
+#macro_optional_find_package(QJSON)
+#macro_log_feature(QJSON_FOUND "QJSON" "Support for searching additional data sources, such as OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
+find_package(QJSON)
+set_package_properties(QJSON PROPERTIES
+    DESCRIPTION "Support for searching additional data sources, such as OpenLibrary and Freebase"
+    URL "http://qjson.sourceforge.net"
+    TYPE OPTIONAL)
 if(QJSON_FOUND)
     include_directories(${QJSON_INCLUDE_DIR})
 endif(QJSON_FOUND)
 
-macro_optional_find_package(Btparse)
-macro_log_feature(BTPARSE_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
+#macro_optional_find_package(Btparse)
+#macro_log_feature(BTPARSE_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
+find_package(Btparse)
+set_package_properties(Btparse PROPERTIES
+    DESCRIPTION "External support for parsing and processing BibTeX data files"
+    URL "https://metacpan.org/release/Text-BibTeX"
+    TYPE OPTIONAL)
 if(BTPARSE_FOUND)
     include_directories(${BTPARSE_INCLUDE_DIR})
     set(TELLICO_BTPARSE_LIBS ${BTPARSE_LIBRARIES})
@@ -105,14 +174,24 @@ else(BTPARSE_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
 endif(BTPARSE_FOUND)
 
-macro_optional_find_package(DiscID)
-macro_log_feature(DISCID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
+#macro_optional_find_package(DiscID)
+#macro_log_feature(DISCID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
+find_package(DiscID)
+set_package_properties(DiscID PROPERTIES
+    DESCRIPTION "Support for reading disc IDs from audio CDs"
+    URL "http://musicbrainz.org/doc/libdiscid"
+    TYPE OPTIONAL)
 if(DISCID_FOUND)
     include_directories(${DISCID_INCLUDE_DIR})
 endif(DISCID_FOUND)
 
-macro_optional_find_package(Csv 3.0)
-macro_log_feature(CSV_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
+#macro_optional_find_package(Csv 3.0)
+#macro_log_feature(CSV_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
+find_package(Csv 3.0)
+set_package_properties(Csv PROPERTIES
+    DESCRIPTION "External support for reading CSV files"
+    URL "http://sourceforge.net/projects/libcsv/"
+    TYPE OPTIONAL)
 if(CSV_FOUND)
     include_directories(${CSV_INCLUDE_DIR})
     set(TELLICO_CSV_LIBS ${CSV_LIBRARIES})
@@ -129,7 +208,11 @@ if(ENABLE_WEBCAM)
         set( ENABLE_WEBCAM FALSE )
     else(NOT CMAKE_SYSTEM_NAME MATCHES "Linux")
         pkg_check_modules(LIBV4L libv4l1>=0.6)
-        macro_log_feature(LIBV4L_FOUND "libv4l" "Support for barcode scanning with a webcam" "http://hansdegoede.livejournal.com/3636.html"  FALSE "" "")
+        #macro_log_feature(LIBV4L_FOUND "libv4l" "Support for barcode scanning with a webcam" "http://hansdegoede.livejournal.com/3636.html"  FALSE "" "")
+        set_package_properties(LIBV4L PROPERTIES
+            DESCRIPTION "Support for barcode scanning with a webcam"
+            URL "http://hansdegoede.livejournal.com/3636.html"
+            TYPE OPTIONAL)
         if(LIBV4L_FOUND)
             if(LIBV4L_VERSION VERSION_LESS "0.8.3" AND CMAKE_SYSTEM_VERSION VERSION_GREATER "2.6.37")
                 message("WARNING: libv4l 0.8.3 or later is required for Linux kernel 2.6.38 or later")
@@ -153,8 +236,8 @@ add_definitions(${QT_DEFINITIONS}
 add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
-include_directories(${KDE4_INCLUDES}
-                    ${QT_INCLUDES}
+include_directories(
+                    
                     ${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
@@ -167,13 +250,6 @@ if(KDE_VERSION VERSION_GREATER 4.4)
 else(KDE_VERSION VERSION_GREATER 4.4)
     set(ENABLE_KNEWSTUFF3 FALSE)
 endif(KDE_VERSION VERSION_GREATER 4.4)
-
-# is there a better way to disable qt3support library?
-get_directory_property(include_dirs INCLUDE_DIRECTORIES)
-if(QT_QT3SUPPORT_FOUND)
-  string(REPLACE ${QT_QT3SUPPORT_INCLUDE_DIR} "" include_dirs "${include_dirs}")
-endif(QT_QT3SUPPORT_FOUND)
-set_directory_properties(PROPERTIES INCLUDE_DIRECTORIES "${include_dirs}")
 
 set(TELLICO_DATA_INSTALL_DIR ${DATA_INSTALL_DIR}/tellico)
 
@@ -213,7 +289,5 @@ install(PROGRAMS tellico.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${XDG_MIME_INSTALL_DIR})
 install(FILES tellico.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata )
 
-if(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
-    macro_display_feature_log()
-endif(CMAKE_SOURCE_DIR STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}")
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

@@ -16,4 +16,4 @@ SET(commands_STAT_SRCS
    updateentries.cpp
    )
 
-KDE4_ADD_LIBRARY(commands STATIC ${commands_STAT_SRCS})
+add_library(commands STATIC ${commands_STAT_SRCS})
