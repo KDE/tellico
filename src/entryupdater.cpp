@@ -265,4 +265,3 @@ void EntryUpdater::slotCleanup() {
   deleteLater();
 }
 
-#include "entryupdater.moc"

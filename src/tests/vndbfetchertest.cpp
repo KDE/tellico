@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "vndbfetchertest.h"
-#include "vndbfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/vndbfetcher.h"

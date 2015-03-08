@@ -523,4 +523,3 @@ Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
   return dupes.toList();
 }
 
-#include "bibtexcollection.moc"

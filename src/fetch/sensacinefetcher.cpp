@@ -69,4 +69,3 @@ QString SensaCineFetcher::ConfigWidget::preferredName() const {
   return SensaCineFetcher::defaultName();
 }
 
-#include "sensacinefetcher.moc"

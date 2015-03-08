@@ -121,4 +121,3 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   return list;
 }
 
-#include "boardgamecollection.moc"

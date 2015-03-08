@@ -582,4 +582,3 @@ void SRUFetcher::ConfigWidget::slotCheckHost() {
   }
 }
 
-#include "srufetcher.moc"

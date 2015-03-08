@@ -300,4 +300,3 @@ void AlexandriaImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "alexandriaimporter.moc"

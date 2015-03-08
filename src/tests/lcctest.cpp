@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "lcctest.h"
-#include "lcctest.moc"
 #include "qtest_kde.h"
 
 #include "../utils/stringcomparison.h"

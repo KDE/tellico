@@ -69,4 +69,3 @@ QString ScreenRushFetcher::ConfigWidget::preferredName() const {
   return ScreenRushFetcher::defaultName();
 }
 
-#include "screenrushfetcher.moc"

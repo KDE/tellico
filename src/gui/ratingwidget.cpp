@@ -229,4 +229,3 @@ void RatingWidget::clearClicked() {
   }
 }
 
-#include "ratingwidget.moc"

@@ -311,4 +311,3 @@ bool ExportDialog::exportCollection(Tellico::Export::Format format_, const KUrl&
   return success;
 }
 
-#include "exportdialog.moc"

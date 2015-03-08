@@ -211,4 +211,3 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   return res;
 }
 
-#include "bookcollection.moc"

@@ -159,4 +159,3 @@ bool DropHandler::handleText(const QString& text_) {
   return true;
 }
 
-#include "drophandler.moc"

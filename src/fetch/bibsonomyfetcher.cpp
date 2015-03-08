@@ -191,4 +191,3 @@ QString BibsonomyFetcher::ConfigWidget::preferredName() const {
   return BibsonomyFetcher::defaultName();
 }
 
-#include "bibsonomyfetcher.moc"

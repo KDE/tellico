@@ -499,4 +499,3 @@ QString AnimeNfoFetcher::ConfigWidget::preferredName() const {
   return AnimeNfoFetcher::defaultName();
 }
 
-#include "animenfofetcher.moc"

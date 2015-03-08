@@ -64,4 +64,3 @@ QWidget* ParaFieldWidget::widget() {
   return m_textEdit;
 }
 
-#include "parafieldwidget.moc"

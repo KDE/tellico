@@ -237,4 +237,3 @@ void ReportDialog::slotSaveAs() {
   }
 }
 
-#include "reportdialog.moc"

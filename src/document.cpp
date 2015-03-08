@@ -798,4 +798,3 @@ QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Document::mergeFields(
   return qMakePair(modified, created);
 }
 
-#include "document.moc"

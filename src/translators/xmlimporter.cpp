@@ -80,4 +80,3 @@ Tellico::Data::CollPtr XMLImporter::collection() {
   return Data::CollPtr();
 }
 
-#include "xmlimporter.moc"

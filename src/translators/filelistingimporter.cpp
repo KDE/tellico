@@ -281,4 +281,3 @@ void FileListingImporter::slotCancel() {
   }
 }
 
-#include "filelistingimporter.moc"

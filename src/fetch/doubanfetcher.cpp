@@ -265,4 +265,3 @@ QString DoubanFetcher::ConfigWidget::preferredName() const {
   return DoubanFetcher::defaultName();
 }
 
-#include "doubanfetcher.moc"

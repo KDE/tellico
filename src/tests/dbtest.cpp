@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "dbtest.h"
-#include "dbtest.moc"
 #include "qtest_kde.h"
 
 #include "../datastore/sqlitedb.h"

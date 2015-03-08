@@ -479,4 +479,3 @@ QString DiscogsFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "discogsfetcher.moc"

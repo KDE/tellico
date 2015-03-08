@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "openlibraryfetchertest.h"
-#include "openlibraryfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/openlibraryfetcher.h"

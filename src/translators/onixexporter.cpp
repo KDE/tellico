@@ -205,4 +205,3 @@ void ONIXExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("Include Images", m_includeImages);
 }
 
-#include "onixexporter.moc"

@@ -87,4 +87,3 @@ bool EntryUpdateJob::doKill() {
   return true;
 }
 
-#include "entryupdatejob.moc"

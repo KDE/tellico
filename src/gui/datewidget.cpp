@@ -319,4 +319,3 @@ void DateWidget::slotDateEntered(const QDate& date_) {
   }
 }
 
-#include "datewidget.moc"

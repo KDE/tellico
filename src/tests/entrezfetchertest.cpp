@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entrezfetchertest.h"
-#include "entrezfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/entrezfetcher.h"

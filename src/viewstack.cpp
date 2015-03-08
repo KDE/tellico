@@ -156,4 +156,3 @@ void ViewStack::setIconSizeInterfaceVisible(bool visible) {
   m_iconSizeSlider->setVisible(visible);
 }
 
-#include "viewstack.moc"

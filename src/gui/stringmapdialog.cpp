@@ -133,4 +133,3 @@ QMap<QString, QString> StringMapDialog::stringMap() {
   return map;
 }
 
-#include "stringmapdialog.moc"

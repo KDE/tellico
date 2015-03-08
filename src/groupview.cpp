@@ -409,4 +409,3 @@ void GroupView::addGroup(Tellico::Data::EntryGroup* group_) {
   }
 }
 
-#include "groupview.moc"

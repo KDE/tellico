@@ -329,4 +329,3 @@ QString HathiTrustFetcher::ConfigWidget::preferredName() const {
   return HathiTrustFetcher::defaultName();
 }
 
-#include "hathitrustfetcher.moc"

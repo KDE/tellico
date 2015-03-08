@@ -94,4 +94,3 @@ QWidget* LineFieldWidget::widget() {
   return m_lineEdit;
 }
 
-#include "linefieldwidget.moc"

@@ -211,4 +211,3 @@ void FilterView::invalidate(Tellico::Data::EntryList entries_) {
   }
 }
 
-#include "filterview.moc"

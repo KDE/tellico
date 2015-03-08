@@ -1027,4 +1027,3 @@ QString FreebaseFetcher::value(const QVariantMap& map, const char* object, const
   }
 }
 
-#include "freebasefetcher.moc"

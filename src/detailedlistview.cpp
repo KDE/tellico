@@ -637,4 +637,3 @@ QString DetailedListView::columnFieldName(int ncol_) const {
   return field ? field->name() : QString();
 }
 
-#include "detailedlistview.moc"

@@ -121,4 +121,3 @@ void StatusBar::slotProgress(qulonglong progress_) {
 void StatusBar::slotUpdate() {
 }
 
-#include "statusbar.moc"

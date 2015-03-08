@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entitytest.h"
-#include "entitytest.moc"
 #include "qtest_kde.h"
 
 #include "../tellico_utils.h"

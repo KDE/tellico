@@ -242,7 +242,6 @@ add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
 include_directories(
-                    
                     ${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}

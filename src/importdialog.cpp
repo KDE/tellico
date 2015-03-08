@@ -471,4 +471,3 @@ Tellico::Data::CollPtr ImportDialog::importText(Tellico::Import::Format format_,
   return c;
 }
 
-#include "importdialog.moc"

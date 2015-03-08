@@ -131,4 +131,3 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
   }
 }
 
-#include "entryiconview.moc"

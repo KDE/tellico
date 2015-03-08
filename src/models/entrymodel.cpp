@@ -379,4 +379,3 @@ QString EntryModel::imageField(Data::CollPtr coll_) const {
   return m_imageFields.value(coll_->id());
 }
 
-#include "entrymodel.moc"

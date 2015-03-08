@@ -304,4 +304,3 @@ QUndoCommand* LoanDialog::modifyLoansCommand() {
   return new Command::ModifyLoans(m_loan, newLoan, m_addEvent->isChecked());
 }
 
-#include "loandialog.moc"

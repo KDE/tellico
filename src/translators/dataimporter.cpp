@@ -48,4 +48,3 @@ void DataImporter::setText(const QString& text) {
   m_source = Text;
 }
 
-#include "dataimporter.moc"

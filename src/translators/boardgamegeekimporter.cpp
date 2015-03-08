@@ -238,4 +238,3 @@ void BoardGameGeekImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "boardgamegeekimporter.moc"

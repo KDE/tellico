@@ -1700,4 +1700,3 @@ void IMDBFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
 }
 
-#include "imdbfetcher.moc"

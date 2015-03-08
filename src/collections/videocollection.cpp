@@ -247,4 +247,3 @@ int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   return res;
 }
 
-#include "videocollection.moc"

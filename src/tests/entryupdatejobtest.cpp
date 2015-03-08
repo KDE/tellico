@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entryupdatejobtest.h"
-#include "entryupdatejobtest.moc"
 #include "qtest_kde.h"
 
 #include "../entryupdatejob.h"

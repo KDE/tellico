@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "winecomfetchertest.h"
-#include "winecomfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/winecomfetcher.h"

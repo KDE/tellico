@@ -595,4 +595,3 @@ bool TellicoXMLExporter::version12Needed() const {
   return false;
 }
 
-#include "tellicoxmlexporter.moc"

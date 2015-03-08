@@ -1051,4 +1051,3 @@ void AmazonFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
 }
 
-#include "amazonfetcher.moc"

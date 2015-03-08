@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "musicbrainzfetchertest.h"
-#include "musicbrainzfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/musicbrainzfetcher.h"

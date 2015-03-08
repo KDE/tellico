@@ -410,4 +410,3 @@ QString ISBNdbFetcher::ConfigWidget::preferredName() const {
   return ISBNdbFetcher::defaultName();
 }
 
-#include "isbndbfetcher.moc"

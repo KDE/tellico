@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "srufetchertest.h"
-#include "srufetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/srufetcher.h"

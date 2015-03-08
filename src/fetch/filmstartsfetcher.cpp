@@ -69,4 +69,3 @@ QString FilmStartsFetcher::ConfigWidget::preferredName() const {
   return FilmStartsFetcher::defaultName();
 }
 
-#include "filmstartsfetcher.moc"

@@ -58,4 +58,3 @@ bool GriffithImporter::canImport(int type) const {
   return type == Data::Collection::Video;
 }
 
-#include "griffithimporter.moc"

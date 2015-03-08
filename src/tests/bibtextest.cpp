@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "bibtextest.h"
-#include "bibtextest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/bibteximporter.h"

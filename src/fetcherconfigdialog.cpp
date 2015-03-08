@@ -242,4 +242,3 @@ void FetcherConfigDialog::slotPossibleNewName(const QString& name_) {
   }
 }
 
-#include "fetcherconfigdialog.moc"

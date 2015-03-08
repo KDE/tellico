@@ -513,4 +513,3 @@ QString AllocineFetcher::ConfigWidget::preferredName() const {
   return AllocineFetcher::defaultName();
 }
 
-#include "allocinefetcher.moc"

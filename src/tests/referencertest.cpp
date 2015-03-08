@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "referencertest.h"
-#include "referencertest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/referencerimporter.h"

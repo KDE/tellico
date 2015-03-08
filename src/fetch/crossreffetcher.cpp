@@ -379,4 +379,3 @@ QString CrossRefFetcher::ConfigWidget::preferredName() const {
   return CrossRefFetcher::defaultName();
 }
 
-#include "crossreffetcher.moc"

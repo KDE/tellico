@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "tellicoreadtest.h"
-#include "tellicoreadtest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/tellicoimporter.h"

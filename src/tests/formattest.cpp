@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "formattest.h"
-#include "formattest.moc"
 #include "qtest_kde.h"
 
 #include "../fieldformat.h"

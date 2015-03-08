@@ -115,4 +115,3 @@ void CountDelegate::paint(QPainter* painter_,
   painter_->restore();
 }
 
-#include "countdelegate.moc"

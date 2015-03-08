@@ -139,4 +139,3 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   return coll;
 }
 
-#include "grs1importer.moc"

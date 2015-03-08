@@ -169,4 +169,3 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   return list;
 }
 
-#include "comicbookcollection.moc"

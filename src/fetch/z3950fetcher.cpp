@@ -839,4 +839,3 @@ QString Z3950Fetcher::ConfigWidget::preferredName() const {
   return s.isEmpty() ? i18n("z39.50 Server") : s;
 }
 
-#include "z3950fetcher.moc"

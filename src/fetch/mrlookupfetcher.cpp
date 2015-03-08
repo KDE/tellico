@@ -225,4 +225,3 @@ QString MRLookupFetcher::ConfigWidget::preferredName() const {
   return MRLookupFetcher::defaultName();
 }
 
-#include "mrlookupfetcher.moc"

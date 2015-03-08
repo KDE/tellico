@@ -333,4 +333,3 @@ QString WineComFetcher::ConfigWidget::preferredName() const {
   return WineComFetcher::defaultName();
 }
 
-#include "winecomfetcher.moc"

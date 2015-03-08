@@ -158,4 +158,3 @@ QString GoodreadsImporter::idFromName(const QString& name_) const {
                               .trimmed();
 }
 
-#include "goodreadsimporter.moc"

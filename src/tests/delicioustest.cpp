@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "delicioustest.h"
-#include "delicioustest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/deliciousimporter.h"

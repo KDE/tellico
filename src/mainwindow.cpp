@@ -2263,4 +2263,3 @@ void MainWindow::slotToggleMenuBarVisibility() {
   mb->isHidden() ? mb->show() : mb->hide();
 }
 
-#include "mainwindow.moc"

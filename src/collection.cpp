@@ -906,4 +906,3 @@ Tellico::Data::ID Collection::getID() {
   return ++id;
 }
 
-#include "collection.moc"

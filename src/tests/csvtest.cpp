@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "csvtest.h"
-#include "csvtest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/csvparser.h"

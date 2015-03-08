@@ -85,4 +85,3 @@ void ConfigWidget::saveConfig(KConfigGroup& config_) {
   slotSetModified(false);
 }
 
-#include "configwidget.moc"

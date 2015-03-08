@@ -479,4 +479,3 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
   return num;
 }
 
-#include "audiofileimporter.moc"

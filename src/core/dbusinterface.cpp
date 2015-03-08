@@ -230,4 +230,3 @@ bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, cons
   return true;
 }
 
-#include "dbusinterface.moc"

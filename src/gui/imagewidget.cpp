@@ -449,4 +449,3 @@ void ImageWidget::cancelScan(KDialog::ButtonCode code_) {
 #endif
 }
 
-#include "imagewidget.moc"

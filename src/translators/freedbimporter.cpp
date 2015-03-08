@@ -557,4 +557,3 @@ void FreeDBImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "freedbimporter.moc"

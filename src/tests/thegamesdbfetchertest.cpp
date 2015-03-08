@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "thegamesdbfetchertest.h"
-#include "thegamesdbfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/thegamesdbfetcher.h"

@@ -142,4 +142,3 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
   return QValidator::Acceptable;
 }
 
-#include "upcvalidator.moc"

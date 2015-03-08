@@ -195,4 +195,3 @@ QString BoardGameGeekFetcher::ConfigWidget::preferredName() const {
   return BoardGameGeekFetcher::defaultName();
 }
 
-#include "boardgamegeekfetcher.moc"

@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "vinoxmltest.h"
-#include "vinoxmltest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/vinoxmlimporter.h"

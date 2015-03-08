@@ -189,4 +189,3 @@ Tellico::Data::BorrowerPtr BorrowerDialog::getBorrower(QWidget* parent_) {
   return Data::BorrowerPtr();
 }
 
-#include "borrowerdialog.moc"

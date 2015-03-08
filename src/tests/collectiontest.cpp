@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "collectiontest.h"
-#include "collectiontest.moc"
 #include "qtest_kde.h"
 
 #include "../collection.h"

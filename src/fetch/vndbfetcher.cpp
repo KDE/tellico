@@ -355,4 +355,3 @@ QString VNDBFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "vndbfetcher.moc"

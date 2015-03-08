@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "citebasefetchertest.h"
-#include "citebasefetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/citebasefetcher.h"

@@ -289,4 +289,3 @@ void GCstarImporter::slotCancel() {
 }
 
 #undef CHECKLIMITS
-#include "gcstarimporter.moc"

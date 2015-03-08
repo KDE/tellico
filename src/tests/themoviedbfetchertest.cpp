@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "themoviedbfetchertest.h"
-#include "themoviedbfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/themoviedbfetcher.h"

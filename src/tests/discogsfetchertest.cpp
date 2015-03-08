@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "discogsfetchertest.h"
-#include "discogsfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/discogsfetcher.h"

@@ -348,4 +348,3 @@ QString FilmasterFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "filmasterfetcher.moc"

@@ -123,4 +123,3 @@ Tellico::EntryUpdater::UpdateResult EntryMatchDialog::updateResult() const {
   return m_itemResults[item];
 }
 
-#include "entrymatchdialog.moc"

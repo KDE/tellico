@@ -337,4 +337,3 @@ QString ArxivFetcher::ConfigWidget::preferredName() const {
   return ArxivFetcher::defaultName();
 }
 
-#include "arxivfetcher.moc"

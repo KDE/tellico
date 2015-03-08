@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "arxivfetchertest.h"
-#include "arxivfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/arxivfetcher.h"

@@ -326,4 +326,3 @@ QString MovieMeterFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "moviemeterfetcher.moc"

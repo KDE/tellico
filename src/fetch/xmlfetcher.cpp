@@ -223,4 +223,3 @@ Tellico::XSLTHandler* XMLFetcher::xsltHandler() {
   return m_xsltHandler;
 }
 
-#include "xmlfetcher.moc"

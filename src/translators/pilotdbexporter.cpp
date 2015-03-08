@@ -244,4 +244,3 @@ void PilotDBExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("Backup", m_backup);
 }
 
-#include "pilotdbexporter.moc"

@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "griffithtest.h"
-#include "griffithtest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/griffithimporter.h"

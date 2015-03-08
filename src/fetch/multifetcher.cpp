@@ -302,4 +302,3 @@ QWidget* MultiFetcher::FetcherListWidget::createWidget(QWidget* parent_) {
   return w;
 }
 
-#include "multifetcher.moc"

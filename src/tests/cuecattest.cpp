@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "cuecattest.h"
-#include "cuecattest.moc"
 #include "qtest_kde.h"
 
 #include "../utils/upcvalidator.h"

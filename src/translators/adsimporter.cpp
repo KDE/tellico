@@ -244,4 +244,3 @@ void ADSImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "adsimporter.moc"

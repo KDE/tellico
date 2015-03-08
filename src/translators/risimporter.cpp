@@ -366,4 +366,3 @@ bool RISImporter::maybeRIS(const KUrl& url_) {
   return rx.exactMatch(currLine);
 }
 
-#include "risimporter.moc"

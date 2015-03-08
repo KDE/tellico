@@ -203,4 +203,3 @@ QString BiblioShareFetcher::ConfigWidget::preferredName() const {
   return BiblioShareFetcher::defaultName();
 }
 
-#include "bibliosharefetcher.moc"

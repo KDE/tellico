@@ -242,4 +242,3 @@ QString CitebaseFetcher::ConfigWidget::preferredName() const {
   return CitebaseFetcher::defaultName();
 }
 
-#include "citebasefetcher.moc"

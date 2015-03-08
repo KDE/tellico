@@ -131,4 +131,3 @@ int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::Entry
   return res;
 }
 
-#include "filecatalog.moc"

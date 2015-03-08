@@ -329,4 +329,3 @@ bool EntryGroupModel::hasValidParent(const QModelIndex& index_) const {
   return parentNode && parentNode != m_rootNode;
 }
  
-#include "entrygroupmodel.moc"

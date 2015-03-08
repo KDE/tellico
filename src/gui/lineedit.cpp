@@ -99,4 +99,3 @@ void LineEdit::spellCheckerCorrected(const QString& oldWord, int pos, const QStr
   }
 }
 
-#include "lineedit.moc"

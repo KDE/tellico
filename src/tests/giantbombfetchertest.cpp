@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "giantbombfetchertest.h"
-#include "giantbombfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/giantbombfetcher.h"

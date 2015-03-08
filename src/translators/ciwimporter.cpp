@@ -271,4 +271,3 @@ bool CIWImporter::maybeCIW(const KUrl& url_) {
   return rx.exactMatch(currLine);
 }
 
-#include "ciwimporter.moc"

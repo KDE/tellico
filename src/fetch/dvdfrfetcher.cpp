@@ -195,4 +195,3 @@ QString DVDFrFetcher::ConfigWidget::preferredName() const {
   return DVDFrFetcher::defaultName();
 }
 
-#include "dvdfrfetcher.moc"

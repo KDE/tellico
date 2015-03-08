@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "isbndbfetchertest.h"
-#include "isbndbfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/isbndbfetcher.h"

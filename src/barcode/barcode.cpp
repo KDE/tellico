@@ -884,4 +884,3 @@ MatchMakerResult::MatchMakerResult( bool even, int digit )
   m_digit = digit;
 }
 
-#include "barcode.moc"

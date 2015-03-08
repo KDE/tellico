@@ -454,4 +454,3 @@ bool Manager::checkCommonFile() {
   return KIO::NetAccess::file_copy(src, dest);
 }
 
-#include "manager.moc"

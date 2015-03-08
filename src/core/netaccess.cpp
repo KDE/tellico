@@ -151,4 +151,3 @@ QString NetAccess::lastErrorString() {
   return s_lastErrorMessage;
 }
 
-#include "netaccess.moc"

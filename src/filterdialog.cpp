@@ -548,4 +548,3 @@ void FilterDialog::slotSaveFilter() {
   Kernel::self()->addFilter(filter);
 }
 
-#include "filterdialog.moc"

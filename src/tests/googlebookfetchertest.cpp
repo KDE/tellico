@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "googlebookfetchertest.h"
-#include "googlebookfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/googlebookfetcher.h"

@@ -866,4 +866,3 @@ void FetchDialog::customEvent(QEvent* e) {
   }
 }
 
-#include "fetchdialog.moc"

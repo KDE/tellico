@@ -99,4 +99,3 @@ QWidget* URLFieldWidget::widget() {
   return m_requester;
 }
 
-#include "urlfieldwidget.moc"

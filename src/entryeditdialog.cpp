@@ -757,4 +757,3 @@ void EntryEditDialog::closeEvent(QCloseEvent* event_) {
   }
 }
 
-#include "entryeditdialog.moc"

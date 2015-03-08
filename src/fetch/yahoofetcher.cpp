@@ -401,4 +401,3 @@ QString YahooFetcher::ConfigWidget::preferredName() const {
   return YahooFetcher::defaultName();
 }
 
-#include "yahoofetcher.moc"

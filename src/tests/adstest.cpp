@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "adstest.h"
-#include "adstest.moc"
 #include "qtest_kde.h"
 
 #include "../translators/adsimporter.h"

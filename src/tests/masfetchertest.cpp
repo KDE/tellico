@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "masfetchertest.h"
-#include "masfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/masfetcher.h"

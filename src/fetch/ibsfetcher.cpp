@@ -450,4 +450,3 @@ QString IBSFetcher::ConfigWidget::preferredName() const {
   return IBSFetcher::defaultName();
 }
 
-#include "ibsfetcher.moc"

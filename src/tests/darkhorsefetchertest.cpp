@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "darkhorsefetchertest.h"
-#include "darkhorsefetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/execexternalfetcher.h"

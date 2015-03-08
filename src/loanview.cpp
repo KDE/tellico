@@ -202,4 +202,3 @@ void LoanView::updateHeader() {
   }
 }
 
-#include "loanview.moc"

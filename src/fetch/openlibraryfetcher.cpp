@@ -456,4 +456,3 @@ QString OpenLibraryFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "openlibraryfetcher.moc"

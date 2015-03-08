@@ -193,4 +193,3 @@ QString BibtexmlExporter::text() {
   return dom.toString();
 }
 
-#include "bibtexmlexporter.moc"

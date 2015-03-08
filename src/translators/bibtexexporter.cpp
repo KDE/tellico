@@ -353,4 +353,3 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   text_ += QLatin1String("\n}\n\n");
 }
 
-#include "bibtexexporter.moc"

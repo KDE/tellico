@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "abstractfetchertest.h"
-#include "abstractfetchertest.moc"
 
 #include "../fetch/fetcherjob.h"
 

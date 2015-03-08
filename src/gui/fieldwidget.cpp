@@ -241,4 +241,3 @@ void FieldWidget::multipleChecked() {
   emit valueChanged(m_field);
 }
 
-#include "fieldwidget.moc"

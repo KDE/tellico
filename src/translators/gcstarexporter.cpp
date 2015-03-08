@@ -162,4 +162,3 @@ QWidget* GCstarExporter::widget(QWidget* parent_) {
   return 0;
 }
 
-#include "gcstarexporter.moc"

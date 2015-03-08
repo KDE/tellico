@@ -48,4 +48,3 @@ TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
 TextImporter::TextImporter(const QString& text_) : Import::Importer(text_) {
 }
 
-#include "textimporter.moc"

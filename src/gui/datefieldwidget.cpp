@@ -54,4 +54,3 @@ QWidget* DateFieldWidget::widget() {
   return m_widget;
 }
 
-#include "datefieldwidget.moc"

@@ -122,4 +122,3 @@ void BibtexKeyDialog::slotFilterDuplicates() {
   }
 }
 
-#include "bibtexkeydialog.moc"

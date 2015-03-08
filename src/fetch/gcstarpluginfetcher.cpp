@@ -486,4 +486,3 @@ void GCstarPluginFetcher::ConfigWidget::showEvent(QShowEvent*) {
   }
 }
 
-#include "gcstarpluginfetcher.moc"

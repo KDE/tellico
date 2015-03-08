@@ -359,4 +359,3 @@ QString MASFetcher::value(const QVariantMap& map, const char* name, const char* 
   }
 }
 
-#include "masfetcher.moc"

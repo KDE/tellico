@@ -445,4 +445,3 @@ QString GoogleBookFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "googlebookfetcher.moc"

@@ -298,4 +298,3 @@ void FilterModel::populateFilterNode(Node* node_, const FilterPtr filter_) const
   }
 }
 
-#include "filtermodel.moc"

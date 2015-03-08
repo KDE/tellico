@@ -134,4 +134,3 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   return list;
 }
 
-#include "gamecollection.moc"

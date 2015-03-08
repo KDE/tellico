@@ -846,4 +846,3 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
   }
 }
 
-#include "htmlexporter.moc"

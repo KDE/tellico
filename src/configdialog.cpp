@@ -1175,4 +1175,3 @@ void ConfigDialog::slotDeleteTemplate() {
   }
 }
 
-#include "configdialog.moc"

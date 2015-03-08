@@ -50,4 +50,3 @@ Tellico::Data::CollPtr VinoXMLImporter::collection() {
   return XSLTImporter::collection();
 }
 
-#include "vinoxmlimporter.moc"

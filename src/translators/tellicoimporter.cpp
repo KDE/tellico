@@ -338,4 +338,3 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
   return true;
 }
 
-#include "tellicoimporter.moc"

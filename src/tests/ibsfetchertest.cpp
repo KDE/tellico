@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ibsfetchertest.h"
-#include "ibsfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/ibsfetcher.h"

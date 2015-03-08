@@ -175,4 +175,3 @@ QString Fetcher::favIcon(const KUrl& url_) {
   return KMimeType::iconNameForUrl(url_);
 }
 
-#include "fetcher.moc"

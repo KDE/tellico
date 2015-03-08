@@ -327,4 +327,3 @@ void TableFieldWidget::slotClear() {
   clearImpl();
 }
 
-#include "tablefieldwidget.moc"

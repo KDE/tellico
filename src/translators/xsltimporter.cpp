@@ -132,4 +132,3 @@ void XSLTImporter::slotCancel() {
   myDebug() << "unimplemented";
 }
 
-#include "xsltimporter.moc"

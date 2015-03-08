@@ -423,4 +423,3 @@ void EntryView::resetColors() {
   connect(this, SIGNAL(completed()), SLOT(slotReloadEntry()));
 }
 
-#include "entryview.moc"

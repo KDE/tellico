@@ -69,4 +69,3 @@ void SpinBox::stepBy(int steps_) {
   }
 }
 
-#include "spinbox.moc"

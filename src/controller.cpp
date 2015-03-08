@@ -658,4 +658,3 @@ void Controller::updatedFetchers() {
   m_mainWindow->updateEntrySources();
 }
 
-#include "controller.moc"

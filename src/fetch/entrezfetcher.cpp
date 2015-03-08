@@ -489,4 +489,3 @@ QString EntrezFetcher::ConfigWidget::preferredName() const {
   return EntrezFetcher::defaultName();
 }
 
-#include "entrezfetcher.moc"

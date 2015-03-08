@@ -132,4 +132,3 @@ bool EntryMerger::cleanMerge(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr
   return true;
 }
 
-#include "entrymerger.moc"

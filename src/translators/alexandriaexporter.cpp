@@ -223,4 +223,3 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
       && img2.save(filename + QLatin1String("_small.jpg"), "JPEG");
 }
 
-#include "alexandriaexporter.moc"

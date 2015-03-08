@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "z3950fetchertest.h"
-#include "z3950fetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/z3950fetcher.h"

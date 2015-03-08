@@ -318,4 +318,3 @@ void AMCImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "amcimporter.moc"

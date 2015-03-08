@@ -67,4 +67,3 @@ void PreviewDialog::showEntry(Tellico::Data::EntryPtr entry_) {
   m_view->showEntry(entry_);
 }
 
-#include "previewdialog.moc"

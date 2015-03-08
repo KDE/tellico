@@ -550,4 +550,3 @@ bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& c
   return true;
 }
 
-#include "fetchmanager.moc"

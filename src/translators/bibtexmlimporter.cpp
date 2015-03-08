@@ -170,4 +170,3 @@ void BibtexmlImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "bibtexmlimporter.moc"

@@ -137,4 +137,3 @@ QString DBLPFetcher::ConfigWidget::preferredName() const {
   return DBLPFetcher::defaultName();
 }
 
-#include "dblpfetcher.moc"

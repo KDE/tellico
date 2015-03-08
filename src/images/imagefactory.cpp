@@ -613,4 +613,3 @@ void ImageFactory::setZipArchive(KZip* zip_) {
 
 #undef RELEASE_IMAGES
 
-#include "imagefactory.moc"

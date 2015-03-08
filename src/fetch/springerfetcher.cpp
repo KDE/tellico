@@ -190,4 +190,3 @@ QString SpringerFetcher::ConfigWidget::preferredName() const {
   return SpringerFetcher::defaultName();
 }
 
-#include "springerfetcher.moc"

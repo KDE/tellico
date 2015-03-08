@@ -172,4 +172,3 @@ QString TheGamesDBFetcher::ConfigWidget::preferredName() const {
   return TheGamesDBFetcher::defaultName();
 }
 
-#include "thegamesdbfetcher.moc"

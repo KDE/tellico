@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "freebasefetchertest.h"
-#include "freebasefetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/freebasefetcher.h"

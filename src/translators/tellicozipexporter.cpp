@@ -154,4 +154,3 @@ void TellicoZipExporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "tellicozipexporter.moc"

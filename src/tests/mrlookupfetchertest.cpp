@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "mrlookupfetchertest.h"
-#include "mrlookupfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/mrlookupfetcher.h"

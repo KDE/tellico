@@ -248,4 +248,3 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("ColumnDelimiter", m_colDelimiter);
 }
 
-#include "csvexporter.moc"

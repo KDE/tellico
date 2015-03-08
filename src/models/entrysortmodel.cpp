@@ -125,4 +125,3 @@ Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index
   return comp;
 }
 
-#include "entrysortmodel.moc"

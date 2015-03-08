@@ -140,4 +140,3 @@ QWidget* NumberFieldWidget::widget() {
   return m_lineEdit;
 }
 
-#include "numberfieldwidget.moc"

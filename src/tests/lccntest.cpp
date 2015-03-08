@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "lccntest.h"
-#include "lccntest.moc"
 #include "qtest_kde.h"
 
 #include "../utils/lccnvalidator.h"

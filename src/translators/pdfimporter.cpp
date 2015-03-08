@@ -301,4 +301,3 @@ void PDFImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "pdfimporter.moc"

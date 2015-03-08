@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "imdbfetchertest.h"
-#include "imdbfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/imdbfetcher.h"

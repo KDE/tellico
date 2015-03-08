@@ -69,4 +69,3 @@ QString BeyazperdeFetcher::ConfigWidget::preferredName() const {
   return BeyazperdeFetcher::defaultName();
 }
 
-#include "beyazperdefetcher.moc"

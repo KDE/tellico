@@ -1048,4 +1048,3 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
   return newTypes;
 }
 
-#include "collectionfieldsdialog.moc"

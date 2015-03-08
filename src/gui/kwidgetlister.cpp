@@ -188,4 +188,3 @@ void KWidgetLister::enableControls()
   mBtnFewer->setEnabled( !isMinWidgets );
 }
 
-#include "kwidgetlister.moc"

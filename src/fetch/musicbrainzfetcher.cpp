@@ -345,4 +345,3 @@ QString MusicBrainzFetcher::ConfigWidget::preferredName() const {
   return MusicBrainzFetcher::defaultName();
 }
 
-#include "musicbrainzfetcher.moc"

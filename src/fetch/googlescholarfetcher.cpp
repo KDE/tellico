@@ -272,4 +272,3 @@ QString GoogleScholarFetcher::ConfigWidget::preferredName() const {
   return GoogleScholarFetcher::defaultName();
 }
 
-#include "googlescholarfetcher.moc"

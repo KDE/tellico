@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "boardgamegeekfetchertest.h"
-#include "boardgamegeekfetchertest.moc"
 #include "qtest_kde.h"
 
 #include "../fetch/execexternalfetcher.h"

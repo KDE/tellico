@@ -58,4 +58,3 @@ QWidget* RatingFieldWidget::widget() {
   return m_rating;
 }
 
-#include "ratingfieldwidget.moc"

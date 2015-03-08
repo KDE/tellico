@@ -423,4 +423,3 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
   mainColl->setMacroList(macros);
 }
 
-#include "bibteximporter.moc"

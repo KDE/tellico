@@ -81,4 +81,3 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
   return coll;
 }
 
-#include "referencerimporter.moc"

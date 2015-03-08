@@ -252,4 +252,3 @@ QString GiantBombFetcher::ConfigWidget::preferredName() const {
   return GiantBombFetcher::defaultName();
 }
 
-#include "giantbombfetcher.moc"

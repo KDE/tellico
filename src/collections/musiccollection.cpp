@@ -143,4 +143,3 @@ int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   return res;
 }
 
-#include "musiccollection.moc"
