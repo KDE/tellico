@@ -8,4 +8,4 @@ SET(newstuff_STAT_SRCS
 qt5_add_dbus_adaptor(newstuff_STAT_SRCS org.kde.tellico.newstuff.xml manager.h Tellico::NewStuff::Manager)
 add_library(newstuff STATIC ${newstuff_STAT_SRCS})
 
-INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${CONFIG_INSTALL_DIR})
+INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})

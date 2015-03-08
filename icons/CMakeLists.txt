@@ -58,6 +58,6 @@ set(ICON_FILES
 
 INSTALL(FILES ${ICON_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR}/pics )
 
-ecm_install_icons( ${ICON_INSTALL_DIR} )
+ecm_install_icons( ${KDE_INSTALL_ICONDIR} )
 
 
