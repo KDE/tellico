@@ -16,10 +16,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${ECM_MODULE_PATH}
                       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
+
+include(ECMAddTests)
+include(ECMMarkNonGuiExecutable)
+include(ECMInstallIcons)
+include(FeatureSummary)
+
 include(KDEInstallDirs)
 include(KDECompilerSettings)
 include(KDECMakeSettings)
-include(FeatureSummary)
 
 ############# Options #################
 
@@ -65,26 +70,26 @@ find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
 #macro_optional_find_package(Nepomuk)
-find_package(Nepomuk)
 #macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
-set_package_properties(Nepomuk PROPERTIES
-    DESCRIPTION "Support for reading file metadata"
-    URL "http://www.kde.org"
-    TYPE OPTIONAL)
-if(NEPOMUK_FOUND)
-    include_directories(${NEPOMUK_INCLUDE_DIRS})
-endif(NEPOMUK_FOUND)
+#find_package(Nepomuk)
+#set_package_properties(Nepomuk PROPERTIES
+#    DESCRIPTION "Support for reading file metadata"
+#    URL "http://www.kde.org"
+#    TYPE OPTIONAL)
+#if(NEPOMUK_FOUND)
+#    include_directories(${NEPOMUK_INCLUDE_DIRS})
+#endif(NEPOMUK_FOUND)
 
 #macro_optional_find_package(KdepimLibs 4.5)
 #macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.5.0" "")
-find_package(KdepimLibs 4.5)
-set_package_properties(KdepimLibs PROPERTIES
-    DESCRIPTION "Support for using the address book and calendar for loans"
-    URL "http://pim.kde.org"
-    TYPE OPTIONAL)
-if(KDEPIMLIBS_FOUND)
-    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
-endif(KDEPIMLIBS_FOUND)
+#find_package(KdepimLibs 4.5)
+#set_package_properties(KdepimLibs PROPERTIES
+#    DESCRIPTION "Support for using the address book and calendar for loans"
+#    URL "http://pim.kde.org"
+#    TYPE OPTIONAL)
+#if(KDEPIMLIBS_FOUND)
+#    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
+#endif(KDEPIMLIBS_FOUND)
 
 #macro_optional_find_package(KdeMultimedia)
 #macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
