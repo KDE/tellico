@@ -46,6 +46,7 @@
 #ifdef HAVE_QJSON
 #include <qjson/serializer.h>
 #include <qjson/parser.h>
+#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -137,7 +138,7 @@ void DiscogsFetcher::search() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 #else
   stop();

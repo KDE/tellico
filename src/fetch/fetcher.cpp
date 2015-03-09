@@ -33,6 +33,7 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <kmimetype.h>
+#include <KUrl>
 
 #include <QDBusInterface>
 #include <QDBusReply>

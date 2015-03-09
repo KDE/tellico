@@ -38,6 +38,7 @@
 #include <KLineEdit>
 #include <KIntSpinBox>
 #include <KCodecs>
+#include <KUrl>
 
 #include <QLabel>
 #include <QFile>
@@ -48,6 +49,7 @@
 
 #ifdef HAVE_QJSON
 #include <qjson/parser.h>
+#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -135,7 +137,7 @@ void AbstractAllocineFetcher::search() {
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 #else
   stop();

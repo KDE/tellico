@@ -59,6 +59,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -394,7 +395,7 @@ void AmazonFetcher::doSearch() {
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

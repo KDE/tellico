@@ -37,4 +37,8 @@ add_library(gui STATIC ${gui_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(gui
     Qt5::Core
+    Qt5::Widgets
+    Qt5::Gui
+    KF5::KDELibs4Support
+    KF5::KIOCore
 )

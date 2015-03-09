@@ -36,6 +36,7 @@
 #include <klocale.h>
 #include <kglobalsettings.h>
 #include <kcalendarsystem.h>
+#include <kglobal.h>
 
 #include <QHBoxLayout>
 #include <QFrame>

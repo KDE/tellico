@@ -44,6 +44,7 @@
 
 #ifdef HAVE_QJSON
 #include <qjson/parser.h>
+#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -132,7 +133,7 @@ void MASFetcher::doSearch() {
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 #else
   stop();

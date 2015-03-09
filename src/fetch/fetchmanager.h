@@ -121,7 +121,7 @@ private:
   static Manager* s_self;
 
   Manager();
-  Fetcher::Ptr createFetcher(KSharedPtr<KSharedConfig> config, const QString& configGroup);
+  Fetcher::Ptr createFetcher(KSharedConfigPtr config, const QString& configGroup);
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 

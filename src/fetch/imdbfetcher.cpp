@@ -53,6 +53,7 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QGridLayout>
+#include <KJobWidgets/KJobWidgets>
 
 //#define IMDB_TEST
 
@@ -361,7 +362,7 @@ void IMDBFetcher::search() {
 #endif
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
   connect(m_job, SIGNAL(redirection(KIO::Job*, const KUrl&)),
@@ -864,7 +865,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   m_redirected = true;
   m_text.clear();
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
   connect(m_job, SIGNAL(redirection(KIO::Job *, const KUrl&)),

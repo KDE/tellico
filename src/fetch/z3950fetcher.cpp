@@ -56,7 +56,7 @@
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
 #include <kseparator.h>
-#include <QIcon>
+#include <KGlobal>
 
 #include <QFile>
 #include <QLabel>
@@ -64,6 +64,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
+#include <QIcon>
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;

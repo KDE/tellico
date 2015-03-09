@@ -38,6 +38,7 @@
 #include <QVBoxLayout>
 #include <QFile>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const char* MRLOOKUP_URL = "http://www.ams.org/mrlookup";
@@ -93,7 +94,7 @@ void MRLookupFetcher::search() {
 
 //  myDebug() << u;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
 

@@ -43,6 +43,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const char* ANIMENFO_BASE_URL = "http://www.animenfo.com/search.php";
@@ -108,7 +109,7 @@ void AnimeNfoFetcher::search() {
 //  myDebug() << "url:" << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

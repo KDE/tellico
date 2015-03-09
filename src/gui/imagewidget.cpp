@@ -30,6 +30,8 @@
 #include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 
+#include <QDrag>
+
 #include <KFileDialog>
 #include <KLocale>
 #include <KMessageBox>
@@ -314,7 +316,7 @@ void ImageWidget::slotEditImage() {
       const Data::Image& img = ImageFactory::imageById(m_imageID);
       img.save(m_img);
       m_editedFileDateTime = QFileInfo(m_img).lastModified();
-      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, KUrl::List() << m_img));
+      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, QList<QUrl>() << m_img));
       m_editProcess->start();
       if(!m_waitDlg) {
         m_waitDlg = new KProgressDialog(this);

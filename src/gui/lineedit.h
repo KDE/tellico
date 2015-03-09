@@ -29,7 +29,7 @@
 
 #include <QString>
 
-class KAction;
+class QAction;
 class KSpell;
 namespace Sonnet {
   class Dialog;
@@ -66,7 +66,7 @@ private slots:
   void spellCheckerCorrected(const QString& oldText, int pos, const QString& newText);
 
 private:
-  KAction* m_spellAction;
+  QAction* m_spellAction;
   bool m_allowSpellCheck;
   bool m_enableSpellCheck;
   Sonnet::Dialog* m_sonnetDialog;

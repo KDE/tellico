@@ -42,6 +42,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <KJobWidgets/KJobWidgets>
 
 //#define IBS_TEST
 
@@ -121,7 +122,7 @@ void IBSFetcher::search() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   if(request().key == ISBN) {
     connect(m_job, SIGNAL(result(KJob*)), SLOT(slotCompleteISBN(KJob*)));
   } else {

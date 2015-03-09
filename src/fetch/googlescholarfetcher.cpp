@@ -39,6 +39,7 @@
 #include <QVBoxLayout>
 #include <QFile>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
@@ -114,7 +115,7 @@ void GoogleScholarFetcher::doSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }

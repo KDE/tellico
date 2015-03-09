@@ -242,7 +242,9 @@ if(ENABLE_WEBCAM)
 endif(ENABLE_WEBCAM)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -Wextra -fno-check-new -Woverloaded-virtual")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -Wextra -fno-check-new -Woverloaded-virtual")
+    # remove -Wno-deprecated when porting to KF5 is more advanced
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -fno-check-new -Woverloaded-virtual -Wno-deprecated -Wno-deprecated-declarations")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
 #add_definitions(${QT_DEFINITIONS}

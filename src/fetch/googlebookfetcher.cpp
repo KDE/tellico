@@ -37,6 +37,7 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KLineEdit>
+#include <KConfigGroup>
 
 #include <QLabel>
 #include <QFile>
@@ -46,6 +47,7 @@
 
 #ifdef HAVE_QJSON
 #include <qjson/parser.h>
+#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -151,7 +153,7 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
   m_jobs << job;
 #endif

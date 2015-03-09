@@ -38,6 +38,7 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KLineEdit>
+#include <KConfigGroup>
 
 #include <QLabel>
 #include <QFile>
@@ -48,6 +49,7 @@
 #ifdef HAVE_QJSON
 #include <qjson/serializer.h>
 #include <qjson/parser.h>
+#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -195,7 +197,7 @@ void FreebaseFetcher::doSearch() {
 //    }
 //    myDebug() << url.url();
     job->setProperty("freebase_query", queryHash);
-    job->ui()->setWindow(GUI::Proxy::widget());
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
     connect(job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
     m_jobs << job;

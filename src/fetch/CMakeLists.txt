@@ -66,6 +66,7 @@ add_library(fetch STATIC ${fetch_STAT_SRCS})
 TARGET_LINK_LIBRARIES(fetch
     newstuff
     ${TELLICO_BTPARSE_LIBS}
+    KF5::KDELibs4Support
     )
 
 IF( YAZ_FOUND )

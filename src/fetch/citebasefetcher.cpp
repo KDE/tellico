@@ -39,6 +39,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QFile>
+#include <KJobWidgets/KJobWidgets>
 
 // #define CITEBASE_TEST
 
@@ -81,7 +82,7 @@ void CitebaseFetcher::search() {
   }
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
