@@ -226,7 +226,7 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(pix));
   addPage(page);
 
   // since this is the first page, go ahead and lay it out
@@ -353,7 +353,7 @@ void ConfigDialog::setupPrintingPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Printing"));
   page->setHeader(i18n("Printing Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(pix));
   addPage(page);
 }
 
@@ -431,7 +431,7 @@ void ConfigDialog::setupTemplatePage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Templates"));
   page->setHeader(i18n("Template Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(pix));
   addPage(page);
 }
 
@@ -463,7 +463,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   KPushButton* btn = new KPushButton(i18n("&Preview..."), frame);
   btn->setWhatsThis(i18n("Show a preview of the template"));
-  btn->setIcon(KIcon(QLatin1String("zoom-original")));
+  btn->setIcon(QIcon::fromTheme(QLatin1String("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
   connect(btn, SIGNAL(clicked()), SLOT(slotShowTemplatePreview()));
 
@@ -560,19 +560,19 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   box1->setSpacing(spacingHint());
 
   KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
-  b1->setIcon(KIcon(QLatin1String("list-add")));
+  b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
   KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
-  b2->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
+  b2->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
   KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
-  b3->setIcon(KIcon(QLatin1String("list-remove")));
+  b3->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
   whats = i18n("Click to select and remove installed templates.");
   b3->setWhatsThis(whats);
@@ -607,7 +607,7 @@ void ConfigDialog::setupFetchPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Data Sources"));
   page->setHeader(i18n("Data Sources Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(pix));
   addPage(page);
 }
 
@@ -626,11 +626,11 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   KHBox* hb = new KHBox(frame);
   leftLayout->addWidget(hb);
   m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), hb);
-  m_moveUpSourceBtn->setIcon(KIcon(QLatin1String("go-up")));
+  m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
   m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), hb);
-  m_moveDownSourceBtn->setIcon(KIcon(QLatin1String("go-down")));
+  m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
@@ -652,16 +652,16 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
   KPushButton* newSourceBtn = new KPushButton(i18n("&New..."), frame);
-  newSourceBtn->setIcon(KIcon(QLatin1String("document-new")));
+  newSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   newSourceBtn->setWhatsThis(i18n("Click to add a new data source."));
   m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
-  m_modifySourceBtn->setIcon(KIcon(QLatin1String("network-wired")));
+  m_modifySourceBtn->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
   m_modifySourceBtn->setWhatsThis(i18n("Click to modify the selected data source."));
   m_removeSourceBtn = new KPushButton(i18n("&Delete"), frame);
-  m_removeSourceBtn->setIcon(KIcon(QLatin1String("list-remove")));
+  m_removeSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
   m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
-  m_newStuffBtn->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
+  m_newStuffBtn->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
   // checksum and signature checking are no longer possible with knewstuff2
   // disable button for now

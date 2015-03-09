@@ -93,12 +93,12 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   boxLayout->addStretch(1);
 
   KPushButton* button1 = new KPushButton(i18n("Select Image..."), this);
-  button1->setIcon(KIcon(QLatin1String("insert-image")));
+  button1->setIcon(QIcon::fromTheme(QLatin1String("insert-image")));
   connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
   boxLayout->addWidget(button1);
 
   KPushButton* button2 = new KPushButton(i18n("Scan Image..."), this);
-  button2->setIcon(KIcon(QLatin1String("scanner")));
+  button2->setIcon(QIcon::fromTheme(QLatin1String("scanner")));
   connect(button2, SIGNAL(clicked()), this, SLOT(slotScanImage()));
   boxLayout->addWidget(button2);
 #ifndef HAVE_KSANE
@@ -126,7 +126,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
       continue;
     }
     offerNames.insert(service->name());
-    QAction* action = m_editMenu->addAction(KIcon(service->icon()), service->name());
+    QAction* action = m_editMenu->addAction(QIcon::fromTheme(service->icon()), service->name());
     action->setData(QVariant::fromValue(service));
     grp->addAction(action);
     if(!selectedAction || editor == service->name()) {
@@ -141,7 +141,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
     m_edit->setEnabled(false);
   }
   KPushButton* button4 = new KPushButton(i18nc("Clear image", "Clear"), this);
-  button4->setIcon(KIcon(QLatin1String("edit-clear")));
+  button4->setIcon(QIcon::fromTheme(QLatin1String("edit-clear")));
   connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
   boxLayout->addWidget(button4);
 
@@ -336,7 +336,7 @@ void ImageWidget::slotFinished() {
 
 void ImageWidget::slotEditMenu(QAction* action) {
   m_editor = action->data().value<KService::Ptr>();
-  m_edit->setIcon(KIcon(m_editor->icon()));
+  m_edit->setIcon(QIcon::fromTheme(m_editor->icon()));
 }
 
 void ImageWidget::slotLinkOnlyClicked() {

@@ -30,7 +30,7 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kicon.h>
+#include <QIcon>
 
 using Tellico::EntryGroupModel;
 
@@ -134,12 +134,12 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
         // so no need to lookup the entry(index_), just use first one we find
         foreach(Data::EntryGroup* group, m_groups) {
           if(!group->isEmpty()) {
-            return KIcon(CollectionFactory::typeName(group->first()->collection()));
+            return QIcon::fromTheme(CollectionFactory::typeName(group->first()->collection()));
           }
         }
       }
       // for groups, check the icon name list
-      return KIcon(m_groupIconNames.at(index_.row()));
+      return QIcon::fromTheme(m_groupIconNames.at(index_.row()));
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:

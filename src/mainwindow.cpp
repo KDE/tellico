@@ -115,7 +115,7 @@ KIcon mimeIcon(const char* s) {
   if(!ptr) {
     myDebug() << "*** no icon for" << s;
   }
-  return ptr ? KIcon(ptr->iconName()) : KIcon();
+  return ptr ? QIcon::fromTheme(ptr->iconName()) : QIcon();
 }
 
 KIcon mimeIcon(const char* s1, const char* s2) {
@@ -126,7 +126,7 @@ KIcon mimeIcon(const char* s1, const char* s2) {
       myDebug() << "*** no icon for" << s1 << "or" << s2;
     }
   }
-  return ptr ? KIcon(ptr->iconName()) : KIcon();
+  return ptr ? QIcon::fromTheme(ptr->iconName()) : QIcon();
 }
 
 }
@@ -234,7 +234,7 @@ void MainWindow::initActions() {
           this, SLOT(slotFileNew(int)));
 
   KActionMenu* fileNewMenu = new KActionMenu(i18n("New"), this);
-  fileNewMenu->setIcon(KIcon(QLatin1String("document-new")));
+  fileNewMenu->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
   fileNewMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("file_new_collection"), fileNewMenu);
@@ -245,7 +245,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String(NAME), collectionMapper, SLOT(map())); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
-  action->setIcon(KIcon(QLatin1String(ICON))); \
+  action->setIcon(QIcon::fromTheme(QLatin1String(ICON))); \
   fileNewMenu->addAction(action); \
   collectionMapper->setMapping(action, Data::Collection::TYPE);
 
@@ -288,7 +288,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("new_custom_collection"), collectionMapper, SLOT(map()));
   action->setText(i18n("New C&ustom Collection"));
   action->setToolTip(i18n("Create a new custom collection"));
-  action->setIcon(KIcon(QLatin1String("document-new")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   fileNewMenu->addAction(action);
   collectionMapper->setMapping(action, Data::Collection::Base);
 
@@ -317,7 +317,7 @@ void MainWindow::initActions() {
           this, SLOT(slotFileImport(int)));
 
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
-  importMenu->setIcon(KIcon(QLatin1String("document-import")));
+  importMenu->setIcon(QIcon::fromTheme(QLatin1String("document-import")));
   importMenu->setToolTip(i18n("Import the collection data from other formats"));
   importMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("file_import"), importMenu);
@@ -405,7 +405,7 @@ void MainWindow::initActions() {
           this, SLOT(slotFileExport(int)));
 
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
-  exportMenu->setIcon(KIcon(QLatin1String("document-export")));
+  exportMenu->setIcon(QIcon::fromTheme(QLatin1String("document-export")));
   exportMenu->setToolTip(i18n("Export the collection data to other formats"));
   exportMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("file_export"), exportMenu);
@@ -473,14 +473,14 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
   action->setText(i18n("Internet Search..."));
   action->setIconText(i18n("Search"));  // find a better word for this?
-  action->setIcon(KIcon(QLatin1String("tools-wizard")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("tools-wizard")));
   action->setShortcut(Qt::CTRL + Qt::Key_I);
   action->setToolTip(i18n("Search the internet..."));
 
   action = actionCollection()->addAction(QLatin1String("filter_dialog"), this, SLOT(slotShowFilterDialog()));
   action->setText(i18n("Advanced &Filter..."));
   action->setIconText(i18n("Filter"));
-  action->setIcon(KIcon(QLatin1String("view-filter")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("view-filter")));
   action->setShortcut(Qt::CTRL + Qt::Key_J);
   action->setToolTip(i18n("Filter the collection"));
 
@@ -490,7 +490,7 @@ void MainWindow::initActions() {
   m_newEntry = actionCollection()->addAction(QLatin1String("coll_new_entry"),
                                              this, SLOT(slotNewEntry()));
   m_newEntry->setText(i18n("&New Entry..."));
-  m_newEntry->setIcon(KIcon(QLatin1String("document-new")));
+  m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   m_newEntry->setIconText(i18n("New"));
   m_newEntry->setShortcut(Qt::CTRL + Qt::Key_N);
   m_newEntry->setToolTip(i18n("Create a new entry"));
@@ -498,28 +498,28 @@ void MainWindow::initActions() {
   m_editEntry = actionCollection()->addAction(QLatin1String("coll_edit_entry"),
                                               this, SLOT(slotShowEntryEditor()));
   m_editEntry->setText(i18n("&Edit Entry..."));
-  m_editEntry->setIcon(KIcon(QLatin1String("document-properties")));
+  m_editEntry->setIcon(QIcon::fromTheme(QLatin1String("document-properties")));
   m_editEntry->setShortcut(Qt::CTRL + Qt::Key_E);
   m_editEntry->setToolTip(i18n("Edit the selected entries"));
 
   m_copyEntry = actionCollection()->addAction(QLatin1String("coll_copy_entry"),
                                               Controller::self(), SLOT(slotCopySelectedEntries()));
   m_copyEntry->setText(i18n("D&uplicate Entry"));
-  m_copyEntry->setIcon(KIcon(QLatin1String("edit-copy")));
+  m_copyEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-copy")));
   m_copyEntry->setShortcut(Qt::CTRL + Qt::Key_Y);
   m_copyEntry->setToolTip(i18n("Copy the selected entries"));
 
   m_deleteEntry = actionCollection()->addAction(QLatin1String("coll_delete_entry"),
                                                 Controller::self(), SLOT(slotDeleteSelectedEntries()));
   m_deleteEntry->setText(i18n("&Delete Entry"));
-  m_deleteEntry->setIcon(KIcon(QLatin1String("edit-delete")));
+  m_deleteEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
   m_deleteEntry->setShortcut(Qt::CTRL + Qt::Key_D);
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
 
   m_mergeEntry = actionCollection()->addAction(QLatin1String("coll_merge_entry"),
                                                Controller::self(), SLOT(slotMergeSelectedEntries()));
   m_mergeEntry->setText(i18n("&Merge Entries"));
-  m_mergeEntry->setIcon(KIcon(QLatin1String("document-import")));
+  m_mergeEntry->setIcon(QIcon::fromTheme(QLatin1String("document-import")));
 //  CTRL+G is ambiguous, pick another
 //  m_mergeEntry->setShortcut(Qt::CTRL + Qt::Key_G);
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
@@ -527,46 +527,46 @@ void MainWindow::initActions() {
 
   m_checkOutEntry = actionCollection()->addAction(QLatin1String("coll_checkout"), Controller::self(), SLOT(slotCheckOut()));
   m_checkOutEntry->setText(i18n("Check-&out..."));
-  m_checkOutEntry->setIcon(KIcon(QLatin1String("arrow-up-double")));
+  m_checkOutEntry->setIcon(QIcon::fromTheme(QLatin1String("arrow-up-double")));
   m_checkOutEntry->setToolTip(i18n("Check-out the selected items"));
 
   m_checkInEntry = actionCollection()->addAction(QLatin1String("coll_checkin"), Controller::self(), SLOT(slotCheckIn()));
   m_checkInEntry->setText(i18n("Check-&in"));
-  m_checkInEntry->setIcon(KIcon(QLatin1String("arrow-down-double")));
+  m_checkInEntry->setIcon(QIcon::fromTheme(QLatin1String("arrow-down-double")));
   m_checkInEntry->setToolTip(i18n("Check-in the selected items"));
 
   action = actionCollection()->addAction(QLatin1String("coll_rename_collection"), this, SLOT(slotRenameCollection()));
   action->setText(i18n("&Rename Collection..."));
-  action->setIcon(KIcon(QLatin1String("edit-rename")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("edit-rename")));
   action->setShortcut(Qt::CTRL + Qt::Key_R);
   action->setToolTip(i18n("Rename the collection"));
 
   action = actionCollection()->addAction(QLatin1String("coll_fields"), this, SLOT(slotShowCollectionFieldsDialog()));
   action->setText(i18n("Collection &Fields..."));
   action->setIconText(i18n("Fields"));
-  action->setIcon(KIcon(QLatin1String("preferences-other")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("preferences-other")));
   action->setShortcut(Qt::CTRL + Qt::Key_U);
   action->setToolTip(i18n("Modify the collection fields"));
 
   action = actionCollection()->addAction(QLatin1String("coll_reports"), this, SLOT(slotShowReportDialog()));
   action->setText(i18n("&Generate Reports..."));
   action->setIconText(i18n("Reports"));
-  action->setIcon(KIcon(QLatin1String("text-rdf")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("text-rdf")));
   action->setToolTip(i18n("Generate collection reports"));
 
   action = actionCollection()->addAction(QLatin1String("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));
   action->setText(i18n("Convert to &Bibliography"));
-  action->setIcon(KIcon(QLatin1String("bibtex")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("bibtex")));
   action->setToolTip(i18n("Convert a book collection to a bibliography"));
 
   action = actionCollection()->addAction(QLatin1String("coll_string_macros"), this, SLOT(slotShowStringMacroDialog()));
   action->setText(i18n("String &Macros..."));
-  action->setIcon(KIcon(QLatin1String("fileview-text")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("fileview-text")));
   action->setToolTip(i18n("Edit the bibtex string macros"));
 
   action = actionCollection()->addAction(QLatin1String("coll_key_manager"), this, SLOT(slotShowBibtexKeyDialog()));
   action->setText(i18n("Check for Duplicate Keys..."));
-  action->setIcon(KIcon(QLatin1String("text/x-bibtex")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("text/x-bibtex")));
   action->setToolTip(i18n("Check for duplicate citation keys"));
 
   QSignalMapper* citeMapper = new QSignalMapper(this);
@@ -576,13 +576,13 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("cite_clipboard"), citeMapper, SLOT(map()));
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
   action->setToolTip(i18n("Copy bibtex citations to the clipboard"));
-  action->setIcon(KIcon(QLatin1String("edit-paste")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("edit-paste")));
   citeMapper->setMapping(action, Cite::CiteClipboard);
 
   action = actionCollection()->addAction(QLatin1String("cite_lyxpipe"), citeMapper, SLOT(map()));
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
-  action->setIcon(KIcon(QLatin1String("lyx"))); // krazy:exclude=iconnames
+  action->setIcon(QIcon::fromTheme(QLatin1String("lyx"))); // krazy:exclude=iconnames
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
@@ -590,7 +590,7 @@ void MainWindow::initActions() {
           Controller::self(), SLOT(slotUpdateSelectedEntries(const QString&)));
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
-  m_updateEntryMenu->setIcon(KIcon(QLatin1String("document-export")));
+  m_updateEntryMenu->setIcon(QIcon::fromTheme(QLatin1String("document-export")));
   m_updateEntryMenu->setIconText(i18nc("Update Entry", "Update"));
   m_updateEntryMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("coll_update_entry"), m_updateEntryMenu);
@@ -718,7 +718,7 @@ void MainWindow::initView() {
   m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);
   Controller::self()->addObserver(m_groupView);
-  m_viewTabs->addTab(m_groupView, KIcon(QLatin1String("folder")), i18n("Groups"));
+  m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QLatin1String("folder")), i18n("Groups"));
   m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
                                     "based on a selected field.</qt>"));
 
@@ -1994,7 +1994,7 @@ void MainWindow::addFilterView() {
 
   m_filterView = new FilterView(m_viewTabs);
   Controller::self()->addObserver(m_filterView);
-  m_viewTabs->insertTab(1, m_filterView, KIcon(QLatin1String("view-filter")), i18n("Filters"));
+  m_viewTabs->insertTab(1, m_filterView, QIcon::fromTheme(QLatin1String("view-filter")), i18n("Filters"));
   m_filterView->setWhatsThis(i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                   "filter rules.</qt>"));
 
@@ -2017,7 +2017,7 @@ void MainWindow::addLoanView() {
 
   m_loanView = new LoanView(m_viewTabs);
   Controller::self()->addObserver(m_loanView);
-  m_viewTabs->insertTab(2, m_loanView, KIcon(QLatin1String("kaddressbook")), i18n("Loans"));
+  m_viewTabs->insertTab(2, m_loanView, QIcon::fromTheme(QLatin1String("kaddressbook")), i18n("Loans"));
   m_loanView->setWhatsThis(i18n("<qt>The <i>Loan View</i> shows a list of all the people who "
                                 "have borrowed items from your collection.</qt>"));
 
@@ -2057,7 +2057,7 @@ void MainWindow::updateCaption(bool modified_) {
 
 void MainWindow::slotUpdateToolbarIcons() {
   // first change the icon for the menu item
-  m_newEntry->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  m_newEntry->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 }
 
 void MainWindow::slotGroupLabelActivated() {
@@ -2131,7 +2131,7 @@ void MainWindow::updateEntrySources() {
 
   Fetch::FetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
-    KAction* action = new KAction(KIcon(Fetch::Manager::fetcherIcon(fetcher)), fetcher->source(), actionCollection());
+    KAction* action = new KAction(QIcon::fromTheme(Fetch::Manager::fetcherIcon(fetcher)), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
     connect(action, SIGNAL(activated()), m_updateMapper, SLOT(map()));
     m_updateMapper->setMapping(action, fetcher->source());

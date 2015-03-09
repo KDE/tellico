@@ -1,7 +1,7 @@
 project(Tellico)
 set(TELLICO_VERSION "2.9.90+git")
 
-# Version 2.8.12 seems to be a minimum version in several KDE apps
+# FindKF5 requires CMake >= 2.8.12
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 set(QT_MIN_VERSION "5.3.0")
 
@@ -16,10 +16,9 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${ECM_MODULE_PATH}
                       ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-
-include(ECMAddTests)
-include(ECMMarkNonGuiExecutable)
-include(ECMInstallIcons)
+#include(ECMAddTests)
+#include(ECMMarkNonGuiExecutable)
+#include(ECMInstallIcons)
 include(FeatureSummary)
 
 include(KDEInstallDirs)
@@ -52,8 +51,19 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Widgets
 )
 
-find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
-             WidgetsAddons XmlGui JobWidgets KDELibs4Support)
+find_package(KF5 REQUIRED COMPONENTS
+    Config
+    ConfigWidgets
+    CoreAddons
+    IconThemes
+    I18n
+    KIO
+    WidgetsAddons
+    XmlGui
+    JobWidgets
+    KDELibs4Support
+)
+find_package(KF5KHtml NO_MODULE)
 
 #find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
 #             Notifications WidgetsAddons WindowSystem Parts Solid DocTools XmlGui JobWidgets)
@@ -65,7 +75,7 @@ include(MacroBoolTo01)
 #include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
-find_package(QImageBlitz REQUIRED)
+#find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
@@ -87,17 +97,17 @@ find_package(LibXslt REQUIRED)
 #    DESCRIPTION "Support for using the address book and calendar for loans"
 #    URL "http://pim.kde.org"
 #    TYPE OPTIONAL)
-#if(KDEPIMLIBS_FOUND)
-#    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
-#endif(KDEPIMLIBS_FOUND)
+if(KDEPIMLIBS_FOUND)
+    include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
+endif(KDEPIMLIBS_FOUND)
 
 #macro_optional_find_package(KdeMultimedia)
 #macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
-find_package(KdeMultimedia 4.2)
-set_package_properties(KdeMultimedia PROPERTIES
-    DESCRIPTION "Support for CDDB searches"
-    URL "http://multimedia.kde.org"
-    TYPE OPTIONAL)
+#find_package(KdeMultimedia 4.2)
+#set_package_properties(KdeMultimedia PROPERTIES
+#    DESCRIPTION "Support for CDDB searches"
+#    URL "http://multimedia.kde.org"
+#    TYPE OPTIONAL)
 
 #macro_optional_find_package(Taglib)
 #macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
@@ -121,11 +131,11 @@ set_package_properties(Yaz PROPERTIES
 
 #macro_optional_find_package(PopplerQt4)
 #macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
-find_package(PopplerQt4)
-set_package_properties(PopplerQt4 PROPERTIES
-    DESCRIPTION "Support for reading PDF files"
-    URL "http://poppler.freedesktop.org"
-    TYPE OPTIONAL)
+#find_package(PopplerQt4)
+#set_package_properties(PopplerQt4 PROPERTIES
+#    DESCRIPTION "Support for reading PDF files"
+#    URL "http://poppler.freedesktop.org"
+#    TYPE OPTIONAL)
 if(POPPLER_QT4_FOUND)
     add_definitions(${POPPLER_QT4_DEFINITIONS})
     include_directories(${POPPLER_QT4_INCLUDE_DIR})
@@ -133,11 +143,11 @@ endif(POPPLER_QT4_FOUND)
 
 #macro_optional_find_package(KSane)
 #macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
-find_package(KSane)
-set_package_properties(KSane PROPERTIES
-    DESCRIPTION "Support for adding scanned images to a collection"
-    URL "http://www.kde.org"
-    TYPE OPTIONAL)
+#find_package(KSane)
+#set_package_properties(KSane PROPERTIES
+#    DESCRIPTION "Support for adding scanned images to a collection"
+#    URL "http://www.kde.org"
+#    TYPE OPTIONAL)
 if(KSANE_FOUND)
     include_directories(${KSANE_INCLUDE_DIR})
 endif(KSANE_FOUND)
@@ -156,11 +166,11 @@ endif(LIBEXEMPI_FOUND)
 
 #macro_optional_find_package(QJSON)
 #macro_log_feature(QJSON_FOUND "QJSON" "Support for searching additional data sources, such as OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
-find_package(QJSON)
-set_package_properties(QJSON PROPERTIES
-    DESCRIPTION "Support for searching additional data sources, such as OpenLibrary and Freebase"
-    URL "http://qjson.sourceforge.net"
-    TYPE OPTIONAL)
+#find_package(QJSON)
+#set_package_properties(QJSON PROPERTIES
+#    DESCRIPTION "Support for searching additional data sources, such as OpenLibrary and Freebase"
+#    URL "http://qjson.sourceforge.net"
+#    TYPE OPTIONAL)
 if(QJSON_FOUND)
     include_directories(${QJSON_INCLUDE_DIR})
 endif(QJSON_FOUND)
@@ -235,14 +245,13 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnon-virtual-dtor -Wno-long-long -Wextra -fno-check-new -Woverloaded-virtual")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-add_definitions(${QT_DEFINITIONS}
-                ${KDE4_DEFINITIONS}
-                ${YAZ_CFLAGS})
+#add_definitions(${QT_DEFINITIONS}
+#                ${KDE4_DEFINITIONS}
+#                ${YAZ_CFLAGS})
 add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
-include_directories(
-                    ${QIMAGEBLITZ_INCLUDES}
+include_directories(${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
@@ -294,4 +303,3 @@ install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES tellico.appdata.xml DESTINATION ${KDE_INSTALL_DATAROOTDIR}/appdata )
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
-

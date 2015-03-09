@@ -158,7 +158,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   m_searchButton = new KPushButton(box1);
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("dialog-cancel"))));
+                                      QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
   m_searchButton->setWhatsThis(i18n("Click to start or stop the search"));
 
@@ -168,7 +168,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   int maxWidth = m_searchButton->sizeHint().width();
   int maxHeight = m_searchButton->sizeHint().height();
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                      KIcon(QLatin1String("edit-find"))));
+                                      QIcon::fromTheme(QLatin1String("edit-find"))));
   maxWidth = qMax(maxWidth, m_searchButton->sizeHint().width());
   maxHeight = qMax(maxHeight, m_searchButton->sizeHint().height());
   m_searchButton->setMinimumWidth(maxWidth);
@@ -182,7 +182,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_multipleISBN->setWhatsThis(i18n("Check this box to search for multiple ISBN or UPC values."));
   connect(m_multipleISBN, SIGNAL(toggled(bool)), SLOT(slotMultipleISBN(bool)));
 
-  m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), KIcon(QLatin1String("format-justify-fill"))), box2);
+  m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), QIcon::fromTheme(QLatin1String("format-justify-fill"))), box2);
   m_editISBN->setEnabled(false);
   m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN or UPC values."));
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
@@ -244,11 +244,11 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   m_addButton = new KPushButton(i18n("&Add Entry"), box3);
   m_addButton->setEnabled(false);
-  m_addButton->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
-  m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), KIcon(QLatin1String("edit-find"))), box3);
+  m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), QIcon::fromTheme(QLatin1String("edit-find"))), box3);
   m_moreButton->setEnabled(false);
   connect(m_moreButton, SIGNAL(clicked()), SLOT(slotMoreClicked()));
   m_moreButton->setWhatsThis(i18n("Fetch more results from the current data source"));
@@ -346,7 +346,7 @@ void FetchDialog::slotSearchClicked() {
     m_oldSearch = value;
     m_started = true;
     m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                        KIcon(QLatin1String("dialog-cancel"))));
+                                        QIcon::fromTheme(QLatin1String("dialog-cancel"))));
     startProgress();
     setStatus(i18n("Searching..."));
     kapp->processEvents();
@@ -400,7 +400,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
 //  myDebug();
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                      KIcon(QLatin1String("edit-find"))));
+                                      QIcon::fromTheme(QLatin1String("edit-find"))));
   stopProgress();
   if(m_resultCount == 0) {
     slotStatus(i18n("The search returned no items."));
@@ -497,7 +497,7 @@ void FetchDialog::slotAddEntry() {
     }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(Data::EntryPtr(new Data::Entry(*entry)));
-    item->setData(0, Qt::DecorationRole, KIcon(QLatin1String("checkmark")));
+    item->setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("checkmark")));
   }
   if(!vec.isEmpty()) {
     Kernel::self()->addEntries(vec, true);
@@ -512,7 +512,7 @@ void FetchDialog::slotMoreClicked() {
 
   m_started = true;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("dialog-cancel"))));
+                                      QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));
   kapp->processEvents();
@@ -684,7 +684,7 @@ void FetchDialog::slotEditMultipleISBN() {
   m_isbnTextEdit->setWhatsThis(s);
   connect(m_isbnTextEdit, SIGNAL(textChanged()), this, SLOT(slotISBNTextChanged()));
 
-  KPushButton* fromFileBtn = new KPushButton(KIcon(QLatin1String("document-open")),
+  KPushButton* fromFileBtn = new KPushButton(QIcon::fromTheme(QLatin1String("document-open")),
                                              i18n("&Load From File..."), box);
   fromFileBtn->setWhatsThis(i18n("<qt>Load the list from a text file.</qt>"));
   connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
@@ -791,7 +791,7 @@ void FetchDialog::slotResetCollection() {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher), fetcher->source());
   }
 
-  m_addButton->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
   if(Fetch::Manager::self()->canFetch()) {
     m_searchButton->setEnabled(true);

@@ -55,7 +55,7 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   m_dupeLabel = new KTitleWidget(this);
   m_dupeLabel->setText(m_coll->title(), KTitleWidget::PlainMessage);
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
-  m_dupeLabel->setPixmap(KIcon(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
+  m_dupeLabel->setPixmap(QIcon::fromTheme(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
   topLayout->addWidget(m_dupeLabel);
 
   KConfigGroup config(KGlobal::config(), QLatin1String("Bibtex Key Dialog Options"));

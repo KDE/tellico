@@ -123,7 +123,7 @@ void LoanDialog::init() {
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
   button(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(KIcon(QLatin1String("kaddressbook")), QString(), mainWidget);
+  KPushButton* pb = new KPushButton(QIcon::fromTheme(QLatin1String("kaddressbook")), QString(), mainWidget);
   topLayout->addWidget(pb, row, 2);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "

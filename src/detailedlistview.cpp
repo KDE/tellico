@@ -557,7 +557,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   QAction* columnAction = m_headerMenu->addMenu(m_columnMenu);
   columnAction->setText(i18nc("Noun, Menu name", "Columns"));
-  columnAction->setIcon(KIcon(QLatin1String("view-file-columns")));
+  columnAction->setIcon(QIcon::fromTheme(QLatin1String("view-file-columns")));
 
   m_headerMenu->addSeparator();
 
@@ -565,7 +565,7 @@ void DetailedListView::updateHeaderMenu() {
   connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
   connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
-  QAction* actResize = m_headerMenu->addAction(KIcon(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
+  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
   connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 

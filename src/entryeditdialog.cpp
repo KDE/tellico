@@ -135,7 +135,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   }
 //  myDebug();
 
-  button(m_newBtn)->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  button(m_newBtn)->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {

@@ -54,14 +54,14 @@ using Tellico::BorrowerDialog;
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const KABC::Addressee& add_)
     : QTreeWidgetItem(parent_), m_uid(add_.uid()) {
   setData(0, Qt::DisplayRole, add_.realName().trimmed());
-  setData(0, Qt::DecorationRole, KIcon(QLatin1String("kaddressbook")));
+  setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("kaddressbook")));
 }
 #endif
 
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const Tellico::Data::Borrower& bor_)
     : QTreeWidgetItem(parent_), m_uid(bor_.uid()) {
   setData(0, Qt::DisplayRole, bor_.name());
-  setData(0, Qt::DecorationRole, KIcon(QLatin1String("tellico")));
+  setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("tellico")));
 }
 
 // default button is going to be used as a print button, so it's separated

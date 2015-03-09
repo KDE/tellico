@@ -34,3 +34,7 @@ SET(gui_STAT_SRCS
    )
 
 add_library(gui STATIC ${gui_STAT_SRCS})
+
+TARGET_LINK_LIBRARIES(gui
+    Qt5::Core
+)

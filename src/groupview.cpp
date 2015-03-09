@@ -38,7 +38,7 @@
 
 #include <kmenu.h>
 #include <klocale.h>
-#include <kicon.h>
+#include <QIcon>
 
 #include <QStringList>
 #include <QColor>
@@ -265,11 +265,11 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
   KMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(KIcon(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
                    i18n("Expand All Groups"), this, SLOT(expandAll()));
-    menu.addAction(KIcon(QLatin1String("arrow-up-double")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-up-double")),
                    i18n("Collapse All Groups"), this, SLOT(collapseAll()));
-    menu.addAction(KIcon(QLatin1String("view-filter")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("view-filter")),
                    i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
   } else {
     Controller::self()->plugEntryActions(&menu);

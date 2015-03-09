@@ -56,7 +56,7 @@
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
 #include <kseparator.h>
-#include <KIcon>
+#include <QIcon>
 
 #include <QFile>
 #include <QLabel>
@@ -813,7 +813,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     } else {
       const QString flag = KStandardDirs::locate("locale",
                                                  QString::fromLatin1("l10n/%1/flag.png").arg(country));
-      m_serverCombo->addItem(KIcon(flag), i18n(name.toUtf8()), group);
+      m_serverCombo->addItem(QIcon::fromTheme(flag), i18n(name.toUtf8()), group);
     }
 
     if(current_.isEmpty() && idx == -1) {

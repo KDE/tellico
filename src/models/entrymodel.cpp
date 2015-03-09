@@ -35,7 +35,7 @@
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <kicon.h>
+#include <QIcon>
 #include <klocale.h>
 
 namespace {
@@ -136,16 +136,16 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         const QString id = entry->field(fieldName);
         KIcon* icon = m_iconCache.object(id);
         if(icon) {
-          return KIcon(*icon);
+          return QIcon::fromTheme(*icon);
         }
         const Data::Image& img = ImageFactory::imageById(id);
         if(img.isNull()) {
           return defaultIcon(entry->collection());
         }
 
-        icon = new KIcon(QPixmap::fromImage(img));
+        icon = new QIcon::fromTheme(QPixmap::fromImage(img));
         m_iconCache.insert(id, icon);
-        return KIcon(*icon);
+        return QIcon::fromTheme(*icon);
       }
       // otherwise just return the image for the entry
       // we don't need a formatted value for any pixmaps
@@ -361,10 +361,10 @@ const KIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
   KIcon tmpIcon(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
   if(tmpIcon.isNull()) {
     myLog() << "null nocover image, loading tellico.png";
-    tmpIcon = KIcon(QLatin1String("tellico"));
+    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"));
   }
 
-  icon = new KIcon(tmpIcon);
+  icon = new QIcon::fromTheme(tmpIcon);
   m_defaultIcons.insert(coll_->type(), icon);
   return *icon;
 }

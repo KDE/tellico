@@ -13,4 +13,5 @@ ADD_LIBRARY(pilotdb-tellico STATIC ${pilotdb_STAT_SRCS})
 TARGET_LINK_LIBRARIES(pilotdb-tellico
     libflatfile-tellico
     libpalm-tellico
+    Qt5::Core
     )

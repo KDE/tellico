@@ -109,10 +109,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   hb1->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb1);
   m_btnNew = new KPushButton(i18nc("New Field", "&New"), hb1);
-  m_btnNew->setIcon(KIcon(QLatin1String("document-new")));
+  m_btnNew->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   m_btnNew->setWhatsThis(i18n("Add a new field to the collection"));
   m_btnDelete = new KPushButton(i18nc("Delete Field", "&Delete"), hb1);
-  m_btnDelete->setIcon(KIcon(QLatin1String("edit-delete")));
+  m_btnDelete->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
 
   connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()) );
@@ -122,11 +122,11 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   hb2->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb2);
   m_btnUp = new KPushButton(hb2);
-  m_btnUp->setIcon(KIcon(QLatin1String("go-up")));
+  m_btnUp->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_btnUp->setWhatsThis(i18n("Move this field up in the list. The list order is important "
                              "for the layout of the entry editor."));
   m_btnDown = new KPushButton(hb2);
-  m_btnDown->setIcon(KIcon(QLatin1String("go-down")));
+  m_btnDown->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_btnDown->setWhatsThis(i18n("Move this field down in the list. The list order is important "
                                "for the layout of the entry editor."));
 
@@ -204,7 +204,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   m_btnExtended = new KPushButton(i18n("Set &properties..."), grid);
-  m_btnExtended->setIcon(KIcon(QLatin1String("bookmarks")));
+  m_btnExtended->setIcon(QIcon::fromTheme(QLatin1String("bookmarks")));
   layout->addWidget(m_btnExtended, row, 2, 1, 2);
   label->setBuddy(m_btnExtended);
   whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");

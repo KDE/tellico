@@ -28,7 +28,7 @@
 #include "../datavectors.h"
 #include "models.h"
 
-#include <KIcon>
+#include <QIcon>
 
 #include <QAbstractItemModel>
 #include <QHash>

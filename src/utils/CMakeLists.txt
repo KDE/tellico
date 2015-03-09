@@ -14,3 +14,8 @@ SET(utils_STAT_SRCS
    )
 
 add_library(utils STATIC ${utils_STAT_SRCS})
+
+TARGET_LINK_LIBRARIES(utils
+    Qt5::Core
+    KF5::KDELibs4Support
+)

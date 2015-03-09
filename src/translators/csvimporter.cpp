@@ -330,7 +330,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
-  m_setColumnBtn->setIcon(KIcon(QLatin1String("dialog-ok-apply")));
+  m_setColumnBtn->setIcon(QIcon::fromTheme(QLatin1String("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 //  hlay3->addStretch(10);
 

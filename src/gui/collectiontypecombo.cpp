@@ -26,7 +26,7 @@
 #include "../collection.h"
 #include "../collectionfactory.h"
 
-#include <KIcon>
+#include <QIcon>
 
 using Tellico::GUI::CollectionTypeCombo;
 
@@ -60,9 +60,9 @@ void CollectionTypeCombo::setCurrentType(int type_) {
 }
 
 void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
-  ComboBox::addItem(KIcon(CollectionFactory::typeName(collType_)), value_, collType_);
+  ComboBox::addItem(QIcon::fromTheme(CollectionFactory::typeName(collType_)), value_, collType_);
 }
 
 void CollectionTypeCombo::insertItem(int index_, const QString& value_, int collType_) {
-  ComboBox::insertItem(index_, KIcon(CollectionFactory::typeName(collType_)), value_, collType_);
+  ComboBox::insertItem(index_, QIcon::fromTheme(CollectionFactory::typeName(collType_)), value_, collType_);
 }

@@ -436,7 +436,7 @@ void FilterDialog::init() {
 
   // only when creating a new filter can it be saved
   if(m_mode == CreateFilter) {
-    m_saveFilter = new KPushButton(KIcon(QLatin1String("view-filter")), i18n("&Save Filter"), page);
+    m_saveFilter = new KPushButton(QIcon::fromTheme(QLatin1String("view-filter")), i18n("&Save Filter"), page);
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
     connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));

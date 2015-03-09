@@ -41,6 +41,8 @@
 #include <kio/job.h>
 #include <kfilterdev.h>
 #include <kdeversion.h>
+#include <kicon.h>
+#include <kiconloader.h>
 
 #include <QDomDocument>
 #include <QFile>
@@ -225,8 +227,8 @@ bool FileHandler::queryExists(const KUrl& url_) {
   GUI::CursorSaver cs(Qt::ArrowCursor);
   KGuiItem guiItem(i18n("Overwrite"));
   guiItem.setIcon(KIcon(QLatin1String("document-save-as"),
-                                      KIconLoader::global(),
-                                      QStringList() << QLatin1String("emblem-important")));
+                        KIconLoader::global(),
+                        QStringList() << QLatin1String("emblem-important")));
   QString str = i18n("A file named \"%1\" already exists. "
                      "Are you sure you want to overwrite it?", url_.fileName());
   int want_continue = KMessageBox::warningContinueCancel(GUI::Proxy::widget(), str,
@@ -247,7 +249,8 @@ bool FileHandler::writeBackupFile(const KUrl& url_) {
     if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
       QFile::remove(url_.path() + QLatin1Char('~'));
     }
-    success = KSaveFile::backupFile(url_.path());
+//    success = KSaveFile::backupFile(url_.path());
+    success = KBackup::backupFile(url_.path());
     if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
       success = true; // ignore error for old version because of bug
     }

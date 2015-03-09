@@ -35,7 +35,7 @@
 
 #include <klocale.h>
 #include <kmenu.h>
-#include <kicon.h>
+#include <QIcon>
 
 #include <QHeaderView>
 #include <QContextMenuEvent>
@@ -129,9 +129,9 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
   KMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(KIcon(QLatin1String("view-filter")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("view-filter")),
                     i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
-    menu.addAction(KIcon(QLatin1String("edit-delete")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("edit-delete")),
                     i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
   } else {
     Controller::self()->plugEntryActions(&menu);

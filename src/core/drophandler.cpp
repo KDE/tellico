@@ -37,6 +37,7 @@
 #include <QEvent>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QMimeData>
 
 using Tellico::DropHandler;
 

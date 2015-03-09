@@ -1,4 +1,4 @@
-########### install files ###############
+include(ECMInstallIcons)
 
 set(PIC_FILES
     album.png

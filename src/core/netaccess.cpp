@@ -34,6 +34,7 @@
 #include <ktemporaryfile.h>
 #include <klocale.h>
 #include <kdeversion.h>
+#include <kurl.h>
 
 #include <QEventLoop>
 

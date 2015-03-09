@@ -21,6 +21,7 @@ add_library(core STATIC ${core_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(core
     utils
+    Qt5::Core
     )
 
 ########### install files ###############

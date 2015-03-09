@@ -37,7 +37,7 @@
 
 #include <kmenu.h>
 #include <klocale.h>
-#include <kicon.h>
+#include <QIcon>
 
 #include <QPainter>
 #include <QPixmap>
