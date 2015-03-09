@@ -36,7 +36,7 @@
 class KLineEdit;
 class KJob;
 #ifdef HAVE_KABC
-namespace KABC {
+namespace KContacts {
   class Addressee;
 }
 #endif
@@ -75,7 +75,7 @@ private:
 class Item : public QTreeWidgetItem {
 public:
 #ifdef HAVE_KABC
-  Item(QTreeWidget* parent, const KABC::Addressee& addressee);
+  Item(QTreeWidget* parent, const KContacts::Addressee& addressee);
 #endif
   Item(QTreeWidget* parent, const Data::Borrower& borrower);
   const QString& uid() const { return m_uid; }

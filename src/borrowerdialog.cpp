@@ -37,7 +37,7 @@
 #include <KJob>
 
 #ifdef HAVE_KABC
-#include <kabc/addressee.h>
+#include <kcontacts/addressee.h>
 #include <Akonadi/Contact/ContactSearchJob>
 #endif
 
@@ -51,7 +51,7 @@
 using Tellico::BorrowerDialog;
 
 #ifdef HAVE_KABC
-BorrowerDialog::Item::Item(QTreeWidget* parent_, const KABC::Addressee& add_)
+BorrowerDialog::Item::Item(QTreeWidget* parent_, const KContacts::Addressee& add_)
     : QTreeWidgetItem(parent_), m_uid(add_.uid()) {
   setData(0, Qt::DisplayRole, add_.realName().trimmed());
   setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("kaddressbook")));
@@ -113,7 +113,7 @@ void BorrowerDialog::akonadiSearchResult(KJob* job_) {
 
   populateBorrowerList();
 
-  foreach(const KABC::Addressee& addressee, searchJob->contacts()) {
+  foreach(const KContacts::Addressee& addressee, searchJob->contacts()) {
     // skip people with no name
     const QString name = addressee.realName().trimmed();
     if(name.isEmpty()) {
@@ -136,7 +136,7 @@ void BorrowerDialog::populateBorrowerList() {
   m_itemHash.clear();
   m_lineEdit->completionObject()->clear();
 
-  // Bug 307958 - KABC::Addressee uids are not constant
+  // Bug 307958 - KContacts::Addressee uids are not constant
   // so populate the borrower list with the existing borrowers
   // before adding ones from address book
   Data::BorrowerList borrowers = Data::Document::self()->collection()->borrowers();

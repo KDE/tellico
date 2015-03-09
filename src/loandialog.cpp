@@ -40,7 +40,7 @@
 #include <kiconloader.h>
 #include <KJob>
 #ifdef HAVE_KABC
-#include <kabc/addressee.h>
+#include <kcontacts/addressee.h>
 #include <Akonadi/Contact/ContactSearchJob>
 #endif
 
@@ -225,7 +225,7 @@ void LoanDialog::akonadiSearchResult(KJob* job_) {
 
   populateBorrowerList();
 
-  foreach(const KABC::Addressee& addressee, searchJob->contacts()) {
+  foreach(const KContacts::Addressee& addressee, searchJob->contacts()) {
     // skip people with no name
     const QString name = addressee.realName().trimmed();
     if(name.isEmpty()) {
