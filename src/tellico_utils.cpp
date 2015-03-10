@@ -32,6 +32,7 @@
 #include <kstandarddirs.h>
 #include <kcharsets.h>
 #include <krandom.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 #include <QDir>
@@ -93,56 +94,7 @@ QString Tellico::i18nReplace(QString text) {
 }
 
 QString Tellico::removeAcceleratorMarker(const QString& label_) {
-#if KDE_IS_VERSION(4,2,0)
-  return KGlobal::locale()->removeAcceleratorMarker(label_);
-#else
-  QString label = label_;
-
-  int p = 0;
-  while (true) {
-      p = label.indexOf(QLatin1Char('&'), p);
-      if (p < 0 || p + 1 == label.length()) {
-          break;
-      }
-
-      if (label[p + 1].isLetterOrNumber()) {
-          // Valid accelerator.
-          label = label.left(p) + label.mid(p + 1);
-
-          // May have been an accelerator in style of
-          // "(<marker><alnum>)" at the start or end of text.
-          if (   p > 0 && p + 1 < label.length()
-              && label[p - 1] == QLatin1Char('(') && label[p + 1] == QLatin1Char(')'))
-          {
-              // Check if at start or end, ignoring non-alphanumerics.
-              int len = label.length();
-              int p1 = p - 2;
-              while (p1 >= 0 && !label[p1].isLetterOrNumber()) {
-                  --p1;
-              }
-              ++p1;
-              int p2 = p + 2;
-              while (p2 < len && !label[p2].isLetterOrNumber()) {
-                  ++p2;
-              }
-              --p2;
-
-              if (p1 == 0) {
-                  label = label.left(p - 1) + label.mid(p2 + 1);
-              } else if (p2 + 1 == len) {
-                  label = label.left(p1) + label.mid(p + 2);
-              }
-          }
-      } else if (label[p + 1] == QLatin1Char('&')) {
-          // Escaped accelerator marker.
-          label = label.left(p) + label.mid(p + 1);
-      }
-
-      ++p;
-  }
-
-  return label;
-#endif
+  return KLocalizedString::removeAcceleratorMarker(label_);
 }
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
