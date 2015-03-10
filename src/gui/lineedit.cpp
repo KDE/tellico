@@ -84,7 +84,8 @@ void LineEdit::slotSpellCheckDone(const QString& newText) {
   if(newText != text()) {
     setText(newText);
   }
-  m_sonnetDialog->delayedDestruct();
+  m_sonnetDialog->hide();
+  m_sonnetDialog->deleteLater();
   m_sonnetDialog = 0;
 }
 

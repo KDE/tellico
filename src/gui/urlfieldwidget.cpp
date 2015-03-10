@@ -29,6 +29,7 @@
 #include <klineedit.h>
 #include <kurlrequester.h>
 #include <kurllabel.h>
+#include <KUrl>
 
 using Tellico::GUI::URLFieldWidget;
 

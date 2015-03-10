@@ -75,7 +75,7 @@ include(MacroBoolTo01)
 #include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
-#find_package(QImageBlitz REQUIRED)
+find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
@@ -260,11 +260,9 @@ include_directories(${QIMAGEBLITZ_INCLUDES}
                     ${Tellico_SOURCE_DIR}/src/core
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
 
-if(KDE_VERSION VERSION_GREATER 4.4)
-    set(ENABLE_KNEWSTUFF3 TRUE)
-else(KDE_VERSION VERSION_GREATER 4.4)
-    set(ENABLE_KNEWSTUFF3 FALSE)
-endif(KDE_VERSION VERSION_GREATER 4.4)
+# TODO
+set(ENABLE_KNEWSTUFF3 FALSE)
+set(ENABLE_KNEWSTUFF2 FALSE)
 
 set(TELLICO_DATA_INSTALL_DIR ${KDE_INSTALL_DATADIR}/tellico)
 

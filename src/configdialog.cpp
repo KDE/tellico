@@ -62,7 +62,7 @@
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
-#else
+#elif defined(ENABLE_KNEWSTUFF2)
 #include <KNS/Engine>
 #endif
 
@@ -123,8 +123,8 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
     , m_okClicked(false) {
   setFaceType(List);
   setModal(true);
-  setCaption(i18n("Configure Tellico"));
-  setButtons(Help|Ok|Apply|Cancel|Default);
+  setWindowTitle(i18n("Configure Tellico"));
+  setButtons(QDialogButtonBox::Help|QDialogButtonBox::Ok|QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::RestoreDefaults);
 
   setupGeneralPage();
   setupPrintingPage();
@@ -226,7 +226,7 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
-  page->setIcon(QIcon::fromTheme(pix));
+  page->setIcon(KIcon(pix));
   addPage(page);
 
   // since this is the first page, go ahead and lay it out
@@ -353,7 +353,7 @@ void ConfigDialog::setupPrintingPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Printing"));
   page->setHeader(i18n("Printing Options"));
-  page->setIcon(QIcon::fromTheme(pix));
+  page->setIcon(KIcon(pix));
   addPage(page);
 }
 
@@ -431,7 +431,7 @@ void ConfigDialog::setupTemplatePage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Templates"));
   page->setHeader(i18n("Template Options"));
-  page->setIcon(QIcon::fromTheme(pix));
+  page->setIcon(KIcon(pix));
   addPage(page);
 }
 
@@ -607,7 +607,7 @@ void ConfigDialog::setupFetchPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Data Sources"));
   page->setHeader(i18n("Data Sources Options"));
-  page->setIcon(QIcon::fromTheme(pix));
+  page->setIcon(KIcon(pix));
   addPage(page);
 }
 
@@ -1035,7 +1035,7 @@ void ConfigDialog::slotNewStuffClicked() {
   dialog.exec();
   {
     KNS3::Entry::List entries = dialog.installedEntries();
-#else
+#elif defined(ENABLE_KNEWSTUFF2)
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-script.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);
@@ -1152,7 +1152,7 @@ void ConfigDialog::slotDownloadTemplate() {
   dialog.exec();
   {
     KNS3::Entry::List entries = dialog.installedEntries();
-#else
+#elif defined(ENABLE_KNEWSTUFF2)
   KNS::Engine engine(this);
   if(engine.init(QLatin1String("tellico-template.knsrc"))) {
     KNS::Entry::List entries = engine.downloadDialogModal(this);

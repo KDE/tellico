@@ -29,6 +29,7 @@
 
 #include <KLocale>
 #include <KTitleWidget>
+#include <KGlobal>
 
 #include <QLabel>
 #include <QVBoxLayout>

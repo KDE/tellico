@@ -29,6 +29,7 @@
 
 #include <khtml_part.h>
 #include <khtmlview.h>
+#include <KUrl>
 
 #include <QPointer>
 

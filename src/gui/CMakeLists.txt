@@ -39,6 +39,7 @@ TARGET_LINK_LIBRARIES(gui
     Qt5::Core
     Qt5::Widgets
     Qt5::Gui
-    KF5::KDELibs4Support
     KF5::KIOCore
+    KF5::KHtml
+    KF5::KDELibs4Support
 )
