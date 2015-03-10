@@ -90,7 +90,6 @@ TARGET_LINK_LIBRARIES(tellico
     Qt5::Widgets
     KF5::KIOCore
     KF5::KHtml
-    KF5::KWidgetsAddons
     ${QIMAGEBLITZ_LIBRARIES}
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
