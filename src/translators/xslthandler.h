@@ -27,6 +27,7 @@
 
 #include <QByteArray>
 #include <QHash>
+#include <QString>
 
 extern "C" {
 // for xmlDocPtr

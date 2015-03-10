@@ -27,7 +27,7 @@
 
 #include "../datavectors.h"
 
-#include <KHBox>
+#include <KDE/KHBox>
 
 #include <QList>
 #include <QLabel>

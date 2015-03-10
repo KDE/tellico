@@ -35,6 +35,7 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kapplication.h>
+#include <KGlobal>
 
 #include <QDomDocument>
 #include <QFile>

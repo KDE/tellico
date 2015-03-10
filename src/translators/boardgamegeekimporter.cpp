@@ -33,6 +33,7 @@
 #include <KLineEdit>
 #include <KConfigGroup>
 #include <KApplication>
+#include <KGlobal>
 
 #include <QVBoxLayout>
 #include <QFormLayout>

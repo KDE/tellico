@@ -40,6 +40,7 @@
 #include <kiconloader.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
+#include <KGlobal>
 
 #include <QGroupBox>
 #include <QLabel>

@@ -42,6 +42,9 @@
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
+#include <KDateTime>
+#include <KFileMetaInfo>
+#include <KIconLoader>
 
 #ifdef HAVE_NEPOMUK
 #include <Nepomuk/Types/Property>
@@ -116,7 +119,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString owner    = QLatin1String("owner");
   const QString group    = QLatin1String("group");
   const QString created  = QLatin1String("created");
-  const QString modified  = QLatin1String("modified");
+  const QString modified = QLatin1String("modified");
   const QString metainfo = QLatin1String("metainfo");
   const QString icon     = QLatin1String("icon");
 
@@ -148,16 +151,17 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     entry->setField(owner,  item.user());
     entry->setField(group,  item.group());
 
-    KDateTime dt = item.time(KFileItem::CreationTime);
+    KDateTime dt(item.time(KFileItem::CreationTime));
     if(!dt.isNull()) {
       entry->setField(created, dt.toString(KDateTime::ISODate));
     }
-    dt = item.time(KFileItem::ModificationTime);
+    dt = KDateTime(item.time(KFileItem::ModificationTime));
     if(!dt.isNull()) {
       entry->setField(modified, dt.toString(KDateTime::ISODate));
     }
 
-    const KFileMetaInfo& meta = item.metaInfo();
+    // flags match old KDE4 behavior. TODO
+    KFileMetaInfo meta(item.localPath(), QString(), KFileMetaInfo::ContentInfo | KFileMetaInfo::TechnicalInfo);
     if(meta.isValid()) {
       QStringList strings;
       foreach(const KFileMetaInfoItem& item, meta.items()) {
@@ -177,10 +181,10 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     if(!m_cancelled && usePreview) {
       m_pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
       if(m_pixmap.isNull()) {
-        m_pixmap = item.pixmap(0);
+        m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
       }
     } else {
-      m_pixmap = item.pixmap(0);
+      m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
     }
 
     if(!m_pixmap.isNull()) {

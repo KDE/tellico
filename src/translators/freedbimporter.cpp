@@ -50,6 +50,7 @@
 #include <KConfigGroup>
 #include <kapplication.h>
 #include <kinputdialog.h>
+#include <KGlobal>
 
 #include <QFile>
 #include <QDir>

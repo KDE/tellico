@@ -31,6 +31,7 @@
 #include <KStandardDirs>
 #include <KLineEdit>
 #include <KConfigGroup>
+#include <KGlobal>
 
 #include <QVBoxLayout>
 #include <QFormLayout>

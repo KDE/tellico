@@ -35,7 +35,6 @@
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <QIcon>
 #include <klocale.h>
 
 namespace {
@@ -45,8 +44,9 @@ namespace {
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
-    m_checkPix(QLatin1String("checkmark")), m_imagesAreAvailable(false) {
+    m_imagesAreAvailable(false) {
   m_iconCache.setMaxCost(Config::iconCacheSize());
+  m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"));
 }
 
 EntryModel::~EntryModel() {
@@ -63,7 +63,7 @@ int EntryModel::columnCount(const QModelIndex&) const {
 }
 
 QModelIndex EntryModel::index(int row_, int column_, const QModelIndex& parent_) const {
-  return hasIndex(row_, column_, parent_) ? createIndex(row_, column_, 0) : QModelIndex();
+  return hasIndex(row_, column_, parent_) ? createIndex(row_, column_) : QModelIndex();
 }
 
 QModelIndex EntryModel::parent(const QModelIndex&) const {
@@ -134,18 +134,18 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
           return defaultIcon(entry->collection());
         }
         const QString id = entry->field(fieldName);
-        KIcon* icon = m_iconCache.object(id);
+        QIcon* icon = m_iconCache.object(id);
         if(icon) {
-          return QIcon::fromTheme(*icon);
+          return QIcon(*icon);
         }
         const Data::Image& img = ImageFactory::imageById(id);
         if(img.isNull()) {
           return defaultIcon(entry->collection());
         }
 
-        icon = new QIcon::fromTheme(QPixmap::fromImage(img));
+        icon = new QIcon(QPixmap::fromImage(img));
         m_iconCache.insert(id, icon);
-        return QIcon::fromTheme(*icon);
+        return QIcon(*icon);
       }
       // otherwise just return the image for the entry
       // we don't need a formatted value for any pixmaps
@@ -353,18 +353,18 @@ void EntryModel::setImagesAreAvailable(bool available_) {
   }
 }
 
-const KIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
-  KIcon* icon = m_defaultIcons.value(coll_->type());
+const QIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
+  QIcon* icon = m_defaultIcons.value(coll_->type());
   if(icon) {
     return *icon;
   }
-  KIcon tmpIcon(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
+  QIcon tmpIcon = QIcon::fromTheme(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
   if(tmpIcon.isNull()) {
     myLog() << "null nocover image, loading tellico.png";
     tmpIcon = QIcon::fromTheme(QLatin1String("tellico"));
   }
 
-  icon = new QIcon::fromTheme(tmpIcon);
+  icon = new QIcon(tmpIcon);
   m_defaultIcons.insert(coll_->type(), icon);
   return *icon;
 }
