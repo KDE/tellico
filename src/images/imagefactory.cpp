@@ -33,7 +33,7 @@
 
 #include <kapplication.h>
 #include <kcolorutils.h>
-#include <qimageblitz.h>
+//#include <qimageblitz.h>
 
 #define RELEASE_IMAGES
 
@@ -505,6 +505,8 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
 
+  // TODO fix QImageBlitz for qt5
+#if 0
   const QString bgname = QLatin1String("gradient_bg.png");
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
@@ -530,6 +532,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
     bgImage.save(opt_.imgDir + bgname, "PNG");
     hdrImage.save(opt_.imgDir + hdrname, "PNG");
   }
+#endif
 }
 
 void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {
