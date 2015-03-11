@@ -298,8 +298,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY
 
 ########### install files ###############
 
+install(PROGRAMS org.kde.tellico.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
-install(PROGRAMS tellico.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES tellico.appdata.xml DESTINATION ${KDE_INSTALL_DATAROOTDIR}/appdata )
 

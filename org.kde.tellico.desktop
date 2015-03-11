@@ -2,7 +2,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Exec=tellico -caption %c %i %u
+Exec=tellico -qwindowtitle %c %u
 Icon=tellico
 X-KDE-DocPath=tellico/index.html
 Comment=A collection manager
