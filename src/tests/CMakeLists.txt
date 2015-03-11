@@ -309,9 +309,9 @@ ENDIF( QJSON_FOUND )
 
 # running gcstar in the fetcher is really unreliable
 #add_executable(gcstarfetchertest gcstarfetchertest.cpp)
-ecm_mark_nongui_executable(gcstarfetchertest)
-add_test(gcstarfetchertest gcstarfetchertest)
-ecm_mark_as_test(gcstarfetchertest)
+#ecm_mark_nongui_executable(gcstarfetchertest)
+#add_test(gcstarfetchertest gcstarfetchertest)
+#ecm_mark_as_test(gcstarfetchertest)
 #TARGET_LINK_LIBRARIES(gcstarfetchertest fetch ${TELLICO_TEST_LIBS})
 
 add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest.cpp)
