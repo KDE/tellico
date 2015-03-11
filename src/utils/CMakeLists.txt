@@ -17,5 +17,6 @@ add_library(utils STATIC ${utils_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(utils
     Qt5::Core
+    KF5::Wallet
     KF5::KDELibs4Support
 )

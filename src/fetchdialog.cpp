@@ -64,6 +64,7 @@
 #include <KHBox>
 #include <KVBox>
 #include <KCodecs>
+#include <KGlobal>
 
 #include <QGroupBox>
 #include <QSplitter>

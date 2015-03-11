@@ -189,12 +189,12 @@ void barcodeRecognitionThread::printArray( int array[10][13][2], int level )
 {
   for (int i = 0; i < 10; i++) {
     QString temp;
-    temp = QString::number( i ) + QString::fromAscii(" :   ");
+    temp = QString::number( i ) + QString::fromLatin1(" :   ");
     for (int j = 0; j < 13; j++) {
       if (array[i][j][level] == -1)
-        temp += QString::fromAscii("x  ");
+        temp += QString::fromLatin1("x  ");
       else
-      temp += QString::number( array[i][j][level] ) + QString::fromAscii("  ");
+      temp += QString::number( array[i][j][level] ) + QString::fromLatin1("  ");
     }
   qDebug() << temp;
   }
@@ -579,7 +579,7 @@ QString Barcode_EAN13::toString() const
     if ((m_numbers[i] >= 0) && (m_numbers[i] <= 9))
       s += QString::number(m_numbers[i]);
     else
-      s += QChar::fromAscii('?');
+      s += QChar::fromLatin1('?');
   return s;
 }
 

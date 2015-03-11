@@ -25,13 +25,16 @@
 #include "fieldcompletion.h"
 #include "fieldformat.h"
 
+#include <KCompletion>
+#include <KCompletionMatches>
+
 using Tellico::FieldCompletion;
 
 FieldCompletion::FieldCompletion(bool multiple_) : KCompletion(), m_multiple(multiple_) {
 }
 
 QString FieldCompletion::makeCompletion(const QString& string_) {
-  if(completionMode() == KGlobalSettings::CompletionNone) {
+  if(completionMode() == KCompletion::CompletionNone) {
     m_beginText.clear();
     return QString();
   }

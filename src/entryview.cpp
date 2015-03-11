@@ -52,6 +52,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QClipboard>
+#include <QDomDocument>
 
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;

@@ -42,6 +42,7 @@
 #include <kaction.h>
 #include <kiconloader.h>
 #include <kmenu.h>
+#include <KGlobal>
 
 #include <QPixmap>
 #include <QMouseEvent>
@@ -130,7 +131,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   if(coll_->type() == Data::Collection::Base) {
     KUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), KUrl());
+      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
       if(u == url) {
         configN = QString::fromLatin1("_%1").arg(i);
         break;

@@ -30,6 +30,7 @@
 #include <klocale.h>
 #include <ktextedit.h>
 #include <KHBox>
+#include <KIconLoader>
 
 #include <QSplitter>
 #include <QLabel>

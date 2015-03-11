@@ -11,8 +11,6 @@
 #include <utility>
 #include <cctype>
 
-#include <kdebug.h>
-
 PalmLib::FlatFile::Database::Database(std::string p_Type, const PalmLib::Database& pdb)
     : m_Type(p_Type)
 {
@@ -74,12 +72,12 @@ PalmLib::FlatFile::Database::appendField(PalmLib::FlatFile::FType field)
 {
     if (! supportsFieldType(field.type())) {
 //        throw PalmLib::error("unsupported field type");
-          kDebug() << "unsupported field type";
+//          kDebug() << "unsupported field type";
           return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-          kDebug() << "maximum number of fields reached";
+//          kDebug() << "maximum number of fields reached";
           return;
     }
     m_fields.push_back(field);
@@ -90,12 +88,12 @@ PalmLib::FlatFile::Database::appendField(const std::string& name,
                                          Field::FieldType type, std::string data)
 {
     if (! supportsFieldType(type)) {
-      kDebug() << "unsupported field type";
+//      kDebug() << "unsupported field type";
         return;
     }
 //        throw PalmLib::error("unsupported field type");
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
-      kDebug() << "maximum number of fields reached";
+//      kDebug() << "maximum number of fields reached";
         return;
       }
 //        throw PalmLib::error("maximum number of fields reached");
@@ -110,12 +108,12 @@ PalmLib::FlatFile::Database::insertField(int i, PalmLib::FlatFile::FType field)
 {
     if (! supportsFieldType(field.type())) {
 //        throw PalmLib::error("unsupported field type");
-        kDebug() << "unsupported field type";
+//        kDebug() << "unsupported field type";
         return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-        kDebug() << "maximum number of fields reached";
+//        kDebug() << "maximum number of fields reached";
         return;
       }
 /*    m_fields.push_back(std::make_pair(name, type));*/
@@ -129,12 +127,12 @@ PalmLib::FlatFile::Database::insertField(int i, const std::string& name,
 {
     if (! supportsFieldType(type)) {
 //        throw PalmLib::error("unsupported field type");
-        kDebug() << "unsupported field type";
+//        kDebug() << "unsupported field type";
         return;
     }
     if (getMaxNumOfFields() != 0 && getNumOfFields() + 1 > getMaxNumOfFields()) {
 //        throw PalmLib::error("maximum number of fields reached");
-        kDebug() << "maximum number of fields reached";
+//        kDebug() << "maximum number of fields reached";
         return;
       }
 /*    m_fields.push_back(std::make_pair(name, type));*/
@@ -158,7 +156,7 @@ PalmLib::FlatFile::Record
 PalmLib::FlatFile::Database::getRecord(unsigned index) const
 {
     if (index >= getNumRecords()) {
-      kDebug() << "invalid index";
+//      kDebug() << "invalid index";
      //throw std::out_of_range("invalid index");
     }
     return m_records[index];
@@ -169,13 +167,13 @@ PalmLib::FlatFile::Database::appendRecord(PalmLib::FlatFile::Record rec)
 {
     if (rec.fields().size() != getNumOfFields()) {
 //        throw PalmLib::error("the number of fields mismatch");
-        kDebug() << "the number of fields mismatch";
+//        kDebug() << "the number of fields mismatch";
         return;
     }
     for (unsigned int i = 0; i < getNumOfFields(); i++) {
         const Field field = rec.fields().at(i);
         if (field.type != field_type(i)) {
-          kDebug() << "field " << i << " type " << field_type(i) << " mismatch: " << field.type;
+//          kDebug() << "field " << i << " type " << field_type(i) << " mismatch: " << field.type;
           return;
 //            throw PalmLib::error(buffer.str());
         }

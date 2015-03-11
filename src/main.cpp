@@ -27,43 +27,52 @@
 #include "mainwindow.h"
 #include "translators/translators.h" // needed for file type enum
 
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
-#include <klocale.h>
+#include <KAboutData>
+#include <KLocalizedString>
+
+#include <QApplication>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
 
 int main(int argc, char* argv[]) {
-  KAboutData aboutData("tellico", 0, ki18n("Tellico"),
-                       TELLICO_VERSION, ki18n("Tellico - a collection manager for KDE"),
-                       KAboutData::License_GPL_V2,
-                       ki18n("(c) 2001-2015, Robby Stephenson"), KLocalizedString(),
-                       "http://tellico-project.org", "tellico-users@kde.org");
-  aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
-  aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
-  aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString(), "regis@boudin.name");
-  aboutData.addAuthor(ki18n("Petri Damstén"), KLocalizedString(), "damu@iki.fi");
-  aboutData.addAuthor(ki18n("Sebastian Held"), KLocalizedString());
+  QApplication app(argc, argv);
 
-  aboutData.addCredit(ki18n("Virginie Quesnay"), ki18n("Icons"));
-  aboutData.addCredit(ki18n("Amarok"), ki18n("Code examples and general inspiration"),
-                      QByteArray(), "http://amarok.kde.org");
-  aboutData.addCredit(ki18n("Greg Ward"), ki18n("Author of btparse library"));
-  aboutData.addCredit(ki18n("Robert Gamble"), ki18n("Author of libcsv library"));
-  aboutData.addCredit(ki18n("Valentin Lavrinenko"), ki18n("Author of rtf2html library"));
+  KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
+                       QLatin1String(TELLICO_VERSION), i18n("Tellico - a collection manager for KDE"),
+                       KAboutLicense::GPL_V2,
+                       i18n("(c) 2001-2015, Robby Stephenson"),
+                       QString(),
+                       QLatin1String("http://tellico-project.org"),
+                       QLatin1String("tellico-users@kde.org"));
+  aboutData.addAuthor(QLatin1String("Robby Stephenson"), QString(), QLatin1String("robby@periapsis.org"));
+  aboutData.addAuthor(QLatin1String("Mathias Monnerville"), i18n("Data source scripts"));
+  aboutData.addAuthor(QLatin1String("Regis Boudin"), QString(), QLatin1String("regis@boudin.name"));
+  aboutData.addAuthor(QLatin1String("Petri Damstén"), QString(), QLatin1String("damu@iki.fi"));
+  aboutData.addAuthor(QLatin1String("Sebastian Held"), QString());
 
-  aboutData.addLicense(KAboutData::License_GPL_V3);
+  aboutData.addCredit(QLatin1String("Virginie Quesnay"), i18n("Icons"));
+  aboutData.addCredit(QLatin1String("Amarok"), i18n("Code examples and general inspiration"),
+                      QString(), QLatin1String("http://amarok.kde.org"));
+  aboutData.addCredit(QLatin1String("Greg Ward"), i18n("Author of btparse library"));
+  aboutData.addCredit(QLatin1String("Robert Gamble"), i18n("Author of libcsv library"));
+  aboutData.addCredit(QLatin1String("Valentin Lavrinenko"), i18n("Author of rtf2html library"));
 
-  KCmdLineOptions options;
-  options.add("nofile", ki18n("Do not reopen the last open file"));
-  options.add("bibtex", ki18n("Import <filename> as a bibtex file")); // krazy:exclude=i18ncheckarg
-  options.add("mods", ki18n("Import <filename> as a MODS file")); // krazy:exclude=i18ncheckarg
-  options.add("ris", ki18n("Import <filename> as a RIS file")); // krazy:exclude=i18ncheckarg
-  options.add("+[filename]", ki18n("File to open"));
+  aboutData.addLicense(KAboutLicense::GPL_V3);
 
-  KCmdLineArgs::init(argc, argv, &aboutData);
-  KCmdLineArgs::addCmdLineOptions(options);
+  QCommandLineParser parser;
+  parser.addVersionOption();
+  parser.addHelpOption();
+  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nofile"), i18n("Do not reopen the last open file")));
+  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("bibtex"), i18n("Import <filename> as a bibtex file")));
+  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("mods"), i18n("Import <filename> as a MODS file")));
+  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("ris"), i18n("Import <filename> as a RIS file")));
+  parser.addPositionalArgument(QLatin1String("[filename]"), i18n("File to open"));
 
-  KApplication app;
+  aboutData.setupCommandLine(&parser);
+
+  parser.process(app);
+  aboutData.processCommandLine(&parser);
+  KAboutData::setApplicationData(aboutData);
 
   if(app.isSessionRestored()) {
     RESTORE(Tellico::MainWindow);
@@ -72,24 +81,23 @@ int main(int argc, char* argv[]) {
     tellico->show();
     tellico->slotShowTipOfDay(false);
 
-    KCmdLineArgs* args = KCmdLineArgs::parsedArgs();
-    if(args->count() > 0) {
-      if(args->isSet("bibtex")) {
-        tellico->importFile(Tellico::Import::Bibtex, args->url(0), Tellico::Import::Replace);
-      } else if(args->isSet("mods")) {
-        tellico->importFile(Tellico::Import::MODS, args->url(0), Tellico::Import::Replace);
-      } else if(args->isSet("ris")) {
-        tellico->importFile(Tellico::Import::RIS, args->url(0), Tellico::Import::Replace);
+    QStringList args = parser.positionalArguments();
+    if(args.count() > 0) {
+      if(parser.isSet(QLatin1String("bibtex"))) {
+        tellico->importFile(Tellico::Import::Bibtex, args.at(0), Tellico::Import::Replace);
+      } else if(parser.isSet(QLatin1String("mods"))) {
+        tellico->importFile(Tellico::Import::MODS, args.at(0), Tellico::Import::Replace);
+      } else if(parser.isSet(QLatin1String("ris"))) {
+        tellico->importFile(Tellico::Import::RIS, args.at(0), Tellico::Import::Replace);
       } else {
-        tellico->slotFileOpen(args->url(0));
+        tellico->slotFileOpen(args.at(0));
       }
     } else {
       // bit of a hack, I just want the --nofile option
       // if --nofile is NOT passed, then the file option is set
       // is it's set, then go ahead and check for opening previous file
-      tellico->initFileOpen(!args->isSet("file"));
+      tellico->initFileOpen(!parser.isSet(QLatin1String("nofile")));
     }
-    args->clear(); // some memory savings
   }
 
   return app.exec();

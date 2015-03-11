@@ -39,6 +39,7 @@
 #include <kpushbutton.h>
 #include <kaction.h>
 #include <kvbox.h>
+#include <KGlobal>
 
 #include <QStringList>
 #include <QObject>

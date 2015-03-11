@@ -37,7 +37,7 @@
 #include <QList>
 
 class KToolBar;
-class KAction;
+class QAction;
 class KSelectAction;
 class KToggleAction;
 class KRecentFilesAction;
@@ -79,7 +79,7 @@ namespace Tellico {
  * window and reads the config file as well as providing a menubar, toolbar
  * and statusbar. Tellico reimplements the methods that KMainWindow provides
  * for main window handling and supports full session management as well as
- * using KActions.
+ * using QActions.
  * @see KMainWindow
  * @see KApplication
  * @see KConfig
@@ -317,7 +317,7 @@ private:
    */
   void readOptions();
   /**
-   * Initializes the KActions of the application
+   * Initializes the QActions of the application
    */
   void initActions();
   /**
@@ -476,16 +476,16 @@ private:
   // the reason that I have to keep pointers to all these
   // is because they get plugged into menus later in Controller
   KRecentFilesAction* m_fileOpenRecent;
-  KAction* m_fileSave;
-  KAction* m_newEntry;
-  KAction* m_editEntry;
-  KAction* m_copyEntry;
-  KAction* m_deleteEntry;
-  KAction* m_mergeEntry;
+  QAction* m_fileSave;
+  QAction* m_newEntry;
+  QAction* m_editEntry;
+  QAction* m_copyEntry;
+  QAction* m_deleteEntry;
+  QAction* m_mergeEntry;
   KActionMenu* m_updateEntryMenu;
-  KAction* m_updateAll;
-  KAction* m_checkInEntry;
-  KAction* m_checkOutEntry;
+  QAction* m_updateAll;
+  QAction* m_checkInEntry;
+  QAction* m_checkOutEntry;
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
 

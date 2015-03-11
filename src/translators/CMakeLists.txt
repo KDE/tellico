@@ -60,6 +60,7 @@ TARGET_LINK_LIBRARIES(translators
     )
 
 TARGET_LINK_LIBRARIES(translators
+    KF5::Archive
     KF5::KDELibs4Support
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}

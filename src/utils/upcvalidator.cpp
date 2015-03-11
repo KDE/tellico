@@ -131,10 +131,10 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
     }
   }
 
-  code = QString::fromLatin1(KCodecs::base64Decode(code.toAscii()));
+  code = QString::fromLatin1(KCodecs::base64Decode(code.toLatin1()));
 
   for(int i = 0; i < code.length(); ++i) {
-    char c = code[i].toAscii() ^ 'C';
+    char c = code[i].toLatin1() ^ 'C';
     code.replace(i, 1, QLatin1Char(c));
   }
 

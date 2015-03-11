@@ -59,6 +59,9 @@
 #include <kapplication.h>
 #include <kvbox.h>
 #include <khbox.h>
+#include <KGlobal>
+#include <KHelpClient>
+#include <KIcon>
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
@@ -124,7 +127,11 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   setFaceType(List);
   setModal(true);
   setWindowTitle(i18n("Configure Tellico"));
-  setButtons(QDialogButtonBox::Help|QDialogButtonBox::Ok|QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::RestoreDefaults);
+  setStandardButtons(QDialogButtonBox::Help |
+                     QDialogButtonBox::Ok |
+                     QDialogButtonBox::Apply |
+                     QDialogButtonBox::Cancel |
+                     QDialogButtonBox::RestoreDefaults);
 
   setupGeneralPage();
   setupPrintingPage();
@@ -135,35 +142,26 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   QSize s = sizeHint();
   resize(qMax(s.width(), CONFIG_MIN_WIDTH), qMax(s.height(), CONFIG_MIN_HEIGHT));
 
-  connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
-  connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
-  connect(this, SIGNAL(defaultClicked()), SLOT(slotDefault()));
+  connect(button(QDialogButtonBox::Ok), SIGNAL(clicked()), SLOT(slotOk()));
+  connect(button(QDialogButtonBox::Apply), SIGNAL(clicked()), SLOT(slotApply()));
+  connect(button(QDialogButtonBox::Help), SIGNAL(clicked()), SLOT(slotHelp()));
+  connect(button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(slotDefault()));
 
-  enableButtonOk(false);
-  enableButtonApply(false);
+  button(QDialogButtonBox::Ok)->setEnabled(false);
+  button(QDialogButtonBox::Apply)->setEnabled(false);
 
-  setHelp(QLatin1String("general-options"));
-  connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotUpdateHelpLink(KPageWidgetItem*)));
+  // these next lines are from convert-kdialog.pl
+  button(QDialogButtonBox::Ok)->setDefault(true);
+  button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox(), SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox(), SIGNAL(rejected()), this, SLOT(reject()));
+
   connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotInitPage(KPageWidgetItem*)));
 }
 
 ConfigDialog::~ConfigDialog() {
   foreach(Fetch::ConfigWidget* widget, m_newStuffConfigWidgets) {
     widget->removed();
-  }
-}
-
-void ConfigDialog::slotUpdateHelpLink(KPageWidgetItem* item_) {
-  const QString name = item_->name();
-  // thes ename must be kept in sync with the page names
-  if(name == i18n("General")) {
-    setHelp(QLatin1String("general-options"));
-  } else if(name == i18n("Printing")) {
-    setHelp(QLatin1String("printing-options"));
-  } else if(name == i18n("Templates")) {
-    setHelp(QLatin1String("template-options"));
-  } else if(name == i18n("Data Sources")) {
-    setHelp(QLatin1String("internet-sources-options"));
   }
 }
 
@@ -199,7 +197,7 @@ void ConfigDialog::slotOk() {
 
 void ConfigDialog::slotApply() {
   emit signalConfigChanged();
-  enableButtonApply(false);
+  button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
 void ConfigDialog::slotDefault() {
@@ -215,6 +213,20 @@ void ConfigDialog::slotDefault() {
   }
   Config::self()->useDefaults(false);
   slotModified();
+}
+
+void ConfigDialog::slotHelp() {
+  const QString name = currentPage()->name();
+  // these names must be kept in sync with the page names
+  if(name == i18n("General")) {
+    KHelpClient::invokeHelp(QLatin1String("general-options"));
+  } else if(name == i18n("Printing")) {
+    KHelpClient::invokeHelp(QLatin1String("printing-options"));
+  } else if(name == i18n("Templates")) {
+    KHelpClient::invokeHelp(QLatin1String("template-options"));
+  } else if(name == i18n("Data Sources")) {
+    KHelpClient::invokeHelp(QLatin1String("internet-sources-options"));
+  }
 }
 
 bool ConfigDialog::isPageInitialized(Page page_) const {
@@ -557,7 +569,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   KHBox* box1 = new KHBox(groupBox);
   vlay->addWidget(box1);
-  box1->setSpacing(spacingHint());
+  box1->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
   KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
   b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
@@ -910,8 +922,8 @@ void ConfigDialog::slotModified() {
   if(m_modifying) {
     return;
   }
-  enableButtonOk(true);
-  enableButtonApply(true);
+  button(QDialogButtonBox::Ok)->setEnabled(true);
+  button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
 void ConfigDialog::slotNewSourceClicked() {
@@ -1033,18 +1045,13 @@ void ConfigDialog::slotNewStuffClicked() {
 #ifdef ENABLE_KNEWSTUFF3
   KNS3::DownloadDialog dialog(QLatin1String("tellico-script.knsrc"), this);
   dialog.exec();
-  {
-    KNS3::Entry::List entries = dialog.installedEntries();
-#elif defined(ENABLE_KNEWSTUFF2)
-  KNS::Engine engine(this);
-  if(engine.init(QLatin1String("tellico-script.knsrc"))) {
-    KNS::Entry::List entries = engine.downloadDialogModal(this);
-#endif
-    if(!entries.isEmpty()) {
-      Fetch::Manager::self()->loadFetchers();
-      readFetchConfig();
-    }
+
+  KNS3::Entry::List entries = dialog.installedEntries();
+  if(!entries.isEmpty()) {
+    Fetch::Manager::self()->loadFetchers();
+    readFetchConfig();
   }
+#endif
 }
 
 Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
@@ -1150,17 +1157,12 @@ void ConfigDialog::slotDownloadTemplate() {
 #ifdef ENABLE_KNEWSTUFF3
   KNS3::DownloadDialog dialog(QLatin1String("tellico-template.knsrc"), this);
   dialog.exec();
-  {
-    KNS3::Entry::List entries = dialog.installedEntries();
-#elif defined(ENABLE_KNEWSTUFF2)
-  KNS::Engine engine(this);
-  if(engine.init(QLatin1String("tellico-template.knsrc"))) {
-    KNS::Entry::List entries = engine.downloadDialogModal(this);
-#endif
-    if(!entries.isEmpty()) {
-      loadTemplateList();
-    }
+
+  KNS3::Entry::List entries = dialog.installedEntries();
+  if(!entries.isEmpty()) {
+    loadTemplateList();
   }
+#endif
 }
 
 void ConfigDialog::slotDeleteTemplate() {

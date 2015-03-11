@@ -31,7 +31,6 @@
 
 #include <QPointer>
 #include <QEvent>
-#include <QCustomEvent>
 #include <QList>
 #include <QHash>
 

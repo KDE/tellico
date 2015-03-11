@@ -98,12 +98,7 @@ private slots:
    * Called when the Default button is clicked.
    */
   void slotDefault();
-  /**
-   * Update the help link for a page.
-   *
-   * @param w The page
-   */
-  void slotUpdateHelpLink(KPageWidgetItem* item);
+  void slotHelp();
   void slotInitPage(KPageWidgetItem* item);
   /**
    * Create a new Internet source

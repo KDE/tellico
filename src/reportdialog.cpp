@@ -43,6 +43,7 @@
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
+#include <KGlobal>
 
 #include <QFile>
 #include <QLabel>

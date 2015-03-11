@@ -89,7 +89,7 @@
 #include <kedittoolbar.h>
 #include <kshortcutsdialog.h>
 #include <kio/netaccess.h>
-#include <kaction.h>
+#include <QAction>
 #include <krecentfilesaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
@@ -97,6 +97,9 @@
 #include <KShortcutsDialog>
 #include <kundostack.h>
 #include <KTabWidget>
+#include <KIcon>
+#include <KMimeType>
+#include <KAction>
 
 #include <QSplitter>
 //#include <QPainter>
@@ -110,7 +113,7 @@ namespace {
   static const int MAIN_WINDOW_MIN_WIDTH = 600;
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
 
-KIcon mimeIcon(const char* s) {
+QIcon mimeIcon(const char* s) {
   KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s), KMimeType::ResolveAliases);
   if(!ptr) {
     myDebug() << "*** no icon for" << s;
@@ -118,7 +121,7 @@ KIcon mimeIcon(const char* s) {
   return ptr ? QIcon::fromTheme(ptr->iconName()) : QIcon();
 }
 
-KIcon mimeIcon(const char* s1, const char* s2) {
+QIcon mimeIcon(const char* s1, const char* s2) {
   KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s1), KMimeType::ResolveAliases);
   if(!ptr) {
     ptr = KMimeType::mimeType(QLatin1String(s2), KMimeType::ResolveAliases);
@@ -239,7 +242,7 @@ void MainWindow::initActions() {
   fileNewMenu->setDelayed(false);
   actionCollection()->addAction(QLatin1String("file_new_collection"), fileNewMenu);
 
-  KAction* action;
+  QAction* action;
 
 #define COLL_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
   action = actionCollection()->addAction(QLatin1String(NAME), collectionMapper, SLOT(map())); \
@@ -626,11 +629,11 @@ void MainWindow::initActions() {
   /*************************************************
    * Short cuts
    *************************************************/
-  KAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this,
+  QAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this,
                                                             SLOT(slotToggleFullScreen()), this);
   actionCollection()->addAction(toggleFullScreenAction->text(), toggleFullScreenAction);
 
-  KAction* toggleMenubarAction = KStandardAction::create(KStandardAction::ShowMenubar, this,
+  QAction* toggleMenubarAction = KStandardAction::create(KStandardAction::ShowMenubar, this,
                                                          SLOT(slotToggleMenuBarVisibility()), this);
   actionCollection()->addAction(toggleMenubarAction->text(), toggleMenubarAction);
 
@@ -666,11 +669,12 @@ void MainWindow::initActions() {
           this, SLOT(slotClearFilter()));
   m_quickFilter->installEventFilter(this); // intercept keyEvents
 
-  action = new KAction(i18n("Filter"), this);
-  action->setDefaultWidget(m_quickFilter);
-  action->setToolTip(i18n("Filter the collection"));
-  action->setShortcutConfigurable(false);
-  actionCollection()->addAction(QLatin1String("quick_filter"), action);
+  QWidgetAction* widgetAction = new QWidgetAction(this);
+  widgetAction->setDefaultWidget(m_quickFilter);
+  widgetAction->setText(i18n("Filter"));
+  widgetAction->setToolTip(i18n("Filter the collection"));
+  widgetAction->setProperty("isShortcutConfigurable", false);
+  actionCollection()->addAction(QLatin1String("quick_filter"), widgetAction);
 
   setupGUI(Keys | ToolBar);
 #ifdef UIFILE
@@ -932,7 +936,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     QList<KUrl> urls = QList<KUrl>() << url;
     QStringList groupBys = QStringList() << groupName;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), KUrl());
+      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
       QString g = config.readEntry(QString::fromLatin1("Group By_%1").arg(i), QString());
       if(!u.isEmpty() && url != u) {
         urls.append(u);
@@ -1117,7 +1121,7 @@ void MainWindow::slotFileOpenRecent(const KUrl& url_) {
       m_fileOpenRecent->setCurrentItem(-1);
     }
   } else {
-    // the KAction shouldn't be checked now
+    // the QAction shouldn't be checked now
     m_fileOpenRecent->setCurrentItem(-1);
   }
 
@@ -1361,7 +1365,7 @@ void MainWindow::activateEditSlot(const char* slot_) {
     const QMetaObject* meta = w->metaObject();
     const int idx = meta->indexOfSlot(slot_);
     if(idx > -1) {
-      myDebug() << "MainWindow invoking" << meta->method(idx).signature();
+      //myDebug() << "MainWindow invoking" << meta->method(idx).signature();
       meta->method(idx).invoke(w, Qt::DirectConnection);
     }
   }
@@ -1407,7 +1411,8 @@ void MainWindow::slotShowConfigDialog() {
 
 void MainWindow::slotHideConfigDialog() {
   if(m_configDlg) {
-    m_configDlg->delayedDestruct();
+    m_configDlg->hide();
+    m_configDlg->deleteLater();
     m_configDlg = 0;
   }
 }
@@ -2131,7 +2136,7 @@ void MainWindow::updateEntrySources() {
 
   Fetch::FetcherVec vec = Fetch::Manager::self()->fetchers(Kernel::self()->collectionType());
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
-    KAction* action = new KAction(QIcon::fromTheme(Fetch::Manager::fetcherIcon(fetcher)), fetcher->source(), actionCollection());
+    QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
     connect(action, SIGNAL(activated()), m_updateMapper, SLOT(map()));
     m_updateMapper->setMapping(action, fetcher->source());
@@ -2259,7 +2264,7 @@ void MainWindow::slotToggleFullScreen() {
 }
 
 void MainWindow::slotToggleMenuBarVisibility() {
-  KMenuBar* mb = menuBar();
+  QMenuBar* mb = menuBar();
   mb->isHidden() ? mb->show() : mb->hide();
 }
 
