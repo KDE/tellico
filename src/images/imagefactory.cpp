@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+ #include <config.h>
+
 #include "imagefactory.h"
 #include "image.h"
 #include "imageinfo.h"
@@ -33,7 +35,10 @@
 
 #include <kapplication.h>
 #include <kcolorutils.h>
-//#include <qimageblitz.h>
+
+#ifdef HAVE_QIMAGEBLITZ
+#include <qimageblitz.h>
+#endif
 
 #define RELEASE_IMAGES
 
@@ -505,16 +510,24 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
 
-  // TODO fix QImageBlitz for qt5
-#if 0
   const QString bgname = QLatin1String("gradient_bg.png");
+#ifdef HAVE_QIMAGEBLITZ
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
+#else
+  QImage bgImage;
+  bgImage.fill(bgc1);
+#endif
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
   const QString hdrname = QLatin1String("gradient_header.png");
+#ifdef HAVE_QIMAGEBLITZ
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
                                               Blitz::VerticalGradient, 100, -100);
+#else
+  QImage hdrImage;
+  hdrImage.fill(bgc2);
+#endif
 
   if(opt_.imgDir.isEmpty()) {
     // write the style images both to the tmp dir and the cache dir
@@ -532,7 +545,6 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
     bgImage.save(opt_.imgDir + bgname, "PNG");
     hdrImage.save(opt_.imgDir + hdrname, "PNG");
   }
-#endif
 }
 
 void ImageFactory::removeImage(const QString& id_, bool deleteImage_) {

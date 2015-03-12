@@ -76,7 +76,7 @@ include(MacroBoolTo01)
 #include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
-#find_package(QImageBlitz REQUIRED)
+find_package(QImageBlitz 5.0)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
@@ -278,6 +278,7 @@ endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS
 
 ########## Wrap tests results around the tests done within the source
 
+macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
 macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
