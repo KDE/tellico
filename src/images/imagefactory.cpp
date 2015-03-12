@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+ #include <config.h>
+
 #include "imagefactory.h"
 #include "image.h"
 #include "imageinfo.h"
@@ -33,7 +35,10 @@
 
 #include <kapplication.h>
 #include <kcolorutils.h>
+
+#ifdef HAVE_QIMAGEBLITZ
 #include <qimageblitz.h>
+#endif
 
 #define RELEASE_IMAGES
 
@@ -506,13 +511,23 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
 
   const QString bgname = QLatin1String("gradient_bg.png");
+#ifdef HAVE_QIMAGEBLITZ
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
+#else
+  QImage bgImage;
+  bgImage.fill(bgc1);
+#endif
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
   const QString hdrname = QLatin1String("gradient_header.png");
+#ifdef HAVE_QIMAGEBLITZ
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
                                               Blitz::VerticalGradient, 100, -100);
+#else
+  QImage hdrImage;
+  hdrImage.fill(bgc2);
+#endif
 
   if(opt_.imgDir.isEmpty()) {
     // write the style images both to the tmp dir and the cache dir

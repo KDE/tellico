@@ -12,8 +12,11 @@ TARGET_LINK_LIBRARIES(images
 )
 # the following linking seems to be necessary for the KDE build dashboard to succeed
 TARGET_LINK_LIBRARIES(images
-    ${QIMAGEBLITZ_LIBRARIES}
     ${KDE4_KIO_LIBS}
 )
+
+IF( QIMAGEBLITZ_FOUND )
+  TARGET_LINK_LIBRARIES(images ${QIMAGEBLITZ_LIBRARIES})
+ENDIF( QIMAGEBLITZ_FOUND )
 
 ADD_DEPENDENCIES(images tellico_config)

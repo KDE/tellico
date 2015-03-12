@@ -39,7 +39,6 @@ include(MacroBoolTo01)
 include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
-find_package(QImageBlitz REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
 
@@ -48,6 +47,12 @@ macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "h
 if(NEPOMUK_FOUND)
     include_directories(${NEPOMUK_INCLUDE_DIRS})
 endif(NEPOMUK_FOUND)
+
+macro_optional_find_package(QImageBlitz 4.0 EXACT)
+macro_log_feature(QIMAGEBLITZ_FOUND "qimageblitz" "Support for fancy image gradients in the default template" "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qimageblitz/html/" FALSE "" "")
+if(QIMAGEBLITZ_FOUND)
+    include_directories(${QIMAGEBLITZ_INCLUDES})
+endif(QIMAGEBLITZ_FOUND)
 
 macro_optional_find_package(KdepimLibs)
 macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.2.0" "")
@@ -131,7 +136,6 @@ remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
 include_directories(${KDE4_INCLUDES}
                     ${QT_INCLUDES}
-                    ${QIMAGEBLITZ_INCLUDES}
                     ${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
@@ -164,6 +168,7 @@ endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS
 
 ########## Wrap tests results around the tests done within the source
 
+macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
 macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
