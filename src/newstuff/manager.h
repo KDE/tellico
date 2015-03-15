@@ -29,9 +29,6 @@
 #include <QMap>
 
 class KArchiveDirectory;
-class KUrl;
-class KTemporaryFile;
-class QStringList;
 
 namespace Tellico {
   namespace NewStuff {
