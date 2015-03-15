@@ -29,9 +29,8 @@
 #include <config.h>
 #include "../borrower.h"
 
-#include <KDateTime>
-
 #ifdef HAVE_KCAL
+#include <KDateTime>
 #include <kcal/calendarresources.h>
 #endif
 

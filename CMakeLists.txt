@@ -49,6 +49,7 @@ check_symbol_exists(strupr "string.h" HAVE_STRUPR)
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Core
     Widgets
+    Xml
     Test
 )
 
