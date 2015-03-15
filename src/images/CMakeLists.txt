@@ -14,7 +14,6 @@ TARGET_LINK_LIBRARIES(images
 TARGET_LINK_LIBRARIES(images
     ${QIMAGEBLITZ_LIBRARIES}
     KF5::KIOCore
-    KF5::KDELibs4Support
 )
 
 ADD_DEPENDENCIES(images tellico_config)

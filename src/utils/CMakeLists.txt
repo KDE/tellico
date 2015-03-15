@@ -20,4 +20,5 @@ TARGET_LINK_LIBRARIES(utils
     Qt5::Xml
     KF5::Wallet
     KF5::I18n
+    KF5::Codecs
 )

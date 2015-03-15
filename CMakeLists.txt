@@ -64,6 +64,7 @@ find_package(KF5 REQUIRED COMPONENTS
     WidgetsAddons
     XmlGui
     JobWidgets
+    Codecs
     KDELibs4Support
 )
 find_package(KF5KHtml NO_MODULE)

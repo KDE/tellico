@@ -26,7 +26,7 @@
 #include "../tellico_debug.h"
 #include "../tellico_utils.h"
 
-#include <kcodecs.h>
+#include <KCodecs>
 #include <KMD5>
 
 #include <QBuffer>

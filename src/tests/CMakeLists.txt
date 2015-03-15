@@ -11,31 +11,31 @@ add_executable(entitytest entitytest.cpp ../tellico_utils.cpp)
 ecm_mark_nongui_executable(entitytest)
 add_test(entitytest entitytest)
 ecm_mark_as_test(entitytest)
-TARGET_LINK_LIBRARIES(entitytest KF5::KDELibs4Support   Qt5::Test )
+TARGET_LINK_LIBRARIES(entitytest KF5::KDELibs4Support Qt5::Test )
 
 add_executable(cuecattest cuecattest.cpp)
 ecm_mark_nongui_executable(cuecattest)
 add_test(cuecattest cuecattest)
 ecm_mark_as_test(cuecattest)
-TARGET_LINK_LIBRARIES(cuecattest utils KF5::KDELibs4Support  Qt5::Test )
+TARGET_LINK_LIBRARIES(cuecattest utils Qt5::Test)
 
 add_executable(isbntest isbntest.cpp)
 ecm_mark_nongui_executable(isbntest)
 add_test(isbntest isbntest)
 ecm_mark_as_test(isbntest)
-TARGET_LINK_LIBRARIES(isbntest utils   Qt5::Test )
+TARGET_LINK_LIBRARIES(isbntest utils Qt5::Test)
 
 add_executable(lccntest lccntest.cpp)
 ecm_mark_nongui_executable(lccntest)
 add_test(lccntest lccntest)
 ecm_mark_as_test(lccntest)
-TARGET_LINK_LIBRARIES(lccntest utils   Qt5::Test )
+TARGET_LINK_LIBRARIES(lccntest utils Qt5::Test)
 
 add_executable(lcctest lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
 ecm_mark_nongui_executable(lcctest)
 add_test(lcctest lcctest)
 ecm_mark_as_test(lcctest)
-TARGET_LINK_LIBRARIES(lcctest utils core   Qt5::Test )
+TARGET_LINK_LIBRARIES(lcctest utils core Qt5::Test)
 
 add_executable(formattest formattest.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(formattest)
@@ -78,12 +78,11 @@ SET(tellicotest_SRCS
    )
 
 add_library(tellicotest STATIC ${tellicotest_SRCS})
+TARGET_LINK_LIBRARIES(tellicotest Qt5::Core Qt5::Gui KF5::I18n)
 
 ADD_DEPENDENCIES(tellicotest tellico_config)
 
 set(TELLICO_TEST_LIBS
-   Qt5::Test
-   KF5::KIOCore
    tellicotest
    collections
    translators
@@ -93,6 +92,8 @@ set(TELLICO_TEST_LIBS
    core
    gui
    tellicotest
+   Qt5::Test
+   KF5::KIOCore
    )
 
 # for some of these, the libraries seem to require being repeated so

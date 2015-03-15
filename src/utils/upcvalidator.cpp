@@ -24,9 +24,8 @@
 
 #include "upcvalidator.h"
 #include "isbnvalidator.h"
-#include "../tellico_debug.h"
 
-#include <kcodecs.h>
+#include <KCodecs>
 
 using Tellico::UPCValidator;
 

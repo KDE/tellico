@@ -40,10 +40,10 @@
 #include "../models/models.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocale>
 #include <KConfigGroup>
-#include <kcodecs.h>
-#include <kglobal.h>
+#include <KCodecs>
+#include <KGlobal>
 #include <kcalendarsystem.h>
 
 #include <QGroupBox>

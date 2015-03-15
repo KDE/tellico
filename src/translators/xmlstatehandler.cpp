@@ -35,8 +35,8 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kcodecs.h>
+#include <KLocale>
+#include <KCodecs>
 
 namespace {
 
