@@ -109,7 +109,7 @@ bool Manager::installTemplate(const QString& file_) {
     if(QFile::exists(name)) {
       QFile::remove(name);
     }
-    if(KIO::file_copy(QUrl(file_), QUrl(name))) {
+    if(KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name))) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
     }
@@ -289,7 +289,7 @@ bool Manager::installScript(const QString& file_) {
 
   QString specFile = scriptFolder + QFileInfo(exeFile).completeBaseName() + QLatin1String(".spec");
   QString sourceExec = scriptFolder + exeFile;
-  QUrl dest(sourceExec);
+  QUrl dest = QUrl::fromLocalFile(sourceExec);
   KFileItem item(KFileItem::Unknown, KFileItem::Unknown, dest, true);
   ::chmod(QFile::encodeName(dest.path()), item.permissions() | S_IXUSR);
 
@@ -348,7 +348,7 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
   int source = fileGroup.readEntry(file_ + QLatin1String("_nbr"), -1);
 
   if(!scriptFolder.isEmpty()) {
-    KIO::del(QUrl(scriptFolder));
+    KIO::del(QUrl::fromLocalFile(scriptFolder));
   }
   if(source != -1) {
     KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
@@ -422,7 +422,7 @@ QString Manager::findEXE(const KArchiveDirectory* dir_) {
 bool Manager::checkCommonFile() {
   // look for a file that gets installed to know the installation directory
   // need to check timestamps
-  QString userDataDir = Tellico::saveLocation(QString());
+  QString userDataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
   QString userCommonFile = userDataDir + QDir::separator() + QLatin1String("tellico-common.xsl");
   if(QFile::exists(userCommonFile)) {
     // check timestamps
