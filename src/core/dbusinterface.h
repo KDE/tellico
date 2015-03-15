@@ -64,8 +64,6 @@ public slots:
     { return exportCollection(Export::HTML, KUrl::fromPath(file)); }
   Q_SCRIPTABLE bool exportCSV(const QString& file)
     { return exportCollection(Export::CSV, KUrl::fromPath(file)); }
-  Q_SCRIPTABLE bool exportPilotDB(const QString& file)
-    { return exportCollection(Export::PilotDB, KUrl::fromPath(file)); }
 
   Q_SCRIPTABLE QList<int> selectedEntries() const;
   Q_SCRIPTABLE QList<int> filteredEntries() const;

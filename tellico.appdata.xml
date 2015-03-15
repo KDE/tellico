@@ -272,26 +272,26 @@
       <li xml:lang="tr">MODS, Bibtex, RIS, CSV, PDF üst verisi ve pek çok diğer biçimi içe aktarır</li>
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
       <li xml:lang="x-test">xxImports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formatsxx</li>
-      <li>Exports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formats</li>
-      <li xml:lang="bs">Izvozi u Bibtex, ONIX, CSV, HTML, PilotDB, i druge formate</li>
-      <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML, PilotDB i altres formats</li>
-      <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML, PilotDB og andre formater</li>
-      <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, PilotDB, und andere Formate</li>
-      <li xml:lang="en-GB">Exports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formats</li>
-      <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML, PilotDB, y otros formatos</li>
-      <li xml:lang="et">Eksport Bibtexi, ONIX-i, CSV, HTML-i, PilotDB ja veel paljudesse vormingutesse</li>
-      <li xml:lang="fr">Exporte vers Bibtex, ONIX, CSV, HTML, PilotDB, et beaucoup d'autres formats</li>
-      <li xml:lang="ia">Il exporta a Bibtex, ONIX, CV, HTML, PilotDB, e altere formatos</li>
-      <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML, PilotDB en andere formaten</li>
-      <li xml:lang="pl">Eksportowanie Bibtex, ONIX, CSV, HTML, PilotDB i innych formatów</li>
-      <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, PilotDB, entre outros formatos</li>
-      <li xml:lang="pt-BR">Exporta para o Bibtex, ONIX, CSV, HTML, PilotDB, entre outros formatos</li>
-      <li xml:lang="sk">Exportuje do Bibtex, ONIX, CSV, HTML, PilotDB a iných formátov</li>
-      <li xml:lang="sl">Zna izvoziti v Bibtex, ONIX, CSV, HTML, PilotDB in druge vrste datotek</li>
-      <li xml:lang="sv">Exporterar till Bibtex, ONIX, CSV, HTML, PilotDB och andra format</li>
-      <li xml:lang="tr">Bibtex, ONIX, CSV, HTML, PilotDB ve pek çok diğer biçimi dışa aktarır</li>
-      <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML, PilotDB тощо.</li>
-      <li xml:lang="x-test">xxExports to Bibtex, ONIX, CSV, HTML, PilotDB, and other formatsxx</li>
+      <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
+      <li xml:lang="bs">Izvozi u Bibtex, ONIX, CSV, HTML, i druge formate</li>
+      <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
+      <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML og andre formater</li>
+      <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, und andere Formate</li>
+      <li xml:lang="en-GB">Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
+      <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML, y otros formatos</li>
+      <li xml:lang="et">Eksport Bibtexi, ONIX-i, CSV, HTML-i ja veel paljudesse vormingutesse</li>
+      <li xml:lang="fr">Exporte vers Bibtex, ONIX, CSV, HTML, et beaucoup d'autres formats</li>
+      <li xml:lang="ia">Il exporta a Bibtex, ONIX, CV, HTML, e altere formatos</li>
+      <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML en andere formaten</li>
+      <li xml:lang="pl">Eksportowanie Bibtex, ONIX, CSV, HTML i innych formatów</li>
+      <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
+      <li xml:lang="pt-BR">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
+      <li xml:lang="sk">Exportuje do Bibtex, ONIX, CSV, HTML a iných formátov</li>
+      <li xml:lang="sl">Zna izvoziti v Bibtex, ONIX, CSV, HTML in druge vrste datotek</li>
+      <li xml:lang="sv">Exporterar till Bibtex, ONIX, CSV, HTML och andra format</li>
+      <li xml:lang="tr">Bibtex, ONIX, CSV, HTML ve pek çok diğer biçimi dışa aktarır</li>
+      <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML тощо.</li>
+      <li xml:lang="x-test">xxExports to Bibtex, ONIX, CSV, HTML, and other formatsxx</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
       <li xml:lang="ca">Importa informació directament des d'Amazon.com, IMDb, servidors z39.50, PubMed, servidors SRU, CrossRef.org, altres llocs web, i des d'scripts externs</li>

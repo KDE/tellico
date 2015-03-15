@@ -79,7 +79,6 @@ TARGET_LINK_LIBRARIES(tellico
     tellicomodels
     utils
     newstuff
-    pilotdb-tellico
     rtf2html-tellico
     ${TELLICO_BTPARSE_LIBS}
     ${TELLICO_CSV_LIBS}

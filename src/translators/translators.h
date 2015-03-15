@@ -75,7 +75,7 @@ namespace Tellico {
       CSV,
       XSLT,
       Text,
-      PilotDB,
+      PilotDB, // Deprecated
       Alexandria,
       ONIX,
       GCstar

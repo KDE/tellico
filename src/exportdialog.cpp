@@ -37,7 +37,6 @@
 #include "translators/bibtexexporter.h"
 #include "translators/bibtexmlexporter.h"
 #include "translators/xsltexporter.h"
-#include "translators/pilotdbexporter.h"
 #include "translators/alexandriaexporter.h"
 #include "translators/onixexporter.h"
 #include "translators/gcstarexporter.h"
@@ -124,7 +123,7 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
 
   setMainWidget(widget);
   readOptions();
-  if(format_ == Export::Alexandria || format_ == Export::PilotDB) {
+  if(format_ == Export::Alexandria) {
     // no encoding options enabled
     group2->setEnabled(false);
   }
@@ -202,14 +201,6 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
 
     case Export::XSLT:
       exporter = new Export::XSLTExporter(coll_);
-      break;
-
-    case Export::PilotDB:
-      {
-        Export::PilotDBExporter* pdbExp = new Export::PilotDBExporter(coll_);
-        pdbExp->setColumns(Controller::self()->visibleColumns());
-        exporter = pdbExp;
-      }
       break;
 
     case Export::Alexandria:

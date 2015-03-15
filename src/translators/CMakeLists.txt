@@ -32,7 +32,6 @@ SET(translators_STAT_SRCS
    importer.cpp
    onixexporter.cpp
    pdfimporter.cpp
-   pilotdbexporter.cpp
    referencerimporter.cpp
    risimporter.cpp
    tellico_xml.cpp

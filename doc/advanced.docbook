@@ -52,7 +52,6 @@ bool exportZip(QString file)
 bool exportBibtex(QString file)
 bool exportHTML(QString file)
 bool exportCSV(QString file)
-bool exportPilotDB(QString file)
 QList&lt;int&gt; selectedEntries()
 QList&lt;int&gt; filteredEntries()
 void openFile(QString file)
@@ -65,7 +64,7 @@ For the four import commands, the first argument is the file to import, and the 
 </para>
 
 <para>
-The current open collection in &appname; may be exported to a file, in either Tellico &XML; format, Tellico ZIP format, Bibtex, &HTML;, comma-separated values (CSV), or the PilotDB format.
+The current open collection in &appname; may be exported to a file, in either Tellico &XML; format, Tellico ZIP format, Bibtex, &HTML;, or comma-separated values (CSV).
 </para>
 
 <para>A list of the entry IDs currently selected or being filtered is able to facilitate showing or updating entries in the view.</para>

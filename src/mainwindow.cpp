@@ -433,9 +433,6 @@ void MainWindow::initActions() {
   EXPORT_ACTION(Export::CSV, "file_export_csv", i18n("Export to CSV..."),
                 i18n("Export to a comma-separated values file"), mimeIcon("text/csv", "text/x-csv"));
 
-  EXPORT_ACTION(Export::PilotDB, "file_export_pilotdb", i18n("Export to PilotDB..."),
-                i18n("Export to a PilotDB database"), BarIcon(QLatin1String("palm")));
-
   EXPORT_ACTION(Export::Alexandria, "file_export_alexandria", i18n("Export to Alexandria..."),
                 i18n("Export to an Alexandria library"), BarIcon(QLatin1String("alexandria")));
 
