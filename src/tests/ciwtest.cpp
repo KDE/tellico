@@ -25,16 +25,16 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ciwtest.h"
-#include "qtest_kde.h"
+#include "qtest.h"
 
 #include "../translators/ciwimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
-QTEST_KDEMAIN_CORE( CiwTest )
+QTEST_APPLESS_MAIN( CiwTest )
 
 void CiwTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ciw");
+  KUrl url(QFINDTESTDATA("/data/test.ciw"));
   KUrl::List urls;
   urls << url;
   Tellico::Import::CIWImporter importer(urls);
