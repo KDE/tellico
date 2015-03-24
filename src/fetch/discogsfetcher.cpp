@@ -117,7 +117,6 @@ void DiscogsFetcher::search() {
     case Keyword:
       u.setPath(QLatin1String("/database/search"));
       u.addQueryItem(QLatin1String("q"), request().value);
-      //u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
     case Raw:
@@ -313,6 +312,13 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
   entry_->setField(QLatin1String("label"), labels.join(FieldFormat::delimiterString()));
 
+  // thumb images are only returned in search, not in a full request
+  // so include them now, even though they're only needed for full data
+  QUrl coverUrl = value(resultMap_, "thumb");
+  if(!coverUrl.isEmpty()) {
+    entry_->setField(QLatin1String("cover"), coverUrl.toString());
+  }
+
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
@@ -384,16 +390,6 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
 
   entry_->setField(QLatin1String("comments"),  value(resultMap_, "notes"));
-
-
-  /* cover image authentication with personal token does not work yet
-  QUrl coverUrl = value(resultMap_, "thumb");
-  if(!coverUrl.isEmpty()) {
-    // also need authentication
-    coverUrl.addQueryItem(QLatin1String("token"), m_apiKey);
-    entry_->setField(QLatin1String("cover"), coverUrl.toString());
-  }
-  */
 }
 
 Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) const {
