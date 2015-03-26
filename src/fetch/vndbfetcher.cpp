@@ -161,6 +161,17 @@ Tellico::Data::EntryPtr VNDBFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+  // image might still be a URL
+  const QString image_id = entry->field(QLatin1String("cover"));
+  if(image_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(image_id, true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
+  }
+
   return entry;
 }
 

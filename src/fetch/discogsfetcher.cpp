@@ -25,6 +25,7 @@
 #include <config.h>
 #include "discogsfetcher.h"
 #include "../collections/musiccollection.h"
+#include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
@@ -186,6 +187,17 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   }
 #endif
 
+  const QString image_id = entry->field(QLatin1String("cover"));
+  // if it's still a url, we need to load it
+  if(image_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(image_id, true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
+  }
+
   // don't want to include ID field
   entry->setField(QLatin1String("discogs-id"), QString());
 
@@ -314,9 +326,9 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   // thumb images are only returned in search, not in a full request
   // so include them now, even though they're only needed for full data
-  QUrl coverUrl = value(resultMap_, "thumb");
+  const QString coverUrl = value(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
-    entry_->setField(QLatin1String("cover"), coverUrl.toString());
+    entry_->setField(QLatin1String("cover"), coverUrl);
   }
 
   // if we only need cursory data, then we're done

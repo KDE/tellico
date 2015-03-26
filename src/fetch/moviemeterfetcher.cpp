@@ -25,6 +25,7 @@
 #include <config.h>
 #include "moviemeterfetcher.h"
 #include "../collections/videocollection.h"
+#include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../core/filehandler.h"
 #include "../tellico_utils.h"
@@ -160,6 +161,17 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
     populateEntry(entry, parser.parse(data).toMap(), true);
   }
 #endif
+
+  // image might still be URL
+  const QString image_id = entry->field(QLatin1String("cover"));
+  if(image_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(image_id, true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
+  }
 
   // don't want to include ID field
   entry->setField(QLatin1String("moviemeter-id"), QString());
