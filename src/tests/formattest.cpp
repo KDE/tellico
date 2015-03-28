@@ -31,7 +31,7 @@
 
 #include <QTest>
 
-QTEST_APPLESS_MAIN( FormatTest )
+QTEST_GUILESS_MAIN( FormatTest )
 
 void FormatTest::initTestCase() {
   Tellico::Config::setArticlesString(QString("the,l'"));
