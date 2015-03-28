@@ -8,6 +8,7 @@ SET(utils_STAT_SRCS
    isbnvalidator.cpp
    lccnvalidator.cpp
    stringcomparison.cpp
+   string_utils.cpp
    upcvalidator.cpp
    wallet.cpp
    xmlhandler.cpp
@@ -18,6 +19,7 @@ add_library(utils STATIC ${utils_STAT_SRCS})
 TARGET_LINK_LIBRARIES(utils
     Qt5::Core
     Qt5::Xml
+    KF5::CoreAddons # for KRandom
     KF5::Wallet
     KF5::I18n
     KF5::Codecs

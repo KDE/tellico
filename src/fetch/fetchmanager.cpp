@@ -30,7 +30,7 @@
 #include "../entry.h"
 #include "../collection.h"
 #include "../document.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
 #include "fetcherinitializer.h"

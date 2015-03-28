@@ -28,7 +28,7 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../progressmanager.h"
 #include "../gui/guiproxy.h"
 #include "../tellico_debug.h"

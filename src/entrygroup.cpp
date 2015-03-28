@@ -24,9 +24,9 @@
 
 #include "entrygroup.h"
 #include "entry.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 
-#include <klocale.h>
+#include <KLocale>
 
 namespace {
   static const char* emptyString = I18N_NOOP("(Empty)");

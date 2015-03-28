@@ -32,7 +32,7 @@
 #include "../gui/guiproxy.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"

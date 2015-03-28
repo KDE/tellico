@@ -24,7 +24,7 @@
 
 #include "animenfofetcher.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../collections/bookcollection.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"

@@ -30,7 +30,7 @@
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../gui/listwidgetitem.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"

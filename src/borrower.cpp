@@ -24,7 +24,7 @@
 
 #include "borrower.h"
 #include "entry.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 
 using Tellico::Data::Loan;
 using Tellico::Data::Borrower;

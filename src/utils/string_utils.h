@@ -22,31 +22,46 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_UTILS_H
-#define TELLICO_UTILS_H
+#ifndef STRING_UTILS_H
+#define STRING_UTILS_H
 
 #include <Qt>
 
-class KLibrary;
-
+class QByteArray;
 class QString;
-class QStringList;
 
 /**
- * This file contains utility functions.
+ * This file contains utility functions for manipulating strings.
  *
  * @author Robby Stephenson
  */
 namespace Tellico {
   /**
-   * Returns a list of the subdirectories in @param dir
-   * Symbolic links are ignored
+   * Decode HTML entities. Only numeric entities are handled currently.
    */
-  QStringList findAllSubDirs(const QString& dir);
+  QString decodeHTML(const QByteArray& data);
+  QString decodeHTML(const QString& text);
 
-  QString saveLocation(const QString& dir);
+  /**
+   * Return a random, and almost certainly unique UID.
+   *
+   * @param length The UID starts with "Tellico" and adds enough letters to be @p length long.
+   */
+  QString uid(int length=20, bool prefix=true);
+  uint toUInt(const QString& string, bool* ok);
+  /**
+   * Replace all occurrences  of <i18n>text</i18n> with i18n("text")
+   */
+  QString i18nReplace(QString text);
+  QString removeAccents(const QString& value);
 
-  KLibrary* openLibrary(const QString& libName);
+  int stringHash(const QString& str);
+  /** take advantage string collisions to reduce memory
+  */
+  QString shareString(const QString& str);
+
+  QString minutes(int seconds);
+  QString fromHtmlData(const QByteArray& data, const char* codecName = 0);
 }
 
 #endif

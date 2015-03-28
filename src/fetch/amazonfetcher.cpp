@@ -35,7 +35,7 @@
 #include "../entry.h"
 #include "../field.h"
 #include "../fieldformat.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/wallet.h"
 #include "../gui/combobox.h"

@@ -24,7 +24,7 @@
 
 #include "gcstarimporter.h"
 #include "../collections/videocollection.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../images/imagefactory.h"
 #include "../borrower.h"
 #include "../fieldformat.h"

@@ -24,7 +24,7 @@
 
 #include "xslthandler.h"
 #include "../tellico_debug.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 
 #include <kurl.h>
 

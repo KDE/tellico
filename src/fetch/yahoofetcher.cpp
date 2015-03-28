@@ -27,7 +27,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"

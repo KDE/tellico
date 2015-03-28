@@ -24,7 +24,7 @@
 
 #include "ibsfetcher.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"

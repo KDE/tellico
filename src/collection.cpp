@@ -28,7 +28,7 @@
 #include "entrygroup.h"
 #include "derivedvalue.h"
 #include "fieldformat.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
 #include "tellico_debug.h"

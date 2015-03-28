@@ -25,7 +25,7 @@
 #include "fetcherconfigdialog.h"
 #include "fetch/fetchmanager.h"
 #include "gui/combobox.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>
@@ -114,7 +114,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   } else {
     // since the label doesn't have a buddy, we don't want an accel,
     // but also want to reuse string we already have
-    label = new QLabel(removeAcceleratorMarker(i18n("Source &type: ")), widget);
+    label = new QLabel(KLocalizedString::removeAcceleratorMarker(i18n("Source &type: ")), widget);
   }
   gl->addWidget(label, ++row, 0);
   w = i18n("Tellico supports several different data sources.");

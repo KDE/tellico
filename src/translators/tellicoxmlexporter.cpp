@@ -30,7 +30,7 @@
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../document.h"
 #include "../fieldformat.h"
 #include "../translators/bibtexhandler.h" // needed for cleaning text

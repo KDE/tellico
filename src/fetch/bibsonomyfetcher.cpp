@@ -25,7 +25,7 @@
 #include "bibsonomyfetcher.h"
 #include "../translators/bibteximporter.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"

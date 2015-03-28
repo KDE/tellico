@@ -32,7 +32,7 @@
 #include "gui/combobox.h"
 #include "tellico_kernel.h"
 #include "translators/tellico_xml.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "tellico_debug.h"
 
 #include <klocale.h>

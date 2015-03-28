@@ -35,6 +35,7 @@
 #include "fetcherconfigdialog.h"
 #include "tellico_kernel.h"
 #include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "core/tellico_config.h"
 #include "images/imagefactory.h"
 #include "gui/combobox.h"
@@ -455,7 +456,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   int row = -1;
   // so I can reuse an i18n string, a plain label can't have an '&'
-  QString s = Tellico::removeAcceleratorMarker(i18n("Collection &type:"));
+  QString s = KLocalizedString::removeAcceleratorMarker(i18n("Collection &type:"));
   QLabel* lab = new QLabel(s, frame);
   gridLayout->addWidget(lab, ++row, 0);
   const int collType = Kernel::self()->collectionType();
