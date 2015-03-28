@@ -8,6 +8,7 @@ SET(images_STAT_SRCS
 add_library(images STATIC ${images_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(images
+    core
     ${QIMAGEBLITZ_LIBRARIES}
     KF5::KIOCore
     KF5::Codecs

@@ -58,8 +58,8 @@
 #include "fetch/fetchmanager.h"
 #include "cite/actionmanager.h"
 #include "core/tellico_config.h"
-#include "core/drophandler.h"
-#include "core/dbusinterface.h"
+#include "gui/drophandler.h"
+#include "dbusinterface.h"
 #include "models/models.h"
 #include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
@@ -89,7 +89,6 @@
 #include <kedittoolbar.h>
 #include <kshortcutsdialog.h>
 #include <kio/netaccess.h>
-#include <QAction>
 #include <krecentfilesaction.h>
 #include <ktoggleaction.h>
 #include <kactioncollection.h>
@@ -102,7 +101,7 @@
 #include <KAction>
 
 #include <QSplitter>
-//#include <QPainter>
+#include <QAction>
 #include <QSignalMapper>
 #include <QTimer>
 #include <QMetaObject> // needed for copy, cut, paste slots

@@ -30,6 +30,7 @@ SET(tellico_SRCS
    collectionfieldsdialog.cpp
    configdialog.cpp
    controller.cpp
+   dbusinterface.cpp
    detailedlistview.cpp
    derivedvalue.cpp
    document.cpp
@@ -87,6 +88,7 @@ TARGET_LINK_LIBRARIES(tellico
 TARGET_LINK_LIBRARIES(tellico
     Qt5::Core
     Qt5::Widgets
+    Qt5::DBus
     KF5::KIOCore
     KF5::KHtml
     ${QIMAGEBLITZ_LIBRARIES}

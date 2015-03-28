@@ -34,7 +34,7 @@
 #include "tellico_utils.h"
 #include "core/filehandler.h"
 #include "core/tellico_config.h"
-#include "core/drophandler.h"
+#include "gui/drophandler.h"
 #include "newstuff/manager.h"
 #include "document.h"
 #include "../tellico_debug.h"

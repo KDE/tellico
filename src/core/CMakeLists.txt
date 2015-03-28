@@ -1,8 +1,6 @@
 ########### next target ###############
 
 SET(core_STAT_SRCS
-   dbusinterface.cpp
-   drophandler.cpp
    filehandler.cpp
    netaccess.cpp
    tellico_config_addons.cpp
@@ -22,7 +20,6 @@ add_library(core STATIC ${core_STAT_SRCS})
 TARGET_LINK_LIBRARIES(core
     utils
     Qt5::Core
-    Qt5::DBus
     KF5::KDELibs4Support
     )
 

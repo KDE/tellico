@@ -26,7 +26,7 @@
 #include "entry.h"
 #include "utils/string_utils.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace {
   static const char* emptyString = I18N_NOOP("(Empty)");
