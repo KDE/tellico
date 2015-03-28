@@ -31,7 +31,7 @@ add_test(lccntest lccntest)
 ecm_mark_as_test(lccntest)
 TARGET_LINK_LIBRARIES(lccntest utils Qt5::Test)
 
-add_executable(lcctest lcctest.cpp ../field.cpp ../fieldformat.cpp ../tellico_utils.cpp)
+add_executable(lcctest lcctest.cpp ../field.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(lcctest)
 add_test(lcctest lcctest)
 ecm_mark_as_test(lcctest)
