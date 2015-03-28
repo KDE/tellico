@@ -27,7 +27,6 @@
 
 #include <Qt>
 
-class QLibrary;
 class QString;
 class QStringList;
 
@@ -44,8 +43,6 @@ namespace Tellico {
   QStringList findAllSubDirs(const QString& dir);
 
   QString saveLocation(const QString& dir);
-
-  QLibrary* openLibrary(const QString& libName);
 }
 
 #endif

@@ -24,7 +24,6 @@
 
 #include "tellico_utils.h"
 
-#include <QLibrary>
 #include <QStandardPaths>
 #include <QDir>
 
@@ -49,18 +48,6 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
     allSubdirs += absSubdir;
   }
   return allSubdirs;
-}
-
-QLibrary* Tellico::openLibrary(const QString& libName_) {
-  QLibrary* library = new QLibrary(libName_);
-  if(!library->load()) {
-//    myWarning() << "Could not load library'" << libName_ << "'";
-//    myWarning() << "ERROR:" << library->errorString();
-    delete library;
-    return 0;
-  }
-
-  return library;
 }
 
 QString Tellico::saveLocation(const QString& dir_) {
