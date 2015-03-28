@@ -82,11 +82,11 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
   imgUrl.setPath(path() + id_);
   Data::Image* img = FileHandler::readImageFile(imgUrl, id_, true /* quiet */);
   if(!img) {
-    myLog() << "image not found:" << imgUrl;
+    myLog() << "image not found:" << imgUrl.url();
     return 0;
   }
   if(img->isNull()) {
-    myLog() << "image found but null:" << imgUrl;
+    myLog() << "image found but null:" << imgUrl.url();
     delete img;
     return 0;
   }

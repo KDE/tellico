@@ -33,8 +33,7 @@
 #include "../tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-#include <kcolorutils.h>
+#include <KColorUtils>
 
 #ifdef HAVE_QIMAGEBLITZ
 #include <qimageblitz.h>
@@ -608,7 +607,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
   }
   if(!url_.isLocalFile()) {
     myWarning() << "Tellico can only save images to local disk";
-    myWarning() << "unable to save to " << url_;
+    myWarning() << "unable to save to " << url_.url();
   } else {
     QString dir = url_.directory(KUrl::AppendTrailingSlash);
     // could have already been set once

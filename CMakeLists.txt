@@ -62,6 +62,7 @@ find_package(KF5 REQUIRED COMPONENTS
     I18n
     KIO
     WidgetsAddons
+    GuiAddons
     XmlGui
     JobWidgets
     Codecs
