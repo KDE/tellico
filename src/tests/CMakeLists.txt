@@ -7,11 +7,11 @@ SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 # which is generated in the build directory
 INCLUDE_DIRECTORIES( ${Tellico_BINARY_DIR}/src )
 
-add_executable(entitytest entitytest.cpp ../tellico_utils.cpp)
+add_executable(entitytest entitytest.cpp ../utils/string_utils.cpp)
 ecm_mark_nongui_executable(entitytest)
 add_test(entitytest entitytest)
 ecm_mark_as_test(entitytest)
-TARGET_LINK_LIBRARIES(entitytest KF5::KDELibs4Support Qt5::Test )
+TARGET_LINK_LIBRARIES(entitytest KF5::CoreAddons KF5::I18n KF5::Codecs Qt5::Test )
 
 add_executable(cuecattest cuecattest.cpp)
 ecm_mark_nongui_executable(cuecattest)

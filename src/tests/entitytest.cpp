@@ -26,7 +26,7 @@
 
 #include "entitytest.h"
 
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 
 #include <QTest>
 
