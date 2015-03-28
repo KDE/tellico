@@ -24,7 +24,6 @@
 
 #include "tellico_utils.h"
 
-#include <KLocale>
 #include <KGlobal>
 #include <KLibrary>
 #include <KStandardDirs>
