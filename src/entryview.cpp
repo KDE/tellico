@@ -31,7 +31,7 @@
 #include "images/imagefactory.h"
 #include "images/imageinfo.h"
 #include "tellico_kernel.h"
-#include "tellico_utils.h"
+#include "utils/tellico_utils.h"
 #include "core/filehandler.h"
 #include "core/tellico_config.h"
 #include "gui/drophandler.h"

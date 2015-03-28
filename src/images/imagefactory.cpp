@@ -30,7 +30,7 @@
 #include "imagedirectory.h"
 #include "../core/filehandler.h"
 #include "../core/tellico_config.h"
-#include "../tellico_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KColorUtils>

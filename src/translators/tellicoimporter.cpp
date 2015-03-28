@@ -33,7 +33,7 @@
 #include "../utils/isbnvalidator.h"
 #include "../core/tellico_strings.h"
 #include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>

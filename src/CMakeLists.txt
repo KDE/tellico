@@ -62,7 +62,6 @@ SET(tellico_SRCS
    progressmanager.cpp
    reportdialog.cpp
    tellico_kernel.cpp
-   tellico_utils.cpp
    viewstack.cpp
    )
 

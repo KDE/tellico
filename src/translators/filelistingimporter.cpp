@@ -30,7 +30,7 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../tellico_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../gui/guiproxy.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"

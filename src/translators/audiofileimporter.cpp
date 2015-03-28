@@ -31,7 +31,7 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../utils/string_utils.h"
-#include "../tellico_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"

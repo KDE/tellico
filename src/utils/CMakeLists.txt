@@ -9,6 +9,7 @@ SET(utils_STAT_SRCS
    lccnvalidator.cpp
    stringcomparison.cpp
    string_utils.cpp
+   tellico_utils.cpp
    upcvalidator.cpp
    wallet.cpp
    xmlhandler.cpp

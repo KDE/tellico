@@ -24,10 +24,8 @@
 
 #include "tellico_utils.h"
 
-#include <KGlobal>
-#include <KLibrary>
-#include <KStandardDirs>
-
+#include <QLibrary>
+#include <QStandardPaths>
 #include <QDir>
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
@@ -53,11 +51,12 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
   return allSubdirs;
 }
 
-KLibrary* Tellico::openLibrary(const QString& libName_) {
-  KLibrary* library = new KLibrary(libName_);
+QLibrary* Tellico::openLibrary(const QString& libName_) {
+  QLibrary* library = new QLibrary(libName_);
   if(!library->load()) {
 //    myWarning() << "Could not load library'" << libName_ << "'";
 //    myWarning() << "ERROR:" << library->errorString();
+    delete library;
     return 0;
   }
 
@@ -65,5 +64,11 @@ KLibrary* Tellico::openLibrary(const QString& libName_) {
 }
 
 QString Tellico::saveLocation(const QString& dir_) {
-  return KGlobal::dirs()->saveLocation("appdata", dir_, true);
+  QString path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + dir_;
+  QDir dir;
+  bool success = dir.mkpath(path);
+  if(!success) {
+//    myWarning() << "Failed to mkPath:" << path;
+  }
+  return path;
 }

@@ -34,7 +34,7 @@
 #include "controller.h"
 #include "fetcherconfigdialog.h"
 #include "tellico_kernel.h"
-#include "tellico_utils.h"
+#include "utils/tellico_utils.h"
 #include "utils/string_utils.h"
 #include "core/tellico_config.h"
 #include "images/imagefactory.h"

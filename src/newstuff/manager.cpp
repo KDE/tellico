@@ -26,7 +26,7 @@
 #include "newstuffadaptor.h"
 #include "../core/filehandler.h"
 #include "../gui/cursorsaver.h"
-#include "../tellico_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
