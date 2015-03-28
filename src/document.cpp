@@ -237,7 +237,7 @@ bool Document::saveDocument(const KUrl& url_) {
     // if successful, doc is no longer modified
     slotSetModified(false);
   } else {
-    myDebug() << "not successful saving to " << url_;
+    myDebug() << "not successful saving to " << url_.url();
   }
   delete exporter;
   return success;
