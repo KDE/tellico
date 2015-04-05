@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "csvexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
 

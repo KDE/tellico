@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "alexandriaexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"

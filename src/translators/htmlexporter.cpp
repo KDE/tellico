@@ -25,7 +25,6 @@
 #include "htmlexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
 #include "../images/image.h"

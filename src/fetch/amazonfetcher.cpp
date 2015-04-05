@@ -31,7 +31,6 @@
 #include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../entry.h"
 #include "../field.h"
 #include "../fieldformat.h"

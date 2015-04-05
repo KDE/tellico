@@ -26,7 +26,6 @@
 
 #include "bibtexmlexporter.h"
 #include "bibtexhandler.h"
-#include "../document.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "tellico_xml.h"
