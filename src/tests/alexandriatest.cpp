@@ -25,16 +25,16 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "alexandriatest.h"
-#include "qtest_kde.h"
 
 #include "../translators/alexandriaimporter.h"
 #include "../translators/alexandriaexporter.h"
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 
-#include <ktempdir.h>
+#include <QTest>
+#include <QTemporaryDir>
 
-QTEST_KDEMAIN_CORE( AlexandriaTest )
+QTEST_GUILESS_MAIN( AlexandriaTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
@@ -44,7 +44,7 @@ void AlexandriaTest::initTestCase() {
 
 void AlexandriaTest::testImport() {
   Tellico::Import::AlexandriaImporter importer;
-  importer.setLibraryPath(QString::fromLatin1(KDESRCDIR) + "/data/alexandria/");
+  importer.setLibraryPath(QFINDTESTDATA("/data/alexandria/"));
 
   // shut the importer up about current collection
   Tellico::Data::CollPtr tmpColl(new Tellico::Data::BookCollection(true));
@@ -75,14 +75,14 @@ void AlexandriaTest::testImport() {
   QCOMPARE(entry->field("loaned"), QL1(""));
   QVERIFY(!entry->field("comments").isEmpty());
 
-  KTempDir outputDir;
+  QTemporaryDir outputDir;
 
   Tellico::Export::AlexandriaExporter exporter(coll);
   exporter.setEntries(coll->entries());
-  exporter.setURL(outputDir.name());
+  exporter.setURL(outputDir.path());
   QVERIFY(exporter.exec());
 
-  importer.setLibraryPath(outputDir.name() + "/.alexandria/" + coll->title());
+  importer.setLibraryPath(outputDir.path() + "/.alexandria/" + coll->title());
   Tellico::Data::CollPtr coll2 = importer.collection();
 
   QVERIFY(!coll2.isNull());

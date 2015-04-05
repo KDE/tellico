@@ -97,6 +97,17 @@ set(TELLICO_TEST_LIBS
    KF5::KIOCore
    )
 
+set(TELLICO2_TEST_LIBS
+   tellicotest
+   collections
+   utils
+   images
+   Qt5::Test
+   KF5::KIOCore
+   KF5::Archive
+   KF5::KDELibs4Support
+   )
+
 # for some of these, the libraries seem to require being repeated so
 # that the order of linking works...no idea why...
 add_executable(collectiontest collectiontest.cpp)
@@ -117,11 +128,19 @@ add_test(adstest adstest)
 ecm_mark_as_test(adstest)
 TARGET_LINK_LIBRARIES(adstest ${TELLICO_TEST_LIBS})
 
-add_executable(alexandriatest alexandriatest.cpp ../progressmanager.cpp)
+add_executable(alexandriatest alexandriatest.cpp
+  ../translators/alexandriaimporter.cpp
+  ../translators/alexandriaexporter.cpp
+  ../translators/importer.cpp
+  ../translators/exporter.cpp
+  ../gui/cursorsaver.cpp
+  ../gui/guiproxy.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(alexandriatest)
 add_test(alexandriatest alexandriatest)
 ecm_mark_as_test(alexandriatest)
-TARGET_LINK_LIBRARIES(alexandriatest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(alexandriatest ${TELLICO2_TEST_LIBS})
 
 add_executable(amctest amctest.cpp)
 ecm_mark_nongui_executable(amctest)
