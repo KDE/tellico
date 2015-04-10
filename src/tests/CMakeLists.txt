@@ -71,7 +71,7 @@ SET(tellicotest_SRCS
    ../filter.cpp
    ../borrower.cpp
    ../collectionfactory.cpp
-   ../tellico_utils.cpp
+   ../utils/tellico_utils.cpp
    ../derivedvalue.cpp
    ../document.cpp
    ../progressmanager.cpp
@@ -94,6 +94,8 @@ set(TELLICO_TEST_LIBS
    tellicotest
    Qt5::Test
    KF5::KIOCore
+   KF5::Archive
+   KF5::KDELibs4Support
    )
 
 set(TELLICO2_TEST_LIBS
