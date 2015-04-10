@@ -71,9 +71,7 @@ SET(tellicotest_SRCS
    ../filter.cpp
    ../borrower.cpp
    ../collectionfactory.cpp
-   ../tellico_utils.cpp
    ../derivedvalue.cpp
-   ../document.cpp
    ../progressmanager.cpp
    )
 

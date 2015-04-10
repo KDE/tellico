@@ -18,6 +18,7 @@ ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_con
 add_library(core STATIC ${core_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(core
+    images
     utils
     Qt5::Core
     KF5::KDELibs4Support
