@@ -19,6 +19,7 @@ add_library(utils STATIC ${utils_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(utils
     Qt5::Core
+    Qt5::Widgets
     Qt5::Xml
     KF5::CoreAddons # for KRandom
     KF5::Wallet
