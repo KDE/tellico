@@ -55,12 +55,11 @@ add_test(comparisontest comparisontest)
 ecm_mark_as_test(comparisontest)
 TARGET_LINK_LIBRARIES(comparisontest utils core Qt5::Test)
 
-# tellico_utils.cpp still requires KDELibs4Support
-add_executable(imagetest imagetest.cpp ../tellico_utils.cpp ../gui/guiproxy.cpp ../gui/cursorsaver.cpp)
+add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../gui/guiproxy.cpp ../gui/cursorsaver.cpp)
 ecm_mark_nongui_executable(imagetest)
 add_test(imagetest imagetest)
 ecm_mark_as_test(imagetest)
-TARGET_LINK_LIBRARIES(imagetest images KF5::Archive KF5::KDELibs4Support Qt5::Test)
+TARGET_LINK_LIBRARIES(imagetest images KF5::Archive Qt5::Test)
 
 SET(tellicotest_SRCS
    ../collection.cpp
