@@ -142,11 +142,18 @@ add_test(alexandriatest alexandriatest)
 ecm_mark_as_test(alexandriatest)
 TARGET_LINK_LIBRARIES(alexandriatest ${TELLICO2_TEST_LIBS})
 
-add_executable(amctest amctest.cpp)
+add_executable(amctest amctest.cpp
+  ../translators/amcimporter.cpp
+  ../translators/dataimporter.cpp
+  ../translators/importer.cpp
+  ../gui/cursorsaver.cpp
+  ../gui/guiproxy.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(amctest)
 add_test(amctest amctest)
 ecm_mark_as_test(amctest)
-TARGET_LINK_LIBRARIES(amctest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(amctest ${TELLICO2_TEST_LIBS})
 
 add_executable(bibtextest bibtextest.cpp)
 ecm_mark_nongui_executable(bibtextest)
