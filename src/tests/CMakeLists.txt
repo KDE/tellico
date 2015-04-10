@@ -41,7 +41,7 @@ add_executable(formattest formattest.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(formattest)
 add_test(formattest formattest)
 ecm_mark_as_test(formattest)
-TARGET_LINK_LIBRARIES(formattest core Qt5::Test )
+TARGET_LINK_LIBRARIES(formattest core Qt5::Test)
 
 add_executable(fieldtest fieldtest.cpp ../field.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(fieldtest)
