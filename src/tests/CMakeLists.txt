@@ -119,7 +119,7 @@ add_executable(filtertest filtertest.cpp)
 ecm_mark_nongui_executable(filtertest)
 add_test(filtertest filtertest)
 ecm_mark_as_test(filtertest)
-TARGET_LINK_LIBRARIES(filtertest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(filtertest ${TELLICO2_TEST_LIBS})
 
 add_executable(adstest adstest.cpp)
 ecm_mark_nongui_executable(adstest)
