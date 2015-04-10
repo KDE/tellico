@@ -25,16 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "adstest.h"
-#include "qtest_kde.h"
 
 #include "../translators/adsimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
-QTEST_KDEMAIN_CORE( AdsTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( AdsTest )
 
 void AdsTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ads");
+  KUrl url(QFINDTESTDATA("data/test.ads"));
   KUrl::List urls;
   urls << url;
   Tellico::Import::ADSImporter importer(urls);

@@ -119,11 +119,17 @@ add_test(filtertest filtertest)
 ecm_mark_as_test(filtertest)
 TARGET_LINK_LIBRARIES(filtertest ${TELLICO2_TEST_LIBS})
 
-add_executable(adstest adstest.cpp)
+add_executable(adstest adstest.cpp
+  ../translators/adsimporter.cpp
+  ../translators/importer.cpp
+  ../gui/cursorsaver.cpp
+  ../gui/guiproxy.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(adstest)
 add_test(adstest adstest)
 ecm_mark_as_test(adstest)
-TARGET_LINK_LIBRARIES(adstest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(adstest ${TELLICO2_TEST_LIBS})
 
 add_executable(alexandriatest alexandriatest.cpp
   ../translators/alexandriaimporter.cpp
