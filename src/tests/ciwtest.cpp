@@ -25,11 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ciwtest.h"
-#include "qtest.h"
 
 #include "../translators/ciwimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
+
+#include <QTest>
 
 QTEST_APPLESS_MAIN( CiwTest )
 

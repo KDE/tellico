@@ -73,7 +73,7 @@ SET(tellicotest_SRCS
    ../collectionfactory.cpp
    ../derivedvalue.cpp
    ../progressmanager.cpp
-   )
+)
 
 add_library(tellicotest STATIC ${tellicotest_SRCS})
 TARGET_LINK_LIBRARIES(tellicotest Qt5::Core Qt5::Gui KF5::I18n)
@@ -170,11 +170,17 @@ add_test(bibtexmltest bibtexmltest)
 ecm_mark_as_test(bibtexmltest)
 TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 
-add_executable(ciwtest ciwtest.cpp)
+add_executable(ciwtest ciwtest.cpp
+  ../translators/ciwimporter.cpp
+  ../translators/importer.cpp
+  ../translators/bibtexhandler.cpp
+  ../gui/cursorsaver.cpp
+  ../gui/guiproxy.cpp
+)
 ecm_mark_nongui_executable(ciwtest)
 add_test(ciwtest ciwtest)
 ecm_mark_as_test(ciwtest)
-TARGET_LINK_LIBRARIES(ciwtest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(ciwtest ${TELLICO2_TEST_LIBS})
 
 add_executable(csvtest csvtest.cpp)
 ecm_mark_nongui_executable(csvtest)
@@ -206,11 +212,17 @@ add_test(referencertest referencertest)
 ecm_mark_as_test(referencertest)
 TARGET_LINK_LIBRARIES(referencertest ${TELLICO_TEST_LIBS})
 
-add_executable(ristest ristest.cpp)
+add_executable(ristest ristest.cpp
+  ../translators/risimporter.cpp
+  ../translators/importer.cpp
+  ../gui/cursorsaver.cpp
+  ../gui/guiproxy.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(ristest)
 add_test(ristest ristest)
 ecm_mark_as_test(ristest)
-TARGET_LINK_LIBRARIES(ristest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(ristest ${TELLICO2_TEST_LIBS})
 
 add_executable(tellicoreadtest tellicoreadtest.cpp)
 ecm_mark_nongui_executable(tellicoreadtest)
