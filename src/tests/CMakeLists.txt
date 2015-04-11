@@ -122,9 +122,9 @@ TARGET_LINK_LIBRARIES(filtertest ${TELLICO2_TEST_LIBS})
 add_executable(adstest adstest.cpp
   ../translators/adsimporter.cpp
   ../translators/importer.cpp
+  ../translators/bibtexhandler.cpp
   ../gui/cursorsaver.cpp
   ../gui/guiproxy.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(adstest)
 add_test(adstest adstest)
@@ -136,9 +136,9 @@ add_executable(alexandriatest alexandriatest.cpp
   ../translators/alexandriaexporter.cpp
   ../translators/importer.cpp
   ../translators/exporter.cpp
+  ../translators/bibtexhandler.cpp
   ../gui/cursorsaver.cpp
   ../gui/guiproxy.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(alexandriatest)
 add_test(alexandriatest alexandriatest)
@@ -149,9 +149,9 @@ add_executable(amctest amctest.cpp
   ../translators/amcimporter.cpp
   ../translators/dataimporter.cpp
   ../translators/importer.cpp
+  ../translators/bibtexhandler.cpp
   ../gui/cursorsaver.cpp
   ../gui/guiproxy.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(amctest)
 add_test(amctest amctest)
@@ -215,9 +215,9 @@ TARGET_LINK_LIBRARIES(referencertest ${TELLICO_TEST_LIBS})
 add_executable(ristest ristest.cpp
   ../translators/risimporter.cpp
   ../translators/importer.cpp
+  ../translators/bibtexhandler.cpp
   ../gui/cursorsaver.cpp
   ../gui/guiproxy.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(ristest)
 add_test(ristest ristest)
