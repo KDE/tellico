@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "collectiontest.h"
-#include "qtest_kde.h"
 
 #include "../collection.h"
 #include "../field.h"
@@ -39,7 +38,9 @@
 #include <KStandardDirs>
 #include <KProcess>
 
-QTEST_KDEMAIN_CORE( CollectionTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( CollectionTest )
 
 class TestResolver : public Tellico::MergeConflictResolver {
 public:
@@ -366,7 +367,7 @@ void CollectionTest::testDtd() {
   proc.setProgram(QLatin1String("xmllint"),
                   QStringList() << QLatin1String("--noout")
                                 << QLatin1String("--dtdvalid")
-                                << QString::fromLatin1(KDESRCDIR) + QLatin1String("../../tellico.dtd")
+                                << QFINDTESTDATA("../../tellico.dtd")
                                 << QLatin1String("-"));
 
   proc.start();
