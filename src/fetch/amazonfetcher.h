@@ -120,7 +120,6 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void readConfigHook(const KConfigGroup& config);
   virtual void saveConfigHook(KConfigGroup& config);
   void initXSLTHandler();
   void doSearch();
@@ -147,7 +146,6 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
-  mutable bool m_keyFoundInWallet;
 };
 
 class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
