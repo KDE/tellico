@@ -26,7 +26,6 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../controller.h"
-#include "../utils/calendarhandler.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -63,7 +62,7 @@ void RemoveLoans::redo() {
     Controller::self()->modifiedEntries(vec);
   }
   if(!calLoans.isEmpty()) {
-    CalendarHandler::removeLoans(calLoans);
+    myWarning() << "Add to calendar not implemented";
   }
 }
 
@@ -93,7 +92,7 @@ void RemoveLoans::undo() {
     }
   }
   if(!calLoans.isEmpty()) {
-    CalendarHandler::addLoans(calLoans);
+    myWarning() << "Add to calendar not implemented";
   }
 }
 

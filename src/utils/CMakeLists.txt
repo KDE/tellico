@@ -1,7 +1,6 @@
 ########### next target ###############
 
 SET(utils_STAT_SRCS
-   calendarhandler.cpp
    fieldcomparison.cpp
    iso5426converter.cpp
    iso6937converter.cpp

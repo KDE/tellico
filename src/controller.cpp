@@ -39,7 +39,6 @@
 #include "borrower.h"
 #include "filterview.h"
 #include "loanview.h"
-#include "utils/calendarhandler.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
 #include "gui/cursorsaver.h"
