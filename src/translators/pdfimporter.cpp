@@ -33,7 +33,6 @@
 #include "../images/imagefactory.h"
 #include "../gui/guiproxy.h"
 #include "../fetch/fetchmanager.h"
-#include "../fetch/crossreffetcher.h"
 #include "../progressmanager.h"
 #include "../gui/cursorsaver.h"
 #include "../entryupdatejob.h"
