@@ -95,7 +95,7 @@ bool Tellico::checkCommonXSLFile() {
   if(QFile::exists(userCommonFile)) {
     // check timestamps
     // pics/tellico.png is not likely to be in a user directory
-    QString installDir= QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/tellico.png"));
+    QString installDir = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/tellico.png"));
     installDir = QFileInfo(installDir).absolutePath();
     QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
     if(userCommonFile == installCommonFile) {
