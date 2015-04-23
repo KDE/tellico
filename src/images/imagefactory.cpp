@@ -416,7 +416,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       return img2;
     }
   }
-  myDebug() << "***not found:" << id_;
+  myDebug() << "***image not found: id =" << id_;
   return Data::Image::null;
 }
 

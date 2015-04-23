@@ -107,11 +107,23 @@ set(TELLICO2_TEST_LIBS
 
 # for some of these, the libraries seem to require being repeated so
 # that the order of linking works...no idea why...
-add_executable(collectiontest collectiontest.cpp)
+add_executable(collectiontest collectiontest.cpp
+  ../document.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+  ../translators/tellicoimporter.cpp
+  ../translators/tellicoxmlhandler.cpp
+  ../translators/tellico_xml.cpp
+  ../translators/xmlstatehandler.cpp
+  ../translators/dataimporter.cpp
+  ../translators/importer.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(collectiontest)
 add_test(collectiontest collectiontest)
 ecm_mark_as_test(collectiontest)
-TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(collectiontest tellicomodels ${TELLICO2_TEST_LIBS} ${LIBXML2_LIBRARIES})
 
 add_executable(filtertest filtertest.cpp)
 ecm_mark_nongui_executable(filtertest)

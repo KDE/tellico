@@ -40,7 +40,7 @@
 
 #include <QTest>
 
-QTEST_APPLESS_MAIN( CollectionTest )
+QTEST_GUILESS_MAIN( CollectionTest )
 
 class TestResolver : public Tellico::MergeConflictResolver {
 public:
