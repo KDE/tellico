@@ -58,8 +58,6 @@ public:
   void setText(const QString& text);
   void updateField(Data::FieldPtr field);
 
-  static const QPixmap& pixmap(const QString& value);
-
 public slots:
   void update();
 

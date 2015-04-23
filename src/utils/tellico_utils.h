@@ -29,6 +29,7 @@
 
 class QString;
 class QStringList;
+class QPixmap;
 
 /**
  * This file contains utility functions.
@@ -43,6 +44,8 @@ namespace Tellico {
   QStringList findAllSubDirs(const QString& dir);
 
   QString saveLocation(const QString& dir);
+
+  const QPixmap& pixmap(const QString& value);
 }
 
 #endif

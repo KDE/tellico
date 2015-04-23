@@ -26,12 +26,12 @@
 #include "models.h"
 #include "../collection.h"
 #include "../collectionfactory.h"
-#include "../images/imagefactory.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../images/image.h"
 #include "../document.h"
-#include "../gui/ratingwidget.h"
+#include "../images/image.h"
+#include "../images/imagefactory.h"
+#include "../utils/tellico_utils.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
@@ -158,7 +158,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         // assume any non-empty value equals true
         return m_checkPix;
       } else if(field->type() == Data::Field::Rating) {
-        return GUI::RatingWidget::pixmap(value);
+        return Tellico::pixmap(value);
       }
 
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {

@@ -23,9 +23,13 @@
  ***************************************************************************/
 
 #include "tellico_utils.h"
+#include "string_utils.h"
+
+#include <KIconLoader>
 
 #include <QStandardPaths>
 #include <QDir>
+#include <QPixmap>
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
   if(dir_.isEmpty()) {
@@ -58,4 +62,24 @@ QString Tellico::saveLocation(const QString& dir_) {
 //    myWarning() << "Failed to mkPath:" << path;
   }
   return path;
+}
+
+const QPixmap& Tellico::pixmap(const QString& value_) {
+  static QHash<int, QPixmap*> pixmaps;
+  if(pixmaps.isEmpty()) {
+    pixmaps.insert(-1, new QPixmap());
+  }
+  bool ok;
+  int n = Tellico::toUInt(value_, &ok);
+  if(!ok || n < 1 || n > 10) {
+    return *pixmaps[-1];
+  }
+  if(pixmaps[n]) {
+    return *pixmaps[n];
+  }
+
+  QString picName = QString::fromLatin1("stars%1").arg(n);
+  QPixmap* pix = new QPixmap(UserIcon(picName));
+  pixmaps.insert(n, pix);
+  return *pix;
 }

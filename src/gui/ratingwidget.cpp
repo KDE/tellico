@@ -27,7 +27,7 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <kiconloader.h>
+#include <KIconLoader>
 
 #include <QHash>
 #include <QPixmap>
@@ -42,26 +42,6 @@ namespace {
 }
 
 using Tellico::GUI::RatingWidget;
-
-const QPixmap& RatingWidget::pixmap(const QString& value_) {
-  static QHash<int, QPixmap*> pixmaps;
-  if(pixmaps.isEmpty()) {
-    pixmaps.insert(-1, new QPixmap());
-  }
-  bool ok;
-  int n = Tellico::toUInt(value_, &ok);
-  if(!ok || n < 1 || n > 10) {
-    return *pixmaps[-1];
-  }
-  if(pixmaps[n]) {
-    return *pixmaps[n];
-  }
-
-  QString picName = QString::fromLatin1("stars%1").arg(n);
-  QPixmap* pix = new QPixmap(UserIcon(picName));
-  pixmaps.insert(n, pix);
-  return *pix;
-}
 
 RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : KHBox(parent_), m_field(field_), m_currIndex(-1) {
