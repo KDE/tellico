@@ -31,12 +31,12 @@
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
 #include "../tellico_kernel.h"
+#include "../utils/tellico_utils.h"
 #include "../utils/string_utils.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
 #include "../gui/cursorsaver.h"
-#include "../newstuff/manager.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -190,7 +190,7 @@ bool HTMLExporter::loadXSLTFile() {
   delete m_handler;
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);
   if(m_checkCommonFile && !m_handler->isValid()) {
-    NewStuff::Manager::checkCommonFile();
+    Tellico::checkCommonXSLFile();
     m_checkCommonFile = false;
     delete m_handler;
     m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);

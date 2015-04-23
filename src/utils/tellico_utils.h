@@ -46,6 +46,12 @@ namespace Tellico {
   QString saveLocation(const QString& dir);
 
   const QPixmap& pixmap(const QString& value);
+
+  /**
+   * Checks that the tellico-common.xsl file has been properly copied
+   * to the user's directory.
+   */
+  bool checkCommonXSLFile();
 }
 
 #endif

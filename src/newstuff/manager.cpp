@@ -122,7 +122,7 @@ bool Manager::installTemplate(const QString& file_) {
     config.writeEntry(file_, allFiles);
     config.writeEntry(xslFile, file_);
   }
-  checkCommonFile();
+  Tellico::checkCommonXSLFile();
   return success;
 }
 
@@ -418,38 +418,3 @@ QString Manager::findEXE(const KArchiveDirectory* dir_) {
 
   return QString();
 }
-
-bool Manager::checkCommonFile() {
-  // look for a file that gets installed to know the installation directory
-  // need to check timestamps
-  QString userDataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
-  QString userCommonFile = userDataDir + QDir::separator() + QLatin1String("tellico-common.xsl");
-  if(QFile::exists(userCommonFile)) {
-    // check timestamps
-    // pics/tellico.png is not likely to be in a user directory
-    QString installDir= QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/tellico.png"));
-    installDir = QFileInfo(installDir).absolutePath();
-    QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
-#ifndef NDEBUG
-    if(userCommonFile == installCommonFile) {
-      myWarning() << "install location is same as user location";
-    }
-#endif
-    QFileInfo installInfo(installCommonFile);
-    QFileInfo userInfo(userCommonFile);
-    if(installInfo.lastModified() > userInfo.lastModified()) {
-      // the installed file has been modified more recently than the user's
-      // remove user's tellico-common.xsl file so it gets copied again
-      myLog() << "removing" << userCommonFile;
-      myLog() << "copying" << installCommonFile;
-      QFile::remove(userCommonFile);
-    } else {
-      return true;
-    }
-  }
-  QUrl src, dest;
-  src.setPath(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("tellico-common.xsl")));
-  dest.setPath(userCommonFile);
-  return KIO::file_copy(src, dest);
-}
-

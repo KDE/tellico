@@ -47,8 +47,6 @@ public:
   bool removeScriptByName(const QString& name);
   bool removeScript(const QString& file, bool manual = false);
 
-  static bool checkCommonFile();
-
 private:
   friend class ManagerSingleton;
 

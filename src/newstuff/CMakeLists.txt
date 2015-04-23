@@ -10,6 +10,7 @@ qt5_add_dbus_adaptor(newstuff_STAT_SRCS org.kde.tellico.newstuff.xml manager.h T
 add_library(newstuff STATIC ${newstuff_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(newstuff
+    utils
     gui
     Qt5::Core
     Qt5::Gui

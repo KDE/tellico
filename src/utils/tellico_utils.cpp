@@ -26,10 +26,13 @@
 #include "string_utils.h"
 
 #include <KIconLoader>
+#include <KIO/FileCopyJob>
 
 #include <QStandardPaths>
 #include <QDir>
 #include <QPixmap>
+#include <QDateTime>
+#include <QUrl>
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
   if(dir_.isEmpty()) {
@@ -82,4 +85,36 @@ const QPixmap& Tellico::pixmap(const QString& value_) {
   QPixmap* pix = new QPixmap(UserIcon(picName));
   pixmaps.insert(n, pix);
   return *pix;
+}
+
+bool Tellico::checkCommonXSLFile() {
+  // look for a file that gets installed to know the installation directory
+  // need to check timestamps
+  QString userDataDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+  QString userCommonFile = userDataDir + QDir::separator() + QLatin1String("tellico-common.xsl");
+  if(QFile::exists(userCommonFile)) {
+    // check timestamps
+    // pics/tellico.png is not likely to be in a user directory
+    QString installDir= QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/tellico.png"));
+    installDir = QFileInfo(installDir).absolutePath();
+    QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
+    if(userCommonFile == installCommonFile) {
+//      myWarning() << "install location is same as user location";
+    }
+    QFileInfo installInfo(installCommonFile);
+    QFileInfo userInfo(userCommonFile);
+    if(installInfo.lastModified() > userInfo.lastModified()) {
+      // the installed file has been modified more recently than the user's
+      // remove user's tellico-common.xsl file so it gets copied again
+//      myLog() << "removing" << userCommonFile;
+//      myLog() << "copying" << installCommonFile;
+      QFile::remove(userCommonFile);
+    } else {
+      return true;
+    }
+  }
+  QUrl src, dest;
+  src.setPath(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("tellico-common.xsl")));
+  dest.setPath(userCommonFile);
+  return KIO::file_copy(src, dest)->exec();
 }

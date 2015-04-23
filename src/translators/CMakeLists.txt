@@ -53,6 +53,9 @@ add_library(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     tellicomodels
+    core
+    gui
+    images
     ${TELLICO_BTPARSE_LIBS}
     ${TELLICO_CSV_LIBS}
     rtf2html-tellico
