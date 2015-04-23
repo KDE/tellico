@@ -120,7 +120,7 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void saveConfigHook(KConfigGroup& config);
+  virtual void readConfigHook(const KConfigGroup& config);
   void initXSLTHandler();
   void doSearch();
   void parseTitle(Data::EntryPtr entry, int collType);
