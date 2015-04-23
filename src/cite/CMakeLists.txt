@@ -7,6 +7,8 @@ SET(cite_STAT_SRCS
 add_library(cite STATIC ${cite_STAT_SRCS})
 
 target_link_libraries(cite
+    core
+    translators
     Qt5::Core
     Qt5::Widgets
 )

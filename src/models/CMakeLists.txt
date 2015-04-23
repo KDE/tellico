@@ -17,6 +17,10 @@ SET(models_STAT_SRCS
 add_library(tellicomodels STATIC ${models_STAT_SRCS})
 
 target_link_libraries(tellicomodels
+    core
+    utils
+    images
+    gui
     Qt5::Core
     Qt5::Gui
     Qt5::Widgets
