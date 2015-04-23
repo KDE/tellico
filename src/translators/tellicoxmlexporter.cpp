@@ -24,6 +24,7 @@
 
 #include "tellicoxmlexporter.h"
 #include "tellico_xml.h"
+#include "bibtexhandler.h" // needed for cleaning text
 #include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
@@ -33,7 +34,6 @@
 #include "../utils/string_utils.h"
 #include "../document.h"
 #include "../fieldformat.h"
-#include "../translators/bibtexhandler.h" // needed for cleaning text
 #include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
 #include "../models/modeliterator.h"
