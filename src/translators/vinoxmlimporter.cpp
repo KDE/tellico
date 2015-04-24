@@ -25,14 +25,13 @@
 #include "vinoxmlimporter.h"
 #include "../collection.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
-
-#include <KStandardDirs>
 
 using Tellico::Import::VinoXMLImporter;
 
 VinoXMLImporter::VinoXMLImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("vinoxml2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("vinoxml2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);

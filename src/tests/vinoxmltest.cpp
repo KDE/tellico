@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "vinoxmltest.h"
-#include "qtest_kde.h"
 
 #include "../translators/vinoxmlimporter.h"
 #include "../collections/winecollection.h"
@@ -33,20 +32,21 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN_CORE( VinoXMLTest )
+QTEST_GUILESS_MAIN( VinoXMLTest )
 
 void VinoXMLTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/vinoxml2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::WineCollection> registerWine(Tellico::Data::Collection::Wine, "wine");
   Tellico::ImageFactory::init();
 }
 
 void VinoXMLTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-vinoxml.xml");
+  KUrl url(QFINDTESTDATA("data/test-vinoxml.xml"));
   Tellico::Import::VinoXMLImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

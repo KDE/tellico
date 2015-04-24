@@ -252,11 +252,13 @@ add_test(tellicoreadtest tellicoreadtest)
 ecm_mark_as_test(tellicoreadtest)
 TARGET_LINK_LIBRARIES(tellicoreadtest tellicomodels ${TELLICO_TEST_LIBS})
 
-add_executable(vinoxmltest vinoxmltest.cpp)
+add_executable(vinoxmltest vinoxmltest.cpp
+  ../translators/vinoxmlimporter.cpp
+)
 ecm_mark_nongui_executable(vinoxmltest)
 add_test(vinoxmltest vinoxmltest)
 ecm_mark_as_test(vinoxmltest)
-TARGET_LINK_LIBRARIES(vinoxmltest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(vinoxmltest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(entryupdatejobtest entryupdatejobtest.cpp ../entryupdatejob.cpp)
 ecm_mark_nongui_executable(entryupdatejobtest)
