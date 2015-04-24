@@ -80,6 +80,33 @@ TARGET_LINK_LIBRARIES(tellicotest Qt5::Core Qt5::Gui KF5::I18n)
 
 ADD_DEPENDENCIES(tellicotest tellico_config)
 
+SET(translatorstest_SRCS
+  ../translators/tellicoimporter.cpp
+  ../translators/xsltimporter.cpp
+  ../translators/textimporter.cpp
+  ../translators/dataimporter.cpp
+  ../translators/importer.cpp
+  ../translators/tellicoxmlhandler.cpp
+  ../translators/tellico_xml.cpp
+  ../translators/xmlstatehandler.cpp
+  ../translators/xslthandler.cpp
+  ../translators/bibtexhandler.cpp
+)
+
+add_library(translatorstest STATIC ${translatorstest_SRCS})
+TARGET_LINK_LIBRARIES(translatorstest
+  Qt5::Core
+  Qt5::Gui
+  Qt5::Widgets
+  Qt5::Xml
+  KF5::I18n
+  KF5::Codecs
+  KF5::KDELibs4Support # remove when BibtexHandler is clean of KUrl
+  ${LIBXML2_LIBRARIES}
+  ${LIBXSLT_LIBRARIES}
+  ${LIBXSLT_EXSLT_LIBRARIES}
+)
+
 set(TELLICO_TEST_LIBS
    tellicotest
    collections
@@ -112,18 +139,11 @@ add_executable(collectiontest collectiontest.cpp
   ../translators/tellicoxmlexporter.cpp
   ../translators/tellicozipexporter.cpp
   ../translators/exporter.cpp
-  ../translators/tellicoimporter.cpp
-  ../translators/tellicoxmlhandler.cpp
-  ../translators/tellico_xml.cpp
-  ../translators/xmlstatehandler.cpp
-  ../translators/dataimporter.cpp
-  ../translators/importer.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(collectiontest)
 add_test(collectiontest collectiontest)
 ecm_mark_as_test(collectiontest)
-TARGET_LINK_LIBRARIES(collectiontest tellicomodels ${TELLICO2_TEST_LIBS} ${LIBXML2_LIBRARIES})
+TARGET_LINK_LIBRARIES(collectiontest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(filtertest filtertest.cpp)
 ecm_mark_nongui_executable(filtertest)
@@ -134,9 +154,6 @@ TARGET_LINK_LIBRARIES(filtertest ${TELLICO2_TEST_LIBS})
 add_executable(adstest adstest.cpp
   ../translators/adsimporter.cpp
   ../translators/importer.cpp
-  ../translators/bibtexhandler.cpp
-  ../gui/cursorsaver.cpp
-  ../gui/guiproxy.cpp
 )
 ecm_mark_nongui_executable(adstest)
 add_test(adstest adstest)
@@ -148,9 +165,6 @@ add_executable(alexandriatest alexandriatest.cpp
   ../translators/alexandriaexporter.cpp
   ../translators/importer.cpp
   ../translators/exporter.cpp
-  ../translators/bibtexhandler.cpp
-  ../gui/cursorsaver.cpp
-  ../gui/guiproxy.cpp
 )
 ecm_mark_nongui_executable(alexandriatest)
 add_test(alexandriatest alexandriatest)
@@ -161,9 +175,6 @@ add_executable(amctest amctest.cpp
   ../translators/amcimporter.cpp
   ../translators/dataimporter.cpp
   ../translators/importer.cpp
-  ../translators/bibtexhandler.cpp
-  ../gui/cursorsaver.cpp
-  ../gui/guiproxy.cpp
 )
 ecm_mark_nongui_executable(amctest)
 add_test(amctest amctest)
@@ -175,7 +186,6 @@ add_executable(bibtextest bibtextest.cpp
   ../translators/importer.cpp
   ../translators/bibtexexporter.cpp
   ../translators/exporter.cpp
-  ../translators/bibtexhandler.cpp
 )
 ecm_mark_nongui_executable(bibtextest)
 add_test(bibtextest bibtextest)
@@ -191,9 +201,6 @@ TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
 add_executable(ciwtest ciwtest.cpp
   ../translators/ciwimporter.cpp
   ../translators/importer.cpp
-  ../translators/bibtexhandler.cpp
-  ../gui/cursorsaver.cpp
-  ../gui/guiproxy.cpp
 )
 ecm_mark_nongui_executable(ciwtest)
 add_test(ciwtest ciwtest)
@@ -233,9 +240,6 @@ TARGET_LINK_LIBRARIES(referencertest ${TELLICO_TEST_LIBS})
 add_executable(ristest ristest.cpp
   ../translators/risimporter.cpp
   ../translators/importer.cpp
-  ../translators/bibtexhandler.cpp
-  ../gui/cursorsaver.cpp
-  ../gui/guiproxy.cpp
 )
 ecm_mark_nongui_executable(ristest)
 add_test(ristest ristest)
