@@ -25,30 +25,32 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "bibtextest.h"
-#include "qtest_kde.h"
 
-#include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
+#include "../translators/bibteximporter.h"
 #include "../translators/bibtexexporter.h"
 #include "../translators/bibtexhandler.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
 #include <KConfig>
 
-QTEST_KDEMAIN_CORE( BibtexTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( BibtexTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
 void BibtexTest::initTestCase() {
-  // since we use the bibtex importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
+  // since we use the bibtex mapping file
+//  KGlobal::dirs()->addResourceDir("appdata", QFINDTESTDATA("../translators/"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 }
 
 void BibtexTest::testImport() {
-  KSharedConfigPtr config = KSharedConfig::openConfig(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KSharedConfigPtr config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
 
   KUrl::List urls;
-  urls << KUrl(QString::fromLatin1(KDESRCDIR) + "/data/test.bib");
+  urls << KUrl(QFINDTESTDATA("data/test.bib"));
 
   Tellico::Import::BibtexImporter importer(urls);
   // shut the importer up about current collection

@@ -170,11 +170,17 @@ add_test(amctest amctest)
 ecm_mark_as_test(amctest)
 TARGET_LINK_LIBRARIES(amctest ${TELLICO2_TEST_LIBS})
 
-add_executable(bibtextest bibtextest.cpp)
+add_executable(bibtextest bibtextest.cpp
+  ../translators/bibteximporter.cpp
+  ../translators/importer.cpp
+  ../translators/bibtexexporter.cpp
+  ../translators/exporter.cpp
+  ../translators/bibtexhandler.cpp
+)
 ecm_mark_nongui_executable(bibtextest)
 add_test(bibtextest bibtextest)
 ecm_mark_as_test(bibtextest)
-TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
 add_executable(bibtexmltest bibtexmltest.cpp)
 ecm_mark_nongui_executable(bibtexmltest)

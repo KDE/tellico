@@ -26,13 +26,11 @@
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../collection.h"
 #include "../core/filehandler.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
-#include <kurl.h>
-#include <klocale.h>
+#include <KUrl>
 
 #include <QDomDocument>
 
@@ -125,7 +123,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
 }
 
 void BibtexHandler::loadTranslationMaps() {
-  QString mapfile = KStandardDirs::locate("appdata", QLatin1String("bibtex-translation.xml"));
+  QString mapfile = DataFileRegistry::self()->locate(QLatin1String("bibtex-translation.xml"));
   if(mapfile.isEmpty()) {
     static bool showMsg = true;
     if(showMsg) {
