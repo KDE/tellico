@@ -24,6 +24,7 @@ target_link_libraries(tellicomodels
     Qt5::Gui
     Qt5::Widgets
     KF5::ItemModels
+    KF5::KDELib4Support
 )
 
 ADD_DEPENDENCIES(tellicomodels tellico_config)
