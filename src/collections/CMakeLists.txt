@@ -19,4 +19,5 @@ SET(collections_STAT_SRCS
 
 add_library(collections STATIC ${collections_STAT_SRCS})
 
-TARGET_LINK_LIBRARIES(collections Qt5::Core)
+# bibtexcollection depends on translators/bibtexhandler
+TARGET_LINK_LIBRARIES(collections translators Qt5::Core)
