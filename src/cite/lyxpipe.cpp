@@ -24,7 +24,7 @@
 
 #include "lyxpipe.h"
 #include "../collection.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../tellico_kernel.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"

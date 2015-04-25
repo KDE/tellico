@@ -48,7 +48,7 @@
 #include "images/imagefactory.h" // needed so tmp files can get cleaned
 #include "collections/collectioninitializer.h"
 #include "collections/bibtexcollection.h" // needed for bibtex string macro dialog
-#include "translators/bibtexhandler.h" // needed for bibtex options
+#include "utils/bibtexhandler.h" // needed for bibtex options
 #include "fetchdialog.h"
 #include "reportdialog.h"
 #include "bibtexkeydialog.h"

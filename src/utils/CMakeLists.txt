@@ -1,6 +1,7 @@
 ########### next target ###############
 
 SET(utils_STAT_SRCS
+   bibtexhandler.cpp
    datafileregistry.cpp
    fieldcomparison.cpp
    iso5426converter.cpp

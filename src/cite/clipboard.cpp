@@ -24,7 +24,7 @@
 
 #include "clipboard.h"
 #include "../collection.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 
 #include <klocale.h>
 

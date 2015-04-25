@@ -25,9 +25,9 @@
 #include <config.h>
 
 #include "bibtexexporter.h"
-#include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../utils/stringset.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"

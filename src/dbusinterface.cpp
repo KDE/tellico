@@ -28,7 +28,7 @@
 #include "../document.h"
 #include "../collection.h"
 #include "../fieldformat.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../mainwindow.h"
 
 #include <QDBusConnection>

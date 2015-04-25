@@ -8,7 +8,6 @@ SET(translators_STAT_SRCS
    amcimporter.cpp
    audiofileimporter.cpp
    bibtexexporter.cpp
-   bibtexhandler.cpp
    bibteximporter.cpp
    bibtexmlexporter.cpp
    bibtexmlimporter.cpp
@@ -56,6 +55,7 @@ TARGET_LINK_LIBRARIES(translators
     core
     gui
     images
+    utils
     ${TELLICO_BTPARSE_LIBS}
     ${TELLICO_CSV_LIBS}
     rtf2html-tellico

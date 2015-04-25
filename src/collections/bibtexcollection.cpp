@@ -24,7 +24,7 @@
 
 #include "bibtexcollection.h"
 #include "../entrycomparison.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 
