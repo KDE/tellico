@@ -25,18 +25,19 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "bibtexmltest.h"
-#include "qtest_kde.h"
 
 #include "../translators/bibtexmlimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../translators/bibtexmlexporter.h"
 
-QTEST_KDEMAIN_CORE( BibtexmlTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( BibtexmlTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
 void BibtexmlTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.bibtexml");
+  KUrl url(QFINDTESTDATA("data/test.bibtexml"));
 
   Tellico::Import::BibtexmlImporter importer(url);
   // shut the importer up about current collection

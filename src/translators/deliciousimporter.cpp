@@ -25,18 +25,17 @@
 #include "deliciousimporter.h"
 #include "../collection.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include "rtf2html/rtf2html.h"
-
-#include <kstandarddirs.h>
 
 #include <QFile>
 
 using Tellico::Import::DeliciousImporter;
 
 DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("delicious2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("delicious2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);

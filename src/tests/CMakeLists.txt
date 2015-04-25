@@ -90,7 +90,6 @@ SET(translatorstest_SRCS
   ../translators/tellico_xml.cpp
   ../translators/xmlstatehandler.cpp
   ../translators/xslthandler.cpp
-  ../translators/bibtexhandler.cpp
 )
 
 add_library(translatorstest STATIC ${translatorstest_SRCS})
@@ -162,8 +161,8 @@ TARGET_LINK_LIBRARIES(adstest ${TELLICO2_TEST_LIBS})
 
 add_executable(alexandriatest alexandriatest.cpp
   ../translators/alexandriaimporter.cpp
-  ../translators/alexandriaexporter.cpp
   ../translators/importer.cpp
+  ../translators/alexandriaexporter.cpp
   ../translators/exporter.cpp
 )
 ecm_mark_nongui_executable(alexandriatest)
@@ -192,11 +191,16 @@ add_test(bibtextest bibtextest)
 ecm_mark_as_test(bibtextest)
 TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
-add_executable(bibtexmltest bibtexmltest.cpp)
+add_executable(bibtexmltest bibtexmltest.cpp
+  ../translators/bibtexmlimporter.cpp
+  ../translators/xmlimporter.cpp
+  ../translators/bibtexmlexporter.cpp
+  ../translators/exporter.cpp
+)
 ecm_mark_nongui_executable(bibtexmltest)
 add_test(bibtexmltest bibtexmltest)
 ecm_mark_as_test(bibtexmltest)
-TARGET_LINK_LIBRARIES(bibtexmltest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(bibtexmltest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(ciwtest ciwtest.cpp
   ../translators/ciwimporter.cpp
@@ -213,11 +217,14 @@ add_test(csvtest csvtest)
 ecm_mark_as_test(csvtest)
 TARGET_LINK_LIBRARIES(csvtest ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS})
 
-add_executable(delicioustest delicioustest.cpp)
+add_executable(delicioustest delicioustest.cpp
+  ../translators/deliciousimporter.cpp
+  ../translators/xmlimporter.cpp
+)
 ecm_mark_nongui_executable(delicioustest)
 add_test(delicioustest delicioustest)
 ecm_mark_as_test(delicioustest)
-TARGET_LINK_LIBRARIES(delicioustest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(delicioustest rtf2html-tellico translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(gcstartest gcstartest.cpp)
 ecm_mark_nongui_executable(gcstartest)

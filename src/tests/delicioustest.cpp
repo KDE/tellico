@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "delicioustest.h"
-#include "qtest_kde.h"
 
 #include "../translators/deliciousimporter.h"
 #include "../collections/bookcollection.h"
@@ -35,16 +34,17 @@
 #include "../collectionfactory.h"
 #include "../filter.h"
 #include "../fieldformat.h"
+#include "../utils/datafileregistry.h"
 
-#include <kstandarddirs.h>
+#include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
 #define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
 
-QTEST_KDEMAIN_CORE( DeliciousTest )
+QTEST_GUILESS_MAIN( DeliciousTest )
 
 void DeliciousTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/delicious2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
@@ -53,7 +53,7 @@ void DeliciousTest::initTestCase() {
 }
 
 void DeliciousTest::testBooks1() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious1_books.xml");
+  KUrl url(QFINDTESTDATA("data/delicious1_books.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -78,7 +78,7 @@ void DeliciousTest::testBooks1() {
 }
 
 void DeliciousTest::testBooks2() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious2_books.xml");
+  KUrl url(QFINDTESTDATA("data/delicious2_books.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -106,7 +106,7 @@ void DeliciousTest::testBooks2() {
 }
 
 void DeliciousTest::testMovies1() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious1_movies.xml");
+  KUrl url(QFINDTESTDATA("data/delicious1_movies.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -158,7 +158,7 @@ void DeliciousTest::testMovies1() {
 }
 
 void DeliciousTest::testMovies2() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious2_movies.xml");
+  KUrl url(QFINDTESTDATA("data/delicious2_movies.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -191,7 +191,7 @@ void DeliciousTest::testMovies2() {
 }
 
 void DeliciousTest::testMusic1() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious1_music.xml");
+  KUrl url(QFINDTESTDATA("data/delicious1_music.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -215,7 +215,7 @@ void DeliciousTest::testMusic1() {
 }
 
 void DeliciousTest::testMusic2() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious2_music.xml");
+  KUrl url(QFINDTESTDATA("data/delicious2_music.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -237,7 +237,7 @@ void DeliciousTest::testMusic2() {
 }
 
 void DeliciousTest::testGames1() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/delicious1_games.xml");
+  KUrl url(QFINDTESTDATA("data/delicious1_games.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
