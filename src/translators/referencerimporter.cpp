@@ -26,16 +26,15 @@
 #include "../collection.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
-
-#include <kstandarddirs.h>
 
 #include <QPixmap>
 
 using Tellico::Import::ReferencerImporter;
 
 ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("referencer2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("referencer2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);
