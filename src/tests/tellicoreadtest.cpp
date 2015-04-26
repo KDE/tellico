@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "tellicoreadtest.h"
-#include "qtest_kde.h"
 
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
@@ -35,7 +34,9 @@
 #include "../fieldformat.h"
 #include "../entry.h"
 
-QTEST_KDEMAIN_CORE( TellicoReadTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( TellicoReadTest )
 
 #define QL1(x) QString::fromLatin1(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
@@ -47,7 +48,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
-    KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
+    KUrl url(QFINDTESTDATA(QL1("data/books-format%1.bc").arg(i)));
 
     Tellico::Import::TellicoImporter importer(url);
     Tellico::Data::CollPtr coll = importer.collection();
@@ -111,7 +112,7 @@ void TellicoReadTest::testEntries_data() {
 }
 
 void TellicoReadTest::testCoinCollection() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/coins-format9.tc"));
+  KUrl url(QFINDTESTDATA("data/coins-format9.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -132,7 +133,7 @@ void TellicoReadTest::testCoinCollection() {
 }
 
 void TellicoReadTest::testTableData() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/tabletest.tc"));
+  KUrl url(QFINDTESTDATA("/data/tabletest.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -181,7 +182,7 @@ void TellicoReadTest::testTableData() {
 }
 
 void TellicoReadTest::testDuplicateLoans() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_loan.xml"));
+  KUrl url(QFINDTESTDATA("/data/duplicate_loan.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -197,7 +198,7 @@ void TellicoReadTest::testDuplicateLoans() {
 }
 
 void TellicoReadTest::testDuplicateBorrowers() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_borrower.xml"));
+  KUrl url(QFINDTESTDATA("/data/duplicate_borrower.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
