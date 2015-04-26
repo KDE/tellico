@@ -25,23 +25,23 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entryupdatejobtest.h"
-#include "qtest_kde.h"
 
 #include "../entryupdatejob.h"
 #include "../fetch/arxivfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <kstandarddirs.h>
+#include <QTest>
 
-QTEST_KDEMAIN_CORE( EntryUpdateJobTest )
+QTEST_GUILESS_MAIN( EntryUpdateJobTest )
 
 EntryUpdateJobTest::EntryUpdateJobTest() : m_loop(this) {
 }
 
 void EntryUpdateJobTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/archiv2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 }
 

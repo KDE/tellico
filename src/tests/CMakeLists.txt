@@ -284,14 +284,14 @@ add_test(vinoxmltest vinoxmltest)
 ecm_mark_as_test(vinoxmltest)
 TARGET_LINK_LIBRARIES(vinoxmltest translatorstest ${TELLICO2_TEST_LIBS})
 
+# fetcher tests from here down
+IF(BUILD_FETCHER_TESTS)
+
 add_executable(entryupdatejobtest entryupdatejobtest.cpp ../entryupdatejob.cpp)
 ecm_mark_nongui_executable(entryupdatejobtest)
 add_test(entryupdatejobtest entryupdatejobtest)
 ecm_mark_as_test(entryupdatejobtest)
 TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
-
-# fetcher tests from here down
-IF(BUILD_FETCHER_TESTS)
 
 add_executable(allocinefetchertest allocinefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(allocinefetchertest)
