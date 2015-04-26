@@ -25,9 +25,8 @@
 #include "griffithimporter.h"
 #include "xslthandler.h"
 #include "../collections/videocollection.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
-
-#include <kstandarddirs.h>
 
 #include <QDir>
 #include <QFile>
@@ -35,7 +34,7 @@
 using Tellico::Import::GriffithImporter;
 
 GriffithImporter::GriffithImporter(const KUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("griffith2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("griffith2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     KUrl u;
     u.setPath(xsltFile);

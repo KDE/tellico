@@ -232,11 +232,14 @@ add_test(gcstartest gcstartest)
 ecm_mark_as_test(gcstartest)
 TARGET_LINK_LIBRARIES(gcstartest ${TELLICO_TEST_LIBS})
 
-add_executable(griffithtest griffithtest.cpp)
+add_executable(griffithtest griffithtest.cpp
+  ../translators/griffithimporter.cpp
+  ../translators/xmlimporter.cpp
+)
 ecm_mark_nongui_executable(griffithtest)
 add_test(griffithtest griffithtest)
 ecm_mark_as_test(griffithtest)
-TARGET_LINK_LIBRARIES(griffithtest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(griffithtest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(referencertest referencertest.cpp
   ../translators/referencerimporter.cpp
