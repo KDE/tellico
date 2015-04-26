@@ -36,6 +36,7 @@
 #include "core/tellico_config.h"
 #include "gui/drophandler.h"
 #include "document.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <kstandarddirs.h>
@@ -218,12 +219,12 @@ void EntryView::setXSLTFile(const QString& file_) {
     m_xsltFile = file_;
   } else {
     const QString templateDir = QLatin1String("entry-templates/");
-    m_xsltFile = KStandardDirs::locate("appdata", templateDir + file_);
+    m_xsltFile = DataFileRegistry::self()->locate(templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
         myWarning() << "can't locate" << file_;
       }
-      m_xsltFile = KStandardDirs::locate("appdata", templateDir + QLatin1String("Fancy.xsl"));
+      m_xsltFile = DataFileRegistry::self()->locate(templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
         QString str = QLatin1String("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");

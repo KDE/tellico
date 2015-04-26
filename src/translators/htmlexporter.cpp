@@ -33,13 +33,14 @@
 #include "../tellico_kernel.h"
 #include "../utils/tellico_utils.h"
 #include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
 #include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
+#include <KStandardDirs>
 #include <KConfigGroup>
 #include <kglobal.h>
 #include <kio/job.h>
@@ -160,7 +161,7 @@ bool HTMLExporter::exec() {
 }
 
 bool HTMLExporter::loadXSLTFile() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
+  QString xsltfile = DataFileRegistry::self()->locate(m_xsltFile);
   if(xsltfile.isEmpty()) {
     myDebug() << "no xslt file for " << m_xsltFile;
     return false;
@@ -519,8 +520,8 @@ void HTMLExporter::readOptions(KSharedConfigPtr config_) {
 
   // read current entry export template
   m_entryXSLTFile = Config::templateName(collection()->type());
-  m_entryXSLTFile = KStandardDirs::locate("appdata", QLatin1String("entry-templates/")
-                                          + m_entryXSLTFile + QLatin1String(".xsl"));
+  m_entryXSLTFile = DataFileRegistry::self()->locate(QLatin1String("entry-templates/")
+                                                     + m_entryXSLTFile + QLatin1String(".xsl"));
 }
 
 void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
@@ -576,7 +577,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
 
   if(m_xsltFilePath.isEmpty()) {
-    m_xsltFilePath = KStandardDirs::locate("appdata", m_xsltFile);
+    m_xsltFilePath = DataFileRegistry::self()->locate(m_xsltFile);
     if(m_xsltFilePath.isEmpty()) {
       myWarning() << "no xslt file for " << m_xsltFile;
     }

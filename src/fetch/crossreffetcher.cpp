@@ -32,10 +32,10 @@
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
 #include "../utils/wallet.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <klineedit.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
@@ -211,9 +211,9 @@ Tellico::Data::EntryPtr CrossRefFetcher::fetchEntryHook(uint uid_) {
 
 void CrossRefFetcher::initXSLTHandler() {
 #ifdef CROSSREF_USE_UNIXREF
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("unixref2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("unixref2tellico.xsl"));
 #else
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("crossref2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("crossref2tellico.xsl"));
 #endif
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate xslt file.";

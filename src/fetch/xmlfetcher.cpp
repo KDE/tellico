@@ -28,9 +28,9 @@
 #include "../gui/guiproxy.h"
 #include "../utils/xmlhandler.h"
 #include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 
@@ -187,7 +187,7 @@ Tellico::Data::EntryPtr XMLFetcher::fetchEntryHook(uint uid_) {
 
 void XMLFetcher::initXSLTHandler() {
   Q_ASSERT(!m_xsltFilename.isEmpty());
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFilename);
+  QString xsltfile = DataFileRegistry::self()->locate(m_xsltFilename);
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate" << m_xsltFilename;
     return;

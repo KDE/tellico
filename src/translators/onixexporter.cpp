@@ -32,9 +32,9 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../gui/cursorsaver.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <kapplication.h>
 #include <kzip.h>
 #include <KConfigGroup>
@@ -108,7 +108,7 @@ bool ONIXExporter::exec() {
 }
 
 QString ONIXExporter::text() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
+  QString xsltfile = DataFileRegistry::self()->locate(m_xsltFile);
   if(xsltfile.isNull()) {
     myDebug() << "no xslt file for " << m_xsltFile;
     return QString();

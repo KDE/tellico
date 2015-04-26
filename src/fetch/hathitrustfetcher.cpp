@@ -30,12 +30,12 @@
 #include "../utils/lccnvalidator.h"
 #include "../gui/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KStandardDirs>
 #include <KJobWidgets>
 
 #include <QLabel>
@@ -132,7 +132,7 @@ bool HathiTrustFetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -156,7 +156,7 @@ bool HathiTrustFetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;

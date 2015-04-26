@@ -26,9 +26,9 @@
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 #include "filehandler.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KStandardDirs>
 #include <KLineEdit>
 #include <KConfigGroup>
 #include <KGlobal>
@@ -48,7 +48,7 @@ namespace {
 using Tellico::Import::GoodreadsImporter;
 
 GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(0) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("goodreads2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("goodreads2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     m_xsltURL.setPath(xsltFile);
   } else {

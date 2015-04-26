@@ -36,13 +36,13 @@
 #include "../fieldformat.h"
 #include "../utils/string_utils.h"
 #include "../utils/isbnvalidator.h"
+#include "../utils/datafileregistry.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kstandarddirs.h>
 #include <kconfig.h>
 #include <klineedit.h>
 #include <kseparator.h>
@@ -764,7 +764,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
 }
 
 void AmazonFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("amazon2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("amazon2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate amazon2tellico.xsl.";
     return;

@@ -34,6 +34,7 @@
 #include "gui/combobox.h"
 #include "gui/cursorsaver.h"
 #include "core/tellico_config.h"
+#include "utils/datafileregistry.h"
 
 #include <klocale.h>
 #include <khtml_part.h>
@@ -148,7 +149,7 @@ void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
-  QString xsltFile = KStandardDirs::locate("appdata", fileName);
+  QString xsltFile = DataFileRegistry::self()->locate(fileName);
   if(xsltFile.isEmpty()) {
     myWarning() << "can't locate " << m_templateCombo->currentData().toString();
     return;

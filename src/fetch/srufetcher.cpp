@@ -35,12 +35,12 @@
 #include "../utils/string_utils.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/isbnvalidator.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
@@ -380,7 +380,7 @@ bool SRUFetcher::initMARCXMLHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -404,7 +404,7 @@ bool SRUFetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
@@ -428,7 +428,7 @@ bool SRUFetcher::initSRWHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("srw2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("srw2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate srw2tellico.xsl.";
     return false;

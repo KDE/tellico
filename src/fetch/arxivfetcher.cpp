@@ -27,6 +27,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../gui/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
@@ -36,7 +37,6 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
 
 #include <QDomDocument>
@@ -226,7 +226,7 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ArxivFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("arxiv2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("arxiv2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate arxiv2tellico.xsl.";
     return;

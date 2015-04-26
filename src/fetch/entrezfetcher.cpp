@@ -30,10 +30,10 @@
 #include "../core/filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -416,7 +416,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
 }
 
 void EntrezFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("pubmed2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("pubmed2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate pubmed2tellico.xsl.";
     return;

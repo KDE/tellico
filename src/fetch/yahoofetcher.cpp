@@ -31,10 +31,10 @@
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
@@ -254,7 +254,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
 }
 
 void YahooFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("yahoo2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("yahoo2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate yahoo2tellico.xsl.";
     return;

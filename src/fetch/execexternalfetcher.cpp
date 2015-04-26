@@ -39,6 +39,7 @@
 #include "../translators/bibteximporter.h"
 #include "../translators/xsltimporter.h"
 #include "../translators/risimporter.h"
+#include "../utils/datafileregistry.h"
 
 #include <klocale.h>
 #include <kprocess.h>
@@ -46,7 +47,6 @@
 #include <kacceleratormanager.h>
 #include <kshell.h>
 #include <KConfigGroup>
-#include <KStandardDirs>
 
 #include <QLabel>
 #include <QRegExp>
@@ -249,7 +249,7 @@ void ExecExternalFetcher::slotProcessExited() {
     case Import::MODS:
       imp = new Import::XSLTImporter(text);
       {
-        QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+        QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           KUrl u;
           u.setPath(xsltFile);

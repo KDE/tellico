@@ -49,6 +49,7 @@
 #include "collections/collectioninitializer.h"
 #include "collections/bibtexcollection.h" // needed for bibtex string macro dialog
 #include "utils/bibtexhandler.h" // needed for bibtex options
+#include "utils/datafileregistry.h"
 #include "fetchdialog.h"
 #include "reportdialog.h"
 #include "bibtexkeydialog.h"
@@ -82,7 +83,6 @@
 #include <kprogressdialog.h>
 #include <khtmlview.h>
 #include <kglobal.h>
-#include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <ktip.h>
 #include <krecentdocument.h>
@@ -797,7 +797,7 @@ void MainWindow::initFileOpen(bool nofile_) {
     slotEntryCount();
 
     const int type = Kernel::self()->collectionType();
-    QString welcomeFile = KStandardDirs::locate("appdata", QLatin1String("welcome.html"));
+    QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));
     QString text = FileHandler::readTextFile(welcomeFile);
     text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
     text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
@@ -1414,7 +1414,7 @@ void MainWindow::slotHideConfigDialog() {
 }
 
 void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
-  QString tipfile = KStandardDirs::locate("appdata", QLatin1String("tellico.tips"));
+  QString tipfile = DataFileRegistry::self()->locate(QLatin1String("tellico.tips"));
   KTipDialog::showTip(this, tipfile, force_);
 }
 

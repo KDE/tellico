@@ -30,7 +30,6 @@
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
 
 #include <QLabel>

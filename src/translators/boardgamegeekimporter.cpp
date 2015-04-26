@@ -27,9 +27,9 @@
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 #include "filehandler.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KStandardDirs>
 #include <KLineEdit>
 #include <KConfigGroup>
 #include <KApplication>
@@ -52,7 +52,7 @@ namespace {
 using Tellico::Import::BoardGameGeekImporter;
 
 BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled(false), m_widget(0) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("boardgamegeek2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("boardgamegeek2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     m_xsltURL.setPath(xsltFile);
   } else {

@@ -36,9 +36,9 @@
 #include "../progressmanager.h"
 #include "../gui/cursorsaver.h"
 #include "../entryupdatejob.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kapplication.h>
 
@@ -65,7 +65,7 @@ bool PDFImporter::canImport(int type_) const {
 }
 
 Tellico::Data::CollPtr PDFImporter::collection() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("xmp2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("xmp2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate xmp2tellico.xsl";
     return Data::CollPtr();

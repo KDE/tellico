@@ -50,9 +50,9 @@
 #include "translators/ciwimporter.h"
 #include "translators/vinoxmlimporter.h"
 #include "translators/boardgamegeekimporter.h"
+#include "utils/datafileregistry.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kstandardguiitem.h>
 
 #include <QGroupBox>
@@ -198,7 +198,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::XSLTImporter(firstURL);
       {
-        QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+        QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           KUrl u;
           u.setPath(xsltFile);

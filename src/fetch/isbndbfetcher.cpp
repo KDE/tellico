@@ -29,10 +29,10 @@
 #include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -302,7 +302,7 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("isbndb2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate isbndb2tellico.xsl.";
     return;

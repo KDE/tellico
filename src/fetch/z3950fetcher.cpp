@@ -46,6 +46,7 @@
 #include "../gui/combobox.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
@@ -83,7 +84,7 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_)
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
     : Fetcher(parent_), m_conn(0), m_started(false), m_done(true), m_preset(preset_),
       m_MARC21XMLHandler(0), m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
-  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(!serverFile.isEmpty()) {
     KConfig serverConfig(serverFile, KConfig::SimpleConfig);
     const QStringList servers = serverConfig.groupList();
@@ -151,7 +152,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
     m_password = config_.readEntry("Password");
   } else {
     m_preset = preset;
-    QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+    QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
     if(!serverFile.isEmpty()) {
       KConfig serverConfig(serverFile, KConfig::SimpleConfig);
       const QStringList servers = serverConfig.groupList();
@@ -298,7 +299,7 @@ bool Z3950Fetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -322,7 +323,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("UNIMARC2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("UNIMARC2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate UNIMARC2MODS3.xsl.";
     return false;
@@ -346,7 +347,7 @@ bool Z3950Fetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
@@ -780,7 +781,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     KGlobal::locale()->splitLocale(lang, lang2A, dummy, dummy, dummy);
   }
 
-  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {
     myWarning() << "no z3950 servers file found";
     return;

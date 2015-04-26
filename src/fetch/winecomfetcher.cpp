@@ -30,10 +30,10 @@
 #include "../collection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <klocale.h>
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -248,7 +248,7 @@ Tellico::Data::EntryPtr WineComFetcher::fetchEntryHook(uint uid_) {
 }
 
 void WineComFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("winecom2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("winecom2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate winecom2tellico.xsl.";
     return;
