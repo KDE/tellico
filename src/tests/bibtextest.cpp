@@ -29,7 +29,7 @@
 #include "../collections/bibtexcollection.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/bibtexexporter.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../utils/datafileregistry.h"
 
 #include <KConfig>
