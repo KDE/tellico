@@ -226,11 +226,18 @@ add_test(delicioustest delicioustest)
 ecm_mark_as_test(delicioustest)
 TARGET_LINK_LIBRARIES(delicioustest rtf2html-tellico translatorstest ${TELLICO2_TEST_LIBS})
 
-add_executable(gcstartest gcstartest.cpp)
+add_executable(gcstartest gcstartest.cpp
+  ../translators/gcstarimporter.cpp
+  ../translators/gcstarexporter.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+  ../document.cpp
+)
 ecm_mark_nongui_executable(gcstartest)
 add_test(gcstartest gcstartest)
 ecm_mark_as_test(gcstartest)
-TARGET_LINK_LIBRARIES(gcstartest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(gcstartest tellicomodels translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(griffithtest griffithtest.cpp
   ../translators/griffithimporter.cpp

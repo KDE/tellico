@@ -25,14 +25,12 @@
 #include "gcstarimporter.h"
 #include "../collections/videocollection.h"
 #include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../images/imagefactory.h"
 #include "../borrower.h"
 #include "../fieldformat.h"
 #include "xslthandler.h"
 #include "tellicoimporter.h"
-
-#include <kapplication.h>
-#include <kstandarddirs.h>
 
 #include <QTextCodec>
 #include <QTextStream>
@@ -239,7 +237,6 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, j);
-      kapp->processEvents();
     }
   }
 
@@ -256,7 +253,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 }
 
 void GCstarImporter::readGCstar(const QString& text_) {
-  QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("gcstar2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("gcstar2tellico.xsl"));
   XSLTHandler handler(xsltFile);
   if(!handler.isValid()) {
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));

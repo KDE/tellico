@@ -25,31 +25,31 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "gcstartest.h"
-#include "qtest_kde.h"
 
 #include "../translators/gcstarimporter.h"
 #include "../translators/gcstarexporter.h"
 #include "../collections/collectioninitializer.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../fieldformat.h"
 
-#include <kstandarddirs.h>
+#include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
 #define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
 
-QTEST_KDEMAIN_CORE( GCstarTest )
+QTEST_GUILESS_MAIN( GCstarTest )
 
 void GCstarTest::initTestCase() {
   Tellico::ImageFactory::init();
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/gcstar2tellico.xsl"));
   // need to register the collection types
   Tellico::CollectionInitializer ci;
 }
 
 void GCstarTest::testBook() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
+  KUrl url(QFINDTESTDATA("data/test-book.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -101,7 +101,7 @@ void GCstarTest::testBook() {
 }
 
 void GCstarTest::testComicBook() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-comicbook.gcs");
+  KUrl url(QFINDTESTDATA("data/test-comicbook.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -159,7 +159,7 @@ void GCstarTest::testComicBook() {
 }
 
 void GCstarTest::testVideo() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-video.gcs");
+  KUrl url(QFINDTESTDATA("data/test-video.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -228,7 +228,7 @@ void GCstarTest::testVideo() {
 }
 
 void GCstarTest::testMusic() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-music.gcs");
+  KUrl url(QFINDTESTDATA("data/test-music.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -279,7 +279,7 @@ void GCstarTest::testMusic() {
 }
 
 void GCstarTest::testVideoGame() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-videogame.gcs");
+  KUrl url(QFINDTESTDATA("data/test-videogame.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -324,7 +324,7 @@ void GCstarTest::testVideoGame() {
 }
 
 void GCstarTest::testBoardGame() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-boardgame.gcs");
+  KUrl url(QFINDTESTDATA("data/test-boardgame.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -370,7 +370,7 @@ void GCstarTest::testBoardGame() {
 }
 
 void GCstarTest::testWine() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-wine.gcs");
+  KUrl url(QFINDTESTDATA("data/test-wine.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -423,7 +423,7 @@ void GCstarTest::testWine() {
 }
 
 void GCstarTest::testCoin() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-coin.gcs");
+  KUrl url(QFINDTESTDATA("data/test-coin.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -469,7 +469,7 @@ void GCstarTest::testCoin() {
 }
 
 void GCstarTest::testCustomFields() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test-book.gcs");
+  KUrl url(QFINDTESTDATA("data/test-book.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

@@ -30,9 +30,9 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../progressmanager.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <klocale.h>
 #include <kapplication.h>
 #include <KGlobal>
@@ -40,6 +40,7 @@
 #include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
+#include <QStandardPaths>
 
 using Tellico::Export::GCstarExporter;
 
@@ -66,7 +67,7 @@ bool GCstarExporter::exec() {
 
   bool success = true;
   if(options() & ExportImages) {
-    const QString imgDir = KGlobal::dirs()->localxdgdatadir() + QLatin1String("gcstar/images/");
+    const QString imgDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("gcstar/images/");
     ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
     item.setTotalSteps(entries().count());
     ProgressItem::Done done(this);
@@ -104,7 +105,7 @@ bool GCstarExporter::exec() {
 }
 
 QString GCstarExporter::text() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
+  QString xsltfile = DataFileRegistry::self()->locate(m_xsltFile);
   if(xsltfile.isNull()) {
     myDebug() << "no xslt file for " << m_xsltFile;
     return QString();
@@ -145,7 +146,7 @@ QString GCstarExporter::text() {
   }
 
   if(options() & ExportImages) {
-    m_handler->addStringParam("imageDir", KGlobal::dirs()->localxdgdatadir().toLocal8Bit() + "gcstar/images/");
+    m_handler->addStringParam("imageDir", QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).toLocal8Bit() + "gcstar/images/");
   }
 
   // now grab the XML
