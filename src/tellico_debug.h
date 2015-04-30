@@ -29,7 +29,7 @@
 // which is copyright Max Howell <max.howell@methylblue.com>
 // amarok is licensed under the GPL
 
-#include <kdebug.h>
+#include <QDebug>
 // std::clock_t
 #include <ctime>
 
@@ -69,12 +69,12 @@
   #define FUNC_PREFIX "[" DEBUG_PREFIX "] "
 #endif
 
-#define myDebug()   kDebug()
-#define myWarning() kWarning()
+#define myDebug()   qDebug()
+#define myWarning() qWarning()
 #ifdef TELLICO_LOG
-#define myLog()     kDebug()
+#define myLog()     qDebug()
 #else
-#define myLog()     kDebugDevNull()
+#define myLog()     //qDebug()
 #endif
 
 namespace Debug {
@@ -83,13 +83,13 @@ class Block {
 
 public:
   Block(const char* label) : m_start(std::clock()), m_label(label) {
-    KDebug(QtDebugMsg)() << "BEGIN:" << label;
+    QDebug(QtDebugMsg) << "BEGIN:" << label;
   }
 
   ~Block() {
     std::clock_t finish = std::clock();
     const double duration = (double) (finish - m_start) / CLOCKS_PER_SEC;
-    KDebug(QtDebugMsg)() << "  END:" << m_label << "- duration =" << duration;
+    QDebug(QtDebugMsg) << "  END:" << m_label << "- duration =" << duration;
   }
 
 private :
@@ -100,7 +100,7 @@ private :
 }
 
 /// Standard function announcer
-#define DEBUG_FUNC myDebug() << k_funcinfo;
+#define DEBUG_FUNC myDebug() << Q_FUNC_INFO;
 
 /// Announce a line
 #define DEBUG_LINE myDebug() << k_lineinfo;

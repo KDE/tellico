@@ -27,7 +27,6 @@
 #include "../core/filehandler.h"
 
 #include <klocale.h>
-#include <kdebug.h>
 #include <klineedit.h>
 #include <kconfig.h>
 #include <KConfigGroup>
