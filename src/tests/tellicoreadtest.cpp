@@ -61,7 +61,7 @@ void TellicoReadTest::testBookCollection() {
   // skip the first one
   for(int i = 1; i < m_collections.count(); ++i) {
     Tellico::Data::CollPtr coll2 = m_collections[i];
-    QVERIFY(!coll2.isNull());
+    QVERIFY(coll2);
     QCOMPARE(coll1->type(), coll2->type());
     QCOMPARE(coll1->title(), coll2->title());
     QCOMPARE(coll1->entryCount(), coll2->entryCount());
@@ -89,8 +89,8 @@ void TellicoReadTest::testEntries() {
       // don't test id values since the initial value has changed from 0 to 1
       Tellico::Data::EntryPtr entry1 = m_collections[0]->entries().at(j);
       Tellico::Data::EntryPtr entry2 = m_collections[i]->entries().at(j);
-      QVERIFY(!entry1.isNull());
-      QVERIFY(!entry2.isNull());
+      QVERIFY(entry1);
+      QVERIFY(entry2);
       QCOMPARE(entry1->field(fieldName), entry2->field(fieldName));
     }
   }
@@ -117,12 +117,12 @@ void TellicoReadTest::testCoinCollection() {
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
 
   Tellico::Data::FieldPtr field = coll->fieldByName("title");
   // old field has Dependent value, now is Line
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
   QCOMPARE(field->title(), QL1("Title"));
   QVERIFY(field->hasFlag(Tellico::Data::Field::Derived));
@@ -138,7 +138,7 @@ void TellicoReadTest::testTableData() {
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Export::TellicoXMLExporter exporter(coll);
@@ -146,7 +146,7 @@ void TellicoReadTest::testTableData() {
   Tellico::Import::TellicoImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 
@@ -187,12 +187,12 @@ void TellicoReadTest::testDuplicateLoans() {
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
 
   QCOMPARE(coll->borrowers().count(), 1);
 
   Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
-  QVERIFY(!bor.isNull());
+  QVERIFY(bor);
 
   QCOMPARE(bor->loans().count(), 1);
 }
@@ -203,12 +203,12 @@ void TellicoReadTest::testDuplicateBorrowers() {
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
 
   QCOMPARE(coll->borrowers().count(), 1);
 
   Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
-  QVERIFY(!bor.isNull());
+  QVERIFY(bor);
 
   QCOMPARE(bor->loans().count(), 2);
 }

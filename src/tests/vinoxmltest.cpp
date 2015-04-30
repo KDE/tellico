@@ -50,12 +50,12 @@ void VinoXMLTest::testImport() {
   Tellico::Import::VinoXMLImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Wine);
   QCOMPARE(coll->entryCount(), 1);
 
   Tellico::Data::EntryPtr entry = coll->entries().first();
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("2002 Goldwater Estate Merlot"));
   QCOMPARE(entry->field("producer"), QLatin1String("Goldwater Estate"));
   QCOMPARE(entry->field("vintage"), QLatin1String("2002"));

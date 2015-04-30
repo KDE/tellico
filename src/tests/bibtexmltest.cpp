@@ -46,7 +46,7 @@ void BibtexmlTest::testImport() {
 
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
 
@@ -63,7 +63,7 @@ void BibtexmlTest::testImport() {
   Tellico::Data::CollPtr coll2 = importer2.collection();
   Tellico::Data::BibtexCollection* bColl2 = static_cast<Tellico::Data::BibtexCollection*>(coll2.data());
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 

@@ -67,7 +67,7 @@ void CollectionTest::initTestCase() {
 
 void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
-  QVERIFY(nullColl.isNull());
+  QVERIFY(!nullColl);
 
   Tellico::Data::Collection coll(false, QLatin1String("Title"));
 

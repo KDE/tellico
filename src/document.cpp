@@ -262,7 +262,7 @@ void Document::deleteContents() {
   if(m_coll) {
     m_coll->clear();
   }
-  m_coll = 0; // old collection gets deleted as a KSharedPtr
+  m_coll = 0; // old collection gets deleted as refcount goes to 0
   m_cancelImageWriting = true;
 }
 

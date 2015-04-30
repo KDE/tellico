@@ -41,13 +41,13 @@ void CiwTest::testImport() {
   Tellico::Import::CIWImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 6);
   QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(3);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("title"), QLatin1String("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
                                                 "Bioreactor Batch Cultures of an Engineered Saccharomyces cerevisiae Strain"));
@@ -61,7 +61,7 @@ void CiwTest::testImport() {
   QVERIFY(!entry->field("abstract").isEmpty());
 
   entry = coll->entryById(6);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("title"), QLatin1String("Prematurity: An Overview and Public Health Implications"));
   QCOMPARE(entry->field("booktitle"), QLatin1String("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));

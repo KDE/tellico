@@ -52,7 +52,7 @@ void AlexandriaTest::testImport() {
 
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
@@ -85,7 +85,7 @@ void AlexandriaTest::testImport() {
   importer.setLibraryPath(outputDir.path() + "/.alexandria/" + coll->title());
   Tellico::Data::CollPtr coll2 = importer.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->title(), coll->title());
   QCOMPARE(coll2->entryCount(), coll->entryCount());

@@ -54,12 +54,12 @@ void GriffithTest::testMovies() {
   importer.setOptions(importer.options() & ~Tellico::Import::ImportShowImageErrors);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 5);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Serendipity"));
   QCOMPARE(entry->field("origtitle"), QLatin1String("Serendipity"));
   QCOMPARE(entry->field("director"), QLatin1String("Peter Chelsom"));

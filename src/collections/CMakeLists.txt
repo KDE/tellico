@@ -20,5 +20,4 @@ SET(collections_STAT_SRCS
 add_library(collections STATIC ${collections_STAT_SRCS})
 
 # bibtexcollection depends on utils/bibtexhandler
-# they all depend on ksharedptr in KDELibs4Support for the moment
-TARGET_LINK_LIBRARIES(collections utils Qt5::Core KF5::KDELibs4Support)
+TARGET_LINK_LIBRARIES(collections utils Qt5::Core)

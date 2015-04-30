@@ -57,12 +57,12 @@ void DeliciousTest::testBooks1() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 5);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Lost in Translation"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("1998"));
   QCOMPARE(entry->field("author"), QLatin1String("Nicole Mones; Robby Stephenson"));
@@ -82,12 +82,12 @@ void DeliciousTest::testBooks2() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 7);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("The Restaurant at the End of the Universe"));
   QCOMPARE(entry->field("isbn"), QLatin1String("0517545357"));
   QCOMPARE(entry->field("cdate"), QLatin1String("2007-12-19"));
@@ -110,13 +110,13 @@ void DeliciousTest::testMovies1() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 4);
 
   // first a movie
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Driving Miss Daisy"));
   QCOMPARE(entry->field("year"), QLatin1String("1990"));
   QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
@@ -139,7 +139,7 @@ void DeliciousTest::testMovies1() {
 
   // check the TV show, too
   entry = coll->entryById(4);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("South Park - The Complete Sixth Season"));
   QCOMPARE(entry->field("year"), QLatin1String("1997"));
   QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
@@ -162,12 +162,12 @@ void DeliciousTest::testMovies2() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 4);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("2001 - A Space Odyssey"));
   QCOMPARE(entry->field("certification"), QLatin1String("G (USA)"));
   QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
@@ -186,7 +186,7 @@ void DeliciousTest::testMovies2() {
   QCOMPARE(entry->field("mdate"), QLatin1String("2009-06-11"));
 
   entry = coll->entryById(4);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("region"), QLatin1String("Region 1"));
 }
 
@@ -195,13 +195,13 @@ void DeliciousTest::testMusic1() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 3);
 
   // first a movie
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Are You Listening?"));
   QCOMPARE(entry->field("artist"), QLatin1String("Dolores O'Riordan"));
   QCOMPARE(entry->field("year"), QLatin1String("2007"));
@@ -219,12 +219,12 @@ void DeliciousTest::testMusic2() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("The Ultimate Sin"));
   QCOMPARE(entry->field("artist"), QLatin1String("Ozzy Osbourne"));
   QCOMPARE(entry->field("year"), QLatin1String("1987"));
@@ -241,13 +241,13 @@ void DeliciousTest::testGames1() {
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Game);
   QCOMPARE(coll->entryCount(), 2);
 
   // first a movie
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Spider-Man 2: The Movie 2"));
   QCOMPARE(entry->field("certification"), QLatin1String("Teen"));
   QCOMPARE(entry->field("platform"), QLatin1String("GameCube"));

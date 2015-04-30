@@ -1651,9 +1651,9 @@ void MainWindow::slotUpdateFilter(FilterPtr filter_) {
 
 void MainWindow::setFilter(const QString& text_) {
   QString text = text_.trimmed();
-  FilterPtr filter(0);
+  FilterPtr filter;
   if(!text.isEmpty()) {
-    filter.attach(new Filter(Filter::MatchAll));
+    filter = new Filter(Filter::MatchAll);
     QString fieldName; // empty field name means match on any field
     // if the text contains '=' assume it's a field name or title
     if(text.indexOf(QLatin1Char('=')) > -1) {
@@ -1693,7 +1693,7 @@ void MainWindow::setFilter(const QString& text_) {
     }
   }
   // only update filter if one exists or did exist
-  if(!filter.isNull() || m_detailedView->filter()) {
+  if(filter || m_detailedView->filter()) {
     Controller::self()->slotUpdateFilter(filter);
   }
 }

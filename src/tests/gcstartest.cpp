@@ -53,14 +53,14 @@ void GCstarTest::testBook() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("The Reason for God"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2008"));
   QCOMPARE(FIELDS(entry, "author").count(), 2);
@@ -83,7 +83,7 @@ void GCstarTest::testBook() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -105,14 +105,14 @@ void GCstarTest::testComicBook() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::ComicBook);
   QCOMPARE(coll->entryCount(), 1);
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("GCstar Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("title"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2010"));
   QCOMPARE(entry->field("series"), QLatin1String("series"));
@@ -141,7 +141,7 @@ void GCstarTest::testComicBook() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -163,12 +163,12 @@ void GCstarTest::testVideo() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
   QCOMPARE(FIELDS(entry, "director").count(), 1);
@@ -191,7 +191,7 @@ void GCstarTest::testVideo() {
   QVERIFY(!entry->field("comments").isEmpty());
 
   entry = coll->entryById(4);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.count(), 11);
   QCOMPARE(castList.at(0), QLatin1String("Famke Janssen::Marnie Watson"));
@@ -202,7 +202,7 @@ void GCstarTest::testVideo() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -232,12 +232,12 @@ void GCstarTest::testMusic() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 1);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Lifesong"));
   QCOMPARE(entry->field("year"), QLatin1String("2005"));
   QCOMPARE(FIELDS(entry, "artist").count(), 1);
@@ -261,7 +261,7 @@ void GCstarTest::testMusic() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -283,12 +283,12 @@ void GCstarTest::testVideoGame() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Game);
   QCOMPARE(coll->entryCount(), 2);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Halo 3"));
   QCOMPARE(entry->field("year"), QLatin1String("2007"));
   QCOMPARE(entry->field("platform"), QLatin1String("Xbox 360"));
@@ -306,7 +306,7 @@ void GCstarTest::testVideoGame() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -328,12 +328,12 @@ void GCstarTest::testBoardGame() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::BoardGame);
   QCOMPARE(coll->entryCount(), 2);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Risk"));
   QCOMPARE(entry->field("year"), QLatin1String("1959"));
   QCOMPARE(FIELDS(entry, "designer").count(), 2);
@@ -352,7 +352,7 @@ void GCstarTest::testBoardGame() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -374,12 +374,12 @@ void GCstarTest::testWine() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Wine);
   QCOMPARE(coll->entryCount(), 1);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("vintage"), QLatin1String("1990"));
   QCOMPARE(entry->field("producer"), QLatin1String("producer"));
   QCOMPARE(entry->field("type"), QLatin1String("Red Wine"));
@@ -405,7 +405,7 @@ void GCstarTest::testWine() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -427,12 +427,12 @@ void GCstarTest::testCoin() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
   QCOMPARE(coll->entryCount(), 1);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("denomination"), QLatin1String("0.05"));
   QCOMPARE(entry->field("year"), QLatin1String("1974"));
   QCOMPARE(entry->field("currency"), QLatin1String("USD"));
@@ -451,7 +451,7 @@ void GCstarTest::testCoin() {
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
   QCOMPARE(coll2->title(), coll->title());
@@ -473,7 +473,7 @@ void GCstarTest::testCustomFields() {
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
@@ -481,14 +481,14 @@ void GCstarTest::testCustomFields() {
 
   // test custom fields
   Tellico::Data::FieldPtr field = coll->fieldByName(QLatin1String("gcsfield1"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->name(), QLatin1String("gcsfield1"));
   QCOMPARE(field->title(), QLatin1String("New boolean"));
   QCOMPARE(field->category(), QLatin1String("User fields"));
   QCOMPARE(field->type(), Tellico::Data::Field::Bool);
 
   field = coll->fieldByName(QLatin1String("gcsfield2"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New choice"));
   QCOMPARE(field->type(), Tellico::Data::Field::Choice);
   QCOMPARE(field->allowed(), QStringList() << QLatin1String("yes")
@@ -496,52 +496,52 @@ void GCstarTest::testCustomFields() {
                                            << QLatin1String("maybe"));
 
   field = coll->fieldByName(QLatin1String("gcsfield3"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New rating"));
   QCOMPARE(field->type(), Tellico::Data::Field::Rating);
   QCOMPARE(field->property(QLatin1String("minimum")), QLatin1String("1"));
   QCOMPARE(field->property(QLatin1String("maximum")), QLatin1String("5"));
 
   field = coll->fieldByName(QLatin1String("gcsfield4"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New field"));
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
 
   field = coll->fieldByName(QLatin1String("gcsfield5"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New image"));
   QCOMPARE(field->type(), Tellico::Data::Field::Image);
 
   field = coll->fieldByName(QLatin1String("gcsfield6"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New long field"));
   QCOMPARE(field->type(), Tellico::Data::Field::Para);
 
   field = coll->fieldByName(QLatin1String("gcsfield7"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New date"));
   QCOMPARE(field->type(), Tellico::Data::Field::Date);
 
   field = coll->fieldByName(QLatin1String("gcsfield8"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("New number"));
   QCOMPARE(field->type(), Tellico::Data::Field::Number);
   QCOMPARE(field->defaultValue(), QLatin1String("2"));
 
   field = coll->fieldByName(QLatin1String("gcsfield9"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("dependency"));
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
   QCOMPARE(field->property(QLatin1String("template")), QLatin1String("%{gcsfield1},%{gcsfield2}"));
 
   field = coll->fieldByName(QLatin1String("gcsfield10"));
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->title(), QLatin1String("list"));
   QCOMPARE(field->type(), Tellico::Data::Field::Table);
   QCOMPARE(field->property(QLatin1String("columns")), QLatin1String("1"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("gcsfield1"), QLatin1String("true"));
   QCOMPARE(entry->field("gcsfield2"), QLatin1String("maybe"));
   QCOMPARE(entry->field("gcsfield3"), QLatin1String("3"));
@@ -557,7 +557,7 @@ void GCstarTest::testCustomFields() {
 
   Tellico::Import::GCstarImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
 
   foreach(Tellico::Data::FieldPtr f1, coll->fields()) {
     Tellico::Data::FieldPtr f2 = coll2->fieldByName(f1->name());

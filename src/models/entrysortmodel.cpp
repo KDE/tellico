@@ -64,13 +64,13 @@ bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   }
   Data::EntryPtr leftEntry = left_.data(EntryPtrRole).value<Data::EntryPtr>();
   Data::EntryPtr rightEntry = right_.data(EntryPtrRole).value<Data::EntryPtr>();
-  if(leftEntry.isNull()) {
-    if(!rightEntry.isNull()) {
+  if(!leftEntry) {
+    if(rightEntry) {
       return true;
     } else {
       return false;
     }
-  } else if(!leftEntry.isNull() && rightEntry.isNull()) {
+  } else if(leftEntry && !rightEntry) {
     return false;
   }
 

@@ -39,7 +39,7 @@ void AmcTest::testImport() {
   Tellico::Import::AMCImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->entryCount(), 2);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);

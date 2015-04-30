@@ -31,15 +31,14 @@
 #include <QHash>
 #include <QPair>
 #include <QMetaType>
-
-#include <ksharedptr.h>
+#include <QExplicitlySharedDataPointer>
 
 namespace Tellico {
   typedef QMap<QString, QString> StringMap;
   typedef QHash<QString, QString> StringHash;
 
   class Filter;
-  typedef KSharedPtr<Filter> FilterPtr;
+  typedef QExplicitlySharedDataPointer<Filter> FilterPtr;
   typedef QList<FilterPtr> FilterList;
 
   namespace Data {
@@ -47,15 +46,15 @@ namespace Tellico {
     typedef int ID;
 
     class Collection;
-    typedef KSharedPtr<Collection> CollPtr;
+    typedef QExplicitlySharedDataPointer<Collection> CollPtr;
     typedef QList<CollPtr> CollList;
 
     class Field;
-    typedef KSharedPtr<Field> FieldPtr;
+    typedef QExplicitlySharedDataPointer<Field> FieldPtr;
     typedef QList<FieldPtr> FieldList;
 
     class Entry;
-    typedef KSharedPtr<Entry> EntryPtr;
+    typedef QExplicitlySharedDataPointer<Entry> EntryPtr;
     typedef QList<EntryPtr> EntryList;
 
     // complicated, I know
@@ -66,7 +65,7 @@ namespace Tellico {
     typedef QPair<Data::EntryList, PairVector> MergePair;
 
     class Borrower;
-    typedef KSharedPtr<Borrower> BorrowerPtr;
+    typedef QExplicitlySharedDataPointer<Borrower> BorrowerPtr;
     typedef QList<BorrowerPtr> BorrowerList;
   }
 }

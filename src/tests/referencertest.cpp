@@ -49,14 +49,14 @@ void ReferencerTest::testImport() {
   Tellico::Import::ReferencerImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
