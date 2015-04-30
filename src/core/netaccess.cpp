@@ -33,7 +33,6 @@
 #include <kio/jobuidelegate.h>
 #include <ktemporaryfile.h>
 #include <klocale.h>
-#include <kdeversion.h>
 #include <kurl.h>
 
 #include <QEventLoop>
@@ -100,14 +99,8 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
 QPixmap NetAccess::filePreview(const KUrl& url, int size) {
   NetAccess netaccess;
 
-#if KDE_IS_VERSION(4,7,0)
   KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url, true);
   KIO::Job* previewJob = KIO::filePreview(KFileItemList() << fileItem, QSize(size, size));
-#else
-  KUrl::List list;
-  list.append(url);
-  KIO::Job* previewJob = KIO::filePreview(list, size, size);
-#endif
   connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
           &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
@@ -118,13 +111,7 @@ QPixmap NetAccess::filePreview(const KUrl& url, int size) {
 QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   NetAccess netaccess;
 
-#if KDE_IS_VERSION(4,7,0)
   KIO::Job* previewJob = KIO::filePreview(KFileItemList() << item, QSize(size, size));
-#else
-  KFileItemList list;
-  list.append(item);
-  KIO::Job* previewJob = KIO::filePreview(list, size, size);
-#endif
   connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
           &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
