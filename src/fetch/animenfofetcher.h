@@ -30,7 +30,7 @@
 
 #include <QPointer>
 
-class KUrl;
+class QUrl;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -81,12 +81,12 @@ private slots:
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  Data::EntryPtr parseEntry(const QString& str, const KUrl& url);
+  Data::EntryPtr parseEntry(const QString& str, const QUrl& url);
 
   QByteArray m_data;
   int m_total;
   QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, KUrl> m_matches;
+  QHash<int, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

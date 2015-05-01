@@ -35,8 +35,8 @@
 QTEST_APPLESS_MAIN( AdsTest )
 
 void AdsTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test.ads"));
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ads"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::ADSImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();

@@ -198,7 +198,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
       // if not, then there was no <image> in the XML
       // so it's a url, but maybe link only
       if(!ImageFactory::hasImageInfo(value)) {
-        KUrl u(value);
+        QUrl u = QUrl::fromUserInput(value);
         // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
           QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);

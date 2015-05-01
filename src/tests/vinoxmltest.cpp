@@ -46,7 +46,7 @@ void VinoXMLTest::initTestCase() {
 }
 
 void VinoXMLTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test-vinoxml.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-vinoxml.xml"));
   Tellico::Import::VinoXMLImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

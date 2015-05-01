@@ -31,7 +31,7 @@
 
 #include <QPointer>
 
-class KUrl;
+class QUrl;
 class KLineEdit;
 class KJob;
 namespace KIO {
@@ -89,7 +89,7 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
-  KUrl searchURL(FetchKey key, const QString& value) const;
+  QUrl searchURL(FetchKey key, const QString& value) const;
   void readWallet() const;
 
   XSLTHandler* m_xsltHandler;

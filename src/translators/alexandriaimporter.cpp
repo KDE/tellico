@@ -168,10 +168,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         entry->setField(isbn, alexValue);
 
         // now find cover image
-        KUrl u;
         alexValue.remove(QLatin1Char('-'));
         for(QStringList::Iterator ext = covers.begin(); ext != covers.end(); ++ext) {
-          u.setPath(dataDir.absoluteFilePath(alexValue + *ext));
+          QUrl u = QUrl::fromLocalFile(dataDir.absoluteFilePath(alexValue + *ext));
           if(!QFile::exists(u.path())) {
             continue;
           }

@@ -35,6 +35,7 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
@@ -44,7 +45,6 @@
 
 #ifdef HAVE_QJSON
 #include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -90,15 +90,15 @@ void FilmasterFetcher::search() {
   m_started = true;
 
 #ifdef HAVE_QJSON
-  KUrl u(FILMASTER_QUERY_URL);
+  QUrl u(QString::fromLatin1(FILMASTER_QUERY_URL));
 
   switch(request().key) {
     case Title:
-      u.addPath(QLatin1String("film/"));
+      u.setPath(u.path() + QLatin1String("film/"));
       break;
 
     case Person:
-      u.addPath(QLatin1String("person/"));
+      u.setPath(u.path() + QLatin1String("person/"));
       break;
 
     default:
@@ -137,8 +137,8 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
 
   const QString image = entry->field(QLatin1String("cover"));
   if(image.contains(QLatin1Char('/'))) {
-    KUrl imageUrl(FILMASTER_API_URL);
-    imageUrl.addPath(image);
+    QUrl imageUrl(QString::fromLatin1(FILMASTER_API_URL));
+    imageUrl.setPath(imageUrl.path() + image);
     const QString id = ImageFactory::addImage(imageUrl, true);
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);
@@ -208,7 +208,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
           uris << value(personMap, "films_directed_uri");
         }
         foreach(const QString& uri, uris) {
-          KUrl u(FILMASTER_API_URL);
+          QUrl u(QString::fromLatin1(FILMASTER_API_URL));
           u.setPath(uri);
           // myDebug() << u;
           QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
@@ -276,7 +276,7 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
   const QString castUri = value(result_, "characters_uri");
   if(!castUri.isEmpty()) {
     QJson::Parser parser;
-    KUrl u(FILMASTER_API_URL);
+    QUrl u(QString::fromLatin1(FILMASTER_API_URL));
     u.setPath(castUri);
     QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
     const QVariantList castList = parser.parse(output.toUtf8()).toMap().value(QLatin1String("objects")).toList();

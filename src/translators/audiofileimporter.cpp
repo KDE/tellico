@@ -58,7 +58,7 @@
 
 using Tellico::Import::AudioFileImporter;
 
-AudioFileImporter::AudioFileImporter(const KUrl& url_) : Tellico::Import::Importer(url_)
+AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
     , m_widget(0)
     , m_cancelled(false) {
 }
@@ -358,7 +358,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       if(!entry) {
         continue;
       }
-      KUrl u;
+      QUrl u;
       u.setPath(fi.absoluteFilePath());
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {

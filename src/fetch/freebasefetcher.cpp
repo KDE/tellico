@@ -39,6 +39,7 @@
 #include <kio/jobuidelegate.h>
 #include <KLineEdit>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
@@ -49,14 +50,13 @@
 #ifdef HAVE_QJSON
 #include <qjson/serializer.h>
 #include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
-  static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread";
-  static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image";
-  static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic";
-  static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
+  static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread/";
+  static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image/";
+  static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic/";
+  static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view/";
   static const char* FREEBASE_API_KEY   = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 }
@@ -179,7 +179,7 @@ void FreebaseFetcher::doSearch() {
     const QByteArray query_string = serializer.serialize(QVariantList() << query);
 //    myDebug() << "query:" << query_string;
 
-    KUrl url(FREEBASE_QUERY_URL);
+    QUrl url(QString::fromLatin1(FREEBASE_QUERY_URL));
     url.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
     if(cursor.type() == QVariant::String) {
       url.addQueryItem(QLatin1String("cursor"), cursor.toString());
@@ -237,8 +237,8 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
   // if it's still a freebase id, then it starts with a slash
   if(image_id.startsWith(QLatin1Char('/'))) {
     // let's set max image size to 200x200
-    KUrl imageUrl(FREEBASE_IMAGE_URL);
-    imageUrl.addPath(image_id);
+    QUrl imageUrl(QString::fromLatin1(FREEBASE_IMAGE_URL));
+    imageUrl.setPath(imageUrl.path() + image_id);
     imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
     imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
 //    myDebug() << "image url:" << imageUrl;
@@ -269,8 +269,8 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     const QString article_id = entry->field(article_field);
     // if it's still a freebase id, then it starts with a slash
     if(article_id.startsWith(QLatin1Char('/'))) {
-      KUrl articleUrl(FREEBASE_BLURB_URL);
-      articleUrl.addPath(article_id);
+      QUrl articleUrl(QString::fromLatin1(FREEBASE_BLURB_URL));
+      articleUrl.setPath(articleUrl.path() + article_id);
       articleUrl.addQueryItem(QLatin1String("limit"), QLatin1String("1"));
       articleUrl.addQueryItem(QLatin1String("filter"), QLatin1String("/common/document/text"));
       articleUrl.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));

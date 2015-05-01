@@ -36,7 +36,7 @@ extern "C" {
 #include <libxslt/xsltInternals.h>
 }
 
-class KUrl;
+class QUrl;
 class QDomDocument;
 
 namespace Tellico {
@@ -69,7 +69,7 @@ public:
   /**
    * @param xsltURL The XSLT URL
    */
-  XSLTHandler(const KUrl& xsltURL);
+  XSLTHandler(const QUrl& xsltURL);
   /**
    * @param xsltDoc The XSLT DOM document
    * @param xsltFile The XSLT file, should be a url?

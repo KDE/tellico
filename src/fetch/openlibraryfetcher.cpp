@@ -103,7 +103,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
 #ifndef HAVE_QJSON
   doCoverOnly(term_);
 #else
-  KUrl u(OPENLIBRARY_QUERY_URL);
+  QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
 
   // books are type/edition
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/edition"));
@@ -214,7 +214,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
   if(entry->field(QLatin1String("cover")).isEmpty()) {
     const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
     if(!isbn.isEmpty()) {
-      KUrl imageUrl = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn);
+      QUrl imageUrl = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);
@@ -335,7 +335,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
       const QString key = value(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
-        KUrl authorUrl(OPENLIBRARY_QUERY_URL);
+        QUrl authorUrl(OPENLIBRARY_QUERY_URL);
         authorUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
         authorUrl.addQueryItem(QLatin1String("key"), key);
         authorUrl.addQueryItem(QLatin1String("name"), QString());
@@ -357,7 +357,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
       const QString key = value(langMap.toMap(), "key");
       if(!key.isEmpty()) {
-        KUrl langUrl(OPENLIBRARY_QUERY_URL);
+        QUrl langUrl(OPENLIBRARY_QUERY_URL);
         langUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
         langUrl.addQueryItem(QLatin1String("key"), key);
         langUrl.addQueryItem(QLatin1String("name"), QString());
@@ -389,7 +389,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
 #ifdef HAVE_QJSON
-  KUrl u(OPENLIBRARY_QUERY_URL);
+  QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
 
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
   u.addQueryItem(QLatin1String("name"), term_);

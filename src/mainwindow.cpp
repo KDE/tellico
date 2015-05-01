@@ -301,7 +301,7 @@ void MainWindow::initActions() {
    *************************************************/
   action = KStandardAction::open(this, SLOT(slotFileOpen()), actionCollection());
   action->setToolTip(i18n("Open an existing document"));
-  m_fileOpenRecent = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const KUrl&)), actionCollection());
+  m_fileOpenRecent = KStandardAction::openRecent(this, SLOT(slotFileOpenRecent(const QUrl&)), actionCollection());
   m_fileOpenRecent->setToolTip(i18n("Open a recently used file"));
   m_fileSave = KStandardAction::save(this, SLOT(slotFileSave()), actionCollection());
   m_fileSave->setToolTip(i18n("Save the document"));
@@ -740,8 +740,8 @@ void MainWindow::initView() {
                                        "for each entry.</qt>"));
 
   m_entryView = new EntryView(m_rightSplit);
-  connect(m_entryView, SIGNAL(signalAction(const KUrl&)),
-          SLOT(slotURLAction(const KUrl&)));
+  connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
+          SLOT(slotURLAction(const QUrl&)));
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 
@@ -780,7 +780,7 @@ void MainWindow::initFileOpen(bool nofile_) {
   bool happyStart = false;
   if(!nofile_ && Config::reopenLastFile()) {
     // Config::lastOpenFile() is the full URL, protocol included
-    KUrl lastFile(Config::lastOpenFile()); // empty string is actually ok, it gets handled
+    QUrl lastFile(Config::lastOpenFile()); // empty string is actually ok, it gets handled
     if(!lastFile.isEmpty() && lastFile.isValid()) {
       slotFileOpen(lastFile);
       happyStart = true;
@@ -875,9 +875,9 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   if(coll_->type() != Data::Collection::Base) {
     entryGroup = group.readEntry("Group By", defaultGroup);
   } else {
-    KUrl url = Kernel::self()->URL();
+    QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = group.readEntry(QString::fromLatin1("URL_%1").arg(i));
+      QUrl u = group.readEntry(QString::fromLatin1("URL_%1").arg(i));
       if(url == u) {
         entryGroup = group.readEntry(QString::fromLatin1("Group By_%1").arg(i), defaultGroup);
         break;
@@ -928,11 +928,11 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 
   if(coll_->type() == Data::Collection::Base) {
     // all of this is to have custom settings on a per file basis
-    KUrl url = Kernel::self()->URL();
-    QList<KUrl> urls = QList<KUrl>() << url;
+    QUrl url = Kernel::self()->URL();
+    QList<QUrl> urls = QList<QUrl>() << url;
     QStringList groupBys = QStringList() << groupName;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
+      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
       QString g = config.readEntry(QString::fromLatin1("Group By_%1").arg(i), QString());
       if(!u.isEmpty() && url != u) {
         urls.append(u);
@@ -1078,7 +1078,7 @@ void MainWindow::slotFileOpen() {
     filter += QLatin1String("\n");
     filter += i18n("*|All Files");
     // keyword 'open'
-    KUrl url = KFileDialog::getOpenUrl(KUrl(QLatin1String("kfiledialog:///open")), filter,
+    QUrl url = KFileDialog::getOpenUrl(QUrl(QLatin1String("kfiledialog:///open")), filter,
                                        this, i18n("Open File"));
     if(!url.isEmpty() && url.isValid()) {
       slotFileOpen(url);
@@ -1087,7 +1087,7 @@ void MainWindow::slotFileOpen() {
   StatusBar::self()->clearStatus();
 }
 
-void MainWindow::slotFileOpen(const KUrl& url_) {
+void MainWindow::slotFileOpen(const QUrl& url_) {
   slotStatusMsg(i18n("Opening file..."));
 
   // close the fields dialog
@@ -1105,7 +1105,7 @@ void MainWindow::slotFileOpen(const KUrl& url_) {
   StatusBar::self()->clearStatus();
 }
 
-void MainWindow::slotFileOpenRecent(const KUrl& url_) {
+void MainWindow::slotFileOpenRecent(const QUrl& url_) {
   slotStatusMsg(i18n("Opening file..."));
 
   // close the fields dialog
@@ -1125,13 +1125,13 @@ void MainWindow::slotFileOpenRecent(const KUrl& url_) {
 }
 
 void MainWindow::openFile(const QString& file_) {
-  KUrl url(file_);
+  QUrl url(file_);
   if(!url.isEmpty() && url.isValid()) {
     slotFileOpen(url);
   }
 }
 
-bool MainWindow::openURL(const KUrl& url_) {
+bool MainWindow::openURL(const QUrl& url_) {
   MARK;
   // try to open document
   GUI::CursorSaver cs(Qt::WaitCursor);
@@ -1244,7 +1244,7 @@ bool MainWindow::fileSaveAs() {
   filter += i18n("*|All Files");
 
   // keyword 'open'
-  KUrl url = KFileDialog::getSaveUrl(KUrl(QLatin1String("kfiledialog:///open")), filter, this, i18n("Save As"));
+  QUrl url = KFileDialog::getSaveUrl(QUrl(QLatin1String("kfiledialog:///open")), filter, this, i18n("Save As"));
 
   if(url.isEmpty()) {
     StatusBar::self()->clearStatus();
@@ -1722,10 +1722,10 @@ void MainWindow::slotFileImport(int format_) {
 
   Import::Format format = static_cast<Import::Format>(format_);
   bool checkURL = true;
-  KUrl url;
+  QUrl url;
   switch(ImportDialog::importTarget(format)) {
     case Import::File:
-      url = KFileDialog::getOpenUrl(KUrl(ImportDialog::startDir(format)), ImportDialog::fileFilter(format),
+      url = KFileDialog::getOpenUrl(QUrl(ImportDialog::startDir(format)), ImportDialog::fileFilter(format),
                                     this, i18n("Import File"));
       break;
 
@@ -1748,7 +1748,7 @@ void MainWindow::slotFileImport(int format_) {
       return;
     }
   }
-  importFile(format, url);
+  importFile(format, QList<QUrl>() << url);
   StatusBar::self()->clearStatus();
 }
 
@@ -1774,7 +1774,7 @@ void MainWindow::slotFileExport(int format_) {
 
     case Export::File:
     {
-      KUrl url = KFileDialog::getSaveUrl(KUrl(QLatin1String("kfiledialog:///export")),
+      QUrl url = KFileDialog::getSaveUrl(QUrl(QLatin1String("kfiledialog:///export")),
                                          dlg.fileFilter(), this, i18n("Export As"));
       if(url.isEmpty()) {
         StatusBar::self()->clearStatus();
@@ -1913,7 +1913,7 @@ void MainWindow::slotHideFetchDialog() {
   }
 }
 
-bool MainWindow::importFile(Tellico::Import::Format format_, const KUrl& url_, Tellico::Import::Action action_) {
+bool MainWindow::importFile(Tellico::Import::Format format_, const QUrl& url_, Tellico::Import::Action action_) {
   // try to open document
   GUI::CursorSaver cs(Qt::WaitCursor);
 
@@ -1953,7 +1953,7 @@ bool MainWindow::importFile(Tellico::Import::Format format_, const KUrl& url_, T
   return !failed; // return true means success
 }
 
-bool MainWindow::exportCollection(Tellico::Export::Format format_, const KUrl& url_) {
+bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& url_) {
   if(!url_.isValid()) {
     myDebug() << "invalid URL:" << url_;
     return false;
@@ -2041,7 +2041,7 @@ void MainWindow::updateCaption(bool modified_) {
     if(!caption.isEmpty()) {
        caption += QLatin1String(" - ");
     }
-    KUrl u = Data::Document::self()->URL();
+    QUrl u = Data::Document::self()->URL();
     if(u.isLocalFile()) {
       // for new files, the filename is set to Untitled in Data::Document
       if(u.fileName() == i18n(Tellico::untitledFilename)) {
@@ -2050,7 +2050,7 @@ void MainWindow::updateCaption(bool modified_) {
         caption += u.path();
       }
     } else {
-      caption += u.prettyUrl();
+      caption += u.toDisplayString();
     }
   }
   setCaption(caption, modified_);
@@ -2142,20 +2142,20 @@ void MainWindow::updateEntrySources() {
   plugActionList(QLatin1String("update_entry_actions"), m_fetchActions);
 }
 
-void MainWindow::importFile(Tellico::Import::Format format_, const KUrl::List& urls_) {
-  KUrl::List urls = urls_;
+void MainWindow::importFile(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
+  QList<QUrl> urls = urls_;
   // update as DropHandler and Importer classes are updated
   if(urls_.count() > 1 &&
      format_ != Import::Bibtex &&
      format_ != Import::RIS &&
      format_ != Import::CIW &&
      format_ != Import::PDF) {
-    KUrl u = urls_.front();
-    QString url = u.isLocalFile() ? u.path() : u.prettyUrl();
+    QUrl u = urls_.front();
+    QString url = u.isLocalFile() ? u.path() : u.toDisplayString();
     Kernel::self()->sorry(i18n("Tellico can only import one file of this type at a time. "
                                "Only %1 will be imported.", url));
     urls.clear();
-    urls = u;
+    urls += u;
   }
 
   ImportDialog dlg(format_, urls, this);
@@ -2232,8 +2232,8 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
   return !failed;
 }
 
-void MainWindow::slotURLAction(const KUrl& url_) {
-  Q_ASSERT(url_.protocol() == QLatin1String("tc"));
+void MainWindow::slotURLAction(const QUrl& url_) {
+  Q_ASSERT(url_.scheme() == QLatin1String("tc"));
   QString actionName = url_.fileName();
   QAction* action = this->action(actionName.toLatin1());
   if(action) {

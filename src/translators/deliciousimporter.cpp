@@ -34,11 +34,10 @@
 
 using Tellico::Import::DeliciousImporter;
 
-DeliciousImporter::DeliciousImporter(const KUrl& url_) : XSLTImporter(url_) {
+DeliciousImporter::DeliciousImporter(const QUrl& url_) : XSLTImporter(url_) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("delicious2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    KUrl u;
-    u.setPath(xsltFile);
+    QUrl u = QUrl::fromLocalFile(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
     myWarning() << "unable to find delicious2tellico.xml!";
@@ -58,8 +57,8 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
     return Data::CollPtr();
   }
 
-  KUrl libraryDir = url();
-  libraryDir.setPath(url().directory() + QLatin1String("Images/"));
+  QUrl libraryDir = url();
+  libraryDir.setPath(url().adjusted(QUrl::StripTrailingSlash|QUrl::RemoveFilename).path() + QLatin1String("Images/"));
   const QStringList imageDirs = QStringList()
                              << QLatin1String("Large Covers/")
                              << QLatin1String("Medium Covers/")

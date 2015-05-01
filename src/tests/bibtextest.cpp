@@ -49,8 +49,8 @@ void BibtexTest::initTestCase() {
 void BibtexTest::testImport() {
   KSharedConfigPtr config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
 
-  KUrl::List urls;
-  urls << KUrl(QFINDTESTDATA("data/test.bib"));
+  QList<QUrl> urls;
+  urls << QUrl::fromLocalFile(QFINDTESTDATA("data/test.bib"));
 
   Tellico::Import::BibtexImporter importer(urls);
   // shut the importer up about current collection

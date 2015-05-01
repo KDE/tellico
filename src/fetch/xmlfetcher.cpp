@@ -64,7 +64,7 @@ void XMLFetcher::continueSearch() {
 }
 
 void XMLFetcher::doSearch() {
-  const KUrl u = searchUrl();
+  const QUrl u = searchUrl();
   Q_ASSERT(!u.isEmpty());
   if(u.isEmpty()) {
     stop();
@@ -193,8 +193,7 @@ void XMLFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);

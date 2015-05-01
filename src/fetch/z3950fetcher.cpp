@@ -305,8 +305,7 @@ bool Z3950Fetcher::initMARC21Handler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MARC21XMLHandler = new XSLTHandler(u);
   if(!m_MARC21XMLHandler->isValid()) {
@@ -329,8 +328,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_UNIMARCXMLHandler = new XSLTHandler(u);
   if(!m_UNIMARCXMLHandler->isValid()) {
@@ -353,8 +351,7 @@ bool Z3950Fetcher::initMODSHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {

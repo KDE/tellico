@@ -33,8 +33,8 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <kmimetype.h>
-#include <KUrl>
 
+#include <QUrl>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QUuid>
@@ -157,10 +157,10 @@ void Fetcher::infoList(const QString& message_, const QStringList& list_) const 
 }
 
 QString Fetcher::favIcon(const char* url_) {
-  return favIcon(KUrl(url_));
+  return favIcon(QUrl(QString::fromLatin1(url_)));
 }
 
-QString Fetcher::favIcon(const KUrl& url_) {
+QString Fetcher::favIcon(const QUrl& url_) {
   QDBusInterface kded(QLatin1String("org.kde.kded"),
                       QLatin1String("/modules/favicons"),
                       QLatin1String("org.kde.FavIcon"));

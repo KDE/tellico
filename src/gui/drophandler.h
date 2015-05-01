@@ -25,8 +25,6 @@
 #ifndef TELLICO_DROPHANDLER_H
 #define TELLICO_DROPHANDLER_H
 
-#include <KUrl>
-
 #include <QObject>
 #include <QEvent>
 #include <QDropEvent>
@@ -47,7 +45,7 @@ protected:
 private:
   bool dragEnter(QDragEnterEvent* event);
   bool drop(QDropEvent* event);
-  bool handleURL(const KUrl::List& urls);
+  bool handleURL(const QList<QUrl>& urls);
   bool handleText(const QString& text);
 };
 

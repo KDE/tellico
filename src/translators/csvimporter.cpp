@@ -57,7 +57,7 @@
 
 using Tellico::Import::CSVImporter;
 
-CSVImporter::CSVImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_),
+CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
     m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QLatin1String(",")),

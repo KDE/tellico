@@ -48,7 +48,7 @@ void GriffithTest::initTestCase() {
 }
 
 void GriffithTest::testMovies() {
-  KUrl url(QFINDTESTDATA("data/griffith.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/griffith.xml"));
   Tellico::Import::GriffithImporter importer(url);
   // can't import images for local test
   importer.setOptions(importer.options() & ~Tellico::Import::ImportShowImageErrors);

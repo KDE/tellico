@@ -31,7 +31,6 @@
 #include "../utils/xmlhandler.h"
 #include "../tellico_debug.h"
 
-#include <kurl.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
@@ -44,6 +43,7 @@
 #include <kicon.h>
 #include <kiconloader.h>
 
+#include <QUrl>
 #include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
@@ -51,7 +51,7 @@
 
 using Tellico::FileHandler;
 
-FileHandler::FileRef::FileRef(const KUrl& url_, bool quiet_) : m_device(0), m_isValid(false) {
+FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(0), m_isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
@@ -90,8 +90,7 @@ bool FileHandler::FileRef::open(bool quiet_) {
   }
   if(!m_device || !m_device->open(QIODevice::ReadOnly)) {
     if(!quiet_) {
-      KUrl u;
-      u.setPath(fileName());
+      QUrl u = QUrl::fromLocalFile(fileName());
       GUI::Proxy::sorry(i18n(errorLoad, u.fileName()));
     }
     delete m_device;
@@ -102,11 +101,11 @@ bool FileHandler::FileRef::open(bool quiet_) {
   return true;
 }
 
-FileHandler::FileRef* FileHandler::fileRef(const KUrl& url_, bool quiet_) {
+FileHandler::FileRef* FileHandler::fileRef(const QUrl& url_, bool quiet_) {
   return new FileRef(url_, quiet_);
 }
 
-QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {
+QString FileHandler::readTextFile(const QUrl& url_, bool quiet_/*=false*/, bool useUTF8_ /*false*/) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QString();
@@ -122,7 +121,7 @@ QString FileHandler::readTextFile(const KUrl& url_, bool quiet_/*=false*/, bool 
   return QString();
 }
 
-QString FileHandler::readXMLFile(const KUrl& url_, bool quiet_/*=false*/) {
+QString FileHandler::readXMLFile(const QUrl& url_, bool quiet_/*=false*/) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QString();
@@ -134,7 +133,7 @@ QString FileHandler::readXMLFile(const KUrl& url_, bool quiet_/*=false*/) {
   return QString();
 }
 
-QDomDocument FileHandler::readXMLDocument(const KUrl& url_, bool processNamespace_, bool quiet_) {
+QDomDocument FileHandler::readXMLDocument(const QUrl& url_, bool processNamespace_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QDomDocument();
@@ -162,7 +161,7 @@ QDomDocument FileHandler::readXMLDocument(const KUrl& url_, bool processNamespac
   return doc;
 }
 
-QByteArray FileHandler::readDataFile(const KUrl& url_, bool quiet_) {
+QByteArray FileHandler::readDataFile(const QUrl& url_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return QByteArray();
@@ -172,7 +171,7 @@ QByteArray FileHandler::readDataFile(const KUrl& url_, bool quiet_) {
   return f.file()->readAll();
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString& id_, bool quiet_, const KUrl& referrer_) {
+Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString& id_, bool quiet_, const QUrl& referrer_) {
   if(referrer_.isEmpty() || url_.isLocalFile()) {
     return readImageFile(url_, id_, quiet_);
   }
@@ -180,8 +179,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString
   KTemporaryFile tempFile;
   tempFile.open();
   tempFile.setAutoRemove(true);
-  KUrl tempURL;
-  tempURL.setPath(tempFile.fileName());
+  QUrl tempURL = QUrl::fromLocalFile(tempFile.fileName());
 
   KIO::JobFlags flags = KIO::Overwrite;
   if(quiet_) {
@@ -193,7 +191,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString
 
   if(!KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget())) {
     if(!quiet_) {
-      QString str = i18n("Tellico is unable to load the image - %1.", url_.prettyUrl());
+      QString str = i18n("Tellico is unable to load the image - %1.", url_.toDisplayString());
       GUI::Proxy::sorry(str);
     }
     return 0;
@@ -201,7 +199,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString
   return readImageFile(tempURL, id_, quiet_);
 }
 
-Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString& id_, bool quiet_) {
+Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString& id_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
     return 0;
@@ -217,7 +215,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const KUrl& url_, const QString
 
 // really, this should be decoupled from the writeBackupFile() function
 // but every other function that calls it would need to be updated
-bool FileHandler::queryExists(const KUrl& url_) {
+bool FileHandler::queryExists(const QUrl& url_) {
   if(url_.isEmpty() || !KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, GUI::Proxy::widget())) {
     return true;
   }
@@ -241,7 +239,7 @@ bool FileHandler::queryExists(const KUrl& url_) {
   return writeBackupFile(url_);
 }
 
-bool FileHandler::writeBackupFile(const KUrl& url_) {
+bool FileHandler::writeBackupFile(const QUrl& url_) {
   bool success = true;
   if(url_.isLocalFile()) {
     // KDE bug 178640, for versions prior to KDE 4.2RC1, backup file was not deleted first
@@ -255,7 +253,7 @@ bool FileHandler::writeBackupFile(const KUrl& url_) {
       success = true; // ignore error for old version because of bug
     }
   } else {
-    KUrl backup(url_);
+    QUrl backup(url_);
     backup.setPath(backup.path() + QLatin1Char('~'));
     KIO::NetAccess::del(backup, GUI::Proxy::widget()); // might fail if backup doesn't exist, that's ok
     KIO::FileCopyJob* job = KIO::file_copy(url_, backup, -1, KIO::Overwrite);
@@ -267,7 +265,7 @@ bool FileHandler::writeBackupFile(const KUrl& url_) {
   return success;
 }
 
-bool FileHandler::writeTextURL(const KUrl& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
+bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool encodeUTF8_, bool force_, bool quiet_) {
   if((!force_ && !queryExists(url_)) || text_.isNull()) {
     if(text_.isNull()) {
       myDebug() << "null string for" << url_;
@@ -332,7 +330,7 @@ bool FileHandler::writeTextFile(KSaveFile& file_, const QString& text_, bool enc
   return success;
 }
 
-bool FileHandler::writeDataURL(const KUrl& url_, const QByteArray& data_, bool force_, bool quiet_) {
+bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool force_, bool quiet_) {
   if(!force_ && !queryExists(url_)) {
     return false;
   }

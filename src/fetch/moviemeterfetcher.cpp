@@ -33,6 +33,7 @@
 #include <KLocale>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
@@ -43,7 +44,6 @@
 #ifdef HAVE_QJSON
 #include <qjson/serializer.h>
 #include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
 #endif
 
 namespace {
@@ -89,7 +89,7 @@ void MovieMeterFetcher::search() {
 #ifdef HAVE_QJSON
   m_started = true;
 
-  KUrl u(MOVIEMETER_API_URL);
+  QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
   u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
   switch(request().key) {
@@ -140,8 +140,8 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
 #ifdef HAVE_QJSON
   QString id = entry->field(QLatin1String("moviemeter-id"));
   if(!id.isEmpty()) {
-    KUrl u(MOVIEMETER_API_URL);
-    u.addPath(id);
+    QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
+    u.setPath(u.path() + id);
     u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
     // quiet
     QByteArray data = FileHandler::readDataFile(u, true);

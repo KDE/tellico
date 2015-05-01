@@ -115,8 +115,8 @@ void SRUFetcher::search() {
 
   m_started = true;
 
-  KUrl u;
-  u.setProtocol(QLatin1String("http"));
+  QUrl u;
+  u.setScheme(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
   u.setPath(m_path);
@@ -386,8 +386,7 @@ bool SRUFetcher::initMARCXMLHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MARCXMLHandler = new XSLTHandler(u);
   if(!m_MARCXMLHandler->isValid()) {
@@ -410,8 +409,7 @@ bool SRUFetcher::initMODSHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {
@@ -434,8 +432,7 @@ bool SRUFetcher::initSRWHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_SRWHandler = new XSLTHandler(u);
   if(!m_SRWHandler->isValid()) {
@@ -570,7 +567,7 @@ void SRUFetcher::ConfigWidget::slotCheckHost() {
   QString s = m_hostEdit->text();
   // someone might be pasting a full URL, check that
   if(s.indexOf(QLatin1Char(':')) > -1 || s.indexOf(QLatin1Char('/')) > -1) {
-    KUrl u(s);
+    QUrl u(s);
     if(u.isValid()) {
       m_hostEdit->setText(u.host());
       if(u.port() > 0) {

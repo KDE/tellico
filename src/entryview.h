@@ -29,7 +29,7 @@
 
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <KUrl>
+#include <QUrl>
 
 #include <QPointer>
 
@@ -82,7 +82,7 @@ public:
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
 
 signals:
-  void signalAction(const KUrl& url);
+  void signalAction(const QUrl& url);
 
 public slots:
   /**
@@ -97,7 +97,7 @@ private slots:
    *
    * @param url The URL to open
    */
-  void slotOpenURL(const KUrl& url);
+  void slotOpenURL(const QUrl& url);
   void slotReloadEntry();
   void slotResetColors();
 

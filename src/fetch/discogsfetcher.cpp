@@ -100,7 +100,7 @@ void DiscogsFetcher::search() {
     return;
   }
 
-  KUrl u(DISCOGS_API_URL);
+  QUrl u(QString::fromLatin1(DISCOGS_API_URL));
 
   switch(request().key) {
     case Title:
@@ -168,7 +168,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   QString id = entry->field(QLatin1String("discogs-id"));
   if(!id.isEmpty()) {
     // quiet
-    KUrl u(DISCOGS_API_URL);
+    QUrl u(QString::fromLatin1(DISCOGS_API_URL));
     u.setPath(QString::fromLatin1("/releases/%1").arg(id));
     QByteArray data = FileHandler::readDataFile(u, true);
 

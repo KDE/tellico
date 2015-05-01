@@ -43,7 +43,7 @@ Q_OBJECT
 public:
   /**
    */
-  CIWImporter(const KUrl::List& urls);
+  CIWImporter(const QList<QUrl>& urls);
   CIWImporter(const QString& text);
 
   /**
@@ -55,7 +55,7 @@ public:
   virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
-  static bool maybeCIW(const KUrl& url);
+  static bool maybeCIW(const QUrl& url);
 
 public slots:
   void slotCancel();
@@ -64,7 +64,7 @@ private:
   static void initTagMap();
 
   Data::FieldPtr fieldByTag(const QString& tag);
-  void readURL(const KUrl& url, int n);
+  void readURL(const QUrl& url, int n);
   void readText(const QString& text, int n);
 
   Data::CollPtr m_coll;

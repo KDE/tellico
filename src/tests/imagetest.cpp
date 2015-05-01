@@ -37,8 +37,8 @@ void ImageTest::initTestCase() {
 }
 
 void ImageTest::testLinkOnly() {
-  KUrl u(QFINDTESTDATA("../../icons/hi128-app-tellico.png"));
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/hi128-app-tellico.png"));
   // addImage(url, quiet, referer, link)
-  QString id = Tellico::ImageFactory::addImage(u, false, KUrl(), true);
+  QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
 }

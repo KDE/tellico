@@ -251,8 +251,7 @@ void ExecExternalFetcher::slotProcessExited() {
       {
         QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
-          KUrl u;
-          u.setPath(xsltFile);
+          QUrl u = QUrl::fromLocalFile(xsltFile);
           static_cast<Import::XSLTImporter*>(imp)->setXSLTURL(u);
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
@@ -454,7 +453,7 @@ ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
 }
 
 void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
-  m_pathEdit->setUrl(KUrl(config_.readPathEntry("ExecPath", QString())));
+  m_pathEdit->setUrl(QUrl::fromLocalFile(config_.readPathEntry("ExecPath", QString())));
   QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
   QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
@@ -506,7 +505,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
 }
 
 void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  KUrl u = m_pathEdit->url();
+  QUrl u = m_pathEdit->url();
   if(!u.isEmpty()) {
     config_.writePathEntry("ExecPath", u.path());
   }

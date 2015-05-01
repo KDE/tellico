@@ -78,11 +78,11 @@ bool ApplicationInterface::showEntry(int id)  {
   return m_mainWindow->showEntry(id);
 }
 
-bool ApplicationInterface::importFile(Tellico::Import::Format format, const KUrl& url, Tellico::Import::Action action) {
+bool ApplicationInterface::importFile(Tellico::Import::Format format, const QUrl& url, Tellico::Import::Action action) {
   return m_mainWindow->importFile(format, url, action);
 }
 
-bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const KUrl& url) {
+bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const QUrl& url) {
   return m_mainWindow->exportCollection(format, url);
 }
 

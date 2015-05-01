@@ -72,7 +72,7 @@ Tellico::Data::CollPtr Document::collection() const {
   return m_coll;
 }
 
-void Document::setURL(const KUrl& url_) {
+void Document::setURL(const QUrl& url_) {
   m_url = url_;
   if(m_url.fileName() != i18n(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
@@ -106,8 +106,7 @@ bool Document::newDocument(int type_) {
   emit signalCollectionAdded(m_coll);
 
   slotSetModified(false);
-  KUrl url;
-  url.setFileName(i18n(Tellico::untitledFilename));
+  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
   m_fileFormat = Import::TellicoImporter::Unknown;
@@ -115,7 +114,7 @@ bool Document::newDocument(int type_) {
   return true;
 }
 
-bool Document::openDocument(const KUrl& url_) {
+bool Document::openDocument(const QUrl& url_) {
   MARK;
   m_loadAllImages = false;
   // delayed image loading only works for local files
@@ -175,7 +174,7 @@ bool Document::openDocument(const KUrl& url_) {
   return true;
 }
 
-bool Document::saveDocument(const KUrl& url_) {
+bool Document::saveDocument(const QUrl& url_) {
   // FileHandler::queryExists calls FileHandler::writeBackupFile
   // so the only reason to check queryExists() is if the url to write to is different than the current one
   if(url_ == m_url) {
@@ -334,8 +333,7 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  KUrl url;
-  url.setFileName(i18n(Tellico::untitledFilename));
+  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
 
@@ -523,7 +521,7 @@ void Document::slotLoadAllImages() {
   m_importer = 0;
 }
 
-void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
+void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   // images get 80 steps in saveDocument()
   const uint stepSize = 1 + qMax(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;

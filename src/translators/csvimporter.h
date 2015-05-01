@@ -55,7 +55,7 @@ Q_OBJECT
 public:
   /**
    */
-  CSVImporter(const KUrl& url);
+  CSVImporter(const QUrl& url);
   ~CSVImporter();
 
   /**

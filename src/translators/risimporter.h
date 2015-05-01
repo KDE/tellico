@@ -43,7 +43,7 @@ Q_OBJECT
 public:
   /**
    */
-  RISImporter(const KUrl::List& urls);
+  RISImporter(const QList<QUrl>& urls);
   RISImporter(const QString& text);
 
   /**
@@ -55,7 +55,7 @@ public:
   virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
-  static bool maybeRIS(const KUrl& url);
+  static bool maybeRIS(const QUrl& url);
 
 public slots:
   void slotCancel();
@@ -65,7 +65,7 @@ private:
   static void initTypeMap();
 
   Data::FieldPtr fieldByTag(const QString& tag);
-  void readURL(const KUrl& url, int n, const QHash<QString, Data::FieldPtr>& risFields);
+  void readURL(const QUrl& url, int n, const QHash<QString, Data::FieldPtr>& risFields);
   void readText(const QString& text, int n, const QHash<QString, Data::FieldPtr>& risFields);
 
   Data::CollPtr m_coll;

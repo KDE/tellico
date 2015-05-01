@@ -30,7 +30,7 @@
 
 #include <QPointer>
 
-class KUrl;
+class QUrl;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -85,7 +85,7 @@ private:
 
   int m_total;
   QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, KUrl> m_matches;
+  QHash<int, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

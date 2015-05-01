@@ -54,7 +54,7 @@ using Tellico::Import::BoardGameGeekImporter;
 BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled(false), m_widget(0) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("boardgamegeek2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    m_xsltURL.setPath(xsltFile);
+    m_xsltURL = QUrl::fromLocalFile(xsltFile);
   } else {
     myWarning() << "unable to find boardgamegeek2tellico.xsl!";
   }
@@ -98,7 +98,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   m_ownedOnly = m_checkOwned->isChecked();
 
   // first get the bgg id list
-  KUrl u(BGG_COLLECTION_URL);
+  QUrl u(QString::fromLatin1(BGG_COLLECTION_URL));
   u.addQueryItem(QLatin1String("username"), m_user);
   u.addQueryItem(QLatin1String("subtype"), QLatin1String("boardgame"));
   u.addQueryItem(QLatin1String("brief"), QLatin1String("1"));
@@ -228,7 +228,7 @@ QWidget* BoardGameGeekImporter::widget(QWidget* parent_) {
 
 QString BoardGameGeekImporter::text(const QStringList& idList_) const {
 //  myDebug() << idList_;
-  KUrl u(BGG_THING_URL);
+  QUrl u(QString::fromLatin1(BGG_THING_URL));
   u.addQueryItem(QLatin1String("id"), idList_.join(QLatin1String(",")));
   u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
 //  myDebug() << u;

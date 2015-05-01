@@ -39,7 +39,7 @@
 
 using Tellico::Import::GCstarImporter;
 
-GCstarImporter::GCstarImporter(const KUrl& url_) : TextImporter(url_, true), m_cancelled(false), m_relativeImageLinks(false) {
+GCstarImporter::GCstarImporter(const QUrl& url_) : TextImporter(url_, true), m_cancelled(false), m_relativeImageLinks(false) {
 }
 
 GCstarImporter::GCstarImporter(const QString& text_) : TextImporter(text_), m_cancelled(false), m_relativeImageLinks(false) {
@@ -158,7 +158,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     entry->setField(QLatin1String("director"),      splitJoin(rx, values[4]));
     entry->setField(QLatin1String("nationality"),   splitJoin(rx, values[5]));
     entry->setField(QLatin1String("genre"),         splitJoin(rx, values[6]));
-    KUrl u = KUrl(values[7]);
+    QUrl u = QUrl(values[7]);
     if(!u.isEmpty()) {
       QString id = ImageFactory::addImage(u, true /* quiet */);
       if(!id.isEmpty()) {
@@ -254,14 +254,14 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 
 void GCstarImporter::readGCstar(const QString& text_) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("gcstar2tellico.xsl"));
-  XSLTHandler handler(xsltFile);
+  XSLTHandler handler(QUrl::fromLocalFile(xsltFile));
   if(!handler.isValid()) {
     setStatusMessage(i18n("Tellico encountered an error in XSLT processing."));
     return;
   }
 
   if(m_relativeImageLinks) {
-    handler.addStringParam("baseDir", url().directory(KUrl::AppendTrailingSlash).toLocal8Bit());
+    handler.addStringParam("baseDir", url().adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path().toLocal8Bit());
   }
 
   const QString str = handler.applyStylesheet(text_);

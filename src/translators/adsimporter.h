@@ -43,7 +43,7 @@ Q_OBJECT
 public:
   /**
    */
-  ADSImporter(const KUrl::List& urls);
+  ADSImporter(const QList<QUrl>& urls);
   ADSImporter(const QString& text);
 
   /**
@@ -62,7 +62,7 @@ private:
   static void initTagMap();
 
   Data::FieldPtr fieldByTag(const QString& tag);
-  void readURL(const KUrl& url, int n);
+  void readURL(const QUrl& url, int n);
   void readText(const QString& text, int n);
 
   Data::CollPtr m_coll;

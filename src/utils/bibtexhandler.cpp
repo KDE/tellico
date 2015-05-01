@@ -30,7 +30,7 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KUrl>
+#include <QUrl>
 
 #include <QDomDocument>
 
@@ -133,8 +133,7 @@ void BibtexHandler::loadTranslationMaps() {
     return;
   }
 
-  KUrl u;
-  u.setPath(mapfile);
+  QUrl u = QUrl::fromLocalFile(mapfile);
   // no namespace processing
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
 

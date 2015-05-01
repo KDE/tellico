@@ -225,7 +225,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
   return exporter;
 }
 
-bool ExportDialog::exportURL(const KUrl& url_/*=KUrl()*/) const {
+bool ExportDialog::exportURL(const QUrl& url_/*=QUrl()*/) const {
   if(!m_exporter) {
     return false;
   }
@@ -281,7 +281,7 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 }
 
 // static
-bool ExportDialog::exportCollection(Tellico::Export::Format format_, const KUrl& url_) {
+bool ExportDialog::exportCollection(Tellico::Export::Format format_, const QUrl& url_) {
   Export::Exporter* exp = exporter(format_, Data::Document::self()->collection());
 
   exp->setURL(url_);

@@ -66,7 +66,7 @@ public:
   virtual void readOptions(KSharedConfigPtr);
   virtual void saveOptions(KSharedConfigPtr);
 
-  void setCollectionURL(const KUrl& url) { m_collectionURL = url; m_links.clear(); }
+  void setCollectionURL(const QUrl& url) { m_collectionURL = url; m_links.clear(); }
   void setXSLTFile(const QString& filename);
   void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
   void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
@@ -86,7 +86,7 @@ private:
   void setFormattingOptions(Data::CollPtr coll);
   void writeImages(Data::CollPtr coll);
   bool writeEntryFiles();
-  KUrl fileDir() const;
+  QUrl fileDir() const;
   QString fileDirName() const;
 
   void parseDOM(_xmlNode* node);
@@ -115,7 +115,7 @@ private:
   QCheckBox* m_checkExportEntryFiles;
   QCheckBox* m_checkExportImages;
 
-  KUrl m_collectionURL;
+  QUrl m_collectionURL;
   QString m_xsltFile;
   QString m_xsltFilePath;
   QString m_dataDir;
@@ -126,7 +126,7 @@ private:
   QStringList m_columns;
   QString m_entryXSLTFile;
 
-  KUrl::List m_files;
+  QList<QUrl> m_files;
   QHash<QString, QString> m_links;
   StringSet m_copiedFiles;
 };

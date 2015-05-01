@@ -89,7 +89,7 @@ void MusicBrainzFetcher::continueSearch() {
 }
 
 void MusicBrainzFetcher::doSearch() {
-  KUrl u(MUSICBRAINZ_API_URL);
+  QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
   u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("limit"), QString::number(m_limit));
   u.addQueryItem(QLatin1String("offset"), QString::number(m_offset));
@@ -125,7 +125,8 @@ void MusicBrainzFetcher::doSearch() {
       return;
   }
 
-  u.addPath(queryPath);
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1Char('/') + queryPath);
 
 //  myDebug() << "url: " << u.url();
 
@@ -245,8 +246,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 
-  KUrl u(MUSICBRAINZ_API_URL);
-  u.addPath(QLatin1String("/release/") + mbid);
+  QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
+  u.setPath(u.path() + QLatin1String("/release/") + mbid);
   u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags url-rels"));
 
@@ -292,8 +293,7 @@ void MusicBrainzFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);

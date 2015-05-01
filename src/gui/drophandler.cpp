@@ -60,7 +60,7 @@ bool DropHandler::eventFilter(QObject* obj_, QEvent* ev_) {
 }
 
 bool DropHandler::dragEnter(QDragEnterEvent* event_) {
-  bool accept = KUrl::List::canDecode(event_->mimeData()) || event_->mimeData()->hasText();
+  bool accept = event_->mimeData()->hasUrls() || event_->mimeData()->hasText();
   if(accept) {
     event_->acceptProposedAction();
   }
@@ -68,10 +68,10 @@ bool DropHandler::dragEnter(QDragEnterEvent* event_) {
 }
 
 bool DropHandler::drop(QDropEvent* event_) {
-  KUrl::List urls = KUrl::List::fromMimeData(event_->mimeData());
+  QList<QUrl> urls = event_->mimeData()->urls();
 
   if(urls.isEmpty() && event_->mimeData()->hasText()) {
-    KUrl u(event_->mimeData()->text());
+    QUrl u(event_->mimeData()->text());
     if(!u.isRelative() && (u.isLocalFile() || !u.host().isEmpty())) {
       urls << u;
     } else {
@@ -81,14 +81,14 @@ bool DropHandler::drop(QDropEvent* event_) {
   return !urls.isEmpty() && handleURL(urls);
 }
 
-bool DropHandler::handleURL(const KUrl::List& urls_) {
+bool DropHandler::handleURL(const QList<QUrl>& urls_) {
   bool hasUnknown = false;
-  KUrl::List tc, pdf, bib, ris, ciw;
-  foreach(const KUrl& url, urls_) {
+  QList<QUrl> tc, pdf, bib, ris, ciw;
+  foreach(const QUrl& url, urls_) {
     KMimeType::Ptr ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
-    if(url.protocol() != QLatin1String("http")) {
+    if(url.scheme() != QLatin1String("http")) {
       ptr = KMimeType::findByUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);

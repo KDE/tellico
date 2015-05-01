@@ -48,7 +48,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
-    KUrl url(QFINDTESTDATA(QL1("data/books-format%1.bc").arg(i)));
+    QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QL1("data/books-format%1.bc").arg(i)));
 
     Tellico::Import::TellicoImporter importer(url);
     Tellico::Data::CollPtr coll = importer.collection();
@@ -112,7 +112,7 @@ void TellicoReadTest::testEntries_data() {
 }
 
 void TellicoReadTest::testCoinCollection() {
-  KUrl url(QFINDTESTDATA("data/coins-format9.tc"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/coins-format9.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -133,7 +133,7 @@ void TellicoReadTest::testCoinCollection() {
 }
 
 void TellicoReadTest::testTableData() {
-  KUrl url(QFINDTESTDATA("/data/tabletest.tc"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/tabletest.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -182,7 +182,7 @@ void TellicoReadTest::testTableData() {
 }
 
 void TellicoReadTest::testDuplicateLoans() {
-  KUrl url(QFINDTESTDATA("/data/duplicate_loan.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/duplicate_loan.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -198,7 +198,7 @@ void TellicoReadTest::testDuplicateLoans() {
 }
 
 void TellicoReadTest::testDuplicateBorrowers() {
-  KUrl url(QFINDTESTDATA("/data/duplicate_borrower.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/duplicate_borrower.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();

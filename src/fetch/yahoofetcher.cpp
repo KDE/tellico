@@ -38,13 +38,13 @@
 #include <KConfigGroup>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int YAHOO_MAX_RETURNS_TOTAL = 20;
@@ -92,7 +92,7 @@ void YahooFetcher::continueSearch() {
 void YahooFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  KUrl u(YAHOO_BASE_URL);
+  QUrl u(QString::fromLatin1(YAHOO_BASE_URL));
   u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
   u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
   u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));
@@ -231,7 +231,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  KUrl imageURL = entry->field(QLatin1String("image"));
+  QUrl imageURL = entry->field(QLatin1String("image"));
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
@@ -260,8 +260,7 @@ void YahooFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -281,8 +280,9 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
   const QString albumid = entry_->field(QLatin1String("yahoo"));
 
-  KUrl u(YAHOO_BASE_URL);
-  u.setFileName(QLatin1String("songSearch"));
+  QUrl u(QString::fromLatin1(YAHOO_BASE_URL));
+  u = u.adjusted(QUrl::RemoveFilename);
+  u.setPath(u.path() + QLatin1String("songSearch"));
   u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
   u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
   u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));

@@ -37,13 +37,13 @@
 #include <kconfig.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QRegExp>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const char* ANIMENFO_BASE_URL = "http://www.animenfo.com/search.php";
@@ -77,7 +77,7 @@ void AnimeNfoFetcher::search() {
   m_started = true;
   m_matches.clear();
 
-  KUrl u(ANIMENFO_BASE_URL);
+  QUrl u(QString::fromLatin1(ANIMENFO_BASE_URL));
   u.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
   u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
 
@@ -161,7 +161,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   for(int pos = infoRx.indexIn(s); m_started && pos > -1; pos = infoRx.indexIn(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
       FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y);
-      KUrl url(KUrl(ANIMENFO_BASE_URL), u);
+      QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(u);
       url.setQuery(QString());
       m_matches.insert(r->uid, url);
       // don't emit signal until after putting url in matches hash
@@ -196,7 +196,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   // grab last response
   if(!u.isEmpty()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y, QString());
-    KUrl url(KUrl(ANIMENFO_BASE_URL), u);
+    QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(u);
     url.setQuery(QString());
     m_matches.insert(r->uid, url);
     // don't emit signal until after putting url in matches hash
@@ -213,7 +213,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 
-  KUrl url = m_matches[uid_];
+  QUrl url = m_matches[uid_];
   if(url.isEmpty()) {
     myWarning() << "no url in map";
     return Data::EntryPtr();
@@ -245,7 +245,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const KUrl& url_) {
+Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const QUrl& url_) {
  // myDebug();
  // class might be anime_info_top
   QRegExp infoRx(QLatin1String("<td\\s+[^>]*class\\s*=\\s*[\"']anime_info[^>]*>(.*)</td>"), Qt::CaseInsensitive);
@@ -403,7 +403,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const K
   imgRx.setMinimal(true);
   int pos = imgRx.indexIn(s);
   if(pos > -1) {
-    KUrl imgURL(KUrl(ANIMENFO_BASE_URL), imgRx.cap(1));
+    QUrl imgURL = QUrl(QLatin1String(ANIMENFO_BASE_URL)).resolved(imgRx.cap(1));
     QString id = ImageFactory::addImage(imgURL, true);
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);

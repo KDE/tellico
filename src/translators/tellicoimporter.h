@@ -48,7 +48,7 @@ public:
   /**
    * @param url The tellico data file.
    */
-  explicit TellicoImporter(const KUrl& url, bool loadAllImages=true);
+  explicit TellicoImporter(const QUrl& url, bool loadAllImages=true);
   /**
    * Constructor used to convert arbitrary text to a @ref Collection
    *
@@ -73,7 +73,7 @@ public:
   // take ownership of zip object with images
   KZip* takeImages();
 
-  static bool loadAllImages(const KUrl& url);
+  static bool loadAllImages(const QUrl& url);
 
 public slots:
   void slotCancel();

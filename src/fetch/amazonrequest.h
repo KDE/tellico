@@ -25,7 +25,7 @@
 #ifndef TELLICO_FETCH_AMAZONREQUEST_H
 #define TELLICO_FETCH_AMAZONREQUEST_H
 
-#include <KUrl>
+#include <QUrl>
 
 #include <QMap>
 
@@ -37,12 +37,12 @@ namespace Tellico {
  */
 class AmazonRequest {
 public:
-  AmazonRequest(const KUrl& site, const QByteArray& key);
+  AmazonRequest(const QUrl& site, const QByteArray& key);
 
-  KUrl signedRequest(const QMap<QString, QString>& params) const;
+  QUrl signedRequest(const QMap<QString, QString>& params) const;
 
 private:
-  KUrl m_siteUrl;
+  QUrl m_siteUrl;
   QByteArray m_key;
 };
 

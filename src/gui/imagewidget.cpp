@@ -178,7 +178,7 @@ void ImageWidget::setImage(const QString& id_) {
   m_cbLinkOnly->setChecked(link);
   m_cbLinkOnly->setEnabled(link); // user can't make a non;-linked image a linked image, so disable if not linked
   // if we're using a link, then the original URL _is_ the id
-  m_originalURL = link ? KUrl(id_) : KUrl();
+  m_originalURL = link ? QUrl(id_) : QUrl();
   m_scaled = QPixmap();
   scale();
 
@@ -241,7 +241,7 @@ void ImageWidget::resizeEvent(QResizeEvent *) {
 }
 
 void ImageWidget::slotGetImage() {
-  KUrl url = KFileDialog::getImageOpenUrl(KUrl(), this);
+  QUrl url = KFileDialog::getImageOpenUrl(QUrl(), this);
   if(url.isEmpty() || !url.isValid()) {
     return;
   }
@@ -316,7 +316,7 @@ void ImageWidget::slotEditImage() {
       const Data::Image& img = ImageFactory::imageById(m_imageID);
       img.save(m_img);
       m_editedFileDateTime = QFileInfo(m_img).lastModified();
-      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, QList<QUrl>() << m_img));
+      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, QList<QUrl>() << QUrl::fromLocalFile(m_img)));
       m_editProcess->start();
       if(!m_waitDlg) {
         m_waitDlg = new KProgressDialog(this);
@@ -331,7 +331,7 @@ void ImageWidget::slotEditImage() {
 
 void ImageWidget::slotFinished() {
   if(m_editedFileDateTime != QFileInfo(m_img).lastModified()) {
-    loadImage(KUrl(m_img));
+    loadImage(QUrl::fromLocalFile(m_img));
   }
   m_waitDlg->close();
 }
@@ -360,7 +360,7 @@ void ImageWidget::slotLinkOnlyClicked() {
   // so it needs to be added to the cache all over again
   // probably could do this without downloading the image all over again,
   // but I'm not going to do that right now
-  const QString& id = ImageFactory::addImage(m_originalURL, false, KUrl(), link);
+  const QString& id = ImageFactory::addImage(m_originalURL, false, QUrl(), link);
   // same image, so no need to call setImage
   m_imageID = id;
   emit signalModified();
@@ -417,7 +417,7 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
     }
     event_->acceptProposedAction();
   } else if(event_->mimeData()->hasText()) {
-    KUrl url(event_->mimeData()->text());
+    QUrl url = QUrl::fromUserInput(event_->mimeData()->text());
     if(!url.isEmpty() && url.isValid()) {
       loadImage(url);
       event_->acceptProposedAction();
@@ -425,12 +425,12 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
   }
 }
 
-void ImageWidget::loadImage(const KUrl& url_) {
+void ImageWidget::loadImage(const QUrl& url_) {
   const bool link = m_cbLinkOnly->isChecked();
 
   GUI::CursorSaver cs;
   // if we're linking only, then we want the image id to be the same as the url
-  const QString& id = ImageFactory::addImage(url_, false, KUrl(), link);
+  const QString& id = ImageFactory::addImage(url_, false, QUrl(), link);
   if(id != m_imageID) {
     setImage(id);
     emit signalModified();

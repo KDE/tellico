@@ -77,31 +77,31 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   static SiteData dataVector[9] = {
     {
       i18n("Amazon (US)"),
-      KUrl("http://webservices.amazon.com/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.com/onca/xml"))
     }, {
       i18n("Amazon (UK)"),
-      KUrl("http://webservices.amazon.co.uk/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.co.uk/onca/xml"))
     }, {
       i18n("Amazon (Germany)"),
-      KUrl("http://webservices.amazon.de/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.de/onca/xml"))
     }, {
       i18n("Amazon (Japan)"),
-      KUrl("http://webservices.amazon.co.jp/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.co.jp/onca/xml"))
     }, {
       i18n("Amazon (France)"),
-      KUrl("http://webservices.amazon.fr/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.fr/onca/xml"))
     }, {
       i18n("Amazon (Canada)"),
-      KUrl("http://webservices.amazon.ca/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.ca/onca/xml"))
     }, {
       i18n("Amazon (China)"),
-      KUrl("http://webservices.amazon.cn/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.cn/onca/xml"))
     }, {
       i18n("Amazon (Spain)"),
-      KUrl("http://webservices.amazon.es/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.es/onca/xml"))
     }, {
       i18n("Amazon (Italy)"),
-      KUrl("http://webservices.amazon.it/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.it/onca/xml"))
     }
   };
 
@@ -380,7 +380,7 @@ void AmazonFetcher::doSearch() {
   }
 
   AmazonRequest request(siteData(m_site).url, m_amazonKey);
-  KUrl newUrl = request.signedRequest(params);
+  QUrl newUrl = request.signedRequest(params);
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
@@ -730,7 +730,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
-  KUrl imageURL;
+  QUrl imageURL;
   switch(m_imageSize) {
     case SmallImage:
       imageURL = entry->field(QLatin1String("small-image"));
@@ -745,7 +745,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     default:
       break;
   }
-//  myDebug() << "grabbing " << imageURL.prettyUrl();
+//  myDebug() << "grabbing " << imageURL.toDisplayString();
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
@@ -770,8 +770,7 @@ void AmazonFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);

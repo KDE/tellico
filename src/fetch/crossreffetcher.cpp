@@ -40,6 +40,7 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
@@ -47,9 +48,6 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
-
-// #define CROSSREF_TEST
 
 #define CROSSREF_USE_UNIXREF
 
@@ -96,7 +94,7 @@ void CrossRefFetcher::search() {
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -220,8 +218,7 @@ void CrossRefFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -233,8 +230,8 @@ void CrossRefFetcher::initXSLTHandler() {
   }
 }
 
-KUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KUrl u(CROSSREF_BASE_URL);
+QUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
+  QUrl u(QString::fromLatin1(CROSSREF_BASE_URL));
   u.addQueryItem(QLatin1String("noredirect"), QLatin1String("true"));
   u.addQueryItem(QLatin1String("multihit"), QLatin1String("true"));
 #ifdef CROSSREF_USE_UNIXREF
@@ -253,13 +250,10 @@ KUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
 
     default:
       myWarning() << "key not recognized: " << key_;
-      return KUrl();
+      return QUrl();
   }
 
-#ifdef CROSSREF_TEST
-  u = KUrl("/home/robby/crossref.xml");
-#endif
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
   return u;
 }
 

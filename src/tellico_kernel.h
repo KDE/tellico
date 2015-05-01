@@ -28,13 +28,13 @@
 #include "datavectors.h"
 #include "borrower.h"
 
-class KUrl;
 class KUndoStack;
 
 class QWidget;
 class QString;
 class QStringList;
 class QUndoCommand;
+class QUrl;
 
 namespace Tellico {
   class MainWindow;
@@ -67,7 +67,7 @@ public:
    *
    * @return The URL
    */
-  KUrl URL() const;
+  QUrl URL() const;
   /**
    * Returns a list of the field titles, wraps the call to the collection itself.
    *

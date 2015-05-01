@@ -43,8 +43,8 @@ public:
   /**
    * @param url The URL of the file to import
    */
-//  DataImporter(const KUrl& url) : Importer(url), m_data(FileHandler::readDataFile(url)), m_source(URL) {}
-  DataImporter(const KUrl& url);
+//  DataImporter(const QUrl& url) : Importer(url), m_data(FileHandler::readDataFile(url)), m_source(URL) {}
+  DataImporter(const QUrl& url);
   /**
    * Since the conversion to a QCString appends a \0 character at the end, remove it.
    *

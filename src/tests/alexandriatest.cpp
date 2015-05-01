@@ -79,7 +79,7 @@ void AlexandriaTest::testImport() {
 
   Tellico::Export::AlexandriaExporter exporter(coll);
   exporter.setEntries(coll->entries());
-  exporter.setURL(outputDir.path());
+  exporter.setURL(QUrl::fromLocalFile(outputDir.path()));
   QVERIFY(exporter.exec());
 
   importer.setLibraryPath(outputDir.path() + "/.alexandria/" + coll->title());

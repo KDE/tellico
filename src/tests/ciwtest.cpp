@@ -35,8 +35,8 @@
 QTEST_APPLESS_MAIN( CiwTest )
 
 void CiwTest::testImport() {
-  KUrl url(QFINDTESTDATA("/data/test.ciw"));
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/test.ciw"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::CIWImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();

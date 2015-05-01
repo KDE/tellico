@@ -32,9 +32,9 @@
 
 using Tellico::EntryComparison;
 
-KUrl EntryComparison::s_documentUrl;
+QUrl EntryComparison::s_documentUrl;
 
-void EntryComparison::setDocumentUrl(const KUrl& url_) {
+void EntryComparison::setDocumentUrl(const QUrl& url_) {
   s_documentUrl = url_;
 }
 
@@ -67,18 +67,18 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   }
   if(f->name() == QLatin1String("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
     // versions before 1.2.7 could have saved the url without the protocol
-    if(KUrl(s1) == KUrl(s2) ||
+    if(QUrl(s1) == QUrl(s2) ||
        (f->property(QLatin1String("relative")) == QLatin1String("true") &&
-        KUrl(s_documentUrl, s1) == KUrl(s_documentUrl, s2))) {
+        s_documentUrl.resolved(s1) == s_documentUrl.resolved(s2))) {
       return 5;
     }
   }
   if (f->name() == QLatin1String("imdb")) {
     // imdb might be a different host since we query akas.imdb.com and normally it is www.imdb.com
-    KUrl us1 = KUrl(s1);
-    KUrl us2 = KUrl(s2);
-    us1.setHost(QLatin1String(""));
-    us2.setHost(QLatin1String(""));
+    QUrl us1 = QUrl::fromUserInput(s1);
+    QUrl us2 = QUrl::fromUserInput(s2);
+    us1.setHost(QString());
+    us2.setHost(QString());
     if(us1 == us2) {
       return 5;
     }

@@ -115,7 +115,7 @@ void GoogleBookFetcher::continueSearch() {
 
 void GoogleBookFetcher::doSearch(const QString& term_) {
 #ifdef HAVE_QJSON
-  KUrl u(GOOGLEBOOK_API_URL);
+  QUrl u(QString::fromLatin1(GOOGLEBOOK_API_URL));
 
   u.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
   u.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));

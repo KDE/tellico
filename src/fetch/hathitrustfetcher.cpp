@@ -95,7 +95,7 @@ void HathiTrustFetcher::search() {
 }
 
 void HathiTrustFetcher::doSearch() {
-  KUrl u(HATHITRUST_QUERY_URL);
+  QUrl u(QString::fromLatin1(HATHITRUST_QUERY_URL));
 
   QStringList searchValues;
   // we split ISBN and LCCN values, which are the only ones we accept anyway
@@ -107,9 +107,9 @@ void HathiTrustFetcher::doSearch() {
       searchValues += QString::fromLatin1("lccn:%1").arg(LCCNValidator::formalize(searchTerm));
     }
   }
-  u.addPath(searchValues.join(QLatin1String("|")));
+  u.setPath(u.path() + searchValues.join(QLatin1String("|")));
 
-  myDebug() << "url:" << u.url();
+//  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -138,8 +138,7 @@ bool HathiTrustFetcher::initMARC21Handler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MARC21XMLHandler = new XSLTHandler(u);
   if(!m_MARC21XMLHandler->isValid()) {
@@ -162,8 +161,7 @@ bool HathiTrustFetcher::initMODSHandler() {
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {

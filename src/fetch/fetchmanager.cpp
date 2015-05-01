@@ -425,7 +425,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       KTemporaryFile tmpFile;
       tmpFile.setAutoRemove(true);
       tmpFile.open();
-      KUrl from, to;
+      QUrl from, to;
       from.setPath(m_scriptMap[name_]);
       to.setPath(tmpFile.fileName());
       // have to overwrite since KTemporaryFile already created it
@@ -460,8 +460,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
 #ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
-    KUrl u;
-    u.setProtocol(QLatin1String("http"));
+    QUrl u;
+    u.setScheme(QLatin1String("http"));
     u.setHost(f->host());
     QString icon = Fetcher::favIcon(u);
     if(u.isValid() && !icon.isEmpty()) {
@@ -472,7 +472,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
-    KUrl u;
+    QUrl u;
     if(p.contains(QLatin1String("allocine"))) {
       u = QLatin1String("http://www.allocine.fr");
     } else if(p.contains(QLatin1String("ministerio_de_cultura"))) {

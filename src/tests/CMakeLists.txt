@@ -100,7 +100,6 @@ TARGET_LINK_LIBRARIES(translatorstest
   Qt5::Xml
   KF5::I18n
   KF5::Codecs
-  KF5::KDELibs4Support # remove when BibtexHandler is clean of KUrl
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}

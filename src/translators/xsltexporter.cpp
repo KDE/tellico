@@ -56,7 +56,7 @@ QString XSLTExporter::fileFilter() const {
 
 
 bool XSLTExporter::exec() {
-  KUrl u = m_URLRequester->url();
+  QUrl u = m_URLRequester->url();
   if(u.isEmpty() || !u.isValid()) {
     return false;
   }

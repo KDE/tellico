@@ -53,7 +53,7 @@ void DeliciousTest::initTestCase() {
 }
 
 void DeliciousTest::testBooks1() {
-  KUrl url(QFINDTESTDATA("data/delicious1_books.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_books.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -78,7 +78,7 @@ void DeliciousTest::testBooks1() {
 }
 
 void DeliciousTest::testBooks2() {
-  KUrl url(QFINDTESTDATA("data/delicious2_books.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious2_books.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -106,7 +106,7 @@ void DeliciousTest::testBooks2() {
 }
 
 void DeliciousTest::testMovies1() {
-  KUrl url(QFINDTESTDATA("data/delicious1_movies.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_movies.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -158,7 +158,7 @@ void DeliciousTest::testMovies1() {
 }
 
 void DeliciousTest::testMovies2() {
-  KUrl url(QFINDTESTDATA("data/delicious2_movies.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious2_movies.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -191,7 +191,7 @@ void DeliciousTest::testMovies2() {
 }
 
 void DeliciousTest::testMusic1() {
-  KUrl url(QFINDTESTDATA("data/delicious1_music.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_music.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -215,7 +215,7 @@ void DeliciousTest::testMusic1() {
 }
 
 void DeliciousTest::testMusic2() {
-  KUrl url(QFINDTESTDATA("data/delicious2_music.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious2_music.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -237,7 +237,7 @@ void DeliciousTest::testMusic2() {
 }
 
 void DeliciousTest::testGames1() {
-  KUrl url(QFINDTESTDATA("data/delicious1_games.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/delicious1_games.xml"));
   Tellico::Import::DeliciousImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

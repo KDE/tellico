@@ -37,7 +37,7 @@ QTEST_GUILESS_MAIN( BibtexmlTest )
 #define QL1(x) QString::fromLatin1(x)
 
 void BibtexmlTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test.bibtexml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.bibtexml"));
 
   Tellico::Import::BibtexmlImporter importer(url);
   // shut the importer up about current collection

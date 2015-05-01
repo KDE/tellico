@@ -55,7 +55,7 @@ void ADSImporter::initTagMap() {
   }
 }
 
-ADSImporter::ADSImporter(const KUrl::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+ADSImporter::ADSImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
   initTagMap();
 }
 
@@ -77,7 +77,7 @@ Tellico::Data::CollPtr ADSImporter::collection() {
 
   if(text().isEmpty()) {
     int count = 0;
-    foreach(const KUrl& url, urls()) {
+    foreach(const QUrl& url, urls()) {
       if(m_cancelled)  {
         break;
       }
@@ -94,7 +94,7 @@ Tellico::Data::CollPtr ADSImporter::collection() {
   return m_coll;
 }
 
-void ADSImporter::readURL(const KUrl& url_, int n) {
+void ADSImporter::readURL(const QUrl& url_, int n) {
   QString str = FileHandler::readTextFile(url_);
   if(str.isEmpty()) {
     return;

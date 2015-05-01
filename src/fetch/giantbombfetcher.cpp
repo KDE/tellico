@@ -77,8 +77,8 @@ void GiantBombFetcher::resetSearch() {
   m_total = -1;
 }
 
-KUrl GiantBombFetcher::searchUrl() {
-  KUrl u(GIANTBOMB_API_URL);
+QUrl GiantBombFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
@@ -91,7 +91,7 @@ KUrl GiantBombFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url: " << u.url();
@@ -131,7 +131,7 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
     return entry_;
   }
 
-  KUrl u(GIANTBOMB_API_URL);
+  QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.setPath(QString::fromLatin1("/game/%1/").arg(id));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);

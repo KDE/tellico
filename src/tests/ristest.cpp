@@ -35,8 +35,8 @@
 QTEST_APPLESS_MAIN( RisTest )
 
 void RisTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test.ris"));
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::RISImporter importer(urls);
   // shut the importer up about current collection

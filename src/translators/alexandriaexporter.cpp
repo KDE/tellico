@@ -69,7 +69,7 @@ bool AlexandriaExporter::exec() {
   const QString alexDirName = QLatin1String(".alexandria");
 
   // create if necessary
-  const KUrl u = url();
+  const QUrl u = url();
   QDir libraryDir;
   if(u.isEmpty()) {
     libraryDir = QDir::home();

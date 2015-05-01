@@ -38,7 +38,7 @@
 #include <KLineEdit>
 #include <KIntSpinBox>
 #include <KCodecs>
-#include <KUrl>
+#include <QUrl>
 
 #include <QLabel>
 #include <QFile>
@@ -98,8 +98,9 @@ void AbstractAllocineFetcher::search() {
   m_started = true;
 
 #ifdef HAVE_QJSON
-  KUrl u(m_baseUrl);
-  u.addPath(QLatin1String("search"));
+  QUrl u(m_baseUrl);
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1Char('/') + QLatin1String("search"));
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
@@ -169,8 +170,9 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 
-  KUrl u(m_baseUrl);
-  u.addPath(QLatin1String("movie"));
+  QUrl u(m_baseUrl);
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1Char('/') + QLatin1String("movie"));
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;

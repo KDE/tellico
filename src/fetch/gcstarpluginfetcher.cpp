@@ -165,8 +165,7 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
   }
 
   foreach(const QString& file, dir.entryList()) {
-    KUrl u;
-    u.setPath(dir.filePath(file));
+    QUrl u = QUrl::fromLocalFile(dir.filePath(file));
     PluginInfo info;
     QString text = FileHandler::readTextFile(u);
     for(int pos = rx.indexIn(text); pos > -1; pos = rx.indexIn(text, pos+rx.matchedLength())) {
@@ -335,8 +334,9 @@ void GCstarPluginFetcher::slotProcessExited() {
     }
   }
 
-  KUrl gcsUrl(tempDir.name());
-  gcsUrl.addPath(QLatin1String("collection.gcs"));
+  QUrl gcsUrl = QUrl::fromLocalFile(tempDir.name());
+  gcsUrl = gcsUrl.adjusted(QUrl::StripTrailingSlash);
+  gcsUrl.setPath(gcsUrl.path() + QLatin1Char('/') + (QLatin1String("collection.gcs")));
 
   Import::GCstarImporter imp(gcsUrl);
   imp.setHasRelativeImageLinks(true);

@@ -57,7 +57,7 @@ namespace {
 
 using Tellico::Import::PDFImporter;
 
-PDFImporter::PDFImporter(const KUrl::List& urls_) : Importer(urls_), m_cancelled(false) {
+PDFImporter::PDFImporter(const QList<QUrl>& urls_) : Importer(urls_), m_cancelled(false) {
 }
 
 bool PDFImporter::canImport(int type_) const {
@@ -65,8 +65,8 @@ bool PDFImporter::canImport(int type_) const {
 }
 
 Tellico::Data::CollPtr PDFImporter::collection() {
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("xmp2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
+  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("xmp2tellico.xsl"));
+  if(xsltFile.isEmpty()) {
     myWarning() << "can not locate xmp2tellico.xsl";
     return Data::CollPtr();
   }
@@ -77,8 +77,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   ProgressItem::Done done(this);
   const bool showProgress = options() & ImportProgress;
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltFile);
 
   XSLTHandler xsltHandler(u);
   if(!xsltHandler.isValid()) {
@@ -93,8 +92,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   Data::CollPtr coll;
   XMPHandler xmpHandler;
-  KUrl::List list = urls();
-  for(KUrl::List::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
+  QList<QUrl> list = urls();
+  for(QList<QUrl>::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
     const std::auto_ptr<FileHandler::FileRef> ref(FileHandler::fileRef(*it));
     if(!ref->isValid()) {
       continue;
@@ -285,7 +284,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   foreach(Data::EntryPtr entry, coll->entries()) {
     if(entry->title().isEmpty()) {
       // use file name
-      KUrl u = entry->field(QLatin1String("url"));
+      QUrl u = entry->field(QLatin1String("url"));
       entry->setField(QLatin1String("title"), u.fileName());
     }
   }

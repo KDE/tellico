@@ -59,7 +59,7 @@ private:
   QWidget* m_widget;
   KLineEdit* m_userEdit;
 
-  KUrl m_xsltURL;
+  QUrl m_xsltURL;
   QString m_user;
   QString m_key;
 };

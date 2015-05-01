@@ -45,7 +45,7 @@ void ReferencerTest::initTestCase() {
 }
 
 void ReferencerTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test.reflib"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.reflib"));
   Tellico::Import::ReferencerImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

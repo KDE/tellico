@@ -30,7 +30,7 @@
 
 #include <QPointer>
 
-class KUrl;
+class QUrl;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -84,7 +84,7 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
-  KUrl searchURL(FetchKey key, const QString& value) const;
+  QUrl searchURL(FetchKey key, const QString& value) const;
   void doSearch();
 
   XSLTHandler* m_xsltHandler;

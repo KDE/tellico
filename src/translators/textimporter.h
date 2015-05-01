@@ -44,7 +44,7 @@ public:
    *
    * @param url The file to be imported
    */
-  explicit TextImporter(const KUrl& url, bool useUTF8_=false);
+  explicit TextImporter(const QUrl& url, bool useUTF8_=false);
   explicit TextImporter(const QString& text);
 };
 

@@ -50,7 +50,7 @@ using Tellico::Import::GoodreadsImporter;
 GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(0) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("goodreads2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    m_xsltURL.setPath(xsltFile);
+    m_xsltURL = QUrl::fromLocalFile(xsltFile);
   } else {
     myWarning() << "unable to find goodreads2tellico.xsl!";
   }
@@ -137,7 +137,7 @@ QWidget* GoodreadsImporter::widget(QWidget* parent_) {
 }
 
 QString GoodreadsImporter::text() const {
-  KUrl u(GOODREADS_LIST_URL);
+  QUrl u(QString::fromLatin1(GOODREADS_LIST_URL));
   u.addQueryItem(QLatin1String("v"), QLatin1String("2"));
   u.addQueryItem(QLatin1String("id"), m_user);
   u.addQueryItem(QLatin1String("key"), m_key);
@@ -146,7 +146,7 @@ QString GoodreadsImporter::text() const {
 }
 
 QString GoodreadsImporter::idFromName(const QString& name_) const {
-  KUrl u(GOODREADS_USER_URL);
+  QUrl u(QString::fromLatin1(GOODREADS_USER_URL));
   u.addQueryItem(QLatin1String("username"), name_);
   u.addQueryItem(QLatin1String("key"), m_key);
 //  myDebug() << u;

@@ -32,7 +32,7 @@
 #include "datavectors.h"
 
 #include <kxmlguiwindow.h>
-#include <kurl.h>
+#include <QUrl>
 
 #include <QList>
 
@@ -127,11 +127,11 @@ public:
    * @param format The file format
    * @param url The url
    */
-  virtual bool importFile(Import::Format format, const KUrl& url, Import::Action action);
+  virtual bool importFile(Import::Format format, const QUrl& url, Import::Action action);
   /**
    * Used by DCOP to export to a file.
    */
-  virtual bool exportCollection(Export::Format format, const KUrl& url);
+  virtual bool exportCollection(Export::Format format, const QUrl& url);
   /**
    * Used by DCOP
    */
@@ -161,13 +161,13 @@ public slots:
    *
    * @param url The url to open
    */
-  void slotFileOpen(const KUrl& url);
+  void slotFileOpen(const QUrl& url);
   /**
    * Opens a file from the recent files menu
    *
    * @param url The url sent by the RecentFilesAction
    */
-  void slotFileOpenRecent(const KUrl& url);
+  void slotFileOpenRecent(const QUrl& url);
   /**
    * Saves the document
    */
@@ -304,7 +304,7 @@ public slots:
   /**
    * Handle a url that indicates some actino should be taken
    */
-  void slotURLAction(const KUrl& url);
+  void slotURLAction(const QUrl& url);
 
 private:
   /**
@@ -355,7 +355,7 @@ private:
    *
    * @param url The url to open
    */
-  bool openURL(const KUrl& url);
+  bool openURL(const QUrl& url);
   /*
    * Helper method to handle the printing duties.
    *
@@ -469,7 +469,7 @@ private slots:
   void slotToggleMenuBarVisibility();
 
 private:
-  void importFile(Import::Format format, const KUrl::List& kurls);
+  void importFile(Import::Format format, const QList<QUrl>& kurls);
   void importText(Import::Format format, const QString& text);
   bool importCollection(Data::CollPtr coll, Import::Action action);
 

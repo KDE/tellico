@@ -719,7 +719,7 @@ void FetchDialog::slotLoadISBNList() {
   if(!m_isbnTextEdit) {
     return;
   }
-  KUrl u = KFileDialog::getOpenUrl(KUrl(), QString(), this);
+  QUrl u = KFileDialog::getOpenUrl(QUrl(), QString(), this);
   if(u.isValid()) {
     m_isbnTextEdit->setText(m_isbnTextEdit->toPlainText() + FileHandler::readTextFile(u));
     m_isbnTextEdit->moveCursor(QTextCursor::End);

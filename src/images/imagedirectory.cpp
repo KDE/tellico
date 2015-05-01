@@ -27,12 +27,12 @@
 #include "filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kurl.h>
 #include <ktempdir.h>
 #include <kzip.h>
 
 #include <QFile>
 #include <QDir>
+#include <QUrl>
 
 using namespace Tellico;
 using Tellico::ImageStorage;
@@ -78,8 +78,7 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
     return 0;
   }
 
-  KUrl imgUrl;
-  imgUrl.setPath(path() + id_);
+  QUrl imgUrl = QUrl::fromLocalFile(path() + id_);
   Data::Image* img = FileHandler::readImageFile(imgUrl, id_, true /* quiet */);
   if(!img) {
     myLog() << "image not found:" << imgUrl.url();
@@ -112,9 +111,9 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     }
     m_pathExists = true;
   }
-  KUrl target;
-  target.setPath(path);
-  target.setFileName(img_.id());
+  QUrl target = QUrl::fromLocalFile(path);
+  target = target.adjusted(QUrl::RemoveFilename);
+  target.setPath(target.path() + img_.id());
   return FileHandler::writeDataURL(target, img_.byteArray(), true /* force */);
 }
 

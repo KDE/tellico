@@ -47,7 +47,7 @@ using Tellico::Import::BibtexImporter;
 
 int BibtexImporter::s_initCount = 0;
 
-BibtexImporter::BibtexImporter(const KUrl::List& urls_) : Importer(urls_)
+BibtexImporter::BibtexImporter(const QList<QUrl>& urls_) : Importer(urls_)
     , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
   init();
 }
@@ -102,8 +102,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     }
   }
 
-  const KUrl::List urls = this->urls();
-  foreach(const KUrl& url, urls) {
+  foreach(const QUrl& url, urls()) {
     if(m_cancelled) {
       return Data::CollPtr();
     }
@@ -355,7 +354,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   return m_widget;
 }
 
-bool BibtexImporter::maybeBibtex(const KUrl& url_) {
+bool BibtexImporter::maybeBibtex(const QUrl& url_) {
   QString text = FileHandler::readTextFile(url_, true /*quiet*/);
   if(text.isEmpty()) {
     return false;
@@ -363,7 +362,7 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   return maybeBibtex(text, url_);
 }
 
-bool BibtexImporter::maybeBibtex(const QString& text, const KUrl& url_) {
+bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   bt_initialize();
   QRegExp rx(QLatin1String("[{}]"));
 

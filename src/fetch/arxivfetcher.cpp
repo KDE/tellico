@@ -38,6 +38,7 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
@@ -45,9 +46,6 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFile>
-#include <KJobWidgets/KJobWidgets>
-
-//#define ARXIV_TEST
 
 namespace {
   static const int ARXIV_RETURNS_PER_REQUEST = 20;
@@ -91,7 +89,7 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-  KUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -232,8 +230,7 @@ void ArxivFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -245,8 +242,8 @@ void ArxivFetcher::initXSLTHandler() {
   }
 }
 
-KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KUrl u(ARXIV_BASE_URL);
+QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
+  QUrl u(QString::fromLatin1(ARXIV_BASE_URL));
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
   u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
@@ -283,13 +280,10 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
   u.addQueryItem(QLatin1String("search_query"), query);
 
-#ifdef ARXIV_TEST
-  u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
-#endif
 //  myDebug() << "url: " << u;
   return u;
 }

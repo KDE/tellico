@@ -28,7 +28,7 @@
 #include "fetcher.h"
 #include "configwidget.h"
 
-#include <KUrl>
+#include <QUrl>
 
 #include <QPointer>
 
@@ -122,7 +122,7 @@ public:
 
 private slots:
   void slotComplete(KJob* job);
-  void slotRedirection(KIO::Job* job, const KUrl& toURL);
+  void slotRedirection(KIO::Job* job, const QUrl& toURL);
 
 private:
   virtual void search();
@@ -138,15 +138,15 @@ private:
   void doRunningTime(const QString& s, Data::EntryPtr e);
   void doAspectRatio(const QString& s, Data::EntryPtr e);
   void doAlsoKnownAs(const QString& s, Data::EntryPtr e);
-  void doPlot(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);
+  void doPlot(const QString& s, Data::EntryPtr e, const QUrl& baseURL_);
   void doStudio(const QString& s, Data::EntryPtr e);
   void doPerson(const QString& s, Data::EntryPtr e,
                 const QString& imdbHeader, const QString& fieldName);
-  void doCast(const QString& s, Data::EntryPtr e, const KUrl& baseURL_);
+  void doCast(const QString& s, Data::EntryPtr e, const QUrl& baseURL_);
   void doLists(const QString& s, Data::EntryPtr e);
   void doLists2(const QString& s, Data::EntryPtr e);
   void doRating(const QString& s, Data::EntryPtr e);
-  void doCover(const QString& s, Data::EntryPtr e, const KUrl& baseURL);
+  void doCover(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
 
   void parseSingleTitleResult();
   void parseSingleNameResult();
@@ -157,10 +157,10 @@ private:
 
   QString m_text;
   QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, KUrl> m_matches;
+  QHash<int, QUrl> m_matches;
   // if a new search is started, m_matches is cleared
   // but we might still need to recover an entry by uid
-  QHash<int, KUrl> m_allMatches;
+  QHash<int, QUrl> m_allMatches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
@@ -168,7 +168,7 @@ private:
 
   QString m_host;
   int m_numCast;
-  KUrl m_url;
+  QUrl m_url;
   bool m_redirected;
   int m_limit;
   Lang m_lang;

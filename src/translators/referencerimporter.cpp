@@ -33,11 +33,10 @@
 
 using Tellico::Import::ReferencerImporter;
 
-ReferencerImporter::ReferencerImporter(const KUrl& url_) : XSLTImporter(url_) {
+ReferencerImporter::ReferencerImporter(const QUrl& url_) : XSLTImporter(url_) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("referencer2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    KUrl u;
-    u.setPath(xsltFile);
+    QUrl u = QUrl::fromLocalFile(xsltFile);
     XSLTImporter::setXSLTURL(u);
   } else {
     myWarning() << "unable to find referencer2tellico.xsl!";

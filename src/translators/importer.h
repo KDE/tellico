@@ -28,7 +28,7 @@
 #include "../datavectors.h"
 #include "../collection.h"
 
-#include <kurl.h>
+#include <QUrl>
 #include <klocale.h>
 
 #include <QObject>
@@ -63,8 +63,8 @@ public:
    *
    * @param url The URL of the file to import
    */
-  Importer(const KUrl& url);
-  Importer(const KUrl::List& urls);
+  Importer(const QUrl& url);
+  Importer(const QList<QUrl>& urls);
   Importer(const QString& text);
   /**
    */
@@ -131,8 +131,8 @@ protected:
    *
    * @return the file URL
    */
-  KUrl url() const { return m_urls.isEmpty() ? KUrl() : m_urls[0]; }
-  KUrl::List urls() const { return m_urls; }
+  QUrl url() const { return m_urls.isEmpty() ? QUrl() : m_urls[0]; }
+  QList<QUrl> urls() const { return m_urls; }
   QString text() const { return m_text; }
   Data::CollPtr currentCollection() const;
   /**
@@ -146,7 +146,7 @@ protected:
 
 private:
   long m_options;
-  KUrl::List m_urls;
+  QList<QUrl> m_urls;
   QString m_text;
   QString m_statusMsg;
   Data::CollPtr m_currentCollection;

@@ -104,34 +104,34 @@ void ISBNdbFetcher::continueSearch() {
 void ISBNdbFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  KUrl u(ISBNDB_BASE_URL);
-  u.addPath(m_apiKey);
+  QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
+  u.setPath(u.path() + m_apiKey);
 
   switch(request().key) {
     case Title:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Person:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("i"), QLatin1String("author_name"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Keyword:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("i"), QLatin1String("full"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case ISBN:
-      u.addPath(QLatin1String("book"));
+      u.setPath(u.path() + QLatin1String("book"));
       {
         // can only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
         v.remove(QLatin1Char('-'));
-        u.addPath(v);
+        u.setPath(u.path() + v);
       }
       break;
 
@@ -308,8 +308,7 @@ void ISBNdbFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);

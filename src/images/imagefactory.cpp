@@ -119,23 +119,23 @@ Tellico::ImageFactory::CacheDir ImageFactory::cacheDir() {
   return TempDir;
 }
 
-QString ImageFactory::addImage(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
+QString ImageFactory::addImage(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory->addImageImpl(url_, quiet_, refer_, link_).id();
 }
 
-const Tellico::Data::Image& ImageFactory::addImageImpl(const KUrl& url_, bool quiet_, const KUrl& refer_, bool link_) {
+const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
   if(url_.isEmpty() || !url_.isValid()) {
     return Data::Image::null;
   }
-//  myLog() << url_.prettyUrl();
+//  myLog() << url_.toDisplayString();
   Data::Image* img = FileHandler::readImageFile(url_, QString(), quiet_, refer_);
   if(!img) {
-    myLog() << "image not found:" << url_.prettyUrl();
+    myLog() << "image not found:" << url_.toDisplayString();
     return Data::Image::null;
   }
   if(img->isNull()) {
-    myLog() << "null image:" << url_.prettyUrl();
+    myLog() << "null image:" << url_.toDisplayString();
     delete img;
     return Data::Image::null;
   }
@@ -338,10 +338,10 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // also, the image info cache might not have it so check if the
   // id is a valid absolute url
   // yeah, it's probably slow
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !KUrl::isRelativeUrl(id_)) {
-    KUrl u(id_);
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl::fromUserInput(id_).isRelative()) {
+    QUrl u(id_);
     if(u.isValid()) {
-      return factory->addImageImpl(u, true, KUrl(), true);
+      return factory->addImageImpl(u, true, QUrl(), true);
     }
   }
 
@@ -601,7 +601,7 @@ void ImageFactory::emitImageMismatch() {
   emit imageLocationMismatch();
 }
 
-void ImageFactory::setLocalDirectory(const KUrl& url_) {
+void ImageFactory::setLocalDirectory(const QUrl& url_) {
   if(url_.isEmpty()) {
     return;
   }
@@ -609,7 +609,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
     myWarning() << "Tellico can only save images to local disk";
     myWarning() << "unable to save to " << url_.url();
   } else {
-    QString dir = url_.directory(KUrl::AppendTrailingSlash);
+    QString dir = url_.path() + QLatin1Char('/');
     // could have already been set once
     if(!url_.fileName().contains(QLatin1String("_files"))) {
       dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");

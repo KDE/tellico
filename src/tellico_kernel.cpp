@@ -59,7 +59,7 @@ Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
     , m_commandHistory(new KUndoStack(parent)) {
 }
 
-KUrl Kernel::URL() const {
+QUrl Kernel::URL() const {
   return Data::Document::self()->URL();
 }
 

@@ -1144,7 +1144,7 @@ void ConfigDialog::slotInstallTemplate() {
   filter += i18n("*.tar.gz *.tgz|Template Packages (*.tar.gz)") + QLatin1Char('\n');
   filter += i18n("*|All Files");
 
-  QString f = KFileDialog::getOpenFileName(KUrl(), filter, this);
+  QString f = KFileDialog::getOpenFileName(QUrl(), filter, this);
   if(f.isEmpty()) {
     return;
   }

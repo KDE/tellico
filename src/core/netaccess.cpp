@@ -33,8 +33,8 @@
 #include <kio/jobuidelegate.h>
 #include <ktemporaryfile.h>
 #include <klocale.h>
-#include <kurl.h>
 
+#include <QUrl>
 #include <QEventLoop>
 
 #include <unistd.h>
@@ -45,7 +45,7 @@ QString Tellico::NetAccess::s_lastErrorMessage;
 
 using Tellico::NetAccess;
 
-bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
+bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
   if(url_.isLocalFile()) {
     return KIO::NetAccess::download(url_, target_, window_);
   }
@@ -62,8 +62,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
     tmpfiles->append(target_);
   }
 
-  KUrl dest;
-  dest.setPath(target_);
+  QUrl dest = QUrl::fromLocalFile(target_);
   KIO::JobFlags flags = KIO::Overwrite;
   if(quiet_) {
     flags |= KIO::HideProgressInfo;
@@ -96,7 +95,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   return false;
 }
 
-QPixmap NetAccess::filePreview(const KUrl& url, int size) {
+QPixmap NetAccess::filePreview(const QUrl& url, int size) {
   NetAccess netaccess;
 
   KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url, true);

@@ -35,7 +35,7 @@ QTEST_GUILESS_MAIN( AmcTest )
 
 // this is a real basic test right now, AMC doesn't run real well under wine
 void AmcTest::testImport() {
-  KUrl url(QFINDTESTDATA("data/test.amc"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.amc"));
   Tellico::Import::AMCImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

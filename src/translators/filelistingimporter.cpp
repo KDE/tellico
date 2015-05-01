@@ -51,6 +51,7 @@
 #include <Nepomuk/ResourceManager>
 #endif
 
+#include <QDir>
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QFile>
@@ -63,7 +64,7 @@ namespace {
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const KUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
+FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
     m_job(0), m_cancelled(false) {
 }
 
@@ -137,12 +138,12 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     Data::EntryPtr entry(new Data::Entry(m_coll));
 
-    const KUrl u = item.url();
+    const QUrl u = item.url();
     entry->setField(title,  u.fileName());
     entry->setField(url,    u.url());
     entry->setField(desc,   item.mimeComment());
     entry->setField(vol,    volume);
-    tmp = KUrl::relativePath(this->url().toLocalFile(), u.directory());
+    tmp = QDir(this->url().toLocalFile()).relativeFilePath(u.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
     // remove "./" from the string
     entry->setField(folder, tmp.right(tmp.length()-2));
     entry->setField(type,   item.mimetype());

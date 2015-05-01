@@ -48,7 +48,7 @@ namespace {
 
 using Tellico::Import::AMCImporter;
 
-AMCImporter::AMCImporter(const KUrl& url_) : DataImporter(url_), m_cancelled(false), m_failed(false) {
+AMCImporter::AMCImporter(const QUrl& url_) : DataImporter(url_), m_cancelled(false), m_failed(false) {
 }
 
 AMCImporter::~AMCImporter() {

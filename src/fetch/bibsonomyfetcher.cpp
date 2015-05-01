@@ -35,14 +35,14 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QVBoxLayout>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   // always bibtex
-  static const char* BIBSONOMY_BASE_URL = "http://bibsonomy.org";
+  static const char* BIBSONOMY_BASE_URL = "http://bibsonomy.org/";
   static const int BIBSONOMY_MAX_RESULTS = 20;
 }
 
@@ -72,16 +72,16 @@ void BibsonomyFetcher::search() {
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u(BIBSONOMY_BASE_URL);
+  QUrl u(QString::fromLatin1(BIBSONOMY_BASE_URL));
   u.setPath(QLatin1String("/bib/"));
 
   switch(request().key) {
     case Person:
-      u.addPath(QString::fromLatin1("author/%1").arg(request().value));
+      u.setPath(u.path() + QString::fromLatin1("author/%1").arg(request().value));
       break;
 
     case Keyword:
-      u.addPath(QString::fromLatin1("search/%1").arg(request().value));
+      u.setPath(u.path() + QString::fromLatin1("search/%1").arg(request().value));
       break;
 
     default:

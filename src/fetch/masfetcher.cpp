@@ -105,7 +105,7 @@ void MASFetcher::continueSearch() {
 
 void MASFetcher::doSearch() {
 #ifdef HAVE_QJSON
-  KUrl u(MAS_API_URL);
+  QUrl u(QString::fromLatin1(MAS_API_URL));
   u.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
   u.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
   u.addQueryItem(QLatin1String("StartIdx"), QString::number(m_start+1));
@@ -280,7 +280,7 @@ void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_
     }
 
     // finally, look it up with a new query
-    KUrl ku(MAS_API_URL);
+    QUrl ku(MAS_API_URL);
     ku.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
     ku.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
     ku.addQueryItem(QLatin1String("StartIdx"), QLatin1String("1"));

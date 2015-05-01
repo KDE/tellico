@@ -34,14 +34,12 @@
 #include <klocale.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QFile>
-#include <KJobWidgets/KJobWidgets>
-
-// #define CITEBASE_TEST
 
 namespace {
   // always bibtex
@@ -75,7 +73,7 @@ void CitebaseFetcher::search() {
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
@@ -180,8 +178,8 @@ Tellico::Data::EntryPtr CitebaseFetcher::fetchEntryHook(uint uid_) {
   return entry;
 }
 
-KUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KUrl u(CITEBASE_BASE_URL);
+QUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
+  QUrl u(QString::fromLatin1(CITEBASE_BASE_URL));
 
   switch(key_) {
     case ArxivID:
@@ -196,12 +194,9 @@ KUrl CitebaseFetcher::searchURL(FetchKey key_, const QString& value_) const {
 
     default:
       myWarning() << "key not recognized: " << key_;
-      return KUrl();
+      return QUrl();
   }
 
-#ifdef CITEBASE_TEST
-  u = KUrl("/home/robby/citebase.bib");
-#endif
 //  myDebug() << "url: " << u.url();
   return u;
 }

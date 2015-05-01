@@ -78,8 +78,8 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
   DropHandler* drophandler = new DropHandler(this);
   view()->installEventFilter(drophandler);
 
-  connect(browserExtension(), SIGNAL(openUrlRequestDelayed(const KUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
-          SLOT(slotOpenURL(const KUrl&)));
+  connect(browserExtension(), SIGNAL(openUrlRequestDelayed(const QUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
+          SLOT(slotOpenURL(const QUrl&)));
   connect(KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), SLOT(slotResetColors()));
 
   view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
@@ -136,7 +136,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  KUrl u;
+  QUrl u;
   u.setPath(m_xsltFile);
   begin(u);
 
@@ -311,20 +311,20 @@ void EntryView::slotRefresh() {
 // need to interpret it relative to document URL instead of xslt file
 // the current node under the mouse vould be the text node inside
 // the anchor node, so iterate up the parents
-void EntryView::slotOpenURL(const KUrl& url_) {
-  if(url_.protocol() == QLatin1String("tc")) {
+void EntryView::slotOpenURL(const QUrl& url_) {
+  if(url_.scheme() == QLatin1String("tc")) {
     // handle this internally
     emit signalAction(url_);
     return;
   }
 
-  KUrl u = url_;
+  QUrl u = url_;
   for(DOM::Node node = nodeUnderMouse(); !node.isNull(); node = node.parentNode()) {
     if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {
       QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
-      if(!href.isEmpty() && KUrl::isRelativeUrl(href)) {
+      if(!href.isEmpty() && QUrl::fromUserInput(href).isRelative()) {
         // interpet url relative to document url
-        u = KUrl(Kernel::self()->URL(), href);
+        u = Kernel::self()->URL().resolved(href);
       }
       break;
     }

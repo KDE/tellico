@@ -32,10 +32,10 @@
 
 using Tellico::Fetch::AmazonRequest;
 
-AmazonRequest::AmazonRequest(const KUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
+AmazonRequest::AmazonRequest(const QUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
 }
 
-KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
+QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   QMap<QString, QString> allParams = params_;
   allParams.insert(QLatin1String("Timestamp"),
                    QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyy-MM-dd'T'hh:mm:ss'Z'")));
@@ -66,7 +66,7 @@ KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   const QByteArray sig = KCodecs::base64Encode(hmac_buffer).toPercentEncoding();
 //  myDebug() << sig;
 
-  KUrl url = m_siteUrl;
+  QUrl url = m_siteUrl;
   url.setEncodedQuery(query + "&Signature=" + sig);
   return url;
 }

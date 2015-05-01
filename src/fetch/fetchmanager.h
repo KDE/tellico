@@ -34,7 +34,7 @@
 #include <QList>
 #include <QPixmap>
 
-class KUrl;
+class QUrl;
 
 namespace Tellico {
   namespace Fetch {

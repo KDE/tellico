@@ -191,7 +191,7 @@ void ReportDialog::slotRefresh() {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  KUrl u;
+  QUrl u;
   u.setPath(m_xsltFile);
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
@@ -215,7 +215,7 @@ void ReportDialog::slotPrint() {
 
 void ReportDialog::slotSaveAs() {
   QString filter = i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
-  KUrl u = KFileDialog::getSaveUrl(KUrl(), filter, this);
+  QUrl u = KFileDialog::getSaveUrl(QUrl(), filter, this);
   if(!u.isEmpty() && u.isValid()) {
     KConfigGroup config(KGlobal::config(), "ExportOptions");
     bool encode = config.readEntry("EncodeUTF8", true);
@@ -228,7 +228,7 @@ void ReportDialog::slotSaveAs() {
       options |= Export::ExportUTF8;
     }
 
-    KUrl oldURL = m_exporter->url();
+    QUrl oldURL = m_exporter->url();
     m_exporter->setOptions(options);
     m_exporter->setURL(u);
 

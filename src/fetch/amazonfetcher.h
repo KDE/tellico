@@ -29,7 +29,7 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <kurl.h>
+#include <QUrl>
 
 #include <QPointer>
 #include <QLabel>
@@ -98,7 +98,7 @@ public:
 
   struct SiteData {
     QString title;
-    KUrl url;
+    QUrl url;
   };
   static const SiteData& siteData(int site);
 

@@ -49,7 +49,7 @@ void GCstarTest::initTestCase() {
 }
 
 void GCstarTest::testBook() {
-  KUrl url(QFINDTESTDATA("data/test-book.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-book.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -101,7 +101,7 @@ void GCstarTest::testBook() {
 }
 
 void GCstarTest::testComicBook() {
-  KUrl url(QFINDTESTDATA("data/test-comicbook.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-comicbook.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -159,7 +159,7 @@ void GCstarTest::testComicBook() {
 }
 
 void GCstarTest::testVideo() {
-  KUrl url(QFINDTESTDATA("data/test-video.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-video.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -228,7 +228,7 @@ void GCstarTest::testVideo() {
 }
 
 void GCstarTest::testMusic() {
-  KUrl url(QFINDTESTDATA("data/test-music.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-music.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -279,7 +279,7 @@ void GCstarTest::testMusic() {
 }
 
 void GCstarTest::testVideoGame() {
-  KUrl url(QFINDTESTDATA("data/test-videogame.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-videogame.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -324,7 +324,7 @@ void GCstarTest::testVideoGame() {
 }
 
 void GCstarTest::testBoardGame() {
-  KUrl url(QFINDTESTDATA("data/test-boardgame.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-boardgame.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -370,7 +370,7 @@ void GCstarTest::testBoardGame() {
 }
 
 void GCstarTest::testWine() {
-  KUrl url(QFINDTESTDATA("data/test-wine.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-wine.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -423,7 +423,7 @@ void GCstarTest::testWine() {
 }
 
 void GCstarTest::testCoin() {
-  KUrl url(QFINDTESTDATA("data/test-coin.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-coin.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
@@ -469,7 +469,7 @@ void GCstarTest::testCoin() {
 }
 
 void GCstarTest::testCustomFields() {
-  KUrl url(QFINDTESTDATA("data/test-book.gcs"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-book.gcs"));
   Tellico::Import::GCstarImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 

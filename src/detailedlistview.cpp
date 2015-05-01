@@ -129,9 +129,9 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
-    KUrl url = Kernel::self()->URL();
+    QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
+      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
       if(u == url) {
         configN = QString::fromLatin1("_%1").arg(i);
         break;
@@ -426,7 +426,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
   if(coll_->type() == Data::Collection::Base) {
     QList<ConfigInfo> info;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
+      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
       if(!u.isEmpty() && i != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;

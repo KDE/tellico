@@ -106,7 +106,7 @@ void WineComFetcher::doSearch() {
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u(WINECOM_BASE_URL);
+  QUrl u(QString::fromLatin1(WINECOM_BASE_URL));
   u.setPath(QLatin1String("/api/beta2/service.svc/XML/catalog"));
   u.addQueryItem(QLatin1String("apikey"), m_apiKey);
   u.addQueryItem(QLatin1String("offset"), QString::number((m_page-1) * WINECOM_RETURNS_PER_REQUEST));
@@ -254,8 +254,7 @@ void WineComFetcher::initXSLTHandler() {
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);

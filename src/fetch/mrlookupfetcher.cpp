@@ -74,7 +74,7 @@ void MRLookupFetcher::readConfigHook(const KConfigGroup& config_) {
 void MRLookupFetcher::search() {
   m_started = true;
 
-  KUrl u(MRLOOKUP_URL);
+  QUrl u(QString::fromLatin1(MRLOOKUP_URL));
 
   switch(request().key) {
     case Title:

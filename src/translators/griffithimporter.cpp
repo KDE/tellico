@@ -33,11 +33,10 @@
 
 using Tellico::Import::GriffithImporter;
 
-GriffithImporter::GriffithImporter(const KUrl& url_) : XSLTImporter(url_) {
+GriffithImporter::GriffithImporter(const QUrl& url_) : XSLTImporter(url_) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("griffith2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
-    KUrl u;
-    u.setPath(xsltFile);
+    QUrl u = QUrl::fromLocalFile(xsltFile);
     setXSLTURL(u);
   } else {
     myWarning() << "unable to find griffith2tellico.xsl!";

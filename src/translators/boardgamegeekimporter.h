@@ -63,7 +63,7 @@ private:
   KLineEdit* m_userEdit;
   QCheckBox* m_checkOwned;
 
-  KUrl m_xsltURL;
+  QUrl m_xsltURL;
   QString m_user;
   bool m_ownedOnly;
 };

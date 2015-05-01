@@ -69,9 +69,9 @@ void BiblioShareFetcher::readConfigHook(const KConfigGroup& config_) {
   }
 }
 
-KUrl BiblioShareFetcher::searchUrl() {
-  KUrl u(BIBLIOSHARE_BASE_URL);
-  u.addPath(QLatin1String("BiblioSimple"));
+QUrl BiblioShareFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
+  u.setPath(u.path() + QLatin1String("BiblioSimple"));
   u.addQueryItem(QLatin1String("Token"), m_token);
 
   switch(request().key) {
@@ -86,7 +86,7 @@ KUrl BiblioShareFetcher::searchUrl() {
       break;
 
     default:
-      return KUrl();
+      return QUrl();
   }
 //  myDebug() << "url:" << u.url();
   return u;
@@ -108,8 +108,8 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
       isbn = ISBNValidator::isbn13(isbn);
       isbn.remove(QLatin1Char('-'));
 
-      KUrl imageUrl(BIBLIOSHARE_BASE_URL);
-      imageUrl.addPath(QLatin1String("Images"));
+      QUrl imageUrl(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
+      imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
       imageUrl.addQueryItem(QLatin1String("Token"), m_token);
       imageUrl.addQueryItem(QLatin1String("SAN"), QString());
       imageUrl.addQueryItem(QLatin1String("Thumbnail"), QString());

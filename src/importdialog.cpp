@@ -64,7 +64,7 @@
 
 using Tellico::ImportDialog;
 
-ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& urls_, QWidget* parent_)
+ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& urls_, QWidget* parent_)
     : KDialog(parent_),
       m_importer(importer(format_, urls_)) {
   setModal(true);
@@ -165,9 +165,9 @@ Tellico::Import::Action ImportDialog::action() const {
 }
 
 // static
-Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const KUrl::List& urls_) {
+Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
 #define CHECK_SIZE if(urls_.size() > 1) myWarning() << "only importing first URL"
-  KUrl firstURL = urls_.isEmpty() ? KUrl() : urls_[0];
+  QUrl firstURL = urls_.isEmpty() ? QUrl() : urls_[0];
   Import::Importer* importer = 0;
   switch(format_) {
     case Import::TellicoXML:
@@ -200,8 +200,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       {
         QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
-          KUrl u;
-          u.setPath(xsltFile);
+          QUrl u = QUrl::fromLocalFile(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
@@ -425,8 +424,8 @@ void ImportDialog::slotUpdateAction() {
 }
 
 // static
-Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const KUrl& url_) {
-  Import::Importer* imp = importer(format_, url_);
+Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const QUrl& url_) {
+  Import::Importer* imp = importer(format_, QList<QUrl>() << url_);
   if(!imp) {
     return Data::CollPtr();
   }
