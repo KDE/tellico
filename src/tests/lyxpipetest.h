@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,26 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_CITE_LYXPIPE_H
-#define TELLICO_CITE_LYXPIPE_H
+#ifndef LYXPIPETEST_H
+#define LYXPIPETEST_H
 
-#include "actionmanager.h"
+#include <QObject>
 
-namespace Tellico {
-  namespace Cite {
+class LyxpipeTest : public QObject {
+Q_OBJECT
 
-/**
- * @author Robby Stephenson
- */
-class Lyxpipe : public Action {
-public:
-  Lyxpipe();
-
-  virtual CiteAction type() const { return CiteLyxpipe; }
-  virtual bool cite(Data::EntryList entries);
+private Q_SLOTS:
+  void testLyxpipe();
+  void testLyxpipeNotExists();
 };
-
-  } // end namespace
-} // end namespace
 
 #endif
