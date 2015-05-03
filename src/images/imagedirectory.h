@@ -29,7 +29,8 @@
 
 #include <QString>
 
-class KTempDir;
+class QTemporaryDir;
+
 class KZip;
 class KArchiveDirectory;
 
@@ -65,7 +66,7 @@ private:
   QString m_path;
   bool m_pathExists;
   // until the file gets saved, the local directory is temporary
-  KTempDir* m_dir;
+  QTemporaryDir* m_dir;
 };
 
 class TemporaryImageDirectory : public ImageDirectory {
@@ -79,7 +80,7 @@ public:
 private:
   void setPath(const QString& path);
 
-  KTempDir* m_dir;
+  QTemporaryDir* m_dir;
 };
 
 class ImageZipArchive : public ImageStorage {

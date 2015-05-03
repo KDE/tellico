@@ -27,12 +27,12 @@
 #include "filehandler.h"
 #include "../tellico_debug.h"
 
-#include <ktempdir.h>
-#include <kzip.h>
+#include <KZip>
 
 #include <QFile>
 #include <QDir>
 #include <QUrl>
+#include <QTemporaryDir>
 
 using namespace Tellico;
 using Tellico::ImageStorage;
@@ -56,9 +56,9 @@ QString ImageDirectory::path() {
   if(m_path.isEmpty()) {
     // an empty path means the file hasn't been saved yet
     if(!m_dir) {
-      m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
+      m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     }
-    setPath(m_dir->name());
+    setPath(m_dir->path());
   }
   return m_path;
 }
@@ -98,8 +98,8 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     if(path.isEmpty()) {
       // an empty path means the file hasn't been saved yet
       if(!m_dir) {
-        m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
-        ImageDirectory::setPath(m_dir->name());
+        m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
+        ImageDirectory::setPath(m_dir->path());
       }
       return writeImage(img_);
     }
@@ -135,8 +135,8 @@ void TemporaryImageDirectory::purge() {
 
 QString TemporaryImageDirectory::path() {
   if(!m_dir) {
-    m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
-    ImageDirectory::setPath(m_dir->name());
+    m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
+    ImageDirectory::setPath(m_dir->path());
   }
   return ImageDirectory::path();
 }

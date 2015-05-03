@@ -28,14 +28,12 @@
 #include "../utils/stringset.h"
 
 #include <QUrl>
-
 #include <QObject>
 #include <QColor>
 #include <QHash>
 #include <QCache>
 #include <QPixmap>
 
-class KTempDir;
 class KZip;
 
 namespace Tellico {

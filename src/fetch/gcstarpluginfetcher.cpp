@@ -42,8 +42,8 @@
 #include <kshell.h>
 #include <KFilterDev>
 #include <KTar>
-#include <KTempDir>
 
+#include <QTemporaryDir>
 #include <QDir>
 #include <QLabel>
 #include <QShowEvent>
@@ -323,18 +323,18 @@ void GCstarPluginFetcher::slotProcessExited() {
     return;
   }
 
-  KTempDir tempDir;
-  dir->copyTo(tempDir.name());
+  QTemporaryDir tempDir;
+  dir->copyTo(tempDir.path());
 
   // KDE seems to have abug (#252821) for gcstar files where the images are not in the images/ directory
   foreach(const QString& filename, dir->entries()) {
     if(dir->entry(filename)->isFile() && filename != QLatin1String("collection.gcs")) {
       const KArchiveFile* f = static_cast<const KArchiveFile*>(dir->entry(filename));
-      f->copyTo(tempDir.name() + QLatin1String("images"));
+      f->copyTo(tempDir.path() + QLatin1String("images"));
     }
   }
 
-  QUrl gcsUrl = QUrl::fromLocalFile(tempDir.name());
+  QUrl gcsUrl = QUrl::fromLocalFile(tempDir.path());
   gcsUrl = gcsUrl.adjusted(QUrl::StripTrailingSlash);
   gcsUrl.setPath(gcsUrl.path() + QLatin1Char('/') + (QLatin1String("collection.gcs")));
 

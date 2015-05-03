@@ -29,7 +29,7 @@
 
 #include "../datavectors.h"
 
-class KTempDir;
+class QTemporaryDir;
 
 namespace Tellico {
   class EntryView;
@@ -49,7 +49,7 @@ public:
   void showEntry(Data::EntryPtr entry);
 
 private:
-  KTempDir* m_tempDir;
+  QTemporaryDir* m_tempDir;
   EntryView* m_view;
 };
 

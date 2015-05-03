@@ -117,7 +117,7 @@ set(TELLICO_TEST_LIBS
    tellicotest
    Qt5::Test
    KF5::KIOCore
-   )
+)
 
 set(TELLICO2_TEST_LIBS
    tellicotest
@@ -127,8 +127,7 @@ set(TELLICO2_TEST_LIBS
    Qt5::Test
    KF5::KIOCore
    KF5::Archive
-   KF5::KDELibs4Support
-   )
+)
 
 # for some of these, the libraries seem to require being repeated so
 # that the order of linking works...no idea why...

@@ -63,7 +63,6 @@ TARGET_LINK_LIBRARIES(translators
 
 TARGET_LINK_LIBRARIES(translators
     KF5::Archive
-    KF5::KDELibs4Support
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}
@@ -98,4 +97,4 @@ ADD_DEPENDENCIES(translators tellico_config)
 
 ########### install files ###############
 
-INSTALL(FILES   bibtex-translation.xml DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
+INSTALL(FILES bibtex-translation.xml DESTINATION ${TELLICO_DATA_INSTALL_DIR})
