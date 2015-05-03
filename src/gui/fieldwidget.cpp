@@ -37,7 +37,7 @@
 #include "../tellico_debug.h"
 
 #include <kurllabel.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QWhatsThis>
 #include <QRegExp>

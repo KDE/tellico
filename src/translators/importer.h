@@ -28,11 +28,9 @@
 #include "../datavectors.h"
 #include "../collection.h"
 
-#include <QUrl>
-#include <klocale.h>
-
 #include <QObject>
 #include <QString>
+#include <QUrl>
 
 class QWidget;
 

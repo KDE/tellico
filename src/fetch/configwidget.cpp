@@ -24,7 +24,7 @@
 
 #include "configwidget.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kacceleratormanager.h>
 #include <KConfigGroup>
 

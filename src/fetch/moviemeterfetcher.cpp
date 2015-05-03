@@ -30,7 +30,7 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KJobWidgets/KJobWidgets>

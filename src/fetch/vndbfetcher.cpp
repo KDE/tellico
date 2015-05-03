@@ -33,7 +33,7 @@
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QTcpSocket>
 #include <QLabel>

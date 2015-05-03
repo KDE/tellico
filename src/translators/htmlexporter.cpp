@@ -46,7 +46,7 @@
 #include <kio/job.h>
 #include <kio/netaccess.h>
 #include <kapplication.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kuser.h>
 
 #include <QDir>

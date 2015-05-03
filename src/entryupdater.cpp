@@ -34,7 +34,7 @@
 #include "entrymatchdialog.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kiconloader.h>
 #include <kapplication.h>
 

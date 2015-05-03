@@ -34,7 +34,7 @@
 #include "../images/imagefactory.h"
 
 #include <KStandardDirs>
-#include <KLocale>
+#include <KLocalizedString>
 
 QTEST_KDEMAIN( BiblioShareFetcherTest, GUI )
 

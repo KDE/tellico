@@ -32,7 +32,7 @@
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>

@@ -26,8 +26,6 @@
 #include "../collection.h"
 #include "../utils/bibtexhandler.h"
 
-#include <klocale.h>
-
 #include <QApplication>
 #include <QClipboard>
 
@@ -48,7 +46,7 @@ bool Clipboard::cite(Tellico::Data::EntryList entries_) {
 
   QString s = QLatin1String("\\cite{");
   foreach(Data::EntryPtr entry, entries_) {
-      s += BibtexHandler::bibtexKey(entry);
+    s += BibtexHandler::bibtexKey(entry);
     s += QLatin1String(", ");
   }
   s.truncate(s.length()-2); // remove last comma

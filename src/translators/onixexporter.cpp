@@ -38,7 +38,7 @@
 #include <kapplication.h>
 #include <kzip.h>
 #include <KConfigGroup>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QDomDocument>
 #include <QFile>

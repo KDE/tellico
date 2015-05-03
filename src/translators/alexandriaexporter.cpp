@@ -32,7 +32,7 @@
 #include "../gui/guiproxy.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kapplication.h>
 

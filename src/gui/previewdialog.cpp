@@ -27,7 +27,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h" // for StyleOptions
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <khtmlview.h>
 
 #include <QTemporaryDir>

@@ -29,7 +29,7 @@
 #include "../tellico_debug.h"
 
 #include <kglobal.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <kmimetype.h>

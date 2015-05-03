@@ -35,7 +35,7 @@
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kdialog.h>
 #include <KConfigGroup>
 #include <klineedit.h>

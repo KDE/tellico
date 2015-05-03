@@ -24,7 +24,7 @@
 
 #include "stringmapdialog.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kdialogbuttonbox.h>

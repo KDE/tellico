@@ -27,7 +27,7 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <QUrl>
 

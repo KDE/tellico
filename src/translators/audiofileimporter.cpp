@@ -46,7 +46,7 @@
 #include <taglib/audioproperties.h>
 #endif
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kapplication.h>
 
 #include <QLabel>

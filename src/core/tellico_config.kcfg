@@ -6,7 +6,7 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
-<include>klocale.h</include>
+<include>KLocalizedString</include>
 <include>kglobalsettings.h</include>
 <include>kcolorscheme.h</include>
 <kcfgfile name="tellicorc"/>

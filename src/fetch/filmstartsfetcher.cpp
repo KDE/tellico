@@ -24,7 +24,7 @@
 
 #include "filmstartsfetcher.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace {
   static const char* FILMSTARTS_API_URL = "http://api.filmstarts.de/rest/v3/";

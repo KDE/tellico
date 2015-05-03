@@ -42,6 +42,7 @@
 #include <kshell.h>
 #include <KFilterDev>
 #include <KTar>
+#include <KLocalizedString>
 
 #include <QTemporaryDir>
 #include <QDir>

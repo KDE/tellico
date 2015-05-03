@@ -52,7 +52,7 @@
 #include "translators/boardgamegeekimporter.h"
 #include "utils/datafileregistry.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kstandardguiitem.h>
 
 #include <QGroupBox>

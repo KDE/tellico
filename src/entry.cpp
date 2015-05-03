@@ -31,7 +31,7 @@
 #include "utils/stringset.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 

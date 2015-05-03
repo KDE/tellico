@@ -29,7 +29,7 @@
 #include "../collection.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kurlrequester.h>
 
 #include <QLabel>

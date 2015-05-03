@@ -37,7 +37,7 @@
 #include "gui/countdelegate.h"
 
 #include <kmenu.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QIcon>
 
 #include <QStringList>

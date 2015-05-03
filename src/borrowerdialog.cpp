@@ -32,7 +32,7 @@
 #include "collection.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KLineEdit>
 #include <KJob>
 

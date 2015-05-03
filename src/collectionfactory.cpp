@@ -26,7 +26,7 @@
 #include "collection.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using namespace Tellico;
 using Tellico::CollectionFactory;

@@ -31,7 +31,7 @@
 #include "../utils/iso5426converter.h"
 #include "../utils/iso6937converter.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kapplication.h>
 #include <KConfigGroup>
 

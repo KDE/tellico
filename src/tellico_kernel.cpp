@@ -49,7 +49,7 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kundostack.h>
 
 using Tellico::Kernel;

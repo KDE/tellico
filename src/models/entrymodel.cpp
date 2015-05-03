@@ -35,7 +35,7 @@
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const int ENTRYMODEL_IMAGE_HEIGHT = 64;

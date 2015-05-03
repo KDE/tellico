@@ -33,7 +33,7 @@
 #include "utils/string_utils.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <ktextedit.h>

@@ -45,6 +45,7 @@
 #include <KDateTime>
 #include <KFileMetaInfo>
 #include <KIconLoader>
+#include <KLocalizedString>
 
 #ifdef HAVE_NEPOMUK
 #include <Nepomuk/Types/Property>

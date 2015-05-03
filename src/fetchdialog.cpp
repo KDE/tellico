@@ -49,7 +49,7 @@
 #include "barcode/barcode.h"
 #endif
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kstatusbar.h>

@@ -32,7 +32,7 @@
 #include "gui/statusbar.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QTimer>
 

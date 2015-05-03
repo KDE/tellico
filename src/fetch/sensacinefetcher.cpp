@@ -24,7 +24,7 @@
 
 #include "sensacinefetcher.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace {
   static const char* SENSACINE_API_URL = "http://api.sensacine.com/rest/v3/";

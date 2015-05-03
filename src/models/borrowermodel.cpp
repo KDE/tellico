@@ -30,7 +30,7 @@
 #include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QIcon>
 
 using Tellico::BorrowerModel;

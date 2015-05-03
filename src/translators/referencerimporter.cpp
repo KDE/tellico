@@ -29,6 +29,8 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
+#include <KLocalizedString>
+
 #include <QPixmap>
 
 using Tellico::Import::ReferencerImporter;

@@ -46,7 +46,7 @@
 #include "tellico_debug.h"
 
 #include <klineedit.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <knuminput.h>

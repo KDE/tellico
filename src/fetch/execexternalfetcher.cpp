@@ -41,7 +41,7 @@
 #include "../translators/risimporter.h"
 #include "../utils/datafileregistry.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kprocess.h>
 #include <kurlrequester.h>
 #include <kacceleratormanager.h>

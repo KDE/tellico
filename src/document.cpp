@@ -43,7 +43,7 @@
 #include "tellico_debug.h"
 
 #include <kmessagebox.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kglobal.h>
 #include <kapplication.h>
 

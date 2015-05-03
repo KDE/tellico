@@ -41,6 +41,7 @@
 
 #include <kmessagebox.h>
 #include <kapplication.h>
+#include <KLocalizedString>
 
 #include <QString>
 #include <QPixmap>

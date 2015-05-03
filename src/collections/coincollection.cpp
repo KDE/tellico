@@ -24,7 +24,7 @@
 
 #include "coincollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* coin_general = I18N_NOOP("General");

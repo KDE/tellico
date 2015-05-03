@@ -26,7 +26,7 @@
 #include "../core/filehandler.h"
 #include "../collection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Import::XMLImporter;
 

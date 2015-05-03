@@ -27,7 +27,7 @@
 #include "../progressmanager.h"
 #include "progress.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kapplication.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>

@@ -34,7 +34,7 @@
 #include "models/models.h"
 #include "gui/countdelegate.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmenu.h>
 #include <QIcon>
 

@@ -29,7 +29,7 @@
 #include "../gui/collectiontypecombo.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>

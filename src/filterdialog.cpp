@@ -33,7 +33,7 @@
 #include "gui/combobox.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kpushbutton.h>

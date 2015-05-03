@@ -36,7 +36,7 @@
 #include "models/entrysortmodel.h"
 #include "models/modelmanager.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kapplication.h>
 #include <kaction.h>

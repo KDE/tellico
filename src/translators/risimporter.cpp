@@ -32,6 +32,7 @@
 #include "../tellico_debug.h"
 
 #include <kapplication.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 #include <QTextStream>

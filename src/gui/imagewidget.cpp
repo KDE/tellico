@@ -33,7 +33,7 @@
 #include <QDrag>
 
 #include <KFileDialog>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KMessageBox>
 #include <KPushButton>
 #include <KStandardDirs>

@@ -24,7 +24,7 @@
 
 #include "screenrushfetcher.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace {
   static const char* SCREENRUSH_API_URL = "http://api.screenrush.co.uk/rest/v3/";

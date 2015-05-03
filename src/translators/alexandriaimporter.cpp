@@ -28,12 +28,13 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../tellico_debug.h"
 #include "../utils/isbnvalidator.h"
+#include "../tellico_debug.h"
 
 #include <kcombobox.h>
 #include <kapplication.h>
 #include <kstringhandler.h>
+#include <KLocalizedString>
 
 #include <QLabel>
 #include <QGroupBox>

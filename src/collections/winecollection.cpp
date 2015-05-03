@@ -24,7 +24,7 @@
 
 #include "winecollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* wine_general = I18N_NOOP("General");

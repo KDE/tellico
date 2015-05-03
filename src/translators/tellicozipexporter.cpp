@@ -33,7 +33,7 @@
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kzip.h>
 #include <kapplication.h>

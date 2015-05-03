@@ -27,7 +27,7 @@
 #include "entry.h"
 #include "tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KTitleWidget>
 #include <KGlobal>
 

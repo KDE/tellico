@@ -41,7 +41,7 @@
 #include "execexternalfetcher.h"
 
 #include <kglobal.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kiconloader.h>
 #include <kstandarddirs.h>
 #include <ktemporaryfile.h>

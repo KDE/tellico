@@ -76,7 +76,7 @@
 #include <kfiledialog.h>
 #include <kmenubar.h>
 #include <ktoolbar.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <kstandardaction.h>
 #include <kwindowsystem.h>

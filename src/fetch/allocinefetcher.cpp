@@ -33,7 +33,7 @@
 
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KLineEdit>
 #include <KIntSpinBox>

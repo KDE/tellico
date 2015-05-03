@@ -29,16 +29,10 @@
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kde_file.h>
+#include <KLocalizedString>
 
 #include <QFile>
 #include <QTextStream>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 using Tellico::Cite::Lyxpipe;
 
@@ -68,10 +62,8 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
     return false;
   }
 
-  int pipeFd = KDE_open(QFile::encodeName(lyxpipe), O_WRONLY);
-  if(!file.open(pipeFd, QIODevice::WriteOnly)) {
+  if(!file.open(QIODevice::WriteOnly)) {
     Kernel::self()->sorry(errorStr);
-    ::close(pipeFd);
     return false;
   }
 
@@ -102,6 +94,5 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
 //  ts << "LYXSRV:tellico:bye\n";
   ts.flush();
   file.close();
-  ::close(pipeFd);
   return true;
 }

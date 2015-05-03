@@ -31,7 +31,7 @@
 #include "../utils/xmlhandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <ktemporaryfile.h>

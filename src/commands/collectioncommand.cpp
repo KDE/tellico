@@ -29,7 +29,7 @@
 #include "../controller.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Command::CollectionCommand;
 

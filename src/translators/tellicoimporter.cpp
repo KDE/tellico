@@ -36,7 +36,7 @@
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kzip.h>
 #include <kapplication.h>
 

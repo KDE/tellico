@@ -46,7 +46,7 @@
 #include <dom/dom_element.h>
 #include <kapplication.h>
 #include <ktemporaryfile.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kglobalsettings.h>
 
 #include <QFile>

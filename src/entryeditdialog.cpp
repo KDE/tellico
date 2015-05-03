@@ -33,7 +33,7 @@
 #include "gui/cursorsaver.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>

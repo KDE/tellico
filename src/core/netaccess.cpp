@@ -32,7 +32,7 @@
 #include <kio/previewjob.h>
 #include <kio/jobuidelegate.h>
 #include <ktemporaryfile.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QUrl>
 #include <QEventLoop>

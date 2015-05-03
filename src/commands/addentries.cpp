@@ -28,7 +28,7 @@
 #include "../datavectors.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Command::AddEntries;
 

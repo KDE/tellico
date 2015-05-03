@@ -28,7 +28,7 @@
 #include "../collection.h"
 #include "../core/filehandler.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kurlrequester.h>
 #include <KUser>
 #include <KConfigGroup>

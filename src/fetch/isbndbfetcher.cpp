@@ -32,7 +32,7 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>

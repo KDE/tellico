@@ -32,6 +32,8 @@
 #include "xslthandler.h"
 #include "tellicoimporter.h"
 
+#include <KLocalizedString>
+
 #include <QTextCodec>
 #include <QTextStream>
 

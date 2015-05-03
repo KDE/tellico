@@ -30,7 +30,7 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KLineEdit>
 

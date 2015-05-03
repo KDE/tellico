@@ -29,7 +29,7 @@
 #include "../images/imageinfo.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KLineEdit>
 

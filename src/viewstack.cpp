@@ -29,7 +29,7 @@
 #include "core/tellico_config.h"
 
 #include <QIcon>
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>

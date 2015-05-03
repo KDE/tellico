@@ -41,7 +41,7 @@
 #include "translators/onixexporter.h"
 #include "translators/gcstarexporter.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kglobal.h>
 #include <kconfig.h>
 

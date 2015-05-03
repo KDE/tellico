@@ -27,7 +27,7 @@
 #include "entry.h"
 #include "fetch/fetchmanager.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <ktextedit.h>
 #include <KHBox>
 #include <KIconLoader>

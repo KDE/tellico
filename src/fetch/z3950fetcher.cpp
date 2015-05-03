@@ -49,7 +49,7 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kstandarddirs.h>
 #include <kapplication.h>
 #include <knuminput.h>

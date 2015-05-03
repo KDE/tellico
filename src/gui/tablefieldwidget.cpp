@@ -29,7 +29,7 @@
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmenu.h>
 #include <QIcon>
 #include <kinputdialog.h>

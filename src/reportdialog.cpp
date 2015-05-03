@@ -36,7 +36,7 @@
 #include "core/tellico_config.h"
 #include "utils/datafileregistry.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
 #include <kstandarddirs.h>

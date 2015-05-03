@@ -36,7 +36,7 @@
 #include "models/entrysortmodel.h"
 
 #include <kmenu.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <QIcon>
 
 #include <QPainter>

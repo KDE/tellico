@@ -40,7 +40,7 @@
 #include "../models/models.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <KCodecs>
 #include <KGlobal>

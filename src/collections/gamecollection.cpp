@@ -25,7 +25,7 @@
 
 #include "gamecollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* game_general = I18N_NOOP("General");

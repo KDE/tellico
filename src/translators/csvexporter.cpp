@@ -26,7 +26,7 @@
 #include "../collection.h"
 #include "../core/filehandler.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kconfig.h>
 #include <KConfigGroup>

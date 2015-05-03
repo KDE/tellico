@@ -40,7 +40,7 @@
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <kconfig.h>

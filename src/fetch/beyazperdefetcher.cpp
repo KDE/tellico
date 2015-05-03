@@ -24,7 +24,7 @@
 
 #include "beyazperdefetcher.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 namespace {
   static const char* BEYAZPERDE_API_URL = "http://api.beyazperde.com/rest/v3/";

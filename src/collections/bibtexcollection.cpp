@@ -28,7 +28,7 @@
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kstringhandler.h>
 
 using namespace Tellico;

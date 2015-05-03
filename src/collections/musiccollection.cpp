@@ -25,7 +25,7 @@
 #include "musiccollection.h"
 #include "../entrycomparison.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* music_general = I18N_NOOP("General");
