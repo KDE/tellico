@@ -41,6 +41,8 @@ void LyxpipeTest::testLyxpipe() {
   Tellico::Config::setLyxpipe(tempFile.fileName().remove(QLatin1String(".in")));
 
   Tellico::Cite::Lyxpipe pipe;
+  QVERIFY(!pipe.hasError());
+  QVERIFY(pipe.errorString().isEmpty());
 
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
 

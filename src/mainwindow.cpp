@@ -1891,7 +1891,11 @@ void MainWindow::slotConvertToBibliography() {
 
 void MainWindow::slotCiteEntry(int action_) {
   StatusBar::self()->setStatus(i18n("Creating citations..."));
-  Cite::ActionManager::self()->cite(static_cast<Cite::CiteAction>(action_), Controller::self()->selectedEntries());
+  Cite::ActionManager* man = Cite::ActionManager::self();
+  man->cite(static_cast<Cite::CiteAction>(action_), Controller::self()->selectedEntries());
+  if(man->hasError()) {
+    Kernel::self()->sorry(man->errorString());
+  }
   StatusBar::self()->clearStatus();
 }
 

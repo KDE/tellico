@@ -25,7 +25,6 @@
 #include "lyxpipe.h"
 #include "../collection.h"
 #include "../utils/bibtexhandler.h"
-#include "../tellico_kernel.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
@@ -36,10 +35,11 @@
 
 using Tellico::Cite::Lyxpipe;
 
-Lyxpipe::Lyxpipe() : Action() {
+Lyxpipe::Lyxpipe() : Action(), m_hasError(false) {
 }
 
 bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
+  m_hasError = false;
   if(entries_.isEmpty()) {
     return false;
   }
@@ -54,16 +54,16 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
   lyxpipe += QLatin1String(".in");
 //  myDebug() << lyxpipe;
 
-  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
+  m_errorString = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
 
   QFile file(lyxpipe);
   if(!file.exists()) {
-    Kernel::self()->sorry(errorStr);
+    m_hasError = true;
     return false;
   }
 
   if(!file.open(QIODevice::WriteOnly)) {
-    Kernel::self()->sorry(errorStr);
+    m_hasError = true;
     return false;
   }
 
@@ -95,4 +95,12 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
   ts.flush();
   file.close();
   return true;
+}
+
+bool Lyxpipe::hasError() const {
+  return m_hasError;
+}
+
+QString Lyxpipe::errorString() const {
+  return m_hasError ? m_errorString : QString();
 }

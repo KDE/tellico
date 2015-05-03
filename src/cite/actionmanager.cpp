@@ -83,3 +83,11 @@ bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::Entry
 
   return m_action->cite(entries_);
 }
+
+bool ActionManager::hasError() const {
+  return m_action && m_action->hasError();
+}
+
+QString ActionManager::errorString() const {
+  return m_action ? m_action->errorString() : QString();
+}
