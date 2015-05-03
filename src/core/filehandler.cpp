@@ -39,7 +39,6 @@
 #include <kfileitem.h>
 #include <kio/job.h>
 #include <kfilterdev.h>
-#include <kdeversion.h>
 #include <kicon.h>
 #include <kiconloader.h>
 
