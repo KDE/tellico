@@ -29,12 +29,12 @@
 
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <QUrl>
 
 #include <QPointer>
 
 class KRun;
-class KTemporaryFile;
+
+class QTemporaryFile;
 
 namespace Tellico {
   class XSLTHandler;
@@ -111,7 +111,7 @@ private:
 
   // to run any clicked processes
   QPointer<KRun> m_run;
-  KTemporaryFile* m_tempFile;
+  QTemporaryFile* m_tempFile;
   bool m_useGradientImages : 1;
   bool m_checkCommonFile : 1;
 };

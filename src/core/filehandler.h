@@ -30,13 +30,13 @@
 
 class QUrl;
 
-class KSaveFile;
 namespace KIO {
   class Job;
 }
 
 class QDomDocument;
 class QIODevice;
+class QSaveFile;
 
 namespace Tellico {
   class ImageFactory;
@@ -176,7 +176,7 @@ private:
    * @param encodeUTF8 Whether to use UTF-8 encoding, or Locale
    * @return A boolean indicating success
    */
-  static bool writeTextFile(KSaveFile& file, const QString& text, bool encodeUTF8);
+  static bool writeTextFile(QSaveFile& file, const QString& text, bool encodeUTF8);
   /**
    * Writes data to a file.
    *
@@ -184,7 +184,7 @@ private:
    * @param data The data
    * @return A boolean indicating success
    */
-  static bool writeDataFile(KSaveFile& file, const QByteArray& data);
+  static bool writeDataFile(QSaveFile& file, const QByteArray& data);
 };
 
 } // end namespace

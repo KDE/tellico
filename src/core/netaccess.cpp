@@ -31,11 +31,10 @@
 #include <kio/netaccess.h>
 #include <kio/previewjob.h>
 #include <kio/jobuidelegate.h>
-#include <ktemporaryfile.h>
 #include <KLocalizedString>
 
 #include <QUrl>
-#include <QEventLoop>
+#include <QTemporaryFile>
 
 #include <unistd.h>
 
@@ -52,7 +51,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
   Q_ASSERT(target_.isEmpty());
   // copied from KIO::NetAccess::download() apidox except for quiet part
   if(target_.isEmpty()) {
-    KTemporaryFile tmpFile;
+    QTemporaryFile tmpFile;
     tmpFile.setAutoRemove(false);
     tmpFile.open();
     target_ = tmpFile.fileName();

@@ -34,19 +34,16 @@
 #include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
-#include <ktemporaryfile.h>
-#include <ksavefile.h>
 #include <kfileitem.h>
 #include <kio/job.h>
-#include <kfilterdev.h>
-#include <kicon.h>
-#include <kiconloader.h>
+#include <KBackup>
 
 #include <QUrl>
 #include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
-#include <QList>
+#include <QTemporaryFile>
+#include <QSaveFile>
 
 using Tellico::FileHandler;
 
@@ -175,9 +172,8 @@ Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString
     return readImageFile(url_, id_, quiet_);
   }
 
-  KTemporaryFile tempFile;
+  QTemporaryFile tempFile;
   tempFile.open();
-  tempFile.setAutoRemove(true);
   QUrl tempURL = QUrl::fromLocalFile(tempFile.fileName());
 
   KIO::JobFlags flags = KIO::Overwrite;
@@ -222,15 +218,11 @@ bool FileHandler::queryExists(const QUrl& url_) {
   // no need to check if we're actually overwriting the current url
   // the TellicoImporter forces the write
   GUI::CursorSaver cs(Qt::ArrowCursor);
-  KGuiItem guiItem(i18n("Overwrite"));
-  guiItem.setIcon(KIcon(QLatin1String("document-save-as"),
-                        KIconLoader::global(),
-                        QStringList() << QLatin1String("emblem-important")));
   QString str = i18n("A file named \"%1\" already exists. "
                      "Are you sure you want to overwrite it?", url_.fileName());
   int want_continue = KMessageBox::warningContinueCancel(GUI::Proxy::widget(), str,
                                                          i18n("Overwrite File?"),
-                                                         guiItem);
+                                                         KStandardGuiItem::overwrite());
 
   if(want_continue == KMessageBox::Cancel) {
     return false;
@@ -241,16 +233,7 @@ bool FileHandler::queryExists(const QUrl& url_) {
 bool FileHandler::writeBackupFile(const QUrl& url_) {
   bool success = true;
   if(url_.isLocalFile()) {
-    // KDE bug 178640, for versions prior to KDE 4.2RC1, backup file was not deleted first
-    // this might fail if a different backup scheme is being used
-    if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
-      QFile::remove(url_.path() + QLatin1Char('~'));
-    }
-//    success = KSaveFile::backupFile(url_.path());
     success = KBackup::backupFile(url_.path());
-    if(KDE::version() < KDE_MAKE_VERSION(4, 1, 90)) {
-      success = true; // ignore error for old version because of bug
-    }
   } else {
     QUrl backup(url_);
     backup.setPath(backup.path() + QLatin1Char('~'));
@@ -273,8 +256,8 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
   }
 
   if(url_.isLocalFile()) {
-    KSaveFile f(url_.path());
-    f.open();
+    QSaveFile f(url_.toLocalFile());
+    f.open(QIODevice::WriteOnly);
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
         GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
@@ -286,10 +269,10 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
   }
 
   // save to remote file
-  KTemporaryFile tempfile;
+  QTemporaryFile tempfile;
   tempfile.open();
-  KSaveFile f(tempfile.fileName());
-  f.open();
+  QSaveFile f(tempfile.fileName());
+  f.open(QIODevice::WriteOnly);
   if(f.error() != QFile::NoError) {
     tempfile.remove();
     if(!quiet_) {
@@ -313,14 +296,14 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
   return success;
 }
 
-bool FileHandler::writeTextFile(KSaveFile& file_, const QString& text_, bool encodeUTF8_) {
+bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool encodeUTF8_) {
   QTextStream t(&file_);
   if(encodeUTF8_) {
     t.setCodec("UTF-8");
   }
   t << text_;
   file_.flush();
-  bool success = file_.finalize();
+  bool success = file_.commit();
 #ifndef NDEBUG
   if(!success) {
     myDebug() << "error = " << file_.error();
@@ -335,8 +318,8 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
   }
 
   if(url_.isLocalFile()) {
-    KSaveFile f(url_.path());
-    f.open();
+    QSaveFile f(url_.toLocalFile());
+    f.open(QIODevice::WriteOnly);
     if(f.error() != QFile::NoError) {
       if(!quiet_) {
         GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
@@ -347,10 +330,10 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
   }
 
   // save to remote file
-  KTemporaryFile tempfile;
+  QTemporaryFile tempfile;
   tempfile.open();
-  KSaveFile f(tempfile.fileName());
-  f.open();
+  QSaveFile f(tempfile.fileName());
+  f.open(QIODevice::WriteOnly);
   if(f.error() != QFile::NoError) {
     if(!quiet_) {
       GUI::Proxy::sorry(i18n(errorWrite, url_.fileName()));
@@ -370,11 +353,11 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
   return success;
 }
 
-bool FileHandler::writeDataFile(KSaveFile& file_, const QByteArray& data_) {
+bool FileHandler::writeDataFile(QSaveFile& file_, const QByteArray& data_) {
   QDataStream s(&file_);
   s.writeRawData(data_.data(), data_.size());
   file_.flush();
-  bool success = file_.finalize();
+  bool success = file_.commit();
 #ifndef NDEBUG
   if(!success) {
     myDebug() << "error = " << file_.error();

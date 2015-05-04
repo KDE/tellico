@@ -30,18 +30,16 @@
 #include "../gui/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#include <QDrag>
-
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPushButton>
 #include <KStandardDirs>
 #include <KProgressDialog>
-#include <KTemporaryFile>
 #include <KProcess>
 #include <KMimeTypeTrader>
 #include <KRun>
+#include <KGlobal>
 
 #include <QMenu>
 #include <QMatrix>
@@ -58,6 +56,8 @@
 #include <QActionGroup>
 #include <QTimer>
 #include <QSet>
+#include <QDrag>
+#include <QTemporaryFile>
 
 #ifdef HAVE_KSANE
 #include <libksane/ksane.h>
@@ -286,11 +286,12 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
   }
   QImage scannedImage = m_saneWidget->toQImage(data, w, h, bpl,
                                                static_cast<KSaneIface::KSaneWidget::ImageFormat>(f));
-  KTemporaryFile temp;
-  temp.setSuffix(QLatin1String(".png"));
+  QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
     scannedImage.save(temp.fileName(), "PNG");
     loadImage(temp.fileName());
+  } else {
+    myWarning() << "Failed to open temp image file";
   }
   QTimer::singleShot(100, m_saneDlg, SLOT(accept()));
 #else
@@ -309,8 +310,7 @@ void ImageWidget::slotEditImage() {
             this, SLOT(slotFinished()));
   }
   if(m_editor && m_editProcess->state() == QProcess::NotRunning) {
-    KTemporaryFile temp;
-    temp.setSuffix(QLatin1String(".png"));
+    QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
     if(temp.open()) {
       m_img = temp.fileName();
       const Data::Image& img = ImageFactory::imageById(m_imageID);
@@ -325,6 +325,8 @@ void ImageWidget::slotEditImage() {
         m_waitDlg->progressBar()->setRange(0, 0);
       }
       m_waitDlg->exec();
+    } else {
+      myWarning() << "Failed to open temp image file";
     }
   }
 }

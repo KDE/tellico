@@ -44,12 +44,12 @@
 #include <KLocalizedString>
 #include <kiconloader.h>
 #include <kstandarddirs.h>
-#include <ktemporaryfile.h>
 #include <kio/job.h>
 #include <kio/netaccess.h>
 
 #include <QFileInfo>
 #include <QDir>
+#include <QTemporaryFile>
 
 #define LOAD_ICON(name, group, size) \
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
@@ -422,13 +422,11 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       // bundledScriptHasExecPath() actually needs to write the exec path
       // back to the config so the configWidget can read it. But if the spec file
       // is not readable, that doesn't work. So work around it with a copy to a temp file
-      KTemporaryFile tmpFile;
-      tmpFile.setAutoRemove(true);
+      QTemporaryFile tmpFile;
       tmpFile.open();
-      QUrl from, to;
-      from.setPath(m_scriptMap[name_]);
-      to.setPath(tmpFile.fileName());
-      // have to overwrite since KTemporaryFile already created it
+      QUrl from = QUrl::fromLocalFile(m_scriptMap[name_]);
+      QUrl to = QUrl::fromLocalFile(tmpFile.fileName());
+      // have to overwrite since QTemporaryFile already created it
       KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
       if(!KIO::NetAccess::synchronousRun(job, 0)) {
         myDebug() << KIO::NetAccess::lastErrorString();

@@ -45,14 +45,15 @@
 #include <khtmlview.h>
 #include <dom/dom_element.h>
 #include <kapplication.h>
-#include <ktemporaryfile.h>
 #include <KLocalizedString>
 #include <kglobalsettings.h>
+#include <KGlobal>
 
 #include <QFile>
 #include <QTextStream>
 #include <QClipboard>
 #include <QDomDocument>
+#include <QTemporaryFile>
 
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;
@@ -402,8 +403,7 @@ void EntryView::resetColors() {
                              .arg(dir + QLatin1String("gradient_header.png"));
 
   delete m_tempFile;
-  m_tempFile = new KTemporaryFile();
-  m_tempFile->setAutoRemove(true);
+  m_tempFile = new QTemporaryFile();
   if(!m_tempFile->open()) {
     myDebug() << "failed to open temp file";
     delete m_tempFile;
@@ -423,4 +423,3 @@ void EntryView::resetColors() {
   openUrl(m_tempFile->fileName());
   connect(this, SIGNAL(completed()), SLOT(slotReloadEntry()));
 }
-
