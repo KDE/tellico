@@ -34,6 +34,7 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <QExplicitlySharedDataPointer>
 
 class KConfigGroup;
 class QUrl;
@@ -52,8 +53,7 @@ class Fetcher : public QObject, public QSharedData {
 Q_OBJECT
 
 public:
-  typedef KSharedPtr<Fetcher> Ptr;
-  typedef KSharedPtr<const Fetcher> CPtr;
+  typedef QExplicitlySharedDataPointer<Fetcher> Ptr;
 
   /**
    */

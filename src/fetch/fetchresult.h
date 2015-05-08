@@ -27,8 +27,7 @@
 
 #include "../datavectors.h"
 
-#include <KSharedPtr>
-
+#include <QExplicitlySharedDataPointer>
 #include <QString>
 
 namespace Tellico {
@@ -38,13 +37,13 @@ class Fetcher;
 
 class FetchResult {
 public:
-  FetchResult(KSharedPtr<Fetcher> f, Data::EntryPtr entry);
-  FetchResult(KSharedPtr<Fetcher> f, const QString& t, const QString& d, const QString& i = QString());
+  FetchResult(QExplicitlySharedDataPointer<Fetcher> f, Data::EntryPtr entry);
+  FetchResult(QExplicitlySharedDataPointer<Fetcher> f, const QString& t, const QString& d, const QString& i = QString());
 
   Data::EntryPtr fetchEntry();
 
   uint uid;
-  KSharedPtr<Fetcher> fetcher;
+  QExplicitlySharedDataPointer<Fetcher> fetcher;
   QString title;
   QString desc;
   QString isbn;
