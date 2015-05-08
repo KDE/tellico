@@ -109,7 +109,8 @@ bool Manager::installTemplate(const QString& file_) {
     if(QFile::exists(name)) {
       QFile::remove(name);
     }
-    if(KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name))) {
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name));
+    if(job->exec()) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
     }
@@ -201,6 +202,7 @@ bool Manager::removeTemplate(const QString& file_, bool manual_) {
 
 void Manager::removeNewStuffFile(const QString& file_) {
 //TODO KF5
+  Q_UNUSED(file_);
 #if 0
   DEBUG_BLOCK;
   if(file_.isEmpty()) {
@@ -280,7 +282,8 @@ bool Manager::installScript(const QString& file_) {
     copyTarget += sourceName;
     scriptFolder = copyTarget + QDir::separator();
     QDir().mkpath(scriptFolder);
-    if(KIO::file_copy(QUrl(file_), QUrl(scriptFolder + exeFile)) == false) {
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile));
+    if(!job->exec()) {
       myDebug() << "Copy failed";
       return false;
     }
