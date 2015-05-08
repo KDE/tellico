@@ -200,6 +200,15 @@ add_test(bibtexmltest bibtexmltest)
 ecm_mark_as_test(bibtexmltest)
 TARGET_LINK_LIBRARIES(bibtexmltest translatorstest ${TELLICO2_TEST_LIBS})
 
+add_executable(citetest citetest.cpp
+  ../collections/bibtexcollection.cpp
+)
+ecm_mark_nongui_executable(citetest)
+add_test(citetest citetest)
+ecm_mark_as_test(citetest)
+TARGET_LINK_LIBRARIES(citetest cite tellicotest Qt5::Test)
+ADD_DEPENDENCIES(citetest tellico_config)
+
 add_executable(ciwtest ciwtest.cpp
   ../translators/ciwimporter.cpp
   ../translators/importer.cpp
@@ -245,15 +254,6 @@ ecm_mark_nongui_executable(griffithtest)
 add_test(griffithtest griffithtest)
 ecm_mark_as_test(griffithtest)
 TARGET_LINK_LIBRARIES(griffithtest translatorstest ${TELLICO2_TEST_LIBS})
-
-add_executable(lyxpipetest lyxpipetest.cpp
-  ../collections/bibtexcollection.cpp
-)
-ecm_mark_nongui_executable(lyxpipetest)
-add_test(lyxpipetest lyxpipetest)
-ecm_mark_as_test(lyxpipetest)
-TARGET_LINK_LIBRARIES(lyxpipetest cite tellicotest Qt5::Test)
-ADD_DEPENDENCIES(lyxpipetest tellico_config)
 
 add_executable(referencertest referencertest.cpp
   ../translators/referencerimporter.cpp

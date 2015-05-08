@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,17 +22,18 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef LYXPIPETEST_H
-#define LYXPIPETEST_H
+#ifndef CITETEST_H
+#define CITETEST_H
 
 #include <QObject>
 
-class LyxpipeTest : public QObject {
+class CiteTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void testLyxpipe();
   void testLyxpipeNotExists();
+  void testClipboard();
 };
 
 #endif

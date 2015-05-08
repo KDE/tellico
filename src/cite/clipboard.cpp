@@ -53,6 +53,7 @@ bool Clipboard::cite(Tellico::Data::EntryList entries_) {
   s += QLatin1Char('}');
 
   QClipboard* cb = QApplication::clipboard();
+  Q_ASSERT(cb);
   cb->setText(s, QClipboard::Clipboard);
   return true;
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,18 +24,21 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "lyxpipetest.h"
+#include "citetest.h"
 #include "../cite/lyxpipe.h"
+#include "../cite/clipboard.h"
 #include "../core/tellico_config.h"
 #include "../collections/bibtexcollection.h"
 
 #include <QTest>
 #include <QTemporaryFile>
+#include <QApplication>
+#include <QClipboard>
 
-QTEST_GUILESS_MAIN( LyxpipeTest )
+QTEST_MAIN( CiteTest )
 
-void LyxpipeTest::testLyxpipe() {
-  QTemporaryFile tempFile(QLatin1String("lyxpipetest.XXXXXX.in"));
+void CiteTest::testLyxpipe() {
+  QTemporaryFile tempFile(QLatin1String("citetest.XXXXXX.in"));
   QVERIFY(tempFile.open());
   // remove ".in" that gets added by Lyxpipe
   Tellico::Config::setLyxpipe(tempFile.fileName().remove(QLatin1String(".in")));
@@ -43,6 +46,7 @@ void LyxpipeTest::testLyxpipe() {
   Tellico::Cite::Lyxpipe pipe;
   QVERIFY(!pipe.hasError());
   QVERIFY(pipe.errorString().isEmpty());
+  QCOMPARE(pipe.type(), Tellico::Cite::CiteLyxpipe);
 
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
 
@@ -65,8 +69,8 @@ void LyxpipeTest::testLyxpipe() {
   QCOMPARE(text, QLatin1String("LYXCMD:tellico:citation-insert:title1, title2\n"));
 }
 
-void LyxpipeTest::testLyxpipeNotExists() {
-  QTemporaryFile tempFile(QLatin1String("lyxpipetest.XXXXXX.in"));
+void CiteTest::testLyxpipeNotExists() {
+  QTemporaryFile tempFile(QLatin1String("citetest.XXXXXX.in"));
   // do not open/create the tempfile
   //QVERIFY(tempFile.open());
 
@@ -84,3 +88,27 @@ void LyxpipeTest::testLyxpipeNotExists() {
   QVERIFY(!pipe.errorString().isEmpty());
 }
 
+void CiteTest::testClipboard() {
+  Tellico::Cite::Clipboard clip;
+  QVERIFY(!clip.hasError());
+  QVERIFY(clip.errorString().isEmpty());
+  QCOMPARE(clip.type(), Tellico::Cite::CiteClipboard);
+
+  Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
+  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
+  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title2"));
+
+  coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2);
+
+  QVERIFY(clip.cite(coll->entries()));
+  QVERIFY(!clip.hasError());
+  QVERIFY(clip.errorString().isEmpty());
+
+  // read and verify clipboard contents
+  QCOMPARE(QApplication::clipboard()->text(), QLatin1String("\\cite{title1, title2}"));
+}
