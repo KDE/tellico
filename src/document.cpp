@@ -42,13 +42,12 @@
 #include "gui/guiproxy.h"
 #include "tellico_debug.h"
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KLocalizedString>
-#include <kglobal.h>
-#include <kapplication.h>
 
 #include <QRegExp>
 #include <QTimer>
+#include <QApplication>
 
 #include <unistd.h>
 
@@ -189,7 +188,7 @@ bool Document::saveDocument(const QUrl& url_) {
 
   // in case we're still loading images, give that a chance to cancel
   m_cancelImageWriting = true;
-  kapp->processEvents();
+  qApp->processEvents();
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Saving file..."), false);
   ProgressItem::Done done(this);
@@ -507,7 +506,7 @@ void Document::slotLoadAllImages() {
       break;
     }
     // stay responsive, do this in the background
-    kapp->processEvents();
+    qApp->processEvents();
   }
 
   if(m_cancelImageWriting) {
@@ -554,7 +553,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j/stepSize);
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
     if(m_cancelImageWriting) {
