@@ -37,13 +37,13 @@
 #include "../tellico_debug.h"
 
 #ifdef HAVE_TAGLIB
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/mpegfile.h>
-#include <taglib/vorbisfile.h>
-#include <taglib/flacfile.h>
-#include <taglib/audioproperties.h>
+#include <fileref.h>
+#include <tag.h>
+#include <id3v2tag.h>
+#include <mpegfile.h>
+#include <vorbisfile.h>
+#include <flacfile.h>
+#include <audioproperties.h>
 #endif
 
 #include <KLocalizedString>
