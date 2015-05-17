@@ -63,7 +63,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
 
   QUrl dest = QUrl::fromLocalFile(target_);
   KIO::JobFlags flags = KIO::Overwrite;
-  if(quiet_) {
+  if(quiet_ || !window_) {
     flags |= KIO::HideProgressInfo;
   }
 
