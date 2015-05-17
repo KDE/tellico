@@ -24,7 +24,7 @@
 
 #include "tellicoxmlexporter.h"
 #include "tellico_xml.h"
-#include "bibtexhandler.h" // needed for cleaning text
+#include "../utils/bibtexhandler.h" // needed for cleaning text
 #include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
