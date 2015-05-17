@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #ifndef TELLICO_MODELITERATOR_H
-#define TELLICO_GROUPITERATOR_H
+#define TELLICO_MODELITERATOR_H
 
 #include "../datavectors.h"
 
