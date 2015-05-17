@@ -33,19 +33,17 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include "fetcherinitializer.h"
 #ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
 #include "srufetcher.h"
 #include "execexternalfetcher.h"
 
-#include <kglobal.h>
+#include <KGlobal>
 #include <KLocalizedString>
 #include <kiconloader.h>
 #include <kstandarddirs.h>
 #include <kio/job.h>
-#include <kio/netaccess.h>
 
 #include <QFileInfo>
 #include <QDir>
@@ -62,7 +60,6 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   // must create static pointer first
   Q_ASSERT(!s_self);
   s_self = this;
-  FetcherInitializer init;
   loadFetchers();
 
 //  m_keyMap.insert(FetchFirst, QString());
@@ -302,8 +299,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
     FETCHER_ADD(IBS);
   }
-#ifdef HAVE_QJSON
   FETCHER_ADD(TheMovieDB);
+#ifdef HAVE_QJSON
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
@@ -428,8 +425,8 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       QUrl to = QUrl::fromLocalFile(tmpFile.fileName());
       // have to overwrite since QTemporaryFile already created it
       KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
-      if(!KIO::NetAccess::synchronousRun(job, 0)) {
-        myDebug() << KIO::NetAccess::lastErrorString();
+      if(!job->exec()) {
+        myDebug() << job->errorString();
       }
       KConfig spec(to.path(), KConfig::SimpleConfig);
       KConfigGroup specConfig(&spec, QString());

@@ -57,6 +57,7 @@
 #include "filterview.h"
 #include "loanview.h"
 #include "fetch/fetchmanager.h"
+#include "fetch/fetcherinitializer.h"
 #include "cite/actionmanager.h"
 #include "core/tellico_config.h"
 #include "gui/drophandler.h"
@@ -168,7 +169,9 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
 
   // initialize all the collection types
   // which must be done before the document is created
-  CollectionInitializer init;
+  CollectionInitializer initCollections;
+  // register all the fetcher types
+  Fetch::FetcherInitializer initFetchers;
 
   // create a document, which also creates an empty book collection
   // must be done before the different widgets are created

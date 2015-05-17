@@ -28,11 +28,11 @@
 #include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h>
+#include <KGlobal>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <kmimetype.h>
+#include <KMimeType>
 
 #include <QUrl>
 #include <QDBusInterface>
