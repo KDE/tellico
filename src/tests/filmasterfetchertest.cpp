@@ -25,24 +25,21 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "filmasterfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/fetcherjob.h"
 #include "../fetch/filmasterfetcher.h"
 #include "../collections/videocollection.h"
-#include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( FilmasterFetcherTest, GUI )
+QTEST_GUILESS_MAIN( FilmasterFetcherTest )
 
 FilmasterFetcherTest::FilmasterFetcherTest() : AbstractFetcherTest() {
 }
 
 void FilmasterFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("The Man from Snowy River"));

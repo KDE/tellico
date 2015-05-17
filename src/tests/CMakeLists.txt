@@ -309,6 +309,7 @@ SET(fetcherstest_SRCS
 
 add_library(fetcherstest STATIC ${fetcherstest_SRCS})
 TARGET_LINK_LIBRARIES(fetcherstest
+  translatorstest
   Qt5::Core
   Qt5::Gui
   Qt5::DBus
@@ -412,11 +413,15 @@ add_test(freebasefetchertest freebasefetchertest)
 ecm_mark_as_test(freebasefetchertest)
     TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
 
-    add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp)
+add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/filmasterfetcher.cpp
+  ../gui/guiproxy.cpp
+  ../gui/cursorsaver.cpp
+)
 ecm_mark_nongui_executable(filmasterfetchertest)
 add_test(filmasterfetchertest filmasterfetchertest)
 ecm_mark_as_test(filmasterfetchertest)
-    TARGET_LINK_LIBRARIES(filmasterfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
     add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(masfetchertest)
