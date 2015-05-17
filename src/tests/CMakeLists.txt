@@ -429,13 +429,15 @@ add_test(masfetchertest masfetchertest)
 ecm_mark_as_test(masfetchertest)
     TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
 
-    add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp)
+add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/googlebookfetcher.cpp
+  ../gui/guiproxy.cpp
+  ../gui/cursorsaver.cpp
+)
 ecm_mark_nongui_executable(googlebookfetchertest)
 add_test(googlebookfetchertest googlebookfetchertest)
 ecm_mark_as_test(googlebookfetchertest)
-    TARGET_LINK_LIBRARIES(googlebookfetchertest fetch ${TELLICO_TEST_LIBS})
-
-ENDIF( QJSON_FOUND )
+TARGET_LINK_LIBRARIES(googlebookfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 # running gcstar in the fetcher is really unreliable
 #add_executable(gcstarfetchertest gcstarfetchertest.cpp)

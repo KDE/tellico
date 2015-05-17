@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "googlebookfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/googlebookfetcher.h"
 #include "../entry.h"
@@ -33,11 +32,13 @@
 
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( GoogleBookFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( GoogleBookFetcherTest )
 
 GoogleBookFetcherTest::GoogleBookFetcherTest() : AbstractFetcherTest()
-    , m_config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig) {
-  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config");
+    , m_config(QFINDTESTDATA("/tellicotest.config"), KConfig::SimpleConfig) {
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest.config"));
 }
 
 void GoogleBookFetcherTest::initTestCase() {
