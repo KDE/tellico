@@ -31,7 +31,7 @@
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
-#include "../translators/bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 
 #include <KStandardDirs>
 

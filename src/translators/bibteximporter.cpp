@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "bibteximporter.h"
-#include "bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
