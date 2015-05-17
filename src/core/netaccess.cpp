@@ -65,7 +65,7 @@ bool NetAccess::download(const KUrl& url_, QString& target_, QWidget* window_, b
   KUrl dest;
   dest.setPath(target_);
   KIO::JobFlags flags = KIO::Overwrite;
-  if(quiet_) {
+  if(quiet_ || !window_) {
     flags |= KIO::HideProgressInfo;
   }
 
