@@ -554,7 +554,7 @@ void AmazonFetcher::slotComplete(KJob*) {
       QString t = entry->title();
       if(rx.indexIn(t) > -1) {
         QString y = rx.cap(1);
-        t.remove(rx).simplified();
+        t = t.remove(rx).simplified();
         entry->setField(QLatin1String("title"), t);
         if(entry->field(QLatin1String("year")).isEmpty()) {
           entry->setField(QLatin1String("year"), y);
