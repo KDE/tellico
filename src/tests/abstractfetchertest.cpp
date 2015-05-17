@@ -52,6 +52,8 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
     job->setMaximumResults(maxResults);
   }
 
+  // TODO
+//  job->exec();
   job->start();
   m_loop.exec();
   return m_results;

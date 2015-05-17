@@ -22,7 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "themoviedbfetcher.h"
 #include "../collections/videocollection.h"
 #include "../gui/combobox.h"
@@ -32,21 +31,20 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
 #include <KConfigGroup>
+#include <KJob>
+#include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
+#include <KIO/StoredTransferJob>
 
+#include <QUrl>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/serializer.h>
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
@@ -79,11 +77,7 @@ QString TheMovieDBFetcher::attribution() const {
 }
 
 bool TheMovieDBFetcher::canSearch(FetchKey k) const {
-#ifdef HAVE_QJSON
   return k == Title;
-#else
-  return false;
-#endif
 }
 
 bool TheMovieDBFetcher::canFetch(int type) const {
@@ -122,7 +116,6 @@ void TheMovieDBFetcher::search() {
 }
 
 void TheMovieDBFetcher::continueSearch() {
-#ifdef HAVE_QJSON
   m_started = true;
 
   if(m_apiKey.isEmpty()) {
@@ -132,7 +125,7 @@ void TheMovieDBFetcher::continueSearch() {
   }
 
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-  u.setPath(QLatin1String(THEMOVIEDB_API_VERSION));
+  u.setPath(QLatin1Char('/') + QLatin1String(THEMOVIEDB_API_VERSION));
 
   switch(request().key) {
     case Title:
@@ -152,9 +145,6 @@ void TheMovieDBFetcher::continueSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
-#else
-  stop();
-#endif
 }
 
 void TheMovieDBFetcher::stop() {
@@ -176,12 +166,11 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-#ifdef HAVE_QJSON
   QString id = entry->field(QLatin1String("tmdb-id"));
   if(!id.isEmpty()) {
     // quiet
     QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-    u.setPath(QString::fromLatin1("%1/movie/%2")
+    u.setPath(QString::fromLatin1("/%1/movie/%2")
               .arg(QLatin1String(THEMOVIEDB_API_VERSION), id));
     u.addQueryItem(QLatin1String("api_key"), m_apiKey);
     u.addQueryItem(QLatin1String("language"), m_locale);
@@ -198,10 +187,9 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     }
     f.close();
 #endif
-    QJson::Parser parser;
-    populateEntry(entry, parser.parse(data).toMap(), true);
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    populateEntry(entry, doc.object().toVariantMap(), true);
   }
-#endif
 
   // don't want to include TMDb ID field
   entry->setField(QLatin1String("tmdb-id"), QString());
@@ -219,7 +207,6 @@ Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr ent
 
 void TheMovieDBFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -276,8 +263,8 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
     coll->addField(f);
   }
 
-  QJson::Parser parser;
-  QVariantMap result = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap result = doc.object().toVariantMap();
 
   QVariantList resultList = result.value(QLatin1String("results")).toList();
   if(resultList.isEmpty()) {
@@ -297,7 +284,6 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
     emit signalResultFound(r);
   }
 
-#endif
   stop();
 }
 
@@ -390,9 +376,8 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 }
 
 void TheMovieDBFetcher::readConfiguration() {
-#ifdef HAVE_QJSON
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-  u.setPath(QString::fromLatin1("%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
+  u.setPath(QString::fromLatin1("/%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
   QByteArray data = FileHandler::readDataFile(u, true);
@@ -407,12 +392,11 @@ void TheMovieDBFetcher::readConfiguration() {
   f.close();
 #endif
 
-  QJson::Parser parser;
-  QVariantMap resultMap = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap resultMap = doc.object().toVariantMap();
 
   m_imageBase = value(resultMap.value(QLatin1String("images")).toMap(), "base_url");
   m_serverConfigDate = QDate::currentDate();
-#endif
 }
 
 Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) const {

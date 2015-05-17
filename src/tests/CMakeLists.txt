@@ -294,6 +294,33 @@ TARGET_LINK_LIBRARIES(vinoxmltest translatorstest ${TELLICO2_TEST_LIBS})
 # fetcher tests from here down
 IF(BUILD_FETCHER_TESTS)
 
+SET(fetcherstest_SRCS
+  ../fetch/fetcher.cpp
+  ../fetch/fetcherjob.cpp
+  ../fetch/fetchresult.cpp
+  ../fetch/fetchmanager.cpp
+  ../fetch/messagehandler.cpp
+  ../fetch/configwidget.cpp
+  ../document.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+)
+
+add_library(fetcherstest STATIC ${fetcherstest_SRCS})
+TARGET_LINK_LIBRARIES(fetcherstest
+  Qt5::Core
+  Qt5::Gui
+  Qt5::DBus
+  KF5::ConfigCore
+  KF5::I18n
+  KF5::Archive
+  KF5::KDELibs4Support
+  ${LIBXML2_LIBRARIES}
+  ${LIBXSLT_LIBRARIES}
+  ${LIBXSLT_EXSLT_LIBRARIES}
+)
+
 add_executable(entryupdatejobtest entryupdatejobtest.cpp ../entryupdatejob.cpp)
 ecm_mark_nongui_executable(entryupdatejobtest)
 add_test(entryupdatejobtest entryupdatejobtest)
@@ -486,13 +513,16 @@ add_test(thegamesdbfetchertest thegamesdbfetchertest)
 ecm_mark_as_test(thegamesdbfetchertest)
 TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetch ${TELLICO_TEST_LIBS})
 
-IF( QJSON_FOUND )
-    add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetchertest.cpp)
+add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/themoviedbfetcher.cpp
+  ../gui/combobox.cpp
+  ../gui/guiproxy.cpp
+  ../gui/cursorsaver.cpp
+)
 ecm_mark_nongui_executable(themoviedbfetchertest)
 add_test(themoviedbfetchertest themoviedbfetchertest)
 ecm_mark_as_test(themoviedbfetchertest)
-    TARGET_LINK_LIBRARIES(themoviedbfetchertest fetch ${TELLICO_TEST_LIBS})
-ENDIF( QJSON_FOUND )
+TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(vndbfetchertest vndbfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(vndbfetchertest)

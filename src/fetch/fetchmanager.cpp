@@ -36,8 +36,8 @@
 #ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
-#include "srufetcher.h"
-#include "execexternalfetcher.h"
+//#include "srufetcher.h"
+//#include "execexternalfetcher.h"
 
 #include <KGlobal>
 #include <KLocalizedString>
@@ -285,7 +285,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 #ifdef ENABLE_IMDB
   FETCHER_ADD(IMDB);
 #endif
-  vec.append(SRUFetcher::libraryOfCongress(this));
+//  vec.append(SRUFetcher::libraryOfCongress(this));
   FETCHER_ADD(ISBNdb);
 //  FETCHER_ADD(Yahoo);
   FETCHER_ADD(AnimeNfo);
@@ -432,7 +432,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       KConfigGroup specConfig(&spec, QString());
       // pass actual location of spec file
       if(name_ == specConfig.readEntry("Name") && bundledScriptHasExecPath(m_scriptMap[name_], specConfig)) {
-        static_cast<ExecExternalFetcher::ConfigWidget*>(w)->readConfig(specConfig);
+        w->readConfig(specConfig);
       } else {
         myWarning() << "Can't read config file for " << to.path();
       }
@@ -452,6 +452,8 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
 }
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
+// TODO: uncomment this when the fetcher tests can link to z3950fetcher and execexternalfetcher
+/*
 #ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
@@ -486,6 +488,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
       }
     }
   }
+*/
   return fetcherIcon(fetcher_->type(), group_, size_);
 }
 
