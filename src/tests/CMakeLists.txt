@@ -305,6 +305,8 @@ SET(fetcherstest_SRCS
   ../translators/tellicoxmlexporter.cpp
   ../translators/tellicozipexporter.cpp
   ../translators/exporter.cpp
+  ../gui/guiproxy.cpp
+  ../gui/cursorsaver.cpp
 )
 
 add_library(fetcherstest STATIC ${fetcherstest_SRCS})
@@ -415,8 +417,6 @@ ecm_mark_as_test(freebasefetchertest)
 
 add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/filmasterfetcher.cpp
-  ../gui/guiproxy.cpp
-  ../gui/cursorsaver.cpp
 )
 ecm_mark_nongui_executable(filmasterfetchertest)
 add_test(filmasterfetchertest filmasterfetchertest)
@@ -424,6 +424,14 @@ ecm_mark_as_test(filmasterfetchertest)
 TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
     add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp)
+add_executable(hathitrustfetchertest hathitrustfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/hathitrustfetcher.cpp
+)
+ecm_mark_nongui_executable(hathitrustfetchertest)
+add_test(hathitrustfetchertest hathitrustfetchertest)
+ecm_mark_as_test(hathitrustfetchertest)
+TARGET_LINK_LIBRARIES(hathitrustfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+
 ecm_mark_nongui_executable(masfetchertest)
 add_test(masfetchertest masfetchertest)
 ecm_mark_as_test(masfetchertest)
@@ -431,8 +439,6 @@ ecm_mark_as_test(masfetchertest)
 
 add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlebookfetcher.cpp
-  ../gui/guiproxy.cpp
-  ../gui/cursorsaver.cpp
 )
 ecm_mark_nongui_executable(googlebookfetchertest)
 add_test(googlebookfetchertest googlebookfetchertest)
@@ -523,8 +529,6 @@ TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetch ${TELLICO_TEST_LIBS})
 add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/themoviedbfetcher.cpp
   ../gui/combobox.cpp
-  ../gui/guiproxy.cpp
-  ../gui/cursorsaver.cpp
 )
 ecm_mark_nongui_executable(themoviedbfetchertest)
 add_test(themoviedbfetchertest themoviedbfetchertest)
