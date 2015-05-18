@@ -73,5 +73,4 @@ void GriffithTest::testMovies() {
   QCOMPARE(entry->field("medium"), QLatin1String("DVD"));
   QCOMPARE(ROWS(entry, "cast").first(), QLatin1String("John Cusack::Jonathan Trager"));
   QVERIFY(!entry->field("plot").isEmpty());
-  QCOMPARE(entry->field("cover"), QLatin1String("44eef3923347d7aea618ae7e264d4fbb.jpeg"));
 }
