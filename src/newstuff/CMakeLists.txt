@@ -11,7 +11,6 @@ add_library(newstuff STATIC ${newstuff_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(newstuff
     utils
-    gui
     Qt5::Core
     Qt5::Gui
     KF5::ConfigCore
