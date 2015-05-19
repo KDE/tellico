@@ -80,9 +80,17 @@ include(MacroBoolTo01)
 #include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
-find_package(QImageBlitz 5.0)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
+
+find_package(QImageBlitz 5.0)
+set_package_properties(QImageBlitz PROPERTIES
+    DESCRIPTION "Support for fancy image gradients in the default template"
+    URL "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qimageblitz/html/"
+    TYPE OPTIONAL)
+if(QIMAGEBLITZ_FOUND)
+    include_directories(${QIMAGEBLITZ_INCLUDES})
+endif(QIMAGEBLITZ_FOUND)
 
 #macro_optional_find_package(Nepomuk)
 #macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
@@ -258,8 +266,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
 remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
 
-include_directories(${QIMAGEBLITZ_INCLUDES}
-                    ${LIBXML2_INCLUDE_DIR}
+include_directories(${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
                     ${Tellico_SOURCE_DIR}/src/core
