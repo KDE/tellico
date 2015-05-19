@@ -31,7 +31,7 @@
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../utils/tellico_utils.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"

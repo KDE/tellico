@@ -30,9 +30,9 @@
 #include "../translators/gcstarimporter.h"
 #include "../gui/combobox.h"
 #include "../gui/collectiontypecombo.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../core/filehandler.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>

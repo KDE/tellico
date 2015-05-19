@@ -24,7 +24,7 @@
 
 #include "drophandler.h"
 #include "../mainwindow.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/risimporter.h"
 #include "../translators/ciwimporter.h"

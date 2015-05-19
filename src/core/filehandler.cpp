@@ -26,8 +26,8 @@
 #include "tellico_strings.h"
 #include "netaccess.h"
 #include "../images/image.h"
-#include "../gui/cursorsaver.h"
-#include "../gui/guiproxy.h"
+#include "../utils/cursorsaver.h"
+#include "../utils/guiproxy.h"
 #include "../utils/xmlhandler.h"
 #include "../tellico_debug.h"
 

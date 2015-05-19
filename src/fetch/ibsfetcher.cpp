@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "ibsfetcher.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"

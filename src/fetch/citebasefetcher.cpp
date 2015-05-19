@@ -24,7 +24,7 @@
 
 #include "citebasefetcher.h"
 #include "../translators/bibteximporter.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"

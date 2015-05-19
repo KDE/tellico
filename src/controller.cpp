@@ -41,7 +41,7 @@
 #include "loanview.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "gui/lineedit.h"
 #include "tellico_debug.h"
 

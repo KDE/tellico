@@ -37,7 +37,7 @@
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
 #include <KStandardDirs>

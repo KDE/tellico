@@ -25,7 +25,7 @@
 #include "mrlookupfetcher.h"
 #include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 

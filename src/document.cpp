@@ -39,7 +39,7 @@
 #include "progressmanager.h"
 #include "core/tellico_config.h"
 #include "entrycomparison.h"
-#include "gui/guiproxy.h"
+#include "utils/guiproxy.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>

@@ -40,7 +40,7 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "gui/combobox.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "utils/stringset.h"
 #include "images/image.h"
 #include "tellico_debug.h"

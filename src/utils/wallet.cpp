@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "wallet.h"
-//#include "../gui/guiproxy.h"
+#include "guiproxy.h"
 
 #include <kwallet.h>
 
@@ -42,9 +42,7 @@ Wallet::Wallet() : m_wallet(0) {
 bool Wallet::prepareWallet() {
   if(!m_wallet || !m_wallet->isOpen()) {
     delete m_wallet;
-//    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), GUI::Proxy::widget()->effectiveWinId());
-    // TODO: use the WinId, but fix the linking problem with the gui lib
-    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), 0);
+    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), GUI::Proxy::widget()->effectiveWinId());
   }
   if(!m_wallet || !m_wallet->isOpen()) {
     delete m_wallet;

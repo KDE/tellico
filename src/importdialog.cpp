@@ -27,7 +27,7 @@
 #include "tellico_debug.h"
 #include "collection.h"
 #include "progressmanager.h"
-#include "gui/guiproxy.h"
+#include "utils/guiproxy.h"
 
 #include "translators/importer.h"
 #include "translators/tellicoimporter.h"

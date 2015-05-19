@@ -29,7 +29,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/xmlimporter.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
 #include "../utils/string_utils.h"

@@ -26,7 +26,7 @@
 #include "allocinefetcher.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"

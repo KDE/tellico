@@ -27,7 +27,7 @@
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../entry.h"
 #include "../core/filehandler.h"

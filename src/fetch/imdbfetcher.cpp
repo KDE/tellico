@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "imdbfetcher.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../collections/videocollection.h"
 #include "../entry.h"
 #include "../field.h"

@@ -25,7 +25,7 @@
 #include "crossreffetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"

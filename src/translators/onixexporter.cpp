@@ -31,7 +31,7 @@
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 

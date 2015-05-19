@@ -29,7 +29,7 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../field.h"

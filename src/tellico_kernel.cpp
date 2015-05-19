@@ -43,7 +43,7 @@
 #include "commands/renamecollection.h"
 #include "collectionfactory.h"
 #include "utils/stringset.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 
 #include <kmessagebox.h>
 #include <kglobal.h>

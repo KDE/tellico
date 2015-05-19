@@ -32,7 +32,7 @@
 #include "controller.h"
 #include "tellico_debug.h"
 #include "gui/combobox.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "core/tellico_config.h"
 #include "utils/datafileregistry.h"
 

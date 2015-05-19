@@ -25,7 +25,7 @@
 #include "xmlfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/xmlhandler.h"
 #include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"

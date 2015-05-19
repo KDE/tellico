@@ -35,9 +35,9 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../utils/tellico_utils.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../progressmanager.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
 #include <config.h>

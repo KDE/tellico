@@ -55,7 +55,7 @@ add_test(comparisontest comparisontest)
 ecm_mark_as_test(comparisontest)
 TARGET_LINK_LIBRARIES(comparisontest utils core Qt5::Test)
 
-add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../gui/guiproxy.cpp ../gui/cursorsaver.cpp)
+add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp)
 ecm_mark_nongui_executable(imagetest)
 add_test(imagetest imagetest)
 ecm_mark_as_test(imagetest)
@@ -305,8 +305,6 @@ SET(fetcherstest_SRCS
   ../translators/tellicoxmlexporter.cpp
   ../translators/tellicozipexporter.cpp
   ../translators/exporter.cpp
-  ../gui/guiproxy.cpp
-  ../gui/cursorsaver.cpp
 )
 
 add_library(fetcherstest STATIC ${fetcherstest_SRCS})

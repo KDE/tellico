@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"

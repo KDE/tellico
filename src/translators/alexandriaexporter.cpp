@@ -29,7 +29,7 @@
 #include "../images/image.h"
 #include "../utils/string_utils.h"
 #include "../progressmanager.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

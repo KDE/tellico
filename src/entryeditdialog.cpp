@@ -30,7 +30,7 @@
 #include "entry.h"
 #include "fieldformat.h"
 #include "tellico_kernel.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "tellico_debug.h"
 
 #include <KLocalizedString>

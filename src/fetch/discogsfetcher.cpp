@@ -25,7 +25,7 @@
 #include <config.h>
 #include "discogsfetcher.h"
 #include "../collections/musiccollection.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../core/filehandler.h"
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"

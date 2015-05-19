@@ -67,8 +67,8 @@
 #include "newstuff/manager.h"
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
-#include "gui/cursorsaver.h"
-#include "gui/guiproxy.h"
+#include "utils/cursorsaver.h"
+#include "utils/guiproxy.h"
 #include "tellico_debug.h"
 
 #include <kapplication.h>

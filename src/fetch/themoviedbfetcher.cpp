@@ -25,7 +25,7 @@
 #include "themoviedbfetcher.h"
 #include "../collections/videocollection.h"
 #include "../gui/combobox.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../core/filehandler.h"
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"

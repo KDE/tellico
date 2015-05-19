@@ -32,7 +32,7 @@
 #include "../gui/combobox.h"
 #include "../gui/lineedit.h"
 #include "../gui/collectiontypecombo.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../newstuff/manager.h"
 #include "../translators/translators.h"
 #include "../translators/tellicoimporter.h"
