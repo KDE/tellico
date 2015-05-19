@@ -327,11 +327,28 @@ add_test(entryupdatejobtest entryupdatejobtest)
 ecm_mark_as_test(entryupdatejobtest)
 TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
 
-add_executable(allocinefetchertest allocinefetchertest.cpp abstractfetchertest.cpp)
+add_executable(allocinefetchertest allocinefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/allocinefetcher.cpp
+  ../fetch/execexternalfetcher.cpp
+  ../translators/bibteximporter.cpp
+  ../translators/risimporter.cpp
+  ../gui/combobox.cpp
+  ../gui/lineedit.cpp
+  ../gui/collectiontypecombo.cpp
+)
 ecm_mark_nongui_executable(allocinefetchertest)
 add_test(allocinefetchertest allocinefetchertest)
 ecm_mark_as_test(allocinefetchertest)
-TARGET_LINK_LIBRARIES(allocinefetchertest fetch ${TELLICO_TEST_LIBS})
+# SonnetCore is needed for GUI::LineEdit
+TARGET_LINK_LIBRARIES(allocinefetchertest
+  fetcherstest
+  translatorstest
+  tellicomodels
+  newstuff
+  ${TELLICO_BTPARSE_LIBS}
+  ${TELLICO2_TEST_LIBS}
+  KF5::SonnetCore
+)
 
 add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(amazonfetchertest)
@@ -405,12 +422,11 @@ add_test(entrezfetchertest entrezfetchertest)
 ecm_mark_as_test(entrezfetchertest)
 TARGET_LINK_LIBRARIES(entrezfetchertest fetch ${TELLICO_TEST_LIBS})
 
-IF( QJSON_FOUND )
-    add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp)
+add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(freebasefetchertest)
 add_test(freebasefetchertest freebasefetchertest)
 ecm_mark_as_test(freebasefetchertest)
-    TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
 
 add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/filmasterfetcher.cpp
@@ -420,7 +436,6 @@ add_test(filmasterfetchertest filmasterfetchertest)
 ecm_mark_as_test(filmasterfetchertest)
 TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-    add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp)
 add_executable(hathitrustfetchertest hathitrustfetchertest.cpp abstractfetchertest.cpp
   ../fetch/hathitrustfetcher.cpp
 )
@@ -429,10 +444,11 @@ add_test(hathitrustfetchertest hathitrustfetchertest)
 ecm_mark_as_test(hathitrustfetchertest)
 TARGET_LINK_LIBRARIES(hathitrustfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
+add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(masfetchertest)
 add_test(masfetchertest masfetchertest)
 ecm_mark_as_test(masfetchertest)
-    TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
 
 add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlebookfetcher.cpp
