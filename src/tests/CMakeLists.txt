@@ -99,7 +99,6 @@ TARGET_LINK_LIBRARIES(translatorstest
   Qt5::Widgets
   Qt5::Xml
   KF5::I18n
-  KF5::Codecs
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}

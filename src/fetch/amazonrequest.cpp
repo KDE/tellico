@@ -24,9 +24,6 @@
 
 #include "amazonrequest.h"
 #include "hmac_sha2.h"
-#include "../tellico_debug.h"
-
-#include <KCodecs>
 
 #include <QDateTime>
 
@@ -63,7 +60,7 @@ QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   hmac_sha256(reinterpret_cast<unsigned char*>(const_cast<char*>(m_key.data())), m_key.length(),
               reinterpret_cast<unsigned char*>(const_cast<char*>(toSign.data())), toSign.length(),
               reinterpret_cast<unsigned char*>(hmac_buffer.data()), hmac_buffer.length());
-  const QByteArray sig = KCodecs::base64Encode(hmac_buffer).toPercentEncoding();
+  const QByteArray sig = hmac_buffer.toBase64().toPercentEncoding();
 //  myDebug() << sig;
 
   QUrl url = m_siteUrl;

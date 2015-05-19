@@ -26,8 +26,6 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <KCodecs>
-
 #include <QBuffer>
 #include <QRegExp>
 #include <QImageReader>

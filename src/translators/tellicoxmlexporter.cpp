@@ -42,7 +42,6 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KCodecs>
 #include <KGlobal>
 #include <kcalendarsystem.h>
 
@@ -383,7 +382,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     if(img.linkOnly()) {
       imgElem.setAttribute(QLatin1String("link"), QLatin1String("true"));
     }
-    QByteArray imgText = KCodecs::base64Encode(img.byteArray());
+    QByteArray imgText = img.byteArray().toBase64();
     imgElem.appendChild(dom_.createTextNode(QLatin1String(imgText)));
   } else {
     const Data::ImageInfo& info = ImageFactory::imageInfo(id_);

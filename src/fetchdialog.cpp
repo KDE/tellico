@@ -63,7 +63,6 @@
 #include <kapplication.h>
 #include <KHBox>
 #include <KVBox>
-#include <KCodecs>
 #include <KGlobal>
 #include <KGlobalSettings>
 
@@ -563,7 +562,7 @@ void FetchDialog::slotShowEntry() {
   const QPixmap sourceIcon = Fetch::Manager::self()->fetcherIcon(r->fetcher);
   const QByteArray ba = Data::Image::byteArray(sourceIcon.toImage(), "PNG");
   QString text = QString::fromLatin1("<qt><img src='data:image/png;base64,%1'/> %2<br/>%3</qt>")
-                 .arg(QLatin1String(KCodecs::base64Encode(ba)), r->fetcher->source(), r->fetcher->attribution());
+                 .arg(QLatin1String(ba.toBase64()), r->fetcher->source(), r->fetcher->attribution());
   entry->setField(QLatin1String("fetchdialog_source"), text);
 
   setStatus(i18n("Ready."));

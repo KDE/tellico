@@ -36,7 +36,6 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KCodecs>
 
 namespace {
 
@@ -694,8 +693,7 @@ bool ImageHandler::start(const QString&, const QString&, const QString&, const Q
 bool ImageHandler::end(const QString&, const QString&, const QString&) {
   bool needToAddInfo = true;
   if(d->loadImages && !d->text.isEmpty()) {
-    QByteArray ba;
-    KCodecs::base64Decode(QByteArray(d->text.toLatin1()), ba);
+    QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {

@@ -12,7 +12,6 @@ TARGET_LINK_LIBRARIES(images
     utils
     ${QIMAGEBLITZ_LIBRARIES}
     KF5::KIOCore
-    KF5::Codecs
     KF5::Archive
     KF5::GuiAddons
     Qt5::Gui

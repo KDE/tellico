@@ -28,5 +28,4 @@ TARGET_LINK_LIBRARIES(utils
     KF5::CoreAddons # for KRandom
     KF5::Wallet
     KF5::I18n
-    KF5::Codecs
 )

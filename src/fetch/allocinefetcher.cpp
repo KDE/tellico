@@ -37,7 +37,6 @@
 #include <KConfigGroup>
 #include <KLineEdit>
 #include <KIntSpinBox>
-#include <KCodecs>
 #include <QUrl>
 
 #include <QLabel>
@@ -474,7 +473,7 @@ QByteArray AbstractAllocineFetcher::calculateSignature(const QList<QPair<QString
 
   const QByteArray toSign = ALLOCINE_PARTNER_KEY + queryString;
   const QByteArray hash = QCryptographicHash::hash(toSign, QCryptographicHash::Sha1);
-  const QByteArray sig = KCodecs::base64Encode(hash);
+  QByteArray sig = hash.toBase64();
   return sig;
 }
 

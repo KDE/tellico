@@ -25,8 +25,6 @@
 #include "upcvalidator.h"
 #include "isbnvalidator.h"
 
-#include <KCodecs>
-
 using Tellico::UPCValidator;
 
 UPCValidator::UPCValidator(QObject* parent_)
@@ -130,7 +128,7 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
     }
   }
 
-  code = QString::fromLatin1(KCodecs::base64Decode(code.toLatin1()));
+  code = QString::fromLatin1(QByteArray::fromBase64(code.toLatin1()));
 
   for(int i = 0; i < code.length(); ++i) {
     char c = code[i].toLatin1() ^ 'C';
