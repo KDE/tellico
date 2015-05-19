@@ -41,7 +41,7 @@ public:
   void restore();
 
 private:
-  bool m_restored : 1;
+  bool m_restored;
 };
 
   } // end namespace

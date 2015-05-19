@@ -24,23 +24,19 @@
 
 #include "cursorsaver.h"
 
-#include <kapplication.h>
+#include <QApplication>
 
 Tellico::GUI::CursorSaver::CursorSaver(const QCursor& cursor_) : m_restored(false) {
-  if(kapp) {
-    kapp->setOverrideCursor(cursor_);
-  }
+  QApplication::setOverrideCursor(cursor_);
 }
 
 Tellico::GUI::CursorSaver::~CursorSaver() {
-  if(!m_restored && kapp) {
-    kapp->restoreOverrideCursor();
+  if(!m_restored) {
+    QApplication::restoreOverrideCursor();
   }
 }
 
 void Tellico::GUI::CursorSaver::restore() {
-  if(kapp) {
-    kapp->restoreOverrideCursor();
-  }
+  QApplication::restoreOverrideCursor();
   m_restored = true;
 }
