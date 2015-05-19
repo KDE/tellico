@@ -25,7 +25,7 @@
 #ifndef TELLICOFIELDCOMPLETION_H
 #define TELLICOFIELDCOMPLETION_H
 
-#include <KCompletion>
+#include <KCompletion/KCompletion>
 
 namespace Tellico {
 
