@@ -36,6 +36,8 @@
 #include <kapplication.h>
 #include <kcolorutils.h>
 
+#include <QFileInfo>
+#include <QDir>
 #ifdef HAVE_QIMAGEBLITZ
 #include <qimageblitz.h>
 #endif
@@ -434,6 +436,28 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       return img2;
     }
   }
+  // now, it appears the image doesn't exist. The only remaining possibility
+  // is that the file name has multiple periods and as a result of the fix for bug 348088,
+  // the image is lurking in a local image directory without the multiple periods
+  if(Config::imageLocation() == Config::ImagesInLocalDir && QDir(localDir()).dirName().contains(QLatin1Char('.'))) {
+    QString realImageDir = localDir();
+    QDir d(realImageDir);
+    // try to cd up and into the other old directory
+    QString cdString = QLatin1String("../") + d.dirName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+    if(d.cd(cdString)) {
+      factory->d->localImageDir.setPath(d.path() + QDir::separator());
+      if(factory->d->localImageDir.hasImage(id_)) {
+//        myDebug() << "Reading image from old local directory" << (cdString+id_);
+        const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
+        // Be sure to reset the image directory location!!
+        factory->d->localImageDir.setPath(realImageDir);
+        factory->d->localImageDir.writeImage(img2);
+        return img2;
+      }
+      factory->d->localImageDir.setPath(realImageDir);
+    }
+  }
+
   myDebug() << "***not found:" << id_;
   return Data::Image::null;
 }
@@ -511,9 +535,14 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     // just to make sure all the image locations clean themselves up
     // delete the factory (which deletes the storage objects) and
     // then recreate the factory, in case anything else needs it
+    // be sure to save local image directory if it's not a temp dir1
+    const QString localDirName = localDir();
     delete factory;
     factory = 0;
     ImageFactory::init();
+    if(QDir(localDirName).exists()) {
+      setLocalDirectory(localDirName);
+    }
   }
 }
 
@@ -632,7 +661,8 @@ QString ImageFactory::localDirectory(const KUrl& url_) {
   QString dir = url_.directory(KUrl::ObeyTrailingSlash | KUrl::AppendTrailingSlash);
   // could have already been set once
   if(!url_.fileName().contains(QLatin1String("_files"))) {
-    dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+    QFileInfo fi(url_.fileName());
+    dir += fi.completeBaseName() + QLatin1String("_files/");
   }
   return dir;
 }
