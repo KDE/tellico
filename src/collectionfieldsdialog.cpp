@@ -195,7 +195,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   const QStringList allCats = m_coll->fieldCategories();
   foreach(const QString& cat, allCats) {
     Data::FieldList fields = m_coll->fieldsByCategory(cat);
-    if(!fields.isEmpty() && !fields[0]->isSingleCategory()) {
+    if(!fields.isEmpty() && !fields.at(0)->isSingleCategory()) {
       cats.append(cat);
     }
   }
