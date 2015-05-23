@@ -610,7 +610,7 @@ void ImageFactory::setLocalDirectory(const KUrl& url_) {
     myWarning() << "Tellico can only save images to local disk";
     myWarning() << "unable to save to " << url_;
   } else {
-    QString dir = url_.directory(KUrl::AppendTrailingSlash);
+    QString dir = url_.directory(KUrl::ObeyTrailingSlash | KUrl::AppendTrailingSlash);
     // could have already been set once
     if(!url_.fileName().contains(QLatin1String("_files"))) {
       dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
