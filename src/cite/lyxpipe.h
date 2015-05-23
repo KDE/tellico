@@ -37,7 +37,7 @@ class Lyxpipe : public Action {
 public:
   Lyxpipe();
 
-  virtual CiteAction type() const { return CiteClipboard; }
+  virtual CiteAction type() const { return CiteLyxpipe; }
   virtual bool cite(Data::EntryList entries);
 };
 

@@ -195,7 +195,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   const QStringList allCats = m_coll->fieldCategories();
   foreach(const QString& cat, allCats) {
     Data::FieldList fields = m_coll->fieldsByCategory(cat);
-    if(!fields.isEmpty() && !fields[0]->isSingleCategory()) {
+    if(!fields.isEmpty() && !fields.at(0)->isSingleCategory()) {
       cats.append(cat);
     }
   }
@@ -951,7 +951,11 @@ void CollectionFieldsDialog::populate(Data::FieldPtr field_) {
   }
 
   idx = m_catCombo->findText(field_->category());
-  m_catCombo->setCurrentIndex(idx); // have to do this here
+  if(idx > -1) {
+    m_catCombo->setCurrentIndex(idx); // have to do this here
+  } else {
+    m_catCombo->lineEdit()->setText(field_->category());
+  }
   m_descEdit->setText(field_->description());
   if(field_->hasFlag(Data::Field::Derived)) {
     m_derivedEdit->setText(field_->property(QLatin1String("template")));
