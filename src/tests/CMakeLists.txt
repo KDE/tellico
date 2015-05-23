@@ -72,6 +72,9 @@ set(TELLICO_TEST_LIBS
 KDE4_ADD_UNIT_TEST(collectiontest NOGUI collectiontest.cpp)
 TARGET_LINK_LIBRARIES(collectiontest ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(documenttest NOGUI documenttest.cpp)
+TARGET_LINK_LIBRARIES(documenttest ${TELLICO_TEST_LIBS} )
+
 KDE4_ADD_UNIT_TEST(filtertest NOGUI filtertest.cpp)
 TARGET_LINK_LIBRARIES(filtertest ${TELLICO_TEST_LIBS})
 

@@ -496,7 +496,7 @@ void Document::slotLoadAllImages() {
       }
       // this is the early loading, so just by calling imageById()
       // the image gets sucked from the zip file and written to disk
-      //by ImageFactory::imageById()
+      // by ImageFactory::imageById()
       if(ImageFactory::imageById(id).isNull()) {
         myDebug() << "entry title:" << entry->title();
       }

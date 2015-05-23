@@ -106,7 +106,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     }
     QDir dir(path);
     if(dir.mkdir(path)) {
-      myLog() << "created" << path;
+//      myLog() << "created" << path;
     } else {
       myWarning() << "unable to create dir:" << path;
     }
