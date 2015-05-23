@@ -35,6 +35,8 @@
 
 #include <KColorUtils>
 
+#include <QFileInfo>
+#include <QDir>
 #ifdef HAVE_QIMAGEBLITZ
 #include <qimageblitz.h>
 #endif
@@ -312,7 +314,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(id_.isEmpty() || !factory) {
     return Data::Image::null;
   }
-//  myLog() << id_;
+//  myLog() << "imageById" << id_;
 
   // can't think of a better place to regularly check for images to release
   // but don't release image that just got asked for
@@ -338,7 +340,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // also, the image info cache might not have it so check if the
   // id is a valid absolute url
   // yeah, it's probably slow
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl::fromUserInput(id_).isRelative()) {
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl(id_).isRelative()) {
     QUrl u(id_);
     if(u.isValid()) {
       return factory->addImageImpl(u, true, QUrl(), true);
@@ -369,6 +371,8 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     }
   }
 
+  // This section uses the config image setting plus the fallback location
+  // to provide confidence that the user's image can be found
   CacheDir dir1 = TempDir;
   CacheDir dir2 = TempDir;
   ImageDirectory* imgDir1 = 0;
@@ -416,7 +420,29 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
       return img2;
     }
   }
-  myDebug() << "***image not found: id =" << id_;
+  // now, it appears the image doesn't exist. The only remaining possibility
+  // is that the file name has multiple periods and as a result of the fix for bug 348088,
+  // the image is lurking in a local image directory without the multiple periods
+  if(Config::imageLocation() == Config::ImagesInLocalDir && QDir(localDir()).dirName().contains(QLatin1Char('.'))) {
+    QString realImageDir = localDir();
+    QDir d(realImageDir);
+    // try to cd up and into the other old directory
+    QString cdString = QLatin1String("../") + d.dirName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+    if(d.cd(cdString)) {
+      factory->d->localImageDir.setPath(d.path() + QDir::separator());
+      if(factory->d->localImageDir.hasImage(id_)) {
+        myDebug() << "Reading image from old local directory" << (cdString+id_);
+        const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
+        // Be sure to reset the image directory location!!
+        factory->d->localImageDir.setPath(realImageDir);
+        factory->d->localImageDir.writeImage(img2);
+        return img2;
+      }
+      factory->d->localImageDir.setPath(realImageDir);
+    }
+  }
+
+  myDebug() << "***not found:" << id_;
   return Data::Image::null;
 }
 
@@ -492,9 +518,14 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     // just to make sure all the image locations clean themselves up
     // delete the factory (which deletes the storage objects) and
     // then recreate the factory, in case anything else needs it
+    // be sure to save local image directory if it's not a temp dir1
+    const QString localDirName = localDir();
     delete factory;
     factory = 0;
     ImageFactory::init();
+    if(QDir(localDirName).exists()) {
+      setLocalDirectory(QUrl::fromLocalFile(localDirName));
+    }
   }
 }
 
@@ -607,12 +638,13 @@ void ImageFactory::setLocalDirectory(const QUrl& url_) {
   }
   if(!url_.isLocalFile()) {
     myWarning() << "Tellico can only save images to local disk";
-    myWarning() << "unable to save to " << url_.url();
+    myWarning() << "unable to save to " << url_;
   } else {
-    QString dir = url_.path() + QLatin1Char('/');
+    QString dir = url_.adjusted(QUrl::RemoveFilename).path();
     // could have already been set once
-    if(!url_.fileName().contains(QLatin1String("_files"))) {
-      dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+    if(!dir.contains(QLatin1String("_files"))) {
+      QFileInfo fi(url_.fileName());
+      dir += fi.completeBaseName() + QLatin1String("_files/");
     }
     factory->d->localImageDir.setPath(dir);
   }

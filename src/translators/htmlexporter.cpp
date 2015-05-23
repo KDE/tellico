@@ -57,6 +57,7 @@
 #include <QLabel>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QFileInfo>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -561,7 +562,8 @@ QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
     return QLatin1String("/");
   }
-  return url().fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+  QFileInfo fi(url().fileName());
+  return fi.completeBaseName() + QLatin1String("_files/");
 }
 
 // how ugly is this?

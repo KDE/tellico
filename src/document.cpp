@@ -493,7 +493,7 @@ void Document::slotLoadAllImages() {
       }
       // this is the early loading, so just by calling imageById()
       // the image gets sucked from the zip file and written to disk
-      //by ImageFactory::imageById()
+      // by ImageFactory::imageById()
       if(ImageFactory::imageById(id).isNull()) {
         myDebug() << "entry title:" << entry->title();
       }
@@ -566,7 +566,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   }
 
   m_cancelImageWriting = false;
-  ImageFactory::setLocalDirectory(oldLocalDir);
+  ImageFactory::setLocalDirectory(QUrl::fromLocalFile(oldLocalDir));
 }
 
 bool Document::pruneImages() {
@@ -794,4 +794,3 @@ QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Document::mergeFields(
   }
   return qMakePair(modified, created);
 }
-

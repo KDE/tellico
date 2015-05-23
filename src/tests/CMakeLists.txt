@@ -141,6 +141,17 @@ add_test(collectiontest collectiontest)
 ecm_mark_as_test(collectiontest)
 TARGET_LINK_LIBRARIES(collectiontest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
+add_executable(documenttest documenttest.cpp
+  ../document.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+)
+ecm_mark_nongui_executable(documenttest)
+add_test(documenttest documenttest)
+ecm_mark_as_test(documenttest)
+TARGET_LINK_LIBRARIES(documenttest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+
 add_executable(filtertest filtertest.cpp)
 ecm_mark_nongui_executable(filtertest)
 add_test(filtertest filtertest)
