@@ -14,6 +14,7 @@
   <name xml:lang="es">Tellico</name>
   <name xml:lang="et">Tellico</name>
   <name xml:lang="fr">Tellico</name>
+  <name xml:lang="gl">Tellico</name>
   <name xml:lang="hu">Tellico</name>
   <name xml:lang="ia">Tellico</name>
   <name xml:lang="nl">Tellico</name>
@@ -36,6 +37,7 @@
   <summary xml:lang="es">Gestor de colecciones</summary>
   <summary xml:lang="et">Kogude haldur</summary>
   <summary xml:lang="fr">Gestionnaire de collections</summary>
+  <summary xml:lang="gl">Xestor de coleccións</summary>
   <summary xml:lang="hu">Gyűjteménykezelő</summary>
   <summary xml:lang="ia">Gerente de collection</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
