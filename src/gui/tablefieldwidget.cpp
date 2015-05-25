@@ -65,7 +65,7 @@ TableFieldWidget::TableFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pare
   m_table->horizontalHeader()->setResizeMode(m_columns-1, QHeaderView::Interactive);
   m_table->resizeColumnToContents(m_columns-1);
   m_table->setSelectionMode(QAbstractItemView::NoSelection);
-  m_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+//  m_table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
   // capture all the context menu events
   m_table->setContextMenuPolicy(Qt::CustomContextMenu);
