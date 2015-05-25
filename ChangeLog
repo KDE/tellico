@@ -1,3 +1,7 @@
+2015-05-24  Robby Stephenson  <robby@homebase.mars>
+
+	* Fixed a bug showing horizontal scroll bar with many table columns (Bug 348189).
+
 2015-02-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.10.
