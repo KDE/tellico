@@ -30,7 +30,7 @@
 
 #include "../images/imagefactory.h"
 #include "../core/tellico_config.h"
-#include "../document.cpp"
+#include "../document.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
