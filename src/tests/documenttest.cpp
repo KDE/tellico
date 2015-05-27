@@ -29,6 +29,7 @@
 #include "qtest_kde.h"
 
 #include "../images/imagefactory.h"
+#include "../images/image.h"
 #include "../core/tellico_config.h"
 #include "../document.h"
 #include "../collections/bookcollection.h"
