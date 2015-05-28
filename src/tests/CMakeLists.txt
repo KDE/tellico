@@ -404,11 +404,14 @@ add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
 TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetch ${TELLICO_TEST_LIBS})
 
-add_executable(citebasefetchertest citebasefetchertest.cpp abstractfetchertest.cpp)
+add_executable(citebasefetchertest citebasefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/citebasefetcher.cpp
+  ../translators/bibteximporter.cpp
+)
 ecm_mark_nongui_executable(citebasefetchertest)
 add_test(citebasefetchertest citebasefetchertest)
 ecm_mark_as_test(citebasefetchertest)
-TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(citebasefetchertest fetcherstest tellicomodels ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
 add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(darkhorsefetchertest)

@@ -25,24 +25,24 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "citebasefetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/citebasefetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( CitebaseFetcherTest, GUI )
+QTEST_GUILESS_MAIN( CitebaseFetcherTest )
 
 CitebaseFetcherTest::CitebaseFetcherTest() : AbstractFetcherTest() {
 }
 
 void CitebaseFetcherTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/citebase2tellico.xsl"));
   // since citebase uses the bibtex importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
+//  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
   m_fieldValues.insert(QLatin1String("arxiv"), QLatin1String("hep-lat/0110180"));
