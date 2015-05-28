@@ -373,11 +373,13 @@ add_test(amazonfetchertest amazonfetchertest)
 ecm_mark_as_test(amazonfetchertest)
 TARGET_LINK_LIBRARIES(amazonfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-add_executable(animenfofetchertest animenfofetchertest.cpp abstractfetchertest.cpp)
+add_executable(animenfofetchertest animenfofetchertest.cpp abstractfetchertest.cpp
+  ../fetch/animenfofetcher.cpp
+)
 ecm_mark_nongui_executable(animenfofetchertest)
 add_test(animenfofetchertest animenfofetchertest)
 ecm_mark_as_test(animenfofetchertest)
-TARGET_LINK_LIBRARIES(animenfofetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(animenfofetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(arxivfetchertest arxivfetchertest.cpp abstractfetchertest.cpp
   ../fetch/arxivfetcher.cpp

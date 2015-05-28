@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "animenfofetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/animenfofetcher.h"
 #include "../entry.h"
@@ -34,9 +33,12 @@
 #include "../images/imagefactory.h"
 #include "../fieldformat.h"
 
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( AnimenfoFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( AnimenfoFetcherTest )
 
 AnimenfoFetcherTest::AnimenfoFetcherTest() : AbstractFetcherTest() {
 }
@@ -47,7 +49,7 @@ void AnimenfoFetcherTest::initTestCase() {
 }
 
 void AnimenfoFetcherTest::testMegami() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -76,7 +78,7 @@ void AnimenfoFetcherTest::testMegami() {
 }
 
 void AnimenfoFetcherTest::testHachimitsu() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -115,7 +117,7 @@ void AnimenfoFetcherTest::testHachimitsu() {
 }
 
 void AnimenfoFetcherTest::testGhost() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

@@ -34,7 +34,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kconfig.h>
+#include <KConfig>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KJobWidgets/KJobWidgets>
@@ -106,7 +106,7 @@ void AnimeNfoFetcher::search() {
       stop();
       return;
   }
-//  myDebug() << "url:" << u.url();
+//  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -147,6 +147,16 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   m_job = 0;
 
   QString s = Tellico::decodeHTML(data);
+#if 0
+  myWarning() << "Remove debug from animenfofetcher.cpp";
+  QFile f(QLatin1String("/tmp/test.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << s;
+  }
+  f.close();
+#endif
 
   QRegExp infoRx(QLatin1String("<td\\s+[^>]*class\\s*=\\s*[\"']anime_info[\"'][^>]*>(.*)</td>"), Qt::CaseInsensitive);
   infoRx.setMinimal(true);
