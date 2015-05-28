@@ -25,18 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "bibliosharefetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/bibliosharefetcher.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
-#include <KLocalizedString>
+#include <QTest>
 
-QTEST_KDEMAIN( BiblioShareFetcherTest, GUI )
+QTEST_GUILESS_MAIN( BiblioShareFetcherTest )
 
 BiblioShareFetcherTest::BiblioShareFetcherTest() : AbstractFetcherTest() {
 }
@@ -45,7 +44,7 @@ void BiblioShareFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/biblioshare2tellico.xsl"));
 }
 
 void BiblioShareFetcherTest::testIsbn() {
@@ -58,7 +57,7 @@ void BiblioShareFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Girl Who Kicked The Hornet's Nest,The"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked the Hornet's Nest"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
   QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));
@@ -77,7 +76,7 @@ void BiblioShareFetcherTest::testIsbn13() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Girl Who Kicked The Hornet's Nest,The"));
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked the Hornet's Nest"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
   QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));

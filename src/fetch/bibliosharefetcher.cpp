@@ -111,8 +111,9 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
       QUrl imageUrl(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
       imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
       imageUrl.addQueryItem(QLatin1String("Token"), m_token);
-      imageUrl.addQueryItem(QLatin1String("SAN"), QString());
-      imageUrl.addQueryItem(QLatin1String("Thumbnail"), QString());
+      // QUrl does not had the "=" for empty SAN and Thumbnail query items
+      imageUrl.addQueryItem(QLatin1String("SAN"), QLatin1String(" "));
+      imageUrl.addQueryItem(QLatin1String("Thumbnail"), QLatin1String(" "));
       imageUrl.addQueryItem(QLatin1String("EAN"), isbn);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
