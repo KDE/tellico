@@ -587,6 +587,9 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     fieldValue += FieldFormat::columnDelimiterString();
     fieldValue += entry->field(QLatin1String("artist"));
   }
+  if(fieldValue.isEmpty()) {
+    return true;
+  }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
     fieldValue = i18n(fieldValue.toUtf8());
@@ -595,9 +598,6 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   if(m_validateISBN) {
     ISBNValidator val(0);
     val.fixup(fieldValue);
-  }
-  if(fieldValue.isEmpty()) {
-    return true;
   }
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
