@@ -170,7 +170,6 @@ in the Data Sources Dialog. There are many available types and sources:</para>
 <listitem><para><link linkend="gcstarplugin"><application>GCstar</application> Plugins</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">arxiv.org</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">bibsonomy.org</link>,</para></listitem>
-<listitem><para><link linkend="bib-sources">citebase.org</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">crossref.org</link>,</para></listitem>
 <listitem><para><link linkend="discogs">Discogs.com</link>,</para></listitem>
 <listitem><para><link linkend="winecom">Wine.com</link>,</para></listitem>
@@ -280,7 +279,7 @@ the best known.
 <sect3 id="bib-sources">
 <title>Bibliographic Databases</title>
 <para>
-<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, <ulink url="http://citebase.org">Citebase</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
+<ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
 </sect3>
 
 <sect3 id="ibs">

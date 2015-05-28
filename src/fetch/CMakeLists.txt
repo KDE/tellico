@@ -12,7 +12,6 @@ SET(fetch_STAT_SRCS
    bibliosharefetcher.cpp
    bibsonomyfetcher.cpp
    boardgamegeekfetcher.cpp
-   citebasefetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp
    dblpfetcher.cpp

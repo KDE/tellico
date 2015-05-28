@@ -39,7 +39,6 @@
 #include "gcstarpluginfetcher.h"
 #include "crossreffetcher.h"
 #include "arxivfetcher.h"
-#include "citebasefetcher.h"
 #include "bibsonomyfetcher.h"
 #include "googlescholarfetcher.h"
 #include "discogsfetcher.h"
@@ -94,7 +93,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GCstarPluginFetcher> registerGCstar(GCstarPlugin);
   RegisterFetcher<Fetch::CrossRefFetcher> registerCrossRef(CrossRef);
   RegisterFetcher<Fetch::ArxivFetcher> registerArxiv(Arxiv);
-  RegisterFetcher<Fetch::CitebaseFetcher> registerCitebase(Citebase);
   RegisterFetcher<Fetch::BibsonomyFetcher> registerBibsonomy(Bibsonomy);
   RegisterFetcher<Fetch::GoogleScholarFetcher> registerGoogle(GoogleScholar);
   RegisterFetcher<Fetch::WineComFetcher> registerWine(WineCom);
