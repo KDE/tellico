@@ -25,17 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "googlescholarfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/googlescholarfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../utils/bibtexhandler.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( GoogleScholarFetcherTest, GUI )
+QTEST_GUILESS_MAIN( GoogleScholarFetcherTest )
 
 GoogleScholarFetcherTest::GoogleScholarFetcherTest() : AbstractFetcherTest() {
 }
@@ -43,7 +43,7 @@ GoogleScholarFetcherTest::GoogleScholarFetcherTest() : AbstractFetcherTest() {
 void GoogleScholarFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the bibtex importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Speeding up the Hybrid Monte Carlo algorithm for dynamical fermions"));

@@ -42,7 +42,6 @@ QTEST_GUILESS_MAIN( BibtexTest )
 
 void BibtexTest::initTestCase() {
   // since we use the bibtex mapping file
-//  KGlobal::dirs()->addResourceDir("appdata", QFINDTESTDATA("../translators/"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 }
 

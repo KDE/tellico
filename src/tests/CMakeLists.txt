@@ -510,11 +510,14 @@ add_test(giantbombfetchertest giantbombfetchertest)
 ecm_mark_as_test(giantbombfetchertest)
 TARGET_LINK_LIBRARIES(giantbombfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-add_executable(googlescholarfetchertest googlescholarfetchertest.cpp abstractfetchertest.cpp)
+add_executable(googlescholarfetchertest googlescholarfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/googlescholarfetcher.cpp
+  ../translators/bibteximporter.cpp
+)
 ecm_mark_nongui_executable(googlescholarfetchertest)
 add_test(googlescholarfetchertest googlescholarfetchertest)
 ecm_mark_as_test(googlescholarfetchertest)
-TARGET_LINK_LIBRARIES(googlescholarfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(googlescholarfetchertest fetcherstest tellicomodels ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
 add_executable(ibsfetchertest ibsfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(ibsfetchertest)
