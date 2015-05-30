@@ -22,32 +22,28 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
+#include <config.h> // for TELLICO_VERSION
+
 #include "discogsfetcher.h"
 #include "../collections/musiccollection.h"
 #include "../utils/guiproxy.h"
-#include "../core/filehandler.h"
 #include "../utils/string_utils.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KConfigGroup>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 #include <KLineEdit>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QBoxLayout>
-#include <QDomDocument>
-#include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/serializer.h>
-#include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
@@ -70,11 +66,7 @@ QString DiscogsFetcher::source() const {
 }
 
 bool DiscogsFetcher::canSearch(FetchKey k) const {
-#ifdef HAVE_QJSON
   return k == Title || k == Person || k == Keyword;
-#else
-  return false;
-#endif
 }
 
 bool DiscogsFetcher::canFetch(int type) const {
@@ -89,7 +81,6 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
 }
 
 void DiscogsFetcher::search() {
-#ifdef HAVE_QJSON
   m_started = true;
 
   if(m_apiKey.isEmpty()) {
@@ -140,9 +131,6 @@ void DiscogsFetcher::search() {
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
-#else
-  stop();
-#endif
 }
 
 void DiscogsFetcher::stop() {
@@ -164,7 +152,6 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-#ifdef HAVE_QJSON
   QString id = entry->field(QLatin1String("discogs-id"));
   if(!id.isEmpty()) {
     // quiet
@@ -183,10 +170,14 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
 
-    QJson::Parser parser;
-    populateEntry(entry, parser.parse(data).toMap(), true);
+    QJsonParseError error;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+    if(error.error == QJsonParseError::NoError) {
+      populateEntry(entry, doc.object().toVariantMap(), true);
+    } else {
+      myDebug() << "Bad JSON results";
+    }
   }
-#endif
 
   // don't want to include ID field
   entry->setField(QLatin1String("discogs-id"), QString());
@@ -209,7 +200,6 @@ Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_
 
 void DiscogsFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -265,8 +255,9 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QJson::Parser parser;
-  const QVariantMap resultMap = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+//  const QVariantMap resultMap = doc.object().toVariantMap().value(QLatin1String("feed")).toMap();
+  const QVariantMap resultMap = doc.object().toVariantMap();
 
   if(value(resultMap, "message").startsWith(QLatin1String("Invalid consumer token"))) {
     message(i18n("The Discogs.com server reports a token error."),
@@ -292,7 +283,6 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
     ++count;
   }
 
-#endif
   stop();
 }
 
@@ -386,7 +376,6 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   entry_->setField(QLatin1String("comments"),  value(resultMap_, "notes"));
 
-
   /* cover image authentication with personal token does not work yet
   QUrl coverUrl = value(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
@@ -479,4 +468,3 @@ QString DiscogsFetcher::value(const QVariantMap& map, const char* name) {
     return QString();
   }
 }
-

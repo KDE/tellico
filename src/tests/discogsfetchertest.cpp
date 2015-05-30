@@ -25,30 +25,24 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "discogsfetchertest.h"
-#include "qtest_kde.h"
-
 #include "../fetch/discogsfetcher.h"
-#include "../collections/musiccollection.h"
-#include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 
-#include <KStandardDirs>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( DiscogsFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( DiscogsFetcherTest )
 
 DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest()
-    , m_config(QString::fromLatin1(KDESRCDIR)  + "/discogsfetchertest.config", KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("discogsfetchertest.config"), KConfig::SimpleConfig) {
 }
 
 void DiscogsFetcherTest::initTestCase() {
-//  Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
-  // since we use the Discogs importer
-//  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
-  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/discogsfetchertest.config");
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("discogsfetchertest.config"));
 }
 
 void DiscogsFetcherTest::testTitle() {
