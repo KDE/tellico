@@ -413,11 +413,14 @@ add_test(darkhorsefetchertest darkhorsefetchertest)
 ecm_mark_as_test(darkhorsefetchertest)
 TARGET_LINK_LIBRARIES(darkhorsefetchertest fetch ${TELLICO_TEST_LIBS})
 
-add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp)
+add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/dblpfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(dblpfetchertest)
 add_test(dblpfetchertest dblpfetchertest)
 ecm_mark_as_test(dblpfetchertest)
-TARGET_LINK_LIBRARIES(dblpfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(dblpfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(discogsfetchertest discogsfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(discogsfetchertest)
