@@ -79,12 +79,9 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
 
-  //OAuth is now required
-  /*
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
   QVERIFY(!img.isNull());
-*/
 }
 
 void DiscogsFetcherTest::testPerson() {
@@ -107,12 +104,10 @@ void DiscogsFetcherTest::testPerson() {
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("title")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
-  //OAuth is now required
-  /*
+
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
   QVERIFY(!img.isNull());
-  */
 }
 
 void DiscogsFetcherTest::testKeyword() {
@@ -136,12 +131,10 @@ void DiscogsFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Evanescence"));
   QVERIFY(!entry->field(QLatin1String("label")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("year")).isEmpty());
-  // OAuth is now required
-  /*
+
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
   QVERIFY(!img.isNull());
-  */
 }
 
 // use the Raw query type to fully test the data for a Discogs release
@@ -175,12 +168,8 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.count(), 14);
   QCOMPARE(trackList.at(0), QLatin1String("Haunted::Evanescence::4:04"));
 
-  // OAuth is now required
-  /*
+  QEXPECT_FAIL("", "Thumbnails are not returned in full raw data, for some reason", Continue);
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QLatin1String("cover")));
-  QVERIFY(!img.isNull());
-*/
 }
 
 // do another check to make sure the Vinyl format is captured

@@ -304,6 +304,12 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
   entry_->setField(QLatin1String("label"), labels.join(FieldFormat::delimiterString()));
 
+  /* thumb value is not always in the full data, so go ahead and set it now */
+  QUrl coverUrl = value(resultMap_, "thumb");
+  if(!coverUrl.isEmpty()) {
+    entry_->setField(QLatin1String("cover"), coverUrl.toString());
+  }
+
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
@@ -375,15 +381,6 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
 
   entry_->setField(QLatin1String("comments"),  value(resultMap_, "notes"));
-
-  /* cover image authentication with personal token does not work yet
-  QUrl coverUrl = value(resultMap_, "thumb");
-  if(!coverUrl.isEmpty()) {
-    // also need authentication
-    coverUrl.addQueryItem(QLatin1String("token"), m_apiKey);
-    entry_->setField(QLatin1String("cover"), coverUrl.toString());
-  }
-  */
 }
 
 Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) const {
