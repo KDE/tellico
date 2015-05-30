@@ -33,9 +33,8 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kconfig.h>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
 #include <QRegExp>

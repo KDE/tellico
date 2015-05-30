@@ -519,11 +519,13 @@ add_test(googlescholarfetchertest googlescholarfetchertest)
 ecm_mark_as_test(googlescholarfetchertest)
 TARGET_LINK_LIBRARIES(googlescholarfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
-add_executable(ibsfetchertest ibsfetchertest.cpp abstractfetchertest.cpp)
+add_executable(ibsfetchertest ibsfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/ibsfetcher.cpp
+)
 ecm_mark_nongui_executable(ibsfetchertest)
 add_test(ibsfetchertest ibsfetchertest)
 ecm_mark_as_test(ibsfetchertest)
-TARGET_LINK_LIBRARIES(ibsfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(ibsfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(imdbfetchertest imdbfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(imdbfetchertest)

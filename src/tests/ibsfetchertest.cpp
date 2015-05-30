@@ -25,13 +25,14 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ibsfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/ibsfetcher.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-QTEST_KDEMAIN( IBSFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( IBSFetcherTest )
 
 IBSFetcherTest::IBSFetcherTest() : AbstractFetcherTest() {
 }
