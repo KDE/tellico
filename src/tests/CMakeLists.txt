@@ -448,11 +448,13 @@ add_test(dvdfrfetchertest dvdfrfetchertest)
 ecm_mark_as_test(dvdfrfetchertest)
 TARGET_LINK_LIBRARIES(dvdfrfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-add_executable(entrezfetchertest entrezfetchertest.cpp abstractfetchertest.cpp)
+add_executable(entrezfetchertest entrezfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/entrezfetcher.cpp
+)
 ecm_mark_nongui_executable(entrezfetchertest)
 add_test(entrezfetchertest entrezfetchertest)
 ecm_mark_as_test(entrezfetchertest)
-TARGET_LINK_LIBRARIES(entrezfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(entrezfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(freebasefetchertest)
