@@ -123,6 +123,7 @@ set(TELLICO2_TEST_LIBS
    collections
    utils
    images
+   tellicomodels
    Qt5::Test
    KF5::KIOCore
    KF5::Archive
@@ -139,7 +140,7 @@ add_executable(collectiontest collectiontest.cpp
 ecm_mark_nongui_executable(collectiontest)
 add_test(collectiontest collectiontest)
 ecm_mark_as_test(collectiontest)
-TARGET_LINK_LIBRARIES(collectiontest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(collectiontest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(documenttest documenttest.cpp
   ../document.cpp
@@ -150,7 +151,7 @@ add_executable(documenttest documenttest.cpp
 ecm_mark_nongui_executable(documenttest)
 add_test(documenttest documenttest)
 ecm_mark_as_test(documenttest)
-TARGET_LINK_LIBRARIES(documenttest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(documenttest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(filtertest filtertest.cpp)
 ecm_mark_nongui_executable(filtertest)
@@ -254,7 +255,7 @@ add_executable(gcstartest gcstartest.cpp
 ecm_mark_nongui_executable(gcstartest)
 add_test(gcstartest gcstartest)
 ecm_mark_as_test(gcstartest)
-TARGET_LINK_LIBRARIES(gcstartest tellicomodels translatorstest ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(gcstartest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(griffithtest griffithtest.cpp
   ../translators/griffithimporter.cpp
@@ -291,7 +292,7 @@ add_executable(tellicoreadtest tellicoreadtest.cpp
 ecm_mark_nongui_executable(tellicoreadtest)
 add_test(tellicoreadtest tellicoreadtest)
 ecm_mark_as_test(tellicoreadtest)
-TARGET_LINK_LIBRARIES(tellicoreadtest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(tellicoreadtest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(vinoxmltest vinoxmltest.cpp
   ../translators/vinoxmlimporter.cpp
@@ -354,7 +355,6 @@ ecm_mark_as_test(allocinefetchertest)
 TARGET_LINK_LIBRARIES(allocinefetchertest
   fetcherstest
   translatorstest
-  tellicomodels
   newstuff
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO2_TEST_LIBS}
@@ -371,7 +371,7 @@ add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(amazonfetchertest)
 add_test(amazonfetchertest amazonfetchertest)
 ecm_mark_as_test(amazonfetchertest)
-TARGET_LINK_LIBRARIES(amazonfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(amazonfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(animenfofetchertest animenfofetchertest.cpp abstractfetchertest.cpp
   ../fetch/animenfofetcher.cpp
@@ -379,7 +379,7 @@ add_executable(animenfofetchertest animenfofetchertest.cpp abstractfetchertest.c
 ecm_mark_nongui_executable(animenfofetchertest)
 add_test(animenfofetchertest animenfofetchertest)
 ecm_mark_as_test(animenfofetchertest)
-TARGET_LINK_LIBRARIES(animenfofetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(animenfofetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(arxivfetchertest arxivfetchertest.cpp abstractfetchertest.cpp
   ../fetch/arxivfetcher.cpp
@@ -387,7 +387,7 @@ add_executable(arxivfetchertest arxivfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(arxivfetchertest)
 add_test(arxivfetchertest arxivfetchertest)
 ecm_mark_as_test(arxivfetchertest)
-TARGET_LINK_LIBRARIES(arxivfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(arxivfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(bibliosharefetchertest bibliosharefetchertest.cpp abstractfetchertest.cpp
   ../fetch/bibliosharefetcher.cpp
@@ -396,7 +396,7 @@ add_executable(bibliosharefetchertest bibliosharefetchertest.cpp abstractfetcher
 ecm_mark_nongui_executable(bibliosharefetchertest)
 add_test(bibliosharefetchertest bibliosharefetchertest)
 ecm_mark_as_test(bibliosharefetchertest)
-TARGET_LINK_LIBRARIES(bibliosharefetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(bibliosharefetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(boardgamegeekfetchertest boardgamegeekfetchertest.cpp abstractfetchertest.cpp
   ../fetch/boardgamegeekfetcher.cpp
@@ -405,7 +405,7 @@ add_executable(boardgamegeekfetchertest boardgamegeekfetchertest.cpp abstractfet
 ecm_mark_nongui_executable(boardgamegeekfetchertest)
 add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
-TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(darkhorsefetchertest)
@@ -420,7 +420,7 @@ add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(dblpfetchertest)
 add_test(dblpfetchertest dblpfetchertest)
 ecm_mark_as_test(dblpfetchertest)
-TARGET_LINK_LIBRARIES(dblpfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(dblpfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(discogsfetchertest discogsfetchertest.cpp abstractfetchertest.cpp
   ../fetch/discogsfetcher.cpp
@@ -428,7 +428,7 @@ add_executable(discogsfetchertest discogsfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(discogsfetchertest)
 add_test(discogsfetchertest discogsfetchertest)
 ecm_mark_as_test(discogsfetchertest)
-TARGET_LINK_LIBRARIES(discogsfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(discogsfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(doubanfetchertest doubanfetchertest.cpp abstractfetchertest.cpp
   ../fetch/doubanfetcher.cpp
@@ -437,7 +437,7 @@ add_executable(doubanfetchertest doubanfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(doubanfetchertest)
 add_test(doubanfetchertest doubanfetchertest)
 ecm_mark_as_test(doubanfetchertest)
-TARGET_LINK_LIBRARIES(doubanfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(doubanfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(dvdfrfetchertest dvdfrfetchertest.cpp abstractfetchertest.cpp
   ../fetch/dvdfrfetcher.cpp
@@ -446,7 +446,7 @@ add_executable(dvdfrfetchertest dvdfrfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(dvdfrfetchertest)
 add_test(dvdfrfetchertest dvdfrfetchertest)
 ecm_mark_as_test(dvdfrfetchertest)
-TARGET_LINK_LIBRARIES(dvdfrfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(dvdfrfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(entrezfetchertest entrezfetchertest.cpp abstractfetchertest.cpp
   ../fetch/entrezfetcher.cpp
@@ -454,7 +454,7 @@ add_executable(entrezfetchertest entrezfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(entrezfetchertest)
 add_test(entrezfetchertest entrezfetchertest)
 ecm_mark_as_test(entrezfetchertest)
-TARGET_LINK_LIBRARIES(entrezfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(entrezfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(freebasefetchertest)
@@ -468,7 +468,7 @@ add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest
 ecm_mark_nongui_executable(filmasterfetchertest)
 add_test(filmasterfetchertest filmasterfetchertest)
 ecm_mark_as_test(filmasterfetchertest)
-TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(hathitrustfetchertest hathitrustfetchertest.cpp abstractfetchertest.cpp
   ../fetch/hathitrustfetcher.cpp
@@ -476,7 +476,7 @@ add_executable(hathitrustfetchertest hathitrustfetchertest.cpp abstractfetcherte
 ecm_mark_nongui_executable(hathitrustfetchertest)
 add_test(hathitrustfetchertest hathitrustfetchertest)
 ecm_mark_as_test(hathitrustfetchertest)
-TARGET_LINK_LIBRARIES(hathitrustfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(hathitrustfetchertest fetcherstest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp
   ../fetch/masfetcher.cpp
@@ -484,7 +484,7 @@ add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp
 ecm_mark_nongui_executable(masfetchertest)
 add_test(masfetchertest masfetchertest)
 ecm_mark_as_test(masfetchertest)
-TARGET_LINK_LIBRARIES(masfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(masfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlebookfetcher.cpp
@@ -492,7 +492,7 @@ add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetcherte
 ecm_mark_nongui_executable(googlebookfetchertest)
 add_test(googlebookfetchertest googlebookfetchertest)
 ecm_mark_as_test(googlebookfetchertest)
-TARGET_LINK_LIBRARIES(googlebookfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(googlebookfetchertest fetcherstest translatorstest ${TELLICO2_TEST_LIBS})
 
 # running gcstar in the fetcher is really unreliable
 #add_executable(gcstarfetchertest gcstarfetchertest.cpp)
@@ -508,7 +508,7 @@ add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest
 ecm_mark_nongui_executable(giantbombfetchertest)
 add_test(giantbombfetchertest giantbombfetchertest)
 ecm_mark_as_test(giantbombfetchertest)
-TARGET_LINK_LIBRARIES(giantbombfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(giantbombfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(googlescholarfetchertest googlescholarfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlescholarfetcher.cpp
@@ -517,7 +517,7 @@ add_executable(googlescholarfetchertest googlescholarfetchertest.cpp abstractfet
 ecm_mark_nongui_executable(googlescholarfetchertest)
 add_test(googlescholarfetchertest googlescholarfetchertest)
 ecm_mark_as_test(googlescholarfetchertest)
-TARGET_LINK_LIBRARIES(googlescholarfetchertest fetcherstest tellicomodels ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(googlescholarfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
 add_executable(ibsfetchertest ibsfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(ibsfetchertest)
@@ -588,7 +588,7 @@ add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetcherte
 ecm_mark_nongui_executable(themoviedbfetchertest)
 add_test(themoviedbfetchertest themoviedbfetchertest)
 ecm_mark_as_test(themoviedbfetchertest)
-TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
+TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest ${TELLICO2_TEST_LIBS})
 
 add_executable(vndbfetchertest vndbfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(vndbfetchertest)
