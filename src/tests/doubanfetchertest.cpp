@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "doubanfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/doubanfetcher.h"
 #include "../collections/bookcollection.h"
@@ -34,10 +33,11 @@
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( DoubanFetcherTest, GUI )
+QTEST_GUILESS_MAIN( DoubanFetcherTest )
 
 DoubanFetcherTest::DoubanFetcherTest() : AbstractFetcherTest() {
 }
@@ -47,7 +47,7 @@ void DoubanFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
   // since we use the xslt importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/douban2tellico.xsl"));
   Tellico::ImageFactory::init();
 }
 
@@ -79,7 +79,7 @@ void DoubanFetcherTest::testBookTitle() {
 }
 
 void DoubanFetcherTest::testISBN() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QLatin1String("9787535765444"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
 

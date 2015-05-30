@@ -39,7 +39,6 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
-#include <QDomDocument>
 
 namespace {
   static const int DOUBAN_MAX_RETURNS_TOTAL = 20;
