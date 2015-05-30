@@ -398,11 +398,14 @@ add_test(bibliosharefetchertest bibliosharefetchertest)
 ecm_mark_as_test(bibliosharefetchertest)
 TARGET_LINK_LIBRARIES(bibliosharefetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-add_executable(boardgamegeekfetchertest boardgamegeekfetchertest.cpp abstractfetchertest.cpp)
+add_executable(boardgamegeekfetchertest boardgamegeekfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/boardgamegeekfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(boardgamegeekfetchertest)
 add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
-TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(darkhorsefetchertest)

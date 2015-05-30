@@ -34,8 +34,8 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
-  void testTitleAPI();
-  void testKeywordAPI();
+  void testTitle();
+  void testKeyword();
 };
 
 #endif
