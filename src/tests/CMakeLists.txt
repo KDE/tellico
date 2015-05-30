@@ -501,11 +501,14 @@ TARGET_LINK_LIBRARIES(googlebookfetchertest fetcherstest translatorstest tellico
 #ecm_mark_as_test(gcstarfetchertest)
 #TARGET_LINK_LIBRARIES(gcstarfetchertest fetch ${TELLICO_TEST_LIBS})
 
-add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest.cpp)
+add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/giantbombfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(giantbombfetchertest)
 add_test(giantbombfetchertest giantbombfetchertest)
 ecm_mark_as_test(giantbombfetchertest)
-TARGET_LINK_LIBRARIES(giantbombfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(giantbombfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(googlescholarfetchertest googlescholarfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(googlescholarfetchertest)

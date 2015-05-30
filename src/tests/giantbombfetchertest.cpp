@@ -25,17 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "giantbombfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/giantbombfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( GiantBombFetcherTest, GUI )
+QTEST_GUILESS_MAIN( GiantBombFetcherTest )
 
 GiantBombFetcherTest::GiantBombFetcherTest() : AbstractFetcherTest() {
 }
@@ -43,7 +43,7 @@ GiantBombFetcherTest::GiantBombFetcherTest() : AbstractFetcherTest() {
 void GiantBombFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/giantbomb2tellico.xsl"));
   Tellico::ImageFactory::init();
 }
 
