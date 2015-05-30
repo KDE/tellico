@@ -22,7 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "masfetcher.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
@@ -34,18 +33,16 @@
 
 #include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const int MAS_MAX_RETURNS = 20;
@@ -57,14 +54,10 @@ using namespace Tellico;
 using Tellico::Fetch::MASFetcher;
 
 MASFetcher::MASFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_parser(0) {
+    : Fetcher(parent_), m_started(false) {
 }
 
 MASFetcher::~MASFetcher() {
-#ifdef HAVE_QJSON
-  delete m_parser;
-  m_parser = 0;
-#endif
 }
 
 QString MASFetcher::source() const {
@@ -77,11 +70,7 @@ QString MASFetcher::attribution() const {
 }
 
 bool MASFetcher::canSearch(FetchKey k) const {
-#ifndef HAVE_QJSON
-  return false;
-#else
   return k == Title || k == Person || k == Keyword;
-#endif
 }
 
 bool MASFetcher::canFetch(int type) const {
@@ -104,7 +93,6 @@ void MASFetcher::continueSearch() {
 }
 
 void MASFetcher::doSearch() {
-#ifdef HAVE_QJSON
   QUrl u(QString::fromLatin1(MAS_API_URL));
   u.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
   u.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
@@ -135,9 +123,6 @@ void MASFetcher::doSearch() {
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
-#else
-  stop();
-#endif
 }
 
 void MASFetcher::stop() {
@@ -170,9 +155,6 @@ Tellico::Fetch::FetchRequest MASFetcher::updateRequest(Data::EntryPtr entry_) {
 }
 
 void MASFetcher::slotComplete(KJob* job_) {
-#ifndef HAVE_QJSON
-  stop();
-#else
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 //  myDebug();
 
@@ -200,10 +182,8 @@ void MASFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  if(!m_parser) {
-    m_parser = new QJson::Parser();
-  }
-  const QVariantMap resultsMap = m_parser->parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  const QVariantMap resultsMap = doc.object().toVariantMap();
 
   if(m_total == -1) {
     m_total = resultsMap.value(QLatin1String("d")).toMap()
@@ -235,11 +215,9 @@ void MASFetcher::slotComplete(KJob* job_) {
   m_start = m_entries.count();
   m_hasMoreResults = m_start < m_total;
   stop();
-#endif
 }
 
 void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_) {
-#ifdef HAVE_QJSON
   entry_->setField(QLatin1String("title"), value(result_, "Title"));
   entry_->setField(QLatin1String("year"), value(result_, "Year"));
   entry_->setField(QLatin1String("doi"), value(result_, "DOI"));
@@ -280,7 +258,7 @@ void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_
     }
 
     // finally, look it up with a new query
-    QUrl ku(MAS_API_URL);
+    QUrl ku(QString::fromLatin1(MAS_API_URL));
     ku.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
     ku.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
     ku.addQueryItem(QLatin1String("StartIdx"), QLatin1String("1"));
@@ -290,8 +268,9 @@ void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_
     ku.addQueryItem(QLatin1String("KeywordID"), keywordId);
 //    myDebug() << ku;
 
-    const QString output = FileHandler::readTextFile(ku, true /*quiet*/);
-    const QVariantList keywordList = m_parser->parse(output.toUtf8()).toMap()
+    QByteArray data = FileHandler::readDataFile(ku, true /*quiet*/);
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    const QVariantList keywordList = doc.object().toVariantMap()
                                     .value(QLatin1String("d")).toMap()
                                     .value(QLatin1String("Keyword")).toMap()
                                     .value(QLatin1String("Result")).toList();
@@ -303,7 +282,6 @@ void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_
   if(!keywords.isEmpty()) {
     entry_->setField(QLatin1String("keyword"), keywords.join(FieldFormat::delimiterString()));
   }
-#endif
 }
 
 Tellico::Fetch::ConfigWidget* MASFetcher::configWidget(QWidget* parent_) const {
@@ -359,4 +337,3 @@ QString MASFetcher::value(const QVariantMap& map, const char* name, const char* 
     return QString();
   }
 }
-

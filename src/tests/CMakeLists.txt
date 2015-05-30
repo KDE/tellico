@@ -478,11 +478,13 @@ add_test(hathitrustfetchertest hathitrustfetchertest)
 ecm_mark_as_test(hathitrustfetchertest)
 TARGET_LINK_LIBRARIES(hathitrustfetchertest fetcherstest translatorstest tellicomodels ${TELLICO2_TEST_LIBS})
 
-add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp)
+add_executable(masfetchertest masfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/masfetcher.cpp
+)
 ecm_mark_nongui_executable(masfetchertest)
 add_test(masfetchertest masfetchertest)
 ecm_mark_as_test(masfetchertest)
-TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(masfetchertest fetcherstest tellicomodels ${TELLICO2_TEST_LIBS})
 
 add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlebookfetcher.cpp

@@ -23,12 +23,13 @@
  ***************************************************************************/
 
 #include "masfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/masfetcher.h"
 #include "../entry.h"
 
-QTEST_KDEMAIN( MASFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( MASFetcherTest )
 
 MASFetcherTest::MASFetcherTest() : AbstractFetcherTest() {
 }
