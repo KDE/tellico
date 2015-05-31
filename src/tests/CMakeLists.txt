@@ -561,11 +561,13 @@ add_test(mrlookupfetchertest mrlookupfetchertest)
 ecm_mark_as_test(mrlookupfetchertest)
 TARGET_LINK_LIBRARIES(mrlookupfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
-add_executable(musicbrainzfetchertest musicbrainzfetchertest.cpp abstractfetchertest.cpp)
+add_executable(musicbrainzfetchertest musicbrainzfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/musicbrainzfetcher.cpp
+)
 ecm_mark_nongui_executable(musicbrainzfetchertest)
 add_test(musicbrainzfetchertest musicbrainzfetchertest)
 ecm_mark_as_test(musicbrainzfetchertest)
-TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 IF( QJSON_FOUND )
     add_executable(openlibraryfetchertest openlibraryfetchertest.cpp abstractfetchertest.cpp)

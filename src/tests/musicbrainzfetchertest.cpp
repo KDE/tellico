@@ -25,19 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "musicbrainzfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/musicbrainzfetcher.h"
 #include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-#include <unistd.h>
-
-QTEST_KDEMAIN( MusicBrainzFetcherTest, GUI )
+QTEST_GUILESS_MAIN( MusicBrainzFetcherTest )
 
 MusicBrainzFetcherTest::MusicBrainzFetcherTest() : AbstractFetcherTest() {
 }
@@ -45,7 +43,7 @@ MusicBrainzFetcherTest::MusicBrainzFetcherTest() : AbstractFetcherTest() {
 void MusicBrainzFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "album");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/musicbrainz2tellico.xsl"));
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("carried along"));
@@ -76,8 +74,8 @@ void MusicBrainzFetcherTest::testTitle() {
 }
 
 void MusicBrainzFetcherTest::testKeyword() {
-  // the total test case ends up exceeding the throttle limit so pause
-  usleep(1000 * 1000);
+  // the total test case ends up exceeding the throttle limit so pause for a second
+  QTest::qWait(1000);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        m_fieldValues.value(QLatin1String("title")));
