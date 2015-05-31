@@ -599,11 +599,14 @@ ecm_mark_as_test(srufetchertest)
 # Sonnet needed for gui/lineedit
 TARGET_LINK_LIBRARIES(srufetchertest fetcherstest ${TELLICO2_TEST_LIBS} KF5::SonnetCore)
 
-add_executable(thegamesdbfetchertest thegamesdbfetchertest.cpp abstractfetchertest.cpp)
+add_executable(thegamesdbfetchertest thegamesdbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/thegamesdbfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(thegamesdbfetchertest)
 add_test(thegamesdbfetchertest thegamesdbfetchertest)
 ecm_mark_as_test(thegamesdbfetchertest)
-TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/themoviedbfetcher.cpp

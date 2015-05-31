@@ -25,17 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "thegamesdbfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/thegamesdbfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( TheGamesDBFetcherTest, GUI )
+QTEST_GUILESS_MAIN( TheGamesDBFetcherTest )
 
 TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 }
@@ -43,7 +43,7 @@ TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 void TheGamesDBFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/thegamesdb2tellico.xsl"));
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("GoldenEye 007"));
