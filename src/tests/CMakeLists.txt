@@ -577,11 +577,14 @@ add_test(openlibraryfetchertest openlibraryfetchertest)
 ecm_mark_as_test(openlibraryfetchertest)
 TARGET_LINK_LIBRARIES(openlibraryfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(springerfetchertest springerfetchertest.cpp abstractfetchertest.cpp)
+add_executable(springerfetchertest springerfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/springerfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(springerfetchertest)
 add_test(springerfetchertest springerfetchertest)
 ecm_mark_as_test(springerfetchertest)
-TARGET_LINK_LIBRARIES(springerfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(springerfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(srufetchertest srufetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(srufetchertest)
