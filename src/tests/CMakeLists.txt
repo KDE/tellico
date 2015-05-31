@@ -586,11 +586,18 @@ add_test(springerfetchertest springerfetchertest)
 ecm_mark_as_test(springerfetchertest)
 TARGET_LINK_LIBRARIES(springerfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(srufetchertest srufetchertest.cpp abstractfetchertest.cpp)
+add_executable(srufetchertest srufetchertest.cpp abstractfetchertest.cpp
+  ../fetch/srufetcher.cpp
+  ../fetch/xmlfetcher.cpp
+  ../translators/xmlimporter.cpp
+  ../gui/lineedit.cpp
+  ../gui/combobox.cpp
+)
 ecm_mark_nongui_executable(srufetchertest)
 add_test(srufetchertest srufetchertest)
 ecm_mark_as_test(srufetchertest)
-TARGET_LINK_LIBRARIES(srufetchertest fetch ${TELLICO_TEST_LIBS})
+# Sonnet needed for gui/lineedit
+TARGET_LINK_LIBRARIES(srufetchertest fetcherstest ${TELLICO2_TEST_LIBS} KF5::SonnetCore)
 
 add_executable(thegamesdbfetchertest thegamesdbfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(thegamesdbfetchertest)

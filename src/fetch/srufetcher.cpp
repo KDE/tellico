@@ -40,7 +40,8 @@
 
 #include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
@@ -49,7 +50,6 @@
 #include <QLabel>
 #include <QGridLayout>
 #include <QFile>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   // 7090 was the old default port, but that was just because LoC used it
@@ -119,7 +119,7 @@ void SRUFetcher::search() {
   u.setScheme(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
-  u.setPath(m_path);
+  u.setPath(QLatin1Char('/') + m_path);
 
   u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
   u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
