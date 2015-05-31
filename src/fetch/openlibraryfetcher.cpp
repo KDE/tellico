@@ -22,7 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "openlibraryfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../images/imagefactory.h"
@@ -35,18 +34,17 @@
 
 #include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/parser.h>
-#include <KJobWidgets/KJobWidgets>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 namespace {
   static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
@@ -68,11 +66,7 @@ QString OpenLibraryFetcher::source() const {
 
 // without QJSON, we can only search on ISBN for covers
 bool OpenLibraryFetcher::canSearch(FetchKey k) const {
-#ifndef HAVE_QJSON
-  return k == ISBN;
-#else
   return k == Title || k == Person || k == ISBN || k == LCCN || k == Keyword;
-#endif
 }
 
 bool OpenLibraryFetcher::canFetch(int type) const {
@@ -100,9 +94,6 @@ void OpenLibraryFetcher::search() {
 }
 
 void OpenLibraryFetcher::doSearch(const QString& term_) {
-#ifndef HAVE_QJSON
-  doCoverOnly(term_);
-#else
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
 
   // books are type/edition
@@ -155,31 +146,6 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
   m_jobs << job;
-#endif
-}
-
-void OpenLibraryFetcher::doCoverOnly(const QString& term_) {
-  switch(request().key) {
-     case ISBN:
-       break;
-
-    default:
-      myWarning() << "key not recognized: " << request().key;
-      return;
-  }
-
-  int pos = 0;
-  ISBNValidator val(this);
-  QString isbn = term_;
-  if(val.validate(isbn, pos) == QValidator::Acceptable) {
-    Data::CollPtr coll(new Data::BookCollection(true));
-    Data::EntryPtr entry(new Data::Entry(coll));
-    entry->setField(QLatin1String("isbn"), isbn);
-
-    FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
-    emit signalResultFound(r);
-  }
 }
 
 void OpenLibraryFetcher::endJob(KIO::StoredTransferJob* job_) {
@@ -243,7 +209,6 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
 
 void OpenLibraryFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -270,9 +235,9 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  QJson::Parser parser;
-  QVariantList resultList = parser.parse(data).toList();
-  if(resultList.isEmpty()) {
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonArray array = doc.array();
+  if(array.isEmpty()) {
 //    myDebug() << "no results";
     endJob(job);
     return;
@@ -285,15 +250,14 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QVariantMap resultMap;
-  foreach(const QVariant& result, resultList) {
+  for(int i = 0; i < array.count(); i++) {
     // be sure to check that the fetcher has not been stopped
     // crashes can occur if not
     if(!m_started) {
       break;
     }
 //    myDebug() << "found result:" << result;
-    resultMap = result.toMap();
+    QVariantMap resultMap = array.at(i).toObject().toVariantMap();
 
 //  myDebug() << resultMap.value(QLatin1String("isbn_10")).toList().at(0);
 
@@ -321,7 +285,9 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     } else if(binding.toLower().contains(QLatin1String("paperback"))) {
       binding = QLatin1String("Paperback");
     }
-    entry->setField(QLatin1String("binding"), i18n(binding.toUtf8()));
+    if(!binding.isEmpty()) {
+      entry->setField(QLatin1String("binding"), i18n(binding.toUtf8()));
+    }
     entry->setField(QLatin1String("publisher"), value(resultMap, "publishers"));
     entry->setField(QLatin1String("series"), value(resultMap, "series"));
     entry->setField(QLatin1String("pages"), value(resultMap, "number_of_pages"));
@@ -335,14 +301,15 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
       const QString key = value(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
-        QUrl authorUrl(OPENLIBRARY_QUERY_URL);
+        QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         authorUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
         authorUrl.addQueryItem(QLatin1String("key"), key);
         authorUrl.addQueryItem(QLatin1String("name"), QString());
 
         QString output = FileHandler::readTextFile(authorUrl, true /*quiet*/);
-        QVariantList authorList = parser.parse(output.toUtf8()).toList();
-        QVariantMap authorResult = authorList.isEmpty() ? QVariantMap() : authorList.at(0).toMap();
+        QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+        QJsonArray array = doc.array();
+        QVariantMap authorResult = array.isEmpty() ? QVariantMap() : array.at(0).toObject().toVariantMap();
         const QString name = value(authorResult, "name");
         if(!name.isEmpty()) {
           authors << name;
@@ -357,14 +324,15 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
       const QString key = value(langMap.toMap(), "key");
       if(!key.isEmpty()) {
-        QUrl langUrl(OPENLIBRARY_QUERY_URL);
+        QUrl langUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         langUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
         langUrl.addQueryItem(QLatin1String("key"), key);
         langUrl.addQueryItem(QLatin1String("name"), QString());
 
         QString output = FileHandler::readTextFile(langUrl, true /*quiet*/, true /*utf8*/);
-        QVariantList langList = parser.parse(output.toUtf8()).toList();
-        QVariantMap langResult = langList.isEmpty() ? QVariantMap() : langList.at(0).toMap();
+        QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+        QJsonArray array = doc.array();
+        QVariantMap langResult = array.isEmpty() ? QVariantMap() : array.at(0).toObject().toVariantMap();
         const QString name = value(langResult, "name");
         if(!name.isEmpty()) {
           langs << i18n(name.toUtf8());
@@ -383,27 +351,21 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 //  m_start = m_entries.count();
 //  m_hasMoreResults = m_start <= m_total;
   m_hasMoreResults = false; // for now, no continued searches
-#endif
   endJob(job);
 }
 
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
-#ifdef HAVE_QJSON
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
 
   u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
   u.addQueryItem(QLatin1String("name"), term_);
 
   QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
-  QJson::Parser parser;
-  QVariantList results = parser.parse(output.toUtf8()).toList();
-  myDebug() << "found" << results.count() << "authors";
+  QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+  QJsonArray array = doc.array();
+  myDebug() << "found" << array.count() << "authors";
   // right now, only use the first
-  return results.isEmpty() ? QString() : value(results.at(0).toMap(), "key");
-#else
-  Q_UNUSED(term_);
-  return QString();
-#endif
+  return array.isEmpty() ? QString() : value(array.at(0).toObject().toVariantMap(), "key");
 }
 
 Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_) const {
@@ -456,4 +418,3 @@ QString OpenLibraryFetcher::value(const QVariantMap& map, const char* name) {
     return QString();
   }
 }
-

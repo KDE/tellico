@@ -569,13 +569,13 @@ add_test(musicbrainzfetchertest musicbrainzfetchertest)
 ecm_mark_as_test(musicbrainzfetchertest)
 TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-IF( QJSON_FOUND )
-    add_executable(openlibraryfetchertest openlibraryfetchertest.cpp abstractfetchertest.cpp)
+add_executable(openlibraryfetchertest openlibraryfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/openlibraryfetcher.cpp
+)
 ecm_mark_nongui_executable(openlibraryfetchertest)
 add_test(openlibraryfetchertest openlibraryfetchertest)
 ecm_mark_as_test(openlibraryfetchertest)
-    TARGET_LINK_LIBRARIES(openlibraryfetchertest fetch ${TELLICO_TEST_LIBS})
-ENDIF( QJSON_FOUND )
+TARGET_LINK_LIBRARIES(openlibraryfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(springerfetchertest springerfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(springerfetchertest)
