@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "vndbfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/vndbfetcher.h"
 #include "../collections/gamecollection.h"
@@ -31,9 +30,12 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( VNDBFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( VNDBFetcherTest )
 
 VNDBFetcherTest::VNDBFetcherTest() : AbstractFetcherTest() {
 }
@@ -50,7 +52,7 @@ void VNDBFetcherTest::initTestCase() {
 }
 
 void VNDBFetcherTest::testTitle() {
-  KConfig config(QString::fromLatin1(KDESRCDIR) + QLatin1String("/tellicotest.config"), KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("vndb");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

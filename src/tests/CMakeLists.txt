@@ -617,11 +617,13 @@ add_test(themoviedbfetchertest themoviedbfetchertest)
 ecm_mark_as_test(themoviedbfetchertest)
 TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest ${TELLICO2_TEST_LIBS})
 
-add_executable(vndbfetchertest vndbfetchertest.cpp abstractfetchertest.cpp)
+add_executable(vndbfetchertest vndbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/vndbfetcher.cpp
+)
 ecm_mark_nongui_executable(vndbfetchertest)
 add_test(vndbfetchertest vndbfetchertest)
 ecm_mark_as_test(vndbfetchertest)
-TARGET_LINK_LIBRARIES(vndbfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(vndbfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(winecomfetchertest winecomfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(winecomfetchertest)
