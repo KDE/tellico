@@ -25,17 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "isbndbfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/isbndbfetcher.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( ISBNdbFetcherTest, GUI )
+QTEST_GUILESS_MAIN( ISBNdbFetcherTest )
 
 ISBNdbFetcherTest::ISBNdbFetcherTest() : AbstractFetcherTest() {
 }
@@ -43,7 +43,7 @@ ISBNdbFetcherTest::ISBNdbFetcherTest() : AbstractFetcherTest() {
 void ISBNdbFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/isbndb2tellico.xsl"));
 }
 
 void ISBNdbFetcherTest::testIsbn() {

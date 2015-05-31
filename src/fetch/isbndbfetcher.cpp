@@ -196,6 +196,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   QDomDocument dom;
   if(!dom.setContent(data, false)) {
     myWarning() << "server did not return valid XML.";
+    stop();
     return;
   }
 

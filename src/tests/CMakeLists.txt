@@ -536,11 +536,13 @@ add_test(imdbfetchertest imdbfetchertest)
 ecm_mark_as_test(imdbfetchertest)
 TARGET_LINK_LIBRARIES(imdbfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(isbndbfetchertest isbndbfetchertest.cpp abstractfetchertest.cpp)
+add_executable(isbndbfetchertest isbndbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/isbndbfetcher.cpp
+)
 ecm_mark_nongui_executable(isbndbfetchertest)
 add_test(isbndbfetchertest isbndbfetchertest)
 ecm_mark_as_test(isbndbfetchertest)
-TARGET_LINK_LIBRARIES(isbndbfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(isbndbfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(moviemeterfetchertest moviemeterfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(moviemeterfetchertest)
