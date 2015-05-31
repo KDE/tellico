@@ -1,4 +1,4 @@
-/***************************************************************************
+2/***************************************************************************
     Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
@@ -195,6 +195,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   QDomDocument dom;
   if(!dom.setContent(data, false)) {
     myWarning() << "server did not return valid XML.";
+    stop();
     return;
   }
 
