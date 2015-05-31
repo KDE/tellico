@@ -952,7 +952,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
     // we want to strip the "/combined" from the url
     QString url = m_url.url();
     if(url.endsWith(QLatin1String("/combined"))) {
-      url = m_url.resolved(QUrl(QLatin1String(".."))).url();
+      url = m_url.adjusted(QUrl::RemoveFilename).url();
     }
     entry->setField(imdb, url);
   }

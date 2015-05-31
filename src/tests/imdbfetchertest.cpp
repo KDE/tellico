@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "imdbfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/imdbfetcher.h"
 #include "../entry.h"
@@ -35,9 +34,12 @@
 #include "../fieldformat.h"
 #include "../fetch/fetcherjob.h"
 
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( ImdbFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( ImdbFetcherTest )
 
 ImdbFetcherTest::ImdbFetcherTest() : AbstractFetcherTest() {
 }
@@ -48,7 +50,7 @@ void ImdbFetcherTest::initTestCase() {
 }
 
 void ImdbFetcherTest::testSnowyRiver() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -89,7 +91,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 
 void ImdbFetcherTest::testSnowyRiverFr() {
   return;
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB FR");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -132,7 +134,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 
 void ImdbFetcherTest::testSnowyRiverEs() {
   return;
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB ES");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -174,7 +176,7 @@ void ImdbFetcherTest::testSnowyRiverEs() {
 }
 
 void ImdbFetcherTest::testAsterix() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
