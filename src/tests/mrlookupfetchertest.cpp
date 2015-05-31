@@ -25,21 +25,21 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "mrlookupfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/mrlookupfetcher.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( MRLookupFetcherTest, GUI )
+QTEST_GUILESS_MAIN( MRLookupFetcherTest )
 
 MRLookupFetcherTest::MRLookupFetcherTest() : AbstractFetcherTest() {
 }
 
 void MRLookupFetcherTest::initTestCase() {
   // since we use the bibtex importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../translators/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
   m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.4169/amer.math.monthly.119.10.852"));
 //  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
@@ -96,4 +96,3 @@ void MRLookupFetcherTest::testAuthor() {
     QCOMPARE(entry->field(i.key()), i.value());
   }
 }
-

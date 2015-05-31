@@ -552,11 +552,14 @@ add_test(moviemeterfetchertest moviemeterfetchertest)
 ecm_mark_as_test(moviemeterfetchertest)
 TARGET_LINK_LIBRARIES(moviemeterfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(mrlookupfetchertest mrlookupfetchertest.cpp abstractfetchertest.cpp)
+add_executable(mrlookupfetchertest mrlookupfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/mrlookupfetcher.cpp
+  ../translators/bibteximporter.cpp
+)
 ecm_mark_nongui_executable(mrlookupfetchertest)
 add_test(mrlookupfetchertest mrlookupfetchertest)
 ecm_mark_as_test(mrlookupfetchertest)
-TARGET_LINK_LIBRARIES(mrlookupfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(mrlookupfetchertest fetcherstest ${TELLICO_BTPARSE_LIBS} ${TELLICO2_TEST_LIBS})
 
 add_executable(musicbrainzfetchertest musicbrainzfetchertest.cpp abstractfetchertest.cpp)
 ecm_mark_nongui_executable(musicbrainzfetchertest)
