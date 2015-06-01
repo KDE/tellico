@@ -333,11 +333,14 @@ TARGET_LINK_LIBRARIES(fetcherstest
   ${LIBXSLT_EXSLT_LIBRARIES}
 )
 
-add_executable(entryupdatejobtest entryupdatejobtest.cpp ../entryupdatejob.cpp)
+add_executable(entryupdatejobtest entryupdatejobtest.cpp
+  ../entryupdatejob.cpp
+  ../fetch/arxivfetcher.cpp
+)
 ecm_mark_nongui_executable(entryupdatejobtest)
 add_test(entryupdatejobtest entryupdatejobtest)
 ecm_mark_as_test(entryupdatejobtest)
-TARGET_LINK_LIBRARIES(entryupdatejobtest fetch translators ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(entryupdatejobtest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(allocinefetchertest allocinefetchertest.cpp abstractfetchertest.cpp
   ../fetch/allocinefetcher.cpp

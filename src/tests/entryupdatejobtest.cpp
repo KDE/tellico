@@ -41,7 +41,7 @@ EntryUpdateJobTest::EntryUpdateJobTest() : m_loop(this) {
 }
 
 void EntryUpdateJobTest::initTestCase() {
-  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/archiv2tellico.xsl"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/arxiv2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 }
 
