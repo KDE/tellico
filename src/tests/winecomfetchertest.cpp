@@ -25,30 +25,32 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "winecomfetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/winecomfetcher.h"
 #include "../collections/winecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( WineComFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( WineComFetcherTest )
 
 WineComFetcherTest::WineComFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
-    , m_config(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config", KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig) {
 }
 
 void WineComFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::WineCollection> registerWine(Tellico::Data::Collection::Wine, "wine");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/winecom2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config");
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("amazonfetchertest.config"));
 }
 
 void WineComFetcherTest::testKeyword() {

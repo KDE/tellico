@@ -35,9 +35,10 @@
 
 #include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
 #include <KConfigGroup>
-#include <klineedit.h>
+#include <KLineEdit>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
@@ -45,7 +46,6 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int WINECOM_RETURNS_PER_REQUEST = 25;

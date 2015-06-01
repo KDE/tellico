@@ -625,11 +625,14 @@ add_test(vndbfetchertest vndbfetchertest)
 ecm_mark_as_test(vndbfetchertest)
 TARGET_LINK_LIBRARIES(vndbfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(winecomfetchertest winecomfetchertest.cpp abstractfetchertest.cpp)
+add_executable(winecomfetchertest winecomfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/winecomfetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
 ecm_mark_nongui_executable(winecomfetchertest)
 add_test(winecomfetchertest winecomfetchertest)
 ecm_mark_as_test(winecomfetchertest)
-TARGET_LINK_LIBRARIES(winecomfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(winecomfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 IF( YAZ_FOUND )
     add_executable(z3950fetchertest z3950fetchertest.cpp abstractfetchertest.cpp)
