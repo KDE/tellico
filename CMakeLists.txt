@@ -177,17 +177,6 @@ if(LIBEXEMPI_FOUND)
     include_directories(${LIBEXEMPI_INCLUDE_DIR})
 endif(LIBEXEMPI_FOUND)
 
-#macro_optional_find_package(QJSON)
-#macro_log_feature(QJSON_FOUND "QJSON" "Support for searching additional data sources, such as OpenLibrary and Freebase" "http://qjson.sourceforge.net" FALSE "" "")
-#find_package(QJSON)
-#set_package_properties(QJSON PROPERTIES
-#    DESCRIPTION "Support for searching additional data sources, such as OpenLibrary and Freebase"
-#    URL "http://qjson.sourceforge.net"
-#    TYPE OPTIONAL)
-if(QJSON_FOUND)
-    include_directories(${QJSON_INCLUDE_DIR})
-endif(QJSON_FOUND)
-
 #macro_optional_find_package(Btparse)
 #macro_log_feature(BTPARSE_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
 find_package(Btparse)
@@ -299,7 +288,6 @@ macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
-macro_bool_to_01(QJSON_FOUND HAVE_QJSON)
 macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)

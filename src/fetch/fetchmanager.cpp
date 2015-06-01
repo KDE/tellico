@@ -300,17 +300,13 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
     FETCHER_ADD(IBS);
   }
   FETCHER_ADD(TheMovieDB);
-#ifdef HAVE_QJSON
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
-#endif
   const QStringList langs = KGlobal::locale()->languageList();
   if(langs.contains(QLatin1String("fr"))) {
     FETCHER_ADD(DVDFr);
-#ifdef HAVE_QJSON
     FETCHER_ADD(Allocine);
-#endif
   }
   if(langs.contains(QLatin1String("de"))) {
     FETCHER_ADD(FilmStarts);

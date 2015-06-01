@@ -100,7 +100,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::GiantBombFetcher> registerBomb(GiantBomb);
   RegisterFetcher<Fetch::OpenLibraryFetcher> registerOpenLibrary(OpenLibrary);
   RegisterFetcher<Fetch::MultiFetcher> registerMulti(Multiple);
-#ifdef HAVE_QJSON
   RegisterFetcher<Fetch::DiscogsFetcher> registerDiscogs(Discogs);
   RegisterFetcher<Fetch::TheMovieDBFetcher> registerTMDB(TheMovieDB);
   RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
@@ -116,7 +115,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
 //  RegisterFetcher<Fetch::FilmStartsFetcher> registerFilmStarts(FilmStarts);
 //  RegisterFetcher<Fetch::SensaCineFetcher> registerSensaCine(SensaCine);
 //  RegisterFetcher<Fetch::BeyazperdeFetcher> registerBeyazperde(Beyazperde);
-#endif
   RegisterFetcher<Fetch::DVDFrFetcher> registerDVDFr(DVDFr);
   RegisterFetcher<Fetch::DoubanFetcher> registerDouban(Douban);
   RegisterFetcher<Fetch::BiblioShareFetcher> registerBiblioShare(BiblioShare);
