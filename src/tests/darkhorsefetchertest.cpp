@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "darkhorsefetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/execexternalfetcher.h"
 #include "../entry.h"
@@ -35,10 +34,13 @@
 #include "../images/image.h"
 #include "../fieldformat.h"
 
+#include <KConfig>
 #include <KConfigGroup>
 #include <KStandardDirs>
 
-QTEST_KDEMAIN( DarkHorseFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( DarkHorseFetcherTest )
 
 DarkHorseFetcherTest::DarkHorseFetcherTest() : AbstractFetcherTest() {
 }
@@ -58,9 +60,9 @@ void DarkHorseFetcherTest::testComic() {
                                        QLatin1String("axe cop: bad guy earth #1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
-  KConfig config(QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/dark_horse_comics.py.spec", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config.group(QLatin1String("<default>"));
-  cg.writeEntry("ExecPath", QString::fromLatin1(KDESRCDIR) + "/../fetch/scripts/dark_horse_comics.py");
+  cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py"));
   // don't sync() and save the new path
   cg.markAsClean();
   fetcher->readConfig(cg, cg.name());

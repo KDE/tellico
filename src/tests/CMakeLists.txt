@@ -410,11 +410,24 @@ add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
 TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp)
+add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/execexternalfetcher.cpp
+  ../translators/bibteximporter.cpp
+  ../translators/risimporter.cpp
+  ../gui/combobox.cpp
+  ../gui/lineedit.cpp
+  ../gui/collectiontypecombo.cpp
+)
 ecm_mark_nongui_executable(darkhorsefetchertest)
 add_test(darkhorsefetchertest darkhorsefetchertest)
 ecm_mark_as_test(darkhorsefetchertest)
-TARGET_LINK_LIBRARIES(darkhorsefetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(darkhorsefetchertest
+  fetcherstest
+  newstuff
+  ${TELLICO_BTPARSE_LIBS}
+  ${TELLICO2_TEST_LIBS}
+  KF5::SonnetCore
+)
 
 add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
   ../fetch/dblpfetcher.cpp
