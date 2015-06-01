@@ -635,11 +635,18 @@ ecm_mark_as_test(winecomfetchertest)
 TARGET_LINK_LIBRARIES(winecomfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 IF( YAZ_FOUND )
-    add_executable(z3950fetchertest z3950fetchertest.cpp abstractfetchertest.cpp)
-ecm_mark_nongui_executable(z3950fetchertest)
-add_test(z3950fetchertest z3950fetchertest)
-ecm_mark_as_test(z3950fetchertest)
-    TARGET_LINK_LIBRARIES(z3950fetchertest fetch ${TELLICO_TEST_LIBS})
+  add_executable(z3950fetchertest z3950fetchertest.cpp abstractfetchertest.cpp
+    ../fetch/z3950fetcher.cpp
+    ../fetch/z3950connection.cpp
+    ../translators/grs1importer.cpp
+    ../translators/adsimporter.cpp
+    ../gui/lineedit.cpp
+    ../gui/combobox.cpp
+  )
+  ecm_mark_nongui_executable(z3950fetchertest)
+  add_test(z3950fetchertest z3950fetchertest)
+  ecm_mark_as_test(z3950fetchertest)
+  TARGET_LINK_LIBRARIES(z3950fetchertest fetcherstest ${YAZ_LIBRARIES} ${TELLICO2_TEST_LIBS} KF5::SonnetCore)
 ENDIF( YAZ_FOUND )
 
 ENDIF(BUILD_FETCHER_TESTS)
