@@ -456,11 +456,13 @@ add_test(entrezfetchertest entrezfetchertest)
 ecm_mark_as_test(entrezfetchertest)
 TARGET_LINK_LIBRARIES(entrezfetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
-add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp)
+add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/freebasefetcher.cpp
+)
 ecm_mark_nongui_executable(freebasefetchertest)
 add_test(freebasefetchertest freebasefetchertest)
 ecm_mark_as_test(freebasefetchertest)
-TARGET_LINK_LIBRARIES(freebasefetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(freebasefetchertest fetcherstest ${TELLICO2_TEST_LIBS})
 
 add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/filmasterfetcher.cpp

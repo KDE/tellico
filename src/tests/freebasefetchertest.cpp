@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "freebasefetchertest.h"
-#include "qtest_kde.h"
 
 #include "../fetch/freebasefetcher.h"
 #include "../collections/bookcollection.h"
@@ -38,9 +37,9 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <QDebug>
+#include <QTest>
 
-QTEST_KDEMAIN( FreebaseFetcherTest, GUI )
+QTEST_GUILESS_MAIN( FreebaseFetcherTest )
 
 #define QL1(x) QString::fromLatin1(x)
 

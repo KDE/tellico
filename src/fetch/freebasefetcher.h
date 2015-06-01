@@ -94,6 +94,7 @@ private slots:
 private:
   static QString value(const QVariantMap& map, const char* name);
   static QString value(const QVariantMap& map, const char* object, const char* name);
+  static QByteArray serialize(const QVariant& value);
 
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
