@@ -40,7 +40,7 @@
   </title>
 
   <booktitle>
-   <xsl:value-of select="booktitle"/>
+   <xsl:value-of select="(booktitle|venue/@conference)[1]"/>
   </booktitle>
 
   <entry-type>
@@ -66,10 +66,6 @@
   <number>
    <xsl:value-of select="venue/@number"/>
   </number>
-
-  <booktitle>
-   <xsl:value-of select="venue/@conference"/>
-  </booktitle>
 
   <publishers>
    <publisher>
