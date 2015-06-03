@@ -331,20 +331,22 @@
 </xsl:template>
 
 <xsl:template match="country">
- <xsl:if test="$coll != 7 and $coll != 8">
-  <tc:nationalitys>
-   <xsl:for-each select="str:tokenize(., ',/;')">
-    <tc:nationality i18n="true">
-     <xsl:value-of select="normalize-space(.)"/>
-    </tc:nationality>
-   </xsl:for-each>
-  </tc:nationalitys>
- </xsl:if>
- <xsl:if test="$coll = 7 or $coll = 8">
-  <tc:country>
-   <xsl:value-of select="."/>
-  </tc:country>
- </xsl:if>
+ <xsl:choose>
+  <xsl:when test="$coll !=6 and $coll != 7 and $coll != 8">
+   <tc:nationalitys>
+    <xsl:for-each select="str:tokenize(., ',/;')">
+     <tc:nationality i18n="true">
+      <xsl:value-of select="normalize-space(.)"/>
+     </tc:nationality>
+    </xsl:for-each>
+   </tc:nationalitys>
+  </xsl:when>
+  <xsl:otherwise>
+   <tc:country>
+    <xsl:value-of select="."/>
+   </tc:country>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 <xsl:template match="actors">
