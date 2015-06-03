@@ -1,3 +1,7 @@
+2015-06-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a bug with HTML exporting titles with single-quotes (Bug 348381).
+
 2015-05-24  Robby Stephenson  <robby@homebase.mars>
 
 	* Fixed a bug showing horizontal scroll bar with many table columns (Bug 348189).
