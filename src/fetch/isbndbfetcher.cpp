@@ -366,7 +366,7 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("http://isbndb.com/docs/api/30-keys.html")),
+                                QLatin1String("http://isbndb.com/account/logincreate")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

@@ -162,7 +162,7 @@ BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioSha
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("http://booknetcanada.ca/index.php?option=com_forme&Itemid=590&fid=11")),
+                                QLatin1String("http://www.booknetcanada.ca/biblioshare-web-services/#onixweb")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

@@ -298,7 +298,7 @@ WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetche
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("http://api.wine.com/plans")),
+                                QLatin1String("https://api.wine.com")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
