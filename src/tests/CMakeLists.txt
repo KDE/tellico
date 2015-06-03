@@ -252,6 +252,18 @@ add_test(griffithtest griffithtest)
 ecm_mark_as_test(griffithtest)
 TARGET_LINK_LIBRARIES(griffithtest translatorstest ${TELLICO_TEST_LIBS})
 
+add_executable(htmlexportertest htmlexportertest.cpp
+  ../translators/htmlexporter.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+  ../document.cpp
+)
+ecm_mark_nongui_executable(htmlexportertest)
+add_test(htmlexportertest htmlexportertest)
+ecm_mark_as_test(htmlexportertest)
+TARGET_LINK_LIBRARIES(htmlexportertest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(referencertest referencertest.cpp
   ../translators/referencerimporter.cpp
 )

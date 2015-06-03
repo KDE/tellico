@@ -30,7 +30,7 @@
 #include "../images/image.h"
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
-#include "../tellico_kernel.h"
+#include "../document.h"
 #include "../utils/tellico_utils.h"
 #include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
@@ -289,7 +289,7 @@ QString HTMLExporter::text() {
 }
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
-  QString file = Kernel::self()->URL().fileName();
+  QString file = Data::Document::self()->URL().fileName();
   if(file != i18n(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
@@ -367,7 +367,9 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   }
 
   QString pageTitle = coll->title();
-  pageTitle += QLatin1Char(' ') + sortString;
+  if(!sortString.isEmpty()) {
+    pageTitle += QLatin1Char(' ') + sortString;
+  }
   m_handler->addStringParam("page-title", pageTitle.toUtf8());
 
   QStringList showFields;
