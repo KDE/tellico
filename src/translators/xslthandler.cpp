@@ -192,7 +192,7 @@ void XSLTHandler::addStringParam(const QByteArray& name_, const QByteArray& valu
   if(value.contains('\'')) {
     if(value.contains('"')) {
       myWarning() << "String param contains both ' and \"" << value_;
-      value.replace('"', "");
+      value.replace('"', "'");
     }
     addParam(name_, QByteArray("\"") + value + QByteArray("\""));
   } else {
