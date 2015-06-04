@@ -30,9 +30,9 @@
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
+#include <KLocalizedString>
+#include <KSharedConfig>
 #include <KConfigGroup>
-#include <kglobal.h>
 
 #include <QRegExp>
 #include <QGroupBox>
@@ -41,6 +41,7 @@
 #include <QVBoxLayout>
 #include <QButtonGroup>
 #include <QFile>
+#include <QApplication>
 
 using namespace Tellico;
 using Tellico::Import::BibtexImporter;
@@ -63,7 +64,7 @@ BibtexImporter::~BibtexImporter() {
     bt_cleanup();
   }
   if(m_readUTF8) {
-    KConfigGroup config(KGlobal::config(), "Import Options");
+    KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
     config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
   }
 }
@@ -239,7 +240,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, urlCount*100 + 100*j/count);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -341,7 +342,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   bg->addButton(m_readUTF8);
   bg->addButton(m_readLocale);
 
-  KConfigGroup config(KGlobal::config(), "Import Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
   bool useUTF8 = config.readEntry("Bibtex UTF8", false);
   if(useUTF8) {
     m_readUTF8->setChecked(true);

@@ -109,7 +109,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   m_buttonGroup->addButton(m_radioMerge, Import::Merge);
 
   QWidget* w = m_importer->widget(widget);
-//  m_importer->readOptions(KGlobal::config());
+//  m_importer->readOptions(KSharedConfig::openConfig());
   if(w) {
     w->layout()->setMargin(0);
     topLayout->addWidget(w, 0);

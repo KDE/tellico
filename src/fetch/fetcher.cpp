@@ -28,7 +28,6 @@
 #include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <KGlobal>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
@@ -120,7 +119,7 @@ void Fetcher::saveConfig() {
   if(m_configGroup.isEmpty()) {
     return;
   }
-  KConfigGroup config(KGlobal::config(), m_configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), m_configGroup);
   config.writeEntry("Uuid", m_uuid);
   saveConfigHook(config);
 }

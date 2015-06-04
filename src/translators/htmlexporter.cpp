@@ -42,10 +42,9 @@
 
 #include <KStandardDirs>
 #include <KConfigGroup>
-#include <kglobal.h>
+#include <KGlobal>
 #include <kio/job.h>
 #include <kio/netaccess.h>
-#include <kapplication.h>
 #include <KLocalizedString>
 #include <kuser.h>
 
@@ -58,6 +57,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QFileInfo>
+#include <QApplication>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -475,7 +475,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
       }
 
       if(++count == processCount) {
-        kapp->processEvents();
+        qApp->processEvents();
         count = 0;
       }
     }
@@ -694,7 +694,7 @@ bool HTMLExporter::copyFiles() {
       if(options() & ExportProgress) {
         ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
   return true;
@@ -767,7 +767,7 @@ bool HTMLExporter::writeEntryFiles() {
       if(options() & ExportProgress) {
         ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
   }

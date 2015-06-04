@@ -31,9 +31,9 @@
 #include "../tellico_debug.h"
 
 #include <KLineEdit>
+#include <KSharedConfig>
 #include <KConfigGroup>
-#include <KApplication>
-#include <KGlobal>
+#include <KLocalizedString>
 
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -42,6 +42,7 @@
 #include <QDomDocument>
 #include <QRegExp>
 #include <QFile>
+#include <QApplication>
 
 namespace {
   static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
@@ -59,7 +60,7 @@ BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled
     myWarning() << "unable to find boardgamegeek2tellico.xsl!";
   }
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - BoardGameGeek"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - BoardGameGeek"));
   m_user = config.readEntry("User ID");
   m_ownedOnly = config.readEntry("Owned", false);
 }
@@ -187,11 +188,11 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
 
     if(showProgress) {
       emit signalProgress(this, 10 + 100*j/idList.size());
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - BoardGameGeek"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - BoardGameGeek"));
   config.writeEntry("User ID", m_user);
   config.writeEntry("Owned", m_ownedOnly);
 

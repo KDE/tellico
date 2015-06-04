@@ -40,7 +40,6 @@
 #include <khtml_part.h>
 #include <khtmlview.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
@@ -133,7 +132,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -141,7 +140,7 @@ ReportDialog::~ReportDialog() {
   delete m_exporter;
   m_exporter = 0;
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
   saveDialogSize(config);
 }
 
@@ -217,7 +216,7 @@ void ReportDialog::slotSaveAs() {
   QString filter = i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
   QUrl u = KFileDialog::getSaveUrl(QUrl(), filter, this);
   if(!u.isEmpty() && u.isValid()) {
-    KConfigGroup config(KGlobal::config(), "ExportOptions");
+    KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
     bool encode = config.readEntry("EncodeUTF8", true);
     long oldOpt = m_exporter->options();
 

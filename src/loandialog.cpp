@@ -180,7 +180,7 @@ void LoanDialog::init() {
                                    "to your active calendar, which can be viewed using KOrganizer. "
                                    "The box is only active if you set a due date.</qt>"));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
   restoreDialogSize(config);
 
 #ifdef HAVE_KABC
@@ -192,7 +192,7 @@ void LoanDialog::init() {
 }
 
 LoanDialog::~LoanDialog() {
-  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
   saveDialogSize(config);
 }
 

@@ -27,15 +27,15 @@
 #include "z3950connection.h"
 #include "z3950fetcher.h"
 #include "messagehandler.h"
-#include "../tellico_debug.h"
 #include "../utils/iso5426converter.h"
 #include "../utils/iso6937converter.h"
+#include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kapplication.h>
 #include <KConfigGroup>
 
 #include <QFile>
+#include <QApplication>
 
 #ifdef HAVE_YAZ
 extern "C" {
@@ -310,7 +310,7 @@ void Z3950Connection::run() {
   }
   // save syntax change for next time
   if(m_syntax != newSyntax) {
-    kapp->postEvent(m_fetcher.data(), new Z3950SyntaxChange(newSyntax));
+    qApp->postEvent(m_fetcher.data(), new Z3950SyntaxChange(newSyntax));
     m_syntax = newSyntax;
   }
 
@@ -420,15 +420,15 @@ bool Z3950Connection::makeConnection() {
 
 void Z3950Connection::done() {
   checkPendingEvents();
-  kapp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
+  qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
 }
 
 void Z3950Connection::done(const QString& msg_, int type_) {
   checkPendingEvents();
   if(m_aborted) {
-    kapp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
+    qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore));
   } else {
-    kapp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore, msg_, type_));
+    qApp->postEvent(m_fetcher.data(), new Z3950ConnectionDone(m_hasMore, msg_, type_));
   }
 }
 

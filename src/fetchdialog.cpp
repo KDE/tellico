@@ -55,15 +55,13 @@
 #include <kstatusbar.h>
 #include <khtmlview.h>
 #include <kprogressdialog.h>
-#include <kconfig.h>
+#include <KSharedConfig>
 #include <kfiledialog.h>
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
 #include <kmessagebox.h>
-#include <kapplication.h>
 #include <KHBox>
 #include <KVBox>
-#include <KGlobal>
 #include <KGlobalSettings>
 
 #include <QGroupBox>
@@ -76,6 +74,7 @@
 #include <QProgressBar>
 #include <QTreeWidget>
 #include <QHeaderView>
+#include <QApplication>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -279,10 +278,10 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
-  KConfigGroup sizeGroup(KGlobal::config(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup sizeGroup(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   restoreDialogSize(sizeGroup);
 
-  KConfigGroup config(KGlobal::config(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(!splitList.empty()) {
     split->setSizes(splitList);
@@ -327,7 +326,7 @@ FetchDialog::~FetchDialog() {
   // no additional entries to check images to keep though
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   saveDialogSize(config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
@@ -350,7 +349,7 @@ void FetchDialog::slotSearchClicked() {
                                         QIcon::fromTheme(QLatin1String("dialog-cancel"))));
     startProgress();
     setStatus(i18n("Searching..."));
-    kapp->processEvents();
+    qApp->processEvents();
     Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
                                         static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt()),
                                         value);
@@ -516,7 +515,7 @@ void FetchDialog::slotMoreClicked() {
                                       QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));
-  kapp->processEvents();
+  qApp->processEvents();
   Fetch::Manager::self()->continueSearch();
 }
 
@@ -590,7 +589,7 @@ void FetchDialog::slotInit() {
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
 
-  KConfigGroup config(KGlobal::config(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   int key = config.readEntry("Search Key", int(Fetch::FetchFirst));
   // only change key if valid
   if(key > Fetch::FetchFirst) {
@@ -805,13 +804,13 @@ void FetchDialog::slotResetCollection() {
 void FetchDialog::slotBarcodeRecognized(const QString& string_) {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
   StringDataEvent* e = new StringDataEvent(string_);
-  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  qApp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
 void FetchDialog::slotBarcodeGotImage(const QImage& img_)  {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
   ImageDataEvent* e = new ImageDataEvent(img_);
-  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  qApp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
 void FetchDialog::openBarcodePreview() {
@@ -858,7 +857,7 @@ void FetchDialog::customEvent(QEvent* e) {
   }
   if(e->type() == StringDataType) {
     // slotBarcodeRecognized() queued call
-    kapp->beep();
+    qApp->beep();
     m_valueLineEdit->setText(static_cast<StringDataEvent*>(e)->string());
     m_searchButton->animateClick();
   } else if(e->type() == ImageDataType) {

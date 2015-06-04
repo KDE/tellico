@@ -31,7 +31,8 @@
 
 #include <KLineEdit>
 #include <KConfigGroup>
-#include <KGlobal>
+#include <KSharedConfig>
+#include <KLocalizedString>
 
 #include <QVBoxLayout>
 #include <QFormLayout>
@@ -55,7 +56,7 @@ GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(0) {
     myWarning() << "unable to find goodreads2tellico.xsl!";
   }
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - Goodreads"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - Goodreads"));
   m_user = config.readEntry("User ID");
   m_key = config.readEntry("Developer Key");
   if(m_key.isEmpty()) {
@@ -108,7 +109,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - Goodreads"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - Goodreads"));
   config.writeEntry("User ID", m_user);
   config.writeEntry("Developer Key", m_key);
 

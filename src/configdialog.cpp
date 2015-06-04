@@ -872,8 +872,8 @@ void ConfigDialog::saveFetchConfig() {
     m_newStuffConfigWidgets.removeAll(cw);
     QString group = QString::fromLatin1("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
-    KGlobal::config()->deleteGroup(group);
-    KConfigGroup configGroup(KGlobal::config(), group);
+    KSharedConfig::openConfig()->deleteGroup(group);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), group);
     configGroup.writeEntry("Name", item->data(Qt::DisplayRole).toString());
     configGroup.writeEntry("Type", int(item->fetchType()));
     configGroup.writeEntry("UpdateOverwrite", item->updateOverwrite());
@@ -885,12 +885,12 @@ void ConfigDialog::saveFetchConfig() {
     reloadFetchers = true;
   }
   // now update total number of sources
-  KConfigGroup sourceGroup(KGlobal::config(), "Data Sources");
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), "Data Sources");
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
   QString group = QString::fromLatin1("Data Source %1").arg(count);
-  while(KGlobal::config()->hasGroup(group)) {
-    KGlobal::config()->deleteGroup(group);
+  while(KSharedConfig::openConfig()->hasGroup(group)) {
+    KSharedConfig::openConfig()->deleteGroup(group);
     ++count;
     group = QString::fromLatin1("Data Source %1").arg(count);
   }

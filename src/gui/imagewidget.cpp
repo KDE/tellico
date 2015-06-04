@@ -39,7 +39,7 @@
 #include <KProcess>
 #include <KMimeTypeTrader>
 #include <KRun>
-#include <KGlobal>
+#include <KSharedConfig>
 
 #include <QMenu>
 #include <QMatrix>
@@ -58,6 +58,7 @@
 #include <QSet>
 #include <QDrag>
 #include <QTemporaryFile>
+#include <QMimeData>
 
 #ifdef HAVE_KSANE
 #include <libksane/ksane.h>
@@ -114,7 +115,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   connect(m_edit, SIGNAL(clicked()), this, SLOT(slotEditImage()));
   boxLayout->addWidget(m_edit);
 
-  KConfigGroup config(KGlobal::config(), "EditImage");
+  KConfigGroup config(KSharedConfig::openConfig(), "EditImage");
   QString editor = config.readEntry("editor");
   m_editMenu = new QMenu(this);
   QActionGroup* grp = new QActionGroup(this);
@@ -162,7 +163,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
 
 ImageWidget::~ImageWidget() {
   if(m_editor) {
-    KConfigGroup config(KGlobal::config(), "EditImage");
+    KConfigGroup config(KSharedConfig::openConfig(), "EditImage");
     config.writeEntry("editor", m_editor->name());
   }
 }

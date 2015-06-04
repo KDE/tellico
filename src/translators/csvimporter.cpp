@@ -36,11 +36,10 @@
 #include <kcombobox.h>
 #include <knuminput.h>
 #include <kpushbutton.h>
-#include <kapplication.h>
 #include <kiconloader.h>
-#include <kconfig.h>
+#include <KSharedConfig>
 #include <kmessagebox.h>
-#include <KGlobal>
+#include <KLocalizedString>
 
 #include <QGroupBox>
 #include <QLabel>
@@ -54,6 +53,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QButtonGroup>
+#include <QApplication>
 
 using Tellico::Import::CSVImporter;
 
@@ -169,12 +169,12 @@ Tellico::Data::CollPtr CSVImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, 100*j/numChars);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
   {
-    KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
     config.writeEntry("Delimiter", m_delimiter);
     config.writeEntry("ColumnDelimiter", m_colDelimiter);
     config.writeEntry("RowDelimiter", m_rowDelimiter);
@@ -338,7 +338,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   l->addWidget(groupBox);
   l->addStretch(1);
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
   m_colDelimiter = config.readEntry("ColumnDelimiter", m_colDelimiter);
   m_rowDelimiter = config.readEntry("RowDelimiter", m_rowDelimiter);

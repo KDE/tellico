@@ -34,13 +34,12 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kapplication.h>
-#include <KGlobal>
 
 #include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
 #include <QStandardPaths>
+#include <QApplication>
 
 using Tellico::Export::GCstarExporter;
 
@@ -94,7 +93,7 @@ bool GCstarExporter::exec() {
       }
       if(showProgress && j%stepSize == 0) {
         item.setProgress(j);
-        kapp->processEvents();
+        qApp->processEvents();
       }
       ++j;
     }

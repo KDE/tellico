@@ -42,8 +42,7 @@
 #include "translators/gcstarexporter.h"
 
 #include <KLocalizedString>
-#include <kglobal.h>
-#include <kconfig.h>
+#include <KSharedConfig>
 
 #include <QLayout>
 #include <QCheckBox>
@@ -140,7 +139,7 @@ QString ExportDialog::fileFilter() {
 }
 
 void ExportDialog::readOptions() {
-  KConfigGroup config(KGlobal::config(), "ExportOptions");
+  KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
   bool format = config.readEntry("FormatFields", false);
   m_formatFields->setChecked(format);
   bool selected = config.readEntry("ExportSelectedOnly", false);
@@ -154,7 +153,7 @@ void ExportDialog::readOptions() {
 }
 
 void ExportDialog::slotSaveOptions() {
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   // each exporter sets its own group
   m_exporter->saveOptions(config);
 
@@ -220,7 +219,7 @@ Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format
       break;
   }
   if(exporter) {
-    exporter->readOptions(KGlobal::config());
+    exporter->readOptions(KSharedConfig::openConfig());
   }
   return exporter;
 }
@@ -287,7 +286,7 @@ bool ExportDialog::exportCollection(Tellico::Export::Format format_, const QUrl&
   exp->setURL(url_);
   exp->setEntries(Data::Document::self()->collection()->entries());
 
-  KConfigGroup config(KGlobal::config(), "ExportOptions");
+  KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
   long options = 0;
   if(config.readEntry("FormatFields", false)) {
     options |= Export::ExportFormatted;

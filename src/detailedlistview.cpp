@@ -38,11 +38,10 @@
 
 #include <KLocalizedString>
 #include <kconfig.h>
-#include <kapplication.h>
 #include <kaction.h>
 #include <kiconloader.h>
 #include <kmenu.h>
-#include <KGlobal>
+#include <KSharedConfig>
 
 #include <QPixmap>
 #include <QMouseEvent>
@@ -125,7 +124,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   }
 
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup config(KGlobal::config(), configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
@@ -419,7 +418,7 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup config(KGlobal::config(), configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   // all of this is to have custom settings on a per file basis
   QString configN;

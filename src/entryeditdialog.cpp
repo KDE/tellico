@@ -39,7 +39,7 @@
 #include <kpushbutton.h>
 #include <kaction.h>
 #include <kvbox.h>
-#include <KGlobal>
+#include <KSharedConfig>
 
 #include <QStringList>
 #include <QObject>
@@ -83,7 +83,7 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
 
   setHelp(QLatin1String("entry-editor"));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -105,7 +105,7 @@ void EntryEditDialog::slotClose() {
     m_needReset = true;
     setContents(m_currEntries);
     slotSetModified(false);
-    KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
     saveDialogSize(config);
   }
 }

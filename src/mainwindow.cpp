@@ -83,7 +83,6 @@
 #include <kwindowsystem.h>
 #include <kprogressdialog.h>
 #include <khtmlview.h>
-#include <kglobal.h>
 #include <kmessagebox.h>
 #include <ktip.h>
 #include <krecentdocument.h>
@@ -691,7 +690,7 @@ void MainWindow::initDocument() {
   Data::Document* doc = Data::Document::self();
   Kernel::self()->resetHistory();
 
-  KConfigGroup config(KGlobal::config(), "General Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "General Options");
   doc->setLoadAllImages(config.readEntry("Load All Images", false));
 
   // allow status messages from the document
@@ -825,13 +824,13 @@ void MainWindow::initFileOpen(bool nofile_) {
 // The options that can be changed in the "Configuration..." dialog
 // are taken care of by the ConfigDialog object.
 void MainWindow::saveOptions() {
-  KConfigGroup config(KGlobal::config(), "Main Window Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Main Window Options");
   saveMainWindowSettings(config);
 
   Config::setShowGroupWidget(m_toggleGroupWidget->isChecked());
   Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
 
-  KConfigGroup filesConfig(KGlobal::config(), "Recent Files");
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
   m_fileOpenRecent->saveEntries(filesConfig);
   if(!isNewDocument()) {
     Config::setLastOpenFile(Data::Document::self()->URL().url());
@@ -862,7 +861,7 @@ void MainWindow::saveOptions() {
   }
 
   // this is used in the EntryEditDialog constructor, too
-  KConfigGroup editDialogConfig(KGlobal::config(), "Edit Dialog Options");
+  KConfigGroup editDialogConfig(KSharedConfig::openConfig(), "Edit Dialog Options");
   m_editDialog->saveDialogSize(editDialogConfig);
 
   saveCollectionOptions(Data::Document::self()->collection());
@@ -871,7 +870,7 @@ void MainWindow::saveOptions() {
 
 void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup group(KGlobal::config(), configGroup);
+  KConfigGroup group(KSharedConfig::openConfig(), configGroup);
 
   QString defaultGroup = coll_->defaultGroupField();
   QString entryGroup;
@@ -915,7 +914,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 
   int configIndex = -1;
   QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup config(KGlobal::config(), configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), configGroup);
   QString groupName;
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
@@ -954,7 +953,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 }
 
 void MainWindow::readOptions() {
-  KConfigGroup mainWindowConfig(KGlobal::config(), "Main Window Options");
+  KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), "Main Window Options");
   applyMainWindowSettings(mainWindowConfig);
 
   QList<int> splitList = Config::mainSplitterSizes();
@@ -980,7 +979,7 @@ void MainWindow::readOptions() {
   slotToggleGroupWidget();
 
   // initialize the recent file list
-  KConfigGroup filesConfig(KGlobal::config(), "Recent Files");
+  KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
   m_fileOpenRecent->loadEntries(filesConfig);
 
   // sort by count if column = 1

@@ -27,7 +27,6 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kglobal.h>
 
 using namespace Tellico;
 using Tellico::Data::Field;
