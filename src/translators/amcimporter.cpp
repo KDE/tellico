@@ -33,11 +33,10 @@
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-
 #include <QFile>
 #include <QImage>
 #include <QByteArray>
+#include <QApplication>
 
 #include <limits.h>
 
@@ -103,7 +102,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
     readEntry();
     if(showProgress) {
       emit signalProgress(this, f->pos());
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

@@ -31,10 +31,9 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-
 #include <QRegExp>
 #include <QTextStream>
+#include <QApplication>
 
 using Tellico::Import::CIWImporter;
 QHash<QString, QString>* CIWImporter::s_tagMap = 0;
@@ -229,7 +228,7 @@ void CIWImporter::readText(const QString& text_, int n) {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, n*100 + 100*j/length);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

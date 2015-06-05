@@ -39,12 +39,12 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kmessagebox.h>
-#include <kapplication.h>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 #include <QString>
 #include <QPixmap>
+#include <QApplication>
 
 #include <config.h>
 #ifdef HAVE_POPPLER
@@ -52,6 +52,7 @@
 #endif
 
 #include <memory>
+
 namespace {
   static const int PDF_FILE_PREVIEW_SIZE = 196;
 }
@@ -239,7 +240,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
     if(showProgress) {
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

@@ -30,8 +30,6 @@
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-
 #include <QRegExp>
 #include <QTextStream>
 
@@ -211,7 +209,6 @@ void ADSImporter::readText(const QString& text_, int n) {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, n*100 + 100*j/length);
-      kapp->processEvents();
     }
   }
 

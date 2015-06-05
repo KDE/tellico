@@ -35,8 +35,7 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-#include <kzip.h>
+#include <KZip>
 #include <KConfigGroup>
 #include <KLocalizedString>
 

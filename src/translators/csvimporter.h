@@ -33,8 +33,8 @@ class CSVImporterWidget;
 class KLineEdit;
 class KComboBox;
 class KIntSpinBox;
-class KPushButton;
 
+class QPushButton;
 class QCheckBox;
 class QRadioButton;
 class QTableWidget;
@@ -109,7 +109,7 @@ private:
   QTableWidget* m_table;
   KIntSpinBox* m_colSpinBox;
   KComboBox* m_comboField;
-  KPushButton* m_setColumnBtn;
+  QPushButton* m_setColumnBtn;
   bool m_hasAssignedFields;
   bool m_isLibraryThing;
 

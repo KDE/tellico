@@ -31,9 +31,8 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <kcombobox.h>
-#include <kapplication.h>
-#include <kstringhandler.h>
+#include <KComboBox>
+#include <KStringHandler>
 #include <KLocalizedString>
 
 #include <QLabel>
@@ -41,6 +40,7 @@
 #include <QTextStream>
 #include <QByteArray>
 #include <QHBoxLayout>
+#include <QApplication>
 
 using Tellico::Import::AlexandriaImporter;
 
@@ -214,7 +214,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

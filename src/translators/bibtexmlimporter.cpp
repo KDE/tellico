@@ -31,8 +31,9 @@
 #include "../core/tellico_strings.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
 #include <KLocalizedString>
+
+#include <QApplication>
 
 using Tellico::Import::BibtexmlImporter;
 
@@ -75,7 +76,7 @@ void BibtexmlImporter::loadDomDocument() {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, 100*j/count);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   } // end entry loop
 }

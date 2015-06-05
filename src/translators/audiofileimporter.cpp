@@ -47,7 +47,6 @@
 #endif
 
 #include <KLocalizedString>
-#include <kapplication.h>
 
 #include <QLabel>
 #include <QGroupBox>
@@ -55,6 +54,7 @@
 #include <QDir>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QApplication>
 
 using Tellico::Import::AudioFileImporter;
 
@@ -106,7 +106,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
       files += dir.absoluteFilePath(*it2);
     }
-//    kapp->processEvents(); not needed ?
+//    qApp->processEvents(); not needed ?
   }
 
   if(m_cancelled) {
@@ -321,7 +321,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
 
 /*    myDebug() << "-- TAG --";
@@ -369,7 +369,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

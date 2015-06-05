@@ -31,7 +31,6 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
 #include <KLocalizedString>
 
 #include <QRegExp>
@@ -312,7 +311,6 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, n*100 + 100*j/length);
-      kapp->processEvents();
     }
   }
 

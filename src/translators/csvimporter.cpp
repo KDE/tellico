@@ -32,15 +32,15 @@
 #include "../gui/collectiontypecombo.h"
 #include "../utils/stringset.h"
 
-#include <klineedit.h>
-#include <kcombobox.h>
-#include <knuminput.h>
-#include <kpushbutton.h>
-#include <kiconloader.h>
+#include <KLineEdit>
+#include <KComboBox>
+#include <KIntSpinBox>
+#include <KIconLoader>
 #include <KSharedConfig>
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KLocalizedString>
 
+#include <QPushButton>
 #include <QGroupBox>
 #include <QLabel>
 #include <QCheckBox>
@@ -328,7 +328,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   hlay3->addSpacing(10);
 
-  m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
+  m_setColumnBtn = new QPushButton(i18n("&Assign Field"), groupBox);
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
   m_setColumnBtn->setIcon(QIcon::fromTheme(QLatin1String("dialog-ok-apply")));

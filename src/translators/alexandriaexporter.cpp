@@ -33,11 +33,11 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kapplication.h>
+#include <KMessageBox>
 
 #include <QDir>
 #include <QTextStream>
+#include <QApplication>
 
 namespace {
   static const int ALEXANDRIA_MAX_SIZE_SMALL = 60;
@@ -117,7 +117,7 @@ bool AlexandriaExporter::exec() {
     success &= writeFile(libraryDir, entry);
     if(showProgress && j%stepSize == 0) {
       item.setProgress(j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
   }

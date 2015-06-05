@@ -42,8 +42,7 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KGlobal>
-#include <kcalendarsystem.h>
+//#include <KCalendarSystem>
 
 #include <QDir>
 #include <QGroupBox>
@@ -322,7 +321,8 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(fieldElem);
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
-        fieldElem.setAttribute(QLatin1String("calendar"), KGlobal::locale()->calendar()->calendarType());
+        // as of Tellico in KF5 (3.0?), just forget about the calendar attribute for the moment
+//        fieldElem.setAttribute(QLatin1String("calendar"), KGlobal::locale()->calendar()->calendarType());
         QStringList s = fieldValue.split(QLatin1Char('-'), QString::KeepEmptyParts);
         if(s.count() > 0 && !s[0].isEmpty()) {
           QDomElement e = dom_.createElement(QLatin1String("year"));

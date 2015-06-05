@@ -46,7 +46,7 @@
 #include <kio/job.h>
 #include <kio/netaccess.h>
 #include <KLocalizedString>
-#include <kuser.h>
+#include <KUser>
 
 #include <QDir>
 #include <QDomDocument>
@@ -58,6 +58,7 @@
 #include <QVBoxLayout>
 #include <QFileInfo>
 #include <QApplication>
+#include <QLocale>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -165,7 +166,7 @@ bool HTMLExporter::exec() {
 bool HTMLExporter::loadXSLTFile() {
   QString xsltFile = DataFileRegistry::self()->locate(m_xsltFile);
   if(xsltFile.isEmpty()) {
-    myDebug() << "no xslt file for " << m_xsltFile;
+    myDebug() << "no xslt file for" << m_xsltFile;
     return false;
   }
 
@@ -175,7 +176,7 @@ bool HTMLExporter::loadXSLTFile() {
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
   if(dom.isNull()) {
-    myDebug() << "error loading xslt file: " << xsltFile;
+    myDebug() << "error loading xslt file:" << xsltFile;
     return false;
   }
 
@@ -237,7 +238,7 @@ bool HTMLExporter::loadXSLTFile() {
 
 QString HTMLExporter::text() {
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
-    myWarning() << "error loading xslt file: " << m_xsltFile;
+    myWarning() << "error loading xslt file:" << m_xsltFile;
     return QString();
   }
 
@@ -293,7 +294,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   if(file != i18n(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
-  m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).toUtf8());
+  m_handler->addStringParam("cdate", QLocale().toString(QDate::currentDate()).toUtf8());
   m_handler->addParam("show-headers", m_printHeaders ? "true()" : "false()");
   m_handler->addParam("group-entries", m_printGrouped ? "true()" : "false()");
 
@@ -393,7 +394,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
 
   // add locale code to stylesheet (for sorting)
-  m_handler->addStringParam("lang", KGlobal::locale()->language().toLatin1());
+  m_handler->addStringParam("lang", QLocale().name().toLatin1());
 }
 
 void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {

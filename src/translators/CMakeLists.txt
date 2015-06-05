@@ -93,6 +93,10 @@ IF( DISCID_FOUND )
   TARGET_LINK_LIBRARIES(translators ${DISCID_LIBRARIES})
 ENDIF( DISCID_FOUND )
 
+IF( KF5FILEMETADATA_FOUND )
+  TARGET_LINK_LIBRARIES(translators KF5::FileMetaData)
+ENDIF( KF5FILEMETADATA_FOUND )
+
 ADD_DEPENDENCIES(translators tellico_config)
 
 ########### install files ###############

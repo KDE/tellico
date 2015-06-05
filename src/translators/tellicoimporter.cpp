@@ -37,12 +37,12 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kzip.h>
-#include <kapplication.h>
+#include <KZip>
 
 #include <QBuffer>
 #include <QFile>
 #include <QTimer>
+#include <QApplication>
 
 using Tellico::Import::TellicoImporter;
 
@@ -127,7 +127,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     pos += blockSize;
     if(showProgress) {
       emit signalProgress(this, pos);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -250,7 +250,7 @@ void TellicoImporter::loadZipData() {
       m_images.remove(*it);
     }
     if(j%stepSize == 0) {
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 

@@ -46,12 +46,12 @@
 #include <libkcddb/client.h>
 #endif
 
-#include <kcombobox.h>
+#include <KComboBox>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <kinputdialog.h>
 #include <KLocalizedString>
 
+#include <QInputDialog>
 #include <QFile>
 #include <QDir>
 #include <QLabel>
@@ -201,10 +201,10 @@ void FreeDBImporter::readCDROM() {
     // switch back to pointer cursor
     GUI::CursorSaver cs(Qt::ArrowCursor);
     bool ok;
-    QString res = KInputDialog::getItem(i18n("Select CDDB Entry"),
+    QString res = QInputDialog::getItem(GUI::Proxy::widget(),
+                                        i18n("Select CDDB Entry"),
                                         i18n("Select a CDDB entry:"),
-                                        list, 0, false, &ok,
-                                        GUI::Proxy::widget());
+                                        list, 0, false, &ok);
     if(ok) {
       int i = 0;
       foreach(const QString& listValue, list) {
