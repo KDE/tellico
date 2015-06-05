@@ -35,10 +35,10 @@
 #include "../images/imagefactory.h"
 #include "../document.h"
 
-#include <KStandardDirs>
 #include <KProcess>
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( CollectionTest )
 
@@ -330,7 +330,7 @@ void CollectionTest::testValue_data() {
 }
 
 void CollectionTest::testDtd() {
-  const QString xmllint = KStandardDirs::findExe(QLatin1String("xmllint"));
+  const QString xmllint = QStandardPaths::findExecutable(QLatin1String("xmllint"));
   if(xmllint.isEmpty()) {
     QSKIP("This test requires xmllint", SkipAll);
   }

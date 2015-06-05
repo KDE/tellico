@@ -36,9 +36,9 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KStandardDirs>
 
 #include <QTest>
+#include <QStandardPaths>
 
 QTEST_GUILESS_MAIN( DarkHorseFetcherTest )
 
@@ -46,7 +46,7 @@ DarkHorseFetcherTest::DarkHorseFetcherTest() : AbstractFetcherTest() {
 }
 
 void DarkHorseFetcherTest::initTestCase() {
-  const QString python = KStandardDirs::findExe(QLatin1String("python"));
+  const QString python = QStandardPaths::findExecutable(QLatin1String("python"));
   if(python.isEmpty()) {
     QSKIP("This test requires python", SkipAll);
   }
