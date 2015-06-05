@@ -49,3 +49,5 @@
 #cmakedefine HAVE_DISCID
 
 #cmakedefine HAVE_LIBCSV
+
+#cmakedefine HAVE_KFILEMETADATA

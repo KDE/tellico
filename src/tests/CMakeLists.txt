@@ -99,6 +99,7 @@ TARGET_LINK_LIBRARIES(translatorstest
   Qt5::Widgets
   Qt5::Xml
   KF5::I18n
+  KF5::Archive
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
@@ -115,8 +116,6 @@ set(TELLICO_TEST_LIBS
    KF5::Archive
 )
 
-# for some of these, the libraries seem to require being repeated so
-# that the order of linking works...no idea why...
 add_executable(collectiontest collectiontest.cpp
   ../document.cpp
   ../translators/tellicoxmlexporter.cpp
@@ -144,6 +143,8 @@ ecm_mark_nongui_executable(filtertest)
 add_test(filtertest filtertest)
 ecm_mark_as_test(filtertest)
 TARGET_LINK_LIBRARIES(filtertest ${TELLICO_TEST_LIBS})
+
+######################################################
 
 add_executable(adstest adstest.cpp
   ../translators/adsimporter.cpp
@@ -229,6 +230,17 @@ ecm_mark_nongui_executable(delicioustest)
 add_test(delicioustest delicioustest)
 ecm_mark_as_test(delicioustest)
 TARGET_LINK_LIBRARIES(delicioustest rtf2html-tellico translatorstest ${TELLICO_TEST_LIBS})
+
+add_executable(filelistingtest filelistingtest.cpp
+  ../translators/filelistingimporter.cpp
+)
+ecm_mark_nongui_executable(filelistingtest)
+add_test(filelistingtest filelistingtest)
+ecm_mark_as_test(filelistingtest)
+TARGET_LINK_LIBRARIES(filelistingtest translatorstest ${TELLICO_TEST_LIBS})
+IF( KF5FILEMETADATA_FOUND )
+  TARGET_LINK_LIBRARIES(filelistingtest KF5::FileMetaData)
+ENDIF( KF5FILEMETADATA_FOUND )
 
 add_executable(gcstartest gcstartest.cpp
   ../translators/gcstarimporter.cpp

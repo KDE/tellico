@@ -68,6 +68,9 @@ find_package(KF5 REQUIRED COMPONENTS
     JobWidgets
     KDELibs4Support
 )
+find_package(KF5 COMPONENTS
+    FileMetaData
+)
 find_package(KF5KHtml NO_MODULE)
 
 #find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
@@ -293,6 +296,7 @@ macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
 macro_bool_to_01(CSV_FOUND HAVE_LIBCSV)
+macro_bool_to_01(KF5FILEMETADATA_FOUND HAVE_KFILEMETADATA)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
