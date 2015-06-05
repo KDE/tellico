@@ -30,7 +30,6 @@
 #include "../translators/ciwimporter.h"
 #include "../tellico_debug.h"
 
-#include <kmimetype.h>
 #include <kio/netaccess.h>
 #include <kio/job.h>
 
@@ -38,6 +37,8 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QMimeDatabase>
+#include <QMimeType>
 
 using Tellico::DropHandler;
 
@@ -85,25 +86,27 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
   bool hasUnknown = false;
   QList<QUrl> tc, pdf, bib, ris, ciw;
   foreach(const QUrl& url, urls_) {
-    KMimeType::Ptr ptr;
+    QMimeType ptr;
     // findByURL doesn't work for http, so actually query
     // the url itself
     if(url.scheme() != QLatin1String("http")) {
-      ptr = KMimeType::findByUrl(url);
+      QMimeDatabase db;
+      ptr = db.mimeTypeForUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);
       KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget());
-      ptr = KMimeType::mimeType(job->mimetype());
+      QMimeDatabase db;
+      ptr = db.mimeTypeForName(job->mimetype());
     }
-    if(ptr->is(QLatin1String("application/x-tellico"))) {
+    if(ptr.inherits(QLatin1String("application/x-tellico"))) {
       tc << url;
-    } else if(ptr->is(QLatin1String("application/pdf"))) {
+    } else if(ptr.inherits(QLatin1String("application/pdf"))) {
       pdf << url;
-    } else if(ptr->is(QLatin1String("text/x-bibtex")) ||
-              ptr->is(QLatin1String("application/x-bibtex")) ||
-              ptr->is(QLatin1String("application/bibtex"))) {
+    } else if(ptr.inherits(QLatin1String("text/x-bibtex")) ||
+              ptr.inherits(QLatin1String("application/x-bibtex")) ||
+              ptr.inherits(QLatin1String("application/bibtex"))) {
       bib << url;
-    } else if(ptr->is(QLatin1String("application/x-research-info-systems"))) {
+    } else if(ptr.inherits(QLatin1String("application/x-research-info-systems"))) {
       ris << url;
     } else if(url.fileName().endsWith(QLatin1String(".bib"))) {
       bib << url;
@@ -111,14 +114,14 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
       ris << url;
     } else if(url.fileName().endsWith(QLatin1String(".ciw"))) {
       ciw << url;
-    } else if(ptr->is(QLatin1String("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
+    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
       bib << url;
-    } else if(ptr->is(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
+    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
       ris << url;
-    } else if(ptr->is(QLatin1String("text/plain")) && Import::CIWImporter::maybeCIW(url)) {
+    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::CIWImporter::maybeCIW(url)) {
       ciw << url;
     } else {
-      myDebug() << "unrecognized type: " << ptr->name() << " (" << url << ")";
+      myDebug() << "unrecognized type: " << ptr.name() << " (" << url << ")";
       hasUnknown = true;
     }
   }
@@ -159,4 +162,3 @@ bool DropHandler::handleText(const QString& text_) {
   }
   return true;
 }
-

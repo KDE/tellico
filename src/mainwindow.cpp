@@ -97,7 +97,6 @@
 #include <kundostack.h>
 #include <KTabWidget>
 #include <KIcon>
-#include <KMimeType>
 #include <KAction>
 
 #include <QSplitter>
@@ -105,6 +104,8 @@
 #include <QSignalMapper>
 #include <QTimer>
 #include <QMetaObject> // needed for copy, cut, paste slots
+#include <QMimeDatabase>
+#include <QMimeType>
 
 #include <unistd.h>
 
@@ -113,22 +114,24 @@ namespace {
   static const int MAX_IMAGES_WARN_PERFORMANCE = 200;
 
 QIcon mimeIcon(const char* s) {
-  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s), KMimeType::ResolveAliases);
-  if(!ptr) {
+  QMimeDatabase db;
+  QMimeType ptr = db.mimeTypeForName(QLatin1String(s));
+  if(!ptr.isValid()) {
     myDebug() << "*** no icon for" << s;
   }
-  return ptr ? QIcon::fromTheme(ptr->iconName()) : QIcon();
+  return ptr.isValid() ? QIcon::fromTheme(ptr.iconName()) : QIcon();
 }
 
 QIcon mimeIcon(const char* s1, const char* s2) {
-  KMimeType::Ptr ptr = KMimeType::mimeType(QLatin1String(s1), KMimeType::ResolveAliases);
-  if(!ptr) {
-    ptr = KMimeType::mimeType(QLatin1String(s2), KMimeType::ResolveAliases);
-    if(!ptr) {
+  QMimeDatabase db;
+  QMimeType ptr = db.mimeTypeForName(QLatin1String(s1));
+  if(!ptr.isValid()) {
+    ptr = db.mimeTypeForName(QLatin1String(s2));
+    if(!ptr.isValid()) {
       myDebug() << "*** no icon for" << s1 << "or" << s2;
     }
   }
-  return ptr ? QIcon::fromTheme(ptr->iconName()) : QIcon();
+  return ptr.isValid() ? QIcon::fromTheme(ptr.iconName()) : QIcon();
 }
 
 }

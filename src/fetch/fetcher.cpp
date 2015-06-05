@@ -31,7 +31,7 @@
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <KMimeType>
+#include <KIO/Global>
 
 #include <QUrl>
 #include <QDBusInterface>
@@ -172,6 +172,6 @@ QString Fetcher::favIcon(const QUrl& url_) {
   }
   // go ahead and try to download it for later
   kded.call(QLatin1String("downloadHostIcon"), url_.url());
-  return KMimeType::iconNameForUrl(url_);
+  return KIO::iconNameForUrl(url_);
 }
 
