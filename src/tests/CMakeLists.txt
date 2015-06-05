@@ -499,11 +499,17 @@ ecm_mark_as_test(freebasefetchertest)
 TARGET_LINK_LIBRARIES(freebasefetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 # running gcstar in the fetcher is really unreliable
-#add_executable(gcstarfetchertest gcstarfetchertest.cpp)
-#ecm_mark_nongui_executable(gcstarfetchertest)
+add_executable(gcstarfetchertest gcstarfetchertest.cpp abstractfetchertest
+  ../fetch/gcstarpluginfetcher.cpp
+  ../fetch/gcstarthread.cpp
+  ../translators/gcstarimporter.cpp
+  ../gui/combobox.cpp
+  ../gui/collectiontypecombo.cpp
+)
+ecm_mark_nongui_executable(gcstarfetchertest)
 #add_test(gcstarfetchertest gcstarfetchertest)
 #ecm_mark_as_test(gcstarfetchertest)
-#TARGET_LINK_LIBRARIES(gcstarfetchertest fetch ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(gcstarfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest.cpp
   ../fetch/giantbombfetcher.cpp

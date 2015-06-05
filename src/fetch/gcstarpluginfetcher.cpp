@@ -37,7 +37,6 @@
 
 #include <KConfigGroup>
 #include <KProcess>
-#include <kstandarddirs.h>
 #include <kacceleratormanager.h>
 #include <kshell.h>
 #include <KFilterDev>
@@ -50,6 +49,7 @@
 #include <QShowEvent>
 #include <QGridLayout>
 #include <QBuffer>
+#include <QStandardPaths>
 
 #include <memory>
 
@@ -63,7 +63,7 @@ GCstarPluginFetcher::PluginParse GCstarPluginFetcher::pluginParse = NotYet;
 GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
   if(!collectionPlugins.contains(collType_)) {
     GUI::CursorSaver cs;
-    QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+    QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
 
     if(pluginParse == NotYet) {
       KProcess proc;
@@ -229,7 +229,7 @@ void GCstarPluginFetcher::search() {
 
   m_data.clear();
 
-  const QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+  const QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
     myWarning() << "gcstar not found!";
     stop();
