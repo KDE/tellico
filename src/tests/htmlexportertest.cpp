@@ -42,6 +42,7 @@ void HtmlExporterTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
 }
 
 void HtmlExporterTest::testHtml() {
@@ -63,4 +64,26 @@ void HtmlExporterTest::testHtml() {
   rx.setMinimal(true);
   QVERIFY(output.contains(rx));
   QCOMPARE(rx.cap(), QLatin1String("<title>Robby's Books</title>"));
+}
+
+void HtmlExporterTest::testReportHtml() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  coll->setTitle(QLatin1String("Robby's Books"));
+
+  Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  coll->addEntries(e);
+
+  Tellico::Export::HTMLExporter exporter(coll);
+  exporter.setXSLTFile(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
+  exporter.setEntries(coll->entries());
+
+  QString output = exporter.text();
+//  qDebug() << output;
+  QVERIFY(!output.isEmpty());
+
+  // check that cdate is passed correctly
+  QRegExp rx("<p id=\"header-right\">(.*)</p>");
+  rx.setMinimal(true);
+  QVERIFY(output.contains(rx));
+  QCOMPARE(rx.cap(1), QLocale().toString(QDate::currentDate()));
 }

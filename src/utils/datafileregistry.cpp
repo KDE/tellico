@@ -65,6 +65,10 @@ void DataFileRegistry::addDataLocation(const QString& dir_, bool prepend_) {
 }
 
 QString DataFileRegistry::locate(const QString& fileName_) {
+  // account for absolute paths
+  if(QFileInfo(fileName_).isAbsolute()) {
+    return fileName_;
+  }
   foreach(const QString& dataDir, m_dataLocations) {
     if(QFileInfo::exists(dataDir + fileName_)) {
       return dataDir + fileName_;
