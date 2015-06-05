@@ -95,17 +95,6 @@ if(QIMAGEBLITZ_FOUND)
     include_directories(${QIMAGEBLITZ_INCLUDES})
 endif(QIMAGEBLITZ_FOUND)
 
-#macro_optional_find_package(Nepomuk)
-#macro_log_feature(NEPOMUK_FOUND "nepomuk" "Support for reading file metadata" "http://www.kde.org" FALSE "4.2.0" "")
-#find_package(Nepomuk)
-#set_package_properties(Nepomuk PROPERTIES
-#    DESCRIPTION "Support for reading file metadata"
-#    URL "http://www.kde.org"
-#    TYPE OPTIONAL)
-#if(NEPOMUK_FOUND)
-#    include_directories(${NEPOMUK_INCLUDE_DIRS})
-#endif(NEPOMUK_FOUND)
-
 #macro_optional_find_package(KdepimLibs 4.5)
 #macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.5.0" "")
 #find_package(KdepimLibs 4.5)
@@ -291,7 +280,6 @@ macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
-macro_bool_to_01(NEPOMUK_FOUND HAVE_NEPOMUK)
 macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
