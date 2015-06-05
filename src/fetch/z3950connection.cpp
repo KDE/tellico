@@ -501,6 +501,8 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
 //  myDebug() << "-------------------------------------------";
   return output;
 #endif
+  Q_UNUSED(fromCharSet_);
+  Q_UNUSED(toCharSet_);
   return text_;
 }
 
@@ -562,6 +564,8 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
 
   return output;
 #else // no yaz
+  Q_UNUSED(marc_);
+  Q_UNUSED(charSet_);
   return QString();
 #endif
 }
