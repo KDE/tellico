@@ -50,12 +50,11 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kstandarddirs.h>
-#include <kapplication.h>
-#include <knuminput.h>
+#include <KStandardDirs>
+#include <KIntSpinBox>
 #include <KConfigGroup>
-#include <kcombobox.h>
-#include <kacceleratormanager.h>
+#include <KComboBox>
+#include <KAcceleratorManager>
 #include <kseparator.h>
 #include <KGlobal>
 

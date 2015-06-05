@@ -49,13 +49,12 @@
 #include <KLocalizedString>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <knuminput.h>
+#include <KIntSpinBox>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
 #include <kfiledialog.h>
-#include <kinputdialog.h>
 #include <kcolorcombo.h>
 #include <kapplication.h>
 #include <kvbox.h>
@@ -83,6 +82,7 @@
 #include <QFontComboBox>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include <QInputDialog>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -1168,10 +1168,11 @@ void ConfigDialog::slotDownloadTemplate() {
 
 void ConfigDialog::slotDeleteTemplate() {
   bool ok;
-  QString name = KInputDialog::getItem(i18n("Delete Template"),
+  QString name = QInputDialog::getItem(this,
+                                       i18n("Delete Template"),
                                        i18n("Select template to delete:"),
                                        Tellico::NewStuff::Manager::self()->userTemplates().keys(),
-                                       0, false, &ok, this);
+                                       0, false, &ok);
   if(ok && !name.isEmpty()) {
     Tellico::NewStuff::Manager::self()->removeTemplateByName(name);
     loadTemplateList();

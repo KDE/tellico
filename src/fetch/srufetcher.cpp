@@ -43,9 +43,9 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
-#include <kcombobox.h>
-#include <kacceleratormanager.h>
-#include <knuminput.h>
+#include <KComboBox>
+#include <KAcceleratorManager>
+#include <KIntSpinBox>
 
 #include <QLabel>
 #include <QGridLayout>

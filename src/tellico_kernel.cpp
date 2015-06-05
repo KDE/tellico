@@ -47,9 +47,10 @@
 
 #include <kmessagebox.h>
 #include <kiconloader.h>
-#include <kinputdialog.h>
 #include <KLocalizedString>
 #include <kundostack.h>
+
+#include <QInputDialog>
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;
@@ -314,8 +315,8 @@ void Kernel::replaceCollection(Tellico::Data::CollPtr coll_) {
 
 void Kernel::renameCollection() {
   bool ok;
-  QString newTitle = KInputDialog::getText(i18n("Rename Collection"), i18n("New collection name:"),
-                                           Data::Document::self()->collection()->title(), &ok, m_widget);
+  QString newTitle = QInputDialog::getText(m_widget, i18n("Rename Collection"), i18n("New collection name:"),
+                                           QLineEdit::Normal, Data::Document::self()->collection()->title(), &ok);
   if(ok) {
     doCommand(new Command::RenameCollection(Data::Document::self()->collection(), newTitle));
   }

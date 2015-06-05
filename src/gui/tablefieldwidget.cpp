@@ -31,13 +31,13 @@
 
 #include <KLocalizedString>
 #include <kmenu.h>
-#include <QIcon>
-#include <kinputdialog.h>
 
 #include <QTableWidget>
 #include <QMouseEvent>
 #include <QEvent>
 #include <QHeaderView>
+#include <QIcon>
+#include <QInputDialog>
 
 namespace {
   static const int MIN_TABLE_ROWS = 5;
@@ -165,8 +165,8 @@ void TableFieldWidget::slotRenameColumn() {
   }
   QString name = m_table->horizontalHeaderItem(m_col)->text();
   bool ok;
-  QString newName = KInputDialog::getText(i18n("Rename Column"), i18n("New column name:"),
-                                          name, &ok, this);
+  QString newName = QInputDialog::getText(this, i18n("Rename Column"), i18n("New column name:"),
+                                          QLineEdit::Normal, name, &ok);
   if(ok && !newName.isEmpty()) {
     Data::FieldPtr newField(new Data::Field(*m_field));
     newField->setProperty(QString::fromLatin1("column%1").arg(m_col+1), newName);

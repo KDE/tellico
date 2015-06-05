@@ -36,15 +36,15 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kdialog.h>
+#include <KDialog>
 #include <KConfigGroup>
-#include <klineedit.h>
-#include <knuminput.h>
+#include <KLineEdit>
+#include <KIntSpinBox>
 #include <KVBox>
 #include <KListWidget>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
-#include <kacceleratormanager.h>
+#include <KJobUiDelegate>
+#include <KAcceleratorManager>
 #include <KJobWidgets/KJobWidgets>
 
 #include <QRegExp>

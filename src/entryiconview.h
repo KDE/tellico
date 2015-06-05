@@ -30,8 +30,6 @@
 
 #include <QListView>
 
-class KIcon;
-
 namespace {
   static const int MIN_ENTRY_ICON_SIZE = 32;
   static const int MAX_ENTRY_ICON_SIZE = 512;
