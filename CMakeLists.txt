@@ -68,9 +68,6 @@ find_package(KF5 REQUIRED COMPONENTS
     JobWidgets
     KDELibs4Support
 )
-find_package(KF5 COMPONENTS
-    FileMetaData
-)
 find_package(KF5KHtml NO_MODULE)
 
 #find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
@@ -85,6 +82,12 @@ include(MacroBoolTo01)
 find_package(Gettext REQUIRED)
 find_package(LibXml2 REQUIRED)
 find_package(LibXslt REQUIRED)
+
+find_package(KF5FileMetaData)
+set_package_properties(KF5FileMetaData PROPERTIES
+    DESCRIPTION "Support for reading file metadata"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
 
 find_package(QImageBlitz 5.0)
 set_package_properties(QImageBlitz PROPERTIES
