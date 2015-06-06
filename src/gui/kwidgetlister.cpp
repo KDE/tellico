@@ -36,11 +36,11 @@
 #include <KDialog>
 #include <KLocalizedString>
 #include <KGuiItem>
-#include <KHBox>
 #include <KPushButton>
 
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 
 #include <assert.h>
 
@@ -56,25 +56,29 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mLayout->setMargin( 0 );
   mLayout->setSpacing( 4 );
 
-  mButtonBox = new KHBox( this );
-  mButtonBox->setSpacing( KDialog::spacingHint() );
+  mButtonBox = new QWidget( this );
+  QHBoxLayout* mButtonBoxHBoxLayout = new QHBoxLayout( mButtonBox );
+  mButtonBoxHBoxLayout->setMargin( 0 );
+  mButtonBoxHBoxLayout->setSpacing( KDialog::spacingHint() );
   mLayout->addWidget( mButtonBox );
 
   mBtnMore = new KPushButton( KGuiItem( i18nc( "more widgets", "More" ),
                                         QLatin1String("list-add") ), mButtonBox );
-  mButtonBox->setStretchFactor( mBtnMore, 0 );
+  mButtonBoxHBoxLayout->setStretchFactor( mBtnMore, 0 );
 
   mBtnFewer = new KPushButton( KGuiItem( i18nc( "fewer widgets", "Fewer" ),
                                          QLatin1String("list-remove") ), mButtonBox );
-  mButtonBox->setStretchFactor( mBtnFewer, 0 );
+  mButtonBoxHBoxLayout->setStretchFactor( mBtnFewer, 0 );
 
   QWidget *spacer = new QWidget( mButtonBox );
-  mButtonBox->setStretchFactor( spacer, 1 );
+  mButtonBoxHBoxLayout->addWidget( spacer );
+  mButtonBoxHBoxLayout->setStretchFactor( spacer, 1 );
 
   mBtnClear = new KPushButton( KStandardGuiItem::clear(), mButtonBox );
+  mButtonBoxHBoxLayout->addWidget( mBtnClear );
   // FIXME a useful whats this. KStandardGuiItem::clear() returns a text with an edit box
   mBtnClear->setWhatsThis( QString() );
-  mButtonBox->setStretchFactor( mBtnClear, 0 );
+  mButtonBoxHBoxLayout->setStretchFactor( mBtnClear, 0 );
 
   //---------- connect everything
   connect( mBtnMore, SIGNAL(clicked()),

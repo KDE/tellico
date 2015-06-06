@@ -41,8 +41,6 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kacceleratormanager.h>
-#include <KHBox>
-#include <KVBox>
 #include <KListWidget>
 
 #include <QLabel>
@@ -52,6 +50,7 @@
 #include <QRegExp>
 #include <QTimer>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QGridLayout>
 
 using namespace Tellico;
@@ -105,27 +104,35 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   }
   connect(m_fieldsWidget, SIGNAL(currentRowChanged(int)), SLOT(slotHighlightedChanged(int)));
 
-  KHBox* hb1 = new KHBox(fieldsGroup);
-  hb1->setSpacing(KDialog::spacingHint());
+  QWidget* hb1 = new QWidget(fieldsGroup);
+  QHBoxLayout* hb1HBoxLayout = new QHBoxLayout(hb1);
+  hb1HBoxLayout->setMargin(0);
+  hb1HBoxLayout->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb1);
   m_btnNew = new KPushButton(i18nc("New Field", "&New"), hb1);
+  hb1HBoxLayout->addWidget(m_btnNew);
   m_btnNew->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   m_btnNew->setWhatsThis(i18n("Add a new field to the collection"));
   m_btnDelete = new KPushButton(i18nc("Delete Field", "&Delete"), hb1);
+  hb1HBoxLayout->addWidget(m_btnDelete);
   m_btnDelete->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
 
   connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()) );
   connect(m_btnDelete, SIGNAL(clicked()), SLOT(slotDelete()));
 
-  KHBox* hb2 = new KHBox(fieldsGroup);
-  hb2->setSpacing(KDialog::spacingHint());
+  QWidget* hb2 = new QWidget(fieldsGroup);
+  QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
+  hb2HBoxLayout->setMargin(0);
+  hb2HBoxLayout->setSpacing(KDialog::spacingHint());
   fieldsLayout->addWidget(hb2);
   m_btnUp = new KPushButton(hb2);
+  hb2HBoxLayout->addWidget(m_btnUp);
   m_btnUp->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_btnUp->setWhatsThis(i18n("Move this field up in the list. The list order is important "
                              "for the layout of the entry editor."));
   m_btnDown = new KPushButton(hb2);
+  hb2HBoxLayout->addWidget(m_btnDown);
   m_btnDown->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_btnDown->setWhatsThis(i18n("Move this field down in the list. The list order is important "
                                "for the layout of the entry editor."));
@@ -133,11 +140,14 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_btnUp, SIGNAL(clicked()), SLOT(slotMoveUp()));
   connect(m_btnDown, SIGNAL(clicked()), SLOT(slotMoveDown()));
 
-  KVBox* vbox = new KVBox(page);
-  vbox->setSpacing(KDialog::spacingHint());
+  QWidget* vbox = new QWidget(page);
+  QVBoxLayout* vboxVBoxLayout = new QVBoxLayout(vbox);
+  vboxVBoxLayout->setMargin(0);
+  vboxVBoxLayout->setSpacing(KDialog::spacingHint());
   topLayout->addWidget(vbox, 2);
 
   QGroupBox* propGroup = new QGroupBox(i18n("Field Properties"), vbox);
+  vboxVBoxLayout->addWidget(propGroup);
   QBoxLayout* propLayout = new QVBoxLayout(propGroup);
 
   QWidget* grid = new QWidget(propGroup);
@@ -225,6 +235,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_descEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
 
   QGroupBox* valueGroup = new QGroupBox(i18n("Value Options"), vbox);
+  vboxVBoxLayout->addWidget(valueGroup);
   QGridLayout* valueLayout = new QGridLayout(valueGroup);
   int valueRow = -1;
 
@@ -283,6 +294,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_formatCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotModified()));
 
   QGroupBox* optionsGroup = new QGroupBox(i18n("Field Options"), vbox);
+  vboxVBoxLayout->addWidget(optionsGroup);
   QBoxLayout* optionsLayout = new QVBoxLayout(optionsGroup);
   m_complete = new QCheckBox(i18n("Enable auto-completion"), optionsGroup);
   m_complete->setWhatsThis(i18n("If checked, KDE auto-completion will be enabled in the "
@@ -302,7 +314,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_grouped, SIGNAL(clicked()), SLOT(slotModified()));
 
   // need to stretch at bottom
-  vbox->setStretchFactor(new QWidget(vbox), 1);
+  vboxVBoxLayout->setStretchFactor(new QWidget(vbox), 1);
 
   // keep a default collection
   m_defaultCollection = CollectionFactory::collection(m_coll->type(), true);

@@ -38,7 +38,6 @@
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>
 #include <kaction.h>
-#include <kvbox.h>
 #include <KSharedConfig>
 
 #include <QStringList>
@@ -47,6 +46,7 @@
 #include <QApplication>
 #include <QGridLayout>
 #include <QCloseEvent>
+#include <QVBoxLayout>
 
 namespace {
   // must be an even number

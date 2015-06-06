@@ -40,7 +40,6 @@
 #include <KConfigGroup>
 #include <KLineEdit>
 #include <KIntSpinBox>
-#include <KVBox>
 #include <KListWidget>
 #include <kio/job.h>
 #include <KJobUiDelegate>
@@ -54,6 +53,7 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QGridLayout>
+#include <QVBoxLayout>
 
 namespace {
   static const uint IMDB_MAX_RESULTS = 20;
@@ -807,11 +807,14 @@ void IMDBFetcher::parseMultipleNameResults() {
   dlg.setModal(false);
   dlg.setButtons(KDialog::Ok|KDialog::Cancel);
 
-  KVBox* box = new KVBox(&dlg);
-  box->setSpacing(10);
+  QWidget* box = new QWidget(&dlg);
+  QVBoxLayout* boxVBoxLayout = new QVBoxLayout(box);
+  boxVBoxLayout->setMargin(0);
+  boxVBoxLayout->setSpacing(10);
   (void) new QLabel(i18n("<qt>Your search returned multiple matches. Please select one below.</qt>"), box);
 
   KListWidget* listWidget = new KListWidget(box);
+  boxVBoxLayout->addWidget(listWidget);
   listWidget->setMinimumWidth(400);
   listWidget->setWrapping(true);
 

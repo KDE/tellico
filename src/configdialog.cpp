@@ -56,9 +56,6 @@
 #include <khtmlview.h>
 #include <kfiledialog.h>
 #include <kcolorcombo.h>
-#include <kapplication.h>
-#include <kvbox.h>
-#include <khbox.h>
 #include <KGlobal>
 #include <KHelpClient>
 #include <KIcon>
@@ -83,6 +80,9 @@
 #include <QGroupBox>
 #include <QButtonGroup>
 #include <QInputDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QApplication>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -568,23 +568,28 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   QVBoxLayout* vlay = new QVBoxLayout(groupBox);
   groupBox->setLayout(vlay);
 
-  KHBox* box1 = new KHBox(groupBox);
+  QWidget* box1 = new QWidget(groupBox);
+  QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
+  box1HBoxLayout->setMargin(0);
   vlay->addWidget(box1);
-  box1->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
+  box1HBoxLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
   KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
+  box1HBoxLayout->addWidget(b1);
   b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
   KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
+  box1HBoxLayout->addWidget(b2);
   b2->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
   KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
+  box1HBoxLayout->addWidget(b3);
   b3->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
   whats = i18n("Click to select and remove installed templates.");
@@ -636,20 +641,27 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   connect(m_sourceListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), SLOT(slotSelectedSourceChanged(QListWidgetItem*)));
   connect(m_sourceListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(slotModifySourceClicked()));
 
-  KHBox* hb = new KHBox(frame);
+  QWidget* hb = new QWidget(frame);
+  QHBoxLayout* hbHBoxLayout = new QHBoxLayout(hb);
+  hbHBoxLayout->setMargin(0);
   leftLayout->addWidget(hb);
   m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), hb);
+  hbHBoxLayout->addWidget(m_moveUpSourceBtn);
   m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
   m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), hb);
+  hbHBoxLayout->addWidget(m_moveDownSourceBtn);
   m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
-  KHBox* hb2 = new KHBox(frame);
+  QWidget* hb2 = new QWidget(frame);
+  QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
+  hb2HBoxLayout->setMargin(0);
   leftLayout->addWidget(hb2);
   m_cbFilterSource = new QCheckBox(i18n("Filter by type:"), hb2);
+  hb2HBoxLayout->addWidget(m_cbFilterSource);
   connect(m_cbFilterSource, SIGNAL(clicked()), SLOT(slotSourceFilterChanged()));
   m_sourceTypeCombo = new GUI::CollectionTypeCombo(hb2);
   connect(m_sourceTypeCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotSourceFilterChanged()));
@@ -786,7 +798,7 @@ void ConfigDialog::readFetchConfig() {
       // there's weird layout bug if it's not hidden
       cw->hide();
     }
-    kapp->processEvents();
+    qApp->processEvents();
   }
   m_sourceListWidget->setUpdatesEnabled(true);
 

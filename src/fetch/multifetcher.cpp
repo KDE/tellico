@@ -34,6 +34,7 @@
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 
 using namespace Tellico;
 using Tellico::Fetch::MultiFetcher;
@@ -184,10 +185,13 @@ MultiFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MultiFetcher* f
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
 
-  KHBox* hbox = new KHBox(optionsWidget());
+  QWidget* hbox = new QWidget(optionsWidget());
+  QHBoxLayout* hboxHBoxLayout = new QHBoxLayout(hbox);
+  hboxHBoxLayout->setMargin(0);
   l->addWidget(hbox);
 
   QLabel* label = new QLabel(i18n("Collection &type:"), hbox);
+  hboxHBoxLayout->addWidget(label);
   m_collCombo = new GUI::CollectionTypeCombo(hbox);
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));

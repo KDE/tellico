@@ -60,8 +60,6 @@
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
 #include <kmessagebox.h>
-#include <KHBox>
-#include <KVBox>
 #include <KGlobalSettings>
 
 #include <QGroupBox>
@@ -70,6 +68,7 @@
 #include <QCheckBox>
 #include <QImage>
 #include <QLabel>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QProgressBar>
 #include <QTreeWidget>
@@ -139,13 +138,17 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QBoxLayout* queryLayout = new QVBoxLayout(queryBox);
   topLayout->addWidget(queryBox);
 
-  KHBox* box1 = new KHBox(queryBox);
-  box1->setSpacing(spacingHint());
+  QWidget* box1 = new QWidget(queryBox);
+  QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
+  box1HBoxLayout->setMargin(0);
+  box1HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box1);
 
   QLabel* label = new QLabel(i18nc("Start the search", "S&earch:"), box1);
+  box1HBoxLayout->addWidget(label);
 
   m_valueLineEdit = new KLineEdit(box1);
+  box1HBoxLayout->addWidget(m_valueLineEdit);
   label->setBuddy(m_valueLineEdit);
   m_valueLineEdit->setWhatsThis(i18n("Enter a search value. An ISBN search must include the full ISBN."));
   m_keyCombo = new GUI::ComboBox(box1);
@@ -157,6 +160,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_keyCombo->setWhatsThis(i18n("Choose the type of search"));
 
   m_searchButton = new KPushButton(box1);
+  box1HBoxLayout->addWidget(m_searchButton);
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
                                       QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
@@ -174,24 +178,30 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_searchButton->setMinimumWidth(maxWidth);
   m_searchButton->setMinimumHeight(maxHeight);
 
-  KHBox* box2 = new KHBox(queryBox);
-  box2->setSpacing(spacingHint());
+  QWidget* box2 = new QWidget(queryBox);
+  QHBoxLayout* box2HBoxLayout = new QHBoxLayout(box2);
+  box2HBoxLayout->setMargin(0);
+  box2HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box2);
 
   m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN/UPC search"), box2);
+  box2HBoxLayout->addWidget(m_multipleISBN);
   m_multipleISBN->setWhatsThis(i18n("Check this box to search for multiple ISBN or UPC values."));
   connect(m_multipleISBN, SIGNAL(toggled(bool)), SLOT(slotMultipleISBN(bool)));
 
   m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), QIcon::fromTheme(QLatin1String("format-justify-fill"))), box2);
+  box2HBoxLayout->addWidget(m_editISBN);
   m_editISBN->setEnabled(false);
   m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN or UPC values."));
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
 
   // add for spacing
-  box2->setStretchFactor(new QWidget(box2), 10);
+  box2HBoxLayout->setStretchFactor(new QWidget(box2), 10);
 
   label = new QLabel(i18n("Search s&ource:"), box2);
+  box2HBoxLayout->addWidget(label);
   m_sourceCombo = new KComboBox(box2);
+  box2HBoxLayout->addWidget(m_sourceCombo);
   label->setBuddy(m_sourceCombo);
   Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(m_collType);
   foreach(Fetch::Fetcher::Ptr fetcher, sources) {
@@ -238,30 +248,38 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
                                          "current collection by selecting it in the list above"));
 
-  KHBox* box3 = new KHBox(mainWidget);
+  QWidget* box3 = new QWidget(mainWidget);
+  QHBoxLayout* box3HBoxLayout = new QHBoxLayout(box3);
+  box3HBoxLayout->setMargin(0);
   topLayout->addWidget(box3);
-  box3->setSpacing(KDialog::spacingHint());
+  box3HBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_addButton = new KPushButton(i18n("&Add Entry"), box3);
+  box3HBoxLayout->addWidget(m_addButton);
   m_addButton->setEnabled(false);
   m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
   m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), QIcon::fromTheme(QLatin1String("edit-find"))), box3);
+  box3HBoxLayout->addWidget(m_moreButton);
   m_moreButton->setEnabled(false);
   connect(m_moreButton, SIGNAL(clicked()), SLOT(slotMoreClicked()));
   m_moreButton->setWhatsThis(i18n("Fetch more results from the current data source"));
 
   KPushButton* clearButton = new KPushButton(KStandardGuiItem::clear(), box3);
+  box3HBoxLayout->addWidget(clearButton);
   connect(clearButton, SIGNAL(clicked()), SLOT(slotClearClicked()));
   clearButton->setWhatsThis(i18n("Clear all search fields and results"));
 
-  KHBox* bottombox = new KHBox(mainWidget);
+  QWidget* bottombox = new QWidget(mainWidget);
+  QHBoxLayout* bottomboxHBoxLayout = new QHBoxLayout(bottombox);
+  bottomboxHBoxLayout->setMargin(0);
   topLayout->addWidget(bottombox);
-  bottombox->setSpacing(KDialog::spacingHint());
+  bottomboxHBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_statusBar = new KStatusBar(bottombox);
+  bottomboxHBoxLayout->addWidget(m_statusBar);
   m_statusLabel = new QLabel(m_statusBar);
   m_statusBar->addPermanentWidget(m_statusLabel, 1);
   m_progress = new QProgressBar(m_statusBar);
@@ -271,6 +289,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_statusBar->addPermanentWidget(m_progress);
 
   KPushButton* closeButton = new KPushButton(KStandardGuiItem::close(), bottombox);
+  bottomboxHBoxLayout->addWidget(closeButton);
   connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
@@ -671,11 +690,14 @@ void FetchDialog::slotEditMultipleISBN() {
   dlg.setCaption(i18n("Edit ISBN/UPC Values"));
   dlg.setButtons(KDialog::Ok|KDialog::Cancel);
 
-  KVBox* box = new KVBox(&dlg);
-  box->setSpacing(10);
+  QWidget* box = new QWidget(&dlg);
+  QVBoxLayout* boxVBoxLayout = new QVBoxLayout(box);
+  boxVBoxLayout->setMargin(0);
+  boxVBoxLayout->setSpacing(10);
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
   (void) new QLabel(s, box);
   m_isbnTextEdit = new KTextEdit(box);
+  boxVBoxLayout->addWidget(m_isbnTextEdit);
   if(m_isbnList.isEmpty()) {
     m_isbnTextEdit->setText(m_valueLineEdit->text());
   } else {
