@@ -233,9 +233,16 @@ QString MultiFetcher::ConfigWidget::preferredName() const {
 }
 
 MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
-    : KHBox(parent_) {
+    : QFrame(parent_) {
+  QHBoxLayout* layout = new QHBoxLayout(this);
+  layout->setSpacing(0);
+  layout->setMargin(0);
+  setLayout(layout);
+
   QLabel* label = new QLabel(QLatin1String("Data source:"), this);
+  layout->addWidget(label);
   m_fetcherCombo = new GUI::ComboBox(this);
+  layout->addWidget(m_fetcherCombo);
   connect(m_fetcherCombo, SIGNAL(activated(int)), SIGNAL(signalModified()));
   label->setBuddy(m_fetcherCombo);
 }
