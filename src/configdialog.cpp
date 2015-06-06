@@ -102,7 +102,7 @@ SourceListItem::SourceListItem(const Tellico::GeneralFetcherInfo& info_, const Q
   }
 }
 
-SourceListItem::SourceListItem(KListWidget* parent_, const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
+SourceListItem::SourceListItem(QListWidget* parent_, const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
     : QListWidgetItem(parent_), m_info(info_),
       m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
   setData(Qt::DisplayRole, info_.name);
@@ -634,7 +634,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
 
   QVBoxLayout* leftLayout = new QVBoxLayout();
   l->addLayout(leftLayout);
-  m_sourceListWidget = new KListWidget(frame);
+  m_sourceListWidget = new QListWidget(frame);
   m_sourceListWidget->setSortingEnabled(false); // no sorting
   m_sourceListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
   leftLayout->addWidget(m_sourceListWidget, 1);

@@ -28,7 +28,8 @@
 #include "fetch/fetcher.h"
 
 #include <kpagedialog.h>
-#include <klistwidget.h>
+
+#include <QListWidget>
 
 class KConfig;
 class KLineEdit;
@@ -194,7 +195,7 @@ private:
   KColorCombo* m_highBaseColorCombo;
   KColorCombo* m_highTextColorCombo;
 
-  KListWidget* m_sourceListWidget;
+  QListWidget* m_sourceListWidget;
   QMap<SourceListItem*, Fetch::ConfigWidget*> m_configWidgets;
   QList<Fetch::ConfigWidget*> m_newStuffConfigWidgets;
   QList<Fetch::ConfigWidget*> m_removedConfigWidgets;
@@ -220,7 +221,7 @@ class SourceListItem : public QListWidgetItem {
 public:
   explicit SourceListItem(const GeneralFetcherInfo& info,
                           const QString& groupName = QString());
-  SourceListItem(KListWidget* parent, const GeneralFetcherInfo& info,
+  SourceListItem(QListWidget* parent, const GeneralFetcherInfo& info,
                  const QString& groupName = QString());
 
   void setConfigGroup(const QString& s) { m_configGroup = s; }

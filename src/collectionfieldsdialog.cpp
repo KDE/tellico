@@ -41,7 +41,6 @@
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kacceleratormanager.h>
-#include <KListWidget>
 
 #include <QLabel>
 #include <QRadioButton>
@@ -52,6 +51,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGridLayout>
+#include <QListWidget>
 
 using namespace Tellico;
 using Tellico::FieldListItem;
@@ -91,7 +91,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   QBoxLayout* fieldsLayout = new QVBoxLayout(fieldsGroup);
   topLayout->addWidget(fieldsGroup, 1);
 
-  m_fieldsWidget = new KListWidget(fieldsGroup);
+  m_fieldsWidget = new QListWidget(fieldsGroup);
   m_fieldsWidget->setMinimumWidth(150);
   fieldsLayout->addWidget(m_fieldsWidget);
 

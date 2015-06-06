@@ -40,7 +40,6 @@
 #include <KConfigGroup>
 #include <KLineEdit>
 #include <KIntSpinBox>
-#include <KListWidget>
 #include <kio/job.h>
 #include <KJobUiDelegate>
 #include <KAcceleratorManager>
@@ -54,6 +53,7 @@
 #include <QGroupBox>
 #include <QGridLayout>
 #include <QVBoxLayout>
+#include <QListWidget>
 
 namespace {
   static const uint IMDB_MAX_RESULTS = 20;
@@ -813,7 +813,7 @@ void IMDBFetcher::parseMultipleNameResults() {
   boxVBoxLayout->setSpacing(10);
   (void) new QLabel(i18n("<qt>Your search returned multiple matches. Please select one below.</qt>"), box);
 
-  KListWidget* listWidget = new KListWidget(box);
+  QListWidget* listWidget = new QListWidget(box);
   boxVBoxLayout->addWidget(listWidget);
   listWidget->setMinimumWidth(400);
   listWidget->setWrapping(true);

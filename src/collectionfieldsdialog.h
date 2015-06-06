@@ -32,8 +32,8 @@
 class KComboBox;
 class KLineEdit;
 class KPushButton;
-class KListWidget;
 
+class QListWidget;
 class QRadioButton;
 class QCheckBox;
 class QPainter;
@@ -107,7 +107,7 @@ private:
   enum NotifyMode { NotifyKernel, NoNotification };
   NotifyMode m_notifyMode;
 
-  KListWidget* m_fieldsWidget;
+  QListWidget* m_fieldsWidget;
   KPushButton* m_btnNew;
   KPushButton* m_btnDelete;
   KPushButton* m_btnUp;
