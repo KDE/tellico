@@ -137,8 +137,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  QUrl u;
-  u.setPath(m_xsltFile);
+  QUrl u = QUrl::fromLocalFile(m_xsltFile);
   begin(u);
 
   Export::TellicoXMLExporter exporter(entry_->collection());
@@ -420,6 +419,6 @@ void EntryView::resetColors() {
 
   // don't flicker
   view()->setUpdatesEnabled(false);
-  openUrl(m_tempFile->fileName());
+  openUrl(QUrl::fromLocalFile(m_tempFile->fileName()));
   connect(this, SIGNAL(completed()), SLOT(slotReloadEntry()));
 }
