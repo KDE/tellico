@@ -183,4 +183,25 @@ void FilterTest::testFilter() {
 
   entry->setField(QLatin1String("number"), QLatin1String("6"));
   QVERIFY(filter.matches(entry));
+
+  // check that a rating can use greater than
+  Tellico::Data::FieldPtr rating(new Tellico::Data::Field(QLatin1String("rating"),
+                                                          QLatin1String("Rating"),
+                                                          Tellico::Data::Field::Rating));
+  coll->addField(rating);
+  entry->setField(QLatin1String("rating"), QLatin1String("3"));
+
+  Tellico::FilterRule* rule8 = new Tellico::FilterRule(QLatin1String("rating"),
+                                                       QLatin1String("2.0"),
+                                                       Tellico::FilterRule::FuncGreater);
+  QCOMPARE(rule8->pattern(), QLatin1String("2.0"));
+  filter.clear();
+  filter.append(rule8);
+  QVERIFY(filter.matches(entry));
+
+  rule8->setFunction(Tellico::FilterRule::FuncLess);
+  QVERIFY(!filter.matches(entry));
+
+  entry->setField(QLatin1String("rating"), QLatin1String("1"));
+  QVERIFY(filter.matches(entry));
 }
