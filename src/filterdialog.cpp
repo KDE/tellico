@@ -153,7 +153,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   if(field) {
     if(field->type() == Data::Field::Date) {
       m_ruleType = Date;
-    } else if(field->type() == Data::Field::Number) {
+    } else if(field->type() == Data::Field::Number || field->type() == Data::Field::Rating) {
       m_ruleType = Number;
     }
   }
