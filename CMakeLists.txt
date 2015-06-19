@@ -91,7 +91,7 @@ set_package_properties(KF5FileMetaData PROPERTIES
 
 find_package(QImageBlitz 5.0)
 set_package_properties(QImageBlitz PROPERTIES
-    DESCRIPTION "Support for fancy image gradients in the default template"
+    DESCRIPTION "Support for image gradients in the default template"
     URL "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qimageblitz/html/"
     TYPE OPTIONAL)
 if(QIMAGEBLITZ_FOUND)
@@ -248,7 +248,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 #                ${KDE4_DEFINITIONS}
 #                ${YAZ_CFLAGS})
 add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
-remove_definitions(-DQT_NO_STL -DQT3_SUPPORT)
+remove_definitions(-DQT_NO_STL)
 
 include_directories(${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
