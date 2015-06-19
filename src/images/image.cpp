@@ -113,7 +113,9 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
   QBuffer buf(&ba);
   buf.open(QIODevice::WriteOnly);
   QImageWriter writer(&buf, outputFormat_);
-  writer.write(img_);
+  if(!writer.write(img_)) {
+    myDebug() << writer.errorString();
+  }
   buf.close();
   return ba;
 }

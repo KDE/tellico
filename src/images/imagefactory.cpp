@@ -545,7 +545,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
 #else
-  QImage bgImage;
+  QImage bgImage(QSize(400, 1), QImage::Format_RGB32);
   bgImage.fill(bgc1);
 #endif
   bgImage = bgImage.transformed(QTransform().rotate(90));
@@ -555,7 +555,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
                                               Blitz::VerticalGradient, 100, -100);
 #else
-  QImage hdrImage;
+  QImage hdrImage(QSize(1, 10), QImage::Format_RGB32);
   hdrImage.fill(bgc2);
 #endif
 
