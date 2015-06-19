@@ -1419,8 +1419,7 @@ void MainWindow::slotHideConfigDialog() {
 }
 
 void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
-  QString tipfile = DataFileRegistry::self()->locate(QLatin1String("tellico.tips"));
-  KTipDialog::showTip(this, tipfile, force_);
+  KTipDialog::showTip(this, QLatin1String("tellico/tellico.tips"), force_);
 }
 
 void MainWindow::slotStatusMsg(const QString& text_) {
