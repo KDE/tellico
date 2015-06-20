@@ -60,7 +60,8 @@ QString ImageDirectory::path() {
     }
     setPath(m_dir->path());
   }
-  return m_path;
+  // in KDE4, the way this worked included the final slash.
+  return m_path + QLatin1Char('/');
 }
 
 void ImageDirectory::setPath(const QString& path_) {
@@ -112,7 +113,6 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     m_pathExists = true;
   }
   QUrl target = QUrl::fromLocalFile(path);
-  target = target.adjusted(QUrl::RemoveFilename);
   target.setPath(target.path() + img_.id());
   return FileHandler::writeDataURL(target, img_.byteArray(), true /* force */);
 }

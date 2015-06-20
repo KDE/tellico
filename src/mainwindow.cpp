@@ -803,12 +803,12 @@ void MainWindow::initFileOpen(bool nofile_) {
 
     const int type = Kernel::self()->collectionType();
     QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));
-    QString text = FileHandler::readTextFile(welcomeFile);
+    QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
     text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
     text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
     text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
     text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
-    text.replace(QLatin1String("$IMGDIR$"),  ImageFactory::tempDir());
+    text.replace(QLatin1String("$IMGDIR$"),  QUrl::fromLocalFile(ImageFactory::tempDir()).url());
     text.replace(QLatin1String("$BANNER$"),
                  i18n("Welcome to the Tellico Collection Manager"));
     text.replace(QLatin1String("$WELCOMETEXT$"),
