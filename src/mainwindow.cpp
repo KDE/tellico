@@ -94,11 +94,11 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <KShortcutsDialog>
-#include <kundostack.h>
 #include <KTabWidget>
 #include <KIcon>
 #include <KAction>
 
+#include <QUndoStack>
 #include <QSplitter>
 #include <QAction>
 #include <QSignalMapper>
@@ -460,8 +460,8 @@ void MainWindow::initActions() {
   /*************************************************
    * Edit menu
    *************************************************/
-  Kernel::self()->commandHistory()->createUndoAction(actionCollection());
-  Kernel::self()->commandHistory()->createRedoAction(actionCollection());
+  KStandardAction::undo(Kernel::self()->commandHistory(), SLOT(undo()), actionCollection());
+  KStandardAction::redo(Kernel::self()->commandHistory(), SLOT(undo()), actionCollection());
 
   action = KStandardAction::cut(this, SLOT(slotEditCut()), actionCollection());
   action->setToolTip(i18n("Cut the selected text and puts it in the clipboard"));
@@ -478,14 +478,14 @@ void MainWindow::initActions() {
   action->setText(i18n("Internet Search..."));
   action->setIconText(i18n("Search"));  // find a better word for this?
   action->setIcon(QIcon::fromTheme(QLatin1String("tools-wizard")));
-  action->setShortcut(Qt::CTRL + Qt::Key_I);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_I);
   action->setToolTip(i18n("Search the internet..."));
 
   action = actionCollection()->addAction(QLatin1String("filter_dialog"), this, SLOT(slotShowFilterDialog()));
   action->setText(i18n("Advanced &Filter..."));
   action->setIconText(i18n("Filter"));
   action->setIcon(QIcon::fromTheme(QLatin1String("view-filter")));
-  action->setShortcut(Qt::CTRL + Qt::Key_J);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_J);
   action->setToolTip(i18n("Filter the collection"));
 
   /*************************************************
@@ -496,28 +496,28 @@ void MainWindow::initActions() {
   m_newEntry->setText(i18n("&New Entry..."));
   m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   m_newEntry->setIconText(i18n("New"));
-  m_newEntry->setShortcut(Qt::CTRL + Qt::Key_N);
+  actionCollection()->setDefaultShortcut(m_newEntry, Qt::CTRL + Qt::Key_N);
   m_newEntry->setToolTip(i18n("Create a new entry"));
 
   m_editEntry = actionCollection()->addAction(QLatin1String("coll_edit_entry"),
                                               this, SLOT(slotShowEntryEditor()));
   m_editEntry->setText(i18n("&Edit Entry..."));
   m_editEntry->setIcon(QIcon::fromTheme(QLatin1String("document-properties")));
-  m_editEntry->setShortcut(Qt::CTRL + Qt::Key_E);
+  actionCollection()->setDefaultShortcut(m_editEntry, Qt::CTRL + Qt::Key_E);
   m_editEntry->setToolTip(i18n("Edit the selected entries"));
 
   m_copyEntry = actionCollection()->addAction(QLatin1String("coll_copy_entry"),
                                               Controller::self(), SLOT(slotCopySelectedEntries()));
   m_copyEntry->setText(i18n("D&uplicate Entry"));
   m_copyEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-copy")));
-  m_copyEntry->setShortcut(Qt::CTRL + Qt::Key_Y);
+  actionCollection()->setDefaultShortcut(m_copyEntry, Qt::CTRL + Qt::Key_Y);
   m_copyEntry->setToolTip(i18n("Copy the selected entries"));
 
   m_deleteEntry = actionCollection()->addAction(QLatin1String("coll_delete_entry"),
                                                 Controller::self(), SLOT(slotDeleteSelectedEntries()));
   m_deleteEntry->setText(i18n("&Delete Entry"));
   m_deleteEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
-  m_deleteEntry->setShortcut(Qt::CTRL + Qt::Key_D);
+  actionCollection()->setDefaultShortcut(m_deleteEntry, Qt::CTRL + Qt::Key_D);
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
 
   m_mergeEntry = actionCollection()->addAction(QLatin1String("coll_merge_entry"),
@@ -525,7 +525,7 @@ void MainWindow::initActions() {
   m_mergeEntry->setText(i18n("&Merge Entries"));
   m_mergeEntry->setIcon(QIcon::fromTheme(QLatin1String("document-import")));
 //  CTRL+G is ambiguous, pick another
-//  m_mergeEntry->setShortcut(Qt::CTRL + Qt::Key_G);
+//  actionCollection()->setDefaultShortcut(m_mergeEntry, Qt::CTRL + Qt::Key_G);
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
   m_mergeEntry->setEnabled(false); // gets enabled when more than 1 entry is selected
 
@@ -542,14 +542,14 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("coll_rename_collection"), this, SLOT(slotRenameCollection()));
   action->setText(i18n("&Rename Collection..."));
   action->setIcon(QIcon::fromTheme(QLatin1String("edit-rename")));
-  action->setShortcut(Qt::CTRL + Qt::Key_R);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_R);
   action->setToolTip(i18n("Rename the collection"));
 
   action = actionCollection()->addAction(QLatin1String("coll_fields"), this, SLOT(slotShowCollectionFieldsDialog()));
   action->setText(i18n("Collection &Fields..."));
   action->setIconText(i18n("Fields"));
   action->setIcon(QIcon::fromTheme(QLatin1String("preferences-other")));
-  action->setShortcut(Qt::CTRL + Qt::Key_U);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_U);
   action->setToolTip(i18n("Modify the collection fields"));
 
   action = actionCollection()->addAction(QLatin1String("coll_reports"), this, SLOT(slotShowReportDialog()));
@@ -630,20 +630,15 @@ void MainWindow::initActions() {
   /*************************************************
    * Short cuts
    *************************************************/
-  QAction* toggleFullScreenAction = KStandardAction::create(KStandardAction::FullScreen, this,
-                                                            SLOT(slotToggleFullScreen()), this);
-  actionCollection()->addAction(toggleFullScreenAction->text(), toggleFullScreenAction);
-
-  QAction* toggleMenubarAction = KStandardAction::create(KStandardAction::ShowMenubar, this,
-                                                         SLOT(slotToggleMenuBarVisibility()), this);
-  actionCollection()->addAction(toggleMenubarAction->text(), toggleMenubarAction);
+  KStandardAction::fullScreen(this, SLOT(slotToggleFullScreen()), this, actionCollection());
+  KStandardAction::showMenubar(this, SLOT(slotToggleMenuBarVisibility()), actionCollection());
 
   /*************************************************
    * Collection Toolbar
    *************************************************/
   action = actionCollection()->addAction(QLatin1String("change_entry_grouping_accel"), this, SLOT(slotGroupLabelActivated()));
   action->setText(i18n("Change Grouping"));
-  action->setShortcut(Qt::CTRL + Qt::Key_G);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_G);
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
@@ -655,7 +650,7 @@ void MainWindow::initActions() {
 
   action = actionCollection()->addAction(QLatin1String("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
   action->setText(i18n("Filter"));
-  action->setShortcut(Qt::CTRL + Qt::Key_F);
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_F);
 
   m_quickFilter = new GUI::LineEdit(this);
   m_quickFilter->setClickMessage(i18n("Filter here...")); // same text as kdepim and amarok

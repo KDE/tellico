@@ -28,8 +28,7 @@
 #include "datavectors.h"
 #include "borrower.h"
 
-class KUndoStack;
-
+class QUndoStack;
 class QWidget;
 class QString;
 class QStringList;
@@ -123,7 +122,7 @@ public:
   void replaceCollection(Data::CollPtr coll);
 
   void renameCollection();
-  KUndoStack* commandHistory() { return m_commandHistory; }
+  QUndoStack* commandHistory() { return m_commandHistory; }
 
   int askAndMerge(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
                   QString value1 = QString(), QString value2 = QString());
@@ -139,7 +138,7 @@ private:
   void doCommand(QUndoCommand* command);
 
   QWidget* m_widget;
-  KUndoStack* m_commandHistory;
+  QUndoStack* m_commandHistory;
 };
 
 } // end namespace

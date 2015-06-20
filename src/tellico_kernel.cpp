@@ -48,15 +48,15 @@
 #include <kmessagebox.h>
 #include <kiconloader.h>
 #include <KLocalizedString>
-#include <kundostack.h>
 
 #include <QInputDialog>
+#include <QUndoStack>
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;
 
 Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
-    , m_commandHistory(new KUndoStack(parent)) {
+    , m_commandHistory(new QUndoStack(parent)) {
 }
 
 QUrl Kernel::URL() const {
