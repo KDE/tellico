@@ -134,7 +134,6 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
-//  myDebug();
 
   button(m_newBtn)->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
@@ -270,7 +269,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 // this doesn't seem to work
 //  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
 // so do this instead
-  layout()->invalidate(); // needed so the sizeHint() gets recalculated
+//  layout()->invalidate(); // needed so the sizeHint() gets recalculated
   m_tabs->setMinimumHeight(m_tabs->minimumSizeHint().height());
   m_tabs->setMinimumWidth(m_tabs->sizeHint().width());
 
