@@ -624,7 +624,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_charSetCombo->addItem(QLatin1String("marc8"));
   m_charSetCombo->addItem(QLatin1String("iso-8859-1"));
   m_charSetCombo->addItem(QLatin1String("utf-8"));
-  connect(m_charSetCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_charSetCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_charSetCombo, row, 1);
   w = i18n("Enter the character set encoding used by the z39.50 server. The most likely choice "
            "is MARC-8, although ISO-8859-1 is common as well.");
@@ -642,7 +642,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_syntaxCombo->addItem(QLatin1String("USMARC"), QLatin1String("usmarc"));
   m_syntaxCombo->addItem(QLatin1String("ADS"), QLatin1String("ads"));
   m_syntaxCombo->addItem(QLatin1String("GRS-1"), QLatin1String("grs-1"));
-  connect(m_syntaxCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_syntaxCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_syntaxCombo, row, 1);
   w = i18n("Enter the data format used by the z39.50 server. Tellico will attempt to "
            "automatically detect the best setting if <i>auto-detect</i> is selected.");

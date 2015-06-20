@@ -1402,7 +1402,7 @@ void MainWindow::slotShowConfigDialog() {
     m_configDlg->show();
     connect(m_configDlg, SIGNAL(signalConfigChanged()),
             SLOT(slotHandleConfigChange()));
-    connect(m_configDlg, SIGNAL(finished()),
+    connect(m_configDlg, SIGNAL(finished(int)),
             SLOT(slotHideConfigDialog()));
   } else {
     KWindowSystem::activateWindow(m_configDlg->winId());

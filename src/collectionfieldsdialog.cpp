@@ -211,7 +211,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   }
   m_catCombo->addItems(cats);
   m_catCombo->setDuplicatesEnabled(false);
-  connect(m_catCombo, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_catCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotModified()));
 
   m_btnExtended = new KPushButton(i18n("Set &properties..."), grid);
   m_btnExtended->setIcon(QIcon::fromTheme(QLatin1String("bookmarks")));
