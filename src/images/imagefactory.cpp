@@ -526,7 +526,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                                               Blitz::VerticalGradient, 100, -100);
 #else
   QImage hdrImage(QSize(1, 10), QImage::Format_RGB32);
-  hdrImage.fill(bgc2);
+  hdrImage.fill(highColor);
 #endif
 
   if(opt_.imgDir.isEmpty()) {
