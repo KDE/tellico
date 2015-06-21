@@ -29,8 +29,6 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <klineedit.h>
-
 #include <QPointer>
 
 class KJob;

@@ -28,8 +28,7 @@
 #include "importer.h"
 
 class QCheckBox;
-
-class KLineEdit;
+class QLineEdit;
 
 namespace Tellico {
   namespace Import {
@@ -60,7 +59,7 @@ private:
   bool m_cancelled;
 
   QWidget* m_widget;
-  KLineEdit* m_userEdit;
+  QLineEdit* m_userEdit;
   QCheckBox* m_checkOwned;
 
   QUrl m_xsltURL;

@@ -25,10 +25,9 @@
 #ifndef TELLICO_STRINGMAPDIALOG_H
 #define TELLICO_STRINGMAPDIALOG_H
 
-#include <kdialog.h>
+#include <KDialog>
 
-class KLineEdit;
-
+class QLineEdit;
 class QTreeWidget;
 class QTreeWidgetItem;
 template <typename T1, typename T2>
@@ -74,8 +73,8 @@ private slots:
 
 protected:
   QTreeWidget* m_treeWidget;
-  KLineEdit* m_edit1;
-  KLineEdit* m_edit2;
+  QLineEdit* m_edit1;
+  QLineEdit* m_edit2;
 };
 
 } // end namespace

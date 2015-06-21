@@ -28,7 +28,7 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
-class KLineEdit;
+class QLineEdit;
 
 namespace Tellico {
   namespace GUI {
@@ -60,7 +60,7 @@ private:
   void initLineEdit();
   void initSpinBox();
 
-  KLineEdit* m_lineEdit;
+  QLineEdit* m_lineEdit;
   SpinBox* m_spinBox;
 };
 

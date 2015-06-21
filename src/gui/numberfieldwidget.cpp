@@ -28,8 +28,7 @@
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 
-#include <klineedit.h>
-
+#include <QLineEdit>
 #include <QValidator>
 #include <QBoxLayout>
 
@@ -48,7 +47,7 @@ NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
 }
 
 void NumberFieldWidget::initLineEdit() {
-  m_lineEdit = new KLineEdit(this);
+  m_lineEdit = new QLineEdit(this);
   connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
 
   // regexp is any number of digits followed optionally by any number of

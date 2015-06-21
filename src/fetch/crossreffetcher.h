@@ -32,7 +32,8 @@
 #include <QPointer>
 
 class QUrl;
-class KLineEdit;
+class QLineEdit;
+
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -72,9 +73,9 @@ public:
     virtual void saveConfigHook(KConfigGroup& config);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_userEdit;
-    KLineEdit* m_passEdit;
-    KLineEdit* m_emailEdit;
+    QLineEdit* m_userEdit;
+    QLineEdit* m_passEdit;
+    QLineEdit* m_emailEdit;
   };
   friend class ConfigWidget;
 

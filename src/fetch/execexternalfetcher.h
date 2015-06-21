@@ -33,11 +33,11 @@
 
 class KProcess;
 class KUrlRequester;
-class KLineEdit;
 class KComboBox;
 class KConfig;
 
 class QCheckBox;
+class QLineEdit;
 
 namespace Tellico {
   namespace GUI {

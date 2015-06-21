@@ -27,7 +27,7 @@
 
 #include "importer.h"
 
-class KLineEdit;
+class QLineEdit;
 
 namespace Tellico {
   namespace Import {
@@ -57,7 +57,7 @@ private:
 
   Data::CollPtr m_coll;
   QWidget* m_widget;
-  KLineEdit* m_userEdit;
+  QLineEdit* m_userEdit;
 
   QUrl m_xsltURL;
   QString m_user;

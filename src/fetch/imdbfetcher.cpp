@@ -38,13 +38,13 @@
 #include <KLocalizedString>
 #include <KDialog>
 #include <KConfigGroup>
-#include <KLineEdit>
 #include <KIntSpinBox>
 #include <kio/job.h>
 #include <KJobUiDelegate>
 #include <KAcceleratorManager>
 #include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QRegExp>
 #include <QFile>
 #include <QMap>

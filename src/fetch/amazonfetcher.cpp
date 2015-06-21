@@ -44,12 +44,12 @@
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <kconfig.h>
-#include <klineedit.h>
 #include <kseparator.h>
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
 #include <KConfigGroup>
 
+#include <QLineEdit>
 #include <QDomDocument>
 #include <QLabel>
 #include <QCheckBox>
@@ -920,7 +920,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_accessEdit = new KLineEdit(optionsWidget());
+  m_accessEdit = new QLineEdit(optionsWidget());
   connect(m_accessEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_accessEdit, row, 1);
   QString w = i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.");
@@ -930,7 +930,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   label = new QLabel(i18n("Secret key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_secretKeyEdit = new KLineEdit(optionsWidget());
+  m_secretKeyEdit = new QLineEdit(optionsWidget());
 //  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_secretKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_secretKeyEdit, row, 1);
@@ -976,7 +976,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   label = new QLabel(i18n("&Associate's ID: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_assocEdit = new KLineEdit(optionsWidget());
+  m_assocEdit = new QLineEdit(optionsWidget());
   connect(m_assocEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_assocEdit, row, 1);
   w = i18n("The associate's id identifies the person accessing the Amazon.com Web Services, and is included "

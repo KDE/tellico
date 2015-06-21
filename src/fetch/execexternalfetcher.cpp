@@ -390,7 +390,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     gridLayout->addWidget(cb, ++row, 0);
     m_cbDict.insert(key, cb);
     GUI::LineEdit* le = new GUI::LineEdit(gbox);
-    le->setClickMessage(QLatin1String("%1")); // for example
+    le->setPlaceholderText(QLatin1String("%1")); // for example
     le->completionObject()->addItem(QLatin1String("%1"));
     gridLayout->addWidget(le, row, 1);
     m_leDict.insert(key, le);
@@ -409,7 +409,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_cbUpdate = new QCheckBox(i18n("Update"), gbox);
   gridLayout->addWidget(m_cbUpdate, ++row, 0);
   m_leUpdate = new GUI::LineEdit(gbox);
-  m_leUpdate->setClickMessage(QLatin1String("%{title}")); // for example
+  m_leUpdate->setPlaceholderText(QLatin1String("%{title}")); // for example
   m_leUpdate->completionObject()->addItem(QLatin1String("%{title}"));
   m_leUpdate->completionObject()->addItem(QLatin1String("%{isbn}"));
   gridLayout->addWidget(m_leUpdate, row, 1);
@@ -470,7 +470,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
     }
     FetchKey key = static_cast<FetchKey>(*it);
     QCheckBox* cb = m_cbDict[key];
-    KLineEdit* le = m_leDict[key];
+    QLineEdit* le = m_leDict[key];
     if(cb && le) {
       if(args.contains(key)) {
         cb->setChecked(true);

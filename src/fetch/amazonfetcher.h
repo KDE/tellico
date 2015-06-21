@@ -34,8 +34,7 @@
 #include <QPointer>
 #include <QLabel>
 
-class KLineEdit;
-
+class QLineEdit;
 class QCheckBox;
 class QLabel;
 
@@ -161,9 +160,9 @@ private slots:
   void slotSiteChanged();
 
 private:
-  KLineEdit* m_accessEdit;
-  KLineEdit* m_secretKeyEdit;
-  KLineEdit* m_assocEdit;
+  QLineEdit* m_accessEdit;
+  QLineEdit* m_secretKeyEdit;
+  QLineEdit* m_assocEdit;
   GUI::ComboBox* m_siteCombo;
   GUI::ComboBox* m_imageCombo;
 };

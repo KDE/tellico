@@ -37,9 +37,9 @@
 #include <kio/job.h>
 #include <KJobUiDelegate>
 #include <KConfigGroup>
-#include <KLineEdit>
 #include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QDomDocument>
 #include <QLabel>
 #include <QFile>
@@ -310,7 +310,7 @@ WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetche
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);

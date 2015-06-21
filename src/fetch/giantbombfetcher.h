@@ -29,7 +29,7 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <klineedit.h>
+#include <QLineEdit>
 
 namespace Tellico {
 
@@ -70,7 +70,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_apiKeyEdit;
+    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 

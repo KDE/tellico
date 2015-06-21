@@ -29,11 +29,11 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KLineEdit>
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KLocalizedString>
 
+#include <QLineEdit>
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QGroupBox>
@@ -126,7 +126,7 @@ QWidget* GoodreadsImporter::widget(QWidget* parent_) {
   QGroupBox* gbox = new QGroupBox(i18n("Goodreads Options"), m_widget);
   QFormLayout* lay = new QFormLayout(gbox);
 
-  m_userEdit = new KLineEdit(gbox);
+  m_userEdit = new QLineEdit(gbox);
   m_userEdit->setText(m_user);
 
   lay->addRow(i18n("User ID"), m_userEdit);

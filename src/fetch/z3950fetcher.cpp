@@ -653,7 +653,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   label = new QLabel(i18n("&User: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_userEdit = new GUI::LineEdit(optionsWidget());
-  m_userEdit->setClickMessage(i18n("Optional"));
+  m_userEdit->setPlaceholderText(i18n("Optional"));
   connect(m_userEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_userEdit, row, 1);
   w = i18n("Enter the authentication user name used by the z39.50 database. Most servers "
@@ -665,7 +665,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   label = new QLabel(i18n("Pass&word: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_passwordEdit = new GUI::LineEdit(optionsWidget());
-  m_passwordEdit->setClickMessage(i18n("Optional"));
+  m_passwordEdit->setPlaceholderText(i18n("Optional"));
   m_passwordEdit->setEchoMode(QLineEdit::Password);
   connect(m_passwordEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passwordEdit, row, 1);

@@ -32,7 +32,6 @@
 
 #include <QPointer>
 
-class KLineEdit;
 class KIntSpinBox;
 class KJob;
 namespace KIO {
@@ -40,6 +39,7 @@ namespace KIO {
   class StoredTransferJob;
 }
 
+class QLineEdit;
 class QCheckBox;
 class QRegExpr;
 
@@ -195,7 +195,7 @@ private slots:
   void slotSiteChanged();
 
 private:
-  KLineEdit* m_hostEdit;
+  QLineEdit* m_hostEdit;
   //GUI::ComboBox* m_langCombo;
   QCheckBox* m_fetchImageCheck;
   KIntSpinBox* m_numCast;

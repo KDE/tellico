@@ -28,7 +28,7 @@
 #include "xmlfetcher.h"
 #include "configwidget.h"
 
-class KLineEdit;
+class QLineEdit;
 
 namespace Tellico {
   namespace Fetch {
@@ -57,7 +57,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_tokenEdit;
+    QLineEdit* m_tokenEdit;
   };
   friend class ConfigWidget;
 

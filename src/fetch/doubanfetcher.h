@@ -32,11 +32,12 @@
 #include <QPointer>
 #include <QVariantMap>
 
+class QLineEdit;
+
 class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
-class KLineEdit;
 
 namespace Tellico {
   namespace Fetch {
@@ -74,7 +75,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_apiKeyEdit;
+    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 

@@ -30,11 +30,11 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <KLineEdit>
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
 
+#include <QLineEdit>
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QGroupBox>
@@ -212,7 +212,7 @@ QWidget* BoardGameGeekImporter::widget(QWidget* parent_) {
   QGroupBox* gbox = new QGroupBox(i18n("BoardGameGeek Options"), m_widget);
   QFormLayout* lay = new QFormLayout(gbox);
 
-  m_userEdit = new KLineEdit(gbox);
+  m_userEdit = new QLineEdit(gbox);
   m_userEdit->setText(m_user);
 
   m_checkOwned = new QCheckBox(i18n("Import owned items only"), gbox);

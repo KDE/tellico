@@ -32,8 +32,8 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <KLineEdit>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -238,7 +238,7 @@ DoubanFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DoubanFetcher*
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);

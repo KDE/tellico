@@ -36,10 +36,10 @@
 #include <KLocalizedString>
 #include <kio/job.h>
 #include <KJobUiDelegate>
-#include <KLineEdit>
 #include <KConfigGroup>
 #include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -952,7 +952,7 @@ FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetc
   QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");

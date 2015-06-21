@@ -30,10 +30,10 @@
 
 class CSVImporterWidget;
 
-class KLineEdit;
 class KComboBox;
 class KIntSpinBox;
 
+class QLineEdit;
 class QPushButton;
 class QCheckBox;
 class QRadioButton;
@@ -103,9 +103,9 @@ private:
   QRadioButton* m_radioSemicolon;
   QRadioButton* m_radioTab;
   QRadioButton* m_radioOther;
-  KLineEdit* m_editOther;
-  KLineEdit* m_editColDelimiter;
-  KLineEdit* m_editRowDelimiter;
+  QLineEdit* m_editOther;
+  QLineEdit* m_editColDelimiter;
+  QLineEdit* m_editRowDelimiter;
   QTableWidget* m_table;
   KIntSpinBox* m_colSpinBox;
   KComboBox* m_comboField;

@@ -32,7 +32,6 @@
 #include "../gui/collectiontypecombo.h"
 #include "../utils/stringset.h"
 
-#include <KLineEdit>
 #include <KComboBox>
 #include <KIntSpinBox>
 #include <KIconLoader>
@@ -40,6 +39,7 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 
+#include <QLineEdit>
 #include <QPushButton>
 #include <QGroupBox>
 #include <QLabel>
@@ -241,7 +241,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
   delimiterLayout->addWidget(m_radioOther);
 
-  m_editOther = new KLineEdit(groupBox);
+  m_editOther = new QLineEdit(groupBox);
   m_editOther->setEnabled(false);
   m_editOther->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editOther->setMaxLength(1);
@@ -267,7 +267,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   lab = new QLabel(i18n("Table column delimiter:"), groupBox);
   lab->setWhatsThis(w);
   delimiterLayout2->addWidget(lab);
-  m_editColDelimiter = new KLineEdit(groupBox);
+  m_editColDelimiter = new QLineEdit(groupBox);
   m_editColDelimiter->setWhatsThis(w);
   m_editColDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editColDelimiter->setMaxLength(1);
@@ -278,7 +278,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   lab = new QLabel(i18n("Table row delimiter:"), groupBox);
   lab->setWhatsThis(w);
   delimiterLayout2->addWidget(lab);
-  m_editRowDelimiter = new KLineEdit(groupBox);
+  m_editRowDelimiter = new QLineEdit(groupBox);
   m_editRowDelimiter->setWhatsThis(w);
   m_editRowDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editRowDelimiter->setMaxLength(1);

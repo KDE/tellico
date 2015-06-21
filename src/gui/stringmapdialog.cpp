@@ -25,7 +25,6 @@
 #include "stringmapdialog.h"
 
 #include <KLocalizedString>
-#include <klineedit.h>
 #include <kiconloader.h>
 #include <kdialogbuttonbox.h>
 
@@ -34,6 +33,7 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLineEdit>
 
 using Tellico::StringMapDialog;
 
@@ -59,10 +59,10 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   boxHBoxLayout->setSpacing(KDialog::spacingHint());
   l->addWidget(box);
 
-  m_edit1 = new KLineEdit(box);
+  m_edit1 = new QLineEdit(box);
   boxHBoxLayout->addWidget(m_edit1);
   m_edit1->setFocus();
-  m_edit2 = new KLineEdit(box);
+  m_edit2 = new QLineEdit(box);
   boxHBoxLayout->addWidget(m_edit2);
 
   KDialogButtonBox* bb = new KDialogButtonBox(box);

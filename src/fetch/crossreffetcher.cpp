@@ -36,12 +36,12 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <klineedit.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
 #include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -317,7 +317,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 
   QLabel* label = new QLabel(i18n("&Username: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_userEdit = new KLineEdit(optionsWidget());
+  m_userEdit = new QLineEdit(optionsWidget());
   connect(m_userEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_userEdit, row, 1);
   QString w = i18n("A username and password is required to access the CrossRef service.");
@@ -327,7 +327,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 
   label = new QLabel(i18n("&Password: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_passEdit = new KLineEdit(optionsWidget());
+  m_passEdit = new QLineEdit(optionsWidget());
 //  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_passEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passEdit, row, 1);
@@ -340,7 +340,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
 
   label = new QLabel(i18n("Email: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_emailEdit = new KLineEdit(optionsWidget());
+  m_emailEdit = new QLineEdit(optionsWidget());
   connect(m_emailEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_emailEdit, row, 1);
   label->setBuddy(m_emailEdit);

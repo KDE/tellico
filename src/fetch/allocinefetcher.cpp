@@ -35,7 +35,6 @@
 #include <KLocalizedString>
 #include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
-#include <KLineEdit>
 #include <KIntSpinBox>
 
 #include <QUrl>
