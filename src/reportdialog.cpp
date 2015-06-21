@@ -35,11 +35,11 @@
 #include "utils/cursorsaver.h"
 #include "core/tellico_config.h"
 #include "utils/datafileregistry.h"
+#include "utils/tellico_utils.h"
 
 #include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <kstandarddirs.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
@@ -78,8 +78,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QLabel* l = new QLabel(i18n("&Report template:"), mainWidget);
   hlay->addWidget(l);
 
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("report-templates/*.xsl"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/report-templates/*.xsl"));
   QMap<QString, QString> templates; // gets sorted by title
   foreach(const QString& file, files) {
     QFileInfo fi(file);

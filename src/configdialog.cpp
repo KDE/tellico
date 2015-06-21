@@ -48,7 +48,6 @@
 #include <klineedit.h>
 #include <KLocalizedString>
 #include <kconfig.h>
-#include <kstandarddirs.h>
 #include <KIntSpinBox>
 #include <kpushbutton.h>
 #include <kiconloader.h>
@@ -1131,8 +1130,7 @@ void ConfigDialog::slotShowTemplatePreview() {
 }
 
 void ConfigDialog::loadTemplateList() {
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("entry-templates/*.xsl"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/entry-templates/*.xsl"));
   QMap<QString, QString> templates; // a QMap will have them values sorted by key
   foreach(const QString& file, files) {
     QFileInfo fi(file);

@@ -42,6 +42,10 @@ namespace Tellico {
    * Symbolic links are ignored
    */
   QStringList findAllSubDirs(const QString& dir);
+  /**
+   * Does something similar to KDE4 KStandardDirs::findALlResources with wildcards
+   */
+  QStringList locateAllFiles(const QString& fileName);
 
   QString saveLocation(const QString& dir);
 

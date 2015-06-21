@@ -31,6 +31,7 @@
 #include "../collection.h"
 #include "../document.h"
 #include "../utils/string_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #ifdef HAVE_YAZ
@@ -42,7 +43,6 @@
 #include <KGlobal>
 #include <KLocalizedString>
 #include <kiconloader.h>
-#include <kstandarddirs.h>
 #include <kio/job.h>
 
 #include <QFileInfo>
@@ -379,8 +379,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   }
 
   // now find all the scripts distributed with tellico
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/data-sources/*.spec"));
   foreach(const QString& file, files) {
     KConfig spec(file, KConfig::SimpleConfig);
     KConfigGroup specConfig(&spec, QString());

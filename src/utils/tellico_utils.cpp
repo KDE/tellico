@@ -33,6 +33,7 @@
 #include <QPixmap>
 #include <QDateTime>
 #include <QUrl>
+#include <QSet>
 
 QStringList Tellico::findAllSubDirs(const QString& dir_) {
   if(dir_.isEmpty()) {
@@ -55,6 +56,26 @@ QStringList Tellico::findAllSubDirs(const QString& dir_) {
     allSubdirs += absSubdir;
   }
   return allSubdirs;
+}
+
+QStringList Tellico::locateAllFiles(const QString& fileName_) {
+  QStringList files;
+  QSet<QString> uniqueNames;
+
+  QString dirPart = fileName_.section(QLatin1Char('/'), 0, -2);
+  QString filePart = fileName_.section(QLatin1Char('/'), -1);
+
+  const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, dirPart, QStandardPaths::LocateDirectory);
+  foreach(const QString& dir, dirs) {
+    const QStringList fileNames = QDir(dir).entryList(QStringList() << filePart);
+    foreach(const QString& file, fileNames) {
+      if(!uniqueNames.contains(file)) {
+        files.append(dir + QLatin1Char('/') + file);
+        uniqueNames += file;
+      }
+    }
+  }
+  return files;
 }
 
 QString Tellico::saveLocation(const QString& dir_) {

@@ -39,7 +39,6 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <krun.h>
 #include <kmessagebox.h>
 #include <khtmlview.h>
@@ -288,7 +287,9 @@ void EntryView::setXSLTFile(const QString& file_) {
   }
 
   // look for a file that gets installed to know the installation directory
-  QString appdir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
+  QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("tellico/pics/tellico.png"));
+  // remove the file name and pics
+  appdir.chop(QString::fromLatin1("pics/tellico.png").length());
   m_handler->addStringParam("datadir", QFile::encodeName(appdir));
 
   // if we don't have to reload the images, then just show the entry and we're done

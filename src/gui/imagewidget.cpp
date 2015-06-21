@@ -33,7 +33,6 @@
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KStandardDirs>
 #include <KProgressDialog>
 #include <KProcess>
 #include <KMimeTypeTrader>
