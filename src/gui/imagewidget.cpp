@@ -33,7 +33,6 @@
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KPushButton>
 #include <KStandardDirs>
 #include <KProgressDialog>
 #include <KProcess>
@@ -41,6 +40,7 @@
 #include <KRun>
 #include <KSharedConfig>
 
+#include <QPushButton>
 #include <QMenu>
 #include <QMatrix>
 #include <QLabel>
@@ -95,12 +95,12 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
 
   boxLayout->addStretch(1);
 
-  KPushButton* button1 = new KPushButton(i18n("Select Image..."), this);
+  QPushButton* button1 = new QPushButton(i18n("Select Image..."), this);
   button1->setIcon(QIcon::fromTheme(QLatin1String("insert-image")));
   connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
   boxLayout->addWidget(button1);
 
-  KPushButton* button2 = new KPushButton(i18n("Scan Image..."), this);
+  QPushButton* button2 = new QPushButton(i18n("Scan Image..."), this);
   button2->setIcon(QIcon::fromTheme(QLatin1String("scanner")));
   connect(button2, SIGNAL(clicked()), this, SLOT(slotScanImage()));
   boxLayout->addWidget(button2);
@@ -143,7 +143,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   } else {
     m_edit->setEnabled(false);
   }
-  KPushButton* button4 = new KPushButton(i18nc("Clear image", "Clear"), this);
+  QPushButton* button4 = new QPushButton(i18nc("Clear image", "Clear"), this);
   button4->setIcon(QIcon::fromTheme(QLatin1String("edit-clear")));
   connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
   boxLayout->addWidget(button4);

@@ -28,11 +28,11 @@
 #include <QWidget>
 
 class KComboBox;
-class KPushButton;
 class KDatePicker;
 
 class QDate;
 class QMenu;
+class QPushButton;
 
 namespace Tellico {
   namespace GUI {
@@ -69,7 +69,7 @@ private:
   SpinBox* m_daySpin;
   KComboBox* m_monthCombo;
   SpinBox* m_yearSpin;
-  KPushButton* m_dateButton;
+  QPushButton* m_dateButton;
 
   QMenu* m_menu;
   KDatePicker* m_picker;

@@ -24,9 +24,8 @@
 
 #include "lineedit.h"
 
-#include <kstandardaction.h>
-#include <kactioncollection.h>
-#include <kaction.h>
+#include <KStandardAction>
+#include <KActionCollection>
 #include <sonnet/dialog.h>
 #include <sonnet/backgroundchecker.h>
 

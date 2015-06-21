@@ -29,12 +29,12 @@
 #include "datewidget.h"
 #include "spinbox.h"
 
-#include <kcombobox.h>
-#include <kpushbutton.h>
-#include <kdatepicker.h>
-#include <kiconloader.h>
-#include <kglobalsettings.h>
+#include <KComboBox>
+#include <KDatePicker>
+#include <KIconLoader>
+#include <KGlobalSettings>
 
+#include <QPushButton>
 #include <QHBoxLayout>
 #include <QFrame>
 #include <QEvent>
@@ -104,7 +104,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   connect(m_monthCombo, SIGNAL(activated(int)), SLOT(slotDateChanged()));
   connect(m_yearSpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
 
-  m_dateButton = new KPushButton(this);
+  m_dateButton = new QPushButton(this);
   m_dateButton->setIcon(QIcon::fromTheme(QLatin1String("view-pim-calendar")));
   connect(m_dateButton, SIGNAL(clicked()), SLOT(slotShowPicker()));
   l->addWidget(m_dateButton, 0);
