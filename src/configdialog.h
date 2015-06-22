@@ -27,17 +27,17 @@
 
 #include "fetch/fetcher.h"
 
-#include <kpagedialog.h>
+#include <KPageDialog>
 
 #include <QListWidget>
 
 class KConfig;
-class KLineEdit;
 class KIntSpinBox;
-class KPushButton;
 class KIntNumInput;
 class KColorCombo;
 
+class QPushButton;
+class QLineEdit;
 class QFontComboBox;
 class QCheckBox;
 class QRadioButton;
@@ -175,10 +175,10 @@ private:
   QCheckBox* m_cbEnableWebcam;
   QCheckBox* m_cbCapitalize;
   QCheckBox* m_cbFormat;
-  KLineEdit* m_leCapitals;
-  KLineEdit* m_leArticles;
-  KLineEdit* m_leSuffixes;
-  KLineEdit* m_lePrefixes;
+  QLineEdit* m_leCapitals;
+  QLineEdit* m_leArticles;
+  QLineEdit* m_leSuffixes;
+  QLineEdit* m_lePrefixes;
 
   QCheckBox* m_cbPrintHeaders;
   QCheckBox* m_cbPrintFormatted;
@@ -187,7 +187,7 @@ private:
   KIntSpinBox* m_imageHeightBox;
 
   GUI::ComboBox* m_templateCombo;
-  KPushButton* m_previewButton;
+  QPushButton* m_previewButton;
   QFontComboBox* m_fontCombo;
   KIntNumInput* m_fontSizeInput;
   KColorCombo* m_baseColorCombo;
@@ -199,11 +199,11 @@ private:
   QMap<SourceListItem*, Fetch::ConfigWidget*> m_configWidgets;
   QList<Fetch::ConfigWidget*> m_newStuffConfigWidgets;
   QList<Fetch::ConfigWidget*> m_removedConfigWidgets;
-  KPushButton* m_modifySourceBtn;
-  KPushButton* m_moveUpSourceBtn;
-  KPushButton* m_moveDownSourceBtn;
-  KPushButton* m_removeSourceBtn;
-  KPushButton* m_newStuffBtn;
+  QPushButton* m_modifySourceBtn;
+  QPushButton* m_moveUpSourceBtn;
+  QPushButton* m_moveDownSourceBtn;
+  QPushButton* m_removeSourceBtn;
+  QPushButton* m_newStuffBtn;
   QCheckBox* m_cbFilterSource;
   GUI::CollectionTypeCombo* m_sourceTypeCombo;
 };

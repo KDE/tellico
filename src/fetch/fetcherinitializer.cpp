@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include <config.h>
+
 #include "fetcherinitializer.h"
 #include "amazonfetcher.h"
 #include "imdbfetcher.h"
@@ -123,4 +124,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::DBLPFetcher> registerDBLP(DBLP);
   RegisterFetcher<Fetch::MRLookupFetcher> registerMRLookup(MRLookup);
   RegisterFetcher<Fetch::BoardGameGeekFetcher> registerBGG(BoardGameGeek);
+
+  Fetch::Manager::self()->loadFetchers();
 }

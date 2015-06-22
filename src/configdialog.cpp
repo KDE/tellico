@@ -45,11 +45,9 @@
 #include "fieldformat.h"
 #include "tellico_debug.h"
 
-#include <klineedit.h>
 #include <KLocalizedString>
 #include <kconfig.h>
 #include <KIntSpinBox>
-#include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
@@ -65,6 +63,8 @@
 #include <KNS/Engine>
 #endif
 
+#include <QLineEdit>
+#include <QPushButton>
 #include <QSize>
 #include <QLayout>
 #include <QLabel>
@@ -203,7 +203,7 @@ void ConfigDialog::slotApply() {
 void ConfigDialog::slotDefault() {
   // only change the defaults on the active page
   Config::self()->useDefaults(true);
-  QString name = currentPage()->name();
+  const QString name = currentPage()->name();
   if(name == i18n("General")) {
     readGeneralConfig();
   } else if(name == i18n("Printing")) {
@@ -311,7 +311,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   QLabel* lab = new QLabel(i18n("No capitali&zation:"), g1);
   g1Layout->addWidget(lab, 0, 0);
-  m_leCapitals = new KLineEdit(g1);
+  m_leCapitals = new QLineEdit(g1);
   g1Layout->addWidget(m_leCapitals, 0, 1);
   lab->setBuddy(m_leCapitals);
   QString whats = i18n("<qt>A list of words which should not be capitalized. Multiple values "
@@ -322,7 +322,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Artic&les:"), g1);
   g1Layout->addWidget(lab, 1, 0);
-  m_leArticles = new KLineEdit(g1);
+  m_leArticles = new QLineEdit(g1);
   g1Layout->addWidget(m_leArticles, 1, 1);
   lab->setBuddy(m_leArticles);
   whats = i18n("<qt>A list of words which should be considered as articles "
@@ -334,7 +334,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Personal suffi&xes:"), g1);
   g1Layout->addWidget(lab, 2, 0);
-  m_leSuffixes = new KLineEdit(g1);
+  m_leSuffixes = new QLineEdit(g1);
   g1Layout->addWidget(m_leSuffixes, 2, 1);
   lab->setBuddy(m_leSuffixes);
   whats = i18n("<qt>A list of suffixes which might be used in personal names. Multiple values "
@@ -345,7 +345,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Surname &prefixes:"), g1);
   g1Layout->addWidget(lab, 3, 0);
-  m_lePrefixes = new KLineEdit(g1);
+  m_lePrefixes = new QLineEdit(g1);
   g1Layout->addWidget(m_lePrefixes, 3, 1);
   lab->setBuddy(m_lePrefixes);
   whats = i18n("<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -473,7 +473,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   gridLayout->addWidget(lab, ++row, 0);
   gridLayout->addWidget(m_templateCombo, row, 1);
 
-  KPushButton* btn = new KPushButton(i18n("&Preview..."), frame);
+  QPushButton* btn = new QPushButton(i18n("&Preview..."), frame);
   btn->setWhatsThis(i18n("Show a preview of the template"));
   btn->setIcon(QIcon::fromTheme(QLatin1String("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
@@ -573,21 +573,21 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   vlay->addWidget(box1);
   box1HBoxLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
-  KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
+  QPushButton* b1 = new QPushButton(i18n("Install..."), box1);
   box1HBoxLayout->addWidget(b1);
   b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
-  KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
+  QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
   box1HBoxLayout->addWidget(b2);
   b2->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
-  KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
+  QPushButton* b3 = new QPushButton(i18n("Delete..."), box1);
   box1HBoxLayout->addWidget(b3);
   b3->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
@@ -644,12 +644,12 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   QHBoxLayout* hbHBoxLayout = new QHBoxLayout(hb);
   hbHBoxLayout->setMargin(0);
   leftLayout->addWidget(hb);
-  m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), hb);
+  m_moveUpSourceBtn = new QPushButton(i18n("Move &Up"), hb);
   hbHBoxLayout->addWidget(m_moveUpSourceBtn);
   m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
-  m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), hb);
+  m_moveDownSourceBtn = new QPushButton(i18n("Move &Down"), hb);
   hbHBoxLayout->addWidget(m_moveDownSourceBtn);
   m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
@@ -675,16 +675,16 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   // these icons are rather arbitrary, but seem to vaguely fit
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
-  KPushButton* newSourceBtn = new KPushButton(i18n("&New..."), frame);
+  QPushButton* newSourceBtn = new QPushButton(i18n("&New..."), frame);
   newSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   newSourceBtn->setWhatsThis(i18n("Click to add a new data source."));
-  m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
+  m_modifySourceBtn = new QPushButton(i18n("&Modify..."), frame);
   m_modifySourceBtn->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
   m_modifySourceBtn->setWhatsThis(i18n("Click to modify the selected data source."));
-  m_removeSourceBtn = new KPushButton(i18n("&Delete"), frame);
+  m_removeSourceBtn = new QPushButton(i18n("&Delete"), frame);
   m_removeSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
-  m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
+  m_newStuffBtn = new QPushButton(i18n("Download..."), frame);
   m_newStuffBtn->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
   // checksum and signature checking are no longer possible with knewstuff2
@@ -784,8 +784,7 @@ void ConfigDialog::readFetchConfig() {
   m_configWidgets.clear();
 
   m_sourceListWidget->setUpdatesEnabled(false);
-  Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
-  foreach(Fetch::Fetcher::Ptr fetcher, fetchers) {
+  foreach(Fetch::Fetcher::Ptr fetcher, Fetch::Manager::self()->fetchers()) {
     GeneralFetcherInfo info(fetcher->type(), fetcher->source(),
                             fetcher->updateOverwrite(), fetcher->uuid());
     SourceListItem* item = new SourceListItem(m_sourceListWidget, info);

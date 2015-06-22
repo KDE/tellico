@@ -2137,7 +2137,7 @@ void MainWindow::updateEntrySources() {
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
     QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
-    connect(action, SIGNAL(activated()), m_updateMapper, SLOT(map()));
+    connect(action, SIGNAL(triggered()), m_updateMapper, SLOT(map()));
     m_updateMapper->setMapping(action, fetcher->source());
     m_fetchActions.append(action);
   }

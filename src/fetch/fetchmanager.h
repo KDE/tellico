@@ -85,7 +85,7 @@ public:
   bool canFetch() const;
   bool hasMoreResults() const;
   void loadFetchers();
-  const FetcherVec& fetchers() const { return m_fetchers; }
+  const FetcherVec& fetchers() const;
   FetcherVec fetchers(int type);
   Fetcher::Ptr fetcherByUuid(const QString& uuid);
   NameTypeMap nameTypeMap();

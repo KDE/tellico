@@ -60,7 +60,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   // must create static pointer first
   Q_ASSERT(!s_self);
   s_self = this;
-  loadFetchers();
+  // no need to load fetchers since the initializer does it for us
 
 //  m_keyMap.insert(FetchFirst, QString());
   m_keyMap.insert(Title,      i18n("Title"));
@@ -106,6 +106,10 @@ void Manager::loadFetchers() {
     m_fetchers = defaultFetchers();
     m_loadDefaults = true;
   }
+}
+
+const Tellico::Fetch::FetcherVec& Manager::fetchers() const {
+  return m_fetchers;
 }
 
 Tellico::Fetch::FetcherVec Manager::fetchers(int type_) {
@@ -253,7 +257,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   }
 
   // special case: the BoardGameGeek fetcher was originally implemented as a Ruby script
-  // now, it's availavle with an XML API, so prefer the new version
+  // now, it's available with an XML API, so prefer the new version
   // so check for fetcher version and switch to the XML if version is missing or lower
   if(fetchType == Fetch::ExecExternal &&
      config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("boardgamegeek.rb"))) {
