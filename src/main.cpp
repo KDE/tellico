@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
       // bit of a hack, I just want the --nofile option
       // if --nofile is NOT passed, then the file option is set
       // is it's set, then go ahead and check for opening previous file
-      tellico->initFileOpen(!parser.isSet(QLatin1String("nofile")));
+      tellico->initFileOpen(parser.isSet(QLatin1String("nofile")));
     }
   }
 
