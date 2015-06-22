@@ -78,6 +78,14 @@ QStringList Tellico::locateAllFiles(const QString& fileName_) {
   return files;
 }
 
+QString Tellico::dataDir() {
+  // look for a file that gets installed to know the installation directory
+  QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("tellico/pics/tellico.png"));
+  // remove the file name string. Important to keep trailing slash
+  appdir.chop(QString::fromLatin1("pics/tellico.png").length());
+  return appdir;
+}
+
 QString Tellico::saveLocation(const QString& dir_) {
   QString path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + dir_;
   QDir dir;

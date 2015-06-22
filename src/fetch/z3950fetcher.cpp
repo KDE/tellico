@@ -50,12 +50,11 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KStandardDirs>
 #include <KIntSpinBox>
 #include <KConfigGroup>
 #include <KComboBox>
 #include <KAcceleratorManager>
-#include <kseparator.h>
+#include <KSeparator>
 #include <KGlobal>
 
 #include <QFile>
@@ -809,8 +808,8 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     if(country.isEmpty()) {
       m_serverCombo->addItem(i18n(name.toUtf8()), group);
     } else {
-      const QString flag = KStandardDirs::locate("locale",
-                                                 QString::fromLatin1("l10n/%1/flag.png").arg(country));
+      const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                  QString::fromLatin1("locale/l10n/%1/flag.png").arg(country));
       m_serverCombo->addItem(QIcon::fromTheme(flag), i18n(name.toUtf8()), group);
     }
 

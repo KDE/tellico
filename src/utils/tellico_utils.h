@@ -46,6 +46,10 @@ namespace Tellico {
    * Does something similar to KDE4 KStandardDirs::findALlResources with wildcards
    */
   QStringList locateAllFiles(const QString& fileName);
+  /**
+   * Return something likely to be the installation directory
+   */
+  QString dataDir();
 
   QString saveLocation(const QString& dir);
 

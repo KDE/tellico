@@ -286,11 +286,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
   }
 
-  // look for a file that gets installed to know the installation directory
-  QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("tellico/pics/tellico.png"));
-  // remove the file name and pics
-  appdir.chop(QString::fromLatin1("pics/tellico.png").length());
-  m_handler->addStringParam("datadir", QFile::encodeName(appdir));
+  m_handler->addStringParam("datadir", QFile::encodeName(Tellico::dataDir()));
 
   // if we don't have to reload the images, then just show the entry and we're done
   if(!reloadImages) {

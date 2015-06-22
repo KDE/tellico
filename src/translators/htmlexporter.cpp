@@ -40,7 +40,6 @@
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#include <KStandardDirs>
 #include <KConfigGroup>
 #include <KGlobal>
 #include <kio/job.h>
@@ -223,7 +222,7 @@ bool HTMLExporter::loadXSLTFile() {
   // if parseDOM, that means we want the locations to be the actual location
   // otherwise, we assume it'll be relative
   if(m_parseDOM && m_dataDir.isEmpty()) {
-    m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
+    m_dataDir = Tellico::dataDir();
   } else if(!m_parseDOM) {
     m_dataDir.clear();
   }
@@ -779,7 +778,7 @@ bool HTMLExporter::writeEntryFiles() {
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
-  QUrl dataDir = QUrl::fromLocalFile(KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png")) + QLatin1String("pics/"));
+  QUrl dataDir = QUrl::fromLocalFile(Tellico::dataDir() + QLatin1String("pics/"));
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
   target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
