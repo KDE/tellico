@@ -149,10 +149,8 @@ private:
   void doCover(const QString& s, Data::EntryPtr e, const QUrl& baseURL);
 
   void parseSingleTitleResult();
-  void parseSingleNameResult();
   void parseMultipleTitleResults();
   void parseTitleBlock(const QString& str);
-  void parseMultipleNameResults();
   Data::EntryPtr parseEntry(const QString& str);
 
   QString m_text;
@@ -177,7 +175,7 @@ private:
   QString m_exactTitles;
   QString m_partialTitles;
   QString m_approxTitles;
-  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, Approx = 4, SinglePerson = 5};
+  enum TitleBlock { Unknown = 0, Popular = 1, Exact = 2, Partial = 3, Approx = 4 };
   TitleBlock m_currentTitleBlock;
   int m_countOffset;
 };
