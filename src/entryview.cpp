@@ -43,16 +43,15 @@
 #include <kmessagebox.h>
 #include <khtmlview.h>
 #include <dom/dom_element.h>
-#include <kapplication.h>
 #include <KLocalizedString>
-#include <kglobalsettings.h>
-#include <KGlobal>
+#include <KGlobalSettings>
 
 #include <QFile>
 #include <QTextStream>
 #include <QClipboard>
 #include <QDomDocument>
 #include <QTemporaryFile>
+#include <QApplication>
 
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;

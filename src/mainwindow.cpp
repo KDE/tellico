@@ -71,7 +71,6 @@
 #include "utils/guiproxy.h"
 #include "tellico_debug.h"
 
-#include <kapplication.h>
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
@@ -98,6 +97,7 @@
 #include <KIcon>
 #include <KAction>
 
+#include <QApplication>
 #include <QUndoStack>
 #include <QSplitter>
 #include <QAction>
@@ -1354,7 +1354,7 @@ void MainWindow::activateEditSlot(const char* slot_) {
   if(m_editDialog->isVisible()) {
     w = m_editDialog->focusWidget();
   } else {
-    w = kapp->focusWidget();
+    w = qApp->focusWidget();
   }
 
   if(w && w->isVisible()) {

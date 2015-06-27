@@ -35,10 +35,10 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kiconloader.h>
-#include <kapplication.h>
+#include <KIconLoader>
 
 #include <QTimer>
+#include <QApplication>
 
 namespace {
   static const int CHECK_COLLECTION_IMAGES_STEP_SIZE = 10;
@@ -144,7 +144,7 @@ void EntryUpdater::slotDone() {
       return;
     }
   }
-  kapp->processEvents();
+  qApp->processEvents();
   // so the entry updater can clean up a bit
   QTimer::singleShot(500, this, SLOT(slotStartNext()));
 }
@@ -164,7 +164,7 @@ void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
       result_->fetcher->stop();
     }
   }
-  kapp->processEvents();
+  qApp->processEvents();
 }
 
 void EntryUpdater::slotCancel() {

@@ -28,15 +28,15 @@
 #include "progress.h"
 
 #include <KLocalizedString>
-#include <kapplication.h>
-#include <kpushbutton.h>
-#include <kiconloader.h>
+#include <KPushButton>
+#include <KIconLoader>
 
 #include <QObject>
 #include <QStyle>
 #include <QTimer>
 #include <QToolTip>
 #include <QLabel>
+#include <QApplication>
 
 using Tellico::StatusBar;
 StatusBar* StatusBar::s_self = 0;
@@ -114,10 +114,9 @@ void StatusBar::slotProgress(qulonglong progress_) {
     if(ProgressManager::self()->anyCanBeCancelled()) {
       m_cancelButton->show();
     }
-    kapp->processEvents(); // needed so the window gets updated ???
+    qApp->processEvents(); // needed so the window gets updated ???
   }
 }
 
 void StatusBar::slotUpdate() {
 }
-
