@@ -55,7 +55,7 @@
 #include <KComboBox>
 #include <KAcceleratorManager>
 #include <KSeparator>
-#include <KGlobal>
+#include <KConfig>
 
 #include <QFile>
 #include <QLabel>
@@ -769,12 +769,8 @@ void Z3950Fetcher::ConfigWidget::slotPresetChanged() {
 }
 
 void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
-  QString lang = KGlobal::locale()->languageList().first();
-  QString lang2A;
-  {
-    QString dummy;
-    KGlobal::locale()->splitLocale(lang, lang2A, dummy, dummy, dummy);
-  }
+  QString lang = QLocale().uiLanguages().first();
+  QString lang2A = lang.contains(QLatin1Char('-')) ? lang.section(QLatin1Char('-'), 0, 0) : lang;
 
   QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {

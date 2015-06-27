@@ -40,10 +40,10 @@
 //#include "srufetcher.h"
 //#include "execexternalfetcher.h"
 
-#include <KGlobal>
 #include <KLocalizedString>
-#include <kiconloader.h>
-#include <kio/job.h>
+#include <KIconLoader>
+#include <KIO/Job>
+#include <KSharedConfig>
 
 #include <QFileInfo>
 #include <QDir>
@@ -299,19 +299,24 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(TheGamesDB);
   FETCHER_ADD(BoardGameGeek);
-// only add IBS if user includes italian
-  if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
-    FETCHER_ADD(IBS);
-  }
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
-  const QStringList langs = KGlobal::locale()->languageList();
+  const QStringList langs = QLocale().uiLanguages();
+  if(langs.first().contains(QLatin1Char('-'))) {
+    // I'm not sure QT always include two-letter locale codes
+    langs << langs.first().section(QLatin1Char('-'), 0, 0);
+  }
+// only add IBS if user includes italian
+  if(langs.contains(QLatin1String("it"))) {
+    FETCHER_ADD(IBS);
+  }
   if(langs.contains(QLatin1String("fr"))) {
     FETCHER_ADD(DVDFr);
     FETCHER_ADD(Allocine);
   }
+/* these don't work
   if(langs.contains(QLatin1String("de"))) {
     FETCHER_ADD(FilmStarts);
   }
@@ -321,6 +326,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(langs.contains(QLatin1String("tr"))) {
     FETCHER_ADD(Beyazperde);
   }
+*/
   return vec;
 }
 
