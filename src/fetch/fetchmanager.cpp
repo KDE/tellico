@@ -303,7 +303,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
-  const QStringList langs = QLocale().uiLanguages();
+  QStringList langs = QLocale().uiLanguages();
   if(langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes
     langs << langs.first().section(QLatin1Char('-'), 0, 0);

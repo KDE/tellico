@@ -53,7 +53,6 @@
 #include <khtmlview.h>
 #include <kfiledialog.h>
 #include <kcolorcombo.h>
-#include <KGlobal>
 #include <KHelpClient>
 #include <KIcon>
 

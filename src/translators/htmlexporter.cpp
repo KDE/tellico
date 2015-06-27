@@ -41,8 +41,7 @@
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
-#include <KGlobal>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <kio/netaccess.h>
 #include <KLocalizedString>
 #include <KUser>

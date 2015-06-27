@@ -39,7 +39,7 @@
 #include <ktextedit.h>
 #include <kiconloader.h>
 #include <KJob>
-#include <KGlobal>
+#include <KSharedConfig>
 #ifdef HAVE_KABC
 #include <kcontacts/addressee.h>
 #include <Akonadi/Contact/ContactSearchJob>
