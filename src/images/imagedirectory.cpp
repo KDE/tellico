@@ -58,10 +58,10 @@ QString ImageDirectory::path() {
     if(!m_dir) {
       m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     }
-    setPath(m_dir->path());
+    // in KDE4, the way this worked included the final slash.
+    setPath(m_dir->path() + QLatin1Char('/'));
   }
-  // in KDE4, the way this worked included the final slash.
-  return m_path + QLatin1Char('/');
+  return m_path;
 }
 
 void ImageDirectory::setPath(const QString& path_) {
@@ -136,7 +136,8 @@ void TemporaryImageDirectory::purge() {
 QString TemporaryImageDirectory::path() {
   if(!m_dir) {
     m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
-    ImageDirectory::setPath(m_dir->path());
+    // in KDE4, the way this worked included the final slash.
+    ImageDirectory::setPath(m_dir->path() + QLatin1Char('/'));
   }
   return ImageDirectory::path();
 }
