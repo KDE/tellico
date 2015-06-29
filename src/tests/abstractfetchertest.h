@@ -45,6 +45,14 @@ protected:
                                    const Tellico::Fetch::FetchRequest& request,
                                    int maxResults = 0 /* means no limit */);
 
+  /**
+   * Some data sources change the order in which they return results with multiple values,
+   * like authors or directors, so use a QSet and have some helper functions to streamline
+   **/
+  static QSet<QString> set(Tellico::Data::EntryPtr entry, const char* field);
+  static QSet<QString> set(const char* value);
+  static QSet<QString> set(const QString& value);
+
 private Q_SLOTS:
   void slotResult(KJob* job);
 
