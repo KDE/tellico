@@ -62,7 +62,7 @@ void BoardGameGeekFetcherTest::testTitle() {
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::BoardGame);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Catan"));
   QCOMPARE(entry->field(QLatin1String("designer")), QLatin1String("Klaus Teuber"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("publisher"))).at(0), QLatin1String("999 Games"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("publisher"))).at(0), QLatin1String("KOSMOS"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1995"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre"))).at(0), QLatin1String("Civilization"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("mechanism"))).at(0), QLatin1String("Dice Rolling"));

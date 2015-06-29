@@ -69,7 +69,7 @@ void TheMovieDBFetcherTest::testTitle() {
     i.next();
     QString result = entry->field(i.key()).toLower();
     //    QVERIFY(result.contains(i.value().toLower()));
-    QCOMPARE(result, i.value().toLower());
+    QCOMPARE(set(result), set(i.value().toLower()));
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
@@ -102,7 +102,7 @@ void TheMovieDBFetcherTest::testTitleFr() {
                                      << QLatin1String("title");
   foreach(const QString& field, fields) {
     QString result = entry->field(field).toLower();
-    QCOMPARE(result, m_fieldValues.value(field).toLower());
+    QCOMPARE(set(result), set(m_fieldValues.value(field).toLower()));
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
@@ -124,7 +124,7 @@ void TheMovieDBFetcherTest::testBabel() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), QLatin1String("Babel"));
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
-  QCOMPARE(entry->field("producer"), QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber"));
+  QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
 
