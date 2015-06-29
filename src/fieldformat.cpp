@@ -24,7 +24,6 @@
 
 #include "fieldformat.h"
 #include "core/tellico_config.h"
-#include "tellico_debug.h"
 
 using Tellico::FieldFormat;
 
@@ -211,7 +210,10 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
     words.removeLast();
 
     // this is probably just something for me, limited to english
-    while(Config::surnamePrefixList().contains(words.last(), Qt::CaseInsensitive)) {
+    // In a previous version of Tellico, using a prefix such as "van der" (with a space) would work
+    // because QStringList::contains did substring matching, but now need to add a function for tokenizing
+    // the list with whitespace as well as comma
+    while(Config::surnamePrefixTokens().contains(words.last(), Qt::CaseInsensitive)) {
       words.prepend(words.last());
       words.removeLast();
     }
@@ -303,7 +305,7 @@ QString FieldFormat::capitalize(QString str_) {
       // check against the noCapitalization list AND the surnamePrefix list
       // does this hold true everywhere other than english?
       if(!Config::noCapitalizationList().contains(word, Qt::CaseInsensitive) && 
-         !Config::surnamePrefixList().contains(word, Qt::CaseInsensitive) &&
+         !Config::surnamePrefixTokens().contains(word, Qt::CaseInsensitive) &&
          nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).toUpper());
       }

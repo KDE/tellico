@@ -66,6 +66,7 @@
 
 namespace {
   static const QRegExp commaSplit = QRegExp(QLatin1String("\\s*,\\s*"));
+  static const QRegExp commaSpaceSplit = QRegExp(QLatin1String("\\s*[, ]\\s*"));
 }
 
 using Tellico::Config;
@@ -75,6 +76,7 @@ QStringList Config::m_articleList;
 QStringList Config::m_articleAposList;
 QStringList Config::m_nameSuffixList;
 QStringList Config::m_surnamePrefixList;
+QStringList Config::m_surnamePrefixTokens;
 
 QStringList Config::noCapitalizationList() {
   static QString cacheValue;
@@ -128,6 +130,18 @@ QStringList Config::surnamePrefixList() {
     m_surnamePrefixList = cacheValue.split(commaSplit);
   }
   return m_surnamePrefixList;
+}
+
+// In a previous version of Tellico, using a prefix such as "van der" (with a space) would work
+// because QStringList::contains did substring matching, but now need to add a function for tokenizing
+// the list with whitespace as well as comma
+QStringList Config::surnamePrefixTokens() {
+  static QString cacheValue;
+  if(cacheValue != Config::surnamePrefixesString()) {
+    cacheValue = Config::surnamePrefixesString();
+    m_surnamePrefixTokens = cacheValue.split(commaSpaceSplit);
+  }
+  return m_surnamePrefixTokens;
 }
 
 QString Config::templateName(int type_) {

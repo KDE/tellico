@@ -140,4 +140,3 @@ void FormatTest::testSplit() {
   QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);
 }
-

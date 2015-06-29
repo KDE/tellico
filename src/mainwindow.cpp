@@ -1471,10 +1471,10 @@ void MainWindow::slotHandleConfigChange() {
   const int imageLocation = Config::imageLocation();
   const bool autoCapitalize = Config::autoCapitalization();
   const bool autoFormat = Config::autoFormat();
-  QStringList articles = Config::articleList();
-  QStringList nocaps = Config::noCapitalizationList();
-  QStringList suffixes = Config::nameSuffixList();
-  QStringList prefixes = Config::surnamePrefixList();
+  const QStringList articles = Config::articleList();
+  const QStringList nocaps = Config::noCapitalizationList();
+  const QStringList suffixes = Config::nameSuffixList();
+  const QStringList prefixes = Config::surnamePrefixList();
 
   m_configDlg->saveConfiguration();
 
