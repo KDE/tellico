@@ -75,6 +75,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
 #ifdef HAVE_NEPOMUK
   Nepomuk::ResourceManager::instance()->init();
+  const bool nepomukRunning = Nepomuk::ResourceManager::instance()->initialized();
 #endif
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
@@ -157,22 +158,24 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
       entry->setField(modified, dt.toString(KDateTime::ISODate));
     }
 
-    const KFileMetaInfo& meta = item.metaInfo();
-    if(meta.isValid()) {
-      QStringList strings;
-      foreach(const KFileMetaInfoItem& item, meta.items()) {
-        const QString s = item.value().toString();
 #ifdef HAVE_NEPOMUK
-        if(!s.isEmpty()) {
-          const QString label = Nepomuk::Types::Property(item.name()).label();
-          if(!metaIgnore.contains(label)) {
-            strings << label + FieldFormat::columnDelimiterString() + item.prefix() + s + item.suffix();
+    if(nepomukRunning) {
+      const KFileMetaInfo& meta = item.metaInfo();
+      if(meta.isValid()) {
+        QStringList strings;
+        foreach(const KFileMetaInfoItem& item, meta.items()) {
+          const QString s = item.value().toString();
+          if(!s.isEmpty()) {
+            const QString label = Nepomuk::Types::Property(item.name()).label();
+            if(!metaIgnore.contains(label)) {
+              strings << label + FieldFormat::columnDelimiterString() + item.prefix() + s + item.suffix();
+            }
           }
         }
-#endif
+        entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
       }
-      entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
     }
+#endif
 
     if(!m_cancelled && usePreview) {
       m_pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);

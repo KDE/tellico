@@ -1,3 +1,7 @@
+2015-07-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed a crashing bug with Nepomuk and certain file types (Bug 345458).
+
 2015-06-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed a bug with HTML exporting titles with single-quotes (Bug 348381).
