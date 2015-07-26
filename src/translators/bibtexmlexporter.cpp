@@ -25,15 +25,14 @@
 #include <config.h>
 
 #include "bibtexmlexporter.h"
-#include "bibtexhandler.h"
-#include "../document.h"
+#include "../utils/bibtexhandler.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "tellico_xml.h"
 #include "../utils/stringset.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QDomDocument>
 #include <QRegExp>
@@ -193,4 +192,3 @@ QString BibtexmlExporter::text() {
   return dom.toString();
 }
 
-#include "bibtexmlexporter.moc"

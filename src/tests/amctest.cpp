@@ -25,21 +25,21 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "amctest.h"
-#include "amctest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/amcimporter.h"
 #include "../collection.h"
 
-QTEST_KDEMAIN_CORE( AmcTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( AmcTest )
 
 // this is a real basic test right now, AMC doesn't run real well under wine
 void AmcTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.amc");
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.amc"));
   Tellico::Import::AMCImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->entryCount(), 2);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);

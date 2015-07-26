@@ -28,14 +28,15 @@
 #include <QString>
 #include <QByteArray>
 
-class KUrl;
-class KSaveFile;
+class QUrl;
+
 namespace KIO {
   class Job;
 }
 
 class QDomDocument;
 class QIODevice;
+class QSaveFile;
 
 namespace Tellico {
   class ImageFactory;
@@ -69,7 +70,7 @@ public:
 
   private:
     friend class FileHandler;
-    explicit FileRef(const KUrl& url, bool quiet=false);
+    explicit FileRef(const QUrl& url, bool quiet=false);
     QIODevice* m_device;
     QString m_filename;
     bool m_isValid;
@@ -84,7 +85,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return The fileref
    */
-  static FileRef* fileRef(const KUrl& url, bool quiet=false);
+  static FileRef* fileRef(const QUrl& url, bool quiet=false);
   /**
    * Read contents of a file into a string.
    *
@@ -93,7 +94,7 @@ public:
    * @param useUTF8 Whether the file should be read as UTF8 or use user locale
    * @return A string containing the contents of a file
    */
-  static QString readTextFile(const KUrl& url, bool quiet=false, bool useUTF8=false);
+  static QString readTextFile(const QUrl& url, bool quiet=false, bool useUTF8=false);
   /**
    * Read contents of an XML file into a string, checking for encoding.
    *
@@ -101,7 +102,7 @@ public:
    * @param quiet whether the importer should report errors or not
    * @return A string containing the contents of a file
    */
-  static QString readXMLFile(const KUrl& url, bool quiet=false);
+  static QString readXMLFile(const QUrl& url, bool quiet=false);
   /**
    * Read contents of an XML file into a QDomDocument.
    *
@@ -110,7 +111,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return A QDomDocument containing the contents of a file
    */
-  static QDomDocument readXMLDocument(const KUrl& url, bool processNamespace, bool quiet=false);
+  static QDomDocument readXMLDocument(const QUrl& url, bool processNamespace, bool quiet=false);
   /**
    * Read contents of a data file into a QByteArray.
    *
@@ -118,7 +119,7 @@ public:
    * @param quiet Whether error messages should be shown
    * @return A QByteArray of the file's contents
    */
-  static QByteArray readDataFile(const KUrl& url, bool quiet=false);
+  static QByteArray readDataFile(const QUrl& url, bool quiet=false);
   /**
    * Writes the contents of a string to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -130,7 +131,7 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeTextURL(const KUrl& url, const QString& text, bool encodeUTF8, bool force=false, bool quiet=false);
+  static bool writeTextURL(const QUrl& url, const QString& text, bool encodeUTF8, bool force=false, bool quiet=false);
   /**
    * Writes data to a url. If the file already exists, a "~" is appended
    * and the existing file is moved. If the file is remote, a temporary file is written and
@@ -141,20 +142,20 @@ public:
    * @param force Whether to force the write
    * @return A boolean indicating success
    */
-  static bool writeDataURL(const KUrl& url, const QByteArray& data, bool force=false, bool quiet=false);
+  static bool writeDataURL(const QUrl& url, const QByteArray& data, bool force=false, bool quiet=false);
   /**
    * Checks to see if a URL exists already, and if so, queries the user.
    *
    * @param url The target URL
    * @return True if it is ok to continue, false otherwise.
    */
-  static bool queryExists(const KUrl& url);
+  static bool queryExists(const QUrl& url);
   /**
    * Write a backup file with '~' extension
    *
    * Returns true on success
    */
-  static bool writeBackupFile(const KUrl& url);
+  static bool writeBackupFile(const QUrl& url);
 
 private:
   /**
@@ -165,8 +166,8 @@ private:
    * @param quiet If errors should be quiet
    * @return The image
    */
-  static Data::Image* readImageFile(const KUrl& url, const QString& id = QString(), bool quiet=false);
-  static Data::Image* readImageFile(const KUrl& url, const QString& id, bool quiet, const KUrl& referrer);
+  static Data::Image* readImageFile(const QUrl& url, const QString& id = QString(), bool quiet=false);
+  static Data::Image* readImageFile(const QUrl& url, const QString& id, bool quiet, const QUrl& referrer);
   /**
    * Writes the contents of a string to a file.
    *
@@ -175,7 +176,7 @@ private:
    * @param encodeUTF8 Whether to use UTF-8 encoding, or Locale
    * @return A boolean indicating success
    */
-  static bool writeTextFile(KSaveFile& file, const QString& text, bool encodeUTF8);
+  static bool writeTextFile(QSaveFile& file, const QString& text, bool encodeUTF8);
   /**
    * Writes data to a file.
    *
@@ -183,7 +184,7 @@ private:
    * @param data The data
    * @return A boolean indicating success
    */
-  static bool writeDataFile(KSaveFile& file, const QByteArray& data);
+  static bool writeDataFile(QSaveFile& file, const QByteArray& data);
 };
 
 } // end namespace

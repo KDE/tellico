@@ -27,7 +27,7 @@
 
 #include "datavectors.h"
 
-#include <kurl.h>
+#include <QUrl>
 
 namespace Tellico {
 
@@ -38,7 +38,7 @@ public:
    * this is totally not the way the comparison should be done, but it's too expensive to include
    * a connection to document.h here
    */
-  static void setDocumentUrl(const KUrl& url);
+  static void setDocumentUrl(const QUrl& url);
 
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field);
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, const QString& field, const Data::Collection* coll);
@@ -51,7 +51,7 @@ public:
   };
 
 private:
-  static KUrl s_documentUrl;
+  static QUrl s_documentUrl;
 };
 
 } // namespace

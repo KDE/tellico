@@ -42,7 +42,7 @@ Q_OBJECT
 public:
   /**
    */
-  BibtexmlImporter(const KUrl& url);
+  BibtexmlImporter(const QUrl& url);
   BibtexmlImporter(const QString& text);
 
   /**

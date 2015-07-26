@@ -25,12 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "fieldtest.h"
-#include "fieldtest.moc"
-#include "qtest_kde.h"
 
 #include "../field.h"
 
-QTEST_KDEMAIN_CORE( FieldTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( FieldTest )
 
 void FieldTest::testAll() {
   Tellico::Data::Field field1("name", "title");

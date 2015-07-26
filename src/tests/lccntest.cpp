@@ -25,16 +25,16 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "lccntest.h"
-#include "lccntest.moc"
-#include "qtest_kde.h"
 
 #include "../utils/lccnvalidator.h"
+
+#include <QTest>
 
 // see http://www.loc.gov/marc/lccn_structure.html
 // see http://www.loc.gov/marc/lccn-namespace.html
 // see http://catalog.loc.gov/help/number.htm
 
-QTEST_KDEMAIN_CORE( LccnTest )
+QTEST_APPLESS_MAIN( LccnTest )
 
 Q_DECLARE_METATYPE(QValidator::State)
 

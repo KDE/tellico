@@ -34,9 +34,9 @@
 #include "models/models.h"
 #include "gui/countdelegate.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmenu.h>
-#include <kicon.h>
+#include <QIcon>
 
 #include <QHeaderView>
 #include <QContextMenuEvent>
@@ -114,9 +114,9 @@ void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
   // no parent means it's a top-level item
   if(index.parent().isValid()) {
     KMenu menu(this);
-    menu.addAction(KIcon(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
                    i18n("Check-in"), this, SLOT(slotCheckIn()));
-    menu.addAction(KIcon(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
                    i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
     menu.exec(event_->globalPos());
   }
@@ -202,4 +202,3 @@ void LoanView::updateHeader() {
   }
 }
 
-#include "loanview.moc"

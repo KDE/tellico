@@ -25,23 +25,22 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "springerfetchertest.h"
-#include "springerfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/springerfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( SpringerFetcherTest, GUI )
+QTEST_GUILESS_MAIN( SpringerFetcherTest )
 
 SpringerFetcherTest::SpringerFetcherTest() : AbstractFetcherTest() {
 }
 
 void SpringerFetcherTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/springer2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 //  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 

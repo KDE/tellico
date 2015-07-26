@@ -22,31 +22,30 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "googlebookfetcher.h"
 #include "../collections/bookcollection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KLineEdit>
+#include <KJobWidgets/KJobWidgets>
+#include <KConfigGroup>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const int GOOGLEBOOK_MAX_RETURNS = 20;
@@ -72,11 +71,7 @@ QString GoogleBookFetcher::source() const {
 }
 
 bool GoogleBookFetcher::canSearch(FetchKey k) const {
-#ifdef HAVE_QJSON
   return k == Title || k == Person || k == ISBN || k == Keyword;
-#else
-  return false;
-#endif
 }
 
 bool GoogleBookFetcher::canFetch(int type) const {
@@ -112,8 +107,7 @@ void GoogleBookFetcher::continueSearch() {
 }
 
 void GoogleBookFetcher::doSearch(const QString& term_) {
-#ifdef HAVE_QJSON
-  KUrl u(GOOGLEBOOK_API_URL);
+  QUrl u(QString::fromLatin1(GOOGLEBOOK_API_URL));
 
   u.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
   u.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));
@@ -151,10 +145,9 @@ void GoogleBookFetcher::doSearch(const QString& term_) {
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
   m_jobs << job;
-#endif
 }
 
 void GoogleBookFetcher::endJob(KIO::StoredTransferJob* job_) {
@@ -185,15 +178,13 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-#ifdef HAVE_QJSON
   QString gbs = entry->field(QLatin1String("gbs-link"));
   if(!gbs.isEmpty()) {
     // quiet
     QByteArray data = FileHandler::readDataFile(gbs, true);
-    QJson::Parser parser;
-    populateEntry(entry, parser.parse(data).toMap());
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    populateEntry(entry, doc.object().toVariantMap());
   }
-#endif
 
   const QString image_id = entry->field(QLatin1String("cover"));
   // if it's still a url, we need to load it
@@ -227,7 +218,6 @@ Tellico::Fetch::FetchRequest GoogleBookFetcher::updateRequest(Data::EntryPtr ent
 
 void GoogleBookFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -266,8 +256,8 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QJson::Parser parser;
-  QVariantMap result = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap result = doc.object().toVariantMap();
   m_total = result.value(QLatin1String("totalItems")).toInt();
 //  myDebug() << "total:" << m_total;
 
@@ -291,7 +281,6 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 
   m_start = m_entries.count();
   m_hasMoreResults = request().key != ISBN && m_start <= m_total;
-#endif
   endJob(job);
 }
 
@@ -400,7 +389,7 @@ GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBook
   QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
@@ -445,4 +434,3 @@ QString GoogleBookFetcher::value(const QVariantMap& map, const char* name) {
   }
 }
 
-#include "googlebookfetcher.moc"

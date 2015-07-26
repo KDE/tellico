@@ -28,10 +28,9 @@
 #include "../entry.h"
 #include "../collection.h"
 #include "../controller.h"
-#include "../utils/calendarhandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Command::AddLoans;
 
@@ -81,7 +80,7 @@ void AddLoans::redo() {
     }
   }
   if(m_addToCalendar) {
-    CalendarHandler::addLoans(m_loans);
+    myWarning() << "Add to calendar not implemented";
   }
   if(wasEmpty) {
     m_loans[0]->entry()->collection()->addBorrower(m_borrower);
@@ -114,7 +113,7 @@ void AddLoans::undo() {
     }
   }
   if(m_addToCalendar) {
-    CalendarHandler::removeLoans(m_loans);
+    myWarning() << "Add to calendar not implemented";
   }
   // the borrower object is kept in the document, it's just empty
   // it won't get saved in the document file

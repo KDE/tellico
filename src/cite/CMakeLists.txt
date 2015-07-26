@@ -4,6 +4,13 @@ SET(cite_STAT_SRCS
    clipboard.cpp
    )
 
-KDE4_ADD_LIBRARY(cite STATIC ${cite_STAT_SRCS})
+add_library(cite STATIC ${cite_STAT_SRCS})
+
+target_link_libraries(cite
+    core
+    utils
+    Qt5::Core
+    Qt5::Widgets
+)
 
 ADD_DEPENDENCIES(cite tellico_config)

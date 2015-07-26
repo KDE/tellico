@@ -30,23 +30,23 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #ifdef HAVE_TAGLIB
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
-#include <taglib/id3v2tag.h>
-#include <taglib/mpegfile.h>
-#include <taglib/vorbisfile.h>
-#include <taglib/flacfile.h>
-#include <taglib/audioproperties.h>
+#include <fileref.h>
+#include <tag.h>
+#include <id3v2tag.h>
+#include <mpegfile.h>
+#include <vorbisfile.h>
+#include <flacfile.h>
+#include <audioproperties.h>
 #endif
 
-#include <klocale.h>
-#include <kapplication.h>
+#include <KLocalizedString>
 
 #include <QLabel>
 #include <QGroupBox>
@@ -54,10 +54,11 @@
 #include <QDir>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QApplication>
 
 using Tellico::Import::AudioFileImporter;
 
-AudioFileImporter::AudioFileImporter(const KUrl& url_) : Tellico::Import::Importer(url_)
+AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
     , m_widget(0)
     , m_cancelled(false) {
 }
@@ -105,7 +106,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
       files += dir.absoluteFilePath(*it2);
     }
-//    kapp->processEvents(); not needed ?
+//    qApp->processEvents(); not needed ?
   }
 
   if(m_cancelled) {
@@ -320,7 +321,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setTotalSteps(this, files.count() + directoryFiles.count());
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
 
 /*    myDebug() << "-- TAG --";
@@ -357,7 +358,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       if(!entry) {
         continue;
       }
-      KUrl u;
+      QUrl u;
       u.setPath(fi.absoluteFilePath());
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
@@ -368,7 +369,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -479,4 +480,3 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
   return num;
 }
 
-#include "audiofileimporter.moc"

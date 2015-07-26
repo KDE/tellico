@@ -202,4 +202,3 @@ bool ProgressManager::anyCanBeCancelled() const {
   return false;
 }
 
-#include "progressmanager.moc"

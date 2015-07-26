@@ -49,7 +49,7 @@ class FileListingImporter : public Importer {
 Q_OBJECT
 
 public:
-  FileListingImporter(const KUrl& url);
+  FileListingImporter(const QUrl& url);
 
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.

@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "gcstarfetchertest.h"
-#include "gcstarfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/gcstarpluginfetcher.h"
 #include "../entry.h"
@@ -35,17 +33,21 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../fieldformat.h"
+#include "../utils/datafileregistry.h"
 
+#include <KConfig>
 #include <KConfigGroup>
-#include <KStandardDirs>
 
-QTEST_KDEMAIN( GCstarFetcherTest, GUI )
+#include <QTest>
+#include <QStandardPaths>
+
+QTEST_GUILESS_MAIN( GCstarFetcherTest )
 
 GCstarFetcherTest::GCstarFetcherTest() : AbstractFetcherTest() {
 }
 
 void GCstarFetcherTest::initTestCase() {
-  const QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+  const QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
     QSKIP("This test requires gcstar", SkipAll);
   }
@@ -53,11 +55,11 @@ void GCstarFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
 
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/gcstar2tellico.xsl"));
 }
 
 void GCstarFetcherTest::testSnowyRiver() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("GCstar Video");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

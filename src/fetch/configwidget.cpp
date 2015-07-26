@@ -24,7 +24,7 @@
 
 #include "configwidget.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kacceleratormanager.h>
 #include <KConfigGroup>
 
@@ -85,4 +85,3 @@ void ConfigWidget::saveConfig(KConfigGroup& config_) {
   slotSetModified(false);
 }
 
-#include "configwidget.moc"

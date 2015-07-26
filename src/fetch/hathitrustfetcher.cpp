@@ -22,30 +22,29 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "hathitrustfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <KStandardDirs>
+#include <KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QDomDocument>
 
 namespace {
   static const char* HATHITRUST_QUERY_URL = "http://catalog.hathitrust.org/api/volumes/full/json/";
@@ -70,11 +69,7 @@ QString HathiTrustFetcher::source() const {
 }
 
 bool HathiTrustFetcher::canSearch(FetchKey k) const {
-#ifdef HAVE_QJSON
   return k == ISBN || k == LCCN;
-#else
-  return false;
-#endif
 }
 
 bool HathiTrustFetcher::canFetch(int type) const {
@@ -86,15 +81,11 @@ void HathiTrustFetcher::readConfigHook(const KConfigGroup&) {
 
 void HathiTrustFetcher::search() {
   m_started = true;
-#ifdef HAVE_QJSON
   doSearch();
-#else
-  stop();
-#endif
 }
 
 void HathiTrustFetcher::doSearch() {
-  KUrl u(HATHITRUST_QUERY_URL);
+  QUrl u(QString::fromLatin1(HATHITRUST_QUERY_URL));
 
   QStringList searchValues;
   // we split ISBN and LCCN values, which are the only ones we accept anyway
@@ -106,12 +97,12 @@ void HathiTrustFetcher::doSearch() {
       searchValues += QString::fromLatin1("lccn:%1").arg(LCCNValidator::formalize(searchTerm));
     }
   }
-  u.addPath(searchValues.join(QLatin1String("|")));
+  u.setPath(u.path() + searchValues.join(QLatin1String("|")));
 
-  myDebug() << "url:" << u.url();
+//  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
 
@@ -131,14 +122,13 @@ bool HathiTrustFetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MARC21XMLHandler = new XSLTHandler(u);
   if(!m_MARC21XMLHandler->isValid()) {
@@ -155,14 +145,13 @@ bool HathiTrustFetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {
@@ -196,8 +185,6 @@ Tellico::Fetch::FetchRequest HathiTrustFetcher::updateRequest(Data::EntryPtr ent
 void HathiTrustFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
-#ifdef HAVE_QJSON
-//  myDebug();
   if(!initMARC21Handler() || !initMODSHandler()) {
     // debug messages are taken care of in the specific methods
     stop();
@@ -231,8 +218,8 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  QJson::Parser parser;
-  QVariantMap resultMap = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap resultMap = doc.object().toVariantMap();
   if(resultMap.isEmpty()) {
     myDebug() << "no results";
     stop();
@@ -252,7 +239,17 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
       myWarning() << "no iterator in record";
       continue;
     }
-    const QString marcxml = ri.value().toMap().value(QLatin1String("marc-xml")).toString();
+    QString marcxml = ri.value().toMap().value(QLatin1String("marc-xml")).toString();
+    // HathiTrust doesn't always include the XML NS in the JSON results. Assume it's always
+    // MARC XML and check that
+    QDomDocument dom;
+    if(dom.setContent(marcxml, true /* namespace processing */) && dom.documentElement().namespaceURI().isEmpty()) {
+      const QString rootName = dom.documentElement().tagName();
+      myDebug() << "no namespace, attempting to set on" << rootName << "element";
+      QRegExp rootRx(QLatin1Char('<') + rootName + QLatin1Char('>'));
+      QString newRoot = QLatin1Char('<') + rootName + QLatin1String(" xmlns=\"http://www.loc.gov/MARC21/slim\">");
+      marcxml.replace(rootRx, newRoot);
+    }
     const QString modsxml = m_MARC21XMLHandler->applyStylesheet(marcxml);
 
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(modsxml));
@@ -276,7 +273,6 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
       }
     }
 
-
     foreach(Data::EntryPtr entry, coll->entries()) {
       FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
       m_entries.insert(r->uid, entry);
@@ -285,7 +281,6 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
   }
 
   m_hasMoreResults = false; // for now, no continued searches
-#endif
   stop();
 }
 
@@ -329,4 +324,3 @@ QString HathiTrustFetcher::ConfigWidget::preferredName() const {
   return HathiTrustFetcher::defaultName();
 }
 
-#include "hathitrustfetcher.moc"

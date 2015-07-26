@@ -14,6 +14,16 @@ SET(models_STAT_SRCS
    modeltest.cpp
    )
 
-KDE4_ADD_LIBRARY(tellicomodels STATIC ${models_STAT_SRCS})
+add_library(tellicomodels STATIC ${models_STAT_SRCS})
+
+target_link_libraries(tellicomodels
+    core
+    utils
+    images
+    Qt5::Core
+    Qt5::Gui
+    Qt5::Widgets
+    KF5::ItemModels
+)
 
 ADD_DEPENDENCIES(tellicomodels tellico_config)

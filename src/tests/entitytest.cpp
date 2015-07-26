@@ -25,12 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entitytest.h"
-#include "entitytest.moc"
-#include "qtest_kde.h"
 
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 
-QTEST_KDEMAIN_CORE( EntityTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( EntityTest )
 
 #define QL1(x) QString::fromLatin1(x)
 

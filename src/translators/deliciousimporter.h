@@ -40,7 +40,7 @@ Q_OBJECT
 public:
   /**
    */
-  DeliciousImporter(const KUrl& url);
+  DeliciousImporter(const QUrl& url);
 
   /**
    */
@@ -52,7 +52,7 @@ public:
 
 private:
   // private so it can't be changed accidently
-  void setXSLTURL(const KUrl& url);
+  void setXSLTURL(const QUrl& url);
 };
 
   } // end namespace

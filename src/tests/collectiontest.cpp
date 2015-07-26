@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "collectiontest.h"
-#include "collectiontest.moc"
-#include "qtest_kde.h"
 
 #include "../collection.h"
 #include "../field.h"
@@ -37,10 +35,12 @@
 #include "../images/imagefactory.h"
 #include "../document.h"
 
-#include <KStandardDirs>
 #include <KProcess>
 
-QTEST_KDEMAIN_CORE( CollectionTest )
+#include <QTest>
+#include <QStandardPaths>
+
+QTEST_GUILESS_MAIN( CollectionTest )
 
 class TestResolver : public Tellico::MergeConflictResolver {
 public:
@@ -67,7 +67,7 @@ void CollectionTest::initTestCase() {
 
 void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
-  QVERIFY(nullColl.isNull());
+  QVERIFY(!nullColl);
 
   Tellico::Data::Collection coll(false, QLatin1String("Title"));
 
@@ -330,7 +330,7 @@ void CollectionTest::testValue_data() {
 }
 
 void CollectionTest::testDtd() {
-  const QString xmllint = KStandardDirs::findExe(QLatin1String("xmllint"));
+  const QString xmllint = QStandardPaths::findExecutable(QLatin1String("xmllint"));
   if(xmllint.isEmpty()) {
     QSKIP("This test requires xmllint", SkipAll);
   }
@@ -367,7 +367,7 @@ void CollectionTest::testDtd() {
   proc.setProgram(QLatin1String("xmllint"),
                   QStringList() << QLatin1String("--noout")
                                 << QLatin1String("--dtdvalid")
-                                << QString::fromLatin1(KDESRCDIR) + QLatin1String("../../tellico.dtd")
+                                << QFINDTESTDATA("../../tellico.dtd")
                                 << QLatin1String("-"));
 
   proc.start();

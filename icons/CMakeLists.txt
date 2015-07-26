@@ -1,6 +1,6 @@
-########### install files ###############
+include(ECMInstallIcons)
 
-set(ICON_FILES
+set(PIC_FILES
     album.png
     alexandria.png
     amc.png
@@ -54,10 +54,27 @@ set(ICON_FILES
     video.png
     vinoxml.png
     wine.png
-    )
+)
 
-INSTALL(FILES ${ICON_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR}/pics )
+INSTALL(FILES ${PIC_FILES}
+        DESTINATION ${TELLICO_DATA_INSTALL_DIR}/pics )
 
-KDE4_INSTALL_ICONS( ${ICON_INSTALL_DIR} )
+set(ICON_FILES
+    16-apps-tellico.png
+    16-mimetypes-application-x-tellico.png
+    22-apps-tellico.png
+    22-mimetypes-application-x-tellico.png
+    32-apps-tellico.png
+    32-mimetypes-application-x-tellico.png
+    48-apps-tellico.png
+    48-mimetypes-application-x-tellico.png
+    64-apps-tellico.png
+    64-mimetypes-application-x-tellico.png
+)
+
+ecm_install_icons(ICONS ${ICON_FILES}
+    DESTINATION ${KDE_INSTALL_ICONDIR}
+    THEME hicolor
+)
 
 

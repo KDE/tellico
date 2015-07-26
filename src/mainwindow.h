@@ -32,12 +32,12 @@
 #include "datavectors.h"
 
 #include <kxmlguiwindow.h>
-#include <kurl.h>
+#include <QUrl>
 
 #include <QList>
 
 class KToolBar;
-class KAction;
+class QAction;
 class KSelectAction;
 class KToggleAction;
 class KRecentFilesAction;
@@ -79,7 +79,7 @@ namespace Tellico {
  * window and reads the config file as well as providing a menubar, toolbar
  * and statusbar. Tellico reimplements the methods that KMainWindow provides
  * for main window handling and supports full session management as well as
- * using KActions.
+ * using QActions.
  * @see KMainWindow
  * @see KApplication
  * @see KConfig
@@ -127,11 +127,11 @@ public:
    * @param format The file format
    * @param url The url
    */
-  virtual bool importFile(Import::Format format, const KUrl& url, Import::Action action);
+  virtual bool importFile(Import::Format format, const QUrl& url, Import::Action action);
   /**
    * Used by DCOP to export to a file.
    */
-  virtual bool exportCollection(Export::Format format, const KUrl& url);
+  virtual bool exportCollection(Export::Format format, const QUrl& url);
   /**
    * Used by DCOP
    */
@@ -161,13 +161,13 @@ public slots:
    *
    * @param url The url to open
    */
-  void slotFileOpen(const KUrl& url);
+  void slotFileOpen(const QUrl& url);
   /**
    * Opens a file from the recent files menu
    *
    * @param url The url sent by the RecentFilesAction
    */
-  void slotFileOpenRecent(const KUrl& url);
+  void slotFileOpenRecent(const QUrl& url);
   /**
    * Saves the document
    */
@@ -304,7 +304,7 @@ public slots:
   /**
    * Handle a url that indicates some actino should be taken
    */
-  void slotURLAction(const KUrl& url);
+  void slotURLAction(const QUrl& url);
 
 private:
   /**
@@ -317,7 +317,7 @@ private:
    */
   void readOptions();
   /**
-   * Initializes the KActions of the application
+   * Initializes the QActions of the application
    */
   void initActions();
   /**
@@ -355,7 +355,7 @@ private:
    *
    * @param url The url to open
    */
-  bool openURL(const KUrl& url);
+  bool openURL(const QUrl& url);
   /*
    * Helper method to handle the printing duties.
    *
@@ -469,23 +469,23 @@ private slots:
   void slotToggleMenuBarVisibility();
 
 private:
-  void importFile(Import::Format format, const KUrl::List& kurls);
+  void importFile(Import::Format format, const QList<QUrl>& kurls);
   void importText(Import::Format format, const QString& text);
   bool importCollection(Data::CollPtr coll, Import::Action action);
 
   // the reason that I have to keep pointers to all these
   // is because they get plugged into menus later in Controller
   KRecentFilesAction* m_fileOpenRecent;
-  KAction* m_fileSave;
-  KAction* m_newEntry;
-  KAction* m_editEntry;
-  KAction* m_copyEntry;
-  KAction* m_deleteEntry;
-  KAction* m_mergeEntry;
+  QAction* m_fileSave;
+  QAction* m_newEntry;
+  QAction* m_editEntry;
+  QAction* m_copyEntry;
+  QAction* m_deleteEntry;
+  QAction* m_mergeEntry;
   KActionMenu* m_updateEntryMenu;
-  KAction* m_updateAll;
-  KAction* m_checkInEntry;
-  KAction* m_checkOutEntry;
+  QAction* m_updateAll;
+  QAction* m_checkInEntry;
+  QAction* m_checkOutEntry;
   KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
 

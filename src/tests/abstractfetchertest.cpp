@@ -25,7 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "abstractfetchertest.h"
-#include "abstractfetchertest.moc"
 
 #include "../fetch/fetcherjob.h"
 
@@ -53,6 +52,8 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
     job->setMaximumResults(maxResults);
   }
 
+  // TODO
+//  job->exec();
   job->start();
   m_loop.exec();
   return m_results;
@@ -61,4 +62,16 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
 void AbstractFetcherTest::slotResult(KJob* job_) {
   m_results = static_cast<Tellico::Fetch::FetcherJob*>(job_)->entries();
   m_loop.quit();
+}
+
+QSet<QString> AbstractFetcherTest::set(Tellico::Data::EntryPtr entry_, const char* field_) {
+  return set(entry_->field(QLatin1String(field_)));
+}
+
+QSet<QString> AbstractFetcherTest::set(const char* value_) {
+  return set(QLatin1String(value_));
+}
+
+QSet<QString> AbstractFetcherTest::set(const QString& value_) {
+  return QSet<QString>::fromList(Tellico::FieldFormat::splitValue(value_));
 }

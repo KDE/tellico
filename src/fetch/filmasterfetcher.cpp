@@ -22,29 +22,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "filmasterfetcher.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../entry.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const char* FILMASTER_API_URL = "http://api.filmaster.com";
@@ -71,11 +69,7 @@ QString FilmasterFetcher::attribution() const {
 }
 
 bool FilmasterFetcher::canSearch(FetchKey k) const {
-#ifndef HAVE_QJSON
-  return false;
-#else
   return k == Title || k == Person || k == Keyword;
-#endif
 }
 
 bool FilmasterFetcher::canFetch(int type) const {
@@ -88,16 +82,15 @@ void FilmasterFetcher::readConfigHook(const KConfigGroup&) {
 void FilmasterFetcher::search() {
   m_started = true;
 
-#ifdef HAVE_QJSON
-  KUrl u(FILMASTER_QUERY_URL);
+  QUrl u(QString::fromLatin1(FILMASTER_QUERY_URL));
 
   switch(request().key) {
     case Title:
-      u.addPath(QLatin1String("film/"));
+      u.setPath(u.path() + QLatin1String("film/"));
       break;
 
     case Person:
-      u.addPath(QLatin1String("person/"));
+      u.setPath(u.path() + QLatin1String("person/"));
       break;
 
     default:
@@ -108,11 +101,8 @@ void FilmasterFetcher::search() {
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
   connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
-#else
-  stop();
-#endif
 }
 
 void FilmasterFetcher::stop() {
@@ -136,8 +126,8 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
 
   const QString image = entry->field(QLatin1String("cover"));
   if(image.contains(QLatin1Char('/'))) {
-    KUrl imageUrl(FILMASTER_API_URL);
-    imageUrl.addPath(image);
+    QUrl imageUrl(QString::fromLatin1(FILMASTER_API_URL));
+    imageUrl.setPath(imageUrl.path() + image);
     const QString id = ImageFactory::addImage(imageUrl, true);
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);
@@ -155,9 +145,6 @@ Tellico::Fetch::FetchRequest FilmasterFetcher::updateRequest(Data::EntryPtr entr
 }
 
 void FilmasterFetcher::slotComplete(KJob* job_) {
-#ifndef HAVE_QJSON
-  stop();
-#else
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 //  myDebug();
 
@@ -188,8 +175,8 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   f.close();
 #endif
 
-  QJson::Parser parser;
-  const QVariantMap resultsMap = parser.parse(data).toMap();
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap resultsMap = doc.object().toVariantMap();
   QVariantList resultList;
   switch(request().key) {
     case Title:
@@ -207,11 +194,11 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
           uris << value(personMap, "films_directed_uri");
         }
         foreach(const QString& uri, uris) {
-          KUrl u(FILMASTER_API_URL);
+          QUrl u(QString::fromLatin1(FILMASTER_API_URL));
           u.setPath(uri);
-          // myDebug() << u;
           QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
-          resultList += parser.parse(output.toUtf8()).toMap().value(QLatin1String("objects")).toList();
+          QJsonDocument doc2 = QJsonDocument::fromJson(output.toUtf8());
+          resultList += doc2.object().toVariantMap().value(QLatin1String("objects")).toList();
         }
       }
       break;
@@ -251,11 +238,9 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 //  m_hasMoreResults = m_start <= m_total;
   m_hasMoreResults = false; // for now, no continued searches
   stop();
-#endif
 }
 
 void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_) {
-#ifdef HAVE_QJSON
   entry_->setField(QLatin1String("title"), value(result_, "title"));
   entry_->setField(QLatin1String("year"), value(result_, "release_year"));
   entry_->setField(QLatin1String("genre"), value(result_, "tags"));
@@ -274,11 +259,11 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
 
   const QString castUri = value(result_, "characters_uri");
   if(!castUri.isEmpty()) {
-    QJson::Parser parser;
-    KUrl u(FILMASTER_API_URL);
+    QUrl u(QString::fromLatin1(FILMASTER_API_URL));
     u.setPath(castUri);
     QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
-    const QVariantList castList = parser.parse(output.toUtf8()).toMap().value(QLatin1String("objects")).toList();
+    QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
+    QVariantList castList = doc.object().toVariantMap().value(QLatin1String("objects")).toList();
     QStringList castLines;
     foreach(const QVariant& castResult, castList) {
       const QVariantMap castMap = castResult.toMap();
@@ -295,7 +280,6 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
   if(optionalFields().contains(QLatin1String("filmaster"))) {
     entry_->setField(QLatin1String("filmaster"), QLatin1String("http://filmaster.com/film/") + value(result_, "permalink"));
   }
-#endif
 }
 
 Tellico::Fetch::ConfigWidget* FilmasterFetcher::configWidget(QWidget* parent_) const {
@@ -347,5 +331,3 @@ QString FilmasterFetcher::value(const QVariantMap& map, const char* name) {
     return QString();
   }
 }
-
-#include "filmasterfetcher.moc"

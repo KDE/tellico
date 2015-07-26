@@ -30,7 +30,7 @@
 #include "../datavectors.h"
 #include "../gui/kwidgetlister.h"
 
-#include <KHBox>
+#include <QFrame>
 
 namespace Tellico {
 
@@ -117,7 +117,7 @@ private:
   FetcherListWidget* m_listWidget;
 };
 
-class MultiFetcher::FetcherItemWidget : public KHBox {
+class MultiFetcher::FetcherItemWidget : public QFrame {
 Q_OBJECT
 
 public:

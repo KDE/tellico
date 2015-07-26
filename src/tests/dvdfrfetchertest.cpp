@@ -25,18 +25,17 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "dvdfrfetchertest.h"
-#include "dvdfrfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/dvdfrfetcher.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( DVDFrFetcherTest, GUI )
+QTEST_GUILESS_MAIN( DVDFrFetcherTest )
 
 DVDFrFetcherTest::DVDFrFetcherTest() : AbstractFetcherTest() {
 }
@@ -44,7 +43,7 @@ DVDFrFetcherTest::DVDFrFetcherTest() : AbstractFetcherTest() {
 void DVDFrFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/dvdfr2tellico.xsl"));
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Le Pacte des loups"));

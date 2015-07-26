@@ -32,15 +32,15 @@
 #include "../gui/collectiontypecombo.h"
 #include "../utils/stringset.h"
 
-#include <klineedit.h>
-#include <kcombobox.h>
-#include <knuminput.h>
-#include <kpushbutton.h>
-#include <kapplication.h>
-#include <kiconloader.h>
-#include <kconfig.h>
-#include <kmessagebox.h>
+#include <KComboBox>
+#include <KIntSpinBox>
+#include <KIconLoader>
+#include <KSharedConfig>
+#include <KMessageBox>
+#include <KLocalizedString>
 
+#include <QLineEdit>
+#include <QPushButton>
 #include <QGroupBox>
 #include <QLabel>
 #include <QCheckBox>
@@ -53,10 +53,11 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QButtonGroup>
+#include <QApplication>
 
 using Tellico::Import::CSVImporter;
 
-CSVImporter::CSVImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_),
+CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
     m_existingCollection(0),
     m_firstRowHeader(false),
     m_delimiter(QLatin1String(",")),
@@ -168,12 +169,12 @@ Tellico::Data::CollPtr CSVImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, 100*j/numChars);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
   {
-    KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
     config.writeEntry("Delimiter", m_delimiter);
     config.writeEntry("ColumnDelimiter", m_colDelimiter);
     config.writeEntry("RowDelimiter", m_rowDelimiter);
@@ -240,7 +241,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
   delimiterLayout->addWidget(m_radioOther);
 
-  m_editOther = new KLineEdit(groupBox);
+  m_editOther = new QLineEdit(groupBox);
   m_editOther->setEnabled(false);
   m_editOther->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editOther->setMaxLength(1);
@@ -266,7 +267,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   lab = new QLabel(i18n("Table column delimiter:"), groupBox);
   lab->setWhatsThis(w);
   delimiterLayout2->addWidget(lab);
-  m_editColDelimiter = new KLineEdit(groupBox);
+  m_editColDelimiter = new QLineEdit(groupBox);
   m_editColDelimiter->setWhatsThis(w);
   m_editColDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editColDelimiter->setMaxLength(1);
@@ -277,7 +278,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   lab = new QLabel(i18n("Table row delimiter:"), groupBox);
   lab->setWhatsThis(w);
   delimiterLayout2->addWidget(lab);
-  m_editRowDelimiter = new KLineEdit(groupBox);
+  m_editRowDelimiter = new QLineEdit(groupBox);
   m_editRowDelimiter->setWhatsThis(w);
   m_editRowDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editRowDelimiter->setMaxLength(1);
@@ -327,17 +328,17 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   hlay3->addSpacing(10);
 
-  m_setColumnBtn = new KPushButton(i18n("&Assign Field"), groupBox);
+  m_setColumnBtn = new QPushButton(i18n("&Assign Field"), groupBox);
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
-  m_setColumnBtn->setIcon(KIcon(QLatin1String("dialog-ok-apply")));
+  m_setColumnBtn->setIcon(QIcon::fromTheme(QLatin1String("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 //  hlay3->addStretch(10);
 
   l->addWidget(groupBox);
   l->addStretch(1);
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("ImportOptions - CSV"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
   m_colDelimiter = config.readEntry("ColumnDelimiter", m_colDelimiter);
   m_rowDelimiter = config.readEntry("RowDelimiter", m_rowDelimiter);
@@ -633,4 +634,3 @@ void CSVImporter::updateFieldCombo() {
   m_comboField->addItem(i18n("<New Field>"));
 }
 
-#include "csvimporter.moc"

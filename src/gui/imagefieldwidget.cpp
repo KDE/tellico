@@ -55,4 +55,3 @@ QWidget* ImageFieldWidget::widget() {
   return m_widget;
 }
 
-#include "imagefieldwidget.moc"

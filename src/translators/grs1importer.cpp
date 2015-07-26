@@ -29,6 +29,8 @@
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 
+#include <KLocalizedString>
+
 #include <QTextStream>
 
 using Tellico::Import::GRS1Importer;
@@ -139,4 +141,3 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   return coll;
 }
 
-#include "grs1importer.moc"

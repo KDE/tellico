@@ -31,8 +31,6 @@
 #include "borrower.h"
 #include "datavectors.h"
 
-#include <ksharedptr.h>
-
 #include <QStringList>
 #include <QHash>
 #include <QObject>

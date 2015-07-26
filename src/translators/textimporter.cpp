@@ -38,7 +38,7 @@ namespace {
 
 using Tellico::Import::TextImporter;
 
-TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
+TextImporter::TextImporter(const QUrl& url_, bool useUTF8_)
     : Import::Importer(url_) {
   if(url_.isValid()) {
     setText(cleanXml(FileHandler::readTextFile(url_, false, useUTF8_)));
@@ -48,4 +48,3 @@ TextImporter::TextImporter(const KUrl& url_, bool useUTF8_)
 TextImporter::TextImporter(const QString& text_) : Import::Importer(text_) {
 }
 
-#include "textimporter.moc"

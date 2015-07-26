@@ -30,14 +30,14 @@
 #include "entry.h"
 #include "field.h"
 #include "document.h"
-#include "tellico_utils.h"
+#include "utils/tellico_utils.h"
 #include "tellico_debug.h"
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
 
 #include <kmenu.h>
-#include <klocale.h>
-#include <kicon.h>
+#include <KLocalizedString>
+#include <QIcon>
 
 #include <QPainter>
 #include <QPixmap>
@@ -131,4 +131,3 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
   }
 }
 
-#include "entryiconview.moc"

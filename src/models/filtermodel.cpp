@@ -31,8 +31,8 @@
 #include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kicon.h>
+#include <KLocalizedString>
+#include <QIcon>
 
 using Tellico::FilterModel;
 
@@ -129,8 +129,8 @@ QVariant FilterModel::data(const QModelIndex& index_, int role_) const {
         return f ? f->name() : QString();
       }
     case Qt::DecorationRole:
-      return parent.isValid() ? KIcon(CollectionFactory::typeName(entry(index_)->collection()))
-                              : KIcon(QLatin1String("view-filter"));
+      return parent.isValid() ? QIcon::fromTheme(CollectionFactory::typeName(entry(index_)->collection()))
+                              : QIcon::fromTheme(QLatin1String("view-filter"));
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
@@ -298,4 +298,3 @@ void FilterModel::populateFilterNode(Node* node_, const FilterPtr filter_) const
   }
 }
 
-#include "filtermodel.moc"

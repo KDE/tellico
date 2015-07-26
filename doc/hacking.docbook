@@ -360,29 +360,6 @@ This setting is for the location of the lyxpipe for sending bibliographic citati
 </sect3>
 </sect2>
 
-<sect2 id="hidden-export-options-pilotdb">
-<title>[Export Options - PilotDB]</title>
-
-<para>
-These settings should be placed in the <emphasis>Export Options - PilotDB</emphasis> group.
-</para>
-
-<sect3>
-<title>Charset</title>
-
-<para>
-The encoding of the exported data within the PilotDB file may be changed with this setting. The default value is the character set for the user's locale.
-</para>
-</sect3>
-
-<sect3>
-<title>Example</title>
-<informalexample>
-<para><userinput>Charset=Windows-1250</userinput></para>
-</informalexample>
-</sect3>
-</sect2>
-
 </sect1>
 
 <sect1 id="bibtex-translation">

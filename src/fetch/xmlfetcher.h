@@ -31,7 +31,7 @@
 #include <QPointer>
 #include <QHash>
 
-class KUrl;
+class QUrl;
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -74,7 +74,7 @@ private slots:
 private:
   virtual void search();
   virtual void resetSearch() = 0;
-  virtual KUrl searchUrl() = 0;
+  virtual QUrl searchUrl() = 0;
   virtual void parseData(QByteArray& data) = 0;
   virtual void checkMoreResults(int count) { Q_UNUSED(count); }
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) = 0;

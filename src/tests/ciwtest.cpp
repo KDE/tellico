@@ -25,29 +25,29 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ciwtest.h"
-#include "ciwtest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/ciwimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
-QTEST_KDEMAIN_CORE( CiwTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( CiwTest )
 
 void CiwTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ciw");
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/test.ciw"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::CIWImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 6);
   QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(3);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("title"), QLatin1String("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
                                                 "Bioreactor Batch Cultures of an Engineered Saccharomyces cerevisiae Strain"));
@@ -61,7 +61,7 @@ void CiwTest::testImport() {
   QVERIFY(!entry->field("abstract").isEmpty());
 
   entry = coll->entryById(6);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("title"), QLatin1String("Prematurity: An Overview and Public Health Implications"));
   QCOMPARE(entry->field("booktitle"), QLatin1String("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));

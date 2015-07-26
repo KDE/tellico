@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "tellicoreadtest.h"
-#include "tellicoreadtest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
@@ -36,7 +34,9 @@
 #include "../fieldformat.h"
 #include "../entry.h"
 
-QTEST_KDEMAIN_CORE( TellicoReadTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( TellicoReadTest )
 
 #define QL1(x) QString::fromLatin1(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
@@ -48,7 +48,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
-    KUrl url(QL1(KDESRCDIR) + QL1("/data/books-format%1.bc").arg(i));
+    QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QL1("data/books-format%1.bc").arg(i)));
 
     Tellico::Import::TellicoImporter importer(url);
     Tellico::Data::CollPtr coll = importer.collection();
@@ -61,7 +61,7 @@ void TellicoReadTest::testBookCollection() {
   // skip the first one
   for(int i = 1; i < m_collections.count(); ++i) {
     Tellico::Data::CollPtr coll2 = m_collections[i];
-    QVERIFY(!coll2.isNull());
+    QVERIFY(coll2);
     QCOMPARE(coll1->type(), coll2->type());
     QCOMPARE(coll1->title(), coll2->title());
     QCOMPARE(coll1->entryCount(), coll2->entryCount());
@@ -89,8 +89,8 @@ void TellicoReadTest::testEntries() {
       // don't test id values since the initial value has changed from 0 to 1
       Tellico::Data::EntryPtr entry1 = m_collections[0]->entries().at(j);
       Tellico::Data::EntryPtr entry2 = m_collections[i]->entries().at(j);
-      QVERIFY(!entry1.isNull());
-      QVERIFY(!entry2.isNull());
+      QVERIFY(entry1);
+      QVERIFY(entry2);
       QCOMPARE(entry1->field(fieldName), entry2->field(fieldName));
     }
   }
@@ -112,17 +112,17 @@ void TellicoReadTest::testEntries_data() {
 }
 
 void TellicoReadTest::testCoinCollection() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/coins-format9.tc"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/coins-format9.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
 
   Tellico::Data::FieldPtr field = coll->fieldByName("title");
   // old field has Dependent value, now is Line
-  QVERIFY(!field.isNull());
+  QVERIFY(field);
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
   QCOMPARE(field->title(), QL1("Title"));
   QVERIFY(field->hasFlag(Tellico::Data::Field::Derived));
@@ -133,12 +133,12 @@ void TellicoReadTest::testCoinCollection() {
 }
 
 void TellicoReadTest::testTableData() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/tabletest.tc"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/tabletest.tc"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->entryCount(), 3);
 
   Tellico::Export::TellicoXMLExporter exporter(coll);
@@ -146,7 +146,7 @@ void TellicoReadTest::testTableData() {
   Tellico::Import::TellicoImporter importer2(exporter.text());
   Tellico::Data::CollPtr coll2 = importer2.collection();
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 
@@ -170,7 +170,8 @@ void TellicoReadTest::testTableData() {
   e3->setField(QL1("table"), value);
   QStringList groups = e3->groupNamesByFieldName("table");
   QCOMPARE(groups.count(), 3);
-  QCOMPARE(groups.at(0), QL1("11a"));
+  // the order of the group names is not stable (it uses QSet::toList)
+  QCOMPARE(groups.toSet(), QSet<QString>() << QL1("11a") << QL1("11b") << QL1("21"));
 
   // test having empty value in table
   Tellico::Data::EntryPtr e = coll2->entryById(2);
@@ -182,33 +183,33 @@ void TellicoReadTest::testTableData() {
 }
 
 void TellicoReadTest::testDuplicateLoans() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_loan.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/duplicate_loan.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
 
   QCOMPARE(coll->borrowers().count(), 1);
 
   Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
-  QVERIFY(!bor.isNull());
+  QVERIFY(bor);
 
   QCOMPARE(bor->loans().count(), 1);
 }
 
 void TellicoReadTest::testDuplicateBorrowers() {
-  KUrl url(QL1(KDESRCDIR) + QL1("/data/duplicate_borrower.xml"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/duplicate_borrower.xml"));
 
   Tellico::Import::TellicoImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
 
   QCOMPARE(coll->borrowers().count(), 1);
 
   Tellico::Data::BorrowerPtr bor = coll->borrowers().first();
-  QVERIFY(!bor.isNull());
+  QVERIFY(bor);
 
   QCOMPARE(bor->loans().count(), 2);
 }

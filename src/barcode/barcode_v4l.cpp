@@ -91,7 +91,7 @@ using barcodeRecognition::barcode_v4l;
 
 barcode_v4l::barcode_v4l()
 {
-  m_devname = QString::fromAscii("/dev/video0");
+  m_devname = QString::fromLatin1("/dev/video0");
   m_grab_width = 640;
   m_grab_height = 480;
 
@@ -174,7 +174,7 @@ QImage barcode_v4l::grab_one2()
 
 bool barcode_v4l::grab_init()
 {
-  m_fd = v4l1_open(m_devname.toAscii().constData(), O_RDONLY);
+  m_fd = v4l1_open(m_devname.toLatin1().constData(), O_RDONLY);
   if (m_fd < 0) {
     myDebug() << "v4l: open " << m_devname << ": " << strerror(errno) << endl;
     return false;

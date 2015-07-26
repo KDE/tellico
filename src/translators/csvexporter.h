@@ -27,8 +27,7 @@
 
 #include "exporter.h"
 
-class KLineEdit;
-
+class QLineEdit;
 class QWidget;
 class QCheckBox;
 class QRadioButton;
@@ -68,9 +67,9 @@ private:
   QRadioButton* m_radioSemicolon;
   QRadioButton* m_radioTab;
   QRadioButton* m_radioOther;
-  KLineEdit* m_editOther;
-  KLineEdit* m_colDelimiterEdit;
-  KLineEdit* m_rowDelimiterEdit;
+  QLineEdit* m_editOther;
+  QLineEdit* m_colDelimiterEdit;
+  QLineEdit* m_rowDelimiterEdit;
 };
 
   } // end namespace

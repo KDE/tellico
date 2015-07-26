@@ -23,16 +23,14 @@
  ***************************************************************************/
 
 #include "csvexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
 
-#include <klocale.h>
-#include <kdebug.h>
-#include <klineedit.h>
+#include <KLocalizedString>
 #include <kconfig.h>
 #include <KConfigGroup>
 
+#include <QLineEdit>
 #include <QGroupBox>
 #include <QCheckBox>
 #include <QRadioButton>
@@ -166,7 +164,7 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
   m_radioOther->setWhatsThis(i18n("Use a custom string as the delimiter."));
   m_delimiterGroupLayout->addWidget(m_radioOther, 1, 1);
 
-  m_editOther = new KLineEdit(delimiterGroup);
+  m_editOther = new QLineEdit(delimiterGroup);
   m_editOther->setEnabled(m_radioOther->isChecked());
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_delimiterGroupLayout->addWidget(m_editOther, 1, 2);
@@ -186,7 +184,7 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
   }
 
   QLabel* label = new QLabel(i18n("Table column delimiter:"), gbox);
-  m_colDelimiterEdit = new KLineEdit(gbox);
+  m_colDelimiterEdit = new QLineEdit(gbox);
   m_colDelimiterEdit->setText(m_colDelimiter);
   m_delimiterGroupLayout->addWidget(label, 2, 0, 1, 2);
   m_delimiterGroupLayout->addWidget(m_colDelimiterEdit, 2, 2);
@@ -195,7 +193,7 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
   m_colDelimiterEdit->setWhatsThis(w);
 
   label = new QLabel(i18n("Table row delimiter:"), gbox);
-  m_rowDelimiterEdit = new KLineEdit(gbox);
+  m_rowDelimiterEdit = new QLineEdit(gbox);
   m_rowDelimiterEdit->setText(m_rowDelimiter);
   m_delimiterGroupLayout->addWidget(label, 3, 0, 1, 2);
   m_delimiterGroupLayout->addWidget(m_rowDelimiterEdit, 3, 2);
@@ -248,4 +246,3 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("ColumnDelimiter", m_colDelimiter);
 }
 
-#include "csvexporter.moc"

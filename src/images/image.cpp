@@ -23,15 +23,14 @@
  ***************************************************************************/
 
 #include "image.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
-#include "../tellico_utils.h"
-
-#include <kcodecs.h>
 
 #include <QBuffer>
 #include <QRegExp>
 #include <QImageReader>
 #include <QImageWriter>
+#include <QCryptographicHash>
 
 using Tellico::Data::Image;
 
@@ -140,7 +139,8 @@ void Image::calculateID() {
 }
 
 QString Image::calculateID(const QByteArray& data_, const QString& format_) {
-  KMD5 md5(data_);
-  QString id = QLatin1String(md5.hexDigest()) + QLatin1Char('.') + format_.toLower();
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  md5.addData(data_);
+  QString id = QLatin1String(md5.result().toHex()) + QLatin1Char('.') + format_.toLower();
   return idClean(id);
 }

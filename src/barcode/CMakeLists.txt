@@ -5,4 +5,9 @@ SET(barcode_STAT_SRCS
    barcode_v4l.cpp
    )
 
-KDE4_ADD_LIBRARY(barcode STATIC ${barcode_STAT_SRCS})
+add_library(barcode STATIC ${barcode_STAT_SRCS})
+
+TARGET_LINK_LIBRARIES(barcode
+    Qt5::Core
+    Qt5::Gui
+)

@@ -23,22 +23,21 @@
  ***************************************************************************/
 
 #include "alexandriaexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../progressmanager.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <kapplication.h>
+#include <KLocalizedString>
+#include <KMessageBox>
 
 #include <QDir>
 #include <QTextStream>
+#include <QApplication>
 
 namespace {
   static const int ALEXANDRIA_MAX_SIZE_SMALL = 60;
@@ -70,7 +69,7 @@ bool AlexandriaExporter::exec() {
   const QString alexDirName = QLatin1String(".alexandria");
 
   // create if necessary
-  const KUrl u = url();
+  const QUrl u = url();
   QDir libraryDir;
   if(u.isEmpty()) {
     libraryDir = QDir::home();
@@ -118,7 +117,7 @@ bool AlexandriaExporter::exec() {
     success &= writeFile(libraryDir, entry);
     if(showProgress && j%stepSize == 0) {
       item.setProgress(j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
   }
@@ -223,4 +222,3 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
       && img2.save(filename + QLatin1String("_small.jpg"), "JPEG");
 }
 
-#include "alexandriaexporter.moc"

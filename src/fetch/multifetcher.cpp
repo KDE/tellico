@@ -29,12 +29,12 @@
 #include "../gui/collectiontypecombo.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 
 using namespace Tellico;
 using Tellico::Fetch::MultiFetcher;
@@ -185,10 +185,13 @@ MultiFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MultiFetcher* f
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
 
-  KHBox* hbox = new KHBox(optionsWidget());
+  QWidget* hbox = new QWidget(optionsWidget());
+  QHBoxLayout* hboxHBoxLayout = new QHBoxLayout(hbox);
+  hboxHBoxLayout->setMargin(0);
   l->addWidget(hbox);
 
   QLabel* label = new QLabel(i18n("Collection &type:"), hbox);
+  hboxHBoxLayout->addWidget(label);
   m_collCombo = new GUI::CollectionTypeCombo(hbox);
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
@@ -230,9 +233,16 @@ QString MultiFetcher::ConfigWidget::preferredName() const {
 }
 
 MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
-    : KHBox(parent_) {
+    : QFrame(parent_) {
+  QHBoxLayout* layout = new QHBoxLayout(this);
+  layout->setSpacing(0);
+  layout->setMargin(0);
+  setLayout(layout);
+
   QLabel* label = new QLabel(QLatin1String("Data source:"), this);
+  layout->addWidget(label);
   m_fetcherCombo = new GUI::ComboBox(this);
+  layout->addWidget(m_fetcherCombo);
   connect(m_fetcherCombo, SIGNAL(activated(int)), SIGNAL(signalModified()));
   label->setBuddy(m_fetcherCombo);
 }
@@ -302,4 +312,3 @@ QWidget* MultiFetcher::FetcherListWidget::createWidget(QWidget* parent_) {
   return w;
 }
 
-#include "multifetcher.moc"

@@ -24,28 +24,22 @@
 
 #include "lyxpipe.h"
 #include "../collection.h"
-#include "../translators/bibtexhandler.h"
-#include "../tellico_kernel.h"
+#include "../utils/bibtexhandler.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kde_file.h>
+#include <KLocalizedString>
 
 #include <QFile>
 #include <QTextStream>
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-
 using Tellico::Cite::Lyxpipe;
 
-Lyxpipe::Lyxpipe() : Action() {
+Lyxpipe::Lyxpipe() : Action(), m_hasError(false) {
 }
 
 bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
+  m_hasError = false;
   if(entries_.isEmpty()) {
     return false;
   }
@@ -60,18 +54,16 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
   lyxpipe += QLatin1String(".in");
 //  myDebug() << lyxpipe;
 
-  QString errorStr = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
+  m_errorString = i18n("<qt>Tellico is unable to write to the server pipe at <b>%1</b>.</qt>", lyxpipe);
 
   QFile file(lyxpipe);
   if(!file.exists()) {
-    Kernel::self()->sorry(errorStr);
+    m_hasError = true;
     return false;
   }
 
-  int pipeFd = KDE_open(QFile::encodeName(lyxpipe), O_WRONLY);
-  if(!file.open(pipeFd, QIODevice::WriteOnly)) {
-    Kernel::self()->sorry(errorStr);
-    ::close(pipeFd);
+  if(!file.open(QIODevice::WriteOnly)) {
+    m_hasError = true;
     return false;
   }
 
@@ -102,6 +94,13 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
 //  ts << "LYXSRV:tellico:bye\n";
   ts.flush();
   file.close();
-  ::close(pipeFd);
   return true;
+}
+
+bool Lyxpipe::hasError() const {
+  return m_hasError;
+}
+
+QString Lyxpipe::errorString() const {
+  return m_hasError ? m_errorString : QString();
 }

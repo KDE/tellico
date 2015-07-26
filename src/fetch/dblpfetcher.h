@@ -77,7 +77,7 @@ public:
 private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   virtual void resetSearch();
-  virtual KUrl searchUrl();
+  virtual QUrl searchUrl();
   virtual void parseData(QByteArray& data);
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 };

@@ -24,16 +24,16 @@
 
 #include "stringmapdialog.h"
 
-#include <klocale.h>
-#include <klineedit.h>
+#include <KLocalizedString>
 #include <kiconloader.h>
 #include <kdialogbuttonbox.h>
-#include <KHBox>
 
 #include <QTreeWidget>
 #include <QHeaderView>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLineEdit>
 
 using Tellico::StringMapDialog;
 
@@ -53,20 +53,24 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(slotUpdate(QTreeWidgetItem*)));
   l->addWidget(m_treeWidget);
 
-  KHBox* box = new KHBox(page);
-  box->setMargin(4);
-  box->setSpacing(KDialog::spacingHint());
+  QWidget* box = new QWidget(page);
+  QHBoxLayout* boxHBoxLayout = new QHBoxLayout(box);
+  boxHBoxLayout->setMargin(4);
+  boxHBoxLayout->setSpacing(KDialog::spacingHint());
   l->addWidget(box);
 
-  m_edit1 = new KLineEdit(box);
+  m_edit1 = new QLineEdit(box);
+  boxHBoxLayout->addWidget(m_edit1);
   m_edit1->setFocus();
-  m_edit2 = new KLineEdit(box);
+  m_edit2 = new QLineEdit(box);
+  boxHBoxLayout->addWidget(m_edit2);
 
   KDialogButtonBox* bb = new KDialogButtonBox(box);
-  bb->addButton(KGuiItem(i18nc("set a value", "&Set") ,KIcon(QLatin1String("document-new"))),
+  boxHBoxLayout->addWidget(bb);
+  bb->addButton(KGuiItem(i18nc("set a value", "&Set") ,QIcon::fromTheme(QLatin1String("document-new"))),
                 QDialogButtonBox::ActionRole,
                 this, SLOT(slotAdd()));
-  bb->addButton(KGuiItem(i18nc("delete a value", "&Delete"), KIcon(QLatin1String("edit-delete"))),
+  bb->addButton(KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))),
                 QDialogButtonBox::ActionRole,
                 this, SLOT(slotDelete()));
 
@@ -133,4 +137,3 @@ QMap<QString, QString> StringMapDialog::stringMap() {
   return map;
 }
 
-#include "stringmapdialog.moc"

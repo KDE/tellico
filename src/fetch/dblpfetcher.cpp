@@ -25,8 +25,9 @@
 #include "dblpfetcher.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
+#include <QUrl>
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -58,8 +59,8 @@ bool DBLPFetcher::canFetch(int type) const {
 void DBLPFetcher::readConfigHook(const KConfigGroup&) {
 }
 
-KUrl DBLPFetcher::searchUrl() {
-  KUrl u(DBLP_API_URL);
+QUrl DBLPFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(DBLP_API_URL));
 
   switch(request().key) {
     case Keyword:
@@ -70,7 +71,7 @@ KUrl DBLPFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized:" << request().key;
-      return KUrl();
+      return QUrl();
   }
   // has to be after query
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
@@ -137,4 +138,3 @@ QString DBLPFetcher::ConfigWidget::preferredName() const {
   return DBLPFetcher::defaultName();
 }
 
-#include "dblpfetcher.moc"

@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "wallet.h"
-#include "../gui/guiproxy.h"
+#include "guiproxy.h"
 
 #include <kwallet.h>
 

@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "imdbfetchertest.h"
-#include "imdbfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/imdbfetcher.h"
 #include "../entry.h"
@@ -36,9 +34,12 @@
 #include "../fieldformat.h"
 #include "../fetch/fetcherjob.h"
 
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( ImdbFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( ImdbFetcherTest )
 
 ImdbFetcherTest::ImdbFetcherTest() : AbstractFetcherTest() {
 }
@@ -49,7 +50,7 @@ void ImdbFetcherTest::initTestCase() {
 }
 
 void ImdbFetcherTest::testSnowyRiver() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -69,9 +70,9 @@ void ImdbFetcherTest::testSnowyRiver() {
 
   QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Adventure; Drama; Family; Romance; Western"));
+  QCOMPARE(set(entry, "genre"), set("Adventure; Drama; Family; Romance; Western"));
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
-  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
+  QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
@@ -79,7 +80,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("language"), QLatin1String("English"));
   QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
+  QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
@@ -90,7 +91,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 
 void ImdbFetcherTest::testSnowyRiverFr() {
   return;
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB FR");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -112,9 +113,9 @@ void ImdbFetcherTest::testSnowyRiverFr() {
   QEXPECT_FAIL("", "IMDB.fr now redirects to imdb.com", Abort);
   QCOMPARE(entry->field("title"), QString::fromUtf8("L'homme de la rivière d'argent"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Aventure; Drame; Famille; Romance; Western"));
+  QCOMPARE(set(entry, "genre"), set("Aventure; Drame; Famille; Romance; Western"));
   QCOMPARE(entry->field("nationality"), QLatin1String("Australie"));
-  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
+  QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2,35 : 1"));
@@ -122,7 +123,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
   QCOMPARE(entry->field("language"), QLatin1String("Anglais"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
   QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
+  QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("http://www.imdb.fr/title/tt0084296/"));
@@ -133,7 +134,7 @@ void ImdbFetcherTest::testSnowyRiverFr() {
 
 void ImdbFetcherTest::testSnowyRiverEs() {
   return;
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB ES");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -155,9 +156,9 @@ void ImdbFetcherTest::testSnowyRiverEs() {
   QEXPECT_FAIL("", "IMDB.es now redirects to imdb.com", Abort);
   QCOMPARE(entry->field("title"), QString::fromUtf8("El hombre de río Nevado"));
   QCOMPARE(entry->field("year"), QLatin1String("1982"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Aventura; Drama; Familia; Romance; Del Oeste"));
+  QCOMPARE(set(entry, "genre"), set("Aventura; Drama; Familia; Romance; Del Oeste"));
   QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
-  QCOMPARE(entry->field("studio"), QLatin1String("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
+  QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QLatin1String("102"));
   QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
   QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2,35 : 1"));
@@ -165,7 +166,7 @@ void ImdbFetcherTest::testSnowyRiverEs() {
   QCOMPARE(entry->field("language"), QString::fromUtf8("Inglés"));
   QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
 //  QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Cul Cullen; A.B. 'Banjo' Paterson"));
+  QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("http://www.imdb.es/title/tt0084296/"));
@@ -175,7 +176,7 @@ void ImdbFetcherTest::testSnowyRiverEs() {
 }
 
 void ImdbFetcherTest::testAsterix() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -193,9 +194,9 @@ void ImdbFetcherTest::testAsterix() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QString::fromUtf8("Astérix aux jeux olympiques"));
-  QCOMPARE(entry->field("director"), QString::fromUtf8("Thomas Langmann; Frédéric Forestier"));
-  QCOMPARE(entry->field("writer"), QString::fromUtf8("René Goscinny; Albert Uderzo"));
+  QCOMPARE(set(entry, "title"), set(QString::fromUtf8("Astérix aux jeux olympiques")));
+  QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Thomas Langmann; Frédéric Forestier")));
+  QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("René Goscinny; Albert Uderzo")));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los juegos olímpicos")));
   QVERIFY(altTitleList.contains(QLatin1String("Asterix alle olimpiadi")));
@@ -215,7 +216,7 @@ void ImdbFetcherTest::testBodyDouble() {
 
   QCOMPARE(entry->field("title"), QLatin1String("Body Double"));
   QCOMPARE(entry->field("director"), QLatin1String("Brian De Palma"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Brian De Palma; Robert J. Avrech"));
+  QCOMPARE(set(entry, "writer"), set("Brian De Palma; Robert J. Avrech"));
   QCOMPARE(entry->field("producer"), QLatin1String("Brian De Palma"));
 }
 
@@ -231,8 +232,8 @@ void ImdbFetcherTest::testMary() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("director"), QLatin1String("Peter Farrelly; Bobby Farrelly"));
-  QCOMPARE(entry->field("writer"), QLatin1String("John J. Strauss; Ed Decter"));
+  QCOMPARE(set(entry, "director"), set("Peter Farrelly; Bobby Farrelly"));
+  QCOMPARE(set(entry, "writer"), set("John J. Strauss; Ed Decter"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=262036
@@ -248,7 +249,7 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
   QCOMPARE(entry->field("genre"), QLatin1String("Drama; Fantasy"));
   QCOMPARE(entry->field("director"), QLatin1String("Takashi Miike"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Ikki Kajiwara; Hisao Maki"));
+  QCOMPARE(set(entry, "writer"), set("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
@@ -290,5 +291,5 @@ void ImdbFetcherTest::testBabel() {
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
   QCOMPARE(entry->field("writer"), QLatin1String("Guillermo Arriaga"));
   // I can't figure out why this test has to use fromLocal8Bit instead of fromUtf8. The actual Tellico output is the same.
-  QCOMPARE(entry->field("producer"), QString::fromLocal8Bit("Steve Golin; Alejandro González Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber"));
+  QCOMPARE(set(entry, "producer"), set(QString::fromLocal8Bit("Steve Golin; Alejandro González Iñárritu; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }

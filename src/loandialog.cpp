@@ -30,17 +30,18 @@
 #include "collection.h"
 #include "commands/addloans.h"
 #include "commands/modifyloans.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <ktextedit.h>
 #include <kiconloader.h>
 #include <KJob>
+#include <KSharedConfig>
 #ifdef HAVE_KABC
-#include <kabc/addressee.h>
+#include <kcontacts/addressee.h>
 #include <Akonadi/Contact/ContactSearchJob>
 #endif
 
@@ -123,7 +124,7 @@ void LoanDialog::init() {
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
   button(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(KIcon(QLatin1String("kaddressbook")), QString(), mainWidget);
+  KPushButton* pb = new KPushButton(QIcon::fromTheme(QLatin1String("kaddressbook")), QString(), mainWidget);
   topLayout->addWidget(pb, row, 2);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
@@ -179,7 +180,7 @@ void LoanDialog::init() {
                                    "to your active calendar, which can be viewed using KOrganizer. "
                                    "The box is only active if you set a due date.</qt>"));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
   restoreDialogSize(config);
 
 #ifdef HAVE_KABC
@@ -191,7 +192,7 @@ void LoanDialog::init() {
 }
 
 LoanDialog::~LoanDialog() {
-  KConfigGroup config(KGlobal::config(), QLatin1String("Loan Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
   saveDialogSize(config);
 }
 
@@ -225,7 +226,7 @@ void LoanDialog::akonadiSearchResult(KJob* job_) {
 
   populateBorrowerList();
 
-  foreach(const KABC::Addressee& addressee, searchJob->contacts()) {
+  foreach(const KContacts::Addressee& addressee, searchJob->contacts()) {
     // skip people with no name
     const QString name = addressee.realName().trimmed();
     if(name.isEmpty()) {
@@ -304,4 +305,3 @@ QUndoCommand* LoanDialog::modifyLoansCommand() {
   return new Command::ModifyLoans(m_loan, newLoan, m_addEvent->isChecked());
 }
 
-#include "loandialog.moc"

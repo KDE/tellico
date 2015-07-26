@@ -27,8 +27,6 @@
 
 #include "datavectors.h"
 
-#include <ksharedptr.h>
-
 #include <QList>
 #include <QString>
 #include <QVariant>

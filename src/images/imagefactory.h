@@ -27,15 +27,13 @@
 
 #include "../utils/stringset.h"
 
-#include <kurl.h>
-
+#include <QUrl>
 #include <QObject>
 #include <QColor>
 #include <QHash>
 #include <QCache>
 #include <QPixmap>
 
-class KTempDir;
 class KZip;
 
 namespace Tellico {
@@ -93,8 +91,8 @@ public:
    * @param quiet If any error should not be reported.
    * @return The image id, empty if null
    */
-  static QString addImage(const KUrl& url, bool quiet=false,
-                          const KUrl& referrer = KUrl(), bool linkOnly=false);
+  static QString addImage(const QUrl& url, bool quiet=false,
+                          const QUrl& referrer = QUrl(), bool linkOnly=false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -149,7 +147,7 @@ public:
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
-  static void setLocalDirectory(const KUrl& url);
+  static void setLocalDirectory(const QUrl& url);
   static void setZipArchive(KZip* zip);
 
   static ImageFactory* self();
@@ -166,8 +164,8 @@ private:
    * @param quiet If any error should not be reported.
    * @return The image
    */
-  const Data::Image& addImageImpl(const KUrl& url, bool quiet=false,
-                                  const KUrl& referrer = KUrl(), bool linkOnly = false);
+  const Data::Image& addImageImpl(const QUrl& url, bool quiet=false,
+                                  const QUrl& referrer = QUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't

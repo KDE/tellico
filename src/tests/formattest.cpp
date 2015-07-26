@@ -25,13 +25,13 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "formattest.h"
-#include "formattest.moc"
-#include "qtest_kde.h"
 
 #include "../fieldformat.h"
 #include "../core/tellico_config.h"
 
-QTEST_KDEMAIN_CORE( FormatTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( FormatTest )
 
 void FormatTest::initTestCase() {
   Tellico::Config::setArticlesString(QString("the,l'"));
@@ -140,4 +140,3 @@ void FormatTest::testSplit() {
   QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);
 }
-

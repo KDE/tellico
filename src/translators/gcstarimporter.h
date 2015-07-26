@@ -42,7 +42,7 @@ Q_OBJECT
 public:
   /**
    */
-  GCstarImporter(const KUrl& url);
+  GCstarImporter(const QUrl& url);
   GCstarImporter(const QString& text);
 
   /**

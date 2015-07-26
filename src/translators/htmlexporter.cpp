@@ -25,30 +25,28 @@
 #include "htmlexporter.h"
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
-#include "../document.h"
 #include "../collection.h"
 #include "../core/filehandler.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
-#include "../tellico_kernel.h"
-#include "../tellico_utils.h"
+#include "../document.h"
+#include "../utils/tellico_utils.h"
+#include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../progressmanager.h"
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
-#include "../gui/cursorsaver.h"
-#include "../newstuff/manager.h"
+#include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <KConfigGroup>
-#include <kglobal.h>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <kio/netaccess.h>
-#include <kapplication.h>
-#include <klocale.h>
-#include <kuser.h>
+#include <KLocalizedString>
+#include <KUser>
 
+#include <QDir>
 #include <QDomDocument>
 #include <QGroupBox>
 #include <QCheckBox>
@@ -57,6 +55,8 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QFileInfo>
+#include <QApplication>
+#include <QLocale>
 
 extern "C" {
 #include <libxml/HTMLparser.h>
@@ -162,20 +162,19 @@ bool HTMLExporter::exec() {
 }
 
 bool HTMLExporter::loadXSLTFile() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
-  if(xsltfile.isEmpty()) {
-    myDebug() << "no xslt file for " << m_xsltFile;
+  QString xsltFile = DataFileRegistry::self()->locate(m_xsltFile);
+  if(xsltFile.isEmpty()) {
+    myDebug() << "no xslt file for" << m_xsltFile;
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltFile);
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
   if(dom.isNull()) {
-    myDebug() << "error loading xslt file: " << xsltfile;
+    myDebug() << "error loading xslt file:" << xsltFile;
     return false;
   }
 
@@ -190,12 +189,12 @@ bool HTMLExporter::loadXSLTFile() {
   }
 
   delete m_handler;
-  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);
+  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile), true /*translate*/);
   if(m_checkCommonFile && !m_handler->isValid()) {
-    NewStuff::Manager::checkCommonFile();
+    Tellico::checkCommonXSLFile();
     m_checkCommonFile = false;
     delete m_handler;
-    m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile), true /*translate*/);
+    m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile), true /*translate*/);
   }
   if(!m_handler->isValid()) {
     delete m_handler;
@@ -208,7 +207,7 @@ bool HTMLExporter::loadXSLTFile() {
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files
-    m_handler->addStringParam("entrydir", QFile::encodeName(fileDir().fileName())+ '/');
+    m_handler->addStringParam("entrydir", QFile::encodeName(fileDir().fileName()) + '/');
     // be sure to link all the entries
     m_handler->addParam("link-entries", "true()");
   }
@@ -222,7 +221,7 @@ bool HTMLExporter::loadXSLTFile() {
   // if parseDOM, that means we want the locations to be the actual location
   // otherwise, we assume it'll be relative
   if(m_parseDOM && m_dataDir.isEmpty()) {
-    m_dataDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
+    m_dataDir = Tellico::dataDir();
   } else if(!m_parseDOM) {
     m_dataDir.clear();
   }
@@ -237,7 +236,7 @@ bool HTMLExporter::loadXSLTFile() {
 
 QString HTMLExporter::text() {
   if((!m_handler || !m_handler->isValid()) && !loadXSLTFile()) {
-    myWarning() << "error loading xslt file: " << m_xsltFile;
+    myWarning() << "error loading xslt file:" << m_xsltFile;
     return QString();
   }
 
@@ -289,11 +288,11 @@ QString HTMLExporter::text() {
 }
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
-  QString file = Kernel::self()->URL().fileName();
+  QString file = Data::Document::self()->URL().fileName();
   if(file != i18n(Tellico::untitledFilename)) {
     m_handler->addStringParam("filename", QFile::encodeName(file));
   }
-  m_handler->addStringParam("cdate", KGlobal::locale()->formatDate(QDate::currentDate()).toUtf8());
+  m_handler->addStringParam("cdate", QLocale().toString(QDate::currentDate()).toUtf8());
   m_handler->addParam("show-headers", m_printHeaders ? "true()" : "false()");
   m_handler->addParam("group-entries", m_printGrouped ? "true()" : "false()");
 
@@ -367,7 +366,9 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   }
 
   QString pageTitle = coll->title();
-  pageTitle += QLatin1Char(' ') + sortString;
+  if(!sortString.isEmpty()) {
+    pageTitle += QLatin1Char(' ') + sortString;
+  }
   m_handler->addStringParam("page-title", pageTitle.toUtf8());
 
   QStringList showFields;
@@ -391,7 +392,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
   m_handler->addStringParam("color2",   Config::templateHighlightedBaseColor(type).name().toLatin1());
 
   // add locale code to stylesheet (for sorting)
-  m_handler->addStringParam("lang", KGlobal::locale()->language().toLatin1());
+  m_handler->addStringParam("lang", QLocale().name().toLatin1());
 }
 
 void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
@@ -419,7 +420,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
 
   // all of them are going to get written to tmp file
   bool useTemp = url().isEmpty();
-  KUrl imgDir;
+  QUrl imgDir;
   QString imgDirRelative;
   // really some convoluted logic here
   // basically, four cases. 1) we're writing to a tmp file, for printing probably
@@ -430,7 +431,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // probably an image in the entry template. 4) we're exporting HTML, and this is not the
   // first entry file, in which case, we want to refer directly to the target dir
   if(useTemp) { // everything goes in the tmp dir
-    imgDir.setPath(ImageFactory::tempDir());
+    imgDir = QUrl::fromLocalFile(ImageFactory::tempDir());
     imgDirRelative = imgDir.path();
   } else if(m_parseDOM) {
     imgDir = fileDir(); // copy to fileDir
@@ -438,7 +439,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     createDir();
   } else {
     imgDir = fileDir();
-    imgDirRelative = KUrl::relativeUrl(url(), imgDir);
+    imgDirRelative = QDir(url().toLocalFile()).relativeFilePath(imgDir.path());
     createDir();
   }
   m_handler->addStringParam("imgdir", QFile::encodeName(imgDirRelative));
@@ -462,8 +463,9 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
         success = ImageFactory::imageInfo(id).linkOnly || ImageFactory::writeCachedImage(id, ImageFactory::TempDir);
       } else {
         const Data::Image& img = ImageFactory::imageById(id);
-        KUrl target = imgDir;
-        target.addPath(id);
+        QUrl target = imgDir;
+        target = target.adjusted(QUrl::StripTrailingSlash);
+        target.setPath(target.path() + QLatin1Char('/') + (id));
         success = !img.isNull() && FileHandler::writeDataURL(target, img.byteArray(), true);
       }
       if(!success) {
@@ -472,7 +474,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
       }
 
       if(++count == processCount) {
-        kapp->processEvents();
+        qApp->processEvents();
         count = 0;
       }
     }
@@ -521,8 +523,8 @@ void HTMLExporter::readOptions(KSharedConfigPtr config_) {
 
   // read current entry export template
   m_entryXSLTFile = Config::templateName(collection()->type());
-  m_entryXSLTFile = KStandardDirs::locate("appdata", QLatin1String("entry-templates/")
-                                          + m_entryXSLTFile + QLatin1String(".xsl"));
+  m_entryXSLTFile = DataFileRegistry::self()->locate(QLatin1String("entry-templates/")
+                                                     + m_entryXSLTFile + QLatin1String(".xsl"));
 }
 
 void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
@@ -545,14 +547,15 @@ void HTMLExporter::setXSLTFile(const QString& filename_) {
   reset();
 }
 
-KUrl HTMLExporter::fileDir() const {
+QUrl HTMLExporter::fileDir() const {
   if(url().isEmpty()) {
-    return KUrl();
+    return QUrl();
   }
-  KUrl fileDir = url();
+  QUrl fileDir = url();
   // cd to directory of target URL
-  fileDir.cd(QLatin1String(".."));
-  fileDir.addPath(fileDirName());
+  fileDir = fileDir.resolved(QUrl(QLatin1String("..")));
+  fileDir = fileDir.adjusted(QUrl::StripTrailingSlash);
+  fileDir.setPath(fileDir.path() + QLatin1Char('/') + fileDirName());
   return fileDir;
 }
 
@@ -574,20 +577,19 @@ QString HTMLExporter::handleLink(const QString& link_) {
     return m_links[link_];
   }
   // assume that if the link_ is not relative, then we don't need to copy it
-  if(!KUrl::isRelativeUrl(link_)) {
+  if(!QUrl::fromUserInput(link_).isRelative()) {
     return link_;
   }
 
   if(m_xsltFilePath.isEmpty()) {
-    m_xsltFilePath = KStandardDirs::locate("appdata", m_xsltFile);
+    m_xsltFilePath = DataFileRegistry::self()->locate(m_xsltFile);
     if(m_xsltFilePath.isEmpty()) {
       myWarning() << "no xslt file for " << m_xsltFile;
     }
   }
 
-  KUrl u;
-  u.setPath(m_xsltFilePath);
-  u = KUrl(u, link_);
+  QUrl u = QUrl::fromLocalFile(m_xsltFilePath);
+  u = QUrl(u).resolved(link_);
 
   // one of the "quirks" of the html export is that img src urls are set to point to
   // the tmpDir() when exporting entry files from a collection, but those images
@@ -646,7 +648,7 @@ void HTMLExporter::createDir() {
   if(!m_checkCreateDir) {
     return;
   }
-  KUrl dir = fileDir();
+  QUrl dir = fileDir();
   if(dir.isEmpty()) {
     myDebug() << "called on empty URL!";
     return;
@@ -668,8 +670,8 @@ bool HTMLExporter::copyFiles() {
   int j = 0;
 
   createDir();
-  KUrl target;
-  for(KUrl::List::ConstIterator it = m_files.constBegin(); it != m_files.constEnd() && !m_cancelled; ++it, ++j) {
+  QUrl target;
+  for(QList<QUrl>::ConstIterator it = m_files.constBegin(); it != m_files.constEnd() && !m_cancelled; ++it, ++j) {
     if(m_copiedFiles.has((*it).url())) {
       continue;
     }
@@ -677,7 +679,8 @@ bool HTMLExporter::copyFiles() {
     if(target.isEmpty()) {
       target = fileDir();
     }
-    target.setFileName((*it).fileName());
+    target = target.adjusted(QUrl::RemoveFilename);
+    target.setPath(target.path() + (*it).fileName());
     KIO::FileCopyJob* job = KIO::file_copy(*it, target, -1, KIO::Overwrite);
     bool success = KIO::NetAccess::synchronousRun(job, m_widget);
     if(success) {
@@ -690,7 +693,7 @@ bool HTMLExporter::copyFiles() {
       if(options() & ExportProgress) {
         ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
   return true;
@@ -715,7 +718,7 @@ bool HTMLExporter::writeEntryFiles() {
                                                    FieldFormat::ForceFormat :
                                                    FieldFormat::AsIsFormat);
 
-  KUrl outputFile = fileDir();
+  QUrl outputFile = fileDir();
 
   GUI::CursorSaver cs(Qt::WaitCursor);
 
@@ -741,7 +744,8 @@ bool HTMLExporter::writeEntryFiles() {
     }
     file.replace(badChars, QLatin1String("_"));
     file += QLatin1Char('-') + QString::number(entryIt->id()) + html;
-    outputFile.setFileName(file);
+    outputFile = outputFile.adjusted(QUrl::RemoveFilename);
+    outputFile.setPath(outputFile.path() + file);
 
     exporter.setEntries(Data::EntryList() << entryIt);
     exporter.setURL(outputFile);
@@ -762,7 +766,7 @@ bool HTMLExporter::writeEntryFiles() {
       if(options() & ExportProgress) {
         ProgressManager::self()->setProgress(this, qMin(start+j/stepSize, 99));
       }
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
   }
@@ -773,14 +777,16 @@ bool HTMLExporter::writeEntryFiles() {
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
-  KUrl dataDir;
-  dataDir.setPath(KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png")) + QLatin1String("pics/"));
-  KUrl target = fileDir();
-  target.addPath(QLatin1String("pics/"));
+  QUrl dataDir = QUrl::fromLocalFile(Tellico::dataDir() + QLatin1String("pics/"));
+  QUrl target = fileDir();
+  target = target.adjusted(QUrl::StripTrailingSlash);
+  target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
   KIO::NetAccess::mkdir(target, m_widget);
   foreach(const QString& dataImage, dataImages) {
-    dataDir.setFileName(dataImage);
-    target.setFileName(dataImage);
+    dataDir = dataDir.adjusted(QUrl::RemoveFilename);
+    dataDir.setPath(dataDir.path() + dataImage);
+    target = target.adjusted(QUrl::RemoveFilename);
+    target.setPath(target.path() + dataImage);
     KIO::NetAccess::file_copy(dataDir, target, m_widget);
   }
 
@@ -848,4 +854,3 @@ void HTMLExporter::parseDOM(xmlNode* node_) {
   }
 }
 
-#include "htmlexporter.moc"

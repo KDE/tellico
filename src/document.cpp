@@ -39,16 +39,15 @@
 #include "progressmanager.h"
 #include "core/tellico_config.h"
 #include "entrycomparison.h"
-#include "gui/guiproxy.h"
+#include "utils/guiproxy.h"
 #include "tellico_debug.h"
 
-#include <kmessagebox.h>
-#include <klocale.h>
-#include <kglobal.h>
-#include <kapplication.h>
+#include <KMessageBox>
+#include <KLocalizedString>
 
 #include <QRegExp>
 #include <QTimer>
+#include <QApplication>
 
 #include <unistd.h>
 
@@ -72,7 +71,7 @@ Tellico::Data::CollPtr Document::collection() const {
   return m_coll;
 }
 
-void Document::setURL(const KUrl& url_) {
+void Document::setURL(const QUrl& url_) {
   m_url = url_;
   if(m_url.fileName() != i18n(Tellico::untitledFilename)) {
     ImageFactory::setLocalDirectory(m_url);
@@ -106,8 +105,7 @@ bool Document::newDocument(int type_) {
   emit signalCollectionAdded(m_coll);
 
   slotSetModified(false);
-  KUrl url;
-  url.setFileName(i18n(Tellico::untitledFilename));
+  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
   m_fileFormat = Import::TellicoImporter::Unknown;
@@ -115,7 +113,7 @@ bool Document::newDocument(int type_) {
   return true;
 }
 
-bool Document::openDocument(const KUrl& url_) {
+bool Document::openDocument(const QUrl& url_) {
   MARK;
   m_loadAllImages = false;
   // delayed image loading only works for local files
@@ -175,7 +173,7 @@ bool Document::openDocument(const KUrl& url_) {
   return true;
 }
 
-bool Document::saveDocument(const KUrl& url_) {
+bool Document::saveDocument(const QUrl& url_) {
   // FileHandler::queryExists calls FileHandler::writeBackupFile
   // so the only reason to check queryExists() is if the url to write to is different than the current one
   if(url_ == m_url) {
@@ -190,7 +188,7 @@ bool Document::saveDocument(const KUrl& url_) {
 
   // in case we're still loading images, give that a chance to cancel
   m_cancelImageWriting = true;
-  kapp->processEvents();
+  qApp->processEvents();
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Saving file..."), false);
   ProgressItem::Done done(this);
@@ -237,7 +235,7 @@ bool Document::saveDocument(const KUrl& url_) {
     // if successful, doc is no longer modified
     slotSetModified(false);
   } else {
-    myDebug() << "not successful saving to " << url_;
+    myDebug() << "not successful saving to " << url_.url();
   }
   delete exporter;
   return success;
@@ -262,7 +260,7 @@ void Document::deleteContents() {
   if(m_coll) {
     m_coll->clear();
   }
-  m_coll = 0; // old collection gets deleted as a KSharedPtr
+  m_coll = 0; // old collection gets deleted as refcount goes to 0
   m_cancelImageWriting = true;
 }
 
@@ -334,8 +332,7 @@ void Document::replaceCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  KUrl url;
-  url.setFileName(i18n(Tellico::untitledFilename));
+  QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
 
@@ -509,7 +506,7 @@ void Document::slotLoadAllImages() {
       break;
     }
     // stay responsive, do this in the background
-    kapp->processEvents();
+    qApp->processEvents();
   }
 
   if(m_cancelImageWriting) {
@@ -523,7 +520,7 @@ void Document::slotLoadAllImages() {
   m_importer = 0;
 }
 
-void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
+void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   // images get 80 steps in saveDocument()
   const uint stepSize = 1 + qMax(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;
@@ -556,7 +553,7 @@ void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j/stepSize);
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
     if(m_cancelImageWriting) {
@@ -569,7 +566,7 @@ void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
   }
 
   m_cancelImageWriting = false;
-  ImageFactory::setLocalDirectory(oldLocalDir);
+  ImageFactory::setLocalDirectory(QUrl::fromLocalFile(oldLocalDir));
 }
 
 bool Document::pruneImages() {
@@ -797,5 +794,3 @@ QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> Document::mergeFields(
   }
   return qMakePair(modified, created);
 }
-
-#include "document.moc"

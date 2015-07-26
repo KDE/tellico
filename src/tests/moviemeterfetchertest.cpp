@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "moviemeterfetchertest.h"
-#include "moviemeterfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/moviemeterfetcher.h"
 #include "../collections/videocollection.h"
@@ -34,9 +32,9 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( MovieMeterFetcherTest, GUI )
+QTEST_GUILESS_MAIN( MovieMeterFetcherTest )
 
 MovieMeterFetcherTest::MovieMeterFetcherTest() : AbstractFetcherTest() {
 }

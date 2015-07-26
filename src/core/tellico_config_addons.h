@@ -32,6 +32,7 @@ public:
   static QStringList articleAposList();
   static QStringList nameSuffixList();
   static QStringList surnamePrefixList();
+  static QStringList surnamePrefixTokens();
 
   static QString templateName(int type);
   static QFont templateFont(int type);
@@ -56,5 +57,6 @@ private:
   static QStringList m_articleAposList;
   static QStringList m_nameSuffixList;
   static QStringList m_surnamePrefixList;
+  static QStringList m_surnamePrefixTokens;
 
 #endif

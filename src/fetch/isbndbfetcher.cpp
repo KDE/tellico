@@ -25,19 +25,19 @@
 #include "isbndbfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
-#include <klineedit.h>
 
+#include <QLineEdit>
 #include <QDomDocument>
 #include <QDomImplementation>
 #include <QLabel>
@@ -45,6 +45,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int ISBNDB_RETURNS_PER_REQUEST = 10;
@@ -103,34 +104,34 @@ void ISBNdbFetcher::continueSearch() {
 void ISBNdbFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  KUrl u(ISBNDB_BASE_URL);
-  u.addPath(m_apiKey);
+  QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
+  u.setPath(u.path() + m_apiKey);
 
   switch(request().key) {
     case Title:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Person:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("i"), QLatin1String("author_name"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Keyword:
-      u.addPath(QLatin1String("books"));
+      u.setPath(u.path() + QLatin1String("books"));
       u.addQueryItem(QLatin1String("i"), QLatin1String("full"));
       u.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case ISBN:
-      u.addPath(QLatin1String("book"));
+      u.setPath(u.path() + QLatin1String("book"));
       {
         // can only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
         v.remove(QLatin1Char('-'));
-        u.addPath(v);
+        u.setPath(u.path() + v);
       }
       break;
 
@@ -144,7 +145,7 @@ void ISBNdbFetcher::doSearch() {
   //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -302,14 +303,13 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("isbndb2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate isbndb2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -378,7 +378,7 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
@@ -411,4 +411,3 @@ QString ISBNdbFetcher::ConfigWidget::preferredName() const {
   return ISBNdbFetcher::defaultName();
 }
 
-#include "isbndbfetcher.moc"

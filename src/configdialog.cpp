@@ -34,7 +34,8 @@
 #include "controller.h"
 #include "fetcherconfigdialog.h"
 #include "tellico_kernel.h"
-#include "tellico_utils.h"
+#include "utils/tellico_utils.h"
+#include "utils/string_utils.h"
 #include "core/tellico_config.h"
 #include "images/imagefactory.h"
 #include "gui/combobox.h"
@@ -44,28 +45,25 @@
 #include "fieldformat.h"
 #include "tellico_debug.h"
 
-#include <klineedit.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
-#include <kstandarddirs.h>
-#include <knuminput.h>
-#include <kpushbutton.h>
+#include <KIntSpinBox>
 #include <kiconloader.h>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
 #include <kfiledialog.h>
-#include <kinputdialog.h>
 #include <kcolorcombo.h>
-#include <kapplication.h>
-#include <kvbox.h>
-#include <khbox.h>
+#include <KHelpClient>
+#include <KIcon>
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
-#else
+#elif defined(ENABLE_KNEWSTUFF2)
 #include <KNS/Engine>
 #endif
 
+#include <QLineEdit>
+#include <QPushButton>
 #include <QSize>
 #include <QLayout>
 #include <QLabel>
@@ -79,6 +77,10 @@
 #include <QFontComboBox>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include <QInputDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QApplication>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -98,7 +100,7 @@ SourceListItem::SourceListItem(const Tellico::GeneralFetcherInfo& info_, const Q
   }
 }
 
-SourceListItem::SourceListItem(KListWidget* parent_, const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
+SourceListItem::SourceListItem(QListWidget* parent_, const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
     : QListWidgetItem(parent_), m_info(info_),
       m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
   setData(Qt::DisplayRole, info_.name);
@@ -123,8 +125,12 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
     , m_okClicked(false) {
   setFaceType(List);
   setModal(true);
-  setCaption(i18n("Configure Tellico"));
-  setButtons(Help|Ok|Apply|Cancel|Default);
+  setWindowTitle(i18n("Configure Tellico"));
+  setStandardButtons(QDialogButtonBox::Help |
+                     QDialogButtonBox::Ok |
+                     QDialogButtonBox::Apply |
+                     QDialogButtonBox::Cancel |
+                     QDialogButtonBox::RestoreDefaults);
 
   setupGeneralPage();
   setupPrintingPage();
@@ -135,35 +141,26 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   QSize s = sizeHint();
   resize(qMax(s.width(), CONFIG_MIN_WIDTH), qMax(s.height(), CONFIG_MIN_HEIGHT));
 
-  connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
-  connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
-  connect(this, SIGNAL(defaultClicked()), SLOT(slotDefault()));
+  connect(button(QDialogButtonBox::Ok), SIGNAL(clicked()), SLOT(slotOk()));
+  connect(button(QDialogButtonBox::Apply), SIGNAL(clicked()), SLOT(slotApply()));
+  connect(button(QDialogButtonBox::Help), SIGNAL(clicked()), SLOT(slotHelp()));
+  connect(button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(slotDefault()));
 
-  enableButtonOk(false);
-  enableButtonApply(false);
+  button(QDialogButtonBox::Ok)->setEnabled(false);
+  button(QDialogButtonBox::Apply)->setEnabled(false);
 
-  setHelp(QLatin1String("general-options"));
-  connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotUpdateHelpLink(KPageWidgetItem*)));
+  // these next lines are from convert-kdialog.pl
+  button(QDialogButtonBox::Ok)->setDefault(true);
+  button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox(), SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox(), SIGNAL(rejected()), this, SLOT(reject()));
+
   connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotInitPage(KPageWidgetItem*)));
 }
 
 ConfigDialog::~ConfigDialog() {
   foreach(Fetch::ConfigWidget* widget, m_newStuffConfigWidgets) {
     widget->removed();
-  }
-}
-
-void ConfigDialog::slotUpdateHelpLink(KPageWidgetItem* item_) {
-  const QString name = item_->name();
-  // thes ename must be kept in sync with the page names
-  if(name == i18n("General")) {
-    setHelp(QLatin1String("general-options"));
-  } else if(name == i18n("Printing")) {
-    setHelp(QLatin1String("printing-options"));
-  } else if(name == i18n("Templates")) {
-    setHelp(QLatin1String("template-options"));
-  } else if(name == i18n("Data Sources")) {
-    setHelp(QLatin1String("internet-sources-options"));
   }
 }
 
@@ -199,13 +196,13 @@ void ConfigDialog::slotOk() {
 
 void ConfigDialog::slotApply() {
   emit signalConfigChanged();
-  enableButtonApply(false);
+  button(QDialogButtonBox::Apply)->setEnabled(false);
 }
 
 void ConfigDialog::slotDefault() {
   // only change the defaults on the active page
   Config::self()->useDefaults(true);
-  QString name = currentPage()->name();
+  const QString name = currentPage()->name();
   if(name == i18n("General")) {
     readGeneralConfig();
   } else if(name == i18n("Printing")) {
@@ -215,6 +212,20 @@ void ConfigDialog::slotDefault() {
   }
   Config::self()->useDefaults(false);
   slotModified();
+}
+
+void ConfigDialog::slotHelp() {
+  const QString name = currentPage()->name();
+  // these names must be kept in sync with the page names
+  if(name == i18n("General")) {
+    KHelpClient::invokeHelp(QLatin1String("general-options"));
+  } else if(name == i18n("Printing")) {
+    KHelpClient::invokeHelp(QLatin1String("printing-options"));
+  } else if(name == i18n("Templates")) {
+    KHelpClient::invokeHelp(QLatin1String("template-options"));
+  } else if(name == i18n("Data Sources")) {
+    KHelpClient::invokeHelp(QLatin1String("internet-sources-options"));
+  }
 }
 
 bool ConfigDialog::isPageInitialized(Page page_) const {
@@ -299,7 +310,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   QLabel* lab = new QLabel(i18n("No capitali&zation:"), g1);
   g1Layout->addWidget(lab, 0, 0);
-  m_leCapitals = new KLineEdit(g1);
+  m_leCapitals = new QLineEdit(g1);
   g1Layout->addWidget(m_leCapitals, 0, 1);
   lab->setBuddy(m_leCapitals);
   QString whats = i18n("<qt>A list of words which should not be capitalized. Multiple values "
@@ -310,7 +321,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Artic&les:"), g1);
   g1Layout->addWidget(lab, 1, 0);
-  m_leArticles = new KLineEdit(g1);
+  m_leArticles = new QLineEdit(g1);
   g1Layout->addWidget(m_leArticles, 1, 1);
   lab->setBuddy(m_leArticles);
   whats = i18n("<qt>A list of words which should be considered as articles "
@@ -322,7 +333,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Personal suffi&xes:"), g1);
   g1Layout->addWidget(lab, 2, 0);
-  m_leSuffixes = new KLineEdit(g1);
+  m_leSuffixes = new QLineEdit(g1);
   g1Layout->addWidget(m_leSuffixes, 2, 1);
   lab->setBuddy(m_leSuffixes);
   whats = i18n("<qt>A list of suffixes which might be used in personal names. Multiple values "
@@ -333,7 +344,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 
   lab = new QLabel(i18n("Surname &prefixes:"), g1);
   g1Layout->addWidget(lab, 3, 0);
-  m_lePrefixes = new KLineEdit(g1);
+  m_lePrefixes = new QLineEdit(g1);
   g1Layout->addWidget(m_lePrefixes, 3, 1);
   lab->setBuddy(m_lePrefixes);
   whats = i18n("<qt>A list of prefixes which might be used in surnames. Multiple values "
@@ -443,7 +454,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   int row = -1;
   // so I can reuse an i18n string, a plain label can't have an '&'
-  QString s = Tellico::removeAcceleratorMarker(i18n("Collection &type:"));
+  QString s = KLocalizedString::removeAcceleratorMarker(i18n("Collection &type:"));
   QLabel* lab = new QLabel(s, frame);
   gridLayout->addWidget(lab, ++row, 0);
   const int collType = Kernel::self()->collectionType();
@@ -461,9 +472,9 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   gridLayout->addWidget(lab, ++row, 0);
   gridLayout->addWidget(m_templateCombo, row, 1);
 
-  KPushButton* btn = new KPushButton(i18n("&Preview..."), frame);
+  QPushButton* btn = new QPushButton(i18n("&Preview..."), frame);
   btn->setWhatsThis(i18n("Show a preview of the template"));
-  btn->setIcon(KIcon(QLatin1String("zoom-original")));
+  btn->setIcon(QIcon::fromTheme(QLatin1String("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
   connect(btn, SIGNAL(clicked()), SLOT(slotShowTemplatePreview()));
 
@@ -555,24 +566,29 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   QVBoxLayout* vlay = new QVBoxLayout(groupBox);
   groupBox->setLayout(vlay);
 
-  KHBox* box1 = new KHBox(groupBox);
+  QWidget* box1 = new QWidget(groupBox);
+  QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
+  box1HBoxLayout->setMargin(0);
   vlay->addWidget(box1);
-  box1->setSpacing(spacingHint());
+  box1HBoxLayout->setSpacing(QApplication::style()->pixelMetric(QStyle::PM_DefaultLayoutSpacing));
 
-  KPushButton* b1 = new KPushButton(i18n("Install..."), box1);
-  b1->setIcon(KIcon(QLatin1String("list-add")));
+  QPushButton* b1 = new QPushButton(i18n("Install..."), box1);
+  box1HBoxLayout->addWidget(b1);
+  b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
-  KPushButton* b2 = new KPushButton(i18n("Download..."), box1);
-  b2->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
+  QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
+  box1HBoxLayout->addWidget(b2);
+  b2->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
-  KPushButton* b3 = new KPushButton(i18n("Delete..."), box1);
-  b3->setIcon(KIcon(QLatin1String("list-remove")));
+  QPushButton* b3 = new QPushButton(i18n("Delete..."), box1);
+  box1HBoxLayout->addWidget(b3);
+  b3->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
   whats = i18n("Click to select and remove installed templates.");
   b3->setWhatsThis(whats);
@@ -616,27 +632,34 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
 
   QVBoxLayout* leftLayout = new QVBoxLayout();
   l->addLayout(leftLayout);
-  m_sourceListWidget = new KListWidget(frame);
+  m_sourceListWidget = new QListWidget(frame);
   m_sourceListWidget->setSortingEnabled(false); // no sorting
   m_sourceListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
   leftLayout->addWidget(m_sourceListWidget, 1);
   connect(m_sourceListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), SLOT(slotSelectedSourceChanged(QListWidgetItem*)));
   connect(m_sourceListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(slotModifySourceClicked()));
 
-  KHBox* hb = new KHBox(frame);
+  QWidget* hb = new QWidget(frame);
+  QHBoxLayout* hbHBoxLayout = new QHBoxLayout(hb);
+  hbHBoxLayout->setMargin(0);
   leftLayout->addWidget(hb);
-  m_moveUpSourceBtn = new KPushButton(i18n("Move &Up"), hb);
-  m_moveUpSourceBtn->setIcon(KIcon(QLatin1String("go-up")));
+  m_moveUpSourceBtn = new QPushButton(i18n("Move &Up"), hb);
+  hbHBoxLayout->addWidget(m_moveUpSourceBtn);
+  m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
-  m_moveDownSourceBtn = new KPushButton(i18n("Move &Down"), hb);
-  m_moveDownSourceBtn->setIcon(KIcon(QLatin1String("go-down")));
+  m_moveDownSourceBtn = new QPushButton(i18n("Move &Down"), hb);
+  hbHBoxLayout->addWidget(m_moveDownSourceBtn);
+  m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
-  KHBox* hb2 = new KHBox(frame);
+  QWidget* hb2 = new QWidget(frame);
+  QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
+  hb2HBoxLayout->setMargin(0);
   leftLayout->addWidget(hb2);
   m_cbFilterSource = new QCheckBox(i18n("Filter by type:"), hb2);
+  hb2HBoxLayout->addWidget(m_cbFilterSource);
   connect(m_cbFilterSource, SIGNAL(clicked()), SLOT(slotSourceFilterChanged()));
   m_sourceTypeCombo = new GUI::CollectionTypeCombo(hb2);
   connect(m_sourceTypeCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotSourceFilterChanged()));
@@ -651,17 +674,17 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   // these icons are rather arbitrary, but seem to vaguely fit
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
-  KPushButton* newSourceBtn = new KPushButton(i18n("&New..."), frame);
-  newSourceBtn->setIcon(KIcon(QLatin1String("document-new")));
+  QPushButton* newSourceBtn = new QPushButton(i18n("&New..."), frame);
+  newSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   newSourceBtn->setWhatsThis(i18n("Click to add a new data source."));
-  m_modifySourceBtn = new KPushButton(i18n("&Modify..."), frame);
-  m_modifySourceBtn->setIcon(KIcon(QLatin1String("network-wired")));
+  m_modifySourceBtn = new QPushButton(i18n("&Modify..."), frame);
+  m_modifySourceBtn->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
   m_modifySourceBtn->setWhatsThis(i18n("Click to modify the selected data source."));
-  m_removeSourceBtn = new KPushButton(i18n("&Delete"), frame);
-  m_removeSourceBtn->setIcon(KIcon(QLatin1String("list-remove")));
+  m_removeSourceBtn = new QPushButton(i18n("&Delete"), frame);
+  m_removeSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
-  m_newStuffBtn = new KPushButton(i18n("Download..."), frame);
-  m_newStuffBtn->setIcon(KIcon(QLatin1String("get-hot-new-stuff")));
+  m_newStuffBtn = new QPushButton(i18n("Download..."), frame);
+  m_newStuffBtn->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
   // checksum and signature checking are no longer possible with knewstuff2
   // disable button for now
@@ -760,8 +783,7 @@ void ConfigDialog::readFetchConfig() {
   m_configWidgets.clear();
 
   m_sourceListWidget->setUpdatesEnabled(false);
-  Fetch::FetcherVec fetchers = Fetch::Manager::self()->fetchers();
-  foreach(Fetch::Fetcher::Ptr fetcher, fetchers) {
+  foreach(Fetch::Fetcher::Ptr fetcher, Fetch::Manager::self()->fetchers()) {
     GeneralFetcherInfo info(fetcher->type(), fetcher->source(),
                             fetcher->updateOverwrite(), fetcher->uuid());
     SourceListItem* item = new SourceListItem(m_sourceListWidget, info);
@@ -773,7 +795,7 @@ void ConfigDialog::readFetchConfig() {
       // there's weird layout bug if it's not hidden
       cw->hide();
     }
-    kapp->processEvents();
+    qApp->processEvents();
   }
   m_sourceListWidget->setUpdatesEnabled(true);
 
@@ -859,8 +881,8 @@ void ConfigDialog::saveFetchConfig() {
     m_newStuffConfigWidgets.removeAll(cw);
     QString group = QString::fromLatin1("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
-    KGlobal::config()->deleteGroup(group);
-    KConfigGroup configGroup(KGlobal::config(), group);
+    KSharedConfig::openConfig()->deleteGroup(group);
+    KConfigGroup configGroup(KSharedConfig::openConfig(), group);
     configGroup.writeEntry("Name", item->data(Qt::DisplayRole).toString());
     configGroup.writeEntry("Type", int(item->fetchType()));
     configGroup.writeEntry("UpdateOverwrite", item->updateOverwrite());
@@ -872,12 +894,12 @@ void ConfigDialog::saveFetchConfig() {
     reloadFetchers = true;
   }
   // now update total number of sources
-  KConfigGroup sourceGroup(KGlobal::config(), "Data Sources");
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), "Data Sources");
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
   QString group = QString::fromLatin1("Data Source %1").arg(count);
-  while(KGlobal::config()->hasGroup(group)) {
-    KGlobal::config()->deleteGroup(group);
+  while(KSharedConfig::openConfig()->hasGroup(group)) {
+    KSharedConfig::openConfig()->deleteGroup(group);
     ++count;
     group = QString::fromLatin1("Data Source %1").arg(count);
   }
@@ -910,8 +932,8 @@ void ConfigDialog::slotModified() {
   if(m_modifying) {
     return;
   }
-  enableButtonOk(true);
-  enableButtonApply(true);
+  button(QDialogButtonBox::Ok)->setEnabled(true);
+  button(QDialogButtonBox::Apply)->setEnabled(true);
 }
 
 void ConfigDialog::slotNewSourceClicked() {
@@ -1033,18 +1055,13 @@ void ConfigDialog::slotNewStuffClicked() {
 #ifdef ENABLE_KNEWSTUFF3
   KNS3::DownloadDialog dialog(QLatin1String("tellico-script.knsrc"), this);
   dialog.exec();
-  {
-    KNS3::Entry::List entries = dialog.installedEntries();
-#else
-  KNS::Engine engine(this);
-  if(engine.init(QLatin1String("tellico-script.knsrc"))) {
-    KNS::Entry::List entries = engine.downloadDialogModal(this);
-#endif
-    if(!entries.isEmpty()) {
-      Fetch::Manager::self()->loadFetchers();
-      readFetchConfig();
-    }
+
+  KNS3::Entry::List entries = dialog.installedEntries();
+  if(!entries.isEmpty()) {
+    Fetch::Manager::self()->loadFetchers();
+    readFetchConfig();
   }
+#endif
 }
 
 Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
@@ -1111,8 +1128,7 @@ void ConfigDialog::slotShowTemplatePreview() {
 }
 
 void ConfigDialog::loadTemplateList() {
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("entry-templates/*.xsl"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/entry-templates/*.xsl"));
   QMap<QString, QString> templates; // a QMap will have them values sorted by key
   foreach(const QString& file, files) {
     QFileInfo fi(file);
@@ -1136,7 +1152,7 @@ void ConfigDialog::slotInstallTemplate() {
   filter += i18n("*.tar.gz *.tgz|Template Packages (*.tar.gz)") + QLatin1Char('\n');
   filter += i18n("*|All Files");
 
-  QString f = KFileDialog::getOpenFileName(KUrl(), filter, this);
+  QString f = KFileDialog::getOpenFileName(QUrl(), filter, this);
   if(f.isEmpty()) {
     return;
   }
@@ -1150,29 +1166,24 @@ void ConfigDialog::slotDownloadTemplate() {
 #ifdef ENABLE_KNEWSTUFF3
   KNS3::DownloadDialog dialog(QLatin1String("tellico-template.knsrc"), this);
   dialog.exec();
-  {
-    KNS3::Entry::List entries = dialog.installedEntries();
-#else
-  KNS::Engine engine(this);
-  if(engine.init(QLatin1String("tellico-template.knsrc"))) {
-    KNS::Entry::List entries = engine.downloadDialogModal(this);
-#endif
-    if(!entries.isEmpty()) {
-      loadTemplateList();
-    }
+
+  KNS3::Entry::List entries = dialog.installedEntries();
+  if(!entries.isEmpty()) {
+    loadTemplateList();
   }
+#endif
 }
 
 void ConfigDialog::slotDeleteTemplate() {
   bool ok;
-  QString name = KInputDialog::getItem(i18n("Delete Template"),
+  QString name = QInputDialog::getItem(this,
+                                       i18n("Delete Template"),
                                        i18n("Select template to delete:"),
                                        Tellico::NewStuff::Manager::self()->userTemplates().keys(),
-                                       0, false, &ok, this);
+                                       0, false, &ok);
   if(ok && !name.isEmpty()) {
     Tellico::NewStuff::Manager::self()->removeTemplateByName(name);
     loadTemplateList();
   }
 }
 
-#include "configdialog.moc"

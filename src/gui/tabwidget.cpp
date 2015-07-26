@@ -42,4 +42,3 @@ void TabWidget::setFocusToFirstChild() {
   }
 }
 
-#include "tabwidget.moc"

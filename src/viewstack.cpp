@@ -28,8 +28,8 @@
 #include "models/entrymodel.h"
 #include "core/tellico_config.h"
 
-#include <KIcon>
-#include <KLocale>
+#include <QIcon>
+#include <KLocalizedString>
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -54,12 +54,12 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
 
   m_listButton = new QToolButton(this);
   m_listButton->setCheckable(true);
-  m_listButton->setIcon(KIcon(QLatin1String("view-list-details")));
+  m_listButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-details")));
   connect(m_listButton, SIGNAL(clicked(bool)), SLOT(showListView()));
 
   m_iconButton = new QToolButton(this);
   m_iconButton->setCheckable(true);
-  m_iconButton->setIcon(KIcon(QLatin1String("view-list-icons")));
+  m_iconButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-icons")));
   connect(m_iconButton, SIGNAL(clicked(bool)), SLOT(showIconView()));
 
   QButtonGroup* bg = new QButtonGroup(this);
@@ -71,7 +71,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   hlay->addStretch(10);
 
   m_decreaseIconSizeButton = new QToolButton(this);
-  m_decreaseIconSizeButton->setIcon(KIcon(QLatin1String("zoom-out")));
+  m_decreaseIconSizeButton->setIcon(QIcon::fromTheme(QLatin1String("zoom-out")));
   m_decreaseIconSizeButton->setToolTip(i18n("Decrease the maximum icon size in the icon list view"));
   hlay->addWidget(m_decreaseIconSizeButton);
   connect(m_decreaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotDecreaseIconSizeButtonClicked()));
@@ -88,7 +88,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   connect(m_iconSizeSlider, SIGNAL(valueChanged(int)), SLOT(slotIconSizeSliderChanged(int)));
 
   m_increaseIconSizeButton = new QToolButton(this);
-  m_increaseIconSizeButton->setIcon(KIcon(QLatin1String("zoom-in")));
+  m_increaseIconSizeButton->setIcon(QIcon::fromTheme(QLatin1String("zoom-in")));
   m_increaseIconSizeButton->setToolTip(i18n("Increase the maximum icon size in the icon list view"));
   hlay->addWidget(m_increaseIconSizeButton, 0);
   connect(m_increaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotIncreaseIconSizeButtonClicked()));
@@ -156,4 +156,3 @@ void ViewStack::setIconSizeInterfaceVisible(bool visible) {
   m_iconSizeSlider->setVisible(visible);
 }
 
-#include "viewstack.moc"

@@ -29,7 +29,7 @@
 #include "../tellico_kernel.h"
 #include "../document.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
 

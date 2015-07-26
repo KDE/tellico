@@ -25,24 +25,25 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "entrezfetchertest.h"
-#include "entrezfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/entrezfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( EntrezFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( EntrezFetcherTest )
 
 EntrezFetcherTest::EntrezFetcherTest() : AbstractFetcherTest() {
 }
 
 void EntrezFetcherTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/pubmed2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
   m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.1016/j.tcb.2013.03.001"));
@@ -58,7 +59,7 @@ void EntrezFetcherTest::initTestCase() {
 }
 
 void EntrezFetcherTest::testTitle() {
-  KConfig config(QString::fromLatin1(KDESRCDIR) + QLatin1String("/tellicotest.config"), KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("entrez");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -123,7 +124,7 @@ void EntrezFetcherTest::testPMID() {
 }
 
 void EntrezFetcherTest::testDOI() {
-  KConfig config(QString::fromLatin1(KDESRCDIR) + QLatin1String("/tellicotest.config"), KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("entrez");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

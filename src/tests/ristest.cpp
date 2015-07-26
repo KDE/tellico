@@ -25,29 +25,33 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "ristest.h"
-#include "ristest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/risimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
-QTEST_KDEMAIN_CORE( RisTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( RisTest )
 
 void RisTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ris");
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::RISImporter importer(urls);
+  // shut the importer up about current collection
+  Tellico::Data::CollPtr tmpColl(new Tellico::Data::BibtexCollection(true));
+  importer.setCurrentCollection(tmpColl);
+
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
   QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));

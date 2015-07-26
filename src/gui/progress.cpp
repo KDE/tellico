@@ -42,4 +42,3 @@ void Progress::setDone() {
   setValue(maximum());
 }
 
-#include "progress.moc"

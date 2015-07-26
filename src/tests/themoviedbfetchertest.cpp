@@ -25,35 +25,31 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "themoviedbfetchertest.h"
-#include "themoviedbfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/themoviedbfetcher.h"
 #include "../collections/videocollection.h"
-#include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KStandardDirs>
+#include <KConfig>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( TheMovieDBFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( TheMovieDBFetcherTest )
 
 TheMovieDBFetcherTest::TheMovieDBFetcherTest() : AbstractFetcherTest() {
 }
 
 void TheMovieDBFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
-  // since we use the importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Superman Returns"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Bad Hat Harry Productions; Warner Bros. Pictures; DC COmics; Legendary Pictures"));
+  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Warner Bros.; DC Comics; Legendary Pictures; Bad Hat Harry Productions"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2006"));
   m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action; adventure; fantasy; science fiction"));
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("Bryan Singer"));
-  m_fieldValues.insert(QLatin1String("producer"), QLatin1String("Bryan Singer"));
+  m_fieldValues.insert(QLatin1String("producer"), QLatin1String("Bryan Singer; Jon Peters; Gilbert Adler"));
   m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("154"));
   m_fieldValues.insert(QLatin1String("nationality"), QLatin1String("USA"));
 }
@@ -73,7 +69,7 @@ void TheMovieDBFetcherTest::testTitle() {
     i.next();
     QString result = entry->field(i.key()).toLower();
     //    QVERIFY(result.contains(i.value().toLower()));
-    QCOMPARE(result, i.value().toLower());
+    QCOMPARE(set(result), set(i.value().toLower()));
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
@@ -83,7 +79,7 @@ void TheMovieDBFetcherTest::testTitle() {
 }
 
 void TheMovieDBFetcherTest::testTitleFr() {
-  KConfig config(QString::fromLatin1(KDESRCDIR)  + "/tellicotest.config", KConfig::SimpleConfig);
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("TMDB FR");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -106,7 +102,7 @@ void TheMovieDBFetcherTest::testTitleFr() {
                                      << QLatin1String("title");
   foreach(const QString& field, fields) {
     QString result = entry->field(field).toLower();
-    QCOMPARE(result, m_fieldValues.value(field).toLower());
+    QCOMPARE(set(result), set(m_fieldValues.value(field).toLower()));
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QVERIFY(!castList.isEmpty());
@@ -128,7 +124,7 @@ void TheMovieDBFetcherTest::testBabel() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), QLatin1String("Babel"));
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
-  QCOMPARE(entry->field("producer"), QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber"));
+  QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
+  QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
 

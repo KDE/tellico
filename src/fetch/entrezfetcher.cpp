@@ -23,28 +23,27 @@
  ***************************************************************************/
 
 #include "entrezfetcher.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
-
-//#define ENTREZ_TEST
 
 namespace {
   static const int ENTREZ_MAX_RETURNS_TOTAL = 25;
@@ -95,11 +94,8 @@ void EntrezFetcher::search() {
     m_dbname = QLatin1String(ENTREZ_DEFAULT_DATABASE);
   }
 
-#ifdef ENTREZ_TEST
-  KUrl u = KUrl("/home/robby/esearch.xml");
-#else
-  KUrl u(ENTREZ_BASE_URL);
-  u.addPath(QLatin1String(ENTREZ_SEARCH_CGI));
+  QUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
+  u.setPath(u.path() + QLatin1String(ENTREZ_SEARCH_CGI));
   u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
   u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
   u.addQueryItem(QLatin1String("usehistory"), QLatin1String("y"));
@@ -134,12 +130,11 @@ void EntrezFetcher::search() {
       stop();
       return;
   }
-#endif
 
   m_step = Search;
 //  myLog() << "url: " << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -240,11 +235,8 @@ void EntrezFetcher::searchResults(const QByteArray& data_) {
 }
 
 void EntrezFetcher::doSummary() {
-#ifdef ENTREZ_TEST
-  KUrl u = KUrl(QLatin1String("/home/robby/esummary.xml"));
-#else
-  KUrl u(ENTREZ_BASE_URL);
-  u.addPath(QLatin1String(ENTREZ_SUMMARY_CGI));
+  QUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
+  u.setPath(u.path() + QLatin1String(ENTREZ_SUMMARY_CGI));
   u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
   u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
   if(m_start > 1) {
@@ -255,12 +247,11 @@ void EntrezFetcher::doSummary() {
   u.addQueryItem(QLatin1String("db"),         m_dbname);
   u.addQueryItem(QLatin1String("query_key"),  m_queryKey);
   u.addQueryItem(QLatin1String("WebEnv"),     m_webEnv);
-#endif
 
   m_step = Summary;
 //  myLog() << "url:" << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -335,17 +326,15 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   }
 
   int id = m_matches[uid_];
-#ifdef ENTREZ_TEST
-  KUrl u = KUrl(QLatin1String("/home/robby/pubmed.xml"));
-#else
-  KUrl u(ENTREZ_BASE_URL);
-  u.addPath(QLatin1String(ENTREZ_FETCH_CGI));
+
+  QUrl u(QString::fromLatin1(ENTREZ_BASE_URL));
+  u.setPath(u.path() + QLatin1String(ENTREZ_FETCH_CGI));
   u.addQueryItem(QLatin1String("tool"),       QLatin1String("Tellico"));
   u.addQueryItem(QLatin1String("retmode"),    QLatin1String("xml"));
   u.addQueryItem(QLatin1String("rettype"),    QLatin1String("abstract"));
   u.addQueryItem(QLatin1String("db"),         m_dbname);
   u.addQueryItem(QLatin1String("id"),         QString::number(id));
-#endif
+
   // now it's sychronous
   QString xmlOutput = FileHandler::readXMLFile(u, true /*quiet*/);
   if(xmlOutput.isEmpty()) {
@@ -380,8 +369,8 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
 
   // try to get a link, but only if necessary
   if(optionalFields().contains(QLatin1String("url"))) {
-    KUrl link(ENTREZ_BASE_URL);
-    link.addPath(QLatin1String(ENTREZ_LINK_CGI));
+    QUrl link(QString::fromLatin1(ENTREZ_BASE_URL));
+    link.setPath(link.path() + QLatin1String(ENTREZ_LINK_CGI));
     link.addQueryItem(QLatin1String("tool"),   QLatin1String("Tellico"));
     link.addQueryItem(QLatin1String("cmd"),    QLatin1String("llinks"));
     link.addQueryItem(QLatin1String("db"),     m_dbname);
@@ -415,14 +404,13 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
 }
 
 void EntrezFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("pubmed2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("pubmed2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate pubmed2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   if(!m_xsltHandler) {
     m_xsltHandler = new XSLTHandler(u);
@@ -489,4 +477,3 @@ QString EntrezFetcher::ConfigWidget::preferredName() const {
   return EntrezFetcher::defaultName();
 }
 
-#include "entrezfetcher.moc"

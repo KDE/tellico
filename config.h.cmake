@@ -42,12 +42,10 @@
 
 #cmakedefine HAVE_V4L
 
-#cmakedefine HAVE_QJSON
-
-#cmakedefine HAVE_NEPOMUK
-
 #cmakedefine HAVE_LIBBTPARSE
 
 #cmakedefine HAVE_DISCID
 
 #cmakedefine HAVE_LIBCSV
+
+#cmakedefine HAVE_KFILEMETADATA

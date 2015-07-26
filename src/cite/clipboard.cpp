@@ -24,9 +24,7 @@
 
 #include "clipboard.h"
 #include "../collection.h"
-#include "../translators/bibtexhandler.h"
-
-#include <klocale.h>
+#include "../utils/bibtexhandler.h"
 
 #include <QApplication>
 #include <QClipboard>
@@ -48,13 +46,14 @@ bool Clipboard::cite(Tellico::Data::EntryList entries_) {
 
   QString s = QLatin1String("\\cite{");
   foreach(Data::EntryPtr entry, entries_) {
-      s += BibtexHandler::bibtexKey(entry);
+    s += BibtexHandler::bibtexKey(entry);
     s += QLatin1String(", ");
   }
   s.truncate(s.length()-2); // remove last comma
   s += QLatin1Char('}');
 
   QClipboard* cb = QApplication::clipboard();
+  Q_ASSERT(cb);
   cb->setText(s, QClipboard::Clipboard);
   return true;
 }

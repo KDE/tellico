@@ -29,9 +29,6 @@
 #include <QMap>
 
 class KArchiveDirectory;
-class KUrl;
-class KTemporaryFile;
-class QStringList;
 
 namespace Tellico {
   namespace NewStuff {
@@ -49,8 +46,6 @@ public:
   bool installScript(const QString& file);
   bool removeScriptByName(const QString& name);
   bool removeScript(const QString& file, bool manual = false);
-
-  static bool checkCommonFile();
 
 private:
   friend class ManagerSingleton;

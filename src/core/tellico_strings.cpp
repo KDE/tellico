@@ -24,7 +24,7 @@
 
 #include "tellico_strings.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 const char* Tellico::errorOpen = I18N_NOOP("Tellico is unable to open the file - %1.");
 const char* Tellico::errorLoad = I18N_NOOP("Tellico is unable to load the file - %1.");

@@ -25,19 +25,19 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "bibtexmltest.h"
-#include "bibtexmltest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/bibtexmlimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../translators/bibtexmlexporter.h"
 
-QTEST_KDEMAIN_CORE( BibtexmlTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( BibtexmlTest )
 
 #define QL1(x) QString::fromLatin1(x)
 
 void BibtexmlTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.bibtexml");
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.bibtexml"));
 
   Tellico::Import::BibtexmlImporter importer(url);
   // shut the importer up about current collection
@@ -46,7 +46,7 @@ void BibtexmlTest::testImport() {
 
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
 
@@ -63,7 +63,7 @@ void BibtexmlTest::testImport() {
   Tellico::Data::CollPtr coll2 = importer2.collection();
   Tellico::Data::BibtexCollection* bColl2 = static_cast<Tellico::Data::BibtexCollection*>(coll2.data());
 
-  QVERIFY(!coll2.isNull());
+  QVERIFY(coll2);
   QCOMPARE(coll2->type(), coll->type());
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 

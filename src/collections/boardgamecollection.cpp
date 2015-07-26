@@ -25,7 +25,7 @@
 
 #include "boardgamecollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* boardgame_general = I18N_NOOP("General");
@@ -121,4 +121,3 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   return list;
 }
 
-#include "boardgamecollection.moc"

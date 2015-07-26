@@ -29,7 +29,7 @@
 #include "datavectors.h"
 
 #include <kdialog.h>
-#include <kurl.h>
+#include <QUrl>
 
 class QCheckBox;
 class QRadioButton;
@@ -50,10 +50,10 @@ public:
   ~ExportDialog();
 
   QString fileFilter();
-  bool exportURL(const KUrl& url=KUrl()) const;
+  bool exportURL(const QUrl& url=QUrl()) const;
 
   static Export::Target exportTarget(Export::Format format);
-  static bool exportCollection(Export::Format format, const KUrl& url);
+  static bool exportCollection(Export::Format format, const QUrl& url);
 
 private slots:
   void slotSaveOptions();

@@ -27,8 +27,9 @@
 #include "entry.h"
 #include "tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KTitleWidget>
+#include <KSharedConfig>
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -47,18 +48,18 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
 
   setButtonGuiItem(User1, KGuiItem(i18n("Filter for duplicates"), QLatin1String("view-filter")));
   setButtonGuiItem(User2, KGuiItem(i18n("Check for duplicates"), QLatin1String("system-search")));
- 
+
   QWidget* mainWidget = new QWidget(this);
   setMainWidget(mainWidget);
   QVBoxLayout* topLayout = new QVBoxLayout(mainWidget);
-   
+
   m_dupeLabel = new KTitleWidget(this);
   m_dupeLabel->setText(m_coll->title(), KTitleWidget::PlainMessage);
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
-  m_dupeLabel->setPixmap(KIcon(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
+  m_dupeLabel->setPixmap(QIcon::fromTheme(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
   topLayout->addWidget(m_dupeLabel);
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Bibtex Key Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Bibtex Key Dialog Options"));
   restoreDialogSize(config);
 
   if(m_coll->type() != Data::Collection::Bibtex)  {
@@ -75,7 +76,7 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
 }
 
 BibtexKeyDialog::~BibtexKeyDialog() {
-  KConfigGroup config(KGlobal::config(), QLatin1String("Bibtex Key Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Bibtex Key Dialog Options"));
   saveDialogSize(config);
 }
 
@@ -122,4 +123,3 @@ void BibtexKeyDialog::slotFilterDuplicates() {
   }
 }
 
-#include "bibtexkeydialog.moc"

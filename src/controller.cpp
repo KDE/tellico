@@ -39,14 +39,13 @@
 #include "borrower.h"
 #include "filterview.h"
 #include "loanview.h"
-#include "utils/calendarhandler.h"
 #include "entryupdater.h"
 #include "entrymerger.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "gui/lineedit.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kaction.h>
 #include <kactionmenu.h>
@@ -658,4 +657,3 @@ void Controller::updatedFetchers() {
   m_mainWindow->updateEntrySources();
 }
 
-#include "controller.moc"

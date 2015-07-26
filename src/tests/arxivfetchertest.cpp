@@ -25,23 +25,22 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "arxivfetchertest.h"
-#include "arxivfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/arxivfetcher.h"
 #include "../entry.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( ArxivFetcherTest, GUI )
+QTEST_GUILESS_MAIN( ArxivFetcherTest)
 
 ArxivFetcherTest::ArxivFetcherTest() : AbstractFetcherTest() {
 }
 
 void ArxivFetcherTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/arxiv2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
   m_fieldValues.insert(QLatin1String("arxiv"), QLatin1String("hep-lat/0110180"));
@@ -61,18 +60,8 @@ void ArxivFetcherTest::testArxivTitle() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QEXPECT_FAIL("", "Exact title searches are currently failing", Continue);
+  QEXPECT_FAIL("", "Exact title searches don't return expected results", Continue);
   QCOMPARE(results.size(), 1);
-
-  if(!results.isEmpty()) {
-    Tellico::Data::EntryPtr entry = results.at(0);
-
-    QHashIterator<QString, QString> i(m_fieldValues);
-    while(i.hasNext()) {
-      i.next();
-      QCOMPARE(entry->field(i.key()), i.value());
-    }
-  }
 }
 
 void ArxivFetcherTest::testArxivID() {

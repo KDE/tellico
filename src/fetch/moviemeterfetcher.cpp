@@ -22,29 +22,27 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "moviemeterfetcher.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
 #include "../core/filehandler.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/serializer.h>
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 namespace {
   static const char* MOVIEMETER_API_KEY = "t80a06uf736d0yd00jpynpdsgea255yk";
@@ -71,11 +69,7 @@ QString MovieMeterFetcher::attribution() const {
 }
 
 bool MovieMeterFetcher::canSearch(FetchKey k) const {
-#ifdef HAVE_QJSON
   return k == Keyword;
-#else
-  return false;
-#endif
 }
 
 bool MovieMeterFetcher::canFetch(int type) const {
@@ -86,10 +80,9 @@ void MovieMeterFetcher::readConfigHook(const KConfigGroup&) {
 }
 
 void MovieMeterFetcher::search() {
-#ifdef HAVE_QJSON
   m_started = true;
 
-  KUrl u(MOVIEMETER_API_URL);
+  QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
   u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
   switch(request().key) {
@@ -111,11 +104,8 @@ void MovieMeterFetcher::search() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
-#else
-  stop();
-#endif
 }
 
 void MovieMeterFetcher::stop() {
@@ -137,11 +127,10 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-#ifdef HAVE_QJSON
   QString id = entry->field(QLatin1String("moviemeter-id"));
   if(!id.isEmpty()) {
-    KUrl u(MOVIEMETER_API_URL);
-    u.addPath(id);
+    QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
+    u.setPath(u.path() + id);
     u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
     // quiet
     QByteArray data = FileHandler::readDataFile(u, true);
@@ -157,10 +146,9 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
     f.close();
 #endif
 
-    QJson::Parser parser;
-    populateEntry(entry, parser.parse(data).toMap(), true);
+    QJsonDocument doc = QJsonDocument::fromJson(data);
+    populateEntry(entry, doc.object().toVariantMap(), true);
   }
-#endif
 
   // image might still be URL
   const QString image_id = entry->field(QLatin1String("cover"));
@@ -189,7 +177,6 @@ Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr ent
 
 void MovieMeterFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -236,21 +223,19 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
 
-  QJson::Parser parser;
-  const QVariant result = parser.parse(data);
-
-  foreach(const QVariant& result, result.toList()) {
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonArray array = doc.array();
+  for(int i = 0; i < array.count(); i++) {
   //  myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    populateEntry(entry, result.toMap(), false);
+    populateEntry(entry, array.at(i).toObject().toVariantMap(), false);
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
 
-#endif
   stop();
 }
 
@@ -337,5 +322,3 @@ QString MovieMeterFetcher::value(const QVariantMap& map, const char* name) {
     return QString();
   }
 }
-
-#include "moviemeterfetcher.moc"

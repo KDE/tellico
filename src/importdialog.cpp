@@ -27,7 +27,7 @@
 #include "tellico_debug.h"
 #include "collection.h"
 #include "progressmanager.h"
-#include "gui/guiproxy.h"
+#include "utils/guiproxy.h"
 
 #include "translators/importer.h"
 #include "translators/tellicoimporter.h"
@@ -50,9 +50,9 @@
 #include "translators/ciwimporter.h"
 #include "translators/vinoxmlimporter.h"
 #include "translators/boardgamegeekimporter.h"
+#include "utils/datafileregistry.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <kstandardguiitem.h>
 
 #include <QGroupBox>
@@ -64,7 +64,7 @@
 
 using Tellico::ImportDialog;
 
-ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& urls_, QWidget* parent_)
+ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& urls_, QWidget* parent_)
     : KDialog(parent_),
       m_importer(importer(format_, urls_)) {
   setModal(true);
@@ -109,7 +109,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const KUrl::List& ur
   m_buttonGroup->addButton(m_radioMerge, Import::Merge);
 
   QWidget* w = m_importer->widget(widget);
-//  m_importer->readOptions(KGlobal::config());
+//  m_importer->readOptions(KSharedConfig::openConfig());
   if(w) {
     w->layout()->setMargin(0);
     topLayout->addWidget(w, 0);
@@ -165,9 +165,9 @@ Tellico::Import::Action ImportDialog::action() const {
 }
 
 // static
-Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const KUrl::List& urls_) {
+Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
 #define CHECK_SIZE if(urls_.size() > 1) myWarning() << "only importing first URL"
-  KUrl firstURL = urls_.isEmpty() ? KUrl() : urls_[0];
+  QUrl firstURL = urls_.isEmpty() ? QUrl() : urls_[0];
   Import::Importer* importer = 0;
   switch(format_) {
     case Import::TellicoXML:
@@ -198,10 +198,9 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::XSLTImporter(firstURL);
       {
-        QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+        QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
-          KUrl u;
-          u.setPath(xsltFile);
+          QUrl u = QUrl::fromLocalFile(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
@@ -425,8 +424,8 @@ void ImportDialog::slotUpdateAction() {
 }
 
 // static
-Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const KUrl& url_) {
-  Import::Importer* imp = importer(format_, url_);
+Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, const QUrl& url_) {
+  Import::Importer* imp = importer(format_, QList<QUrl>() << url_);
   if(!imp) {
     return Data::CollPtr();
   }
@@ -471,4 +470,3 @@ Tellico::Data::CollPtr ImportDialog::importText(Tellico::Import::Format format_,
   return c;
 }
 
-#include "importdialog.moc"

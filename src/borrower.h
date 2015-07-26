@@ -28,10 +28,9 @@
 #include "datavectors.h"
 #include "entry.h"
 
-#include <ksharedptr.h>
-
 #include <QDate>
 #include <QString>
+#include <QExplicitlySharedDataPointer>
 
 namespace Tellico {
   namespace Data {
@@ -73,7 +72,7 @@ private:
   bool m_inCalendar;
 };
 
-typedef KSharedPtr<Loan> LoanPtr;
+typedef QExplicitlySharedDataPointer<Loan> LoanPtr;
 typedef QList<LoanPtr> LoanList;
 
 /**

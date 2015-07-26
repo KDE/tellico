@@ -30,6 +30,7 @@ SET(tellico_SRCS
    collectionfieldsdialog.cpp
    configdialog.cpp
    controller.cpp
+   dbusinterface.cpp
    detailedlistview.cpp
    derivedvalue.cpp
    document.cpp
@@ -61,11 +62,10 @@ SET(tellico_SRCS
    progressmanager.cpp
    reportdialog.cpp
    tellico_kernel.cpp
-   tellico_utils.cpp
    viewstack.cpp
    )
 
-KDE4_ADD_EXECUTABLE(tellico ${tellico_SRCS})
+add_executable(tellico ${tellico_SRCS})
 
 TARGET_LINK_LIBRARIES(tellico
     core
@@ -79,31 +79,30 @@ TARGET_LINK_LIBRARIES(tellico
     tellicomodels
     utils
     newstuff
-    pilotdb-tellico
     rtf2html-tellico
     ${TELLICO_BTPARSE_LIBS}
     ${TELLICO_CSV_LIBS}
     )
 
 TARGET_LINK_LIBRARIES(tellico
-    ${QT_AND_KDECORE_LIBS}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDE4_KHTML_LIBS}
-    ${KDE4_SOLID_LIBS}
+    Qt5::Core
+    Qt5::Widgets
+    Qt5::DBus
+    KF5::KIOCore
+    KF5::KHtml
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
-    ${LIBEXSLT_LIBRARIES}
+    ${LIBXSLT_EXSLT_LIBRARIES}
     )
 
 IF( ENABLE_KNEWSTUFF3 )
-  TARGET_LINK_LIBRARIES(tellico ${KDE4_KNEWSTUFF3_LIBS})
+  TARGET_LINK_LIBRARIES(tellico KF5::NewStuff)
 ELSE( ENABLE_KNEWSTUFF3 )
   TARGET_LINK_LIBRARIES(tellico ${KDE4_KNEWSTUFF2_LIBS})
 ENDIF( ENABLE_KNEWSTUFF3 )
 
 IF( KDEPIMLIBS_FOUND )
-  TARGET_LINK_LIBRARIES(tellico ${KDEPIMLIBS_KABC_LIBS} ${KDEPIMLIBS_KCAL_LIBS} ${KDEPIMLIBS_AKONADI_CONTACT_LIBS})
+  TARGET_LINK_LIBRARIES(tellico KF5::Contacts ${KDEPIMLIBS_KCAL_LIBS} KF5::AkonadiContact)
 ENDIF( KDEPIMLIBS_FOUND )
 
 IF( KDEMULTIMEDIA_FOUND )
@@ -131,12 +130,11 @@ IF( ENABLE_WEBCAM )
 ENDIF( ENABLE_WEBCAM )
 
 IF( KSANE_FOUND )
-  TARGET_LINK_LIBRARIES(tellico ${KSANE_LIBRARY})
+  TARGET_LINK_LIBRARIES(tellico KF5::Sane)
 ENDIF( KSANE_FOUND )
-
-INSTALL( TARGETS tellico ${INSTALL_TARGETS_DEFAULT_ARGS} )
 
 ########### install files ###############
 
-INSTALL(FILES   tellicorc DESTINATION ${CONFIG_INSTALL_DIR} )
-INSTALL(FILES   tellicoui.rc DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
+INSTALL(TARGETS tellico ${INSTALL_TARGETS_DEFAULT_ARGS} )
+INSTALL(FILES tellicorc DESTINATION ${KDE_INSTALL_CONFDIR} )
+INSTALL(FILES tellicoui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/tellico )

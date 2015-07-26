@@ -24,7 +24,7 @@
 
 #include "winecollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* wine_general = I18N_NOOP("General");
@@ -135,4 +135,3 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   return list;
 }
 
-#include "winecollection.moc"

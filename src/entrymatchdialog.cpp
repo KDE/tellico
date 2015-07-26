@@ -27,13 +27,14 @@
 #include "entry.h"
 #include "fetch/fetchmanager.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <ktextedit.h>
-#include <KHBox>
+#include <KIconLoader>
 
 #include <QSplitter>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QTreeWidget>
 
 namespace {
@@ -57,11 +58,14 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   setMainWidget(mainWidget);
   QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
 
-  KHBox* hbox = new KHBox(mainWidget);
-  hbox->setSpacing(10);
+  QWidget* hbox = new QWidget(mainWidget);
+  QHBoxLayout* hboxHBoxLayout = new QHBoxLayout(hbox);
+  hboxHBoxLayout->setMargin(0);
+  hboxHBoxLayout->setSpacing(10);
   topLayout->addWidget(hbox);
 
   QLabel* icon = new QLabel(hbox);
+  hboxHBoxLayout->addWidget(icon);
   icon->setPixmap(Fetch::Manager::fetcherIcon(fetcher_, KIconLoader::Panel, 48));
   icon->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::AlignTop);
 
@@ -71,6 +75,7 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
                    entryToUpdate_->title());
 
   KTextEdit* l = new KTextEdit(hbox);
+  hboxHBoxLayout->addWidget(l);
   l->setHtml(s);
   l->setReadOnly(true);
   l->setMaximumHeight(48);
@@ -123,4 +128,3 @@ Tellico::EntryUpdater::UpdateResult EntryMatchDialog::updateResult() const {
   return m_itemResults[item];
 }
 
-#include "entrymatchdialog.moc"

@@ -46,6 +46,8 @@ public:
   virtual CiteAction type() const = 0;
   virtual bool connect() { return true; }
   virtual bool cite(Data::EntryList entries) = 0;
+  virtual bool hasError() const { return false; }
+  virtual QString errorString() const { return QString(); }
 };
 
 /**
@@ -57,6 +59,8 @@ public:
   ~ActionManager();
 
   bool cite(CiteAction action, Data::EntryList entries);
+  bool hasError() const;
+  QString errorString() const;
 
 private:
   ActionManager();

@@ -27,12 +27,12 @@
 #include "filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kurl.h>
-#include <ktempdir.h>
-#include <kzip.h>
+#include <KZip>
 
 #include <QFile>
 #include <QDir>
+#include <QUrl>
+#include <QTemporaryDir>
 
 using namespace Tellico;
 using Tellico::ImageStorage;
@@ -56,9 +56,10 @@ QString ImageDirectory::path() {
   if(m_path.isEmpty()) {
     // an empty path means the file hasn't been saved yet
     if(!m_dir) {
-      m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
+      m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
     }
-    setPath(m_dir->name());
+    // in KDE4, the way this worked included the final slash.
+    setPath(m_dir->path() + QLatin1Char('/'));
   }
   return m_path;
 }
@@ -78,15 +79,14 @@ Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
     return 0;
   }
 
-  KUrl imgUrl;
-  imgUrl.setPath(path() + id_);
+  QUrl imgUrl = QUrl::fromLocalFile(path() + id_);
   Data::Image* img = FileHandler::readImageFile(imgUrl, id_, true /* quiet */);
   if(!img) {
-    myLog() << "image not found:" << imgUrl;
+    myLog() << "image not found:" << imgUrl.url();
     return 0;
   }
   if(img->isNull()) {
-    myLog() << "image found but null:" << imgUrl;
+    myLog() << "image found but null:" << imgUrl.url();
     delete img;
     return 0;
   }
@@ -99,8 +99,8 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     if(path.isEmpty()) {
       // an empty path means the file hasn't been saved yet
       if(!m_dir) {
-        m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
-        ImageDirectory::setPath(m_dir->name());
+        m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
+        ImageDirectory::setPath(m_dir->path());
       }
       return writeImage(img_);
     }
@@ -112,9 +112,8 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
     }
     m_pathExists = true;
   }
-  KUrl target;
-  target.setPath(path);
-  target.setFileName(img_.id());
+  QUrl target = QUrl::fromLocalFile(path);
+  target.setPath(target.path() + img_.id());
   return FileHandler::writeDataURL(target, img_.byteArray(), true /* force */);
 }
 
@@ -136,8 +135,9 @@ void TemporaryImageDirectory::purge() {
 
 QString TemporaryImageDirectory::path() {
   if(!m_dir) {
-    m_dir = new KTempDir(); // default is to auto-delete, aka autoRemove()
-    ImageDirectory::setPath(m_dir->name());
+    m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
+    // in KDE4, the way this worked included the final slash.
+    ImageDirectory::setPath(m_dir->path() + QLatin1Char('/'));
   }
   return ImageDirectory::path();
 }

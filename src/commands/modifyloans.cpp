@@ -26,9 +26,9 @@
 #include "../document.h"
 #include "../entry.h"
 #include "../controller.h"
-#include "../utils/calendarhandler.h"
+#include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Command::ModifyLoans;
 
@@ -51,13 +51,9 @@ void ModifyLoans::redo() {
   Controller::self()->modifiedBorrower(b);
 
   if(m_addToCalendar && !m_oldLoan->inCalendar()) {
-    Data::LoanList loans;
-    loans.append(m_newLoan);
-    CalendarHandler::addLoans(loans);
+    myWarning() << "Add to calendar not implemented";
   } else if(!m_addToCalendar && m_oldLoan->inCalendar()) {
-    Data::LoanList loans;
-    loans.append(m_newLoan); // CalendarHandler checks via uid
-    CalendarHandler::removeLoans(loans);
+    myWarning() << "Add to calendar not implemented";
   }
 }
 
@@ -72,12 +68,8 @@ void ModifyLoans::undo() {
   Controller::self()->modifiedBorrower(b);
 
   if(m_addToCalendar && !m_oldLoan->inCalendar()) {
-    Data::LoanList loans;
-    loans.append(m_newLoan);
-    CalendarHandler::removeLoans(loans);
+    myWarning() << "Add to calendar not implemented";
   } else if(!m_addToCalendar && m_oldLoan->inCalendar()) {
-    Data::LoanList loans;
-    loans.append(m_oldLoan);
-    CalendarHandler::addLoans(loans);
+    myWarning() << "Add to calendar not implemented";
   }
 }

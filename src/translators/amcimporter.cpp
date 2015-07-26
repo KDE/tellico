@@ -33,11 +33,10 @@
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-
 #include <QFile>
 #include <QImage>
 #include <QByteArray>
+#include <QApplication>
 
 #include <limits.h>
 
@@ -48,7 +47,7 @@ namespace {
 
 using Tellico::Import::AMCImporter;
 
-AMCImporter::AMCImporter(const KUrl& url_) : DataImporter(url_), m_cancelled(false), m_failed(false) {
+AMCImporter::AMCImporter(const QUrl& url_) : DataImporter(url_), m_cancelled(false), m_failed(false) {
 }
 
 AMCImporter::~AMCImporter() {
@@ -103,7 +102,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
     readEntry();
     if(showProgress) {
       emit signalProgress(this, f->pos());
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -318,4 +317,3 @@ void AMCImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "amcimporter.moc"

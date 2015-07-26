@@ -39,6 +39,12 @@ public:
 
   virtual CiteAction type() const { return CiteLyxpipe; }
   virtual bool cite(Data::EntryList entries);
+  virtual bool hasError() const;
+  virtual QString errorString() const;
+
+private:
+  bool m_hasError;
+  QString m_errorString;
 };
 
   } // end namespace

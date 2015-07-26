@@ -17,5 +17,7 @@ SET(collections_STAT_SRCS
    winecollection.cpp
    )
 
-KDE4_ADD_LIBRARY(collections STATIC ${collections_STAT_SRCS})
-TARGET_LINK_LIBRARIES(collections translators)
+add_library(collections STATIC ${collections_STAT_SRCS})
+
+# bibtexcollection depends on utils/bibtexhandler
+TARGET_LINK_LIBRARIES(collections utils Qt5::Core)

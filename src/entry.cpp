@@ -27,11 +27,11 @@
 #include "collection.h"
 #include "field.h"
 #include "derivedvalue.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "utils/stringset.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 

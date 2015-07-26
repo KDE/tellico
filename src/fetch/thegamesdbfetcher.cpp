@@ -25,10 +25,10 @@
 #include "thegamesdbfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -61,23 +61,23 @@ bool TheGamesDBFetcher::canFetch(int type) const {
   return type == Data::Collection::Game;
 }
 
-KUrl TheGamesDBFetcher::searchUrl() {
-  KUrl u;
+QUrl TheGamesDBFetcher::searchUrl() {
+  QUrl u;
 
   switch(request().key) {
     case Title:
-      u = KUrl(THEGAMESDB_DETAIL_API_URL);
+      u = QUrl(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
       u.addQueryItem(QLatin1String("name"), request().value);
       break;
 
     case Keyword:
-      u = KUrl(THEGAMESDB_SEARCH_API_URL);
+      u = QUrl(QString::fromLatin1(THEGAMESDB_SEARCH_API_URL));
       u.addQueryItem(QLatin1String("name"), request().value);
       break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url: " << u.url();
@@ -93,7 +93,7 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHookData(Data::EntryPtr ent
     return entry_;
   }
 
-  KUrl u(THEGAMESDB_DETAIL_API_URL);
+  QUrl u(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
   u.addQueryItem(QLatin1String("id"), id);
 //  myDebug() << "url: " << u;
 
@@ -172,4 +172,3 @@ QString TheGamesDBFetcher::ConfigWidget::preferredName() const {
   return TheGamesDBFetcher::defaultName();
 }
 
-#include "thegamesdbfetcher.moc"

@@ -51,7 +51,7 @@ public:
 private:
   QWidget* m_widget;
   KUrlRequester* m_URLRequester;
-  KUrl m_xsltFile;
+  QUrl m_xsltFile;
 };
 
   } // end namespace

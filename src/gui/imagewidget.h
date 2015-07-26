@@ -25,15 +25,15 @@
 #ifndef TELLICO_IMAGEWIDGET_H
 #define TELLICO_IMAGEWIDGET_H
 
-#include <KUrl>
 #include <KDialog>
+#include <KService>
 
 #include <QWidget>
 #include <QPixmap>
 #include <QPoint>
-#include <KService>
 #include <QDateTime>
 #include <QPointer>
+#include <QUrl>
 
 #include <config.h>
 
@@ -94,14 +94,14 @@ private slots:
 
 private:
   void scale();
-  void loadImage(const KUrl& url);
+  void loadImage(const QUrl& url);
 
   QString m_imageID;
   QPixmap m_pixmap;
   QPixmap m_scaled;
   QLabel* m_label;
   QCheckBox* m_cbLinkOnly;
-  KUrl m_originalURL;
+  QUrl m_originalURL;
   QPoint m_dragStart;
   QMenu* m_editMenu;
   QToolButton* m_edit;

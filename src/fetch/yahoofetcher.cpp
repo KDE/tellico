@@ -26,18 +26,19 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
@@ -91,7 +92,7 @@ void YahooFetcher::continueSearch() {
 void YahooFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
-  KUrl u(YAHOO_BASE_URL);
+  QUrl u(QString::fromLatin1(YAHOO_BASE_URL));
   u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
   u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
   u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));
@@ -122,7 +123,7 @@ void YahooFetcher::doSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -230,7 +231,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  KUrl imageURL = entry->field(QLatin1String("image"));
+  QUrl imageURL = entry->field(QLatin1String("image"));
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
@@ -253,14 +254,13 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
 }
 
 void YahooFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("yahoo2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("yahoo2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate yahoo2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -280,8 +280,9 @@ void YahooFetcher::getTracks(Tellico::Data::EntryPtr entry_) {
 
   const QString albumid = entry_->field(QLatin1String("yahoo"));
 
-  KUrl u(YAHOO_BASE_URL);
-  u.setFileName(QLatin1String("songSearch"));
+  QUrl u(QString::fromLatin1(YAHOO_BASE_URL));
+  u = u.adjusted(QUrl::RemoveFilename);
+  u.setPath(u.path() + QLatin1String("songSearch"));
   u.addQueryItem(QLatin1String("appid"),   QLatin1String(YAHOO_APP_ID));
   u.addQueryItem(QLatin1String("type"),    QLatin1String("all"));
   u.addQueryItem(QLatin1String("output"),  QLatin1String("xml"));
@@ -401,4 +402,3 @@ QString YahooFetcher::ConfigWidget::preferredName() const {
   return YahooFetcher::defaultName();
 }
 
-#include "yahoofetcher.moc"

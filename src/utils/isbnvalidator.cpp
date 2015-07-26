@@ -24,7 +24,6 @@
 
 #include "isbnvalidator.h"
 #include "upcvalidator.h"
-#include "../tellico_debug.h"
 
 #include <QStringList>
 
@@ -39,11 +38,9 @@ QString ISBNValidator::isbn10(QString isbn13) {
     return isbn13;
   }
   if(!isbn13.startsWith(QLatin1String("978"))) {
-    myDebug() << "BAD! Trying to isbn10" << isbn13;
     return original;
   }
   if(isbn13.length() < 13) {
-    myDebug() << "BAD! Trying to isbn10" << isbn13;
     fixup10(isbn13);
     return isbn13;
   }
@@ -59,7 +56,6 @@ QString ISBNValidator::isbn10(QString isbn13) {
 QString ISBNValidator::isbn13(QString isbn10) {
   isbn10.remove(QLatin1Char('-'));
   if(isbn10.length() < 10) {
-    myDebug() << "BAD! Tring to isbn113" << isbn10;
     return isbn10;
   }
   if(isbn10.length() > 10) {
@@ -570,4 +566,3 @@ bool Tellico::ISBNComparison::operator()(const QString& value1_, const QString& 
   return value1 == value2;
 }
 
-#include "isbnvalidator.moc"

@@ -25,12 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "comparisontest.h"
-#include "comparisontest.moc"
-#include "qtest_kde.h"
 
 #include "../utils/stringcomparison.h"
 
-QTEST_KDEMAIN_CORE( ComparisonTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( ComparisonTest )
 
 void ComparisonTest::testNumber() {
   QFETCH(QString, string1);

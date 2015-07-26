@@ -24,28 +24,27 @@
 
 #include "tellicoxmlexporter.h"
 #include "tellico_xml.h"
+#include "../utils/bibtexhandler.h" // needed for cleaning text
 #include "../entrygroup.h"
 #include "../collections/bibtexcollection.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../document.h"
 #include "../fieldformat.h"
-#include "../translators/bibtexhandler.h" // needed for cleaning text
 #include "../models/entrysortmodel.h"
 #include "../models/modelmanager.h"
 #include "../models/modeliterator.h"
 #include "../models/models.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
-#include <kcodecs.h>
-#include <kglobal.h>
-#include <kcalendarsystem.h>
+//#include <KCalendarSystem>
 
+#include <QDir>
 #include <QGroupBox>
 #include <QCheckBox>
 #include <QDomDocument>
@@ -322,7 +321,10 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(fieldElem);
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
-        fieldElem.setAttribute(QLatin1String("calendar"), KGlobal::locale()->calendar()->calendarType());
+        // as of Tellico in KF5 (3.0?), just forget about the calendar attribute for the moment, always use gregorian
+        // I could modify the DTD to make calendar attribute optional, but I choose not to
+//        fieldElem.setAttribute(QLatin1String("calendar"), KGlobal::locale()->calendar()->calendarType());
+        fieldElem.setAttribute(QLatin1String("calendar"), QLatin1String("gregorian"));
         QStringList s = fieldValue.split(QLatin1Char('-'), QString::KeepEmptyParts);
         if(s.count() > 0 && !s[0].isEmpty()) {
           QDomElement e = dom_.createElement(QLatin1String("year"));
@@ -343,8 +345,9 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
                 fIt->property(QLatin1String("relative")) == QLatin1String("true") &&
                 !url().isEmpty()) {
         // if a relative URL and url() is not empty, change the value!
-        KUrl old_url(Data::Document::self()->URL(), fieldValue);
-        fieldElem.appendChild(dom_.createTextNode(KUrl::relativeUrl(url(), old_url)));
+        QUrl old_url = Data::Document::self()->URL().resolved(fieldValue);
+        QString relPath = QDir(url().toLocalFile()).relativeFilePath(old_url.path());
+        fieldElem.appendChild(dom_.createTextNode(relPath));
       } else {
         fieldElem.appendChild(dom_.createTextNode(fieldValue));
       }
@@ -381,7 +384,7 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     if(img.linkOnly()) {
       imgElem.setAttribute(QLatin1String("link"), QLatin1String("true"));
     }
-    QByteArray imgText = KCodecs::base64Encode(img.byteArray());
+    QByteArray imgText = img.byteArray().toBase64();
     imgElem.appendChild(dom_.createTextNode(QLatin1String(imgText)));
   } else {
     const Data::ImageInfo& info = ImageFactory::imageInfo(id_);
@@ -595,4 +598,3 @@ bool TellicoXMLExporter::version12Needed() const {
   return false;
 }
 
-#include "tellicoxmlexporter.moc"

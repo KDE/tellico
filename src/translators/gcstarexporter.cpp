@@ -30,15 +30,16 @@
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../progressmanager.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
-#include <klocale.h>
-#include <kapplication.h>
+#include <KLocalizedString>
 
 #include <QDomDocument>
 #include <QFile>
 #include <QTextStream>
+#include <QStandardPaths>
+#include <QApplication>
 
 using Tellico::Export::GCstarExporter;
 
@@ -65,7 +66,7 @@ bool GCstarExporter::exec() {
 
   bool success = true;
   if(options() & ExportImages) {
-    const QString imgDir = KGlobal::dirs()->localxdgdatadir() + QLatin1String("gcstar/images/");
+    const QString imgDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("gcstar/images/");
     ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), false);
     item.setTotalSteps(entries().count());
     ProgressItem::Done done(this);
@@ -84,15 +85,15 @@ bool GCstarExporter::exec() {
           break;
         }
 
-        KUrl target;
-        target.setPath(imgDir);
-        target.setFileName(img.id());
+        QUrl target = QUrl::fromLocalFile(imgDir);
+        target = target.adjusted(QUrl::RemoveFilename);
+        target.setPath(target.path() + img.id());
 //        myDebug() << "Writing" << target.url();
         success &= FileHandler::writeDataURL(target, img.byteArray(), true /* force */);
       }
       if(showProgress && j%stepSize == 0) {
         item.setProgress(j);
-        kapp->processEvents();
+        qApp->processEvents();
       }
       ++j;
     }
@@ -103,8 +104,8 @@ bool GCstarExporter::exec() {
 }
 
 QString GCstarExporter::text() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
-  if(xsltfile.isNull()) {
+  QString xsltFile = DataFileRegistry::self()->locate(m_xsltFile);
+  if(xsltFile.isNull()) {
     myDebug() << "no xslt file for " << m_xsltFile;
     return QString();
   }
@@ -119,14 +120,13 @@ QString GCstarExporter::text() {
   // all params should be passed to XSLTHandler in utf8
   // input string to XSLTHandler should be in utf-8, EVEN IF DOM STRING SAYS OTHERWISE
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltFile);
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
   if(dom.isNull()) {
-    myDebug() << "error loading xslt file: " << xsltfile;
+    myDebug() << "error loading xslt file: " << xsltFile;
     return QString();
   }
 
@@ -137,14 +137,14 @@ QString GCstarExporter::text() {
   }
 
   delete m_handler;
-  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile));
+  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile));
   if(!m_handler || !m_handler->isValid()) {
     myDebug() << "bad handler";
     return QString();
   }
 
   if(options() & ExportImages) {
-    m_handler->addStringParam("imageDir", KGlobal::dirs()->localxdgdatadir().toLocal8Bit() + "gcstar/images/");
+    m_handler->addStringParam("imageDir", QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation).toLocal8Bit() + "gcstar/images/");
   }
 
   // now grab the XML
@@ -162,4 +162,3 @@ QWidget* GCstarExporter::widget(QWidget* parent_) {
   return 0;
 }
 
-#include "gcstarexporter.moc"

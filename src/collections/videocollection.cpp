@@ -25,7 +25,7 @@
 #include "videocollection.h"
 #include "../entrycomparison.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* video_general = I18N_NOOP("General");
@@ -247,4 +247,3 @@ int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   return res;
 }
 
-#include "videocollection.moc"

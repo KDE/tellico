@@ -78,4 +78,3 @@ QWidget* ChoiceFieldWidget::widget() {
   return m_comboBox;
 }
 
-#include "choicefieldwidget.moc"

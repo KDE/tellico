@@ -25,18 +25,19 @@
 #include "xmlfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../utils/xmlhandler.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 
 #include <QFile>
 #include <QTextStream>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 using Tellico::Fetch::XMLFetcher;
 
@@ -63,7 +64,7 @@ void XMLFetcher::continueSearch() {
 }
 
 void XMLFetcher::doSearch() {
-  const KUrl u = searchUrl();
+  const QUrl u = searchUrl();
   Q_ASSERT(!u.isEmpty());
   if(u.isEmpty()) {
     stop();
@@ -72,7 +73,7 @@ void XMLFetcher::doSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
 
@@ -186,14 +187,13 @@ Tellico::Data::EntryPtr XMLFetcher::fetchEntryHook(uint uid_) {
 
 void XMLFetcher::initXSLTHandler() {
   Q_ASSERT(!m_xsltFilename.isEmpty());
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFilename);
+  QString xsltfile = DataFileRegistry::self()->locate(m_xsltFilename);
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate" << m_xsltFilename;
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -223,4 +223,3 @@ Tellico::XSLTHandler* XMLFetcher::xsltHandler() {
   return m_xsltHandler;
 }
 
-#include "xmlfetcher.moc"

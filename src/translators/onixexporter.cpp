@@ -31,14 +31,13 @@
 #include "../core/filehandler.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kstandarddirs.h>
-#include <kapplication.h>
-#include <kzip.h>
+#include <KZip>
 #include <KConfigGroup>
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QDomDocument>
 #include <QFile>
@@ -108,8 +107,8 @@ bool ONIXExporter::exec() {
 }
 
 QString ONIXExporter::text() {
-  QString xsltfile = KStandardDirs::locate("appdata", m_xsltFile);
-  if(xsltfile.isNull()) {
+  QString xsltFile = DataFileRegistry::self()->locate(m_xsltFile);
+  if(xsltFile.isNull()) {
     myDebug() << "no xslt file for " << m_xsltFile;
     return QString();
   }
@@ -124,14 +123,13 @@ QString ONIXExporter::text() {
   // all params should be passed to XSLTHandler in utf8
   // input string to XSLTHandler should be in utf-8, EVEN IF DOM STRING SAYS OTHERWISE
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltFile);
   // do NOT do namespace processing, it messes up the XSL declaration since
   // QDom thinks there are no elements in the Tellico namespace and as a result
   // removes the namespace declaration
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
   if(dom.isNull()) {
-    myDebug() << "error loading xslt file: " << xsltfile;
+    myDebug() << "error loading xslt file: " << xsltFile;
     return QString();
   }
 
@@ -142,7 +140,7 @@ QString ONIXExporter::text() {
   }
 
   delete m_handler;
-  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltfile));
+  m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile));
 
   QDateTime now = QDateTime::currentDateTime();
   m_handler->addStringParam("sentDate", now.toString(QLatin1String("yyyyMMddhhmm")).toUtf8());
@@ -205,4 +203,3 @@ void ONIXExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("Include Images", m_includeImages);
 }
 
-#include "onixexporter.moc"

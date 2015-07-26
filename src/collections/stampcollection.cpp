@@ -24,7 +24,7 @@
 
 #include "stampcollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* stamp_general = I18N_NOOP("General");
@@ -143,4 +143,3 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   return list;
 }
 
-#include "stampcollection.moc"

@@ -25,10 +25,10 @@
 #include "dvdfrfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -37,8 +37,6 @@
 #include <QVBoxLayout>
 #include <QTextCodec>
 #include <QDomDocument>
-
-//#define DVDFR_TEST
 
 namespace {
   static const int DVDFR_MAX_RETURNS_TOTAL = 20;
@@ -66,12 +64,8 @@ bool DVDFrFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-KUrl DVDFrFetcher::searchUrl() {
-#ifdef DVDFR_TEST
-  return KUrl("/home/robby/kde/src/tellico/src/fetch/dvdfr_search2.xml");
-#endif
-
-  KUrl u(DVDFR_SEARCH_API_URL);
+QUrl DVDFrFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(DVDFR_SEARCH_API_URL));
 
   switch(request().key) {
     case Title:
@@ -89,7 +83,7 @@ KUrl DVDFrFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url: " << u.url();
@@ -105,13 +99,9 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
     return entry_;
   }
 
-  KUrl u(DVDFR_DETAIL_API_URL);
+  QUrl u(QString::fromLatin1(DVDFR_DETAIL_API_URL));
   u.addQueryItem(QLatin1String("id"), id);
 //  myDebug() << "url: " << u;
-
-#ifdef DVDFR_TEST
-  u = KUrl("/home/robby/kde/src/tellico/src/fetch/dvdfr_detail2.xml");
-#endif
 
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
@@ -195,4 +185,3 @@ QString DVDFrFetcher::ConfigWidget::preferredName() const {
   return DVDFrFetcher::defaultName();
 }
 
-#include "dvdfrfetcher.moc"

@@ -25,29 +25,29 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "adstest.h"
-#include "adstest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/adsimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../fieldformat.h"
 
-QTEST_KDEMAIN_CORE( AdsTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( AdsTest )
 
 void AdsTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.ads");
-  KUrl::List urls;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ads"));
+  QList<QUrl> urls;
   urls << url;
   Tellico::Import::ADSImporter importer(urls);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 1);
   QCOMPARE(coll->title(), QLatin1String("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Distant clusters of galaxies detected by X-rays"));
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("1993"));

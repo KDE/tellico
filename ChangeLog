@@ -6,9 +6,17 @@
 
 	* Fixed a bug with HTML exporting titles with single-quotes (Bug 348381).
 
+2015-05-27  Robby Stephenson  <robby@homebase.mars>
+
+	* Removed the Citebase fetcher.
+
 2015-05-24  Robby Stephenson  <robby@homebase.mars>
 
 	* Fixed a bug showing horizontal scroll bar with many table columns (Bug 348189).
+
+2015-03-15  Robby Stephenson  <robby@homebase.mars>
+
+	* Removed the PilotDB exporter.
 
 2015-02-15  Robby Stephenson  <robby@periapsis.org>
 

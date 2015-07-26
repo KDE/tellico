@@ -25,42 +25,41 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "griffithtest.h"
-#include "griffithtest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/griffithimporter.h"
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <kstandarddirs.h>
+#include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
 #define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
 
-QTEST_KDEMAIN_CORE( GriffithTest )
+QTEST_GUILESS_MAIN( GriffithTest )
 
 void GriffithTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/griffith2tellico.xsl"));
   Tellico::ImageFactory::init();
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
 }
 
 void GriffithTest::testMovies() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/griffith.xml");
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/griffith.xml"));
   Tellico::Import::GriffithImporter importer(url);
   // can't import images for local test
   importer.setOptions(importer.options() & ~Tellico::Import::ImportShowImageErrors);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Video);
   QCOMPARE(coll->entryCount(), 5);
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Serendipity"));
   QCOMPARE(entry->field("origtitle"), QLatin1String("Serendipity"));
   QCOMPARE(entry->field("director"), QLatin1String("Peter Chelsom"));

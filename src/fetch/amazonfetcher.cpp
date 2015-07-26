@@ -29,29 +29,27 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../entry.h"
 #include "../field.h"
 #include "../fieldformat.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../utils/isbnvalidator.h"
-#include "../utils/wallet.h"
+#include "../utils/datafileregistry.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kstandarddirs.h>
 #include <kconfig.h>
-#include <klineedit.h>
 #include <kseparator.h>
 #include <kcombobox.h>
 #include <kacceleratormanager.h>
 #include <KConfigGroup>
 
+#include <QLineEdit>
 #include <QDomDocument>
 #include <QLabel>
 #include <QCheckBox>
@@ -59,6 +57,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -78,31 +77,31 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   static SiteData dataVector[9] = {
     {
       i18n("Amazon (US)"),
-      KUrl("http://webservices.amazon.com/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.com/onca/xml"))
     }, {
       i18n("Amazon (UK)"),
-      KUrl("http://webservices.amazon.co.uk/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.co.uk/onca/xml"))
     }, {
       i18n("Amazon (Germany)"),
-      KUrl("http://webservices.amazon.de/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.de/onca/xml"))
     }, {
       i18n("Amazon (Japan)"),
-      KUrl("http://webservices.amazon.co.jp/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.co.jp/onca/xml"))
     }, {
       i18n("Amazon (France)"),
-      KUrl("http://webservices.amazon.fr/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.fr/onca/xml"))
     }, {
       i18n("Amazon (Canada)"),
-      KUrl("http://webservices.amazon.ca/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.ca/onca/xml"))
     }, {
       i18n("Amazon (China)"),
-      KUrl("http://webservices.amazon.cn/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.cn/onca/xml"))
     }, {
       i18n("Amazon (Spain)"),
-      KUrl("http://webservices.amazon.es/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.es/onca/xml"))
     }, {
       i18n("Amazon (Italy)"),
-      KUrl("http://webservices.amazon.it/onca/xml")
+      QUrl(QLatin1String("http://webservices.amazon.it/onca/xml"))
     }
   };
 
@@ -112,7 +111,7 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
 AmazonFetcher::AmazonFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0), m_site(Unknown), m_imageSize(MediumImage),
       m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
-      m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false), m_keyFoundInWallet(false) {
+      m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
   (void)linkText; // just to shut up the compiler
 }
 
@@ -175,15 +174,6 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   int imageSize = config_.readEntry("Image Size", -1);
   if(imageSize > -1) {
     m_imageSize = static_cast<ImageSize>(imageSize);
-  }
-}
-
-// just in case the secret key was once saved in the wallet
-// be sure to save it back in the rc file
-void AmazonFetcher::saveConfigHook(KConfigGroup& config_) {
-  if(!secretKey().isEmpty() && m_keyFoundInWallet) {
-    config_.writeEntry("SecretKey", m_amazonKey);
-    config_.sync();
   }
 }
 
@@ -390,11 +380,11 @@ void AmazonFetcher::doSearch() {
   }
 
   AmazonRequest request(siteData(m_site).url, m_amazonKey);
-  KUrl newUrl = request.signedRequest(params);
+  QUrl newUrl = request.signedRequest(params);
 //  myDebug() << newUrl;
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -740,7 +730,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
-  KUrl imageURL;
+  QUrl imageURL;
   switch(m_imageSize) {
     case SmallImage:
       imageURL = entry->field(QLatin1String("small-image"));
@@ -755,7 +745,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     default:
       break;
   }
-//  myDebug() << "grabbing " << imageURL.prettyUrl();
+//  myDebug() << "grabbing " << imageURL.toDisplayString();
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {
@@ -774,14 +764,13 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
 }
 
 void AmazonFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("amazon2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("amazon2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate amazon2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -886,16 +875,6 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
 }
 
 QString AmazonFetcher::secretKey() const {
-  if(m_amazonKey.isEmpty()) {
-    myWarning() << "Looking for the Amazon key in kwallet...";
-    QByteArray maybeKey = Wallet::self()->readWalletEntry(m_access);
-    if(!maybeKey.isEmpty()) {
-      m_amazonKey = maybeKey;
-      m_keyFoundInWallet = true;
-    } else {
-      myWarning() << "No Amazon secret key found for" << source();
-    }
-  }
   return QString::fromUtf8(m_amazonKey);
 }
 
@@ -941,7 +920,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_accessEdit = new KLineEdit(optionsWidget());
+  m_accessEdit = new QLineEdit(optionsWidget());
   connect(m_accessEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_accessEdit, row, 1);
   QString w = i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.");
@@ -951,7 +930,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   label = new QLabel(i18n("Secret key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_secretKeyEdit = new KLineEdit(optionsWidget());
+  m_secretKeyEdit = new QLineEdit(optionsWidget());
 //  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
   connect(m_secretKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_secretKeyEdit, row, 1);
@@ -997,7 +976,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   label = new QLabel(i18n("&Associate's ID: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_assocEdit = new KLineEdit(optionsWidget());
+  m_assocEdit = new QLineEdit(optionsWidget());
   connect(m_assocEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_assocEdit, row, 1);
   w = i18n("The associate's id identifies the person accessing the Amazon.com Web Services, and is included "
@@ -1051,4 +1030,3 @@ void AmazonFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
 }
 
-#include "amazonfetcher.moc"

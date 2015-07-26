@@ -25,8 +25,6 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "amazonfetchertest.h"
-#include "amazonfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/amazonfetcher.h"
 #include "../collections/bookcollection.h"
@@ -34,15 +32,17 @@
 #include "../collections/videocollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
-#include  "../images/imagefactory.h"
+#include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
 #include <KConfigGroup>
 
-QTEST_KDEMAIN( AmazonFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( AmazonFetcherTest )
 
 AmazonFetcherTest::AmazonFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
-    , m_config(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config", KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig) {
 }
 
 void AmazonFetcherTest::initTestCase() {
@@ -50,10 +50,10 @@ void AmazonFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "music");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "mvideo");
   // since we use an XSL file
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/amazon2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_hasConfigFile = QFile::exists(QString::fromLatin1(KDESRCDIR)  + "/amazonfetchertest.config");
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("amazonfetchertest.config"));
 
   QHash<QString, QString> practicalRdf;
   practicalRdf.insert(QLatin1String("title"), QLatin1String("Practical RDF"));
@@ -137,7 +137,7 @@ void AmazonFetcherTest::testTitle() {
         locale == QLatin1String("CN") ||
         locale == QLatin1String("IT") ||
         locale == QLatin1String("DE"))) {
-      QVERIFY2(result.contains(i.value(), Qt::CaseInsensitive), i.key().toAscii());
+      QVERIFY2(result.contains(i.value(), Qt::CaseInsensitive), i.key().toLatin1());
     } else if(collType == Tellico::Data::Collection::Video &&
        i.key() == QLatin1String("year") &&
        locale == QLatin1String("FR")) {

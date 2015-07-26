@@ -12,7 +12,6 @@ SET(fetch_STAT_SRCS
    bibliosharefetcher.cpp
    bibsonomyfetcher.cpp
    boardgamegeekfetcher.cpp
-   citebasefetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp
    dblpfetcher.cpp
@@ -61,21 +60,20 @@ SET(fetch_STAT_SRCS
    z3950fetcher.cpp
    )
 
-KDE4_ADD_LIBRARY(fetch STATIC ${fetch_STAT_SRCS})
+add_library(fetch STATIC ${fetch_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(fetch
     newstuff
+    utils
     ${TELLICO_BTPARSE_LIBS}
+    KF5::Archive
+    KF5::KDELibs4Support
     )
 
 IF( YAZ_FOUND )
   TARGET_LINK_LIBRARIES(fetch ${YAZ_LIBRARIES})
 ENDIF( YAZ_FOUND )
 
-IF( QJSON_FOUND )
-  TARGET_LINK_LIBRARIES(fetch ${QJSON_LIBRARIES} ${qjson_LIBRARIES})
-ENDIF( QJSON_FOUND )
-
 ########### install files ###############
 
-INSTALL(FILES   z3950-servers.cfg DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
+INSTALL(FILES z3950-servers.cfg DESTINATION ${TELLICO_DATA_INSTALL_DIR} )

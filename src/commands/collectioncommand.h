@@ -27,9 +27,8 @@
 
 #include "../datavectors.h"
 
-#include <kurl.h>
-
 #include <QUndoCommand>
+#include <QUrl>
 
 namespace Tellico {
   namespace Command {
@@ -58,7 +57,7 @@ private:
   Data::CollPtr m_origColl;
   Data::CollPtr m_newColl;
 
-  KUrl m_origURL;
+  QUrl m_origURL;
   Data::FieldList m_origFields;
   Data::MergePair m_mergePair;
   // for the Replace case, the collection that got replaced needs to be cleared

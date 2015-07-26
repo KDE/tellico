@@ -36,12 +36,12 @@
 #include "models/entrysortmodel.h"
 #include "models/modelmanager.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kconfig.h>
-#include <kapplication.h>
 #include <kaction.h>
 #include <kiconloader.h>
 #include <kmenu.h>
+#include <KSharedConfig>
 
 #include <QPixmap>
 #include <QMouseEvent>
@@ -124,13 +124,13 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   }
 
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup config(KGlobal::config(), configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
-    KUrl url = Kernel::self()->URL();
+    QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), KUrl());
+      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
       if(u == url) {
         configN = QString::fromLatin1("_%1").arg(i);
         break;
@@ -418,14 +418,14 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
-  KConfigGroup config(KGlobal::config(), configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   // all of this is to have custom settings on a per file basis
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
     QList<ConfigInfo> info;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      KUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
+      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i));
       if(!u.isEmpty() && i != configIndex_) {
         configN = QString::fromLatin1("_%1").arg(i);
         ConfigInfo ci;
@@ -557,7 +557,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   QAction* columnAction = m_headerMenu->addMenu(m_columnMenu);
   columnAction->setText(i18nc("Noun, Menu name", "Columns"));
-  columnAction->setIcon(KIcon(QLatin1String("view-file-columns")));
+  columnAction->setIcon(QIcon::fromTheme(QLatin1String("view-file-columns")));
 
   m_headerMenu->addSeparator();
 
@@ -565,7 +565,7 @@ void DetailedListView::updateHeaderMenu() {
   connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
   connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
-  QAction* actResize = m_headerMenu->addAction(KIcon(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
+  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
   connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 
@@ -637,4 +637,3 @@ QString DetailedListView::columnFieldName(int ncol_) const {
   return field ? field->name() : QString();
 }
 
-#include "detailedlistview.moc"

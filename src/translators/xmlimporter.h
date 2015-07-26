@@ -46,7 +46,7 @@ public:
    *
    * @param url The file to be imported
    */
-  XMLImporter(const KUrl& url);
+  XMLImporter(const QUrl& url);
   /**
    * Imports xml text.
    *

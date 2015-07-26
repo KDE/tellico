@@ -32,14 +32,14 @@
 #include "controller.h"
 #include "tellico_debug.h"
 #include "gui/combobox.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "core/tellico_config.h"
+#include "utils/datafileregistry.h"
+#include "utils/tellico_utils.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <kstandarddirs.h>
-#include <kapplication.h>
 #include <kpushbutton.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
@@ -77,8 +77,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QLabel* l = new QLabel(i18n("&Report template:"), mainWidget);
   hlay->addWidget(l);
 
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("report-templates/*.xsl"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/report-templates/*.xsl"));
   QMap<QString, QString> templates; // gets sorted by title
   foreach(const QString& file, files) {
     QFileInfo fi(file);
@@ -131,7 +130,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -139,7 +138,7 @@ ReportDialog::~ReportDialog() {
   delete m_exporter;
   m_exporter = 0;
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Report Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
   saveDialogSize(config);
 }
 
@@ -147,7 +146,7 @@ void ReportDialog::slotGenerate() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
   QString fileName = QLatin1String("report-templates/") + m_templateCombo->currentData().toString();
-  QString xsltFile = KStandardDirs::locate("appdata", fileName);
+  QString xsltFile = DataFileRegistry::self()->locate(fileName);
   if(xsltFile.isEmpty()) {
     myWarning() << "can't locate " << m_templateCombo->currentData().toString();
     return;
@@ -189,7 +188,7 @@ void ReportDialog::slotRefresh() {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  KUrl u;
+  QUrl u;
   u.setPath(m_xsltFile);
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
@@ -213,9 +212,9 @@ void ReportDialog::slotPrint() {
 
 void ReportDialog::slotSaveAs() {
   QString filter = i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
-  KUrl u = KFileDialog::getSaveUrl(KUrl(), filter, this);
+  QUrl u = KFileDialog::getSaveUrl(QUrl(), filter, this);
   if(!u.isEmpty() && u.isValid()) {
-    KConfigGroup config(KGlobal::config(), "ExportOptions");
+    KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
     bool encode = config.readEntry("EncodeUTF8", true);
     long oldOpt = m_exporter->options();
 
@@ -226,7 +225,7 @@ void ReportDialog::slotSaveAs() {
       options |= Export::ExportUTF8;
     }
 
-    KUrl oldURL = m_exporter->url();
+    QUrl oldURL = m_exporter->url();
     m_exporter->setOptions(options);
     m_exporter->setURL(u);
 
@@ -237,4 +236,3 @@ void ReportDialog::slotSaveAs() {
   }
 }
 
-#include "reportdialog.moc"

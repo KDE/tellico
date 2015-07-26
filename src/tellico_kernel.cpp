@@ -30,7 +30,6 @@
 #include "filter.h"
 #include "filterdialog.h"
 #include "loandialog.h"
-#include "utils/calendarhandler.h"
 #include "tellico_debug.h"
 #include "commands/collectioncommand.h"
 #include "commands/fieldcommand.h"
@@ -44,23 +43,23 @@
 #include "commands/renamecollection.h"
 #include "collectionfactory.h"
 #include "utils/stringset.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 
 #include <kmessagebox.h>
-#include <kglobal.h>
 #include <kiconloader.h>
-#include <kinputdialog.h>
-#include <klocale.h>
-#include <kundostack.h>
+#include <KLocalizedString>
+
+#include <QInputDialog>
+#include <QUndoStack>
 
 using Tellico::Kernel;
 Kernel* Kernel::s_self = 0;
 
 Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
-    , m_commandHistory(new KUndoStack(parent)) {
+    , m_commandHistory(new QUndoStack(parent)) {
 }
 
-KUrl Kernel::URL() const {
+QUrl Kernel::URL() const {
   return Data::Document::self()->URL();
 }
 
@@ -316,8 +315,8 @@ void Kernel::replaceCollection(Tellico::Data::CollPtr coll_) {
 
 void Kernel::renameCollection() {
   bool ok;
-  QString newTitle = KInputDialog::getText(i18n("Rename Collection"), i18n("New collection name:"),
-                                           Data::Document::self()->collection()->title(), &ok, m_widget);
+  QString newTitle = QInputDialog::getText(m_widget, i18n("Rename Collection"), i18n("New collection name:"),
+                                           QLineEdit::Normal, Data::Document::self()->collection()->title(), &ok);
   if(ok) {
     doCommand(new Command::RenameCollection(Data::Document::self()->collection(), newTitle));
   }

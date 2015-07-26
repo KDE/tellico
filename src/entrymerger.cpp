@@ -32,7 +32,7 @@
 #include "gui/statusbar.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QTimer>
 
@@ -132,4 +132,3 @@ bool EntryMerger::cleanMerge(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr
   return true;
 }
 
-#include "entrymerger.moc"

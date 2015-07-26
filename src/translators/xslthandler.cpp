@@ -24,9 +24,9 @@
 
 #include "xslthandler.h"
 #include "../tellico_debug.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 
-#include <kurl.h>
+#include <QUrl>
 
 #include <QDomDocument>
 #include <QTextCodec>
@@ -94,17 +94,17 @@ XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
   }
 }
 
-XSLTHandler::XSLTHandler(const KUrl& xsltURL_) :
+XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
     m_stylesheet(0) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.encodedPathAndQuery().toUtf8(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8(), NULL, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltURL_.path();
     }
   } else {
-    myDebug() << "XSLTHandler(KUrl) - invalid: " << xsltURL_;
+    myDebug() << "XSLTHandler(QUrl) - invalid: " << xsltURL_;
   }
 }
 

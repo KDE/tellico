@@ -27,7 +27,7 @@
 
 #include "../datavectors.h"
 
-#include <KHBox>
+#include <KDE/KHBox>
 
 #include <QList>
 #include <QLabel>
@@ -57,8 +57,6 @@ public:
   QString text() const;
   void setText(const QString& text);
   void updateField(Data::FieldPtr field);
-
-  static const QPixmap& pixmap(const QString& value);
 
 public slots:
   void update();

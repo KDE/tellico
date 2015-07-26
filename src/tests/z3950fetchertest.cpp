@@ -25,17 +25,16 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "z3950fetchertest.h"
-#include "z3950fetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/z3950fetcher.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( Z3950FetcherTest, GUI )
+QTEST_GUILESS_MAIN( Z3950FetcherTest )
 
 Z3950FetcherTest::Z3950FetcherTest() : AbstractFetcherTest() {
 }
@@ -43,9 +42,9 @@ Z3950FetcherTest::Z3950FetcherTest() : AbstractFetcherTest() {
 void Z3950FetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBibtex(Tellico::Data::Collection::Book, "book");
   // since we use the MODS importer
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
   // also use the z3950-servers.cfg file
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../fetch/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../fetch/z3950-servers.cfg"));
 }
 
 void Z3950FetcherTest::testTitle() {

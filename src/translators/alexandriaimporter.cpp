@@ -28,18 +28,19 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../tellico_debug.h"
 #include "../utils/isbnvalidator.h"
+#include "../tellico_debug.h"
 
-#include <kcombobox.h>
-#include <kapplication.h>
-#include <kstringhandler.h>
+#include <KComboBox>
+#include <KStringHandler>
+#include <KLocalizedString>
 
 #include <QLabel>
 #include <QGroupBox>
 #include <QTextStream>
 #include <QByteArray>
 #include <QHBoxLayout>
+#include <QApplication>
 
 using Tellico::Import::AlexandriaImporter;
 
@@ -168,10 +169,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         entry->setField(isbn, alexValue);
 
         // now find cover image
-        KUrl u;
         alexValue.remove(QLatin1Char('-'));
         for(QStringList::Iterator ext = covers.begin(); ext != covers.end(); ++ext) {
-          u.setPath(dataDir.absoluteFilePath(alexValue + *ext));
+          QUrl u = QUrl::fromLocalFile(dataDir.absoluteFilePath(alexValue + *ext));
           if(!QFile::exists(u.path())) {
             continue;
           }
@@ -214,7 +214,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -300,4 +300,3 @@ void AlexandriaImporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "alexandriaimporter.moc"

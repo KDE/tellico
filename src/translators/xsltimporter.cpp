@@ -29,7 +29,7 @@
 #include "../collection.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kurlrequester.h>
 
 #include <QLabel>
@@ -43,7 +43,7 @@ using Tellico::Import::XSLTImporter;
 
 namespace {
 
-static bool isUTF8(const KUrl& url_) {
+static bool isUTF8(const QUrl& url_) {
   // read first line to check encoding
   const std::auto_ptr<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
   if(!ref->isValid()) {
@@ -59,7 +59,7 @@ static bool isUTF8(const KUrl& url_) {
 }
 
 // always use utf8 for xslt
-XSLTImporter::XSLTImporter(const KUrl& url_) : Tellico::Import::TextImporter(url_, isUTF8(url_)),
+XSLTImporter::XSLTImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_, isUTF8(url_)),
     m_widget(0),
     m_URLRequester(0) {
 }
@@ -132,4 +132,3 @@ void XSLTImporter::slotCancel() {
   myDebug() << "unimplemented";
 }
 
-#include "xsltimporter.moc"

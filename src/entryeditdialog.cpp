@@ -30,15 +30,15 @@
 #include "entry.h"
 #include "fieldformat.h"
 #include "tellico_kernel.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>
 #include <kaction.h>
-#include <kvbox.h>
+#include <KSharedConfig>
 
 #include <QStringList>
 #include <QObject>
@@ -46,6 +46,7 @@
 #include <QApplication>
 #include <QGridLayout>
 #include <QCloseEvent>
+#include <QVBoxLayout>
 
 namespace {
   // must be an even number
@@ -82,7 +83,7 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
 
   setHelp(QLatin1String("entry-editor"));
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
   restoreDialogSize(config);
 }
 
@@ -104,7 +105,7 @@ void EntryEditDialog::slotClose() {
     m_needReset = true;
     setContents(m_currEntries);
     slotSetModified(false);
-    KConfigGroup config(KGlobal::config(), QLatin1String("Edit Dialog Options"));
+    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
     saveDialogSize(config);
   }
 }
@@ -133,9 +134,8 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
-//  myDebug();
 
-  button(m_newBtn)->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  button(m_newBtn)->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
@@ -269,7 +269,7 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 // this doesn't seem to work
 //  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum);
 // so do this instead
-  layout()->invalidate(); // needed so the sizeHint() gets recalculated
+//  layout()->invalidate(); // needed so the sizeHint() gets recalculated
   m_tabs->setMinimumHeight(m_tabs->minimumSizeHint().height());
   m_tabs->setMinimumWidth(m_tabs->sizeHint().width());
 
@@ -757,4 +757,3 @@ void EntryEditDialog::closeEvent(QCloseEvent* event_) {
   }
 }
 
-#include "entryeditdialog.moc"

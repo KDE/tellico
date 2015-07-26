@@ -25,13 +25,13 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "filtertest.h"
-#include "filtertest.moc"
-#include "qtest_kde.h"
 
 #include "../filter.h"
 #include "../entry.h"
 
-QTEST_KDEMAIN_CORE( FilterTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( FilterTest )
 
 void FilterTest::initTestCase() {
 }

@@ -25,20 +25,21 @@
 #include "winecomfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KJobUiDelegate>
 #include <KConfigGroup>
-#include <klineedit.h>
+#include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QDomDocument>
 #include <QLabel>
 #include <QFile>
@@ -105,7 +106,7 @@ void WineComFetcher::doSearch() {
 
 //  myDebug() << "value = " << value_;
 
-  KUrl u(WINECOM_BASE_URL);
+  QUrl u(QString::fromLatin1(WINECOM_BASE_URL));
   u.setPath(QLatin1String("/api/beta2/service.svc/XML/catalog"));
   u.addQueryItem(QLatin1String("apikey"), m_apiKey);
   u.addQueryItem(QLatin1String("offset"), QString::number((m_page-1) * WINECOM_RETURNS_PER_REQUEST));
@@ -124,7 +125,7 @@ void WineComFetcher::doSearch() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -247,14 +248,13 @@ Tellico::Data::EntryPtr WineComFetcher::fetchEntryHook(uint uid_) {
 }
 
 void WineComFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("winecom2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("winecom2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate winecom2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -310,7 +310,7 @@ WineComFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const WineComFetche
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
@@ -333,4 +333,3 @@ QString WineComFetcher::ConfigWidget::preferredName() const {
   return WineComFetcher::defaultName();
 }
 
-#include "winecomfetcher.moc"

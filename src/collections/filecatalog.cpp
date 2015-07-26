@@ -25,7 +25,7 @@
 #include "filecatalog.h"
 #include "../entrycomparison.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* file_general = I18N_NOOP("General");
@@ -131,4 +131,3 @@ int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::Entry
   return res;
 }
 
-#include "filecatalog.moc"

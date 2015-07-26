@@ -31,8 +31,9 @@
 
 #include <QPointer>
 
-class KUrl;
-class KLineEdit;
+class QUrl;
+class QLineEdit;
+
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -72,9 +73,9 @@ public:
     virtual void saveConfigHook(KConfigGroup& config);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_userEdit;
-    KLineEdit* m_passEdit;
-    KLineEdit* m_emailEdit;
+    QLineEdit* m_userEdit;
+    QLineEdit* m_passEdit;
+    QLineEdit* m_emailEdit;
   };
   friend class ConfigWidget;
 
@@ -89,7 +90,7 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   void initXSLTHandler();
-  KUrl searchURL(FetchKey key, const QString& value) const;
+  QUrl searchURL(FetchKey key, const QString& value) const;
   void readWallet() const;
 
   XSLTHandler* m_xsltHandler;

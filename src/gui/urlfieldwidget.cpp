@@ -30,6 +30,8 @@
 #include <kurlrequester.h>
 #include <kurllabel.h>
 
+#include <QUrl>
+
 using Tellico::GUI::URLFieldWidget;
 
 // subclass of KUrlCompletion is needed so the KUrlLabel
@@ -38,7 +40,7 @@ using Tellico::GUI::URLFieldWidget;
 QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
   // KUrlCompletion::makeCompletion() uses an internal variable instead
   // of calling KUrlCompletion::dir() so need to set the base dir before completing
-  setDir(Kernel::self()->URL().directory());
+  setDir(Kernel::self()->URL().adjusted(QUrl::PreferLocalFile | QUrl::RemoveFilename));
   return KUrlCompletion::makeCompletion(text_);
 }
 
@@ -64,13 +66,19 @@ URLFieldWidget::~URLFieldWidget() {
 }
 
 QString URLFieldWidget::text() const {
-  if(m_isRelative) {
-    return KUrl::relativeUrl(Kernel::self()->URL(), m_requester->url());
+  if(m_isRelative && Kernel::self()->URL().isLocalFile()) {
+    //KURl::relativeUrl() has no QUrl analog
+    QUrl base_url = Kernel::self()->URL();
+    QUrl url = m_requester->url();
+    //return Kernel::self()->URL().resolved(m_requester->url());
+    return QDir(base_url.path()).relativeFilePath(url.path());
   }
   // for comparison purposes and to be consistent with the file listing importer
   // I want the full url here, including the protocol
-  // the requester only returns the path, so create a KUrl
-  return KUrl(m_requester->url()).url();
+  // the requester only returns the path, so create a QUrl
+  // TODO: 2015-04-30 no longer necessary in KF5/Qt5?
+  //return QUrl(m_requester->url()).url();
+  return m_requester->url().url();
 }
 
 void URLFieldWidget::setTextImpl(const QString& text_) {
@@ -92,11 +100,10 @@ void URLFieldWidget::slotOpenURL(const QString& url_) {
     return;
   }
   // just in case, interpret string relative to document url
-  m_run = new KRun(KUrl(Kernel::self()->URL(), url_), this);
+  m_run = new KRun(Kernel::self()->URL().resolved(url_), this);
 }
 
 QWidget* URLFieldWidget::widget() {
   return m_requester;
 }
 
-#include "urlfieldwidget.moc"

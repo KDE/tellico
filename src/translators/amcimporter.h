@@ -36,7 +36,7 @@ namespace Tellico {
 class AMCImporter : public DataImporter {
 Q_OBJECT
 public:
-  AMCImporter(const KUrl& url);
+  AMCImporter(const QUrl& url);
   virtual ~AMCImporter();
 
   virtual Data::CollPtr collection();

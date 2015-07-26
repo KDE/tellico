@@ -22,39 +22,37 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <config.h>
 #include "freebasefetcher.h"
 #include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../entry.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
-#include <kio/jobuidelegate.h>
-#include <KLineEdit>
+#include <KJobUiDelegate>
+#include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
 #include <QTextCodec>
-
-#ifdef HAVE_QJSON
-#include <qjson/serializer.h>
-#include <qjson/parser.h>
-#endif
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
-  static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread";
-  static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image";
-  static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic";
-  static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view";
+  static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread/";
+  static const char* FREEBASE_IMAGE_URL = "https://usercontent.googleapis.com/freebase/v1/image/";
+  static const char* FREEBASE_BLURB_URL = "https://www.googleapis.com/freebase/v1/topic/";
+  static const char* FREEBASE_VIEW_URL  = "http://www.freebase.com/view/";
   static const char* FREEBASE_API_KEY   = "AIzaSyBdsa_DEGpDQ6PzZyYHHHokRIBY8thOdUQ";
   static const int   FREEBASE_RETURNS_PER_REQUEST = 25;
 }
@@ -108,11 +106,6 @@ void FreebaseFetcher::continueSearch() {
 }
 
 void FreebaseFetcher::doSearch() {
-#ifndef HAVE_QJSON
-  stop();
-  return;
-#else
-
   QVariantList queries;
   switch(collectionType()) {
     case Data::Collection::Book:
@@ -150,12 +143,11 @@ void FreebaseFetcher::doSearch() {
     return;
   }
 
-  QJson::Serializer serializer;
   foreach(const QVariant& queryVariant, queries) {
     QVariantMap query = queryVariant.toMap();
     Q_ASSERT(!query.isEmpty());
 
-    const uint queryHash = qHash(serializer.serialize(query));
+    const uint queryHash = qHash(serialize(query));
     // we skip the query if the cursor is valid and == false
     const QVariant cursor = m_cursors.value(queryHash);
     if(cursor.type() == QVariant::Bool && !cursor.toBool()) {
@@ -174,10 +166,10 @@ void FreebaseFetcher::doSearch() {
     query.insert(QLatin1String("/common/topic/image"), id_query);
     query.insert(QLatin1String("/common/topic/article"), id_query);
 
-    const QByteArray query_string = serializer.serialize(QVariantList() << query);
+    const QByteArray query_string = serialize(QVariantList() << query);
 //    myDebug() << "query:" << query_string;
 
-    KUrl url(FREEBASE_QUERY_URL);
+    QUrl url(QString::fromLatin1(FREEBASE_QUERY_URL));
     url.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
     if(cursor.type() == QVariant::String) {
       url.addQueryItem(QLatin1String("cursor"), cursor.toString());
@@ -195,12 +187,11 @@ void FreebaseFetcher::doSearch() {
 //    }
 //    myDebug() << url.url();
     job->setProperty("freebase_query", queryHash);
-    job->ui()->setWindow(GUI::Proxy::widget());
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
     connect(job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
     m_jobs << job;
   }
-#endif
 }
 
 void FreebaseFetcher::endJob(KIO::StoredTransferJob* job_) {
@@ -235,8 +226,8 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
   // if it's still a freebase id, then it starts with a slash
   if(image_id.startsWith(QLatin1Char('/'))) {
     // let's set max image size to 200x200
-    KUrl imageUrl(FREEBASE_IMAGE_URL);
-    imageUrl.addPath(image_id);
+    QUrl imageUrl(QString::fromLatin1(FREEBASE_IMAGE_URL));
+    imageUrl.setPath(imageUrl.path() + image_id);
     imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
     imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
 //    myDebug() << "image url:" << imageUrl;
@@ -267,8 +258,8 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     const QString article_id = entry->field(article_field);
     // if it's still a freebase id, then it starts with a slash
     if(article_id.startsWith(QLatin1Char('/'))) {
-      KUrl articleUrl(FREEBASE_BLURB_URL);
-      articleUrl.addPath(article_id);
+      QUrl articleUrl(QString::fromLatin1(FREEBASE_BLURB_URL));
+      articleUrl.setPath(articleUrl.path() + article_id);
       articleUrl.addQueryItem(QLatin1String("limit"), QLatin1String("1"));
       articleUrl.addQueryItem(QLatin1String("filter"), QLatin1String("/common/document/text"));
       articleUrl.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
@@ -277,18 +268,15 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
       const QByteArray data = FileHandler::readDataFile(articleUrl, true);
       if(data.isEmpty()) {
         entry->setField(article_field, QString());
-#ifdef HAVE_QJSON
       } else {
-        QJson::Parser parser;
-        const QVariant response = parser.parse(data);
-        const QVariantMap articleMap = response.toMap()
+        QJsonDocument doc = QJsonDocument::fromJson(data);
+        const QVariantMap articleMap = doc.object().toVariantMap()
               .value(QLatin1String("property")).toMap()
               .value(QLatin1String("/common/document/text")).toMap();
         const QVariantList valueList = articleMap.value(QLatin1String("values")).toList();
         if(!valueList.isEmpty()) {
           entry->setField(article_field, value(valueList.first().toMap(), "value"));
         }
-#endif
       }
     }
   }
@@ -314,7 +302,6 @@ Tellico::Fetch::FetchRequest FreebaseFetcher::updateRequest(Data::EntryPtr entry
 
 void FreebaseFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-#ifdef HAVE_QJSON
 //  myDebug();
 
   if(job->error()) {
@@ -341,9 +328,8 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
     f.close();
 #endif
 
-  QJson::Parser parser;
-  QVariant response = parser.parse(data);
-  if(response.isNull()) {
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  if(doc.isNull()) {
     myDebug() << "no response";
     endJob(job);
     return;
@@ -352,8 +338,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
   const uint queryHash = job->property("freebase_query").toUInt();
 
   QVariantList resultList;
-
-  const QVariantMap responseMap = response.toMap();
+  const QVariantMap responseMap = doc.object().toVariantMap();
   // check response code to see if everything was ok
   if(responseMap.contains(QLatin1String("result"))) {
     m_cursors[queryHash] = responseMap.value(QLatin1String("cursor"));
@@ -441,7 +426,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
             binding = i18n("Hardback");
           } else if(binding.toLower() == QLatin1String("mass market paperback")) {
             binding = i18n("Paperback");
-          } else {
+          } else if(!binding.isEmpty()) {
             binding = FieldFormat::capitalize(binding);
           }
           entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8()));
@@ -607,7 +592,6 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
   }
-#endif
   endJob(job);
 }
 
@@ -941,6 +925,7 @@ QVariantList FreebaseFetcher::boardGameQueries() const {
       break;
   }
 
+//  myDebug() << serialize(queries);
   return queries;
 }
 
@@ -967,7 +952,7 @@ FreebaseFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const FreebaseFetc
   QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
@@ -1027,4 +1012,6 @@ QString FreebaseFetcher::value(const QVariantMap& map, const char* object, const
   }
 }
 
-#include "freebasefetcher.moc"
+QByteArray FreebaseFetcher::serialize(const QVariant& value_) {
+  return QJsonDocument::fromVariant(value_).toJson(QJsonDocument::Compact);
+}

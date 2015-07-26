@@ -25,19 +25,19 @@
 #include "tablefieldwidget.h"
 #include "../field.h"
 #include "../fieldformat.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kmenu.h>
-#include <kicon.h>
-#include <kinputdialog.h>
 
 #include <QTableWidget>
 #include <QMouseEvent>
 #include <QEvent>
 #include <QHeaderView>
+#include <QIcon>
+#include <QInputDialog>
 
 namespace {
   static const int MIN_TABLE_ROWS = 5;
@@ -165,8 +165,8 @@ void TableFieldWidget::slotRenameColumn() {
   }
   QString name = m_table->horizontalHeaderItem(m_col)->text();
   bool ok;
-  QString newName = KInputDialog::getText(i18n("Rename Column"), i18n("New column name:"),
-                                          name, &ok, this);
+  QString newName = QInputDialog::getText(this, i18n("Rename Column"), i18n("New column name:"),
+                                          QLineEdit::Normal, name, &ok);
   if(ok && !newName.isEmpty()) {
     Data::FieldPtr newField(new Data::Field(*m_field));
     newField->setProperty(QString::fromLatin1("column%1").arg(m_col+1), newName);
@@ -231,9 +231,9 @@ void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
   m_col = col;
 
   KMenu menu(this);
-  menu.addAction(KIcon(QLatin1String("edit-rename")), i18n("Rename Column..."),
+  menu.addAction(QIcon::fromTheme(QLatin1String("edit-rename")), i18n("Rename Column..."),
                  this, SLOT(slotRenameColumn()));
-  menu.addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Table"),
+  menu.addAction(QIcon::fromTheme(QLatin1String("edit-clear")), i18n("Clear Table"),
                  this, SLOT(clearImpl()));
   menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
 }
@@ -250,28 +250,28 @@ void TableFieldWidget::verticalHeaderContextMenu(const QPoint& point_) {
 
 void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
   KMenu menu(this);
-  menu.addAction(KIcon(QLatin1String("edit-table-insert-row-below")), i18n("Insert Row"),
+  menu.addAction(QIcon::fromTheme(QLatin1String("edit-table-insert-row-below")), i18n("Insert Row"),
                  this, SLOT(slotInsertRow()));
-  menu.addAction(KIcon(QLatin1String("edit-table-delete-row")), i18n("Remove Row"),
+  menu.addAction(QIcon::fromTheme(QLatin1String("edit-table-delete-row")), i18n("Remove Row"),
                  this, SLOT(slotRemoveRow()));
-  QAction* act = menu.addAction(KIcon(QLatin1String("arrow-up")), i18n("Move Row Up"),
+  QAction* act = menu.addAction(QIcon::fromTheme(QLatin1String("arrow-up")), i18n("Move Row Up"),
                                 this, SLOT(slotMoveRowUp()));
   if(m_row < 1) {
     act->setEnabled(false);
   }
-  act = menu.addAction(KIcon(QLatin1String("arrow-down")), i18n("Move Row Down"),
+  act = menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down")), i18n("Move Row Down"),
                        this, SLOT(slotMoveRowDown()));
   if(m_row < 0 || m_row > m_table->rowCount()-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  act = menu.addAction(KIcon(QLatin1String("edit-rename")), i18n("Rename Column..."),
+  act = menu.addAction(QIcon::fromTheme(QLatin1String("edit-rename")), i18n("Rename Column..."),
                        this, SLOT(slotRenameColumn()));
   if(m_col < 0 || m_col > m_columns-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
-  menu.addAction(KIcon(QLatin1String("edit-clear")), i18n("Clear Table"),
+  menu.addAction(QIcon::fromTheme(QLatin1String("edit-clear")), i18n("Clear Table"),
                  this, SLOT(slotClear()));
 
   menu.exec(point_);
@@ -327,4 +327,3 @@ void TableFieldWidget::slotClear() {
   clearImpl();
 }
 
-#include "tablefieldwidget.moc"

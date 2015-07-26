@@ -28,7 +28,7 @@
 #include "../datavectors.h"
 #include "models.h"
 
-#include <KIcon>
+#include <QIcon>
 
 #include <QAbstractItemModel>
 #include <QHash>
@@ -74,18 +74,18 @@ public:
 private:
   Data::EntryPtr entry(const QModelIndex& index) const;
   Data::FieldPtr field(const QModelIndex& index) const;
-  const KIcon& defaultIcon(Data::CollPtr coll) const;
+  const QIcon& defaultIcon(Data::CollPtr coll) const;
   QString imageField(Data::CollPtr coll) const;
 
   Data::EntryList m_entries;
   Data::FieldList m_fields;
-  KIcon m_checkPix;
+  QIcon m_checkPix;
   QHash<int, int> m_saveStates;
   bool m_imagesAreAvailable;
 
-  mutable QHash<int, KIcon*> m_defaultIcons;
+  mutable QHash<int, QIcon*> m_defaultIcons;
   mutable QHash<long, QString> m_imageFields;
-  mutable QCache<QString, KIcon> m_iconCache;
+  mutable QCache<QString, QIcon> m_iconCache;
 };
 
 } // end namespace

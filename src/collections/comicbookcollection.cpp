@@ -24,7 +24,7 @@
 
 #include "comicbookcollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* comic_general = I18N_NOOP("General");
@@ -169,4 +169,3 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   return list;
 }
 
-#include "comicbookcollection.moc"

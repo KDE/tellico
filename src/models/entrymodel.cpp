@@ -26,17 +26,16 @@
 #include "models.h"
 #include "../collection.h"
 #include "../collectionfactory.h"
-#include "../images/imagefactory.h"
 #include "../entry.h"
 #include "../field.h"
-#include "../images/image.h"
 #include "../document.h"
-#include "../gui/ratingwidget.h"
+#include "../images/image.h"
+#include "../images/imagefactory.h"
+#include "../utils/tellico_utils.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <kicon.h>
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const int ENTRYMODEL_IMAGE_HEIGHT = 64;
@@ -45,8 +44,9 @@ namespace {
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
-    m_checkPix(QLatin1String("checkmark")), m_imagesAreAvailable(false) {
+    m_imagesAreAvailable(false) {
   m_iconCache.setMaxCost(Config::iconCacheSize());
+  m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"));
 }
 
 EntryModel::~EntryModel() {
@@ -63,7 +63,7 @@ int EntryModel::columnCount(const QModelIndex&) const {
 }
 
 QModelIndex EntryModel::index(int row_, int column_, const QModelIndex& parent_) const {
-  return hasIndex(row_, column_, parent_) ? createIndex(row_, column_, 0) : QModelIndex();
+  return hasIndex(row_, column_, parent_) ? createIndex(row_, column_) : QModelIndex();
 }
 
 QModelIndex EntryModel::parent(const QModelIndex&) const {
@@ -134,18 +134,18 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
           return defaultIcon(entry->collection());
         }
         const QString id = entry->field(fieldName);
-        KIcon* icon = m_iconCache.object(id);
+        QIcon* icon = m_iconCache.object(id);
         if(icon) {
-          return KIcon(*icon);
+          return QIcon(*icon);
         }
         const Data::Image& img = ImageFactory::imageById(id);
         if(img.isNull()) {
           return defaultIcon(entry->collection());
         }
 
-        icon = new KIcon(QPixmap::fromImage(img));
+        icon = new QIcon(QPixmap::fromImage(img));
         m_iconCache.insert(id, icon);
-        return KIcon(*icon);
+        return QIcon(*icon);
       }
       // otherwise just return the image for the entry
       // we don't need a formatted value for any pixmaps
@@ -158,7 +158,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         // assume any non-empty value equals true
         return m_checkPix;
       } else if(field->type() == Data::Field::Rating) {
-        return GUI::RatingWidget::pixmap(value);
+        return Tellico::pixmap(value);
       }
 
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
@@ -353,18 +353,18 @@ void EntryModel::setImagesAreAvailable(bool available_) {
   }
 }
 
-const KIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
-  KIcon* icon = m_defaultIcons.value(coll_->type());
+const QIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
+  QIcon* icon = m_defaultIcons.value(coll_->type());
   if(icon) {
     return *icon;
   }
-  KIcon tmpIcon(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
+  QIcon tmpIcon = QIcon::fromTheme(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
   if(tmpIcon.isNull()) {
     myLog() << "null nocover image, loading tellico.png";
-    tmpIcon = KIcon(QLatin1String("tellico"));
+    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"));
   }
 
-  icon = new KIcon(tmpIcon);
+  icon = new QIcon(tmpIcon);
   m_defaultIcons.insert(coll_->type(), icon);
   return *icon;
 }
@@ -379,4 +379,3 @@ QString EntryModel::imageField(Data::CollPtr coll_) const {
   return m_imageFields.value(coll_->id());
 }
 
-#include "entrymodel.moc"

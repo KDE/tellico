@@ -31,7 +31,7 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 #include <QTextStream>
@@ -118,7 +118,7 @@ void RISImporter::initTypeMap() {
   }
 }
 
-RISImporter::RISImporter(const KUrl::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+RISImporter::RISImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }
@@ -165,7 +165,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
 
   if(text().isEmpty()) {
     int count = 0;
-    foreach(const KUrl& url, urls()) {
+    foreach(const QUrl& url, urls()) {
       if(m_cancelled)  {
         break;
       }
@@ -182,7 +182,7 @@ Tellico::Data::CollPtr RISImporter::collection() {
   return m_coll;
 }
 
-void RISImporter::readURL(const KUrl& url_, int n, const QHash<QString, Tellico::Data::FieldPtr>& risFields_) {
+void RISImporter::readURL(const QUrl& url_, int n, const QHash<QString, Tellico::Data::FieldPtr>& risFields_) {
   QString str = FileHandler::readTextFile(url_);
   if(str.isEmpty()) {
     return;
@@ -311,7 +311,6 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, n*100 + 100*j/length);
-      kapp->processEvents();
     }
   }
 
@@ -345,7 +344,7 @@ void RISImporter::slotCancel() {
   m_cancelled = true;
 }
 
-bool RISImporter::maybeRIS(const KUrl& url_) {
+bool RISImporter::maybeRIS(const QUrl& url_) {
   QString text = FileHandler::readTextFile(url_, true /*quiet*/);
   if(text.isEmpty()) {
     return false;
@@ -366,4 +365,3 @@ bool RISImporter::maybeRIS(const KUrl& url_) {
   return rx.exactMatch(currLine);
 }
 
-#include "risimporter.moc"

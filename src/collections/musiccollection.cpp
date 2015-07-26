@@ -25,7 +25,7 @@
 #include "musiccollection.h"
 #include "../entrycomparison.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* music_general = I18N_NOOP("General");
@@ -143,4 +143,3 @@ int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   return res;
 }
 
-#include "musiccollection.moc"

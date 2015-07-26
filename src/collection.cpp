@@ -28,12 +28,12 @@
 #include "entrygroup.h"
 #include "derivedvalue.h"
 #include "fieldformat.h"
-#include "tellico_utils.h"
+#include "utils/string_utils.h"
 #include "utils/stringset.h"
 #include "entrycomparison.h"
 #include "tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 #include <QRegExp>
 
@@ -906,4 +906,3 @@ Tellico::Data::ID Collection::getID() {
   return ++id;
 }
 
-#include "collection.moc"

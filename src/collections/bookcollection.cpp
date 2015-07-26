@@ -25,7 +25,7 @@
 #include "bookcollection.h"
 #include "../entrycomparison.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* book_general = I18N_NOOP("General");
@@ -211,4 +211,3 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   return res;
 }
 
-#include "bookcollection.moc"

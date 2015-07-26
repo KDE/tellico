@@ -31,10 +31,9 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
-
 #include <QRegExp>
 #include <QTextStream>
+#include <QApplication>
 
 using Tellico::Import::CIWImporter;
 QHash<QString, QString>* CIWImporter::s_tagMap = 0;
@@ -65,7 +64,7 @@ void CIWImporter::initTagMap() {
   }
 }
 
-CIWImporter::CIWImporter(const KUrl::List& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+CIWImporter::CIWImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
   initTagMap();
 }
 
@@ -88,7 +87,7 @@ Tellico::Data::CollPtr CIWImporter::collection() {
 
   if(text().isEmpty()) {
     int count = 0;
-    foreach(const KUrl& url, urls()) {
+    foreach(const QUrl& url, urls()) {
       if(m_cancelled)  {
         break;
       }
@@ -105,7 +104,7 @@ Tellico::Data::CollPtr CIWImporter::collection() {
   return m_coll;
 }
 
-void CIWImporter::readURL(const KUrl& url_, int n) {
+void CIWImporter::readURL(const QUrl& url_, int n) {
   QString str = FileHandler::readTextFile(url_);
   if(str.isEmpty()) {
     return;
@@ -229,7 +228,7 @@ void CIWImporter::readText(const QString& text_, int n) {
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, n*100 + 100*j/length);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -250,7 +249,7 @@ void CIWImporter::slotCancel() {
   m_cancelled = true;
 }
 
-bool CIWImporter::maybeCIW(const KUrl& url_) {
+bool CIWImporter::maybeCIW(const QUrl& url_) {
   QString text = FileHandler::readTextFile(url_, true /*quiet*/);
   if(text.isEmpty()) {
     return false;
@@ -271,4 +270,3 @@ bool CIWImporter::maybeCIW(const KUrl& url_) {
   return rx.exactMatch(currLine);
 }
 
-#include "ciwimporter.moc"

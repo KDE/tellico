@@ -29,8 +29,7 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <klineedit.h>
-
+#include <QLineEdit>
 #include <QPointer>
 #include <QDate>
 
@@ -123,7 +122,7 @@ private slots:
   void slotLangChanged();
 
 private:
-  KLineEdit* m_apiKeyEdit;
+  QLineEdit* m_apiKeyEdit;
   GUI::ComboBox* m_langCombo;
 };
 

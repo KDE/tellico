@@ -26,11 +26,11 @@
 #include "../core/filehandler.h"
 #include "../collection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Import::XMLImporter;
 
-XMLImporter::XMLImporter(const KUrl& url_) : Import::Importer(url_) {
+XMLImporter::XMLImporter(const QUrl& url_) : Import::Importer(url_) {
   if(!url_.isEmpty() && url_.isValid()) {
     m_dom = FileHandler::readXMLDocument(url_, true);
   }
@@ -43,7 +43,7 @@ XMLImporter::XMLImporter(const QString& text_) : Import::Importer(text_) {
   setText(text_);
 }
 
-XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KUrl()) {
+XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(QUrl()) {
   if(data_.isEmpty()) {
     return;
   }
@@ -60,7 +60,7 @@ XMLImporter::XMLImporter(const QByteArray& data_) : Import::Importer(KUrl()) {
   }
 }
 
-XMLImporter::XMLImporter(const QDomDocument& dom_) : Import::Importer(KUrl()), m_dom(dom_) {
+XMLImporter::XMLImporter(const QDomDocument& dom_) : Import::Importer(QUrl()), m_dom(dom_) {
 }
 
 void XMLImporter::setText(const QString& text_) {
@@ -80,4 +80,3 @@ Tellico::Data::CollPtr XMLImporter::collection() {
   return Data::CollPtr();
 }
 
-#include "xmlimporter.moc"

@@ -25,12 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "cuecattest.h"
-#include "cuecattest.moc"
-#include "qtest_kde.h"
 
 #include "../utils/upcvalidator.h"
 
-QTEST_KDEMAIN_CORE( CueCatTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( CueCatTest )
 
 Q_DECLARE_METATYPE(QValidator::State)
 

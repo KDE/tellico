@@ -32,21 +32,21 @@
 #include "../gui/combobox.h"
 #include "../gui/lineedit.h"
 #include "../gui/collectiontypecombo.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../newstuff/manager.h"
 #include "../translators/translators.h"
 #include "../translators/tellicoimporter.h"
 #include "../translators/bibteximporter.h"
 #include "../translators/xsltimporter.h"
 #include "../translators/risimporter.h"
+#include "../utils/datafileregistry.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kprocess.h>
 #include <kurlrequester.h>
 #include <kacceleratormanager.h>
 #include <kshell.h>
 #include <KConfigGroup>
-#include <KStandardDirs>
 
 #include <QLabel>
 #include <QRegExp>
@@ -249,10 +249,9 @@ void ExecExternalFetcher::slotProcessExited() {
     case Import::MODS:
       imp = new Import::XSLTImporter(text);
       {
-        QString xsltFile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+        QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
-          KUrl u;
-          u.setPath(xsltFile);
+          QUrl u = QUrl::fromLocalFile(xsltFile);
           static_cast<Import::XSLTImporter*>(imp)->setXSLTURL(u);
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
@@ -391,7 +390,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     gridLayout->addWidget(cb, ++row, 0);
     m_cbDict.insert(key, cb);
     GUI::LineEdit* le = new GUI::LineEdit(gbox);
-    le->setClickMessage(QLatin1String("%1")); // for example
+    le->setPlaceholderText(QLatin1String("%1")); // for example
     le->completionObject()->addItem(QLatin1String("%1"));
     gridLayout->addWidget(le, row, 1);
     m_leDict.insert(key, le);
@@ -410,7 +409,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_cbUpdate = new QCheckBox(i18n("Update"), gbox);
   gridLayout->addWidget(m_cbUpdate, ++row, 0);
   m_leUpdate = new GUI::LineEdit(gbox);
-  m_leUpdate->setClickMessage(QLatin1String("%{title}")); // for example
+  m_leUpdate->setPlaceholderText(QLatin1String("%{title}")); // for example
   m_leUpdate->completionObject()->addItem(QLatin1String("%{title}"));
   m_leUpdate->completionObject()->addItem(QLatin1String("%{isbn}"));
   gridLayout->addWidget(m_leUpdate, row, 1);
@@ -454,7 +453,7 @@ ExecExternalFetcher::ConfigWidget::~ConfigWidget() {
 }
 
 void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) {
-  m_pathEdit->setUrl(KUrl(config_.readPathEntry("ExecPath", QString())));
+  m_pathEdit->setUrl(QUrl::fromLocalFile(config_.readPathEntry("ExecPath", QString())));
   QList<int> argKeys = config_.readEntry("ArgumentKeys", QList<int>());
   QStringList argValues = config_.readEntry("Arguments", QStringList());
   if(argKeys.count() != argValues.count()) {
@@ -471,7 +470,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
     }
     FetchKey key = static_cast<FetchKey>(*it);
     QCheckBox* cb = m_cbDict[key];
-    KLineEdit* le = m_leDict[key];
+    QLineEdit* le = m_leDict[key];
     if(cb && le) {
       if(args.contains(key)) {
         cb->setChecked(true);
@@ -506,7 +505,7 @@ void ExecExternalFetcher::ConfigWidget::readConfig(const KConfigGroup& config_) 
 }
 
 void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  KUrl u = m_pathEdit->url();
+  QUrl u = m_pathEdit->url();
   if(!u.isEmpty()) {
     config_.writePathEntry("ExecPath", u.path());
   }
@@ -550,4 +549,3 @@ QString ExecExternalFetcher::ConfigWidget::preferredName() const {
   return m_name.isEmpty() ? ExecExternalFetcher::defaultName() : m_name;
 }
 
-#include "execexternalfetcher.moc"

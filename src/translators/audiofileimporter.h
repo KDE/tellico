@@ -48,7 +48,7 @@ Q_OBJECT
 public:
   /**
    */
-  AudioFileImporter(const KUrl& url);
+  AudioFileImporter(const QUrl& url);
 
   /**
    */

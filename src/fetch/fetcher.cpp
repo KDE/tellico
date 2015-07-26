@@ -28,12 +28,12 @@
 #include "../entry.h"
 #include "../tellico_debug.h"
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>
-#include <kmimetype.h>
+#include <KIO/Global>
 
+#include <QUrl>
 #include <QDBusInterface>
 #include <QDBusReply>
 #include <QUuid>
@@ -119,7 +119,7 @@ void Fetcher::saveConfig() {
   if(m_configGroup.isEmpty()) {
     return;
   }
-  KConfigGroup config(KGlobal::config(), m_configGroup);
+  KConfigGroup config(KSharedConfig::openConfig(), m_configGroup);
   config.writeEntry("Uuid", m_uuid);
   saveConfigHook(config);
 }
@@ -156,10 +156,10 @@ void Fetcher::infoList(const QString& message_, const QStringList& list_) const 
 }
 
 QString Fetcher::favIcon(const char* url_) {
-  return favIcon(KUrl(url_));
+  return favIcon(QUrl(QString::fromLatin1(url_)));
 }
 
-QString Fetcher::favIcon(const KUrl& url_) {
+QString Fetcher::favIcon(const QUrl& url_) {
   QDBusInterface kded(QLatin1String("org.kde.kded"),
                       QLatin1String("/modules/favicons"),
                       QLatin1String("org.kde.FavIcon"));
@@ -172,7 +172,6 @@ QString Fetcher::favIcon(const KUrl& url_) {
   }
   // go ahead and try to download it for later
   kded.call(QLatin1String("downloadHostIcon"), url_.url());
-  return KMimeType::iconNameForUrl(url_);
+  return KIO::iconNameForUrl(url_);
 }
 
-#include "fetcher.moc"

@@ -25,14 +25,14 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "openlibraryfetchertest.h"
-#include "openlibraryfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/openlibraryfetcher.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-QTEST_KDEMAIN( OpenLibraryFetcherTest, GUI )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( OpenLibraryFetcherTest )
 
 OpenLibraryFetcherTest::OpenLibraryFetcherTest() : AbstractFetcherTest() {
 }

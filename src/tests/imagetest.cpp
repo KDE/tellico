@@ -25,20 +25,20 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "imagetest.h"
-#include "imagetest.moc"
-#include "qtest_kde.h"
 
 #include "../images/imagefactory.h"
 
-QTEST_KDEMAIN_CORE( ImageTest )
+#include <QTest>
+
+QTEST_GUILESS_MAIN( ImageTest )
 
 void ImageTest::initTestCase() {
   Tellico::ImageFactory::init();
 }
 
 void ImageTest::testLinkOnly() {
-  KUrl u(QString::fromLatin1(KDESRCDIR) + "../../icons/hi128-app-tellico.png");
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/hi128-app-tellico.png"));
   // addImage(url, quiet, referer, link)
-  QString id = Tellico::ImageFactory::addImage(u, false, KUrl(), true);
+  QString id = Tellico::ImageFactory::addImage(u, false, QUrl(), true);
   QCOMPARE(id, u.url());
 }

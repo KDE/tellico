@@ -40,7 +40,7 @@
 #include "field.h"
 #include "fieldformat.h"
 #include "gui/combobox.h"
-#include "gui/cursorsaver.h"
+#include "utils/cursorsaver.h"
 #include "utils/stringset.h"
 #include "images/image.h"
 #include "tellico_debug.h"
@@ -49,21 +49,18 @@
 #include "barcode/barcode.h"
 #endif
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <klineedit.h>
 #include <kpushbutton.h>
 #include <kstatusbar.h>
 #include <khtmlview.h>
 #include <kprogressdialog.h>
-#include <kconfig.h>
+#include <KSharedConfig>
 #include <kfiledialog.h>
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
 #include <kmessagebox.h>
-#include <kapplication.h>
-#include <KHBox>
-#include <KVBox>
-#include <KCodecs>
+#include <KGlobalSettings>
 
 #include <QGroupBox>
 #include <QSplitter>
@@ -71,10 +68,12 @@
 #include <QCheckBox>
 #include <QImage>
 #include <QLabel>
+#include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QProgressBar>
 #include <QTreeWidget>
 #include <QHeaderView>
+#include <QApplication>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -139,13 +138,17 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QBoxLayout* queryLayout = new QVBoxLayout(queryBox);
   topLayout->addWidget(queryBox);
 
-  KHBox* box1 = new KHBox(queryBox);
-  box1->setSpacing(spacingHint());
+  QWidget* box1 = new QWidget(queryBox);
+  QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
+  box1HBoxLayout->setMargin(0);
+  box1HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box1);
 
   QLabel* label = new QLabel(i18nc("Start the search", "S&earch:"), box1);
+  box1HBoxLayout->addWidget(label);
 
   m_valueLineEdit = new KLineEdit(box1);
+  box1HBoxLayout->addWidget(m_valueLineEdit);
   label->setBuddy(m_valueLineEdit);
   m_valueLineEdit->setWhatsThis(i18n("Enter a search value. An ISBN search must include the full ISBN."));
   m_keyCombo = new GUI::ComboBox(box1);
@@ -157,8 +160,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_keyCombo->setWhatsThis(i18n("Choose the type of search"));
 
   m_searchButton = new KPushButton(box1);
+  box1HBoxLayout->addWidget(m_searchButton);
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("dialog-cancel"))));
+                                      QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
   m_searchButton->setWhatsThis(i18n("Click to start or stop the search"));
 
@@ -168,30 +172,36 @@ FetchDialog::FetchDialog(QWidget* parent_)
   int maxWidth = m_searchButton->sizeHint().width();
   int maxHeight = m_searchButton->sizeHint().height();
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                      KIcon(QLatin1String("edit-find"))));
+                                      QIcon::fromTheme(QLatin1String("edit-find"))));
   maxWidth = qMax(maxWidth, m_searchButton->sizeHint().width());
   maxHeight = qMax(maxHeight, m_searchButton->sizeHint().height());
   m_searchButton->setMinimumWidth(maxWidth);
   m_searchButton->setMinimumHeight(maxHeight);
 
-  KHBox* box2 = new KHBox(queryBox);
-  box2->setSpacing(spacingHint());
+  QWidget* box2 = new QWidget(queryBox);
+  QHBoxLayout* box2HBoxLayout = new QHBoxLayout(box2);
+  box2HBoxLayout->setMargin(0);
+  box2HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box2);
 
   m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN/UPC search"), box2);
+  box2HBoxLayout->addWidget(m_multipleISBN);
   m_multipleISBN->setWhatsThis(i18n("Check this box to search for multiple ISBN or UPC values."));
   connect(m_multipleISBN, SIGNAL(toggled(bool)), SLOT(slotMultipleISBN(bool)));
 
-  m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), KIcon(QLatin1String("format-justify-fill"))), box2);
+  m_editISBN = new KPushButton(KGuiItem(i18n("Edit ISBN/UPC values..."), QIcon::fromTheme(QLatin1String("format-justify-fill"))), box2);
+  box2HBoxLayout->addWidget(m_editISBN);
   m_editISBN->setEnabled(false);
   m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN or UPC values."));
   connect(m_editISBN, SIGNAL(clicked()), SLOT(slotEditMultipleISBN()));
 
   // add for spacing
-  box2->setStretchFactor(new QWidget(box2), 10);
+  box2HBoxLayout->setStretchFactor(new QWidget(box2), 10);
 
   label = new QLabel(i18n("Search s&ource:"), box2);
+  box2HBoxLayout->addWidget(label);
   m_sourceCombo = new KComboBox(box2);
+  box2HBoxLayout->addWidget(m_sourceCombo);
   label->setBuddy(m_sourceCombo);
   Fetch::FetcherVec sources = Fetch::Manager::self()->fetchers(m_collType);
   foreach(Fetch::Fetcher::Ptr fetcher, sources) {
@@ -238,30 +248,38 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
                                          "current collection by selecting it in the list above"));
 
-  KHBox* box3 = new KHBox(mainWidget);
+  QWidget* box3 = new QWidget(mainWidget);
+  QHBoxLayout* box3HBoxLayout = new QHBoxLayout(box3);
+  box3HBoxLayout->setMargin(0);
   topLayout->addWidget(box3);
-  box3->setSpacing(KDialog::spacingHint());
+  box3HBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_addButton = new KPushButton(i18n("&Add Entry"), box3);
+  box3HBoxLayout->addWidget(m_addButton);
   m_addButton->setEnabled(false);
-  m_addButton->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
-  m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), KIcon(QLatin1String("edit-find"))), box3);
+  m_moreButton = new KPushButton(KGuiItem(i18n("Get More Results"), QIcon::fromTheme(QLatin1String("edit-find"))), box3);
+  box3HBoxLayout->addWidget(m_moreButton);
   m_moreButton->setEnabled(false);
   connect(m_moreButton, SIGNAL(clicked()), SLOT(slotMoreClicked()));
   m_moreButton->setWhatsThis(i18n("Fetch more results from the current data source"));
 
   KPushButton* clearButton = new KPushButton(KStandardGuiItem::clear(), box3);
+  box3HBoxLayout->addWidget(clearButton);
   connect(clearButton, SIGNAL(clicked()), SLOT(slotClearClicked()));
   clearButton->setWhatsThis(i18n("Clear all search fields and results"));
 
-  KHBox* bottombox = new KHBox(mainWidget);
+  QWidget* bottombox = new QWidget(mainWidget);
+  QHBoxLayout* bottomboxHBoxLayout = new QHBoxLayout(bottombox);
+  bottomboxHBoxLayout->setMargin(0);
   topLayout->addWidget(bottombox);
-  bottombox->setSpacing(KDialog::spacingHint());
+  bottomboxHBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_statusBar = new KStatusBar(bottombox);
+  bottomboxHBoxLayout->addWidget(m_statusBar);
   m_statusLabel = new QLabel(m_statusBar);
   m_statusBar->addPermanentWidget(m_statusLabel, 1);
   m_progress = new QProgressBar(m_statusBar);
@@ -271,6 +289,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_statusBar->addPermanentWidget(m_progress);
 
   KPushButton* closeButton = new KPushButton(KStandardGuiItem::close(), bottombox);
+  bottomboxHBoxLayout->addWidget(closeButton);
   connect(closeButton, SIGNAL(clicked()), SLOT(accept()));
 
   connect(m_timer, SIGNAL(timeout()), SLOT(slotMoveProgress()));
@@ -278,10 +297,10 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
-  KConfigGroup sizeGroup(KGlobal::config(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup sizeGroup(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   restoreDialogSize(sizeGroup);
 
-  KConfigGroup config(KGlobal::config(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(!splitList.empty()) {
     split->setSizes(splitList);
@@ -326,7 +345,7 @@ FetchDialog::~FetchDialog() {
   // no additional entries to check images to keep though
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
-  KConfigGroup config(KGlobal::config(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
   saveDialogSize(config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
@@ -346,10 +365,10 @@ void FetchDialog::slotSearchClicked() {
     m_oldSearch = value;
     m_started = true;
     m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                        KIcon(QLatin1String("dialog-cancel"))));
+                                        QIcon::fromTheme(QLatin1String("dialog-cancel"))));
     startProgress();
     setStatus(i18n("Searching..."));
-    kapp->processEvents();
+    qApp->processEvents();
     Fetch::Manager::self()->startSearch(m_sourceCombo->currentText(),
                                         static_cast<Fetch::FetchKey>(m_keyCombo->currentData().toInt()),
                                         value);
@@ -400,7 +419,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
 //  myDebug();
   m_started = false;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                      KIcon(QLatin1String("edit-find"))));
+                                      QIcon::fromTheme(QLatin1String("edit-find"))));
   stopProgress();
   if(m_resultCount == 0) {
     slotStatus(i18n("The search returned no items."));
@@ -497,7 +516,7 @@ void FetchDialog::slotAddEntry() {
     }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(Data::EntryPtr(new Data::Entry(*entry)));
-    item->setData(0, Qt::DecorationRole, KIcon(QLatin1String("checkmark")));
+    item->setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("checkmark")));
   }
   if(!vec.isEmpty()) {
     Kernel::self()->addEntries(vec, true);
@@ -512,10 +531,10 @@ void FetchDialog::slotMoreClicked() {
 
   m_started = true;
   m_searchButton->setGuiItem(KGuiItem(i18n(FETCH_STRING_STOP),
-                                      KIcon(QLatin1String("dialog-cancel"))));
+                                      QIcon::fromTheme(QLatin1String("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));
-  kapp->processEvents();
+  qApp->processEvents();
   Fetch::Manager::self()->continueSearch();
 }
 
@@ -561,7 +580,7 @@ void FetchDialog::slotShowEntry() {
   const QPixmap sourceIcon = Fetch::Manager::self()->fetcherIcon(r->fetcher);
   const QByteArray ba = Data::Image::byteArray(sourceIcon.toImage(), "PNG");
   QString text = QString::fromLatin1("<qt><img src='data:image/png;base64,%1'/> %2<br/>%3</qt>")
-                 .arg(QLatin1String(KCodecs::base64Encode(ba)), r->fetcher->source(), r->fetcher->attribution());
+                 .arg(QLatin1String(ba.toBase64()), r->fetcher->source(), r->fetcher->attribution());
   entry->setField(QLatin1String("fetchdialog_source"), text);
 
   setStatus(i18n("Ready."));
@@ -589,7 +608,7 @@ void FetchDialog::slotInit() {
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
 
-  KConfigGroup config(KGlobal::config(), "Fetch Dialog Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   int key = config.readEntry("Search Key", int(Fetch::FetchFirst));
   // only change key if valid
   if(key > Fetch::FetchFirst) {
@@ -671,11 +690,14 @@ void FetchDialog::slotEditMultipleISBN() {
   dlg.setCaption(i18n("Edit ISBN/UPC Values"));
   dlg.setButtons(KDialog::Ok|KDialog::Cancel);
 
-  KVBox* box = new KVBox(&dlg);
-  box->setSpacing(10);
+  QWidget* box = new QWidget(&dlg);
+  QVBoxLayout* boxVBoxLayout = new QVBoxLayout(box);
+  boxVBoxLayout->setMargin(0);
+  boxVBoxLayout->setSpacing(10);
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
   (void) new QLabel(s, box);
   m_isbnTextEdit = new KTextEdit(box);
+  boxVBoxLayout->addWidget(m_isbnTextEdit);
   if(m_isbnList.isEmpty()) {
     m_isbnTextEdit->setText(m_valueLineEdit->text());
   } else {
@@ -684,7 +706,7 @@ void FetchDialog::slotEditMultipleISBN() {
   m_isbnTextEdit->setWhatsThis(s);
   connect(m_isbnTextEdit, SIGNAL(textChanged()), this, SLOT(slotISBNTextChanged()));
 
-  KPushButton* fromFileBtn = new KPushButton(KIcon(QLatin1String("document-open")),
+  KPushButton* fromFileBtn = new KPushButton(QIcon::fromTheme(QLatin1String("document-open")),
                                              i18n("&Load From File..."), box);
   fromFileBtn->setWhatsThis(i18n("<qt>Load the list from a text file.</qt>"));
   connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
@@ -718,7 +740,7 @@ void FetchDialog::slotLoadISBNList() {
   if(!m_isbnTextEdit) {
     return;
   }
-  KUrl u = KFileDialog::getOpenUrl(KUrl(), QString(), this);
+  QUrl u = KFileDialog::getOpenUrl(QUrl(), QString(), this);
   if(u.isValid()) {
     m_isbnTextEdit->setText(m_isbnTextEdit->toPlainText() + FileHandler::readTextFile(u));
     m_isbnTextEdit->moveCursor(QTextCursor::End);
@@ -791,7 +813,7 @@ void FetchDialog::slotResetCollection() {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher), fetcher->source());
   }
 
-  m_addButton->setIcon(KIcon(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
   if(Fetch::Manager::self()->canFetch()) {
     m_searchButton->setEnabled(true);
@@ -804,13 +826,13 @@ void FetchDialog::slotResetCollection() {
 void FetchDialog::slotBarcodeRecognized(const QString& string_) {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
   StringDataEvent* e = new StringDataEvent(string_);
-  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  qApp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
 void FetchDialog::slotBarcodeGotImage(const QImage& img_)  {
   // attention: this slot is called in the context of another thread => do not use GUI-functions!
   ImageDataEvent* e = new ImageDataEvent(img_);
-  kapp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
+  qApp->postEvent(this, e); // the event loop will call FetchDialog::customEvent() in the context of the GUI thread
 }
 
 void FetchDialog::openBarcodePreview() {
@@ -857,7 +879,7 @@ void FetchDialog::customEvent(QEvent* e) {
   }
   if(e->type() == StringDataType) {
     // slotBarcodeRecognized() queued call
-    kapp->beep();
+    qApp->beep();
     m_valueLineEdit->setText(static_cast<StringDataEvent*>(e)->string());
     m_searchButton->animateClick();
   } else if(e->type() == ImageDataType) {
@@ -866,4 +888,3 @@ void FetchDialog::customEvent(QEvent* e) {
   }
 }
 
-#include "fetchdialog.moc"

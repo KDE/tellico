@@ -25,14 +25,14 @@
 #include <config.h>
 
 #include "bibtexexporter.h"
-#include "bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../core/filehandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../utils/stringset.h"
 #include "../fieldformat.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 #include <kcombobox.h>
 
@@ -353,4 +353,3 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   text_ += QLatin1String("\n}\n\n");
 }
 
-#include "bibtexexporter.moc"

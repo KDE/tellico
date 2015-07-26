@@ -5,14 +5,15 @@ SET(images_STAT_SRCS
    imageinfo.cpp
    )
 
-KDE4_ADD_LIBRARY(images STATIC ${images_STAT_SRCS})
+add_library(images STATIC ${images_STAT_SRCS})
+
 TARGET_LINK_LIBRARIES(images
     core
-    gui
-)
-# the following linking seems to be necessary for the KDE build dashboard to succeed
-TARGET_LINK_LIBRARIES(images
-    ${KDE4_KIO_LIBS}
+    utils
+    KF5::KIOCore
+    KF5::Archive
+    KF5::GuiAddons
+    Qt5::Gui
 )
 
 IF( QIMAGEBLITZ_FOUND )

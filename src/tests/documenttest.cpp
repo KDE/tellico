@@ -25,21 +25,18 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "documenttest.h"
-#include "documenttest.moc"
-#include "qtest_kde.h"
-
+#include "../document.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../core/tellico_config.h"
-#include "../document.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 
-#include <KTempDir>
-
+#include <QTest>
+#include <QTemporaryDir>
 #include <QFile>
 
-QTEST_KDEMAIN_CORE( DocumentTest )
+QTEST_GUILESS_MAIN( DocumentTest )
 
 void DocumentTest::initTestCase() {
   Tellico::ImageFactory::init();
@@ -54,18 +51,19 @@ void DocumentTest::testImageLocalDirectory() {
 
   QString tempDirName;
 
-  KTempDir tempDir;
+
+  QTemporaryDir tempDir;
+  QVERIFY(tempDir.isValid());
   tempDir.setAutoRemove(true);
-  tempDirName = tempDir.name();
-  QString fileName = tempDirName + "with-image.tc";
-  QString imageDirName = tempDirName + "with-image_files/";
+  tempDirName = tempDir.path();
+  QString fileName = tempDirName + "/with-image.tc";
+  QString imageDirName = tempDirName + "/with-image_files/";
 
   // copy a collection file that includes an image into the temporary directory
-  QVERIFY(QFile::copy(QString::fromLatin1(KDESRCDIR "/data/with-image.tc"),
-                      fileName));
+  QVERIFY(QFile::copy(QFINDTESTDATA("data/with-image.tc"), fileName));
 
   Tellico::Data::Document* doc = Tellico::Data::Document::self();
-  QVERIFY(doc->openDocument(fileName));
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName)));
   QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName);
 
   Tellico::Data::CollPtr coll = doc->collection();
@@ -79,7 +77,7 @@ void DocumentTest::testImageLocalDirectory() {
   QCOMPARE(e->field(QLatin1String("cover")), QLatin1String("17b54b2a742c6d342a75f122d615a793.jpeg"));
 
   // save the document, so the images get copied out of the .tc file into the local image directory
-  QVERIFY(doc->saveDocument(fileName));
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName)));
   // verify that backup file gets created
   QVERIFY(QFile::exists(fileName + '~'));
 
@@ -97,12 +95,12 @@ void DocumentTest::testImageLocalDirectory() {
   /* also have to check backwards compatability with prior behavior */
   /*************************************************************************/
 
-  QString fileName2 = tempDirName + "with-image.1.tc";
-  QString imageDirName2 = tempDirName + "with-image.1_files/";
+  QString fileName2 = tempDirName + "/with-image.1.tc";
+  QString imageDirName2 = tempDirName + "/with-image.1_files/";
 
   // copy the collection file, which no longer contains the images inside
   QVERIFY(QFile::copy(fileName, fileName2));
-  QVERIFY(doc->openDocument(fileName2));
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName2)));
   QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName2);
   QDir imageDir2(imageDirName2);
 
@@ -118,7 +116,7 @@ void DocumentTest::testImageLocalDirectory() {
   // the proper image exists and is written
   QVERIFY(imageDir.remove(e->field("cover")));
   QVERIFY(!imageDir.exists(e->field(QLatin1String("cover"))));
-  QVERIFY(doc->saveDocument(fileName2));
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
   // now the file should exist in the proper location
   QVERIFY(imageDir2.exists(e->field(QLatin1String("cover"))));
   // clear the cache
@@ -126,6 +124,6 @@ void DocumentTest::testImageLocalDirectory() {
   QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
 
   // sanity check, the directory should not exists after KTempDir destruction
-  tempDir.unlink();
+  tempDir.remove();
   QVERIFY(!QDir(tempDirName).exists());
 }

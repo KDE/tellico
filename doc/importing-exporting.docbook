@@ -321,23 +321,6 @@ Comma-separated values (CSV) are a common way of importing and exporting tabular
 </screenshot>
 </sect2>
 
-<sect2 id="exporting-pilotdb">
-<title>Exporting Pilot-DB</title>
-
-<para>
-<ulink url="http://pilot-db.sourceforge.net">Pilot-DB</ulink> is a database format for &PalmOS;. Various desktop applications can read and write Pilot-DB files. Exported <literal role="extension">.pdb</literal> files can be transferred to a PDA, and used directly. At the moment, &appname; is not able to import Pilot-DB files.
-</para>
-
-<screenshot>
-<screeninfo>Pilot-DB Export Options</screeninfo>
-<mediaobject>
-<imageobject><imagedata format="PNG" fileref="export-pdb.png"/></imageobject>
-<textobject><phrase>Pilot-DB Export Options</phrase></textobject>
-</mediaobject>
-</screenshot>
-
-</sect2>
-
 <sect2 id="exporting-alexandria">
 <title>Exporting Alexandria</title>
 

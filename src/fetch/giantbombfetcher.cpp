@@ -25,11 +25,11 @@
 #include "giantbombfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -77,8 +77,8 @@ void GiantBombFetcher::resetSearch() {
   m_total = -1;
 }
 
-KUrl GiantBombFetcher::searchUrl() {
-  KUrl u(GIANTBOMB_API_URL);
+QUrl GiantBombFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
@@ -91,7 +91,7 @@ KUrl GiantBombFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url: " << u.url();
@@ -131,7 +131,7 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
     return entry_;
   }
 
-  KUrl u(GIANTBOMB_API_URL);
+  QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.setPath(QString::fromLatin1("/game/%1/").arg(id));
   u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("api_key"), m_apiKey);
@@ -219,7 +219,7 @@ GiantBombFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GiantBombFe
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
-  m_apiKeyEdit = new KLineEdit(optionsWidget());
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
@@ -252,4 +252,3 @@ QString GiantBombFetcher::ConfigWidget::preferredName() const {
   return GiantBombFetcher::defaultName();
 }
 
-#include "giantbombfetcher.moc"

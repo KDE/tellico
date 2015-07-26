@@ -33,13 +33,12 @@
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
 
-#include <klocale.h>
-#include <kconfig.h>
-#include <kzip.h>
-#include <kapplication.h>
+#include <KLocalizedString>
+#include <KZip>
 
-#include <qdom.h>
+#include <QDomDocument>
 #include <QBuffer>
+#include <QApplication>
 
 using namespace Tellico;
 using Tellico::Export::TellicoZipExporter;
@@ -132,7 +131,7 @@ bool TellicoZipExporter::exec() {
         imageSet.add(id);
         if(j%stepSize == 0) {
           ProgressManager::self()->setProgress(this, qMin(10+j/stepSize, 99));
-          kapp->processEvents();
+          qApp->processEvents();
         }
         ++j;
       }
@@ -154,4 +153,3 @@ void TellicoZipExporter::slotCancel() {
   m_cancelled = true;
 }
 
-#include "tellicozipexporter.moc"

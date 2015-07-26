@@ -25,29 +25,25 @@
 #include "manager.h"
 #include "newstuffadaptor.h"
 #include "../core/filehandler.h"
-#include "../gui/cursorsaver.h"
-#include "../tellico_utils.h"
+#include "../utils/cursorsaver.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
-#include <kurl.h>
 #include <ktar.h>
-#include <kglobal.h>
 #include <kconfig.h>
-#include <ktemporaryfile.h>
 #include <kfileitem.h>
-#include <kdeversion.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KDesktopFile>
 #include <KIO/Job>
 #include <KIO/DeleteJob>
-#include <KIO/NetAccess>
 
 #include <QFileInfo>
 #include <QDir>
-#include <QWidget>
+#include <QStandardPaths>
+#include <QTemporaryFile>
+#include <QGlobalStatic>
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -63,7 +59,7 @@ public:
   }
 }
 
-K_GLOBAL_STATIC(Tellico::NewStuff::ManagerSingleton, s_instance)
+Q_GLOBAL_STATIC(Tellico::NewStuff::ManagerSingleton, s_instance)
 
 using Tellico::NewStuff::Manager;
 
@@ -113,7 +109,8 @@ bool Manager::installTemplate(const QString& file_) {
     if(QFile::exists(name)) {
       QFile::remove(name);
     }
-    if(KIO::NetAccess::file_copy(KUrl(file_), KUrl(name))) {
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(name));
+    if(job->exec()) {
       xslFile = QFileInfo(name).fileName();
       allFiles << xslFile;
     }
@@ -122,11 +119,11 @@ bool Manager::installTemplate(const QString& file_) {
   if(xslFile.isEmpty()) {
     success = false;
   } else {
-    KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+    KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
     config.writeEntry(file_, allFiles);
     config.writeEntry(xslFile, file_);
   }
-  checkCommonFile();
+  Tellico::checkCommonXSLFile();
   return success;
 }
 
@@ -152,7 +149,7 @@ bool Manager::removeTemplateByName(const QString& name_) {
 
   QString xslFile = userTemplates().value(name_);
   if(!xslFile.isEmpty()) {
-    KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+    KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
     QString file = config.readEntry(xslFile, QString());
     if(!file.isEmpty()) {
       return removeTemplate(file, true);
@@ -170,7 +167,7 @@ bool Manager::removeTemplate(const QString& file_, bool manual_) {
   }
   GUI::CursorSaver cs;
 
-  KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
+  KConfigGroup fileGroup(KSharedConfig::openConfig(), "KNewStuffFiles");
   QStringList files = fileGroup.readEntry(file_, QStringList());
 
   if(files.isEmpty()) {
@@ -204,13 +201,15 @@ bool Manager::removeTemplate(const QString& file_, bool manual_) {
 }
 
 void Manager::removeNewStuffFile(const QString& file_) {
+//TODO KF5
+  Q_UNUSED(file_);
+#if 0
   DEBUG_BLOCK;
   if(file_.isEmpty()) {
     return;
   }
   // remove newstuff meta file if that exists
-  KStandardDirs dirs;
-  QString newStuffDir = dirs.saveLocation("data", QLatin1String("knewstuff2-entries.registry/"));
+  QString newStuffDir = dirs.writableLocation("data", QLatin1String("knewstuff2-entries.registry/"));
   QStringList metaFiles = QDir(newStuffDir).entryList(QStringList() << QLatin1String("*.meta"), QDir::Files);
   QByteArray start = QString::fromLatin1(" <ghnsinstall payloadfile=\"%1\"").arg(file_).toUtf8();
   foreach(const QString& meta, metaFiles) {
@@ -226,6 +225,7 @@ void Manager::removeNewStuffFile(const QString& file_) {
       f.close();
     }
   }
+#endif
 }
 
 bool Manager::installScript(const QString& file_) {
@@ -282,7 +282,8 @@ bool Manager::installScript(const QString& file_) {
     copyTarget += sourceName;
     scriptFolder = copyTarget + QDir::separator();
     QDir().mkpath(scriptFolder);
-    if(KIO::NetAccess::file_copy(KUrl(file_), KUrl(scriptFolder + exeFile)) == false) {
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(file_), QUrl::fromLocalFile(scriptFolder + exeFile));
+    if(!job->exec()) {
       myDebug() << "Copy failed";
       return false;
     }
@@ -291,7 +292,7 @@ bool Manager::installScript(const QString& file_) {
 
   QString specFile = scriptFolder + QFileInfo(exeFile).completeBaseName() + QLatin1String(".spec");
   QString sourceExec = scriptFolder + exeFile;
-  KUrl dest(sourceExec);
+  QUrl dest = QUrl::fromLocalFile(sourceExec);
   KFileItem item(KFileItem::Unknown, KFileItem::Unknown, dest, true);
   ::chmod(QFile::encodeName(dest.path()), item.permissions() | S_IXUSR);
 
@@ -303,23 +304,23 @@ bool Manager::installScript(const QString& file_) {
   cg.writeEntry("NewStuffName", sourceName);
   cg.writeEntry("DeleteOnRemove", true);
 
-  KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+  KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
   config.writeEntry(sourceName, realFile);
   config.writeEntry(realFile, scriptFolder);
   //  myDebug() << "exeFile = " << exeFile;
   //  myDebug() << "sourceExec = " << info->sourceExec;
   //  myDebug() << "sourceName = " << info->sourceName;
   //  myDebug() << "specFile = " << info->specFile;
-  KConfigGroup configGroup(KGlobal::config(), QLatin1String("Data Sources"));
+  KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
   int nSources = configGroup.readEntry("Sources Count", 0);
   config.writeEntry(file_ + QLatin1String("_nbr"), nSources);
   configGroup.writeEntry("Sources Count", nSources + 1);
-  KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(nSources));
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(nSources));
   sourceGroup.writeEntry("Name", sourceName);
   sourceGroup.writeEntry("ExecPath", sourceExec);
   sourceGroup.writeEntry("DeleteOnRemove", true);
   sourceGroup.writeEntry("Type", 5);
-  KGlobal::config()->sync();
+  KSharedConfig::openConfig()->sync();
   return true;
 }
 
@@ -329,7 +330,7 @@ bool Manager::removeScriptByName(const QString& name_) {
     return false;
   }
 
-  KConfigGroup config(KGlobal::config(), "KNewStuffFiles");
+  KConfigGroup config(KSharedConfig::openConfig(), "KNewStuffFiles");
   QString file = config.readEntry(name_, QString());
   if(!file.isEmpty()) {
     return removeScript(file, true);
@@ -345,18 +346,18 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
   GUI::CursorSaver cs;
 
   bool success = true;
-  KConfigGroup fileGroup(KGlobal::config(), "KNewStuffFiles");
+  KConfigGroup fileGroup(KSharedConfig::openConfig(), "KNewStuffFiles");
   QString scriptFolder = fileGroup.readEntry(file_, QString());
   int source = fileGroup.readEntry(file_ + QLatin1String("_nbr"), -1);
 
   if(!scriptFolder.isEmpty()) {
-    KIO::del(KUrl(scriptFolder));
+    KIO::del(QUrl::fromLocalFile(scriptFolder));
   }
   if(source != -1) {
-    KConfigGroup configGroup(KGlobal::config(), QLatin1String("Data Sources"));
+    KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     configGroup.writeEntry("Sources Count", nSources - 1);
-    KConfigGroup sourceGroup(KGlobal::config(), QString::fromLatin1("Data Source %1").arg(source));
+    KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(source));
     sourceGroup.deleteGroup();
   }
   // remove config entries even if unsuccessful
@@ -420,38 +421,3 @@ QString Manager::findEXE(const KArchiveDirectory* dir_) {
 
   return QString();
 }
-
-bool Manager::checkCommonFile() {
-  // look for a file that gets installed to know the installation directory
-  // need to check timestamps
-  QString userDataDir = Tellico::saveLocation(QString());
-  QString userCommonFile = userDataDir + QDir::separator() + QLatin1String("tellico-common.xsl");
-  if(QFile::exists(userCommonFile)) {
-    // check timestamps
-    // pics/tellico.png is not likely to be in a user directory
-    QString installDir = KGlobal::dirs()->findResourceDir("appdata", QLatin1String("pics/tellico.png"));
-    QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
-#ifndef NDEBUG
-    if(userCommonFile == installCommonFile) {
-      myWarning() << "install location is same as user location";
-    }
-#endif
-    QFileInfo installInfo(installCommonFile);
-    QFileInfo userInfo(userCommonFile);
-    if(installInfo.lastModified() > userInfo.lastModified()) {
-      // the installed file has been modified more recently than the user's
-      // remove user's tellico-common.xsl file so it gets copied again
-      myLog() << "removing" << userCommonFile;
-      myLog() << "copying" << installCommonFile;
-      QFile::remove(userCommonFile);
-    } else {
-      return true;
-    }
-  }
-  KUrl src, dest;
-  src.setPath(KGlobal::dirs()->findResource("appdata", QLatin1String("tellico-common.xsl")));
-  dest.setPath(userCommonFile);
-  return KIO::NetAccess::file_copy(src, dest);
-}
-
-#include "manager.moc"

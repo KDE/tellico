@@ -25,39 +25,38 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "referencertest.h"
-#include "referencertest.moc"
-#include "qtest_kde.h"
 
 #include "../translators/referencerimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../fieldformat.h"
+#include "../utils/datafileregistry.h"
 
-#include <kstandarddirs.h>
+#include <QTest>
 
 #define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
 
-QTEST_KDEMAIN_CORE( ReferencerTest )
+QTEST_GUILESS_MAIN( ReferencerTest )
 
 void ReferencerTest::initTestCase() {
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/referencer2tellico.xsl"));
   // need to register the collection type
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 }
 
 void ReferencerTest::testImport() {
-  KUrl url(QString::fromLatin1(KDESRCDIR) + "/data/test.reflib");
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.reflib"));
   Tellico::Import::ReferencerImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
 
-  QVERIFY(!coll.isNull());
+  QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
   QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QVERIFY(!entry.isNull());
+  QVERIFY(entry);
   QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
   QCOMPARE(entry->field("year"), QLatin1String("2002"));
   QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));

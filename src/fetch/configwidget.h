@@ -49,6 +49,7 @@ public:
 
   void setAccepted(bool accepted_) { m_accepted = accepted_; }
   bool shouldSave() const { return m_modified && m_accepted; }
+  virtual void readConfig(const KConfigGroup&) {}
   /**
    * Saves any configuration options. The config group must be
    * set before calling this function.

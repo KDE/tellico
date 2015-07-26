@@ -30,26 +30,24 @@
 #include "../entry.h"
 #include "../collection.h"
 #include "../document.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include "fetcherinitializer.h"
 #ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
-#include "srufetcher.h"
-#include "execexternalfetcher.h"
+//#include "srufetcher.h"
+//#include "execexternalfetcher.h"
 
-#include <kglobal.h>
-#include <klocale.h>
-#include <kiconloader.h>
-#include <kstandarddirs.h>
-#include <ktemporaryfile.h>
-#include <kio/job.h>
-#include <kio/netaccess.h>
+#include <KLocalizedString>
+#include <KIconLoader>
+#include <KIO/Job>
+#include <KSharedConfig>
 
 #include <QFileInfo>
 #include <QDir>
+#include <QTemporaryFile>
 
 #define LOAD_ICON(name, group, size) \
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
@@ -62,8 +60,7 @@ Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new Manage
   // must create static pointer first
   Q_ASSERT(!s_self);
   s_self = this;
-  FetcherInitializer init;
-  loadFetchers();
+  // no need to load fetchers since the initializer does it for us
 
 //  m_keyMap.insert(FetchFirst, QString());
   m_keyMap.insert(Title,      i18n("Title"));
@@ -91,7 +88,7 @@ void Manager::loadFetchers() {
   m_fetchers.clear();
   m_uuidHash.clear();
 
-  KSharedConfigPtr config = KGlobal::config();
+  KSharedConfigPtr config = KSharedConfig::openConfig();
   if(config->hasGroup(QLatin1String("Data Sources"))) {
     KConfigGroup configGroup(config, QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
@@ -109,6 +106,10 @@ void Manager::loadFetchers() {
     m_fetchers = defaultFetchers();
     m_loadDefaults = true;
   }
+}
+
+const Tellico::Fetch::FetcherVec& Manager::fetchers() const {
+  return m_fetchers;
 }
 
 Tellico::Fetch::FetcherVec Manager::fetchers(int type_) {
@@ -256,7 +257,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   }
 
   // special case: the BoardGameGeek fetcher was originally implemented as a Ruby script
-  // now, it's availavle with an XML API, so prefer the new version
+  // now, it's available with an XML API, so prefer the new version
   // so check for fetcher version and switch to the XML if version is missing or lower
   if(fetchType == Fetch::ExecExternal &&
      config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("boardgamegeek.rb"))) {
@@ -288,7 +289,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 #ifdef ENABLE_IMDB
   FETCHER_ADD(IMDB);
 #endif
-  vec.append(SRUFetcher::libraryOfCongress(this));
+//  vec.append(SRUFetcher::libraryOfCongress(this));
   FETCHER_ADD(ISBNdb);
 //  FETCHER_ADD(Yahoo);
   FETCHER_ADD(AnimeNfo);
@@ -298,23 +299,24 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(BiblioShare);
   FETCHER_ADD(TheGamesDB);
   FETCHER_ADD(BoardGameGeek);
-// only add IBS if user includes italian
-  if(KGlobal::locale()->languageList().contains(QLatin1String("it"))) {
-    FETCHER_ADD(IBS);
-  }
-#ifdef HAVE_QJSON
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(OpenLibrary);
   FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
-#endif
-  const QStringList langs = KGlobal::locale()->languageList();
+  QStringList langs = QLocale().uiLanguages();
+  if(langs.first().contains(QLatin1Char('-'))) {
+    // I'm not sure QT always include two-letter locale codes
+    langs << langs.first().section(QLatin1Char('-'), 0, 0);
+  }
+// only add IBS if user includes italian
+  if(langs.contains(QLatin1String("it"))) {
+    FETCHER_ADD(IBS);
+  }
   if(langs.contains(QLatin1String("fr"))) {
     FETCHER_ADD(DVDFr);
-#ifdef HAVE_QJSON
     FETCHER_ADD(Allocine);
-#endif
   }
+/* these don't work
   if(langs.contains(QLatin1String("de"))) {
     FETCHER_ADD(FilmStarts);
   }
@@ -324,6 +326,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(langs.contains(QLatin1String("tr"))) {
     FETCHER_ADD(Beyazperde);
   }
+*/
   return vec;
 }
 
@@ -335,12 +338,12 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   }
 
   FetcherVec vec;
-  KConfigGroup config(KGlobal::config(), "Data Sources");
+  KConfigGroup config(KSharedConfig::openConfig(), "Data Sources");
   int nSources = config.readEntry("Sources Count", 0);
   for(int i = 0; i < nSources; ++i) {
     QString group = QString::fromLatin1("Data Source %1").arg(i);
     // needs the KConfig*
-    Fetcher::Ptr fetcher = createFetcher(KGlobal::config(), group);
+    Fetcher::Ptr fetcher = createFetcher(KSharedConfig::openConfig(), group);
     if(fetcher && fetcher->canFetch(collType_) && fetcher->canUpdate()) {
       vec.append(fetcher);
     }
@@ -386,8 +389,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   }
 
   // now find all the scripts distributed with tellico
-  QStringList files = KGlobal::dirs()->findAllResources("appdata", QLatin1String("data-sources/*.spec"),
-                                                        KStandardDirs::NoDuplicates);
+  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/data-sources/*.spec"));
   foreach(const QString& file, files) {
     KConfig spec(file, KConfig::SimpleConfig);
     KConfigGroup specConfig(&spec, QString());
@@ -422,22 +424,20 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
       // bundledScriptHasExecPath() actually needs to write the exec path
       // back to the config so the configWidget can read it. But if the spec file
       // is not readable, that doesn't work. So work around it with a copy to a temp file
-      KTemporaryFile tmpFile;
-      tmpFile.setAutoRemove(true);
+      QTemporaryFile tmpFile;
       tmpFile.open();
-      KUrl from, to;
-      from.setPath(m_scriptMap[name_]);
-      to.setPath(tmpFile.fileName());
-      // have to overwrite since KTemporaryFile already created it
+      QUrl from = QUrl::fromLocalFile(m_scriptMap[name_]);
+      QUrl to = QUrl::fromLocalFile(tmpFile.fileName());
+      // have to overwrite since QTemporaryFile already created it
       KIO::Job* job = KIO::file_copy(from, to, -1, KIO::Overwrite);
-      if(!KIO::NetAccess::synchronousRun(job, 0)) {
-        myDebug() << KIO::NetAccess::lastErrorString();
+      if(!job->exec()) {
+        myDebug() << job->errorString();
       }
       KConfig spec(to.path(), KConfig::SimpleConfig);
       KConfigGroup specConfig(&spec, QString());
       // pass actual location of spec file
       if(name_ == specConfig.readEntry("Name") && bundledScriptHasExecPath(m_scriptMap[name_], specConfig)) {
-        static_cast<ExecExternalFetcher::ConfigWidget*>(w)->readConfig(specConfig);
+        w->readConfig(specConfig);
       } else {
         myWarning() << "Can't read config file for " << to.path();
       }
@@ -457,11 +457,13 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
 }
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
+// TODO: uncomment this when the fetcher tests can link to z3950fetcher and execexternalfetcher
+/*
 #ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
-    KUrl u;
-    u.setProtocol(QLatin1String("http"));
+    QUrl u;
+    u.setScheme(QLatin1String("http"));
     u.setHost(f->host());
     QString icon = Fetcher::favIcon(u);
     if(u.isValid() && !icon.isEmpty()) {
@@ -472,7 +474,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
-    KUrl u;
+    QUrl u;
     if(p.contains(QLatin1String("allocine"))) {
       u = QLatin1String("http://www.allocine.fr");
     } else if(p.contains(QLatin1String("ministerio_de_cultura"))) {
@@ -491,6 +493,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
       }
     }
   }
+*/
   return fetcherIcon(fetcher_->type(), group_, size_);
 }
 
@@ -550,4 +553,3 @@ bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& c
   return true;
 }
 
-#include "fetchmanager.moc"

@@ -24,9 +24,8 @@
 
 #include "lineedit.h"
 
-#include <kstandardaction.h>
-#include <kactioncollection.h>
-#include <kaction.h>
+#include <KStandardAction>
+#include <KActionCollection>
 #include <sonnet/dialog.h>
 #include <sonnet/backgroundchecker.h>
 
@@ -84,7 +83,8 @@ void LineEdit::slotSpellCheckDone(const QString& newText) {
   if(newText != text()) {
     setText(newText);
   }
-  m_sonnetDialog->delayedDestruct();
+  m_sonnetDialog->hide();
+  m_sonnetDialog->deleteLater();
   m_sonnetDialog = 0;
 }
 
@@ -99,4 +99,3 @@ void LineEdit::spellCheckerCorrected(const QString& oldWord, int pos, const QStr
   }
 }
 
-#include "lineedit.moc"

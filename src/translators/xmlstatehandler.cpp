@@ -32,11 +32,10 @@
 #include "../images/imageinfo.h"
 #include "../images/imagefactory.h"
 #include "../utils/isbnvalidator.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kcodecs.h>
+#include <KLocalizedString>
 
 namespace {
 
@@ -198,7 +197,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
       // if not, then there was no <image> in the XML
       // so it's a url, but maybe link only
       if(!ImageFactory::hasImageInfo(value)) {
-        KUrl u(value);
+        QUrl u = QUrl::fromUserInput(value);
         // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
           QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
@@ -588,6 +587,9 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     fieldValue += FieldFormat::columnDelimiterString();
     fieldValue += entry->field(QLatin1String("artist"));
   }
+  if(fieldValue.isEmpty()) {
+    return true;
+  }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
     fieldValue = i18n(fieldValue.toUtf8());
@@ -596,9 +598,6 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   if(m_validateISBN) {
     ISBNValidator val(0);
     val.fixup(fieldValue);
-  }
-  if(fieldValue.isEmpty()) {
-    return true;
   }
   // for fields with multiple values, we need to add on the new value
   QString oldValue = entry->field(fieldName);
@@ -694,8 +693,7 @@ bool ImageHandler::start(const QString&, const QString&, const QString&, const Q
 bool ImageHandler::end(const QString&, const QString&, const QString&) {
   bool needToAddInfo = true;
   if(d->loadImages && !d->text.isEmpty()) {
-    QByteArray ba;
-    KCodecs::base64Decode(QByteArray(d->text.toLatin1()), ba);
+    QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
     if(!ba.isEmpty()) {
       QString result = ImageFactory::addImage(ba, m_format, m_imageId);
       if(result.isEmpty()) {

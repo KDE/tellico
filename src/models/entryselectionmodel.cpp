@@ -85,4 +85,3 @@ void EntrySelectionModel::selectedEntriesChanged() {
   m_processing = false;
 }
 
-#include "entryselectionmodel.moc"

@@ -25,10 +25,10 @@
 #include "boardgamegeekfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../tellico_utils.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -65,8 +65,8 @@ bool BoardGameGeekFetcher::canFetch(int type) const {
   return type == Data::Collection::BoardGame;
 }
 
-KUrl BoardGameGeekFetcher::searchUrl() {
-  KUrl u(BGG_SEARCH_URL);
+QUrl BoardGameGeekFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(BGG_SEARCH_URL));
 
   switch(request().key) {
     case Title:
@@ -88,7 +88,7 @@ KUrl BoardGameGeekFetcher::searchUrl() {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url: " << u.url();
@@ -104,7 +104,7 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
     return entry_;
   }
 
-  KUrl u(BGG_THING_URL);
+  QUrl u(QString::fromLatin1(BGG_THING_URL));
   u.addQueryItem(QLatin1String("id"), id);
   u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
 //  myDebug() << "url: " << u;
@@ -195,4 +195,3 @@ QString BoardGameGeekFetcher::ConfigWidget::preferredName() const {
   return BoardGameGeekFetcher::defaultName();
 }
 
-#include "boardgamegeekfetcher.moc"

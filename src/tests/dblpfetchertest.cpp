@@ -25,24 +25,23 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "dblpfetchertest.h"
-#include "dblpfetchertest.moc"
-#include "qtest_kde.h"
 
 #include "../fetch/dblpfetcher.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 
-#include <KStandardDirs>
+#include <QTest>
 
-QTEST_KDEMAIN( DBLPFetcherTest, GUI )
+QTEST_GUILESS_MAIN( DBLPFetcherTest )
 
 DBLPFetcherTest::DBLPFetcherTest() : AbstractFetcherTest() {
 }
 
 void DBLPFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
-  KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/dblp2tellico.xsl"));
 }
 
 void DBLPFetcherTest::testProceedings() {

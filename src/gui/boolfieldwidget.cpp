@@ -60,4 +60,3 @@ QWidget* BoolFieldWidget::widget() {
   return m_checkBox;
 }
 
-#include "boolfieldwidget.moc"

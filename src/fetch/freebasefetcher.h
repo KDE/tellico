@@ -36,7 +36,8 @@ class KJob;
 namespace KIO {
   class StoredTransferJob;
 }
-class KLineEdit;
+
+class QLineEdit;
 
 namespace Tellico {
   namespace Fetch {
@@ -80,7 +81,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:
-    KLineEdit* m_apiKeyEdit;
+    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -94,6 +95,7 @@ private slots:
 private:
   static QString value(const QVariantMap& map, const char* name);
   static QString value(const QVariantMap& map, const char* object, const char* name);
+  static QByteArray serialize(const QVariant& value);
 
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);

@@ -24,18 +24,15 @@
 
 #include "amazonrequest.h"
 #include "hmac_sha2.h"
-#include "../tellico_debug.h"
-
-#include <KCodecs>
 
 #include <QDateTime>
 
 using Tellico::Fetch::AmazonRequest;
 
-AmazonRequest::AmazonRequest(const KUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
+AmazonRequest::AmazonRequest(const QUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
 }
 
-KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
+QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   QMap<QString, QString> allParams = params_;
   allParams.insert(QLatin1String("Timestamp"),
                    QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyy-MM-dd'T'hh:mm:ss'Z'")));
@@ -63,10 +60,10 @@ KUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   hmac_sha256(reinterpret_cast<unsigned char*>(const_cast<char*>(m_key.data())), m_key.length(),
               reinterpret_cast<unsigned char*>(const_cast<char*>(toSign.data())), toSign.length(),
               reinterpret_cast<unsigned char*>(hmac_buffer.data()), hmac_buffer.length());
-  const QByteArray sig = KCodecs::base64Encode(hmac_buffer).toPercentEncoding();
+  const QByteArray sig = hmac_buffer.toBase64().toPercentEncoding();
 //  myDebug() << sig;
 
-  KUrl url = m_siteUrl;
+  QUrl url = m_siteUrl;
   url.setEncodedQuery(query + "&Signature=" + sig);
   return url;
 }

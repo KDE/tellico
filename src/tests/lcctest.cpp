@@ -25,12 +25,12 @@
 #undef QT_NO_CAST_FROM_ASCII
 
 #include "lcctest.h"
-#include "lcctest.moc"
-#include "qtest_kde.h"
 
 #include "../utils/stringcomparison.h"
 
-QTEST_KDEMAIN_CORE( LccTest )
+#include <QTest>
+
+QTEST_APPLESS_MAIN( LccTest )
 
 // see http://library.dts.edu/Pages/RM/Helps/lc_call.shtml
 

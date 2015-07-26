@@ -33,7 +33,8 @@
 #include <QPointer>
 
 class KRun;
-class KTemporaryFile;
+
+class QTemporaryFile;
 
 namespace Tellico {
   class XSLTHandler;
@@ -81,7 +82,7 @@ public:
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
 
 signals:
-  void signalAction(const KUrl& url);
+  void signalAction(const QUrl& url);
 
 public slots:
   /**
@@ -96,7 +97,7 @@ private slots:
    *
    * @param url The URL to open
    */
-  void slotOpenURL(const KUrl& url);
+  void slotOpenURL(const QUrl& url);
   void slotReloadEntry();
   void slotResetColors();
 
@@ -110,7 +111,7 @@ private:
 
   // to run any clicked processes
   QPointer<KRun> m_run;
-  KTemporaryFile* m_tempFile;
+  QTemporaryFile* m_tempFile;
   bool m_useGradientImages : 1;
   bool m_checkCommonFile : 1;
 };

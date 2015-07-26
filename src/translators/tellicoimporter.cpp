@@ -32,21 +32,21 @@
 #include "../images/image.h"
 #include "../utils/isbnvalidator.h"
 #include "../core/tellico_strings.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kzip.h>
-#include <kapplication.h>
+#include <KLocalizedString>
+#include <KZip>
 
 #include <QBuffer>
 #include <QFile>
 #include <QTimer>
+#include <QApplication>
 
 using Tellico::Import::TellicoImporter;
 
-TellicoImporter::TellicoImporter(const KUrl& url_, bool loadAllImages_) : DataImporter(url_),
+TellicoImporter::TellicoImporter(const QUrl& url_, bool loadAllImages_) : DataImporter(url_),
     m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
     m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
 }
@@ -127,7 +127,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     pos += blockSize;
     if(showProgress) {
       emit signalProgress(this, pos);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -250,7 +250,7 @@ void TellicoImporter::loadZipData() {
       m_images.remove(*it);
     }
     if(j%stepSize == 0) {
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -295,7 +295,7 @@ void TellicoImporter::slotCancel() {
 }
 
 // static
-bool TellicoImporter::loadAllImages(const KUrl& url_) {
+bool TellicoImporter::loadAllImages(const QUrl& url_) {
   // only local files are allowed
   if(url_.isEmpty() || !url_.isValid() || !url_.isLocalFile()) {
 //    myDebug() << "returning";
@@ -303,7 +303,7 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
   }
 
   // keep track of url for error reporting
-  static KUrl u;
+  static QUrl u;
 
   KZip zip(url_.path());
   if(!zip.open(QIODevice::ReadOnly)) {
@@ -338,4 +338,3 @@ bool TellicoImporter::loadAllImages(const KUrl& url_) {
   return true;
 }
 
-#include "tellicoimporter.moc"

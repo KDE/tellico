@@ -25,19 +25,20 @@
 #include "arxivfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
+#include "../utils/datafileregistry.h"
 #include "../collection.h"
 #include "../entry.h"
 #include "../core/netaccess.h"
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
-#include <kstandarddirs.h>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QDomDocument>
 #include <QLabel>
@@ -45,8 +46,6 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFile>
-
-//#define ARXIV_TEST
 
 namespace {
   static const int ARXIV_RETURNS_PER_REQUEST = 20;
@@ -90,14 +89,14 @@ void ArxivFetcher::continueSearch() {
 }
 
 void ArxivFetcher::doSearch() {
-  KUrl u = searchURL(request().key, request().value);
+  QUrl u = searchURL(request().key, request().value);
   if(u.isEmpty()) {
     stop();
     return;
   }
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -225,14 +224,13 @@ Tellico::Data::EntryPtr ArxivFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ArxivFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("arxiv2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("arxiv2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate arxiv2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -244,8 +242,8 @@ void ArxivFetcher::initXSLTHandler() {
   }
 }
 
-KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
-  KUrl u(ARXIV_BASE_URL);
+QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
+  QUrl u(QString::fromLatin1(ARXIV_BASE_URL));
   u.addQueryItem(QLatin1String("start"), QString::number(m_start));
   u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
@@ -282,13 +280,10 @@ KUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
 
     default:
       myWarning() << "key not recognized: " << request().key;
-      return KUrl();
+      return QUrl();
   }
   u.addQueryItem(QLatin1String("search_query"), query);
 
-#ifdef ARXIV_TEST
-  u = KUrl::fromPathOrUrl("/home/robby/arxiv.xml");
-#endif
 //  myDebug() << "url: " << u;
   return u;
 }
@@ -337,4 +332,3 @@ QString ArxivFetcher::ConfigWidget::preferredName() const {
   return ArxivFetcher::defaultName();
 }
 
-#include "arxivfetcher.moc"

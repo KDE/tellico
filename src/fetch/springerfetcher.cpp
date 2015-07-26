@@ -27,8 +27,9 @@
 #include "../utils/isbnvalidator.h"
 #include "../tellico_debug.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <KConfigGroup>
+#include <QUrl>
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -77,8 +78,8 @@ void SpringerFetcher::resetSearch() {
   m_total = -1;
 }
 
-KUrl SpringerFetcher::searchUrl() {
-  KUrl u(SPRINGER_BASE_URL);
+QUrl SpringerFetcher::searchUrl() {
+  QUrl u(QString::fromLatin1(SPRINGER_BASE_URL));
   u.addQueryItem(QLatin1String("api_key"), QLatin1String(SPRINGER_API_KEY));
   u.addQueryItem(QLatin1String("s"), QString::number(m_start + 1));
   u.addQueryItem(QLatin1String("p"), QString::number(SPRINGER_QUERY_COUNT));
@@ -114,7 +115,7 @@ KUrl SpringerFetcher::searchUrl() {
       break;
 
     default:
-      return KUrl();
+      return QUrl();
   }
 
 //  myDebug() << "url:" << u.url();
@@ -190,4 +191,3 @@ QString SpringerFetcher::ConfigWidget::preferredName() const {
   return SpringerFetcher::defaultName();
 }
 
-#include "springerfetcher.moc"

@@ -26,7 +26,7 @@
 #include "../document.h"
 #include "../collection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 using Tellico::Command::RenameCollection;
 

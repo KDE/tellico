@@ -8,7 +8,6 @@ SET(translators_STAT_SRCS
    amcimporter.cpp
    audiofileimporter.cpp
    bibtexexporter.cpp
-   bibtexhandler.cpp
    bibteximporter.cpp
    bibtexmlexporter.cpp
    bibtexmlimporter.cpp
@@ -32,7 +31,6 @@ SET(translators_STAT_SRCS
    importer.cpp
    onixexporter.cpp
    pdfimporter.cpp
-   pilotdbexporter.cpp
    referencerimporter.cpp
    risimporter.cpp
    tellico_xml.cpp
@@ -50,25 +48,25 @@ SET(translators_STAT_SRCS
    xsltimporter.cpp
    )
 
-KDE4_ADD_LIBRARY(translators STATIC ${translators_STAT_SRCS})
+add_library(translators STATIC ${translators_STAT_SRCS})
 TARGET_LINK_LIBRARIES(translators
     collections
     tellicomodels
+    core
+    gui
+    images
+    utils
     ${TELLICO_BTPARSE_LIBS}
     ${TELLICO_CSV_LIBS}
     rtf2html-tellico
     )
 
 TARGET_LINK_LIBRARIES(translators
+    KF5::Archive
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
-    ${LIBEXSLT_LIBRARIES}
+    ${LIBXSLT_EXSLT_LIBRARIES}
     )
-
-IF( NEPOMUK_FOUND )
-  ADD_DEFINITIONS( -DDISABLE_NEPOMUK_LEGACY )
-  TARGET_LINK_LIBRARIES(translators ${NEPOMUK_LIBRARIES})
-ENDIF( NEPOMUK_FOUND)
 
 IF( KCDDB_FOUND )
   TARGET_LINK_LIBRARIES(translators ${KCDDB_LIBRARIES})
@@ -90,8 +88,12 @@ IF( DISCID_FOUND )
   TARGET_LINK_LIBRARIES(translators ${DISCID_LIBRARIES})
 ENDIF( DISCID_FOUND )
 
+IF( KF5FILEMETADATA_FOUND )
+  TARGET_LINK_LIBRARIES(translators KF5::FileMetaData)
+ENDIF( KF5FILEMETADATA_FOUND )
+
 ADD_DEPENDENCIES(translators tellico_config)
 
 ########### install files ###############
 
-INSTALL(FILES   bibtex-translation.xml DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
+INSTALL(FILES bibtex-translation.xml DESTINATION ${TELLICO_DATA_INSTALL_DIR})

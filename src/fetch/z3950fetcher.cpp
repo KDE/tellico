@@ -46,17 +46,16 @@
 #include "../gui/combobox.h"
 #include "../utils/isbnvalidator.h"
 #include "../utils/lccnvalidator.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
-#include <kapplication.h>
-#include <knuminput.h>
+#include <KLocalizedString>
+#include <KIntSpinBox>
 #include <KConfigGroup>
-#include <kcombobox.h>
-#include <kacceleratormanager.h>
-#include <kseparator.h>
-#include <KIcon>
+#include <KComboBox>
+#include <KAcceleratorManager>
+#include <KSeparator>
+#include <KConfig>
 
 #include <QFile>
 #include <QLabel>
@@ -64,6 +63,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
+#include <QIcon>
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
@@ -82,7 +82,7 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_)
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
     : Fetcher(parent_), m_conn(0), m_started(false), m_done(true), m_preset(preset_),
       m_MARC21XMLHandler(0), m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
-  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(!serverFile.isEmpty()) {
     KConfig serverConfig(serverFile, KConfig::SimpleConfig);
     const QStringList servers = serverConfig.groupList();
@@ -150,7 +150,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
     m_password = config_.readEntry("Password");
   } else {
     m_preset = preset;
-    QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+    QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
     if(!serverFile.isEmpty()) {
       KConfig serverConfig(serverFile, KConfig::SimpleConfig);
       const QStringList servers = serverConfig.groupList();
@@ -297,14 +297,13 @@ bool Z3950Fetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MARC21XMLHandler = new XSLTHandler(u);
   if(!m_MARC21XMLHandler->isValid()) {
@@ -321,14 +320,13 @@ bool Z3950Fetcher::initUNIMARCHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("UNIMARC2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("UNIMARC2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate UNIMARC2MODS3.xsl.";
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_UNIMARCXMLHandler = new XSLTHandler(u);
   if(!m_UNIMARCXMLHandler->isValid()) {
@@ -345,14 +343,13 @@ bool Z3950Fetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   m_MODSHandler = new XSLTHandler(u);
   if(!m_MODSHandler->isValid()) {
@@ -626,7 +623,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_charSetCombo->addItem(QLatin1String("marc8"));
   m_charSetCombo->addItem(QLatin1String("iso-8859-1"));
   m_charSetCombo->addItem(QLatin1String("utf-8"));
-  connect(m_charSetCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_charSetCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_charSetCombo, row, 1);
   w = i18n("Enter the character set encoding used by the z39.50 server. The most likely choice "
            "is MARC-8, although ISO-8859-1 is common as well.");
@@ -644,7 +641,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_syntaxCombo->addItem(QLatin1String("USMARC"), QLatin1String("usmarc"));
   m_syntaxCombo->addItem(QLatin1String("ADS"), QLatin1String("ads"));
   m_syntaxCombo->addItem(QLatin1String("GRS-1"), QLatin1String("grs-1"));
-  connect(m_syntaxCombo, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_syntaxCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_syntaxCombo, row, 1);
   w = i18n("Enter the data format used by the z39.50 server. Tellico will attempt to "
            "automatically detect the best setting if <i>auto-detect</i> is selected.");
@@ -655,7 +652,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   label = new QLabel(i18n("&User: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_userEdit = new GUI::LineEdit(optionsWidget());
-  m_userEdit->setClickMessage(i18n("Optional"));
+  m_userEdit->setPlaceholderText(i18n("Optional"));
   connect(m_userEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_userEdit, row, 1);
   w = i18n("Enter the authentication user name used by the z39.50 database. Most servers "
@@ -667,7 +664,7 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   label = new QLabel(i18n("Pass&word: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_passwordEdit = new GUI::LineEdit(optionsWidget());
-  m_passwordEdit->setClickMessage(i18n("Optional"));
+  m_passwordEdit->setPlaceholderText(i18n("Optional"));
   m_passwordEdit->setEchoMode(QLineEdit::Password);
   connect(m_passwordEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_passwordEdit, row, 1);
@@ -772,14 +769,10 @@ void Z3950Fetcher::ConfigWidget::slotPresetChanged() {
 }
 
 void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
-  QString lang = KGlobal::locale()->languageList().first();
-  QString lang2A;
-  {
-    QString dummy;
-    KGlobal::locale()->splitLocale(lang, lang2A, dummy, dummy, dummy);
-  }
+  QString lang = QLocale().uiLanguages().first();
+  QString lang2A = lang.contains(QLatin1Char('-')) ? lang.section(QLatin1Char('-'), 0, 0) : lang;
 
-  QString serverFile = KStandardDirs::locate("appdata", QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {
     myWarning() << "no z3950 servers file found";
     return;
@@ -811,9 +804,9 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     if(country.isEmpty()) {
       m_serverCombo->addItem(i18n(name.toUtf8()), group);
     } else {
-      const QString flag = KStandardDirs::locate("locale",
-                                                 QString::fromLatin1("l10n/%1/flag.png").arg(country));
-      m_serverCombo->addItem(KIcon(flag), i18n(name.toUtf8()), group);
+      const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                  QString::fromLatin1("locale/l10n/%1/flag.png").arg(country));
+      m_serverCombo->addItem(QIcon::fromTheme(flag), i18n(name.toUtf8()), group);
     }
 
     if(current_.isEmpty() && idx == -1) {
@@ -839,4 +832,3 @@ QString Z3950Fetcher::ConfigWidget::preferredName() const {
   return s.isEmpty() ? i18n("z39.50 Server") : s;
 }
 
-#include "z3950fetcher.moc"

@@ -26,14 +26,14 @@
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../collection.h"
 #include "../entry.h"
+#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -44,6 +44,7 @@
 #include <QGridLayout>
 #include <QDomDocument>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int MUSICBRAINZ_MAX_RETURNS_TOTAL = 10;
@@ -88,7 +89,7 @@ void MusicBrainzFetcher::continueSearch() {
 }
 
 void MusicBrainzFetcher::doSearch() {
-  KUrl u(MUSICBRAINZ_API_URL);
+  QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
   u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("limit"), QString::number(m_limit));
   u.addQueryItem(QLatin1String("offset"), QString::number(m_offset));
@@ -124,12 +125,13 @@ void MusicBrainzFetcher::doSearch() {
       return;
   }
 
-  u.addPath(queryPath);
+  u = u.adjusted(QUrl::StripTrailingSlash);
+  u.setPath(u.path() + QLatin1Char('/') + queryPath);
 
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
 }
@@ -244,8 +246,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 
-  KUrl u(MUSICBRAINZ_API_URL);
-  u.addPath(QLatin1String("/release/") + mbid);
+  QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
+  u.setPath(u.path() + QLatin1String("/release/") + mbid);
   u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   u.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags url-rels"));
 
@@ -285,14 +287,13 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 }
 
 void MusicBrainzFetcher::initXSLTHandler() {
-  QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("musicbrainz2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("musicbrainz2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate musicbrainz2tellico.xsl.";
     return;
   }
 
-  KUrl u;
-  u.setPath(xsltfile);
+  QUrl u = QUrl::fromLocalFile(xsltfile);
 
   delete m_xsltHandler;
   m_xsltHandler = new XSLTHandler(u);
@@ -345,4 +346,3 @@ QString MusicBrainzFetcher::ConfigWidget::preferredName() const {
   return MusicBrainzFetcher::defaultName();
 }
 
-#include "musicbrainzfetcher.moc"

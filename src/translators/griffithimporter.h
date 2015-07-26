@@ -45,7 +45,7 @@ Q_OBJECT
 public:
   /**
    */
-  GriffithImporter(const KUrl& url);
+  GriffithImporter(const QUrl& url);
   /**
    */
   virtual ~GriffithImporter();

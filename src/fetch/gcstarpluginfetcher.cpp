@@ -30,25 +30,26 @@
 #include "../translators/gcstarimporter.h"
 #include "../gui/combobox.h"
 #include "../gui/collectiontypecombo.h"
-#include "../gui/cursorsaver.h"
+#include "../utils/cursorsaver.h"
 #include "../core/filehandler.h"
-#include "../gui/guiproxy.h"
+#include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
 #include <KProcess>
-#include <kstandarddirs.h>
 #include <kacceleratormanager.h>
 #include <kshell.h>
 #include <KFilterDev>
 #include <KTar>
-#include <KTempDir>
+#include <KLocalizedString>
 
+#include <QTemporaryDir>
 #include <QDir>
 #include <QLabel>
 #include <QShowEvent>
 #include <QGridLayout>
 #include <QBuffer>
+#include <QStandardPaths>
 
 #include <memory>
 
@@ -62,7 +63,7 @@ GCstarPluginFetcher::PluginParse GCstarPluginFetcher::pluginParse = NotYet;
 GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
   if(!collectionPlugins.contains(collType_)) {
     GUI::CursorSaver cs;
-    QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+    QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
 
     if(pluginParse == NotYet) {
       KProcess proc;
@@ -165,8 +166,7 @@ void GCstarPluginFetcher::readPluginsOld(int collType_, const QString& gcstar_) 
   }
 
   foreach(const QString& file, dir.entryList()) {
-    KUrl u;
-    u.setPath(dir.filePath(file));
+    QUrl u = QUrl::fromLocalFile(dir.filePath(file));
     PluginInfo info;
     QString text = FileHandler::readTextFile(u);
     for(int pos = rx.indexIn(text); pos > -1; pos = rx.indexIn(text, pos+rx.matchedLength())) {
@@ -229,7 +229,7 @@ void GCstarPluginFetcher::search() {
 
   m_data.clear();
 
-  const QString gcstar = KStandardDirs::findExe(QLatin1String("gcstar"));
+  const QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
   if(gcstar.isEmpty()) {
     myWarning() << "gcstar not found!";
     stop();
@@ -324,19 +324,20 @@ void GCstarPluginFetcher::slotProcessExited() {
     return;
   }
 
-  KTempDir tempDir;
-  dir->copyTo(tempDir.name());
+  QTemporaryDir tempDir;
+  dir->copyTo(tempDir.path());
 
-  // KDE seems to have abug (#252821) for gcstar files where the images are not in the images/ directory
+  // KDE seems to have a bug (#252821) for gcstar files where the images are not in the images/ directory
   foreach(const QString& filename, dir->entries()) {
     if(dir->entry(filename)->isFile() && filename != QLatin1String("collection.gcs")) {
       const KArchiveFile* f = static_cast<const KArchiveFile*>(dir->entry(filename));
-      f->copyTo(tempDir.name() + QLatin1String("images"));
+      f->copyTo(tempDir.path() + QLatin1String("/images"));
     }
   }
 
-  KUrl gcsUrl(tempDir.name());
-  gcsUrl.addPath(QLatin1String("collection.gcs"));
+  QUrl gcsUrl = QUrl::fromLocalFile(tempDir.path());
+  gcsUrl = gcsUrl.adjusted(QUrl::StripTrailingSlash);
+  gcsUrl.setPath(gcsUrl.path() + QLatin1String("/collection.gcs"));
 
   Import::GCstarImporter imp(gcsUrl);
   imp.setHasRelativeImageLinks(true);
@@ -486,4 +487,3 @@ void GCstarPluginFetcher::ConfigWidget::showEvent(QShowEvent*) {
   }
 }
 
-#include "gcstarpluginfetcher.moc"

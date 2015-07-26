@@ -30,29 +30,35 @@
 #include "../field.h"
 #include "../fieldformat.h"
 #include "../images/imagefactory.h"
-#include "../tellico_utils.h"
-#include "../gui/guiproxy.h"
+#include "../utils/tellico_utils.h"
+#include "../utils/guiproxy.h"
 #include "../progressmanager.h"
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
 #include <kio/job.h>
-#include <kio/netaccess.h>
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
+#include <KIconLoader>
+#include <KLocalizedString>
+#include <KJobWidgets/KJobWidgets>
 
-#ifdef HAVE_NEPOMUK
-#include <Nepomuk/Types/Property>
-#include <Nepomuk/ResourceManager>
+#ifdef HAVE_KFILEMETADATA
+#include <KFileMetaData/Extractor>
+#include <KFileMetaData/ExtractorCollection>
+#include <KFileMetaData/SimpleExtractionResult>
+#include <KFileMetaData/PropertyInfo>
 #endif
 
+#include <QDate>
+#include <QDir>
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QFile>
 #include <QFileInfo>
 #include <QVBoxLayout>
+#include <QApplication>
 
 namespace {
   static const int FILE_PREVIEW_SIZE = 128;
@@ -60,7 +66,7 @@ namespace {
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const KUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
+FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
     m_job(0), m_cancelled(false) {
 }
 
@@ -73,11 +79,6 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     return m_coll;
   }
 
-#ifdef HAVE_NEPOMUK
-  Nepomuk::ResourceManager::instance()->init();
-  const bool nepomukRunning = Nepomuk::ResourceManager::instance()->initialized();
-#endif
-
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
   connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
@@ -86,15 +87,22 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   // going to assume only one volume will ever be imported
   const QString volume = volumeName();
 
-  m_job = m_recursive->isChecked()
-          ? KIO::listRecursive(url(), KIO::DefaultFlags, false)
-          : KIO::listDir(url(), KIO::DefaultFlags, false);
+  // the importer might be running without a gui/widget
+  m_job = (m_widget && m_recursive->isChecked())
+          ? KIO::listRecursive(url(), KIO::DefaultFlags, false /* include hidden */)
+          : KIO::listDir(url(), KIO::DefaultFlags, false /* include hidden */);
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(entries(KIO::Job*, const KIO::UDSEntryList&)),
           SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
 
-  if(!KIO::NetAccess::synchronousRun(m_job, GUI::Proxy::widget()) || m_cancelled) {
+  if(!m_job->exec() || m_cancelled) {
+    myDebug() << "did not run job:" << m_job->errorString();
     return Data::CollPtr();
   }
+
+#ifdef HAVE_KFILEMETADATA
+  KFileMetaData::ExtractorCollection extractors;
+#endif
 
   QStringList metaIgnore = QStringList()
                          << QLatin1String("mimeType")
@@ -104,7 +112,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
                          << QLatin1String("contentSize")
                          << QLatin1String("type");
 
-  const bool usePreview = m_filePreview->isChecked();
+  const bool usePreview = m_widget && m_filePreview->isChecked();
 
   const QString title    = QLatin1String("title");
   const QString url      = QLatin1String("url");
@@ -117,7 +125,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString owner    = QLatin1String("owner");
   const QString group    = QLatin1String("group");
   const QString created  = QLatin1String("created");
-  const QString modified  = QLatin1String("modified");
+  const QString modified = QLatin1String("modified");
   const QString metainfo = QLatin1String("metainfo");
   const QString icon     = QLatin1String("icon");
 
@@ -135,12 +143,12 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     Data::EntryPtr entry(new Data::Entry(m_coll));
 
-    const KUrl u = item.url();
+    const QUrl u = item.url();
     entry->setField(title,  u.fileName());
     entry->setField(url,    u.url());
     entry->setField(desc,   item.mimeComment());
     entry->setField(vol,    volume);
-    tmp = KUrl::relativePath(this->url().toLocalFile(), u.directory());
+    tmp = QDir(this->url().toLocalFile()).relativeFilePath(u.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
     // remove "./" from the string
     entry->setField(folder, tmp.right(tmp.length()-2));
     entry->setField(type,   item.mimetype());
@@ -149,41 +157,43 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     entry->setField(owner,  item.user());
     entry->setField(group,  item.group());
 
-    KDateTime dt = item.time(KFileItem::CreationTime);
+    QDateTime dt(item.time(KFileItem::CreationTime));
     if(!dt.isNull()) {
-      entry->setField(created, dt.toString(KDateTime::ISODate));
+      entry->setField(created, dt.date().toString(Qt::ISODate));
     }
-    dt = item.time(KFileItem::ModificationTime);
+    dt = QDateTime(item.time(KFileItem::ModificationTime));
     if(!dt.isNull()) {
-      entry->setField(modified, dt.toString(KDateTime::ISODate));
+      entry->setField(modified, dt.date().toString(Qt::ISODate));
     }
 
-#ifdef HAVE_NEPOMUK
-    if(nepomukRunning) {
-      const KFileMetaInfo& meta = item.metaInfo();
-      if(meta.isValid()) {
-        QStringList strings;
-        foreach(const KFileMetaInfoItem& item, meta.items()) {
-          const QString s = item.value().toString();
-          if(!s.isEmpty()) {
-            const QString label = Nepomuk::Types::Property(item.name()).label();
-            if(!metaIgnore.contains(label)) {
-              strings << label + FieldFormat::columnDelimiterString() + item.prefix() + s + item.suffix();
-            }
-          }
+#ifdef HAVE_KFILEMETADATA
+    KFileMetaData::SimpleExtractionResult result(u.url(), item.mimetype(), KFileMetaData::ExtractionResult::ExtractMetaData);
+    QList<KFileMetaData::Extractor*> exList = extractors.fetchExtractors(item.mimetype());
+    foreach(KFileMetaData::Extractor* ex, exList) {
+      ex->extract(&result);
+    }
+    QStringList strings;
+    KFileMetaData::PropertyMap properties = result.properties();
+    KFileMetaData::PropertyMap::const_iterator it = properties.constBegin();
+    for( ; it != properties.constEnd(); ++it) {
+      const QString s = it.value().toString();
+      if(!s.isEmpty()) {
+        const QString label = KFileMetaData::PropertyInfo(it.key()).displayName();
+        if(!metaIgnore.contains(label)) {
+          strings << label + FieldFormat::columnDelimiterString() + s;
         }
-        entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
       }
     }
+    entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
 #endif
 
     if(!m_cancelled && usePreview) {
       m_pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
       if(m_pixmap.isNull()) {
-        m_pixmap = item.pixmap(0);
+        m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
       }
     } else {
-      m_pixmap = item.pixmap(0);
+      m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
     }
 
     if(!m_pixmap.isNull()) {
@@ -198,7 +208,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     if(showProgress && j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j);
-      kapp->processEvents();
+      qApp->processEvents();
     }
     ++j;
   }
@@ -284,4 +294,3 @@ void FileListingImporter::slotCancel() {
   }
 }
 
-#include "filelistingimporter.moc"

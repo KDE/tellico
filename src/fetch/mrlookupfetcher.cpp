@@ -25,11 +25,11 @@
 #include "mrlookupfetcher.h"
 #include "../translators/bibteximporter.h"
 #include "../collections/bibtexcollection.h"
-#include "../gui/guiproxy.h"
-#include "../tellico_utils.h"
+#include "../utils/guiproxy.h"
+#include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 #include <kio/job.h>
 #include <kio/jobuidelegate.h>
 #include <KConfigGroup>
@@ -38,6 +38,7 @@
 #include <QVBoxLayout>
 #include <QFile>
 #include <QTextCodec>
+#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const char* MRLOOKUP_URL = "http://www.ams.org/mrlookup";
@@ -73,7 +74,7 @@ void MRLookupFetcher::readConfigHook(const KConfigGroup& config_) {
 void MRLookupFetcher::search() {
   m_started = true;
 
-  KUrl u(MRLOOKUP_URL);
+  QUrl u(QString::fromLatin1(MRLOOKUP_URL));
 
   switch(request().key) {
     case Title:
@@ -93,7 +94,7 @@ void MRLookupFetcher::search() {
 
 //  myDebug() << u;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->ui()->setWindow(GUI::Proxy::widget());
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
 
@@ -225,4 +226,3 @@ QString MRLookupFetcher::ConfigWidget::preferredName() const {
   return MRLookupFetcher::defaultName();
 }
 
-#include "mrlookupfetcher.moc"

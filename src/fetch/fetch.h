@@ -63,7 +63,7 @@ enum Type {
   ISBNdb,
   GCstarPlugin,
   CrossRef,
-  Citebase,
+  Citebase, // Removed
   Arxiv,
   Bibsonomy,
   GoogleScholar,

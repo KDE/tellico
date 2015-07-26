@@ -29,13 +29,12 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <kurl.h>
+#include <QUrl>
 
 #include <QPointer>
 #include <QLabel>
 
-class KLineEdit;
-
+class QLineEdit;
 class QCheckBox;
 class QLabel;
 
@@ -98,7 +97,7 @@ public:
 
   struct SiteData {
     QString title;
-    KUrl url;
+    QUrl url;
   };
   static const SiteData& siteData(int site);
 
@@ -121,7 +120,6 @@ private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   virtual void readConfigHook(const KConfigGroup& config);
-  virtual void saveConfigHook(KConfigGroup& config);
   void initXSLTHandler();
   void doSearch();
   void parseTitle(Data::EntryPtr entry, int collType);
@@ -147,7 +145,6 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
-  mutable bool m_keyFoundInWallet;
 };
 
 class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
@@ -163,9 +160,9 @@ private slots:
   void slotSiteChanged();
 
 private:
-  KLineEdit* m_accessEdit;
-  KLineEdit* m_secretKeyEdit;
-  KLineEdit* m_assocEdit;
+  QLineEdit* m_accessEdit;
+  QLineEdit* m_secretKeyEdit;
+  QLineEdit* m_assocEdit;
   GUI::ComboBox* m_siteCombo;
   GUI::ComboBox* m_imageCombo;
 };

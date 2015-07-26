@@ -94,4 +94,3 @@ bool FetcherJob::doKill() {
   return true;
 }
 
-#include "fetcherjob.moc"

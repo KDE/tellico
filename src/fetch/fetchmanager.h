@@ -34,7 +34,7 @@
 #include <QList>
 #include <QPixmap>
 
-class KUrl;
+class QUrl;
 
 namespace Tellico {
   namespace Fetch {
@@ -85,7 +85,7 @@ public:
   bool canFetch() const;
   bool hasMoreResults() const;
   void loadFetchers();
-  const FetcherVec& fetchers() const { return m_fetchers; }
+  const FetcherVec& fetchers() const;
   FetcherVec fetchers(int type);
   Fetcher::Ptr fetcherByUuid(const QString& uuid);
   NameTypeMap nameTypeMap();
@@ -121,7 +121,7 @@ private:
   static Manager* s_self;
 
   Manager();
-  Fetcher::Ptr createFetcher(KSharedPtr<KSharedConfig> config, const QString& configGroup);
+  Fetcher::Ptr createFetcher(KSharedConfigPtr config, const QString& configGroup);
   FetcherVec defaultFetchers();
   void updateStatus(const QString& message);
 

@@ -24,7 +24,7 @@
 
 #include "cardcollection.h"
 
-#include <klocale.h>
+#include <KLocalizedString>
 
 namespace {
   static const char* card_general = I18N_NOOP("General");
@@ -133,4 +133,3 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   return list;
 }
 
-#include "cardcollection.moc"

@@ -23,16 +23,16 @@
  ***************************************************************************/
 
 #include "bibteximporter.h"
-#include "bibtexhandler.h"
+#include "../utils/bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <kapplication.h>
+#include <KLocalizedString>
+#include <KSharedConfig>
 #include <KConfigGroup>
-#include <kglobal.h>
 
 #include <QRegExp>
 #include <QGroupBox>
@@ -41,13 +41,14 @@
 #include <QVBoxLayout>
 #include <QButtonGroup>
 #include <QFile>
+#include <QApplication>
 
 using namespace Tellico;
 using Tellico::Import::BibtexImporter;
 
 int BibtexImporter::s_initCount = 0;
 
-BibtexImporter::BibtexImporter(const KUrl::List& urls_) : Importer(urls_)
+BibtexImporter::BibtexImporter(const QList<QUrl>& urls_) : Importer(urls_)
     , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
   init();
 }
@@ -63,7 +64,7 @@ BibtexImporter::~BibtexImporter() {
     bt_cleanup();
   }
   if(m_readUTF8) {
-    KConfigGroup config(KGlobal::config(), "Import Options");
+    KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
     config.writeEntry("Bibtex UTF8", m_readUTF8->isChecked());
   }
 }
@@ -102,8 +103,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
     }
   }
 
-  const KUrl::List urls = this->urls();
-  foreach(const KUrl& url, urls) {
+  foreach(const QUrl& url, urls()) {
     if(m_cancelled) {
       return Data::CollPtr();
     }
@@ -240,7 +240,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 
     if(showProgress && j%stepSize == 0) {
       emit signalProgress(this, urlCount*100 + 100*j/count);
-      kapp->processEvents();
+      qApp->processEvents();
     }
   }
 
@@ -342,7 +342,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   bg->addButton(m_readUTF8);
   bg->addButton(m_readLocale);
 
-  KConfigGroup config(KGlobal::config(), "Import Options");
+  KConfigGroup config(KSharedConfig::openConfig(), "Import Options");
   bool useUTF8 = config.readEntry("Bibtex UTF8", false);
   if(useUTF8) {
     m_readUTF8->setChecked(true);
@@ -355,7 +355,7 @@ QWidget* BibtexImporter::widget(QWidget* parent_) {
   return m_widget;
 }
 
-bool BibtexImporter::maybeBibtex(const KUrl& url_) {
+bool BibtexImporter::maybeBibtex(const QUrl& url_) {
   QString text = FileHandler::readTextFile(url_, true /*quiet*/);
   if(text.isEmpty()) {
     return false;
@@ -363,7 +363,7 @@ bool BibtexImporter::maybeBibtex(const KUrl& url_) {
   return maybeBibtex(text, url_);
 }
 
-bool BibtexImporter::maybeBibtex(const QString& text, const KUrl& url_) {
+bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   bt_initialize();
   QRegExp rx(QLatin1String("[{}]"));
 
@@ -423,4 +423,3 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
   mainColl->setMacroList(macros);
 }
 
-#include "bibteximporter.moc"

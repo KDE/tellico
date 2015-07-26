@@ -1,8 +1,6 @@
 ########### next target ###############
 
 SET(core_STAT_SRCS
-   dbusinterface.cpp
-   drophandler.cpp
    filehandler.cpp
    netaccess.cpp
    tellico_config_addons.cpp
@@ -13,19 +11,22 @@ SET(core_KCFG_SRCS
    tellico_config.kcfgc
    )
 
-KDE4_ADD_KCFG_FILES(core_STAT_SRCS ${core_KCFG_SRCS})
+kconfig_add_kcfg_files(core_STAT_SRCS ${core_KCFG_SRCS})
 
 ADD_CUSTOM_TARGET(tellico_config DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/tellico_config.h)
 
-KDE4_ADD_LIBRARY(core STATIC ${core_STAT_SRCS})
+add_library(core STATIC ${core_STAT_SRCS})
 
 TARGET_LINK_LIBRARIES(core
+    images
     utils
+    Qt5::Core
+    KF5::KDELibs4Support
     )
 
 ########### install files ###############
 
-INSTALL(FILES   tellico_config.kcfg DESTINATION ${KCFG_INSTALL_DIR} )
-INSTALL(FILES   tellico-rename.upd tellico.upd DESTINATION ${KCONF_UPDATE_INSTALL_DIR} )
+INSTALL(FILES   tellico_config.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR} )
+INSTALL(FILES   tellico-rename.upd tellico.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR} )
 
-INSTALL(PROGRAMS   tellico-1-3-update.pl DESTINATION ${KCONF_UPDATE_INSTALL_DIR} )
+INSTALL(PROGRAMS   tellico-1-3-update.pl DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR} )

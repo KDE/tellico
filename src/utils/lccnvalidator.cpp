@@ -90,4 +90,3 @@ QString LCCNValidator::formalize(const QString& value_) {
   return alpha + year + serial + suffix;
 }
 
-#include "lccnvalidator.moc"
