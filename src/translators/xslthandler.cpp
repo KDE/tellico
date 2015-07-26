@@ -189,8 +189,15 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
 
 void XSLTHandler::addStringParam(const QByteArray& name_, const QByteArray& value_) {
   QByteArray value = value_;
-  value.replace('\'', "&apos;");
-  addParam(name_, QByteArray("'") + value + QByteArray("'"));
+  if(value.contains('\'')) {
+    if(value.contains('"')) {
+      myWarning() << "String param contains both ' and \"" << value_;
+      value.replace('"', "'");
+    }
+    addParam(name_, QByteArray("\"") + value + QByteArray("\""));
+  } else {
+    addParam(name_, QByteArray("'") + value + QByteArray("'"));
+  }
 }
 
 void XSLTHandler::addParam(const QByteArray& name_, const QByteArray& value_) {
