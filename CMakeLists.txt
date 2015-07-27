@@ -67,6 +67,7 @@ find_package(KF5 REQUIRED COMPONENTS
     XmlGui
     JobWidgets
     KDELibs4Support
+    Wallet
 )
 find_package(KF5KHtml NO_MODULE)
 
