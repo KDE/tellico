@@ -26,6 +26,7 @@
 #define TELLICO_IMPORT_AMCIMPORTER_H
 
 #include "dataimporter.h"
+#include <QDataStream>
 
 namespace Tellico {
   namespace Import {

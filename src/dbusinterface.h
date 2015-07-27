@@ -27,8 +27,8 @@
 
 #include "../translators/translators.h"
 
+#include <QObject>
 #include <QUrl>
-
 #include <QStringList>
 
 // the entry id is typedef'd to an int, but we need to use an int for DBUS
