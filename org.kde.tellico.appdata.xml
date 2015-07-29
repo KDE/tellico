@@ -281,8 +281,12 @@
       <li xml:lang="uk">Імпортування метаданих MODS, Bibtex, RIS, CSV, PDF та даних у багатьох інших форматах.</li>
       <li xml:lang="x-test">xxImports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formatsxx</li>
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
+      <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML en andere formaten</li>
+      <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
+      <li xml:lang="pt-BR">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
       <li xml:lang="sv">Exporterar till Bibtex, ONIX, CSV, HTML och andra format</li>
+      <li xml:lang="uk">Експортування даних у форматах Bibtex, ONIX, CSV, HTML тощо.</li>
       <li xml:lang="x-test">xxExports to Bibtex, ONIX, CSV, HTML, and other formatsxx</li>
       <li>Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="bs">Uvozi informacije direktno sa Amazon.com, IMDb, z39.50 servera, PubMed, SRU servera, CrossRef.org, različitih drugih web stranica, i iz vanjskih skripti</li>
