@@ -1,7 +1,7 @@
+cmake_minimum_required(VERSION 2.8.9)
+
 project(Tellico)
 set(TELLICO_VERSION "2.3.10+git")
-
-cmake_minimum_required(VERSION 2.6.2)
 
 # http://www.cmake.org/Wiki/CMake_Useful_Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
