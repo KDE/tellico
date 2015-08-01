@@ -34,8 +34,6 @@ option(ENABLE_CDTEXT       "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
 
-include(CheckTypeSize)
-
 include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
 check_symbol_exists(strupr "string.h" HAVE_STRUPR)
@@ -62,13 +60,8 @@ find_package(KF5 REQUIRED COMPONENTS
     KDELibs4Support
     Wallet
 )
-find_package(KF5KHtml NO_MODULE)
+find_package(KF5KHtml REQUIRED NO_MODULE)
 
-#find_package(KF5 REQUIRED Config ConfigWidgets CoreAddons IconThemes I18n KIO
-#             Notifications WidgetsAddons WindowSystem Parts Solid DocTools XmlGui JobWidgets)
-
-#find_package(KDE4 4.2.0 REQUIRED)
-#include(KDE4Defaults)
 include(MacroLibrary)
 include(MacroBoolTo01)
 #include(MacroLogFeature)
