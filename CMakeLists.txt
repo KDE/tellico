@@ -35,13 +35,6 @@ option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
 
 include(CheckTypeSize)
-check_type_size("unsigned char" SIZEOF_UNSIGNED_CHAR)
-check_type_size("unsigned short" SIZEOF_UNSIGNED_SHORT)
-check_type_size("unsigned long" SIZEOF_UNSIGNED_LONG)
-check_type_size("unsigned int" SIZEOF_UNSIGNED_INT)
-check_type_size("short" SIZEOF_SHORT)
-check_type_size("long" SIZEOF_LONG)
-check_type_size("int" SIZEOF_INT)
 
 include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
