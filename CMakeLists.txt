@@ -126,17 +126,15 @@ set_package_properties(Yaz PROPERTIES
     URL "http://www.indexdata.dk/yaz/"
     TYPE OPTIONAL)
 
-#macro_optional_find_package(PopplerQt4)
-#macro_log_feature(POPPLER_QT4_FOUND "libpoppler" "Support for reading PDF files" "http://poppler.freedesktop.org/" FALSE "" "")
-#find_package(PopplerQt4)
-#set_package_properties(PopplerQt4 PROPERTIES
-#    DESCRIPTION "Support for reading PDF files"
-#    URL "http://poppler.freedesktop.org"
-#    TYPE OPTIONAL)
-if(POPPLER_QT4_FOUND)
-    add_definitions(${POPPLER_QT4_DEFINITIONS})
-    include_directories(${POPPLER_QT4_INCLUDE_DIR})
-endif(POPPLER_QT4_FOUND)
+find_package(PopplerQt5)
+set_package_properties(PopplerQt5 PROPERTIES
+    DESCRIPTION "Support for reading PDF files"
+    URL "http://poppler.freedesktop.org"
+    TYPE OPTIONAL)
+if(POPPLER_QT5_FOUND)
+    add_definitions(${POPPLER_QT5_DEFINITIONS})
+    include_directories(${POPPLER_QT5_INCLUDE_DIR})
+endif(POPPLER_QT5_FOUND)
 
 #macro_optional_find_package(KSane)
 #macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
@@ -264,7 +262,7 @@ endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS
 
 macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(POPPLER_QT4_FOUND HAVE_POPPLER)
+macro_bool_to_01(POPPLER_QT5_FOUND HAVE_POPPLER)
 macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
 macro_bool_to_01(YAZ_FOUND HAVE_YAZ)
 macro_bool_to_01(KSANE_FOUND HAVE_KSANE)

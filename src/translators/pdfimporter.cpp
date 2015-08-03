@@ -48,7 +48,7 @@
 
 #include <config.h>
 #ifdef HAVE_POPPLER
-#include <poppler-qt4.h>
+#include <poppler-qt5.h>
 #endif
 
 #include <memory>
