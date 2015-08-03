@@ -157,7 +157,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
   }
 
   // assume result is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
 
@@ -195,7 +195,7 @@ Tellico::Data::EntryPtr CrossRefFetcher::fetchEntryHook(uint uid_) {
       coll->addField(field);
     }
     if(entry->field(field).isEmpty()) {
-      QPixmap pix = NetAccess::filePreview(entry->field(QLatin1String("url")));
+      QPixmap pix = NetAccess::filePreview(QUrl::fromUserInput(entry->field(QLatin1String("url"))));
       if(!pix.isNull()) {
         QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
         if(!id.isEmpty()) {

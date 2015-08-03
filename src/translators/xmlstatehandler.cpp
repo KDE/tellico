@@ -296,7 +296,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 
   QString title  = attValue(atts_, "title", i18n("Unknown"));
   if(isI18n) {
-    title = i18n(title.toUtf8());
+    title = i18n(title.toUtf8().constData());
   }
 
   QString typeStr = attValue(atts_, "type", QString::number(Data::Field::Line));
@@ -307,7 +307,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     QStringList allowed = attValue(atts_, "allowed").split(QRegExp(QLatin1String("\\s*;\\s*")), QString::SkipEmptyParts);
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
-        (*word) = i18n((*word).toUtf8());
+        (*word) = i18n((*word).toUtf8().constData());
       }
     }
     field = new Data::Field(name, title, allowed);
@@ -323,7 +323,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
       cat.remove(QLatin1Char('&'));
     }
     if(isI18n) {
-      cat = i18n(cat.toUtf8());
+      cat = i18n(cat.toUtf8().constData());
     }
     field->setCategory(cat);
   }
@@ -356,7 +356,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   if(idx > -1) {
     QString desc = atts_.value(idx);
     if(isI18n) {
-      desc = i18n(desc.toUtf8());
+      desc = i18n(desc.toUtf8().constData());
     }
     field->setDescription(desc);
   }
@@ -592,7 +592,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   }
   // special case: if the i18n attribute equals true, then translate the title, description, and category
   if(m_i18n) {
-    fieldValue = i18n(fieldValue.toUtf8());
+    fieldValue = i18n(fieldValue.toUtf8().constData());
   }
   // special case for isbn fields, go ahead and validate
   if(m_validateISBN) {

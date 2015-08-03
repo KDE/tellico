@@ -215,7 +215,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   // image might still be a URL
   const QString image_id = entry->field(QLatin1String("cover"));
   if(image_id.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(image_id, true /* quiet */);
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
@@ -359,7 +359,7 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
 
   QStringList genres;
   foreach(const QVariant& variant, resultMap.value(QLatin1String("genre")).toList()) {
-    genres << i18n(value(variant.toMap(), "$").toUtf8());
+    genres << i18n(value(variant.toMap(), "$").toUtf8().constData());
   }
   entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
 

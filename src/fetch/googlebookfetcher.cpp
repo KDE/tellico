@@ -181,7 +181,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
   QString gbs = entry->field(QLatin1String("gbs-link"));
   if(!gbs.isEmpty()) {
     // quiet
-    QByteArray data = FileHandler::readDataFile(gbs, true);
+    QByteArray data = FileHandler::readDataFile(QUrl::fromUserInput(gbs), true);
     QJsonDocument doc = QJsonDocument::fromJson(data);
     populateEntry(entry, doc.object().toVariantMap());
   }
@@ -189,7 +189,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
   const QString image_id = entry->field(QLatin1String("cover"));
   // if it's still a url, we need to load it
   if(image_id.startsWith(QLatin1String("http"))) {
-    const QString id = ImageFactory::addImage(image_id, true);
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
       entry->setField(QLatin1String("cover"), QString());

@@ -200,7 +200,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   }
 
   // assume always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   Import::TellicoImporter imp(str);
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);

@@ -179,7 +179,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
   if(entry->field(QLatin1String("cover")).isEmpty()) {
     const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
     if(!isbn.isEmpty()) {
-      QUrl imageUrl = QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn);
+      QUrl imageUrl(QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);
@@ -285,7 +285,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       binding = QLatin1String("Paperback");
     }
     if(!binding.isEmpty()) {
-      entry->setField(QLatin1String("binding"), i18n(binding.toUtf8()));
+      entry->setField(QLatin1String("binding"), i18n(binding.toUtf8().constData()));
     }
     entry->setField(QLatin1String("publisher"), value(resultMap, "publishers"));
     entry->setField(QLatin1String("series"), value(resultMap, "series"));
@@ -334,7 +334,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
         QVariantMap langResult = array.isEmpty() ? QVariantMap() : array.at(0).toObject().toVariantMap();
         const QString name = value(langResult, "name");
         if(!name.isEmpty()) {
-          langs << i18n(name.toUtf8());
+          langs << i18n(name.toUtf8().constData());
         }
       }
     }

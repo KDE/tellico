@@ -294,7 +294,7 @@ bool Manager::installScript(const QString& file_) {
   QString sourceExec = scriptFolder + exeFile;
   QUrl dest = QUrl::fromLocalFile(sourceExec);
   KFileItem item(KFileItem::Unknown, KFileItem::Unknown, dest, true);
-  ::chmod(QFile::encodeName(dest.path()), item.permissions() | S_IXUSR);
+  ::chmod(QFile::encodeName(dest.path()).constData(), item.permissions() | S_IXUSR);
 
   KDesktopFile df(specFile);
   KConfigGroup cg = df.desktopGroup();

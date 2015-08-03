@@ -216,7 +216,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     // always an article?
     entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
 
-    QPixmap pix = NetAccess::filePreview(ref->fileName(), PDF_FILE_PREVIEW_SIZE);
+    QPixmap pix = NetAccess::filePreview(QUrl::fromLocalFile(ref->fileName()), PDF_FILE_PREVIEW_SIZE);
 
     if(!pix.isNull()) {
       // is png best option?
@@ -282,11 +282,11 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     }
   }
 
-// finally
+  // finally
   foreach(Data::EntryPtr entry, coll->entries()) {
     if(entry->title().isEmpty()) {
       // use file name
-      QUrl u = entry->field(QLatin1String("url"));
+      QUrl u = QUrl::fromLocalFile(entry->field(QLatin1String("url")));
       entry->setField(QLatin1String("title"), u.fileName());
     }
   }

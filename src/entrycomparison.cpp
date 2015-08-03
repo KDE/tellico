@@ -69,7 +69,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     // versions before 1.2.7 could have saved the url without the protocol
     if(QUrl(s1) == QUrl(s2) ||
        (f->property(QLatin1String("relative")) == QLatin1String("true") &&
-        s_documentUrl.resolved(s1) == s_documentUrl.resolved(s2))) {
+        s_documentUrl.resolved(QUrl(s1)) == s_documentUrl.resolved(QUrl(s2)))) {
       return 5;
     }
   }

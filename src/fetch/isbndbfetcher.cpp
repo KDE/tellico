@@ -218,7 +218,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
 
   // assume result is always utf-8
   // https://bugs.kde.org/show_bug.cgi?id=339063 -- some output is incorrectly encoded
-//  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+//  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   QString str = m_xsltHandler->applyStylesheet(dom.toString());
   Import::TellicoImporter imp(str);
   // be quiet when loading images

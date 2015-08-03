@@ -47,6 +47,7 @@ public:
   /**
    */
   XSLTImporter(const QUrl& url);
+  XSLTImporter(const QString& text);
 
   /**
    */

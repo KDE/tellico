@@ -569,7 +569,7 @@ QString HTMLExporter::fileDirName() const {
 
 // how ugly is this?
 const xmlChar* HTMLExporter::handleLink(const xmlChar* link_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).toUtf8()));
+  return reinterpret_cast<xmlChar*>(qstrdup(handleLink(QString::fromUtf8(reinterpret_cast<const char*>(link_))).toUtf8().constData()));
 }
 
 QString HTMLExporter::handleLink(const QString& link_) {
@@ -589,7 +589,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
 
   QUrl u = QUrl::fromLocalFile(m_xsltFilePath);
-  u = QUrl(u).resolved(link_);
+  u = u.resolved(QUrl(link_));
 
   // one of the "quirks" of the html export is that img src urls are set to point to
   // the tmpDir() when exporting entry files from a collection, but those images
@@ -618,7 +618,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
 }
 
 const xmlChar* HTMLExporter::analyzeInternalCSS(const xmlChar* str_) {
-  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).toUtf8()));
+  return reinterpret_cast<xmlChar*>(qstrdup(analyzeInternalCSS(QString::fromUtf8(reinterpret_cast<const char*>(str_))).toUtf8().constData()));
 }
 
 QString HTMLExporter::analyzeInternalCSS(const QString& str_) {

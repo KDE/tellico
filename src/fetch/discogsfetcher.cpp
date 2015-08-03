@@ -182,7 +182,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   const QString image_id = entry->field(QLatin1String("cover"));
   // if it's still a url, we need to load it
   if(image_id.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(image_id, true /* quiet */);
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
@@ -316,9 +316,9 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   entry_->setField(QLatin1String("label"), labels.join(FieldFormat::delimiterString()));
 
   /* thumb value is not always in the full data, so go ahead and set it now */
-  QUrl coverUrl = value(resultMap_, "thumb");
+  QString coverUrl = value(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
-    entry_->setField(QLatin1String("cover"), coverUrl.toString());
+    entry_->setField(QLatin1String("cover"), coverUrl);
   }
 
   // if we only need cursory data, then we're done

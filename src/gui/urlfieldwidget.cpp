@@ -82,7 +82,7 @@ QString URLFieldWidget::text() const {
 }
 
 void URLFieldWidget::setTextImpl(const QString& text_) {
-  m_requester->setUrl(text_);
+  m_requester->setUrl(QUrl::fromUserInput(text_));
   static_cast<KUrlLabel*>(label())->setUrl(text_);
 }
 
@@ -100,7 +100,8 @@ void URLFieldWidget::slotOpenURL(const QString& url_) {
     return;
   }
   // just in case, interpret string relative to document url
-  m_run = new KRun(Kernel::self()->URL().resolved(url_), this);
+  m_run = new KRun(Kernel::self()->URL().resolved(QUrl::fromUserInput(url_)),
+                   this);
 }
 
 QWidget* URLFieldWidget::widget() {

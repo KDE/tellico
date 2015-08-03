@@ -151,7 +151,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   // if the pointer is retained, it gets double-deleted
   m_job = 0;
 
-  const QString text = QString::fromUtf8(data, data.size());
+  const QString text = QString::fromUtf8(data.constData(), data.size());
 
 #if 0
   myWarning() << "Remove debug from googlescholarfetcher.cpp";
@@ -169,7 +169,7 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
   for(int pos = m_bibtexRx.indexIn(text); count < m_limit && pos > -1; pos = m_bibtexRx.indexIn(text, pos+m_bibtexRx.matchedLength()), ++count) {
     // for some reason, KIO and google don't return bibtex when '&' is escaped
     QString url = m_bibtexRx.cap(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
-    QUrl bibtexUrl = QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)).resolved(url);
+    QUrl bibtexUrl = QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)).resolved(QUrl(url));
 //    myDebug() << bibtexUrl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);
   }

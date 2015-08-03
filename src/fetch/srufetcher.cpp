@@ -260,7 +260,7 @@ void SRUFetcher::slotComplete(KJob*) {
   Data::CollPtr coll;
   QString msg;
 
-  const QString result = QString::fromUtf8(data, data.size());
+  const QString result = QString::fromUtf8(data.constData(), data.size());
 
   // first check for SRU errors
   const QString& diag = XML::nsZingDiag;

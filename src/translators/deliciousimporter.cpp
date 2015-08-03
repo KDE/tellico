@@ -98,7 +98,7 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
         if(!QFile::exists(imgPath)) {
           continue;
         }
-        QString imgID = ImageFactory::addImage(imgPath, true);
+        QString imgID = ImageFactory::addImage(QUrl::fromLocalFile(imgPath), true);
         if(!imgID.isEmpty()) {
           entry->setField(coverField, imgID);
         }

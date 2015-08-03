@@ -877,7 +877,7 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   } else {
     QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      QUrl u = group.readEntry(QString::fromLatin1("URL_%1").arg(i));
+      QUrl u(group.readEntry(QString::fromLatin1("URL_%1").arg(i)));
       if(url == u) {
         entryGroup = group.readEntry(QString::fromLatin1("Group By_%1").arg(i), defaultGroup);
         break;
@@ -1730,7 +1730,7 @@ void MainWindow::slotFileImport(int format_) {
 
     case Import::Dir:
       // TODO: allow remote audiofile importing
-      url.setPath(KFileDialog::getExistingDirectory(ImportDialog::startDir(format),
+      url.setPath(KFileDialog::getExistingDirectory(QUrl::fromLocalFile(ImportDialog::startDir(format)),
                                                     this, i18n("Import Directory")));
       break;
 
@@ -2238,7 +2238,7 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
 void MainWindow::slotURLAction(const QUrl& url_) {
   Q_ASSERT(url_.scheme() == QLatin1String("tc"));
   QString actionName = url_.fileName();
-  QAction* action = this->action(actionName.toLatin1());
+  QAction* action = this->action(actionName.toLatin1().constData());
   if(action) {
     action->activate(QAction::Trigger);
   } else {

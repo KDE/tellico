@@ -84,7 +84,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
     QString lfile = fi.fileName();
     QString name = lfile.section(QLatin1Char('.'), 0, -2);
     name.replace(QLatin1Char('_'), QLatin1Char(' '));
-    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
+    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8().constData(), name.toUtf8().constData());
     templates.insert(title, lfile);
   }
 
@@ -235,4 +235,3 @@ void ReportDialog::slotSaveAs() {
     m_exporter->setOptions(oldOpt);
   }
 }
-

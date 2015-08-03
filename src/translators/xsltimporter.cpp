@@ -64,6 +64,11 @@ XSLTImporter::XSLTImporter(const QUrl& url_) : Tellico::Import::TextImporter(url
     m_URLRequester(0) {
 }
 
+XSLTImporter::XSLTImporter(const QString& text_) : Tellico::Import::TextImporter(text_),
+    m_widget(0),
+    m_URLRequester(0) {
+}
+
 Tellico::Data::CollPtr XSLTImporter::collection() {
   if(m_coll) {
     return m_coll;

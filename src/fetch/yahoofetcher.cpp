@@ -192,7 +192,7 @@ void YahooFetcher::slotComplete(KJob*) {
   }
 
   // assume yahoo is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   Import::TellicoImporter imp(str);
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
@@ -231,7 +231,7 @@ Tellico::Data::EntryPtr YahooFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QUrl imageURL = entry->field(QLatin1String("image"));
+  QUrl imageURL = QUrl::fromUserInput(entry->field(QLatin1String("image")));
   if(!imageURL.isEmpty()) {
     QString id = ImageFactory::addImage(imageURL, true);
     if(id.isEmpty()) {

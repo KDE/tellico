@@ -345,7 +345,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
                 fIt->property(QLatin1String("relative")) == QLatin1String("true") &&
                 !url().isEmpty()) {
         // if a relative URL and url() is not empty, change the value!
-        QUrl old_url = Data::Document::self()->URL().resolved(fieldValue);
+        QUrl old_url = Data::Document::self()->URL().resolved(QUrl(fieldValue));
         QString relPath = QDir(url().toLocalFile()).relativeFilePath(old_url.path());
         fieldElem.appendChild(dom_.createTextNode(relPath));
       } else {

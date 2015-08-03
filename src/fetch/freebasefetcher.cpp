@@ -429,7 +429,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
           } else if(!binding.isEmpty()) {
             binding = FieldFormat::capitalize(binding);
           }
-          entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8()));
+          entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8().constData()));
         }
         break;
 
@@ -544,7 +544,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
           const QStringList platforms = FieldFormat::splitValue(value(resultMap, "platforms"));
           if(!platforms.isEmpty()) {
             // just grab first one
-            entry->setField(QLatin1String("platform"), i18n(platforms.at(0).toUtf8()));
+            entry->setField(QLatin1String("platform"), i18n(platforms.at(0).toUtf8().constData()));
           }
         }
         break;
@@ -651,7 +651,7 @@ QVariantList FreebaseFetcher::bookQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
@@ -660,12 +660,12 @@ QVariantList FreebaseFetcher::bookQueries() const {
       {
         QVariantMap workQuery = query.value(QLatin1String("work:book")).toMap();
         workQuery.remove(QLatin1String("*"));
-        
+
         QVariantMap authorSubQuery = workQuery;
-        authorSubQuery.insert(QLatin1String("author~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        authorSubQuery.insert(QLatin1String("author~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap editorSubquery = workQuery;
-        editorSubquery.insert(QLatin1String("editor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        editorSubquery.insert(QLatin1String("editor~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         // create dummy namespaces so as not to clobber full request
         // for books with multiple authors, for example, not doing
@@ -725,12 +725,12 @@ QVariantList FreebaseFetcher::comicBookQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
     case Person:
-      query.insert(QLatin1String("editor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("editor~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
@@ -768,7 +768,7 @@ QVariantList FreebaseFetcher::movieQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
@@ -776,19 +776,19 @@ QVariantList FreebaseFetcher::movieQueries() const {
       {
         // use a dummy namespace for all of these
         QVariantMap directorQuery = query;
-        directorQuery.insert(QLatin1String("b:directed_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        directorQuery.insert(QLatin1String("b:directed_by~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap producerQuery = query;
-        producerQuery.insert(QLatin1String("b:produced_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        producerQuery.insert(QLatin1String("b:produced_by~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap writerQuery = query;
-        writerQuery.insert(QLatin1String("b:written_by~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        writerQuery.insert(QLatin1String("b:written_by~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap composerQuery = query;
-        composerQuery.insert(QLatin1String("b:music~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        composerQuery.insert(QLatin1String("b:music~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap castSubquery;
-        castSubquery.insert(QLatin1String("actor~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        castSubquery.insert(QLatin1String("actor~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
         QVariantMap castQuery = query;
         // have to give it a dummy namespace so we get back all the people
         castQuery.insert(QLatin1String("b:starring"), QVariantList() << castSubquery);
@@ -836,7 +836,7 @@ QVariantList FreebaseFetcher::musicQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
@@ -846,7 +846,7 @@ QVariantList FreebaseFetcher::musicQueries() const {
         // match against album artist instead
         QVariantMap albumQuery = query.value(QLatin1String("album")).toList().at(0).toMap();
         albumQuery.remove(QLatin1String("optional"));
-        albumQuery.insert(QLatin1String("artist~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        albumQuery.insert(QLatin1String("artist~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         query.insert(QLatin1String("album"), QVariantList() << albumQuery);
         queries << query;
@@ -868,17 +868,17 @@ QVariantList FreebaseFetcher::videoGameQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
     case Person:
       {
         QVariantMap developerQuery = query;
-        developerQuery.insert(QLatin1String("developer~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        developerQuery.insert(QLatin1String("developer~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap publisherQuery = query;
-        publisherQuery.insert(QLatin1String("publisher~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        publisherQuery.insert(QLatin1String("publisher~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
         queries << developerQuery << publisherQuery;
       }
       break;
@@ -905,17 +905,17 @@ QVariantList FreebaseFetcher::boardGameQueries() const {
   QVariantList queries;
   switch(request().key) {
     case Title:
-      query.insert(QLatin1String("name~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+      query.insert(QLatin1String("name~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
       queries << query;
       break;
 
     case Person:
       {
         QVariantMap designerQuery = query;
-        designerQuery.insert(QLatin1String("designer~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        designerQuery.insert(QLatin1String("designer~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
 
         QVariantMap publisherQuery = query;
-        publisherQuery.insert(QLatin1String("publisher~="), QLatin1Char('*') + request().value + QLatin1Char('*'));
+        publisherQuery.insert(QLatin1String("publisher~="), QString(QLatin1Char('*') + request().value + QLatin1Char('*')));
         queries << designerQuery << publisherQuery;
       }
       break;

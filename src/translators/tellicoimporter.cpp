@@ -86,7 +86,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
       m_format = Error;
       return Data::CollPtr();
     }
-    s = QByteArray(data(), 6);
+    s = QByteArray(data().constData(), 6);
   }
 
   // need to decide if the data is xml text, or a zip file

@@ -318,9 +318,9 @@ void EntryView::slotOpenURL(const QUrl& url_) {
   for(DOM::Node node = nodeUnderMouse(); !node.isNull(); node = node.parentNode()) {
     if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {
       QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
-      if(!href.isEmpty() && QUrl::fromUserInput(href).isRelative()) {
+      if(!href.isEmpty()) {
         // interpet url relative to document url
-        u = Kernel::self()->URL().resolved(href);
+        u = Kernel::self()->URL().resolved(QUrl(href));
       }
       break;
     }

@@ -233,7 +233,7 @@ void ExecExternalFetcher::slotProcessExited() {
     return;
   }
 
-  const QString text = QString::fromUtf8(m_data, m_data.size());
+  const QString text = QString::fromUtf8(m_data.constData(), m_data.size());
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
   Import::Importer* imp = 0;
   // only 4 formats re supported here
@@ -432,7 +432,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   l->setRowStretch(++row, 1);
 
   if(fetcher_) {
-    m_pathEdit->setUrl(fetcher_->m_path);
+    m_pathEdit->setUrl(QUrl::fromLocalFile(fetcher_->m_path));
     m_newStuffName = fetcher_->m_newStuffName;
   }
   if(fetcher_ && fetcher_->m_collType > -1) {

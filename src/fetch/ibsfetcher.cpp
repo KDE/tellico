@@ -171,7 +171,7 @@ void IBSFetcher::slotComplete(KJob*) {
   for(int pos = anchorRx.indexIn(s); m_started && pos > -1; pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
     if(!u.isEmpty()) {
       // the url probable contains &amp; so be careful
-      QUrl url = u.replace(QLatin1String("&amp;"), QLatin1String("&"));
+      QUrl url(u.replace(QLatin1String("&amp;"), QLatin1String("&")));
       FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
       m_matches.insert(r->uid, url);
       emit signalResultFound(r);
@@ -193,7 +193,7 @@ void IBSFetcher::slotComplete(KJob*) {
 
   if(!u.isEmpty()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, d);
-    m_matches.insert(r->uid, u.replace(QLatin1String("&amp;"), QLatin1String("&")));
+    m_matches.insert(r->uid, QUrl(u.replace(QLatin1String("&amp;"), QLatin1String("&"))));
     emit signalResultFound(r);
   }
 
@@ -346,7 +346,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   if(!isbn.isEmpty()) {
     entry->setField(QLatin1String("isbn"), isbn);
 #if 1
-    QUrl imgURL = QString::fromLatin1("http://giotto.ibs.it/cop/copt13.asp?f=%1").arg(isbn);
+    QUrl imgURL(QString::fromLatin1("http://giotto.ibs.it/cop/copt13.asp?f=%1").arg(isbn));
 //    myLog() << "cover = " << imgURL;
     QString id = ImageFactory::addImage(imgURL, true, QUrl(QString::fromLatin1("http://internetbookshop.it")));
     if(!id.isEmpty()) {

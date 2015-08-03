@@ -764,7 +764,7 @@ void ConfigDialog::readTemplateConfig() {
   QString file = Config::templateName(collType);
   file.replace(QLatin1Char('_'), QLatin1Char(' '));
   QString fileContext = file + QLatin1String(" XSL Template");
-  m_templateCombo->setCurrentItem(i18nc(fileContext.toUtf8(), file.toUtf8()));
+  m_templateCombo->setCurrentItem(i18nc(fileContext.toUtf8().constData(), file.toUtf8().constData()));
 
   m_fontCombo->setCurrentFont(QFont(Config::templateFont(collType).family()));
   m_fontSizeInput->setValue(Config::templateFont(collType).pointSize());
@@ -1135,7 +1135,7 @@ void ConfigDialog::loadTemplateList() {
     QString lfile = fi.fileName().section(QLatin1Char('.'), 0, -2);
     QString name = lfile;
     name.replace(QLatin1Char('_'), QLatin1Char(' '));
-    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8(), name.toUtf8());
+    QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8().constData(), name.toUtf8().constData());
     templates.insert(title, lfile);
   }
 

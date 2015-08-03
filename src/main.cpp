@@ -84,13 +84,13 @@ int main(int argc, char* argv[]) {
     QStringList args = parser.positionalArguments();
     if(args.count() > 0) {
       if(parser.isSet(QLatin1String("bibtex"))) {
-        tellico->importFile(Tellico::Import::Bibtex, args.at(0), Tellico::Import::Replace);
+        tellico->importFile(Tellico::Import::Bibtex, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else if(parser.isSet(QLatin1String("mods"))) {
-        tellico->importFile(Tellico::Import::MODS, args.at(0), Tellico::Import::Replace);
+        tellico->importFile(Tellico::Import::MODS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else if(parser.isSet(QLatin1String("ris"))) {
-        tellico->importFile(Tellico::Import::RIS, args.at(0), Tellico::Import::Replace);
+        tellico->importFile(Tellico::Import::RIS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else {
-        tellico->slotFileOpen(args.at(0));
+        tellico->slotFileOpen(QUrl::fromUserInput(args.at(0)));
       }
     } else {
       // bit of a hack, I just want the --nofile option

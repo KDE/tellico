@@ -314,7 +314,7 @@ void CollectionTest::testValue() {
   entry->setField(field2, string + dummy);
 
   QCOMPARE(entry->formattedField(field1, Tellico::FieldFormat::ForceFormat), formatted);
-  QCOMPARE(entry->formattedField(field2, Tellico::FieldFormat::ForceFormat), formatted + dummy);
+  QCOMPARE(entry->formattedField(field2, Tellico::FieldFormat::ForceFormat), formatted.append(dummy));
 }
 
 void CollectionTest::testValue_data() {

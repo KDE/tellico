@@ -101,7 +101,7 @@ private:
   bool makeConnection();
   void done();
   void done(const QString& message, int type);
-  QByteArray toCString(const QString& text);
+  const char* toCString(const QString& text);
   QString toString(const QByteArray& text);
   void checkPendingEvents();
 

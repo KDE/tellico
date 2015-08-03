@@ -171,7 +171,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   for(int pos = infoRx.indexIn(s); m_started && pos > -1; pos = infoRx.indexIn(s, pos+1)) {
     if(n == 0 && !u.isEmpty()) {
       FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y);
-      QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(u);
+      QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(QUrl(u));
       url.setQuery(QString());
       m_matches.insert(r->uid, url);
       // don't emit signal until after putting url in matches hash
@@ -206,7 +206,7 @@ void AnimeNfoFetcher::slotComplete(KJob*) {
   // grab last response
   if(!u.isEmpty()) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), t, y, QString());
-    QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(u);
+    QUrl url = QUrl(QString::fromLatin1(ANIMENFO_BASE_URL)).resolved(QUrl(u));
     url.setQuery(QString());
     m_matches.insert(r->uid, url);
     // don't emit signal until after putting url in matches hash
@@ -413,7 +413,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
   imgRx.setMinimal(true);
   int pos = imgRx.indexIn(s);
   if(pos > -1) {
-    QUrl imgURL = QUrl(QLatin1String(ANIMENFO_BASE_URL)).resolved(imgRx.cap(1));
+    QUrl imgURL = QUrl(QLatin1String(ANIMENFO_BASE_URL)).resolved(QUrl(imgRx.cap(1)));
     QString id = ImageFactory::addImage(imgURL, true);
     if(!id.isEmpty()) {
       entry->setField(QLatin1String("cover"), id);

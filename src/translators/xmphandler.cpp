@@ -71,7 +71,7 @@ void XMPHandler::init() {
 QString XMPHandler::extractXMP(const QString& file) {
   QString result;
 #ifdef HAVE_EXEMPI
-  XmpFilePtr xmpfile = xmp_files_open_new(QFile::encodeName(file), XMP_OPEN_READ);
+  XmpFilePtr xmpfile = xmp_files_open_new(QFile::encodeName(file).constData(), XMP_OPEN_READ);
   if(!xmpfile) {
     myDebug() << "unable to open " << file;
     return result;

@@ -25,7 +25,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 include(ECMUninstallTarget)
 
 include(KDEInstallDirs)
-include(KDECompilerSettings)
+#include(KDECompilerSettings)
+include(KDEFrameworkCompilerSettings)
 include(KDECMakeSettings)
 
 ############# Options #################

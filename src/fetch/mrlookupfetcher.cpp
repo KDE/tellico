@@ -141,7 +141,7 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   // if the pointer is retained, it gets double-deleted
   m_job = 0;
 
-  const QString text = QString::fromUtf8(data, data.size());
+  const QString text = QString::fromUtf8(data.constData(), data.size());
   // grab everything within the <pre></pre> block
   QRegExp preRx(QLatin1String("<pre>(.*)</pre>"));
   preRx.setMinimal(true);

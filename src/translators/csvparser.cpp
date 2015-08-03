@@ -108,7 +108,7 @@ QStringList CSVParser::nextTokens() {
   d->done = false;
   while(hasNext() && !d->done) {
     QByteArray line = d->stream->readLine().toUtf8() + '\n'; // need the eol char
-    csv_parse(&d->parser, line, line.length(), &writeToken, &writeRow, this);
+    csv_parse(&d->parser, line.constData(), line.length(), &writeToken, &writeRow, this);
   }
   csv_fini(&d->parser, &writeToken, &writeRow, this);
   return d->tokens;

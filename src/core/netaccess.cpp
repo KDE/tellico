@@ -126,7 +126,7 @@ void NetAccess::removeTempFile(const QString& name) {
     return;
   }
   if(tmpfiles->contains(name)) {
-    ::unlink(QFile::encodeName(name));
+    ::unlink(QFile::encodeName(name).constData());
     tmpfiles->removeAll(name);
   } else {
     KIO::NetAccess::removeTempFile(name);

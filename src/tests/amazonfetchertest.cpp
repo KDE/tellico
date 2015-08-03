@@ -137,7 +137,7 @@ void AmazonFetcherTest::testTitle() {
         locale == QLatin1String("CN") ||
         locale == QLatin1String("IT") ||
         locale == QLatin1String("DE"))) {
-      QVERIFY2(result.contains(i.value(), Qt::CaseInsensitive), i.key().toLatin1());
+      QVERIFY2(result.contains(i.value(), Qt::CaseInsensitive), qPrintable(i.key()));
     } else if(collType == Tellico::Data::Collection::Video &&
        i.key() == QLatin1String("year") &&
        locale == QLatin1String("FR")) {

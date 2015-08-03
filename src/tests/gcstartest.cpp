@@ -561,7 +561,7 @@ void GCstarTest::testCustomFields() {
 
   foreach(Tellico::Data::FieldPtr f1, coll->fields()) {
     Tellico::Data::FieldPtr f2 = coll2->fieldByName(f1->name());
-    QVERIFY2(f2, f1->name().toLatin1());
+    QVERIFY2(f2, qPrintable(f1->name()));
     QCOMPARE(f1->name(), f2->name());
     QCOMPARE(f1->title(), f2->title());
     QCOMPARE(f1->category(), f2->category());

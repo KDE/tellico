@@ -487,7 +487,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 //  stripHTML.setMinimal(true);
 
   // assume amazon is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data, data.size()));
+  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
   Import::TellicoImporter imp(str);
   // be quiet when loading images
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
@@ -730,7 +730,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
-  QUrl imageURL;
+  QString imageURL;
   switch(m_imageSize) {
     case SmallImage:
       imageURL = entry->field(QLatin1String("small-image"));
@@ -747,7 +747,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
   }
 //  myDebug() << "grabbing " << imageURL.toDisplayString();
   if(!imageURL.isEmpty()) {
-    QString id = ImageFactory::addImage(imageURL, true);
+    QString id = ImageFactory::addImage(QUrl::fromUserInput(imageURL), true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     } else { // amazon serves up 1x1 gifs occasionally, but that's caught in the image constructor
@@ -868,7 +868,7 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString
   }
   static QRegExp regionRx(QLatin1String("Region [1-9]"));
   if(regionRx.indexIn(token) > -1) {
-    entry->setField(QLatin1String("region"), i18n(regionRx.cap(0).toUtf8()));
+    entry->setField(QLatin1String("region"), i18n(regionRx.cap(0).toUtf8().constData()));
     res = true;
   }
   return res;

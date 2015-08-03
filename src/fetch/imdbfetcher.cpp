@@ -329,7 +329,7 @@ void IMDBFetcher::search() {
       break;
 
     case Raw:
-      m_url = request().value;
+      m_url = QUrl(request().value);
       break;
 
     default:
@@ -605,7 +605,7 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
     }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), pPos == -1 ? cap2 : cap2.left(pPos), desc);
-    QUrl u = QUrl(m_url).resolved(cap1);
+    QUrl u = QUrl(m_url).resolved(QUrl(cap1));
     u.setQuery(QString());
     m_matches.insert(r->uid, u);
     m_allMatches.insert(r->uid, u);
@@ -1100,7 +1100,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
   int pos = posterRx.indexIn(str_);
   while(pos > -1) {
     if(posterRx.cap(1).contains(imgRx)) {
-      QUrl u = QUrl(baseURL_).resolved(imgRx.cap(1));
+      QUrl u = QUrl(baseURL_).resolved(QUrl(imgRx.cap(1)));
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
         entry_->setField(cover, id);
@@ -1117,7 +1117,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
   while(pos > -1) {
     const QString url = imgRx.cap(0).toLower();
     if(url.contains(cover)) {
-      QUrl u = QUrl(baseURL_).resolved(imgRx.cap(1));
+      QUrl u = QUrl(baseURL_).resolved(QUrl(imgRx.cap(1)));
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
         entry_->setField(cover, id);
@@ -1140,7 +1140,7 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
       QRegExp hrefRx(QLatin1String("href=['\"](.*)['\"]"), Qt::CaseInsensitive);
       hrefRx.setMinimal(true);
       if(hrefRx.indexIn(tag) > -1) {
-        QUrl u = QUrl(baseURL_).resolved(hrefRx.cap(1));
+        QUrl u = QUrl(baseURL_).resolved(QUrl(hrefRx.cap(1)));
         QString id = ImageFactory::addImage(u, true);
         if(!id.isEmpty()) {
           entry_->setField(cover, id);
@@ -1318,7 +1318,7 @@ void IMDBFetcher::doLists(const QString& str_, Tellico::Data::EntryPtr entry_) {
 
 Tellico::Fetch::FetchRequest IMDBFetcher::updateRequest(Data::EntryPtr entry_) {
   const QString t = entry_->field(QLatin1String("title"));
-  QUrl link = entry_->field(QLatin1String("imdb"));
+  QUrl link = QUrl::fromUserInput(entry_->field(QLatin1String("imdb")));
 
   if(!link.isEmpty() && link.isValid()) {
     if(link.host() != m_host) {

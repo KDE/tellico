@@ -130,7 +130,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  Import::BibtexImporter imp(QString::fromUtf8(data, data.size()));
+  Import::BibtexImporter imp(QString::fromUtf8(data.constData(), data.size()));
   Data::CollPtr coll = imp.collection();
 
   if(!coll) {

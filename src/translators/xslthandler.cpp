@@ -84,7 +84,7 @@ XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
   init();
   QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
   if(!file.isEmpty()) {
-    xmlDocPtr xsltDoc = xmlReadFile(file, NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), NULL, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltFile_;
@@ -98,7 +98,7 @@ XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
     m_stylesheet(0) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8().constData(), NULL, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltURL_.path();
@@ -240,8 +240,8 @@ QString XSLTHandler::process(xmlDocPtr docIn) {
   QHash<QByteArray, QByteArray>::ConstIterator it = m_params.constBegin();
   QHash<QByteArray, QByteArray>::ConstIterator end = m_params.constEnd();
   for(int i = 0; it != end; ++it) {
-    params[i  ] = qstrdup(it.key());
-    params[i+1] = qstrdup(it.value());
+    params[i  ] = qstrdup(it.key().constData());
+    params[i+1] = qstrdup(it.value().constData());
     params[i+2] = NULL;
     i += 2;
   }

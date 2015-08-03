@@ -68,7 +68,7 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
     if(url.isEmpty()) {
       continue;
     }
-    QPixmap pix = NetAccess::filePreview(url);
+    QPixmap pix = NetAccess::filePreview(QUrl::fromLocalFile(url));
     if(pix.isNull()) {
       continue;
     }
