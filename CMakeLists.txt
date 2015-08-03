@@ -1,11 +1,14 @@
+# FindKF5 requires CMake >= 2.8.12
+cmake_minimum_required(VERSION 2.8.12)
+set(QT_MIN_VERSION "5.3.0")
+
 project(Tellico)
 set(TELLICO_VERSION "2.9.90+git")
 
-# FindKF5 requires CMake >= 2.8.12
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-set(QT_MIN_VERSION "5.3.0")
+include(FeatureSummary)
 
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+find_package(ECM 1.3.0 NO_MODULE)
+set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://projects.kde.org/projects/kdesupport/extra-cmake-modules")
 
 # http://www.cmake.org/Wiki/CMake_Useful_Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
@@ -20,7 +23,6 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 #include(ECMMarkNonGuiExecutable)
 #include(ECMInstallIcons)
 include(ECMUninstallTarget)
-include(FeatureSummary)
 
 include(KDEInstallDirs)
 include(KDECompilerSettings)
