@@ -1,4 +1,4 @@
-# - Try to find the Qt4 binding of the Poppler library
+# - Try to find the Qt5 binding of the Poppler library
 # Once done this will define
 #
 #  POPPLER_QT5_FOUND - system has poppler-qt5
