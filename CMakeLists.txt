@@ -1,8 +1,9 @@
+# FindKF5 requires CMake >= 2.8.12
+cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+
 project(Tellico)
 set(TELLICO_VERSION "2.9.90+git")
 
-# FindKF5 requires CMake >= 2.8.12
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 set(QT_MIN_VERSION "5.3.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
