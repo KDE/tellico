@@ -195,8 +195,8 @@
 
   <xsl:call-template name="names">
    <xsl:with-param name="elem" select="'author'"/>
-   <xsl:with-param name="nodes" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='text'] = 'author' or
-                                                  mods:role/mods:roleTerm[@authority='marcrelator' and @type='text'] = 'creator']"/>
+   <xsl:with-param name="nodes" select="mods:name[mods:role/mods:roleTerm[@type='text'] = 'author' or
+                                                  mods:role/mods:roleTerm[@type='text'] = 'creator']"/>
   </xsl:call-template>
 
   <xsl:call-template name="names">

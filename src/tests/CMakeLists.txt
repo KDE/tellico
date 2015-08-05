@@ -276,6 +276,12 @@ add_test(htmlexportertest htmlexportertest)
 ecm_mark_as_test(htmlexportertest)
 TARGET_LINK_LIBRARIES(htmlexportertest translatorstest ${TELLICO_TEST_LIBS})
 
+add_executable(modstest modstest.cpp)
+ecm_mark_nongui_executable(modstest)
+add_test(modstest modstest)
+ecm_mark_as_test(modstest)
+TARGET_LINK_LIBRARIES(modstest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(referencertest referencertest.cpp
   ../translators/referencerimporter.cpp
 )
