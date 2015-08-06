@@ -488,6 +488,25 @@ add_test(entrezfetchertest entrezfetchertest)
 ecm_mark_as_test(entrezfetchertest)
 TARGET_LINK_LIBRARIES(entrezfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(externalfetchertest externalfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/execexternalfetcher.cpp
+  ../translators/bibteximporter.cpp
+  ../translators/risimporter.cpp
+  ../gui/combobox.cpp
+  ../gui/lineedit.cpp
+  ../gui/collectiontypecombo.cpp
+)
+ecm_mark_nongui_executable(externalfetchertest)
+add_test(externalfetchertest externalfetchertest)
+ecm_mark_as_test(externalfetchertest)
+TARGET_LINK_LIBRARIES(externalfetchertest
+  fetcherstest
+  newstuff
+  ${TELLICO_BTPARSE_LIBS}
+  ${TELLICO_TEST_LIBS}
+  KF5::SonnetCore
+)
+
 add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/filmasterfetcher.cpp
 )

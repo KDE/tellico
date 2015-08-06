@@ -22,43 +22,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
+#ifndef EXTERNALFETCHERTEST_H
+#define EXTERNALFETCHERTEST_H
 
-#include "modstest.h"
+#include "abstractfetchertest.h"
 
-#include "../translators/xsltimporter.h"
-#include "../collections/bookcollection.h"
-#include "../collectionfactory.h"
-#include "../fieldformat.h"
-#include "../utils/datafileregistry.h"
+class ExternalFetcherTest : public AbstractFetcherTest {
+Q_OBJECT
+public:
+  ExternalFetcherTest();
 
-#include <QTest>
+private Q_SLOTS:
+  void initTestCase();
+  void testMods();
+};
 
-QTEST_APPLESS_MAIN( ModsTest )
-
-void ModsTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
-  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
-}
-
-void ModsTest::testBook() {
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/example_mods.xml"));
-  Tellico::Import::XSLTImporter importer(url);
-  importer.setXSLTURL(QUrl::fromLocalFile(QFINDTESTDATA("../../xslt/mods2tellico.xsl")));
-
-  Tellico::Data::CollPtr coll = importer.collection();
-
-  QVERIFY(coll);
-  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
-  QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("MODS Import"));
-
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Sound and fury"));
-  QCOMPARE(entry->field("author"), QLatin1String("Alterman, Eric"));
-  QCOMPARE(entry->field("genre"), QLatin1String("bibliography"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1999"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("0-8014-8639-4"));
-  QCOMPARE(entry->field("lccn"), QLatin1String("99042030"));
-}
+#endif

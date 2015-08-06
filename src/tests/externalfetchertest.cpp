@@ -24,36 +24,45 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
-#include "modstest.h"
+#include "externalfetchertest.h"
 
-#include "../translators/xsltimporter.h"
+#include "../fetch/execexternalfetcher.h"
+#include "../entry.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
-#include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
+#include <KConfig>
+#include <KConfigGroup>
+
 #include <QTest>
+#include <QStandardPaths>
 
-QTEST_APPLESS_MAIN( ModsTest )
+QTEST_GUILESS_MAIN( ExternalFetcherTest )
 
-void ModsTest::initTestCase() {
+ExternalFetcherTest::ExternalFetcherTest() : AbstractFetcherTest() {
+}
+
+void ExternalFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/mods2tellico.xsl"));
 }
 
-void ModsTest::testBook() {
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/example_mods.xml"));
-  Tellico::Import::XSLTImporter importer(url);
-  importer.setXSLTURL(QUrl::fromLocalFile(QFINDTESTDATA("../../xslt/mods2tellico.xsl")));
+void ExternalFetcherTest::testMods() {
+  // fake the fetcher by 'cat'ting the MODS file
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
+                                       QFINDTESTDATA("data/example_mods.xml"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
-  Tellico::Data::CollPtr coll = importer.collection();
+  KConfig config(QFINDTESTDATA("data/cat_mods.spec"), KConfig::SimpleConfig);
+  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  fetcher->readConfig(cg, cg.name());
 
-  QVERIFY(coll);
-  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
-  QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("MODS Import"));
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QLatin1String("Sound and fury"));
   QCOMPARE(entry->field("author"), QLatin1String("Alterman, Eric"));
