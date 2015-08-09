@@ -422,14 +422,16 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
         entry->setField(QLatin1String("genre"), FieldFormat::capitalize(value(resultMap, "book", "genre")));
         {
           QString binding = value(resultMap, "binding");
-          if(binding.toLower() == QLatin1String("hardcover")) {
-            binding = i18n("Hardback");
-          } else if(binding.toLower() == QLatin1String("mass market paperback")) {
-            binding = i18n("Paperback");
-          } else if(!binding.isEmpty()) {
-            binding = FieldFormat::capitalize(binding);
+          if(!binding.isEmpty()) {
+            if(binding.toLower() == QLatin1String("hardcover")) {
+              binding = i18n("Hardback");
+            } else if(binding.toLower() == QLatin1String("mass market paperback")) {
+              binding = i18n("Paperback");
+            } else {
+              binding = FieldFormat::capitalize(binding);
+            }
+            entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8().constData()));
           }
-          entry->setField(QLatin1String("binding"),   i18n(binding.toUtf8().constData()));
         }
         break;
 
