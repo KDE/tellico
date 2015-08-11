@@ -32,13 +32,10 @@
 
 #include "kwidgetlister.h"
 
-#include <KDebug>
-#include <KDialog>
 #include <KLocalizedString>
 #include <KGuiItem>
 #include <KPushButton>
 
-#include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
@@ -55,19 +52,21 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mLayout = new QVBoxLayout( this );
   mLayout->setMargin( 0 );
   mLayout->setSpacing( 4 );
+  mLayout->setSizeConstraint(QLayout::SetFixedSize);
 
   mButtonBox = new QWidget( this );
   QHBoxLayout* mButtonBoxHBoxLayout = new QHBoxLayout( mButtonBox );
   mButtonBoxHBoxLayout->setMargin( 0 );
-  mButtonBoxHBoxLayout->setSpacing( KDialog::spacingHint() );
   mLayout->addWidget( mButtonBox );
 
   mBtnMore = new KPushButton( KGuiItem( i18nc( "more widgets", "More" ),
                                         QLatin1String("list-add") ), mButtonBox );
+  mButtonBoxHBoxLayout->addWidget( mBtnMore );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnMore, 0 );
 
   mBtnFewer = new KPushButton( KGuiItem( i18nc( "fewer widgets", "Fewer" ),
                                          QLatin1String("list-remove") ), mButtonBox );
+  mButtonBoxHBoxLayout->addWidget( mBtnFewer );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnFewer, 0 );
 
   QWidget *spacer = new QWidget( mButtonBox );

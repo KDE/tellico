@@ -58,7 +58,11 @@ using Tellico::FilterRuleWidgetLister;
 using Tellico::FilterDialog;
 
 FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
-    : KHBox(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_ruleType(General) {
+    : QWidget(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_ruleType(General) {
+  QHBoxLayout* l = new QHBoxLayout(this);
+  l->setMargin(0);
+  l->setSizeConstraint(QLayout::SetFixedSize);
+
   initLists();
   initWidget();
 
@@ -81,17 +85,19 @@ void FilterRuleWidget::initLists() {
 }
 
 void FilterRuleWidget::initWidget() {
-  setSpacing(4);
-
   m_ruleField = new KComboBox(this);
+  layout()->addWidget(m_ruleField);
   connect(m_ruleField, SIGNAL(activated(int)), SIGNAL(signalModified()));
   connect(m_ruleField, SIGNAL(activated(int)), SLOT(slotRuleFieldChanged(int)));
 
   m_ruleFunc = new GUI::ComboBox(this);
+  layout()->addWidget(m_ruleFunc);
   connect(m_ruleFunc, SIGNAL(activated(int)), SIGNAL(signalModified()));
   connect(m_ruleFunc, SIGNAL(activated(int)), SLOT(slotRuleFunctionChanged(int)));
 
   m_valueStack = new QStackedWidget(this);
+  layout()->addWidget(m_valueStack);
+
   m_ruleValue = new KLineEdit(m_valueStack);
   connect(m_ruleValue, SIGNAL(textChanged(const QString&)), SIGNAL(signalModified()));
   m_valueStack->addWidget(m_ruleValue);
@@ -170,7 +176,7 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
   // don't show the date picker if we're using regular expressions
   if(m_ruleType == Date && data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp) {
     m_valueStack->setCurrentWidget(m_ruleDate);
-} else {
+  } else {
     m_valueStack->setCurrentWidget(m_ruleValue);
     m_ruleValue->setClickMessage(QString());
     if(m_ruleType == Number) {

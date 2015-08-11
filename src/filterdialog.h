@@ -30,8 +30,7 @@
 #include "filter.h"
 #include "datavectors.h"
 
-#include <kdialog.h>
-#include <KHBox>
+#include <KDialog>
 
 #include <QString>
 #include <QStringList>
@@ -61,7 +60,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class FilterRuleWidget : public KHBox {
+class FilterRuleWidget : public QWidget {
 Q_OBJECT
 
 public:
