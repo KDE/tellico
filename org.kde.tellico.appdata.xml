@@ -27,6 +27,7 @@
   <name xml:lang="tr">Tellico</name>
   <name xml:lang="uk">Tellico</name>
   <name xml:lang="x-test">xxTellicoxx</name>
+  <name xml:lang="zh-CN">Tellico</name>
   <summary>Collection Manager</summary>
   <summary xml:lang="bs">Menadžer kolekcija</summary>
   <summary xml:lang="ca">Gestor de col·leccions</summary>
@@ -99,6 +100,7 @@
     <p xml:lang="tr">Özellikleri:</p>
     <p xml:lang="uk">Можливості:</p>
     <p xml:lang="x-test">xxFeatures:xx</p>
+    <p xml:lang="zh-CN">功能：</p>
     <ul>
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
