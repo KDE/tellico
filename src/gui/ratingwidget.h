@@ -27,8 +27,6 @@
 
 #include "../datavectors.h"
 
-#include <KDE/KHBox>
-
 #include <QList>
 #include <QLabel>
 #include <QPixmap>
@@ -45,7 +43,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class RatingWidget : public KHBox {
+class RatingWidget : public QWidget {
 Q_OBJECT
 
 typedef QList<QLabel*> LabelList;
