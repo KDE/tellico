@@ -79,7 +79,7 @@ QString Tellico::i18nReplace(QString text) {
   int pos = rx.indexIn(text);
   while(pos > -1) {
     // KDE bug 254863, be sure to escape just in case of spurious & entities
-    text.replace(pos, rx.matchedLength(), Qt::escape(i18n(rx.cap(1).toUtf8().constData())));
+    text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).toUtf8().constData()).toHtmlEscaped());
     pos = rx.indexIn(text, pos+rx.matchedLength());
   }
   return text;
