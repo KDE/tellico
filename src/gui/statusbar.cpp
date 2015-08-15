@@ -29,7 +29,6 @@
 
 #include <KLocalizedString>
 #include <KPushButton>
-#include <KIconLoader>
 
 #include <QObject>
 #include <QStyle>

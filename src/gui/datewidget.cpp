@@ -31,7 +31,6 @@
 
 #include <KComboBox>
 #include <KDatePicker>
-#include <KIconLoader>
 
 #include <QPushButton>
 #include <QHBoxLayout>

@@ -35,7 +35,6 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KIconLoader>
 
 #include <QTimer>
 #include <QApplication>

@@ -48,13 +48,11 @@
 #include <KLocalizedString>
 #include <kconfig.h>
 #include <KIntSpinBox>
-#include <kiconloader.h>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
 #include <kfiledialog.h>
 #include <kcolorcombo.h>
 #include <KHelpClient>
-#include <KIcon>
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
@@ -233,11 +231,10 @@ bool ConfigDialog::isPageInitialized(Page page_) const {
 }
 
 void ConfigDialog::setupGeneralPage() {
-  QPixmap pix = DesktopIcon(QLatin1String("tellico"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(QLatin1String("tellico")));
   addPage(page);
 
   // since this is the first page, go ahead and lay it out
@@ -360,11 +357,10 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
 }
 
 void ConfigDialog::setupPrintingPage() {
-  QPixmap pix = DesktopIcon(QLatin1String("printer"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Printing"));
   page->setHeader(i18n("Printing Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(QLatin1String("printer")));
   addPage(page);
 }
 
@@ -437,12 +433,11 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 }
 
 void ConfigDialog::setupTemplatePage() {
-  // odd icon, I know, matches KMail, though...
-  QPixmap pix = DesktopIcon(QLatin1String("preferences-desktop-theme"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Templates"));
   page->setHeader(i18n("Template Options"));
-  page->setIcon(KIcon(pix));
+  // odd icon, I know, matches KMail, though...
+  page->setIcon(QIcon::fromTheme(QLatin1String("preferences-desktop-theme")));
   addPage(page);
 }
 
@@ -619,11 +614,10 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 }
 
 void ConfigDialog::setupFetchPage() {
-  QPixmap pix = DesktopIcon(QLatin1String("network-wired"), KIconLoader::SizeMedium);
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Data Sources"));
   page->setHeader(i18n("Data Sources Options"));
-  page->setIcon(KIcon(pix));
+  page->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
   addPage(page);
 }
 

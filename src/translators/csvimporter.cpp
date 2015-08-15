@@ -34,7 +34,6 @@
 
 #include <KComboBox>
 #include <KIntSpinBox>
-#include <KIconLoader>
 #include <KSharedConfig>
 #include <KMessageBox>
 #include <KLocalizedString>
