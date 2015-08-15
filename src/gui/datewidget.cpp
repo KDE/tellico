@@ -32,7 +32,6 @@
 #include <KComboBox>
 #include <KDatePicker>
 #include <KIconLoader>
-#include <KGlobalSettings>
 
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -40,6 +39,8 @@
 #include <QEvent>
 #include <QMenu>
 #include <QWidgetAction>
+#include <QApplication>
+#include <QDesktopWidget>
 
 using Tellico::GUI::DateWidget;
 
@@ -267,7 +268,7 @@ void DateWidget::clear() {
 }
 
 void DateWidget::slotShowPicker() {
-  QRect desk = KGlobalSettings::desktopGeometry(this);
+  QRect desk = QApplication::desktop()->screenGeometry(this);
   QPoint popupPoint = mapToGlobal(QPoint(0, 0));
 
   int dateFrameHeight = m_menu->sizeHint().height();

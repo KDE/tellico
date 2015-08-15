@@ -60,7 +60,6 @@
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
 #include <kmessagebox.h>
-#include <KGlobalSettings>
 
 #include <QGroupBox>
 #include <QSplitter>
@@ -74,6 +73,7 @@
 #include <QTreeWidget>
 #include <QHeaderView>
 #include <QApplication>
+#include <QDesktopWidget>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -851,7 +851,7 @@ void FetchDialog::openBarcodePreview() {
   if (m_barcodeRecognitionThread->isWebcamAvailable()) {
     m_barcodePreview = new QLabel(0);
     m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
-    m_barcodePreview->move(KGlobalSettings::desktopGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
+    m_barcodePreview->move(QApplication::desktop()->screenGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
     m_barcodePreview->show();
 
     connect( m_barcodeRecognitionThread, SIGNAL(recognized(const QString&)), this, SLOT(slotBarcodeRecognized(const QString&)) );
