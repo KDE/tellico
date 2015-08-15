@@ -34,7 +34,7 @@
 #include <QEvent>
 #include <QVector>
 
-class KMenu;
+class QMenu;
 
 namespace Tellico {
   class DetailedEntryItem;
@@ -162,8 +162,8 @@ private:
     int sortOrder;
   };
 
-  KMenu* m_headerMenu;
-  KMenu* m_columnMenu;
+  QMenu* m_headerMenu;
+  QMenu* m_columnMenu;
   bool m_loadingCollection;
   bool m_selectionChanging;
 };

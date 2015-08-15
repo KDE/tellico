@@ -40,9 +40,9 @@
 #include <kconfig.h>
 #include <kaction.h>
 #include <kiconloader.h>
-#include <kmenu.h>
 #include <KSharedConfig>
 
+#include <QMenu>
 #include <QPixmap>
 #include <QMouseEvent>
 #include <QHeaderView>
@@ -92,8 +92,8 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m
   header()->installEventFilter(this);
   header()->setMinimumSectionSize(20);
 
-  m_headerMenu = new KMenu(this);
-  m_columnMenu = new KMenu(this);
+  m_headerMenu = new QMenu(this);
+  m_columnMenu = new QMenu(this);
   connect(m_columnMenu, SIGNAL(triggered(QAction*)),
           SLOT(slotColumnMenuActivated(QAction*)));
 
@@ -271,7 +271,7 @@ void DetailedListView::contextMenuEvent(QContextMenuEvent* event_) {
     return;
   }
 
-  KMenu menu(this);
+  QMenu menu(this);
   Controller::self()->plugEntryActions(&menu);
   menu.exec(event_->globalPos());
 }
@@ -541,7 +541,7 @@ void DetailedListView::updateHeaderMenu() {
     return;
   }
   m_headerMenu->clear();
-  m_headerMenu->addTitle(i18n("View Columns"));
+  m_headerMenu->addSection(i18n("View Columns"));
 
   m_columnMenu->clear();
 

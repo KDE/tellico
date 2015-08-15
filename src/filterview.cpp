@@ -34,9 +34,9 @@
 #include "gui/countdelegate.h"
 
 #include <KLocalizedString>
-#include <kmenu.h>
-#include <QIcon>
 
+#include <QMenu>
+#include <QIcon>
 #include <QHeaderView>
 #include <QContextMenuEvent>
 
@@ -126,7 +126,7 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
     return;
   }
 
-  KMenu menu(this);
+  QMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
     menu.addAction(QIcon::fromTheme(QLatin1String("view-filter")),

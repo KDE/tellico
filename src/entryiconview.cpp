@@ -35,10 +35,10 @@
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
 
-#include <kmenu.h>
 #include <KLocalizedString>
-#include <QIcon>
 
+#include <QMenu>
+#include <QIcon>
 #include <QPainter>
 #include <QPixmap>
 #include <QContextMenuEvent>
@@ -95,7 +95,7 @@ void EntryIconView::slotDoubleClicked(const QModelIndex& index_) {
 }
 
 void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
-  KMenu menu(this);
+  QMenu menu(this);
 
   // only insert entry items if one is selected
   QModelIndex index = indexAt(ev_->pos());

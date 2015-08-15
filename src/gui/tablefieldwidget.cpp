@@ -30,8 +30,8 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kmenu.h>
 
+#include <QMenu>
 #include <QTableWidget>
 #include <QMouseEvent>
 #include <QEvent>
@@ -230,7 +230,7 @@ void TableFieldWidget::horizontalHeaderContextMenu(const QPoint& point_) {
   m_row = -1;
   m_col = col;
 
-  KMenu menu(this);
+  QMenu menu(this);
   menu.addAction(QIcon::fromTheme(QLatin1String("edit-rename")), i18n("Rename Column..."),
                  this, SLOT(slotRenameColumn()));
   menu.addAction(QIcon::fromTheme(QLatin1String("edit-clear")), i18n("Clear Table"),
@@ -249,7 +249,7 @@ void TableFieldWidget::verticalHeaderContextMenu(const QPoint& point_) {
  }
 
 void TableFieldWidget::makeRowContextMenu(const QPoint& point_) {
-  KMenu menu(this);
+  QMenu menu(this);
   menu.addAction(QIcon::fromTheme(QLatin1String("edit-table-insert-row-below")), i18n("Insert Row"),
                  this, SLOT(slotInsertRow()));
   menu.addAction(QIcon::fromTheme(QLatin1String("edit-table-delete-row")), i18n("Remove Row"),

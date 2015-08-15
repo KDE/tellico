@@ -30,7 +30,7 @@
 #include <QObject>
 #include <QList>
 
-class KMenu;
+class QMenu;
 
 namespace Tellico {
   class MainWindow;
@@ -62,11 +62,11 @@ public:
   /**
    * Plug the default collection actions into a widget
    */
-  void plugCollectionActions(KMenu* popup);
+  void plugCollectionActions(QMenu* popup);
   /**
    * Plug the default entry actions into a widget
    */
-  void plugEntryActions(KMenu* popup);
+  void plugEntryActions(QMenu* popup);
   void updateActions() const;
 
   /**
@@ -156,7 +156,7 @@ private:
 
   void blockAllSignals(bool block) const;
   bool canCheckIn() const;
-  void plugUpdateMenu(KMenu* popup);
+  void plugUpdateMenu(QMenu* popup);
 
   MainWindow* m_mainWindow;
 

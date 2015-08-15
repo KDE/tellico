@@ -36,10 +36,10 @@
 #include "models/models.h"
 #include "gui/countdelegate.h"
 
-#include <kmenu.h>
 #include <KLocalizedString>
-#include <QIcon>
 
+#include <QMenu>
+#include <QIcon>
 #include <QStringList>
 #include <QColor>
 #include <QRegExp>
@@ -262,7 +262,7 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
     return;
   }
 
-  KMenu menu(this);
+  QMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
     menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),

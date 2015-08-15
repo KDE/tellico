@@ -49,8 +49,9 @@
 #include <kmessagebox.h>
 #include <kaction.h>
 #include <kactionmenu.h>
-#include <kmenu.h>
 #include <ktabwidget.h>
+
+#include <QMenu>
 
 #include <unistd.h>
 
@@ -445,7 +446,7 @@ void Controller::editEntry(Tellico::Data::EntryPtr) const {
   m_mainWindow->slotShowEntryEditor();
 }
 
-void Controller::plugCollectionActions(KMenu* popup_) {
+void Controller::plugCollectionActions(QMenu* popup_) {
   if(!popup_) {
     return;
   }
@@ -455,7 +456,7 @@ void Controller::plugCollectionActions(KMenu* popup_) {
   popup_->addAction(m_mainWindow->action("change_entry_grouping"));
 }
 
-void Controller::plugEntryActions(KMenu* popup_) {
+void Controller::plugEntryActions(QMenu* popup_) {
   if(!popup_) {
     return;
   }
@@ -473,7 +474,7 @@ void Controller::plugEntryActions(KMenu* popup_) {
   popup_->addAction(m_mainWindow->m_checkOutEntry);
 }
 
-void Controller::plugUpdateMenu(KMenu* popup_) {
+void Controller::plugUpdateMenu(QMenu* popup_) {
   QMenu* updatePopup = 0;
   foreach(QAction* action, popup_->actions()) {
     if(action && action->text() == m_mainWindow->m_updateEntryMenu->text()) {
