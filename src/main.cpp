@@ -36,6 +36,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
   KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
                        QLatin1String(TELLICO_VERSION), i18n("Tellico - a collection manager for KDE"),
@@ -60,8 +61,6 @@ int main(int argc, char* argv[]) {
   aboutData.addLicense(KAboutLicense::GPL_V3);
 
   QCommandLineParser parser;
-  parser.addVersionOption();
-  parser.addHelpOption();
   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nofile"), i18n("Do not reopen the last open file")));
   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("bibtex"), i18n("Import <filename> as a bibtex file")));
   parser.addOption(QCommandLineOption(QStringList() << QLatin1String("mods"), i18n("Import <filename> as a MODS file")));
