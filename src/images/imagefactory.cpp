@@ -537,11 +537,10 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                           ? opt_.highlightedBaseColor
                           : Config::templateHighlightedBaseColor(collectionType_);
 
-  const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
-  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
-
   const QString bgname = QLatin1String("gradient_bg.png");
 #ifdef HAVE_QIMAGEBLITZ
+  const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
+  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
 #else
