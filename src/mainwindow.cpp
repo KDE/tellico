@@ -863,7 +863,7 @@ void MainWindow::saveOptions() {
   m_editDialog->saveDialogSize(editDialogConfig);
 
   saveCollectionOptions(Data::Document::self()->collection());
-  Config::self()->writeConfig();
+  Config::self()->save();
 }
 
 void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {

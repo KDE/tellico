@@ -904,7 +904,7 @@ void ConfigDialog::saveFetchConfig() {
     group = QString::fromLatin1("Data Source %1").arg(count);
   }
 
-  Config::self()->writeConfig();
+  Config::self()->save();
 
   if(reloadFetchers) {
     Fetch::Manager::self()->loadFetchers();
