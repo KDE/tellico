@@ -538,9 +538,8 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                           : Config::templateHighlightedBaseColor(collectionType_);
 
   const QString bgname = QLatin1String("gradient_bg.png");
-#ifdef HAVE_QIMAGEBLITZ
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
-  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
+#ifdef HAVE_QIMAGEBLITZ
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
                                    Blitz::PipeCrossGradient);
 #else
@@ -551,6 +550,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
 
   const QString hdrname = QLatin1String("gradient_header.png");
 #ifdef HAVE_QIMAGEBLITZ
+  const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
                                               Blitz::VerticalGradient, 100, -100);
 #else
