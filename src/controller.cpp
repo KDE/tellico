@@ -47,7 +47,6 @@
 
 #include <KLocalizedString>
 #include <kmessagebox.h>
-#include <kaction.h>
 #include <kactionmenu.h>
 #include <ktabwidget.h>
 

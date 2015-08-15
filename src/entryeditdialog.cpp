@@ -37,7 +37,6 @@
 #include <kmessagebox.h>
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>
-#include <kaction.h>
 #include <KSharedConfig>
 
 #include <QStringList>

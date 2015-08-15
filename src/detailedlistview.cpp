@@ -37,8 +37,6 @@
 #include "models/modelmanager.h"
 
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kaction.h>
 #include <kiconloader.h>
 #include <KSharedConfig>
 
