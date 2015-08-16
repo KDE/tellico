@@ -114,6 +114,12 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_btnDelete = new KPushButton(i18nc("Delete Field", "&Delete"), hb1);
   m_btnDelete->setIcon(KIcon(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
+  // KDE bug 351226, duplicate accelerator keys
+  // in order to avoid changing strings in the very stable branch, retain the english i18n
+  // but check if the text matches the english, and if so, remove the accelerator
+  if(m_btnDelete->text() == QLatin1String("&Delete")) {
+    m_btnDelete->setText(QLatin1String("Delete"));
+  }
 
   connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()) );
   connect(m_btnDelete, SIGNAL(clicked()), SLOT(slotDelete()));
@@ -229,6 +235,12 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   int valueRow = -1;
 
   label = new QLabel(i18n("&Default value:"), valueGroup);
+  // KDE bug 351226, duplicate accelerator keys
+  // in order to avoid changing strings in the very stable branch, retain the english i18n
+  // but check if the text matches the english, and if so, remove the accelerator
+  if(label->text() == QLatin1String("&Default value:")) {
+    label->setText(QLatin1String("Default value:"));
+  }
   valueLayout->addWidget(label, ++valueRow, 0);
   m_defaultEdit = new KLineEdit(valueGroup);
   valueLayout->addWidget(m_defaultEdit, valueRow, 1, 1, 3);
@@ -339,7 +351,7 @@ void CollectionFieldsDialog::setNotifyKernel(bool notify_) {
 void CollectionFieldsDialog::slotSelectInitial() {
   // the accel management is here so that it doesn't cause conflicts with the
   // ones explicitly set in the constructor
-  KAcceleratorManager::manage(mainWidget());
+  KAcceleratorManager::manage(this);
   m_fieldsWidget->setCurrentRow(0);
 }
 
