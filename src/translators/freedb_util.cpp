@@ -29,9 +29,8 @@
 #include "freedbimporter.h"
 #include "../tellico_debug.h"
 
-#include <kde_file.h>
-
 #include <QList>
+#include <qplatformdefs.h>
 
 using Tellico::Import::FreeDBImporter;
 
@@ -137,7 +136,7 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
 #ifdef ENABLE_CDTEXT
 // only works for linux ATM
 #if defined(__linux__)
-  int drive = KDE_open(drive_.data(), O_RDONLY | O_NONBLOCK);
+  int drive = QT_OPEN(drive_.data(), O_RDONLY | O_NONBLOCK);
   CloseDrive closer(drive);
   if(drive < 0) {
     return cdtext;
