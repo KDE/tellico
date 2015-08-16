@@ -33,7 +33,7 @@
 #include <QHash>
 #include <QLabel>
 
-class KLineEdit;
+class QLineEdit;
 class QCheckBox;
 class QStackedWidget;
 
@@ -71,7 +71,7 @@ private:
   bool m_useDefaultName : 1;
   Fetch::ConfigWidget* m_configWidget;
   QLabel* m_iconLabel;
-  KLineEdit* m_nameEdit;
+  QLineEdit* m_nameEdit;
   GUI::ComboBox* m_typeCombo;
   QCheckBox* m_cbOverwrite;
   QStackedWidget* m_stack;

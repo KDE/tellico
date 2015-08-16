@@ -30,9 +30,9 @@
 #include <kdialog.h>
 
 class KComboBox;
-class KLineEdit;
 class KPushButton;
 
+class QLineEdit;
 class QListWidget;
 class QRadioButton;
 class QCheckBox;
@@ -113,14 +113,14 @@ private:
   KPushButton* m_btnUp;
   KPushButton* m_btnDown;
 
-  KLineEdit* m_titleEdit;
+  QLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
   KComboBox* m_catCombo;
-  KLineEdit* m_descEdit;
-  KLineEdit* m_derivedEdit;
-  KLineEdit* m_defaultEdit;
+  QLineEdit* m_descEdit;
+  QLineEdit* m_derivedEdit;
+  QLineEdit* m_defaultEdit;
   QCheckBox* m_derived;
-  KLineEdit* m_allowEdit;
+  QLineEdit* m_allowEdit;
   KPushButton* m_btnExtended;
 
   GUI::ComboBox* m_formatCombo;

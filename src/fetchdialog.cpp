@@ -50,7 +50,6 @@
 #endif
 
 #include <KLocalizedString>
-#include <klineedit.h>
 #include <kpushbutton.h>
 #include <kstatusbar.h>
 #include <khtmlview.h>
@@ -61,6 +60,7 @@
 #include <ktextedit.h>
 #include <kmessagebox.h>
 
+#include <QLineEdit>
 #include <QGroupBox>
 #include <QSplitter>
 #include <QTimer>
@@ -147,7 +147,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QLabel* label = new QLabel(i18nc("Start the search", "S&earch:"), box1);
   box1HBoxLayout->addWidget(label);
 
-  m_valueLineEdit = new KLineEdit(box1);
+  m_valueLineEdit = new QLineEdit(box1);
   box1HBoxLayout->addWidget(m_valueLineEdit);
   label->setBuddy(m_valueLineEdit);
   m_valueLineEdit->setWhatsThis(i18n("Enter a search value. An ISBN search must include the full ISBN."));

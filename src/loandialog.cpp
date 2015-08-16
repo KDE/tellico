@@ -34,7 +34,7 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <klineedit.h>
+#include <KLineEdit>
 #include <kpushbutton.h>
 #include <ktextedit.h>
 #include <kiconloader.h>
@@ -117,7 +117,7 @@ void LoanDialog::init() {
 
   QLabel* l = new QLabel(i18n("&Lend to:"), mainWidget);
   topLayout->addWidget(l, ++row, 0);
-  m_borrowerEdit = new KLineEdit(mainWidget);
+  m_borrowerEdit = new KLineEdit(mainWidget); //krazy:exclude=qclasses
   topLayout->addWidget(m_borrowerEdit, row, 1);
   l->setBuddy(m_borrowerEdit);
   m_borrowerEdit->completionObject()->setIgnoreCase(true);

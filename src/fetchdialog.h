@@ -27,7 +27,7 @@
 
 #include "datavectors.h"
 
-#include <kdialog.h>
+#include <KDialog>
 
 #include <QPointer>
 #include <QEvent>
@@ -51,11 +51,11 @@ namespace barcodeRecognition {
 }
 
 class KComboBox;
-class KLineEdit;
 class KPushButton;
 class KStatusBar;
 class KTextEdit;
 
+class QLineEdit;
 class QLabel;
 class QProgressBar;
 class QTimer;
@@ -120,7 +120,7 @@ private:
 
   KComboBox* m_sourceCombo;
   GUI::ComboBox* m_keyCombo;
-  KLineEdit* m_valueLineEdit;
+  QLineEdit* m_valueLineEdit;
   KPushButton* m_searchButton;
   QCheckBox* m_multipleISBN;
   KPushButton* m_editISBN;

@@ -36,12 +36,11 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <klineedit.h>
-#include <kiconloader.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 #include <kacceleratormanager.h>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -158,7 +157,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   int row = -1;
   QLabel* label = new QLabel(i18n("&Title:"), grid);
   layout->addWidget(label, ++row, 0);
-  m_titleEdit = new KLineEdit(grid);
+  m_titleEdit = new QLineEdit(grid);
   layout->addWidget(m_titleEdit, row, 1);
   label->setBuddy(m_titleEdit);
   QString whats = i18n("The title of the field");
@@ -224,7 +223,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   label = new QLabel(i18n("Description:"), grid);
   layout->addWidget(label, ++row, 0);
-  m_descEdit = new KLineEdit(grid);
+  m_descEdit = new QLineEdit(grid);
   m_descEdit->setMinimumWidth(150);
   layout->addWidget(m_descEdit, row, 1, 1, 3);
   label->setBuddy(m_descEdit);
@@ -241,7 +240,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   label = new QLabel(i18n("Default value:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
-  m_defaultEdit = new KLineEdit(valueGroup);
+  m_defaultEdit = new QLineEdit(valueGroup);
   valueLayout->addWidget(m_defaultEdit, valueRow, 1, 1, 3);
   label->setBuddy(m_defaultEdit);
   whats = i18n("<qt>A default value can be set for new entries.</qt>");
@@ -251,7 +250,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   label = new QLabel(i18n("Value template:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
-  m_derivedEdit = new KLineEdit(valueGroup);
+  m_derivedEdit = new QLineEdit(valueGroup);
   m_derivedEdit->setMinimumWidth(150);
   valueLayout->addWidget(m_derivedEdit, valueRow, 1);
   label->setBuddy(m_derivedEdit);
@@ -271,7 +270,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   label = new QLabel(i18n("A&llowed values:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
-  m_allowEdit = new KLineEdit(valueGroup);
+  m_allowEdit = new QLineEdit(valueGroup);
   valueLayout->addWidget(m_allowEdit, valueRow, 1, 1, 3);
   label->setBuddy(m_allowEdit);
   whats = i18n("<qt>For <i>Choice</i>-type fields, these are the only values allowed. They are "

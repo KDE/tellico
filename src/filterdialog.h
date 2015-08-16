@@ -43,6 +43,7 @@ class KDateComboBox;
 class QRadioButton;
 class QDialog;
 class QStackedWidget;
+class QLineEdit;
 
 namespace Tellico {
   namespace GUI {
@@ -185,7 +186,7 @@ private:
   QRadioButton* m_matchAll;
   QRadioButton* m_matchAny;
   FilterRuleWidgetLister* m_ruleLister;
-  KLineEdit* m_filterName;
+  QLineEdit* m_filterName;
   KPushButton* m_saveFilter;
 };
 

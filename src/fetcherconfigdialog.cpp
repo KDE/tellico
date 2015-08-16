@@ -29,10 +29,10 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <klineedit.h>
 #include <kcombobox.h>
 #include <kiconloader.h>
 
+#include <QLineEdit>
 #include <QLabel>
 #include <QLayout>
 #include <QStackedWidget>
@@ -102,7 +102,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   QString w = i18n("The name identifies the data source and should be unique and informative.");
   label->setWhatsThis(w);
 
-  m_nameEdit = new KLineEdit(widget);
+  m_nameEdit = new QLineEdit(widget);
   gl->addWidget(m_nameEdit, row, 1);
   m_nameEdit->setFocus();
   m_nameEdit->setWhatsThis(w);

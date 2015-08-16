@@ -35,7 +35,7 @@
 
 using Tellico::GUI::LineEdit;
 
-LineEdit::LineEdit(QWidget* parent_) : KLineEdit(parent_)
+LineEdit::LineEdit(QWidget* parent_) : KLineEdit(parent_) //krazy:exclude=qclasses
     , m_allowSpellCheck(false)
     , m_enableSpellCheck(true)
     , m_sonnetDialog(0) {

@@ -34,12 +34,11 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kcombobox.h>
-#include <klineedit.h>
-#include <kpushbutton.h>
+#include <KComboBox>
+#include <KLineEdit>
+#include <KPushButton>
 #include <kservicetypetrader.h>
 #include <kregexpeditorinterface.h>
-#include <kiconloader.h>
 #include <kdatecombobox.h>
 
 #include <QLayout>
@@ -98,7 +97,7 @@ void FilterRuleWidget::initWidget() {
   m_valueStack = new QStackedWidget(this);
   layout()->addWidget(m_valueStack);
 
-  m_ruleValue = new KLineEdit(m_valueStack);
+  m_ruleValue = new KLineEdit(m_valueStack); //krazy:exclude=qclasses
   connect(m_ruleValue, SIGNAL(textChanged(const QString&)), SIGNAL(signalModified()));
   m_valueStack->addWidget(m_ruleValue);
 
@@ -413,7 +412,7 @@ void FilterDialog::init() {
   QLabel* lab = new QLabel(i18n("Filter name:"), page);
   blay->addWidget(lab);
 
-  m_filterName = new KLineEdit(page);
+  m_filterName = new QLineEdit(page);
   blay->addWidget(m_filterName);
   connect(m_filterName, SIGNAL(textChanged(const QString&)), SLOT(slotFilterChanged()));
 

@@ -83,7 +83,7 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_)
   connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
           SLOT(updateEdit(QTreeWidgetItem*)));
 
-  m_lineEdit = new KLineEdit(mainWidget);
+  m_lineEdit = new KLineEdit(mainWidget); //krazy:exclude=qclasses
   topLayout->addWidget(m_lineEdit);
   connect(m_lineEdit->completionObject(), SIGNAL(match(const QString&)),
           SLOT(selectItem(const QString&)));

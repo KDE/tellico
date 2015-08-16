@@ -45,7 +45,7 @@ namespace Tellico {
 class Field : public QSharedData {
 public:
   /**
-   * The possible field types. A Line is represented by a KLineEdit,
+   * The possible field types. A Line is represented by a QLineEdit,
    * a Para is a QMultiLineEdit encompassing multiple lines, a Choice is
    * limited to set values shown in a KComboBox, and a Bool is either true
    * or not and is thus a QCheckBox. A Number type is an integer, though it used

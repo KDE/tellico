@@ -26,7 +26,7 @@
 #include "../field.h"
 #include "../tellico_kernel.h"
 
-#include <klineedit.h>
+#include <KLineEdit>
 #include <kurlrequester.h>
 #include <kurllabel.h>
 

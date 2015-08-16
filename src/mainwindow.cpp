@@ -653,8 +653,8 @@ void MainWindow::initActions() {
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_F);
 
   m_quickFilter = new GUI::LineEdit(this);
-  m_quickFilter->setClickMessage(i18n("Filter here...")); // same text as kdepim and amarok
-  m_quickFilter->setClearButtonShown(true);
+  m_quickFilter->setPlaceholderText(i18n("Filter here...")); // same text as kdepim and amarok
+  m_quickFilter->setClearButtonEnabled(true);
   // same as Dolphin text edit
   m_quickFilter->setMinimumWidth(150);
   m_quickFilter->setMaximumWidth(300);

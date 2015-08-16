@@ -45,7 +45,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class LineEdit : public KLineEdit {
+class LineEdit : public KLineEdit { //krazy:exclude=qclasses
 Q_OBJECT
 
 public:
