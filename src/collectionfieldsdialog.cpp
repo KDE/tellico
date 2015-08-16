@@ -113,7 +113,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   hb1HBoxLayout->addWidget(m_btnNew);
   m_btnNew->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   m_btnNew->setWhatsThis(i18n("Add a new field to the collection"));
-  m_btnDelete = new KPushButton(i18nc("Delete Field", "&Delete"), hb1);
+  m_btnDelete = new KPushButton(i18nc("Delete Field", "Delete"), hb1);
   hb1HBoxLayout->addWidget(m_btnDelete);
   m_btnDelete->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
@@ -239,7 +239,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   QGridLayout* valueLayout = new QGridLayout(valueGroup);
   int valueRow = -1;
 
-  label = new QLabel(i18n("&Default value:"), valueGroup);
+  label = new QLabel(i18n("Default value:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
   m_defaultEdit = new KLineEdit(valueGroup);
   valueLayout->addWidget(m_defaultEdit, valueRow, 1, 1, 3);
@@ -351,7 +351,7 @@ void CollectionFieldsDialog::setNotifyKernel(bool notify_) {
 void CollectionFieldsDialog::slotSelectInitial() {
   // the accel management is here so that it doesn't cause conflicts with the
   // ones explicitly set in the constructor
-  KAcceleratorManager::manage(mainWidget());
+  KAcceleratorManager::manage(this);
   m_fieldsWidget->setCurrentRow(0);
 }
 
