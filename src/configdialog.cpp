@@ -68,7 +68,6 @@
 #include <QCheckBox>
 #include <QPixmap>
 #include <QRegExp>
-#include <QPushButton>
 #include <QFileInfo>
 #include <QRadioButton>
 #include <QFrame>

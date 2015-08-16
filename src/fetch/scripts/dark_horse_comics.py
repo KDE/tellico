@@ -193,7 +193,7 @@ class BasicTellicoDOM:
 		try:
 			print nEntry.toxml()
 		except:
-			print sys.stderr, "Error while outputing XML content from entry to Tellico"
+			print sys.stderr, "Error while outputting XML content from entry to Tellico"
 
 	def printXMLTree(self):
 		"""
@@ -412,7 +412,7 @@ class DarkHorseParser:
 		# Get all links
 		links = self.__fetchMovieLinks()
 
-		# Now retrieve infos
+		# Now retrieve info
 		if links:
 			for entry in links:
 				data = self.__fetchMovieInfo( url = self.__movieURL + entry )

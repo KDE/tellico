@@ -92,7 +92,7 @@ void DocumentTest::testImageLocalDirectory() {
   /*************************************************************************/
   /* now also verify image directory when file name has multiple periods */
   /* see https://bugs.kde.org/show_bug.cgi?id=348088 */
-  /* also have to check backwards compatability with prior behavior */
+  /* also have to check backwards compatibility with prior behavior */
   /*************************************************************************/
 
   QString fileName2 = tempDirName + "/with-image.1.tc";

@@ -50,7 +50,7 @@
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
   static const char* THEMOVIEDB_API_URL = "http://api.themoviedb.org";
-  static const char* THEMOVIEDB_API_VERSION = "3";
+  static const char* THEMOVIEDB_API_VERSION = "3"; // krazy:exclude=doublequote_chars
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
 }
 

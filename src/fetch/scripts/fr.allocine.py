@@ -436,7 +436,7 @@ class AlloCineParser:
 		# Get all links
 		links = self.__fetchMovieLinks(title)
 
-		# Now retrieve infos
+		# Now retrieve info
 		if links:
 			for entry in links:
 				data = self.__fetchMovieInfo( url = "%s=%s" % (self.__movieURL, entry[0]), url2 = "%s=%s" % (self.__castURL, entry[0]) )

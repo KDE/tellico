@@ -241,7 +241,7 @@ class BasicTellicoDOM:
 		try:
 			print nEntry.toxml()
 		except:
-			print sys.stderr, "Error while outputing XML content from entry to Tellico"
+			print sys.stderr, "Error while outputting XML content from entry to Tellico"
 
 	def printXMLTree(self):
 		"""
@@ -510,7 +510,7 @@ Tellico cannot connect to: http://www.mcu.es/comun/bases/isbn/ISBN.htm webpage:
 		# Get all links
 		links = self.__fetchBookLinks()
 
-		# Now retrieve infos
+		# Now retrieve info
 		if links:
 			for entry in links:
 				data = self.__fetchBookInfo( url = self.__baseURL + entry.replace(' ', '%20') )

@@ -183,7 +183,7 @@ void VNDBFetcher::slotComplete() {
   // remove the late hex character
   data.chop(1);
 
-  if(data.startsWith("error")) {
+  if(data.startsWith("error")) { //krazy:exclude=strings
     QJsonDocument doc = QJsonDocument::fromJson(data.mid(5));
     QVariantMap result = doc.object().toVariantMap();
     if(result.contains(QLatin1String("msg"))) {
@@ -196,7 +196,7 @@ void VNDBFetcher::slotComplete() {
 
 //  myDebug() << data;
   if(m_state == PreLogin) {
-    if(data.startsWith("ok")) {
+    if(data.startsWith("ok")) { //krazy:exclude=strings
       m_state = PostLogin;
     } else {
       stop();
@@ -204,7 +204,7 @@ void VNDBFetcher::slotComplete() {
     return;
   }
 
-  if(!data.startsWith("results")) {
+  if(!data.startsWith("results")) { //krazy:exclude=strings
     myDebug() << "Expecting results!";
     stop();
     return;
