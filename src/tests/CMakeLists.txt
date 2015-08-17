@@ -216,11 +216,15 @@ add_test(ciwtest ciwtest)
 ecm_mark_as_test(ciwtest)
 TARGET_LINK_LIBRARIES(ciwtest ${TELLICO_TEST_LIBS})
 
-#add_executable(csvtest csvtest.cpp)
-#ecm_mark_nongui_executable(csvtest)
-#add_test(csvtest csvtest)
-#ecm_mark_as_test(csvtest)
-#TARGET_LINK_LIBRARIES(csvtest ${TELLICO_CSV_LIBS} ${TELLICO_TEST_LIBS})
+add_executable(csvtest csvtest.cpp
+  ../translators/csvparser.cpp
+  ../translators/csvexporter.cpp
+  ../translators/exporter.cpp
+)
+ecm_mark_nongui_executable(csvtest)
+add_test(csvtest csvtest)
+ecm_mark_as_test(csvtest)
+TARGET_LINK_LIBRARIES(csvtest ${TELLICO_CSV_LIBS} translatorstest ${TELLICO_TEST_LIBS})
 
 add_executable(delicioustest delicioustest.cpp
   ../translators/deliciousimporter.cpp

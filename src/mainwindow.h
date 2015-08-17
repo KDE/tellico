@@ -80,9 +80,6 @@ namespace Tellico {
  * and statusbar. Tellico reimplements the methods that KMainWindow provides
  * for main window handling and supports full session management as well as
  * using QActions.
- * @see KMainWindow
- * @see KApplication
- * @see KConfig
  *
  * @author Robby Stephenson
  */
