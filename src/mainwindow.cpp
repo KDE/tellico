@@ -75,7 +75,6 @@
 #include <kcombobox.h>
 #include <kiconloader.h>
 #include <kfiledialog.h>
-#include <kmenubar.h>
 #include <ktoolbar.h>
 #include <KLocalizedString>
 #include <kconfig.h>
@@ -94,8 +93,6 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <KShortcutsDialog>
-#include <KIcon>
-#include <KAction>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -106,6 +103,7 @@
 #include <QMetaObject> // needed for copy, cut, paste slots
 #include <QMimeDatabase>
 #include <QMimeType>
+#include <QMenuBar>
 
 #include <unistd.h>
 
@@ -164,7 +162,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   Kernel::init(this); // the only time this is ever called!
   GUI::Proxy::setMainWidget(this);
 
-  setWindowIcon(DesktopIcon(QLatin1String("tellico")));
+  setWindowIcon(QIcon::fromTheme(QLatin1String("tellico")));
 
   // initialize the status bar and progress bar
   initStatusBar();
