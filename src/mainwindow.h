@@ -43,7 +43,6 @@ class KToggleAction;
 class KRecentFilesAction;
 class KActionMenu;
 class KDialogBase;
-class KTabWidget;
 
 class QCloseEvent;
 class QSplitter;
@@ -53,6 +52,7 @@ namespace Tellico {
 // forward declarations
   namespace GUI {
     class LineEdit;
+    class TabWidget;
   }
   class Controller;
   class ViewStack;
@@ -501,7 +501,7 @@ private:
 
   DetailedListView* m_detailedView;
   EntryEditDialog* m_editDialog;
-  KTabWidget* m_viewTabs;
+  GUI::TabWidget* m_viewTabs;
   GroupView* m_groupView;
   FilterView* m_filterView;
   LoanView* m_loanView;

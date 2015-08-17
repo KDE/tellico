@@ -24,10 +24,12 @@
 
 #include "tabwidget.h"
 
+#include <QTabBar>
+
 using Tellico::GUI::TabWidget;
 
 TabWidget::TabWidget(QWidget* parent_)
-    : KTabWidget(parent_) {
+    : QTabWidget(parent_) {
 }
 
 void TabWidget::setFocusToFirstChild() {
@@ -42,3 +44,8 @@ void TabWidget::setFocusToFirstChild() {
   }
 }
 
+void TabWidget::setTabBarHidden(bool hide_) {
+  QTabBar* tabBar = findChild<QTabBar *>();
+  Q_ASSERT(tabBar);
+  tabBar->setHidden(hide_);
+}

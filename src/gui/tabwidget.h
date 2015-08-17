@@ -25,7 +25,7 @@
 #ifndef TELLICO_GUI_TABWIDGET_H
 #define TELLICO_GUI_TABWIDGET_H
 
-#include <KTabWidget>
+#include <QTabWidget>
 
 namespace Tellico {
   namespace GUI {
@@ -33,7 +33,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class TabWidget : public KTabWidget {
+class TabWidget : public QTabWidget {
 Q_OBJECT
 
 public:
@@ -46,6 +46,7 @@ public:
    * Sets the focus to the first focusable widget on the current page.
    */
   void setFocusToFirstChild();
+  void setTabBarHidden(bool hide);
 };
 
   } // end namespace

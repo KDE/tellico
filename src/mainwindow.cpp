@@ -67,6 +67,7 @@
 #include "newstuff/manager.h"
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
+#include "gui/tabwidget.h"
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
 #include "tellico_debug.h"
@@ -93,7 +94,6 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <KShortcutsDialog>
-#include <KTabWidget>
 #include <KIcon>
 #include <KAction>
 
@@ -713,7 +713,7 @@ void MainWindow::initView() {
   m_split = new QSplitter(Qt::Horizontal, this);
   setCentralWidget(m_split);
 
-  m_viewTabs = new KTabWidget(m_split);
+  m_viewTabs = new GUI::TabWidget(m_split);
   m_viewTabs->setTabBarHidden(true);
   m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);

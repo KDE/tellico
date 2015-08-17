@@ -43,12 +43,12 @@
 #include "entrymerger.h"
 #include "utils/cursorsaver.h"
 #include "gui/lineedit.h"
+#include "gui/tabwidget.h"
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
 #include <kmessagebox.h>
 #include <kactionmenu.h>
-#include <ktabwidget.h>
 
 #include <QMenu>
 
