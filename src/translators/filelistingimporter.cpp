@@ -40,7 +40,6 @@
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
-#include <KIconLoader>
 #include <KLocalizedString>
 #include <KJobWidgets/KJobWidgets>
 
@@ -190,10 +189,10 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     if(!m_cancelled && usePreview) {
       m_pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
       if(m_pixmap.isNull()) {
-        m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
+        m_pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
       }
     } else {
-      m_pixmap = KIconLoader::global()->loadMimeTypeIcon(item.iconName(), KIconLoader::Desktop);
+      m_pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
     }
 
     if(!m_pixmap.isNull()) {

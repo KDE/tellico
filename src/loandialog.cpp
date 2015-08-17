@@ -37,7 +37,6 @@
 #include <KLineEdit>
 #include <kpushbutton.h>
 #include <ktextedit.h>
-#include <kiconloader.h>
 #include <KJob>
 #include <KSharedConfig>
 #ifdef HAVE_KABC
@@ -93,7 +92,7 @@ void LoanDialog::init() {
   int row = -1;
 
   QLabel* pixLabel = new QLabel(mainWidget);
-  pixLabel->setPixmap(DesktopIcon(QLatin1String("tellico"), 64));
+  pixLabel->setPixmap(QIcon::fromTheme(QLatin1String("tellico")).pixmap(QSize(32, 32)));
   pixLabel->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::AlignTop);
   topLayout->addWidget(pixLabel, ++row, 0);
 

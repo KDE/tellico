@@ -25,7 +25,6 @@
 #include "stringmapdialog.h"
 
 #include <KLocalizedString>
-#include <kiconloader.h>
 #include <kdialogbuttonbox.h>
 
 #include <QTreeWidget>

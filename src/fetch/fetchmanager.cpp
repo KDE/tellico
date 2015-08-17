@@ -458,9 +458,8 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
 // TODO: uncomment this when the fetcher tests can link to z3950fetcher and execexternalfetcher
-/*
-#ifdef HAVE_YAZ
   if(fetcher_->type() == Fetch::Z3950) {
+#ifdef HAVE_YAZ
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
     QUrl u;
     u.setScheme(QLatin1String("http"));
@@ -469,8 +468,9 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     if(u.isValid() && !icon.isEmpty()) {
       return LOAD_ICON(icon, group_, size_);
     }
-  } else
 #endif
+/*
+  } else
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
@@ -492,8 +492,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
         return LOAD_ICON(icon, group_, size_);
       }
     }
-  }
 */
+  }
   return fetcherIcon(fetcher_->type(), group_, size_);
 }
 

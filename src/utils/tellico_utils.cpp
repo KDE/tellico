@@ -25,9 +25,9 @@
 #include "tellico_utils.h"
 #include "string_utils.h"
 
-#include <KIconLoader>
 #include <KIO/FileCopyJob>
 
+#include <QIcon>
 #include <QStandardPaths>
 #include <QDir>
 #include <QPixmap>
@@ -111,7 +111,7 @@ const QPixmap& Tellico::pixmap(const QString& value_) {
   }
 
   QString picName = QString::fromLatin1("stars%1").arg(n);
-  QPixmap* pix = new QPixmap(UserIcon(picName));
+  QPixmap* pix = new QPixmap(QIcon::fromTheme(picName).pixmap(QSize(16, 16)));
   pixmaps.insert(n, pix);
   return *pix;
 }

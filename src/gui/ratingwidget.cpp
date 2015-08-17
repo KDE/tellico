@@ -27,8 +27,6 @@
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
-#include <KIconLoader>
-
 #include <QHash>
 #include <QPixmap>
 #include <QBoxLayout>
@@ -49,8 +47,8 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   layout->setMargin(0);
   layout->setSpacing(0);
 
-  m_pixOn = UserIcon(QLatin1String("star_on"));
-  m_pixOff = UserIcon(QLatin1String("star_off"));
+  m_pixOn = QIcon::fromTheme(QLatin1String("star_on")).pixmap(QSize(18, 18));
+  m_pixOff = QIcon::fromTheme(QLatin1String("star_off")).pixmap(QSize(18, 18));
 
   // find maximum width and height
   int w = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.width(), m_pixOff.width()));
@@ -64,9 +62,9 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
 
   m_clearButton = new QToolButton(this);
   if(layoutDirection() == Qt::LeftToRight) {
-    m_clearButton->setIcon(SmallIcon(QLatin1String("edit-clear-locationbar-rtl")));
+    m_clearButton->setIcon(QIcon::fromTheme(QLatin1String("edit-clear-locationbar-rtl")));
   } else {
-    m_clearButton->setIcon(SmallIcon(QLatin1String("edit-clear-locationbar-ltr")));
+    m_clearButton->setIcon(QIcon::fromTheme(QLatin1String("edit-clear-locationbar-ltr")));
   }
   connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearClicked()));
   layout->addWidget(m_clearButton);

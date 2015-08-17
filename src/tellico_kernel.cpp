@@ -46,7 +46,6 @@
 #include "utils/cursorsaver.h"
 
 #include <kmessagebox.h>
-#include <kiconloader.h>
 #include <KLocalizedString>
 
 #include <QInputDialog>

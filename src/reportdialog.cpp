@@ -41,7 +41,6 @@
 #include <khtml_part.h>
 #include <khtmlview.h>
 #include <kpushbutton.h>
-#include <kiconloader.h>
 #include <kfiledialog.h>
 
 #include <QFile>
