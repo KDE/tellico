@@ -215,7 +215,11 @@ void CrossRefFetcher::initXSLTHandler() {
   QString xsltfile = KStandardDirs::locate("appdata", QLatin1String("crossref2tellico.xsl"));
 #endif
   if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate xslt file.";
+#ifdef CROSSREF_USE_UNIXREF
+    myWarning() << "can not locate xslt file: unixref2tellico.xsl";
+#else
+    myWarning() << "can not locate xslt file: crossref2tellico.xsl";
+#endif
     return;
   }
 
@@ -258,7 +262,7 @@ KUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
 #ifdef CROSSREF_TEST
   u = KUrl("/home/robby/crossref.xml");
 #endif
-  myDebug() << "url: " << u.url();
+//  myDebug() << "url: " << u.url();
   return u;
 }
 
