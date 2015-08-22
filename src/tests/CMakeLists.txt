@@ -147,6 +147,9 @@ TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(citebasefetchertest NOGUI citebasefetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(citebasefetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(crossreffetchertest NOGUI crossreffetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(crossreffetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(darkhorsefetchertest NOGUI darkhorsefetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(darkhorsefetchertest fetch ${TELLICO_TEST_LIBS})
 

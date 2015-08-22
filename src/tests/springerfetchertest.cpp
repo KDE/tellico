@@ -43,7 +43,6 @@ SpringerFetcherTest::SpringerFetcherTest() : AbstractFetcherTest() {
 void SpringerFetcherTest::initTestCase() {
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
-//  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 
   m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.1007/BF02174211"));
 //  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
