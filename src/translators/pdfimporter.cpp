@@ -45,6 +45,7 @@
 
 #include <QString>
 #include <QPixmap>
+#include <QFile>
 
 #include <config.h>
 #ifdef HAVE_POPPLER
@@ -110,7 +111,16 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       setStatusMessage(i18n("Tellico was unable to read any metadata from the PDF file."));
     } else {
       setStatusMessage(QString());
-
+#if 0
+      myWarning() << "Remove debug from pdfimporter.cpp";
+      QFile f(QString::fromLatin1("/tmp/test-xmp.xml"));
+      if(f.open(QIODevice::WriteOnly)) {
+        QTextStream t(&f);
+        t.setCodec("UTF-8");
+        t << xmp;
+      }
+      f.close();
+#endif
       Import::TellicoImporter importer(xsltHandler.applyStylesheet(xmp));
       newColl = importer.collection();
       if(!newColl || newColl->entryCount() == 0) {
@@ -217,8 +227,9 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
 
     QPixmap pix = NetAccess::filePreview(ref->fileName(), PDF_FILE_PREVIEW_SIZE);
-
-    if(!pix.isNull()) {
+    if(pix.isNull()) {
+//      myDebug() << "No file preview from pdf";
+    } else {
       // is png best option?
       QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
       if(!id.isEmpty()) {
@@ -250,7 +261,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   if(hasDOI) {
     Fetch::FetcherVec vec = Fetch::Manager::self()->createUpdateFetchers(coll->type(), Fetch::DOI);
-    if(vec.isEmpty()) {
+    if(vec.isEmpty() && GUI::Proxy::widget()) {
       GUI::CursorSaver cs(Qt::ArrowCursor);
       KMessageBox::information(GUI::Proxy::widget(),
                               i18n("Tellico is able to download information about entries with a DOI from "

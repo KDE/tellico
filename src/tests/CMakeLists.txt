@@ -105,14 +105,17 @@ TARGET_LINK_LIBRARIES(gcstartest ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(griffithtest NOGUI griffithtest.cpp)
 TARGET_LINK_LIBRARIES(griffithtest ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(modstest NOGUI modstest.cpp)
+TARGET_LINK_LIBRARIES(modstest ${TELLICO_TEST_LIBS})
+
+KDE4_ADD_UNIT_TEST(pdftest NOGUI pdftest.cpp  ../entryupdatejob.cpp)
+TARGET_LINK_LIBRARIES(pdftest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(referencertest NOGUI referencertest.cpp)
 TARGET_LINK_LIBRARIES(referencertest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(ristest NOGUI ristest.cpp)
 TARGET_LINK_LIBRARIES(ristest ${TELLICO_TEST_LIBS})
-
-KDE4_ADD_UNIT_TEST(modstest NOGUI modstest.cpp)
-TARGET_LINK_LIBRARIES(modstest ${TELLICO_TEST_LIBS})
 
 KDE4_ADD_UNIT_TEST(tellicoreadtest NOGUI tellicoreadtest.cpp)
 TARGET_LINK_LIBRARIES(tellicoreadtest tellicomodels ${TELLICO_TEST_LIBS})

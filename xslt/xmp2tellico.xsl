@@ -4,6 +4,7 @@
                 xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
                 xmlns:jabref="http://jabref.sourceforge.net/bibteXMP/"
+                xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
                 xmlns:str="http://exslt.org/strings"
                 xmlns:m="uri:months"
                 extension-element-prefixes="str"
@@ -57,6 +58,9 @@
   <collection title="XMP Conversion" type="5">
    <fields>
     <field name="_default"/>
+    <xsl:if test=".//prism:issn">
+     <field flags="0" title="ISSN" category="Publishing" format="4" type="1" name="issn" i18n="true"/>
+    </xsl:if>
    </fields>
    <xsl:apply-templates select=".//rdf:RDF"/>
   </collection>
@@ -86,6 +90,15 @@
  </authors>
 </xsl:template>
 
+<xsl:template match="dc:publisher">
+ <publishers>
+  <xsl:call-template name="multiple-values">
+   <xsl:with-param name="value" select="."/>
+   <xsl:with-param name="field" select="'publisher'"/>
+  </xsl:call-template>
+ </publishers>
+</xsl:template>
+
 <xsl:template match="dc:subject">
  <keywords>
   <xsl:call-template name="multiple-values">
@@ -95,7 +108,7 @@
  </keywords>
 </xsl:template>
 
-<xsl:template match="dc:date">
+<xsl:template match="dc:date|prism:coverDate">
  <xsl:variable name="tokens" select="str:tokenize(., '-')"/>
  <year><xsl:value-of select="normalize-space($tokens[1])"/></year>
  <month><xsl:value-of select="normalize-space($tokens[2])"/></month>
@@ -103,8 +116,8 @@
 
 <xsl:template match="dc:identifier">
  <!-- assume DOI requires a period and a slash -->
- <xsl:if test="not(//jabref:doi) and
-               (contains(.,'.') and contains(.,'/'))">
+ <xsl:if test="not(//jabref:doi) and not(//prism:doi) and
+               contains(.,'.') and contains(.,'/')">
   <doi><xsl:value-of select="normalize-space(.)"/></doi>
  </xsl:if>
 </xsl:template>
@@ -129,7 +142,7 @@
  <bibtex-key><xsl:value-of select="normalize-space(.)"/></bibtex-key>
 </xsl:template>
 
-<xsl:template match="jabref:journal">
+<xsl:template match="jabref:journal|prism:publicationName">
  <journal><xsl:value-of select="normalize-space(.)"/></journal>
 </xsl:template>
 
@@ -137,8 +150,20 @@
  <url><xsl:value-of select="normalize-space(.)"/></url>
 </xsl:template>
 
-<xsl:template match="jabref:doi">
+<xsl:template match="jabref:doi|prism:doi">
  <doi><xsl:value-of select="normalize-space(.)"/></doi>
+</xsl:template>
+
+<xsl:template match="prism:volume">
+ <volume><xsl:value-of select="normalize-space(.)"/></volume>
+</xsl:template>
+
+<xsl:template match="prism:pageRange">
+ <pages><xsl:value-of select="normalize-space(.)"/></pages>
+</xsl:template>
+
+<xsl:template match="prism:issn">
+ <issn><xsl:value-of select="normalize-space(.)"/></issn>
 </xsl:template>
 
 <xsl:template name="multiple-values">
