@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,67 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "wallet.h"
-#include "guiproxy.h"
+#ifndef PDFTEST_H
+#define PDFTEST_H
 
-#include <kwallet.h>
+#include <QObject>
 
-#include <QWidget>
+class PdfTest : public QObject {
+Q_OBJECT
 
-using Tellico::Wallet;
+private Q_SLOTS:
+  void initTestCase();
+  void testScienceDirect();
+};
 
-Tellico::Wallet* Wallet::self() {
-  static Wallet wallet;
-  return &wallet;
-}
-
-Wallet::Wallet() : m_wallet(0) {
-}
-
-bool Wallet::prepareWallet() {
-  if(GUI::Proxy::widget() && (!m_wallet || !m_wallet->isOpen())) {
-    delete m_wallet;
-    m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), GUI::Proxy::widget()->effectiveWinId());
-  }
-  if(!m_wallet || !m_wallet->isOpen()) {
-    delete m_wallet;
-    m_wallet = 0;
-    return false;
-  }
-
-  if(!m_wallet->hasFolder(KWallet::Wallet::PasswordFolder()) &&
-     !m_wallet->createFolder(KWallet::Wallet::PasswordFolder())) {
-    return false;
-  }
-
-  return m_wallet->setFolder(KWallet::Wallet::PasswordFolder());
-}
-
-QByteArray Wallet::readWalletEntry(const QString& key_) {
-  QByteArray value;
-
-  if(!prepareWallet()) {
-    return value;
-  }
-
-  if(m_wallet->readEntry(key_, value) != 0) {
-    return QByteArray();
-  }
-
-  return value;
-}
-
-QMap<QString, QString> Wallet::readWalletMap(const QString& key_) {
-  QMap<QString, QString> map;
-
-  if(!prepareWallet()) {
-    return map;
-  }
-
-  if(m_wallet->readMap(key_, map) != 0) {
-    return QMap<QString, QString>();
-  }
-
-  return map;
-}
-
+#endif

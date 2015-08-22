@@ -43,6 +43,7 @@ SET(XSLT_FILES
     tellico-printing.xsl
     thegamesdb2tellico.xsl
     UNIMARC2MODS3.xsl
+    unixref2tellico.xsl
     vhs-logo.png
     vinoxml2tellico.xsl
     welcome.html

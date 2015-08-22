@@ -322,9 +322,6 @@ add_test(vinoxmltest vinoxmltest)
 ecm_mark_as_test(vinoxmltest)
 TARGET_LINK_LIBRARIES(vinoxmltest translatorstest ${TELLICO_TEST_LIBS})
 
-# fetcher tests from here down
-IF(BUILD_FETCHER_TESTS)
-
 SET(fetcherstest_SRCS
   ../fetch/fetcher.cpp
   ../fetch/fetcherjob.cpp
@@ -352,6 +349,26 @@ TARGET_LINK_LIBRARIES(fetcherstest
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
 )
+
+# the PDF importer uses CrossRefFetcher, so include the test in the fetchers
+add_executable(pdftest pdftest.cpp
+  ../translators/pdfimporter.cpp
+  ../translators/xmphandler.cpp
+  ../entryupdatejob.cpp
+)
+ecm_mark_nongui_executable(pdftest)
+add_test(pdftest pdftest)
+ecm_mark_as_test(pdftest)
+TARGET_LINK_LIBRARIES(pdftest translatorstest fetcherstest ${TELLICO_TEST_LIBS})
+IF( LIBEXEMPI_FOUND )
+  TARGET_LINK_LIBRARIES(pdftest ${LIBEXEMPI_LIBRARIES})
+ENDIF( LIBEXEMPI_FOUND )
+IF( POPPLER_QT5_FOUND )
+  TARGET_LINK_LIBRARIES(pdftest ${POPPLER_QT5_LIBRARIES})
+ENDIF( POPPLER_QT5_FOUND )
+
+# fetcher tests from here down
+IF(BUILD_FETCHER_TESTS)
 
 add_executable(entryupdatejobtest entryupdatejobtest.cpp
   ../entryupdatejob.cpp
@@ -429,6 +446,15 @@ ecm_mark_nongui_executable(boardgamegeekfetchertest)
 add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
 TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
+add_executable(crossreffetchertest crossreffetchertest.cpp abstractfetchertest.cpp
+  ../fetch/crossreffetcher.cpp
+  ../fetch/xmlfetcher.cpp
+)
+ecm_mark_nongui_executable(crossreffetchertest)
+add_test(crossreffetchertest crossreffetchertest)
+ecm_mark_as_test(crossreffetchertest)
+TARGET_LINK_LIBRARIES(crossreffetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest.cpp
   ../fetch/execexternalfetcher.cpp

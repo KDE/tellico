@@ -1,3 +1,11 @@
+2015-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved PDF importer for Science Direct files.
+
+2015-08-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed key accelerator conflict for 'D' in Collection Fields dialog (Bug 351226).
+
 2015-08-05  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with using external fetcher source with MODS output.

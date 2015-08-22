@@ -87,6 +87,7 @@ void CrossRefFetcher::search() {
 
   readWallet();
   if(m_email.isEmpty() && (m_user.isEmpty() || m_password.isEmpty())) {
+    myDebug() << i18n("%1 requires a username and password.", source());
     message(i18n("%1 requires a username and password.", source()), MessageHandler::Error);
     stop();
     return;
@@ -214,7 +215,11 @@ void CrossRefFetcher::initXSLTHandler() {
   QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("crossref2tellico.xsl"));
 #endif
   if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate xslt file.";
+#ifdef CROSSREF_USE_UNIXREF
+    myWarning() << "can not locate xslt file: unixref2tellico.xsl";
+#else
+    myWarning() << "can not locate xslt file: crossref2tellico.xsl";
+#endif
     return;
   }
 

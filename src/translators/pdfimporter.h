@@ -34,6 +34,7 @@ class PDFImporter : public Importer {
 Q_OBJECT
 
 public:
+  PDFImporter(const QUrl& url);
   PDFImporter(const QList<QUrl>& urls);
 
   virtual bool canImport(int type) const;
