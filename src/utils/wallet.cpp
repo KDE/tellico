@@ -40,7 +40,7 @@ Wallet::Wallet() : m_wallet(0) {
 }
 
 bool Wallet::prepareWallet() {
-  if(!m_wallet || !m_wallet->isOpen()) {
+  if(GUI::Proxy::widget() && (!m_wallet || !m_wallet->isOpen())) {
     delete m_wallet;
     m_wallet = KWallet::Wallet::openWallet(KWallet::Wallet::NetworkWallet(), GUI::Proxy::widget()->effectiveWinId());
   }
