@@ -31,6 +31,7 @@
 #include <kio/netaccess.h>
 #include <kio/previewjob.h>
 #include <kio/jobuidelegate.h>
+#include <KJobWidgets>
 #include <KLocalizedString>
 
 #include <QUrl>
@@ -95,15 +96,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
 }
 
 QPixmap NetAccess::filePreview(const QUrl& url, int size) {
-  NetAccess netaccess;
-
-  KFileItem fileItem(KFileItem::Unknown, KFileItem::Unknown, url, true);
-  KIO::Job* previewJob = KIO::filePreview(KFileItemList() << fileItem, QSize(size, size));
-  connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-          &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
-
-  KIO::NetAccess::synchronousRun(previewJob, GUI::Proxy::widget());
-  return netaccess.m_preview;
+  return filePreview(KFileItem(url), size);
 }
 
 QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
@@ -113,7 +106,15 @@ QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
           &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
 
-  KIO::NetAccess::synchronousRun(previewJob, GUI::Proxy::widget());
+  if(GUI::Proxy::widget()) {
+    KJobWidgets::setWindow(previewJob, GUI::Proxy::widget());
+  }
+  if(!previewJob->exec()) {
+    myDebug() << "Preview job did not succeed";
+  }
+  if(previewJob->error() != 0) {
+    myDebug() << previewJob->errorString();
+  }
   return netaccess.m_preview;
 }
 

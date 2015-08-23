@@ -231,7 +231,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
     QPixmap pix = NetAccess::filePreview(QUrl::fromLocalFile(ref->fileName()), PDF_FILE_PREVIEW_SIZE);
     if(pix.isNull()) {
-//      myDebug() << "No file preview from pdf";
+      myDebug() << "No file preview from pdf";
     } else {
       // is png best option?
       QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
@@ -314,4 +314,3 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 void PDFImporter::slotCancel() {
   m_cancelled = true;
 }
-
