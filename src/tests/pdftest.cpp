@@ -52,7 +52,6 @@ void PdfTest::testScienceDirect() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("XMP Conversion"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
