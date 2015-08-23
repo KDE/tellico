@@ -24,6 +24,7 @@
 
 #undef QT_NO_CAST_FROM_ASCII
 
+#include <config.h>
 #include "pdftest.h"
 
 #include "../translators/pdfimporter.h"
@@ -51,10 +52,10 @@ void PdfTest::testScienceDirect() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("XMP Conversion"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
+#ifdef LIBEXEMPI_FOUND
   QCOMPARE(entry->field("title"), QLatin1String("Parametric analysis of air-water heat recovery concept applied to HVAC systems"));
   QCOMPARE(entry->field("author"), QLatin1String("Mohamad Ramadan; Mostafa Gad El Rab; Mahmoud Khaled"));
   QCOMPARE(entry->field("journal"), QLatin1String("Case Studies in Thermal Engineering"));
@@ -67,4 +68,5 @@ void PdfTest::testScienceDirect() {
   QCOMPARE(entry->field("pages"), QLatin1String("61-68"));
   QCOMPARE(entry->field("doi"), QLatin1String("10.1016/j.csite.2015.06.001"));
 //  QVERIFY(!entry->field("cover").isEmpty());
+#endif
 }
