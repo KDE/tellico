@@ -151,7 +151,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   box1HBoxLayout->addWidget(m_valueLineEdit);
   label->setBuddy(m_valueLineEdit);
   m_valueLineEdit->setWhatsThis(i18n("Enter a search value. An ISBN search must include the full ISBN."));
+
   m_keyCombo = new GUI::ComboBox(box1);
+  box1HBoxLayout->addWidget(m_keyCombo);
   Fetch::KeyMap map = Fetch::Manager::self()->keyMap();
   for(Fetch::KeyMap::ConstIterator it = map.constBegin(); it != map.constEnd(); ++it) {
     m_keyCombo->addItem(it.value(), it.key());
@@ -215,6 +217,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   QSplitter* split = new QSplitter(Qt::Vertical, mainWidget);
   topLayout->addWidget(split);
+  split->setChildrenCollapsible(false);
 
   m_treeWidget = new QTreeWidget(split);
   m_treeWidget->sortItems(1, Qt::AscendingOrder);
@@ -226,6 +229,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
                                               << i18n("Title")
                                               << i18n("Description")
                                               << i18n("Source"));
+  m_treeWidget->setFrameShape(QFrame::NoFrame);
   m_treeWidget->setColumnWidth(0, 20); // will show a check mark when added
   m_treeWidget->model()->setHeaderData(0, Qt::Horizontal, Qt::AlignHCenter, Qt::TextAlignmentRole); // align checkmark in middle
   m_treeWidget->viewport()->installEventFilter(this);
