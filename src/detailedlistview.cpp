@@ -611,12 +611,18 @@ void DetailedListView::checkHeader() {
   }
   // find title action in menu and activate it
   QAction* action = 0;
+  QAction* fallbackAction = 0;
   foreach(QAction* tryAction, m_columnMenu->actions()) {
     const int ncol = tryAction->data().toInt();
     if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {
       action = tryAction;
       break;
+    } else if(ncol > -1 && !fallbackAction) {
+      fallbackAction = tryAction;
     }
+  }
+  if(!action) {
+    action = fallbackAction;
   }
   if(action) {
     action->setChecked(true);
