@@ -66,8 +66,8 @@ SRUFetcher::SRUFetcher(QObject* parent_)
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
-                       QObject* parent_) : Fetcher(parent_),
-      m_host(host_), m_port(port_), m_path(path_), m_format(QLatin1String("mods")),
+                       const QString& format_, QObject* parent_) : Fetcher(parent_),
+      m_host(host_), m_port(port_), m_path(path_), m_format(format_),
       m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
   m_name = name_; // m_name is protected in super class
 }
@@ -446,7 +446,7 @@ bool SRUFetcher::initSRWHandler() {
 
 Tellico::Fetch::Fetcher::Ptr SRUFetcher::libraryOfCongress(QObject* parent_) {
   return Fetcher::Ptr(new SRUFetcher(i18n("Library of Congress (US)"), QLatin1String("z3950.loc.gov"), 7090,
-                                     QLatin1String("voyager"), parent_));
+                                     QLatin1String("voyager"), QLatin1String("mods"), parent_));
 }
 
 QString SRUFetcher::defaultName() {
