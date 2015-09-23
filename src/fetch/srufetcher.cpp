@@ -119,7 +119,18 @@ void SRUFetcher::search() {
   u.setScheme(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
-  u.setPath(QLatin1Char('/') + m_path);
+//  u.setPath(QLatin1Char('/') + m_path, QUrl::TolerantMode);
+
+/*
+  QString uStr = QLatin1String("http://") + m_host;
+  if(m_port > 0) {
+    uStr += QLatin1Char(':') + QString::number(m_port);
+  }
+  uStr += QLatin1Char('/') + m_path;
+  u = QUrl::fromUserInput(uStr);
+*/
+  // hack to allow (for now) including extra query terms in the path, avoids double encoding
+  u = QUrl::fromUserInput(u.url() + QLatin1Char('/') + m_path);
 
   u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
   u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));

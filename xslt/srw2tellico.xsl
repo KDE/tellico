@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns="http://periapsis.org/tellico/"
+                xmlns:tc="http://periapsis.org/tellico/"
                 xmlns:srw="http://www.loc.gov/zing/srw/"
                 xmlns:prism="http://prismstandard.org/namespaces/basic/2.0/"
                 xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:telterms="http://krait.kb.nl/coop/tel/handbook/telterms.html"
                 exclude-result-prefixes="srw prism dc"
                 version="1.0">
 
@@ -24,148 +25,166 @@
             doctype-system="http://periapsis.org/tellico/dtd/v11/tellico.dtd"/>
 
 <xsl:template match="/">
- <tellico syntaxVersion="11">
-  <collection title="Import" type="5">
-   <fields>
-    <field name="_default"/>
+ <tc:tellico syntaxVersion="11">
+  <tc:collection title="Import" type="5">
+   <tc:fields>
+    <tc:field name="_default"/>
     <xsl:if test=".//prism:issn">
-     <field flags="0" title="ISSN#" category="Publishing" format="4" type="1" name="issn" description="ISSN#" />
+     <tc:field flags="0" title="ISSN#" category="Publishing" format="4" type="1" name="issn" description="ISSN#" />
     </xsl:if>
-   </fields>
+   </tc:fields>
    <xsl:for-each select=".//srw:record">
     <xsl:apply-templates select="."/>
    </xsl:for-each>
-  </collection>
- </tellico>
+  </tc:collection>
+ </tc:tellico>
 </xsl:template>
 
 <xsl:template match="srw:record">
- <entry>
+ <tc:entry>
 
-  <entry-type>
+  <tc:entry-type>
    <xsl:choose>
     <xsl:when test=".//prism:issn">
      <xsl:text>article</xsl:text>
     </xsl:when>
-    <xsl:when test=".//prism:isbn">
+    <xsl:when test=".//ISBN|.//prism:isbn">
      <xsl:text>book</xsl:text>
     </xsl:when>
     <xsl:otherwise>
      <xsl:text>article</xsl:text>
     </xsl:otherwise>
    </xsl:choose>
-  </entry-type>
+  </tc:entry-type>
 
-  <authors>
+  <tc:authors>
    <xsl:for-each select=".//dc:creator">
-    <author>
+    <tc:author>
      <xsl:value-of select="."/>
-    </author>
+    </tc:author>
    </xsl:for-each>
-  </authors>
+  </tc:authors>
 
-  <genres i18n="true">
+  <tc:publishers>
+   <xsl:for-each select=".//dc:publisher">
+    <tc:publisher>
+     <xsl:value-of select="."/>
+    </tc:publisher>
+   </xsl:for-each>
+  </tc:publishers>
+
+  <tc:genres i18n="true">
    <xsl:for-each select=".//prism:genre">
-    <genre>
+    <tc:genre>
      <xsl:value-of select="."/>
-    </genre>
+    </tc:genre>
    </xsl:for-each>
-  </genres>
+  </tc:genres>
 
-  <keywords i18n="true">
+  <tc:keywords i18n="true">
    <xsl:for-each select=".//dc:subject|.//prism:keyword">
-    <keyword>
+    <tc:keyword>
      <xsl:value-of select="."/>
-    </keyword>
+    </tc:keyword>
    </xsl:for-each>
-  </keywords>
+  </tc:keywords>
 
   <xsl:apply-templates/>
 
- </entry>
+ </tc:entry>
 </xsl:template>
 
 <!-- disable default behavior -->
 <xsl:template match="text()|@*"></xsl:template>
 
 <xsl:template match="dc:title">
- <title>
+ <tc:title>
   <xsl:value-of select="."/>
- </title>
-</xsl:template>
-
-<xsl:template match="dc:publisher">
- <publisher>
-  <xsl:value-of select="."/>
- </publisher>
+ </tc:title>
 </xsl:template>
 
 <xsl:template match="dc:description">
- <note>
+ <tc:note>
   <xsl:value-of select="."/>
- </note>
+ </tc:note>
 </xsl:template>
 
 <xsl:template match="prism:publicationName">
- <journal>
+ <tc:journal>
   <xsl:value-of select="."/>
- </journal>
+ </tc:journal>
 </xsl:template>
 
-<xsl:template match="prism:publicationDate">
- <year>
+<xsl:template match="dc:date|prism:publicationDate">
+ <tc:year>
   <xsl:call-template name="year">
    <xsl:with-param name="value" select="."/>
   </xsl:call-template>
- </year>
+ </tc:year>
 </xsl:template>
 
 <xsl:template match="prism:edition">
- <edition>
+ <tc:edition>
   <xsl:value-of select="."/>
- </edition>
+ </tc:edition>
 </xsl:template>
 
-<xsl:template match="prism:isbn">
- <isbn>
+<!-- ISBN is a prticular element of KB with x-fields=ISBN
+     See https://www.librarything.com/topic/136014# -->
+<xsl:template match="prism:isbn|ISBN">
+ <tc:isbn>
   <xsl:value-of select="."/>
- </isbn>
+ </tc:isbn>
 </xsl:template>
 
 <xsl:template match="prism:issn">
- <issn>
+ <tc:issn>
   <xsl:value-of select="."/>
- </issn>
+ </tc:issn>
 </xsl:template>
 
 <xsl:template match="prism:doi">
- <doi>
+ <tc:doi>
   <xsl:value-of select="."/>
- </doi>
+ </tc:doi>
 </xsl:template>
 
 <xsl:template match="prism:volume">
- <volume>
+ <tc:volume>
   <xsl:value-of select="."/>
- </volume>
+ </tc:volume>
 </xsl:template>
 
 <xsl:template match="prism:number">
- <number>
+ <tc:number>
   <xsl:value-of select="."/>
- </number>
+ </tc:number>
 </xsl:template>
 
-<xsl:template match="prism:url">
- <url>
+<xsl:template match="prism:url|telterms:recordIdentifier">
+ <tc:url>
   <xsl:value-of select="."/>
- </url>
+ </tc:url>
 </xsl:template>
 
 <xsl:template name="year">
  <xsl:param name="value"/>
- <!-- return first four digits in value -->
- <xsl:value-of select="substring(translate($value, translate($value, '0123456789', ''), ''), 0, 5)"/>
+ <xsl:variable name="digits">
+  <xsl:value-of select="translate($value, translate($value, '0123456789', ''), '')"/>
+ </xsl:variable>
+ <xsl:variable name="len">
+  <xsl:value-of select="string-length($digits)"/>
+ </xsl:variable>
+ <xsl:choose>
+  <!-- return first four digits in value -->
+  <xsl:when test="starts-with($digits, '19') or starts-with($digits, '20')">
+   <xsl:value-of select="substring($digits, 1, 4)"/>
+  </xsl:when>
+  <!-- KB returns dc:date as 'Fri Jan 01 01:00:00 CET 1971' for example -->
+  <xsl:when test="$len &gt; 5 and (substring($digits, $len - 3, 2) = '19' or substring($digits, $len - 3, 2) = '20')">
+   <xsl:value-of select="substring($digits, $len - 3, 4)"/>
+  </xsl:when>
+ </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
