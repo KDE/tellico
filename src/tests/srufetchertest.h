@@ -36,6 +36,7 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testIsbn();
+  void testKBTitle();
 };
 
 #endif

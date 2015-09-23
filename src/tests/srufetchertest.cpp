@@ -30,6 +30,7 @@
 
 #include "../fetch/srufetcher.h"
 #include "../collections/bookcollection.h"
+#include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 
@@ -42,6 +43,7 @@ SRUFetcherTest::SRUFetcherTest() : AbstractFetcherTest() {
 
 void SRUFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
   // since we use the MODS importer
   KGlobal::dirs()->addResourceDir("appdata", QString::fromLatin1(KDESRCDIR) + "/../../xslt/");
 }
@@ -75,4 +77,28 @@ void SRUFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Foundations of Qt development"));
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-59059-831-8"));
+}
+
+void SRUFetcherTest::testKBTitle() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+                                       QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(QLatin1String("KB"),
+                                                                      QLatin1String("jsru.kb.nl"),
+                                                                      80,
+                                                                      QLatin1String("/sru/sru.pl?x-collection=GGC&x-fields=ISBN"),
+                                                                      QLatin1String("dc"),
+                                                                      this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
+//  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
+  QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("book"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Purmerend : Muusses"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("9023117042"));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1971"));
+  QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
 }

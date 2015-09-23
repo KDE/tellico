@@ -58,7 +58,8 @@ public:
   /**
    */
   SRUFetcher(QObject* parent);
-  SRUFetcher(const QString& name, const QString& host, uint port, const QString& dbname,
+  SRUFetcher(const QString& name, const QString& host, uint port,
+             const QString& dbname, const QString& format,
              QObject* parent);
   /**
    */
