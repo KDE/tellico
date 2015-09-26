@@ -655,6 +655,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   hb2HBoxLayout->addWidget(m_cbFilterSource);
   connect(m_cbFilterSource, SIGNAL(clicked()), SLOT(slotSourceFilterChanged()));
   m_sourceTypeCombo = new GUI::CollectionTypeCombo(hb2);
+  hb2HBoxLayout->addWidget(m_sourceTypeCombo);
   connect(m_sourceTypeCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotSourceFilterChanged()));
   // we want to remove the item for a custom collection
   int index = m_sourceTypeCombo->findData(Data::Collection::Base);
