@@ -34,8 +34,6 @@
 #include <KIO/Global>
 
 #include <QUrl>
-#include <QDBusInterface>
-#include <QDBusReply>
 #include <QUuid>
 #include <QPointer>
 
@@ -160,18 +158,5 @@ QString Fetcher::favIcon(const char* url_) {
 }
 
 QString Fetcher::favIcon(const QUrl& url_) {
-  QDBusInterface kded(QLatin1String("org.kde.kded"),
-                      QLatin1String("/modules/favicons"),
-                      QLatin1String("org.kde.FavIcon"));
-  if(!kded.isValid()) {
-    myDebug() << "invalid dbus interface";
-  }
-  QDBusReply<QString> iconName = kded.call(QLatin1String("iconForUrl"), url_.url());
-  if(iconName.isValid() && !iconName.value().isEmpty()) {
-    return iconName;
-  }
-  // go ahead and try to download it for later
-  kded.call(QLatin1String("downloadHostIcon"), url_.url());
   return KIO::iconNameForUrl(url_);
 }
-
