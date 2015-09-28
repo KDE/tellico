@@ -25,7 +25,7 @@
 #ifndef TELLICO_STRINGMAPDIALOG_H
 #define TELLICO_STRINGMAPDIALOG_H
 
-#include <KDialog>
+#include <QDialog>
 
 class QLineEdit;
 class QTreeWidget;
@@ -46,7 +46,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class StringMapDialog : public KDialog {
+class StringMapDialog : public QDialog {
 Q_OBJECT
 
 public:

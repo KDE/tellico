@@ -848,7 +848,7 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
   props.remove(QLatin1String("template"));
 
   StringMapDialog dlg(props, this, true);
-  dlg.setCaption(i18n("Extended Field Properties"));
+  dlg.setWindowTitle(i18n("Extended Field Properties"));
   dlg.setLabels(i18n("Property"), i18n("Value"));
   if(dlg.exec() == QDialog::Accepted) {
     props = dlg.stringMap();

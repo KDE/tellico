@@ -287,10 +287,6 @@ public slots:
    */
   void slotShowStringMacroDialog();
   /**
-   * Hides the string macro editor dialog for the application.
-   */
-  void slotHideStringMacroDialog();
-  /**
    * Shows the citation key dialog
    */
   void slotShowBibtexKeyDialog();
@@ -422,7 +418,7 @@ private slots:
   /**
    * Handle the Ok button being clicked in the string macros dialog.
    */
-  void slotStringMacroDialogOk();
+  void slotStringMacroDialogFinished(int result=-1);
   /**
    * Since I use an application icon in the toolbar, I need to change its size whenever
    * the toolbar changes mode

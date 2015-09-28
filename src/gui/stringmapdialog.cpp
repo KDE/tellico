@@ -24,8 +24,9 @@
 
 #include "stringmapdialog.h"
 
+#include <KPushButton>
 #include <KLocalizedString>
-#include <kdialogbuttonbox.h>
+#include <KGuiItem>
 
 #include <QTreeWidget>
 #include <QHeaderView>
@@ -33,15 +34,20 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLineEdit>
+#include <QDialogButtonBox>
 
 using Tellico::StringMapDialog;
 
 StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* parent_, bool modal_/*=false*/)
-    : KDialog(parent_) {
+    : QDialog(parent_) {
   setModal(modal_);
-  setButtons(Ok|Cancel);
 
-  QWidget* page = new QWidget(this);
+  QWidget* mainWidget = new QWidget(this);
+  QVBoxLayout* mainLayout = new QVBoxLayout(mainWidget);
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+
+  QWidget* page = new QWidget(mainWidget);
   QBoxLayout* l = new QVBoxLayout(page);
 
   m_treeWidget = new QTreeWidget(page);
@@ -54,8 +60,8 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
 
   QWidget* box = new QWidget(page);
   QHBoxLayout* boxHBoxLayout = new QHBoxLayout(box);
-  boxHBoxLayout->setMargin(4);
-  boxHBoxLayout->setSpacing(KDialog::spacingHint());
+  boxHBoxLayout->setMargin(0);
+  boxHBoxLayout->setSpacing(4);
   l->addWidget(box);
 
   m_edit1 = new QLineEdit(box);
@@ -64,18 +70,19 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   m_edit2 = new QLineEdit(box);
   boxHBoxLayout->addWidget(m_edit2);
 
-  KDialogButtonBox* bb = new KDialogButtonBox(box);
+  QDialogButtonBox* bb = new QDialogButtonBox(box);
   boxHBoxLayout->addWidget(bb);
-  bb->addButton(KGuiItem(i18nc("set a value", "&Set") ,QIcon::fromTheme(QLatin1String("document-new"))),
-                QDialogButtonBox::ActionRole,
-                this, SLOT(slotAdd()));
-  bb->addButton(KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))),
-                QDialogButtonBox::ActionRole,
-                this, SLOT(slotDelete()));
+  KPushButton* pb1 = new KPushButton(KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QLatin1String("document-new"))), bb);
+  connect(pb1, SIGNAL(clicked()), this, SLOT(slotAdd()));
+  bb->addButton(pb1, QDialogButtonBox::ActionRole);
+
+  KPushButton* pb2 = new KPushButton(KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))), bb);
+  connect(pb2, SIGNAL(clicked()), this, SLOT(slotDelete()));
+  bb->addButton(pb2, QDialogButtonBox::ActionRole);
 
   l->addWidget(box);
   l->addStretch(1);
-  setMainWidget(page);
+  mainLayout->addWidget(page);
 
   for(QMap<QString, QString>::ConstIterator it = map_.begin(); it != map_.end(); ++it) {
     if(!it.value().isEmpty()) {
@@ -84,8 +91,15 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   }
   m_treeWidget->resizeColumnToContents(0);
 
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+  mainLayout->addWidget(buttonBox);
+
   setMinimumWidth(400);
-  showButtonSeparator(true);
 }
 
 void StringMapDialog::slotAdd() {
@@ -135,4 +149,3 @@ QMap<QString, QString> StringMapDialog::stringMap() {
   }
   return map;
 }
-

@@ -1455,7 +1455,7 @@ void MainWindow::slotEnableOpenedActions() {
 
   // close the filter dialog when a new collection is opened
   slotHideFilterDialog();
-  slotHideStringMacroDialog();
+  slotStringMacroDialogFinished();
 }
 
 void MainWindow::slotEnableModifiedActions(bool modified_ /*= true*/) {
@@ -1796,29 +1796,27 @@ void MainWindow::slotShowStringMacroDialog() {
   if(!m_stringMacroDlg) {
     const Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data());
     m_stringMacroDlg = new StringMapDialog(c->macroList(), this, false);
-    m_stringMacroDlg->setCaption(i18n("String Macros"));
+    m_stringMacroDlg->setWindowTitle(i18n("String Macros"));
     m_stringMacroDlg->setLabels(i18n("Macro"), i18n("String"));
-    connect(m_stringMacroDlg, SIGNAL(finished()), SLOT(slotHideStringMacroDialog()));
-    connect(m_stringMacroDlg, SIGNAL(okClicked()), SLOT(slotStringMacroDialogOk()));
+    connect(m_stringMacroDlg, SIGNAL(finished(int)), SLOT(slotStringMacroDialogFinished(int)));
   } else {
     KWindowSystem::activateWindow(m_stringMacroDlg->winId());
   }
   m_stringMacroDlg->show();
 }
 
-void MainWindow::slotHideStringMacroDialog() {
-  if(m_stringMacroDlg) {
-    m_stringMacroDlg->delayedDestruct();
-    m_stringMacroDlg = 0;
-  }
-}
-
-void MainWindow::slotStringMacroDialogOk() {
+void MainWindow::slotStringMacroDialogFinished(int result_) {
   // no point in checking if collection is bibtex, as dialog would never have been created
-  if(m_stringMacroDlg) {
+  if(!m_stringMacroDlg) {
+    return;
+  }
+  if(result_ == QDialog::Accepted) {
     static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data())->setMacroList(m_stringMacroDlg->stringMap());
     Data::Document::self()->slotSetModified(true);
   }
+  m_stringMacroDlg->hide();
+  m_stringMacroDlg->deleteLater();
+  m_stringMacroDlg = 0;
 }
 
 void MainWindow::slotShowBibtexKeyDialog() {
