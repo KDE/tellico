@@ -29,7 +29,6 @@
 #include <sonnet/dialog.h>
 #include <sonnet/backgroundchecker.h>
 
-#include <QApplication>
 #include <QMenu>
 #include <QContextMenuEvent>
 
@@ -98,4 +97,3 @@ void LineEdit::spellCheckerCorrected(const QString& oldWord, int pos, const QStr
     insert(newWord);
   }
 }
-

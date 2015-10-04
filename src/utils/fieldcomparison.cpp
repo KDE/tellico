@@ -31,7 +31,6 @@
 #include "../images/image.h"
 #include "../tellico_debug.h"
 
-#include <QPixmap>
 #include <QDateTime>
 
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {

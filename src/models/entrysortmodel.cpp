@@ -124,4 +124,3 @@ Tellico::FieldComparison* EntrySortModel::getComparison(const QModelIndex& index
   }
   return comp;
 }
-

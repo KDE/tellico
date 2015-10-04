@@ -28,7 +28,6 @@
 #include "../tellico_debug.h"
 
 #include <QHash>
-#include <QPixmap>
 #include <QBoxLayout>
 #include <QLabel>
 #include <QMouseEvent>

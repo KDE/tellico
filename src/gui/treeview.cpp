@@ -62,4 +62,3 @@ Qt::SortOrder TreeView::sortOrder() const {
 int TreeView::sortRole() const {
   return sortModel()->sortRole();
 }
-

@@ -30,7 +30,6 @@
 #include "filter.h"
 
 #include <QStringList>
-#include <QPixmap>
 #include <QEvent>
 #include <QVector>
 

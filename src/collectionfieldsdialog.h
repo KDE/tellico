@@ -36,7 +36,6 @@ class QLineEdit;
 class QListWidget;
 class QRadioButton;
 class QCheckBox;
-class QPainter;
 
 namespace Tellico {
   namespace Data {

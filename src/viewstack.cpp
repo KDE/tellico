@@ -28,9 +28,9 @@
 #include "models/entrymodel.h"
 #include "core/tellico_config.h"
 
-#include <QIcon>
 #include <KLocalizedString>
 
+#include <QIcon>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QToolButton>
@@ -155,4 +155,3 @@ void ViewStack::setIconSizeInterfaceVisible(bool visible) {
   m_increaseIconSizeButton->setVisible(visible);
   m_iconSizeSlider->setVisible(visible);
 }
-

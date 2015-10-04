@@ -25,7 +25,6 @@
 #include "detailedlistview.h"
 #include "collection.h"
 #include "collectionfactory.h"
-#include "images/imagefactory.h"
 #include "controller.h"
 #include "field.h"
 #include "entry.h"
@@ -40,7 +39,6 @@
 #include <KSharedConfig>
 
 #include <QMenu>
-#include <QPixmap>
 #include <QMouseEvent>
 #include <QHeaderView>
 #include <QContextMenuEvent>
@@ -639,4 +637,3 @@ QString DetailedListView::columnFieldName(int ncol_) const {
   Data::FieldPtr field = model()->headerData(ncol_, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
   return field ? field->name() : QString();
 }
-

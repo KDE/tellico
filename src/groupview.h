@@ -28,8 +28,6 @@
 #include "gui/treeview.h"
 #include "observer.h"
 
-#include <QPixmap>
-
 namespace Tellico {
   namespace Data {
     class EntryGroup;

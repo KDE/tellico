@@ -39,8 +39,6 @@
 
 #include <QMenu>
 #include <QIcon>
-#include <QPainter>
-#include <QPixmap>
 #include <QContextMenuEvent>
 
 namespace {
@@ -130,4 +128,3 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
     }
   }
 }
-

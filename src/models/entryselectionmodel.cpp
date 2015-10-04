@@ -84,4 +84,3 @@ void EntrySelectionModel::selectedEntriesChanged() {
   }
   m_processing = false;
 }
-

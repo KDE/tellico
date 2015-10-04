@@ -76,7 +76,7 @@ void CountDelegate::paint(QPainter* painter_,
   }
   m_showCount = false;
 
-  // No, we retrieve the correct style option by calling intiStyleOption from
+  // Now, we retrieve the correct style option by calling initStyleOption from
   // the superclass.
   QStyleOptionViewItemV4 option4 = option_;
   QStyledItemDelegate::initStyleOption(&option4, index_);
@@ -114,4 +114,3 @@ void CountDelegate::paint(QPainter* painter_,
   painter_->drawText(countRect, Qt::AlignLeft, countString);
   painter_->restore();
 }
-

@@ -35,8 +35,6 @@ namespace Sonnet {
   class Dialog;
 }
 
-class QFocusEvent;
-class QPaintEvent;
 class QContextMenuEvent;
 
 namespace Tellico {
