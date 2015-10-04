@@ -111,7 +111,7 @@ const QPixmap& Tellico::pixmap(const QString& value_) {
   }
 
   QString picName = QString::fromLatin1("stars%1").arg(n);
-  QPixmap* pix = new QPixmap(QIcon::fromTheme(picName).pixmap(QSize(16, 16)));
+  QPixmap* pix = new QPixmap(QIcon::fromTheme(picName).pixmap(QSize(n*16, 16)));
   pixmaps.insert(n, pix);
   return *pix;
 }
