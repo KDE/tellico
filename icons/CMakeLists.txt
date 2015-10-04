@@ -70,6 +70,8 @@ set(ICON_FILES
     48-mimetypes-application-x-tellico.png
     64-apps-tellico.png
     64-mimetypes-application-x-tellico.png
+    128-apps-tellico.png
+    128-mimetypes-application-x-tellico.png
 )
 
 ecm_install_icons(ICONS ${ICON_FILES}
