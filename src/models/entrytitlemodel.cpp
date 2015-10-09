@@ -109,7 +109,10 @@ QVariant EntryTitleModel::data(const QModelIndex& index_, int role_) const {
       }
 
       icon = new KIcon(QPixmap::fromImage(img));
-      m_iconCache.insert(id, icon);
+      if(!m_iconCache.insert(id, icon)) {
+        // failing to insert invalidates the icon pointer
+        return KIcon(QPixmap::fromImage(img));
+      }
       return KIcon(*icon);
     }
     case EntryPtrRole:
