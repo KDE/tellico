@@ -144,7 +144,10 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         }
 
         icon = new QIcon(QPixmap::fromImage(img));
-        m_iconCache.insert(id, icon);
+        if(!m_iconCache.insert(id, icon)) {
+          // failing to insert invalidates the icon pointer
+          return QIcon(QPixmap::fromImage(img));
+        }
         return QIcon(*icon);
       }
       // otherwise just return the image for the entry
