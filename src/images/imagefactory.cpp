@@ -493,13 +493,14 @@ QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
     pix = new QPixmap(img.convertToPixmap());
   }
 
+  QPixmap pix2(*pix); // retain a copy of pix in case it doesn't go into the cache
   // pixmap size is w x h x d, divided by 8 bits
+  const int size = (pix->width()*pix->height()*pix->depth()/8);
   if(!factory->d->pixmapCache.insert(key, pix, pix->width()*pix->height()*pix->depth()/8)) {
+    // at this point, pix might be deleted
     myWarning() << "can't save in cache: " << id_;
-    myWarning() << "### Current pixmap size is " << (pix->width()*pix->height()*pix->depth()/8);
+    myWarning() << "### Current pixmap size is " << size;
     myWarning() << "### Max pixmap cache size is " << factory->d->pixmapCache.maxCost();
-    QPixmap pix2(*pix);
-    delete pix;
     return pix2;
   }
   return *pix;
