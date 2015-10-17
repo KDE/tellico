@@ -90,6 +90,7 @@ bool Lyxpipe::cite(Tellico::Data::EntryList entries_) {
   }
   if(output.isEmpty()) {
     myDebug() << "no available bibtex keys!";
+    ::close(pipeFd);
     return false;
   } else {
     output.truncate(output.length()-2); // remove last comma and space
