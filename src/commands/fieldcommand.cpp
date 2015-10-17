@@ -57,10 +57,13 @@ void FieldCommand::init() {
   switch(m_mode) {
     case FieldAdd:
       setText(i18n("Add %1 Field", m_activeField->title()));
+      break;
     case FieldModify:
       setText(i18n("Modify %1 Field", m_activeField->title()));
+      break;
     case FieldRemove:
       setText(i18n("Delete %1 Field", m_activeField->title()));
+      break;
   }
 
   if(!m_coll) {
