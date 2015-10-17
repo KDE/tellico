@@ -49,10 +49,13 @@ CollectionCommand::CollectionCommand(Mode mode_, Tellico::Data::CollPtr origColl
   switch(m_mode) {
     case Append:
       setText(i18n("Append Collection"));
+      break;
     case Merge:
       setText(i18n("Merge Collection"));
+      break;
     case Replace:
       setText(i18n("Replace Collection"));
+      break;
   }
 }
 
