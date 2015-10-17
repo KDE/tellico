@@ -187,8 +187,7 @@ void ReportDialog::slotRefresh() {
 
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
-  QUrl u;
-  u.setPath(m_xsltFile);
+  QUrl u = QUrl::fromLocalFile(m_xsltFile);
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
 #if 0
