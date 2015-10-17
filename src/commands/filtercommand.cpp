@@ -54,10 +54,13 @@ FilterCommand::FilterCommand(Mode mode_, Tellico::FilterPtr activeFilter_, Telli
   switch(m_mode) {
     case FilterAdd:
       setText(i18n("Add Filter"));
+      break;
     case FilterModify:
       setText(i18n("Modify Filter"));
+      break;
     case FilterRemove:
       setText(i18n("Delete Filter"));
+      break;
   }
 }
 
