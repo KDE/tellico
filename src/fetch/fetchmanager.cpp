@@ -419,7 +419,7 @@ Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::F
   } else {
     myWarning() << "no widget defined for type =" << type_;
   }
-  if(type_ == ExecExternal) {
+  if(w && type_ == ExecExternal) {
     if(!name_.isEmpty() && m_scriptMap.contains(name_)) {
       // bundledScriptHasExecPath() actually needs to write the exec path
       // back to the config so the configWidget can read it. But if the spec file
