@@ -553,8 +553,7 @@ QUrl HTMLExporter::fileDir() const {
   }
   QUrl fileDir = url();
   // cd to directory of target URL
-  fileDir = fileDir.resolved(QUrl(QLatin1String("..")));
-  fileDir = fileDir.adjusted(QUrl::StripTrailingSlash);
+  fileDir = fileDir.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash);
   fileDir.setPath(fileDir.path() + QLatin1Char('/') + fileDirName());
   return fileDir;
 }
