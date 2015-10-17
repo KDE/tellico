@@ -282,7 +282,7 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
   }
 
   clearSelection();
-  EntrySortModel* proxyModel = dynamic_cast<EntrySortModel*>(model());
+  EntrySortModel* proxyModel = static_cast<EntrySortModel*>(model());
   foreach(Data::EntryPtr entry, entries_) {
     QModelIndex index = sourceModel()->indexFromEntry(entry);
     if(!proxyModel->mapFromSource(index).isValid()) {
