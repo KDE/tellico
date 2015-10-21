@@ -159,6 +159,13 @@
         text-align: left;
    }
    </style>
+   <script type="text/javascript">
+    <xsl:call-template name="sort-array">
+     <xsl:with-param name="fields" select="tc:collection[1]/tc:fields"/>
+     <xsl:with-param name="columns" select="$columns"/>
+    </xsl:call-template>
+   </script>
+   <script type="text/javascript" src="../tellico2html.js"/>
    <title>
     <xsl:value-of select="tc:collection/@title"/>
    </title>
@@ -176,7 +183,7 @@
   <xsl:value-of select="@title"/>
  </h1>
 
- <table>
+ <table class="sortable">
   <!-- always print headers -->
   <thead>
    <tr>

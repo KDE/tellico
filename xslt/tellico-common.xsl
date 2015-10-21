@@ -296,4 +296,29 @@
  </xsl:if>
 </xsl:template>
 
+<xsl:template name="sort-array">
+ <xsl:param name="fields"/>
+ <xsl:param name="columns"/>
+ var COL_SORT_ARRAY = new Array()
+ <xsl:for-each select="$columns">
+  <xsl:variable name="column" select="."/>
+  <xsl:variable name="field" select="$fields/tc:field[@name = $column]"/>
+  <!-- number sorting is 1, date is 2, everything else is 0 -->
+  <xsl:variable name="sort-type">
+   <xsl:choose>
+    <xsl:when test="$field/@type = 12">
+     <xsl:text>2</xsl:text>
+    </xsl:when>
+    <xsl:when test="$field/@type = 6">
+     <xsl:text>1</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:text>0</xsl:text>
+    </xsl:otherwise>
+   </xsl:choose>
+  </xsl:variable>
+  COL_SORT_ARRAY[<xsl:value-of select="position()-1"/>] = <xsl:value-of select="$sort-type"/>
+ </xsl:for-each>
+</xsl:template>
+
 </xsl:stylesheet>
