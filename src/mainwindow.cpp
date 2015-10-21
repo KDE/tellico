@@ -92,6 +92,7 @@
 #include <kactioncollection.h>
 #include <kactionmenu.h>
 #include <KShortcutsDialog>
+#include <KAboutData>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -310,6 +311,18 @@ void MainWindow::initActions() {
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   action->setToolTip(i18n("Save the document as a different file..."));
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
+  {
+    KHTMLPart w;
+    // KHTMLPart printing was broken in KDE until KHTML 5.16
+    const QString version =  w.componentData().version();
+    const uint major = version.section(QLatin1Char('.'), 0, 0).toUInt();
+    const uint minor = version.section(QLatin1Char('.'), 1, 1).toUInt();
+    if(major == 5 && minor < 16) {
+      myWarning() << "Printing is broken for KDE Frameworks < 5.16. Please upgrade";
+      action->setEnabled(false);
+    }
+  }
+
   action->setToolTip(i18n("Print the contents of the document..."));
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   action->setToolTip(i18n("Quit the application"));
@@ -1573,6 +1586,17 @@ void MainWindow::slotHideReportDialog() {
 
 void MainWindow::doPrint(const QString& html_) {
   KHTMLPart w;
+
+  // KHTMLPart printing was broken in KDE until KHTML 5.16
+  // see https://git.reviewboard.kde.org/r/125681/
+  const QString version =  w.componentData().version();
+  const uint major = version.section(QLatin1Char('.'), 0, 0).toUInt();
+  const uint minor = version.section(QLatin1Char('.'), 1, 1).toUInt();
+  if(major == 5 && minor < 16) {
+    myWarning() << "Printing is broken for KDE Frameworks < 5.16. Please upgrade";
+    return;
+  }
+
   w.setJScriptEnabled(false);
   w.setJavaEnabled(false);
   w.setMetaRefreshEnabled(false);
