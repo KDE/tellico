@@ -138,7 +138,7 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   QSize s = sizeHint();
   resize(qMax(s.width(), CONFIG_MIN_WIDTH), qMax(s.height(), CONFIG_MIN_HEIGHT));
 
-  connect(button(QDialogButtonBox::Ok), SIGNAL(clicked()), SLOT(slotOk()));
+  // OK button is connected to buttonBox accepted() signal which is already connected to accept() slot
   connect(button(QDialogButtonBox::Apply), SIGNAL(clicked()), SLOT(slotApply()));
   connect(button(QDialogButtonBox::Help), SIGNAL(clicked()), SLOT(slotHelp()));
   connect(button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(slotDefault()));
@@ -149,8 +149,6 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   // these next lines are from convert-kdialog.pl
   button(QDialogButtonBox::Ok)->setDefault(true);
   button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox(), SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox(), SIGNAL(rejected()), this, SLOT(reject()));
 
   connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotInitPage(KPageWidgetItem*)));
 }
@@ -184,10 +182,10 @@ void ConfigDialog::slotInitPage(KPageWidgetItem* item_) {
   }
 }
 
-void ConfigDialog::slotOk() {
+void ConfigDialog::accept() {
   m_okClicked = true;
   slotApply();
-  accept();
+  KPageDialog::accept();
   m_okClicked = false;
 }
 

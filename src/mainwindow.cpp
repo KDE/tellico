@@ -1404,15 +1404,14 @@ void MainWindow::slotToggleEntryEditor() {
 void MainWindow::slotShowConfigDialog() {
   if(!m_configDlg) {
     m_configDlg = new ConfigDialog(this);
-    m_configDlg->show();
     connect(m_configDlg, SIGNAL(signalConfigChanged()),
             SLOT(slotHandleConfigChange()));
     connect(m_configDlg, SIGNAL(finished(int)),
             SLOT(slotHideConfigDialog()));
   } else {
     KWindowSystem::activateWindow(m_configDlg->winId());
-    m_configDlg->show();
   }
+  m_configDlg->show();
 }
 
 void MainWindow::slotHideConfigDialog() {

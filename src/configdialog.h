@@ -90,7 +90,7 @@ private slots:
   /**
    * Called when the Ok button is clicked.
    */
-  void slotOk();
+  virtual void accept();
   /**
    * Called when the Apply button is clicked.
    */
