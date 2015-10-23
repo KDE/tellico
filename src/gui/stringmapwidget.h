@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,46 +22,63 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "stringmapdialog.h"
-#include "stringmapwidget.h"
-#include <KPushButton>
-#include <KLocalizedString>
-#include <KGuiItem>
+#ifndef TELLICO_STRINGMAPWIDGET_H
+#define TELLICO_STRINGMAPWIDGET_H
 
-#include <QTreeWidget>
-#include <QHeaderView>
-#include <QPushButton>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLineEdit>
-#include <QDialogButtonBox>
+#include <QWidget>
 
-using Tellico::StringMapDialog;
+class QLineEdit;
+class QTreeWidget;
+class QTreeWidgetItem;
+template <typename T1, typename T2>
+class QMap;
 
-StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* parent_, bool modal_/*=false*/)
-    : QDialog(parent_) {
-  setModal(modal_);
+namespace Tellico {
+  namespace GUI {
 
-  QVBoxLayout* mainLayout = new QVBoxLayout(this);
-  setLayout(mainLayout);
-  m_widget = new GUI::StringMapWidget(map_, this);
-  mainLayout->addWidget(m_widget);
+/**
+ * @short A simple widget for editing a map between two strings.
+ *
+ * A \ref QTreeWidget is used with the map keys in the first column and
+ * the map values in the second. Two edit boxes are below the list view.
+ * When an item is selected, the key-value is pair is placed in the edit
+ * boxes. Add and Delete buttons are used to add a new pair, or to remove
+ * an existing one.
+ *
+ * @author Robby Stephenson
+ */
+class StringMapWidget : public QWidget {
+Q_OBJECT
 
-  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
-  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
-  okButton->setDefault(true);
-  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
-  mainLayout->addWidget(buttonBox);
+public:
+  StringMapWidget(const QMap<QString, QString>& stringMap, QWidget* parent);
 
-  setMinimumWidth(400);
-}
+  /**
+   * Sets the titles for the key and value columns.
+   *
+   * @param label1 The name of the key string
+   * @param label2 The name of the value string
+   */
+  void setLabels(const QString& label1, const QString& label2);
+  /**
+   * Returns the modified string map.
+   *
+   * @return The modified string map
+   */
+  QMap<QString, QString> stringMap();
+  void setStringMap(const QMap<QString, QString>& stringMap);
 
-void StringMapDialog::setLabels(const QString& label1_, const QString& label2_) {
-  m_widget->setLabels(label1_, label2_);
-}
+private slots:
+  void slotAdd();
+  void slotDelete();
+  void slotUpdate(QTreeWidgetItem* item);
 
-QMap<QString, QString> StringMapDialog::stringMap() {
-  return m_widget->stringMap();
-}
+protected:
+  QTreeWidget* m_treeWidget;
+  QLineEdit* m_edit1;
+  QLineEdit* m_edit2;
+};
+
+  }
+} // end namespace
+#endif
