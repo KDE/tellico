@@ -1,3 +1,7 @@
+2015-10-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added user-defined query pairs for SRUFetcher url.
+
 2015-08-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved PDF importer for Science Direct files.
