@@ -48,6 +48,18 @@ ConfigWidget::ConfigWidget(QWidget* parent_) : QWidget(parent_), m_modified(fals
   gvbox->setLayout(vbox);
 }
 
+bool ConfigWidget::shouldSave() const {
+  return m_modified && m_accepted;
+}
+
+void ConfigWidget::setAccepted(bool accepted_) {
+  m_accepted = accepted_;
+}
+
+void ConfigWidget::slotSetModified(bool modified_) {
+  m_modified = modified_;
+}
+
 void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, const QStringList& fieldsToAdd_) {
   if(customFields_.isEmpty()) {
     return;
@@ -85,3 +97,6 @@ void ConfigWidget::saveConfig(KConfigGroup& config_) {
   slotSetModified(false);
 }
 
+QWidget* ConfigWidget::optionsWidget() {
+  return m_optionsWidget;
+}
