@@ -42,6 +42,7 @@ namespace Tellico {
   namespace GUI {
     class LineEdit;
     class ComboBox;
+    class StringMapWidget;
   }
   namespace Fetch {
 
@@ -102,6 +103,7 @@ private:
   uint m_port;
   QString m_path;
   QString m_format;
+  StringMap m_queryMap;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
@@ -127,6 +129,7 @@ private:
   KIntSpinBox* m_portSpinBox;
   GUI::LineEdit* m_pathEdit;
   GUI::ComboBox* m_formatCombo;
+  GUI::StringMapWidget* m_queryTree;
 };
 
   } // end namespace

@@ -32,6 +32,7 @@
 #include "../utils/guiproxy.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
+#include "../gui/stringmapwidget.h"
 #include "../utils/string_utils.h"
 #include "../utils/lccnvalidator.h"
 #include "../utils/isbnvalidator.h"
@@ -104,6 +105,13 @@ void SRUFetcher::readConfigHook(const KConfigGroup& config_) {
     m_path.prepend(QLatin1Char('/'));
   }
   m_format = config_.readEntry("Format", "mods");
+  myDebug() << m_host << m_format;
+  const QStringList queryFields = config_.readEntry("QueryFields", QStringList());
+  const QStringList queryValues = config_.readEntry("QueryValues", QStringList());
+  Q_ASSERT(queryFields.count() == queryValues.count());
+  for(int i = 0; i < qMin(queryFields.count(), queryValues.count()); ++i) {
+    m_queryMap.insert(queryFields.at(i), queryValues.at(i));
+  }
 }
 
 void SRUFetcher::search() {
@@ -138,6 +146,11 @@ void SRUFetcher::search() {
   if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
     u.addQueryItem(QLatin1String("recordSchema"), m_format);
   }
+
+  for(StringMap::ConstIterator it = m_queryMap.begin(); it != m_queryMap.end(); ++it) {
+    u.addQueryItem(it.key(), it.value());
+  }
+
   // added for the nature.com openSearch, what's the best way to make this an option?
   if(m_host.endsWith(QLatin1String("nature.com"))) {
     u.addQueryItem(QLatin1String("httpAccept"), QLatin1String("application/sru+xml"));
@@ -538,6 +551,10 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
 
   l->setRowStretch(++row, 1);
 
+  m_queryTree = new GUI::StringMapWidget(StringMap(), optionsWidget());
+  l->addWidget(m_queryTree, row, 0, 1, 2);
+  m_queryTree->setLabels(i18n("Field"), i18n("Value"));
+
   // now add additional fields widget
   addFieldsWidget(SRUFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
@@ -546,6 +563,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
     m_portSpinBox->setValue(fetcher_->m_port);
     m_pathEdit->setText(fetcher_->m_path);
     m_formatCombo->setCurrentData(fetcher_->m_format);
+    m_queryTree->setStringMap(fetcher_->m_queryMap);
   }
   KAcceleratorManager::manage(optionsWidget());
 }
@@ -566,6 +584,12 @@ void SRUFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   s = m_formatCombo->currentData().toString();
   if(!s.isEmpty()) {
     config_.writeEntry("Format", s);
+    myDebug() << "saving" << m_hostEdit->text().trimmed() << "; Format" << s;
+  }
+  StringMap queryMap = m_queryTree->stringMap();
+  if(!queryMap.isEmpty()) {
+    config_.writeEntry("QueryFields", queryMap.keys());
+    config_.writeEntry("QueryValues", queryMap.values());
   }
 }
 
@@ -590,4 +614,3 @@ void SRUFetcher::ConfigWidget::slotCheckHost() {
     }
   }
 }
-
