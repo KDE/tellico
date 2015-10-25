@@ -611,7 +611,7 @@ void SRUFetcher::ConfigWidget::slotCheckHost() {
         m_portSpinBox->setValue(u.port());
       }
       if(!u.path().isEmpty()) {
-        m_pathEdit->setText(u.path());
+        m_pathEdit->setText(u.path().trimmed());
       }
     }
   }
