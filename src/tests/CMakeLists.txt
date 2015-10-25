@@ -681,6 +681,7 @@ add_executable(srufetchertest srufetchertest.cpp abstractfetchertest.cpp
   ../translators/xmlimporter.cpp
   ../gui/lineedit.cpp
   ../gui/combobox.cpp
+  ../gui/stringmapwidget.cpp
 )
 ecm_mark_nongui_executable(srufetchertest)
 add_test(srufetchertest srufetchertest)
