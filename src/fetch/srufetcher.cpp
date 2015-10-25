@@ -301,7 +301,9 @@ void SRUFetcher::slotComplete(KJob*) {
   QString modsResult;
   if(m_format == QLatin1String("mods")) {
     modsResult = result;
-  } else if(m_format == QLatin1String("marcxml") && initMARCXMLHandler()) {
+//  } else if(m_format == QLatin1String("marcxml") && initMARCXMLHandler()) {
+// some SRU data sources call it MARC21-xml or something other than marcxml
+  } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive) && initMARCXMLHandler()) {
     modsResult = m_MARCXMLHandler->applyStylesheet(result);
   }
   if(!modsResult.isEmpty() && initMODSHandler()) {
@@ -530,8 +532,9 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_formatCombo->addItem(QLatin1String("MARCXML"), QLatin1String("marcxml"));
   m_formatCombo->addItem(QLatin1String("PAM"), QLatin1String("pam"));
   m_formatCombo->addItem(QLatin1String("Dublin Core"), QLatin1String("dc"));
-  m_formatCombo->addItem(QLatin1String(""), QLatin1String("none"));
+  m_formatCombo->setEditable(true);
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  connect(m_formatCombo, SIGNAL(editTextChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Enter the result format used by the server.");
   label->setWhatsThis(w);
@@ -547,6 +550,9 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
     m_hostEdit->setText(fetcher_->m_host);
     m_portSpinBox->setValue(fetcher_->m_port);
     m_pathEdit->setText(fetcher_->m_path);
+    if(m_formatCombo->findData(fetcher_->m_format) == -1) {
+      m_formatCombo->addItem(fetcher_->m_format, fetcher_->m_format);
+    }
     m_formatCombo->setCurrentData(fetcher_->m_format);
   }
   KAcceleratorManager::manage(optionsWidget());
@@ -565,7 +571,11 @@ void SRUFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!s.isEmpty()) {
     config_.writeEntry("Path", s);
   }
-  s = m_formatCombo->currentData().toString();
+  s = m_formatCombo->currentData().toString().trimmed();
+  if(s.isEmpty()) {
+    // user-entered format will not have data set for the item. Just use the text itself
+    s = m_formatCombo->currentText().trimmed();
+  }
   if(!s.isEmpty()) {
     config_.writeEntry("Format", s);
   }
