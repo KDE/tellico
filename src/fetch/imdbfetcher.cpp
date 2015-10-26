@@ -41,7 +41,6 @@
 #include <KAcceleratorManager>
 #include <KJobWidgets/KJobWidgets>
 
-#include <QLineEdit>
 #include <QRegExp>
 #include <QFile>
 #include <QMap>
@@ -262,7 +261,8 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(0), m_started(false), m_fetchImages(true),
-    m_numCast(10), m_limit(IMDB_MAX_RESULTS), m_lang(EN), m_countOffset(0) {
+    m_numCast(10), m_redirected(false), m_limit(IMDB_MAX_RESULTS), m_lang(EN),
+    m_currentTitleBlock(Unknown), m_countOffset(0) {
   if(!s_tagRx) {
     initRegExps();
   }

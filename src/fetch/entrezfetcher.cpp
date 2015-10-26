@@ -60,7 +60,7 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::EntrezFetcher;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(0),
-    m_step(Begin), m_started(false) {
+    m_start(1), m_total(-1), m_step(Begin), m_started(false) {
 }
 
 EntrezFetcher::~EntrezFetcher() {

@@ -28,7 +28,7 @@
 using Tellico::UPCValidator;
 
 UPCValidator::UPCValidator(QObject* parent_)
-    : QValidator(parent_), m_checkISBN(false) {
+    : QValidator(parent_), m_checkISBN(false), m_isbn(false) {
 }
 
 QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {

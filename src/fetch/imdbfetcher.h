@@ -193,8 +193,6 @@ private slots:
   void slotSiteChanged();
 
 private:
-  QLineEdit* m_hostEdit;
-  //GUI::ComboBox* m_langCombo;
   QCheckBox* m_fetchImageCheck;
   KIntSpinBox* m_numCast;
 };

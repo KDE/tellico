@@ -47,8 +47,8 @@ signals:
   void signalISBN();
 
 private:
-  bool m_checkISBN : 1;
-  mutable bool m_isbn : 1;
+  bool m_checkISBN;
+  mutable bool m_isbn;
 };
 
 class CueCat {

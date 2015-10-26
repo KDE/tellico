@@ -121,6 +121,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
     : KDialog(parent_)
     , m_timer(new QTimer(this))
     , m_started(false)
+    , m_resultCount(0)
     , m_treeWasResized(false)
     , m_barcodePreview(0)
     , m_barcodeRecognitionThread(0) {

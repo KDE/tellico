@@ -52,7 +52,8 @@ namespace {
 
 using Tellico::Import::BoardGameGeekImporter;
 
-BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled(false), m_widget(0) {
+BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled(false), m_widget(0)
+    , m_userEdit(0), m_checkOwned(0) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("boardgamegeek2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     m_xsltURL = QUrl::fromLocalFile(xsltFile);

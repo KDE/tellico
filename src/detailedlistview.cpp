@@ -73,7 +73,8 @@ protected:
 using namespace Tellico;
 using Tellico::DetailedListView;
 
-DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_), m_selectionChanging(false) {
+DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
+    , m_loadingCollection(false), m_selectionChanging(false) {
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);

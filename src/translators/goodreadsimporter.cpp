@@ -48,7 +48,7 @@ namespace {
 
 using Tellico::Import::GoodreadsImporter;
 
-GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(0) {
+GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(0), m_userEdit(0) {
   QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("goodreads2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     m_xsltURL = QUrl::fromLocalFile(xsltFile);

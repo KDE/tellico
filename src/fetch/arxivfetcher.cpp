@@ -57,7 +57,7 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::ArxivFetcher;
 
 ArxivFetcher::ArxivFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0), m_start(0), m_job(0), m_started(false) {
+    : Fetcher(parent_), m_xsltHandler(0), m_start(0), m_total(-1), m_job(0), m_started(false) {
 }
 
 ArxivFetcher::~ArxivFetcher() {

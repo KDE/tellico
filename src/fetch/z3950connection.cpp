@@ -94,7 +94,7 @@ Z3950ResultFound::~Z3950ResultFound() {
 
 class Z3950Connection::Private {
 public:
-  Private() {}
+  Private() : conn_opt(0), conn(0) {}
 #ifdef HAVE_YAZ
   ~Private() {
     ZOOM_options_destroy(conn_opt);
