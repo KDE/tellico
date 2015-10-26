@@ -1,3 +1,7 @@
+2015-10-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed the Yahoo fetcher.
+
 2015-10-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Added user-defined query pairs for SRUFetcher url.

@@ -291,7 +291,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 #endif
 //  vec.append(SRUFetcher::libraryOfCongress(this));
   FETCHER_ADD(ISBNdb);
-//  FETCHER_ADD(Yahoo);
   FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Arxiv);
   FETCHER_ADD(GoogleScholar);

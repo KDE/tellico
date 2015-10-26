@@ -57,7 +57,7 @@ enum Type {
   SRU,
   Entrez,
   ExecExternal,
-  Yahoo,
+  Yahoo, // Removed
   AnimeNfo,
   IBS,
   ISBNdb,

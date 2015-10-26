@@ -55,7 +55,6 @@ SET(fetch_STAT_SRCS
    vndbfetcher.cpp
    winecomfetcher.cpp
    xmlfetcher.cpp
-   yahoofetcher.cpp
    z3950connection.cpp
    z3950fetcher.cpp
    )
