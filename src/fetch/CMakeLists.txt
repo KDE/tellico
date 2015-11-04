@@ -21,6 +21,7 @@ SET(fetch_STAT_SRCS
    entrezfetcher.cpp
    execexternalfetcher.cpp
    fetcher.cpp
+   fetcherinfolistitem.cpp
    fetcherinitializer.cpp
    fetcherjob.cpp
    fetchmanager.cpp

@@ -85,36 +85,7 @@ namespace {
   static const int CONFIG_MIN_HEIGHT = 420;
 }
 
-using Tellico::SourceListItem;
 using Tellico::ConfigDialog;
-
-SourceListItem::SourceListItem(const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
-    : QListWidgetItem(), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
-  setData(Qt::DisplayRole, info_.name);
-  QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
-  if(!pix.isNull()) {
-    setData(Qt::DecorationRole, pix);
-  }
-}
-
-SourceListItem::SourceListItem(QListWidget* parent_, const Tellico::GeneralFetcherInfo& info_, const QString& groupName_)
-    : QListWidgetItem(parent_), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
-  setData(Qt::DisplayRole, info_.name);
-  QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
-  if(!pix.isNull()) {
-    setData(Qt::DecorationRole, pix);
-  }
-}
-
-void SourceListItem::setFetcher(Tellico::Fetch::Fetcher::Ptr fetcher) {
-  m_fetcher = fetcher;
-  QPixmap pix = Fetch::Manager::fetcherIcon(fetcher);
-  if(!pix.isNull()) {
-    setData(Qt::DecorationRole, pix);
-  }
-}
 
 ConfigDialog::ConfigDialog(QWidget* parent_)
     : KPageDialog(parent_)
@@ -777,9 +748,9 @@ void ConfigDialog::readFetchConfig() {
 
   m_sourceListWidget->setUpdatesEnabled(false);
   foreach(Fetch::Fetcher::Ptr fetcher, Fetch::Manager::self()->fetchers()) {
-    GeneralFetcherInfo info(fetcher->type(), fetcher->source(),
+    Fetch::FetcherInfo info(fetcher->type(), fetcher->source(),
                             fetcher->updateOverwrite(), fetcher->uuid());
-    SourceListItem* item = new SourceListItem(m_sourceListWidget, info);
+    FetcherInfoListItem* item = new FetcherInfoListItem(m_sourceListWidget, info);
     item->setFetcher(fetcher);
   }
   m_sourceListWidget->setUpdatesEnabled(true);
@@ -859,7 +830,7 @@ void ConfigDialog::saveFetchConfig() {
   bool reloadFetchers = false;
   int count = 0; // start group numbering at 0
   for( ; count < m_sourceListWidget->count(); ++count) {
-    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(count));
+    FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->item(count));
     Fetch::ConfigWidget* cw = m_configWidgets[item];
     if(!cw || (!cw->shouldSave() && !item->isNewSource())) {
       continue;
@@ -933,8 +904,8 @@ void ConfigDialog::slotNewSourceClicked() {
     return;
   }
 
-  GeneralFetcherInfo info(type, dlg.sourceName(), dlg.updateOverwrite());
-  SourceListItem* item = new SourceListItem(m_sourceListWidget, info);
+  Fetch::FetcherInfo info(type, dlg.sourceName(), dlg.updateOverwrite());
+  FetcherInfoListItem* item = new FetcherInfoListItem(m_sourceListWidget, info);
   m_sourceListWidget->scrollToItem(item);
   m_sourceListWidget->setCurrentItem(item);
   Fetch::ConfigWidget* cw = dlg.configWidget();
@@ -950,7 +921,7 @@ void ConfigDialog::slotNewSourceClicked() {
 }
 
 void ConfigDialog::slotModifySourceClicked() {
-  SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->currentItem());
+  FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->currentItem());
   if(!item) {
     return;
   }
@@ -989,7 +960,7 @@ void ConfigDialog::slotModifySourceClicked() {
 }
 
 void ConfigDialog::slotRemoveSourceClicked() {
-  SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->currentItem());
+  FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->currentItem());
   if(!item) {
     return;
   }
@@ -1034,7 +1005,7 @@ void ConfigDialog::slotSourceFilterChanged() {
   const bool showAll = !m_sourceTypeCombo->isEnabled();
   const int type = m_sourceTypeCombo->currentType();
   for(int count = 0; count < m_sourceListWidget->count(); ++count) {
-    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(count));
+    FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->item(count));
     item->setHidden(!showAll && item->fetcher() && !item->fetcher()->canFetch(type));
   }
 }
@@ -1058,7 +1029,7 @@ void ConfigDialog::slotNewStuffClicked() {
 #endif
 }
 
-Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
+Tellico::FetcherInfoListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
     myDebug() << "empty path";
     return 0;
@@ -1067,7 +1038,7 @@ Tellico::SourceListItem* ConfigDialog::findItem(const QString& path_) const {
   // this is a bit ugly, loop over all items, find the execexternal one
   // that matches the path
   for(int i = 0; i < m_sourceListWidget->count(); ++i) {
-    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(i));
+    FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->item(i));
     if(item->fetchType() != Fetch::ExecExternal) {
       continue;
     }
@@ -1183,7 +1154,7 @@ void ConfigDialog::slotDeleteTemplate() {
 
 void ConfigDialog::slotCreateConfigWidgets() {
   for(int count = 0; count < m_sourceListWidget->count(); ++count) {
-    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(count));
+    FetcherInfoListItem* item = static_cast<FetcherInfoListItem*>(m_sourceListWidget->item(count));
     // only create a new config widget if we don't have one already
     if(!m_configWidgets.contains(item)) {
       Fetch::ConfigWidget* cw = item->fetcher()->configWidget(this);

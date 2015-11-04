@@ -25,7 +25,7 @@
 #ifndef TELLICO_CONFIGDIALOG_H
 #define TELLICO_CONFIGDIALOG_H
 
-#include "fetch/fetcher.h"
+#include "fetch/fetcherinfolistitem.h"
 
 #include <KPageDialog>
 
@@ -44,7 +44,6 @@ class QRadioButton;
 class QFrame;
 
 namespace Tellico {
-  class SourceListItem;
   namespace Fetch {
     class ConfigWidget;
   }
@@ -162,7 +161,7 @@ private:
   void readFetchConfig();
   void saveFetchConfig();
 
-  SourceListItem* findItem(const QString& path) const;
+  FetcherInfoListItem* findItem(const QString& path) const;
   void loadTemplateList();
 
   bool m_modifying;
@@ -197,7 +196,7 @@ private:
   KColorCombo* m_highTextColorCombo;
 
   QListWidget* m_sourceListWidget;
-  QMap<SourceListItem*, Fetch::ConfigWidget*> m_configWidgets;
+  QMap<FetcherInfoListItem*, Fetch::ConfigWidget*> m_configWidgets;
   QList<Fetch::ConfigWidget*> m_newStuffConfigWidgets;
   QList<Fetch::ConfigWidget*> m_removedConfigWidgets;
   QPushButton* m_modifySourceBtn;
@@ -207,40 +206,6 @@ private:
   QPushButton* m_newStuffBtn;
   QCheckBox* m_cbFilterSource;
   GUI::CollectionTypeCombo* m_sourceTypeCombo;
-};
-
-class GeneralFetcherInfo {
-public:
-  GeneralFetcherInfo(Fetch::Type t, const QString& n, bool o, QString u=QString()) : type(t), name(n), updateOverwrite(o), uuid(u) {}
-  Fetch::Type type;
-  QString name;
-  bool updateOverwrite;
-  QString uuid;
-};
-
-class SourceListItem : public QListWidgetItem {
-public:
-  explicit SourceListItem(const GeneralFetcherInfo& info,
-                          const QString& groupName = QString());
-  SourceListItem(QListWidget* parent, const GeneralFetcherInfo& info,
-                 const QString& groupName = QString());
-
-  void setConfigGroup(const QString& s) { m_configGroup = s; if(m_fetcher) m_fetcher->setConfigGroup(s); }
-  const QString& configGroup() const { return m_configGroup; }
-  const Fetch::Type& fetchType() const { return m_info.type; }
-  void setUpdateOverwrite(bool b) { m_info.updateOverwrite = b; }
-  bool updateOverwrite() const { return m_info.updateOverwrite; }
-  void setNewSource(bool b) { m_newSource = b; }
-  bool isNewSource() const { return m_newSource; }
-  QString uuid() const { return m_info.uuid; }
-  void setFetcher(Fetch::Fetcher::Ptr fetcher);
-  Fetch::Fetcher::Ptr fetcher() const { return m_fetcher; }
-
-private:
-  GeneralFetcherInfo m_info;
-  QString m_configGroup;
-  bool m_newSource;
-  Fetch::Fetcher::Ptr m_fetcher;
 };
 
 } // end namespace
