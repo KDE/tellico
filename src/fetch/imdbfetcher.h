@@ -39,7 +39,6 @@ namespace KIO {
   class StoredTransferJob;
 }
 
-class QLineEdit;
 class QCheckBox;
 class QRegExpr;
 
