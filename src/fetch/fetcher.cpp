@@ -122,6 +122,10 @@ void Fetcher::saveConfig() {
   saveConfigHook(config);
 }
 
+void Fetcher::setConfigGroup(const QString& group_) {
+  m_configGroup = group_;
+}
+
 Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
   QPointer<Fetcher> ptr(this);
   Data::EntryPtr entry = fetchEntryHook(uid_);

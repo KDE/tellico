@@ -78,6 +78,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QApplication>
+#include <QTimer>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -780,14 +781,6 @@ void ConfigDialog::readFetchConfig() {
                             fetcher->updateOverwrite(), fetcher->uuid());
     SourceListItem* item = new SourceListItem(m_sourceListWidget, info);
     item->setFetcher(fetcher);
-    // grab the config widget, taking ownership
-    Fetch::ConfigWidget* cw = fetcher->configWidget(this);
-    if(cw) { // might return 0 when no widget available for fetcher type
-      m_configWidgets.insert(item, cw);
-      // there's weird layout bug if it's not hidden
-      cw->hide();
-    }
-    qApp->processEvents();
   }
   m_sourceListWidget->setUpdatesEnabled(true);
 
@@ -800,6 +793,7 @@ void ConfigDialog::readFetchConfig() {
   }
 
   m_modifying = false;
+  QTimer::singleShot(500, this, SLOT(slotCreateConfigWidgets()));
 }
 
 void ConfigDialog::saveConfiguration() {
@@ -964,6 +958,14 @@ void ConfigDialog::slotModifySourceClicked() {
   Fetch::ConfigWidget* cw = 0;
   if(m_configWidgets.contains(item)) {
     cw = m_configWidgets[item];
+  } else {
+    // grab the config widget, taking ownership
+    cw = item->fetcher()->configWidget(this);
+    if(cw) { // might return 0 when no widget available for fetcher type
+      m_configWidgets.insert(item, cw);
+      // there's weird layout bug if it's not hidden
+      cw->hide();
+    }
   }
   if(!cw) {
     // no config widget for this one
@@ -1179,3 +1181,17 @@ void ConfigDialog::slotDeleteTemplate() {
   }
 }
 
+void ConfigDialog::slotCreateConfigWidgets() {
+  for(int count = 0; count < m_sourceListWidget->count(); ++count) {
+    SourceListItem* item = static_cast<SourceListItem*>(m_sourceListWidget->item(count));
+    // only create a new config widget if we don't have one already
+    if(!m_configWidgets.contains(item)) {
+      Fetch::ConfigWidget* cw = item->fetcher()->configWidget(this);
+      if(cw) { // might return 0 when no widget available for fetcher type
+        m_configWidgets.insert(item, cw);
+        // there's weird layout bug if it's not hidden
+        cw->hide();
+      }
+    }
+  }
+}
