@@ -145,7 +145,7 @@ void SRUFetcher::search() {
   if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
     u.addQueryItem(QLatin1String("recordSchema"), m_format);
   }
-  for(StringMap::ConstIterator it = m_queryMap.begin(); it != m_queryMap.end(); ++it) {
+  for(StringMap::ConstIterator it = m_queryMap.constBegin(); it != m_queryMap.constEnd(); ++it) {
     u.addQueryItem(it.key(), it.value());
   }
 
