@@ -128,6 +128,7 @@ public:
    */
   void readConfig(const KConfigGroup& config, const QString& groupName);
   void saveConfig();
+  void setConfigGroup(const QString& group);
   /**
    * Returns a widget for modifying the fetcher's config.
    */

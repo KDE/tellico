@@ -228,7 +228,7 @@ public:
   SourceListItem(KListWidget* parent, const GeneralFetcherInfo& info,
                  const QString& groupName = QString());
 
-  void setConfigGroup(const QString& s) { m_configGroup = s; }
+  void setConfigGroup(const QString& s) { m_configGroup = s; if(m_fetcher) m_fetcher->setConfigGroup(s); }
   const QString& configGroup() const { return m_configGroup; }
   const Fetch::Type& fetchType() const { return m_info.type; }
   void setUpdateOverwrite(bool b) { m_info.updateOverwrite = b; }
