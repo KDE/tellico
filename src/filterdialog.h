@@ -37,13 +37,13 @@
 
 class KComboBox;
 class KLineEdit;
-class KPushButton;
 class KDateComboBox;
 
 class QRadioButton;
 class QDialog;
 class QStackedWidget;
 class QLineEdit;
+class QPushButton;
 
 namespace Tellico {
   namespace GUI {
@@ -109,7 +109,7 @@ private:
   QStackedWidget* m_valueStack;
   KLineEdit* m_ruleValue;
   KDateComboBox* m_ruleDate;
-  KPushButton* m_editRegExp;
+  QPushButton* m_editRegExp;
   QDialog* m_editRegExpDialog;  //krazy:exclude=qclasses
   QStringList m_ruleFieldList;
   enum RuleType {
@@ -187,7 +187,7 @@ private:
   QRadioButton* m_matchAny;
   FilterRuleWidgetLister* m_ruleLister;
   QLineEdit* m_filterName;
-  KPushButton* m_saveFilter;
+  QPushButton* m_saveFilter;
 };
 
 } // end namespace

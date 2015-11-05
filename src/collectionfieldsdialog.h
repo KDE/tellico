@@ -27,11 +27,11 @@
 
 #include "datavectors.h"
 
-#include <kdialog.h>
+#include <KDialog>
 
 class KComboBox;
-class KPushButton;
 
+class QPushButton;
 class QLineEdit;
 class QListWidget;
 class QRadioButton;
@@ -107,10 +107,10 @@ private:
   NotifyMode m_notifyMode;
 
   QListWidget* m_fieldsWidget;
-  KPushButton* m_btnNew;
-  KPushButton* m_btnDelete;
-  KPushButton* m_btnUp;
-  KPushButton* m_btnDown;
+  QPushButton* m_btnNew;
+  QPushButton* m_btnDelete;
+  QPushButton* m_btnUp;
+  QPushButton* m_btnDown;
 
   QLineEdit* m_titleEdit;
   KComboBox* m_typeCombo;
@@ -120,7 +120,7 @@ private:
   QLineEdit* m_defaultEdit;
   QCheckBox* m_derived;
   QLineEdit* m_allowEdit;
-  KPushButton* m_btnExtended;
+  QPushButton* m_btnExtended;
 
   GUI::ComboBox* m_formatCombo;
   QCheckBox* m_complete;

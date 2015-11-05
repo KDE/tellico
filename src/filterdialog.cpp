@@ -36,7 +36,6 @@
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KLineEdit>
-#include <KPushButton>
 #include <kservicetypetrader.h>
 #include <kregexpeditorinterface.h>
 #include <kdatecombobox.h>
@@ -51,6 +50,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QStackedWidget>
+#include <QPushButton>
 
 using Tellico::FilterRuleWidget;
 using Tellico::FilterRuleWidgetLister;
@@ -106,7 +106,7 @@ void FilterRuleWidget::initWidget() {
   m_valueStack->addWidget(m_ruleDate);
 
   if(!KServiceTypeTrader::self()->query(QLatin1String("KRegExpEditor/KRegExpEditor")).isEmpty()) {
-    m_editRegExp = new KPushButton(i18n("Edit..."), this);
+    m_editRegExp = new QPushButton(i18n("Edit..."), this);
     connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
   }
 
@@ -418,7 +418,7 @@ void FilterDialog::init() {
 
   // only when creating a new filter can it be saved
   if(m_mode == CreateFilter) {
-    m_saveFilter = new KPushButton(QIcon::fromTheme(QLatin1String("view-filter")), i18n("&Save Filter"), page);
+    m_saveFilter = new QPushButton(QIcon::fromTheme(QLatin1String("view-filter")), i18n("&Save Filter"), page);
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
     connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));

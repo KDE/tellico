@@ -32,8 +32,6 @@
 
 #include <QHash>
 
-class KPushButton;
-
 namespace Tellico {
   namespace GUI {
     class TabWidget;

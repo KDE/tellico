@@ -29,10 +29,10 @@
 #ifndef TELLICO_STATUSBAR_H
 #define TELLICO_STATUSBAR_H
 
-#include <kstatusbar.h>
+#include <KStatusBar>
 
 class QLabel;
-class KPushButton;
+class QPushButton;
 
 namespace Tellico {
   namespace GUI {
@@ -69,7 +69,7 @@ private:
   QLabel* m_mainLabel;
   QLabel* m_countLabel;
   GUI::Progress* m_progress;
-  KPushButton* m_cancelButton;
+  QPushButton* m_cancelButton;
 };
 
 }

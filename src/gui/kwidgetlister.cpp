@@ -33,9 +33,9 @@
 #include "kwidgetlister.h"
 
 #include <KLocalizedString>
-#include <KGuiItem>
-#include <KPushButton>
+#include <KStandardGuiItem>
 
+#include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
@@ -59,13 +59,15 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mButtonBoxHBoxLayout->setMargin( 0 );
   mLayout->addWidget( mButtonBox );
 
-  mBtnMore = new KPushButton( KGuiItem( i18nc( "more widgets", "More" ),
-                                        QLatin1String("list-add") ), mButtonBox );
+  mBtnMore = new QPushButton( mButtonBox );
+  KGuiItem::assign( mBtnMore, KGuiItem( i18nc( "more widgets", "More" ),
+                                        QLatin1String("list-add") ) );
   mButtonBoxHBoxLayout->addWidget( mBtnMore );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnMore, 0 );
 
-  mBtnFewer = new KPushButton( KGuiItem( i18nc( "fewer widgets", "Fewer" ),
-                                         QLatin1String("list-remove") ), mButtonBox );
+  mBtnFewer = new QPushButton( mButtonBox );
+  KGuiItem::assign( mBtnFewer, KGuiItem( i18nc( "fewer widgets", "Fewer" ),
+                                         QLatin1String("list-remove") ) );
   mButtonBoxHBoxLayout->addWidget( mBtnFewer );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnFewer, 0 );
 
@@ -73,7 +75,8 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mButtonBoxHBoxLayout->addWidget( spacer );
   mButtonBoxHBoxLayout->setStretchFactor( spacer, 1 );
 
-  mBtnClear = new KPushButton( KStandardGuiItem::clear(), mButtonBox );
+  mBtnClear = new QPushButton( mButtonBox );
+  KGuiItem::assign( mBtnClear, KStandardGuiItem::clear() );
   mButtonBoxHBoxLayout->addWidget( mBtnClear );
   // FIXME a useful whats this. KStandardGuiItem::clear() returns a text with an edit box
   mBtnClear->setWhatsThis( QString() );

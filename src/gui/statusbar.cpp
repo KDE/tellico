@@ -28,13 +28,13 @@
 #include "progress.h"
 
 #include <KLocalizedString>
-#include <KPushButton>
+#include <KStandardGuiItem>
 
-#include <QObject>
 #include <QStyle>
 #include <QTimer>
 #include <QToolTip>
 #include <QLabel>
+#include <QPushButton>
 #include <QApplication>
 
 using Tellico::StatusBar;
@@ -57,7 +57,8 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
   m_progress = new GUI::Progress(100, this);
   addPermanentWidget(m_progress, 1);
 
-  m_cancelButton = new KPushButton(KStandardGuiItem::cancel(), this);
+  m_cancelButton = new QPushButton(this);
+  KGuiItem::assign(m_cancelButton, KStandardGuiItem::cancel());
   m_cancelButton->setText(QString());
   m_cancelButton->setToolTip(i18n("Cancel"));
   addPermanentWidget(m_cancelButton, 0);

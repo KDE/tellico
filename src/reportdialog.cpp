@@ -40,8 +40,8 @@
 #include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <kpushbutton.h>
 #include <kfiledialog.h>
+#include <KStandardGuiItem>
 
 #include <QFile>
 #include <QLabel>
@@ -50,6 +50,7 @@
 #include <QTextStream>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QPushButton>
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
@@ -94,17 +95,20 @@ ReportDialog::ReportDialog(QWidget* parent_)
   hlay->addWidget(m_templateCombo);
   l->setBuddy(m_templateCombo);
 
-  KPushButton* pb1 = new KPushButton(KGuiItem(i18n("&Generate"), QLatin1String("application-x-executable")), mainWidget);
+  QPushButton* pb1 = new QPushButton(mainWidget);
+  KGuiItem::assign(pb1, KGuiItem(i18n("&Generate"), QLatin1String("application-x-executable")));
   hlay->addWidget(pb1);
   connect(pb1, SIGNAL(clicked()), SLOT(slotGenerate()));
 
   hlay->addStretch();
 
-  KPushButton* pb2 = new KPushButton(KStandardGuiItem::saveAs(), mainWidget);
+  QPushButton* pb2 = new QPushButton(mainWidget);
+  KGuiItem::assign(pb2, KStandardGuiItem::saveAs());
   hlay->addWidget(pb2);
   connect(pb2, SIGNAL(clicked()), SLOT(slotSaveAs()));
 
-  KPushButton* pb3 = new KPushButton(KStandardGuiItem::print(), mainWidget);
+  QPushButton* pb3 = new QPushButton(mainWidget);
+  KGuiItem::assign(pb3, KStandardGuiItem::print());
   hlay->addWidget(pb3);
   connect(pb3, SIGNAL(clicked()), SLOT(slotPrint()));
 

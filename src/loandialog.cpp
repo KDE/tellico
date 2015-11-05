@@ -35,7 +35,6 @@
 
 #include <KLocalizedString>
 #include <KLineEdit>
-#include <kpushbutton.h>
 #include <ktextedit.h>
 #include <KJob>
 #include <KSharedConfig>
@@ -47,6 +46,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QGridLayout>
+#include <QPushButton>
 
 using Tellico::LoanDialog;
 
@@ -123,7 +123,7 @@ void LoanDialog::init() {
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
   button(Ok)->setEnabled(false); // disable until a name is entered
-  KPushButton* pb = new KPushButton(QIcon::fromTheme(QLatin1String("kaddressbook")), QString(), mainWidget);
+  QPushButton* pb = new QPushButton(QIcon::fromTheme(QLatin1String("kaddressbook")), QString(), mainWidget);
   topLayout->addWidget(pb, row, 2);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
