@@ -57,7 +57,7 @@ private slots:
 private:
   Data::CollPtr m_coll;
   Data::EntryList m_dupes;
-  
+
   KTitleWidget* m_dupeLabel;
 };
 

@@ -28,25 +28,40 @@
 #include "../images/imagefactory.h" // for StyleOptions
 
 #include <KLocalizedString>
-#include <khtmlview.h>
+#include <KHTMLView>
 
 #include <QTemporaryDir>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using Tellico::GUI::PreviewDialog;
 
 PreviewDialog::PreviewDialog(QWidget* parent_)
-        : KDialog(parent_)
+        : QDialog(parent_)
         , m_tempDir(new QTemporaryDir()) {
   setModal(false);
-  setCaption(i18n("Template Preview"));
-  setButtons(Ok);
+  setWindowTitle(i18n("Template Preview"));
+
+  QVBoxLayout* mainLayout = new QVBoxLayout;
+  setLayout(mainLayout);
+
+  QWidget* mainWidget = new QWidget(this);
+  mainLayout->addWidget(mainWidget);
+
+  m_view = new EntryView(mainWidget);
+  mainLayout->addWidget(m_view->view());
+
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
+  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+  mainLayout->addWidget(buttonBox);
+
+  resize(QSize(600, 500));
 
   m_tempDir->setAutoRemove(true);
-  connect(this, SIGNAL(finished()), SLOT(delayedDestruct()));
-
-  m_view = new EntryView(this);
-  setMainWidget(m_view->view());
-  setInitialSize(QSize(600, 500));
 }
 
 PreviewDialog::~PreviewDialog() {
@@ -67,4 +82,3 @@ void PreviewDialog::setXSLTOptions(int collectionType_, Tellico::StyleOptions op
 void PreviewDialog::showEntry(Tellico::Data::EntryPtr entry_) {
   m_view->showEntry(entry_);
 }
-

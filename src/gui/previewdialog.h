@@ -25,7 +25,7 @@
 #ifndef TELLICO_GUI_PREVIEWDIALOG_H
 #define TELLICO_GUI_PREVIEWDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 #include "../datavectors.h"
 
@@ -37,7 +37,7 @@ namespace Tellico {
 
   namespace GUI {
 
-class PreviewDialog : public KDialog {
+class PreviewDialog : public QDialog {
 Q_OBJECT
 
 public:
