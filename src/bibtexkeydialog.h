@@ -25,19 +25,21 @@
 #ifndef TELLICO_BIBTEXKEYDIALOG_H
 #define TELLICO_BIBTEXKEYDIALOG_H
 
-#include <kdialog.h>
+#include <QDialog>
 
 #include "datavectors.h"
 #include "filter.h"
 
 class KTitleWidget;
 
+class QPushButton;
+
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
  */
-class BibtexKeyDialog : public KDialog {
+class BibtexKeyDialog : public QDialog {
 Q_OBJECT
 
 public:
@@ -59,6 +61,7 @@ private:
   Data::EntryList m_dupes;
 
   KTitleWidget* m_dupeLabel;
+  QPushButton* m_filterButton;
 };
 
 } // end namespace

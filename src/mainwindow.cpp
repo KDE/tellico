@@ -1849,7 +1849,7 @@ void MainWindow::slotShowBibtexKeyDialog() {
 
   if(!m_bibtexKeyDlg) {
     m_bibtexKeyDlg = new BibtexKeyDialog(Data::Document::self()->collection(), this);
-    connect(m_bibtexKeyDlg, SIGNAL(finished()), SLOT(slotHideBibtexKeyDialog()));
+    connect(m_bibtexKeyDlg, SIGNAL(finished(int)), SLOT(slotHideBibtexKeyDialog()));
     connect(m_bibtexKeyDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
             this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
   } else {
@@ -1860,7 +1860,7 @@ void MainWindow::slotShowBibtexKeyDialog() {
 
 void MainWindow::slotHideBibtexKeyDialog() {
   if(m_bibtexKeyDlg) {
-    m_bibtexKeyDlg->delayedDestruct();
+    m_bibtexKeyDlg->deleteLater();
     m_bibtexKeyDlg = 0;
   }
 }
