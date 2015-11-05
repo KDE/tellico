@@ -24,17 +24,11 @@
 
 #include "stringmapdialog.h"
 #include "stringmapwidget.h"
-#include <KPushButton>
-#include <KLocalizedString>
-#include <KGuiItem>
 
-#include <QTreeWidget>
 #include <QHeaderView>
-#include <QPushButton>
 #include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLineEdit>
 #include <QDialogButtonBox>
+#include <QPushButton>
 
 using Tellico::StringMapDialog;
 
