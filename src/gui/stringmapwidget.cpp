@@ -24,7 +24,6 @@
 
 #include "stringmapwidget.h"
 
-#include <KPushButton>
 #include <KLocalizedString>
 #include <KGuiItem>
 
@@ -34,6 +33,7 @@
 #include <QHBoxLayout>
 #include <QLineEdit>
 #include <QDialogButtonBox>
+#include <QPushButton>
 
 using Tellico::GUI::StringMapWidget;
 
@@ -65,11 +65,14 @@ StringMapWidget::StringMapWidget(const QMap<QString, QString>& map_, QWidget* pa
 
   QDialogButtonBox* bb = new QDialogButtonBox(box);
   boxHBoxLayout->addWidget(bb);
-  KPushButton* pb1 = new KPushButton(KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QLatin1String("document-new"))), bb);
+
+  QPushButton* pb1 = new QPushButton(bb);
+  KGuiItem::assign(pb1, KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QLatin1String("document-new"))));
   connect(pb1, SIGNAL(clicked()), this, SLOT(slotAdd()));
   bb->addButton(pb1, QDialogButtonBox::ActionRole);
 
-  KPushButton* pb2 = new KPushButton(KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))), bb);
+  QPushButton* pb2 = new QPushButton(bb);
+  KGuiItem::assign(pb2, KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))));
   connect(pb2, SIGNAL(clicked()), this, SLOT(slotDelete()));
   bb->addButton(pb2, QDialogButtonBox::ActionRole);
 
