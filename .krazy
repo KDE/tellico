@@ -1,2 +1,3 @@
 EXCLUDE license
 EXTRA null,qmath,crud
+CHECKSETS kde5,foss
