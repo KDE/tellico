@@ -309,6 +309,7 @@ void SRUFetcher::slotComplete(KJob*) {
   if(m_format == QLatin1String("mods")) {
     modsResult = result;
 //  } else if(m_format == QLatin1String("marcxml") && initMARCXMLHandler()) {
+// some SRU data sources call it MARC21-xml or something other than marcxml
   } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive) && initMARCXMLHandler()) {
     modsResult = m_MARCXMLHandler->applyStylesheet(result);
   }
@@ -535,7 +536,6 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_formatCombo->addItem(QLatin1String("MARCXML"), QLatin1String("marcxml"));
   m_formatCombo->addItem(QLatin1String("PAM"), QLatin1String("pam"));
   m_formatCombo->addItem(QLatin1String("Dublin Core"), QLatin1String("dc"));
-//  m_formatCombo->addItem(QLatin1String(""), QLatin1String("none"));
   m_formatCombo->setEditable(true);
   connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_formatCombo, SIGNAL(editTextChanged(QString)), SLOT(slotSetModified()));
