@@ -28,7 +28,7 @@
 #include "datavectors.h"
 #include "borrower.h"
 
-#include <kdialog.h>
+#include <QDialog>
 
 class KLineEdit;
 class KTextEdit;
@@ -36,6 +36,7 @@ class KJob;
 
 class QUndoCommand;
 class QCheckBox;
+class QDialogButtonBox;
 
 namespace Tellico {
   namespace GUI {
@@ -45,7 +46,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class LoanDialog : public KDialog {
+class LoanDialog : public QDialog {
 Q_OBJECT
 
 public:
@@ -88,6 +89,7 @@ private:
   GUI::DateWidget* m_dueDate;
   KTextEdit* m_note;
   QCheckBox* m_addEvent;
+  QDialogButtonBox* m_buttonBox;
 
   QString m_uid;
 };
