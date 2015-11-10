@@ -71,10 +71,12 @@ LoanDialog::LoanDialog(Tellico::Data::LoanPtr loan_, QWidget* parent_)
   m_loanDate->setDate(m_loan->loanDate());
   if(m_loan->dueDate().isValid()) {
     m_dueDate->setDate(m_loan->dueDate());
+#ifdef HAVE_KCAL
     m_addEvent->setEnabled(true);
     if(m_loan->inCalendar()) {
       m_addEvent->setChecked(true);
     }
+#endif
   }
   m_note->setPlainText(m_loan->note());
 }
