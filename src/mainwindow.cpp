@@ -1388,6 +1388,12 @@ void MainWindow::slotEditDeselect() {
 void MainWindow::slotToggleGroupWidget() {
   if(m_toggleGroupWidget->isChecked()) {
     m_viewTabs->show();
+    // if width was set to zero, choose a default width
+    if(m_viewTabs->width() == 0) {
+      QList<int> widths = m_split->sizes();
+      widths[0] = m_viewTabs->minimumSizeHint().width();
+      m_split->setSizes(widths);
+    }
   } else {
     m_viewTabs->hide();
   }
