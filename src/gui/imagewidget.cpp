@@ -33,7 +33,6 @@
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <KProgressDialog>
 #include <KProcess>
 #include <KMimeTypeTrader>
 #include <KRun>
@@ -58,6 +57,7 @@
 #include <QDrag>
 #include <QTemporaryFile>
 #include <QMimeData>
+#include <QProgressDialog>
 
 #ifdef HAVE_KSANE
 #include <libksane/ksane.h>
@@ -319,10 +319,10 @@ void ImageWidget::slotEditImage() {
       m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, QList<QUrl>() << QUrl::fromLocalFile(m_img)));
       m_editProcess->start();
       if(!m_waitDlg) {
-        m_waitDlg = new KProgressDialog(this);
-        m_waitDlg->showCancelButton(false);
+        m_waitDlg = new QProgressDialog(this);
+        m_waitDlg->setCancelButton(0);
         m_waitDlg->setLabelText(i18n("Opening image in %1...", m_editor->name()));
-        m_waitDlg->progressBar()->setRange(0, 0);
+        m_waitDlg->setRange(0, 0);
       }
       m_waitDlg->exec();
     } else {

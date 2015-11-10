@@ -46,7 +46,8 @@ class QCheckBox;
 class QLabel;
 class QToolButton;
 class QMenu;
-class KProgressDialog;
+class QProgressDialog;
+
 class KProcess;
 #ifdef HAVE_KSANE
 class KDialog;
@@ -108,7 +109,7 @@ private:
   KService::Ptr m_editor;
   QString m_img;
   KProcess* m_editProcess;
-  KProgressDialog* m_waitDlg;
+  QProgressDialog* m_waitDlg;
   QDateTime m_editedFileDateTime;
 #ifdef HAVE_KSANE
   QPointer<KSaneIface::KSaneWidget> m_saneWidget;
