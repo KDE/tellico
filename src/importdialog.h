@@ -28,9 +28,9 @@
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <kdialog.h>
-#include <QUrl>
+#include <KDialog>
 
+#include <QUrl>
 #include <QShowEvent>
 
 class QRadioButton;
