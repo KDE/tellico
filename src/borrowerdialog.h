@@ -25,11 +25,10 @@
 #ifndef TELLICO_BORROWERDIALOG_H
 #define TELLICO_BORROWERDIALOG_H
 
-#include "borrower.h"
 #include <config.h>
+#include "borrower.h"
 
-#include <KDialog>
-
+#include <QDialog>
 #include <QHash>
 #include <QTreeWidget>
 
@@ -46,7 +45,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class BorrowerDialog : public KDialog {
+class BorrowerDialog : public QDialog {
 Q_OBJECT
 
 public:

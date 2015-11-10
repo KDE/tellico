@@ -22,10 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifdef QT_STRICT_ITERATORS
-#define WAS_STRICT
-#undef QT_STRICT_ITERATORS
-#endif
 
 #include "borrowerdialog.h"
 #include "document.h"
@@ -37,16 +33,23 @@
 #include <KJob>
 
 #ifdef HAVE_KABC
-#include <kcontacts/addressee.h>
-#include <Akonadi/Contact/ContactSearchJob>
+#ifdef QT_STRICT_ITERATORS
+#define WAS_STRICT
+#undef QT_STRICT_ITERATORS
 #endif
 
-#include <QVBoxLayout>
+#include <kcontacts/addressee.h>
+#include <Akonadi/Contact/ContactSearchJob>
 
 #ifdef WAS_STRICT
 #define QT_STRICT_ITERATORS
 #undef WAS_STRICT
 #endif
+#endif
+
+#include <QVBoxLayout>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 using Tellico::BorrowerDialog;
 
@@ -66,29 +69,40 @@ BorrowerDialog::Item::Item(QTreeWidget* parent_, const Tellico::Data::Borrower& 
 
 // default button is going to be used as a print button, so it's separated
 BorrowerDialog::BorrowerDialog(QWidget* parent_)
-    : KDialog(parent_) {
+    : QDialog(parent_) {
   setModal(true);
-  setCaption(i18n("Select Borrower"));
-  setButtons(Ok | Cancel);
+  setWindowTitle(i18n("Select Borrower"));
+
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  QVBoxLayout *mainLayout = new QVBoxLayout(this);
+  setLayout(mainLayout);
 
   QWidget* mainWidget = new QWidget(this);
-  setMainWidget(mainWidget);
-  QVBoxLayout* topLayout = new QVBoxLayout(mainWidget);
+  mainLayout->addWidget(mainWidget);
+
+  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
   m_treeWidget = new QTreeWidget(mainWidget);
-  topLayout->addWidget(m_treeWidget);
+  mainLayout->addWidget(m_treeWidget);
   m_treeWidget->setHeaderLabel(i18n("Name"));
+  m_treeWidget->setRootIsDecorated(false);
   connect(m_treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
           SLOT(accept()));
   connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
           SLOT(updateEdit(QTreeWidgetItem*)));
 
   m_lineEdit = new KLineEdit(mainWidget); //krazy:exclude=qclasses
-  topLayout->addWidget(m_lineEdit);
+  mainLayout->addWidget(m_lineEdit);
   connect(m_lineEdit->completionObject(), SIGNAL(match(const QString&)),
           SLOT(selectItem(const QString&)));
   m_lineEdit->setFocus();
   m_lineEdit->completionObject()->setIgnoreCase(true);
+
+  mainLayout->addWidget(buttonBox);
 
 #ifdef HAVE_KABC
   // Search for all existing contacts
@@ -188,4 +202,3 @@ Tellico::Data::BorrowerPtr BorrowerDialog::getBorrower(QWidget* parent_) {
   }
   return Data::BorrowerPtr();
 }
-

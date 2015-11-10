@@ -59,6 +59,7 @@ LoanView::LoanView(QWidget* parent_) : GUI::TreeView(parent_), m_notSortedYet(tr
   sortModel->setSourceModel(borrowerModel);
   setModel(sortModel);
   setItemDelegate(new GUI::CountDelegate(this));
+  updateHeader();
 }
 
 /*
@@ -201,4 +202,3 @@ void LoanView::updateHeader() {
     model()->setHeaderData(0, Qt::Horizontal, i18n("Borrower (Sort by Count)"));
   }
 }
-
