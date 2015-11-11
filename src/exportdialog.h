@@ -28,7 +28,7 @@
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <kdialog.h>
+#include <QDialog>
 #include <QUrl>
 
 class QCheckBox;
@@ -42,7 +42,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ExportDialog : public KDialog {
+class ExportDialog : public QDialog {
 Q_OBJECT
 
 public:
