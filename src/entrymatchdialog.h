@@ -29,8 +29,7 @@
 #include "entryupdater.h"
 #include "fetch/fetcher.h"
 
-#include <kdialog.h>
-
+#include <QDialog>
 #include <QHash>
 
 namespace Tellico {
@@ -45,7 +44,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class EntryMatchDialog : public KDialog {
+class EntryMatchDialog : public QDialog {
 Q_OBJECT
 
 public:
