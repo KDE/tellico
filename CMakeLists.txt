@@ -254,10 +254,6 @@ add_subdirectory(icons)
 add_subdirectory(xslt)
 add_subdirectory(doc)
 
-if(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
-    message("WARNING: CDDB Lookup is not supported on your platform")
-endif(NOT CMAKE_SYSTEM_NAME MATCHES "FreeBSD|Linux|kFreeBSD|NetBSD|OpenBSD|SunOS|Darwin")
-
 ########## Wrap tests results around the tests done within the source
 
 macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
