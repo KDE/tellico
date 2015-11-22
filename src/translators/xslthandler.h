@@ -79,7 +79,8 @@ public:
    */
   ~XSLTHandler();
 
-  bool isValid() const { return (m_stylesheet != NULL); }
+  bool isValid() const;
+
   /**
    * Set the XSLT text
    *

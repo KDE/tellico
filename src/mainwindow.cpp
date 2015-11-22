@@ -91,7 +91,6 @@
 #include <KToggleAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KShortcutsDialog>
 #include <KAboutData>
 
 #include <QApplication>

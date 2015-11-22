@@ -510,7 +510,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
 
   QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
                                                 size_, KIconLoader::DefaultState,
-                                                QStringList(), 0L, true);
+                                                QStringList(), 0, true);
   if(pix.isNull()) {
     pix = BarIcon(name);
   }

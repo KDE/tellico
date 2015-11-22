@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef HATHIFETCHERTEST_H
-#define HATHIFETCHERTEST_H
+#ifndef HATHTRUSTIFETCHERTEST_H
+#define HATHITRUSTFETCHERTEST_H
 
 #include "abstractfetchertest.h"
 

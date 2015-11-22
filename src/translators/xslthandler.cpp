@@ -84,7 +84,7 @@ XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
   init();
   QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
   if(!file.isEmpty()) {
-    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), 0, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltFile_;
@@ -98,7 +98,7 @@ XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
     m_stylesheet(0) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8().constData(), NULL, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8().constData(), 0, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltURL_.path();
@@ -144,6 +144,10 @@ void XSLTHandler::init() {
   m_params.clear();
 }
 
+bool XSLTHandler::isValid() const {
+  return (m_stylesheet != 0);
+}
+
 void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFile_, bool translate_) {
   bool utf8 = true; // XML defaults to utf-8
 
@@ -172,9 +176,9 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
 
   xmlDocPtr xsltDoc;
   if(utf8) {
-    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toUtf8().data()), xsltFile_.data(), NULL, xslt_options);
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toUtf8().data()), xsltFile_.data(), 0, xslt_options);
   } else {
-    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toLocal8Bit().data()), xsltFile_.data(), NULL, xslt_options);
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toLocal8Bit().data()), xsltFile_.data(), 0, xslt_options);
   }
 
   if(m_stylesheet) {
@@ -224,7 +228,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
   }
 
   xmlDocPtr docIn;
-  docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), NULL, NULL, xml_options);
+  docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), 0, 0, xml_options);
 
   return process(docIn);
 }
@@ -236,13 +240,13 @@ QString XSLTHandler::process(xmlDocPtr docIn) {
   }
 
   QVector<const char*> params(2*m_params.count() + 1);
-  params[0] = NULL;
+  params[0] = 0;
   QHash<QByteArray, QByteArray>::ConstIterator it = m_params.constBegin();
   QHash<QByteArray, QByteArray>::ConstIterator end = m_params.constEnd();
   for(int i = 0; it != end; ++it) {
     params[i  ] = qstrdup(it.key().constData());
     params[i+1] = qstrdup(it.value().constData());
-    params[i+2] = NULL;
+    params[i+2] = 0;
     i += 2;
   }
   // returns NULL on error

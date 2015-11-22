@@ -654,7 +654,7 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
     if (fields[i][0] == 0) {
       if ((fields[i][1] >= min_unit_length) && (fields[i][1] <= max_unit_length)) {
         if ((abs(fields[i][1] - fields[i + 1][1]) <= max_start_sentry_bar_differences)
-                  && (abs(fields[i][1] - fields[i + 2][1]) <= max_start_sentry_bar_differences) && (fields[i + 3][1] < fields[i][1] << 3)) {
+                  && (qAbs(fields[i][1] - fields[i + 2][1]) <= max_start_sentry_bar_differences) && (fields[i + 3][1] < fields[i][1] << 3)) {
           start_sentinel_i = i;
           break;
         }

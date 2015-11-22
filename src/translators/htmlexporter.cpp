@@ -129,7 +129,7 @@ bool HTMLExporter::exec() {
   // ok if not ExportProgress, no worries
   ProgressItem::Done done(this);
 
-  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().toUtf8().data()), NULL);
+  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().toUtf8().data()), 0);
   xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
   if(root == 0) {
     myDebug() << "no root";
