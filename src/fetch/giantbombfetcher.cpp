@@ -50,6 +50,7 @@ using Tellico::Fetch::GiantBombFetcher;
 
 GiantBombFetcher::GiantBombFetcher(QObject* parent_)
     : XMLFetcher(parent_)
+    , m_total(-1)
     , m_apiKey(QLatin1String(GIANTBOMB_API_KEY)) {
   setLimit(GIANTBOMB_MAX_RETURNS_TOTAL);
   setXSLTFilename(QLatin1String("giantbomb2tellico.xsl"));

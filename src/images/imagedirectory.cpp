@@ -147,7 +147,7 @@ void TemporaryImageDirectory::setPath(const QString& path) {
   Q_ASSERT(path.isEmpty()); // should never be called, that's why it's private
 }
 
-ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(0) {
+ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(0), m_imgDir(0) {
 }
 
 ImageZipArchive::~ImageZipArchive() {

@@ -59,7 +59,7 @@ using Tellico::Fetch::ISBNdbFetcher;
 
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_countOffset(0),
+      m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_numResults(0), m_countOffset(0),
       m_job(0), m_started(false), m_apiKey(QLatin1String(ISBNDB_APP_ID)) {
   // https://bugs.kde.org/show_bug.cgi?id=339063 -- some output is incorrectly encoded
   QDomImplementation::setInvalidDataPolicy(QDomImplementation::DropInvalidChars);

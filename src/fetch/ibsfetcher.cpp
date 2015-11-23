@@ -51,7 +51,7 @@ using namespace Tellico;
 using Tellico::Fetch::IBSFetcher;
 
 IBSFetcher::IBSFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_total(0), m_started(false) {
 }
 
 IBSFetcher::~IBSFetcher() {

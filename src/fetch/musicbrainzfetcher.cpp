@@ -34,8 +34,9 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KJobUiDelegate>
+#include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
 
 #include <QLabel>
@@ -44,7 +45,6 @@
 #include <QGridLayout>
 #include <QDomDocument>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int MUSICBRAINZ_MAX_RETURNS_TOTAL = 10;
@@ -56,7 +56,7 @@ using Tellico::Fetch::MusicBrainzFetcher;
 
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_offset(0),
+      m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_total(-1), m_offset(0),
       m_job(0), m_started(false) {
 }
 

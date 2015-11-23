@@ -84,7 +84,7 @@ private:
   Data::EntryPtr parseEntry(const QString& str, const QUrl& url);
 
   QByteArray m_data;
-  int m_total;
+//  int m_total;
   QHash<int, Data::EntryPtr> m_entries;
   QHash<int, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;

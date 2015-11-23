@@ -58,7 +58,7 @@ using Tellico::Fetch::WineComFetcher;
 
 WineComFetcher::WineComFetcher(QObject* parent_)
     : Fetcher(parent_), m_xsltHandler(0),
-      m_limit(WINECOM_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_offset(0),
+      m_limit(WINECOM_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_numResults(0), m_offset(0),
       m_job(0), m_started(false) {
 }
 

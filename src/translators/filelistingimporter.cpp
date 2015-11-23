@@ -36,7 +36,7 @@
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"
 
-#include <kio/job.h>
+#include <KIO/Job>
 #include <solid/device.h>
 #include <solid/storagevolume.h>
 #include <solid/storageaccess.h>
@@ -66,7 +66,7 @@ namespace {
 using Tellico::Import::FileListingImporter;
 
 FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
-    m_job(0), m_cancelled(false) {
+    m_recursive(0), m_filePreview(0), m_job(0), m_cancelled(false) {
 }
 
 bool FileListingImporter::canImport(int type) const {

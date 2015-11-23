@@ -80,7 +80,7 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_)
 }
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
-    : Fetcher(parent_), m_conn(0), m_started(false), m_done(true), m_preset(preset_),
+    : Fetcher(parent_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_started(false), m_done(true), m_preset(preset_),
       m_MARC21XMLHandler(0), m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
   QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(!serverFile.isEmpty()) {

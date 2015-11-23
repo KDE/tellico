@@ -85,7 +85,7 @@ private:
   virtual void parseData(QByteArray& data);
   virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
 
-  int m_start;
+//  int m_start;
   int m_total;
 
   QString m_apiKey;

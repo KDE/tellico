@@ -129,7 +129,6 @@ private:
   GUI::CollectionTypeCombo* m_collCombo;
   GUI::ComboBox* m_pluginCombo;
   QLabel* m_authorLabel;
-  QLabel* m_langLabel;
 };
 
   } // end namespace

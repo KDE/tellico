@@ -57,7 +57,7 @@ using namespace Tellico;
 using Tellico::Export::TellicoXMLExporter;
 
 TellicoXMLExporter::TellicoXMLExporter(Tellico::Data::CollPtr coll) : Exporter(coll),
-      m_includeImages(false), m_includeGroups(false), m_widget(0) {
+      m_includeImages(false), m_includeGroups(false), m_widget(0), m_checkIncludeImages(0) {
   setOptions(options() | Export::ExportImages | Export::ExportImageSize); // not included by default
 }
 

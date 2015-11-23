@@ -212,7 +212,8 @@ private:
 
 class FieldValueHandler : public StateHandler {
 public:
-  FieldValueHandler(StateData* data) : StateHandler(data) {}
+  FieldValueHandler(StateData* data) : StateHandler(data)
+    , m_i18n(false), m_validateISBN(false) {}
   virtual ~FieldValueHandler() {}
 
   virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
@@ -256,7 +257,8 @@ private:
 
 class ImageHandler : public StateHandler {
 public:
-  ImageHandler(StateData* data) : StateHandler(data) {}
+  ImageHandler(StateData* data) : StateHandler(data)
+    , m_link(false), m_width(0), m_height(0) {}
   virtual ~ImageHandler() {}
 
   virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
@@ -329,7 +331,8 @@ private:
 
 class LoanHandler : public StateHandler {
 public:
-  LoanHandler(StateData* data) : StateHandler(data) {}
+  LoanHandler(StateData* data) : StateHandler(data)
+    , m_id(-1), m_inCalendar(false) {}
   virtual ~LoanHandler() {}
 
   virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);

@@ -423,11 +423,6 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   m_authorLabel = new QLabel(optionsWidget());
   l->addWidget(m_authorLabel, row, 1);
 
-//  label = new QLabel(i18n("Language: "), optionsWidget());
-//  l->addWidget(label, row, 2);
-//  m_langLabel = new QLabel(optionsWidget());
-//  l->addWidget(m_langLabel, row, 3);
-
   if(fetcher_) {
     if(fetcher_->m_collType > -1) {
       m_collCombo->setCurrentType(fetcher_->m_collType);
@@ -472,7 +467,6 @@ void GCstarPluginFetcher::ConfigWidget::slotTypeChanged() {
 void GCstarPluginFetcher::ConfigWidget::slotPluginChanged() {
   PluginInfo info = m_pluginCombo->currentData().toHash();
   m_authorLabel->setText(info[QLatin1String("author")].toString());
-//  m_langLabel->setText(info[QLatin1String("lang")].toString());
   emit signalName(preferredName());
 }
 
@@ -486,4 +480,3 @@ void GCstarPluginFetcher::ConfigWidget::showEvent(QShowEvent*) {
     }
   }
 }
-

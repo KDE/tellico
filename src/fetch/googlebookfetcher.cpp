@@ -60,6 +60,7 @@ GoogleBookFetcher::GoogleBookFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
     , m_start(0)
+    , m_total(0)
     , m_apiKey(QLatin1String(GOOGLEBOOK_API_KEY)) {
 }
 

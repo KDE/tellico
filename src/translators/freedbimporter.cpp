@@ -66,7 +66,13 @@
 
 using Tellico::Import::FreeDBImporter;
 
-FreeDBImporter::FreeDBImporter() : Tellico::Import::Importer(), m_widget(0), m_cancelled(false) {
+FreeDBImporter::FreeDBImporter() : Tellico::Import::Importer()
+    , m_widget(0)
+    , m_buttonGroup(0)
+    , m_radioCDROM(0)
+    , m_radioCache(0)
+    , m_driveCombo(0)
+    , m_cancelled(false) {
 }
 
 bool FreeDBImporter::canImport(int type) const {

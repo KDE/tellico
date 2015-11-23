@@ -54,7 +54,7 @@ using namespace Tellico;
 using Tellico::Fetch::MASFetcher;
 
 MASFetcher::MASFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_started(false), m_start(0), m_total(-1) {
 }
 
 MASFetcher::~MASFetcher() {

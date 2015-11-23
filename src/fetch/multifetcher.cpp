@@ -40,7 +40,7 @@ using namespace Tellico;
 using Tellico::Fetch::MultiFetcher;
 
 MultiFetcher::MultiFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_), m_started(false), m_collType(0) {
 }
 
 MultiFetcher::~MultiFetcher() {

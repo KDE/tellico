@@ -77,6 +77,10 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_imageWidth(0),
     m_imageHeight(0),
     m_widget(0),
+    m_checkPrintHeaders(0),
+    m_checkPrintGrouped(0),
+    m_checkExportEntryFiles(0),
+    m_checkExportImages(0),
     m_xsltFile(QLatin1String("tellico2html.xsl")) {
 }
 
