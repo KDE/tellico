@@ -5,3 +5,4 @@ Douban API2 for video and music (QJson)
 Add Zotero query
 When adding new default value to a field, offer to insert value ine xisting entries
 Remove FIlmaster?
+Make sure all usages of FileRef* deletes the pointer

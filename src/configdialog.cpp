@@ -50,9 +50,9 @@
 #include <KIntSpinBox>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
-#include <kfiledialog.h>
 #include <kcolorcombo.h>
 #include <KHelpClient>
+#include <KRecentDirs>
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
@@ -79,6 +79,7 @@
 #include <QHBoxLayout>
 #include <QApplication>
 #include <QTimer>
+#include <QFileDialog>
 
 namespace {
   static const int CONFIG_MIN_WIDTH = 640;
@@ -1113,14 +1114,16 @@ void ConfigDialog::loadTemplateList() {
 }
 
 void ConfigDialog::slotInstallTemplate() {
-  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QLatin1Char('\n');
-  filter += i18n("*.tar.gz *.tgz|Template Packages (*.tar.gz)") + QLatin1Char('\n');
-  filter += i18n("*|All Files");
+  QString filter = i18n("XSL Files (*.xsl)") + QLatin1String(";;");
+  filter += i18n("Template Packages (*.tar.gz *.tgz)") + QLatin1String(";;");
+  filter += i18n("All Files (*)");
 
-  QString f = KFileDialog::getOpenFileName(QUrl(), filter, this);
+  const QString fileClass(QLatin1String(":InstallTemplate"));
+  const QString f = QFileDialog::getOpenFileName(this, QString(), KRecentDirs::dir(fileClass), filter);
   if(f.isEmpty()) {
     return;
   }
+  KRecentDirs::add(fileClass, QFileInfo(f).dir().canonicalPath());
 
   if(Tellico::NewStuff::Manager::self()->installTemplate(f)) {
     loadTemplateList();
