@@ -87,7 +87,7 @@ QString Tellico::dataDir() {
 }
 
 QString Tellico::saveLocation(const QString& dir_) {
-  QString path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + dir_;
+  QString path = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QDir::separator() + dir_;
   QDir dir;
   bool success = dir.mkpath(path);
   if(!success) {
@@ -142,8 +142,7 @@ bool Tellico::checkCommonXSLFile() {
       return true;
     }
   }
-  QUrl src, dest;
-  src.setPath(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("tellico-common.xsl")));
-  dest.setPath(userCommonFile);
+  QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("tellico-common.xsl")));
+  QUrl dest = QUrl::fromLocalFile(userCommonFile);
   return KIO::file_copy(src, dest)->exec();
 }
