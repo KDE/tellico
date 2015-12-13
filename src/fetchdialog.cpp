@@ -54,7 +54,6 @@
 #include <khtmlview.h>
 #include <kprogressdialog.h>
 #include <KSharedConfig>
-#include <kfiledialog.h>
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
 #include <KMessageBox>
@@ -75,6 +74,7 @@
 #include <QHeaderView>
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QFileDialog>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -706,7 +706,8 @@ void FetchDialog::slotEditMultipleISBN() {
   boxVBoxLayout->setMargin(0);
   boxVBoxLayout->setSpacing(10);
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
-  (void) new QLabel(s, box);
+  QLabel* l = new QLabel(s, box);
+  boxVBoxLayout->addWidget(l);
   m_isbnTextEdit = new KTextEdit(box);
   boxVBoxLayout->addWidget(m_isbnTextEdit);
   if(m_isbnList.isEmpty()) {
@@ -718,6 +719,7 @@ void FetchDialog::slotEditMultipleISBN() {
   connect(m_isbnTextEdit, SIGNAL(textChanged()), this, SLOT(slotISBNTextChanged()));
 
   QPushButton* fromFileBtn = new QPushButton(box);
+  boxVBoxLayout->addWidget(fromFileBtn);
   KGuiItem::assign(fromFileBtn, KStandardGuiItem::open());
   fromFileBtn->setText(i18n("&Load From File..."));
   fromFileBtn->setWhatsThis(i18n("<qt>Load the list from a text file.</qt>"));
@@ -752,7 +754,7 @@ void FetchDialog::slotLoadISBNList() {
   if(!m_isbnTextEdit) {
     return;
   }
-  QUrl u = KFileDialog::getOpenUrl(QUrl(), QString(), this);
+  QUrl u = QUrl::fromLocalFile(QFileDialog::getOpenFileName(this, QString(), QString(), QString()));
   if(u.isValid()) {
     m_isbnTextEdit->setText(m_isbnTextEdit->toPlainText() + FileHandler::readTextFile(u));
     m_isbnTextEdit->moveCursor(QTextCursor::End);
