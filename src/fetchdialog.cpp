@@ -58,6 +58,7 @@
 #include <ktextedit.h>
 #include <KMessageBox>
 #include <KStandardGuiItem>
+#include <KWindowConfig>
 
 #include <QPushButton>
 #include <QLineEdit>
@@ -308,10 +309,9 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), qMax(FETCH_MIN_WIDTH, minimumSizeHint().width())));
   setStatus(i18n("Ready."));
 
-  KConfigGroup sizeGroup(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
-  restoreDialogSize(sizeGroup);
-
   KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
+
   QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(!splitList.empty()) {
     split->setSizes(splitList);
@@ -357,7 +357,7 @@ FetchDialog::~FetchDialog() {
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
-  saveDialogSize(config);
+  KWindowConfig::saveWindowSize(windowHandle(), config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
   config.writeEntry("Search Key", m_keyCombo->currentData().toInt());

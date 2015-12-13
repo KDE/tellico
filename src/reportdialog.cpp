@@ -42,6 +42,7 @@
 #include <khtmlview.h>
 #include <kfiledialog.h>
 #include <KStandardGuiItem>
+#include <KWindowConfig>
 
 #include <QFile>
 #include <QLabel>
@@ -134,7 +135,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
-  restoreDialogSize(config);
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
 }
 
 ReportDialog::~ReportDialog() {
@@ -142,7 +143,7 @@ ReportDialog::~ReportDialog() {
   m_exporter = 0;
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
-  saveDialogSize(config);
+  KWindowConfig::saveWindowSize(windowHandle(), config);
 }
 
 void ReportDialog::slotGenerate() {

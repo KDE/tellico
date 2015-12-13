@@ -38,6 +38,7 @@
 #include <kacceleratormanager.h>
 #include <kpushbutton.h>
 #include <KSharedConfig>
+#include <KWindowConfig>
 
 #include <QStringList>
 #include <QObject>
@@ -83,7 +84,7 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   setHelp(QLatin1String("entry-editor"));
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
-  restoreDialogSize(config);
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
 }
 
 // we want to try the close button
@@ -105,7 +106,7 @@ void EntryEditDialog::slotClose() {
     setContents(m_currEntries);
     slotSetModified(false);
     KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
-    saveDialogSize(config);
+    KWindowConfig::saveWindowSize(windowHandle(), config);
   }
 }
 
@@ -755,4 +756,3 @@ void EntryEditDialog::closeEvent(QCloseEvent* event_) {
     event_->ignore();
   }
 }
-

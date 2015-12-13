@@ -92,6 +92,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KAboutData>
+#include <KWindowConfig>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -869,7 +870,7 @@ void MainWindow::saveOptions() {
 
   // this is used in the EntryEditDialog constructor, too
   KConfigGroup editDialogConfig(KSharedConfig::openConfig(), "Edit Dialog Options");
-  m_editDialog->saveDialogSize(editDialogConfig);
+  KWindowConfig::saveWindowSize(m_editDialog->windowHandle(), editDialogConfig);
 
   saveCollectionOptions(Data::Document::self()->collection());
   Config::self()->save();
