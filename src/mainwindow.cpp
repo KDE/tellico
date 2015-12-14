@@ -1084,11 +1084,11 @@ void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
   if(m_editDialog->queryModified() && querySaveModified()) {
-    QString filter = i18n("Tellico Files (*.tc *.bc)");
+    QString filter = i18n("Tellico Files") + QLatin1String(" (*.tc *.bc)");
     filter += QLatin1String(";;");
-    filter += i18n("XML Files (*.xml)");
+    filter += i18n("XML Files") + QLatin1String(" (*.xml)");
     filter += QLatin1String(";;");
-    filter += i18n("All Files (*)");
+    filter += i18n("All Files") + QLatin1String(" (*)");
     // keyword 'open'
     QString fileClass;
     const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///open")), fileClass);
@@ -1255,9 +1255,9 @@ bool MainWindow::fileSaveAs() {
 
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
-  QString filter = i18n("Tellico Files (*.tc *.bc)");
+  QString filter = i18n("Tellico Files") + QLatin1String(" (*.tc *.bc)");
   filter += QLatin1String(";;");
-  filter += i18n("All Files (*)");
+  filter += i18n("All Files") + QLatin1String(" (*)");
 
   // keyword 'open'
   QString fileClass;

@@ -51,7 +51,7 @@ QString XSLTExporter::formatString() const {
 }
 
 QString XSLTExporter::fileFilter() const {
-  return i18n("All Files (*)");
+  return i18n("All Files") + QLatin1String(" (*)");
 }
 
 
@@ -96,7 +96,10 @@ QWidget* XSLTExporter::widget(QWidget* parent_) {
 
   l->addWidget(gbox);
 
-  QString filter = i18n("*.xsl|XSL Files (*.xsl)") + QLatin1Char('\n') + i18n("*|All Files");
+  // these are in the old KDE4 filter format, not the Qt5 format
+  QString filter = QLatin1String("*.xsl|") + i18n("XSL Files")
+                 + QLatin1Char('\n')
+                 + QLatin1String("*|") + i18n("All Files");
   m_URLRequester->setFilter(filter);
   m_URLRequester->setMode(KFile::File | KFile::ExistingOnly);
   if(!m_xsltFile.isEmpty()) {

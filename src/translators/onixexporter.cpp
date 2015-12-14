@@ -68,7 +68,7 @@ QString ONIXExporter::formatString() const {
 }
 
 QString ONIXExporter::fileFilter() const {
-  return i18n("Zip Files (*.zip)") + QLatin1String(";;") + i18n("All Files (*)");
+  return i18n("Zip Files") + QLatin1String(" (*.zip)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
 bool ONIXExporter::exec() {

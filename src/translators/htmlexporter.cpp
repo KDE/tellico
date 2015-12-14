@@ -94,7 +94,7 @@ QString HTMLExporter::formatString() const {
 }
 
 QString HTMLExporter::fileFilter() const {
-  return i18n("HTML Files (*.html)") + QLatin1String(";;") + i18n("All Files (*)");
+  return i18n("HTML Files") + QLatin1String(" (*.html)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
 void HTMLExporter::reset() {

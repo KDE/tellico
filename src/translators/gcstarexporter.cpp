@@ -58,7 +58,7 @@ QString GCstarExporter::formatString() const {
 }
 
 QString GCstarExporter::fileFilter() const {
-  return i18n("GCstar Data Files (*.gcs)") + QLatin1String(";;") + i18n("All Files (*)");
+  return i18n("GCstar Data Files") + QLatin1String(" (*.gcs)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
 bool GCstarExporter::exec() {

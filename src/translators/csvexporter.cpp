@@ -62,7 +62,7 @@ QString CSVExporter::formatString() const {
 }
 
 QString CSVExporter::fileFilter() const {
-  return i18n("CSV Files (*.csv)") + QLatin1String(";;") + i18n("All Files (*)");
+  return i18n("CSV Files") + QLatin1String(" (*.csv)") + QLatin1String(";;") + i18n("All Files") + QLatin1String(" (*)");
 }
 
 QString& CSVExporter::escapeText(QString& text_) const {

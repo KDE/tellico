@@ -214,7 +214,9 @@ void ReportDialog::slotPrint() {
 }
 
 void ReportDialog::slotSaveAs() {
-  QString filter = i18n("HTML Files (*.html)") + QLatin1String(";;") + i18n("All Files (*)");
+  QString filter = i18n("HTML Files") + QLatin1String(" (*.html)")
+                 + QLatin1String(";;")
+                 + i18n("All Files") + QLatin1String(" (*)");
   QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
   if(!u.isEmpty() && u.isValid()) {
     KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");

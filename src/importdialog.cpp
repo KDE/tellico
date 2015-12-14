@@ -318,16 +318,16 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
   QString text;
   switch(format_) {
     case Import::TellicoXML:
-      text = i18n("Tellico Files (*.tc *.bc)") + QLatin1String(";;");
-      text += i18n("XML Files (*.xml)") + QLatin1String(";;");
+      text = i18n("Tellico Files") + QLatin1String(" (*.tc *.bc)") + QLatin1String(";;");
+      text += i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
       break;
 
     case Import::Bibtex:
-      text = i18n("Bibtex Files (*.bib)") + QLatin1String(";;");
+      text = i18n("Bibtex Files") + QLatin1String(" (*.bib)") + QLatin1String(";;");
       break;
 
     case Import::CSV:
-      text = i18n("CSV Files (*.csv)") + QLatin1String(";;");
+      text = i18n("CSV Files") + QLatin1String(" (*.csv)") + QLatin1String(";;");
       break;
 
     case Import::Bibtexml:
@@ -335,36 +335,36 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::MODS:
     case Import::Delicious:
     case Import::Griffith:
-      text = i18n("XML Files (*.xml)") + QLatin1String(";;");
+      text = i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
       break;
 
     case Import::RIS:
-      text = i18n("RIS Files (*.ris)") + QLatin1String(";;");
+      text = i18n("RIS Files") + QLatin1String(" (*.ris)") + QLatin1String(";;");
       break;
 
     case Import::GCstar:
-      text = i18n("GCstar Data Files (*.gcs *.gcf)") + QLatin1String(";;");
+      text = i18n("GCstar Data Files") + QLatin1String(" (*.gcs *.gcf)") + QLatin1String(";;");
       break;
 
     case Import::AMC:
-      text = i18n("AMC Data Files (*.amc)") + QLatin1String(";;");
+      text = i18n("AMC Data Files") + QLatin1String(" (*.amc)") + QLatin1String(";;");
       break;
 
     case Import::PDF:
-      text = i18n("PDF Files (*.pdf)") + QLatin1String(";;");
+      text = i18n("PDF Files") + QLatin1String(" (*.pdf)") + QLatin1String(";;");
       break;
 
     case Import::Referencer:
-      text = i18n("Referencer Files (*.reflib)") + QLatin1String(";;");
+      text = i18n("Referencer Files") + QLatin1String(" (*.reflib)") + QLatin1String(";;");
       break;
 
     case Import::CIW:
-      text = i18n("CIW Files (*.ciw)") + QLatin1String(";;");
+      text = i18n("CIW Files") + QLatin1String(" (*.ciw)") + QLatin1String(";;");
       break;
 
     case Import::VinoXML:
-      text = i18n("VinoXML Data Files (*.vinoxml)") + QLatin1String(";;");
-      text += i18n("XML Files (*.xml)") + QLatin1String(";;");
+      text = i18n("VinoXML Data Files") + QLatin1String(" (*.vinoxml)") + QLatin1String(";;");
+      text += i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
       break;
 
     case Import::AudioFile:
@@ -377,7 +377,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
       break;
   }
 
-  return text + i18n("All Files (*)");
+  return text + i18n("All Files") + QLatin1String(" (*)");
 }
 
 // audio files are imported by directory

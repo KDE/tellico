@@ -1114,9 +1114,9 @@ void ConfigDialog::loadTemplateList() {
 }
 
 void ConfigDialog::slotInstallTemplate() {
-  QString filter = i18n("XSL Files (*.xsl)") + QLatin1String(";;");
-  filter += i18n("Template Packages (*.tar.gz *.tgz)") + QLatin1String(";;");
-  filter += i18n("All Files (*)");
+  QString filter = i18n("XSL Files") + QLatin1String(" (*.xsl)") + QLatin1String(";;");
+  filter += i18n("Template Packages") + QLatin1String(" (*.tar.gz *.tgz)") + QLatin1String(";;");
+  filter += i18n("All Files") + QLatin1String(" (*)");
 
   const QString fileClass(QLatin1String(":InstallTemplate"));
   const QString f = QFileDialog::getOpenFileName(this, QString(), KRecentDirs::dir(fileClass), filter);
