@@ -564,4 +564,3 @@ void FreeDBImporter::slotClicked(int id_) {
 void FreeDBImporter::slotCancel() {
   m_cancelled = true;
 }
-

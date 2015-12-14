@@ -269,4 +269,3 @@ bool CIWImporter::maybeCIW(const QUrl& url_) {
   }
   return rx.exactMatch(currLine);
 }
-

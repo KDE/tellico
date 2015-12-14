@@ -482,4 +482,3 @@ int AudioFileImporter::discNumber(const TagLib::FileRef& ref_) const {
 #endif
   return num;
 }
-

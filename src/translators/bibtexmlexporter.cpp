@@ -49,7 +49,7 @@ QString BibtexmlExporter::formatString() const {
 }
 
 QString BibtexmlExporter::fileFilter() const {
-  return i18n("*.xml|Bibtexml Files (*.xml)") + QLatin1Char('\n') + i18n("*|All Files");
+  return i18n("Bibtexml Files (*.xml)") + QLatin1String(";;") + i18n("All Files (*)");
 }
 
 bool BibtexmlExporter::exec() {
@@ -191,4 +191,3 @@ QString BibtexmlExporter::text() {
 
   return dom.toString();
 }
-

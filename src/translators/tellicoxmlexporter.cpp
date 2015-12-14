@@ -66,7 +66,7 @@ QString TellicoXMLExporter::formatString() const {
 }
 
 QString TellicoXMLExporter::fileFilter() const {
-  return i18n("*.xml|XML Files (*.xml)") + QLatin1Char('\n') + i18n("*|All Files");
+  return i18n("XML Files (*.xml)") + QLatin1String(";;") + i18n("All Files (*)");
 }
 
 bool TellicoXMLExporter::exec() {

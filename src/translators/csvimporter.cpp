@@ -644,4 +644,3 @@ void CSVImporter::updateFieldCombo() {
   }
   m_comboField->addItem(i18n("<New Field>"));
 }
-

@@ -337,4 +337,3 @@ bool TellicoImporter::loadAllImages(const QUrl& url_) {
   }
   return true;
 }
-

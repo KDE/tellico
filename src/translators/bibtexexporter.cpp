@@ -62,7 +62,7 @@ QString BibtexExporter::formatString() const {
 }
 
 QString BibtexExporter::fileFilter() const {
-  return i18n("*.bib|Bibtex Files (*.bib)") + QLatin1Char('\n') + i18n("*|All Files");
+  return i18n("Bibtex Files (*.bib)") + QLatin1String(";;") + i18n("All Files");
 }
 
 bool BibtexExporter::exec() {
@@ -356,4 +356,3 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   }
   text_ += QLatin1String("\n}\n\n");
 }
-

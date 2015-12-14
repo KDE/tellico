@@ -316,4 +316,3 @@ QStringList AMCImporter::parseCast(const QString& text_) {
 void AMCImporter::slotCancel() {
   m_cancelled = true;
 }
-

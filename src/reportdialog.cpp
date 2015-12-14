@@ -40,7 +40,6 @@
 #include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
-#include <kfiledialog.h>
 #include <KStandardGuiItem>
 #include <KWindowConfig>
 
@@ -52,6 +51,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QFileDialog>
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
@@ -214,8 +214,8 @@ void ReportDialog::slotPrint() {
 }
 
 void ReportDialog::slotSaveAs() {
-  QString filter = i18n("*.html|HTML Files (*.html)") + QLatin1Char('\n') + i18n("*|All Files");
-  QUrl u = KFileDialog::getSaveUrl(QUrl(), filter, this);
+  QString filter = i18n("HTML Files (*.html)") + QLatin1String(";;") + i18n("All Files (*)");
+  QUrl u = QFileDialog::getSaveFileUrl(this, QString(), QUrl(), filter);
   if(!u.isEmpty() && u.isValid()) {
     KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
     bool encode = config.readEntry("EncodeUTF8", true);

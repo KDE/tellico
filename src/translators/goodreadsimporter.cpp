@@ -159,4 +159,3 @@ QString GoodreadsImporter::idFromName(const QString& name_) const {
                               .text()
                               .trimmed();
 }
-

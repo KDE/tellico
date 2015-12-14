@@ -364,4 +364,3 @@ bool RISImporter::maybeRIS(const QUrl& url_) {
   }
   return rx.exactMatch(currLine);
 }
-

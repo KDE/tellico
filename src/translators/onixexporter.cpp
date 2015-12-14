@@ -68,7 +68,7 @@ QString ONIXExporter::formatString() const {
 }
 
 QString ONIXExporter::fileFilter() const {
-  return i18n("*.zip|Zip Files (*.zip)") + QLatin1Char('\n') + i18n("*|All Files");
+  return i18n("Zip Files (*.zip)") + QLatin1String(";;") + i18n("All Files (*)");
 }
 
 bool ONIXExporter::exec() {
@@ -203,4 +203,3 @@ void ONIXExporter::saveOptions(KSharedConfigPtr config_) {
   KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Images", m_includeImages);
 }
-

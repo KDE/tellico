@@ -73,17 +73,18 @@
 #include "tellico_debug.h"
 
 #include <KComboBox>
-#include <KFileDialog>
 #include <KToolBar>
 #include <KLocalizedString>
 #include <KConfig>
 #include <KStandardAction>
 #include <KWindowSystem>
+#include <KWindowConfig>
 #include <KProgressDialog>
 #include <KHTMLView>
 #include <KMessageBox>
 #include <KTipDialog>
 #include <KRecentDocument>
+#include <KRecentDirs>
 #include <KEditToolBar>
 #include <KShortcutsDialog>
 #include <KIO/NetAccess>
@@ -92,7 +93,7 @@
 #include <KActionCollection>
 #include <KActionMenu>
 #include <KAboutData>
-#include <KWindowConfig>
+#include <KFileWidget>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -104,6 +105,7 @@
 #include <QMimeDatabase>
 #include <QMimeType>
 #include <QMenuBar>
+#include <QFileDialog>
 
 #include <unistd.h>
 
@@ -1082,16 +1084,20 @@ void MainWindow::slotFileOpen() {
   slotStatusMsg(i18n("Opening file..."));
 
   if(m_editDialog->queryModified() && querySaveModified()) {
-    QString filter = i18n("*.tc *.bc|Tellico Files (*.tc)");
-    filter += QLatin1String("\n");
-    filter += i18n("*.xml|XML Files (*.xml)");
-    filter += QLatin1String("\n");
-    filter += i18n("*|All Files");
+    QString filter = i18n("Tellico Files (*.tc *.bc)");
+    filter += QLatin1String(";;");
+    filter += i18n("XML Files (*.xml)");
+    filter += QLatin1String(";;");
+    filter += i18n("All Files (*)");
     // keyword 'open'
-    QUrl url = KFileDialog::getOpenUrl(QUrl(QLatin1String("kfiledialog:///open")), filter,
-                                       this, i18n("Open File"));
+    QString fileClass;
+    const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///open")), fileClass);
+    QUrl url = QFileDialog::getOpenFileUrl(this, i18n("Open File"), startUrl, filter);
     if(!url.isEmpty() && url.isValid()) {
       slotFileOpen(url);
+      if(url.isLocalFile()) {
+        KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+      }
     }
   }
   StatusBar::self()->clearStatus();
@@ -1249,16 +1255,21 @@ bool MainWindow::fileSaveAs() {
 
   slotStatusMsg(i18n("Saving file with a new filename..."));
 
-  QString filter = i18n("*.tc *.bc|Tellico Files (*.tc)");
-  filter += QLatin1Char('\n');
-  filter += i18n("*|All Files");
+  QString filter = i18n("Tellico Files (*.tc *.bc)");
+  filter += QLatin1String(";;");
+  filter += i18n("All Files (*)");
 
   // keyword 'open'
-  QUrl url = KFileDialog::getSaveUrl(QUrl(QLatin1String("kfiledialog:///open")), filter, this, i18n("Save As"));
+  QString fileClass;
+  const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///open")), fileClass);
+  const QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Save As"), startUrl, filter);
 
   if(url.isEmpty()) {
     StatusBar::self()->clearStatus();
     return false;
+  }
+  if(url.isLocalFile()) {
+    KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
   }
 
   bool ret = true;
@@ -1750,14 +1761,27 @@ void MainWindow::slotFileImport(int format_) {
   QUrl url;
   switch(ImportDialog::importTarget(format)) {
     case Import::File:
-      url = KFileDialog::getOpenUrl(QUrl(ImportDialog::startDir(format)), ImportDialog::fileFilter(format),
-                                    this, i18n("Import File"));
+      {
+        QString fileClass;
+        const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///import")), fileClass);
+        url = QFileDialog::getOpenFileUrl(this, i18n("Import File"), startUrl, ImportDialog::fileFilter(format));
+        if(url.isLocalFile()) {
+          KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+        }
+      }
       break;
 
     case Import::Dir:
       // TODO: allow remote audiofile importing
-      url.setPath(KFileDialog::getExistingDirectory(QUrl::fromLocalFile(ImportDialog::startDir(format)),
-                                                    this, i18n("Import Directory")));
+      {
+        const QString fileClass(QLatin1String("ImportDir"));
+        QString dirName = ImportDialog::startDir(format);
+        if(dirName.isEmpty()) {
+          dirName = KRecentDirs::dir(fileClass);
+        }
+        url = QUrl::fromLocalFile(QFileDialog::getExistingDirectory(this, i18n("Import Directory"), dirName));
+        KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+      }
       break;
 
     case Import::None:
@@ -1799,14 +1823,18 @@ void MainWindow::slotFileExport(int format_) {
 
     case Export::File:
     {
-      QUrl url = KFileDialog::getSaveUrl(QUrl(QLatin1String("kfiledialog:///export")),
-                                         dlg.fileFilter(), this, i18n("Export As"));
+      QString fileClass;
+      const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///export")), fileClass);
+      QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Export As"), startUrl, dlg.fileFilter());
       if(url.isEmpty()) {
         StatusBar::self()->clearStatus();
         return;
       }
 
       if(url.isValid()) {
+        if(url.isLocalFile()) {
+          KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+        }
         GUI::CursorSaver cs(Qt::WaitCursor);
         dlg.exportURL(url);
       }

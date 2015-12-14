@@ -422,4 +422,3 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
   macros.unite(newColl->macroList());
   mainColl->setMacroList(macros);
 }
-

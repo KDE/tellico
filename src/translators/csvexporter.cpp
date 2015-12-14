@@ -62,7 +62,7 @@ QString CSVExporter::formatString() const {
 }
 
 QString CSVExporter::fileFilter() const {
-  return i18n("*.csv|CSV Files (*.csv)") + QLatin1Char('\n') + i18n("*|All Files");
+  return i18n("CSV Files (*.csv)") + QLatin1String(";;") + i18n("All Files (*)");
 }
 
 QString& CSVExporter::escapeText(QString& text_) const {
@@ -253,4 +253,3 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
   group.writeEntry("RowDelimiter", m_rowDelimiter);
   group.writeEntry("ColumnDelimiter", m_colDelimiter);
 }
-

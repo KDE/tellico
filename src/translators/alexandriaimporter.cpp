@@ -299,4 +299,3 @@ QString& AlexandriaImporter::clean(QString& str_) {
 void AlexandriaImporter::slotCancel() {
   m_cancelled = true;
 }
-

@@ -240,4 +240,3 @@ QString BoardGameGeekImporter::text(const QStringList& idList_) const {
 void BoardGameGeekImporter::slotCancel() {
   m_cancelled = true;
 }
-

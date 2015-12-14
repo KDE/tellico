@@ -55,4 +55,3 @@ void GriffithImporter::beginXSLTHandler(XSLTHandler* handler_) {
 bool GriffithImporter::canImport(int type) const {
   return type == Data::Collection::Video;
 }
-

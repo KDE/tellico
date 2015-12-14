@@ -48,4 +48,3 @@ Tellico::Data::CollPtr Exporter::collection() const {
 const Tellico::Data::FieldList& Exporter::fields() const {
   return m_fields.isEmpty() ? collection()->fields() : m_fields;
 }
-

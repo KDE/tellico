@@ -136,4 +136,3 @@ QWidget* XSLTImporter::widget(QWidget* parent_) {
 void XSLTImporter::slotCancel() {
   myDebug() << "unimplemented";
 }
-

@@ -47,4 +47,3 @@ void DataImporter::setText(const QString& text) {
   m_data.truncate(m_data.size()-1);
   m_source = Text;
 }
-

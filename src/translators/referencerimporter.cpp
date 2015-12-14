@@ -80,4 +80,3 @@ Tellico::Data::CollPtr ReferencerImporter::collection() {
   }
   return coll;
 }
-

@@ -47,4 +47,3 @@ TextImporter::TextImporter(const QUrl& url_, bool useUTF8_)
 
 TextImporter::TextImporter(const QString& text_) : Import::Importer(text_) {
 }
-

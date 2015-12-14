@@ -240,4 +240,3 @@ Tellico::Data::FieldPtr ADSImporter::fieldByTag(const QString& tag_) {
 void ADSImporter::slotCancel() {
   m_cancelled = true;
 }
-

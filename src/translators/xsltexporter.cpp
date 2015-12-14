@@ -51,7 +51,7 @@ QString XSLTExporter::formatString() const {
 }
 
 QString XSLTExporter::fileFilter() const {
-  return i18n("*|All Files");
+  return i18n("All Files (*)");
 }
 
 

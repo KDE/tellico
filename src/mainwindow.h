@@ -32,8 +32,8 @@
 #include "datavectors.h"
 
 #include <kxmlguiwindow.h>
-#include <QUrl>
 
+#include <QUrl>
 #include <QList>
 
 class KToolBar;

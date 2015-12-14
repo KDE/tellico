@@ -115,4 +115,3 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
 
   return coll;
 }
-

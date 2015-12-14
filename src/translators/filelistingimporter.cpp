@@ -292,4 +292,3 @@ void FileListingImporter::slotCancel() {
     m_job->kill();
   }
 }
-

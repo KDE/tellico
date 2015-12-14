@@ -171,4 +171,3 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
 void BibtexmlImporter::slotCancel() {
   m_cancelled = true;
 }
-

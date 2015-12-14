@@ -79,4 +79,3 @@ void XMLImporter::setText(const QString& text_) {
 Tellico::Data::CollPtr XMLImporter::collection() {
   return Data::CollPtr();
 }
-
