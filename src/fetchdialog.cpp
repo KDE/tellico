@@ -50,7 +50,6 @@
 #endif
 
 #include <KLocalizedString>
-#include <kstatusbar.h>
 #include <khtmlview.h>
 #include <kprogressdialog.h>
 #include <KSharedConfig>
@@ -76,6 +75,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QFileDialog>
+#include <QStatusBar>
 
 namespace {
   static const int FETCH_MIN_WIDTH = 600;
@@ -289,7 +289,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   topLayout->addWidget(bottombox);
   bottomboxHBoxLayout->setSpacing(KDialog::spacingHint());
 
-  m_statusBar = new KStatusBar(bottombox);
+  m_statusBar = new QStatusBar(bottombox);
   bottomboxHBoxLayout->addWidget(m_statusBar);
   m_statusLabel = new QLabel(m_statusBar);
   m_statusBar->addPermanentWidget(m_statusLabel, 1);

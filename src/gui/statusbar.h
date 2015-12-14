@@ -29,7 +29,7 @@
 #ifndef TELLICO_STATUSBAR_H
 #define TELLICO_STATUSBAR_H
 
-#include <KStatusBar>
+#include <QStatusBar>
 
 class QLabel;
 class QPushButton;
@@ -43,7 +43,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class StatusBar : public KStatusBar {
+class StatusBar : public QStatusBar {
 Q_OBJECT
 
 public:

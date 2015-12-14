@@ -51,9 +51,9 @@ namespace barcodeRecognition {
 }
 
 class KComboBox;
-class KStatusBar;
 class KTextEdit;
 
+class QStatusBar;
 class QPushButton;
 class QLineEdit;
 class QLabel;
@@ -128,7 +128,7 @@ private:
   EntryView* m_entryView;
   QPushButton* m_addButton;
   QPushButton* m_moreButton;
-  KStatusBar* m_statusBar;
+  QStatusBar* m_statusBar;
   QLabel* m_statusLabel;
   QProgressBar* m_progress;
   QTimer* m_timer;

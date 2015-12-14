@@ -40,7 +40,7 @@
 using Tellico::StatusBar;
 StatusBar* StatusBar::s_self = 0;
 
-StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
+StatusBar::StatusBar(QWidget* parent_) : QStatusBar(parent_) {
   s_self = this;
 
   // don't care about text and id
@@ -72,7 +72,7 @@ StatusBar::StatusBar(QWidget* parent_) : KStatusBar(parent_) {
 }
 
 void StatusBar::ensurePolished() const {
-  KStatusBar::ensurePolished();
+  QStatusBar::ensurePolished();
 
   int h = 0;
   QList<QWidget*> list = findChildren<QWidget*>();
