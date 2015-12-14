@@ -46,13 +46,12 @@
 #include <QPixmap>
 #include <QApplication>
 #include <QFile>
+#include <QScopedPointer>
 
 #include <config.h>
 #ifdef HAVE_POPPLER
 #include <poppler-qt5.h>
 #endif
-
-#include <memory>
 
 namespace {
   static const int PDF_FILE_PREVIEW_SIZE = 196;
@@ -100,7 +99,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   XMPHandler xmpHandler;
   QList<QUrl> list = urls();
   for(QList<QUrl>::Iterator it = list.begin(); it != list.end() && !m_cancelled; ++it, ++j) {
-    const std::auto_ptr<FileHandler::FileRef> ref(FileHandler::fileRef(*it));
+    const QScopedPointer<FileHandler::FileRef> ref(FileHandler::fileRef(*it));
     if(!ref->isValid()) {
       continue;
     }

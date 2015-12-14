@@ -47,3 +47,8 @@ void DataImporter::setText(const QString& text) {
   m_data.truncate(m_data.size()-1);
   m_source = Text;
 }
+
+Tellico::FileHandler::FileRef& DataImporter::fileRef() const {
+  Q_ASSERT(m_fileRef);
+  return *m_fileRef;
+}

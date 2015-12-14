@@ -67,7 +67,7 @@ protected:
    * @return the file data
    */
   const QByteArray& data() const { return m_data; }
-  FileHandler::FileRef& fileRef() const { return *m_fileRef; }
+  FileHandler::FileRef& fileRef() const;
 
 private:
   QByteArray m_data;

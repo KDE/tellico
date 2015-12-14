@@ -36,8 +36,7 @@
 #include <QGroupBox>
 #include <QTextStream>
 #include <QHBoxLayout>
-
-#include <memory>
+#include <QScopedPointer>
 
 using Tellico::Import::XSLTImporter;
 
@@ -45,7 +44,7 @@ namespace {
 
 static bool isUTF8(const QUrl& url_) {
   // read first line to check encoding
-  const std::auto_ptr<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
+  const QScopedPointer<Tellico::FileHandler::FileRef> ref(Tellico::FileHandler::fileRef(url_));
   if(!ref->isValid()) {
     return false;
   }
