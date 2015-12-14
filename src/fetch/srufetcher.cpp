@@ -46,8 +46,8 @@
 #include <KConfigGroup>
 #include <KComboBox>
 #include <KAcceleratorManager>
-#include <KIntSpinBox>
 
+#include <QSpinBox>
 #include <QLabel>
 #include <QGridLayout>
 #include <QFile>
@@ -511,7 +511,10 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
 
   label = new QLabel(i18n("&Port: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_portSpinBox = new KIntSpinBox(0, 999999, 1, SRU_DEFAULT_PORT, optionsWidget());
+  m_portSpinBox = new QSpinBox(optionsWidget());
+  m_portSpinBox->setMaximum(999999);
+  m_portSpinBox->setMinimum(0);
+  m_portSpinBox->setValue(SRU_DEFAULT_PORT);
   connect(m_portSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSetModified()));
   l->addWidget(m_portSpinBox, row, 1);
   w = i18n("Enter the port number of the server. The default is %1.", SRU_DEFAULT_PORT);

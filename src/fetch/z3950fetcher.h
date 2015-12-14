@@ -41,7 +41,8 @@
 #include <QPointer>
 #include <QEvent>
 
-class KIntSpinBox;
+class QSpinBox;
+
 class KComboBox;
 
 namespace Tellico {
@@ -145,7 +146,7 @@ private:
   QCheckBox* m_usePreset;
   GUI::ComboBox* m_serverCombo;
   GUI::LineEdit* m_hostEdit;
-  KIntSpinBox* m_portSpinBox;
+  QSpinBox* m_portSpinBox;
   GUI::LineEdit* m_databaseEdit;
   GUI::LineEdit* m_userEdit;
   GUI::LineEdit* m_passwordEdit;

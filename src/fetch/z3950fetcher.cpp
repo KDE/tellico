@@ -50,13 +50,13 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <KIntSpinBox>
 #include <KConfigGroup>
 #include <KComboBox>
 #include <KAcceleratorManager>
 #include <KSeparator>
 #include <KConfig>
 
+#include <QSpinBox>
 #include <QFile>
 #include <QLabel>
 #include <QDomDocument>
@@ -598,7 +598,10 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
 
   label = new QLabel(i18n("&Port: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_portSpinBox = new KIntSpinBox(0, 999999, 1, Z3950_DEFAULT_PORT, optionsWidget());
+  m_portSpinBox = new QSpinBox(optionsWidget());
+  m_portSpinBox->setMaximum(999999);
+  m_portSpinBox->setMinimum(0);
+  m_portSpinBox->setValue(Z3950_DEFAULT_PORT);
   connect(m_portSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSetModified()));
   l->addWidget(m_portSpinBox, row, 1);
   w = i18n("Enter the port number of the server. The default is %1.", Z3950_DEFAULT_PORT);

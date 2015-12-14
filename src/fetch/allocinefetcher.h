@@ -31,7 +31,8 @@
 
 #include <QPointer>
 
-class KIntSpinBox;
+class QSpinBox;
+
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -70,7 +71,7 @@ public:
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const = 0;
   private:
-    KIntSpinBox* m_numCast;
+    QSpinBox* m_numCast;
   };
   friend class ConfigWidget;
 

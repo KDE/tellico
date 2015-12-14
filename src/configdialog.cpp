@@ -47,7 +47,6 @@
 
 #include <KLocalizedString>
 #include <kconfig.h>
-#include <KIntSpinBox>
 #include <kacceleratormanager.h>
 #include <khtmlview.h>
 #include <kcolorcombo.h>
@@ -60,6 +59,7 @@
 #include <KNS/Engine>
 #endif
 
+#include <QSpinBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QSize>
@@ -370,7 +370,10 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 
   QLabel* lab = new QLabel(i18n("Maximum image &width:"), imageOptions);
   gridLayout->addWidget(lab, 0, 0);
-  m_imageWidthBox = new KIntSpinBox(0, 999, 1, 50, imageOptions);
+  m_imageWidthBox = new QSpinBox(imageOptions);
+  m_imageWidthBox->setMaximum(999);
+  m_imageWidthBox->setMinimum(0);
+  m_imageWidthBox->setValue(50);
   gridLayout->addWidget(m_imageWidthBox, 0, 1);
   m_imageWidthBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageWidthBox);
@@ -384,7 +387,10 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 
   lab = new QLabel(i18n("&Maximum image height:"), imageOptions);
   gridLayout->addWidget(lab, 1, 0);
-  m_imageHeightBox = new KIntSpinBox(0, 999, 1, 50, imageOptions);
+  m_imageHeightBox = new QSpinBox(imageOptions);
+  m_imageHeightBox->setMaximum(999);
+  m_imageHeightBox->setMinimum(0);
+  m_imageHeightBox->setValue(50);
   gridLayout->addWidget(m_imageHeightBox, 1, 1);
   m_imageHeightBox->setSuffix(QLatin1String(" px"));
   lab->setBuddy(m_imageHeightBox);
@@ -473,8 +479,9 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   m_fontCombo->setWhatsThis(whats);
 
   fontLayout->addWidget(new QLabel(i18n("Size:"), fontGroup), ++row, 0);
-  m_fontSizeInput = new KIntNumInput(fontGroup);
-  m_fontSizeInput->setRange(5, 30); // 30 is same max as konq config
+  m_fontSizeInput = new QSpinBox(fontGroup);
+  m_fontSizeInput->setMaximum(30); // 30 is same max as konq config
+  m_fontSizeInput->setMinimum(5);
   m_fontSizeInput->setSuffix(QLatin1String("pt"));
   fontLayout->addWidget(m_fontSizeInput, row, 1);
   connect(m_fontSizeInput, SIGNAL(valueChanged(int)), SLOT(slotModified()));

@@ -31,8 +31,8 @@
 class CSVImporterWidget;
 
 class KComboBox;
-class KIntSpinBox;
 
+class QSpinBox;
 class QLineEdit;
 class QPushButton;
 class QCheckBox;
@@ -107,7 +107,7 @@ private:
   QLineEdit* m_editColDelimiter;
   QLineEdit* m_editRowDelimiter;
   QTableWidget* m_table;
-  KIntSpinBox* m_colSpinBox;
+  QSpinBox* m_colSpinBox;
   KComboBox* m_comboField;
   QPushButton* m_setColumnBtn;
   bool m_hasAssignedFields;

@@ -32,10 +32,10 @@
 #include <QListWidget>
 
 class KConfig;
-class KIntSpinBox;
 class KIntNumInput;
 class KColorCombo;
 
+class QSpinBox;
 class QPushButton;
 class QLineEdit;
 class QFontComboBox;
@@ -183,13 +183,13 @@ private:
   QCheckBox* m_cbPrintHeaders;
   QCheckBox* m_cbPrintFormatted;
   QCheckBox* m_cbPrintGrouped;
-  KIntSpinBox* m_imageWidthBox;
-  KIntSpinBox* m_imageHeightBox;
+  QSpinBox* m_imageWidthBox;
+  QSpinBox* m_imageHeightBox;
 
   GUI::ComboBox* m_templateCombo;
   QPushButton* m_previewButton;
   QFontComboBox* m_fontCombo;
-  KIntNumInput* m_fontSizeInput;
+  QSpinBox* m_fontSizeInput;
   KColorCombo* m_baseColorCombo;
   KColorCombo* m_textColorCombo;
   KColorCombo* m_highBaseColorCombo;

@@ -33,11 +33,11 @@
 #include "../utils/stringset.h"
 
 #include <KComboBox>
-#include <KIntSpinBox>
 #include <KSharedConfig>
 #include <KMessageBox>
 #include <KLocalizedString>
 
+#include <QSpinBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QGroupBox>
@@ -317,7 +317,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   lab = new QLabel(i18n("Co&lumn:"), groupBox);
   hlay3->addWidget(lab);
   lab->setWhatsThis(what);
-  m_colSpinBox = new KIntSpinBox(groupBox);
+  m_colSpinBox = new QSpinBox(groupBox);
   hlay3->addWidget(m_colSpinBox);
   m_colSpinBox->setWhatsThis(what);
   m_colSpinBox->setMinimum(1);

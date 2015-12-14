@@ -29,10 +29,10 @@
 #include "configwidget.h"
 
 #include <QUrl>
-
 #include <QPointer>
 
-class KIntSpinBox;
+class QSpinBox;
+
 class KJob;
 namespace KIO {
   class Job;
@@ -193,7 +193,7 @@ private slots:
 
 private:
   QCheckBox* m_fetchImageCheck;
-  KIntSpinBox* m_numCast;
+  QSpinBox* m_numCast;
 };
 
   } // end namespace

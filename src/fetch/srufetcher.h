@@ -30,7 +30,8 @@
 
 #include <QPointer>
 
-class KIntSpinBox;
+class QSpinBox;
+
 class KComboBox;
 class KJob;
 namespace KIO {
@@ -126,7 +127,7 @@ private slots:
 
 private:
   GUI::LineEdit* m_hostEdit;
-  KIntSpinBox* m_portSpinBox;
+  QSpinBox* m_portSpinBox;
   GUI::LineEdit* m_pathEdit;
   GUI::ComboBox* m_formatCombo;
   GUI::StringMapWidget* m_queryTree;

@@ -36,8 +36,8 @@
 #include <KLocalizedString>
 #include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
-#include <KIntSpinBox>
 
+#include <QSpinBox>
 #include <QUrl>
 #include <QLabel>
 #include <QFile>
@@ -405,7 +405,10 @@ AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Abst
 
   QLabel* label = new QLabel(i18n("&Maximum cast: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_numCast = new KIntSpinBox(0, 99, 1, 10, optionsWidget());
+  m_numCast = new QSpinBox(optionsWidget());
+  m_numCast->setMaximum(99);
+  m_numCast->setMinimum(0);
+  m_numCast->setValue(10);
   connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
