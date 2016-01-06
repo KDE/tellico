@@ -551,4 +551,3 @@ bool Manager::bundledScriptHasExecPath(const QString& specFile_, KConfigGroup& c
   config_.sync(); // might be readonly, but that's ok
   return true;
 }
-
