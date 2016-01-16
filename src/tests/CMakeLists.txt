@@ -247,9 +247,9 @@ TARGET_LINK_LIBRARIES(filelistingtest
   ${TELLICO_TEST_LIBS}
   KF5::Solid
 )
-IF( KF5FILEMETADATA_FOUND )
+IF( KF5FileMetaData_FOUND )
   TARGET_LINK_LIBRARIES(filelistingtest KF5::FileMetaData)
-ENDIF( KF5FILEMETADATA_FOUND )
+ENDIF( KF5FileMetaData_FOUND )
 
 add_executable(gcstartest gcstartest.cpp
   ../translators/gcstarimporter.cpp
