@@ -46,15 +46,20 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     Xml
     DBus
     Test
+    Network
 )
 
 find_package(KF5 REQUIRED COMPONENTS
+    Archive
+    Codecs
     Config
     ConfigWidgets
     CoreAddons
+    DocTools
     IconThemes
     I18n
     KIO
+    Solid
     WidgetsAddons
     GuiAddons
     XmlGui

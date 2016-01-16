@@ -66,7 +66,10 @@ TARGET_LINK_LIBRARIES(fetch
     newstuff
     utils
     ${TELLICO_BTPARSE_LIBS}
+    Qt5::Network
     KF5::Archive
+    KF5::IconThemes
+    KF5::JobWidgets
     KF5::KDELibs4Support
     )
 

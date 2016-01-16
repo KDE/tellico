@@ -90,6 +90,7 @@ TARGET_LINK_LIBRARIES(tellico
     Qt5::DBus
     KF5::KIOCore
     KF5::KHtml
+    KF5::KDELibs4Support
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}

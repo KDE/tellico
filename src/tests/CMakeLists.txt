@@ -100,6 +100,7 @@ TARGET_LINK_LIBRARIES(translatorstest
   Qt5::Xml
   KF5::I18n
   KF5::Archive
+  KF5::KIOWidgets
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
@@ -241,7 +242,11 @@ add_executable(filelistingtest filelistingtest.cpp
 ecm_mark_nongui_executable(filelistingtest)
 add_test(filelistingtest filelistingtest)
 ecm_mark_as_test(filelistingtest)
-TARGET_LINK_LIBRARIES(filelistingtest translatorstest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(filelistingtest
+  translatorstest
+  ${TELLICO_TEST_LIBS}
+  KF5::Solid
+)
 IF( KF5FILEMETADATA_FOUND )
   TARGET_LINK_LIBRARIES(filelistingtest KF5::FileMetaData)
 ENDIF( KF5FILEMETADATA_FOUND )
@@ -344,6 +349,7 @@ TARGET_LINK_LIBRARIES(fetcherstest
   KF5::ConfigCore
   KF5::I18n
   KF5::Archive
+  KF5::IconThemes
   KF5::KDELibs4Support
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
@@ -399,6 +405,8 @@ TARGET_LINK_LIBRARIES(allocinefetchertest
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO_TEST_LIBS}
   KF5::SonnetCore
+  KF5::SonnetUi
+  KF5::XmlGui
 )
 
 add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp
@@ -473,6 +481,8 @@ TARGET_LINK_LIBRARIES(darkhorsefetchertest
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO_TEST_LIBS}
   KF5::SonnetCore
+  KF5::SonnetUi
+  KF5::XmlGui
 )
 
 add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
@@ -535,6 +545,8 @@ TARGET_LINK_LIBRARIES(externalfetchertest
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO_TEST_LIBS}
   KF5::SonnetCore
+  KF5::SonnetUi
+  KF5::XmlGui
 )
 
 add_executable(filmasterfetchertest filmasterfetchertest.cpp abstractfetchertest.cpp
@@ -687,7 +699,13 @@ ecm_mark_nongui_executable(srufetchertest)
 add_test(srufetchertest srufetchertest)
 ecm_mark_as_test(srufetchertest)
 # Sonnet needed for gui/lineedit
-TARGET_LINK_LIBRARIES(srufetchertest fetcherstest ${TELLICO_TEST_LIBS} KF5::SonnetCore)
+TARGET_LINK_LIBRARIES(srufetchertest
+  fetcherstest
+  ${TELLICO_TEST_LIBS}
+  KF5::SonnetCore
+  KF5::SonnetUi
+  KF5::XmlGui
+)
 
 add_executable(thegamesdbfetchertest thegamesdbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/thegamesdbfetcher.cpp

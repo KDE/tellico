@@ -63,6 +63,8 @@ TARGET_LINK_LIBRARIES(translators
 
 TARGET_LINK_LIBRARIES(translators
     KF5::Archive
+    KF5::JobWidgets
+    KF5::Solid
     ${LIBXML2_LIBRARIES}
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}

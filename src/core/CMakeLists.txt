@@ -21,6 +21,10 @@ TARGET_LINK_LIBRARIES(core
     images
     utils
     Qt5::Core
+    KF5::ConfigCore
+    KF5::ConfigGui
+    KF5::ConfigWidgets
+    KF5::JobWidgets
     KF5::KDELibs4Support
     )
 
