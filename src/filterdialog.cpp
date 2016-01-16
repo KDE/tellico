@@ -177,7 +177,7 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
     m_valueStack->setCurrentWidget(m_ruleDate);
   } else {
     m_valueStack->setCurrentWidget(m_ruleValue);
-    m_ruleValue->setClickMessage(QString());
+    m_ruleValue->setPlaceholderText(QString());
     if(m_ruleType == Number) {
       m_ruleValue->setValidator(new QIntValidator(this));
     } else {
