@@ -35,7 +35,7 @@
 #include <KMessageBox>
 #include <KProcess>
 #include <KMimeTypeTrader>
-#include <KRun>
+#include <KIO/DesktopExecParser>
 #include <KSharedConfig>
 
 #include <QPushButton>
@@ -316,7 +316,8 @@ void ImageWidget::slotEditImage() {
       const Data::Image& img = ImageFactory::imageById(m_imageID);
       img.save(m_img);
       m_editedFileDateTime = QFileInfo(m_img).lastModified();
-      m_editProcess->setProgram(KRun::processDesktopExec(*m_editor, QList<QUrl>() << QUrl::fromLocalFile(m_img)));
+      KIO::DesktopExecParser parser(*m_editor, QList<QUrl>() << QUrl::fromLocalFile(m_img));
+      m_editProcess->setProgram(parser.resultingArguments());
       m_editProcess->start();
       if(!m_waitDlg) {
         m_waitDlg = new QProgressDialog(this);
