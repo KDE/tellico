@@ -114,6 +114,13 @@
    </xsl:call-template>
   </num-players>
 
+  <playing-time>
+   <xsl:value-of select="playingtime/@value"/>
+  </playing-time>
+
+  <minimum-age>
+   <xsl:value-of select="minage/@value"/>
+  </minimum-age>
  </entry>
 </xsl:template>
 

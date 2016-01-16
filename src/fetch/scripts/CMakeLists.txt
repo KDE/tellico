@@ -3,7 +3,6 @@
 
 SET(SCRIPT_FILES
     bedetheque.py
-    boardgamegeek.rb
     dark_horse_comics.py
     fr.allocine.py
     ministerio_de_cultura.py

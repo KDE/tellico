@@ -505,7 +505,7 @@ Wine collections have 15 default fields.
 <sect2 id="board-game-collection">
 <title>Board Game Collections</title>
 <para>
-Board game collections have 15 default fields.
+Board game collections have 17 default fields.
 <emphasis>Title</emphasis>,
 <emphasis>Genre</emphasis>,
 <emphasis>Mechanism</emphasis>,
@@ -513,6 +513,8 @@ Board game collections have 15 default fields.
 <emphasis>Publisher</emphasis>,
 <emphasis>Designer</emphasis>,
 <emphasis>Number of Players</emphasis>,
+<emphasis>Playing Time</emphasis>,
+<emphasis>Minimum Age</emphasis>,
 <emphasis>Description</emphasis>,
 <emphasis>Rating</emphasis>,
 <emphasis>Purchase Date</emphasis>,
