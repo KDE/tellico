@@ -322,9 +322,11 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
 
   connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
   connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
+  connect(this, SIGNAL(defaultClicked()), SLOT(slotDefault()));
 
   enableButtonOk(false);
   enableButtonApply(false);
+  button(Default)->setEnabled(false);
 
   setHelp(QLatin1String("fields-dialog"));
 
