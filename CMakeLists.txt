@@ -64,9 +64,7 @@ find_package(KF5 REQUIRED COMPONENTS
 )
 find_package(KF5KHtml REQUIRED NO_MODULE)
 
-include(MacroLibrary)
 include(MacroBoolTo01)
-#include(MacroLogFeature)
 
 find_package(Gettext REQUIRED)
 find_package(LibXml2 REQUIRED)
