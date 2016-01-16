@@ -81,6 +81,12 @@ set_package_properties(KF5FileMetaData PROPERTIES
     URL "http://www.kde.org"
     TYPE OPTIONAL)
 
+find_package(KF5NewStuff)
+set_package_properties(KF5NewStuff PROPERTIES
+    DESCRIPTION "Support for fetching new templates and scripts"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
+
 find_package(QImageBlitz 5.0)
 set_package_properties(QImageBlitz PROPERTIES
     DESCRIPTION "Support for image gradients in the default template"
@@ -246,10 +252,6 @@ include_directories(${LIBXML2_INCLUDE_DIR}
                     ${Tellico_SOURCE_DIR}/src/core
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
 
-# TODO
-set(ENABLE_KNEWSTUFF3 FALSE)
-set(ENABLE_KNEWSTUFF2 FALSE)
-
 set(TELLICO_DATA_INSTALL_DIR ${KDE_INSTALL_DATADIR}/tellico)
 
 add_subdirectory(src)
@@ -269,7 +271,7 @@ macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
-macro_bool_to_01(ENABLE_KNEWSTUFF3 ENABLE_KNEWSTUFF3)
+macro_bool_to_01(KF5NewStuff_FOUND ENABLE_KNEWSTUFF3)
 macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
 macro_bool_to_01(CSV_FOUND HAVE_LIBCSV)

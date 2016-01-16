@@ -55,8 +55,6 @@
 
 #ifdef ENABLE_KNEWSTUFF3
 #include <KNS3/DownloadDialog>
-#elif defined(ENABLE_KNEWSTUFF2)
-#include <KNS/Engine>
 #endif
 
 #include <QSpinBox>
