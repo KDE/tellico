@@ -1,3 +1,11 @@
+2016-01-15  Sven Werlen  <sven.werlen@gmail.com>
+
+	* Fixed "Defaults" button in Collection Fields dialog (Bug 357637).
+
+2015-12-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 2.3.11.
+
 2015-10-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed the Yahoo fetcher.
