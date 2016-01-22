@@ -34,9 +34,8 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kacceleratormanager.h>
-#include <kpushbutton.h>
+#include <KMessageBox>
+#include <KAcceleratorManager>
 #include <KSharedConfig>
 #include <KWindowConfig>
 
@@ -47,6 +46,7 @@
 #include <QGridLayout>
 #include <QCloseEvent>
 #include <QVBoxLayout>
+#include <QPushButton>
 
 namespace {
   // must be an even number
