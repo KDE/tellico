@@ -30,8 +30,9 @@
 #include "../translators/ciwimporter.h"
 #include "../tellico_debug.h"
 
-#include <kio/netaccess.h>
-#include <kio/job.h>
+#include <KIO/NetAccess>
+#include <KIO/Job>
+#include <KJobWidgets>
 
 #include <QEvent>
 #include <QDragEnterEvent>
@@ -94,7 +95,8 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
       ptr = db.mimeTypeForUrl(url);
     } else {
       KIO::MimetypeJob* job = KIO::mimetype(url, KIO::HideProgressInfo);
-      KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget());
+      KJobWidgets::setWindow(job, GUI::Proxy::widget());
+      job->exec();
       QMimeDatabase db;
       ptr = db.mimeTypeForName(job->mimetype());
     }
