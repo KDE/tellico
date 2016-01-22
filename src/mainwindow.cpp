@@ -1789,7 +1789,7 @@ void MainWindow::slotFileImport(int format_) {
   }
 
   if(checkURL) {
-    bool ok = !url.isEmpty() && url.isValid() && QFile::exists(url));
+    bool ok = !url.isEmpty() && url.isValid() && QFile::exists(url.toLocalFile());
     if(!ok) {
       StatusBar::self()->clearStatus();
       return;

@@ -35,8 +35,9 @@
 #include <kmessagebox.h>
 #include <kio/netaccess.h>
 #include <kfileitem.h>
-#include <kio/job.h>
+#include <KIO/DeleteJob>
 #include <KBackup>
+#include <KJobWidgets>
 
 #include <QUrl>
 #include <QDomDocument>
@@ -184,7 +185,8 @@ Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString
   KIO::Job* job = KIO::file_copy(url_, tempURL, -1, flags);
   job->addMetaData(QLatin1String("referrer"), referrer_.url());
 
-  if(!KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget())) {
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  if(!job->exec()) {
     if(!quiet_) {
       QString str = i18n("Tellico is unable to load the image - %1.", url_.toDisplayString());
       GUI::Proxy::sorry(str);
@@ -237,9 +239,12 @@ bool FileHandler::writeBackupFile(const QUrl& url_) {
   } else {
     QUrl backup(url_);
     backup.setPath(backup.path() + QLatin1Char('~'));
-    KIO::NetAccess::del(backup, GUI::Proxy::widget()); // might fail if backup doesn't exist, that's ok
+    KIO::DeleteJob* delJob = KIO::del(backup);
+    KJobWidgets::setWindow(delJob, GUI::Proxy::widget());
+    delJob->exec(); // might fail if backup doesn't exist, that's ok
     KIO::FileCopyJob* job = KIO::file_copy(url_, backup, -1, KIO::Overwrite);
-    success = KIO::NetAccess::synchronousRun(job, GUI::Proxy::widget());
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    success = job->exec();
   }
   if(!success) {
     GUI::Proxy::sorry(i18n(errorWrite, url_.fileName() + QLatin1Char('~')));

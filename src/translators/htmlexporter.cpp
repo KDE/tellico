@@ -26,25 +26,26 @@
 #include "xslthandler.h"
 #include "tellicoxmlexporter.h"
 #include "../collection.h"
+#include "../document.h"
 #include "../core/filehandler.h"
+#include "../core/tellico_config.h"
+#include "../core/tellico_strings.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
 #include "../images/imageinfo.h"
-#include "../document.h"
 #include "../utils/tellico_utils.h"
 #include "../utils/string_utils.h"
 #include "../utils/datafileregistry.h"
 #include "../progressmanager.h"
-#include "../core/tellico_config.h"
-#include "../core/tellico_strings.h"
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
-#include <KIO/Job>
-#include <kio/netaccess.h>
+#include <KIO/DeleteJob>
+#include <KIO/NetAccess>
 #include <KLocalizedString>
 #include <KUser>
+#include <KJobWidgets>
 
 #include <QDir>
 #include <QDomDocument>
@@ -659,7 +660,9 @@ void HTMLExporter::createDir() {
   if(KIO::NetAccess::exists(dir, KIO::NetAccess::DestinationSide, 0)) {
     m_checkCreateDir = false;
   } else {
-    m_checkCreateDir = !KIO::NetAccess::mkdir(dir, m_widget);
+    KIO::Job* job = KIO::mkdir(dir);
+    KJobWidgets::setWindow(job, m_widget);
+    m_checkCreateDir = !job->exec();
   }
 }
 
@@ -685,12 +688,12 @@ bool HTMLExporter::copyFiles() {
     target = target.adjusted(QUrl::RemoveFilename);
     target.setPath(target.path() + (*it).fileName());
     KIO::FileCopyJob* job = KIO::file_copy(*it, target, -1, KIO::Overwrite);
-    bool success = KIO::NetAccess::synchronousRun(job, m_widget);
-    if(success) {
+    KJobWidgets::setWindow(job, m_widget);
+    if(job->exec()) {
       m_copiedFiles.add((*it).url());
     } else {
       myWarning() << "can't copy " << target;
-      myWarning() << KIO::NetAccess::lastErrorString();
+      myWarning() << job->errorString();
     }
     if(j%stepSize == 0) {
       if(options() & ExportProgress) {
@@ -784,13 +787,17 @@ bool HTMLExporter::writeEntryFiles() {
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
   target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));
-  KIO::NetAccess::mkdir(target, m_widget);
+  KIO::Job* job = KIO::mkdir(target);
+  KJobWidgets::setWindow(job, m_widget);
+  job->exec();
   foreach(const QString& dataImage, dataImages) {
     dataDir = dataDir.adjusted(QUrl::RemoveFilename);
     dataDir.setPath(dataDir.path() + dataImage);
     target = target.adjusted(QUrl::RemoveFilename);
     target.setPath(target.path() + dataImage);
-    KIO::NetAccess::file_copy(dataDir, target, m_widget);
+    KIO::Job* job = KIO::file_copy(dataDir, target);
+    KJobWidgets::setWindow(job, m_widget);
+    job->exec();
   }
 
   return true;
