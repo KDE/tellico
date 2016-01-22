@@ -35,9 +35,8 @@
 #include <KLocalizedString>
 
 #include <QUrl>
+#include <QFileInfo>
 #include <QTemporaryFile>
-
-#include <unistd.h>
 
 static QStringList* tmpfiles = 0;
 
@@ -46,11 +45,17 @@ QString Tellico::NetAccess::s_lastErrorMessage;
 using Tellico::NetAccess;
 
 bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
-  if(url_.isLocalFile()) {
-    return KIO::NetAccess::download(url_, target_, window_);
-  }
-  Q_ASSERT(target_.isEmpty());
   // copied from KIO::NetAccess::download() apidox except for quiet part
+  if(url_.isLocalFile()) {
+    target_ = url_.toLocalFile();
+    const bool readable = QFileInfo(target_).isReadable();
+    if(!readable) {
+      s_lastErrorMessage = i18n(errorOpen, target_);
+    }
+    return readable;
+  }
+
+  Q_ASSERT(target_.isEmpty());
   if(target_.isEmpty()) {
     QTemporaryFile tmpFile;
     tmpFile.setAutoRemove(false);
@@ -127,14 +132,11 @@ void NetAccess::removeTempFile(const QString& name) {
     return;
   }
   if(tmpfiles->contains(name)) {
-    ::unlink(QFile::encodeName(name).constData());
+    QFile::remove(name);
     tmpfiles->removeAll(name);
-  } else {
-    KIO::NetAccess::removeTempFile(name);
   }
 }
 
 QString NetAccess::lastErrorString() {
   return s_lastErrorMessage;
 }
-
