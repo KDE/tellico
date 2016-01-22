@@ -51,7 +51,6 @@
 
 #include <KLocalizedString>
 #include <khtmlview.h>
-#include <kprogressdialog.h>
 #include <KSharedConfig>
 #include <kacceleratormanager.h>
 #include <ktextedit.h>
