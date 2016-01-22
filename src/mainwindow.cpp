@@ -1765,9 +1765,7 @@ void MainWindow::slotFileImport(int format_) {
         QString fileClass;
         const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///import")), fileClass);
         url = QFileDialog::getOpenFileUrl(this, i18n("Import File"), startUrl, ImportDialog::fileFilter(format));
-        if(url.isLocalFile()) {
-          KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
-        }
+        KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
       }
       break;
 
@@ -1791,7 +1789,7 @@ void MainWindow::slotFileImport(int format_) {
   }
 
   if(checkURL) {
-    bool ok = !url.isEmpty() && url.isValid() && KIO::NetAccess::exists(url, KIO::NetAccess::SourceSide, this);
+    bool ok = !url.isEmpty() && url.isValid() && QFile::exists(url));
     if(!ok) {
       StatusBar::self()->clearStatus();
       return;
