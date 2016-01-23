@@ -73,9 +73,9 @@ TARGET_LINK_LIBRARIES(fetch
     KF5::KDELibs4Support
     )
 
-IF( YAZ_FOUND )
-  TARGET_LINK_LIBRARIES(fetch ${YAZ_LIBRARIES})
-ENDIF( YAZ_FOUND )
+IF( Yaz_FOUND )
+  TARGET_LINK_LIBRARIES(fetch ${Yaz_LIBRARIES})
+ENDIF( Yaz_FOUND )
 
 ########### install files ###############
 

@@ -6,23 +6,12 @@
 #
 # For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 
-#in cache already
-if(LIBV4L_INCLUDE_DIR AND LIBV4L_LIBRARIES)
-  set(LIBV4L_FIND_QUIETLY TRUE)
-endif(LIBV4L_INCLUDE_DIR AND LIBV4L_LIBRARIES)
-
 FIND_PATH(LIBV4L_INCLUDE_DIR
     NAMES libv4l1.h
-    PATHS
-    ${KDE4_INCLUDE_DIR}
-    ${INCLUDE_INSTALL_DIR}
 )
 
 FIND_LIBRARY(LIBV4L_LIBRARIES
     NAMES v4l1
-    PATHS
-    ${KDE4_LIB_DIR}
-    ${LIB_INSTALL_DIR}
 )
 
 include(FindPackageHandleStandardArgs)

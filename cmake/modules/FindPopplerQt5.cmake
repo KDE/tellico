@@ -1,10 +1,10 @@
 # - Try to find the Qt5 binding of the Poppler library
 # Once done this will define
 #
-#  POPPLER_QT5_FOUND - system has poppler-qt5
-#  POPPLER_QT5_INCLUDE_DIR - the poppler-qt5 include directory
-#  POPPLER_QT5_LIBRARIES - Link these to use poppler-qt5
-#  POPPLER_QT5_DEFINITIONS - Compiler switches required for using poppler-qt5
+#  Poppler_Qt5_FOUND - system has poppler-qt5
+#  Poppler_Qt5_INCLUDE_DIRS - the poppler-qt5 include directories
+#  Poppler_Qt5_LIBRARIES - Link these to use poppler-qt5
+#  Poppler_Qt5_DEFINITIONS - Compiler switches required for using poppler-qt5
 #
 
 # use pkg-config to get the directories and then use these values
@@ -40,38 +40,21 @@
 find_package(PkgConfig)
 pkg_check_modules(PC_POPPLERQT5 QUIET poppler-qt5)
 
-set(POPPLER_QT5_DEFINITIONS ${PC_POPPLERQT5_CFLAGS_OTHER})
+set(Poppler_Qt5_DEFINITIONS ${PC_POPPLERQT5_CFLAGS_OTHER})
 
-find_path(POPPLER_QT5_INCLUDE_DIR
+find_path(Poppler_Qt5_INCLUDE_DIRS
   NAMES poppler-qt5.h
   HINTS ${PC_POPPLERQT5_INCLUDEDIR}
   PATH_SUFFIXES poppler/qt5 poppler
 )
 
-find_library(POPPLER_QT5_LIBRARY
+find_library(Poppler_Qt5_LIBRARIES
   NAMES poppler-qt5
   HINTS ${PC_POPPLERQT5_LIBDIR}
 )
 
-set(POPPLER_QT5_LIBRARIES ${POPPLER_QT5_LIBRARY})
-
-if (POPPLER_QT5_INCLUDE_DIR AND POPPLER_QT5_LIBRARIES)
-  set(POPPLER_QT5_FOUND TRUE)
-else ()
-  set(POPPLER_QT5_FOUND FALSE)
-endif ()
-  
-if (POPPLER_QT5_FOUND)
-  if (NOT PopplerQt5_FIND_QUIETLY)
-    message(STATUS "Found poppler-qt5: library: ${POPPLER_QT5_LIBRARIES}, include path: ${POPPLER_QT5_INCLUDE_DIR}")
-  endif ()
-else ()
-  if (PopplerQt5_FIND_REQUIRED)
-    message(FATAL_ERROR "Could NOT find poppler-qt5")
-  endif ()
-endif ()
-
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(PopplerQt5 REQUIRED_VARS POPPLER_QT5_INCLUDE_DIR POPPLER_QT5_LIBRARIES)
+find_package_handle_standard_args(PopplerQt5 REQUIRED_VARS Poppler_Qt5_INCLUDE_DIRS Poppler_Qt5_LIBRARIES)
+set(Poppler_Qt5_FOUND ${PopplerQt5_FOUND})
 
-mark_as_advanced(POPPLER_QT5_INCLUDE_DIR POPPLER_QT5_LIBRARIES)
+mark_as_advanced(Poppler_Qt5_INCLUDE_DIRS Poppler_Qt5_LIBRARIES)

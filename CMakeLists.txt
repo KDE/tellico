@@ -128,22 +128,25 @@ if(TAGLIB_FOUND)
 endif(TAGLIB_FOUND)
 
 #macro_optional_find_package(Yaz 2.0)
-#macro_log_feature(YAZ_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
+#macro_log_feature(Yaz_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
 find_package(Yaz 2.0)
 set_package_properties(Yaz PROPERTIES
     DESCRIPTION "Support for searching z39.50 databases"
     URL "http://www.indexdata.dk/yaz/"
     TYPE OPTIONAL)
+if(Yaz_FOUND)
+    include_directories(${Yaz_INCLUDE_DIRS})
+endif(Yaz_FOUND)
 
 find_package(PopplerQt5)
 set_package_properties(PopplerQt5 PROPERTIES
     DESCRIPTION "Support for reading PDF files"
     URL "http://poppler.freedesktop.org"
     TYPE OPTIONAL)
-if(POPPLER_QT5_FOUND)
-    add_definitions(${POPPLER_QT5_DEFINITIONS})
-    include_directories(${POPPLER_QT5_INCLUDE_DIR})
-endif(POPPLER_QT5_FOUND)
+if(Poppler_Qt5_FOUND)
+    add_definitions(${Poppler_Qt5_DEFINITIONS})
+    include_directories(${Poppler_Qt5_INCLUDE_DIRS})
+endif(Poppler_Qt5_FOUND)
 
 #macro_optional_find_package(KSane)
 #macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
@@ -157,55 +160,54 @@ if(KSANE_FOUND)
 endif(KSANE_FOUND)
 
 #macro_optional_find_package(Exempi 2.0)
-#macro_log_feature(LIBEXEMPI_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
+#macro_log_feature(Exempi_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
     DESCRIPTION "Support for reading PDF/XMP metadata"
     URL "http://libopenraw.freedesktop.org/wiki/Exempi/"
     TYPE OPTIONAL)
-if(LIBEXEMPI_FOUND)
-    add_definitions(${LIBEXEMPI_CFLAGS})
-    include_directories(${LIBEXEMPI_INCLUDE_DIR})
-endif(LIBEXEMPI_FOUND)
+if(Exempi_FOUND)
+    include_directories(${Exempi_INCLUDE_DIRS})
+endif(Exempi_FOUND)
 
 #macro_optional_find_package(Btparse)
-#macro_log_feature(BTPARSE_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
+#macro_log_feature(Btparse_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
 find_package(Btparse)
 set_package_properties(Btparse PROPERTIES
     DESCRIPTION "External support for parsing and processing BibTeX data files"
     URL "https://metacpan.org/release/Text-BibTeX"
     TYPE OPTIONAL)
-if(BTPARSE_FOUND)
-    include_directories(${BTPARSE_INCLUDE_DIR})
-    set(TELLICO_BTPARSE_LIBS ${BTPARSE_LIBRARIES})
-else(BTPARSE_FOUND)
+if(Btparse_FOUND)
+    include_directories(${Btparse_INCLUDE_DIRS})
+    set(TELLICO_BTPARSE_LIBS ${Btparse_LIBRARIES})
+else(Btparse_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
-endif(BTPARSE_FOUND)
+endif(Btparse_FOUND)
 
 #macro_optional_find_package(DiscID)
-#macro_log_feature(DISCID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
+#macro_log_feature(DiscID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
 find_package(DiscID)
 set_package_properties(DiscID PROPERTIES
     DESCRIPTION "Support for reading disc IDs from audio CDs"
     URL "http://musicbrainz.org/doc/libdiscid"
     TYPE OPTIONAL)
-if(DISCID_FOUND)
-    include_directories(${DISCID_INCLUDE_DIR})
-endif(DISCID_FOUND)
+if(DiscID_FOUND)
+    include_directories(${DiscID_INCLUDE_DIRS})
+endif(DiscID_FOUND)
 
 #macro_optional_find_package(Csv 3.0)
-#macro_log_feature(CSV_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
+#macro_log_feature(Csv_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
 find_package(Csv 3.0)
 set_package_properties(Csv PROPERTIES
     DESCRIPTION "External support for reading CSV files"
     URL "http://sourceforge.net/projects/libcsv/"
     TYPE OPTIONAL)
-if(CSV_FOUND)
-    include_directories(${CSV_INCLUDE_DIR})
-    set(TELLICO_CSV_LIBS ${CSV_LIBRARIES})
-else(CSV_FOUND)
+if(Csv_FOUND)
+    include_directories(${Csv_INCLUDE_DIRS})
+    set(TELLICO_CSV_LIBS ${Csv_LIBRARIES})
+else(Csv_FOUND)
     set(TELLICO_CSV_LIBS csv-tellico)
-endif(CSV_FOUND)
+endif(Csv_FOUND)
 
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
@@ -263,18 +265,18 @@ add_subdirectory(doc)
 
 macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(POPPLER_QT5_FOUND HAVE_POPPLER)
-macro_bool_to_01(LIBEXEMPI_FOUND HAVE_EXEMPI)
-macro_bool_to_01(YAZ_FOUND HAVE_YAZ)
+macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
+macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
+macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KSANE_FOUND HAVE_KSANE)
 macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 macro_bool_to_01(KF5NewStuff_FOUND ENABLE_KNEWSTUFF3)
-macro_bool_to_01(BTPARSE_FOUND HAVE_LIBBTPARSE)
-macro_bool_to_01(DISCID_FOUND HAVE_DISCID)
-macro_bool_to_01(CSV_FOUND HAVE_LIBCSV)
+macro_bool_to_01(Btparse_FOUND HAVE_LIBBTPARSE)
+macro_bool_to_01(DiscID_FOUND HAVE_DISCID)
+macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)

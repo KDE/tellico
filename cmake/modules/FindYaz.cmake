@@ -1,23 +1,17 @@
-# YAZ_FOUND - system has the YAZ library
-# YAZ_INCLUDE_DIR - the YAZ include directory
-# YAZ_LIBRARIES - The libraries needed to use YAZ
+# Yaz_FOUND - system has the YAZ library
+# Yaz_INCLUDE_DIRS - the YAZ include directory
+# Yaz_LIBRARIES - The libraries needed to use YAZ
 
-#in cache already
-if(YAZ_INCLUDE_DIR AND YAZ_LIBRARIES)
-  set(YAZ_FIND_QUIETLY TRUE)
-endif(YAZ_INCLUDE_DIR AND YAZ_LIBRARIES)
+find_package(PkgConfig)
+pkg_check_modules(PC_YAZ yaz)
 
-include(FindPkgConfig)
-pkg_check_modules(YAZ yaz)
+find_path(Yaz_INCLUDE_DIRS
+    NAMES yaz/yaz-version.h
+    PATHS ${PC_YAZ_INCLUDEDIR})
 
-find_path(YAZ_INCLUDE_DIR
-    NAMES yaz-version.h
-    PATH_SUFFIXES yaz
-    PATHS ${YAZ_INCLUDEDIR})
-
-find_library(YAZ_LIBRARIES NAMES yaz ${YAZ_LIBRARY_DIRS})
+find_library(Yaz_LIBRARIES NAMES yaz ${PC_YAZ_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(libyaz DEFAULT_MSG YAZ_INCLUDE_DIR YAZ_LIBRARIES)
+find_package_handle_standard_args(Yaz DEFAULT_MSG Yaz_INCLUDE_DIRS Yaz_LIBRARIES)
 
-mark_as_advanced(YAZ_INCLUDE_DIR YAZ_LIBRARIES)
+mark_as_advanced(Yaz_INCLUDE_DIRS Yaz_LIBRARIES)

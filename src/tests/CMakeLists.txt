@@ -366,12 +366,12 @@ ecm_mark_nongui_executable(pdftest)
 add_test(pdftest pdftest)
 ecm_mark_as_test(pdftest)
 TARGET_LINK_LIBRARIES(pdftest translatorstest fetcherstest ${TELLICO_TEST_LIBS})
-IF( LIBEXEMPI_FOUND )
-  TARGET_LINK_LIBRARIES(pdftest ${LIBEXEMPI_LIBRARIES})
-ENDIF( LIBEXEMPI_FOUND )
-IF( POPPLER_QT5_FOUND )
-  TARGET_LINK_LIBRARIES(pdftest ${POPPLER_QT5_LIBRARIES})
-ENDIF( POPPLER_QT5_FOUND )
+IF( Exempi_FOUND )
+  TARGET_LINK_LIBRARIES(pdftest ${Exempi_LIBRARIES})
+ENDIF( Exempi_FOUND )
+IF( Poppler_Qt5_FOUND )
+  TARGET_LINK_LIBRARIES(pdftest ${Poppler_Qt5_LIBRARIES})
+ENDIF( Poppler_Qt5_FOUND )
 
 # fetcher tests from here down
 IF(BUILD_FETCHER_TESTS)
@@ -742,7 +742,7 @@ add_test(winecomfetchertest winecomfetchertest)
 ecm_mark_as_test(winecomfetchertest)
 TARGET_LINK_LIBRARIES(winecomfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
-IF( YAZ_FOUND )
+IF( Yaz_FOUND )
   add_executable(z3950fetchertest z3950fetchertest.cpp abstractfetchertest.cpp
     ../fetch/z3950fetcher.cpp
     ../fetch/z3950connection.cpp
@@ -754,7 +754,7 @@ IF( YAZ_FOUND )
   ecm_mark_nongui_executable(z3950fetchertest)
   add_test(z3950fetchertest z3950fetchertest)
   ecm_mark_as_test(z3950fetchertest)
-  TARGET_LINK_LIBRARIES(z3950fetchertest fetcherstest ${YAZ_LIBRARIES} ${TELLICO_TEST_LIBS} KF5::SonnetCore)
-ENDIF( YAZ_FOUND )
+  TARGET_LINK_LIBRARIES(z3950fetchertest fetcherstest ${Yaz_LIBRARIES} ${TELLICO_TEST_LIBS} KF5::SonnetCore)
+ENDIF( Yaz_FOUND )
 
 ENDIF(BUILD_FETCHER_TESTS)
