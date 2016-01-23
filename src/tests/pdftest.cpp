@@ -55,7 +55,7 @@ void PdfTest::testScienceDirect() {
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
-#ifdef LIBEXEMPI_FOUND
+#ifdef HAVE_EXEMPI
   QCOMPARE(entry->field("title"), QLatin1String("Parametric analysis of air-water heat recovery concept applied to HVAC systems"));
   QCOMPARE(entry->field("author"), QLatin1String("Mohamad Ramadan; Mostafa Gad El Rab; Mahmoud Khaled"));
   QCOMPARE(entry->field("journal"), QLatin1String("Case Studies in Thermal Engineering"));
