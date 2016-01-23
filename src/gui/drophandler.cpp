@@ -30,7 +30,6 @@
 #include "../translators/ciwimporter.h"
 #include "../tellico_debug.h"
 
-#include <KIO/NetAccess>
 #include <KIO/Job>
 #include <KJobWidgets>
 

@@ -28,7 +28,6 @@
 #include "../tellico_debug.h"
 
 #include <kio/job.h>
-#include <kio/netaccess.h>
 #include <kio/previewjob.h>
 #include <kio/jobuidelegate.h>
 #include <KJobWidgets>
