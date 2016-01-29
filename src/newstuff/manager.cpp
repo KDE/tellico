@@ -293,7 +293,8 @@ bool Manager::installScript(const QString& file_) {
   QString specFile = scriptFolder + QFileInfo(exeFile).completeBaseName() + QLatin1String(".spec");
   QString sourceExec = scriptFolder + exeFile;
   QUrl dest = QUrl::fromLocalFile(sourceExec);
-  KFileItem item(KFileItem::Unknown, KFileItem::Unknown, dest, true);
+  KFileItem item(dest);
+  item.setDelayedMimeTypes(true);
   ::chmod(QFile::encodeName(dest.path()).constData(), item.permissions() | S_IXUSR);
 
   KDesktopFile df(specFile);
