@@ -43,8 +43,6 @@
 
 namespace {
   static const int ENTRY_ICON_SIZE_PAD = 6;
-  static const int ENTRY_ICON_SHADOW_RIGHT = 1;
-  static const int ENTRY_ICON_SHADOW_BOTTOM = 1;
 }
 
 using Tellico::EntryIconView;
