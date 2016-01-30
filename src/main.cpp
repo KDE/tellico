@@ -29,6 +29,7 @@
 
 #include <KAboutData>
 #include <KLocalizedString>
+#include <KCrash>
 
 #include <QApplication>
 #include <QCommandLineParser>
@@ -37,6 +38,8 @@
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
+
+  KCrash::initialize();
 
   KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
                        QLatin1String(TELLICO_VERSION), i18n("Tellico - a collection manager for KDE"),

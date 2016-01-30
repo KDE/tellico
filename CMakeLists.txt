@@ -55,17 +55,18 @@ find_package(KF5 REQUIRED COMPONENTS
     Config
     ConfigWidgets
     CoreAddons
+    Crash
     DocTools
+    GuiAddons
     IconThemes
     I18n
+    JobWidgets
     KIO
     Solid
-    WidgetsAddons
-    GuiAddons
-    XmlGui
-    JobWidgets
-    KDELibs4Support
     Wallet
+    WidgetsAddons
+    XmlGui
+    KDELibs4Support
 )
 find_package(KF5KHtml REQUIRED NO_MODULE)
 

@@ -88,6 +88,7 @@ TARGET_LINK_LIBRARIES(tellico
     Qt5::Core
     Qt5::Widgets
     Qt5::DBus
+    KF5::Crash
     KF5::KIOCore
     KF5::KHtml
     KF5::KDELibs4Support
