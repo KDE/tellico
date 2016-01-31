@@ -84,7 +84,7 @@ bool ONIXExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("onix.xml"), QString(), QString(), xml.constData(), xml.size());
+  zip.writeFile(QLatin1String("onix.xml"), xml);
 
   // use a dict for fast random access to keep track of which images were written to the file
   if(m_includeImages) { // for now, we're ignoring (options() & Export::ExportImages)
@@ -95,8 +95,7 @@ bool ONIXExporter::exec() {
       if(!img.isNull() && !imageSet.has(img.id())
          && (img.format() == "JPEG" || img.format() == "JPG" || img.format() == "GIF")) { /// onix only understands jpeg and gif
         QByteArray ba = img.byteArray();
-        zip.writeFile(QLatin1String("images/") + entry->field(cover),
-                      QString(), QString(), ba.constData(), ba.size());
+        zip.writeFile(QLatin1String("images/") + entry->field(cover), ba);
         imageSet.add(img.id());
       }
     }

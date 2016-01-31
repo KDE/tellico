@@ -90,7 +90,7 @@ bool TellicoZipExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("tellico.xml"), QString(), QString(), xml.constData(), xml.size());
+  zip.writeFile(QLatin1String("tellico.xml"), xml);
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
@@ -127,7 +127,7 @@ bool TellicoZipExporter::exec() {
         }
         QByteArray ba = img.byteArray();
 //        myDebug() << "adding image id = " << it->field(fIt);
-        zip.writeFile(imagesDir + id, QString(), QString(), ba.constData(), ba.size());
+        zip.writeFile(imagesDir + id, ba);
         imageSet.add(id);
         if(j%stepSize == 0) {
           ProgressManager::self()->setProgress(this, qMin(10+j/stepSize, 99));
