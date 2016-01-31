@@ -41,7 +41,7 @@ images | borrowers | filters)+>
 <!ATTLIST field flags CDATA #IMPLIED>
 <!ATTLIST field format CDATA #IMPLIED>
 <!ATTLIST field description CDATA #IMPLIED>
-<!-- no 5,  9, 11, or 13 -->
+<!-- no 5, 9, 11, or 13 -->
 <!ATTLIST field type (1|2|3|4|6|7|8|10|12|14) #REQUIRED>
 
 <!ELEMENT prop (#PCDATA)>
@@ -99,7 +99,7 @@ mimetype | size | permissions | owner | group | created | modified |
 metainfos | icon | amazon | imdb | imdb-rating | alttitles |
 allcertifications | address | abstract | designers | designer | bggid |
 mechanisms | num-players | cdate | mdate | translators | currency |
-countrys | country | doi | folder | denomination | image)+>
+countrys | country | doi | folder | denomination | image | playing-time | minimum-age)+>
 <!ATTLIST entry id CDATA #REQUIRED>
 
 <!-- general -->
@@ -278,6 +278,9 @@ countrys | country | doi | folder | denomination | image)+>
 <!ELEMENT bggid (#PCDATA)>
 <!ELEMENT num-players (num-player+)>
 <!ELEMENT num-player (#PCDATA)>
+<!-- playing-time and minimum-age added for Tellico v3 -->
+<!ELEMENT playing-time (#PCDATA)>
+<!ELEMENT minimum-age (#PCDATA)>
 
 <!-- special -->
 <!ELEMENT amazon (#PCDATA)>
