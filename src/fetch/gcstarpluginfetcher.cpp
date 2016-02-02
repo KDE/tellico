@@ -40,6 +40,7 @@
 #include <kacceleratormanager.h>
 #include <kshell.h>
 #include <KFilterDev>
+#include <KCompressionDevice>
 #include <KTar>
 #include <KLocalizedString>
 
@@ -50,8 +51,6 @@
 #include <QGridLayout>
 #include <QBuffer>
 #include <QStandardPaths>
-
-#include <memory>
 
 using namespace Tellico;
 using Tellico::Fetch::GCstarPluginFetcher;
@@ -300,14 +299,15 @@ void GCstarPluginFetcher::slotProcessExited() {
   }
 
   QBuffer filterBuffer(&m_data);
-  std::auto_ptr<QIODevice> filter(KFilterDev::device(&filterBuffer, QLatin1String("application/x-gzip"), false));
-  if(!filter->open(QIODevice::ReadOnly)) {
+  KCompressionDevice::CompressionType compressionType = KFilterDev::compressionTypeForMimeType(QLatin1String("application/x-gzip"));
+  KCompressionDevice filter(&filterBuffer, false, compressionType);
+  if(!filter.open(QIODevice::ReadOnly)) {
     myWarning() << "unable to open gzip filter";
     stop();
     return;
   }
 
-  QByteArray tarData = filter->readAll();
+  QByteArray tarData = filter.readAll();
   QBuffer buffer(&tarData);
 
   KTar tar(&buffer);
