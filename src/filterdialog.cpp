@@ -60,7 +60,8 @@ FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
     : QWidget(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_ruleType(General) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(0);
-  l->setSizeConstraint(QLayout::SetFixedSize);
+//  l->setSizeConstraint(QLayout::SetFixedSize);
+  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 
   initLists();
   initWidget();
@@ -388,6 +389,7 @@ void FilterDialog::init() {
   QGroupBox* m_matchGroup = new QGroupBox(i18n("Filter Criteria"), page);
   QVBoxLayout* vlay = new QVBoxLayout(m_matchGroup);
   topLayout->addWidget(m_matchGroup);
+  m_matchGroup->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 
   m_matchAll = new QRadioButton(i18n("Match a&ll of the following"), m_matchGroup);
   m_matchAny = new QRadioButton(i18n("Match an&y of the following"), m_matchGroup);

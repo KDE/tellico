@@ -52,7 +52,8 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mLayout = new QVBoxLayout( this );
   mLayout->setMargin( 0 );
   mLayout->setSpacing( 4 );
-  mLayout->setSizeConstraint(QLayout::SetFixedSize);
+//  mLayout->setSizeConstraint(QLayout::SetFixedSize);
+  setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
 
   mButtonBox = new QWidget( this );
   QHBoxLayout* mButtonBoxHBoxLayout = new QHBoxLayout( mButtonBox );
