@@ -68,12 +68,12 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
   connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
-  m_filterButton = new QPushButton(buttonBox);
-  KGuiItem::assign(m_filterButton, KGuiItem(i18n("Filter for duplicates"), QLatin1String("view-filter")));
-  buttonBox->addButton(m_filterButton, QDialogButtonBox::ActionRole);
   QPushButton* checkDuplicates = new QPushButton(buttonBox);
   KGuiItem::assign(checkDuplicates, KGuiItem(i18n("Check for duplicates"), QLatin1String("system-search")));
   buttonBox->addButton(checkDuplicates, QDialogButtonBox::ActionRole);
+  m_filterButton = new QPushButton(buttonBox);
+  KGuiItem::assign(m_filterButton, KGuiItem(i18n("Filter for duplicates"), QLatin1String("view-filter")));
+  buttonBox->addButton(m_filterButton, QDialogButtonBox::ActionRole);
 
   topLayout->addWidget(buttonBox);
 
