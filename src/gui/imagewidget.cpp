@@ -177,6 +177,7 @@ void ImageWidget::setImage(const QString& id_) {
   const bool link = ImageFactory::imageInfo(id_).linkOnly;
   m_cbLinkOnly->setChecked(link);
   m_cbLinkOnly->setEnabled(link); // user can't make a non;-linked image a linked image, so disable if not linked
+  m_edit->setEnabled(true);
   // if we're using a link, then the original URL _is_ the id
   m_originalURL = link ? QUrl(id_) : QUrl();
   m_scaled = QPixmap();
@@ -200,6 +201,7 @@ void ImageWidget::slotClear() {
   m_label->setPixmap(m_scaled);
   m_cbLinkOnly->setChecked(false);
   m_cbLinkOnly->setEnabled(true);
+  m_edit->setEnabled(false);
   update();
   if(!wasEmpty) {
     emit signalModified();
@@ -304,6 +306,10 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
 }
 
 void ImageWidget::slotEditImage() {
+  if(m_imageID.isEmpty()) {
+    return;
+  }
+
   if(!m_editProcess) {
     m_editProcess = new KProcess(this);
     connect(m_editProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
@@ -453,4 +459,3 @@ void ImageWidget::cancelScan(KDialog::ButtonCode code_) {
   }
 #endif
 }
-
