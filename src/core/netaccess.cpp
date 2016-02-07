@@ -27,9 +27,9 @@
 #include "../utils/guiproxy.h"
 #include "../tellico_debug.h"
 
-#include <kio/job.h>
-#include <kio/previewjob.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/PreviewJob>
+#include <KIO/StatJob>
+#include <KIO/JobUiDelegate>
 #include <KJobWidgets>
 #include <KLocalizedString>
 
@@ -134,6 +134,17 @@ void NetAccess::removeTempFile(const QString& name) {
     QFile::remove(name);
     tmpfiles->removeAll(name);
   }
+}
+
+bool NetAccess::exists(const QUrl& url_, bool sourceSide_, QWidget* window_) {
+  if(url_.isLocalFile()) {
+    return QFile::exists(url_.toLocalFile());
+  }
+
+  KIO::StatJob* job = KIO::stat(url_);
+  KJobWidgets::setWindow(job, window_);
+  job->setSide(sourceSide_ ? KIO::StatJob::SourceSide : KIO::StatJob::DestinationSide);
+  return job->exec();
 }
 
 QString NetAccess::lastErrorString() {

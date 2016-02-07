@@ -28,6 +28,7 @@
 #include "../collection.h"
 #include "../document.h"
 #include "../core/filehandler.h"
+#include "../core/netaccess.h"
 #include "../core/tellico_config.h"
 #include "../core/tellico_strings.h"
 #include "../images/image.h"
@@ -41,8 +42,9 @@
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
+#include <KIO/MkdirJob>
+#include <KIO/FileCopyJob>
 #include <KIO/DeleteJob>
-#include <KIO/NetAccess>
 #include <KLocalizedString>
 #include <KUser>
 #include <KJobWidgets>
@@ -599,7 +601,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   // the tmpDir() when exporting entry files from a collection, but those images
   // don't actually exist, and they get copied in writeImages() instead.
   // so we only need to keep track of the url if it exists
-  const bool exists = KIO::NetAccess::exists(u, KIO::NetAccess::DestinationSide, 0);
+  const bool exists = NetAccess::exists(u, false, m_widget);
   if(exists) {
     m_files.append(u);
   }
@@ -657,7 +659,7 @@ void HTMLExporter::createDir() {
     myDebug() << "called on empty URL!";
     return;
   }
-  if(KIO::NetAccess::exists(dir, KIO::NetAccess::DestinationSide, 0)) {
+  if(NetAccess::exists(dir, false, m_widget)) {
     m_checkCreateDir = false;
   } else {
     KIO::Job* job = KIO::mkdir(dir);

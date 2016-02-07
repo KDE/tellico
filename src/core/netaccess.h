@@ -42,6 +42,7 @@ public:
   static QPixmap filePreview(const QUrl& fileName, int size=196);
   static QPixmap filePreview(const KFileItem& item, int size=196);
   static void removeTempFile(const QString& name);
+  static bool exists(const QUrl& url, bool sourceSide, QWidget* window);
 
   static QString lastErrorString();
 

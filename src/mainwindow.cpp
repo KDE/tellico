@@ -41,7 +41,6 @@
 #include "importdialog.h"
 #include "exportdialog.h"
 #include "filehandler.h" // needed so static mainWindow variable can be set
-#include "gui/stringmapdialog.h"
 #include "translators/htmlexporter.h" // for printing
 #include "entryview.h"
 #include "entryiconview.h"
@@ -60,11 +59,13 @@
 #include "fetch/fetcherinitializer.h"
 #include "cite/actionmanager.h"
 #include "core/tellico_config.h"
-#include "gui/drophandler.h"
+#include "core/netaccess.h"
 #include "dbusinterface.h"
 #include "models/models.h"
 #include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
+#include "gui/drophandler.h"
+#include "gui/stringmapdialog.h"
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
@@ -87,7 +88,6 @@
 #include <KRecentDirs>
 #include <KEditToolBar>
 #include <KShortcutsDialog>
-#include <KIO/NetAccess>
 #include <KRecentFilesAction>
 #include <KToggleAction>
 #include <KActionCollection>
@@ -1972,7 +1972,7 @@ bool MainWindow::importFile(Tellico::Import::Format format_, const QUrl& url_, T
 
   bool failed = false;
   Data::CollPtr coll;
-  if(!url_.isEmpty() && url_.isValid() && KIO::NetAccess::exists(url_, KIO::NetAccess::SourceSide, this)) {
+  if(!url_.isEmpty() && url_.isValid() && NetAccess::exists(url_, true, this)) {
     coll = ImportDialog::importURL(format_, url_);
   } else {
     Kernel::self()->sorry(i18n(errorLoad, url_.fileName()));
