@@ -33,15 +33,16 @@
 #include "tellico_debug.h"
 #include "gui/combobox.h"
 #include "utils/cursorsaver.h"
-#include "core/tellico_config.h"
 #include "utils/datafileregistry.h"
 #include "utils/tellico_utils.h"
+#include "core/tellico_config.h"
 
 #include <KLocalizedString>
 #include <khtml_part.h>
 #include <khtmlview.h>
 #include <KStandardGuiItem>
 #include <KWindowConfig>
+#include <KConfigGroup>
 
 #include <QFile>
 #include <QLabel>
@@ -52,6 +53,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QFileDialog>
+#include <QDialogButtonBox>
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
@@ -62,15 +64,15 @@ using Tellico::ReportDialog;
 
 // default button is going to be used as a print button, so it's separated
 ReportDialog::ReportDialog(QWidget* parent_)
-    : KDialog(parent_),
-      m_exporter(0) {
+    : QDialog(parent_), m_exporter(0) {
   setModal(false);
-  setCaption(i18n("Collection Report"));
-  setButtons(Close);
-  setDefaultButton(Close);
+  setWindowTitle(i18n("Collection Report"));
 
   QWidget* mainWidget = new QWidget(this);
-  setMainWidget(mainWidget);
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  setLayout(mainLayout);
+  mainLayout->addWidget(mainWidget);
+
   QVBoxLayout* topLayout = new QVBoxLayout(mainWidget);
 
   QBoxLayout* hlay = new QHBoxLayout();
@@ -130,6 +132,12 @@ ReportDialog::ReportDialog(QWidget* parent_)
   m_HTMLPart->begin();
   m_HTMLPart->write(text);
   m_HTMLPart->end();
+
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
+  mainLayout->addWidget(buttonBox);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));

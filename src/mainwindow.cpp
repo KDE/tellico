@@ -1595,7 +1595,8 @@ void MainWindow::slotShowReportDialog() {
 
 void MainWindow::slotHideReportDialog() {
   if(m_reportDlg) {
-    m_reportDlg->delayedDestruct();
+    m_reportDlg->hide();
+    m_reportDlg->deleteLater();
     m_reportDlg = 0;
   }
 }
