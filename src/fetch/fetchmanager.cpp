@@ -409,7 +409,6 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   return map;
 }
 
-
 // called when creating a new fetcher
 Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::Fetch::Type type_, const QString& name_) {
   ConfigWidget* w = 0;
@@ -464,7 +463,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     u.setScheme(QLatin1String("http"));
     u.setHost(f->host());
     QString icon = Fetcher::favIcon(u);
-    if(u.isValid() && !icon.isEmpty()) {
+    if(!icon.isEmpty()) {
       return LOAD_ICON(icon, group_, size_);
     }
 #endif
@@ -505,7 +504,8 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
   }
 
   if(name.isEmpty()) {
-    return QPixmap();
+    // use default tellico application icon
+    name = QLatin1String("tellico");
   }
 
   QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),

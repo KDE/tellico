@@ -32,6 +32,10 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KIO/Global>
+#include <kio_version.h>
+#if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
+#include <KIO/FavIconRequestJob>
+#endif
 
 #include <QUrl>
 #include <QUuid>
@@ -162,5 +166,23 @@ QString Fetcher::favIcon(const char* url_) {
 }
 
 QString Fetcher::favIcon(const QUrl& url_) {
-  return KIO::iconNameForUrl(url_);
+  if(!url_.isValid()) {
+    return QString();
+  }
+#if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
+  KIO::FavIconRequestJob* job = new KIO::FavIconRequestJob(url_);
+#endif
+  QString name = KIO::favIconForUrl(url_);
+
+  // favIcons start with "/". being an absolute file path from FavIconFetchJob
+  // but KIconLoader still expects them to start with "favicons/" and appends ".png"
+  // since the rest of Tellico assumes KDE4 behavior, adjust here
+  if(name.startsWith(QLatin1Char('/'))) {
+    int pos = name.indexOf(QLatin1String("favicons/"));
+    if(pos > -1) {
+      name = name.mid(pos);
+      name.chop(4); // remove ".png";
+    }
+  }
+  return name;
 }
