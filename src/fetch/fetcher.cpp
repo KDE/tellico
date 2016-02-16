@@ -171,6 +171,7 @@ QString Fetcher::favIcon(const QUrl& url_) {
   }
 #if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
   KIO::FavIconRequestJob* job = new KIO::FavIconRequestJob(url_);
+  Q_UNUSED(job);
 #endif
   QString name = KIO::favIconForUrl(url_);
 
