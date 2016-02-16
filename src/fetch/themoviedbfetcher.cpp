@@ -521,4 +521,3 @@ QString TheMovieDBFetcher::value(const QVariantMap& map, const char* name) {
     return QString();
   }
 }
-
