@@ -84,6 +84,7 @@ private slots:
   bool slotShowExtendedProperties();
   void slotSelectInitial();
   void slotDerivedChecked(bool checked);
+  void resetToCurrent();
 
 private:
   void applyChanges();

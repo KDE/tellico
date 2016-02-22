@@ -576,7 +576,9 @@ void CollectionFieldsDialog::slotTypeChanged(const QString& type_) {
 }
 
 void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
-//  myDebug() << index_;
+  if(index_ == m_oldIndex) {
+    return; // state when checkValues() returns false
+  }
 
   // use this instead of blocking signals everywhere
   m_updatingValues = true;
@@ -586,9 +588,8 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
 
   // next check old values
   if(!checkValues()) {
-    m_fieldsWidget->blockSignals(true);
-    m_fieldsWidget->setCurrentRow(m_oldIndex);
-    m_fieldsWidget->blockSignals(false);
+    // Other functions get called and change selection after this one. Use a SIngleShot to revert
+    QTimer::singleShot(0, this, SLOT(resetToCurrent()));
     m_updatingValues = false;
     return;
   }
@@ -870,6 +871,10 @@ bool CollectionFieldsDialog::slotShowExtendedProperties() {
 void CollectionFieldsDialog::slotDerivedChecked(bool checked_) {
   m_defaultEdit->setEnabled(!checked_);
   m_derivedEdit->setEnabled(checked_);
+}
+
+void CollectionFieldsDialog::resetToCurrent() {
+  m_fieldsWidget->setCurrentRow(m_oldIndex);
 }
 
 bool CollectionFieldsDialog::checkValues() {
