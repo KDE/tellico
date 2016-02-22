@@ -117,7 +117,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_btnDelete->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
 
-  connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()) );
+  connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()));
   connect(m_btnDelete, SIGNAL(clicked()), SLOT(slotDelete()));
 
   QWidget* hb2 = new QWidget(fieldsGroup);
@@ -313,7 +313,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   connect(m_grouped, SIGNAL(clicked()), SLOT(slotModified()));
 
   // need to stretch at bottom
-  vboxVBoxLayout->setStretchFactor(new QWidget(vbox), 1);
+  vboxVBoxLayout->addStretch(1);
 
   // keep a default collection
   m_defaultCollection = CollectionFactory::collection(m_coll->type(), true);
@@ -1064,4 +1064,3 @@ QStringList CollectionFieldsDialog::newTypesAllowed(int type_ /*=0*/) {
   }
   return newTypes;
 }
-
