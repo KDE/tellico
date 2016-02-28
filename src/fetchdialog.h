@@ -27,8 +27,7 @@
 
 #include "datavectors.h"
 
-#include <KDialog>
-
+#include <QDialog>
 #include <QPointer>
 #include <QEvent>
 #include <QList>
@@ -67,7 +66,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class FetchDialog : public KDialog {
+class FetchDialog : public QDialog {
 Q_OBJECT
 
 public:

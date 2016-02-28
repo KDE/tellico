@@ -1585,7 +1585,7 @@ void MainWindow::slotChangeGrouping() {
 void MainWindow::slotShowReportDialog() {
   if(!m_reportDlg) {
     m_reportDlg = new ReportDialog(this);
-    connect(m_reportDlg, SIGNAL(finished()),
+    connect(m_reportDlg, SIGNAL(finished(int)),
             SLOT(slotHideReportDialog()));
   } else {
     KWindowSystem::activateWindow(m_reportDlg->winId());
@@ -1643,7 +1643,7 @@ void MainWindow::slotShowFilterDialog() {
             Data::Document::self(), SLOT(slotSetModified()));
     connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
             this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
-    connect(m_filterDlg, SIGNAL(finished()),
+    connect(m_filterDlg, SIGNAL(finished(int)),
             SLOT(slotHideFilterDialog()));
   } else {
     KWindowSystem::activateWindow(m_filterDlg->winId());
@@ -1656,7 +1656,8 @@ void MainWindow::slotHideFilterDialog() {
 //  m_quickFilter->blockSignals(false);
   m_quickFilter->setEnabled(true);
   if(m_filterDlg) {
-    m_filterDlg->delayedDestruct();
+    m_filterDlg->hide();
+    m_filterDlg->deleteLater();
     m_filterDlg = 0;
   }
 }
@@ -1738,7 +1739,7 @@ void MainWindow::setFilter(const QString& text_) {
 void MainWindow::slotShowCollectionFieldsDialog() {
   if(!m_collFieldsDlg) {
     m_collFieldsDlg = new CollectionFieldsDialog(Data::Document::self()->collection(), this);
-    connect(m_collFieldsDlg, SIGNAL(finished()),
+    connect(m_collFieldsDlg, SIGNAL(finished(int)),
             SLOT(slotHideCollectionFieldsDialog()));
   } else {
     KWindowSystem::activateWindow(m_collFieldsDlg->winId());
@@ -1748,7 +1749,8 @@ void MainWindow::slotShowCollectionFieldsDialog() {
 
 void MainWindow::slotHideCollectionFieldsDialog() {
   if(m_collFieldsDlg) {
-    m_collFieldsDlg->delayedDestruct();
+    m_collFieldsDlg->hide();
+    m_collFieldsDlg->deleteLater();
     m_collFieldsDlg = 0;
   }
 }
@@ -1952,7 +1954,7 @@ void MainWindow::slotCiteEntry(int action_) {
 void MainWindow::slotShowFetchDialog() {
   if(!m_fetchDlg) {
     m_fetchDlg = new FetchDialog(this);
-    connect(m_fetchDlg, SIGNAL(finished()), SLOT(slotHideFetchDialog()));
+    connect(m_fetchDlg, SIGNAL(finished(int)), SLOT(slotHideFetchDialog()));
     connect(Controller::self(), SIGNAL(collectionAdded(int)), m_fetchDlg, SLOT(slotResetCollection()));
   } else {
     KWindowSystem::activateWindow(m_fetchDlg->winId());
@@ -1962,7 +1964,8 @@ void MainWindow::slotShowFetchDialog() {
 
 void MainWindow::slotHideFetchDialog() {
   if(m_fetchDlg) {
-    m_fetchDlg->delayedDestruct();
+    m_fetchDlg->hide();
+    m_fetchDlg->deleteLater();
     m_fetchDlg = 0;
   }
 }

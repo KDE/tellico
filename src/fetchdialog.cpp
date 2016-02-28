@@ -58,6 +58,7 @@
 #include <KStandardGuiItem>
 #include <KWindowConfig>
 
+#include <QDialogButtonBox>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QGroupBox>
@@ -119,7 +120,7 @@ class FetchDialog::FetchResultItem : public QTreeWidgetItem {
 };
 
 FetchDialog::FetchDialog(QWidget* parent_)
-    : KDialog(parent_)
+    : QDialog(parent_)
     , m_timer(new QTimer(this))
     , m_started(false)
     , m_resultCount(0)
@@ -127,13 +128,15 @@ FetchDialog::FetchDialog(QWidget* parent_)
     , m_barcodePreview(0)
     , m_barcodeRecognitionThread(0) {
   setModal(false);
-  setCaption(i18n("Internet Search"));
-  setButtons(0);
+  setWindowTitle(i18n("Internet Search"));
+
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  setLayout(mainLayout);
 
   m_collType = Kernel::self()->collectionType();
 
   QWidget* mainWidget = new QWidget(this);
-  setMainWidget(mainWidget);
+  mainLayout->addWidget(mainWidget);
   QBoxLayout* topLayout = new QVBoxLayout(mainWidget);
 
   QGroupBox* queryBox = new QGroupBox(i18n("Search Query"), mainWidget);
@@ -143,7 +146,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QWidget* box1 = new QWidget(queryBox);
   QHBoxLayout* box1HBoxLayout = new QHBoxLayout(box1);
   box1HBoxLayout->setMargin(0);
-  box1HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box1);
 
   QLabel* label = new QLabel(i18nc("Start the search", "S&earch:"), box1);
@@ -185,7 +187,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QWidget* box2 = new QWidget(queryBox);
   QHBoxLayout* box2HBoxLayout = new QHBoxLayout(box2);
   box2HBoxLayout->setMargin(0);
-  box2HBoxLayout->setSpacing(spacingHint());
   queryLayout->addWidget(box2);
 
   m_multipleISBN = new QCheckBox(i18n("&Multiple ISBN/UPC search"), box2);
@@ -233,7 +234,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
                                               << i18n("Title")
                                               << i18n("Description")
                                               << i18n("Source"));
-  m_treeWidget->setFrameShape(QFrame::NoFrame);
   m_treeWidget->setColumnWidth(0, 20); // will show a check mark when added
   m_treeWidget->model()->setHeaderData(0, Qt::Horizontal, Qt::AlignHCenter, Qt::TextAlignmentRole); // align checkmark in middle
   m_treeWidget->viewport()->installEventFilter(this);
@@ -260,7 +260,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QHBoxLayout* box3HBoxLayout = new QHBoxLayout(box3);
   box3HBoxLayout->setMargin(0);
   topLayout->addWidget(box3);
-  box3HBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_addButton = new QPushButton(i18n("&Add Entry"), box3);
   box3HBoxLayout->addWidget(m_addButton);
@@ -286,7 +285,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   QHBoxLayout* bottomboxHBoxLayout = new QHBoxLayout(bottombox);
   bottomboxHBoxLayout->setMargin(0);
   topLayout->addWidget(bottombox);
-  bottomboxHBoxLayout->setSpacing(KDialog::spacingHint());
 
   m_statusBar = new QStatusBar(bottombox);
   bottomboxHBoxLayout->addWidget(m_statusBar);
@@ -297,6 +295,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_progress->setFixedHeight(fontMetrics().height()+2);
   m_progress->hide();
   m_statusBar->addPermanentWidget(m_progress);
+  m_statusBar->setSizeGripEnabled(false);
 
   QPushButton* closeButton = new QPushButton(bottombox);
   KGuiItem::assign(closeButton, KStandardGuiItem::close());
@@ -696,15 +695,19 @@ void FetchDialog::slotMultipleISBN(bool toggle_) {
 }
 
 void FetchDialog::slotEditMultipleISBN() {
-  KDialog dlg(this);
+  QDialog dlg(this);
   dlg.setModal(true);
-  dlg.setCaption(i18n("Edit ISBN/UPC Values"));
-  dlg.setButtons(KDialog::Ok|KDialog::Cancel);
+  dlg.setWindowTitle(i18n("Edit ISBN/UPC Values"));
+
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  dlg.setLayout(mainLayout);
 
   QWidget* box = new QWidget(&dlg);
   QVBoxLayout* boxVBoxLayout = new QVBoxLayout(box);
   boxVBoxLayout->setMargin(0);
   boxVBoxLayout->setSpacing(10);
+  mainLayout->addWidget(box);
+
   QString s = i18n("<qt>Enter the ISBN or UPC values, one per line.</qt>");
   QLabel* l = new QLabel(s, box);
   boxVBoxLayout->addWidget(l);
@@ -724,7 +727,12 @@ void FetchDialog::slotEditMultipleISBN() {
   fromFileBtn->setText(i18n("&Load From File..."));
   fromFileBtn->setWhatsThis(i18n("<qt>Load the list from a text file.</qt>"));
   connect(fromFileBtn, SIGNAL(clicked()), SLOT(slotLoadISBNList()));
-  dlg.setMainWidget(box);
+
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  boxVBoxLayout->addWidget(buttonBox);
+  connect(buttonBox, SIGNAL(accepted()), &dlg, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), &dlg, SLOT(reject()));
+
   dlg.setMinimumWidth(qMax(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
 
   if(dlg.exec() == QDialog::Accepted) {
