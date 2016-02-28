@@ -360,6 +360,12 @@ TARGET_LINK_LIBRARIES(fetcherstest
   ${LIBXSLT_EXSLT_LIBRARIES}
 )
 
+IF(${KF5KIO_VERSION} VERSION_GREATER "5.18.0")
+  TARGET_LINK_LIBRARIES(fetcherstest
+      KF5::KIOGui
+  )
+ENDIF(${KF5_VERSION} VERSION_GREATER "5.18.0")
+
 # the PDF importer uses CrossRefFetcher, so include the test in the fetchers
 add_executable(pdftest pdftest.cpp
   ../translators/pdfimporter.cpp
