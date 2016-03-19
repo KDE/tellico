@@ -169,6 +169,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
     QDomDocument dom;
     if(!dom.setContent(data, false)) {
       myWarning() << "server did not return valid XML.";
+      stop();
       return;
     }
     // total is /resp/fetchresults/@numResults
