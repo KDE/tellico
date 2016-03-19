@@ -49,9 +49,9 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   list.append(createDefaultField(TitleField));
 
   QStringList platform;
-  platform << i18n("Xbox 360") << i18n("Xbox")
-           << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation") << i18nc("PlayStation Portable", "PSP")
-           << i18n("Nintendo Wii") << i18n("Nintendo DS") << i18n("GameCube") << i18n("Dreamcast")
+  platform << i18n("Xbox One") << i18n("Xbox 360") << i18n("Xbox")
+           << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation") << i18nc("PlayStation Portable", "PSP") << i18n("PlayStation Vita")
+           << i18n("Nintendo Wii") << i18n("Nintendo 3DS") << i18n("Nintendo DS") << i18n("GameCube") << i18n("Dreamcast")
            << i18n("Game Boy Advance") << i18n("Game Boy Color") << i18n("Game Boy")
            << i18nc("Windows Platform", "Windows") << i18n("Mac OS") << i18n("Linux");
   field = new Field(QLatin1String("platform"), i18n("Platform"), platform);
