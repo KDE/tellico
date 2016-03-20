@@ -66,6 +66,9 @@
    <xsl:variable name="p" select="platforms/platform[1]/name"/>
    <!-- convert to default Tellico spelling -->
    <xsl:choose>
+    <xsl:when test="$p='PlayStation 4'">
+     <xsl:value-of select="'PlayStation4'"/>
+    </xsl:when>
     <xsl:when test="$p='PlayStation 3'">
      <xsl:value-of select="'PlayStation3'"/>
     </xsl:when>
