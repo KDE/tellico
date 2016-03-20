@@ -165,6 +165,17 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   // if the pointer is retained, it gets double-deleted
   m_job = 0;
 
+#if 0
+  myWarning() << "Remove debug from musicbrainzfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test.xml"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
+
   if(m_total == -1) {
     QDomDocument dom;
     if(!dom.setContent(data, false)) {
@@ -180,17 +191,6 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
 //      myDebug() << "total = " << m_total;
     }
   }
-
-#if 0
-  myWarning() << "Remove debug from musicbrainzfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t.setCodec("UTF-8");
-    t << data;
-  }
-  f.close();
-#endif
 
   if(!m_xsltHandler) {
     initXSLTHandler();
