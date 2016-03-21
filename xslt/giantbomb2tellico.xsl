@@ -87,6 +87,12 @@
     <xsl:when test="contains($p, '3DS')">
      <xsl:value-of select="'Nintendo 3DS'"/>
     </xsl:when>
+    <xsl:when test="contains($p, 'Super Nintendo')">
+     <xsl:value-of select="'Super Nintendo'"/>
+    </xsl:when>
+    <xsl:when test="$p = 'Nintendo Entertainment System'">
+     <xsl:value-of select="'Nintendo'"/>
+    </xsl:when>
     <xsl:when test="$p='PC'">
      <xsl:value-of select="'Windows'"/>
     </xsl:when>

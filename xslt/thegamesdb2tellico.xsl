@@ -24,8 +24,6 @@
   <collection title="Search Results" type="11"> <!-- 11 is game -->
    <fields>
     <field name="_default"/>
-    <!-- have to add Nintendo 64 and Nintendo-->
-    <field title="Platform" flags="2" category="General" format="4" type="3" allowed="Xbox 360;Xbox;PlayStation3;PlayStation2;PlayStation;PSP;Nintendo Wii;Nintendo DS;Nintendo 64;Super Nintendo;Nintendo;GameCube;Dreamcast;Genesis;Game Boy Advance;Game Boy Color;Game Boy;Windows;Mac OS;Linux" name="platform"/>
     <field flags="0" title="TGDB ID" category="General" format="4" type="1" name="thegamesdb-id"/>
    </fields>
    <xsl:apply-templates select="/Data/Game"/>
