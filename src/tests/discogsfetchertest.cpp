@@ -191,7 +191,7 @@ void DiscogsFetcherTest::testRawDataVinyl() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Clash"));
-  QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("Clash, The"));
+  QCOMPARE(entry->field(QLatin1String("artist")), QLatin1String("The Clash"));
   QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("CBS; CBS"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1977"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Rock"));
@@ -201,5 +201,5 @@ void DiscogsFetcherTest::testRawDataVinyl() {
 
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
   QCOMPARE(trackList.count(), 14);
-  QCOMPARE(trackList.at(0), QLatin1String("Janie Jones::Clash, The::2:05"));
+  QCOMPARE(trackList.at(0), QLatin1String("Janie Jones::The Clash::2:05"));
 }
