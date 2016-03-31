@@ -35,8 +35,6 @@
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
-#include <KLocalizedString>
-
 namespace {
   static const int ENTRYMODEL_IMAGE_HEIGHT = 64;
 }
@@ -381,4 +379,3 @@ QString EntryModel::imageField(Data::CollPtr coll_) const {
   }
   return m_imageFields.value(coll_->id());
 }
-
