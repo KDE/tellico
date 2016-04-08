@@ -19,6 +19,7 @@
   <name xml:lang="gl">Tellico</name>
   <name xml:lang="hu">Tellico</name>
   <name xml:lang="ia">Tellico</name>
+  <name xml:lang="it">Tellico</name>
   <name xml:lang="nl">Tellico</name>
   <name xml:lang="pl">Tellico</name>
   <name xml:lang="pt">Tellico</name>
@@ -45,6 +46,7 @@
   <summary xml:lang="gl">Xestor de coleccións</summary>
   <summary xml:lang="hu">Gyűjteménykezelő</summary>
   <summary xml:lang="ia">Gerente de collection</summary>
+  <summary xml:lang="it">Gestore della collezione</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
   <summary xml:lang="pl">Zarządzanie zbiorem</summary>
   <summary xml:lang="pt">Gestor de Colecções</summary>
@@ -73,6 +75,7 @@
     <p xml:lang="fr">Tellico est une application pour organiser vos collections. Il fournit des modèles par défaut pour les livres, les bibliographies, les vidéos, la musique, les jeux vidéo, les monnaies, les timbres, les cartes à collectionner, les bandes dessinées et les vins. Il vous permet de saisir votre collection dans une base de données de catalogue, enregistrant différentes propriétés telles que le titre, l'auteur, etc.</p>
     <p xml:lang="gl">Tellico é un programa para organizar coleccións. Fornece modelos predeterminados para libros, bibliografías, vídeos, música, videoxogos, moedas, selos, cartas de colección, banda deseñada, e vinos. Permítelle engadir a súa colección a unha base de datos de catálogo na que pode gardar moitas propiedades distintas, como o título de cada elemento, o seu autor, etc.</p>
     <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
+    <p xml:lang="it">Tellico è un'applicazione per organizzare le tue collezioni. Fornisce modelli predefiniti per libri, bibliografie, video, musica, videogiochi, monete, francobolli, carte da gioco, fumetti e vini. Ti permette di inserire la tua collezione in una base di dati, salvando molte proprietà differenti come titolo, autore, ecc.</p>
     <p xml:lang="nl">Tellico is een toepassing voor het organiseren van uw verzamelingen. Het biedt standaard sjablonen voor boeken, bibliografieën, video's, muziek, videogames, munten, postzegels, visitekaartjes, strips en wijnen. Het stelt u in staat om uw verzameling in een catalogusdatabase in te voeren, waarin veel verschillende eigenschappen, zoals titel, auteur, etc. opgeslagen kunnen worden.</p>
     <p xml:lang="pl">Tellico jest programem do porządkowania twoich zbiorów. Dostarcza domyślnych szablonów dla książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win. Umożliwia wprowadzenie całego twojego zbioru do bazy danych katalogu, zapisując przy tym wiele różnych właściwości takich jak tytuł, autor, itp.</p>
     <p xml:lang="pt">O Tellico é uma aplicação para organizar as suas colecções. Oferece modelos predefinidos para livros, bibliografias, vídeos, músicas, jogos de vídeo, moedas, selos, cromos, livros de banda desenhada, vinhos, entre outras colecções. Permite-lhe introduzir a sua colecção numa base de dados de catálogos, gravando diversas propriedades, como o título, o autor, etc.</p>
@@ -98,6 +101,7 @@
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
+    <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
     <p xml:lang="pl">Cechy:</p>
     <p xml:lang="pt">Funcionalidades:</p>
@@ -123,6 +127,7 @@
       <li xml:lang="fr">Prends en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
       <li xml:lang="gl">Compatíbel con coleccións predeterminadas de libros, entradas bibliográficas, vídeos, música, videoxogos, banda deseñada, moedas, selos, cartas de colección, viños, xogos de taboleiro e catálogos de ficheiros.</li>
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
+      <li xml:lang="it">Supporta collezioni standard di libri, voci bibliografiche, video, musica, videogiochi, fumetti, monete, francobolli, carte da gioco, vini, giochi da tavolo e collezioni di file</li>
       <li xml:lang="nl">Ondersteunt standaard verzamelingen van boeken, bibliografie-items, video's, muziek, videogames, strips, munten, postzegels, visitekaartjes, wijnen, bordspellen en catalogs van bestanden</li>
       <li xml:lang="pl">Obsługa domyślnych zbiorów książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win, gier planszowych oraz katalogów plików</li>
       <li xml:lang="pt">Suporta diversas colecções de livros, itens bibliográficos, vídeos, músicas, jogos de vídeo, livros de banda desenhada, moedas, selos, cromos, vinhos, jogos de tabuleiros e catálogos de ficheiros</li>
@@ -146,6 +151,7 @@
       <li xml:lang="fr">Prends en charge les collections personnalisées par l'utilisateur</li>
       <li xml:lang="gl">Permite aos usuarios definir coleccións personalizadas.</li>
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
+      <li xml:lang="it">Supporta collezioni personalizzate definite dall'utente</li>
       <li xml:lang="nl">Ondersteunt gebruikergedefinieerde eigen verzamelingen</li>
       <li xml:lang="pl">Obsługa zbiorów określonych przez użytkownika</li>
       <li xml:lang="pt">Suporta colecções personalizadas pelo utilizador</li>
@@ -169,6 +175,7 @@
       <li xml:lang="fr">Prend en charge n'importe quel nombre de champs définis par l'utilisateur, de plusieurs types différents : texte, paragraphe, liste, case à cocher, nombre, URL, date, images et combinaisons</li>
       <li xml:lang="gl">Permite ao usuario definir campos de varios tipos: texto, parágrafo, lista, lista con caixas para marcar, número, URL, data, imaxes, e combinacións.</li>
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
+      <li xml:lang="it">Supporta un qualsiasi numero di campi definiti dall'utente, di molti tipi differenti: testo, paragrafi, liste, caselle, numeri, URL, dati, immagini e combinazioni</li>
       <li xml:lang="nl">Ondersteunt elk aantal gebruikergedefinieerde velden met verscheidene verschillende types: tekst, paragraaf, lijst, keuzevakje, aantal, URL, datum, afbeelding en combinaties</li>
       <li xml:lang="pl">Obsługa dowolnej liczby pól określonych przez użytkownika, wielu różnych rodzajów: tekst, akapit, spis, pole zaznaczane, liczba, adres URL, data, obraz i ich kombinacje</li>
       <li xml:lang="pt">Suporta qualquer número de campos definidos pelo utilizador, de diferentes tipos: texto, parágrafo, lista, opção de marcação, número, URL, data, imagens e combinações</li>
@@ -192,6 +199,7 @@
       <li xml:lang="fr">Gestion des entrées avec plusieurs auteurs, genres, mots-clés, etc</li>
       <li xml:lang="gl">Pode xestionar entradas con varios autores, xéneros, palabras clave, etc.</li>
       <li xml:lang="ia">Il manea entratas con multiple autores, generes, parolas clave, etc.</li>
+      <li xml:lang="it">Gestisce voci con autori multipli, generi, parole chiave, ecc.</li>
       <li xml:lang="nl">Behandelt items met meerdere auteurs, genres, zoektermen, etc.</li>
       <li xml:lang="pl">Obsługa wpisów z wieloma autorami, gatunkami, słowami kluczowymi, itp.</li>
       <li xml:lang="pt">Lida com itens de vários autores, géneros, palavras-chave, etc</li>
@@ -215,6 +223,7 @@
       <li xml:lang="fr">Formate automatiquement les titres et les noms</li>
       <li xml:lang="gl">Aplica automaticamente un formato aos títulos e nomes.</li>
       <li xml:lang="ia">Automaticamente da forma a titulos e nomines</li>
+      <li xml:lang="it">Formatta automaticamente titoli e nomi</li>
       <li xml:lang="nl">Deelt automatisch titels en namen in</li>
       <li xml:lang="pl">Samoczynne formatowanie tytułów i nazw</li>
       <li xml:lang="pt">Formata automaticamente os títulos e nomes</li>
@@ -238,6 +247,7 @@
       <li xml:lang="fr">Prend en charge la recherche dans la collection et une vue filtrée</li>
       <li xml:lang="gl">Permite buscar nas coleccións e filtrar nas vistas.</li>
       <li xml:lang="ia">Il supporta cerca de collection e filtro de vista</li>
+      <li xml:lang="it">Supporta ricerche nella collezione e filtraggio della vista</li>
       <li xml:lang="nl">Ondersteunt zoeken in verzamelingen en filtering op weergave</li>
       <li xml:lang="pl">Obsługa przedukiwania zbiorów i filtrowanych widoków</li>
       <li xml:lang="pt">Suporta a pesquisa na colecção e a filtragem da janela</li>
@@ -261,6 +271,7 @@
       <li xml:lang="fr">Trie et groupe les collections suivant diverses propriétés</li>
       <li xml:lang="gl">Permite ordenar ou agrupar as coleccións en funcións de varias propiedades.</li>
       <li xml:lang="ia">Il ordina e gruppa per varie proprietates</li>
+      <li xml:lang="it">Ordina e raggruppa la collezione in base a varie proprietà</li>
       <li xml:lang="nl">Sorteert en groepeert verzameling door verschillende eigenschappen</li>
       <li xml:lang="pl">Szeregowanie i grupowanie zbiorów według różnych właściwości</li>
       <li xml:lang="pt">Ordena e agrupa a colecção de acordo com diversas propriedades</li>
@@ -284,6 +295,7 @@
       <li xml:lang="fr">Permet des modèles d'entrées personnalisable via XSLT</li>
       <li xml:lang="gl">Permite personalizar os modelos para entradas mediante XSLT.</li>
       <li xml:lang="ia">Il permitte patronos de entratas personalisate per XSLT</li>
+      <li xml:lang="it">Permette modelli di immissione personalizzabili attraverso XSLT</li>
       <li xml:lang="nl">Staat aanpasbare sjablonen van items toe via XSLT</li>
       <li xml:lang="pl">Własne szablony wpisów dzięki XSLT</li>
       <li xml:lang="pt">Permite modelos de registos personalizados, através de XSLT</li>
@@ -307,6 +319,7 @@
       <li xml:lang="fr">Importe MODS, Bibtex, RIS, CSV, les métadonnées PDF, et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode importar ficheiros en formato MODS, Bibtex, RIS, CSV, metadatos de PDF, e moitos outros formatos.</li>
       <li xml:lang="ia">Il importa metadatos MODS, Bibtex, RIS, CSV, PDF e plure altere formatos</li>
+      <li xml:lang="it">Importa MODS, Bibtex, RIS, CSV, metadati dei PDF, e molti altri formati</li>
       <li xml:lang="nl">Importeert MODS, Bibtex, RIS, CSV, PDF metadata en vele andere formaten</li>
       <li xml:lang="pl">Importowanie MODS, Bibtex, RIS, CSV, metadanych PDF i wielu innych formatów</li>
       <li xml:lang="pt">Importa dos formatos MODS, Bibtex, RIS, CSV, meta-dados de PDF, entre muitos outros</li>
@@ -325,6 +338,7 @@
       <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML y otros formatos</li>
       <li xml:lang="fi">Vie BibTeX-, ONIX-, CSV-, HTML- ja muihin tiedostomuotoihin</li>
       <li xml:lang="gl">Pode exportar coleccións nos formatos Bibtex, CSV, e HTML, entre outros.</li>
+      <li xml:lang="it">Esporta in formato Bibtex, ONIX, CSV, HTML e altri</li>
       <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML en andere formaten</li>
       <li xml:lang="pl">Eksportowanie Bibtex, ONIX, CSV, HTML i innych formatów</li>
       <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
@@ -348,6 +362,7 @@
       <li xml:lang="fr">Importe les informations directement depuis Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org et de nombreux autres sites web ainsi que depuis des scripts externes</li>
       <li xml:lang="gl">Importa información directamente de Amazon.com, IMDb, servidores z39.50, PubMed, servidores SRU, CrossRef.org, doutros sitios web, e de scripts externos.</li>
       <li xml:lang="ia">Il importa information directemente ab Amazon.com, IMDb,  servitores z39.50, PubMed, seritores SRU, CrossRef.org, varie altere sitios web e ab external scripts</li>
+      <li xml:lang="it">Importa informazioni direttamente da Amazon.com, IMDb, server z39.50, PubMed, server SRU, CrossRef.org, svariati altri siti web, e da script esterni</li>
       <li xml:lang="nl">Importeert informatie direct uit Amazon.com, IMDb, z39.50-servers, PubMed, SRU-servers, CrossRef.org, verschillende andere websites en uit externe scripts</li>
       <li xml:lang="pl">Importowanie szczegółów bezpośrednio z Amazon.com, IMDb, serwerów z39.50, PubMed, serwerów SRU, CrossRef.org i różnych innych stron sieciowych, a także z zewnętrznych skryptów</li>
       <li xml:lang="pt">Importa a informação directamente a partir da Amazon.com, IMDb, servidores de z39.50, PubMed, servidores de SRU, CrossRef.org, entre outros serviços, bem como de programas externos</li>
@@ -371,6 +386,7 @@
       <li xml:lang="fr">Importe les données CDDB pour cataloguer les CDs audio</li>
       <li xml:lang="gl">Importa datos de CDDB para catalogar CD de son.</li>
       <li xml:lang="ia">Il importa datos de CDDB pro catalogar CDs audio</li>
+      <li xml:lang="it">Importa dati CDDB per catalogare cd audio</li>
       <li xml:lang="nl">Importeert CDDB-gegevens voor catalogiseren van audio-cd's</li>
       <li xml:lang="pl">Importowanie danych CDDB do katalogowanie płyt muzycznych</li>
       <li xml:lang="pt">Importa os dados do CDDB para catalogar os CD's de áudio</li>
@@ -394,6 +410,7 @@
       <li xml:lang="fr">Scanne et importe les collections de fichiers audio, tels que les fichiers mp3 ou ogg</li>
       <li xml:lang="gl">Analiza e importa coleccións de ficheiros de son, como MP3 ou OGG.</li>
       <li xml:lang="ia">Il scande e importa collectiones de file audio, tal como mp3 o ogg</li>
+      <li xml:lang="it">Cerca e importa collezioni di file audio, come mp3 oppure ogg</li>
       <li xml:lang="nl">Scant en importeert verzamelingen van audio-bestanden, zoals mp3 of ogg</li>
       <li xml:lang="pl">Przeszukiwanie i importowanie zbiorów plików dźwiękowych, takich jak mp3 czy ogg</li>
       <li xml:lang="pt">Sonda e importa as colecções dos ficheiros de áudio, como MP3's ou OGG's</li>
