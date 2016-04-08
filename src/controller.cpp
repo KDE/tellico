@@ -321,7 +321,7 @@ void Controller::slotDeleteSelectedEntries() {
     QString str = i18n("Do you really want to delete this entry?");
     QString dontAsk = QLatin1String("DeleteEntry");
     int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str, i18n("Delete Entry"),
-                                                 KGuiItem(i18n("&Delete"), QLatin1String("edit-delete")),
+                                                 KStandardGuiItem::del(),
                                                  KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::Continue) {
       m_working = false;
@@ -337,7 +337,7 @@ void Controller::slotDeleteSelectedEntries() {
     QString dontAsk = QLatin1String("DeleteMultipleBooks");
     int ret = KMessageBox::warningContinueCancelList(Kernel::self()->widget(), str, names,
                                                      i18n("Delete Multiple Entries"),
-                                                     KGuiItem(i18n("&Delete"), QLatin1String("edit-delete")),
+                                                     KStandardGuiItem::del(),
                                                      KStandardGuiItem::cancel(), dontAsk);
     if(ret != KMessageBox::Continue) {
       m_working = false;
