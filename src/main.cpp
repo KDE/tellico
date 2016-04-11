@@ -153,6 +153,10 @@ int main(int argc, char* argv[]) {
     Tellico::MainWindow* tellico = new Tellico::MainWindow();
     tellico->show();
     tellico->slotShowTipOfDay(false);
+    // slotInit gets called out of a QTimer signal
+    // but it wasn't always completing in-time
+    // so call it manually to ensure it has finished
+    tellico->slotInit();
 
     QStringList args = parser.positionalArguments();
     if(args.count() > 0) {
@@ -163,7 +167,7 @@ int main(int argc, char* argv[]) {
       } else if(parser.isSet(QLatin1String("ris"))) {
         tellico->importFile(Tellico::Import::RIS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else {
-        tellico->slotFileOpen(QUrl::fromUserInput(args.at(0)));
+        tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
       }
     } else {
       // bit of a hack, I just want the --nofile option

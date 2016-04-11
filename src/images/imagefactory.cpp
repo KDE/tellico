@@ -103,6 +103,7 @@ QString ImageFactory::localDir() {
 }
 
 QString ImageFactory::imageDir() {
+  Q_ASSERT(factory);
   switch(cacheDir()) {
     case LocalDir: return localDir();
     case DataDir: return dataDir();
