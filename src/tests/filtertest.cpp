@@ -137,14 +137,17 @@ void FilterTest::testFilter() {
                                                         Tellico::Data::Field::Date));
   coll->addField(date);
 
-  entry->setField(QLatin1String("date"), QLatin1String("2011-10-25"));
 
   Tellico::FilterRule* rule6 = new Tellico::FilterRule(QLatin1String("date"),
-                                                       QLatin1String("2011-10-24"),
+                                                       QLatin1String("2011-01-24"),
                                                        Tellico::FilterRule::FuncAfter);
-  QCOMPARE(rule6->pattern(), QLatin1String("2011-10-24"));
+  QCOMPARE(rule6->pattern(), QLatin1String("2011-01-24"));
   filter.clear();
   filter.append(rule6);
+  // test Bug 361625
+  entry->setField(QLatin1String("date"), QLatin1String("2011-1-25"));
+  QVERIFY(filter.matches(entry));
+  entry->setField(QLatin1String("date"), QLatin1String("2011-01-25"));
   QVERIFY(filter.matches(entry));
 
   rule6->setFunction(Tellico::FilterRule::FuncBefore);

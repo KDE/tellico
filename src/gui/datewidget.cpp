@@ -178,11 +178,19 @@ QString DateWidget::text() const {
   s += QLatin1Char('-');
   // first item is empty
   if(m_monthCombo->currentIndex() > 0) {
+    // zero-pad to two digits
+    if(m_monthCombo->currentIndex() < 10) {
+      s += QLatin1Char('0');
+    }
     s += QString::number(m_monthCombo->currentIndex());
     empty = false;
   }
   s += QLatin1Char('-');
   if(m_daySpin->value() > m_daySpin->minimum()) {
+    // zero-pad to two digits
+    if(m_daySpin->value() < 10) {
+      s += QLatin1Char('0');
+    }
     s += QString::number(m_daySpin->value());
     empty = false;
   }
