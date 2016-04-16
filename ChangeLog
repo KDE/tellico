@@ -1,3 +1,7 @@
+2016-04-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed filter comparison with custom dates (Bug 361625).
+
 2016-01-15  Sven Werlen  <sven.werlen@gmail.com>
 
 	* Fixed "Defaults" button in Collection Fields dialog (Bug 357637).
