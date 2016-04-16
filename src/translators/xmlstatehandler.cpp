@@ -632,8 +632,16 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   if(localName_ == QLatin1String("year")) {
     tokens[0] = d->text;
   } else if(localName_ == QLatin1String("month")) {
+    // enforce two digits for month
+    while(d->text.length() < 2) {
+      d->text.prepend(QLatin1Char('0'));
+    }
     tokens[1] = d->text;
   } else if(localName_ == QLatin1String("day")) {
+    // enforce two digits for day
+    while(d->text.length() < 2) {
+      d->text.prepend(QLatin1Char('0'));
+    }
     tokens[2] = d->text;
   }
   d->textBuffer = tokens.join(QLatin1String("-"));

@@ -321,7 +321,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(fieldElem);
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
-        // as of Tellico in KF5 (3.0?), just forget about the calendar attribute for the moment, always use gregorian
+        // as of Tellico in KF5 (3.0), just forget about the calendar attribute for the moment, always use gregorian
         // I could modify the DTD to make calendar attribute optional, but I choose not to
 //        fieldElem.setAttribute(QLatin1String("calendar"), KLocale::global()->calendar()->calendarType());
         fieldElem.setAttribute(QLatin1String("calendar"), QLatin1String("gregorian"));
