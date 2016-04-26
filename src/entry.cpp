@@ -157,10 +157,10 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
       foreach(const QString& row, FieldFormat::splitTable(field(field_->name()))) {
         QStringList columns = FieldFormat::splitRow(row);
         QStringList newValues;
-        foreach(const QString& value, FieldFormat::splitValue(columns.at(0))) {
-          newValues << FieldFormat::format(value, field_->formatType(), FieldFormat::DefaultFormat);
-        }
         if(!columns.isEmpty()) {
+          foreach(const QString& value, FieldFormat::splitValue(columns.at(0))) {
+            newValues << FieldFormat::format(value, field_->formatType(), FieldFormat::DefaultFormat);
+          }
           columns.replace(0, newValues.join(FieldFormat::delimiterString()));
         }
         rows << columns.join(FieldFormat::columnDelimiterString());
@@ -298,7 +298,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
     // we only take groups from the first column
     foreach(const QString& row, FieldFormat::splitTable(field(f))) {
       const QStringList columns = FieldFormat::splitRow(row);
-      const QStringList values = FieldFormat::splitValue(columns.at(0));
+      const QStringList values = columns.isEmpty() ? QStringList() : FieldFormat::splitValue(columns.at(0));
       foreach(const QString& value, values) {
         groups.add(FieldFormat::format(value, f->formatType(), FieldFormat::DefaultFormat));
       }
