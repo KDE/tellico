@@ -126,6 +126,18 @@ void CollectionTest::testCollection() {
   entry2->setField(QLatin1String("title"), QLatin1String("new title"));
   QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
   QCOMPARE(entry2->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
+
+  // check Bug 361622 - properly handling empty rows in table
+  Tellico::Data::FieldPtr tableField(new Tellico::Data::Field(QLatin1String("table"), QLatin1String("Table"), Tellico::Data::Field::Table));
+  tableField->setFormatType(Tellico::FieldFormat::FormatName);
+  coll->addField(tableField);
+  QString tableValue = QLatin1String("Value1")
+                     + Tellico::FieldFormat::rowDelimiterString()
+                     + Tellico::FieldFormat::rowDelimiterString()
+                     + QLatin1String("Value2");
+  entry2->setField(QLatin1String("table"), tableValue);
+  QCOMPARE(entry2->formattedField(QLatin1String("table")), tableValue);
+  QCOMPARE(entry2->groupNamesByFieldName(QLatin1String("table")), QStringList() << QLatin1String("Value1") << QLatin1String("Value2"));
 }
 
 void CollectionTest::testFields() {

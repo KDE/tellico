@@ -166,10 +166,10 @@ QString DerivedValue::templateKeyValue(EntryPtr entry_, const QString& key_, boo
       // for tables, only take first column
       QStringList rows = FieldFormat::splitTable(formatted_ ? entry_->formattedField(field) : entry_->field(field));
       foreach(const QString& row, rows) {
-        if(row.isEmpty())  {
-          continue;
+        const QStringList rowValues = FieldFormat::splitRow(row);
+        if(!rowValues.isEmpty()) {
+          values.append(rowValues.at(0));
         }
-        values.append(FieldFormat::splitRow(row).at(0));
       }
     } else {
       values = FieldFormat::splitValue(formatted_ ? entry_->formattedField(field) : entry_->field(field));
