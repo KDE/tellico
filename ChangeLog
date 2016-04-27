@@ -1,3 +1,7 @@
+2016-04-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added menu items for each Url field in icon view (Bug 250913).
+
 2016-04-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug with empty table rows (Bug 361622).

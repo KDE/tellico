@@ -39,7 +39,6 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <krun.h>
 #include <kmessagebox.h>
 #include <khtmlview.h>
 #include <dom/dom_element.h>
@@ -52,6 +51,7 @@
 #include <QDomDocument>
 #include <QTemporaryFile>
 #include <QApplication>
+#include <QDesktopServices>
 
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;
@@ -66,7 +66,7 @@ void EntryViewWidget::copy() {
 }
 
 EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_),
-    m_handler(0), m_run(0), m_tempFile(0), m_useGradientImages(true), m_checkCommonFile(true) {
+    m_handler(0), m_tempFile(0), m_useGradientImages(true), m_checkCommonFile(true) {
   setJScriptEnabled(false);
   setJavaEnabled(false);
   setMetaRefreshEnabled(false);
@@ -85,9 +85,6 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
 }
 
 EntryView::~EntryView() {
-  if(m_run) {
-    m_run->abort();
-  }
   delete m_handler;
   m_handler = 0;
   delete m_tempFile;
@@ -325,8 +322,8 @@ void EntryView::slotOpenURL(const QUrl& url_) {
       break;
     }
   }
-  // open the url, m_run gets auto-deleted
-  m_run = new KRun(u, view());
+  // open the url
+  QDesktopServices::openUrl(u);
 }
 
 void EntryView::slotReloadEntry() {

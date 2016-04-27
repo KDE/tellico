@@ -27,7 +27,6 @@
 
 #include "fieldwidget.h"
 
-#include <krun.h>
 #include <kurlcompletion.h>
 
 #include <QPointer>
@@ -68,8 +67,7 @@ private:
   };
 
   KUrlRequester* m_requester;
-  bool m_isRelative : 1;
-  QPointer<KRun> m_run;
+  bool m_isRelative;
 };
 
   } // end GUI namespace

@@ -31,6 +31,7 @@
 #include <kurllabel.h>
 
 #include <QUrl>
+#include <QDesktopServices>
 
 using Tellico::GUI::URLFieldWidget;
 
@@ -45,7 +46,7 @@ QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
 }
 
 URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
-    : FieldWidget(field_, parent_), m_run(0) {
+    : FieldWidget(field_, parent_) {
 
   m_requester = new KUrlRequester(this);
   m_requester->lineEdit()->setCompletionObject(new URLCompletion());
@@ -60,9 +61,6 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
 }
 
 URLFieldWidget::~URLFieldWidget() {
-  if(m_run) {
-    m_run->abort();
-  }
 }
 
 QString URLFieldWidget::text() const {
@@ -99,12 +97,11 @@ void URLFieldWidget::slotOpenURL(const QString& url_) {
   if(url_.isEmpty()) {
     return;
   }
-  // just in case, interpret string relative to document url
-  m_run = new KRun(Kernel::self()->URL().resolved(QUrl::fromUserInput(url_)),
-                   this);
+  QDesktopServices::openUrl(m_isRelative ?
+                            Kernel::self()->URL().resolved(QUrl::fromUserInput(url_)) :
+                            QUrl::fromUserInput(url_));
 }
 
 QWidget* URLFieldWidget::widget() {
   return m_requester;
 }
-

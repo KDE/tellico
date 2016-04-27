@@ -32,8 +32,6 @@
 
 #include <QPointer>
 
-class KRun;
-
 class QTemporaryFile;
 
 namespace Tellico {
@@ -109,11 +107,9 @@ private:
   QString m_xsltFile;
   QString m_textToShow;
 
-  // to run any clicked processes
-  QPointer<KRun> m_run;
   QTemporaryFile* m_tempFile;
-  bool m_useGradientImages : 1;
-  bool m_checkCommonFile : 1;
+  bool m_useGradientImages;
+  bool m_checkCommonFile;
 };
 
 // stupid naming on my part, I need to subclass the view to
