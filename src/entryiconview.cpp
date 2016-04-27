@@ -152,7 +152,6 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
 }
 
 void EntryIconView::slotOpenUrlMenuActivated(QAction* action_/*=0*/) {
-  Q_ASSERT(action_);
   if(!action_) {
     return;
   }
