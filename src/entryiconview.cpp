@@ -31,15 +31,17 @@
 #include "field.h"
 #include "document.h"
 #include "utils/tellico_utils.h"
-#include "tellico_debug.h"
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
+#include "tellico_kernel.h"
+#include "tellico_debug.h"
 
 #include <KLocalizedString>
 
 #include <QMenu>
 #include <QIcon>
 #include <QContextMenuEvent>
+#include <QDesktopServices>
 
 namespace {
   static const int ENTRY_ICON_SIZE_PAD = 6;
@@ -97,6 +99,28 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
   QModelIndex index = indexAt(ev_->pos());
   if(index.isValid()) {
     Controller::self()->plugEntryActions(&menu);
+
+    // add a menu item to open each URL field
+    Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
+    Data::FieldList urlFields;
+    foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
+      if(field->type() == Data::Field::URL) {
+        urlFields += field;
+      }
+    }
+    foreach(Data::FieldPtr urlField, urlFields) {
+      QAction* act = menu.addAction(QIcon::fromTheme(QLatin1String("bookmarks")),
+                                    i18nc("Open URL", "Open %1", urlField->title()));
+      const QString value = entry->field(urlField);
+      act->setData(value);
+      act->setWhatsThis(value);
+      act->setEnabled(!value.isEmpty());
+      menu.addAction(act);
+    }
+    if(!urlFields.isEmpty()) {
+      connect(&menu, SIGNAL(triggered(QAction*)), SLOT(slotOpenUrlMenuActivated(QAction*)));
+    }
+
     menu.addSeparator();
   }
 
@@ -115,7 +139,7 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
   if(!field) {
     return;
   }
-  // could have just put the index of the field in the list as the actionn data
+  // could have just put the index of the field in the list as the action data
   // but instead, we need to to iterate over the current fields and find the index since EntryTitleModel
   // uses the field list index as the column value
   Data::FieldList fields = Data::Document::self()->collection()->fields();
@@ -124,5 +148,16 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
       model()->sort(i);
       break;
     }
+  }
+}
+
+void EntryIconView::slotOpenUrlMenuActivated(QAction* action_/*=0*/) {
+  Q_ASSERT(action_);
+  if(!action_) {
+    return;
+  }
+  const QString link = action_->data().toString();
+  if(!link.isEmpty()) {
+    QDesktopServices::openUrl(Kernel::self()->URL().resolved(QUrl::fromUserInput(link)));
   }
 }
