@@ -358,8 +358,8 @@
       <li xml:lang="x-test">xxImports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scriptsxx</li>
       <li>Imports CDDB data for cataloging audio CDs</li>
       <li xml:lang="bs">Uvozi CDDB podatke za popisivanje muzičkih CD-ova</li>
-      <li xml:lang="ca">Importa dades CDDB per la catalogació dels CD d'àudio</li>
-      <li xml:lang="ca-valencia">Importa dades CDDB per la catalogació dels CD d'àudio</li>
+      <li xml:lang="ca">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
+      <li xml:lang="ca-valencia">Importa dades CDDB per a la catalogació dels CD d'àudio</li>
       <li xml:lang="da">Importerer CDDB-data til katalogisering af lyd-cd'er</li>
       <li xml:lang="de">Importiert CDDB-Daten für die Katalogisierung von Audi-CDs</li>
       <li xml:lang="en-GB">Imports CDDB data for cataloguing audio CDs</li>
