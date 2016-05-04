@@ -171,12 +171,10 @@ void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
 
     // if this layout model is changed, be sure to check slotUpdateField()
     QWidget* page = new QWidget(m_tabs);
-    // (parent, margin, spacing)
     QBoxLayout* boxLayout = new QVBoxLayout(page);
 
     QWidget* grid = new QWidget(page);
     gridList.append(grid);
-    // (parent, nrows, ncols, margin, spacing)
     // spacing gets a bit weird, if there are absolutely no Choice fields,
     // then spacing should be 5, which is set later
     QGridLayout* layout = new QGridLayout(grid);

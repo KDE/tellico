@@ -1,3 +1,7 @@
+2016-05-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Use elided text in Choice combobox to avoid wide windows(Bug 362028).
+
 2016-04-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug with empty table rows (Bug 361622).

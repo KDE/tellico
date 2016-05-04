@@ -55,6 +55,7 @@ protected:
 
 private:
   KComboBox* m_comboBox;
+  int m_maxTextWidth;
 };
 
   } // end GUI namespace

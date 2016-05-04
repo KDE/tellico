@@ -549,7 +549,7 @@ void DetailedListView::resetEntryStatus() {
 void DetailedListView::updateHeaderMenu() {
   // we only want to update the menu when the header count and model count agree
   if(model()->columnCount() != header()->count()) {
-    myDebug() << "column counts diagree";
+    myDebug() << "column counts disagree";
     return;
   }
   m_headerMenu->clear();
