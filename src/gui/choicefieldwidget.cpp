@@ -25,37 +25,49 @@
 #include "choicefieldwidget.h"
 #include "../field.h"
 
-#include <kcombobox.h>
+#include <QComboBox>
+#include <QGuiApplication>
+#include <QScreen>
+
+namespace {
+  const double MAX_FRACTION_SCREEN_WIDTH = 0.4;
+}
 
 using Tellico::GUI::ChoiceFieldWidget;
 
 ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_), m_comboBox(0) {
 
-  m_comboBox = new KComboBox(this);
+  m_comboBox = new QComboBox(this);
   connect(m_comboBox, SIGNAL(activated(int)), SLOT(checkModified()));
-  // always have empty choice, but don't show two empty values
-  m_comboBox->addItem(QString());
-  QStringList values = field_->allowed();
-  values.removeAll(QString());
-  m_comboBox->addItems(values);
-  m_comboBox->setMinimumWidth(5*fontMetrics().maxWidth());
+  m_maxTextWidth = MAX_FRACTION_SCREEN_WIDTH * QGuiApplication::primaryScreen()->size().width();
 
+  QStringList values = field_->allowed();
+  // always have empty choice, but don't show two empty values
+  values.removeAll(QString());
+
+  const QFontMetrics& fm = fontMetrics();
+  m_comboBox->addItem(QString(), QString());
+  foreach(const QString& value, values) {
+    m_comboBox->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
+  }
+
+  m_comboBox->setMinimumWidth(5*fm.maxWidth());
   registerWidget();
 }
 
 QString ChoiceFieldWidget::text() const {
-  return m_comboBox->currentText();
+  return m_comboBox->currentData().toString();
 }
 
 void ChoiceFieldWidget::setTextImpl(const QString& text_) {
   int idx = m_comboBox->findText(text_);
   if(idx < 0) {
-    m_comboBox->addItem(text_);
+    m_comboBox->addItem(fontMetrics().elidedText(text_, Qt::ElideMiddle, m_maxTextWidth), text_);
+    m_comboBox->setCurrentIndex(m_comboBox->count()-1);
   } else {
     m_comboBox->setCurrentIndex(idx);
   }
-  m_comboBox->setCurrentItem(text_);
 }
 
 void ChoiceFieldWidget::clearImpl() {
@@ -66,15 +78,19 @@ void ChoiceFieldWidget::clearImpl() {
 void ChoiceFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
   int idx = m_comboBox->currentIndex();
   m_comboBox->clear();
-  // always have empty choice
-  m_comboBox->addItem(QString());
+
   QStringList values = newField_->allowed();
   values.removeAll(QString());
-  m_comboBox->addItems(values);
+
+  const QFontMetrics& fm = fontMetrics();
+  // always have empty choice
+  m_comboBox->addItem(QString(), QString());
+  foreach(const QString& value, values) {
+    m_comboBox->addItem(fm.elidedText(value, Qt::ElideMiddle, m_maxTextWidth), value);
+  }
   m_comboBox->setCurrentIndex(idx);
 }
 
 QWidget* ChoiceFieldWidget::widget() {
   return m_comboBox;
 }
-

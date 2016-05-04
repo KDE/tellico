@@ -28,7 +28,7 @@
 #include "fieldwidget.h"
 #include "../datavectors.h"
 
-class KComboBox;
+class QComboBox;
 
 namespace Tellico {
   namespace GUI {
@@ -54,7 +54,8 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
-  KComboBox* m_comboBox;
+  QComboBox* m_comboBox;
+  int m_maxTextWidth;
 };
 
   } // end GUI namespace

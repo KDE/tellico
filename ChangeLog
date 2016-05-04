@@ -1,3 +1,7 @@
+2016-05-03  Robby Stephenson  <robby@periapsis.org>
+
+	* Use elided text in Choice combobox to avoid wide windows(Bug 362028).
+
 2016-04-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Added menu items for each Url field in icon view (Bug 250913).
