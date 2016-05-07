@@ -1037,9 +1037,9 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     while(pos > -1) {
       const int pos2 = tdCharRx.indexIn(prodText, pos+1);
       const QString credit = tdCharRx.cap(1).trimmed();
-      if(pos2 > -1 && (credit == QLatin1String("producer") ||
-                       credit == QLatin1String("co-producer") ||
-                       credit == QLatin1String("associate producer"))) {
+      if(pos2 > -1 && (credit.startsWith(QLatin1String("producer")) ||
+                       credit.startsWith(QLatin1String("co-producer")) ||
+                       credit.startsWith(QLatin1String("associate producer")))) {
         producers += s_anchorNameRx->cap(2).trimmed();
       }
       pos = s_anchorNameRx->indexIn(prodText, pos+1);
