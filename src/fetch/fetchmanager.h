@@ -28,6 +28,7 @@
 #include "fetcher.h"
 
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QObject>
 #include <QMap>
