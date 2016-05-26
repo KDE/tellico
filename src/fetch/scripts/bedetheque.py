@@ -65,7 +65,7 @@ Version 0.4: 2009-04-03
 * Minor bug fixes
 
 Version 0.3: 2009-01-28
-* Added back cover and exemple page images.
+* Added back cover and example page images.
 * Images are now full-size (use '-i' if you prefer thumbnail)
 * Added per-album user's rating
 * Fixed issue on missing old critics.
