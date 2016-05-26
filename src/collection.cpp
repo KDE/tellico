@@ -559,7 +559,6 @@ bool Collection::removeEntries(const Tellico::Data::EntryList& vec_) {
     return false;
   }
 
-//  myDebug() << "deleted entry - " << entry_->title();
   removeEntriesFromDicts(vec_, fieldNames());
   bool success = true;
   foreach(EntryPtr entry, vec_) {

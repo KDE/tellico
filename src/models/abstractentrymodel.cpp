@@ -85,13 +85,26 @@ void AbstractEntryModel::modifyEntries(const Tellico::Data::EntryList& entries_)
 }
 
 void AbstractEntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
+  // for performance reasons, if more than 10 entries are being removed, rather than
+  // iterating over all of them, which really hurts, just signal a full replacement
+  const bool bigRemoval = (entries_.size() > 10);
+  if(bigRemoval) {
+    beginResetModel();
+  }
   foreach(Data::EntryPtr entry, entries_) {
     int idx = m_entries.indexOf(entry);
     if(idx > -1) {
-      beginRemoveRows(QModelIndex(), idx, idx);
-      m_entries.removeOne(entry);
-      endRemoveRows();
+      if(!bigRemoval) {
+        beginRemoveRows(QModelIndex(), idx, idx);
+      }
+      m_entries.removeAt(idx);
+      if(!bigRemoval) {
+        endRemoveRows();
+      }
     }
+  }
+  if(bigRemoval) {
+    endResetModel();
   }
 }
 

@@ -64,7 +64,7 @@ void RemoveEntries::redo() {
 
   m_coll->removeEntries(m_entries);
   Controller::self()->removedEntries(m_entries);
-  
+
   QUndoCommand::redo();
 }
 
