@@ -270,8 +270,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
   Data::CollPtr coll = imp.collection();
 //  getTracks(entry);
-  if(!coll) {
-    myWarning() << "no collection pointer";
+  if(!coll || coll->entries().isEmpty()) {
+    myWarning() << "no collection pointer or no entries";
     return entry;
   }
 
