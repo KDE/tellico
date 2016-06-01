@@ -8,3 +8,5 @@ Remove FIlmaster?
 Make sure all usages of FileRef* deletes the pointer
 
 Use FileRef for template installation to support network install
+
+brickset.com api
