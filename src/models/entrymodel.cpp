@@ -141,10 +141,10 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
           return defaultIcon(entry->collection());
         }
 
-        icon = new QIcon(QPixmap::fromImage(img));
+        icon = new QIcon(img.convertToPixmap());
         if(!m_iconCache.insert(id, icon)) {
           // failing to insert invalidates the icon pointer
-          return QIcon(QPixmap::fromImage(img));
+          return QIcon(img.convertToPixmap());
         }
         return QIcon(*icon);
       }
@@ -165,7 +165,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
         const Data::Image& img = ImageFactory::imageById(value);
         if(!img.isNull()) {
-          return QPixmap::fromImage(img).scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
+          return img.convertToPixmap().scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
         }
       }
       return QVariant();
