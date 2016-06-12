@@ -440,4 +440,3 @@ IBSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
 QString IBSFetcher::ConfigWidget::preferredName() const {
   return IBSFetcher::defaultName();
 }
-

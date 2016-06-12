@@ -410,4 +410,3 @@ void ISBNdbFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString ISBNdbFetcher::ConfigWidget::preferredName() const {
   return ISBNdbFetcher::defaultName();
 }
-

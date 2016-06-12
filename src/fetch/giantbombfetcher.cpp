@@ -252,4 +252,3 @@ void GiantBombFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString GiantBombFetcher::ConfigWidget::preferredName() const {
   return GiantBombFetcher::defaultName();
 }
-
