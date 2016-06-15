@@ -115,13 +115,13 @@
      </tc:field>
     </xsl:when>
     <xsl:when test="@type='GCcomics'">
-     <tc:field title="ISBN#" flags="0" category="Publishing" format="4" description="International Standard Book Number" type="1" name="isbn" i18n="true"/>
-     <tc:field title="Plot" flags="0" category="Plot" format="4" type="2" name="plot" i18n="true"/>
+     <tc:field flags="0" title="ISBN#" category="Publishing" format="4" description="International Standard Book Number" type="1" name="isbn" i18n="true"/>
+     <tc:field flags="0" title="Plot" category="Plot" format="4" type="2" name="plot" i18n="true"/>
      <tc:field flags="7" title="Colorist" category="General" format="2" type="1" name="colorist" i18n="true"/>
      <tc:field flags="6" title="Format" category="Publishing" format="4" type="1" name="format" i18n="true"/>
      <tc:field flags="6" title="Category" category="Publishing" format="4" type="1" name="category" i18n="true"/>
      <tc:field flags="6" title="Collection" category="Personal" format="4" type="1" name="collection" i18n="true"/>
-     <tc:field title="Boards" flags="0" category="Publishing" format="4" type="6" name="numberboards"/>
+     <tc:field flags="0" title="Boards" category="Publishing" format="4" type="6" name="numberboards"/>
     </xsl:when>
    </xsl:choose>
    <xsl:apply-templates select="userCollection/fields/field"/>
