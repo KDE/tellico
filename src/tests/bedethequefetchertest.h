@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #ifndef BEDETHEQUEFETCHERTEST_H
-#define BEDETHEUQEFETCHERTEST_H
+#define BEDETHEQUEFETCHERTEST_H
 
 #include "abstractfetchertest.h"
 
