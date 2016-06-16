@@ -194,20 +194,18 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
 }
 
 int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
+  if(!entry1_ || !entry2_) {
+    return 0;
+  }
   // equal isbn's or lccn's are easy, give it a weight of 100
   if(EntryComparison::score(entry1_, entry2_, QLatin1String("isbn"), this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QLatin1String("lccn"), this) > 0) {
     return 100; // good match
   }
   int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
-//  if(res == 0) {
-//    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title();
-//  }
   res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("author"), this);
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("cr_year"), this);
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("pub_year"), this);
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("binding"), this);
   return res;
 }
-

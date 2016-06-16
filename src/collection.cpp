@@ -904,4 +904,3 @@ Tellico::Data::ID Collection::getID() {
   static ID id = 0;
   return ++id;
 }
-

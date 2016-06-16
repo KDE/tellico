@@ -50,6 +50,7 @@ public:
   explicit ComicBookCollection(bool addDefaultFields, const QString& title = QString());
 
   virtual Type type() const { return ComicBook; }
+  virtual int sameEntry(Data::EntryPtr entry1, Data::EntryPtr entry2) const;
 
   static FieldList defaultFields();
 };

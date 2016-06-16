@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2016 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "comicbookcollection.h"
+#include "../entrycomparison.h"
 
 #include <KLocalizedString>
 
@@ -169,3 +170,26 @@ Tellico::Data::FieldList ComicBookCollection::defaultFields() {
   return list;
 }
 
+int ComicBookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
+  if(!entry1_ || !entry2_) {
+    return 0;
+  }
+  // equal isbn's or lccn's are easy, give it a weight of 100
+  // special for Bedetheque links for match
+  if(EntryComparison::score(entry1_, entry2_, QLatin1String("isbn"), this) > 0 ||
+     EntryComparison::score(entry1_, entry2_, QLatin1String("lccn"), this) > 0) {
+    return 100; // great match
+  }
+  // special for Bedetheque links for match
+  if(EntryComparison::score(entry1_, entry2_, QLatin1String("lien-bel"), this) > 0) {
+    return 100; // great match
+  }
+  int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
+  res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("series"), this);
+  res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("writer"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("artist"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("issue"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("publisher"), this);
+  res += EntryComparison::score(entry1_, entry2_, QLatin1String("pub_year"), this);
+  return res;
+}
