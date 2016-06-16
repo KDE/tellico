@@ -447,6 +447,14 @@ add_test(arxivfetchertest arxivfetchertest)
 ecm_mark_as_test(arxivfetchertest)
 TARGET_LINK_LIBRARIES(arxivfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(bedethequefetchertest bedethequefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/bedethequefetcher.cpp
+)
+ecm_mark_nongui_executable(bedethequefetchertest)
+add_test(bedethequefetchertest bedethequefetchertest)
+ecm_mark_as_test(bedethequefetchertest)
+TARGET_LINK_LIBRARIES(bedethequefetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(bibliosharefetchertest bibliosharefetchertest.cpp abstractfetchertest.cpp
   ../fetch/bibliosharefetcher.cpp
   ../fetch/xmlfetcher.cpp
