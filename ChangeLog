@@ -1,3 +1,7 @@
+2016-06-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Added native data source for Bedetheque.com
+
 2016-05-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved performance when deleting many entries.

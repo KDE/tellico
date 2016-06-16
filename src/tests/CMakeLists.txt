@@ -141,6 +141,9 @@ TARGET_LINK_LIBRARIES(animenfofetchertest fetch ${TELLICO_TEST_LIBS})
 KDE4_ADD_UNIT_TEST(arxivfetchertest NOGUI arxivfetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(arxivfetchertest fetch ${TELLICO_TEST_LIBS})
 
+KDE4_ADD_UNIT_TEST(bedethequefetchertest NOGUI bedethequefetchertest.cpp abstractfetchertest.cpp)
+TARGET_LINK_LIBRARIES(bedethequefetchertest fetch ${TELLICO_TEST_LIBS})
+
 KDE4_ADD_UNIT_TEST(bibliosharefetchertest NOGUI bibliosharefetchertest.cpp abstractfetchertest.cpp)
 TARGET_LINK_LIBRARIES(bibliosharefetchertest fetch ${TELLICO_TEST_LIBS})
 

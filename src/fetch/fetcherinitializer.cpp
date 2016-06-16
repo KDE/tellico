@@ -69,6 +69,7 @@
 #include "dblpfetcher.h"
 #include "mrlookupfetcher.h"
 #include "boardgamegeekfetcher.h"
+#include "bedethequefetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -127,4 +128,5 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::DBLPFetcher> registerDBLP(DBLP);
   RegisterFetcher<Fetch::MRLookupFetcher> registerMRLookup(MRLookup);
   RegisterFetcher<Fetch::BoardGameGeekFetcher> registerBGG(BoardGameGeek);
+  RegisterFetcher<Fetch::BedethequeFetcher> registerBD(Bedetheque);
 }

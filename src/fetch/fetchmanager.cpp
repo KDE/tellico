@@ -266,6 +266,17 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
       generalConfig.writeEntry("FetchVersion", 1);
     }
   }
+  // special case: the Bedetheque fetcher was originally implemented as a Python script
+  // now, it's available as a builtin data source, so prefer the new version
+  // so check for fetcher version and switch to the newer if version is missing or lower
+  if(fetchType == Fetch::ExecExternal &&
+     config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("bedetheque.py"))) {
+    KConfigGroup generalConfig(config_, QLatin1String("General Options"));
+    if(generalConfig.readEntry("FetchVersion", 0) < 2) {
+      fetchType = Fetch::Bedetheque;
+      generalConfig.writeEntry("FetchVersion", 2);
+    }
+  }
 
   Fetcher::Ptr f;
   if(functionRegistry.contains(fetchType)) {
