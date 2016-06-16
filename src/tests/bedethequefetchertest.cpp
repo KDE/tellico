@@ -70,14 +70,14 @@ void BedethequeFetcherTest::testSeriesArno() {
   QCOMPARE(entry->field("title"), QLatin1String("Le Combat d'Odiri"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
   QCOMPARE(entry->field("series"), QLatin1String("(AUT) Arno"));
-  QCOMPARE(entry->field("writer"), QString::fromLatin1("Châteaureynaud, Georges-Olivier"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
   QCOMPARE(entry->field("publisher"), QLatin1String("Bayard"));
   QCOMPARE(entry->field("artist"), QLatin1String("Arno"));
   QCOMPARE(entry->field("colorist"), QLatin1String("Arno"));
   QCOMPARE(entry->field("pages"), QLatin1String("88"));
   QCOMPARE(entry->field("genre"), QLatin1String("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
-  QCOMPARE(entry->field("edition"), QString::fromLatin1("Je bouquine : à partir de 10 ans"));
+  QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
@@ -100,7 +100,7 @@ void BedethequeFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QString::fromLatin1("Jérusalem d'Afrique"));
+  QCOMPARE(entry->field("title"), QString::fromUtf8("Jérusalem d'Afrique"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2006"));
   QCOMPARE(entry->field("series"), QLatin1String("Chat du Rabbin (Le)"));
   QCOMPARE(entry->field("writer"), QLatin1String("Sfar, Joann"));
@@ -134,7 +134,7 @@ void BedethequeFetcherTest::testDonjon() {
   QCOMPARE(results.size(), 1);
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QString::fromLatin1("Un mariage à part"));
+  QCOMPARE(entry->field("title"), QString::fromUtf8("Un mariage à part"));
   QCOMPARE(entry->field("writer"), QLatin1String("Sfar, Joann; Boulet; Trondheim, Lewis"));
   QCOMPARE(entry->field("artist"), QLatin1String("Boulet"));
   QCOMPARE(entry->field("colorist"), QLatin1String("Albon, Lucie"));

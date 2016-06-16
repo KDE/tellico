@@ -156,7 +156,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString output = Tellico::decodeHTML(data);
+  QString output = Tellico::fromHtmlData(data, "UTF-8");
 #if 0
   myWarning() << "Remove debug from bedethequefetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/testbd.html"));
@@ -239,7 +239,7 @@ void BedethequeFetcher::slotLinkComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = 0;
 
-  QString output = Tellico::decodeHTML(data);
+  QString output = Tellico::fromHtmlData(data, "UTF-8");
   Data::EntryPtr entry = parseEntry(output);
   if(!entry) {
     myDebug() << "error in processing entry";
@@ -268,7 +268,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString results = Tellico::decodeHTML(FileHandler::readDataFile(url, true));
+  QString results = Tellico::fromHtmlData(FileHandler::readDataFile(url, true), "UTF-8");
   if(results.isEmpty()) {
     myDebug() << "no text results";
     return Data::EntryPtr();
@@ -300,18 +300,18 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
 
  // map captions in HTML to field names
   QHash<QString, QString> fieldMap;
-  fieldMap.insert(QString::fromLatin1("Série"),       QLatin1String("series"));
-  fieldMap.insert(QLatin1String("Titre"),             QLatin1String("title"));
-  fieldMap.insert(QLatin1String("Origine"),           QLatin1String("country"));
+  fieldMap.insert(QString::fromUtf8("Série"),       QLatin1String("series"));
+  fieldMap.insert(QLatin1String("Titre"),           QLatin1String("title"));
+  fieldMap.insert(QLatin1String("Origine"),         QLatin1String("country"));
 //  fieldMap.insert(QLatin1String("Format"),          QLatin1String("binding"));
-  fieldMap.insert(QString::fromLatin1("Scénario"),    QLatin1String("writer"));
-  fieldMap.insert(QLatin1String("Dessin"),            QLatin1String("artist"));
-  fieldMap.insert(QString::fromLatin1("Dépot légal"), QLatin1String("pub_year"));
-  fieldMap.insert(QLatin1String("Editeur"),           QLatin1String("publisher"));
-  fieldMap.insert(QLatin1String("Planches"),          QLatin1String("pages"));
-  fieldMap.insert(QLatin1String("Style"),             QLatin1String("genre"));
-  fieldMap.insert(QLatin1String("Tome"),              QLatin1String("issue"));
-  fieldMap.insert(QLatin1String("Collection"),        QLatin1String("edition"));
+  fieldMap.insert(QString::fromUtf8("Scénario"),    QLatin1String("writer"));
+  fieldMap.insert(QLatin1String("Dessin"),          QLatin1String("artist"));
+  fieldMap.insert(QString::fromUtf8("Dépot légal"), QLatin1String("pub_year"));
+  fieldMap.insert(QLatin1String("Editeur"),         QLatin1String("publisher"));
+  fieldMap.insert(QLatin1String("Planches"),        QLatin1String("pages"));
+  fieldMap.insert(QLatin1String("Style"),           QLatin1String("genre"));
+  fieldMap.insert(QLatin1String("Tome"),            QLatin1String("issue"));
+  fieldMap.insert(QLatin1String("Collection"),      QLatin1String("edition"));
 
   if(optionalFields().contains(QLatin1String("isbn"))) {
     Data::FieldPtr field(new Data::Field(QLatin1String("isbn"), i18n("ISBN#")));
