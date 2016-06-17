@@ -431,7 +431,7 @@ void BedethequeFetcher::fetchToken() {
 }
 
 Tellico::Fetch::ConfigWidget* BedethequeFetcher::configWidget(QWidget* parent_) const {
-  return new BedethequeFetcher::ConfigWidget(parent_);
+  return new BedethequeFetcher::ConfigWidget(parent_, this);
 }
 
 QString BedethequeFetcher::defaultName() {
