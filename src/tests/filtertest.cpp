@@ -137,7 +137,6 @@ void FilterTest::testFilter() {
                                                         Tellico::Data::Field::Date));
   coll->addField(date);
 
-
   Tellico::FilterRule* rule6 = new Tellico::FilterRule(QLatin1String("date"),
                                                        QLatin1String("2011-01-24"),
                                                        Tellico::FilterRule::FuncAfter);

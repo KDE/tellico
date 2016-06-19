@@ -78,7 +78,6 @@ int Tellico::BoolComparison::compare(const QString& str1_, const QString& str2_)
   return str1_.compare(str2_);
 }
 
-
 Tellico::TitleComparison::TitleComparison() : StringComparison() {
 }
 

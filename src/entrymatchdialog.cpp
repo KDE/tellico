@@ -130,7 +130,6 @@ void EntryMatchDialog::slotShowEntry() {
   m_entryView->showEntry(m_itemEntries[item]);
 }
 
-
 Tellico::EntryUpdater::UpdateResult EntryMatchDialog::updateResult() const {
   QTreeWidgetItem* item = m_treeWidget->currentItem();
   if(!item) {

@@ -61,7 +61,6 @@ public:
    */
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
 
-
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DBLPFetcher* fetcher = 0);

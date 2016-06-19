@@ -1,4 +1,3 @@
-
 ########### next target ###############
 
 SET(translators_STAT_SRCS

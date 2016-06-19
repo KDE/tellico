@@ -1,4 +1,3 @@
-
 ########### next target ###############
 
 SET(collections_STAT_SRCS

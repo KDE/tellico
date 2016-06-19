@@ -36,7 +36,6 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-
 find_package(PkgConfig)
 pkg_check_modules(PC_POPPLERQT5 QUIET poppler-qt5)
 

@@ -51,7 +51,6 @@ void DocumentTest::testImageLocalDirectory() {
 
   QString tempDirName;
 
-
   QTemporaryDir tempDir;
   QVERIFY(tempDir.isValid());
   tempDir.setAutoRemove(true);

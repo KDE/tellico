@@ -150,7 +150,6 @@ private:
   QValidator::State validate10(QString& input, int& pos) const;
   QValidator::State validate13(QString& input, int& pos) const;
 
-
   /**
    * This function calculates and returns the ISBN checksum. The
    * algorithm is based on some code by Andrew Plotkin, available at

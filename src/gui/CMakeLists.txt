@@ -1,4 +1,3 @@
-
 ########### next target ###############
 
 SET(gui_STAT_SRCS

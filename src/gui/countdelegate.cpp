@@ -57,7 +57,6 @@ void CountDelegate::initStyleOption(QStyleOptionViewItem* option_,
   }
 }
 
-
 void CountDelegate::paint(QPainter* painter_,
                           const QStyleOptionViewItem& option_,
                           const QModelIndex& index_) const {

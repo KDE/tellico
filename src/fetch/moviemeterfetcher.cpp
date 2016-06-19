@@ -261,7 +261,6 @@ void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
   entry_->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
 
-
   if(entry_->collection()->hasField(QLatin1String("moviemeter"))) {
     entry_->setField(QLatin1String("moviemeter"), value(resultMap_, "url"));
   }

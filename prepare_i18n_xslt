@@ -45,7 +45,6 @@ def print_output(dir):
         sys.stdout.write("\");\n")
         extract_i18n(f)
 
-
 if __name__ == "__main__":
     print_output("xslt/entry-templates")
     print_output("xslt/report-templates")

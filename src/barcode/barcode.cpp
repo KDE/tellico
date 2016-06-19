@@ -111,7 +111,6 @@ void barcodeRecognitionThread::stop()
   m_stop_mutex.unlock();
 }
 
-
 void barcodeRecognitionThread::recognizeBarcode( QImage img )
 {
   // attention! This function is called from GUI context
@@ -695,14 +694,12 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
   if (left_numbers_i + 1 > end_i)
     return QVector<int>();
 
-
   // test the side from which we are reading the barcode:
   for (int j = 0; j < 4; j++) {
     current_number_field[j][0] = fields[left_numbers_i + j][0];
     current_number_field[j][1] = fields[left_numbers_i + j][1];
   }
   MatchMakerResult matchMakerResult = recognizeNumber( current_number_field, BOTH_TABLES );
-
 
   if (matchMakerResult.isEven()) {
     // we are reading the barcode from the back side:

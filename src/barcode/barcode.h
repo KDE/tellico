@@ -107,8 +107,6 @@ namespace barcodeRecognition {
     static MatchMakerResult recognizeSystemCode( bool parity_pattern[6] );
   };
 
-
-
   /** \brief this thread handles barcode recognition using webcams
    *  @author Sebastian Held <sebastian.held@gmx.de>
    */

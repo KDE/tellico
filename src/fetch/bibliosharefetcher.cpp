@@ -92,7 +92,6 @@ QUrl BiblioShareFetcher::searchUrl() {
   return u;
 }
 
-
 Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 

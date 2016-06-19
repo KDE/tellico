@@ -364,7 +364,6 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
   m_handler->addStringParam("imgdir",   QFile::encodeName(opt_.imgDir));
 }
 
-
 void EntryView::slotResetColors() {
   // this will delete and reread the default colors, assuming they changed
   // better to do this elsewhere, but do it here for now

@@ -43,7 +43,6 @@ GriffithImporter::GriffithImporter(const QUrl& url_) : XSLTImporter(url_) {
   }
 }
 
-
 GriffithImporter::~GriffithImporter() {
 }
 

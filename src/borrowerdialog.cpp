@@ -22,7 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-
 #include "borrowerdialog.h"
 #include "document.h"
 #include "collection.h"

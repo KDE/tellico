@@ -54,7 +54,6 @@ QString XSLTExporter::fileFilter() const {
   return i18n("All Files") + QLatin1String(" (*)");
 }
 
-
 bool XSLTExporter::exec() {
   QUrl u = m_URLRequester->url();
   if(u.isEmpty() || !u.isValid()) {

@@ -1,7 +1,6 @@
 <chapter id="configuration">
 <title>Configuration</title>
 
-
 <para>
 The <interface>Configuration Dialog</interface> contains all the options for
 changing some of the default behaviour of &appname;.
@@ -316,7 +315,6 @@ the best known.
 <ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
 </para>
 </sect3>
-
 
 </sect2>
 

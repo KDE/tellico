@@ -1,4 +1,3 @@
-
 ########### next target ###############
 
 SET(newstuff_STAT_SRCS
