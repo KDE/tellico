@@ -25,6 +25,7 @@
 #include "bedethequefetcher.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/isbnvalidator.h"
 #include "../collections/comicbookcollection.h"
 #include "../entry.h"
 #include "../fieldformat.h"
@@ -44,7 +45,7 @@
 #include <QVBoxLayout>
 
 namespace {
-  static const char* BD_BASE_URL = "http://www.bedetheque.com/search/albums";
+  static const char* BD_BASE_URL = "http://m.bedetheque.com/album";
 }
 
 using namespace Tellico;
@@ -96,12 +97,14 @@ void BedethequeFetcher::search() {
 
   QUrl u(QString::fromLatin1(BD_BASE_URL));
 
+/*
   fetchToken();
   if(m_token.isEmpty()) {
     myDebug() << "empty token";
     stop();
     return;
   }
+*/
 
   switch(request().key) {
     case Title:
@@ -113,7 +116,7 @@ void BedethequeFetcher::search() {
       break;
 
     case ISBN:
-      u.addQueryItem(QLatin1String("RechISBN"), request().value);
+      u.addQueryItem(QLatin1String("RechISBN"), ISBNValidator::cleanValue(request().value));
       break;
 
     default:
@@ -121,7 +124,7 @@ void BedethequeFetcher::search() {
       stop();
       return;
   }
-  u.addQueryItem(QLatin1String("csrf_token_bedetheque"), m_token);
+//  u.addQueryItem(QLatin1String("csrf_token_bedetheque"), m_token);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -171,7 +174,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  const int pos_list = output.indexOf(QLatin1String("<ul class=\"search-list\">"), 0, Qt::CaseInsensitive);
+  const int pos_list = output.indexOf(QLatin1String("<li data-role=\"list-divider\" role=\"heading\">"), 0, Qt::CaseInsensitive);
   if(pos_list == -1) {
     myDebug() << "No results found";
     stop();
@@ -180,13 +183,13 @@ void BedethequeFetcher::slotComplete(KJob*) {
   const int pos_end = output.indexOf(QLatin1String("</ul>"), pos_list+1, Qt::CaseInsensitive);
   output = output.mid(pos_list, pos_end-pos_list);
 
-  QString pat = QLatin1String("http://www.bedetheque.com/BD");
+  QString pat = QLatin1String("http://m.bedetheque.com/BD");
   QRegExp anchorRx(QLatin1String("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
                    QRegExp::escape(pat) +
                    QLatin1String("[^\"']*)\"[^>]*>(.*)</a"), Qt::CaseInsensitive);
   anchorRx.setMinimal(true);
 
-  QRegExp spanRx(QLatin1String("<span\\s.*class\\s*=\\s*\"(.*)\".*>(.*)</span"));
+  QRegExp spanRx(QLatin1String("\\sclass\\s*=\\s*\"(.*)\">(.*)<"));
   spanRx.setMinimal(true);
 
   for(int pos = anchorRx.indexIn(output); m_started && pos > -1; pos = anchorRx.indexIn(output, pos+anchorRx.matchedLength())) {
@@ -215,10 +218,8 @@ void BedethequeFetcher::slotComplete(KJob*) {
     }
 
     if(!title.isEmpty() && !url.isEmpty()) {
-      QUrl u(url);
-      u.setHost(QLatin1String("m.bedetheque.com")); // use mobile site for easier parsing
       FetchResult* r = new FetchResult(Fetcher::Ptr(this), title, desc.join(QLatin1String(" ")));
-      m_matches.insert(r->uid, u);
+      m_matches.insert(r->uid, QUrl(url));
       emit signalResultFound(r);
     }
   }
@@ -427,7 +428,7 @@ Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr ent
 void BedethequeFetcher::fetchToken() {
   QRegExp tokenRx(QLatin1String("name\\s*=\\s*\"csrf_token_bedetheque\"\\s*value\\s*=\\s*\"([^\"]+)\""));
 
-  const QUrl url(QString::fromLatin1(BD_BASE_URL));
+  const QUrl url(QString::fromLatin1("http://www.bedetheque.com/search/albums"));
   const QString text = FileHandler::readTextFile(url, true /*quiet*/);
   if(tokenRx.indexIn(text) > -1) {
     m_token = tokenRx.cap(1);
