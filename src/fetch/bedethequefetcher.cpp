@@ -71,7 +71,7 @@ bool BedethequeFetcher::canFetch(int type) const {
 
 // No UPC or Raw for now.
 bool BedethequeFetcher::canSearch(FetchKey k) const {
-  return k == Keyword || k == ISBN;
+  return k == Title || k == Keyword || k == ISBN;
 }
 
 void BedethequeFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -104,6 +104,10 @@ void BedethequeFetcher::search() {
   }
 
   switch(request().key) {
+    case Title:
+      u.addQueryItem(QLatin1String("RechTitre"), request().value);
+      break;
+
     case Keyword:
       u.addQueryItem(QLatin1String("RechSerie"), request().value);
       break;

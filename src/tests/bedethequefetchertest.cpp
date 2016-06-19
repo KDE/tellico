@@ -49,7 +49,41 @@ void BedethequeFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::ComicBookCollection> registerCB(Tellico::Data::Collection::ComicBook, "comic");
 }
 
-void BedethequeFetcherTest::testSeriesArno() {
+void BedethequeFetcherTest::testTitle() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("bedetheque");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title, "Le Combat d'Odiri");
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Le Combat d'Odiri"));
+  QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
+  QCOMPARE(entry->field("series"), QLatin1String("(AUT) Arno"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
+  QCOMPARE(entry->field("publisher"), QLatin1String("Bayard"));
+  QCOMPARE(entry->field("artist"), QLatin1String("Arno"));
+  QCOMPARE(entry->field("colorist"), QLatin1String("Arno"));
+  QCOMPARE(entry->field("pages"), QLatin1String("88"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Tout sur un auteur (hors BD)"));
+  QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
+  QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
+  QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
+  QVERIFY(!entry->field("cover").isEmpty());
+}
+
+void BedethequeFetcherTest::testSeries() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("bedetheque");
   if(!config.hasGroup(groupName)) {
@@ -80,7 +114,6 @@ void BedethequeFetcherTest::testSeriesArno() {
   QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
-  QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
 
@@ -114,6 +147,7 @@ void BedethequeFetcherTest::testIsbn() {
   QCOMPARE(entry->field("genre"), QLatin1String("Aventure"));
   QCOMPARE(entry->field("isbn"), QLatin1String("2-205-05868-1"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
+  QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
 

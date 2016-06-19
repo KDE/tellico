@@ -34,7 +34,8 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
-  void testSeriesArno();
+  void testTitle();
+  void testSeries();
   void testIsbn();
   void testDonjon();
 };
