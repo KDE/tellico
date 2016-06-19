@@ -79,7 +79,6 @@ void BedethequeFetcherTest::testTitle() {
   QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
-  QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
 
@@ -114,7 +113,6 @@ void BedethequeFetcherTest::testSeries() {
   QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
-  QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
 
@@ -148,6 +146,7 @@ void BedethequeFetcherTest::testIsbn() {
   QCOMPARE(entry->field("genre"), QLatin1String("Aventure"));
   QCOMPARE(entry->field("isbn"), QLatin1String("2-205-05868-1"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
+  QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
 
