@@ -36,9 +36,10 @@
 #include <KLocalizedString>
 #include <KComboBox>
 #include <KLineEdit>
-#include <kservicetypetrader.h>
-#include <kregexpeditorinterface.h>
-#include <kdatecombobox.h>
+#include <KServiceTypeTrader>
+#include <KRegExpEditorInterface>
+#include <KDateComboBox>
+#include <KHelpClient>
 
 #include <QLayout>
 #include <QGroupBox>
@@ -51,6 +52,7 @@
 #include <QVBoxLayout>
 #include <QStackedWidget>
 #include <QPushButton>
+#include <QDialogButtonBox>
 
 using Tellico::FilterRuleWidget;
 using Tellico::FilterRuleWidgetLister;
@@ -371,20 +373,32 @@ namespace {
 // modal dialog so I don't have to worry about updating stuff
 // don't show apply button if not saving, i.e. just modifying existing filter
 FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
-    : KDialog(parent_),
-      m_filter(0), m_mode(mode_), m_saveFilter(0) {
+    : QDialog(parent_), m_filter(0), m_mode(mode_), m_saveFilter(0) {
   setModal(true);
-  setCaption(mode_ == CreateFilter ? i18n("Advanced Filter") : i18n("Modify Filter"));
-  setButtons(mode_ == CreateFilter ? Help|Ok|Apply|Cancel : Help|Ok|Cancel);
-  setDefaultButton(Ok);
-  showButtonSeparator(false);
-  init();
-}
+  setWindowTitle(mode_ == CreateFilter ? i18n("Advanced Filter") : i18n("Modify Filter"));
 
-void FilterDialog::init() {
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  setLayout(mainLayout);
+
   QWidget* page = new QWidget(this);
-  setMainWidget(page);
+  mainLayout->addWidget(page);
   QVBoxLayout* topLayout = new QVBoxLayout(page);
+
+  QDialogButtonBox* buttonBox;
+  if(mode_ == CreateFilter) {
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Ok|QDialogButtonBox::Cancel|QDialogButtonBox::Apply);
+  } else {
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  }
+  m_okButton = buttonBox->button(QDialogButtonBox::Ok);
+  m_applyButton = buttonBox->button(QDialogButtonBox::Apply);
+  connect(m_okButton, SIGNAL(clicked()), SLOT(slotOk()));
+  if(m_applyButton) {
+    connect(m_applyButton, SIGNAL(clicked()), SLOT(slotApply()));
+  }
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
 
   QGroupBox* m_matchGroup = new QGroupBox(i18n("Filter Criteria"), page);
   QVBoxLayout* vlay = new QVBoxLayout(m_matchGroup);
@@ -424,15 +438,12 @@ void FilterDialog::init() {
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
     connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));
-    enableButtonApply(false);
+    m_applyButton->setEnabled(false);
   }
-  enableButtonOk(false); // disable at start
-  button(Help)->setDefault(false); // Help automatically becomes default when OK is disabled
-  button(Cancel)->setDefault(true); // Help automatically becomes default when OK is disabled
+  m_okButton->setEnabled(false); // disable at start
+  buttonBox->button(QDialogButtonBox::Cancel)->setDefault(true);
   setMinimumWidth(qMax(minimumWidth(), FILTER_MIN_WIDTH));
-  setHelp(QLatin1String("filter-dialog"));
-  connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
-  connect(this, SIGNAL(applyClicked()), SLOT(slotApply()));
+  mainLayout->addWidget(buttonBox);
 }
 
 Tellico::FilterPtr FilterDialog::currentFilter(bool alwaysCreateNew_) {
@@ -484,6 +495,10 @@ void FilterDialog::slotApply() {
   emit signalUpdateFilter(currentFilter());
 }
 
+void FilterDialog::slotHelp() {
+  KHelpClient::invokeHelp(QLatin1String("filter-dialog"));
+}
+
 void FilterDialog::slotClear() {
 //  myDebug();
   m_matchAll->setChecked(true);
@@ -504,11 +519,15 @@ void FilterDialog::slotFilterChanged() {
   const bool enableOk = !currentFilter()->isEmpty() || hadFilter;
   if(m_saveFilter) {
     m_saveFilter->setEnabled(!m_filterName->text().isEmpty() && !emptyFilter);
-    enableButtonApply(!emptyFilter);
+    if(m_applyButton) {
+      m_applyButton->setEnabled(!emptyFilter);
+    }
   }
-  enableButtonApply(enableOk);
-  enableButtonOk(enableOk);
-  button(Ok)->setDefault(enableOk);
+  if(m_applyButton) {
+    m_applyButton->setEnabled(enableOk);
+  }
+  m_okButton->setEnabled(enableOk);
+  m_okButton->setDefault(enableOk);
 }
 
 void FilterDialog::slotSaveFilter() {
@@ -531,4 +550,3 @@ void FilterDialog::slotSaveFilter() {
   }
   Kernel::self()->addFilter(filter);
 }
-

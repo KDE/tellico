@@ -30,8 +30,7 @@
 #include "filter.h"
 #include "datavectors.h"
 
-#include <KDialog>
-
+#include <QDialog>
 #include <QString>
 #include <QStringList>
 
@@ -145,7 +144,7 @@ protected:
 /**
  * @author Robby Stephenson
  */
-class FilterDialog : public KDialog {
+class FilterDialog : public QDialog {
 Q_OBJECT
 
 public:
@@ -168,8 +167,9 @@ public slots:
   void slotClear();
 
 protected slots:
-  virtual void slotOk();
-  virtual void slotApply();
+  void slotOk();
+  void slotApply();
+  void slotHelp();
   void slotShrink();
   void slotFilterChanged();
   void slotSaveFilter();
@@ -179,8 +179,6 @@ signals:
   void signalCollectionModified();
 
 private:
-  void init();
-
   FilterPtr m_filter;
   const Mode m_mode;
   QRadioButton* m_matchAll;
@@ -188,6 +186,8 @@ private:
   FilterRuleWidgetLister* m_ruleLister;
   QLineEdit* m_filterName;
   QPushButton* m_saveFilter;
+  QPushButton* m_okButton;
+  QPushButton* m_applyButton;
 };
 
 } // end namespace
