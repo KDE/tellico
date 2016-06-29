@@ -116,8 +116,6 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
 
   button(QDialogButtonBox::Ok)->setEnabled(false);
   button(QDialogButtonBox::Apply)->setEnabled(false);
-
-  // these next lines are from convert-kdialog.pl
   button(QDialogButtonBox::Ok)->setDefault(true);
   button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
 
@@ -664,7 +662,7 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   vlay->addWidget(m_modifySourceBtn);
   vlay->addWidget(m_removeSourceBtn);
   // separate newstuff button from the rest
-  vlay->addSpacing(2 * KDialog::spacingHint());
+  vlay->addSpacing(16);
   vlay->addWidget(m_newStuffBtn);
   vlay->addStretch(1);
 
