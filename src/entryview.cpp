@@ -105,7 +105,9 @@ void EntryView::clear() {
 
 void EntryView::showEntries(Tellico::Data::EntryList entries_) {
   Q_ASSERT(!entries_.isEmpty());
-  showEntry(entries_.first());
+  if(!entries_.isEmpty()) {
+    showEntry(entries_.first());
+  }
 }
 
 void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
