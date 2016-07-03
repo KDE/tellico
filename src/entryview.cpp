@@ -39,11 +39,10 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kmessagebox.h>
-#include <khtmlview.h>
+#include <KMessageBox>
+#include <KHTMLView>
 #include <dom/dom_element.h>
 #include <KLocalizedString>
-#include <KGlobalSettings>
 
 #include <QFile>
 #include <QTextStream>
@@ -56,13 +55,23 @@
 using Tellico::EntryView;
 using Tellico::EntryViewWidget;
 
-EntryViewWidget::EntryViewWidget(KHTMLPart* part, QWidget* parent)
+EntryViewWidget::EntryViewWidget(EntryView* part, QWidget* parent)
     : KHTMLView(part, parent) {}
 
 // for the life of me, I could not figure out how to call the actual
 // KHTMLPartBrowserExtension::copy() slot, so this will have to do
 void EntryViewWidget::copy() {
   QApplication::clipboard()->setText(part()->selectedText(), QClipboard::Clipboard);
+}
+
+void EntryViewWidget::changeEvent(QEvent* event_) {
+  // this will delete and reread the default colors, assuming they changed
+  if(event_->type() == QEvent::PaletteChange ||
+     event_->type() == QEvent::FontChange ||
+     event_->type() == QEvent::ApplicationFontChange) {
+    static_cast<EntryView*>(part())->resetView();
+  }
+  KHTMLView::changeEvent(event_);
 }
 
 EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_),
@@ -79,7 +88,6 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
 
   connect(browserExtension(), SIGNAL(openUrlRequestDelayed(const QUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
           SLOT(slotOpenURL(const QUrl&)));
-  connect(KGlobalSettings::self(), SIGNAL(kdisplayPaletteChanged()), SLOT(slotResetColors()));
 
   view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 }
@@ -287,13 +295,12 @@ void EntryView::setXSLTFile(const QString& file_) {
   m_handler->addStringParam("datadir", QFile::encodeName(Tellico::dataDir()));
 
   // if we don't have to reload the images, then just show the entry and we're done
-  if(!reloadImages) {
+  if(reloadImages) {
+    // now, have to recreate images and refresh khtml cache
+    resetColors();
+  } else {
     showEntry(m_entry);
-    return;
   }
-
-  // now, have to recreate images and refresh khtml cache
-  resetColors();
 }
 
 void EntryView::slotRefresh() {
@@ -366,13 +373,10 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
   m_handler->addStringParam("imgdir",   QFile::encodeName(opt_.imgDir));
 }
 
-void EntryView::slotResetColors() {
-  // this will delete and reread the default colors, assuming they changed
-  // better to do this elsewhere, but do it here for now
-//  Config::deleteAndReset();
+void EntryView::resetView() {
   delete m_handler;
   m_handler = 0;
-  setXSLTFile(m_xsltFile);
+  setXSLTFile(m_xsltFile); // this ends up calling resetColors()
 }
 
 void EntryView::resetColors() {

@@ -78,6 +78,7 @@ public:
   void addXSLTStringParam(const QByteArray& name, const QByteArray& value);
   void setXSLTOptions(const StyleOptions& options);
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
+  void resetView();
 
 signals:
   void signalAction(const QUrl& url);
@@ -97,7 +98,6 @@ private slots:
    */
   void slotOpenURL(const QUrl& url);
   void slotReloadEntry();
-  void slotResetColors();
 
 private:
   void resetColors();
@@ -117,9 +117,13 @@ private:
 class EntryViewWidget : public KHTMLView {
 Q_OBJECT
 public:
-  EntryViewWidget(KHTMLPart* part, QWidget* parent);
+  EntryViewWidget(EntryView* part, QWidget* parent);
+
 public slots:
   void copy();
+
+protected:
+  void changeEvent(QEvent* event);
 };
 
 } //end namespace
