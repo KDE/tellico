@@ -253,8 +253,6 @@ QString FieldFormat::date(const QString& date_) {
   }
   // rather use ISO date formatting than locale formatting for now. Primarily, it makes sorting just work.
   return empty ? date_ : QDate(y, m, d).toString(Qt::ISODate);
-  // use short form
-//  return KLocale::global()->formatDate(date, true);
 }
 
 QString FieldFormat::capitalize(QString str_) {

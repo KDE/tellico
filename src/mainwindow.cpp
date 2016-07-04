@@ -80,7 +80,6 @@
 #include <KStandardAction>
 #include <KWindowSystem>
 #include <KWindowConfig>
-#include <KProgressDialog>
 #include <KHTMLView>
 #include <KMessageBox>
 #include <KTipDialog>
