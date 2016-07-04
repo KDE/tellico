@@ -149,16 +149,14 @@ if(Poppler_Qt5_FOUND)
     include_directories(${Poppler_Qt5_INCLUDE_DIRS})
 endif(Poppler_Qt5_FOUND)
 
-#macro_optional_find_package(KSane)
-#macro_log_feature(KSANE_FOUND "libksane" "Support for adding scanned images to a collection" "http://www.kde.org/" FALSE "4.2.0" "")
-#find_package(KSane)
-#set_package_properties(KSane PROPERTIES
-#    DESCRIPTION "Support for adding scanned images to a collection"
-#    URL "http://www.kde.org"
-#    TYPE OPTIONAL)
-if(KSANE_FOUND)
-    include_directories(${KSANE_INCLUDE_DIR})
-endif(KSANE_FOUND)
+find_package(KF5Sane)
+set_package_properties(KF5Sane PROPERTIES
+    DESCRIPTION "Support for adding scanned images to a collection"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
+if(KF5Sane_FOUND)
+    include_directories(${KF5Sane_INCLUDE_DIRS})
+endif(KF5Sane_FOUND)
 
 #macro_optional_find_package(Exempi 2.0)
 #macro_log_feature(Exempi_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
@@ -246,7 +244,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 #add_definitions(${QT_DEFINITIONS}
 #                ${KDE4_DEFINITIONS}
 #                ${YAZ_CFLAGS})
-add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII)
+add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII -DQT_NO_URL_CAST_FROM_STRING)
 remove_definitions(-DQT_NO_STL)
 
 include_directories(${LIBXML2_INCLUDE_DIR}
@@ -269,7 +267,7 @@ macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
 macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
-macro_bool_to_01(KSANE_FOUND HAVE_KSANE)
+macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)
 macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)

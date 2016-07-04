@@ -30,6 +30,7 @@
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
 
+#include <KPageDialog>
 #include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -37,6 +38,7 @@
 #include <KMimeTypeTrader>
 #include <KIO/DesktopExecParser>
 #include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QPushButton>
 #include <QMenu>
@@ -253,16 +255,15 @@ void ImageWidget::slotGetImage() {
 void ImageWidget::slotScanImage() {
 #ifdef HAVE_KSANE
   if(!m_saneDlg) {
-    m_saneDlg = new KDialog(this);
+    m_saneDlg = new KPageDialog(this);
     m_saneWidget = new KSaneIface::KSaneWidget(m_saneDlg);
-    m_saneDlg->setMainWidget(m_saneWidget);
-    m_saneDlg->setButtons(KDialog::Cancel);
+    m_saneDlg->addPage(m_saneWidget, QString());
+    m_saneDlg->setStandardButtons(QDialogButtonBox::Cancel);
     m_saneDlg->setAttribute(Qt::WA_DeleteOnClose, false);
     connect(m_saneWidget, SIGNAL(imageReady(QByteArray &, int, int, int, int)),
             SLOT(imageReady(QByteArray &, int, int, int, int)));
-    // the dialog emits buttonClicked before it handles the actual cancel action
-    connect(m_saneDlg, SIGNAL(buttonClicked(KDialog::ButtonCode)),
-            SLOT(cancelScan(KDialog::ButtonCode)));
+    connect(m_saneDlg, SIGNAL(rejected()),
+            SLOT(cancelScan()));
   }
   if(m_saneDevice.isEmpty()) {
     m_saneDevice = m_saneWidget->selectDevice(this);
@@ -291,7 +292,7 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
   QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));
   if(temp.open()) {
     scannedImage.save(temp.fileName(), "PNG");
-    loadImage(temp.fileName());
+    loadImage(QUrl::fromLocalFile(temp.fileName()));
   } else {
     myWarning() << "Failed to open temp image file";
   }
@@ -449,10 +450,7 @@ void ImageWidget::loadImage(const QUrl& url_) {
   m_cbLinkOnly->setEnabled(true);
 }
 
-void ImageWidget::cancelScan(KDialog::ButtonCode code_) {
-  if(code_ != KDialog::Cancel) {
-    return;
-  }
+void ImageWidget::cancelScan() {
 #ifdef HAVE_KSANE
   if(m_saneWidget) {
     m_saneWidget->scanCancel();

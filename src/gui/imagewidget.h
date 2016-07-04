@@ -25,7 +25,6 @@
 #ifndef TELLICO_IMAGEWIDGET_H
 #define TELLICO_IMAGEWIDGET_H
 
-#include <KDialog>
 #include <KService>
 
 #include <QWidget>
@@ -50,7 +49,7 @@ class QProgressDialog;
 
 class KProcess;
 #ifdef HAVE_KSANE
-class KDialog;
+class KPageDialog;
 namespace KSaneIface { class KSaneWidget; }
 #endif
 namespace Tellico {
@@ -91,7 +90,7 @@ private slots:
   void slotEditImage();
   void slotEditMenu(QAction* action);
   void slotFinished();
-  void cancelScan(KDialog::ButtonCode code);
+  void cancelScan();
 
 private:
   void scale();
@@ -113,7 +112,7 @@ private:
   QDateTime m_editedFileDateTime;
 #ifdef HAVE_KSANE
   QPointer<KSaneIface::KSaneWidget> m_saneWidget;
-  QPointer<KDialog> m_saneDlg;
+  QPointer<KPageDialog> m_saneDlg;
   QString m_saneDevice;
   bool m_saneDeviceIsOpen;
 #endif

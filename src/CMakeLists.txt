@@ -125,9 +125,9 @@ IF( ENABLE_WEBCAM )
   TARGET_LINK_LIBRARIES(tellico barcode ${LIBV4L_LIBRARIES})
 ENDIF( ENABLE_WEBCAM )
 
-IF( KSANE_FOUND )
+IF( KF5Sane_FOUND )
   TARGET_LINK_LIBRARIES(tellico KF5::Sane)
-ENDIF( KSANE_FOUND )
+ENDIF( KF5Sane_FOUND )
 
 ########### install files ###############
 
