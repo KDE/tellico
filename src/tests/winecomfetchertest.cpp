@@ -70,7 +70,7 @@ void WineComFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Eola Hills Wine Cellars"));
+  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Eola Hills"));
   QCOMPARE(entry->field(QLatin1String("appellation")), QLatin1String("Willamette Valley"));
   QCOMPARE(entry->field(QLatin1String("vintage")), QLatin1String("1999"));
   QCOMPARE(entry->field(QLatin1String("varietal")), QLatin1String("Pinot Noir"));
