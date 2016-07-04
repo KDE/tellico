@@ -27,7 +27,7 @@
 
 #include "datavectors.h"
 
-#include <KDialog>
+#include <QDialog>
 
 class KComboBox;
 
@@ -36,6 +36,7 @@ class QLineEdit;
 class QListWidget;
 class QRadioButton;
 class QCheckBox;
+class QDialogButtonBox;
 
 namespace Tellico {
   namespace Data {
@@ -50,7 +51,7 @@ class FieldListItem;
 /**
  * @author Robby Stephenson
  */
-class CollectionFieldsDialog : public KDialog {
+class CollectionFieldsDialog : public QDialog {
 Q_OBJECT
 
 public:
@@ -72,6 +73,7 @@ protected slots:
   virtual void slotOk();
   virtual void slotApply();
   virtual void slotDefault();
+  void slotHelp();
 
 private slots:
   void slotNew();
@@ -127,6 +129,7 @@ private:
   QCheckBox* m_complete;
   QCheckBox* m_multiple;
   QCheckBox* m_grouped;
+  QDialogButtonBox* m_buttonBox;
 };
 
 } // end namespace

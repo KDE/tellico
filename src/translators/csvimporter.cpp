@@ -34,6 +34,7 @@
 
 #include <KComboBox>
 #include <KSharedConfig>
+#include <KConfigGroup>
 #include <KMessageBox>
 #include <KLocalizedString>
 
