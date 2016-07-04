@@ -50,10 +50,10 @@ void CrossRefFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Robustness and Efficiency Improvements for Star Tracker Attitude Estimation"));
   m_fieldValues.insert(QLatin1String("author"), QLatin1String("Tjorven Delabie; Joris De Schutter; Bart Vandenbussche"));
-  m_fieldValues.insert(QLatin1String("pages"), QLatin1String("1-14"));
+  m_fieldValues.insert(QLatin1String("pages"), QLatin1String("2108-2121"));
   m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Journal of Guidance, Control, and Dynamics"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2015"));
-  m_fieldValues.insert(QLatin1String("month"), QLatin1String("04"));
+  m_fieldValues.insert(QLatin1String("month"), QLatin1String("11"));
 }
 
 void CrossRefFetcherTest::testDOI() {
