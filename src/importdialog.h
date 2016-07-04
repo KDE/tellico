@@ -28,8 +28,7 @@
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <KDialog>
-
+#include <QDialog>
 #include <QUrl>
 #include <QShowEvent>
 
@@ -46,7 +45,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class ImportDialog : public KDialog {
+class ImportDialog : public QDialog {
 Q_OBJECT
 
 public:

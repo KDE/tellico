@@ -53,7 +53,7 @@
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
-#include <kstandardguiitem.h>
+#include <KStandardGuiItem>
 
 #include <QGroupBox>
 #include <QButtonGroup>
@@ -61,17 +61,22 @@
 #include <QCheckBox>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QDialogButtonBox>
+#include <QPushButton>
 
 using Tellico::ImportDialog;
 
 ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& urls_, QWidget* parent_)
-    : KDialog(parent_),
+    : QDialog(parent_),
       m_importer(importer(format_, urls_)) {
   setModal(true);
-  setCaption(i18n("Import Options"));
-  setButtons(Ok|Cancel);
+  setWindowTitle(i18n("Import Options"));
+
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  setLayout(mainLayout);
 
   QWidget* widget = new QWidget(this);
+  mainLayout->addWidget(widget);
   QVBoxLayout* topLayout = new QVBoxLayout(widget);
 
   QGroupBox* groupBox = new QGroupBox(i18n("Import Options"), widget);
@@ -118,17 +123,23 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   connect(m_buttonGroup, SIGNAL(buttonClicked(int)), m_importer, SLOT(slotActionChanged(int)));
 
   topLayout->addStretch();
-  setMainWidget(widget);
+
+  QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel);
+  mainLayout->addWidget(buttonBox);
+  QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
+  okButton->setDefault(true);
+  okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+  connect(okButton, SIGNAL(clicked()), SLOT(slotOk()));
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
   KGuiItem ok = KStandardGuiItem::ok();
   ok.setText(i18n("&Import"));
-  setButtonGuiItem(Ok, ok);
+  KGuiItem::assign(okButton, ok);
 
   // want to grab default button action, too
   // since the importer might do something with widgets, don't just call it, do it after layout is done
   QTimer::singleShot(0, this, SLOT(slotUpdateAction()));
-
-  connect(this, SIGNAL(okClicked()), SLOT(slotOk()));
 }
 
 ImportDialog::~ImportDialog() {
