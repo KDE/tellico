@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
                        QLatin1String(TELLICO_VERSION), i18n("Tellico - a collection manager for KDE"),
                        KAboutLicense::GPL_V2,
-                       i18n("(c) 2001-2015, Robby Stephenson"),
+                       i18n("(c) 2001-2016, Robby Stephenson"),
                        QString(),
                        QLatin1String("http://tellico-project.org"),
                        QLatin1String("tellico-users@kde.org"));
