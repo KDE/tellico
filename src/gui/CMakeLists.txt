@@ -43,5 +43,4 @@ TARGET_LINK_LIBRARIES(gui
     KF5::SonnetCore
     KF5::SonnetUi
     KF5::XmlGui
-    KF5::KDELibs4Support
 )
