@@ -31,7 +31,6 @@
 #include "../tellico_debug.h"
 
 #include <KPageDialog>
-#include <KFileDialog>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KProcess>
@@ -60,6 +59,8 @@
 #include <QTemporaryFile>
 #include <QMimeData>
 #include <QProgressDialog>
+#include <QFileDialog>
+#include <QImageReader>
 
 #ifdef HAVE_KSANE
 #include <libksane/ksane.h>
@@ -245,7 +246,14 @@ void ImageWidget::resizeEvent(QResizeEvent *) {
 }
 
 void ImageWidget::slotGetImage() {
-  QUrl url = KFileDialog::getImageOpenUrl(QUrl(), this);
+  QString filter;
+  foreach(const QByteArray& ba, QImageReader::supportedImageFormats()) {
+    if(!filter.isEmpty()) {
+      filter += QLatin1Char(' ');
+    }
+    filter += QLatin1String("*.") + QString::fromLatin1(ba);
+  }
+  QUrl url = QFileDialog::getOpenFileUrl(this, QString(), QUrl(), i18n("All Images (%1)", filter));
   if(url.isEmpty() || !url.isValid()) {
     return;
   }
