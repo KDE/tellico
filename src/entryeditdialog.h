@@ -28,8 +28,7 @@
 #include "observer.h"
 #include "gui/fieldwidget.h"
 
-#include <kdialog.h>
-
+#include <QDialog>
 #include <QHash>
 
 namespace Tellico {
@@ -40,7 +39,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class EntryEditDialog : public KDialog, public Observer {
+class EntryEditDialog : public QDialog, public Observer {
 Q_OBJECT
 
 // needed for completion object support
@@ -61,7 +60,7 @@ public:
    *
    * @param coll A pointer to the collection whose fields should be used for setting up the layout
    */
-  void setLayout(Data::CollPtr coll);
+  void resetLayout(Data::CollPtr coll);
   /**
    * Clears all of the input controls in the widget. The pointer to the
    * current entry is nullified, but not the pointer to the current collection.
@@ -122,7 +121,7 @@ public slots:
   void setContents(Tellico::Data::EntryList entries);
 
 protected slots:
-  virtual void slotButtonClicked(int button);
+  void slotHelp();
 
 private slots:
   void fieldValueChanged(Tellico::Data::FieldPtr field);
@@ -149,8 +148,8 @@ private:
   GUI::TabWidget* m_tabs;
   QHash<QString, GUI::FieldWidget*> m_widgetDict;
 
-  ButtonCode m_saveBtn;
-  ButtonCode m_newBtn;
+  QPushButton* m_newButton;
+  QPushButton* m_saveButton;
 
   bool m_modified;
   Data::FieldList m_modifiedFields;

@@ -124,7 +124,7 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
 //  blockAllSignals(true);
   m_mainWindow->m_detailedView->addCollection(coll_);
   m_mainWindow->m_groupView->addCollection(coll_);
-  m_mainWindow->m_editDialog->setLayout(coll_);
+  m_mainWindow->m_editDialog->resetLayout(coll_);
   if(!coll_->filters().isEmpty()) {
     m_mainWindow->addFilterView();
     m_mainWindow->m_filterView->addCollection(coll_);
@@ -255,7 +255,7 @@ void Controller::modifiedField(Tellico::Data::CollPtr coll_, Tellico::Data::Fiel
 }
 
 void Controller::reorderedFields(Tellico::Data::CollPtr coll_) {
-  m_mainWindow->m_editDialog->setLayout(coll_);
+  m_mainWindow->m_editDialog->resetLayout(coll_);
   m_mainWindow->m_detailedView->reorderFields(coll_->fields());
   m_mainWindow->slotUpdateCollectionToolBar(coll_);
   m_mainWindow->m_entryView->slotRefresh();

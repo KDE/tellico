@@ -764,7 +764,7 @@ void MainWindow::initView() {
 
 void MainWindow::initConnections() {
   // have to toggle the menu item if the dialog gets closed
-  connect(m_editDialog, SIGNAL(finished()),
+  connect(m_editDialog, SIGNAL(finished(int)),
           this, SLOT(slotEditDialogFinished()));
 
   EntrySelectionModel* proxySelect = static_cast<EntrySelectionModel*>(m_iconView->selectionModel());

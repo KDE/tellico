@@ -38,6 +38,7 @@
 #include <KAcceleratorManager>
 #include <KSharedConfig>
 #include <KWindowConfig>
+#include <KHelpClient>
 
 #include <QStringList>
 #include <QObject>
@@ -47,6 +48,7 @@
 #include <QCloseEvent>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QDialogButtonBox>
 
 namespace {
   // must be an even number
@@ -56,44 +58,48 @@ namespace {
 using Tellico::EntryEditDialog;
 
 EntryEditDialog::EntryEditDialog(QWidget* parent_)
-    : KDialog(parent_),
+    : QDialog(parent_),
       m_tabs(new GUI::TabWidget(this)),
       m_modified(false),
       m_isOrphan(false),
       m_isWorking(false),
       m_needReset(false) {
-  setCaption(i18n("Edit Entry"));
-  setButtons(Help|User1|Apply|Close);
-  setDefaultButton(User1);
-  setButtonGuiItem(User1, KGuiItem(i18n("&New Entry")));
+  setWindowTitle(i18n("Edit Entry"));
 
-  setMainWidget(m_tabs);
+  QVBoxLayout* mainLayout = new QVBoxLayout();
+  setLayout(mainLayout);
+  mainLayout->addWidget(m_tabs);
 
-  m_newBtn  = User1;
-  m_saveBtn = Apply;
+  QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|
+                                                     QDialogButtonBox::Close|
+                                                     QDialogButtonBox::Apply);
+  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
+//  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  mainLayout->addWidget(buttonBox);
+
+  m_newButton = new QPushButton();
+  buttonBox->addButton(m_newButton, QDialogButtonBox::ActionRole);
+  m_newButton->setDefault(true);
+  KGuiItem::assign(m_newButton, KGuiItem(i18n("&New Entry")));
+
+  m_saveButton = buttonBox->button(QDialogButtonBox::Apply);
+  m_saveButton->setEnabled(false);
   KGuiItem save = KStandardGuiItem::save();
   save.setText(i18n("Sa&ve Entry"));
-  setButtonGuiItem(m_saveBtn, save);
-  enableButton(m_saveBtn, false);
+  KGuiItem::assign(m_saveButton, save);
 
-  // close is handled by slotButtonClicked()
-//  connect(this, SIGNAL(closeClicked()), SLOT(slotClose()));
-  connect(this, SIGNAL(applyClicked()), SLOT(slotHandleSave()));
-  connect(this, SIGNAL(user1Clicked()), SLOT(slotHandleNew()));
+  connect(buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), SLOT(slotClose()));
+  connect(m_saveButton, SIGNAL(clicked()), SLOT(slotHandleSave()));
+  connect(m_newButton, SIGNAL(clicked()), SLOT(slotHandleNew()));
 
-  setHelp(QLatin1String("entry-editor"));
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
   KWindowConfig::restoreWindowSize(windowHandle(), config);
 }
 
-// we want to try the close button
-void EntryEditDialog::slotButtonClicked(int button_) {
-  if(button_ == KDialog::Close) {
-    slotClose();
-  } else {
-    KDialog::slotButtonClicked(button_);
-  }
+void EntryEditDialog::slotHelp() {
+  KHelpClient::invokeHelp(QLatin1String("entry-editor"));
 }
 
 void EntryEditDialog::slotClose() {
@@ -117,8 +123,8 @@ void EntryEditDialog::slotReset() {
 //  myDebug();
 
   slotSetModified(false);
-  enableButton(m_saveBtn, false);
-  setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
+  m_saveButton->setEnabled(false);
+  m_saveButton->setText(i18n("Sa&ve Entry"));
   m_currColl = 0;
   m_currEntries.clear();
 
@@ -130,12 +136,12 @@ void EntryEditDialog::slotReset() {
   m_widgetDict.clear();
 }
 
-void EntryEditDialog::setLayout(Tellico::Data::CollPtr coll_) {
+void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
   if(!coll_ || m_isWorking) {
     return;
   }
 
-  button(m_newBtn)->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  m_newButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
@@ -384,7 +390,7 @@ void EntryEditDialog::slotHandleSave() {
       Kernel::self()->modifyEntries(oldEntries, m_currEntries, fieldNames);
     }
     if(!m_currEntries.isEmpty() && !m_currEntries[0]->title().isEmpty()) {
-      setCaption(i18n("Edit Entry") + QLatin1String(" - ") + m_currEntries[0]->title());
+      setWindowTitle(i18n("Edit Entry") + QLatin1String(" - ") + m_currEntries[0]->title());
     }
   }
 
@@ -407,7 +413,7 @@ void EntryEditDialog::clear() {
   }
   m_modifiedFields.clear();
 
-  setCaption(i18n("Edit Entry"));
+  setWindowTitle(i18n("Edit Entry"));
 
   if(m_isOrphan) {
     if(m_currEntries.count() > 1) {
@@ -417,7 +423,7 @@ void EntryEditDialog::clear() {
   }
   m_currEntries.clear();
 
-  setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
+  m_saveButton->setText(i18n("Sa&ve Entry"));
 
   m_isWorking = false;
   slotSetModified(false);
@@ -453,7 +459,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   }
 
   // multiple entries, so don't set caption
-  setCaption(i18n("Edit Entries"));
+  setWindowTitle(i18n("Edit Entries"));
 
   m_currEntries = entries_;
   m_isWorking = true;
@@ -479,7 +485,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   blockSignals(false);
   m_isWorking = false;
 
-  setButtonText(m_saveBtn, i18n("Sa&ve Entries"));
+  m_saveButton->setText(i18n("Sa&ve Entries"));
 }
 
 void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
@@ -503,7 +509,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   m_currEntries.append(entry_);
 
   if(!entry_->title().isEmpty()) {
-    setCaption(i18n("Edit Entry") + QLatin1String(" - ") + entry_->title());
+    setWindowTitle(i18n("Edit Entry") + QLatin1String(" - ") + entry_->title());
   }
 
   if(m_currColl != entry_->collection()) {
@@ -524,7 +530,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   } // end field loop
 
   if(entry_->isOwned()) {
-    setButtonText(m_saveBtn, i18n("Sa&ve Entry"));
+    m_saveButton->setText(i18n("Sa&ve Entry"));
     slotSetModified(false);
   } else {
     // saving is necessary for unowned entries
@@ -553,7 +559,7 @@ void EntryEditDialog::removeField(Tellico::Data::CollPtr, Tellico::Data::FieldPt
       m_tabs->removeTab(m_tabs->indexOf(w));
       delete w; // automatically deletes child widget
     } else {
-      // much of this replicates code in setLayout()
+      // much of this replicates code in resetLayout()
       QGridLayout* layout = static_cast<QGridLayout*>(widget->parentWidget()->layout());
       delete widget; // automatically removes from layout
 
@@ -629,11 +635,10 @@ void EntryEditDialog::updateCompletions(Tellico::Data::EntryPtr entry_) {
 
 void EntryEditDialog::slotSetModified(bool mod_/*=true*/) {
   m_modified = mod_;
-  enableButton(m_saveBtn, mod_);
+  m_saveButton->setEnabled(mod_);
 }
 
 bool EntryEditDialog::queryModified() {
-//  myDebug() << "modified is" << m_modified;
   bool ok = true;
   // assume that if the dialog is hidden, we shouldn't ask the user to modify changes
   if(!isVisible()) {
@@ -668,7 +673,7 @@ bool EntryEditDialog::queryModified() {
 void EntryEditDialog::addField(Tellico::Data::CollPtr coll_, Tellico::Data::FieldPtr field_) {
   Q_ASSERT(coll_ == m_currColl);
   Q_UNUSED(field_);
-  setLayout(coll_);
+  resetLayout(coll_);
 }
 
 // modified fields will always have the same name
@@ -685,7 +690,7 @@ void EntryEditDialog::modifyField(Tellico::Data::CollPtr coll_, Tellico::Data::F
   if(oldField_->type() != newField_->type()
      || (oldField_->category() != newField_->category() && !newField_->isSingleCategory())) {
     bool modified = m_modified;
-    setLayout(coll_);
+    resetLayout(coll_);
     setContents(m_currEntries);
     m_modified = modified;
     return;
@@ -742,14 +747,14 @@ void EntryEditDialog::fieldValueChanged(Data::FieldPtr field_) {
   if(!m_modifiedFields.contains(field_)) {
     m_modifiedFields.append(field_);
   }
-  slotSetModified();
+  slotSetModified(true);
 }
 
 void EntryEditDialog::closeEvent(QCloseEvent* event_) {
   // check to see if an entry should be saved before hiding
   // block signals so the entry view and selection isn't cleared
   if(queryModified()) {
-    KDialog::closeEvent(event_);
+    QDialog::closeEvent(event_);
   } else {
     event_->ignore();
   }

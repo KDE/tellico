@@ -70,9 +70,9 @@ signals:
   void signalCollectionModified();
 
 protected slots:
-  virtual void slotOk();
-  virtual void slotApply();
-  virtual void slotDefault();
+  void slotOk();
+  void slotApply();
+  void slotDefault();
   void slotHelp();
 
 private slots:
