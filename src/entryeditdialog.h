@@ -125,6 +125,7 @@ protected slots:
 
 private slots:
   void fieldValueChanged(Tellico::Data::FieldPtr field);
+  void slotUpdateSize();
 
 private:
   /**
@@ -141,7 +142,9 @@ private:
    * @param entry A pointer to the entry
    */
   void updateCompletions(Data::EntryPtr entry);
-  virtual void closeEvent(QCloseEvent* event);
+  virtual void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
+  virtual void hideEvent(QHideEvent* event) Q_DECL_OVERRIDE;
+  virtual void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
 
   Data::CollPtr m_currColl;
   Data::EntryList m_currEntries;

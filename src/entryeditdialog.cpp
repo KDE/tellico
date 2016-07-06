@@ -49,10 +49,12 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QTimer>
 
 namespace {
   // must be an even number
   static const int NCOLS = 2; // number of columns of GUI::FieldWidgets
+  static const char* dialogOptionsString = "Edit Dialog Options";
 }
 
 using Tellico::EntryEditDialog;
@@ -92,10 +94,6 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   connect(buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), SLOT(slotClose()));
   connect(m_saveButton, SIGNAL(clicked()), SLOT(slotHandleSave()));
   connect(m_newButton, SIGNAL(clicked()), SLOT(slotHandleNew()));
-
-
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
-  KWindowConfig::restoreWindowSize(windowHandle(), config);
 }
 
 void EntryEditDialog::slotHelp() {
@@ -111,8 +109,6 @@ void EntryEditDialog::slotClose() {
     m_needReset = true;
     setContents(m_currEntries);
     slotSetModified(false);
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Edit Dialog Options"));
-    KWindowConfig::saveWindowSize(windowHandle(), config);
   }
 }
 
@@ -120,7 +116,6 @@ void EntryEditDialog::slotReset() {
   if(m_isWorking) {
     return;
   }
-//  myDebug();
 
   slotSetModified(false);
   m_saveButton->setEnabled(false);
@@ -287,7 +282,6 @@ void EntryEditDialog::slotHandleNew() {
   if(!m_currColl || !queryModified()) {
     return;
   }
-//  myDebug();
 
   m_tabs->setCurrentIndex(0);
   m_tabs->setFocusToFirstChild();
@@ -492,7 +486,6 @@ void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
   if(m_isWorking || !queryModified()) {
     return;
   }
-//  myDebug();
 
   if(!entry_) {
     myDebug() << "null entry pointer";
@@ -748,6 +741,30 @@ void EntryEditDialog::fieldValueChanged(Data::FieldPtr field_) {
     m_modifiedFields.append(field_);
   }
   slotSetModified(true);
+}
+
+void EntryEditDialog::showEvent(QShowEvent* event_) {
+  QDialog::showEvent(event_);
+/*
+  I attempted to read and restore window size here, but it didn't work (July 2016)
+  I discovered that I had to put it in a timer. Somewhere, the resize event or something
+  was overriding any size changes I did here. Calling this->resize() would work but 
+  windowHandle()->resize() would not (as KWindowConfig::restoreWindowSize uses)
+*/
+  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
+}
+
+void EntryEditDialog::slotUpdateSize() {
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
+}
+
+void EntryEditDialog::hideEvent(QHideEvent* event_) {
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
+  KWindowConfig::saveWindowSize(windowHandle(), config);
+  config.sync();
+
+  QDialog::hideEvent(event_);
 }
 
 void EntryEditDialog::closeEvent(QCloseEvent* event_) {
