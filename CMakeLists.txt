@@ -160,7 +160,7 @@ set_package_properties(KF5Sane PROPERTIES
     URL "http://www.kde.org"
     TYPE OPTIONAL)
 if(KF5Sane_FOUND)
-    include_directories(${KF5Sane_INCLUDE_DIRS})
+    include_directories(${KF5Sane_INCLUDE_DIR})
 endif(KF5Sane_FOUND)
 
 #macro_optional_find_package(Exempi 2.0)

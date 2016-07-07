@@ -40,6 +40,7 @@ TARGET_LINK_LIBRARIES(gui
     Qt5::Gui
     KF5::KIOCore
     KF5::KHtml
+    KF5::Sane
     KF5::SonnetCore
     KF5::SonnetUi
     KF5::XmlGui

@@ -63,7 +63,7 @@
 #include <QImageReader>
 
 #ifdef HAVE_KSANE
-#include <libksane/ksane.h>
+#include <KSaneWidget>
 #endif
 
 Q_DECLARE_METATYPE(KService::Ptr)
