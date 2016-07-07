@@ -8,6 +8,11 @@ set(QT_MIN_VERSION "5.4.0")
 
 find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 
+CMAKE_POLICY(SET CMP0028 OLD)
+if(POLICY CMP0063)
+  cmake_policy(SET CMP0063 NEW)
+endif(POLICY CMP0063)
+
 # http://www.cmake.org/Wiki/CMake_Useful_Variables
 # automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR
 # to the include directories in every processed CMakeLists.txt
