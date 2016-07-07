@@ -31,7 +31,7 @@
 #include "translators/translators.h"
 #include "datavectors.h"
 
-#include <kxmlguiwindow.h>
+#include <KXmlGuiWindow>
 
 #include <QUrl>
 #include <QList>
@@ -42,7 +42,6 @@ class KSelectAction;
 class KToggleAction;
 class KRecentFilesAction;
 class KActionMenu;
-class KDialogBase;
 
 class QCloseEvent;
 class QSplitter;

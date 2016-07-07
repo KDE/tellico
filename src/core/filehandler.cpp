@@ -32,9 +32,9 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kio/netaccess.h>
-#include <kfileitem.h>
+#include <KMessageBox>
+#include <KFileItem>
+#include <KIO/FileCopyJob>
 #include <KIO/DeleteJob>
 #include <KBackup>
 #include <KJobWidgets>
@@ -269,8 +269,7 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
       }
       return false;
     }
-    bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
-    return success;
+    return FileHandler::writeTextFile(f, text_, encodeUTF8_);
   }
 
   // save to remote file
@@ -288,12 +287,11 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
 
   bool success = FileHandler::writeTextFile(f, text_, encodeUTF8_);
   if(success) {
-    success = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
-    if(!success) {
-      tempfile.remove();
-      if(!quiet_) {
-        GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
-      }
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(tempfile.fileName()), url_, -1, KIO::Overwrite);
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    success = job->exec();
+    if(!success && !quiet_) {
+      GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
     }
   }
   tempfile.remove();
@@ -348,7 +346,9 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 
   bool success = FileHandler::writeDataFile(f, data_);
   if(success) {
-    success = KIO::NetAccess::upload(tempfile.fileName(), url_, GUI::Proxy::widget());
+    KIO::Job* job = KIO::file_copy(QUrl::fromLocalFile(tempfile.fileName()), url_, -1, KIO::Overwrite);
+    KJobWidgets::setWindow(job, GUI::Proxy::widget());
+    success = job->exec();
     if(!success && !quiet_) {
       GUI::Proxy::sorry(i18n(errorUpload, url_.fileName()));
     }

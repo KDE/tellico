@@ -28,8 +28,7 @@
 #include "fetch/fetch.h"
 #include "fetch/configwidget.h"
 
-#include <kdialog.h>
-
+#include <QDialog>
 #include <QHash>
 #include <QLabel>
 
@@ -45,7 +44,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class FetcherConfigDialog : public KDialog {
+class FetcherConfigDialog : public QDialog {
 Q_OBJECT
 
 public:
@@ -63,6 +62,7 @@ private slots:
   void slotNewSourceSelected(int idx);
   void slotNameChanged(const QString& name);
   void slotPossibleNewName(const QString& name);
+  void slotHelp();
 
 private:
   void init(Fetch::Type type);
