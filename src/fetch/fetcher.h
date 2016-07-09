@@ -137,7 +137,7 @@ public:
   static QString favIcon(const char* url);
   static QString favIcon(const QUrl& url);
 
-signals:
+Q_SIGNALS:
 //  void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::FetchResult* result);
   void signalDone(Tellico::Fetch::Fetcher* fetcher);

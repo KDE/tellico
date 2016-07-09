@@ -56,7 +56,7 @@ public:
 
   EntryUpdater::UpdateResult updateResult() const;
 
-private slots:
+private Q_SLOTS:
   void slotShowEntry();
 
 private:

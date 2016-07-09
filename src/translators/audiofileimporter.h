@@ -58,7 +58,7 @@ public:
   virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
   void slotAddFileToggled(bool on);
 

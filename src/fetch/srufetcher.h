@@ -90,7 +90,7 @@ public:
 
   static Fetcher::Ptr libraryOfCongress(QObject* parent);
 
-private slots:
+private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
@@ -122,7 +122,7 @@ public:
   virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;
 
-private slots:
+private Q_SLOTS:
   void slotCheckHost();
 
 private:

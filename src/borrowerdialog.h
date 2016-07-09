@@ -51,7 +51,7 @@ Q_OBJECT
 public:
   static Data::BorrowerPtr getBorrower(QWidget* parent);
 
-private slots:
+private Q_SLOTS:
   void selectItem(const QString& name);
   void updateEdit(QTreeWidgetItem* item);
   void akonadiSearchResult(KJob*);

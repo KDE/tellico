@@ -183,7 +183,7 @@ public:
                                                              Data::FieldList fields,
                                                              Data::EntryList entries);
 
-public slots:
+public Q_SLOTS:
   /**
    * Sets the modified flag. If it is true, the signalModified signal is made.
    *
@@ -192,7 +192,7 @@ public slots:
   void slotSetModified(bool m=true);
   void slotSetClean(bool clean);
 
-signals:
+Q_SIGNALS:
   /**
    * Signals that the document has been modified.
    */
@@ -211,7 +211,7 @@ signals:
   void signalCollectionAdded(Tellico::Data::CollPtr coll);
   void signalCollectionDeleted(Tellico::Data::CollPtr coll);
 
-private slots:
+private Q_SLOTS:
   /**
    * Does an initial loading of all images, used for writing
    * images to temp dir initially

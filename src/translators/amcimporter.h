@@ -43,7 +43,7 @@ public:
   virtual Data::CollPtr collection();
   bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

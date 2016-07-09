@@ -45,11 +45,11 @@ public:
   typedef QPair<Fetch::FetchResult*, bool> UpdateResult;
   typedef QList<UpdateResult> ResultList;
 
-public slots:
+public Q_SLOTS:
   void slotResult(Tellico::Fetch::FetchResult* result);
   void slotCancel();
 
-private slots:
+private Q_SLOTS:
   void slotStartNext();
   void slotDone();
   void slotCleanup();

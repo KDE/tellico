@@ -49,7 +49,7 @@ public:
 protected:
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
 
-private slots:
+private Q_SLOTS:
   void clearGroupComparison();
 
 private:

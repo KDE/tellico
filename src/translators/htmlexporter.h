@@ -79,7 +79,7 @@ public:
 
   QString text();
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

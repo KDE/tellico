@@ -55,7 +55,7 @@ public:
   virtual QWidget* widget(QWidget*) { return 0; }
   virtual bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

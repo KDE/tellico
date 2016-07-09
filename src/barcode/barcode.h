@@ -120,7 +120,7 @@ namespace barcodeRecognition {
     void recognizeBarcode( QImage img );
     bool isWebcamAvailable();
   QSize getPreviewSize() const;
-  signals:
+  Q_SIGNALS:
     void recognized( QString barcode );
     void gotImage( const QImage &img );
   protected:

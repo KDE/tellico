@@ -83,7 +83,7 @@ public:
   static bool maybeBibtex(const QUrl& url);
   static bool maybeBibtex(const QString& text, const QUrl& url = QUrl());
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

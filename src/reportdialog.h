@@ -52,13 +52,13 @@ public:
   ReportDialog(QWidget* parent);
   virtual ~ReportDialog();
 
-public slots:
+public Q_SLOTS:
   /**
    * Regenerate the report.
    */
   void slotRefresh();
 
-private slots:
+private Q_SLOTS:
   void slotGenerate();
   void slotPrint();
   void slotSaveAs();

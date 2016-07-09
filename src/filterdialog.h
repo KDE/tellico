@@ -87,13 +87,13 @@ public:
    */
   void reset();
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
-public slots:
+public Q_SLOTS:
   void setFocus();
 
-protected slots:
+protected Q_SLOTS:
   void slotEditRegExp();
   void slotRuleFieldChanged(int which);
   void slotRuleFunctionChanged(int which);
@@ -129,11 +129,11 @@ public:
   QList<QWidget*> widgetList() const;
   void setFilter(FilterPtr filter);
 
-public slots:
+public Q_SLOTS:
   void reset();
   virtual void setFocus();
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
 protected:
@@ -163,10 +163,10 @@ public:
   FilterPtr currentFilter(bool alwaysCreateNew=false);
   void setFilter(FilterPtr filter);
 
-public slots:
+public Q_SLOTS:
   void slotClear();
 
-protected slots:
+protected Q_SLOTS:
   void slotOk();
   void slotApply();
   void slotHelp();
@@ -174,7 +174,7 @@ protected slots:
   void slotFilterChanged();
   void slotSaveFilter();
 
-signals:
+Q_SIGNALS:
   void signalUpdateFilter(Tellico::FilterPtr);
   void signalCollectionModified();
 

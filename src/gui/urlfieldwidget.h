@@ -49,14 +49,14 @@ public:
   virtual QString text() const;
   virtual void setTextImpl(const QString& text);
 
-public slots:
+public Q_SLOTS:
   virtual void clearImpl();
 
 protected:
   virtual QWidget* widget();
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
-protected slots:
+protected Q_SLOTS:
   void slotOpenURL(const QString& url);
 
 private:

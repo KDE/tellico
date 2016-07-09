@@ -57,7 +57,7 @@ public:
 
   static bool maybeRIS(const QUrl& url);
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

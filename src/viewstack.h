@@ -52,7 +52,7 @@ public:
   int currentWidget() const;
   void setCurrentWidget(int widget);
 
-private slots:
+private Q_SLOTS:
   void showListView();
   void showIconView();
   /**

@@ -66,7 +66,7 @@ public:
 
   void cancel();
 
-signals:
+Q_SIGNALS:
   void signalProgress(ProgressItem* item);
   void signalDone(ProgressItem* item);
   void signalCancelled(ProgressItem* item);
@@ -102,20 +102,20 @@ public:
 
   bool anyCanBeCancelled() const;
 
-signals:
+Q_SIGNALS:
 //  void signalItemAdded(ProgressItem* item);
 //  void signalItemProgress(ProgressItem* item);
 //  void signalItemDone(ProgressItem* item);
 //  void signalItemCancelled(ProgressItem* item);
   void signalTotalProgress(qulonglong progress);
 
-public slots:
+public Q_SLOTS:
   void slotCancelAll();
   void setProgress(QObject* owner, qulonglong steps);
   void setTotalSteps(QObject* owner, qulonglong steps);
   void setDone(QObject* owner);
 
-private slots:
+private Q_SLOTS:
   void slotItemDone(ProgressItem* item);
   void slotUpdateTotalProgress();
 

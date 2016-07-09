@@ -124,7 +124,7 @@ public:
   int visibleItems() const;
   void resetEntryStatus();
 
-public slots:
+public Q_SLOTS:
   /**
    * Resets the list view, clearing and deleting all items.
    */
@@ -135,7 +135,7 @@ public slots:
   void slotRefresh();
   void slotRefreshImages();
 
-private slots:
+private Q_SLOTS:
   void slotDoubleClicked(const QModelIndex& index);
   void slotColumnMenuActivated(QAction* action);
   void updateHeaderMenu();

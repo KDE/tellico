@@ -114,7 +114,7 @@ class KWidgetLister : public QWidget
         nothing. */
     virtual void clearWidget( QWidget *w );
 
-    /** Because QT 2.x does not support signals/slots in template
+    /** Because QT does not support signals/slots in template
         classes, we are forced to emulate this by forcing the
         implementers of subclasses of KWidgetLister to reimplement this
         function which replaces the "@p new @p T" call. */

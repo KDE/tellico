@@ -68,7 +68,7 @@ public:
   QMap<QString, QString> stringMap();
   void setStringMap(const QMap<QString, QString>& stringMap);
 
-private slots:
+private Q_SLOTS:
   void slotAdd();
   void slotDelete();
   void slotUpdate(QTreeWidgetItem* item);

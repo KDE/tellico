@@ -83,7 +83,7 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
-private slots:
+private Q_SLOTS:
   void slotResult(Tellico::Fetch::FetchResult* result);
   void slotDone();
 
@@ -109,7 +109,7 @@ public:
   virtual void saveConfigHook(KConfigGroup&);
   virtual QString preferredName() const;
 
-private slots:
+private Q_SLOTS:
   void slotTypeChanged();
 
 private:
@@ -127,10 +127,10 @@ public:
   void setSource(Fetcher::Ptr fetcher);
   QString fetcherUuid() const;
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
-public slots:
+public Q_SLOTS:
 
 private:
   GUI::ComboBox* m_fetcherCombo;
@@ -146,7 +146,7 @@ public:
   void setSources(const QList<Fetcher::Ptr>& fetchers);
   QStringList uuids() const;
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
 protected:

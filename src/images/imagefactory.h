@@ -152,7 +152,7 @@ public:
 
   static ImageFactory* self();
 
-signals:
+Q_SIGNALS:
   void imageLocationMismatch();
 
 private:

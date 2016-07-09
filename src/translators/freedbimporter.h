@@ -60,10 +60,10 @@ public:
   virtual QWidget* widget(QWidget* parent);
   virtual bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
-private slots:
+private Q_SLOTS:
   void slotClicked(int id);
 
 private:

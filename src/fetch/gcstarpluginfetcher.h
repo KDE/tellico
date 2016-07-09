@@ -74,7 +74,7 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields() { return StringHash(); }
 
-private slots:
+private Q_SLOTS:
   void slotData(const QByteArray& data);
   void slotError(const QByteArray& data);
   void slotProcessExited();
@@ -117,7 +117,7 @@ public:
   virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;
 
-private slots:
+private Q_SLOTS:
   void slotTypeChanged();
   void slotPluginChanged();
 

@@ -64,7 +64,7 @@ public:
   static Data::CollPtr importURL(Import::Format format, const QUrl& url);
   static Data::CollPtr importText(Import::Format format, const QString& text);
 
-private slots:
+private Q_SLOTS:
   virtual void slotOk();
   void slotUpdateAction();
 

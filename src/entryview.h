@@ -80,17 +80,17 @@ public:
   void setUseGradientImages(bool b) { m_useGradientImages = b; }
   void resetView();
 
-signals:
+Q_SIGNALS:
   void signalAction(const QUrl& url);
 
-public slots:
+public Q_SLOTS:
   /**
    * Helper function to refresh view.
    */
   void slotRefresh();
   void showEntries(Tellico::Data::EntryList entries);
 
-private slots:
+private Q_SLOTS:
   /**
    * Open a URL.
    *
@@ -119,7 +119,7 @@ Q_OBJECT
 public:
   EntryViewWidget(EntryView* part, QWidget* parent);
 
-public slots:
+public Q_SLOTS:
   void copy();
 
 protected:

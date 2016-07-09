@@ -75,7 +75,7 @@ public:
   };
   friend class ConfigWidget;
 
-private slots:
+private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:

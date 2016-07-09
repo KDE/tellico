@@ -60,10 +60,10 @@ public:
   virtual QWidget* widget(QWidget*);
   virtual bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
-private slots:
+private Q_SLOTS:
   void slotEntries(KIO::Job* job, const KIO::UDSEntryList& list);
 
 private:

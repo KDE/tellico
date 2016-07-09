@@ -42,11 +42,11 @@ public:
 protected:
   virtual void run();
 
-public slots:
+public Q_SLOTS:
   void slotData();
   void slotError();
 
-signals:
+Q_SIGNALS:
   void standardOutput(const QByteArray& data);
   void standardError(const QByteArray& data);
 

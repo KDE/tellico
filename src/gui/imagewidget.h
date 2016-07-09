@@ -69,10 +69,10 @@ public:
   void setImage(const QString& id);
   void setLinkOnlyChecked(bool l);
 
-public slots:
+public Q_SLOTS:
   void slotClear();
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
 protected:
@@ -82,7 +82,7 @@ protected:
   virtual void dragEnterEvent(QDragEnterEvent* ev);
   virtual void dropEvent(QDropEvent* ev);
 
-private slots:
+private Q_SLOTS:
   void slotGetImage();
   void slotLinkOnlyClicked();
   void slotScanImage();

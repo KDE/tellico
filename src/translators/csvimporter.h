@@ -68,11 +68,11 @@ public:
 
   virtual bool validImport() const;
 
-public slots:
+public Q_SLOTS:
   void slotActionChanged(int action);
   void slotCancel();
 
-private slots:
+private Q_SLOTS:
   void slotTypeChanged();
   void slotFieldChanged(int idx);
   void slotFirstRowHeader(bool b);

@@ -87,7 +87,7 @@ public:
    */
   virtual void removeField(Data::CollPtr, Data::FieldPtr field);
 
-public slots:
+public Q_SLOTS:
   /**
    * Called when the Close button is clicked. It just hides the dialog.
    */
@@ -120,10 +120,10 @@ public slots:
    */
   void setContents(Tellico::Data::EntryList entries);
 
-protected slots:
+protected Q_SLOTS:
   void slotHelp();
 
-private slots:
+private Q_SLOTS:
   void fieldValueChanged(Tellico::Data::FieldPtr field);
   void slotUpdateSize();
 

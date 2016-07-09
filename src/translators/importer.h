@@ -113,13 +113,13 @@ public:
    */
   void setCurrentCollection(Data::CollPtr coll) { m_currentCollection = coll; }
 
-public slots:
+public Q_SLOTS:
   /**
    * The import action was changed in the import dialog
    */
   virtual void slotActionChanged(int) {}
 
-signals:
+Q_SIGNALS:
   void signalTotalSteps(QObject* obj, qulonglong steps);
   void signalProgress(QObject* obj, qulonglong progress);
 

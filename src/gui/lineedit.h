@@ -57,7 +57,7 @@ public:
 protected:
   virtual void contextMenuEvent(QContextMenuEvent* event);
 
-private slots:
+private Q_SLOTS:
   void slotCheckSpelling();
   void slotSpellCheckDone(const QString& text);
   void spellCheckerMisspelling(const QString& text, int pos);

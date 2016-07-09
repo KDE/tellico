@@ -339,7 +339,7 @@ public:
 
   static FieldPtr createDefaultField(DefaultField field);
 
-signals:
+Q_SIGNALS:
   void signalGroupsModified(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
   void signalRefreshField(Tellico::Data::FieldPtr field);
   void mergeAddedField(Tellico::Data::CollPtr coll, Tellico::Data::FieldPtr field);

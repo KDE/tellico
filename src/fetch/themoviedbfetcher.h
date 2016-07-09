@@ -88,7 +88,7 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
-private slots:
+private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
@@ -118,7 +118,7 @@ public:
   virtual void saveConfigHook(KConfigGroup&);
   virtual QString preferredName() const;
 
-private slots:
+private Q_SLOTS:
   void slotLangChanged();
 
 private:

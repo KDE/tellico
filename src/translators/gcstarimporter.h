@@ -55,7 +55,7 @@ public:
 
   void setHasRelativeImageLinks(bool b) { m_relativeImageLinks = b; }
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

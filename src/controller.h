@@ -112,7 +112,7 @@ public:
 
   void clearFilter();
 
-public slots:
+public Q_SLOTS:
   /**
    * When a collection is added to the document, certain actions need to be taken
    * by the parent app. The collection toolbar is updated, the entry count is set, and
@@ -147,7 +147,7 @@ public slots:
   void slotCheckIn();
   void slotCheckIn(const Data::EntryList& entries);
 
-signals:
+Q_SIGNALS:
   void collectionAdded(int collType);
 
 private:

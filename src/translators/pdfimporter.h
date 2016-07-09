@@ -41,7 +41,7 @@ public:
 
   virtual Data::CollPtr collection();
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

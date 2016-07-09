@@ -108,12 +108,12 @@ public:
   static QPixmap fetcherIcon(Fetcher::Ptr ptr, int iconGroup=3 /*Small*/, int size=0 /* default*/);
   static StringHash optionalFields(Type type);
 
-signals:
+Q_SIGNALS:
   void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::FetchResult* result);
   void signalDone();
 
-private slots:
+private Q_SLOTS:
   void slotFetcherDone(Tellico::Fetch::Fetcher* fetcher);
 
 private:

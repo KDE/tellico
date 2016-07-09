@@ -66,10 +66,10 @@ public:
   virtual void removed() {}
   virtual QString preferredName() const = 0;
 
-signals:
+Q_SIGNALS:
   void signalName(const QString& name);
 
-public slots:
+public Q_SLOTS:
   void slotSetModified(bool modified = true);
 
 protected:

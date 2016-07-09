@@ -50,7 +50,7 @@ public:
   virtual Data::CollPtr collection();
   virtual bool canImport(int type) const;
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

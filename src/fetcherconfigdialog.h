@@ -58,7 +58,7 @@ public:
   bool updateOverwrite() const;
   Fetch::ConfigWidget* configWidget() const;
 
-private slots:
+private Q_SLOTS:
   void slotNewSourceSelected(int idx);
   void slotNameChanged(const QString& name);
   void slotPossibleNewName(const QString& name);

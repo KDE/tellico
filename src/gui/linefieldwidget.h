@@ -46,7 +46,7 @@ public:
   virtual void setTextImpl(const QString& text);
   virtual void addCompletionObjectItem(const QString& text);
 
-public slots:
+public Q_SLOTS:
   virtual void clearImpl();
 
 protected:

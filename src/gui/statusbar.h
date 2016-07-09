@@ -55,7 +55,7 @@ public:
 
   virtual void ensurePolished() const;
 
-private slots:
+private Q_SLOTS:
   void slotProgress(qulonglong progress);
   void slotUpdate();
 

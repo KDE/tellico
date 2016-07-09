@@ -75,13 +75,13 @@ public:
    */
   void saveConfiguration();
 
-signals:
+Q_SIGNALS:
   /**
    * Emitted whenever the Ok or Apply button is clicked.
    */
   void signalConfigChanged();
 
-private slots:
+private Q_SLOTS:
   /**
    * Called when anything gets changed
    */

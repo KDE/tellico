@@ -46,7 +46,7 @@ public:
 
   static QString lastErrorString();
 
-private slots:
+private Q_SLOTS:
   void slotPreview(const KFileItem& item, const QPixmap& pix);
 
 private:

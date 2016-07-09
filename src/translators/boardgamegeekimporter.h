@@ -49,7 +49,7 @@ public:
 
   virtual QWidget* widget(QWidget* parent);
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

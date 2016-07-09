@@ -48,14 +48,14 @@ public:
   virtual QString text() const;
   virtual void setTextImpl(const QString& text);
 
-public slots:
+public Q_SLOTS:
   virtual void clearImpl();
 
 protected:
   virtual QWidget* widget();
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
-private slots:
+private Q_SLOTS:
   void tableContextMenu(const QPoint& point);
   void horizontalHeaderContextMenu(const QPoint& point);
   void verticalHeaderContextMenu(const QPoint& point);

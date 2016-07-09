@@ -71,14 +71,14 @@ public:
   // factory function
   static FieldWidget* create(Data::FieldPtr field, QWidget* parent);
 
-public slots:
+public Q_SLOTS:
   virtual void insertDefault();
   void setEnabled(bool enabled);
 
-signals:
+Q_SIGNALS:
   void valueChanged(Tellico::Data::FieldPtr field);
 
-protected slots:
+protected Q_SLOTS:
   void checkModified();
 
 protected:
@@ -91,7 +91,7 @@ protected:
   // not all widgets have to be updated when the field changes
   virtual void updateFieldHook(Data::FieldPtr, Data::FieldPtr) {}
 
-private slots:
+private Q_SLOTS:
   void multipleChecked();
 
 private:

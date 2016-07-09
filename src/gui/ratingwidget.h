@@ -56,10 +56,10 @@ public:
   void setText(const QString& text);
   void updateField(Data::FieldPtr field);
 
-public slots:
+public Q_SLOTS:
   void update();
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
 protected:
@@ -67,7 +67,7 @@ protected:
   virtual void enterEvent(QEvent* e);
   virtual void leaveEvent(QEvent* e);
 
-private slots:
+private Q_SLOTS:
   void clearClicked();
 
 private:

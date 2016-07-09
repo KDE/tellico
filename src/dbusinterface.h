@@ -44,7 +44,7 @@ Q_CLASSINFO("D-Bus Interface", "org.kde.tellico")
 public:
   ApplicationInterface(MainWindow* parent);
 
-public slots:
+public Q_SLOTS:
   Q_SCRIPTABLE bool importTellico(const QString& file, const QString& action)
     { return importFile(Import::TellicoXML, QUrl::fromUserInput(file), actionType(action)); }
   Q_SCRIPTABLE bool importBibtex(const QString& file, const QString& action)
@@ -88,7 +88,7 @@ Q_CLASSINFO("D-Bus Interface", "org.kde.tellico")
 public:
   CollectionInterface(QObject* parent);
 
-public slots:
+public Q_SLOTS:
   Q_SCRIPTABLE int addEntry();
   Q_SCRIPTABLE bool removeEntry(int entryID);
 

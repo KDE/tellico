@@ -62,7 +62,7 @@ public:
 
   QUndoCommand* createCommand();
 
-private slots:
+private Q_SLOTS:
   void slotBorrowerNameChanged(const QString& str);
   void slotGetBorrower();
   void slotDueDateChanged();

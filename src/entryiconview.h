@@ -51,13 +51,13 @@ public:
 
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
 
-public slots:
+public Q_SLOTS:
   void setMaxAllowedIconWidth(int width);
 
 protected:
   void contextMenuEvent(QContextMenuEvent* event);
 
-private slots:
+private Q_SLOTS:
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortMenuActivated(QAction* action);
   void slotOpenUrlMenuActivated(QAction* action=0);

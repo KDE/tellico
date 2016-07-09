@@ -48,7 +48,7 @@ public:
 
   void setIncludeImages(bool b) { m_includeImages = b; }
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

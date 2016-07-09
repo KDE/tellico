@@ -41,7 +41,7 @@ public:
 
   virtual void stepBy(int steps);
 
-private slots:
+private Q_SLOTS:
   void checkValue(const QString&);
 
 private:

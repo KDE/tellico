@@ -137,7 +137,7 @@ public:
 
   bool eventFilter(QObject* watched, QEvent* event);
 
-public slots:
+public Q_SLOTS:
   /**
    * Initializes some stuff after the object is created.
    */
@@ -369,7 +369,7 @@ private:
   void updateCollectionActions();
   void updateEntrySources();
 
-private slots:
+private Q_SLOTS:
   /**
    * Updates the actions when a file is opened.
    */

@@ -55,7 +55,7 @@ public:
   static Export::Target exportTarget(Export::Format format);
   static bool exportCollection(Export::Format format, const QUrl& url);
 
-private slots:
+private Q_SLOTS:
   void slotSaveOptions();
 
 private:

@@ -47,7 +47,7 @@ public:
   virtual QString text() const;
   virtual void setTextImpl(const QString& text);
 
-public slots:
+public Q_SLOTS:
   virtual void clearImpl();
 
 protected:

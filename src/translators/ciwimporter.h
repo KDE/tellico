@@ -57,7 +57,7 @@ public:
 
   static bool maybeCIW(const QUrl& url);
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

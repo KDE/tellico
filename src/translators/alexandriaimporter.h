@@ -65,7 +65,7 @@ public:
 
   void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

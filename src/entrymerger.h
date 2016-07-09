@@ -50,10 +50,10 @@ public:
   EntryMerger(Data::EntryList entries, QObject* parent);
   ~EntryMerger();
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
-private slots:
+private Q_SLOTS:
   void slotStartNext();
   void slotCleanup();
 

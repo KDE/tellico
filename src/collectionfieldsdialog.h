@@ -66,16 +66,16 @@ public:
 
   void setNotifyKernel(bool notify);
 
-signals:
+Q_SIGNALS:
   void signalCollectionModified();
 
-protected slots:
+protected Q_SLOTS:
   void slotOk();
   void slotApply();
   void slotDefault();
   void slotHelp();
 
-private slots:
+private Q_SLOTS:
   void slotNew();
   void slotDelete();
   void slotMoveUp();

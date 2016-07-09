@@ -83,7 +83,7 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
-private slots:
+private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:

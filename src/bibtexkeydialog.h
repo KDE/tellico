@@ -46,13 +46,13 @@ public:
   BibtexKeyDialog(Data::CollPtr coll, QWidget* parent);
   virtual ~BibtexKeyDialog();
 
-signals:
+Q_SIGNALS:
   void signalUpdateFilter(Tellico::FilterPtr);
 
-public slots:
+public Q_SLOTS:
   void slotCheckDuplicates();
 
-private slots:
+private Q_SLOTS:
   void slotCheckDuplicatesImpl();
   void slotFilterDuplicates();
 

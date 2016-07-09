@@ -46,7 +46,7 @@ public:
 protected:
   bool doKill();
 
-private slots:
+private Q_SLOTS:
   void startUpdate();
   void slotResult(Tellico::Fetch::FetchResult* result);
   void slotDone();

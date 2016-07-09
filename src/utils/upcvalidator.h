@@ -43,7 +43,7 @@ public:
 
   void setCheckISBN(bool b) { m_checkISBN = b; }
 
-signals:
+Q_SIGNALS:
   void signalISBN();
 
 private:

@@ -68,7 +68,7 @@ protected:
   void setLimit(int limit);
   XSLTHandler* xsltHandler();
 
-private slots:
+private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:

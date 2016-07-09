@@ -76,10 +76,10 @@ public:
   FetchDialog(QWidget* parent);
   ~FetchDialog();
 
-public slots:
+public Q_SLOTS:
   void slotResetCollection();
 
-private slots:
+private Q_SLOTS:
   void slotSearchClicked();
   void slotClearClicked();
   void slotAddEntry();

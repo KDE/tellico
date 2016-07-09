@@ -136,7 +136,7 @@ public:
   virtual void saveConfigHook(KConfigGroup& config_);
   virtual QString preferredName() const;
 
-private slots:
+private Q_SLOTS:
   void slotTogglePreset(bool on);
   void slotPresetChanged();
 

@@ -58,7 +58,7 @@ public:
   virtual void beginXSLTHandler(XSLTHandler*) {}
   void setXSLTURL(const QUrl& url) { m_xsltURL = url; }
 
-public slots:
+public Q_SLOTS:
   void slotCancel();
 
 private:

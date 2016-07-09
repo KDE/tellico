@@ -55,10 +55,10 @@ public:
   void setDate(const QString& date);
   void clear();
 
-signals:
+Q_SIGNALS:
   void signalModified();
 
-private slots:
+private Q_SLOTS:
   void slotDateChanged();
   void slotShowPicker();
   void slotDateSelected(const QDate& newDate);
