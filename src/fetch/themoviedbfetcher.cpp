@@ -50,7 +50,7 @@
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
-  static const char* THEMOVIEDB_API_URL = "http://api.themoviedb.org";
+  static const char* THEMOVIEDB_API_URL = "https://api.themoviedb.org";
   static const char* THEMOVIEDB_API_VERSION = "3"; // krazy:exclude=doublequote_chars
   static const char* THEMOVIEDB_API_KEY = "919890b4128d33c729dc368209ece555";
 }
@@ -132,7 +132,7 @@ void TheMovieDBFetcher::continueSearch() {
   switch(request().key) {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
-      u.setPath(u.path() + QLatin1Char('/') + (QLatin1String("/search/movie")));
+      u.setPath(u.path() + QLatin1String("/search/movie"));
       {
         QUrlQuery q;
         q.addQueryItem(QLatin1String("api_key"), m_apiKey);
@@ -226,7 +226,6 @@ Tellico::Fetch::FetchRequest TheMovieDBFetcher::updateRequest(Data::EntryPtr ent
 
 void TheMovieDBFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-//  myDebug();
 
   if(job->error()) {
     job->ui()->showErrorMessage();
@@ -293,7 +292,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   }
 
   foreach(const QVariant& result, resultList) {
-  //  myDebug() << "found result:" << result;
+//    myDebug() << "found result:" << result;
 
     Data::EntryPtr entry(new Data::Entry(coll));
     populateEntry(entry, result.toMap(), false);
