@@ -126,11 +126,9 @@ void MusicBrainzFetcher::doSearch() {
       stop();
       return;
   }
-
   u.setQuery(q);
   u = u.adjusted(QUrl::StripTrailingSlash);
-  u.setPath(u.path() + QLatin1Char('/') + queryPath);
-
+  u.setPath(u.path() + queryPath);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -251,11 +249,12 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   }
 
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
-  u.setPath(u.path() + QLatin1String("/release/") + mbid);
+  u.setPath(u.path() + QLatin1String("release/") + mbid);
   QUrlQuery q;
   q.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
   q.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags url-rels"));
   u.setQuery(q);
+//  myDebug() << u;
 
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
