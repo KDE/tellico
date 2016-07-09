@@ -40,8 +40,11 @@ TARGET_LINK_LIBRARIES(gui
     Qt5::Gui
     KF5::KIOCore
     KF5::KHtml
-    KF5::Sane
     KF5::SonnetCore
     KF5::SonnetUi
     KF5::XmlGui
 )
+
+IF( KF5Sane_FOUND )
+  TARGET_LINK_LIBRARIES(gui KF5::Sane)
+ENDIF( KF5Sane_FOUND )
