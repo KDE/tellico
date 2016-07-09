@@ -177,10 +177,11 @@ QModelIndex FilterModel::parent(const QModelIndex& index_) const {
 }
 
 void FilterModel::clear() {
+  beginResetModel();
   m_filters.clear();
   delete m_rootNode;
   m_rootNode = new Node(0);
-  reset();
+  endResetModel();
 }
 
 void FilterModel::addFilters(const Tellico::FilterList& filters_) {

@@ -45,7 +45,7 @@ using Tellico::FilterView;
 
 FilterView::FilterView(QWidget* parent_)
     : GUI::TreeView(parent_), m_notSortedYet(true) {
-  header()->setResizeMode(QHeaderView::Stretch);
+  header()->setSectionResizeMode(QHeaderView::Stretch);
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 

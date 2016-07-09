@@ -203,11 +203,12 @@ QModelIndex EntryGroupModel::parent(const QModelIndex& index_) const {
 }
 
 void EntryGroupModel::clear() {
+  beginResetModel();
   m_groups.clear();
   delete m_rootNode;
   m_rootNode = new Node(0);
   m_groupIconNames.clear();
-  reset();
+  endResetModel();
 }
 
 void EntryGroupModel::addGroups(const QList<Tellico::Data::EntryGroup*>& groups_, const QString& iconName_) {

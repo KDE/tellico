@@ -43,6 +43,7 @@
 #include <QRegExp>
 #include <QFile>
 #include <QApplication>
+#include <QUrlQuery>
 
 namespace {
   static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
@@ -101,12 +102,14 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
 
   // first get the bgg id list
   QUrl u(QString::fromLatin1(BGG_COLLECTION_URL));
-  u.addQueryItem(QLatin1String("username"), m_user);
-  u.addQueryItem(QLatin1String("subtype"), QLatin1String("boardgame"));
-  u.addQueryItem(QLatin1String("brief"), QLatin1String("1"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("username"), m_user);
+  q.addQueryItem(QLatin1String("subtype"), QLatin1String("boardgame"));
+  q.addQueryItem(QLatin1String("brief"), QLatin1String("1"));
   if(m_ownedOnly) {
-    u.addQueryItem(QLatin1String("own"), QLatin1String("1"));
+    q.addQueryItem(QLatin1String("own"), QLatin1String("1"));
   }
+  u.setQuery(q);
 
   QStringList idList;
   QDomDocument dom = FileHandler::readXMLDocument(u, false, true);
@@ -231,8 +234,10 @@ QWidget* BoardGameGeekImporter::widget(QWidget* parent_) {
 QString BoardGameGeekImporter::text(const QStringList& idList_) const {
 //  myDebug() << idList_;
   QUrl u(QString::fromLatin1(BGG_THING_URL));
-  u.addQueryItem(QLatin1String("id"), idList_.join(QLatin1String(",")));
-  u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("id"), idList_.join(QLatin1String(",")));
+  q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  u.setQuery(q);
 //  myDebug() << u;
   return FileHandler::readTextFile(u, true, true);
 }

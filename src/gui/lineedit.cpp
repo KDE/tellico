@@ -26,8 +26,8 @@
 
 #include <KStandardAction>
 #include <KActionCollection>
-#include <sonnet/dialog.h>
-#include <sonnet/backgroundchecker.h>
+#include <Sonnet/Dialog>
+#include <Sonnet/BackgroundChecker>
 
 #include <QMenu>
 #include <QContextMenuEvent>

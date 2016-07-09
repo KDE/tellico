@@ -39,6 +39,7 @@
 #include <QGroupBox>
 #include <QDomDocument>
 #include <QRegExp>
+#include <QUrlQuery>
 
 namespace {
   static const char* GOODREADS_LIST_URL = "http://www.goodreads.com/review/list.xml";
@@ -139,17 +140,21 @@ QWidget* GoodreadsImporter::widget(QWidget* parent_) {
 
 QString GoodreadsImporter::text() const {
   QUrl u(QString::fromLatin1(GOODREADS_LIST_URL));
-  u.addQueryItem(QLatin1String("v"), QLatin1String("2"));
-  u.addQueryItem(QLatin1String("id"), m_user);
-  u.addQueryItem(QLatin1String("key"), m_key);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("v"), QLatin1String("2"));
+  q.addQueryItem(QLatin1String("id"), m_user);
+  q.addQueryItem(QLatin1String("key"), m_key);
+  u.setQuery(q);
 //  myDebug() << u;
   return FileHandler::readTextFile(u, false, true);
 }
 
 QString GoodreadsImporter::idFromName(const QString& name_) const {
   QUrl u(QString::fromLatin1(GOODREADS_USER_URL));
-  u.addQueryItem(QLatin1String("username"), name_);
-  u.addQueryItem(QLatin1String("key"), m_key);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("username"), name_);
+  q.addQueryItem(QLatin1String("key"), m_key);
+  u.setQuery(q);
 //  myDebug() << u;
 
   QDomDocument dom = FileHandler::readXMLDocument(u, false /* process namespace */);

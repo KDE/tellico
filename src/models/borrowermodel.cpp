@@ -31,6 +31,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
+
 #include <QIcon>
 
 using Tellico::BorrowerModel;
@@ -168,10 +169,11 @@ QModelIndex BorrowerModel::parent(const QModelIndex& index_) const {
 }
 
 void BorrowerModel::clear() {
+  beginResetModel();
   m_borrowers.clear();
   delete m_rootNode;
   m_rootNode = new Node(0);
-  reset();
+  endResetModel();
 }
 
 void BorrowerModel::addBorrowers(const Tellico::Data::BorrowerList& borrowers_) {

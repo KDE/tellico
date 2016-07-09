@@ -70,7 +70,7 @@ void EntrySelectionModel::selectedEntriesChanged() {
     m_selectedEntries = entries.toList();
     emit entriesSelected(m_selectedEntries);
     // for every selection model which did not call this function. clear the selection
-    foreach(const QWeakPointer<QItemSelectionModel>& ptr, m_modelList) { //krazy:exclude=foreach
+    foreach(const QPointer<QItemSelectionModel>& ptr, m_modelList) { //krazy:exclude=foreach
       QItemSelectionModel* const otherModel = ptr.data();
       if(otherModel && otherModel != selectionModel) {
         otherModel->clearSelection();

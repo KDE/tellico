@@ -304,7 +304,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_table->setSelectionMode(QAbstractItemView::SingleSelection);
   m_table->setSelectionBehavior(QAbstractItemView::SelectColumns);
   m_table->verticalHeader()->hide();
-  m_table->horizontalHeader()->setClickable(true);
+  m_table->horizontalHeader()->setSectionsClickable(true);
   m_table->setMinimumHeight(m_widget->fontMetrics().lineSpacing() * 8);
   m_table->setWhatsThis(i18n("The table shows up to the first five lines of the CSV file."));
   connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCurrentChanged(int, int)));

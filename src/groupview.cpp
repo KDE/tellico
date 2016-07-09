@@ -50,7 +50,7 @@ using Tellico::GroupView;
 
 GroupView::GroupView(QWidget* parent_)
     : GUI::TreeView(parent_), m_notSortedYet(true) {
-  header()->setResizeMode(QHeaderView::Stretch);
+  header()->setSectionResizeMode(QHeaderView::Stretch);
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
