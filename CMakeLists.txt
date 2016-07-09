@@ -64,14 +64,15 @@ find_package(KF5 REQUIRED COMPONENTS
     DocTools
     GuiAddons
     IconThemes
+    ItemModels
     I18n
     JobWidgets
     KIO
     Solid
     Wallet
     WidgetsAddons
+    WindowSystem
     XmlGui
-    KDELibs4Support
 )
 find_package(KF5KHtml REQUIRED NO_MODULE)
 

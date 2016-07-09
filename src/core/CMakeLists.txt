@@ -26,7 +26,6 @@ TARGET_LINK_LIBRARIES(core
     KF5::ConfigWidgets
     KF5::JobWidgets
     KF5::KIOWidgets
-    KF5::KDELibs4Support
     )
 
 ########### install files ###############

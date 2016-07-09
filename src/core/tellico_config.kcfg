@@ -7,7 +7,7 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
 <include>KLocalizedString</include>
-<include>kcolorscheme.h</include>
+<include>KColorScheme</include>
 <include>QFontDatabase</include>
 <kcfgfile name="tellicorc"/>
 

@@ -76,7 +76,7 @@ SET(tellicotest_SRCS
 )
 
 add_library(tellicotest STATIC ${tellicotest_SRCS})
-TARGET_LINK_LIBRARIES(tellicotest Qt5::Core Qt5::Gui KF5::I18n)
+TARGET_LINK_LIBRARIES(tellicotest Qt5::Core Qt5::Gui KF5::I18n KF5::ConfigWidgets)
 
 ADD_DEPENDENCIES(tellicotest tellico_config)
 
@@ -347,10 +347,11 @@ TARGET_LINK_LIBRARIES(fetcherstest
   Qt5::Gui
   Qt5::DBus
   KF5::ConfigCore
+  KF5::ConfigGui
+  KF5::ConfigWidgets
   KF5::I18n
   KF5::Archive
   KF5::IconThemes
-  KF5::KDELibs4Support
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
@@ -768,7 +769,14 @@ IF( Yaz_FOUND )
   ecm_mark_nongui_executable(z3950fetchertest)
   add_test(z3950fetchertest z3950fetchertest)
   ecm_mark_as_test(z3950fetchertest)
-  TARGET_LINK_LIBRARIES(z3950fetchertest fetcherstest ${Yaz_LIBRARIES} ${TELLICO_TEST_LIBS} KF5::SonnetCore)
+  TARGET_LINK_LIBRARIES(z3950fetchertest
+                        fetcherstest
+                        ${Yaz_LIBRARIES}
+                        ${TELLICO_TEST_LIBS}
+                        KF5::SonnetCore
+                        KF5::SonnetUi
+                        KF5::XmlGui
+  )
 ENDIF( Yaz_FOUND )
 
 ENDIF(BUILD_FETCHER_TESTS)
