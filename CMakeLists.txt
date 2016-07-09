@@ -94,6 +94,15 @@ set_package_properties(KF5NewStuff PROPERTIES
     URL "http://www.kde.org"
     TYPE OPTIONAL)
 
+find_package(KF5Sane)
+set_package_properties(KF5Sane PROPERTIES
+    DESCRIPTION "Support for adding scanned images to a collection"
+    URL "http://www.kde.org"
+    TYPE OPTIONAL)
+if(KF5Sane_FOUND)
+    include_directories(${KF5Sane_INCLUDE_DIR})
+endif(KF5Sane_FOUND)
+
 find_package(QImageBlitz 5.0)
 set_package_properties(QImageBlitz PROPERTIES
     DESCRIPTION "Support for image gradients in the default template"
@@ -154,15 +163,6 @@ if(Poppler_Qt5_FOUND)
     add_definitions(${Poppler_Qt5_DEFINITIONS})
     include_directories(${Poppler_Qt5_INCLUDE_DIRS})
 endif(Poppler_Qt5_FOUND)
-
-find_package(KF5Sane)
-set_package_properties(KF5Sane PROPERTIES
-    DESCRIPTION "Support for adding scanned images to a collection"
-    URL "http://www.kde.org"
-    TYPE OPTIONAL)
-if(KF5Sane_FOUND)
-    include_directories(${KF5Sane_INCLUDE_DIR})
-endif(KF5Sane_FOUND)
 
 #macro_optional_find_package(Exempi 2.0)
 #macro_log_feature(Exempi_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
@@ -291,6 +291,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY
 install(PROGRAMS org.kde.tellico.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
-install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_DATAROOTDIR}/appdata )
+install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
