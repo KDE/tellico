@@ -43,6 +43,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const int MAS_MAX_RETURNS = 20;
@@ -94,29 +95,31 @@ void MASFetcher::continueSearch() {
 
 void MASFetcher::doSearch() {
   QUrl u(QString::fromLatin1(MAS_API_URL));
-  u.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
-  u.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
-  u.addQueryItem(QLatin1String("StartIdx"), QString::number(m_start+1));
-  u.addQueryItem(QLatin1String("EndIdx"), QString::number(m_start+MAS_MAX_RETURNS));
-  u.addQueryItem(QLatin1String("ResultObjects"), QLatin1String("Publication"));
-  u.addQueryItem(QLatin1String("PublicationContent"), QLatin1String("AllInfo"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
+  q.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
+  q.addQueryItem(QLatin1String("StartIdx"), QString::number(m_start+1));
+  q.addQueryItem(QLatin1String("EndIdx"), QString::number(m_start+MAS_MAX_RETURNS));
+  q.addQueryItem(QLatin1String("ResultObjects"), QLatin1String("Publication"));
+  q.addQueryItem(QLatin1String("PublicationContent"), QLatin1String("AllInfo"));
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("TitleQuery"), request().value);
+      q.addQueryItem(QLatin1String("TitleQuery"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("AuthorQuery"), request().value);
+      q.addQueryItem(QLatin1String("AuthorQuery"), request().value);
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("FulltextQuery"), request().value);
+      q.addQueryItem(QLatin1String("FulltextQuery"), request().value);
       break;
 
     default:
       break;
   }
+  u.setQuery(q);
 
 //  myDebug() << "url:" << u;
 
@@ -259,13 +262,15 @@ void MASFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_
 
     // finally, look it up with a new query
     QUrl ku(QString::fromLatin1(MAS_API_URL));
-    ku.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
-    ku.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
-    ku.addQueryItem(QLatin1String("StartIdx"), QLatin1String("1"));
-    ku.addQueryItem(QLatin1String("EndIdx"), QLatin1String("1"));
-    ku.addQueryItem(QLatin1String("ResultObjects"), QLatin1String("Keyword"));
-    ku.addQueryItem(QLatin1String("PublicationContent"), QLatin1String("AllInfo"));
-    ku.addQueryItem(QLatin1String("KeywordID"), keywordId);
+    QUrlQuery q;
+    q.addQueryItem(QLatin1String("Version"), QLatin1String("1.2"));
+    q.addQueryItem(QLatin1String("AppId"), QLatin1String(MAS_API_ID));
+    q.addQueryItem(QLatin1String("StartIdx"), QLatin1String("1"));
+    q.addQueryItem(QLatin1String("EndIdx"), QLatin1String("1"));
+    q.addQueryItem(QLatin1String("ResultObjects"), QLatin1String("Keyword"));
+    q.addQueryItem(QLatin1String("PublicationContent"), QLatin1String("AllInfo"));
+    q.addQueryItem(QLatin1String("KeywordID"), keywordId);
+    ku.setQuery(q);
 //    myDebug() << ku;
 
     QByteArray data = FileHandler::readDataFile(ku, true /*quiet*/);

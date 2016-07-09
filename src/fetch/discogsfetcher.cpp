@@ -45,6 +45,7 @@
 #include <QBoxLayout>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const int DISCOGS_MAX_RETURNS_TOTAL = 20;
@@ -94,27 +95,28 @@ void DiscogsFetcher::search() {
 
   QUrl u(QString::fromLatin1(DISCOGS_API_URL));
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
       u.setPath(QLatin1String("/database/search"));
-      u.addQueryItem(QLatin1String("release_title"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("release"));
+      q.addQueryItem(QLatin1String("release_title"), request().value);
+      q.addQueryItem(QLatin1String("type"), QLatin1String("release"));
       break;
 
     case Person:
       u.setPath(QLatin1String("/database/search"));
-      u.addQueryItem(QLatin1String("artist"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("release"));
+      q.addQueryItem(QLatin1String("artist"), request().value);
+      q.addQueryItem(QLatin1String("type"), QLatin1String("release"));
       break;
 
     case Keyword:
       u.setPath(QLatin1String("/database/search"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Raw:
       u.setPath(QLatin1String("/database/search"));
-      u.setEncodedQuery(request().value.toUtf8());
+      q.setQuery(request().value);
       break;
 
     default:
@@ -122,7 +124,8 @@ void DiscogsFetcher::search() {
       stop();
       return;
   }
-  u.addQueryItem(QLatin1String("token"), m_apiKey);
+  q.addQueryItem(QLatin1String("token"), m_apiKey);
+  u.setQuery(q);
 
 //  myDebug() << "url: " << u.url();
 

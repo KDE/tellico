@@ -41,13 +41,13 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
-#include <kconfig.h>
-#include <kseparator.h>
-#include <kcombobox.h>
-#include <kacceleratormanager.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
+#include <KSeparator>
+#include <KComboBox>
+#include <KAcceleratorManager>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLineEdit>
 #include <QDomDocument>
@@ -57,7 +57,6 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
-#include <KJobWidgets/KJobWidgets>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;

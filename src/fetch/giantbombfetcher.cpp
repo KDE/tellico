@@ -38,6 +38,7 @@
 #include <QGridLayout>
 #include <QDomDocument>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 namespace {
   static const int GIANTBOMB_MAX_RETURNS_TOTAL = 20;
@@ -80,20 +81,22 @@ void GiantBombFetcher::resetSearch() {
 
 QUrl GiantBombFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  q.addQueryItem(QLatin1String("api_key"), m_apiKey);
 
   switch(request().key) {
     case Keyword:
       u.setPath(QLatin1String("/search"));
-      u.addQueryItem(QLatin1String("query"), request().value);
-      u.addQueryItem(QLatin1String("resources"), QLatin1String("game"));
+      q.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QLatin1String("resources"), QLatin1String("game"));
       break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
       return QUrl();
   }
+  u.setQuery(q);
 
 //  myDebug() << "url: " << u.url();
   return u;
@@ -134,8 +137,10 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
 
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.setPath(QString::fromLatin1("/game/%1/").arg(id));
-  u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  u.setQuery(q);
 //  myDebug() << "url: " << u;
 
   // quiet

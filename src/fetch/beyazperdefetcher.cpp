@@ -68,4 +68,3 @@ BeyazperdeFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAl
 QString BeyazperdeFetcher::ConfigWidget::preferredName() const {
   return BeyazperdeFetcher::defaultName();
 }
-

@@ -42,6 +42,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* IBS_BASE_URL = "http://www.internetbookshop.it/ser/serpge.asp";
@@ -79,16 +80,17 @@ void IBSFetcher::search() {
   m_matches.clear();
 
   QUrl u(QString::fromLatin1(IBS_BASE_URL));
+  QUrlQuery q;
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("T"), request().value);
+      q.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
+      q.addQueryItem(QLatin1String("T"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("A"), request().value);
+      q.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
+      q.addQueryItem(QLatin1String("A"), request().value);
       break;
 
     case ISBN:
@@ -100,13 +102,13 @@ void IBSFetcher::search() {
         s.remove(QLatin1Char('-'));
         // limit to first isbn
         s = s.section(QLatin1Char(';'), 0, 0);
-        u.addQueryItem(QLatin1String("isbn"), s);
+        q.addQueryItem(QLatin1String("isbn"), s);
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
-      u.addQueryItem(QLatin1String("S"), request().value);
+      q.addQueryItem(QLatin1String("Type"), QLatin1String("keyword"));
+      q.addQueryItem(QLatin1String("S"), request().value);
       break;
 
     default:
@@ -114,6 +116,7 @@ void IBSFetcher::search() {
       stop();
       return;
   }
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);

@@ -33,9 +33,10 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLineEdit>
 #include <QDomDocument>
@@ -45,7 +46,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
+#include <QUrlQuery>
 
 namespace {
   static const int ISBNDB_RETURNS_PER_REQUEST = 10;
@@ -107,22 +108,23 @@ void ISBNdbFetcher::doSearch() {
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
   u.setPath(u.path() + m_apiKey);
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
       u.setPath(u.path() + QLatin1String("books"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Person:
       u.setPath(u.path() + QLatin1String("books"));
-      u.addQueryItem(QLatin1String("i"), QLatin1String("author_name"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("i"), QLatin1String("author_name"));
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Keyword:
       u.setPath(u.path() + QLatin1String("books"));
-      u.addQueryItem(QLatin1String("i"), QLatin1String("full"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("i"), QLatin1String("full"));
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case ISBN:
@@ -140,7 +142,8 @@ void ISBNdbFetcher::doSearch() {
       stop();
       return;
   }
-  u.addQueryItem(QLatin1String("page"), QString::number(m_page));
+  q.addQueryItem(QLatin1String("page"), QString::number(m_page));
+  u.setQuery(q);
 
   //  myDebug() << "url: " << u.url();
 

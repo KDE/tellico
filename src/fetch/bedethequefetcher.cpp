@@ -43,6 +43,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* BD_BASE_URL = "http://m.bedetheque.com/album";
@@ -106,17 +107,18 @@ void BedethequeFetcher::search() {
   }
 */
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("RechTitre"), request().value);
+      q.addQueryItem(QLatin1String("RechTitre"), request().value);
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("RechSerie"), request().value);
+      q.addQueryItem(QLatin1String("RechSerie"), request().value);
       break;
 
     case ISBN:
-      u.addQueryItem(QLatin1String("RechISBN"), ISBNValidator::cleanValue(request().value));
+      q.addQueryItem(QLatin1String("RechISBN"), ISBNValidator::cleanValue(request().value));
       break;
 
     default:
@@ -124,7 +126,8 @@ void BedethequeFetcher::search() {
       stop();
       return;
   }
-//  u.addQueryItem(QLatin1String("csrf_token_bedetheque"), m_token);
+//  q.addQueryItem(QLatin1String("csrf_token_bedetheque"), m_token);
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);

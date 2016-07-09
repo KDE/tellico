@@ -45,6 +45,7 @@
 #include <QGridLayout>
 #include <QDomDocument>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 namespace {
   static const int MUSICBRAINZ_MAX_RETURNS_TOTAL = 10;
@@ -90,25 +91,26 @@ void MusicBrainzFetcher::continueSearch() {
 
 void MusicBrainzFetcher::doSearch() {
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
-  u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("limit"), QString::number(m_limit));
-  u.addQueryItem(QLatin1String("offset"), QString::number(m_offset));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
+  q.addQueryItem(QLatin1String("limit"), QString::number(m_limit));
+  q.addQueryItem(QLatin1String("offset"), QString::number(m_offset));
 
   QString queryPath;
   switch(request().key) {
     case Title:
       queryPath = QLatin1String("/release/");
-      u.addQueryItem(QLatin1String("title"), request().value);
+      q.addQueryItem(QLatin1String("title"), request().value);
       break;
 
     case Person:
       queryPath = QLatin1String("/release/");
-      u.addQueryItem(QLatin1String("artist"), request().value);
+      q.addQueryItem(QLatin1String("artist"), request().value);
       break;
 
     case Keyword:
       queryPath = QLatin1String("/release/");
-      u.addQueryItem(QLatin1String("query"), QLatin1String("artist:\"") + request().value + QLatin1String("\" OR ") +
+      q.addQueryItem(QLatin1String("query"), QLatin1String("artist:\"") + request().value + QLatin1String("\" OR ") +
                                              QLatin1String("release:\"") + request().value + QLatin1String("\" OR ")  +
                                              QLatin1String("track:\"") + request().value + QLatin1String("\" OR ") +
                                              QLatin1String("label:\"") + request().value + QLatin1String("\""));
@@ -116,7 +118,7 @@ void MusicBrainzFetcher::doSearch() {
 
     case Raw:
       queryPath = QLatin1String("/release/");
-      u.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QLatin1String("query"), request().value);
       break;
 
     default:
@@ -125,6 +127,7 @@ void MusicBrainzFetcher::doSearch() {
       return;
   }
 
+  u.setQuery(q);
   u = u.adjusted(QUrl::StripTrailingSlash);
   u.setPath(u.path() + QLatin1Char('/') + queryPath);
 
@@ -249,8 +252,10 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
   u.setPath(u.path() + QLatin1String("/release/") + mbid);
-  u.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
-  u.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags url-rels"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("type"), QLatin1String("xml"));
+  q.addQueryItem(QLatin1String("inc"), QLatin1String("artist tracks release-events release-groups labels tags url-rels"));
+  u.setQuery(q);
 
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
@@ -346,4 +351,3 @@ void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString MusicBrainzFetcher::ConfigWidget::preferredName() const {
   return MusicBrainzFetcher::defaultName();
 }
-

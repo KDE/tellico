@@ -68,4 +68,3 @@ FilmStartsFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAl
 QString FilmStartsFetcher::ConfigWidget::preferredName() const {
   return FilmStartsFetcher::defaultName();
 }
-

@@ -834,4 +834,3 @@ QString Z3950Fetcher::ConfigWidget::preferredName() const {
   QString s = m_hostEdit->text();
   return s.isEmpty() ? i18n("z39.50 Server") : s;
 }
-

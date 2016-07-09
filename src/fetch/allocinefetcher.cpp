@@ -47,6 +47,7 @@
 #include <QCryptographicHash>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const char* ALLOCINE_API_KEY = "100043982026";
@@ -125,8 +126,10 @@ void AbstractAllocineFetcher::search() {
 
   const QByteArray sig = calculateSignature(params);
 
-  u.setQueryItems(params);
-  u.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
+  QUrlQuery query;
+  query.setQueryItems(params);
+  query.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
+  u.setQuery(query);
 //  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -176,8 +179,10 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
   const QByteArray sig = calculateSignature(params);
 
-  u.setQueryItems(params);
-  u.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
+  QUrlQuery query;
+  query.setQueryItems(params);
+  query.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
+  u.setQuery(query);
 //  myDebug() << "url: " << u;
   // quiet
   QByteArray data = FileHandler::readDataFile(u, true);

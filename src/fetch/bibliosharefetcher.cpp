@@ -35,6 +35,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* BIBLIOSHARE_BASE_URL = "http://www.biblioshare.org/BNCServices/BNCServices.asmx/";
@@ -72,7 +73,9 @@ void BiblioShareFetcher::readConfigHook(const KConfigGroup& config_) {
 QUrl BiblioShareFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
   u.setPath(u.path() + QLatin1String("BiblioSimple"));
-  u.addQueryItem(QLatin1String("Token"), m_token);
+
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("Token"), m_token);
 
   switch(request().key) {
     case ISBN:
@@ -81,13 +84,14 @@ QUrl BiblioShareFetcher::searchUrl() {
         QString v = request().value.section(QLatin1Char(';'), 0);
         v = ISBNValidator::isbn13(v);
         v.remove(QLatin1Char('-'));
-        u.addQueryItem(QLatin1String("EAN"), v);
+        q.addQueryItem(QLatin1String("EAN"), v);
       }
       break;
 
     default:
       return QUrl();
   }
+  u.setQuery(q);
 //  myDebug() << "url:" << u.url();
   return u;
 }
@@ -109,11 +113,13 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
 
       QUrl imageUrl(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
       imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
-      imageUrl.addQueryItem(QLatin1String("Token"), m_token);
+      QUrlQuery q;
+      q.addQueryItem(QLatin1String("Token"), m_token);
       // QUrl does not had the "=" for empty SAN and Thumbnail query items
-      imageUrl.addQueryItem(QLatin1String("SAN"), QLatin1String(" "));
-      imageUrl.addQueryItem(QLatin1String("Thumbnail"), QLatin1String(" "));
-      imageUrl.addQueryItem(QLatin1String("EAN"), isbn);
+      q.addQueryItem(QLatin1String("SAN"), QLatin1String(" "));
+      q.addQueryItem(QLatin1String("Thumbnail"), QLatin1String(" "));
+      q.addQueryItem(QLatin1String("EAN"), isbn);
+      imageUrl.setQuery(q);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
         // placeholder images are 120x120 or 1x1

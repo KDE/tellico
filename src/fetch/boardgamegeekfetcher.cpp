@@ -37,6 +37,7 @@
 #include <QVBoxLayout>
 #include <QTextCodec>
 #include <QDomDocument>
+#include <QUrlQuery>
 
 namespace {
   // a lot of overlap with boardgamegeekimporter.h
@@ -68,28 +69,30 @@ bool BoardGameGeekFetcher::canFetch(int type) const {
 QUrl BoardGameGeekFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BGG_SEARCH_URL));
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("query"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
-      u.addQueryItem(QLatin1String("exact"), QLatin1String("1"));
+      q.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("exact"), QLatin1String("1"));
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("query"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
-      u.addQueryItem(QLatin1String("id"), request().value);
-      u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("id"), request().value);
+      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
       break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
       return QUrl();
   }
+  u.setQuery(q);
 
 //  myDebug() << "url: " << u.url();
   return u;
@@ -105,8 +108,10 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   }
 
   QUrl u(QString::fromLatin1(BGG_THING_URL));
-  u.addQueryItem(QLatin1String("id"), id);
-  u.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("id"), id);
+  q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  u.setQuery(q);
 //  myDebug() << "url: " << u;
 
   // quiet

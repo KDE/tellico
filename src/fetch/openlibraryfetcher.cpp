@@ -45,6 +45,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QUrlQuery>
 
 namespace {
   static const char* OPENLIBRARY_QUERY_URL = "http://openlibrary.org/query.json";
@@ -94,14 +95,14 @@ void OpenLibraryFetcher::search() {
 
 void OpenLibraryFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
-
+  QUrlQuery q;
   // books are type/edition
-  u.addQueryItem(QLatin1String("type"), QLatin1String("/type/edition"));
-  u.addQueryItem(QLatin1String("*"), QString());
+  q.addQueryItem(QLatin1String("type"), QLatin1String("/type/edition"));
+  q.addQueryItem(QLatin1String("*"), QString());
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("title"), term_);
+      q.addQueryItem(QLatin1String("title"), term_);
       break;
 
     case Person:
@@ -111,7 +112,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
           myWarning() << "no authors found";
           return;
         }
-        u.addQueryItem(QLatin1String("authors"), author);
+        q.addQueryItem(QLatin1String("authors"), author);
       }
       break;
 
@@ -119,15 +120,15 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       {
         const QString isbn = ISBNValidator::cleanValue(term_);
         if(isbn.size() > 10) {
-          u.addQueryItem(QLatin1String("isbn_13"), isbn);
+          q.addQueryItem(QLatin1String("isbn_13"), isbn);
         } else {
-          u.addQueryItem(QLatin1String("isbn_10"), isbn);
+          q.addQueryItem(QLatin1String("isbn_10"), isbn);
         }
       }
       break;
 
     case LCCN:
-      u.addQueryItem(QLatin1String("lccn"), term_);
+      q.addQueryItem(QLatin1String("lccn"), term_);
       break;
 
     case Keyword:
@@ -138,7 +139,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       myWarning() << "key not recognized:" << request().key;
       return;
   }
-
+  u.setQuery(q);
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -301,9 +302,11 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       const QString key = value(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
-        authorUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
-        authorUrl.addQueryItem(QLatin1String("key"), key);
-        authorUrl.addQueryItem(QLatin1String("name"), QString());
+        QUrlQuery q;
+        q.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
+        q.addQueryItem(QLatin1String("key"), key);
+        q.addQueryItem(QLatin1String("name"), QString());
+        authorUrl.setQuery(q);
 
         QString output = FileHandler::readTextFile(authorUrl, true /*quiet*/);
         QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
@@ -324,9 +327,11 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       const QString key = value(langMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl langUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
-        langUrl.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
-        langUrl.addQueryItem(QLatin1String("key"), key);
-        langUrl.addQueryItem(QLatin1String("name"), QString());
+        QUrlQuery q;
+        q.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
+        q.addQueryItem(QLatin1String("key"), key);
+        q.addQueryItem(QLatin1String("name"), QString());
+        langUrl.setQuery(q);
 
         QString output = FileHandler::readTextFile(langUrl, true /*quiet*/, true /*utf8*/);
         QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
@@ -355,9 +360,10 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
-
-  u.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
-  u.addQueryItem(QLatin1String("name"), term_);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
+  q.addQueryItem(QLatin1String("name"), term_);
+  u.setQuery(q);
 
   QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
   QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());

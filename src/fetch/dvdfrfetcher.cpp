@@ -37,6 +37,7 @@
 #include <QVBoxLayout>
 #include <QTextCodec>
 #include <QDomDocument>
+#include <QUrlQuery>
 
 namespace {
   static const int DVDFR_MAX_RETURNS_TOTAL = 20;
@@ -67,25 +68,26 @@ bool DVDFrFetcher::canFetch(int type) const {
 QUrl DVDFrFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(DVDFR_SEARCH_API_URL));
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
       // DVDfr requires the title string to be in iso-8859-15
       {
         QTextCodec* codec = QTextCodec::codecForName("iso-8859-15");
         Q_ASSERT(codec);
-        u.addEncodedQueryItem("title", codec->fromUnicode(request().value));
+        q.addQueryItem(QLatin1String("title"), QString::fromUtf8(codec->fromUnicode(request().value)));
       }
       break;
 
     case UPC:
-      u.addQueryItem(QLatin1String("gencode"), request().value);
+      q.addQueryItem(QLatin1String("gencode"), request().value);
       break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
       return QUrl();
   }
-
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
   return u;
 }
@@ -100,7 +102,9 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   }
 
   QUrl u(QString::fromLatin1(DVDFR_DETAIL_API_URL));
-  u.addQueryItem(QLatin1String("id"), id);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("id"), id);
+  u.setQuery(q);
 //  myDebug() << "url: " << u;
 
   // quiet

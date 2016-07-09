@@ -64,6 +64,6 @@ QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
 //  myDebug() << sig;
 
   QUrl url = m_siteUrl;
-  url.setEncodedQuery(query + "&Signature=" + sig);
+  url.setQuery(QString::fromLocal8Bit(query + "&Signature=" + sig));
   return url;
 }

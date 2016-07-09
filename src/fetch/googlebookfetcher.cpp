@@ -46,6 +46,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const int GOOGLEBOOK_MAX_RETURNS = 20;
@@ -109,40 +110,40 @@ void GoogleBookFetcher::continueSearch() {
 
 void GoogleBookFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(GOOGLEBOOK_API_URL));
-
-  u.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
-  u.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));
-  u.addQueryItem(QLatin1String("printType"), QLatin1String("books"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
+  q.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));
+  q.addQueryItem(QLatin1String("printType"), QLatin1String("books"));
   // we don't require a key, cause it might work without it
   if(!m_apiKey.isEmpty()) {
-    u.addQueryItem(QLatin1String("key"), m_apiKey);
+    q.addQueryItem(QLatin1String("key"), m_apiKey);
   }
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("q"), QLatin1String("intitle:") + term_);
+      q.addQueryItem(QLatin1String("q"), QLatin1String("intitle:") + term_);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("q"), QLatin1String("inauthor:") + term_);
+      q.addQueryItem(QLatin1String("q"), QLatin1String("inauthor:") + term_);
       break;
 
     case ISBN:
       {
         const QString isbn = ISBNValidator::cleanValue(term_);
-        u.addQueryItem(QLatin1String("q"), QLatin1String("isbn:") + isbn);
+        q.addQueryItem(QLatin1String("q"), QLatin1String("isbn:") + isbn);
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), term_);
+      q.addQueryItem(QLatin1String("q"), term_);
       break;
 
     default:
       myWarning() << "key not recognized:" << request().key;
       return;
   }
-
+  u.setQuery(q);
 //  myDebug() << "url:" << u;
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);

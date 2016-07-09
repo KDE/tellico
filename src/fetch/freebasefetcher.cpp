@@ -47,6 +47,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const char* FREEBASE_QUERY_URL = "https://www.googleapis.com/freebase/v1/mqlread/";
@@ -170,16 +171,18 @@ void FreebaseFetcher::doSearch() {
 //    myDebug() << "query:" << query_string;
 
     QUrl url(QString::fromLatin1(FREEBASE_QUERY_URL));
-    url.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
+    QUrlQuery q;
+    q.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
     if(cursor.type() == QVariant::String) {
-      url.addQueryItem(QLatin1String("cursor"), cursor.toString());
+      q.addQueryItem(QLatin1String("cursor"), cursor.toString());
 //      myDebug() << "using cursor" << cursor;
     } else {
-      url.addQueryItem(QLatin1String("cursor"), QString());
+      q.addQueryItem(QLatin1String("cursor"), QString());
     }
 //    if(query_string.length() < 2048) {
-//    url.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
-      url.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
+//    q.addQueryItem(QLatin1String("queries"), QString::fromUtf8(query_string));
+      q.addQueryItem(QLatin1String("query"), QString::fromUtf8(query_string));
+      url.setQuery(q);
       QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
 //    } else {
 //      query_string.prepend("queries=");
@@ -228,8 +231,10 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     // let's set max image size to 200x200
     QUrl imageUrl(QString::fromLatin1(FREEBASE_IMAGE_URL));
     imageUrl.setPath(imageUrl.path() + image_id);
-    imageUrl.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
-    imageUrl.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
+    QUrlQuery q;
+    q.addQueryItem(QLatin1String("maxwidth"), QLatin1String("200"));
+    q.addQueryItem(QLatin1String("maxheight"), QLatin1String("200"));
+    imageUrl.setQuery(q);
 //    myDebug() << "image url:" << imageUrl;
     const QString id = ImageFactory::addImage(imageUrl, true);
     if(id.isEmpty()) {
@@ -260,11 +265,13 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
     if(article_id.startsWith(QLatin1Char('/'))) {
       QUrl articleUrl(QString::fromLatin1(FREEBASE_BLURB_URL));
       articleUrl.setPath(articleUrl.path() + article_id);
-      articleUrl.addQueryItem(QLatin1String("limit"), QLatin1String("1"));
-      articleUrl.addQueryItem(QLatin1String("filter"), QLatin1String("/common/document/text"));
-      articleUrl.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
-//      articleUrl.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
-//      articleUrl.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+      QUrlQuery q;
+      q.addQueryItem(QLatin1String("limit"), QLatin1String("1"));
+      q.addQueryItem(QLatin1String("filter"), QLatin1String("/common/document/text"));
+      q.addQueryItem(QLatin1String("key"), QLatin1String(FREEBASE_API_KEY));
+//      q.addQueryItem(QLatin1String("maxlength"), QLatin1String("1000"));
+//      q.addQueryItem(QLatin1String("break_paragraphs"), QLatin1String("true"));
+      articleUrl.setQuery(q);
       const QByteArray data = FileHandler::readDataFile(articleUrl, true);
       if(data.isEmpty()) {
         entry->setField(article_field, QString());

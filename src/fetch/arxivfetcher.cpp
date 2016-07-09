@@ -46,6 +46,7 @@
 #include <QPixmap>
 #include <QVBoxLayout>
 #include <QFile>
+#include <QUrlQuery>
 
 namespace {
   static const int ARXIV_RETURNS_PER_REQUEST = 20;
@@ -244,8 +245,9 @@ void ArxivFetcher::initXSLTHandler() {
 
 QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   QUrl u(QString::fromLatin1(ARXIV_BASE_URL));
-  u.addQueryItem(QLatin1String("start"), QString::number(m_start));
-  u.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("start"), QString::number(m_start));
+  q.addQueryItem(QLatin1String("max_results"), QString::number(ARXIV_RETURNS_PER_REQUEST));
 
   // quotes should be used if spaces are present
   QString value = value_;
@@ -282,7 +284,8 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       myWarning() << "key not recognized: " << request().key;
       return QUrl();
   }
-  u.addQueryItem(QLatin1String("search_query"), query);
+  q.addQueryItem(QLatin1String("search_query"), query);
+  u.setQuery(q);
 
 //  myDebug() << "url: " << u;
   return u;

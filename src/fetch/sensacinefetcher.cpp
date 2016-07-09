@@ -68,4 +68,3 @@ SensaCineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAll
 QString SensaCineFetcher::ConfigWidget::preferredName() const {
   return SensaCineFetcher::defaultName();
 }
-

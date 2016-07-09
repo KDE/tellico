@@ -46,6 +46,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
@@ -132,9 +133,13 @@ void TheMovieDBFetcher::continueSearch() {
     case Title:
       u = u.adjusted(QUrl::StripTrailingSlash);
       u.setPath(u.path() + QLatin1Char('/') + (QLatin1String("/search/movie")));
-      u.addQueryItem(QLatin1String("api_key"), m_apiKey);
-      u.addQueryItem(QLatin1String("language"), m_locale);
-      u.addQueryItem(QLatin1String("query"), request().value);
+      {
+        QUrlQuery q;
+        q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+        q.addQueryItem(QLatin1String("language"), m_locale);
+        q.addQueryItem(QLatin1String("query"), request().value);
+        u.setQuery(q);
+      }
       break;
 
     default:
@@ -173,10 +178,12 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
     u.setPath(QString::fromLatin1("/%1/movie/%2")
               .arg(QLatin1String(THEMOVIEDB_API_VERSION), id));
-    u.addQueryItem(QLatin1String("api_key"), m_apiKey);
-    u.addQueryItem(QLatin1String("language"), m_locale);
-    u.addQueryItem(QLatin1String("append_to_response"),
+    QUrlQuery q;
+    q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+    q.addQueryItem(QLatin1String("language"), m_locale);
+    q.addQueryItem(QLatin1String("append_to_response"),
                    QLatin1String("alternative_titles,credits"));
+    u.setQuery(q);
     QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
     myWarning() << "Remove debug2 from themoviedbfetcher.cpp";
@@ -390,7 +397,9 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 void TheMovieDBFetcher::readConfiguration() {
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
   u.setPath(QString::fromLatin1("/%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
-  u.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  u.setQuery(q);
 
   QByteArray data = FileHandler::readDataFile(u, true);
 #if 0

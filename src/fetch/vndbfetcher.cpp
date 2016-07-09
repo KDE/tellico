@@ -115,7 +115,6 @@ void VNDBFetcher::search() {
   switch(request().key) {
     case Title:
       get += "(title ~ \"" + request().value.toUtf8() + "\")";
-//      u.addQueryItem(QLatin1String("title"), term_);
       break;
 
     default:

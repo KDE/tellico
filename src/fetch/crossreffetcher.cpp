@@ -48,6 +48,7 @@
 #include <QGridLayout>
 #include <QPixmap>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 #define CROSSREF_USE_UNIXREF
 
@@ -237,27 +238,28 @@ void CrossRefFetcher::initXSLTHandler() {
 
 QUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
   QUrl u(QString::fromLatin1(CROSSREF_BASE_URL));
-  u.addQueryItem(QLatin1String("noredirect"), QLatin1String("true"));
-  u.addQueryItem(QLatin1String("multihit"), QLatin1String("true"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("noredirect"), QLatin1String("true"));
+  q.addQueryItem(QLatin1String("multihit"), QLatin1String("true"));
 #ifdef CROSSREF_USE_UNIXREF
-  u.addQueryItem(QLatin1String("format"), QLatin1String("unixref"));
+  q.addQueryItem(QLatin1String("format"), QLatin1String("unixref"));
 #endif
   if(m_email.isEmpty()) {
-    u.addQueryItem(QLatin1String("pid"), QString::fromLatin1("%1:%2").arg(m_user, m_password));
+    q.addQueryItem(QLatin1String("pid"), QString::fromLatin1("%1:%2").arg(m_user, m_password));
   } else {
-    u.addQueryItem(QLatin1String("pid"), m_email);
+    q.addQueryItem(QLatin1String("pid"), m_email);
   }
 
   switch(key_) {
     case DOI:
-      u.addQueryItem(QLatin1String("rft_id"), QString::fromLatin1("info:doi/%1").arg(value_));
+      q.addQueryItem(QLatin1String("rft_id"), QString::fromLatin1("info:doi/%1").arg(value_));
       break;
 
     default:
       myWarning() << "key not recognized: " << key_;
       return QUrl();
   }
-
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
   return u;
 }
@@ -378,4 +380,3 @@ void CrossRefFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString CrossRefFetcher::ConfigWidget::preferredName() const {
   return CrossRefFetcher::defaultName();
 }
-

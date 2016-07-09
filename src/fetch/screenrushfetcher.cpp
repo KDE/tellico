@@ -68,4 +68,3 @@ ScreenRushFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAl
 QString ScreenRushFetcher::ConfigWidget::preferredName() const {
   return ScreenRushFetcher::defaultName();
 }
-

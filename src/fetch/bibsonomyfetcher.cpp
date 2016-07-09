@@ -39,6 +39,7 @@
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   // always bibtex
@@ -89,8 +90,9 @@ void BibsonomyFetcher::search() {
       stop();
       return;
   }
-
-  u.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("items"), QString::number(BIBSONOMY_MAX_RESULTS));
+  u.setQuery(q);
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());

@@ -51,6 +51,7 @@
 #include <QLabel>
 #include <QGridLayout>
 #include <QFile>
+#include <QUrlQuery>
 
 namespace {
   // 7090 was the old default port, but that was just because LoC used it
@@ -139,21 +140,22 @@ void SRUFetcher::search() {
   // hack to allow (for now) including extra query terms in the path, avoids double encoding
   u = QUrl::fromUserInput(u.url() + QLatin1Char('/') + m_path);
 
-  u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
-  u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
-  u.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
+  QUrlQuery query;
+  query.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
+  query.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
+  query.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
   if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
-    u.addQueryItem(QLatin1String("recordSchema"), m_format);
+    query.addQueryItem(QLatin1String("recordSchema"), m_format);
   }
   for(StringMap::ConstIterator it = m_queryMap.constBegin(); it != m_queryMap.constEnd(); ++it) {
-    u.addQueryItem(it.key(), it.value());
+    query.addQueryItem(it.key(), it.value());
   }
 
   const int type = collectionType();
   QString str = QLatin1Char('"') + request().value + QLatin1Char('"');
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("query"), QLatin1String("dc.title=") + str);
+      query.addQueryItem(QLatin1String("query"), QLatin1String("dc.title=") + str);
       break;
 
     case Person:
@@ -164,7 +166,7 @@ void SRUFetcher::search() {
         } else {
           s = QLatin1String("dc.creator=") + str + QLatin1String(" or dc.editor=") + str;
         }
-        u.addQueryItem(QLatin1String("query"), s);
+        query.addQueryItem(QLatin1String("query"), s);
       }
       break;
 
@@ -189,7 +191,7 @@ void SRUFetcher::search() {
             q += QLatin1String(" or ");
           }
         }
-        u.addQueryItem(QLatin1String("query"), q);
+        query.addQueryItem(QLatin1String("query"), q);
       }
       break;
 
@@ -205,19 +207,19 @@ void SRUFetcher::search() {
             q += QLatin1String(" or ");
           }
         }
-        u.addQueryItem(QLatin1String("query"), q);
+        query.addQueryItem(QLatin1String("query"), q);
       }
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("query"), str);
+      query.addQueryItem(QLatin1String("query"), str);
       break;
 
     case Raw:
       {
         QString key = request().value.section(QLatin1Char('='), 0, 0).trimmed();
         QString str = request().value.section(QLatin1Char('='), 1).trimmed();
-        u.addQueryItem(key, str);
+        query.addQueryItem(key, str);
       }
       break;
 
@@ -226,6 +228,7 @@ void SRUFetcher::search() {
       stop();
       break;
   }
+  u.setQuery(query);
 //  myDebug() << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);

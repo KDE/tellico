@@ -35,6 +35,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* THEGAMESDB_SEARCH_API_URL = "http://thegamesdb.net/api/GetGamesList.php";
@@ -64,21 +65,23 @@ bool TheGamesDBFetcher::canFetch(int type) const {
 QUrl TheGamesDBFetcher::searchUrl() {
   QUrl u;
 
+  QUrlQuery q;
   switch(request().key) {
     case Title:
       u = QUrl(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
-      u.addQueryItem(QLatin1String("name"), request().value);
+      q.addQueryItem(QLatin1String("name"), request().value);
       break;
 
     case Keyword:
       u = QUrl(QString::fromLatin1(THEGAMESDB_SEARCH_API_URL));
-      u.addQueryItem(QLatin1String("name"), request().value);
+      q.addQueryItem(QLatin1String("name"), request().value);
       break;
 
     default:
       myWarning() << "key not recognized: " << request().key;
       return QUrl();
   }
+  u.setQuery(q);
 
 //  myDebug() << "url: " << u.url();
   return u;
@@ -94,7 +97,9 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHookData(Data::EntryPtr ent
   }
 
   QUrl u(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
-  u.addQueryItem(QLatin1String("id"), id);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("id"), id);
+  u.setQuery(q);
 //  myDebug() << "url: " << u;
 
   // quiet
@@ -171,4 +176,3 @@ void TheGamesDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString TheGamesDBFetcher::ConfigWidget::preferredName() const {
   return TheGamesDBFetcher::defaultName();
 }
-

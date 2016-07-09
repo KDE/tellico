@@ -43,6 +43,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const char* FILMASTER_API_URL = "http://api.filmaster.com";
@@ -96,7 +97,9 @@ void FilmasterFetcher::search() {
     default:
       break;
   }
-  u.addQueryItem(QLatin1String("phrase"), request().value);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("phrase"), request().value);
+  u.setQuery(q);
 
 //  myDebug() << "url:" << u;
 

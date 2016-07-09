@@ -311,4 +311,3 @@ QWidget* MultiFetcher::FetcherListWidget::createWidget(QWidget* parent_) {
   connect(w, SIGNAL(signalModified()), SIGNAL(signalModified()));
   return w;
 }
-

@@ -40,6 +40,7 @@
 #include <QVBoxLayout>
 #include <QFile>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
@@ -92,19 +93,20 @@ void GoogleScholarFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
   QUrl u(QString::fromLatin1(SCHOLAR_BASE_URL));
-  u.addQueryItem(QLatin1String("start"), QString::number(m_start));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("start"), QString::number(m_start));
 
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(request().value));
       break;
 
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(request().value));
       break;
 
     default:
@@ -112,6 +114,7 @@ void GoogleScholarFetcher::doSearch() {
       stop();
       return;
   }
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -272,4 +275,3 @@ GoogleScholarFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleS
 QString GoogleScholarFetcher::ConfigWidget::preferredName() const {
   return GoogleScholarFetcher::defaultName();
 }
-

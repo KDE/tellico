@@ -31,7 +31,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
@@ -43,6 +43,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QUrlQuery>
 
 namespace {
   static const char* MOVIEMETER_API_KEY = "t80a06uf736d0yd00jpynpdsgea255yk";
@@ -83,16 +84,17 @@ void MovieMeterFetcher::search() {
   m_started = true;
 
   QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
-  u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
   switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("q"), request().value);
       //u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
     case Raw:
-      u.setEncodedQuery(request().value.toUtf8());
+      q.setQuery(request().value);
       break;
 
     default:
@@ -100,7 +102,7 @@ void MovieMeterFetcher::search() {
       stop();
       return;
   }
-
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -131,7 +133,9 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
   if(!id.isEmpty()) {
     QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
     u.setPath(u.path() + id);
-    u.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+    QUrlQuery q;
+    q.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+    u.setQuery(q);
     // quiet
     QByteArray data = FileHandler::readDataFile(u, true);
 

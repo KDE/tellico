@@ -39,6 +39,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 namespace {
   static const int DOUBAN_MAX_RETURNS_TOTAL = 20;
@@ -102,6 +103,7 @@ QUrl DoubanFetcher::searchUrl() {
       return QUrl();
   }
 
+  QUrlQuery q;
   switch(request().key) {
     case ISBN:
       u.setPath(u.path() + QLatin1String("subject/isbn/"));
@@ -117,7 +119,7 @@ QUrl DoubanFetcher::searchUrl() {
 
     case Keyword:
       u.setPath(u.path() + QLatin1String("subjects"));
-      u.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("q"), request().value);
       break;
 
     default:
@@ -126,11 +128,11 @@ QUrl DoubanFetcher::searchUrl() {
   }
 
   if(!m_apiKey.isEmpty()) {
-    u.addQueryItem(QLatin1String("apikey"), m_apiKey);
+    q.addQueryItem(QLatin1String("apikey"), m_apiKey);
   }
-  u.addQueryItem(QLatin1String("max-results"), QString::number(DOUBAN_MAX_RETURNS_TOTAL));
-  u.addQueryItem(QLatin1String("start-index"), QString::number(1));
-
+  q.addQueryItem(QLatin1String("max-results"), QString::number(DOUBAN_MAX_RETURNS_TOTAL));
+  q.addQueryItem(QLatin1String("start-index"), QString::number(1));
+  u.setQuery(q);
 //  myDebug() << "url:" << u.url();
   return u;
 }

@@ -30,15 +30,16 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 #include <KConfigGroup>
+#include <KJobWidgets/KJobWidgets>
 
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QFile>
 #include <QTextCodec>
-#include <KJobWidgets/KJobWidgets>
+#include <QUrlQuery>
 
 namespace {
   static const char* MRLOOKUP_URL = "http://www.ams.org/mrlookup";
@@ -75,14 +76,14 @@ void MRLookupFetcher::search() {
   m_started = true;
 
   QUrl u(QString::fromLatin1(MRLOOKUP_URL));
-
+  QUrlQuery q;
   switch(request().key) {
     case Title:
-      u.addQueryItem(QLatin1String("ti"), request().value);
+      q.addQueryItem(QLatin1String("ti"), request().value);
       break;
 
     case Person:
-      u.addQueryItem(QLatin1String("au"), request().value);
+      q.addQueryItem(QLatin1String("au"), request().value);
       break;
 
     default:
@@ -90,7 +91,8 @@ void MRLookupFetcher::search() {
       stop();
       return;
   }
-  u.addQueryItem(QLatin1String("format"), QLatin1String("bibtex"));
+  q.addQueryItem(QLatin1String("format"), QLatin1String("bibtex"));
+  u.setQuery(q);
 
 //  myDebug() << u;
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -225,4 +227,3 @@ MRLookupFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MRLookupFetc
 QString MRLookupFetcher::ConfigWidget::preferredName() const {
   return MRLookupFetcher::defaultName();
 }
-

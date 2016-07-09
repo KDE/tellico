@@ -48,6 +48,7 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QGridLayout>
+#include <QUrlQuery>
 
 namespace {
   static const uint IMDB_MAX_RESULTS = 20;
@@ -321,11 +322,13 @@ void IMDBFetcher::search() {
   m_url.setPath(QLatin1String("/find"));
 
   // as far as I can tell, the url encoding should always be iso-8859-1?
-  m_url.addQueryItem(QLatin1String("q"), request().value);
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("q"), request().value);
 
   switch(request().key) {
     case Title:
-      m_url.addQueryItem(QLatin1String("s"), QLatin1String("tt"));
+      q.addQueryItem(QLatin1String("s"), QLatin1String("tt"));
+      m_url.setQuery(q);
       break;
 
     case Raw:
@@ -461,7 +464,7 @@ void IMDBFetcher::parseSingleTitleResult() {
   // IMDB returns different HTML for single title results and has a query in the url
   // clear the query so we download the "canonical" page for the title
   QUrl url(m_url);
-  url.setEncodedQuery(QByteArray());
+  url.setQuery(QString());
   m_matches.insert(r->uid, url);
   m_allMatches.insert(r->uid, url);
   emit signalResultFound(r);

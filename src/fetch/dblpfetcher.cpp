@@ -27,10 +27,10 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <QUrl>
 
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* DBLP_API_URL = "http://www.dblp.org/search/api/";
@@ -62,11 +62,12 @@ void DBLPFetcher::readConfigHook(const KConfigGroup&) {
 QUrl DBLPFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(DBLP_API_URL));
 
+  QUrlQuery q;
   switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("q"), request().value);
-      u.addQueryItem(QLatin1String("h"), QString::number(DBLP_MAX_RETURNS_TOTAL));
-      u.addQueryItem(QLatin1String("c"), QString::number(0));
+      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QLatin1String("h"), QString::number(DBLP_MAX_RETURNS_TOTAL));
+      q.addQueryItem(QLatin1String("c"), QString::number(0));
       break;
 
     default:
@@ -74,7 +75,8 @@ QUrl DBLPFetcher::searchUrl() {
       return QUrl();
   }
   // has to be after query
-  u.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  u.setQuery(q);
 
 //  myDebug() << "url:" << u.url();
   return u;

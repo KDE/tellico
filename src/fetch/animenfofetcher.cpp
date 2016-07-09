@@ -44,6 +44,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
+#include <QUrlQuery>
 
 namespace {
   static const char* ANIMENFO_BASE_URL = "http://www.animenfo.com/search.php";
@@ -78,16 +79,17 @@ void AnimeNfoFetcher::search() {
   m_matches.clear();
 
   QUrl u(QString::fromLatin1(ANIMENFO_BASE_URL));
-  u.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
-  u.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
+  q.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
 
   switch(request().collectionType) {
     case Data::Collection::Book:
-      u.addQueryItem(QLatin1String("queryin"),  QLatin1String("manga_titles"));
+      q.addQueryItem(QLatin1String("queryin"),  QLatin1String("manga_titles"));
       break;
 
     case Data::Collection::Video:
-      u.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
+      q.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
       break;
 
     default:
@@ -98,7 +100,7 @@ void AnimeNfoFetcher::search() {
 
   switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QLatin1String("query"), request().value);
       break;
 
     default:
@@ -106,6 +108,7 @@ void AnimeNfoFetcher::search() {
       stop();
       return;
   }
+  u.setQuery(q);
 //  myDebug() << "url:" << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -509,4 +512,3 @@ AnimeNfoFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AnimeNfoFetc
 QString AnimeNfoFetcher::ConfigWidget::preferredName() const {
   return AnimeNfoFetcher::defaultName();
 }
-

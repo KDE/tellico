@@ -46,6 +46,7 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
+#include <QUrlQuery>
 
 namespace {
   static const int WINECOM_RETURNS_PER_REQUEST = 25;
@@ -108,13 +109,14 @@ void WineComFetcher::doSearch() {
 
   QUrl u(QString::fromLatin1(WINECOM_BASE_URL));
   u.setPath(QLatin1String("/api/beta2/service.svc/XML/catalog"));
-  u.addQueryItem(QLatin1String("apikey"), m_apiKey);
-  u.addQueryItem(QLatin1String("offset"), QString::number((m_page-1) * WINECOM_RETURNS_PER_REQUEST));
-  u.addQueryItem(QLatin1String("size"), QString::number(WINECOM_RETURNS_PER_REQUEST));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("apikey"), m_apiKey);
+  q.addQueryItem(QLatin1String("offset"), QString::number((m_page-1) * WINECOM_RETURNS_PER_REQUEST));
+  q.addQueryItem(QLatin1String("size"), QString::number(WINECOM_RETURNS_PER_REQUEST));
 
   switch(request().key) {
     case Keyword:
-      u.addQueryItem(QLatin1String("search"), request().value);
+      q.addQueryItem(QLatin1String("search"), request().value);
       break;
 
     default:
@@ -122,6 +124,7 @@ void WineComFetcher::doSearch() {
       stop();
       return;
   }
+  u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
