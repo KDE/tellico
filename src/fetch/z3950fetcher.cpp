@@ -805,11 +805,11 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     const QString country = cfg.readEntry("Country", QString());
 
     if(country.isEmpty()) {
-      m_serverCombo->addItem(i18n(name.toUtf8().constData()), group);
+      m_serverCombo->addItem(name, group);
     } else {
       const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                                   QString::fromLatin1("locale/l10n/%1/flag.png").arg(country));
-      m_serverCombo->addItem(QIcon::fromTheme(flag), i18n(name.toUtf8().constData()), group);
+      m_serverCombo->addItem(QIcon::fromTheme(flag), name, group);
     }
 
     if(current_.isEmpty() && idx == -1) {
