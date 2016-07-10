@@ -68,7 +68,7 @@ compilation.
 
 Tellico has many unit tests for checking some parts of
 the code for problems. The tests can be compiled by
-using -DKDE4_BUILD_TESTS=TRUE and then running
+using -DBUILD_TESTS=TRUE and then running
 
 % make test
 
