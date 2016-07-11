@@ -137,7 +137,8 @@ void CollectionTest::testCollection() {
                      + QLatin1String("Value2");
   entry2->setField(QLatin1String("table"), tableValue);
   QCOMPARE(entry2->formattedField(QLatin1String("table")), tableValue);
-  QCOMPARE(entry2->groupNamesByFieldName(QLatin1String("table")), QStringList() << QLatin1String("Value1") << QLatin1String("Value2"));
+  QCOMPARE(QSet<QString>::fromList(entry2->groupNamesByFieldName(QLatin1String("table"))),
+           QSet<QString>() << QLatin1String("Value1") << QLatin1String("Value2"));
 }
 
 void CollectionTest::testFields() {
