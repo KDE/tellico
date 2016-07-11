@@ -9,15 +9,6 @@ import re
 
 i18n = re.compile(r'<i18n>(.*?)</i18n>', re.DOTALL)
 ws   = re.compile('\s+')
-title = re.compile(r'<title>(.*?)</title>', re.DOTALL)
-
-def extract_i18n_z3950(filename):
-    f = open(filename, 'r')
-    text = f.read()
-    for m in title.finditer(text):
-        sys.stdout.write("i18n(\"")
-        sys.stdout.write(ws.sub(' ', m.group(1)))
-        sys.stdout.write("\");\n")
 
 def extract_i18n(filename):
     f = open(filename, 'r')
