@@ -10,10 +10,18 @@ import re
 i18n = re.compile(r'<i18n>(.*?)</i18n>', re.DOTALL)
 ws   = re.compile('\s+')
 
+def line_of_char(s, c):
+    return s.count('\n', 0, c) + 1
+
 def extract_i18n(filename):
     f = open(filename, 'r')
     text = f.read()
     for m in i18n.finditer(text):
+        sys.stdout.write("// i18n: file: ")
+        sys.stdout.write(filename)
+        sys.stdout.write(":")
+        sys.stdout.write(str(line_of_char(text, m.start(1))))
+        sys.stdout.write("\n")
         sys.stdout.write("i18n(\"")
         sys.stdout.write(ws.sub(' ', m.group(1)))
         sys.stdout.write("\");\n")
@@ -31,6 +39,8 @@ def print_output(dir):
     files = get_xsl_files(dir)
     for f in files:
         name = os.path.basename(f)[:-4].replace('_', ' ')
+        sys.stdout.write("\n// i18n: file: ")
+        sys.stdout.write(f)
         sys.stdout.write("\ni18nc(\"")
         sys.stdout.write(name + " XSL Template\", \"" + name)
         sys.stdout.write("\");\n")
