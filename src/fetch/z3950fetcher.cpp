@@ -787,6 +787,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
   const QStringList servers = serverConfig.groupList();
   // I want the list of servers sorted by name so use QMap instead of QHash
   QMap<QString, QString> serverNameMap;
+  QHash<QString, QIcon> flags;
   for(QStringList::ConstIterator server = servers.constBegin(); server != servers.constEnd(); ++server) {
     if((*server).isEmpty()) {
       myDebug() << "empty id";
@@ -804,13 +805,21 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
     KConfigGroup cfg(&serverConfig, group);
     const QString country = cfg.readEntry("Country", QString());
 
-    if(country.isEmpty()) {
-      m_serverCombo->addItem(name, group);
-    } else {
-      const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                  QString::fromLatin1("locale/l10n/%1/flag.png").arg(country));
-      m_serverCombo->addItem(QIcon::fromTheme(flag), name, group);
+    QIcon icon;
+    if(!country.isEmpty()) {
+      QHash<QString, QIcon>::ConstIterator it = flags.constFind(country);
+      if(it != flags.constEnd()) {
+        icon = it.value();
+      } else {
+        const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                    QString::fromLatin1("kf5/locale/countries/%1/flag.png").arg(country));
+        if (!flag.isEmpty()) {
+          icon = QIcon(flag);
+          flags.insert(country, icon);
+        }
+      }
     }
+    m_serverCombo->addItem(icon, name, group);
 
     if(current_.isEmpty() && idx == -1) {
       // set the initial selection to something depending on the language
