@@ -812,7 +812,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
         icon = it.value();
       } else {
         const QString flag = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                                    QString::fromLatin1("locale/l10n/%1/flag.png").arg(country));
+                                                    QString::fromLatin1("kf5/locale/countries/%1/flag.png").arg(country));
         if (!flag.isEmpty()) {
           icon = QIcon(flag);
           flags.insert(country, icon);
