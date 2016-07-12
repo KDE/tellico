@@ -1,4 +1,10 @@
 Name=Dark Horse Comics
+Name[ca]=Comics Dark Horse
+Name[es]=Dark Horse Comics
+Name[pt]=Dark Horse Comics
+Name[sv]=Dark Horse Comics
+Name[uk]=Комікси Темного Коня
+Name[x-test]=xxDark Horse Comicsxx
 Type=data-source
 ArgumentKeys=1
 Arguments=%1

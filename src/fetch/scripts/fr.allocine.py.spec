@@ -1,4 +1,10 @@
 Name=Allocine.fr
+Name[ca]=Allocine.fr
+Name[es]=Allocine.fr
+Name[pt]=Allocine.fr
+Name[sv]=Allocine.fr
+Name[uk]=Allocine.fr
+Name[x-test]=xxAllocine.frxx
 Type=data-source
 ArgumentKeys=1
 Arguments=%1
