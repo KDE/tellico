@@ -1,6 +1,7 @@
 Name=Allocine.fr
 Name[ca]=Allocine.fr
 Name[es]=Allocine.fr
+Name[nl]=Allocine.fr
 Name[pt]=Allocine.fr
 Name[sv]=Allocine.fr
 Name[uk]=Allocine.fr
