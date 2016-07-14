@@ -12,6 +12,8 @@ SET(gui_STAT_SRCS
    imagefieldwidget.cpp
    imagewidget.cpp
    fieldwidget.cpp
+   filterrulewidget.cpp
+   filterrulewidgetlister.cpp
    kwidgetlister.cpp
    lineedit.cpp
    linefieldwidget.cpp

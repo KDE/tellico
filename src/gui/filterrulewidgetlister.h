@@ -22,69 +22,34 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef FILTERDIALOG_H
-#define FILTERDIALOG_H
+#ifndef FILTERRULEWIDGETLIST_H
+#define FILTERRULEWIDGETLIST_H
 
-#include "datavectors.h"
-
-#include <QDialog>
-#include <QString>
-#include <QStringList>
-
-class QRadioButton;
-class QPushButton;
-class QLineEdit;
+// kwidgetlister is copied from kdepim/libkdenetwork cvs
+#include "kwidgetlister.h"
+#include "../datavectors.h"
 
 namespace Tellico {
-  class FilterRuleWidgetLister;
 
-/**
- * @author Robby Stephenson
- */
-class FilterDialog : public QDialog {
+class FilterRuleWidgetLister : public KWidgetLister {
 Q_OBJECT
 
 public:
-  enum Mode {
-    CreateFilter,
-    ModifyFilter
-  };
+  FilterRuleWidgetLister(QWidget* parent);
 
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  FilterDialog(Mode mode, QWidget* parent);
-
-  FilterPtr currentFilter(bool alwaysCreateNew=false);
+  QList<QWidget*> widgetList() const;
   void setFilter(FilterPtr filter);
 
 public Q_SLOTS:
-  void slotClear();
-
-protected Q_SLOTS:
-  void slotOk();
-  void slotApply();
-  void slotHelp();
-  void slotShrink();
-  void slotFilterChanged();
-  void slotSaveFilter();
+  void reset();
+  virtual void setFocus();
 
 Q_SIGNALS:
-  void signalUpdateFilter(Tellico::FilterPtr);
-  void signalCollectionModified();
+  void signalModified();
 
-private:
-  FilterPtr m_filter;
-  const Mode m_mode;
-  QRadioButton* m_matchAll;
-  QRadioButton* m_matchAny;
-  FilterRuleWidgetLister* m_ruleLister;
-  QLineEdit* m_filterName;
-  QPushButton* m_saveFilter;
-  QPushButton* m_okButton;
-  QPushButton* m_applyButton;
+protected:
+  virtual void clearWidget(QWidget* widget);
+  virtual QWidget* createWidget(QWidget* parent);
 };
 
 } // end namespace
