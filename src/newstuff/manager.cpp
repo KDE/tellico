@@ -30,9 +30,9 @@
 #include "../tellico_kernel.h"
 #include "../tellico_debug.h"
 
-#include <ktar.h>
-#include <kconfig.h>
-#include <kfileitem.h>
+#include <KTar>
+#include <KConfig>
+#include <KFileItem>
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KDesktopFile>

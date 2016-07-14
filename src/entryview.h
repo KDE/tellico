@@ -27,8 +27,8 @@
 
 #include "datavectors.h"
 
-#include <khtml_part.h>
-#include <khtmlview.h>
+#include <KHTMLPart>
+#include <KHTMLView>
 
 #include <QPointer>
 

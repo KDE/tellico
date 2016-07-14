@@ -25,13 +25,14 @@
 #ifndef TELLICO_EXPORTER_H
 #define TELLICO_EXPORTER_H
 
+#include <QObject>
+
 #include "../entry.h"
 #include "../datavectors.h"
 
-#include <QUrl>
-#include <ksharedconfig.h>
+#include <KSharedConfig>
 
-#include <QObject>
+#include <QUrl>
 
 class KConfig;
 

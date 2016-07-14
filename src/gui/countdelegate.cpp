@@ -32,7 +32,7 @@
 #include <QTreeView>
 #include <QPainter>
 
-#include <kcolorscheme.h>
+#include <KColorScheme>
 
 using Tellico::GUI::CountDelegate;
 

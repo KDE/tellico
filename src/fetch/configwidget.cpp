@@ -25,7 +25,7 @@
 #include "configwidget.h"
 
 #include <KLocalizedString>
-#include <kacceleratormanager.h>
+#include <KAcceleratorManager>
 #include <KConfigGroup>
 
 #include <QGroupBox>

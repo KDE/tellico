@@ -34,7 +34,7 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <kcombobox.h>
+#include <KComboBox>
 
 #include <QRegExp>
 #include <QCheckBox>

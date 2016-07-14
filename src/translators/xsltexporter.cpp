@@ -29,7 +29,7 @@
 #include "../core/filehandler.h"
 
 #include <KLocalizedString>
-#include <kurlrequester.h>
+#include <KUrlRequester>
 #include <KUser>
 #include <KConfigGroup>
 

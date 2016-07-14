@@ -42,10 +42,10 @@
 #include "../utils/datafileregistry.h"
 
 #include <KLocalizedString>
-#include <kprocess.h>
-#include <kurlrequester.h>
-#include <kacceleratormanager.h>
-#include <kshell.h>
+#include <KProcess>
+#include <KUrlRequester>
+#include <KAcceleratorManager>
+#include <KShell>
 #include <KConfigGroup>
 
 #include <QLabel>

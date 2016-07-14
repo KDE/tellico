@@ -47,8 +47,8 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kmessagebox.h>
-#include <kactionmenu.h>
+#include <KMessageBox>
+#include <KActionMenu>
 
 #include <QMenu>
 

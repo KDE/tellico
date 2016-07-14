@@ -29,7 +29,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kstringhandler.h>
+#include <KStringHandler>
 
 using namespace Tellico;
 using Tellico::Data::BibtexCollection;
@@ -522,4 +522,3 @@ Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
   }
   return dupes.toList();
 }
-

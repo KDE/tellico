@@ -27,7 +27,7 @@
 #include "../utils/guiproxy.h"
 #include "../utils/cursorsaver.h"
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 
 using Tellico::Fetch::ManagerMessage;
 

@@ -27,7 +27,6 @@
 #include "../core/filehandler.h"
 
 #include <KLocalizedString>
-#include <kconfig.h>
 #include <KConfigGroup>
 
 #include <QLineEdit>

@@ -46,10 +46,10 @@
 #include "tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kconfig.h>
-#include <kacceleratormanager.h>
-#include <khtmlview.h>
-#include <kcolorcombo.h>
+#include <KConfig>
+#include <KAcceleratorManager>
+#include <KHTMLView>
+#include <KColorCombo>
 #include <KHelpClient>
 #include <KRecentDirs>
 

@@ -28,7 +28,7 @@
 #include "../collection.h"
 #include "../tellico_debug.h"
 
-#include <krandom.h>
+#include <KRandom>
 
 namespace {
   bool append(QString& text, Tellico::Data::EntryPtr entry, const char* field) {

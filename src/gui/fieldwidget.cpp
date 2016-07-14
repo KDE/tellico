@@ -36,7 +36,7 @@
 #include "../field.h"
 #include "../tellico_debug.h"
 
-#include <kurllabel.h>
+#include <KUrlLabel>
 #include <KLocalizedString>
 
 #include <QWhatsThis>

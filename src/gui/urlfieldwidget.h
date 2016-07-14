@@ -27,7 +27,7 @@
 
 #include "fieldwidget.h"
 
-#include <kurlcompletion.h>
+#include <KUrlCompletion>
 
 #include <QPointer>
 

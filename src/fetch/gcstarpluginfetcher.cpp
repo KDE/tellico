@@ -37,8 +37,8 @@
 
 #include <KConfigGroup>
 #include <KProcess>
-#include <kacceleratormanager.h>
-#include <kshell.h>
+#include <KAcceleratorManager>
+#include <KShell>
 #include <KFilterDev>
 #include <KCompressionDevice>
 #include <KTar>

@@ -45,7 +45,7 @@
 #include "utils/stringset.h"
 #include "utils/cursorsaver.h"
 
-#include <kmessagebox.h>
+#include <KMessageBox>
 #include <KLocalizedString>
 
 #include <QInputDialog>

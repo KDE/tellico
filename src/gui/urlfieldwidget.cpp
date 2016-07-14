@@ -27,8 +27,8 @@
 #include "../tellico_kernel.h"
 
 #include <KLineEdit>
-#include <kurlrequester.h>
-#include <kurllabel.h>
+#include <KUrlRequester>
+#include <KUrlLabel>
 
 #include <QUrl>
 #include <QDesktopServices>

@@ -30,7 +30,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kurlrequester.h>
+#include <KUrlRequester>
 
 #include <QLabel>
 #include <QGroupBox>

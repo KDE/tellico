@@ -50,10 +50,10 @@
 #endif
 
 #include <KLocalizedString>
-#include <khtmlview.h>
+#include <KHTMLView>
 #include <KSharedConfig>
-#include <kacceleratormanager.h>
-#include <ktextedit.h>
+#include <KAcceleratorManager>
+#include <KTextEdit>
 #include <KMessageBox>
 #include <KStandardGuiItem>
 #include <KWindowConfig>

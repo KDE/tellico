@@ -25,7 +25,7 @@
 #ifndef TELLICO_GUI_COMBOBOX_H
 #define TELLICO_GUI_COMBOBOX_H
 
-#include <kcombobox.h>
+#include <KComboBox>
 
 #include <QVariant>
 #include <QList>
