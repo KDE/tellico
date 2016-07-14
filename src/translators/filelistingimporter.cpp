@@ -36,12 +36,12 @@
 #include "../core/netaccess.h"
 #include "../tellico_debug.h"
 
-#include <KIO/Job>
-#include <solid/device.h>
-#include <solid/storagevolume.h>
-#include <solid/storageaccess.h>
 #include <KLocalizedString>
 #include <KJobWidgets/KJobWidgets>
+#include <KIO/Job>
+#include <Solid/Device>
+#include <Solid/StorageVolume>
+#include <Solid/StorageAccess>
 
 #ifdef HAVE_KFILEMETADATA
 #include <KFileMetaData/Extractor>

@@ -28,8 +28,7 @@
 #include "importer.h"
 #include "../datavectors.h"
 
-#include <kio/global.h>
-#include <kfileitem.h>
+#include <KFileItem>
 
 #include <QPointer>
 #include <QPixmap>
@@ -76,7 +75,7 @@ private:
   QPointer<KIO::Job> m_job;
   KFileItemList m_files;
   QPixmap m_pixmap;
-  bool m_cancelled : 1;
+  bool m_cancelled;
 };
 
   } // end namespace

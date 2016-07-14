@@ -34,7 +34,7 @@
 
 #include <KLocalizedString>
 #include <KConfigGroup>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 

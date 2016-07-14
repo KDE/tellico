@@ -36,8 +36,8 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 #include <KConfigGroup>
 #include <KJobWidgets/KJobWidgets>
 

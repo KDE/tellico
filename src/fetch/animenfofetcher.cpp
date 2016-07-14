@@ -35,8 +35,8 @@
 
 #include <KLocalizedString>
 #include <KConfig>
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
 #include <QRegExp>

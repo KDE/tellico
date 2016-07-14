@@ -31,8 +31,8 @@
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
-#include <kio/job.h>
-#include <kio/jobuidelegate.h>
+#include <KIO/Job>
+#include <KIO/JobUiDelegate>
 
 #include <QFile>
 #include <QTextStream>

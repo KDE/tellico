@@ -40,7 +40,7 @@
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
-#include <kio/job.h>
+#include <KIO/Job>
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 #include <KConfigGroup>
