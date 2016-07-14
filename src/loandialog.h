@@ -67,6 +67,7 @@ private Q_SLOTS:
   void slotGetBorrower();
   void slotDueDateChanged();
   void akonadiSearchResult(KJob*);
+  void slotUpdateSize();
 
 private:
   void init();

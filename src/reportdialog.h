@@ -62,6 +62,7 @@ private Q_SLOTS:
   void slotGenerate();
   void slotPrint();
   void slotSaveAs();
+  void slotUpdateSize();
 
 private:
   KHTMLPart* m_HTMLPart;

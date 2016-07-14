@@ -54,10 +54,12 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QDialogButtonBox>
+#include <QTimer>
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
   static const int REPORT_MIN_HEIGHT = 420;
+  static const char* dialogOptionsString = "Report Dialog Options";
 }
 
 using Tellico::ReportDialog;
@@ -142,15 +144,14 @@ ReportDialog::ReportDialog(QWidget* parent_)
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
-  KWindowConfig::restoreWindowSize(windowHandle(), config);
+  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
 }
 
 ReportDialog::~ReportDialog() {
   delete m_exporter;
   m_exporter = 0;
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Report Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
   KWindowConfig::saveWindowSize(windowHandle(), config);
 }
 
@@ -247,4 +248,9 @@ void ReportDialog::slotSaveAs() {
     m_exporter->setURL(oldURL);
     m_exporter->setOptions(oldOpt);
   }
+}
+
+void ReportDialog::slotUpdateSize() {
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
 }

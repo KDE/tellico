@@ -909,4 +909,3 @@ void FetchDialog::customEvent(QEvent* e) {
     m_barcodePreview->setPixmap(QPixmap::fromImage(static_cast<ImageDataEvent*>(e)->image()));
   }
 }
-

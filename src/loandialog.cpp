@@ -52,6 +52,11 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
+#include <QTimer>
+
+namespace {
+  static const char* dialogOptionsString = "Loan Dialog Options";
+}
 
 using Tellico::LoanDialog;
 
@@ -198,9 +203,6 @@ void LoanDialog::init() {
                                    "to your active calendar, which can be viewed using KOrganizer. "
                                    "The box is only active if you set a due date.</qt>"));
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
-  KWindowConfig::restoreWindowSize(windowHandle(), config);
-
 #ifdef HAVE_KABC
   // Search for all existing contacts
   Akonadi::ContactSearchJob* job = new Akonadi::ContactSearchJob();
@@ -217,6 +219,8 @@ void LoanDialog::init() {
   connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
   mainLayout->addWidget(m_buttonBox);
+
+  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
 }
 
 LoanDialog::~LoanDialog() {
@@ -333,3 +337,7 @@ QUndoCommand* LoanDialog::modifyLoansCommand() {
   return new Command::ModifyLoans(m_loan, newLoan, m_addEvent->isChecked());
 }
 
+void LoanDialog::slotUpdateSize() {
+  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
+}

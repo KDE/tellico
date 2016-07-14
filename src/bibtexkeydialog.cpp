@@ -31,7 +31,6 @@
 #include <KTitleWidget>
 #include <KSharedConfig>
 #include <KGuiItem>
-#include <KWindowConfig>
 
 #include <QLabel>
 #include <QVBoxLayout>
@@ -59,9 +58,6 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
   m_dupeLabel->setPixmap(QIcon::fromTheme(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
   topLayout->addWidget(m_dupeLabel);
-
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Bibtex Key Dialog Options"));
-  KWindowConfig::restoreWindowSize(windowHandle(), config);
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
   buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
@@ -91,8 +87,6 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
 }
 
 BibtexKeyDialog::~BibtexKeyDialog() {
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Bibtex Key Dialog Options"));
-  KWindowConfig::saveWindowSize(windowHandle(), config);
 }
 
 void BibtexKeyDialog::slotCheckDuplicates() {
