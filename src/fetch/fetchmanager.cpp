@@ -37,8 +37,8 @@
 #ifdef HAVE_YAZ
 #include "z3950fetcher.h"
 #endif
-//#include "srufetcher.h"
-//#include "execexternalfetcher.h"
+#include "srufetcher.h"
+#include "execexternalfetcher.h"
 
 #include <KLocalizedString>
 #include <KIconLoader>
@@ -300,7 +300,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 #ifdef ENABLE_IMDB
   FETCHER_ADD(IMDB);
 #endif
-//  vec.append(SRUFetcher::libraryOfCongress(this));
+  vec.append(SRUFetcher::libraryOfCongress(this));
   FETCHER_ADD(ISBNdb);
   FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Arxiv);
@@ -455,7 +455,6 @@ QString Manager::typeName(Tellico::Fetch::Type type_) {
 }
 
 QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, int size_) {
-// TODO: uncomment this when the fetcher tests can link to z3950fetcher and execexternalfetcher
   if(fetcher_->type() == Fetch::Z3950) {
 #ifdef HAVE_YAZ
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
@@ -467,20 +466,21 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
       return LOAD_ICON(icon, group_, size_);
     }
 #endif
-/*
   } else
   if(fetcher_->type() == Fetch::ExecExternal) {
     const Fetch::ExecExternalFetcher* f = static_cast<const Fetch::ExecExternalFetcher*>(fetcher_.data());
     const QString p = f->execPath();
     QUrl u;
     if(p.contains(QLatin1String("allocine"))) {
-      u = QLatin1String("http://www.allocine.fr");
+      u = QUrl(QLatin1String("http://www.allocine.fr"));
     } else if(p.contains(QLatin1String("ministerio_de_cultura"))) {
-      u = QLatin1String("http://www.mcu.es");
+      u = QUrl(QLatin1String("http://www.mcu.es"));
     } else if(p.contains(QLatin1String("dark_horse_comics"))) {
-      u = QLatin1String("http://www.darkhorse.com");
+      u = QUrl(QLatin1String("http://www.darkhorse.com"));
     } else if(p.contains(QLatin1String("boardgamegeek"))) {
-      u = QLatin1String("http://www.boardgamegeek.com");
+      u = QUrl(QLatin1String("http://www.boardgamegeek.com"));
+    } else if(p.contains(QLatin1String("supercat"))) {
+      u = QUrl(QLatin1String("https://evergreen-ils.org"));
     } else if(f->source().contains(QLatin1String("amarok"), Qt::CaseInsensitive)) {
       return LOAD_ICON(QLatin1String("amarok"), group_, size_);
     }
@@ -490,7 +490,6 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
         return LOAD_ICON(icon, group_, size_);
       }
     }
-*/
   }
   return fetcherIcon(fetcher_->type(), group_, size_);
 }
