@@ -326,17 +326,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
     FETCHER_ADD(DVDFr);
     FETCHER_ADD(Allocine);
   }
-/* these don't work
-  if(langs.contains(QLatin1String("de"))) {
-    FETCHER_ADD(FilmStarts);
-  }
-  if(langs.contains(QLatin1String("es"))) {
-    FETCHER_ADD(SensaCine);
-  }
-  if(langs.contains(QLatin1String("tr"))) {
-    FETCHER_ADD(Beyazperde);
-  }
-*/
   return vec;
 }
 

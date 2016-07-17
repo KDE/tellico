@@ -9,7 +9,6 @@ SET(fetch_STAT_SRCS
    animenfofetcher.cpp
    arxivfetcher.cpp
    bedethequefetcher.cpp
-   beyazperdefetcher.cpp
    bibliosharefetcher.cpp
    bibsonomyfetcher.cpp
    boardgamegeekfetcher.cpp
@@ -28,7 +27,6 @@ SET(fetch_STAT_SRCS
    fetchmanager.cpp
    fetchresult.cpp
    filmasterfetcher.cpp
-   filmstartsfetcher.cpp
    freebasefetcher.cpp
    gcstarpluginfetcher.cpp
    gcstarthread.cpp
@@ -47,8 +45,6 @@ SET(fetch_STAT_SRCS
    multifetcher.cpp
    musicbrainzfetcher.cpp
    openlibraryfetcher.cpp
-   screenrushfetcher.cpp
-   sensacinefetcher.cpp
    sha2.c
    springerfetcher.cpp
    srufetcher.cpp

@@ -42,14 +42,6 @@ private Q_SLOTS:
   void testTitleAPI();
   void testTitleAPIAccented();
   void testGhostDog();
-
-#if 0
-  void testTitleScreenRush();
-  void testTitleFilmStarts();
-  void testTitleFilmStartsGerman();
-  void testTitleSensaCineSpanish();
-  void testTitleBeyazperdeTurkish();
-#endif
 };
 
 #endif

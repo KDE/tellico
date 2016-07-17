@@ -84,10 +84,10 @@ enum Type {
   MAS,
   Springer,
   Allocine,
-  ScreenRush,
-  FilmStarts,
-  SensaCine,
-  Beyazperde,
+  ScreenRush, // Removed
+  FilmStarts, // Removed
+  SensaCine, // Removed
+  Beyazperde, // Removed
   HathiTrust,
   TheGamesDB,
   DBLP,
