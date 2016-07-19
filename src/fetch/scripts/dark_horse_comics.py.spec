@@ -1,6 +1,8 @@
 Name=Dark Horse Comics
 Name[ca]=Comics Dark Horse
+Name[ca@valencia]=Comics Dark Horse
 Name[es]=Dark Horse Comics
+Name[it]=Dark Horse Comics
 Name[nl]=Dark Horse Comics
 Name[pl]=Dark Horse Comics
 Name[pt]=Dark Horse Comics
