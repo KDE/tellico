@@ -41,9 +41,10 @@
 #include "../progressmanager.h"
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
+#include "../utils/string_utils.h"
 
 #ifdef HAVE_KCDDB
-#include <libkcddb/client.h>
+#include <KCddb/Client>
 #endif
 
 #include <KComboBox>

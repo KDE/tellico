@@ -215,6 +215,14 @@ else(Csv_FOUND)
     set(TELLICO_CSV_LIBS csv-tellico)
 endif(Csv_FOUND)
 
+find_package(KF5Cddb)
+set_package_properties(KF5Cddb PROPERTIES
+    DESCRIPTION "KF5 CDDB library"
+    URL "https://github.com/isoft-linux/libkcddb"
+    TYPE OPTIONAL
+    PURPOSE "libkcddb is used to retrieve audio CD meta data from the internet."
+)
+
 # webcam uses libv4l, which only works on Linux for now
 # Linux 2.6.38 removed the videodev.h header
 # libv4l 0.8.3 includes a compat header for videodev.h
@@ -275,7 +283,7 @@ macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)
-macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
+macro_bool_to_01(KF5Cddb_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
