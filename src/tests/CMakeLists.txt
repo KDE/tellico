@@ -340,6 +340,18 @@ SET(fetcherstest_SRCS
   ../translators/exporter.cpp
 )
 
+# FetchManager links to SRUFetcher for the default sources
+# so have to include everything it needs
+SET(fetcherstest_SRCS
+  ${fetcherstest_SRCS}
+  ../fetch/srufetcher.cpp
+  ../fetch/xmlfetcher.cpp
+  ../translators/xmlimporter.cpp
+  ../gui/lineedit.cpp
+  ../gui/combobox.cpp
+  ../gui/stringmapwidget.cpp
+)
+
 add_library(fetcherstest STATIC ${fetcherstest_SRCS})
 TARGET_LINK_LIBRARIES(fetcherstest
   translatorstest
@@ -352,6 +364,9 @@ TARGET_LINK_LIBRARIES(fetcherstest
   KF5::I18n
   KF5::Archive
   KF5::IconThemes
+  KF5::XmlGui
+  KF5::SonnetCore
+  KF5::SonnetUi
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
@@ -397,8 +412,6 @@ add_executable(allocinefetchertest allocinefetchertest.cpp abstractfetchertest.c
   ../fetch/execexternalfetcher.cpp
   ../translators/bibteximporter.cpp
   ../translators/risimporter.cpp
-  ../gui/combobox.cpp
-  ../gui/lineedit.cpp
   ../gui/collectiontypecombo.cpp
 )
 ecm_mark_nongui_executable(allocinefetchertest)
@@ -411,9 +424,6 @@ TARGET_LINK_LIBRARIES(allocinefetchertest
   newstuff
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO_TEST_LIBS}
-  KF5::SonnetCore
-  KF5::SonnetUi
-  KF5::XmlGui
 )
 
 add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp
@@ -421,7 +431,6 @@ add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp
   ../fetch/amazonrequest.cpp
   ../fetch/hmac_sha2.c
   ../fetch/sha2.c
-  ../gui/combobox.cpp
 )
 ecm_mark_nongui_executable(amazonfetchertest)
 add_test(amazonfetchertest amazonfetchertest)
@@ -454,7 +463,6 @@ TARGET_LINK_LIBRARIES(bedethequefetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(bibliosharefetchertest bibliosharefetchertest.cpp abstractfetchertest.cpp
   ../fetch/bibliosharefetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(bibliosharefetchertest)
 add_test(bibliosharefetchertest bibliosharefetchertest)
@@ -463,7 +471,6 @@ TARGET_LINK_LIBRARIES(bibliosharefetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(boardgamegeekfetchertest boardgamegeekfetchertest.cpp abstractfetchertest.cpp
   ../fetch/boardgamegeekfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(boardgamegeekfetchertest)
 add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
@@ -472,7 +479,6 @@ TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest ${TELLICO_TEST_LIBS}
 
 add_executable(crossreffetchertest crossreffetchertest.cpp abstractfetchertest.cpp
   ../fetch/crossreffetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(crossreffetchertest)
 add_test(crossreffetchertest crossreffetchertest)
@@ -483,8 +489,6 @@ add_executable(darkhorsefetchertest darkhorsefetchertest.cpp abstractfetchertest
   ../fetch/execexternalfetcher.cpp
   ../translators/bibteximporter.cpp
   ../translators/risimporter.cpp
-  ../gui/combobox.cpp
-  ../gui/lineedit.cpp
   ../gui/collectiontypecombo.cpp
 )
 ecm_mark_nongui_executable(darkhorsefetchertest)
@@ -495,14 +499,10 @@ TARGET_LINK_LIBRARIES(darkhorsefetchertest
   newstuff
   ${TELLICO_BTPARSE_LIBS}
   ${TELLICO_TEST_LIBS}
-  KF5::SonnetCore
-  KF5::SonnetUi
-  KF5::XmlGui
 )
 
 add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
   ../fetch/dblpfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(dblpfetchertest)
 add_test(dblpfetchertest dblpfetchertest)
@@ -519,7 +519,6 @@ TARGET_LINK_LIBRARIES(discogsfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(doubanfetchertest doubanfetchertest.cpp abstractfetchertest.cpp
   ../fetch/doubanfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(doubanfetchertest)
 add_test(doubanfetchertest doubanfetchertest)
@@ -528,7 +527,6 @@ TARGET_LINK_LIBRARIES(doubanfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(dvdfrfetchertest dvdfrfetchertest.cpp abstractfetchertest.cpp
   ../fetch/dvdfrfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(dvdfrfetchertest)
 add_test(dvdfrfetchertest dvdfrfetchertest)
@@ -547,8 +545,6 @@ add_executable(externalfetchertest externalfetchertest.cpp abstractfetchertest.c
   ../fetch/execexternalfetcher.cpp
   ../translators/bibteximporter.cpp
   ../translators/risimporter.cpp
-  ../gui/combobox.cpp
-  ../gui/lineedit.cpp
   ../gui/collectiontypecombo.cpp
 )
 ecm_mark_nongui_executable(externalfetchertest)
@@ -585,7 +581,6 @@ add_executable(gcstarfetchertest gcstarfetchertest.cpp abstractfetchertest
   ../fetch/gcstarpluginfetcher.cpp
   ../fetch/gcstarthread.cpp
   ../translators/gcstarimporter.cpp
-  ../gui/combobox.cpp
   ../gui/collectiontypecombo.cpp
 )
 ecm_mark_nongui_executable(gcstarfetchertest)
@@ -595,7 +590,6 @@ TARGET_LINK_LIBRARIES(gcstarfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(giantbombfetchertest giantbombfetchertest.cpp abstractfetchertest.cpp
   ../fetch/giantbombfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(giantbombfetchertest)
 add_test(giantbombfetchertest giantbombfetchertest)
@@ -695,7 +689,6 @@ TARGET_LINK_LIBRARIES(openlibraryfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(springerfetchertest springerfetchertest.cpp abstractfetchertest.cpp
   ../fetch/springerfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(springerfetchertest)
 add_test(springerfetchertest springerfetchertest)
@@ -703,12 +696,6 @@ ecm_mark_as_test(springerfetchertest)
 TARGET_LINK_LIBRARIES(springerfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(srufetchertest srufetchertest.cpp abstractfetchertest.cpp
-  ../fetch/srufetcher.cpp
-  ../fetch/xmlfetcher.cpp
-  ../translators/xmlimporter.cpp
-  ../gui/lineedit.cpp
-  ../gui/combobox.cpp
-  ../gui/stringmapwidget.cpp
 )
 ecm_mark_nongui_executable(srufetchertest)
 add_test(srufetchertest srufetchertest)
@@ -717,14 +704,10 @@ ecm_mark_as_test(srufetchertest)
 TARGET_LINK_LIBRARIES(srufetchertest
   fetcherstest
   ${TELLICO_TEST_LIBS}
-  KF5::SonnetCore
-  KF5::SonnetUi
-  KF5::XmlGui
 )
 
 add_executable(thegamesdbfetchertest thegamesdbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/thegamesdbfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(thegamesdbfetchertest)
 add_test(thegamesdbfetchertest thegamesdbfetchertest)
@@ -733,7 +716,6 @@ TARGET_LINK_LIBRARIES(thegamesdbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(themoviedbfetchertest themoviedbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/themoviedbfetcher.cpp
-  ../gui/combobox.cpp
 )
 ecm_mark_nongui_executable(themoviedbfetchertest)
 add_test(themoviedbfetchertest themoviedbfetchertest)
@@ -750,7 +732,6 @@ TARGET_LINK_LIBRARIES(vndbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(winecomfetchertest winecomfetchertest.cpp abstractfetchertest.cpp
   ../fetch/winecomfetcher.cpp
-  ../fetch/xmlfetcher.cpp
 )
 ecm_mark_nongui_executable(winecomfetchertest)
 add_test(winecomfetchertest winecomfetchertest)
@@ -763,8 +744,6 @@ IF( Yaz_FOUND )
     ../fetch/z3950connection.cpp
     ../translators/grs1importer.cpp
     ../translators/adsimporter.cpp
-    ../gui/lineedit.cpp
-    ../gui/combobox.cpp
   )
   ecm_mark_nongui_executable(z3950fetchertest)
   add_test(z3950fetchertest z3950fetchertest)
@@ -773,9 +752,6 @@ IF( Yaz_FOUND )
                         fetcherstest
                         ${Yaz_LIBRARIES}
                         ${TELLICO_TEST_LIBS}
-                        KF5::SonnetCore
-                        KF5::SonnetUi
-                        KF5::XmlGui
   )
 ENDIF( Yaz_FOUND )
 
