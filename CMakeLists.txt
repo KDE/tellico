@@ -124,16 +124,12 @@ if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
 endif(KDEPIMLIBS_FOUND)
 
-#macro_optional_find_package(KdeMultimedia)
-#macro_log_feature(KDEMULTIMEDIA_FOUND "kdemultimedia" "Support for CDDB searches" "http://multimedia.kde.org" FALSE "4.2.0" "")
-#find_package(KdeMultimedia 4.2)
-#set_package_properties(KdeMultimedia PROPERTIES
-#    DESCRIPTION "Support for CDDB searches"
-#    URL "http://multimedia.kde.org"
-#    TYPE OPTIONAL)
+find_package(Libkcddb 5.0)
+set_package_properties(Libkcddb PROPERTIES
+    DESCRIPTION "Support for CDDB searches"
+    URL "http://projects.kde.org/projects/kde/kdemultimedia/libkcddb"
+    TYPE OPTIONAL)
 
-#macro_optional_find_package(Taglib)
-#macro_log_feature(TAGLIB_FOUND "taglib" "Support for reading multimedia files" "http://www.freshmeat.net/projects/taglib" FALSE "" "")
 find_package(Taglib)
 set_package_properties(Taglib PROPERTIES
     DESCRIPTION "Support for reading multimedia files"
@@ -144,8 +140,6 @@ if(TAGLIB_FOUND)
     include_directories(${TAGLIB_INCLUDES})
 endif(TAGLIB_FOUND)
 
-#macro_optional_find_package(Yaz 2.0)
-#macro_log_feature(Yaz_FOUND "libyaz" "Support for searching z39.50 databases" "http://www.indexdata.dk/yaz/" FALSE "2.0" "")
 find_package(Yaz 2.0)
 set_package_properties(Yaz PROPERTIES
     DESCRIPTION "Support for searching z39.50 databases"
@@ -165,8 +159,6 @@ if(Poppler_Qt5_FOUND)
     include_directories(${Poppler_Qt5_INCLUDE_DIRS})
 endif(Poppler_Qt5_FOUND)
 
-#macro_optional_find_package(Exempi 2.0)
-#macro_log_feature(Exempi_FOUND "libexempi" "Support for reading PDF/XMP metadata" "http://libopenraw.freedesktop.org/wiki/Exempi" FALSE "2.0" "")
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
     DESCRIPTION "Support for reading PDF/XMP metadata"
@@ -176,8 +168,6 @@ if(Exempi_FOUND)
     include_directories(${Exempi_INCLUDE_DIRS})
 endif(Exempi_FOUND)
 
-#macro_optional_find_package(Btparse)
-#macro_log_feature(Btparse_FOUND "btparse" "External support for parsing and processing BibTeX data files" "https://metacpan.org/release/Text-BibTeX" FALSE "" "")
 find_package(Btparse)
 set_package_properties(Btparse PROPERTIES
     DESCRIPTION "External support for parsing and processing BibTeX data files"
@@ -190,8 +180,6 @@ else(Btparse_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
 endif(Btparse_FOUND)
 
-#macro_optional_find_package(DiscID)
-#macro_log_feature(DiscID_FOUND "libdiscid" "Support for reading disc IDs from audio CDs" "http://musicbrainz.org/doc/libdiscid" FALSE "" "")
 find_package(DiscID)
 set_package_properties(DiscID PROPERTIES
     DESCRIPTION "Support for reading disc IDs from audio CDs"
@@ -201,8 +189,6 @@ if(DiscID_FOUND)
     include_directories(${DiscID_INCLUDE_DIRS})
 endif(DiscID_FOUND)
 
-#macro_optional_find_package(Csv 3.0)
-#macro_log_feature(Csv_FOUND "libcsv" "External support for reading CSV files" "http://sourceforge.net/projects/libcsv/" FALSE "3.0" "")
 find_package(Csv 3.0)
 set_package_properties(Csv PROPERTIES
     DESCRIPTION "External support for reading CSV files"
@@ -275,7 +261,7 @@ macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)
-macro_bool_to_01(KDEMULTIMEDIA_FOUND HAVE_KCDDB)
+macro_bool_to_01(Libkcddb_FOUND HAVE_KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
