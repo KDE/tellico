@@ -69,9 +69,11 @@ TARGET_LINK_LIBRARIES(translators
     ${LIBXSLT_EXSLT_LIBRARIES}
     )
 
-IF( Libkcddb_FOUND )
+IF( KF5Cddb_FOUND )
+  TARGET_LINK_LIBRARIES(translators KF5::Cddb)
+ELSEIF( Libkcddb_FOUND )
   TARGET_LINK_LIBRARIES(translators KDE::Libkcddb::kcddb)
-ENDIF( Libkcddb_FOUND )
+ENDIF( KF5Cddb_FOUND)
 
 IF( Poppler_Qt5_FOUND )
   TARGET_LINK_LIBRARIES(translators ${Poppler_Qt5_LIBRARIES})

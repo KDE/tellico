@@ -124,11 +124,19 @@ if(KDEPIMLIBS_FOUND)
     include_directories(${KDEPIMLIBS_INCLUDE_DIRS})
 endif(KDEPIMLIBS_FOUND)
 
-find_package(Libkcddb 5.0)
-set_package_properties(Libkcddb PROPERTIES
+# There is a port of libkcddb to use KF5 style linking and headers
+find_package(KF5Cddb QUIET)
+set_package_properties(KF5Cddb PROPERTIES
     DESCRIPTION "Support for CDDB searches"
     URL "http://projects.kde.org/projects/kde/kdemultimedia/libkcddb"
     TYPE OPTIONAL)
+if(NOT KF5Cddb_FOUND)
+  find_package(Libkcddb 5.0)
+  set_package_properties(Libkcddb PROPERTIES
+      DESCRIPTION "Support for CDDB searches"
+      URL "http://projects.kde.org/projects/kde/kdemultimedia/libkcddb"
+      TYPE OPTIONAL)
+endif(NOT KF5Cddb_FOUND)
 
 find_package(Taglib)
 set_package_properties(Taglib PROPERTIES
@@ -262,6 +270,7 @@ macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)
 macro_bool_to_01(Libkcddb_FOUND HAVE_KCDDB)
+macro_bool_to_01(KF5Cddb_FOUND HAVE_KF5KCDDB)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KABC)
 macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
@@ -280,4 +289,4 @@ install(FILES tellico.dtd tellico.tips DESTINATION ${TELLICO_DATA_INSTALL_DIR})
 install(FILES tellico.xml DESTINATION  ${KDE_INSTALL_MIMEDIR})
 install(FILES org.kde.tellico.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR} )
 
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

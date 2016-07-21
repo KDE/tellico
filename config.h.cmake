@@ -19,6 +19,7 @@
 #cmakedefine HAVE_KCAL
 
 #cmakedefine HAVE_KCDDB
+#cmakedefine HAVE_KF5KCDDB
 
 #cmakedefine ENABLE_AMAZON
 
