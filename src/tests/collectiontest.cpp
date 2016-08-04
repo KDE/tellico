@@ -480,6 +480,7 @@ void CollectionTest::testMergeFields() {
 
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll2));
   entry2->setField(QLatin1String("platform"), QLatin1String("PlayStation"));
+  QCOMPARE(entry2->field(QLatin1String("platform")), QLatin1String("PlayStation"));
   coll2->addEntries(entry2);
 
   QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Tellico::Data::Document::mergeFields(coll1,
@@ -494,4 +495,49 @@ void CollectionTest::testMergeFields() {
 
   Tellico::Data::FieldList addedFields = p.second;
   QVERIFY(addedFields.isEmpty());
+}
+
+void CollectionTest::testAppendCollection() {
+  // appending a collection adds new fields, merges existing one, and add new entries
+  // the new entries should belong to the original collection and the existing entries should 
+  // remain in the source collection
+  Tellico::Data::CollPtr coll1 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
+  Tellico::Data::CollPtr coll2 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
+
+  // modify the allowed values for  "platform" in collection 1
+  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QLatin1String("platform"));
+  QVERIFY(platform1);
+  QStringList newValues1 = QStringList() << QLatin1String("My Box");
+  platform1->setAllowed(newValues1);
+  QVERIFY(coll1->modifyField(platform1));
+  // add a new field
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
+  QVERIFY(coll1->addField(field1));
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll1));
+  QCOMPARE(entry1->collection(), coll1);
+  coll1->addEntries(entry1);
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll2));
+  QCOMPARE(entry2->collection(), coll2);
+  coll2->addEntries(entry2);
+
+  // append coll1 into coll2
+  Tellico::Data::Document::appendCollection(coll2, coll1);
+  // verify that the test field was added
+  QVERIFY(coll2->hasField(QLatin1String("test")));
+  // verified that the modified field was merged
+  Tellico::Data::FieldPtr platform2 = coll2->fieldByName(QLatin1String("platform"));
+  QVERIFY(platform2);
+  QVERIFY(platform2->allowed().contains(QLatin1String("My Box")));
+
+  // coll2 should have two entries now, both with proper parent
+  QCOMPARE(coll2->entryCount(), 2);
+  Tellico::Data::EntryList e2 = coll2->entries();
+  QCOMPARE(e2.at(0)->collection(), coll2);
+  QCOMPARE(e2.at(1)->collection(), coll2);
+
+  QCOMPARE(coll1->entryCount(), 1);
+  Tellico::Data::EntryList e1 = coll1->entries();
+  QCOMPARE(e1.at(0)->collection(), coll1);
 }
