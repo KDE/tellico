@@ -265,23 +265,29 @@ void Document::deleteContents() {
 }
 
 void Document::appendCollection(Tellico::Data::CollPtr coll_) {
-  if(!coll_) {
+  appendCollection(m_coll, coll_);
+}
+
+void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
+  if(!coll1_ || !coll2_) {
     return;
   }
 
-  m_coll->blockSignals(true);
+  coll1_->blockSignals(true);
 
-  foreach(FieldPtr field, coll_->fields()) {
-    m_coll->mergeField(field);
+  foreach(FieldPtr field, coll2_->fields()) {
+    coll1_->mergeField(field);
   }
 
-  foreach(EntryPtr entry, coll_->entries()) {
+  Data::EntryList newEntries;
+  foreach(EntryPtr entry, coll2_->entries()) {
     Data::EntryPtr newEntry(new Data::Entry(*entry));
-    newEntry->setCollection(m_coll);
+    newEntry->setCollection(coll1_);
+    newEntries << newEntry;
   }
-  m_coll->addEntries(coll_->entries());
+  coll1_->addEntries(newEntries);
   // TODO: merge filters and loans
-  m_coll->blockSignals(false);
+  coll1_->blockSignals(false);
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
