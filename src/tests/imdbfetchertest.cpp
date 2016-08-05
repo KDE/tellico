@@ -85,7 +85,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
   QCOMPARE(entry->field("imdb"), QLatin1String("http://akas.imdb.com/title/tt0084296/"));
-  QCOMPARE(entry->field("imdb-rating"), QLatin1String("7.33"));
+  QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
 }
