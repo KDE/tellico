@@ -3,6 +3,7 @@ Name[ca]=Comics Dark Horse
 Name[ca@valencia]=Comics Dark Horse
 Name[cs]=Dark Horse Comics
 Name[de]=Dark-Horse-Comics
+Name[en_GB]=Dark Horse Comics
 Name[es]=Dark Horse Comics
 Name[it]=Dark Horse Comics
 Name[nl]=Dark Horse Comics
