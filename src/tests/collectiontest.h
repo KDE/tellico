@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2016 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -43,6 +43,7 @@ private Q_SLOTS:
   void testDuplicate();
   void testMergeFields();
   void testAppendCollection();
+  void testMergeCollection();
 };
 
 #endif

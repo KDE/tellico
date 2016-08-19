@@ -291,24 +291,28 @@ void Document::appendCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::Co
 }
 
 Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_) {
+  return mergeCollection(m_coll, coll_);
+}
+
+Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_, Tellico::Data::CollPtr coll2_) {
   MergePair pair;
-  if(!coll_) {
+  if(!coll1_ || !coll2_) {
     return pair;
   }
 
-  m_coll->blockSignals(true);
-  Data::FieldList fields = coll_->fields();
+  coll1_->blockSignals(true);
+  Data::FieldList fields = coll2_->fields();
   foreach(FieldPtr field, fields) {
-    m_coll->mergeField(field);
+    coll1_->mergeField(field);
   }
 
-  EntryList currEntries = m_coll->entries();
-  EntryList newEntries = coll_->entries();
+  EntryList currEntries = coll1_->entries();
+  EntryList newEntries = coll2_->entries();
   foreach(EntryPtr newEntry, newEntries) {
     int bestMatch = 0;
     Data::EntryPtr matchEntry;
     foreach(EntryPtr currEntry, currEntries) {
-      int match = m_coll->sameEntry(currEntry, newEntry);
+      int match = coll1_->sameEntry(currEntry, newEntry);
       if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
         matchEntry = currEntry;
         break;
@@ -322,14 +326,14 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll_)
       mergeEntry(matchEntry, newEntry);
     } else {
       Data::EntryPtr e(new Data::Entry(*newEntry));
-      e->setCollection(m_coll);
+      e->setCollection(coll1_);
       // keep track of which entries got added
       pair.first.append(e);
     }
   }
-  m_coll->addEntries(pair.first);
+  coll1_->addEntries(pair.first);
   // TODO: merge filters and loans
-  m_coll->blockSignals(false);
+  coll1_->blockSignals(false);
   return pair;
 }
 

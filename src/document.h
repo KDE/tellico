@@ -151,6 +151,7 @@ public:
    * @return A QPair of the merged entries, see note in datavectors.h
    */
   MergePair mergeCollection(CollPtr coll);
+  static MergePair mergeCollection(CollPtr targetColl, CollPtr sourceColl);
   /**
    * Replace the current collection with a new one. Effectively, this is equivalent to opening
    * a new file containing this collection.

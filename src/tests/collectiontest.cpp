@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2016 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,6 +32,7 @@
 #include "../collectionfactory.h"
 #include "../collections/collectioninitializer.h"
 #include "../translators/tellicoxmlexporter.h"
+#include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
 #include "../document.h"
 
@@ -541,4 +542,38 @@ void CollectionTest::testAppendCollection() {
   QCOMPARE(coll1->entryCount(), 1);
   Tellico::Data::EntryList e1 = coll1->entries();
   QCOMPARE(e1.at(0)->collection(), coll1);
+}
+
+void CollectionTest::testMergeCollection() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
+
+  Tellico::Import::TellicoImporter importer1(url);
+  Tellico::Data::CollPtr coll1 = importer1.collection();
+  QVERIFY(coll1);
+
+  Tellico::Import::TellicoImporter importer2(url);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  QVERIFY(coll2);
+
+  QCOMPARE(coll1->entryCount(), coll2->entryCount());
+
+  // merge coll2 into coll1
+  // first item is a vector of all entries that got added in the merge process
+  // second item is a pair of entries that had their table field modified
+  // typedef QVector< QPair<EntryPtr, QString> > PairVector;
+  // typedef QPair<Data::EntryList, PairVector> MergePair;
+  Tellico::Data::MergePair mergePair = Tellico::Data::Document::mergeCollection(coll1, coll2);
+
+  // since the merge was two identical collections, no new entries should have been added
+  QVERIFY(mergePair.first.isEmpty());
+  // no table fields edited either
+  QVERIFY(mergePair.second.isEmpty());
+
+  // check item count
+  QCOMPARE(coll1->fields().count(), coll2->fields().count());
+  QCOMPARE(coll1->entryCount(), coll2->entryCount());
+
+  QBENCHMARK {
+    Tellico::Data::Document::mergeCollection(coll1, coll2);
+  }
 }
