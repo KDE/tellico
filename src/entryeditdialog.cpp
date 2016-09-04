@@ -75,8 +75,6 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|
                                                      QDialogButtonBox::Close|
                                                      QDialogButtonBox::Apply);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-//  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
   connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
   mainLayout->addWidget(buttonBox);
 
@@ -96,6 +94,10 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   connect(m_newButton, SIGNAL(clicked()), SLOT(slotHandleNew()));
 }
 
+void EntryEditDialog::reject() {
+  slotClose();
+}
+
 void EntryEditDialog::slotHelp() {
   KHelpClient::invokeHelp(QLatin1String("entry-editor"));
 }
@@ -104,7 +106,7 @@ void EntryEditDialog::slotClose() {
   // check to see if an entry should be saved before hiding
   // block signals so the entry view and selection isn't cleared
   if(queryModified()) {
-    hide();
+    accept();
     // make sure to reset values in the dialog
     m_needReset = true;
     setContents(m_currEntries);
@@ -764,7 +766,11 @@ void EntryEditDialog::hideEvent(QHideEvent* event_) {
   KWindowConfig::saveWindowSize(windowHandle(), config);
   config.sync();
 
-  QDialog::hideEvent(event_);
+  if(queryModified()) {
+    QDialog::hideEvent(event_);
+  } else {
+    event_->ignore();
+  }
 }
 
 void EntryEditDialog::closeEvent(QCloseEvent* event_) {

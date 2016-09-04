@@ -119,6 +119,10 @@ public Q_SLOTS:
    * the widgets will be enabled or not, depending on whether the rest of the entries match the first one.
    */
   void setContents(Tellico::Data::EntryList entries);
+  /**
+   * Override the implmentation to check whether the entry needs to be modified
+   */
+  virtual void reject();
 
 protected Q_SLOTS:
   void slotHelp();
