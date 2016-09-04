@@ -108,9 +108,10 @@ public:
    * Saves the document contents to a file.
    *
    * @param url The location to save the file
+   * @param force Boolean indicating the file should be overwritten if necessary
    * @return A boolean indicating success
    */
-  bool saveDocument(const QUrl& url);
+  bool saveDocument(const QUrl& url, bool force = false);
   /**
    * Closes the document, deleting the contents. The return value is presently always true.
    *

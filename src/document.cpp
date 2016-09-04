@@ -173,7 +173,7 @@ bool Document::openDocument(const QUrl& url_) {
   return true;
 }
 
-bool Document::saveDocument(const QUrl& url_) {
+bool Document::saveDocument(const QUrl& url_, bool force_) {
   // FileHandler::queryExists calls FileHandler::writeBackupFile
   // so the only reason to check queryExists() is if the url to write to is different than the current one
   if(url_ == m_url) {
@@ -181,7 +181,7 @@ bool Document::saveDocument(const QUrl& url_) {
       return false;
     }
   } else {
-    if(!FileHandler::queryExists(url_)) {
+    if(!force_ && !FileHandler::queryExists(url_)) {
       return false;
     }
   }

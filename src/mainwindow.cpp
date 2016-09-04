@@ -1274,7 +1274,9 @@ bool MainWindow::fileSaveAs() {
   bool ret = true;
   if(url.isValid()) {
     GUI::CursorSaver cs(Qt::WaitCursor);
-    if(Data::Document::self()->saveDocument(url)) {
+    m_savingImageLocationChange = true;
+    // Overwriting an existing file was already confirmed in QFileDialog::getSaveFileUrl()
+    if(Data::Document::self()->saveDocument(url, true /* force */)) {
       Kernel::self()->resetHistory();
       KRecentDocument::add(url);
       m_fileOpenRecent->addUrl(url);
@@ -1285,6 +1287,7 @@ bool MainWindow::fileSaveAs() {
     } else {
       ret = false;
     }
+    m_savingImageLocationChange = false;
   }
 
   StatusBar::self()->clearStatus();
