@@ -240,10 +240,6 @@ bool ExportDialog::exportURL(const QUrl& url_/*=QUrl()*/) const {
     return false;
   }
 
-  if(!url_.isEmpty() && !FileHandler::queryExists(url_)) {
-    return false;
-  }
-
   // exporter might need to know final URL, say for writing images or something
   m_exporter->setURL(url_);
   if(m_exportSelected->isChecked()) {
