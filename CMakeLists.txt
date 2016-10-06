@@ -104,14 +104,17 @@ if(KF5Sane_FOUND)
     include_directories(${KF5Sane_INCLUDE_DIR})
 endif(KF5Sane_FOUND)
 
-find_package(QImageBlitz 5.0)
-set_package_properties(QImageBlitz PROPERTIES
-    DESCRIPTION "Support for image gradients in the default template"
-    URL "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qimageblitz/html/"
-    TYPE OPTIONAL)
-if(QIMAGEBLITZ_FOUND)
-    include_directories(${QIMAGEBLITZ_INCLUDES})
-endif(QIMAGEBLITZ_FOUND)
+# Use pkg-config just to check QImageBlitz library version since CMake doesn't
+# can't just use pkg-config because qimageblitz.pc doesn't seem to have correct includes and linking
+pkg_check_modules (QImageBlitz qimageblitz>=5.0)
+if(QImageBlitz_FOUND)
+    find_package(QImageBlitz 5.0)
+    set_package_properties(QImageBlitz PROPERTIES
+        DESCRIPTION "Support for image gradients in the default template"
+        URL "http://api.kde.org/kdesupport-api/kdesupport-apidocs/qimageblitz/html/"
+        TYPE OPTIONAL)
+        include_directories(${QIMAGEBLITZ_INCLUDES})
+endif(QImageBlitz_FOUND)
 
 #macro_optional_find_package(KdepimLibs 4.5)
 #macro_log_feature(KDEPIMLIBS_FOUND "kdepimlibs" "Support for using the address book and calendar for loans" "http://pim.kde.org" FALSE "4.5.0" "")
