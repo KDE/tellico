@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testMergeFields();
   void testAppendCollection();
   void testMergeCollection();
+  void testMergeBenchmark();
 };
 
 #endif

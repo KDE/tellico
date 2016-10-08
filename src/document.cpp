@@ -308,21 +308,44 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
 
   EntryList currEntries = coll1_->entries();
   EntryList newEntries = coll2_->entries();
+  std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(QLatin1String("title")));
+  std::sort(newEntries.begin(), newEntries.end(), Data::EntryCmp(QLatin1String("title")));
+
+  const int currTotal = currEntries.count();
+  int lastMatchId = 0;
+  bool checkSameId = false; // if the matching entries have the same id, then check that first for later comparisons
   foreach(EntryPtr newEntry, newEntries) {
     int bestMatch = 0;
-    Data::EntryPtr matchEntry;
-    foreach(EntryPtr currEntry, currEntries) {
-      int match = coll1_->sameEntry(currEntry, newEntry);
-      if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
+    Data::EntryPtr matchEntry, currEntry;
+    // first, if we're checking against same ID
+    if(checkSameId) {
+      currEntry = currEntries.first()->collection()->entryById(newEntry->id());
+      if(currEntry &&
+         currEntry->collection()->sameEntry(currEntry, newEntry) >= EntryComparison::ENTRY_PERFECT_MATCH) {
+        // only have to compare against perfect match
         matchEntry = currEntry;
-        break;
-      } else if(match >= EntryComparison::ENTRY_GOOD_MATCH && match > bestMatch) {
-        bestMatch = match;
-        matchEntry = currEntry;
-        // don't break, keep looking for better one
+      }
+    }
+    if(!matchEntry) {
+      // alternative is to loop over them all
+      for(int i = 0; i < currTotal; ++i) {
+        // since we're sorted by title, track the index of the previous match and starts comparison there
+        currEntry = currEntries.at((i+lastMatchId) % currTotal);
+        int match = currEntry->collection()->sameEntry(currEntry, newEntry);
+        if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
+          matchEntry = currEntry;
+          lastMatchId = (i+lastMatchId) % currTotal;
+          break;
+        } else if(match >= EntryComparison::ENTRY_GOOD_MATCH && match > bestMatch) {
+          bestMatch = match;
+          matchEntry = currEntry;
+          lastMatchId = (i+lastMatchId) % currTotal;
+          // don't break, keep looking for better one
+        }
       }
     }
     if(matchEntry) {
+      checkSameId = checkSameId || (matchEntry->id() == newEntry->id());
       mergeEntry(matchEntry, newEntry);
     } else {
       Data::EntryPtr e(new Data::Entry(*newEntry));

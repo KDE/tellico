@@ -555,7 +555,11 @@ void CollectionTest::testMergeCollection() {
   Tellico::Data::CollPtr coll2 = importer2.collection();
   QVERIFY(coll2);
 
-  QCOMPARE(coll1->entryCount(), coll2->entryCount());
+  Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
+  QCOMPARE(entryToAdd->collection(), coll2);
+  coll2->addEntries(entryToAdd);
+
+  QCOMPARE(coll1->entryCount()+1, coll2->entryCount());
 
   // merge coll2 into coll1
   // first item is a vector of all entries that got added in the merge process
@@ -564,14 +568,31 @@ void CollectionTest::testMergeCollection() {
   // typedef QPair<Data::EntryList, PairVector> MergePair;
   Tellico::Data::MergePair mergePair = Tellico::Data::Document::mergeCollection(coll1, coll2);
 
-  // since the merge was two identical collections, no new entries should have been added
-  QVERIFY(mergePair.first.isEmpty());
+  // one new entry was added
+  QCOMPARE(mergePair.first.count(), 1);
   // no table fields edited either
   QVERIFY(mergePair.second.isEmpty());
 
   // check item count
   QCOMPARE(coll1->fields().count(), coll2->fields().count());
   QCOMPARE(coll1->entryCount(), coll2->entryCount());
+}
+
+void CollectionTest::testMergeBenchmark() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
+
+  Tellico::Import::TellicoImporter importer1(url);
+  Tellico::Data::CollPtr coll1 = importer1.collection();
+  QVERIFY(coll1);
+
+  Tellico::Import::TellicoImporter importer2(url);
+  Tellico::Data::CollPtr coll2 = importer2.collection();
+  QVERIFY(coll2);
+
+  for(int i = 0; i < 100; ++i) {
+    Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
+    coll2->addEntries(entryToAdd);
+  }
 
   QBENCHMARK {
     Tellico::Data::Document::mergeCollection(coll1, coll2);
