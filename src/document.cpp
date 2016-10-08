@@ -203,11 +203,11 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   // case saving will over write the old file that has the images in it!
   if(includeImages) {
     totalSteps = 10;
-    item.setTotalSteps(10);
+    item.setTotalSteps(totalSteps);
     // since TellicoZipExporter uses 100 steps, then it will get 100/110 of the total progress
   } else {
     totalSteps = 100;
-    item.setTotalSteps(100);
+    item.setTotalSteps(totalSteps);
     m_cancelImageWriting = false;
     writeAllImages(imageLocation == Config::ImagesInAppDir ? ImageFactory::DataDir : ImageFactory::LocalDir, url_);
   }
