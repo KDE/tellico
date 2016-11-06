@@ -603,20 +603,27 @@ void ImageFactory::emitImageMismatch() {
   emit imageLocationMismatch();
 }
 
-void ImageFactory::setLocalDirectory(const KUrl& url_) {
+QString ImageFactory::localDirectory(const KUrl& url_) {
   if(url_.isEmpty()) {
-    return;
+    return QString();
   }
   if(!url_.isLocalFile()) {
     myWarning() << "Tellico can only save images to local disk";
     myWarning() << "unable to save to " << url_;
-  } else {
-    QString dir = url_.directory(KUrl::ObeyTrailingSlash | KUrl::AppendTrailingSlash);
-    // could have already been set once
-    if(!url_.fileName().contains(QLatin1String("_files"))) {
-      dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
-    }
-    factory->d->localImageDir.setPath(dir);
+    return QString();
+  }
+  QString dir = url_.directory(KUrl::ObeyTrailingSlash | KUrl::AppendTrailingSlash);
+  // could have already been set once
+  if(!url_.fileName().contains(QLatin1String("_files"))) {
+    dir += url_.fileName().section(QLatin1Char('.'), 0, 0) + QLatin1String("_files/");
+  }
+  return dir;
+}
+
+void ImageFactory::setLocalDirectory(const QUrl& url_) {
+  const QString localDirName = localDirectory(url_);
+  if(!localDirName.isEmpty()) {
+    factory->d->localImageDir.setPath(localDirName);
   }
 }
 

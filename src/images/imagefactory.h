@@ -149,6 +149,7 @@ public:
   static void removeImage(const QString& id_, bool deleteImage);
   static StringSet imagesNotInCache();
 
+  static QString localDirectory(const KUrl& url);
   static void setLocalDirectory(const KUrl& url);
   static void setZipArchive(KZip* zip);
 
