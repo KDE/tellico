@@ -520,7 +520,7 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     // just to make sure all the image locations clean themselves up
     // delete the factory (which deletes the storage objects) and
     // then recreate the factory, in case anything else needs it
-    // be sure to save local image directory if it's not a temp dir1
+    // be sure to save local image directory if it's not a temp dir!
     const QString localDirName = localDir();
     delete factory;
     factory = 0;
@@ -633,21 +633,28 @@ void ImageFactory::emitImageMismatch() {
   emit imageLocationMismatch();
 }
 
-void ImageFactory::setLocalDirectory(const QUrl& url_) {
+QString ImageFactory::localDirectory(const QUrl& url_) {
   if(url_.isEmpty()) {
-    return;
+    return QString();
   }
   if(!url_.isLocalFile()) {
     myWarning() << "Tellico can only save images to local disk";
     myWarning() << "unable to save to " << url_;
-  } else {
-    QString dir = url_.adjusted(QUrl::RemoveFilename).path();
-    // could have already been set once
-    if(!dir.contains(QLatin1String("_files"))) {
-      QFileInfo fi(url_.fileName());
-      dir += fi.completeBaseName() + QLatin1String("_files/");
-    }
-    factory->d->localImageDir.setPath(dir);
+    return QString();
+  }
+  QString dir = url_.adjusted(QUrl::RemoveFilename).path();
+  // could have already been set once
+  if(!dir.contains(QLatin1String("_files"))) {
+    QFileInfo fi(url_.fileName());
+    dir += fi.completeBaseName() + QLatin1String("_files/");
+  }
+  return dir;
+}
+
+void ImageFactory::setLocalDirectory(const QUrl& url_) {
+  const QString localDirName = localDirectory(url_);
+  if(!localDirName.isEmpty()) {
+    factory->d->localImageDir.setPath(localDirName);
   }
 }
 
