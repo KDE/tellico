@@ -283,15 +283,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
                           (dir_ == TempDir ? &factory->d->tempImageDir :
                                              &factory->d->localImageDir);
   Q_ASSERT(imgDir);
-  bool exists = imgDir->hasImage(id_);
-  // only write if it doesn't exist
-  bool success = (!force_ && exists);
-  if(!success) {
-    const Data::Image& img = imageById(id_);
-    if(!img.isNull()) {
-      success = imgDir->writeImage(img);
-    }
-  }
+  bool success = writeCachedImage(id_, imgDir, force_);
 
   if(success) {
     // remove from dict and add to cache
@@ -303,6 +295,24 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
       if(factory->d->imageCache.insert(img->id(), img, img->numBytes())) {
         s_imageInfoMap.remove(id_);
       }
+    }
+  }
+  return success;
+}
+
+bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_, bool force_ /*=false*/) {
+  if(id_.isEmpty() || !imgDir_) {
+    return false;
+  }
+// myLog() << "looking in" << imgDir_->path();
+  bool exists = imgDir_->hasImage(id_);
+  // only write if it doesn't exist
+  bool success = (!force_ && exists);
+  if(!success) {
+    const Data::Image& img = imageById(id_);
+    if(!img.isNull()) {
+//      myLog() << "writing image";
+      success = imgDir_->writeImage(img);
     }
   }
   return success;
@@ -370,37 +380,42 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
     }
   }
 
-  CacheDir dir1 = TempDir;
-  CacheDir dir2 = TempDir;
-  ImageDirectory* imgDir1 = 0;
-  ImageDirectory* imgDir2 = 0;
+  // This section uses the config image setting plus the fallback location
+  // to provide confidence that the user's image can be found
+  CacheDir configLoc = TempDir;
+  CacheDir fallbackLoc = TempDir;
+  ImageDirectory* configImgDir = 0;
+  ImageDirectory* fallbackImgDir = 0;
   if(Config::imageLocation() == Config::ImagesInLocalDir) {
-    dir1 = LocalDir;
-    dir2 = DataDir;
-    imgDir1 = &factory->d->localImageDir;
-    imgDir2 = &factory->d->dataImageDir;
+    configLoc = LocalDir;
+    fallbackLoc = DataDir;
+    configImgDir = &factory->d->localImageDir;
+    fallbackImgDir = &factory->d->dataImageDir;
   } else if(Config::imageLocation() == Config::ImagesInAppDir) {
-    dir1 = DataDir;
-    dir2 = LocalDir;
-    imgDir1 = &factory->d->dataImageDir;
-    imgDir2 = &factory->d->localImageDir;
+    configLoc = DataDir;
+    fallbackLoc = LocalDir;
+    configImgDir = &factory->d->dataImageDir;
+    fallbackImgDir = &factory->d->localImageDir;
   }
 
-  if(imgDir1 && imgDir1->hasImage(id_)) {
-    const Data::Image& img2 = factory->addCachedImageImpl(id_, dir1);
+  // check the configured location first
+  if(configImgDir && configImgDir->hasImage(id_)) {
+    const Data::Image& img2 = factory->addCachedImageImpl(id_, configLoc);
     if(!img2.isNull()) {
+//      myLog() << "found image in configured location" << configImgDir->path();
       return img2;
     } else {
-      myDebug() << "tried to add" << id_ << "from" << imgDir1->path() << "but failed";
+      myDebug() << "tried to add" << id_ << "from" << configImgDir->path() << "but failed";
     }
-  } else if(imgDir2 && imgDir2->hasImage(id_)) {
-    const Data::Image& img2 = factory->addCachedImageImpl(id_, dir2);
+  } else if(fallbackImgDir && fallbackImgDir->hasImage(id_)) {
+    const Data::Image& img2 = factory->addCachedImageImpl(id_, fallbackLoc);
     if(!img2.isNull()) {
+//      myLog() << "found image in fallback location" << fallbackImgDir->path();
       // the img is in the other location
       factory->emitImageMismatch();
       return img2;
     } else {
-      myDebug() << "tried to add" << id_ << "from" << imgDir2->path() << "but failed";
+      myDebug() << "tried to add" << id_ << "from" << fallbackImgDir->path() << "but failed";
     }
   }
   // at this point, there's a possibility that the user has changed settings so that the images
@@ -408,12 +423,14 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   if(factory->d->dataImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, DataDir);
     if(!img2.isNull()) {
+//      myLog() << "found image in data dir location";
       return img2;
     }
   }
   if(factory->d->localImageDir.hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, LocalDir);
     if(!img2.isNull()) {
+//      myLog() << "found image in local dir location";
       return img2;
     }
   }
@@ -620,7 +637,7 @@ QString ImageFactory::localDirectory(const KUrl& url_) {
   return dir;
 }
 
-void ImageFactory::setLocalDirectory(const QUrl& url_) {
+void ImageFactory::setLocalDirectory(const KUrl& url_) {
   const QString localDirName = localDirectory(url_);
   if(!localDirName.isEmpty()) {
     factory->d->localImageDir.setPath(localDirName);

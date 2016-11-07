@@ -43,6 +43,7 @@ namespace Tellico {
     class Image;
     class ImageInfo;
   }
+  class ImageDirectory;
 
 class StyleOptions {
 public:
@@ -119,6 +120,7 @@ public:
   static QString addImage(const QByteArray& data, const QString& format, const QString& id);
 
   static bool writeCachedImage(const QString& id, CacheDir dir, bool force = false);
+  static bool writeCachedImage(const QString& id, ImageDirectory* dir, bool force = false);
 
   /**
    * Returns an image reference given its id. If none is found, a null image

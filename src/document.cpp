@@ -33,6 +33,7 @@
 #include "fieldformat.h"
 #include "tellico_strings.h"
 #include "images/imagefactory.h"
+#include "images/imagedirectory.h"
 #include "images/image.h"
 #include "images/imageinfo.h"
 #include "utils/stringset.h"
@@ -529,15 +530,18 @@ void Document::slotLoadAllImages() {
   m_importer = 0;
 }
 
+// cacheDir_ is the location dir to write the images
+// localDir_ provide the new file location which is only needed if cacheDir == LocalDir
 void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
   // images get 80 steps in saveDocument()
   const uint stepSize = 1 + qMax(1, m_coll->entryCount()/80); // add 1 since it could round off
   uint j = 1;
 
-  QString oldLocalDir = ImageFactory::localDir();
-  ImageFactory::setLocalDirectory(localDir_);
-
   ImageFactory::CacheDir cacheDir = static_cast<ImageFactory::CacheDir>(cacheDir_);
+  ImageDirectory* imgDir = 0;
+  if(cacheDir == ImageFactory::LocalDir) {
+    imgDir = new ImageDirectory(ImageFactory::localDirectory(localDir_));
+  }
 
   QString id;
   StringSet images;
@@ -553,7 +557,14 @@ void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
       if(ImageFactory::imageInfo(id).linkOnly) {
         continue;
       }
-      if(!ImageFactory::writeCachedImage(id, cacheDir)) {
+      // careful here, if we're writing to LocalDir, need to read from the old LocalDir and write to new
+      bool success;
+      if(cacheDir == ImageFactory::LocalDir) {
+        success = ImageFactory::writeCachedImage(id, imgDir);
+      } else {
+        success = ImageFactory::writeCachedImage(id, cacheDir);
+      }
+      if(!success) {
         myDebug() << "did not write image for entry title:" << entry->title();
       }
       if(m_cancelImageWriting) {
@@ -575,7 +586,6 @@ void Document::writeAllImages(int cacheDir_, const KUrl& localDir_) {
   }
 
   m_cancelImageWriting = false;
-  ImageFactory::setLocalDirectory(oldLocalDir);
 }
 
 bool Document::pruneImages() {

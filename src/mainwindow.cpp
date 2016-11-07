@@ -1185,7 +1185,7 @@ bool MainWindow::fileSave() {
     ret = fileSaveAs();
   } else {
     // special check: if there are more than 200 images AND the "Write Images In File" config key
-    // is not set, then warn user that performance may suffer, and write result
+    // is set, then warn user that performance may suffer, and write result
     if(Config::imageLocation() == Config::ImagesInFile &&
        Config::askWriteImagesInFile() &&
        Data::Document::self()->imageCount() > MAX_IMAGES_WARN_PERFORMANCE) {
