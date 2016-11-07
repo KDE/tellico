@@ -88,36 +88,45 @@ void DocumentTest::testImageLocalDirectory() {
   // clear the internal image cache
   Tellico::ImageFactory::clean(true);
 
+  // verify that the images are copied from the old directory when saving to a new file
+  QString fileName2 = tempDirName + "/with-image2.tc";
+  QString imageDirName2 = tempDirName + "/with-image2_files/";
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QVERIFY(QFile::exists(fileName2));
+  QDir imageDir2(imageDirName2);
+  QVERIFY(imageDir2.exists());
+  QVERIFY(imageDir2.exists(e->field(QLatin1String("cover"))));
+
   /*************************************************************************/
   /* now also verify image directory when file name has multiple periods */
   /* see https://bugs.kde.org/show_bug.cgi?id=348088 */
   /* also have to check backwards compatibility with prior behavior */
   /*************************************************************************/
 
-  QString fileName2 = tempDirName + "/with-image.1.tc";
-  QString imageDirName2 = tempDirName + "/with-image.1_files/";
+  QString fileName3 = tempDirName + "/with-image.1.tc";
+  QString imageDirName3 = tempDirName + "/with-image.1_files/";
 
   // copy the collection file, which no longer contains the images inside
-  QVERIFY(QFile::copy(fileName, fileName2));
-  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName2)));
-  QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName2);
-  QDir imageDir2(imageDirName2);
+  QVERIFY(QFile::copy(fileName, fileName3));
+  QVERIFY(doc->openDocument(QUrl::fromLocalFile(fileName3)));
+  QCOMPARE(Tellico::ImageFactory::localDir(), imageDirName3);
+  QDir imageDir3(imageDirName3);
 
   // verify that the images can be loaded from the image directory that does NOT have multiple periods
   // since that was the behavior prior to the bug being fixed
   coll = doc->collection();
   e = coll->entries().at(0);
   // image should not be in the next image dir yet since we haven't saved
-  QVERIFY(!imageDir2.exists(e->field(QLatin1String("cover"))));
+  QVERIFY(!imageDir3.exists(e->field(QLatin1String("cover"))));
   QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
 
   // now remove the first image from the first image directory, save the document, and verify that
   // the proper image exists and is written
   QVERIFY(imageDir.remove(e->field("cover")));
   QVERIFY(!imageDir.exists(e->field(QLatin1String("cover"))));
-  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName2)));
+  QVERIFY(doc->saveDocument(QUrl::fromLocalFile(fileName3)));
   // now the file should exist in the proper location
-  QVERIFY(imageDir2.exists(e->field(QLatin1String("cover"))));
+  QVERIFY(imageDir3.exists(e->field(QLatin1String("cover"))));
   // clear the cache
   Tellico::ImageFactory::clean(true);
   QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
