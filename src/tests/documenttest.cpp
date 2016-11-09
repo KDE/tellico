@@ -131,7 +131,7 @@ void DocumentTest::testImageLocalDirectory() {
   Tellico::ImageFactory::clean(true);
   QVERIFY(!Tellico::ImageFactory::imageById(e->field("cover")).isNull());
 
-  // sanity check, the directory should not exists after KTempDir destruction
+  // sanity check, the directory should not exists after QTemporaryDir destruction
   tempDir.remove();
   QVERIFY(!QDir(tempDirName).exists());
 }
