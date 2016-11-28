@@ -43,6 +43,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  KLocalizedString::setApplicationDomain("tellico");
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
   // Migrate KDE4 configuration and data files 
