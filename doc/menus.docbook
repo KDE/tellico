@@ -10,14 +10,14 @@ or menu bars.
 -->
 
 <sect1 id="main-window-menus">
-<title>The Main &appname; Window</title>
+<title>The Main &tellico; Window</title>
 
 <para>Each menu item is discussed below. When there is a keyboard shortcut that
 performs a menu item function, the default shortcut is listed with the menu item.
 </para>
 
 <sect2>
-<title>The <guimenu>File</guimenu> Menu</title>
+<title>The File Menu</title>
 
 <para>
 <variablelist>
@@ -31,7 +31,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>creates a new collection</action>. &appname; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection.</para>
+<para>This command <action>creates a new collection</action>. &tellico; supports <link linkend="collection-types">12 default collection types</link> along with an empty user-defined custom collection.</para>
 </listitem>
 </varlistentry>
 
@@ -47,7 +47,7 @@ performs a menu item function, the default shortcut is listed with the menu item
 </term>
 
 <listitem>
-<para>This command <action>opens a &appname; file</action>.</para>
+<para>This command <action>opens a &tellico; file</action>.</para>
 </listitem>
 </varlistentry>
 
@@ -87,6 +87,9 @@ modified.</para>
 <varlistentry>
 <term>
  <menuchoice>
+  <shortcut>
+   <keycombo>&Ctrl;&Shift;<keycap>S</keycap></keycombo>
+  </shortcut>
   <guimenu>File</guimenu>
   <guimenuitem>Save As...</guimenuitem>
  </menuchoice>
@@ -122,7 +125,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>imports data from another file</action>. &appname; can import data from a number of <link linkend="importing">other formats</link>.</para>
+<para>This command <action>imports data from another file</action>. &tellico; can import data from a number of <link linkend="importing">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
@@ -135,7 +138,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>exports the collection to another format</action>. &appname; can export data to a number of <link linkend="exporting">other formats</link>.</para>
+<para>This command <action>exports the collection to another format</action>. &tellico; can export data to a number of <link linkend="exporting">other formats</link>.</para>
 </listitem>
 </varlistentry>
 
@@ -151,7 +154,7 @@ modified.</para>
 </term>
 
 <listitem>
-<para>This command <action>closes the &appname; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
+<para>This command <action>closes the &tellico; window</action>. If the collection has unsaved changes, you will be prompted to save them before continuing.</para>
 </listitem>
 </varlistentry>
 
@@ -161,7 +164,7 @@ modified.</para>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% EDIT MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title>The <guimenu>Edit</guimenu> Menu</title>
+<title>The Edit Menu</title>
 
 <para>
 
@@ -318,7 +321,7 @@ modified.</para>
 
 <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% COLLECTION MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title>The <guimenu>Collection</guimenu> Menu</title>
+<title>The Collection Menu</title>
 <para>
 
 <variablelist>
@@ -565,38 +568,15 @@ source and <action>update the selected entries</action>.</para>
 </para>
 </sect2>
 
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SETTINGS / HELP MENU %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 <sect2>
-<title>The <guimenu>Settings</guimenu> Menu</title>
-<para>
+<title>The Settings and Help Menu</title>
+
+<para>Apart from the common &kde; Settings and Help menus described in the <ulink url="help:/fundamentals/ui.html#menus">Menu</ulink>
+chapter of the &kde; Fundamentals documentation &tellico; has these application specific menu entries:
+</para>
 
 <variablelist>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Toolbars Shown</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>toggles the display of the toolbars</action>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Show Statusbar</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>toggles the display of the statusbar</action>.</para>
-</listitem>
-</varlistentry>
 
 <varlistentry>
 <term>
@@ -634,74 +614,6 @@ source and <action>update the selected entries</action>.</para>
 
 <listitem>
 <para>This command <action>changes the field used to group the entries</action> in the collection.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Configure Shortcuts...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &kde; <interface>Keyboard Shortcut Configuration Dialog</interface></action>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Configure Toolbars...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &kde; <interface>Toolbar Configuration Dialog</interface></action>.</para>
-</listitem>
-</varlistentry>
-
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Settings</guimenu>
-  <guimenuitem>Configure &appname;...</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the &appname; <interface>Configuration Dialog</interface></action>.</para>
-</listitem>
-</varlistentry>
-
-</variablelist>
-
-</para>
-</sect2>
-
-<sect2>
-<title>The <guimenu>Help</guimenu> Menu</title>
-
-<para>These are the &kde; standard items for the <guimenu>Help</guimenu> menu:</para>
-
-&help.menu.documentation;
-
-<para>Apart from the standard &kde; <guimenu>Help</guimenu> menu items
-described above &appname; has this additional menu entry:</para>
-
-<variablelist>
-<varlistentry>
-<term>
- <menuchoice>
-  <guimenu>Help</guimenu>
-  <guimenuitem>Tip of the Day</guimenuitem>
- </menuchoice>
-</term>
-
-<listitem>
-<para>This command <action>opens the Tip of the Day dialog</action>. You can page through all the tips by using the buttons on the dialog.</para>
 </listitem>
 </varlistentry>
 

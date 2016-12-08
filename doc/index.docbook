@@ -1,8 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY appname '<application>Tellico</application>'>
-  <!ENTITY kappname "&appname;">
-  <!ENTITY package "extragear/office">
+  <!ENTITY kappname "&tellico;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE"><!-- change language only here -->
 
@@ -44,7 +42,7 @@ Do NOT change these in the translation. -->
 <date>28/08/2009</date>
 <releaseinfo>2.0</releaseinfo>
 
-<title>The &appname; Handbook</title>
+<title>The &tellico; Handbook</title>
 
 <authorgroup>
 <author>
@@ -85,7 +83,7 @@ For licensing information of both the software and this documentation, please re
 
 <abstract>
 <para>
-This document is a handbook for using &appname;, a collection manager software application.
+This document is a handbook for using &tellico;, a collection manager software application.
 </para>
 </abstract>
 
@@ -126,10 +124,10 @@ problems. Basically a long version of the abstract.  Don't include a
 revision history. (see installation appendix comment) -->
 
 <sect1 id="tellico-intro">
-<title>&appname;</title>
+<title>&tellico;</title>
 
 <para>
-&appname; is a program for managing collections. It began as a simple
+&tellico; is a program for managing collections. It began as a simple
 book collection manager, and has expanded to include default
 collection templates for bibliographies, comic books, videos, music,
 coins, stamps, trading cards, video games, wines, board games, and file listings.
@@ -137,10 +135,10 @@ In addition, custom collections can be built for any other type of collectibles.
 </para>
 
 <sect2 id="what-tellico-is">
-<title>What &appname; Is</title>
+<title>What &tellico; Is</title>
 
 <para>
-&appname; keeps track of the items in a collection, and offers
+&tellico; keeps track of the items in a collection, and offers
 an easy way to enter data for each entry. It provides several
 field types, and allows for an unlimited number of
 user-defined fields. The entries in a collection may be grouped by any
@@ -157,19 +155,19 @@ or publication of data.
 </sect2>
 
 <sect2 id="what-tellico-is-not">
-<title>What &appname; Is Not</title>
+<title>What &tellico; Is Not</title>
 
 <para>
-&appname; is not an audio or video player. It does not provide
+&tellico; is not an audio or video player. It does not provide
 facilities for reading or modifying multimedia files. It also does
-not provide any image-editing functionality. Although &appname; has some
+not provide any image-editing functionality. Although &tellico; has some
 functionality for managing bibliography lists, it is not a full-blown
-bibliographic reference manager. &appname; also does not pretend to have
+bibliographic reference manager. &tellico; also does not pretend to have
 all the capabilities of a full-fledged relational database.
 </para>
 
 <para>
-As somewhat of a disclaimer, &appname; is a hobby for the author, and no
+As somewhat of a disclaimer, &tellico; is a hobby for the author, and no
 guarantees are made about its functionality, usefullness, or otherwise.
 More information is included in the
 <link linkend="credits">license declaration</link>.
@@ -184,9 +182,9 @@ More information is included in the
 <sect2 id="collections">
 <title>Collections</title>
 <para>
-In &appname;, a collection is the document. Only one collection exists in each &appname;
+In &tellico;, a collection is the document. Only one collection exists in each &tellico;
 file. A collection contains any number of <link linkend="fields">fields</link> and
-<link linkend="entries">entries</link>. &appname; supports 12 specific collection types by
+<link linkend="entries">entries</link>. &tellico; supports 12 specific collection types by
 default: books, bibliographic entries, comic books, videos, music, trading cards, coins, stamps,
 video games, wines, board games, and file listings. In addition, an empty generic collection
 template is available for any other type of collectibles or lists.
@@ -196,7 +194,7 @@ template is available for any other type of collectibles or lists.
 <sect2 id="fields">
 <title>Collection Fields</title>
 <para>
-Each collection may have an unlimited number of fields. &appname; supports eleven types of fields,
+Each collection may have an unlimited number of fields. &tellico; supports eleven types of fields,
 which allow for a range of different data. The fields can be edited with the
 <link linkend="fields-dialog"><interface>Collection Fields Dialog</interface></link> and are explained further in the
 <link linkend="field-types">Field Types</link> section.
@@ -207,15 +205,15 @@ which allow for a range of different data. The fields can be edited with the
 <title>Collection Entries</title>
 
 <para>
-An entry is the basic record in &appname;. Each entry contains a single value for each field in
+An entry is the basic record in &tellico;. Each entry contains a single value for each field in
 the collection. A collection may have an unlimited number of entries, in theory, although since
 the whole collection is always resident in memory, too many entries could slow down the application.
 </para>
 
 <para>
-&appname; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
+&tellico; has been tested with a collection of 10,000 entries, and the speed was satisfactory.
 However, if many large images are included in the collection, the loading and processing time
-does slow down greatly. Performance can be improved by having &appname; store images separate from
+does slow down greatly. Performance can be improved by having &tellico; store images separate from
 the data file itself, either in the application-specific folder or a folder relative to
 the data file. More information can be found in the
 <link linkend="configuration">configuration section</link>.
@@ -253,7 +251,7 @@ file included in the KDE distribution. -->
 <title>Credits and License</title>
 
 <para>
-&appname;
+&tellico;
 </para>
 <para>
 Program copyright 2001-2011 &robby; <email>&email;</email>
@@ -271,27 +269,6 @@ Documentation copyright 2001-2011 &robby; <email>&email;</email>
 url="http://www.freebsd.org/copyright/freebsd-doc-license.html">FreeBSD Documentation License</ulink>, if you so choose. If you wish to allow use of your version of this content only under the terms of the FreeBSD Documentation License, and not to allow others to use your version of this file under the terms of the GFDL, indicate your decision by deleting the GFDL notice and replacing it with the notice and other provisions required by the FreeBSD Documentation License. If you do not delete the GFDL notice above, a recipient may use your version of this file under the terms of either the GFDL or the FreeBSD Documentation License.</para>
 
 </chapter>
-
-<appendix id="installation">
-<title>Installation</title>
-
-<sect1 id="getting-tellico">
-<title>How to obtain &appname;</title>
-
-<para>
-The &appname; home page is
-<ulink url="&homepage;">&homepage;</ulink>.
-Updates and news can be found there.</para>
-</sect1>
-
-<sect1 id="compilation">
-<title>Compilation and Installation</title>
-
-&install.compile.documentation;
-
-</sect1>
-
-</appendix>
 
 &documentation.index;
 
