@@ -35,12 +35,6 @@
 
 namespace Tellico {
 
-  enum SaveState {
-    NormalState,
-    NewState,
-    ModifiedState
-  };
-
   namespace Data {
     class Collection;
     class EntryGroup;

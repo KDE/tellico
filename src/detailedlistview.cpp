@@ -34,6 +34,7 @@
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
 #include "models/modelmanager.h"
+#include "gui/detailedentryitemdelegate.h"
 
 #include <KLocalizedString>
 #include <KSharedConfig>
@@ -42,33 +43,6 @@
 #include <QMouseEvent>
 #include <QHeaderView>
 #include <QContextMenuEvent>
-#include <QStyledItemDelegate>
-
-namespace Tellico {
-
-class DetailedEntryItemDelegate : public QStyledItemDelegate {
-public:
-  DetailedEntryItemDelegate(QObject* parent) : QStyledItemDelegate(parent) {}
-
-protected:
-  void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const {
-    QStyledItemDelegate::initStyleOption(option, index);
-
-    QStyleOptionViewItemV4* opt = ::qstyleoption_cast<QStyleOptionViewItemV4*>(option);
-    const int state = index.data(SaveStateRole).toInt();
-    if(state == NewState || state == ModifiedState) {
-      opt->font.setBold(true);
-      opt->font.setItalic(true);
-    }
-    // since the model returns an icon for the title, turn it off for the list view
-    // here we assume that column 0 is always the title field
-    if(index.column() == 0) {
-      opt->features ^= QStyleOptionViewItemV2::HasDecoration;
-    }
-  }
-};
-
-}
 
 using namespace Tellico;
 using Tellico::DetailedListView;

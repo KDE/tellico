@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,27 +22,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_MODELS_H
-#define TELLICO_MODELS_H
+#ifndef TELLICO_DETAILEDENTRYITEMDELEGATE_H
+#define TELLICO_DETAILEDENTRYITEMDELEGATE_H
 
-#include <qnamespace.h>
+#include <QStyledItemDelegate>
 
 namespace Tellico {
 
-  enum SaveState {
-    NormalState,
-    NewState,
-    ModifiedState
-  };
+class DetailedEntryItemDelegate : public QStyledItemDelegate {
+public:
+  DetailedEntryItemDelegate(QObject* parent) : QStyledItemDelegate(parent) {}
 
-  enum ModelRole {
-    RowCountRole = Qt::UserRole + 1,
-    EntryPtrRole,
-    FieldPtrRole,
-    GroupPtrRole,
-    SaveStateRole,
-    ValidParentRole
-  };
+protected:
+  void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const;
+};
 
-} // end namespace
+} // end namespace;
 #endif

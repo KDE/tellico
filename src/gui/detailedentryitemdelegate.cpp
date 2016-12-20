@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,27 +22,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_MODELS_H
-#define TELLICO_MODELS_H
+#include "detailedentryitemdelegate.h"
+#include "../models/models.h"
 
-#include <qnamespace.h>
+using namespace Tellico;
+using Tellico::DetailedEntryItemDelegate;
 
-namespace Tellico {
+void DetailedEntryItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const {
+  QStyledItemDelegate::initStyleOption(option, index);
 
-  enum SaveState {
-    NormalState,
-    NewState,
-    ModifiedState
-  };
-
-  enum ModelRole {
-    RowCountRole = Qt::UserRole + 1,
-    EntryPtrRole,
-    FieldPtrRole,
-    GroupPtrRole,
-    SaveStateRole,
-    ValidParentRole
-  };
-
-} // end namespace
-#endif
+  QStyleOptionViewItemV4* opt = ::qstyleoption_cast<QStyleOptionViewItemV4*>(option);
+  const int state = index.data(SaveStateRole).toInt();
+  if(state == NewState || state == ModifiedState) {
+    opt->font.setBold(true);
+    opt->font.setItalic(true);
+  }
+}
