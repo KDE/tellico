@@ -1,3 +1,7 @@
+2016-12-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with truncated first two characters of root folder when importing a file listing (Bug 373918).
+
 2016-11-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.0.

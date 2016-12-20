@@ -148,8 +148,8 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     entry->setField(desc,   item.mimeComment());
     entry->setField(vol,    volume);
     tmp = QDir(this->url().toLocalFile()).relativeFilePath(u.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
-    // remove "./" from the string
-    entry->setField(folder, tmp.right(tmp.length()-2));
+    // use empty string for root folder instead of "."
+    entry->setField(folder, tmp == QLatin1String(".") ? QString() : tmp);
     entry->setField(type,   item.mimetype());
     entry->setField(size,   KIO::convertSize(item.size()));
     entry->setField(perm,   item.permissionsString());
