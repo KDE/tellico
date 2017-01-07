@@ -60,7 +60,7 @@ void FileListingTest::testCpp() {
   QCOMPARE(entry->field("title"), QLatin1String("filelistingtest.cpp"));
   QCOMPARE(entry->field("url"), url.url());
   QVERIFY(entry->field("description").contains("C++"));
-  QCOMPARE(entry->field("folder"), QLatin1String(".")); // empty relative folder location
+  QCOMPARE(entry->field("folder"), QLatin1String("")); // empty relative folder location
   QCOMPARE(entry->field("mimetype"), QLatin1String("text/x-c++src"));
   QVERIFY(!entry->field("size").isEmpty());
   QVERIFY(!entry->field("permissions").isEmpty());
