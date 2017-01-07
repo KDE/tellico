@@ -127,28 +127,25 @@ void SRUFetcher::search() {
   u.setScheme(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
-//  u.setPath(QLatin1Char('/') + m_path, QUrl::TolerantMode);
-
-/*
-  QString uStr = QLatin1String("http://") + m_host;
-  if(m_port > 0) {
-    uStr += QLatin1Char(':') + QString::number(m_port);
-  }
-  uStr += QLatin1Char('/') + m_path;
-  u = QUrl::fromUserInput(uStr);
-*/
-  // hack to allow (for now) including extra query terms in the path, avoids double encoding
   u = QUrl::fromUserInput(u.url() + QLatin1Char('/') + m_path);
 
   QUrlQuery query;
-  query.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
-  query.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
-  query.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
-  if(!m_format.isEmpty() && m_format != QLatin1String("none")) {
-    query.addQueryItem(QLatin1String("recordSchema"), m_format);
-  }
   for(StringMap::ConstIterator it = m_queryMap.constBegin(); it != m_queryMap.constEnd(); ++it) {
     query.addQueryItem(it.key(), it.value());
+  }
+  // allow user to override these so check for existing item first
+  if(!query.hasQueryItem(QLatin1String("operation"))) {
+    query.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
+  }
+  if(!query.hasQueryItem(QLatin1String("version"))) {
+    query.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));
+  }
+  if(!query.hasQueryItem(QLatin1String("maximumRecords"))) {
+    query.addQueryItem(QLatin1String("maximumRecords"), QString::number(SRU_MAX_RECORDS));
+  }
+  if(!m_format.isEmpty() && m_format != QLatin1String("none")
+     && !query.hasQueryItem(QLatin1String("recordSchema"))) {
+    query.addQueryItem(QLatin1String("recordSchema"), m_format);
   }
 
   const int type = collectionType();
