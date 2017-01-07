@@ -33,6 +33,9 @@
 #include "../entry.h"
 #include "../utils/datafileregistry.h"
 
+#include <KConfig>
+#include <KConfigGroup>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( SRUFetcherTest )
@@ -78,15 +81,19 @@ void SRUFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-59059-831-8"));
 }
 
+// see http://raoulm.home.xs4all.nl/mcq.htm
 void SRUFetcherTest::testKBTitle() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("KB");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
                                        QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(QLatin1String("KB"),
-                                                                      QLatin1String("jsru.kb.nl"),
-                                                                      80,
-                                                                      QLatin1String("/sru/sru.pl?x-collection=GGC&x-fields=ISBN"),
-                                                                      QLatin1String("dc"),
-                                                                      this));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -94,7 +101,34 @@ void SRUFetcherTest::testKBTitle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
-//  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
+//  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("No Author"));
+  QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("book"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Purmerend : Muusses"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("9023117042"));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1971"));
+  QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
+}
+
+// see http://raoulm.home.xs4all.nl/mcq.htm
+void SRUFetcherTest::testKBIsbn() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("KB");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
+                                       QLatin1String("9023117042"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("book"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Purmerend : Muusses"));
   QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("9023117042"));

@@ -184,6 +184,7 @@ void SRUFetcher::search() {
         QString q;
         for(int i = 0; i < isbnList.count(); ++i) {
           q += QLatin1String("bath.isbn=") + isbnList.at(i);
+//          q += QLatin1String("dc.identifier=") + isbnList.at(i);
           if(i < isbnList.count()-1) {
             q += QLatin1String(" or ");
           }
