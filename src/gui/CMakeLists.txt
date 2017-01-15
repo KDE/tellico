@@ -23,9 +23,11 @@ SET(gui_STAT_SRCS
    parafieldwidget.cpp
    previewdialog.cpp
    progress.cpp
+   ratingdelegate.cpp
    ratingfieldwidget.cpp
    ratingwidget.cpp
    spinbox.cpp
+   starrating.cpp
    statusbar.cpp
    stringmapdialog.cpp
    stringmapwidget.cpp

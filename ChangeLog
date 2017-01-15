@@ -1,3 +1,7 @@
+2017-01-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with Rating drawing size in list view (Bug 372560).
+
 2016-12-19  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with truncated first two characters of root folder when importing a file listing (Bug 373918).

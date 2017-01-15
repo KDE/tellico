@@ -144,6 +144,7 @@ private Q_SLOTS:
   void resizeColumnsToContents();
   void hideNewColumn(const QModelIndex& index, int start, int end);
 //  void slotCacheColumnWidth(int section, int oldSize, int newSize);
+  void updateColumnDelegates();
 
 private:
   void contextMenuEvent(QContextMenuEvent* event);

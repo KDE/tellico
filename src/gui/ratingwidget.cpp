@@ -34,7 +34,7 @@
 #include <QToolButton>
 
 namespace {
-  static const int RATING_WIDGET_MAX_ICONS = 10; // same as in Field::ratingValues()
+  static const int RATING_WIDGET_MAX_ICONS = 10; // same as in Field::convertOldRating()
   static const int RATING_WIDGET_MAX_STAR_SIZE = 24;
 }
 

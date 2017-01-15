@@ -102,8 +102,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       field = this->field(index_);
       if(!field ||
          field->type() == Data::Field::Image ||
-         field->type() == Data::Field::Bool ||
-         field->type() == Data::Field::Rating) {
+         field->type() == Data::Field::Bool) {
         return QVariant();
       }
       entry = this->entry(index_);
