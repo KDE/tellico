@@ -31,7 +31,6 @@
 #include "../document.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
-#include "../utils/tellico_utils.h"
 #include "../core/tellico_config.h"
 #include "../tellico_debug.h"
 
