@@ -157,8 +157,6 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(field->type() == Data::Field::Bool) {
         // assume any non-empty value equals true
         return m_checkPix;
-      } else if(field->type() == Data::Field::Rating) {
-        return Tellico::pixmap(value);
       }
 
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
