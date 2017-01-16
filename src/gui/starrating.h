@@ -37,7 +37,7 @@ public:
 
   explicit StarRating(int rating = 0, int size = Small, QPoint point = QPoint(0, 0));
 
-  void setRating(int rating) { m_rating = rating; }
+  void setRating(int rating);
   void setMaxRating(int maxRating);
   void setSize(int size);
   void setPoint(QPoint point) { m_point = point; }

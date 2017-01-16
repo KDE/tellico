@@ -36,16 +36,15 @@ void StarRating::paint(QPainter* painter) {
   painter->save();
 
   painter->translate(m_point + QPoint(StarRating::Margin, StarRating::Margin));
-  QPixmap* star = &m_starNormal;
-  int rating = m_rating;
-  for(int i = 1; i <= m_maxRating; ++i) {
-    if(i > rating) {
-      star = &m_starInactive;
-    }
-    painter->drawPixmap(((i - 1) * (m_starSize + 2*Margin)), 0, *star);
+  for(int i = 1; i <= m_rating; ++i) {
+    painter->drawPixmap(((i - 1) * (m_starSize + 2*Margin)), 0, m_starNormal);
   }
 
   painter->restore();
+}
+
+void StarRating::setRating(int rating_) {
+  m_rating = qMin(rating_, m_maxRating);
 }
 
 void StarRating::setMaxRating(int maxRating_) {
