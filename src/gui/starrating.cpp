@@ -64,6 +64,6 @@ void StarRating::setSize(int size) {
 //static
 QSize StarRating::sizeHint(int size) {
   // *__*__*__*__*   +  StarRating::Margin around it
-  int bothMargin = (StarRating::Margin * 2);
+  const int bothMargin = (StarRating::Margin * 2);
   return QSize( 5 * (size + 2) - 2, size) + QSize(bothMargin, bothMargin);
 }
