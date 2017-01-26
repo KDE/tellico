@@ -49,11 +49,11 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QLatin1String("title"), QLatin1String("Superman Returns"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("Bad Hat Harry Productions; Warner Bros. Pictures; DC COmics; Legendary Pictures"));
+  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("DC Comics; Legendary Pictures; Warner Bros.; Bad Hat Harry Productions"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("2006"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("action; adventure; fantasy; science fiction"));
+  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("adventure; fantasy; action; science fiction"));
   m_fieldValues.insert(QLatin1String("director"), QLatin1String("Bryan Singer"));
-  m_fieldValues.insert(QLatin1String("producer"), QLatin1String("Bryan Singer"));
+  m_fieldValues.insert(QLatin1String("producer"), QLatin1String("Bryan Singer; jon peters; gilbert adler"));
   m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("154"));
   m_fieldValues.insert(QLatin1String("nationality"), QLatin1String("USA"));
 }
