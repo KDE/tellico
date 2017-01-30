@@ -234,7 +234,6 @@ QString GoogleScholarFetcher::defaultIcon() {
 
 void GoogleScholarFetcher::setBibtexCookie() {
   // it appears that the series of url reads are necessary to get the correct coookie set
-  FileHandler::readTextFile(KUrl(SCHOLAR_BASE_URL), true);
   // have to set preferences to have bibtex output
   const QString text = FileHandler::readTextFile(KUrl(SCHOLAR_SET_CONFIG_URL), true);
   // find hidden input variables
