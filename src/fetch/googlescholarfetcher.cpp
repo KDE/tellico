@@ -45,7 +45,8 @@
 namespace {
   static const int GOOGLE_MAX_RETURNS_TOTAL = 20;
   static const char* SCHOLAR_BASE_URL = "http://scholar.google.com/scholar";
-  static const char* SCHOLAR_SET_BIBTEX_URL = "http://scholar.google.com/scholar_setprefs?num=100&scis=yes&scisf=4&submit=Save+Preferences";
+  static const char* SCHOLAR_SET_CONFIG_URL = "http://scholar.google.com/scholar_settings?hl=en&as_sdt=0,5";
+  static const char* SCHOLAR_SET_BIBTEX_URL = "http://scholar.google.com/scholar_setprefs?hl=en&num=100&scis=yes&scisf=4&submit=";
 }
 
 using namespace Tellico;
@@ -236,8 +237,10 @@ QString GoogleScholarFetcher::defaultIcon() {
 }
 
 void GoogleScholarFetcher::setBibtexCookie() {
+  // it appears that the series of url reads are necessary to get the correct coookie set
+  FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)), true);
   // have to set preferences to have bibtex output
-  const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_BIBTEX_URL)), true);
+  const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_CONFIG_URL)), true);
   // find hidden input variables
   QRegExp inputRx(QLatin1String("<input\\s+[^>]*\\s*type\\s*=\\s*\"hidden\"\\s+[^>]+>"));
   inputRx.setMinimal(true);
