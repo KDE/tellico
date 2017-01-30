@@ -1,3 +1,7 @@
+2017-01-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Google Scholar data source.
+
 2016-06-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Added native data source for Bedetheque.com
