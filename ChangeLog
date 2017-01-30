@@ -1,3 +1,7 @@
+2017-01-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Google Scholar data source.
+
 2017-01-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with Rating drawing size in list view (Bug 372560).
