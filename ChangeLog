@@ -1,3 +1,7 @@
+2017-01-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed Bibsys z39.50 settings (Bug 375758).
+
 2017-01-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.12.
