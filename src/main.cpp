@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
                        TELLICO_VERSION, ki18n("Tellico - a collection manager for KDE"),
                        KAboutData::License_GPL_V2,
                        ki18n("(c) 2001-2015, Robby Stephenson"), KLocalizedString(),
-                       "http://tellico-project.org", "tellico-users@kde.org");
+                       "http://tellico-project.org");
   aboutData.addAuthor(ki18n("Robby Stephenson"), KLocalizedString(), "robby@periapsis.org");
   aboutData.addAuthor(ki18n("Mathias Monnerville"), ki18n("Data source scripts"));
   aboutData.addAuthor(ki18n("Regis Boudin"), KLocalizedString(), "regis@boudin.name");
@@ -64,7 +64,6 @@ int main(int argc, char* argv[]) {
   KCmdLineArgs::addCmdLineOptions(options);
 
   KApplication app;
-
   if(app.isSessionRestored()) {
     RESTORE(Tellico::MainWindow);
   } else {
