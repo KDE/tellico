@@ -79,7 +79,7 @@ void Z3950FetcherTest::testIsbn() {
 }
 
 void Z3950FetcherTest::testADS() {
-  // ADS has disappeared with no warning
+  // 2014: ADS has disappeared with no warning
   return;
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Raw,
@@ -104,4 +104,18 @@ void Z3950FetcherTest::testADS() {
   QCOMPARE(entry->field(QLatin1String("volume")), QLatin1String("43"));
   QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("Communications In Mathematical Physics"));
   QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
+}
+
+void Z3950FetcherTest::testBibsysIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
+                                       QLatin1String("8242407665"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QLatin1String("bibsys")));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QString::fromUtf8("Grønn"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("82-42-40477-1"));
 }
