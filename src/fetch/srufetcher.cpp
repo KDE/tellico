@@ -312,7 +312,13 @@ void SRUFetcher::slotComplete(KJob*) {
 //  } else if(m_format == QLatin1String("marcxml") && initMARCXMLHandler()) {
 // some SRU data sources call it MARC21-xml or something other than marcxml
   } else if(m_format.startsWith(QLatin1String("marc"), Qt::CaseInsensitive) && initMARCXMLHandler()) {
-    modsResult = m_MARCXMLHandler->applyStylesheet(result);
+    // brute force marcxchange conversion. This is probably wrong at some level
+    QString newResult = result;
+    if(m_format.startsWith(QLatin1String("marcxchange"), Qt::CaseInsensitive)) {
+      newResult.replace(QRegExp(QLatin1String("xmlns:marc=\"info:lc/xmlns/marcxchange-v[12]\"")),
+                        QLatin1String("xmlns:marc=\"http://www.loc.gov/MARC21/slim\""));
+    }
+    modsResult = m_MARCXMLHandler->applyStylesheet(newResult);
   }
   if(!modsResult.isEmpty() && initMODSHandler()) {
     Import::TellicoImporter imp(m_MODSHandler->applyStylesheet(modsResult));
