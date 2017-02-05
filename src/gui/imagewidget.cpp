@@ -38,6 +38,8 @@
 #include <KIO/DesktopExecParser>
 #include <KSharedConfig>
 #include <KConfigGroup>
+#include <KFileWidget>
+#include <KRecentDirs>
 
 #include <QPushButton>
 #include <QMenu>
@@ -253,10 +255,15 @@ void ImageWidget::slotGetImage() {
     }
     filter += QLatin1String("*.") + QString::fromLatin1(ba);
   }
-  QUrl url = QFileDialog::getOpenFileUrl(this, QString(), QUrl(), i18n("All Images (%1)", filter));
+  QStringList imageDirs = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation);
+  QString imageStartDir = imageDirs.isEmpty() ? QString() : imageDirs.first();
+  QString fileClass;
+  QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///image") + imageStartDir), fileClass);
+  const QUrl url = QFileDialog::getOpenFileUrl(this, QString(), startUrl, i18n("All Images (%1)", filter));
   if(url.isEmpty() || !url.isValid()) {
     return;
   }
+  KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
   loadImage(url);
 }
 

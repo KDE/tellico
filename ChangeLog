@@ -1,5 +1,6 @@
 2017-02-05  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed image open dialog to remember last location (Bug 376002).
 	* Added ESRB rating for "Everyone 10+" (Bug 375995).
 
 2017-01-30  Robby Stephenson  <robby@periapsis.org>
