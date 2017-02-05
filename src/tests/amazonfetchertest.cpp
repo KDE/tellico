@@ -30,6 +30,7 @@
 #include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
 #include "../collections/videocollection.h"
+#include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
@@ -49,6 +50,7 @@ void AmazonFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "music");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "mvideo");
+  Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
   // since we use an XSL file
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/amazon2tellico.xsl"));
   Tellico::ImageFactory::init();
@@ -207,6 +209,30 @@ void AmazonFetcherTest::testTitle_data() {
                                   << QString::fromLatin1("Le Pacte des Loups")
                                   << QString::fromLatin1("pacteDesLoups");
 
+}
+
+void AmazonFetcherTest::testTitleVideoGame() {
+  QString groupName = QLatin1String("Amazon US");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
+                                       QLatin1String("Ghostbusters Story Pack - LEGO Dimensions"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QLatin1String("Ghostbusters Story Pack - LEGO Dimensions"));
+  QCOMPARE(entry->field("publisher"), QLatin1String("Warner Home Video - Games"));
+  // the E10+ ESRB rating was added to Tellico in 2017 in version 3.0.1
+  QCOMPARE(entry->field("certification"), QLatin1String("Everyone 10+"));
 }
 
 void AmazonFetcherTest::testIsbn() {

@@ -38,6 +38,7 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testTitle_data();
+  void testTitleVideoGame();
   void testIsbn();
   void testIsbn_data();
   void testUpc();

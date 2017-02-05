@@ -1,3 +1,7 @@
+2017-02-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Added ESRB rating for "Everyone 10+" (Bug 375995).
+
 2017-01-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed Bibsys z39.50 settings (Bug 375758).
