@@ -403,10 +403,10 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
 }
 
 void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
-  // keep track of which image fields to write, this is for field names
+  // keep track of which image fields to write, this is for field titles
   StringSet imageFields;
   foreach(const QString& column, m_columns) {
-    if(coll_->fieldByTitle(column)->type() == Data::Field::Image) {
+    if(coll_->fieldByTitle(column) && coll_->fieldByTitle(column)->type() == Data::Field::Image) {
       imageFields.add(column);
     }
   }
