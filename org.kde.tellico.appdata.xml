@@ -21,6 +21,7 @@
   <name xml:lang="ia">Tellico</name>
   <name xml:lang="it">Tellico</name>
   <name xml:lang="nl">Tellico</name>
+  <name xml:lang="nn">Tellico</name>
   <name xml:lang="pl">Tellico</name>
   <name xml:lang="pt">Tellico</name>
   <name xml:lang="pt-BR">Tellico</name>
@@ -48,6 +49,7 @@
   <summary xml:lang="ia">Gerente de collection</summary>
   <summary xml:lang="it">Gestore della collezione</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
+  <summary xml:lang="nn">Samlingsdatabase</summary>
   <summary xml:lang="pl">Zarządzanie zbiorem</summary>
   <summary xml:lang="pt">Gestor de Colecções</summary>
   <summary xml:lang="pt-BR">Gerenciador de Coleções</summary>
@@ -103,6 +105,7 @@
     <p xml:lang="ia">Characteristicas:</p>
     <p xml:lang="it">Funzionalità:</p>
     <p xml:lang="nl">Mogelijkheden:</p>
+    <p xml:lang="nn">Funksjonar:</p>
     <p xml:lang="pl">Cechy:</p>
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>

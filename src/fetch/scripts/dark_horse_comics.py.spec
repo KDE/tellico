@@ -7,6 +7,7 @@ Name[en_GB]=Dark Horse Comics
 Name[es]=Dark Horse Comics
 Name[it]=Dark Horse Comics
 Name[nl]=Dark Horse Comics
+Name[nn]=Dark Horse Comics
 Name[pl]=Dark Horse Comics
 Name[pt]=Dark Horse Comics
 Name[sk]=Komiksy Dark Horse
