@@ -34,7 +34,9 @@ private Q_SLOTS:
   void initTestCase();
 
   void testHtml();
+  void testHtmlTitle();
   void testReportHtml();
+  void testDirectoryNames();
 };
 
 #endif

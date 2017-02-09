@@ -122,10 +122,6 @@ bool HTMLExporter::exec() {
     return false;
   }
 
-  if(!m_parseDOM) {
-    return FileHandler::writeTextURL(url(), text(), options() & Export::ExportUTF8, force);
-  }
-
   m_cancelled = false;
   // TODO: maybe need label?
   if(options() & ExportProgress) {
@@ -135,36 +131,12 @@ bool HTMLExporter::exec() {
   }
   // ok if not ExportProgress, no worries
   ProgressItem::Done done(this);
-
-  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(text().toUtf8().data()), 0);
-  xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
-  if(root == 0) {
-    myDebug() << "no root";
-    return false;
-  }
-  parseDOM(root);
-
-  if(m_cancelled) {
-    return true; // intentionally cancelled
-  }
-  ProgressManager::self()->setProgress(this, 15);
-
-  xmlChar* c;
-  int bytes;
-  htmlDocDumpMemory(htmlDoc, &c, &bytes);
-  QString allText;
-  if(bytes > 0) {
-    allText = QString::fromUtf8(reinterpret_cast<const char*>(c), bytes);
-    xmlFree(c);
-  }
-
-  if(m_cancelled) {
-    return true; // intentionally cancelled
-  }
   ProgressManager::self()->setProgress(this, 20);
 
-  bool success = FileHandler::writeTextURL(url(), allText, options() & Export::ExportUTF8, force);
-  success &= copyFiles() && (!m_exportEntryFiles || writeEntryFiles());
+  bool success = FileHandler::writeTextURL(url(), text(), options() & Export::ExportUTF8, force);
+  if(m_parseDOM && !m_cancelled) {
+    success &= copyFiles() && (!m_exportEntryFiles || writeEntryFiles());
+  }
   return success;
 }
 
@@ -214,7 +186,7 @@ bool HTMLExporter::loadXSLTFile() {
 
   if(m_exportEntryFiles) {
     // export entries to same place as all the other date files
-    m_handler->addStringParam("entrydir", QFile::encodeName(fileDir().fileName()) + '/');
+    m_handler->addStringParam("entrydir", QFile::encodeName(fileDirName()));
     // be sure to link all the entries
     m_handler->addParam("link-entries", "true()");
   }
@@ -278,20 +250,39 @@ QString HTMLExporter::text() {
   f.close();
 #endif
 
-  const QString text = m_handler->applyStylesheet(output.toString());
+  const QString outputText = m_handler->applyStylesheet(output.toString());
 #if 0
   QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
-    t << text;
+    t << outputText;
 //    t << "\n\n-------------------------------------------------------\n\n";
-//    t << Tellico::i18nReplace(text);
+//    t << Tellico::i18nReplace(outputText);
   }
   f2.close();
 #endif
-  // the XSLT file gets translated instead
-//  return Tellico::i18nReplace(text);
-  return text;
+
+  if(!m_parseDOM) {
+    return outputText;
+  }
+
+  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(outputText.toUtf8().data()), 0);
+  xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
+  if(root == 0) {
+    myDebug() << "no root";
+    return outputText;
+  }
+  parseDOM(root);
+
+  xmlChar* c;
+  int bytes;
+  htmlDocDumpMemory(htmlDoc, &c, &bytes);
+  QString allText;
+  if(bytes > 0) {
+    allText = QString::fromUtf8(reinterpret_cast<const char*>(c), bytes);
+    xmlFree(c);
+  }
+  return allText;
 }
 
 void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
@@ -579,11 +570,16 @@ const xmlChar* HTMLExporter::handleLink(const xmlChar* link_) {
 }
 
 QString HTMLExporter::handleLink(const QString& link_) {
+  if(link_.isEmpty()) {
+    return link_;
+  }
   if(m_links.contains(link_)) {
     return m_links[link_];
   }
+  const QUrl linkUrl(link_);
   // assume that if the link_ is not relative, then we don't need to copy it
-  if(!QUrl::fromUserInput(link_).isRelative()) {
+  // also an invalid url is not relative either
+  if(!linkUrl.isRelative()) {
     return link_;
   }
 
@@ -595,7 +591,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
 
   QUrl u = QUrl::fromLocalFile(m_xsltFilePath);
-  u = u.resolved(QUrl(link_));
+  u = u.resolved(linkUrl);
 
   // one of the "quirks" of the html export is that img src urls are set to point to
   // the tmpDir() when exporting entry files from a collection, but those images
