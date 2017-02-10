@@ -66,6 +66,10 @@ void CollectionTest::initTestCase() {
   Tellico::CollectionInitializer ci;
 }
 
+void CollectionTest::cleanupTestCase() {
+  Tellico::ImageFactory::clean(true);
+}
+
 void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
   QVERIFY(!nullColl);

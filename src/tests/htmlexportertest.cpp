@@ -48,6 +48,10 @@ void HtmlExporterTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
 }
 
+void HtmlExporterTest::cleanupTestCase() {
+  Tellico::ImageFactory::clean(true);
+}
+
 void HtmlExporterTest::testHtml() {
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
   // the default collection will use a temporary directory as a local image dir

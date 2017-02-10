@@ -44,6 +44,10 @@ void DocumentTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 
+void DocumentTest::cleanupTestCase() {
+  Tellico::ImageFactory::clean(true);
+}
+
 void DocumentTest::testImageLocalDirectory() {
   Tellico::Config::setImageLocation(Tellico::Config::ImagesInLocalDir);
   // the default collection will use a temporary directory as a local image dir
