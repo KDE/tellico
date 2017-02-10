@@ -35,6 +35,8 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void cleanupTestCase();
+
   void testTitle();
   void testTitleAccented();
   void testTitleAccentRemoved();

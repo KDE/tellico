@@ -54,6 +54,10 @@ void AllocineFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 }
 
+void AllocineFetcherTest::cleanupTestCase() {
+  Tellico::ImageFactory::clean(true);
+}
+
 void AllocineFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QLatin1String("Superman Returns"));
