@@ -128,18 +128,11 @@ if(KDEPIMLIBS_FOUND)
 endif(KDEPIMLIBS_FOUND)
 
 # There is a port of libkcddb to use KF5 style linking and headers
-find_package(KF5Cddb QUIET)
+find_package(KF5Cddb)
 set_package_properties(KF5Cddb PROPERTIES
     DESCRIPTION "Support for CDDB searches"
-    URL "http://projects.kde.org/projects/kde/kdemultimedia/libkcddb"
+    URL "https://cgit.kde.org/libkcddb.git"
     TYPE OPTIONAL)
-if(NOT KF5Cddb_FOUND)
-  find_package(Libkcddb 5.0)
-  set_package_properties(Libkcddb PROPERTIES
-      DESCRIPTION "Support for CDDB searches"
-      URL "http://projects.kde.org/projects/kde/kdemultimedia/libkcddb"
-      TYPE OPTIONAL)
-endif(NOT KF5Cddb_FOUND)
 
 find_package(Taglib)
 set_package_properties(Taglib PROPERTIES
