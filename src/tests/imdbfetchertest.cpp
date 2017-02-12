@@ -199,7 +199,7 @@ void ImdbFetcherTest::testAsterix() {
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Thomas Langmann; Frédéric Forestier")));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("René Goscinny; Albert Uderzo")));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
-  QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los juegos olímpicos")));
+  QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los Juegos Olímpicos")));
   QVERIFY(altTitleList.contains(QLatin1String("Asterix alle olimpiadi")));
 }
 
