@@ -127,7 +127,7 @@ void SRUFetcher::search() {
   u.setScheme(QLatin1String("http"));
   u.setHost(m_host);
   u.setPort(m_port);
-  u = QUrl::fromUserInput(u.url() + QLatin1Char('/') + m_path);
+  u = QUrl::fromUserInput(u.url() + m_path);
 
   QUrlQuery query;
   for(StringMap::ConstIterator it = m_queryMap.constBegin(); it != m_queryMap.constEnd(); ++it) {

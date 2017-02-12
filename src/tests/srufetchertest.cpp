@@ -135,3 +135,30 @@ void SRUFetcherTest::testKBIsbn() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1971"));
   QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
 }
+
+void SRUFetcherTest::testCopacIsbn() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("Copac");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
+                                       QLatin1String("1430202513"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Foundations of Qt development"));
+  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-43020-251-3"));
+  QCOMPARE(entry->field(QLatin1String("lcc")), QLatin1String("QA76.6 .T4457 2007eb"));
+  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1007/978-1-4302-0251-6"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2007"));
+  QVERIFY(entry->field(QLatin1String("publisher")).contains(QLatin1String("Apress")));
+}

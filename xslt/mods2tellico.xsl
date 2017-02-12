@@ -104,6 +104,12 @@
       <prop name="bibtex">abstract</prop>
      </field>
     </xsl:if>
+    <!-- default book collection does not include a doi field -->
+    <xsl:if test="$type='book' and .//mods:mods/mods:identifier[@type='doi']">
+     <field flags="0" title="DOI" category="Publishing" description="Digital Object Identifier" format="4" type="1" name="doi" i18n="true">
+      <prop name="bibtex">doi</prop>
+     </field>
+    </xsl:if>
     <!-- default book collection does not include an address -->
     <xsl:if test="$type='book' and .//mods:originInfo/mods:place/mods:placeTerm[@type='text']">
      <field flags="6" title="Address" category="Publishing" format="4" type="1" name="address" i18n="true">
@@ -188,7 +194,14 @@
 
   <title>
    <xsl:value-of select="mods:titleInfo/mods:nonSort"/>
-   <xsl:value-of select="mods:titleInfo/mods:title"/>
+   <xsl:choose>
+    <xsl:when test="mods:titleInfo[not(@type)]">
+     <xsl:value-of select="mods:titleInfo[not(@type)]/mods:title"/>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="mods:titleInfo/mods:title"/>
+    </xsl:otherwise>
+   </xsl:choose>
   </title>
 
   <subtitle>
