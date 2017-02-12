@@ -1,3 +1,7 @@
+2017-02-12  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated DBLP data source.
+
 2017-01-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed Bibsys z39.50 settings (Bug 375758).
@@ -6,7 +10,6 @@
 2017-01-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 2.3.12.
-
 	* Fixed Google Scholar data source.
 
 2016-06-15  Robby Stephenson  <robby@periapsis.org>

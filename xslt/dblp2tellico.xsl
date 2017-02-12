@@ -33,18 +33,34 @@
 </xsl:template>
 
 <xsl:template match="info">
+ <xsl:variable name="type">
+  <xsl:choose>
+   <xsl:when test="type='Journal Articles'">
+    <xsl:text>article</xsl:text>
+   </xsl:when>
+   <xsl:when test="type='Conference and Workshop Papers'">
+    <xsl:text>inproceedings</xsl:text>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="type"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:variable>
+
  <entry>
 
   <title>
    <xsl:value-of select="title"/>
   </title>
 
-  <booktitle>
-   <xsl:value-of select="(booktitle|venue/@conference)[1]"/>
-  </booktitle>
+  <xsl:if test="$type='inproceedings'">
+   <booktitle>
+    <xsl:value-of select="(booktitle|venue)[1]"/>
+   </booktitle>
+  </xsl:if>
 
   <entry-type>
-   <xsl:value-of select="type"/>
+   <xsl:value-of select="$type"/>
   </entry-type>
 
   <year>
@@ -52,29 +68,31 @@
   </year>
 
   <pages>
-   <xsl:value-of select="venue/@pages"/>
+   <xsl:value-of select="pages"/>
   </pages>
 
-  <journal>
-   <xsl:value-of select="venue/@journal"/>
-  </journal>
+  <xsl:if test="$type='article'">
+   <journal>
+    <xsl:value-of select="(journal|venue)[1]"/>
+   </journal>
+  </xsl:if>
 
   <volume>
-   <xsl:value-of select="venue/@volume"/>
+   <xsl:value-of select="volume"/>
   </volume>
 
   <number>
-   <xsl:value-of select="venue/@number"/>
+   <xsl:value-of select="number"/>
   </number>
 
   <publishers>
    <publisher>
-    <xsl:value-of select="venue/@publisher"/>
+    <xsl:value-of select="publisher"/>
    </publisher>
   </publishers>
 
   <url>
-   <xsl:value-of select="title/@ee"/>
+   <xsl:value-of select="url"/>
   </url>
 
   <authors>
@@ -86,7 +104,10 @@
   </authors>
 
   <bibtex-key>
-   <xsl:value-of select="substring-after(venue/@url, '#')"/>
+   <xsl:call-template name="substring-after-last">
+    <xsl:with-param name="input" select="url"/>
+    <xsl:with-param name="substr" select="'/'"/>
+   </xsl:call-template>
   </bibtex-key>
 
   <!-- just assume DOI starts with 10. -->
@@ -100,6 +121,23 @@
 
  </entry>
 
+</xsl:template>
+
+<xsl:template name="substring-after-last">
+ <xsl:param name="input"/>
+ <xsl:param name="substr"/>
+ <xsl:variable name="temp" select="substring-after($input, $substr)"/>
+ <xsl:choose>
+  <xsl:when test="$substr and contains($temp, $substr)">
+   <xsl:call-template name="substring-after-last">
+    <xsl:with-param name="input" select="$temp"/>
+    <xsl:with-param name="substr" select="$substr"/>
+   </xsl:call-template>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="$temp"/>
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
