@@ -129,7 +129,7 @@ void SRUFetcher::search() {
   u = QUrl::fromUserInput(uStr);
 */
   // hack to allow (for now) including extra query terms in the path, avoids double encoding
-  u.setUrl(u.url() + QLatin1Char('/') + m_path);
+  u.setUrl(u.url() + m_path);
 
   u.addQueryItem(QLatin1String("operation"), QLatin1String("searchRetrieve"));
   u.addQueryItem(QLatin1String("version"), QLatin1String("1.1"));

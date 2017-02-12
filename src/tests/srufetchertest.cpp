@@ -102,3 +102,26 @@ void SRUFetcherTest::testKBTitle() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1971"));
   QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
 }
+
+void SRUFetcherTest::testCopacIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
+                                       QLatin1String("1430202513"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(QLatin1String("copac"),
+                                                                      QLatin1String("copac.jisc.ac.uk"),
+                                                                      3000,
+                                                                      QLatin1String("/copac"),
+                                                                      QLatin1String("mods"),
+                                                                      this));
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Foundations of Qt development"));
+  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-43020-251-3"));
+  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1007/978-1-4302-0251-6"));
+  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2007"));
+  QVERIFY(entry->field(QLatin1String("publisher")).contains(QLatin1String("Apress")));
+}
