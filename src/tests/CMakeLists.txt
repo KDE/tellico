@@ -187,9 +187,6 @@ IF( QJSON_FOUND )
     KDE4_ADD_UNIT_TEST(filmasterfetchertest NOGUI filmasterfetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(filmasterfetchertest fetch ${TELLICO_TEST_LIBS})
 
-    KDE4_ADD_UNIT_TEST(masfetchertest NOGUI masfetchertest.cpp abstractfetchertest.cpp)
-    TARGET_LINK_LIBRARIES(masfetchertest fetch ${TELLICO_TEST_LIBS})
-
     KDE4_ADD_UNIT_TEST(googlebookfetchertest NOGUI googlebookfetchertest.cpp abstractfetchertest.cpp)
     TARGET_LINK_LIBRARIES(googlebookfetchertest fetch ${TELLICO_TEST_LIBS})
 

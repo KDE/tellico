@@ -81,7 +81,7 @@ enum Type {
   BiblioShare,
   MovieMeter,
   GoogleBook,
-  MAS,
+  MAS, // Removed
   Springer,
   Allocine,
   ScreenRush,

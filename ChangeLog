@@ -1,5 +1,6 @@
 2017-02-12  Robby Stephenson  <robby@periapsis.org>
 
+	* Removed Microsoft Academic Search data source (defunct).
 	* Updated DBLP data source.
 
 2017-01-30  Robby Stephenson  <robby@periapsis.org>
