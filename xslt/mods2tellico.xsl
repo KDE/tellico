@@ -130,10 +130,12 @@
      includes that in the mods output, so just check for publisher
      Changed in Tellico 1.2.9, allow anything that has typeOfResource='text'
      //mods:mods[(mods:typeOfResource='text' and -->
-   <xsl:for-each select=".//mods:mods[ mods:typeOfResource='text' or
-                                       mods:originInfo/mods:publisher or
-                                       mods:identifier[@type='isbn'] or
-                                       mods:identifier[@type='lccn'] ]">
+<!-- Changed in Tellico 3.0.1 and 2.3.13, don't read mods info in extension elements -->
+   <xsl:for-each select=".//mods:mods[ (mods:typeOfResource='text' or
+                                        mods:originInfo/mods:publisher or
+                                        mods:identifier[@type='isbn'] or
+                                        mods:identifier[@type='lccn']) and
+                                       not(ancestor::mods:extension) ]">
     <xsl:apply-templates select="."/>
    </xsl:for-each>
   </collection>
