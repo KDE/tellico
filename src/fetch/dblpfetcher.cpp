@@ -139,4 +139,3 @@ void DBLPFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString DBLPFetcher::ConfigWidget::preferredName() const {
   return DBLPFetcher::defaultName();
 }
-

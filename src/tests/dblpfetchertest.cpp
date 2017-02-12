@@ -59,8 +59,9 @@ void DBLPFetcherTest::testProceedings() {
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("433-446"));
   QCOMPARE(entry->field(QLatin1String("booktitle")), QLatin1String("IEEE Symposium on Security and Privacy"));
-  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dx.doi.org/10.1109/SP.2010.33"));
-  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1109/SP.2010.33"));
+  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String(""));
+  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dblp.org/rec/conf/sp/MurdochDAB10"));
+//  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1109/SP.2010.33"));
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("inproceedings"));
   QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("MurdochDAB10"));
 }
@@ -81,10 +82,10 @@ void DBLPFetcherTest::testArticle() {
   QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("129-141"));
   QCOMPARE(entry->field(QLatin1String("volume")), QLatin1String("120"));
   QCOMPARE(entry->field(QLatin1String("number")), QLatin1String("1"));
-  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("J. Comb. Theory, Ser. A (JCT)"));
+  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("J. Comb. Theory, Ser. A"));
   QCOMPARE(entry->field(QLatin1String("booktitle")), QLatin1String(""));
-  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dx.doi.org/10.1016/j.jcta.2012.07.005"));
-  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1016/j.jcta.2012.07.005"));
+  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dblp.org/rec/journals/jct/WangZ13"));
+//  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1016/j.jcta.2012.07.005"));
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("article"));
   QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("WangZ13"));
 }
