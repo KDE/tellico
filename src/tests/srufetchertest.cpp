@@ -125,9 +125,10 @@ void SRUFetcherTest::testKBIsbn() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QCOMPARE(results.size(), 1);
+  // for whatever reason, there are two results with the same isbn and we want the second
+  QCOMPARE(results.size(), 2);
 
-  Tellico::Data::EntryPtr entry = results.at(0);
+  Tellico::Data::EntryPtr entry = results.at(1);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Godfried Bomans: Erik of het klein insectenboek"));
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("book"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Purmerend : Muusses"));

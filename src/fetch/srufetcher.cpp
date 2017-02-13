@@ -186,8 +186,13 @@ void SRUFetcher::search() {
         }
         QString q;
         for(int i = 0; i < isbnList.count(); ++i) {
-          q += QLatin1String("bath.isbn=") + isbnList.at(i);
-//          q += QLatin1String("dc.identifier=") + isbnList.at(i);
+          // make an assumption that DC output uses the dc profile and everything else uses Bath for ISBN
+          // no idea if this holds true universally, but matches LOC, COPAC, and KB
+          if(m_format == QLatin1String("dc")) {
+            q += QLatin1String("dc.identifier=") + isbnList.at(i);
+          } else {
+            q += QLatin1String("bath.isbn=") + isbnList.at(i);
+          }
           if(i < isbnList.count()-1) {
             q += QLatin1String(" or ");
           }
