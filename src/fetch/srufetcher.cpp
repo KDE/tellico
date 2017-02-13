@@ -72,6 +72,9 @@ SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, c
       m_host(host_), m_port(port_), m_path(path_), m_format(format_),
       m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
   m_name = name_; // m_name is protected in super class
+  if(!m_path.startsWith(QLatin1Char('/'))) {
+    m_path.prepend(QLatin1Char('/'));
+  }
 }
 
 SRUFetcher::~SRUFetcher() {
