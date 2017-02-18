@@ -33,7 +33,6 @@
 #include "../images/imagefactory.h"
 #include "../tellico_debug.h"
 
-#include <QFile>
 #include <QImage>
 #include <QByteArray>
 #include <QApplication>
