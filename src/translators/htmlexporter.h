@@ -72,6 +72,7 @@ public:
 
   void setCollectionURL(const QUrl& url) { m_collectionURL = url; m_links.clear(); }
   void setXSLTFile(const QString& filename);
+  void setEntryXSLTFile(const QString& filename);
   void setPrintHeaders(bool printHeaders) { m_printHeaders = printHeaders; }
   void setPrintGrouped(bool printGrouped) { m_printGrouped = printGrouped; }
   void setMaxImageSize(int w, int h) { m_imageWidth = w; m_imageHeight = h; }

@@ -45,6 +45,7 @@ void HtmlExporterTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/tellico2html.xsl"));
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/entry-templates/Fancy.xsl"));
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/report-templates/Column_View.xsl"));
 }
 
@@ -80,6 +81,7 @@ void HtmlExporterTest::testHtml() {
   Tellico::Export::HTMLExporter exp(coll);
   exp.setEntries(coll->entries());
   exp.setExportEntryFiles(true);
+  exp.setEntryXSLTFile(QLatin1String("Fancy"));
   exp.setColumns(QStringList() << QLatin1String("Title") << QLatin1String("Gift")
                                << QLatin1String("Rating") << QLatin1String("Front Cover"));
   exp.setURL(QUrl::fromLocalFile(tempDirName + "/testHtml.html"));
@@ -95,6 +97,36 @@ void HtmlExporterTest::testHtml() {
   QVERIFY(output.contains(QLatin1String("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
   // verify relative location of image file
   QVERIFY(output.contains(QLatin1String("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
+
+  QVERIFY(exp.exec());
+  QFile f(tempDirName + "/testHtml.html");
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/tellico2html.js")));
+  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/pics/checkmark.png")));
+  QVERIFY(fileText.contains(QLatin1String("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
+  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
+
+  QVERIFY(QFile::exists(tempDirName + "/testHtml_files/tellico2html.js"));
+  QVERIFY(QFile::exists(tempDirName + "/testHtml_files/pics/checkmark.png"));
+  QVERIFY(QFile::exists(tempDirName + "/testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg"));
+
+  // check entry html output
+  QFile f2(tempDirName + "/testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html");
+  QVERIFY(f2.exists());
+  QVERIFY(f2.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in2(&f2);
+  QString entryText = in2.readAll();
+  // verify relative location of image file
+  QVERIFY(entryText.contains(QLatin1String("src=\"./17b54b2a742c6d342a75f122d615a793.jpeg")));
+  // verify relative location of image pics
+  QVERIFY(entryText.contains(QLatin1String("src=\"pics/checkmark.png")));
+  // verify link to parent html file
+  QVERIFY(entryText.contains(QLatin1String("href=\"../testHtml.html")));
 
   // sanity check, the directory should not exists after QTemporaryDir destruction
   tempDir.remove();

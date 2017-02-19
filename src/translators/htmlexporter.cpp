@@ -437,8 +437,11 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     createDir();
   } else {
     imgDir = fileDir();
-    imgDirRelative = QDir(url().toLocalFile()).relativeFilePath(imgDir.path());
+    imgDirRelative = QFileInfo(url().path()).dir().relativeFilePath(imgDir.path());
     createDir();
+  }
+  if(!imgDirRelative.endsWith(QLatin1Char('/'))) {
+    imgDirRelative += QLatin1Char('/');
   }
   m_handler->addStringParam("imgdir", QFile::encodeName(imgDirRelative));
 
@@ -545,6 +548,18 @@ void HTMLExporter::setXSLTFile(const QString& filename_) {
   reset();
 }
 
+void HTMLExporter::setEntryXSLTFile(const QString& fileName_) {
+  QString fileName = fileName_;
+  if(!fileName.endsWith(QLatin1String(".xsl"))) {
+    fileName += QLatin1String(".xsl");
+  }
+  QString f = DataFileRegistry::self()->locate(QLatin1String("entry-templates/") + fileName);
+  if(f.isEmpty()) {
+    myDebug() << fileName << "entry XSL file is not found";
+  }
+  m_entryXSLTFile = f;
+}
+
 QUrl HTMLExporter::fileDir() const {
   if(url().isEmpty()) {
     return QUrl();
@@ -552,7 +567,11 @@ QUrl HTMLExporter::fileDir() const {
   QUrl fileDir = url();
   // cd to directory of target URL
   fileDir = fileDir.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash);
-  fileDir.setPath(fileDir.path() + QLatin1Char('/') + fileDirName());
+  if(fileDirName().startsWith(QLatin1Char('/'))) {
+    fileDir.setPath(fileDir.path() + fileDirName());
+  } else {
+    fileDir.setPath(fileDir.path() + QLatin1Char('/') + fileDirName());
+  }
   return fileDir;
 }
 
@@ -616,6 +635,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   } else {
     m_links.insert(link_, link_);
   }
+//  myDebug() << link_ << linkUrl << u << m_links[link_];
   return m_links[link_];
 }
 
