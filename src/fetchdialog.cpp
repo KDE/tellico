@@ -308,8 +308,6 @@ FetchDialog::FetchDialog(QWidget* parent_)
   setStatus(i18n("Ready."));
 
   KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
-  KWindowConfig::restoreWindowSize(windowHandle(), config);
-
   QList<int> splitList = config.readEntry("Splitter Sizes", QList<int>());
   if(!splitList.empty()) {
     split->setSizes(splitList);
@@ -613,12 +611,16 @@ void FetchDialog::stopProgress() {
 }
 
 void FetchDialog::slotInit() {
+  // do this in the singleShot slot so it works
+  // see note in entryeditdialog.cpp (Feb 2017)
+  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
+  KWindowConfig::restoreWindowSize(windowHandle(), config);
+
   if(!Fetch::Manager::self()->canFetch()) {
     m_searchButton->setEnabled(false);
     Kernel::self()->sorry(i18n("No Internet sources are available for your current collection type."), this);
   }
 
-  KConfigGroup config(KSharedConfig::openConfig(), "Fetch Dialog Options");
   int key = config.readEntry("Search Key", int(Fetch::FetchFirst));
   // only change key if valid
   if(key > Fetch::FetchFirst) {
