@@ -35,8 +35,6 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testSnowyRiver();
-  void testSnowyRiverFr();
-  void testSnowyRiverEs();
   void testAsterix();
   void testBodyDouble();
   void testMary();
