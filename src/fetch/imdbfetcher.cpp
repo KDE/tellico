@@ -767,7 +767,7 @@ void IMDBFetcher::doAlsoKnownAs(const QString& str_, Tellico::Data::EntryPtr ent
 
   // match until next b tag
 //  QRegExp akaRx(QLatin1String("also known as(.*)<b(?:\\s.*)?>"));
-  QRegExp akaRx(QString::fromLatin1("%1(.*)<span[>\\s/]").arg(langData(m_lang).also_known_as), Qt::CaseInsensitive);
+  QRegExp akaRx(QString::fromLatin1("%1(.*)(<a|<span)[>\\s/]").arg(langData(m_lang).also_known_as), Qt::CaseInsensitive);
   akaRx.setMinimal(true);
 
   if(akaRx.indexIn(str_) > -1 && !akaRx.cap(1).isEmpty()) {

@@ -88,6 +88,9 @@ void ImdbFetcherTest::testSnowyRiver() {
   QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
+  QVERIFY(altTitleList.contains(QLatin1String("Herencia de un valiente")));
+  QVERIFY(!entry->field("alttitle").contains(QLatin1String("See more")));
 }
 
 void ImdbFetcherTest::testAsterix() {
