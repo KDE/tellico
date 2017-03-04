@@ -562,9 +562,9 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   uint j = 1;
 
   ImageFactory::CacheDir cacheDir = static_cast<ImageFactory::CacheDir>(cacheDir_);
-  ImageDirectory* imgDir = 0;
+  QScopedPointer<ImageDirectory> imgDir;
   if(cacheDir == ImageFactory::LocalDir) {
-    imgDir = new ImageDirectory(ImageFactory::localDirectory(localDir_));
+    imgDir.reset(new ImageDirectory(ImageFactory::localDirectory(localDir_)));
   }
 
   QString id;
@@ -584,7 +584,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
       // careful here, if we're writing to LocalDir, need to read from the old LocalDir and write to new
       bool success;
       if(cacheDir == ImageFactory::LocalDir) {
-        success = ImageFactory::writeCachedImage(id, imgDir);
+        success = ImageFactory::writeCachedImage(id, imgDir.data());
       } else {
         success = ImageFactory::writeCachedImage(id, cacheDir);
       }

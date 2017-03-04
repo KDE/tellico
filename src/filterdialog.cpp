@@ -140,6 +140,8 @@ Tellico::FilterPtr FilterDialog::currentFilter(bool alwaysCreateNew_) {
     FilterRule* rule = rw->rule();
     if(rule && !rule->isEmpty()) {
       newFilter->append(rule);
+    } else {
+      delete rule;
     }
   }
   newFilter->setName(m_filterName->text());
