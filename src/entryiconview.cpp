@@ -140,7 +140,7 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
     return;
   }
   // could have just put the index of the field in the list as the action data
-  // but instead, we need to to iterate over the current fields and find the index since EntryTitleModel
+  // but instead, we need to iterate over the current fields and find the index since EntryTitleModel
   // uses the field list index as the column value
   Data::FieldList fields = Data::Document::self()->collection()->fields();
   for(int i = 0; i < fields.count(); ++i) {
