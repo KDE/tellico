@@ -680,6 +680,14 @@ add_test(openlibraryfetchertest openlibraryfetchertest)
 ecm_mark_as_test(openlibraryfetchertest)
 TARGET_LINK_LIBRARIES(openlibraryfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(omdbfetchertest omdbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/omdbfetcher.cpp
+)
+ecm_mark_nongui_executable(omdbfetchertest)
+add_test(omdbfetchertest omdbfetchertest)
+ecm_mark_as_test(omdbfetchertest)
+TARGET_LINK_LIBRARIES(omdbfetchertest fetcherstest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(springerfetchertest springerfetchertest.cpp abstractfetchertest.cpp
   ../fetch/springerfetcher.cpp
 )

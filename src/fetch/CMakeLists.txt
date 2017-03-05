@@ -43,6 +43,7 @@ SET(fetch_STAT_SRCS
    mrlookupfetcher.cpp
    multifetcher.cpp
    musicbrainzfetcher.cpp
+   omdbfetcher.cpp
    openlibraryfetcher.cpp
    sha2.c
    springerfetcher.cpp
