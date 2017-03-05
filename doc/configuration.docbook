@@ -162,7 +162,6 @@ in the Data Sources Dialog. There are many available types and sources:</para>
 <listitem><para><link linkend="z3950">z39.50 servers</link>,</para></listitem>
 <listitem><para><link linkend="sru">SRU servers</link>,</para></listitem>
 <listitem><para><link linkend="entrez">Entrez (PubMed) databases</link>,</para></listitem>
-<listitem><para><link linkend="yahoo">Yahoo! Audio Search</link>,</para></listitem>
 <listitem><para><link linkend="animenfo">AnimeNfo.com</link>,</para></listitem>
 <listitem><para><link linkend="ibs">Internet Bookshop Italia</link>,</para></listitem>
 <listitem><para><link linkend="isbndb">ISBNdb.com</link>,</para></listitem>
@@ -173,6 +172,8 @@ in the Data Sources Dialog. There are many available types and sources:</para>
 <listitem><para><link linkend="discogs">Discogs.com</link>,</para></listitem>
 <listitem><para><link linkend="winecom">Wine.com</link>,</para></listitem>
 <listitem><para><link linkend="tmdb">TheMovieDB.org</link>,</para></listitem>
+<listitem><para><link linkend="tgdb">TheGamesDB.net</link>,</para></listitem>
+<listitem><para><link linkend="omdb">OMDBAPI.com</link>,</para></listitem>
 <listitem><para><link linkend="musicbrainz">MusicBrainz.org</link>,</para></listitem>
 <listitem><para><link linkend="giantbomb">GiantBomb.com</link>,</para></listitem>
 <listitem><para><link linkend="openlibrary">OpenLibrary.org</link>,</para></listitem>
@@ -344,9 +345,16 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 </para>
 </sect3>
 
+<sect3 id="omdb">
+<title>OMDBAPI.com</title>
+<para>
+<ulink url="http://omdbapi.com">The Open Movie Database</ulink>is a free web service to obtain movie information.
+</para>
+</sect3>
+
 </sect2>
 
-<!-- start of movie sources -->
+<!-- start of music sources -->
 <sect2 id="music-sources">
 <title>Music Data Sources</title>
 
@@ -361,13 +369,6 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <title>MusicBrainz.org</title>
 <para>
 <ulink url="http://musicbrainz.org">MusicBrainz.org</ulink> is a community music metadatabase that attempts to create a comprehensive music information site.
-</para>
-</sect3>
-
-<sect3 id="yahoo">
-<title>Yahoo! Audio Search</title>
-<para>
-The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may be used to search for music album information.  This data source is often unavailable or broken.
 </para>
 </sect3>
 
@@ -394,6 +395,13 @@ The <ulink url="http://audio.search.yahoo.com">Yahoo! Audio Search</ulink> may b
 <title>GiantBomb.com</title>
 <para>
 <ulink url="http://giantbomb.com">GiantBomb.com</ulink> is a large community-driven video game database. Registration for a free account is required.
+</para>
+</sect3>
+
+<sect3 id="tgdb">
+<title>TheGamesDB.net</title>
+<para>
+<ulink url="http://thegamesdb.net">TheGamesDB.net</ulink> is an open, online database for video game fans.
 </para>
 </sect3>
 
