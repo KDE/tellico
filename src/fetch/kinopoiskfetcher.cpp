@@ -193,6 +193,14 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     myDebug() << "error in processing entry";
     return Data::EntryPtr();
   }
+
+  if(optionalFields().contains(QLatin1String("kinopoisk"))) {
+    Data::FieldPtr field(new Data::Field(QLatin1String("kinopoisk"), i18n("KinoPoisk Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    entry->collection()->addField(field);
+    entry->setField(QLatin1String("kinopoisk"), url.url());
+  }
+
   m_entries.insert(uid_, entry); // keep for later
   return entry;
 }
@@ -388,6 +396,7 @@ QString KinoPoiskFetcher::defaultIcon() {
 Tellico::StringHash KinoPoiskFetcher::allOptionalFields() {
   StringHash hash;
   hash[QLatin1String("origtitle")] = i18n("Original Title");
+  hash[QLatin1String("kinopoisk")] = i18n("KinoPoisk Link");
   return hash;
 }
 
