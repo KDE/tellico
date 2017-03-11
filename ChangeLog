@@ -1,3 +1,7 @@
+2017-03-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for DataPoisk.ru.
+
 2017-03-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for OMDBAPI.com.

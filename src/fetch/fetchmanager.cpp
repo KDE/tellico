@@ -327,6 +327,9 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
     FETCHER_ADD(DVDFr);
     FETCHER_ADD(Allocine);
   }
+  if(langs.contains(QLatin1String("ru"))) {
+    FETCHER_ADD(KinoPoisk);
+  }
   return vec;
 }
 

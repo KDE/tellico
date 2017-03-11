@@ -647,6 +647,14 @@ add_test(isbndbfetchertest isbndbfetchertest)
 ecm_mark_as_test(isbndbfetchertest)
 TARGET_LINK_LIBRARIES(isbndbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(kinopoiskfetchertest kinopoiskfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/kinopoiskfetcher.cpp
+)
+ecm_mark_nongui_executable(kinopoiskfetchertest)
+add_test(kinopoiskfetchertest kinopoiskfetchertest)
+ecm_mark_as_test(kinopoiskfetchertest)
+TARGET_LINK_LIBRARIES(kinopoiskfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(moviemeterfetchertest moviemeterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/moviemeterfetcher.cpp
 )
