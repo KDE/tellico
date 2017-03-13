@@ -210,7 +210,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
                  Track 1: Some Track Title - Some Artist(s);
                  Track 2: Some Other Track Title - Some Other Artist(s), etc.
     We read the Album Artist from the TPE2 frame to be compatible with
-    Amarok as the most popular music player for KDE, but also Apple (iTunes),
+    Amarok as the most popular music player by KDE, but also Apple (iTunes),
     Microsoft (Windows Media Player) and others which use this frame to
     read/write the album artist too.
     See Amarok source file src/collectionscanner/CollectionScanner.cpp,
