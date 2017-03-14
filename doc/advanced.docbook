@@ -9,9 +9,9 @@ When running &appname; from the command line, there are several options for open
 </para>
 
 <programlisting>
-Usage: tellico [Qt-options] [KDE-options] [options] [filename]
+Usage: tellico [options] [filename]
 
-Tellico - a collection manager for KDE
+Tellico - a collection manager by KDE
 
 Options:
   --nofile                  Do not reopen the last open file
