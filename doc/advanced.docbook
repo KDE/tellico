@@ -11,7 +11,7 @@ When running &appname; from the command line, there are several options for open
 <programlisting>
 Usage: tellico [options] [filename]
 
-Tellico - a collection manager by KDE
+Tellico - a KDE collection manager
 
 Options:
   --nofile                  Do not reopen the last open file
