@@ -76,12 +76,13 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
-  void slotCompleteISBN(KJob* job);
 
 private:
   virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   Data::EntryPtr parseEntry(const QString& str);
+
+  static QString value(const QVariantMap& map, const char* name);
 
   int m_total;
   QHash<int, Data::EntryPtr> m_entries;

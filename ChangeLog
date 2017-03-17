@@ -1,3 +1,7 @@
+2017-03-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated the IBS.it data source (Bug 373774).
+
 2017-03-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for DataPoisk.ru.

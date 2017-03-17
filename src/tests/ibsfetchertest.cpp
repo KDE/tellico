@@ -52,7 +52,7 @@ void IBSFetcherTest::testTitle() {
   QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
+    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("8804620374")) {
       entry = testEntry;
       break;
     }
@@ -73,26 +73,9 @@ void IBSFetcherTest::testIsbn() {
   compareEntry(results.first());
 }
 
-void IBSFetcherTest::testAuthor() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
-                                       QLatin1String("Bruno Vespa"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
-
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 10);
-  Tellico::Data::EntryPtr entry;
-  foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->field(QLatin1String("isbn")) == QLatin1String("9788804620372")) {
-      entry = testEntry;
-      break;
-    }
-  }
-  QVERIFY(entry);
-  compareEntry(entry);
-}
-
 void IBSFetcherTest::testTranslator() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("9788842914976"));
+                                       QLatin1String("8842914975"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -101,14 +84,16 @@ void IBSFetcherTest::testTranslator() {
 
   Tellico::Data::EntryPtr entry = results.first();
   QCOMPARE(entry->field("title"), QString::fromUtf8("La città sepolta"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("9788842914976"));
+  QCOMPARE(entry->field("isbn"), QLatin1String("8842914975"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Thriller"));
+  QCOMPARE(entry->field("language"), QLatin1String("italiano"));
   QCOMPARE(entry->field("author"), QLatin1String("James Rollins"));
   QCOMPARE(entry->field("translator"), QLatin1String("M. Zonetti"));
 }
 
 void IBSFetcherTest::testEditor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("9788873718734"));
+                                       QLatin1String("8873718735"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IBSFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -123,7 +108,7 @@ void IBSFetcherTest::testEditor() {
 
 void IBSFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QVERIFY(entry->field("title").startsWith(QLatin1String("Vino & cucina")));
-  QCOMPARE(entry->field("isbn"), QLatin1String("9788804620372"));
+  QCOMPARE(entry->field("isbn"), QLatin1String("8804620374"));
   QCOMPARE(entry->field("author"), QLatin1String("Antonella Clerici; Bruno Vespa"));
   QCOMPARE(entry->field("pub_year"), QLatin1String("2012"));
   QCOMPARE(entry->field("pages"), QLatin1String("225"));
