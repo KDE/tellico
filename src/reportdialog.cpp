@@ -205,6 +205,7 @@ void ReportDialog::slotRefresh() {
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
 #if 0
+  myDebug() << "Remove debug from reportdialog.cpp";
   QFile f(QLatin1String("/tmp/test.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);

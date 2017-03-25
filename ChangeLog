@@ -1,3 +1,7 @@
+2017-03-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with image location for reports, introduced in v3.0.1 (Bug 377790).
+
 2017-03-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated the IBS.it data source (Bug 373774).

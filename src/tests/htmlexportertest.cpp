@@ -159,6 +159,8 @@ void HtmlExporterTest::testReportHtml() {
   coll->setTitle(QLatin1String("Robby's Books"));
 
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
+  e->setField(QLatin1String("title"), QLatin1String("My Title"));
+  e->setField(QLatin1String("rating"), QLatin1String("3"));
   coll->addEntries(e);
 
   Tellico::Export::HTMLExporter exporter(coll);
@@ -166,7 +168,6 @@ void HtmlExporterTest::testReportHtml() {
   exporter.setEntries(coll->entries());
 
   QString output = exporter.text();
-//  qDebug() << output;
   QVERIFY(!output.isEmpty());
 
   // check that cdate is passed correctly
@@ -174,6 +175,17 @@ void HtmlExporterTest::testReportHtml() {
   rx.setMinimal(true);
   QVERIFY(output.contains(rx));
   QCOMPARE(rx.cap(1), QLocale().toString(QDate::currentDate()));
+
+  // test image location in tmp directory
+  Tellico::Export::HTMLExporter exporter2(coll);
+  exporter2.setXSLTFile(QFINDTESTDATA("../../xslt/report-templates/Image_List.xsl"));
+  exporter2.setEntries(coll->entries());
+  exporter2.setColumns(QStringList() << QLatin1String("Title") << QLatin1String("Rating"));
+
+  QString output2 = exporter2.text();
+  QVERIFY(!output2.isEmpty());
+  // the rating pic image needs to be an absolute local path, starting with "/"
+  QVERIFY(output2.contains(QRegExp(QLatin1String("src=\"/[^\"]+stars3.png"))));
 }
 
 void HtmlExporterTest::testDirectoryNames() {

@@ -252,6 +252,7 @@ QString HTMLExporter::text() {
 
   const QString outputText = m_handler->applyStylesheet(output.toString());
 #if 0
+  myDebug() << "Remove debug2 from htmlexporter.cpp";
   QFile f2(QLatin1String("/tmp/test.html"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
@@ -630,7 +631,8 @@ QString HTMLExporter::handleLink(const QString& link_) {
   }
   // pictures are special since they might not exist when the HTML is exported, since they might get copied later
   // on the other hand, don't change the file location if it doesn't exist
-  if(isPic || exists) {
+  // and only use relative location if an export URL() is set
+  if((isPic || exists) && !url().isEmpty()) {
     m_links.insert(link_, fileDirName() + midDir + u.fileName());
   } else {
     m_links.insert(link_, link_);
