@@ -63,9 +63,9 @@ public:
   virtual QString source() const;
   virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const;
+  virtual Type type() const { return Discogs; }
   virtual void stop();
   virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return Discogs; }
   virtual bool canFetch(int type) const;
   virtual void readConfigHook(const KConfigGroup& config);
   virtual void saveConfigHook(KConfigGroup&) {}
