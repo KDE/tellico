@@ -26,8 +26,8 @@
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
-#include "../utils/guiproxy.h"
 #include "../core/filehandler.h"
+#include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
 #include "../tellico_debug.h"
 
