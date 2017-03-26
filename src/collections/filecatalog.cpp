@@ -130,4 +130,3 @@ int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::Entry
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("mimetype"), this);
   return res;
 }
-

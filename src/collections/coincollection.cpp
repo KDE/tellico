@@ -149,4 +149,3 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
 
   return list;
 }
-

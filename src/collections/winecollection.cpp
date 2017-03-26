@@ -134,4 +134,3 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
 
   return list;
 }
-

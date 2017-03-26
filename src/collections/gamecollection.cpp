@@ -136,4 +136,3 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
 
   return list;
 }
-

@@ -142,4 +142,3 @@ int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   res += EntryComparison::score(entry1_, entry2_, QLatin1String("medium"), this);
   return res;
 }
-

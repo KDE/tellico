@@ -142,4 +142,3 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
 
   return list;
 }
-
