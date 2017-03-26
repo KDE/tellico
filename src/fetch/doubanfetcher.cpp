@@ -83,6 +83,7 @@ bool DoubanFetcher::canFetch(int type) const {
 }
 
 void DoubanFetcher::readConfigHook(const KConfigGroup& config_) {
+  Q_UNUSED(config_);
 }
 
 void DoubanFetcher::search() {
@@ -420,7 +421,8 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
   }
   entry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QLatin1String("origtitle")) &&
+     !value(resultMap_, "original_title").isEmpty()) {
     entry->setField(QLatin1String("origtitle"), value(resultMap_, "original_title"));
   }
   if(optionalFields().contains(QLatin1String("douban"))) {
@@ -435,24 +437,36 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
   entry->setField(QLatin1String("label"), value(resultMap_, "attrs", "publisher"));
   entry->setField(QLatin1String("year"), value(resultMap_, "attrs", "pubdate").left(4));
 
-  if(value(resultMap_, "attrs", "media") == QLatin1String("Audio CD")) {
+  if(value(resultMap_, "attrs", "media") == QLatin1String("Audio CD") ||
+     value(resultMap_, "attrs", "media") == QLatin1String("CD")) {
     entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
   }
 
-  QStringList tracks;
+  QStringList values, tracks;
   foreach(const QVariant& v, resultMap_.value(QLatin1String("attrs"))
                                .toMap().value(QLatin1String("tracks")).toList()) {
-    QStringList l = v.toString().split(QLatin1String(" - "));
+    // some cases have all the tracks in one item, separated by "\n" and using 01. track numbers
+    if(v.toString().contains(QLatin1Char('\n'))) {
+      values << v.toString().split(QLatin1String("\n"));
+    } else {
+      values << v.toString();
+    }
+  }
+  QRegExp trackNumRx(QLatin1String("^\\d+. "));
+  foreach(QString value, values) { // can't be const
+    // might starts with track number
+    QStringList l = value.remove(trackNumRx).split(QLatin1String(" - "));
     if(l.size() == 1) {
       tracks << l.first();
     } else if(l.size() > 1) {
-      const QString s = l.takeLast();
-      tracks << l.join(QLatin1String(" - ")) + FieldFormat::columnDelimiterString() + s;
+      const QString last = l.takeLast();
+      tracks << l.join(QLatin1String(" - ")) + FieldFormat::columnDelimiterString() + last;
     }
   }
   entry->setField(QLatin1String("track"), tracks.join(FieldFormat::rowDelimiterString()));
 
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QLatin1String("origtitle")) &&
+     !value(resultMap_, "original_title").isEmpty()) {
     entry->setField(QLatin1String("origtitle"), value(resultMap_, "original_title"));
   }
   if(optionalFields().contains(QLatin1String("douban"))) {
@@ -503,6 +517,7 @@ DoubanFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const DoubanFetcher*
 }
 
 void DoubanFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  Q_UNUSED(config_);
 }
 
 QString DoubanFetcher::ConfigWidget::preferredName() const {
