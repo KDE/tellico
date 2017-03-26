@@ -452,12 +452,21 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
       values << v.toString();
     }
   }
-  QRegExp trackNumRx(QLatin1String("^\\d+. "));
+  QRegExp trackNumRx(QLatin1String("^\\d+[.\\s]{2}"));
+  QRegExp trackDurRx(QLatin1String("\\d+:\\d{2}"));
   foreach(QString value, values) { // can't be const
     // might starts with track number
     QStringList l = value.remove(trackNumRx).split(QLatin1String(" - "));
     if(l.size() == 1) {
-      tracks << l.first();
+      // might be split by tab characters and have track length at end
+      l = value.remove(trackNumRx).split(QRegExp(QLatin1String("[\t\n]+")));
+      if(trackDurRx.exactMatch(l.last())) {
+        tracks << l.first() + FieldFormat::columnDelimiterString() +
+                  entry->field(QLatin1String("artist")) + FieldFormat::columnDelimiterString() +
+                  l.last();
+      } else {
+        tracks << l.first();
+      }
     } else if(l.size() > 1) {
       const QString last = l.takeLast();
       tracks << l.join(QLatin1String(" - ")) + FieldFormat::columnDelimiterString() + last;

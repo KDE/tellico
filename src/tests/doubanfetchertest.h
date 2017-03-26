@@ -39,6 +39,7 @@ private Q_SLOTS:
   void testVideo();
   void testMusic();
   void testMusicAdele();
+  void testMusicArtPepper();
 };
 
 #endif

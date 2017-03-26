@@ -200,3 +200,28 @@ void DoubanFetcherTest::testMusicAdele() {
   QCOMPARE(trackList.front(), QLatin1String("Rolling in the Deep"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
+
+void DoubanFetcherTest::testMusicArtPepper() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
+                                       QString::fromUtf8("Art Pepper Meets the Rhythm Section"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DoubanFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Album);
+
+  QCOMPARE(entry->field("title"), QLatin1String("Art Pepper Meets The Rhythm Section"));
+  QCOMPARE(entry->field("year"), QLatin1String("1991"));
+  QCOMPARE(entry->field("label"), QLatin1String("Ojc"));
+  QCOMPARE(entry->field("artist"), QLatin1String("Art Pepper"));
+  QCOMPARE(entry->field("medium"), QLatin1String("Compact Disc"));
+  QStringList trackList = Tellico::FieldFormat::splitTable(entry->field("track"));
+  QCOMPARE(trackList.count(), 9);
+  QCOMPARE(trackList.front(), QLatin1String("You'd Be So Nice To Come Home To::Art Pepper::5:25"));
+  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+}
