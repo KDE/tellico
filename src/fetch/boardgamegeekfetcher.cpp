@@ -169,7 +169,7 @@ Tellico::Fetch::ConfigWidget* BoardGameGeekFetcher::configWidget(QWidget* parent
 }
 
 QString BoardGameGeekFetcher::defaultName() {
-  return QLatin1String("BoardGameGeek.com");
+  return QLatin1String("BoardGameGeek");
 }
 
 QString BoardGameGeekFetcher::defaultIcon() {
@@ -199,4 +199,3 @@ void BoardGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString BoardGameGeekFetcher::ConfigWidget::preferredName() const {
   return BoardGameGeekFetcher::defaultName();
 }
-
