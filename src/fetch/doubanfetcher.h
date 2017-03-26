@@ -25,14 +25,12 @@
 #ifndef TELLICO_DOUBANFETCHER_H
 #define TELLICO_DOUBANFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
 
 #include <QPointer>
 #include <QVariantMap>
-
-class QLineEdit;
 
 class KJob;
 namespace KIO {
@@ -45,7 +43,7 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class DoubanFetcher : public XMLFetcher {
+class DoubanFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -59,9 +57,12 @@ public:
   /**
    */
   virtual QString source() const;
+  virtual bool isSearching() const { return m_started; }
   virtual bool canSearch(FetchKey k) const;
   virtual Type type() const { return Douban; }
   virtual bool canFetch(int type) const;
+  virtual void stop();
+  virtual Data::EntryPtr fetchEntryHook(uint uid);
   virtual void readConfigHook(const KConfigGroup& config);
 
   /**
@@ -74,8 +75,6 @@ public:
     explicit ConfigWidget(QWidget* parent_, const DoubanFetcher* fetcher = 0);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
-  private:
-    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -83,14 +82,27 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
+private Q_SLOTS:
+  void slotComplete(KJob* job);
+  void slotCompleteISBN(KJob* job);
+
 private:
+  virtual void search();
   virtual FetchRequest updateRequest(Data::EntryPtr entry);
   virtual void resetSearch() {}
-  virtual QUrl searchUrl();
-  virtual void parseData(QByteArray&) {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+  Data::EntryPtr createEntry(const QVariantMap& resultMap);
+  void populateBookEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   
-  QString m_apiKey;
+  static QString value(const QVariantMap& map, const char* name);
+  static QString value(const QVariantMap& map, const char* object, const char* name);
+
+  bool m_started;
+
+  QHash<int, QUrl> m_matches;
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
 };
 
   } // end namespace

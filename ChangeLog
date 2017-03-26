@@ -1,3 +1,7 @@
+2017-03-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Douban data source to API v2 (from XML to JSON).
+
 2017-03-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with image location for reports, introduced in v3.0.1 (Bug 377790).
