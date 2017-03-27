@@ -731,6 +731,14 @@ add_test(themoviedbfetchertest themoviedbfetchertest)
 ecm_mark_as_test(themoviedbfetchertest)
 TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest ${TELLICO_TEST_LIBS})
 
+add_executable(videogamegeekfetchertest videogamegeekfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/videogamegeekfetcher.cpp
+)
+ecm_mark_nongui_executable(videogamegeekfetchertest)
+add_test(videogamegeekfetchertest videogamegeekfetchertest)
+ecm_mark_as_test(videogamegeekfetchertest)
+TARGET_LINK_LIBRARIES(videogamegeekfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(vndbfetchertest vndbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/vndbfetcher.cpp
 )

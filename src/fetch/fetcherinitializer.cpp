@@ -66,6 +66,7 @@
 #include "bedethequefetcher.h"
 #include "omdbfetcher.h"
 #include "kinopoiskfetcher.h"
+#include "videogamegeekfetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -117,6 +118,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::BedethequeFetcher> registerBD(Bedetheque);
   RegisterFetcher<Fetch::OMDBFetcher> registerOMDB(OMDB);
   RegisterFetcher<Fetch::KinoPoiskFetcher> registerKinoPoisk(KinoPoisk);
+  RegisterFetcher<Fetch::VideoGameGeekFetcher> registerVGG(VideoGameGeek);
 
   Fetch::Manager::self()->loadFetchers();
 }

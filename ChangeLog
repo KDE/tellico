@@ -1,3 +1,7 @@
+2017-03-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for VideoGameGeek.com
+
 2017-03-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Douban data source to API v2 (from XML to JSON).

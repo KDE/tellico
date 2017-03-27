@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2014 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,7 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "boardgamegeekfetcher.h"
+#include "videogamegeekfetcher.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
 #include "../utils/string_utils.h"
@@ -46,45 +46,45 @@ namespace {
 }
 
 using namespace Tellico;
-using Tellico::Fetch::BoardGameGeekFetcher;
+using Tellico::Fetch::VideoGameGeekFetcher;
 
-BoardGameGeekFetcher::BoardGameGeekFetcher(QObject* parent_)
+VideoGameGeekFetcher::VideoGameGeekFetcher(QObject* parent_)
     : XMLFetcher(parent_) {
   setLimit(BGG_MAX_RETURNS_TOTAL);
   setXSLTFilename(QLatin1String("boardgamegeek2tellico.xsl"));
 }
 
-BoardGameGeekFetcher::~BoardGameGeekFetcher() {
+VideoGameGeekFetcher::~VideoGameGeekFetcher() {
 }
 
-QString BoardGameGeekFetcher::source() const {
+QString VideoGameGeekFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
-bool BoardGameGeekFetcher::canFetch(int type) const {
-  return type == Data::Collection::BoardGame;
+bool VideoGameGeekFetcher::canFetch(int type) const {
+  return type == Data::Collection::Game;
 }
 
-QUrl BoardGameGeekFetcher::searchUrl() {
+QUrl VideoGameGeekFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BGG_SEARCH_URL));
 
   QUrlQuery q;
   switch(request().key) {
     case Title:
       q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
       q.addQueryItem(QLatin1String("exact"), QLatin1String("1"));
       break;
 
     case Keyword:
       q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
       q.addQueryItem(QLatin1String("id"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
       break;
 
     default:
@@ -97,7 +97,7 @@ QUrl BoardGameGeekFetcher::searchUrl() {
   return u;
 }
 
-Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
+Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
   const QString id = entry_->field(QLatin1String("bggid"));
@@ -109,7 +109,7 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   QUrl u(QString::fromLatin1(BGG_THING_URL));
   QUrlQuery q;
   q.addQueryItem(QLatin1String("id"), id);
-  q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -117,7 +117,7 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   QString output = FileHandler::readXMLFile(u, true);
 
 #if 0
-  myWarning() << "Remove output debug from boardgamegeekfetcher.cpp";
+  myWarning() << "Remove output debug from videogamegeekfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -150,7 +150,7 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   return coll->entries().front();
 }
 
-Tellico::Fetch::FetchRequest BoardGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
+Tellico::Fetch::FetchRequest VideoGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
   QString bggid = entry_->field(QLatin1String("bggid"));
   if(!bggid.isEmpty()) {
     return FetchRequest(Raw, bggid);
@@ -163,38 +163,37 @@ Tellico::Fetch::FetchRequest BoardGameGeekFetcher::updateRequest(Data::EntryPtr 
   return FetchRequest();
 }
 
-Tellico::Fetch::ConfigWidget* BoardGameGeekFetcher::configWidget(QWidget* parent_) const {
-  return new BoardGameGeekFetcher::ConfigWidget(parent_, this);
+Tellico::Fetch::ConfigWidget* VideoGameGeekFetcher::configWidget(QWidget* parent_) const {
+  return new VideoGameGeekFetcher::ConfigWidget(parent_, this);
 }
 
-QString BoardGameGeekFetcher::defaultName() {
-  return QLatin1String("BoardGameGeek");
+QString VideoGameGeekFetcher::defaultName() {
+  return QLatin1String("VideoGameGeek");
 }
 
-QString BoardGameGeekFetcher::defaultIcon() {
-  return favIcon("http://www.boardgamegeek.com");
+QString VideoGameGeekFetcher::defaultIcon() {
+  return favIcon("http://www.videogamegeek.com");
 }
 
-Tellico::StringHash BoardGameGeekFetcher::allOptionalFields() {
+Tellico::StringHash VideoGameGeekFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("artist")]             = i18nc("Comic Book Illustrator", "Artist");
-  hash[QLatin1String("boardgamegeek-link")] = i18n("BoardGameGeek Link");
+  hash[QLatin1String("videogamegeek-link")] = i18n("VideoGameGeek Link");
   return hash;
 }
 
-BoardGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BoardGameGeekFetcher* fetcher_)
+VideoGameGeekFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const VideoGameGeekFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
 
   // now add additional fields widget
-  addFieldsWidget(BoardGameGeekFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+  addFieldsWidget(VideoGameGeekFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
-void BoardGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void VideoGameGeekFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 }
 
-QString BoardGameGeekFetcher::ConfigWidget::preferredName() const {
-  return BoardGameGeekFetcher::defaultName();
+QString VideoGameGeekFetcher::ConfigWidget::preferredName() const {
+  return VideoGameGeekFetcher::defaultName();
 }
