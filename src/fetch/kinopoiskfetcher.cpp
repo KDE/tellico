@@ -212,10 +212,10 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
 
   QRegExp tagRx(QLatin1String("<.*>"));
   tagRx.setMinimal(true);
-  
-  QRegExp anchorRx(QLatin1String("<a\\s+href=\".*\"[^>]*>(.*)</")); 
+
+  QRegExp anchorRx(QLatin1String("<a\\s+href=\".*\"[^>]*>(.*)</"));
   anchorRx.setMinimal(true);
-  
+
   QRegExp titleRx(QLatin1String("class=\"moviename-big\"[^>]*>([^<]+)</"));
   if(str_.contains(titleRx)) {
     entry->setField(QLatin1String("title"), titleRx.cap(1));
@@ -225,7 +225,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
-  
+
     QRegExp origTitleRx(QLatin1String("itemprop=\"alternativeHeadline\"[^>]*>([^<]+)</"));
     if(str_.contains(origTitleRx)) {
       entry->setField(QLatin1String("origtitle"), origTitleRx.cap(1));

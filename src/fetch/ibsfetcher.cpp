@@ -237,7 +237,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     myDebug() << "No JSON block";
     return Data::EntryPtr();
   }
-  
+
   QJsonDocument doc = QJsonDocument::fromJson(jsonRx.cap(1).toUtf8());
   QVariantMap objectMap = doc.object().toVariantMap();
   QVariantMap resultMap = objectMap.value(QLatin1String("mainEntity")).toMap();
@@ -248,12 +248,12 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
 
   Data::CollPtr coll(new Data::BookCollection(true));
   Data::EntryPtr entry(new Data::Entry(coll));
-  
+
   // as genre, take the last breadcrumb
   QString genre = value(objectMap, "breadcrumb");
   genre = genre.section(QLatin1String(">"), -1);
-  entry->setField(QLatin1String("genre"), genre);  
-  
+  entry->setField(QLatin1String("genre"), genre);
+
   // the title in the embedded loses it's identifier? "La..."
   entry->setField(QLatin1String("title"), value(resultMap, "name"));
   entry->setField(QLatin1String("author"), value(resultMap, "author"));
@@ -274,14 +274,14 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   // inLanguage is upper-case language code
   const QString lang = value(resultMap, "inLanguage");
   entry->setField(QLatin1String("language"), QLocale(lang.toLower()).nativeLanguageName());
-  
+
   Data::FieldPtr f(new Data::Field(QLatin1String("plot"), i18n("Plot Summary"), Data::Field::Para));
   coll->addField(f);
   entry->setField(f, value(resultMap, "description"));
 
   entry->setField(QLatin1String("pages"), value(resultMap, "numberOfPages"));
   entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-  
+
   // multiple authors do not show up in the embedded JSON
   QRegExp titleDivRx(QLatin1String("<div id=\"title\">(.*)</div>"));
   titleDivRx.setMinimal(true);
@@ -302,7 +302,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
       entry->setField(QLatin1String("title"), labelRx.cap(1).simplified());
     }
   }
-  
+
   QRegExp tagRx(QLatin1String("<.*>"));
   tagRx.setMinimal(true);
 
@@ -310,16 +310,16 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   QRegExp editorRx(QLatin1String("<strong>Curatore:</strong>(.*)</div"));
   editorRx.setMinimal(true);
   if(str_.contains(editorRx)) {
-    entry->setField(QLatin1String("editor"), editorRx.cap(1).remove(tagRx).simplified());    
+    entry->setField(QLatin1String("editor"), editorRx.cap(1).remove(tagRx).simplified());
   }
 
   // editor is not in embedded json
   QRegExp translatorRx(QLatin1String("<strong>Traduttore:</strong>(.*)</div"));
   translatorRx.setMinimal(true);
   if(str_.contains(translatorRx)) {
-    entry->setField(QLatin1String("translator"), translatorRx.cap(1).remove(tagRx).simplified());    
+    entry->setField(QLatin1String("translator"), translatorRx.cap(1).remove(tagRx).simplified());
   }
-  
+
   return entry;
 }
 

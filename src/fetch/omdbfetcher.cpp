@@ -307,7 +307,7 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
 
   entry_->setField(QLatin1String("cover"), value(resultMap_, "Poster"));
   entry_->setField(QLatin1String("plot"), value(resultMap_, "Plot"));
-  
+
   if(optionalFields().contains(QLatin1String("imdb"))) {
     if(!entry_->collection()->hasField(QLatin1String("imdb"))) {
       Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
