@@ -210,8 +210,10 @@
 
   <xsl:call-template name="names">
    <xsl:with-param name="elem" select="'author'"/>
+   <!-- 3/27/17 : added @usage='primary' for HathiTrustFetcher responses -->
    <xsl:with-param name="nodes" select="mods:name[mods:role/mods:roleTerm[@type='text'] = 'author' or
-                                                  mods:role/mods:roleTerm[@type='text'] = 'creator']"/>
+                                                  mods:role/mods:roleTerm[@type='text'] = 'creator' or
+                                                  (@type='personal' and @usage='primary')]"/>
   </xsl:call-template>
 
   <xsl:call-template name="names">
