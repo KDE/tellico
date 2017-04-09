@@ -63,4 +63,5 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Action; First-Person Shooter"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
+  QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("Mature"));
 }

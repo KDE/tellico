@@ -7,7 +7,7 @@
    ===================================================================
    Tellico XSLT file - used for importing Giant Bomb search data.
 
-   Copyright (C) 2010 Robby Stephenson - <robby@periapsis.org>
+   Copyright (C) 201-2017 Robby Stephenson - <robby@periapsis.org>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -128,6 +128,38 @@
     </developer>
    </xsl:for-each>
   </developers>
+
+  <certification i18n="true">
+   <xsl:for-each select="original_game_rating/game_rating">
+    <xsl:if test="starts-with(name, 'ESRB')">
+     <!-- string starts with 'ESRB: ' -->
+     <xsl:variable name="esrb" select="substring(name, 7)"/>
+     <xsl:choose>
+      <xsl:when test="$esrb='U'">
+       <xsl:value-of select="'Unrated'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='AO'">
+       <xsl:value-of select="'Adults Only'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='M'">
+       <xsl:value-of select="'Mature'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='T'">
+       <xsl:value-of select="'Teen'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='E10+'">
+       <xsl:value-of select="'Everyone 10+'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='EC'">
+       <xsl:value-of select="'Everyone'"/>
+      </xsl:when>
+      <xsl:when test="$esrb='C'">
+       <xsl:value-of select="'Early Childhood'"/>
+      </xsl:when>
+     </xsl:choose>
+    </xsl:if>
+   </xsl:for-each>
+  </certification>
 
  </entry>
 </xsl:template>
