@@ -10,6 +10,7 @@ Use FileRef for template installation to support network install
 
 brickset.com api
 MusicBrainz api v2
+IGDB https://igdb.github.io/api/about/welcome/
 
 Supercat script: url is now 
 http://gapines.org/opac/extras/opensearch/1.1/-/mods3/title/bible
