@@ -198,6 +198,7 @@ QString GiantBombFetcher::defaultIcon() {
 
 Tellico::StringHash GiantBombFetcher::allOptionalFields() {
   StringHash hash;
+  hash[QLatin1String("giantbomb")] = i18n("GiantBomb Link");
   return hash;
 }
 

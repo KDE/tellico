@@ -33,6 +33,9 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KConfig>
+#include <KConfigGroup>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( GiantBombFetcherTest )
@@ -48,9 +51,17 @@ void GiantBombFetcherTest::initTestCase() {
 }
 
 void GiantBombFetcherTest::testKeyword() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("giantbomb");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QLatin1String("Halo 3: ODST"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GiantBombFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -64,4 +75,5 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Action; First-Person Shooter"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
   QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("Mature"));
+  QCOMPARE(entry->field(QLatin1String("giantbomb")), QLatin1String("https://www.giantbomb.com/halo-3-odst/3030-24035/"));
 }

@@ -25,7 +25,7 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="Giant Bomb ID" category="General" format="4" type="1" name="giantbomb-id"/>
-    <field flags="0" title="Giant Bomb Link" category="General" format="4" type="7" name="giantbomb"/>
+    <field flags="0" title="Giant Bomb Link" category="General" format="4" type="7" name="giantbomb" i18n="true"/>
    </fields>
    <!-- initial search has results/game elements, final detailed is only results, only ones with name child -->
    <xsl:apply-templates select="/response/results/game | /response/results[name]"/>
