@@ -712,7 +712,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
   }
 
   // clean up the title
-  parseTitle(entry, type);
+  parseTitle(entry);
 
   // also sometimes table fields have rows but no values
   Data::FieldList fields = entry->collection()->fields();
@@ -810,65 +810,70 @@ Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_)
   return FetchRequest();
 }
 
-void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry, int collType) {
-  Q_UNUSED(collType);
+void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   // assume that everything in brackets or parentheses is extra
   QRegExp rx(QLatin1String("[\\(\\[](.*)[\\)\\]]"));
   rx.setMinimal(true);
-  QString title = entry->field(QLatin1String("title"));
+  QString title = entry_->field(QLatin1String("title"));
   int pos = rx.indexIn(title);
   while(pos > -1) {
-    if(parseTitleToken(entry, rx.cap(1))) {
+    if(parseTitleToken(entry_, rx.cap(1))) {
       title.remove(pos, rx.matchedLength());
       --pos; // search again there
     }
     pos = rx.indexIn(title, pos+1);
   }
-  entry->setField(QLatin1String("title"), title.trimmed());
+  entry_->setField(QLatin1String("title"), title.trimmed());
 }
 
-bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry, const QString& token) {
-//  myDebug() << "title token:" << token;
+bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QString& token_) {
+//  myDebug() << "title token:" << token_;
   // if res = true, then the token gets removed from the title
   bool res = false;
-  if(token.indexOf(QLatin1String("widescreen"), 0, Qt::CaseInsensitive) > -1 ||
-     token.indexOf(i18n("Widescreen"), 0, Qt::CaseInsensitive) > -1) {
-    entry->setField(QLatin1String("widescreen"), QLatin1String("true"));
+  if(token_.indexOf(QLatin1String("widescreen"), 0, Qt::CaseInsensitive) > -1 ||
+     token_.indexOf(i18n("Widescreen"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QLatin1String("widescreen"), QLatin1String("true"));
     // res = true; leave it in the title
-  } else if(token.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.indexOf(QLatin1String("full screen"), 0, Qt::CaseInsensitive) > -1) {
     // skip, but go ahead and remove from title
     res = true;
-  } else if(token.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
+  } else if(token_.indexOf(QLatin1String("import"), 0, Qt::CaseInsensitive) > -1) {
     // skip, but go ahead and remove from title
     res = true;
   }
-  if(token.indexOf(QLatin1String("blu-ray"), 0, Qt::CaseInsensitive) > -1) {
-    entry->setField(QLatin1String("medium"), i18n("Blu-ray"));
+  if(token_.indexOf(QLatin1String("blu-ray"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QLatin1String("medium"), i18n("Blu-ray"));
     res = true;
-  } else if(token.indexOf(QLatin1String("hd dvd"), 0, Qt::CaseInsensitive) > -1) {
-    entry->setField(QLatin1String("medium"), i18n("HD DVD"));
+  } else if(token_.indexOf(QLatin1String("hd dvd"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QLatin1String("medium"), i18n("HD DVD"));
     res = true;
-  } else if(token.indexOf(QLatin1String("vhs"), 0, Qt::CaseInsensitive) > -1) {
-    entry->setField(QLatin1String("medium"), i18n("VHS"));
+  } else if(token_.indexOf(QLatin1String("vhs"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QLatin1String("medium"), i18n("VHS"));
     res = true;
   }
-  if(token.indexOf(QLatin1String("director's cut"), 0, Qt::CaseInsensitive) > -1 ||
-     token.indexOf(i18n("Director's Cut"), 0, Qt::CaseInsensitive) > -1) {
-    entry->setField(QLatin1String("directors-cut"), QLatin1String("true"));
+  if(token_.indexOf(QLatin1String("director's cut"), 0, Qt::CaseInsensitive) > -1 ||
+     token_.indexOf(i18n("Director's Cut"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QLatin1String("directors-cut"), QLatin1String("true"));
     // res = true; leave it in the title
   }
-  if(token.toLower() == QLatin1String("ntsc")) {
-    entry->setField(QLatin1String("format"), i18n("NTSC"));
+  if(token_.toLower() == QLatin1String("ntsc")) {
+    entry_->setField(QLatin1String("format"), i18n("NTSC"));
     res = true;
   }
-  if(token.toLower() == QLatin1String("dvd")) {
-    entry->setField(QLatin1String("medium"), i18n("DVD"));
+  if(token_.toLower() == QLatin1String("dvd")) {
+    entry_->setField(QLatin1String("medium"), i18n("DVD"));
     res = true;
   }
   static QRegExp regionRx(QLatin1String("Region [1-9]"));
-  if(regionRx.indexIn(token) > -1) {
-    entry->setField(QLatin1String("region"), i18n(regionRx.cap(0).toUtf8().constData()));
+  if(regionRx.indexIn(token_) > -1) {
+    entry_->setField(QLatin1String("region"), i18n(regionRx.cap(0).toUtf8().constData()));
     res = true;
+  }
+  if(entry_->collection()->type() == Data::Collection::Game) {
+    Data::FieldPtr f = entry_->collection()->fieldByName(QLatin1String("platform"));
+    if(f && f->allowed().contains(token_)) {
+      res = true;
+    }
   }
   return res;
 }
@@ -1028,4 +1033,3 @@ QString AmazonFetcher::ConfigWidget::preferredName() const {
 void AmazonFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
 }
-

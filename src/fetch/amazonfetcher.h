@@ -122,7 +122,7 @@ private:
   virtual void readConfigHook(const KConfigGroup& config);
   void initXSLTHandler();
   void doSearch();
-  void parseTitle(Data::EntryPtr entry, int collType);
+  void parseTitle(Data::EntryPtr entry);
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
   QString secretKey() const;
 
