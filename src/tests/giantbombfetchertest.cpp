@@ -76,4 +76,5 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
   QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("Mature"));
   QCOMPARE(entry->field(QLatin1String("giantbomb")), QLatin1String("https://www.giantbomb.com/halo-3-odst/3030-24035/"));
+  QCOMPARE(entry->field(QLatin1String("pegi")), QLatin1String("PEGI 16"));
 }

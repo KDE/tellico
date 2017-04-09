@@ -26,6 +26,7 @@
     <field name="_default"/>
     <field flags="0" title="Giant Bomb ID" category="General" format="4" type="1" name="giantbomb-id"/>
     <field flags="0" title="Giant Bomb Link" category="General" format="4" type="7" name="giantbomb" i18n="true"/>
+    <field flags="2" title="PEGI Rating" category="General" format="4" type="3" allowed="PEGI 3;PEGI 7;PEGI 12;PEGI 16;PEGI 18" name="pegi" i18n="true"/>
    </fields>
    <!-- initial search has results/game elements, final detailed is only results, only ones with name child -->
    <xsl:apply-templates select="/response/results/game | /response/results[name]"/>
@@ -129,9 +130,9 @@
    </xsl:for-each>
   </developers>
 
-  <certification i18n="true">
-   <xsl:for-each select="original_game_rating/game_rating">
-    <xsl:if test="starts-with(name, 'ESRB')">
+  <xsl:for-each select="original_game_rating/game_rating">
+   <xsl:if test="starts-with(name, 'ESRB')">
+    <certification i18n="true">
      <!-- string starts with 'ESRB: ' -->
      <xsl:variable name="esrb" select="substring(name, 7)"/>
      <xsl:choose>
@@ -157,9 +158,32 @@
        <xsl:value-of select="'Early Childhood'"/>
       </xsl:when>
      </xsl:choose>
-    </xsl:if>
-   </xsl:for-each>
-  </certification>
+    </certification>
+   </xsl:if>
+   <xsl:if test="starts-with(name, 'PEGI')">
+    <pegi i18n="true">
+     <!-- string starts with 'PEGI: ' -->
+     <xsl:variable name="pegi" select="substring(name, 7)"/>
+     <xsl:choose>
+      <xsl:when test="$pegi='3+'">
+       <xsl:value-of select="'PEGI 3'"/>
+      </xsl:when>
+      <xsl:when test="$pegi='7+'">
+       <xsl:value-of select="'PEGI 7'"/>
+      </xsl:when>
+      <xsl:when test="$pegi='12+'">
+       <xsl:value-of select="'PEGI 12'"/>
+      </xsl:when>
+      <xsl:when test="$pegi='16+'">
+       <xsl:value-of select="'PEGI 16'"/>
+      </xsl:when>
+      <xsl:when test="$pegi='18+'">
+       <xsl:value-of select="'PEGI 18'"/>
+      </xsl:when>
+     </xsl:choose>
+    </pegi>
+   </xsl:if>
+  </xsl:for-each>
 
  </entry>
 </xsl:template>
