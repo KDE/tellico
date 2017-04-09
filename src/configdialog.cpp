@@ -139,7 +139,7 @@ void ConfigDialog::slotInitPage(KPageWidgetItem* item_) {
   }
 
   const QString name = item_->name();
-  // thes ename must be kept in sync with the page names
+  // these names must be kept in sync with the page names
   if(name == i18n("General")) {
     initGeneralPage(frame);
   } else if(name == i18n("Printing")) {
