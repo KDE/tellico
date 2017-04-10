@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,86 +22,42 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#undef QT_NO_CAST_FROM_ASCII
 
-namespace Tellico {
-  namespace Fetch {
+#include "dbcfetchertest.h"
 
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
-};
+#include "../fetch/dbcfetcher.h"
+#include "../collections/bibtexcollection.h"
+#include "../collectionfactory.h"
+#include "../entry.h"
+#include "../utils/datafileregistry.h"
 
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo, // Removed
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase, // Removed
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase,
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS, // Removed
-  Springer,
-  Allocine,
-  ScreenRush, // Removed
-  FilmStarts, // Removed
-  SensaCine, // Removed
-  Beyazperde, // Removed
-  HathiTrust,
-  TheGamesDB,
-  DBLP,
-  VNDB,
-  MRLookup,
-  BoardGameGeek,
-  Bedetheque,
-  OMDB,
-  KinoPoisk,
-  VideoGameGeek,
-  DBC
-};
+#include <QTest>
 
-  }
+QTEST_GUILESS_MAIN( DBCFetcherTest )
+
+DBCFetcherTest::DBCFetcherTest() : AbstractFetcherTest() {
 }
 
-#endif
+void DBCFetcherTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/dbc2tellico.xsl"));
+}
+
+void DBCFetcherTest::testIsbn() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
+                                       QLatin1String("9788711391839"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Min kamp"));
+  QCOMPARE(entry->field(QLatin1String("author")), QString::fromUtf8("Karl Ove Knausgård"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Lindhardt og Ringhof"));
+  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2012"));
+  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("978-87-11-39183-9"));
+  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("487"));
+}

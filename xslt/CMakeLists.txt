@@ -12,6 +12,7 @@ SET(XSLT_FILES
     cassette-logo.png
     cd-logo.png
     crossref2tellico.xsl
+    dbc2tellico.xsl
     dblp2tellico.xsl
     delicious2tellico.xsl
     dvd-logo.png

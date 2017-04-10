@@ -14,6 +14,7 @@ SET(fetch_STAT_SRCS
    boardgamegeekfetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp
+   dbcfetcher.cpp
    dblpfetcher.cpp
    discogsfetcher.cpp
    doubanfetcher.cpp

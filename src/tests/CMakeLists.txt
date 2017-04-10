@@ -502,6 +502,14 @@ TARGET_LINK_LIBRARIES(darkhorsefetchertest
   ${TELLICO_TEST_LIBS}
 )
 
+add_executable(dbcfetchertest dbcfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/dbcfetcher.cpp
+)
+ecm_mark_nongui_executable(dbcfetchertest)
+add_test(dbcfetchertest dbcfetchertest)
+ecm_mark_as_test(dbcfetchertest)
+TARGET_LINK_LIBRARIES(dbcfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(dblpfetchertest dblpfetchertest.cpp abstractfetchertest.cpp
   ../fetch/dblpfetcher.cpp
 )

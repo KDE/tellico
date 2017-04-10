@@ -1,5 +1,6 @@
 2017-04-09  Robby Stephenson  <robby@periapsis.org>
 
+	* Added data source for https://opensource.dbc.dk.
 	* Added PEGI rating to GiantBomb results (Bug 375996).
 
 2017-03-27  Robby Stephenson  <robby@periapsis.org>

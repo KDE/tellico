@@ -89,4 +89,3 @@ void DBLPFetcherTest::testArticle() {
   QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("article"));
   QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("WangZ13"));
 }
-
