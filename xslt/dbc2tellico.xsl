@@ -24,7 +24,7 @@
    ===================================================================
 -->
 
-<xsl:variable name="letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz</xsl:variable>
+<xsl:variable name="letters">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz.</xsl:variable>
 
 <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"
             doctype-public="-//Robby Stephenson/DTD Tellico V11.0//EN"
@@ -32,25 +32,28 @@
 
 <xsl:template match="/">
  <tellico syntaxVersion="11">
-  <collection title="DBC Import" type="5">
+  <!-- type="2" is a book collection -->
+  <collection title="DBC Import" type="2">
    <fields>
     <field name="_default"/>
+    <!-- add a plot field -->
+     <field flags="0" title="Plot" category="Plot Summary" format="4" type="2" name="plot" i18n="true"/>
    </fields>
-   <xsl:apply-templates select="dbc:searchResponse/dbc:result/dbc:searchResult/dbc:collection/dbc:object/dkabm:record"/>
+   <!-- only grab records whose type is Book, "Bog" -->
+   <xsl:apply-templates select="dbc:searchResponse/dbc:result/dbc:searchResult/dbc:collection/dbc:object/dkabm:record[dc:type[@xsi:type='dkdcplus:BibDK-Type']='Bog']"/>
   </collection>
  </tellico>
 </xsl:template>
 
 <xsl:template match="dkabm:record">
  <entry>
-
   <title>
    <xsl:value-of select="dc:title"/>
   </title>
 
-  <year>
+  <pub_year>
    <xsl:value-of select="substring(dc:date,1,4)"/>
-  </year>
+  </pub_year>
 
   <xsl:if test="dcterms:extent[contains(.,'sider')]">
    <pages>
@@ -78,6 +81,33 @@
    </xsl:for-each>
   </authors>
 
+  <translators>
+   <xsl:for-each select="dc:contributor[@xsi:type='dkdcplus:trl']">
+    <translator>
+     <xsl:value-of select="."/>
+    </translator>
+   </xsl:for-each>
+  </translators>
+
+  <genres>
+   <xsl:for-each select="dc:subject[@xsi:type='dkdcplus:genre']">
+    <genre>
+     <xsl:value-of select="."/>
+    </genre>
+   </xsl:for-each>
+  </genres>
+
+  <languages>
+   <xsl:for-each select="dc:language[not(@xsi:type)]">
+    <language>
+     <xsl:value-of select="."/>
+    </language>
+   </xsl:for-each>
+  </languages>
+
+  <plot>
+   <xsl:value-of select="dcterms:abstract"/>
+  </plot>
  </entry>
 </xsl:template>
 

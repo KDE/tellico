@@ -53,11 +53,11 @@ QString DBCFetcher::source() const {
 }
 
 bool DBCFetcher::canSearch(FetchKey k) const {
-  return k == Keyword || k == ISBN;
+  return k == Title || k == Keyword || k == ISBN;
 }
 
 bool DBCFetcher::canFetch(int type) const {
-  return type == Data::Collection::Bibtex;
+  return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
 void DBCFetcher::readConfigHook(const KConfigGroup&) {
@@ -68,6 +68,14 @@ QUrl DBCFetcher::searchUrl() {
 
   QUrlQuery query;
   switch(request().key) {
+    case Title:
+      query.addQueryItem(QLatin1String("query"), QLatin1String("dkcclterm.ti=\"") + request().value + QLatin1Char('"'));
+      break;
+
+    case Keyword:
+      query.addQueryItem(QLatin1String("query"), QLatin1String("cql.keywords=\"") + request().value + QLatin1Char('"'));
+      break;
+
     case ISBN:
       {
         QString s = request().value;
@@ -86,14 +94,16 @@ QUrl DBCFetcher::searchUrl() {
   query.addQueryItem(QLatin1String("action"), QLatin1String("search"));
   // see https://opensource.dbc.dk/services/open-search-web-service
   // agency and profile determine the search collections
-  query.addQueryItem(QLatin1String("agency"), QLatin1String("100200"));
-  query.addQueryItem(QLatin1String("profile"), QLatin1String("test"));
+//  query.addQueryItem(QLatin1String("agency"), QLatin1String("100200"));
+//  query.addQueryItem(QLatin1String("profile"), QLatin1String("test"));
+  query.addQueryItem(QLatin1String("agency"), QLatin1String("761500"));
+  query.addQueryItem(QLatin1String("profile"), QLatin1String("opac"));
   query.addQueryItem(QLatin1String("start"), QLatin1String("1"));
-  query.addQueryItem(QLatin1String("stepValue"), QLatin1String("1"));
+  query.addQueryItem(QLatin1String("stepValue"), QLatin1String("5"));
   query.addQueryItem(QLatin1String("outputType"), QLatin1String("xml"));
   u.setQuery(query);
 
-  myDebug() << "url:" << u.url();
+//  myDebug() << "url:" << u.url();
   return u;
 }
 
@@ -122,7 +132,7 @@ Tellico::Fetch::ConfigWidget* DBCFetcher::configWidget(QWidget* parent_) const {
 }
 
 QString DBCFetcher::defaultName() {
-  return QLatin1String("DBC");
+  return QLatin1String("Dansk BiblioteksCenter (DBC)");
 }
 
 QString DBCFetcher::defaultIcon() {
