@@ -121,9 +121,9 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         return QVariant();
       }
 
-      // for titles only, for the icon view, return whatever
+      // for titles only or first column, for the icon view, return whatever
       // image field is first in the collection
-      if(field->name() == QLatin1String("title")) {
+      if(index_.column() == 0 || field->name() == QLatin1String("title")) {
         // return entry image in this case
         QString fieldName = imageField(entry->collection());
         if(fieldName.isEmpty()) {

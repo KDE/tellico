@@ -1,3 +1,7 @@
+2017-04-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug showing icons for custom collection (Bug 378852).
+
 2017-04-09  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for https://opensource.dbc.dk.
