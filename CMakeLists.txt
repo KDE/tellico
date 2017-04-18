@@ -6,7 +6,8 @@ set(TELLICO_VERSION "3.0.2+git")
 
 set(QT_MIN_VERSION "5.4.0")
 
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+# FindPoppler was added to ECM in 5.19
+find_package(ECM 5.19 REQUIRED NO_MODULE)
 
 CMAKE_POLICY(SET CMP0028 OLD)
 if(POLICY CMP0063)
@@ -153,15 +154,8 @@ if(Yaz_FOUND)
     include_directories(${Yaz_INCLUDE_DIRS})
 endif(Yaz_FOUND)
 
-find_package(PopplerQt5)
-set_package_properties(PopplerQt5 PROPERTIES
-    DESCRIPTION "Support for reading PDF files"
-    URL "http://poppler.freedesktop.org"
-    TYPE OPTIONAL)
-if(Poppler_Qt5_FOUND)
-    add_definitions(${Poppler_Qt5_DEFINITIONS})
-    include_directories(${Poppler_Qt5_INCLUDE_DIRS})
-endif(Poppler_Qt5_FOUND)
+# FindPoppler is part of ECM >= 5.19
+find_package(Poppler COMPONENTS Qt5)
 
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
@@ -261,7 +255,7 @@ add_subdirectory(doc)
 
 macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
+macro_bool_to_01(Poppler_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)

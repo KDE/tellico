@@ -392,9 +392,9 @@ TARGET_LINK_LIBRARIES(pdftest translatorstest fetcherstest ${TELLICO_TEST_LIBS})
 IF( Exempi_FOUND )
   TARGET_LINK_LIBRARIES(pdftest ${Exempi_LIBRARIES})
 ENDIF( Exempi_FOUND )
-IF( Poppler_Qt5_FOUND )
-  TARGET_LINK_LIBRARIES(pdftest ${Poppler_Qt5_LIBRARIES})
-ENDIF( Poppler_Qt5_FOUND )
+IF( Poppler_FOUND )
+  TARGET_LINK_LIBRARIES(pdftest Poppler::Qt5)
+ENDIF( Poppler_FOUND )
 
 # fetcher tests from here down
 IF(BUILD_FETCHER_TESTS)
