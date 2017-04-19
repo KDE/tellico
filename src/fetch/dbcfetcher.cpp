@@ -53,7 +53,7 @@ QString DBCFetcher::source() const {
 }
 
 bool DBCFetcher::canSearch(FetchKey k) const {
-  return k == Title || k == Keyword || k == ISBN;
+  return k == Title || k == Person || k == Keyword || k == ISBN;
 }
 
 bool DBCFetcher::canFetch(int type) const {
@@ -74,6 +74,10 @@ QUrl DBCFetcher::searchUrl() {
 
     case Keyword:
       query.addQueryItem(QLatin1String("query"), QLatin1String("cql.keywords=\"") + request().value + QLatin1Char('"'));
+      break;
+
+    case Person:
+      query.addQueryItem(QLatin1String("query"), QLatin1String("term.mainCreator=\"") + request().value + QLatin1Char('"'));
       break;
 
     case ISBN:
@@ -98,6 +102,7 @@ QUrl DBCFetcher::searchUrl() {
 //  query.addQueryItem(QLatin1String("profile"), QLatin1String("test"));
   query.addQueryItem(QLatin1String("agency"), QLatin1String("761500"));
   query.addQueryItem(QLatin1String("profile"), QLatin1String("opac"));
+  query.addQueryItem(QLatin1String("term.type"), QLatin1String("bog"));
   query.addQueryItem(QLatin1String("start"), QLatin1String("1"));
   query.addQueryItem(QLatin1String("stepValue"), QLatin1String("5"));
   query.addQueryItem(QLatin1String("outputType"), QLatin1String("xml"));
