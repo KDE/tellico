@@ -62,7 +62,7 @@ public:
   /**
    * Event filter used to popup the menu
    */
-  bool eventFilter(QObject* obj, QEvent* ev);
+  bool eventFilter(QObject* obj, QEvent* ev) Q_DECL_OVERRIDE;
   /**
    * Selects the item which refers to a certain entry.
    *
@@ -94,24 +94,24 @@ public:
    *
    * @param entry A pointer to the entry
    */
-  virtual void addEntries(Data::EntryList entries);
+  virtual void addEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
   /**
    * Modifies any item which refers to a entry, resetting the column contents.
    *
    * @param entry A pointer to the entry
    */
-  virtual void modifyEntries(Data::EntryList entries);
+  virtual void modifyEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
   /**
    * Removes any item which refers to a certain entry.
    *
    * @param entry A pointer to the entry
    */
-  virtual void removeEntries(Data::EntryList entries);
+  virtual void removeEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
 
-  virtual void addField(Data::CollPtr, Data::FieldPtr field);
+  virtual void addField(Data::CollPtr, Data::FieldPtr field) Q_DECL_OVERRIDE;
   void addField(Data::FieldPtr field, int width);
-  virtual void modifyField(Data::CollPtr, Data::FieldPtr oldField, Data::FieldPtr newField);
-  virtual void removeField(Data::CollPtr, Data::FieldPtr field);
+  virtual void modifyField(Data::CollPtr, Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
+  virtual void removeField(Data::CollPtr, Data::FieldPtr field) Q_DECL_OVERRIDE;
 
   void reorderFields(const Data::FieldList& fields);
   /**
@@ -147,7 +147,7 @@ private Q_SLOTS:
   void updateColumnDelegates();
 
 private:
-  void contextMenuEvent(QContextMenuEvent* event);
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
   void setState(Tellico::Data::EntryList entries_, int state);
   void adjustColumnWidths();
   void checkHeader();

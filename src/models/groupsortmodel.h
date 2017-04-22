@@ -44,10 +44,10 @@ public:
   GroupSortModel(QObject* parent);
   virtual ~GroupSortModel();
 
-  virtual void setSourceModel(QAbstractItemModel* sourceModel);
+  virtual void setSourceModel(QAbstractItemModel* sourceModel) Q_DECL_OVERRIDE;
 
 protected:
-  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const;
+  virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void clearGroupComparison();

@@ -47,8 +47,8 @@ public:
   FieldCommand(Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=Data::FieldPtr());
   FieldCommand(QUndoCommand* parent, Mode mode, Data::CollPtr coll, Data::FieldPtr activeField, Data::FieldPtr oldField=Data::FieldPtr());
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   void init();

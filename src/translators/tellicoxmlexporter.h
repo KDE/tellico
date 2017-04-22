@@ -48,9 +48,9 @@ Q_OBJECT
 public:
   TellicoXMLExporter(Data::CollPtr coll);
 
-  virtual bool exec();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const;
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE;
 
   QString text() const;
   QDomDocument exportXML() const;
@@ -58,9 +58,9 @@ public:
   void setIncludeImages(bool b) { m_includeImages = b; }
   void setIncludeGroups(bool b) { m_includeGroups = b; }
 
-  virtual QWidget* widget(QWidget*);
-  virtual void readOptions(KSharedConfigPtr cfg);
-  virtual void saveOptions(KSharedConfigPtr cfg);
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
+  virtual void readOptions(KSharedConfigPtr cfg) Q_DECL_OVERRIDE;
+  virtual void saveOptions(KSharedConfigPtr cfg) Q_DECL_OVERRIDE;
 
   /**
    * An integer indicating format version.

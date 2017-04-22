@@ -40,7 +40,7 @@ class UpdateEntries : public QUndoCommand {
 public:
   UpdateEntries(Data::CollPtr coll, Data::EntryPtr oldEntry, Data::EntryPtr newEntry, bool overWrite);
 
-  virtual void redo();
+  virtual void redo() Q_DECL_OVERRIDE;
 
 private:
   Data::CollPtr m_coll;

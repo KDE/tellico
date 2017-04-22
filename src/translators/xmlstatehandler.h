@@ -77,8 +77,8 @@ public:
   NullHandler(StateData* data) : StateHandler(data) {}
   virtual ~NullHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) { return true; }
-  virtual bool   end(const QString&, const QString&, const QString&) { return true; }
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE { return true; }
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE { return true; }
 };
 
 class RootHandler : public StateHandler {
@@ -86,11 +86,11 @@ public:
   RootHandler(StateData* data) : StateHandler(data) {}
   virtual ~RootHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) { return true; }
-  virtual bool   end(const QString&, const QString&, const QString&) { return true; }
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE { return true; }
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE { return true; }
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class DocumentHandler : public StateHandler {
@@ -98,11 +98,11 @@ public:
   DocumentHandler(StateData* data) : StateHandler(data) {}
   virtual ~DocumentHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class CollectionHandler : public StateHandler {
@@ -110,11 +110,11 @@ public:
   CollectionHandler(StateData* data) : StateHandler(data) {}
   virtual ~CollectionHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FieldsHandler : public StateHandler {
@@ -122,11 +122,11 @@ public:
   FieldsHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldsHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FieldHandler : public StateHandler {
@@ -134,11 +134,11 @@ public:
   FieldHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FieldPropertyHandler : public StateHandler {
@@ -146,8 +146,8 @@ public:
   FieldPropertyHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldPropertyHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
   QString m_propertyName;
@@ -158,8 +158,8 @@ public:
   BibtexPreambleHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexPreambleHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class BibtexMacrosHandler : public StateHandler {
@@ -167,11 +167,11 @@ public:
   BibtexMacrosHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexMacrosHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class BibtexMacroHandler : public StateHandler {
@@ -179,8 +179,8 @@ public:
   BibtexMacroHandler(StateData* data) : StateHandler(data) {}
   virtual ~BibtexMacroHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
   QString m_macroName;
@@ -191,11 +191,11 @@ public:
   EntryHandler(StateData* data) : StateHandler(data) {}
   virtual ~EntryHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FieldValueContainerHandler : public StateHandler {
@@ -203,11 +203,11 @@ public:
   FieldValueContainerHandler(StateData* data) : StateHandler(data) {}
   virtual ~FieldValueContainerHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FieldValueHandler : public StateHandler {
@@ -216,11 +216,11 @@ public:
     , m_i18n(false), m_validateISBN(false) {}
   virtual ~FieldValueHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
   bool m_i18n;
   bool m_validateISBN;
 };
@@ -230,8 +230,8 @@ public:
   DateValueHandler(StateData* data) : StateHandler(data) {}
   virtual ~DateValueHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class TableColumnHandler : public StateHandler {
@@ -239,8 +239,8 @@ public:
   TableColumnHandler(StateData* data) : StateHandler(data) {}
   virtual ~TableColumnHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class ImagesHandler : public StateHandler {
@@ -248,11 +248,11 @@ public:
   ImagesHandler(StateData* data) : StateHandler(data) {}
   virtual ~ImagesHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class ImageHandler : public StateHandler {
@@ -261,8 +261,8 @@ public:
     , m_link(false), m_width(0), m_height(0) {}
   virtual ~ImageHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
   QString m_format;
@@ -277,11 +277,11 @@ public:
   FiltersHandler(StateData* data) : StateHandler(data) {}
   virtual ~FiltersHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FilterHandler : public StateHandler {
@@ -289,11 +289,11 @@ public:
   FilterHandler(StateData* data) : StateHandler(data) {}
   virtual ~FilterHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class FilterRuleHandler : public StateHandler {
@@ -301,8 +301,8 @@ public:
   FilterRuleHandler(StateData* data) : StateHandler(data) {}
   virtual ~FilterRuleHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class BorrowersHandler : public StateHandler {
@@ -310,11 +310,11 @@ public:
   BorrowersHandler(StateData* data) : StateHandler(data) {}
   virtual ~BorrowersHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class BorrowerHandler : public StateHandler {
@@ -322,11 +322,11 @@ public:
   BorrowerHandler(StateData* data) : StateHandler(data) {}
   virtual ~BorrowerHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&);
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 };
 
 class LoanHandler : public StateHandler {
@@ -335,8 +335,8 @@ public:
     , m_id(-1), m_inCalendar(false) {}
   virtual ~LoanHandler() {}
 
-  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&);
-  virtual bool   end(const QString&, const QString&, const QString&);
+  virtual bool start(const QString&, const QString&, const QString&, const QXmlAttributes&) Q_DECL_OVERRIDE;
+  virtual bool   end(const QString&, const QString&, const QString&) Q_DECL_OVERRIDE;
 
 private:
   int m_id;

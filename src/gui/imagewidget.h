@@ -76,11 +76,11 @@ Q_SIGNALS:
   void signalModified();
 
 protected:
-  virtual void resizeEvent(QResizeEvent* ev);
-  virtual void mousePressEvent(QMouseEvent* ev);
-  virtual void mouseMoveEvent(QMouseEvent* ev);
-  virtual void dragEnterEvent(QDragEnterEvent* ev);
-  virtual void dropEvent(QDropEvent* ev);
+  virtual void resizeEvent(QResizeEvent* ev) Q_DECL_OVERRIDE;
+  virtual void mousePressEvent(QMouseEvent* ev) Q_DECL_OVERRIDE;
+  virtual void mouseMoveEvent(QMouseEvent* ev) Q_DECL_OVERRIDE;
+  virtual void dragEnterEvent(QDragEnterEvent* ev) Q_DECL_OVERRIDE;
+  virtual void dropEvent(QDropEvent* ev) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotGetImage();

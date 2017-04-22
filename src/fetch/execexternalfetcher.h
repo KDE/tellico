@@ -59,16 +59,16 @@ public:
    */
   virtual ~ExecExternalFetcher();
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual bool canSearch(FetchKey k) const { return m_args.contains(k) || (m_canUpdate && k == ExecUpdate); }
-  virtual bool canUpdate() const { return m_canUpdate; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return ExecExternal; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return m_args.contains(k) || (m_canUpdate && k == ExecUpdate); }
+  virtual bool canUpdate() const Q_DECL_OVERRIDE { return m_canUpdate; }
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return ExecExternal; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   const QString& execPath() const { return m_path; }
 
@@ -77,10 +77,10 @@ public:
     explicit ConfigWidget(QWidget* parent = 0, const ExecExternalFetcher* fetcher = 0);
     ~ConfigWidget();
 
-    void readConfig(const KConfigGroup& config);
-    virtual void saveConfigHook(KConfigGroup& config);
-    virtual void removed();
-    virtual QString preferredName() const;
+    void readConfig(const KConfigGroup& config) Q_DECL_OVERRIDE;
+    virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+    virtual void removed() Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
 
   private:
     bool m_deleteOnRemove : 1;
@@ -107,8 +107,8 @@ private Q_SLOTS:
 private:
   static QStringList parseArguments(const QString& str);
 
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void startSearch(const QStringList& args);
 
   bool m_started;

@@ -90,7 +90,7 @@ public:
   void reset();
   void setQuery(const QString& query);
   void setUserPassword(const QString& user, const QString& pword);
-  void run();
+  void run() Q_DECL_OVERRIDE;
 
   void abort() { m_aborted = true; }
 

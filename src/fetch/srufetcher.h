@@ -69,17 +69,17 @@ public:
 
   /**
    */
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   // only search title, person, isbn, or keyword. No Raw for now.
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return SRU; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Person || k == ISBN || k == Keyword || k == LCCN; }
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return SRU; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -94,8 +94,8 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   bool initMARCXMLHandler();
   bool initMODSHandler();
   bool initSRWHandler();
@@ -119,8 +119,8 @@ Q_OBJECT
 
 public:
   explicit ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
-  virtual void saveConfigHook(KConfigGroup& config);
-  virtual QString preferredName() const;
+  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString preferredName() const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotCheckHost();

@@ -43,15 +43,15 @@ public:
   ChoiceFieldWidget(Data::FieldPtr field, QWidget* parent);
   virtual ~ChoiceFieldWidget() {}
 
-  virtual QString text() const;
-  virtual void setTextImpl(const QString& text);
+  virtual QString text() const Q_DECL_OVERRIDE;
+  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  virtual void clearImpl();
+  virtual void clearImpl() Q_DECL_OVERRIDE;
 
 protected:
-  virtual QWidget* widget();
-  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
+  virtual QWidget* widget() Q_DECL_OVERRIDE;
+  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 private:
   QComboBox* m_comboBox;

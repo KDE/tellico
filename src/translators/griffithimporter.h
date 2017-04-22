@@ -50,9 +50,9 @@ public:
    */
   virtual ~GriffithImporter();
 
-  virtual bool canImport(int type) const;
-  virtual void beginXSLTHandler(XSLTHandler* handler);
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+  virtual void beginXSLTHandler(XSLTHandler* handler) Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return 0; }
 
 private:
   Data::CollPtr m_coll;

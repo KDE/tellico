@@ -54,11 +54,11 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
   /**
    */
-  virtual QWidget* widget(QWidget* parent);
-  virtual bool canImport(int type) const;
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
   void slotCancel();

@@ -55,7 +55,7 @@ public Q_SLOTS:
   void setMaxAllowedIconWidth(int width);
 
 protected:
-  void contextMenuEvent(QContextMenuEvent* event);
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotDoubleClicked(const QModelIndex& index);

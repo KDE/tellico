@@ -37,9 +37,9 @@ public:
   PDFImporter(const QUrl& url);
   PDFImporter(const QList<QUrl>& urls);
 
-  virtual bool canImport(int type) const;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
   void slotCancel();

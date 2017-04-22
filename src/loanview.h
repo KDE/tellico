@@ -48,9 +48,9 @@ public:
 
   virtual void addCollection(Data::CollPtr coll);
 
-  virtual void    addBorrower(Data::BorrowerPtr);
-  virtual void modifyBorrower(Data::BorrowerPtr);
-  virtual void removeBorrower(Data::BorrowerPtr);
+  virtual void    addBorrower(Data::BorrowerPtr) Q_DECL_OVERRIDE;
+  virtual void modifyBorrower(Data::BorrowerPtr) Q_DECL_OVERRIDE;
+  virtual void removeBorrower(Data::BorrowerPtr) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
   /**
@@ -65,7 +65,7 @@ private Q_SLOTS:
   void slotSortingChanged(int column, Qt::SortOrder order);
 
 private:
-  void contextMenuEvent(QContextMenuEvent* event);
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
   void updateHeader();
 
   bool m_notSortedYet;

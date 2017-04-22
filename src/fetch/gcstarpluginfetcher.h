@@ -56,16 +56,16 @@ public:
    */
   virtual ~GCstarPluginFetcher();
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual bool canSearch(FetchKey k) const { return k == Title; }
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title; }
 
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return GCstarPlugin; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return GCstarPlugin; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -80,8 +80,8 @@ private Q_SLOTS:
   void slotProcessExited();
 
 private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
 
   // map Author, Name, Lang, etc...
   typedef QHash<QString, QVariant> PluginInfo;
@@ -114,15 +114,15 @@ public:
   explicit ConfigWidget(QWidget* parent, const GCstarPluginFetcher* fetcher = 0);
   ~ConfigWidget();
 
-  virtual void saveConfigHook(KConfigGroup& config);
-  virtual QString preferredName() const;
+  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString preferredName() const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotTypeChanged();
   void slotPluginChanged();
 
 private:
-  void showEvent(QShowEvent* event);
+  void showEvent(QShowEvent* event) Q_DECL_OVERRIDE;
 
   bool m_needPluginList;
   QString m_originalPluginName;

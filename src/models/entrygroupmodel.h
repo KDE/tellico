@@ -44,14 +44,14 @@ public:
   EntryGroupModel(QObject* parent);
   virtual ~EntryGroupModel();
 
-  virtual int rowCount(const QModelIndex& parent = QModelIndex()) const;
-  virtual int columnCount(const QModelIndex& parent = QModelIndex()) const;
-  virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
-  virtual bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role=Qt::EditRole);
-  virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const;
-  virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole);
-  virtual QModelIndex index(int row, int column=0, const QModelIndex& parent = QModelIndex()) const;
-  virtual QModelIndex parent(const QModelIndex& index) const;
+  virtual int rowCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
+  virtual int columnCount(const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
+  virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+  virtual bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role=Qt::EditRole) Q_DECL_OVERRIDE;
+  virtual QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+  virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) Q_DECL_OVERRIDE;
+  virtual QModelIndex index(int row, int column=0, const QModelIndex& parent = QModelIndex()) const Q_DECL_OVERRIDE;
+  virtual QModelIndex parent(const QModelIndex& index) const Q_DECL_OVERRIDE;
 
   void clear();
   void addGroups(const QList<Data::EntryGroup*>& groups, const QString& iconName);

@@ -38,8 +38,8 @@ class Clipboard : public Action {
 public:
   Clipboard();
 
-  virtual CiteAction type() const { return CiteClipboard; }
-  virtual bool cite(Data::EntryList entries);
+  virtual CiteAction type() const Q_DECL_OVERRIDE { return CiteClipboard; }
+  virtual bool cite(Data::EntryList entries) Q_DECL_OVERRIDE;
 };
 
   }

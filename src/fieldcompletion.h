@@ -39,13 +39,13 @@ public:
   FieldCompletion(bool multiple);
 
   void setMultiple(bool m) { m_multiple = m; }
-  virtual QString makeCompletion(const QString& string);
-  virtual void clear();
+  virtual QString makeCompletion(const QString& string) Q_DECL_OVERRIDE;
+  virtual void clear() Q_DECL_OVERRIDE;
 
 protected:
-  virtual void postProcessMatch(QString* match) const;
-  virtual void postProcessMatches(QStringList* matches) const;
-  virtual void postProcessMatches(KCompletionMatches* matches) const;
+  virtual void postProcessMatch(QString* match) const Q_DECL_OVERRIDE;
+  virtual void postProcessMatches(QStringList* matches) const Q_DECL_OVERRIDE;
+  virtual void postProcessMatches(KCompletionMatches* matches) const Q_DECL_OVERRIDE;
 
 private:
   bool m_multiple;

@@ -41,10 +41,10 @@ public:
   enum Mode { PerfectMatchOnly, GoodMatchOrBetter };
   EntryUpdateJob(QObject* parent, Data::EntryPtr entry, Fetch::Fetcher::Ptr fetcher, Mode mode = PerfectMatchOnly);
 
-  virtual void start();
+  virtual void start() Q_DECL_OVERRIDE;
 
 protected:
-  bool doKill();
+  bool doKill() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void startUpdate();

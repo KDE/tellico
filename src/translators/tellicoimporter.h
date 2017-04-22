@@ -64,7 +64,7 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
   Format format() const { return m_format; }
 
   bool hasImages() const;

@@ -41,14 +41,14 @@ public:
   FetcherJob(QObject* parent, Fetcher::Ptr fetcher, const FetchRequest& request);
   ~FetcherJob();
 
-  virtual void start();
+  virtual void start() Q_DECL_OVERRIDE;
 
   QList<Tellico::Fetch::FetchResult*> results() { return m_results; }
   Data::EntryList entries();
   void setMaximumResults(int count);
 
 protected:
-  bool doKill();
+  bool doKill() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void startSearch();

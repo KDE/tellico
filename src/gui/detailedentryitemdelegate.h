@@ -34,7 +34,7 @@ public:
   DetailedEntryItemDelegate(QObject* parent) : QStyledItemDelegate(parent) {}
 
 protected:
-  void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const;
+  void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const Q_DECL_OVERRIDE;
 };
 
 } // end namespace;

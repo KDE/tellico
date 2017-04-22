@@ -39,12 +39,12 @@ Q_OBJECT
 public:
   TellicoZipExporter(Data::CollPtr coll);
 
-  virtual bool exec();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const;
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE;
 
   // no options
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return 0; }
 
   void setIncludeImages(bool b) { m_includeImages = b; }
 
