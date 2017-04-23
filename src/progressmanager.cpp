@@ -91,6 +91,7 @@ ProgressManager::ProgressManager() : QObject() {
 }
 
 void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
+  Q_ASSERT(owner_);
   if(!owner_ || !m_items.contains(owner_)) {
     return;
   }
@@ -101,7 +102,8 @@ void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
 }
 
 void ProgressManager::setTotalSteps(QObject* owner_, qulonglong steps_) {
-  if(!m_items.contains(owner_)) {
+  Q_ASSERT(owner_);
+  if(!owner_ || !m_items.contains(owner_)) {
     return;
   }
 
@@ -111,10 +113,7 @@ void ProgressManager::setTotalSteps(QObject* owner_, qulonglong steps_) {
 
 void ProgressManager::setDone(QObject* owner_) {
   Q_ASSERT(owner_);
-  if(!owner_) {
-    return;
-  }
-  if(!m_items.contains(owner_)) {
+  if(!owner_ || !m_items.contains(owner_)) {
     return;
   }
   setDone(m_items[owner_]);
@@ -145,6 +144,7 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
 ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
                                                    const QString& label_,
                                                    bool canCancel_) {
+  Q_ASSERT(owner_);
 //  myDebug() << owner_->className() << ":" << label_;
   if(m_items.contains(owner_)) {
     return *m_items[owner_];
@@ -201,4 +201,3 @@ bool ProgressManager::anyCanBeCancelled() const {
   }
   return false;
 }
-
