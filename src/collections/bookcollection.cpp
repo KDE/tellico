@@ -182,8 +182,10 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   field = new Field(QLatin1String("cover"), i18n("Front Cover"), Field::Image);
   list.append(field);
 
+  field = new Field(QLatin1String("plot"), i18n("Plot Summary"), Field::Para);
+  list.append(field);
+
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
-  field->setCategory(i18n(book_personal));
   list.append(field);
 
   list.append(createDefaultField(IDField));

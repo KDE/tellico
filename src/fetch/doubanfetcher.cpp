@@ -323,11 +323,6 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
         f->setCategory(i18n("General"));
         coll->addField(f);
       }
-      // always add a plot field. TODO: Eventually, should make a default field?
-      if(!coll->hasField(QLatin1String("plot"))) {
-        Data::FieldPtr f(new Data::Field(QLatin1String("plot"), i18n("Plot Summary"), Data::Field::Para));
-        coll->addField(f);
-      }
       entry = new Data::Entry(coll);
       populateBookEntry(entry, resultMap_);
       break;

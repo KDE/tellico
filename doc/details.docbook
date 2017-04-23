@@ -207,7 +207,7 @@ By default, all the collection types include an <emphasis>ID</emphasis> field, w
 <sect2 id="book-collection">
 <title>Book Collections</title>
 <para>
-Book collections have 26 default fields:
+Book collections have 27 default fields:
 <emphasis>Title</emphasis>,
 <emphasis>Subtitle</emphasis>,
 <emphasis>Author</emphasis>,
@@ -232,7 +232,8 @@ Book collections have 26 default fields:
 <emphasis>Gift</emphasis>,
 <emphasis>Loaned</emphasis>,
 <emphasis>Rating</emphasis>,
-<emphasis>Front Cover</emphasis>, and
+<emphasis>Front Cover</emphasis>,
+<emphasis>Plot Summary</emphasis>, and
 <emphasis>Comments</emphasis>.
 </para>
 
@@ -289,7 +290,7 @@ Book collections can be converted to bibliographies. Default bibtex fields are a
 <sect2 id="comic-book-collection">
 <title>Comic Book Collections</title>
 <para>
-Comic book collections have 22 default fields:
+Comic book collections have 23 default fields:
 <emphasis>Title</emphasis>,
 <emphasis>Subtitle</emphasis>,
 <emphasis>Writer</emphasis>,
@@ -310,7 +311,8 @@ Comic book collections have 22 default fields:
 <emphasis>Signed</emphasis>,
 <emphasis>Gift</emphasis>,
 <emphasis>Loaned</emphasis>,
-<emphasis>Front Cover</emphasis>, and
+<emphasis>Front Cover</emphasis>,
+<emphasis>Plot Summary</emphasis>, and
 <emphasis>Comments</emphasis>.
 </para>
 

@@ -36,8 +36,6 @@
   <collection title="DBC Import" type="2">
    <fields>
     <field name="_default"/>
-    <!-- add a plot field -->
-     <field flags="0" title="Plot" category="Plot Summary" format="4" type="2" name="plot" i18n="true"/>
    </fields>
    <!-- only grab records whose type is Book, "Bog" -->
    <xsl:apply-templates select="dbc:searchResponse/dbc:result/dbc:searchResult/dbc:collection/dbc:object/dkabm:record[dc:type[@xsi:type='dkdcplus:BibDK-Type']='Bog']"/>

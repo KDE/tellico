@@ -275,10 +275,7 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   const QString lang = value(resultMap, "inLanguage");
   entry->setField(QLatin1String("language"), QLocale(lang.toLower()).nativeLanguageName());
 
-  Data::FieldPtr f(new Data::Field(QLatin1String("plot"), i18n("Plot Summary"), Data::Field::Para));
-  coll->addField(f);
-  entry->setField(f, value(resultMap, "description"));
-
+  entry->setField(QLatin1String("plot"), value(resultMap, "description"));
   entry->setField(QLatin1String("pages"), value(resultMap, "numberOfPages"));
   entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
 
