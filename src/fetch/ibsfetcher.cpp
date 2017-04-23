@@ -133,7 +133,7 @@ void IBSFetcher::stop() {
 
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -185,7 +185,7 @@ void IBSFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
   stop();
 }
 

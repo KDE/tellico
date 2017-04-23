@@ -55,7 +55,7 @@ FetcherConfigDialog::FetcherConfigDialog(QWidget* parent_)
     : QDialog(parent_)
     , m_newSource(true)
     , m_useDefaultName(true)
-    , m_configWidget(0) {
+    , m_configWidget(nullptr) {
   init(Fetch::Unknown);
 }
 
@@ -130,7 +130,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     m_typeCombo->setWhatsThis(w);
     label->setBuddy(m_typeCombo);
   } else {
-    m_typeCombo = 0;
+    m_typeCombo = nullptr;
     QLabel* lab = new QLabel(Fetch::Manager::typeName(type_), widget);
     gl->addWidget(lab, row, 1);
     lab->setWhatsThis(w);
@@ -160,7 +160,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     m_typeCombo->setCurrentIndex(z3950_idx);
     slotNewSourceSelected(z3950_idx);
   } else {
-    m_stack = 0;
+    m_stack = nullptr;
     // just add config widget and reparent
     m_configWidget->setParent(widget);
     m_configWidget->show();

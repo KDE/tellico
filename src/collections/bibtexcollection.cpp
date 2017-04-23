@@ -316,7 +316,7 @@ bool BibtexCollection::removeField(const QString& name_, bool force_) {
 }
 
 Tellico::Data::FieldPtr BibtexCollection::fieldByBibtexName(const QString& bibtex_) const {
-  return FieldPtr(m_bibtexFieldDict.contains(bibtex_) ? m_bibtexFieldDict.value(bibtex_) : 0);
+  return FieldPtr(m_bibtexFieldDict.contains(bibtex_) ? m_bibtexFieldDict.value(bibtex_) : nullptr);
 }
 
 Tellico::Data::EntryPtr BibtexCollection::entryByBibtexKey(const QString& key_) const {

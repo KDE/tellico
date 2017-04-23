@@ -183,7 +183,7 @@ class IMDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  explicit ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = nullptr);
 
   virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;

@@ -48,7 +48,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
     , QSharedData()
     , m_updateOverwrite(false)
     , m_hasMoreResults(false)
-    , m_messager(0) {
+    , m_messager(nullptr) {
 }
 
 Fetcher::~Fetcher() {

@@ -56,7 +56,7 @@ void EntryUpdateJobTest::testUpdate() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   // don't use 'this' as job parent, it crashes
-  Tellico::EntryUpdateJob* job = new Tellico::EntryUpdateJob(0, entry, fetcher);
+  Tellico::EntryUpdateJob* job = new Tellico::EntryUpdateJob(nullptr, entry, fetcher);
   connect(job, SIGNAL(result(KJob*)), &m_loop, SLOT(quit()));
 
   job->start();

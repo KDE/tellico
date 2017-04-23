@@ -89,7 +89,7 @@ public:
    *
    * @return A pointer to the setting widget
    */
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
   /**
    * Checks to see if the importer can return a collection of this type
    *

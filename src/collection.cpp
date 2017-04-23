@@ -666,7 +666,7 @@ Tellico::Data::EntryGroupDict* Collection::entryGroupDictByName(const QString& n
 //  myDebug() << name_;
   m_lastGroupField = name_; // keep track, even if it's invalid
   if(name_.isEmpty() || !m_entryGroupDicts.contains(name_) || m_entries.isEmpty()) {
-    return 0;
+    return nullptr;
   }
   EntryGroupDict* dict = m_entryGroupDicts.value(name_);
   if(dict && dict->isEmpty()) {

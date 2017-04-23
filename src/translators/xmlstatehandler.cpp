@@ -111,7 +111,7 @@ StateHandler* DocumentHandler::nextHandlerImpl(const QString&, const QString& lo
   } else if(localName_ == QLatin1String("borrowers")) {
     return new BorrowersHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool DocumentHandler::start(const QString&, const QString& localName_, const QString&, const QXmlAttributes& atts_) {
@@ -156,7 +156,7 @@ StateHandler* CollectionHandler::nextHandlerImpl(const QString&, const QString& 
   } else if(localName_ == QLatin1String("images")) {
     return new ImagesHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool CollectionHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
@@ -230,7 +230,7 @@ StateHandler* FieldsHandler::nextHandlerImpl(const QString&, const QString& loca
      (d->syntaxVersion < 4 && localName_ == QLatin1String("attribute"))) {
     return new FieldHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool FieldsHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
@@ -281,7 +281,7 @@ StateHandler* FieldHandler::nextHandlerImpl(const QString&, const QString& local
   if(localName_ == QLatin1String("prop")) {
     return new FieldPropertyHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool FieldHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
@@ -442,7 +442,7 @@ StateHandler* BibtexMacrosHandler::nextHandlerImpl(const QString&, const QString
   if(localName_ == QLatin1String("macro")) {
     return new BibtexMacroHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool BibtexMacrosHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
@@ -530,7 +530,7 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
   } else if(localName_ == QLatin1String("column")) {
     return new TableColumnHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool FieldValueHandler::start(const QString&, const QString&, const QString& localName_, const QXmlAttributes& atts_) {
@@ -596,7 +596,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   }
   // special case for isbn fields, go ahead and validate
   if(m_validateISBN) {
-    ISBNValidator val(0);
+    ISBNValidator val(nullptr);
     val.fixup(fieldValue);
   }
   // for fields with multiple values, we need to add on the new value
@@ -674,7 +674,7 @@ StateHandler* ImagesHandler::nextHandlerImpl(const QString&, const QString& loca
   if(localName_ == QLatin1String("image")) {
     return new ImageHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool ImagesHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
@@ -723,7 +723,7 @@ StateHandler* FiltersHandler::nextHandlerImpl(const QString&, const QString& loc
   if(localName_ == QLatin1String("filter")) {
     return new FilterHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool FiltersHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
@@ -738,7 +738,7 @@ StateHandler* FilterHandler::nextHandlerImpl(const QString&, const QString& loca
   if(localName_ == QLatin1String("rule")) {
     return new FilterRuleHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool FilterHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
@@ -807,7 +807,7 @@ StateHandler* BorrowersHandler::nextHandlerImpl(const QString&, const QString& l
   if(localName_ == QLatin1String("borrower")) {
     return new BorrowerHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool BorrowersHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
@@ -822,7 +822,7 @@ StateHandler* BorrowerHandler::nextHandlerImpl(const QString&, const QString& lo
   if(localName_ == QLatin1String("loan")) {
     return new LoanHandler(d);
   }
-  return 0;
+  return nullptr;
 }
 
 bool BorrowerHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {

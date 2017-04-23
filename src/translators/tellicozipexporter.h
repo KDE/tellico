@@ -44,7 +44,7 @@ public:
   virtual QString fileFilter() const;
 
   // no options
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
 
   void setIncludeImages(bool b) { m_includeImages = b; }
 

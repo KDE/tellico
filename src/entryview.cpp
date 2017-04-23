@@ -75,7 +75,7 @@ void EntryViewWidget::changeEvent(QEvent* event_) {
 }
 
 EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, parent_), parent_),
-    m_handler(0), m_tempFile(0), m_useGradientImages(true), m_checkCommonFile(true) {
+    m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
   setJScriptEnabled(false);
   setJavaEnabled(false);
   setMetaRefreshEnabled(false);
@@ -94,13 +94,13 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
 
 EntryView::~EntryView() {
   delete m_handler;
-  m_handler = 0;
+  m_handler = nullptr;
   delete m_tempFile;
-  m_tempFile = 0;
+  m_tempFile = nullptr;
 }
 
 void EntryView::clear() {
-  m_entry = 0;
+  m_entry = nullptr;
 
   // just clear the view
   begin();
@@ -274,7 +274,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       myWarning() << "invalid xslt handler";
       clear();
       delete m_handler;
-      m_handler = 0;
+      m_handler = nullptr;
       return;
     }
   }
@@ -350,7 +350,7 @@ void EntryView::slotReloadEntry() {
     clear();
   }
   delete m_tempFile;
-  m_tempFile = 0;
+  m_tempFile = nullptr;
 }
 
 void EntryView::addXSLTStringParam(const QByteArray& name_, const QByteArray& value_) {
@@ -375,7 +375,7 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
 
 void EntryView::resetView() {
   delete m_handler;
-  m_handler = 0;
+  m_handler = nullptr;
   setXSLTFile(m_xsltFile); // this ends up calling resetColors()
 }
 
@@ -404,7 +404,7 @@ void EntryView::resetColors() {
   if(!m_tempFile->open()) {
     myDebug() << "failed to open temp file";
     delete m_tempFile;
-    m_tempFile = 0;
+    m_tempFile = nullptr;
     return;
   }
   QTextStream stream(m_tempFile);

@@ -58,24 +58,24 @@
 using Tellico::Import::CSVImporter;
 
 CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
-    m_existingCollection(0),
+    m_existingCollection(nullptr),
     m_firstRowHeader(false),
     m_delimiter(QLatin1String(",")),
     m_cancelled(false),
-    m_widget(0),
-    m_comboColl(0),
-    m_checkFirstRowHeader(0),
-    m_radioComma(0),
-    m_radioSemicolon(0),
-    m_radioTab(0),
-    m_radioOther(0),
-    m_editOther(0),
-    m_editColDelimiter(0),
-    m_editRowDelimiter(0),
-    m_table(0),
-    m_colSpinBox(0),
-    m_comboField(0),
-    m_setColumnBtn(0),
+    m_widget(nullptr),
+    m_comboColl(nullptr),
+    m_checkFirstRowHeader(nullptr),
+    m_radioComma(nullptr),
+    m_radioSemicolon(nullptr),
+    m_radioTab(nullptr),
+    m_radioOther(nullptr),
+    m_editOther(nullptr),
+    m_editColDelimiter(nullptr),
+    m_editRowDelimiter(nullptr),
+    m_table(nullptr),
+    m_colSpinBox(nullptr),
+    m_comboField(nullptr),
+    m_setColumnBtn(nullptr),
     m_hasAssignedFields(false),
     m_isLibraryThing(false),
     m_parser(new CSVParser(text())) {
@@ -84,7 +84,7 @@ CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_)
 
 CSVImporter::~CSVImporter() {
   delete m_parser;
-  m_parser = 0;
+  m_parser = nullptr;
 }
 
 Tellico::Data::CollPtr CSVImporter::collection() {
@@ -592,7 +592,7 @@ void CSVImporter::slotFieldChanged(int idx_) {
 void CSVImporter::slotActionChanged(int action_) {
   Data::CollPtr currColl = currentCollection();
   if(!currColl) {
-    m_existingCollection = 0;
+    m_existingCollection = nullptr;
     return;
   }
 
@@ -602,7 +602,7 @@ void CSVImporter::slotActionChanged(int action_) {
         int currType = m_comboColl->currentType();
         m_comboColl->reset();
         m_comboColl->setCurrentType(currType);
-        m_existingCollection = 0;
+        m_existingCollection = nullptr;
       }
       break;
 

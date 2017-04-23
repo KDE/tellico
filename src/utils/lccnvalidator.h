@@ -43,7 +43,7 @@ class LCCNValidator : public QRegExpValidator {
 Q_OBJECT
 
 public:
-  LCCNValidator(QObject* parent);
+  LCCNValidator(QObject* parent = nullptr);
 
   /**
    * Returns the formalized version as dictated by LOC search

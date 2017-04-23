@@ -59,13 +59,13 @@ static bool isUTF8(const QUrl& url_) {
 
 // always use utf8 for xslt
 XSLTImporter::XSLTImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_, isUTF8(url_)),
-    m_widget(0),
-    m_URLRequester(0) {
+    m_widget(nullptr),
+    m_URLRequester(nullptr) {
 }
 
 XSLTImporter::XSLTImporter(const QString& text_) : Tellico::Import::TextImporter(text_),
-    m_widget(0),
-    m_URLRequester(0) {
+    m_widget(nullptr),
+    m_URLRequester(nullptr) {
 }
 
 Tellico::Data::CollPtr XSLTImporter::collection() {
@@ -107,7 +107,7 @@ Tellico::Data::CollPtr XSLTImporter::collection() {
 QWidget* XSLTImporter::widget(QWidget* parent_) {
   // if the url has already been set, then there's no widget
   if(!m_xsltURL.isEmpty()) {
-    return 0;
+    return nullptr;
   }
 
   m_widget = new QWidget(parent_);

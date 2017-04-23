@@ -57,12 +57,12 @@ private:
   Data::ID m_id;
 };
 
-FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)), m_beingInvalidated(false) {
+FilterModel::FilterModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(nullptr)), m_beingInvalidated(false) {
 }
 
 FilterModel::~FilterModel() {
   delete m_rootNode;
-  m_rootNode = 0;
+  m_rootNode = nullptr;
 }
 
 int FilterModel::rowCount(const QModelIndex& index_) const {
@@ -180,7 +180,7 @@ void FilterModel::clear() {
   beginResetModel();
   m_filters.clear();
   delete m_rootNode;
-  m_rootNode = new Node(0);
+  m_rootNode = new Node(nullptr);
   endResetModel();
 }
 

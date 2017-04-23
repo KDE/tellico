@@ -36,7 +36,7 @@ Tellico::Wallet* Wallet::self() {
   return &wallet;
 }
 
-Wallet::Wallet() : m_wallet(0) {
+Wallet::Wallet() : m_wallet(nullptr) {
 }
 
 bool Wallet::prepareWallet() {
@@ -46,7 +46,7 @@ bool Wallet::prepareWallet() {
   }
   if(!m_wallet || !m_wallet->isOpen()) {
     delete m_wallet;
-    m_wallet = 0;
+    m_wallet = nullptr;
     return false;
   }
 

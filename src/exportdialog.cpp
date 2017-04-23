@@ -142,7 +142,7 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
 
 ExportDialog::~ExportDialog() {
   delete m_exporter;
-  m_exporter = 0;
+  m_exporter = nullptr;
 }
 
 QString ExportDialog::fileFilter() {
@@ -176,7 +176,7 @@ void ExportDialog::slotSaveOptions() {
 
 // static
 Tellico::Export::Exporter* ExportDialog::exporter(Tellico::Export::Format format_, Data::CollPtr coll_) {
-  Export::Exporter* exporter = 0;
+  Export::Exporter* exporter = nullptr;
 
   switch(format_) {
     case Export::TellicoXML:

@@ -56,7 +56,7 @@ QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
 
   // once it gets converted to an ISBN, remember that, and use it for later
   if(input_.startsWith(QLatin1String("978")) || input_.startsWith(QLatin1String("979"))) {
-    ISBNValidator val(0);
+    ISBNValidator val;
     QValidator::State s = val.validate(input_, pos_);
     if(s == QValidator::Acceptable) {
       m_isbn = true;
@@ -88,7 +88,7 @@ void UPCValidator::fixup(QString& input_) const {
   const uint len = input_.length();
   if(len > 12 && (input_.startsWith(QLatin1String("978")) || input_.startsWith(QLatin1String("979")))) {
     QString s = input_;
-    ISBNValidator val(0);
+    ISBNValidator val;
     int p = 0;
     int state = val.validate(s, p);
     if(state == QValidator::Acceptable) {
@@ -138,4 +138,3 @@ QValidator::State Tellico::CueCat::decode(QString& input_) {
   input_ = code;
   return QValidator::Acceptable;
 }
-

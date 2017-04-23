@@ -36,7 +36,7 @@ namespace {
 using Tellico::GUI::ChoiceFieldWidget;
 
 ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
-    : FieldWidget(field_, parent_), m_comboBox(0) {
+    : FieldWidget(field_, parent_), m_comboBox(nullptr) {
 
   m_comboBox = new QComboBox(this);
   connect(m_comboBox, SIGNAL(activated(int)), SLOT(checkModified()));

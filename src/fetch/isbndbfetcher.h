@@ -48,7 +48,7 @@ class ISBNdbFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  ISBNdbFetcher(QObject* parent = 0);
+  ISBNdbFetcher(QObject* parent = nullptr);
   ~ISBNdbFetcher();
 
   virtual QString source() const;
@@ -66,7 +66,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:

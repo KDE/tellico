@@ -62,7 +62,7 @@ using Tellico::XSLTHandler;
 XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() {
   m_buf = xmlOutputBufferCreateIO((xmlOutputWriteCallback)writeToQString,
                                   (xmlOutputCloseCallback)closeQString,
-                                  &m_res, 0);
+                                  &m_res, nullptr);
   if(m_buf) {
     m_buf->written = 0;
   } else {
@@ -73,18 +73,18 @@ XSLTHandler::XMLOutputBuffer::XMLOutputBuffer() {
 XSLTHandler::XMLOutputBuffer::~XMLOutputBuffer() {
   if(m_buf) {
     xmlOutputBufferClose(m_buf); //also flushes
-    m_buf = 0;
+    m_buf = nullptr;
   }
 }
 
 int XSLTHandler::s_initCount = 0;
 
 XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
-    m_stylesheet(0) {
+    m_stylesheet(nullptr) {
   init();
   QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
   if(!file.isEmpty()) {
-    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), 0, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(file.constData(), nullptr, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltFile_;
@@ -95,10 +95,10 @@ XSLTHandler::XSLTHandler(const QByteArray& xsltFile_) :
 }
 
 XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
-    m_stylesheet(0) {
+    m_stylesheet(nullptr) {
   init();
   if(xsltURL_.isValid() && xsltURL_.isLocalFile()) {
-    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8().constData(), 0, xslt_options);
+    xmlDocPtr xsltDoc = xmlReadFile(xsltURL_.toLocalFile().toUtf8().constData(), nullptr, xslt_options);
     m_stylesheet = xsltParseStylesheetDoc(xsltDoc);
     if(!m_stylesheet) {
       myDebug() << "null stylesheet pointer for " << xsltURL_.path();
@@ -109,7 +109,7 @@ XSLTHandler::XSLTHandler(const QUrl& xsltURL_) :
 }
 
 XSLTHandler::XSLTHandler(const QDomDocument& xsltDoc_, const QByteArray& xsltFile_, bool translate_) :
-    m_stylesheet(0) {
+    m_stylesheet(nullptr) {
   init();
   QByteArray file = QUrl::toPercentEncoding(QString::fromLocal8Bit(xsltFile_));
   if(!xsltDoc_.isNull() && !file.isEmpty()) {
@@ -145,7 +145,7 @@ void XSLTHandler::init() {
 }
 
 bool XSLTHandler::isValid() const {
-  return (m_stylesheet != 0);
+  return (m_stylesheet != nullptr);
 }
 
 void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFile_, bool translate_) {
@@ -176,9 +176,9 @@ void XSLTHandler::setXSLTDoc(const QDomDocument& dom_, const QByteArray& xsltFil
 
   xmlDocPtr xsltDoc;
   if(utf8) {
-    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toUtf8().data()), xsltFile_.data(), 0, xslt_options);
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toUtf8().data()), xsltFile_.data(), nullptr, xslt_options);
   } else {
-    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toLocal8Bit().data()), xsltFile_.data(), 0, xslt_options);
+    xsltDoc = xmlReadDoc(reinterpret_cast<xmlChar*>(s.toLocal8Bit().data()), xsltFile_.data(), nullptr, xslt_options);
   }
 
   if(m_stylesheet) {
@@ -228,7 +228,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
   }
 
   xmlDocPtr docIn;
-  docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), 0, 0, xml_options);
+  docIn = xmlReadDoc(reinterpret_cast<xmlChar*>(text_.toUtf8().data()), nullptr, nullptr, xml_options);
 
   return process(docIn);
 }
@@ -240,13 +240,13 @@ QString XSLTHandler::process(xmlDocPtr docIn) {
   }
 
   QVector<const char*> params(2*m_params.count() + 1);
-  params[0] = 0;
+  params[0] = nullptr;
   QHash<QByteArray, QByteArray>::ConstIterator it = m_params.constBegin();
   QHash<QByteArray, QByteArray>::ConstIterator end = m_params.constEnd();
   for(int i = 0; it != end; ++it) {
     params[i  ] = qstrdup(it.key().constData());
     params[i+1] = qstrdup(it.value().constData());
-    params[i+2] = 0;
+    params[i+2] = nullptr;
     i += 2;
   }
   // returns NULL on error
@@ -257,7 +257,7 @@ QString XSLTHandler::process(xmlDocPtr docIn) {
   }
 
   xmlFreeDoc(docIn);
-  docIn = 0;
+  docIn = nullptr;
 
   if(!docOut) {
     myDebug() << "error applying stylesheet!";
@@ -273,7 +273,7 @@ QString XSLTHandler::process(xmlDocPtr docIn) {
   }
 
   xmlFreeDoc(docOut);
-  docOut = 0;
+  docOut = nullptr;
 
   return output.result();
 }

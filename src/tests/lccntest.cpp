@@ -48,7 +48,7 @@ void LccnTest::testValidation() {
   QFETCH(QString, string);
   QFETCH(QValidator::State, state);
 
-  Tellico::LCCNValidator val(0);
+  Tellico::LCCNValidator val;
   int pos = 0;
 
   QCOMPARE(val.validate(string, pos), state);

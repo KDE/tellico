@@ -58,12 +58,12 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::ArxivFetcher;
 
 ArxivFetcher::ArxivFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0), m_start(0), m_total(-1), m_job(0), m_started(false) {
+    : Fetcher(parent_), m_xsltHandler(nullptr), m_start(0), m_total(-1), m_job(nullptr), m_started(false) {
 }
 
 ArxivFetcher::~ArxivFetcher() {
   delete m_xsltHandler;
-  m_xsltHandler = 0;
+  m_xsltHandler = nullptr;
 }
 
 QString ArxivFetcher::source() const {
@@ -109,7 +109,7 @@ void ArxivFetcher::stop() {
 //  myDebug();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -132,7 +132,7 @@ void ArxivFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 #if 0
   myWarning() << "Remove debug from arxivfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
@@ -238,7 +238,7 @@ void ArxivFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in arxiv2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

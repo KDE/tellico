@@ -159,7 +159,7 @@ void TheMovieDBFetcher::stop() {
   }
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -241,7 +241,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from themoviedbfetcher.cpp";

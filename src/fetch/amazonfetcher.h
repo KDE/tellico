@@ -151,7 +151,7 @@ class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  explicit ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent_, const AmazonFetcher* fetcher = nullptr);
 
   virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;

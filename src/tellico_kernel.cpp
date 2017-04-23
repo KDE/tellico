@@ -52,7 +52,7 @@
 #include <QUndoStack>
 
 using Tellico::Kernel;
-Kernel* Kernel::s_self = 0;
+Kernel* Kernel::s_self = nullptr;
 
 Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
     , m_commandHistory(new QUndoStack(parent)) {

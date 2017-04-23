@@ -139,19 +139,19 @@ using namespace Tellico;
 using Tellico::MainWindow;
 
 MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
-    m_updateAll(0),
-    m_statusBar(0),
-    m_editDialog(0),
-    m_groupView(0),
-    m_filterView(0),
-    m_loanView(0),
-    m_configDlg(0),
-    m_filterDlg(0),
-    m_collFieldsDlg(0),
-    m_stringMacroDlg(0),
-    m_bibtexKeyDlg(0),
-    m_fetchDlg(0),
-    m_reportDlg(0),
+    m_updateAll(nullptr),
+    m_statusBar(nullptr),
+    m_editDialog(nullptr),
+    m_groupView(nullptr),
+    m_filterView(nullptr),
+    m_loanView(nullptr),
+    m_configDlg(nullptr),
+    m_filterDlg(nullptr),
+    m_collFieldsDlg(nullptr),
+    m_stringMacroDlg(nullptr),
+    m_bibtexKeyDlg(nullptr),
+    m_fetchDlg(nullptr),
+    m_reportDlg(nullptr),
     m_queuedFilters(0),
     m_initialized(false),
     m_newDocument(true),
@@ -1058,13 +1058,13 @@ void MainWindow::slotFileNew(int type_) {
       m_viewTabs->removeTab(m_viewTabs->indexOf(m_filterView));
       Controller::self()->removeObserver(m_filterView);
       delete m_filterView;
-      m_filterView = 0;
+      m_filterView = nullptr;
     }
     if(m_loanView) {
       m_viewTabs->removeTab(m_viewTabs->indexOf(m_loanView));
       Controller::self()->removeObserver(m_loanView);
       delete m_loanView;
-      m_loanView = 0;
+      m_loanView = nullptr;
     }
     m_viewTabs->setTabBarHidden(true);
     Data::Document::self()->newDocument(type_);
@@ -1180,13 +1180,13 @@ bool MainWindow::openURL(const QUrl& url_) {
     m_viewTabs->removeTab(m_viewTabs->indexOf(m_filterView));
     Controller::self()->removeObserver(m_filterView);
     delete m_filterView;
-    m_filterView = 0;
+    m_filterView = nullptr;
   }
   if(m_loanView && m_loanView->isEmpty()) {
     m_viewTabs->removeTab(m_viewTabs->indexOf(m_loanView));
     Controller::self()->removeObserver(m_loanView);
     delete m_loanView;
-    m_loanView = 0;
+    m_loanView = nullptr;
   }
   Controller::self()->hideTabs(); // does conditional check
 
@@ -1437,7 +1437,7 @@ void MainWindow::slotHideConfigDialog() {
   if(m_configDlg) {
     m_configDlg->hide();
     m_configDlg->deleteLater();
-    m_configDlg = 0;
+    m_configDlg = nullptr;
   }
 }
 
@@ -1599,7 +1599,7 @@ void MainWindow::slotHideReportDialog() {
   if(m_reportDlg) {
     m_reportDlg->hide();
     m_reportDlg->deleteLater();
-    m_reportDlg = 0;
+    m_reportDlg = nullptr;
   }
 }
 
@@ -1660,7 +1660,7 @@ void MainWindow::slotHideFilterDialog() {
   if(m_filterDlg) {
     m_filterDlg->hide();
     m_filterDlg->deleteLater();
-    m_filterDlg = 0;
+    m_filterDlg = nullptr;
   }
 }
 
@@ -1753,7 +1753,7 @@ void MainWindow::slotHideCollectionFieldsDialog() {
   if(m_collFieldsDlg) {
     m_collFieldsDlg->hide();
     m_collFieldsDlg->deleteLater();
-    m_collFieldsDlg = 0;
+    m_collFieldsDlg = nullptr;
   }
 }
 
@@ -1876,7 +1876,7 @@ void MainWindow::slotStringMacroDialogFinished(int result_) {
   }
   m_stringMacroDlg->hide();
   m_stringMacroDlg->deleteLater();
-  m_stringMacroDlg = 0;
+  m_stringMacroDlg = nullptr;
 }
 
 void MainWindow::slotShowBibtexKeyDialog() {
@@ -1898,7 +1898,7 @@ void MainWindow::slotShowBibtexKeyDialog() {
 void MainWindow::slotHideBibtexKeyDialog() {
   if(m_bibtexKeyDlg) {
     m_bibtexKeyDlg->deleteLater();
-    m_bibtexKeyDlg = 0;
+    m_bibtexKeyDlg = nullptr;
   }
 }
 
@@ -1968,7 +1968,7 @@ void MainWindow::slotHideFetchDialog() {
   if(m_fetchDlg) {
     m_fetchDlg->hide();
     m_fetchDlg->deleteLater();
-    m_fetchDlg = 0;
+    m_fetchDlg = nullptr;
   }
 }
 

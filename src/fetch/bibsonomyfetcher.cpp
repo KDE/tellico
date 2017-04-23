@@ -51,7 +51,7 @@ using namespace Tellico;
 using Tellico::Fetch::BibsonomyFetcher;
 
 BibsonomyFetcher::BibsonomyFetcher(QObject* parent_)
-    : Fetcher(parent_), m_job(0), m_started(false) {
+    : Fetcher(parent_), m_job(nullptr), m_started(false) {
 }
 
 BibsonomyFetcher::~BibsonomyFetcher() {
@@ -107,7 +107,7 @@ void BibsonomyFetcher::stop() {
 //  myDebug();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -130,7 +130,7 @@ void BibsonomyFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 
   Import::BibtexImporter imp(QString::fromUtf8(data.constData(), data.size()));
   Data::CollPtr coll = imp.collection();

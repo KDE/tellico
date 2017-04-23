@@ -36,7 +36,7 @@
 #include <QApplication>
 
 using Tellico::Import::CIWImporter;
-QHash<QString, QString>* CIWImporter::s_tagMap = 0;
+QHash<QString, QString>* CIWImporter::s_tagMap = nullptr;
 
 // static
 void CIWImporter::initTagMap() {
@@ -64,11 +64,11 @@ void CIWImporter::initTagMap() {
   }
 }
 
-CIWImporter::CIWImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+CIWImporter::CIWImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
 }
 
-CIWImporter::CIWImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(0), m_cancelled(false) {
+CIWImporter::CIWImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
 }
 

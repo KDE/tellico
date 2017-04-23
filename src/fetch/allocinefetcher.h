@@ -67,7 +67,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const = 0;
   private:
@@ -120,7 +120,7 @@ public:
 
   class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = nullptr);
     virtual QString preferredName() const;
   };
 

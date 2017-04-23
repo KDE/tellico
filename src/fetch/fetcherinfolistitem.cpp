@@ -29,7 +29,7 @@ using Tellico::FetcherInfoListItem;
 
 FetcherInfoListItem::FetcherInfoListItem(const Tellico::Fetch::FetcherInfo& info_, const QString& groupName_)
     : QListWidgetItem(), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
+      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(nullptr) {
   setData(Qt::DisplayRole, info_.name);
   QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
   if(!pix.isNull()) {
@@ -39,7 +39,7 @@ FetcherInfoListItem::FetcherInfoListItem(const Tellico::Fetch::FetcherInfo& info
 
 FetcherInfoListItem::FetcherInfoListItem(QListWidget* parent_, const Tellico::Fetch::FetcherInfo& info_, const QString& groupName_)
     : QListWidgetItem(parent_), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(0) {
+      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(nullptr) {
   setData(Qt::DisplayRole, info_.name);
   QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
   if(!pix.isNull()) {

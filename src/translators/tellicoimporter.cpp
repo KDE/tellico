@@ -48,19 +48,19 @@ using Tellico::Import::TellicoImporter;
 
 TellicoImporter::TellicoImporter(const QUrl& url_, bool loadAllImages_) : DataImporter(url_),
     m_loadAllImages(loadAllImages_), m_format(Unknown), m_modified(false),
-    m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
+    m_cancelled(false), m_hasImages(false), m_buffer(nullptr), m_zip(nullptr), m_imgDir(nullptr) {
 }
 
 TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_),
     m_loadAllImages(true), m_format(Unknown), m_modified(false),
-    m_cancelled(false), m_hasImages(false), m_buffer(0), m_zip(0), m_imgDir(0) {
+    m_cancelled(false), m_hasImages(false), m_buffer(nullptr), m_zip(nullptr), m_imgDir(nullptr) {
 }
 
 TellicoImporter::~TellicoImporter() {
   delete m_zip;
-  m_zip = 0;
+  m_zip = nullptr;
   delete m_buffer;
-  m_buffer = 0;
+  m_buffer = nullptr;
 }
 
 Tellico::Data::CollPtr TellicoImporter::collection() {
@@ -153,7 +153,7 @@ void TellicoImporter::loadZipData() {
   delete m_buffer;
   delete m_zip;
   if(source() == URL) {
-    m_buffer = 0;
+    m_buffer = nullptr;
     m_zip = new KZip(fileRef().fileName());
   } else {
     QByteArray allData = data();
@@ -164,9 +164,9 @@ void TellicoImporter::loadZipData() {
     setStatusMessage(i18n(errorLoad, url().fileName()));
     m_format = Error;
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
 
@@ -177,9 +177,9 @@ void TellicoImporter::loadZipData() {
     setStatusMessage(str);
     m_format = Error;
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
 
@@ -194,9 +194,9 @@ void TellicoImporter::loadZipData() {
     setStatusMessage(str);
     m_format = Error;
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
 
@@ -205,26 +205,26 @@ void TellicoImporter::loadZipData() {
   if(!m_coll) {
     m_format = Error;
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
 
   if(m_cancelled) {
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
 
   const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     delete m_buffer;
-    m_buffer = 0;
+    m_buffer = nullptr;
     return;
   }
   m_imgDir = static_cast<const KArchiveDirectory*>(imgDirEntry);
@@ -285,7 +285,7 @@ bool TellicoImporter::loadImage(const QString& id_) {
 
 KZip* TellicoImporter::takeImages() {
   KZip* zip = m_zip;
-  m_zip = 0;
+  m_zip = nullptr;
   return zip;
 }
 

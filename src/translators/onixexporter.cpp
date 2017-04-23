@@ -51,16 +51,16 @@
 using Tellico::Export::ONIXExporter;
 
 ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
-    m_handler(0),
+    m_handler(nullptr),
     m_xsltFile(QLatin1String("tellico2onix.xsl")),
     m_includeImages(true),
-    m_widget(0),
-    m_checkIncludeImages(0) {
+    m_widget(nullptr),
+    m_checkIncludeImages(nullptr) {
 }
 
 ONIXExporter::~ONIXExporter() {
   delete m_handler;
-  m_handler = 0;
+  m_handler = nullptr;
 }
 
 QString ONIXExporter::formatString() const {

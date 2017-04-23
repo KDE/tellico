@@ -65,7 +65,7 @@ class KWidgetLister : public QWidget
   Q_OBJECT
   public:
     explicit KWidgetLister( int minWidgets=1, int maxWidgets=8,
-                            QWidget *parent=0, const char *name=0 );
+                            QWidget *parent=nullptr, const char *name=nullptr );
     virtual ~KWidgetLister();
 
   protected Q_SLOTS:
@@ -99,7 +99,7 @@ class KWidgetLister : public QWidget
         implementaion, though, since you cannot put the widget on screen
         from derived classes (@p mLayout is private).
         Make sure the parent of the QWidget to add is this KWidgetLister. */
-    virtual void addWidgetAtEnd( QWidget *w=0 );
+    virtual void addWidgetAtEnd( QWidget *w=nullptr );
 
     /** Removes a single (always the last) widget. Doesn't care if there
         are still only @ref mMinWidgets left on screen and whether it

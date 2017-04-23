@@ -40,16 +40,16 @@ using Tellico::ImageDirectory;
 using Tellico::TemporaryImageDirectory;
 using Tellico::ImageZipArchive;
 
-ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_dir(0) {
+ImageDirectory::ImageDirectory() : ImageStorage(), m_pathExists(false), m_dir(nullptr) {
 }
 
-ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() , m_dir(0) {
+ImageDirectory::ImageDirectory(const QString& path_) : ImageStorage() , m_dir(nullptr) {
   setPath(path_);
 }
 
 ImageDirectory::~ImageDirectory() {
   delete m_dir;
-  m_dir = 0;
+  m_dir = nullptr;
 }
 
 QString ImageDirectory::path() {
@@ -76,19 +76,19 @@ bool ImageDirectory::hasImage(const QString& id_) {
 
 Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
   if(!hasImage(id_)) {
-    return 0;
+    return nullptr;
   }
 
   QUrl imgUrl = QUrl::fromLocalFile(path() + id_);
   Data::Image* img = FileHandler::readImageFile(imgUrl, id_, true /* quiet */);
   if(!img) {
     myLog() << "image not found:" << imgUrl.url();
-    return 0;
+    return nullptr;
   }
   if(img->isNull()) {
     myLog() << "image found but null:" << imgUrl.url();
     delete img;
-    return 0;
+    return nullptr;
   }
   return img;
 }
@@ -121,7 +121,7 @@ bool ImageDirectory::removeImage(const QString& id_) {
   return QFile::remove(path() + id_);
 }
 
-TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(0) {
+TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(nullptr) {
 }
 
 TemporaryImageDirectory::~TemporaryImageDirectory() {
@@ -130,7 +130,7 @@ TemporaryImageDirectory::~TemporaryImageDirectory() {
 
 void TemporaryImageDirectory::purge() {
   delete m_dir;
-  m_dir = 0;
+  m_dir = nullptr;
 }
 
 QString TemporaryImageDirectory::path() {
@@ -147,30 +147,30 @@ void TemporaryImageDirectory::setPath(const QString& path) {
   Q_ASSERT(path.isEmpty()); // should never be called, that's why it's private
 }
 
-ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(0), m_imgDir(0) {
+ImageZipArchive::ImageZipArchive() : ImageStorage(), m_zip(nullptr), m_imgDir(nullptr) {
 }
 
 ImageZipArchive::~ImageZipArchive() {
   delete m_zip;
-  m_zip = 0;
+  m_zip = nullptr;
 }
 
 void ImageZipArchive::setZip(KZip* zip_) {
   m_images.clear();
   delete m_zip;
   m_zip = zip_;
-  m_imgDir = 0;
+  m_imgDir = nullptr;
 
   const KArchiveDirectory* dir = m_zip->directory();
   if(!dir) {
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     return;
   }
   const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     delete m_zip;
-    m_zip = 0;
+    m_zip = nullptr;
     return;
   }
   m_imgDir = static_cast<const KArchiveDirectory*>(imgDirEntry);
@@ -183,9 +183,9 @@ bool ImageZipArchive::hasImage(const QString& id_) {
 
 Tellico::Data::Image* ImageZipArchive::imageById(const QString& id_) {
   if(!hasImage(id_)) {
-    return 0;
+    return nullptr;
   }
-  Data::Image* img = 0;
+  Data::Image* img = nullptr;
   const KArchiveEntry* file = m_imgDir->entry(id_);
   if(file && file->isFile()) {
     img = new Data::Image(static_cast<const KArchiveFile*>(file)->data(),
@@ -196,17 +196,17 @@ Tellico::Data::Image* ImageZipArchive::imageById(const QString& id_) {
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     delete m_zip;
-    m_zip = 0;
-    m_imgDir = 0;
+    m_zip = nullptr;
+    m_imgDir = nullptr;
   }
   if(!img) {
     myLog() << "image not found:" << id_;
-    return 0;
+    return nullptr;
   }
   if(img->isNull()) {
     myLog() << "image found but null:" << id_;
     delete img;
-    return 0;
+    return nullptr;
   }
   return img;
 }

@@ -54,14 +54,14 @@ using namespace Tellico;
 using Tellico::Fetch::HathiTrustFetcher;
 
 HathiTrustFetcher::HathiTrustFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_MARC21XMLHandler(0), m_MODSHandler(0) {
+    : Fetcher(parent_), m_started(false), m_MARC21XMLHandler(nullptr), m_MODSHandler(nullptr) {
 }
 
 HathiTrustFetcher::~HathiTrustFetcher() {
   delete m_MARC21XMLHandler;
-  m_MARC21XMLHandler = 0;
+  m_MARC21XMLHandler = nullptr;
   delete m_MODSHandler;
-  m_MODSHandler = 0;
+  m_MODSHandler = nullptr;
 }
 
 QString HathiTrustFetcher::source() const {
@@ -134,7 +134,7 @@ bool HathiTrustFetcher::initMARC21Handler() {
   if(!m_MARC21XMLHandler->isValid()) {
     myWarning() << "error in MARC21slim2MODS3.xsl.";
     delete m_MARC21XMLHandler;
-    m_MARC21XMLHandler = 0;
+    m_MARC21XMLHandler = nullptr;
     return false;
   }
   return true;
@@ -157,10 +157,10 @@ bool HathiTrustFetcher::initMODSHandler() {
   if(!m_MODSHandler->isValid()) {
     myWarning() << "error in mods2tellico.xsl.";
     delete m_MODSHandler;
-    m_MODSHandler = 0;
+    m_MODSHandler = nullptr;
     // no use in keeping the MARC handlers now
     delete m_MARC21XMLHandler;
-    m_MARC21XMLHandler = 0;
+    m_MARC21XMLHandler = nullptr;
     return false;
   }
   return true;
@@ -205,7 +205,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from hathitrustfetcher.cpp";

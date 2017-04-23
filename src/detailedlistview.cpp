@@ -606,8 +606,8 @@ void DetailedListView::checkHeader() {
     return;
   }
   // find title action in menu and activate it
-  QAction* action = 0;
-  QAction* fallbackAction = 0;
+  QAction* action = nullptr;
+  QAction* fallbackAction = nullptr;
   foreach(QAction* tryAction, m_columnMenu->actions()) {
     const int ncol = tryAction->data().toInt();
     if(ncol > -1 && columnFieldName(ncol) == QLatin1String("title")) {

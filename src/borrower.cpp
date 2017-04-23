@@ -30,7 +30,7 @@ using Tellico::Data::Loan;
 using Tellico::Data::Borrower;
 
 Loan::Loan(Tellico::Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note)
-    : QSharedData(), m_uid(Tellico::uid()), m_borrower(0), m_entry(entry), m_loanDate(loanDate), m_dueDate(dueDate),
+    : QSharedData(), m_uid(Tellico::uid()), m_borrower(nullptr), m_entry(entry), m_loanDate(loanDate), m_dueDate(dueDate),
       m_note(note), m_inCalendar(false) {
 }
 

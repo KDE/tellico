@@ -143,7 +143,7 @@ void BedethequeFetcher::stop() {
 
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -164,7 +164,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 
   QString output = Tellico::decodeHTML(data);
 #if 0
@@ -245,7 +245,7 @@ void BedethequeFetcher::slotLinkComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 
   QString output = Tellico::decodeHTML(data);
   Data::EntryPtr entry = parseEntry(output);

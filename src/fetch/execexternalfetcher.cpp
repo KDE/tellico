@@ -81,7 +81,7 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
 }
 
 ExecExternalFetcher::ExecExternalFetcher(QObject* parent_) : Fetcher(parent_),
-    m_started(false), m_collType(-1), m_formatType(-1), m_canUpdate(false), m_process(0), m_deleteOnRemove(false) {
+    m_started(false), m_collType(-1), m_formatType(-1), m_canUpdate(false), m_process(nullptr), m_deleteOnRemove(false) {
 }
 
 ExecExternalFetcher::~ExecExternalFetcher() {
@@ -190,7 +190,7 @@ void ExecExternalFetcher::stop() {
   if(m_process) {
     m_process->kill();
     m_process->deleteLater();
-    m_process = 0;
+    m_process = nullptr;
   }
   m_data.clear();
   m_started = false;
@@ -235,7 +235,7 @@ void ExecExternalFetcher::slotProcessExited() {
 
   const QString text = QString::fromUtf8(m_data.constData(), m_data.size());
   Import::Format format = static_cast<Import::Format>(m_formatType > -1 ? m_formatType : Import::TellicoXML);
-  Import::Importer* imp = 0;
+  Import::Importer* imp = nullptr;
   // only 4 formats re supported here
   switch(format) {
     case Import::TellicoXML:
@@ -256,7 +256,7 @@ void ExecExternalFetcher::slotProcessExited() {
         } else {
           myWarning() << "unable to find mods2tellico.xml!";
           delete imp;
-          imp = 0;
+          imp = nullptr;
         }
       }
       break;

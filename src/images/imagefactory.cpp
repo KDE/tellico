@@ -50,7 +50,7 @@ using Tellico::ImageFactory;
 QHash<QString, Tellico::Data::ImageInfo> ImageFactory::s_imageInfoMap;
 Tellico::StringSet ImageFactory::s_imagesToRelease;
 
-Tellico::ImageFactory* ImageFactory::factory = 0;
+Tellico::ImageFactory* ImageFactory::factory = nullptr;
 
 class ImageFactory::Private {
 public:
@@ -232,7 +232,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QByteArray& data_, 
 
 const Tellico::Data::Image& ImageFactory::addCachedImageImpl(const QString& id_, CacheDir dir_) {
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
-  Data::Image* img = 0;
+  Data::Image* img = nullptr;
   switch(dir_) {
     case DataDir:
       img = d->dataImageDir.imageById(id_);
@@ -386,8 +386,8 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   // to provide confidence that the user's image can be found
   CacheDir configLoc = TempDir;
   CacheDir fallbackLoc = TempDir;
-  ImageDirectory* configImgDir = 0;
-  ImageDirectory* fallbackImgDir = 0;
+  ImageDirectory* configImgDir = nullptr;
+  ImageDirectory* fallbackImgDir = nullptr;
   if(Config::imageLocation() == Config::ImagesInLocalDir) {
     configLoc = LocalDir;
     fallbackLoc = DataDir;
@@ -538,7 +538,7 @@ void ImageFactory::clean(bool purgeTempDirectory_) {
     // be sure to save local image directory if it's not a temp dir!
     const QString localDirName = localDir();
     delete factory;
-    factory = 0;
+    factory = nullptr;
     ImageFactory::init();
     if(QDir(localDirName).exists()) {
       setLocalDirectory(QUrl::fromLocalFile(localDirName));

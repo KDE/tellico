@@ -36,7 +36,7 @@
 Tellico::FieldComparison* Tellico::FieldComparison::create(Data::FieldPtr field_) {
   if(!field_) {
     myWarning() << "No field for creating a field comparison";
-    return 0;
+    return nullptr;
   }
   if(field_->type() == Data::Field::Image) {
     return new ImageComparison(field_);

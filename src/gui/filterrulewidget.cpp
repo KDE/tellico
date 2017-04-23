@@ -47,7 +47,7 @@
 using Tellico::FilterRuleWidget;
 
 FilterRuleWidget::FilterRuleWidget(Tellico::FilterRule* rule_, QWidget* parent_)
-    : QWidget(parent_), m_ruleDate(0), m_editRegExp(0), m_editRegExpDialog(0), m_ruleType(General) {
+    : QWidget(parent_), m_ruleDate(nullptr), m_editRegExp(nullptr), m_editRegExpDialog(nullptr), m_ruleType(General) {
   QHBoxLayout* l = new QHBoxLayout(this);
   l->setMargin(0);
 //  l->setSizeConstraint(QLayout::SetFixedSize);
@@ -131,7 +131,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
   m_ruleType = General;
   QString fieldTitle = m_ruleField->currentText();
   if(fieldTitle.isEmpty() || fieldTitle[0] == QLatin1Char('<')) {
-    m_ruleValue->setCompletionObject(0);
+    m_ruleValue->setCompletionObject(nullptr);
     updateFunctionList();
     return;
   }
@@ -143,7 +143,7 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
     m_ruleValue->setCompletionObject(completion);
     m_ruleValue->setAutoDeleteCompletionObject(true);
   } else {
-    m_ruleValue->setCompletionObject(0);
+    m_ruleValue->setCompletionObject(nullptr);
   }
 
   if(field) {
@@ -172,7 +172,7 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
     if(m_ruleType == Number) {
       m_ruleValue->setValidator(new QIntValidator(this));
     } else {
-      m_ruleValue->setValidator(0);
+      m_ruleValue->setValidator(nullptr);
     }
   }
 }

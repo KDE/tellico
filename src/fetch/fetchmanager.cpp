@@ -53,7 +53,7 @@
   KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group), size_)
 
 using Tellico::Fetch::Manager;
-Manager* Manager::s_self = 0;
+Manager* Manager::s_self = nullptr;
 
 Manager::Manager() : QObject(), m_currentFetcherIndex(-1), m_messager(new ManagerMessage()),
                      m_count(0), m_loadDefaults(false) {
@@ -415,7 +415,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
 
 // called when creating a new fetcher
 Tellico::Fetch::ConfigWidget* Manager::configWidget(QWidget* parent_, Tellico::Fetch::Type type_, const QString& name_) {
-  ConfigWidget* w = 0;
+  ConfigWidget* w = nullptr;
   if(functionRegistry.contains(type_)) {
     w = functionRegistry.value(type_).configWidget(parent_);
   } else {
@@ -513,7 +513,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
 
   QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),
                                                 size_, KIconLoader::DefaultState,
-                                                QStringList(), 0, true);
+                                                QStringList(), nullptr, true);
   if(pix.isNull()) {
     pix = BarIcon(name);
   }

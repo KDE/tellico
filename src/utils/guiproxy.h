@@ -38,7 +38,7 @@ namespace Tellico {
 class Proxy {
 public:
   static QWidget* widget();
-  static void sorry(const QString& text, QWidget* widget=0);
+  static void sorry(const QString& text, QWidget* widget=nullptr);
 
 private:
   friend class Tellico::MainWindow;

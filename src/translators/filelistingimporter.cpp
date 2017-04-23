@@ -65,8 +65,8 @@ namespace {
 
 using Tellico::Import::FileListingImporter;
 
-FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(0), m_widget(0),
-    m_recursive(0), m_filePreview(0), m_job(0), m_cancelled(false) {
+FileListingImporter::FileListingImporter(const QUrl& url_) : Importer(url_), m_coll(nullptr), m_widget(nullptr),
+    m_recursive(nullptr), m_filePreview(nullptr), m_job(nullptr), m_cancelled(false) {
 }
 
 bool FileListingImporter::canImport(int type) const {
@@ -253,7 +253,7 @@ QWidget* FileListingImporter::widget(QWidget* parent_) {
 void FileListingImporter::slotEntries(KIO::Job* job_, const KIO::UDSEntryList& list_) {
   if(m_cancelled) {
     job_->kill();
-    m_job = 0;
+    m_job = nullptr;
     return;
   }
 

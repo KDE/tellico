@@ -42,8 +42,8 @@ using namespace Tellico;
 using Tellico::Export::XSLTExporter;
 
 XSLTExporter::XSLTExporter(Data::CollPtr coll_) : Export::Exporter(coll_),
-    m_widget(0),
-    m_URLRequester(0) {
+    m_widget(nullptr),
+    m_URLRequester(nullptr) {
 }
 
 QString XSLTExporter::formatString() const {

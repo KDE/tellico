@@ -33,7 +33,7 @@ ModelManager* ModelManager::self() {
   return &manager;
 }
 
-ModelManager::ModelManager() : m_entryModel(0), m_groupModel(0) {
+ModelManager::ModelManager() : m_entryModel(nullptr), m_groupModel(nullptr) {
 }
 
 QAbstractItemModel* ModelManager::entryModel() {

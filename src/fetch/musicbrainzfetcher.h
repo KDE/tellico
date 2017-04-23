@@ -78,7 +78,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   };

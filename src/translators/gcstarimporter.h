@@ -50,7 +50,7 @@ public:
   virtual Data::CollPtr collection();
   /**
    */
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
   virtual bool canImport(int type) const;
 
   void setHasRelativeImageLinks(bool b) { m_relativeImageLinks = b; }

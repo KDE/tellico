@@ -49,12 +49,12 @@ using Tellico::Import::BibtexImporter;
 int BibtexImporter::s_initCount = 0;
 
 BibtexImporter::BibtexImporter(const QList<QUrl>& urls_) : Importer(urls_)
-    , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
+    , m_widget(nullptr), m_readUTF8(nullptr), m_readLocale(nullptr), m_cancelled(false) {
   init();
 }
 
 BibtexImporter::BibtexImporter(const QString& text_) : Importer(text_)
-    , m_widget(0), m_readUTF8(0), m_readLocale(0), m_cancelled(false) {
+    , m_widget(nullptr), m_readUTF8(nullptr), m_readLocale(nullptr), m_cancelled(false) {
   init();
 }
 
@@ -170,10 +170,10 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 
     if(bt_entry_metatype(node) == BTE_MACRODEF) {
       char* macro;
-      (void) bt_next_field(node, 0, &macro);
+      (void) bt_next_field(node, nullptr, &macro);
       // FIXME: replace macros within macro definitions!
       // lookup lowercase macro in map
-      c->addMacro(m_macros[QString::fromUtf8(macro)], QString::fromUtf8(bt_macro_text(macro, 0, 0)));
+      c->addMacro(m_macros[QString::fromUtf8(macro)], QString::fromUtf8(bt_macro_text(macro, nullptr, 0)));
       continue;
     }
 
@@ -194,12 +194,12 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
     Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str, currentColl);
 
     char* name;
-    AST* field = 0;
+    AST* field = nullptr;
     while((field = bt_next_field(node, field, &name))) {
 //      myDebug() << "\tfound: " << name;
 //      str = QLatin1String(bt_get_text(field));
       str.clear();
-      AST* value = 0;
+      AST* value = nullptr;
       bt_nodetype type;
       char* svalue;
       bool end_macro = false;
@@ -245,7 +245,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
   }
 
   if(m_cancelled) {
-    ptr = 0;
+    ptr = nullptr;
   }
 
   // clean-up
@@ -295,7 +295,7 @@ void BibtexImporter::parseText(const QString& text) {
       if(ok && node) {
         if(bt_entry_metatype(node) == BTE_MACRODEF && macroName.indexIn(entry) > -1) {
           char* macro;
-          (void) bt_next_field(node, 0, &macro);
+          (void) bt_next_field(node, nullptr, &macro);
           m_macros.insert(QString::fromUtf8(macro), macroName.cap(1).trimmed());
         }
         m_nodes.append(node);
@@ -308,7 +308,7 @@ void BibtexImporter::parseText(const QString& text) {
   }
   if(needsCleanup) {
     // clean up some structures
-    bt_parse_entry_s(0, 0, 1, 0, 0);
+    bt_parse_entry_s(nullptr, nullptr, 1, 0, nullptr);
   }
 }
 
@@ -395,7 +395,7 @@ bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   }
   if(foundOne) {
     // clean up some structures
-    bt_parse_entry_s(0, 0, 1, 0, 0);
+    bt_parse_entry_s(nullptr, nullptr, 1, 0, nullptr);
   }
   bt_cleanup();
   return foundOne;

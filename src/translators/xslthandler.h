@@ -54,7 +54,7 @@ public:
   public:
     XMLOutputBuffer();
     ~XMLOutputBuffer();
-    bool isValid() const { return (m_buf != 0); }
+    bool isValid() const { return (m_buf != nullptr); }
     xmlOutputBuffer* buffer() const { return m_buf; }
     QString result() const { return m_res; }
   private:

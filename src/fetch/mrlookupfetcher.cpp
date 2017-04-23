@@ -106,7 +106,7 @@ void MRLookupFetcher::stop() {
   }
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -141,7 +141,7 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
   const QString text = QString::fromUtf8(data.constData(), data.size());
   // grab everything within the <pre></pre> block

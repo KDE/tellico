@@ -48,7 +48,7 @@
 
 using Tellico::FileHandler;
 
-FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(0), m_isValid(false) {
+FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(nullptr), m_isValid(false) {
   if(url_.isEmpty()) {
     return;
   }
@@ -77,7 +77,7 @@ FileHandler::FileRef::~FileRef() {
     m_device->close();
   }
   delete m_device;
-  m_device = 0;
+  m_device = nullptr;
   m_isValid = false;
 }
 
@@ -91,7 +91,7 @@ bool FileHandler::FileRef::open(bool quiet_) {
       GUI::Proxy::sorry(i18n(errorLoad, u.fileName()));
     }
     delete m_device;
-    m_device = 0;
+    m_device = nullptr;
     m_isValid = false;
     return false;
   }
@@ -191,7 +191,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString
       QString str = i18n("Tellico is unable to load the image - %1.", url_.toDisplayString());
       GUI::Proxy::sorry(str);
     }
-    return 0;
+    return nullptr;
   }
   return readImageFile(tempURL, id_, quiet_);
 }
@@ -199,7 +199,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString
 Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString& id_, bool quiet_) {
   FileRef f(url_, quiet_);
   if(!f.isValid()) {
-    return 0;
+    return nullptr;
   }
 
   Data::Image* img = new Data::Image(f.fileName(), id_);

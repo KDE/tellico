@@ -60,7 +60,7 @@ protected:
 private Q_SLOTS:
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortMenuActivated(QAction* action);
-  void slotOpenUrlMenuActivated(QAction* action=0);
+  void slotOpenUrlMenuActivated(QAction* action=nullptr);
 
 private:
   int m_maxAllowedIconWidth;

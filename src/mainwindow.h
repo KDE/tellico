@@ -92,7 +92,7 @@ public:
   /**
    * The main window constructor, calls all init functions to create the application.
    */
-  MainWindow(QWidget* parent=0);
+  MainWindow(QWidget* parent=nullptr);
   ~MainWindow();
 
   /**

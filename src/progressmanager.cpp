@@ -29,7 +29,7 @@
 
 using Tellico::ProgressItem;
 using Tellico::ProgressManager;
-ProgressManager* ProgressManager::s_self = 0;
+ProgressManager* ProgressManager::s_self = nullptr;
 
 template<typename T>
 inline

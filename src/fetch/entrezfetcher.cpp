@@ -60,7 +60,7 @@ using namespace Tellico;
 using namespace Tellico::Fetch;
 using Tellico::Fetch::EntrezFetcher;
 
-EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(0),
+EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(nullptr),
     m_start(1), m_total(-1), m_step(Begin), m_started(false) {
 }
 
@@ -153,7 +153,7 @@ void EntrezFetcher::stop() {
   }
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   m_step = Begin;
@@ -176,7 +176,7 @@ void EntrezFetcher::slotComplete(KJob*) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from entrezfetcher.cpp: " << __LINE__;
@@ -427,7 +427,7 @@ void EntrezFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in pubmed2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

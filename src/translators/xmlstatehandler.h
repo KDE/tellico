@@ -69,7 +69,7 @@ public:
 protected:
   StateData* d;
 private:
-  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&)  { return 0; }
+  virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&)  { return nullptr; }
 };
 
 class NullHandler : public StateHandler {

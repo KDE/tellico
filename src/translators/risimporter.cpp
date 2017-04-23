@@ -37,8 +37,8 @@
 #include <QTextStream>
 
 using Tellico::Import::RISImporter;
-QHash<QString, QString>* RISImporter::s_tagMap = 0;
-QHash<QString, QString>* RISImporter::s_typeMap = 0;
+QHash<QString, QString>* RISImporter::s_tagMap = nullptr;
+QHash<QString, QString>* RISImporter::s_typeMap = nullptr;
 
 // static
 void RISImporter::initTagMap() {
@@ -118,12 +118,12 @@ void RISImporter::initTypeMap() {
   }
 }
 
-RISImporter::RISImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+RISImporter::RISImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }
 
-RISImporter::RISImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(0), m_cancelled(false) {
+RISImporter::RISImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
   initTypeMap();
 }

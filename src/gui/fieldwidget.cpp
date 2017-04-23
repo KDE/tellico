@@ -57,7 +57,7 @@ FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent
   if(field_->hasFlag(Data::Field::NoEdit) ||
      field_->hasFlag(Data::Field::Derived)) {
     myWarning() << "read-only/dependent field, this shouldn't have been called";
-    return 0;
+    return nullptr;
   }
   switch(field_->type()) {
     case Data::Field::Line:
@@ -93,7 +93,7 @@ FieldWidget* FieldWidget::create(Tellico::Data::FieldPtr field_, QWidget* parent
 
     default:
       myWarning() << "unknown field type = " << field_->type();
-      return 0;
+      return nullptr;
   }
 }
 

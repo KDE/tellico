@@ -42,7 +42,7 @@ class ISBNValidator : public QValidator {
 Q_OBJECT
 
 public:
-  ISBNValidator(QObject* parent);
+  ISBNValidator(QObject* parent = nullptr);
 
   /**
    * Certain conditions are checked. Character, length and position

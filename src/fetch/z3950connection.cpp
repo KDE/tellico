@@ -67,7 +67,7 @@ namespace {
 
   class YazCloser {
   public:
-    YazCloser(yaz_iconv_t iconv_) : iconv(iconv_), marc(0) {}
+    YazCloser(yaz_iconv_t iconv_) : iconv(iconv_), marc(nullptr) {}
     YazCloser(yaz_iconv_t iconv_, yaz_marc_t marc_) : iconv(iconv_), marc(marc_) {}
     ~YazCloser() {
       if(iconv) yaz_iconv_close(iconv);
@@ -95,7 +95,7 @@ Z3950ResultFound::~Z3950ResultFound() {
 class Z3950Connection::Private {
 public:
 #ifdef HAVE_YAZ
-  Private() : conn_opt(0), conn(0) {}
+  Private() : conn_opt(nullptr), conn(nullptr) {}
   ~Private() {
     ZOOM_options_destroy(conn_opt);
     ZOOM_connection_destroy(conn);
@@ -139,7 +139,7 @@ Z3950Connection::Z3950Connection(Tellico::Fetch::Z3950Fetcher* fetcher,
 Z3950Connection::~Z3950Connection() {
   m_connected = false;
   delete d;
-  d = 0;
+  d = nullptr;
 }
 
 void Z3950Connection::reset() {
@@ -492,7 +492,7 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
     return text_;
   }
   // bug in yaz, need to flush buffer to catch last character
-  yaz_iconv(cd, 0, 0, &result, &outlen);
+  yaz_iconv(cd, nullptr, nullptr, &result, &outlen);
 
   // length is pointer difference
   ptrdiff_t len = result - result0.data();

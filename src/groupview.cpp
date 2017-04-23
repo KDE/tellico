@@ -179,7 +179,7 @@ void GroupView::setEntrySelected(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  Data::EntryGroup* group = 0;
+  Data::EntryGroup* group = nullptr;
   foreach(Data::EntryGroup* tmpGroup, entry_->groups()) {
     if(tmpGroup->fieldName() == m_groupBy) {
       group = tmpGroup;

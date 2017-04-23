@@ -56,7 +56,7 @@
 
 using Tellico::Controller;
 
-Controller* Controller::s_self = 0;
+Controller* Controller::s_self = nullptr;
 
 Controller::Controller(Tellico::MainWindow* parent_)
     : QObject(parent_), m_mainWindow(parent_), m_working(false) {
@@ -474,7 +474,7 @@ void Controller::plugEntryActions(QMenu* popup_) {
 }
 
 void Controller::plugUpdateMenu(QMenu* popup_) {
-  QMenu* updatePopup = 0;
+  QMenu* updatePopup = nullptr;
   foreach(QAction* action, popup_->actions()) {
     if(action && action->text() == m_mainWindow->m_updateEntryMenu->text()) {
       updatePopup = action->menu();

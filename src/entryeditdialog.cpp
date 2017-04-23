@@ -122,7 +122,7 @@ void EntryEditDialog::slotReset() {
   slotSetModified(false);
   m_saveButton->setEnabled(false);
   m_saveButton->setText(i18n("Sa&ve Entry"));
-  m_currColl = 0;
+  m_currColl = nullptr;
   m_currEntries.clear();
 
   while(m_tabs->count() > 0) {

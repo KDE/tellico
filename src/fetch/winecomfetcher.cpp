@@ -58,14 +58,14 @@ using namespace Tellico;
 using Tellico::Fetch::WineComFetcher;
 
 WineComFetcher::WineComFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0),
+    : Fetcher(parent_), m_xsltHandler(nullptr),
       m_limit(WINECOM_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_numResults(0), m_offset(0),
-      m_job(0), m_started(false) {
+      m_job(nullptr), m_started(false) {
 }
 
 WineComFetcher::~WineComFetcher() {
   delete m_xsltHandler;
-  m_xsltHandler = 0;
+  m_xsltHandler = nullptr;
 }
 
 QString WineComFetcher::source() const {
@@ -140,7 +140,7 @@ void WineComFetcher::stop() {
 //  myDebug();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
 
   m_started = false;
@@ -164,7 +164,7 @@ void WineComFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 #if 0
   myWarning() << "Remove debug from winecomfetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
@@ -264,7 +264,7 @@ void WineComFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in winecom2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

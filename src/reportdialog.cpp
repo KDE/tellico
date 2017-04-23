@@ -66,7 +66,7 @@ using Tellico::ReportDialog;
 
 // default button is going to be used as a print button, so it's separated
 ReportDialog::ReportDialog(QWidget* parent_)
-    : QDialog(parent_), m_exporter(0) {
+    : QDialog(parent_), m_exporter(nullptr) {
   setModal(false);
   setWindowTitle(i18n("Collection Report"));
 
@@ -149,7 +149,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
 ReportDialog::~ReportDialog() {
   delete m_exporter;
-  m_exporter = 0;
+  m_exporter = nullptr;
 
   KConfigGroup config(KSharedConfig::openConfig(), QLatin1String(dialogOptionsString));
   KWindowConfig::saveWindowSize(windowHandle(), config);

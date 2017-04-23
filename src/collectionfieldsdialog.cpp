@@ -72,8 +72,8 @@ private:
 CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWidget* parent_)
     : QDialog(parent_),
       m_coll(coll_),
-      m_defaultCollection(0),
-      m_currentField(0),
+      m_defaultCollection(nullptr),
+      m_currentField(nullptr),
       m_modified(false),
       m_updatingValues(false),
       m_reordered(false),
@@ -853,7 +853,7 @@ Tellico::FieldListItem* CollectionFieldsDialog::findItem(Tellico::Data::FieldPtr
       return textItem;
     }
   }
-  return 0;
+  return nullptr;
 }
 
 bool CollectionFieldsDialog::slotShowExtendedProperties() {

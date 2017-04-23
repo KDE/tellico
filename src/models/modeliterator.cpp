@@ -31,14 +31,14 @@
 
 using Tellico::ModelIterator;
 
-ModelIterator::ModelIterator() : m_model(0), m_row(0) {
+ModelIterator::ModelIterator() : m_model(nullptr), m_row(0) {
 }
 
 ModelIterator::ModelIterator(QAbstractItemModel* model_) : m_model(model_), m_row(0) {
 }
 
 bool ModelIterator::isValid() const {
-  return m_model != 0 && m_row >= 0 && m_row < m_model->rowCount();
+  return m_model && m_row >= 0 && m_row < m_model->rowCount();
 }
 
 ModelIterator& ModelIterator::operator++() {
@@ -48,7 +48,7 @@ ModelIterator& ModelIterator::operator++() {
 
 Tellico::Data::EntryGroup* ModelIterator::group() const {
   if(!isValid()) {
-    return 0;
+    return nullptr;
   }
 
   return m_model->data(m_model->index(m_row, 0), GroupPtrRole).value<Data::EntryGroup*>();

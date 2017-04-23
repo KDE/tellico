@@ -930,7 +930,7 @@ void ConfigDialog::slotModifySourceClicked() {
     return;
   }
 
-  Fetch::ConfigWidget* cw = 0;
+  Fetch::ConfigWidget* cw = nullptr;
   if(m_configWidgets.contains(item)) {
     cw = m_configWidgets[item];
   } else {
@@ -1036,7 +1036,7 @@ void ConfigDialog::slotNewStuffClicked() {
 Tellico::FetcherInfoListItem* ConfigDialog::findItem(const QString& path_) const {
   if(path_.isEmpty()) {
     myDebug() << "empty path";
-    return 0;
+    return nullptr;
   }
 
   // this is a bit ugly, loop over all items, find the execexternal one
@@ -1052,7 +1052,7 @@ Tellico::FetcherInfoListItem* ConfigDialog::findItem(const QString& path_) const
     }
   }
   myDebug() << "no matching item found";
-  return 0;
+  return nullptr;
 }
 
 void ConfigDialog::slotShowTemplatePreview() {

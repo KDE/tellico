@@ -79,10 +79,10 @@ namespace {
 
 using Tellico::GUI::ImageWidget;
 
-ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
-  m_editProcess(0), m_waitDlg(0)
+ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullptr),
+  m_editProcess(nullptr), m_waitDlg(nullptr)
 #ifdef HAVE_KSANE
-  , m_saneWidget(0), m_saneDlg(0), m_saneDeviceIsOpen(false)
+  , m_saneWidget(nullptr), m_saneDlg(nullptr), m_saneDeviceIsOpen(false)
 #endif
 {
   QHBoxLayout* l = new QHBoxLayout(this);
@@ -124,7 +124,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(0),
   m_editMenu = new QMenu(this);
   QActionGroup* grp = new QActionGroup(this);
   grp->setExclusive(true);
-  QAction* selectedAction = 0;
+  QAction* selectedAction = nullptr;
   KService::List offers = KMimeTypeTrader::self()->query(QLatin1String("image/png"),
                                                          QLatin1String("Application"));
   QSet<QString> offerNames;
@@ -343,7 +343,7 @@ void ImageWidget::slotEditImage() {
       m_editProcess->start();
       if(!m_waitDlg) {
         m_waitDlg = new QProgressDialog(this);
-        m_waitDlg->setCancelButton(0);
+        m_waitDlg->setCancelButton(nullptr);
         m_waitDlg->setLabelText(i18n("Opening image in %1...", m_editor->name()));
         m_waitDlg->setRange(0, 0);
       }

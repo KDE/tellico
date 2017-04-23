@@ -50,11 +50,11 @@ BibtexExporter::BibtexExporter(Data::CollPtr coll) : Tellico::Export::Exporter(c
    m_expandMacros(false),
    m_packageURL(true),
    m_skipEmptyKeys(false),
-   m_widget(0),
-   m_checkExpandMacros(0),
-   m_checkPackageURL(0),
-   m_checkSkipEmpty(0),
-   m_cbBibtexStyle(0) {
+   m_widget(nullptr),
+   m_checkExpandMacros(nullptr),
+   m_checkPackageURL(nullptr),
+   m_checkSkipEmpty(nullptr),
+   m_cbBibtexStyle(nullptr) {
 }
 
 QString BibtexExporter::formatString() const {

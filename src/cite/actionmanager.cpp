@@ -35,7 +35,7 @@ Tellico::Cite::ActionManager* ActionManager::self() {
   return &self;
 }
 
-ActionManager::ActionManager() : m_action(0) {
+ActionManager::ActionManager() : m_action(nullptr) {
 }
 
 ActionManager::~ActionManager() {
@@ -47,7 +47,7 @@ bool ActionManager::connect(Tellico::Cite::CiteAction action_) {
     return m_action->connect();
   } else if(m_action) {
     delete m_action;
-    m_action = 0;
+    m_action = nullptr;
   }
 
   switch(action_) {
@@ -70,7 +70,7 @@ bool ActionManager::cite(Tellico::Cite::CiteAction action_, Tellico::Data::Entry
   }
   if(m_action && m_action->type() != action_) {
     delete m_action;
-    m_action = 0;
+    m_action = nullptr;
   }
   if(!m_action && !connect(action_)) {
     myDebug() << "unable to connect";

@@ -48,7 +48,7 @@ class WineComFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  WineComFetcher(QObject* parent = 0);
+  WineComFetcher(QObject* parent = nullptr);
   ~WineComFetcher();
 
   virtual QString source() const;
@@ -65,7 +65,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const WineComFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const WineComFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:

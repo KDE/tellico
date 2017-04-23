@@ -56,14 +56,14 @@ using namespace Tellico;
 using Tellico::Fetch::MusicBrainzFetcher;
 
 MusicBrainzFetcher::MusicBrainzFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0),
+    : Fetcher(parent_), m_xsltHandler(nullptr),
       m_limit(MUSICBRAINZ_MAX_RETURNS_TOTAL), m_total(-1), m_offset(0),
-      m_job(0), m_started(false) {
+      m_job(nullptr), m_started(false) {
 }
 
 MusicBrainzFetcher::~MusicBrainzFetcher() {
   delete m_xsltHandler;
-  m_xsltHandler = 0;
+  m_xsltHandler = nullptr;
 }
 
 QString MusicBrainzFetcher::source() const {
@@ -143,7 +143,7 @@ void MusicBrainzFetcher::stop() {
   }
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -164,7 +164,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from musicbrainzfetcher.cpp";
@@ -305,7 +305,7 @@ void MusicBrainzFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in musicbrainz2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

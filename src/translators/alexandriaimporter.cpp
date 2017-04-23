@@ -164,7 +164,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         entry->setField(year, alexValue);
 
       } else if(alexField == QLatin1String("isbn")) {
-        const ISBNValidator val(0);
+        const ISBNValidator val;
         val.fixup(alexValue);
         entry->setField(isbn, alexValue);
 

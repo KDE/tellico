@@ -54,12 +54,12 @@ using namespace Tellico;
 using Tellico::Fetch::VNDBFetcher;
 
 VNDBFetcher::VNDBFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_socket(0), m_isConnected(false), m_state(PreLogin) {
+    : Fetcher(parent_), m_started(false), m_socket(nullptr), m_isConnected(false), m_state(PreLogin) {
 }
 
 VNDBFetcher::~VNDBFetcher() {
   delete m_socket;
-  m_socket = 0;
+  m_socket = nullptr;
 }
 
 QString VNDBFetcher::source() const {

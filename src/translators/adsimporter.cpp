@@ -34,7 +34,7 @@
 #include <QTextStream>
 
 using Tellico::Import::ADSImporter;
-QHash<QString, QString>* ADSImporter::s_tagMap = 0;
+QHash<QString, QString>* ADSImporter::s_tagMap = nullptr;
 
 // static
 void ADSImporter::initTagMap() {
@@ -53,11 +53,11 @@ void ADSImporter::initTagMap() {
   }
 }
 
-ADSImporter::ADSImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(0), m_cancelled(false) {
+ADSImporter::ADSImporter(const QList<QUrl>& urls_) : Tellico::Import::Importer(urls_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
 }
 
-ADSImporter::ADSImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(0), m_cancelled(false) {
+ADSImporter::ADSImporter(const QString& text_) : Tellico::Import::Importer(text_), m_coll(nullptr), m_cancelled(false) {
   initTagMap();
 }
 

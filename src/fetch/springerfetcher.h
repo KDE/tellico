@@ -38,7 +38,7 @@ class SpringerFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
-  SpringerFetcher(QObject* parent = 0);
+  SpringerFetcher(QObject* parent = nullptr);
   ~SpringerFetcher();
 
   virtual QString source() const;
@@ -52,7 +52,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const SpringerFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const SpringerFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   };

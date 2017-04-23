@@ -59,10 +59,10 @@
 using Tellico::Import::AudioFileImporter;
 
 AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Importer(url_)
-    , m_widget(0)
-    , m_recursive(0)
-    , m_addFilePath(0)
-    , m_addBitrate(0)
+    , m_widget(nullptr)
+    , m_recursive(nullptr)
+    , m_addFilePath(nullptr)
+    , m_addBitrate(nullptr)
     , m_cancelled(false) {
 }
 

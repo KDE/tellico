@@ -118,7 +118,7 @@ class SRUFetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  explicit ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent_, const SRUFetcher* fetcher = nullptr);
   virtual void saveConfigHook(KConfigGroup& config);
   virtual QString preferredName() const;
 

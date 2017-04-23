@@ -31,7 +31,7 @@
 
 using Tellico::GUI::Proxy;
 
-QWidget* Proxy::s_widget = 0;
+QWidget* Proxy::s_widget = nullptr;
 
 void Proxy::setMainWidget(QWidget* widget_) {
   s_widget = widget_;

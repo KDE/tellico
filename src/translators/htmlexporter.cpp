@@ -69,7 +69,7 @@ extern "C" {
 using Tellico::Export::HTMLExporter;
 
 HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
-    m_handler(0),
+    m_handler(nullptr),
     m_printHeaders(true),
     m_printGrouped(false),
     m_exportEntryFiles(false),
@@ -79,17 +79,17 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_checkCommonFile(true),
     m_imageWidth(0),
     m_imageHeight(0),
-    m_widget(0),
-    m_checkPrintHeaders(0),
-    m_checkPrintGrouped(0),
-    m_checkExportEntryFiles(0),
-    m_checkExportImages(0),
+    m_widget(nullptr),
+    m_checkPrintHeaders(nullptr),
+    m_checkPrintGrouped(nullptr),
+    m_checkExportEntryFiles(nullptr),
+    m_checkExportImages(nullptr),
     m_xsltFile(QLatin1String("tellico2html.xsl")) {
 }
 
 HTMLExporter::~HTMLExporter() {
   delete m_handler;
-  m_handler = 0;
+  m_handler = nullptr;
 }
 
 QString HTMLExporter::formatString() const {
@@ -103,7 +103,7 @@ QString HTMLExporter::fileFilter() const {
 void HTMLExporter::reset() {
   // since the ExportUTF8 option may have changed, need to delete handler
   delete m_handler;
-  m_handler = 0;
+  m_handler = nullptr;
   m_files.clear();
   m_links.clear();
   m_copiedFiles.clear();
@@ -177,7 +177,7 @@ bool HTMLExporter::loadXSLTFile() {
   }
   if(!m_handler->isValid()) {
     delete m_handler;
-    m_handler = 0;
+    m_handler = nullptr;
     return false;
   }
   m_handler->addStringParam("date", QDate::currentDate().toString(Qt::ISODate).toLatin1());
@@ -267,9 +267,9 @@ QString HTMLExporter::text() {
     return outputText;
   }
 
-  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(outputText.toUtf8().data()), 0);
+  htmlDocPtr htmlDoc = htmlParseDoc(reinterpret_cast<xmlChar*>(outputText.toUtf8().data()), nullptr);
   xmlNodePtr root = xmlDocGetRootElement(htmlDoc);
-  if(root == 0) {
+  if(root == nullptr) {
     myDebug() << "no root";
     return outputText;
   }
@@ -828,7 +828,7 @@ void HTMLExporter::slotCancel() {
 }
 
 void HTMLExporter::parseDOM(xmlNode* node_) {
-  if(node_ == 0) {
+  if(node_ == nullptr) {
     myDebug() << "no node";
     return;
   }

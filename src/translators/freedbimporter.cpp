@@ -71,11 +71,11 @@
 using Tellico::Import::FreeDBImporter;
 
 FreeDBImporter::FreeDBImporter() : Tellico::Import::Importer()
-    , m_widget(0)
-    , m_buttonGroup(0)
-    , m_radioCDROM(0)
-    , m_radioCache(0)
-    , m_driveCombo(0)
+    , m_widget(nullptr)
+    , m_buttonGroup(nullptr)
+    , m_radioCDROM(nullptr)
+    , m_radioCache(nullptr)
+    , m_driveCombo(nullptr)
     , m_cancelled(false) {
 }
 

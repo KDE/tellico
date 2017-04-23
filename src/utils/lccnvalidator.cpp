@@ -89,4 +89,3 @@ QString LCCNValidator::formalize(const QString& value_) {
   serial = serial.rightJustified(6, QLatin1Char('0'));
   return alpha + year + serial + suffix;
 }
-

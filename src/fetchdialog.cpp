@@ -125,8 +125,8 @@ FetchDialog::FetchDialog(QWidget* parent_)
     , m_started(false)
     , m_resultCount(0)
     , m_treeWasResized(false)
-    , m_barcodePreview(0)
-    , m_barcodeRecognitionThread(0) {
+    , m_barcodePreview(nullptr)
+    , m_barcodeRecognitionThread(nullptr) {
   setModal(false);
   setWindowTitle(i18n("Internet Search"));
 
@@ -333,11 +333,11 @@ FetchDialog::~FetchDialog() {
       m_barcodeRecognitionThread->terminate();
     }
     delete m_barcodeRecognitionThread;
-    m_barcodeRecognitionThread = 0;
+    m_barcodeRecognitionThread = nullptr;
   }
   if(m_barcodePreview) {
     delete m_barcodePreview;
-    m_barcodePreview = 0;
+    m_barcodePreview = nullptr;
   }
 #endif
 
@@ -659,7 +659,7 @@ void FetchDialog::slotKeyChanged(int idx_) {
     m_multipleISBN->setChecked(false);
     m_multipleISBN->setEnabled(false);
 //    slotMultipleISBN(false);
-    m_valueLineEdit->setValidator(0);
+    m_valueLineEdit->setValidator(nullptr);
   }
 
   if(key == Fetch::ISBN || key == Fetch::UPC) {
@@ -757,7 +757,7 @@ void FetchDialog::slotEditMultipleISBN() {
     }
     m_valueLineEdit->setText(m_isbnList.join(FieldFormat::delimiterString()));
   }
-  m_isbnTextEdit = 0; // gets auto-deleted
+  m_isbnTextEdit = nullptr; // gets auto-deleted
 }
 
 void FetchDialog::slotLoadISBNList() {
@@ -873,7 +873,7 @@ void FetchDialog::openBarcodePreview() {
   // barcode recognition
   m_barcodeRecognitionThread = new barcodeRecognitionThread();
   if (m_barcodeRecognitionThread->isWebcamAvailable()) {
-    m_barcodePreview = new QLabel(0);
+    m_barcodePreview = new QLabel(nullptr);
     m_barcodePreview->resize(m_barcodeRecognitionThread->getPreviewSize());
     m_barcodePreview->move(QApplication::desktop()->screenGeometry(m_barcodePreview).width() - m_barcodePreview->frameGeometry().width(), 30);
     m_barcodePreview->show();

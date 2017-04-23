@@ -105,7 +105,7 @@ class MultiFetcher::ConfigWidget : public Fetch::ConfigWidget {
 Q_OBJECT
 
 public:
-  explicit ConfigWidget(QWidget* parent_, const MultiFetcher* fetcher = 0);
+  explicit ConfigWidget(QWidget* parent_, const MultiFetcher* fetcher = nullptr);
   virtual void saveConfigHook(KConfigGroup&);
   virtual QString preferredName() const;
 

@@ -123,7 +123,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     if(!gotFirstLine) {
       if(values[0] != QLatin1String("GCfilms")) {
         setStatusMessage(i18n("<qt>The file is not a valid GCstar data file.</qt>"));
-        m_coll = 0;
+        m_coll = nullptr;
         return;
       }
       if(values.size() > 2 && values[2] == QLatin1String("UTF8")) {
@@ -243,7 +243,7 @@ void GCstarImporter::readGCfilms(const QString& text_) {
   }
 
   if(m_cancelled) {
-    m_coll = 0;
+    m_coll = nullptr;
     return;
   }
 

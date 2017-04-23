@@ -43,7 +43,7 @@ Q_OBJECT
 public:
   EntrySelectionModel(QAbstractItemModel* targetModel,
                       QItemSelectionModel* selModel,
-                      QObject* parent=0);
+                      QObject* parent=nullptr);
 
   void addSelectionProxy(QItemSelectionModel* selModel);
 

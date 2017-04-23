@@ -49,7 +49,7 @@ using Tellico::CSVParser;
 
 class CSVParser::Private {
 public:
-  Private() : stream(0), done(false) {
+  Private() : stream(nullptr), done(false) {
     csv_init(&parser, 0);
   }
   ~Private() {

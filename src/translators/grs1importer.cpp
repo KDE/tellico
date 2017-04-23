@@ -34,7 +34,7 @@
 #include <QTextStream>
 
 using Tellico::Import::GRS1Importer;
-GRS1Importer::TagMap* GRS1Importer::s_tagMap = 0;
+GRS1Importer::TagMap* GRS1Importer::s_tagMap = nullptr;
 
 // static
 void GRS1Importer::initTagMap() {

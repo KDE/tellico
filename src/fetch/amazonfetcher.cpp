@@ -108,15 +108,15 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
 }
 
 AmazonFetcher::AmazonFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0), m_site(Unknown), m_imageSize(MediumImage),
+    : Fetcher(parent_), m_xsltHandler(nullptr), m_site(Unknown), m_imageSize(MediumImage),
       m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
-      m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(0), m_started(false) {
+      m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(nullptr), m_started(false) {
   (void)linkText; // just to shut up the compiler
 }
 
 AmazonFetcher::~AmazonFetcher() {
   delete m_xsltHandler;
-  m_xsltHandler = 0;
+  m_xsltHandler = nullptr;
 }
 
 QString AmazonFetcher::source() const {
@@ -395,7 +395,7 @@ void AmazonFetcher::stop() {
 //  myDebug();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -418,7 +418,7 @@ void AmazonFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from amazonfetcher.cpp";
@@ -776,7 +776,7 @@ void AmazonFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in amazon2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

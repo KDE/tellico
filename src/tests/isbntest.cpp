@@ -44,7 +44,7 @@ void IsbnTest::testFixup() {
   QFETCH(QString, string);
   QFETCH(QString, expectedIsbn);
 
-  Tellico::ISBNValidator val(0);
+  Tellico::ISBNValidator val;
   QString qs = string;
   val.fixup(qs);
   QCOMPARE(qs, expectedIsbn);
@@ -192,7 +192,7 @@ void IsbnTest::testState() {
   int pos = value.length() - 1;
   const QString original = value;
 
-  Tellico::ISBNValidator val(0);
+  Tellico::ISBNValidator val;
   QValidator::State state = val.validate(value, pos);
   if(!changedValue) {
     QCOMPARE(value, original);

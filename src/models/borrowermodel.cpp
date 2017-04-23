@@ -56,12 +56,12 @@ private:
   QList<Node*> m_children;
 };
 
-BorrowerModel::BorrowerModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(0)) {
+BorrowerModel::BorrowerModel(QObject* parent) : QAbstractItemModel(parent), m_rootNode(new Node(nullptr)) {
 }
 
 BorrowerModel::~BorrowerModel() {
   delete m_rootNode;
-  m_rootNode = 0;
+  m_rootNode = nullptr;
 }
 
 int BorrowerModel::rowCount(const QModelIndex& index_) const {
@@ -172,7 +172,7 @@ void BorrowerModel::clear() {
   beginResetModel();
   m_borrowers.clear();
   delete m_rootNode;
-  m_rootNode = new Node(0);
+  m_rootNode = new Node(nullptr);
   endResetModel();
 }
 

@@ -35,7 +35,7 @@
 using Tellico::GUI::NumberFieldWidget;
 
 NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
-    : FieldWidget(field_, parent_), m_lineEdit(0), m_spinBox(0) {
+    : FieldWidget(field_, parent_), m_lineEdit(nullptr), m_spinBox(nullptr) {
 
   if(field_->hasFlag(Data::Field::AllowMultiple)) {
     initLineEdit();
@@ -118,12 +118,12 @@ void NumberFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
   if(wasLineEdit && !nowLineEdit) {
     layout()->removeWidget(m_lineEdit);
     delete m_lineEdit;
-    m_lineEdit = 0;
+    m_lineEdit = nullptr;
     initSpinBox();
   } else if(!wasLineEdit && nowLineEdit) {
     layout()->removeWidget(m_spinBox);
     delete m_spinBox;
-    m_spinBox = 0;
+    m_spinBox = nullptr;
     initLineEdit();
   }
 

@@ -92,7 +92,7 @@ public:
   int collectionType() const;
   QString collectionTypeName() const;
 
-  void sorry(const QString& text, QWidget* widget=0);
+  void sorry(const QString& text, QWidget* widget=nullptr);
 
   void beginCommandGroup(const QString& name);
   void endCommandGroup();

@@ -30,14 +30,14 @@ DataImporter::DataImporter(const QUrl& url) : Importer(url), m_source(URL) {
   m_fileRef = FileHandler::fileRef(url);
 }
 
-DataImporter::DataImporter(const QString& text) : Importer(text), m_data(text.toUtf8()), m_source(Text), m_fileRef(0) {
+DataImporter::DataImporter(const QString& text) : Importer(text), m_data(text.toUtf8()), m_source(Text), m_fileRef(nullptr) {
   // remove newline
   m_data.truncate(m_data.size()-1);
 }
 
 DataImporter::~DataImporter() {
   delete m_fileRef;
-  m_fileRef = 0;
+  m_fileRef = nullptr;
 }
 
 void DataImporter::setText(const QString& text) {

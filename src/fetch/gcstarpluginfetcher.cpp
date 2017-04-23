@@ -197,7 +197,7 @@ QString GCstarPluginFetcher::gcstarType(int collType_) {
 }
 
 GCstarPluginFetcher::GCstarPluginFetcher(QObject* parent_) : Fetcher(parent_),
-    m_started(false), m_collType(-1), m_thread(0) {
+    m_started(false), m_collType(-1), m_thread(nullptr) {
 }
 
 GCstarPluginFetcher::~GCstarPluginFetcher() {
@@ -262,7 +262,7 @@ void GCstarPluginFetcher::stop() {
       m_thread->wait();
     }
     delete m_thread;
-    m_thread = 0;
+    m_thread = nullptr;
   }
   m_data.clear();
   m_started = false;

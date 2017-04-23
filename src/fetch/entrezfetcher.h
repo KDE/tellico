@@ -66,7 +66,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=0);
+    explicit ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher=nullptr);
     virtual QString preferredName() const;
   };
   friend class ConfigWidget;

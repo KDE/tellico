@@ -45,15 +45,15 @@ CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_)
     m_delimiter(QLatin1String(",")),
     m_colDelimiter(QLatin1String(":")),
     m_rowDelimiter(QLatin1String("|")),
-    m_widget(0),
-    m_checkIncludeTitles(0),
-    m_radioComma(0),
-    m_radioSemicolon(0),
-    m_radioTab(0),
-    m_radioOther(0),
-    m_editOther(0),
-    m_colDelimiterEdit(0),
-    m_rowDelimiterEdit(0) {
+    m_widget(nullptr),
+    m_checkIncludeTitles(nullptr),
+    m_radioComma(nullptr),
+    m_radioSemicolon(nullptr),
+    m_radioTab(nullptr),
+    m_radioOther(nullptr),
+    m_editOther(nullptr),
+    m_colDelimiterEdit(nullptr),
+    m_rowDelimiterEdit(nullptr) {
 }
 
 QString CSVExporter::formatString() const {

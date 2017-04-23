@@ -64,13 +64,13 @@ using namespace Tellico;
 using Tellico::Fetch::SRUFetcher;
 
 SRUFetcher::SRUFetcher(QObject* parent_)
-    : Fetcher(parent_), m_port(SRU_DEFAULT_PORT), m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
+    : Fetcher(parent_), m_port(SRU_DEFAULT_PORT), m_job(nullptr), m_MARCXMLHandler(nullptr), m_MODSHandler(nullptr), m_SRWHandler(nullptr), m_started(false) {
 }
 
 SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, const QString& path_,
                        const QString& format_, QObject* parent_) : Fetcher(parent_),
       m_host(host_), m_port(port_), m_path(path_), m_format(format_),
-      m_job(0), m_MARCXMLHandler(0), m_MODSHandler(0), m_SRWHandler(0), m_started(false) {
+      m_job(nullptr), m_MARCXMLHandler(nullptr), m_MODSHandler(nullptr), m_SRWHandler(nullptr), m_started(false) {
   m_name = name_; // m_name is protected in super class
   if(!m_path.startsWith(QLatin1Char('/'))) {
     m_path.prepend(QLatin1Char('/'));
@@ -79,11 +79,11 @@ SRUFetcher::SRUFetcher(const QString& name_, const QString& host_, uint port_, c
 
 SRUFetcher::~SRUFetcher() {
   delete m_MARCXMLHandler;
-  m_MARCXMLHandler = 0;
+  m_MARCXMLHandler = nullptr;
   delete m_MODSHandler;
-  m_MODSHandler = 0;
+  m_MODSHandler = nullptr;
   delete m_SRWHandler;
-  m_SRWHandler = 0;
+  m_SRWHandler = nullptr;
 }
 
 QString SRUFetcher::source() const {
@@ -249,7 +249,7 @@ void SRUFetcher::stop() {
   }
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
 
   m_started = false;
@@ -270,7 +270,7 @@ void SRUFetcher::slotComplete(KJob*) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from srufetcher.cpp";
@@ -426,7 +426,7 @@ bool SRUFetcher::initMARCXMLHandler() {
   if(!m_MARCXMLHandler->isValid()) {
     myWarning() << "error in MARC21slim2MODS3.xsl.";
     delete m_MARCXMLHandler;
-    m_MARCXMLHandler = 0;
+    m_MARCXMLHandler = nullptr;
     return false;
   }
   return true;
@@ -449,7 +449,7 @@ bool SRUFetcher::initMODSHandler() {
   if(!m_MODSHandler->isValid()) {
     myWarning() << "error in mods2tellico.xsl.";
     delete m_MODSHandler;
-    m_MODSHandler = 0;
+    m_MODSHandler = nullptr;
     return false;
   }
   return true;
@@ -472,7 +472,7 @@ bool SRUFetcher::initSRWHandler() {
   if(!m_SRWHandler->isValid()) {
     myWarning() << "error in srw2tellico.xsl.";
     delete m_SRWHandler;
-    m_SRWHandler = 0;
+    m_SRWHandler = nullptr;
     return false;
   }
   return true;

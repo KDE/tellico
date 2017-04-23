@@ -29,7 +29,7 @@ class RatingDelegate : public QStyledItemDelegate {
 Q_OBJECT
 
 public:
-  RatingDelegate(QObject* parent = 0);
+  RatingDelegate(QObject* parent = nullptr);
 
   void setMaxRating(uint rating_) { m_maxRating = rating_; }
   void paint(QPainter* painter, const QStyleOptionViewItem& option,const QModelIndex& index) const;

@@ -74,14 +74,14 @@ using namespace Tellico;
 using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_)
-    : Fetcher(parent_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
-      m_started(false), m_done(true), m_MARC21XMLHandler(0),
-      m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
+    : Fetcher(parent_), m_conn(nullptr), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
+      m_started(false), m_done(true), m_MARC21XMLHandler(nullptr),
+      m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
 }
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
-    : Fetcher(parent_), m_conn(0), m_port(Z3950_DEFAULT_PORT), m_started(false), m_done(true), m_preset(preset_),
-      m_MARC21XMLHandler(0), m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
+    : Fetcher(parent_), m_conn(nullptr), m_port(Z3950_DEFAULT_PORT), m_started(false), m_done(true), m_preset(preset_),
+      m_MARC21XMLHandler(nullptr), m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
   QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(!serverFile.isEmpty()) {
     KConfig serverConfig(serverFile, KConfig::SimpleConfig);
@@ -106,24 +106,24 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& host_, int port_,
                            const QString& dbName_, const QString& syntax_)
-    : Fetcher(parent_), m_conn(0), m_host(host_), m_port(port_), m_dbname(dbName_)
+    : Fetcher(parent_), m_conn(nullptr), m_host(host_), m_port(port_), m_dbname(dbName_)
     , m_syntax(syntax_), m_esn(Z3950_DEFAULT_ESN)
-    , m_started(false), m_done(true), m_MARC21XMLHandler(0)
-    , m_UNIMARCXMLHandler(0), m_MODSHandler(0) {
+    , m_started(false), m_done(true), m_MARC21XMLHandler(nullptr)
+    , m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
 }
 
 Z3950Fetcher::~Z3950Fetcher() {
   delete m_MARC21XMLHandler;
-  m_MARC21XMLHandler = 0;
+  m_MARC21XMLHandler = nullptr;
   delete m_UNIMARCXMLHandler;
-  m_UNIMARCXMLHandler = 0;
+  m_UNIMARCXMLHandler = nullptr;
   delete m_MODSHandler;
-  m_MODSHandler = 0;
+  m_MODSHandler = nullptr;
 
   if(m_conn) {
     m_conn->wait();
     m_conn->deleteLater();
-    m_conn = 0;
+    m_conn = nullptr;
   }
 }
 
@@ -309,7 +309,7 @@ bool Z3950Fetcher::initMARC21Handler() {
   if(!m_MARC21XMLHandler->isValid()) {
     myWarning() << "error in MARC21slim2MODS3.xsl.";
     delete m_MARC21XMLHandler;
-    m_MARC21XMLHandler = 0;
+    m_MARC21XMLHandler = nullptr;
     return false;
   }
   return true;
@@ -332,7 +332,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
   if(!m_UNIMARCXMLHandler->isValid()) {
     myWarning() << "error in UNIMARC2MODS3.xsl.";
     delete m_UNIMARCXMLHandler;
-    m_UNIMARCXMLHandler = 0;
+    m_UNIMARCXMLHandler = nullptr;
     return false;
   }
   return true;
@@ -355,12 +355,12 @@ bool Z3950Fetcher::initMODSHandler() {
   if(!m_MODSHandler->isValid()) {
     myWarning() << "error in mods2tellico.xsl.";
     delete m_MODSHandler;
-    m_MODSHandler = 0;
+    m_MODSHandler = nullptr;
     // no use in keeping the MARC handlers now
     delete m_MARC21XMLHandler;
-    m_MARC21XMLHandler = 0;
+    m_MARC21XMLHandler = nullptr;
     delete m_UNIMARCXMLHandler;
-    m_UNIMARCXMLHandler = 0;
+    m_UNIMARCXMLHandler = nullptr;
     return false;
   }
   return true;

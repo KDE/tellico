@@ -45,7 +45,7 @@ public:
   QString text();
 
   // no options
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
 };
 
   } // end namespace

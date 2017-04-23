@@ -54,10 +54,10 @@
 
 using namespace Tellico;
 using Tellico::Data::Document;
-Document* Document::s_self = 0;
+Document* Document::s_self = nullptr;
 
-Document::Document() : QObject(), m_coll(0), m_isModified(false),
-    m_loadAllImages(false), m_validFile(false), m_importer(0), m_cancelImageWriting(false),
+Document::Document() : QObject(), m_coll(nullptr), m_isModified(false),
+    m_loadAllImages(false), m_validFile(false), m_importer(nullptr), m_cancelImageWriting(false),
     m_fileFormat(Import::TellicoImporter::Unknown) {
   m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
   newDocument(Collection::Book);
@@ -65,7 +65,7 @@ Document::Document() : QObject(), m_coll(0), m_isModified(false),
 
 Document::~Document() {
   delete m_importer;
-  m_importer = 0;
+  m_importer = nullptr;
 }
 
 Tellico::Data::CollPtr Document::collection() const {
@@ -97,7 +97,7 @@ void Document::slotSetClean(bool clean_) {
 
 bool Document::newDocument(int type_) {
   delete m_importer;
-  m_importer = 0;
+  m_importer = nullptr;
   deleteContents();
 
   m_coll = CollectionFactory::collection(type_, true);
@@ -169,7 +169,7 @@ bool Document::openDocument(const QUrl& url_) {
   } else {
     emit signalCollectionImagesLoaded(m_coll);
     m_importer->deleteLater();
-    m_importer = 0;
+    m_importer = nullptr;
   }
   return true;
 }
@@ -244,7 +244,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
 
 bool Document::closeDocument() {
   delete m_importer;
-  m_importer = 0;
+  m_importer = nullptr;
   deleteContents();
   return true;
 }
@@ -261,7 +261,7 @@ void Document::deleteContents() {
   if(m_coll) {
     m_coll->clear();
   }
-  m_coll = 0; // old collection gets deleted as refcount goes to 0
+  m_coll = nullptr; // old collection gets deleted as refcount goes to 0
   m_cancelImageWriting = true;
 }
 
@@ -551,7 +551,7 @@ void Document::slotLoadAllImages() {
 
   m_cancelImageWriting = false;
   m_importer->deleteLater();
-  m_importer = 0;
+  m_importer = nullptr;
 }
 
 // cacheDir_ is the location dir to write the images

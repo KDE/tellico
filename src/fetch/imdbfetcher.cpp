@@ -57,11 +57,11 @@ namespace {
 using namespace Tellico;
 using Tellico::Fetch::IMDBFetcher;
 
-QRegExp* IMDBFetcher::s_tagRx = 0;
-QRegExp* IMDBFetcher::s_anchorRx = 0;
-QRegExp* IMDBFetcher::s_anchorTitleRx = 0;
-QRegExp* IMDBFetcher::s_anchorNameRx = 0;
-QRegExp* IMDBFetcher::s_titleRx = 0;
+QRegExp* IMDBFetcher::s_tagRx = nullptr;
+QRegExp* IMDBFetcher::s_anchorRx = nullptr;
+QRegExp* IMDBFetcher::s_anchorTitleRx = nullptr;
+QRegExp* IMDBFetcher::s_anchorNameRx = nullptr;
+QRegExp* IMDBFetcher::s_titleRx = nullptr;
 
 // static
 void IMDBFetcher::initRegExps() {
@@ -261,7 +261,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
 }
 
 IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
-    m_job(0), m_started(false), m_fetchImages(true),
+    m_job(nullptr), m_started(false), m_fetchImages(true),
     m_numCast(10), m_redirected(false), m_limit(IMDB_MAX_RESULTS), m_lang(EN),
     m_currentTitleBlock(Unknown), m_countOffset(0) {
   if(!s_tagRx) {
@@ -387,7 +387,7 @@ void IMDBFetcher::stop() {
 //  myLog();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
 
   m_started = false;
@@ -419,7 +419,7 @@ void IMDBFetcher::slotComplete(KJob*) {
   }
   // see bug 319662. If fetcher is cancelled, job is killed
   // if the pointer is retained, it gets double-deleted
-  m_job = 0;
+  m_job = nullptr;
 
 #if 0
   myWarning() << "Remove debug from imdbfetcher.cpp";

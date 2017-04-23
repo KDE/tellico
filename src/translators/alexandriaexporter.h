@@ -49,7 +49,7 @@ public:
   virtual QString fileFilter() const { return QString(); } // no need for this
 
   // no config options
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
 
 private:
   static QString& escapeText(QString& str);

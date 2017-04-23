@@ -56,7 +56,7 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField);
 
 private:
-  bool isSpinBox() const { return (m_spinBox != 0); }
+  bool isSpinBox() const { return (m_spinBox != nullptr); }
   void initLineEdit();
   void initSpinBox();
 

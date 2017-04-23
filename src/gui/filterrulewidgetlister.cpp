@@ -85,7 +85,7 @@ void FilterRuleWidgetLister::setFocus() {
 }
 
 QWidget* FilterRuleWidgetLister::createWidget(QWidget* parent_) {
-  QWidget* w = new FilterRuleWidget(static_cast<Tellico::FilterRule*>(0), parent_);
+  QWidget* w = new FilterRuleWidget(static_cast<Tellico::FilterRule*>(nullptr), parent_);
   connect(w, SIGNAL(signalModified()), SIGNAL(signalModified()));
   return w;
 }

@@ -37,7 +37,7 @@ using Tellico::GUI::LineEdit;
 LineEdit::LineEdit(QWidget* parent_) : KLineEdit(parent_) //krazy:exclude=qclasses
     , m_allowSpellCheck(false)
     , m_enableSpellCheck(true)
-    , m_sonnetDialog(0) {
+    , m_sonnetDialog(nullptr) {
   m_spellAction = KStandardAction::spelling(this, SLOT(slotCheckSpelling()), new KActionCollection(this));
 }
 
@@ -84,7 +84,7 @@ void LineEdit::slotSpellCheckDone(const QString& newText) {
   }
   m_sonnetDialog->hide();
   m_sonnetDialog->deleteLater();
-  m_sonnetDialog = 0;
+  m_sonnetDialog = nullptr;
 }
 
 void LineEdit::spellCheckerMisspelling(const QString &text, int pos) {

@@ -50,7 +50,7 @@ Q_OBJECT
 public:
   /**
    */
-  AlexandriaImporter() : Importer(), m_widget(0), m_library(0), m_cancelled(false) {}
+  AlexandriaImporter() : Importer(), m_widget(nullptr), m_library(nullptr), m_cancelled(false) {}
   /**
    */
   virtual ~AlexandriaImporter() {}

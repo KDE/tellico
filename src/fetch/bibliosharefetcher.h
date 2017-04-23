@@ -40,7 +40,7 @@ class BiblioShareFetcher : public XMLFetcher {
 Q_OBJECT
 
 public:
-  BiblioShareFetcher(QObject* parent = 0);
+  BiblioShareFetcher(QObject* parent = nullptr);
   ~BiblioShareFetcher();
 
   virtual QString source() const;
@@ -53,7 +53,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher = 0);
+    explicit ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&);
     virtual QString preferredName() const;
   private:

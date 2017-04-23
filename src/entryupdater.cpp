@@ -216,7 +216,7 @@ void EntryUpdater::handleResults() {
     return;
   }
 //  myDebug() << "best match = " << best << " (" << matches.count() << " matches)";
-  UpdateResult match(0, true);
+  UpdateResult match(nullptr, true);
   if(matches.count() == 1) {
     match = matches.front();
   } else if(matches.count() > 1) {
@@ -233,7 +233,7 @@ Tellico::EntryUpdater::UpdateResult EntryUpdater::askUser(const ResultList& resu
                        m_fetchers[m_fetchIndex], results);
 
   if(dlg.exec() != QDialog::Accepted) {
-    return UpdateResult(0, false);
+    return UpdateResult(nullptr, false);
   }
   return dlg.updateResult();
 }

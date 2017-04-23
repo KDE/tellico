@@ -66,7 +66,7 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
 
 PreviewDialog::~PreviewDialog() {
   delete m_tempDir;
-  m_tempDir = 0;
+  m_tempDir = nullptr;
 }
 
 void PreviewDialog::setXSLTFile(const QString& file_) {

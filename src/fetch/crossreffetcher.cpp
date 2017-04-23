@@ -61,12 +61,12 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::CrossRefFetcher;
 
 CrossRefFetcher::CrossRefFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(0), m_job(0), m_started(false) {
+    : Fetcher(parent_), m_xsltHandler(nullptr), m_job(nullptr), m_started(false) {
 }
 
 CrossRefFetcher::~CrossRefFetcher() {
   delete m_xsltHandler;
-  m_xsltHandler = 0;
+  m_xsltHandler = nullptr;
 }
 
 QString CrossRefFetcher::source() const {
@@ -115,7 +115,7 @@ void CrossRefFetcher::stop() {
 //  myDebug();
   if(m_job) {
     m_job->kill();
-    m_job = 0;
+    m_job = nullptr;
   }
   m_started = false;
   emit signalDone(this);
@@ -138,7 +138,7 @@ void CrossRefFetcher::slotComplete(KJob*) {
   }
 
   // since the fetch is done, don't worry about holding the job pointer
-  m_job = 0;
+  m_job = nullptr;
 #if 0
   myWarning() << "Remove debug from crossreffetcher.cpp";
   QFile f(QLatin1String("/tmp/test.xml"));
@@ -231,7 +231,7 @@ void CrossRefFetcher::initXSLTHandler() {
   if(!m_xsltHandler->isValid()) {
     myWarning() << "error in crossref2tellico.xsl.";
     delete m_xsltHandler;
-    m_xsltHandler = 0;
+    m_xsltHandler = nullptr;
     return;
   }
 }

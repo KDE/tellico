@@ -144,7 +144,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
 
 ImportDialog::~ImportDialog() {
   delete m_importer;
-  m_importer = 0;
+  m_importer = nullptr;
 }
 
 Tellico::Data::CollPtr ImportDialog::collection() {
@@ -179,7 +179,7 @@ Tellico::Import::Action ImportDialog::action() const {
 Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
 #define CHECK_SIZE if(urls_.size() > 1) myWarning() << "only importing first URL"
   QUrl firstURL = urls_.isEmpty() ? QUrl() : urls_[0];
-  Import::Importer* importer = 0;
+  Import::Importer* importer = nullptr;
   switch(format_) {
     case Import::TellicoXML:
       CHECK_SIZE;
@@ -297,7 +297,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
   }
   if(!importer) {
     myWarning() << "importer not created!";
-    return 0;
+    return nullptr;
   }
   importer->setCurrentCollection(Data::Document::self()->collection());
   return importer;
@@ -306,7 +306,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
 
 //static
 Tellico::Import::Importer* ImportDialog::importerForText(Tellico::Import::Format format_, const QString& text_) {
-  Import::Importer* importer = 0;
+  Import::Importer* importer = nullptr;
   switch(format_) {
     case Import::Bibtex:
       importer = new Import::BibtexImporter(text_);
@@ -318,7 +318,7 @@ Tellico::Import::Importer* ImportDialog::importerForText(Tellico::Import::Format
 
   if(!importer) {
     myWarning() << "importer not created!";
-    return 0;
+    return nullptr;
   }
   importer->setCurrentCollection(Data::Document::self()->collection());
   return importer;

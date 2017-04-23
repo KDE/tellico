@@ -62,7 +62,7 @@ using Tellico::LoanDialog;
 
 LoanDialog::LoanDialog(const Tellico::Data::EntryList& entries_, QWidget* parent_)
     : QDialog(parent_),
-      m_mode(Add), m_borrower(0), m_entries(entries_), m_loan(0) {
+      m_mode(Add), m_borrower(nullptr), m_entries(entries_), m_loan(nullptr) {
   setModal(true);
   setWindowTitle(i18n("Loan Dialog"));
 
@@ -283,7 +283,7 @@ QUndoCommand* LoanDialog::createCommand() {
   // first, check to see if the borrower is empty
   QString name = m_borrowerEdit->text();
   if(name.isEmpty()) {
-    return 0;
+    return nullptr;
   }
 
   // ok, first handle creating new loans
@@ -296,13 +296,13 @@ QUndoCommand* LoanDialog::createCommand() {
 
 QUndoCommand* LoanDialog::addLoansCommand() {
   if(m_entries.isEmpty()) {
-    return 0;
+    return nullptr;
   }
 
   const QString name = m_borrowerEdit->text();
 
   // see if there's a borrower with this name already
-  m_borrower = 0;
+  m_borrower = nullptr;
   Data::BorrowerList borrowers = m_entries.at(0)->collection()->borrowers();
   foreach(Data::BorrowerPtr borrower, borrowers) {
     if(borrower->name() == name) {
@@ -328,7 +328,7 @@ QUndoCommand* LoanDialog::addLoansCommand() {
 
 QUndoCommand* LoanDialog::modifyLoansCommand() {
   if(!m_loan) {
-    return 0;
+    return nullptr;
   }
 
   Data::LoanPtr newLoan(new Data::Loan(*m_loan));

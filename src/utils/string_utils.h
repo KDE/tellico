@@ -61,7 +61,7 @@ namespace Tellico {
   QString shareString(const QString& str);
 
   QString minutes(int seconds);
-  QString fromHtmlData(const QByteArray& data, const char* codecName = 0);
+  QString fromHtmlData(const QByteArray& data, const char* codecName = nullptr);
 }
 
 #endif

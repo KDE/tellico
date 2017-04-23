@@ -52,7 +52,7 @@ public:
 
   virtual bool canImport(int type) const;
   virtual void beginXSLTHandler(XSLTHandler* handler);
-  virtual QWidget* widget(QWidget*) { return 0; }
+  virtual QWidget* widget(QWidget*) { return nullptr; }
 
 private:
   Data::CollPtr m_coll;

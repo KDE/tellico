@@ -37,7 +37,7 @@
 #include <QFileInfo>
 #include <QTemporaryFile>
 
-static QStringList* tmpfiles = 0;
+static QStringList* tmpfiles = nullptr;
 
 QString Tellico::NetAccess::s_lastErrorMessage;
 
