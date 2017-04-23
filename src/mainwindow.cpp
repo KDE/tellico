@@ -2117,7 +2117,11 @@ void MainWindow::updateCaption(bool modified_) {
 
 void MainWindow::slotUpdateToolbarIcons() {
   // first change the icon for the menu item
-  m_newEntry->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  if(Kernel::self()->collectionType() == Data::Collection::Base) {
+    m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+  } else {
+    m_newEntry->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  }
 }
 
 void MainWindow::slotGroupLabelActivated() {
