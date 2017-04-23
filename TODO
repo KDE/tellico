@@ -4,6 +4,7 @@ Douban
 Add Zotero query
 When adding new default value to a field, offer to insert value ine xisting entries
 Remove Filmaster?
+Remove Freebase?
 Make sure all usages of FileRef* deletes the pointer
 
 Use FileRef for template installation to support network install
