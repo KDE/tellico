@@ -56,25 +56,25 @@ public:
 
   /**
    */
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual bool canSearch(FetchKey k) const;
-  virtual Type type() const { return Douban; }
-  virtual bool canFetch(int type) const;
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return Douban; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const DoubanFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
   friend class ConfigWidget;
 
@@ -87,14 +87,14 @@ private Q_SLOTS:
   void slotCompleteISBN(KJob* job);
 
 private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void resetSearch() {}
   Data::EntryPtr createEntry(const QVariantMap& resultMap);
   void populateBookEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   void populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   void populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-  
+
   static QString value(const QVariantMap& map, const char* name);
   static QString value(const QVariantMap& map, const char* object, const char* name);
 

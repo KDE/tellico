@@ -38,12 +38,12 @@ public:
   ~TellicoXMLHandler();
 
   virtual bool startElement(const QString& namespaceURI, const QString& localName,
-                            const QString& qName, const QXmlAttributes& atts);
+                            const QString& qName, const QXmlAttributes& atts) Q_DECL_OVERRIDE;
   virtual bool endElement(const QString& namespaceURI, const QString& localName,
-                          const QString& qName);
-  virtual bool characters(const QString& ch);
+                          const QString& qName) Q_DECL_OVERRIDE;
+  virtual bool characters(const QString& ch) Q_DECL_OVERRIDE;
 
-  virtual QString errorString() const;
+  virtual QString errorString() const Q_DECL_OVERRIDE;
 
   Data::CollPtr collection() const;
   bool hasImages() const;

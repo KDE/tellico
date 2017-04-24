@@ -53,13 +53,13 @@ class DateWidget::DatePickerAction : public QWidgetAction
     }
 
   protected:
-    QWidget *createWidget( QWidget *parent )
+    QWidget *createWidget( QWidget *parent ) Q_DECL_OVERRIDE
     {
       mDatePicker->setParent( parent );
       return mDatePicker;
     }
 
-    void deleteWidget( QWidget *widget )
+    void deleteWidget( QWidget *widget ) Q_DECL_OVERRIDE
     {
       if ( widget != mDatePicker ) {
         return;

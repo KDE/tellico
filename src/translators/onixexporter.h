@@ -46,13 +46,13 @@ public:
   ONIXExporter(Data::CollPtr coll);
   ~ONIXExporter();
 
-  virtual bool exec();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const;
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE;
 
-  virtual QWidget* widget(QWidget*);
-  virtual void readOptions(KSharedConfigPtr);
-  virtual void saveOptions(KSharedConfigPtr);
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE;
+  virtual void readOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
+  virtual void saveOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
 
   QString text();
 

@@ -39,13 +39,13 @@ Q_OBJECT
 public:
   SpinBox(int min, int max, QWidget* parent);
 
-  virtual void stepBy(int steps);
+  virtual void stepBy(int steps) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void checkValue(const QString&);
 
 private:
-  QValidator::State validate(QString& text, int& pos) const;
+  QValidator::State validate(QString& text, int& pos) const Q_DECL_OVERRIDE;
 };
 
   } // end namespace

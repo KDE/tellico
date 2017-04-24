@@ -38,8 +38,8 @@ Q_OBJECT
 public:
   UPCValidator(QObject* parent);
 
-  virtual QValidator::State validate(QString& input, int& pos) const;
-  virtual void fixup(QString& input) const;
+  virtual QValidator::State validate(QString& input, int& pos) const Q_DECL_OVERRIDE;
+  virtual void fixup(QString& input) const Q_DECL_OVERRIDE;
 
   void setCheckISBN(bool b) { m_checkISBN = b; }
 

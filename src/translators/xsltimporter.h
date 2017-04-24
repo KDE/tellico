@@ -51,10 +51,10 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
   /**
    */
-  virtual QWidget* widget(QWidget* parent);
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
   virtual void beginXSLTHandler(XSLTHandler*) {}
   void setXSLTURL(const QUrl& url) { m_xsltURL = url; }
 

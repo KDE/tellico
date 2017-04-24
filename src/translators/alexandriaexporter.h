@@ -44,12 +44,12 @@ Q_OBJECT
 public:
   AlexandriaExporter(Data::CollPtr coll);
 
-  virtual bool exec();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const { return QString(); } // no need for this
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE { return QString(); } // no need for this
 
   // no config options
-  virtual QWidget* widget(QWidget*) { return nullptr; }
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
 
 private:
   static QString& escapeText(QString& str);

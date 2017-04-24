@@ -46,7 +46,7 @@ public:
    */
   explicit StampCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const { return Stamp; }
+  virtual Type type() const Q_DECL_OVERRIDE { return Stamp; }
 
   static FieldList defaultFields();
 };

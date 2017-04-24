@@ -41,20 +41,20 @@ public:
   SpringerFetcher(QObject* parent = nullptr);
   ~SpringerFetcher();
 
-  virtual QString source() const;
-  virtual QString attribution() const;
-  virtual bool canSearch(FetchKey k) const;
-  virtual Type type() const { return Springer; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual QString attribution() const Q_DECL_OVERRIDE;
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return Springer; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const SpringerFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
   friend class ConfigWidget;
 
@@ -63,12 +63,12 @@ public:
   static StringHash allOptionalFields() { return StringHash(); }
 
 private:
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch();
-  virtual QUrl searchUrl();
-  virtual void parseData(QByteArray&);
-  virtual void checkMoreResults(int count);
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) { return entry; }
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void resetSearch() Q_DECL_OVERRIDE;
+  virtual QUrl searchUrl() Q_DECL_OVERRIDE;
+  virtual void parseData(QByteArray&) Q_DECL_OVERRIDE;
+  virtual void checkMoreResults(int count) Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE { return entry; }
 
   int m_start;
   int m_total;

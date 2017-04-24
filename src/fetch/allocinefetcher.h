@@ -58,18 +58,18 @@ public:
    */
   virtual ~AbstractAllocineFetcher();
 
-  virtual bool isSearching() const { return m_started; }
-  virtual bool canSearch(FetchKey k) const;
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const = 0;
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE = 0;
   private:
     QSpinBox* m_numCast;
   };
@@ -83,8 +83,8 @@ private:
   static QString value(const QVariantMap& map, const char* object, const char* name);
   static QByteArray calculateSignature(const QList<QPair<QString, QString> >& params);
 
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::CollPtr createCollection() const;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
@@ -110,18 +110,18 @@ public:
    */
   AllocineFetcher(QObject* parent);
 
-  virtual QString source() const;
-  virtual Type type() const { return Allocine; }
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return Allocine; }
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget : public AbstractAllocineFetcher::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const AbstractAllocineFetcher* fetcher = nullptr);
-    virtual QString preferredName() const;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
 
   static QString defaultName();

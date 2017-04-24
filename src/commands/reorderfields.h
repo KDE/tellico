@@ -40,8 +40,8 @@ class ReorderFields : public QUndoCommand {
 public:
   ReorderFields(Data::CollPtr coll, const Data::FieldList& oldFields, const Data::FieldList& newFields);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   Data::CollPtr m_coll;

@@ -51,22 +51,22 @@ public:
 
   /**
    */
-  virtual QString source() const;
-  virtual bool canSearch(FetchKey k) const { return k == Title || k == Keyword; }
-  virtual Type type() const { return VideoGameGeek; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup&) {}
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Keyword; }
+  virtual Type type() const Q_DECL_OVERRIDE { return VideoGameGeek; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup&) Q_DECL_OVERRIDE {}
 
   /**
    * Returns a widget for modifying the fetcher's config.
    */
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const VideoGameGeekFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup&);
-    virtual QString preferredName() const;
+    virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
   friend class ConfigWidget;
 
@@ -75,11 +75,11 @@ public:
   static StringHash allOptionalFields();
 
 private:
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
-  virtual void resetSearch() {}
-  virtual QUrl searchUrl();
-  virtual void parseData(QByteArray&) {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry);
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  virtual void resetSearch() Q_DECL_OVERRIDE {}
+  virtual QUrl searchUrl() Q_DECL_OVERRIDE;
+  virtual void parseData(QByteArray&) Q_DECL_OVERRIDE {}
+  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE;
 };
 
   } // end namespace

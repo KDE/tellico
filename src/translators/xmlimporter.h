@@ -61,13 +61,13 @@ public:
   XMLImporter(const QByteArray& data);
   XMLImporter(const QDomDocument& dom);
 
-  virtual void setText(const QString& text);
+  virtual void setText(const QString& text) Q_DECL_OVERRIDE;
 
   /**
    * This class gets used as a utility XML loader. This should never get called,
    * but cannot be abstract.
    */
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
 
   /**
    * Returns the contents of the imported file.

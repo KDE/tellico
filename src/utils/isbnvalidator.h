@@ -55,7 +55,7 @@ public:
    * @param pos The position of the cursor
    * @return The condition of the text
    */
-  virtual QValidator::State validate(QString& input, int& pos) const;
+  virtual QValidator::State validate(QString& input, int& pos) const Q_DECL_OVERRIDE;
 
   /**
    * The input string is examined. Hyphens are inserted appropriately,
@@ -127,7 +127,7 @@ public:
    *
    * @param input The raw string, hyphens included
    */
-  virtual void fixup(QString& input) const;
+  virtual void fixup(QString& input) const Q_DECL_OVERRIDE;
 
   static void staticFixup(QString& input);
   static void fixup10(QString& input);

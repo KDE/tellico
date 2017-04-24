@@ -46,8 +46,8 @@ public:
    */
   explicit VideoCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const { return Video; }
-  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const;
+  virtual Type type() const Q_DECL_OVERRIDE { return Video; }
+  virtual int sameEntry(Data::EntryPtr, Data::EntryPtr) const Q_DECL_OVERRIDE;
 
   static FieldList defaultFields();
 };

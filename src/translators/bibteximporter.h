@@ -76,9 +76,9 @@ public:
    *
    * @return A pointer to a @ref BibtexCollection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection();
-  virtual QWidget* widget(QWidget* parent);
-  virtual bool canImport(int type) const;
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
   static bool maybeBibtex(const QUrl& url);
   static bool maybeBibtex(const QString& text, const QUrl& url = QUrl());

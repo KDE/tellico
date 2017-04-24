@@ -25,7 +25,8 @@
 #ifndef TELLICO_FETCH_MESSAGEHANDLER_H
 #define TELLICO_FETCH_MESSAGEHANDLER_H
 
-class QString;
+#include <QString>
+
 class QStringList;
 
 namespace Tellico {
@@ -50,8 +51,8 @@ public:
   ManagerMessage() : MessageHandler() {}
   virtual ~ManagerMessage() {}
 
-  virtual void send(const QString& message, Type type);
-  virtual void infoList(const QString& message, const QStringList& list);
+  virtual void send(const QString& message, Type type) Q_DECL_OVERRIDE;
+  virtual void infoList(const QString& message, const QStringList& list) Q_DECL_OVERRIDE;
 };
 
   } // end namespace

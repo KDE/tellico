@@ -61,14 +61,14 @@ public:
   HTMLExporter(Data::CollPtr coll);
   ~HTMLExporter();
 
-  virtual bool exec();
-  virtual void reset();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const;
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual void reset() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE;
 
-  virtual QWidget* widget(QWidget* parent);
-  virtual void readOptions(KSharedConfigPtr);
-  virtual void saveOptions(KSharedConfigPtr);
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual void readOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
+  virtual void saveOptions(KSharedConfigPtr) Q_DECL_OVERRIDE;
 
   void setCollectionURL(const QUrl& url) { m_collectionURL = url; m_links.clear(); }
   void setXSLTFile(const QString& filename);

@@ -37,7 +37,7 @@ public:
   AskUserResolver()  {};
   ~AskUserResolver() {};
   virtual MergeConflictResolver::Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
-                                                const QString& value1 = QString(), const QString& value2 = QString());
+                                                const QString& value1 = QString(), const QString& value2 = QString()) Q_DECL_OVERRIDE;
 
 };
 

@@ -47,8 +47,8 @@ public:
   CollectionCommand(Mode mode, Data::CollPtr currentColl, Data::CollPtr newColl);
   ~CollectionCommand();
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   void copyFields();

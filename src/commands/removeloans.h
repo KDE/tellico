@@ -40,8 +40,8 @@ class RemoveLoans : public QUndoCommand  {
 public:
   explicit RemoveLoans(Data::LoanList loans, QUndoCommand* parent = nullptr);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   Data::LoanList m_loans;

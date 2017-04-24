@@ -43,7 +43,7 @@ public:
   TreeView(QWidget* parent);
   virtual ~TreeView();
 
-  virtual void setModel(QAbstractItemModel* model);
+  virtual void setModel(QAbstractItemModel* model) Q_DECL_OVERRIDE;
   AbstractSortModel* sortModel() const;
 
   bool isEmpty() const;

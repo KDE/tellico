@@ -43,8 +43,8 @@ public:
   ModifyEntries(QUndoCommand* parent, Data::CollPtr coll, const Data::EntryList& oldEntries,
                 const Data::EntryList& newEntries, const QStringList& modifiedFields);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   void swapValues();

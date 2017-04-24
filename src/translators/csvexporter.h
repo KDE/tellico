@@ -44,14 +44,14 @@ Q_OBJECT
 public:
   CSVExporter(Data::CollPtr coll);
 
-  virtual bool exec();
-  virtual QString formatString() const;
-  virtual QString fileFilter() const;
+  virtual bool exec() Q_DECL_OVERRIDE;
+  virtual QString formatString() const Q_DECL_OVERRIDE;
+  virtual QString fileFilter() const Q_DECL_OVERRIDE;
   QString text() const;
 
-  virtual QWidget* widget(QWidget* parent);
-  virtual void readOptions(KSharedConfigPtr config);
-  virtual void saveOptions(KSharedConfigPtr config);
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
+  virtual void readOptions(KSharedConfigPtr config) Q_DECL_OVERRIDE;
+  virtual void saveOptions(KSharedConfigPtr config) Q_DECL_OVERRIDE;
 
 private:
   QString& escapeText(QString& text) const;

@@ -39,8 +39,8 @@ class RenameCollection : public QUndoCommand {
 public:
   RenameCollection(Data::CollPtr coll, const QString& newTitle);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   Data::CollPtr m_coll;

@@ -113,7 +113,7 @@ private:
   void openBarcodePreview();
   void closeBarcodePreview();
 
-  void customEvent(QEvent* event);
+  void customEvent(QEvent* event) Q_DECL_OVERRIDE;
 
   class FetchResultItem;
 

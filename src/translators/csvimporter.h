@@ -61,15 +61,15 @@ public:
   /**
    * @return A pointer to a @ref Data::Collection, or 0 if none can be created.
    */
-  virtual Data::CollPtr collection();
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
   /**
    */
-  virtual QWidget* widget(QWidget* parent);
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
 
-  virtual bool validImport() const;
+  virtual bool validImport() const Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  void slotActionChanged(int action);
+  void slotActionChanged(int action) Q_DECL_OVERRIDE;
   void slotCancel();
 
 private Q_SLOTS:

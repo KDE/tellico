@@ -50,7 +50,7 @@ public:
                                                  Tellico::Data::EntryPtr,
                                                  Tellico::Data::FieldPtr,
                                                  const QString& value1 = QString(),
-                                                 const QString& value2 = QString()) {
+                                                 const QString& value2 = QString()) Q_DECL_OVERRIDE {
     Q_UNUSED(value1);
     Q_UNUSED(value2);
     return m_ret;

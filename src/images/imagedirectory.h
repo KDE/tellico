@@ -57,8 +57,8 @@ public:
   virtual QString path();
   virtual void setPath(const QString& path);
 
-  bool hasImage(const QString& id);
-  Data::Image* imageById(const QString& id);
+  bool hasImage(const QString& id) Q_DECL_OVERRIDE;
+  Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
   bool writeImage(const Data::Image& image);
   bool removeImage(const QString& id);
 
@@ -74,11 +74,11 @@ public:
   TemporaryImageDirectory();
   virtual ~TemporaryImageDirectory();
 
-  virtual QString path();
+  virtual QString path() Q_DECL_OVERRIDE;
   void purge();
 
 private:
-  void setPath(const QString& path);
+  void setPath(const QString& path) Q_DECL_OVERRIDE;
 
   QTemporaryDir* m_dir;
 };
@@ -90,8 +90,8 @@ public:
 
   void setZip(KZip* zip);
 
-  bool hasImage(const QString& id);
-  Data::Image* imageById(const QString& id);
+  bool hasImage(const QString& id) Q_DECL_OVERRIDE;
+  Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
 
 private:
   KZip* m_zip;

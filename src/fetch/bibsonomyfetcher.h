@@ -50,23 +50,23 @@ public:
   BibsonomyFetcher(QObject* parent);
   ~BibsonomyFetcher();
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
 
-  virtual bool canSearch(FetchKey k) const { return k == Person || k == Keyword; }
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return Bibsonomy; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Person || k == Keyword; }
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return Bibsonomy; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
     explicit ConfigWidget(QWidget* parent_, const BibsonomyFetcher* fetcher = nullptr);
-    virtual void saveConfigHook(KConfigGroup& config);
-    virtual QString preferredName() const;
+    virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+    virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
   friend class ConfigWidget;
 
@@ -78,8 +78,8 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

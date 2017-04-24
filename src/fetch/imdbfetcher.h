@@ -69,15 +69,15 @@ public:
    */
   virtual ~IMDBFetcher();
 
-  virtual QString source() const;
-  virtual bool isSearching() const { return m_started; }
-  virtual void continueSearch();
-  virtual bool canSearch(FetchKey k) const;
-  virtual void stop();
-  virtual Data::EntryPtr fetchEntryHook(uint uid);
-  virtual Type type() const { return IMDB; }
-  virtual bool canFetch(int type) const;
-  virtual void readConfigHook(const KConfigGroup& config);
+  virtual QString source() const Q_DECL_OVERRIDE;
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual void continueSearch() Q_DECL_OVERRIDE;
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual Type type() const Q_DECL_OVERRIDE { return IMDB; }
+  virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
   struct LangData {
     QString siteTitle;
@@ -110,7 +110,7 @@ public:
   };
   static const LangData& langData(int lang);
 
-  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const;
+  virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
   class ConfigWidget;
   friend class ConfigWidget;
@@ -124,8 +124,8 @@ private Q_SLOTS:
   void slotRedirection(KIO::Job* job, const QUrl& toURL);
 
 private:
-  virtual void search();
-  virtual FetchRequest updateRequest(Data::EntryPtr entry);
+  virtual void search() Q_DECL_OVERRIDE;
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   static void initRegExps();
   static QRegExp* s_tagRx;
   static QRegExp* s_anchorRx;
@@ -185,8 +185,8 @@ Q_OBJECT
 public:
   explicit ConfigWidget(QWidget* parent_, const IMDBFetcher* fetcher = nullptr);
 
-  virtual void saveConfigHook(KConfigGroup& config);
-  virtual QString preferredName() const;
+  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual QString preferredName() const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotSiteChanged();

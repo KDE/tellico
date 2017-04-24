@@ -40,8 +40,8 @@ class AddEntries : public QUndoCommand  {
 public:
   AddEntries(Data::CollPtr coll, const Data::EntryList& entries);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   Data::CollPtr m_coll;

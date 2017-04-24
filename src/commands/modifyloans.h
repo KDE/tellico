@@ -40,8 +40,8 @@ class ModifyLoans : public QUndoCommand  {
 public:
   ModifyLoans(Data::LoanPtr oldLoan, Data::LoanPtr newLoan, bool addToCalendar);
 
-  virtual void redo();
-  virtual void undo();
+  virtual void redo() Q_DECL_OVERRIDE;
+  virtual void undo() Q_DECL_OVERRIDE;
 
 private:
   Data::LoanPtr m_oldLoan;

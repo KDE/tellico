@@ -67,10 +67,10 @@ public:
    */
   void clear();
 
-  virtual void    addEntries(Data::EntryList entries);
-  virtual void modifyEntries(Data::EntryList entries);
+  virtual void    addEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
+  virtual void modifyEntries(Data::EntryList entries) Q_DECL_OVERRIDE;
 
-  virtual void    addField(Data::CollPtr coll, Data::FieldPtr field);
+  virtual void    addField(Data::CollPtr coll, Data::FieldPtr field) Q_DECL_OVERRIDE;
   /**
    * Updates a widget when its field has been modified. The category may have changed, completions may have
    * been added or removed, or what-have-you.
@@ -79,13 +79,13 @@ public:
    * @param oldField A pointer to the old field, which should have the same name as the new one
    * @param newField A pointer to the new field
    */
-  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField);
+  virtual void modifyField(Data::CollPtr coll, Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
   /**
    * Removes a field from the editor.
    *
    * @param field The field to be removed
    */
-  virtual void removeField(Data::CollPtr, Data::FieldPtr field);
+  virtual void removeField(Data::CollPtr, Data::FieldPtr field) Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
   /**
@@ -122,7 +122,7 @@ public Q_SLOTS:
   /**
    * Override the implmentation to check whether the entry needs to be modified
    */
-  virtual void reject();
+  virtual void reject() Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
   void slotHelp();

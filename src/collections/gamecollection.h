@@ -45,7 +45,7 @@ public:
    */
   explicit GameCollection(bool addDefaultFields, const QString& title = QString());
 
-  virtual Type type() const { return Game; }
+  virtual Type type() const Q_DECL_OVERRIDE { return Game; }
 
   static FieldList defaultFields();
 };

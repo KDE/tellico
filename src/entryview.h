@@ -123,7 +123,7 @@ public Q_SLOTS:
   void copy();
 
 protected:
-  void changeEvent(QEvent* event);
+  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 };
 
 } //end namespace
