@@ -306,24 +306,24 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
 }
 
 void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("tmdb-id"), value(resultMap_, "id"));
-  entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
-  entry_->setField(QLatin1String("year"),  value(resultMap_, "release_date").left(4));
+  entry_->setField(QLatin1String("tmdb-id"), mapValue(resultMap_, "id"));
+  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "release_date").left(4));
 
   QStringList directors, producers, writers, composers;
   QVariantList crewList = resultMap_.value(QLatin1String("credits")).toMap()
                                     .value(QLatin1String("crew")).toList();
   foreach(const QVariant& crew, crewList) {
     const QVariantMap crewMap = crew.toMap();
-    const QString job = value(crewMap, "job");
+    const QString job = mapValue(crewMap, "job");
     if(job == QLatin1String("Director")) {
-      directors += value(crewMap, "name");
+      directors += mapValue(crewMap, "name");
     } else if(job == QLatin1String("Producer")) {
-      producers += value(crewMap, "name");
+      producers += mapValue(crewMap, "name");
     } else if(job == QLatin1String("Screenplay")) {
-      writers += value(crewMap, "name");
+      writers += mapValue(crewMap, "name");
     } else if(job == QLatin1String("Original Music Composer")) {
-      composers += value(crewMap, "name");
+      composers += mapValue(crewMap, "name");
     }
   }
   entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
@@ -337,19 +337,19 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   if(entry_->collection()->hasField(QLatin1String("tmdb"))) {
-    entry_->setField(QLatin1String("tmdb"), QLatin1String("http://www.themoviedb.org/movie/") + value(resultMap_, "id"));
+    entry_->setField(QLatin1String("tmdb"), QLatin1String("http://www.themoviedb.org/movie/") + mapValue(resultMap_, "id"));
   }
   if(entry_->collection()->hasField(QLatin1String("imdb"))) {
-    entry_->setField(QLatin1String("imdb"), QLatin1String("http://www.imdb.com/title/") + value(resultMap_, "imdb_id"));
+    entry_->setField(QLatin1String("imdb"), QLatin1String("http://www.imdb.com/title/") + mapValue(resultMap_, "imdb_id"));
   }
   if(entry_->collection()->hasField(QLatin1String("origtitle"))) {
-    entry_->setField(QLatin1String("origtitle"), value(resultMap_, "original_title"));
+    entry_->setField(QLatin1String("origtitle"), mapValue(resultMap_, "original_title"));
   }
   if(entry_->collection()->hasField(QLatin1String("alttitle"))) {
     QStringList atitles;
     foreach(const QVariant& atitle, resultMap_.value(QLatin1String("alternative_titles")).toMap()
                                                .value(QLatin1String("titles")).toList()) {
-      atitles << value(atitle.toMap(), "title");
+      atitles << mapValue(atitle.toMap(), "title");
     }
     entry_->setField(QLatin1String("alttitle"), atitles.join(FieldFormat::rowDelimiterString()));
   }
@@ -359,19 +359,19 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
                                     .value(QLatin1String("cast")).toList();
   foreach(const QVariant& cast, castList) {
     QVariantMap castMap = cast.toMap();
-    actors << value(castMap, "name") + FieldFormat::columnDelimiterString() + value(castMap, "character");
+    actors << mapValue(castMap, "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "character");
   }
   entry_->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
   QStringList studios;
   foreach(const QVariant& studio, resultMap_.value(QLatin1String("production_companies")).toList()) {
-    studios << value(studio.toMap(), "name");
+    studios << mapValue(studio.toMap(), "name");
   }
   entry_->setField(QLatin1String("studio"), studios.join(FieldFormat::delimiterString()));
 
   QStringList countries;
   foreach(const QVariant& country, resultMap_.value(QLatin1String("production_countries")).toList()) {
-    QString name = value(country.toMap(), "name");
+    QString name = mapValue(country.toMap(), "name");
     if(name == QLatin1String("United States of America")) {
       name = QLatin1String("USA");
     }
@@ -381,16 +381,16 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 
   QStringList genres;
   foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
-    genres << value(genre.toMap(), "name");
+    genres << mapValue(genre.toMap(), "name");
   }
   entry_->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
 
   // hard-coded poster size for now
-  QString cover = m_imageBase + QLatin1String("w342") + value(resultMap_, "poster_path");
+  QString cover = m_imageBase + QLatin1String("w342") + mapValue(resultMap_, "poster_path");
   entry_->setField(QLatin1String("cover"), cover);
 
-  entry_->setField(QLatin1String("running-time"), value(resultMap_, "runtime"));
-  entry_->setField(QLatin1String("plot"), value(resultMap_, "overview"));
+  entry_->setField(QLatin1String("running-time"), mapValue(resultMap_, "runtime"));
+  entry_->setField(QLatin1String("plot"), mapValue(resultMap_, "overview"));
 }
 
 void TheMovieDBFetcher::readConfiguration() {
@@ -415,7 +415,7 @@ void TheMovieDBFetcher::readConfiguration() {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap resultMap = doc.object().toVariantMap();
 
-  m_imageBase = value(resultMap.value(QLatin1String("images")).toMap(), "base_url");
+  m_imageBase = mapValue(resultMap.value(QLatin1String("images")).toMap(), "base_url");
   m_serverConfigDate = QDate::currentDate();
 }
 
@@ -514,18 +514,4 @@ QString TheMovieDBFetcher::ConfigWidget::preferredName() const {
 
 void TheMovieDBFetcher::ConfigWidget::slotLangChanged() {
   emit signalName(preferredName());
-}
-
-// static
-QString TheMovieDBFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }

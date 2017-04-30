@@ -244,36 +244,36 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
 }
 
 void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("moviemeter-id"), value(resultMap_, "id"));
-  entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
-  entry_->setField(QLatin1String("year"),  value(resultMap_, "year"));
+  entry_->setField(QLatin1String("moviemeter-id"), mapValue(resultMap_, "id"));
+  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "year"));
 
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
   }
 
-  entry_->setField(QLatin1String("genre"),  value(resultMap_, "genres"));
-  entry_->setField(QLatin1String("plot"),  value(resultMap_, "plot"));
-  entry_->setField(QLatin1String("running-time"),  value(resultMap_, "duration"));
-  entry_->setField(QLatin1String("director"),  value(resultMap_, "directors"));
-  entry_->setField(QLatin1String("nationality"),  value(resultMap_, "countries"));
+  entry_->setField(QLatin1String("genre"),  mapValue(resultMap_, "genres"));
+  entry_->setField(QLatin1String("plot"),  mapValue(resultMap_, "plot"));
+  entry_->setField(QLatin1String("running-time"),  mapValue(resultMap_, "duration"));
+  entry_->setField(QLatin1String("director"),  mapValue(resultMap_, "directors"));
+  entry_->setField(QLatin1String("nationality"),  mapValue(resultMap_, "countries"));
 
   QStringList castList;
   foreach(const QVariant& actor, resultMap_.value(QLatin1String("actors")).toList()) {
-    castList << value(actor.toMap(), "name");
+    castList << mapValue(actor.toMap(), "name");
   }
   entry_->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
 
   if(entry_->collection()->hasField(QLatin1String("moviemeter"))) {
-    entry_->setField(QLatin1String("moviemeter"), value(resultMap_, "url"));
+    entry_->setField(QLatin1String("moviemeter"), mapValue(resultMap_, "url"));
   }
 
   if(entry_->collection()->hasField(QLatin1String("alttitle"))) {
-    entry_->setField(QLatin1String("alttitle"), value(resultMap_, "alternative_title"));
+    entry_->setField(QLatin1String("alttitle"), mapValue(resultMap_, "alternative_title"));
   }
 
-  entry_->setField(QLatin1String("cover"), value(resultMap_.value(QLatin1String("posters")).toMap(), "small"));
+  entry_->setField(QLatin1String("cover"), mapValue(resultMap_.value(QLatin1String("posters")).toMap(), "small"));
 }
 
 Tellico::Fetch::ConfigWidget* MovieMeterFetcher::configWidget(QWidget* parent_) const {
@@ -310,18 +310,4 @@ void MovieMeterFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString MovieMeterFetcher::ConfigWidget::preferredName() const {
   return MovieMeterFetcher::defaultName();
-}
-
-// static
-QString MovieMeterFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }

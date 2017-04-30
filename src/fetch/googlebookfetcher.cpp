@@ -288,24 +288,24 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 
 void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap) {
   if(entry->collection()->hasField(QLatin1String("gbs-link"))) {
-    entry->setField(QLatin1String("gbs-link"), value(resultMap, "selfLink"));
+    entry->setField(QLatin1String("gbs-link"), mapValue(resultMap, "selfLink"));
   }
 
   const QVariantMap volumeMap = resultMap.value(QLatin1String("volumeInfo")).toMap();
-  entry->setField(QLatin1String("title"),     value(volumeMap, "title"));
-  entry->setField(QLatin1String("subtitle"),  value(volumeMap, "subtitle"));
-  entry->setField(QLatin1String("pub_year"),  value(volumeMap, "publishedDate").left(4));
-  entry->setField(QLatin1String("author"),    value(volumeMap, "authors"));
+  entry->setField(QLatin1String("title"),     mapValue(volumeMap, "title"));
+  entry->setField(QLatin1String("subtitle"),  mapValue(volumeMap, "subtitle"));
+  entry->setField(QLatin1String("pub_year"),  mapValue(volumeMap, "publishedDate").left(4));
+  entry->setField(QLatin1String("author"),    mapValue(volumeMap, "authors"));
   // workaround for bug, where publisher can be enclosed in quotes
-  QString pub = value(volumeMap, "publisher");
+  QString pub = mapValue(volumeMap, "publisher");
   if(pub.startsWith(QLatin1Char('"')) && pub.endsWith(QLatin1Char('"'))) {
     pub.chop(1);
     pub = pub.remove(0, 1);
   }
   entry->setField(QLatin1String("publisher"), pub);
-  entry->setField(QLatin1String("pages"),     value(volumeMap, "pageCount"));
-  entry->setField(QLatin1String("language"),  value(volumeMap, "language"));
-  entry->setField(QLatin1String("comments"),  value(volumeMap, "description"));
+  entry->setField(QLatin1String("pages"),     mapValue(volumeMap, "pageCount"));
+  entry->setField(QLatin1String("language"),  mapValue(volumeMap, "language"));
+  entry->setField(QLatin1String("comments"),  mapValue(volumeMap, "description"));
 
   QStringList catList = volumeMap.value(QLatin1String("categories")).toStringList();
   // google is going to give us a lot of categories
@@ -322,11 +322,11 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   QString isbn;
   foreach(const QVariant& idVariant, volumeMap.value(QLatin1String("industryIdentifiers")).toList()) {
     const QVariantMap idMap = idVariant.toMap();
-    if(value(idMap, "type") == QLatin1String("ISBN_10")) {
-      isbn = value(idMap, "identifier");
+    if(mapValue(idMap, "type") == QLatin1String("ISBN_10")) {
+      isbn = mapValue(idMap, "identifier");
       break;
-    } else if(value(idMap, "type") == QLatin1String("ISBN_13")) {
-      isbn = value(idMap, "identifier");
+    } else if(mapValue(idMap, "type") == QLatin1String("ISBN_13")) {
+      isbn = mapValue(idMap, "identifier");
       // allow isbn10 to override, so don't break here
     }
   }
@@ -338,15 +338,15 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
 
   const QVariantMap imageMap = volumeMap.value(QLatin1String("imageLinks")).toMap();
   if(imageMap.contains(QLatin1String("small"))) {
-    entry->setField(QLatin1String("cover"), value(imageMap, "small"));
+    entry->setField(QLatin1String("cover"), mapValue(imageMap, "small"));
   } else if(imageMap.contains(QLatin1String("thumbnail"))) {
-    entry->setField(QLatin1String("cover"), value(imageMap, "thumbnail"));
+    entry->setField(QLatin1String("cover"), mapValue(imageMap, "thumbnail"));
   } else if(imageMap.contains(QLatin1String("smallThumbnail"))) {
-    entry->setField(QLatin1String("cover"), value(imageMap, "smallThumbnail"));
+    entry->setField(QLatin1String("cover"), mapValue(imageMap, "smallThumbnail"));
   }
 
   if(optionalFields().contains(QLatin1String("googlebook"))) {
-    entry->setField(QLatin1String("googlebook"), value(volumeMap, "infoLink"));
+    entry->setField(QLatin1String("googlebook"), mapValue(volumeMap, "infoLink"));
   }
 }
 
@@ -421,18 +421,3 @@ void GoogleBookFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString GoogleBookFetcher::ConfigWidget::preferredName() const {
   return GoogleBookFetcher::defaultName();
 }
-
-// static
-QString GoogleBookFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
-}
-

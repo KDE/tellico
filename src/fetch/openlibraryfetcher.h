@@ -94,8 +94,6 @@ private:
   QString getAuthorKeys(const QString& term);
   void endJob(KIO::StoredTransferJob* job);
 
-  static QString value(const QVariantMap& map, const char* name);
-
   QHash<int, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 

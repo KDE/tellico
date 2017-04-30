@@ -7,7 +7,7 @@ SET( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 # which is generated in the build directory
 INCLUDE_DIRECTORIES( ${Tellico_BINARY_DIR}/src )
 
-add_executable(entitytest entitytest.cpp)
+add_executable(entitytest entitytest.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(entitytest)
 add_test(entitytest entitytest)
 ecm_mark_as_test(entitytest)
@@ -55,7 +55,7 @@ add_test(comparisontest comparisontest)
 ecm_mark_as_test(comparisontest)
 TARGET_LINK_LIBRARIES(comparisontest utils core Qt5::Test)
 
-add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp)
+add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(imagetest)
 add_test(imagetest imagetest)
 ecm_mark_as_test(imagetest)

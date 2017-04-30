@@ -252,13 +252,13 @@ void IGDBFetcher::slotComplete(KJob* job_) {
 }
 
 void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
-  entry_->setField(QLatin1String("title"), value(resultMap_, "name"));
-  entry_->setField(QLatin1String("description"), value(resultMap_, "summary"));
-  entry_->setField(QLatin1String("certification"), m_esrbHash.value(value(resultMap_, "esrb", "rating")));
-  entry_->setField(QLatin1String("pub-id"), value(resultMap_, "publishers"));
-  entry_->setField(QLatin1String("dev-id"), value(resultMap_, "developers"));
+  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "name"));
+  entry_->setField(QLatin1String("description"), mapValue(resultMap_, "summary"));
+  entry_->setField(QLatin1String("certification"), m_esrbHash.value(mapValue(resultMap_, "esrb", "rating")));
+  entry_->setField(QLatin1String("pub-id"), mapValue(resultMap_, "publishers"));
+  entry_->setField(QLatin1String("dev-id"), mapValue(resultMap_, "developers"));
 
-  QString cover = value(resultMap_, "cover", "url");
+  QString cover = mapValue(resultMap_, "cover", "url");
   if(cover.startsWith(QLatin1Char('/'))) {
     cover.prepend(QLatin1String("https:"));
   }
@@ -278,7 +278,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   if(!releases.isEmpty()) {
     QVariantMap releaseMap = releases.at(0).toMap();
     // for now just grab the year of the first release
-    entry_->setField(QLatin1String("year"), value(releaseMap, "y"));
+    entry_->setField(QLatin1String("year"), mapValue(releaseMap, "y"));
     const QString platform = m_platformHash.value(releaseMap.value(QLatin1String("platform")).toInt());
     if(platform == QLatin1String("Nintendo Entertainment System (NES)")) {
       entry_->setField(QLatin1String("platform"), i18n("Nintendo"));
@@ -312,11 +312,11 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   }
 
   if(optionalFields().contains(QLatin1String("pegi"))) {
-    entry_->setField(QLatin1String("pegi"), m_pegiHash.value(value(resultMap_, "pegi", "rating")));
+    entry_->setField(QLatin1String("pegi"), m_pegiHash.value(mapValue(resultMap_, "pegi", "rating")));
   }
 
   if(optionalFields().contains(QLatin1String("igdb"))) {
-    entry_->setField(QLatin1String("igdb"), value(resultMap_, "url"));
+    entry_->setField(QLatin1String("igdb"), mapValue(resultMap_, "url"));
   }
 }
 
@@ -354,7 +354,7 @@ QString IGDBFetcher::companyName(const QString& companyId_) const {
 #endif
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
-  const QString company = value(doc.array().toVariantList().at(0).toMap(), "name");
+  const QString company = mapValue(doc.array().toVariantList().at(0).toMap(), "name");
   m_companyHash.insert(companyId_, company);
   return company;
 }
@@ -605,34 +605,6 @@ void IGDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 
 QString IGDBFetcher::ConfigWidget::preferredName() const {
   return IGDBFetcher::defaultName();
-}
-
-// static
-QString IGDBFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
-}
-
-QString IGDBFetcher::value(const QVariantMap& map, const char* object, const char* name) {
-  const QVariant v = map.value(QLatin1String(object));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return value(v.toMap(), name);
-  } else if(v.canConvert(QVariant::List)) {
-    QVariantList list = v.toList();
-    return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
-  } else {
-    return QString();
-  }
 }
 
 QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_) {

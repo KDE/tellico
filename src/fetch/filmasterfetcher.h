@@ -87,8 +87,6 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  static QString value(const QVariantMap& map, const char* name);
-
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
 

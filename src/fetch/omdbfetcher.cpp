@@ -260,15 +260,15 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 }
 
 void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("imdb-id"), value(resultMap_, "imdbID"));
-  entry_->setField(QLatin1String("title"), value(resultMap_, "Title"));
-  entry_->setField(QLatin1String("year"),  value(resultMap_, "Year"));
+  entry_->setField(QLatin1String("imdb-id"), mapValue(resultMap_, "imdbID"));
+  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "Title"));
+  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "Year"));
 
   if(!fullData_) {
     return;
   }
 
-  const QString cert = value(resultMap_, "Rated");
+  const QString cert = mapValue(resultMap_, "Rated");
   Data::FieldPtr certField = entry_->collection()->fieldByName(QLatin1String("certification"));
   if(certField) {
     foreach(const QString& value, certField->allowed()) {
@@ -278,35 +278,35 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
       }
     }
   }
-  entry_->setField(QLatin1String("running-time"), value(resultMap_, "Runtime")
+  entry_->setField(QLatin1String("running-time"), mapValue(resultMap_, "Runtime")
                                                   .remove(QRegExp(QLatin1String("[^\\d]"))));
 
-  const QStringList genres = value(resultMap_, "Genre").split(QLatin1String(", "));
+  const QStringList genres = mapValue(resultMap_, "Genre").split(QLatin1String(", "));
   entry_->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
 
-  const QStringList directors = value(resultMap_, "Director").split(QLatin1String(", "));
+  const QStringList directors = mapValue(resultMap_, "Director").split(QLatin1String(", "));
   entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
 
-  QStringList writers = value(resultMap_, "Writer").split(QLatin1String(", "));
+  QStringList writers = mapValue(resultMap_, "Writer").split(QLatin1String(", "));
   // some wrtiers have parentheticals, remove those
   entry_->setField(QLatin1String("writer"), writers
                                            .replaceInStrings(QRegExp(QLatin1String("\\s*\\(.+\\)\\s*")), QString())
                                            .join(FieldFormat::delimiterString()));
 
-  const QStringList producers = value(resultMap_, "Producer").split(QLatin1String(", "));
+  const QStringList producers = mapValue(resultMap_, "Producer").split(QLatin1String(", "));
   entry_->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
 
-  const QStringList actors = value(resultMap_, "Actors").split(QLatin1String(", "));
+  const QStringList actors = mapValue(resultMap_, "Actors").split(QLatin1String(", "));
   entry_->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  const QStringList countries = value(resultMap_, "Country").split(QLatin1String(", "));
+  const QStringList countries = mapValue(resultMap_, "Country").split(QLatin1String(", "));
   entry_->setField(QLatin1String("nationality"), countries.join(FieldFormat::delimiterString()));
 
-  const QStringList langs = value(resultMap_, "Language").split(QLatin1String(", "));
+  const QStringList langs = mapValue(resultMap_, "Language").split(QLatin1String(", "));
   entry_->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
 
-  entry_->setField(QLatin1String("cover"), value(resultMap_, "Poster"));
-  entry_->setField(QLatin1String("plot"), value(resultMap_, "Plot"));
+  entry_->setField(QLatin1String("cover"), mapValue(resultMap_, "Poster"));
+  entry_->setField(QLatin1String("plot"), mapValue(resultMap_, "Plot"));
 
   if(optionalFields().contains(QLatin1String("imdb"))) {
     if(!entry_->collection()->hasField(QLatin1String("imdb"))) {
@@ -354,18 +354,4 @@ void OMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString OMDBFetcher::ConfigWidget::preferredName() const {
   return OMDBFetcher::defaultName();
-}
-
-// static
-QString OMDBFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }

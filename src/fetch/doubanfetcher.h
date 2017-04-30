@@ -95,9 +95,6 @@ private:
   void populateVideoEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
   void populateMusicEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
-  static QString value(const QVariantMap& map, const char* name);
-  static QString value(const QVariantMap& map, const char* object, const char* name);
-
   bool m_started;
 
   QHash<int, QUrl> m_matches;

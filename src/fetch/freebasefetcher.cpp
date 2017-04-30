@@ -282,7 +282,7 @@ Tellico::Data::EntryPtr FreebaseFetcher::fetchEntryHook(uint uid_) {
               .value(QLatin1String("/common/document/text")).toMap();
         const QVariantList valueList = articleMap.value(QLatin1String("values")).toList();
         if(!valueList.isEmpty()) {
-          entry->setField(article_field, value(valueList.first().toMap(), "value"));
+          entry->setField(article_field, mapValue(valueList.first().toMap(), "value"));
         }
       }
     }
@@ -361,7 +361,7 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
     }
   } else if(responseMap.contains(QLatin1String("error"))) {
     // we have an error!!!!!!!!!!!!!
-    const QString msg = value(responseMap, "error", "message");
+    const QString msg = mapValue(responseMap, "error", "message");
     if(!msg.isEmpty()) {
       myDebug() << "message:" << msg;
       message(msg, MessageHandler::Error);
@@ -389,46 +389,46 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
     QVariantMap resultMap = result.toMap();
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    entry->setField(QLatin1String("title"), value(resultMap, "name"));
+    entry->setField(QLatin1String("title"), mapValue(resultMap, "name"));
     if(optionalFields().contains(QLatin1String("freebase"))) {
-      entry->setField(QLatin1String("freebase"), QLatin1String(FREEBASE_VIEW_URL) + value(resultMap, "id"));
+      entry->setField(QLatin1String("freebase"), QLatin1String(FREEBASE_VIEW_URL) + mapValue(resultMap, "id"));
     }
 
     switch(type) {
       case Data::Collection::Book:
       case Data::Collection::Bibtex:
-        entry->setField(QLatin1String("pub_year"),  value(resultMap, "publication_date").left(4));
+        entry->setField(QLatin1String("pub_year"),  mapValue(resultMap, "publication_date").left(4));
         {
-          QString isbn = value(resultMap, "isbn", "isbn");
+          QString isbn = mapValue(resultMap, "isbn", "isbn");
           if(isbn.isEmpty()) {
-            isbn = value(resultMap, "/media_common/cataloged_instance/isbn13", "value");
+            isbn = mapValue(resultMap, "/media_common/cataloged_instance/isbn13", "value");
           }
           entry->setField(QLatin1String("isbn"), isbn);
         }
-        entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-        entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages"));
+        entry->setField(QLatin1String("publisher"), mapValue(resultMap, "publisher"));
+        entry->setField(QLatin1String("pages"),     mapValue(resultMap, "number_of_pages"));
         {
-          QString lccn = value(resultMap, "LCCN");
+          QString lccn = mapValue(resultMap, "LCCN");
           if(lccn.isEmpty()) {
-            lccn = value(resultMap, "/media_common/cataloged_instance/lccn", "value");
+            lccn = mapValue(resultMap, "/media_common/cataloged_instance/lccn", "value");
           }
           entry->setField(QLatin1String("lccn"), lccn);
         }
-        entry->setField(QLatin1String("author"),    value(resultMap, "work:book", "author"));
-        entry->setField(QLatin1String("editor"),    value(resultMap, "work:book", "editor"));
-        entry->setField(QLatin1String("cr_year"),   value(resultMap, "work:book", "copyright_date").left(4));
+        entry->setField(QLatin1String("author"),    mapValue(resultMap, "work:book", "author"));
+        entry->setField(QLatin1String("editor"),    mapValue(resultMap, "work:book", "editor"));
+        entry->setField(QLatin1String("cr_year"),   mapValue(resultMap, "work:book", "copyright_date").left(4));
         {
-          const QString series = value(resultMap, "work:book", "part_of_series");
+          const QString series = mapValue(resultMap, "work:book", "part_of_series");
           // some have duplicate values?
           QStringList seriesList = FieldFormat::splitValue(series);
           seriesList.removeDuplicates();
           entry->setField(QLatin1String("series"), seriesList.join(FieldFormat::delimiterString()));
         }
-        entry->setField(QLatin1String("language"),  value(resultMap, "work:book", "original_language"));
-        entry->setField(QLatin1String("pages"),     value(resultMap, "number_of_pages", "numbered_pages"));
-        entry->setField(QLatin1String("genre"), FieldFormat::capitalize(value(resultMap, "book", "genre")));
+        entry->setField(QLatin1String("language"),  mapValue(resultMap, "work:book", "original_language"));
+        entry->setField(QLatin1String("pages"),     mapValue(resultMap, "number_of_pages", "numbered_pages"));
+        entry->setField(QLatin1String("genre"), FieldFormat::capitalize(mapValue(resultMap, "book", "genre")));
         {
-          QString binding = value(resultMap, "binding");
+          QString binding = mapValue(resultMap, "binding");
           if(!binding.isEmpty()) {
             if(binding.toLower() == QLatin1String("hardcover")) {
               binding = i18n("Hardback");
@@ -443,27 +443,27 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
         break;
 
       case Data::Collection::ComicBook:
-        entry->setField(QLatin1String("writer"),     value(resultMap, "editor"));
-        entry->setField(QLatin1String("issue"),      value(resultMap, "issue_number"));
-        entry->setField(QLatin1String("pub_year"),   value(resultMap, "date_of_publication").left(4));
-        entry->setField(QLatin1String("publisher"),  value(resultMap, "!/comic_books/comic_book_series/issues", "publisher"));
-        entry->setField(QLatin1String("series"),     value(resultMap, "!/comic_books/comic_book_series/issues", "name"));
-        entry->setField(QLatin1String("genre"),      value(resultMap, "!/comic_books/comic_book_series/issues", "genre"));
+        entry->setField(QLatin1String("writer"),     mapValue(resultMap, "editor"));
+        entry->setField(QLatin1String("issue"),      mapValue(resultMap, "issue_number"));
+        entry->setField(QLatin1String("pub_year"),   mapValue(resultMap, "date_of_publication").left(4));
+        entry->setField(QLatin1String("publisher"),  mapValue(resultMap, "!/comic_books/comic_book_series/issues", "publisher"));
+        entry->setField(QLatin1String("series"),     mapValue(resultMap, "!/comic_books/comic_book_series/issues", "name"));
+        entry->setField(QLatin1String("genre"),      mapValue(resultMap, "!/comic_books/comic_book_series/issues", "genre"));
         {
           QStringList artists;
-          QString colors = value(resultMap, "cover_colors");
+          QString colors = mapValue(resultMap, "cover_colors");
           if(!colors.isEmpty()) {
             artists << colors;
           }
-          QString inks = value(resultMap, "cover_inks");
+          QString inks = mapValue(resultMap, "cover_inks");
           if(!inks.isEmpty())  {
             artists << inks;
           }
-          QString letters = value(resultMap, "cover_letters");
+          QString letters = mapValue(resultMap, "cover_letters");
           if(!letters.isEmpty()) {
             artists << letters;
           }
-          QString pencils = value(resultMap, "cover_pencils");
+          QString pencils = mapValue(resultMap, "cover_pencils");
           if(!pencils.isEmpty()) {
             artists << pencils;
           }
@@ -473,23 +473,23 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
 
       case Data::Collection::Video:
         {
-          entry->setField(QLatin1String("director"),      value(resultMap, "directed_by"));
-          entry->setField(QLatin1String("producer"),      value(resultMap, "produced_by"));
-          entry->setField(QLatin1String("writer"),        value(resultMap, "written_by"));
-          entry->setField(QLatin1String("composer"),      value(resultMap, "music"));
-          QString studio = value(resultMap, "production_companies");
+          entry->setField(QLatin1String("director"),      mapValue(resultMap, "directed_by"));
+          entry->setField(QLatin1String("producer"),      mapValue(resultMap, "produced_by"));
+          entry->setField(QLatin1String("writer"),        mapValue(resultMap, "written_by"));
+          entry->setField(QLatin1String("composer"),      mapValue(resultMap, "music"));
+          QString studio = mapValue(resultMap, "production_companies");
           if(studio.isEmpty()) {
-            studio = value(resultMap, "distributors", "distributor");
+            studio = mapValue(resultMap, "distributors", "distributor");
           }
           entry->setField(QLatin1String("studio"),        studio);
-          entry->setField(QLatin1String("genre"),         value(resultMap, "genre"));
-          entry->setField(QLatin1String("nationality"),   value(resultMap, "country"));
-          entry->setField(QLatin1String("keyword"),       value(resultMap, "subjects"));
+          entry->setField(QLatin1String("genre"),         mapValue(resultMap, "genre"));
+          entry->setField(QLatin1String("nationality"),   mapValue(resultMap, "country"));
+          entry->setField(QLatin1String("keyword"),       mapValue(resultMap, "subjects"));
           // sometimes the rating comes back with multiple values
-          const QStringList certs = FieldFormat::splitValue(value(resultMap, "rating"));
+          const QStringList certs = FieldFormat::splitValue(mapValue(resultMap, "rating"));
           entry->setField(QLatin1String("certification"), certs.isEmpty() ? QString() : certs.first());
-          entry->setField(QLatin1String("year"),          value(resultMap, "initial_release_date").left(4));
-          entry->setField(QLatin1String("running-time"),  value(resultMap, "runtime", "runtime"));
+          entry->setField(QLatin1String("year"),          mapValue(resultMap, "initial_release_date").left(4));
+          entry->setField(QLatin1String("running-time"),  mapValue(resultMap, "runtime", "runtime"));
 
           QStringList castList;
           const QVariantList castResult = resultMap.value(QLatin1String("starring")).toList();
@@ -513,13 +513,13 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
 
       case Data::Collection::Album:
         {
-          entry->setField(QLatin1String("artist"), value(resultMap, "artist"));
+          entry->setField(QLatin1String("artist"), mapValue(resultMap, "artist"));
           if(entry->field(QLatin1String("artist")).isEmpty()) {
-            entry->setField(QLatin1String("artist"), value(resultMap, "credited_as"));
+            entry->setField(QLatin1String("artist"), mapValue(resultMap, "credited_as"));
           }
-          entry->setField(QLatin1String("year"),   value(resultMap, "release_date").left(4));
-          entry->setField(QLatin1String("label"),  value(resultMap, "label"));
-          entry->setField(QLatin1String("genre"),  value(resultMap, "album", "genre"));
+          entry->setField(QLatin1String("year"),   mapValue(resultMap, "release_date").left(4));
+          entry->setField(QLatin1String("label"),  mapValue(resultMap, "label"));
+          entry->setField(QLatin1String("genre"),  mapValue(resultMap, "album", "genre"));
 
           QStringList trackList;
           const QVariantList trackResult = resultMap.value(QLatin1String("track")).toList();
@@ -546,11 +546,11 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
       case Data::Collection::Game:
         {
           // video game stuff
-          entry->setField(QLatin1String("genre"),     value(resultMap, "cvg_genre"));
-          entry->setField(QLatin1String("developer"), value(resultMap, "developer"));
-          entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-          entry->setField(QLatin1String("year"),      value(resultMap, "release_date").left(4));
-          const QStringList platforms = FieldFormat::splitValue(value(resultMap, "platforms"));
+          entry->setField(QLatin1String("genre"),     mapValue(resultMap, "cvg_genre"));
+          entry->setField(QLatin1String("developer"), mapValue(resultMap, "developer"));
+          entry->setField(QLatin1String("publisher"), mapValue(resultMap, "publisher"));
+          entry->setField(QLatin1String("year"),      mapValue(resultMap, "release_date").left(4));
+          const QStringList platforms = FieldFormat::splitValue(mapValue(resultMap, "platforms"));
           if(!platforms.isEmpty()) {
             // just grab first one
             entry->setField(QLatin1String("platform"), i18n(platforms.at(0).toUtf8().constData()));
@@ -561,12 +561,12 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
       case Data::Collection::BoardGame:
         {
           // video game stuff
-          entry->setField(QLatin1String("genre"),     value(resultMap, "genre"));
-          entry->setField(QLatin1String("designer"),  value(resultMap, "designer"));
-          entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
-          entry->setField(QLatin1String("year"),      value(resultMap, "introduced").left(4));
-          const int minPlayers = value(resultMap, "number_of_players", "low_value").toInt();
-          const int maxPlayers = value(resultMap, "number_of_players", "high_value").toInt();
+          entry->setField(QLatin1String("genre"),     mapValue(resultMap, "genre"));
+          entry->setField(QLatin1String("designer"),  mapValue(resultMap, "designer"));
+          entry->setField(QLatin1String("publisher"), mapValue(resultMap, "publisher"));
+          entry->setField(QLatin1String("year"),      mapValue(resultMap, "introduced").left(4));
+          const int minPlayers = mapValue(resultMap, "number_of_players", "low_value").toInt();
+          const int maxPlayers = mapValue(resultMap, "number_of_players", "high_value").toInt();
           if(minPlayers > 0 && maxPlayers > 0) {
             QStringList players;
             for(int i = minPlayers; i <= maxPlayers; ++i) {
@@ -582,19 +582,19 @@ void FreebaseFetcher::slotComplete(KJob* job_) {
     }
 
     // set the image and article ids. The actual content gets loaded in fetchEntryHook()
-    entry->setField(QLatin1String("cover"), value(resultMap, "/common/topic/image", "id"));
+    entry->setField(QLatin1String("cover"), mapValue(resultMap, "/common/topic/image", "id"));
     if(type == Data::Collection::Album && entry->field(QLatin1String("cover")).isEmpty()) {
       // musical releases can have the image from the album
       QVariantList albumList = resultMap.value(QLatin1String("album")).toList();
       if(!albumList.isEmpty()) {
         QVariantMap albumMap = albumList.at(0).toMap();
-        entry->setField(QLatin1String("cover"), value(albumMap, "/common/topic/image", "id"));
+        entry->setField(QLatin1String("cover"), mapValue(albumMap, "/common/topic/image", "id"));
       }
     }
     if(type == Data::Collection::Video) {
-      entry->setField(QLatin1String("plot"), value(resultMap, "/common/topic/article", "id"));
+      entry->setField(QLatin1String("plot"), mapValue(resultMap, "/common/topic/article", "id"));
     } else if(type == Data::Collection::Game || type == Data::Collection::BoardGame) {
-      entry->setField(QLatin1String("description"), value(resultMap, "/common/topic/article", "id"));
+      entry->setField(QLatin1String("description"), mapValue(resultMap, "/common/topic/article", "id"));
     }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
@@ -990,35 +990,6 @@ void FreebaseFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 
 QString FreebaseFetcher::ConfigWidget::preferredName() const {
   return FreebaseFetcher::defaultName();
-}
-
-QString FreebaseFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else if(v.canConvert(QVariant::Map)) {
-    return v.toMap().value(QLatin1String("name")).toString();
-  } else {
-    return QString();
-  }
-}
-
-QString FreebaseFetcher::value(const QVariantMap& map, const char* object, const char* name) {
-  const QVariant v = map.value(QLatin1String(object));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return value(v.toMap(), name);
-  } else if(v.canConvert(QVariant::List)) {
-    QVariantList list = v.toList();
-    return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
-  } else {
-    return QString();
-  }
 }
 
 QByteArray FreebaseFetcher::serialize(const QVariant& value_) {

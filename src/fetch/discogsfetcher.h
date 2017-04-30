@@ -97,8 +97,6 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
 
-  static QString value(const QVariantMap& map, const char* name);
-
   bool m_started;
 
   QString m_apiKey;

@@ -93,8 +93,6 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  static QString value(const QVariantMap& map, const char* name);
-  static QString value(const QVariantMap& map, const char* object, const char* name);
   static QByteArray serialize(const QVariant& value);
 
   virtual void search() Q_DECL_OVERRIDE;

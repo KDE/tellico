@@ -273,7 +273,7 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
 //  const QVariantMap resultMap = doc.object().toVariantMap().value(QLatin1String("feed")).toMap();
   const QVariantMap resultMap = doc.object().toVariantMap();
 
-  if(value(resultMap, "message").startsWith(QLatin1String("Invalid consumer token"))) {
+  if(mapValue(resultMap, "message").startsWith(QLatin1String("Invalid consumer token"))) {
     message(i18n("The Discogs.com server reports a token error."),
             MessageHandler::Error);
     stop();
@@ -301,25 +301,25 @@ void DiscogsFetcher::slotComplete(KJob* job_) {
 }
 
 void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("discogs-id"), value(resultMap_, "id"));
-  entry_->setField(QLatin1String("title"), value(resultMap_, "title"));
-  entry_->setField(QLatin1String("year"),  value(resultMap_, "year"));
-  entry_->setField(QLatin1String("genre"),  value(resultMap_, "genres"));
+  entry_->setField(QLatin1String("discogs-id"), mapValue(resultMap_, "id"));
+  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "year"));
+  entry_->setField(QLatin1String("genre"),  mapValue(resultMap_, "genres"));
 
   QStringList artists;
   foreach(const QVariant& artist, resultMap_.value(QLatin1String("artists")).toList()) {
-    artists << value(artist.toMap(), "name");
+    artists << mapValue(artist.toMap(), "name");
   }
   entry_->setField(QLatin1String("artist"), artists.join(FieldFormat::delimiterString()));
 
   QStringList labels;
   foreach(const QVariant& label, resultMap_.value(QLatin1String("labels")).toList()) {
-    labels << value(label.toMap(), "name");
+    labels << mapValue(label.toMap(), "name");
   }
   entry_->setField(QLatin1String("label"), labels.join(FieldFormat::delimiterString()));
 
   /* thumb value is not always in the full data, so go ahead and set it now */
-  QString coverUrl = value(resultMap_, "thumb");
+  QString coverUrl = mapValue(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
     entry_->setField(QLatin1String("cover"), coverUrl);
   }
@@ -333,14 +333,14 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   // if there is a CD, prefer that in the track list
   bool hasCD = false;
   foreach(const QVariant& format, resultMap_.value(QLatin1String("formats")).toList()) {
-    if(value(format.toMap(), "name") == QLatin1String("CD")) {
+    if(mapValue(format.toMap(), "name") == QLatin1String("CD")) {
       entry_->setField(QLatin1String("medium"), i18n("Compact Disc"));
       hasCD = true;
-    } else if(value(format.toMap(), "name") == QLatin1String("Vinyl")) {
+    } else if(mapValue(format.toMap(), "name") == QLatin1String("Vinyl")) {
       entry_->setField(QLatin1String("medium"), i18n("Vinyl"));
-    } else if(value(format.toMap(), "name") == QLatin1String("Cassette")) {
+    } else if(mapValue(format.toMap(), "name") == QLatin1String("Cassette")) {
       entry_->setField(QLatin1String("medium"), i18n("Cassette"));
-    } else if(!hasCD && value(format.toMap(), "name") == QLatin1String("DVD")) {
+    } else if(!hasCD && mapValue(format.toMap(), "name") == QLatin1String("DVD")) {
       // sometimes a CD and DVD both are included. If we're using the CD, ignore the DVD
       entry_->setField(QLatin1String("medium"), i18n("DVD"));
     }
@@ -349,52 +349,52 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   QStringList tracks;
   foreach(const QVariant& track, resultMap_.value(QLatin1String("tracklist")).toList()) {
     const QVariantMap trackMap = track.toMap();
-    if(value(trackMap, "type_") != QLatin1String("track")) {
+    if(mapValue(trackMap, "type_") != QLatin1String("track")) {
       continue;
     }
 
     // Releases might include a CD and a DVD, for example
     // prefer only the tracks on the CD. Allow positionns of just numbers
-    if(hasCD && !(value(trackMap, "position").at(0).isNumber() || 
-                  value(trackMap, "position").startsWith(QLatin1String("CD")))) {
+    if(hasCD && !(mapValue(trackMap, "position").at(0).isNumber() ||
+                  mapValue(trackMap, "position").startsWith(QLatin1String("CD")))) {
       continue;
     }
 
     QStringList trackInfo;
-    trackInfo << value(trackMap, "title");
+    trackInfo << mapValue(trackMap, "title");
     if(trackMap.contains(QLatin1String("artists"))) {
       QStringList artists;
       foreach(const QVariant& artist, trackMap.value(QLatin1String("artists")).toList()) {
-        artists << value(artist.toMap(), "name");
+        artists << mapValue(artist.toMap(), "name");
       }
       trackInfo << artists.join(FieldFormat::delimiterString());
     } else {
       trackInfo << entry_->field(QLatin1String("artist"));
     }
-    trackInfo << value(trackMap, "duration");
+    trackInfo << mapValue(trackMap, "duration");
     tracks << trackInfo.join(FieldFormat::columnDelimiterString());
   }
   entry_->setField(QLatin1String("track"), tracks.join(FieldFormat::rowDelimiterString()));
 
   if(entry_->collection()->hasField(QLatin1String("discogs"))) {
-    entry_->setField(QLatin1String("discogs"), value(resultMap_, "uri"));
+    entry_->setField(QLatin1String("discogs"), mapValue(resultMap_, "uri"));
   }
 
   if(entry_->collection()->hasField(QLatin1String("nationality"))) {
-    entry_->setField(QLatin1String("nationality"), value(resultMap_, "country"));
+    entry_->setField(QLatin1String("nationality"), mapValue(resultMap_, "country"));
   }
 
   if(entry_->collection()->hasField(QLatin1String("producer"))) {
     QStringList producers;
     foreach(const QVariant& extraartist, resultMap_.value(QLatin1String("extraartists")).toList()) {
-      if(value(extraartist.toMap(), "role").contains(QLatin1String("Producer"))) {
-        producers << value(extraartist.toMap(), "name");
+      if(mapValue(extraartist.toMap(), "role").contains(QLatin1String("Producer"))) {
+        producers << mapValue(extraartist.toMap(), "name");
       }
     }
     entry_->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
   }
 
-  entry_->setField(QLatin1String("comments"),  value(resultMap_, "notes"));
+  entry_->setField(QLatin1String("comments"),  mapValue(resultMap_, "notes"));
 }
 
 Tellico::Fetch::ConfigWidget* DiscogsFetcher::configWidget(QWidget* parent_) const {
@@ -464,18 +464,4 @@ void DiscogsFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 
 QString DiscogsFetcher::ConfigWidget::preferredName() const {
   return DiscogsFetcher::defaultName();
-}
-
-// static
-QString DiscogsFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }

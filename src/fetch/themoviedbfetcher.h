@@ -97,8 +97,6 @@ private:
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
   void readConfiguration();
 
-  static QString value(const QVariantMap& map, const char* name);
-
   bool m_started;
 
   QString m_locale;

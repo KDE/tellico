@@ -82,8 +82,6 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryPtr parseEntry(const QString& str);
 
-  static QString value(const QVariantMap& map, const char* name);
-
   int m_total;
   QHash<int, Data::EntryPtr> m_entries;
   QHash<int, QUrl> m_matches;

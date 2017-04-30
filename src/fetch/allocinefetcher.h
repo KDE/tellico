@@ -79,8 +79,6 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  static QString value(const QVariantMap& map, const char* name);
-  static QString value(const QVariantMap& map, const char* object, const char* name);
   static QByteArray calculateSignature(const QList<QPair<QString, QString> >& params);
 
   virtual void search() Q_DECL_OVERRIDE;

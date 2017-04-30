@@ -318,39 +318,39 @@ Tellico::Data::CollPtr AbstractAllocineFetcher::createCollection() const {
 
 void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap) {
   if(entry->collection()->hasField(QLatin1String("allocine-code"))) {
-    entry->setField(QLatin1String("allocine-code"), value(resultMap, "code"));
+    entry->setField(QLatin1String("allocine-code"), mapValue(resultMap, "code"));
   }
 
-  entry->setField(QLatin1String("title"), value(resultMap, "title"));
+  entry->setField(QLatin1String("title"), mapValue(resultMap, "title"));
   if(optionalFields().contains(QLatin1String("origtitle"))) {
-    entry->setField(QLatin1String("origtitle"), value(resultMap, "originalTitle"));
+    entry->setField(QLatin1String("origtitle"), mapValue(resultMap, "originalTitle"));
   }
   if(entry->title().isEmpty()) {
-    entry->setField(QLatin1String("title"), value(resultMap,  "originalTitle"));
+    entry->setField(QLatin1String("title"), mapValue(resultMap,  "originalTitle"));
   }
-  entry->setField(QLatin1String("year"), value(resultMap, "productionYear"));
-  entry->setField(QLatin1String("plot"), value(resultMap, "synopsis"));
+  entry->setField(QLatin1String("year"), mapValue(resultMap, "productionYear"));
+  entry->setField(QLatin1String("plot"), mapValue(resultMap, "synopsis"));
 
-  const int runTime = value(resultMap, "runtime").toInt();
+  const int runTime = mapValue(resultMap, "runtime").toInt();
   entry->setField(QLatin1String("running-time"), QString::number(runTime/60));
 
   const QVariantList castList = resultMap.value(QLatin1String("castMember")).toList();
   QStringList actors, directors, producers, composers;
   foreach(const QVariant& castVariant, castList) {
     const QVariantMap castMap = castVariant.toMap();
-    const int code = value(castMap, "activity", "code").toInt();
+    const int code = mapValue(castMap, "activity", "code").toInt();
     switch(code) {
       case 8001:
-        actors << (value(castMap, "person", "name") + FieldFormat::columnDelimiterString() + value(castMap, "role"));
+        actors << (mapValue(castMap, "person", "name") + FieldFormat::columnDelimiterString() + mapValue(castMap, "role"));
         break;
       case 8002:
-        directors << value(castMap, "person", "name");
+        directors << mapValue(castMap, "person", "name");
         break;
       case 8029:
-        producers << value(castMap, "person", "name");
+        producers << mapValue(castMap, "person", "name");
         break;
       case 8003:
-        composers << value(castMap, "person", "name");
+        composers << mapValue(castMap, "person", "name");
         break;
     }
   }
@@ -360,23 +360,23 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
   entry->setField(QLatin1String("composer"), composers.join(FieldFormat::delimiterString()));
 
   const QVariantMap releaseMap = resultMap.value(QLatin1String("release")).toMap();
-  entry->setField(QLatin1String("studio"), value(releaseMap, "distributor", "name"));
+  entry->setField(QLatin1String("studio"), mapValue(releaseMap, "distributor", "name"));
 
   QStringList genres;
   foreach(const QVariant& variant, resultMap.value(QLatin1String("genre")).toList()) {
-    genres << i18n(value(variant.toMap(), "$").toUtf8().constData());
+    genres << i18n(mapValue(variant.toMap(), "$").toUtf8().constData());
   }
   entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
 
   QStringList nats;
   foreach(const QVariant& variant, resultMap.value(QLatin1String("nationality")).toList()) {
-    nats << value(variant.toMap(), "$");
+    nats << mapValue(variant.toMap(), "$");
   }
   entry->setField(QLatin1String("nationality"), nats.join(FieldFormat::delimiterString()));
 
   QStringList langs;
   foreach(const QVariant& variant, resultMap.value(QLatin1String("language")).toList()) {
-    langs << value(variant.toMap(), "$");
+    langs << mapValue(variant.toMap(), "$");
   }
   entry->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
 
@@ -385,10 +385,10 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
     entry->setField(QLatin1String("color"), i18n("Color"));
   }
 
-  entry->setField(QLatin1String("cover"), value(resultMap, "poster", "href"));
+  entry->setField(QLatin1String("cover"), mapValue(resultMap, "poster", "href"));
 
   if(optionalFields().contains(QLatin1String("allocine"))) {
-    entry->setField(QLatin1String("allocine"), value(resultMap, "link", "href"));
+    entry->setField(QLatin1String("allocine"), mapValue(resultMap, "link", "href"));
   }
 }
 
@@ -428,34 +428,6 @@ AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Abst
 
 void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("Max Cast", m_numCast->value());
-}
-
-// static
-QString AbstractAllocineFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
-}
-
-QString AbstractAllocineFetcher::value(const QVariantMap& map, const char* object, const char* name) {
-  const QVariant v = map.value(QLatin1String(object));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::Map)) {
-    return value(v.toMap(), name);
-  } else if(v.canConvert(QVariant::List)) {
-    QVariantList list = v.toList();
-    return list.isEmpty() ? QString() : value(list.at(0).toMap(), name);
-  } else {
-    return QString();
-  }
 }
 
 QByteArray AbstractAllocineFetcher::calculateSignature(const QList<QPair<QString, QString> >& params_) {

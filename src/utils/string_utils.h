@@ -25,10 +25,11 @@
 #ifndef STRING_UTILS_H
 #define STRING_UTILS_H
 
-#include <Qt>
-
 class QByteArray;
 class QString;
+
+#include <Qt>
+#include <QMetaType>
 
 /**
  * This file contains utility functions for manipulating strings.
@@ -62,6 +63,10 @@ namespace Tellico {
 
   QString minutes(int seconds);
   QString fromHtmlData(const QByteArray& data, const char* codecName = nullptr);
+
+  // helper methods for the QVariantMaps used by the JSON importers
+  QString mapValue(const QVariantMap& map, const char* object);
+  QString mapValue(const QVariantMap& map, const char* object, const char* name);
 }
 
 #endif

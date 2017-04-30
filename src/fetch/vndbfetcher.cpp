@@ -255,16 +255,16 @@ void VNDBFetcher::slotComplete() {
     resultMap = result.toMap();
 
     Data::EntryPtr entry(new Data::Entry(coll));
-    entry->setField(QLatin1String("title"), value(resultMap, "title"));
-    entry->setField(QLatin1String("year"), value(resultMap, "released").left(4));
+    entry->setField(QLatin1String("title"), mapValue(resultMap, "title"));
+    entry->setField(QLatin1String("year"), mapValue(resultMap, "released").left(4));
     entry->setField(QLatin1String("genre"), i18n("Visual Novel"));
-    entry->setField(QLatin1String("description"), value(resultMap, "description"));
-    entry->setField(QLatin1String("cover"), value(resultMap, "image"));
+    entry->setField(QLatin1String("description"), mapValue(resultMap, "description"));
+    entry->setField(QLatin1String("cover"), mapValue(resultMap, "image"));
     if(optionalFields().contains(QLatin1String("origtitle"))) {
-      entry->setField(QLatin1String("origtitle"), value(resultMap, "original"));
+      entry->setField(QLatin1String("origtitle"), mapValue(resultMap, "original"));
     }
     if(optionalFields().contains(QLatin1String("alias"))) {
-      const QString aliases = value(resultMap, "aliases");
+      const QString aliases = mapValue(resultMap, "aliases");
       entry->setField(QLatin1String("alias"), aliases.split(QLatin1String("\n")).join(FieldFormat::delimiterString()));
     }
 
@@ -332,20 +332,4 @@ void VNDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString VNDBFetcher::ConfigWidget::preferredName() const {
   return VNDBFetcher::defaultName();
-}
-
-// static
-QString VNDBFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else if(v.canConvert(QVariant::Map)) {
-    return v.toMap().value(QLatin1String("value")).toString();
-  } else {
-    return QString();
-  }
 }

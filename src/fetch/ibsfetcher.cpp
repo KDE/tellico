@@ -250,15 +250,15 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
 
   // as genre, take the last breadcrumb
-  QString genre = value(objectMap, "breadcrumb");
+  QString genre = mapValue(objectMap, "breadcrumb");
   genre = genre.section(QLatin1String(">"), -1);
   entry->setField(QLatin1String("genre"), genre);
 
   // the title in the embedded loses it's identifier? "La..."
-  entry->setField(QLatin1String("title"), value(resultMap, "name"));
-  entry->setField(QLatin1String("author"), value(resultMap, "author"));
+  entry->setField(QLatin1String("title"), mapValue(resultMap, "name"));
+  entry->setField(QLatin1String("author"), mapValue(resultMap, "author"));
 
-  const QString bookFormat = value(resultMap, "bookFormat");
+  const QString bookFormat = mapValue(resultMap, "bookFormat");
   if(bookFormat == QLatin1String("http://schema.org/Paperback")) {
     entry->setField(QLatin1String("binding"), i18n("Paperback"));
   } else if(bookFormat == QLatin1String("http://schema.org/Hardcover")) {
@@ -267,17 +267,17 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     entry->setField(QLatin1String("binding"), i18n("E-Book"));
   }
 
-  entry->setField(QLatin1String("pub_year"), value(resultMap, "datePublished"));
-  entry->setField(QLatin1String("cover"), value(resultMap, "image"));
-  entry->setField(QLatin1String("isbn"), value(resultMap, "isbn"));
+  entry->setField(QLatin1String("pub_year"), mapValue(resultMap, "datePublished"));
+  entry->setField(QLatin1String("cover"), mapValue(resultMap, "image"));
+  entry->setField(QLatin1String("isbn"), mapValue(resultMap, "isbn"));
 
   // inLanguage is upper-case language code
-  const QString lang = value(resultMap, "inLanguage");
+  const QString lang = mapValue(resultMap, "inLanguage");
   entry->setField(QLatin1String("language"), QLocale(lang.toLower()).nativeLanguageName());
 
-  entry->setField(QLatin1String("plot"), value(resultMap, "description"));
-  entry->setField(QLatin1String("pages"), value(resultMap, "numberOfPages"));
-  entry->setField(QLatin1String("publisher"), value(resultMap, "publisher"));
+  entry->setField(QLatin1String("plot"), mapValue(resultMap, "description"));
+  entry->setField(QLatin1String("pages"), mapValue(resultMap, "numberOfPages"));
+  entry->setField(QLatin1String("publisher"), mapValue(resultMap, "publisher"));
 
   // multiple authors do not show up in the embedded JSON
   QRegExp titleDivRx(QLatin1String("<div id=\"title\">(.*)</div>"));
@@ -353,18 +353,4 @@ IBSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
 
 QString IBSFetcher::ConfigWidget::preferredName() const {
   return IBSFetcher::defaultName();
-}
-
-// static
-QString IBSFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else {
-    return QString();
-  }
 }

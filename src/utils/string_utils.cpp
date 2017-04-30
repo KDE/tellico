@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "string_utils.h"
+#include "../fieldformat.h"
 
 #include <KCharsets>
 #include <KLocalizedString>
@@ -30,6 +31,7 @@
 
 #include <QRegExp>
 #include <QTextCodec>
+#include <QVariant>
 
 namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
@@ -129,4 +131,34 @@ QString Tellico::removeAccents(const QString& value_) {
     value2.remove(QChar(i));
   }
   return value2;
+}
+
+QString Tellico::mapValue(const QVariantMap& map, const char* name) {
+  const QVariant v = map.value(QLatin1String(name));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::String)) {
+    return v.toString();
+  } else if(v.canConvert(QVariant::StringList)) {
+    return v.toStringList().join(FieldFormat::delimiterString());
+  } else if(v.canConvert(QVariant::Map)) {
+    // FilmasterFetcher, OpenLibraryFetcher and VNDBFetcher depend on the default "value" field
+    return v.toMap().value(QLatin1String("value")).toString();
+  } else {
+    return QString();
+  }
+}
+
+QString Tellico::mapValue(const QVariantMap& map, const char* object, const char* name) {
+  const QVariant v = map.value(QLatin1String(object));
+  if(v.isNull())  {
+    return QString();
+  } else if(v.canConvert(QVariant::Map)) {
+    return mapValue(v.toMap(), name);
+  } else if(v.canConvert(QVariant::List)) {
+    const QVariantList list = v.toList();
+    return list.isEmpty() ? QString() : mapValue(list.at(0).toMap(), name);
+  } else {
+    return QString();
+  }
 }

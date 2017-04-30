@@ -92,8 +92,6 @@ private:
   void populateHashes();
   QString companyName(const QString& companyId) const;
 
-  static QString value(const QVariantMap& map, const char* name);
-  static QString value(const QVariantMap& map, const char* object, const char* name);
   static QPointer<KIO::StoredTransferJob> igdbJob(const QUrl& url, const QString& apiKey);
 
   bool m_started;

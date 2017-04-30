@@ -193,8 +193,8 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
         QStringList uris;
         foreach(const QVariant& person, personList) {
           const QVariantMap personMap = person.toMap();
-          uris << value(personMap, "films_played_uri");
-          uris << value(personMap, "films_directed_uri");
+          uris << mapValue(personMap, "films_played_uri");
+          uris << mapValue(personMap, "films_directed_uri");
         }
         foreach(const QString& uri, uris) {
           QUrl u(QString::fromLatin1(FILMASTER_API_URL));
@@ -244,23 +244,23 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 }
 
 void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_) {
-  entry_->setField(QLatin1String("title"), value(result_, "title"));
-  entry_->setField(QLatin1String("year"), value(result_, "release_year"));
-  entry_->setField(QLatin1String("genre"), value(result_, "tags"));
-  entry_->setField(QLatin1String("nationality"), value(result_, "production_country_list"));
-  entry_->setField(QLatin1String("cover"), value(result_, "image"));
-  entry_->setField(QLatin1String("plot"), value(result_, "description"));
+  entry_->setField(QLatin1String("title"), mapValue(result_, "title"));
+  entry_->setField(QLatin1String("year"), mapValue(result_, "release_year"));
+  entry_->setField(QLatin1String("genre"), mapValue(result_, "tags"));
+  entry_->setField(QLatin1String("nationality"), mapValue(result_, "production_country_list"));
+  entry_->setField(QLatin1String("cover"), mapValue(result_, "image"));
+  entry_->setField(QLatin1String("plot"), mapValue(result_, "description"));
 
   QStringList directors;
   foreach(const QVariant& director, result_.value(QLatin1String("directors")).toList()) {
     const QVariantMap directorMap = director.toMap();
-    directors << value(directorMap, "name") + QLatin1Char(' ') + value(directorMap, "surname");
+    directors << mapValue(directorMap, "name") + QLatin1Char(' ') + mapValue(directorMap, "surname");
   }
   if(!directors.isEmpty()) {
     entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
   }
 
-  const QString castUri = value(result_, "characters_uri");
+  const QString castUri = mapValue(result_, "characters_uri");
   if(!castUri.isEmpty()) {
     QUrl u(QString::fromLatin1(FILMASTER_API_URL));
     u.setPath(castUri);
@@ -271,9 +271,9 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
     foreach(const QVariant& castResult, castList) {
       const QVariantMap castMap = castResult.toMap();
       const QVariantMap nameMap = castMap.value(QLatin1String("person")).toMap();
-      castLines << value(nameMap, "name") + QLatin1Char(' ') + value(nameMap, "surname")
+      castLines << mapValue(nameMap, "name") + QLatin1Char(' ') + mapValue(nameMap, "surname")
                  + FieldFormat::columnDelimiterString()
-                 + value(castMap, "character");
+                 + mapValue(castMap, "character");
     }
     if(!castLines.isEmpty()) {
       entry_->setField(QLatin1String("cast"), castLines.join(FieldFormat::rowDelimiterString()));
@@ -281,7 +281,7 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
   }
 
   if(optionalFields().contains(QLatin1String("filmaster"))) {
-    entry_->setField(QLatin1String("filmaster"), QLatin1String("http://filmaster.com/film/") + value(result_, "permalink"));
+    entry_->setField(QLatin1String("filmaster"), QLatin1String("http://filmaster.com/film/") + mapValue(result_, "permalink"));
   }
 }
 
@@ -318,19 +318,4 @@ void FilmasterFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 
 QString FilmasterFetcher::ConfigWidget::preferredName() const {
   return FilmasterFetcher::defaultName();
-}
-
-QString FilmasterFetcher::value(const QVariantMap& map, const char* name) {
-  const QVariant v = map.value(QLatin1String(name));
-  if(v.isNull())  {
-    return QString();
-  } else if(v.canConvert(QVariant::String)) {
-    return v.toString();
-  } else if(v.canConvert(QVariant::StringList)) {
-    return v.toStringList().join(Tellico::FieldFormat::delimiterString());
-  } else if(v.canConvert(QVariant::Map)) {
-    return v.toMap().value(QLatin1String("value")).toString();
-  } else {
-    return QString();
-  }
 }
