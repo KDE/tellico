@@ -98,7 +98,8 @@ enum Type {
   OMDB,
   KinoPoisk,
   VideoGameGeek,
-  DBC
+  DBC,
+  IGDB
 };
 
   }

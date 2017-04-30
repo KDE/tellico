@@ -638,6 +638,14 @@ add_test(ibsfetchertest ibsfetchertest)
 ecm_mark_as_test(ibsfetchertest)
 TARGET_LINK_LIBRARIES(ibsfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(igdbfetchertest igdbfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/igdbfetcher.cpp
+)
+ecm_mark_nongui_executable(igdbfetchertest)
+add_test(igdbfetchertest igdbfetchertest)
+ecm_mark_as_test(igdbfetchertest)
+TARGET_LINK_LIBRARIES(igdbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(imdbfetchertest imdbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/imdbfetcher.cpp
   ../gui/listwidgetitem.cpp

@@ -37,6 +37,7 @@ SET(fetch_STAT_SRCS
    hathitrustfetcher.cpp
    hmac_sha2.c
    ibsfetcher.cpp
+   igdbfetcher.cpp
    imdbfetcher.cpp
    isbndbfetcher.cpp
    kinopoiskfetcher.cpp
