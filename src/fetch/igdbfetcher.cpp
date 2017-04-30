@@ -56,22 +56,15 @@ namespace {
 using namespace Tellico;
 using Tellico::Fetch::IGDBFetcher;
 
-QHash<int, QString> IGDBFetcher::s_genreHash;
-QHash<int, QString> IGDBFetcher::s_platformHash;
-QHash<QString, QString> IGDBFetcher::s_companyHash;
-QHash<QString, QString> IGDBFetcher::s_esrbHash;
-QHash<QString, QString> IGDBFetcher::s_pegiHash;
-
 IGDBFetcher::IGDBFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false), m_apiKey(QLatin1String(IGDB_API_KEY)) {
   //  setLimit(IGDB_MAX_RETURNS_TOTAL);
-  if(s_genreHash.isEmpty()) {
+  if(m_genreHash.isEmpty()) {
     populateHashes();
   }
 }
 
 IGDBFetcher::~IGDBFetcher() {
-  myDebug() << "destroyed IGDBFetcher";
 }
 
 QString IGDBFetcher::source() const {
@@ -261,7 +254,7 @@ void IGDBFetcher::slotComplete(KJob* job_) {
 void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
   entry_->setField(QLatin1String("title"), value(resultMap_, "name"));
   entry_->setField(QLatin1String("description"), value(resultMap_, "summary"));
-  entry_->setField(QLatin1String("certification"), s_esrbHash.value(value(resultMap_, "esrb", "rating")));
+  entry_->setField(QLatin1String("certification"), m_esrbHash.value(value(resultMap_, "esrb", "rating")));
   entry_->setField(QLatin1String("pub-id"), value(resultMap_, "publishers"));
   entry_->setField(QLatin1String("dev-id"), value(resultMap_, "developers"));
 
@@ -274,7 +267,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   QVariantList genreIDs = resultMap_.value(QLatin1String("genres")).toList();
   QStringList genres;
   foreach(const QVariant& id, genreIDs) {
-    QString g = s_genreHash.value(id.toInt());
+    QString g = m_genreHash.value(id.toInt());
     if(!g.isEmpty()) {
       genres << g;
     }
@@ -286,7 +279,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     QVariantMap releaseMap = releases.at(0).toMap();
     // for now just grab the year of the first release
     entry_->setField(QLatin1String("year"), value(releaseMap, "y"));
-    const QString platform = s_platformHash.value(releaseMap.value(QLatin1String("platform")).toInt());
+    const QString platform = m_platformHash.value(releaseMap.value(QLatin1String("platform")).toInt());
     if(platform == QLatin1String("Nintendo Entertainment System (NES)")) {
       entry_->setField(QLatin1String("platform"), i18n("Nintendo"));
     } else if(platform == QLatin1String("Nintendo PlayStation")) {
@@ -319,7 +312,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   }
 
   if(optionalFields().contains(QLatin1String("pegi"))) {
-    entry_->setField(QLatin1String("pegi"), s_pegiHash.value(value(resultMap_, "pegi", "rating")));
+    entry_->setField(QLatin1String("pegi"), m_pegiHash.value(value(resultMap_, "pegi", "rating")));
   }
 
   if(optionalFields().contains(QLatin1String("igdb"))) {
@@ -328,8 +321,8 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
 }
 
 QString IGDBFetcher::companyName(const QString& companyId_) const {
-  if(s_companyHash.contains(companyId_)) {
-    return s_companyHash.value(companyId_);
+  if(m_companyHash.contains(companyId_)) {
+    return m_companyHash.value(companyId_);
   }
   QUrl u(QString::fromLatin1(IGDB_API_URL));
   u.setPath(u.path() + QLatin1String("companies/") + companyId_);
@@ -362,12 +355,184 @@ QString IGDBFetcher::companyName(const QString& companyId_) const {
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   const QString company = value(doc.array().toVariantList().at(0).toMap(), "name");
-  s_companyHash.insert(companyId_, company);
+  m_companyHash.insert(companyId_, company);
   return company;
 }
 
 Tellico::Fetch::ConfigWidget* IGDBFetcher::configWidget(QWidget* parent_) const {
   return new IGDBFetcher::ConfigWidget(parent_, this);
+}
+
+
+// Use member hash for certain field names for now.
+// Don't expect IGDB values to change. This avoids exponentially multiplying the number of API calls
+void IGDBFetcher::populateHashes() {
+  m_genreHash.insert(2,  QLatin1String("Point-and-click"));
+  m_genreHash.insert(4,  QLatin1String("Fighting"));
+  m_genreHash.insert(5,  QLatin1String("Shooter"));
+  m_genreHash.insert(7,  QLatin1String("Music"));
+  m_genreHash.insert(8,  QLatin1String("Platform"));
+  m_genreHash.insert(9,  QLatin1String("Puzzle"));
+  m_genreHash.insert(10, QLatin1String("Racing"));
+  m_genreHash.insert(11, QLatin1String("Real Time Strategy (RTS)"));
+  m_genreHash.insert(12, QLatin1String("Role-playing (RPG)"));
+  m_genreHash.insert(13, QLatin1String("Simulator"));
+  m_genreHash.insert(14, QLatin1String("Sport"));
+  m_genreHash.insert(15, QLatin1String("Strategy"));
+  m_genreHash.insert(16, QLatin1String("Turn-based strategy (TBS)"));
+  m_genreHash.insert(24, QLatin1String("Tactical"));
+  m_genreHash.insert(25, QLatin1String("Hack and slash/Beat 'em up"));
+  m_genreHash.insert(26, QLatin1String("Quiz/Trivia"));
+  m_genreHash.insert(30, QLatin1String("Pinball"));
+  m_genreHash.insert(31, QLatin1String("Adventure"));
+  m_genreHash.insert(32, QLatin1String("Indie"));
+  m_genreHash.insert(33, QLatin1String("Arcade"));
+
+  m_platformHash.insert(3, QLatin1String("Linux"));
+  m_platformHash.insert(4, QLatin1String("Nintendo 64"));
+  m_platformHash.insert(5, QLatin1String("Wii"));
+  m_platformHash.insert(6, QLatin1String("PC (Microsoft Windows)"));
+  m_platformHash.insert(7, QLatin1String("PlayStation"));
+  m_platformHash.insert(8, QLatin1String("PlayStation 2"));
+  m_platformHash.insert(9, QLatin1String("PlayStation 3"));
+  m_platformHash.insert(11, QLatin1String("Xbox"));
+  m_platformHash.insert(12, QLatin1String("Xbox 360"));
+  m_platformHash.insert(13, QLatin1String("PC DOS"));
+  m_platformHash.insert(14, QLatin1String("Mac"));
+  m_platformHash.insert(15, QLatin1String("Commodore C64/128"));
+  m_platformHash.insert(16, QLatin1String("Amiga"));
+  m_platformHash.insert(18, QLatin1String("Nintendo Entertainment System (NES)"));
+  m_platformHash.insert(19, QLatin1String("Super Nintendo Entertainment System (SNES)"));
+  m_platformHash.insert(20, QLatin1String("Nintendo DS"));
+  m_platformHash.insert(21, QLatin1String("Nintendo GameCube"));
+  m_platformHash.insert(22, QLatin1String("Game Boy Color"));
+  m_platformHash.insert(23, QLatin1String("Dreamcast"));
+  m_platformHash.insert(24, QLatin1String("Game Boy Advance"));
+  m_platformHash.insert(25, QLatin1String("Amstrad CPC"));
+  m_platformHash.insert(26, QLatin1String("ZX Spectrum"));
+  m_platformHash.insert(27, QLatin1String("MSX"));
+  m_platformHash.insert(29, QLatin1String("Sega Mega Drive/Genesis"));
+  m_platformHash.insert(30, QLatin1String("Sega 32X"));
+  m_platformHash.insert(32, QLatin1String("Sega Saturn"));
+  m_platformHash.insert(33, QLatin1String("Game Boy"));
+  m_platformHash.insert(34, QLatin1String("Android"));
+  m_platformHash.insert(35, QLatin1String("Sega Game Gear"));
+  m_platformHash.insert(36, QLatin1String("Xbox Live Arcade"));
+  m_platformHash.insert(37, QLatin1String("Nintendo 3DS"));
+  m_platformHash.insert(38, QLatin1String("PlayStation Portable"));
+  m_platformHash.insert(39, QLatin1String("iOS"));
+  m_platformHash.insert(41, QLatin1String("Wii U"));
+  m_platformHash.insert(42, QLatin1String("N-Gage"));
+  m_platformHash.insert(44, QLatin1String("Tapwave Zodiac"));
+  m_platformHash.insert(45, QLatin1String("PlayStation Network"));
+  m_platformHash.insert(46, QLatin1String("PlayStation Vita"));
+  m_platformHash.insert(47, QLatin1String("Virtual Console (Nintendo)"));
+  m_platformHash.insert(48, QLatin1String("PlayStation 4"));
+  m_platformHash.insert(49, QLatin1String("Xbox One"));
+  m_platformHash.insert(50, QLatin1String("3DO Interactive Multiplayer"));
+  m_platformHash.insert(51, QLatin1String("Family Computer Disk System"));
+  m_platformHash.insert(52, QLatin1String("Arcade"));
+  m_platformHash.insert(53, QLatin1String("MSX2"));
+  m_platformHash.insert(55, QLatin1String("Mobile"));
+  m_platformHash.insert(56, QLatin1String("WiiWare"));
+  m_platformHash.insert(57, QLatin1String("WonderSwan"));
+  m_platformHash.insert(58, QLatin1String("Super Famicom"));
+  m_platformHash.insert(59, QLatin1String("Atari 2600"));
+  m_platformHash.insert(60, QLatin1String("Atari 7800"));
+  m_platformHash.insert(61, QLatin1String("Atari Lynx"));
+  m_platformHash.insert(62, QLatin1String("Atari Jaguar"));
+  m_platformHash.insert(63, QLatin1String("Atari ST/STE"));
+  m_platformHash.insert(64, QLatin1String("Sega Master System"));
+  m_platformHash.insert(65, QLatin1String("Atari 8-bit"));
+  m_platformHash.insert(66, QLatin1String("Atari 5200"));
+  m_platformHash.insert(67, QLatin1String("Intellivision"));
+  m_platformHash.insert(68, QLatin1String("ColecoVision"));
+  m_platformHash.insert(69, QLatin1String("BBC Microcomputer System"));
+  m_platformHash.insert(70, QLatin1String("Vectrex"));
+  m_platformHash.insert(71, QLatin1String("Commodore VIC-20"));
+  m_platformHash.insert(72, QLatin1String("Ouya"));
+  m_platformHash.insert(73, QLatin1String("BlackBerry OS"));
+  m_platformHash.insert(74, QLatin1String("Windows Phone"));
+  m_platformHash.insert(75, QLatin1String("Apple II"));
+  m_platformHash.insert(77, QLatin1String("Sharp X1"));
+  m_platformHash.insert(78, QLatin1String("Sega CD"));
+  m_platformHash.insert(79, QLatin1String("Neo Geo MVS"));
+  m_platformHash.insert(80, QLatin1String("Neo Geo AES"));
+  m_platformHash.insert(82, QLatin1String("Web browser"));
+  m_platformHash.insert(84, QLatin1String("SG-1000"));
+  m_platformHash.insert(85, QLatin1String("Donner Model 30"));
+  m_platformHash.insert(86, QLatin1String("TurboGrafx-16/PC Engine"));
+  m_platformHash.insert(87, QLatin1String("Virtual Boy"));
+  m_platformHash.insert(88, QLatin1String("Odyssey"));
+  m_platformHash.insert(89, QLatin1String("Microvision"));
+  m_platformHash.insert(90, QLatin1String("Commodore PET"));
+  m_platformHash.insert(91, QLatin1String("Bally Astrocade"));
+  m_platformHash.insert(92, QLatin1String("SteamOS"));
+  m_platformHash.insert(93, QLatin1String("Commodore 16"));
+  m_platformHash.insert(94, QLatin1String("Commodore Plus/4"));
+  m_platformHash.insert(95, QLatin1String("PDP-1"));
+  m_platformHash.insert(96, QLatin1String("PDP-10"));
+  m_platformHash.insert(97, QLatin1String("PDP-8"));
+  m_platformHash.insert(98, QLatin1String("DEC GT40"));
+  m_platformHash.insert(99, QLatin1String("Family Computer"));
+  m_platformHash.insert(100, QLatin1String("Analogue electronics"));
+  m_platformHash.insert(101, QLatin1String("Ferranti Nimrod Computer"));
+  m_platformHash.insert(102, QLatin1String("EDSAC"));
+  m_platformHash.insert(103, QLatin1String("PDP-7"));
+  m_platformHash.insert(104, QLatin1String("HP 2100"));
+  m_platformHash.insert(105, QLatin1String("HP 3000"));
+  m_platformHash.insert(106, QLatin1String("SDS Sigma 7"));
+  m_platformHash.insert(107, QLatin1String("Call-A-Computer time-shared mainframe computer system"));
+  m_platformHash.insert(108, QLatin1String("PDP-11"));
+  m_platformHash.insert(109, QLatin1String("CDC Cyber 70"));
+  m_platformHash.insert(110, QLatin1String("PLATO"));
+  m_platformHash.insert(111, QLatin1String("Imlac PDS-1"));
+  m_platformHash.insert(112, QLatin1String("Microcomputer"));
+  m_platformHash.insert(113, QLatin1String("OnLive Game System"));
+  m_platformHash.insert(114, QLatin1String("Amiga CD32"));
+  m_platformHash.insert(115, QLatin1String("Apple IIGS"));
+  m_platformHash.insert(116, QLatin1String("Acorn Archimedes"));
+  m_platformHash.insert(117, QLatin1String("Philips CD-i"));
+  m_platformHash.insert(118, QLatin1String("FM Towns"));
+  m_platformHash.insert(119, QLatin1String("Neo Geo Pocket"));
+  m_platformHash.insert(120, QLatin1String("Neo Geo Pocket Color"));
+  m_platformHash.insert(121, QLatin1String("Sharp X68000"));
+  m_platformHash.insert(122, QLatin1String("Nuon"));
+  m_platformHash.insert(123, QLatin1String("WonderSwan Color"));
+  m_platformHash.insert(124, QLatin1String("SwanCrystal"));
+  m_platformHash.insert(125, QLatin1String("PC-8801"));
+  m_platformHash.insert(126, QLatin1String("TRS-80"));
+  m_platformHash.insert(127, QLatin1String("Fairchild Channel F"));
+  m_platformHash.insert(128, QLatin1String("PC Engine SuperGrafx"));
+  m_platformHash.insert(129, QLatin1String("Texas Instruments TI-99"));
+  m_platformHash.insert(130, QLatin1String("Nintendo Switch"));
+  m_platformHash.insert(131, QLatin1String("Nintendo PlayStation"));
+  m_platformHash.insert(132, QLatin1String("Amazon Fire TV"));
+  m_platformHash.insert(133, QLatin1String("Philips Videopac G7000"));
+  m_platformHash.insert(134, QLatin1String("Acorn Electron"));
+  m_platformHash.insert(135, QLatin1String("Hyper Neo Geo 64"));
+  m_platformHash.insert(136, QLatin1String("Neo Geo CD"));
+
+  // cheat by grabbing i18n values from default collection
+  Data::CollPtr c(new Data::GameCollection(true));
+  QStringList esrb = c->fieldByName(QLatin1String("certification"))->allowed();
+  Q_ASSERT(esrb.size() == 8);
+  while(esrb.size() < 8) {
+    esrb << QString();
+  }
+  m_esrbHash.insert(QLatin1String("1"), esrb.at(7));
+  m_esrbHash.insert(QLatin1String("2"), esrb.at(6));
+  m_esrbHash.insert(QLatin1String("3"), esrb.at(5));
+  m_esrbHash.insert(QLatin1String("4"), esrb.at(4));
+  m_esrbHash.insert(QLatin1String("5"), esrb.at(3));
+  m_esrbHash.insert(QLatin1String("6"), esrb.at(2));
+  m_esrbHash.insert(QLatin1String("7"), esrb.at(1));
+
+  m_pegiHash.insert(QLatin1String("1"), QLatin1String("PEGI 3"));
+  m_pegiHash.insert(QLatin1String("2"), QLatin1String("PEGI 7"));
+  m_pegiHash.insert(QLatin1String("3"), QLatin1String("PEGI 12"));
+  m_pegiHash.insert(QLatin1String("4"), QLatin1String("PEGI 16"));
+  m_pegiHash.insert(QLatin1String("5"), QLatin1String("PEGI 18"));
 }
 
 QString IGDBFetcher::defaultName() {
@@ -468,177 +633,6 @@ QString IGDBFetcher::value(const QVariantMap& map, const char* object, const cha
   } else {
     return QString();
   }
-}
-
-// Be lazy. Use static hash for certain field names for now.
-// Don't expect IGDB values to change. This avoids exponentially multiplying the number of API calls
-void IGDBFetcher::populateHashes() {
-  s_genreHash.insert(2,  QLatin1String("Point-and-click"));
-  s_genreHash.insert(4,  QLatin1String("Fighting"));
-  s_genreHash.insert(5,  QLatin1String("Shooter"));
-  s_genreHash.insert(7,  QLatin1String("Music"));
-  s_genreHash.insert(8,  QLatin1String("Platform"));
-  s_genreHash.insert(9,  QLatin1String("Puzzle"));
-  s_genreHash.insert(10, QLatin1String("Racing"));
-  s_genreHash.insert(11, QLatin1String("Real Time Strategy (RTS)"));
-  s_genreHash.insert(12, QLatin1String("Role-playing (RPG)"));
-  s_genreHash.insert(13, QLatin1String("Simulator"));
-  s_genreHash.insert(14, QLatin1String("Sport"));
-  s_genreHash.insert(15, QLatin1String("Strategy"));
-  s_genreHash.insert(16, QLatin1String("Turn-based strategy (TBS)"));
-  s_genreHash.insert(24, QLatin1String("Tactical"));
-  s_genreHash.insert(25, QLatin1String("Hack and slash/Beat 'em up"));
-  s_genreHash.insert(26, QLatin1String("Quiz/Trivia"));
-  s_genreHash.insert(30, QLatin1String("Pinball"));
-  s_genreHash.insert(31, QLatin1String("Adventure"));
-  s_genreHash.insert(32, QLatin1String("Indie"));
-  s_genreHash.insert(33, QLatin1String("Arcade"));
-
-  s_platformHash.insert(3, QLatin1String("Linux"));
-  s_platformHash.insert(4, QLatin1String("Nintendo 64"));
-  s_platformHash.insert(5, QLatin1String("Wii"));
-  s_platformHash.insert(6, QLatin1String("PC (Microsoft Windows)"));
-  s_platformHash.insert(7, QLatin1String("PlayStation"));
-  s_platformHash.insert(8, QLatin1String("PlayStation 2"));
-  s_platformHash.insert(9, QLatin1String("PlayStation 3"));
-  s_platformHash.insert(11, QLatin1String("Xbox"));
-  s_platformHash.insert(12, QLatin1String("Xbox 360"));
-  s_platformHash.insert(13, QLatin1String("PC DOS"));
-  s_platformHash.insert(14, QLatin1String("Mac"));
-  s_platformHash.insert(15, QLatin1String("Commodore C64/128"));
-  s_platformHash.insert(16, QLatin1String("Amiga"));
-  s_platformHash.insert(18, QLatin1String("Nintendo Entertainment System (NES)"));
-  s_platformHash.insert(19, QLatin1String("Super Nintendo Entertainment System (SNES)"));
-  s_platformHash.insert(20, QLatin1String("Nintendo DS"));
-  s_platformHash.insert(21, QLatin1String("Nintendo GameCube"));
-  s_platformHash.insert(22, QLatin1String("Game Boy Color"));
-  s_platformHash.insert(23, QLatin1String("Dreamcast"));
-  s_platformHash.insert(24, QLatin1String("Game Boy Advance"));
-  s_platformHash.insert(25, QLatin1String("Amstrad CPC"));
-  s_platformHash.insert(26, QLatin1String("ZX Spectrum"));
-  s_platformHash.insert(27, QLatin1String("MSX"));
-  s_platformHash.insert(29, QLatin1String("Sega Mega Drive/Genesis"));
-  s_platformHash.insert(30, QLatin1String("Sega 32X"));
-  s_platformHash.insert(32, QLatin1String("Sega Saturn"));
-  s_platformHash.insert(33, QLatin1String("Game Boy"));
-  s_platformHash.insert(34, QLatin1String("Android"));
-  s_platformHash.insert(35, QLatin1String("Sega Game Gear"));
-  s_platformHash.insert(36, QLatin1String("Xbox Live Arcade"));
-  s_platformHash.insert(37, QLatin1String("Nintendo 3DS"));
-  s_platformHash.insert(38, QLatin1String("PlayStation Portable"));
-  s_platformHash.insert(39, QLatin1String("iOS"));
-  s_platformHash.insert(41, QLatin1String("Wii U"));
-  s_platformHash.insert(42, QLatin1String("N-Gage"));
-  s_platformHash.insert(44, QLatin1String("Tapwave Zodiac"));
-  s_platformHash.insert(45, QLatin1String("PlayStation Network"));
-  s_platformHash.insert(46, QLatin1String("PlayStation Vita"));
-  s_platformHash.insert(47, QLatin1String("Virtual Console (Nintendo)"));
-  s_platformHash.insert(48, QLatin1String("PlayStation 4"));
-  s_platformHash.insert(49, QLatin1String("Xbox One"));
-  s_platformHash.insert(50, QLatin1String("3DO Interactive Multiplayer"));
-  s_platformHash.insert(51, QLatin1String("Family Computer Disk System"));
-  s_platformHash.insert(52, QLatin1String("Arcade"));
-  s_platformHash.insert(53, QLatin1String("MSX2"));
-  s_platformHash.insert(55, QLatin1String("Mobile"));
-  s_platformHash.insert(56, QLatin1String("WiiWare"));
-  s_platformHash.insert(57, QLatin1String("WonderSwan"));
-  s_platformHash.insert(58, QLatin1String("Super Famicom"));
-  s_platformHash.insert(59, QLatin1String("Atari 2600"));
-  s_platformHash.insert(60, QLatin1String("Atari 7800"));
-  s_platformHash.insert(61, QLatin1String("Atari Lynx"));
-  s_platformHash.insert(62, QLatin1String("Atari Jaguar"));
-  s_platformHash.insert(63, QLatin1String("Atari ST/STE"));
-  s_platformHash.insert(64, QLatin1String("Sega Master System"));
-  s_platformHash.insert(65, QLatin1String("Atari 8-bit"));
-  s_platformHash.insert(66, QLatin1String("Atari 5200"));
-  s_platformHash.insert(67, QLatin1String("Intellivision"));
-  s_platformHash.insert(68, QLatin1String("ColecoVision"));
-  s_platformHash.insert(69, QLatin1String("BBC Microcomputer System"));
-  s_platformHash.insert(70, QLatin1String("Vectrex"));
-  s_platformHash.insert(71, QLatin1String("Commodore VIC-20"));
-  s_platformHash.insert(72, QLatin1String("Ouya"));
-  s_platformHash.insert(73, QLatin1String("BlackBerry OS"));
-  s_platformHash.insert(74, QLatin1String("Windows Phone"));
-  s_platformHash.insert(75, QLatin1String("Apple II"));
-  s_platformHash.insert(77, QLatin1String("Sharp X1"));
-  s_platformHash.insert(78, QLatin1String("Sega CD"));
-  s_platformHash.insert(79, QLatin1String("Neo Geo MVS"));
-  s_platformHash.insert(80, QLatin1String("Neo Geo AES"));
-  s_platformHash.insert(82, QLatin1String("Web browser"));
-  s_platformHash.insert(84, QLatin1String("SG-1000"));
-  s_platformHash.insert(85, QLatin1String("Donner Model 30"));
-  s_platformHash.insert(86, QLatin1String("TurboGrafx-16/PC Engine"));
-  s_platformHash.insert(87, QLatin1String("Virtual Boy"));
-  s_platformHash.insert(88, QLatin1String("Odyssey"));
-  s_platformHash.insert(89, QLatin1String("Microvision"));
-  s_platformHash.insert(90, QLatin1String("Commodore PET"));
-  s_platformHash.insert(91, QLatin1String("Bally Astrocade"));
-  s_platformHash.insert(92, QLatin1String("SteamOS"));
-  s_platformHash.insert(93, QLatin1String("Commodore 16"));
-  s_platformHash.insert(94, QLatin1String("Commodore Plus/4"));
-  s_platformHash.insert(95, QLatin1String("PDP-1"));
-  s_platformHash.insert(96, QLatin1String("PDP-10"));
-  s_platformHash.insert(97, QLatin1String("PDP-8"));
-  s_platformHash.insert(98, QLatin1String("DEC GT40"));
-  s_platformHash.insert(99, QLatin1String("Family Computer"));
-  s_platformHash.insert(100, QLatin1String("Analogue electronics"));
-  s_platformHash.insert(101, QLatin1String("Ferranti Nimrod Computer"));
-  s_platformHash.insert(102, QLatin1String("EDSAC"));
-  s_platformHash.insert(103, QLatin1String("PDP-7"));
-  s_platformHash.insert(104, QLatin1String("HP 2100"));
-  s_platformHash.insert(105, QLatin1String("HP 3000"));
-  s_platformHash.insert(106, QLatin1String("SDS Sigma 7"));
-  s_platformHash.insert(107, QLatin1String("Call-A-Computer time-shared mainframe computer system"));
-  s_platformHash.insert(108, QLatin1String("PDP-11"));
-  s_platformHash.insert(109, QLatin1String("CDC Cyber 70"));
-  s_platformHash.insert(110, QLatin1String("PLATO"));
-  s_platformHash.insert(111, QLatin1String("Imlac PDS-1"));
-  s_platformHash.insert(112, QLatin1String("Microcomputer"));
-  s_platformHash.insert(113, QLatin1String("OnLive Game System"));
-  s_platformHash.insert(114, QLatin1String("Amiga CD32"));
-  s_platformHash.insert(115, QLatin1String("Apple IIGS"));
-  s_platformHash.insert(116, QLatin1String("Acorn Archimedes"));
-  s_platformHash.insert(117, QLatin1String("Philips CD-i"));
-  s_platformHash.insert(118, QLatin1String("FM Towns"));
-  s_platformHash.insert(119, QLatin1String("Neo Geo Pocket"));
-  s_platformHash.insert(120, QLatin1String("Neo Geo Pocket Color"));
-  s_platformHash.insert(121, QLatin1String("Sharp X68000"));
-  s_platformHash.insert(122, QLatin1String("Nuon"));
-  s_platformHash.insert(123, QLatin1String("WonderSwan Color"));
-  s_platformHash.insert(124, QLatin1String("SwanCrystal"));
-  s_platformHash.insert(125, QLatin1String("PC-8801"));
-  s_platformHash.insert(126, QLatin1String("TRS-80"));
-  s_platformHash.insert(127, QLatin1String("Fairchild Channel F"));
-  s_platformHash.insert(128, QLatin1String("PC Engine SuperGrafx"));
-  s_platformHash.insert(129, QLatin1String("Texas Instruments TI-99"));
-  s_platformHash.insert(130, QLatin1String("Nintendo Switch"));
-  s_platformHash.insert(131, QLatin1String("Nintendo PlayStation"));
-  s_platformHash.insert(132, QLatin1String("Amazon Fire TV"));
-  s_platformHash.insert(133, QLatin1String("Philips Videopac G7000"));
-  s_platformHash.insert(134, QLatin1String("Acorn Electron"));
-  s_platformHash.insert(135, QLatin1String("Hyper Neo Geo 64"));
-  s_platformHash.insert(136, QLatin1String("Neo Geo CD"));
-
-  // cheat by grabbing i18n values from default collection
-  Data::CollPtr c(new Data::GameCollection(true));
-  QStringList esrb = c->fieldByName(QLatin1String("certification"))->allowed();
-  Q_ASSERT(esrb.size() == 8);
-  while(esrb.size() < 8) {
-    esrb << QString();
-  }
-  s_esrbHash.insert(QLatin1String("1"), esrb.at(7));
-  s_esrbHash.insert(QLatin1String("2"), esrb.at(6));
-  s_esrbHash.insert(QLatin1String("3"), esrb.at(5));
-  s_esrbHash.insert(QLatin1String("4"), esrb.at(4));
-  s_esrbHash.insert(QLatin1String("5"), esrb.at(3));
-  s_esrbHash.insert(QLatin1String("6"), esrb.at(2));
-  s_esrbHash.insert(QLatin1String("7"), esrb.at(1));
-
-  s_pegiHash.insert(QLatin1String("1"), QLatin1String("PEGI 3"));
-  s_pegiHash.insert(QLatin1String("2"), QLatin1String("PEGI 7"));
-  s_pegiHash.insert(QLatin1String("3"), QLatin1String("PEGI 12"));
-  s_pegiHash.insert(QLatin1String("4"), QLatin1String("PEGI 16"));
-  s_pegiHash.insert(QLatin1String("5"), QLatin1String("PEGI 18"));
 }
 
 QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_) {

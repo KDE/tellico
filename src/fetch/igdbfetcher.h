@@ -89,11 +89,11 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void populateHashes();
   QString companyName(const QString& companyId) const;
 
   static QString value(const QVariantMap& map, const char* name);
   static QString value(const QVariantMap& map, const char* object, const char* name);
-  static void populateHashes();
   static QPointer<KIO::StoredTransferJob> igdbJob(const QUrl& url, const QString& apiKey);
 
   bool m_started;
@@ -102,11 +102,11 @@ private:
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
-  static QHash<int, QString> s_genreHash;
-  static QHash<int, QString> s_platformHash;
-  static QHash<QString, QString> s_companyHash;
-  static QHash<QString, QString> s_esrbHash;
-  static QHash<QString, QString> s_pegiHash;
+  QHash<int, QString> m_genreHash;
+  QHash<int, QString> m_platformHash;
+  QHash<QString, QString> m_esrbHash;
+  QHash<QString, QString> m_pegiHash;
+  mutable QHash<QString, QString> m_companyHash;
 };
 
 class IGDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
