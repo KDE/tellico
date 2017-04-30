@@ -73,7 +73,6 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
   }
 
   // KIO::storedGet seems to handle Content-Encoding: gzip ok
-  QByteArray data;
   KIO::StoredTransferJob* getJob = KIO::storedGet(url_, KIO::NoReload, flags);
   KJobWidgets::setWindow(getJob, window_);
   if(getJob->exec()) {
