@@ -116,7 +116,8 @@ QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& tr
   trackLengths_.clear();
   for (int i = first; i <= last; ++i) {
     list.append(discid_get_track_offset(disc, i));
-    trackLengths_.append(discid_get_track_length(disc, i));
+    // 75 sectors per second. trackLengths is intended to be in seconds
+    trackLengths_.append(discid_get_track_length(disc, i) / 75);
   }
   list.append(discid_get_sectors(disc));
 #endif

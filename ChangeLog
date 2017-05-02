@@ -1,3 +1,7 @@
+2017-05-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed track length for CD audio (Bug 379426).
+
 2017-04-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for IGDB.com.
