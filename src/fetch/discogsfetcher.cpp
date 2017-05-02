@@ -187,6 +187,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   if(image_id.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
+      myDebug() << "empty id for" << image_id;
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok

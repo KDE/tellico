@@ -146,7 +146,7 @@ void DiscogsFetcherTest::testRawData() {
   KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Raw,
-                                       QLatin1String("q=1588789"));
+                                       QLatin1String("q=r1588789"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -168,7 +168,6 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.count(), 14);
   QCOMPARE(trackList.at(0), QLatin1String("Haunted::Evanescence::4:04"));
 
-  QEXPECT_FAIL("", "Thumbnails are not returned in full raw data, for some reason", Continue);
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
 }
 
@@ -195,7 +194,7 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QCOMPARE(entry->field(QLatin1String("label")), QLatin1String("CBS; CBS"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1977"));
   QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Rock"));
-  QCOMPARE(entry->field(QLatin1String("discogs")), QLatin1String("https://www.discogs.com/Clash-The-Clash/release/456552"));
+  QCOMPARE(entry->field(QLatin1String("discogs")), QLatin1String("https://www.discogs.com/The-Clash-The-Clash/release/456552"));
   QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("UK"));
   QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("Vinyl"));
 
