@@ -74,7 +74,7 @@ enum Type {
   GiantBomb,
   OpenLibrary,
   Multiple,
-  Freebase,
+  Freebase, // Removed
   DVDFr,
   Filmaster,
   Douban,

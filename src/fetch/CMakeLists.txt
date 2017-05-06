@@ -28,7 +28,6 @@ SET(fetch_STAT_SRCS
    fetchmanager.cpp
    fetchresult.cpp
    filmasterfetcher.cpp
-   freebasefetcher.cpp
    gcstarpluginfetcher.cpp
    gcstarthread.cpp
    giantbombfetcher.cpp

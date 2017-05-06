@@ -311,7 +311,6 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(BoardGameGeek);
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(OpenLibrary);
-  FETCHER_ADD(Freebase);
   FETCHER_ADD(GoogleBook);
   FETCHER_ADD(OMDB);
   QStringList langs = QLocale().uiLanguages();

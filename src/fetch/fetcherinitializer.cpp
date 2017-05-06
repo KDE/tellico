@@ -48,7 +48,6 @@
 #include "giantbombfetcher.h"
 #include "openlibraryfetcher.h"
 #include "multifetcher.h"
-#include "freebasefetcher.h"
 #include "filmasterfetcher.h"
 #include "hathitrustfetcher.h"
 #include "vndbfetcher.h"
@@ -102,7 +101,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::MultiFetcher> registerMulti(Multiple);
   RegisterFetcher<Fetch::DiscogsFetcher> registerDiscogs(Discogs);
   RegisterFetcher<Fetch::TheMovieDBFetcher> registerTMDB(TheMovieDB);
-  RegisterFetcher<Fetch::FreebaseFetcher> registerFreebase(Freebase);
   RegisterFetcher<Fetch::FilmasterFetcher> registerFilmaster(Filmaster);
   RegisterFetcher<Fetch::GoogleBookFetcher> registerGoogleBook(GoogleBook);
   RegisterFetcher<Fetch::HathiTrustFetcher> registerHathiTrust(HathiTrust);

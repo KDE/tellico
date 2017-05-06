@@ -577,14 +577,6 @@ add_test(filmasterfetchertest filmasterfetchertest)
 ecm_mark_as_test(filmasterfetchertest)
 TARGET_LINK_LIBRARIES(filmasterfetchertest fetcherstest translatorstest ${TELLICO_TEST_LIBS})
 
-add_executable(freebasefetchertest freebasefetchertest.cpp abstractfetchertest.cpp
-  ../fetch/freebasefetcher.cpp
-)
-ecm_mark_nongui_executable(freebasefetchertest)
-add_test(freebasefetchertest freebasefetchertest)
-ecm_mark_as_test(freebasefetchertest)
-TARGET_LINK_LIBRARIES(freebasefetchertest fetcherstest ${TELLICO_TEST_LIBS})
-
 # running gcstar in the fetcher is really unreliable
 add_executable(gcstarfetchertest gcstarfetchertest.cpp abstractfetchertest
   ../fetch/gcstarpluginfetcher.cpp

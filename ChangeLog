@@ -1,3 +1,7 @@
+2017-05-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Removed Freebase data source.
+
 2017-05-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed track length for CD audio (Bug 379426).
