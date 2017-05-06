@@ -27,8 +27,6 @@
 
 #include "abstractfetchertest.h"
 
-#include <QHash>
-
 class OpenLibraryFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -39,9 +37,6 @@ private Q_SLOTS:
   void testIsbn();
   void testIsbn13();
   void testMultipleIsbn();
-
-private:
-  QHash<QString, QString> m_fieldValues;
 };
 
 #endif
