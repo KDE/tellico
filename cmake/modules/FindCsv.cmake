@@ -21,7 +21,7 @@ if(Csv_INCLUDE_DIRS)
   set(Csv_VERSION ${Csv_MAJOR_VERSION}.${Csv_MINOR_VERSION}.${Csv_PATCH_VERSION})
 
   include(FindPackageHandleStandardArgs)
-  find_package_handle_standard_args(Csv REQUIRED_VARS Csv_INCLUDE_DIRS Csv_LIBRARIES VERSION_VAR Csv_VERSION)
+  find_package_handle_standard_args(Csv FOUND_VAR Csv_FOUND REQUIRED_VARS Csv_INCLUDE_DIRS Csv_LIBRARIES VERSION_VAR Csv_VERSION)
 endif(Csv_INCLUDE_DIRS)
 
 mark_as_advanced(Csv_INCLUDE_DIRS Csv_LIBRARIES)

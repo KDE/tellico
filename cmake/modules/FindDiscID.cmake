@@ -11,6 +11,6 @@ find_path(DiscID_INCLUDE_DIRS
 find_library(DiscID_LIBRARIES NAMES discid ${PC_DISCID_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(DiscID DEFAULT_MSG DiscID_INCLUDE_DIRS DiscID_LIBRARIES)
+find_package_handle_standard_args(DiscID FOUND_VAR DiscID_FOUND REQUIRED_VARS DiscID_INCLUDE_DIRS DiscID_LIBRARIES)
 
 mark_as_advanced(DiscID_INCLUDE_DIRS DiscID_LIBRARIES)

@@ -12,6 +12,6 @@ find_path(Yaz_INCLUDE_DIRS
 find_library(Yaz_LIBRARIES NAMES yaz ${PC_YAZ_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Yaz DEFAULT_MSG Yaz_INCLUDE_DIRS Yaz_LIBRARIES)
+find_package_handle_standard_args(Yaz FOUND_VAR Yaz_FOUND REQUIRED_VARS Yaz_INCLUDE_DIRS Yaz_LIBRARIES)
 
 mark_as_advanced(Yaz_INCLUDE_DIRS Yaz_LIBRARIES)

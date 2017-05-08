@@ -12,6 +12,6 @@ find_path(Exempi_INCLUDE_DIRS
 find_library(Exempi_LIBRARIES NAMES exempi ${PC_LIBEXEMPI_LIBRARY_DIRS})
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Exempi DEFAULT_MSG Exempi_INCLUDE_DIRS Exempi_LIBRARIES)
+find_package_handle_standard_args(Exempi FOUND_VAR Exempi_FOUND REQUIRED_VARS Exempi_INCLUDE_DIRS Exempi_LIBRARIES)
 
 mark_as_advanced(Exempi_INCLUDE_DIRS Exempi_LIBRARIES)

@@ -8,6 +8,6 @@ find_path(Btparse_INCLUDE_DIRS
 find_library(Btparse_LIBRARIES NAMES btparse)
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(Btparse DEFAULT_MSG Btparse_INCLUDE_DIRS Btparse_LIBRARIES)
+find_package_handle_standard_args(Btparse FOUND_VAR Btparse_FOUND REQUIRED_VARS Btparse_INCLUDE_DIRS Btparse_LIBRARIES)
 
 mark_as_advanced(Btparse_INCLUDE_DIRS Btparse_LIBRARIES)

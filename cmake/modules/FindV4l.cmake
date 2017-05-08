@@ -15,6 +15,6 @@ FIND_LIBRARY(LIBV4L_LIBRARIES
 )
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(libv4l DEFAULT_MSG LIBV4L_INCLUDE_DIR LIBV4L_LIBRARIES)
+find_package_handle_standard_args(libv4l FOUND_VAR LIBV4L_FOUND REQUIRED_VARS LIBV4L_INCLUDE_DIR LIBV4L_LIBRARIES)
 
 mark_as_advanced(LIBV4L_INCLUDE_DIR LIBV4L_LIBRARIES)
