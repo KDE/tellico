@@ -384,6 +384,7 @@ void CollectionTest::testDtd() {
   KProcess proc;
   proc.setProgram(QLatin1String("xmllint"),
                   QStringList() << QLatin1String("--noout")
+                                << QLatin1String("--nonet")
                                 << QLatin1String("--dtdvalid")
                                 << QFINDTESTDATA("../../tellico.dtd")
                                 << QLatin1String("-"));
