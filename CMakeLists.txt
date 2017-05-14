@@ -156,10 +156,6 @@ endif(Yaz_FOUND)
 
 # FindPoppler is part of ECM >= 5.19
 find_package(Poppler COMPONENTS Qt5)
-set_package_properties(Poppler PROPERTIES
-    DESCRIPTION "Support for reading PDF files"
-    URL "http://poppler.freedesktop.org"
-    TYPE OPTIONAL)
 
 find_package(Exempi 2.0)
 set_package_properties(Exempi PROPERTIES
