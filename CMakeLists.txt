@@ -255,7 +255,7 @@ add_subdirectory(doc)
 
 macro_bool_to_01(QIMAGEBLITZ_FOUND HAVE_QIMAGEBLITZ)
 macro_bool_to_01(TAGLIB_FOUND HAVE_TAGLIB)
-macro_bool_to_01(Poppler_FOUND HAVE_POPPLER)
+macro_bool_to_01(Poppler_Qt5_FOUND HAVE_POPPLER)
 macro_bool_to_01(Exempi_FOUND HAVE_EXEMPI)
 macro_bool_to_01(Yaz_FOUND HAVE_YAZ)
 macro_bool_to_01(KF5Sane_FOUND HAVE_KSANE)

@@ -75,9 +75,9 @@ ELSEIF( Libkcddb_FOUND )
   TARGET_LINK_LIBRARIES(translators KDE::Libkcddb::kcddb)
 ENDIF( KF5Cddb_FOUND)
 
-IF( Poppler_FOUND )
+IF( Poppler_Qt5_FOUND )
   TARGET_LINK_LIBRARIES(translators Poppler::Qt5)
-ENDIF( Poppler_FOUND )
+ENDIF( Poppler_Qt5_FOUND )
 
 IF( Exempi_FOUND )
   TARGET_LINK_LIBRARIES(translators ${Exempi_LIBRARIES})
