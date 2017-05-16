@@ -13,6 +13,7 @@ Name[pt]=Dark Horse Comics
 Name[sk]=Komiksy Dark Horse
 Name[sl]=Dark Horse Comics
 Name[sv]=Dark Horse Comics
+Name[tr]=Kara At Karikatürleri
 Name[uk]=Комікси Темного Коня
 Name[x-test]=xxDark Horse Comicsxx
 Type=data-source

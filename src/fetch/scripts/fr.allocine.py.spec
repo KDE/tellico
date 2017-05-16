@@ -14,6 +14,7 @@ Name[pt]=Allocine.fr
 Name[sk]=Allocine.fr
 Name[sl]=Allocine.fr
 Name[sv]=Allocine.fr
+Name[tr]=Allocine.fr
 Name[uk]=Allocine.fr
 Name[x-test]=xxAllocine.frxx
 Type=data-source
