@@ -280,3 +280,34 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   field_->setProperty(QLatin1String("rating"), QString());
   field_->setType(Rating);
 }
+
+Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
+  Data::FieldPtr field;
+  switch(fieldEnum) {
+    case IDField:
+      field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
+      field->setCategory(i18n("Personal"));
+      field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
+      field->setFlags(Field::Derived);
+      field->setFormatType(FieldFormat::FormatNone);
+      break;
+    case TitleField:
+      field = new Field(QLatin1String("title"), i18n("Title"));
+      field->setCategory(i18n("General"));
+      field->setFlags(Field::NoDelete);
+      field->setFormatType(FieldFormat::FormatTitle);
+      break;
+    case CreatedDateField:
+      field = new Field(QLatin1String("cdate"), i18n("Date Created"), Field::Date);
+      field->setCategory(i18n("Personal"));
+      field->setFlags(Field::NoEdit);
+      break;
+    case ModifiedDateField:
+      field = new Field(QLatin1String("mdate"), i18n("Date Modified"), Field::Date);
+      field->setCategory(i18n("Personal"));
+      field->setFlags(Field::NoEdit);
+      break;
+  }
+  Q_ASSERT(field);
+  return field;
+}

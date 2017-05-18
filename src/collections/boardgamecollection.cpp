@@ -46,7 +46,7 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(TitleField));
+  list.append(Field::createDefaultField(Field::TitleField));
 
   field = new Field(QLatin1String("genre"), i18n("Genre"));
   field->setCategory(i18n(boardgame_general));
@@ -124,9 +124,9 @@ Tellico::Data::FieldList BoardGameCollection::defaultFields() {
   field->setCategory(i18n(boardgame_personal));
   list.append(field);
 
-  list.append(createDefaultField(IDField));
-  list.append(createDefaultField(CreatedDateField));
-  list.append(createDefaultField(ModifiedDateField));
+  list.append(Field::createDefaultField(Field::IDField));
+  list.append(Field::createDefaultField(Field::CreatedDateField));
+  list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
 }

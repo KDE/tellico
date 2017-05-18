@@ -68,7 +68,7 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
 
 /******************* General ****************************/
 
-  field = createDefaultField(TitleField);
+  field = Field::createDefaultField(Field::TitleField);
   field->setProperty(QLatin1String("bibtex"), QLatin1String("title"));
   list.append(field);
 
@@ -250,15 +250,15 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   field->setProperty(QLatin1String("bibtex"), QLatin1String("note"));
   list.append(field);
 
-  field = createDefaultField(IDField);
+  field = Field::createDefaultField(Field::IDField);
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
-  field = createDefaultField(CreatedDateField);
+  field = Field::createDefaultField(Field::CreatedDateField);
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
-  field = createDefaultField(ModifiedDateField);
+  field = Field::createDefaultField(Field::ModifiedDateField);
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 

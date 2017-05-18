@@ -311,6 +311,15 @@ public:
   */
   static void convertOldRating(Data::FieldPtr field);
 
+  enum DefaultField {
+    IDField,
+    TitleField,
+    CreatedDateField,
+    ModifiedDateField
+  };
+
+  static FieldPtr createDefaultField(DefaultField field);
+
 private:
   static QRegExp s_delimiter;
 

@@ -45,7 +45,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = createDefaultField(TitleField);
+  field = Field::createDefaultField(Field::TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{year}%{mintmark} %{type} %{denomination}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatType(FieldFormat::FormatNone);
@@ -143,9 +143,9 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   field->setCategory(i18n(coin_personal));
   list.append(field);
 
-  list.append(createDefaultField(IDField));
-  list.append(createDefaultField(CreatedDateField));
-  list.append(createDefaultField(ModifiedDateField));
+  list.append(Field::createDefaultField(Field::IDField));
+  list.append(Field::createDefaultField(Field::CreatedDateField));
+  list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
 }

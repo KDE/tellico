@@ -45,7 +45,7 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = createDefaultField(TitleField);
+  field = Field::createDefaultField(Field::TitleField);
   field->setTitle(i18n("Name"));
   field->setFormatType(FieldFormat::FormatNone);
   list.append(field);

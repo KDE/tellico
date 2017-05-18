@@ -46,7 +46,7 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  list.append(createDefaultField(TitleField));
+  list.append(Field::createDefaultField(Field::TitleField));
 
   QStringList platform;
   platform << i18n("Xbox One") << i18n("Xbox 360") << i18n("Xbox")
@@ -130,9 +130,9 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   field->setCategory(i18n(game_personal));
   list.append(field);
 
-  list.append(createDefaultField(IDField));
-  list.append(createDefaultField(CreatedDateField));
-  list.append(createDefaultField(ModifiedDateField));
+  list.append(Field::createDefaultField(Field::IDField));
+  list.append(Field::createDefaultField(Field::CreatedDateField));
+  list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
 }

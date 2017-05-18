@@ -42,37 +42,6 @@ using Tellico::Data::Collection;
 
 const QString Collection::s_peopleGroupName = QLatin1String("_people");
 
-Tellico::Data::FieldPtr Collection::createDefaultField(DefaultField fieldEnum) {
-  Data::FieldPtr field;
-  switch(fieldEnum) {
-    case IDField:
-      field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
-      field->setCategory(i18n("Personal"));
-      field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
-      field->setFlags(Field::Derived);
-      field->setFormatType(FieldFormat::FormatNone);
-      break;
-    case TitleField:
-      field = new Field(QLatin1String("title"), i18n("Title"));
-      field->setCategory(i18n("General"));
-      field->setFlags(Field::NoDelete);
-      field->setFormatType(FieldFormat::FormatTitle);
-      break;
-    case CreatedDateField:
-      field = new Field(QLatin1String("cdate"), i18n("Date Created"), Field::Date);
-      field->setCategory(i18n("Personal"));
-      field->setFlags(Field::NoEdit);
-      break;
-    case ModifiedDateField:
-      field = new Field(QLatin1String("mdate"), i18n("Date Modified"), Field::Date);
-      field->setCategory(i18n("Personal"));
-      field->setFlags(Field::NoEdit);
-      break;
-  }
-  Q_ASSERT(field);
-  return field;
-}
-
 Collection::Collection(const QString& title_)
     : QObject(), QSharedData(), m_nextEntryId(1), m_title(title_), m_trackGroups(false) {
   m_id = getID();
@@ -85,10 +54,10 @@ Collection::Collection(bool addDefaultFields_, const QString& title_)
   }
   m_id = getID();
   if(addDefaultFields_) {
-    addField(createDefaultField(IDField));
-    addField(createDefaultField(TitleField));
-    addField(createDefaultField(CreatedDateField));
-    addField(createDefaultField(ModifiedDateField));
+    addField(Field::createDefaultField(Field::IDField));
+    addField(Field::createDefaultField(Field::TitleField));
+    addField(Field::createDefaultField(Field::CreatedDateField));
+    addField(Field::createDefaultField(Field::ModifiedDateField));
   }
 }
 

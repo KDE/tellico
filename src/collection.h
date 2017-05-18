@@ -330,15 +330,6 @@ public:
    */
   static const QString s_peopleGroupName;
 
-  enum DefaultField {
-    IDField,
-    TitleField,
-    CreatedDateField,
-    ModifiedDateField
-  };
-
-  static FieldPtr createDefaultField(DefaultField field);
-
 Q_SIGNALS:
   void signalGroupsModified(Tellico::Data::CollPtr coll, QList<Tellico::Data::EntryGroup*> groups);
   void signalRefreshField(Tellico::Data::FieldPtr field);

@@ -45,7 +45,7 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = createDefaultField(TitleField);
+  field = Field::createDefaultField(Field::TitleField);
   field->setProperty(QLatin1String("template"), QLatin1String("%{year} %{brand} %{player}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatType(FieldFormat::FormatNone);
@@ -126,9 +126,9 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
   field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
-  list.append(createDefaultField(IDField));
-  list.append(createDefaultField(CreatedDateField));
-  list.append(createDefaultField(ModifiedDateField));
+  list.append(Field::createDefaultField(Field::IDField));
+  list.append(Field::createDefaultField(Field::CreatedDateField));
+  list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
 }

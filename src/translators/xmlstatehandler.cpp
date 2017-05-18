@@ -259,13 +259,13 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   // checking the defaultFields bool since if it is true, we already added these default fields
   // even for old syntax versions
   if(d->syntaxVersion < 11 && !d->defaultFields) {
-    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::IDField));
+    d->coll->addField(Data::Field::createDefaultField(Data::Field::IDField));
   }
   // now add all the new fields
   d->coll->addFields(d->fields);
   if(d->syntaxVersion < 11 && !d->defaultFields) {
-    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::CreatedDateField));
-    d->coll->addField(Data::Collection::createDefaultField(Data::Collection::ModifiedDateField));
+    d->coll->addField(Data::Field::createDefaultField(Data::Field::CreatedDateField));
+    d->coll->addField(Data::Field::createDefaultField(Data::Field::ModifiedDateField));
   }
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex

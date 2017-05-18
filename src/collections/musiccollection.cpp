@@ -46,7 +46,7 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
-  field = createDefaultField(TitleField);
+  field = Field::createDefaultField(Field::TitleField);
   field->setTitle(i18n("Album"));
   list.append(field);
 
@@ -122,9 +122,9 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
   field->setCategory(i18n(music_personal));
   list.append(field);
 
-  list.append(createDefaultField(IDField));
-  list.append(createDefaultField(CreatedDateField));
-  list.append(createDefaultField(ModifiedDateField));
+  list.append(Field::createDefaultField(Field::IDField));
+  list.append(Field::createDefaultField(Field::CreatedDateField));
+  list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
 }
