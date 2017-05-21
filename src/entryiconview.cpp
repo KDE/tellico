@@ -44,7 +44,7 @@
 #include <QDesktopServices>
 
 namespace {
-  static const int ENTRY_ICON_SIZE_PAD = 6;
+  static const int ENTRY_ICON_SIZE_PAD = 2;
 }
 
 using Tellico::EntryIconView;
