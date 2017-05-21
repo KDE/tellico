@@ -385,6 +385,7 @@ void CollectionTest::testDtd() {
   proc.setProgram(QLatin1String("xmllint"),
                   QStringList() << QLatin1String("--noout")
                                 << QLatin1String("--nonet")
+                                << QLatin1String("--nowarning")
                                 << QLatin1String("--dtdvalid")
                                 << QFINDTESTDATA("../../tellico.dtd")
                                 << QLatin1String("-"));
@@ -506,7 +507,7 @@ void CollectionTest::testMergeFields() {
 
 void CollectionTest::testAppendCollection() {
   // appending a collection adds new fields, merges existing one, and add new entries
-  // the new entries should belong to the original collection and the existing entries should 
+  // the new entries should belong to the original collection and the existing entries should
   // remain in the source collection
   Tellico::Data::CollPtr coll1 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
   Tellico::Data::CollPtr coll2 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
