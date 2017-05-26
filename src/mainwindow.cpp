@@ -747,12 +747,13 @@ void MainWindow::initView() {
   m_iconView = m_viewStack->iconView();
   m_iconView->setModel(m_detailedView->model());
   Controller::self()->addObserver(m_iconView);
-  m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
-                                       "for each entry.</qt>"));
+  m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
+                                "an icon, which may be an image in the entry.</qt>"));
 
   m_entryView = new EntryView(m_rightSplit);
   connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
           SLOT(slotURLAction(const QUrl&)));
+  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 
