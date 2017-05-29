@@ -295,7 +295,10 @@ bool Manager::installScript(const QString& file_) {
   QUrl dest = QUrl::fromLocalFile(sourceExec);
   KFileItem item(dest);
   item.setDelayedMimeTypes(true);
-  ::chmod(QFile::encodeName(dest.path()).constData(), item.permissions() | S_IXUSR);
+  int out = ::chmod(QFile::encodeName(dest.path()).constData(), item.permissions() | S_IXUSR);
+  if(out != 0) {
+    myDebug() << "Failed to set permissions for" << dest.path();
+  }
 
   KDesktopFile df(specFile);
   KConfigGroup cg = df.desktopGroup();
