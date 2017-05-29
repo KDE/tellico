@@ -168,7 +168,6 @@ QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {
   if(atEnd && input_.count(digit) == 9 && input_[len-1] == QLatin1Char('-')) {
     input_.truncate(len-2);
     pos_ -= 2;
-    len -= 2;
   }
 
   // now fixup the hyphens and maybe add a checksum
