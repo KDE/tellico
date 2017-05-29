@@ -352,6 +352,10 @@ void CollectionTest::testDtd() {
   if(xmllint.isEmpty()) {
     QSKIP("This test requires xmllint", SkipAll);
   }
+  // xmllint doesn't seem to support spaces in path. Is this an XML thing?
+  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegExp("\\s"))) {
+    QSKIP("This test prohibits whitespace in the build path", SkipAll);
+  }
 
   QFETCH(int, typeInt);
   Tellico::Data::Collection::Type type = static_cast<Tellico::Data::Collection::Type>(typeInt);
