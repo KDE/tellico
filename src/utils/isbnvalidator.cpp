@@ -222,7 +222,6 @@ QValidator::State ISBNValidator::validate13(QString& input_, int& pos_) const {
   if(atEnd && (countN == 12 || countN == 9) && input_[len-1] == QLatin1Char('-')) {
     input_.truncate(len-2);
     pos_ -= 2;
-    len -= 2;
   }
 
   // now fixup the hyphens and maybe add a checksum
