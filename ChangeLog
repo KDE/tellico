@@ -1,3 +1,7 @@
+2017-05-29  Robby Stephenson  <robby@periapsis.org>
+
+	* Switch from using libdiscid to libcdio, which includes cdtext.
+
 2017-05-06  Robby Stephenson  <robby@periapsis.org>
 
 	* Removed Freebase data source.

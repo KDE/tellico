@@ -1,9 +1,5 @@
 /***************************************************************************
- *                                                                         *
- * Modified from cd-discid.c, found at http://lly.org/~rcw/cd-discid/      *
- *                                                                         *
- * Copyright (c) 1999-2003 Robert Woodcock <rcw@debian.org>                *
- *                                                                         *
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,250 +22,96 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
+
 #include "freedbimporter.h"
 #include "../tellico_debug.h"
 
 #include <QList>
-#include <qplatformdefs.h>
+
+extern "C" {
+#ifdef HAVE_CDIO
+#include <cdio/cdio.h>
+#include <cdio/cdtext.h>
+#endif
+}
+
+namespace {
+#ifdef HAVE_CDIO
+  class CloseCdio {
+  public:
+    CloseCdio(CdIo_t* d) : cdio(d) {}
+    ~CloseCdio() { cdio_destroy(cdio); }
+  private:
+    CdIo_t* cdio;
+  };
+#endif
+}
 
 using Tellico::Import::FreeDBImporter;
 
-extern "C" {
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-#include <fcntl.h>
-#include <sys/ioctl.h>
-
-#if defined(__linux__)
-
-// see http://bugs.kde.org/show_bug.cgi?id=86188
-#ifdef __STRICT_ANSI__
-#undef __STRICT_ANSI__
-#define _ANSI_WAS_HERE_
-#endif
-#include <linux/types.h>
-// swabb.h is not C++ friendly. Prevent including it.
-#define _LINUX_BYTEORDER_SWABB_H
-#include <linux/cdrom.h>
-#ifdef _ANSI_WAS_HERE_
-#define __STRICT_ANSI__
-#undef _ANSI_WAS_HERE_
-#endif
-#define         cdte_track_address      cdte_addr.lba
-
-#endif  /* os selection */
-
-}
-
-#include <config.h>
-
-#ifdef HAVE_DISCID
-#include <discid/discid.h>
-#endif
-
-namespace {
-  class CloseDrive {
-  public:
-    CloseDrive(int d) : drive(d) {}
-    ~CloseDrive() { ::close(drive); }
-  private:
-    int drive;
-  };
-
-#ifdef HAVE_DISCID
-  class CloseDiscId {
-  public:
-    CloseDiscId(DiscId* d) : disc(d) {}
-    ~CloseDiscId() { discid_free(disc); }
-  private:
-    DiscId* disc;
-  };
-#endif
-}
-
 QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& trackLengths_) {
   QList<uint> list;
-
-#ifdef HAVE_DISCID
-  DiscId* disc = discid_new();
-  if (!disc) {
+#ifdef HAVE_CDIO
+  // CDDB needs the Logical Block Addresses (LBA) for the track sector offsets
+  CdIo_t* cdio_p = cdio_open(drive_.constData(), DRIVER_UNKNOWN);
+  if(cdio_p == nullptr) {
+    myDebug() << "no cdio pointer";
     return list;
   }
+  CloseCdio closer(cdio_p);
 
-  const CloseDiscId closer(disc);
-
-#ifdef DISCID_HAVE_SPARSE_READ
-  int res = discid_read_sparse(disc, drive_.constData(), 0);
-#else
-  int res = discid_read(disc, drive_.constData());
-#endif
-  if (!res) {
-    return list;
-  }
-
-  const int first = discid_get_first_track_num(disc);
-  const int last = discid_get_last_track_num(disc);
+  track_t i_track = cdio_get_first_track_num(cdio_p);
+  track_t i_tracks = i_track + cdio_get_num_tracks(cdio_p);
 
   trackLengths_.clear();
-  for (int i = first; i <= last; ++i) {
-    list.append(discid_get_track_offset(disc, i));
-    // 75 sectors per second. trackLengths is intended to be in seconds
-    trackLengths_.append(discid_get_track_length(disc, i) / 75);
+  for( ; i_track < i_tracks; ++i_track) {
+    list.append(cdio_get_track_lba(cdio_p, i_track));
+    // add 1 so the conversion to int rounds up
+    trackLengths_.append(1+cdio_get_track_sec_count(cdio_p, i_track) / CDIO_CD_FRAMES_PER_SEC);
   }
-  list.append(discid_get_sectors(disc));
+  list.append(cdio_lsn_to_lba(cdio_get_disc_last_lsn(cdio_p)));
+
+#else
+  Q_UNUSED(drive_);
+  Q_UNUSED(trackLengths_);
 #endif
   return list;
 }
 
-inline
-ushort from2Byte(uchar* d) {
-  return (d[0] << 8 & 0xFF00) | (d[1] & 0xFF);
-}
-
-#define SIZE 61
-// mostly taken from kover and k3b
-// licensed under GPL
 FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
   CDText cdtext;
-#ifdef ENABLE_CDTEXT
-// only works for linux ATM
-#if defined(__linux__)
-  int drive = QT_OPEN(drive_.data(), O_RDONLY | O_NONBLOCK);
-  CloseDrive closer(drive);
-  if(drive < 0) {
+#if defined(ENABLE_CDTEXT) && defined(HAVE_CDIO)
+  CdIo_t* cdio_p = cdio_open(drive_.constData(), DRIVER_UNKNOWN);
+  if(cdio_p == nullptr) {
+    myDebug() << "no cdio pointer";
+    return cdtext;
+  }
+  CloseCdio closer(cdio_p);
+
+  const cdtext_t* cdtext_p = cdio_get_cdtext(cdio_p);
+  if(cdtext_p == nullptr) {
+    myDebug() << "no cdtext pointer";
     return cdtext;
   }
 
-  cdrom_generic_command m_cmd;
-  ::memset(&m_cmd, 0, sizeof(cdrom_generic_command));
+  const char* title = cdtext_get_const(cdtext_p, CDTEXT_FIELD_TITLE, 0);
+  cdtext.title = QString::fromUtf8(title);
+  const char* performer = cdtext_get_const(cdtext_p, CDTEXT_FIELD_PERFORMER, 0);
+  cdtext.artist = QString::fromUtf8(performer);
+  const char* message = cdtext_get_const(cdtext_p, CDTEXT_FIELD_MESSAGE, 0);
+  cdtext.message = QString::fromUtf8(message);
 
-  int dataLen;
-
-  int format = 5;
-  int track = 0;
-  uchar buffer[2048];
-
-  m_cmd.cmd[0] = 0x43;
-  m_cmd.cmd[1] = 0x0;
-  m_cmd.cmd[2] = format & 0x0F;
-  m_cmd.cmd[6] = track;
-  m_cmd.cmd[8] = 2; // we only read the length first
-
-  m_cmd.buffer = buffer;
-  m_cmd.buflen = 2;
-  m_cmd.data_direction = CGC_DATA_READ;
-
-  if(ioctl(drive, CDROM_SEND_PACKET, &m_cmd) != 0) {
-    myDebug() << "access error";
-    return cdtext;
+  track_t i_track = cdio_get_first_track_num(cdio_p);
+  track_t i_tracks = i_track + cdio_get_num_tracks(cdio_p);
+  for( ; i_track < i_tracks; ++i_track) {
+    const char* title = cdtext_get_const(cdtext_p, CDTEXT_FIELD_TITLE, i_track);
+    cdtext.trackTitles.append(QString::fromUtf8(title));
+    const char* performer = cdtext_get_const(cdtext_p, CDTEXT_FIELD_PERFORMER, i_track);
+    cdtext.trackArtists.append(QString::fromUtf8(performer));
   }
-
-  dataLen = from2Byte(buffer) + 2;
-  m_cmd.cmd[7] = 2048 >> 8;
-  m_cmd.cmd[8] = 2048 & 0xFF;
-  m_cmd.buflen = 2048;
-  ::ioctl(drive, CDROM_SEND_PACKET, &m_cmd);
-  dataLen = from2Byte(buffer) + 2;
-
-  ::memset(buffer, 0, dataLen);
-
-  m_cmd.cmd[7] = dataLen >> 8;
-  m_cmd.cmd[8] = dataLen;
-  m_cmd.buffer = buffer;
-  m_cmd.buflen = dataLen;
-  ::ioctl(drive, CDROM_SEND_PACKET, &m_cmd);
-
-  bool rc = false;
-  int buffer_size = (buffer[0] << 8) | buffer[1];
-  buffer_size -= 2;
-
-  char data[SIZE];
-  short pos_data = 0;
-  char old_block_no = 0xff;
-  for(uchar* bufptr = buffer + 4; buffer_size >= 18; bufptr += 18, buffer_size -= 18) {
-    char code = *bufptr;
-
-    if((code & 0x80) != 0x80) {
-      continue;
-    }
-
-    char block_no = *(bufptr + 3);
-    if(block_no & 0x80) {
-      myDebug() << "double byte code not supported";
-      continue;
-    }
-    block_no &= 0x70;
-
-    if(block_no != old_block_no) {
-      if(rc) {
-        break;
-      }
-      pos_data = 0;
-      old_block_no = block_no;
-    }
-
-    track = *(bufptr + 1);
-    if(track & 0x80) {
-      continue;
-    }
-
-    uchar* txtstr = bufptr + 4;
-
-    int length = 11;
-    while(length >= 0 && *(txtstr + length) == '\0') {
-      --length;
-    }
-
-    ++length;
-    if(length < 12) {
-      ++length;
-    }
-
-    for(int j = 0; j < length; ++j) {
-      char c = *(txtstr + j);
-      if(c == '\0') {
-        data[pos_data] = c;
-        if(track == 0) {
-          if(code == (char)0xFFFFFF80) {
-            cdtext.title = QString::fromUtf8(data);
-          } else if(code == (char)0xFFFFFF81) {
-            cdtext.artist = QString::fromUtf8(data);
-          } else if (code == (char)0xFFFFFF85) {
-            cdtext.message = QString::fromUtf8(data);
-          }
-        } else {
-          if(code == (char)0xFFFFFF80) {
-            if(cdtext.trackTitles.size() < track) {
-              cdtext.trackTitles.resize(track);
-            }
-            cdtext.trackTitles[track-1] = QString::fromUtf8(data);
-          } else if(code == char(0xFFFFFF81)) {
-            if(cdtext.trackArtists.size() < track) {
-              cdtext.trackArtists.resize(track);
-            }
-            cdtext.trackArtists[track-1] = QString::fromUtf8(data);
-          }
-        }
-        rc = true;
-        pos_data = 0;
-        ++track;
-      } else if(pos_data < (SIZE - 1)) {
-        data[pos_data++] = c;
-      }
-    }
-  }
-  if(cdtext.trackTitles.size() != cdtext.trackArtists.size()) {
-    int size = qMax(cdtext.trackTitles.size(), cdtext.trackArtists.size());
-    cdtext.trackTitles.resize(size);
-    cdtext.trackArtists.resize(size);
-  }
-#endif
 #else
   Q_UNUSED(drive_);
 #endif
   return cdtext;
 }
-#undef SIZE

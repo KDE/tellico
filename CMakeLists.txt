@@ -178,14 +178,14 @@ else(Btparse_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
 endif(Btparse_FOUND)
 
-find_package(DiscID)
-set_package_properties(DiscID PROPERTIES
-    DESCRIPTION "Support for reading disc IDs from audio CDs"
-    URL "http://musicbrainz.org/doc/libdiscid"
+find_package(CDIO)
+set_package_properties(CDIO PROPERTIES
+    DESCRIPTION "Support for reading cdtext from audio CDs"
+    URL "https://www.gnu.org/software/libcdio/"
     TYPE OPTIONAL)
-if(DiscID_FOUND)
-    include_directories(${DiscID_INCLUDE_DIRS})
-endif(DiscID_FOUND)
+if(CDIO_FOUND)
+    include_directories(${CDIO_INCLUDE_DIRS})
+endif(CDIO_FOUND)
 
 find_package(Csv 3.0)
 set_package_properties(Csv PROPERTIES
@@ -266,7 +266,7 @@ macro_bool_to_01(KDEPIMLIBS_FOUND HAVE_KCAL)
 macro_bool_to_01(LIBV4L_FOUND HAVE_V4L)
 macro_bool_to_01(KF5NewStuff_FOUND ENABLE_KNEWSTUFF3)
 macro_bool_to_01(Btparse_FOUND HAVE_LIBBTPARSE)
-macro_bool_to_01(DiscID_FOUND HAVE_DISCID)
+macro_bool_to_01(CDIO_FOUND HAVE_CDIO)
 macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
 
