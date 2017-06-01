@@ -89,26 +89,50 @@ FreeDBImporter::CDText FreeDBImporter::getCDText(const QByteArray& drive_) {
   }
   CloseCdio closer(cdio_p);
 
+#if LIBCDIO_VERSION_NUM >= 90
   const cdtext_t* cdtext_p = cdio_get_cdtext(cdio_p);
+#else
+  const cdtext_t* cdtext_p = cdio_get_cdtext(cdio_p, 0);
+#endif
   if(cdtext_p == nullptr) {
     myDebug() << "no cdtext pointer";
     return cdtext;
   }
 
+#if LIBCDIO_VERSION_NUM >= 90
   const char* title = cdtext_get_const(cdtext_p, CDTEXT_FIELD_TITLE, 0);
+#else
+  const char* title = cdtext_get_const(CDTEXT_TITLE, cdtext_p);
+#endif
   cdtext.title = QString::fromUtf8(title);
+#if LIBCDIO_VERSION_NUM >= 90
   const char* performer = cdtext_get_const(cdtext_p, CDTEXT_FIELD_PERFORMER, 0);
+#else
+  const char* performer = cdtext_get_const(CDTEXT_PERFORMER, cdtext_p);
+#endif
   cdtext.artist = QString::fromUtf8(performer);
+#if LIBCDIO_VERSION_NUM >= 90
   const char* message = cdtext_get_const(cdtext_p, CDTEXT_FIELD_MESSAGE, 0);
+#else
+  const char* message = cdtext_get_const(CDTEXT_MESSAGE, cdtext_p);
+#endif
   cdtext.message = QString::fromUtf8(message);
 
   track_t i_track = cdio_get_first_track_num(cdio_p);
   track_t i_tracks = i_track + cdio_get_num_tracks(cdio_p);
   for( ; i_track < i_tracks; ++i_track) {
+#if LIBCDIO_VERSION_NUM >= 90
     const char* title = cdtext_get_const(cdtext_p, CDTEXT_FIELD_TITLE, i_track);
     cdtext.trackTitles.append(QString::fromUtf8(title));
     const char* performer = cdtext_get_const(cdtext_p, CDTEXT_FIELD_PERFORMER, i_track);
     cdtext.trackArtists.append(QString::fromUtf8(performer));
+#else
+    const cdtext_t *track_cdtext_p = cdio_get_cdtext(cdio_p, i_track);
+    const char* title = cdtext_get_const(CDTEXT_TITLE, track_cdtext_p);
+    cdtext.trackTitles.append(QString::fromUtf8(title));
+    const char* performer = cdtext_get_const(CDTEXT_PERFORMER, track_cdtext_p);
+    cdtext.trackArtists.append(QString::fromUtf8(performer));
+#endif
   }
 #else
   Q_UNUSED(drive_);
