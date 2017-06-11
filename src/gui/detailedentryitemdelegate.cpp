@@ -33,7 +33,7 @@ void DetailedEntryItemDelegate::initStyleOption(QStyleOptionViewItem* option, co
 
   QStyleOptionViewItemV4* opt = ::qstyleoption_cast<QStyleOptionViewItemV4*>(option);
   const int state = index.data(SaveStateRole).toInt();
-  if(state == NewState || state == ModifiedState) {
+  if(opt && (state == NewState || state == ModifiedState)) {
     opt->font.setBold(true);
     opt->font.setItalic(true);
   }
