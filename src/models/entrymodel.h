@@ -29,7 +29,6 @@
 #include "models.h"
 
 #include <QIcon>
-
 #include <QAbstractItemModel>
 #include <QHash>
 #include <QCache>

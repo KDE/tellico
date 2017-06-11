@@ -51,11 +51,19 @@ EntryModel::~EntryModel() {
 }
 
 int EntryModel::rowCount(const QModelIndex& index_) const {
-  // no children for valid indexes
-  return index_.isValid() ? 0 : m_entries.count();
+  // valid indexes have no children/rows
+  if(index_.isValid()) {
+    return 0;
+  }
+  // even if entries are included, if there are no fields, then no rows either
+  return m_fields.isEmpty() ? 0 : m_entries.count();
 }
 
-int EntryModel::columnCount(const QModelIndex&) const {
+int EntryModel::columnCount(const QModelIndex& index_) const {
+  // valid indexes have no columns
+  if(index_.isValid()) {
+    return 0;
+  }
   return m_fields.count();
 }
 
@@ -269,6 +277,8 @@ void EntryModel::clearSaveState() {
 }
 
 void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
+  // should never have entries without having fields first
+  Q_ASSERT(!m_fields.isEmpty() || entries_.isEmpty());
   beginResetModel();
   m_entries = entries_;
   endResetModel();
@@ -315,9 +325,9 @@ void EntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
 
 void EntryModel::setFields(const Tellico::Data::FieldList& fields_) {
   if(!m_fields.isEmpty()) {
-    beginRemoveColumns(QModelIndex(), 0, m_fields.size()-1);
+    beginResetModel();
     m_fields.clear();
-    endRemoveColumns();
+    endResetModel();
   }
   if(!fields_.isEmpty()) {
     beginInsertColumns(QModelIndex(), 0, fields_.size()-1);
