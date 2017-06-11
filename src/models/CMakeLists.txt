@@ -11,8 +11,7 @@ SET(models_STAT_SRCS
    groupsortmodel.cpp
    modeliterator.cpp
    modelmanager.cpp
-   modeltest.cpp
-   )
+)
 
 add_library(tellicomodels STATIC ${models_STAT_SRCS})
 
