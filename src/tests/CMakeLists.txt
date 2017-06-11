@@ -145,6 +145,23 @@ add_test(filtertest filtertest)
 ecm_mark_as_test(filtertest)
 TARGET_LINK_LIBRARIES(filtertest ${TELLICO_TEST_LIBS})
 
+add_executable(tellicomodeltest tellicomodeltest.cpp modeltest.cpp
+  ../document.cpp
+  ../translators/tellicoimporter.cpp
+  ../translators/dataimporter.cpp
+  ../translators/importer.cpp
+  ../translators/tellicoxmlexporter.cpp
+  ../translators/tellicozipexporter.cpp
+  ../translators/exporter.cpp
+  ../translators/tellicoxmlhandler.cpp
+  ../translators/tellico_xml.cpp
+  ../translators/xmlstatehandler.cpp
+)
+ecm_mark_nongui_executable(tellicomodeltest)
+add_test(tellicomodeltest tellicomodeltest)
+ecm_mark_as_test(tellicomodeltest)
+TARGET_LINK_LIBRARIES(tellicomodeltest ${TELLICO_TEST_LIBS} ${LIBXML2_LIBRARIES})
+
 ######################################################
 
 add_executable(adstest adstest.cpp
