@@ -28,10 +28,18 @@
 #include "modeltest.h"
 #include "../models/entrymodel.h"
 #include "../models/entrysortmodel.h"
+#include "../models/filtermodel.h"
+#include "../collections/bookcollection.h"
+#include "../collectionfactory.h"
+#include "../document.h"
 
 #include <QTest>
 
 QTEST_GUILESS_MAIN( TellicoModelTest )
+
+void TellicoModelTest::initTestCase() {
+  Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
+}
 
 void TellicoModelTest::testEntryModel() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
@@ -49,6 +57,7 @@ void TellicoModelTest::testEntryModel() {
 
   entryModel.setFields(coll->fields());
   entryModel.setEntries(coll->entries());
+  QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
 
   Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
   coll->addField(field1);
@@ -71,7 +80,48 @@ void TellicoModelTest::testEntryModel() {
   sortModel.setFilter(filter);
 
   entryModel.clear();
+  entryModel.setFields(coll->fields());
+  entryModel.setEntries(coll->entries());
+  QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
+
+  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test-new")));
+  coll->modifyField(field3);
+  QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
+  entryModel.modifyField(field2, field3);
+
+  coll->removeField(field3);
+  entryModel.removeFields(Tellico::Data::FieldList() << field3);
+  QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
+
+  QCOMPARE(coll->entries().count(), entryModel.rowCount(QModelIndex()));
+  coll->removeEntries(Tellico::Data::EntryList() << entry2);
+  QCOMPARE(coll->entries().count() + 1, entryModel.rowCount(QModelIndex()));
+  entryModel.removeEntries(Tellico::Data::EntryList() << entry2);
+  QCOMPARE(coll->entries().count(), entryModel.rowCount(QModelIndex()));
 }
 
 void TellicoModelTest::testFilterModel() {
+  Tellico::FilterModel filterModel(this);
+  ModelTest test1(&filterModel);
+
+  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QLatin1String("title"),
+                                                       QLatin1String("Star Wars"),
+                                                       Tellico::FilterRule::FuncEquals);
+  Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
+  filter->append(rule1);
+  filterModel.addFilter(filter);
+
+  Tellico::Data::CollPtr c = Tellico::Data::Document::self()->collection();
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(c));
+  entry1->setField(QLatin1String("title"), QLatin1String("Star Wars"));
+  c->addEntries(entry1);
+
+  filterModel.clear();
+  filterModel.addFilter(filter);
+  QCOMPARE(filter, filterModel.filter(filterModel.index(0, 0)));
+  QVERIFY(filterModel.indexContainsEntry(filterModel.index(0, 0), entry1));
+
+  filterModel.invalidate(filterModel.index(0, 0));
+  QCOMPARE(filter, filterModel.filter(filterModel.index(0, 0)));
+  QVERIFY(filterModel.indexContainsEntry(filterModel.index(0, 0), entry1));
 }
