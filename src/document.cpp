@@ -163,13 +163,15 @@ bool Document::openDocument(const QUrl& url_) {
 //  if(pruneImages()) {
 //    slotSetModified(true);
 //  }
-  if(m_importer->hasImages()) {
+  if(m_importer && m_importer->hasImages()) {
     m_cancelImageWriting = false;
     QTimer::singleShot(500, this, SLOT(slotLoadAllImages()));
   } else {
     emit signalCollectionImagesLoaded(m_coll);
-    m_importer->deleteLater();
-    m_importer = nullptr;
+    if(m_importer) {
+      m_importer->deleteLater();
+      m_importer = nullptr;
+    }
   }
   return true;
 }
@@ -513,14 +515,12 @@ void Document::renameCollection(const QString& newTitle_) {
 
 // this only gets called when a zip file with images is opened
 // by loading every image, it gets pulled out of the zip file and
-// copied to disk. then the zip file can be closed and not retained in memory
+// copied to disk. Then the zip file can be closed and not retained in memory
 void Document::slotLoadAllImages() {
   QString id;
   StringSet images;
-  Data::EntryList entries = m_coll->entries();
-  Data::FieldList imageFields = m_coll->imageFields();
-  foreach(EntryPtr entry, entries) {
-    foreach(FieldPtr field, imageFields) {
+  foreach(EntryPtr entry, m_coll->entries()) {
+    foreach(FieldPtr field, m_coll->imageFields()) {
       id = entry->field(field);
       if(id.isEmpty() || images.has(id)) {
         continue;
@@ -544,14 +544,16 @@ void Document::slotLoadAllImages() {
   }
 
   if(m_cancelImageWriting) {
-    myLog() << "cancel image writing";
+    myLog() << "slotLoadAllImages() - cancel image writing";
   } else {
     emit signalCollectionImagesLoaded(m_coll);
   }
 
   m_cancelImageWriting = false;
-  m_importer->deleteLater();
-  m_importer = nullptr;
+  if(m_importer) {
+    m_importer->deleteLater();
+    m_importer = nullptr;
+  }
 }
 
 // cacheDir_ is the location dir to write the images
@@ -606,7 +608,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   }
 
   if(m_cancelImageWriting) {
-    myDebug() << "cancel image writing";
+    myDebug() << "writeAllImage() - cancel image writing";
   }
 
   m_cancelImageWriting = false;
