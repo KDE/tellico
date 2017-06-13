@@ -96,8 +96,10 @@ void Document::slotSetClean(bool clean_) {
 }
 
 bool Document::newDocument(int type_) {
-  delete m_importer;
-  m_importer = nullptr;
+  if(m_importer) {
+    m_importer->deleteLater();
+    m_importer = nullptr;
+  }
   deleteContents();
 
   m_coll = CollectionFactory::collection(type_, true);
@@ -122,7 +124,9 @@ bool Document::openDocument(const QUrl& url_) {
     m_loadAllImages = true;
   }
 
-  delete m_importer;
+  if(m_importer) {
+    m_importer->deleteLater();
+  }
   m_importer = new Import::TellicoImporter(url_, m_loadAllImages);
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(m_importer, m_importer->progressLabel(), true);
@@ -134,6 +138,10 @@ bool Document::openDocument(const QUrl& url_) {
   ProgressItem::Done done(m_importer);
 
   CollPtr coll = m_importer->collection();
+  if(!m_importer) {
+    myDebug() << "The importer was deleted out from under us";
+    return false;
+  }
   // delayed image loading only works for zip files
   // format is only known AFTER collection() is called
 
@@ -245,8 +253,10 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
 }
 
 bool Document::closeDocument() {
-  delete m_importer;
-  m_importer = nullptr;
+  if(m_importer) {
+    m_importer->deleteLater();
+    m_importer = nullptr;
+  }
   deleteContents();
   return true;
 }

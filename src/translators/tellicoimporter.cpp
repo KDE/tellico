@@ -43,6 +43,7 @@
 #include <QFile>
 #include <QTimer>
 #include <QApplication>
+#include <QPointer>
 
 using Tellico::Import::TellicoImporter;
 
@@ -89,6 +90,9 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
     s = QByteArray(data().constData(), 6);
   }
 
+  // hack for processEvents and deletion
+  QPointer<TellicoImporter> thisPtr(this);
+
   // need to decide if the data is xml text, or a zip file
   // if the first 5 characters are <?xml then treat it like text
   if(s[0] == '<' && s[1] == '?' && s[2] == 'x' && s[3] == 'm' && s[4] == 'l') {
@@ -98,7 +102,7 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
     m_format = Zip;
     loadZipData();
   }
-  return m_coll;
+  return thisPtr ? m_coll : Data::CollPtr();
 }
 
 void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
@@ -119,16 +123,21 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   int pos = 0;
   emit signalTotalSteps(this, data_.size());
 
+  // hack to allow processEvents
+  QPointer<TellicoImporter> thisPtr(this);
   while(success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
     success = reader.parseContinue();
     pos += blockSize;
-    if(showProgress) {
+    if(thisPtr && showProgress) {
       emit signalProgress(this, pos);
       qApp->processEvents();
     }
+  }
+  if(!thisPtr) {
+    return;
   }
 
   if(!success) {
@@ -201,7 +210,12 @@ void TellicoImporter::loadZipData() {
   }
 
   const QByteArray xmlData = static_cast<const KArchiveFile*>(entry)->data();
+  // hack to account for processEvents and deletion
+  QPointer<TellicoImporter> thisPtr(this);
   loadXMLData(xmlData, false);
+  if(!thisPtr) {
+    return;
+  }
   if(!m_coll) {
     m_format = Error;
     delete m_zip;
@@ -254,7 +268,7 @@ void TellicoImporter::loadZipData() {
     }
   }
 
-  if(m_images.isEmpty()) {
+  if(thisPtr && m_images.isEmpty()) {
     // give it some time
     QTimer::singleShot(3000, this, SLOT(deleteLater()));
   }
