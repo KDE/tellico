@@ -1,3 +1,3 @@
-debian/tmp/usr/share/kde4/apps/tellico/data-sources
-debian/tmp/usr/share/kde4/apps/tellico/z3950-servers.cfg
+debian/tmp/usr/share/tellico/data-sources
+debian/tmp/usr/share/tellico/z3950-servers.cfg
 

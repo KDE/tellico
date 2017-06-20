@@ -1,3 +1,99 @@
+tellico (3.0.2-1.2) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Modified tellico-doc.install to keep files at upstream place
+  * Not compressing docbook files. Closes: #864077
+
+ -- Geert Stappers <stappers@debian.org>  Sun, 04 Jun 2017 13:35:07 +0200
+
+tellico (3.0.2-1.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream release. Closes: #856718, #859657
+  * debian/watch: has content again Closes: #863323
+  * debian/README.source: new file,
+    for further notes on packaging tellico
+  * debian/control:
+    - Dependencies lines wrapped
+    - trailing white spaces removed. Dank je wel Lekensteyn
+  * debian/patches/series: new file.
+  * debian/patches/unclean: new file.
+    for cleaning up the unclean upstream tarball
+  * debian/source/include-binaries: new file
+    tells about known binaries in the upstream tarball
+  * debian/rules: updated disable tests
+    also #716982 updated with a comment about it
+  * debian/tellico-data.install:
+    - added  usr/share/*/org.kde.tellico.appdata.xml
+    - removed  usr/share/appdata
+  * debian/source/lintian-overrides: new file
+
+ -- Geert Stappers <stappers@debian.org>  Sat, 03 Jun 2017 14:53:40 +0200
+
+tellico (2.3.9+dfsg.1-1) unstable; urgency=low
+
+  * New upstream release.
+    + Patch cdb95d17 is now included, drop it.
+    + CVS parsing update. Closes: #729503.
+  * Bump Stadards-Version to 3.9.6. No other change needed.
+
+ -- Regis Boudin <regis@debian.org>  Sat, 18 Oct 2014 12:40:17 +0200
+
+tellico (2.3.8+dfsg.2-1) unstable; urgency=low
+
+  * Repack the upstream source further to remove sourceless jquery.js.
+    Closes: #736786.
+  * Enable parallel building. Thanks Pino Toscano. Closes: #721029.
+  * Take patch cdb95d17 from upstream git. Closes: #729499.
+  * Bump Stadards-Version to 3.9.5. No other change needed.
+
+ -- Regis Boudin <regis@debian.org>  Sat, 01 Mar 2014 15:05:27 +0100
+
+tellico (2.3.8+dfsg.1-2) unstable; urgency=low
+
+  * Disable tests for now, which should at least temporarily address #716982.
+
+ -- Regis Boudin <regis@debian.org>  Sat, 20 Jul 2013 13:02:17 +0200
+
+tellico (2.3.8+dfsg.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Split the documentation to a tellico-doc package, as it represents about
+    half the size of the binaries. The tellico package "only" recommends it.
+  * Bump Standards-Version to 3.9.4.
+
+ -- Regis Boudin <regis@debian.org>  Mon, 08 Jul 2013 22:26:50 +0200
+
+tellico (2.3.5+dfsg.1-4) unstable; urgency=low
+
+  * Fix passing of hardening flags. Thanks Simon Ruderich. Closes: #669190.
+
+ -- Regis Boudin <regis@debian.org>  Sun, 03 Jun 2012 10:29:26 +0200
+
+tellico (2.3.5+dfsg.1-3) unstable; urgency=low
+
+  * Actually add pkg-config to the build-depends. For real this time.
+
+ -- Regis Boudin <regis@debian.org>  Tue, 10 Apr 2012 22:57:42 +0200
+
+tellico (2.3.5+dfsg.1-2) unstable; urgency=low
+
+  * Build-Depend on pkg-config. Thanks to Pino Toscano, and apologies again
+    for misunderstanding. Closes: #661447.
+  * Bump debhelper compatibility to 9. Build-depend accordingly.
+
+ -- Regis Boudin <regis@debian.org>  Tue, 10 Apr 2012 20:33:24 +0200
+
+tellico (2.3.5+dfsg.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Further repacking to remove KDE 4.7 bits.
+  * Bum build-depend on KDE to 4.7.
+  * Update packages descriptions, thanks to Paul Stewart. Closes: #647154.
+  * Bump Standards-Version to 3.9.3.
+
+ -- Regis Boudin <regis@debian.org>  Thu, 15 Mar 2012 22:16:59 +0100
+
 tellico (2.3.4+dfsg.1-1) unstable; urgency=low
 
   * New upstream release
