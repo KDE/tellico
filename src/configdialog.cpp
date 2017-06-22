@@ -200,7 +200,7 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
-  page->setIcon(QIcon::fromTheme(QLatin1String("tellico")));
+  page->setIcon(QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
   addPage(page);
 
   // since this is the first page, go ahead and lay it out

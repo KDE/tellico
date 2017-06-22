@@ -172,7 +172,7 @@ QString BoardGameGeekFetcher::defaultName() {
 }
 
 QString BoardGameGeekFetcher::defaultIcon() {
-  return favIcon("http://www.boardgamegeek.com");
+  return favIcon("https://www.boardgamegeek.com");
 }
 
 Tellico::StringHash BoardGameGeekFetcher::allOptionalFields() {

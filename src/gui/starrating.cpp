@@ -54,7 +54,7 @@ void StarRating::setMaxRating(int maxRating_) {
 void StarRating::setSize(int size) {
   int px = (size < Small) ? Small : size;
   QSize sz = QSize(px, px);
-  QIcon icon = QIcon::fromTheme(QLatin1String("star_on"));
+  QIcon icon = QIcon(QLatin1String(":/icons/star_on"));
   m_starNormal = icon.pixmap(sz);
   m_starSize = m_starNormal.size().width(); //maybe we didn't get the full size
   sz = QSize(m_starSize, m_starSize);

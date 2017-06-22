@@ -1343,7 +1343,7 @@ QString IMDBFetcher::defaultName() {
 }
 
 QString IMDBFetcher::defaultIcon() {
-  return favIcon("http://imdb.com");
+  return favIcon("http://www.imdb.com");
 }
 
 //static

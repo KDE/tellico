@@ -46,7 +46,9 @@ int main(int argc, char* argv[]) {
   KLocalizedString::setApplicationDomain("tellico");
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
-  // Migrate KDE4 configuration and data files 
+  Q_INIT_RESOURCE(icons);
+
+  // Migrate KDE4 configuration and data files
   Kdelibs4ConfigMigrator migrator(QLatin1String("tellico"));
   migrator.setConfigFiles(QStringList() << QStringLiteral("tellicorc"));
   migrator.setUiFiles(QStringList() << QStringLiteral("tellicoui.rc"));

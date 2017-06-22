@@ -163,7 +163,8 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   Kernel::init(this); // the only time this is ever called!
   GUI::Proxy::setMainWidget(this);
 
-  setWindowIcon(QIcon::fromTheme(QLatin1String("tellico")));
+  setWindowIcon(QIcon::fromTheme(QLatin1String("tellico"),
+                                 QIcon(QLatin1String(":/icons/tellico"))));
 
   // initialize the status bar and progress bar
   initStatusBar();
@@ -251,7 +252,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String(NAME), collectionMapper, SLOT(map())); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
-  action->setIcon(QIcon::fromTheme(QLatin1String(ICON))); \
+  action->setIcon(QIcon(QLatin1String(":/icons/" ICON))); \
   fileNewMenu->addAction(action); \
   collectionMapper->setMapping(action, Data::Collection::TYPE);
 
@@ -349,7 +350,8 @@ void MainWindow::initActions() {
   importMapper->setMapping(action, TYPE);
 
   IMPORT_ACTION(Import::TellicoXML, "file_import_tellico", i18n("Import Tellico Data..."),
-                i18n("Import another Tellico data file"), QIcon::fromTheme(QLatin1String("tellico")));
+                i18n("Import another Tellico data file"),
+                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
 
   IMPORT_ACTION(Import::CSV, "file_import_csv", i18n("Import CSV Data..."),
                 i18n("Import a CSV file"), mimeIcon("text/csv", "text/x-csv"));
@@ -358,13 +360,16 @@ void MainWindow::initActions() {
                 i18n("Import a MODS data file"), mimeIcon("text/xml"));
 
   IMPORT_ACTION(Import::Alexandria, "file_import_alexandria", i18n("Import Alexandria Data..."),
-                i18n("Import data from the Alexandria book collection manager"), QIcon::fromTheme(QLatin1String("alexandria")));
+                i18n("Import data from the Alexandria book collection manager"),
+                QIcon::fromTheme(QLatin1String("alexandria"), QIcon(QLatin1String(":/icons/alexandria"))));
 
   IMPORT_ACTION(Import::Delicious, "file_import_delicious", i18n("Import Delicious Library Data..."),
-                i18n("Import data from Delicious Library"), QIcon::fromTheme(QLatin1String("deliciouslibrary")));
+                i18n("Import data from Delicious Library"),
+                QIcon::fromTheme(QLatin1String("deliciouslibrary"), QIcon(QLatin1String(":/icons/deliciouslibrary"))));
 
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
-                i18n("Import data from Referencer"), QIcon::fromTheme(QLatin1String("referencer")));
+                i18n("Import data from Referencer"),
+                QIcon::fromTheme(QLatin1String("referencer"), QIcon(QLatin1String(":/icons/referencer"))));
 
   IMPORT_ACTION(Import::Bibtex, "file_import_bibtex", i18n("Import Bibtex Data..."),
                 i18n("Import a bibtex bibliography file"), mimeIcon("text/x-bibtex"));
@@ -373,10 +378,10 @@ void MainWindow::initActions() {
                 i18n("Import a Bibtexml bibliography file"), mimeIcon("text/xml"));
 
   IMPORT_ACTION(Import::RIS, "file_import_ris", i18n("Import RIS Data..."),
-                i18n("Import an RIS reference file"), QIcon::fromTheme(QLatin1String("cite")));
+                i18n("Import an RIS reference file"), QIcon::fromTheme(QLatin1String(":/icons/cite")));
 
   IMPORT_ACTION(Import::Goodreads, "file_import_goodreads", i18n("Import Goodreads Collection..."),
-                i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QLatin1String("goodreads")));
+                i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QLatin1String(":/icons/goodreads")));
 
   IMPORT_ACTION(Import::PDF, "file_import_pdf", i18n("Import PDF File..."),
                 i18n("Import a PDF file"), mimeIcon("application/pdf"));
@@ -394,19 +399,22 @@ void MainWindow::initActions() {
 #endif
 
   IMPORT_ACTION(Import::GCstar, "file_import_gcstar", i18n("Import GCstar Data..."),
-                i18n("Import a GCstar data file"), QIcon::fromTheme(QLatin1String("gcstar")));
+                i18n("Import a GCstar data file"),
+                QIcon::fromTheme(QLatin1String("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));
 
   IMPORT_ACTION(Import::Griffith, "file_import_griffith", i18n("Import Griffith Data..."),
-                i18n("Import a Griffith database"), QIcon::fromTheme(QLatin1String("griffith")));
+                i18n("Import a Griffith database"),
+                QIcon::fromTheme(QLatin1String("griffith"), QIcon(QLatin1String(":/icons/griffith"))));
 
   IMPORT_ACTION(Import::AMC, "file_import_amc", i18n("Import Ant Movie Catalog Data..."),
-                i18n("Import an Ant Movie Catalog data file"), QIcon::fromTheme(QLatin1String("amc")));
+                i18n("Import an Ant Movie Catalog data file"),
+                QIcon::fromTheme(QLatin1String("amc"), QIcon(QLatin1String(":/icons/amc"))));
 
   IMPORT_ACTION(Import::BoardGameGeek, "file_import_boardgamegeek", i18n("Import BoardGameGeek Collection..."),
-                i18n("Import a collection from BoardGameGeek.com"), QIcon::fromTheme(QLatin1String("boardgamegeek")));
+                i18n("Import a collection from BoardGameGeek.com"), QIcon(QLatin1String(":/icons/boardgamegeek")));
 
   IMPORT_ACTION(Import::VinoXML, "file_import_vinoxml", i18n("Import VinoXML..."),
-                i18n("Import VinoXML data"), QIcon::fromTheme(QLatin1String("vinoxml")));
+                i18n("Import VinoXML data"), QIcon(QLatin1String(":/icons/vinoxml")));
 
   IMPORT_ACTION(Import::FileListing, "file_import_filelisting", i18n("Import File Listing..."),
                 i18n("Import information about files in a folder"), mimeIcon("inode/directory"));
@@ -437,10 +445,12 @@ void MainWindow::initActions() {
   exportMapper->setMapping(action, TYPE);
 
   EXPORT_ACTION(Export::TellicoXML, "file_export_xml", i18n("Export to XML..."),
-                i18n("Export to a Tellico XML file"), QIcon::fromTheme(QLatin1String("tellico")));
+                i18n("Export to a Tellico XML file"),
+                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
 
   EXPORT_ACTION(Export::TellicoZip, "file_export_zip", i18n("Export to Zip..."),
-                i18n("Export to a Tellico Zip file"), QIcon::fromTheme(QLatin1String("tellico")));
+                i18n("Export to a Tellico Zip file"),
+                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
 
   EXPORT_ACTION(Export::HTML, "file_export_html", i18n("Export to HTML..."),
                 i18n("Export to an HTML file"), mimeIcon("text/html"));
@@ -449,7 +459,8 @@ void MainWindow::initActions() {
                 i18n("Export to a comma-separated values file"), mimeIcon("text/csv", "text/x-csv"));
 
   EXPORT_ACTION(Export::Alexandria, "file_export_alexandria", i18n("Export to Alexandria..."),
-                i18n("Export to an Alexandria library"), QIcon::fromTheme(QLatin1String("alexandria")));
+                i18n("Export to an Alexandria library"),
+                QIcon::fromTheme(QLatin1String("alexandria"), QIcon(QLatin1String(":/icons/alexandria"))));
 
   EXPORT_ACTION(Export::Bibtex, "file_export_bibtex", i18n("Export to Bibtex..."),
                 i18n("Export to a bibtex file"), mimeIcon("text/x-bibtex"));
@@ -461,7 +472,8 @@ void MainWindow::initActions() {
                 i18n("Export to an ONIX file"), mimeIcon("text/xml"));
 
   EXPORT_ACTION(Export::GCstar, "file_export_gcstar", i18n("Export to GCstar..."),
-                i18n("Export to a GCstar data file"), QIcon::fromTheme(QLatin1String("gcstar")));
+                i18n("Export to a GCstar data file"),
+                QIcon::fromTheme(QLatin1String("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));
 
   EXPORT_ACTION(Export::XSLT, "file_export_xslt", i18n("Export XSL Transform..."),
                 i18n("Export using an XSL Transform"), mimeIcon("application/xslt+xml", "text/x-xslt"));
@@ -571,17 +583,17 @@ void MainWindow::initActions() {
 
   action = actionCollection()->addAction(QLatin1String("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));
   action->setText(i18n("Convert to &Bibliography"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("bibtex")));
+  action->setIcon(QIcon(QLatin1String(":/icons/bibtex")));
   action->setToolTip(i18n("Convert a book collection to a bibliography"));
 
   action = actionCollection()->addAction(QLatin1String("coll_string_macros"), this, SLOT(slotShowStringMacroDialog()));
   action->setText(i18n("String &Macros..."));
-  action->setIcon(QIcon::fromTheme(QLatin1String("fileview-text")));
+  action->setIcon(QIcon::fromTheme(QLatin1String("view-list-text")));
   action->setToolTip(i18n("Edit the bibtex string macros"));
 
   action = actionCollection()->addAction(QLatin1String("coll_key_manager"), this, SLOT(slotShowBibtexKeyDialog()));
   action->setText(i18n("Check for Duplicate Keys..."));
-  action->setIcon(QIcon::fromTheme(QLatin1String("text/x-bibtex")));
+  action->setIcon(mimeIcon("text/x-bibtex"));
   action->setToolTip(i18n("Check for duplicate citation keys"));
 
   QSignalMapper* citeMapper = new QSignalMapper(this);
@@ -597,7 +609,7 @@ void MainWindow::initActions() {
   action = actionCollection()->addAction(QLatin1String("cite_lyxpipe"), citeMapper, SLOT(map()));
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("lyx"))); // krazy:exclude=iconnames
+  action->setIcon(QIcon::fromTheme(QLatin1String("lyx"), QIcon(QLatin1String(":/icons/lyx"))));
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
@@ -2121,7 +2133,7 @@ void MainWindow::slotUpdateToolbarIcons() {
   if(Kernel::self()->collectionType() == Data::Collection::Base) {
     m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
   } else {
-    m_newEntry->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+    m_newEntry->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
   }
 }
 

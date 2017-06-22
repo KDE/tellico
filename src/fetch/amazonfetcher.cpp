@@ -888,7 +888,7 @@ QString AmazonFetcher::defaultName() {
 }
 
 QString AmazonFetcher::defaultIcon() {
-  return favIcon("http://amazon.com");
+  return favIcon("http://www.amazon.com");
 }
 
 Tellico::StringHash AmazonFetcher::allOptionalFields() {

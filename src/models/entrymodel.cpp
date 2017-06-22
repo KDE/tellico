@@ -43,7 +43,7 @@ using Tellico::EntryModel;
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
     m_imagesAreAvailable(false) {
   m_iconCache.setMaxCost(Config::iconCacheSize());
-  m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"));
+  m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
 }
 
 EntryModel::~EntryModel() {
@@ -378,10 +378,10 @@ const QIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
   if(icon) {
     return *icon;
   }
-  QIcon tmpIcon = QIcon::fromTheme(QLatin1String("nocover_") + CollectionFactory::typeName(coll_->type()));
+  QIcon tmpIcon = QIcon(QLatin1String(":/icons/nocover_") + CollectionFactory::typeName(coll_->type()));
   if(tmpIcon.isNull()) {
     myLog() << "null nocover image, loading tellico.png";
-    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"));
+    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico")));
   }
 
   icon = new QIcon(tmpIcon);

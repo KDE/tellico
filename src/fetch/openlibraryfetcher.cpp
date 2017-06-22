@@ -382,7 +382,7 @@ QString OpenLibraryFetcher::defaultName() {
 }
 
 QString OpenLibraryFetcher::defaultIcon() {
-  return favIcon("http://www.openlibrary.org");
+  return favIcon("http://openlibrary.org");
 }
 
 Tellico::StringHash OpenLibraryFetcher::allOptionalFields() {

@@ -334,7 +334,7 @@ QString MusicBrainzFetcher::defaultName() {
 }
 
 QString MusicBrainzFetcher::defaultIcon() {
-  return favIcon("http://www.musicbrainz.org");
+  return favIcon("https://musicbrainz.org");
 }
 
 MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrainzFetcher*)

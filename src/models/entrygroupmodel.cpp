@@ -134,7 +134,7 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
         // so no need to lookup the entry(index_), just use first one we find
         foreach(Data::EntryGroup* group, m_groups) {
           if(!group->isEmpty()) {
-            return QIcon::fromTheme(CollectionFactory::typeName(group->first()->collection()));
+            return QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(group->first()->collection()));
           }
         }
       }
@@ -329,4 +329,4 @@ bool EntryGroupModel::hasValidParent(const QModelIndex& index_) const {
   // if it's top-level, it has no parent
   return parentNode && parentNode != m_rootNode;
 }
- 
+

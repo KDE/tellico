@@ -60,9 +60,9 @@ void CollectionTypeCombo::setCurrentType(int type_) {
 }
 
 void CollectionTypeCombo::addItem(const QString& value_, int collType_) {
-  ComboBox::addItem(QIcon::fromTheme(CollectionFactory::typeName(collType_)), value_, collType_);
+  ComboBox::addItem(QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(collType_)), value_, collType_);
 }
 
 void CollectionTypeCombo::insertItem(int index_, const QString& value_, int collType_) {
-  ComboBox::insertItem(index_, QIcon::fromTheme(CollectionFactory::typeName(collType_)), value_, collType_);
+  ComboBox::insertItem(index_, QIcon(QLatin1String(":/icons/") + CollectionFactory::typeName(collType_)), value_, collType_);
 }

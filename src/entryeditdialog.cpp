@@ -138,7 +138,7 @@ void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  m_newButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  m_newButton->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
@@ -750,7 +750,7 @@ void EntryEditDialog::showEvent(QShowEvent* event_) {
 /*
   I attempted to read and restore window size here, but it didn't work (July 2016)
   I discovered that I had to put it in a timer. Somewhere, the resize event or something
-  was overriding any size changes I did here. Calling this->resize() would work but 
+  was overriding any size changes I did here. Calling this->resize() would work but
   windowHandle()->resize() would not (as KWindowConfig::restoreWindowSize uses)
 */
   QTimer::singleShot(0, this, SLOT(slotUpdateSize()));

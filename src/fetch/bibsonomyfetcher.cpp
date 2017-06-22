@@ -177,7 +177,7 @@ QString BibsonomyFetcher::defaultName() {
 }
 
 QString BibsonomyFetcher::defaultIcon() {
-  return favIcon("http://bibsonomy.org");
+  return favIcon("https://www.bibsonomy.org");
 }
 
 BibsonomyFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BibsonomyFetcher*)

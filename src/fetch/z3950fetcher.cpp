@@ -553,7 +553,7 @@ QString Z3950Fetcher::defaultName() {
 }
 
 QString Z3950Fetcher::defaultIcon() {
-  return QLatin1String("network-wired"); // rather arbitrary
+  return QLatin1String("network-server"); // rather arbitrary
 }
 
 // static

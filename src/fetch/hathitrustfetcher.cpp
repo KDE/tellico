@@ -293,7 +293,7 @@ QString HathiTrustFetcher::defaultName() {
 }
 
 QString HathiTrustFetcher::defaultIcon() {
-  return favIcon("http://http://www.hathitrust.org");
+  return favIcon("http://www.hathitrust.org");
 }
 
 Tellico::StringHash HathiTrustFetcher::allOptionalFields() {

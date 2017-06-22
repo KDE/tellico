@@ -172,7 +172,7 @@ QString VideoGameGeekFetcher::defaultName() {
 }
 
 QString VideoGameGeekFetcher::defaultIcon() {
-  return favIcon("http://www.videogamegeek.com");
+  return favIcon("https://www.videogamegeek.com");
 }
 
 Tellico::StringHash VideoGameGeekFetcher::allOptionalFields() {

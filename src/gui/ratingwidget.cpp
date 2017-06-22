@@ -46,8 +46,8 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   layout->setMargin(0);
   layout->setSpacing(0);
 
-  m_pixOn = QIcon::fromTheme(QLatin1String("star_on")).pixmap(QSize(18, 18));
-  m_pixOff = QIcon::fromTheme(QLatin1String("star_off")).pixmap(QSize(18, 18));
+  m_pixOn = QIcon(QLatin1String(":/icons/star_on")).pixmap(QSize(18, 18));
+  m_pixOff = QIcon(QLatin1String(":/icons/star_off")).pixmap(QSize(18, 18));
 
   // find maximum width and height
   int w = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.width(), m_pixOff.width()));

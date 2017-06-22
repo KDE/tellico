@@ -108,7 +108,9 @@ void LoanDialog::init() {
 
   QLabel* pixLabel = new QLabel(mainWidget);
   mainLayout->addWidget(pixLabel);
-  pixLabel->setPixmap(QIcon::fromTheme(QLatin1String("tellico")).pixmap(QSize(64, 64)));
+  pixLabel->setPixmap(QIcon::fromTheme(QLatin1String("tellico"),
+                                       QIcon(QLatin1String(":/icons/tellico")))
+                                      .pixmap(QSize(64, 64)));
   pixLabel->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::AlignTop);
   topLayout->addWidget(pixLabel, ++row, 0);
 

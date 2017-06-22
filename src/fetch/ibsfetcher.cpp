@@ -341,7 +341,7 @@ QString IBSFetcher::defaultName() {
 }
 
 QString IBSFetcher::defaultIcon() {
-  return favIcon("http://ibs.it");
+  return favIcon("http://www.ibs.it");
 }
 
 IBSFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)

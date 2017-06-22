@@ -264,7 +264,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_addButton = new QPushButton(i18n("&Add Entry"), box3);
   box3HBoxLayout->addWidget(m_addButton);
   m_addButton->setEnabled(false);
-  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon::fromTheme(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
   connect(m_addButton, SIGNAL(clicked()), SLOT(slotAddEntry()));
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
@@ -524,7 +524,8 @@ void FetchDialog::slotAddEntry() {
     }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(Data::EntryPtr(new Data::Entry(*entry)));
-    item->setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("checkmark")));
+    item->setData(0, Qt::DecorationRole,
+                  QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark"))));
   }
   if(!vec.isEmpty()) {
     Kernel::self()->addEntries(vec, true);
@@ -837,7 +838,7 @@ void FetchDialog::slotResetCollection() {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher), fetcher->source());
   }
 
-  m_addButton->setIcon(QIcon::fromTheme(Kernel::self()->collectionTypeName()));
+  m_addButton->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
 
   if(Fetch::Manager::self()->canFetch()) {
     m_searchButton->setEnabled(true);

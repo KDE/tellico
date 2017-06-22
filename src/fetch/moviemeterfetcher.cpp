@@ -285,7 +285,7 @@ QString MovieMeterFetcher::defaultName() {
 }
 
 QString MovieMeterFetcher::defaultIcon() {
-  return favIcon("http://www.moviemeter.nl");
+  return favIcon("https://www.moviemeter.nl");
 }
 
 Tellico::StringHash MovieMeterFetcher::allOptionalFields() {
