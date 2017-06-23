@@ -271,4 +271,3 @@ Tellico::Data::LoanPtr BorrowerModel::loan(const QModelIndex& index_) const {
   }
   return loan;
 }
-

@@ -56,4 +56,3 @@ bool ComboBox::setCurrentData(const QVariant& data_, int role_) {
   }
   return success;
 }
-

@@ -93,4 +93,3 @@ void LineFieldWidget::updateFieldHook(Tellico::Data::FieldPtr oldField_, Tellico
 QWidget* LineFieldWidget::widget() {
   return m_lineEdit;
 }
-

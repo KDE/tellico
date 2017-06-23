@@ -68,4 +68,3 @@ void SpinBox::stepBy(int steps_) {
     emit valueChanged(text());
   }
 }
-

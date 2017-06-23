@@ -193,4 +193,3 @@ void BibsonomyFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString BibsonomyFetcher::ConfigWidget::preferredName() const {
   return BibsonomyFetcher::defaultName();
 }
-

@@ -188,4 +188,3 @@ void DVDFrFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString DVDFrFetcher::ConfigWidget::preferredName() const {
   return DVDFrFetcher::defaultName();
 }
-

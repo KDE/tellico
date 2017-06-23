@@ -2339,4 +2339,3 @@ void MainWindow::slotToggleMenuBarVisibility() {
   QMenuBar* mb = menuBar();
   mb->isHidden() ? mb->show() : mb->hide();
 }
-

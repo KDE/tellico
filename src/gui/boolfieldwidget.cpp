@@ -59,4 +59,3 @@ void BoolFieldWidget::clearImpl() {
 QWidget* BoolFieldWidget::widget() {
   return m_checkBox;
 }
-

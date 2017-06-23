@@ -81,4 +81,3 @@ void FieldCompletion::postProcessMatches(KCompletionMatches* matches_) const {
     }
   }
 }
-

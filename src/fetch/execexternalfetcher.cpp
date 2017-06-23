@@ -548,4 +548,3 @@ void ExecExternalFetcher::ConfigWidget::removed() {
 QString ExecExternalFetcher::ConfigWidget::preferredName() const {
   return m_name.isEmpty() ? ExecExternalFetcher::defaultName() : m_name;
 }
-

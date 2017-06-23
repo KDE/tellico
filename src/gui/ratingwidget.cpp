@@ -210,4 +210,3 @@ void RatingWidget::clearClicked() {
     emit signalModified();
   }
 }
-

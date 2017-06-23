@@ -229,4 +229,3 @@ bool CollectionInterface::addEntryValue(int id_, const QString& fieldName_, cons
   Kernel::self()->modifyEntries(Data::EntryList() << oldEntry, Data::EntryList() << entry, QStringList() << field->name());
   return true;
 }
-

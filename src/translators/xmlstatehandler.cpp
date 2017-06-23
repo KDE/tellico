@@ -870,4 +870,3 @@ bool LoanHandler::end(const QString&, const QString&, const QString&) {
   d->borrower->addLoan(loan);
   return true;
 }
-

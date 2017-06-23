@@ -54,4 +54,3 @@ void ImageFieldWidget::clearImpl() {
 QWidget* ImageFieldWidget::widget() {
   return m_widget;
 }
-

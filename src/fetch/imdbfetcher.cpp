@@ -1442,4 +1442,3 @@ QString IMDBFetcher::ConfigWidget::preferredName() const {
 void IMDBFetcher::ConfigWidget::slotSiteChanged() {
   emit signalName(preferredName());
 }
-

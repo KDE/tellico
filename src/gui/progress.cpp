@@ -41,4 +41,3 @@ bool Progress::isDone() const {
 void Progress::setDone() {
   setValue(maximum());
 }
-

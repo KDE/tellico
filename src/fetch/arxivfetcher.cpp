@@ -334,4 +334,3 @@ void ArxivFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString ArxivFetcher::ConfigWidget::preferredName() const {
   return ArxivFetcher::defaultName();
 }
-

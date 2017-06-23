@@ -93,4 +93,3 @@ bool FetcherJob::doKill() {
   m_fetcher->stop();
   return true;
 }
-

@@ -263,4 +263,3 @@ void EntryUpdater::slotCleanup() {
   Kernel::self()->endCommandGroup();
   deleteLater();
 }
-

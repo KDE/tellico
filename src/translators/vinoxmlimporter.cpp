@@ -47,4 +47,3 @@ bool VinoXMLImporter::canImport(int type) const {
 Tellico::Data::CollPtr VinoXMLImporter::collection() {
   return XSLTImporter::collection();
 }
-

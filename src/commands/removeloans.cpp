@@ -95,4 +95,3 @@ void RemoveLoans::undo() {
     myWarning() << "Add to calendar not implemented";
   }
 }
-

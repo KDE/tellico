@@ -408,4 +408,3 @@ void GroupView::addGroup(Tellico::Data::EntryGroup* group_) {
     sourceModel()->setData(index, m_groupClosedIconName, Qt::DecorationRole);
   }
 }
-

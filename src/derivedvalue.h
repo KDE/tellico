@@ -58,4 +58,3 @@ private:
 } // end namespace
 
 #endif
-

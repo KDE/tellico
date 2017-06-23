@@ -57,4 +57,3 @@ bool Clipboard::cite(Tellico::Data::EntryList entries_) {
   cb->setText(s, QClipboard::Clipboard);
   return true;
 }
-

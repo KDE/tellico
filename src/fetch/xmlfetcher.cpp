@@ -222,4 +222,3 @@ Tellico::XSLTHandler* XMLFetcher::xsltHandler() {
   Q_ASSERT(m_xsltHandler);
   return m_xsltHandler;
 }
-

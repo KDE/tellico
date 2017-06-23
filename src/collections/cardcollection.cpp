@@ -132,4 +132,3 @@ Tellico::Data::FieldList CardCollection::defaultFields() {
 
   return list;
 }
-

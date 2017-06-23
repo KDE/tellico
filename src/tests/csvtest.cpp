@@ -86,4 +86,3 @@ void CsvTest::testEntry() {
   output.chop(1);
   QCOMPARE(output, QLatin1String("\"title, with comma\""));
 }
-

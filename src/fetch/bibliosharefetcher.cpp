@@ -208,4 +208,3 @@ void BiblioShareFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString BiblioShareFetcher::ConfigWidget::preferredName() const {
   return BiblioShareFetcher::defaultName();
 }
-

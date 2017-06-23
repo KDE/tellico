@@ -52,4 +52,3 @@ void GCstarThread::slotData() {
 void GCstarThread::slotError() {
   emit standardError(static_cast<KProcess*>(sender())->readAllStandardError());
 }
-

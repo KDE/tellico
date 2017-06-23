@@ -485,4 +485,3 @@ EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher*
 QString EntrezFetcher::ConfigWidget::preferredName() const {
   return EntrezFetcher::defaultName();
 }
-

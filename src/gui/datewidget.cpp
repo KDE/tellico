@@ -320,4 +320,3 @@ void DateWidget::slotDateEntered(const QDate& date_) {
     emit signalModified();
   }
 }
-

@@ -53,4 +53,3 @@ void DateFieldWidget::clearImpl() {
 QWidget* DateFieldWidget::widget() {
   return m_widget;
 }
-

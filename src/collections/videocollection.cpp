@@ -246,4 +246,3 @@ int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::E
   res += 10*EntryComparison::score(entry1_, entry2_, QLatin1String("imdb"), this);
   return res;
 }
-

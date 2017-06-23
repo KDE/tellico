@@ -137,4 +137,3 @@ void hmac_sha512(unsigned char *key, unsigned int key_size,
 #endif
 
 #endif /* ! _HMAC_SHA2_H */
-

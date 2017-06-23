@@ -323,4 +323,3 @@ void HathiTrustFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString HathiTrustFetcher::ConfigWidget::preferredName() const {
   return HathiTrustFetcher::defaultName();
 }
-

@@ -193,4 +193,3 @@ void SpringerFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
 QString SpringerFetcher::ConfigWidget::preferredName() const {
   return SpringerFetcher::defaultName();
 }
-

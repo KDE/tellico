@@ -563,4 +563,3 @@ bool Tellico::ISBNComparison::operator()(const QString& value1_, const QString& 
   }
   return value1 == value2;
 }
-

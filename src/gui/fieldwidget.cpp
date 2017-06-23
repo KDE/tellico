@@ -240,4 +240,3 @@ void FieldWidget::checkModified() {
 void FieldWidget::multipleChecked() {
   emit valueChanged(m_field);
 }
-

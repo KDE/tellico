@@ -210,4 +210,3 @@ void FilterView::invalidate(Tellico::Data::EntryList entries_) {
     }
   }
 }
-

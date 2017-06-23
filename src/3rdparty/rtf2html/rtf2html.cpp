@@ -540,4 +540,3 @@ QString RTF2HTML::toHTML() const {
 
    return QString::fromStdString(html);
 }
-

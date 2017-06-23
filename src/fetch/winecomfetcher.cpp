@@ -335,4 +335,3 @@ void WineComFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 QString WineComFetcher::ConfigWidget::preferredName() const {
   return WineComFetcher::defaultName();
 }
-

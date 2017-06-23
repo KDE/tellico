@@ -121,4 +121,3 @@ Tellico::StringComparison* GroupSortModel::getComparison(Data::EntryGroup* group
   }
   return comp;
 }
-

@@ -57,4 +57,3 @@ QString Importer::progressLabel() const {
          i18n("Loading data...") :
          i18n("Loading %1...", url().fileName());
 }
-

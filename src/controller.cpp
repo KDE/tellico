@@ -656,4 +656,3 @@ bool Controller::canCheckIn() const {
 void Controller::updatedFetchers() {
   m_mainWindow->updateEntrySources();
 }
-

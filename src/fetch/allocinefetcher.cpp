@@ -486,4 +486,3 @@ AllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AbstractAllo
 QString AllocineFetcher::ConfigWidget::preferredName() const {
   return AllocineFetcher::defaultName();
 }
-

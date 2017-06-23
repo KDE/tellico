@@ -57,4 +57,3 @@ void RatingFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::
 QWidget* RatingFieldWidget::widget() {
   return m_rating;
 }
-

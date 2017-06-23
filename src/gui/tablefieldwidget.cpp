@@ -326,4 +326,3 @@ void TableFieldWidget::slotMoveRowDown() {
 void TableFieldWidget::slotClear() {
   clearImpl();
 }
-

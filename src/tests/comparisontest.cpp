@@ -63,4 +63,3 @@ void ComparisonTest::testNumber_data() {
   QTest::newRow("multiple3") << QString("2") << QString("2; 3") << -1;
   QTest::newRow("multiple4") << QString("1; 2") << QString("1; 3") << -1;
 }
-

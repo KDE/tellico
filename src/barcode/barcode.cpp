@@ -880,4 +880,3 @@ MatchMakerResult::MatchMakerResult( bool even, int digit )
   m_even = even;
   m_digit = digit;
 }
-

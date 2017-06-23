@@ -329,4 +329,3 @@ bool EntryGroupModel::hasValidParent(const QModelIndex& index_) const {
   // if it's top-level, it has no parent
   return parentNode && parentNode != m_rootNode;
 }
-

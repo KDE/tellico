@@ -127,4 +127,3 @@ void TheMovieDBFetcherTest::testBabel() {
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Alejandro González Iñárritu")));
   QCOMPARE(set(entry, "producer"), set(QString::fromUtf8("Alejandro González Iñárritu; Steve Golin; Jon Kilik; Ann Ruark; Corinne Golden Weber")));
 }
-
