@@ -92,7 +92,7 @@ void XMLFetcher::stop() {
 void XMLFetcher::slotComplete(KJob* ) {
   Q_ASSERT(m_job);
   if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

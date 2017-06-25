@@ -228,7 +228,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
   if(job->error()) {
-    job->ui()->showErrorMessage();
+    job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

@@ -151,7 +151,7 @@ void BedethequeFetcher::stop() {
 
 void BedethequeFetcher::slotComplete(KJob*) {
   if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
@@ -233,7 +233,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
 // slot called after downloading the exact link
 void BedethequeFetcher::slotLinkComplete(KJob*) {
   if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

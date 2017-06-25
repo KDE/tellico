@@ -151,7 +151,7 @@ void MusicBrainzFetcher::stop() {
 
 void MusicBrainzFetcher::slotComplete(KJob* ) {
   if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

@@ -152,7 +152,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 //  myDebug();
 
   if(job->error()) {
-    job->ui()->showErrorMessage();
+    job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

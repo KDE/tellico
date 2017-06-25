@@ -192,7 +192,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
   }
 
   if(job->error()) {
-    job->ui()->showErrorMessage();
+    job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }

@@ -212,7 +212,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 //  myDebug();
 
   if(job->error()) {
-    job->ui()->showErrorMessage();
+    job->uiDelegate()->showErrorMessage();
     endJob(job);
     return;
   }

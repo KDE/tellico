@@ -171,7 +171,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
 //  myDebug();
 
   if(m_job->error()) {
-    m_job->ui()->showErrorMessage();
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
