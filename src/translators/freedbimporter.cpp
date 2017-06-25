@@ -311,7 +311,7 @@ void FreeDBImporter::readCache() {
   }
 
   KCDDB::Config cfg;
-  cfg.readConfig();
+  cfg.load();
 
   QStringList dirs = cfg.cacheLocations();
   foreach(const QString& dirName, dirs) {
