@@ -49,7 +49,7 @@ QTreeView* CountDelegate::parent() const {
 void CountDelegate::initStyleOption(QStyleOptionViewItem* option_,
                                     const QModelIndex& index_) const {
   if(m_showCount) {
-    QStyleOptionViewItemV4* noTextOption = qstyleoption_cast<QStyleOptionViewItemV4*>(option_);
+    QStyleOptionViewItem* noTextOption = qstyleoption_cast<QStyleOptionViewItem*>(option_);
     QStyledItemDelegate::initStyleOption(noTextOption, index_);
     noTextOption->text.clear();
   } else {
@@ -77,17 +77,17 @@ void CountDelegate::paint(QPainter* painter_,
 
   // Now, we retrieve the correct style option by calling initStyleOption from
   // the superclass.
-  QStyleOptionViewItemV4 option4 = option_;
-  QStyledItemDelegate::initStyleOption(&option4, index_);
-  QString text = option4.text;
+  QStyleOptionViewItem option(option_);
+  QStyledItemDelegate::initStyleOption(&option, index_);
+  QString text = option.text;
 
   QVariant countValue = index_.data(RowCountRole);
   QString countString = QString::fromLatin1(" (%1)").arg(countValue.toInt());
 
   // Now calculate the rectangle for the text
   QStyle* s = parent()->style();
-  const QWidget* widget = option4.widget;
-  const QRect itemRect = s->subElementRect(QStyle::SE_ItemViewItemText, &option4, widget);
+  const QWidget* widget = option.widget;
+  const QRect itemRect = s->subElementRect(QStyle::SE_ItemViewItemText, &option, widget);
 
   // Squeeze the folder text if it is to big and calculate the rectangles
   // where the text and the count will be drawn to
@@ -103,7 +103,7 @@ void CountDelegate::paint(QPainter* painter_,
   QRect countRect = itemRect;
   countRect.setLeft(textRect.right());
 
-  KColorScheme::ColorSet cs = (option4.state & QStyle::State_Selected) ?
+  KColorScheme::ColorSet cs = (option.state & QStyle::State_Selected) ?
                                KColorScheme::Selection : KColorScheme::View;
   QColor countColor = KColorScheme(QPalette::Active, cs).foreground(KColorScheme::LinkText).color();
 

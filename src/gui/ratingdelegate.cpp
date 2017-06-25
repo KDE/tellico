@@ -27,9 +27,8 @@ RatingDelegate::RatingDelegate(QObject* parent /* = 0 */) : QStyledItemDelegate(
 }
 
 void RatingDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const {
-  QStyleOptionViewItemV4 opt(option);
-  QStyle* style = opt.widget ? opt.widget->style() : QApplication::style();
-  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &opt, painter, opt.widget);
+  QStyle* style = option.widget ? option.widget->style() : QApplication::style();
+  style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
 
   const int left = option.rect.left();
   const int top = option.rect.top();
