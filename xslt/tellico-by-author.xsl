@@ -47,7 +47,7 @@
 
 <xsl:template match="tc:tellico">
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'11'"/>
+  <xsl:with-param name="this-version" select="'12'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 

@@ -581,7 +581,7 @@ Tellico::Data::EntryList TellicoXMLExporter::sortEntries(const Data::EntryList& 
 }
 
 bool TellicoXMLExporter::version12Needed() const {
-  // version 12 is only necessary if the new filter rules are not used
+  // version 12 is only necessary if the new filter rules are used
   foreach(FilterPtr filter, collection()->filters()) {
     foreach(FilterRule* rule, *filter) {
       if(rule->function() == FilterRule::FuncBefore ||

@@ -59,9 +59,9 @@
 <!-- The default layout is pretty boring, but catches every field value in
      the entry. The title is in the top H1 element. -->
 <xsl:template match="tc:tellico">
- <!-- This stylesheet is designed for Tellico document syntax version 10 -->
+ <!-- This stylesheet is designed for Tellico document syntax version 12 -->
  <xsl:call-template name="syntax-version">
-  <xsl:with-param name="this-version" select="'11'"/>
+  <xsl:with-param name="this-version" select="'12'"/>
   <xsl:with-param name="data-version" select="@syntaxVersion"/>
  </xsl:call-template>
 
