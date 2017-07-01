@@ -38,6 +38,8 @@ using Tellico::FilterModel;
 
 class FilterModel::Node {
 public:
+  // for nodes that refer to a filter (not an entry), then overload the id variable to indicate whether
+  // the filter node has been populated or not. m_id == -1 means not populated, m_id == 0 means yes populated
   Node(Node* parent_, Data::ID id_=-1) : m_parent(parent_), m_id(id_) {}
   ~Node() { qDeleteAll(m_children); }
 
@@ -45,6 +47,7 @@ public:
   Node* child(int row) const { return m_children.at(row); }
   int row() const { return m_parent ? m_parent->m_children.indexOf(const_cast<Node*>(this)) : 0; }
   Data::ID id() const { return m_id; }
+  void setID(Data::ID id_) { m_id = id_; }
   int childCount() const { return m_children.count(); }
 
   void addChild(Node* child) {  m_children.append(child); }
@@ -76,7 +79,9 @@ int FilterModel::rowCount(const QModelIndex& index_) const {
   Node* node = static_cast<Node*>(index_.internalPointer());
   Q_ASSERT(node);
   // node may not be populated yet, do so unless we're in the middle of invalidating the node
-  if(!m_beingInvalidated && node->childCount() == 0) {
+  // for a filter node, an id == -1 then it means it has not yet been populated (better than checking
+  // if childCount() == 0 since a filter could have zero entry matches)
+  if(!m_beingInvalidated && node->id() == -1) {
     populateFilterNode(node, m_filters.at(index_.row()));
   }
   return node->childCount();
@@ -251,6 +256,9 @@ void FilterModel::invalidate(const QModelIndex& index_) {
 
   Node* filterNode = static_cast<Node*>(index_.internalPointer());
   Q_ASSERT(filterNode);
+  if(!filterNode) {
+    return;
+  }
 
   beginRemoveRows(index_, 0, filterNode->childCount() - 1);
   filterNode->removeAll();
@@ -301,4 +309,6 @@ void FilterModel::populateFilterNode(Node* node_, const FilterPtr filter_) const
     Node* childNode = new Node(node_, entry->id());
     node_->addChild(childNode);
   }
+  // for filter nodes (which don't need ID), an ID value of 0 instead of -1 means it has been populated
+  node_->setID(0);
 }
