@@ -32,6 +32,7 @@
 #include <QDebug>
 // std::clock_t
 #include <ctime>
+#include <unistd.h>
 
 // linux has __GNUC_PREREQ, NetBSD has __GNUC_PREREQ__
 #if defined(__GNUC_PREREQ) && !defined(__GNUC_PREREQ__)
