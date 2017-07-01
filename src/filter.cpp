@@ -257,18 +257,17 @@ bool Filter::matches(Tellico::Data::EntryPtr entry_) const {
   bool match = false;
   foreach(const FilterRule* rule, *this) {
     if(rule->matches(entry_)) {
+      match = true;
       if(m_op == Filter::MatchAny) {
-        return true;
-      } else {
-        match = true;
+        break; // don't need to check other rules
       }
     } else {
+      match = false;
       if(m_op == Filter::MatchAll) {
-        return false;
+        break; // no need to check further
       }
     }
   }
-
   return match;
 }
 
