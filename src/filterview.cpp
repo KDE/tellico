@@ -196,10 +196,10 @@ void FilterView::invalidate(Tellico::Data::EntryList entries_) {
   const int rows = model()->rowCount();
   for(int row = 0; row < rows; ++row) {
     QModelIndex index = sourceModel()->index(row, 0);
-     FilterPtr filter = sourceModel()->filter(index);
-     if(!filter) {
-       continue;
-     }
+    FilterPtr filter = sourceModel()->filter(index);
+    if(!filter) {
+      continue;
+    }
     // two cases: if the filter used to match the entry and no longer does, then check the children indexes
     // if the filter matches now, check the actual match
     foreach(Data::EntryPtr entry, entries_) {

@@ -270,17 +270,21 @@ void FilterModel::invalidate(const QModelIndex& index_) {
 
 bool FilterModel::indexContainsEntry(const QModelIndex& parent_, Data::EntryPtr entry_) const {
   Q_ASSERT(entry_);
-  if(!entry_) {
+  Q_ASSERT(parent_.isValid());
+  if(!entry_ || !parent_.isValid()) {
     return false;
   }
-
-  QModelIndex entryIndex = index(0, 0, parent_);
-  while(entryIndex.isValid()) {
-    Node* node = static_cast<Node*>(entryIndex.internalPointer());
-    if(node && node->id() == entry_->id()) {
+  Node* parentNode = static_cast<Node*>(parent_.internalPointer());
+  Q_ASSERT(parentNode);
+  if(!parentNode) {
+    return false;
+  }
+  for(int i = 0; i < parentNode->childCount(); ++i) {
+    Node* childNode = parentNode->child(i);
+    Q_ASSERT(childNode);
+    if(childNode && childNode->id() == entry_->id()) {
       return true;
     }
-    entryIndex = entryIndex.sibling(entryIndex.row()+1, 0);
   }
   return false;
 }
