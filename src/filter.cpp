@@ -42,7 +42,8 @@ FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Funct
 
 bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
   Q_ASSERT(entry_);
-  if(!entry_) {
+  Q_ASSERT(entry_->collection());
+  if(!entry_ || !entry_->collection()) {
     return false;
   }
   switch (m_function) {
@@ -88,7 +89,9 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
     }
   } else {
     return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0 ||
-           m_pattern.compare(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat), Qt::CaseInsensitive) == 0;
+           (entry_->collection()->hasField(m_fieldName) &&
+            entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone &&
+            m_pattern.compare(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat), Qt::CaseInsensitive) == 0);
   }
 
   return false;
@@ -127,13 +130,16 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
     if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
       return true;
     }
-    value = entry_->formattedField(m_fieldName);
-    if(value.contains(m_pattern, Qt::CaseInsensitive)) {
-      return true;
-    }
-    value2 = removeAccents(value);
-    if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
-      return true;
+    if(entry_->collection()->hasField(m_fieldName) &&
+       entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone) {
+      value = entry_->formattedField(m_fieldName);
+      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+        return true;
+      }
+      value2 = removeAccents(value);
+      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+        return true;
+      }
     }
   }
 
@@ -156,7 +162,9 @@ bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
     }
   } else {
     return pattern.indexIn(entry_->field(m_fieldName)) >= 0 ||
-           pattern.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0;
+           (entry_->collection()->hasField(m_fieldName) &&
+            entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone &&
+            pattern.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0);
   }
 
   return false;

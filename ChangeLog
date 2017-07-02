@@ -1,6 +1,10 @@
+2017-07-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved performance for filtering large collections by avoiding needless field value formatting.
+
 2017-05-29  Robby Stephenson  <robby@periapsis.org>
 
-	* Switch from using libdiscid to libcdio, which includes cdtext.
+	* Switched from using libdiscid to libcdio, which includes cdtext.
 
 2017-05-06  Robby Stephenson  <robby@periapsis.org>
 
