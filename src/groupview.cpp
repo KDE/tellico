@@ -339,8 +339,12 @@ void GroupView::slotFilterGroup() {
       }
     } else {
       Data::EntryGroup* group = model()->data(index, GroupPtrRole).value<Data::EntryGroup*>();
-      if(group && !group->hasEmptyGroupName()) {
-        filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
+      if(group) {
+        if(group->hasEmptyGroupName()) {
+          filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
+        } else {
+          filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
+        }
       }
     }
   }
