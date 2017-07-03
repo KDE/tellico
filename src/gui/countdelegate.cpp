@@ -62,8 +62,8 @@ void CountDelegate::paint(QPainter* painter_,
                           const QModelIndex& index_) const {
   Q_ASSERT(index_.isValid());
 
-  // only paint for first column
-  m_showCount = index_.column() == 0;
+  // only paint for first column and no parent
+  m_showCount = index_.column() == 0 && !index_.parent().isValid();
 
   // First, paint the basic, but without the text. We remove the text
   // in initStyleOption(), which gets called by QStyledItemDelegate::paint().
