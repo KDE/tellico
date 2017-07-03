@@ -1,5 +1,6 @@
 2017-07-02  Robby Stephenson  <robby@periapsis.org>
 
+	* Fixed bug of running out of memory when writing very large XML files (Bug 380832).
 	* Improved performance for filtering large collections by avoiding needless field value formatting.
 
 2017-05-29  Robby Stephenson  <robby@periapsis.org>

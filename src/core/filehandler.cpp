@@ -46,6 +46,10 @@
 #include <QTemporaryFile>
 #include <QSaveFile>
 
+namespace {
+  static const int MAX_TEXT_CHUNK_WRITE_SIZE = 100 * 1024 * 1024;
+}
+
 using Tellico::FileHandler;
 
 FileHandler::FileRef::FileRef(const QUrl& url_, bool quiet_) : m_device(nullptr), m_isValid(false) {
@@ -300,11 +304,14 @@ bool FileHandler::writeTextURL(const QUrl& url_, const QString& text_, bool enco
 }
 
 bool FileHandler::writeTextFile(QSaveFile& file_, const QString& text_, bool encodeUTF8_) {
-  QTextStream t(&file_);
+  QTextStream ts(&file_);
   if(encodeUTF8_) {
-    t.setCodec("UTF-8");
+    ts.setCodec("UTF-8");
   }
-  t << text_;
+  // KDE Bug 380832. If string is longer than MAX_TEXT_CHUNK_WRITE_SIZE characters, split into chunks.
+  for(int i = 0; i < text_.length(); i += MAX_TEXT_CHUNK_WRITE_SIZE) {
+    ts << text_.midRef(i, MAX_TEXT_CHUNK_WRITE_SIZE);
+  }
   file_.flush();
   bool success = file_.commit();
 #ifndef NDEBUG
