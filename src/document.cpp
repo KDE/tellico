@@ -211,7 +211,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   // write all images to disk cache if needed
   // have to do this before executing exporter in case
   // the user changed the imageInFile setting from Yes to No, in which
-  // case saving will over write the old file that has the images in it!
+  // case saving will overwrite the old file that has the images in it!
   if(includeImages) {
     totalSteps = 10;
     item.setTotalSteps(totalSteps);
@@ -246,7 +246,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
     // if successful, doc is no longer modified
     slotSetModified(false);
   } else {
-    myDebug() << "not successful saving to " << url_.url();
+    myDebug() << "Document::saveDocument() - not successful saving to" << url_.url();
   }
   delete exporter;
   return success;
@@ -471,7 +471,7 @@ bool Document::loadAllImagesNow() const {
     return false;
   }
   if(m_loadAllImages) {
-    myDebug() << "all valid images should already be loaded!";
+    myDebug() << "Document::loadAllImagesNow() - all valid images should already be loaded!";
     return false;
   }
   return Import::TellicoImporter::loadAllImages(m_url);
@@ -618,7 +618,7 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
   }
 
   if(m_cancelImageWriting) {
-    myDebug() << "writeAllImage() - cancel image writing";
+    myDebug() << "Document::writeAllImages() - cancel image writing";
   }
 
   m_cancelImageWriting = false;

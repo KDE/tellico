@@ -371,7 +371,6 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
   if(m_includeImages) {
     const Data::Image& img = ImageFactory::imageById(id_);
     if(img.isNull()) {
-      myDebug() << "null image - " << id_;
       return;
     }
     imgElem.setAttribute(QLatin1String("format"), QLatin1String(img.format()));
