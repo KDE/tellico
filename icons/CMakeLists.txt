@@ -33,6 +33,7 @@ set(PIC_FILES
     referencer.png
     script.png
     script.svg
+    sru.png
     stamp.png
     star_off.png
     star_on.png
