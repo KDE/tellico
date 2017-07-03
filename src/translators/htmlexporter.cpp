@@ -200,7 +200,7 @@ bool HTMLExporter::loadXSLTFile() {
   // if parseDOM, that means we want the locations to be the actual location
   // otherwise, we assume it'll be relative
   if(m_parseDOM && m_dataDir.isEmpty()) {
-    m_dataDir = Tellico::dataDir();
+    m_dataDir = Tellico::installationDir();
   } else if(!m_parseDOM) {
     m_dataDir.clear();
   }
@@ -803,7 +803,7 @@ bool HTMLExporter::writeEntryFiles() {
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QString::fromLatin1("stars%1.png").arg(i);
   }
-  QUrl dataDir = QUrl::fromLocalFile(Tellico::dataDir() + QLatin1String("pics/"));
+  QUrl dataDir = QUrl::fromLocalFile(Tellico::installationDir() + QLatin1String("pics/"));
   QUrl target = fileDir();
   target = target.adjusted(QUrl::StripTrailingSlash);
   target.setPath(target.path() + QLatin1Char('/') + (QLatin1String("pics/")));

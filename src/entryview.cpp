@@ -290,7 +290,7 @@ void EntryView::setXSLTFile(const QString& file_) {
     m_handler->addStringParam("imgdir", QFile::encodeName(ImageFactory::tempDir()));
   }
 
-  m_handler->addStringParam("datadir", QFile::encodeName(Tellico::dataDir()));
+  m_handler->addStringParam("datadir", QFile::encodeName(Tellico::installationDir()));
 
   // if we don't have to reload the images, then just show the entry and we're done
   if(reloadImages) {

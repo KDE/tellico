@@ -49,7 +49,7 @@ namespace Tellico {
   /**
    * Return something likely to be the installation directory
    */
-  QString dataDir();
+  QString installationDir();
 
   QString saveLocation(const QString& dir);
 
