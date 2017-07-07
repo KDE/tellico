@@ -47,6 +47,7 @@ Q_OBJECT
 
 public:
   TellicoXMLExporter(Data::CollPtr coll);
+  ~TellicoXMLExporter();
 
   virtual bool exec() Q_DECL_OVERRIDE;
   virtual QString formatString() const Q_DECL_OVERRIDE;

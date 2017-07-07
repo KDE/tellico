@@ -60,6 +60,9 @@ TellicoXMLExporter::TellicoXMLExporter(Tellico::Data::CollPtr coll) : Exporter(c
   setOptions(options() | Export::ExportImages | Export::ExportImageSize); // not included by default
 }
 
+TellicoXMLExporter::~TellicoXMLExporter() {
+}
+
 QString TellicoXMLExporter::formatString() const {
   return i18n("XML");
 }

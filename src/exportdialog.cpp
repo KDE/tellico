@@ -54,6 +54,7 @@
 #include <QVBoxLayout>
 #include <QDialogButtonBox>
 #include <QPushButton>
+#include <QScopedPointer>
 
 using namespace Tellico;
 using Tellico::ExportDialog;
@@ -288,7 +289,7 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 
 // static
 bool ExportDialog::exportCollection(Tellico::Export::Format format_, const QUrl& url_) {
-  Export::Exporter* exp = exporter(format_, Data::Document::self()->collection());
+  QScopedPointer<Export::Exporter> exp(exporter(format_, Data::Document::self()->collection()));
 
   exp->setURL(url_);
   exp->setEntries(Data::Document::self()->collection()->entries());
@@ -303,7 +304,5 @@ bool ExportDialog::exportCollection(Tellico::Export::Format format_, const QUrl&
   }
   exp->setOptions(options | Export::ExportForce);
 
-  bool success = exp->exec();
-  delete exp;
-  return success;
+  return exp->exec();
 }
