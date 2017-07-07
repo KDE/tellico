@@ -125,11 +125,11 @@ public:
    */
   virtual bool importFile(Import::Format format, const QUrl& url, Import::Action action);
   /**
-   * Used by DCOP to export to a file.
+   * Used by DBUS to export to a file.
    */
   virtual bool exportCollection(Export::Format format, const QUrl& url, bool filtered);
   /**
-   * Used by DCOP
+   * Used by DBUS
    */
   virtual void openFile(const QString& file);
   virtual void setFilter(const QString& text);
