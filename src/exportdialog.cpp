@@ -26,7 +26,6 @@
 #include "collection.h"
 #include "filehandler.h"
 #include "controller.h"
-#include "document.h"
 #include "tellico_debug.h"
 
 #include "translators/exporter.h"
@@ -288,11 +287,11 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 }
 
 // static
-bool ExportDialog::exportCollection(Tellico::Export::Format format_, const QUrl& url_) {
-  QScopedPointer<Export::Exporter> exp(exporter(format_, Data::Document::self()->collection()));
+bool ExportDialog::exportCollection(Data::CollPtr coll_, Tellico::Export::Format format_, const QUrl& url_) {
+  QScopedPointer<Export::Exporter> exp(exporter(format_, coll_));
 
   exp->setURL(url_);
-  exp->setEntries(Data::Document::self()->collection()->entries());
+  exp->setEntries(coll_->entries());
 
   KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
   long options = 0;

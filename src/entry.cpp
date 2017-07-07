@@ -304,7 +304,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
       }
     }
   } else if(f->hasFlag(Field::AllowMultiple)) {
-    // use a string split instead of regexp split. since we've already enforced the space after the semi-comma
+    // use a string split instead of regexp split, since we've already enforced the space after the semi-comma
     groups.add(FieldFormat::splitValue(formattedField(f), FieldFormat::StringSplit));
   } else {
     groups.add(formattedField(f));

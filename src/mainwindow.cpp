@@ -2032,24 +2032,23 @@ bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& u
   }
 
   GUI::CursorSaver cs;
-  const Data::CollPtr c = Data::Document::self()->collection();
-  if(!c) {
+  const Data::CollPtr coll = Data::Document::self()->collection();
+  if(!coll) {
     return false;
   }
 
   // only bibliographies can export to bibtex or bibtexml
-  bool isBibtex = (c->type() == Data::Collection::Bibtex);
+  const bool isBibtex = (coll->type() == Data::Collection::Bibtex);
   if(!isBibtex && (format_ == Export::Bibtex || format_ == Export::Bibtexml)) {
     return false;
   }
   // only books and bibliographies can export to alexandria
-  bool isBook = (c->type() == Data::Collection::Book);
+  const bool isBook = (coll->type() == Data::Collection::Book);
   if(!isBibtex && !isBook && format_ == Export::Alexandria) {
     return false;
   }
 
-  bool success = ExportDialog::exportCollection(format_, url_);
-  return success;
+  return ExportDialog::exportCollection(coll, format_, url_);
 }
 
 bool MainWindow::showEntry(Data::ID id) {
