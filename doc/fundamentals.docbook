@@ -126,10 +126,6 @@ A formatted representation of the entry's values is shown in the <interface>Entr
 The default templates also make &URL; fields active, which will open up with the default &kde; file association. When exporting to &HTML;, the current template is used for exporting the individual entry files.
 </para>
 
-<para>
-In addition, when multiple entries are selected, an icon view is shown, using the first <link linkend="image">Image</link> field in the collection. Entries may be selected as in the <interface>Column View</interface>. Right-clicking in the icon view will show a menu that changes the sorting criteria for the entries.
-</para>
-
 </sect2>
 
 <sect2 id="status-bar">
