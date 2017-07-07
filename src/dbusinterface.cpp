@@ -82,8 +82,8 @@ bool ApplicationInterface::importFile(Tellico::Import::Format format, const QUrl
   return m_mainWindow->importFile(format, url, action);
 }
 
-bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const QUrl& url) {
-  return m_mainWindow->exportCollection(format, url);
+bool ApplicationInterface::exportCollection(Tellico::Export::Format format, const QUrl& url, bool filtered) {
+  return m_mainWindow->exportCollection(format, url, filtered);
 }
 
 CollectionInterface::CollectionInterface(QObject* parent_) : QObject(parent_) {

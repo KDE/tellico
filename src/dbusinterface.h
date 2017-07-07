@@ -54,16 +54,16 @@ public Q_SLOTS:
   Q_SCRIPTABLE bool importRIS(const QString& file, const QString& action)
     { return importFile(Import::RIS, QUrl::fromUserInput(file), actionType(action)); }
 
-  Q_SCRIPTABLE bool exportXML(const QString& file)
-    { return exportCollection(Export::TellicoXML, QUrl::fromUserInput(file)); }
-  Q_SCRIPTABLE bool exportZip(const QString& file)
-    { return exportCollection(Export::TellicoZip, QUrl::fromUserInput(file)); }
-  Q_SCRIPTABLE bool exportBibtex(const QString& file)
-    { return exportCollection(Export::Bibtex, QUrl::fromUserInput(file)); }
-  Q_SCRIPTABLE bool exportHTML(const QString& file)
-    { return exportCollection(Export::HTML, QUrl::fromUserInput(file)); }
-  Q_SCRIPTABLE bool exportCSV(const QString& file)
-    { return exportCollection(Export::CSV, QUrl::fromUserInput(file)); }
+  Q_SCRIPTABLE bool exportXML(const QString& file, bool filtered=false)
+    { return exportCollection(Export::TellicoXML, QUrl::fromUserInput(file), filtered); }
+  Q_SCRIPTABLE bool exportZip(const QString& file, bool filtered=false)
+    { return exportCollection(Export::TellicoZip, QUrl::fromUserInput(file), filtered); }
+  Q_SCRIPTABLE bool exportBibtex(const QString& file, bool filtered=false)
+    { return exportCollection(Export::Bibtex, QUrl::fromUserInput(file), filtered); }
+  Q_SCRIPTABLE bool exportHTML(const QString& file, bool filtered=false)
+    { return exportCollection(Export::HTML, QUrl::fromUserInput(file), filtered); }
+  Q_SCRIPTABLE bool exportCSV(const QString& file, bool filtered=false)
+    { return exportCollection(Export::CSV, QUrl::fromUserInput(file), filtered); }
 
   Q_SCRIPTABLE QList<int> selectedEntries() const;
   Q_SCRIPTABLE QList<int> filteredEntries() const;
@@ -74,7 +74,7 @@ public Q_SLOTS:
 
 private:
   virtual bool importFile(Import::Format format, const QUrl& url, Import::Action action);
-  virtual bool exportCollection(Export::Format format, const QUrl& url);
+  virtual bool exportCollection(Export::Format format, const QUrl& url, bool filtered);
 
   Import::Action actionType(const QString& actionName);
 

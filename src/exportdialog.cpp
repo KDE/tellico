@@ -287,11 +287,10 @@ Tellico::Export::Target ExportDialog::exportTarget(Tellico::Export::Format forma
 }
 
 // static
-bool ExportDialog::exportCollection(Data::CollPtr coll_, Tellico::Export::Format format_, const QUrl& url_) {
+bool ExportDialog::exportCollection(Data::CollPtr coll_, Data::EntryList entries_, Export::Format format_, const QUrl& url_) {
   QScopedPointer<Export::Exporter> exp(exporter(format_, coll_));
-
   exp->setURL(url_);
-  exp->setEntries(coll_->entries());
+  exp->setEntries(entries_);
 
   KConfigGroup config(KSharedConfig::openConfig(), "ExportOptions");
   long options = 0;

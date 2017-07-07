@@ -2025,7 +2025,7 @@ bool MainWindow::importFile(Tellico::Import::Format format_, const QUrl& url_, T
   return !failed; // return true means success
 }
 
-bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& url_) {
+bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& url_, bool filtered_) {
   if(!url_.isValid()) {
     myDebug() << "invalid URL:" << url_;
     return false;
@@ -2048,7 +2048,8 @@ bool MainWindow::exportCollection(Tellico::Export::Format format_, const QUrl& u
     return false;
   }
 
-  return ExportDialog::exportCollection(coll, format_, url_);
+  return ExportDialog::exportCollection(coll, filtered_ ? Controller::self()->visibleEntries() : coll->entries(),
+                                        format_, url_);
 }
 
 bool MainWindow::showEntry(Data::ID id) {

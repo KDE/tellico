@@ -127,7 +127,7 @@ public:
   /**
    * Used by DCOP to export to a file.
    */
-  virtual bool exportCollection(Export::Format format, const QUrl& url);
+  virtual bool exportCollection(Export::Format format, const QUrl& url, bool filtered);
   /**
    * Used by DCOP
    */

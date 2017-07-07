@@ -47,11 +47,11 @@ bool importTellico(QString file, QString action)
 bool importBibtex(QString file, QString action)
 bool importMODS(QString file, QString action)
 bool importRIS(QString file, QString action)
-bool exportXML(QString file)
-bool exportZip(QString file)
-bool exportBibtex(QString file)
-bool exportHTML(QString file)
-bool exportCSV(QString file)
+bool exportXML(QString file, bool filtered)
+bool exportZip(QString file, bool filtered)
+bool exportBibtex(QString file, bool filtered)
+bool exportHTML(QString file, bool filtered)
+bool exportCSV(QString file, bool filtered)
 QList&lt;int&gt; selectedEntries()
 QList&lt;int&gt; filteredEntries()
 void openFile(QString file)
@@ -64,7 +64,7 @@ For the four import commands, the first argument is the file to import, and the 
 </para>
 
 <para>
-The current open collection in &appname; may be exported to a file, in either Tellico &XML; format, Tellico ZIP format, Bibtex, &HTML;, or comma-separated values (CSV).
+The current open collection in &appname; may be exported to a file, in either Tellico &XML; format, Tellico ZIP format, Bibtex, &HTML;, or comma-separated values (CSV). The export commands take an optional argument to specify whether the collection should be limited to the current filter or not.
 </para>
 
 <para>A list of the entry IDs currently selected or being filtered is able to facilitate showing or updating entries in the view.</para>
@@ -127,6 +127,12 @@ Here are some examples for scripting &appname; using the &DBus; interface.
 <screen width="40">
 <emphasis>Export a Bibtex file</emphasis>
 <prompt>%</prompt> <userinput>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib</userinput>
+<computeroutput>true</computeroutput>
+</screen>
+
+<screen width="40">
+<emphasis>Export a Bibtex file using the current filter</emphasis>
+<prompt>%</prompt> <userinput>qdbus org.kde.tellico /Tellico org.kde.tellico.exportBibtex ~/documents/reference.bib true</userinput>
 <computeroutput>true</computeroutput>
 </screen>
 

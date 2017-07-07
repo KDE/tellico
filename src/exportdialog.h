@@ -53,7 +53,7 @@ public:
   bool exportURL(const QUrl& url=QUrl()) const;
 
   static Export::Target exportTarget(Export::Format format);
-  static bool exportCollection(Data::CollPtr coll, Export::Format format, const QUrl& url);
+  static bool exportCollection(Data::CollPtr coll, Data::EntryList entries, Export::Format format, const QUrl& url);
 
 private Q_SLOTS:
   void slotSaveOptions();
