@@ -439,6 +439,15 @@ void AmazonFetcher::slotComplete(KJob*) {
       stop();
       return;
     }
+    // check for ItemSearchErrorResponse
+    if(dom.documentElement().tagName() == QLatin1String("ItemSearchErrorResponse")) {
+      QDomNode n = dom.documentElement().namedItem(QLatin1String("Error")).namedItem(QLatin1String("Message"));
+      if(!n.isNull()) {
+        message(n.toElement().text(), MessageHandler::Error);
+        stop();
+        return;
+      }
+    }
     // find TotalResults element
     // it's in the first level under the root element
     //ItemSearchResponse/Items/TotalResults

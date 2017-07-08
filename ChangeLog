@@ -1,6 +1,10 @@
+2017-07-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added message dialog for Amazon Associate warning (Bug 364784).
+
 2017-07-06  Robby Stephenson  <robby@periapsis.org>
 
-	* Add DBUS option for filtering exported entries (Bug 382035).
+	* Added DBUS option for filtering exported entries (Bug 382035).
 
 2017-07-02  Robby Stephenson  <robby@periapsis.org>
 
