@@ -222,13 +222,13 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
     m_cancelImageWriting = false;
     writeAllImages(imageLocation == Config::ImagesInAppDir ? ImageFactory::DataDir : ImageFactory::LocalDir, url_);
   }
-  Export::Exporter* exporter;
+  QScopedPointer<Export::Exporter> exporter;
   if(m_fileFormat == Import::TellicoImporter::XML) {
-    exporter = new Export::TellicoXMLExporter(m_coll);
-    static_cast<Export::TellicoXMLExporter*>(exporter)->setIncludeImages(includeImages);
+    exporter.reset(new Export::TellicoXMLExporter(m_coll));
+    static_cast<Export::TellicoXMLExporter*>(exporter.data())->setIncludeImages(includeImages);
   } else {
-    exporter = new Export::TellicoZipExporter(m_coll);
-    static_cast<Export::TellicoZipExporter*>(exporter)->setIncludeImages(includeImages);
+    exporter.reset(new Export::TellicoZipExporter(m_coll));
+    static_cast<Export::TellicoZipExporter*>(exporter.data())->setIncludeImages(includeImages);
   }
   item.setProgress(int(0.8*totalSteps));
   exporter->setEntries(m_coll->entries());
@@ -238,7 +238,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   // only write the image sizes if they're known already
   opt &= ~Export::ExportImageSize;
   exporter->setOptions(opt);
-  bool success = exporter->exec();
+  const bool success = exporter->exec();
   item.setProgress(int(0.9*totalSteps));
 
   if(success) {
@@ -248,7 +248,6 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   } else {
     myDebug() << "Document::saveDocument() - not successful saving to" << url_.url();
   }
-  delete exporter;
   return success;
 }
 
