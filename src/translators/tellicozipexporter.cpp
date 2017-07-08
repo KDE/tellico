@@ -145,8 +145,7 @@ bool TellicoZipExporter::exec() {
     return true;
   }
 
-  bool success = FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
-  return success;
+  return FileHandler::writeDataURL(url(), data, options() & Export::ExportForce);
 }
 
 void TellicoZipExporter::slotCancel() {
