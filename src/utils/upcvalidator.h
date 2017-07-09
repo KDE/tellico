@@ -44,7 +44,7 @@ public:
   void setCheckISBN(bool b) { m_checkISBN = b; }
 
 Q_SIGNALS:
-  void signalISBN();
+  void signalISBN() const;
 
 private:
   bool m_checkISBN;

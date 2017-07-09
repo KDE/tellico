@@ -72,7 +72,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
     }
     return 0;
   }
-  return s.left(idx).toUInt(ok);
+  return s.leftRef(idx).toUInt(ok);
 }
 
 QString Tellico::i18nReplace(QString text) {

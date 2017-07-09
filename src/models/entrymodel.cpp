@@ -47,7 +47,7 @@ EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
 }
 
 EntryModel::~EntryModel() {
-  qDeleteAll(m_defaultIcons.values());
+  qDeleteAll(m_defaultIcons);
 }
 
 int EntryModel::rowCount(const QModelIndex& index_) const {

@@ -60,9 +60,7 @@ QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
     QValidator::State s = val.validate(input_, pos_);
     if(s == QValidator::Acceptable) {
       m_isbn = true;
-      // bad hack
-      UPCValidator* that = const_cast<UPCValidator*>(this);
-      that->signalISBN();
+      emit signalISBN();
     }
     return s;
   }
@@ -92,9 +90,7 @@ void UPCValidator::fixup(QString& input_) const {
     int p = 0;
     int state = val.validate(s, p);
     if(state == QValidator::Acceptable) {
-      // bad hack
-      UPCValidator* that = const_cast<UPCValidator*>(this);
-      that->signalISBN();
+      emit signalISBN();
       input_ = s;
     }
   }
