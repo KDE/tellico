@@ -46,7 +46,8 @@ void OMDBFetcherTest::initTestCase() {
 }
 
 void OMDBFetcherTest::testTitle() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  // all the private API test config is in amazonfetchertest.config right now
+  KConfig config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("OMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

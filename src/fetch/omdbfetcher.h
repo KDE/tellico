@@ -32,6 +32,8 @@
 #include <QPointer>
 #include <QDate>
 
+class QLineEdit;
+
 class KJob;
 namespace KIO {
   class StoredTransferJob;
@@ -84,6 +86,8 @@ public:
     explicit ConfigWidget(QWidget* parent_, const OMDBFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+  private:
+    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -100,6 +104,7 @@ private:
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
 
   bool m_started;
+  QString m_apiKey;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

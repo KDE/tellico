@@ -101,6 +101,8 @@ void WineComFetcher::continueSearch() {
 void WineComFetcher::doSearch() {
   if(m_apiKey.isEmpty()) {
     myDebug() << "No API key";
+    // TODO: all message for missing key
+    //message(i18n(""), MessageHandler::Error);
     stop();
     return;
   }

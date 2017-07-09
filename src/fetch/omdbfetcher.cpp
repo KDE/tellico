@@ -39,6 +39,7 @@
 
 #include <QUrl>
 #include <QLabel>
+#include <QLineEdit>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
@@ -76,7 +77,11 @@ bool OMDBFetcher::canFetch(int type) const {
   return type == Data::Collection::Video;
 }
 
-void OMDBFetcher::readConfigHook(const KConfigGroup&) {
+void OMDBFetcher::readConfigHook(const KConfigGroup& config_) {
+  QString k = config_.readEntry("API Key", QString());
+  if(!k.isEmpty()) {
+    m_apiKey = k;
+  }
 }
 
 void OMDBFetcher::saveConfigHook(KConfigGroup&) {
@@ -89,17 +94,22 @@ void OMDBFetcher::search() {
 void OMDBFetcher::continueSearch() {
   m_started = true;
 
-  QUrl u(QString::fromLatin1(OMDB_API_URL));
+  if(m_apiKey.isEmpty()) {
+    myDebug() << "No API key";
+    // TODO: all message for missing key
+    //message(i18n(""), MessageHandler::Error);
+    stop();
+    return;
+  }
 
+  QUrl u(QString::fromLatin1(OMDB_API_URL));
+  QUrlQuery q;
+  q.addQueryItem(QLatin1String("apikey"), m_apiKey);
   switch(request().key) {
     case Title:
-      {
-        QUrlQuery q;
-        q.addQueryItem(QLatin1String("type"), QLatin1String("movie"));
-        q.addQueryItem(QLatin1String("r"), QLatin1String("json"));
-        q.addQueryItem(QLatin1String("s"), request().value);
-        u.setQuery(q);
-      }
+      q.addQueryItem(QLatin1String("type"), QLatin1String("movie"));
+      q.addQueryItem(QLatin1String("r"), QLatin1String("json"));
+      q.addQueryItem(QLatin1String("s"), request().value);
       break;
 
     default:
@@ -107,6 +117,7 @@ void OMDBFetcher::continueSearch() {
       stop();
       return;
   }
+  u.setQuery(q);
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -140,6 +151,7 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
     q.addQueryItem(QLatin1String("type"), QLatin1String("movie"));
     q.addQueryItem(QLatin1String("r"), QLatin1String("json"));
     q.addQueryItem(QLatin1String("i"), id);
+    q.addQueryItem(QLatin1String("apikey"), m_apiKey);
     u.setQuery(q);
     QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
@@ -237,6 +249,13 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap result = doc.object().toVariantMap();
+
+  const bool response = result.value(QLatin1String("Response")).toBool();
+  if(!response) {
+    message(result.value(QLatin1String("Error")).toString(), MessageHandler::Error);
+    stop();
+    return;
+  }
 
   QVariantList resultList = result.value(QLatin1String("Search")).toList();
   if(resultList.isEmpty()) {
@@ -341,9 +360,37 @@ Tellico::StringHash OMDBFetcher::allOptionalFields() {
 
 OMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OMDBFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+  QLabel* al = new QLabel(i18n("Registration is required for accessing the %1 data source. "
+                               "If you agree to the terms and conditions, <a href='%2'>sign "
+                               "up for an account</a>, and enter your information below.",
+                                preferredName(),
+                                QLatin1String("http://www.omdbapi.com")),
+                          optionsWidget());
+  al->setOpenExternalLinks(true);
+  al->setWordWrap(true);
+  ++row;
+  l->addWidget(al, row, 0, 1, 2);
+  // richtext gets weird with size
+  al->setMinimumWidth(al->sizeHint().width());
+
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  l->addWidget(m_apiKeyEdit, row, 1);
+  label->setBuddy(m_apiKeyEdit);
+
+  l->setRowStretch(++row, 10);
+
+  if(fetcher_) {
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+  }
 
   // now add additional fields widget
   addFieldsWidget(OMDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
