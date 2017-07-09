@@ -89,7 +89,6 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
     for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
       if(*server == m_preset) {
         KConfigGroup cfg(&serverConfig, *server);
-        const QString name = cfg.readEntry("Name");
         m_host = cfg.readEntry("Host");
         m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
         m_dbname = cfg.readEntry("Database");
@@ -157,7 +156,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
       for(QStringList::ConstIterator server = servers.begin(); server != servers.end(); ++server) {
         if(*server == preset) {
           KConfigGroup cfg(&serverConfig, *server);
-          const QString name = cfg.readEntry("Name");
+//          const QString name = cfg.readEntry("Name");
           m_host = cfg.readEntry("Host");
           m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
           m_dbname = cfg.readEntry("Database");
@@ -773,8 +772,8 @@ void Z3950Fetcher::ConfigWidget::slotPresetChanged() {
 }
 
 void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
-  QString lang = QLocale().uiLanguages().first();
-  QString lang2A = lang.contains(QLatin1Char('-')) ? lang.section(QLatin1Char('-'), 0, 0) : lang;
+  const QString lang = QLocale().uiLanguages().constFirst();
+  const QString lang2A = lang.contains(QLatin1Char('-')) ? lang.section(QLatin1Char('-'), 0, 0) : lang;
 
   QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {

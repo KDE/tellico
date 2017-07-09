@@ -911,8 +911,8 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
   br2Rx.setMinimal(true);
   QRegExp divRx(QLatin1String("<div\\s[^>]*class\\s*=\\s*\"(?:info|txt-block)\"[^>]*>(.*)</div"), Qt::CaseInsensitive);
   divRx.setMinimal(true);
-  QString name = QLatin1String("/name/");
 
+  const QString name = QLatin1String("/name/");
   StringSet people;
   for(int pos = str_.indexOf(divRx); pos > -1; pos = str_.indexOf(divRx, pos+divRx.matchedLength())) {
     const QString infoBlock = divRx.cap(1);
@@ -982,7 +982,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
         pos = castText.indexOf(castEnd, 0, Qt::CaseInsensitive);
         if(pos > 9) {
           // back up 9 places
-          if(castText.mid(pos-9, 9).startsWith(data.episodes)) {
+          if(castText.midRef(pos-9, 9).startsWith(data.episodes)) {
             // find next cast list
             pos = castText.indexOf(castEnd, pos+6, Qt::CaseInsensitive);
           }
@@ -995,7 +995,6 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
     return;
   }
 
-  const QString name = QLatin1String("/name/");
   QRegExp tdRx(QLatin1String("<td[^>]*>(.*)</td>"), Qt::CaseInsensitive);
   tdRx.setMinimal(true);
 

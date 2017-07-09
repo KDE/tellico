@@ -70,13 +70,10 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
   m_coll = new Data::BookCollection(true);
 
-  const QString title = QLatin1String("title");
   const QString author = QLatin1String("author");
   const QString year = QLatin1String("pub_year");
   const QString binding = QLatin1String("binding");
   const QString isbn = QLatin1String("isbn");
-  const QString pub = QLatin1String("publisher");
-  const QString rating = QLatin1String("rating");
   const QString cover = QLatin1String("cover");
   const QString comments = QLatin1String("comments");
 

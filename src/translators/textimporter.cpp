@@ -31,7 +31,7 @@ namespace {
   QString& cleanXml(QString s) {
     // remove C0 Control Characters, since we assume we're importing a file
     // with contents that will be represented in XML later...
-    static const QRegExp rx(QLatin1String("[\x0000-\x00FF]"));
+    static const QRegExp rx(QString::fromUtf8("[\x0000-\x00FF]"));
     return s.remove(rx);
   }
 }

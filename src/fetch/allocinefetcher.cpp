@@ -121,7 +121,7 @@ void AbstractAllocineFetcher::search() {
   params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
   params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
 
-  const QString sed = QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyyMMdd"));
+  const QString sed = QDateTime::currentDateTimeUtc().toString(QLatin1String("yyyyMMdd"));
   params.append(qMakePair(QString::fromLatin1("sed"), sed));
 
   const QByteArray sig = calculateSignature(params);
@@ -174,7 +174,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
   params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
 
-  const QString sed = QDateTime::currentDateTime().toUTC().toString(QLatin1String("yyyyMMdd"));
+  const QString sed = QDateTime::currentDateTimeUtc().toString(QLatin1String("yyyyMMdd"));
   params.append(qMakePair(QString::fromLatin1("sed"), sed));
 
   const QByteArray sig = calculateSignature(params);

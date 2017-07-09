@@ -394,8 +394,8 @@ void EntryView::resetColors() {
   // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
   // work. So force a reload with a temp file, then catch the completed signal and repaint
   QString s = QString::fromLatin1("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
-                             .arg(dir + QLatin1String("gradient_bg.png"))
-                             .arg(dir + QLatin1String("gradient_header.png"));
+                             .arg(dir + QLatin1String("gradient_bg.png"),
+                                  dir + QLatin1String("gradient_header.png"));
 
   delete m_tempFile;
   m_tempFile = new QTemporaryFile();

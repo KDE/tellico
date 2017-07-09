@@ -282,7 +282,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     QString binding = mapValue(resultMap, "physical_format");
     if(binding.toLower() == QLatin1String("hardcover")) {
       binding = QLatin1String("Hardback");
-    } else if(binding.toLower().contains(QLatin1String("paperback"))) {
+    } else if(binding.contains(QLatin1String("paperback"), Qt::CaseInsensitive)) {
       binding = QLatin1String("Paperback");
     }
     if(!binding.isEmpty()) {

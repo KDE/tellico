@@ -203,9 +203,9 @@ void FreeDBImporter::readCDROM() {
   if(r == KCDDB::MultipleRecordFound || responseList.count() > 1) {
     QStringList list;
     foreach(const KCDDB::CDInfo& info, responseList) {
-      list.append(QString::fromLatin1("%1, %2, %3").arg(info.get(KCDDB::Artist).toString())
-                                                   .arg(info.get(KCDDB::Title).toString())
-                                                   .arg(info.get(KCDDB::Genre).toString()));
+      list.append(QString::fromLatin1("%1, %2, %3").arg(info.get(KCDDB::Artist).toString(),
+                                                        info.get(KCDDB::Title).toString(),
+                                                        info.get(KCDDB::Genre).toString()));
     }
 
     // switch back to pointer cursor
@@ -339,6 +339,8 @@ void FreeDBImporter::readCache() {
   const QString artist   = QLatin1String("artist");
   const QString year     = QLatin1String("year");
   const QString genre    = QLatin1String("genre");
+  const QString medium   = QLatin1String("medium");
+  const QString keyword  = QLatin1String("keyword");
   const QString track    = QLatin1String("track");
   const QString comments = QLatin1String("comments");
   int numFiles = files.count();
@@ -387,17 +389,17 @@ void FreeDBImporter::readCache() {
     // create a new entry and set fields
     Data::EntryPtr entry(new Data::Entry(m_coll));
     // obviously a CD
-    entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
-    entry->setField(title,  info.get(KCDDB::Title).toString());
+    entry->setField(medium, i18n("Compact Disc"));
+    entry->setField(title, info.get(KCDDB::Title).toString());
     entry->setField(artist, info.get(KCDDB::Artist).toString());
-    entry->setField(genre,  info.get(KCDDB::Genre).toString());
+    entry->setField(genre, info.get(KCDDB::Genre).toString());
     if(!info.get(KCDDB::Year).isNull()) {
-      entry->setField(QLatin1String("year"), info.get(KCDDB::Year).toString());
+      entry->setField(year, info.get(KCDDB::Year).toString());
     }
-    entry->setField(QLatin1String("keyword"), info.get(KCDDB::Category).toString());
+    entry->setField(keyword, info.get(KCDDB::Category).toString());
     QString extd = info.get(QLatin1String("EXTD")).toString();
     extd.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
-    entry->setField(QLatin1String("comments"), extd);
+    entry->setField(comments, extd);
 
     // step through trackList
     QStringList trackList;

@@ -115,7 +115,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
   }
   QStringList words = title_.split(QLatin1Char(' '), QString::SkipEmptyParts);
   foreach(const QString& word, words) {
-    key += word.left(1).toLower();
+    key += word.at(0).toLower();
   }
   key += year_;
   // bibtex key may only contain [0-9a-zA-Z-]
