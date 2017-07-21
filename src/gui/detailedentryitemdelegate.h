@@ -30,6 +30,8 @@
 namespace Tellico {
 
 class DetailedEntryItemDelegate : public QStyledItemDelegate {
+Q_OBJECT
+
 public:
   DetailedEntryItemDelegate(QObject* parent) : QStyledItemDelegate(parent) {}
 
