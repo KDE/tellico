@@ -113,8 +113,6 @@ void KinoFetcher::stop() {
 }
 
 void KinoFetcher::slotComplete(KJob*) {
-//  myDebug();
-
   if(m_job->error()) {
     m_job->uiDelegate()->showErrorMessage();
     stop();
@@ -213,7 +211,6 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
     myWarning() << "no entry in hash";
     return Data::EntryPtr();
   }
-
 
   Data::EntryPtr entry = m_entries[uid_];
   // if the url is not in the hash, the entry has already been fully populated
