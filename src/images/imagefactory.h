@@ -31,7 +31,6 @@
 #include <QObject>
 #include <QColor>
 #include <QHash>
-#include <QCache>
 #include <QPixmap>
 
 class KZip;

@@ -35,6 +35,7 @@
 
 #include <KColorUtils>
 
+#include <QCache>
 #include <QFileInfo>
 #include <QDir>
 #ifdef HAVE_QIMAGEBLITZ
