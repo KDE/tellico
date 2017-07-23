@@ -30,7 +30,6 @@
 #include "filter.h"
 #include "filterdialog.h"
 #include "loandialog.h"
-#include "tellico_debug.h"
 #include "commands/collectioncommand.h"
 #include "commands/fieldcommand.h"
 #include "commands/filtercommand.h"
@@ -56,6 +55,9 @@ Kernel* Kernel::s_self = nullptr;
 
 Kernel::Kernel(Tellico::MainWindow* parent) : m_widget(parent)
     , m_commandHistory(new QUndoStack(parent)) {
+}
+
+Kernel::~Kernel() {
 }
 
 QUrl Kernel::URL() const {

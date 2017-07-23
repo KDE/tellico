@@ -94,6 +94,9 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   connect(m_newButton, SIGNAL(clicked()), SLOT(slotHandleNew()));
 }
 
+EntryEditDialog::~EntryEditDialog() {
+}
+
 void EntryEditDialog::reject() {
   slotClose();
 }

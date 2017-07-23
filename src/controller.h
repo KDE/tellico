@@ -153,6 +153,7 @@ Q_SIGNALS:
 private:
   static Controller* s_self;
   Controller(MainWindow* parent);
+  ~Controller();
 
   void blockAllSignals(bool block) const;
   bool canCheckIn() const;

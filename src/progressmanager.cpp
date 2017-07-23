@@ -90,6 +90,9 @@ void ProgressItem::cancel() {
 ProgressManager::ProgressManager() : QObject() {
 }
 
+ProgressManager::~ProgressManager() {
+}
+
 void ProgressManager::setProgress(QObject* owner_, qulonglong steps_) {
   Q_ASSERT(owner_);
   if(!owner_ || !m_items.contains(owner_)) {
@@ -129,11 +132,9 @@ void ProgressManager::setDone(ProgressItem* item_) {
 }
 
 void ProgressManager::slotItemDone(ProgressItem* item_) {
-// cancel ends up removing it from the map, so make a copy
-  ProgressMap map = m_items;
-  for(ProgressMap::Iterator it = map.begin(); it != map.end(); ++it) {
-    if(static_cast<ProgressItem*>(it.value()) == item_) {
-      m_items.remove(it.key());
+  for(ProgressMap::Iterator it = m_items.begin(); it != m_items.end(); ++it) {
+    if(it.value() == item_) {
+      m_items.erase(it);
       break;
     }
   }
@@ -183,9 +184,7 @@ void ProgressManager::slotUpdateTotalProgress() {
 }
 
 void ProgressManager::slotCancelAll() {
-// cancel ends up removing it from the map, so make a copy
-  ProgressMap map = m_items;
-  for(ProgressMap::ConstIterator it = map.constBegin(), end = map.constEnd(); it != end; ++it) {
+  for(ProgressMap::ConstIterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
     if(it.value()) {
       it.value()->cancel();
       setDone(it.value());

@@ -92,7 +92,7 @@ class ProgressManager : public QObject {
 Q_OBJECT
 
 public:
-  virtual ~ProgressManager() {}
+  virtual ~ProgressManager();
 
   static ProgressManager* self() { if(!s_self) s_self = new ProgressManager(); return s_self; }
 

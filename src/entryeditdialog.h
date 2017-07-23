@@ -47,6 +47,7 @@ friend class GUI::FieldWidget;
 
 public:
   EntryEditDialog(QWidget* parent);
+  ~EntryEditDialog();
 
   /**
    * Checks to see if any data needs to be saved. Returns @p true if it's ok to continue with

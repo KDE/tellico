@@ -30,9 +30,6 @@
 #include <KLocalizedString>
 #include <KStandardGuiItem>
 
-#include <QStyle>
-#include <QTimer>
-#include <QToolTip>
 #include <QLabel>
 #include <QPushButton>
 #include <QApplication>

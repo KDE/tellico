@@ -178,7 +178,8 @@ QString CollectionInterface::entryBibtexKey(int id_) const {
   if(!entry) {
     return QString();
   }
-  return BibtexHandler::bibtexKeys(Data::EntryList() << entry).first();
+  const QStringList keys = BibtexHandler::bibtexKeys(Data::EntryList() << entry);
+  return keys.isEmpty() ? QString() : keys.first();
 }
 
 bool CollectionInterface::setEntryValue(int id_, const QString& fieldName_, const QString& value_) {

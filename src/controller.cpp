@@ -62,6 +62,9 @@ Controller::Controller(Tellico::MainWindow* parent_)
     : QObject(parent_), m_mainWindow(parent_), m_working(false) {
 }
 
+Controller::~Controller() {
+}
+
 void Controller::addObserver(Tellico::Observer* obs) {
   m_observers.append(obs);
 }

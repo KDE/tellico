@@ -134,6 +134,7 @@ private:
   Kernel(MainWindow* parent);
   Kernel(const Kernel&);
   Kernel& operator=(const Kernel&);
+  ~Kernel();
 
   void doCommand(QUndoCommand* command);
 
