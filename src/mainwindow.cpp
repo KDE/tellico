@@ -891,6 +891,10 @@ void MainWindow::saveOptions() {
 }
 
 void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
+  if(!coll_) {
+    myDebug() << "Bad, no collection in MainWindow::readCollectionOptions()";
+    return;
+  }
   const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup group(KSharedConfig::openConfig(), configGroup);
 

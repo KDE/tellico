@@ -43,6 +43,7 @@
 #include "collectionfactory.h"
 #include "utils/stringset.h"
 #include "utils/cursorsaver.h"
+#include "tellico_debug.h"
 
 #include <KMessageBox>
 #include <KLocalizedString>
@@ -81,7 +82,9 @@ QStringList Kernel::valuesByFieldName(const QString& name_) const {
 }
 
 int Kernel::collectionType() const {
-  return Data::Document::self()->collection()->type();
+  return Data::Document::self()->collection() ?
+         Data::Document::self()->collection()->type() :
+         Data::Collection::Base;
 }
 
 QString Kernel::collectionTypeName() const {
