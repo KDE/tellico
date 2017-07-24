@@ -43,7 +43,6 @@
 #include "collectionfactory.h"
 #include "utils/stringset.h"
 #include "utils/cursorsaver.h"
-#include "tellico_debug.h"
 
 #include <KMessageBox>
 #include <KLocalizedString>

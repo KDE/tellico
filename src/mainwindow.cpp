@@ -207,6 +207,7 @@ MainWindow::~MainWindow() {
 
 void MainWindow::slotInit() {
   MARK;
+  // if the edit dialog exists, we know we've already called this function
   if(m_editDialog) {
     return;
   }
