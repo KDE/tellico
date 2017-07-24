@@ -184,7 +184,7 @@ void ProgressManager::slotUpdateTotalProgress() {
 }
 
 void ProgressManager::slotCancelAll() {
-  for(ProgressMap::ConstIterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
+  for(ProgressMap::Iterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
     if(it.value()) {
       it.value()->cancel();
       setDone(it.value());
