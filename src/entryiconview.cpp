@@ -49,7 +49,7 @@ namespace {
 
 using Tellico::EntryIconView;
 
-EntryIconView::EntryIconView(QAbstractItemModel* model_, QWidget* parent_)
+EntryIconView::EntryIconView(QWidget* parent_)
     : QListView(parent_), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE) {
   setViewMode(QListView::IconMode);
   setMovement(QListView::Static);
@@ -59,12 +59,6 @@ EntryIconView::EntryIconView(QAbstractItemModel* model_, QWidget* parent_)
   setResizeMode(QListView::Adjust);
   setWordWrap(true);
   setSpacing(ENTRY_ICON_SIZE_PAD);
-
-  Q_ASSERT(::qobject_cast<EntryModel*>(model_));
-  EntrySortModel* sortModel = new EntrySortModel(this);
-  sortModel->setSortRole(EntryPtrRole);
-  sortModel->setSourceModel(model_);
-  setModel(sortModel);
 
   connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
 

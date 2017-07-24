@@ -758,6 +758,7 @@ void MainWindow::initView() {
           m_detailedView, SLOT(slotRefreshImages()));
 
   m_iconView = m_viewStack->iconView();
+  // use the same model in both views so they are sync'ed
   m_iconView->setModel(m_detailedView->model());
   Controller::self()->addObserver(m_iconView);
   m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "

@@ -46,7 +46,7 @@ class EntryIconView : public QListView, public Observer {
 Q_OBJECT
 
 public:
-  EntryIconView(QAbstractItemModel* model, QWidget* parent);
+  EntryIconView(QWidget* parent);
   ~EntryIconView();
 
   int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
