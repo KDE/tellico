@@ -307,7 +307,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
   if(id_.isEmpty() || !imgDir_) {
     return false;
   }
-// myLog() << "looking in" << imgDir_->path();
+//  myLog() << "dir =" << imgDir_->path() << "; id =" << id_;
   bool exists = imgDir_->hasImage(id_);
   // only write if it doesn't exist
   bool success = (!force_ && exists);
@@ -413,7 +413,7 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   } else if(fallbackImgDir && fallbackImgDir->hasImage(id_)) {
     const Data::Image& img2 = factory->addCachedImageImpl(id_, fallbackLoc);
     if(!img2.isNull()) {
-//      myLog() << "found image in fallback location" << fallbackImgDir->path();
+//      myLog() << "found image in fallback location" << fallbackImgDir->path() << id_;
       // the img is in the other location
       factory->emitImageMismatch();
       return img2;

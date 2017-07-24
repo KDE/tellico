@@ -450,6 +450,7 @@ private Q_SLOTS:
   void slotFilterLabelActivated();
   void slotClearFilter();
   void slotRenameCollection();
+  void slotImageLocationMismatch();
   void slotImageLocationChanged();
   /**
    * Toggle full screen mode

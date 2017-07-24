@@ -221,7 +221,7 @@ void MainWindow::slotInit() {
   initConnections();
   ImageFactory::init();
   connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
-          SLOT(slotImageLocationChanged()));
+          SLOT(slotImageLocationMismatch()));
   // Init DBUS
   NewStuff::Manager::self();
 }
@@ -2168,6 +2168,11 @@ void MainWindow::slotClearFilter() {
 
 void MainWindow::slotRenameCollection() {
   Kernel::self()->renameCollection();
+}
+
+void MainWindow::slotImageLocationMismatch() {
+  // TODO: having a single image location mismatch should not be reason to completely save the whole document
+  QTimer::singleShot(0, this, SLOT(slotImageLocationChanged()));
 }
 
 void MainWindow::slotImageLocationChanged() {
