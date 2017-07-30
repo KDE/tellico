@@ -133,8 +133,8 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       // image field is first in the collection
       if(index_.column() == 0 || field->name() == QLatin1String("title")) {
         // return entry image in this case
-        QString fieldName = imageField(entry->collection());
-        if(fieldName.isEmpty()) {
+        const QString fieldName = imageField(entry->collection());
+        if(fieldName.isEmpty() || !m_imagesAreAvailable) {
           return defaultIcon(entry->collection());
         }
         const QString id = entry->field(fieldName);
