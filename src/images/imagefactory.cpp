@@ -149,7 +149,7 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
     img->setID(url_.url());
   }
 
-  if(hasImage(img->id())) {
+  if(hasImageInMemory(img->id())) {
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;
@@ -176,7 +176,7 @@ QString ImageFactory::addImage(const QPixmap& pix_, const QString& format_) {
 
 const Tellico::Data::Image& ImageFactory::addImageImpl(const QImage& image_, const QString& format_) {
   Data::Image* img = new Data::Image(image_, format_);
-  if(hasImage(img->id())) {
+  if(hasImageInMemory(img->id())) {
     const Data::Image& img2 = imageById(img->id());
     if(!img2.isNull()) {
       delete img;
@@ -322,7 +322,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
 }
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
-  Q_ASSERT(factory);
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(id_.isEmpty() || !factory) {
     return Data::Image::null;
   }
@@ -485,7 +485,7 @@ bool ImageFactory::hasImageInfo(const QString& id_) {
 
 bool ImageFactory::validImage(const QString& id_) {
   // don't try s_imageInfoMap[id_] cause it inserts an empty image info
-  return s_imageInfoMap.contains(id_) || factory->hasImage(id_) || !imageById(id_).isNull();
+  return s_imageInfoMap.contains(id_) || factory->hasImageInMemory(id_) || !imageById(id_).isNull();
 }
 
 QPixmap ImageFactory::pixmap(const QString& id_, int width_, int height_) {
@@ -618,7 +618,7 @@ Tellico::StringSet ImageFactory::imagesNotInCache() {
   return set;
 }
 
-bool ImageFactory::hasImage(const QString& id_) const {
+bool ImageFactory::hasImageInMemory(const QString& id_) const {
   return d->imageCache.contains(id_) || d->imageDict.contains(id_);
 }
 

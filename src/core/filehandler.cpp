@@ -214,7 +214,7 @@ Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString
   return img;
 }
 
-// really, this should be decoupled from the writeBackupFile() function
+// TODO: really, this should be decoupled from the writeBackupFile() function
 // but every other function that calls it would need to be updated
 bool FileHandler::queryExists(const QUrl& url_) {
   if(url_.isEmpty() || !QFile::exists(url_.toLocalFile())) {

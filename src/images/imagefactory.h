@@ -200,7 +200,7 @@ private:
   ImageFactory();
   ~ImageFactory();
 
-  bool hasImage(const QString& id) const;
+  bool hasImageInMemory(const QString& id) const;
   void releaseImages();
   void emitImageMismatch();
 
