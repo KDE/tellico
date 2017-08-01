@@ -28,7 +28,15 @@
 using namespace Tellico;
 using Tellico::DetailedEntryItemDelegate;
 
+DetailedEntryItemDelegate::DetailedEntryItemDelegate(QObject* parent_) : QStyledItemDelegate(parent_)
+    , m_isLoading(false) {
+}
+
 void DetailedEntryItemDelegate::initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const {
+  if(m_isLoading) {
+    return;
+  }
+  m_isLoading = true;
   QStyledItemDelegate::initStyleOption(option, index);
 
   const int state = index.data(SaveStateRole).toInt();
@@ -36,4 +44,5 @@ void DetailedEntryItemDelegate::initStyleOption(QStyleOptionViewItem* option, co
     option->font.setBold(true);
     option->font.setItalic(true);
   }
+  m_isLoading = false;
 }
