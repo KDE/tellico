@@ -41,7 +41,7 @@ namespace {
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
-    m_imagesAreAvailable(false) {
+    m_imagesAreAvailable(false), m_loadingImages(false) {
   m_iconCache.setMaxCost(Config::iconCacheSize());
   m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
 }
@@ -142,7 +142,14 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         if(icon) {
           return QIcon(*icon);
         }
+        // this is an attempt at a workaround for Bug 382572, while refactoring to use asynch
+        // image loading is deferred to future work
+        if(m_loadingImages) {
+          return defaultIcon(entry->collection());
+        }
+        m_loadingImages = true;
         const Data::Image& img = ImageFactory::imageById(id);
+        m_loadingImages = false;
         if(img.isNull()) {
           return defaultIcon(entry->collection());
         }
@@ -167,7 +174,13 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       }
 
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
+        // see note above re: Bug 382572
+        if(m_loadingImages) {
+          return QVariant();
+        }
+        m_loadingImages = true;
         const Data::Image& img = ImageFactory::imageById(value);
+        m_loadingImages = false;
         if(!img.isNull()) {
           return img.convertToPixmap().scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
         }
