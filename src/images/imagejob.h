@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,75 +22,37 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMAGE_H
-#define TELLICO_IMAGE_H
+#ifndef TELLICO_IMAGEJOB_H
+#define TELLICO_IMAGEJOB_H
 
-#include <QImage>
-#include <QString>
-#include <QByteArray>
-#include <QPixmap>
+#include <KIO/Job>
+
+#include "image.h"
 
 namespace Tellico {
-  class ImageFactory;
-  class ImageDirectory;
-  class ImageZipArchive;
-  class FileHandler;
-  class ImageJob;
-
-  namespace Data {
 
 /**
  * @author Robby Stephenson
  */
-class Image : public QImage {
-
-friend class Tellico::ImageFactory;
-friend class Tellico::ImageDirectory;
-friend class Tellico::ImageZipArchive;
-friend class Tellico::FileHandler;
-friend class Tellico::ImageJob;
+class ImageJob : public KIO::Job {
+Q_OBJECT
 
 public:
-  ~Image();
+  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false);
+  virtual ~ImageJob();
 
-  const QString& id() const { return m_id; };
-  const QByteArray& format() const { return m_format; };
-  QByteArray byteArray() const;
-  bool isNull() const;
-  bool linkOnly() const { return m_linkOnly; }
-  void setLinkOnly(bool l) { m_linkOnly = l; }
+  const Data::Image& image() const;
 
-  QPixmap convertToPixmap() const;
-  QPixmap convertToPixmap(int width, int height) const;
-
-  static QByteArray outputFormat(const QByteArray& inputFormat);
-  static QByteArray byteArray(const QImage& img, const QByteArray& outputFormat);
-  static QString idClean(const QString& id);
-  static QString calculateID(const QByteArray& data, const QString& format);
-
-  static const Image null;
+private Q_SLOTS:
+  void slotStart();
 
 private:
-  Image();
-  explicit Image(const QString& filename, const QString& id = QString());
-  Image(const QImage& image, const QString& format);
-  Image(const QByteArray& data, const QString& format, const QString& id);
-
-  void setID(const QString& id);
-  void calculateID();
-
+  QUrl m_url;
   QString m_id;
-  QByteArray m_format;
-  bool m_linkOnly : 1;
-
-  static QList<QByteArray> s_outputFormats;
+  Data::Image m_image;
 };
 
-  } // end namespace
 } // end namespace
 
-inline bool operator== (const Tellico::Data::Image& img1, const Tellico::Data::Image& img2) {
-  return img1.id() == img2.id();
-}
 
 #endif

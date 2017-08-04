@@ -61,6 +61,12 @@ add_test(imagetest imagetest)
 ecm_mark_as_test(imagetest)
 TARGET_LINK_LIBRARIES(imagetest images KF5::Archive Qt5::Test)
 
+add_executable(imagejobtest imagejobtest.cpp ../fieldformat.cpp)
+ecm_mark_nongui_executable(imagejobtest)
+add_test(imagejobtest imagejobtest)
+ecm_mark_as_test(imagejobtest)
+TARGET_LINK_LIBRARIES(imagejobtest images KF5::Archive Qt5::Test)
+
 SET(tellicotest_SRCS
    ../collection.cpp
    ../entry.cpp
