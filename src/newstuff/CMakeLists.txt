@@ -14,6 +14,7 @@ TARGET_LINK_LIBRARIES(newstuff
     Qt5::Gui
     KF5::ConfigCore
     KF5::KIOCore
+    KF5::Archive
     )
 
 INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})

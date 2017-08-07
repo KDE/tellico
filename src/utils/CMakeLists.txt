@@ -30,4 +30,5 @@ TARGET_LINK_LIBRARIES(utils
     KF5::I18n
     KF5::WidgetsAddons
     KF5::Codecs
+    KF5::KIOCore
 )

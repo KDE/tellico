@@ -71,6 +71,7 @@ TARGET_LINK_LIBRARIES(fetch
     KF5::Archive
     KF5::IconThemes
     KF5::JobWidgets
+    KF5::KIOWidgets
     )
 
 IF(${KF5KIO_VERSION} VERSION_GREATER "5.18.0")

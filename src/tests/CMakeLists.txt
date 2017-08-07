@@ -101,6 +101,7 @@ TARGET_LINK_LIBRARIES(translatorstest
   KF5::I18n
   KF5::Archive
   KF5::KIOWidgets
+  KF5::ConfigWidgets
   ${LIBXML2_LIBRARIES}
   ${LIBXSLT_LIBRARIES}
   ${LIBXSLT_EXSLT_LIBRARIES}
