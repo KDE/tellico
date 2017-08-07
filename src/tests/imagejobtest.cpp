@@ -50,7 +50,7 @@ void ImageJobTest::slotGetResult(KJob *job) {
   emit exitLoop();
 }
 
-void ImageJobTest::testInvalid() {
+void ImageJobTest::testInvalidUrl() {
   QUrl u;
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
@@ -86,10 +86,27 @@ void ImageJobTest::testUnreadable() {
   QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
 }
 
+void ImageJobTest::testImageInvalid() {
+  // text file is an invalid image
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("imagejobtest.cpp"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(img.isNull());
+  QCOMPARE(img.linkOnly(), false);
+}
+
 void ImageJobTest::testImageLoad() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
 
-  Tellico::ImageJob* job = new Tellico::ImageJob(u);
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
   connect(job, SIGNAL(result(KJob*)),
           this, SLOT(slotGetResult(KJob*)));
 
@@ -102,4 +119,70 @@ void ImageJobTest::testImageLoad() {
   QCOMPARE(img.id(), QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
+
+  // check that the job is automatically deleted
+  qApp->processEvents();
+  QVERIFY(!job);
+}
+
+void ImageJobTest::testImageLoadWithId() {
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, QLatin1String("tellico-rocks"));
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(!img.isNull());
+  QCOMPARE(img.id(), QLatin1String("tellico-rocks"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), false);
+}
+
+void ImageJobTest::testImageLink() {
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
+                                                          QString() /* id */,
+                                                          false /* quiet */,
+                                                          true /* link only */);
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(!img.isNull());
+  // id is not the MD5 hash
+  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), true);
+}
+
+void ImageJobTest::testNetworkImage() {
+  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(!img.isNull());
+  QCOMPARE(img.id(), QLatin1String("757322046f4aa54290a3d92b05b71ca1.png"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), false);
+
+  // check that the job is automatically deleted
+  qApp->processEvents();
+  QVERIFY(!job);
 }

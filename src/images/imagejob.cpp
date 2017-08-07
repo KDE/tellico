@@ -30,8 +30,8 @@
 
 using Tellico::ImageJob;
 
-ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job()
-    , m_url(url_), m_id(id_) {
+ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_, bool linkOnly_) : KIO::Job()
+    , m_url(url_), m_id(id_), m_linkOnly(linkOnly_) {
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(quiet_) {
     flags |= KIO::HideProgressInfo;
@@ -45,6 +45,7 @@ ImageJob::~ImageJob() {
 void ImageJob::slotStart() {
   if(!m_url.isValid()) {
     setError(KIO::ERR_MALFORMED_URL);
+    emitResult();
   } else if(m_url.isLocalFile()) {
     const QString fileName = m_url.toLocalFile();
     if(!QFileInfo(fileName).isReadable()) {
@@ -53,6 +54,35 @@ void ImageJob::slotStart() {
       setErrorText(fileName);
     } else {
       m_image = Data::Image(fileName, m_id);
+      if(m_image.isNull()) {
+        m_image = Data::Image::null;
+      }
+      if(m_linkOnly) {
+        m_image.setLinkOnly(true);
+        m_image.setID(m_url.url());
+      }
+    }
+    emitResult();
+  } else {
+    // non-local valid url
+    // KIO::storedGet seems to handle Content-Encoding: gzip ok
+    KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload);
+    QObject::connect(getJob, &KJob::result, this, &ImageJob::getJobResult);
+    addSubjob(getJob);
+  }
+}
+
+void ImageJob::getJobResult(KJob* job_) {
+  if(!job_ || job_->error()) {
+    // error handling for subjob is handled by KCompositeJob
+    return;
+  }
+  KIO::StoredTransferJob* getJob = qobject_cast<KIO::StoredTransferJob*>(job_);
+  if(getJob) {
+    // TODO: need to figure out appropriate way to know image format
+    m_image = Data::Image(getJob->data(), QLatin1String("png"), m_id);
+    if(m_id.isEmpty()) {
+      m_image.calculateID();
     }
   }
   emitResult();

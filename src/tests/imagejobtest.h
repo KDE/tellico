@@ -36,10 +36,14 @@ private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
 
-  void testInvalid();
+  void testInvalidUrl();
   void testNonexistant();
   void testUnreadable();
+  void testImageInvalid();
   void testImageLoad();
+  void testImageLoadWithId();
+  void testImageLink();
+  void testNetworkImage();
 
 Q_SIGNALS:
   void exitLoop();

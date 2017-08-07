@@ -38,17 +38,19 @@ class ImageJob : public KIO::Job {
 Q_OBJECT
 
 public:
-  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false);
+  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false, bool linkOnly=false);
   virtual ~ImageJob();
 
   const Data::Image& image() const;
 
 private Q_SLOTS:
   void slotStart();
+  void getJobResult(KJob* job);
 
 private:
   QUrl m_url;
   QString m_id;
+  bool m_linkOnly;
   Data::Image m_image;
 };
 
