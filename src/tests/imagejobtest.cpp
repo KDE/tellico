@@ -95,8 +95,7 @@ void ImageJobTest::testImageInvalid() {
           this, SLOT(slotGetResult(KJob*)));
 
   enterLoop();
-  // success!
-  QCOMPARE(m_result, 0);
+  QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
 
   Tellico::Data::Image img = job->image();
   QVERIFY(img.isNull());

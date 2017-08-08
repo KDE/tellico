@@ -66,6 +66,7 @@ void ImageJob::slotStart() {
     } else {
       m_image = Data::Image(fileName, m_id);
       if(m_image.isNull()) {
+        setError(KIO::ERR_UNKNOWN);
         m_image = Data::Image::null;
       }
       if(m_linkOnly) {
