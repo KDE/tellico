@@ -84,6 +84,9 @@ void ImageJobTest::testUnreadable() {
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(img.isNull());
 }
 
 void ImageJobTest::testImageInvalid() {
@@ -184,4 +187,18 @@ void ImageJobTest::testNetworkImage() {
   // check that the job is automatically deleted
   qApp->processEvents();
   QVERIFY(!job);
+}
+
+void ImageJobTest::testNetworkImageInvalid() {
+  QUrl u(QLatin1String("http://tellico-project.org"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(img.isNull());
 }

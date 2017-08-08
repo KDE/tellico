@@ -44,6 +44,7 @@ private Q_SLOTS:
   void testImageLoadWithId();
   void testImageLink();
   void testNetworkImage();
+  void testNetworkImageInvalid();
 
 Q_SIGNALS:
   void exitLoop();
