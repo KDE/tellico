@@ -25,6 +25,8 @@
 #include "imagejob.h"
 #include "../tellico_debug.h"
 
+#include <KLocalizedString>
+
 #include <QTimer>
 #include <QFileInfo>
 
@@ -42,6 +44,16 @@ ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_, bool linkO
 ImageJob::~ImageJob() {
 }
 
+QString ImageJob::errorString() const {
+  // by default, KIO::Job returns an error string depending on the error code and
+  // using errorText() as a url or file name. Instead, just set a full error text and use it
+  return errorText();
+}
+
+const Tellico::Data::Image& ImageJob::image() const {
+  return m_image;
+}
+
 void ImageJob::slotStart() {
   if(!m_url.isValid()) {
     setError(KIO::ERR_MALFORMED_URL);
@@ -50,8 +62,7 @@ void ImageJob::slotStart() {
     const QString fileName = m_url.toLocalFile();
     if(!QFileInfo(fileName).isReadable()) {
       setError(KIO::ERR_CANNOT_OPEN_FOR_READING);
-      //TODO ok to use KIO default? i18n(errorOpen, target_);
-      setErrorText(fileName);
+      setErrorText(i18n("Tellico is unable to load the image - %1.", fileName));
     } else {
       m_image = Data::Image(fileName, m_id);
       if(m_image.isNull()) {
@@ -86,8 +97,4 @@ void ImageJob::getJobResult(KJob* job_) {
     }
   }
   emitResult();
-}
-
-const Tellico::Data::Image& ImageJob::image() const {
-  return m_image;
 }
