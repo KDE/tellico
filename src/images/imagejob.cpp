@@ -29,6 +29,8 @@
 
 #include <QTimer>
 #include <QFileInfo>
+#include <QBuffer>
+#include <QImageReader>
 
 using Tellico::ImageJob;
 
@@ -87,14 +89,26 @@ void ImageJob::slotStart() {
 void ImageJob::getJobResult(KJob* job_) {
   if(!job_ || job_->error()) {
     // error handling for subjob is handled by KCompositeJob
+    setErrorText(i18n("Tellico is unable to load the image - %1.", m_url.toDisplayString()));
     return;
   }
   KIO::StoredTransferJob* getJob = qobject_cast<KIO::StoredTransferJob*>(job_);
   if(getJob) {
-    // TODO: need to figure out appropriate way to know image format
-    m_image = Data::Image(getJob->data(), QLatin1String("png"), m_id);
-    if(m_id.isEmpty()) {
-      m_image.calculateID();
+    // If we used the Image() c'tor that take a bytearray of data, I'm not sure how to
+    // figure out the image format directly. Instead, write into a buffer and use QImageReader
+    QByteArray data = getJob->data();
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    m_image = Data::Image(data, QString::fromLatin1(QImageReader::imageFormat(&buffer)), m_id);
+    if(m_image.isNull()) {
+      setError(KIO::ERR_UNKNOWN);
+      m_image = Data::Image::null;
+    } else {
+      // if we can't write the input format, then change to one we can
+      m_image.setFormat(Data::Image::outputFormat(m_image.format()));
+      if(m_id.isEmpty()) {
+        m_image.calculateID();
+      }
     }
   }
   emitResult();

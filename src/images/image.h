@@ -77,6 +77,7 @@ private:
   Image(const QByteArray& data, const QString& format, const QString& id);
 
   void setID(const QString& id);
+  void setFormat(const QByteArray& format_) { m_format = format_; }
   void calculateID();
 
   QString m_id;
