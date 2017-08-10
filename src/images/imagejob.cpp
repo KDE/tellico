@@ -109,6 +109,10 @@ void ImageJob::getJobResult(KJob* job_) {
       if(m_id.isEmpty()) {
         m_image.calculateID();
       }
+      if(m_linkOnly) {
+        m_image.setLinkOnly(true);
+        m_image.setID(m_url.url());
+      }
     }
   }
   emitResult();

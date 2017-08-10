@@ -189,6 +189,27 @@ void ImageJobTest::testNetworkImage() {
   QVERIFY(!job);
 }
 
+void ImageJobTest::testNetworkImageLink() {
+  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
+                                                          QString() /* id */,
+                                                          false /* quiet */,
+                                                          true /* link only */);
+  connect(job, SIGNAL(result(KJob*)),
+          this, SLOT(slotGetResult(KJob*)));
+
+  enterLoop();
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = job->image();
+  QVERIFY(!img.isNull());
+  QCOMPARE(img.id(), u.url());
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), true);
+}
+
 void ImageJobTest::testNetworkImageInvalid() {
   QUrl u(QLatin1String("http://tellico-project.org"));
 
