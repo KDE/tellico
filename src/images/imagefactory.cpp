@@ -86,7 +86,7 @@ void ImageFactory::init() {
 }
 
 Tellico::ImageFactory* ImageFactory::self() {
-  Q_ASSERT(factory);
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   return factory;
 }
 
@@ -461,6 +461,36 @@ const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
 
   myDebug() << "***ImageFactory::imageById() - not found:" << id_;
   return Data::Image::null;
+}
+
+bool ImageFactory::hasLocalImage(const QString& id_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
+  if(id_.isEmpty() || !factory) {
+    return false;
+  }
+  const QUrl u(id_);
+  return factory->d->imageCache.contains(id_) ||
+         factory->d->imageDict.contains(id_) ||
+         factory->d->tempImageDir.hasImage(id_) ||
+         factory->d->imageZipArchive.hasImage(id_) ||
+         (u.isValid() && !u.isRelative() && u.isLocalFile()) ||
+         (Config::imageLocation() == Config::ImagesInLocalDir &&
+                                     factory->d->localImageDir.hasImage(id_)) ||
+         (Config::imageLocation() == Config::ImagesInAppDir &&
+                                     factory->d->dataImageDir.hasImage(id_));
+}
+
+void ImageFactory::requestImage(const QString& id_) {
+  if(hasLocalImage(id_)) {
+    emit factory->imageAvailable(id_);
+    return;
+  }
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl(id_).isRelative()) {
+    QUrl u(id_);
+    if(u.isValid()) {
+      factory->requestImageImpl(u, true, QUrl(), true);
+    }
+  }
 }
 
 Tellico::Data::ImageInfo ImageFactory::imageInfo(const QString& id_) {

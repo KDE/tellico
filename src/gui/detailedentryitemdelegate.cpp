@@ -24,6 +24,7 @@
 
 #include "detailedentryitemdelegate.h"
 #include "../models/models.h"
+#include "../tellico_debug.h"
 
 using namespace Tellico;
 using Tellico::DetailedEntryItemDelegate;

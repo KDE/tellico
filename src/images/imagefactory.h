@@ -124,9 +124,18 @@ public:
    * is returned.
    *
    * @param id The image id
-   * @return The image referencenter
+   * @return The image reference
    */
   static const Data::Image& imageById(const QString& id);
+  static bool hasLocalImage(const QString& id);
+  /**
+   * Requests an image to be made available. Images already in the cache or available locally are
+   * consisdered to be instantly available. Others will be downloaded and the imageAvailable() signal
+   * is used to indicate completion
+   *
+   * @param id The image id
+   */
+  static void requestImage(const QString& id);
   static Data::ImageInfo imageInfo(const QString& id);
   static void cacheImageInfo(const Data::ImageInfo& info);
   static bool hasImageInfo(const QString& id);
@@ -155,7 +164,10 @@ public:
   static ImageFactory* self();
 
 Q_SIGNALS:
+  void imageAvailable(const QString& id);
   void imageLocationMismatch();
+
+private Q_SLOTS:
 
 private:
   /**
@@ -167,6 +179,8 @@ private:
    * @return The image
    */
   const Data::Image& addImageImpl(const QUrl& url, bool quiet=false,
+                                  const QUrl& referrer = QUrl(), bool linkOnly = false);
+  const Data::Image& requestImageImpl(const QUrl& url, bool quiet=false,
                                   const QUrl& referrer = QUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
