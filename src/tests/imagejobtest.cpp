@@ -34,9 +34,15 @@
 QTEST_GUILESS_MAIN( ImageJobTest )
 
 void ImageJobTest::initTestCase() {
+  Tellico::ImageFactory::init();
 }
 
 void ImageJobTest::cleanupTestCase() {
+}
+
+void ImageJobTest::init() {
+  m_result = -1;
+  m_imageId.clear();
 }
 
 void ImageJobTest::enterLoop() {
@@ -45,8 +51,14 @@ void ImageJobTest::enterLoop() {
   eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
 }
 
-void ImageJobTest::slotGetResult(KJob *job) {
+void ImageJobTest::slotGetResult(KJob* job) {
   m_result = job->error();
+  emit exitLoop();
+}
+
+void ImageJobTest::slotAvailable(const QString& id_) {
+  m_result = 0;
+  m_imageId = id_;
   emit exitLoop();
 }
 
@@ -222,4 +234,49 @@ void ImageJobTest::testNetworkImageInvalid() {
 
   Tellico::Data::Image img = job->image();
   QVERIFY(img.isNull());
+}
+
+void ImageJobTest::testFactoryRequestLocal() {
+  QVERIFY(m_imageId.isEmpty());
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+          this, &ImageJobTest::slotAvailable);
+
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
+  Tellico::ImageFactory::requestImage(u.url());
+
+  // don't need to enter loop since the image is local and signal fires immediately
+  QVERIFY(!m_imageId.isEmpty());
+  // success!
+  QCOMPARE(m_result, 0);
+
+  Tellico::Data::Image img = Tellico::ImageFactory::imageById(m_imageId);
+  QVERIFY(!img.isNull());
+  // id is not the MD5 hash
+  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), true);
+}
+
+void ImageJobTest::testFactoryRequestNetwork() {
+  QVERIFY(m_imageId.isEmpty());
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+          this, &ImageJobTest::slotAvailable);
+
+  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  Tellico::ImageFactory::requestImage(u.url());
+
+  enterLoop();
+  QVERIFY(!m_imageId.isEmpty());
+  // success!
+  QCOMPARE(m_result, 0);
+  // the image should be in local memory now
+//  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
+  QVERIFY(!img.isNull());
+  // id is not the MD5 hash
+  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), true);
 }

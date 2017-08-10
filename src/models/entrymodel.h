@@ -84,7 +84,6 @@ private:
   QIcon m_checkPix;
   QHash<int, int> m_saveStates;
   bool m_imagesAreAvailable;
-  mutable bool m_loadingImages;
 
   mutable QHash<int, QIcon*> m_defaultIcons;
   mutable QHash<long, QString> m_imageFields;

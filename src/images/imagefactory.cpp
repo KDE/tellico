@@ -28,6 +28,7 @@
 #include "image.h"
 #include "imageinfo.h"
 #include "imagedirectory.h"
+#include "imagejob.h"
 #include "../core/filehandler.h"
 #include "../config/tellico_config.h"
 #include "../utils/tellico_utils.h"
@@ -62,7 +63,7 @@ public:
   QHash<QString, Data::Image*> imageDict;
   QCache<QString, Data::Image> imageCache;
   QCache<QString, QPixmap> pixmapCache;
-  ImageDirectory dataImageDir; // kept in $KDEHOME/share/apps/tellico/data/
+  ImageDirectory dataImageDir; // kept in $HOME/.local/share/tellico/data/
   ImageDirectory localImageDir; // kept local to data file
   TemporaryImageDirectory tempImageDir; // kept in tmp directory
   ImageZipArchive imageZipArchive;
@@ -162,6 +163,13 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   }
   s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
   return *img;
+}
+
+void ImageFactory::requestImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
+  myDebug() << "requestImageImpl()" << url_;
+  ImageJob* job = new ImageJob(url_, QString(), quiet_, link_);
+  connect(job, &ImageJob::result,
+          this, &ImageFactory::slotImageJobResult);
 }
 
 QString ImageFactory::addImage(const QImage& image_, const QString& format_) {
@@ -485,8 +493,8 @@ void ImageFactory::requestImage(const QString& id_) {
     emit factory->imageAvailable(id_);
     return;
   }
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !QUrl(id_).isRelative()) {
-    QUrl u(id_);
+  const QUrl u(id_);
+  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !u.isRelative()) {
     if(u.isValid()) {
       factory->requestImageImpl(u, true, QUrl(), true);
     }
@@ -709,6 +717,28 @@ void ImageFactory::setZipArchive(KZip* zip_) {
     return;
   }
   factory->d->imageZipArchive.setZip(zip_);
+}
+
+void ImageFactory::slotImageJobResult(KJob* job_) {
+  ImageJob* imageJob = qobject_cast<ImageJob*>(job_);
+  Q_ASSERT(imageJob);
+  if(!imageJob) {
+    myWarning() << "No image job";
+    return;
+  }
+  const Data::Image& img = imageJob->image();
+  if(img.isNull()) {
+     myDebug() << "null image for" << imageJob->url();
+     // don't emit anything
+     return;
+  }
+  // TODO: different than ::adImageImpl() - was that a bug?
+  if(imageJob->linkOnly()) {
+    Data::Image* newImage = new Data::Image(img);
+    d->imageDict.insert(img.id(), newImage);
+  }
+  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  emit factory->imageAvailable(img.id());
 }
 
 #undef RELEASE_IMAGES

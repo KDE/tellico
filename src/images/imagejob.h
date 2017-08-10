@@ -42,6 +42,8 @@ public:
   virtual ~ImageJob();
 
   virtual QString errorString() const Q_DECL_OVERRIDE;
+  QUrl url() const { return m_url; }
+  bool linkOnly() const { return m_linkOnly; }
   const Data::Image& image() const;
 
 private Q_SLOTS:

@@ -35,6 +35,7 @@ Q_OBJECT
 private Q_SLOTS:
   void initTestCase();
   void cleanupTestCase();
+  void init();
 
   void testInvalidUrl();
   void testNonexistant();
@@ -46,17 +47,21 @@ private Q_SLOTS:
   void testNetworkImage();
   void testNetworkImageLink();
   void testNetworkImageInvalid();
+  void testFactoryRequestLocal();
+  void testFactoryRequestNetwork();
 
 Q_SIGNALS:
   void exitLoop();
 
 protected Q_SLOTS:
   void slotGetResult(KJob *);
+  void slotAvailable(const QString&);
 
 private:
   void enterLoop();
 
   int m_result;
+  QString m_imageId;
 };
 
 #endif

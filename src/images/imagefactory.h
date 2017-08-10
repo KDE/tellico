@@ -34,6 +34,7 @@
 #include <QPixmap>
 
 class KZip;
+class KJob;
 
 namespace Tellico {
   namespace Data {
@@ -168,6 +169,7 @@ Q_SIGNALS:
   void imageLocationMismatch();
 
 private Q_SLOTS:
+  void slotImageJobResult(KJob* job);
 
 private:
   /**
@@ -180,8 +182,8 @@ private:
    */
   const Data::Image& addImageImpl(const QUrl& url, bool quiet=false,
                                   const QUrl& referrer = QUrl(), bool linkOnly = false);
-  const Data::Image& requestImageImpl(const QUrl& url, bool quiet=false,
-                                  const QUrl& referrer = QUrl(), bool linkOnly = false);
+  void requestImageImpl(const QUrl& url, bool quiet=false,
+                        const QUrl& referrer = QUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
