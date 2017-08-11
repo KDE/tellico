@@ -37,9 +37,6 @@ public:
 
 protected:
   void initStyleOption(QStyleOptionViewItem* option, const QModelIndex& index) const Q_DECL_OVERRIDE;
-
-private:
-  mutable bool m_isLoading;
 };
 
 } // end namespace;
