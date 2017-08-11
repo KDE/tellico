@@ -46,6 +46,8 @@ public:
   bool linkOnly() const { return m_linkOnly; }
   const Data::Image& image() const;
 
+  void setReferrer(const QUrl& referrer);
+
 private Q_SLOTS:
   void slotStart();
   void getJobResult(KJob* job);
@@ -54,6 +56,7 @@ private:
   QUrl m_url;
   QString m_id;
   bool m_linkOnly;
+  QUrl m_referrer;
   Data::Image m_image;
 };
 

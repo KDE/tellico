@@ -56,6 +56,10 @@ const Tellico::Data::Image& ImageJob::image() const {
   return m_image;
 }
 
+void ImageJob::setReferrer(const QUrl& referrer_) {
+  m_referrer = referrer_;
+}
+
 void ImageJob::slotStart() {
   if(!m_url.isValid()) {
     setError(KIO::ERR_MALFORMED_URL);
@@ -82,7 +86,11 @@ void ImageJob::slotStart() {
     // KIO::storedGet seems to handle Content-Encoding: gzip ok
     KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload);
     QObject::connect(getJob, &KJob::result, this, &ImageJob::getJobResult);
+    if(!m_referrer.isEmpty()) {
+      getJob->addMetaData(QLatin1String("referrer"), m_referrer.url());
+    }
     addSubjob(getJob);
+    // don't emit result, it will be taken care of by the subjob handling
   }
 }
 

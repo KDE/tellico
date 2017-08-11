@@ -46,7 +46,6 @@ using Tellico::NetAccess;
 bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, bool quiet_) {
   // copied from KIO::NetAccess::download() apidox except for quiet part
   if(url_.isLocalFile()) {
-    myDebug() << "downloading a local file" << url_;
     target_ = url_.toLocalFile();
     const bool readable = QFileInfo(target_).isReadable();
     if(!readable) {
