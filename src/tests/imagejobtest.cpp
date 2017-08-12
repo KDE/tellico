@@ -270,7 +270,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
   // success!
   QCOMPARE(m_result, 0);
   // the image should be in local memory now
-//  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
   QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
