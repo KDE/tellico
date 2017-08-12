@@ -242,7 +242,7 @@ void ImageJobTest::testFactoryRequestLocal() {
           this, &ImageJobTest::slotAvailable);
 
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
-  Tellico::ImageFactory::requestImage(u.url());
+  Tellico::ImageFactory::requestImageById(u.url());
 
   // don't need to enter loop since the image is local and signal fires immediately
   QVERIFY(!m_imageId.isEmpty());
@@ -263,7 +263,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
           this, &ImageJobTest::slotAvailable);
 
   QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
-  Tellico::ImageFactory::requestImage(u.url());
+  Tellico::ImageFactory::requestImageById(u.url());
 
   enterLoop();
   QVERIFY(!m_imageId.isEmpty());

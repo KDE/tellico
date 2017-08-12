@@ -131,12 +131,12 @@ public:
   static bool hasLocalImage(const QString& id);
   /**
    * Requests an image to be made available. Images already in the cache or available locally are
-   * consisdered to be instantly available. Others will be downloaded and the imageAvailable() signal
+   * considered to be instantly available. Others will be downloaded and the imageAvailable() signal
    * is used to indicate completion
    *
    * @param id The image id
    */
-  static void requestImage(const QString& id);
+  static void requestImageById(const QString& id);
   static Data::ImageInfo imageInfo(const QString& id);
   static void cacheImageInfo(const Data::ImageInfo& info);
   static bool hasImageInfo(const QString& id);

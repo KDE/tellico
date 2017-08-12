@@ -147,7 +147,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         if(!ImageFactory::hasLocalImage(id)) {
           if(!m_requestedImages.contains(id,entry)) {
             m_requestedImages.insert(id, entry);
-            ImageFactory::requestImage(id);
+            ImageFactory::requestImageById(id);
           }
           return defaultIcon(entry->collection());
         }
@@ -186,7 +186,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
           if(!m_requestedImages.contains(value, entry)) {
             myDebug() << "Requesting" << value;
             m_requestedImages.insert(value, entry);
-            ImageFactory::requestImage(value);
+            ImageFactory::requestImageById(value);
           }
         }
       }

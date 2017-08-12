@@ -490,7 +490,7 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
                                      factory->d->dataImageDir.hasImage(id_));
 }
 
-void ImageFactory::requestImage(const QString& id_) {
+void ImageFactory::requestImageById(const QString& id_) {
   if(hasLocalImage(id_)) {
     emit factory->imageAvailable(id_);
     return;
