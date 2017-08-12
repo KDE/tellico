@@ -38,7 +38,7 @@ class ImageJob : public KIO::Job {
 Q_OBJECT
 
 public:
-  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false, bool linkOnly=false);
+  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false);
   virtual ~ImageJob();
 
   virtual QString errorString() const Q_DECL_OVERRIDE;
@@ -46,6 +46,7 @@ public:
   bool linkOnly() const { return m_linkOnly; }
   const Data::Image& image() const;
 
+  void setLinkOnly(bool linkOnly);
   void setReferrer(const QUrl& referrer);
 
 private Q_SLOTS:

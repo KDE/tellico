@@ -162,8 +162,8 @@ void ImageJobTest::testImageLink() {
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
                                                           QString() /* id */,
-                                                          false /* quiet */,
-                                                          true /* link only */);
+                                                          false /* quiet */);
+  job->setLinkOnly(true);
   connect(job, SIGNAL(result(KJob*)),
           this, SLOT(slotGetResult(KJob*)));
 
@@ -206,8 +206,8 @@ void ImageJobTest::testNetworkImageLink() {
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
                                                           QString() /* id */,
-                                                          false /* quiet */,
-                                                          true /* link only */);
+                                                          false /* quiet */);
+  job->setLinkOnly(true);
   connect(job, SIGNAL(result(KJob*)),
           this, SLOT(slotGetResult(KJob*)));
 

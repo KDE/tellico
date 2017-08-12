@@ -34,8 +34,8 @@
 
 using Tellico::ImageJob;
 
-ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_, bool linkOnly_) : KIO::Job()
-    , m_url(url_), m_id(id_), m_linkOnly(linkOnly_) {
+ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job()
+    , m_url(url_), m_id(id_), m_linkOnly(false) {
   KIO::JobFlags flags = KIO::DefaultFlags;
   if(quiet_) {
     flags |= KIO::HideProgressInfo;
@@ -54,6 +54,10 @@ QString ImageJob::errorString() const {
 
 const Tellico::Data::Image& ImageJob::image() const {
   return m_image;
+}
+
+void ImageJob::setLinkOnly(bool linkOnly_) {
+  m_linkOnly = linkOnly_;
 }
 
 void ImageJob::setReferrer(const QUrl& referrer_) {

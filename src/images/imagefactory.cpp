@@ -167,7 +167,8 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
 
 void ImageFactory::requestImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
   myDebug() << "requestImageImpl()" << url_;
-  ImageJob* job = new ImageJob(url_, QString(), quiet_, link_);
+  ImageJob* job = new ImageJob(url_, QString(), quiet_);
+  job->setLinkOnly(link_);
   job->setReferrer(refer_);
   connect(job, &ImageJob::result,
           this, &ImageFactory::slotImageJobResult);
