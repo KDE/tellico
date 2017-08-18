@@ -6,9 +6,6 @@
       xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
 
-<include>KLocalizedString</include>
-<include>KColorScheme</include>
-<include>QFontDatabase</include>
 <kcfgfile name="tellicorc"/>
 
 <group name="TipOfDay">
