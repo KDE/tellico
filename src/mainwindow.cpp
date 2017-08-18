@@ -40,7 +40,7 @@
 #include "controller.h"
 #include "importdialog.h"
 #include "exportdialog.h"
-#include "filehandler.h" // needed so static mainWindow variable can be set
+#include "core/filehandler.h" // needed so static mainWindow variable can be set
 #include "translators/htmlexporter.h" // for printing
 #include "entryview.h"
 #include "entryiconview.h"
@@ -52,7 +52,7 @@
 #include "fetchdialog.h"
 #include "reportdialog.h"
 #include "bibtexkeydialog.h"
-#include "tellico_strings.h"
+#include "core/tellico_strings.h"
 #include "filterview.h"
 #include "loanview.h"
 #include "fetch/fetchmanager.h"

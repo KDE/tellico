@@ -33,7 +33,7 @@
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"
 #include "tellico_kernel.h"
-#include "filehandler.h"
+#include "core/filehandler.h"
 #include "collection.h"
 #include "entry.h"
 #include "document.h"

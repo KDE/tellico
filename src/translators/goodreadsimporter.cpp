@@ -25,7 +25,7 @@
 #include "goodreadsimporter.h"
 #include "xslthandler.h"
 #include "tellicoimporter.h"
-#include "filehandler.h"
+#include "../core/filehandler.h"
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 

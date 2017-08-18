@@ -24,7 +24,7 @@
 
 #include "imagedirectory.h"
 #include "image.h"
-#include "filehandler.h"
+#include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
 #include <KZip>

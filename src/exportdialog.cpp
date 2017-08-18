@@ -24,7 +24,7 @@
 
 #include "exportdialog.h"
 #include "collection.h"
-#include "filehandler.h"
+#include "core/filehandler.h"
 #include "controller.h"
 #include "tellico_debug.h"
 
