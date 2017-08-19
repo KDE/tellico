@@ -29,7 +29,7 @@
 #include "imageinfo.h"
 #include "imagedirectory.h"
 #include "../core/filehandler.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 

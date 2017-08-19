@@ -30,7 +30,7 @@
 #include "entry.h"
 #include "tellico_debug.h"
 #include "tellico_kernel.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 #include "models/entrymodel.h"
 #include "models/entrysortmodel.h"
 #include "models/modelmanager.h"

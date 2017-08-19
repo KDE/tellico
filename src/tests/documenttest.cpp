@@ -28,7 +28,7 @@
 #include "../document.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 

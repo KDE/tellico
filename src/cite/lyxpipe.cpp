@@ -25,7 +25,7 @@
 #include "lyxpipe.h"
 #include "../collection.h"
 #include "../utils/bibtexhandler.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>

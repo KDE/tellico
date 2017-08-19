@@ -33,7 +33,7 @@
 #include "../document.h"
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 
 #include <QTest>
 #include <QRegExp>

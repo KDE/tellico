@@ -35,7 +35,7 @@
 #include "utils/cursorsaver.h"
 #include "utils/datafileregistry.h"
 #include "utils/tellico_utils.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 
 #include <KLocalizedString>
 #include <KHTMLPart>

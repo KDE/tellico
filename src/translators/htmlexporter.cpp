@@ -29,7 +29,7 @@
 #include "../document.h"
 #include "../core/filehandler.h"
 #include "../core/netaccess.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 #include "../core/tellico_strings.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"

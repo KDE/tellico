@@ -33,7 +33,7 @@
 #include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "core/filehandler.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 #include "gui/drophandler.h"
 #include "document.h"
 #include "../utils/datafileregistry.h"

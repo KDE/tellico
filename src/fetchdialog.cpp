@@ -28,7 +28,7 @@
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcher.h"
 #include "fetch/fetchresult.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 #include "entryview.h"
 #include "utils/isbnvalidator.h"
 #include "utils/upcvalidator.h"

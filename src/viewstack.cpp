@@ -25,7 +25,7 @@
 #include "viewstack.h"
 #include "detailedlistview.h"
 #include "entryiconview.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 
 #include <KLocalizedString>
 

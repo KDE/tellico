@@ -27,7 +27,7 @@
 #include "citetest.h"
 #include "../cite/lyxpipe.h"
 #include "../cite/clipboard.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 #include "../collections/bibtexcollection.h"
 
 #include <QTest>

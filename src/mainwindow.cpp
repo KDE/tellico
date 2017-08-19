@@ -58,7 +58,7 @@
 #include "fetch/fetchmanager.h"
 #include "fetch/fetcherinitializer.h"
 #include "cite/actionmanager.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 #include "core/netaccess.h"
 #include "dbusinterface.h"
 #include "models/models.h"

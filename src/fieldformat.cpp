@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "fieldformat.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 
 using Tellico::FieldFormat;
 

@@ -241,7 +241,7 @@ remove_definitions(-DQT_NO_STL)
 include_directories(${LIBXML2_INCLUDE_DIR}
                     ${LIBXSLT_INCLUDE_DIR}
                     ${CMAKE_CURRENT_BINARY_DIR}
-                    ${Tellico_SOURCE_DIR}/src/core
+                    ${Tellico_SOURCE_DIR}/src/config
                     ${Tellico_SOURCE_DIR}/src/3rdparty)
 
 set(TELLICO_DATA_INSTALL_DIR ${KDE_INSTALL_DATADIR}/tellico)

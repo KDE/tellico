@@ -36,7 +36,7 @@
 #include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
 #include "utils/string_utils.h"
-#include "core/tellico_config.h"
+#include "config/tellico_config.h"
 #include "images/imagefactory.h"
 #include "gui/combobox.h"
 #include "gui/collectiontypecombo.h"

@@ -27,7 +27,7 @@
 #include "formattest.h"
 
 #include "../fieldformat.h"
-#include "../core/tellico_config.h"
+#include "../config/tellico_config.h"
 
 #include <QTest>
 
