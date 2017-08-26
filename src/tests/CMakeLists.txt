@@ -11,7 +11,7 @@ add_executable(entitytest entitytest.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(entitytest)
 add_test(entitytest entitytest)
 ecm_mark_as_test(entitytest)
-TARGET_LINK_LIBRARIES(entitytest utils Qt5::Test )
+TARGET_LINK_LIBRARIES(entitytest utils config Qt5::Test )
 
 add_executable(cuecattest cuecattest.cpp)
 ecm_mark_nongui_executable(cuecattest)
@@ -35,25 +35,25 @@ add_executable(lcctest lcctest.cpp ../field.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(lcctest)
 add_test(lcctest lcctest)
 ecm_mark_as_test(lcctest)
-TARGET_LINK_LIBRARIES(lcctest utils core Qt5::Test)
+TARGET_LINK_LIBRARIES(lcctest tellicomodels Qt5::Test)
 
 add_executable(formattest formattest.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(formattest)
 add_test(formattest formattest)
 ecm_mark_as_test(formattest)
-TARGET_LINK_LIBRARIES(formattest core Qt5::Test)
+TARGET_LINK_LIBRARIES(formattest config Qt5::Test)
 
 add_executable(fieldtest fieldtest.cpp ../field.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(fieldtest)
 add_test(fieldtest fieldtest)
 ecm_mark_as_test(fieldtest)
-TARGET_LINK_LIBRARIES(fieldtest core Qt5::Test)
+TARGET_LINK_LIBRARIES(fieldtest config utils Qt5::Test)
 
 add_executable(comparisontest comparisontest.cpp ../field.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(comparisontest)
 add_test(comparisontest comparisontest)
 ecm_mark_as_test(comparisontest)
-TARGET_LINK_LIBRARIES(comparisontest utils core Qt5::Test)
+TARGET_LINK_LIBRARIES(comparisontest tellicomodels Qt5::Test)
 
 add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(imagetest)
@@ -112,6 +112,7 @@ set(TELLICO_TEST_LIBS
    collections
    utils
    images
+   core
    tellicomodels
    Qt5::Test
    KF5::KIOCore
@@ -215,15 +216,16 @@ add_executable(bibtexmltest bibtexmltest.cpp
 ecm_mark_nongui_executable(bibtexmltest)
 add_test(bibtexmltest bibtexmltest)
 ecm_mark_as_test(bibtexmltest)
-TARGET_LINK_LIBRARIES(bibtexmltest translatorstest ${TELLICO_TEST_LIBS})
+TARGET_LINK_LIBRARIES(bibtexmltest translatorstest core ${TELLICO_TEST_LIBS})
 
 add_executable(citetest citetest.cpp
   ../collections/bibtexcollection.cpp
+  ../core/filehandler.cpp
 )
 ecm_mark_nongui_executable(citetest)
 add_test(citetest citetest)
 ecm_mark_as_test(citetest)
-TARGET_LINK_LIBRARIES(citetest cite tellicotest Qt5::Test)
+TARGET_LINK_LIBRARIES(citetest cite tellicotest config images Qt5::Test)
 ADD_DEPENDENCIES(citetest tellico_config)
 
 add_executable(ciwtest ciwtest.cpp

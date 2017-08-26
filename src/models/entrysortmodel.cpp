@@ -24,7 +24,7 @@
 
 #include "entrysortmodel.h"
 #include "models.h"
-#include "../utils/fieldcomparison.h"
+#include "fieldcomparison.h"
 #include "../field.h"
 #include "../entry.h"
 

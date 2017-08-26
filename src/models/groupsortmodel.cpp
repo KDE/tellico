@@ -24,9 +24,9 @@
 
 #include "groupsortmodel.h"
 #include "models.h"
+#include "stringcomparison.h"
 #include "../field.h"
 #include "../entrygroup.h"
-#include "../utils/stringcomparison.h"
 #include "../document.h"
 #include "../tellico_debug.h"
 
