@@ -42,7 +42,6 @@
 #include "../progressmanager.h"
 #include "../utils/cursorsaver.h"
 #include "../tellico_debug.h"
-#include "../utils/string_utils.h"
 
 #if defined HAVE_KF5KCDDB
 #include <KCddb/Client>

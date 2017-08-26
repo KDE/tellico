@@ -121,7 +121,7 @@ public Q_SLOTS:
    */
   void setContents(Tellico::Data::EntryList entries);
   /**
-   * Override the implmentation to check whether the entry needs to be modified
+   * Override the implementation to check whether the entry needs to be modified
    */
   virtual void reject() Q_DECL_OVERRIDE;
 

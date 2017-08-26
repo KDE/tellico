@@ -54,7 +54,6 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QDialogButtonBox>
-#include <QTimer>
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
