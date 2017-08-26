@@ -150,7 +150,7 @@ QString BibtexExporter::text() {
 
   StringSet usedKeys;
   Data::EntryList crossRefs;
-  QString type, key, newKey, value;
+  QString type, key, newKey;
   foreach(Data::EntryPtr entryIt, entries()) {
     type = entryIt->field(typeField);
     if(type.isEmpty()) {
