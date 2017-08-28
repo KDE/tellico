@@ -144,6 +144,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
           return QIcon(*icon);
         }
         // if it's not a local image, request that it be downloaded
+        // TODO: what if it's null image? Need to avoid repetitive requests
         if(!ImageFactory::hasLocalImage(id)) {
           if(!m_requestedImages.contains(id,entry)) {
             m_requestedImages.insert(id, entry);
