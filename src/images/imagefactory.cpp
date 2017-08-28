@@ -734,7 +734,7 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
      // don't emit anything
      return;
   }
-  // TODO: different than ::adImageImpl() - was that a bug?
+  // TODO: different than ::addImageImpl() - was that a bug?
   if(imageJob->linkOnly()) {
     Data::Image* newImage = new Data::Image(img);
     d->imageDict.insert(img.id(), newImage);
