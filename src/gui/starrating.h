@@ -24,8 +24,8 @@
 #include <QPainter>
 
 /**
-  * @brief This file will provide he StarRating which is
-  * responsible for painting rating stars. It will support ratings from 1 to 10 in different sizes
+  * @brief This file provides the StarRating for painting rating stars.
+  * It supports ratings from 1 to 10 in different sizes.
   */
 class StarRating {
 
