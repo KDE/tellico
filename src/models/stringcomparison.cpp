@@ -105,9 +105,11 @@ int Tellico::NumberComparison::compare(const QString& str1_, const QString& str2
       num2 = values2.at(index).toFloat(&ok2);
     }
     if(ok1 && ok2) {
-      int ret = static_cast<int>(num1 - num2);
-      if(ret != 0) {
-        return ret;
+      if(!qFuzzyCompare(num1, num2)) {
+        const float ret = num1 - num2;
+        // if abs(ret) < 0.5, we want to round up/down to -1 or 1
+        // so that comparing 0.2 to 0.4 yields 1, for example, and not 0
+        return ret < 0 ? qMin(-1, qRound(ret)) : qMax(1, qRound(ret));
       }
     }
     ++index;

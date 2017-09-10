@@ -1,6 +1,7 @@
 2017-09-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with showing stars in column view for float values (Bug 384547).
+	* Fixed bug with comparing float values (Bug 384547).
 
 2017-08-26  Robby Stephenson  <robby@periapsis.org>
 

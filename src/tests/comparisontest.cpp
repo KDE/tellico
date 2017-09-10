@@ -61,4 +61,8 @@ void ComparisonTest::testNumber_data() {
   QTest::newRow("multiple2") << QString("3; 2") << QString("2") << 1;
   QTest::newRow("multiple3") << QString("2") << QString("2; 3") << -1;
   QTest::newRow("multiple4") << QString("1; 2") << QString("1; 3") << -1;
+  QTest::newRow("float1") << QString("5.1") << QString("6.9") << -2;
+  QTest::newRow("float2") << QString("5.1") << QString("5.2") << -1;
+  QTest::newRow("float3") << QString("5.2") << QString("5.1") << 1;
+  QTest::newRow("float4") << QString("5.1") << QString("5.1") << 0;
 }
