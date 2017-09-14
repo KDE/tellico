@@ -106,9 +106,10 @@ public:
   static QString addImage(const QImage& image, const QString& format);
   static QString addImage(const QPixmap& image, const QString& format);
   /**
-   * Add an image, reading it from data, which is the case when reading from the data file. The
-   * @p id isn't strictly needed, since it can be reconstructed from the image data and format, but
-   * since it's already known, go ahead and use it.
+   * Add an image, reading it from data, which is the case when reading from the data file, and
+   * using the @p format and @p id as the image id. The image id is checked in the image cache
+   * image dict first, and then if it is not found, a new Image is constructed. The new image is
+   * inserted in the dict, and the image info is cached.
    *
    * @param data The image data
    * @param format The image format, from Qt's output format list

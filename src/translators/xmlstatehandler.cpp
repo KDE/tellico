@@ -181,8 +181,8 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   // and on reading the xml file, Tellico would load the image file, too
   // here, we need to scan all the image values in all the entries and check
   // maybe this is too costly, especially since the capability wasn't advertised?
-  const bool hasMDate = d->coll->hasField(QLatin1String("mdate"));
 
+  const bool hasMDate = d->coll->hasField(QLatin1String("mdate"));
   const int maxImageWarnings = 3;
   int imageWarnings = 0;
 
@@ -197,10 +197,10 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
       // if not, then there was no <image> in the XML
       // so it's a url, but maybe link only
       if(!ImageFactory::hasImageInfo(value)) {
-        QUrl u = QUrl::fromUserInput(value);
+        const QUrl u = QUrl::fromUserInput(value);
         // the image file name is a valid URL, but I want it to be a local URL or non empty remote one
         if(u.isValid() && (u.isLocalFile() || !u.host().isEmpty())) {
-          QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
+          const QString result = ImageFactory::addImage(u, !d->showImageLoadErrors || imageWarnings >= maxImageWarnings /* quiet */);
           if(result.isEmpty()) {
             // clear value for the field in this case
             value.clear();
@@ -217,6 +217,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
           entry->setField(field->name(), value);
           entry->setField(QLatin1String("mdate"), mdate);
         } else {
+          // reset the image id to be whatever was loaded
           entry->setField(field->name(), value);
         }
       }
