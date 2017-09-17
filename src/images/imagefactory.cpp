@@ -29,7 +29,6 @@
 #include "imageinfo.h"
 #include "imagedirectory.h"
 #include "imagejob.h"
-#include "../core/filehandler.h"
 #include "../config/tellico_config.h"
 #include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
@@ -133,36 +132,29 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   if(url_.isEmpty() || !url_.isValid()) {
     return Data::Image::null;
   }
-//  myLog() << url_.toDisplayString();
-  Data::Image* img = FileHandler::readImageFile(url_, QString(), quiet_, refer_);
-  if(!img) {
-    myLog() << "image not found:" << url_.toDisplayString();
+  myLog() << "addImageImpl() - " << url_.toDisplayString();
+  ImageJob* job = new ImageJob(url_, QString(), quiet_);
+  job->setLinkOnly(link_);
+  job->setReferrer(refer_);
+
+  if(!job->exec()) {
+    myDebug() << "ImageJOb failed to exec";
     return Data::Image::null;
   }
-  if(img->isNull()) {
-    myLog() << "null image:" << url_.toDisplayString();
-    delete img;
-    return Data::Image::null;
+
+  const Data::Image& img = job->image();
+
+  if(hasImageInMemory(img.id())) {
+    //const Data::Image& img2 = imageById(img.id());
+    myDebug() << "image is already in memory?";
   }
 
   if(link_) {
-    img->setLinkOnly(true);
-    img->setID(url_.url());
+    Data::Image* newImage = new Data::Image(img);
+    d->imageDict.insert(img.id(), newImage);
   }
-
-  if(hasImageInMemory(img->id())) {
-    const Data::Image& img2 = imageById(img->id());
-    if(!img2.isNull()) {
-      delete img;
-      return img2;
-    }
-  }
-
-  if(!link_) {
-    d->imageDict.insert(img->id(), img);
-  }
-  s_imageInfoMap.insert(img->id(), Data::ImageInfo(*img));
-  return *img;
+  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  return img;
 }
 
 void ImageFactory::requestImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
@@ -734,7 +726,6 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
      // don't emit anything
      return;
   }
-  // TODO: different than ::addImageImpl() - was that a bug?
   if(imageJob->linkOnly()) {
     Data::Image* newImage = new Data::Image(img);
     d->imageDict.insert(img.id(), newImage);
