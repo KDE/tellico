@@ -132,13 +132,13 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   if(url_.isEmpty() || !url_.isValid()) {
     return Data::Image::null;
   }
-  myLog() << "addImageImpl() - " << url_.toDisplayString();
+  myLog() << "addImageImpl():" << url_.toDisplayString();
   ImageJob* job = new ImageJob(url_, QString(), quiet_);
   job->setLinkOnly(link_);
   job->setReferrer(refer_);
 
   if(!job->exec()) {
-    myDebug() << "ImageJOb failed to exec";
+    myDebug() << "ImageJob failed to exec";
     return Data::Image::null;
   }
 
@@ -149,7 +149,9 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
     myDebug() << "image is already in memory?";
   }
 
-  if(link_) {
+  if(!link_) {
+    // hold the image in memory since it probably isn't written locally to disk yet
+    myDebug() << "image is not link, add to dict";
     Data::Image* newImage = new Data::Image(img);
     d->imageDict.insert(img.id(), newImage);
   }
@@ -726,7 +728,8 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
      // don't emit anything
      return;
   }
-  if(imageJob->linkOnly()) {
+  if(!imageJob->linkOnly()) {
+    // hold the image in memory since it probably isn't written locally to disk yet
     Data::Image* newImage = new Data::Image(img);
     d->imageDict.insert(img.id(), newImage);
   }
