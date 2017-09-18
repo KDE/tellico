@@ -151,7 +151,6 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
 
   if(!link_) {
     // hold the image in memory since it probably isn't written locally to disk yet
-    myDebug() << "image is not link, add to dict";
     Data::Image* newImage = new Data::Image(img);
     d->imageDict.insert(img.id(), newImage);
   }
