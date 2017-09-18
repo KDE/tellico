@@ -626,7 +626,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     case Data::Collection::Book:
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
-      {
+      if(optionalFields().contains(QLatin1String("keyword"))) {
         StringSet newWords;
         const QStringList keywords = FieldFormat::splitValue(entry->field(QLatin1String("keyword")));
         foreach(const QString& keyword, keywords) {
