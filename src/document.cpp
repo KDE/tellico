@@ -537,8 +537,9 @@ void Document::slotLoadAllImages() {
       // this is the early loading, so just by calling imageById()
       // the image gets sucked from the zip file and written to disk
       // by ImageFactory::imageById()
+      // TODO:: does this need to check against images with link only?
       if(ImageFactory::imageById(id).isNull()) {
-        myDebug() << "entry title:" << entry->title();
+        myDebug() << "Null image for entry:" << entry->title() << id;
       }
       images.add(id);
       if(m_cancelImageWriting) {
