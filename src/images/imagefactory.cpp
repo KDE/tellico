@@ -132,7 +132,6 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   if(url_.isEmpty() || !url_.isValid()) {
     return Data::Image::null;
   }
-  myLog() << "addImageImpl():" << url_.toDisplayString();
   ImageJob* job = new ImageJob(url_, QString(), quiet_);
   job->setLinkOnly(link_);
   job->setReferrer(refer_);
