@@ -35,11 +35,7 @@
 using Tellico::ImageJob;
 
 ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job()
-    , m_url(url_), m_id(id_), m_linkOnly(false) {
-  KIO::JobFlags flags = KIO::DefaultFlags;
-  if(quiet_) {
-    flags |= KIO::HideProgressInfo;
-  }
+    , m_url(url_), m_id(id_), m_linkOnly(false), m_quiet(quiet_) {
   QTimer::singleShot(0, this, SLOT(slotStart()));
 }
 
@@ -86,9 +82,13 @@ void ImageJob::slotStart() {
     }
     emitResult();
   } else {
+    KIO::JobFlags flags = KIO::DefaultFlags;
+    if(m_quiet) {
+      flags |= KIO::HideProgressInfo;
+    }
     // non-local valid url
     // KIO::storedGet seems to handle Content-Encoding: gzip ok
-    KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload);
+    KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload, flags);
     QObject::connect(getJob, &KJob::result, this, &ImageJob::getJobResult);
     if(!m_referrer.isEmpty()) {
       getJob->addMetaData(QLatin1String("referrer"), m_referrer.url());

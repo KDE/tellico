@@ -57,6 +57,7 @@ private:
   QUrl m_url;
   QString m_id;
   bool m_linkOnly;
+  bool m_quiet;
   QUrl m_referrer;
   Data::Image m_image;
 };
