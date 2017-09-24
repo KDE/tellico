@@ -131,10 +131,12 @@ public:
   static const Data::Image& imageById(const QString& id);
   static bool hasLocalImage(const QString& id);
   bool hasImageInMemory(const QString& id) const;
+  // just used for testing
+  bool hasNullImage(const QString& id) const;
   /**
    * Requests an image to be made available. Images already in the cache or available locally are
-   * considered to be instantly available. Others will be downloaded and the imageAvailable() signal
-   * is used to indicate completion
+   * considered to be instantly available. Otherwise, the id is assumed to be a URL and is downloaded
+   * The imageAvailable() signal is used to indicate completion and availability of the image.
    *
    * @param id The image id
    */

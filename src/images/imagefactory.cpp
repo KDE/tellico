@@ -66,6 +66,7 @@ public:
   ImageDirectory localImageDir; // kept local to data file
   TemporaryImageDirectory tempImageDir; // kept in tmp directory
   ImageZipArchive imageZipArchive;
+  StringSet nullImages;
 };
 
 ImageFactory::ImageFactory() : QObject(), d(new Private()) {
@@ -129,7 +130,7 @@ QString ImageFactory::addImage(const QUrl& url_, bool quiet_, const QUrl& refer_
 }
 
 const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
-  if(url_.isEmpty() || !url_.isValid()) {
+  if(url_.isEmpty() || !url_.isValid() || d->nullImages.contains(url_.url())) {
     return Data::Image::null;
   }
   ImageJob* job = new ImageJob(url_, QString(), quiet_);
@@ -137,11 +138,17 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   job->setReferrer(refer_);
 
   if(!job->exec()) {
-    myDebug() << "ImageJob failed to exec";
+//    myDebug() << "ImageJob failed to exec";
+    // ERR_UNKNOWN is used when the returned image is truly null
+    // rather than network error or some such
+    if(job->error() == KIO::ERR_UNKNOWN) {
+      d->nullImages.add(url_.url());
+    }
     return Data::Image::null;
   }
 
   const Data::Image& img = job->image();
+  Q_ASSERT(!img.isNull());
 
   if(hasImageInMemory(img.id())) {
     //const Data::Image& img2 = imageById(img.id());
@@ -310,7 +317,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
     return false;
   }
 //  myLog() << "dir =" << imgDir_->path() << "; id =" << id_;
-  bool exists = imgDir_->hasImage(id_);
+  const bool exists = imgDir_->hasImage(id_);
   // only write if it doesn't exist
   bool success = (!force_ && exists);
   if(!success) {
@@ -325,7 +332,7 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
 
 const Tellico::Data::Image& ImageFactory::imageById(const QString& id_) {
   Q_ASSERT(factory && "ImageFactory is not initialized!");
-  if(id_.isEmpty() || !factory) {
+  if(id_.isEmpty() || !factory || factory->d->nullImages.contains(id_)) {
     return Data::Image::null;
   }
 //  myLog() << "imageById" << id_;
@@ -483,8 +490,13 @@ bool ImageFactory::hasLocalImage(const QString& id_) {
 }
 
 void ImageFactory::requestImageById(const QString& id_) {
+  Q_ASSERT(factory && "ImageFactory is not initialized!");
   if(hasLocalImage(id_)) {
     emit factory->imageAvailable(id_);
+    return;
+  }
+  if(factory->d->nullImages.contains(id_)) {
+    // don't emit anything
     return;
   }
   const QUrl u(id_);
@@ -654,6 +666,10 @@ bool ImageFactory::hasImageInMemory(const QString& id_) const {
   return d->imageCache.contains(id_) || d->imageDict.contains(id_);
 }
 
+bool ImageFactory::hasNullImage(const QString& id_) const {
+  return d->nullImages.contains(id_);
+}
+
 // the purpose here is to remove images from the dict if they're is on the disk somewhere,
 // either in tempDir() or in dataDir(). The use for this is for calling pixmap() on an
 // image too big to stay in the cache. Then it stays in the dict forever.
@@ -723,6 +739,7 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   const Data::Image& img = imageJob->image();
   if(img.isNull()) {
      myDebug() << "null image for" << imageJob->url();
+     d->nullImages.add(imageJob->url().url());
      // don't emit anything
      return;
   }

@@ -31,6 +31,7 @@
 #include <QEventLoop>
 #include <QTemporaryFile>
 #include <QNetworkInterface>
+#include <QSignalSpy>
 
 QTEST_GUILESS_MAIN( ImageJobTest )
 
@@ -280,6 +281,32 @@ void ImageJobTest::testFactoryRequestLocal() {
   QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), true);
+}
+
+void ImageJobTest::testFactoryRequestLocalInvalid() {
+  QVERIFY(m_imageId.isEmpty());
+  QSignalSpy spy(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable);
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+          this, &ImageJobTest::slotAvailable);
+
+  // text file is an invalid image
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("imagejobtest.cpp"));
+  Tellico::ImageFactory::requestImageById(u.url());
+
+  // it will be a null image, but a local url, so image is still loaded with immediate signal
+  QCOMPARE(spy.count(), 1);
+  // the available image id is the url
+  QCOMPARE(m_imageId, u.url());
+
+  // now try to load it
+  Tellico::Data::Image img = Tellico::ImageFactory::imageById(m_imageId);
+  QVERIFY(img.isNull());
+  QCOMPARE(img.linkOnly(), false);
+  // make sure the null image list is updated
+  QVERIFY(Tellico::ImageFactory::self()->hasNullImage(m_imageId));
+  // the image should not be in local memory now
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
 }
 
 void ImageJobTest::testFactoryRequestNetwork() {

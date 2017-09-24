@@ -48,6 +48,7 @@ private Q_SLOTS:
   void testNetworkImageLink();
   void testNetworkImageInvalid();
   void testFactoryRequestLocal();
+  void testFactoryRequestLocalInvalid();
   void testFactoryRequestNetwork();
 
 Q_SIGNALS:
