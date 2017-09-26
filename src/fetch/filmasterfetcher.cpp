@@ -129,12 +129,20 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
 
   const QString image = entry->field(QLatin1String("cover"));
   if(image.contains(QLatin1Char('/'))) {
-    QUrl imageUrl(QString::fromLatin1(FILMASTER_API_URL));
-    imageUrl.setPath(imageUrl.path() + image);
-    const QString id = ImageFactory::addImage(imageUrl, true);
-    if(!id.isEmpty()) {
-      entry->setField(QLatin1String("cover"), id);
+    QUrl imageUrl;
+    if(image.startsWith(QLatin1String("//"))) {
+      imageUrl = QUrl(QLatin1String("http:") + image);
+    } else {
+      imageUrl = QUrl(QString::fromLatin1(FILMASTER_API_URL));
+      imageUrl.setPath(imageUrl.path() + image);
     }
+    const QString id = ImageFactory::addImage(imageUrl, true);
+    if(id.isEmpty()) {
+      myDebug() << "Failed to load" << imageUrl;
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
   }
   return entry;
 }

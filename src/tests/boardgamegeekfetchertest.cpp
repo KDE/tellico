@@ -68,6 +68,7 @@ void BoardGameGeekFetcherTest::testTitle() {
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("mechanism"))).at(0), QLatin1String("Dice Rolling"));
   QCOMPARE(entry->field(QLatin1String("num-player")), QLatin1String("3; 4"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
 }
 

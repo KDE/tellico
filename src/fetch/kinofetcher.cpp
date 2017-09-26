@@ -314,7 +314,12 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
   if(divMetaMatch.hasMatch()) {
     QRegularExpression coverRx(QString::fromLatin1("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QLatin1String("title"))));
     QRegularExpressionMatch coverMatch = coverRx.match(divMetaMatch.captured(1));
-    entry->setField(QLatin1String("cover"), coverMatch.captured(1));
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverMatch.captured(1)), true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
   }
 }
 

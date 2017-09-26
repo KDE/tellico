@@ -32,12 +32,14 @@
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../document.h"
+#include "../images/imagefactory.h"
 
 #include <QTest>
 
 QTEST_GUILESS_MAIN( TellicoModelTest )
 
 void TellicoModelTest::initTestCase() {
+  Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
 }
 

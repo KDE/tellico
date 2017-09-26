@@ -75,6 +75,7 @@ void AnimenfoFetcherTest::testMegami() {
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ああっ女神さまっ ~ いつも二人で"));
   QVERIFY(entry->field("plot").startsWith(QLatin1String("Keiichi finds out")));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void AnimenfoFetcherTest::testHachimitsu() {
@@ -110,6 +111,7 @@ void AnimenfoFetcherTest::testHachimitsu() {
   QCOMPARE(entry->field("animenfo-rating"), QLatin1String("9"));
   QVERIFY(entry->field("plot").startsWith(QLatin1String("Takemoto, Mayama, and Morita are students")));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field("animenfo").isEmpty());
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
   QCOMPARE(castList.count(), 7);
@@ -144,5 +146,6 @@ void AnimenfoFetcherTest::testGhost() {
   QCOMPARE(entry->field("author"), QString::fromUtf8("Shiro Masamune (士郎 正宗)"));
   QCOMPARE(entry->field("alttitle"), QLatin1String("Ghost in the Shell"));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field("animenfo").isEmpty());
 }

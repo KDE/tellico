@@ -50,9 +50,9 @@ void TheGamesDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QLatin1String("platform"), QLatin1String("Nintendo 64"));
   m_fieldValues.insert(QLatin1String("year"), QLatin1String("1997"));
   m_fieldValues.insert(QLatin1String("certification"), QLatin1String("Teen"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Shooter"));
+  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Action; Adventure; Shooter; Stealth"));
   m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Nintendo"));
-  m_fieldValues.insert(QLatin1String("developer"), QLatin1String("Rareware"));
+  m_fieldValues.insert(QLatin1String("developer"), QLatin1String("Rare"));
 }
 
 void TheGamesDBFetcherTest::testTitle() {
@@ -73,6 +73,7 @@ void TheGamesDBFetcherTest::testTitle() {
   }
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void TheGamesDBFetcherTest::testKeyword() {
@@ -93,4 +94,5 @@ void TheGamesDBFetcherTest::testKeyword() {
   }
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

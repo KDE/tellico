@@ -71,6 +71,7 @@ void MusicBrainzFetcherTest::testTitle() {
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void MusicBrainzFetcherTest::testKeyword() {
@@ -94,6 +95,7 @@ void MusicBrainzFetcherTest::testKeyword() {
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void MusicBrainzFetcherTest::testPerson() {
@@ -123,6 +125,7 @@ void MusicBrainzFetcherTest::testPerson() {
   }
   QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 // test grabbing cover art from coverartarchive.org
@@ -139,4 +142,5 @@ void MusicBrainzFetcherTest::testCoverArt() {
   QCOMPARE(entry->title(), QLatin1String("Laulut ja tarinat"));
   QEXPECT_FAIL("", "MusicBrainz covers from coverartarchive are failing", Abort);
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

@@ -163,6 +163,7 @@ void AmazonFetcherTest::testTitle() {
     }
   }
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void AmazonFetcherTest::testTitle_data() {
@@ -270,6 +271,7 @@ void AmazonFetcherTest::testIsbn() {
     }
   }
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void AmazonFetcherTest::testIsbn_data() {
@@ -335,6 +337,7 @@ void AmazonFetcherTest::testUpc() {
     }
   }
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   if(collType == Tellico::Data::Collection::Album) {
     QVERIFY(!entry->field(QLatin1String("genre")).isEmpty());
     QVERIFY(!entry->field(QLatin1String("track")).isEmpty());

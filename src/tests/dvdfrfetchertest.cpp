@@ -75,6 +75,7 @@ void DVDFrFetcherTest::testTitle() {
   }
   QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
@@ -108,6 +109,7 @@ void DVDFrFetcherTest::testUPC() {
   QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("DVD"));
   QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }
