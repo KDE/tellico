@@ -87,8 +87,9 @@ void DiscogsFetcher::search() {
 
   if(m_apiKey.isEmpty()) {
     myDebug() << "empty API key";
-    message(i18n("Access to data from Discogs.com requires a personal token."),
-            MessageHandler::Error);
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
     stop();
     return;
   }

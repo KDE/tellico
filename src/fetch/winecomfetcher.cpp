@@ -101,8 +101,9 @@ void WineComFetcher::continueSearch() {
 void WineComFetcher::doSearch() {
   if(m_apiKey.isEmpty()) {
     myDebug() << "No API key";
-    // TODO: all message for missing key
-    //message(i18n(""), MessageHandler::Error);
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
     stop();
     return;
   }
