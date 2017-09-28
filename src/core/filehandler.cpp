@@ -323,7 +323,7 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 }
 
 bool FileHandler::writeDataFile(QSaveFile& file_, const QByteArray& data_) {
-  myDebug() << "Writing to" << file_.fileName();
+//  myDebug() << "Writing to" << file_.fileName();
   QDataStream s(&file_);
   s.writeRawData(data_.data(), data_.size());
   file_.flush();

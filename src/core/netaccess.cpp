@@ -53,7 +53,6 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
     }
     return readable;
   }
-  myDebug() << "downloading a non-local file" << url_;
 
   Q_ASSERT(target_.isEmpty());
   if(target_.isEmpty()) {
