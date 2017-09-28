@@ -25,7 +25,6 @@
 #include "filehandler.h"
 #include "tellico_strings.h"
 #include "netaccess.h"
-#include "../images/image.h"
 #include "../utils/cursorsaver.h"
 #include "../utils/guiproxy.h"
 #include "../utils/xmlhandler.h"
@@ -170,48 +169,6 @@ QByteArray FileHandler::readDataFile(const QUrl& url_, bool quiet_) {
 
   f.open(quiet_);
   return f.file()->readAll();
-}
-
-Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString& id_, bool quiet_, const QUrl& referrer_) {
-  if(referrer_.isEmpty() || url_.isLocalFile()) {
-    return readImageFile(url_, id_, quiet_);
-  }
-
-  QTemporaryFile tempFile;
-  tempFile.open();
-  QUrl tempURL = QUrl::fromLocalFile(tempFile.fileName());
-
-  KIO::JobFlags flags = KIO::Overwrite;
-  if(quiet_) {
-    flags |= KIO::HideProgressInfo;
-  }
-
-  KIO::Job* job = KIO::file_copy(url_, tempURL, -1, flags);
-  job->addMetaData(QLatin1String("referrer"), referrer_.url());
-
-  KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  if(!job->exec()) {
-    if(!quiet_) {
-      QString str = i18n("Tellico is unable to load the image - %1.", url_.toDisplayString());
-      GUI::Proxy::sorry(str);
-    }
-    return nullptr;
-  }
-  return readImageFile(tempURL, id_, quiet_);
-}
-
-Tellico::Data::Image* FileHandler::readImageFile(const QUrl& url_, const QString& id_, bool quiet_) {
-  FileRef f(url_, quiet_);
-  if(!f.isValid()) {
-    return nullptr;
-  }
-
-  Data::Image* img = new Data::Image(f.fileName(), id_);
-  if(img->isNull() && !quiet_) {
-    QString str = i18n("Tellico is unable to load the image - %1.", url_.fileName());
-    GUI::Proxy::sorry(str);
-  }
-  return img;
 }
 
 // TODO: really, this should be decoupled from the writeBackupFile() function
@@ -366,10 +323,11 @@ bool FileHandler::writeDataURL(const QUrl& url_, const QByteArray& data_, bool f
 }
 
 bool FileHandler::writeDataFile(QSaveFile& file_, const QByteArray& data_) {
+  myDebug() << "Writing to" << file_.fileName();
   QDataStream s(&file_);
   s.writeRawData(data_.data(), data_.size());
   file_.flush();
-  bool success = file_.commit();
+  const bool success = file_.commit();
 #ifndef NDEBUG
   if(!success) {
     myDebug() << "error = " << file_.error();
