@@ -106,6 +106,7 @@ bool Document::newDocument(int type_) {
   m_coll->setTrackGroups(true);
 
   emit signalCollectionAdded(m_coll);
+  emit signalCollectionImagesLoaded(m_coll);
 
   slotSetModified(false);
   QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
