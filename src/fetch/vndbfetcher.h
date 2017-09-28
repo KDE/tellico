@@ -85,6 +85,7 @@ private Q_SLOTS:
   void slotComplete();
   void slotState();
   void slotError();
+  void slotRead();
 
 private:
   enum State {
@@ -101,6 +102,7 @@ private:
   QTcpSocket* m_socket;
   bool m_isConnected;
   State m_state;
+  QByteArray m_data;
 };
 
   } // end namespace
