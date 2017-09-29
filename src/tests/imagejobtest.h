@@ -50,6 +50,7 @@ private Q_SLOTS:
   void testFactoryRequestLocal();
   void testFactoryRequestLocalInvalid();
   void testFactoryRequestNetwork();
+  void testFactoryRequestNetworkLinkOnly();
 
 Q_SIGNALS:
   void exitLoop();

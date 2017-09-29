@@ -155,22 +155,10 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
     myDebug() << "image is already in memory?";
   }
 
-  if(!link_) {
-    // hold the image in memory since it probably isn't written locally to disk yet
-    Data::Image* newImage = new Data::Image(img);
-    d->imageDict.insert(img.id(), newImage);
-  }
+  // hold the image in memory since it probably isn't written locally to disk yet
+  d->imageDict.insert(img.id(), new Data::Image(img));
   s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   return img;
-}
-
-void ImageFactory::requestImageImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
-  myDebug() << "requestImageImpl()" << url_;
-  ImageJob* job = new ImageJob(url_, QString(), quiet_);
-  job->setLinkOnly(link_);
-  job->setReferrer(refer_);
-  connect(job, &ImageJob::result,
-          this, &ImageFactory::slotImageJobResult);
 }
 
 QString ImageFactory::addImage(const QImage& image_, const QString& format_) {
@@ -500,11 +488,25 @@ void ImageFactory::requestImageById(const QString& id_) {
     return;
   }
   const QUrl u(id_);
-  if((s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly) || !u.isRelative()) {
+  // what does it mean when the Id is an absolute Url and yet the image is not link only?
+  // Probably a heritage image id before the bugs were fixed.
+  const bool linkOnly = (s_imageInfoMap.contains(id_) && s_imageInfoMap[id_].linkOnly);
+  if(linkOnly || !u.isRelative()) {
     if(u.isValid()) {
-      factory->requestImageImpl(u, true, QUrl(), true);
+      factory->requestImageByUrlImpl(u, true /* quiet */, QUrl() /* referrer */, linkOnly);
+      if(!linkOnly) {
+        myDebug() << "Loading an image url that is not link only. The image id will get updated.";
+      }
     }
   }
+}
+
+void ImageFactory::requestImageByUrlImpl(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
+  ImageJob* job = new ImageJob(url_, QString() /* id, use calculated one */, quiet_);
+  job->setLinkOnly(link_);
+  job->setReferrer(refer_);
+  connect(job, &ImageJob::result,
+          this, &ImageFactory::slotImageJobResult);
 }
 
 Tellico::Data::ImageInfo ImageFactory::imageInfo(const QString& id_) {
@@ -743,11 +745,9 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
      // don't emit anything
      return;
   }
-  if(!imageJob->linkOnly()) {
-    // hold the image in memory since it probably isn't written locally to disk yet
-    Data::Image* newImage = new Data::Image(img);
-    d->imageDict.insert(img.id(), newImage);
-  }
+
+  // hold the image in memory since it probably isn't written locally to disk yet
+  d->imageDict.insert(img.id(), new Data::Image(img));
   s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
   emit factory->imageAvailable(img.id());
 }

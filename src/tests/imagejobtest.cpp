@@ -26,6 +26,7 @@
 
 #include "../images/imagejob.h"
 #include "../images/imagefactory.h"
+#include "../images/imageinfo.h"
 
 #include <QTest>
 #include <QEventLoop>
@@ -332,8 +333,41 @@ void ImageJobTest::testFactoryRequestNetwork() {
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(!img.isNull());
+  // id is the MD5 hash, since it's not link only
+  QCOMPARE(img.id(), QLatin1String("757322046f4aa54290a3d92b05b71ca1.png"));
+  QCOMPARE(img.format(), QByteArray("png"));
+  QCOMPARE(img.linkOnly(), false);
+}
+
+void ImageJobTest::testFactoryRequestNetworkLinkOnly() {
+  if(!networkIsAvailable()) {
+    QSKIP("This test requires network access", SkipSingle);
+    return;
+  }
+
+  QVERIFY(m_imageId.isEmpty());
+  connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
+          this, &ImageJobTest::slotAvailable);
+
+  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  // first, tell the image factory that the image is link only
+  Tellico::Data::ImageInfo info(u.url(), "PNG", 64, 64, true /* link only */);
+  Tellico::ImageFactory::cacheImageInfo(info);
+
+  Tellico::ImageFactory::requestImageById(u.url());
+
+  enterLoop();
+  QVERIFY(!m_imageId.isEmpty());
+  // success!
+  QCOMPARE(m_result, 0);
+  // the image should be in local memory now
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(m_imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(m_imageId));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
+  QVERIFY(!img.isNull());
   // id is not the MD5 hash
-  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QCOMPARE(img.id(), u.url());
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), true);
 }
