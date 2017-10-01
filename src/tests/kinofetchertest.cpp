@@ -82,4 +82,5 @@ void KinoFetcherTest::testTitle() {
   QCOMPARE(entry->field("certification"), QLatin1String("FSK 12 (DE)"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

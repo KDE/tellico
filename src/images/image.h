@@ -35,6 +35,7 @@ namespace Tellico {
   class ImageDirectory;
   class ImageZipArchive;
   class FileHandler;
+  class ImageJob;
 
   namespace Data {
 
@@ -47,6 +48,7 @@ friend class Tellico::ImageFactory;
 friend class Tellico::ImageDirectory;
 friend class Tellico::ImageZipArchive;
 friend class Tellico::FileHandler;
+friend class Tellico::ImageJob;
 
 public:
   ~Image();
@@ -74,11 +76,8 @@ private:
   Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);
 
-  //disable copy
-  Image(const Image&);
-  Image& operator=(const Image&);
-
   void setID(const QString& id);
+  void setFormat(const QByteArray& format_) { m_format = format_; }
   void calculateID();
 
   QString m_id;

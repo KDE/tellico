@@ -159,16 +159,6 @@ public:
 
 private:
   /**
-   * Read contents of a file into an image. It's private since everything should use the
-   * ImageFactory methods.
-   *
-   * @param url The URL of the file
-   * @param quiet If errors should be quiet
-   * @return The image
-   */
-  static Data::Image* readImageFile(const QUrl& url, const QString& id = QString(), bool quiet=false);
-  static Data::Image* readImageFile(const QUrl& url, const QString& id, bool quiet, const QUrl& referrer);
-  /**
    * Writes the contents of a string to a file.
    *
    * @param file The file object

@@ -64,6 +64,7 @@ void BiblioShareFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void BiblioShareFetcherTest::testIsbn13() {
@@ -83,4 +84,5 @@ void BiblioShareFetcherTest::testIsbn13() {
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

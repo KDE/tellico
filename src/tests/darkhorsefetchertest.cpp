@@ -82,5 +82,6 @@ void DarkHorseFetcherTest::testComic() {
   QCOMPARE(entry->field("artist"), QLatin1String("Ethan Nicolle"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
 }

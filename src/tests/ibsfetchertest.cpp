@@ -115,4 +115,5 @@ void IBSFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field("publisher"), QLatin1String("Mondadori"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

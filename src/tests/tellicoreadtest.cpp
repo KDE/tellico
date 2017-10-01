@@ -31,6 +31,8 @@
 #include "../collections/coincollection.h"
 #include "../collectionfactory.h"
 #include "../translators/tellicoxmlexporter.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
 #include "../fieldformat.h"
 #include "../entry.h"
 
@@ -54,6 +56,11 @@ void TellicoReadTest::initTestCase() {
     Tellico::Data::CollPtr coll = importer.collection();
     m_collections.append(coll);
   }
+  Tellico::ImageFactory::init();
+}
+
+void TellicoReadTest::init() {
+  Tellico::ImageFactory::clean(true);
 }
 
 void TellicoReadTest::testBookCollection() {
@@ -212,4 +219,74 @@ void TellicoReadTest::testDuplicateBorrowers() {
   QVERIFY(bor);
 
   QCOMPARE(bor->loans().count(), 2);
+}
+
+void TellicoReadTest::testLocalImage() {
+  // this is the md5 hash of the tellico.png icon, used as an image id
+  const QString imageId(QL1("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  // not yet loaded
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/local_image.xml"));
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  // replace %COVER% with image file location
+  fileText.replace(QL1("%COVER%"),
+                   QFINDTESTDATA("../../icons/tellico.png"));
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QLatin1String("cover")), imageId);
+
+  // the image should be in local memory now
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+  QVERIFY(!img.isNull());
+}
+
+void TellicoReadTest::testRemoteImage() {
+  // this is the md5 hash of the logo.png icon, used as an image id
+  const QString imageId(QL1("757322046f4aa54290a3d92b05b71ca1.png"));
+  // not yet loaded
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/local_image.xml"));
+  QFile f(url.toLocalFile());
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+
+  QTextStream in(&f);
+  QString fileText = in.readAll();
+  // replace %COVER% with image file location
+  fileText.replace(QL1("%COVER%"),
+                   QL1("http://tellico-project.org/sites/default/files/logo.png"));
+
+  Tellico::Import::TellicoImporter importer(fileText);
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(QLatin1String("cover")), imageId);
+
+  // the image should be in local memory now
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
+  QVERIFY(Tellico::ImageFactory::self()->hasImageInfo(imageId));
+
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
+  QVERIFY(!img.isNull());
 }

@@ -83,6 +83,7 @@ void AllocineFetcherTest::testTitle() {
   QCOMPARE(castList.size(), 8);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void AllocineFetcherTest::testTitleAccented() {
@@ -179,6 +180,7 @@ void AllocineFetcherTest::testTitleAPI() {
   QCOMPARE(castList.size(), 5);
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void AllocineFetcherTest::testTitleAPIAccented() {

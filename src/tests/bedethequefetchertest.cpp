@@ -81,6 +81,7 @@ void BedethequeFetcherTest::testTitle() {
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testSeries() {
@@ -115,6 +116,7 @@ void BedethequeFetcherTest::testSeries() {
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testIsbn() {
@@ -149,6 +151,7 @@ void BedethequeFetcherTest::testIsbn() {
   QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testDonjon() {
@@ -174,6 +177,7 @@ void BedethequeFetcherTest::testDonjon() {
   QCOMPARE(entry->field("artist"), QLatin1String("Boulet"));
   QCOMPARE(entry->field("colorist"), QLatin1String("Albon, Lucie"));
   QCOMPARE(entry->field("isbn"), QLatin1String("2-84055-734-7"));
-  QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
+  QCOMPARE(entry->field("lien-bel"), QLatin1String("https://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

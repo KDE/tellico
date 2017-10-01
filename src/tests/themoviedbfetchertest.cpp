@@ -75,6 +75,7 @@ void TheMovieDBFetcherTest::testTitle() {
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Superman / Clark Kent"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 
@@ -108,6 +109,7 @@ void TheMovieDBFetcherTest::testTitleFr() {
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Brandon Routh::Superman / Clark Kent"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 

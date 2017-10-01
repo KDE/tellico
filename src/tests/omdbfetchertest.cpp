@@ -78,6 +78,7 @@ void OMDBFetcherTest::testTitle() {
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QLatin1String("Brandon Routh"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
   QCOMPARE(entry->field(QLatin1String("imdb")), QLatin1String("http://www.imdb.com/title/tt0348150/"));
 }

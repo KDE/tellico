@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,49 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOREADTEST_H
-#define TELLICOREADTEST_H
+#ifndef IMAGEJOBTEST_H
+#define IMAGEJOBTEST_H
 
 #include <QObject>
-#include <QList>
 
-#include "../collection.h"
+class KJob;
 
-class TellicoReadTest : public QObject {
+class ImageJobTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
   void initTestCase();
+  void cleanupTestCase();
   void init();
 
-  void testBookCollection();
-  void testEntries();
-  void testEntries_data();
-  void testCoinCollection();
-  void testTableData();
-  void testDuplicateLoans();
-  void testDuplicateBorrowers();
-  void testLocalImage();
-  void testRemoteImage();
+  void testInvalidUrl();
+  void testNonexistant();
+  void testUnreadable();
+  void testImageInvalid();
+  void testImageLoad();
+  void testImageLoadWithId();
+  void testImageLink();
+  void testNetworkImage();
+  void testNetworkImageLink();
+  void testNetworkImageInvalid();
+  void testFactoryRequestLocal();
+  void testFactoryRequestLocalInvalid();
+  void testFactoryRequestNetwork();
+  void testFactoryRequestNetworkLinkOnly();
+
+Q_SIGNALS:
+  void exitLoop();
+
+protected Q_SLOTS:
+  void slotGetResult(KJob *);
+  void slotAvailable(const QString&);
 
 private:
-  QList<Tellico::Data::CollPtr> m_collections;
+  void enterLoop();
+  bool networkIsAvailable();
+
+  int m_result;
+  QString m_imageId;
 };
 
 #endif

@@ -129,10 +129,20 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   }
 
   const QString output = Tellico::decodeHTML(data);
+#if 0
+  myWarning() << "Remove debug from kinopoiskfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test1.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << output;
+  }
+  f.close();
+#endif
 
-  // look for a paragraph, class=",", with an internal ink to "/level/1/film..."
+  // look for a paragraph, class=",", with an internal ink to "/film..."
   QRegExp resultRx(QLatin1String("<p class=\"name\">\\s*"
-                                 "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
+                                 "<a href=\"/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
                                  "<span class=\"year\">(.*)</span"));
   resultRx.setMinimal(true);
 
@@ -170,7 +180,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString results = Tellico::decodeHTML(FileHandler::readDataFile(url, true));
+  const QString results = Tellico::decodeHTML(FileHandler::readDataFile(url, true));
   if(results.isEmpty()) {
     myDebug() << "no text results";
     return Data::EntryPtr();
@@ -178,8 +188,8 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 
 //  myDebug() << url.url();
 #if 0
-  myWarning() << "Remove debug from ibsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.html"));
+  myWarning() << "Remove debug from kinopoiskfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -368,7 +378,12 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   QRegExp coverRx(QLatin1String("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
   coverRx.setMinimal(true);
   if(str_.contains(coverRx)) {
-    entry->setField(QLatin1String("cover"), coverRx.cap(1));
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverRx.cap(1)), true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
   }
   return entry;
 }

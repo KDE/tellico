@@ -69,11 +69,11 @@ void IGDBFetcherTest::testKeyword() {
   QCOMPARE(entry->field("platform"), QLatin1String("Nintendo Wii"));
   QCOMPARE(entry->field("certification"), QLatin1String("Teen"));
   QCOMPARE(entry->field("pegi"), QLatin1String("PEGI 12"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Adventure"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Platform; Puzzle; Role-playing (RPG); Adventure"));
   QCOMPARE(entry->field("publisher"), QLatin1String("Nintendo"));
   QCOMPARE(entry->field("developer"), QLatin1String("Nintendo EAD Group No. 3"));
   QCOMPARE(entry->field("igdb"), QLatin1String("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess"));
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).startsWith('/'));
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

@@ -78,4 +78,5 @@ void VNDBFetcherTest::testTitle() {
   }
   QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

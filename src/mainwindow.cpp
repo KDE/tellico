@@ -219,7 +219,6 @@ void MainWindow::slotInit() {
   slotToggleEntryEditor();
 
   initConnections();
-  ImageFactory::init();
   connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
           SLOT(slotImageLocationMismatch()));
   // Init DBUS
@@ -734,6 +733,9 @@ void MainWindow::initDocument() {
 
 void MainWindow::initView() {
   MARK;
+  // initialize the image factory before the entry models are created
+  ImageFactory::init();
+
   m_split = new QSplitter(Qt::Horizontal, this);
   setCentralWidget(m_split);
 
@@ -821,6 +823,8 @@ void MainWindow::initFileOpen(bool nofile_) {
     slotEnableModifiedActions(false);
 
     slotEntryCount();
+    // tell the entry views and models that there are no images to load
+    m_detailedView->slotRefreshImages();
 
     const int type = Kernel::self()->collectionType();
     QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));

@@ -3,6 +3,7 @@ SET(images_STAT_SRCS
    imagedirectory.cpp
    imagefactory.cpp
    imageinfo.cpp
+   imagejob.cpp
    )
 
 add_library(images STATIC ${images_STAT_SRCS})

@@ -88,6 +88,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
   QVERIFY(altTitleList.contains(QLatin1String("Herencia de un valiente")));
   QVERIFY(!entry->field("alttitle").contains(QLatin1String("See more")));
@@ -170,6 +171,7 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(set(entry, "writer"), set("Ikki Kajiwara; Hisao Maki"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=314113

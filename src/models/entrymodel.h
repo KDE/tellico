@@ -70,6 +70,9 @@ public:
 
   QModelIndex indexFromEntry(Data::EntryPtr entry) const;
 
+private Q_SLOTS:
+  void refreshImage(const QString& id);
+
 private:
   Data::EntryPtr entry(const QModelIndex& index) const;
   Data::FieldPtr field(const QModelIndex& index) const;
@@ -81,11 +84,12 @@ private:
   QIcon m_checkPix;
   QHash<int, int> m_saveStates;
   bool m_imagesAreAvailable;
-  mutable bool m_loadingImages;
 
   mutable QHash<int, QIcon*> m_defaultIcons;
   mutable QHash<long, QString> m_imageFields;
   mutable QCache<QString, QIcon> m_iconCache;
+  // maps ids of requested images into entries
+  mutable QMultiHash<QString, Data::EntryPtr> m_requestedImages;
 };
 
 } // end namespace

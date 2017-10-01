@@ -388,7 +388,7 @@ GoogleBookFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GoogleBook
   // richtext gets weird with size
   al->setMinimumWidth(al->sizeHint().width());
 
-  QLabel* label = new QLabel(i18n("API key: "), optionsWidget());
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new QLineEdit(optionsWidget());

@@ -122,5 +122,6 @@ void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Computers")));
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("XML")));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
 }

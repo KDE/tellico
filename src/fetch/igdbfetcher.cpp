@@ -99,6 +99,9 @@ void IGDBFetcher::continueSearch() {
 
   if(m_apiKey.isEmpty()) {
     myDebug() << "empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
     stop();
     return;
   }
@@ -169,6 +172,17 @@ Tellico::Data::EntryPtr IGDBFetcher::fetchEntryHook(uint uid_) {
     }
   }
   entry->setField(QLatin1String("developer"), developers.join(FieldFormat::delimiterString()));
+
+  // image might still be a URL
+  const QString image_id = entry->field(QLatin1String("cover"));
+  if(image_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QLatin1String("cover"), id);
+  }
 
   // clear the placeholder fields
   entry->setField(QLatin1String("pub-id"), QString());

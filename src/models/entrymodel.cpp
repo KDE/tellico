@@ -41,9 +41,10 @@ namespace {
 using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
-    m_imagesAreAvailable(false), m_loadingImages(false) {
+    m_imagesAreAvailable(false) {
   m_iconCache.setMaxCost(Config::iconCacheSize());
   m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
+  connect(ImageFactory::self(), &ImageFactory::imageAvailable, this, &EntryModel::refreshImage);
 }
 
 EntryModel::~EntryModel() {
@@ -142,14 +143,16 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         if(icon) {
           return QIcon(*icon);
         }
-        // this is an attempt at a workaround for Bug 382572, while refactoring to use asynch
-        // image loading is deferred to future work
-        if(m_loadingImages) {
+        // if it's not a local image, request that it be downloaded
+        if(!ImageFactory::hasLocalImage(id)) {
+          // it's probably a link only image, so the Id is the URL
+          if(!m_requestedImages.contains(id,entry)) {
+            m_requestedImages.insert(id, entry);
+            ImageFactory::requestImageById(id);
+          }
           return defaultIcon(entry->collection());
         }
-        m_loadingImages = true;
         const Data::Image& img = ImageFactory::imageById(id);
-        m_loadingImages = false;
         if(img.isNull()) {
           return defaultIcon(entry->collection());
         }
@@ -174,15 +177,18 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       }
 
       if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
-        // see note above re: Bug 382572
-        if(m_loadingImages) {
-          return QVariant();
-        }
-        m_loadingImages = true;
-        const Data::Image& img = ImageFactory::imageById(value);
-        m_loadingImages = false;
-        if(!img.isNull()) {
-          return img.convertToPixmap().scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
+        // if it's not a local image, request that it be downloaded
+        if(ImageFactory::hasLocalImage(value)) {
+          const Data::Image& img = ImageFactory::imageById(value);
+          if(!img.isNull()) {
+            return img.convertToPixmap().scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
+          }
+        } else {
+          if(!m_requestedImages.contains(value, entry)) {
+            myDebug() << "Requesting" << value;
+            m_requestedImages.insert(value, entry);
+            ImageFactory::requestImageById(value);
+          }
         }
       }
       return QVariant();
@@ -410,4 +416,15 @@ QString EntryModel::imageField(Data::CollPtr coll_) const {
     }
   }
   return m_imageFields.value(coll_->id());
+}
+
+void EntryModel::refreshImage(const QString& id_) {
+  myDebug() << "refreshImage()" << id_;
+  QMultiHash<QString, Data::EntryPtr>::iterator i = m_requestedImages.find(id_);
+  while(i != m_requestedImages.end() && i.key() == id_) {
+    QModelIndex index = indexFromEntry(i.value());
+    emit dataChanged(index, index);
+    ++i;
+  }
+  m_requestedImages.remove(id_);
 }

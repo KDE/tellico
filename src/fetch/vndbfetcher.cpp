@@ -79,10 +79,11 @@ void VNDBFetcher::readConfigHook(const KConfigGroup&) {
 
 void VNDBFetcher::search() {
   m_started = true;
+  m_data.clear();
 
   if(!m_socket) {
     m_socket = new QTcpSocket(this);
-    connect(m_socket, SIGNAL(readyRead()), SLOT(slotComplete()));
+    connect(m_socket, SIGNAL(readyRead()), SLOT(slotRead()));
     connect(m_socket, SIGNAL(stateChanged(QAbstractSocket::SocketState)), SLOT(slotState()));
     connect(m_socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(slotError()));
   }
@@ -170,16 +171,14 @@ Tellico::Fetch::FetchRequest VNDBFetcher::updateRequest(Data::EntryPtr entry_) {
 }
 
 void VNDBFetcher::slotComplete() {
-//  myDebug();
-
-  QByteArray data = m_socket->readAll();
-  if(data.isEmpty()) {
+  if(m_data.isEmpty()) {
     myDebug() << "no data";
     stop();
     return;
   }
 
-  // remove the late hex character
+  QByteArray data = m_data;
+  // remove the last hex character
   data.chop(1);
 
   if(data.startsWith("error")) { //krazy:exclude=strings
@@ -197,6 +196,7 @@ void VNDBFetcher::slotComplete() {
   if(m_state == PreLogin) {
     if(data.startsWith("ok")) { //krazy:exclude=strings
       m_state = PostLogin;
+      m_data.clear(); // reset data buffer
     } else {
       stop();
     }
@@ -222,7 +222,14 @@ void VNDBFetcher::slotComplete() {
   f.close();
 #endif
 
-  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QJsonParseError jsonError;
+  QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
+  if(doc.isNull()) {
+    myDebug() << "null JSON document:" << jsonError.errorString();
+    message(jsonError.errorString(), MessageHandler::Error);
+    stop();
+    return;
+  }
   QVariantMap topResultMap = doc.object().toVariantMap();
   QVariantList resultList = topResultMap.value(QLatin1String("items")).toList();
   if(resultList.isEmpty()) {
@@ -297,6 +304,16 @@ void VNDBFetcher::slotError() {
   }
   myDebug() << m_socket->errorString();
 }
+
+void VNDBFetcher::slotRead() {
+  m_data += m_socket->readAll();
+
+  // check the last character, if it's not the hex character, continue waiting
+  if(m_socket->atEnd() && m_data.endsWith(0x04)) {
+    slotComplete();
+  }
+}
+
 
 Tellico::Fetch::ConfigWidget* VNDBFetcher::configWidget(QWidget* parent_) const {
   return new VNDBFetcher::ConfigWidget(parent_, this);

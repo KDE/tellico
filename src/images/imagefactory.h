@@ -34,6 +34,7 @@
 #include <QPixmap>
 
 class KZip;
+class KJob;
 
 namespace Tellico {
   namespace Data {
@@ -105,9 +106,10 @@ public:
   static QString addImage(const QImage& image, const QString& format);
   static QString addImage(const QPixmap& image, const QString& format);
   /**
-   * Add an image, reading it from data, which is the case when reading from the data file. The
-   * @p id isn't strictly needed, since it can be reconstructed from the image data and format, but
-   * since it's already known, go ahead and use it.
+   * Add an image, reading it from data, which is the case when reading from the data file, and
+   * using the @p format and @p id as the image id. The image id is checked in the image cache
+   * image dict first, and then if it is not found, a new Image is constructed. The new image is
+   * inserted in the dict, and the image info is cached.
    *
    * @param data The image data
    * @param format The image format, from Qt's output format list
@@ -124,9 +126,21 @@ public:
    * is returned.
    *
    * @param id The image id
-   * @return The image referencenter
+   * @return The image reference
    */
   static const Data::Image& imageById(const QString& id);
+  static bool hasLocalImage(const QString& id);
+  bool hasImageInMemory(const QString& id) const;
+  // just used for testing
+  bool hasNullImage(const QString& id) const;
+  /**
+   * Requests an image to be made available. Images already in the cache or available locally are
+   * considered to be instantly available. Otherwise, the id is assumed to be a URL and is downloaded
+   * The imageAvailable() signal is used to indicate completion and availability of the image.
+   *
+   * @param id The image id
+   */
+  static void requestImageById(const QString& id);
   static Data::ImageInfo imageInfo(const QString& id);
   static void cacheImageInfo(const Data::ImageInfo& info);
   static bool hasImageInfo(const QString& id);
@@ -155,7 +169,11 @@ public:
   static ImageFactory* self();
 
 Q_SIGNALS:
+  void imageAvailable(const QString& id);
   void imageLocationMismatch();
+
+private Q_SLOTS:
+  void slotImageJobResult(KJob* job);
 
 private:
   /**
@@ -168,6 +186,8 @@ private:
    */
   const Data::Image& addImageImpl(const QUrl& url, bool quiet=false,
                                   const QUrl& referrer = QUrl(), bool linkOnly = false);
+  void requestImageByUrlImpl(const QUrl& url, bool quiet=false,
+                             const QUrl& referrer = QUrl(), bool linkOnly = false);
   /**
    * Add an image, reading it from a regular QImage, which is the case when dragging and dropping
    * an image in the @ref ImageWidget. The format has to be included, since the QImage doesn't
@@ -200,7 +220,6 @@ private:
   ImageFactory();
   ~ImageFactory();
 
-  bool hasImageInMemory(const QString& id) const;
   void releaseImages();
   void emitImageMismatch();
 

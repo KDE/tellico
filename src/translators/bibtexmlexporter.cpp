@@ -120,7 +120,7 @@ QString BibtexmlExporter::text() {
     if(key.isEmpty()) {
       key = BibtexHandler::bibtexKey(entryIt);
     }
-    QString newKey = key;
+    newKey = key;
     char c = 'a';
     while(usedKeys.has(newKey)) {
       // duplicate found!

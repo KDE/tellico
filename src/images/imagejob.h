@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,33 +22,47 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICOREADTEST_H
-#define TELLICOREADTEST_H
+#ifndef TELLICO_IMAGEJOB_H
+#define TELLICO_IMAGEJOB_H
 
-#include <QObject>
-#include <QList>
+#include <KIO/Job>
 
-#include "../collection.h"
+#include "image.h"
 
-class TellicoReadTest : public QObject {
+namespace Tellico {
+
+/**
+ * @author Robby Stephenson
+ */
+class ImageJob : public KIO::Job {
 Q_OBJECT
 
-private Q_SLOTS:
-  void initTestCase();
-  void init();
+public:
+  ImageJob(const QUrl& url, const QString& id = QString(), bool quiet=false);
+  virtual ~ImageJob();
 
-  void testBookCollection();
-  void testEntries();
-  void testEntries_data();
-  void testCoinCollection();
-  void testTableData();
-  void testDuplicateLoans();
-  void testDuplicateBorrowers();
-  void testLocalImage();
-  void testRemoteImage();
+  virtual QString errorString() const Q_DECL_OVERRIDE;
+  QUrl url() const { return m_url; }
+  bool linkOnly() const { return m_linkOnly; }
+  const Data::Image& image() const;
+
+  void setLinkOnly(bool linkOnly);
+  void setReferrer(const QUrl& referrer);
+
+private Q_SLOTS:
+  void slotStart();
+  void getJobResult(KJob* job);
 
 private:
-  QList<Tellico::Data::CollPtr> m_collections;
+  QUrl m_url;
+  QString m_id;
+  bool m_linkOnly;
+  bool m_quiet;
+  QUrl m_referrer;
+  Data::Image m_image;
 };
+
+} // end namespace
+
 
 #endif

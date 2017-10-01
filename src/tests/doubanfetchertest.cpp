@@ -75,6 +75,7 @@ void DoubanFetcherTest::testBookTitle() {
   QCOMPARE(entry->field("pages"), QLatin1String("176"));
   QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 
@@ -112,6 +113,7 @@ void DoubanFetcherTest::testISBN() {
   QCOMPARE(entry->field("douban"), QLatin1String("https://book.douban.com/subject/5422665/"));
   QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 
@@ -148,6 +150,7 @@ void DoubanFetcherTest::testVideo() {
 //  QVERIFY(!entry->field(QLatin1String("language")).isEmpty());
 //  QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
 }
 
@@ -175,6 +178,7 @@ void DoubanFetcherTest::testMusic() {
   QCOMPARE(trackList.front(), QLatin1String("Danger Zone::Kenny Loggins"));
 //  QVERIFY(!entry->field(QLatin1String("keyword")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void DoubanFetcherTest::testMusicAdele() {
@@ -199,6 +203,7 @@ void DoubanFetcherTest::testMusicAdele() {
   QCOMPARE(trackList.count(), 15);
   QCOMPARE(trackList.front(), QLatin1String("Rolling in the Deep"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
 
 void DoubanFetcherTest::testMusicArtPepper() {
@@ -224,4 +229,5 @@ void DoubanFetcherTest::testMusicArtPepper() {
   QCOMPARE(trackList.count(), 9);
   QCOMPARE(trackList.front(), QLatin1String("You'd Be So Nice To Come Home To::Art Pepper::5:25"));
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }

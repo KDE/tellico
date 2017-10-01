@@ -85,4 +85,5 @@ void KinoPoiskFetcherTest::testSuperman() {
 //  QVERIFY(entry->field("plot").startsWith(QString::fromUtf8("Возвратившись на Землю")));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
 }
