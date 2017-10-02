@@ -150,14 +150,11 @@ const Tellico::Data::Image& ImageFactory::addImageImpl(const QUrl& url_, bool qu
   const Data::Image& img = job->image();
   Q_ASSERT(!img.isNull());
 
-  if(hasImageInMemory(img.id())) {
-    //const Data::Image& img2 = imageById(img.id());
-    myDebug() << "image is already in memory?";
-  }
-
   // hold the image in memory since it probably isn't written locally to disk yet
-  d->imageDict.insert(img.id(), new Data::Image(img));
-  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  if(!d->imageDict.contains(img.id())) {
+    d->imageDict.insert(img.id(), new Data::Image(img));
+    s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  }
   return img;
 }
 
@@ -682,7 +679,7 @@ void ImageFactory::releaseImages() {
   }
 
   foreach(const QString& id, s_imagesToRelease) {
-    if(!d->imageDict.value(id)) {
+    if(!d->imageDict.contains(id)) {
       continue;
     }
     if(d->dataImageDir.hasImage(id) ||
@@ -747,8 +744,10 @@ void ImageFactory::slotImageJobResult(KJob* job_) {
   }
 
   // hold the image in memory since it probably isn't written locally to disk yet
-  d->imageDict.insert(img.id(), new Data::Image(img));
-  s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  if(!d->imageDict.contains(img.id())) {
+    d->imageDict.insert(img.id(), new Data::Image(img));
+    s_imageInfoMap.insert(img.id(), Data::ImageInfo(img));
+  }
   emit factory->imageAvailable(img.id());
 }
 
