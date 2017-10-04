@@ -32,6 +32,7 @@
 #include <QRegExp>
 #include <QTextCodec>
 #include <QVariant>
+#include <QCache>
 
 namespace {
   static const int STRING_STORE_SIZE = 997; // too big, too small?
@@ -125,11 +126,16 @@ QString Tellico::fromHtmlData(const QByteArray& data_, const char* codecName) {
 }
 
 QString Tellico::removeAccents(const QString& value_) {
+  static QCache<QString, QString> stringCache(STRING_STORE_SIZE);
+  if(stringCache.contains(value_)) {
+    return *stringCache.object(value_);
+  }
   QString value2 = value_.normalized(QString::NormalizationForm_D);
   // remove accents from table "Combining Diacritical Marks"
   for(int i = 0x0300; i <= 0x036F; ++i) {
     value2.remove(QChar(i));
   }
+  stringCache.insert(value_, new QString(value2));
   return value2;
 }
 
