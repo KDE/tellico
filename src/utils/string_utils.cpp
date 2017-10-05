@@ -142,6 +142,7 @@ QString Tellico::removeAccents(const QString& value_) {
     pattern.chop(1);
     pattern += QLatin1Char(')');
     rx.setPattern(pattern);
+    rx.optimize();
   }
   // remove accents from table "Combining Diacritical Marks"
   const QString value2 = value_.normalized(QString::NormalizationForm_D).remove(rx);
