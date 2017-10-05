@@ -33,6 +33,7 @@
 QTEST_APPLESS_MAIN( EntityTest )
 
 #define QL1(x) QString::fromLatin1(x)
+#define QU8(x) QString::fromUtf8(x)
 
 void EntityTest::testEntities() {
   QFETCH(QByteArray, data);
@@ -49,4 +50,24 @@ void EntityTest::testEntities_data() {
   QTest::newRow("&fake;") << QByteArray("&fake;") << QL1("&fake;");
   QTest::newRow("&#48;") << QByteArray("&#48;") << QL1("0");
   QTest::newRow("robby&#48;robb") << QByteArray("robby&#48;robby") << QL1("robby0robby");
+}
+
+void EntityTest::testAccents() {
+  QFETCH(QString, inputString);
+  QFETCH(QString, expectedString);
+
+  QCOMPARE(Tellico::removeAccents(inputString), expectedString);
+}
+
+void EntityTest::testAccents_data() {
+  QTest::addColumn<QString>("inputString");
+  QTest::addColumn<QString>("expectedString");
+
+  QTest::newRow("robby") << QL1("robby") << QL1("robby");
+  QTest::newRow("jose") << QU8("José Guzmán") << QL1("Jose Guzman");
+  QTest::newRow("inarritu") << QU8("Alejandro González Iñárritu") << QL1("Alejandro Gonzalez Inarritu");
+  QTest::newRow("harakiri") << QU8("'Shitsurakuen': jôbafuku onna harakiri") << QL1("'Shitsurakuen': jobafuku onna harakiri");
+  QTest::newRow("svet") << QU8("Tmavomodrý Svět") << QL1("Tmavomodry Svet");
+  QTest::newRow("russian") << QU8("Возвращение Супермена") << QU8("Возвращение Супермена");
+  QTest::newRow("chinese") << QU8("湖南科学技术出版社") << QU8("湖南科学技术出版社");
 }
