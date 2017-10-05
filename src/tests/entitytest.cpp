@@ -89,7 +89,6 @@ void EntityTest::testI18nReplace_data() {
   QTest::newRow("basic3") << QL1("\n   <i18n>robby</i18n>  \n davy\n") << QL1("robby davy\n");
   // KDE bug 254863
   QTest::newRow("bug254863") << QL1("<i18n>Cer&ca</i18n>") << QL1("Cer&amp;ca");
-  QTest::newRow("empty") << QL1("<i18n></i18n>") << QL1("");
   QTest::newRow("multiple") << QL1("<i18n>robby</i18n> davy <i18n>jason</i18n>") << QL1("robby davy jason");
   QTest::newRow("bracket") << QL1("<i18n>robby <robby></i18n>") << QL1("robby &lt;robby&gt;");
 }
