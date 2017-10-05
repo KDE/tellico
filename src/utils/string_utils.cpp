@@ -30,6 +30,7 @@
 #include <KRandom>
 
 #include <QRegExp>
+#include <QRegularExpression>
 #include <QTextCodec>
 #include <QVariant>
 #include <QCache>
@@ -130,11 +131,18 @@ QString Tellico::removeAccents(const QString& value_) {
   if(stringCache.contains(value_)) {
     return *stringCache.object(value_);
   }
-  QString value2 = value_.normalized(QString::NormalizationForm_D);
-  // remove accents from table "Combining Diacritical Marks"
-  for(int i = 0x0300; i <= 0x036F; ++i) {
-    value2.remove(QChar(i));
+  static QRegularExpression rx;
+  if(rx.pattern().isEmpty()) {
+    QString pattern(QLatin1String("(?:"));
+    for(int i = 0x0300; i <= 0x036F; ++i) {
+      pattern += QChar(i) + QLatin1Char('|');
+    }
+    pattern.chop(1);
+    pattern += QLatin1Char(')');
+    rx.setPattern(pattern);
   }
+  // remove accents from table "Combining Diacritical Marks"
+  const QString value2 = value_.normalized(QString::NormalizationForm_D).remove(rx);
   stringCache.insert(value_, new QString(value2));
   return value2;
 }
