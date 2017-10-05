@@ -29,7 +29,6 @@
 #include <KLocalizedString>
 #include <KRandom>
 
-#include <QRegExp>
 #include <QRegularExpression>
 #include <QTextCodec>
 #include <QVariant>
@@ -79,12 +78,15 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 
 QString Tellico::i18nReplace(QString text) {
   // Because QDomDocument sticks in random newlines, go ahead and grab them too
-  static QRegExp rx(QLatin1String("(?:\\n+ *)*<i18n>([^<]*)</i18n>(?: *\\n+)*"));
-  int pos = rx.indexIn(text);
-  while(pos > -1) {
+  static QRegularExpression rx(QLatin1String("(?:\\n+ *)*<i18n>(.*?)</i18n>(?: *\\n+)*"),
+                               QRegularExpression::OptimizeOnFirstUsageOption);
+  QRegularExpressionMatch match = rx.match(text);
+  while(match.hasMatch()) {
     // KDE bug 254863, be sure to escape just in case of spurious & entities
-    text.replace(pos, rx.matchedLength(), i18n(rx.cap(1).toUtf8().constData()).toHtmlEscaped());
-    pos = rx.indexIn(text, pos+1);
+    text.replace(match.capturedStart(),
+                 match.capturedLength(),
+                 i18n(match.captured(1).toUtf8().constData()).toHtmlEscaped());
+    match = rx.match(text, match.capturedStart()+1);
   }
   return text;
 }
