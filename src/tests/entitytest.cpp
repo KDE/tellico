@@ -71,3 +71,24 @@ void EntityTest::testAccents_data() {
   QTest::newRow("russian") << QU8("Возвращение Супермена") << QU8("Возвращение Супермена");
   QTest::newRow("chinese") << QU8("湖南科学技术出版社") << QU8("湖南科学技术出版社");
 }
+
+void EntityTest::testI18nReplace() {
+  QFETCH(QString, inputString);
+  QFETCH(QString, expectedString);
+
+  QCOMPARE(Tellico::i18nReplace(inputString), expectedString);
+}
+
+void EntityTest::testI18nReplace_data() {
+  QTest::addColumn<QString>("inputString");
+  QTest::addColumn<QString>("expectedString");
+
+  QTest::newRow("robby") << QL1("robby") << QL1("robby");
+  QTest::newRow("basic1") << QL1("<i18n>robby</i18n>") << QL1("robby");
+  QTest::newRow("basic2") << QL1("<i18n>robby davy</i18n>") << QL1("robby davy");
+  QTest::newRow("basic3") << QL1("\n   <i18n>robby</i18n>  \n davy\n") << QL1("robby davy\n");
+  // KDE bug 254863
+  QTest::newRow("bug254863") << QL1("<i18n>Cer&ca</i18n>") << QL1("Cer&amp;ca");
+  QTest::newRow("empty") << QL1("<i18n></i18n>") << QL1("");
+  QTest::newRow("multiple") << QL1("<i18n>robby</i18n> davy <i18n>jason</i18n>") << QL1("robby davy jason");
+}
