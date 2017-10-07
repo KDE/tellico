@@ -68,6 +68,11 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
   connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
 
+  m_flowButton = new QToolButton(this);
+  m_flowButton->setCheckable(true);
+  m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
+  connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
+
   QButtonGroup* bg = new QButtonGroup(this);
   bg->addButton(m_listButton);
   bg->addButton(m_iconButton);
