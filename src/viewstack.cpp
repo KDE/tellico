@@ -25,6 +25,7 @@
 #include "viewstack.h"
 #include "detailedlistview.h"
 #include "entryiconview.h"
+#include "gui/qxtflowview.h"
 #include "config/tellico_config.h"
 
 #include <KLocalizedString>
@@ -41,7 +42,8 @@ using Tellico::ViewStack;
 
 ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
     , m_listView(new DetailedListView(this))
-    , m_iconView(new EntryIconView(this)) {
+    , m_iconView(new EntryIconView(this))
+    , m_flowView(new QxtFlowView(this)) {
   QBoxLayout* lay = new QVBoxLayout();
   lay->setMargin(0);
   lay->setSpacing(0);
@@ -61,12 +63,19 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_iconButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-icons")));
   connect(m_iconButton, SIGNAL(clicked(bool)), SLOT(showIconView()));
 
+  m_flowButton = new QToolButton(this);
+  m_flowButton->setCheckable(true);
+  m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
+  connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
+
   QButtonGroup* bg = new QButtonGroup(this);
   bg->addButton(m_listButton);
   bg->addButton(m_iconButton);
+  bg->addButton(m_flowButton);
 
   hlay->addWidget(m_listButton);
   hlay->addWidget(m_iconButton);
+  hlay->addWidget(m_flowButton);
   hlay->addStretch(10);
 
   m_decreaseIconSizeButton = new QToolButton(this);
@@ -98,6 +107,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   lay->addWidget(m_stack);
   m_stack->addWidget(m_listView);
   m_stack->addWidget(m_iconView);
+  m_stack->addWidget(m_flowView);
 
   setLayout(lay);
 }
@@ -130,6 +140,11 @@ void ViewStack::showListView() {
 
 void ViewStack::showIconView() {
   m_stack->setCurrentWidget(m_iconView);
+  setIconSizeInterfaceVisible(true);
+}
+
+void ViewStack::showFlowView() {
+  m_stack->setCurrentWidget(m_flowView);
   setIconSizeInterfaceVisible(true);
 }
 

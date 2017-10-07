@@ -46,6 +46,7 @@ class KActionMenu;
 class QCloseEvent;
 class QSplitter;
 class QSignalMapper;
+class QxtFlowView;
 
 namespace Tellico {
 // forward declarations
@@ -500,6 +501,7 @@ private:
   LoanView* m_loanView;
   EntryView* m_entryView;
   EntryIconView* m_iconView;
+  QxtFlowView* m_flowView;
   ViewStack* m_viewStack;
   QSignalMapper* m_updateMapper;
 

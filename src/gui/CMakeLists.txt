@@ -23,6 +23,8 @@ SET(gui_STAT_SRCS
    parafieldwidget.cpp
    previewdialog.cpp
    progress.cpp
+   qxtflowview.cpp
+   qxtflowview_p.cpp
    ratingdelegate.cpp
    ratingfieldwidget.cpp
    ratingwidget.cpp

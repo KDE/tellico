@@ -33,6 +33,9 @@
 #include <QMultiHash>
 
 namespace Tellico {
+  namespace Data {
+    class Image;
+  }
 
 /**
  * @author Robby Stephenson
@@ -75,7 +78,7 @@ private Q_SLOTS:
 private:
   Data::EntryPtr entry(const QModelIndex& index) const;
   Data::FieldPtr field(const QModelIndex& index) const;
-  QVariant requestImage(Data::EntryPtr entry, const QString& id) const;
+  const Data::Image& requestImage(Data::EntryPtr entry, const QString& id) const;
 
   Data::EntryList m_entries;
   Data::FieldList m_fields;
