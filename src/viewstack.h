@@ -32,6 +32,7 @@
 class QStackedWidget;
 class QSlider;
 class QToolButton;
+class QxtFlowView;
 
 namespace Tellico {
   class DetailedListView;
@@ -48,6 +49,7 @@ public:
 
   DetailedListView* listView() { return m_listView; }
   EntryIconView* iconView() { return m_iconView; }
+  QxtFlowView* flowView() { return m_flowView; }
 
   int currentWidget() const;
   void setCurrentWidget(int widget);
@@ -55,6 +57,7 @@ public:
 private Q_SLOTS:
   void showListView();
   void showIconView();
+  void showFlowView();
   /**
     * Called when the "Decrease Icon Size" button is clicked.
     */
@@ -76,9 +79,11 @@ private:
 
   DetailedListView* m_listView;
   EntryIconView* m_iconView;
+  QxtFlowView* m_flowView;
   QStackedWidget* m_stack;
   QToolButton* m_listButton;
   QToolButton* m_iconButton;
+  QToolButton* m_flowButton;
   QSlider* m_iconSizeSlider;
   QToolButton* m_increaseIconSizeButton;
   QToolButton* m_decreaseIconSizeButton;

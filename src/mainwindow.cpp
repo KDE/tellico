@@ -71,6 +71,7 @@
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
 #include "gui/dockwidget.h"
+#include "gui/qxtflowview.h"
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
 #include "tellico_debug.h"
@@ -777,6 +778,11 @@ void MainWindow::initView() {
   Controller::self()->addObserver(m_iconView);
   m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
                                 "an icon, which may be an image in the entry.</qt>"));
+
+  m_flowView = m_viewStack->flowView();
+  // use the same model in both views so they are sync'ed
+  m_flowView->setModel(m_detailedView->model());
+  m_flowView->setPictureRole(ImageRole);
 
   m_collectionViewDock->setWidget(m_viewStack);
   m_dummyWindow->addDockWidget(Qt::TopDockWidgetArea, m_collectionViewDock);

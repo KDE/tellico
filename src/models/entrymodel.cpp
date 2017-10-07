@@ -165,7 +165,29 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(value.isEmpty()) {
         return QVariant();
       }
-      return requestImage(entry, value);
+      {
+        const Data::Image& img = requestImage(entry, value);
+        return img.isNull() ? QVariant() : qVariantFromValue(img.convertToPixmap());
+      }
+
+    case ImageRole:
+      // return the primary image for the entry, no matter the index column
+      entry = this->entry(index_);
+      if(!entry) {
+        return QVariant();
+      }
+      field = entry->collection()->primaryImageField();
+      if(!field) {
+        return QVariant();
+      }
+      value = entry->field(field);
+      if(value.isEmpty()) {
+        return QVariant();
+      }
+      {
+        const Data::Image& img = requestImage(entry, value);
+        return img.isNull() ? QVariant() : img;
+      }
 
     case EntryPtrRole:
       entry = this->entry(index_);
@@ -378,21 +400,19 @@ void EntryModel::setImagesAreAvailable(bool available_) {
   }
 }
 
-QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) const {
+const Tellico::Data::Image& EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) const {
   if(!m_imagesAreAvailable) {
-    return QVariant();
+    return Data::Image::null;
   }
   // if it's not a local image, request that it be downloaded
   if(ImageFactory::hasLocalImage(id_)) {
-    const Data::Image& img = ImageFactory::imageById(id_);
-    if(!img.isNull()) {
-      return img.convertToPixmap();
-    }
-  } else if(!m_requestedImages.contains(id_, entry_)) {
+    return ImageFactory::imageById(id_);
+  }
+  if(!m_requestedImages.contains(id_, entry_)) {
     m_requestedImages.insert(id_, entry_);
     ImageFactory::requestImageById(id_);
   }
-  return QVariant();
+  return Data::Image::null;
 }
 
 void EntryModel::refreshImage(const QString& id_) {
