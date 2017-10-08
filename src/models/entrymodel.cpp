@@ -419,7 +419,6 @@ QString EntryModel::imageField(Data::CollPtr coll_) const {
 }
 
 void EntryModel::refreshImage(const QString& id_) {
-  myDebug() << "refreshImage()" << id_;
   QMultiHash<QString, Data::EntryPtr>::iterator i = m_requestedImages.find(id_);
   while(i != m_requestedImages.end() && i.key() == id_) {
     QModelIndex index = indexFromEntry(i.value());

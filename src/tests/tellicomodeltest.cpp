@@ -29,9 +29,13 @@
 #include "../models/entrymodel.h"
 #include "../models/entrysortmodel.h"
 #include "../models/filtermodel.h"
+#include "../models/entrygroupmodel.h"
+#include "../models/groupsortmodel.h"
+#include "../models/modeliterator.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../document.h"
+#include "../entrygroup.h"
 #include "../images/imagefactory.h"
 
 #include <QTest>
@@ -73,6 +77,15 @@ void TellicoModelTest::testEntryModel() {
   coll->addField(field2);
   entryModel.addFields(Tellico::Data::FieldList() << field2);
 
+  // Check FieldPtrRole in model data
+  QModelIndex index = entryModel.index(0, entryModel.columnCount()-1);
+  QVERIFY(index.isValid());
+  QCOMPARE(entryModel.data(index, Tellico::FieldPtrRole),
+           QVariant::fromValue(field2));
+  //check FieldPtrRole in header model data
+  QCOMPARE(entryModel.headerData(entryModel.columnCount()-1, Qt::Horizontal, Tellico::FieldPtrRole),
+           QVariant::fromValue(field2));
+
   Tellico::FilterRule* rule1 = new Tellico::FilterRule(QLatin1String("title"),
                                                        QLatin1String("Star Wars"),
                                                        Tellico::FilterRule::FuncEquals);
@@ -100,6 +113,10 @@ void TellicoModelTest::testEntryModel() {
   QCOMPARE(coll->entries().count() + 1, entryModel.rowCount(QModelIndex()));
   entryModel.removeEntries(Tellico::Data::EntryList() << entry2);
   QCOMPARE(coll->entries().count(), entryModel.rowCount(QModelIndex()));
+
+  for(Tellico::ModelIterator eIt(&entryModel); eIt.entry(); ++eIt) {
+    QVERIFY(eIt.isValid());
+  }
 }
 
 void TellicoModelTest::testFilterModel() {
@@ -126,4 +143,34 @@ void TellicoModelTest::testFilterModel() {
   filterModel.invalidate(filterModel.index(0, 0));
   QCOMPARE(filter, filterModel.filter(filterModel.index(0, 0)));
   QVERIFY(filterModel.indexContainsEntry(filterModel.index(0, 0), entry1));
+}
+
+void TellicoModelTest::testGroupModel() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true)); // add default fields
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QLatin1String("title"), QLatin1String("Star Wars"));
+  entry1->setField(QLatin1String("author"), QLatin1String("George Lucas"));
+  coll->addEntries(entry1);
+
+  Tellico::EntryGroupModel groupModel(this);
+  ModelTest test1(&groupModel);
+
+  Tellico::GroupSortModel sortModel(this);
+  ModelTest test2(&sortModel);
+
+  sortModel.setSourceModel(&groupModel);
+
+  Tellico::Data::EntryGroupDict* dict = coll->entryGroupDictByName(QLatin1String("author"));
+  groupModel.addGroups(dict->values(), QString());
+  QCOMPARE(sortModel.rowCount(), 1);
+
+  for(Tellico::ModelIterator gIt(&groupModel); gIt.group(); ++gIt) {
+    QVERIFY(gIt.isValid());
+    Tellico::Data::EntryGroup* group = gIt.group();
+    QVERIFY(group);
+    QCOMPARE(group->groupName(), QLatin1String("Lucas, George"));
+    QCOMPARE(group->fieldName(), QLatin1String("author"));
+    QCOMPARE(group->size(), 1);
+    QVERIFY(!group->hasEmptyGroupName());
+  }
 }
