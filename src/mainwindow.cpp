@@ -825,26 +825,28 @@ void MainWindow::initFileOpen(bool nofile_) {
     slotEntryCount();
     // tell the entry views and models that there are no images to load
     m_detailedView->slotRefreshImages();
-
-    const int type = Kernel::self()->collectionType();
-    QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));
-    QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
-    text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
-    text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
-    text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
-    text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
-    text.replace(QLatin1String("$IMGDIR$"),  QUrl::fromLocalFile(ImageFactory::tempDir()).url());
-    text.replace(QLatin1String("$BANNER$"),
-                 i18n("Welcome to the Tellico Collection Manager"));
-    text.replace(QLatin1String("$WELCOMETEXT$"),
-                 i18n("<h3>Tellico is a tool for managing collections of books, "
-                      "videos, music, and whatever else you want to catalog.</h3>"
-                      "<h3>New entries can be added to your collection by "
-                      "<a href=\"tc:///coll_new_entry\">entering data manually</a> or by "
-                      "<a href=\"tc:///edit_search_internet\">downloading data</a> from "
-                      "various Internet sources.</h3>"));
-    m_entryView->showText(text);
   }
+
+  // show welcome text, even when opening an existing collection
+  const int type = Kernel::self()->collectionType();
+  QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));
+  QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
+  text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
+  text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
+  text.replace(QLatin1String("$COLOR1$"),  Config::templateHighlightedTextColor(type).name());
+  text.replace(QLatin1String("$COLOR2$"),  Config::templateHighlightedBaseColor(type).name());
+  text.replace(QLatin1String("$IMGDIR$"),  QUrl::fromLocalFile(ImageFactory::tempDir()).url());
+  text.replace(QLatin1String("$BANNER$"),
+                i18n("Welcome to the Tellico Collection Manager"));
+  text.replace(QLatin1String("$WELCOMETEXT$"),
+                i18n("<h3>Tellico is a tool for managing collections of books, "
+                    "videos, music, and whatever else you want to catalog.</h3>"
+                    "<h3>New entries can be added to your collection by "
+                    "<a href=\"tc:///coll_new_entry\">entering data manually</a> or by "
+                    "<a href=\"tc:///edit_search_internet\">downloading data</a> from "
+                    "various Internet sources.</h3>"));
+  m_entryView->showText(text);
+
   m_initialized = true;
 }
 

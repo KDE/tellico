@@ -29,12 +29,12 @@
 #include "entrygroup.h"
 #include "filter.h"
 #include "controller.h"
-#include "../tellico_debug.h"
 #include "models/entrygroupmodel.h"
 #include "models/groupsortmodel.h"
 #include "models/modelmanager.h"
 #include "models/models.h"
 #include "gui/countdelegate.h"
+#include "tellico_debug.h"
 
 #include <KLocalizedString>
 
@@ -54,17 +54,10 @@ GroupView::GroupView(QWidget* parent_)
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  connect(this, SIGNAL(expanded(const QModelIndex&)),
-          SLOT(slotExpanded(const QModelIndex&)));
-
-  connect(this, SIGNAL(collapsed(const QModelIndex&)),
-          SLOT(slotCollapsed(const QModelIndex&)));
-
-  connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
-          SLOT(slotDoubleClicked(const QModelIndex&)));
-
-  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
-          SLOT(slotSortingChanged(int,Qt::SortOrder)));
+  connect(this, &GroupView::expanded, this, &GroupView::slotExpanded);
+  connect(this, &GroupView::collapsed, this, &GroupView::slotCollapsed);
+  connect(this, &GroupView::doubleClicked, this, &GroupView::slotDoubleClicked);
+  connect(header(), &QHeaderView::sortIndicatorChanged, this, &GroupView::slotSortingChanged);
 
   m_groupOpenIconName = QLatin1String("folder-open");
   m_groupClosedIconName = QLatin1String("folder");

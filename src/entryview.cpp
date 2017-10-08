@@ -32,12 +32,12 @@
 #include "images/imageinfo.h"
 #include "tellico_kernel.h"
 #include "utils/tellico_utils.h"
+#include "utils/datafileregistry.h"
 #include "core/filehandler.h"
 #include "config/tellico_config.h"
 #include "gui/drophandler.h"
 #include "document.h"
-#include "../utils/datafileregistry.h"
-#include "../tellico_debug.h"
+#include "tellico_debug.h"
 
 #include <KMessageBox>
 #include <KHTMLView>
