@@ -92,3 +92,21 @@ void EntityTest::testI18nReplace_data() {
   QTest::newRow("multiple") << QL1("<i18n>robby</i18n> davy <i18n>jason</i18n>") << QL1("robby davy jason");
   QTest::newRow("bracket") << QL1("<i18n>robby <robby></i18n>") << QL1("robby &lt;robby&gt;");
 }
+
+void EntityTest::testMinutes() {
+  QFETCH(int, seconds);
+  QFETCH(QString, minutesString);
+
+  QCOMPARE(Tellico::minutes(seconds), minutesString);
+}
+
+void EntityTest::testMinutes_data() {
+  QTest::addColumn<int>("seconds");
+  QTest::addColumn<QString>("minutesString");
+
+  QTest::newRow("1")   << 1   << QL1("0:01");
+  QTest::newRow("60")  << 60  << QL1("1:00");
+  QTest::newRow("600") << 600 << QL1("10:00");
+  QTest::newRow("0")   << 0   << QL1("0:00");
+  QTest::newRow("120") << 120 << QL1("2:00");
+}

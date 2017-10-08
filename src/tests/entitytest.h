@@ -37,6 +37,8 @@ private Q_SLOTS:
   void testAccents_data();
   void testI18nReplace();
   void testI18nReplace_data();
+  void testMinutes();
+  void testMinutes_data();
 };
 
 #endif
