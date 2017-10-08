@@ -35,7 +35,7 @@
 #include <QCache>
 
 namespace {
-  static const int STRING_STORE_SIZE = 997; // too big, too small?
+  static const int STRING_STORE_SIZE = 4999; // too big, too small?
 }
 
 QString Tellico::decodeHTML(const QByteArray& data_) {
