@@ -49,6 +49,7 @@ void VinoXMLTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test-vinoxml.xml"));
   Tellico::Import::VinoXMLImporter importer(url);
   Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Wine));
 
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Wine);
