@@ -65,6 +65,7 @@ QValidator::State UPCValidator::validate(QString& input_, int& pos_) const {
     return s;
   }
 
+  // TODO: return QValidator::Acceptable if check sum is correct
   return QValidator::Intermediate;
 }
 

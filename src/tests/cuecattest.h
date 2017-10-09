@@ -34,6 +34,8 @@ private Q_SLOTS:
   void initTestCase();
   void testDecode();
   void testDecode_data();
+  void testUpcValidate();
+  void testUpcValidate_data();
 };
 
 #endif

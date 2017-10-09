@@ -54,9 +54,40 @@ void CueCatTest::testDecode_data() {
   QTest::addColumn<QString>("expectedString");
   QTest::addColumn<QValidator::State>("state");
 
-  QTest::newRow("My name is robby") << QL1("My name is robby") << QL1("My name is robby") << QValidator::Invalid;
+  QTest::newRow("My name is robby") << QL1("My name is robby")
+                                    << QL1("My name is robby")
+                                    << QValidator::Invalid;
+  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY")
+                                             << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY")
+                                             << QValidator::Intermediate;
+  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.")
+         << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.")
+         << QL1("9780201889543")
+         << QValidator::Acceptable;
+}
 
-  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY") << QValidator::Intermediate;
+void CueCatTest::testUpcValidate() {
+  QFETCH(QString, string);
+  QFETCH(QString, expectedString);
+  QFETCH(QValidator::State, state);
 
-  QTest::newRow(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.") << QL1(".C3nZC3nZC3nYCxP2Dxb1CNnY.cGen.ENr7C3fZCNT7ENz3Ca.") << QL1("9780201889543") << QValidator::Acceptable;
+  Tellico::UPCValidator v(this);
+  int pos = 0;
+  QCOMPARE(v.validate(string, pos), state);
+  v.fixup(string);
+  QCOMPARE(string, expectedString);
+}
+
+void CueCatTest::testUpcValidate_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("expectedString");
+  QTest::addColumn<QValidator::State>("state");
+
+  // TODO: return QValidator::Acceptable if check sum is correct
+  QTest::newRow("Acceptable") << QL1("796030114977") << QL1("796030114977") << QValidator::Intermediate;
+  QTest::newRow("Intermediate") << QL1("79603011497") << QL1("79603011497") << QValidator::Intermediate;
+  QTest::newRow("Intermediate space") << QL1("79603011497 ") << QL1("79603011497") << QValidator::Invalid;
+  QTest::newRow("Intermediate space number") << QL1("79603011497 7") << QL1("79603011497") << QValidator::Invalid;
+  QTest::newRow("ISBN") << QL1("9780940016750") << QL1("9780940016750") << QValidator::Intermediate;
+  QTest::newRow("ISBN") << QL1("978-0940016750") << QL1("978-0940016750") << QValidator::Intermediate;
 }
