@@ -22,6 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h> // for TELLICO_VERSION
+
 #include "allocinefetcher.h"
 #include "../collections/videocollection.h"
 #include "../images/imagefactory.h"
@@ -134,7 +136,8 @@ void AbstractAllocineFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // 10/8/17: UserAgent appears necessary to receive data
-  m_job->addMetaData(QLatin1String("UserAgent"), QLatin1String("Tellico"));
+  m_job->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
+                                                                .arg(QLatin1String(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
@@ -189,7 +192,8 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   // 10/8/17: UserAgent appears necessary to receive data
 //  QByteArray data = FileHandler::readDataFile(u, true);
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QLatin1String("UserAgent"), QLatin1String("Tellico"));
+  dataJob->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
+                                                                  .arg(QLatin1String(TELLICO_VERSION)));
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;
