@@ -62,7 +62,7 @@ void VideoGameGeekFetcherTest::testTitle() {
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Game);
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Mass Effect 3: Citadel"));
   QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("BioWare"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Electronic Arts (EA)"));
+  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Electronic Arts Inc. (EA)"));
   QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2013"));
 //  QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("PlayStation3"));
   QCOMPARE(set(entry, "genre"), set("Action RPG; Shooter"));

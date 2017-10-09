@@ -85,9 +85,18 @@ void OMDBFetcherTest::testTitle() {
 
 // see https://bugs.kde.org/show_bug.cgi?id=336765
 void OMDBFetcherTest::testBabel() {
+  // all the private API test config is in amazonfetchertest.config right now
+  KConfig config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig);
+  QString groupName = QLatin1String("OMDB");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QLatin1String("babel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -96,5 +105,5 @@ void OMDBFetcherTest::testBabel() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), QLatin1String("Babel"));
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
 }
