@@ -133,6 +133,8 @@ void AbstractAllocineFetcher::search() {
 //  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  // 10/8/17: UserAgent appears necessary to receive data
+  m_job->addMetaData(QLatin1String("UserAgent"), QLatin1String("Tellico"));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
@@ -184,11 +186,18 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   query.addQueryItem(QLatin1String("sig"), QLatin1String(sig));
   u.setQuery(query);
 //  myDebug() << "url: " << u;
-  // quiet
-  QByteArray data = FileHandler::readDataFile(u, true);
+  // 10/8/17: UserAgent appears necessary to receive data
+//  QByteArray data = FileHandler::readDataFile(u, true);
+  KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  dataJob->addMetaData(QLatin1String("UserAgent"), QLatin1String("Tellico"));
+  if(!dataJob->exec()) {
+    myDebug() << "Failed to load" << u;
+    return entry;
+  }
+  const QByteArray data = dataJob->data();
 
 #if 0
-  myWarning() << "Remove debug from allocinefetcher.cpp";
+  myWarning() << "Remove debug2 from allocinefetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test2.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
@@ -204,7 +213,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   if(error.error != QJsonParseError::NoError) {
     myDebug() << "Bad JSON results";
 #if 0
-    myWarning() << "Remove debug from allocinefetcher.cpp";
+    myWarning() << "Remove debug3 from allocinefetcher.cpp";
     QFile f2(QString::fromLatin1("/tmp/test3.json"));
     if(f2.open(QIODevice::WriteOnly)) {
       QTextStream t(&f2);
