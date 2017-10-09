@@ -214,17 +214,14 @@ Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_
   return FetchRequest();
 }
 
-void DiscogsFetcher::slotComplete(KJob* job_) {
-  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-//  myDebug();
-
-  if(job->error()) {
-    job->uiDelegate()->showErrorMessage();
+void DiscogsFetcher::slotComplete(KJob*) {
+  if(m_job->error()) {
+    m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = job->data();
+  QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
