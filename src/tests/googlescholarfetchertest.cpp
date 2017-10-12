@@ -58,7 +58,7 @@ void GoogleScholarFetcherTest::initTestCase() {
 
 void GoogleScholarFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
+                                       m_fieldValues.value("title"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -78,7 +78,7 @@ void GoogleScholarFetcherTest::testTitle() {
 
 void GoogleScholarFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QLatin1Char('"') + m_fieldValues.value("author") + QLatin1Char('"'));
+                                       m_fieldValues.value("author"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);

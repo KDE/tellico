@@ -97,6 +97,13 @@ void GoogleScholarFetcher::doSearch() {
   QUrlQuery q;
   q.addQueryItem(QLatin1String("start"), QString::number(m_start));
 
+  QString value = request().value;
+  if(!value.startsWith(QLatin1Char('"'))) {
+    value = QLatin1Char('"') + value;
+  }
+  if(!value.endsWith(QLatin1Char('"'))) {
+    value += QLatin1Char('"');
+  }
   switch(request().key) {
     case Title:
       q.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(request().value));
