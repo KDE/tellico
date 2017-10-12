@@ -30,6 +30,7 @@
 #include "../datavectors.h"
 
 #include <QPointer>
+#include <QTime>
 
 class KJob;
 namespace KIO {
@@ -101,6 +102,7 @@ private:
   int m_limit;
   int m_total;
   int m_offset;
+  QTime m_requestTime;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

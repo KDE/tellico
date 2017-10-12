@@ -46,6 +46,7 @@
 #include <QDomDocument>
 #include <QTextCodec>
 #include <QUrlQuery>
+#include <QThread>
 
 namespace {
   static const int MUSICBRAINZ_MAX_RETURNS_TOTAL = 10;
@@ -131,6 +132,7 @@ void MusicBrainzFetcher::doSearch() {
   u.setPath(u.path() + queryPath);
 //  myDebug() << "url: " << u.url();
 
+  m_requestTime.start();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -256,6 +258,11 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
+  // limit to one request per second
+  while(m_requestTime.elapsed() < 1000) {
+    QThread::msleep(300);
+  }
+  m_requestTime.start();
   // quiet
   QString output = FileHandler::readXMLFile(u, true);
 #if 0
