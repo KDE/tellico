@@ -101,8 +101,8 @@ void IBSFetcher::search() {
         QString s = request().value;
         // limit to first isbn
         s = s.section(QLatin1Char(';'), 0, 0);
-        // isbn10 search doesn't work?
-        s = ISBNValidator::isbn13(s);
+        // isbn13 search doesn't work?
+        s = ISBNValidator::isbn10(s);
         // dashes don't work
         s.remove(QLatin1Char('-'));
         q.addQueryItem(QLatin1String("query"), s);
@@ -230,7 +230,7 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
-  QRegExp jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*)</"));
+  QRegExp jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*)</script"));
   jsonRx.setMinimal(true);
 
   if(!str_.contains(jsonRx)) {
@@ -238,6 +238,16 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
     return Data::EntryPtr();
   }
 
+#if 0
+  myWarning() << "Remove json debug from ibsfetcher.cpp";
+  QFile f(QLatin1String("/tmp/test.json"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << jsonRx.cap(1);
+  }
+  f.close();
+#endif
   QJsonDocument doc = QJsonDocument::fromJson(jsonRx.cap(1).toUtf8());
   QVariantMap objectMap = doc.object().toVariantMap();
   QVariantMap resultMap = objectMap.value(QLatin1String("mainEntity")).toMap();
