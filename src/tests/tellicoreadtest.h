@@ -46,6 +46,8 @@ private Q_SLOTS:
   void testDuplicateBorrowers();
   void testLocalImage();
   void testRemoteImage();
+  void testXMLHandler();
+  void testXMLHandler_data();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;

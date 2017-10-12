@@ -35,6 +35,7 @@
 #include "../images/image.h"
 #include "../fieldformat.h"
 #include "../entry.h"
+#include "../utils/xmlhandler.h"
 
 #include <QTest>
 
@@ -289,4 +290,26 @@ void TellicoReadTest::testRemoteImage() {
 
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(imageId);
   QVERIFY(!img.isNull());
+}
+
+void TellicoReadTest::testXMLHandler() {
+  QFETCH(QByteArray, data);
+  QFETCH(QString, expectedString);
+  QFETCH(bool, changeEncoding);
+
+  QString origString = QString::fromUtf8(data);
+  QCOMPARE(Tellico::XMLHandler::readXMLData(data), expectedString);
+  QCOMPARE(Tellico::XMLHandler::setUtf8XmlEncoding(origString), changeEncoding);
+}
+
+void TellicoReadTest::testXMLHandler_data() {
+  QTest::addColumn<QByteArray>("data");
+  QTest::addColumn<QString>("expectedString");
+  QTest::addColumn<bool>("changeEncoding");
+
+  QTest::newRow("basic") << QByteArray("<x>value</x>") << QString::fromUtf8("<x>value</x>") << false;
+  QTest::newRow("utf8") << QByteArray("<?xml encoding=\"utf-8\"?>\n<x>value</x>")
+                        << QString::fromUtf8("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << false;
+  QTest::newRow("latin1") << QByteArray("<?xml encoding=\"latin1\"?>\n<x>value</x>")
+                          << QString::fromUtf8("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
 }
