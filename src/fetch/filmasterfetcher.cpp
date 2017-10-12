@@ -47,7 +47,7 @@
 
 namespace {
   static const char* FILMASTER_API_URL = "http://api.filmaster.com";
-  static const char* FILMASTER_QUERY_URL = "http://api.filmaster.com/1.0/search/";
+  static const char* FILMASTER_QUERY_URL = "http://api.filmaster.com/1.1/search/";
 }
 
 using namespace Tellico;
