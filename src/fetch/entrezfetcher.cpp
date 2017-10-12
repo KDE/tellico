@@ -124,7 +124,8 @@ void EntrezFetcher::search() {
 
     case DOI:
     case Raw:
-      q.setQuery(u.query() + QLatin1Char('&') + request().value);
+      // for DOI, enough to match any field to DOI value
+      //q.setQuery(u.query() + QLatin1Char('&') + request().value);
       break;
 
     default:
@@ -135,7 +136,7 @@ void EntrezFetcher::search() {
   u.setQuery(q);
 
   m_step = Search;
-//  myLog() << "url: " << u.url();
+//  myLog() << "search url: " << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -254,7 +255,7 @@ void EntrezFetcher::doSummary() {
   u.setQuery(q);
 
   m_step = Summary;
-//  myLog() << "url:" << u.url();
+//  myLog() << "summary url:" << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -349,11 +350,11 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 #if 0
-  myWarning() << "turn me off!";
+  myWarning() << "turn me off in entrezfetcher.cpp!";
   QFile f1(QLatin1String("/tmp/test-entry.xml"));
   if(f1.open(QIODevice::WriteOnly)) {
     QTextStream t(&f1);
-    t.setEncoding(QTextStream::UnicodeUTF8);
+    t.setCodec("UTF-8");
     t << xmlOutput;
   }
   f1.close();
