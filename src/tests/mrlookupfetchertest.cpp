@@ -41,21 +41,20 @@ void MRLookupFetcherTest::initTestCase() {
   // since we use the bibtex importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
-  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.4169/amer.math.monthly.119.10.852"));
-//  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("An elementary view of Weyl's theory of equal distribution"));
+  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.4169/amer.math.monthly.121.10.917"));
+  m_fieldValues.insert(QLatin1String("title"), QLatin1String("An unnoticed consequence of Szeg\\\"o's distribution theorem"));
   m_fieldValues.insert(QLatin1String("author"), QLatin1String("Trench, William F."));
-  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("119"));
+  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("121"));
   m_fieldValues.insert(QLatin1String("journal"), QLatin1String("American Mathematical Monthly"));
   m_fieldValues.insert(QLatin1String("number"), QLatin1String("10"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2012"));
-  m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("852–861"));
+  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2014"));
+  m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("917–921"));
   m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
 }
 
 void MRLookupFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       m_fieldValues.value("title"));
+                                       QString::fromLatin1("An unnoticed consequence of Szego's distribution theorem"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MRLookupFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
