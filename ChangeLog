@@ -32,6 +32,10 @@
 	* Fixed bug of running out of memory when writing very large XML files (Bug 380832).
 	* Improved performance for filtering large collections by avoiding needless field value formatting.
 
+2017-06-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with some icons not being shown (Bug 378477).
+
 2017-05-29  Robby Stephenson  <robby@periapsis.org>
 
 	* Switched from using libdiscid to libcdio, which includes cdtext.
