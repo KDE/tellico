@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
 project(Tellico)
-set(TELLICO_VERSION "3.0.2+git")
+set(TELLICO_VERSION "3.1")
 
 set(QT_MIN_VERSION "5.4.0")
 
