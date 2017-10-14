@@ -1,3 +1,11 @@
+2017-10-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 3.1.
+
+2017-09-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bugs with remote image loading (Bug 382572, Bug 379607, Bug 384104).
+
 2017-09-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with showing stars in column view for float values (Bug 384547).
@@ -71,7 +79,7 @@
 
 2017-03-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Added data source for DataPoisk.ru.
+	* Added data source for KinoPoisk.ru.
 
 2017-03-04  Robby Stephenson  <robby@periapsis.org>
 
