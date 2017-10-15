@@ -1,3 +1,7 @@
+2017-10-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Goodreads importer to use https endpoint.
+
 2017-10-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.1.

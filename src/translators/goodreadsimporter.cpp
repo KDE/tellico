@@ -42,8 +42,8 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* GOODREADS_LIST_URL = "http://www.goodreads.com/review/list.xml";
-  static const char* GOODREADS_USER_URL = "http://www.goodreads.com/user/show.xml";
+  static const char* GOODREADS_LIST_URL = "https://www.goodreads.com/review/list.xml";
+  static const char* GOODREADS_USER_URL = "https://www.goodreads.com/user/show.xml";
   static const char* GOODREADS_API_KEY = "dpgbQvOWk0n4cwL32jQRA";
 }
 
@@ -146,7 +146,7 @@ QString GoodreadsImporter::text() const {
   q.addQueryItem(QLatin1String("key"), m_key);
   u.setQuery(q);
 //  myDebug() << u;
-  return FileHandler::readTextFile(u, false, true);
+  return FileHandler::readTextFile(u, true /* quiet */, true);
 }
 
 QString GoodreadsImporter::idFromName(const QString& name_) const {
@@ -157,7 +157,7 @@ QString GoodreadsImporter::idFromName(const QString& name_) const {
   u.setQuery(q);
 //  myDebug() << u;
 
-  QDomDocument dom = FileHandler::readXMLDocument(u, false /* process namespace */);
+  QDomDocument dom = FileHandler::readXMLDocument(u, false /* process namespace */, true /* quiet */);
   return dom.documentElement().namedItem(QLatin1String("user"))
                               .namedItem(QLatin1String("id"))
                               .toElement()
