@@ -336,7 +336,9 @@ void GroupView::slotFilterGroup() {
         if(group->hasEmptyGroupName()) {
           filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
         } else {
-          filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
+//          filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
+          const QString rxPattern(QLatin1String("(^|;\\s)") + group->groupName() + QLatin1String("($|;)"));
+          filter->append(new FilterRule(m_groupBy, rxPattern, FilterRule::FuncRegExp));
         }
       }
     }

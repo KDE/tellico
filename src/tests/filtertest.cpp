@@ -28,6 +28,7 @@
 
 #include "../filter.h"
 #include "../entry.h"
+#include "../collections/bookcollection.h"
 
 #include <QTest>
 
@@ -206,4 +207,36 @@ void FilterTest::testFilter() {
 
   entry->setField(QLatin1String("rating"), QLatin1String("1"));
   QVERIFY(filter.matches(entry));
+}
+
+void FilterTest::testGroupViewFilter() {
+  // ideally, I'd instantiate a GroupView object and test that, but it's tough with all the dependencies
+  // so this code is identical to what is in Tellico::GroupView::slotFilterGroup()
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true, QLatin1String("TestCollection")));
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QLatin1String("author"), QLatin1String("John Author"));
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(QLatin1String("author"), QLatin1String("John Q. Author"));
+  Tellico::Data::EntryPtr entry3(new Tellico::Data::Entry(coll));
+  entry3->setField(QLatin1String("author"), QLatin1String("John Author; James Author"));
+  Tellico::Data::EntryPtr entry4(new Tellico::Data::Entry(coll));
+  entry4->setField(QLatin1String("author"), QLatin1String("James Author; John Author"));
+
+  QString pattern(entry1->formattedField(QLatin1String("author")));
+  // the filter should match all since it was the initial way the group view filter was constructed
+  Tellico::Filter filter1(Tellico::Filter::MatchAny);
+  filter1.append(new Tellico::FilterRule(QLatin1String("author"), pattern, Tellico::FilterRule::FuncContains));
+  QVERIFY(filter1.matches(entry1));
+  QVERIFY(filter1.matches(entry2));
+  QVERIFY(filter1.matches(entry3));
+  QVERIFY(filter1.matches(entry4));
+
+  QString rxPattern(QLatin1String("(^|;\\s)") + pattern + QLatin1String("($|;)"));
+  // the filter should match entry1, entry3, and entry 4 but not entry2
+  Tellico::Filter filter2(Tellico::Filter::MatchAny);
+  filter2.append(new Tellico::FilterRule(QLatin1String("author"), rxPattern, Tellico::FilterRule::FuncRegExp));
+  QVERIFY(filter2.matches(entry1));
+  QVERIFY(!filter2.matches(entry2)); // does not match
+  QVERIFY(filter2.matches(entry3));
+  QVERIFY(filter2.matches(entry4));
 }
