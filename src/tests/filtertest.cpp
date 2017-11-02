@@ -218,9 +218,17 @@ void FilterTest::testGroupViewFilter() {
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
   entry2->setField(QLatin1String("author"), QLatin1String("John Q. Author"));
   Tellico::Data::EntryPtr entry3(new Tellico::Data::Entry(coll));
-  entry3->setField(QLatin1String("author"), QLatin1String("John Author; James Author"));
+  entry3->setField(QLatin1String("author"), QLatin1String("John Author") +
+                                            Tellico::FieldFormat::delimiterString() +
+                                            QLatin1String("James Author"));
   Tellico::Data::EntryPtr entry4(new Tellico::Data::Entry(coll));
-  entry4->setField(QLatin1String("author"), QLatin1String("James Author; John Author"));
+  entry4->setField(QLatin1String("author"), QLatin1String("James Author") +
+                                            Tellico::FieldFormat::delimiterString() +
+                                            QLatin1String("John Author"));
+  Tellico::Data::EntryPtr entry5(new Tellico::Data::Entry(coll));
+  entry5->setField(QLatin1String("author"), QLatin1String("James Author") +
+                                            Tellico::FieldFormat::delimiterString() +
+                                            QLatin1String("John Q. Author"));
 
   QString pattern(entry1->formattedField(QLatin1String("author")));
   // the filter should match all since it was the initial way the group view filter was constructed
@@ -230,13 +238,15 @@ void FilterTest::testGroupViewFilter() {
   QVERIFY(filter1.matches(entry2));
   QVERIFY(filter1.matches(entry3));
   QVERIFY(filter1.matches(entry4));
+  QVERIFY(filter1.matches(entry5));
 
   QString rxPattern(QLatin1String("(^|;\\s)") + pattern + QLatin1String("($|;)"));
-  // the filter should match entry1, entry3, and entry 4 but not entry2
+  // the filter should match entry1, entry3, and entry 4 but not entry2 or entry5
   Tellico::Filter filter2(Tellico::Filter::MatchAny);
   filter2.append(new Tellico::FilterRule(QLatin1String("author"), rxPattern, Tellico::FilterRule::FuncRegExp));
   QVERIFY(filter2.matches(entry1));
   QVERIFY(!filter2.matches(entry2)); // does not match
   QVERIFY(filter2.matches(entry3));
   QVERIFY(filter2.matches(entry4));
+  QVERIFY(!filter2.matches(entry5));
 }
