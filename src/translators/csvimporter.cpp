@@ -139,10 +139,12 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         break;
       }
       QString value = values[cols[i]].trimmed();
-      if(replaceColDelimiter) {
+      // only replace delimiters for tables
+      // see https://forum.kde.org/viewtopic.php?f=200&t=142712
+      if(replaceColDelimiter && m_coll->fieldByName(names[i])->type() == Data::Field::Table) {
         value.replace(m_colDelimiter, FieldFormat::columnDelimiterString());
       }
-      if(replaceRowDelimiter) {
+      if(replaceRowDelimiter && m_coll->fieldByName(names[i])->type() == Data::Field::Table) {
         value.replace(m_rowDelimiter, FieldFormat::rowDelimiterString());
       }
       if(m_isLibraryThing) {

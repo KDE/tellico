@@ -1,3 +1,7 @@
+2017-11-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with duplicated colons in CSV importer (Bug 386483).
+
 2017-11-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved "Filter by Group" to use a regular expression (Bug 386011).
