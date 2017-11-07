@@ -1,3 +1,7 @@
+2017-11-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug for "losing" icons after modifying a collection (Bug 386549).
+
 2017-11-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with duplicated colons in CSV importer (Bug 386483).

@@ -166,6 +166,10 @@ void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_) {
   // FIXME: Signals for delete collection and then added are yucky
   slotCollectionDeleted(coll_);
   slotCollectionAdded(coll_);
+  // https://bugs.kde.org/show_bug.cgi?id=386549
+  // at some point, I need to revisit the ::setImagesAreAvailable() methodology
+  // there are too many workarounds in the code for that
+  m_mainWindow->m_detailedView->slotRefreshImages();
 }
 
 void Controller::slotCollectionDeleted(Tellico::Data::CollPtr coll_) {
