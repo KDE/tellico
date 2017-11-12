@@ -30,8 +30,7 @@
 
 #include <QIcon>
 #include <QAbstractItemModel>
-#include <QHash>
-#include <QCache>
+#include <QMultiHash>
 
 namespace Tellico {
 
@@ -76,7 +75,6 @@ private Q_SLOTS:
 private:
   Data::EntryPtr entry(const QModelIndex& index) const;
   Data::FieldPtr field(const QModelIndex& index) const;
-  const QIcon& defaultIcon(Data::CollPtr coll) const;
 
   Data::EntryList m_entries;
   Data::FieldList m_fields;
@@ -84,8 +82,6 @@ private:
   QHash<int, int> m_saveStates;
   bool m_imagesAreAvailable;
 
-  mutable QHash<int, QIcon*> m_defaultIcons;
-  mutable QCache<QString, QIcon> m_iconCache;
   // maps ids of requested images into entries
   mutable QMultiHash<QString, Data::EntryPtr> m_requestedImages;
 };

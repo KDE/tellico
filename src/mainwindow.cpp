@@ -62,6 +62,7 @@
 #include "core/netaccess.h"
 #include "dbusinterface.h"
 #include "models/models.h"
+#include "models/entryiconmodel.h"
 #include "models/entryselectionmodel.h"
 #include "newstuff/manager.h"
 #include "gui/drophandler.h"
@@ -761,7 +762,9 @@ void MainWindow::initView() {
 
   m_iconView = m_viewStack->iconView();
   // use the same model in both views so they are sync'ed
-  m_iconView->setModel(m_detailedView->model());
+  EntryIconModel* iconModel = new EntryIconModel(m_iconView);
+  iconModel->setSourceModel(m_detailedView->model());
+  m_iconView->setModel(iconModel);
   Controller::self()->addObserver(m_iconView);
   m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
                                 "an icon, which may be an image in the entry.</qt>"));

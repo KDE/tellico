@@ -69,6 +69,14 @@ EntryIconView::EntryIconView(QWidget* parent_)
 EntryIconView::~EntryIconView() {
 }
 
+void EntryIconView::setModel(QAbstractItemModel* model_) {
+  QListView::setModel(model_);
+  if(!model_) {
+    return;
+  }
+  connect(model_, &QAbstractItemModel::columnsInserted, this, &EntryIconView::updateModelColumn);
+}
+
 void EntryIconView::setMaxAllowedIconWidth(int width_) {
   m_maxAllowedIconWidth = qBound(MIN_ENTRY_ICON_SIZE, width_, MAX_ENTRY_ICON_SIZE);
   QSize iconSize(m_maxAllowedIconWidth, m_maxAllowedIconWidth);
@@ -153,4 +161,17 @@ void EntryIconView::slotOpenUrlMenuActivated(QAction* action_/*=0*/) {
   if(!link.isEmpty()) {
     QDesktopServices::openUrl(Kernel::self()->URL().resolved(QUrl::fromUserInput(link)));
   }
+}
+
+void EntryIconView::updateModelColumn() {
+  //default model column is 0
+  int modelColumn = 0;
+  // iterate over model columns, find the one whose name is "title"
+  for(int ncol = 0; ncol < model()->columnCount(); ++ncol) {
+    Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
+    if(field && field->name() == QLatin1String("title")) {
+      modelColumn = ncol;
+    }
+  }
+  setModelColumn(modelColumn);
 }

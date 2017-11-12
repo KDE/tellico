@@ -31,7 +31,6 @@
 #include "../document.h"
 #include "../images/image.h"
 #include "../images/imagefactory.h"
-#include "../config/tellico_config.h"
 #include "../tellico_debug.h"
 
 namespace {
@@ -42,13 +41,11 @@ using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
     m_imagesAreAvailable(false) {
-  m_iconCache.setMaxCost(Config::iconCacheSize());
   m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
   connect(ImageFactory::self(), &ImageFactory::imageAvailable, this, &EntryModel::refreshImage);
 }
 
 EntryModel::~EntryModel() {
-  qDeleteAll(m_defaultIcons);
 }
 
 int EntryModel::rowCount(const QModelIndex& index_) const {
@@ -130,41 +127,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         return QVariant();
       }
 
-      // for titles only or first column, for the icon view, return whatever
-      // image field is first in the collection
-      if(index_.column() == 0 || field->name() == QLatin1String("title")) {
-        // return entry image in this case
-        const QString fieldName = entry->collection()->primaryImageField();
-        if(fieldName.isEmpty() || !m_imagesAreAvailable) {
-          return defaultIcon(entry->collection());
-        }
-        const QString id = entry->field(fieldName);
-        QIcon* icon = m_iconCache.object(id);
-        if(icon) {
-          return QIcon(*icon);
-        }
-        // if it's not a local image, request that it be downloaded
-        if(!ImageFactory::hasLocalImage(id)) {
-          // it's probably a link only image, so the Id is the URL
-          if(!m_requestedImages.contains(id,entry)) {
-            m_requestedImages.insert(id, entry);
-            ImageFactory::requestImageById(id);
-          }
-          return defaultIcon(entry->collection());
-        }
-        const Data::Image& img = ImageFactory::imageById(id);
-        if(img.isNull()) {
-          return defaultIcon(entry->collection());
-        }
-
-        icon = new QIcon(img.convertToPixmap());
-        if(!m_iconCache.insert(id, icon)) {
-          // failing to insert invalidates the icon pointer
-          return QIcon(img.convertToPixmap());
-        }
-        return QIcon(*icon);
-      }
-      // otherwise just return the image for the entry
+      // just return the image for the entry
       // we don't need a formatted value for any pixmaps
       value = entry->field(field);
       if(value.isEmpty()) {
@@ -285,7 +248,6 @@ void EntryModel::clear() {
   m_entries.clear();
   m_fields.clear();
   m_saveStates.clear();
-  m_iconCache.clear();
   endResetModel();
 }
 
@@ -390,22 +352,6 @@ void EntryModel::setImagesAreAvailable(bool available_) {
     m_imagesAreAvailable = available_;
     endResetModel();
   }
-}
-
-const QIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
-  QIcon* icon = m_defaultIcons.value(coll_->type());
-  if(icon) {
-    return *icon;
-  }
-  QIcon tmpIcon = QIcon(QLatin1String(":/icons/nocover_") + CollectionFactory::typeName(coll_->type()));
-  if(tmpIcon.isNull()) {
-    myLog() << "null nocover image, loading tellico.png";
-    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico")));
-  }
-
-  icon = new QIcon(tmpIcon);
-  m_defaultIcons.insert(coll_->type(), icon);
-  return *icon;
 }
 
 void EntryModel::refreshImage(const QString& id_) {

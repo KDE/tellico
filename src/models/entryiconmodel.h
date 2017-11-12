@@ -1,6 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2002-2009 Robby Stephenson <robby@periapsis.org>
-    Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,49 +22,41 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_ENTRYICONVIEW_H
-#define TELLICO_ENTRYICONVIEW_H
+#ifndef TELLICO_ENTRYICONMODEL_H
+#define TELLICO_ENTRYICONMODEL_H
 
-#include "observer.h"
+#include "../datavectors.h"
 
-#include <QListView>
-
-namespace {
-  static const int MIN_ENTRY_ICON_SIZE = 32;
-  static const int MAX_ENTRY_ICON_SIZE = 512;
-  static const int SMALL_INCREMENT_ICON_SIZE = 1;
-  static const int LARGE_INCREMENT_ICON_SIZE = 8;
-}
+#include <QIdentityProxyModel>
+#include <QHash>
+#include <QCache>
 
 namespace Tellico {
 
 /**
  * @author Robby Stephenson
+ *
+ * This identity model does nothing except modify EntryModel::data() to return an entry's icon
+ * for every column. It's intended to be used in EntryIconView.
  */
-class EntryIconView : public QListView, public Observer {
+class EntryIconModel : public QIdentityProxyModel {
 Q_OBJECT
 
 public:
-  EntryIconView(QWidget* parent);
-  ~EntryIconView();
+  EntryIconModel(QObject* parent);
+  virtual ~EntryIconModel();
 
-  void setModel(QAbstractItemModel* model) Q_DECL_OVERRIDE;
-  int maxAllowedIconWidth() const { return m_maxAllowedIconWidth; }
+  void setSourceModel(QAbstractItemModel* newSourceModel) Q_DECL_OVERRIDE;
+  QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  void setMaxAllowedIconWidth(int width);
-
-protected:
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
-
-private Q_SLOTS:
-  void slotDoubleClicked(const QModelIndex& index);
-  void slotSortMenuActivated(QAction* action);
-  void slotOpenUrlMenuActivated(QAction* action=nullptr);
-  void updateModelColumn();
+  void clearCache();
 
 private:
-  int m_maxAllowedIconWidth;
+  const QIcon& defaultIcon(Data::CollPtr coll) const;
+
+  mutable QHash<int, QIcon*> m_defaultIcons;
+  mutable QCache<QString, QIcon> m_iconCache;
 };
 
 } // end namespace

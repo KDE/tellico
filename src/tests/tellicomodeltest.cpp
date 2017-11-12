@@ -27,6 +27,7 @@
 #include "tellicomodeltest.h"
 #include "modeltest.h"
 #include "../models/entrymodel.h"
+#include "../models/entryiconmodel.h"
 #include "../models/entrysortmodel.h"
 #include "../models/filtermodel.h"
 #include "../models/entrygroupmodel.h"
@@ -56,9 +57,13 @@ void TellicoModelTest::testEntryModel() {
   Tellico::EntryModel entryModel(this);
   ModelTest test1(&entryModel);
 
-  Tellico::EntrySortModel sortModel(this);
-  ModelTest test2(&sortModel);
+  Tellico::EntryIconModel iconModel(this);
+  ModelTest test2(&iconModel);
 
+  Tellico::EntrySortModel sortModel(this);
+  ModelTest test3(&sortModel);
+
+  iconModel.setSourceModel(&entryModel);
   sortModel.setSourceModel(&entryModel);
 
   entryModel.setFields(coll->fields());
