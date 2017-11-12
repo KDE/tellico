@@ -265,6 +265,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
     return;
   }
 
+  int count = 0;
   foreach(const QVariant& result, resultList) {
 //    myDebug() << "found result:" << result;
 
@@ -274,6 +275,10 @@ void OMDBFetcher::slotComplete(KJob* job_) {
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
+    ++count;
+    if(count >= OMDB_MAX_RETURNS_TOTAL) {
+      break;
+    }
   }
 
   stop();
