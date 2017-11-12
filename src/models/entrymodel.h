@@ -77,7 +77,6 @@ private:
   Data::EntryPtr entry(const QModelIndex& index) const;
   Data::FieldPtr field(const QModelIndex& index) const;
   const QIcon& defaultIcon(Data::CollPtr coll) const;
-  QString imageField(Data::CollPtr coll) const;
 
   Data::EntryList m_entries;
   Data::FieldList m_fields;
@@ -86,7 +85,6 @@ private:
   bool m_imagesAreAvailable;
 
   mutable QHash<int, QIcon*> m_defaultIcons;
-  mutable QHash<long, QString> m_imageFields;
   mutable QCache<QString, QIcon> m_iconCache;
   // maps ids of requested images into entries
   mutable QMultiHash<QString, Data::EntryPtr> m_requestedImages;

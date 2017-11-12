@@ -873,3 +873,7 @@ Tellico::Data::ID Collection::getID() {
   static ID id = 0;
   return ++id;
 }
+
+QString Collection::primaryImageField() const {
+  return m_imageFields.isEmpty() ? QString() : m_imageFields.front()->name();
+}

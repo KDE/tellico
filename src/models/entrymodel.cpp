@@ -134,7 +134,7 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       // image field is first in the collection
       if(index_.column() == 0 || field->name() == QLatin1String("title")) {
         // return entry image in this case
-        const QString fieldName = imageField(entry->collection());
+        const QString fieldName = entry->collection()->primaryImageField();
         if(fieldName.isEmpty() || !m_imagesAreAvailable) {
           return defaultIcon(entry->collection());
         }
@@ -406,16 +406,6 @@ const QIcon& EntryModel::defaultIcon(Data::CollPtr coll_) const {
   icon = new QIcon(tmpIcon);
   m_defaultIcons.insert(coll_->type(), icon);
   return *icon;
-}
-
-QString EntryModel::imageField(Data::CollPtr coll_) const {
-  if(!m_imageFields.contains(coll_->id())) {
-    const Data::FieldList& fields = coll_->imageFields();
-    if(!fields.isEmpty()) {
-      m_imageFields.insert(coll_->id(), fields[0]->name());
-    }
-  }
-  return m_imageFields.value(coll_->id());
 }
 
 void EntryModel::refreshImage(const QString& id_) {
