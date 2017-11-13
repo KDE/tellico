@@ -171,6 +171,7 @@ void EntryIconView::updateModelColumn() {
     Data::FieldPtr field = model()->headerData(ncol, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>();
     if(field && field->name() == QLatin1String("title")) {
       modelColumn = ncol;
+      break;
     }
   }
   setModelColumn(modelColumn);
