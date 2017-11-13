@@ -154,7 +154,7 @@ QChar Iso6937Converter::getChar(uchar c) {
   case 0xD1:
     return 0x00B9; // 13/01 SUPERSCRIPT ONE
   case 0xD2:
-    return 0x2117; // 13/02 REGISTERED SIGN
+    return 0x00AE; // 13/02 REGISTERED SIGN
   case 0xD3:
     return 0x00A9; // 13/03 COPYRIGHT SIGN
   case 0xD4:
@@ -488,7 +488,7 @@ QChar Iso6937Converter::getCombiningChar(uint c) {
     return 0x02DA; // RING ABOVE
   case 0xCA41:
     return 0x00C5; // LATIN CAPITAL LETTER A WITH RING ABOVE
-  case 0xCAAD:
+  case 0xCA55:
     return 0x016E; // LATIN CAPITAL LETTER U WITH RING ABOVE
   case 0xCA61:
     return 0x00E5; // LATIN SMALL LETTER A WITH RING ABOVE
@@ -516,7 +516,8 @@ QChar Iso6937Converter::getCombiningChar(uint c) {
     return 0x0162; // LATIN CAPITAL LETTER T WITH CEDILLA
   case 0xCB63:
     return 0x00E7; // LATIN SMALL LETTER C WITH CEDILLA
-    //        case 0xCB67: return 0x0123; // small g with cedilla
+  case 0xCB67:
+    return 0x0123; // small g with cedilla
   case 0xCB6B:
     return 0x0137; // LATIN SMALL LETTER K WITH CEDILLA
   case 0xCB6C:

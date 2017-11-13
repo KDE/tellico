@@ -1,6 +1,7 @@
 2017-11-12  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with incorrect entry titles in icon view and multiple entry icons (Bug 386548).
+	* Fixed a few ISO-6937 character encodings.
 
 2017-11-06  Robby Stephenson  <robby@periapsis.org>
 

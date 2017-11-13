@@ -67,6 +67,12 @@ add_test(imagejobtest imagejobtest)
 ecm_mark_as_test(imagejobtest)
 TARGET_LINK_LIBRARIES(imagejobtest images KF5::Archive Qt5::Test)
 
+add_executable(iso6937test iso6937test.cpp)
+ecm_mark_nongui_executable(iso6937test)
+add_test(iso6937test iso6937test)
+ecm_mark_as_test(iso6937test)
+TARGET_LINK_LIBRARIES(iso6937test utils Qt5::Test)
+
 SET(tellicotest_SRCS
    ../collection.cpp
    ../entry.cpp
