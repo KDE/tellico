@@ -51,7 +51,7 @@ void EntryIconModel::setSourceModel(QAbstractItemModel* newSourceModel_) {
 
 QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
   switch(role_) {
-    // this IdentityModel serves to return the enrty's primary image as the DecorationRole
+    // this IdentityModel serves to return the entry's primary image as the DecorationRole
     // no matter what the index column may be
     case Qt::DecorationRole:
     {
