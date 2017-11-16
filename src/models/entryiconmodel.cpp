@@ -55,10 +55,6 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
     // no matter what the index column may be
     case Qt::DecorationRole:
     {
-      Data::FieldPtr field = index_.data(FieldPtrRole).value<Data::FieldPtr>();
-      if(!field) {
-        return QVariant();
-      }
       Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
       if(!entry) {
         return QVariant();
