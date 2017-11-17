@@ -141,7 +141,7 @@ public:
    *
    * @return The primary image field
    */
-  QString primaryImageField() const;
+  FieldPtr primaryImageField() const;
   /**
    * Returns a reference to the list of field groups. This value is cached rather
    * than generated with each call, so the method should be fairly fast.

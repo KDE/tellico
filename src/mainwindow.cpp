@@ -761,7 +761,6 @@ void MainWindow::initView() {
           m_detailedView, SLOT(slotRefreshImages()));
 
   m_iconView = m_viewStack->iconView();
-  // use the same model in both views so they are sync'ed
   EntryIconModel* iconModel = new EntryIconModel(m_iconView);
   iconModel->setSourceModel(m_detailedView->model());
   m_iconView->setModel(iconModel);

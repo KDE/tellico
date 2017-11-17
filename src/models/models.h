@@ -41,7 +41,8 @@ namespace Tellico {
     FieldPtrRole,
     GroupPtrRole,
     SaveStateRole,
-    ValidParentRole
+    ValidParentRole,
+    PrimaryImageRole
   };
 
 } // end namespace

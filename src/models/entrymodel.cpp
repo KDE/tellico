@@ -139,22 +139,30 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
         return m_checkPix;
       }
 
-      if(m_imagesAreAvailable && field->type() == Data::Field::Image) {
-        // if it's not a local image, request that it be downloaded
-        if(ImageFactory::hasLocalImage(value)) {
-          const Data::Image& img = ImageFactory::imageById(value);
-          if(!img.isNull()) {
-            return img.convertToPixmap().scaledToHeight(ENTRYMODEL_IMAGE_HEIGHT);
-          }
-        } else {
-          if(!m_requestedImages.contains(value, entry)) {
-            myDebug() << "Requesting" << value;
-            m_requestedImages.insert(value, entry);
-            ImageFactory::requestImageById(value);
-          }
+      if(field->type() == Data::Field::Image) {
+        // convert pixmap to icon
+        QVariant v = requestImage(entry, value);
+        if(!v.isNull() && v.canConvert<QPixmap>()) {
+          return QIcon(v.value<QPixmap>());
         }
       }
       return QVariant();
+
+    case PrimaryImageRole:
+      // return the primary image for the entry, no matter the index column
+      entry = this->entry(index_);
+      if(!entry) {
+        return QVariant();
+      }
+      field = entry->collection()->primaryImageField();
+      if(!field) {
+        return QVariant();
+      }
+      value = entry->field(field);
+      if(value.isEmpty()) {
+        return QVariant();
+      }
+      return requestImage(entry, value);
 
     case EntryPtrRole:
       entry = this->entry(index_);
@@ -352,6 +360,23 @@ void EntryModel::setImagesAreAvailable(bool available_) {
     m_imagesAreAvailable = available_;
     endResetModel();
   }
+}
+
+QVariant EntryModel::requestImage(Data::EntryPtr entry_, const QString& id_) const {
+  if(!m_imagesAreAvailable) {
+    return QVariant();
+  }
+  // if it's not a local image, request that it be downloaded
+  if(ImageFactory::hasLocalImage(id_)) {
+    const Data::Image& img = ImageFactory::imageById(id_);
+    if(!img.isNull()) {
+      return img.convertToPixmap();
+    }
+  } else if(!m_requestedImages.contains(id_, entry_)) {
+    m_requestedImages.insert(id_, entry_);
+    ImageFactory::requestImageById(id_);
+  }
+  return QVariant();
 }
 
 void EntryModel::refreshImage(const QString& id_) {

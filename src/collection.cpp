@@ -874,6 +874,6 @@ Tellico::Data::ID Collection::getID() {
   return ++id;
 }
 
-QString Collection::primaryImageField() const {
-  return m_imageFields.isEmpty() ? QString() : m_imageFields.front()->name();
+Data::FieldPtr Collection::primaryImageField() const {
+  return m_imageFields.isEmpty() ? Data::FieldPtr() : fieldByName(m_imageFields.front()->name());
 }

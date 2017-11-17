@@ -24,13 +24,12 @@
 
 #include "entryiconmodel.h"
 #include "models.h"
-#include "../images/image.h"
-#include "../images/imagefactory.h"
 #include "../collectionfactory.h"
 #include "../config/tellico_config.h"
 #include "../tellico_debug.h"
 
 #include <QIcon>
+#include <QPixmap>
 
 using Tellico::EntryIconModel;
 
@@ -60,31 +59,27 @@ QVariant EntryIconModel::data(const QModelIndex& index_, int role_) const {
         return QVariant();
       }
 
-      // return entry image in this case
-      const QString fieldName = entry->collection()->primaryImageField();
-//      if(fieldName.isEmpty() || !m_imagesAreAvailable) {
-      if(fieldName.isEmpty()) {
+      // return entry primary image in this case
+      Data::FieldPtr field = entry->collection()->primaryImageField();
+      if(!field) {
         return defaultIcon(entry->collection());
       }
-      const QString id = entry->field(fieldName);
-      QIcon* icon = m_iconCache.object(id);
-      if(icon) {
-        return QIcon(*icon);
+      const QString id = entry->field(field);
+      if(m_iconCache.contains(id)) {
+        return QIcon(*m_iconCache.object(id));
       }
-      // if it's not a local image, request that it be downloaded
-      if(!ImageFactory::hasLocalImage(id)) {
-        // TODO: figure out how to handle image requests as in EntryModel
-        return defaultIcon(entry->collection());
-      }
-      const Data::Image& img = ImageFactory::imageById(id);
-      if(img.isNull()) {
+
+      QVariant v = QIdentityProxyModel::data(index_, PrimaryImageRole);
+      if(v.isNull() || !v.canConvert<QPixmap>()) {
         return defaultIcon(entry->collection());
       }
 
-      icon = new QIcon(img.convertToPixmap());
+      const QPixmap p = v.value<QPixmap>();
+      QIcon* icon = new QIcon(p);
       if(!m_iconCache.insert(id, icon)) {
         // failing to insert invalidates the icon pointer
-        return QIcon(img.convertToPixmap());
+        myDebug() << "failed to insert into icon cache";
+        return QIcon(p);
       }
       return QIcon(*icon);
     }
