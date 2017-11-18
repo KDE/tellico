@@ -51,11 +51,12 @@ Q_SIGNALS:
   void entriesSelected(Tellico::Data::EntryList entries);
 
 private Q_SLOTS:
-  void selectedEntriesChanged();
+  void selectedEntriesChanged(const QItemSelection& selected, const QItemSelection& deselected);
 
 private:
   Data::EntryList m_selectedEntries;
   QList< QPointer<QItemSelectionModel> > m_modelList;
+  QPointer<QItemSelectionModel> m_recentSelectionModel;
   bool m_processing;
 };
 

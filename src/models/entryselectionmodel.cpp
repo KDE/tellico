@@ -41,45 +41,60 @@ EntrySelectionModel::EntrySelectionModel(QAbstractItemModel* targetModel_,
 void EntrySelectionModel::addSelectionProxy(QItemSelectionModel* selModel_) {
   Q_ASSERT(selModel_);
   m_modelList += selModel_;
-  connect(selModel_, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
-          this, SLOT(selectedEntriesChanged()));
+  connect(selModel_, &QItemSelectionModel::selectionChanged,
+          this, &EntrySelectionModel::selectedEntriesChanged);
 }
 
-void EntrySelectionModel::selectedEntriesChanged() {
+void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
   // when clearSelection() is called on the other models, then there's a cascading series of calls to
   // selectedEntriesChanged(). But we only care about the first one
   if(m_processing) {
     return;
   }
   m_processing = true;
-  // we need to grab all the selected indexes in the caller
+
   QItemSelectionModel* selectionModel = qobject_cast<QItemSelectionModel*>(sender());
   Q_ASSERT(selectionModel);
   if(!selectionModel) {
     return;
   }
 
-  QSet<Data::EntryPtr> entries;
-  foreach(const QModelIndex& index, selectionModel->selectedIndexes()) {
+  if(m_recentSelectionModel != selectionModel) {
+    m_selectedEntries.clear();
+  }
+  m_recentSelectionModel = selectionModel;
+
+  // clearing the selection in the other models will have cascading calls to selectionChanged()
+  // now, add and remove selected entries from the list
+  // the selection will include an index for every column, need to check for duplicates
+  QList<Data::ID> IDlist;
+  foreach(const QModelIndex& index, deselected_.indexes()) {
     Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
-    if(entry) {
-      entries += entry;
+    if(entry && !IDlist.contains(entry->id())) {
+      m_selectedEntries.removeOne(entry);
+      IDlist += entry->id();
     }
   }
-  if(!entries.isEmpty()) {
-    m_selectedEntries = entries.toList();
-    emit entriesSelected(m_selectedEntries);
-    // for every selection model which did not call this function. clear the selection
-    foreach(const QPointer<QItemSelectionModel>& ptr, m_modelList) { //krazy:exclude=foreach
-      QItemSelectionModel* const otherModel = ptr.data();
-      if(otherModel && otherModel != selectionModel) {
-        otherModel->clearSelection();
-      } else if(!otherModel) {
-        // since the filter or loan view could be created multiple times
-        // the selection model might be added multiple times
-        // since foreach() creates a copy of the list, it's ok to remove this here
-        m_modelList.removeOne(ptr);
-      }
+  IDlist.clear();
+  foreach(const QModelIndex& index, selected_.indexes()) {
+    Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
+    if(entry && !IDlist.contains(entry->id())) {
+      m_selectedEntries += entry;
+      IDlist += entry->id();
+    }
+  }
+
+  emit entriesSelected(m_selectedEntries);
+  // for every selection model which did not call this function, clear the selection
+  foreach(const QPointer<QItemSelectionModel>& ptr, m_modelList) { //krazy:exclude=foreach
+    QItemSelectionModel* const otherModel = ptr.data();
+    if(otherModel && otherModel != selectionModel) {
+      otherModel->clearSelection();
+    } else if(!otherModel) {
+      // since the filter or loan view could be created multiple times
+      // the selection model might be added multiple times
+      // since foreach() creates a copy of the list, it's ok to remove this here
+      m_modelList.removeOne(ptr);
     }
   }
   m_processing = false;

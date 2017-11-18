@@ -791,7 +791,6 @@ void MainWindow::initConnections() {
           Controller::self(), SLOT(slotUpdateSelection(Tellico::Data::EntryList)));
   connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
           m_editDialog, SLOT(setContents(Tellico::Data::EntryList)));
-
   connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
           m_entryView, SLOT(showEntries(Tellico::Data::EntryList)));
 

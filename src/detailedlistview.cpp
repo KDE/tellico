@@ -57,7 +57,6 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
   setRootIsDecorated(false);
   setUniformRowHeights(true);
 
-//  connect(this, SIGNAL(selectionChanged()), SLOT(slotSelectionChanged()));
   connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
 
   // header menu
