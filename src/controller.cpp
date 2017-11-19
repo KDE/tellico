@@ -435,6 +435,9 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   updateActions();
 
   m_mainWindow->m_detailedView->setFilter(filter_); // takes ownership
+  if(!filter_ && m_mainWindow->m_filterView) { // for example, when quick filter clears the selection
+    m_mainWindow->m_filterView->clearSelection();
+  }
 
   blockAllSignals(false);
 

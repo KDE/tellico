@@ -1,3 +1,7 @@
+2017-11-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with filter selection (Bug 387130).
+
 2017-11-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with multi-selection and entry editing (Bug 387053).

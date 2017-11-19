@@ -151,9 +151,8 @@ void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSe
       break;
     }
   }
-  if(filter) {
-    emit signalUpdateFilter(filter);
-  }
+  // emitting signal with a null filter is ok and accounts for clearing the selection
+  emit signalUpdateFilter(filter);
 }
 
 void FilterView::slotDoubleClicked(const QModelIndex& index_) {
