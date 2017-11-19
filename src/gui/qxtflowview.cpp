@@ -401,14 +401,12 @@ void QxtFlowView::mouseMoveEvent(QMouseEvent * event)
         showNext();
         d->lastgrabpos = event->pos();
     }
-
 }
 
 /*! \reimp */
 void QxtFlowView::mouseReleaseEvent(QMouseEvent* event)
 {
     Q_UNUSED(event);
-
 }
 
 /*! \reimp */
@@ -428,7 +426,6 @@ void QxtFlowView::resizeEvent(QResizeEvent* event)
 /*! \reimp */
 void QxtFlowView::wheelEvent(QWheelEvent * event)
 {
-
     if (event->orientation() == Qt::Horizontal)
     {
         event->ignore();
@@ -455,8 +452,6 @@ void QxtFlowView::wheelEvent(QWheelEvent * event)
         }
         event->accept();
     }
-
-
 }
 
 /*! \internal */
@@ -471,14 +466,6 @@ void QxtFlowView::updateAnimation()
         emit currentIndexChanged(d->currentcenter);
     }
 }
-
-
-
-
-
-
-
-
 
 void QxtFlowViewPrivate::columnsAboutToBeInserted(const QModelIndex & parent, int start, int end)
 {
@@ -535,16 +522,10 @@ void QxtFlowViewPrivate::headerDataChanged(Qt::Orientation orientation, int firs
     Q_UNUSED(orientation);
     Q_UNUSED(first);
     Q_UNUSED(last);
-
-
-
-
-
 }
 
 void QxtFlowViewPrivate::layoutAboutToBeChanged()
 {
-
 }
 
 void QxtFlowViewPrivate::layoutChanged()
@@ -597,13 +578,10 @@ void QxtFlowViewPrivate::rowsRemoved(const QModelIndex & parent, int start, int 
         removeSlide(i);
         modelmap.removeAt(i);
     }
-
 }
 
 void QxtFlowViewPrivate::setModel(QAbstractItemModel * m)
 {
-
-
     if (model)
     {
 
@@ -674,7 +652,6 @@ void QxtFlowViewPrivate::setModel(QAbstractItemModel * m)
     reset();
 }
 
-
 void QxtFlowViewPrivate::clear()
 {
     int c = state->slideImages.count();
@@ -687,14 +664,11 @@ void QxtFlowViewPrivate::clear()
     triggerRender();
 }
 
-
 void QxtFlowViewPrivate::triggerRender()
 {
     triggerTimer.setSingleShot(true);
     triggerTimer.start(0);
 }
-
-
 
 void QxtFlowViewPrivate::insertSlide(int index, const QImage& image)
 {
@@ -719,15 +693,12 @@ void QxtFlowViewPrivate::removeSlide(int index)
     triggerRender();
 }
 
-
 void QxtFlowViewPrivate::showSlide(int index)
 {
     if (index == state->centerSlide.slideIndex)
         return;
     animator->start(index);
 }
-
-
 
 void QxtFlowViewPrivate::reset()
 {
@@ -747,8 +718,6 @@ void QxtFlowViewPrivate::reset()
     }
     triggerRender();
 }
-
-
 
 void QxtFlowViewPrivate::setCurrentIndex(QModelIndex index)
 {

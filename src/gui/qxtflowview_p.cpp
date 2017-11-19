@@ -704,11 +704,3 @@ void QxtFlowViewSoftwareRenderer::render()
     renderSlides();
     dirty = false;
 }
-
-
-
-
-
-
-
-
