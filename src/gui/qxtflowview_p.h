@@ -66,6 +66,7 @@
 #include <QVector>
 #include <QWidget>
 #include <QAbstractItemModel>
+#include <QItemSelectionModel>
 #include <QPersistentModelIndex>
 #include <QList>
 
@@ -254,8 +255,9 @@ public:
     QxtFlowViewAnimator* animator;
     QxtFlowViewAbstractRenderer* renderer;
     QTimer triggerTimer;
-    QAbstractItemModel * model;
-    void setModel(QAbstractItemModel * model);
+    QAbstractItemModel* model;
+    QItemSelectionModel* selectionModel;
+    void setModel(QAbstractItemModel* model);
     void clear();
     void triggerRender();
     void insertSlide(int index, const QImage& image);

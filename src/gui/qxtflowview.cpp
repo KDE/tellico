@@ -48,6 +48,8 @@
  ****************************************************************************/
 
 #include "qxtflowview_p.h"
+#include "../tellico_debug.h"
+
 #include <QWheelEvent>
 
 /*!
@@ -91,6 +93,7 @@ QxtFlowView::QxtFlowView(QWidget* parent): QWidget(parent)
     d = new QxtFlowViewPrivate;
 
     d->model = 0;
+    d->selectionModel = 0;
     d->picrole = Qt::DecorationRole;
     d->textrole = Qt::DisplayRole;
     d->piccolumn = 0;
@@ -135,17 +138,60 @@ QxtFlowView::~QxtFlowView()
     \bold {Note:} The view does not take ownership of the model unless it is the
     model's parent object because it may be shared between many different views.
  */
-void QxtFlowView::setModel(QAbstractItemModel * model)
+void QxtFlowView::setModel(QAbstractItemModel* model)
 {
+    if(model == d->model)
+      return;
+    // TODO: move this into QxtFlowView class
     d->setModel(model);
+
+    QItemSelectionModel* selection_model = new QItemSelectionModel(model, this);
+    connect(model, SIGNAL(destroyed()), selection_model, SLOT(deleteLater()));
+    setSelectionModel(selection_model);
+
+    d->reset();
 }
 
 /*!
     Returns the model.
  */
-QAbstractItemModel * QxtFlowView::model()
+QAbstractItemModel* QxtFlowView::model()
 {
     return d->model;
+}
+
+/*!
+    Sets the selection \a model.
+ */
+void QxtFlowView::setSelectionModel(QItemSelectionModel* selectionModel)
+{
+    if(selectionModel && d->model && selectionModel->model() != d->model) {
+        qWarning("QxtFlowViewPrivate::setSelectionModel() failed: "
+                 "Trying to set a selection model, which works on "
+                 "a different model than the view.");
+        return;
+    }
+    if(d->selectionModel) {
+        disconnect(d->selectionModel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                   this, SIGNAL(selectionChanged(QItemSelection,QItemSelection)));
+        disconnect(d->selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                   this, SIGNAL(currentChanged(QModelIndex,QModelIndex)));
+    }
+    d->selectionModel = selectionModel;
+    if(d->selectionModel) {
+        connect(d->selectionModel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+                this, SIGNAL(selectionChanged(QItemSelection,QItemSelection)));
+        connect(d->selectionModel, SIGNAL(currentChanged(QModelIndex,QModelIndex)),
+                this, SIGNAL(currentChanged(QModelIndex,QModelIndex)));
+    }
+}
+
+/*!
+    Returns the selection model.
+ */
+QItemSelectionModel* QxtFlowView::selectionModel()
+{
+    return d->selectionModel;
 }
 
 /*!
@@ -385,6 +431,18 @@ void QxtFlowView::keyPressEvent(QKeyEvent* event)
 void QxtFlowView::mousePressEvent(QMouseEvent* event)
 {
     d->lastgrabpos = event->pos();
+    if(!d->selectionModel)
+        return;
+    QPersistentModelIndex index = d->modelmap.at(d->state->centerIndex);
+    if (index.isValid()) {
+      d->selectionModel->setCurrentIndex(index, QItemSelectionModel::NoUpdate);
+      QItemSelection selection;
+      selection.select(index, index);
+      d->selectionModel->select(selection, QItemSelectionModel::Select);
+    } else {
+        // Forces a finalize() even if mouse is pressed, but not on a item
+        d->selectionModel->select(QModelIndex(), QItemSelectionModel::Select);
+    }
 }
 
 /*! \reimp */
@@ -463,7 +521,7 @@ void QxtFlowView::updateAnimation()
     if (d->state->centerIndex != old_center)
     {
         d->currentcenter = d->modelmap.at(d->state->centerIndex);
-        emit currentIndexChanged(d->currentcenter);
+        emit currentChanged(d->currentcenter, d->modelmap.at(old_center));
     }
 }
 
@@ -648,8 +706,6 @@ void QxtFlowViewPrivate::setModel(QAbstractItemModel * m)
         connect(this->model, SIGNAL(rowsRemoved(const QModelIndex & , int , int)),
                 this, SLOT(rowsRemoved(const QModelIndex & , int , int)));
     }
-
-    reset();
 }
 
 void QxtFlowViewPrivate::clear()
@@ -716,6 +772,8 @@ void QxtFlowViewPrivate::reset()
         else
             currentcenter=QModelIndex();
     }
+    if(selectionModel)
+      selectionModel->reset();
     triggerRender();
 }
 

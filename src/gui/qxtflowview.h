@@ -52,7 +52,7 @@
 
 #include <QWidget>
 #include <QAbstractItemModel>
-
+#include <QItemSelectionModel>
 
 class QxtFlowViewPrivate;
 class QxtFlowView : public QWidget
@@ -84,8 +84,11 @@ public:
     QxtFlowView(QWidget* parent = 0);
     ~QxtFlowView();
 
-    void setModel(QAbstractItemModel * model);
-    QAbstractItemModel * model();
+    void setModel(QAbstractItemModel* model);
+    QAbstractItemModel* model();
+
+    void setSelectionModel(QItemSelectionModel* model);
+    QItemSelectionModel* selectionModel();
 
     QColor backgroundColor() const;
     void setBackgroundColor(const QColor& c);
@@ -119,7 +122,9 @@ public Q_SLOTS:
     void triggerRender();
 
 Q_SIGNALS:
-    void currentIndexChanged(QModelIndex index);
+    virtual void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    // TODO: update QxtFlowView::updateAnimation() to use selection model
+    virtual void currentChanged(const QModelIndex &current, const QModelIndex &previous);
 
 protected:
     virtual void paintEvent(QPaintEvent *event);
