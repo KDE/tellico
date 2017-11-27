@@ -1,8 +1,0 @@
-
-This document has information about the packaging workflow
-
-Also the place that tells about "dfsg"
- ( please add that information )
-
-
-* Do `apt install pkg-kde-tools` before you do `sbuild`
