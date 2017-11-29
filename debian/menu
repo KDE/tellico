@@ -1,5 +1,0 @@
-?package(tellico):needs="X11"\
-  section="Applications/Office"\
-  title="Tellico"\
-  icon="/usr/share/pixmaps/tellico.xpm"\
-  command="/usr/bin/tellico"
