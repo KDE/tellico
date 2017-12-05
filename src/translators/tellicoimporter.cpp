@@ -125,7 +125,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 
   // hack to allow processEvents
   QPointer<TellicoImporter> thisPtr(this);
-  while(success && !m_cancelled && pos < data_.size()) {
+  while(thisPtr && success && !m_cancelled && pos < data_.size()) {
     uint size = qMin(blockSize, data_.size() - pos);
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
