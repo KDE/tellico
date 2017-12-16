@@ -367,7 +367,6 @@ void FetchDialog::slotSearchClicked() {
     Fetch::Manager::self()->stop();
     slotFetchDone();
   } else {
-    m_treeWidget->clear();
     const QString value = m_valueLineEdit->text().simplified();
     m_resultCount = 0;
     m_oldSearch = value;
