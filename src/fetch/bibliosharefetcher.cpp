@@ -115,10 +115,10 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
       imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
       QUrlQuery q;
       q.addQueryItem(QLatin1String("Token"), m_token);
-      // QUrl does not had the "=" for empty SAN and Thumbnail query items
-      q.addQueryItem(QLatin1String("SAN"), QLatin1String(" "));
-      q.addQueryItem(QLatin1String("Thumbnail"), QLatin1String(" "));
       q.addQueryItem(QLatin1String("EAN"), isbn);
+      // the actual values for SAN Thumbnail don't seem to matter, they just can't be empty
+      q.addQueryItem(QLatin1String("SAN"), QLatin1String("string"));
+      q.addQueryItem(QLatin1String("Thumbnail"), QLatin1String("cover"));
       imageUrl.setQuery(q);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
