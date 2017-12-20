@@ -639,11 +639,6 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Reset the window's layout"));
   action->setIcon(QIcon::fromTheme(QLatin1String("resetview")));
 
-  m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), this);
-  m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
-//  connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
-//  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_toggleGroupWidget);
-
   m_toggleEntryEditor = new KToggleAction(i18n("Show Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
@@ -882,7 +877,6 @@ void MainWindow::saveOptions() {
   KConfigGroup config(KSharedConfig::openConfig(), "Main Window Options");
   saveMainWindowSettings(config);
 
-  Config::setShowGroupWidget(m_toggleGroupWidget->isChecked());
   Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
 
   KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
@@ -891,10 +885,6 @@ void MainWindow::saveOptions() {
     Config::setLastOpenFile(Data::Document::self()->URL().url());
   }
 
-  if(!m_groupView->isHidden()) {
-//    Config::setMainSplitterSizes(m_split->sizes());
-  }
-//  Config::setSecondarySplitterSizes(m_rightSplit->sizes());
   Config::setViewWidget(m_viewStack->currentWidget());
 
   // historical reasons
@@ -1015,27 +1005,10 @@ void MainWindow::readOptions() {
   KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), "Main Window Options");
   applyMainWindowSettings(mainWindowConfig);
 
-  QList<int> splitList = Config::mainSplitterSizes();
-  if(splitList.empty()) {
-    const int tw = width()/3;
-    splitList << tw << 2*tw;
-  }
-//  m_split->setSizes(splitList);
-
-  splitList = Config::secondarySplitterSizes();
-  if(splitList.empty()) {
-    const int th = 2*width()/5;
-    splitList << th << th;
-  }
-//  m_rightSplit->setSizes(splitList);
-
   m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
 
   connect(toolBar(QLatin1String("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
-
-  m_toggleGroupWidget->setChecked(Config::showGroupWidget());
-  slotToggleGroupWidget();
 
   // initialize the recent file list
   KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
@@ -1446,20 +1419,6 @@ void MainWindow::slotEditSelectAll() {
 
 void MainWindow::slotEditDeselect() {
   Controller::self()->slotUpdateSelection(Data::EntryList());
-}
-
-void MainWindow::slotToggleGroupWidget() {
-  if(m_toggleGroupWidget->isChecked()) {
-    m_viewTabs->show();
-    // if width was set to zero, choose a default width
-    if(m_viewTabs->width() == 0) {
-//      QList<int> widths = m_split->sizes();
-//      widths[0] = m_viewTabs->minimumSizeHint().width();
-//      m_split->setSizes(widths);
-    }
-  } else {
-    m_viewTabs->hide();
-  }
 }
 
 void MainWindow::slotToggleEntryEditor() {

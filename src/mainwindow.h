@@ -201,10 +201,6 @@ public Q_SLOTS:
    */
   void slotEditDeselect();
   /**
-   * Toggles the group widget.
-   */
-  void slotToggleGroupWidget();
-  /**
    * Toggles the edit widget.
    */
   void slotToggleEntryEditor();
@@ -480,7 +476,6 @@ private:
   QAction* m_updateAll;
   QAction* m_checkInEntry;
   QAction* m_checkOutEntry;
-  KToggleAction* m_toggleGroupWidget;
   KToggleAction* m_toggleEntryEditor;
 
   KSelectAction* m_entryGrouping;

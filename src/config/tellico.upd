@@ -30,3 +30,8 @@ File=tellicorc
 Group=General Options
 RemoveKey=Show Entry View
 RemoveGroup=Detailed View Options
+#
+Id=tellico-3.2
+File=tellicorc
+Group=General Options
+RemoveKey=Show Group Widget

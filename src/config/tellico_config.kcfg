@@ -14,11 +14,6 @@
     </entry>
 </group>
 
-<group name="Main Window Options">
-    <entry key="Main Splitter Sizes" type="IntList"/>
-    <entry key="Secondary Splitter Sizes" type="IntList"/>
-</group>
-
 <group name="Group View Options">
     <entry key="SortColumn" type="Int" name="groupViewSortColumn">
         <default>0</default>
@@ -53,9 +48,6 @@
 </group>
 
 <group name="General Options">
-    <entry key="Show Group Widget" type="Bool">
-        <default>true</default>
-    </entry>
     <entry key="Show Edit Widget" type="Bool">
         <default>false</default>
     </entry>
