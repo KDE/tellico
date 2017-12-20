@@ -44,7 +44,7 @@ class KRecentFilesAction;
 class KActionMenu;
 
 class QCloseEvent;
-class QSplitter;
+class QDockWidget;
 class QSignalMapper;
 
 namespace Tellico {
@@ -460,6 +460,7 @@ private Q_SLOTS:
    * Toggle menubar visibility
    */
   void slotToggleMenuBarVisibility();
+  void slotResetLayout();
 
 private:
   void importFile(Import::Format format, const QList<QUrl>& kurls);
@@ -485,10 +486,8 @@ private:
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;
 
-  // m_split is used between the stuff on the left and stuff on the right
-  QSplitter* m_split;
-  // m_leftSplit is used between detailed view and entry view
-  QSplitter* m_rightSplit;
+  QDockWidget* m_groupDock;
+  QDockWidget* m_columnDock;
 
   Tellico::StatusBar* m_statusBar;
 

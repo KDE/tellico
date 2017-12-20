@@ -97,7 +97,7 @@
 
 #include <QApplication>
 #include <QUndoStack>
-#include <QSplitter>
+#include <QDockWidget>
 #include <QAction>
 #include <QSignalMapper>
 #include <QTimer>
@@ -634,10 +634,15 @@ void MainWindow::initActions() {
   setStandardToolBarMenuEnabled(true);
   createStandardStatusBarAction();
 
+  action = actionCollection()->addAction(QLatin1String("reset_layout"), this, SLOT(slotResetLayout()));
+  action->setText(i18n("Reset Layout"));
+  action->setToolTip(i18n("Reset the window's layout"));
+  action->setIcon(QIcon::fromTheme(QLatin1String("resetview")));
+
   m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), this);
   m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
-  connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
-  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_toggleGroupWidget);
+//  connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
+//  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_toggleGroupWidget);
 
   m_toggleEntryEditor = new KToggleAction(i18n("Show Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
@@ -696,13 +701,7 @@ void MainWindow::initActions() {
   widgetAction->setProperty("isShortcutConfigurable", false);
   actionCollection()->addAction(QLatin1String("quick_filter"), widgetAction);
 
-  setupGUI(Keys | ToolBar);
-#ifdef UIFILE
-  myWarning() << "call!";
-  createGUI(UIFILE);
-#else
-  createGUI();
-#endif
+  // final GUI setup is in initView()
 }
 
 #undef mimeIcon
@@ -737,10 +736,11 @@ void MainWindow::initView() {
   // initialize the image factory before the entry models are created
   ImageFactory::init();
 
-  m_split = new QSplitter(Qt::Horizontal, this);
-  setCentralWidget(m_split);
+  m_groupDock = new QDockWidget(i18n("Group Tabs"), this);
+  m_groupDock->setObjectName(QLatin1String("group_tabs"));
+  m_groupDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
 
-  m_viewTabs = new GUI::TabWidget(m_split);
+  m_viewTabs = new GUI::TabWidget(this);
   m_viewTabs->setTabBarHidden(true);
   m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);
@@ -748,10 +748,15 @@ void MainWindow::initView() {
   m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QLatin1String("folder")), i18n("Groups"));
   m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
                                     "based on a selected field.</qt>"));
+  m_groupDock->setWidget(m_viewTabs);
+  addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
+  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_groupDock->toggleViewAction());
 
-  m_rightSplit = new QSplitter(Qt::Vertical, m_split);
+  m_columnDock = new QDockWidget(i18n("Column View"), this);
+  m_columnDock->setObjectName(QLatin1String("column_view"));
+  m_columnDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
 
-  m_viewStack = new ViewStack(m_rightSplit);
+  m_viewStack = new ViewStack(this);
 
   m_detailedView = m_viewStack->listView();
   Controller::self()->addObserver(m_detailedView);
@@ -768,17 +773,36 @@ void MainWindow::initView() {
   m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
                                 "an icon, which may be an image in the entry.</qt>"));
 
-  m_entryView = new EntryView(m_rightSplit);
+  m_columnDock->setWidget(m_viewStack);
+  addDockWidget(Qt::TopDockWidgetArea, m_columnDock);
+  actionCollection()->addAction(QLatin1String("toggle_column_widget"), m_columnDock->toggleViewAction());
+
+  m_entryView = new EntryView(this);
   connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
           SLOT(slotURLAction(const QUrl&)));
   m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
+  setCentralWidget(m_entryView->view());
 
+  setDockOptions(QMainWindow::AnimatedDocks); // no tabbed docks
+  setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
+  setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
+  setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+  setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
   setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
 
   EntrySelectionModel* proxySelect = new EntrySelectionModel(m_iconView->model(),
                                                              m_detailedView->selectionModel(),
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
+
+  // settign up GUI now rather than in initActions
+  setupGUI(Keys | ToolBar);
+#ifdef UIFILE
+  myWarning() << "call!";
+  createGUI(UIFILE);
+#else
+  createGUI();
+#endif
 }
 
 void MainWindow::initConnections() {
@@ -868,9 +892,9 @@ void MainWindow::saveOptions() {
   }
 
   if(!m_groupView->isHidden()) {
-    Config::setMainSplitterSizes(m_split->sizes());
+//    Config::setMainSplitterSizes(m_split->sizes());
   }
-  Config::setSecondarySplitterSizes(m_rightSplit->sizes());
+//  Config::setSecondarySplitterSizes(m_rightSplit->sizes());
   Config::setViewWidget(m_viewStack->currentWidget());
 
   // historical reasons
@@ -996,14 +1020,14 @@ void MainWindow::readOptions() {
     const int tw = width()/3;
     splitList << tw << 2*tw;
   }
-  m_split->setSizes(splitList);
+//  m_split->setSizes(splitList);
 
   splitList = Config::secondarySplitterSizes();
   if(splitList.empty()) {
     const int th = 2*width()/5;
     splitList << th << th;
   }
-  m_rightSplit->setSizes(splitList);
+//  m_rightSplit->setSizes(splitList);
 
   m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
@@ -1429,9 +1453,9 @@ void MainWindow::slotToggleGroupWidget() {
     m_viewTabs->show();
     // if width was set to zero, choose a default width
     if(m_viewTabs->width() == 0) {
-      QList<int> widths = m_split->sizes();
-      widths[0] = m_viewTabs->minimumSizeHint().width();
-      m_split->setSizes(widths);
+//      QList<int> widths = m_split->sizes();
+//      widths[0] = m_viewTabs->minimumSizeHint().width();
+//      m_split->setSizes(widths);
     }
   } else {
     m_viewTabs->hide();
@@ -2356,4 +2380,14 @@ void MainWindow::slotToggleFullScreen() {
 void MainWindow::slotToggleMenuBarVisibility() {
   QMenuBar* mb = menuBar();
   mb->isHidden() ? mb->show() : mb->hide();
+}
+
+void MainWindow::slotResetLayout() {
+  removeDockWidget(m_groupDock);
+  addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
+  m_groupDock->show();
+
+  removeDockWidget(m_columnDock);
+  addDockWidget(Qt::TopDockWidgetArea, m_columnDock);
+  m_columnDock->show();
 }

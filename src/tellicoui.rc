@@ -1,6 +1,6 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="35" name="tellico">
+<kpartgui version="36" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
@@ -21,7 +21,7 @@
     <Action name="new_custom_collection"/>
    </Menu>
    <Menu name="file_import">
-    <text>&amp;Import</text>
+    <text context="@title:menu">&amp;Import</text>
     <Action name="file_import_tellico"/>
     <Action name="file_import_csv"/>
     <Action name="file_import_gcstar"/>
@@ -51,7 +51,7 @@
     <Action name="file_import_xslt"/>
    </Menu>
    <Menu name="file_export">
-    <text>&amp;Export</text>
+    <text context="@title:menu">&amp;Export</text>
     <Action name="file_export_xml"/>
     <Action name="file_export_zip"/>
     <Action name="file_export_html"/>
@@ -72,14 +72,14 @@
    <Action name="filter_dialog"/>
   </Menu>
   <Menu name="collection">
-   <text>&amp;Collection</text>
+   <text context="@title:menu">&amp;Collection</text>
    <Action name="coll_new_entry"/>
    <Action name="coll_edit_entry"/>
    <Action name="coll_copy_entry"/>
    <Action name="coll_delete_entry"/>
    <Action name="coll_merge_entry"/>
    <Menu name="coll_update_entry">
-    <text>&amp;Update Entry</text>
+    <text context="@title:menu">&amp;Update Entry</text>
     <Action name="update_entry_all"/>
     <Separator/>
     <ActionList name="update_entry_actions"/>
@@ -93,7 +93,7 @@
    <Action name="coll_reports"/>
    <Separator/>
    <Menu name="coll_bibliography">
-    <text>&amp;Bibliography</text>
+    <text context="@title:menu">&amp;Bibliography</text>
     <Action name="coll_convert_bibliography"/>
     <Action name="coll_string_macros"/>
     <Action name="coll_key_manager"/>
@@ -102,10 +102,16 @@
    </Menu>
   </Menu>
   <Menu name="settings">
-   <Action append="show_merge" name="toggle_collection_bar"/>
-   <Action append="show_merge" name="toggle_group_widget"/>
-   <Action append="show_merge" name="toggle_edit_widget"/>
+   <Menu name="dockers" append="show_merge">
+     <text context="@title:menu">&amp;Dockers</text>
+     <!--<Action name="options_show_statusbar"/>-->
+     <Action name="toggle_collection_bar"/>
+     <Action name="toggle_group_widget"/>
+     <Action name="toggle_column_widget"/>
+     <Action name="toggle_edit_widget"/>
+   </Menu>
    <Action append="show_merge" name="change_entry_grouping"/>
+   <Action append="show_merge" name="reset_layout"/>
   </Menu>
   <Menu name="help">
    <Action name="tipOfDay"/>
