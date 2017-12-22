@@ -56,7 +56,6 @@ public:
    * The constructor sets up the single column, and initializes the popup menu.
    *
    * @param parent A pointer to the parent widget
-   * @param name The widget name
    */
   GroupView(QWidget* parent);
 
@@ -90,8 +89,6 @@ public:
   void removeCollection(Data::CollPtr coll);
   /**
    * Refresh all the items for the collection.
-   *
-   * @return The item for the collection
    */
   void populateCollection();
   /**
@@ -122,7 +119,6 @@ private:
    * Inserts a listviewitem for a given group
    *
    * @param group The group to be added
-   * @return A pointer to the created @ ref ParentItem
    */
   void addGroup(Data::EntryGroup* group);
 
