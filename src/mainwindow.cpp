@@ -639,7 +639,7 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Reset the window's layout"));
   action->setIcon(QIcon::fromTheme(QLatin1String("resetview")));
 
-  m_toggleEntryEditor = new KToggleAction(i18n("Show Entry &Editor"), this);
+  m_toggleEntryEditor = new KToggleAction(i18n("Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
   actionCollection()->addAction(QLatin1String("toggle_edit_widget"), m_toggleEntryEditor);

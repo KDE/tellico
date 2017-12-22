@@ -103,7 +103,7 @@
   </Menu>
   <Menu name="settings">
    <Menu name="dockers" append="show_merge">
-     <text context="@title:menu">&amp;Show Panels</text>
+     <text context="@title:menu">&amp;Show Views</text>
      <!--<Action name="options_show_statusbar"/>-->
      <Action name="toggle_collection_bar"/>
      <Action name="toggle_group_widget"/>
