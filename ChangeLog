@@ -1,3 +1,8 @@
+2018-01-09  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with OMDB settings not being saved (Bug 388703).
+	* Updated IMDb data source.
+
 2017-12-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Revert change to clear search dialog on new search (Bug 357799).
