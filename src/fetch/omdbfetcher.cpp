@@ -402,7 +402,11 @@ OMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const OMDBFetcher* fet
   addFieldsWidget(OMDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
-void OMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {
+void OMDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  const QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty()) {
+    config_.writeEntry("API Key", apiKey);
+  }
 }
 
 QString OMDBFetcher::ConfigWidget::preferredName() const {
