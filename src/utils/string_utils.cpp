@@ -173,8 +173,12 @@ QString Tellico::mapValue(const QVariantMap& map, const char* object, const char
   } else if(v.canConvert(QVariant::Map)) {
     return mapValue(v.toMap(), name);
   } else if(v.canConvert(QVariant::List)) {
-    const QVariantList list = v.toList();
-    return list.isEmpty() ? QString() : mapValue(list.at(0).toMap(), name);
+    QStringList values;
+    foreach(QVariant v, v.toList()) {
+      const QString s = mapValue(v.toMap(), name);
+      if(!s.isEmpty()) values += s;
+    }
+    return values.join(FieldFormat::delimiterString());
   } else {
     return QString();
   }

@@ -73,9 +73,8 @@ void KinoFetcherTest::testTitle() {
   QCOMPARE(set(entry, "genre"), set("Superhelden-Film; Comicverfilmung; Fantasyfilm; Actionfilm"));
   QCOMPARE(entry->field("director"), QLatin1String("Bryan Singer"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
-  QVERIFY(!castList.isEmpty());
+  QCOMPARE(castList.size(), 9);
   QCOMPARE(castList.at(0), QLatin1String("Brandon Routh"));
-  QCOMPARE(castList.size(), 3);
   QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
   QCOMPARE(entry->field("studio"), QLatin1String("Warner"));
   QCOMPARE(entry->field("running-time"), QLatin1String("154"));
