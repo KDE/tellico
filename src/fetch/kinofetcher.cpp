@@ -45,6 +45,8 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const char* KINO_BASE_URL = "http://www.kino.de/se/";
@@ -143,13 +145,8 @@ void KinoFetcher::slotComplete(KJob*) {
 
   QRegularExpression linkRx(QLatin1String("<a .+?movie-link.+?href=\"(.+?)\".*>(.+?)</"));
   QRegularExpression dateSpanRx(QLatin1String("<span .+?movie-startdate.+?>(.+?)</span"));
-  // spans could have multiple values, all which have their own span elements. assume all on one line, so check against ending newline
-  QRegularExpression genreSpanRx(QLatin1String("<span .+?movie-genre.+?>(.+?)\\n"));
-  QRegularExpression castSpanRx(QLatin1String("<span .+?movie-cast.+?>(.+?)\\n"));
-  QRegularExpression directorSpanRx(QLatin1String("<span .+?movie-director.+?>(.+?)\\n"));
   QRegularExpression dateRx(QLatin1String("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QLatin1String("(\\d{4})/?$"));
-  QRegularExpression tagRx(QLatin1String("<.+?>"));
 
   QRegularExpressionMatchIterator i = linkRx.globalMatch(s);
   while(i.hasNext()) {
@@ -173,27 +170,6 @@ void KinoFetcher::slotComplete(KJob*) {
       y = yearEndRx.match(u).captured(1);
     }
     entry->setField(QLatin1String("year"), y);
-
-    QRegularExpressionMatch genreMatch = genreSpanRx.match(s, match.capturedEnd());
-    if(genreMatch.hasMatch()) {
-      QString g = genreMatch.captured(1).remove(tagRx).remove(QLatin1String("Genre: "));
-      QStringList genres = g.split(QRegularExpression(QLatin1String("\\s*,\\s*")));
-      entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
-    }
-
-    QRegularExpressionMatch directorMatch = directorSpanRx.match(s, match.capturedEnd());
-    if(directorMatch.hasMatch()) {
-      QString d = directorMatch.captured(1).remove(tagRx).remove(QLatin1String("Von: "));
-      QStringList directors = d.split(QRegularExpression(QLatin1String("\\s*(,|\\sund\\s)\\s*")));
-      entry->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
-    }
-
-    QRegularExpressionMatch castMatch = castSpanRx.match(s, match.capturedEnd());
-    if(castMatch.hasMatch()) {
-      QString c = castMatch.captured(1).remove(tagRx).remove(QLatin1String("Mit: ")).remove(QLatin1String(" und weiteren"));
-      QStringList cast = c.split(QRegularExpression(QLatin1String("\\s*,\\s*")));
-      entry->setField(QLatin1String("cast"), cast.join(FieldFormat::rowDelimiterString()));
-    }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     QUrl url = QUrl(QString::fromLatin1(KINO_BASE_URL)).resolved(QUrl(u));
@@ -242,20 +218,53 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
 }
 
 void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
+  QRegularExpression jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*?)</script"),
+                            QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpressionMatchIterator i = jsonRx.globalMatch(str_);
+  while(i.hasNext()) {
+    QJsonDocument doc = QJsonDocument::fromJson(i.next().captured(1).toUtf8());
+    QVariantMap objectMap = doc.object().toVariantMap();
+    if(mapValue(objectMap, "@type") != QLatin1String("Movie")) {
+      continue;
+    }
+    entry->setField(QLatin1String("director"), mapValue(objectMap, "director", "name"));
+
+    QStringList actors;
+    foreach(QVariant v, objectMap.value(QLatin1String("actor")).toList()) {
+      const QString actor = mapValue(v.toMap(), "name");
+      if(!actor.isEmpty()) actors += actor;
+    }
+    if(!actors.isEmpty()) {
+      entry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
+    }
+  }
+
   QRegularExpression tagRx(QLatin1String("<.+?>"));
 
   QRegularExpression nationalityRx(QLatin1String("<dt>Produktionsland</dt><dd>(.*?)</dd>"));
   QRegularExpressionMatch nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
-    QString n = nationalityMatch.captured(1).remove(tagRx);
+    const QString n = nationalityMatch.captured(1).remove(tagRx);
     entry->setField(QLatin1String("nationality"), n);
   }
 
   QRegularExpression lengthRx(QLatin1String("<dt.*?>Dauer</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
-    QString l = lengthMatch.captured(1).remove(tagRx).remove(QLatin1String(" Min"));
+    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QLatin1String(" Min"));
     entry->setField(QLatin1String("running-time"), l);
+  }
+
+  QRegularExpression genreRx(QLatin1String("<dt.*?>Genre</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpressionMatch genreMatch = genreRx.match(str_);
+  if(genreMatch.hasMatch()) {
+    QRegularExpression anchorRx(QLatin1String("<a.*?>(.*?)</a>"));
+    QRegularExpressionMatchIterator i = anchorRx.globalMatch(genreMatch.captured(1));
+    QStringList genres;
+    while(i.hasNext()) {
+      genres += i.next().captured(1).trimmed();
+    }
+    entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
   QRegularExpression certRx(QLatin1String("<dt>FSK</dt><dd>(.*?)</dd>"));
