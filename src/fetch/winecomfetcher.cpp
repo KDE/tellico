@@ -72,6 +72,12 @@ QString WineComFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+QString WineComFetcher::attribution() const {
+  // per https://api.wine.com/wiki
+  return QLatin1String("<a href=\"http://www.wine.com/\" title=\"Wine.com the destination for Wine and Wine Gifts\">"
+                       "<img src=\"http://cache.wine.com/images/logos/80x20_winecom_logo.png\" alt=\"Wine.com the destination for Wine and Wine Gifts\" /></a>");
+}
+
 bool WineComFetcher::canFetch(int type) const {
   return type == Data::Collection::Wine;
 }

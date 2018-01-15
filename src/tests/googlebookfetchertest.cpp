@@ -114,10 +114,15 @@ void GoogleBookFetcherTest::testKeyword() {
 
 void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
   QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical RDF"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-55051-0"));
+  if(entry->field(QLatin1String("isbn")) == QLatin1String("0-596-55051-0")) {
+    QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-55051-0"));
+    QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("352"));
+  } else {
+    QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-51561-8"));
+    QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("336"));
+  }
   QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
   QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media, Inc."));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("352"));
   QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Computers")));
   QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("XML")));
