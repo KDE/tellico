@@ -164,7 +164,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
     QByteArray data = FileHandler::readDataFile(u, true);
 
 #if 0
-    myWarning() << "Remove debug2 from discogsfetcher.cpp";
+    myWarning() << "Remove debug2 from discogsfetcher.cpp (/tmp/test2.json)";
     QFile f(QString::fromLatin1("/tmp/test2.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);

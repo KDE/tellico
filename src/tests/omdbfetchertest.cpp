@@ -105,5 +105,5 @@ void OMDBFetcherTest::testBabel() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field("title"), QLatin1String("Babel"));
   QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro González Iñárritu"));
+  QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
 }
