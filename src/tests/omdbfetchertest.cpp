@@ -46,8 +46,8 @@ void OMDBFetcherTest::initTestCase() {
 }
 
 void OMDBFetcherTest::testTitle() {
-  // all the private API test config is in amazonfetchertest.config right now
-  KConfig config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig);
+  // all the private API test config is in tellicotest_private.config right now
+  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("OMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
@@ -85,8 +85,8 @@ void OMDBFetcherTest::testTitle() {
 
 // see https://bugs.kde.org/show_bug.cgi?id=336765
 void OMDBFetcherTest::testBabel() {
-  // all the private API test config is in amazonfetchertest.config right now
-  KConfig config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig);
+  // all the private API test config is in tellicotest_private.config right now
+  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
   QString groupName = QLatin1String("OMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);

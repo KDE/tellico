@@ -41,7 +41,7 @@
 QTEST_GUILESS_MAIN( WineComFetcherTest )
 
 WineComFetcherTest::WineComFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
-    , m_config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
 }
 
 void WineComFetcherTest::initTestCase() {
@@ -50,7 +50,7 @@ void WineComFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/winecom2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_hasConfigFile = QFile::exists(QFINDTESTDATA("amazonfetchertest.config"));
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
 }
 
 void WineComFetcherTest::testKeyword() {

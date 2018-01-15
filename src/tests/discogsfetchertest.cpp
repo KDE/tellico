@@ -37,12 +37,12 @@
 QTEST_GUILESS_MAIN( DiscogsFetcherTest )
 
 DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest()
-    , m_config(QFINDTESTDATA("discogsfetchertest.config"), KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
 }
 
 void DiscogsFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
-  m_hasConfigFile = QFile::exists(QFINDTESTDATA("discogsfetchertest.config"));
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
 }
 
 void DiscogsFetcherTest::testTitle() {
