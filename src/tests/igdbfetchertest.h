@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfig>
+
 class IGDBFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -35,6 +37,10 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testKeyword();
+
+private:
+  bool m_hasConfigFile;
+  KConfig m_config;
 };
 
 #endif
