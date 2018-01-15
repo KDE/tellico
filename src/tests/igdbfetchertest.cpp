@@ -38,20 +38,21 @@
 
 QTEST_GUILESS_MAIN( IGDBFetcherTest )
 
-IGDBFetcherTest::IGDBFetcherTest() : AbstractFetcherTest() {
+IGDBFetcherTest::IGDBFetcherTest() : AbstractFetcherTest()
+    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
 }
 
 void IGDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
 }
 
 void IGDBFetcherTest::testKeyword() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("igdb");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
+  const QString groupName = QLatin1String("IGDB");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with IGDB settings.", SkipAll);
   }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QLatin1String("Zelda Twilight Princess Wii"));
@@ -69,7 +70,7 @@ void IGDBFetcherTest::testKeyword() {
   QCOMPARE(entry->field("platform"), QLatin1String("Nintendo Wii"));
   QCOMPARE(entry->field("certification"), QLatin1String("Teen"));
   QCOMPARE(entry->field("pegi"), QLatin1String("PEGI 12"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Platform; Puzzle; Role-playing (RPG); Adventure"));
+  QCOMPARE(entry->field("genre"), QLatin1String("Platform; Puzzle; Role-playing (RPG); Sport; Adventure"));
   QCOMPARE(entry->field("publisher"), QLatin1String("Nintendo"));
   QCOMPARE(entry->field("developer"), QLatin1String("Nintendo EAD Group No. 3"));
   QCOMPARE(entry->field("igdb"), QLatin1String("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess"));

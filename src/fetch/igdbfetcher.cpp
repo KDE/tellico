@@ -49,15 +49,14 @@
 
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
-  static const char* IGDB_API_URL = "https://igdbcom-internet-game-database-v1.p.mashape.com/";
-  static const char* IGDB_API_KEY = "Ger6nO0EnKmsh7FCyUPa3GMdeYM5p1sfrPjjsnLYoHdDf19CGG";
+  static const char* IGDB_API_URL = "https://api-2445582011268.apicast.io";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::IGDBFetcher;
 
 IGDBFetcher::IGDBFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false), m_apiKey(QLatin1String(IGDB_API_KEY)) {
+    : Fetcher(parent_), m_started(false) {
   //  setLimit(IGDB_MAX_RETURNS_TOTAL);
   if(m_genreHash.isEmpty()) {
     populateHashes();
@@ -84,7 +83,7 @@ bool IGDBFetcher::canFetch(int type) const {
 }
 
 void IGDBFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key", IGDB_API_KEY);
+  QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
@@ -107,7 +106,7 @@ void IGDBFetcher::continueSearch() {
   }
 
   QUrl u(QString::fromLatin1(IGDB_API_URL));
-  u.setPath(u.path() + QLatin1String("games/"));
+  u.setPath(u.path() + QLatin1String("/games/"));
   QUrlQuery q;
   switch(request().key) {
     case Keyword:
@@ -339,11 +338,10 @@ QString IGDBFetcher::companyName(const QString& companyId_) const {
     return m_companyHash.value(companyId_);
   }
   QUrl u(QString::fromLatin1(IGDB_API_URL));
-  u.setPath(u.path() + QLatin1String("companies/") + companyId_);
+  u.setPath(u.path() + QLatin1String("/companies/") + companyId_);
 
   QUrlQuery q;
   q.addQueryItem(QLatin1String("fields"), QLatin1String("*"));
-
   u.setQuery(q);
 
   QPointer<KIO::StoredTransferJob> job = igdbJob(u, m_apiKey);
@@ -576,7 +574,7 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 IGDBFetcher::defaultName(),
-                                QLatin1String("http://igdb.github.io/api/about/welcome/")),
+                                QLatin1String("https://api.igdb.com/signup")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
@@ -591,9 +589,6 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
   m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
-  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
-  label->setWhatsThis(w);
-  m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
   l->setRowStretch(++row, 10);
@@ -602,11 +597,7 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
   addFieldsWidget(IGDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
-    // only show the key if it is not the default Tellico one...
-    // that way the user is prompted to apply for their own
-    if(fetcher_->m_apiKey != QLatin1String(IGDB_API_KEY)) {
-      m_apiKeyEdit->setText(fetcher_->m_apiKey);
-    }
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
   }
 }
 
@@ -623,7 +614,7 @@ QString IGDBFetcher::ConfigWidget::preferredName() const {
 
 QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_) {
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QLatin1String("customHTTPHeader"), QLatin1String("X-Mashape-Key: ") + apiKey_);
+  job->addMetaData(QLatin1String("customHTTPHeader"), QLatin1String("user-key: ") + apiKey_);
   job->addMetaData(QLatin1String("accept"), QLatin1String("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;

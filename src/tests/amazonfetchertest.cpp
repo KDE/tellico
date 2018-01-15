@@ -43,7 +43,7 @@
 QTEST_GUILESS_MAIN( AmazonFetcherTest )
 
 AmazonFetcherTest::AmazonFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
-    , m_config(QFINDTESTDATA("amazonfetchertest.config"), KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
 }
 
 void AmazonFetcherTest::initTestCase() {
@@ -55,7 +55,7 @@ void AmazonFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/amazon2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_hasConfigFile = QFile::exists(QFINDTESTDATA("amazonfetchertest.config"));
+  m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
 
   QHash<QString, QString> practicalRdf;
   practicalRdf.insert(QLatin1String("title"), QLatin1String("Practical RDF"));
