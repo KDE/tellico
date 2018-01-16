@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2001-2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2018 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
                        QLatin1String(TELLICO_VERSION), i18n("Tellico - a KDE collection manager"),
                        KAboutLicense::GPL_V2,
-                       i18n("(c) 2001-2017, Robby Stephenson"),
+                       i18n("(c) 2001-2018, Robby Stephenson"),
                        QString(),
                        QLatin1String("http://tellico-project.org"));
   aboutData.addAuthor(QLatin1String("Robby Stephenson"), QString(), QLatin1String("robby@periapsis.org"));
