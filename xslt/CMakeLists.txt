@@ -47,7 +47,6 @@ SET(XSLT_FILES
     vhs-logo.png
     vinoxml2tellico.xsl
     welcome.html
-    winecom2tellico.xsl
     xmp2tellico.xsl
     yahoo2tellico.xsl
     )

@@ -42,7 +42,6 @@
 #include "bibsonomyfetcher.h"
 #include "googlescholarfetcher.h"
 #include "discogsfetcher.h"
-#include "winecomfetcher.h"
 #include "themoviedbfetcher.h"
 #include "musicbrainzfetcher.h"
 #include "giantbombfetcher.h"
@@ -95,7 +94,6 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::ArxivFetcher> registerArxiv(Arxiv);
   RegisterFetcher<Fetch::BibsonomyFetcher> registerBibsonomy(Bibsonomy);
   RegisterFetcher<Fetch::GoogleScholarFetcher> registerGoogle(GoogleScholar);
-  RegisterFetcher<Fetch::WineComFetcher> registerWine(WineCom);
   RegisterFetcher<Fetch::MusicBrainzFetcher> registerMB(MusicBrainz);
   RegisterFetcher<Fetch::GiantBombFetcher> registerBomb(GiantBomb);
   RegisterFetcher<Fetch::OpenLibraryFetcher> registerOpenLibrary(OpenLibrary);

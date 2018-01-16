@@ -55,7 +55,6 @@ SET(fetch_STAT_SRCS
    themoviedbfetcher.cpp
    videogamegeekfetcher.cpp
    vndbfetcher.cpp
-   winecomfetcher.cpp
    xmlfetcher.cpp
    z3950connection.cpp
    z3950fetcher.cpp

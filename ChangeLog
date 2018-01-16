@@ -1,3 +1,8 @@
+2018-01-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 3.1.1.
+	* Removed deprecated Wine.com data source.
+
 2018-01-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Kino.de data source.

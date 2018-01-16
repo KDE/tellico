@@ -169,7 +169,6 @@ in the Data Sources Dialog. There are many available types and sources. A few of
 <listitem><para><link linkend="bib-sources">bibsonomy.org</link>,</para></listitem>
 <listitem><para><link linkend="bib-sources">crossref.org</link>,</para></listitem>
 <listitem><para><link linkend="discogs">Discogs.com</link>,</para></listitem>
-<listitem><para><link linkend="winecom">Wine.com</link>,</para></listitem>
 <listitem><para><link linkend="tmdb">TheMovieDB.org</link>,</para></listitem>
 <listitem><para><link linkend="tgdb">TheGamesDB.net</link>,</para></listitem>
 <listitem><para><link linkend="omdb">OMDBAPI.com</link>,</para></listitem>
@@ -373,17 +372,10 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 </sect2>
 
 <!-- start of wine sources -->
-<sect2 id="wine-sources">
+<!--<sect2 id="wine-sources">
 <title>Wine Data Sources</title>
 
-<sect3 id="winecom">
-<title>Wine.com</title>
-<para>
-<ulink url="http://wine.com">Wine.com</ulink> is an online wine seller, and offers access to a database information on wine varietals. Registration for a free account is required.
-</para>
-</sect3>
-
-</sect2>
+</sect2>-->
 
 <!-- start of video game sources -->
 <sect2 id="videogame-sources">
@@ -405,7 +397,6 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 
 </sect2>
 
-<!-- start of wine sources -->
 <sect2 id="variety-type-sources">
 <title>Data Sources for Multiple Collection Types</title>
 
