@@ -33,10 +33,6 @@ namespace Tellico {
 /**
  * An importer for importing collections used by Griffith, a movie collection manager.
  *
- * Unless the XML file is passed to the constructor, the database is assumed to be
- * $HOME/.griffith/griffith.db. The file format is sqlite3,
- * and a python script, depending on pysqlite, is used to import the database
- *
  * @author Robby Stephenson
  */
 class GriffithImporter : public XSLTImporter {
