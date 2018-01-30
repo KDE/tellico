@@ -131,7 +131,7 @@ void MusicBrainzFetcher::doSearch() {
   u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
-  m_requestTime.start();
+  m_requestTimer.start();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
   m_job->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1 ( http://tellico-project.org )")
@@ -261,10 +261,10 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 //  myDebug() << u;
 
   // limit to one request per second
-  while(m_requestTime.elapsed() < 1000) {
+  while(m_requestTimer.elapsed() < 1000) {
     QThread::msleep(300);
   }
-  m_requestTime.start();
+  m_requestTimer.start();
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   dataJob->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1 ( http://tellico-project.org )")
