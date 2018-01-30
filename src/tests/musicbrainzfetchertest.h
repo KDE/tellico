@@ -40,6 +40,7 @@ private Q_SLOTS:
   void testPerson();
   void testKeyword();
   void testCoverArt();
+  void testSoundtrack();
 
 private:
   QHash<QString, QString> m_fieldValues;

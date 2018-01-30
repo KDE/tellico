@@ -2,16 +2,16 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://periapsis.org/tellico/"
                 xmlns:str="http://exslt.org/strings"
-                xmlns:mb="http://musicbrainz.org/ns/mmd-1.0#"
+                xmlns:mb="http://musicbrainz.org/ns/mmd-2.0#"
                 exclude-result-prefixes="mb"
                 extension-element-prefixes="str"
                 version="1.0">
 
 <!--
    ===================================================================
-   Tellico XSLT file - used for importing musicbrainz data
+   Tellico XSLT file - used for importing musicbrainz data, version 2
 
-   Copyright (C) 2009 Robby Stephenson -robby@periapsis.org
+   Copyright (C) 2009-2018 Robby Stephenson -robby@periapsis.org
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -46,39 +46,37 @@
   </mbid>
 
   <year>
-   <xsl:value-of select="substring(mb:release-event-list/mb:event[1]/@date, 1, 4)"/>
+   <xsl:value-of select="substring(mb:release-event-list/mb:release-event[1]/mb:date, 1, 4)"/>
   </year>
 
   <artists>
-   <xsl:for-each select="mb:artist">
+   <xsl:for-each select="mb:artist-credit/mb:name-credit">
     <artist>
-     <xsl:value-of select="mb:name"/>
+     <xsl:value-of select="mb:artist/mb:name"/>
     </artist>
    </xsl:for-each>
   </artists>
 
   <labels>
-   <!-- for now, just use first release -->
-   <!-- <xsl:for-each select="mb:release-event-list/mb:event/mb:label[not(.=preceding::mb:label)]"> -->
-   <xsl:for-each select="mb:release-event-list/mb:event[1]/mb:label">
+   <xsl:for-each select="mb:label-info-list/mb:label-info">
     <label>
-     <xsl:value-of select="mb:name"/>
+     <xsl:value-of select="mb:label/mb:name"/>
     </label>
    </xsl:for-each>
   </labels>
 
-  <xsl:if test="mb:release-event-list/mb:event[1]/@format = 'CD'">
+  <xsl:if test="mb:medium-list/mb:medium[1]/mb:format = 'CD'">
    <medium i18n='yes'>Compact Disc</medium>
   </xsl:if>
-  <xsl:if test="mb:release-event-list/mb:event[1]/@format = 'Cassette'">
+  <xsl:if test="mb:medium-list/mb:medium[1]/mb:format = 'Cassette'">
    <medium i18n='yes'>Cassette</medium>
   </xsl:if>
-  <xsl:if test="mb:release-event-list/mb:event[1]/@format = 'Vinyl'">
+  <xsl:if test="mb:medium-list/mb:medium[1]/mb:format = 'Vinyl'">
    <medium i18n='yes'>Vinyl</medium>
   </xsl:if>
 
   <genres>
-   <xsl:if test="contains(@type,'oundtrack')">
+   <xsl:if test="contains(mb:release-group/@type,'oundtrack')">
     <genre i18n='yes'>Soundtrack</genre>
    </xsl:if>
   </genres>
@@ -96,27 +94,27 @@
 
   <xsl:variable name="release" select="."/>
   <tracks>
-   <xsl:for-each select="mb:track-list/mb:track">
+   <xsl:for-each select="mb:medium-list/mb:medium/mb:track-list/mb:track">
     <track>
      <column>
-     <xsl:value-of select="mb:title"/>
+      <xsl:value-of select="mb:recording/mb:title"/>
      </column>
      <column>
      <xsl:choose>
-      <xsl:when test="mb:artist">
+      <xsl:when test="mb:recording/mb:artist">
        <!-- some combinationss are separated by &,but some artists use & -->
        <!-- some combinations uses 'and' -->
        <!-- no way to accurately split, just setlle on comma for now -->
-       <xsl:value-of select="translate(mb:artist/mb:name,',', ';')"/>
+       <xsl:value-of select="translate(mb:recording/mb:artist/mb:name,',', ';')"/>
       </xsl:when>
       <xsl:otherwise>
-       <xsl:value-of select="$release/mb:artist/mb:name"/>
+       <xsl:value-of select="$release/mb:artist-credit/mb:name-credit/mb:artist[1]/mb:name"/>
       </xsl:otherwise>
      </xsl:choose>
      </column>
      <column>
      <xsl:call-template name="time">
-      <xsl:with-param name="duration" select="mb:duration"/>
+      <xsl:with-param name="duration" select="mb:length"/>
      </xsl:call-template>
      </column>
     </track>
@@ -125,21 +123,17 @@
 
   <cover>
    <xsl:choose>
+    <xsl:when test="mb:cover-art-archive/mb:front='true'">
+     <xsl:value-of select="concat('http://coverartarchive.org/release/',@id,'/front')"/>
+    </xsl:when>
     <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink']">
      <xsl:value-of select="mb:relation-list[@target-type='Url']/mb:relation[@type='CoverArtLink'][1]/@target"/>
     </xsl:when>
     <!-- most musicbrainz items have Amazon ASIN values, but not all point got valid images
          if the AmazonAsin Url is set, then it likely does -->
-    <xsl:when test="mb:relation-list[@target-type='Url']/mb:relation[@type='AmazonAsin']">
+    <xsl:when test="mb:relation-list[@target-type='url']/mb:relation[@type='amazon asin'] and mb:asin">
      <xsl:value-of select="concat('http://ecx.images-amazon.com/images/P/',mb:asin,'.01.MZZZZZZZ.jpg')"/>
     </xsl:when>
-    <!-- TODO: when switching to ws/2, check cover-art-archive element for existence of front cover art
-               before setting the value, so an extra http call is not done -->
-    <!--
-    <xsl:otherwise>
-     <xsl:value-of select="concat('http://coverartarchive.org/release/',@id,'/front')"/>
-    </xsl:otherwise>
-    -->
    </xsl:choose>
   </cover>
 
