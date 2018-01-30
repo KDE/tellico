@@ -140,7 +140,21 @@ void MusicBrainzFetcherTest::testCoverArt() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QLatin1String("Laulut ja tarinat"));
-  QEXPECT_FAIL("", "MusicBrainz covers from coverartarchive are failing", Abort);
   QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
   QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+}
+
+void MusicBrainzFetcherTest::testSoundtrack() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
+                                       QLatin1String("legend of bagger vance"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QLatin1String("The Legend of Bagger Vance"));
+  // sound tracks are the only genre tag that is read
+  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Soundtrack"));
 }
