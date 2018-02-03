@@ -99,7 +99,7 @@ void AbstractAllocineFetcher::search() {
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
-  params.append(qMakePair(QString::fromLatin1("partner"), m_apiKey));
+  params.append(qMakePair(QStringLiteral("partner"), m_apiKey));
 
   // I can't figure out how to encode accent marks, but they don't
   // seem to be necessary
@@ -112,7 +112,7 @@ void AbstractAllocineFetcher::search() {
 
   switch(request().key) {
     case Keyword:
-      params.append(qMakePair(QString::fromLatin1("q"), q));
+      params.append(qMakePair(QStringLiteral("q"), q));
       break;
 
     default:
@@ -120,11 +120,11 @@ void AbstractAllocineFetcher::search() {
       return;
   }
 
-  params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
-  params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
+  params.append(qMakePair(QStringLiteral("format"), QStringLiteral("json")));
+  params.append(qMakePair(QStringLiteral("filter"), QStringLiteral("movie")));
 
   const QString sed = QDateTime::currentDateTimeUtc().toString(QLatin1String("yyyyMMdd"));
-  params.append(qMakePair(QString::fromLatin1("sed"), sed));
+  params.append(qMakePair(QStringLiteral("sed"), sed));
 
   const QByteArray sig = calculateSignature(params);
 
@@ -136,7 +136,7 @@ void AbstractAllocineFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // 10/8/17: UserAgent appears necessary to receive data
-  m_job->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
+  m_job->addMetaData(QLatin1String("UserAgent"), QStringLiteral("Tellico/%1")
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
@@ -173,14 +173,14 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
-  params.append(qMakePair(QString::fromLatin1("partner"), m_apiKey));
-  params.append(qMakePair(QString::fromLatin1("code"), code));
-  params.append(qMakePair(QString::fromLatin1("profile"), QString::fromLatin1("large")));
-  params.append(qMakePair(QString::fromLatin1("filter"), QString::fromLatin1("movie")));
-  params.append(qMakePair(QString::fromLatin1("format"), QString::fromLatin1("json")));
+  params.append(qMakePair(QStringLiteral("partner"), m_apiKey));
+  params.append(qMakePair(QStringLiteral("code"), code));
+  params.append(qMakePair(QStringLiteral("profile"), QStringLiteral("large")));
+  params.append(qMakePair(QStringLiteral("filter"), QStringLiteral("movie")));
+  params.append(qMakePair(QStringLiteral("format"), QStringLiteral("json")));
 
   const QString sed = QDateTime::currentDateTimeUtc().toString(QLatin1String("yyyyMMdd"));
-  params.append(qMakePair(QString::fromLatin1("sed"), sed));
+  params.append(qMakePair(QStringLiteral("sed"), sed));
 
   const QByteArray sig = calculateSignature(params);
 
@@ -192,7 +192,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   // 10/8/17: UserAgent appears necessary to receive data
 //  QByteArray data = FileHandler::readDataFile(u, true);
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
+  dataJob->addMetaData(QLatin1String("UserAgent"), QStringLiteral("Tellico/%1")
                                                                   .arg(QLatin1String(TELLICO_VERSION)));
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
@@ -476,7 +476,7 @@ Tellico::Fetch::ConfigWidget* AllocineFetcher::configWidget(QWidget* parent_) co
 }
 
 QString AllocineFetcher::defaultName() {
-  return QString::fromUtf8("AlloCiné.fr");
+  return QStringLiteral("AlloCiné.fr");
 }
 
 QString AllocineFetcher::defaultIcon() {

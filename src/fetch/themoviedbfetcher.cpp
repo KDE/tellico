@@ -75,7 +75,7 @@ QString TheMovieDBFetcher::source() const {
 
 // https://www.themoviedb.org/about/api-terms
 QString TheMovieDBFetcher::attribution() const {
-  return QString::fromLatin1("This product uses the TMDb API but is not endorsed or certified by TMDb.");
+  return QStringLiteral("This product uses the TMDb API but is not endorsed or certified by TMDb.");
 }
 
 bool TheMovieDBFetcher::canSearch(FetchKey k) const {
@@ -179,7 +179,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
   if(!id.isEmpty()) {
     // quiet
     QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-    u.setPath(QString::fromLatin1("/%1/movie/%2")
+    u.setPath(QStringLiteral("/%1/movie/%2")
               .arg(QLatin1String(THEMOVIEDB_API_VERSION), id));
     QUrlQuery q;
     q.addQueryItem(QLatin1String("api_key"), m_apiKey);
@@ -403,7 +403,7 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 
 void TheMovieDBFetcher::readConfiguration() {
   QUrl u(QString::fromLatin1(THEMOVIEDB_API_URL));
-  u.setPath(QString::fromLatin1("/%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
+  u.setPath(QStringLiteral("/%1/configuration").arg(QLatin1String(THEMOVIEDB_API_VERSION)));
   QUrlQuery q;
   q.addQueryItem(QLatin1String("api_key"), m_apiKey);
   u.setQuery(q);

@@ -202,7 +202,7 @@ void FreeDBImporter::readCDROM() {
   if(r == KCDDB::MultipleRecordFound || responseList.count() > 1) {
     QStringList list;
     foreach(const KCDDB::CDInfo& info, responseList) {
-      list.append(QString::fromLatin1("%1, %2, %3").arg(info.get(KCDDB::Artist).toString(),
+      list.append(QStringLiteral("%1, %2, %3").arg(info.get(KCDDB::Artist).toString(),
                                                         info.get(KCDDB::Title).toString(),
                                                         info.get(KCDDB::Genre).toString()));
     }

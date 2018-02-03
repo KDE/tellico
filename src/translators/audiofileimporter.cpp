@@ -170,8 +170,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       continue;
     }
     int disc = discNumber(f);
-    if(disc > 1 && !m_coll->hasField(QString::fromLatin1("track%1").arg(disc))) {
-      Data::FieldPtr f2(new Data::Field(QString::fromLatin1("track%1").arg(disc),
+    if(disc > 1 && !m_coll->hasField(QStringLiteral("track%1").arg(disc))) {
+      Data::FieldPtr f2(new Data::Field(QStringLiteral("track%1").arg(disc),
                                         i18n("Tracks (Disc %1)", disc),
                                         Data::Field::Table));
       f2->setFormatType(FieldFormat::FormatTitle);

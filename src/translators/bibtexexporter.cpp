@@ -263,7 +263,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
 }
 
 void BibtexExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_expandMacros = group.readEntry("Expand Macros", m_expandMacros);
   m_packageURL = group.readEntry("URL Package", m_packageURL);
   m_skipEmptyKeys = group.readEntry("Skip Empty Keys", m_skipEmptyKeys);
@@ -276,7 +276,7 @@ void BibtexExporter::readOptions(KSharedConfigPtr config_) {
 }
 
 void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_expandMacros = m_checkExpandMacros->isChecked();
   group.writeEntry("Expand Macros", m_expandMacros);
   m_packageURL = m_checkPackageURL->isChecked();

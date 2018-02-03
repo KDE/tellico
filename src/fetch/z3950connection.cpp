@@ -218,7 +218,7 @@ void Z3950Connection::run() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
+    myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
     return;
   }
@@ -334,7 +334,7 @@ void Z3950Connection::run() {
         if(!QByteArray(addinfo).isEmpty()) {
           s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
         }
-        myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
+        myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
         if(showError) {
           showError = false;
           m_hasMore = true;
@@ -411,7 +411,7 @@ bool Z3950Connection::makeConnection() {
     if(!QByteArray(addinfo).isEmpty()) {
       s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
     }
-    myDebug() << QString::fromLatin1("[%1/%2]").arg(m_host, m_dbname) << s;
+    myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
     return false;
   }

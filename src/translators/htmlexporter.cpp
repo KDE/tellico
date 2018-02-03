@@ -519,7 +519,7 @@ QWidget* HTMLExporter::widget(QWidget* parent_) {
 }
 
 void HTMLExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup exportConfig(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup exportConfig(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_printHeaders = exportConfig.readEntry("Print Field Headers", m_printHeaders);
   m_printGrouped = exportConfig.readEntry("Print Grouped", m_printGrouped);
   m_exportEntryFiles = exportConfig.readEntry("Export Entry Files", m_exportEntryFiles);
@@ -531,7 +531,7 @@ void HTMLExporter::readOptions(KSharedConfigPtr config_) {
 }
 
 void HTMLExporter::saveOptions(KSharedConfigPtr config_) {
-  KConfigGroup cfg(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup cfg(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_printHeaders = m_checkPrintHeaders->isChecked();
   cfg.writeEntry("Print Field Headers", m_printHeaders);
   m_printGrouped = m_checkPrintGrouped->isChecked();
@@ -802,7 +802,7 @@ bool HTMLExporter::writeEntryFiles() {
   QStringList dataImages;
   dataImages << QLatin1String("checkmark.png");
   for(uint i = 1; i <= 10; ++i) {
-    dataImages << QString::fromLatin1("stars%1.png").arg(i);
+    dataImages << QStringLiteral("stars%1.png").arg(i);
   }
   QUrl dataDir = QUrl::fromLocalFile(Tellico::installationDir() + QLatin1String("pics/"));
   QUrl target = fileDir();

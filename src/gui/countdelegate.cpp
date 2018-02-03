@@ -81,7 +81,7 @@ void CountDelegate::paint(QPainter* painter_,
   QString text = option.text;
 
   QVariant countValue = index_.data(RowCountRole);
-  QString countString = QString::fromLatin1(" (%1)").arg(countValue.toInt());
+  QString countString = QStringLiteral(" (%1)").arg(countValue.toInt());
 
   // Now calculate the rectangle for the text
   QStyle* s = parent()->style();

@@ -229,7 +229,7 @@ void IGDBFetcher::slotComplete(KJob* job_) {
 
   Data::CollPtr coll(new Data::GameCollection(true));
   if(optionalFields().contains(QLatin1String("pegi"))) {
-    QStringList pegi = QString::fromLatin1("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
+    QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
                                     .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
     Data::FieldPtr field(new Data::Field(QLatin1String("pegi"), i18n("PEGI Rating"), pegi));
     field->setFlags(Data::Field::AllowGrouped);

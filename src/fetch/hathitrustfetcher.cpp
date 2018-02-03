@@ -92,9 +92,9 @@ void HathiTrustFetcher::doSearch() {
   const QStringList searchTerms = FieldFormat::splitValue(request().value);
   foreach(const QString& searchTerm, searchTerms) {
     if(request().key == ISBN) {
-      searchValues += QString::fromLatin1("isbn:%1").arg(ISBNValidator::cleanValue(searchTerm));
+      searchValues += QStringLiteral("isbn:%1").arg(ISBNValidator::cleanValue(searchTerm));
     } else {
-      searchValues += QString::fromLatin1("lccn:%1").arg(LCCNValidator::formalize(searchTerm));
+      searchValues += QStringLiteral("lccn:%1").arg(LCCNValidator::formalize(searchTerm));
     }
   }
   u.setPath(u.path() + searchValues.join(QLatin1String("|")));

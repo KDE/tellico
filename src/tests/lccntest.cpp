@@ -38,7 +38,7 @@ QTEST_APPLESS_MAIN( LccnTest )
 
 Q_DECLARE_METATYPE(QValidator::State)
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void LccnTest::initTestCase() {
   qRegisterMetaType<QValidator::State>();

@@ -78,11 +78,11 @@ void BibsonomyFetcher::search() {
 
   switch(request().key) {
     case Person:
-      u.setPath(u.path() + QString::fromLatin1("author/%1").arg(request().value));
+      u.setPath(u.path() + QStringLiteral("author/%1").arg(request().value));
       break;
 
     case Keyword:
-      u.setPath(u.path() + QString::fromLatin1("search/%1").arg(request().value));
+      u.setPath(u.path() + QStringLiteral("search/%1").arg(request().value));
       break;
 
     default:

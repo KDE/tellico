@@ -136,7 +136,7 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   }
 
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
-  u.setPath(QString::fromLatin1("/game/%1/").arg(id));
+  u.setPath(QStringLiteral("/game/%1/").arg(id));
   QUrlQuery q;
   q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
   q.addQueryItem(QLatin1String("api_key"), m_apiKey);

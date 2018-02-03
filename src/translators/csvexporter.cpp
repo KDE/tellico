@@ -217,7 +217,7 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
 }
 
 void CSVExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_includeTitles = group.readEntry("Include Titles", m_includeTitles);
   m_delimiter = group.readEntry("Delimiter", m_delimiter);
   m_rowDelimiter = group.readEntry("RowDelimiter", m_rowDelimiter);
@@ -246,7 +246,7 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
     m_rowDelimiter = s;
   }
 
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Titles", m_includeTitles);
   group.writeEntry("Delimiter", m_delimiter);
   group.writeEntry("RowDelimiter", m_rowDelimiter);

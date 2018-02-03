@@ -188,12 +188,12 @@ void barcodeRecognitionThread::printArray( int array[10][13][2], int level )
 {
   for (int i = 0; i < 10; i++) {
     QString temp;
-    temp = QString::number( i ) + QString::fromLatin1(" :   ");
+    temp = QString::number( i ) + QLatin1String(" :   ");
     for (int j = 0; j < 13; j++) {
       if (array[i][j][level] == -1)
-        temp += QString::fromLatin1("x  ");
+        temp += QLatin1String("x  ");
       else
-      temp += QString::number( array[i][j][level] ) + QString::fromLatin1("  ");
+      temp += QString::number( array[i][j][level] ) + QLatin1String("  ");
     }
   qDebug() << temp;
   }

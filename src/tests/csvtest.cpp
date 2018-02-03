@@ -31,7 +31,7 @@
 
 QTEST_MAIN( CsvTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void CsvTest::initTestCase() {
 }

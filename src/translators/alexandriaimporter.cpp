@@ -185,7 +185,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
           if(line.indexOf(spaces) > -1) {
             alexValue.clear();
             int spaceCount = spaces.matchedLength();
-            QRegExp begin(QString::fromLatin1("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
+            QRegExp begin(QStringLiteral("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
             while(!line.isNull() && line.indexOf(begin) > -1) {
               line.remove(begin);
               alexValue += clean(line) + QLatin1Char('\n');

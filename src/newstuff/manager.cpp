@@ -319,7 +319,7 @@ bool Manager::installScript(const QString& file_) {
   int nSources = configGroup.readEntry("Sources Count", 0);
   config.writeEntry(file_ + QLatin1String("_nbr"), nSources);
   configGroup.writeEntry("Sources Count", nSources + 1);
-  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(nSources));
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(nSources));
   sourceGroup.writeEntry("Name", sourceName);
   sourceGroup.writeEntry("ExecPath", sourceExec);
   sourceGroup.writeEntry("DeleteOnRemove", true);
@@ -361,7 +361,7 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
     KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     configGroup.writeEntry("Sources Count", nSources - 1);
-    KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(source));
+    KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(source));
     sourceGroup.deleteGroup();
   }
   // remove config entries even if unsuccessful

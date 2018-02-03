@@ -245,14 +245,14 @@ QUrl CrossRefFetcher::searchURL(FetchKey key_, const QString& value_) const {
   q.addQueryItem(QLatin1String("format"), QLatin1String("unixref"));
 #endif
   if(m_email.isEmpty()) {
-    q.addQueryItem(QLatin1String("pid"), QString::fromLatin1("%1:%2").arg(m_user, m_password));
+    q.addQueryItem(QLatin1String("pid"), QStringLiteral("%1:%2").arg(m_user, m_password));
   } else {
     q.addQueryItem(QLatin1String("pid"), m_email);
   }
 
   switch(key_) {
     case DOI:
-      q.addQueryItem(QLatin1String("rft_id"), QString::fromLatin1("info:doi/%1").arg(value_));
+      q.addQueryItem(QLatin1String("rft_id"), QStringLiteral("info:doi/%1").arg(value_));
       break;
 
     default:

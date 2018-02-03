@@ -840,7 +840,7 @@ void ConfigDialog::saveFetchConfig() {
       continue;
     }
     m_newStuffConfigWidgets.removeAll(cw);
-    QString group = QString::fromLatin1("Data Source %1").arg(count);
+    QString group = QStringLiteral("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
     KSharedConfig::openConfig()->deleteGroup(group);
     KConfigGroup configGroup(KSharedConfig::openConfig(), group);
@@ -858,11 +858,11 @@ void ConfigDialog::saveFetchConfig() {
   KConfigGroup sourceGroup(KSharedConfig::openConfig(), "Data Sources");
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
-  QString group = QString::fromLatin1("Data Source %1").arg(count);
+  QString group = QStringLiteral("Data Source %1").arg(count);
   while(KSharedConfig::openConfig()->hasGroup(group)) {
     KSharedConfig::openConfig()->deleteGroup(group);
     ++count;
-    group = QString::fromLatin1("Data Source %1").arg(count);
+    group = QStringLiteral("Data Source %1").arg(count);
   }
 
   Config::self()->save();

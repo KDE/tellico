@@ -169,7 +169,7 @@ void TableFieldWidget::slotRenameColumn() {
                                           QLineEdit::Normal, name, &ok);
   if(ok && !newName.isEmpty()) {
     Data::FieldPtr newField(new Data::Field(*m_field));
-    newField->setProperty(QString::fromLatin1("column%1").arg(m_col+1), newName);
+    newField->setProperty(QStringLiteral("column%1").arg(m_col+1), newName);
     if(Kernel::self()->modifyField(newField)) {
       m_field = newField;
       labelColumns(m_field);
@@ -190,7 +190,7 @@ bool TableFieldWidget::emptyRow(int row_) const {
 void TableFieldWidget::labelColumns(Tellico::Data::FieldPtr field_) {
   QStringList labels;
   for(int col = 0; col < m_columns; ++col) {
-    QString s = field_->property(QString::fromLatin1("column%1").arg(col+1));
+    QString s = field_->property(QStringLiteral("column%1").arg(col+1));
     if(s.isEmpty()) {
       s = i18n("Column %1", col+1);
     }

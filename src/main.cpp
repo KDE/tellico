@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
   aboutData.addAuthor(QLatin1String("Robby Stephenson"), QString(), QLatin1String("robby@periapsis.org"));
   aboutData.addAuthor(QLatin1String("Mathias Monnerville"), i18n("Data source scripts"));
   aboutData.addAuthor(QLatin1String("Regis Boudin"), QString(), QLatin1String("regis@boudin.name"));
-  aboutData.addAuthor(QString::fromUtf8("Petri Damstén"), QString(), QLatin1String("damu@iki.fi"));
+  aboutData.addAuthor(QStringLiteral("Petri Damstén"), QString(), QLatin1String("damu@iki.fi"));
   aboutData.addAuthor(QLatin1String("Sebastian Held"), QString());
 
   aboutData.addCredit(QLatin1String("Virginie Quesnay"), i18n("Icons"));

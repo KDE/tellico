@@ -379,9 +379,9 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QLatin1String("publisher"), mapValue(resultMap_, "publisher"));
 
   const QString binding = mapValue(resultMap_, "binding");
-  if(binding == QString::fromUtf8("精装")) {
+  if(binding == QStringLiteral("精装")) {
     entry->setField(QLatin1String("binding"), i18n("Hardback"));
-  } else if(binding == QString::fromUtf8("平装")) {
+  } else if(binding == QStringLiteral("平装")) {
     entry->setField(QLatin1String("binding"), i18n("Paperback"));
   }
 

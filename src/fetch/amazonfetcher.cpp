@@ -277,7 +277,7 @@ void AmazonFetcher::doSearch() {
       } else if(type == Data::Collection::Game) {
         params.insert(QLatin1String("Manufacturer"), value);
       } else { // books and bibtex
-        QString s = QString::fromLatin1("author:%1 or publisher:%2").arg(value, value);
+        QString s = QStringLiteral("author:%1 or publisher:%2").arg(value, value);
 //        params.insert(QLatin1String("Author"),       value, mib);
 //        params.insert(QLatin1String("Publisher"),    value, mib);
         params.insert(QLatin1String("Power"),    s);

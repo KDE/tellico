@@ -192,13 +192,13 @@ QWidget* ONIXExporter::widget(QWidget* parent_) {
 }
 
 void ONIXExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_includeImages = group.readEntry("Include Images", m_includeImages);
 }
 
 void ONIXExporter::saveOptions(KSharedConfigPtr config_) {
   m_includeImages = m_checkIncludeImages->isChecked();
 
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Images", m_includeImages);
 }

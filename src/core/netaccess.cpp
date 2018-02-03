@@ -88,7 +88,7 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
       s_lastErrorMessage = i18n(errorOpen, target_);
     }
   } else {
-    s_lastErrorMessage = QString::fromLatin1("Tellico was unable to download %1").arg(url_.url());
+    s_lastErrorMessage = QStringLiteral("Tellico was unable to download %1").arg(url_.url());
     myWarning() << getJob->errorString();
   }
 

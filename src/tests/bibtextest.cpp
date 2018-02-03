@@ -38,7 +38,7 @@
 
 QTEST_GUILESS_MAIN( BibtexTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void BibtexTest::initTestCase() {
   // since we use the bibtex mapping file

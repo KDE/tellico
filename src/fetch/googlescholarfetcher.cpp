@@ -106,7 +106,7 @@ void GoogleScholarFetcher::doSearch() {
   }
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("allintitle:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("allintitle:%1").arg(request().value));
       break;
 
     case Keyword:
@@ -114,7 +114,7 @@ void GoogleScholarFetcher::doSearch() {
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("author:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("author:%1").arg(request().value));
       break;
 
     default:

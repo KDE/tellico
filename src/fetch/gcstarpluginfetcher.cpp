@@ -78,7 +78,7 @@ GCstarPluginFetcher::PluginList GCstarPluginFetcher::plugins(int collType_) {
             int x = versionRx.cap(1).toInt();
             int y = versionRx.cap(2).toInt();
             int z = versionRx.cap(3).toInt(); // ok to be empty
-            myDebug() << QString::fromLatin1("found %1.%2.%3").arg(x).arg(y).arg(z);
+            myDebug() << QStringLiteral("found %1.%2.%3").arg(x).arg(y).arg(z);
             // --list-plugins argument was added for 1.3 release
             pluginParse = (x >= 1 && y >=3) ? New : Old;
           }

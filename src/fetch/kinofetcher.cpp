@@ -321,7 +321,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
                                QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch divMetaMatch = divMetaRx.match(str_);
   if(divMetaMatch.hasMatch()) {
-    QRegularExpression coverRx(QString::fromLatin1("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QLatin1String("title"))));
+    QRegularExpression coverRx(QStringLiteral("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QLatin1String("title"))));
     QRegularExpressionMatch coverMatch = coverRx.match(divMetaMatch.captured(1));
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverMatch.captured(1)), true /* quiet */);
     if(id.isEmpty()) {

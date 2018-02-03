@@ -308,13 +308,13 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
 
  // map captions in HTML to field names
   QHash<QString, QString> fieldMap;
-  fieldMap.insert(QString::fromUtf8("Série"),       QLatin1String("series"));
+  fieldMap.insert(QStringLiteral("Série"),       QLatin1String("series"));
   fieldMap.insert(QLatin1String("Titre"),           QLatin1String("title"));
   fieldMap.insert(QLatin1String("Origine"),         QLatin1String("country"));
 //  fieldMap.insert(QLatin1String("Format"),          QLatin1String("binding"));
-  fieldMap.insert(QString::fromUtf8("Scénario"),    QLatin1String("writer"));
+  fieldMap.insert(QStringLiteral("Scénario"),    QLatin1String("writer"));
   fieldMap.insert(QLatin1String("Dessin"),          QLatin1String("artist"));
-  fieldMap.insert(QString::fromUtf8("Dépot légal"), QLatin1String("pub_year"));
+  fieldMap.insert(QStringLiteral("Dépot légal"), QLatin1String("pub_year"));
   fieldMap.insert(QLatin1String("Editeur"),         QLatin1String("publisher"));
   fieldMap.insert(QLatin1String("Planches"),        QLatin1String("pages"));
   fieldMap.insert(QLatin1String("Style"),           QLatin1String("genre"));
@@ -431,7 +431,7 @@ Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr ent
 void BedethequeFetcher::fetchToken() {
   QRegExp tokenRx(QLatin1String("name\\s*=\\s*\"csrf_token_bedetheque\"\\s*value\\s*=\\s*\"([^\"]+)\""));
 
-  const QUrl url(QString::fromLatin1("http://www.bedetheque.com/search/albums"));
+  const QUrl url(QLatin1String("http://www.bedetheque.com/search/albums"));
   const QString text = FileHandler::readTextFile(url, true /*quiet*/);
   if(tokenRx.indexIn(text) > -1) {
     m_token = tokenRx.cap(1);

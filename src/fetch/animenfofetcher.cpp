@@ -411,7 +411,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
   entry->setField(QLatin1String("animenfo"), url_.url());
 
   // image
-  QRegExp imgRx(QString::fromLatin1("<img\\s+[^>]*src\\s*=\\s*[\"']([^>]*)[\"']\\s+[^>]*alt\\s*=\\s*[\"']%1[\"']")
+  QRegExp imgRx(QStringLiteral("<img\\s+[^>]*src\\s*=\\s*[\"']([^>]*)[\"']\\s+[^>]*alt\\s*=\\s*[\"']%1[\"']")
                                     .arg(QRegExp::escape(fullTitle)), Qt::CaseInsensitive);
   imgRx.setMinimal(true);
   int pos = imgRx.indexIn(s);

@@ -88,15 +88,15 @@ QUrl SpringerFetcher::searchUrl() {
 
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("title:\"%1\" OR book:\"%1\"").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("title:\"%1\" OR book:\"%1\"").arg(request().value));
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("name:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("name:%1").arg(request().value));
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("\"%1\"").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("\"%1\"").arg(request().value));
       break;
 
     case ISBN:
@@ -104,12 +104,12 @@ QUrl SpringerFetcher::searchUrl() {
         // only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
         v = ISBNValidator::isbn13(v);
-        q.addQueryItem(QLatin1String("q"), QString::fromLatin1("isbn:%1").arg(v));
+        q.addQueryItem(QLatin1String("q"), QStringLiteral("isbn:%1").arg(v));
       }
       break;
 
     case DOI:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("doi:%1").arg(request().value));
+      q.addQueryItem(QLatin1String("q"), QStringLiteral("doi:%1").arg(request().value));
       break;
 
     case Raw:

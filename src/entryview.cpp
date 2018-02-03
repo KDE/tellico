@@ -392,7 +392,7 @@ void EntryView::resetColors() {
   // this is a rather bad hack to get around the fact that the image cache is not reloaded when
   // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
   // work. So force a reload with a temp file, then catch the completed signal and repaint
-  QString s = QString::fromLatin1("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
+  QString s = QStringLiteral("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
                              .arg(dir + QLatin1String("gradient_bg.png"),
                                   dir + QLatin1String("gradient_header.png"));
 

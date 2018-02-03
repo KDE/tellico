@@ -258,16 +258,16 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
   QString query;
   switch(key_) {
     case Title:
-      query = QString::fromLatin1("ti:%1").arg(value);
+      query = QStringLiteral("ti:%1").arg(value);
       break;
 
     case Person:
-      query = QString::fromLatin1("au:%1").arg(value);
+      query = QStringLiteral("au:%1").arg(value);
       break;
 
     case Keyword:
       // keyword gets to use all the words without being quoted
-      query = QString::fromLatin1("all:%1").arg(value);
+      query = QStringLiteral("all:%1").arg(value);
       break;
 
     case ArxivID:
@@ -276,7 +276,7 @@ QUrl ArxivFetcher::searchURL(FetchKey key_, const QString& value_) const {
       QString value = value_;
       value.remove(QRegExp(QLatin1String("^arxiv:"), Qt::CaseInsensitive));
       value.remove(QRegExp(QLatin1String("v\\d+$")));
-      query = QString::fromLatin1("id:%1").arg(value);
+      query = QStringLiteral("id:%1").arg(value);
       }
       break;
 

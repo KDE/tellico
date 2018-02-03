@@ -41,7 +41,7 @@
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
 
 void TellicoReadTest::initTestCase() {

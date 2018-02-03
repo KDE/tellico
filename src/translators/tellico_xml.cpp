@@ -71,11 +71,11 @@ const QString Tellico::XML::nsZing = QLatin1String("http://www.loc.gov/zing/srw/
 const QString Tellico::XML::nsZingDiag = QLatin1String("http://www.loc.gov/zing/srw/diagnostic/");
 
 QString Tellico::XML::pubTellico(int version) {
- return QString::fromLatin1("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
+ return QStringLiteral("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
 }
 
 QString Tellico::XML::dtdTellico(int version) {
-  return QString::fromLatin1("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(version);
+  return QStringLiteral("http://periapsis.org/tellico/dtd/v%1/tellico.dtd").arg(version);
 }
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {

@@ -36,7 +36,7 @@
 
 QTEST_GUILESS_MAIN( AlexandriaTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void AlexandriaTest::initTestCase() {
   Tellico::ImageFactory::init();

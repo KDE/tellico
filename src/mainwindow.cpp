@@ -904,7 +904,7 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
     myDebug() << "Bad, no collection in MainWindow::readCollectionOptions()";
     return;
   }
-  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  const QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup group(KSharedConfig::openConfig(), configGroup);
 
   QString defaultGroup = coll_->defaultGroupField();
@@ -914,9 +914,9 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   } else {
     QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      QUrl u(group.readEntry(QString::fromLatin1("URL_%1").arg(i)));
+      QUrl u(group.readEntry(QStringLiteral("URL_%1").arg(i)));
       if(url == u) {
-        entryGroup = group.readEntry(QString::fromLatin1("Group By_%1").arg(i), defaultGroup);
+        entryGroup = group.readEntry(QStringLiteral("Group By_%1").arg(i), defaultGroup);
         break;
       }
     }
@@ -948,7 +948,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
   }
 
   int configIndex = -1;
-  QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KSharedConfig::openConfig(), configGroup);
   QString groupName;
   if(m_entryGrouping->currentItem() > -1 &&
@@ -969,8 +969,8 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     QList<QUrl> urls = QList<QUrl>() << url;
     QStringList groupBys = QStringList() << groupName;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
-      QString g = config.readEntry(QString::fromLatin1("Group By_%1").arg(i), QString());
+      QUrl u = config.readEntry(QStringLiteral("URL_%1").arg(i), QUrl());
+      QString g = config.readEntry(QStringLiteral("Group By_%1").arg(i), QString());
       if(!u.isEmpty() && url != u) {
         urls.append(u);
         groupBys.append(g);
@@ -980,8 +980,8 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     }
     int limit = qMin(urls.count(), Config::maxCustomURLSettings());
     for(int i = 0; i < limit; ++i) {
-      config.writeEntry(QString::fromLatin1("URL_%1").arg(i), urls[i].url());
-      config.writeEntry(QString::fromLatin1("Group By_%1").arg(i), groupBys[i]);
+      config.writeEntry(QStringLiteral("URL_%1").arg(i), urls[i].url());
+      config.writeEntry(QStringLiteral("Group By_%1").arg(i), groupBys[i]);
     }
   }
   m_detailedView->saveConfig(coll_, configIndex);

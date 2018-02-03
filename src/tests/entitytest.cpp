@@ -32,7 +32,7 @@
 
 QTEST_APPLESS_MAIN( EntityTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 #define QU8(x) QString::fromUtf8(x)
 
 void EntityTest::testEntities() {

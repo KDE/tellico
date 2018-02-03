@@ -82,7 +82,7 @@ QString Tellico::installationDir() {
   // look for a file that gets installed to know the installation directory
   QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("tellico/pics/tellico.png"));
   // remove the file name string. Important to keep trailing slash
-  appdir.chop(QString::fromLatin1("pics/tellico.png").length());
+  appdir.chop(QStringLiteral("pics/tellico.png").length());
   return appdir;
 }
 
@@ -110,7 +110,7 @@ const QPixmap& Tellico::pixmap(const QString& value_) {
     return *pixmaps[n];
   }
 
-  QString picName = QString::fromLatin1(":/icons/stars%1").arg(n);
+  QString picName = QStringLiteral(":/icons/stars%1").arg(n);
   QPixmap* pix = new QPixmap(QIcon(picName).pixmap(QSize(n*16, 16)));
   pixmaps.insert(n, pix);
   return *pix;

@@ -34,7 +34,7 @@
 
 QTEST_GUILESS_MAIN( BibtexmlTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void BibtexmlTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.bibtexml"));

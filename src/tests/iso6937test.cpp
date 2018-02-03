@@ -27,7 +27,7 @@
 
 #include <QTest>
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 #define QU8(x) QString::fromUtf8(x)
 
 QTEST_APPLESS_MAIN( Iso6937Test )

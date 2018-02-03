@@ -93,7 +93,7 @@ void Manager::loadFetchers() {
     KConfigGroup configGroup(config, QLatin1String("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     for(int i = 0; i < nSources; ++i) {
-      QString group = QString::fromLatin1("Data Source %1").arg(i);
+      QString group = QStringLiteral("Data Source %1").arg(i);
       Fetcher::Ptr f = createFetcher(config, group);
       if(f) {
         m_fetchers.append(f);
@@ -343,7 +343,7 @@ Tellico::Fetch::FetcherVec Manager::createUpdateFetchers(int collType_) {
   KConfigGroup config(KSharedConfig::openConfig(), "Data Sources");
   int nSources = config.readEntry("Sources Count", 0);
   for(int i = 0; i < nSources; ++i) {
-    QString group = QString::fromLatin1("Data Source %1").arg(i);
+    QString group = QStringLiteral("Data Source %1").arg(i);
     // needs the KConfig*
     Fetcher::Ptr fetcher = createFetcher(KSharedConfig::openConfig(), group);
     if(fetcher && fetcher->canFetch(collType_) && fetcher->canUpdate()) {

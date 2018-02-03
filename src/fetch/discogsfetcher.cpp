@@ -131,7 +131,7 @@ void DiscogsFetcher::search() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QLatin1String("UserAgent"), QString::fromLatin1("Tellico/%1")
+  m_job->addMetaData(QLatin1String("UserAgent"), QStringLiteral("Tellico/%1")
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
@@ -160,7 +160,7 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
   if(!id.isEmpty()) {
     // quiet
     QUrl u(QString::fromLatin1(DISCOGS_API_URL));
-    u.setPath(QString::fromLatin1("/releases/%1").arg(id));
+    u.setPath(QStringLiteral("/releases/%1").arg(id));
     QByteArray data = FileHandler::readDataFile(u, true);
 
 #if 0

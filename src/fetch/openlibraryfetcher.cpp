@@ -180,7 +180,7 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
   if(entry->field(QLatin1String("cover")).isEmpty()) {
     const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
     if(!isbn.isEmpty()) {
-      QUrl imageUrl(QString::fromLatin1("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
+      QUrl imageUrl(QStringLiteral("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
         entry->setField(QLatin1String("cover"), id);

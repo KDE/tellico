@@ -348,8 +348,8 @@ int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr
                 + QString::fromLatin1("<br/><center><table><tr>"
                                       "<th>%1</th>"
                                       "<th>%2</th></tr>").arg(title1, title2)
-                + QString::fromLatin1("<tr><td><em>%1</em></td>").arg(value1_)
-                + QString::fromLatin1("<td><em>%1</em></td></tr></table></center>").arg(value2_)
+                + QStringLiteral("<tr><td><em>%1</em></td>").arg(value1_)
+                + QStringLiteral("<td><em>%1</em></td></tr></table></center>").arg(value2_)
                 + i18n("Please choose which value to keep.")
                 + QLatin1String("</qt>");
 

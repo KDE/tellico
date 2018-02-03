@@ -288,7 +288,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp writerRx(QString::fromUtf8("<td class=\"type\">сценарий</td>(.*)</td"));
+  QRegExp writerRx(QStringLiteral("<td class=\"type\">сценарий</td>(.*)</td"));
   writerRx.setMinimal(true);
   if(str_.contains(writerRx)) {
     QString s = writerRx.cap(1);
@@ -339,7 +339,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp castRx(QString::fromUtf8("<h4>В главных ролях.*</h4>.*<ul>(.*)</ul>"));
+  QRegExp castRx(QStringLiteral("<h4>В главных ролях.*</h4>.*<ul>(.*)</ul>"));
   castRx.setMinimal(true);
   if(str_.contains(castRx)) {
     QString s = castRx.cap(1);
@@ -401,7 +401,7 @@ Tellico::Fetch::ConfigWidget* KinoPoiskFetcher::configWidget(QWidget* parent_) c
 }
 
 QString KinoPoiskFetcher::defaultName() {
-  return QString::fromUtf8("КиноПоиск (KinoPoisk.ru)");
+  return QStringLiteral("КиноПоиск (KinoPoisk.ru)");
 }
 
 QString KinoPoiskFetcher::defaultIcon() {
