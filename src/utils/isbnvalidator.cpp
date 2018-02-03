@@ -118,7 +118,7 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
 }
 
 void ISBNValidator::fixup(QString& input_) const {
-  return staticFixup(input_);
+  staticFixup(input_);
 }
 
 void ISBNValidator::staticFixup(QString& input_) {
