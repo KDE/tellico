@@ -83,7 +83,6 @@ void FilmasterFetcherTest::testPerson() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QEXPECT_FAIL("", "Person searches are failing for Filmaster", Abort);
   QVERIFY(results.size() > 0);
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
   for(int i = 0; i < results.size(); ++i) {
