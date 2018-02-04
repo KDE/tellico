@@ -81,22 +81,22 @@ void HtmlExporterTest::testHtml() {
   Tellico::Export::HTMLExporter exp(coll);
   exp.setEntries(coll->entries());
   exp.setExportEntryFiles(true);
-  exp.setEntryXSLTFile(QLatin1String("Fancy"));
-  exp.setColumns(QStringList() << QLatin1String("Title") << QLatin1String("Gift")
-                               << QLatin1String("Rating") << QLatin1String("Front Cover"));
+  exp.setEntryXSLTFile(QStringLiteral("Fancy"));
+  exp.setColumns(QStringList() << QStringLiteral("Title") << QStringLiteral("Gift")
+                               << QStringLiteral("Rating") << QStringLiteral("Front Cover"));
   exp.setURL(QUrl::fromLocalFile(tempDirName + "/testHtml.html"));
 
   QString output = exp.text();
   QVERIFY(!output.isEmpty());
 
   // verify the relative location of the tellico2html.js file
-  QVERIFY(output.contains(QLatin1String("src=\"testHtml_files/tellico2html.js")));
+  QVERIFY(output.contains(QStringLiteral("src=\"testHtml_files/tellico2html.js")));
   // verify relative location of image pics
-  QVERIFY(output.contains(QLatin1String("src=\"testHtml_files/pics/checkmark.png")));
+  QVERIFY(output.contains(QStringLiteral("src=\"testHtml_files/pics/checkmark.png")));
   // verify relative location of entry link
-  QVERIFY(output.contains(QLatin1String("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
+  QVERIFY(output.contains(QStringLiteral("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
   // verify relative location of image file
-  QVERIFY(output.contains(QLatin1String("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
+  QVERIFY(output.contains(QStringLiteral("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
 
   QVERIFY(exp.exec());
   QFile f(tempDirName + "/testHtml.html");
@@ -105,10 +105,10 @@ void HtmlExporterTest::testHtml() {
 
   QTextStream in(&f);
   QString fileText = in.readAll();
-  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/tellico2html.js")));
-  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/pics/checkmark.png")));
-  QVERIFY(fileText.contains(QLatin1String("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
-  QVERIFY(fileText.contains(QLatin1String("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
+  QVERIFY(fileText.contains(QStringLiteral("src=\"testHtml_files/tellico2html.js")));
+  QVERIFY(fileText.contains(QStringLiteral("src=\"testHtml_files/pics/checkmark.png")));
+  QVERIFY(fileText.contains(QStringLiteral("href=\"testHtml_files/Catching_Fire__The_Second_Book_of_the_Hunger_Games_-1.html")));
+  QVERIFY(fileText.contains(QStringLiteral("src=\"testHtml_files/17b54b2a742c6d342a75f122d615a793.jpeg")));
 
   QVERIFY(QFile::exists(tempDirName + "/testHtml_files/tellico2html.js"));
   QVERIFY(QFile::exists(tempDirName + "/testHtml_files/pics/checkmark.png"));
@@ -122,11 +122,11 @@ void HtmlExporterTest::testHtml() {
   QTextStream in2(&f2);
   QString entryText = in2.readAll();
   // verify relative location of image file
-  QVERIFY(entryText.contains(QLatin1String("src=\"./17b54b2a742c6d342a75f122d615a793.jpeg")));
+  QVERIFY(entryText.contains(QStringLiteral("src=\"./17b54b2a742c6d342a75f122d615a793.jpeg")));
   // verify relative location of image pics
-  QVERIFY(entryText.contains(QLatin1String("src=\"pics/checkmark.png")));
+  QVERIFY(entryText.contains(QStringLiteral("src=\"pics/checkmark.png")));
   // verify link to parent html file
-  QVERIFY(entryText.contains(QLatin1String("href=\"../testHtml.html")));
+  QVERIFY(entryText.contains(QStringLiteral("href=\"../testHtml.html")));
 
   // sanity check, the directory should not exists after QTemporaryDir destruction
   tempDir.remove();
@@ -135,7 +135,7 @@ void HtmlExporterTest::testHtml() {
 
 void HtmlExporterTest::testHtmlTitle() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
-  coll->setTitle(QLatin1String("Robby's Books"));
+  coll->setTitle(QStringLiteral("Robby's Books"));
 
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
   coll->addEntries(e);
@@ -151,16 +151,16 @@ void HtmlExporterTest::testHtmlTitle() {
   QRegExp rx("<title>.*</title>");
   rx.setMinimal(true);
   QVERIFY(output.contains(rx));
-  QCOMPARE(rx.cap(), QLatin1String("<title>Robby's Books</title>"));
+  QCOMPARE(rx.cap(), QStringLiteral("<title>Robby's Books</title>"));
 }
 
 void HtmlExporterTest::testReportHtml() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
-  coll->setTitle(QLatin1String("Robby's Books"));
+  coll->setTitle(QStringLiteral("Robby's Books"));
 
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(coll));
-  e->setField(QLatin1String("title"), QLatin1String("My Title"));
-  e->setField(QLatin1String("rating"), QLatin1String("3"));
+  e->setField(QStringLiteral("title"), QStringLiteral("My Title"));
+  e->setField(QStringLiteral("rating"), QStringLiteral("3"));
   coll->addEntries(e);
 
   Tellico::Export::HTMLExporter exporter(coll);
@@ -180,23 +180,23 @@ void HtmlExporterTest::testReportHtml() {
   Tellico::Export::HTMLExporter exporter2(coll);
   exporter2.setXSLTFile(QFINDTESTDATA("../../xslt/report-templates/Image_List.xsl"));
   exporter2.setEntries(coll->entries());
-  exporter2.setColumns(QStringList() << QLatin1String("Title") << QLatin1String("Rating"));
+  exporter2.setColumns(QStringList() << QStringLiteral("Title") << QStringLiteral("Rating"));
 
   QString output2 = exporter2.text();
   QVERIFY(!output2.isEmpty());
   // the rating pic image needs to be an absolute local path, starting with "/"
-  QVERIFY(output2.contains(QRegExp(QLatin1String("src=\"/[^\"]+stars3.png"))));
+  QVERIFY(output2.contains(QRegExp(QStringLiteral("src=\"/[^\"]+stars3.png"))));
 }
 
 void HtmlExporterTest::testDirectoryNames() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
   Tellico::Export::HTMLExporter exp(coll);
 
-  exp.setURL(QUrl::fromLocalFile(QDir::homePath() + QLatin1String("/test.html")));
-  QCOMPARE(exp.fileDir(), QUrl::fromLocalFile(QDir::homePath() + QLatin1String("/test_files/")));
-  QCOMPARE(exp.fileDirName(), QLatin1String("test_files/"));
+  exp.setURL(QUrl::fromLocalFile(QDir::homePath() + QStringLiteral("/test.html")));
+  QCOMPARE(exp.fileDir(), QUrl::fromLocalFile(QDir::homePath() + QStringLiteral("/test_files/")));
+  QCOMPARE(exp.fileDirName(), QStringLiteral("test_files/"));
 
   // setCollectionUrl used when exporting entry files only
   exp.setCollectionURL(QUrl::fromLocalFile(QDir::homePath()));
-  QCOMPARE(exp.fileDirName(), QLatin1String("/"));
+  QCOMPARE(exp.fileDirName(), QStringLiteral("/"));
 }

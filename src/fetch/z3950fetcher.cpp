@@ -67,7 +67,7 @@
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
-  static const QString Z3950_DEFAULT_ESN = QLatin1String("F");
+  static const QString Z3950_DEFAULT_ESN = QStringLiteral("F");
 }
 
 using namespace Tellico;
@@ -82,7 +82,7 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_)
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
     : Fetcher(parent_), m_conn(nullptr), m_port(Z3950_DEFAULT_PORT), m_started(false), m_done(true), m_preset(preset_),
       m_MARC21XMLHandler(nullptr), m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
-  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QStringLiteral("z3950-servers.cfg"));
   if(!serverFile.isEmpty()) {
     KConfig serverConfig(serverFile, KConfig::SimpleConfig);
     const QStringList servers = serverConfig.groupList();
@@ -149,7 +149,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
     m_password = config_.readEntry("Password");
   } else {
     m_preset = preset;
-    QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
+    QString serverFile = DataFileRegistry::self()->locate(QStringLiteral("z3950-servers.cfg"));
     if(!serverFile.isEmpty()) {
       KConfig serverConfig(serverFile, KConfig::SimpleConfig);
       const QStringList servers = serverConfig.groupList();
@@ -220,7 +220,7 @@ void Z3950Fetcher::search() {
         }
         const int count = isbnList.count();
         if(count > 1) {
-          m_pqn = QLatin1String("@or ");
+          m_pqn = QStringLiteral("@or ");
         }
         for(int i = 0; i < count; ++i) {
           m_pqn += QLatin1String(" @attr 1=7 ") + isbnList.at(i);
@@ -296,7 +296,7 @@ bool Z3950Fetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -319,7 +319,7 @@ bool Z3950Fetcher::initUNIMARCHandler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("UNIMARC2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("UNIMARC2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate UNIMARC2MODS3.xsl.";
     return false;
@@ -342,7 +342,7 @@ bool Z3950Fetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
@@ -525,18 +525,18 @@ void Z3950Fetcher::customEvent(QEvent* event_) {
 
 Tellico::Fetch::FetchRequest Z3950Fetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug() << source() << ": " << entry_->title();
-  QString isbn = entry_->field(QLatin1String("isbn"));
+  QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(Fetch::ISBN, isbn);
   }
 
-  QString lccn = entry_->field(QLatin1String("lccn"));
+  QString lccn = entry_->field(QStringLiteral("lccn"));
   if(!lccn.isEmpty()) {
     return FetchRequest(Fetch::LCCN, lccn);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
@@ -553,17 +553,17 @@ QString Z3950Fetcher::defaultName() {
 
 QString Z3950Fetcher::defaultIcon() {
 //  return QLatin1String("network-server"); // rather arbitrary
-  return QLatin1String("network-server-database"); // rather arbitrary
+  return QStringLiteral("network-server-database"); // rather arbitrary
 }
 
 // static
 Tellico::StringHash Z3950Fetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("address")]  = i18n("Address");
-  hash[QLatin1String("abstract")] = i18n("Abstract");
-  hash[QLatin1String("illustrator")] = i18n("Illustrator");
-  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
-  hash[QLatin1String("lcc")] = i18nc("Library of Congress classification system", "LoC Classification");
+  hash[QStringLiteral("address")]  = i18n("Address");
+  hash[QStringLiteral("abstract")] = i18n("Abstract");
+  hash[QStringLiteral("illustrator")] = i18n("Illustrator");
+  hash[QStringLiteral("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QStringLiteral("lcc")] = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
 }
 
@@ -623,9 +623,9 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   l->addWidget(label, ++row, 0);
   m_charSetCombo = new KComboBox(true, optionsWidget());
   m_charSetCombo->addItem(QString());
-  m_charSetCombo->addItem(QLatin1String("marc8"));
-  m_charSetCombo->addItem(QLatin1String("iso-8859-1"));
-  m_charSetCombo->addItem(QLatin1String("utf-8"));
+  m_charSetCombo->addItem(QStringLiteral("marc8"));
+  m_charSetCombo->addItem(QStringLiteral("iso-8859-1"));
+  m_charSetCombo->addItem(QStringLiteral("utf-8"));
   connect(m_charSetCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_charSetCombo, row, 1);
   w = i18n("Enter the character set encoding used by the z39.50 server. The most likely choice "
@@ -638,12 +638,12 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   l->addWidget(label, ++row, 0);
   m_syntaxCombo = new GUI::ComboBox(optionsWidget());
   m_syntaxCombo->addItem(i18n("Auto-detect"), QString());
-  m_syntaxCombo->addItem(QLatin1String("MODS"), QLatin1String("mods"));
-  m_syntaxCombo->addItem(QLatin1String("MARC21"), QLatin1String("marc21"));
-  m_syntaxCombo->addItem(QLatin1String("UNIMARC"), QLatin1String("unimarc"));
-  m_syntaxCombo->addItem(QLatin1String("USMARC"), QLatin1String("usmarc"));
-  m_syntaxCombo->addItem(QLatin1String("ADS"), QLatin1String("ads"));
-  m_syntaxCombo->addItem(QLatin1String("GRS-1"), QLatin1String("grs-1"));
+  m_syntaxCombo->addItem(QStringLiteral("MODS"), QLatin1String("mods"));
+  m_syntaxCombo->addItem(QStringLiteral("MARC21"), QLatin1String("marc21"));
+  m_syntaxCombo->addItem(QStringLiteral("UNIMARC"), QLatin1String("unimarc"));
+  m_syntaxCombo->addItem(QStringLiteral("USMARC"), QLatin1String("usmarc"));
+  m_syntaxCombo->addItem(QStringLiteral("ADS"), QLatin1String("ads"));
+  m_syntaxCombo->addItem(QStringLiteral("GRS-1"), QLatin1String("grs-1"));
   connect(m_syntaxCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_syntaxCombo, row, 1);
   w = i18n("Enter the data format used by the z39.50 server. Tellico will attempt to "
@@ -775,7 +775,7 @@ void Z3950Fetcher::ConfigWidget::loadPresets(const QString& current_) {
   const QString lang = QLocale().uiLanguages().constFirst();
   const QString lang2A = lang.contains(QLatin1Char('-')) ? lang.section(QLatin1Char('-'), 0, 0) : lang;
 
-  QString serverFile = DataFileRegistry::self()->locate(QLatin1String("z3950-servers.cfg"));
+  QString serverFile = DataFileRegistry::self()->locate(QStringLiteral("z3950-servers.cfg"));
   if(serverFile.isEmpty()) {
     myWarning() << "no z3950 servers file found";
     return;

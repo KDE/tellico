@@ -45,7 +45,7 @@ using Tellico::Export::GCstarExporter;
 
 GCstarExporter::GCstarExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(nullptr),
-    m_xsltFile(QLatin1String("tellico2gcstar.xsl")) {
+    m_xsltFile(QStringLiteral("tellico2gcstar.xsl")) {
 }
 
 GCstarExporter::~GCstarExporter() {
@@ -54,7 +54,7 @@ GCstarExporter::~GCstarExporter() {
 }
 
 QString GCstarExporter::formatString() const {
-  return QLatin1String("GCstar");
+  return QStringLiteral("GCstar");
 }
 
 QString GCstarExporter::fileFilter() const {

@@ -97,12 +97,12 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
   QUrlQuery q;
   // books are type/edition
-  q.addQueryItem(QLatin1String("type"), QLatin1String("/type/edition"));
-  q.addQueryItem(QLatin1String("*"), QString());
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/edition"));
+  q.addQueryItem(QStringLiteral("*"), QString());
 
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("title"), term_);
+      q.addQueryItem(QStringLiteral("title"), term_);
       break;
 
     case Person:
@@ -112,7 +112,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
           myWarning() << "no authors found";
           return;
         }
-        q.addQueryItem(QLatin1String("authors"), author);
+        q.addQueryItem(QStringLiteral("authors"), author);
       }
       break;
 
@@ -120,15 +120,15 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
       {
         const QString isbn = ISBNValidator::cleanValue(term_);
         if(isbn.size() > 10) {
-          q.addQueryItem(QLatin1String("isbn_13"), isbn);
+          q.addQueryItem(QStringLiteral("isbn_13"), isbn);
         } else {
-          q.addQueryItem(QLatin1String("isbn_10"), isbn);
+          q.addQueryItem(QStringLiteral("isbn_10"), isbn);
         }
       }
       break;
 
     case LCCN:
-      q.addQueryItem(QLatin1String("lccn"), term_);
+      q.addQueryItem(QStringLiteral("lccn"), term_);
       break;
 
     case Keyword:
@@ -177,13 +177,13 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
   }
 
   // if the entry is not set, go ahead and try to fetch it
-  if(entry->field(QLatin1String("cover")).isEmpty()) {
-    const QString isbn = ISBNValidator::cleanValue(entry->field(QLatin1String("isbn")));
+  if(entry->field(QStringLiteral("cover")).isEmpty()) {
+    const QString isbn = ISBNValidator::cleanValue(entry->field(QStringLiteral("isbn")));
     if(!isbn.isEmpty()) {
       QUrl imageUrl(QStringLiteral("http://covers.openlibrary.org/b/isbn/%1-M.jpg?default=false").arg(isbn));
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
-        entry->setField(QLatin1String("cover"), id);
+        entry->setField(QStringLiteral("cover"), id);
       }
     }
   }
@@ -192,15 +192,15 @@ Tellico::Data::EntryPtr OpenLibraryFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString isbn = entry_->field(QLatin1String("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  const QString lccn = entry_->field(QLatin1String("lccn"));
+  const QString lccn = entry_->field(QStringLiteral("lccn"));
   if(!lccn.isEmpty()) {
     return FetchRequest(LCCN, lccn);
   }
-  const QString title = entry_->field(QLatin1String("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -244,8 +244,8 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::BookCollection(true));
-  if(!coll->hasField(QLatin1String("openlibrary")) && optionalFields().contains(QLatin1String("openlibrary"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
+  if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QLatin1String("openlibrary"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -263,9 +263,9 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
     Data::EntryPtr entry(new Data::Entry(coll));
 
-    entry->setField(QLatin1String("title"), mapValue(resultMap, "title"));
-    entry->setField(QLatin1String("subtitle"), mapValue(resultMap, "subtitle"));
-    entry->setField(QLatin1String("pub_year"), mapValue(resultMap, "publish_date"));
+    entry->setField(QStringLiteral("title"), mapValue(resultMap, "title"));
+    entry->setField(QStringLiteral("subtitle"), mapValue(resultMap, "subtitle"));
+    entry->setField(QStringLiteral("pub_year"), mapValue(resultMap, "publish_date"));
     QString isbn = mapValue(resultMap, "isbn_10");
     if(isbn.isEmpty()) {
       isbn = mapValue(resultMap, "isbn_13");
@@ -273,39 +273,39 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     if(!isbn.isEmpty()) {
       ISBNValidator val(this);
       val.fixup(isbn);
-      entry->setField(QLatin1String("isbn"), isbn);
+      entry->setField(QStringLiteral("isbn"), isbn);
     }
-    entry->setField(QLatin1String("lccn"), mapValue(resultMap, "lccn"));
-    entry->setField(QLatin1String("genre"), mapValue(resultMap, "genres"));
-    entry->setField(QLatin1String("keyword"), mapValue(resultMap, "subjects"));
-    entry->setField(QLatin1String("edition"), mapValue(resultMap, "edition_name"));
+    entry->setField(QStringLiteral("lccn"), mapValue(resultMap, "lccn"));
+    entry->setField(QStringLiteral("genre"), mapValue(resultMap, "genres"));
+    entry->setField(QStringLiteral("keyword"), mapValue(resultMap, "subjects"));
+    entry->setField(QStringLiteral("edition"), mapValue(resultMap, "edition_name"));
     QString binding = mapValue(resultMap, "physical_format");
     if(binding.toLower() == QLatin1String("hardcover")) {
-      binding = QLatin1String("Hardback");
+      binding = QStringLiteral("Hardback");
     } else if(binding.contains(QLatin1String("paperback"), Qt::CaseInsensitive)) {
-      binding = QLatin1String("Paperback");
+      binding = QStringLiteral("Paperback");
     }
     if(!binding.isEmpty()) {
-      entry->setField(QLatin1String("binding"), i18n(binding.toUtf8().constData()));
+      entry->setField(QStringLiteral("binding"), i18n(binding.toUtf8().constData()));
     }
-    entry->setField(QLatin1String("publisher"), mapValue(resultMap, "publishers"));
-    entry->setField(QLatin1String("series"), mapValue(resultMap, "series"));
-    entry->setField(QLatin1String("pages"), mapValue(resultMap, "number_of_pages"));
-    entry->setField(QLatin1String("comments"), mapValue(resultMap, "notes"));
+    entry->setField(QStringLiteral("publisher"), mapValue(resultMap, "publishers"));
+    entry->setField(QStringLiteral("series"), mapValue(resultMap, "series"));
+    entry->setField(QStringLiteral("pages"), mapValue(resultMap, "number_of_pages"));
+    entry->setField(QStringLiteral("comments"), mapValue(resultMap, "notes"));
 
     if(optionalFields().contains(QLatin1String("openlibrary"))) {
-      entry->setField(QLatin1String("openlibrary"), QLatin1String("http://openlibrary.org") + mapValue(resultMap, "key"));
+      entry->setField(QStringLiteral("openlibrary"), QLatin1String("http://openlibrary.org") + mapValue(resultMap, "key"));
     }
 
     QStringList authors;
-    foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
+    foreach(const QVariant& authorMap, resultMap.value(QStringLiteral("authors")).toList()) {
       const QString key = mapValue(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         QUrlQuery q;
-        q.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
-        q.addQueryItem(QLatin1String("key"), key);
-        q.addQueryItem(QLatin1String("name"), QString());
+        q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/author"));
+        q.addQueryItem(QStringLiteral("key"), key);
+        q.addQueryItem(QStringLiteral("name"), QString());
         authorUrl.setQuery(q);
 
         QString output = FileHandler::readTextFile(authorUrl, true /*quiet*/);
@@ -319,18 +319,18 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       }
     }
     if(!authors.isEmpty()) {
-      entry->setField(QLatin1String("author"), authors.join(FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
     }
 
     QStringList langs;
-    foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
+    foreach(const QVariant& langMap, resultMap.value(QStringLiteral("languages")).toList()) {
       const QString key = mapValue(langMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl langUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
         QUrlQuery q;
-        q.addQueryItem(QLatin1String("type"), QLatin1String("/type/language"));
-        q.addQueryItem(QLatin1String("key"), key);
-        q.addQueryItem(QLatin1String("name"), QString());
+        q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/language"));
+        q.addQueryItem(QStringLiteral("key"), key);
+        q.addQueryItem(QStringLiteral("name"), QString());
         langUrl.setQuery(q);
 
         QString output = FileHandler::readTextFile(langUrl, true /*quiet*/, true /*utf8*/);
@@ -344,7 +344,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
       }
     }
     if(!langs.isEmpty()) {
-      entry->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
     }
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
@@ -361,14 +361,14 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 QString OpenLibraryFetcher::getAuthorKeys(const QString& term_) {
   QUrl u(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("type"), QLatin1String("/type/author"));
-  q.addQueryItem(QLatin1String("name"), term_);
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("/type/author"));
+  q.addQueryItem(QStringLiteral("name"), term_);
   u.setQuery(q);
 
   QString output = FileHandler::readTextFile(u, true /*quiet*/, true /*utf8*/);
   QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
   QJsonArray array = doc.array();
-  myDebug() << "found" << array.count() << "authors";
+//  myDebug() << "found" << array.count() << "authors";
   // right now, only use the first
   return array.isEmpty() ? QString() : mapValue(array.at(0).toObject().toVariantMap(), "key");
 }
@@ -378,7 +378,7 @@ Tellico::Fetch::ConfigWidget* OpenLibraryFetcher::configWidget(QWidget* parent_)
 }
 
 QString OpenLibraryFetcher::defaultName() {
-  return QLatin1String("Open Library"); // no translation
+  return QStringLiteral("Open Library"); // no translation
 }
 
 QString OpenLibraryFetcher::defaultIcon() {
@@ -387,7 +387,7 @@ QString OpenLibraryFetcher::defaultIcon() {
 
 Tellico::StringHash OpenLibraryFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("openlibrary")] = i18n("OpenLibrary Link");
+  hash[QStringLiteral("openlibrary")] = i18n("OpenLibrary Link");
   return hash;
 }
 

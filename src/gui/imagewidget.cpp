@@ -100,12 +100,12 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   boxLayout->addStretch(1);
 
   QPushButton* button1 = new QPushButton(i18n("Select Image..."), this);
-  button1->setIcon(QIcon::fromTheme(QLatin1String("insert-image")));
+  button1->setIcon(QIcon::fromTheme(QStringLiteral("insert-image")));
   connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
   boxLayout->addWidget(button1);
 
   QPushButton* button2 = new QPushButton(i18n("Scan Image..."), this);
-  button2->setIcon(QIcon::fromTheme(QLatin1String("scanner")));
+  button2->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
   connect(button2, SIGNAL(clicked()), this, SLOT(slotScanImage()));
   boxLayout->addWidget(button2);
 #ifndef HAVE_KSANE
@@ -125,8 +125,8 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   QActionGroup* grp = new QActionGroup(this);
   grp->setExclusive(true);
   QAction* selectedAction = nullptr;
-  KService::List offers = KMimeTypeTrader::self()->query(QLatin1String("image/png"),
-                                                         QLatin1String("Application"));
+  KService::List offers = KMimeTypeTrader::self()->query(QStringLiteral("image/png"),
+                                                         QStringLiteral("Application"));
   QSet<QString> offerNames;
   foreach(KService::Ptr service, offers) {
     if(offerNames.contains(service->name())) {
@@ -148,7 +148,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
     m_edit->setEnabled(false);
   }
   QPushButton* button4 = new QPushButton(i18nc("Clear image", "Clear"), this);
-  button4->setIcon(QIcon::fromTheme(QLatin1String("edit-clear")));
+  button4->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear")));
   connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
   boxLayout->addWidget(button4);
 
@@ -435,7 +435,7 @@ void ImageWidget::dropEvent(QDropEvent* event_) {
   if(event_->mimeData()->hasImage()) {
     QVariant imageData = event_->mimeData()->imageData();
     // Qt reads PNG data by default
-    const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QLatin1String("PNG"));
+    const QString& id = ImageFactory::addImage(qvariant_cast<QPixmap>(imageData), QStringLiteral("PNG"));
     if(!id.isEmpty() && id != m_imageID) {
       setImage(id);
       emit signalModified();

@@ -44,17 +44,17 @@ void AdsTest::testImport() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
+  QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Distant clusters of galaxies detected by X-rays"));
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("1993"));
-  QCOMPARE(entry->field("pages"), QLatin1String("50-57"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Distant clusters of galaxies detected by X-rays"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("year"), QStringLiteral("1993"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("50-57"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("Cavaliere, A."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("Cavaliere, A."));
   QVERIFY(!entry->field("abstract").isEmpty());
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("keyword")).count(), 7);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("keyword")).first(), QLatin1String("Cosmic Plasma"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("keyword")).first(), QStringLiteral("Cosmic Plasma"));
 }

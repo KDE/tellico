@@ -46,26 +46,26 @@ void CrossRefFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/unixref2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
-  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.2514/1.G000894"));
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Robustness and Efficiency Improvements for Star Tracker Attitude Estimation"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("Tjorven Delabie; Joris De Schutter; Bart Vandenbussche"));
-  m_fieldValues.insert(QLatin1String("pages"), QLatin1String("2108-2121"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Journal of Guidance, Control, and Dynamics"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2015"));
-  m_fieldValues.insert(QLatin1String("month"), QLatin1String("11"));
+  m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.2514/1.G000894"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Robustness and Efficiency Improvements for Star Tracker Attitude Estimation"));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Tjorven Delabie; Joris De Schutter; Bart Vandenbussche"));
+  m_fieldValues.insert(QStringLiteral("pages"), QStringLiteral("2108-2121"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("Journal of Guidance, Control, and Dynamics"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2015"));
+  m_fieldValues.insert(QStringLiteral("month"), QStringLiteral("11"));
 }
 
 void CrossRefFetcherTest::testDOI() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("crossref");
+  QString groupName = QStringLiteral("crossref");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
-                                       m_fieldValues.value("doi"));
+                                       m_fieldValues.value(QStringLiteral("doi")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::CrossRefFetcher(this));
   fetcher->readConfig(cg, cg.name());
 

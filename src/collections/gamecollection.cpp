@@ -36,7 +36,7 @@ using Tellico::Data::GameCollection;
 
 GameCollection::GameCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Games") : title_) {
-  setDefaultGroupField(QLatin1String("platform"));
+  setDefaultGroupField(QStringLiteral("platform"));
   if(addDefaultFields_) {
     addFields(defaultFields());
   }
@@ -57,29 +57,29 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
            << i18n("GameCube") << i18n("Dreamcast") << i18nc("Sega Genesis", "Genesis")
            << i18n("Game Boy Advance") << i18n("Game Boy Color") << i18n("Game Boy")
            << i18nc("Windows Platform", "Windows") << i18n("Mac OS") << i18n("Linux");
-  field = new Field(QLatin1String("platform"), i18n("Platform"), platform);
+  field = new Field(QStringLiteral("platform"), i18n("Platform"), platform);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("genre"), i18n("Genre"));
+  field = new Field(QStringLiteral("genre"), i18n("Genre"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("year"), i18n("Release Year"), Field::Number);
+  field = new Field(QStringLiteral("year"), i18n("Release Year"), Field::Number);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("publisher"), i18nc("Games - Publisher", "Publisher"));
+  field = new Field(QStringLiteral("publisher"), i18nc("Games - Publisher", "Publisher"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("developer"), i18n("Developer"));
+  field = new Field(QStringLiteral("developer"), i18n("Developer"));
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -89,44 +89,44 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
                      .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-  field = new Field(QLatin1String("certification"), i18n("ESRB Rating"), cert);
+  field = new Field(QStringLiteral("certification"), i18n("ESRB Rating"), cert);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("description"), i18n("Description"), Field::Para);
+  field = new Field(QStringLiteral("description"), i18n("Description"), Field::Para);
   list.append(field);
 
-  field = new Field(QLatin1String("rating"), i18n("Personal Rating"), Field::Rating);
+  field = new Field(QStringLiteral("rating"), i18n("Personal Rating"), Field::Rating);
   field->setCategory(i18n(game_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("completed"), i18n("Completed"), Field::Bool);
+  field = new Field(QStringLiteral("completed"), i18n("Completed"), Field::Bool);
   field->setCategory(i18n(game_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
+  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(game_personal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(game_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
+  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(game_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("loaned"), i18n("Loaned"), Field::Bool);
+  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
   field->setCategory(i18n(game_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("cover"), i18n("Cover"), Field::Image);
+  field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
   field->setCategory(i18n(game_personal));
   list.append(field);
 

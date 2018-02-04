@@ -52,7 +52,7 @@ void CollectionTypeCombo::reset() {
     addItem(it.key(), it.value());
   }
   // now add the custom type last
-  ComboBox::addItem(QIcon::fromTheme(QLatin1String("document-new")),
+  ComboBox::addItem(QIcon::fromTheme(QStringLiteral("document-new")),
                     nameHash.value(Data::Collection::Base), Data::Collection::Base);
 }
 

@@ -38,7 +38,7 @@ bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
   QString firstLine = stream.readLine();
   if(rx.indexIn(firstLine) > -1) {
     if(rx.cap(1).toLower() != QLatin1String("utf-8")) {
-      firstLine.replace(rx, QLatin1String("encoding=\"utf-8\""));
+      firstLine.replace(rx, QStringLiteral("encoding=\"utf-8\""));
       text_ = firstLine + QLatin1Char('\n') + stream.readAll();
       return true;
     }

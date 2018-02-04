@@ -80,7 +80,7 @@ void KinoFetcher::search() {
 
   QUrl u(QString::fromLatin1(KINO_BASE_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("sp_search_filter"), QLatin1String("movie"));
+  q.addQueryItem(QStringLiteral("sp_search_filter"), QStringLiteral("movie"));
 
   switch(request().key) {
     case Title:
@@ -143,10 +143,10 @@ void KinoFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression linkRx(QLatin1String("<a .+?movie-link.+?href=\"(.+?)\".*>(.+?)</"));
-  QRegularExpression dateSpanRx(QLatin1String("<span .+?movie-startdate.+?>(.+?)</span"));
-  QRegularExpression dateRx(QLatin1String("\\d{2}\\.\\d{2}\\.(\\d{4})"));
-  QRegularExpression yearEndRx(QLatin1String("(\\d{4})/?$"));
+  QRegularExpression linkRx(QStringLiteral("<a .+?movie-link.+?href=\"(.+?)\".*>(.+?)</"));
+  QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
+  QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
+  QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
 
   QRegularExpressionMatchIterator i = linkRx.globalMatch(s);
   while(i.hasNext()) {
@@ -159,7 +159,7 @@ void KinoFetcher::slotComplete(KJob*) {
     Data::EntryPtr entry(new Data::Entry(coll));
     coll->addEntries(entry);
 
-    entry->setField(QLatin1String("title"), match.captured(2));
+    entry->setField(QStringLiteral("title"), match.captured(2));
 
     QString y;
     QRegularExpressionMatch dateMatch = dateSpanRx.match(s, match.capturedEnd());
@@ -169,7 +169,7 @@ void KinoFetcher::slotComplete(KJob*) {
       // see if year is embedded in url
       y = yearEndRx.match(u).captured(1);
     }
-    entry->setField(QLatin1String("year"), y);
+    entry->setField(QStringLiteral("year"), y);
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     QUrl url = QUrl(QString::fromLatin1(KINO_BASE_URL)).resolved(QUrl(u));
@@ -218,7 +218,7 @@ Tellico::Data::EntryPtr KinoFetcher::fetchEntryHook(uint uid_) {
 }
 
 void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
-  QRegularExpression jsonRx(QLatin1String("<script type=\"application/ld\\+json\">(.*?)</script"),
+  QRegularExpression jsonRx(QStringLiteral("<script type=\"application/ld\\+json\">(.*?)</script"),
                             QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatchIterator i = jsonRx.globalMatch(str_);
   while(i.hasNext()) {
@@ -227,113 +227,113 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     if(mapValue(objectMap, "@type") != QLatin1String("Movie")) {
       continue;
     }
-    entry->setField(QLatin1String("director"), mapValue(objectMap, "director", "name"));
+    entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
 
     QStringList actors;
-    foreach(QVariant v, objectMap.value(QLatin1String("actor")).toList()) {
+    foreach(QVariant v, objectMap.value(QStringLiteral("actor")).toList()) {
       const QString actor = mapValue(v.toMap(), "name");
       if(!actor.isEmpty()) actors += actor;
     }
     if(!actors.isEmpty()) {
-      entry->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
+      entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
     }
   }
 
-  QRegularExpression tagRx(QLatin1String("<.+?>"));
+  QRegularExpression tagRx(QStringLiteral("<.+?>"));
 
-  QRegularExpression nationalityRx(QLatin1String("<dt>Produktionsland</dt><dd>(.*?)</dd>"));
+  QRegularExpression nationalityRx(QStringLiteral("<dt>Produktionsland</dt><dd>(.*?)</dd>"));
   QRegularExpressionMatch nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
     const QString n = nationalityMatch.captured(1).remove(tagRx);
-    entry->setField(QLatin1String("nationality"), n);
+    entry->setField(QStringLiteral("nationality"), n);
   }
 
-  QRegularExpression lengthRx(QLatin1String("<dt.*?>Dauer</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression lengthRx(QStringLiteral("<dt.*?>Dauer</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch lengthMatch = lengthRx.match(str_);
   if(lengthMatch.hasMatch()) {
-    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QLatin1String(" Min"));
-    entry->setField(QLatin1String("running-time"), l);
+    const QString l = lengthMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min"));
+    entry->setField(QStringLiteral("running-time"), l);
   }
 
-  QRegularExpression genreRx(QLatin1String("<dt.*?>Genre</dt><dd.*?>(.*?)</dd>"));
+  QRegularExpression genreRx(QStringLiteral("<dt.*?>Genre</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch genreMatch = genreRx.match(str_);
   if(genreMatch.hasMatch()) {
-    QRegularExpression anchorRx(QLatin1String("<a.*?>(.*?)</a>"));
+    QRegularExpression anchorRx(QStringLiteral("<a.*?>(.*?)</a>"));
     QRegularExpressionMatchIterator i = anchorRx.globalMatch(genreMatch.captured(1));
     QStringList genres;
     while(i.hasNext()) {
       genres += i.next().captured(1).trimmed();
     }
-    entry->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
+    entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
-  QRegularExpression certRx(QLatin1String("<dt>FSK</dt><dd>(.*?)</dd>"));
+  QRegularExpression certRx(QStringLiteral("<dt>FSK</dt><dd>(.*?)</dd>"));
   QRegularExpressionMatch certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
     // need to translate? Let's just add FSK ratings to the allowed values
-    QStringList allowed = entry->collection()->hasField(QLatin1String("certification")) ?
-                          entry->collection()->fieldByName(QLatin1String("certification"))->allowed() :
+    QStringList allowed = entry->collection()->hasField(QStringLiteral("certification")) ?
+                          entry->collection()->fieldByName(QStringLiteral("certification"))->allowed() :
                           QStringList();
     if(!allowed.contains(QLatin1String("FSK 0 (DE)"))) {
-      allowed << QLatin1String("FSK 0 (DE)")
-              << QLatin1String("FSK 6 (DE)")
-              << QLatin1String("FSK 12 (DE)")
-              << QLatin1String("FSK 16 (DE)")
-              << QLatin1String("FSK 18 (DE)");
-      entry->collection()->fieldByName(QLatin1String("certification"))->setAllowed(allowed);
+      allowed << QStringLiteral("FSK 0 (DE)")
+              << QStringLiteral("FSK 6 (DE)")
+              << QStringLiteral("FSK 12 (DE)")
+              << QStringLiteral("FSK 16 (DE)")
+              << QStringLiteral("FSK 18 (DE)");
+      entry->collection()->fieldByName(QStringLiteral("certification"))->setAllowed(allowed);
     }
     QString c = certMatch.captured(1).remove(tagRx);
     if(c == QLatin1String("ab 0")) {
-      c = QLatin1String("FSK 0 (DE)");
+      c = QStringLiteral("FSK 0 (DE)");
     } else if(c == QLatin1String("ab 6")) {
-      c = QLatin1String("FSK 6 (DE)");
+      c = QStringLiteral("FSK 6 (DE)");
     } else if(c == QLatin1String("ab 12")) {
-      c = QLatin1String("FSK 12 (DE)");
+      c = QStringLiteral("FSK 12 (DE)");
     } else if(c == QLatin1String("ab 16")) {
-      c = QLatin1String("FSK 16 (DE)");
+      c = QStringLiteral("FSK 16 (DE)");
     } else if(c == QLatin1String("ab 18")) {
-      c = QLatin1String("FSK 18 (DE)");
+      c = QStringLiteral("FSK 18 (DE)");
     }
-    entry->setField(QLatin1String("certification"), c);
+    entry->setField(QStringLiteral("certification"), c);
   }
 
-  QRegularExpression studioRx(QLatin1String("<dt>Filmverleih</dt><dd>(.*?)</dd>"));
+  QRegularExpression studioRx(QStringLiteral("<dt>Filmverleih</dt><dd>(.*?)</dd>"));
   QRegularExpressionMatch studioMatch = studioRx.match(str_);
   if(studioMatch.hasMatch()) {
-    QString s = studioMatch.captured(1).remove(tagRx).remove(QLatin1String(" Min"));
-    entry->setField(QLatin1String("studio"), s);
+    QString s = studioMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min"));
+    entry->setField(QStringLiteral("studio"), s);
   }
 
-  QRegularExpression plotRx(QLatin1String("<div class=\"js-teaser movie-plot-teaser\"></div>(.*?)<(/section|h2)>"),
+  QRegularExpression plotRx(QStringLiteral("<div class=\"js-teaser movie-plot-teaser\"></div>(.*?)<(/section|h2)>"),
                                           QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch plotMatch = plotRx.match(str_);
   if(plotMatch.hasMatch()) {
     QString plot;
-    QRegularExpression pRx(QLatin1String("<p>.*?</p>"));
+    QRegularExpression pRx(QStringLiteral("<p>.*?</p>"));
     QRegularExpressionMatchIterator i = pRx.globalMatch(plotMatch.captured(1));
     while(i.hasNext()) {
       plot += i.next().captured(0);
     }
-    entry->setField(QLatin1String("plot"), plot);
+    entry->setField(QStringLiteral("plot"), plot);
   }
 
-  QRegularExpression divMetaRx(QLatin1String("<div class=\"movie-meta\".*?>(.+?)</div>"),
+  QRegularExpression divMetaRx(QStringLiteral("<div class=\"movie-meta\".*?>(.+?)</div>"),
                                QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch divMetaMatch = divMetaRx.match(str_);
   if(divMetaMatch.hasMatch()) {
-    QRegularExpression coverRx(QStringLiteral("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QLatin1String("title"))));
+    QRegularExpression coverRx(QStringLiteral("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QStringLiteral("title"))));
     QRegularExpressionMatch coverMatch = coverRx.match(divMetaMatch.captured(1));
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverMatch.captured(1)), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QLatin1String("cover"), id);
+    entry->setField(QStringLiteral("cover"), id);
   }
 }
 
 Tellico::Fetch::FetchRequest KinoFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
@@ -345,7 +345,7 @@ Tellico::Fetch::ConfigWidget* KinoFetcher::configWidget(QWidget* parent_) const 
 }
 
 QString KinoFetcher::defaultName() {
-  return QLatin1String("kino.de");
+  return QStringLiteral("kino.de");
 }
 
 QString KinoFetcher::defaultIcon() {
@@ -355,12 +355,12 @@ QString KinoFetcher::defaultIcon() {
 //static
 Tellico::StringHash KinoFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("distributor")]     = i18n("Distributor");
-  hash[QLatin1String("episodes")]        = i18n("Episodes");
-  hash[QLatin1String("origtitle")]       = i18n("Original Title");
-  hash[QLatin1String("alttitle")]        = i18n("Alternative Titles");
-  hash[QLatin1String("animenfo-rating")] = i18n("AnimeNfo Rating");
-  hash[QLatin1String("animenfo")]        = i18n("AnimeNfo Link");
+  hash[QStringLiteral("distributor")]     = i18n("Distributor");
+  hash[QStringLiteral("episodes")]        = i18n("Episodes");
+  hash[QStringLiteral("origtitle")]       = i18n("Original Title");
+  hash[QStringLiteral("alttitle")]        = i18n("Alternative Titles");
+  hash[QStringLiteral("animenfo-rating")] = i18n("AnimeNfo Rating");
+  hash[QStringLiteral("animenfo")]        = i18n("AnimeNfo Link");
   return hash;
 }
 

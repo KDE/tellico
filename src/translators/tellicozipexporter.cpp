@@ -90,14 +90,14 @@ bool TellicoZipExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("tellico.xml"), xml);
+  zip.writeFile(QStringLiteral("tellico.xml"), xml);
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
     // gonna be lazy and just increment progress every 3 images
     // it might be less, might be more
     int j = 0;
-    const QString imagesDir = QLatin1String("images/");
+    const QString imagesDir = QStringLiteral("images/");
     StringSet imageSet;
     Data::FieldList imageFields = coll->imageFields();
     // take intersection with the fields to be exported

@@ -41,20 +41,20 @@ void MRLookupFetcherTest::initTestCase() {
   // since we use the bibtex importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
-  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.4169/amer.math.monthly.121.10.917"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("An unnoticed consequence of Szeg\\\"o's distribution theorem"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("Trench, William F."));
-  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("121"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("American Mathematical Monthly"));
-  m_fieldValues.insert(QLatin1String("number"), QLatin1String("10"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2014"));
-  m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("917–921"));
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
+  m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.4169/amer.math.monthly.121.10.917"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("An unnoticed consequence of Szeg\\\"o's distribution theorem"));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Trench, William F."));
+  m_fieldValues.insert(QStringLiteral("volume"), QStringLiteral("121"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("American Mathematical Monthly"));
+  m_fieldValues.insert(QStringLiteral("number"), QStringLiteral("10"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2014"));
+  m_fieldValues.insert(QStringLiteral("pages"), QStringLiteral("917–921"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
 }
 
 void MRLookupFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QString::fromLatin1("An unnoticed consequence of Szego's distribution theorem"));
+                                       QLatin1String("An unnoticed consequence of Szego's distribution theorem"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MRLookupFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -71,7 +71,7 @@ void MRLookupFetcherTest::testTitle() {
 
 void MRLookupFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QLatin1String("Trench, William"));
+                                       QStringLiteral("Trench, William"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MRLookupFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -80,7 +80,7 @@ void MRLookupFetcherTest::testAuthor() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->title().toLower() == m_fieldValues.value(QLatin1String("title")).toLower()) {
+    if(test->title().toLower() == m_fieldValues.value(QStringLiteral("title")).toLower()) {
       entry = test;
       break;
     } else {

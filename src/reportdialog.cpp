@@ -81,7 +81,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QLabel* l = new QLabel(i18n("&Report template:"), mainWidget);
   hlay->addWidget(l);
 
-  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/report-templates/*.xsl"));
+  QStringList files = Tellico::locateAllFiles(QStringLiteral("tellico/report-templates/*.xsl"));
   QMap<QString, QString> templates; // gets sorted by title
   foreach(const QString& file, files) {
     QFileInfo fi(file);
@@ -100,7 +100,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   l->setBuddy(m_templateCombo);
 
   QPushButton* pb1 = new QPushButton(mainWidget);
-  KGuiItem::assign(pb1, KGuiItem(i18n("&Generate"), QLatin1String("application-x-executable")));
+  KGuiItem::assign(pb1, KGuiItem(i18n("&Generate"), QStringLiteral("application-x-executable")));
   hlay->addWidget(pb1);
   connect(pb1, SIGNAL(clicked()), SLOT(slotGenerate()));
 

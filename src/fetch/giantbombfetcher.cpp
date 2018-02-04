@@ -54,7 +54,7 @@ GiantBombFetcher::GiantBombFetcher(QObject* parent_)
     , m_total(-1)
     , m_apiKey(QLatin1String(GIANTBOMB_API_KEY)) {
   setLimit(GIANTBOMB_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("giantbomb2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("giantbomb2tellico.xsl"));
 }
 
 GiantBombFetcher::~GiantBombFetcher() {
@@ -82,14 +82,14 @@ void GiantBombFetcher::resetSearch() {
 QUrl GiantBombFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
-  q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
+  q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
 
   switch(request().key) {
     case Keyword:
-      u.setPath(QLatin1String("/search"));
-      q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("resources"), QLatin1String("game"));
+      u.setPath(QStringLiteral("/search"));
+      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("resources"), QStringLiteral("game"));
       break;
 
     default:
@@ -129,7 +129,7 @@ void GiantBombFetcher::parseData(QByteArray& data_) {
 Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
-  const QString id = entry_->field(QLatin1String("giantbomb-id"));
+  const QString id = entry_->field(QStringLiteral("giantbomb-id"));
   if(id.isEmpty()) {
     myDebug() << "no giantbomb id found";
     return entry_;
@@ -138,8 +138,8 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
   u.setPath(QStringLiteral("/game/%1/").arg(id));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
-  q.addQueryItem(QLatin1String("api_key"), m_apiKey);
+  q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
+  q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -172,12 +172,12 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("giantbomb-id"));
+  coll->removeField(QStringLiteral("giantbomb-id"));
   return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest GiantBombFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
   }
@@ -189,7 +189,7 @@ Tellico::Fetch::ConfigWidget* GiantBombFetcher::configWidget(QWidget* parent_) c
 }
 
 QString GiantBombFetcher::defaultName() {
-  return QLatin1String("Giant Bomb");
+  return QStringLiteral("Giant Bomb");
 }
 
 QString GiantBombFetcher::defaultIcon() {
@@ -198,8 +198,8 @@ QString GiantBombFetcher::defaultIcon() {
 
 Tellico::StringHash GiantBombFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("giantbomb")] = i18n("GiantBomb Link");
-  hash[QLatin1String("pegi")] = i18n("PEGI Rating");
+  hash[QStringLiteral("giantbomb")] = i18n("GiantBomb Link");
+  hash[QStringLiteral("pegi")] = i18n("PEGI Rating");
   return hash;
 }
 

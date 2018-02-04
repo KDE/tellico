@@ -321,8 +321,8 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
 
   EntryList currEntries = coll1_->entries();
   EntryList newEntries = coll2_->entries();
-  std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(QLatin1String("title")));
-  std::sort(newEntries.begin(), newEntries.end(), Data::EntryCmp(QLatin1String("title")));
+  std::sort(currEntries.begin(), currEntries.end(), Data::EntryCmp(QStringLiteral("title")));
+  std::sort(newEntries.begin(), newEntries.end(), Data::EntryCmp(QStringLiteral("title")));
 
   const int currTotal = currEntries.count();
   int lastMatchId = 0;
@@ -440,7 +440,7 @@ void Document::unMergeCollection(Tellico::Data::CollPtr coll_, Tellico::Data::Fi
   m_coll->removeEntries(entries);
 
   // second item in pair are the entries which got modified by the original merge command
-  const QString track = QLatin1String("track");
+  const QString track = QStringLiteral("track");
   PairVector trackChanges = entryPair_.second;
   // need to go through them in reverse since one entry may have been modified multiple times
   // first item in the pair is the entry pointer
@@ -493,14 +493,14 @@ void Document::checkOutEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  const QString loaned = QLatin1String("loaned");
+  const QString loaned = QStringLiteral("loaned");
   if(!m_coll->hasField(loaned)) {
     FieldPtr f(new Field(loaned, i18n("Loaned"), Field::Bool));
     f->setFlags(Field::AllowGrouped);
     f->setCategory(i18n("Personal"));
     m_coll->addField(f);
   }
-  entry_->setField(loaned, QLatin1String("true"));
+  entry_->setField(loaned, QStringLiteral("true"));
   EntryList vec;
   vec.append(entry_);
   m_coll->updateDicts(vec, QStringList() << loaned);
@@ -511,7 +511,7 @@ void Document::checkInEntry(Tellico::Data::EntryPtr entry_) {
     return;
   }
 
-  const QString loaned = QLatin1String("loaned");
+  const QString loaned = QStringLiteral("loaned");
   if(!m_coll->hasField(loaned)) {
     return;
   }

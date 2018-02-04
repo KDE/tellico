@@ -124,17 +124,17 @@ void MusicBrainzFetcher::doSearch() {
       return;
   }
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("query"), queryString);
-  q.addQueryItem(QLatin1String("limit"), QString::number(m_limit));
-  q.addQueryItem(QLatin1String("offset"), QString::number(m_offset));
-  q.addQueryItem(QLatin1String("fmt"), QLatin1String("xml"));
+  q.addQueryItem(QStringLiteral("query"), queryString);
+  q.addQueryItem(QStringLiteral("limit"), QString::number(m_limit));
+  q.addQueryItem(QStringLiteral("offset"), QString::number(m_offset));
+  q.addQueryItem(QStringLiteral("fmt"), QStringLiteral("xml"));
   u.setQuery(q);
 //  myDebug() << "url: " << u.url();
 
   m_requestTimer.start();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
-  m_job->addMetaData(QLatin1String("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
+  m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
@@ -189,10 +189,10 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
       return;
     }
     // total is /metadata/release-list/@count
-    QDomNode n = dom.documentElement().namedItem(QLatin1String("release-list"));
+    QDomNode n = dom.documentElement().namedItem(QStringLiteral("release-list"));
     QDomElement e = n.toElement();
     if(!e.isNull()) {
-      m_total = e.attribute(QLatin1String("count")).toInt();
+      m_total = e.attribute(QStringLiteral("count")).toInt();
 //      myDebug() << "total = " << m_total;
     }
   }
@@ -247,7 +247,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString mbid = entry->field(QLatin1String("mbid"));
+  QString mbid = entry->field(QStringLiteral("mbid"));
   if(mbid.isEmpty()) {
     return entry;
   }
@@ -255,8 +255,8 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
   u.setPath(u.path() + QLatin1String("release/") + mbid);
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("fmt"), QLatin1String("xml"));
-  q.addQueryItem(QLatin1String("inc"), QLatin1String("artists+recordings+release-groups+labels+url-rels"));
+  q.addQueryItem(QStringLiteral("fmt"), QStringLiteral("xml"));
+  q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
   u.setQuery(q);
 //  myDebug() << u;
 
@@ -267,7 +267,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   m_requestTimer.start();
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  dataJob->addMetaData(QLatin1String("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
+  dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
                                                                 .arg(QLatin1String(TELLICO_VERSION)));
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
@@ -300,7 +300,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("mbid"));
+  coll->removeField(QStringLiteral("mbid"));
 
   entry = coll->entries().front();
   m_entries.insert(uid_, entry); // replaces old value
@@ -308,7 +308,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 }
 
 void MusicBrainzFetcher::initXSLTHandler() {
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("musicbrainz2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("musicbrainz2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate musicbrainz2tellico.xsl.";
     return;
@@ -327,8 +327,8 @@ void MusicBrainzFetcher::initXSLTHandler() {
 }
 
 Tellico::Fetch::FetchRequest MusicBrainzFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString title = entry_->field(QLatin1String("title"));
-  const QString artist = entry_->field(QLatin1String("artist"));
+  const QString title = entry_->field(QStringLiteral("title"));
+  const QString artist = entry_->field(QStringLiteral("artist"));
   if(artist.isEmpty() && !title.isEmpty()) {
     return FetchRequest(Title, title);
   } else if(title.isEmpty() && !artist.isEmpty()) {
@@ -344,7 +344,7 @@ Tellico::Fetch::ConfigWidget* MusicBrainzFetcher::configWidget(QWidget* parent_)
 }
 
 QString MusicBrainzFetcher::defaultName() {
-  return QLatin1String("MusicBrainz"); // no translation
+  return QStringLiteral("MusicBrainz"); // no translation
 }
 
 QString MusicBrainzFetcher::defaultIcon() {

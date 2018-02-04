@@ -108,13 +108,13 @@ void LoanDialog::init() {
 
   QLabel* pixLabel = new QLabel(mainWidget);
   mainLayout->addWidget(pixLabel);
-  pixLabel->setPixmap(QIcon::fromTheme(QLatin1String("tellico"),
+  pixLabel->setPixmap(QIcon::fromTheme(QStringLiteral("tellico"),
                                        QIcon(QLatin1String(":/icons/tellico")))
                                       .pixmap(QSize(64, 64)));
   pixLabel->setAlignment(Qt::Alignment(Qt::AlignLeft) | Qt::AlignTop);
   topLayout->addWidget(pixLabel, ++row, 0);
 
-  QString entryString = QLatin1String("<qt><p>");
+  QString entryString = QStringLiteral("<qt><p>");
   if(m_mode == Add) {
     entryString += i18n("The following items are being checked out:");
     entryString += QLatin1String("</p><ol>");
@@ -143,7 +143,7 @@ void LoanDialog::init() {
   m_borrowerEdit->completionObject()->setIgnoreCase(true);
   connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
           SLOT(slotBorrowerNameChanged(const QString&)));
-  QPushButton* pb = new QPushButton(QIcon::fromTheme(QLatin1String("kaddressbook")), QString(), mainWidget);
+  QPushButton* pb = new QPushButton(QIcon::fromTheme(QStringLiteral("kaddressbook")), QString(), mainWidget);
   mainLayout->addWidget(pb);
   topLayout->addWidget(pb, row, 2);
   connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
@@ -226,7 +226,7 @@ void LoanDialog::init() {
 }
 
 LoanDialog::~LoanDialog() {
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Loan Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Loan Dialog Options"));
   KWindowConfig::saveWindowSize(windowHandle(), config);
 }
 

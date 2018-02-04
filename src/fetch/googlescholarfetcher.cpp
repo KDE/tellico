@@ -95,7 +95,7 @@ void GoogleScholarFetcher::doSearch() {
 
   QUrl u(QString::fromLatin1(SCHOLAR_BASE_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("start"), QString::number(m_start));
+  q.addQueryItem(QStringLiteral("start"), QString::number(m_start));
 
   QString value = request().value;
   if(!value.startsWith(QLatin1Char('"'))) {
@@ -106,15 +106,15 @@ void GoogleScholarFetcher::doSearch() {
   }
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("q"), QStringLiteral("allintitle:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("allintitle:%1").arg(request().value));
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value);
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("q"), QStringLiteral("author:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("author:%1").arg(request().value));
       break;
 
     default:
@@ -223,7 +223,7 @@ Tellico::Data::EntryPtr GoogleScholarFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest GoogleScholarFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -236,7 +236,7 @@ Tellico::Fetch::ConfigWidget* GoogleScholarFetcher::configWidget(QWidget* parent
 
 QString GoogleScholarFetcher::defaultName() {
   // no i18n
-  return QLatin1String("Google Scholar");
+  return QStringLiteral("Google Scholar");
 }
 
 QString GoogleScholarFetcher::defaultIcon() {

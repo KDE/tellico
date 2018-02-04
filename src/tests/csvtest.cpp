@@ -73,16 +73,16 @@ void CsvTest::testAll_data() {
 void CsvTest::testEntry() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true));
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
-  entry->setField(QLatin1String("title"), QLatin1String("title, with comma"));
+  entry->setField(QStringLiteral("title"), QStringLiteral("title, with comma"));
   coll->addEntries(entry);
 
   Tellico::Export::CSVExporter exporter(coll);
   exporter.setEntries(coll->entries());
-  exporter.setFields(Tellico::Data::FieldList() << coll->fieldByName(QLatin1String("title")));
+  exporter.setFields(Tellico::Data::FieldList() << coll->fieldByName(QStringLiteral("title")));
 
   QString output = exporter.text();
   // the header line has the field titles, skip that
   output = output.section(QLatin1Char('\n'), 1);
   output.chop(1);
-  QCOMPARE(output, QLatin1String("\"title, with comma\""));
+  QCOMPARE(output, QStringLiteral("\"title, with comma\""));
 }

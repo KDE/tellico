@@ -118,7 +118,7 @@ void FreeDBImporter::readCDROM() {
   }
 
   {
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - FreeDB"));
+    KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FreeDB"));
     config.writeEntry("CD-ROM Devices", drives);
     config.writeEntry("Last Device", drivePath);
     config.writeEntry("Cache Files Only", false);
@@ -272,19 +272,20 @@ void FreeDBImporter::readCDROM() {
 
   Data::EntryPtr entry(new Data::Entry(m_coll));
   // obviously a CD
-  entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
-  entry->setField(QLatin1String("title"),  info.get(KCDDB::Title).toString());
-  entry->setField(QLatin1String("artist"), info.get(KCDDB::Artist).toString());
-  entry->setField(QLatin1String("genre"),  info.get(KCDDB::Genre).toString());
+  entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
+  entry->setField(QStringLiteral("title"),  info.get(KCDDB::Title).toString());
+  entry->setField(QStringLiteral("artist"), info.get(KCDDB::Artist).toString());
+  entry->setField(QStringLiteral("genre"),  info.get(KCDDB::Genre).toString());
   if(!info.get(KCDDB::Year).isNull()) {
-    entry->setField(QLatin1String("year"), info.get(KCDDB::Year).toString());
+    entry->setField(QStringLiteral("year"), info.get(KCDDB::Year).toString());
   }
-  entry->setField(QLatin1String("keyword"), info.get(KCDDB::Category).toString());
-  QString extd = info.get(QLatin1String("EXTD")).toString();
+  entry->setField(QStringLiteral("keyword"), info.get(KCDDB::Category).toString());
+  QString extd = info.get(QStringLiteral("EXTD")).toString();
   extd.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
-  entry->setField(QLatin1String("comments"), extd);
+  entry->setField(QStringLiteral("comments"), extd);
 
   QStringList trackList;
+  trackList.reserve(info.numberOfTracks());
   for(int i = 0; i < info.numberOfTracks(); ++i) {
     QString s = info.track(i).get(KCDDB::Title).toString() + FieldFormat::columnDelimiterString();
     const QString trackArtist = info.track(i).get(KCDDB::Artist).toString().trimmed();
@@ -294,7 +295,7 @@ void FreeDBImporter::readCDROM() {
     }
     trackList << s;
   }
-  entry->setField(QLatin1String("track"), trackList.join(FieldFormat::rowDelimiterString()));
+  entry->setField(QStringLiteral("track"), trackList.join(FieldFormat::rowDelimiterString()));
 
   m_coll->addEntries(entry);
   readCDText(drive);
@@ -305,7 +306,7 @@ void FreeDBImporter::readCache() {
 #if defined (HAVE_KCDDB) || defined (HAVE_KF5KCDDB)
   {
     // remember the import options
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - FreeDB"));
+    KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FreeDB"));
     config.writeEntry("Cache Files Only", true);
   }
 
@@ -334,14 +335,14 @@ void FreeDBImporter::readCache() {
 //    qApp->processEvents(); // really needed ?
   }
 
-  const QString title    = QLatin1String("title");
-  const QString artist   = QLatin1String("artist");
-  const QString year     = QLatin1String("year");
-  const QString genre    = QLatin1String("genre");
-  const QString medium   = QLatin1String("medium");
-  const QString keyword  = QLatin1String("keyword");
-  const QString track    = QLatin1String("track");
-  const QString comments = QLatin1String("comments");
+  const QString title    = QStringLiteral("title");
+  const QString artist   = QStringLiteral("artist");
+  const QString year     = QStringLiteral("year");
+  const QString genre    = QStringLiteral("genre");
+  const QString medium   = QStringLiteral("medium");
+  const QString keyword  = QStringLiteral("keyword");
+  const QString track    = QStringLiteral("track");
+  const QString comments = QStringLiteral("comments");
   int numFiles = files.count();
 
   if(numFiles == 0) {
@@ -396,12 +397,13 @@ void FreeDBImporter::readCache() {
       entry->setField(year, info.get(KCDDB::Year).toString());
     }
     entry->setField(keyword, info.get(KCDDB::Category).toString());
-    QString extd = info.get(QLatin1String("EXTD")).toString();
+    QString extd = info.get(QStringLiteral("EXTD")).toString();
     extd.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
     entry->setField(comments, extd);
 
     // step through trackList
     QStringList trackList;
+    trackList.reserve(info.numberOfTracks());
     for(int i = 0; i < info.numberOfTracks(); ++i) {
       trackList << info.track(i).get(KCDDB::Title).toString();
     }
@@ -438,8 +440,8 @@ void FreeDBImporter::readCache() {
 }
 
 #define SETFIELD(name,value) \
-  if(entry->field(QLatin1String(name)).isEmpty()) { \
-    entry->setField(QLatin1String(name), value); \
+  if(entry->field(QStringLiteral(name)).isEmpty()) { \
+    entry->setField(QStringLiteral(name), value); \
   }
 
 void FreeDBImporter::readCDText(const QByteArray& drive_) {
@@ -454,7 +456,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   }
   if(!entry) {
     entry = new Data::Entry(m_coll);
-    entry->setField(QLatin1String("medium"), i18n("Compact Disc"));
+    entry->setField(QStringLiteral("medium"), i18n("Compact Disc"));
     m_coll->addEntries(entry);
   }
 
@@ -472,6 +474,7 @@ void FreeDBImporter::readCDText(const QByteArray& drive_) {
   SETFIELD("artist",   artist);
   SETFIELD("comments", cdtext.message);
   QStringList tracks;
+  tracks.reserve(cdtext.trackTitles.size());
   for(int i = 0; i < cdtext.trackTitles.size(); ++i) {
     tracks << cdtext.trackTitles[i] + FieldFormat::columnDelimiterString() + cdtext.trackArtists[i];
     if(artist.isEmpty()) {
@@ -532,14 +535,14 @@ QWidget* FreeDBImporter::widget(QWidget* parent_) {
   l->addStretch(1);
 
   // now read config options
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - FreeDB"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - FreeDB"));
   QStringList devices = config.readEntry("CD-ROM Devices", QStringList());
   if(devices.isEmpty()) {
 #if defined(__OpenBSD__)
     devices += QLatin1String("/dev/rcd0c");
 #endif
-    devices += QLatin1String("/dev/cdrom");
-    devices += QLatin1String("/dev/dvd");
+    devices += QStringLiteral("/dev/cdrom");
+    devices += QStringLiteral("/dev/dvd");
   }
   m_driveCombo->addItems(devices);
   QString device = config.readEntry("Last Device");

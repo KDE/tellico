@@ -52,7 +52,7 @@ using Tellico::Export::ONIXExporter;
 
 ONIXExporter::ONIXExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_handler(nullptr),
-    m_xsltFile(QLatin1String("tellico2onix.xsl")),
+    m_xsltFile(QStringLiteral("tellico2onix.xsl")),
     m_includeImages(true),
     m_widget(nullptr),
     m_checkIncludeImages(nullptr) {
@@ -84,11 +84,11 @@ bool ONIXExporter::exec() {
 
   KZip zip(&buf);
   zip.open(QIODevice::WriteOnly);
-  zip.writeFile(QLatin1String("onix.xml"), xml);
+  zip.writeFile(QStringLiteral("onix.xml"), xml);
 
   // use a dict for fast random access to keep track of which images were written to the file
   if(m_includeImages) { // for now, we're ignoring (options() & Export::ExportImages)
-    const QString cover = QLatin1String("cover");
+    const QString cover = QStringLiteral("cover");
     StringSet imageSet;
     foreach(Data::EntryPtr entry, entries()) {
       const Data::Image& img = ImageFactory::imageById(entry->field(cover));
@@ -143,7 +143,7 @@ QString ONIXExporter::text() {
   m_handler = new XSLTHandler(dom, QFile::encodeName(xsltFile));
 
   QDateTime now = QDateTime::currentDateTime();
-  m_handler->addStringParam("sentDate", now.toString(QLatin1String("yyyyMMddhhmm")).toUtf8());
+  m_handler->addStringParam("sentDate", now.toString(QStringLiteral("yyyyMMddhhmm")).toUtf8());
 
   m_handler->addStringParam("version", TELLICO_VERSION);
 

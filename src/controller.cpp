@@ -326,7 +326,7 @@ void Controller::slotDeleteSelectedEntries() {
   // confirm delete
   if(m_selectedEntries.count() == 1) {
     QString str = i18n("Do you really want to delete this entry?");
-    QString dontAsk = QLatin1String("DeleteEntry");
+    QString dontAsk = QStringLiteral("DeleteEntry");
     int ret = KMessageBox::warningContinueCancel(Kernel::self()->widget(), str, i18n("Delete Entry"),
                                                  KStandardGuiItem::del(),
                                                  KStandardGuiItem::cancel(), dontAsk);
@@ -341,7 +341,7 @@ void Controller::slotDeleteSelectedEntries() {
     }
     QString str = i18n("Do you really want to delete these entries?");
     // historically called DeleteMultipleBooks, don't change
-    QString dontAsk = QLatin1String("DeleteMultipleBooks");
+    QString dontAsk = QStringLiteral("DeleteMultipleBooks");
     int ret = KMessageBox::warningContinueCancelList(Kernel::self()->widget(), str, names,
                                                      i18n("Delete Multiple Entries"),
                                                      KStandardGuiItem::del(),
@@ -515,7 +515,7 @@ void Controller::plugUpdateMenu(QMenu* popup_) {
 
 void Controller::updateActions() const {
   const bool emptySelection = m_selectedEntries.isEmpty();
-  m_mainWindow->stateChanged(QLatin1String("empty_selection"),
+  m_mainWindow->stateChanged(QStringLiteral("empty_selection"),
                              emptySelection ? KXMLGUIClient::StateNoReverse : KXMLGUIClient::StateReverse);
   foreach(QAction* action, m_mainWindow->m_fetchActions) {
     action->setEnabled(!emptySelection);
@@ -656,7 +656,7 @@ void Controller::hideTabs() const {
 
 bool Controller::canCheckIn() const {
   foreach(Data::EntryPtr entry, m_selectedEntries) {
-    if(entry->field(QLatin1String("loaned")) == QLatin1String("true")) {
+    if(entry->field(QStringLiteral("loaned")) == QLatin1String("true")) {
       return true;
     }
   }

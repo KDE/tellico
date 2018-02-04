@@ -171,7 +171,8 @@ void Z3950Connection::run() {
   ZOOM_query query = ZOOM_query_create();
   QueryDestroyer qd(query);
 
-  int errcode = ZOOM_query_prefix(query, toCString(m_pqn));
+  const QByteArray ba = toByteArray(m_pqn);
+  int errcode = ZOOM_query_prefix(query, ba.constData());
   if(errcode != 0) {
     myDebug() << "query error: " << m_pqn;
     QString s = i18n("Query error!");
@@ -195,7 +196,7 @@ void Z3950Connection::run() {
   // if syntax is mods, set esn to mods too
   QByteArray type = "raw";
   if(m_syntax == QLatin1String("mods")) {
-    m_syntax = QLatin1String("xml");
+    m_syntax = QStringLiteral("xml");
     ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
     type = "xml";
   } else {
@@ -229,7 +230,7 @@ void Z3950Connection::run() {
   if(numResults > 0) {
     myLog() << "current syntax is " << m_syntax << " (" << numResults << " results)";
     // so now we know that results exist, might have to check syntax
- 
+
     if(m_syntax == QLatin1String("ads")) {
       // ads syntax is really 1.2.840.10003.5.1000.147.1
       // see http://adsabs.harvard.edu/abs_doc/ads_server.html
@@ -244,7 +245,7 @@ void Z3950Connection::run() {
       newSyntax = QString::fromLatin1(ZOOM_record_get(rec, "syntax", &len)).toLower();
       myLog() << "syntax guess is " << newSyntax;
       if(newSyntax == QLatin1String("mods") || newSyntax == QLatin1String("xml")) {
-        m_syntax = QLatin1String("xml");
+        m_syntax = QStringLiteral("xml");
         ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
       } else if(newSyntax == QLatin1String("grs-1")) {
         // if it's defaulting to grs-1, go ahead and change it to try to get a marc
@@ -259,7 +260,7 @@ void Z3950Connection::run() {
        newSyntax != QLatin1String("grs-1") &&
        newSyntax != QLatin1String("ads")) {
       myLog() << "changing z39.50 syntax to MODS";
-      newSyntax = QLatin1String("xml");
+      newSyntax = QStringLiteral("xml");
       ZOOM_resultset_option_set(resultSet, "elementSetName", "mods");
       ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.toLatin1().constData());
       rec = ZOOM_resultset_record(resultSet, 0);
@@ -267,28 +268,28 @@ void Z3950Connection::run() {
       if(len == 0) {
         // change set name back
         ZOOM_resultset_option_set(resultSet, "elementSetName", m_esn.toLatin1().constData());
-        newSyntax = QLatin1String("usmarc"); // try usmarc
+        newSyntax = QStringLiteral("usmarc"); // try usmarc
         myLog() << "changing z39.50 syntax to USMARC";
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.toLatin1().constData());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
-        newSyntax = QLatin1String("marc21"); // try marc21
+        newSyntax = QStringLiteral("marc21"); // try marc21
         myLog() << "changing z39.50 syntax to MARC21";
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.toLatin1().constData());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
-        newSyntax = QLatin1String("unimarc"); // try unimarc
+        newSyntax = QStringLiteral("unimarc"); // try unimarc
         myLog() << "changing z39.50 syntax to UNIMARC";
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.toLatin1().constData());
         rec = ZOOM_resultset_record(resultSet, 0);
         ZOOM_record_get(rec, "raw", &len);
       }
       if(len == 0) {
-        newSyntax = QLatin1String("grs-1"); // try grs-1
+        newSyntax = QStringLiteral("grs-1"); // try grs-1
         myLog() << "changing z39.50 syntax to GRS-1";
         ZOOM_resultset_option_set(resultSet, "preferredRecordSyntax", newSyntax.toLatin1().constData());
         rec = ZOOM_resultset_record(resultSet, 0);
@@ -305,10 +306,10 @@ void Z3950Connection::run() {
 
   // go back to fooling ourselves and calling it mods
   if(m_syntax == QLatin1String("xml")) {
-    m_syntax = QLatin1String("mods");
+    m_syntax = QStringLiteral("mods");
   }
   if(newSyntax == QLatin1String("xml")) {
-    newSyntax = QLatin1String("mods");
+    newSyntax = QStringLiteral("mods");
   }
   // save syntax change for next time
   if(m_syntax != newSyntax) {
@@ -317,7 +318,7 @@ void Z3950Connection::run() {
   }
 
   if(m_sourceCharSet.isEmpty()) {
-    m_sourceCharSet = QLatin1String("marc-8");
+    m_sourceCharSet = QStringLiteral("marc-8");
   }
 
   const size_t realLimit = qMin(numResults, m_limit);
@@ -391,9 +392,12 @@ bool Z3950Connection::makeConnection() {
 #ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
   ZOOM_options_set(d->conn_opt, "implementationName", "Tellico");
-  ZOOM_options_set(d->conn_opt, "databaseName",       toCString(m_dbname));
-  ZOOM_options_set(d->conn_opt, "user",               toCString(m_user));
-  ZOOM_options_set(d->conn_opt, "password",           toCString(m_password));
+  QByteArray ba = toByteArray(m_dbname);
+  ZOOM_options_set(d->conn_opt, "databaseName",       ba.constData());
+  ba = toByteArray(m_user);
+  ZOOM_options_set(d->conn_opt, "user",               ba.constData());
+  ba = toByteArray(m_password);
+  ZOOM_options_set(d->conn_opt, "password",           ba.constData());
 
   d->conn = ZOOM_connection_create(d->conn_opt);
   ZOOM_connection_connect(d->conn, m_host.toLatin1().constData(), m_port);
@@ -442,13 +446,13 @@ void Z3950Connection::checkPendingEvents() {
 }
 
 inline
-const char* Z3950Connection::toCString(const QString& text_) {
-  return iconvRun(text_.toUtf8(), QLatin1String("utf-8"), m_sourceCharSet).constData();
+QByteArray Z3950Connection::toByteArray(const QString& text_) {
+  return iconvRun(text_.toUtf8(), QStringLiteral("utf-8"), m_sourceCharSet);
 }
 
 inline
 QString Z3950Connection::toString(const QByteArray& text_) {
-  return QString::fromUtf8(iconvRun(text_, m_sourceCharSet, QLatin1String("utf-8")));
+  return QString::fromUtf8(iconvRun(text_, m_sourceCharSet, QStringLiteral("utf-8")));
 }
 
 // static
@@ -468,9 +472,9 @@ QByteArray Z3950Connection::iconvRun(const QByteArray& text_, const QString& fro
     QString charSetLower = fromCharSet_.toLower();
     charSetLower.remove(QLatin1Char('-')).remove(QLatin1Char(' '));
     if(charSetLower == QLatin1String("iso5426")) {
-      return iconvRun(Iso5426Converter::toUtf8(text_).toUtf8().constData(), QLatin1String("utf-8"), toCharSet_);
+      return iconvRun(Iso5426Converter::toUtf8(text_).toUtf8().constData(), QStringLiteral("utf-8"), toCharSet_);
     } else if(charSetLower == QLatin1String("iso6937")) {
-      return iconvRun(Iso6937Converter::toUtf8(text_).toUtf8().constData(), QLatin1String("utf-8"), toCharSet_);
+      return iconvRun(Iso6937Converter::toUtf8(text_).toUtf8().constData(), QStringLiteral("utf-8"), toCharSet_);
     }
     myWarning() << "conversion from" << fromCharSet_
                 << "to" << toCharSet_ << "is unsupported";
@@ -521,9 +525,9 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
     QString charSetLower = charSet_.toLower();
     charSetLower.remove(QLatin1Char('-')).remove(QLatin1Char(' '));
     if(charSetLower == QLatin1String("iso5426")) {
-      return toXML(Iso5426Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
+      return toXML(Iso5426Converter::toUtf8(marc_).toUtf8(), QStringLiteral("utf-8"));
     } else if(charSetLower == QLatin1String("iso6937")) {
-      return toXML(Iso6937Converter::toUtf8(marc_).toUtf8(), QLatin1String("utf-8"));
+      return toXML(Iso6937Converter::toUtf8(marc_).toUtf8(), QStringLiteral("utf-8"));
     }
     myWarning() << "conversion from" << charSet_ << "is unsupported";
     return QString();
@@ -558,7 +562,7 @@ QString Z3950Connection::toXML(const QByteArray& marc_, const QString& charSet_)
     return QString();
   }
 
-  QString output = QLatin1String("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+  QString output = QStringLiteral("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
   output += QString::fromUtf8(result, len+1);
 //  myDebug() << QCString(result);
 //  myDebug() << "-------------------------------------------";

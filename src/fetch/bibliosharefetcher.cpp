@@ -49,7 +49,7 @@ BiblioShareFetcher::BiblioShareFetcher(QObject* parent_)
     : XMLFetcher(parent_)
     , m_token(QLatin1String(BIBLIOSHARE_TOKEN)) {
   setLimit(1);
-  setXSLTFilename(QLatin1String("biblioshare2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("biblioshare2tellico.xsl"));
 }
 
 BiblioShareFetcher::~BiblioShareFetcher() {
@@ -75,7 +75,7 @@ QUrl BiblioShareFetcher::searchUrl() {
   u.setPath(u.path() + QLatin1String("BiblioSimple"));
 
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("Token"), m_token);
+  q.addQueryItem(QStringLiteral("Token"), m_token);
 
   switch(request().key) {
     case ISBN:
@@ -84,7 +84,7 @@ QUrl BiblioShareFetcher::searchUrl() {
         QString v = request().value.section(QLatin1Char(';'), 0);
         v = ISBNValidator::isbn13(v);
         v.remove(QLatin1Char('-'));
-        q.addQueryItem(QLatin1String("EAN"), v);
+        q.addQueryItem(QStringLiteral("EAN"), v);
       }
       break;
 
@@ -105,8 +105,8 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
   }
 
   // if the entry cover is not set, go ahead and try to fetch it
-  if(entry_->field(QLatin1String("cover")).isEmpty()) {
-    QString isbn = ISBNValidator::cleanValue(entry_->field(QLatin1String("isbn")));
+  if(entry_->field(QStringLiteral("cover")).isEmpty()) {
+    QString isbn = ISBNValidator::cleanValue(entry_->field(QStringLiteral("isbn")));
     if(!isbn.isEmpty()) {
       isbn = ISBNValidator::isbn13(isbn);
       isbn.remove(QLatin1Char('-'));
@@ -114,11 +114,11 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
       QUrl imageUrl(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
       imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
       QUrlQuery q;
-      q.addQueryItem(QLatin1String("Token"), m_token);
+      q.addQueryItem(QStringLiteral("Token"), m_token);
       // QUrl does not had the "=" for empty SAN and Thumbnail query items
-      q.addQueryItem(QLatin1String("SAN"), QLatin1String(" "));
-      q.addQueryItem(QLatin1String("Thumbnail"), QLatin1String(" "));
-      q.addQueryItem(QLatin1String("EAN"), isbn);
+      q.addQueryItem(QStringLiteral("SAN"), QStringLiteral(" "));
+      q.addQueryItem(QStringLiteral("Thumbnail"), QStringLiteral(" "));
+      q.addQueryItem(QStringLiteral("EAN"), isbn);
       imageUrl.setQuery(q);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
@@ -126,7 +126,7 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
         Data::ImageInfo info = ImageFactory::imageInfo(id);
         if((info.width() != 120 || info.height() != 120) &&
            (info.width() != 1 || info.height() != 1)) {
-          entry_->setField(QLatin1String("cover"), id);
+          entry_->setField(QStringLiteral("cover"), id);
         }
       }
     }
@@ -136,7 +136,7 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
 }
 
 Tellico::Fetch::FetchRequest BiblioShareFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString isbn = entry_->field(QLatin1String("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(Fetch::ISBN, isbn);
   }
@@ -149,7 +149,7 @@ Tellico::Fetch::ConfigWidget* BiblioShareFetcher::configWidget(QWidget* parent_)
 }
 
 QString BiblioShareFetcher::defaultName() {
-  return QLatin1String("BiblioShare");
+  return QStringLiteral("BiblioShare");
 }
 
 QString BiblioShareFetcher::defaultIcon() {

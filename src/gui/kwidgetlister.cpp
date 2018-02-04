@@ -62,13 +62,13 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
 
   mBtnMore = new QPushButton( mButtonBox );
   KGuiItem::assign( mBtnMore, KGuiItem( i18nc( "more widgets", "More" ),
-                                        QLatin1String("list-add") ) );
+                                        QStringLiteral("list-add") ) );
   mButtonBoxHBoxLayout->addWidget( mBtnMore );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnMore, 0 );
 
   mBtnFewer = new QPushButton( mButtonBox );
   KGuiItem::assign( mBtnFewer, KGuiItem( i18nc( "fewer widgets", "Fewer" ),
-                                         QLatin1String("list-remove") ) );
+                                         QStringLiteral("list-remove") ) );
   mButtonBoxHBoxLayout->addWidget( mBtnFewer );
   mButtonBoxHBoxLayout->setStretchFactor( mBtnFewer, 0 );
 

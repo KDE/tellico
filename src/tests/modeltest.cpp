@@ -406,7 +406,7 @@ void ModelTest::data()
     QVERIFY( model->index ( 0, 0 ).isValid() );
 
     // shouldn't be able to set data on an invalid index
-    QVERIFY( !model->setData ( QModelIndex(), QLatin1String ( "foo" ), Qt::DisplayRole ) );
+    QVERIFY( !model->setData ( QModelIndex(), QStringLiteral ( "foo" ), Qt::DisplayRole ) );
 
     // General Purpose roles that should return a QString
     QVariant variant = model->data ( model->index ( 0, 0 ), Qt::ToolTipRole );

@@ -41,7 +41,7 @@ using Tellico::EntryModel;
 
 EntryModel::EntryModel(QObject* parent) : QAbstractItemModel(parent),
     m_imagesAreAvailable(false) {
-  m_checkPix = QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
+  m_checkPix = QIcon::fromTheme(QStringLiteral("checkmark"), QIcon(QLatin1String(":/icons/checkmark")));
   connect(ImageFactory::self(), &ImageFactory::imageAvailable, this, &EntryModel::refreshImage);
 }
 

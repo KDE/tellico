@@ -51,7 +51,7 @@ void TellicoModelTest::initTestCase() {
 void TellicoModelTest::testEntryModel() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Star Wars"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Star Wars"));
   coll->addEntries(entry1);
 
   Tellico::EntryModel entryModel(this);
@@ -70,7 +70,7 @@ void TellicoModelTest::testEntryModel() {
   entryModel.setEntries(coll->entries());
   QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
 
-  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test")));
   coll->addField(field1);
   entryModel.setFields(coll->fields());
 
@@ -78,7 +78,7 @@ void TellicoModelTest::testEntryModel() {
   coll->addEntries(entry2);
   entryModel.addEntries(Tellico::Data::EntryList() << entry2);
 
-  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QLatin1String("test2"), QLatin1String("test2")));
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QStringLiteral("test2"), QStringLiteral("test2")));
   coll->addField(field2);
   entryModel.addFields(Tellico::Data::FieldList() << field2);
 
@@ -91,8 +91,8 @@ void TellicoModelTest::testEntryModel() {
   QCOMPARE(entryModel.headerData(entryModel.columnCount()-1, Qt::Horizontal, Tellico::FieldPtrRole),
            QVariant::fromValue(field2));
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QLatin1String("title"),
-                                                       QLatin1String("Star Wars"),
+  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
+                                                       QStringLiteral("Star Wars"),
                                                        Tellico::FilterRule::FuncEquals);
   Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
   filter->append(rule1);
@@ -104,7 +104,7 @@ void TellicoModelTest::testEntryModel() {
   entryModel.setEntries(coll->entries());
   QCOMPARE(entryModel.index(0, 0), entryModel.indexFromEntry(entry1));
 
-  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test-new")));
+  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test-new")));
   coll->modifyField(field3);
   QCOMPARE(coll->fields().count(), entryModel.columnCount(QModelIndex()));
   entryModel.modifyField(field2, field3);
@@ -128,8 +128,8 @@ void TellicoModelTest::testFilterModel() {
   Tellico::FilterModel filterModel(this);
   ModelTest test1(&filterModel);
 
-  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QLatin1String("title"),
-                                                       QLatin1String("Star Wars"),
+  Tellico::FilterRule* rule1 = new Tellico::FilterRule(QStringLiteral("title"),
+                                                       QStringLiteral("Star Wars"),
                                                        Tellico::FilterRule::FuncEquals);
   Tellico::FilterPtr filter(new Tellico::Filter(Tellico::Filter::MatchAny));
   filter->append(rule1);
@@ -137,7 +137,7 @@ void TellicoModelTest::testFilterModel() {
 
   Tellico::Data::CollPtr c = Tellico::Data::Document::self()->collection();
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(c));
-  entry1->setField(QLatin1String("title"), QLatin1String("Star Wars"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Star Wars"));
   c->addEntries(entry1);
 
   filterModel.clear();
@@ -153,8 +153,8 @@ void TellicoModelTest::testFilterModel() {
 void TellicoModelTest::testGroupModel() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true)); // add default fields
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Star Wars"));
-  entry1->setField(QLatin1String("author"), QLatin1String("George Lucas"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Star Wars"));
+  entry1->setField(QStringLiteral("author"), QStringLiteral("George Lucas"));
   coll->addEntries(entry1);
 
   Tellico::EntryGroupModel groupModel(this);
@@ -165,7 +165,7 @@ void TellicoModelTest::testGroupModel() {
 
   sortModel.setSourceModel(&groupModel);
 
-  Tellico::Data::EntryGroupDict* dict = coll->entryGroupDictByName(QLatin1String("author"));
+  Tellico::Data::EntryGroupDict* dict = coll->entryGroupDictByName(QStringLiteral("author"));
   groupModel.addGroups(dict->values(), QString());
   QCOMPARE(sortModel.rowCount(), 1);
 
@@ -173,8 +173,8 @@ void TellicoModelTest::testGroupModel() {
     QVERIFY(gIt.isValid());
     Tellico::Data::EntryGroup* group = gIt.group();
     QVERIFY(group);
-    QCOMPARE(group->groupName(), QLatin1String("Lucas, George"));
-    QCOMPARE(group->fieldName(), QLatin1String("author"));
+    QCOMPARE(group->groupName(), QStringLiteral("Lucas, George"));
+    QCOMPARE(group->fieldName(), QStringLiteral("author"));
     QCOMPARE(group->size(), 1);
     QVERIFY(!group->hasEmptyGroupName());
   }

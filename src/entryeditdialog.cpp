@@ -102,7 +102,7 @@ void EntryEditDialog::reject() {
 }
 
 void EntryEditDialog::slotHelp() {
-  KHelpClient::invokeHelp(QLatin1String("entry-editor"));
+  KHelpClient::invokeHelp(QStringLiteral("entry-editor"));
 }
 
 void EntryEditDialog::slotClose() {
@@ -320,7 +320,7 @@ void EntryEditDialog::slotHandleSave() {
       names += entry->title();
     }
     QString str(i18n("Do you really want to modify these entries?"));
-    QString dontAsk = QLatin1String("SaveMultipleBooks"); // don't change 'books', invisible anyway
+    QString dontAsk = QStringLiteral("SaveMultipleBooks"); // don't change 'books', invisible anyway
     int ret = KMessageBox::questionYesNoList(this, str, names, i18n("Modify Multiple Entries"),
                                              KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {
@@ -351,7 +351,7 @@ void EntryEditDialog::slotHandleSave() {
         }
         entry->setField(field, temp);
         if(temp.isEmpty()) {
-          const QString prop = field->property(QLatin1String("required")).toLower();
+          const QString prop = field->property(QStringLiteral("required")).toLower();
           if(prop == QLatin1String("1") || prop == QLatin1String("true")) {
             fieldsRequiringValues.append(field);
           }
@@ -367,7 +367,7 @@ void EntryEditDialog::slotHandleSave() {
     foreach(Data::FieldPtr it, fieldsRequiringValues) {
       titles << it->title();
     }
-    QString dontAsk = QLatin1String("SaveWithoutRequired");
+    QString dontAsk = QStringLiteral("SaveWithoutRequired");
     int ret = KMessageBox::questionYesNoList(this, str, titles, i18n("Modify Entries"),
                                              KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
     if(ret != KMessageBox::Yes) {

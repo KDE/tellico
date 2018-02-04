@@ -56,9 +56,9 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-  void tableContextMenu(const QPoint& point);
-  void horizontalHeaderContextMenu(const QPoint& point);
-  void verticalHeaderContextMenu(const QPoint& point);
+  void tableContextMenu(QPoint point);
+  void horizontalHeaderContextMenu(QPoint point);
+  void verticalHeaderContextMenu(QPoint point);
   void slotCheckRows(int row, int col);
   void slotResizeColumn(QTableWidgetItem* item);
   void slotRenameColumn();
@@ -69,7 +69,7 @@ private Q_SLOTS:
   void slotClear();
 
 private:
-  void makeRowContextMenu(const QPoint& point);
+  void makeRowContextMenu(QPoint point);
   bool emptyRow(int row) const;
   void labelColumns(Data::FieldPtr field);
 

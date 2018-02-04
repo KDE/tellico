@@ -91,7 +91,7 @@ void ImageJob::slotStart() {
     KIO::StoredTransferJob* getJob = KIO::storedGet(m_url, KIO::NoReload, flags);
     QObject::connect(getJob, &KJob::result, this, &ImageJob::getJobResult);
     if(!m_referrer.isEmpty()) {
-      getJob->addMetaData(QLatin1String("referrer"), m_referrer.url());
+      getJob->addMetaData(QStringLiteral("referrer"), m_referrer.url());
     }
     addSubjob(getJob);
     // don't emit result, it will be taken care of by the subjob handling

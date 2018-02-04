@@ -34,8 +34,8 @@
 QTEST_GUILESS_MAIN( FormatTest )
 
 void FormatTest::initTestCase() {
-  Tellico::Config::setArticlesString(QString("the,l'"));
-  Tellico::Config::setNoCapitalizationString(QString("the,of,et,de"));
+  Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
+  Tellico::Config::setNoCapitalizationString(QStringLiteral("the,of,et,de"));
 }
 
 void FormatTest::testCapitalization() {
@@ -135,7 +135,7 @@ void FormatTest::testName_data() {
 }
 
 void FormatTest::testSplit() {
-  QStringList list = QStringList() << "one" << "two" << "three";
+  QStringList list = QStringList() << QStringLiteral("one") << QStringLiteral("two") << QStringLiteral("three");
   QCOMPARE(Tellico::FieldFormat::splitValue(list.join(Tellico::FieldFormat::delimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);

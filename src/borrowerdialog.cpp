@@ -63,7 +63,7 @@ BorrowerDialog::Item::Item(QTreeWidget* parent_, const KContacts::Addressee& add
 BorrowerDialog::Item::Item(QTreeWidget* parent_, const Tellico::Data::Borrower& bor_)
     : QTreeWidgetItem(parent_), m_uid(bor_.uid()) {
   setData(0, Qt::DisplayRole, bor_.name());
-  setData(0, Qt::DecorationRole, QIcon::fromTheme(QLatin1String("tellico"),
+  setData(0, Qt::DecorationRole, QIcon::fromTheme(QStringLiteral("tellico"),
                                                   QIcon(QLatin1String(":/icons/tellico"))));
 }
 

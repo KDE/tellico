@@ -32,6 +32,8 @@ namespace Tellico {
 namespace GUI {
 
 class CollectionTypeCombo : public ComboBox {
+Q_OBJECT
+
 public:
   CollectionTypeCombo(QWidget* parent);
   void reset();

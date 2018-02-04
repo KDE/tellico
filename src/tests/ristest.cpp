@@ -48,17 +48,17 @@ void RisTest::testImport() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
+  QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2002"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("1057-1119"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("Koglin,M."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("Koglin,M."));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QLatin1String("entry-type"));
+  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QStringLiteral("entry-type"));
 }

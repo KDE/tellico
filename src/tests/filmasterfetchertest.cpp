@@ -42,16 +42,16 @@ FilmasterFetcherTest::FilmasterFetcherTest() : AbstractFetcherTest() {
 void FilmasterFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("The Man from Snowy River"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("1982"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("western; romans; familijny; dramat"));
-  m_fieldValues.insert(QLatin1String("director"), QLatin1String("George Miller"));
-//  m_fieldValues.insert(QLatin1String("nationality"), QLatin1String("Australia"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("The Man from Snowy River"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1982"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("western; romans; familijny; dramat"));
+  m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("George Miller"));
+//  m_fieldValues.insert(QStringLiteral("nationality"), QStringLiteral("Australia"));
 }
 
 void FilmasterFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QLatin1String("Man From Snowy River"));
+                                       QStringLiteral("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FilmasterFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
@@ -67,18 +67,18 @@ void FilmasterFetcherTest::testTitle() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
 // 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-//  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
-//  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void FilmasterFetcherTest::testPerson() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Person,
-                                       QLatin1String("Tom Burlinson"));
+                                       QStringLiteral("Tom Burlinson"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FilmasterFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -87,7 +87,7 @@ void FilmasterFetcherTest::testPerson() {
   Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until wee find the one we want
   for(int i = 0; i < results.size(); ++i) {
     Tellico::Data::EntryPtr test = results.at(i);
-    if(test->field(QLatin1String("title")).toLower() == QLatin1String("the man from snowy river")) {
+    if(test->field(QStringLiteral("title")).toLower() == QStringLiteral("the man from snowy river")) {
       entry = test;
       break;
     } else {
@@ -102,18 +102,18 @@ void FilmasterFetcherTest::testPerson() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
 // 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-//  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
-//  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void FilmasterFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
-                                       QLatin1String("Man From Snowy River"));
+                                       QStringLiteral("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::FilmasterFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
@@ -129,11 +129,11 @@ void FilmasterFetcherTest::testKeyword() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
+  QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
 // 2017-10-01: cover link is now invalid
-//  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
- // QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+//  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+ // QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 //   2017-05-01: plot is no longer being returned
-//  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+//  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }

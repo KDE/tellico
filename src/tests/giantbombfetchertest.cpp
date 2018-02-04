@@ -52,14 +52,14 @@ void GiantBombFetcherTest::initTestCase() {
 
 void GiantBombFetcherTest::testKeyword() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("giantbomb");
+  QString groupName = QStringLiteral("giantbomb");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Halo 3: ODST"));
+                                       QStringLiteral("Halo 3: ODST"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GiantBombFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,13 +68,13 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Halo 3: ODST"));
-  QCOMPARE(entry->field(QLatin1String("developer")), QLatin1String("Bungie"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2009"));
-  QCOMPARE(entry->field(QLatin1String("platform")), QLatin1String("Xbox 360"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Action; First-Person Shooter"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Microsoft Studios"));
-  QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("Mature"));
-  QCOMPARE(entry->field(QLatin1String("giantbomb")), QLatin1String("https://www.giantbomb.com/halo-3-odst/3030-24035/"));
-  QCOMPARE(entry->field(QLatin1String("pegi")), QLatin1String("PEGI 16"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Halo 3: ODST"));
+  QCOMPARE(entry->field(QStringLiteral("developer")), QStringLiteral("Bungie"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2009"));
+  QCOMPARE(entry->field(QStringLiteral("platform")), QStringLiteral("Xbox 360"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; First-Person Shooter"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Microsoft Studios"));
+  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("Mature"));
+  QCOMPARE(entry->field(QStringLiteral("giantbomb")), QStringLiteral("https://www.giantbomb.com/halo-3-odst/3030-24035/"));
+  QCOMPARE(entry->field(QStringLiteral("pegi")), QStringLiteral("PEGI 16"));
 }

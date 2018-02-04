@@ -281,7 +281,7 @@ bool Kernel::removeFilter(Tellico::FilterPtr filter_) {
   }
 
   QString str = i18n("Do you really want to delete this filter?");
-  QString dontAsk = QLatin1String("DeleteFilter");
+  QString dontAsk = QStringLiteral("DeleteFilter");
   int ret = KMessageBox::questionYesNo(m_widget, str, i18n("Delete Filter?"),
                                        KStandardGuiItem::yes(), KStandardGuiItem::no(), dontAsk);
   if(ret != KMessageBox::Yes) {
@@ -331,8 +331,8 @@ void Kernel::doCommand(QUndoCommand* command_) {
 
 int Kernel::askAndMerge(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_, Tellico::Data::FieldPtr field_,
                         QString value1_, QString value2_) {
-  QString title1 = entry1_->field(QLatin1String("title"));
-  QString title2 = entry2_->field(QLatin1String("title"));
+  QString title1 = entry1_->field(QStringLiteral("title"));
+  QString title2 = entry2_->field(QStringLiteral("title"));
   if(title1 == title2) {
     title1 = i18n("Entry 1");
     title2 = i18n("Entry 2");

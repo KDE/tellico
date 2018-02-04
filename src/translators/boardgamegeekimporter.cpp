@@ -55,14 +55,14 @@ using Tellico::Import::BoardGameGeekImporter;
 
 BoardGameGeekImporter::BoardGameGeekImporter() : Import::Importer(), m_cancelled(false), m_widget(nullptr)
     , m_userEdit(nullptr), m_checkOwned(nullptr) {
-  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("boardgamegeek2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("boardgamegeek2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     m_xsltURL = QUrl::fromLocalFile(xsltFile);
   } else {
     myWarning() << "unable to find boardgamegeek2tellico.xsl!";
   }
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - BoardGameGeek"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - BoardGameGeek"));
   m_user = config.readEntry("User ID");
   m_ownedOnly = config.readEntry("Owned", false);
 }
@@ -103,11 +103,11 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   // first get the bgg id list
   QUrl u(QString::fromLatin1(BGG_COLLECTION_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("username"), m_user);
-  q.addQueryItem(QLatin1String("subtype"), QLatin1String("boardgame"));
-  q.addQueryItem(QLatin1String("brief"), QLatin1String("1"));
+  q.addQueryItem(QStringLiteral("username"), m_user);
+  q.addQueryItem(QStringLiteral("subtype"), QStringLiteral("boardgame"));
+  q.addQueryItem(QStringLiteral("brief"), QStringLiteral("1"));
   if(m_ownedOnly) {
-    q.addQueryItem(QLatin1String("own"), QLatin1String("1"));
+    q.addQueryItem(QStringLiteral("own"), QStringLiteral("1"));
   }
   u.setQuery(q);
 
@@ -127,12 +127,12 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     ++loopCount;
   }
 
-  QDomNodeList items = dom.documentElement().elementsByTagName(QLatin1String("item"));
+  QDomNodeList items = dom.documentElement().elementsByTagName(QStringLiteral("item"));
   for(int i = 0; i < items.count(); ++i) {
     if(!items.at(i).isElement()) {
       continue;
     }
-    const QString id = items.at(i).toElement().attribute(QLatin1String("objectid"));
+    const QString id = items.at(i).toElement().attribute(QStringLiteral("objectid"));
     if(!id.isEmpty()) {
       idList += id;
     }
@@ -179,10 +179,10 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
     Data::CollPtr c = imp.collection();
     // assume we always want the 3 extra fields defined in boardgamegeek2tellico.xsl
-    if(!m_coll->hasField(QLatin1String("bggid"))) {
-      m_coll->addField(Data::FieldPtr(new Data::Field(*c->fieldByName(QLatin1String("bggid")))));
-      m_coll->addField(Data::FieldPtr(new Data::Field(*c->fieldByName(QLatin1String("boardgamegeek-link")))));
-      Data::FieldPtr f(new Data::Field(*c->fieldByName(QLatin1String("artist"))));
+    if(!m_coll->hasField(QStringLiteral("bggid"))) {
+      m_coll->addField(Data::FieldPtr(new Data::Field(*c->fieldByName(QStringLiteral("bggid")))));
+      m_coll->addField(Data::FieldPtr(new Data::Field(*c->fieldByName(QStringLiteral("boardgamegeek-link")))));
+      Data::FieldPtr f(new Data::Field(*c->fieldByName(QStringLiteral("artist"))));
       // also, let's assume that the artist field title should be illustrator instead of musician
       f->setTitle(i18nc("Comic Book Illustrator", "Artist"));
       m_coll->addField(f);
@@ -196,7 +196,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     }
   }
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - BoardGameGeek"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - BoardGameGeek"));
   config.writeEntry("User ID", m_user);
   config.writeEntry("Owned", m_ownedOnly);
 
@@ -235,8 +235,8 @@ QString BoardGameGeekImporter::text(const QStringList& idList_) const {
 //  myDebug() << idList_;
   QUrl u(QString::fromLatin1(BGG_THING_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("id"), idList_.join(QLatin1String(",")));
-  q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  q.addQueryItem(QStringLiteral("id"), idList_.join(QLatin1String(",")));
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("boardgame,boardgameexpansion"));
   u.setQuery(q);
 //  myDebug() << u;
   return FileHandler::readTextFile(u, true, true);

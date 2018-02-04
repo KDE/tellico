@@ -83,7 +83,7 @@ void ImageFactory::init() {
   factory = new ImageFactory();
   factory->d->imageCache.setMaxCost(Config::imageCacheSize());
   factory->d->pixmapCache.setMaxCost(Config::imageCacheSize());
-  factory->d->dataImageDir.setPath(Tellico::saveLocation(QLatin1String("data/")));
+  factory->d->dataImageDir.setPath(Tellico::saveLocation(QStringLiteral("data/")));
 }
 
 Tellico::ImageFactory* ImageFactory::self() {
@@ -598,7 +598,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                           ? opt_.highlightedBaseColor
                           : Config::templateHighlightedBaseColor(collectionType_);
 
-  const QString bgname = QLatin1String("gradient_bg.png");
+  const QString bgname(QStringLiteral("gradient_bg.png"));
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
 #ifdef HAVE_QIMAGEBLITZ
   QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
@@ -609,7 +609,7 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
 #endif
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
-  const QString hdrname = QLatin1String("gradient_header.png");
+  const QString hdrname(QStringLiteral("gradient_header.png"));
 #ifdef HAVE_QIMAGEBLITZ
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
   QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
@@ -623,12 +623,12 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
     // write the style images both to the tmp dir and the cache dir
     // doesn't really hurt and lets the user switch back and forth
     ImageFactory::removeImage(bgname, true /*delete */);
-    factory->addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QLatin1String("PNG"), bgname);
+    factory->addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QStringLiteral("PNG"), bgname);
     ImageFactory::writeCachedImage(bgname, cacheDir(), true /*force*/);
     ImageFactory::writeCachedImage(bgname, TempDir, true /*force*/);
 
     ImageFactory::removeImage(hdrname, true /*delete */);
-    factory->addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QLatin1String("PNG"), hdrname);
+    factory->addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QStringLiteral("PNG"), hdrname);
     ImageFactory::writeCachedImage(hdrname, cacheDir(), true /*force*/);
     ImageFactory::writeCachedImage(hdrname, TempDir, true /*force*/);
   } else {

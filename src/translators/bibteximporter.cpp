@@ -187,11 +187,11 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
     str = QString::fromUtf8(bt_entry_type(node));
 //    myDebug() << "entry type: " << str;
     // text is automatically put into lower-case by btparse
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("entry-type"), str, currentColl);
+    Data::BibtexCollection::setFieldValue(entry, QStringLiteral("entry-type"), str, currentColl);
 
     str = QString::fromUtf8(bt_entry_key(node));
 //    myDebug() << "entry key: " << str;
-    Data::BibtexCollection::setFieldValue(entry, QLatin1String("key"), str, currentColl);
+    Data::BibtexCollection::setFieldValue(entry, QStringLiteral("key"), str, currentColl);
 
     char* name;
     AST* field = nullptr;

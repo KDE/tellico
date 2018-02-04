@@ -164,7 +164,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   Kernel::init(this); // the only time this is ever called!
   GUI::Proxy::setMainWidget(this);
 
-  setWindowIcon(QIcon::fromTheme(QLatin1String("tellico"),
+  setWindowIcon(QIcon::fromTheme(QStringLiteral("tellico"),
                                  QIcon(QLatin1String(":/icons/tellico"))));
 
   // initialize the status bar and progress bar
@@ -242,18 +242,18 @@ void MainWindow::initActions() {
           this, SLOT(slotFileNew(int)));
 
   KActionMenu* fileNewMenu = new KActionMenu(i18n("New"), this);
-  fileNewMenu->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+  fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
   fileNewMenu->setDelayed(false);
-  actionCollection()->addAction(QLatin1String("file_new_collection"), fileNewMenu);
+  actionCollection()->addAction(QStringLiteral("file_new_collection"), fileNewMenu);
 
   QAction* action;
 
 #define COLL_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QLatin1String(NAME), collectionMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), collectionMapper, SLOT(map())); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
-  action->setIcon(QIcon(QLatin1String(":/icons/" ICON))); \
+  action->setIcon(QIcon(QStringLiteral(":/icons/" ICON))); \
   fileNewMenu->addAction(action); \
   collectionMapper->setMapping(action, Data::Collection::TYPE);
 
@@ -293,10 +293,10 @@ void MainWindow::initActions() {
   COLL_ACTION(File, "new_file_catalog", i18n("New &File Catalog"),
               i18n("Create a new file catalog"), "file");
 
-  action = actionCollection()->addAction(QLatin1String("new_custom_collection"), collectionMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("new_custom_collection"), collectionMapper, SLOT(map()));
   action->setText(i18n("New C&ustom Collection"));
   action->setToolTip(i18n("Create a new custom collection"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   fileNewMenu->addAction(action);
   collectionMapper->setMapping(action, Data::Collection::Base);
 
@@ -337,13 +337,13 @@ void MainWindow::initActions() {
           this, SLOT(slotFileImport(int)));
 
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
-  importMenu->setIcon(QIcon::fromTheme(QLatin1String("document-import")));
+  importMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
   importMenu->setToolTip(i18n("Import the collection data from other formats"));
   importMenu->setDelayed(false);
-  actionCollection()->addAction(QLatin1String("file_import"), importMenu);
+  actionCollection()->addAction(QStringLiteral("file_import"), importMenu);
 
 #define IMPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QLatin1String(NAME), importMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), importMapper, SLOT(map())); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(ICON); \
@@ -352,7 +352,7 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::TellicoXML, "file_import_tellico", i18n("Import Tellico Data..."),
                 i18n("Import another Tellico data file"),
-                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
+                QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
 
   IMPORT_ACTION(Import::CSV, "file_import_csv", i18n("Import CSV Data..."),
                 i18n("Import a CSV file"), mimeIcon("text/csv", "text/x-csv"));
@@ -362,15 +362,15 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::Alexandria, "file_import_alexandria", i18n("Import Alexandria Data..."),
                 i18n("Import data from the Alexandria book collection manager"),
-                QIcon::fromTheme(QLatin1String("alexandria"), QIcon(QLatin1String(":/icons/alexandria"))));
+                QIcon::fromTheme(QStringLiteral("alexandria"), QIcon(QLatin1String(":/icons/alexandria"))));
 
   IMPORT_ACTION(Import::Delicious, "file_import_delicious", i18n("Import Delicious Library Data..."),
                 i18n("Import data from Delicious Library"),
-                QIcon::fromTheme(QLatin1String("deliciouslibrary"), QIcon(QLatin1String(":/icons/deliciouslibrary"))));
+                QIcon::fromTheme(QStringLiteral("deliciouslibrary"), QIcon(QLatin1String(":/icons/deliciouslibrary"))));
 
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
                 i18n("Import data from Referencer"),
-                QIcon::fromTheme(QLatin1String("referencer"), QIcon(QLatin1String(":/icons/referencer"))));
+                QIcon::fromTheme(QStringLiteral("referencer"), QIcon(QLatin1String(":/icons/referencer"))));
 
   IMPORT_ACTION(Import::Bibtex, "file_import_bibtex", i18n("Import Bibtex Data..."),
                 i18n("Import a bibtex bibliography file"), mimeIcon("text/x-bibtex"));
@@ -379,10 +379,10 @@ void MainWindow::initActions() {
                 i18n("Import a Bibtexml bibliography file"), mimeIcon("text/xml"));
 
   IMPORT_ACTION(Import::RIS, "file_import_ris", i18n("Import RIS Data..."),
-                i18n("Import an RIS reference file"), QIcon::fromTheme(QLatin1String(":/icons/cite")));
+                i18n("Import an RIS reference file"), QIcon::fromTheme(QStringLiteral(":/icons/cite")));
 
   IMPORT_ACTION(Import::Goodreads, "file_import_goodreads", i18n("Import Goodreads Collection..."),
-                i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QLatin1String(":/icons/goodreads")));
+                i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QStringLiteral(":/icons/goodreads")));
 
   IMPORT_ACTION(Import::PDF, "file_import_pdf", i18n("Import PDF File..."),
                 i18n("Import a PDF file"), mimeIcon("application/pdf"));
@@ -401,15 +401,15 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::GCstar, "file_import_gcstar", i18n("Import GCstar Data..."),
                 i18n("Import a GCstar data file"),
-                QIcon::fromTheme(QLatin1String("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));
+                QIcon::fromTheme(QStringLiteral("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));
 
   IMPORT_ACTION(Import::Griffith, "file_import_griffith", i18n("Import Griffith Data..."),
                 i18n("Import a Griffith database"),
-                QIcon::fromTheme(QLatin1String("griffith"), QIcon(QLatin1String(":/icons/griffith"))));
+                QIcon::fromTheme(QStringLiteral("griffith"), QIcon(QLatin1String(":/icons/griffith"))));
 
   IMPORT_ACTION(Import::AMC, "file_import_amc", i18n("Import Ant Movie Catalog Data..."),
                 i18n("Import an Ant Movie Catalog data file"),
-                QIcon::fromTheme(QLatin1String("amc"), QIcon(QLatin1String(":/icons/amc"))));
+                QIcon::fromTheme(QStringLiteral("amc"), QIcon(QLatin1String(":/icons/amc"))));
 
   IMPORT_ACTION(Import::BoardGameGeek, "file_import_boardgamegeek", i18n("Import BoardGameGeek Collection..."),
                 i18n("Import a collection from BoardGameGeek.com"), QIcon(QLatin1String(":/icons/boardgamegeek")));
@@ -432,13 +432,13 @@ void MainWindow::initActions() {
           this, SLOT(slotFileExport(int)));
 
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
-  exportMenu->setIcon(QIcon::fromTheme(QLatin1String("document-export")));
+  exportMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   exportMenu->setToolTip(i18n("Export the collection data to other formats"));
   exportMenu->setDelayed(false);
-  actionCollection()->addAction(QLatin1String("file_export"), exportMenu);
+  actionCollection()->addAction(QStringLiteral("file_export"), exportMenu);
 
 #define EXPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QLatin1String(NAME), exportMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), exportMapper, SLOT(map())); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(ICON); \
@@ -447,11 +447,11 @@ void MainWindow::initActions() {
 
   EXPORT_ACTION(Export::TellicoXML, "file_export_xml", i18n("Export to XML..."),
                 i18n("Export to a Tellico XML file"),
-                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
+                QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QStringLiteral(":/icons/tellico"))));
 
   EXPORT_ACTION(Export::TellicoZip, "file_export_zip", i18n("Export to Zip..."),
                 i18n("Export to a Tellico Zip file"),
-                QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
+                QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QStringLiteral(":/icons/tellico"))));
 
   EXPORT_ACTION(Export::HTML, "file_export_html", i18n("Export to HTML..."),
                 i18n("Export to an HTML file"), mimeIcon("text/html"));
@@ -461,7 +461,7 @@ void MainWindow::initActions() {
 
   EXPORT_ACTION(Export::Alexandria, "file_export_alexandria", i18n("Export to Alexandria..."),
                 i18n("Export to an Alexandria library"),
-                QIcon::fromTheme(QLatin1String("alexandria"), QIcon(QLatin1String(":/icons/alexandria"))));
+                QIcon::fromTheme(QStringLiteral("alexandria"), QIcon(QStringLiteral(":/icons/alexandria"))));
 
   EXPORT_ACTION(Export::Bibtex, "file_export_bibtex", i18n("Export to Bibtex..."),
                 i18n("Export to a bibtex file"), mimeIcon("text/x-bibtex"));
@@ -474,7 +474,7 @@ void MainWindow::initActions() {
 
   EXPORT_ACTION(Export::GCstar, "file_export_gcstar", i18n("Export to GCstar..."),
                 i18n("Export to a GCstar data file"),
-                QIcon::fromTheme(QLatin1String("gcstar"), QIcon(QLatin1String(":/icons/gcstar"))));
+                QIcon::fromTheme(QStringLiteral("gcstar"), QIcon(QStringLiteral(":/icons/gcstar"))));
 
   EXPORT_ACTION(Export::XSLT, "file_export_xslt", i18n("Export XSL Transform..."),
                 i18n("Export using an XSL Transform"), mimeIcon("application/xslt+xml", "text/x-xslt"));
@@ -498,101 +498,101 @@ void MainWindow::initActions() {
   action = KStandardAction::deselect(this, SLOT(slotEditDeselect()), actionCollection());
   action->setToolTip(i18n("Deselect all the entries in the collection"));
 
-  action = actionCollection()->addAction(QLatin1String("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
+  action = actionCollection()->addAction(QStringLiteral("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
   action->setText(i18n("Internet Search..."));
   action->setIconText(i18n("Search"));  // find a better word for this?
-  action->setIcon(QIcon::fromTheme(QLatin1String("tools-wizard")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("tools-wizard")));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_I);
   action->setToolTip(i18n("Search the internet..."));
 
-  action = actionCollection()->addAction(QLatin1String("filter_dialog"), this, SLOT(slotShowFilterDialog()));
+  action = actionCollection()->addAction(QStringLiteral("filter_dialog"), this, SLOT(slotShowFilterDialog()));
   action->setText(i18n("Advanced &Filter..."));
   action->setIconText(i18n("Filter"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("view-filter")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("view-filter")));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_J);
   action->setToolTip(i18n("Filter the collection"));
 
   /*************************************************
    * Collection menu
    *************************************************/
-  m_newEntry = actionCollection()->addAction(QLatin1String("coll_new_entry"),
+  m_newEntry = actionCollection()->addAction(QStringLiteral("coll_new_entry"),
                                              this, SLOT(slotNewEntry()));
   m_newEntry->setText(i18n("&New Entry..."));
-  m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+  m_newEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   m_newEntry->setIconText(i18n("New"));
   actionCollection()->setDefaultShortcut(m_newEntry, Qt::CTRL + Qt::Key_N);
   m_newEntry->setToolTip(i18n("Create a new entry"));
 
-  m_editEntry = actionCollection()->addAction(QLatin1String("coll_edit_entry"),
+  m_editEntry = actionCollection()->addAction(QStringLiteral("coll_edit_entry"),
                                               this, SLOT(slotShowEntryEditor()));
   m_editEntry->setText(i18n("&Edit Entry..."));
-  m_editEntry->setIcon(QIcon::fromTheme(QLatin1String("document-properties")));
+  m_editEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-properties")));
   actionCollection()->setDefaultShortcut(m_editEntry, Qt::CTRL + Qt::Key_E);
   m_editEntry->setToolTip(i18n("Edit the selected entries"));
 
-  m_copyEntry = actionCollection()->addAction(QLatin1String("coll_copy_entry"),
+  m_copyEntry = actionCollection()->addAction(QStringLiteral("coll_copy_entry"),
                                               Controller::self(), SLOT(slotCopySelectedEntries()));
   m_copyEntry->setText(i18n("D&uplicate Entry"));
-  m_copyEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-copy")));
+  m_copyEntry->setIcon(QIcon::fromTheme(QStringLiteral("edit-copy")));
   actionCollection()->setDefaultShortcut(m_copyEntry, Qt::CTRL + Qt::Key_Y);
   m_copyEntry->setToolTip(i18n("Copy the selected entries"));
 
-  m_deleteEntry = actionCollection()->addAction(QLatin1String("coll_delete_entry"),
+  m_deleteEntry = actionCollection()->addAction(QStringLiteral("coll_delete_entry"),
                                                 Controller::self(), SLOT(slotDeleteSelectedEntries()));
   m_deleteEntry->setText(i18n("&Delete Entry"));
-  m_deleteEntry->setIcon(QIcon::fromTheme(QLatin1String("edit-delete")));
+  m_deleteEntry->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
   actionCollection()->setDefaultShortcut(m_deleteEntry, Qt::CTRL + Qt::Key_D);
   m_deleteEntry->setToolTip(i18n("Delete the selected entries"));
 
-  m_mergeEntry = actionCollection()->addAction(QLatin1String("coll_merge_entry"),
+  m_mergeEntry = actionCollection()->addAction(QStringLiteral("coll_merge_entry"),
                                                Controller::self(), SLOT(slotMergeSelectedEntries()));
   m_mergeEntry->setText(i18n("&Merge Entries"));
-  m_mergeEntry->setIcon(QIcon::fromTheme(QLatin1String("document-import")));
+  m_mergeEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
 //  CTRL+G is ambiguous, pick another
 //  actionCollection()->setDefaultShortcut(m_mergeEntry, Qt::CTRL + Qt::Key_G);
   m_mergeEntry->setToolTip(i18n("Merge the selected entries"));
   m_mergeEntry->setEnabled(false); // gets enabled when more than 1 entry is selected
 
-  m_checkOutEntry = actionCollection()->addAction(QLatin1String("coll_checkout"), Controller::self(), SLOT(slotCheckOut()));
+  m_checkOutEntry = actionCollection()->addAction(QStringLiteral("coll_checkout"), Controller::self(), SLOT(slotCheckOut()));
   m_checkOutEntry->setText(i18n("Check-&out..."));
-  m_checkOutEntry->setIcon(QIcon::fromTheme(QLatin1String("arrow-up-double")));
+  m_checkOutEntry->setIcon(QIcon::fromTheme(QStringLiteral("arrow-up-double")));
   m_checkOutEntry->setToolTip(i18n("Check-out the selected items"));
 
-  m_checkInEntry = actionCollection()->addAction(QLatin1String("coll_checkin"), Controller::self(), SLOT(slotCheckIn()));
+  m_checkInEntry = actionCollection()->addAction(QStringLiteral("coll_checkin"), Controller::self(), SLOT(slotCheckIn()));
   m_checkInEntry->setText(i18n("Check-&in"));
-  m_checkInEntry->setIcon(QIcon::fromTheme(QLatin1String("arrow-down-double")));
+  m_checkInEntry->setIcon(QIcon::fromTheme(QStringLiteral("arrow-down-double")));
   m_checkInEntry->setToolTip(i18n("Check-in the selected items"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_rename_collection"), this, SLOT(slotRenameCollection()));
+  action = actionCollection()->addAction(QStringLiteral("coll_rename_collection"), this, SLOT(slotRenameCollection()));
   action->setText(i18n("&Rename Collection..."));
-  action->setIcon(QIcon::fromTheme(QLatin1String("edit-rename")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("edit-rename")));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_R);
   action->setToolTip(i18n("Rename the collection"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_fields"), this, SLOT(slotShowCollectionFieldsDialog()));
+  action = actionCollection()->addAction(QStringLiteral("coll_fields"), this, SLOT(slotShowCollectionFieldsDialog()));
   action->setText(i18n("Collection &Fields..."));
   action->setIconText(i18n("Fields"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("preferences-other")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("preferences-other")));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_U);
   action->setToolTip(i18n("Modify the collection fields"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_reports"), this, SLOT(slotShowReportDialog()));
+  action = actionCollection()->addAction(QStringLiteral("coll_reports"), this, SLOT(slotShowReportDialog()));
   action->setText(i18n("&Generate Reports..."));
   action->setIconText(i18n("Reports"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("text-rdf")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("text-rdf")));
   action->setToolTip(i18n("Generate collection reports"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));
+  action = actionCollection()->addAction(QStringLiteral("coll_convert_bibliography"), this, SLOT(slotConvertToBibliography()));
   action->setText(i18n("Convert to &Bibliography"));
   action->setIcon(QIcon(QLatin1String(":/icons/bibtex")));
   action->setToolTip(i18n("Convert a book collection to a bibliography"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_string_macros"), this, SLOT(slotShowStringMacroDialog()));
+  action = actionCollection()->addAction(QStringLiteral("coll_string_macros"), this, SLOT(slotShowStringMacroDialog()));
   action->setText(i18n("String &Macros..."));
-  action->setIcon(QIcon::fromTheme(QLatin1String("view-list-text")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("view-list-text")));
   action->setToolTip(i18n("Edit the bibtex string macros"));
 
-  action = actionCollection()->addAction(QLatin1String("coll_key_manager"), this, SLOT(slotShowBibtexKeyDialog()));
+  action = actionCollection()->addAction(QStringLiteral("coll_key_manager"), this, SLOT(slotShowBibtexKeyDialog()));
   action->setText(i18n("Check for Duplicate Keys..."));
   action->setIcon(mimeIcon("text/x-bibtex"));
   action->setToolTip(i18n("Check for duplicate citation keys"));
@@ -601,16 +601,16 @@ void MainWindow::initActions() {
   connect(citeMapper, SIGNAL(mapped(int)),
           this, SLOT(slotCiteEntry(int)));
 
-  action = actionCollection()->addAction(QLatin1String("cite_clipboard"), citeMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("cite_clipboard"), citeMapper, SLOT(map()));
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
   action->setToolTip(i18n("Copy bibtex citations to the clipboard"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("edit-paste")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("edit-paste")));
   citeMapper->setMapping(action, Cite::CiteClipboard);
 
-  action = actionCollection()->addAction(QLatin1String("cite_lyxpipe"), citeMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("cite_lyxpipe"), citeMapper, SLOT(map()));
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("lyx"), QIcon(QLatin1String(":/icons/lyx"))));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("lyx"), QIcon(QLatin1String(":/icons/lyx"))));
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
@@ -618,15 +618,15 @@ void MainWindow::initActions() {
           Controller::self(), SLOT(slotUpdateSelectedEntries(const QString&)));
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
-  m_updateEntryMenu->setIcon(QIcon::fromTheme(QLatin1String("document-export")));
+  m_updateEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   m_updateEntryMenu->setIconText(i18nc("Update Entry", "Update"));
   m_updateEntryMenu->setDelayed(false);
-  actionCollection()->addAction(QLatin1String("coll_update_entry"), m_updateEntryMenu);
+  actionCollection()->addAction(QStringLiteral("coll_update_entry"), m_updateEntryMenu);
 
-  m_updateAll = actionCollection()->addAction(QLatin1String("update_entry_all"), m_updateMapper, SLOT(map()));
+  m_updateAll = actionCollection()->addAction(QStringLiteral("update_entry_all"), m_updateMapper, SLOT(map()));
   m_updateAll->setText(i18n("All Sources"));
   m_updateAll->setToolTip(i18n("Update entry data from all available sources"));
-  m_updateMapper->setMapping(m_updateAll, QLatin1String("_all"));
+  m_updateMapper->setMapping(m_updateAll, QStringLiteral("_all"));
 
   /*************************************************
    * Settings menu
@@ -637,12 +637,12 @@ void MainWindow::initActions() {
   m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), this);
   m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
   connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
-  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_toggleGroupWidget);
+  actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_toggleGroupWidget);
 
   m_toggleEntryEditor = new KToggleAction(i18n("Show Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
-  actionCollection()->addAction(QLatin1String("toggle_edit_widget"), m_toggleEntryEditor);
+  actionCollection()->addAction(QStringLiteral("toggle_edit_widget"), m_toggleEntryEditor);
 
   KStandardAction::preferences(this, SLOT(slotShowConfigDialog()), actionCollection());
 
@@ -660,7 +660,7 @@ void MainWindow::initActions() {
   /*************************************************
    * Collection Toolbar
    *************************************************/
-  action = actionCollection()->addAction(QLatin1String("change_entry_grouping_accel"), this, SLOT(slotGroupLabelActivated()));
+  action = actionCollection()->addAction(QStringLiteral("change_entry_grouping_accel"), this, SLOT(slotGroupLabelActivated()));
   action->setText(i18n("Change Grouping"));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_G);
 
@@ -668,11 +668,11 @@ void MainWindow::initActions() {
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
   // really bad hack, but I can't figure out how to make the combobox resize when the contents change
   // see note in slotChangeGrouping() - so ensure its at least a little bigger
-  m_entryGrouping->addAction(QLatin1String("                         "));
+  m_entryGrouping->addAction(QStringLiteral("                         "));
   connect(m_entryGrouping, SIGNAL(triggered(int)), SLOT(slotChangeGrouping()));
-  actionCollection()->addAction(QLatin1String("change_entry_grouping"), m_entryGrouping);
+  actionCollection()->addAction(QStringLiteral("change_entry_grouping"), m_entryGrouping);
 
-  action = actionCollection()->addAction(QLatin1String("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
+  action = actionCollection()->addAction(QStringLiteral("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
   action->setText(i18n("Filter"));
   actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_F);
 
@@ -694,7 +694,7 @@ void MainWindow::initActions() {
   widgetAction->setText(i18n("Filter"));
   widgetAction->setToolTip(i18n("Filter the collection"));
   widgetAction->setProperty("isShortcutConfigurable", false);
-  actionCollection()->addAction(QLatin1String("quick_filter"), widgetAction);
+  actionCollection()->addAction(QStringLiteral("quick_filter"), widgetAction);
 
   setupGUI(Keys | ToolBar);
 #ifdef UIFILE
@@ -745,7 +745,7 @@ void MainWindow::initView() {
   m_viewTabs->setDocumentMode(true);
   m_groupView = new GroupView(m_viewTabs);
   Controller::self()->addObserver(m_groupView);
-  m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QLatin1String("folder")), i18n("Groups"));
+  m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QStringLiteral("folder")), i18n("Groups"));
   m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
                                     "based on a selected field.</qt>"));
 
@@ -830,7 +830,7 @@ void MainWindow::initFileOpen(bool nofile_) {
 
   // show welcome text, even when opening an existing collection
   const int type = Kernel::self()->collectionType();
-  QString welcomeFile = DataFileRegistry::self()->locate(QLatin1String("welcome.html"));
+  QString welcomeFile = DataFileRegistry::self()->locate(QStringLiteral("welcome.html"));
   QString text = FileHandler::readTextFile(QUrl::fromLocalFile(welcomeFile));
   text.replace(QLatin1String("$FGCOLOR$"), Config::templateTextColor(type).name());
   text.replace(QLatin1String("$BGCOLOR$"), Config::templateBaseColor(type).name());
@@ -933,7 +933,7 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
 
   QString entryXSLTFile = Config::templateName(coll_->type());
   if(entryXSLTFile.isEmpty()) {
-    entryXSLTFile = QLatin1String("Fancy"); // should never happen, but just in case
+    entryXSLTFile = QStringLiteral("Fancy"); // should never happen, but just in case
   }
   m_entryView->setXSLTFile(entryXSLTFile + QLatin1String(".xsl"));
 
@@ -1008,7 +1008,7 @@ void MainWindow::readOptions() {
   m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
 
-  connect(toolBar(QLatin1String("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
+  connect(toolBar(QStringLiteral("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
 
   m_toggleGroupWidget->setChecked(Config::showGroupWidget());
   slotToggleGroupWidget();
@@ -1116,7 +1116,7 @@ void MainWindow::slotFileOpen() {
     filter += i18n("All Files") + QLatin1String(" (*)");
     // keyword 'open'
     QString fileClass;
-    const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///open")), fileClass);
+    const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///open")), fileClass);
     QUrl url = QFileDialog::getOpenFileUrl(this, i18n("Open File"), startUrl, filter);
     if(!url.isEmpty() && url.isValid()) {
       slotFileOpen(url);
@@ -1286,7 +1286,7 @@ bool MainWindow::fileSaveAs() {
 
   // keyword 'open'
   QString fileClass;
-  const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///open")), fileClass);
+  const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///open")), fileClass);
   const QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Save As"), startUrl, filter);
 
   if(url.isEmpty()) {
@@ -1333,7 +1333,7 @@ void MainWindow::slotFilePrint() {
     QString str = i18n("The collection is currently being filtered to show a limited subset of "
                        "the entries. Only the visible entries will be printed. Continue?");
     int ret = KMessageBox::warningContinueCancel(this, str, QString(), KStandardGuiItem::print(),
-                                                 KStandardGuiItem::cancel(), QLatin1String("WarnPrintVisible"));
+                                                 KStandardGuiItem::cancel(), QStringLiteral("WarnPrintVisible"));
     if(ret == KMessageBox::Cancel) {
       StatusBar::self()->clearStatus();
       return;
@@ -1345,7 +1345,7 @@ void MainWindow::slotFilePrint() {
   Export::HTMLExporter exporter(Data::Document::self()->collection());
   // only print visible entries
   exporter.setEntries(m_detailedView->visibleEntries());
-  exporter.setXSLTFile(QLatin1String("tellico-printing.xsl"));
+  exporter.setXSLTFile(QStringLiteral("tellico-printing.xsl"));
   exporter.setPrintHeaders(printHeaders);
   exporter.setPrintGrouped(printGrouped);
   exporter.setGroupBy(Controller::self()->expandedGroupBy());
@@ -1468,7 +1468,7 @@ void MainWindow::slotHideConfigDialog() {
 }
 
 void MainWindow::slotShowTipOfDay(bool force_/*=true*/) {
-  KTipDialog::showTip(this, QLatin1String("tellico/tellico.tips"), force_);
+  KTipDialog::showTip(this, QStringLiteral("tellico/tellico.tips"), force_);
 }
 
 void MainWindow::slotStatusMsg(const QString& text_) {
@@ -1546,7 +1546,7 @@ void MainWindow::slotHandleConfigChange() {
     // invalidate all groups
     Data::Document::self()->collection()->invalidateGroups();
     // refreshing the title causes the group view to refresh
-    Controller::self()->slotRefreshField(Data::Document::self()->collection()->fieldByName(QLatin1String("title")));
+    Controller::self()->slotRefreshField(Data::Document::self()->collection()->fieldByName(QStringLiteral("title")));
   }
 
   QString entryXSLTFile = Config::templateName(Kernel::self()->collectionType());
@@ -1710,7 +1710,7 @@ void MainWindow::slotUpdateFilter() {
 void MainWindow::slotUpdateFilter(FilterPtr filter_) {
   // Can't just block signals because clear button won't show then
   m_dontQueueFilter = true;
-  m_quickFilter->setText(QLatin1String(" ")); // To be able to clear custom filter
+  m_quickFilter->setText(QStringLiteral(" ")); // To be able to clear custom filter
   Controller::self()->slotUpdateFilter(filter_);
   m_dontQueueFilter = false;
 }
@@ -1794,7 +1794,7 @@ void MainWindow::slotFileImport(int format_) {
     case Import::File:
       {
         QString fileClass;
-        const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///import")), fileClass);
+        const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///import")), fileClass);
         url = QFileDialog::getOpenFileUrl(this, i18n("Import File"), startUrl, ImportDialog::fileFilter(format));
         KRecentDirs::add(fileClass, url.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
       }
@@ -1803,7 +1803,7 @@ void MainWindow::slotFileImport(int format_) {
     case Import::Dir:
       // TODO: allow remote audiofile importing
       {
-        const QString fileClass(QLatin1String("ImportDir"));
+        const QString fileClass(QStringLiteral("ImportDir"));
         QString dirName = ImportDialog::startDir(format);
         if(dirName.isEmpty()) {
           dirName = KRecentDirs::dir(fileClass);
@@ -1853,7 +1853,7 @@ void MainWindow::slotFileExport(int format_) {
     case Export::File:
     {
       QString fileClass;
-      const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QLatin1String("kfiledialog:///export")), fileClass);
+      const QUrl startUrl = KFileWidget::getStartUrl(QUrl(QStringLiteral("kfiledialog:///export")), fileClass);
       QUrl url = QFileDialog::getSaveFileUrl(this, i18n("Export As"), startUrl, dlg.fileFilter());
       if(url.isEmpty()) {
         StatusBar::self()->clearStatus();
@@ -2080,7 +2080,7 @@ void MainWindow::addFilterView() {
 
   m_filterView = new FilterView(m_viewTabs);
   Controller::self()->addObserver(m_filterView);
-  m_viewTabs->insertTab(1, m_filterView, QIcon::fromTheme(QLatin1String("view-filter")), i18n("Filters"));
+  m_viewTabs->insertTab(1, m_filterView, QIcon::fromTheme(QStringLiteral("view-filter")), i18n("Filters"));
   m_filterView->setWhatsThis(i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                   "filter rules.</qt>"));
 
@@ -2103,7 +2103,7 @@ void MainWindow::addLoanView() {
 
   m_loanView = new LoanView(m_viewTabs);
   Controller::self()->addObserver(m_loanView);
-  m_viewTabs->insertTab(2, m_loanView, QIcon::fromTheme(QLatin1String("kaddressbook")), i18n("Loans"));
+  m_viewTabs->insertTab(2, m_loanView, QIcon::fromTheme(QStringLiteral("kaddressbook")), i18n("Loans"));
   m_loanView->setWhatsThis(i18n("<qt>The <i>Loan View</i> shows a list of all the people who "
                                 "have borrowed items from your collection.</qt>"));
 
@@ -2144,7 +2144,7 @@ void MainWindow::updateCaption(bool modified_) {
 void MainWindow::slotUpdateToolbarIcons() {
   // first change the icon for the menu item
   if(Kernel::self()->collectionType() == Data::Collection::Base) {
-    m_newEntry->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+    m_newEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   } else {
     m_newEntry->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
   }
@@ -2201,7 +2201,7 @@ void MainWindow::updateCollectionActions() {
     return;
   }
 
-  stateChanged(QLatin1String("collection_reset"));
+  stateChanged(QStringLiteral("collection_reset"));
 
   Data::Collection::Type type = Data::Document::self()->collection()->type();
   stateChanged(QLatin1String("is_") + CollectionFactory::typeName(type));
@@ -2214,7 +2214,7 @@ void MainWindow::updateCollectionActions() {
 }
 
 void MainWindow::updateEntrySources() {
-  unplugActionList(QLatin1String("update_entry_actions"));
+  unplugActionList(QStringLiteral("update_entry_actions"));
   foreach(QAction* action, m_fetchActions) {
     foreach(QWidget* widget, action->associatedWidgets()) {
       widget->removeAction(action);
@@ -2233,7 +2233,7 @@ void MainWindow::updateEntrySources() {
     m_fetchActions.append(action);
   }
 
-  plugActionList(QLatin1String("update_entry_actions"), m_fetchActions);
+  plugActionList(QStringLiteral("update_entry_actions"), m_fetchActions);
 }
 
 void MainWindow::importFile(Tellico::Import::Format format_, const QList<QUrl>& urls_) {
@@ -2345,7 +2345,7 @@ bool MainWindow::eventFilter(QObject* obj_, QEvent* ev_) {
         return true;
     }
   }
-  return false;
+  return KXmlGuiWindow::eventFilter(obj_, ev_);
 }
 
 void MainWindow::slotToggleFullScreen() {

@@ -51,13 +51,13 @@ void ImdbFetcherTest::initTestCase() {
 
 void ImdbFetcherTest::testSnowyRiver() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("IMDB");
+  QString groupName = QStringLiteral("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "The Man From Snowy River");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("The Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,42 +68,42 @@ void ImdbFetcherTest::testSnowyRiver() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("The Man from Snowy River"));
-  QCOMPARE(entry->field("year"), QLatin1String("1982"));
+  QCOMPARE(entry->field("title"), QStringLiteral("The Man from Snowy River"));
+  QCOMPARE(entry->field("year"), QStringLiteral("1982"));
   QCOMPARE(set(entry, "genre"), set("Adventure; Drama; Family; Romance; Western"));
-  QCOMPARE(entry->field("nationality"), QLatin1String("Australia"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("Australia"));
   QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
-  QCOMPARE(entry->field("running-time"), QLatin1String("102"));
-  QCOMPARE(entry->field("audio-track"), QLatin1String("Dolby"));
-  QCOMPARE(entry->field("aspect-ratio"), QLatin1String("2.35 : 1"));
-  QCOMPARE(entry->field("color"), QLatin1String("Color"));
-  QCOMPARE(entry->field("language"), QLatin1String("English"));
-  QCOMPARE(entry->field("certification"), QLatin1String("PG (USA)"));
-  QCOMPARE(entry->field("director"), QLatin1String("George Miller"));
-  QCOMPARE(entry->field("producer"), QLatin1String("Geoff Burrowes"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("102"));
+  QCOMPARE(entry->field("audio-track"), QStringLiteral("Dolby"));
+  QCOMPARE(entry->field("aspect-ratio"), QStringLiteral("2.35 : 1"));
+  QCOMPARE(entry->field("color"), QStringLiteral("Color"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("PG (USA)"));
+  QCOMPARE(entry->field("director"), QStringLiteral("George Miller"));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Geoff Burrowes"));
   QCOMPARE(set(entry, "writer"), set("Cul Cullen; A.B. 'Banjo' Paterson;John Dixon"));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson::Jim Craig"));
-  QCOMPARE(entry->field("imdb"), QLatin1String("http://www.imdb.com/title/tt0084296/"));
+  QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
+  QCOMPARE(entry->field("imdb"), QStringLiteral("http://www.imdb.com/title/tt0084296/"));
   QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
-  QVERIFY(altTitleList.contains(QLatin1String("Herencia de un valiente")));
-  QVERIFY(!entry->field("alttitle").contains(QLatin1String("See more")));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
+  QVERIFY(altTitleList.contains(QStringLiteral("Herencia de un valiente")));
+  QVERIFY(!entry->field("alttitle").contains(QStringLiteral("See more")));
 }
 
 void ImdbFetcherTest::testAsterix() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("IMDB");
+  QString groupName = QStringLiteral("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QString::fromUtf8("Astérix aux jeux olympiques"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Astérix aux jeux olympiques"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -115,19 +115,19 @@ void ImdbFetcherTest::testAsterix() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   // title is returned in english
-  QCOMPARE(entry->field("title"), QLatin1String("Asterix at the Olympic Games"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Asterix at the Olympic Games"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("Astérix aux jeux olympiques"));
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Thomas Langmann; Frédéric Forestier")));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Franck Magnier; René Goscinny; Olivier Dazat; Alexandre Charlot; Thomas Langmann; Albert Uderzo")));
-  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
+  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Asterix at the Olympic Games")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los Juegos Olímpicos")));
-  QVERIFY(altTitleList.contains(QLatin1String("Asterix alle olimpiadi")));
+  QVERIFY(altTitleList.contains(QStringLiteral("Asterix alle olimpiadi")));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
 void ImdbFetcherTest::testBodyDouble() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Body Double");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Body Double"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -137,15 +137,15 @@ void ImdbFetcherTest::testBodyDouble() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Body Double"));
-  QCOMPARE(entry->field("director"), QLatin1String("Brian De Palma"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Body Double"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Brian De Palma"));
   QCOMPARE(set(entry, "writer"), set("Brian De Palma; Robert J. Avrech"));
-  QCOMPARE(entry->field("producer"), QLatin1String("Brian De Palma"));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Brian De Palma"));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
 void ImdbFetcherTest::testMary() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "There's Something About Mary");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("There's Something About Mary"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -162,13 +162,13 @@ void ImdbFetcherTest::testMary() {
 // https://bugs.kde.org/show_bug.cgi?id=262036
 void ImdbFetcherTest::testOkunen() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("IMDB Okunen");
+  QString groupName = QStringLiteral("IMDB Okunen");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "46-okunen no koi");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("46-okunen no koi"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -178,23 +178,23 @@ void ImdbFetcherTest::testOkunen() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   // if the settings included origtitle, then the title would be "Big Bang Love, Juvenile A"
-  QCOMPARE(entry->field("title"), QLatin1String("46-okunen no koi"));
-  QCOMPARE(entry->field("origtitle"), QLatin1String(""));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Drama; Fantasy"));
-  QCOMPARE(entry->field("director"), QLatin1String("Takashi Miike"));
+  QCOMPARE(entry->field("title"), QStringLiteral("46-okunen no koi"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral(""));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Drama; Fantasy"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Takashi Miike"));
   QCOMPARE(set(entry, "writer"), set("Ikki Kajiwara; Hisao Maki; Masa Nakamura"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field("alttitle"));
-  QVERIFY(altTitleList.contains(QLatin1String("Big Bang Love, Juvenile A")));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
+  QVERIFY(altTitleList.contains(QStringLiteral("Big Bang Love, Juvenile A")));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=314113
 void ImdbFetcherTest::testFetchResultEncoding() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QString::fromUtf8("jôbafuku onna harakiri"));
+                                       QStringLiteral("jôbafuku onna harakiri"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
   if(!hasNetwork()) {
@@ -213,7 +213,7 @@ void ImdbFetcherTest::testFetchResultEncoding() {
 
 // https://bugs.kde.org/show_bug.cgi?id=336765
 void ImdbFetcherTest::testBabel() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Babel");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Babel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IMDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -223,8 +223,8 @@ void ImdbFetcherTest::testBabel() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Babel"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Babel"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Alejandro G. Iñárritu; Guillermo Arriaga")));
   // I can't figure out why this test has to use fromLocal8Bit instead of fromUtf8. The actual Tellico output is the same.

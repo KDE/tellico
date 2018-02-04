@@ -55,7 +55,7 @@ void ExternalFetcherTest::testMods() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QFINDTESTDATA("data/cat_mods.spec"), KConfig::SimpleConfig);
-  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  KConfigGroup cg = config.group(QStringLiteral("<default>"));
   fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -64,10 +64,10 @@ void ExternalFetcherTest::testMods() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Sound and fury"));
-  QCOMPARE(entry->field("author"), QLatin1String("Alterman, Eric"));
-  QCOMPARE(entry->field("genre"), QLatin1String("bibliography"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1999"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("0-8014-8639-4"));
-  QCOMPARE(entry->field("lccn"), QLatin1String("99042030"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Sound and fury"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Alterman, Eric"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("bibliography"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1999"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0-8014-8639-4"));
+  QCOMPARE(entry->field("lccn"), QStringLiteral("99042030"));
 }

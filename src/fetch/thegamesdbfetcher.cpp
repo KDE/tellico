@@ -48,7 +48,7 @@ using Tellico::Fetch::TheGamesDBFetcher;
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
     : XMLFetcher(parent_) {
   setLimit(10);
-  setXSLTFilename(QLatin1String("thegamesdb2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("thegamesdb2tellico.xsl"));
 }
 
 TheGamesDBFetcher::~TheGamesDBFetcher() {
@@ -69,12 +69,12 @@ QUrl TheGamesDBFetcher::searchUrl() {
   switch(request().key) {
     case Title:
       u = QUrl(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
-      q.addQueryItem(QLatin1String("name"), request().value);
+      q.addQueryItem(QStringLiteral("name"), request().value);
       break;
 
     case Keyword:
       u = QUrl(QString::fromLatin1(THEGAMESDB_SEARCH_API_URL));
-      q.addQueryItem(QLatin1String("name"), request().value);
+      q.addQueryItem(QStringLiteral("name"), request().value);
       break;
 
     default:
@@ -90,7 +90,7 @@ QUrl TheGamesDBFetcher::searchUrl() {
 Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
-  const QString id = entry_->field(QLatin1String("thegamesdb-id"));
+  const QString id = entry_->field(QStringLiteral("thegamesdb-id"));
   if(id.isEmpty()) {
     myDebug() << "no id found";
     return entry_;
@@ -98,7 +98,7 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHookData(Data::EntryPtr ent
 
   QUrl u(QString::fromLatin1(THEGAMESDB_DETAIL_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("id"), id);
+  q.addQueryItem(QStringLiteral("id"), id);
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -131,12 +131,12 @@ Tellico::Data::EntryPtr TheGamesDBFetcher::fetchEntryHookData(Data::EntryPtr ent
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("thegamesdb-id"));
+  coll->removeField(QStringLiteral("thegamesdb-id"));
   return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest TheGamesDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -148,7 +148,7 @@ Tellico::Fetch::ConfigWidget* TheGamesDBFetcher::configWidget(QWidget* parent_) 
 }
 
 QString TheGamesDBFetcher::defaultName() {
-  return QLatin1String("TheGamesDB.net");
+  return QStringLiteral("TheGamesDB.net");
 }
 
 QString TheGamesDBFetcher::defaultIcon() {

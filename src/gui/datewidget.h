@@ -51,7 +51,7 @@ public:
 
   QDate date() const;
   QString text() const;
-  void setDate(const QDate& date);
+  void setDate(QDate date);
   void setDate(const QString& date);
   void clear();
 
@@ -61,8 +61,8 @@ Q_SIGNALS:
 private Q_SLOTS:
   void slotDateChanged();
   void slotShowPicker();
-  void slotDateSelected(const QDate& newDate);
-  void slotDateEntered(const QDate& newDate);
+  void slotDateSelected(QDate newDate);
+  void slotDateEntered(QDate newDate);
 
 private:
   class DatePickerAction;

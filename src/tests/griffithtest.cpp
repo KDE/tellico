@@ -60,19 +60,19 @@ void GriffithTest::testMovies() {
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Serendipity"));
-  QCOMPARE(entry->field("origtitle"), QLatin1String("Serendipity"));
-  QCOMPARE(entry->field("director"), QLatin1String("Peter Chelsom"));
-  QCOMPARE(entry->field("year"), QLatin1String("2001"));
-  QCOMPARE(entry->field("certification"), QLatin1String("PG-13 (USA)"));
-  QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Comedy; Romance; Fantasy"));
-  QCOMPARE(entry->field("rating"), QLatin1String("6"));
-  QCOMPARE(entry->field("running-time"), QLatin1String("90"));
-  QCOMPARE(entry->field("studio"), QLatin1String("studio"));
-  QCOMPARE(entry->field("seen"), QLatin1String("true"));
-  QCOMPARE(entry->field("medium"), QLatin1String("DVD"));
-  QCOMPARE(ROWS(entry, "cast").first(), QLatin1String("John Cusack::Jonathan Trager"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Serendipity"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral("Serendipity"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Peter Chelsom"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2001"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Comedy; Romance; Fantasy"));
+  QCOMPARE(entry->field("rating"), QStringLiteral("6"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("90"));
+  QCOMPARE(entry->field("studio"), QStringLiteral("studio"));
+  QCOMPARE(entry->field("seen"), QStringLiteral("true"));
+  QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
+  QCOMPARE(ROWS(entry, "cast").first(), QStringLiteral("John Cusack::Jonathan Trager"));
   QVERIFY(!entry->field("plot").isEmpty());
   // cover will be empty since local images don't exist
 }

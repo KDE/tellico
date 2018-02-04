@@ -220,7 +220,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   if(file_.at(0) == QLatin1Char('/')) {
     m_xsltFile = file_;
   } else {
-    const QString templateDir = QLatin1String("entry-templates/");
+    const QString templateDir = QStringLiteral("entry-templates/");
     m_xsltFile = DataFileRegistry::self()->locate(templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
@@ -228,7 +228,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       }
       m_xsltFile = DataFileRegistry::self()->locate(templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
-        QString str = QLatin1String("<qt>");
+        QString str = QStringLiteral("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
         str += QLatin1Char(' ');
         str += i18n("Please check your installation.");

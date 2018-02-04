@@ -223,7 +223,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
     return QString();
   }
   if(text_.isEmpty()) {
-    myDebug() << "empty input";
+    myDebug() << "XSLTHandler::applyStylesheet() - empty input";
     return QString();
   }
 
@@ -235,7 +235,7 @@ QString XSLTHandler::applyStylesheet(const QString& text_) {
 
 QString XSLTHandler::process(xmlDocPtr docIn) {
   if(!docIn) {
-    myDebug() << "error parsing input string!";
+    myDebug() << "XSLTHandler::applyStylesheet() - error parsing input string!";
     return QString();
   }
 
@@ -285,7 +285,7 @@ QDomDocument& XSLTHandler::setLocaleEncoding(QDomDocument& dom_) {
     if(children.item(j).isElement() && children.item(j).nodeName() == QLatin1String("xsl:output")) {
       QDomElement e = children.item(j).toElement();
       const QString encoding = QLatin1String(QTextCodec::codecForLocale()->name());
-      e.setAttribute(QLatin1String("encoding"), encoding);
+      e.setAttribute(QStringLiteral("encoding"), encoding);
       break;
     }
   }

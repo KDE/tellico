@@ -42,7 +42,7 @@ using Tellico::Fetch::DBLPFetcher;
 
 DBLPFetcher::DBLPFetcher(QObject* parent_) : XMLFetcher(parent_) {
   setLimit(DBLP_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("dblp2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("dblp2tellico.xsl"));
 }
 
 DBLPFetcher::~DBLPFetcher() {
@@ -65,9 +65,9 @@ QUrl DBLPFetcher::searchUrl() {
   QUrlQuery q;
   switch(request().key) {
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), request().value);
-      q.addQueryItem(QLatin1String("h"), QString::number(DBLP_MAX_RETURNS_TOTAL));
-      q.addQueryItem(QLatin1String("c"), QString::number(0));
+      q.addQueryItem(QStringLiteral("q"), request().value);
+      q.addQueryItem(QStringLiteral("h"), QString::number(DBLP_MAX_RETURNS_TOTAL));
+      q.addQueryItem(QStringLiteral("c"), QString::number(0));
       break;
 
     default:
@@ -75,7 +75,7 @@ QUrl DBLPFetcher::searchUrl() {
       return QUrl();
   }
   // has to be after query
-  q.addQueryItem(QLatin1String("format"), QLatin1String("xml"));
+  q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
   u.setQuery(q);
 
 //  myDebug() << "url:" << u.url();
@@ -99,7 +99,7 @@ Tellico::Data::EntryPtr DBLPFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
 }
 
 Tellico::Fetch::FetchRequest DBLPFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
   }
@@ -111,7 +111,7 @@ Tellico::Fetch::ConfigWidget* DBLPFetcher::configWidget(QWidget* parent_) const 
 }
 
 QString DBLPFetcher::defaultName() {
-  return QLatin1String("DBLP");
+  return QStringLiteral("DBLP");
 }
 
 QString DBLPFetcher::defaultIcon() {

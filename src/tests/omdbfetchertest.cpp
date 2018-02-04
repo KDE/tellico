@@ -48,14 +48,14 @@ void OMDBFetcherTest::initTestCase() {
 void OMDBFetcherTest::testTitle() {
   // all the private API test config is in tellicotest_private.config right now
   KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("OMDB");
+  QString groupName = QStringLiteral("OMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QLatin1String("superman returns"));
+                                       QStringLiteral("superman returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -64,37 +64,37 @@ void OMDBFetcherTest::testTitle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Superman Returns"));
-  QCOMPARE(entry->field(QLatin1String("certification")), QLatin1String("PG-13 (USA)"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2006"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("Action; Adventure; Sci-Fi"));
-  QCOMPARE(entry->field(QLatin1String("director")), QLatin1String("Bryan Singer"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Superman Returns"));
+  QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("PG-13 (USA)"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2006"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; Adventure; Sci-Fi"));
+  QCOMPARE(entry->field(QStringLiteral("director")), QStringLiteral("Bryan Singer"));
   QCOMPARE(set(entry, "writer"),
            set("Michael Dougherty; Dan Harris; Bryan Singer; Michael Dougherty; Dan Harris; Jerry Siegel; Joe Shuster"));
-//  QCOMPARE(entry->field(QLatin1String("producer")), QLatin1String("Bryan Singer; Jon Peters; Gilbert Adler"));
-  QCOMPARE(entry->field(QLatin1String("running-time")), QLatin1String("154"));
-  QCOMPARE(entry->field(QLatin1String("nationality")), QLatin1String("USA"));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+//  QCOMPARE(entry->field(QStringLiteral("producer")), QStringLiteral("Bryan Singer; Jon Peters; Gilbert Adler"));
+  QCOMPARE(entry->field(QStringLiteral("running-time")), QStringLiteral("154"));
+  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("USA"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
-  QCOMPARE(entry->field(QLatin1String("imdb")), QLatin1String("http://www.imdb.com/title/tt0348150/"));
+  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("imdb")), QStringLiteral("http://www.imdb.com/title/tt0348150/"));
 }
 
 // see https://bugs.kde.org/show_bug.cgi?id=336765
 void OMDBFetcherTest::testBabel() {
   // all the private API test config is in tellicotest_private.config right now
   KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("OMDB");
+  QString groupName = QStringLiteral("OMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QLatin1String("babel"));
+                                       QStringLiteral("babel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -103,7 +103,7 @@ void OMDBFetcherTest::testBabel() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field("title"), QLatin1String("Babel"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Babel"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Alejandro G. Iñárritu"));
 }

@@ -129,9 +129,9 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
   QMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(QIcon::fromTheme(QLatin1String("view-filter")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("view-filter")),
                     i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
-    menu.addAction(QIcon::fromTheme(QLatin1String("edit-delete")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
                     i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
   } else {
     Controller::self()->plugEntryActions(&menu);
@@ -141,7 +141,7 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
 
 void FilterView::selectionChanged(const QItemSelection& selected_, const QItemSelection& deselected_) {
 //  DEBUG_BLOCK;
-  QAbstractItemView::selectionChanged(selected_, deselected_);
+  GUI::TreeView::selectionChanged(selected_, deselected_);
   FilterPtr filter;
   foreach(const QModelIndex& index, selectionModel()->selectedIndexes()) {
     QModelIndex realIndex = sortModel()->mapToSource(index);

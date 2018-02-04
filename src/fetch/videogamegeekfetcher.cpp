@@ -51,7 +51,7 @@ using Tellico::Fetch::VideoGameGeekFetcher;
 VideoGameGeekFetcher::VideoGameGeekFetcher(QObject* parent_)
     : XMLFetcher(parent_) {
   setLimit(BGG_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("boardgamegeek2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("boardgamegeek2tellico.xsl"));
 }
 
 VideoGameGeekFetcher::~VideoGameGeekFetcher() {
@@ -71,20 +71,20 @@ QUrl VideoGameGeekFetcher::searchUrl() {
   QUrlQuery q;
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
-      q.addQueryItem(QLatin1String("exact"), QLatin1String("1"));
+      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("exact"), QStringLiteral("1"));
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
-      q.addQueryItem(QLatin1String("id"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
+      q.addQueryItem(QStringLiteral("id"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
       break;
 
     default:
@@ -100,7 +100,7 @@ QUrl VideoGameGeekFetcher::searchUrl() {
 Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
-  const QString id = entry_->field(QLatin1String("bggid"));
+  const QString id = entry_->field(QStringLiteral("bggid"));
   if(id.isEmpty()) {
     myDebug() << "no bgg id found";
     return entry_;
@@ -108,8 +108,8 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
 
   QUrl u(QString::fromLatin1(BGG_THING_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("id"), id);
-  q.addQueryItem(QLatin1String("type"), QLatin1String("videogame,videogameexpansion"));
+  q.addQueryItem(QStringLiteral("id"), id);
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("videogame,videogameexpansion"));
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -146,17 +146,17 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("bggid"));
+  coll->removeField(QStringLiteral("bggid"));
   return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest VideoGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString bggid = entry_->field(QLatin1String("bggid"));
+  QString bggid = entry_->field(QStringLiteral("bggid"));
   if(!bggid.isEmpty()) {
     return FetchRequest(Raw, bggid);
   }
 
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -168,7 +168,7 @@ Tellico::Fetch::ConfigWidget* VideoGameGeekFetcher::configWidget(QWidget* parent
 }
 
 QString VideoGameGeekFetcher::defaultName() {
-  return QLatin1String("VideoGameGeek");
+  return QStringLiteral("VideoGameGeek");
 }
 
 QString VideoGameGeekFetcher::defaultIcon() {
@@ -177,7 +177,7 @@ QString VideoGameGeekFetcher::defaultIcon() {
 
 Tellico::StringHash VideoGameGeekFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("videogamegeek-link")] = i18n("VideoGameGeek Link");
+  hash[QStringLiteral("videogamegeek-link")] = i18n("VideoGameGeek Link");
   return hash;
 }
 

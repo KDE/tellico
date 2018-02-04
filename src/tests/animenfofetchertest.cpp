@@ -50,13 +50,13 @@ void AnimenfoFetcherTest::initTestCase() {
 
 void AnimenfoFetcherTest::testMegami() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("AnimeNfo.com");
+  QString groupName = QStringLiteral("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword, "Aa! Megami-sama!");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword, QStringLiteral("Aa! Megami-sama!"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,25 +68,25 @@ void AnimenfoFetcherTest::testMegami() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Aa! Megami-sama!: Together Forever"));
-  QCOMPARE(entry->field("year"), QLatin1String("2011"));
-  QCOMPARE(entry->field("episodes"), QLatin1String("2"));
-  QCOMPARE(entry->field("studio"), QLatin1String("AIC (Anime International Company)"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Aa! Megami-sama!: Together Forever"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2011"));
+  QCOMPARE(entry->field("episodes"), QStringLiteral("2"));
+  QCOMPARE(entry->field("studio"), QStringLiteral("AIC (Anime International Company)"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ああっ女神さまっ ~ いつも二人で"));
-  QVERIFY(entry->field("plot").startsWith(QLatin1String("Keiichi finds out")));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Keiichi finds out")));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void AnimenfoFetcherTest::testHachimitsu() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("AnimeNfo.com");
+  QString groupName = QStringLiteral("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword, "Hachimitsu to Clover");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword, QStringLiteral("Hachimitsu to Clover"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -98,35 +98,35 @@ void AnimenfoFetcherTest::testHachimitsu() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Hachimitsu to Clover"));
-  QCOMPARE(entry->field("year"), QLatin1String("2005"));
-  QCOMPARE(entry->field("episodes"), QLatin1String("26"));
-  QCOMPARE(entry->field("keyword"), QLatin1String("TV"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Comedy; Drama; Romance"));
-  QCOMPARE(entry->field("studio"), QLatin1String("J.C.STAFF"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Hachimitsu to Clover"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2005"));
+  QCOMPARE(entry->field("episodes"), QStringLiteral("26"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("TV"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Comedy; Drama; Romance"));
+  QCOMPARE(entry->field("studio"), QStringLiteral("J.C.STAFF"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("ハチミツとクローバー"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Kasai Kenichi (カサヰ ケンイチ)"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Kuroda Yosuke (黒田洋介)"));
-  QCOMPARE(entry->field("alttitle"), QLatin1String("Honey and Clover"));
-  QCOMPARE(entry->field("animenfo-rating"), QLatin1String("9"));
-  QVERIFY(entry->field("plot").startsWith(QLatin1String("Takemoto, Mayama, and Morita are students")));
+  QCOMPARE(entry->field("alttitle"), QStringLiteral("Honey and Clover"));
+  QCOMPARE(entry->field("animenfo-rating"), QStringLiteral("9"));
+  QVERIFY(entry->field("plot").startsWith(QStringLiteral("Takemoto, Mayama, and Morita are students")));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field("animenfo").isEmpty());
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.count(), 7);
   QCOMPARE(castList.at(0), QString::fromUtf8("Kudo Haruka (工藤晴香)::Hanamoto Hagumi"));
 }
 
 void AnimenfoFetcherTest::testGhost() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("AnimeNfo.com");
+  QString groupName = QStringLiteral("AnimeNfo.com");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword, "Ghost in the Shell");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword, QStringLiteral("Ghost in the Shell"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AnimeNfoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -138,14 +138,14 @@ void AnimenfoFetcherTest::testGhost() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Kokaku Kido Tai"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Action; Science-Fiction"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Kodansha"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Kokaku Kido Tai"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1991"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Action; Science-Fiction"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Kodansha"));
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("攻殻機動隊"));
   QCOMPARE(entry->field("author"), QString::fromUtf8("Shiro Masamune (士郎 正宗)"));
-  QCOMPARE(entry->field("alttitle"), QLatin1String("Ghost in the Shell"));
+  QCOMPARE(entry->field("alttitle"), QStringLiteral("Ghost in the Shell"));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!entry->field("animenfo").isEmpty());
 }

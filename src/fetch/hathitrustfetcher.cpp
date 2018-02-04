@@ -122,7 +122,7 @@ bool HathiTrustFetcher::initMARC21Handler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("MARC21slim2MODS3.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("MARC21slim2MODS3.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate MARC21slim2MODS3.xsl.";
     return false;
@@ -145,7 +145,7 @@ bool HathiTrustFetcher::initMODSHandler() {
     return true;
   }
 
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("mods2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate mods2tellico.xsl.";
     return false;
@@ -171,11 +171,11 @@ Tellico::Data::EntryPtr HathiTrustFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest HathiTrustFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString isbn = entry_->field(QLatin1String("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  const QString lccn = entry_->field(QLatin1String("lccn"));
+  const QString lccn = entry_->field(QStringLiteral("lccn"));
   if(!lccn.isEmpty()) {
     return FetchRequest(LCCN, lccn);
   }
@@ -228,7 +228,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
 
   QVariantMap::const_iterator i = resultMap.constBegin();
   for( ; i != resultMap.constEnd(); ++i) {
-    const QVariantMap recordMap = i.value().toMap().value(QLatin1String("records")).toMap();
+    const QVariantMap recordMap = i.value().toMap().value(QStringLiteral("records")).toMap();
     if(recordMap.isEmpty()) {
       myDebug() << "empty result map";
       continue;
@@ -239,7 +239,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
       myWarning() << "no iterator in record";
       continue;
     }
-    QString marcxml = ri.value().toMap().value(QLatin1String("marc-xml")).toString();
+    QString marcxml = ri.value().toMap().value(QStringLiteral("marc-xml")).toString();
     // HathiTrust doesn't always include the XML NS in the JSON results. Assume it's always
     // MARC XML and check that
     QDomDocument dom;
@@ -289,7 +289,7 @@ Tellico::Fetch::ConfigWidget* HathiTrustFetcher::configWidget(QWidget* parent_) 
 }
 
 QString HathiTrustFetcher::defaultName() {
-  return QLatin1String("HathiTrust"); // no translation
+  return QStringLiteral("HathiTrust"); // no translation
 }
 
 QString HathiTrustFetcher::defaultIcon() {
@@ -299,11 +299,11 @@ QString HathiTrustFetcher::defaultIcon() {
 Tellico::StringHash HathiTrustFetcher::allOptionalFields() {
   // same ones as z3950fetcher
   StringHash hash;
-  hash[QLatin1String("address")]  = i18n("Address");
-  hash[QLatin1String("abstract")] = i18n("Abstract");
-  hash[QLatin1String("illustrator")] = i18n("Illustrator");
-  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
-  hash[QLatin1String("lcc")] = i18nc("Library of Congress classification system", "LoC Classification");
+  hash[QStringLiteral("address")]  = i18n("Address");
+  hash[QStringLiteral("abstract")] = i18n("Abstract");
+  hash[QStringLiteral("illustrator")] = i18n("Illustrator");
+  hash[QStringLiteral("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QStringLiteral("lcc")] = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
 }
 

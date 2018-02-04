@@ -62,7 +62,7 @@ void BibtexTest::testImport() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 36);
-  QVERIFY(coll->hasField(QLatin1String("issn")));
+  QVERIFY(coll->hasField(QStringLiteral("issn")));
 
   QCOMPARE(bColl->preamble(), QL1("preamble"));
 
@@ -91,11 +91,11 @@ void BibtexTest::testImport() {
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 
   foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
-    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QLatin1String("bibtex-key")));
+    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QStringLiteral("bibtex-key")));
     QVERIFY(e2);
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
       // entry ids will be different
-      if(f->name() != QLatin1String("id")) {
+      if(f->name() != QStringLiteral("id")) {
         QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
       }
     }
@@ -110,16 +110,16 @@ void BibtexTest::testDuplicateKeys() {
   QVERIFY(dupes.isEmpty());
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
-  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Title 1"));
+  entry1->setField(QStringLiteral("bibtex-key"), QStringLiteral("title1"));
 
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
-  entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
-  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("Title 2"));
+  entry2->setField(QStringLiteral("bibtex-key"), QStringLiteral("title1"));
 
   Tellico::Data::EntryPtr entry3(new Tellico::Data::Entry(coll));
-  entry3->setField(QLatin1String("title"), QLatin1String("Title 3"));
-  entry3->setField(QLatin1String("bibtex-key"), QLatin1String("title3"));
+  entry3->setField(QStringLiteral("title"), QStringLiteral("Title 3"));
+  entry3->setField(QStringLiteral("bibtex-key"), QStringLiteral("title3"));
 
   coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2 << entry3);
 
@@ -128,15 +128,15 @@ void BibtexTest::testDuplicateKeys() {
   dupes = bColl->duplicateBibtexKeys();
   QCOMPARE(dupes.count(), 2);
 
-  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title2"));
+  entry2->setField(QStringLiteral("bibtex-key"), QStringLiteral("title2"));
   dupes = bColl->duplicateBibtexKeys();
   QCOMPARE(dupes.count(), 0);
 }
 
 void BibtexTest::testMapping() {
   // test a few strings from the bibtex mapping file
-  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("™"), QStringList()), QLatin1String("{{\\texttrademark}}"));
-  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("ß"), QStringList()), QLatin1String("{{\\ss}}"));
-  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("…"), QStringList()), QLatin1String("{{\\ldots}}"));
-  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("°"), QStringList()), QLatin1String("{$^{\\circ}$}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("™"), QStringList()), QStringLiteral("{{\\texttrademark}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("ß"), QStringList()), QStringLiteral("{{\\ss}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("…"), QStringList()), QStringLiteral("{{\\ldots}}"));
+  QCOMPARE(Tellico::BibtexHandler::exportText(QString::fromUtf8("°"), QStringList()), QStringLiteral("{$^{\\circ}$}"));
 }

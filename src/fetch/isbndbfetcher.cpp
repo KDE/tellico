@@ -112,19 +112,19 @@ void ISBNdbFetcher::doSearch() {
   switch(request().key) {
     case Title:
       u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value);
       break;
 
     case Person:
       u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QLatin1String("i"), QLatin1String("author_name"));
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("i"), QStringLiteral("author_name"));
+      q.addQueryItem(QStringLiteral("q"), request().value);
       break;
 
     case Keyword:
       u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QLatin1String("i"), QLatin1String("full"));
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("i"), QStringLiteral("full"));
+      q.addQueryItem(QStringLiteral("q"), request().value);
       break;
 
     case ISBN:
@@ -142,7 +142,7 @@ void ISBNdbFetcher::doSearch() {
       stop();
       return;
   }
-  q.addQueryItem(QLatin1String("page"), QString::number(m_page));
+  q.addQueryItem(QStringLiteral("page"), QString::number(m_page));
   u.setQuery(q);
 
   //  myDebug() << "url: " << u.url();
@@ -204,10 +204,10 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   }
 
   if(m_total == -1) {
-    QDomNode n = dom.documentElement().namedItem(QLatin1String("BookList"));
+    QDomNode n = dom.documentElement().namedItem(QStringLiteral("BookList"));
     QDomElement e = n.toElement();
     if(!e.isNull()) {
-      m_total = e.attribute(QLatin1String("total_results"), QString::number(-1)).toInt();
+      m_total = e.attribute(QStringLiteral("total_results"), QString::number(-1)).toInt();
     }
   }
 
@@ -233,7 +233,7 @@ void ISBNdbFetcher::slotComplete(KJob*) {
   }
 
   if(coll->entryCount() == 0) {
-    QDomNode n = dom.documentElement().namedItem(QLatin1String("ErrorMessage"));
+    QDomNode n = dom.documentElement().namedItem(QStringLiteral("ErrorMessage"));
     QDomElement e = n.toElement();
     if(!e.isNull() && e.text() == QLatin1String("Access key error")) {
       message(i18n("<qt><p><b>The ISBNndb.com server reports an access key error.</b></p>"
@@ -306,7 +306,7 @@ Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
 }
 
 void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = DataFileRegistry::self()->locate(QLatin1String("isbndb2tellico.xsl"));
+  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("isbndb2tellico.xsl"));
   if(xsltfile.isEmpty()) {
     myWarning() << "can not locate isbndb2tellico.xsl.";
     return;
@@ -325,13 +325,13 @@ void ISBNdbFetcher::initXSLTHandler() {
 }
 
 Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString isbn = entry_->field(QLatin1String("isbn"));
+  QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(Fetch::ISBN, isbn);
   }
 
   // optimistically try searching for title and rely on Collection::sameEntry() to figure things out
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
@@ -353,8 +353,8 @@ QString ISBNdbFetcher::defaultIcon() {
 Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
   // same ones as z3950fetcher
   StringHash hash;
-  hash[QLatin1String("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
-  hash[QLatin1String("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
+  hash[QStringLiteral("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
+  hash[QStringLiteral("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
 }
 

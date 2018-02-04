@@ -56,7 +56,7 @@ QString realFieldName(int syntaxVersion, const QString& localName) {
   QString fieldName = localName;
   if(syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
     // in version 2, "keywords" changed to "keyword"
-    fieldName = QLatin1String("keyword");
+    fieldName = QStringLiteral("keyword");
   }
   return fieldName;
 }
@@ -165,7 +165,7 @@ bool CollectionHandler::start(const QString&, const QString&, const QString&, co
   d->entryName = attValue(atts_, "unit");
   // for error recovery, assume entry name is default if empty for now
   if(d->entryName.isEmpty()) {
-    d->entryName = QLatin1String("entry");
+    d->entryName = QStringLiteral("entry");
   }
   return true;
 }
@@ -182,7 +182,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   // here, we need to scan all the image values in all the entries and check
   // maybe this is too costly, especially since the capability wasn't advertised?
 
-  const bool hasMDate = d->coll->hasField(QLatin1String("mdate"));
+  const bool hasMDate = d->coll->hasField(QStringLiteral("mdate"));
   const int maxImageWarnings = 3;
   int imageWarnings = 0;
 
@@ -213,9 +213,9 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
         }
         if(hasMDate) {
           // since the modified date gets reset, keep a copy
-          const QString mdate = entry->field(QLatin1String("mdate"));
+          const QString mdate = entry->field(QStringLiteral("mdate"));
           entry->setField(field->name(), value);
-          entry->setField(QLatin1String("mdate"), mdate);
+          entry->setField(QStringLiteral("mdate"), mdate);
         } else {
           // reset the image id to be whatever was loaded
           entry->setField(field->name(), value);
@@ -245,7 +245,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   // in syntax 4, the element name was changed to "entry", always, rather than depending on
   // on the entryName of the collection.
   if(d->syntaxVersion > 3) {
-    d->entryName = QLatin1String("entry");
+    d->entryName = QStringLiteral("entry");
     Data::Collection::Type type = static_cast<Data::Collection::Type>(d->collType);
     d->coll = CollectionFactory::collection(type, addFields);
   } else {
@@ -271,7 +271,7 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
 
 //  as a special case, for old book collections with a bibtex-id field, convert to Bibtex
   if(d->syntaxVersion < 4 && d->collType == Data::Collection::Book
-     && d->coll->hasField(QLatin1String("bibtex-id"))) {
+     && d->coll->hasField(QStringLiteral("bibtex-id"))) {
     d->coll = Data::BibtexCollection::convertBookCollection(d->coll);
   }
 
@@ -363,7 +363,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   }
 
   if(d->syntaxVersion < 5 && atts_.index(QLatin1String("bibtex-field")) > -1) {
-    field->setProperty(QLatin1String("bibtex"), attValue(atts_, "bibtex-field"));
+    field->setProperty(QStringLiteral("bibtex"), attValue(atts_, "bibtex-field"));
   }
 
   // for syntax 8, rating fields got their own type
@@ -385,9 +385,9 @@ bool FieldHandler::end(const QString&, const QString&, const QString&) {
   if(!d->fields.isEmpty()) {
     Data::FieldPtr field = d->fields.back();
     if(field->hasFlag(Data::Field::Derived) &&
-       field->property(QLatin1String("template")).isEmpty() &&
+       field->property(QStringLiteral("template")).isEmpty() &&
        field->description().contains(QLatin1Char('%'))) {
-      field->setProperty(QLatin1String("template"), field->description());
+      field->setProperty(QStringLiteral("template"), field->description());
       field->setDescription(QString());
     }
   }
@@ -405,13 +405,13 @@ bool FieldPropertyHandler::start(const QString&, const QString&, const QString&,
   // all track fields in music collections prior to version 9 get converted to three columns
   if(d->syntaxVersion < 9) {
     if(d->collType == Data::Collection::Album && field->name() == QLatin1String("track")) {
-      field->setProperty(QLatin1String("columns"), QLatin1String("3"));
-      field->setProperty(QLatin1String("column1"), i18n("Title"));
-      field->setProperty(QLatin1String("column2"), i18n("Artist"));
-      field->setProperty(QLatin1String("column3"), i18n("Length"));
+      field->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+      field->setProperty(QStringLiteral("column1"), i18n("Title"));
+      field->setProperty(QStringLiteral("column2"), i18n("Artist"));
+      field->setProperty(QStringLiteral("column3"), i18n("Length"));
     } else if(d->collType == Data::Collection::Video && field->name() == QLatin1String("cast")) {
-      field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
-      field->setProperty(QLatin1String("column2"), i18n("Role"));
+      field->setProperty(QStringLiteral("column1"), i18n("Actor/Actress"));
+      field->setProperty(QStringLiteral("column2"), i18n("Role"));
     }
   }
 
@@ -501,8 +501,8 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
 bool EntryHandler::end(const QString&, const QString&, const QString&) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
-  if(!d->modifiedDate.isEmpty() && d->coll->hasField(QLatin1String("mdate"))) {
-    entry->setField(QLatin1String("mdate"), d->modifiedDate);
+  if(!d->modifiedDate.isEmpty() && d->coll->hasField(QStringLiteral("mdate"))) {
+    entry->setField(QStringLiteral("mdate"), d->modifiedDate);
     d->modifiedDate.clear();
   }
   return true;
@@ -560,7 +560,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
 
   if(d->syntaxVersion < 4 && f->type() == Data::Field::Bool) {
     // in version 3 and prior, checkbox attributes had no text(), set it to "true"
-    fieldValue = QLatin1String("true");
+    fieldValue = QStringLiteral("true");
   } else if(d->syntaxVersion < 8 && f->type() == Data::Field::Rating) {
     // in version 8, old rating fields get changed
     bool ok;
@@ -586,7 +586,7 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   if(d->syntaxVersion < 9 && d->coll->type() == Data::Collection::Album && fieldName == QLatin1String("track")) {
     // yes, this assumes the artist has already been set
     fieldValue += FieldFormat::columnDelimiterString();
-    fieldValue += entry->field(QLatin1String("artist"));
+    fieldValue += entry->field(QStringLiteral("artist"));
   }
   if(fieldValue.isEmpty()) {
     return true;
@@ -626,7 +626,7 @@ bool DateValueHandler::start(const QString&, const QString&, const QString&, con
 bool DateValueHandler::end(const QString&, const QString& localName_, const QString&) {
   // the data value is y-m-d even if there are no date values
   if(d->textBuffer.isEmpty()) {
-    d->textBuffer = QLatin1String("--");
+    d->textBuffer = QStringLiteral("--");
   }
   QStringList tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
   Q_ASSERT(tokens.size() == 3);
@@ -663,7 +663,7 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
     QRegExp rx(QLatin1String("\\d+:\\d\\d"));
     if(rx.exactMatch(d->text)) {
       d->text += FieldFormat::columnDelimiterString();
-      d->text += d->entries.back()->field(QLatin1String("artist"));
+      d->text += d->entries.back()->field(QStringLiteral("artist"));
     }
   }
 

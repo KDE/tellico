@@ -115,9 +115,9 @@ void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
   // no parent means it's a top-level item
   if(index.parent().isValid()) {
     QMenu menu(this);
-    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
                    i18n("Check-in"), this, SLOT(slotCheckIn()));
-    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
                    i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
     menu.exec(event_->globalPos());
   }

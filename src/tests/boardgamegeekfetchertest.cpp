@@ -51,7 +51,7 @@ void BoardGameGeekFetcherTest::initTestCase() {
 
 void BoardGameGeekFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Title,
-                                       QLatin1String("Catan"));
+                                       QStringLiteral("Catan"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -60,21 +60,21 @@ void BoardGameGeekFetcherTest::testTitle() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::BoardGame);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Catan"));
-  QCOMPARE(entry->field(QLatin1String("designer")), QLatin1String("Klaus Teuber"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("publisher"))).at(0), QLatin1String("KOSMOS"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1995"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("genre"))).at(0), QLatin1String("Negotiation"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QLatin1String("mechanism"))).at(0), QLatin1String("Dice Rolling"));
-  QCOMPARE(entry->field(QLatin1String("num-player")), QLatin1String("3; 4"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Catan"));
+  QCOMPARE(entry->field(QStringLiteral("designer")), QStringLiteral("Klaus Teuber"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("publisher"))).at(0), QStringLiteral("KOSMOS"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1995"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("genre"))).at(0), QStringLiteral("Negotiation"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QStringLiteral("mechanism"))).at(0), QStringLiteral("Dice Rolling"));
+  QCOMPARE(entry->field(QStringLiteral("num-player")), QStringLiteral("3; 4"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
 }
 
 void BoardGameGeekFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::BoardGame, Tellico::Fetch::Keyword,
-                                       QLatin1String("The Settlers of Catan"));
+                                       QStringLiteral("The Settlers of Catan"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BoardGameGeekFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);

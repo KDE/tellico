@@ -45,20 +45,20 @@ void GoogleScholarFetcherTest::initTestCase() {
   // since we use the bibtex importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Speeding up the Hybrid Monte Carlo algorithm for dynamical fermions"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("Hasenbusch, Martin"));
-  m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Elsevier"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("physics letters b"));
-  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("519"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2001"));
-  m_fieldValues.insert(QLatin1String("pages"), QString::fromUtf8("177–182"));
-  m_fieldValues.insert(QLatin1String("bibtex-key"), QLatin1String("hasenbusch2001speeding"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Speeding up the Hybrid Monte Carlo algorithm for dynamical fermions"));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Hasenbusch, Martin"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Elsevier"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("physics letters b"));
+  m_fieldValues.insert(QStringLiteral("volume"), QStringLiteral("519"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2001"));
+  m_fieldValues.insert(QStringLiteral("pages"), QStringLiteral("177–182"));
+  m_fieldValues.insert(QStringLiteral("bibtex-key"), QStringLiteral("hasenbusch2001speeding"));
 }
 
 void GoogleScholarFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       m_fieldValues.value("title"));
+                                       m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -78,7 +78,7 @@ void GoogleScholarFetcherTest::testTitle() {
 
 void GoogleScholarFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       m_fieldValues.value("author"));
+                                       m_fieldValues.value(QStringLiteral("author")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleScholarFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -87,7 +87,7 @@ void GoogleScholarFetcherTest::testAuthor() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->title().toLower() == m_fieldValues.value(QLatin1String("title")).toLower()) {
+    if(test->title().toLower() == m_fieldValues.value(QStringLiteral("title")).toLower()) {
       entry = test;
       break;
     } else {

@@ -47,7 +47,7 @@ GCstarFetcherTest::GCstarFetcherTest() : AbstractFetcherTest() {
 }
 
 void GCstarFetcherTest::initTestCase() {
-  const QString gcstar = QStandardPaths::findExecutable(QLatin1String("gcstar"));
+  const QString gcstar = QStandardPaths::findExecutable(QStringLiteral("gcstar"));
   if(gcstar.isEmpty()) {
     QSKIP("This test requires gcstar", SkipAll);
   }
@@ -60,13 +60,13 @@ void GCstarFetcherTest::initTestCase() {
 
 void GCstarFetcherTest::testSnowyRiver() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("GCstar Video");
+  QString groupName = QStringLiteral("GCstar Video");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Superman Returns");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GCstarPluginFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -77,8 +77,8 @@ void GCstarFetcherTest::testSnowyRiver() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Superman Returns"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Superman Returns"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
 }

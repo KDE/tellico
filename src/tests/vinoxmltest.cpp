@@ -57,21 +57,21 @@ void VinoXMLTest::testImport() {
 
   Tellico::Data::EntryPtr entry = coll->entries().first();
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("2002 Goldwater Estate Merlot"));
-  QCOMPARE(entry->field("producer"), QLatin1String("Goldwater Estate"));
-  QCOMPARE(entry->field("vintage"), QLatin1String("2002"));
-  QCOMPARE(entry->field("varietal"), QLatin1String("Merlot"));
-  QCOMPARE(entry->field("appellation"), QLatin1String("Waiheke Island"));
-  QCOMPARE(entry->field("type"), QLatin1String("Red Wine"));
-  QCOMPARE(entry->field("pur_date"), QLatin1String("2002-09-25"));
-  QCOMPARE(entry->field("pur_price"), QLatin1String("25.00"));
-  QCOMPARE(entry->field("country"), QLatin1String("New Zealand"));
-  QCOMPARE(entry->field("quantity"), QLatin1String("5"));
-  QCOMPARE(entry->field("label"), QLatin1String("GoldWaterEsslin2002.jpg"));
+  QCOMPARE(entry->field("title"), QStringLiteral("2002 Goldwater Estate Merlot"));
+  QCOMPARE(entry->field("producer"), QStringLiteral("Goldwater Estate"));
+  QCOMPARE(entry->field("vintage"), QStringLiteral("2002"));
+  QCOMPARE(entry->field("varietal"), QStringLiteral("Merlot"));
+  QCOMPARE(entry->field("appellation"), QStringLiteral("Waiheke Island"));
+  QCOMPARE(entry->field("type"), QStringLiteral("Red Wine"));
+  QCOMPARE(entry->field("pur_date"), QStringLiteral("2002-09-25"));
+  QCOMPARE(entry->field("pur_price"), QStringLiteral("25.00"));
+  QCOMPARE(entry->field("country"), QStringLiteral("New Zealand"));
+  QCOMPARE(entry->field("quantity"), QStringLiteral("5"));
+  QCOMPARE(entry->field("label"), QStringLiteral("GoldWaterEsslin2002.jpg"));
   QVERIFY(!entry->field("description").isEmpty());
 
   QVERIFY(Tellico::ImageFactory::validImage(entry->field("label")));
-  Tellico::Data::ImageInfo info = Tellico::ImageFactory::imageInfo(entry->field("label"));
+  Tellico::Data::ImageInfo info = Tellico::ImageFactory::imageInfo(entry->field(QStringLiteral("label")));
   QCOMPARE(info.width(false), 256);
   QCOMPARE(info.height(false), 920);
 }

@@ -425,7 +425,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       // legacy entry item
       config.deleteEntry(QLatin1String("ColumnState")    + configN);
     }
-    configN = QLatin1String("_0");
+    configN = QStringLiteral("_0");
   }
 
   QStringList colNames;
@@ -530,7 +530,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   QAction* columnAction = m_headerMenu->addMenu(m_columnMenu);
   columnAction->setText(i18nc("Noun, Menu name", "Columns"));
-  columnAction->setIcon(QIcon::fromTheme(QLatin1String("view-file-columns")));
+  columnAction->setIcon(QIcon::fromTheme(QStringLiteral("view-file-columns")));
 
   m_headerMenu->addSeparator();
 
@@ -538,7 +538,7 @@ void DetailedListView::updateHeaderMenu() {
   connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
   connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
-  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
+  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Resize to Content"));
   connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 
@@ -552,7 +552,7 @@ void DetailedListView::updateColumnDelegates() {
       }
       RatingDelegate* delegate = new RatingDelegate(this);
       bool ok; // not used
-      delegate->setMaxRating(Tellico::toUInt(field->property(QLatin1String("maximum")), &ok));
+      delegate->setMaxRating(Tellico::toUInt(field->property(QStringLiteral("maximum")), &ok));
       setItemDelegateForColumn(ncol, delegate);
     } else {
       // reset column delegate to overall delegate

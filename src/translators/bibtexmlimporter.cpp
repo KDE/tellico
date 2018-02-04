@@ -64,7 +64,7 @@ void BibtexmlImporter::loadDomDocument() {
   const QString& ns = XML::nsBibtexml;
   m_coll = new Data::BibtexCollection(true);
 
-  QDomNodeList entryelems = root.elementsByTagNameNS(ns, QLatin1String("entry"));
+  QDomNodeList entryelems = root.elementsByTagNameNS(ns, QStringLiteral("entry"));
 //  myDebug() << "found " << entryelems.count() << " entries";
 
   const uint count = entryelems.count();
@@ -95,9 +95,9 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
     <publisher>...</publisher> */
 
   QString type = node.firstChild().toElement().tagName();
-  entry->setField(QLatin1String("entry-type"), type);
-  QString id = node.toElement().attribute(QLatin1String("id"));
-  entry->setField(QLatin1String("bibtex-key"), id);
+  entry->setField(QStringLiteral("entry-type"), type);
+  QString id = node.toElement().attribute(QStringLiteral("id"));
+  entry->setField(QStringLiteral("bibtex-key"), id);
 
   QString name, value;
   // field values are first child of first child of entry node
@@ -124,16 +124,16 @@ void BibtexmlImporter::readEntry(const QDomNode& entryNode_) {
       } else {
         name = n.firstChild().toElement().tagName();
         if(name == QLatin1String("keyword")) {
-          name = QLatin1String("keywords");
+          name = QStringLiteral("keywords");
         }
         value.clear();
         for(QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
           // n2 could have first, middle, lastname elements...
           if(name == QLatin1String("person")) {
             QStringList names;
-            names << QLatin1String("initials") << QLatin1String("first")
-                  << QLatin1String("middle") << QLatin1String("prelast")
-                  << QLatin1String("last") << QLatin1String("lineage");
+            names << QStringLiteral("initials") << QStringLiteral("first")
+                  << QStringLiteral("middle") << QStringLiteral("prelast")
+                  << QStringLiteral("last") << QStringLiteral("lineage");
             foreach(const QString& name, names) {
               QDomNodeList list = n2.toElement().elementsByTagName(name);
               if(list.count() > 1) {

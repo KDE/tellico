@@ -209,7 +209,7 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::XSLTImporter(firstURL);
       {
-        QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("mods2tellico.xsl"));
+        QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("mods2tellico.xsl"));
         if(!xsltFile.isEmpty()) {
           QUrl u = QUrl::fromLocalFile(xsltFile);
           static_cast<Import::XSLTImporter*>(importer)->setXSLTURL(u);
@@ -413,7 +413,7 @@ QString ImportDialog::startDir(Tellico::Import::Format format_) {
   if(format_ == Import::GCstar) {
     QDir dir = QDir::home();
     // able to cd if exists and readable
-    if(dir.cd(QLatin1String(".local/share/gcstar/"))) {
+    if(dir.cd(QStringLiteral(".local/share/gcstar/"))) {
       return dir.absolutePath();
     }
   }

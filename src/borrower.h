@@ -38,7 +38,7 @@ namespace Tellico {
 class Loan : public QSharedData {
 
 public:
-  Loan(Data::EntryPtr entry, const QDate& loanDate, const QDate& dueDate, const QString& note);
+  Loan(Data::EntryPtr entry, QDate loanDate, QDate dueDate, const QString& note);
   Loan(const Loan& other);
 
   Data::BorrowerPtr borrower() const;
@@ -52,7 +52,7 @@ public:
   const QDate& loanDate() const { return m_loanDate; }
 
   const QDate& dueDate() const { return m_dueDate; }
-  void setDueDate(const QDate& date) { m_dueDate = date; }
+  void setDueDate(QDate date) { m_dueDate = date; }
 
   const QString& note() const { return m_note; }
   void setNote(const QString& text) { m_note = text; }

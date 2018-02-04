@@ -80,7 +80,7 @@ QStringList Tellico::locateAllFiles(const QString& fileName_) {
 
 QString Tellico::installationDir() {
   // look for a file that gets installed to know the installation directory
-  QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("tellico/pics/tellico.png"));
+  QString appdir = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("tellico/pics/tellico.png"));
   // remove the file name string. Important to keep trailing slash
   appdir.chop(QStringLiteral("pics/tellico.png").length());
   return appdir;
@@ -124,7 +124,7 @@ bool Tellico::checkCommonXSLFile() {
   if(QFile::exists(userCommonFile)) {
     // check timestamps
     // pics/tellico.png is not likely to be in a user directory
-    QString installDir = QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("pics/tellico.png"));
+    QString installDir = QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("pics/tellico.png"));
     installDir = QFileInfo(installDir).absolutePath();
     QString installCommonFile = installDir + QDir::separator() + QLatin1String("tellico-common.xsl");
     if(userCommonFile == installCommonFile) {
@@ -142,7 +142,7 @@ bool Tellico::checkCommonXSLFile() {
       return true;
     }
   }
-  QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, QLatin1String("tellico-common.xsl")));
+  QUrl src = QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("tellico-common.xsl")));
   QUrl dest = QUrl::fromLocalFile(userCommonFile);
   return KIO::file_copy(src, dest)->exec();
 }

@@ -49,33 +49,33 @@ void Z3950FetcherTest::initTestCase() {
 
 void Z3950FetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       QLatin1String("Foundations of Qt Development"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QLatin1String("loc")));
+                                       QStringLiteral("Foundations of Qt Development"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QStringLiteral("loc")));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Foundations of Qt development"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-59059-831-8"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt development"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Thelin, Johan."));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-59059-831-8"));
 }
 
 void Z3950FetcherTest::testIsbn() {
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("978-1-59059-831-3; 0-201-88954-4"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QLatin1String("loc")));
+                                       QStringLiteral("978-1-59059-831-3; 0-201-88954-4"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QStringLiteral("loc")));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 2);
 
   Tellico::Data::EntryPtr entry = results.at(1);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Foundations of Qt development"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Thelin, Johan."));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-59059-831-8"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Foundations of Qt development"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Thelin, Johan."));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-59059-831-8"));
 }
 
 void Z3950FetcherTest::testADS() {
@@ -83,39 +83,39 @@ void Z3950FetcherTest::testADS() {
   return;
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Raw,
-                                       QLatin1String("@and @attr 1=4 \"Particle creation by black holes\" "
+                                       QStringLiteral("@and @attr 1=4 \"Particle creation by black holes\" "
                                                      "@and @attr 1=1003 Hawking @attr 1=62 Generalized"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this,
-                                                                        QLatin1String("z3950.adsabs.harvard.edu"),
+                                                                        QStringLiteral("z3950.adsabs.harvard.edu"),
                                                                         210,
-                                                                        QLatin1String("AST"),
-                                                                        QLatin1String("ads")));
+                                                                        QStringLiteral("AST"),
+                                                                        QStringLiteral("ads")));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Particle creation by black holes"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Hawking, S. W."));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("1975"));
-  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1007/BF02345020"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("199-220"));
-  QCOMPARE(entry->field(QLatin1String("volume")), QLatin1String("43"));
-  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("Communications In Mathematical Physics"));
-  QVERIFY(!entry->field(QLatin1String("url")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Particle creation by black holes"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Hawking, S. W."));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1975"));
+  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1007/BF02345020"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("199-220"));
+  QCOMPARE(entry->field(QStringLiteral("volume")), QStringLiteral("43"));
+  QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("Communications In Mathematical Physics"));
+  QVERIFY(!entry->field(QStringLiteral("url")).isEmpty());
 }
 
 void Z3950FetcherTest::testBibsysIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("8242407665"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QLatin1String("bibsys")));
+                                       QStringLiteral("8242407665"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this, QStringLiteral("bibsys")));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QString::fromUtf8("Grønn"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("82-42-40477-1"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("Grønn"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("82-42-40477-1"));
 }

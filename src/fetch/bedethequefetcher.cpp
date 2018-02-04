@@ -87,9 +87,9 @@ void BedethequeFetcher::search() {
   // special case for updates which include the BD link as Raw request
   if(request().key == Raw) {
     QUrl u(request().value);
-    u.setHost(QLatin1String("m.bedetheque.com")); // use mobile site for easier parsing
+    u.setHost(QStringLiteral("m.bedetheque.com")); // use mobile site for easier parsing
     m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-    m_job->addMetaData(QLatin1String("referrer"), QString::fromLatin1(BD_BASE_URL));
+    m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(BD_BASE_URL));
     KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
     // different slot here
     connect(m_job, SIGNAL(result(KJob*)), SLOT(slotLinkComplete(KJob*)));
@@ -110,15 +110,15 @@ void BedethequeFetcher::search() {
   QUrlQuery q;
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("RechTitre"), request().value);
+      q.addQueryItem(QStringLiteral("RechTitre"), request().value);
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("RechSerie"), request().value);
+      q.addQueryItem(QStringLiteral("RechSerie"), request().value);
       break;
 
     case ISBN:
-      q.addQueryItem(QLatin1String("RechISBN"), ISBNValidator::cleanValue(request().value));
+      q.addQueryItem(QStringLiteral("RechISBN"), ISBNValidator::cleanValue(request().value));
       break;
 
     default:
@@ -131,7 +131,7 @@ void BedethequeFetcher::search() {
 //  myDebug() << "url: " << u.url();
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  m_job->addMetaData(QLatin1String("referrer"), QString::fromLatin1(BD_BASE_URL));
+  m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(BD_BASE_URL));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
@@ -186,7 +186,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
   const int pos_end = output.indexOf(QLatin1String("</ul>"), pos_list+1, Qt::CaseInsensitive);
   output = output.mid(pos_list, pos_end-pos_list);
 
-  QString pat = QLatin1String("http://m.bedetheque.com/BD");
+  QString pat = QStringLiteral("http://m.bedetheque.com/BD");
   QRegExp anchorRx(QLatin1String("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
                    QRegExp::escape(pat) +
                    QLatin1String("[^\"']*)\"[^>]*>(.*)</a"), Qt::CaseInsensitive);
@@ -308,36 +308,36 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
 
  // map captions in HTML to field names
   QHash<QString, QString> fieldMap;
-  fieldMap.insert(QStringLiteral("Série"),       QLatin1String("series"));
-  fieldMap.insert(QLatin1String("Titre"),           QLatin1String("title"));
-  fieldMap.insert(QLatin1String("Origine"),         QLatin1String("country"));
+  fieldMap.insert(QStringLiteral("Série"),       QStringLiteral("series"));
+  fieldMap.insert(QStringLiteral("Titre"),           QStringLiteral("title"));
+  fieldMap.insert(QStringLiteral("Origine"),         QStringLiteral("country"));
 //  fieldMap.insert(QLatin1String("Format"),          QLatin1String("binding"));
-  fieldMap.insert(QStringLiteral("Scénario"),    QLatin1String("writer"));
-  fieldMap.insert(QLatin1String("Dessin"),          QLatin1String("artist"));
-  fieldMap.insert(QStringLiteral("Dépot légal"), QLatin1String("pub_year"));
-  fieldMap.insert(QLatin1String("Editeur"),         QLatin1String("publisher"));
-  fieldMap.insert(QLatin1String("Planches"),        QLatin1String("pages"));
-  fieldMap.insert(QLatin1String("Style"),           QLatin1String("genre"));
-  fieldMap.insert(QLatin1String("Tome"),            QLatin1String("issue"));
-  fieldMap.insert(QLatin1String("Collection"),      QLatin1String("edition"));
+  fieldMap.insert(QStringLiteral("Scénario"),    QStringLiteral("writer"));
+  fieldMap.insert(QStringLiteral("Dessin"),          QStringLiteral("artist"));
+  fieldMap.insert(QStringLiteral("Dépot légal"), QStringLiteral("pub_year"));
+  fieldMap.insert(QStringLiteral("Editeur"),         QStringLiteral("publisher"));
+  fieldMap.insert(QStringLiteral("Planches"),        QStringLiteral("pages"));
+  fieldMap.insert(QStringLiteral("Style"),           QStringLiteral("genre"));
+  fieldMap.insert(QStringLiteral("Tome"),            QStringLiteral("issue"));
+  fieldMap.insert(QStringLiteral("Collection"),      QStringLiteral("edition"));
 
   if(optionalFields().contains(QLatin1String("isbn"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("isbn"), i18n("ISBN#")));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("isbn"), i18n("ISBN#")));
     field->setCategory(i18n("Publishing"));
     field->setDescription(i18n("International Standard Book Number"));
     coll->addField(field);
-    fieldMap.insert(QLatin1String("ISBN"), QLatin1String("isbn"));
+    fieldMap.insert(QStringLiteral("ISBN"), QStringLiteral("isbn"));
   }
   if(optionalFields().contains(QLatin1String("colorist"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("colorist"), i18n("Colorist")));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("colorist"), i18n("Colorist")));
     field->setCategory(i18n("General"));
     field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
     field->setFormatType(FieldFormat::FormatName);
     coll->addField(field);
-    fieldMap.insert(QLatin1String("Couleurs"), QLatin1String("colorist"));
+    fieldMap.insert(QStringLiteral("Couleurs"), QStringLiteral("colorist"));
   }
   if(optionalFields().contains(QLatin1String("lien-bel"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("lien-bel"), i18n("Bedetheque Link"), Data::Field::URL));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("lien-bel"), i18n("Bedetheque Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -347,7 +347,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
 
   QRegExp yearRx(QLatin1String("\\d{4}"));
   // the negative lookahead with "no-border" is for multiple values
-  QString pat = QLatin1String("<label>%1.*</label>(.+)</li>(?!\\s*<li class=\"no-border)");
+  QString pat = QStringLiteral("<label>%1.*</label>(.+)</li>(?!\\s*<li class=\"no-border)");
 
   Data::EntryPtr entry(new Data::Entry(coll));
 
@@ -389,7 +389,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     QUrl u(imgRx.cap(1));
     QString id = ImageFactory::addImage(u, true);
     if(!id.isEmpty()) {
-      entry->setField(QLatin1String("cover"), id);
+      entry->setField(QStringLiteral("cover"), id);
     }
   }
 
@@ -397,7 +397,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     QRegExp chronRx(QLatin1String("La chronique\\s*</li>\\s*<li[^>]*>(.*)</ul>"));
     chronRx.setMinimal(true);
     if(chronRx.indexIn(str_) > -1) {
-      entry->setField(QLatin1String("comments"), chronRx.cap(1).trimmed());
+      entry->setField(QStringLiteral("comments"), chronRx.cap(1).trimmed());
     }
   }
 
@@ -405,7 +405,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     QRegExp linkRx(QLatin1String("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"([^\"]+)\""));
     linkRx.setMinimal(true);
     if(linkRx.indexIn(str_) > -1) {
-      entry->setField(QLatin1String("lien-bel"), linkRx.cap(1));
+      entry->setField(QStringLiteral("lien-bel"), linkRx.cap(1));
     }
   }
 
@@ -413,15 +413,15 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
 }
 
 Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString l = entry_->field(QLatin1String("lien-bel"));
+  QString l = entry_->field(QStringLiteral("lien-bel"));
   if(!l.isEmpty()) {
     return FetchRequest(Fetch::Raw, l);
   }
-  QString i = entry_->field(QLatin1String("isbn"));
+  QString i = entry_->field(QStringLiteral("isbn"));
   if(!i.isEmpty()) {
     return FetchRequest(Fetch::ISBN, i);
   }
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
@@ -431,7 +431,7 @@ Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr ent
 void BedethequeFetcher::fetchToken() {
   QRegExp tokenRx(QLatin1String("name\\s*=\\s*\"csrf_token_bedetheque\"\\s*value\\s*=\\s*\"([^\"]+)\""));
 
-  const QUrl url(QLatin1String("http://www.bedetheque.com/search/albums"));
+  const QUrl url(QStringLiteral("http://www.bedetheque.com/search/albums"));
   const QString text = FileHandler::readTextFile(url, true /*quiet*/);
   if(tokenRx.indexIn(text) > -1) {
     m_token = tokenRx.cap(1);
@@ -443,7 +443,7 @@ Tellico::Fetch::ConfigWidget* BedethequeFetcher::configWidget(QWidget* parent_) 
 }
 
 QString BedethequeFetcher::defaultName() {
-  return QLatin1String("Bedetheque");
+  return QStringLiteral("Bedetheque");
 }
 
 QString BedethequeFetcher::defaultIcon() {
@@ -453,11 +453,11 @@ QString BedethequeFetcher::defaultIcon() {
 //static
 Tellico::StringHash BedethequeFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("colorist")]     = i18n("Colorist");
-  hash[QLatin1String("comments")]     = i18n("Comments");
-  hash[QLatin1String("isbn")]         = i18n("ISBN#");
+  hash[QStringLiteral("colorist")]     = i18n("Colorist");
+  hash[QStringLiteral("comments")]     = i18n("Comments");
+  hash[QStringLiteral("isbn")]         = i18n("ISBN#");
   // use the field name that the bedetheque.py script did, to maintain backwards compatibility
-  hash[QLatin1String("lien-bel")]     = i18n("Bedetheque Link");
+  hash[QStringLiteral("lien-bel")]     = i18n("Bedetheque Link");
   return hash;
 }
 

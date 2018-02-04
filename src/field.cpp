@@ -47,17 +47,17 @@ Field::Field(const QString& name_, const QString& title_, Type type_/*=Line*/)
       m_flags = AllowMultiple;
       if(m_type == Table2) {
         m_type = Table;
-        setProperty(QLatin1String("columns"), QLatin1String("2"));
+        setProperty(QStringLiteral("columns"), QStringLiteral("2"));
       } else {
-        setProperty(QLatin1String("columns"), QLatin1String("1"));
+        setProperty(QStringLiteral("columns"), QStringLiteral("1"));
       }
       break;
     case Date:  // hidden from user
       m_formatType = FieldFormat::FormatDate;
       break;
     case Rating:
-      setProperty(QLatin1String("minimum"), QLatin1String("1"));
-      setProperty(QLatin1String("maximum"), QLatin1String("5"));
+      setProperty(QStringLiteral("minimum"), QStringLiteral("1"));
+      setProperty(QStringLiteral("maximum"), QStringLiteral("5"));
       break;
     case ReadOnly:
       m_flags = NoEdit;
@@ -122,10 +122,10 @@ void Field::setType(Field::Type type_) {
       m_flags |= AllowMultiple;
       if(m_type == Table2) {
         m_type = Table;
-        setProperty(QLatin1String("columns"), QLatin1String("2"));
+        setProperty(QStringLiteral("columns"), QStringLiteral("2"));
       }
-      if(property(QLatin1String("columns")).isEmpty()) {
-        setProperty(QLatin1String("columns"), QLatin1String("1"));
+      if(property(QStringLiteral("columns")).isEmpty()) {
+        setProperty(QStringLiteral("columns"), QStringLiteral("1"));
       }
       break;
     case Date:
@@ -174,12 +174,12 @@ void Field::setFormatType(FieldFormat::Type type_) {
 }
 
 QString Field::defaultValue() const {
-  return property(QLatin1String("default"));
+  return property(QStringLiteral("default"));
 }
 
 void Field::setDefaultValue(const QString& value_) {
   if(value_.isEmpty() || m_type != Choice || m_allowed.contains(value_)) {
-    setProperty(QLatin1String("default"), value_);
+    setProperty(QStringLiteral("default"), value_);
   }
 }
 
@@ -252,7 +252,7 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
   }
 
   if(field_->name() != QLatin1String("rating")
-     && field_->property(QLatin1String("rating")) != QLatin1String("true")) {
+     && field_->property(QStringLiteral("rating")) != QLatin1String("true")) {
     return; // nothing to do
   }
 
@@ -274,10 +274,10 @@ void Field::convertOldRating(Tellico::Data::FieldPtr field_) {
     min = 1;
     max = 5;
   }
-  field_->setProperty(QLatin1String("minimum"), QString::number(min));
-  field_->setProperty(QLatin1String("maximum"), QString::number(max));
+  field_->setProperty(QStringLiteral("minimum"), QString::number(min));
+  field_->setProperty(QStringLiteral("maximum"), QString::number(max));
   //remove any old property
-  field_->setProperty(QLatin1String("rating"), QString());
+  field_->setProperty(QStringLiteral("rating"), QString());
   field_->setType(Rating);
 }
 
@@ -285,25 +285,25 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
   Data::FieldPtr field;
   switch(fieldEnum) {
     case IDField:
-      field = new Field(QLatin1String("id"), i18nc("ID # of the entry", "ID"), Field::Number);
+      field = new Field(QStringLiteral("id"), i18nc("ID # of the entry", "ID"), Field::Number);
       field->setCategory(i18n("Personal"));
-      field->setProperty(QLatin1String("template"), QLatin1String("%{@id}"));
+      field->setProperty(QStringLiteral("template"), QStringLiteral("%{@id}"));
       field->setFlags(Field::Derived);
       field->setFormatType(FieldFormat::FormatNone);
       break;
     case TitleField:
-      field = new Field(QLatin1String("title"), i18n("Title"));
+      field = new Field(QStringLiteral("title"), i18n("Title"));
       field->setCategory(i18n("General"));
       field->setFlags(Field::NoDelete);
       field->setFormatType(FieldFormat::FormatTitle);
       break;
     case CreatedDateField:
-      field = new Field(QLatin1String("cdate"), i18n("Date Created"), Field::Date);
+      field = new Field(QStringLiteral("cdate"), i18n("Date Created"), Field::Date);
       field->setCategory(i18n("Personal"));
       field->setFlags(Field::NoEdit);
       break;
     case ModifiedDateField:
-      field = new Field(QLatin1String("mdate"), i18n("Date Modified"), Field::Date);
+      field = new Field(QStringLiteral("mdate"), i18n("Date Modified"), Field::Date);
       field->setCategory(i18n("Personal"));
       field->setFlags(Field::NoEdit);
       break;

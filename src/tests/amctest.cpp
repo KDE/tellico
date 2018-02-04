@@ -43,5 +43,5 @@ void AmcTest::testImport() {
   QCOMPARE(coll->entryCount(), 2);
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
-  QCOMPARE(entry->title(), QLatin1String("Title2"));
+  QCOMPARE(entry->title(), QStringLiteral("Title2"));
 }

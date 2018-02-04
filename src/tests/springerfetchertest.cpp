@@ -43,20 +43,20 @@ void SpringerFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/springer2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
-  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.1007/BF02174211"));
-//  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("The roughening transition of the three-dimensional Ising interface: A Monte Carlo study"));
-  m_fieldValues.insert(QLatin1String("author"), QString::fromUtf8("Hasenbusch, M.; Meyer, S.; Pütz, M."));
-  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("85"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Journal of Statistical Physics"));
-  m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Springer"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("1996"));
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
+  m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.1007/BF02174211"));
+//  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("The roughening transition of the three-dimensional Ising interface: A Monte Carlo study"));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Hasenbusch, M.; Meyer, S.; Pütz, M."));
+  m_fieldValues.insert(QStringLiteral("volume"), QStringLiteral("85"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("Journal of Statistical Physics"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Springer"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1996"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
 }
 
 void SpringerFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QLatin1String("roughening transition of the three-dimensional Ising interface"));
+                                       QStringLiteral("roughening transition of the three-dimensional Ising interface"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -69,12 +69,12 @@ void SpringerFetcherTest::testTitle() {
     i.next();
     QCOMPARE(entry->field(i.key()), i.value());
   }
-  QVERIFY(entry->field(QLatin1String("abstract")).contains(QLatin1String("Kosterlitz-Thouless")));
+  QVERIFY(entry->field(QStringLiteral("abstract")).contains(QStringLiteral("Kosterlitz-Thouless")));
 }
 
 void SpringerFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QLatin1String("Albert Einstein"));
+                                       QStringLiteral("Albert Einstein"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -84,7 +84,7 @@ void SpringerFetcherTest::testAuthor() {
 
 void SpringerFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QLatin1String("Hadron-hadron scattering"));
+                                       QStringLiteral("Hadron-hadron scattering"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   // spring fetcher defaults to 10 at a time, expect 11 to check search continue
@@ -95,7 +95,7 @@ void SpringerFetcherTest::testKeyword() {
 
 void SpringerFetcherTest::testISBN() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
-                                       QLatin1String("978-3-7643-7436-5"));
+                                       QStringLiteral("978-3-7643-7436-5"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   // there are several results for the same ISBN here
@@ -106,7 +106,7 @@ void SpringerFetcherTest::testISBN() {
 
 void SpringerFetcherTest::testDOI() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
-                                       m_fieldValues.value("doi"));
+                                       m_fieldValues.value(QStringLiteral("doi")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SpringerFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -119,5 +119,5 @@ void SpringerFetcherTest::testDOI() {
     i.next();
     QCOMPARE(entry->field(i.key()), i.value());
   }
-  QVERIFY(entry->field(QLatin1String("abstract")).contains(QLatin1String("Kosterlitz-Thouless")));
+  QVERIFY(entry->field(QStringLiteral("abstract")).contains(QStringLiteral("Kosterlitz-Thouless")));
 }

@@ -47,10 +47,10 @@ void GoogleBookFetcherTest::initTestCase() {
 
 void GoogleBookFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
-                                       QLatin1String("Practical Rdf"));
+                                       QStringLiteral("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
   if(m_hasConfigFile) {
-    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    KConfigGroup cg(&m_config, QStringLiteral("GoogleBookTest"));
     fetcher->readConfig(cg, cg.name());
   }
 
@@ -62,10 +62,10 @@ void GoogleBookFetcherTest::testTitle() {
 
 void GoogleBookFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("0-596-55051-0"));
+                                       QStringLiteral("0-596-55051-0"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
   if(m_hasConfigFile) {
-    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    KConfigGroup cg(&m_config, QStringLiteral("GoogleBookTest"));
     fetcher->readConfig(cg, cg.name());
   }
 
@@ -77,10 +77,10 @@ void GoogleBookFetcherTest::testIsbn() {
 
 void GoogleBookFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
-                                       QLatin1String("Shelley Powers"));
+                                       QStringLiteral("Shelley Powers"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
   if(m_hasConfigFile) {
-    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    KConfigGroup cg(&m_config, QStringLiteral("GoogleBookTest"));
     fetcher->readConfig(cg, cg.name());
   }
 
@@ -88,7 +88,7 @@ void GoogleBookFetcherTest::testAuthor() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr testEntry, results) {
-    if(testEntry->title() == QLatin1String("Practical RDF")) {
+    if(testEntry->title() == QStringLiteral("Practical RDF")) {
       entry = testEntry;
       break;
     }
@@ -99,10 +99,10 @@ void GoogleBookFetcherTest::testAuthor() {
 
 void GoogleBookFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword,
-                                       QLatin1String("Practical Rdf"));
+                                       QStringLiteral("Practical Rdf"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GoogleBookFetcher(this));
   if(m_hasConfigFile) {
-    KConfigGroup cg(&m_config, QLatin1String("GoogleBookTest"));
+    KConfigGroup cg(&m_config, QStringLiteral("GoogleBookTest"));
     fetcher->readConfig(cg, cg.name());
   }
 
@@ -113,20 +113,20 @@ void GoogleBookFetcherTest::testKeyword() {
 }
 
 void GoogleBookFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Practical RDF"));
-  if(entry->field(QLatin1String("isbn")) == QLatin1String("0-596-55051-0")) {
-    QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-55051-0"));
-    QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("352"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Practical RDF"));
+  if(entry->field(QStringLiteral("isbn")) == QStringLiteral("0-596-55051-0")) {
+    QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-596-55051-0"));
+    QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("352"));
   } else {
-    QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-596-51561-8"));
-    QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("336"));
+    QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-596-51561-8"));
+    QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("336"));
   }
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Shelley Powers"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("O'Reilly Media, Inc."));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
-  QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Computers")));
-  QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("XML")));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Shelley Powers"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("O'Reilly Media, Inc."));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2003"));
+  QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("Computers")));
+  QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("XML")));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
 }

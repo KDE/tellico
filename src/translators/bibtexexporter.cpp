@@ -86,7 +86,7 @@ QString BibtexExporter::text() {
   QString crossRefField;
   bool hasCrossRefs = false;
 
-  const QString bibtex = QLatin1String("bibtex");
+  const QString bibtex = QStringLiteral("bibtex");
 // keep a list of all the 'ordinary' fields to iterate through later
   Data::FieldList fields;
   foreach(Data::FieldPtr it, this->fields()) {
@@ -296,8 +296,8 @@ void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
 void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldList& fields_, const Tellico::Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
   const QStringList macros = static_cast<const Data::BibtexCollection*>(collection().data())->macroList().keys();
-  const QString bibtex = QLatin1String("bibtex");
-  const QString bibtexSep = QLatin1String("bibtex-separator");
+  const QString bibtex = QStringLiteral("bibtex");
+  const QString bibtexSep = QStringLiteral("bibtex-separator");
   QRegExp numberRx(QLatin1String("^\\d+$"));
 
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;

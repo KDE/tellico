@@ -30,9 +30,9 @@
 
 #include <QRegExp>
 
-const QString Tellico::XML::nsXSL = QLatin1String("http://www.w3.org/1999/XSL/Transform");
-const QString Tellico::XML::nsBibtexml = QLatin1String("http://bibtexml.sf.net/");
-const QString Tellico::XML::dtdBibtexml = QLatin1String("bibtexml.dtd");
+const QString Tellico::XML::nsXSL = QStringLiteral("http://www.w3.org/1999/XSL/Transform");
+const QString Tellico::XML::nsBibtexml = QStringLiteral("http://bibtexml.sf.net/");
+const QString Tellico::XML::dtdBibtexml = QStringLiteral("bibtexml.dtd");
 
 /*
  * VERSION 2 added namespaces, changed to multiple elements,
@@ -63,12 +63,12 @@ const QString Tellico::XML::dtdBibtexml = QLatin1String("bibtexml.dtd");
  * VERSION 12 added new filter rules: before and after, less than and greater than. But only use v12 when needed
  */
 const uint Tellico::XML::syntaxVersion = 12;
-const QString Tellico::XML::nsTellico = QLatin1String("http://periapsis.org/tellico/");
+const QString Tellico::XML::nsTellico = QStringLiteral("http://periapsis.org/tellico/");
 
-const QString Tellico::XML::nsBookcase = QLatin1String("http://periapsis.org/bookcase/");
-const QString Tellico::XML::nsDublinCore = QLatin1String("http://purl.org/dc/elements/1.1/");
-const QString Tellico::XML::nsZing = QLatin1String("http://www.loc.gov/zing/srw/");
-const QString Tellico::XML::nsZingDiag = QLatin1String("http://www.loc.gov/zing/srw/diagnostic/");
+const QString Tellico::XML::nsBookcase = QStringLiteral("http://periapsis.org/bookcase/");
+const QString Tellico::XML::nsDublinCore = QStringLiteral("http://purl.org/dc/elements/1.1/");
+const QString Tellico::XML::nsZing = QStringLiteral("http://www.loc.gov/zing/srw/");
+const QString Tellico::XML::nsZingDiag = QStringLiteral("http://www.loc.gov/zing/srw/diagnostic/");
 
 QString Tellico::XML::pubTellico(int version) {
  return QStringLiteral("-//Robby Stephenson/DTD Tellico V%1.0//EN").arg(version);
@@ -85,7 +85,7 @@ bool Tellico::XML::validXMLElementName(const QString& name_) {
 QString Tellico::XML::elementName(const QString& name_) {
   QString name = name_;
   // change white space to dashes
-  name.replace(QRegExp(QLatin1String("\\s+")), QLatin1String("-"));
+  name.replace(QRegExp(QLatin1String("\\s+")), QStringLiteral("-"));
   // first cut, if it passes, we're done
   if(XML::validXMLElementName(name)) {
     return name;

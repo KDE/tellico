@@ -51,13 +51,13 @@ void KinoFetcherTest::initTestCase() {
 
 void KinoFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("IMDB");
+  QString groupName = QStringLiteral("IMDB");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Superman Returns");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,18 +68,18 @@ void KinoFetcherTest::testTitle() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Superman Returns"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Superman Returns"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(set(entry, "genre"), set("Superhelden-Film; Comicverfilmung; Fantasyfilm; Actionfilm"));
-  QCOMPARE(entry->field("director"), QLatin1String("Bryan Singer"));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(entry->field("director"), QStringLiteral("Bryan Singer"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QCOMPARE(castList.size(), 9);
-  QCOMPARE(castList.at(0), QLatin1String("Brandon Routh"));
-  QCOMPARE(entry->field("nationality"), QLatin1String("USA"));
-  QCOMPARE(entry->field("studio"), QLatin1String("Warner"));
-  QCOMPARE(entry->field("running-time"), QLatin1String("154"));
-  QCOMPARE(entry->field("certification"), QLatin1String("FSK 12 (DE)"));
+  QCOMPARE(castList.at(0), QStringLiteral("Brandon Routh"));
+  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
+  QCOMPARE(entry->field("studio"), QStringLiteral("Warner"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("154"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("FSK 12 (DE)"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

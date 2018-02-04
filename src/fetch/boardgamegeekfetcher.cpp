@@ -51,7 +51,7 @@ using Tellico::Fetch::BoardGameGeekFetcher;
 BoardGameGeekFetcher::BoardGameGeekFetcher(QObject* parent_)
     : XMLFetcher(parent_) {
   setLimit(BGG_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("boardgamegeek2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("boardgamegeek2tellico.xsl"));
 }
 
 BoardGameGeekFetcher::~BoardGameGeekFetcher() {
@@ -71,20 +71,20 @@ QUrl BoardGameGeekFetcher::searchUrl() {
   QUrlQuery q;
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
-      q.addQueryItem(QLatin1String("exact"), QLatin1String("1"));
+      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("boardgame,boardgameexpansion"));
+      q.addQueryItem(QStringLiteral("exact"), QStringLiteral("1"));
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("query"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QStringLiteral("query"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("boardgame,boardgameexpansion"));
       break;
 
     case Raw:
       u.setUrl(QLatin1String(BGG_THING_URL));
-      q.addQueryItem(QLatin1String("id"), request().value);
-      q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+      q.addQueryItem(QStringLiteral("id"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("boardgame,boardgameexpansion"));
       break;
 
     default:
@@ -100,7 +100,7 @@ QUrl BoardGameGeekFetcher::searchUrl() {
 Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
-  const QString id = entry_->field(QLatin1String("bggid"));
+  const QString id = entry_->field(QStringLiteral("bggid"));
   if(id.isEmpty()) {
     myDebug() << "no bgg id found";
     return entry_;
@@ -108,8 +108,8 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
 
   QUrl u(QString::fromLatin1(BGG_THING_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("id"), id);
-  q.addQueryItem(QLatin1String("type"), QLatin1String("boardgame,boardgameexpansion"));
+  q.addQueryItem(QStringLiteral("id"), id);
+  q.addQueryItem(QStringLiteral("type"), QStringLiteral("boardgame,boardgameexpansion"));
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -146,17 +146,17 @@ Tellico::Data::EntryPtr BoardGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("bggid"));
+  coll->removeField(QStringLiteral("bggid"));
   return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest BoardGameGeekFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString bggid = entry_->field(QLatin1String("bggid"));
+  QString bggid = entry_->field(QStringLiteral("bggid"));
   if(!bggid.isEmpty()) {
     return FetchRequest(Raw, bggid);
   }
 
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -168,7 +168,7 @@ Tellico::Fetch::ConfigWidget* BoardGameGeekFetcher::configWidget(QWidget* parent
 }
 
 QString BoardGameGeekFetcher::defaultName() {
-  return QLatin1String("BoardGameGeek");
+  return QStringLiteral("BoardGameGeek");
 }
 
 QString BoardGameGeekFetcher::defaultIcon() {
@@ -177,8 +177,8 @@ QString BoardGameGeekFetcher::defaultIcon() {
 
 Tellico::StringHash BoardGameGeekFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("artist")]             = i18nc("Comic Book Illustrator", "Artist");
-  hash[QLatin1String("boardgamegeek-link")] = i18n("BoardGameGeek Link");
+  hash[QStringLiteral("artist")]             = i18nc("Comic Book Illustrator", "Artist");
+  hash[QStringLiteral("boardgamegeek-link")] = i18n("BoardGameGeek Link");
   return hash;
 }
 

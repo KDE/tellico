@@ -89,8 +89,8 @@ void Manager::loadFetchers() {
   m_uuidHash.clear();
 
   KSharedConfigPtr config = KSharedConfig::openConfig();
-  if(config->hasGroup(QLatin1String("Data Sources"))) {
-    KConfigGroup configGroup(config, QLatin1String("Data Sources"));
+  if(config->hasGroup(QStringLiteral("Data Sources"))) {
+    KConfigGroup configGroup(config, QStringLiteral("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     for(int i = 0; i < nSources; ++i) {
       QString group = QStringLiteral("Data Source %1").arg(i);
@@ -261,7 +261,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   // so check for fetcher version and switch to the XML if version is missing or lower
   if(fetchType == Fetch::ExecExternal &&
      config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("boardgamegeek.rb"))) {
-    KConfigGroup generalConfig(config_, QLatin1String("General Options"));
+    KConfigGroup generalConfig(config_, QStringLiteral("General Options"));
     if(generalConfig.readEntry("FetchVersion", 0) < 1) {
       fetchType = Fetch::BoardGameGeek;
       generalConfig.writeEntry("FetchVersion", 1);
@@ -272,7 +272,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   // so check for fetcher version and switch to the newer if version is missing or lower
   if(fetchType == Fetch::ExecExternal &&
      config.readPathEntry("ExecPath", QString()).endsWith(QLatin1String("bedetheque.py"))) {
-    KConfigGroup generalConfig(config_, QLatin1String("General Options"));
+    KConfigGroup generalConfig(config_, QStringLiteral("General Options"));
     if(generalConfig.readEntry("FetchVersion", 0) < 2) {
       fetchType = Fetch::Bedetheque;
       generalConfig.writeEntry("FetchVersion", 2);
@@ -391,7 +391,7 @@ Tellico::Fetch::NameTypeMap Manager::nameTypeMap() {
   }
 
   // now find all the scripts distributed with tellico
-  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/data-sources/*.spec"));
+  QStringList files = Tellico::locateAllFiles(QStringLiteral("tellico/data-sources/*.spec"));
   foreach(const QString& file, files) {
     KConfig spec(file, KConfig::SimpleConfig);
     KConfigGroup specConfig(&spec, QString());
@@ -462,7 +462,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
 #ifdef HAVE_YAZ
     const Fetch::Z3950Fetcher* f = static_cast<const Fetch::Z3950Fetcher*>(fetcher_.data());
     QUrl u;
-    u.setScheme(QLatin1String("http"));
+    u.setScheme(QStringLiteral("http"));
     u.setHost(f->host());
     QString icon = Fetcher::favIcon(u);
     if(!icon.isEmpty()) {
@@ -475,17 +475,17 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Fetcher::Ptr fetcher_, int group_, 
     const QString p = f->execPath();
     QUrl u;
     if(p.contains(QLatin1String("allocine"))) {
-      u = QUrl(QLatin1String("http://www.allocine.fr"));
+      u = QUrl(QStringLiteral("http://www.allocine.fr"));
     } else if(p.contains(QLatin1String("ministerio_de_cultura"))) {
-      u = QUrl(QLatin1String("http://www.mcu.es"));
+      u = QUrl(QStringLiteral("http://www.mcu.es"));
     } else if(p.contains(QLatin1String("dark_horse_comics"))) {
-      u = QUrl(QLatin1String("http://www.darkhorse.com"));
+      u = QUrl(QStringLiteral("http://www.darkhorse.com"));
     } else if(p.contains(QLatin1String("boardgamegeek"))) {
-      u = QUrl(QLatin1String("http://www.boardgamegeek.com"));
+      u = QUrl(QStringLiteral("http://www.boardgamegeek.com"));
     } else if(p.contains(QLatin1String("supercat"))) {
-      u = QUrl(QLatin1String("https://evergreen-ils.org"));
+      u = QUrl(QStringLiteral("https://evergreen-ils.org"));
     } else if(f->source().contains(QLatin1String("amarok"), Qt::CaseInsensitive)) {
-      return LOAD_ICON(QLatin1String("amarok"), group_, size_);
+      return LOAD_ICON(QStringLiteral("amarok"), group_, size_);
     }
     if(!u.isEmpty() && u.isValid()) {
       QString icon = Fetcher::favIcon(u);
@@ -507,7 +507,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
 
   if(name.isEmpty()) {
     // use default tellico application icon
-    name = QLatin1String("tellico");
+    name = QStringLiteral("tellico");
   }
 
   QPixmap pix = KIconLoader::global()->loadIcon(name, static_cast<KIconLoader::Group>(group_),

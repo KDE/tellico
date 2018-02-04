@@ -80,16 +80,16 @@ void AnimeNfoFetcher::search() {
 
   QUrl u(QString::fromLatin1(ANIMENFO_BASE_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("action"),   QLatin1String("Go"));
-  q.addQueryItem(QLatin1String("option"),   QLatin1String("keywords"));
+  q.addQueryItem(QStringLiteral("action"),   QStringLiteral("Go"));
+  q.addQueryItem(QStringLiteral("option"),   QStringLiteral("keywords"));
 
   switch(request().collectionType) {
     case Data::Collection::Book:
-      q.addQueryItem(QLatin1String("queryin"),  QLatin1String("manga_titles"));
+      q.addQueryItem(QStringLiteral("queryin"),  QStringLiteral("manga_titles"));
       break;
 
     case Data::Collection::Video:
-      q.addQueryItem(QLatin1String("queryin"),  QLatin1String("anime_titles"));
+      q.addQueryItem(QStringLiteral("queryin"),  QStringLiteral("anime_titles"));
       break;
 
     default:
@@ -100,7 +100,7 @@ void AnimeNfoFetcher::search() {
 
   switch(request().key) {
     case Keyword:
-      q.addQueryItem(QLatin1String("query"), request().value);
+      q.addQueryItem(QStringLiteral("query"), request().value);
       break;
 
     default:
@@ -289,56 +289,56 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
   }
 
   // add new fields
-  Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
+  Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
+  f = new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table);
   f->setFormatType(FieldFormat::FormatTitle);
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("distributor"), i18n("Distributor"));
+  f = new Data::Field(QStringLiteral("distributor"), i18n("Distributor"));
   f->setCategory(i18n("Other People"));
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
   f->setFormatType(FieldFormat::FormatPlain);
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("episodes"), i18n("Episodes"), Data::Field::Number);
+  f = new Data::Field(QStringLiteral("episodes"), i18n("Episodes"), Data::Field::Number);
   f->setCategory(i18n("Features"));
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("animenfo"), i18n("AnimeNfo Link"), Data::Field::URL);
+  f = new Data::Field(QStringLiteral("animenfo"), i18n("AnimeNfo Link"), Data::Field::URL);
   f->setCategory(i18n("General"));
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("animenfo-rating"), i18n("AnimeNfo Rating"), Data::Field::Rating);
+  f = new Data::Field(QStringLiteral("animenfo-rating"), i18n("AnimeNfo Rating"), Data::Field::Rating);
   f->setCategory(i18n("General"));
-  f->setProperty(QLatin1String("maximum"), QLatin1String("10"));
+  f->setProperty(QStringLiteral("maximum"), QStringLiteral("10"));
   coll->addField(f);
 
  // map captions in HTML to field names
   QHash<QString, QString> fieldMap;
-  fieldMap.insert(QLatin1String("Title"), QLatin1String("title"));
-  fieldMap.insert(QLatin1String("Japanese Title"), QLatin1String("origtitle"));
-  fieldMap.insert(QLatin1String("Total Episodes"), QLatin1String("episodes"));
-  fieldMap.insert(QLatin1String("Category"), QLatin1String("keyword"));
-  fieldMap.insert(QLatin1String("Genres"), QLatin1String("genre"));
-  fieldMap.insert(QLatin1String("Genre"), QLatin1String("genre"));
-  fieldMap.insert(QLatin1String("Studio"), QLatin1String("studio"));
-  fieldMap.insert(QLatin1String("US Distribution"), QLatin1String("distributor"));
-  fieldMap.insert(QLatin1String("Author"), QLatin1String("author"));
-  fieldMap.insert(QLatin1String("Publisher"), QLatin1String("publisher"));
-  fieldMap.insert(QLatin1String("Director"), QLatin1String("director"));
-  fieldMap.insert(QLatin1String("Script"), QLatin1String("writer"));
-  fieldMap.insert(QLatin1String("Music"), QLatin1String("composer"));
-  fieldMap.insert(QLatin1String("User Rating"), QLatin1String("animenfo-rating"));
+  fieldMap.insert(QStringLiteral("Title"), QStringLiteral("title"));
+  fieldMap.insert(QStringLiteral("Japanese Title"), QStringLiteral("origtitle"));
+  fieldMap.insert(QStringLiteral("Total Episodes"), QStringLiteral("episodes"));
+  fieldMap.insert(QStringLiteral("Category"), QStringLiteral("keyword"));
+  fieldMap.insert(QStringLiteral("Genres"), QStringLiteral("genre"));
+  fieldMap.insert(QStringLiteral("Genre"), QStringLiteral("genre"));
+  fieldMap.insert(QStringLiteral("Studio"), QStringLiteral("studio"));
+  fieldMap.insert(QStringLiteral("US Distribution"), QStringLiteral("distributor"));
+  fieldMap.insert(QStringLiteral("Author"), QStringLiteral("author"));
+  fieldMap.insert(QStringLiteral("Publisher"), QStringLiteral("publisher"));
+  fieldMap.insert(QStringLiteral("Director"), QStringLiteral("director"));
+  fieldMap.insert(QStringLiteral("Script"), QStringLiteral("writer"));
+  fieldMap.insert(QStringLiteral("Music"), QStringLiteral("composer"));
+  fieldMap.insert(QStringLiteral("User Rating"), QStringLiteral("animenfo-rating"));
 
   switch(request().collectionType) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
-      fieldMap.insert(QLatin1String("Year Published"), QLatin1String("pub_year"));
+      fieldMap.insert(QStringLiteral("Year Published"), QStringLiteral("pub_year"));
       break;
     case Data::Collection::Video:
-      fieldMap.insert(QLatin1String("Year Published"), QLatin1String("year"));
+      fieldMap.insert(QStringLiteral("Year Published"), QStringLiteral("year"));
       break;
     default:
       break;
@@ -408,7 +408,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
     }
     n = (n+1)%2;
   }
-  entry->setField(QLatin1String("animenfo"), url_.url());
+  entry->setField(QStringLiteral("animenfo"), url_.url());
 
   // image
   QRegExp imgRx(QStringLiteral("<img\\s+[^>]*src\\s*=\\s*[\"']([^>]*)[\"']\\s+[^>]*alt\\s*=\\s*[\"']%1[\"']")
@@ -419,14 +419,14 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
     QUrl imgURL = QUrl(QLatin1String(ANIMENFO_BASE_URL)).resolved(QUrl(imgRx.cap(1)));
     QString id = ImageFactory::addImage(imgURL, true);
     if(!id.isEmpty()) {
-      entry->setField(QLatin1String("cover"), id);
+      entry->setField(QStringLiteral("cover"), id);
     } else {
       myDebug() << "bad cover" << imgURL.url();
     }
   }
 
   // now look for alternative titles and plot
-  const QString a = QLatin1String("Alternative titles");
+  const QString a = QStringLiteral("Alternative titles");
   pos = s.indexOf(a, 0, Qt::CaseInsensitive);
   if(pos > -1) {
     pos += a.length();
@@ -435,7 +435,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
       value = s.mid(pos, pos2-pos).simplified();
       value.replace(QLatin1String("<br />"), FieldFormat::rowDelimiterString());
       value = value.remove(tagRx).trimmed();
-      entry->setField(QLatin1String("alttitle"), value);
+      entry->setField(QStringLiteral("alttitle"), value);
     }
   }
 
@@ -445,7 +445,7 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
     descRx.setMinimal(true);
     pos = descRx.indexIn(s, pos+1);
     if(pos > -1) {
-      entry->setField(QLatin1String("plot"), descRx.cap(1).remove(tagRx).simplified());
+      entry->setField(QStringLiteral("plot"), descRx.cap(1).remove(tagRx).simplified());
     }
   }
 
@@ -461,14 +461,14 @@ Tellico::Data::EntryPtr AnimeNfoFetcher::parseEntry(const QString& str_, const Q
         castLines << voiceRx.cap(1) + FieldFormat::columnDelimiterString() + charRx.cap(1);
       }
     }
-    entry->setField(QLatin1String("cast"), castLines.join(FieldFormat::rowDelimiterString()));
+    entry->setField(QStringLiteral("cast"), castLines.join(FieldFormat::rowDelimiterString()));
   }
 
   return entry;
 }
 
 Tellico::Fetch::FetchRequest AnimeNfoFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Keyword, t);
   }
@@ -480,7 +480,7 @@ Tellico::Fetch::ConfigWidget* AnimeNfoFetcher::configWidget(QWidget* parent_) co
 }
 
 QString AnimeNfoFetcher::defaultName() {
-  return QLatin1String("AnimeNfo.com");
+  return QStringLiteral("AnimeNfo.com");
 }
 
 QString AnimeNfoFetcher::defaultIcon() {
@@ -490,12 +490,12 @@ QString AnimeNfoFetcher::defaultIcon() {
 //static
 Tellico::StringHash AnimeNfoFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("distributor")]     = i18n("Distributor");
-  hash[QLatin1String("episodes")]        = i18n("Episodes");
-  hash[QLatin1String("origtitle")]       = i18n("Original Title");
-  hash[QLatin1String("alttitle")]        = i18n("Alternative Titles");
-  hash[QLatin1String("animenfo-rating")] = i18n("AnimeNfo Rating");
-  hash[QLatin1String("animenfo")]        = i18n("AnimeNfo Link");
+  hash[QStringLiteral("distributor")]     = i18n("Distributor");
+  hash[QStringLiteral("episodes")]        = i18n("Episodes");
+  hash[QStringLiteral("origtitle")]       = i18n("Original Title");
+  hash[QStringLiteral("alttitle")]        = i18n("Alternative Titles");
+  hash[QStringLiteral("animenfo-rating")] = i18n("AnimeNfo Rating");
+  hash[QStringLiteral("animenfo")]        = i18n("AnimeNfo Link");
   return hash;
 }
 

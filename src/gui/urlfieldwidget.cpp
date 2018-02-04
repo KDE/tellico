@@ -57,7 +57,7 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   registerWidget();
 
   // special case, remember if it's a relative url
-  m_isRelative = field_->property(QLatin1String("relative")) == QLatin1String("true");
+  m_isRelative = field_->property(QStringLiteral("relative")) == QLatin1String("true");
 }
 
 URLFieldWidget::~URLFieldWidget() {
@@ -90,7 +90,7 @@ void URLFieldWidget::clearImpl() {
 }
 
 void URLFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
-  m_isRelative = newField_->property(QLatin1String("relative")) == QLatin1String("true");
+  m_isRelative = newField_->property(QStringLiteral("relative")) == QLatin1String("true");
 }
 
 void URLFieldWidget::slotOpenURL(const QString& url_) {

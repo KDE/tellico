@@ -85,7 +85,7 @@ void KinoPoiskFetcher::search() {
     case Title:
       // first means return first result only
       //q.addQueryItem(QLatin1String("first"), QLatin1String("yes"));
-      q.addQueryItem(QLatin1String("kp_query"), request().value);
+      q.addQueryItem(QStringLiteral("kp_query"), request().value);
       break;
 
     default:
@@ -205,10 +205,10 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   }
 
   if(optionalFields().contains(QLatin1String("kinopoisk"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("kinopoisk"), i18n("KinoPoisk Link"), Data::Field::URL));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("kinopoisk"), i18n("KinoPoisk Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     entry->collection()->addField(field);
-    entry->setField(QLatin1String("kinopoisk"), url.url());
+    entry->setField(QStringLiteral("kinopoisk"), url.url());
   }
 
   m_entries.insert(uid_, entry); // keep for later
@@ -228,23 +228,23 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
 
   QRegExp titleRx(QLatin1String("class=\"moviename-big\"[^>]*>([^<]+)</"));
   if(str_.contains(titleRx)) {
-    entry->setField(QLatin1String("title"), titleRx.cap(1));
+    entry->setField(QStringLiteral("title"), titleRx.cap(1));
   }
 
   if(optionalFields().contains(QLatin1String("origtitle"))) {
-    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
+    Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
 
     QRegExp origTitleRx(QLatin1String("itemprop=\"alternativeHeadline\"[^>]*>([^<]+)</"));
     if(str_.contains(origTitleRx)) {
-      entry->setField(QLatin1String("origtitle"), origTitleRx.cap(1));
+      entry->setField(QStringLiteral("origtitle"), origTitleRx.cap(1));
     }
   }
 
   QRegExp yearRx(QLatin1String("<a href=\"/lists/m_act%5Byear[^\"]+\"[^>]*>([^<]+)</a"));
   if(str_.contains(yearRx)) {
-    entry->setField(QLatin1String("year"), yearRx.cap(1));
+    entry->setField(QStringLiteral("year"), yearRx.cap(1));
   }
 
   QRegExp countryRx(QLatin1String("<a href=\"/lists/m_act%5Bcountry[^\"]+\"[^>]*>([^<]+)</a"));
@@ -256,7 +256,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   }
   if(!countries.isEmpty()) {
     countries.removeDuplicates();
-    entry->setField(QLatin1String("nationality"), countries.join(Tellico::FieldFormat::delimiterString()));
+    entry->setField(QStringLiteral("nationality"), countries.join(Tellico::FieldFormat::delimiterString()));
   }
 
   QRegExp genreRx(QLatin1String("<a href=\"/lists/m_act%5Bgenre[^\"]+\"[^>]*>([^<]+)</a"));
@@ -268,7 +268,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   }
   if(!genres.isEmpty()) {
     genres.removeDuplicates();
-    entry->setField(QLatin1String("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
+    entry->setField(QStringLiteral("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
   }
 
   QRegExp directorRx(QLatin1String("<td itemprop=\"director\">(.*)</td"));
@@ -284,7 +284,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       }
     }
     if(!directors.isEmpty()) {
-      entry->setField(QLatin1String("director"), directors.join(Tellico::FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("director"), directors.join(Tellico::FieldFormat::delimiterString()));
     }
   }
 
@@ -301,7 +301,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       }
     }
     if(!writers.isEmpty()) {
-      entry->setField(QLatin1String("writer"), writers.join(Tellico::FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("writer"), writers.join(Tellico::FieldFormat::delimiterString()));
     }
   }
 
@@ -318,7 +318,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       }
     }
     if(!producers.isEmpty()) {
-      entry->setField(QLatin1String("producer"), producers.join(Tellico::FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("producer"), producers.join(Tellico::FieldFormat::delimiterString()));
     }
   }
 
@@ -335,7 +335,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       }
     }
     if(!composers.isEmpty()) {
-      entry->setField(QLatin1String("composer"), composers.join(Tellico::FieldFormat::delimiterString()));
+      entry->setField(QStringLiteral("composer"), composers.join(Tellico::FieldFormat::delimiterString()));
     }
   }
 
@@ -352,19 +352,19 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       }
     }
     if(!actors.isEmpty()) {
-      entry->setField(QLatin1String("cast"), actors.join(Tellico::FieldFormat::rowDelimiterString()));
+      entry->setField(QStringLiteral("cast"), actors.join(Tellico::FieldFormat::rowDelimiterString()));
     }
   }
 
   QRegExp runtimeRx(QLatin1String("id=\"runtime\">(\\d+)"));
   if(str_.contains(runtimeRx)) {
-    entry->setField(QLatin1String("running-time"), runtimeRx.cap(1));
+    entry->setField(QStringLiteral("running-time"), runtimeRx.cap(1));
   }
 
   QRegExp plotRx(QLatin1String("itemprop=\"description\"[^>]*>(.+)</div"));
   plotRx.setMinimal(true);
   if(str_.contains(plotRx)) {
-    entry->setField(QLatin1String("plot"), Tellico::decodeHTML(plotRx.cap(1)));
+    entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
   }
 
   QRegExp mpaaRx(QLatin1String("itemprop=\"contentRating\"[^>]+content=\"MPAA ([^>]+)\""));
@@ -372,7 +372,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   if(str_.contains(mpaaRx)) {
     QString value = mpaaRx.cap(1) + QLatin1String(" (USA)");
 //    entry->setField(QLatin1String("certification"), i18n(value.toUtf8()));
-    entry->setField(QLatin1String("certification"), value);
+    entry->setField(QStringLiteral("certification"), value);
   }
 
   QRegExp coverRx(QLatin1String("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
@@ -383,13 +383,13 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QLatin1String("cover"), id);
+    entry->setField(QStringLiteral("cover"), id);
   }
   return entry;
 }
 
 Tellico::Fetch::FetchRequest KinoPoiskFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString t = entry_->field(QLatin1String("title"));
+  QString t = entry_->field(QStringLiteral("title"));
   if(!t.isEmpty()) {
     return FetchRequest(Fetch::Title, t);
   }
@@ -410,8 +410,8 @@ QString KinoPoiskFetcher::defaultIcon() {
 
 Tellico::StringHash KinoPoiskFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  hash[QLatin1String("kinopoisk")] = i18n("KinoPoisk Link");
+  hash[QStringLiteral("origtitle")] = i18n("Original Title");
+  hash[QStringLiteral("kinopoisk")] = i18n("KinoPoisk Link");
   return hash;
 }
 

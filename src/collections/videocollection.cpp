@@ -38,7 +38,7 @@ using Tellico::Data::VideoCollection;
 
 VideoCollection::VideoCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Videos") : title_) {
-  setDefaultGroupField(QLatin1String("genre"));
+  setDefaultGroupField(QStringLiteral("genre"));
   if(addDefaultFields_) {
     addFields(defaultFields());
   }
@@ -52,12 +52,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   QStringList media;
   media << i18n("DVD") << i18n("VHS") << i18n("VCD") << i18n("DivX") << i18n("Blu-ray") << i18n("HD DVD");
-  field = new Field(QLatin1String("medium"), i18n("Medium"), media);
+  field = new Field(QStringLiteral("medium"), i18n("Medium"), media);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("year"), i18n("Production Year"), Field::Number);
+  field = new Field(QStringLiteral("year"), i18n("Production Year"), Field::Number);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
@@ -66,12 +66,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)")
                      .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-  field = new Field(QLatin1String("certification"), i18n("Certification"), cert);
+  field = new Field(QStringLiteral("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("genre"), i18n("Genre"));
+  field = new Field(QStringLiteral("genre"), i18n("Genre"));
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -87,12 +87,12 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
          << i18n("Region 6")
          << i18n("Region 7")
          << i18n("Region 8");
-  field = new Field(QLatin1String("region"), i18n("Region"), region);
+  field = new Field(QStringLiteral("region"), i18n("Region"), region);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("nationality"), i18n("Nationality"));
+  field = new Field(QStringLiteral("nationality"), i18n("Nationality"));
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -100,127 +100,127 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 
   QStringList format;
   format << i18n("NTSC") << i18n("PAL") << i18n("SECAM");
-  field = new Field(QLatin1String("format"), i18n("Format"), format);
+  field = new Field(QStringLiteral("format"), i18n("Format"), format);
   field->setCategory(i18n(video_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("cast"), i18n("Cast"), Field::Table);
-  field->setProperty(QLatin1String("columns"), QLatin1String("2"));
-  field->setProperty(QLatin1String("column1"), i18n("Actor/Actress"));
-  field->setProperty(QLatin1String("column2"), i18n("Role"));
+  field = new Field(QStringLiteral("cast"), i18n("Cast"), Field::Table);
+  field->setProperty(QStringLiteral("columns"), QStringLiteral("2"));
+  field->setProperty(QStringLiteral("column1"), i18n("Actor/Actress"));
+  field->setProperty(QStringLiteral("column2"), i18n("Role"));
   field->setFormatType(FieldFormat::FormatName);
   field->setFlags(Field::AllowGrouped);
   field->setDescription(i18n("A table for the cast members, along with the roles they play"));
   list.append(field);
 
-  field = new Field(QLatin1String("director"), i18n("Director"));
+  field = new Field(QStringLiteral("director"), i18n("Director"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("producer"), i18n("Producer"));
+  field = new Field(QStringLiteral("producer"), i18n("Producer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("writer"), i18n("Writer"));
+  field = new Field(QStringLiteral("writer"), i18n("Writer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("composer"), i18n("Composer"));
+  field = new Field(QStringLiteral("composer"), i18n("Composer"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("studio"), i18n("Studio"));
+  field = new Field(QStringLiteral("studio"), i18n("Studio"));
   field->setCategory(i18n(video_people));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("language"), i18n("Language Tracks"));
+  field = new Field(QStringLiteral("language"), i18n("Language Tracks"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("subtitle"), i18n("Subtitle Languages"));
+  field = new Field(QStringLiteral("subtitle"), i18n("Subtitle Languages"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("audio-track"), i18n("Audio Tracks"));
+  field = new Field(QStringLiteral("audio-track"), i18n("Audio Tracks"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("running-time"), i18n("Running Time"), Field::Number);
+  field = new Field(QStringLiteral("running-time"), i18n("Running Time"), Field::Number);
   field->setCategory(i18n(video_features));
   field->setDescription(i18n("The running time of the video (in minutes)"));
   list.append(field);
 
-  field = new Field(QLatin1String("aspect-ratio"), i18n("Aspect Ratio"));
+  field = new Field(QStringLiteral("aspect-ratio"), i18n("Aspect Ratio"));
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("widescreen"), i18n("Widescreen"), Field::Bool);
+  field = new Field(QStringLiteral("widescreen"), i18n("Widescreen"), Field::Bool);
   field->setCategory(i18n(video_features));
   list.append(field);
 
   QStringList color;
   color << i18n("Color") << i18n("Black & White");
-  field = new Field(QLatin1String("color"), i18n("Color Mode"), color);
+  field = new Field(QStringLiteral("color"), i18n("Color Mode"), color);
   field->setCategory(i18n(video_features));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("directors-cut"), i18n("Director's Cut"), Field::Bool);
+  field = new Field(QStringLiteral("directors-cut"), i18n("Director's Cut"), Field::Bool);
   field->setCategory(i18n(video_features));
   list.append(field);
 
-  field = new Field(QLatin1String("plot"), i18n("Plot Summary"), Field::Para);
+  field = new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para);
   list.append(field);
 
-  field = new Field(QLatin1String("rating"), i18n("Personal Rating"), Field::Rating);
+  field = new Field(QStringLiteral("rating"), i18n("Personal Rating"), Field::Rating);
   field->setCategory(i18n(video_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
+  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(video_personal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(video_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
+  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(video_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("loaned"), i18n("Loaned"), Field::Bool);
+  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
   field->setCategory(i18n(video_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("keyword"), i18n("Keywords"));
+  field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
   field->setCategory(i18n(video_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("cover"), i18n("Cover"), Field::Image);
+  field = new Field(QStringLiteral("cover"), i18n("Cover"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));
@@ -233,16 +233,16 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // not enough for title to be equal, must also have another field
   // ever possible for a studio to do two movies with identical titles?
-  int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
+  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
 //  if(res == 0) {
 //    myDebug() << "different titles for " << entry1_->title() << " vs. "
 //              << entry2_->title();
 //  }
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("director"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("studio"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("medium"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("director"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("studio"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("medium"), this);
   // when imdb field is equal it is the same
-  res += 10*EntryComparison::score(entry1_, entry2_, QLatin1String("imdb"), this);
+  res += 10*EntryComparison::score(entry1_, entry2_, QStringLiteral("imdb"), this);
   return res;
 }

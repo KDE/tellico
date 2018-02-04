@@ -84,7 +84,7 @@ HTMLExporter::HTMLExporter(Tellico::Data::CollPtr coll_) : Tellico::Export::Expo
     m_checkPrintGrouped(nullptr),
     m_checkExportEntryFiles(nullptr),
     m_checkExportImages(nullptr),
-    m_xsltFile(QLatin1String("tellico2html.xsl")) {
+    m_xsltFile(QStringLiteral("tellico2html.xsl")) {
 }
 
 HTMLExporter::~HTMLExporter() {
@@ -347,7 +347,7 @@ void HTMLExporter::setFormattingOptions(Tellico::Data::CollPtr coll) {
       int ncols = 0;
       if(f->type() == Data::Field::Table) {
         bool ok;
-        ncols = Tellico::toUInt(f->property(QLatin1String("columns")), &ok);
+        ncols = Tellico::toUInt(f->property(QStringLiteral("columns")), &ok);
         if(!ok) {
           ncols = 1;
         }
@@ -579,7 +579,7 @@ QUrl HTMLExporter::fileDir() const {
 
 QString HTMLExporter::fileDirName() const {
   if(!m_collectionURL.isEmpty()) {
-    return QLatin1String("/");
+    return QStringLiteral("/");
   }
   QFileInfo fi(url().fileName());
   return fi.completeBaseName() + QLatin1String("_files/");
@@ -628,7 +628,7 @@ QString HTMLExporter::handleLink(const QString& link_) {
   const bool isPic = link_.startsWith(m_dataDir + QLatin1String("pics/"));
   QString midDir;
   if(m_exportEntryFiles && isPic) {
-    midDir = QLatin1String("pics/");
+    midDir = QStringLiteral("pics/");
   }
   // pictures are special since they might not exist when the HTML is exported, since they might get copied later
   // on the other hand, don't change the file location if it doesn't exist
@@ -650,7 +650,7 @@ QString HTMLExporter::analyzeInternalCSS(const QString& str_) {
   QString str = str_;
   int start = 0;
   int end = 0;
-  const QString url = QLatin1String("url(");
+  const QString url = QStringLiteral("url(");
   for(int pos = str.indexOf(url); pos >= 0; pos = str.indexOf(url, pos+1)) {
     pos += 4; // url(
     if(str[pos] ==  QLatin1Char('"') || str[pos] == QLatin1Char('\'')) {
@@ -758,8 +758,8 @@ bool HTMLExporter::writeEntryFiles() {
   exporter.setCollectionURL(url());
   bool parseDOM = true;
 
-  const QString title = QLatin1String("title");
-  const QString html = QLatin1String(".html");
+  const QString title = QStringLiteral("title");
+  const QString html = QStringLiteral(".html");
   bool multipleTitles = collection()->fieldByName(title)->hasFlag(Data::Field::AllowMultiple);
   Data::EntryList entries = this->entries(); // not const since the pointer has to be copied
   foreach(Data::EntryPtr entryIt, entries) {
@@ -769,7 +769,7 @@ bool HTMLExporter::writeEntryFiles() {
     if(multipleTitles) {
       file = file.section(QLatin1Char(';'), 0, 0);
     }
-    file.replace(badChars, QLatin1String("_"));
+    file.replace(badChars, QStringLiteral("_"));
     file += QLatin1Char('-') + QString::number(entryIt->id()) + html;
     outputFile = outputFile.adjusted(QUrl::RemoveFilename);
     outputFile.setPath(outputFile.path() + file);
@@ -800,7 +800,8 @@ bool HTMLExporter::writeEntryFiles() {
   // the images in "pics/" are special data images, copy them always
   // since the entry files may refer to them, but we don't know that
   QStringList dataImages;
-  dataImages << QLatin1String("checkmark.png");
+  dataImages.reserve(1 + 10);
+  dataImages << QStringLiteral("checkmark.png");
   for(uint i = 1; i <= 10; ++i) {
     dataImages << QStringLiteral("stars%1.png").arg(i);
   }

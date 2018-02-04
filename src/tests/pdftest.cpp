@@ -56,17 +56,17 @@ void PdfTest::testScienceDirect() {
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
 #ifdef HAVE_EXEMPI
-  QCOMPARE(entry->field("title"), QLatin1String("Parametric analysis of air-water heat recovery concept applied to HVAC systems"));
-  QCOMPARE(entry->field("author"), QLatin1String("Mohamad Ramadan; Mostafa Gad El Rab; Mahmoud Khaled"));
-  QCOMPARE(entry->field("journal"), QLatin1String("Case Studies in Thermal Engineering"));
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Elsevier"));
-  QCOMPARE(entry->field("year"), QLatin1String("2015"));
-  QCOMPARE(entry->field("month"), QLatin1String("09"));
-  QCOMPARE(entry->field("keyword"), QLatin1String("Heat recovery; HVAC; Water heating; Thermal modeling; Parametric analysis"));
-  QCOMPARE(entry->field("volume"), QLatin1String("6"));
-  QCOMPARE(entry->field("pages"), QLatin1String("61-68"));
-  QCOMPARE(entry->field("doi"), QLatin1String("10.1016/j.csite.2015.06.001"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Parametric analysis of air-water heat recovery concept applied to HVAC systems"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Mohamad Ramadan; Mostafa Gad El Rab; Mahmoud Khaled"));
+  QCOMPARE(entry->field("journal"), QStringLiteral("Case Studies in Thermal Engineering"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Elsevier"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2015"));
+  QCOMPARE(entry->field("month"), QStringLiteral("09"));
+  QCOMPARE(entry->field("keyword"), QStringLiteral("Heat recovery; HVAC; Water heating; Thermal modeling; Parametric analysis"));
+  QCOMPARE(entry->field("volume"), QStringLiteral("6"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("61-68"));
+  QCOMPARE(entry->field("doi"), QStringLiteral("10.1016/j.csite.2015.06.001"));
 //  QVERIFY(!entry->field("cover").isEmpty());
 #endif
 }

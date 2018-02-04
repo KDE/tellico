@@ -35,7 +35,7 @@
 using Tellico::Import::DeliciousImporter;
 
 DeliciousImporter::DeliciousImporter(const QUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("delicious2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("delicious2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     QUrl u = QUrl::fromLocalFile(xsltFile);
     XSLTImporter::setXSLTURL(u);
@@ -60,26 +60,26 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
   QUrl libraryDir = url();
   libraryDir.setPath(url().adjusted(QUrl::StripTrailingSlash|QUrl::RemoveFilename).path() + QLatin1String("Images/"));
   const QStringList imageDirs = QStringList()
-                             << QLatin1String("Large Covers/")
-                             << QLatin1String("Medium Covers/")
-                             << QLatin1String("Small Covers/")
-                             << QLatin1String("Plain Covers/");
+                             << QStringLiteral("Large Covers/")
+                             << QStringLiteral("Medium Covers/")
+                             << QStringLiteral("Small Covers/")
+                             << QStringLiteral("Plain Covers/");
   QString commField;
   switch(coll->type()) {
     case Data::Collection::Book:
     case Data::Collection::Album:
-      commField = QLatin1String("comments"); break;
+      commField = QStringLiteral("comments"); break;
     case Data::Collection::Video:
-      commField = QLatin1String("plot"); break;
+      commField = QStringLiteral("plot"); break;
     case Data::Collection::Game:
-      commField = QLatin1String("description"); break;
+      commField = QStringLiteral("description"); break;
     default:
       myWarning() << "bad collection type:" << coll->type();
   }
 
-  const QString mdateField = QLatin1String("mdate");
-  const QString uuidField = QLatin1String("uuid");
-  const QString coverField = QLatin1String("cover");
+  const QString mdateField = QStringLiteral("mdate");
+  const QString uuidField = QStringLiteral("uuid");
+  const QString coverField = QStringLiteral("cover");
   const bool isLocal = url().isLocalFile();
 
   foreach(Data::EntryPtr entry, coll->entries()) {

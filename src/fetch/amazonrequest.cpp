@@ -34,8 +34,8 @@ AmazonRequest::AmazonRequest(const QUrl& site_, const QByteArray& key_) : m_site
 
 QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
   QMap<QString, QString> allParams = params_;
-  allParams.insert(QLatin1String("Timestamp"),
-                   QDateTime::currentDateTimeUtc().toString(QLatin1String("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+  allParams.insert(QStringLiteral("Timestamp"),
+                   QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
   QByteArray query;
   // has to be a map so that the query elements are sorted

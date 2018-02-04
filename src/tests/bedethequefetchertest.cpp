@@ -51,13 +51,13 @@ void BedethequeFetcherTest::initTestCase() {
 
 void BedethequeFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("bedetheque");
+  QString groupName = QStringLiteral("bedetheque");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title, "Le Combat d'Odiri");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title, QStringLiteral("Le Combat d'Odiri"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,31 +68,31 @@ void BedethequeFetcherTest::testTitle() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Le Combat d'Odiri"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
-  QCOMPARE(entry->field("series"), QLatin1String("(AUT) Arno"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Le Combat d'Odiri"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1991"));
+  QCOMPARE(entry->field("series"), QStringLiteral("(AUT) Arno"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Bayard"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Arno"));
-  QCOMPARE(entry->field("colorist"), QLatin1String("Arno"));
-  QCOMPARE(entry->field("pages"), QLatin1String("88"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Tout sur un auteur (hors BD)"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Bayard"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("88"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
-  QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testSeries() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("bedetheque");
+  QString groupName = QStringLiteral("bedetheque");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword, "Arno");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword, QStringLiteral("Arno"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -103,31 +103,31 @@ void BedethequeFetcherTest::testSeries() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Le Combat d'Odiri"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1991"));
-  QCOMPARE(entry->field("series"), QLatin1String("(AUT) Arno"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Le Combat d'Odiri"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1991"));
+  QCOMPARE(entry->field("series"), QStringLiteral("(AUT) Arno"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Châteaureynaud, Georges-Olivier"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Bayard"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Arno"));
-  QCOMPARE(entry->field("colorist"), QLatin1String("Arno"));
-  QCOMPARE(entry->field("pages"), QLatin1String("88"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Tout sur un auteur (hors BD)"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("2-227-72311-4"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Bayard"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Arno"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("88"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
-  QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testIsbn() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("bedetheque");
+  QString groupName = QStringLiteral("bedetheque");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::ISBN, "2-205-05868-1");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::ISBN, QStringLiteral("2-205-05868-1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -137,33 +137,33 @@ void BedethequeFetcherTest::testIsbn() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Jérusalem d'Afrique"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("series"), QLatin1String("Chat du Rabbin (Le)"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Sfar, Joann"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Sfar, Joann"));
-  QCOMPARE(entry->field("colorist"), QLatin1String("Findakly, Brigitte"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Dargaud"));
-  QCOMPARE(entry->field("pages"), QLatin1String("80"));
-  QCOMPARE(entry->field("issue"), QLatin1String("5"));
-  QCOMPARE(entry->field("edition"), QLatin1String("Poisson Pilote"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Aventure"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("2-205-05868-1"));
-  QCOMPARE(entry->field("lien-bel"), QLatin1String("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2006"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Chat du Rabbin (Le)"));
+  QCOMPARE(entry->field("writer"), QStringLiteral("Sfar, Joann"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Sfar, Joann"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Findakly, Brigitte"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Dargaud"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("80"));
+  QCOMPARE(entry->field("issue"), QStringLiteral("5"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("Poisson Pilote"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Aventure"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("2-205-05868-1"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void BedethequeFetcherTest::testDonjon() {
   // this one has multiple writers
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("bedetheque");
+  QString groupName = QStringLiteral("bedetheque");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Raw, "http://m.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Raw, QStringLiteral("http://m.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BedethequeFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -174,10 +174,10 @@ void BedethequeFetcherTest::testDonjon() {
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Un mariage à part"));
   QCOMPARE(set(entry, "writer"), set("Sfar, Joann; Boulet; Trondheim, Lewis"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Boulet"));
-  QCOMPARE(entry->field("colorist"), QLatin1String("Albon, Lucie"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("2-84055-734-7"));
-  QCOMPARE(entry->field("lien-bel"), QLatin1String("https://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Boulet"));
+  QCOMPARE(entry->field("colorist"), QStringLiteral("Albon, Lucie"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("2-84055-734-7"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-Donjon-Zenith-Tome-5-Un-mariage-a-part-56495.html"));
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

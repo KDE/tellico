@@ -103,11 +103,11 @@ QString CollectionFactory::typeName(int type_) {
     return self().nameRegistry.value(type_);
   }
   myWarning() << "collection type not implemented:" << type_;
-  return QLatin1String("entry");
+  return QStringLiteral("entry");
 }
 
 QString CollectionFactory::typeName(Data::CollPtr coll_) {
-  return coll_ ? typeName(coll_->type()) : QLatin1String("entry");
+  return coll_ ? typeName(coll_->type()) : QStringLiteral("entry");
 }
 
 bool CollectionFactory::isDefaultField(int type_, const QString& name_) {

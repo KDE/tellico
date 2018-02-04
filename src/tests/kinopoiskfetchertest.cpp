@@ -51,13 +51,13 @@ void KinoPoiskFetcherTest::initTestCase() {
 
 void KinoPoiskFetcherTest::testSuperman() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("kinopoisk");
+  QString groupName = QStringLiteral("kinopoisk");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, "Superman Returns");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoPoiskFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -69,21 +69,21 @@ void KinoPoiskFetcherTest::testSuperman() {
   Tellico::Data::EntryPtr entry = results.at(0);
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Возвращение Супермена"));
-  QCOMPARE(entry->field("origtitle"), QLatin1String("Superman Returns"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
+  QCOMPARE(entry->field("origtitle"), QStringLiteral("Superman Returns"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("nationality"), QString::fromUtf8("США"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Брайан Сингер"));
   QCOMPARE(entry->field("writer"), QString::fromUtf8("Майкл Догерти; Дэн Харрис; Брайан Сингер"));
   QCOMPARE(entry->field("producer"), QString::fromUtf8("Гилберт Адлер; Джон Питерс; Брайан Сингер"));
   QCOMPARE(entry->field("composer"), QString::fromUtf8("Джон Оттмен"));
   QCOMPARE(set(entry, "genre"), set(QString::fromUtf8("фантастика; боевик; приключения")));
-  QCOMPARE(entry->field("certification"), QLatin1String("PG-13 (USA)"));
-  QCOMPARE(entry->field("running-time"), QLatin1String("169"));
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("169"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QString::fromUtf8("Брэндон Рут"));
 //  QVERIFY(entry->field("plot").startsWith(QString::fromUtf8("Возвратившись на Землю")));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

@@ -111,32 +111,32 @@ void GoogleBookFetcher::continueSearch() {
 void GoogleBookFetcher::doSearch(const QString& term_) {
   QUrl u(QString::fromLatin1(GOOGLEBOOK_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
-  q.addQueryItem(QLatin1String("startIndex"), QString::number(m_start));
-  q.addQueryItem(QLatin1String("printType"), QLatin1String("books"));
+  q.addQueryItem(QStringLiteral("maxResults"), QString::number(GOOGLEBOOK_MAX_RETURNS));
+  q.addQueryItem(QStringLiteral("startIndex"), QString::number(m_start));
+  q.addQueryItem(QStringLiteral("printType"), QStringLiteral("books"));
   // we don't require a key, cause it might work without it
   if(!m_apiKey.isEmpty()) {
-    q.addQueryItem(QLatin1String("key"), m_apiKey);
+    q.addQueryItem(QStringLiteral("key"), m_apiKey);
   }
 
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("q"), QLatin1String("intitle:") + term_);
+      q.addQueryItem(QStringLiteral("q"), QLatin1String("intitle:") + term_);
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("q"), QLatin1String("inauthor:") + term_);
+      q.addQueryItem(QStringLiteral("q"), QLatin1String("inauthor:") + term_);
       break;
 
     case ISBN:
       {
         const QString isbn = ISBNValidator::cleanValue(term_);
-        q.addQueryItem(QLatin1String("q"), QLatin1String("isbn:") + isbn);
+        q.addQueryItem(QStringLiteral("q"), QLatin1String("isbn:") + isbn);
       }
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), term_);
+      q.addQueryItem(QStringLiteral("q"), term_);
       break;
 
     default:
@@ -180,7 +180,7 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString gbs = entry->field(QLatin1String("gbs-link"));
+  QString gbs = entry->field(QStringLiteral("gbs-link"));
   if(!gbs.isEmpty()) {
     // quiet
     QByteArray data = FileHandler::readDataFile(QUrl::fromUserInput(gbs), true);
@@ -188,30 +188,30 @@ Tellico::Data::EntryPtr GoogleBookFetcher::fetchEntryHook(uint uid_) {
     populateEntry(entry, doc.object().toVariantMap());
   }
 
-  const QString image_id = entry->field(QLatin1String("cover"));
+  const QString image_id = entry->field(QStringLiteral("cover"));
   // if it's still a url, we need to load it
   if(image_id.startsWith(QLatin1String("http"))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-      entry->setField(QLatin1String("cover"), QString());
+      entry->setField(QStringLiteral("cover"), QString());
     } else {
-      entry->setField(QLatin1String("cover"), id);
+      entry->setField(QStringLiteral("cover"), id);
     }
   }
 
   // don't want to include gbs json link
-  entry->setField(QLatin1String("gbs-link"), QString());
+  entry->setField(QStringLiteral("gbs-link"), QString());
 
   return entry;
 }
 
 Tellico::Fetch::FetchRequest GoogleBookFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString isbn = entry_->field(QLatin1String("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -248,22 +248,22 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 
   Data::CollPtr coll(new Data::BookCollection(true));
   // always add the gbs-link for fetchEntryHook
-  Data::FieldPtr field(new Data::Field(QLatin1String("gbs-link"), QLatin1String("GBS Link"), Data::Field::URL));
+  Data::FieldPtr field(new Data::Field(QStringLiteral("gbs-link"), QStringLiteral("GBS Link"), Data::Field::URL));
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-  if(!coll->hasField(QLatin1String("googlebook")) && optionalFields().contains(QLatin1String("googlebook"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("googlebook"), i18n("Google Book Link"), Data::Field::URL));
+  if(!coll->hasField(QStringLiteral("googlebook")) && optionalFields().contains(QLatin1String("googlebook"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("googlebook"), i18n("Google Book Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap result = doc.object().toVariantMap();
-  m_total = result.value(QLatin1String("totalItems")).toInt();
+  m_total = result.value(QStringLiteral("totalItems")).toInt();
 //  myDebug() << "total:" << m_total;
 
-  QVariantList resultList = result.value(QLatin1String("items")).toList();
+  QVariantList resultList = result.value(QStringLiteral("items")).toList();
   if(resultList.isEmpty()) {
     myDebug() << "no results";
     endJob(job);
@@ -287,40 +287,40 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
 }
 
 void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap) {
-  if(entry->collection()->hasField(QLatin1String("gbs-link"))) {
-    entry->setField(QLatin1String("gbs-link"), mapValue(resultMap, "selfLink"));
+  if(entry->collection()->hasField(QStringLiteral("gbs-link"))) {
+    entry->setField(QStringLiteral("gbs-link"), mapValue(resultMap, "selfLink"));
   }
 
-  const QVariantMap volumeMap = resultMap.value(QLatin1String("volumeInfo")).toMap();
-  entry->setField(QLatin1String("title"),     mapValue(volumeMap, "title"));
-  entry->setField(QLatin1String("subtitle"),  mapValue(volumeMap, "subtitle"));
-  entry->setField(QLatin1String("pub_year"),  mapValue(volumeMap, "publishedDate").left(4));
-  entry->setField(QLatin1String("author"),    mapValue(volumeMap, "authors"));
+  const QVariantMap volumeMap = resultMap.value(QStringLiteral("volumeInfo")).toMap();
+  entry->setField(QStringLiteral("title"),     mapValue(volumeMap, "title"));
+  entry->setField(QStringLiteral("subtitle"),  mapValue(volumeMap, "subtitle"));
+  entry->setField(QStringLiteral("pub_year"),  mapValue(volumeMap, "publishedDate").left(4));
+  entry->setField(QStringLiteral("author"),    mapValue(volumeMap, "authors"));
   // workaround for bug, where publisher can be enclosed in quotes
   QString pub = mapValue(volumeMap, "publisher");
   if(pub.startsWith(QLatin1Char('"')) && pub.endsWith(QLatin1Char('"'))) {
     pub.chop(1);
     pub = pub.remove(0, 1);
   }
-  entry->setField(QLatin1String("publisher"), pub);
-  entry->setField(QLatin1String("pages"),     mapValue(volumeMap, "pageCount"));
-  entry->setField(QLatin1String("language"),  mapValue(volumeMap, "language"));
-  entry->setField(QLatin1String("comments"),  mapValue(volumeMap, "description"));
+  entry->setField(QStringLiteral("publisher"), pub);
+  entry->setField(QStringLiteral("pages"),     mapValue(volumeMap, "pageCount"));
+  entry->setField(QStringLiteral("language"),  mapValue(volumeMap, "language"));
+  entry->setField(QStringLiteral("comments"),  mapValue(volumeMap, "description"));
 
-  QStringList catList = volumeMap.value(QLatin1String("categories")).toStringList();
+  QStringList catList = volumeMap.value(QStringLiteral("categories")).toStringList();
   // google is going to give us a lot of categories
   QSet<QString> cats;
   foreach(const QString& cat, catList) {
     cats += cat.split(QRegExp(QLatin1String("\\s*/\\s*"))).toSet();
   }
   // remove General
-  cats.remove(QLatin1String("General"));
+  cats.remove(QStringLiteral("General"));
   catList = cats.toList();
   catList.sort();
-  entry->setField(QLatin1String("keyword"), catList.join(FieldFormat::delimiterString()));
+  entry->setField(QStringLiteral("keyword"), catList.join(FieldFormat::delimiterString()));
 
   QString isbn;
-  foreach(const QVariant& idVariant, volumeMap.value(QLatin1String("industryIdentifiers")).toList()) {
+  foreach(const QVariant& idVariant, volumeMap.value(QStringLiteral("industryIdentifiers")).toList()) {
     const QVariantMap idMap = idVariant.toMap();
     if(mapValue(idMap, "type") == QLatin1String("ISBN_10")) {
       isbn = mapValue(idMap, "identifier");
@@ -333,20 +333,20 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   if(!isbn.isEmpty()) {
     ISBNValidator val(this);
     val.fixup(isbn);
-    entry->setField(QLatin1String("isbn"), isbn);
+    entry->setField(QStringLiteral("isbn"), isbn);
   }
 
-  const QVariantMap imageMap = volumeMap.value(QLatin1String("imageLinks")).toMap();
-  if(imageMap.contains(QLatin1String("small"))) {
-    entry->setField(QLatin1String("cover"), mapValue(imageMap, "small"));
-  } else if(imageMap.contains(QLatin1String("thumbnail"))) {
-    entry->setField(QLatin1String("cover"), mapValue(imageMap, "thumbnail"));
-  } else if(imageMap.contains(QLatin1String("smallThumbnail"))) {
-    entry->setField(QLatin1String("cover"), mapValue(imageMap, "smallThumbnail"));
+  const QVariantMap imageMap = volumeMap.value(QStringLiteral("imageLinks")).toMap();
+  if(imageMap.contains(QStringLiteral("small"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(imageMap, "small"));
+  } else if(imageMap.contains(QStringLiteral("thumbnail"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(imageMap, "thumbnail"));
+  } else if(imageMap.contains(QStringLiteral("smallThumbnail"))) {
+    entry->setField(QStringLiteral("cover"), mapValue(imageMap, "smallThumbnail"));
   }
 
   if(optionalFields().contains(QLatin1String("googlebook"))) {
-    entry->setField(QLatin1String("googlebook"), mapValue(volumeMap, "infoLink"));
+    entry->setField(QStringLiteral("googlebook"), mapValue(volumeMap, "infoLink"));
   }
 }
 
@@ -364,7 +364,7 @@ QString GoogleBookFetcher::defaultIcon() {
 
 Tellico::StringHash GoogleBookFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("googlebook")] = i18n("Google Book Link");
+  hash[QStringLiteral("googlebook")] = i18n("Google Book Link");
   return hash;
 }
 

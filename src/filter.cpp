@@ -179,7 +179,7 @@ bool FilterRule::before(Tellico::Data::EntryPtr entry_) const {
   const QDate pattern = m_patternVariant.toDate();
 //  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
   // Bug 361625: some older versions of Tellico serialized the date with single digit month and day
-  const QDate value = QDate::fromString(entry_->field(m_fieldName), QLatin1String("yyyy-M-d"));
+  const QDate value = QDate::fromString(entry_->field(m_fieldName), QStringLiteral("yyyy-M-d"));
   return value.isValid() && value < pattern;
 }
 
@@ -192,7 +192,7 @@ bool FilterRule::after(Tellico::Data::EntryPtr entry_) const {
   const QDate pattern = m_patternVariant.toDate();
 //  const QDate value = QDate::fromString(entry_->field(m_fieldName), Qt::ISODate);
   // Bug 361625: some older versions of Tellico serialized the date with single digit month and day
-  const QDate value = QDate::fromString(entry_->field(m_fieldName), QLatin1String("yyyy-M-d"));
+  const QDate value = QDate::fromString(entry_->field(m_fieldName), QStringLiteral("yyyy-M-d"));
   return value.isValid() && value > pattern;
 }
 

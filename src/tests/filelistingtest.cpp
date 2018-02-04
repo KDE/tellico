@@ -52,16 +52,16 @@ void FileListingTest::testCpp() {
 
   Tellico::Data::EntryPtr entry;
   foreach(Tellico::Data::EntryPtr tmpEntry, coll->entries()) {
-    if(tmpEntry->field("title") == QLatin1String("filelistingtest.cpp")) {
+    if(tmpEntry->field(QStringLiteral("title")) == QStringLiteral("filelistingtest.cpp")) {
       entry = tmpEntry;
     }
   }
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("filelistingtest.cpp"));
+  QCOMPARE(entry->field("title"), QStringLiteral("filelistingtest.cpp"));
   QCOMPARE(entry->field("url"), url.url());
   QVERIFY(entry->field("description").contains("C++"));
-  QCOMPARE(entry->field("folder"), QLatin1String("")); // empty relative folder location
-  QCOMPARE(entry->field("mimetype"), QLatin1String("text/x-c++src"));
+  QCOMPARE(entry->field("folder"), QStringLiteral("")); // empty relative folder location
+  QCOMPARE(entry->field("mimetype"), QStringLiteral("text/x-c++src"));
   QVERIFY(!entry->field("size").isEmpty());
   QVERIFY(!entry->field("permissions").isEmpty());
   QVERIFY(!entry->field("owner").isEmpty());
@@ -70,7 +70,7 @@ void FileListingTest::testCpp() {
 //  QVERIFY(!entry->field("created").isEmpty());
   QVERIFY(!entry->field("modified").isEmpty());
 #ifdef HAVE_KFILEMETADATA
-  QCOMPARE(entry->field("metainfo"), QLatin1String(""));
+  QCOMPARE(entry->field("metainfo"), QStringLiteral(""));
 #endif
   // icon name does not get set for the jenkins build service
 //  QVERIFY(!entry->field("icon").isEmpty());

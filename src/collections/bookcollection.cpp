@@ -38,7 +38,7 @@ using Tellico::Data::BookCollection;
 
 BookCollection::BookCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Books") : title_) {
-  setDefaultGroupField(QLatin1String("author"));
+  setDefaultGroupField(QStringLiteral("author"));
   if(addDefaultFields_) {
     addFields(defaultFields());
   }
@@ -50,18 +50,18 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
 
   list.append(Field::createDefaultField(Field::TitleField));
 
-  field = new Field(QLatin1String("subtitle"), i18n("Subtitle"));
+  field = new Field(QStringLiteral("subtitle"), i18n("Subtitle"));
   field->setCategory(i18n(book_general));
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
-  field = new Field(QLatin1String("author"), i18n("Author"));
+  field = new Field(QStringLiteral("author"), i18n("Author"));
   field->setCategory(i18n(book_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("editor"), i18n("Editor"));
+  field = new Field(QStringLiteral("editor"), i18n("Editor"));
   field->setCategory(i18n(book_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
@@ -70,122 +70,122 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   QStringList binding;
   binding << i18n("Hardback") << i18n("Paperback") << i18n("Trade Paperback")
           << i18n("E-Book") << i18n("Magazine") << i18n("Journal");
-  field = new Field(QLatin1String("binding"), i18n("Binding"), binding);
+  field = new Field(QStringLiteral("binding"), i18n("Binding"), binding);
   field->setCategory(i18n(book_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
+  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(book_general));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
+  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(book_general));
   list.append(field);
 
-  field = new Field(QLatin1String("publisher"), i18n("Publisher"));
+  field = new Field(QStringLiteral("publisher"), i18n("Publisher"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("edition"), i18n("Edition"));
+  field = new Field(QStringLiteral("edition"), i18n("Edition"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("cr_year"), i18n("Copyright Year"), Field::Number);
+  field = new Field(QStringLiteral("cr_year"), i18n("Copyright Year"), Field::Number);
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowGrouped | Field::AllowMultiple);
   list.append(field);
 
-  field = new Field(QLatin1String("pub_year"), i18n("Publication Year"), Field::Number);
+  field = new Field(QStringLiteral("pub_year"), i18n("Publication Year"), Field::Number);
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("isbn"), i18n("ISBN#"));
+  field = new Field(QStringLiteral("isbn"), i18n("ISBN#"));
   field->setCategory(i18n(book_publishing));
   field->setDescription(i18n("International Standard Book Number"));
   list.append(field);
 
-  field = new Field(QLatin1String("lccn"), i18n("LCCN#"));
+  field = new Field(QStringLiteral("lccn"), i18n("LCCN#"));
   field->setCategory(i18n(book_publishing));
   field->setDescription(i18n("Library of Congress Control Number"));
   list.append(field);
 
-  field = new Field(QLatin1String("pages"), i18n("Pages"), Field::Number);
+  field = new Field(QStringLiteral("pages"), i18n("Pages"), Field::Number);
   field->setCategory(i18n(book_publishing));
   list.append(field);
 
-  field = new Field(QLatin1String("translator"), i18n("Translator"));
+  field = new Field(QStringLiteral("translator"), i18n("Translator"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
-  field = new Field(QLatin1String("language"), i18n("Language"));
+  field = new Field(QStringLiteral("language"), i18n("Language"));
   field->setCategory(i18n(book_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped | Field::AllowMultiple);
   list.append(field);
 
-  field = new Field(QLatin1String("genre"), i18n("Genre"));
+  field = new Field(QStringLiteral("genre"), i18n("Genre"));
   field->setCategory(i18n(book_classification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   // in document versions < 3, this was "keywords" and not "keyword"
   // but the title didn't change, only the name
-  field = new Field(QLatin1String("keyword"), i18n("Keywords"));
+  field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
   field->setCategory(i18n(book_classification));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("series"), i18n("Series"));
+  field = new Field(QStringLiteral("series"), i18n("Series"));
   field->setCategory(i18n(book_classification));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("series_num"), i18n("Series Number"), Field::Number);
+  field = new Field(QStringLiteral("series_num"), i18n("Series Number"), Field::Number);
   field->setCategory(i18n(book_classification));
   list.append(field);
 
   QStringList cond;
   cond << i18n("New") << i18n("Used");
-  field = new Field(QLatin1String("condition"), i18n("Condition"), cond);
+  field = new Field(QStringLiteral("condition"), i18n("Condition"), cond);
   field->setCategory(i18n(book_classification));
   list.append(field);
 
-  field = new Field(QLatin1String("signed"), i18n("Signed"), Field::Bool);
+  field = new Field(QStringLiteral("signed"), i18n("Signed"), Field::Bool);
   field->setCategory(i18n(book_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("read"), i18n("Read"), Field::Bool);
+  field = new Field(QStringLiteral("read"), i18n("Read"), Field::Bool);
   field->setCategory(i18n(book_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(book_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("loaned"), i18n("Loaned"), Field::Bool);
+  field = new Field(QStringLiteral("loaned"), i18n("Loaned"), Field::Bool);
   field->setCategory(i18n(book_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("rating"), i18n("Rating"), Field::Rating);
+  field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
   field->setCategory(i18n(book_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("cover"), i18n("Front Cover"), Field::Image);
+  field = new Field(QStringLiteral("cover"), i18n("Front Cover"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("plot"), i18n("Plot Summary"), Field::Para);
+  field = new Field(QStringLiteral("plot"), i18n("Plot Summary"), Field::Para);
   list.append(field);
 
-  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));
@@ -200,14 +200,14 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
     return 0;
   }
   // equal isbn's or lccn's are easy, give it a weight of 100
-  if(EntryComparison::score(entry1_, entry2_, QLatin1String("isbn"), this) > 0 ||
-     EntryComparison::score(entry1_, entry2_, QLatin1String("lccn"), this) > 0) {
+  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0 ||
+     EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"), this) > 0) {
     return 100; // good match
   }
-  int res = 3*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
-  res += 2*EntryComparison::score(entry1_, entry2_, QLatin1String("author"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("cr_year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("pub_year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QLatin1String("binding"), this);
+  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("author"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("cr_year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
   return res;
 }

@@ -43,24 +43,24 @@ void CIWImporter::initTagMap() {
   if(!s_tagMap) {
     s_tagMap = new QHash<QString, QString>();
     // BT is special and is handled separately
-    s_tagMap->insert(QLatin1String("PT"), QLatin1String("entry-type"));
-    s_tagMap->insert(QLatin1String("TI"), QLatin1String("title"));
-    s_tagMap->insert(QLatin1String("BT"), QLatin1String("booktitle"));
-    s_tagMap->insert(QLatin1String("AU"), QLatin1String("author"));
-    s_tagMap->insert(QLatin1String("AF"), QLatin1String("author"));
-    s_tagMap->insert(QLatin1String("BE"), QLatin1String("editor"));
-    s_tagMap->insert(QLatin1String("PY"), QLatin1String("year"));
-    s_tagMap->insert(QLatin1String("AB"), QLatin1String("abstract"));
-    s_tagMap->insert(QLatin1String("DE"), QLatin1String("keyword"));
-    s_tagMap->insert(QLatin1String("SO"), QLatin1String("journal"));
-    s_tagMap->insert(QLatin1String("SE"), QLatin1String("journal"));
-    s_tagMap->insert(QLatin1String("VL"), QLatin1String("volume"));
-    s_tagMap->insert(QLatin1String("IS"), QLatin1String("number"));
-    s_tagMap->insert(QLatin1String("PU"), QLatin1String("publisher"));
-    s_tagMap->insert(QLatin1String("BN"), QLatin1String("isbn"));
-    s_tagMap->insert(QLatin1String("PA"), QLatin1String("address"));
-    s_tagMap->insert(QLatin1String("DI"), QLatin1String("doi"));
-    s_tagMap->insert(QLatin1String("EP"), QLatin1String("pages"));
+    s_tagMap->insert(QStringLiteral("PT"), QStringLiteral("entry-type"));
+    s_tagMap->insert(QStringLiteral("TI"), QStringLiteral("title"));
+    s_tagMap->insert(QStringLiteral("BT"), QStringLiteral("booktitle"));
+    s_tagMap->insert(QStringLiteral("AU"), QStringLiteral("author"));
+    s_tagMap->insert(QStringLiteral("AF"), QStringLiteral("author"));
+    s_tagMap->insert(QStringLiteral("BE"), QStringLiteral("editor"));
+    s_tagMap->insert(QStringLiteral("PY"), QStringLiteral("year"));
+    s_tagMap->insert(QStringLiteral("AB"), QStringLiteral("abstract"));
+    s_tagMap->insert(QStringLiteral("DE"), QStringLiteral("keyword"));
+    s_tagMap->insert(QStringLiteral("SO"), QStringLiteral("journal"));
+    s_tagMap->insert(QStringLiteral("SE"), QStringLiteral("journal"));
+    s_tagMap->insert(QStringLiteral("VL"), QStringLiteral("volume"));
+    s_tagMap->insert(QStringLiteral("IS"), QStringLiteral("number"));
+    s_tagMap->insert(QStringLiteral("PU"), QStringLiteral("publisher"));
+    s_tagMap->insert(QStringLiteral("BN"), QStringLiteral("isbn"));
+    s_tagMap->insert(QStringLiteral("PA"), QStringLiteral("address"));
+    s_tagMap->insert(QStringLiteral("DI"), QStringLiteral("doi"));
+    s_tagMap->insert(QStringLiteral("EP"), QStringLiteral("pages"));
   }
 }
 
@@ -166,7 +166,7 @@ void CIWImporter::readText(const QString& text_, int n) {
         usebooktitle = true;
       }
       // assume everything is article
-      value = QLatin1String("article");
+      value = QStringLiteral("article");
     } else if(tag == QLatin1String("BN")) {
       // test for valid isbn
       int pos = 0;
@@ -175,7 +175,7 @@ void CIWImporter::readText(const QString& text_, int n) {
       }
     } else if(tag == QLatin1String("SO")) {
       if(usebooktitle) {
-        tag = QLatin1String("BT");
+        tag = QStringLiteral("BT");
       }
     } else if(tag == QLatin1String("BP")) {
       sp = value;
@@ -187,7 +187,7 @@ void CIWImporter::readText(const QString& text_, int n) {
           ep = QString::number(startPage + endPage);
         }
         value = sp + QLatin1Char('-') + ep;
-        tag = QLatin1String("EP");
+        tag = QStringLiteral("EP");
         sp.clear();
         ep.clear();
       } else {

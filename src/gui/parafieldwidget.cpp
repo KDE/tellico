@@ -34,7 +34,7 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
 
   m_textEdit = new KTextEdit(this);
   m_textEdit->setAcceptRichText(false);
-  if(field_->property(QLatin1String("spellcheck")) != QLatin1String("false")) {
+  if(field_->property(QStringLiteral("spellcheck")) != QLatin1String("false")) {
     m_textEdit->setCheckSpellingEnabled(true);
   }
   connect(m_textEdit, SIGNAL(textChanged()), SLOT(checkModified()));
@@ -51,7 +51,7 @@ QString ParaFieldWidget::text() const {
 void ParaFieldWidget::setTextImpl(const QString& text_) {
   QRegExp rx(QLatin1String("<br/?>"), Qt::CaseInsensitive);
   QString s = text_;
-  s.replace(rx, QLatin1String("\n"));
+  s.replace(rx, QStringLiteral("\n"));
   m_textEdit->setPlainText(s);
 }
 

@@ -46,18 +46,18 @@ void TheGamesDBFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/thegamesdb2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("GoldenEye 007"));
-  m_fieldValues.insert(QLatin1String("platform"), QLatin1String("Nintendo 64"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("1997"));
-  m_fieldValues.insert(QLatin1String("certification"), QLatin1String("Teen"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Action; Adventure; Shooter; Stealth"));
-  m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Nintendo"));
-  m_fieldValues.insert(QLatin1String("developer"), QLatin1String("Rare"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("GoldenEye 007"));
+  m_fieldValues.insert(QStringLiteral("platform"), QStringLiteral("Nintendo 64"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1997"));
+  m_fieldValues.insert(QStringLiteral("certification"), QStringLiteral("Teen"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Adventure; Shooter; Stealth"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo"));
+  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare"));
 }
 
 void TheGamesDBFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
-                                       QLatin1String("Goldeneye"));
+                                       QStringLiteral("Goldeneye"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -71,14 +71,14 @@ void TheGamesDBFetcherTest::testTitle() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void TheGamesDBFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Goldeneye"));
+                                       QStringLiteral("Goldeneye"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -92,7 +92,7 @@ void TheGamesDBFetcherTest::testKeyword() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

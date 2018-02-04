@@ -46,7 +46,7 @@ void DBLPFetcherTest::initTestCase() {
 
 void DBLPFetcherTest::testProceedings() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QLatin1String("Chip and PIN is Broken"));
+                                       QStringLiteral("Chip and PIN is Broken"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBLPFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -54,21 +54,21 @@ void DBLPFetcherTest::testProceedings() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Chip and PIN is Broken."));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Steven J. Murdoch; Saar Drimer; Ross J. Anderson; Mike Bond"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2010"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("433-446"));
-  QCOMPARE(entry->field(QLatin1String("booktitle")), QLatin1String("IEEE Symposium on Security and Privacy"));
-  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String(""));
-  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dblp.org/rec/conf/sp/MurdochDAB10"));
-//  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1109/SP.2010.33"));
-  QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("inproceedings"));
-  QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("MurdochDAB10"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Chip and PIN is Broken."));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Steven J. Murdoch; Saar Drimer; Ross J. Anderson; Mike Bond"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2010"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("433-446"));
+  QCOMPARE(entry->field(QStringLiteral("booktitle")), QStringLiteral("IEEE Symposium on Security and Privacy"));
+  QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral(""));
+  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("http://dblp.org/rec/conf/sp/MurdochDAB10"));
+//  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1109/SP.2010.33"));
+  QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("inproceedings"));
+  QCOMPARE(entry->field(QStringLiteral("bibtex-key")), QStringLiteral("MurdochDAB10"));
 }
 
 void DBLPFetcherTest::testArticle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QLatin1String("Nontrivial independent sets of bipartite graphs"));
+                                       QStringLiteral("Nontrivial independent sets of bipartite graphs"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBLPFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -76,16 +76,16 @@ void DBLPFetcherTest::testArticle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Nontrivial independent sets of bipartite graphs and cross-intersecting families."));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Jun Wang; Huajun Zhang"));
-  QCOMPARE(entry->field(QLatin1String("year")), QLatin1String("2013"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("129-141"));
-  QCOMPARE(entry->field(QLatin1String("volume")), QLatin1String("120"));
-  QCOMPARE(entry->field(QLatin1String("number")), QLatin1String("1"));
-  QCOMPARE(entry->field(QLatin1String("journal")), QLatin1String("J. Comb. Theory, Ser. A"));
-  QCOMPARE(entry->field(QLatin1String("booktitle")), QLatin1String(""));
-  QCOMPARE(entry->field(QLatin1String("url")), QLatin1String("http://dblp.org/rec/journals/jct/WangZ13"));
-//  QCOMPARE(entry->field(QLatin1String("doi")), QLatin1String("10.1016/j.jcta.2012.07.005"));
-  QCOMPARE(entry->field(QLatin1String("entry-type")), QLatin1String("article"));
-  QCOMPARE(entry->field(QLatin1String("bibtex-key")), QLatin1String("WangZ13"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Nontrivial independent sets of bipartite graphs and cross-intersecting families."));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Jun Wang; Huajun Zhang"));
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2013"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("129-141"));
+  QCOMPARE(entry->field(QStringLiteral("volume")), QStringLiteral("120"));
+  QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("1"));
+  QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("J. Comb. Theory, Ser. A"));
+  QCOMPARE(entry->field(QStringLiteral("booktitle")), QStringLiteral(""));
+  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("http://dblp.org/rec/journals/jct/WangZ13"));
+//  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1016/j.jcta.2012.07.005"));
+  QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("article"));
+  QCOMPARE(entry->field(QStringLiteral("bibtex-key")), QStringLiteral("WangZ13"));
 }
