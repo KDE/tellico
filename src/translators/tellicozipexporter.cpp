@@ -65,7 +65,7 @@ bool TellicoZipExporter::exec() {
   // TODO: maybe need label?
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), true);
   item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Export::TellicoZipExporter::slotCancel);
   ProgressItem::Done done(this);
 
   TellicoXMLExporter exp(coll);

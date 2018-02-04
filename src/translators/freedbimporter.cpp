@@ -357,7 +357,7 @@ void FreeDBImporter::readCache() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::FreeDBImporter::slotCancel);
   ProgressItem::Done done(this);
 
   uint step = 1;

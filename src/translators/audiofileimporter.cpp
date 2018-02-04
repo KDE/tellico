@@ -81,7 +81,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
   item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::AudioFileImporter::slotCancel);
   ProgressItem::Done done(this);
 
   // TODO: allow remote audio file importing

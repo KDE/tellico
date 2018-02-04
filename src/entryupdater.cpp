@@ -99,7 +99,8 @@ void EntryUpdater::init() {
   Kernel::self()->beginCommandGroup(i18n("Update Entries"));
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, label, true /*canCancel*/);
   item.setTotalSteps(m_fetchers.count() * m_origEntryCount);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled,
+          this, &Tellico::EntryUpdater::slotCancel);
 
   // done if no fetchers available
   if(m_fetchers.isEmpty()) {

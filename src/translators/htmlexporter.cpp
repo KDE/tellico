@@ -127,7 +127,7 @@ bool HTMLExporter::exec() {
   if(options() & ExportProgress) {
     ProgressItem& item = ProgressManager::self()->newProgressItem(this, QString(), true);
     item.setTotalSteps(100);
-    connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+    connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Export::HTMLExporter::slotCancel);
   }
   // ok if not ExportProgress, no worries
   ProgressItem::Done done(this);

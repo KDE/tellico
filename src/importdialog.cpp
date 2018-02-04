@@ -154,7 +154,7 @@ Tellico::Data::CollPtr ImportDialog::collection() {
             ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
     connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
             ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-    connect(&item, SIGNAL(signalCancelled(ProgressItem*)), m_importer, SLOT(slotCancel()));
+    connect(&item, &Tellico::ProgressItem::signalCancelled, m_importer, &Tellico::Import::Importer::slotCancel);
     ProgressItem::Done done(m_importer);
     m_coll = m_importer->collection();
   }
@@ -445,7 +445,7 @@ Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, 
           ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
   connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
           ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), imp, SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, imp, &Tellico::Import::Importer::slotCancel);
   ProgressItem::Done done(imp);
 
   Data::CollPtr c = imp->collection();
@@ -469,7 +469,7 @@ Tellico::Data::CollPtr ImportDialog::importText(Tellico::Import::Format format_,
           ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
   connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
           ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), imp, SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, imp, &Tellico::Import::Importer::slotCancel);
   ProgressItem::Done done(imp);
 */
   Data::CollPtr c = imp->collection();

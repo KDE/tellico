@@ -78,7 +78,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(urls().count());
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::PDFImporter::slotCancel);
   ProgressItem::Done done(this);
   const bool showProgress = options() & ImportProgress;
 

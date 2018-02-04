@@ -163,8 +163,6 @@ ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
   connect(item, &Tellico::ProgressItem::signalDone,
           this, &Tellico::ProgressManager::slotItemDone);
 
-//  connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
-//  emit signalItemAdded(item);
   return *item;
 }
 

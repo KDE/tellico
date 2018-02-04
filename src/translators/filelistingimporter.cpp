@@ -80,7 +80,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::FileListingImporter::slotCancel);
   ProgressItem::Done done(this);
 
   // going to assume only one volume will ever be imported
