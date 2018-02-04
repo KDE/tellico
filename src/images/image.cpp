@@ -47,8 +47,8 @@ Image::Image(const Image& other) : QImage(other)
 }
 
 Image& Image::operator=(const Image& other) {
+  QImage::operator=(other);
   if(this != &other) {
-    QImage::operator=(other);
     m_id = other.m_id;
     m_format = other.m_format;
     m_linkOnly = other.m_linkOnly;
