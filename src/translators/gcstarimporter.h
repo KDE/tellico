@@ -56,7 +56,7 @@ public:
   void setHasRelativeImageLinks(bool b) { m_relativeImageLinks = b; }
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private:
   static QString splitJoin(const QRegExp& rx, const QString& s);

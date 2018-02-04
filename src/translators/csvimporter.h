@@ -63,6 +63,10 @@ public:
    */
   virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
   /**
+   * The CSVImporter can import any type known to Tellico.
+   */
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE { Q_UNUSED(type); return true; }
+  /**
    */
   virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
 
@@ -70,7 +74,7 @@ public:
 
 public Q_SLOTS:
   void slotActionChanged(int action) Q_DECL_OVERRIDE;
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotTypeChanged();

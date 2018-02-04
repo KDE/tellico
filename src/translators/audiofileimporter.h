@@ -59,7 +59,7 @@ public:
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
   void slotAddFileToggled(bool on);
 
 private:

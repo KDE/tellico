@@ -68,6 +68,7 @@ public:
    * but cannot be abstract.
    */
   virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE { Q_UNUSED(type); return true; }
 
   /**
    * Returns the contents of the imported file.
@@ -75,6 +76,9 @@ public:
    * @return The file contents
    */
   const QDomDocument& domDocument() const { return m_dom; }
+
+public Q_SLOTS:
+  void slotCancel() Q_DECL_OVERRIDE {}
 
 private:
   QDomDocument m_dom;

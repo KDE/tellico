@@ -60,7 +60,7 @@ public:
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
   void slotEntries(KIO::Job* job, const KIO::UDSEntryList& list);
