@@ -278,6 +278,9 @@ void Controller::slotClearSelection() {
 
   m_mainWindow->m_detailedView->clearSelection();
   m_mainWindow->m_groupView->clearSelection();
+  if(m_mainWindow->m_filterView) {
+    m_mainWindow->m_filterView->clearSelection();
+  }
   if(m_mainWindow->m_loanView) {
     m_mainWindow->m_loanView->clearSelection();
   }
@@ -435,7 +438,10 @@ void Controller::slotUpdateFilter(Tellico::FilterPtr filter_) {
   updateActions();
 
   m_mainWindow->m_detailedView->setFilter(filter_); // takes ownership
-  if(!filter_ && m_mainWindow->m_filterView) { // for example, when quick filter clears the selection
+  if(!filter_ && m_mainWindow->m_filterView && !m_mainWindow->m_dontQueueFilter) {
+    // for example, when quick filter clears the selection
+    // the check against m_dontQueueFilter is to prevent the situation when the FilterView has an Entry selected
+    // which sends an empty filter selection, which would then clear the whole FilterView selection
     m_mainWindow->m_filterView->clearSelection();
   }
 

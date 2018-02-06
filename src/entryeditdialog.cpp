@@ -292,7 +292,9 @@ void EntryEditDialog::slotHandleNew() {
   m_tabs->setFocusToFirstChild();
   clear();
   m_isWorking = true; // clear() will get called again
-  Controller::self()->slotClearSelection();
+  if(!signalsBlocked()) {
+    Controller::self()->slotClearSelection();
+  }
   m_isWorking = false;
 
   Data::EntryPtr entry(new Data::Entry(m_currColl));

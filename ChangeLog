@@ -1,3 +1,7 @@
+2018-02-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed "Filter by Group" (Bug 389931).
+
 2018-01-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated MusicBrainz data source to Web Service v2.
