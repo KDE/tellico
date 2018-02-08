@@ -47,7 +47,6 @@ SET(XSLT_FILES
     vinoxml2tellico.xsl
     welcome.html
     xmp2tellico.xsl
-    yahoo2tellico.xsl
     )
 
 INSTALL(FILES ${XSLT_FILES} DESTINATION ${TELLICO_DATA_INSTALL_DIR} )
