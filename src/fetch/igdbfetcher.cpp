@@ -562,6 +562,14 @@ Tellico::StringHash IGDBFetcher::allOptionalFields() {
   return hash;
 }
 
+QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_) {
+  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("user-key: ") + apiKey_);
+  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  return job;
+}
+
 IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QGridLayout* l = new QGridLayout(optionsWidget());
@@ -610,12 +618,4 @@ void IGDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
 
 QString IGDBFetcher::ConfigWidget::preferredName() const {
   return IGDBFetcher::defaultName();
-}
-
-QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_) {
-  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("user-key: ") + apiKey_);
-  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
-  KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  return job;
 }
