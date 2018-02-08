@@ -23,13 +23,10 @@
  ***************************************************************************/
 
 #include "isbndbfetcher.h"
-#include "../translators/xslthandler.h"
-#include "../translators/tellicoimporter.h"
+#include "../collections/bookcollection.h"
+#include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
-#include "../collection.h"
-#include "../entry.h"
-#include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -39,36 +36,29 @@
 #include <KJobWidgets/KJobWidgets>
 
 #include <QLineEdit>
-#include <QDomDocument>
-#include <QDomImplementation>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QTextCodec>
-#include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
-  static const int ISBNDB_RETURNS_PER_REQUEST = 10;
   static const int ISBNDB_MAX_RETURNS_TOTAL = 25;
-  static const char* ISBNDB_BASE_URL = "http://isbndb.com/api/v2/xml/";
-  static const char* ISBNDB_APP_ID = "3B9S3BQS";
+  static const char* ISBNDB_BASE_URL = "https://api.isbndb.com";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::ISBNdbFetcher;
 
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(nullptr),
-      m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_page(1), m_total(-1), m_numResults(0), m_countOffset(0),
-      m_job(nullptr), m_started(false), m_apiKey(QLatin1String(ISBNDB_APP_ID)) {
-  // https://bugs.kde.org/show_bug.cgi?id=339063 -- some output is incorrectly encoded
-  QDomImplementation::setInvalidDataPolicy(QDomImplementation::DropInvalidChars);
+    : Fetcher(parent_),
+      m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_total(-1), m_numResults(0),
+      m_job(nullptr), m_started(false) {
 }
 
 ISBNdbFetcher::~ISBNdbFetcher() {
-  delete m_xsltHandler;
-  m_xsltHandler = nullptr;
 }
 
 QString ISBNdbFetcher::source() const {
@@ -76,11 +66,11 @@ QString ISBNdbFetcher::source() const {
 }
 
 bool ISBNdbFetcher::canFetch(int type) const {
-  return type == Data::Collection::Book || type == Data::Collection::ComicBook || type == Data::Collection::Bibtex;
+  return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
 
 void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key", ISBNDB_APP_ID);
+  QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
@@ -88,16 +78,24 @@ void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
 
 void ISBNdbFetcher::search() {
   m_started = true;
-  m_page = 1;
   m_total = -1;
   m_numResults = 0;
-  m_countOffset = 0;
 
   doSearch();
 }
 
 void ISBNdbFetcher::continueSearch() {
   m_started = true;
+
+  if(m_apiKey.isEmpty()) {
+    myDebug() << "empty API key";
+    message(i18n("An access key is required to use this data source.")
+            + QLatin1Char(' ') +
+            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
+    stop();
+    return;
+  }
+
   m_limit += ISBNDB_MAX_RETURNS_TOTAL;
   doSearch();
 }
@@ -106,29 +104,17 @@ void ISBNdbFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
-  u.setPath(u.path() + m_apiKey);
-
-  QUrlQuery q;
   switch(request().key) {
     case Title:
-      u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      u.setPath(QLatin1String("/books/") + request().value);
       break;
 
     case Person:
-      u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QStringLiteral("i"), QStringLiteral("author_name"));
-      q.addQueryItem(QStringLiteral("q"), request().value);
-      break;
-
-    case Keyword:
-      u.setPath(u.path() + QLatin1String("books"));
-      q.addQueryItem(QStringLiteral("i"), QStringLiteral("full"));
-      q.addQueryItem(QStringLiteral("q"), request().value);
+      u.setPath(QLatin1String("/author/") + request().value);
       break;
 
     case ISBN:
-      u.setPath(u.path() + QLatin1String("book"));
+      u.setPath(QLatin1String("/book/"));
       {
         // can only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
@@ -142,15 +128,10 @@ void ISBNdbFetcher::doSearch() {
       stop();
       return;
   }
-  q.addQueryItem(QStringLiteral("page"), QString::number(m_page));
-  u.setQuery(q);
+//  myDebug() << "url: " << u.url();
 
-  //  myDebug() << "url: " << u.url();
-
-  m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
-  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  m_job = isbndbJob(u, m_apiKey);
+  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
 
 void ISBNdbFetcher::stop() {
@@ -167,161 +148,94 @@ void ISBNdbFetcher::stop() {
   emit signalDone(this);
 }
 
-void ISBNdbFetcher::slotComplete(KJob*) {
-//  myDebug();
+void ISBNdbFetcher::slotComplete(KJob* job_) {
+  KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
 
-  if(m_job->error()) {
-    m_job->uiDelegate()->showErrorMessage();
+  if(job->error()) {
+    job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
     return;
   }
-
-  // since the fetch is done, don't worry about holding the job pointer
+  // see bug 319662. If fetcher is cancelled, job is killed
+  // if the pointer is retained, it gets double-deleted
   m_job = nullptr;
+
 #if 0
   myWarning() << "Remove debug from isbndbfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
+  QFile file(QString::fromLatin1("/tmp/test.json"));
+  if(file.open(QIODevice::WriteOnly)) {
+    QTextStream t(&file);
     t.setCodec("UTF-8");
     t << data;
   }
-  f.close();
+  file.close();
 #endif
 
-  QDomDocument dom;
-  if(!dom.setContent(data, false)) {
-    myWarning() << "server did not return valid XML.";
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  QVariantMap result = doc.object().toVariantMap();
+  QVariantList resultList;
+  if(result.contains(QStringLiteral("book"))) {
+    resultList += result.value(QStringLiteral("book"));
+    m_total = 1;
+  } else if(result.contains(QStringLiteral("books"))) {
+    m_total = result.value(QStringLiteral("total")).toInt();
+    resultList = result.value(QStringLiteral("books")).toList();
+  } else {
+    myDebug() << "no results";
     stop();
     return;
   }
+//  myDebug() << "Total:" << m_total;
 
-  if(m_total == -1) {
-    QDomNode n = dom.documentElement().namedItem(QStringLiteral("BookList"));
-    QDomElement e = n.toElement();
-    if(!e.isNull()) {
-      m_total = e.attribute(QStringLiteral("total_results"), QString::number(-1)).toInt();
-    }
-  }
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
-    }
-  }
-
-  // assume result is always utf-8
-  // https://bugs.kde.org/show_bug.cgi?id=339063 -- some output is incorrectly encoded
-//  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
-  QString str = m_xsltHandler->applyStylesheet(dom.toString());
-  Import::TellicoImporter imp(str);
-  // be quiet when loading images
-  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
-  Data::CollPtr coll = imp.collection();
-  if(!coll) {
-    stop();
-    return;
-  }
-
-  if(coll->entryCount() == 0) {
-    QDomNode n = dom.documentElement().namedItem(QStringLiteral("ErrorMessage"));
-    QDomElement e = n.toElement();
-    if(!e.isNull() && e.text() == QLatin1String("Access key error")) {
-      message(i18n("<qt><p><b>The ISBNndb.com server reports an access key error.</b></p>"
-                   "You may have reached the maximum number of searches for today with this key, "
-                   "or you may have entered the access key incorrectly.</qt>"), MessageHandler::Error);
-      stop();
-      return;
-    }
-  }
-
-  // since the Dewey and LoC field titles have a context in their i18n call here
-  // but not in the isbndb2tellico.xsl stylesheet where the field is actually created
-  // update the field titles here
-  QHashIterator<QString, QString> i(allOptionalFields());
-  while(i.hasNext()) {
-    i.next();
-    Data::FieldPtr field = coll->fieldByName(i.key());
-    if(field) {
-      field->setTitle(i.value());
-      coll->modifyField(field);
-    }
-  }
+  Data::CollPtr coll(new Data::BookCollection(true));
 
   int count = 0;
-  foreach(Data::EntryPtr entry, coll->entries()) {
-    if(m_numResults >= m_limit) {
-      break;
-    }
-    if(count < m_countOffset) {
-      continue;
-    }
-    if(!m_started) {
-      // might get aborted
-      break;
-    }
+  foreach(const QVariant& result, resultList) {
+//    myDebug() << "found result:" << result;
+
+    Data::EntryPtr entry(new Data::Entry(coll));
+    populateEntry(entry, result.toMap());
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
-    m_entries.insert(r->uid, Data::EntryPtr(entry));
+    m_entries.insert(r->uid, entry);
     emit signalResultFound(r);
-    ++m_numResults;
     ++count;
-  }
-
-  // are there any additional results to get?
-  m_hasMoreResults = m_page * ISBNDB_RETURNS_PER_REQUEST < m_total;
-
-  const int currentTotal = qMin(m_total, m_limit);
-  if(m_page * ISBNDB_RETURNS_PER_REQUEST < currentTotal) {
-    int foundCount = (m_page-1) * ISBNDB_RETURNS_PER_REQUEST + coll->entryCount();
-    message(i18n("Results from %1: %2/%3", source(), foundCount, m_total), MessageHandler::Status);
-    ++m_page;
-    m_countOffset = 0;
-    doSearch();
-  } else {
-    m_countOffset = m_entries.count() % ISBNDB_RETURNS_PER_REQUEST;
-    if(m_countOffset == 0) {
-      ++m_page; // need to go to next page
+    ++m_numResults;
+    if(count >= m_limit) {
+      break;
     }
-    stop(); // required
   }
+
+  stop(); // required
 }
 
 Tellico::Data::EntryPtr ISBNdbFetcher::fetchEntryHook(uint uid_) {
-  Data::EntryPtr entry = m_entries[uid_];
-  if(!entry) {
-    myWarning() << "no entry in dict";
+  if(!m_entries.contains(uid_)) {
+    myDebug() << "no entry ptr";
     return Data::EntryPtr();
   }
+
+  Data::EntryPtr entry = m_entries.value(uid_);
+
+  // image might still be a URL
+  const QString image_id = entry->field(QStringLiteral("cover"));
+  if(image_id.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QStringLiteral("cover"), id);
+  }
+
   return entry;
-}
-
-void ISBNdbFetcher::initXSLTHandler() {
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("isbndb2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate isbndb2tellico.xsl.";
-    return;
-  }
-
-  QUrl u = QUrl::fromLocalFile(xsltfile);
-
-  delete m_xsltHandler;
-  m_xsltHandler = new XSLTHandler(u);
-  if(!m_xsltHandler->isValid()) {
-    myWarning() << "error in isbndb2tellico.xsl.";
-    delete m_xsltHandler;
-    m_xsltHandler = nullptr;
-    return;
-  }
 }
 
 Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -336,6 +250,55 @@ Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_)
     return FetchRequest(Fetch::Title, t);
   }
   return FetchRequest();
+}
+
+void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
+  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
+  // "date_published" can be "2008-12-13" or "July 2012"
+  QString pubYear = mapValue(resultMap_, "date_published").remove(QRegExp(QStringLiteral("[^\\d]"))).left(4);
+  entry_->setField(QStringLiteral("pub_year"), pubYear);
+  QStringList authors;
+  foreach(const QVariant& author, resultMap_.value(QStringLiteral("authors")).toList()) {
+    authors += author.toString();
+  }
+  entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("publisher"), mapValue(resultMap_, "publisher"));
+  entry_->setField(QStringLiteral("edition"), mapValue(resultMap_, "edition"));
+  QString binding = mapValue(resultMap_, "binding");
+  if(binding.isEmpty()) {
+    binding = mapValue(resultMap_, "format");
+  }
+  if(binding.startsWith(QStringLiteral("Hardcover"))) {
+    binding = QStringLiteral("Hardback");
+  } else if(binding.startsWith(QStringLiteral("Paperback"))) {
+    binding = QStringLiteral("Paperback");
+  }
+  if(!binding.isEmpty()) {
+    entry_->setField(QStringLiteral("binding"), i18n(binding.toUtf8().constData()));
+  }
+  QStringList subjects;
+  foreach(const QVariant& subject, resultMap_.value(QStringLiteral("subjects")).toList()) {
+    subjects += subject.toString();
+  }
+  entry_->setField(QStringLiteral("genre"), subjects.join(FieldFormat::delimiterString()));
+  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
+  entry_->setField(QStringLiteral("pages"), mapValue(resultMap_, "pages"));
+  entry_->setField(QStringLiteral("language"), mapValue(resultMap_, "language"));
+  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "overview"));
+  if(mapValue(resultMap_, "overview").isEmpty()) {
+    entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "synopsis"));
+  }
+
+  const QString dewey = mapValue(resultMap_, "dewey_decimal");
+  if(!dewey.isEmpty() && optionalFields().contains(QLatin1String("dewey"))) {
+    if(!entry_->collection()->hasField(QStringLiteral("dewey"))) {
+      Data::FieldPtr field(new Data::Field(QStringLiteral("dewey"), i18n("Dewey Decimal"), Data::Field::Line));
+      field->setCategory(i18n("Publishing"));
+      entry_->collection()->addField(field);
+    }
+    entry_->setField(QStringLiteral("dewey"), dewey);
+  }
 }
 
 Tellico::Fetch::ConfigWidget* ISBNdbFetcher::configWidget(QWidget* parent_) const {
@@ -354,8 +317,15 @@ Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
   // same ones as z3950fetcher
   StringHash hash;
   hash[QStringLiteral("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
-  hash[QStringLiteral("lcc")]   = i18nc("Library of Congress classification system", "LoC Classification");
   return hash;
+}
+
+QPointer<KIO::StoredTransferJob> ISBNdbFetcher::isbndbJob(const QUrl& url_, const QString& apiKey_) {
+  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
+  job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("X-API-Key: ") + apiKey_);
+//  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  KJobWidgets::setWindow(job, GUI::Proxy::widget());
+  return job;
 }
 
 ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher_)
@@ -369,7 +339,7 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("http://isbndb.com/account/logincreate")),
+                                QLatin1String("https://isbndb.com/isbn-database")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
@@ -384,19 +354,12 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   m_apiKeyEdit = new QLineEdit(optionsWidget());
   connect(m_apiKeyEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
   l->addWidget(m_apiKeyEdit, row, 1);
-  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
-  label->setWhatsThis(w);
-  m_apiKeyEdit->setWhatsThis(w);
   label->setBuddy(m_apiKeyEdit);
 
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
-    // only show the key if it is not the default Tellico one...
-    // that way the user is prompted to apply for their own
-    if(fetcher_->m_apiKey != QLatin1String(ISBNDB_APP_ID)) {
-      m_apiKeyEdit->setText(fetcher_->m_apiKey);
-    }
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
   }
 
   // now add additional fields widget

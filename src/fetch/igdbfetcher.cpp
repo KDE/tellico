@@ -375,7 +375,6 @@ Tellico::Fetch::ConfigWidget* IGDBFetcher::configWidget(QWidget* parent_) const 
   return new IGDBFetcher::ConfigWidget(parent_, this);
 }
 
-
 // Use member hash for certain field names for now.
 // Don't expect IGDB values to change. This avoids exponentially multiplying the number of API calls
 void IGDBFetcher::populateHashes() {
