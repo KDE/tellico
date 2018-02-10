@@ -74,9 +74,16 @@ void ISBNdbFetcherTest::testIsbn() {
 }
 
 void ISBNdbFetcherTest::testIsbn13() {
+  QString groupName = QStringLiteral("ISBNdb");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with ISBNdb settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("9780789312235"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -95,9 +102,16 @@ void ISBNdbFetcherTest::testIsbn13() {
 }
 
 void ISBNdbFetcherTest::testMultipleIsbn() {
+  QString groupName = QStringLiteral("ISBNdb");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with ISBNdb settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("0789312239; 9780596000486"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -106,9 +120,16 @@ void ISBNdbFetcherTest::testMultipleIsbn() {
 }
 
 void ISBNdbFetcherTest::testTitle() {
+  QString groupName = QStringLiteral("ISBNdb");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with ISBNdb settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Title,
                                        QStringLiteral("PACKING FOR MARS The Curious Science of Life in the Void"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -133,9 +154,16 @@ void ISBNdbFetcherTest::testTitle() {
 }
 
 void ISBNdbFetcherTest::testAuthor() {
+  QString groupName = QStringLiteral("ISBNdb");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with ISBNdb settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::Person,
                                        QStringLiteral("Joshua Foer"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
+  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
