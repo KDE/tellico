@@ -96,7 +96,6 @@ void ISBNdbFetcher::continueSearch() {
     return;
   }
 
-  m_limit += ISBNDB_MAX_RETURNS_TOTAL;
   doSearch();
 }
 
@@ -188,7 +187,8 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
     m_total = result.value(QStringLiteral("total")).toInt();
     resultList = result.value(QStringLiteral("books")).toList();
   } else {
-    myDebug() << "no results";
+    const QString msg = result.value(QStringLiteral("message")).toString();
+    myDebug() << "no results:" << msg;
     stop();
     return;
   }
@@ -323,7 +323,7 @@ Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
 QPointer<KIO::StoredTransferJob> ISBNdbFetcher::isbndbJob(const QUrl& url_, const QString& apiKey_) {
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("X-API-Key: ") + apiKey_);
-//  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;
 }
