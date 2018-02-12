@@ -229,6 +229,7 @@
       <li xml:lang="ia">Automaticamente da forma a titulos e nomines</li>
       <li xml:lang="it">Formatta automaticamente titoli e nomi</li>
       <li xml:lang="nl">Deelt automatisch titels en namen in</li>
+      <li xml:lang="nn">Formaterer automatisk titlar og namn</li>
       <li xml:lang="pl">Samoczynne formatowanie tytułów i nazw</li>
       <li xml:lang="pt">Formata automaticamente os títulos e nomes</li>
       <li xml:lang="pt-BR">Formata automaticamente os títulos e nomes</li>
@@ -253,6 +254,7 @@
       <li xml:lang="ia">Il supporta cerca de collection e filtro de vista</li>
       <li xml:lang="it">Supporta ricerche nella collezione e filtraggio della vista</li>
       <li xml:lang="nl">Ondersteunt zoeken in verzamelingen en filtering op weergave</li>
+      <li xml:lang="nn">Støttar søk og filtrering i samlingar</li>
       <li xml:lang="pl">Obsługa przedukiwania zbiorów i filtrowanych widoków</li>
       <li xml:lang="pt">Suporta a pesquisa na colecção e a filtragem da janela</li>
       <li xml:lang="pt-BR">Suporte a pesquisa na coleção e filtragem da janela</li>
@@ -277,6 +279,7 @@
       <li xml:lang="ia">Il ordina e gruppa per varie proprietates</li>
       <li xml:lang="it">Ordina e raggruppa la collezione in base a varie proprietà</li>
       <li xml:lang="nl">Sorteert en groepeert verzameling door verschillende eigenschappen</li>
+      <li xml:lang="nn">Sorterer og grupperer automatisk samlingane</li>
       <li xml:lang="pl">Szeregowanie i grupowanie zbiorów według różnych właściwości</li>
       <li xml:lang="pt">Ordena e agrupa a colecção de acordo com diversas propriedades</li>
       <li xml:lang="pt-BR">Ordena e agrupa a coleção de acordo com diversas propriedades</li>
@@ -325,6 +328,7 @@
       <li xml:lang="ia">Il importa metadatos MODS, Bibtex, RIS, CSV, PDF e plure altere formatos</li>
       <li xml:lang="it">Importa MODS, Bibtex, RIS, CSV, metadati dei PDF, e molti altri formati</li>
       <li xml:lang="nl">Importeert MODS, Bibtex, RIS, CSV, PDF metadata en vele andere formaten</li>
+      <li xml:lang="nn">Kan importera MODS, BibTeX, RIS, CSV, PDF-metadata og mange andre format</li>
       <li xml:lang="pl">Importowanie MODS, Bibtex, RIS, CSV, metadanych PDF i wielu innych formatów</li>
       <li xml:lang="pt">Importa dos formatos MODS, Bibtex, RIS, CSV, meta-dados de PDF, entre muitos outros</li>
       <li xml:lang="pt-BR">Importa dos formatos MODS, Bibtex, RIS, CSV, metadados de PDF, entre muitos outros</li>
@@ -345,6 +349,7 @@
       <li xml:lang="gl">Pode exportar coleccións nos formatos Bibtex, CSV, e HTML, entre outros.</li>
       <li xml:lang="it">Esporta in formato Bibtex, ONIX, CSV, HTML e altri</li>
       <li xml:lang="nl">Exporteert naar Bibtex, ONIX, CSV, HTML en andere formaten</li>
+      <li xml:lang="nn">Kan eksportera til BibTeX, ONIX, CSV, HTML og andre format</li>
       <li xml:lang="pl">Eksportowanie Bibtex, ONIX, CSV, HTML i innych formatów</li>
       <li xml:lang="pt">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
       <li xml:lang="pt-BR">Exporta para o Bibtex, ONIX, CSV, HTML, entre outros formatos</li>
