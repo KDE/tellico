@@ -49,6 +49,7 @@ public:
   static void setTemplateHighlightedTextColor(int type, const QColor& color);
 
 private:
+  static QRegExp commaSplit();
   static void checkArticleList();
 
   static QStringList m_noCapitalizationList;
