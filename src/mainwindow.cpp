@@ -2323,6 +2323,8 @@ bool MainWindow::importCollection(Tellico::Data::CollPtr coll_, Tellico::Import:
       slotEnableModifiedActions(false);
       break;
   }
+  // tell the entry views and models that there are no further images to load
+  m_detailedView->slotRefreshImages();
   return !failed;
 }
 
