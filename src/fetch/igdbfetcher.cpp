@@ -49,7 +49,7 @@
 
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
-  static const char* IGDB_API_URL = "https://api-2445582011268.apicast.io";
+  static const char* IGDB_API_URL = "https://api-endpoint.igdb.com";
 }
 
 using namespace Tellico;
