@@ -113,7 +113,7 @@ const IMDBFetcher::LangData& IMDBFetcher::langData(int lang_) {
       QStringLiteral("Language"),
       QStringLiteral("Certification"),
       QStringLiteral("Country"),
-      QStringLiteral("plot\\s*(?:outline|summary)?")
+      QStringLiteral("plot\\s+(outline|summary)(?!/)")
     }, {
       i18n("Internet Movie Database (French)"),
       QStringLiteral("www.imdb.fr"),
@@ -649,13 +649,13 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
     results = Tellico::fromHtmlData(FileHandler::readDataFile(url, true));
     m_url = url; // needed for processing
 #if 0
-  myWarning() << "Remove debug from imdbfetcher.cpp for /tmp/testimdbresult.html";
-  QFile f(QString::fromLatin1("/tmp/testimdbresult.html"));
-  if(f.open(QIODevice::WriteOnly)) {
-    QTextStream t(&f);
-    t << results;
-  }
-  f.close();
+    myWarning() << "Remove debug from imdbfetcher.cpp for /tmp/testimdbresult.html";
+    QFile f(QString::fromLatin1("/tmp/testimdbresult.html"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t << results;
+    }
+    f.close();
 #endif
     results = Tellico::decodeHTML(results);
   }
@@ -842,21 +842,26 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
 
   bool useUserSummary = false;
 
-  QString thisPlot;
   // match until next <p> tag
-  QString plotRxStr = langData(m_lang).plot + QStringLiteral("(.*)</p");
+  QString plotRxStr = langData(m_lang).plot + QStringLiteral("(.*)</(p|div|li)");
   QRegExp plotRx(plotRxStr, Qt::CaseInsensitive);
   plotRx.setMinimal(true);
   QRegExp plotURLRx(QStringLiteral("<a\\s+.*href\\s*=\\s*\".*/title/.*/plotsummary\""), Qt::CaseInsensitive);
   plotURLRx.setMinimal(true);
   if(plotRx.indexIn(str_) > -1) {
-    thisPlot = plotRx.cap(1);
+    QString thisPlot = plotRx.cap(2);
+    // if ends with "Written by", remove it. It has an em tag
+    thisPlot.remove(QRegExp(QStringLiteral("<em class=\"nobr\".*</em>")));
     thisPlot.remove(*s_tagRx); // remove HTML tags
-    entry_->setField(QStringLiteral("plot"), thisPlot);
+    thisPlot = thisPlot.simplified();
     // if thisPlot ends with (more) or contains
     // a url that ends with plotsummary, then we'll grab it, otherwise not
-    if(plotRx.cap(0).endsWith(QStringLiteral("(more)</")) || plotURLRx.indexIn(plotRx.cap(0)) > -1) {
+    if(plotRx.cap(0).endsWith(QStringLiteral("(more)</")) ||
+       plotURLRx.indexIn(plotRx.cap(0)) > -1 ||
+       thisPlot.isEmpty()) {
       useUserSummary = true;
+    } else {
+      entry_->setField(QStringLiteral("plot"), thisPlot);
     }
   } else {
     useUserSummary = true;
@@ -871,7 +876,7 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
     QString plotPage = Tellico::fromHtmlData(FileHandler::readDataFile(plotURL, true));
 
     if(!plotPage.isEmpty()) {
-      QRegExp plotRx(QStringLiteral("<p\\s+class\\s*=\\s*\"plotpar\">(.*)</p"));
+      QRegExp plotRx(QStringLiteral("id=\"plot-summaries-content\">(.*)</p"));
       plotRx.setMinimal(true);
       QRegExp plotRx2(QStringLiteral("<div\\s+id\\s*=\\s*\"swiki.2.1\">(.*)</d"));
       plotRx2.setMinimal(true);
@@ -885,10 +890,11 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
       // remove last little "written by", if there
       userPlot.remove(QRegExp(QStringLiteral("\\s*written by.*$"), Qt::CaseInsensitive));
       if(!userPlot.isEmpty()) {
-        entry_->setField(QStringLiteral("plot"), Tellico::decodeHTML(userPlot));
+        entry_->setField(QStringLiteral("plot"), Tellico::decodeHTML(userPlot.simplified()));
       }
     }
   }
+//  myDebug() << "Plot:" << entry_->field(QStringLiteral("plot"));
 }
 
 void IMDBFetcher::doStudio(const QString& str_, Tellico::Data::EntryPtr entry_) {

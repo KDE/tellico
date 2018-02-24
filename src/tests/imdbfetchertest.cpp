@@ -88,6 +88,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QCOMPARE(entry->field("imdb"), QStringLiteral("http://www.imdb.com/title/tt0084296/"));
   QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("plot").contains('>'));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
@@ -119,6 +120,9 @@ void ImdbFetcherTest::testAsterix() {
   QCOMPARE(entry->field("origtitle"), QString::fromUtf8("Astérix aux jeux olympiques"));
   QCOMPARE(set(entry, "director"), set(QString::fromUtf8("Thomas Langmann; Frédéric Forestier")));
   QCOMPARE(set(entry, "writer"), set(QString::fromUtf8("Franck Magnier; René Goscinny; Olivier Dazat; Alexandre Charlot; Thomas Langmann; Albert Uderzo")));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("plot").contains('>'));
+  QVERIFY(!entry->field("plot").contains("»"));
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Asterix at the Olympic Games")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los Juegos Olímpicos")));
