@@ -166,7 +166,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
 #ifdef HAVE_KFILEMETADATA
-    KFileMetaData::SimpleExtractionResult result(u.url(), item.mimetype(), KFileMetaData::ExtractionResult::ExtractMetaData);
+    KFileMetaData::SimpleExtractionResult result(u.toLocalFile(), item.mimetype(), KFileMetaData::ExtractionResult::ExtractMetaData);
     QList<KFileMetaData::Extractor*> exList = extractors.fetchExtractors(item.mimetype());
     foreach(KFileMetaData::Extractor* ex, exList) {
       ex->extract(&result);
