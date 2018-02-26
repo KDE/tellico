@@ -43,6 +43,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
   KLocalizedString::setApplicationDomain("tellico");
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
