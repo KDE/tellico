@@ -63,7 +63,7 @@ public:
   bool removeImage(const QString& id);
 
 private:
-  Q_DISABLE_COPY(ImageDirectory);
+  Q_DISABLE_COPY(ImageDirectory)
   QString m_path;
   bool m_pathExists;
   // until the file gets saved, the local directory is temporary
@@ -79,7 +79,7 @@ public:
   void purge();
 
 private:
-  Q_DISABLE_COPY(TemporaryImageDirectory);
+  Q_DISABLE_COPY(TemporaryImageDirectory)
   void setPath(const QString& path) Q_DECL_OVERRIDE;
 
   QTemporaryDir* m_dir;
@@ -96,7 +96,7 @@ public:
   Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
 
 private:
-  Q_DISABLE_COPY(ImageZipArchive);
+  Q_DISABLE_COPY(ImageZipArchive)
   KZip* m_zip;
   const KArchiveDirectory* m_imgDir;
   StringSet m_images;

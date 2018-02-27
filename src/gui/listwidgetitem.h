@@ -38,7 +38,7 @@ public:
   void setColored(bool colored);
 
 private:
-  Q_DISABLE_COPY(ListWidgetItem);
+  Q_DISABLE_COPY(ListWidgetItem)
   bool m_colored;
 };
 
