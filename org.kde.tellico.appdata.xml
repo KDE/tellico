@@ -439,6 +439,7 @@
   <url type="help">http://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
   <screenshots>
     <screenshot type="default" width="867" height="627">
+      <caption>The main window showing a simple item in a book collection</caption>
       <image>http://kde.org/images/screenshots/tellico.png</image>
     </screenshot>
   </screenshots>
