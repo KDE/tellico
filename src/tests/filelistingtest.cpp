@@ -28,6 +28,7 @@
 #include "filelistingtest.h"
 
 #include "../translators/filelistingimporter.h"
+#include "../translators/xmphandler.h"
 #include "../images/imagefactory.h"
 
 #include <QTest>
@@ -70,8 +71,35 @@ void FileListingTest::testCpp() {
 //  QVERIFY(!entry->field("created").isEmpty());
   QVERIFY(!entry->field("modified").isEmpty());
 #ifdef HAVE_KFILEMETADATA
-  QCOMPARE(entry->field("metainfo"), QStringLiteral(""));
+  QCOMPARE(entry->field("metainfo"), QString());
 #endif
   // icon name does not get set for the jenkins build service
 //  QVERIFY(!entry->field("icon").isEmpty());
+}
+
+void FileListingTest::testXMPData() {
+  // initializing exempi can cause a crash in Exiv for files with XMP data
+  // see https://bugs.kde.org/show_bug.cgi?id=390744
+//  Tellico::XMPHandler xmp;
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/BlueSquare.jpg"));
+  Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::File);
+  QVERIFY(coll->entryCount() > 0);
+
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr tmpEntry, coll->entries()) {
+    if(tmpEntry->field(QStringLiteral("title")) == QStringLiteral("BlueSquare.jpg")) {
+      entry = tmpEntry;
+    }
+  }
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("BlueSquare.jpg"));
+  QCOMPARE(entry->field("mimetype"), QStringLiteral("image/jpeg"));
+  QCOMPARE(entry->field("size"), QStringLiteral("23.6 KiB"));
+#ifdef HAVE_KFILEMETADATA
+  QVERIFY(!entry->field("metainfo").isEmpty());
+#endif
 }
