@@ -176,8 +176,8 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     KFileMetaData::PropertyMap properties = result.properties();
     KFileMetaData::PropertyMap::const_iterator it = properties.constBegin();
     for( ; it != properties.constEnd(); ++it) {
-      const QString s = it.value().toString();
-      if(!s.isEmpty()) {
+      const QString value = it.value().toString();
+      if(!value.isEmpty()) {
         QString label;
         if(propertyNameHash.contains(it.key())) {
           label = propertyNameHash.value(it.key());
@@ -185,8 +185,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
           label = KFileMetaData::PropertyInfo(it.key()).displayName();
           propertyNameHash.insert(it.key(), label);
         }
+//        myDebug() << label << value;
         if(!metaIgnore.contains(label)) {
-          strings << label + FieldFormat::columnDelimiterString() + s;
+          strings << label + FieldFormat::columnDelimiterString() + value;
         }
       }
     }
