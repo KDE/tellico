@@ -102,10 +102,11 @@ public:
    *
    * @param fieldName The name of the field
    * @param value The value of the field
+   * @param updateMDate Whether to update the modified date of the entry
    * @return A boolean indicating whether or not the field was successfully set
    */
-  bool setField(const QString& fieldName, const QString& value);
-  bool setField(Data::FieldPtr field, const QString& value);
+  bool setField(const QString& fieldName, const QString& value, bool updateMDate=true);
+  bool setField(Data::FieldPtr field, const QString& value, bool updateMDate=true);
   /**
    * Returns a pointer to the parent collection of the entry.
    *

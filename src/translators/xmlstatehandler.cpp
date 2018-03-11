@@ -614,7 +614,8 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   if(fieldName == QLatin1String("mdate")) {
     d->modifiedDate = fieldValue;
   } else {
-    entry->setField(fieldName, fieldValue);
+    // no need to update the modified date when setting the entry's field value
+    entry->setField(fieldName, fieldValue, false /* no modified date update */);
   }
   return true;
 }
