@@ -122,9 +122,9 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
       }
     }
   } else {
-    QString value = entry_->field(m_fieldName);
+    const QString value = entry_->field(m_fieldName);
     if(value.contains(m_pattern, Qt::CaseInsensitive)) {
-        return true;
+      return true;
     }
     QString value2 = removeAccents(value);
     if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
@@ -132,12 +132,15 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
     }
     if(entry_->collection()->hasField(m_fieldName) &&
        entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone) {
-      value = entry_->formattedField(m_fieldName);
-      if(value.contains(m_pattern, Qt::CaseInsensitive)) {
+      const QString fvalue = entry_->formattedField(m_fieldName);
+      if(fvalue == value) {
+        return false; // if the formatted value is equal to original value, no need to recheck
+      }
+      if(fvalue.contains(m_pattern, Qt::CaseInsensitive)) {
         return true;
       }
-      value2 = removeAccents(value);
-      if(value2 != value && value2.contains(m_pattern, Qt::CaseInsensitive)) {
+      value2 = removeAccents(fvalue);
+      if(value2 != fvalue && value2.contains(m_pattern, Qt::CaseInsensitive)) {
         return true;
       }
     }
