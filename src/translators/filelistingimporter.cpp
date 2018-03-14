@@ -167,10 +167,22 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
 #ifdef HAVE_KFILEMETADATA
-    KFileMetaData::SimpleExtractionResult result(u.toLocalFile(), item.mimetype(), KFileMetaData::ExtractionResult::ExtractMetaData);
+    KFileMetaData::SimpleExtractionResult result(u.toLocalFile(),
+                                                 item.mimetype(),
+                                                 KFileMetaData::ExtractionResult::ExtractMetaData);
     QList<KFileMetaData::Extractor*> exList = extractors.fetchExtractors(item.mimetype());
     foreach(KFileMetaData::Extractor* ex, exList) {
-      ex->extract(&result);
+// initializing exempi can cause a crash in Exiv for files with XMP data
+// crude workaround is to avoid using the exivextractor and the only apparent way is to
+// matach against the mimetypes
+// see https://bugs.kde.org/show_bug.cgi?id=390744
+#ifdef HAVE_EXEMPI
+      if(!ex->mimetypes().contains(QStringLiteral("image/x-exv"))) {
+#else
+      if(true) {
+#endif
+        ex->extract(&result);
+      }
     }
     QStringList strings;
     KFileMetaData::PropertyMap properties = result.properties();

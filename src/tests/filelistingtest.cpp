@@ -78,9 +78,15 @@ void FileListingTest::testCpp() {
 }
 
 void FileListingTest::testXMPData() {
+  {
+    Tellico::XMPHandler xmp;
+#ifdef HAVE_EXEMPI
+    QVERIFY(xmp.isXMPEnabled());
+    QVERIFY(!xmp.extractXMP(QFINDTESTDATA("data/BlueSquare.jpg")).isEmpty());
+#endif
+  }
   // initializing exempi can cause a crash in Exiv for files with XMP data
   // see https://bugs.kde.org/show_bug.cgi?id=390744
-//  Tellico::XMPHandler xmp;
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/BlueSquare.jpg"));
   Tellico::Import::FileListingImporter importer(url.adjusted(QUrl::RemoveFilename));
   Tellico::Data::CollPtr coll = importer.collection();
@@ -100,6 +106,7 @@ void FileListingTest::testXMPData() {
   QCOMPARE(entry->field("mimetype"), QStringLiteral("image/jpeg"));
   QCOMPARE(entry->field("size"), QStringLiteral("23.6 KiB"));
 #ifdef HAVE_KFILEMETADATA
+  QEXPECT_FAIL("", "Because of a crash related to exempi and kfilemetadata linking, no metadata is read", Continue);
   QVERIFY(!entry->field("metainfo").isEmpty());
 #endif
 }
