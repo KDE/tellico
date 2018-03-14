@@ -74,13 +74,13 @@ void CollectionTest::testEmpty() {
   Tellico::Data::CollPtr nullColl;
   QVERIFY(!nullColl);
 
-  Tellico::Data::Collection coll(false, QLatin1String("Title"));
+  Tellico::Data::Collection coll(false, QStringLiteral("Title"));
 
   QCOMPARE(coll.id(), 1);
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QVERIFY(coll.fields().isEmpty());
-  QCOMPARE(coll.title(), QLatin1String("Title"));
+  QCOMPARE(coll.title(), QStringLiteral("Title"));
 }
 
 void CollectionTest::testCollection() {
@@ -89,10 +89,10 @@ void CollectionTest::testCollection() {
   QCOMPARE(coll->entryCount(), 0);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Base);
   QCOMPARE(coll->fields().count(), 4);
-  QVERIFY(coll->hasField(QLatin1String("title")));
-  QVERIFY(coll->hasField(QLatin1String("id")));
-  QVERIFY(coll->hasField(QLatin1String("cdate")));
-  QVERIFY(coll->hasField(QLatin1String("mdate")));
+  QVERIFY(coll->hasField(QStringLiteral("title")));
+  QVERIFY(coll->hasField(QStringLiteral("id")));
+  QVERIFY(coll->hasField(QStringLiteral("cdate")));
+  QVERIFY(coll->hasField(QStringLiteral("mdate")));
   QVERIFY(coll->peopleFields().isEmpty());
   QVERIFY(coll->imageFields().isEmpty());
   QVERIFY(!coll->hasImages());
@@ -101,15 +101,15 @@ void CollectionTest::testCollection() {
   coll->addEntries(entry1);
 
   // check derived value
-  QCOMPARE(entry1->field(QLatin1String("id")), QLatin1String("1"));
+  QCOMPARE(entry1->field(QStringLiteral("id")), QStringLiteral("1"));
   // check created and modified values
-  QCOMPARE(entry1->field(QLatin1String("cdate")), QDate::currentDate().toString(Qt::ISODate));
-  QCOMPARE(entry1->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(entry1->field(QStringLiteral("cdate")), QDate::currentDate().toString(Qt::ISODate));
+  QCOMPARE(entry1->field(QStringLiteral("mdate")), QDate::currentDate().toString(Qt::ISODate));
 
   // also verify that the empty string is included in list of group names
-  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test")));
   coll->addField(field1);
-  QStringList groupNames = entry1->groupNamesByFieldName(QLatin1String("test"));
+  QStringList groupNames = entry1->groupNamesByFieldName(QStringLiteral("test"));
   QCOMPARE(groupNames.count(), 1);
   QVERIFY(groupNames.at(0).isEmpty());
 
@@ -117,33 +117,33 @@ void CollectionTest::testCollection() {
   // add created and modified dates from earlier, to make sure they don't get overwritten
   QDate weekAgo = QDate::currentDate().addDays(-7);
   QDate yesterday = QDate::currentDate().addDays(-1);
-  entry2->setField(QLatin1String("cdate"), weekAgo.toString(Qt::ISODate));
-  entry2->setField(QLatin1String("mdate"), yesterday.toString(Qt::ISODate));
+  entry2->setField(QStringLiteral("cdate"), weekAgo.toString(Qt::ISODate));
+  entry2->setField(QStringLiteral("mdate"), yesterday.toString(Qt::ISODate));
   coll->addEntries(entry2);
 
   // check derived value
-  QCOMPARE(entry2->field(QLatin1String("id")), QLatin1String("2"));
+  QCOMPARE(entry2->field(QStringLiteral("id")), QStringLiteral("2"));
   // check created and modified values
-  QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
-  QCOMPARE(entry2->field(QLatin1String("mdate")), yesterday.toString(Qt::ISODate));
+  QCOMPARE(entry2->field(QStringLiteral("cdate")), weekAgo.toString(Qt::ISODate));
+  QCOMPARE(entry2->field(QStringLiteral("mdate")), yesterday.toString(Qt::ISODate));
 
   // check that mdate gets updates
-  entry2->setField(QLatin1String("title"), QLatin1String("new title"));
-  QCOMPARE(entry2->field(QLatin1String("cdate")), weekAgo.toString(Qt::ISODate));
-  QCOMPARE(entry2->field(QLatin1String("mdate")), QDate::currentDate().toString(Qt::ISODate));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("new title"));
+  QCOMPARE(entry2->field(QStringLiteral("cdate")), weekAgo.toString(Qt::ISODate));
+  QCOMPARE(entry2->field(QStringLiteral("mdate")), QDate::currentDate().toString(Qt::ISODate));
 
   // check Bug 361622 - properly handling empty rows in table
-  Tellico::Data::FieldPtr tableField(new Tellico::Data::Field(QLatin1String("table"), QLatin1String("Table"), Tellico::Data::Field::Table));
+  Tellico::Data::FieldPtr tableField(new Tellico::Data::Field(QStringLiteral("table"), QStringLiteral("Table"), Tellico::Data::Field::Table));
   tableField->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(tableField);
-  QString tableValue = QLatin1String("Value1")
+  QString tableValue = QStringLiteral("Value1")
                      + Tellico::FieldFormat::rowDelimiterString()
                      + Tellico::FieldFormat::rowDelimiterString()
-                     + QLatin1String("Value2");
-  entry2->setField(QLatin1String("table"), tableValue);
-  QCOMPARE(entry2->formattedField(QLatin1String("table")), tableValue);
-  QCOMPARE(QSet<QString>::fromList(entry2->groupNamesByFieldName(QLatin1String("table"))),
-           QSet<QString>() << QLatin1String("Value1") << QLatin1String("Value2"));
+                     + QStringLiteral("Value2");
+  entry2->setField(QStringLiteral("table"), tableValue);
+  QCOMPARE(entry2->formattedField(QStringLiteral("table")), tableValue);
+  QCOMPARE(QSet<QString>::fromList(entry2->groupNamesByFieldName(QStringLiteral("table"))),
+           QSet<QString>() << QStringLiteral("Value1") << QStringLiteral("Value2"));
 }
 
 void CollectionTest::testFields() {
@@ -153,26 +153,26 @@ void CollectionTest::testFields() {
   QVERIFY(coll->peopleFields().isEmpty());
   QVERIFY(coll->imageFields().isEmpty());
 
-  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"),
-                                                          QLatin1String("Author")));
+  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QStringLiteral("author"),
+                                                          QStringLiteral("Author")));
   aField->setFlags(Tellico::Data::Field::AllowMultiple | Tellico::Data::Field::AllowGrouped);
   aField->setFormatType(Tellico::FieldFormat::FormatName);
   QCOMPARE(coll->addField(aField), true);
-  QVERIFY(coll->hasField(QLatin1String("author")));
-  QCOMPARE(coll->defaultGroupField(), QLatin1String("author"));
+  QVERIFY(coll->hasField(QStringLiteral("author")));
+  QCOMPARE(coll->defaultGroupField(), QStringLiteral("author"));
 
   QCOMPARE(coll->fields().count(), 5);
   QCOMPARE(coll->peopleFields().count(), 1);
   QVERIFY(coll->imageFields().isEmpty());
   QVERIFY(!coll->hasImages());
-  QCOMPARE(coll->fieldsByCategory(QLatin1String("General")).size(), 2);
+  QCOMPARE(coll->fieldsByCategory(QStringLiteral("General")).size(), 2);
 
-  Tellico::Data::FieldPtr bField(new Tellico::Data::Field(QLatin1String("cover"),
-                                                          QLatin1String("Cover"),
+  Tellico::Data::FieldPtr bField(new Tellico::Data::Field(QStringLiteral("cover"),
+                                                          QStringLiteral("Cover"),
                                                           Tellico::Data::Field::Image));
   QCOMPARE(coll->addField(bField), true);
-  QVERIFY(coll->hasField(QLatin1String("cover")));
-  QVERIFY(!coll->hasField(QLatin1String("Ccover")));
+  QVERIFY(coll->hasField(QStringLiteral("cover")));
+  QVERIFY(!coll->hasField(QStringLiteral("Ccover")));
 
   QCOMPARE(coll->fields().count(), 6);
   QCOMPARE(coll->peopleFields().count(), 1);
@@ -181,57 +181,57 @@ void CollectionTest::testFields() {
 
   QStringList cats = coll->fieldCategories();
   QCOMPARE(cats.size(), 3);
-  QVERIFY(cats.contains(QLatin1String("General")));
-  QVERIFY(cats.contains(QLatin1String("Personal")));
-  QVERIFY(cats.contains(QLatin1String("Cover")));
+  QVERIFY(cats.contains(QStringLiteral("General")));
+  QVERIFY(cats.contains(QStringLiteral("Personal")));
+  QVERIFY(cats.contains(QStringLiteral("Cover")));
 
   const QStringList names = coll->fieldNames();
   QCOMPARE(names.size(), 6);
-  QVERIFY(names.contains(QLatin1String("author")));
-  QVERIFY(names.contains(QLatin1String("cover")));
+  QVERIFY(names.contains(QStringLiteral("author")));
+  QVERIFY(names.contains(QStringLiteral("cover")));
 
   const QStringList titles = coll->fieldTitles();
   QCOMPARE(titles.size(), 6);
-  QVERIFY(titles.contains(QLatin1String("Author")));
-  QVERIFY(titles.contains(QLatin1String("Cover")));
+  QVERIFY(titles.contains(QStringLiteral("Author")));
+  QVERIFY(titles.contains(QStringLiteral("Cover")));
 
-  QCOMPARE(coll->fieldByName(QLatin1String("author")), aField);
-  QCOMPARE(coll->fieldByTitle(QLatin1String("Author")), aField);
-  QCOMPARE(coll->fieldNameByTitle(QLatin1String("Author")), QLatin1String("author"));
-  QCOMPARE(coll->fieldNameByTitle(QLatin1String("author")), QString());
-  QCOMPARE(coll->fieldTitleByName(QLatin1String("Author")), QString());
-  QCOMPARE(coll->fieldTitleByName(QLatin1String("author")), QLatin1String("Author"));
+  QCOMPARE(coll->fieldByName(QStringLiteral("author")), aField);
+  QCOMPARE(coll->fieldByTitle(QStringLiteral("Author")), aField);
+  QCOMPARE(coll->fieldNameByTitle(QStringLiteral("Author")), QStringLiteral("author"));
+  QCOMPARE(coll->fieldNameByTitle(QStringLiteral("author")), QString());
+  QCOMPARE(coll->fieldTitleByName(QStringLiteral("Author")), QString());
+  QCOMPARE(coll->fieldTitleByName(QStringLiteral("author")), QStringLiteral("Author"));
 
-  QVERIFY(coll->removeField(QLatin1String("cover")));
-  QVERIFY(!coll->hasField(QLatin1String("cover")));
+  QVERIFY(coll->removeField(QStringLiteral("cover")));
+  QVERIFY(!coll->hasField(QStringLiteral("cover")));
   QCOMPARE(coll->fields().count(), 5);
   QVERIFY(!coll->hasImages());
-  QCOMPARE(coll->fieldTitleByName(QLatin1String("cover")), QString());
+  QCOMPARE(coll->fieldTitleByName(QStringLiteral("cover")), QString());
   QCOMPARE(coll->fieldCategories().size(), 2);
 
-  Tellico::Data::FieldPtr cField(new Tellico::Data::Field(QLatin1String("editor"),
-                                                          QLatin1String("Editor")));
+  Tellico::Data::FieldPtr cField(new Tellico::Data::Field(QStringLiteral("editor"),
+                                                          QStringLiteral("Editor")));
   cField->setFlags(Tellico::Data::Field::AllowGrouped);
   cField->setFormatType(Tellico::FieldFormat::FormatName);
-  cField->setCategory(QLatin1String("People"));
+  cField->setCategory(QStringLiteral("People"));
 
   // since the field name does not match an existing field, modifying should fail
   QVERIFY(!coll->modifyField(cField));
-  cField->setName(QLatin1String("author"));
+  cField->setName(QStringLiteral("author"));
   QVERIFY(coll->modifyField(cField));
-  QCOMPARE(coll->fieldByName(QLatin1String("author")), cField);
-  QCOMPARE(coll->fieldByTitle(QLatin1String("Author")), Tellico::Data::FieldPtr());
-  QCOMPARE(coll->fieldByTitle(QLatin1String("Editor")), cField);
+  QCOMPARE(coll->fieldByName(QStringLiteral("author")), cField);
+  QCOMPARE(coll->fieldByTitle(QStringLiteral("Author")), Tellico::Data::FieldPtr());
+  QCOMPARE(coll->fieldByTitle(QStringLiteral("Editor")), cField);
   QCOMPARE(coll->peopleFields().count(), 1);
 
   cats = coll->fieldCategories();
   QCOMPARE(cats.size(), 3);
-  QVERIFY(cats.contains(QLatin1String("General")));
-  QVERIFY(cats.contains(QLatin1String("Personal")));
-  QVERIFY(cats.contains(QLatin1String("People")));
+  QVERIFY(cats.contains(QStringLiteral("General")));
+  QVERIFY(cats.contains(QStringLiteral("Personal")));
+  QVERIFY(cats.contains(QStringLiteral("People")));
 
-  QCOMPARE(coll->fieldsByCategory(QLatin1String("General")).size(), 1);
-  QCOMPARE(coll->fieldsByCategory(QLatin1String("People")).size(), 1);
+  QCOMPARE(coll->fieldsByCategory(QStringLiteral("General")).size(), 1);
+  QCOMPARE(coll->fieldsByCategory(QStringLiteral("People")).size(), 1);
 
   coll->clear();
   QVERIFY(coll->fields().isEmpty());
@@ -239,70 +239,70 @@ void CollectionTest::testFields() {
   QVERIFY(coll->imageFields().isEmpty());
   QVERIFY(coll->fieldCategories().isEmpty());
   QVERIFY(coll->defaultGroupField().isEmpty());
-  QCOMPARE(coll->fieldByName(QLatin1String("author")), Tellico::Data::FieldPtr());
-  QCOMPARE(coll->fieldByTitle(QLatin1String("Editor")), Tellico::Data::FieldPtr());
+  QCOMPARE(coll->fieldByName(QStringLiteral("author")), Tellico::Data::FieldPtr());
+  QCOMPARE(coll->fieldByTitle(QStringLiteral("Editor")), Tellico::Data::FieldPtr());
 }
 
 void CollectionTest::testDerived() {
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
-  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QLatin1String("author"),
-                                                          QLatin1String("Author")));
+  Tellico::Data::FieldPtr aField(new Tellico::Data::Field(QStringLiteral("author"),
+                                                          QStringLiteral("Author")));
   aField->setFlags(Tellico::Data::Field::AllowMultiple);
   aField->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(aField);
 
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
-  entry->setField(QLatin1String("author"), QLatin1String("Albert Einstein; Niels Bohr"));
+  entry->setField(QStringLiteral("author"), QStringLiteral("Albert Einstein; Niels Bohr"));
   coll->addEntries(entry);
 
-  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("Test")));
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author}"));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("Test")));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author}"));
   field->setFlags(Tellico::Data::Field::Derived);
   field->setFormatType(Tellico::FieldFormat::FormatName);
   coll->addField(field);
 
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein; Niels Bohr"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("Albert Einstein; Niels Bohr"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{test3}"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{test3}"));
 
-  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QLatin1String("test2"), QLatin1String("Test")));
-  field2->setProperty(QLatin1String("template"), QLatin1String("%{test}"));
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QStringLiteral("test2"), QStringLiteral("Test")));
+  field2->setProperty(QStringLiteral("template"), QStringLiteral("%{test}"));
   field2->setFlags(Tellico::Data::Field::Derived);
   coll->addField(field2);
 
-  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QLatin1String("test3"), QLatin1String("Test")));
-  field3->setProperty(QLatin1String("template"), QLatin1String("%{test3:1}"));
+  Tellico::Data::FieldPtr field3(new Tellico::Data::Field(QStringLiteral("test3"), QStringLiteral("Test")));
+  field3->setProperty(QStringLiteral("template"), QStringLiteral("%{test3:1}"));
   field3->setFlags(Tellico::Data::Field::Derived);
   coll->addField(field3);
 
   // recursive, so template should be empty now
-  QCOMPARE(field3->property(QLatin1String("template")), QString());
+  QCOMPARE(field3->property(QStringLiteral("template")), QString());
 
   // now test all the possible format options
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:1}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("Albert Einstein"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1/l}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("albert einstein"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:1/l}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("albert einstein"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1/u}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("ALBERT EINSTEIN"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:1/u}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("ALBERT EINSTEIN"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:1}"));
-  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::FieldFormat::ForceFormat), QLatin1String("Einstein, Albert"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:1}"));
+  QCOMPARE(entry->formattedField(QStringLiteral("test"), Tellico::FieldFormat::ForceFormat), QStringLiteral("Einstein, Albert"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:2}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:2}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("Niels Bohr"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Niels Bohr"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:-1}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("Niels Bohr"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-1}"));
-  QCOMPARE(entry->formattedField(QLatin1String("test"), Tellico::FieldFormat::ForceFormat), QLatin1String("Bohr, Niels"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:-1}"));
+  QCOMPARE(entry->formattedField(QStringLiteral("test"), Tellico::FieldFormat::ForceFormat), QStringLiteral("Bohr, Niels"));
 
-  field->setProperty(QLatin1String("template"), QLatin1String("%{author:-2}"));
-  QCOMPARE(entry->field(QLatin1String("test")), QLatin1String("Albert Einstein"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{author:-2}"));
+  QCOMPARE(entry->field(QStringLiteral("test")), QStringLiteral("Albert Einstein"));
 }
 
 void CollectionTest::testValue() {
@@ -314,12 +314,12 @@ void CollectionTest::testValue() {
 
   Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
 
-  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("Test")));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("Test")));
   field1->setFlags(Tellico::Data::Field::AllowMultiple);
   field1->setFormatType(type);
   coll->addField(field1);
 
-  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QLatin1String("table"), QLatin1String("Table"), Tellico::Data::Field::Table));
+  Tellico::Data::FieldPtr field2(new Tellico::Data::Field(QStringLiteral("table"), QStringLiteral("Table"), Tellico::Data::Field::Table));
   field2->setFormatType(type);
   coll->addField(field2);
 
@@ -328,7 +328,7 @@ void CollectionTest::testValue() {
 
   entry->setField(field1, string);
 
-  const QString dummy = Tellico::FieldFormat::columnDelimiterString() + QLatin1String("dummy, the; Dummy, The; the dummy");
+  const QString dummy = Tellico::FieldFormat::columnDelimiterString() + QStringLiteral("dummy, the; Dummy, The; the dummy");
   entry->setField(field2, string + dummy);
 
   QCOMPARE(entry->formattedField(field1, Tellico::FieldFormat::ForceFormat), formatted);
@@ -348,7 +348,7 @@ void CollectionTest::testValue_data() {
 }
 
 void CollectionTest::testDtd() {
-  const QString xmllint = QStandardPaths::findExecutable(QLatin1String("xmllint"));
+  const QString xmllint = QStandardPaths::findExecutable(QStringLiteral("xmllint"));
   if(xmllint.isEmpty()) {
     QSKIP("This test requires xmllint", SkipAll);
   }
@@ -373,10 +373,10 @@ void CollectionTest::testDtd() {
       case Tellico::Data::Field::URL:    entry1->setField(field, field->title()); break;
       case Tellico::Data::Field::Table:  entry1->setField(field, field->title()); break;
       case Tellico::Data::Field::Image:  entry1->setField(field, field->title()); break;
-      case Tellico::Data::Field::Number: entry1->setField(field, QLatin1String("1")); break;
-      case Tellico::Data::Field::Rating: entry1->setField(field, QLatin1String("1")); break;
-      case Tellico::Data::Field::Date:   entry1->setField(field, QLatin1String("2009-01-10")); break;
-      case Tellico::Data::Field::Bool:   entry1->setField(field, QLatin1String("true")); break;
+      case Tellico::Data::Field::Number: entry1->setField(field, QStringLiteral("1")); break;
+      case Tellico::Data::Field::Rating: entry1->setField(field, QStringLiteral("1")); break;
+      case Tellico::Data::Field::Date:   entry1->setField(field, QStringLiteral("2009-01-10")); break;
+      case Tellico::Data::Field::Bool:   entry1->setField(field, QStringLiteral("true")); break;
       case Tellico::Data::Field::Choice: entry1->setField(field, field->allowed().first()); break;
       default: break;
     }
@@ -386,13 +386,13 @@ void CollectionTest::testDtd() {
   exporter.setEntries(coll->entries());
 
   KProcess proc;
-  proc.setProgram(QLatin1String("xmllint"),
-                  QStringList() << QLatin1String("--noout")
-                                << QLatin1String("--nonet")
-                                << QLatin1String("--nowarning")
-                                << QLatin1String("--dtdvalid")
+  proc.setProgram(QStringLiteral("xmllint"),
+                  QStringList() << QStringLiteral("--noout")
+                                << QStringLiteral("--nonet")
+                                << QStringLiteral("--nowarning")
+                                << QStringLiteral("--dtdvalid")
                                 << QFINDTESTDATA("../../tellico.dtd")
-                                << QLatin1String("-"));
+                                << QStringLiteral("-"));
 
   proc.start();
   proc.write(exporter.text().toUtf8());
@@ -425,7 +425,7 @@ void CollectionTest::testDuplicate() {
   QCOMPARE(coll->entryCount(), 0);
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
   coll->addEntries(entry1);
   QCOMPARE(coll->entryCount(), 1);
 
@@ -444,35 +444,35 @@ void CollectionTest::testDuplicate() {
   ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
   QCOMPARE(ret, true);
 
-  entry2->setField(QLatin1String("title"), QLatin1String("title2"));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("title2"));
 
   ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &cancelMerge);
   QCOMPARE(ret, false);
-  QCOMPARE(entry1->title(), QLatin1String("title1"));
-  QCOMPARE(entry2->title(), QLatin1String("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("title1"));
+  QCOMPARE(entry2->title(), QStringLiteral("title2"));
 
   TestResolver keepFirst(Tellico::MergeConflictResolver::KeepFirst);
   ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepFirst);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QLatin1String("title1"));
+  QCOMPARE(entry1->title(), QStringLiteral("title1"));
   // the second entry never gets changed
-  QCOMPARE(entry2->title(), QLatin1String("title2"));
+  QCOMPARE(entry2->title(), QStringLiteral("title2"));
 
-  entry2->setField(QLatin1String("title"), QLatin1String("title2"));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("title2"));
 
   TestResolver keepSecond(Tellico::MergeConflictResolver::KeepSecond);
   ret = Tellico::Data::Document::mergeEntry(entry1, entry2, &keepSecond);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QLatin1String("title2"));
-  QCOMPARE(entry2->title(), QLatin1String("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("title2"));
+  QCOMPARE(entry2->title(), QStringLiteral("title2"));
 
-  entry1->setField(QLatin1String("title"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
 
   // returns true, ("merge successful") even if values were not merged
   ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
   QCOMPARE(ret, true);
-  QCOMPARE(entry1->title(), QLatin1String("title1"));
-  QCOMPARE(entry2->title(), QLatin1String("title2"));
+  QCOMPARE(entry1->title(), QStringLiteral("title1"));
+  QCOMPARE(entry2->title(), QStringLiteral("title2"));
 }
 
 void CollectionTest::testMergeFields() {
@@ -483,27 +483,27 @@ void CollectionTest::testMergeFields() {
   Tellico::Data::CollPtr coll2 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
 
   // modify the allowed values for  "platform" in collection 1
-  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QLatin1String("platform"));
+  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QStringLiteral("platform"));
   QVERIFY(platform1);
-  QStringList newValues1 = QStringList() << QLatin1String("PSP") << QLatin1String("Xbox 360");
+  QStringList newValues1 = QStringList() << QStringLiteral("PSP") << QStringLiteral("Xbox 360");
   platform1->setAllowed(newValues1);
   QVERIFY(coll1->modifyField(platform1));
   QCOMPARE(platform1->allowed(), newValues1);
 
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll2));
-  entry2->setField(QLatin1String("platform"), QLatin1String("PlayStation"));
-  QCOMPARE(entry2->field(QLatin1String("platform")), QLatin1String("PlayStation"));
+  entry2->setField(QStringLiteral("platform"), QStringLiteral("PlayStation"));
+  QCOMPARE(entry2->field(QStringLiteral("platform")), QStringLiteral("PlayStation"));
   coll2->addEntries(entry2);
 
   QPair<Tellico::Data::FieldList, Tellico::Data::FieldList> p = Tellico::Data::Document::mergeFields(coll1,
-                                       Tellico::Data::FieldList() << coll2->fieldByName(QLatin1String("platform")),
+                                       Tellico::Data::FieldList() << coll2->fieldByName(QStringLiteral("platform")),
                                        Tellico::Data::EntryList() << entry2);
 
   Tellico::Data::FieldList modifiedFields = p.first;
   QCOMPARE(modifiedFields.count(), 1);
   // this is the zinger right here. The list of allowed values should be the original
   // with only the new existing value tacked on the end
-  QCOMPARE(modifiedFields.first()->allowed(), newValues1 << entry2->field(QLatin1String("platform")));
+  QCOMPARE(modifiedFields.first()->allowed(), newValues1 << entry2->field(QStringLiteral("platform")));
 
   Tellico::Data::FieldList addedFields = p.second;
   QVERIFY(addedFields.isEmpty());
@@ -517,13 +517,13 @@ void CollectionTest::testAppendCollection() {
   Tellico::Data::CollPtr coll2 = Tellico::CollectionFactory::collection(Tellico::Data::Collection::Game, true);
 
   // modify the allowed values for  "platform" in collection 1
-  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QLatin1String("platform"));
+  Tellico::Data::FieldPtr platform1 = coll1->fieldByName(QStringLiteral("platform"));
   QVERIFY(platform1);
-  QStringList newValues1 = QStringList() << QLatin1String("My Box");
+  QStringList newValues1 = QStringList() << QStringLiteral("My Box");
   platform1->setAllowed(newValues1);
   QVERIFY(coll1->modifyField(platform1));
   // add a new field
-  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QLatin1String("test"), QLatin1String("test")));
+  Tellico::Data::FieldPtr field1(new Tellico::Data::Field(QStringLiteral("test"), QStringLiteral("test")));
   QVERIFY(coll1->addField(field1));
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll1));
@@ -537,11 +537,11 @@ void CollectionTest::testAppendCollection() {
   // append coll1 into coll2
   Tellico::Data::Document::appendCollection(coll2, coll1);
   // verify that the test field was added
-  QVERIFY(coll2->hasField(QLatin1String("test")));
+  QVERIFY(coll2->hasField(QStringLiteral("test")));
   // verified that the modified field was merged
-  Tellico::Data::FieldPtr platform2 = coll2->fieldByName(QLatin1String("platform"));
+  Tellico::Data::FieldPtr platform2 = coll2->fieldByName(QStringLiteral("platform"));
   QVERIFY(platform2);
-  QVERIFY(platform2->allowed().contains(QLatin1String("My Box")));
+  QVERIFY(platform2->allowed().contains(QStringLiteral("My Box")));
 
   // coll2 should have two entries now, both with proper parent
   QCOMPARE(coll2->entryCount(), 2);

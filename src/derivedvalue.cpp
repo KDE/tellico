@@ -43,7 +43,7 @@ DerivedValue::DerivedValue(FieldPtr field_) : m_keyRx(QLatin1String("^([^:]+):?(
   if(!field_->hasFlag(Field::Derived)) {
     myWarning() << "using DerivedValue for non-derived field";
   } else {
-    m_valueTemplate = field_->property(QLatin1String("template"));
+    m_valueTemplate = field_->property(QStringLiteral("template"));
     m_fieldName = field_->name();
   }
   m_keyRx.setMinimal(true);

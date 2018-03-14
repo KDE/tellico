@@ -96,7 +96,7 @@ void FilterRuleWidget::initWidget() {
   connect(m_ruleDate, SIGNAL(dateChanged(const QDate&)), SIGNAL(signalModified()));
   m_valueStack->addWidget(m_ruleDate);
 
-  if(!KServiceTypeTrader::self()->query(QLatin1String("KRegExpEditor/KRegExpEditor")).isEmpty()) {
+  if(!KServiceTypeTrader::self()->query(QStringLiteral("KRegExpEditor/KRegExpEditor")).isEmpty()) {
     m_editRegExp = new QPushButton(i18n("Edit..."), this);
     connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
   }
@@ -108,7 +108,7 @@ void FilterRuleWidget::initWidget() {
 
 void FilterRuleWidget::slotEditRegExp() {
   if(!m_editRegExpDialog) {
-    m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QLatin1String("KRegExpEditor/KRegExpEditor"),
+    m_editRegExpDialog = KServiceTypeTrader::createInstanceFromQuery<QDialog>(QStringLiteral("KRegExpEditor/KRegExpEditor"),
                                                                               QString(), this);  //krazy:exclude=qclasses
   }
 

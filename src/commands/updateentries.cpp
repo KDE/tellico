@@ -47,6 +47,7 @@ public:
   }
 
 private:
+  Q_DISABLE_COPY(OverWriteResolver)
   bool m_overWrite;
 };
 

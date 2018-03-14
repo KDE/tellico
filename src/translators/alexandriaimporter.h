@@ -66,7 +66,7 @@ public:
   void setLibraryPath(const QString& libraryPath) { m_libraryPath = libraryPath; }
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private:
   static QString& cleanLine(QString& str);

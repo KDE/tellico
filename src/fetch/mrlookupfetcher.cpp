@@ -79,11 +79,11 @@ void MRLookupFetcher::search() {
   QUrlQuery q;
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("ti"), request().value);
+      q.addQueryItem(QStringLiteral("ti"), request().value);
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("au"), request().value);
+      q.addQueryItem(QStringLiteral("au"), request().value);
       break;
 
     default:
@@ -91,7 +91,7 @@ void MRLookupFetcher::search() {
       stop();
       return;
   }
-  q.addQueryItem(QLatin1String("format"), QLatin1String("bibtex"));
+  q.addQueryItem(QStringLiteral("format"), QStringLiteral("bibtex"));
   u.setQuery(q);
 
 //  myDebug() << u;
@@ -117,7 +117,7 @@ Tellico::Data::EntryPtr MRLookupFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest MRLookupFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -181,13 +181,13 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
 
   // switch the FJournal field with the Journal field
   foreach(Data::EntryPtr entry, coll->entries()) {
-    entry->setField(QLatin1String("journal"), entry->field(QLatin1String("fjournal")));
+    entry->setField(QStringLiteral("journal"), entry->field(QStringLiteral("fjournal")));
   }
-  coll->removeField(QLatin1String("fjournal"));
+  coll->removeField(QStringLiteral("fjournal"));
   // unnecessary fields
-  coll->removeField(QLatin1String("mrclass"));
-  coll->removeField(QLatin1String("mrnumber"));
-  coll->removeField(QLatin1String("mrreviewer"));
+  coll->removeField(QStringLiteral("mrclass"));
+  coll->removeField(QStringLiteral("mrnumber"));
+  coll->removeField(QStringLiteral("mrreviewer"));
 
   foreach(Data::EntryPtr entry, coll->entries()) {
     if(!m_started) {
@@ -210,7 +210,7 @@ Tellico::Fetch::ConfigWidget* MRLookupFetcher::configWidget(QWidget* parent_) co
 }
 
 QString MRLookupFetcher::defaultName() {
-  return QLatin1String("Mathematical Reviews");
+  return QStringLiteral("Mathematical Reviews");
 }
 
 QString MRLookupFetcher::defaultIcon() {

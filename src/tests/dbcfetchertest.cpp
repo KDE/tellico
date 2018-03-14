@@ -46,7 +46,7 @@ void DBCFetcherTest::initTestCase() {
 
 void DBCFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QLatin1String("Min kamp"));
+                                       QStringLiteral("Min kamp"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -54,19 +54,19 @@ void DBCFetcherTest::testTitle() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Min kamp"));
-  QCOMPARE(entry->field(QLatin1String("author")), QString::fromUtf8("Karl Ove Knausgård"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Lindhardt og Ringhof"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2012"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("487"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("barndomserindringer; erindringer"));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void DBCFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
-                                       QLatin1String("9788711391839"));
+                                       QStringLiteral("9788711391839"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -74,21 +74,21 @@ void DBCFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Min kamp"));
-  QCOMPARE(entry->field(QLatin1String("author")), QString::fromUtf8("Karl Ove Knausgård"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Lindhardt og Ringhof"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2012"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("487"));
-  QCOMPARE(entry->field(QLatin1String("language")), QLatin1String("Dansk"));
-  QCOMPARE(entry->field(QLatin1String("translator")), QLatin1String("Sara Koch"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("barndomserindringer; erindringer"));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
+  QCOMPARE(entry->field(QStringLiteral("language")), QStringLiteral("Dansk"));
+  QCOMPARE(entry->field(QStringLiteral("translator")), QStringLiteral("Sara Koch"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void DBCFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QLatin1String("9788711391839"));
+                                       QStringLiteral("9788711391839"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DBCFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -96,12 +96,12 @@ void DBCFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("Min kamp"));
-  QCOMPARE(entry->field(QLatin1String("author")), QString::fromUtf8("Karl Ove Knausgård"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Lindhardt og Ringhof"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2012"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("978-87-11-39183-9"));
-  QCOMPARE(entry->field(QLatin1String("pages")), QLatin1String("487"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("barndomserindringer; erindringer"));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Min kamp"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QString::fromUtf8("Karl Ove Knausgård"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Lindhardt og Ringhof"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2012"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-87-11-39183-9"));
+  QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("487"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("barndomserindringer; erindringer"));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }

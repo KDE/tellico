@@ -41,20 +41,20 @@ void GRS1Importer::initTagMap() {
   if(!s_tagMap) {
     s_tagMap =  new TagMap();
     // BT is special and is handled separately
-    s_tagMap->insert(TagPair(2, 1), QLatin1String("title"));
-    s_tagMap->insert(TagPair(2, 2), QLatin1String("author"));
-    s_tagMap->insert(TagPair(2, 4), QLatin1String("year"));
-    s_tagMap->insert(TagPair(2, 7), QLatin1String("publisher"));
-    s_tagMap->insert(TagPair(2, 31), QLatin1String("publisher"));
-    s_tagMap->insert(TagPair(2, 20), QLatin1String("language"));
-    s_tagMap->insert(TagPair(2, 21), QLatin1String("keyword"));
-    s_tagMap->insert(TagPair(3, QLatin1String("isbn/issn")), QLatin1String("isbn"));
-    s_tagMap->insert(TagPair(3, QLatin1String("isbn")), QLatin1String("isbn"));
-    s_tagMap->insert(TagPair(3, QLatin1String("notes")), QLatin1String("note"));
-    s_tagMap->insert(TagPair(3, QLatin1String("note")), QLatin1String("note"));
-    s_tagMap->insert(TagPair(3, QLatin1String("series")), QLatin1String("series"));
-    s_tagMap->insert(TagPair(3, QLatin1String("physical description")), QLatin1String("note"));
-    s_tagMap->insert(TagPair(3, QLatin1String("subtitle")), QLatin1String("subtitle"));
+    s_tagMap->insert(TagPair(2, 1), QStringLiteral("title"));
+    s_tagMap->insert(TagPair(2, 2), QStringLiteral("author"));
+    s_tagMap->insert(TagPair(2, 4), QStringLiteral("year"));
+    s_tagMap->insert(TagPair(2, 7), QStringLiteral("publisher"));
+    s_tagMap->insert(TagPair(2, 31), QStringLiteral("publisher"));
+    s_tagMap->insert(TagPair(2, 20), QStringLiteral("language"));
+    s_tagMap->insert(TagPair(2, 21), QStringLiteral("keyword"));
+    s_tagMap->insert(TagPair(3, QLatin1String("isbn/issn")), QStringLiteral("isbn"));
+    s_tagMap->insert(TagPair(3, QLatin1String("isbn")), QStringLiteral("isbn"));
+    s_tagMap->insert(TagPair(3, QLatin1String("notes")), QStringLiteral("note"));
+    s_tagMap->insert(TagPair(3, QLatin1String("note")), QStringLiteral("note"));
+    s_tagMap->insert(TagPair(3, QLatin1String("series")), QStringLiteral("series"));
+    s_tagMap->insert(TagPair(3, QLatin1String("physical description")), QStringLiteral("note"));
+    s_tagMap->insert(TagPair(3, QLatin1String("subtitle")), QStringLiteral("subtitle"));
   }
 }
 
@@ -69,12 +69,12 @@ bool GRS1Importer::canImport(int type) const {
 Tellico::Data::CollPtr GRS1Importer::collection() {
   Data::CollPtr coll(new Data::BibtexCollection(true));
 
-  Data::FieldPtr f(new Data::Field(QLatin1String("isbn"), i18n("ISBN#")));
+  Data::FieldPtr f(new Data::Field(QStringLiteral("isbn"), i18n("ISBN#")));
   f->setCategory(i18n("Publishing"));
   f->setDescription(i18n("International Standard Book Number"));
   coll->addField(f);
 
-  f = new Data::Field(QLatin1String("language"), i18n("Language"));
+  f = new Data::Field(QStringLiteral("language"), i18n("Language"));
   f->setCategory(i18n("Publishing"));
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped | Data::Field::AllowMultiple);
   coll->addField(f);
@@ -123,7 +123,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
       val.remove(dateRx);
     } else if(field == QLatin1String("publisher")) {
       if(pubRx.indexIn(val) > -1) {
-        e->setField(QLatin1String("address"), pubRx.cap(1));
+        e->setField(QStringLiteral("address"), pubRx.cap(1));
         val = pubRx.cap(2);
       }
     }

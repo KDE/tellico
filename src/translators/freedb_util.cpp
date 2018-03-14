@@ -65,6 +65,7 @@ QList<uint> FreeDBImporter::offsetList(const QByteArray& drive_, QList<uint>& tr
   track_t i_tracks = i_track + cdio_get_num_tracks(cdio_p);
 
   trackLengths_.clear();
+  list.reserve(i_tracks+1);
   for( ; i_track < i_tracks; ++i_track) {
     list.append(cdio_get_track_lba(cdio_p, i_track));
     // add 1 so the conversion to int rounds up

@@ -118,16 +118,17 @@ QValidator::State ISBNValidator::validate(QString& input_, int& pos_) const {
 }
 
 void ISBNValidator::fixup(QString& input_) const {
-  return staticFixup(input_);
+  staticFixup(input_);
 }
 
 void ISBNValidator::staticFixup(QString& input_) {
   if((input_.startsWith(QLatin1String("978"))
        || input_.startsWith(QLatin1String("979")))
      && input_.count(QRegExp(QLatin1String("\\d"))) > 10) {
-    return fixup13(input_);
+    fixup13(input_);
+  } else {
+    fixup10(input_);
   }
-  return fixup10(input_);
 }
 
 QValidator::State ISBNValidator::validate10(QString& input_, int& pos_) const {

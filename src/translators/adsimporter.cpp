@@ -40,16 +40,16 @@ QHash<QString, QString>* ADSImporter::s_tagMap = nullptr;
 void ADSImporter::initTagMap() {
   if(!s_tagMap) {
     s_tagMap = new QHash<QString, QString>();
-    s_tagMap->insert(QLatin1String("A"), QLatin1String("author"));
-    s_tagMap->insert(QLatin1String("J"), QLatin1String("journal"));
-    s_tagMap->insert(QLatin1String("V"), QLatin1String("volume"));
-    s_tagMap->insert(QLatin1String("D"), QLatin1String("year"));
-    s_tagMap->insert(QLatin1String("T"), QLatin1String("title"));
-    s_tagMap->insert(QLatin1String("K"), QLatin1String("keyword"));
-    s_tagMap->insert(QLatin1String("Y"), QLatin1String("doi"));
-    s_tagMap->insert(QLatin1String("L"), QLatin1String("pages"));
-    s_tagMap->insert(QLatin1String("B"), QLatin1String("abstract"));
-    s_tagMap->insert(QLatin1String("U"), QLatin1String("url"));
+    s_tagMap->insert(QStringLiteral("A"), QStringLiteral("author"));
+    s_tagMap->insert(QStringLiteral("J"), QStringLiteral("journal"));
+    s_tagMap->insert(QStringLiteral("V"), QStringLiteral("volume"));
+    s_tagMap->insert(QStringLiteral("D"), QStringLiteral("year"));
+    s_tagMap->insert(QStringLiteral("T"), QStringLiteral("title"));
+    s_tagMap->insert(QStringLiteral("K"), QStringLiteral("keyword"));
+    s_tagMap->insert(QStringLiteral("Y"), QStringLiteral("doi"));
+    s_tagMap->insert(QStringLiteral("L"), QStringLiteral("pages"));
+    s_tagMap->insert(QStringLiteral("B"), QStringLiteral("abstract"));
+    s_tagMap->insert(QStringLiteral("U"), QStringLiteral("url"));
   }
 }
 
@@ -115,7 +115,7 @@ void ADSImporter::readText(const QString& text_, int n) {
   uint j = 0;
   Data::EntryPtr entry(new Data::Entry(m_coll));
   // all ADS entries are journal articles
-  entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
+  entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
 
   // technically, the spec requires a space immediately after the hyphen
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
@@ -144,7 +144,7 @@ void ADSImporter::readText(const QString& text_, int n) {
         m_coll->addEntries(entry);
       }
       entry = new Data::Entry(m_coll);
-      entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
+      entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
       continue;
     } else if(tag == QLatin1String("P")) {
       sp = value;
@@ -156,7 +156,7 @@ void ADSImporter::readText(const QString& text_, int n) {
           ep = QString::number(startPage + endPage);
         }
         value = sp + QLatin1Char('-') + ep;
-        tag = QLatin1String("L");
+        tag = QStringLiteral("L");
         sp.clear();
         ep.clear();
       } else {

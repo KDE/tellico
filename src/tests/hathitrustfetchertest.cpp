@@ -46,7 +46,7 @@ void HathiTrustFetcherTest::initTestCase() {
 
 void HathiTrustFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("1931561567"));
+                                       QStringLiteral("1931561567"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::HathiTrustFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -60,7 +60,7 @@ void HathiTrustFetcherTest::testIsbn() {
 
 void HathiTrustFetcherTest::testLccn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::LCCN,
-                                       QLatin1String("2003019402"));
+                                       QStringLiteral("2003019402"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::HathiTrustFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -73,15 +73,15 @@ void HathiTrustFetcherTest::testLccn() {
 }
 
 void HathiTrustFetcherTest::compareEntry(Tellico::Data::EntryPtr entry) {
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The forgotten genius"));
-  QCOMPARE(entry->field(QLatin1String("subtitle")), QLatin1String("the biography of Robert Hooke 1635-1703"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("1-931561-56-7"));
-  QCOMPARE(entry->field(QLatin1String("lccn")), QLatin1String("2003019402"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Inwood, Stephen"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("MacAdam/Cage Pub."));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2003"));
-  QCOMPARE(entry->field(QLatin1String("genre")), QLatin1String("bibliography; biography"));
-  QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("Architecture")));
-  QVERIFY(entry->field(QLatin1String("keyword")).contains(QLatin1String("history")));
-  QVERIFY(entry->field(QLatin1String("comments")).contains(QLatin1String("London")));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The forgotten genius"));
+  QCOMPARE(entry->field(QStringLiteral("subtitle")), QStringLiteral("the biography of Robert Hooke 1635-1703"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("1-931561-56-7"));
+  QCOMPARE(entry->field(QStringLiteral("lccn")), QStringLiteral("2003019402"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Inwood, Stephen"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("MacAdam/Cage Pub."));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2003"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("bibliography; biography"));
+  QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("Architecture")));
+  QVERIFY(entry->field(QStringLiteral("keyword")).contains(QStringLiteral("history")));
+  QVERIFY(entry->field(QStringLiteral("comments")).contains(QStringLiteral("London")));
 }

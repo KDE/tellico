@@ -72,6 +72,8 @@ public:
 
 private:
   Image();
+  Image(const Image& image);
+  Image& operator=(const Image&);
   explicit Image(const QString& filename, const QString& id = QString());
   Image(const QImage& image, const QString& format);
   Image(const QByteArray& data, const QString& format, const QString& id);

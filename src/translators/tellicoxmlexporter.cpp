@@ -93,18 +93,18 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   }
 
   QDomImplementation impl;
-  QDomDocumentType doctype = impl.createDocumentType(QLatin1String("tellico"),
+  QDomDocumentType doctype = impl.createDocumentType(QStringLiteral("tellico"),
                                                      XML::pubTellico(exportVersion),
                                                      XML::dtdTellico(exportVersion));
   //default namespace
   const QString& ns = XML::nsTellico;
 
-  QDomDocument dom = impl.createDocument(ns, QLatin1String("tellico"), doctype);
+  QDomDocument dom = impl.createDocument(ns, QStringLiteral("tellico"), doctype);
 
   // root tellico element
   QDomElement root = dom.documentElement();
 
-  QString encodeStr = QLatin1String("version=\"1.0\" encoding=\"");
+  QString encodeStr = QStringLiteral("version=\"1.0\" encoding=\"");
   if(options() & Export::ExportUTF8) {
     encodeStr += QLatin1String("UTF-8");
   } else {
@@ -113,9 +113,9 @@ QDomDocument TellicoXMLExporter::exportXML() const {
   encodeStr += QLatin1Char('"');
 
   // createDocument creates a root node, insert the processing instruction before it
-  dom.insertBefore(dom.createProcessingInstruction(QLatin1String("xml"), encodeStr), root);
+  dom.insertBefore(dom.createProcessingInstruction(QStringLiteral("xml"), encodeStr), root);
 
-  root.setAttribute(QLatin1String("syntaxVersion"), exportVersion);
+  root.setAttribute(QStringLiteral("syntaxVersion"), exportVersion);
 
   FieldFormat::Request format = (options() & Export::ExportFormatted ?
                                                 FieldFormat::ForceFormat :
@@ -136,11 +136,11 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
     return;
   }
 
-  QDomElement collElem = dom_.createElement(QLatin1String("collection"));
-  collElem.setAttribute(QLatin1String("type"), coll->type());
-  collElem.setAttribute(QLatin1String("title"), coll->title());
+  QDomElement collElem = dom_.createElement(QStringLiteral("collection"));
+  collElem.setAttribute(QStringLiteral("type"), coll->type());
+  collElem.setAttribute(QStringLiteral("title"), coll->title());
 
-  QDomElement fieldsElem = dom_.createElement(QLatin1String("fields"));
+  QDomElement fieldsElem = dom_.createElement(QStringLiteral("fields"));
   collElem.appendChild(fieldsElem);
 
   foreach(Data::FieldPtr field, fields()) {
@@ -150,16 +150,16 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   if(coll->type() == Data::Collection::Bibtex) {
     const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(coll.data());
     if(!c->preamble().isEmpty()) {
-      QDomElement preElem = dom_.createElement(QLatin1String("bibtex-preamble"));
+      QDomElement preElem = dom_.createElement(QStringLiteral("bibtex-preamble"));
       preElem.appendChild(dom_.createTextNode(c->preamble()));
       collElem.appendChild(preElem);
     }
 
-    QDomElement macrosElem = dom_.createElement(QLatin1String("macros"));
+    QDomElement macrosElem = dom_.createElement(QStringLiteral("macros"));
     for(StringMap::ConstIterator macroIt = c->macroList().constBegin(); macroIt != c->macroList().constEnd(); ++macroIt) {
       if(!macroIt.value().isEmpty()) {
-        QDomElement macroElem = dom_.createElement(QLatin1String("macro"));
-        macroElem.setAttribute(QLatin1String("name"), macroIt.key());
+        QDomElement macroElem = dom_.createElement(QStringLiteral("macro"));
+        macroElem.setAttribute(QStringLiteral("name"), macroIt.key());
         macroElem.appendChild(dom_.createTextNode(macroIt.value()));
         macrosElem.appendChild(macroElem);
       }
@@ -174,7 +174,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
   }
 
   if(!m_images.isEmpty() && (options() & Export::ExportImages)) {
-    QDomElement imgsElem = dom_.createElement(QLatin1String("images"));
+    QDomElement imgsElem = dom_.createElement(QStringLiteral("images"));
     const QStringList imageIds = m_images.toList();
     foreach(const QString& id, m_images) {
       exportImageXML(dom_, imgsElem, id);
@@ -192,7 +192,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
 
   // the borrowers and filters are in the tellico object, not the collection
   if(options() & Export::ExportComplete) {
-    QDomElement bElem = dom_.createElement(QLatin1String("borrowers"));
+    QDomElement bElem = dom_.createElement(QStringLiteral("borrowers"));
     foreach(Data::BorrowerPtr borrower, coll->borrowers()) {
       exportBorrowerXML(dom_, bElem, borrower);
     }
@@ -200,7 +200,7 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
       parent_.appendChild(bElem);
     }
 
-    QDomElement fElem = dom_.createElement(QLatin1String("filters"));
+    QDomElement fElem = dom_.createElement(QStringLiteral("filters"));
     foreach(FilterPtr filter, coll->filters()) {
       exportFilterXML(dom_, fElem, filter);
     }
@@ -211,31 +211,31 @@ void TellicoXMLExporter::exportCollectionXML(QDomDocument& dom_, QDomElement& pa
 }
 
 void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_, Tellico::Data::FieldPtr field_) const {
-  QDomElement elem = dom_.createElement(QLatin1String("field"));
+  QDomElement elem = dom_.createElement(QStringLiteral("field"));
 
-  elem.setAttribute(QLatin1String("name"),     field_->name());
-  elem.setAttribute(QLatin1String("title"),    field_->title());
-  elem.setAttribute(QLatin1String("category"), field_->category());
-  elem.setAttribute(QLatin1String("type"),     field_->type());
-  elem.setAttribute(QLatin1String("flags"),    field_->flags());
-  elem.setAttribute(QLatin1String("format"),   field_->formatType());
+  elem.setAttribute(QStringLiteral("name"),     field_->name());
+  elem.setAttribute(QStringLiteral("title"),    field_->title());
+  elem.setAttribute(QStringLiteral("category"), field_->category());
+  elem.setAttribute(QStringLiteral("type"),     field_->type());
+  elem.setAttribute(QStringLiteral("flags"),    field_->flags());
+  elem.setAttribute(QStringLiteral("format"),   field_->formatType());
 
   if(field_->type() == Data::Field::Choice) {
-    elem.setAttribute(QLatin1String("allowed"), field_->allowed().join(QLatin1String(";")));
+    elem.setAttribute(QStringLiteral("allowed"), field_->allowed().join(QLatin1String(";")));
   }
 
   // only save description if it's not equal to title, which is the default
   // title is never empty, so this indirectly checks for empty descriptions
   if(field_->description() != field_->title()) {
-    elem.setAttribute(QLatin1String("description"), field_->description());
+    elem.setAttribute(QStringLiteral("description"), field_->description());
   }
 
   for(StringMap::ConstIterator it = field_->propertyList().begin(); it != field_->propertyList().end(); ++it) {
     if(it.value().isEmpty()) {
       continue;
     }
-    QDomElement e = dom_.createElement(QLatin1String("prop"));
-    e.setAttribute(QLatin1String("name"), it.key());
+    QDomElement e = dom_.createElement(QStringLiteral("prop"));
+    e.setAttribute(QStringLiteral("name"), it.key());
     e.appendChild(dom_.createTextNode(it.value()));
     elem.appendChild(e);
   }
@@ -244,8 +244,8 @@ void TellicoXMLExporter::exportFieldXML(QDomDocument& dom_, QDomElement& parent_
 }
 
 void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_, Tellico::Data::EntryPtr entry_, int format_) const {
-  QDomElement entryElem = dom_.createElement(QLatin1String("entry"));
-  entryElem.setAttribute(QLatin1String("id"), QString::number(entry_->id()));
+  QDomElement entryElem = dom_.createElement(QStringLiteral("entry"));
+  entryElem.setAttribute(QStringLiteral("id"), QString::number(entry_->id()));
 
   // iterate through every field for the entry
   foreach(Data::FieldPtr fIt, fields()) {
@@ -279,7 +279,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       entryElem.appendChild(parElem);
 
       bool ok;
-      int ncols = Tellico::toUInt(fIt->property(QLatin1String("columns")), &ok);
+      int ncols = Tellico::toUInt(fIt->property(QStringLiteral("columns")), &ok);
       if(!ok || ncols < 1) {
         ncols = 1;
       }
@@ -295,7 +295,7 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
           columnValues.replace(ncols-1, lastValue);
         }
         for(int col = 0; col < columnValues.count(); ++col) {
-          QDomElement elem = dom_.createElement(QLatin1String("column"));
+          QDomElement elem = dom_.createElement(QStringLiteral("column"));
           elem.appendChild(dom_.createTextNode(columnValues.at(col)));
           fieldElem.appendChild(elem);
         }
@@ -324,25 +324,25 @@ void TellicoXMLExporter::exportEntryXML(QDomDocument& dom_, QDomElement& parent_
       // Date fields get special treatment
       if(fIt->type() == Data::Field::Date) {
         // as of Tellico in KF5 (3.0), just forget about the calendar attribute for the moment, always use gregorian
-        fieldElem.setAttribute(QLatin1String("calendar"), QLatin1String("gregorian"));
+        fieldElem.setAttribute(QStringLiteral("calendar"), QStringLiteral("gregorian"));
         QStringList s = fieldValue.split(QLatin1Char('-'), QString::KeepEmptyParts);
         if(s.count() > 0 && !s[0].isEmpty()) {
-          QDomElement e = dom_.createElement(QLatin1String("year"));
+          QDomElement e = dom_.createElement(QStringLiteral("year"));
           fieldElem.appendChild(e);
           e.appendChild(dom_.createTextNode(s[0]));
         }
         if(s.count() > 1 && !s[1].isEmpty()) {
-          QDomElement e = dom_.createElement(QLatin1String("month"));
+          QDomElement e = dom_.createElement(QStringLiteral("month"));
           fieldElem.appendChild(e);
           e.appendChild(dom_.createTextNode(s[1]));
         }
         if(s.count() > 2 && !s[2].isEmpty()) {
-          QDomElement e = dom_.createElement(QLatin1String("day"));
+          QDomElement e = dom_.createElement(QStringLiteral("day"));
           fieldElem.appendChild(e);
           e.appendChild(dom_.createTextNode(s[2]));
         }
       } else if(fIt->type() == Data::Field::URL &&
-                fIt->property(QLatin1String("relative")) == QLatin1String("true") &&
+                fIt->property(QStringLiteral("relative")) == QLatin1String("true") &&
                 !url().isEmpty()) {
         // if a relative URL and url() is not empty, change the value!
         QUrl old_url = Data::Document::self()->URL().resolved(QUrl(fieldValue));
@@ -370,18 +370,18 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
   }
 //  myLog() << "id = " << id_;
 
-  QDomElement imgElem = dom_.createElement(QLatin1String("image"));
+  QDomElement imgElem = dom_.createElement(QStringLiteral("image"));
   if(m_includeImages) {
     const Data::Image& img = ImageFactory::imageById(id_);
     if(img.isNull()) {
       return;
     }
-    imgElem.setAttribute(QLatin1String("format"), QLatin1String(img.format()));
-    imgElem.setAttribute(QLatin1String("id"),     QString(img.id()));
-    imgElem.setAttribute(QLatin1String("width"),  img.width());
-    imgElem.setAttribute(QLatin1String("height"), img.height());
+    imgElem.setAttribute(QStringLiteral("format"), QLatin1String(img.format()));
+    imgElem.setAttribute(QStringLiteral("id"),     QString(img.id()));
+    imgElem.setAttribute(QStringLiteral("width"),  img.width());
+    imgElem.setAttribute(QStringLiteral("height"), img.height());
     if(img.linkOnly()) {
-      imgElem.setAttribute(QLatin1String("link"), QLatin1String("true"));
+      imgElem.setAttribute(QStringLiteral("link"), QStringLiteral("true"));
     }
     QByteArray imgText = img.byteArray().toBase64();
     imgElem.appendChild(dom_.createTextNode(QLatin1String(imgText)));
@@ -390,14 +390,14 @@ void TellicoXMLExporter::exportImageXML(QDomDocument& dom_, QDomElement& parent_
     if(info.isNull()) {
       return;
     }
-    imgElem.setAttribute(QLatin1String("format"), QLatin1String(info.format));
-    imgElem.setAttribute(QLatin1String("id"),     QString(info.id));
+    imgElem.setAttribute(QStringLiteral("format"), QLatin1String(info.format));
+    imgElem.setAttribute(QStringLiteral("id"),     QString(info.id));
     // only load the images to read the size if necessary
     const bool loadImageIfNecessary = options() & Export::ExportImageSize;
-    imgElem.setAttribute(QLatin1String("width"),  info.width(loadImageIfNecessary));
-    imgElem.setAttribute(QLatin1String("height"), info.height(loadImageIfNecessary));
+    imgElem.setAttribute(QStringLiteral("width"),  info.width(loadImageIfNecessary));
+    imgElem.setAttribute(QStringLiteral("height"), info.height(loadImageIfNecessary));
     if(info.linkOnly) {
-      imgElem.setAttribute(QLatin1String("link"), QLatin1String("true"));
+      imgElem.setAttribute(QStringLiteral("link"), QStringLiteral("true"));
     }
   }
   parent_.appendChild(imgElem);
@@ -411,16 +411,16 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
     if(gIt.group()->isEmpty()) {
       continue;
     }
-    QDomElement groupElem = dom_.createElement(QLatin1String("group"));
-    groupElem.setAttribute(QLatin1String("title"), gIt.group()->groupName());
+    QDomElement groupElem = dom_.createElement(QStringLiteral("group"));
+    groupElem.setAttribute(QStringLiteral("title"), gIt.group()->groupName());
     // now iterate over all entry items in the group
     Data::EntryList sorted = sortEntries(*gIt.group());
     foreach(Data::EntryPtr eIt, sorted) {
       if(!exportAll && vec.indexOf(eIt) == -1) {
         continue;
       }
-      QDomElement entryRefElem = dom_.createElement(QLatin1String("entryRef"));
-      entryRefElem.setAttribute(QLatin1String("id"), QString::number(eIt->id()));
+      QDomElement entryRefElem = dom_.createElement(QStringLiteral("entryRef"));
+      entryRefElem.setAttribute(QStringLiteral("id"), QString::number(eIt->id()));
       groupElem.appendChild(entryRefElem);
     }
     if(groupElem.hasChildNodes()) {
@@ -430,46 +430,46 @@ void TellicoXMLExporter::exportGroupXML(QDomDocument& dom_, QDomElement& parent_
 }
 
 void TellicoXMLExporter::exportFilterXML(QDomDocument& dom_, QDomElement& parent_, Tellico::FilterPtr filter_) const {
-  QDomElement filterElem = dom_.createElement(QLatin1String("filter"));
-  filterElem.setAttribute(QLatin1String("name"), filter_->name());
+  QDomElement filterElem = dom_.createElement(QStringLiteral("filter"));
+  filterElem.setAttribute(QStringLiteral("name"), filter_->name());
 
-  QString match = (filter_->op() == Filter::MatchAll) ? QLatin1String("all") : QLatin1String("any");
-  filterElem.setAttribute(QLatin1String("match"), match);
+  QString match = (filter_->op() == Filter::MatchAll) ? QStringLiteral("all") : QStringLiteral("any");
+  filterElem.setAttribute(QStringLiteral("match"), match);
 
   foreach(FilterRule* rule, *filter_) {
-    QDomElement ruleElem = dom_.createElement(QLatin1String("rule"));
-    ruleElem.setAttribute(QLatin1String("field"), rule->fieldName());
-    ruleElem.setAttribute(QLatin1String("pattern"), rule->pattern());
+    QDomElement ruleElem = dom_.createElement(QStringLiteral("rule"));
+    ruleElem.setAttribute(QStringLiteral("field"), rule->fieldName());
+    ruleElem.setAttribute(QStringLiteral("pattern"), rule->pattern());
     switch(rule->function()) {
       case FilterRule::FuncContains:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("contains"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("contains"));
         break;
       case FilterRule::FuncNotContains:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("notcontains"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("notcontains"));
         break;
       case FilterRule::FuncEquals:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("equals"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("equals"));
         break;
       case FilterRule::FuncNotEquals:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("notequals"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("notequals"));
         break;
       case FilterRule::FuncRegExp:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("regexp"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("regexp"));
         break;
       case FilterRule::FuncNotRegExp:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("notregexp"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("notregexp"));
         break;
       case FilterRule::FuncBefore:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("before"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("before"));
         break;
       case FilterRule::FuncAfter:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("after"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("after"));
         break;
       case FilterRule::FuncGreater:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("greaterthan"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("greaterthan"));
         break;
       case FilterRule::FuncLess:
-        ruleElem.setAttribute(QLatin1String("function"), QLatin1String("lessthan"));
+        ruleElem.setAttribute(QStringLiteral("function"), QStringLiteral("lessthan"));
         break;
       /* If anything is updated here, be sure to update xmlstatehandler */
     }
@@ -485,22 +485,22 @@ void TellicoXMLExporter::exportBorrowerXML(QDomDocument& dom_, QDomElement& pare
     return;
   }
 
-  QDomElement bElem = dom_.createElement(QLatin1String("borrower"));
+  QDomElement bElem = dom_.createElement(QStringLiteral("borrower"));
   parent_.appendChild(bElem);
 
-  bElem.setAttribute(QLatin1String("name"), borrower_->name());
-  bElem.setAttribute(QLatin1String("uid"), borrower_->uid());
+  bElem.setAttribute(QStringLiteral("name"), borrower_->name());
+  bElem.setAttribute(QStringLiteral("uid"), borrower_->uid());
 
   foreach(Data::LoanPtr it, borrower_->loans()) {
-    QDomElement lElem = dom_.createElement(QLatin1String("loan"));
+    QDomElement lElem = dom_.createElement(QStringLiteral("loan"));
     bElem.appendChild(lElem);
 
-    lElem.setAttribute(QLatin1String("uid"), it->uid());
-    lElem.setAttribute(QLatin1String("entryRef"), QString::number(it->entry()->id()));
-    lElem.setAttribute(QLatin1String("loanDate"), it->loanDate().toString(Qt::ISODate));
-    lElem.setAttribute(QLatin1String("dueDate"), it->dueDate().toString(Qt::ISODate));
+    lElem.setAttribute(QStringLiteral("uid"), it->uid());
+    lElem.setAttribute(QStringLiteral("entryRef"), QString::number(it->entry()->id()));
+    lElem.setAttribute(QStringLiteral("loanDate"), it->loanDate().toString(Qt::ISODate));
+    lElem.setAttribute(QStringLiteral("dueDate"), it->dueDate().toString(Qt::ISODate));
     if(it->inCalendar()) {
-      lElem.setAttribute(QLatin1String("calendar"), QLatin1String("true"));
+      lElem.setAttribute(QStringLiteral("calendar"), QStringLiteral("true"));
     }
 
     lElem.appendChild(dom_.createTextNode(it->note()));
@@ -531,14 +531,14 @@ QWidget* TellicoXMLExporter::widget(QWidget* parent_) {
 }
 
 void TellicoXMLExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_includeImages = group.readEntry("Include Images", m_includeImages);
 }
 
 void TellicoXMLExporter::saveOptions(KSharedConfigPtr config_) {
   m_includeImages = m_checkIncludeImages->isChecked();
 
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Images", m_includeImages);
 }
 

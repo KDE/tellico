@@ -42,7 +42,7 @@ using Tellico::Fetch::DBCFetcher;
 
 DBCFetcher::DBCFetcher(QObject* parent_) : XMLFetcher(parent_) {
   setLimit(DBC_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("dbc2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("dbc2tellico.xsl"));
 }
 
 DBCFetcher::~DBCFetcher() {
@@ -69,15 +69,15 @@ QUrl DBCFetcher::searchUrl() {
   QUrlQuery query;
   switch(request().key) {
     case Title:
-      query.addQueryItem(QLatin1String("query"), QLatin1String("dkcclterm.ti=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("dkcclterm.ti=\"") + request().value + QLatin1Char('"'));
       break;
 
     case Keyword:
-      query.addQueryItem(QLatin1String("query"), QLatin1String("cql.keywords=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("cql.keywords=\"") + request().value + QLatin1Char('"'));
       break;
 
     case Person:
-      query.addQueryItem(QLatin1String("query"), QLatin1String("term.mainCreator=\"") + request().value + QLatin1Char('"'));
+      query.addQueryItem(QStringLiteral("query"), QLatin1String("term.mainCreator=\"") + request().value + QLatin1Char('"'));
       break;
 
     case ISBN:
@@ -87,7 +87,7 @@ QUrl DBCFetcher::searchUrl() {
         QStringList isbnList = FieldFormat::splitValue(s);
         // only search for first ISBN for now
         QString q = isbnList.isEmpty() ? QString() : QLatin1String("dkcclterm.ib=") + isbnList.at(0);
-        query.addQueryItem(QLatin1String("query"), q);
+        query.addQueryItem(QStringLiteral("query"), q);
       }
       break;
 
@@ -95,17 +95,17 @@ QUrl DBCFetcher::searchUrl() {
       myWarning() << "key not recognized:" << request().key;
       return QUrl();
   }
-  query.addQueryItem(QLatin1String("action"), QLatin1String("search"));
+  query.addQueryItem(QStringLiteral("action"), QStringLiteral("search"));
   // see https://opensource.dbc.dk/services/open-search-web-service
   // agency and profile determine the search collections
 //  query.addQueryItem(QLatin1String("agency"), QLatin1String("100200"));
 //  query.addQueryItem(QLatin1String("profile"), QLatin1String("test"));
-  query.addQueryItem(QLatin1String("agency"), QLatin1String("761500"));
-  query.addQueryItem(QLatin1String("profile"), QLatin1String("opac"));
-  query.addQueryItem(QLatin1String("term.type"), QLatin1String("bog"));
-  query.addQueryItem(QLatin1String("start"), QLatin1String("1"));
-  query.addQueryItem(QLatin1String("stepValue"), QLatin1String("5"));
-  query.addQueryItem(QLatin1String("outputType"), QLatin1String("xml"));
+  query.addQueryItem(QStringLiteral("agency"), QStringLiteral("761500"));
+  query.addQueryItem(QStringLiteral("profile"), QStringLiteral("opac"));
+  query.addQueryItem(QStringLiteral("term.type"), QStringLiteral("bog"));
+  query.addQueryItem(QStringLiteral("start"), QStringLiteral("1"));
+  query.addQueryItem(QStringLiteral("stepValue"), QStringLiteral("5"));
+  query.addQueryItem(QStringLiteral("outputType"), QStringLiteral("xml"));
   u.setQuery(query);
 
 //  myDebug() << "url:" << u.url();
@@ -125,7 +125,7 @@ Tellico::Data::EntryPtr DBCFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
 }
 
 Tellico::Fetch::FetchRequest DBCFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
   }

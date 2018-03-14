@@ -59,20 +59,18 @@ void AddLoans::redo() {
   bool wasEmpty = m_borrower->isEmpty();
 
   // if there's no loaned field, we'll add one
-  bool loanExisted = m_loans[0]->entry()->collection()->hasField(QLatin1String("loaned"));
+  bool loanExisted = m_loans[0]->entry()->collection()->hasField(QStringLiteral("loaned"));
   m_addedLoanField = false; // assume we didn't add the field yet
 
   // add the loans to the borrower
   foreach(Data::LoanPtr loan, m_loans) {
     m_borrower->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Data::EntryList vec;
-    vec.append(loan->entry());
-    Controller::self()->modifiedEntries(vec);
+    Controller::self()->modifiedEntries(Data::EntryList() << loan->entry());
   }
   if(!loanExisted) {
     Data::CollPtr c = m_loans[0]->entry()->collection();
-    Data::FieldPtr f = c->fieldByName(QLatin1String("loaned"));
+    Data::FieldPtr f = c->fieldByName(QStringLiteral("loaned"));
     if(f) {
       // notify everything that a new field was added
       Controller::self()->addedField(c, f);
@@ -100,13 +98,11 @@ void AddLoans::undo() {
   foreach(Data::LoanPtr loan, m_loans) {
     m_borrower->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Data::EntryList vec;
-    vec.append(loan->entry());
-    Controller::self()->modifiedEntries(vec);
+    Controller::self()->modifiedEntries(Data::EntryList() << loan->entry());
   }
   if(m_addedLoanField) {
     Data::CollPtr c = m_loans[0]->entry()->collection();
-    Data::FieldPtr f = c->fieldByName(QLatin1String("loaned"));
+    Data::FieldPtr f = c->fieldByName(QStringLiteral("loaned"));
     if(f) {
       c->removeField(f);
       Controller::self()->removedField(c, f);

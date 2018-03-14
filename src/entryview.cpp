@@ -220,7 +220,7 @@ void EntryView::setXSLTFile(const QString& file_) {
   if(file_.at(0) == QLatin1Char('/')) {
     m_xsltFile = file_;
   } else {
-    const QString templateDir = QLatin1String("entry-templates/");
+    const QString templateDir = QStringLiteral("entry-templates/");
     m_xsltFile = DataFileRegistry::self()->locate(templateDir + file_);
     if(m_xsltFile.isEmpty()) {
       if(!file_.isEmpty()) {
@@ -228,7 +228,7 @@ void EntryView::setXSLTFile(const QString& file_) {
       }
       m_xsltFile = DataFileRegistry::self()->locate(templateDir + QLatin1String("Fancy.xsl"));
       if(m_xsltFile.isEmpty()) {
-        QString str = QLatin1String("<qt>");
+        QString str = QStringLiteral("<qt>");
         str += i18n("Tellico is unable to locate the default entry stylesheet.");
         str += QLatin1Char(' ');
         str += i18n("Please check your installation.");
@@ -392,7 +392,7 @@ void EntryView::resetColors() {
   // this is a rather bad hack to get around the fact that the image cache is not reloaded when
   // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
   // work. So force a reload with a temp file, then catch the completed signal and repaint
-  QString s = QString::fromLatin1("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
+  QString s = QStringLiteral("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
                              .arg(dir + QLatin1String("gradient_bg.png"),
                                   dir + QLatin1String("gradient_header.png"));
 

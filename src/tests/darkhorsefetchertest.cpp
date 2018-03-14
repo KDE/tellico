@@ -46,7 +46,7 @@ DarkHorseFetcherTest::DarkHorseFetcherTest() : AbstractFetcherTest() {
 }
 
 void DarkHorseFetcherTest::initTestCase() {
-  const QString python = QStandardPaths::findExecutable(QLatin1String("python"));
+  const QString python = QStandardPaths::findExecutable(QStringLiteral("python"));
   if(python.isEmpty()) {
     QSKIP("This test requires python", SkipAll);
   }
@@ -57,11 +57,11 @@ void DarkHorseFetcherTest::initTestCase() {
 
 void DarkHorseFetcherTest::testComic() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
-                                       QLatin1String("axe cop: bad guy earth #1"));
+                                       QStringLiteral("axe cop: bad guy earth #1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"), KConfig::SimpleConfig);
-  KConfigGroup cg = config.group(QLatin1String("<default>"));
+  KConfigGroup cg = config.group(QStringLiteral("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py"));
   // don't sync() and save the new path
   cg.markAsClean();
@@ -73,15 +73,15 @@ void DarkHorseFetcherTest::testComic() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QLatin1String("Axe Cop: Bad Guy Earth #1"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("2011"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Humor"));
-  QCOMPARE(entry->field("pages"), QLatin1String("32"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Dark Horse Comics"));
-  QCOMPARE(entry->field("writer"), QLatin1String("Malachai Nicolle"));
-  QCOMPARE(entry->field("artist"), QLatin1String("Ethan Nicolle"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Axe Cop: Bad Guy Earth #1"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Humor"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("32"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Dark Horse Comics"));
+  QCOMPARE(entry->field("writer"), QStringLiteral("Malachai Nicolle"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Ethan Nicolle"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
 }

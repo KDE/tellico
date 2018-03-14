@@ -56,7 +56,7 @@ Tellico::StringComparison* Tellico::StringComparison::create(Data::FieldPtr fiel
     return new ISODateComparison();
   } else if(field_->formatType() == FieldFormat::FormatTitle) {
     return new TitleComparison();
-  } else if(field_->property(QLatin1String("lcc")) == QLatin1String("true") ||
+  } else if(field_->property(QStringLiteral("lcc")) == QLatin1String("true") ||
             field_->name() == QLatin1String("lcc")) {
     // allow LCC comparison if LCC property is set, or if the name is lcc
     return new LCCComparison();

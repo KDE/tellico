@@ -60,7 +60,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   }
 
   const Data::BibtexCollection* c = static_cast<const Data::BibtexCollection*>(entry_->collection().data());
-  Data::FieldPtr f = c->fieldByBibtexName(QLatin1String("key"));
+  Data::FieldPtr f = c->fieldByBibtexName(QStringLiteral("key"));
   if(f) {
     QString key = entry_->field(f->name());
     if(!key.isEmpty()) {
@@ -69,7 +69,7 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
   }
 
   QString author;
-  Data::FieldPtr authorField = c->fieldByBibtexName(QLatin1String("author"));
+  Data::FieldPtr authorField = c->fieldByBibtexName(QStringLiteral("author"));
   if(authorField) {
     if(authorField->hasFlag(Data::Field::AllowMultiple)) {
       // grab first author only;
@@ -80,21 +80,21 @@ QString BibtexHandler::bibtexKey(Tellico::Data::EntryPtr entry_) {
     }
   }
 
-  Data::FieldPtr titleField = c->fieldByBibtexName(QLatin1String("title"));
+  Data::FieldPtr titleField = c->fieldByBibtexName(QStringLiteral("title"));
   QString title;
   if(titleField) {
     title = entry_->field(titleField->name());
   }
 
-  Data::FieldPtr yearField = c->fieldByBibtexName(QLatin1String("year"));
+  Data::FieldPtr yearField = c->fieldByBibtexName(QStringLiteral("year"));
   QString year;
   if(yearField) {
     year = entry_->field(yearField->name());
   }
   if(year.isEmpty()) {
-    year = entry_->field(QLatin1String("pub_year"));
+    year = entry_->field(QStringLiteral("pub_year"));
     if(year.isEmpty()) {
-      year = entry_->field(QLatin1String("cr_year"));
+      year = entry_->field(QStringLiteral("cr_year"));
     }
   }
   year = year.section(QLatin1Char(';'), 0, 0);
@@ -123,7 +123,7 @@ QString BibtexHandler::bibtexKey(const QString& author_, const QString& title_, 
 }
 
 void BibtexHandler::loadTranslationMaps() {
-  QString mapfile = DataFileRegistry::self()->locate(QLatin1String("bibtex-translation.xml"));
+  QString mapfile = DataFileRegistry::self()->locate(QStringLiteral("bibtex-translation.xml"));
   if(mapfile.isEmpty()) {
     static bool showMsg = true;
     if(showMsg) {
@@ -137,13 +137,13 @@ void BibtexHandler::loadTranslationMaps() {
   // no namespace processing
   QDomDocument dom = FileHandler::readXMLDocument(u, false);
 
-  QDomNodeList keyList = dom.elementsByTagName(QLatin1String("key"));
+  QDomNodeList keyList = dom.elementsByTagName(QStringLiteral("key"));
 
   for(int i = 0; i < keyList.count(); ++i) {
-    QDomNodeList strList = keyList.item(i).toElement().elementsByTagName(QLatin1String("string"));
+    QDomNodeList strList = keyList.item(i).toElement().elementsByTagName(QStringLiteral("string"));
     // the strList might have more than one node since there are multiple ways
     // to represent a character in LaTex.
-    QString s = keyList.item(i).toElement().attribute(QLatin1String("char"));
+    QString s = keyList.item(i).toElement().attribute(QStringLiteral("char"));
     for(int j = 0; j < strList.count(); ++j) {
       s_utf8LatexMap[s].append(strList.item(j).toElement().text());
 //      myDebug() << s << " = " << strList.item(j).toElement().text();
@@ -169,9 +169,9 @@ QString BibtexHandler::importText(char* text_) {
   // we need to lower-case any capitalized text after the first letter that is
   // NOT contained in braces
 
-  QRegExp rx(QLatin1String("\\{([A-Z]+)\\}"));
+  QRegExp rx(QStringLiteral("\\{([A-Z]+)\\}"));
   rx.setMinimal(true);
-  str.replace(rx, QLatin1String("\\1"));
+  str.replace(rx, QStringLiteral("\\1"));
 
   return str;
 }

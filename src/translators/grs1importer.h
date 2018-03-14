@@ -53,6 +53,9 @@ public:
   virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
+public Q_SLOTS:
+  void slotCancel() Q_DECL_OVERRIDE {}
+
 private:
   static void initTagMap();
 

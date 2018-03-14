@@ -90,17 +90,17 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   // it would be better to do this in a real OO way, but this should work
   const bool addEntryType = m_coll->type() == Collection::Book &&
                             coll_->type() == Collection::Bibtex &&
-                            !m_coll->hasField(QLatin1String("entry-type"));
+                            !m_coll->hasField(QStringLiteral("entry-type"));
   m_coll = coll_;
   m_id = -1;
   // set this after changing the m_coll pointer since setField() checks field validity
   if(addEntryType) {
-    setField(QLatin1String("entry-type"), QLatin1String("book"));
+    setField(QStringLiteral("entry-type"), QStringLiteral("book"));
   }
 }
 
 QString Entry::title() const {
-  return field(QLatin1String("title"));
+  return field(QStringLiteral("title"));
 }
 
 QString Entry::field(const QString& fieldName_) const {
@@ -188,11 +188,13 @@ QString Entry::formattedField(Tellico::Data::FieldPtr field_, FieldFormat::Reque
   return m_formattedFields.value(field_->name());
 }
 
-bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_) {
-  return setField(field_->name(), value_);
+bool Entry::setField(Tellico::Data::FieldPtr field_, const QString& value_, bool updateMDate_) {
+  return setField(field_->name(), value_, updateMDate_);
 }
 
-bool Entry::setField(const QString& name_, const QString& value_) {
+// updating the modified date of the entry is expensive with the call to QDate::currentDate
+// when loading a collection from a file (in particular), it's faster to ignore that date
+bool Entry::setField(const QString& name_, const QString& value_, bool updateMDate_) {
   if(name_.isEmpty()) {
     myWarning() << "empty field name for value:" << value_;
     return false;
@@ -213,8 +215,9 @@ bool Entry::setField(const QString& name_, const QString& value_) {
   const bool wasDifferent = field(name_) != value_;;
   const bool res = setFieldImpl(name_, value_);
   // returning true means entry was successfully modified
-  if(res && wasDifferent && name_ != QLatin1String("mdate") && m_coll->hasField(QLatin1String("mdate"))) {
-    setFieldImpl(QLatin1String("mdate"), QDate::currentDate().toString(Qt::ISODate));
+  if(res && wasDifferent && updateMDate_ &&
+     name_ != QLatin1String("mdate") && m_coll->hasField(QStringLiteral("mdate"))) {
+    setFieldImpl(QStringLiteral("mdate"), QDate::currentDate().toString(Qt::ISODate));
   }
   return res;
 }

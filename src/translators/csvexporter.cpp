@@ -42,9 +42,9 @@ using Tellico::Export::CSVExporter;
 
 CSVExporter::CSVExporter(Data::CollPtr coll_) : Tellico::Export::Exporter(coll_),
     m_includeTitles(true),
-    m_delimiter(QLatin1String(",")),
-    m_colDelimiter(QLatin1String(":")),
-    m_rowDelimiter(QLatin1String("|")),
+    m_delimiter(QStringLiteral(",")),
+    m_colDelimiter(QStringLiteral(":")),
+    m_rowDelimiter(QStringLiteral("|")),
     m_widget(nullptr),
     m_checkIncludeTitles(nullptr),
     m_radioComma(nullptr),
@@ -95,7 +95,7 @@ QString CSVExporter::text() const {
       QString title = fIt->title();
       // because of Microsoft Excel bug, http://support.microsoft.com/kb/323626
       if(text.isEmpty() && title == QLatin1String("ID")) {
-        title = QLatin1String("Id");
+        title = QStringLiteral("Id");
       }
       text += escapeText(title) + m_delimiter;
     }
@@ -217,7 +217,7 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
 }
 
 void CSVExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_includeTitles = group.readEntry("Include Titles", m_includeTitles);
   m_delimiter = group.readEntry("Delimiter", m_delimiter);
   m_rowDelimiter = group.readEntry("RowDelimiter", m_rowDelimiter);
@@ -246,7 +246,7 @@ void CSVExporter::saveOptions(KSharedConfigPtr config_) {
     m_rowDelimiter = s;
   }
 
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   group.writeEntry("Include Titles", m_includeTitles);
   group.writeEntry("Delimiter", m_delimiter);
   group.writeEntry("RowDelimiter", m_rowDelimiter);

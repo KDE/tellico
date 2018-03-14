@@ -92,7 +92,7 @@ void ConfigWidget::saveConfig(KConfigGroup& config_) {
       fields << it.key();
     }
   }
-  config_.writeEntry(QLatin1String("Custom Fields"), fields);
+  config_.writeEntry(QStringLiteral("Custom Fields"), fields);
   saveConfigHook(config_);
   slotSetModified(false);
 }

@@ -439,6 +439,16 @@
   <url type="help">http://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
   <screenshots>
     <screenshot type="default" width="867" height="627">
+      <caption>The main window showing a simple item in a book collection</caption>
+      <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
+      <caption xml:lang="en-GB">The main window showing a simple item in a book collection</caption>
+      <caption xml:lang="es">La ventana principal mostrando un elemento sencillo de una colección de libros</caption>
+      <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
+      <caption xml:lang="pt">A janela principal a mostrar um item simples numa colecção de livros</caption>
+      <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
+      <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книг</caption>
+      <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
       <image>http://kde.org/images/screenshots/tellico.png</image>
     </screenshot>
   </screenshots>

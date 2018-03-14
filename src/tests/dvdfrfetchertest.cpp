@@ -46,20 +46,20 @@ void DVDFrFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/dvdfr2tellico.xsl"));
   Tellico::ImageFactory::init();
 
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Le Pacte des loups"));
-  m_fieldValues.insert(QLatin1String("studio"), QLatin1String("StudioCanal"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2001"));
-  m_fieldValues.insert(QLatin1String("format"), QLatin1String("PAL"));
-  m_fieldValues.insert(QLatin1String("aspect-ratio"), QLatin1String("2.35"));
-  m_fieldValues.insert(QLatin1String("writer"), QString::fromUtf8("Stéphane Cabel; Christophe Gans"));
-  m_fieldValues.insert(QLatin1String("director"), QLatin1String("Christophe Gans"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Aventure; Fantastique"));
-  m_fieldValues.insert(QLatin1String("widescreen"), QLatin1String("true"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Le Pacte des loups"));
+  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("StudioCanal"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2001"));
+  m_fieldValues.insert(QStringLiteral("format"), QStringLiteral("PAL"));
+  m_fieldValues.insert(QStringLiteral("aspect-ratio"), QStringLiteral("2.35"));
+  m_fieldValues.insert(QStringLiteral("writer"), QStringLiteral("Stéphane Cabel; Christophe Gans"));
+  m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("Christophe Gans"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Aventure; Fantastique"));
+  m_fieldValues.insert(QStringLiteral("widescreen"), QStringLiteral("true"));
 }
 
 void DVDFrFetcherTest::testTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QLatin1String("Le Pacte des loups"));
+                                       QStringLiteral("Le Pacte des loups"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -73,16 +73,16 @@ void DVDFrFetcherTest::testTitle() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cast")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
 }
 
 void DVDFrFetcherTest::testTitleAccented() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
-                                       QString::fromUtf8("La Communauté de l'Anneau"));
+                                       QStringLiteral("La Communauté de l'Anneau"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -92,7 +92,7 @@ void DVDFrFetcherTest::testTitleAccented() {
 
 void DVDFrFetcherTest::testUPC() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::UPC,
-                                       QLatin1String("3259119636120"));
+                                       QStringLiteral("3259119636120"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DVDFrFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -106,10 +106,10 @@ void DVDFrFetcherTest::testUPC() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QCOMPARE(entry->field(QLatin1String("medium")), QLatin1String("DVD"));
-  QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("comments")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("DVD"));
+  QVERIFY(!entry->field(QStringLiteral("cast")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("comments")).isEmpty());
 }

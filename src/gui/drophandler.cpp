@@ -99,15 +99,15 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
       QMimeDatabase db;
       ptr = db.mimeTypeForName(job->mimetype());
     }
-    if(ptr.inherits(QLatin1String("application/x-tellico"))) {
+    if(ptr.inherits(QStringLiteral("application/x-tellico"))) {
       tc << url;
-    } else if(ptr.inherits(QLatin1String("application/pdf"))) {
+    } else if(ptr.inherits(QStringLiteral("application/pdf"))) {
       pdf << url;
-    } else if(ptr.inherits(QLatin1String("text/x-bibtex")) ||
-              ptr.inherits(QLatin1String("application/x-bibtex")) ||
-              ptr.inherits(QLatin1String("application/bibtex"))) {
+    } else if(ptr.inherits(QStringLiteral("text/x-bibtex")) ||
+              ptr.inherits(QStringLiteral("application/x-bibtex")) ||
+              ptr.inherits(QStringLiteral("application/bibtex"))) {
       bib << url;
-    } else if(ptr.inherits(QLatin1String("application/x-research-info-systems"))) {
+    } else if(ptr.inherits(QStringLiteral("application/x-research-info-systems"))) {
       ris << url;
     } else if(url.fileName().endsWith(QLatin1String(".bib"))) {
       bib << url;
@@ -115,11 +115,11 @@ bool DropHandler::handleURL(const QList<QUrl>& urls_) {
       ris << url;
     } else if(url.fileName().endsWith(QLatin1String(".ciw"))) {
       ciw << url;
-    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
+    } else if(ptr.inherits(QStringLiteral("text/plain")) && Import::BibtexImporter::maybeBibtex(url)) {
       bib << url;
-    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::RISImporter::maybeRIS(url)) {
+    } else if(ptr.inherits(QStringLiteral("text/plain")) && Import::RISImporter::maybeRIS(url)) {
       ris << url;
-    } else if(ptr.inherits(QLatin1String("text/plain")) && Import::CIWImporter::maybeCIW(url)) {
+    } else if(ptr.inherits(QStringLiteral("text/plain")) && Import::CIWImporter::maybeCIW(url)) {
       ciw << url;
     } else {
       myDebug() << "unrecognized type: " << ptr.name() << " (" << url << ")";

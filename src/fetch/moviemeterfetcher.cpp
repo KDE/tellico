@@ -66,7 +66,7 @@ QString MovieMeterFetcher::source() const {
 }
 
 QString MovieMeterFetcher::attribution() const {
-  return QLatin1String("<a href=\"http://www.moviemeter.nl\">MovieMeter</a>");
+  return QStringLiteral("<a href=\"http://www.moviemeter.nl\">MovieMeter</a>");
 }
 
 bool MovieMeterFetcher::canSearch(FetchKey k) const {
@@ -85,11 +85,11 @@ void MovieMeterFetcher::search() {
 
   QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+  q.addQueryItem(QStringLiteral("api_key"), QLatin1String(MOVIEMETER_API_KEY));
 
   switch(request().key) {
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value);
       //u.addQueryItem(QLatin1String("type"), QLatin1String("all"));
       break;
 
@@ -129,12 +129,12 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString id = entry->field(QLatin1String("moviemeter-id"));
+  QString id = entry->field(QStringLiteral("moviemeter-id"));
   if(!id.isEmpty()) {
     QUrl u(QString::fromLatin1(MOVIEMETER_API_URL));
     u.setPath(u.path() + id);
     QUrlQuery q;
-    q.addQueryItem(QLatin1String("api_key"), QLatin1String(MOVIEMETER_API_KEY));
+    q.addQueryItem(QStringLiteral("api_key"), QLatin1String(MOVIEMETER_API_KEY));
     u.setQuery(q);
     // quiet
     QByteArray data = FileHandler::readDataFile(u, true);
@@ -155,24 +155,24 @@ Tellico::Data::EntryPtr MovieMeterFetcher::fetchEntryHook(uint uid_) {
   }
 
   // image might still be URL
-  const QString image_id = entry->field(QLatin1String("cover"));
+  const QString image_id = entry->field(QStringLiteral("cover"));
   if(image_id.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QLatin1String("cover"), id);
+    entry->setField(QStringLiteral("cover"), id);
   }
 
   // don't want to include ID field
-  entry->setField(QLatin1String("moviemeter-id"), QString());
+  entry->setField(QStringLiteral("moviemeter-id"), QString());
 
   return entry;
 }
 
 Tellico::Fetch::FetchRequest MovieMeterFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString title = entry_->field(QLatin1String("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Keyword, title);
   }
@@ -212,17 +212,17 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
 
   Data::CollPtr coll(new Data::VideoCollection(true));
   // always add ID for fetchEntryHook
-  Data::FieldPtr field(new Data::Field(QLatin1String("moviemeter-id"), QLatin1String("MovieMeter ID"), Data::Field::Line));
+  Data::FieldPtr field(new Data::Field(QStringLiteral("moviemeter-id"), QStringLiteral("MovieMeter ID"), Data::Field::Line));
   field->setCategory(i18n("General"));
   coll->addField(field);
 
   if(optionalFields().contains(QLatin1String("moviemeter"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("moviemeter"), i18n("MovieMeter Link"), Data::Field::URL));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("moviemeter"), i18n("MovieMeter Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
   if(optionalFields().contains(QLatin1String("alttitle"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
+    Data::FieldPtr field(new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
     coll->addField(field);
   }
@@ -244,36 +244,36 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
 }
 
 void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("moviemeter-id"), mapValue(resultMap_, "id"));
-  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "title"));
-  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "year"));
+  entry_->setField(QStringLiteral("moviemeter-id"), mapValue(resultMap_, "id"));
+  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
+  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "year"));
 
   // if we only need cursory data, then we're done
   if(!fullData_) {
     return;
   }
 
-  entry_->setField(QLatin1String("genre"),  mapValue(resultMap_, "genres"));
-  entry_->setField(QLatin1String("plot"),  mapValue(resultMap_, "plot"));
-  entry_->setField(QLatin1String("running-time"),  mapValue(resultMap_, "duration"));
-  entry_->setField(QLatin1String("director"),  mapValue(resultMap_, "directors"));
-  entry_->setField(QLatin1String("nationality"),  mapValue(resultMap_, "countries"));
+  entry_->setField(QStringLiteral("genre"),  mapValue(resultMap_, "genres"));
+  entry_->setField(QStringLiteral("plot"),  mapValue(resultMap_, "plot"));
+  entry_->setField(QStringLiteral("running-time"),  mapValue(resultMap_, "duration"));
+  entry_->setField(QStringLiteral("director"),  mapValue(resultMap_, "directors"));
+  entry_->setField(QStringLiteral("nationality"),  mapValue(resultMap_, "countries"));
 
   QStringList castList;
-  foreach(const QVariant& actor, resultMap_.value(QLatin1String("actors")).toList()) {
+  foreach(const QVariant& actor, resultMap_.value(QStringLiteral("actors")).toList()) {
     castList << mapValue(actor.toMap(), "name");
   }
-  entry_->setField(QLatin1String("cast"), castList.join(FieldFormat::rowDelimiterString()));
+  entry_->setField(QStringLiteral("cast"), castList.join(FieldFormat::rowDelimiterString()));
 
-  if(entry_->collection()->hasField(QLatin1String("moviemeter"))) {
-    entry_->setField(QLatin1String("moviemeter"), mapValue(resultMap_, "url"));
+  if(entry_->collection()->hasField(QStringLiteral("moviemeter"))) {
+    entry_->setField(QStringLiteral("moviemeter"), mapValue(resultMap_, "url"));
   }
 
-  if(entry_->collection()->hasField(QLatin1String("alttitle"))) {
-    entry_->setField(QLatin1String("alttitle"), mapValue(resultMap_, "alternative_title"));
+  if(entry_->collection()->hasField(QStringLiteral("alttitle"))) {
+    entry_->setField(QStringLiteral("alttitle"), mapValue(resultMap_, "alternative_title"));
   }
 
-  entry_->setField(QLatin1String("cover"), mapValue(resultMap_.value(QLatin1String("posters")).toMap(), "small"));
+  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_.value(QStringLiteral("posters")).toMap(), "small"));
 }
 
 Tellico::Fetch::ConfigWidget* MovieMeterFetcher::configWidget(QWidget* parent_) const {
@@ -281,7 +281,7 @@ Tellico::Fetch::ConfigWidget* MovieMeterFetcher::configWidget(QWidget* parent_) 
 }
 
 QString MovieMeterFetcher::defaultName() {
-  return QLatin1String("MovieMeter"); // no translation
+  return QStringLiteral("MovieMeter"); // no translation
 }
 
 QString MovieMeterFetcher::defaultIcon() {
@@ -290,8 +290,8 @@ QString MovieMeterFetcher::defaultIcon() {
 
 Tellico::StringHash MovieMeterFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("moviemeter")] = i18n("MovieMeter Link");
-  hash[QLatin1String("alttitle")]   = i18n("Alternative Titles");
+  hash[QStringLiteral("moviemeter")] = i18n("MovieMeter Link");
+  hash[QStringLiteral("alttitle")]   = i18n("Alternative Titles");
   return hash;
 }
 

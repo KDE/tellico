@@ -91,7 +91,7 @@ using barcodeRecognition::barcode_v4l;
 
 barcode_v4l::barcode_v4l()
 {
-  m_devname = QString::fromLatin1("/dev/video0");
+  m_devname = QStringLiteral("/dev/video0");
   m_grab_width = 640;
   m_grab_height = 480;
 

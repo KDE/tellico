@@ -35,7 +35,7 @@ using Tellico::Data::CoinCollection;
 
 CoinCollection::CoinCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Coins") : title_) {
-  setDefaultGroupField(QLatin1String("denomination"));
+  setDefaultGroupField(QStringLiteral("denomination"));
   if(addDefaultFields_) {
     addFields(defaultFields());
   }
@@ -46,47 +46,47 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   FieldPtr field;
 
   field = Field::createDefaultField(Field::TitleField);
-  field->setProperty(QLatin1String("template"), QLatin1String("%{year}%{mintmark} %{type} %{denomination}"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{year}%{mintmark} %{type} %{denomination}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
-  field = new Field(QLatin1String("type"), i18n("Type"));
+  field = new Field(QStringLiteral("type"), i18n("Type"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   /* TRANSLATORS: denomination refers to the monetary value. */
-  field = new Field(QLatin1String("denomination"), i18nc("monetary denomination", "Denomination"));
+  field = new Field(QStringLiteral("denomination"), i18nc("monetary denomination", "Denomination"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("year"), i18n("Year"), Field::Number);
+  field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("mintmark"), i18n("Mint Mark"));
+  field = new Field(QStringLiteral("mintmark"), i18n("Mint Mark"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("country"), i18n("Country"));
+  field = new Field(QStringLiteral("country"), i18n("Country"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("currency"), i18n("Currency"));
+  field = new Field(QStringLiteral("currency"), i18n("Currency"));
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("set"), i18n("Coin Set"), Field::Bool);
+  field = new Field(QStringLiteral("set"), i18n("Coin Set"), Field::Bool);
   field->setCategory(i18n(coin_general));
   list.append(field);
 
@@ -100,7 +100,7 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
                             "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
                             "Very Good-8,Good-4,Fair")
                       .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-  field = new Field(QLatin1String("grade"), i18n("Grade"), grade);
+  field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
@@ -109,37 +109,37 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
                               "PCGS,NGC,ANACS,ICG,ASA,PCI",
                               "PCGS,NGC,ANACS,ICG,ASA,PCI")
                         .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
-  field = new Field(QLatin1String("service"), i18n("Grading Service"), service);
+  field = new Field(QStringLiteral("service"), i18n("Grading Service"), service);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
+  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(coin_personal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
+  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(coin_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("location"), i18n("Location"));
+  field = new Field(QStringLiteral("location"), i18n("Location"));
   field->setCategory(i18n(coin_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(coin_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("obverse"), i18n("Obverse"), Field::Image);
+  field = new Field(QStringLiteral("obverse"), i18n("Obverse"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("reverse"), i18n("Reverse"), Field::Image);
+  field = new Field(QStringLiteral("reverse"), i18n("Reverse"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
   field->setCategory(i18n(coin_personal));
   list.append(field);
 

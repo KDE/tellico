@@ -39,8 +39,7 @@ public:
   static bool isXMPEnabled();
 
 private:
-  void init();
-
+  static bool s_needInit;
   static int s_initCount;
 };
 

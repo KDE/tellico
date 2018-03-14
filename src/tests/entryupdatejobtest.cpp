@@ -47,10 +47,10 @@ void EntryUpdateJobTest::initTestCase() {
 
 void EntryUpdateJobTest::testUpdate() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
-  Tellico::Data::FieldPtr field(new Tellico::Data::Field("arxiv", "Arxiv ID"));
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("arxiv"), QStringLiteral("Arxiv ID")));
   coll->addField(field);
   Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
-  entry->setField("arxiv", "hep-lat/0110180");
+  entry->setField(QStringLiteral("arxiv"), QStringLiteral("hep-lat/0110180"));
   coll->addEntries(entry);
 
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
@@ -62,5 +62,5 @@ void EntryUpdateJobTest::testUpdate() {
   job->start();
   m_loop.exec();
 
-  QCOMPARE(entry->field("title"), QLatin1String("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
 }

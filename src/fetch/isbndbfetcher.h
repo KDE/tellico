@@ -38,7 +38,6 @@ namespace KIO {
 }
 
 namespace Tellico {
-  class XSLTHandler;
   namespace Fetch {
 
 /**
@@ -83,16 +82,15 @@ private Q_SLOTS:
 
 private:
   virtual void search() Q_DECL_OVERRIDE;
-  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  void initXSLTHandler();
   void doSearch();
+  virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
-  XSLTHandler* m_xsltHandler;
+  static QPointer<KIO::StoredTransferJob> isbndbJob(const QUrl& url, const QString& apiKey);
+
   int m_limit;
-  int m_page;
   int m_total;
   int m_numResults;
-  int m_countOffset;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

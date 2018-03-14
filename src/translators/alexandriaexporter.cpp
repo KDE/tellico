@@ -66,7 +66,7 @@ bool AlexandriaExporter::exec() {
     return false;
   }
 
-  const QString alexDirName = QLatin1String(".alexandria");
+  const QString alexDirName = QStringLiteral(".alexandria");
 
   // create if necessary
   const QUrl u = url();
@@ -128,7 +128,7 @@ bool AlexandriaExporter::exec() {
 // everything is put between quotes except for the rating, just to be sure it's interpreted as a string
 bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr entry_) {
   // the filename is the isbn without dashes, followed by .yaml
-  QString isbn = entry_->field(QLatin1String("isbn"));
+  QString isbn = entry_->field(QStringLiteral("isbn"));
   if(isbn.isEmpty()) {
     return false; // can't write it since Alexandria uses isbn as name of file
   }
@@ -149,7 +149,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   ts.setCodec("UTF-8");
   ts << "--- !ruby/object:Alexandria::Book\n";
   ts << "authors:\n";
-  QStringList authors = FieldFormat::splitValue(entry_->formattedField(QLatin1String("author"), format));
+  QStringList authors = FieldFormat::splitValue(entry_->formattedField(QStringLiteral("author"), format));
   for(QStringList::Iterator it = authors.begin(); it != authors.end(); ++it) {
     ts << "  - " << escapeText(*it) << "\n";
   }
@@ -158,11 +158,11 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
     ts << "  - n/a\n";
   }
 
-  QString tmp = entry_->formattedField(QLatin1String("title"), format);
+  QString tmp = entry_->formattedField(QStringLiteral("title"), format);
   ts << "title: \"" << escapeText(tmp) << "\"\n";
 
   // Alexandria refers to the binding as the edition
-  tmp = entry_->formattedField(QLatin1String("binding"), format);
+  tmp = entry_->formattedField(QStringLiteral("binding"), format);
   ts << "edition: \"" << escapeText(tmp) << "\"\n";
 
   // sometimes Alexandria interprets the isbn as a number instead of a string
@@ -170,37 +170,37 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   ts << "isbn: \"" << isbn << "\"\n";
 
   static const QRegExp rx(QLatin1String("<br/?>"), Qt::CaseInsensitive);
-  tmp = entry_->formattedField(QLatin1String("comments"), format);
-  tmp.replace(rx, QLatin1String("\n"));
+  tmp = entry_->formattedField(QStringLiteral("comments"), format);
+  tmp.replace(rx, QStringLiteral("\n"));
   ts << "notes: |-\n";
   foreach(const QString& line, tmp.split(QLatin1Char('\n'))) {
     ts << "  " << line << "\n";
   }
 
-  tmp = entry_->formattedField(QLatin1String("publisher"), format);
+  tmp = entry_->formattedField(QStringLiteral("publisher"), format);
   // publisher uses n/a when empty
-  ts << "publisher: \"" << (tmp.isEmpty() ? QLatin1String("n/a") : escapeText(tmp)) << "\"\n";
+  ts << "publisher: \"" << (tmp.isEmpty() ? QStringLiteral("n/a") : escapeText(tmp)) << "\"\n";
 
-  tmp = entry_->formattedField(QLatin1String("pub_year"), format);
+  tmp = entry_->formattedField(QStringLiteral("pub_year"), format);
   if(!tmp.isEmpty()) {
     ts << "publishing_year: \"" << escapeText(tmp) << "\"\n";
   }
 
-  tmp = entry_->field(QLatin1String("rating"));
+  tmp = entry_->field(QStringLiteral("rating"));
   bool ok;
   int rating = Tellico::toUInt(tmp, &ok);
   if(ok) {
     ts << "rating: " << rating << "\n";
   }
 
-  tmp = entry_->field(QLatin1String("read"));
+  tmp = entry_->field(QStringLiteral("read"));
   if(!tmp.isEmpty()) {
     ts << "redd: true\n";
   }
 
   file.close();
 
-  QString cover = entry_->field(QLatin1String("cover"));
+  QString cover = entry_->field(QStringLiteral("cover"));
   if(cover.isEmpty() || !(options() & Export::ExportImages)) {
     return true; // all done
   }

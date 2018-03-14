@@ -270,6 +270,7 @@ TARGET_LINK_LIBRARIES(delicioustest rtf2html-tellico translatorstest ${TELLICO_T
 
 add_executable(filelistingtest filelistingtest.cpp
   ../translators/filelistingimporter.cpp
+  ../translators/xmphandler.cpp
 )
 ecm_mark_nongui_executable(filelistingtest)
 add_test(filelistingtest filelistingtest)
@@ -282,6 +283,9 @@ TARGET_LINK_LIBRARIES(filelistingtest
 IF( KF5FileMetaData_FOUND )
   TARGET_LINK_LIBRARIES(filelistingtest KF5::FileMetaData)
 ENDIF( KF5FileMetaData_FOUND )
+IF( Exempi_FOUND )
+  TARGET_LINK_LIBRARIES(filelistingtest ${Exempi_LIBRARIES})
+ENDIF( Exempi_FOUND )
 
 add_executable(gcstartest gcstartest.cpp
   ../translators/gcstarimporter.cpp

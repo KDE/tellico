@@ -31,7 +31,7 @@ QRegExp FieldFormat::delimiterRx = QRegExp(QLatin1String("\\s*;\\s*"));
 QRegExp FieldFormat::commaSplitRx = QRegExp(QLatin1String("\\s*,\\s*"));
 
 QString FieldFormat::delimiterString() {
-  return QLatin1String("; ");
+  return QStringLiteral("; ");
 }
 
 QRegExp FieldFormat::delimiterRegExp() {
@@ -45,7 +45,7 @@ QString FieldFormat::fixupValue(const QString& value_) {
 }
 
 QString FieldFormat::columnDelimiterString() {
-  return QLatin1String("::");
+  return QStringLiteral("::");
 }
 
 QString FieldFormat::rowDelimiterString() {
@@ -142,7 +142,7 @@ QString FieldFormat::title(const QString& title_, Options opt_) {
 
     // arbitrarily impose rule that a space must follow every comma
     // has to come before the capitalization since the space is significant
-    newTitle.replace(commaSplitRx, QLatin1String(", "));
+    newTitle.replace(commaSplitRx, QStringLiteral(", "));
   }
 
   if(opt_.testFlag(FormatCapitalize)) {
@@ -176,7 +176,7 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
   static const QRegExp periodSpace(QLatin1String("\\.\\s*(?=.)"));
 
   QString name = name_;
-  name.replace(periodSpace, QLatin1String(". "));
+  name.replace(periodSpace, QStringLiteral(". "));
   if(opt_.testFlag(FormatCapitalize)) {
     name = capitalize(name);
   }
@@ -193,7 +193,7 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
       (name.indexOf(QLatin1Char(',')) > -1 && !Config::nameSuffixList().contains(words.last(), Qt::CaseInsensitive))) {
     // arbitrarily impose rule that no spaces before a comma and
     // a single space after every comma
-    name.replace(commaSplitRx, QLatin1String(", "));
+    name.replace(commaSplitRx, QStringLiteral(", "));
   } else if(words.count() > 1) {
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word

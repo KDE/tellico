@@ -67,10 +67,10 @@ public:
   void cancel();
 
 Q_SIGNALS:
-  void signalProgress(ProgressItem* item);
-  void signalDone(ProgressItem* item);
-  void signalCancelled(ProgressItem* item);
-  void signalTotalSteps(ProgressItem* item);
+  void signalProgress(Tellico::ProgressItem* item);
+  void signalDone(Tellico::ProgressItem* item);
+  void signalCancelled(Tellico::ProgressItem* item);
+  void signalTotalSteps(Tellico::ProgressItem* item);
 
 protected:
   /* Only to be used by the ProgressManager */
@@ -116,7 +116,7 @@ public Q_SLOTS:
   void setDone(QObject* owner);
 
 private Q_SLOTS:
-  void slotItemDone(ProgressItem* item);
+  void slotItemDone(Tellico::ProgressItem* item);
   void slotUpdateTotalProgress();
 
 private:

@@ -111,7 +111,7 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
       }
     }
     foreach(Data::FieldPtr urlField, urlFields) {
-      QAction* act = menu.addAction(QIcon::fromTheme(QLatin1String("bookmarks")),
+      QAction* act = menu.addAction(QIcon::fromTheme(QStringLiteral("bookmarks")),
                                     i18nc("Open URL", "Open %1", urlField->title()));
       const QString value = entry->field(urlField);
       act->setData(value);

@@ -49,6 +49,7 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_pixOn = QIcon(QLatin1String(":/icons/star_on")).pixmap(QSize(18, 18));
   m_pixOff = QIcon(QLatin1String(":/icons/star_off")).pixmap(QSize(18, 18));
 
+  m_widgets.reserve(RATING_WIDGET_MAX_ICONS);
   // find maximum width and height
   int w = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.width(), m_pixOff.width()));
   int h = qMax(RATING_WIDGET_MAX_STAR_SIZE, qMax(m_pixOn.height(), m_pixOff.height()));
@@ -61,9 +62,9 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
 
   m_clearButton = new QToolButton(this);
   if(layoutDirection() == Qt::LeftToRight) {
-    m_clearButton->setIcon(QIcon::fromTheme(QLatin1String("edit-clear-locationbar-rtl")));
+    m_clearButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-locationbar-rtl")));
   } else {
-    m_clearButton->setIcon(QIcon::fromTheme(QLatin1String("edit-clear-locationbar-ltr")));
+    m_clearButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-locationbar-ltr")));
   }
   connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearClicked()));
   layout->addWidget(m_clearButton);
@@ -104,8 +105,8 @@ void RatingWidget::init() {
 
 void RatingWidget::updateBounds() {
   bool ok; // not used;
-  m_min = Tellico::toUInt(m_field->property(QLatin1String("minimum")), &ok);
-  m_max = Tellico::toUInt(m_field->property(QLatin1String("maximum")), &ok);
+  m_min = Tellico::toUInt(m_field->property(QStringLiteral("minimum")), &ok);
+  m_max = Tellico::toUInt(m_field->property(QStringLiteral("maximum")), &ok);
   if(m_max > RATING_WIDGET_MAX_ICONS) {
     myDebug() << "max is too high: " << m_max;
     m_max = RATING_WIDGET_MAX_ICONS;

@@ -67,12 +67,12 @@ StringMapWidget::StringMapWidget(const QMap<QString, QString>& map_, QWidget* pa
   boxHBoxLayout->addWidget(bb);
 
   QPushButton* pb1 = new QPushButton(bb);
-  KGuiItem::assign(pb1, KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QLatin1String("document-new"))));
+  KGuiItem::assign(pb1, KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QStringLiteral("document-new"))));
   connect(pb1, SIGNAL(clicked()), this, SLOT(slotAdd()));
   bb->addButton(pb1, QDialogButtonBox::ActionRole);
 
   QPushButton* pb2 = new QPushButton(bb);
-  KGuiItem::assign(pb2, KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QLatin1String("edit-delete"))));
+  KGuiItem::assign(pb2, KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QStringLiteral("edit-delete"))));
   connect(pb2, SIGNAL(clicked()), this, SLOT(slotDelete()));
   bb->addButton(pb2, QDialogButtonBox::ActionRole);
 

@@ -168,7 +168,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_searchButton = new QPushButton(box1);
   box1HBoxLayout->addWidget(m_searchButton);
   KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
-                                            QIcon::fromTheme(QLatin1String("dialog-cancel"))));
+                                            QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
   connect(m_searchButton, SIGNAL(clicked()), SLOT(slotSearchClicked()));
   m_searchButton->setWhatsThis(i18n("Click to start or stop the search"));
 
@@ -178,7 +178,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   int maxWidth = m_searchButton->sizeHint().width();
   int maxHeight = m_searchButton->sizeHint().height();
   KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                            QIcon::fromTheme(QLatin1String("edit-find"))));
+                                            QIcon::fromTheme(QStringLiteral("edit-find"))));
   maxWidth = qMax(maxWidth, m_searchButton->sizeHint().width());
   maxHeight = qMax(maxHeight, m_searchButton->sizeHint().height());
   m_searchButton->setMinimumWidth(maxWidth);
@@ -196,7 +196,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
 
   m_editISBN = new QPushButton(box2);
   KGuiItem::assign(m_editISBN, KGuiItem(i18n("Edit ISBN/UPC values..."),
-                                        QIcon::fromTheme(QLatin1String("format-justify-fill"))));
+                                        QIcon::fromTheme(QStringLiteral("format-justify-fill"))));
   box2HBoxLayout->addWidget(m_editISBN);
   m_editISBN->setEnabled(false);
   m_editISBN->setWhatsThis(i18n("Click to open a text edit box for entering or editing multiple ISBN or UPC values."));
@@ -251,7 +251,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   // don't bother creating funky gradient images for compact view
   m_entryView->setUseGradientImages(false);
   // set the xslt file AFTER setting the gradient image option
-  m_entryView->setXSLTFile(QLatin1String("Compact.xsl"));
+  m_entryView->setXSLTFile(QStringLiteral("Compact.xsl"));
   m_entryView->addXSLTStringParam("skip-fields", "id,mdate,cdate");
   m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
                                          "current collection by selecting it in the list above"));
@@ -269,7 +269,7 @@ FetchDialog::FetchDialog(QWidget* parent_)
   m_addButton->setWhatsThis(i18n("Add the selected entry to the current collection"));
 
   m_moreButton = new QPushButton(box3);
-  KGuiItem::assign(m_moreButton, KGuiItem(i18n("Get More Results"), QIcon::fromTheme(QLatin1String("edit-find"))));
+  KGuiItem::assign(m_moreButton, KGuiItem(i18n("Get More Results"), QIcon::fromTheme(QStringLiteral("edit-find"))));
   box3HBoxLayout->addWidget(m_moreButton);
   m_moreButton->setEnabled(false);
   connect(m_moreButton, SIGNAL(clicked()), SLOT(slotMoreClicked()));
@@ -352,7 +352,7 @@ FetchDialog::~FetchDialog() {
   // no additional entries to check images to keep though
   Data::Document::self()->removeImagesNotInCollection(entriesToCheck, Data::EntryList());
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("Fetch Dialog Options"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("Fetch Dialog Options"));
   KWindowConfig::saveWindowSize(windowHandle(), config);
 
   config.writeEntry("Splitter Sizes", static_cast<QSplitter*>(m_treeWidget->parentWidget())->sizes());
@@ -372,7 +372,7 @@ void FetchDialog::slotSearchClicked() {
     m_oldSearch = value;
     m_started = true;
     KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
-                                              QIcon::fromTheme(QLatin1String("dialog-cancel"))));
+                                              QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
     startProgress();
     setStatus(i18n("Searching..."));
     qApp->processEvents();
@@ -426,7 +426,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
 //  myDebug();
   m_started = false;
   KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_SEARCH),
-                                            QIcon::fromTheme(QLatin1String("edit-find"))));
+                                            QIcon::fromTheme(QStringLiteral("edit-find"))));
   stopProgress();
   if(m_resultCount == 0) {
     slotStatus(i18n("The search returned no items."));
@@ -450,6 +450,7 @@ void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
      (key == Fetch::ISBN || key == Fetch::UPC)) {
     QStringList searchValues = FieldFormat::splitValue(m_oldSearch.simplified());
     QStringList resultValues;
+    resultValues.reserve(m_treeWidget->topLevelItemCount());
     for(int i = 0; i < m_treeWidget->topLevelItemCount(); ++i) {
       resultValues << static_cast<FetchResultItem*>(m_treeWidget->topLevelItem(i))->m_result->isbn;
     }
@@ -518,13 +519,13 @@ void FetchDialog::slotAddEntry() {
       stopProgress();
       setStatus(i18n("Ready."));
     }
-    if(entry->collection()->hasField(QLatin1String("fetchdialog_source"))) {
-      entry->collection()->removeField(QLatin1String("fetchdialog_source"));
+    if(entry->collection()->hasField(QStringLiteral("fetchdialog_source"))) {
+      entry->collection()->removeField(QStringLiteral("fetchdialog_source"));
     }
     // add a copy, intentionally allowing multiple copies to be added
     vec.append(Data::EntryPtr(new Data::Entry(*entry)));
     item->setData(0, Qt::DecorationRole,
-                  QIcon::fromTheme(QLatin1String("checkmark"), QIcon(QLatin1String(":/icons/checkmark"))));
+                  QIcon::fromTheme(QStringLiteral("checkmark"), QIcon(QLatin1String(":/icons/checkmark"))));
   }
   if(!vec.isEmpty()) {
     Kernel::self()->addEntries(vec, true);
@@ -539,7 +540,7 @@ void FetchDialog::slotMoreClicked() {
 
   m_started = true;
   KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_STOP),
-                                            QIcon::fromTheme(QLatin1String("dialog-cancel"))));
+                                            QIcon::fromTheme(QStringLiteral("dialog-cancel"))));
   startProgress();
   setStatus(i18n("Searching..."));
   qApp->processEvents();
@@ -580,16 +581,16 @@ void FetchDialog::slotShowEntry() {
     setStatus(i18n("Ready."));
     return;
   }
-  if(!entry->collection()->hasField(QLatin1String("fetchdialog_source"))) {
-    Data::FieldPtr f(new Data::Field(QLatin1String("fetchdialog_source"), i18n("Attribution"), Data::Field::Para));
+  if(!entry->collection()->hasField(QStringLiteral("fetchdialog_source"))) {
+    Data::FieldPtr f(new Data::Field(QStringLiteral("fetchdialog_source"), i18n("Attribution"), Data::Field::Para));
     entry->collection()->addField(f);
   }
 
   const QPixmap sourceIcon = Fetch::Manager::self()->fetcherIcon(r->fetcher);
   const QByteArray ba = Data::Image::byteArray(sourceIcon.toImage(), "PNG");
-  QString text = QString::fromLatin1("<qt><img src='data:image/png;base64,%1'/> %2<br/>%3</qt>")
+  QString text = QStringLiteral("<qt><img src='data:image/png;base64,%1'/> %2<br/>%3</qt>")
                  .arg(QLatin1String(ba.toBase64()), r->fetcher->source(), r->fetcher->attribution());
-  entry->setField(QLatin1String("fetchdialog_source"), text);
+  entry->setField(QStringLiteral("fetchdialog_source"), text);
 
   setStatus(i18n("Ready."));
 
@@ -738,7 +739,7 @@ void FetchDialog::slotEditMultipleISBN() {
   dlg.setMinimumWidth(qMax(dlg.minimumWidth(), FETCH_MIN_WIDTH*2/3));
 
   if(dlg.exec() == QDialog::Accepted) {
-    m_isbnList = m_isbnTextEdit->toPlainText().split(QLatin1String("\n"));
+    m_isbnList = m_isbnTextEdit->toPlainText().split(QStringLiteral("\n"));
     const QValidator* val = m_valueLineEdit->validator();
     if(val) {
       for(QStringList::Iterator it = m_isbnList.begin(); it != m_isbnList.end(); ++it) {
@@ -789,7 +790,7 @@ void FetchDialog::slotISBNTextChanged() {
   if(cursor.atStart() || text.at(cursor.position()-1) != QLatin1Char('\n')) {
     return;
   }
-  QStringList lines = text.left(cursor.position()-1).split(QLatin1String("\n"));
+  QStringList lines = text.left(cursor.position()-1).split(QStringLiteral("\n"));
   QString newLine = lines.last();
   int pos = 0;
   // validate() changes the input

@@ -41,7 +41,6 @@ Q_OBJECT
 public:
   FilterView(QWidget* parent);
 
-//  virtual bool isSelectable(GUI::ListViewItem*) const;
   FilterModel* sourceModel() const;
 
   void addCollection(Data::CollPtr coll);

@@ -182,13 +182,13 @@ void ConfigDialog::slotHelp() {
   const QString name = currentPage()->name();
   // these names must be kept in sync with the page names
   if(name == i18n("General")) {
-    KHelpClient::invokeHelp(QLatin1String("general-options"));
+    KHelpClient::invokeHelp(QStringLiteral("general-options"));
   } else if(name == i18n("Printing")) {
-    KHelpClient::invokeHelp(QLatin1String("printing-options"));
+    KHelpClient::invokeHelp(QStringLiteral("printing-options"));
   } else if(name == i18n("Templates")) {
-    KHelpClient::invokeHelp(QLatin1String("template-options"));
+    KHelpClient::invokeHelp(QStringLiteral("template-options"));
   } else if(name == i18n("Data Sources")) {
-    KHelpClient::invokeHelp(QLatin1String("internet-sources-options"));
+    KHelpClient::invokeHelp(QStringLiteral("internet-sources-options"));
   }
 }
 
@@ -200,7 +200,7 @@ void ConfigDialog::setupGeneralPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("General"));
   page->setHeader(i18n("General Options"));
-  page->setIcon(QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
+  page->setIcon(QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QLatin1String(":/icons/tellico"))));
   addPage(page);
 
   // since this is the first page, go ahead and lay it out
@@ -326,7 +326,7 @@ void ConfigDialog::setupPrintingPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Printing"));
   page->setHeader(i18n("Printing Options"));
-  page->setIcon(QIcon::fromTheme(QLatin1String("printer")));
+  page->setIcon(QIcon::fromTheme(QStringLiteral("printer")));
   addPage(page);
 }
 
@@ -371,7 +371,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   m_imageWidthBox->setMinimum(0);
   m_imageWidthBox->setValue(50);
   gridLayout->addWidget(m_imageWidthBox, 0, 1);
-  m_imageWidthBox->setSuffix(QLatin1String(" px"));
+  m_imageWidthBox->setSuffix(QStringLiteral(" px"));
   lab->setBuddy(m_imageWidthBox);
   QString whats = i18n("The maximum width of the images in the printout. The aspect ratio is preserved.");
   lab->setWhatsThis(whats);
@@ -388,7 +388,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   m_imageHeightBox->setMinimum(0);
   m_imageHeightBox->setValue(50);
   gridLayout->addWidget(m_imageHeightBox, 1, 1);
-  m_imageHeightBox->setSuffix(QLatin1String(" px"));
+  m_imageHeightBox->setSuffix(QStringLiteral(" px"));
   lab->setBuddy(m_imageHeightBox);
   whats = i18n("The maximum height of the images in the printout. The aspect ratio is preserved.");
   lab->setWhatsThis(whats);
@@ -409,7 +409,7 @@ void ConfigDialog::setupTemplatePage() {
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Templates"));
   page->setHeader(i18n("Template Options"));
   // odd icon, I know, matches KMail, though...
-  page->setIcon(QIcon::fromTheme(QLatin1String("preferences-desktop-theme")));
+  page->setIcon(QIcon::fromTheme(QStringLiteral("preferences-desktop-theme")));
   addPage(page);
 }
 
@@ -441,7 +441,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   QPushButton* btn = new QPushButton(i18n("&Preview..."), frame);
   btn->setWhatsThis(i18n("Show a preview of the template"));
-  btn->setIcon(QIcon::fromTheme(QLatin1String("zoom-original")));
+  btn->setIcon(QIcon::fromTheme(QStringLiteral("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
   connect(btn, SIGNAL(clicked()), SLOT(slotShowTemplatePreview()));
 
@@ -478,7 +478,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   m_fontSizeInput = new QSpinBox(fontGroup);
   m_fontSizeInput->setMaximum(30); // 30 is same max as konq config
   m_fontSizeInput->setMinimum(5);
-  m_fontSizeInput->setSuffix(QLatin1String("pt"));
+  m_fontSizeInput->setSuffix(QStringLiteral("pt"));
   fontLayout->addWidget(m_fontSizeInput, row, 1);
   connect(m_fontSizeInput, SIGNAL(valueChanged(int)), SLOT(slotModified()));
   lab->setBuddy(m_fontSizeInput);
@@ -542,21 +542,21 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   QPushButton* b1 = new QPushButton(i18n("Install..."), box1);
   box1HBoxLayout->addWidget(b1);
-  b1->setIcon(QIcon::fromTheme(QLatin1String("list-add")));
+  b1->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
   connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
   QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
   box1HBoxLayout->addWidget(b2);
-  b2->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
+  b2->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
   connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
   QPushButton* b3 = new QPushButton(i18n("Delete..."), box1);
   box1HBoxLayout->addWidget(b3);
-  b3->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
+  b3->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
   connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
   whats = i18n("Click to select and remove installed templates.");
   b3->setWhatsThis(whats);
@@ -590,7 +590,7 @@ void ConfigDialog::setupFetchPage() {
   QFrame* frame = new QFrame(this);
   KPageWidgetItem* page = new KPageWidgetItem(frame, i18n("Data Sources"));
   page->setHeader(i18n("Data Sources Options"));
-  page->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
+  page->setIcon(QIcon::fromTheme(QStringLiteral("network-wired")));
   addPage(page);
 }
 
@@ -612,12 +612,12 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   leftLayout->addWidget(hb);
   m_moveUpSourceBtn = new QPushButton(i18n("Move &Up"), hb);
   hbHBoxLayout->addWidget(m_moveUpSourceBtn);
-  m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-up")));
+  m_moveUpSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
   m_moveUpSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                        "that Tellico uses when entries are automatically updated."));
   m_moveDownSourceBtn = new QPushButton(i18n("Move &Down"), hb);
   hbHBoxLayout->addWidget(m_moveDownSourceBtn);
-  m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("go-down")));
+  m_moveDownSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
   m_moveDownSourceBtn->setWhatsThis(i18n("The order of the data sources sets the order "
                                          "that Tellico uses when entries are automatically updated."));
 
@@ -643,16 +643,16 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   QVBoxLayout* vlay = new QVBoxLayout();
   l->addLayout(vlay);
   QPushButton* newSourceBtn = new QPushButton(i18n("&New..."), frame);
-  newSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("document-new")));
+  newSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   newSourceBtn->setWhatsThis(i18n("Click to add a new data source."));
   m_modifySourceBtn = new QPushButton(i18n("&Modify..."), frame);
-  m_modifySourceBtn->setIcon(QIcon::fromTheme(QLatin1String("network-wired")));
+  m_modifySourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("network-wired")));
   m_modifySourceBtn->setWhatsThis(i18n("Click to modify the selected data source."));
   m_removeSourceBtn = new QPushButton(i18n("&Delete"), frame);
-  m_removeSourceBtn->setIcon(QIcon::fromTheme(QLatin1String("list-remove")));
+  m_removeSourceBtn->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
   m_removeSourceBtn->setWhatsThis(i18n("Click to delete the selected data source."));
   m_newStuffBtn = new QPushButton(i18n("Download..."), frame);
-  m_newStuffBtn->setIcon(QIcon::fromTheme(QLatin1String("get-hot-new-stuff")));
+  m_newStuffBtn->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
   m_newStuffBtn->setWhatsThis(i18n("Click to download additional data sources."));
   // checksum and signature checking are no longer possible with knewstuff2
   // disable button for now
@@ -840,7 +840,7 @@ void ConfigDialog::saveFetchConfig() {
       continue;
     }
     m_newStuffConfigWidgets.removeAll(cw);
-    QString group = QString::fromLatin1("Data Source %1").arg(count);
+    QString group = QStringLiteral("Data Source %1").arg(count);
     // in case we later change the order, clear the group now
     KSharedConfig::openConfig()->deleteGroup(group);
     KConfigGroup configGroup(KSharedConfig::openConfig(), group);
@@ -858,11 +858,11 @@ void ConfigDialog::saveFetchConfig() {
   KConfigGroup sourceGroup(KSharedConfig::openConfig(), "Data Sources");
   sourceGroup.writeEntry("Sources Count", count);
   // and purge old config groups
-  QString group = QString::fromLatin1("Data Source %1").arg(count);
+  QString group = QStringLiteral("Data Source %1").arg(count);
   while(KSharedConfig::openConfig()->hasGroup(group)) {
     KSharedConfig::openConfig()->deleteGroup(group);
     ++count;
-    group = QString::fromLatin1("Data Source %1").arg(count);
+    group = QStringLiteral("Data Source %1").arg(count);
   }
 
   Config::self()->save();
@@ -1022,7 +1022,7 @@ void ConfigDialog::slotSelectedSourceChanged(QListWidgetItem* item_) {
 
 void ConfigDialog::slotNewStuffClicked() {
 #ifdef ENABLE_KNEWSTUFF3
-  KNS3::DownloadDialog dialog(QLatin1String("tellico-script.knsrc"), this);
+  KNS3::DownloadDialog dialog(QStringLiteral("tellico-script.knsrc"), this);
   dialog.exec();
 
   KNS3::Entry::List entries = dialog.installedEntries();
@@ -1080,11 +1080,11 @@ void ConfigDialog::slotShowTemplatePreview() {
     } else if(f->type() == Data::Field::Choice) {
       e->setField(f->name(), f->allowed().front());
     } else if(f->type() == Data::Field::Number) {
-      e->setField(f->name(), QLatin1String("1"));
+      e->setField(f->name(), QStringLiteral("1"));
     } else if(f->type() == Data::Field::Bool) {
-      e->setField(f->name(), QLatin1String("true"));
+      e->setField(f->name(), QStringLiteral("true"));
     } else if(f->type() == Data::Field::Rating) {
-      e->setField(f->name(), QLatin1String("5"));
+      e->setField(f->name(), QStringLiteral("5"));
     } else {
       e->setField(f->name(), f->title());
     }
@@ -1097,7 +1097,7 @@ void ConfigDialog::slotShowTemplatePreview() {
 }
 
 void ConfigDialog::loadTemplateList() {
-  QStringList files = Tellico::locateAllFiles(QLatin1String("tellico/entry-templates/*.xsl"));
+  QStringList files = Tellico::locateAllFiles(QStringLiteral("tellico/entry-templates/*.xsl"));
   QMap<QString, QString> templates; // a QMap will have them values sorted by key
   foreach(const QString& file, files) {
     QFileInfo fi(file);
@@ -1121,7 +1121,7 @@ void ConfigDialog::slotInstallTemplate() {
   filter += i18n("Template Packages") + QLatin1String(" (*.tar.gz *.tgz)") + QLatin1String(";;");
   filter += i18n("All Files") + QLatin1String(" (*)");
 
-  const QString fileClass(QLatin1String(":InstallTemplate"));
+  const QString fileClass(QStringLiteral(":InstallTemplate"));
   const QString f = QFileDialog::getOpenFileName(this, QString(), KRecentDirs::dir(fileClass), filter);
   if(f.isEmpty()) {
     return;
@@ -1135,7 +1135,7 @@ void ConfigDialog::slotInstallTemplate() {
 
 void ConfigDialog::slotDownloadTemplate() {
 #ifdef ENABLE_KNEWSTUFF3
-  KNS3::DownloadDialog dialog(QLatin1String("tellico-template.knsrc"), this);
+  KNS3::DownloadDialog dialog(QStringLiteral("tellico-template.knsrc"), this);
   dialog.exec();
 
   KNS3::Entry::List entries = dialog.installedEntries();

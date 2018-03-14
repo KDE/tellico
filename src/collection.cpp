@@ -40,7 +40,7 @@
 using namespace Tellico;
 using Tellico::Data::Collection;
 
-const QString Collection::s_peopleGroupName = QLatin1String("_people");
+const QString Collection::s_peopleGroupName = QStringLiteral("_people");
 
 Collection::Collection(const QString& title_)
     : QObject(), QSharedData(), m_nextEntryId(1), m_title(title_), m_trackGroups(false) {
@@ -129,7 +129,7 @@ bool Collection::addField(Tellico::Data::FieldPtr field_) {
   if(field_->hasFlag(Field::Derived)) {
     DerivedValue dv(field_);
     if(dv.isRecursive(this)) {
-      field_->setProperty(QLatin1String("template"), QString());
+      field_->setProperty(QStringLiteral("template"), QString());
     }
   }
 
@@ -159,7 +159,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
 
   if(newField_->type() == Field::Table2) {
     newField_->setType(Data::Field::Table);
-    newField_->setProperty(QLatin1String("columns"), QLatin1String("2"));
+    newField_->setProperty(QStringLiteral("columns"), QStringLiteral("2"));
   }
 
   // the original field type is kept
@@ -216,7 +216,7 @@ bool Collection::mergeField(Tellico::Data::FieldPtr newField_) {
     if(propName == QLatin1String("template") && currField->hasFlag(Field::Derived)) {
       DerivedValue dv(currField);
       if(dv.isRecursive(this)) {
-        currField->setProperty(QLatin1String("template"), QString());
+        currField->setProperty(QStringLiteral("template"), QString());
       }
     }
   }
@@ -278,7 +278,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
   if(newField_->hasFlag(Field::Derived)) {
     DerivedValue dv(newField_);
     if(dv.isRecursive(this)) {
-      newField_->setProperty(QLatin1String("template"), QString());
+      newField_->setProperty(QStringLiteral("template"), QString());
     }
   }
 
@@ -355,7 +355,7 @@ bool Collection::modifyField(Tellico::Data::FieldPtr newField_) {
 
   // now to update all entries if the field is a derived value and the template changed
   if(newField_->hasFlag(Field::Derived) &&
-     oldField->property(QLatin1String("template")) != newField_->property(QLatin1String("template"))) {
+     oldField->property(QStringLiteral("template")) != newField_->property(QStringLiteral("template"))) {
     emit signalRefreshField(newField_);
   }
 
@@ -470,11 +470,11 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     }
     m_entryById.insert(entry->id(), entry.data());
 
-    if(hasField(QLatin1String("cdate")) && entry->field(QLatin1String("cdate")).isEmpty()) {
-      entry->setField(QLatin1String("cdate"), QDate::currentDate().toString(Qt::ISODate));
+    if(hasField(QStringLiteral("cdate")) && entry->field(QStringLiteral("cdate")).isEmpty()) {
+      entry->setField(QStringLiteral("cdate"), QDate::currentDate().toString(Qt::ISODate));
     }
-    if(hasField(QLatin1String("mdate")) && entry->field(QLatin1String("mdate")).isEmpty()) {
-      entry->setField(QLatin1String("mdate"), QDate::currentDate().toString(Qt::ISODate));
+    if(hasField(QStringLiteral("mdate")) && entry->field(QStringLiteral("mdate")).isEmpty()) {
+      entry->setField(QStringLiteral("mdate"), QDate::currentDate().toString(Qt::ISODate));
     }
   }
   if(m_trackGroups) {
@@ -860,7 +860,7 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
 
   // start with twice the title score
   // and since the minimum is > 10, then need more than just a perfect title match
-  int res = 2*EntryComparison::score(entry1_, entry2_, QLatin1String("title"), this);
+  int res = 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
   // then add score for each field
   FieldList fields = entry1_->collection()->fields();
   foreach(FieldPtr field, fields) {

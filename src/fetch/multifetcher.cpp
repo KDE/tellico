@@ -153,11 +153,11 @@ Tellico::Data::EntryPtr MultiFetcher::fetchEntryHook(uint uid_) {
 
 Tellico::Fetch::FetchRequest MultiFetcher::updateRequest(Data::EntryPtr entry_) {
 //  myDebug();
-  QString isbn = entry_->field(QLatin1String("isbn"));
+  QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(ISBN, isbn);
   }
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -173,7 +173,7 @@ QString MultiFetcher::defaultName() {
 }
 
 QString MultiFetcher::defaultIcon() {
-  return QLatin1String("folder-favorites");
+  return QStringLiteral("folder-favorites");
 }
 
 Tellico::StringHash MultiFetcher::allOptionalFields() {
@@ -239,7 +239,7 @@ MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
   layout->setMargin(0);
   setLayout(layout);
 
-  QLabel* label = new QLabel(QLatin1String("Data source:"), this);
+  QLabel* label = new QLabel(QStringLiteral("Data source:"), this);
   layout->addWidget(label);
   m_fetcherCombo = new GUI::ComboBox(this);
   layout->addWidget(m_fetcherCombo);

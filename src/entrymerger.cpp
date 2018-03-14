@@ -55,7 +55,8 @@ EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
   QString label = i18n("Merging entries...");
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, label, true /*canCancel*/);
   item.setTotalSteps(m_origCount);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled,
+          this, &Tellico::EntryMerger::slotCancel);
 
   // done if no entries to merge
   if(m_origCount < 2) {

@@ -34,7 +34,7 @@
 
 QTEST_GUILESS_MAIN( BibtexmlTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 
 void BibtexmlTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.bibtexml"));
@@ -68,11 +68,11 @@ void BibtexmlTest::testImport() {
   QCOMPARE(coll2->entryCount(), coll->entryCount());
 
   foreach(Tellico::Data::EntryPtr e1, coll->entries()) {
-    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QLatin1String("bibtex-key")));
+    Tellico::Data::EntryPtr e2 = bColl2->entryByBibtexKey(e1->field(QStringLiteral("bibtex-key")));
     QVERIFY(e2);
     foreach(Tellico::Data::FieldPtr f, coll->fields()) {
       // entry ids will be different
-      if(f->name() != QLatin1String("id")) {
+      if(f->name() != QStringLiteral("id")) {
         QCOMPARE(f->name() + e1->field(f), f->name() + e2->field(f));
       }
     }

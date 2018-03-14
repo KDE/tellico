@@ -84,7 +84,7 @@ public:
   static bool maybeBibtex(const QString& text, const QUrl& url = QUrl());
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private:
   void init();

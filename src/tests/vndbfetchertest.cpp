@@ -44,24 +44,24 @@ void VNDBFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
   Tellico::ImageFactory::init();
 
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("G-senjou no Maou"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2008"));
-//  m_fieldValues.insert(QLatin1String("developer"), QLatin1String("Akabei Soft2"));
-  m_fieldValues.insert(QLatin1String("origtitle"), QString::fromUtf8("G線上の魔王"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("G-senjou no Maou"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2008"));
+//  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Akabei Soft2"));
+  m_fieldValues.insert(QStringLiteral("origtitle"), QStringLiteral("G線上の魔王"));
   // alias value was removed from the vndb data for this item
-//  m_fieldValues.insert(QLatin1String("alias"), QLatin1String("The Devil on G-String"));
+//  m_fieldValues.insert(QStringLiteral("alias"), QStringLiteral("The Devil on G-String"));
 }
 
 void VNDBFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("vndb");
+  QString groupName = QStringLiteral("vndb");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
-                                       QLatin1String("G-senjou no Maou"));
+                                       QStringLiteral("G-senjou no Maou"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::VNDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -76,7 +76,7 @@ void VNDBFetcherTest::testTitle() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

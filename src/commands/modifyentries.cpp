@@ -82,15 +82,17 @@ void ModifyEntries::redo() {
   }
   // loans expose a field named "loaned", and the user might modify that without
   // checking in the loan, so verify that. Heavy-handed, yes...
-  const QString loaned = QLatin1String("loaned");
+  const QString loaned = QStringLiteral("loaned");
   bool hasLoanField = m_coll->hasField(loaned);
   if(hasLoanField && m_modifiedFields.contains(loaned)) {
+    Data::EntryList notLoaned;
     foreach(Data::EntryPtr entry, m_entries) {
       if(entry->field(loaned).isEmpty()) {
-        Data::EntryList notLoaned;
         notLoaned.append(entry);
-        Controller::self()->slotCheckIn(notLoaned);
       }
+    }
+    if(!notLoaned.isEmpty()) {
+      Controller::self()->slotCheckIn(notLoaned);
     }
   }
   m_coll->updateDicts(m_entries, m_modifiedFields);

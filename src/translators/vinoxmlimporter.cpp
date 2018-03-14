@@ -31,7 +31,7 @@
 using Tellico::Import::VinoXMLImporter;
 
 VinoXMLImporter::VinoXMLImporter(const QUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("vinoxml2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("vinoxml2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     QUrl u = QUrl::fromLocalFile(xsltFile);
     XSLTImporter::setXSLTURL(u);

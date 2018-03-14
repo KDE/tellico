@@ -59,8 +59,8 @@ GroupView::GroupView(QWidget* parent_)
   connect(this, &GroupView::doubleClicked, this, &GroupView::slotDoubleClicked);
   connect(header(), &QHeaderView::sortIndicatorChanged, this, &GroupView::slotSortingChanged);
 
-  m_groupOpenIconName = QLatin1String("folder-open");
-  m_groupClosedIconName = QLatin1String("folder");
+  m_groupOpenIconName = QStringLiteral("folder-open");
+  m_groupClosedIconName = QStringLiteral("folder");
   EntryGroupModel* groupModel = new EntryGroupModel(this);
   GroupSortModel* sortModel = new GroupSortModel(this);
   sortModel->setSourceModel(groupModel);
@@ -90,8 +90,8 @@ void GroupView::addCollection(Tellico::Data::CollPtr coll_) {
   // when the coll gets set for the first time, the pixmaps need to be updated
   if((m_coll->hasField(m_groupBy) && m_coll->fieldByName(m_groupBy)->formatType() == FieldFormat::FormatName)
      || m_groupBy == Data::Collection::s_peopleGroupName) {
-    m_groupOpenIconName = QLatin1String(":/icons/person-open");
-    m_groupClosedIconName = QLatin1String(":/icons/person");
+    m_groupOpenIconName = QStringLiteral(":/icons/person-open");
+    m_groupClosedIconName = QStringLiteral(":/icons/person");
   }
 
   updateHeader();
@@ -258,11 +258,11 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
   QMenu menu(this);
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
-    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-down-double")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
                    i18n("Expand All Groups"), this, SLOT(expandAll()));
-    menu.addAction(QIcon::fromTheme(QLatin1String("arrow-up-double")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-up-double")),
                    i18n("Collapse All Groups"), this, SLOT(collapseAll()));
-    menu.addAction(QIcon::fromTheme(QLatin1String("view-filter")),
+    menu.addAction(QIcon::fromTheme(QStringLiteral("view-filter")),
                    i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
   } else {
     Controller::self()->plugEntryActions(&menu);
@@ -294,11 +294,11 @@ void GroupView::setGroupField(const QString& groupField_) {
   }
   if((m_coll->hasField(groupField_) && m_coll->fieldByName(groupField_)->formatType() == Tellico::FieldFormat::FormatName)
      || groupField_ == Tellico::Data::Collection::s_peopleGroupName) {
-    m_groupOpenIconName = QLatin1String(":/icons/person-open");
-    m_groupClosedIconName = QLatin1String(":/icons/person");
+    m_groupOpenIconName = QStringLiteral(":/icons/person-open");
+    m_groupClosedIconName = QStringLiteral(":/icons/person");
   } else {
-    m_groupOpenIconName = QLatin1String("folder-open");
-    m_groupClosedIconName = QLatin1String("folder");
+    m_groupOpenIconName = QStringLiteral("folder-open");
+    m_groupClosedIconName = QStringLiteral("folder");
   }
   updateHeader();
   populateCollection();
@@ -336,7 +336,7 @@ void GroupView::slotFilterGroup() {
         if(group->hasEmptyGroupName()) {
           filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
         } else {
-//          filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncContains));
+          // TODO:: should not hard-code the semi-colon. Use FieldFormat::delimiterString()
           const QString rxPattern(QLatin1String("(^|;\\s)") + group->groupName() + QLatin1String("($|;)"));
           filter->append(new FilterRule(m_groupBy, rxPattern, FilterRule::FuncRegExp));
         }

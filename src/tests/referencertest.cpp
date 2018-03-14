@@ -53,17 +53,17 @@ void ReferencerTest::testImport() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
-  QCOMPARE(coll->title(), QLatin1String("Referencer Import"));
+  QCOMPARE(coll->title(), QStringLiteral("Referencer Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("year"), QLatin1String("2002"));
-  QCOMPARE(entry->field("pages"), QLatin1String("1057-1119"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2002"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("1057-1119"));
   QCOMPARE(FIELDS(entry, "author").count(), 3);
-  QCOMPARE(FIELDS(entry, "author").first(), QLatin1String("Koglin, M."));
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("bibtex-key"), QLatin1String("Koglin2002"));
+  QCOMPARE(FIELDS(entry, "author").first(), QStringLiteral("Koglin, M."));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("bibtex-key"), QStringLiteral("Koglin2002"));
   QCOMPARE(FIELDS(entry, "keyword").count(), 2);
-  QCOMPARE(FIELDS(entry, "keyword").first(), QLatin1String("tag1"));
+  QCOMPARE(FIELDS(entry, "keyword").first(), QStringLiteral("tag1"));
 }

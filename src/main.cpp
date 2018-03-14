@@ -43,13 +43,14 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
   KLocalizedString::setApplicationDomain("tellico");
   app.setApplicationVersion(QStringLiteral(TELLICO_VERSION));
 
   Q_INIT_RESOURCE(icons);
 
   // Migrate KDE4 configuration and data files
-  Kdelibs4ConfigMigrator migrator(QLatin1String("tellico"));
+  Kdelibs4ConfigMigrator migrator(QStringLiteral("tellico"));
   migrator.setConfigFiles(QStringList() << QStringLiteral("tellicorc"));
   migrator.setUiFiles(QStringList() << QStringLiteral("tellicoui.rc"));
 
@@ -65,7 +66,7 @@ int main(int argc, char* argv[]) {
     QString sourceFilePath, targetFilePath;
 
     // first copy tellico-common.xsl if exists
-    QString fileName = QLatin1String("tellico-common.xsl");
+    QString fileName = QStringLiteral("tellico-common.xsl");
     sourceFilePath = sourceBasePath + QLatin1Char('/') + fileName;
     targetFilePath = targetBasePath + QLatin1Char('/') + fileName;
     if(QFile::exists(sourceFilePath) && !QFile::exists(targetFilePath)) {
@@ -116,33 +117,33 @@ int main(int argc, char* argv[]) {
   KCrash::initialize();
 
   // component name = "tellico" is same as bugs.kde.org product name
-  KAboutData aboutData(QLatin1String("tellico"), QLatin1String("Tellico"),
-                       QLatin1String(TELLICO_VERSION), i18n("Tellico - a KDE collection manager"),
+  KAboutData aboutData(QStringLiteral("tellico"), QStringLiteral("Tellico"),
+                       QStringLiteral(TELLICO_VERSION), i18n("Tellico - a KDE collection manager"),
                        KAboutLicense::GPL_V2,
                        i18n("(c) 2001-2018, Robby Stephenson"),
                        QString(),
-                       QLatin1String("http://tellico-project.org"));
-  aboutData.addAuthor(QLatin1String("Robby Stephenson"), QString(), QLatin1String("robby@periapsis.org"));
-  aboutData.addAuthor(QLatin1String("Mathias Monnerville"), i18n("Data source scripts"));
-  aboutData.addAuthor(QLatin1String("Regis Boudin"), QString(), QLatin1String("regis@boudin.name"));
-  aboutData.addAuthor(QString::fromUtf8("Petri Damstén"), QString(), QLatin1String("damu@iki.fi"));
-  aboutData.addAuthor(QLatin1String("Sebastian Held"), QString());
+                       QStringLiteral("http://tellico-project.org"));
+  aboutData.addAuthor(QStringLiteral("Robby Stephenson"), QString(), QStringLiteral("robby@periapsis.org"));
+  aboutData.addAuthor(QStringLiteral("Mathias Monnerville"), i18n("Data source scripts"));
+  aboutData.addAuthor(QStringLiteral("Regis Boudin"), QString(), QStringLiteral("regis@boudin.name"));
+  aboutData.addAuthor(QStringLiteral("Petri Damstén"), QString(), QStringLiteral("damu@iki.fi"));
+  aboutData.addAuthor(QStringLiteral("Sebastian Held"), QString());
 
-  aboutData.addCredit(QLatin1String("Virginie Quesnay"), i18n("Icons"));
-  aboutData.addCredit(QLatin1String("Amarok"), i18n("Code examples and general inspiration"),
-                      QString(), QLatin1String("http://amarok.kde.org"));
-  aboutData.addCredit(QLatin1String("Greg Ward"), i18n("Author of btparse library"));
-  aboutData.addCredit(QLatin1String("Robert Gamble"), i18n("Author of libcsv library"));
-  aboutData.addCredit(QLatin1String("Valentin Lavrinenko"), i18n("Author of rtf2html library"));
+  aboutData.addCredit(QStringLiteral("Virginie Quesnay"), i18n("Icons"));
+  aboutData.addCredit(QStringLiteral("Amarok"), i18n("Code examples and general inspiration"),
+                      QString(), QStringLiteral("http://amarok.kde.org"));
+  aboutData.addCredit(QStringLiteral("Greg Ward"), i18n("Author of btparse library"));
+  aboutData.addCredit(QStringLiteral("Robert Gamble"), i18n("Author of libcsv library"));
+  aboutData.addCredit(QStringLiteral("Valentin Lavrinenko"), i18n("Author of rtf2html library"));
 
   aboutData.addLicense(KAboutLicense::GPL_V3);
 
   QCommandLineParser parser;
-  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("nofile"), i18n("Do not reopen the last open file")));
-  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("bibtex"), i18n("Import <filename> as a bibtex file")));
-  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("mods"), i18n("Import <filename> as a MODS file")));
-  parser.addOption(QCommandLineOption(QStringList() << QLatin1String("ris"), i18n("Import <filename> as a RIS file")));
-  parser.addPositionalArgument(QLatin1String("[filename]"), i18n("File to open"));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("nofile"), i18n("Do not reopen the last open file")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("bibtex"), i18n("Import <filename> as a bibtex file")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("mods"), i18n("Import <filename> as a MODS file")));
+  parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("ris"), i18n("Import <filename> as a RIS file")));
+  parser.addPositionalArgument(QStringLiteral("[filename]"), i18n("File to open"));
 
   aboutData.setupCommandLine(&parser);
 
@@ -163,11 +164,11 @@ int main(int argc, char* argv[]) {
 
     QStringList args = parser.positionalArguments();
     if(args.count() > 0) {
-      if(parser.isSet(QLatin1String("bibtex"))) {
+      if(parser.isSet(QStringLiteral("bibtex"))) {
         tellico->importFile(Tellico::Import::Bibtex, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
-      } else if(parser.isSet(QLatin1String("mods"))) {
+      } else if(parser.isSet(QStringLiteral("mods"))) {
         tellico->importFile(Tellico::Import::MODS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
-      } else if(parser.isSet(QLatin1String("ris"))) {
+      } else if(parser.isSet(QStringLiteral("ris"))) {
         tellico->importFile(Tellico::Import::RIS, QUrl::fromUserInput(args.at(0)), Tellico::Import::Replace);
       } else {
         tellico->slotFileOpen(QUrl::fromUserInput(args.at(0), QDir::currentPath()));
@@ -176,7 +177,7 @@ int main(int argc, char* argv[]) {
       // bit of a hack, I just want the --nofile option
       // if --nofile is NOT passed, then the file option is set
       // is it's set, then go ahead and check for opening previous file
-      tellico->initFileOpen(parser.isSet(QLatin1String("nofile")));
+      tellico->initFileOpen(parser.isSet(QStringLiteral("nofile")));
     }
   }
 

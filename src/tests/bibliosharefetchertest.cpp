@@ -49,7 +49,7 @@ void BiblioShareFetcherTest::initTestCase() {
 
 void BiblioShareFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("0670069035"));
+                                       QStringLiteral("0670069035"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BiblioShareFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -57,19 +57,19 @@ void BiblioShareFetcherTest::testIsbn() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked the Hornet's Nest"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
-  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Girl Who Kicked the Hornet's Nest"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Stieg Larsson"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-670-06903-5"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Viking"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void BiblioShareFetcherTest::testIsbn13() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
-                                       QLatin1String("9780670069033"));
+                                       QStringLiteral("9780670069033"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::BiblioShareFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -77,12 +77,12 @@ void BiblioShareFetcherTest::testIsbn13() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QLatin1String("title")), QLatin1String("The Girl Who Kicked the Hornet's Nest"));
-  QCOMPARE(entry->field(QLatin1String("author")), QLatin1String("Stieg Larsson"));
-  QCOMPARE(entry->field(QLatin1String("binding")), QLatin1String("Hardback"));
-  QCOMPARE(entry->field(QLatin1String("isbn")), QLatin1String("0-670-06903-5"));
-  QCOMPARE(entry->field(QLatin1String("pub_year")), QLatin1String("2010"));
-  QCOMPARE(entry->field(QLatin1String("publisher")), QLatin1String("Viking"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("The Girl Who Kicked the Hornet's Nest"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Stieg Larsson"));
+  QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-670-06903-5"));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Viking"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

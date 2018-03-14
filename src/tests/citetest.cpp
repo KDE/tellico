@@ -38,10 +38,10 @@
 QTEST_MAIN( CiteTest )
 
 void CiteTest::testLyxpipe() {
-  QTemporaryFile tempFile(QLatin1String("citetest.XXXXXX.in"));
+  QTemporaryFile tempFile(QStringLiteral("citetest.XXXXXX.in"));
   QVERIFY(tempFile.open());
   // remove ".in" that gets added by Lyxpipe
-  Tellico::Config::setLyxpipe(tempFile.fileName().remove(QLatin1String(".in")));
+  Tellico::Config::setLyxpipe(tempFile.fileName().remove(QStringLiteral(".in")));
 
   Tellico::Cite::Lyxpipe pipe;
   QVERIFY(!pipe.hasError());
@@ -51,11 +51,11 @@ void CiteTest::testLyxpipe() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
-  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Title 1"));
+  entry1->setField(QStringLiteral("bibtex-key"), QStringLiteral("title1"));
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
-  entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
-  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title2"));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("Title 2"));
+  entry2->setField(QStringLiteral("bibtex-key"), QStringLiteral("title2"));
 
   coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2);
 
@@ -66,11 +66,11 @@ void CiteTest::testLyxpipe() {
   // read and verify file contents
   QTextStream ts(&tempFile);
   QString text = ts.readAll();
-  QCOMPARE(text, QLatin1String("LYXCMD:tellico:citation-insert:title1, title2\n"));
+  QCOMPARE(text, QStringLiteral("LYXCMD:tellico:citation-insert:title1, title2\n"));
 }
 
 void CiteTest::testLyxpipeNotExists() {
-  QTemporaryFile tempFile(QLatin1String("citetest.XXXXXX.in"));
+  QTemporaryFile tempFile(QStringLiteral("citetest.XXXXXX.in"));
   // do not open/create the tempfile
   //QVERIFY(tempFile.open());
 
@@ -78,8 +78,8 @@ void CiteTest::testLyxpipeNotExists() {
 
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
-  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Title 1"));
+  entry1->setField(QStringLiteral("bibtex-key"), QStringLiteral("title1"));
   coll->addEntries(Tellico::Data::EntryList() << entry1);
 
   // cite should fail with an error
@@ -97,11 +97,11 @@ void CiteTest::testClipboard() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
-  entry1->setField(QLatin1String("title"), QLatin1String("Title 1"));
-  entry1->setField(QLatin1String("bibtex-key"), QLatin1String("title1"));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Title 1"));
+  entry1->setField(QStringLiteral("bibtex-key"), QStringLiteral("title1"));
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
-  entry2->setField(QLatin1String("title"), QLatin1String("Title 2"));
-  entry2->setField(QLatin1String("bibtex-key"), QLatin1String("title2"));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("Title 2"));
+  entry2->setField(QStringLiteral("bibtex-key"), QStringLiteral("title2"));
 
   coll->addEntries(Tellico::Data::EntryList() << entry1 << entry2);
 
@@ -110,5 +110,5 @@ void CiteTest::testClipboard() {
   QVERIFY(clip.errorString().isEmpty());
 
   // read and verify clipboard contents
-  QCOMPARE(QApplication::clipboard()->text(), QLatin1String("\\cite{title1, title2}"));
+  QCOMPARE(QApplication::clipboard()->text(), QStringLiteral("\\cite{title1, title2}"));
 }

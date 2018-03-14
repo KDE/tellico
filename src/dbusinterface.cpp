@@ -37,7 +37,7 @@ using Tellico::ApplicationInterface;
 using Tellico::CollectionInterface;
 
 ApplicationInterface::ApplicationInterface(Tellico::MainWindow* parent_) : QObject(parent_), m_mainWindow(parent_) {
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/Tellico"), this, QDBusConnection::ExportScriptableSlots);
+  QDBusConnection::sessionBus().registerObject(QStringLiteral("/Tellico"), this, QDBusConnection::ExportScriptableSlots);
 }
 
 Tellico::Import::Action ApplicationInterface::actionType(const QString& actionName) {
@@ -67,11 +67,11 @@ QList<int> ApplicationInterface::filteredEntries() const {
 }
 
 void ApplicationInterface::openFile(const QString& file) {
-  return m_mainWindow->openFile(file);
+  m_mainWindow->openFile(file);
 }
 
 void ApplicationInterface::setFilter(const QString& text) {
-  return m_mainWindow->setFilter(text);
+  m_mainWindow->setFilter(text);
 }
 
 bool ApplicationInterface::showEntry(int id)  {
@@ -87,7 +87,7 @@ bool ApplicationInterface::exportCollection(Tellico::Export::Format format, cons
 }
 
 CollectionInterface::CollectionInterface(QObject* parent_) : QObject(parent_) {
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/Collections"), this, QDBusConnection::ExportScriptableSlots);
+  QDBusConnection::sessionBus().registerObject(QStringLiteral("/Collections"), this, QDBusConnection::ExportScriptableSlots);
 }
 
 int CollectionInterface::addEntry() {

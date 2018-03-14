@@ -79,6 +79,10 @@ IF( Poppler_Qt5_FOUND )
   TARGET_LINK_LIBRARIES(translators Poppler::Qt5)
 ENDIF( Poppler_Qt5_FOUND )
 
+IF( KF5FileMetaData_FOUND )
+  TARGET_LINK_LIBRARIES(translators KF5::FileMetaData)
+ENDIF( KF5FileMetaData_FOUND )
+
 IF( Exempi_FOUND )
   TARGET_LINK_LIBRARIES(translators ${Exempi_LIBRARIES})
 ENDIF( Exempi_FOUND )
@@ -90,10 +94,6 @@ ENDIF( TAGLIB_FOUND )
 IF( CDIO_FOUND )
   TARGET_LINK_LIBRARIES(translators ${CDIO_LIBRARIES})
 ENDIF( CDIO_FOUND )
-
-IF( KF5FileMetaData_FOUND )
-  TARGET_LINK_LIBRARIES(translators KF5::FileMetaData)
-ENDIF( KF5FileMetaData_FOUND )
 
 ADD_DEPENDENCIES(translators tellico_config)
 

@@ -105,12 +105,12 @@ void OMDBFetcher::continueSearch() {
 
   QUrl u(QString::fromLatin1(OMDB_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("apikey"), m_apiKey);
+  q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("type"), QLatin1String("movie"));
-      q.addQueryItem(QLatin1String("r"), QLatin1String("json"));
-      q.addQueryItem(QLatin1String("s"), request().value);
+      q.addQueryItem(QStringLiteral("type"), QStringLiteral("movie"));
+      q.addQueryItem(QStringLiteral("r"), QStringLiteral("json"));
+      q.addQueryItem(QStringLiteral("s"), request().value);
       break;
 
     default:
@@ -144,15 +144,15 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  QString id = entry->field(QLatin1String("imdb-id"));
+  QString id = entry->field(QStringLiteral("imdb-id"));
   if(!id.isEmpty()) {
     // quiet
     QUrl u(QString::fromLatin1(OMDB_API_URL));
     QUrlQuery q;
-    q.addQueryItem(QLatin1String("type"), QLatin1String("movie"));
-    q.addQueryItem(QLatin1String("r"), QLatin1String("json"));
-    q.addQueryItem(QLatin1String("i"), id);
-    q.addQueryItem(QLatin1String("apikey"), m_apiKey);
+    q.addQueryItem(QStringLiteral("type"), QStringLiteral("movie"));
+    q.addQueryItem(QStringLiteral("r"), QStringLiteral("json"));
+    q.addQueryItem(QStringLiteral("i"), id);
+    q.addQueryItem(QStringLiteral("apikey"), m_apiKey);
     u.setQuery(q);
     QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
@@ -170,24 +170,24 @@ Tellico::Data::EntryPtr OMDBFetcher::fetchEntryHook(uint uid_) {
   }
 
   // image might still be a URL
-  const QString image_id = entry->field(QLatin1String("cover"));
+  const QString image_id = entry->field(QStringLiteral("cover"));
   if(image_id.contains(QLatin1Char('/'))) {
     const QString id = ImageFactory::addImage(QUrl::fromUserInput(image_id), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QLatin1String("cover"), id);
+    entry->setField(QStringLiteral("cover"), id);
   }
 
   // don't want to include IMDb ID field
-  entry->setField(QLatin1String("imdb-id"), QString());
+  entry->setField(QStringLiteral("imdb-id"), QString());
 
   return entry;
 }
 
 Tellico::Fetch::FetchRequest OMDBFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -226,7 +226,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
   Data::CollPtr coll(new Data::VideoCollection(true));
   // always add the imdb-id for fetchEntryHook
-  Data::FieldPtr field(new Data::Field(QLatin1String("imdb-id"), QLatin1String("IMDb ID"), Data::Field::Line));
+  Data::FieldPtr field(new Data::Field(QStringLiteral("imdb-id"), QStringLiteral("IMDb ID"), Data::Field::Line));
   field->setCategory(i18n("General"));
   coll->addField(field);
 
@@ -251,14 +251,14 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap result = doc.object().toVariantMap();
 
-  const bool response = result.value(QLatin1String("Response")).toBool();
+  const bool response = result.value(QStringLiteral("Response")).toBool();
   if(!response) {
-    message(result.value(QLatin1String("Error")).toString(), MessageHandler::Error);
+    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
     stop();
     return;
   }
 
-  QVariantList resultList = result.value(QLatin1String("Search")).toList();
+  QVariantList resultList = result.value(QStringLiteral("Search")).toList();
   if(resultList.isEmpty()) {
     myDebug() << "no results";
     stop();
@@ -285,62 +285,62 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 }
 
 void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_, bool fullData_) {
-  entry_->setField(QLatin1String("imdb-id"), mapValue(resultMap_, "imdbID"));
-  entry_->setField(QLatin1String("title"), mapValue(resultMap_, "Title"));
-  entry_->setField(QLatin1String("year"),  mapValue(resultMap_, "Year"));
+  entry_->setField(QStringLiteral("imdb-id"), mapValue(resultMap_, "imdbID"));
+  entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "Title"));
+  entry_->setField(QStringLiteral("year"),  mapValue(resultMap_, "Year"));
 
   if(!fullData_) {
     return;
   }
 
   const QString cert = mapValue(resultMap_, "Rated");
-  Data::FieldPtr certField = entry_->collection()->fieldByName(QLatin1String("certification"));
+  Data::FieldPtr certField = entry_->collection()->fieldByName(QStringLiteral("certification"));
   if(certField) {
     foreach(const QString& value, certField->allowed()) {
       if(value.startsWith(cert)) {
-        entry_->setField(QLatin1String("certification"), value);
+        entry_->setField(QStringLiteral("certification"), value);
         break;
       }
     }
   }
-  entry_->setField(QLatin1String("running-time"), mapValue(resultMap_, "Runtime")
+  entry_->setField(QStringLiteral("running-time"), mapValue(resultMap_, "Runtime")
                                                   .remove(QRegExp(QLatin1String("[^\\d]"))));
 
-  const QStringList genres = mapValue(resultMap_, "Genre").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("genre"), genres.join(FieldFormat::delimiterString()));
+  const QStringList genres = mapValue(resultMap_, "Genre").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
-  const QStringList directors = mapValue(resultMap_, "Director").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
+  const QStringList directors = mapValue(resultMap_, "Director").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
 
-  QStringList writers = mapValue(resultMap_, "Writer").split(QLatin1String(", "));
+  QStringList writers = mapValue(resultMap_, "Writer").split(QStringLiteral(", "));
   // some wrtiers have parentheticals, remove those
-  entry_->setField(QLatin1String("writer"), writers
+  entry_->setField(QStringLiteral("writer"), writers
                                            .replaceInStrings(QRegExp(QLatin1String("\\s*\\(.+\\)\\s*")), QString())
                                            .join(FieldFormat::delimiterString()));
 
-  const QStringList producers = mapValue(resultMap_, "Producer").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("producer"), producers.join(FieldFormat::delimiterString()));
+  const QStringList producers = mapValue(resultMap_, "Producer").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("producer"), producers.join(FieldFormat::delimiterString()));
 
-  const QStringList actors = mapValue(resultMap_, "Actors").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("cast"), actors.join(FieldFormat::rowDelimiterString()));
+  const QStringList actors = mapValue(resultMap_, "Actors").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  const QStringList countries = mapValue(resultMap_, "Country").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("nationality"), countries.join(FieldFormat::delimiterString()));
+  const QStringList countries = mapValue(resultMap_, "Country").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("nationality"), countries.join(FieldFormat::delimiterString()));
 
-  const QStringList langs = mapValue(resultMap_, "Language").split(QLatin1String(", "));
-  entry_->setField(QLatin1String("language"), langs.join(FieldFormat::delimiterString()));
+  const QStringList langs = mapValue(resultMap_, "Language").split(QStringLiteral(", "));
+  entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
 
-  entry_->setField(QLatin1String("cover"), mapValue(resultMap_, "Poster"));
-  entry_->setField(QLatin1String("plot"), mapValue(resultMap_, "Plot"));
+  entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "Poster"));
+  entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "Plot"));
 
   if(optionalFields().contains(QLatin1String("imdb"))) {
-    if(!entry_->collection()->hasField(QLatin1String("imdb"))) {
-      Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
+    if(!entry_->collection()->hasField(QStringLiteral("imdb"))) {
+      Data::FieldPtr field(new Data::Field(QStringLiteral("imdb"), i18n("IMDb Link"), Data::Field::URL));
       field->setCategory(i18n("General"));
       entry_->collection()->addField(field);
     }
-    entry_->setField(QLatin1String("imdb"), QLatin1String("http://www.imdb.com/title/")
-                                          + entry_->field(QLatin1String("imdb-id"))
+    entry_->setField(QStringLiteral("imdb"), QLatin1String("http://www.imdb.com/title/")
+                                          + entry_->field(QStringLiteral("imdb-id"))
                                           + QLatin1Char('/'));
   }
 
@@ -351,7 +351,7 @@ Tellico::Fetch::ConfigWidget* OMDBFetcher::configWidget(QWidget* parent_) const 
 }
 
 QString OMDBFetcher::defaultName() {
-  return QLatin1String("The Open Movie Database");
+  return QStringLiteral("The Open Movie Database");
 }
 
 QString OMDBFetcher::defaultIcon() {
@@ -360,7 +360,7 @@ QString OMDBFetcher::defaultIcon() {
 
 Tellico::StringHash OMDBFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("imdb")] = i18n("IMDb Link");
+  hash[QStringLiteral("imdb")] = i18n("IMDb Link");
   return hash;
 }
 

@@ -49,7 +49,7 @@ QString Tellico::decodeHTML(const QString& text) {
 QString Tellico::uid(int l, bool prefix) {
   QString uid;
   if(prefix) {
-    uid = QLatin1String("Tellico");
+    uid = QStringLiteral("Tellico");
   }
   uid.append(KRandom::randomString(qMax(l - uid.length(), 0)));
   return uid;
@@ -78,7 +78,7 @@ uint Tellico::toUInt(const QString& s, bool* ok) {
 
 QString Tellico::i18nReplace(QString text) {
   // Because QDomDocument sticks in random newlines, go ahead and grab them too
-  static QRegularExpression rx(QLatin1String("(?:\\n+ *)*<i18n>(.*?)</i18n>(?: *\\n+)*"),
+  static QRegularExpression rx(QStringLiteral("(?:\\n+ *)*<i18n>(.*?)</i18n>(?: *\\n+)*"),
                                QRegularExpression::OptimizeOnFirstUsageOption);
   QRegularExpressionMatch match = rx.match(text);
   while(match.hasMatch()) {
@@ -135,7 +135,7 @@ QString Tellico::removeAccents(const QString& value_) {
   }
   static QRegularExpression rx;
   if(rx.pattern().isEmpty()) {
-    QString pattern(QLatin1String("(?:"));
+    QString pattern(QStringLiteral("(?:"));
     for(int i = 0x0300; i <= 0x036F; ++i) {
       pattern += QChar(i) + QLatin1Char('|');
     }
@@ -160,7 +160,7 @@ QString Tellico::mapValue(const QVariantMap& map, const char* name) {
     return v.toStringList().join(FieldFormat::delimiterString());
   } else if(v.canConvert(QVariant::Map)) {
     // FilmasterFetcher, OpenLibraryFetcher and VNDBFetcher depend on the default "value" field
-    return v.toMap().value(QLatin1String("value")).toString();
+    return v.toMap().value(QStringLiteral("value")).toString();
   } else {
     return QString();
   }

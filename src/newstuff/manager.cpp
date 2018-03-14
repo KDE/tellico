@@ -64,13 +64,13 @@ Q_GLOBAL_STATIC(Tellico::NewStuff::ManagerSingleton, s_instance)
 using Tellico::NewStuff::Manager;
 
 Manager::Manager(QObject* parent_) : QObject(parent_) {
-  QDBusConnection::sessionBus().registerService(QLatin1String("org.kde.tellico"));
+  QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.tellico"));
   new NewstuffAdaptor(this);
-  QDBusConnection::sessionBus().registerObject(QLatin1String("/NewStuff"), this);
+  QDBusConnection::sessionBus().registerObject(QStringLiteral("/NewStuff"), this);
 }
 
 Manager::~Manager() {
-  QDBusConnection::sessionBus().unregisterService(QLatin1String("org.kde.tellico"));
+  QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.kde.tellico"));
 }
 
 Manager* Manager::self() {
@@ -93,7 +93,7 @@ bool Manager::installTemplate(const QString& file_) {
   KTar archive(file_);
   if(archive.open(QIODevice::ReadOnly)) {
     const KArchiveDirectory* archiveDir = archive.directory();
-    archiveDir->copyTo(Tellico::saveLocation(QLatin1String("entry-templates/")));
+    archiveDir->copyTo(Tellico::saveLocation(QStringLiteral("entry-templates/")));
 
     allFiles = archiveFiles(archiveDir);
     // remember files installed for template
@@ -104,7 +104,7 @@ bool Manager::installTemplate(const QString& file_) {
       name += QLatin1String(".xsl");
     }
     name.remove(QRegExp(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
-    name = Tellico::saveLocation(QLatin1String("entry-templates/")) + name;
+    name = Tellico::saveLocation(QStringLiteral("entry-templates/")) + name;
     // Should overwrite since we might be upgrading
     if(QFile::exists(name)) {
       QFile::remove(name);
@@ -128,8 +128,8 @@ bool Manager::installTemplate(const QString& file_) {
 }
 
 QMap<QString, QString> Manager::userTemplates() {
-  QDir dir(Tellico::saveLocation(QLatin1String("entry-templates/")));
-  dir.setNameFilters(QStringList() << QLatin1String("*.xsl"));
+  QDir dir(Tellico::saveLocation(QStringLiteral("entry-templates/")));
+  dir.setNameFilters(QStringList() << QStringLiteral("*.xsl"));
   dir.setFilter(QDir::Files | QDir::Writable);
   QStringList files = dir.entryList();
   QMap<QString, QString> nameFileMap;
@@ -155,7 +155,7 @@ bool Manager::removeTemplateByName(const QString& name_) {
       return removeTemplate(file, true);
     }
     // At least remove xsl file
-    QFile::remove(Tellico::saveLocation(QLatin1String("entry-templates/")) + xslFile);
+    QFile::remove(Tellico::saveLocation(QStringLiteral("entry-templates/")) + xslFile);
     return true;
   }
   return false;
@@ -176,7 +176,7 @@ bool Manager::removeTemplate(const QString& file_, bool manual_) {
   }
 
   bool success = true;
-  QString path = Tellico::saveLocation(QLatin1String("entry-templates/"));
+  QString path = Tellico::saveLocation(QStringLiteral("entry-templates/"));
   foreach(const QString& file, files) {
     if(file.endsWith(QDir::separator())) {
       // ok to not delete all directories
@@ -238,7 +238,7 @@ bool Manager::installScript(const QString& file_) {
   QString realFile = file_;
 
   KTar archive(file_);
-  QString copyTarget = Tellico::saveLocation(QLatin1String("data-sources/"));
+  QString copyTarget = Tellico::saveLocation(QStringLiteral("data-sources/"));
   QString scriptFolder;
   QString exeFile;
   QString sourceName;
@@ -315,11 +315,11 @@ bool Manager::installScript(const QString& file_) {
   //  myDebug() << "sourceExec = " << info->sourceExec;
   //  myDebug() << "sourceName = " << info->sourceName;
   //  myDebug() << "specFile = " << info->specFile;
-  KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
+  KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
   int nSources = configGroup.readEntry("Sources Count", 0);
   config.writeEntry(file_ + QLatin1String("_nbr"), nSources);
   configGroup.writeEntry("Sources Count", nSources + 1);
-  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(nSources));
+  KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(nSources));
   sourceGroup.writeEntry("Name", sourceName);
   sourceGroup.writeEntry("ExecPath", sourceExec);
   sourceGroup.writeEntry("DeleteOnRemove", true);
@@ -358,10 +358,10 @@ bool Manager::removeScript(const QString& file_, bool manual_) {
     KIO::del(QUrl::fromLocalFile(scriptFolder));
   }
   if(source != -1) {
-    KConfigGroup configGroup(KSharedConfig::openConfig(), QLatin1String("Data Sources"));
+    KConfigGroup configGroup(KSharedConfig::openConfig(), QStringLiteral("Data Sources"));
     int nSources = configGroup.readEntry("Sources Count", 0);
     configGroup.writeEntry("Sources Count", nSources - 1);
-    KConfigGroup sourceGroup(KSharedConfig::openConfig(), QString::fromLatin1("Data Source %1").arg(source));
+    KConfigGroup sourceGroup(KSharedConfig::openConfig(), QStringLiteral("Data Source %1").arg(source));
     sourceGroup.deleteGroup();
   }
   // remove config entries even if unsuccessful

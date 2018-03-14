@@ -100,7 +100,7 @@ const QIcon& EntryIconModel::defaultIcon(Data::CollPtr coll_) const {
   QIcon tmpIcon = QIcon(QLatin1String(":/icons/nocover_") + CollectionFactory::typeName(coll_->type()));
   if(tmpIcon.isNull()) {
     myLog() << "null nocover image, loading tellico.png";
-    tmpIcon = QIcon::fromTheme(QLatin1String("tellico"), QIcon(QLatin1String(":/icons/tellico")));
+    tmpIcon = QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QLatin1String(":/icons/tellico")));
   }
 
   icon = new QIcon(tmpIcon);

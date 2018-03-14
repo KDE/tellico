@@ -49,6 +49,7 @@ void RemoveLoans::redo() {
 
   // not all of the loans might be in the calendar
   Data::LoanList calLoans;
+  Data::EntryList modifiedEntries;
   // remove the loans from the borrowers
   foreach(Data::LoanPtr loan, m_loans) {
     if(loan->inCalendar()) {
@@ -56,10 +57,8 @@ void RemoveLoans::redo() {
     }
     loan->borrower()->removeLoan(loan);
     Data::Document::self()->checkInEntry(loan->entry());
-    Data::EntryList vec;
-    vec.append(loan->entry());
+    modifiedEntries.append(loan->entry());
     Controller::self()->modifiedBorrower(loan->borrower());
-    Controller::self()->modifiedEntries(vec);
   }
   if(!calLoans.isEmpty()) {
     myWarning() << "Add to calendar not implemented";
@@ -73,6 +72,7 @@ void RemoveLoans::undo() {
 
   // not all of the loans might be in the calendar
   Data::LoanList calLoans;
+  Data::EntryList modifiedEntries;
   foreach(Data::LoanPtr loan, m_loans) {
     if(loan->inCalendar()) {
       calLoans.append(loan);
@@ -82,14 +82,15 @@ void RemoveLoans::undo() {
     const bool emptyBorrower = loan->borrower()->isEmpty();
     loan->borrower()->addLoan(loan);
     Data::Document::self()->checkOutEntry(loan->entry());
-    Data::EntryList vec;
-    vec.append(loan->entry());
-    Controller::self()->modifiedEntries(vec);
+    modifiedEntries.append(loan->entry());
     if(emptyBorrower) {
       Controller::self()->addedBorrower(loan->borrower());
     } else {
       Controller::self()->modifiedBorrower(loan->borrower());
     }
+  }
+  if(!modifiedEntries.isEmpty()) {
+    Controller::self()->modifiedEntries(modifiedEntries);
   }
   if(!calLoans.isEmpty()) {
     myWarning() << "Add to calendar not implemented";

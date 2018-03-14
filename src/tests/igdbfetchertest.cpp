@@ -48,14 +48,14 @@ void IGDBFetcherTest::initTestCase() {
 }
 
 void IGDBFetcherTest::testKeyword() {
-  const QString groupName = QLatin1String("IGDB");
+  const QString groupName = QStringLiteral("IGDB");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with IGDB settings.", SkipAll);
   }
   KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QLatin1String("Zelda Twilight Princess Wii"));
+                                       QStringLiteral("Zelda Twilight Princess GameCube"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IGDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -65,16 +65,16 @@ void IGDBFetcherTest::testKeyword() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("The Legend of Zelda: Twilight Princess"));
-  QCOMPARE(entry->field("year"), QLatin1String("2006"));
-  QCOMPARE(entry->field("platform"), QLatin1String("Nintendo Wii"));
-  QCOMPARE(entry->field("certification"), QLatin1String("Teen"));
-  QCOMPARE(entry->field("pegi"), QLatin1String("PEGI 12"));
-  QCOMPARE(entry->field("genre"), QLatin1String("Platform; Puzzle; Role-playing (RPG); Sport; Adventure"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Nintendo"));
-  QCOMPARE(entry->field("developer"), QLatin1String("Nintendo EAD Group No. 3"));
-  QCOMPARE(entry->field("igdb"), QLatin1String("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess"));
-  QVERIFY(!entry->field(QLatin1String("description")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
+  QCOMPARE(entry->field("platform"), QStringLiteral("GameCube"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
+  QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Platform; Puzzle; Role-playing (RPG); Sport; Adventure"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo"));
+  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD Group No. 3"));
+  QCOMPARE(entry->field("igdb"), QStringLiteral("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess"));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

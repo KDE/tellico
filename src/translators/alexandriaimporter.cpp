@@ -70,15 +70,15 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
 
   m_coll = new Data::BookCollection(true);
 
-  const QString author = QLatin1String("author");
-  const QString year = QLatin1String("pub_year");
-  const QString binding = QLatin1String("binding");
-  const QString isbn = QLatin1String("isbn");
-  const QString cover = QLatin1String("cover");
-  const QString comments = QLatin1String("comments");
+  const QString author = QStringLiteral("author");
+  const QString year = QStringLiteral("pub_year");
+  const QString binding = QStringLiteral("binding");
+  const QString isbn = QStringLiteral("isbn");
+  const QString cover = QStringLiteral("cover");
+  const QString comments = QStringLiteral("comments");
 
   // start with yaml files
-  dataDir.setNameFilters(QStringList() << QLatin1String("*.yaml"));
+  dataDir.setNameFilters(QStringList() << QStringLiteral("*.yaml"));
   const QStringList files = dataDir.entryList();
   const uint numFiles = files.count();
   const uint stepSize = qMax(s_stepSize, numFiles/100);
@@ -87,9 +87,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
   emit signalTotalSteps(this, numFiles);
 
   QStringList covers;
-  covers << QLatin1String(".cover")
-         << QLatin1String("_medium.jpg")
-         << QLatin1String("_small.jpg");
+  covers << QStringLiteral(".cover")
+         << QStringLiteral("_medium.jpg")
+         << QStringLiteral("_small.jpg");
 
   QTextStream ts;
   ts.setCodec("UTF-8"); // YAML is always utf8?
@@ -133,7 +133,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       }
 
       if(alexField == QLatin1String("redd"))  {
-        alexField = QLatin1String("read");
+        alexField = QStringLiteral("read");
       }
 
       if(alexField == QLatin1String("authors")) {
@@ -185,7 +185,7 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
           if(line.indexOf(spaces) > -1) {
             alexValue.clear();
             int spaceCount = spaces.matchedLength();
-            QRegExp begin(QString::fromLatin1("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
+            QRegExp begin(QStringLiteral("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
             while(!line.isNull() && line.indexOf(begin) > -1) {
               line.remove(begin);
               alexValue += clean(line) + QLatin1Char('\n');
@@ -240,7 +240,7 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
   hlay->addWidget(m_library);
 
   // .alexandria might not exist
-  if(m_libraryDir.cd(QLatin1String(".alexandria"))) {
+  if(m_libraryDir.cd(QStringLiteral(".alexandria"))) {
     m_library->addItems(m_libraryDir.entryList());
   }
 
@@ -255,7 +255,7 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
 
 QString& AlexandriaImporter::cleanLine(QString& str_) {
   static QRegExp escRx(QLatin1String("\\\\x(\\w\\w)"), Qt::CaseInsensitive);
-  str_.remove(QLatin1String("\\r"));
+  str_.remove(QStringLiteral("\\r"));
   str_.replace(QLatin1String("\\n"), QLatin1String("\n"));
   str_.replace(QLatin1String("\\t"), QLatin1String("\t"));
 
@@ -290,7 +290,7 @@ QString& AlexandriaImporter::clean(QString& str_) {
   }
   // we ignore YAML tags, this is not actually a good parser, but will do for now
   str_.remove(QRegExp(QLatin1String("^![^\\s]*\\s+")));
-  return str_.replace(quote, QLatin1String("\""));
+  return str_.replace(quote, QStringLiteral("\""));
 }
 
 void AlexandriaImporter::slotCancel() {

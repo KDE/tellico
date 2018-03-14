@@ -44,34 +44,34 @@ void CiwTest::testImport() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 6);
-  QCOMPARE(coll->title(), QLatin1String("Bibliography"));
+  QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(3);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("title"), QLatin1String("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
                                                 "Bioreactor Batch Cultures of an Engineered Saccharomyces cerevisiae Strain"));
-  QCOMPARE(entry->field("year"), QLatin1String("2010"));
-  QCOMPARE(entry->field("pages"), QLatin1String("744-750"));
-  QCOMPARE(entry->field("volume"), QLatin1String("76"));
-  QCOMPARE(entry->field("journal"), QLatin1String("APPLIED AND ENVIRONMENTAL MICROBIOLOGY"));
-  QCOMPARE(entry->field("doi"), QLatin1String("10.1128/AEM.02396-09"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2010"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("744-750"));
+  QCOMPARE(entry->field("volume"), QStringLiteral("76"));
+  QCOMPARE(entry->field("journal"), QStringLiteral("APPLIED AND ENVIRONMENTAL MICROBIOLOGY"));
+  QCOMPARE(entry->field("doi"), QStringLiteral("10.1128/AEM.02396-09"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 5);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("Zelle, Rintze M."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("Zelle, Rintze M."));
   QVERIFY(!entry->field("abstract").isEmpty());
 
   entry = coll->entryById(6);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QLatin1String("article"));
-  QCOMPARE(entry->field("title"), QLatin1String("Prematurity: An Overview and Public Health Implications"));
-  QCOMPARE(entry->field("booktitle"), QLatin1String("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("978-0-8243-2732-3"));
+  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Prematurity: An Overview and Public Health Implications"));
+  QCOMPARE(entry->field("booktitle"), QStringLiteral("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("978-0-8243-2732-3"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 4);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QLatin1String("McCormick, Marie C."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("McCormick, Marie C."));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("editor")).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("editor")).first(), QLatin1String("Fielding, JE"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("editor")).first(), QStringLiteral("Fielding, JE"));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QLatin1String("entry-type"));
+  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QStringLiteral("entry-type"));
 }

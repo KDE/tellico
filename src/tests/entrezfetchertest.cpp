@@ -46,28 +46,28 @@ void EntrezFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/pubmed2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
-  m_fieldValues.insert(QLatin1String("doi"), QLatin1String("10.1016/j.tcb.2013.03.001"));
-  m_fieldValues.insert(QLatin1String("pmid"), QLatin1String("23597843"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Stem cell competition: finding balance in the niche."));
-  m_fieldValues.insert(QLatin1String("author"), QString::fromUtf8("Rachel R Stine; Erika L Matunis"));
-//  m_fieldValues.insert(QLatin1String("volume"), QLatin1String("85"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Trends in cell biology"));
-//  m_fieldValues.insert(QLatin1String("publisher"), QLatin1String("Springer"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2013"));
-  m_fieldValues.insert(QLatin1String("month"), QLatin1String("8"));
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
+  m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.1016/j.tcb.2013.03.001"));
+  m_fieldValues.insert(QStringLiteral("pmid"), QStringLiteral("23597843"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Stem cell competition: finding balance in the niche."));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Rachel R Stine; Erika L Matunis"));
+//  m_fieldValues.insert(QStringLiteral("volume"), QStringLiteral("85"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("Trends in cell biology"));
+//  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Springer"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2013"));
+  m_fieldValues.insert(QStringLiteral("month"), QStringLiteral("8"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
 }
 
 void EntrezFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("entrez");
+  QString groupName = QStringLiteral("entrez");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       m_fieldValues.value("title"));
+                                       m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -81,12 +81,12 @@ void EntrezFetcherTest::testTitle() {
     i.next();
     QCOMPARE(entry->field(i.key()), i.value());
   }
-  QVERIFY(entry->field(QLatin1String("abstract")).contains(QLatin1String("Drosophila")));
+  QVERIFY(entry->field(QStringLiteral("abstract")).contains(QStringLiteral("Drosophila")));
 }
 
 void EntrezFetcherTest::testAuthor() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Person,
-                                       QLatin1String("Rachel R Stine"));
+                                       QStringLiteral("Rachel R Stine"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -96,7 +96,7 @@ void EntrezFetcherTest::testAuthor() {
 
 void EntrezFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Keyword,
-                                       QLatin1String("Drosophila"));
+                                       QStringLiteral("Drosophila"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
 
   // fetcher defaults to 25 at a time, ask for 26 to check search continue
@@ -114,7 +114,7 @@ void EntrezFetcherTest::testKeyword() {
 
 void EntrezFetcherTest::testPMID() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::PubmedID,
-                                       m_fieldValues.value("pmid"));
+                                       m_fieldValues.value(QStringLiteral("pmid")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
 
   // there are several results for the same ISBN here
@@ -125,14 +125,14 @@ void EntrezFetcherTest::testPMID() {
 
 void EntrezFetcherTest::testDOI() {
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QLatin1String("entrez");
+  QString groupName = QStringLiteral("entrez");
   if(!config.hasGroup(groupName)) {
     QSKIP("This test requires a config file.", SkipAll);
   }
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
-                                       m_fieldValues.value("doi"));
+                                       m_fieldValues.value(QStringLiteral("doi")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::EntrezFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -146,5 +146,5 @@ void EntrezFetcherTest::testDOI() {
     i.next();
     QCOMPARE(entry->field(i.key()), i.value());
   }
-  QVERIFY(entry->field(QLatin1String("abstract")).contains(QLatin1String("Drosophila")));
+  QVERIFY(entry->field(QStringLiteral("abstract")).contains(QStringLiteral("Drosophila")));
 }

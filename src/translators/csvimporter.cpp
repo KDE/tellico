@@ -60,7 +60,7 @@ using Tellico::Import::CSVImporter;
 CSVImporter::CSVImporter(const QUrl& url_) : Tellico::Import::TextImporter(url_),
     m_existingCollection(nullptr),
     m_firstRowHeader(false),
-    m_delimiter(QLatin1String(",")),
+    m_delimiter(QStringLiteral(",")),
     m_cancelled(false),
     m_widget(nullptr),
     m_comboColl(nullptr),
@@ -100,7 +100,9 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   const QStringList existingNames = m_coll->fieldNames();
 
   QList<int> cols;
+  cols.reserve(m_table->columnCount());
   QStringList names;
+  names.reserve(m_table->columnCount());
   for(int col = 0; col < m_table->columnCount(); ++col) {
     QString t = m_table->horizontalHeaderItem(col)->text();
     if(m_coll->fieldByTitle(t)) {
@@ -188,7 +190,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
   }
 
   {
-    KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
+    KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - CSV"));
     config.writeEntry("Delimiter", m_delimiter);
     config.writeEntry("ColumnDelimiter", m_colDelimiter);
     config.writeEntry("RowDelimiter", m_rowDelimiter);
@@ -345,14 +347,14 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_setColumnBtn = new QPushButton(i18n("&Assign Field"), groupBox);
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
-  m_setColumnBtn->setIcon(QIcon::fromTheme(QLatin1String("dialog-ok-apply")));
+  m_setColumnBtn->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")));
   connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
 //  hlay3->addStretch(10);
 
   l->addWidget(groupBox);
   l->addStretch(1);
 
-  KConfigGroup config(KSharedConfig::openConfig(), QLatin1String("ImportOptions - CSV"));
+  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - CSV"));
   m_delimiter = config.readEntry("Delimiter", m_delimiter);
   m_colDelimiter = config.readEntry("ColumnDelimiter", m_colDelimiter);
   m_rowDelimiter = config.readEntry("RowDelimiter", m_rowDelimiter);
@@ -455,11 +457,11 @@ void CSVImporter::slotFirstRowHeader(bool b_) {
 
 void CSVImporter::slotDelimiter() {
   if(m_radioComma->isChecked()) {
-    m_delimiter = QLatin1String(",");
+    m_delimiter = QStringLiteral(",");
   } else if(m_radioSemicolon->isChecked()) {
-    m_delimiter = QLatin1String(";");
+    m_delimiter = QStringLiteral(";");
   } else if(m_radioTab->isChecked()) {
-    m_delimiter = QLatin1String("\t");
+    m_delimiter = QStringLiteral("\t");
   } else {
     m_editOther->setFocus();
     m_delimiter = m_editOther->text();
@@ -537,15 +539,15 @@ void CSVImporter::updateHeader() {
       if(m_isLibraryThing && m_coll->type() == Data::Collection::Book) {
         static QHash<QString, QString> ltFields;
         if(ltFields.isEmpty()) {
-          ltFields[QLatin1String("TITLE")]                = QLatin1String("title");
-          ltFields[QLatin1String("AUTHOR (first, last)")] = QLatin1String("author");
-          ltFields[QLatin1String("DATE")]                 = QLatin1String("pub_year");
-          ltFields[QLatin1String("ISBNs")]                = QLatin1String("isbn");
-          ltFields[QLatin1String("RATINGS")]              = QLatin1String("rating");
-          ltFields[QLatin1String("ENTRY DATE")]           = QLatin1String("cdate");
-          ltFields[QLatin1String("TAGS")]                 = QLatin1String("keyword");
-          ltFields[QLatin1String("COMMENT")]              = QLatin1String("comments");
-          ltFields[QLatin1String("REVIEWS")]              = QLatin1String("review");
+          ltFields[QStringLiteral("TITLE")]                = QStringLiteral("title");
+          ltFields[QStringLiteral("AUTHOR (first, last)")] = QStringLiteral("author");
+          ltFields[QStringLiteral("DATE")]                 = QStringLiteral("pub_year");
+          ltFields[QStringLiteral("ISBNs")]                = QStringLiteral("isbn");
+          ltFields[QStringLiteral("RATINGS")]              = QStringLiteral("rating");
+          ltFields[QStringLiteral("ENTRY DATE")]           = QStringLiteral("cdate");
+          ltFields[QStringLiteral("TAGS")]                 = QStringLiteral("keyword");
+          ltFields[QStringLiteral("COMMENT")]              = QStringLiteral("comments");
+          ltFields[QStringLiteral("REVIEWS")]              = QStringLiteral("review");
         }
         // strip leading and trailing single quotes
         itemValue.remove(0,1).chop(1);
@@ -553,7 +555,7 @@ void CSVImporter::updateHeader() {
 
         // review is a new field, we're going to add it by default
         if(itemValue == QLatin1String("review") && !m_coll->hasField(itemValue)) {
-          Data::FieldPtr field(new Data::Field(QLatin1String("review"), i18n("Review"), Data::Field::Para));
+          Data::FieldPtr field(new Data::Field(QStringLiteral("review"), i18n("Review"), Data::Field::Para));
           m_coll->addField(field);
           updateFieldCombo();
           m_comboField->setCurrentIndex(m_comboField->count()-2);

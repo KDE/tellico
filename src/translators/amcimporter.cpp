@@ -170,11 +170,11 @@ QString AMCImporter::readImage(const QString& format_) {
     myDebug() << "null image";
     return QString();
   }
-  QString format = QLatin1String("PNG");
+  QString format = QStringLiteral("PNG");
   if(format_ == QLatin1String(".jpg")) {
-    format = QLatin1String("JPEG");
+    format = QStringLiteral("JPEG");
   } else if(format_ == QLatin1String(".gif")) {
-    format = QLatin1String("GIF");
+    format = QStringLiteral("GIF");
   }
   return ImageFactory::addImage(img, format);
 }
@@ -192,14 +192,14 @@ void AMCImporter::readEntry() {
   if(m_majVersion >= 3 && m_minVersion >= 5) {
     rating /= 10;
   }
-  e->setField(QLatin1String("rating"), QString::number(rating));
+  e->setField(QStringLiteral("rating"), QString::number(rating));
   quint32 year = readInt();
   if(year > 0) {
-    e->setField(QLatin1String("year"), QString::number(year));
+    e->setField(QStringLiteral("year"), QString::number(year));
   }
   quint32 time = readInt();
   if(time > 0) {
-    e->setField(QLatin1String("running-time"), QString::number(time));
+    e->setField(QStringLiteral("running-time"), QString::number(time));
   }
 
   readInt(); // video bitrate
@@ -207,55 +207,55 @@ void AMCImporter::readEntry() {
   readInt(); // number of files
   readBool(); // checked
   readString(); // media label
-  e->setField(QLatin1String("medium"), readString());
+  e->setField(QStringLiteral("medium"), readString());
   readString(); // source
   readString(); // borrower
   QString s = readString(); // title
   if(!s.isEmpty()) {
-    e->setField(QLatin1String("title"), s);
+    e->setField(QStringLiteral("title"), s);
   }
   QString s2 = readString(); // translated title
   if(s.isEmpty()) {
-    e->setField(QLatin1String("title"), s2);
+    e->setField(QStringLiteral("title"), s2);
   }
 
-  e->setField(QLatin1String("director"), readString());
+  e->setField(QStringLiteral("director"), readString());
   s = readString();
   QRegExp roleRx(QLatin1String("(.+) \\(([^(]+)\\)"));
   roleRx.setMinimal(true);
   if(roleRx.indexIn(s) > -1) {
     QString role = roleRx.cap(2).toLower();
     if(role == QLatin1String("story") || role == QLatin1String("written by")) {
-      e->setField(QLatin1String("writer"), roleRx.cap(1));
+      e->setField(QStringLiteral("writer"), roleRx.cap(1));
     } else {
-      e->setField(QLatin1String("producer"), s);
+      e->setField(QStringLiteral("producer"), s);
     }
   } else {
-    e->setField(QLatin1String("producer"), s);
+    e->setField(QStringLiteral("producer"), s);
   }
-  e->setField(QLatin1String("nationality"), readString());
-  e->setField(QLatin1String("genre"), readString().replace(QLatin1String(", "), FieldFormat::delimiterString()));
+  e->setField(QStringLiteral("nationality"), readString());
+  e->setField(QStringLiteral("genre"), readString().replace(QLatin1String(", "), FieldFormat::delimiterString()));
 
-  e->setField(QLatin1String("cast"), parseCast(readString()).join(FieldFormat::rowDelimiterString()));
+  e->setField(QStringLiteral("cast"), parseCast(readString()).join(FieldFormat::rowDelimiterString()));
 
   readString(); // url
-  e->setField(QLatin1String("plot"), readString());
-  e->setField(QLatin1String("comments"), readString());
+  e->setField(QStringLiteral("plot"), readString());
+  e->setField(QStringLiteral("comments"), readString());
   s = readString(); // video format
   QRegExp regionRx(QLatin1String("Region \\d"));
   if(regionRx.indexIn(s) > -1) {
-    e->setField(QLatin1String("region"), regionRx.cap(0));
+    e->setField(QStringLiteral("region"), regionRx.cap(0));
   }
-  e->setField(QLatin1String("audio-track"), readString()); // audio format
+  e->setField(QStringLiteral("audio-track"), readString()); // audio format
   readString(); // resolution
   readString(); // frame rate
-  e->setField(QLatin1String("language"), readString()); // audio language
-  e->setField(QLatin1String("subtitle"), readString()); // subtitle
+  e->setField(QStringLiteral("language"), readString()); // audio language
+  e->setField(QStringLiteral("subtitle"), readString()); // subtitle
   readString(); // file size
   s = readString(); // picture extension
   s = readImage(s); // picture
   if(!s.isEmpty()) {
-    e->setField(QLatin1String("cover"), s);
+    e->setField(QStringLiteral("cover"), s);
   }
 
   m_coll->addEntries(e);

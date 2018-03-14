@@ -105,7 +105,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   connect(m_yearSpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
 
   m_dateButton = new QPushButton(this);
-  m_dateButton->setIcon(QIcon::fromTheme(QLatin1String("view-pim-calendar")));
+  m_dateButton->setIcon(QIcon::fromTheme(QStringLiteral("view-pim-calendar")));
   connect(m_dateButton, SIGNAL(clicked()), SLOT(slotShowPicker()));
   l->addWidget(m_dateButton, 0);
 
@@ -192,7 +192,7 @@ QString DateWidget::text() const {
   return empty ? QString() : s;
 }
 
-void DateWidget::setDate(const QDate& date_) {
+void DateWidget::setDate(QDate date_) {
   m_daySpin->blockSignals(true);
   m_monthCombo->blockSignals(true);
   m_yearSpin->blockSignals(true);
@@ -306,7 +306,7 @@ void DateWidget::slotShowPicker() {
   m_menu->popup(popupPoint);
 }
 
-void DateWidget::slotDateSelected(const QDate& date_) {
+void DateWidget::slotDateSelected(QDate date_) {
   if(date_.isValid()) {
     setDate(date_);
     emit signalModified();
@@ -314,7 +314,7 @@ void DateWidget::slotDateSelected(const QDate& date_) {
   }
 }
 
-void DateWidget::slotDateEntered(const QDate& date_) {
+void DateWidget::slotDateEntered(QDate date_) {
   if(date_.isValid()) {
     setDate(date_);
     emit signalModified();

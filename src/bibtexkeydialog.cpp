@@ -56,7 +56,7 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   m_dupeLabel = new KTitleWidget(this);
   m_dupeLabel->setText(m_coll->title(), KTitleWidget::PlainMessage);
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
-  m_dupeLabel->setPixmap(QIcon::fromTheme(QLatin1String("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
+  m_dupeLabel->setPixmap(QIcon::fromTheme(QStringLiteral("tools-wizard")).pixmap(64, 64), KTitleWidget::ImageLeft);
   topLayout->addWidget(m_dupeLabel);
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
@@ -65,10 +65,10 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 
   QPushButton* checkDuplicates = new QPushButton(buttonBox);
-  KGuiItem::assign(checkDuplicates, KGuiItem(i18n("Check for duplicates"), QLatin1String("system-search")));
+  KGuiItem::assign(checkDuplicates, KGuiItem(i18n("Check for duplicates"), QStringLiteral("system-search")));
   buttonBox->addButton(checkDuplicates, QDialogButtonBox::ActionRole);
   m_filterButton = new QPushButton(buttonBox);
-  KGuiItem::assign(m_filterButton, KGuiItem(i18n("Filter for duplicates"), QLatin1String("view-filter")));
+  KGuiItem::assign(m_filterButton, KGuiItem(i18n("Filter for duplicates"), QStringLiteral("view-filter")));
   buttonBox->addButton(m_filterButton, QDialogButtonBox::ActionRole);
 
   topLayout->addWidget(buttonBox);
@@ -120,9 +120,9 @@ void BibtexKeyDialog::slotFilterDuplicates() {
 
   QSet<QString> keys;
   foreach(Data::EntryPtr entry, m_dupes) {
-    const QString key = entry->field(QLatin1String("bibtex-key"));
+    const QString key = entry->field(QStringLiteral("bibtex-key"));
     if(!keys.contains(key)) {
-      filter->append(new FilterRule(QLatin1String("bibtex-key"), key, FilterRule::FuncEquals));
+      filter->append(new FilterRule(QStringLiteral("bibtex-key"), key, FilterRule::FuncEquals));
       keys << key;
     }
   }

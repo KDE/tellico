@@ -154,13 +154,15 @@ ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
   ProgressItem* item = new ProgressItem(label_, canCancel_);
   m_items.insert(owner_, item);
 
-  connect(item, SIGNAL(signalTotalSteps(ProgressItem*)), SLOT(slotUpdateTotalProgress()));
-  connect(item, SIGNAL(signalProgress(ProgressItem*)),   SLOT(slotUpdateTotalProgress()));
-  connect(item, SIGNAL(signalDone(ProgressItem*)),       SLOT(slotUpdateTotalProgress()));
-  connect(item, SIGNAL(signalDone(ProgressItem*)),       SLOT(slotItemDone(ProgressItem*)));
+  connect(item, &Tellico::ProgressItem::signalTotalSteps,
+          this, &Tellico::ProgressManager::slotUpdateTotalProgress);
+  connect(item, &Tellico::ProgressItem::signalProgress,
+          this, &Tellico::ProgressManager::slotUpdateTotalProgress);
+  connect(item, &Tellico::ProgressItem::signalDone,
+          this, &Tellico::ProgressManager::slotUpdateTotalProgress);
+  connect(item, &Tellico::ProgressItem::signalDone,
+          this, &Tellico::ProgressManager::slotItemDone);
 
-//  connect(item, SIGNAL(signalProgress(ProgressItem*)), SIGNAL(signalItemProgress(ProgressItem*)));
-//  emit signalItemAdded(item);
   return *item;
 }
 

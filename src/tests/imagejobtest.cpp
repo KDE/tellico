@@ -86,7 +86,7 @@ void ImageJobTest::testInvalidUrl() {
 }
 
 void ImageJobTest::testNonexistant() {
-  QUrl u(QLatin1String("file:///non-existant-location"));
+  QUrl u(QStringLiteral("file:///non-existant-location"));
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
   connect(job, SIGNAL(result(KJob*)),
@@ -109,7 +109,7 @@ void ImageJobTest::testUnreadable() {
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(img.isNull());
 }
 
@@ -124,7 +124,7 @@ void ImageJobTest::testImageInvalid() {
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(img.isNull());
   QCOMPARE(img.linkOnly(), false);
 }
@@ -140,9 +140,9 @@ void ImageJobTest::testImageLoad() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
-  QCOMPARE(img.id(), QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QCOMPARE(img.id(), QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 
@@ -154,7 +154,7 @@ void ImageJobTest::testImageLoad() {
 void ImageJobTest::testImageLoadWithId() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
 
-  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, QLatin1String("tellico-rocks"));
+  QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, QStringLiteral("tellico-rocks"));
   connect(job, SIGNAL(result(KJob*)),
           this, SLOT(slotGetResult(KJob*)));
 
@@ -162,9 +162,9 @@ void ImageJobTest::testImageLoadWithId() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
-  QCOMPARE(img.id(), QLatin1String("tellico-rocks"));
+  QCOMPARE(img.id(), QStringLiteral("tellico-rocks"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 }
@@ -183,10 +183,10 @@ void ImageJobTest::testImageLink() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
   // id is not the MD5 hash
-  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QVERIFY(img.id() != QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), true);
 }
@@ -197,7 +197,7 @@ void ImageJobTest::testNetworkImage() {
     return;
   }
 
-  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
   connect(job, SIGNAL(result(KJob*)),
@@ -207,9 +207,9 @@ void ImageJobTest::testNetworkImage() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
-  QCOMPARE(img.id(), QLatin1String("757322046f4aa54290a3d92b05b71ca1.png"));
+  QCOMPARE(img.id(), QStringLiteral("757322046f4aa54290a3d92b05b71ca1.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 
@@ -224,7 +224,7 @@ void ImageJobTest::testNetworkImageLink() {
     return;
   }
 
-  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
                                                           QString() /* id */,
@@ -237,7 +237,7 @@ void ImageJobTest::testNetworkImageLink() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(!img.isNull());
   QCOMPARE(img.id(), u.url());
   QCOMPARE(img.format(), QByteArray("png"));
@@ -250,7 +250,7 @@ void ImageJobTest::testNetworkImageInvalid() {
     return;
   }
 
-  QUrl u(QLatin1String("http://tellico-project.org"));
+  QUrl u(QStringLiteral("http://tellico-project.org"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
   connect(job, SIGNAL(result(KJob*)),
@@ -259,7 +259,7 @@ void ImageJobTest::testNetworkImageInvalid() {
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
 
-  Tellico::Data::Image img = job->image();
+  const Tellico::Data::Image& img = job->image();
   QVERIFY(img.isNull());
 }
 
@@ -276,10 +276,10 @@ void ImageJobTest::testFactoryRequestLocal() {
   // success!
   QCOMPARE(m_result, 0);
 
-  Tellico::Data::Image img = Tellico::ImageFactory::imageById(m_imageId);
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(!img.isNull());
   // id is not the MD5 hash
-  QVERIFY(img.id() != QLatin1String("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  QVERIFY(img.id() != QStringLiteral("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), true);
 }
@@ -300,7 +300,7 @@ void ImageJobTest::testFactoryRequestLocalInvalid() {
   QCOMPARE(m_imageId, u.url());
 
   // now try to load it
-  Tellico::Data::Image img = Tellico::ImageFactory::imageById(m_imageId);
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(img.isNull());
   QCOMPARE(img.linkOnly(), false);
   // make sure the null image list is updated
@@ -320,7 +320,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
-  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
   Tellico::ImageFactory::requestImageById(u.url());
 
   enterLoop();
@@ -334,7 +334,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(m_imageId);
   QVERIFY(!img.isNull());
   // id is the MD5 hash, since it's not link only
-  QCOMPARE(img.id(), QLatin1String("757322046f4aa54290a3d92b05b71ca1.png"));
+  QCOMPARE(img.id(), QStringLiteral("757322046f4aa54290a3d92b05b71ca1.png"));
   QCOMPARE(img.format(), QByteArray("png"));
   QCOMPARE(img.linkOnly(), false);
 }
@@ -349,7 +349,7 @@ void ImageJobTest::testFactoryRequestNetworkLinkOnly() {
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
-  QUrl u(QLatin1String("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
   // first, tell the image factory that the image is link only
   Tellico::Data::ImageInfo info(u.url(), "PNG", 64, 64, true /* link only */);
   Tellico::ImageFactory::cacheImageInfo(info);

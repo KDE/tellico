@@ -80,7 +80,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::FileListingImporter::slotCancel);
   ProgressItem::Done done(this);
 
   // going to assume only one volume will ever be imported
@@ -101,32 +101,33 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
 #ifdef HAVE_KFILEMETADATA
   KFileMetaData::ExtractorCollection extractors;
+  QHash<KFileMetaData::Property::Property, QString> propertyNameHash;
 #endif
 
   QStringList metaIgnore = QStringList()
-                         << QLatin1String("mimeType")
-                         << QLatin1String("url")
-                         << QLatin1String("fileName")
-                         << QLatin1String("lastModified")
-                         << QLatin1String("contentSize")
-                         << QLatin1String("type");
+                         << QStringLiteral("mimeType")
+                         << QStringLiteral("url")
+                         << QStringLiteral("fileName")
+                         << QStringLiteral("lastModified")
+                         << QStringLiteral("contentSize")
+                         << QStringLiteral("type");
 
   const bool usePreview = m_widget && m_filePreview->isChecked();
 
-  const QString title    = QLatin1String("title");
-  const QString url      = QLatin1String("url");
-  const QString desc     = QLatin1String("description");
-  const QString vol      = QLatin1String("volume");
-  const QString folder   = QLatin1String("folder");
-  const QString type     = QLatin1String("mimetype");
-  const QString size     = QLatin1String("size");
-  const QString perm     = QLatin1String("permissions");
-  const QString owner    = QLatin1String("owner");
-  const QString group    = QLatin1String("group");
-  const QString created  = QLatin1String("created");
-  const QString modified = QLatin1String("modified");
-  const QString metainfo = QLatin1String("metainfo");
-  const QString icon     = QLatin1String("icon");
+  const QString title    = QStringLiteral("title");
+  const QString url      = QStringLiteral("url");
+  const QString desc     = QStringLiteral("description");
+  const QString vol      = QStringLiteral("volume");
+  const QString folder   = QStringLiteral("folder");
+  const QString type     = QStringLiteral("mimetype");
+  const QString size     = QStringLiteral("size");
+  const QString perm     = QStringLiteral("permissions");
+  const QString owner    = QStringLiteral("owner");
+  const QString group    = QStringLiteral("group");
+  const QString created  = QStringLiteral("created");
+  const QString modified = QStringLiteral("modified");
+  const QString metainfo = QStringLiteral("metainfo");
+  const QString icon     = QStringLiteral("icon");
 
   m_coll = new Data::FileCatalog(true);
   QString tmp;
@@ -166,20 +167,39 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     }
 
 #ifdef HAVE_KFILEMETADATA
-    KFileMetaData::SimpleExtractionResult result(u.url(), item.mimetype(), KFileMetaData::ExtractionResult::ExtractMetaData);
+    KFileMetaData::SimpleExtractionResult result(u.toLocalFile(),
+                                                 item.mimetype(),
+                                                 KFileMetaData::ExtractionResult::ExtractMetaData);
     QList<KFileMetaData::Extractor*> exList = extractors.fetchExtractors(item.mimetype());
     foreach(KFileMetaData::Extractor* ex, exList) {
-      ex->extract(&result);
+// initializing exempi can cause a crash in Exiv for files with XMP data
+// crude workaround is to avoid using the exivextractor and the only apparent way is to
+// matach against the mimetypes
+// see https://bugs.kde.org/show_bug.cgi?id=390744
+#ifdef HAVE_EXEMPI
+      if(!ex->mimetypes().contains(QStringLiteral("image/x-exv"))) {
+#else
+      if(true) {
+#endif
+        ex->extract(&result);
+      }
     }
     QStringList strings;
     KFileMetaData::PropertyMap properties = result.properties();
     KFileMetaData::PropertyMap::const_iterator it = properties.constBegin();
     for( ; it != properties.constEnd(); ++it) {
-      const QString s = it.value().toString();
-      if(!s.isEmpty()) {
-        const QString label = KFileMetaData::PropertyInfo(it.key()).displayName();
+      const QString value = it.value().toString();
+      if(!value.isEmpty()) {
+        QString label;
+        if(propertyNameHash.contains(it.key())) {
+          label = propertyNameHash.value(it.key());
+        } else {
+          label = KFileMetaData::PropertyInfo(it.key()).displayName();
+          propertyNameHash.insert(it.key(), label);
+        }
+//        myDebug() << label << value;
         if(!metaIgnore.contains(label)) {
-          strings << label + FieldFormat::columnDelimiterString() + s;
+          strings << label + FieldFormat::columnDelimiterString() + value;
         }
       }
     }
@@ -197,7 +217,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
     if(!m_pixmap.isNull()) {
       // is png best option?
-      const QString id = ImageFactory::addImage(m_pixmap, QLatin1String("PNG"));
+      const QString id = ImageFactory::addImage(m_pixmap, QStringLiteral("PNG"));
       if(!id.isEmpty()) {
         entry->setField(icon, id);
       }

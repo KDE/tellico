@@ -166,7 +166,7 @@ void ImageZipArchive::setZip(KZip* zip_) {
     m_zip = nullptr;
     return;
   }
-  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
+  const KArchiveEntry* imgDirEntry = dir->entry(QStringLiteral("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     delete m_zip;
     m_zip = nullptr;

@@ -68,7 +68,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   if(f->name() == QLatin1String("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
     // versions before 1.2.7 could have saved the url without the protocol
     if(QUrl(s1) == QUrl(s2) ||
-       (f->property(QLatin1String("relative")) == QLatin1String("true") &&
+       (f->property(QStringLiteral("relative")) == QLatin1String("true") &&
         s_documentUrl.resolved(QUrl(s1)) == s_documentUrl.resolved(QUrl(s2)))) {
       return 5;
     }

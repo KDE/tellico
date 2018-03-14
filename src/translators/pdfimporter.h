@@ -42,7 +42,7 @@ public:
   virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
 
 public Q_SLOTS:
-  void slotCancel();
+  void slotCancel() Q_DECL_OVERRIDE;
 
 private:
   bool m_cancelled;

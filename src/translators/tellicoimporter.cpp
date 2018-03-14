@@ -193,9 +193,9 @@ void TellicoImporter::loadZipData() {
   }
 
   // main file was changed from bookcase.xml to tellico.xml as of version 0.13
-  const KArchiveEntry* entry = dir->entry(QLatin1String("tellico.xml"));
+  const KArchiveEntry* entry = dir->entry(QStringLiteral("tellico.xml"));
   if(!entry) {
-    entry = dir->entry(QLatin1String("bookcase.xml"));
+    entry = dir->entry(QStringLiteral("bookcase.xml"));
   }
   if(!entry || !entry->isFile()) {
     QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
@@ -233,7 +233,7 @@ void TellicoImporter::loadZipData() {
     return;
   }
 
-  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
+  const KArchiveEntry* imgDirEntry = dir->entry(QStringLiteral("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     delete m_zip;
     m_zip = nullptr;
@@ -337,7 +337,7 @@ bool TellicoImporter::loadAllImages(const QUrl& url_) {
     return false;
   }
 
-  const KArchiveEntry* imgDirEntry = dir->entry(QLatin1String("images"));
+  const KArchiveEntry* imgDirEntry = dir->entry(QStringLiteral("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
     return false;
   }

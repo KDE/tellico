@@ -34,8 +34,8 @@
 QTEST_GUILESS_MAIN( FormatTest )
 
 void FormatTest::initTestCase() {
-  Tellico::Config::setArticlesString(QString("the,l'"));
-  Tellico::Config::setNoCapitalizationString(QString("the,of,et,de"));
+  Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
+  Tellico::Config::setNoCapitalizationString(QStringLiteral("the,of,et,de"));
 }
 
 void FormatTest::testCapitalization() {
@@ -53,8 +53,8 @@ void FormatTest::testCapitalization_data() {
   // right now, 'the' is in the no capitalization string
   QTest::newRow("test2") << "title, the" << "Title, the";
   QTest::newRow("test3") << "the return of the king" << "The Return of the King";
-  QTest::newRow("test4") << QString::fromUtf8("école nationale supérieure de l'aéronautique et de l'espace")
-                         << QString::fromUtf8("École Nationale Supérieure de l'Aéronautique et de l'Espace");
+  QTest::newRow("test4") << QStringLiteral("école nationale supérieure de l'aéronautique et de l'espace")
+                         << QStringLiteral("École Nationale Supérieure de l'Aéronautique et de l'Espace");
 }
 
 void FormatTest::testTitle() {
@@ -135,7 +135,7 @@ void FormatTest::testName_data() {
 }
 
 void FormatTest::testSplit() {
-  QStringList list = QStringList() << "one" << "two" << "three";
+  QStringList list = QStringList() << QStringLiteral("one") << QStringLiteral("two") << QStringLiteral("three");
   QCOMPARE(Tellico::FieldFormat::splitValue(list.join(Tellico::FieldFormat::delimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);

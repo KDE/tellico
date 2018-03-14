@@ -86,7 +86,7 @@ QString BibtexExporter::text() {
   QString crossRefField;
   bool hasCrossRefs = false;
 
-  const QString bibtex = QLatin1String("bibtex");
+  const QString bibtex = QStringLiteral("bibtex");
 // keep a list of all the 'ordinary' fields to iterate through later
   Data::FieldList fields;
   foreach(Data::FieldPtr it, this->fields()) {
@@ -263,7 +263,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
 }
 
 void BibtexExporter::readOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_expandMacros = group.readEntry("Expand Macros", m_expandMacros);
   m_packageURL = group.readEntry("URL Package", m_packageURL);
   m_skipEmptyKeys = group.readEntry("Skip Empty Keys", m_skipEmptyKeys);
@@ -276,7 +276,7 @@ void BibtexExporter::readOptions(KSharedConfigPtr config_) {
 }
 
 void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
-  KConfigGroup group(config_, QString::fromLatin1("ExportOptions - %1").arg(formatString()));
+  KConfigGroup group(config_, QStringLiteral("ExportOptions - %1").arg(formatString()));
   m_expandMacros = m_checkExpandMacros->isChecked();
   group.writeEntry("Expand Macros", m_expandMacros);
   m_packageURL = m_checkPackageURL->isChecked();
@@ -296,8 +296,8 @@ void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
 void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldList& fields_, const Tellico::Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
   const QStringList macros = static_cast<const Data::BibtexCollection*>(collection().data())->macroList().keys();
-  const QString bibtex = QLatin1String("bibtex");
-  const QString bibtexSep = QLatin1String("bibtex-separator");
+  const QString bibtex = QStringLiteral("bibtex");
+  const QString bibtexSep = QStringLiteral("bibtex-separator");
   QRegExp numberRx(QLatin1String("^\\d+$"));
 
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;

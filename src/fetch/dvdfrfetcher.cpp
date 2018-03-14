@@ -51,7 +51,7 @@ using Tellico::Fetch::DVDFrFetcher;
 DVDFrFetcher::DVDFrFetcher(QObject* parent_)
     : XMLFetcher(parent_) {
   setLimit(DVDFR_MAX_RETURNS_TOTAL);
-  setXSLTFilename(QLatin1String("dvdfr2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("dvdfr2tellico.xsl"));
 }
 
 DVDFrFetcher::~DVDFrFetcher() {
@@ -75,12 +75,12 @@ QUrl DVDFrFetcher::searchUrl() {
       {
         QTextCodec* codec = QTextCodec::codecForName("iso-8859-15");
         Q_ASSERT(codec);
-        q.addQueryItem(QLatin1String("title"), QString::fromUtf8(codec->fromUnicode(request().value)));
+        q.addQueryItem(QStringLiteral("title"), QString::fromUtf8(codec->fromUnicode(request().value)));
       }
       break;
 
     case UPC:
-      q.addQueryItem(QLatin1String("gencode"), request().value);
+      q.addQueryItem(QStringLiteral("gencode"), request().value);
       break;
 
     default:
@@ -95,7 +95,7 @@ QUrl DVDFrFetcher::searchUrl() {
 Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) {
   Q_ASSERT(entry_);
 
-  const QString id = entry_->field(QLatin1String("dvdfr-id"));
+  const QString id = entry_->field(QStringLiteral("dvdfr-id"));
   if(id.isEmpty()) {
     myDebug() << "no dvdfr id found";
     return entry_;
@@ -103,7 +103,7 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
 
   QUrl u(QString::fromLatin1(DVDFR_DETAIL_API_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("id"), id);
+  q.addQueryItem(QStringLiteral("id"), id);
   u.setQuery(q);
 //  myDebug() << "url: " << u;
 
@@ -140,12 +140,12 @@ Tellico::Data::EntryPtr DVDFrFetcher::fetchEntryHookData(Data::EntryPtr entry_) 
   }
 
   // don't want to include id
-  coll->removeField(QLatin1String("dvdfr-id"));
+  coll->removeField(QStringLiteral("dvdfr-id"));
   return coll->entries().front();
 }
 
 Tellico::Fetch::FetchRequest DVDFrFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QLatin1String("title"));
+  QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -157,7 +157,7 @@ Tellico::Fetch::ConfigWidget* DVDFrFetcher::configWidget(QWidget* parent_) const
 }
 
 QString DVDFrFetcher::defaultName() {
-  return QLatin1String("DVDFr.com");
+  return QStringLiteral("DVDFr.com");
 }
 
 QString DVDFrFetcher::defaultIcon() {
@@ -166,9 +166,9 @@ QString DVDFrFetcher::defaultIcon() {
 
 Tellico::StringHash DVDFrFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("origtitle")] = i18n("Original Title");
-  hash[QLatin1String("dvdfr")]     = i18n("DVDFr Link");
-  hash[QLatin1String("alttitle")]  = i18n("Alternative Titles");
+  hash[QStringLiteral("origtitle")] = i18n("Original Title");
+  hash[QStringLiteral("dvdfr")]     = i18n("DVDFr Link");
+  hash[QStringLiteral("alttitle")]  = i18n("Alternative Titles");
   return hash;
 }
 

@@ -114,7 +114,7 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
 
   // only when creating a new filter can it be saved
   if(m_mode == CreateFilter) {
-    m_saveFilter = new QPushButton(QIcon::fromTheme(QLatin1String("view-filter")), i18n("&Save Filter"), this);
+    m_saveFilter = new QPushButton(QIcon::fromTheme(QStringLiteral("view-filter")), i18n("&Save Filter"), this);
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
     connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));
@@ -178,7 +178,7 @@ void FilterDialog::slotApply() {
 }
 
 void FilterDialog::slotHelp() {
-  KHelpClient::invokeHelp(QLatin1String("filter-dialog"));
+  KHelpClient::invokeHelp(QStringLiteral("filter-dialog"));
 }
 
 void FilterDialog::slotClear() {

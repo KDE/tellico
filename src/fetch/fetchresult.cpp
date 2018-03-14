@@ -53,7 +53,7 @@ FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
    , fetcher(fetcher_)
    , title(entry_->title())
    , desc(makeDescription(entry_))
-   , isbn(entry_->field(QLatin1String("isbn"))) {
+   , isbn(entry_->field(QStringLiteral("isbn"))) {
 }
 
 FetchResult::FetchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)

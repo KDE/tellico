@@ -81,7 +81,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
   item.setTotalSteps(100);
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::AudioFileImporter::slotCancel);
   ProgressItem::Done done(this);
 
   // TODO: allow remote audio file importing
@@ -117,13 +117,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   }
   item.setTotalSteps(files.count());
 
-  const QString title    = QLatin1String("title");
-  const QString artist   = QLatin1String("artist");
-  const QString year     = QLatin1String("year");
-  const QString genre    = QLatin1String("genre");
-  const QString track    = QLatin1String("track");
-  const QString comments = QLatin1String("comments");
-  const QString file     = QLatin1String("file");
+  const QString title    = QStringLiteral("title");
+  const QString artist   = QStringLiteral("artist");
+  const QString year     = QStringLiteral("year");
+  const QString genre    = QStringLiteral("genre");
+  const QString track    = QStringLiteral("track");
+  const QString comments = QStringLiteral("comments");
+  const QString file     = QStringLiteral("file");
 
   m_coll = new Data::MusicCollection(true);
 
@@ -137,12 +137,12 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       f = new Data::Field(file, i18n("Files"), Data::Field::Table);
       m_coll->addField(f);
     }
-    f->setProperty(QLatin1String("column1"), i18n("Files"));
+    f->setProperty(QStringLiteral("column1"), i18n("Files"));
     if(addBitrate) {
-      f->setProperty(QLatin1String("columns"), QLatin1String("2"));
-      f->setProperty(QLatin1String("column2"), i18n("Bitrate"));
+      f->setProperty(QStringLiteral("columns"), QStringLiteral("2"));
+      f->setProperty(QStringLiteral("column2"), i18n("Bitrate"));
     } else {
-      f->setProperty(QLatin1String("columns"), QLatin1String("1"));
+      f->setProperty(QStringLiteral("columns"), QStringLiteral("1"));
     }
   }
 
@@ -170,15 +170,15 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       continue;
     }
     int disc = discNumber(f);
-    if(disc > 1 && !m_coll->hasField(QString::fromLatin1("track%1").arg(disc))) {
-      Data::FieldPtr f2(new Data::Field(QString::fromLatin1("track%1").arg(disc),
+    if(disc > 1 && !m_coll->hasField(QStringLiteral("track%1").arg(disc))) {
+      Data::FieldPtr f2(new Data::Field(QStringLiteral("track%1").arg(disc),
                                         i18n("Tracks (Disc %1)", disc),
                                         Data::Field::Table));
       f2->setFormatType(FieldFormat::FormatTitle);
-      f2->setProperty(QLatin1String("columns"), QLatin1String("3"));
-      f2->setProperty(QLatin1String("column1"), i18n("Title"));
-      f2->setProperty(QLatin1String("column2"), i18n("Artist"));
-      f2->setProperty(QLatin1String("column3"), i18n("Length"));
+      f2->setProperty(QStringLiteral("columns"), QStringLiteral("3"));
+      f2->setProperty(QStringLiteral("column1"), i18n("Title"));
+      f2->setProperty(QStringLiteral("column2"), i18n("Artist"));
+      f2->setProperty(QStringLiteral("column3"), i18n("Length"));
       m_coll->addField(f2);
       if(changeTrackTitle) {
         Data::FieldPtr newTrack(new Data::Field(*m_coll->fieldByName(track)));
@@ -365,7 +365,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       u.setPath(fi.absoluteFilePath());
       QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
-        entry->setField(QLatin1String("cover"), id);
+        entry->setField(QStringLiteral("cover"), id);
       }
       break;
     }

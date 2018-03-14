@@ -48,7 +48,7 @@ using Tellico::Fetch::SpringerFetcher;
 SpringerFetcher::SpringerFetcher(QObject* parent_)
     : XMLFetcher(parent_), m_start(0), m_total(-1) {
   setLimit(SPRINGER_QUERY_COUNT);
-  setXSLTFilename(QLatin1String("springer2tellico.xsl"));
+  setXSLTFilename(QStringLiteral("springer2tellico.xsl"));
 }
 
 SpringerFetcher::~SpringerFetcher() {
@@ -82,21 +82,21 @@ void SpringerFetcher::resetSearch() {
 QUrl SpringerFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(SPRINGER_BASE_URL));
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("api_key"), QLatin1String(SPRINGER_API_KEY));
-  q.addQueryItem(QLatin1String("s"), QString::number(m_start + 1));
-  q.addQueryItem(QLatin1String("p"), QString::number(SPRINGER_QUERY_COUNT));
+  q.addQueryItem(QStringLiteral("api_key"), QLatin1String(SPRINGER_API_KEY));
+  q.addQueryItem(QStringLiteral("s"), QString::number(m_start + 1));
+  q.addQueryItem(QStringLiteral("p"), QString::number(SPRINGER_QUERY_COUNT));
 
   switch(request().key) {
     case Title:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("title:\"%1\" OR book:\"%1\"").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("title:\"%1\" OR book:\"%1\"").arg(request().value));
       break;
 
     case Person:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("name:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("name:%1").arg(request().value));
       break;
 
     case Keyword:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("\"%1\"").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("\"%1\"").arg(request().value));
       break;
 
     case ISBN:
@@ -104,16 +104,16 @@ QUrl SpringerFetcher::searchUrl() {
         // only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
         v = ISBNValidator::isbn13(v);
-        q.addQueryItem(QLatin1String("q"), QString::fromLatin1("isbn:%1").arg(v));
+        q.addQueryItem(QStringLiteral("q"), QStringLiteral("isbn:%1").arg(v));
       }
       break;
 
     case DOI:
-      q.addQueryItem(QLatin1String("q"), QString::fromLatin1("doi:%1").arg(request().value));
+      q.addQueryItem(QStringLiteral("q"), QStringLiteral("doi:%1").arg(request().value));
       break;
 
     case Raw:
-      q.addQueryItem(QLatin1String("q"), request().value);
+      q.addQueryItem(QStringLiteral("q"), request().value);
       break;
 
     default:
@@ -132,8 +132,8 @@ void SpringerFetcher::parseData(QByteArray& data_) {
     return;
   }
   // total is /response/result/total
-  QDomNode n = dom.documentElement().namedItem(QLatin1String("result"))
-                                    .namedItem(QLatin1String("total"));
+  QDomNode n = dom.documentElement().namedItem(QStringLiteral("result"))
+                                    .namedItem(QStringLiteral("total"));
   QDomElement e = n.toElement();
   if(!e.isNull()) {
     m_total = e.text().toInt();
@@ -147,17 +147,17 @@ void SpringerFetcher::checkMoreResults(int count_) {
 }
 
 Tellico::Fetch::FetchRequest SpringerFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString doi = entry_->field(QLatin1String("doi"));
+  const QString doi = entry_->field(QStringLiteral("doi"));
   if(!doi.isEmpty()) {
     return FetchRequest(Fetch::DOI, doi);
   }
 
-  const QString isbn = entry_->field(QLatin1String("isbn"));
+  const QString isbn = entry_->field(QStringLiteral("isbn"));
   if(!isbn.isEmpty()) {
     return FetchRequest(Fetch::ISBN, isbn);
   }
 
-  const QString title = entry_->field(QLatin1String("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Fetch::Title, title);
   }
@@ -170,7 +170,7 @@ Tellico::Fetch::ConfigWidget* SpringerFetcher::configWidget(QWidget* parent_) co
 }
 
 QString SpringerFetcher::defaultName() {
-  return QLatin1String("SpringerLink");
+  return QStringLiteral("SpringerLink");
 }
 
 QString SpringerFetcher::defaultIcon() {

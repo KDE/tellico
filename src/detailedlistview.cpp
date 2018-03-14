@@ -95,16 +95,16 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  const QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   QString configN;
   if(coll_->type() == Data::Collection::Base) {
     QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      QUrl u = config.readEntry(QString::fromLatin1("URL_%1").arg(i), QUrl());
+      QUrl u = config.readEntry(QStringLiteral("URL_%1").arg(i), QUrl());
       if(u == url) {
-        configN = QString::fromLatin1("_%1").arg(i);
+        configN = QStringLiteral("_%1").arg(i);
         break;
       }
     }
@@ -390,7 +390,7 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
 }
 
 void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_) {
-  const QString configGroup = QString::fromLatin1("Options - %1").arg(CollectionFactory::typeName(coll_));
+  const QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KSharedConfig::openConfig(), configGroup);
 
   // all of this is to have custom settings on a per file basis
@@ -398,9 +398,9 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
   if(coll_->type() == Data::Collection::Base) {
     QList<ConfigInfo> info;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
-      QUrl u(config.readEntry(QString::fromLatin1("URL_%1").arg(i)));
+      QUrl u(config.readEntry(QStringLiteral("URL_%1").arg(i)));
       if(!u.isEmpty() && i != configIndex_) {
-        configN = QString::fromLatin1("_%1").arg(i);
+        configN = QStringLiteral("_%1").arg(i);
         ConfigInfo ci;
         ci.cols      = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
         ci.widths    = config.readEntry(QLatin1String("ColumnWidths") + configN, QList<int>());
@@ -415,7 +415,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
     int limit = qMin(info.count(), Config::maxCustomURLSettings()-1);
     for(int i = 0; i < limit; ++i) {
       // starts at one since the current config will be written below
-      configN = QString::fromLatin1("_%1").arg(i+1);
+      configN = QStringLiteral("_%1").arg(i+1);
       config.writeEntry(QLatin1String("ColumnNames")     + configN, info[i].cols);
       config.writeEntry(QLatin1String("ColumnWidths")    + configN, info[i].widths);
       config.writeEntry(QLatin1String("ColumnOrder")     + configN, info[i].order);
@@ -425,7 +425,7 @@ void DetailedListView::saveConfig(Tellico::Data::CollPtr coll_, int configIndex_
       // legacy entry item
       config.deleteEntry(QLatin1String("ColumnState")    + configN);
     }
-    configN = QLatin1String("_0");
+    configN = QStringLiteral("_0");
   }
 
   QStringList colNames;
@@ -530,7 +530,7 @@ void DetailedListView::updateHeaderMenu() {
   }
   QAction* columnAction = m_headerMenu->addMenu(m_columnMenu);
   columnAction->setText(i18nc("Noun, Menu name", "Columns"));
-  columnAction->setIcon(QIcon::fromTheme(QLatin1String("view-file-columns")));
+  columnAction->setIcon(QIcon::fromTheme(QStringLiteral("view-file-columns")));
 
   m_headerMenu->addSeparator();
 
@@ -538,7 +538,7 @@ void DetailedListView::updateHeaderMenu() {
   connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
   connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
-  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QLatin1String("zoom-fit-width")), i18n("Resize to Content"));
+  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Resize to Content"));
   connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 
@@ -552,7 +552,7 @@ void DetailedListView::updateColumnDelegates() {
       }
       RatingDelegate* delegate = new RatingDelegate(this);
       bool ok; // not used
-      delegate->setMaxRating(Tellico::toUInt(field->property(QLatin1String("maximum")), &ok));
+      delegate->setMaxRating(Tellico::toUInt(field->property(QStringLiteral("maximum")), &ok));
       setItemDelegateForColumn(ncol, delegate);
     } else {
       // reset column delegate to overall delegate

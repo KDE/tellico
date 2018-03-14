@@ -87,7 +87,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   topLayout->addLayout(vlay1);
   m_iconLabel = new QLabel(widget);
   if(type_ == Fetch::Unknown) {
-    m_iconLabel->setPixmap(KIconLoader::global()->loadIcon(QLatin1String("network-wired"), KIconLoader::Panel, 64));
+    m_iconLabel->setPixmap(KIconLoader::global()->loadIcon(QStringLiteral("network-wired"), KIconLoader::Panel, 64));
   } else {
     m_iconLabel->setPixmap(Fetch::Manager::self()->fetcherIcon(type_, KIconLoader::Panel, 64));
   }
@@ -258,5 +258,5 @@ void FetcherConfigDialog::slotPossibleNewName(const QString& name_) {
 }
 
 void FetcherConfigDialog::slotHelp() {
-  KHelpClient::invokeHelp(QLatin1String("data-sources-options"));
+  KHelpClient::invokeHelp(QStringLiteral("data-sources-options"));
 }

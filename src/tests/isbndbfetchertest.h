@@ -27,7 +27,7 @@
 
 #include "abstractfetchertest.h"
 
-#include <QHash>
+#include <KConfig>
 
 class ISBNdbFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
@@ -43,7 +43,8 @@ private Q_SLOTS:
   void testAuthor();
 
 private:
-  QHash<QString, QString> m_fieldValues;
+  bool m_hasConfigFile;
+  KConfig m_config;
 };
 
 #endif

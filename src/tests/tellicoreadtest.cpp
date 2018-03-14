@@ -41,7 +41,7 @@
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
-#define QL1(x) QString::fromLatin1(x)
+#define QL1(x) QStringLiteral(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
 
 void TellicoReadTest::initTestCase() {
@@ -128,7 +128,7 @@ void TellicoReadTest::testCoinCollection() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Coin);
 
-  Tellico::Data::FieldPtr field = coll->fieldByName("title");
+  Tellico::Data::FieldPtr field = coll->fieldByName(QStringLiteral("title"));
   // old field has Dependent value, now is Line
   QVERIFY(field);
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
@@ -176,7 +176,7 @@ void TellicoReadTest::testTableData() {
                 + Tellico::FieldFormat::columnDelimiterString() + "22"
                 + Tellico::FieldFormat::columnDelimiterString() + "23";
   e3->setField(QL1("table"), value);
-  QStringList groups = e3->groupNamesByFieldName("table");
+  QStringList groups = e3->groupNamesByFieldName(QStringLiteral("table"));
   QCOMPARE(groups.count(), 3);
   // the order of the group names is not stable (it uses QSet::toList)
   QCOMPARE(groups.toSet(), QSet<QString>() << QL1("11a") << QL1("11b") << QL1("21"));
@@ -184,7 +184,7 @@ void TellicoReadTest::testTableData() {
   // test having empty value in table
   Tellico::Data::EntryPtr e = coll2->entryById(2);
   QVERIFY(e);
-  const QStringList rows = Tellico::FieldFormat::splitTable(e->field("table"));
+  const QStringList rows = Tellico::FieldFormat::splitTable(e->field(QStringLiteral("table")));
   QCOMPARE(rows.count(), 1);
   const QStringList cols = Tellico::FieldFormat::splitRow(rows.at(0));
   QCOMPARE(cols.count(), 3);
@@ -247,7 +247,7 @@ void TellicoReadTest::testLocalImage() {
 
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field(QLatin1String("cover")), imageId);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
 
   // the image should be in local memory now
   QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
@@ -282,7 +282,7 @@ void TellicoReadTest::testRemoteImage() {
 
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field(QLatin1String("cover")), imageId);
+  QCOMPARE(entry->field(QStringLiteral("cover")), imageId);
 
   // the image should be in local memory now
   QVERIFY(Tellico::ImageFactory::self()->hasImageInMemory(imageId));
@@ -307,9 +307,9 @@ void TellicoReadTest::testXMLHandler_data() {
   QTest::addColumn<QString>("expectedString");
   QTest::addColumn<bool>("changeEncoding");
 
-  QTest::newRow("basic") << QByteArray("<x>value</x>") << QString::fromUtf8("<x>value</x>") << false;
+  QTest::newRow("basic") << QByteArray("<x>value</x>") << QStringLiteral("<x>value</x>") << false;
   QTest::newRow("utf8") << QByteArray("<?xml encoding=\"utf-8\"?>\n<x>value</x>")
-                        << QString::fromUtf8("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << false;
+                        << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << false;
   QTest::newRow("latin1") << QByteArray("<?xml encoding=\"latin1\"?>\n<x>value</x>")
-                          << QString::fromUtf8("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
+                          << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
 }

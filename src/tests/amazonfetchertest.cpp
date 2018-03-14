@@ -58,47 +58,47 @@ void AmazonFetcherTest::initTestCase() {
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
 
   QHash<QString, QString> practicalRdf;
-  practicalRdf.insert(QLatin1String("title"), QLatin1String("Practical RDF"));
-  practicalRdf.insert(QLatin1String("isbn"), QLatin1String("0-596-00263-7"));
-  practicalRdf.insert(QLatin1String("author"), QLatin1String("Shelley Powers"));
-  practicalRdf.insert(QLatin1String("binding"), QLatin1String("Paperback"));
-  practicalRdf.insert(QLatin1String("publisher"), QLatin1String("O'Reilly Media"));
-  practicalRdf.insert(QLatin1String("pages"), QLatin1String("331"));
+  practicalRdf.insert(QStringLiteral("title"), QStringLiteral("Practical RDF"));
+  practicalRdf.insert(QStringLiteral("isbn"), QStringLiteral("0-596-00263-7"));
+  practicalRdf.insert(QStringLiteral("author"), QStringLiteral("Shelley Powers"));
+  practicalRdf.insert(QStringLiteral("binding"), QStringLiteral("Paperback"));
+  practicalRdf.insert(QStringLiteral("publisher"), QStringLiteral("O'Reilly Media"));
+  practicalRdf.insert(QStringLiteral("pages"), QStringLiteral("331"));
 
   QHash<QString, QString> gloryRevealed;
-  gloryRevealed.insert(QLatin1String("title"), QLatin1String("Glory Revealed II"));
-  gloryRevealed.insert(QLatin1String("medium"), QLatin1String("Compact Disc"));
-//  gloryRevealed.insert(QLatin1String("artist"), QLatin1String("Various Artists"));
-  gloryRevealed.insert(QLatin1String("label"), QLatin1String("Reunion"));
-  gloryRevealed.insert(QLatin1String("year"), QLatin1String("2009"));
+  gloryRevealed.insert(QStringLiteral("title"), QStringLiteral("Glory Revealed II"));
+  gloryRevealed.insert(QStringLiteral("medium"), QStringLiteral("Compact Disc"));
+//  gloryRevealed.insert(QStringLiteral("artist"), QStringLiteral("Various Artists"));
+  gloryRevealed.insert(QStringLiteral("label"), QStringLiteral("Reunion"));
+  gloryRevealed.insert(QStringLiteral("year"), QStringLiteral("2009"));
 
   QHash<QString, QString> incredibles;
-  incredibles.insert(QLatin1String("title"), QLatin1String("Incredibles"));
-  incredibles.insert(QLatin1String("medium"), QLatin1String("DVD"));
-//  incredibles.insert(QLatin1String("certification"), QLatin1String("PG (USA)"));
-//  incredibles.insert(QLatin1String("studio"), QLatin1String("Walt Disney Home Entertainment"));
-//  incredibles.insert(QLatin1String("year"), QLatin1String("2004"));
-  incredibles.insert(QLatin1String("widescreen"), QLatin1String("true"));
-  incredibles.insert(QLatin1String("director"), QLatin1String("Brad Bird; Bud Luckey; Roger Gould"));
+  incredibles.insert(QStringLiteral("title"), QStringLiteral("Incredibles"));
+  incredibles.insert(QStringLiteral("medium"), QStringLiteral("DVD"));
+//  incredibles.insert(QStringLiteral("certification"), QStringLiteral("PG (USA)"));
+//  incredibles.insert(QStringLiteral("studio"), QStringLiteral("Walt Disney Home Entertainment"));
+//  incredibles.insert(QStringLiteral("year"), QStringLiteral("2004"));
+  incredibles.insert(QStringLiteral("widescreen"), QStringLiteral("true"));
+  incredibles.insert(QStringLiteral("director"), QStringLiteral("Brad Bird; Bud Luckey; Roger Gould"));
 
   QHash<QString, QString> pacteDesLoups;
-  pacteDesLoups.insert(QLatin1String("title"), QLatin1String("Le Pacte des Loups"));
-  pacteDesLoups.insert(QLatin1String("medium"), QLatin1String("Blu-ray"));
-//  pacteDesLoups.insert(QLatin1String("region"), QLatin1String("Region 2"));
-  pacteDesLoups.insert(QLatin1String("studio"), QLatin1String("StudioCanal"));
-  pacteDesLoups.insert(QLatin1String("year"), QLatin1String("2001"));
-  pacteDesLoups.insert(QLatin1String("director"), QLatin1String("Christophe Gans"));
-//  pacteDesLoups.insert(QLatin1String("format"), QLatin1String("PAL"));
+  pacteDesLoups.insert(QStringLiteral("title"), QStringLiteral("Le Pacte des Loups"));
+  pacteDesLoups.insert(QStringLiteral("medium"), QStringLiteral("Blu-ray"));
+//  pacteDesLoups.insert(QStringLiteral("region"), QStringLiteral("Region 2"));
+  pacteDesLoups.insert(QStringLiteral("studio"), QStringLiteral("StudioCanal"));
+  pacteDesLoups.insert(QStringLiteral("year"), QStringLiteral("2001"));
+  pacteDesLoups.insert(QStringLiteral("director"), QStringLiteral("Christophe Gans"));
+//  pacteDesLoups.insert(QStringLiteral("format"), QStringLiteral("PAL"));
 
   QHash<QString, QString> petitPrinceCN;
-  petitPrinceCN.insert(QLatin1String("title"), QString::fromUtf8("小王子(65周年纪念版)"));
-  petitPrinceCN.insert(QLatin1String("author"), QString::fromUtf8("圣埃克絮佩里 (Saint-Exupery)"));
+  petitPrinceCN.insert(QStringLiteral("title"), QStringLiteral("小王子(65周年纪念版)"));
+  petitPrinceCN.insert(QStringLiteral("author"), QStringLiteral("圣埃克絮佩里 (Saint-Exupery)"));
 
-  m_fieldValues.insert(QLatin1String("practicalRdf"), practicalRdf);
-  m_fieldValues.insert(QLatin1String("gloryRevealed"), gloryRevealed);
-  m_fieldValues.insert(QLatin1String("incredibles"), incredibles);
-  m_fieldValues.insert(QLatin1String("pacteDesLoups"), pacteDesLoups);
-  m_fieldValues.insert(QLatin1String("petitPrinceCN"), petitPrinceCN);
+  m_fieldValues.insert(QStringLiteral("practicalRdf"), practicalRdf);
+  m_fieldValues.insert(QStringLiteral("gloryRevealed"), gloryRevealed);
+  m_fieldValues.insert(QStringLiteral("incredibles"), incredibles);
+  m_fieldValues.insert(QStringLiteral("pacteDesLoups"), pacteDesLoups);
+  m_fieldValues.insert(QStringLiteral("petitPrinceCN"), petitPrinceCN);
 }
 
 void AmazonFetcherTest::testTitle() {
@@ -107,7 +107,7 @@ void AmazonFetcherTest::testTitle() {
   QFETCH(QString, searchValue);
   QFETCH(QString, resultName);
 
-  QString groupName = QLatin1String("Amazon ") + locale;
+  QString groupName = QStringLiteral("Amazon ") + locale;
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
@@ -126,44 +126,44 @@ void AmazonFetcherTest::testTitle() {
   while(i.hasNext()) {
     i.next();
     // a known bug is CA video titles result in music results, so only title matches
-    if(i.key() != QLatin1String("title")) {
+    if(i.key() != QStringLiteral("title")) {
       QEXPECT_FAIL("CA video title", "CA video titles show music results for some reason", Continue);
     }
     QString result = entry->field(i.key()).toLower();
     // several titles have edition info in the title
     if(collType == Tellico::Data::Collection::Video &&
-       i.key() == QLatin1String("title") &&
-       (locale == QLatin1String("CA") ||
-        locale == QLatin1String("FR") ||
-        locale == QLatin1String("ES") ||
-        locale == QLatin1String("CN") ||
-        locale == QLatin1String("IT") ||
-        locale == QLatin1String("DE"))) {
+       i.key() == QStringLiteral("title") &&
+       (locale == QStringLiteral("CA") ||
+        locale == QStringLiteral("FR") ||
+        locale == QStringLiteral("ES") ||
+        locale == QStringLiteral("CN") ||
+        locale == QStringLiteral("IT") ||
+        locale == QStringLiteral("DE"))) {
       QVERIFY2(result.contains(i.value(), Qt::CaseInsensitive), qPrintable(i.key()));
     } else if(collType == Tellico::Data::Collection::Video &&
-       i.key() == QLatin1String("year") &&
-       locale == QLatin1String("FR")) {
+       i.key() == QStringLiteral("year") &&
+       locale == QStringLiteral("FR")) {
       // france has no year for movie
       QCOMPARE(result, QString());
     } else if(collType == Tellico::Data::Collection::Video &&
-              i.key() == QLatin1String("medium") &&
-              (locale == QLatin1String("ES") || locale == QLatin1String("IT"))) {
+              i.key() == QStringLiteral("medium") &&
+              (locale == QStringLiteral("ES") || locale == QStringLiteral("IT"))) {
       // ES and IT think it's a DVD
-      QCOMPARE(result, QLatin1String("dvd"));
-    } else if(i.key() == QLatin1String("pages") &&
-              (locale == QLatin1String("UK") || locale == QLatin1String("CA"))) {
+      QCOMPARE(result, QStringLiteral("dvd"));
+    } else if(i.key() == QStringLiteral("pages") &&
+              (locale == QStringLiteral("UK") || locale == QStringLiteral("CA"))) {
       // UK and CA have different page count
-      QCOMPARE(result, QLatin1String("352"));
-    } else if((i.key() == QLatin1String("director") || i.key() == QLatin1String("studio") || i.key() == QLatin1String("year")) &&
-              (locale == QLatin1String("ES") || locale == QLatin1String("IT"))) {
+      QCOMPARE(result, QStringLiteral("352"));
+    } else if((i.key() == QStringLiteral("director") || i.key() == QStringLiteral("studio") || i.key() == QStringLiteral("year")) &&
+              (locale == QStringLiteral("ES") || locale == QStringLiteral("IT"))) {
       // ES and IT have no director or studio or year info
       QCOMPARE(result, QString());
     } else {
       QCOMPARE(result, i.value().toLower());
     }
   }
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void AmazonFetcherTest::testTitle_data() {
@@ -172,55 +172,55 @@ void AmazonFetcherTest::testTitle_data() {
   QTest::addColumn<QString>("searchValue");
   QTest::addColumn<QString>("resultName");
 
-  QTest::newRow("US book title") << QString::fromLatin1("US")
+  QTest::newRow("US book title") << QStringLiteral("US")
                                  << static_cast<int>(Tellico::Data::Collection::Book)
-                                 << QString::fromLatin1("Practical RDF")
-                                 << QString::fromLatin1("practicalRdf");
-  QTest::newRow("UK book title") << QString::fromLatin1("UK")
+                                 << QStringLiteral("Practical RDF")
+                                 << QStringLiteral("practicalRdf");
+  QTest::newRow("UK book title") << QStringLiteral("UK")
                                  << static_cast<int>(Tellico::Data::Collection::Book)
-                                 << QString::fromLatin1("Practical RDF")
-                                 << QString::fromLatin1("practicalRdf");
+                                 << QStringLiteral("Practical RDF")
+                                 << QStringLiteral("practicalRdf");
 //  QTest::newRow("DE") << QString::fromLatin1("DE");
 //  QTest::newRow("JP") << QString::fromLatin1("JP");
 //  QTest::newRow("FR") << QString::fromLatin1("FR");
-  QTest::newRow("CA book title") << QString::fromLatin1("CA")
+  QTest::newRow("CA book title") << QStringLiteral("CA")
                                  << static_cast<int>(Tellico::Data::Collection::Book)
-                                 << QString::fromLatin1("Practical RDF")
-                                 << QString::fromLatin1("practicalRdf");
-  QTest::newRow("CN book title") << QString::fromLatin1("CN")
+                                 << QStringLiteral("Practical RDF")
+                                 << QStringLiteral("practicalRdf");
+  QTest::newRow("CN book title") << QStringLiteral("CN")
                                   << static_cast<int>(Tellico::Data::Collection::Book)
-                                  << QString::fromUtf8("小王子(65周年纪念版)")
-                                  << QString::fromLatin1("petitPrinceCN");
+                                  << QStringLiteral("小王子(65周年纪念版)")
+                                  << QStringLiteral("petitPrinceCN");
 
   // a known bug is CA video titles result in music results, so only title matches
 //  QTest::newRow("CA video title") << QString::fromLatin1("CA")
 //                                  << static_cast<int>(Tellico::Data::Collection::Video)
 //                                  << QString::fromLatin1("Le Pacte des Loups")
 //                                  << QString::fromLatin1("pacteDesLoups");
-  QTest::newRow("FR video title") << QString::fromLatin1("FR")
+  QTest::newRow("FR video title") << QStringLiteral("FR")
                                   << static_cast<int>(Tellico::Data::Collection::Video)
-                                  << QString::fromLatin1("Le Pacte des Loups")
-                                  << QString::fromLatin1("pacteDesLoups");
-  QTest::newRow("ES video title") << QString::fromLatin1("ES")
+                                  << QStringLiteral("Le Pacte des Loups")
+                                  << QStringLiteral("pacteDesLoups");
+  QTest::newRow("ES video title") << QStringLiteral("ES")
                                   << static_cast<int>(Tellico::Data::Collection::Video)
-                                  << QString::fromLatin1("Le Pacte des Loups")
-                                  << QString::fromLatin1("pacteDesLoups");
-  QTest::newRow("IT video title") << QString::fromLatin1("IT")
+                                  << QStringLiteral("Le Pacte des Loups")
+                                  << QStringLiteral("pacteDesLoups");
+  QTest::newRow("IT video title") << QStringLiteral("IT")
                                   << static_cast<int>(Tellico::Data::Collection::Video)
-                                  << QString::fromLatin1("Le Pacte des Loups")
-                                  << QString::fromLatin1("pacteDesLoups");
+                                  << QStringLiteral("Le Pacte des Loups")
+                                  << QStringLiteral("pacteDesLoups");
 
 }
 
 void AmazonFetcherTest::testTitleVideoGame() {
-  QString groupName = QLatin1String("Amazon US");
+  QString groupName = QStringLiteral("Amazon US");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
   KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
-                                       QLatin1String("Ghostbusters Story Pack - LEGO Dimensions"));
+                                       QStringLiteral("Ghostbusters Story Pack - LEGO Dimensions"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -230,10 +230,10 @@ void AmazonFetcherTest::testTitleVideoGame() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Ghostbusters Story Pack - LEGO Dimensions"));
-  QCOMPARE(entry->field("publisher"), QLatin1String("Warner Home Video - Games"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Ghostbusters Story Pack - LEGO Dimensions"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Warner Home Video - Games"));
   // the E10+ ESRB rating was added to Tellico in 2017 in version 3.0.1
-  QCOMPARE(entry->field("certification"), QLatin1String("Everyone 10+"));
+  QCOMPARE(entry->field("certification"), QStringLiteral("Everyone 10+"));
 }
 
 void AmazonFetcherTest::testIsbn() {
@@ -241,7 +241,7 @@ void AmazonFetcherTest::testIsbn() {
   QFETCH(QString, searchValue);
   QFETCH(QString, resultName);
 
-  QString groupName = QLatin1String("Amazon ") + locale;
+  QString groupName = QStringLiteral("Amazon ") + locale;
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
@@ -262,16 +262,16 @@ void AmazonFetcherTest::testIsbn() {
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
-    if(i.key() == QLatin1String("pages") &&
-       (locale == QLatin1String("UK") || locale == QLatin1String("CA"))) {
+    if(i.key() == QStringLiteral("pages") &&
+       (locale == QStringLiteral("UK") || locale == QStringLiteral("CA"))) {
       // UK and CA have different page count
-      QCOMPARE(result, QLatin1String("352"));
+      QCOMPARE(result, QStringLiteral("352"));
     } else {
       QCOMPARE(result, i.value().toLower());
     }
   }
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
 void AmazonFetcherTest::testIsbn_data() {
@@ -279,18 +279,18 @@ void AmazonFetcherTest::testIsbn_data() {
   QTest::addColumn<QString>("searchValue");
   QTest::addColumn<QString>("resultName");
 
-  QTest::newRow("US isbn") << QString::fromLatin1("US")
-                           << QString::fromLatin1("0-596-00263-7; 978-1-59059-831-3")
-                           << QString::fromLatin1("practicalRdf");
-  QTest::newRow("UK isbn") << QString::fromLatin1("UK")
-                           << QString::fromLatin1("0-596-00263-7; 978-1-59059-831-3")
-                           << QString::fromLatin1("practicalRdf");
+  QTest::newRow("US isbn") << QStringLiteral("US")
+                           << QStringLiteral("0-596-00263-7; 978-1-59059-831-3")
+                           << QStringLiteral("practicalRdf");
+  QTest::newRow("UK isbn") << QStringLiteral("UK")
+                           << QStringLiteral("0-596-00263-7; 978-1-59059-831-3")
+                           << QStringLiteral("practicalRdf");
 //  QTest::newRow("DE") << QString::fromLatin1("DE");
 //  QTest::newRow("JP") << QString::fromLatin1("JP");
 //  QTest::newRow("FR") << QString::fromLatin1("FR");
-  QTest::newRow("CA isbn") << QString::fromLatin1("CA")
-                           << QString::fromLatin1("0-596-00263-7; 978-1-59059-831-3")
-                           << QString::fromLatin1("practicalRdf");
+  QTest::newRow("CA isbn") << QStringLiteral("CA")
+                           << QStringLiteral("0-596-00263-7; 978-1-59059-831-3")
+                           << QStringLiteral("practicalRdf");
 /*
   QTest::newRow("CN isbn") << QString::fromLatin1("CN")
                            << QString::fromLatin1("7511305202")
@@ -304,7 +304,7 @@ void AmazonFetcherTest::testUpc() {
   QFETCH(QString, searchValue);
   QFETCH(QString, resultName);
 
-  QString groupName = QLatin1String("Amazon ") + locale;
+  QString groupName = QStringLiteral("Amazon ") + locale;
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
@@ -325,24 +325,24 @@ void AmazonFetcherTest::testUpc() {
     QString result = entry->field(i.key()).toLower();
     // exception for UK label different than US
     // and FR title having edition info
-    if((i.key() == QLatin1String("label") && locale == QLatin1String("UK")) ||
-       (i.key() == QLatin1String("title"))) {
+    if((i.key() == QStringLiteral("label") && locale == QStringLiteral("UK")) ||
+       (i.key() == QStringLiteral("title"))) {
       QVERIFY(result.contains(i.value(), Qt::CaseInsensitive));
-    } else if(i.key() == QLatin1String("year") &&
-       locale == QLatin1String("FR")) {
+    } else if(i.key() == QStringLiteral("year") &&
+       locale == QStringLiteral("FR")) {
       // france has no year for movie
       QCOMPARE(result, QString());
     } else {
       QCOMPARE(result, i.value().toLower());
     }
   }
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
   if(collType == Tellico::Data::Collection::Album) {
-    QVERIFY(!entry->field(QLatin1String("genre")).isEmpty());
-    QVERIFY(!entry->field(QLatin1String("track")).isEmpty());
+    QVERIFY(!entry->field(QStringLiteral("genre")).isEmpty());
+    QVERIFY(!entry->field(QStringLiteral("track")).isEmpty());
   } else if(collType == Tellico::Data::Collection::Video) {
-    QVERIFY(!entry->field(QLatin1String("cast")).isEmpty());
+    QVERIFY(!entry->field(QStringLiteral("cast")).isEmpty());
   }
 }
 
@@ -352,38 +352,38 @@ void AmazonFetcherTest::testUpc_data() {
   QTest::addColumn<QString>("searchValue");
   QTest::addColumn<QString>("resultName");
 
-  QTest::newRow("US music upc") << QString::fromLatin1("US")
+  QTest::newRow("US music upc") << QStringLiteral("US")
                                 << static_cast<int>(Tellico::Data::Collection::Album)
-                                << QString::fromLatin1("602341013727")
-                                << QString::fromLatin1("gloryRevealed");
+                                << QStringLiteral("602341013727")
+                                << QStringLiteral("gloryRevealed");
   // non-US should work with or without the initial 0 country code
-  QTest::newRow("UK music upc1") << QString::fromLatin1("UK")
+  QTest::newRow("UK music upc1") << QStringLiteral("UK")
                                 << static_cast<int>(Tellico::Data::Collection::Album)
-                                << QString::fromLatin1("602341013727")
-                                << QString::fromLatin1("gloryRevealed");
-  QTest::newRow("UK music upc2") << QString::fromLatin1("UK")
+                                << QStringLiteral("602341013727")
+                                << QStringLiteral("gloryRevealed");
+  QTest::newRow("UK music upc2") << QStringLiteral("UK")
                                 << static_cast<int>(Tellico::Data::Collection::Album)
-                                << QString::fromLatin1("0602341013727")
-                                << QString::fromLatin1("gloryRevealed");
-  QTest::newRow("CA music upc") << QString::fromLatin1("CA")
+                                << QStringLiteral("0602341013727")
+                                << QStringLiteral("gloryRevealed");
+  QTest::newRow("CA music upc") << QStringLiteral("CA")
                                 << static_cast<int>(Tellico::Data::Collection::Album)
-                                << QString::fromLatin1("0602341013727")
-                                << QString::fromLatin1("gloryRevealed");
+                                << QStringLiteral("0602341013727")
+                                << QStringLiteral("gloryRevealed");
 
-  QTest::newRow("US movie upc") << QString::fromLatin1("US")
+  QTest::newRow("US movie upc") << QStringLiteral("US")
                                 << static_cast<int>(Tellico::Data::Collection::Video)
-                                << QString::fromLatin1("786936244250")
-                                << QString::fromLatin1("incredibles");
-  QTest::newRow("UK movie upc") << QString::fromLatin1("UK")
+                                << QStringLiteral("786936244250")
+                                << QStringLiteral("incredibles");
+  QTest::newRow("UK movie upc") << QStringLiteral("UK")
                                 << static_cast<int>(Tellico::Data::Collection::Video)
-                                << QString::fromLatin1("0786936244250")
-                                << QString::fromLatin1("incredibles");
-  QTest::newRow("CA movie upc") << QString::fromLatin1("CA")
+                                << QStringLiteral("0786936244250")
+                                << QStringLiteral("incredibles");
+  QTest::newRow("CA movie upc") << QStringLiteral("CA")
                                 << static_cast<int>(Tellico::Data::Collection::Video)
-                                << QString::fromLatin1("0786936244250")
-                                << QString::fromLatin1("incredibles");
-  QTest::newRow("FR movie upc") << QString::fromLatin1("FR")
+                                << QStringLiteral("0786936244250")
+                                << QStringLiteral("incredibles");
+  QTest::newRow("FR movie upc") << QStringLiteral("FR")
                                 << static_cast<int>(Tellico::Data::Collection::Video)
-                                << QString::fromLatin1("5050582560985")
-                                << QString::fromLatin1("pacteDesLoups");
+                                << QStringLiteral("5050582560985")
+                                << QStringLiteral("pacteDesLoups");
 }

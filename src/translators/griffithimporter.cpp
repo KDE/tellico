@@ -34,7 +34,7 @@
 using Tellico::Import::GriffithImporter;
 
 GriffithImporter::GriffithImporter(const QUrl& url_) : XSLTImporter(url_) {
-  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("griffith2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("griffith2tellico.xsl"));
   if(!xsltFile.isEmpty()) {
     QUrl u = QUrl::fromLocalFile(xsltFile);
     setXSLTURL(u);

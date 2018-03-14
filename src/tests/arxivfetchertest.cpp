@@ -43,19 +43,19 @@ void ArxivFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/arxiv2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
-  m_fieldValues.insert(QLatin1String("arxiv"), QLatin1String("hep-lat/0110180"));
-  m_fieldValues.insert(QLatin1String("entry-type"), QLatin1String("article"));
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
-  m_fieldValues.insert(QLatin1String("author"), QLatin1String("M. Hasenbusch; K. Jansen"));
-  m_fieldValues.insert(QLatin1String("keyword"), QLatin1String("High Energy Physics - Lattice"));
-  m_fieldValues.insert(QLatin1String("journal"), QLatin1String("Nucl.Phys.Proc.Suppl. 106"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("2002"));
-  m_fieldValues.insert(QLatin1String("pages"), QLatin1String("1076-1078"));
+  m_fieldValues.insert(QStringLiteral("arxiv"), QStringLiteral("hep-lat/0110180"));
+  m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Speeding up the Hybrid-Monte-Carlo algorithm for dynamical fermions"));
+  m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("M. Hasenbusch; K. Jansen"));
+  m_fieldValues.insert(QStringLiteral("keyword"), QStringLiteral("High Energy Physics - Lattice"));
+  m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("Nucl.Phys.Proc.Suppl. 106"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2002"));
+  m_fieldValues.insert(QStringLiteral("pages"), QStringLiteral("1076-1078"));
 }
 
 void ArxivFetcherTest::testArxivTitle() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
-                                       QLatin1Char('"') + m_fieldValues.value("title") + QLatin1Char('"'));
+                                       QLatin1Char('"') + m_fieldValues.value(QStringLiteral("title")) + QLatin1Char('"'));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -66,7 +66,7 @@ void ArxivFetcherTest::testArxivTitle() {
 
 void ArxivFetcherTest::testArxivID() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID,
-                                       "arxiv:" + m_fieldValues.value("arxiv"));
+                                       "arxiv:" + m_fieldValues.value(QStringLiteral("arxiv")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -82,7 +82,7 @@ void ArxivFetcherTest::testArxivID() {
 }
 
 void ArxivFetcherTest::testArxivIDVersioned() {
-  QString arxivVersioned = m_fieldValues.value("arxiv") + "v1";
+  QString arxivVersioned = m_fieldValues.value(QStringLiteral("arxiv")) + "v1";
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ArxivID, arxivVersioned);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ArxivFetcher(this));
 
@@ -96,7 +96,7 @@ void ArxivFetcherTest::testArxivIDVersioned() {
   QHashIterator<QString, QString> i(m_fieldValues);
   while(i.hasNext()) {
     i.next();
-    if(i.key() == "arxiv") continue;
+    if(i.key() == QLatin1String("arxiv")) continue;
     QCOMPARE(entry->field(i.key()), i.value());
   }
 }

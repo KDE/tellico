@@ -43,17 +43,17 @@ void MovieMeterFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::ImageFactory::init();
 
-  m_fieldValues.insert(QLatin1String("title"), QLatin1String("Man from Snowy River, The"));
-  m_fieldValues.insert(QLatin1String("year"), QLatin1String("1982"));
-  m_fieldValues.insert(QLatin1String("director"), QLatin1String("George Miller"));
-  m_fieldValues.insert(QLatin1String("running-time"), QLatin1String("102"));
-  m_fieldValues.insert(QLatin1String("genre"), QLatin1String("Western"));
-  m_fieldValues.insert(QLatin1String("nationality"), QString::fromUtf8("Australië"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Man from Snowy River, The"));
+  m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1982"));
+  m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("George Miller"));
+  m_fieldValues.insert(QStringLiteral("running-time"), QStringLiteral("102"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Western"));
+  m_fieldValues.insert(QStringLiteral("nationality"), QStringLiteral("Australië"));
 }
 
 void MovieMeterFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
-                                       QLatin1String("Man From Snowy River"));
+                                       QStringLiteral("Man From Snowy River"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MovieMeterFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 2);
@@ -69,17 +69,17 @@ void MovieMeterFetcherTest::testKeyword() {
     QString result = entry->field(i.key()).toLower();
     QCOMPARE(result, i.value().toLower());
   }
-  QStringList castList = Tellico::FieldFormat::splitTable(entry->field("cast"));
+  QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
-  QCOMPARE(castList.at(0), QLatin1String("Tom Burlinson"));
-  QVERIFY(!entry->field(QLatin1String("cover")).isEmpty());
-  QVERIFY(!entry->field(QLatin1String("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!entry->field(QLatin1String("plot")).isEmpty());
+  QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!entry->field(QStringLiteral("plot")).isEmpty());
 }
 
 void MovieMeterFetcherTest::testKeywordCzech() {
 //  QString tmav = QString::fromUtf8("Tmavomodrý Svět");
-  QString tmav = QString::fromUtf8("Tmavomodrý Svet");
+  QString tmav = QStringLiteral("Tmavomodrý Svet");
 //  QString tmav = QString::fromUtf8("Tmavomodrý svet");
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        tmav);

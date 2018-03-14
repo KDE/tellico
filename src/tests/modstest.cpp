@@ -51,14 +51,14 @@ void ModsTest::testBook() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QLatin1String("MODS Import"));
+  QCOMPARE(coll->title(), QStringLiteral("MODS Import"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QLatin1String("Sound and fury"));
-  QCOMPARE(entry->field("author"), QLatin1String("Alterman, Eric"));
-  QCOMPARE(entry->field("genre"), QLatin1String("bibliography"));
-  QCOMPARE(entry->field("pub_year"), QLatin1String("1999"));
-  QCOMPARE(entry->field("isbn"), QLatin1String("0-8014-8639-4"));
-  QCOMPARE(entry->field("lccn"), QLatin1String("99042030"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Sound and fury"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Alterman, Eric"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("bibliography"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1999"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0-8014-8639-4"));
+  QCOMPARE(entry->field("lccn"), QStringLiteral("99042030"));
 }

@@ -70,7 +70,7 @@ bool PDFImporter::canImport(int type_) const {
 }
 
 Tellico::Data::CollPtr PDFImporter::collection() {
-  QString xsltFile = DataFileRegistry::self()->locate(QLatin1String("xmp2tellico.xsl"));
+  QString xsltFile = DataFileRegistry::self()->locate(QStringLiteral("xmp2tellico.xsl"));
   if(xsltFile.isEmpty()) {
     myWarning() << "can not locate xmp2tellico.xsl";
     return Data::CollPtr();
@@ -78,7 +78,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(urls().count());
-  connect(&item, SIGNAL(signalCancelled(ProgressItem*)), SLOT(slotCancel()));
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::PDFImporter::slotCancel);
   ProgressItem::Done done(this);
   const bool showProgress = options() & ImportProgress;
 
@@ -130,7 +130,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         setStatusMessage(i18n("Tellico was unable to read any metadata from the PDF file."));
       } else {
         entry = newColl->entries().front();
-        hasDOI |= !entry->field(QLatin1String("doi")).isEmpty();
+        hasDOI |= !entry->field(QStringLiteral("doi")).isEmpty();
         // the XMP handler has a habit of inserting empty values surrounded by parentheses
         QRegExp rx(QLatin1String("\\(\\s*\\)"));
         foreach(Data::FieldPtr field, newColl->fields()) {
@@ -157,21 +157,21 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     if(doc && !doc->isLocked()) {
       // now the question is, do we overwrite XMP data with Poppler data?
       // for now, let's say yes conditionally
-      QString s = doc->info(QLatin1String("Title")).simplified();
+      QString s = doc->info(QStringLiteral("Title")).simplified();
       if(!s.isEmpty()) {
-        entry->setField(QLatin1String("title"), s);
+        entry->setField(QStringLiteral("title"), s);
       }
       // author could be separated by commas, "and" or whatever
       // we're not going to overwrite it
-      if(entry->field(QLatin1String("author")).isEmpty()) {
+      if(entry->field(QStringLiteral("author")).isEmpty()) {
         QRegExp rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
-        QStringList authors = doc->info(QLatin1String("Author")).simplified().split(rx);
-        entry->setField(QLatin1String("author"), authors.join(FieldFormat::delimiterString()));
+        QStringList authors = doc->info(QStringLiteral("Author")).simplified().split(rx);
+        entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
       }
-      s = doc->info(QLatin1String("Keywords")).simplified();
+      s = doc->info(QStringLiteral("Keywords")).simplified();
       if(!s.isEmpty()) {
         // keywords are also separated by semi-colons in poppler
-        entry->setField(QLatin1String("keyword"), s);
+        entry->setField(QStringLiteral("keyword"), s);
       }
 
       // now parse the first page text and try to guess
@@ -195,7 +195,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         if(rx.indexIn(text) > -1) {
           QString doi = rx.cap(1);
           myLog() << "in PDF file, found DOI:" << doi;
-          entry->setField(QLatin1String("doi"), doi);
+          entry->setField(QStringLiteral("doi"), doi);
           hasDOI = true;
         }
         rx = QRegExp(QLatin1String("arXiv:"
@@ -207,12 +207,12 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         if(rx.indexIn(text) > -1) {
           QString arxiv = rx.cap(1);
           myLog() << "in PDF file, found arxiv:" << arxiv;
-          if(!entry->collection()->hasField(QLatin1String("arxiv"))) {
-            Data::FieldPtr field(new Data::Field(QLatin1String("arxiv"), i18n("arXiv ID")));
+          if(!entry->collection()->hasField(QStringLiteral("arxiv"))) {
+            Data::FieldPtr field(new Data::Field(QStringLiteral("arxiv"), i18n("arXiv ID")));
             field->setCategory(i18n("Publishing"));
             entry->collection()->addField(field);
           }
-          entry->setField(QLatin1String("arxiv"), arxiv);
+          entry->setField(QStringLiteral("arxiv"), arxiv);
           hasArxiv = true;
         }
 
@@ -224,22 +224,22 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     delete doc;
 #endif
 
-    entry->setField(QLatin1String("url"), (*it).url());
+    entry->setField(QStringLiteral("url"), (*it).url());
     // always an article?
-    entry->setField(QLatin1String("entry-type"), QLatin1String("article"));
+    entry->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
 
     QPixmap pix = NetAccess::filePreview(QUrl::fromLocalFile(ref->fileName()), PDF_FILE_PREVIEW_SIZE);
     if(pix.isNull()) {
       myDebug() << "No file preview from pdf";
     } else {
       // is png best option?
-      QString id = ImageFactory::addImage(pix, QLatin1String("PNG"));
+      QString id = ImageFactory::addImage(pix, QStringLiteral("PNG"));
       if(!id.isEmpty()) {
-        Data::FieldPtr field = newColl->fieldByName(QLatin1String("cover"));
+        Data::FieldPtr field = newColl->fieldByName(QStringLiteral("cover"));
         if(!field && !newColl->imageFields().isEmpty()) {
           field = newColl->imageFields().front();
         } else if(!field) {
-          field = new Data::Field(QLatin1String("cover"), i18n("Front Cover"), Data::Field::Image);
+          field = new Data::Field(QStringLiteral("cover"), i18n("Front Cover"), Data::Field::Image);
           newColl->addField(field);
         }
         entry->setField(field, id);
@@ -270,7 +270,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
                                    "CrossRef.org. However, you must create an CrossRef account and add a new "
                                    "data source with your account information."),
                               QString(),
-                              QLatin1String("CrossRefSourceNeeded"));
+                              QStringLiteral("CrossRefSourceNeeded"));
     } else {
       foreach(Fetch::Fetcher::Ptr fetcher, vec) {
         foreach(Data::EntryPtr entry, coll->entries()) {
@@ -299,8 +299,8 @@ Tellico::Data::CollPtr PDFImporter::collection() {
   foreach(Data::EntryPtr entry, coll->entries()) {
     if(entry->title().isEmpty()) {
       // use file name
-      QUrl u = QUrl::fromLocalFile(entry->field(QLatin1String("url")));
-      entry->setField(QLatin1String("title"), u.fileName());
+      QUrl u = QUrl::fromLocalFile(entry->field(QStringLiteral("url")));
+      entry->setField(QStringLiteral("title"), u.fileName());
     }
   }
 

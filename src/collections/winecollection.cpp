@@ -35,7 +35,7 @@ using Tellico::Data::WineCollection;
 
 WineCollection::WineCollection(bool addDefaultFields_, const QString& title_)
    : Collection(title_.isEmpty() ? i18n("My Wines") : title_) {
-  setDefaultGroupField(QLatin1String("type"));
+  setDefaultGroupField(QStringLiteral("type"));
   if(addDefaultFields_) {
     addFields(defaultFields());
   }
@@ -46,86 +46,86 @@ Tellico::Data::FieldList WineCollection::defaultFields() {
   FieldPtr field;
 
   field = Field::createDefaultField(Field::TitleField);
-  field->setProperty(QLatin1String("template"), QLatin1String("%{vintage} %{producer:1} %{varietal:1}"));
+  field->setProperty(QStringLiteral("template"), QStringLiteral("%{vintage} %{producer:1} %{varietal:1}"));
   field->setFlags(Field::NoDelete | Field::Derived);
   field->setFormatType(FieldFormat::FormatNone);
   list.append(field);
 
-  field = new Field(QLatin1String("producer"), i18nc("Wine Producer", "Producer"));
+  field = new Field(QStringLiteral("producer"), i18nc("Wine Producer", "Producer"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("appellation"), i18n("Appellation"));
+  field = new Field(QStringLiteral("appellation"), i18n("Appellation"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("varietal"), i18n("Varietal"));
+  field = new Field(QStringLiteral("varietal"), i18n("Varietal"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("vintage"), i18n("Vintage"), Field::Number);
+  field = new Field(QStringLiteral("vintage"), i18n("Vintage"), Field::Number);
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
   QStringList type;
   type << i18n("Red Wine") << i18n("White Wine") << i18n("Sparkling Wine");
-  field = new Field(QLatin1String("type"), i18n("Type"), type);
+  field = new Field(QStringLiteral("type"), i18n("Type"), type);
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("country"), i18n("Country"));
+  field = new Field(QStringLiteral("country"), i18n("Country"));
   field->setCategory(i18n(wine_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_date"), i18n("Purchase Date"));
+  field = new Field(QStringLiteral("pur_date"), i18n("Purchase Date"));
   field->setCategory(i18n(wine_personal));
   field->setFormatType(FieldFormat::FormatDate);
   list.append(field);
 
-  field = new Field(QLatin1String("pur_price"), i18n("Purchase Price"));
+  field = new Field(QStringLiteral("pur_price"), i18n("Purchase Price"));
   field->setCategory(i18n(wine_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("location"), i18n("Location"));
+  field = new Field(QStringLiteral("location"), i18n("Location"));
   field->setCategory(i18n(wine_personal));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("quantity"), i18n("Quantity"), Field::Number);
+  field = new Field(QStringLiteral("quantity"), i18n("Quantity"), Field::Number);
   field->setCategory(i18n(wine_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("drink-by"), i18n("Drink By"), Field::Number);
-  field->setCategory(i18n(wine_personal));
-  field->setFlags(Field::AllowGrouped);
-  list.append(field);
-
-  field = new Field(QLatin1String("rating"), i18n("Rating"), Field::Rating);
+  field = new Field(QStringLiteral("drink-by"), i18n("Drink By"), Field::Number);
   field->setCategory(i18n(wine_personal));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QLatin1String("gift"), i18n("Gift"), Field::Bool);
+  field = new Field(QStringLiteral("rating"), i18n("Rating"), Field::Rating);
+  field->setCategory(i18n(wine_personal));
+  field->setFlags(Field::AllowGrouped);
+  list.append(field);
+
+  field = new Field(QStringLiteral("gift"), i18n("Gift"), Field::Bool);
   field->setCategory(i18n(wine_personal));
   list.append(field);
 
-  field = new Field(QLatin1String("label"), i18n("Label Image"), Field::Image);
+  field = new Field(QStringLiteral("label"), i18n("Label Image"), Field::Image);
   list.append(field);
 
-  field = new Field(QLatin1String("description"), i18n("Description"), Field::Para);
+  field = new Field(QStringLiteral("description"), i18n("Description"), Field::Para);
   list.append(field);
 
-  field = new Field(QLatin1String("comments"), i18n("Comments"), Field::Para);
+  field = new Field(QStringLiteral("comments"), i18n("Comments"), Field::Para);
   list.append(field);
 
   list.append(Field::createDefaultField(Field::IDField));

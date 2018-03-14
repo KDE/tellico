@@ -98,7 +98,7 @@ void FilmasterFetcher::search() {
       break;
   }
   QUrlQuery q;
-  q.addQueryItem(QLatin1String("phrase"), request().value);
+  q.addQueryItem(QStringLiteral("phrase"), request().value);
   u.setQuery(q);
 
 //  myDebug() << "url:" << u;
@@ -127,7 +127,7 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  const QString image = entry->field(QLatin1String("cover"));
+  const QString image = entry->field(QStringLiteral("cover"));
   if(image.contains(QLatin1Char('/'))) {
     QUrl imageUrl;
     if(image.startsWith(QLatin1String("//"))) {
@@ -142,13 +142,13 @@ Tellico::Data::EntryPtr FilmasterFetcher::fetchEntryHook(uint uid_) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
     // empty image ID is ok
-    entry->setField(QLatin1String("cover"), id);
+    entry->setField(QStringLiteral("cover"), id);
   }
   return entry;
 }
 
 Tellico::Fetch::FetchRequest FilmasterFetcher::updateRequest(Data::EntryPtr entry_) {
-  const QString title = entry_->field(QLatin1String("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -191,13 +191,13 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   QVariantList resultList;
   switch(request().key) {
     case Title:
-      resultList = resultsMap.value(QLatin1String("best_results")).toList()
-                 + resultsMap.value(QLatin1String("results")).toList();
+      resultList = resultsMap.value(QStringLiteral("best_results")).toList()
+                 + resultsMap.value(QStringLiteral("results")).toList();
       break;
 
     case Person:
       {
-        const QVariantList personList = resultsMap.value(QLatin1String("best_results")).toList();
+        const QVariantList personList = resultsMap.value(QStringLiteral("best_results")).toList();
         QStringList uris;
         foreach(const QVariant& person, personList) {
           const QVariantMap personMap = person.toMap();
@@ -209,13 +209,13 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
           u.setPath(uri);
           QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
           QJsonDocument doc2 = QJsonDocument::fromJson(output.toUtf8());
-          resultList += doc2.object().toVariantMap().value(QLatin1String("objects")).toList();
+          resultList += doc2.object().toVariantMap().value(QStringLiteral("objects")).toList();
         }
       }
       break;
 
     case Keyword:
-      resultList = resultsMap.value(QLatin1String("films")).toMap().value(QLatin1String("best_results")).toList();
+      resultList = resultsMap.value(QStringLiteral("films")).toMap().value(QStringLiteral("best_results")).toList();
       break;
 
     default:
@@ -229,8 +229,8 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::VideoCollection(true));
-  if(!coll->hasField(QLatin1String("filmaster")) && optionalFields().contains(QLatin1String("filmaster"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("filmaster"), i18n("Filmaster Link"), Data::Field::URL));
+  if(!coll->hasField(QStringLiteral("filmaster")) && optionalFields().contains(QLatin1String("filmaster"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("filmaster"), i18n("Filmaster Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -252,20 +252,20 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
 }
 
 void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result_) {
-  entry_->setField(QLatin1String("title"), mapValue(result_, "title"));
-  entry_->setField(QLatin1String("year"), mapValue(result_, "release_year"));
-  entry_->setField(QLatin1String("genre"), mapValue(result_, "tags"));
-  entry_->setField(QLatin1String("nationality"), mapValue(result_, "production_country_list"));
-  entry_->setField(QLatin1String("cover"), mapValue(result_, "image"));
-  entry_->setField(QLatin1String("plot"), mapValue(result_, "description"));
+  entry_->setField(QStringLiteral("title"), mapValue(result_, "title"));
+  entry_->setField(QStringLiteral("year"), mapValue(result_, "release_year"));
+  entry_->setField(QStringLiteral("genre"), mapValue(result_, "tags"));
+  entry_->setField(QStringLiteral("nationality"), mapValue(result_, "production_country_list"));
+  entry_->setField(QStringLiteral("cover"), mapValue(result_, "image"));
+  entry_->setField(QStringLiteral("plot"), mapValue(result_, "description"));
 
   QStringList directors;
-  foreach(const QVariant& director, result_.value(QLatin1String("directors")).toList()) {
+  foreach(const QVariant& director, result_.value(QStringLiteral("directors")).toList()) {
     const QVariantMap directorMap = director.toMap();
     directors << mapValue(directorMap, "name") + QLatin1Char(' ') + mapValue(directorMap, "surname");
   }
   if(!directors.isEmpty()) {
-    entry_->setField(QLatin1String("director"), directors.join(FieldFormat::delimiterString()));
+    entry_->setField(QStringLiteral("director"), directors.join(FieldFormat::delimiterString()));
   }
 
   const QString castUri = mapValue(result_, "characters_uri");
@@ -274,22 +274,22 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
     u.setPath(castUri);
     QString output = FileHandler::readTextFile(u, false /*quiet*/, true /*utf8*/);
     QJsonDocument doc = QJsonDocument::fromJson(output.toUtf8());
-    QVariantList castList = doc.object().toVariantMap().value(QLatin1String("objects")).toList();
+    QVariantList castList = doc.object().toVariantMap().value(QStringLiteral("objects")).toList();
     QStringList castLines;
     foreach(const QVariant& castResult, castList) {
       const QVariantMap castMap = castResult.toMap();
-      const QVariantMap nameMap = castMap.value(QLatin1String("person")).toMap();
+      const QVariantMap nameMap = castMap.value(QStringLiteral("person")).toMap();
       castLines << mapValue(nameMap, "name") + QLatin1Char(' ') + mapValue(nameMap, "surname")
                  + FieldFormat::columnDelimiterString()
                  + mapValue(castMap, "character");
     }
     if(!castLines.isEmpty()) {
-      entry_->setField(QLatin1String("cast"), castLines.join(FieldFormat::rowDelimiterString()));
+      entry_->setField(QStringLiteral("cast"), castLines.join(FieldFormat::rowDelimiterString()));
     }
   }
 
   if(optionalFields().contains(QLatin1String("filmaster"))) {
-    entry_->setField(QLatin1String("filmaster"), QLatin1String("http://filmaster.com/film/") + mapValue(result_, "permalink"));
+    entry_->setField(QStringLiteral("filmaster"), QLatin1String("http://filmaster.com/film/") + mapValue(result_, "permalink"));
   }
 }
 
@@ -298,7 +298,7 @@ Tellico::Fetch::ConfigWidget* FilmasterFetcher::configWidget(QWidget* parent_) c
 }
 
 QString FilmasterFetcher::defaultName() {
-  return QLatin1String("Filmaster"); // no translation
+  return QStringLiteral("Filmaster"); // no translation
 }
 
 QString FilmasterFetcher::defaultIcon() {
@@ -307,7 +307,7 @@ QString FilmasterFetcher::defaultIcon() {
 
 Tellico::StringHash FilmasterFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QLatin1String("filmaster")] = i18n("Filmaster Link");
+  hash[QStringLiteral("filmaster")] = i18n("Filmaster Link");
   return hash;
 }
 

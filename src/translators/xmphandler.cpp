@@ -36,6 +36,7 @@
 
 using Tellico::XMPHandler;
 
+bool XMPHandler::s_needInit = true;
 int XMPHandler::s_initCount = 0;
 
 bool XMPHandler::isXMPEnabled() {
@@ -47,30 +48,27 @@ bool XMPHandler::isXMPEnabled() {
 }
 
 XMPHandler::XMPHandler() {
-  init();
+#ifdef HAVE_EXEMPI
+  ++s_initCount;
+#endif
 }
 
 XMPHandler::~XMPHandler() {
 #ifdef HAVE_EXEMPI
   --s_initCount;
-  if(s_initCount == 0) {
+  if(s_initCount == 0 && !s_needInit) {
     xmp_terminate();
   }
-#endif
-}
-
-void XMPHandler::init() {
-#ifdef HAVE_EXEMPI
-  if(s_initCount == 0) {
-    xmp_init();
-  }
-  ++s_initCount;
 #endif
 }
 
 QString XMPHandler::extractXMP(const QString& file) {
   QString result;
 #ifdef HAVE_EXEMPI
+  if(s_needInit) {
+    xmp_init();
+    s_needInit = false;
+  }
   XmpFilePtr xmpfile = xmp_files_open_new(QFile::encodeName(file).constData(), XMP_OPEN_READ);
   if(!xmpfile) {
     myDebug() << "unable to open " << file;
