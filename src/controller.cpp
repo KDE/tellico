@@ -277,6 +277,7 @@ void Controller::slotClearSelection() {
   blockAllSignals(true);
 
   m_mainWindow->m_detailedView->clearSelection();
+  m_mainWindow->m_iconView->clearSelection();
   m_mainWindow->m_groupView->clearSelection();
   if(m_mainWindow->m_filterView) {
     m_mainWindow->m_filterView->clearSelection();

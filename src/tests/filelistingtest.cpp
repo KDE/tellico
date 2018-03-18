@@ -106,7 +106,9 @@ void FileListingTest::testXMPData() {
   QCOMPARE(entry->field("mimetype"), QStringLiteral("image/jpeg"));
   QCOMPARE(entry->field("size"), QStringLiteral("23.6 KiB"));
 #ifdef HAVE_KFILEMETADATA
+#ifdef HAVE_EXEMPI
   QEXPECT_FAIL("", "Because of a crash related to exempi and kfilemetadata linking, no metadata is read", Continue);
+#endif
   QVERIFY(!entry->field("metainfo").isEmpty());
 #endif
 }
