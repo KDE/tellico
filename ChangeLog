@@ -1,3 +1,8 @@
+2018-03-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with inconsistent selection (Bug 391614).
+	* Added a workaround for a crash when linking to both Exempi and KFileMetadata.
+
 2018-02-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDb data source.
