@@ -639,11 +639,6 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Reset the window's layout"));
   action->setIcon(QIcon::fromTheme(QLatin1String("resetview")));
 
-  m_toggleGroupWidget = new KToggleAction(i18n("Show Grou&p View"), this);
-  m_toggleGroupWidget->setToolTip(i18n("Enable/disable the group view"));
-  connect(m_toggleGroupWidget, SIGNAL(triggered()), SLOT(slotToggleGroupWidget()));
-  actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_toggleGroupWidget);
-
   m_toggleEntryEditor = new KToggleAction(i18n("Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
