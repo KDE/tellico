@@ -46,6 +46,7 @@ public:
                       QObject* parent=nullptr);
 
   void addSelectionProxy(QItemSelectionModel* selModel);
+  Tellico::Data::EntryList selectedEntries() const { return m_selectedEntries; }
 
 Q_SIGNALS:
   void entriesSelected(Tellico::Data::EntryList entries);

@@ -1259,6 +1259,7 @@ bool MainWindow::fileSave() {
       m_newDocument = false;
       updateCaption(false);
       m_fileSave->setEnabled(false);
+      // TODO: call a method of the model instead of the view here
       m_detailedView->resetEntryStatus();
     } else {
       ret = false;
@@ -2088,6 +2089,7 @@ void MainWindow::addFilterView() {
           this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
   // use the EntrySelectionModel as a proxy so when entries get selected in the filter view
   // the edit dialog and entry view are updated
+  // TODO: consider using KSelectionProxyModel
   static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_filterView->selectionModel());
 
   // sort by count if column = 1
@@ -2109,6 +2111,7 @@ void MainWindow::addLoanView() {
 
   // use the EntrySelectionModel as a proxy so when entries get selected in the loan view
   // the edit dialog and entry view are updated
+  // TODO: consider using KSelectionProxyModel
   static_cast<EntrySelectionModel*>(m_iconView->selectionModel())->addSelectionProxy(m_loanView->selectionModel());
 
   // sort by count if column = 1

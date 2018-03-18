@@ -33,6 +33,7 @@
 #include "../models/entrygroupmodel.h"
 #include "../models/groupsortmodel.h"
 #include "../models/modeliterator.h"
+#include "../models/entryselectionmodel.h"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../document.h"
@@ -40,6 +41,7 @@
 #include "../images/imagefactory.h"
 
 #include <QTest>
+#include <QSignalSpy>
 
 QTEST_GUILESS_MAIN( TellicoModelTest )
 
@@ -178,4 +180,60 @@ void TellicoModelTest::testGroupModel() {
     QCOMPARE(group->size(), 1);
     QVERIFY(!group->hasEmptyGroupName());
   }
+}
+
+void TellicoModelTest::testSelectionModel() {
+  qRegisterMetaType<Tellico::Data::EntryList>("Tellico::Data::EntryList");
+  // this mimics the model dependencies used in mainwindow.cpp
+  Tellico::EntryModel entryModel(this);
+  ModelTest test1(&entryModel);
+  Tellico::EntryIconModel iconModel(this);
+  ModelTest test2(&iconModel);
+  iconModel.setSourceModel(&entryModel);
+
+  QItemSelectionModel selModel(&entryModel, this);
+  Tellico::EntrySelectionModel proxySelect(&iconModel, &selModel, this);
+
+//  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default fields
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(QStringLiteral("title"), QStringLiteral("test1"));
+  coll->addEntries(entry1);
+
+  entryModel.setFields(coll->fields());
+  entryModel.setEntries(coll->entries());
+
+  QSignalSpy entriesSelectedSpy(&proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)));
+  selModel.select(entryModel.index(0,0), QItemSelectionModel::Select);
+  QCOMPARE(entriesSelectedSpy.count(), 1);
+
+  Tellico::Data::EntryList entries = proxySelect.selectedEntries();
+  QCOMPARE(entries.count(), 1);
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
+
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(QStringLiteral("title"), QStringLiteral("test2"));
+  coll->addEntries(entry2);
+  entryModel.addEntries(Tellico::Data::EntryList() << entry2);
+
+  entries = proxySelect.selectedEntries();
+  QCOMPARE(entries.count(), 1);
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
+
+  selModel.select(entryModel.index(1,0), QItemSelectionModel::Select);
+  entries = proxySelect.selectedEntries();
+  QCOMPARE(entries.count(), 2);
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("test1"));
+  QCOMPARE(entries.at(1)->title(), QStringLiteral("test2"));
+
+  selModel.select(entryModel.index(0,0), QItemSelectionModel::Toggle);
+  entries = proxySelect.selectedEntries();
+  QCOMPARE(entries.count(), 1);
+  QCOMPARE(entries.at(0)->title(), QStringLiteral("test2"));
+
+  entryModel.clear();
+  // now there should be no selection since EntryModel::clear calls modelReset()
+  // and the proxy selection is connected to that signal
+  entries = proxySelect.selectedEntries();
+  QCOMPARE(entries.count(), 0);
 }

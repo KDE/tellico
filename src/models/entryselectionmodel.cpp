@@ -36,6 +36,10 @@ EntrySelectionModel::EntrySelectionModel(QAbstractItemModel* targetModel_,
     : KLinkItemSelectionModel(targetModel_, selModel_, parent_)
     , m_processing(false) {
   addSelectionProxy(selModel_);
+  // when the entry model is reset, the selection signal is not triggered
+  // using the modelReset signal does not work
+  connect(targetModel_, &QAbstractItemModel::modelAboutToBeReset,
+          this, &QItemSelectionModel::clear);
 }
 
 void EntrySelectionModel::addSelectionProxy(QItemSelectionModel* selModel_) {
@@ -67,7 +71,8 @@ void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_
   // clearing the selection in the other models will have cascading calls to selectionChanged()
   // now, add and remove selected entries from the list
   // the selection will include an index for every column, need to check for duplicates
-  QList<Data::ID> IDlist;
+  // can't use a QSet of entries since we want to retain the selection ordering
+  QSet<Data::ID> IDlist;
   foreach(const QModelIndex& index, deselected_.indexes()) {
     Data::EntryPtr entry = index.data(EntryPtrRole).value<Data::EntryPtr>();
     if(entry && !IDlist.contains(entry->id())) {

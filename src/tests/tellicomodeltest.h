@@ -35,6 +35,7 @@ private Q_SLOTS:
   void testEntryModel();
   void testFilterModel();
   void testGroupModel();
+  void testSelectionModel();
 };
 
 #endif
