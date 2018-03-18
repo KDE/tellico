@@ -35,6 +35,9 @@
 
 namespace {
   static const int ENTRYMODEL_IMAGE_HEIGHT = 64;
+  // number of entries in a list considered to be "small" in that
+  // faster to do individual operations than model reset
+  static const int SMALL_OPERATION_ENTRY_SIZE = 10;
 }
 
 using Tellico::EntryModel;
@@ -260,9 +263,22 @@ void EntryModel::clear() {
 }
 
 void EntryModel::clearSaveState() {
-  beginResetModel();
-  m_saveStates.clear();
-  endResetModel();
+  // if there are many save states to be toggled, do a full model reset
+  if(m_saveStates.size() > SMALL_OPERATION_ENTRY_SIZE) {
+    beginResetModel();
+    m_saveStates.clear();
+    endResetModel();
+  } else {
+    QHashIterator<int, int> i(m_saveStates);
+    while(i.hasNext()) {
+      i.next();
+      // If the hash is modified while a QHashIterator is active, the QHashIterator
+      // will continue iterating over the original hash, ignoring the modified copy.
+      m_saveStates.remove(i.key());
+      QModelIndex idx = createIndex(i.key(), 0);
+      emit dataChanged(idx, idx, QVector<int>() << SaveStateRole);
+    }
+  }
 }
 
 void EntryModel::setEntries(const Tellico::Data::EntryList& entries_) {
@@ -291,7 +307,7 @@ void EntryModel::modifyEntries(const Tellico::Data::EntryList& entries_) {
 void EntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
   // for performance reasons, if more than 10 entries are being removed, rather than
   // iterating over all of them, which really hurts, just signal a full replacement
-  const bool bigRemoval = (entries_.size() > 10);
+  const bool bigRemoval = (entries_.size() > SMALL_OPERATION_ENTRY_SIZE);
   if(bigRemoval) {
     beginResetModel();
   }
