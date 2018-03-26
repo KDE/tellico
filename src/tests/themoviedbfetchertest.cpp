@@ -45,7 +45,7 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Superman Returns"));
-  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros.; DC Comics; Legendary Pictures; Bad Hat Harry Productions"));
+  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; DC Comics; Legendary Pictures; Bad Hat Harry Productions"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2006"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("action; adventure; fantasy; science fiction"));
   m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("Bryan Singer"));
@@ -68,7 +68,6 @@ void TheMovieDBFetcherTest::testTitle() {
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
-    //    QVERIFY(result.contains(i.value().toLower()));
     QCOMPARE(set(result), set(i.value().toLower()));
   }
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
