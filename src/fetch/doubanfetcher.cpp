@@ -227,7 +227,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
   switch(request().collectionType) {
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
-      foreach(const QVariant& v, resultsMap.value(QStringLiteral("books")).toList()) {
+      foreach(const QVariant& v, resultsMap.value(QLatin1String("books")).toList()) {
         const QVariantMap resultMap = v.toMap();
         FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
                                          mapValue(resultMap, "author") + QLatin1Char('/') +
@@ -239,7 +239,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
       break;
 
     case Data::Collection::Video:
-      foreach(const QVariant& v, resultsMap.value(QStringLiteral("subjects")).toList()) {
+      foreach(const QVariant& v, resultsMap.value(QLatin1String("subjects")).toList()) {
         const QVariantMap resultMap = v.toMap();
         FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
                                          mapValue(resultMap, "directors", "name") + QLatin1Char('/') +
@@ -253,7 +253,7 @@ void DoubanFetcher::slotComplete(KJob* job_) {
       break;
 
     case Data::Collection::Album:
-      foreach(const QVariant& v, resultsMap.value(QStringLiteral("musics")).toList()) {
+      foreach(const QVariant& v, resultsMap.value(QLatin1String("musics")).toList()) {
         const QVariantMap resultMap = v.toMap();
         FetchResult* r = new FetchResult(Fetcher::Ptr(this), mapValue(resultMap, "title"),
                                          mapValue(resultMap, "attrs", "singer") + QLatin1Char('/') +
@@ -411,7 +411,7 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
   entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
 
   QStringList actors;
-  foreach(const QVariant& v, resultMap_.value(QStringLiteral("casts")).toList()) {
+  foreach(const QVariant& v, resultMap_.value(QLatin1String("casts")).toList()) {
     actors << v.toMap().value(QStringLiteral("name")).toString();
   }
   entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
@@ -438,8 +438,8 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
   }
 
   QStringList values, tracks;
-  foreach(const QVariant& v, resultMap_.value(QStringLiteral("attrs"))
-                               .toMap().value(QStringLiteral("tracks")).toList()) {
+  foreach(const QVariant& v, resultMap_.value(QLatin1String("attrs"))
+                               .toMap().value(QLatin1String("tracks")).toList()) {
     // some cases have all the tracks in one item, separated by "\n" and using 01. track numbers
     if(v.toString().contains(QLatin1Char('\n'))) {
       values << v.toString().split(QStringLiteral("\n"));

@@ -259,7 +259,7 @@ void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
   QString pubYear = mapValue(resultMap_, "date_published").remove(QRegExp(QStringLiteral("[^\\d]"))).left(4);
   entry_->setField(QStringLiteral("pub_year"), pubYear);
   QStringList authors;
-  foreach(const QVariant& author, resultMap_.value(QStringLiteral("authors")).toList()) {
+  foreach(const QVariant& author, resultMap_.value(QLatin1String("authors")).toList()) {
     authors += author.toString();
   }
   entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
@@ -278,7 +278,7 @@ void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
     entry_->setField(QStringLiteral("binding"), i18n(binding.toUtf8().constData()));
   }
   QStringList subjects;
-  foreach(const QVariant& subject, resultMap_.value(QStringLiteral("subjects")).toList()) {
+  foreach(const QVariant& subject, resultMap_.value(QLatin1String("subjects")).toList()) {
     subjects += subject.toString();
   }
   entry_->setField(QStringLiteral("genre"), subjects.join(FieldFormat::delimiterString()));

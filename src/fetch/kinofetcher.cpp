@@ -230,7 +230,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
 
     QStringList actors;
-    foreach(QVariant v, objectMap.value(QStringLiteral("actor")).toList()) {
+    foreach(QVariant v, objectMap.value(QLatin1String("actor")).toList()) {
       const QString actor = mapValue(v.toMap(), "name");
       if(!actor.isEmpty()) actors += actor;
     }

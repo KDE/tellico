@@ -1203,7 +1203,7 @@ void IMDBFetcher::doLists2(const QString& str_, Tellico::Data::EntryPtr entry_) 
         genres << token.trimmed();
       }
     } else if(tag == data.language) {
-      foreach(const QString& token, value.split(QRegExp(QStringLiteral("[,|]")))) {
+      foreach(const QString& token, value.split(QRegExp(QLatin1String("[,|]")))) {
         langs << token.trimmed();
       }
     } else if(tag == data.sound) {

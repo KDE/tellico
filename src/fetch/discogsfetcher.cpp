@@ -280,7 +280,7 @@ void DiscogsFetcher::slotComplete(KJob*) {
   }
 
   int count = 0;
-  foreach(const QVariant& result, resultMap.value(QStringLiteral("results")).toList()) {
+  foreach(const QVariant& result, resultMap.value(QLatin1String("results")).toList()) {
     if(count >= DISCOGS_MAX_RETURNS_TOTAL) {
       break;
     }
@@ -306,13 +306,13 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   entry_->setField(QStringLiteral("genre"),  mapValue(resultMap_, "genres"));
 
   QStringList artists;
-  foreach(const QVariant& artist, resultMap_.value(QStringLiteral("artists")).toList()) {
+  foreach(const QVariant& artist, resultMap_.value(QLatin1String("artists")).toList()) {
     artists << mapValue(artist.toMap(), "name");
   }
   entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
 
   QStringList labels;
-  foreach(const QVariant& label, resultMap_.value(QStringLiteral("labels")).toList()) {
+  foreach(const QVariant& label, resultMap_.value(QLatin1String("labels")).toList()) {
     labels << mapValue(label.toMap(), "name");
   }
   entry_->setField(QStringLiteral("label"), labels.join(FieldFormat::delimiterString()));
@@ -331,7 +331,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   // check the formats, it could have multiple
   // if there is a CD, prefer that in the track list
   bool hasCD = false;
-  foreach(const QVariant& format, resultMap_.value(QStringLiteral("formats")).toList()) {
+  foreach(const QVariant& format, resultMap_.value(QLatin1String("formats")).toList()) {
     if(mapValue(format.toMap(), "name") == QLatin1String("CD")) {
       entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
       hasCD = true;
@@ -346,7 +346,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   }
 
   QStringList tracks;
-  foreach(const QVariant& track, resultMap_.value(QStringLiteral("tracklist")).toList()) {
+  foreach(const QVariant& track, resultMap_.value(QLatin1String("tracklist")).toList()) {
     const QVariantMap trackMap = track.toMap();
     if(mapValue(trackMap, "type_") != QLatin1String("track")) {
       continue;
@@ -363,7 +363,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     trackInfo << mapValue(trackMap, "title");
     if(trackMap.contains(QStringLiteral("artists"))) {
       QStringList artists;
-      foreach(const QVariant& artist, trackMap.value(QStringLiteral("artists")).toList()) {
+      foreach(const QVariant& artist, trackMap.value(QLatin1String("artists")).toList()) {
         artists << mapValue(artist.toMap(), "name");
       }
       trackInfo << artists.join(FieldFormat::delimiterString());
@@ -385,7 +385,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
 
   if(entry_->collection()->hasField(QStringLiteral("producer"))) {
     QStringList producers;
-    foreach(const QVariant& extraartist, resultMap_.value(QStringLiteral("extraartists")).toList()) {
+    foreach(const QVariant& extraartist, resultMap_.value(QLatin1String("extraartists")).toList()) {
       if(mapValue(extraartist.toMap(), "role").contains(QLatin1String("Producer"))) {
         producers << mapValue(extraartist.toMap(), "name");
       }

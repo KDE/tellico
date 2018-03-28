@@ -260,7 +260,7 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
   entry_->setField(QStringLiteral("plot"), mapValue(result_, "description"));
 
   QStringList directors;
-  foreach(const QVariant& director, result_.value(QStringLiteral("directors")).toList()) {
+  foreach(const QVariant& director, result_.value(QLatin1String("directors")).toList()) {
     const QVariantMap directorMap = director.toMap();
     directors << mapValue(directorMap, "name") + QLatin1Char(' ') + mapValue(directorMap, "surname");
   }

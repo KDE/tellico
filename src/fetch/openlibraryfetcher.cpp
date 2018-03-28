@@ -298,7 +298,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     }
 
     QStringList authors;
-    foreach(const QVariant& authorMap, resultMap.value(QStringLiteral("authors")).toList()) {
+    foreach(const QVariant& authorMap, resultMap.value(QLatin1String("authors")).toList()) {
       const QString key = mapValue(authorMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl authorUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));
@@ -323,7 +323,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     }
 
     QStringList langs;
-    foreach(const QVariant& langMap, resultMap.value(QStringLiteral("languages")).toList()) {
+    foreach(const QVariant& langMap, resultMap.value(QLatin1String("languages")).toList()) {
       const QString key = mapValue(langMap.toMap(), "key");
       if(!key.isEmpty()) {
         QUrl langUrl(QString::fromLatin1(OPENLIBRARY_QUERY_URL));

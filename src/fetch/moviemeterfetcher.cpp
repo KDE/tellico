@@ -260,7 +260,7 @@ void MovieMeterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("nationality"),  mapValue(resultMap_, "countries"));
 
   QStringList castList;
-  foreach(const QVariant& actor, resultMap_.value(QStringLiteral("actors")).toList()) {
+  foreach(const QVariant& actor, resultMap_.value(QLatin1String("actors")).toList()) {
     castList << mapValue(actor.toMap(), "name");
   }
   entry_->setField(QStringLiteral("cast"), castList.join(FieldFormat::rowDelimiterString()));

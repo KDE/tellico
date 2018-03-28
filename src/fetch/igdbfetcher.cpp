@@ -151,7 +151,7 @@ Tellico::Data::EntryPtr IGDBFetcher::fetchEntryHook(uint uid_) {
   QStringList publishers;
   // grab the publisher data
   if(entry->field(QStringLiteral("publisher")).isEmpty()) {
-    foreach(const QString& pid, FieldFormat::splitValue(entry->field(QStringLiteral("pub-id")))) {
+    foreach(const QString& pid, FieldFormat::splitValue(entry->field(QLatin1String("pub-id")))) {
       const QString publisher = companyName(pid);
       if(!publisher.isEmpty()) {
         publishers << publisher;
@@ -163,7 +163,7 @@ Tellico::Data::EntryPtr IGDBFetcher::fetchEntryHook(uint uid_) {
   QStringList developers;
   // grab the developer data
   if(entry->field(QStringLiteral("developer")).isEmpty()) {
-    foreach(const QString& did, FieldFormat::splitValue(entry->field(QStringLiteral("dev-id")))) {
+    foreach(const QString& did, FieldFormat::splitValue(entry->field(QLatin1String("dev-id")))) {
       const QString developer = companyName(did);
       if(!developer.isEmpty()) {
         developers << developer;
