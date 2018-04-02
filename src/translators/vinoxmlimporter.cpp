@@ -23,8 +23,6 @@
  ***************************************************************************/
 
 #include "vinoxmlimporter.h"
-#include "../collection.h"
-#include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 #include "../tellico_debug.h"
 
@@ -42,8 +40,4 @@ VinoXMLImporter::VinoXMLImporter(const QUrl& url_) : XSLTImporter(url_) {
 
 bool VinoXMLImporter::canImport(int type) const {
   return type == Data::Collection::Wine;
-}
-
-Tellico::Data::CollPtr VinoXMLImporter::collection() {
-  return XSLTImporter::collection();
 }
