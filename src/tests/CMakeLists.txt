@@ -221,7 +221,6 @@ TARGET_LINK_LIBRARIES(bibtextest ${TELLICO_BTPARSE_LIBS} ${TELLICO_TEST_LIBS})
 
 add_executable(bibtexmltest bibtexmltest.cpp
   ../translators/bibtexmlimporter.cpp
-  ../translators/xmlimporter.cpp
   ../translators/bibtexmlexporter.cpp
   ../translators/exporter.cpp
 )

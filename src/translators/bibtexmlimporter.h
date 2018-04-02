@@ -25,10 +25,7 @@
 #ifndef TELLICO_BIBTEXMLIMPORTER_H
 #define TELLICO_BIBTEXMLIMPORTER_H
 
-#include "xmlimporter.h"
-#include "../datavectors.h"
-
-class QDomNode;
+#include "xsltimporter.h"
 
 namespace Tellico {
   namespace Import {
@@ -36,7 +33,7 @@ namespace Tellico {
 /**
  *@author Robby Stephenson
  */
-class BibtexmlImporter : public XMLImporter {
+class BibtexmlImporter : public XSLTImporter {
 Q_OBJECT
 
 public:
@@ -47,18 +44,13 @@ public:
 
   /**
    */
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
-public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE;
-
 private:
-  void loadDomDocument();
-  void readEntry(const QDomNode& entryNode);
-
-  Data::CollPtr m_coll;
-  bool m_cancelled : 1;
+  void init();
+  // private so it can't be changed accidently
+  void setXSLTURL(const QUrl& url);
 };
 
   } // end namespace

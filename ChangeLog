@@ -1,3 +1,7 @@
+2018-04-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated BibTeXML importer.
+
 2018-03-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with inconsistent selection (Bug 391614).

@@ -7,6 +7,7 @@ SET(XSLT_FILES
     amazon2tellico.xsl
     arxiv2tellico.xsl
     biblioshare2tellico.xsl
+    bibtexml2tellico.xsl
     bluray-logo.png
     boardgamegeek2tellico.xsl
     cassette-logo.png

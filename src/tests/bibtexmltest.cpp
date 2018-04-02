@@ -27,14 +27,22 @@
 #include "bibtexmltest.h"
 
 #include "../translators/bibtexmlimporter.h"
-#include "../collections/bibtexcollection.h"
 #include "../translators/bibtexmlexporter.h"
+#include "../collections/bibtexcollection.h"
+#include "../collectionfactory.h"
+#include "../utils/datafileregistry.h"
 
 #include <QTest>
 
 QTEST_GUILESS_MAIN( BibtexmlTest )
 
 #define QL1(x) QStringLiteral(x)
+
+void BibtexmlTest::initTestCase() {
+  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/bibtexml2tellico.xsl"));
+  // need to register the collection type
+  Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtexml(Tellico::Data::Collection::Bibtex, "bibtex");
+}
 
 void BibtexmlTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.bibtexml"));
