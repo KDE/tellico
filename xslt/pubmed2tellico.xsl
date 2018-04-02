@@ -45,7 +45,8 @@
   <collection title="PubMed Import" type="5">
    <fields>
     <field name="_default"/>
-    <field flags="0" title="Institution" category="Institution" format="4" type="2" name="institution" i18n="true">
+    <!-- match bibtexml2tellico -->
+    <field flags="6" title="Institution" category="Institution" format="0" type="1" name="institution" i18n="true">
      <prop name="bibtex">institution</prop>
     </field>
     <field flags="0" title="Pubmed" category="Publishing" format="4" type="1" name="pmid" description="Pubmed" i18n="true" />
