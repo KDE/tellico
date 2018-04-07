@@ -253,6 +253,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
   const bool response = result.value(QStringLiteral("Response")).toBool();
   if(!response) {
+    myDebug() << "Error:" << result.value(QStringLiteral("Error")).toString();
     message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
     stop();
     return;

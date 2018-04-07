@@ -320,7 +320,7 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QStringLiteral("keyword"), catList.join(FieldFormat::delimiterString()));
 
   QString isbn;
-  foreach(const QVariant& idVariant, volumeMap.value(QStringLiteral("industryIdentifiers")).toList()) {
+  foreach(const QVariant& idVariant, volumeMap.value(QLatin1String("industryIdentifiers")).toList()) {
     const QVariantMap idMap = idVariant.toMap();
     if(mapValue(idMap, "type") == QLatin1String("ISBN_10")) {
       isbn = mapValue(idMap, "identifier");

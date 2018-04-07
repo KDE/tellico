@@ -355,8 +355,8 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
   if(entry_->collection()->hasField(QStringLiteral("alttitle"))) {
     QStringList atitles;
-    foreach(const QVariant& atitle, resultMap_.value(QStringLiteral("alternative_titles")).toMap()
-                                               .value(QStringLiteral("titles")).toList()) {
+    foreach(const QVariant& atitle, resultMap_.value(QLatin1String("alternative_titles")).toMap()
+                                               .value(QLatin1String("titles")).toList()) {
       atitles << mapValue(atitle.toMap(), "title");
     }
     entry_->setField(QStringLiteral("alttitle"), atitles.join(FieldFormat::rowDelimiterString()));
@@ -372,13 +372,13 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
   QStringList studios;
-  foreach(const QVariant& studio, resultMap_.value(QStringLiteral("production_companies")).toList()) {
+  foreach(const QVariant& studio, resultMap_.value(QLatin1String("production_companies")).toList()) {
     studios << mapValue(studio.toMap(), "name");
   }
   entry_->setField(QStringLiteral("studio"), studios.join(FieldFormat::delimiterString()));
 
   QStringList countries;
-  foreach(const QVariant& country, resultMap_.value(QStringLiteral("production_countries")).toList()) {
+  foreach(const QVariant& country, resultMap_.value(QLatin1String("production_countries")).toList()) {
     QString name = mapValue(country.toMap(), "name");
     if(name == QLatin1String("United States of America")) {
       name = QStringLiteral("USA");
@@ -388,7 +388,7 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   entry_->setField(QStringLiteral("nationality"), countries.join(FieldFormat::delimiterString()));
 
   QStringList genres;
-  foreach(const QVariant& genre, resultMap_.value(QStringLiteral("genres")).toList()) {
+  foreach(const QVariant& genre, resultMap_.value(QLatin1String("genres")).toList()) {
     genres << mapValue(genre.toMap(), "name");
   }
   entry_->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));

@@ -135,7 +135,8 @@ bool Document::openDocument(const QUrl& url_) {
           ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
   connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
           ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, &Tellico::ProgressItem::signalCancelled, m_importer, &Tellico::Import::TellicoImporter::slotCancel);
+  connect(&item, &Tellico::ProgressItem::signalCancelled,
+          m_importer.data(), &Tellico::Import::TellicoImporter::slotCancel);
   ProgressItem::Done done(m_importer);
 
   CollPtr coll = m_importer->collection();

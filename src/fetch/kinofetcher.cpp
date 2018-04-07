@@ -230,7 +230,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
 
     QStringList actors;
-    foreach(QVariant v, objectMap.value(QStringLiteral("actor")).toList()) {
+    foreach(QVariant v, objectMap.value(QLatin1String("actor")).toList()) {
       const QString actor = mapValue(v.toMap(), "name");
       if(!actor.isEmpty()) actors += actor;
     }
@@ -304,20 +304,21 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("studio"), s);
   }
 
-  QRegularExpression plotRx(QStringLiteral("<div class=\"js-teaser movie-plot-teaser\"></div>(.*?)<(/section|h2)>"),
+  QRegularExpression plotRx(QStringLiteral("<div class=\"post-body-teaser\"></div>(.*?)<(/section|h2)>"),
                                           QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch plotMatch = plotRx.match(str_);
   if(plotMatch.hasMatch()) {
     QString plot;
-    QRegularExpression pRx(QStringLiteral("<p>.*?</p>"));
+    // sometimes the plot starts with double <p>
+    QRegularExpression pRx(QStringLiteral("<p>(?!<p>).*?</p>"));
     QRegularExpressionMatchIterator i = pRx.globalMatch(plotMatch.captured(1));
     while(i.hasNext()) {
       plot += i.next().captured(0);
     }
-    entry->setField(QStringLiteral("plot"), plot);
+    entry->setField(QStringLiteral("plot"), plot.trimmed());
   }
 
-  QRegularExpression divMetaRx(QStringLiteral("<div class=\"movie-meta\".*?>(.+?)</div>"),
+  QRegularExpression divMetaRx(QStringLiteral("<div class=\"product-meta.*?>(.+?)</div>"),
                                QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch divMetaMatch = divMetaRx.match(str_);
   if(divMetaMatch.hasMatch()) {
@@ -345,7 +346,7 @@ Tellico::Fetch::ConfigWidget* KinoFetcher::configWidget(QWidget* parent_) const 
 }
 
 QString KinoFetcher::defaultName() {
-  return QStringLiteral("kino.de");
+  return QStringLiteral("Kino.de");
 }
 
 QString KinoFetcher::defaultIcon() {
@@ -355,12 +356,8 @@ QString KinoFetcher::defaultIcon() {
 //static
 Tellico::StringHash KinoFetcher::allOptionalFields() {
   StringHash hash;
-  hash[QStringLiteral("distributor")]     = i18n("Distributor");
-  hash[QStringLiteral("episodes")]        = i18n("Episodes");
-  hash[QStringLiteral("origtitle")]       = i18n("Original Title");
-  hash[QStringLiteral("alttitle")]        = i18n("Alternative Titles");
-  hash[QStringLiteral("animenfo-rating")] = i18n("AnimeNfo Rating");
-  hash[QStringLiteral("animenfo")]        = i18n("AnimeNfo Link");
+  // TODO: add link
+//  hash[QStringLiteral("kino")] = i18n("Kino.de Link");
   return hash;
 }
 

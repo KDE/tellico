@@ -376,19 +376,19 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
   entry->setField(QStringLiteral("studio"), mapValue(releaseMap, "distributor", "name"));
 
   QStringList genres;
-  foreach(const QVariant& variant, resultMap.value(QStringLiteral("genre")).toList()) {
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("genre")).toList()) {
     genres << i18n(mapValue(variant.toMap(), "$").toUtf8().constData());
   }
   entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
   QStringList nats;
-  foreach(const QVariant& variant, resultMap.value(QStringLiteral("nationality")).toList()) {
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("nationality")).toList()) {
     nats << mapValue(variant.toMap(), "$");
   }
   entry->setField(QStringLiteral("nationality"), nats.join(FieldFormat::delimiterString()));
 
   QStringList langs;
-  foreach(const QVariant& variant, resultMap.value(QStringLiteral("language")).toList()) {
+  foreach(const QVariant& variant, resultMap.value(QLatin1String("language")).toList()) {
     langs << mapValue(variant.toMap(), "$");
   }
   entry->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
