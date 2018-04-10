@@ -323,12 +323,7 @@ void QxtFlowViewSoftwareRenderer::init()
     int w = (ww + 1) / 2;
     int h = (wh + 1) / 2;
 
-#ifdef PICTUREFLOW_QT4
     buffer = QImage(ww, wh, QImage::Format_RGB32);
-#endif
-#if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
-    buffer.create(ww, wh, 32);
-#endif
     buffer.fill(bgcolor);
 
     rays.resize(w*2);
@@ -355,26 +350,15 @@ static QRgb blendColor(QRgb c1, QRgb c2, int blend)
 static QImage* prepareSurface(const QImage* slideImage, int w, int h, QRgb bgcolor,
                               QxtFlowView::ReflectionEffect reflectionEffect)
 {
-#ifdef PICTUREFLOW_QT4
     Qt::TransformationMode mode = Qt::SmoothTransformation;
     QImage img = slideImage->scaled(w, h, Qt::IgnoreAspectRatio, mode);
-#endif
-#if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
-    QImage img = slideImage->smoothScale(w, h);
-#endif
 
     // slightly larger, to accommodate for the reflection
     int hs = h * 2;
     int hofs = h / 3;
 
     // offscreen buffer: black is sweet
-#ifdef PICTUREFLOW_QT4
     QImage* result = new QImage(hs, w, QImage::Format_RGB32);
-#endif
-#if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
-    QImage* result = new QImage;
-    result->create(hs, w, 32);
-#endif
     result->fill(bgcolor);
 
     // transpose the image, this is to speed-up the rendering
@@ -484,12 +468,7 @@ QImage* QxtFlowViewSoftwareRenderer::surface(int slideIndex)
     if (slideIndex >= (int)state->slideImages.count())
         return 0;
 
-#ifdef PICTUREFLOW_QT4
     int key = slideIndex;
-#endif
-#if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
-    QString key = QString::number(slideIndex);
-#endif
 
     QImage* img = state->slideImages.at(slideIndex);
     bool empty = img ? img->isNull() : true;
@@ -502,7 +481,6 @@ QImage* QxtFlowViewSoftwareRenderer::surface(int slideIndex)
             int sw = state->slideWidth;
             int sh = state->slideHeight;
 
-#ifdef PICTUREFLOW_QT4
             QImage img = QImage(sw, sh, QImage::Format_RGB32);
 
             QPainter painter(&img);
@@ -518,36 +496,17 @@ QImage* QxtFlowViewSoftwareRenderer::surface(int slideIndex)
             painter.setBrush(QBrush());
             painter.drawRect(2, 2, sw - 3, sh - 3);
             painter.end();
-#endif
-#if defined(PICTUREFLOW_QT3) || defined(PICTUREFLOW_QT2)
-            QPixmap pixmap(sw, sh, 32);
-            QPainter painter(&pixmap);
-            painter.fillRect(pixmap.rect(), QColor(192, 192, 192));
-            painter.fillRect(5, 5, sw - 10, sh - 10, QColor(64, 64, 64));
-            painter.end();
-            QImage img = pixmap.convertToImage();
-#endif
 
             blankSurface = prepareSurface(&img, sw, sh, bgcolor, state->reflectionEffect);
         }
         return blankSurface;
     }
 
-#ifdef PICTUREFLOW_QT4
     bool exist = imageHash.contains(slideIndex);
     if (exist)
         if (img == imageHash.find(slideIndex).value())
-#endif
-#ifdef PICTUREFLOW_QT3
-            bool exist = imageHash.find(slideIndex) != imageHash.end();
-    if (exist)
-        if (img == imageHash.find(slideIndex).data())
-#endif
-#ifdef PICTUREFLOW_QT2
-            if (img == imageHash[slideIndex])
-#endif
-                if (surfaceCache.contains(key))
-                    return surfaceCache[key];
+            if (surfaceCache.contains(key))
+                return surfaceCache[key];
 
     QImage* sr = prepareSurface(img, state->slideWidth, state->slideHeight, bgcolor, state->reflectionEffect);
     surfaceCache.insert(key, sr);

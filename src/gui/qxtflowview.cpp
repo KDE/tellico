@@ -435,13 +435,13 @@ void QxtFlowView::mousePressEvent(QMouseEvent * event)
         return;
     QPersistentModelIndex index = d->modelmap.at(d->state->centerIndex);
     if (index.isValid()) {
-      myDebug() << "mousePressEvent() valid current index" << d->state->centerIndex;
+      myDebug() << "mousePressEvent(): valid current index" << d->state->centerIndex;
       d->selectionModel->setCurrentIndex(index, QItemSelectionModel::NoUpdate);
       QItemSelection selection;
       selection.select(index, index);
       d->selectionModel->select(selection, QItemSelectionModel::Select);
     } else {
-      myDebug() << "mousePressEvent() invalid current index";
+      myDebug() << "mousePressEvent(): invalid current index";
       // Forces a finalize() even if mouse is pressed, but not on a item
       d->selectionModel->select(QModelIndex(), QItemSelectionModel::Select);
     }

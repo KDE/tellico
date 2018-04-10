@@ -50,10 +50,7 @@
 #ifndef QXTFLOWVIEW_P_H_INCLUDED
 #define QXTFLOWVIEW_P_H_INCLUDED
 
-
 #include "qxtflowview.h"
-
-#define PICTUREFLOW_QT4
 
 #include <QApplication>
 #include <QCache>
@@ -224,18 +221,8 @@ private:
     QImage buffer;
     QVector<PFreal> rays;
     QImage* blankSurface;
-#ifdef PICTUREFLOW_QT4
     QCache<int, QImage> surfaceCache;
     QHash<int, QImage*> imageHash;
-#endif
-#ifdef PICTUREFLOW_QT3
-    QCache<QImage> surfaceCache;
-    QMap<int, QImage*> imageHash;
-#endif
-#ifdef PICTUREFLOW_QT2
-    QCache<QImage> surfaceCache;
-    QIntDict<QImage> imageHash;
-#endif
 
     void render();
     void renderSlides();

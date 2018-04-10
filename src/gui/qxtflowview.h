@@ -122,9 +122,9 @@ public Q_SLOTS:
     void triggerRender();
 
 Q_SIGNALS:
-    virtual void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
+    void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected);
     // TODO: update QxtFlowView::updateAnimation() to use selection model
-    virtual void currentChanged(const QModelIndex &current, const QModelIndex &previous);
+    void currentChanged(const QModelIndex &current, const QModelIndex &previous);
 
 protected:
     virtual void paintEvent(QPaintEvent *event);
@@ -142,4 +142,4 @@ private:
     QxtFlowViewPrivate* d;
 };
 
-#endif // PICTUREFLOW_H
+#endif
