@@ -154,7 +154,6 @@ void QxtFlowViewAnimator::update()
 
     int speed = 16384 / 4;
 
-#if 1
     // deaccelerate when approaching the target
     const int max = 2 * 65536;
 
@@ -166,7 +165,6 @@ void QxtFlowViewAnimator::update()
 
     int ia = IANGLE_MAX * (fi - max / 2) / (max * 2);
     speed = 512 + 16384 * (PFREAL_ONE + fsin(ia)) / PFREAL_ONE;
-#endif
 
     frame += speed * step;
 
