@@ -402,7 +402,7 @@ void QxtFlowView::showSlide(QModelIndex index)
 }
 
 /*! \reimp */
-void QxtFlowView::keyPressEvent(QKeyEvent* event)
+void QxtFlowView::keyPressEvent(QKeyEvent * event)
 {
     if (event->key() == Qt::Key_Left)
     {
@@ -428,20 +428,22 @@ void QxtFlowView::keyPressEvent(QKeyEvent* event)
 }
 
 /*! \reimp */
-void QxtFlowView::mousePressEvent(QMouseEvent* event)
+void QxtFlowView::mousePressEvent(QMouseEvent * event)
 {
     d->lastgrabpos = event->pos();
     if(!d->selectionModel)
         return;
     QPersistentModelIndex index = d->modelmap.at(d->state->centerIndex);
     if (index.isValid()) {
+      myDebug() << "mousePressEvent() valid current index" << d->state->centerIndex;
       d->selectionModel->setCurrentIndex(index, QItemSelectionModel::NoUpdate);
       QItemSelection selection;
       selection.select(index, index);
       d->selectionModel->select(selection, QItemSelectionModel::Select);
     } else {
-        // Forces a finalize() even if mouse is pressed, but not on a item
-        d->selectionModel->select(QModelIndex(), QItemSelectionModel::Select);
+      myDebug() << "mousePressEvent() invalid current index";
+      // Forces a finalize() even if mouse is pressed, but not on a item
+      d->selectionModel->select(QModelIndex(), QItemSelectionModel::Select);
     }
 }
 
