@@ -85,7 +85,7 @@ void ImdbFetcherTest::testSnowyRiver() {
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QStringLiteral("Tom Burlinson::Jim Craig"));
-  QCOMPARE(entry->field("imdb"), QStringLiteral("http://www.imdb.com/title/tt0084296/"));
+  QCOMPARE(entry->field("imdb"), QStringLiteral("https://www.imdb.com/title/tt0084296/"));
   QVERIFY(!entry->field("imdb-rating").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("plot").contains('>'));
