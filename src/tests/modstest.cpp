@@ -27,6 +27,7 @@
 #include "modstest.h"
 
 #include "../translators/xsltimporter.h"
+#include "../translators/xslthandler.cpp"
 #include "../collections/bookcollection.h"
 #include "../collectionfactory.h"
 #include "../fieldformat.h"
@@ -61,4 +62,27 @@ void ModsTest::testBook() {
   QCOMPARE(entry->field("pub_year"), QStringLiteral("1999"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("0-8014-8639-4"));
   QCOMPARE(entry->field("lccn"), QStringLiteral("99042030"));
+}
+
+// The Deutsche Nationalbibliothek SRU server returns MARCXML encapsulated in SRW
+// The LoC MARC21 to MODS stylesheet has to be modified to accept multiple mods:record elements
+// outside of the marc:collection element
+// http://www.dnb.de/DE/Service/DigitaleDienste/SRU/sru_node.html
+void ModsTest::testDNBMARCXML() {
+  Tellico::XSLTHandler marcHandler(QUrl::fromLocalFile(QFINDTESTDATA("../../xslt/MARC21slim2MODS3.xsl")));
+  QVERIFY(marcHandler.isValid());
+
+  QFile f(QFINDTESTDATA("data/dnb-marcxml.xml"));
+  QVERIFY(f.exists());
+  QVERIFY(f.open(QIODevice::ReadOnly | QIODevice::Text));
+  QTextStream stream(&f);
+  const QString mods = marcHandler.applyStylesheet(stream.readAll());
+
+  Tellico::Import::XSLTImporter importer(mods);
+  importer.setXSLTURL(QUrl::fromLocalFile(QFINDTESTDATA("../../xslt/mods2tellico.xsl")));
+
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(coll->entryCount(), 25);
 }

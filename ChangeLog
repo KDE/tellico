@@ -1,3 +1,7 @@
+2018-07-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated SRU fetcher to allow multiple marc records within a SRW result (DNB).
+
 2018-04-18  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IMDb data source (Bug 393239).
