@@ -1,131 +1,123 @@
 <xsl:stylesheet xmlns="http://www.loc.gov/mods/v3" xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" exclude-result-prefixes="xlink marc" version="1.0">
-	<xsl:include href="MARC21slimUtils.xsl"/>
+	<xsl:include href="http://www.loc.gov/standards/marcxml/xslt/MARC21slimUtils.xsl"/>
 	<xsl:output encoding="UTF-8" indent="yes" method="xml"/>
 	<xsl:strip-space elements="*"/>
 
 	<!-- Maintenance note: For each revision, change the content of <recordInfo><recordOrigin> to reflect the new revision number.
-	MARC21slim2MODS3-5 (Revision 1.116) 20160315
-	
-	MODS 3.6
-	Revision 1.116 - Added nameIdentifier to 700/710/711/100/110/111 $0 RE: MODS 3.6 - 2016/3/15 ws
-	Revision 1.115 - Added @otherType for 7xx RE: MODS 3.6 - 2016/3/15 ws
-	Revision 1.114 - Added <itemIdentifier> for 852$p and <itemIdentifier > with type="copy number" for 852$t RE: MODS 3.6 - 2016/3/15 ws
-	Revision 1.113 - Added @valueURI="contents of $0" for 752/662 RE: MODS 3.6 - 2016/3/15 ws
-	Revision 1.112 - Added @xml:space="preserve" to title/nonSort on 245 and 242 RE: MODS 3.6 - 2016/3/15 ws
-	
-	Revision 1.111 - Added test to prevent empty authority attribute for 047 with no subfield 2. - ws 2016/03/24
-	Revision 1.110 - Added test to prevent empty authority attribute for 336 with no subfield 2. - ws 2016/03/24
-	Revision 1.109 - Added test to prevent empty authority attribute for 655 and use if ind2 if no subfield 2 is available. - ws 2016/03/24
-	Revision 1.108 - Added filter to name templates to exclude names with title subfields. - ws 2016/03/24
-	
-	Revision 1.107 - Added support for 024/@ind1=7 - ws 2016/1/7	
-	Revision 1.106 - Added a xsl:when to deal with '#' and ' ' in $leader19 and $controlField008-18 - ws 2014/12/19		
-	Revision 1.105 - Add @unit to extent - ws 2014/11/20	
-	Revision 1.104 - Fixed 111$n and 711$n to reflect mapping to <namePart> tmee 20141112
-	Revision 1.103 - Fixed 008/28 to reflect revised mapping for government publication tmee 20141104	
-	Revision 1.102 - Fixed 240$s duplication tmee 20140812
-	Revision 1.101 - Fixed 130 tmee 20140806
-	Revision 1.100 - Fixed 245c tmee 20140804
-	Revision 1.99 - Fixed 240 issue tmee 20140804
-	Revision 1.98 - Fixed 336 mapping tmee 20140522
-	Revision 1.97 - Fixed 264 mapping tmee 20140521
-	Revision 1.96 - Fixed 310 and 321 and 008 frequency authority for marcfrequency tmee 2014/04/22
-	Revision 1.95 - Modified 035 to include identifier type (WlCaITV) tmee 2014/04/21	
-	Revision 1.94 - Leader 07 b changed mapping from continuing to serial tmee 2014/02/21
-	
-	MODS 3.5 
-	Revision 1.93 - Fixed personal name transform for ind1=0 tmee 2014/01/31
-	Revision 1.92 - Removed duplicate code for 856 1.51 tmee 2014/01/31
-	Revision 1.91 - Fixed createnameFrom720 duplication tmee 2014/01/31
-	Revision 1.90 - Fixed 520 displayLabel tmee tmee 2014/01/31
-	Revision 1.89 - Fixed 008-06 when value = 's' for cartographics tmee tmee 2014/01/31
-	Revision 1.88 - Fixed 510c mapping - tmee 2013/08/29
-	Revision 1.87 - Fixed expressions of <accessCondition> type values - tmee 2013/08/29
-	Revision 1.86 - Fixed 008 <frequency> subfield to occur w/i <originiInfo> - tmee 2013/08/29
-	Revision 1.85 - Fixed 245$c - tmee 2013/03/07
-	Revision 1.84 - Fixed 1.35 and 1.36 date mapping for 008 when 008/06=e,p,r,s,t so only 008/07-10 displays, rather than 008/07-14 - tmee 2013/02/01   
-	Revision 1.83 - Deleted mapping for 534 to note - tmee 2013/01/18
-	Revision 1.82 - Added mapping for 264 ind 0,1,2,3 to originInfo - 2013/01/15 tmee
-	Revision 1.81 - Added mapping for 336$a$2, 337$a$2, 338$a$2 - 2012/12/03 tmee
-	Revision 1.80 - Added 100/700 mapping for "family" - 2012/09/10 tmee
-	Revision 1.79 - Added 245 $s mapping - 2012/07/11 tmee
-	Revision 1.78 - Fixed 852 mapping <shelfLocation> was changed to <shelfLocator> - 2012/05/07 tmee
-	Revision 1.77 - Fixed 008-06 when value = 's' - 2012/04/19 tmee
-	Revision 1.76 - Fixed 242 - 2012/02/01 tmee
-	Revision 1.75 - Fixed 653 - 2012/01/31 tmee
-	Revision 1.74 - Fixed 510 note - 2011/07/15 tmee
-	Revision 1.73 - Fixed 506 540 - 2011/07/11 tmee
-	Revision 1.72 - Fixed frequency error - 2011/07/07 and 2011/07/14 tmee
-	Revision 1.71 - Fixed subject titles for subfields t - 2011/04/26 tmee 
-	Revision 1.70 - Added mapping for OCLC numbers in 035s to go into <identifier type="oclc"> 2011/02/27 - tmee 	
-	Revision 1.69 - Added mapping for untyped identifiers for 024 - 2011/02/27 tmee 
-	Revision 1.68 - Added <subject><titleInfo> mapping for 600/610/611 subfields t,p,n - 2010/12/22 tmee
-	Revision 1.67 - Added frequency values and authority="marcfrequency" for 008/18 - 2010/12/09 tmee
-	Revision 1.66 - Fixed 008/06=c,d,i,m,k,u, from dateCreated to dateIssued - 2010/12/06 tmee
-	Revision 1.65 - Added back marcsmd and marccategory for 007 cr- 2010/12/06 tmee
-	Revision 1.64 - Fixed identifiers - removed isInvalid template - 2010/12/06 tmee
-	Revision 1.63 - Fixed descriptiveStandard value from aacr2 to aacr - 2010/12/06 tmee
-	Revision 1.62 - Fixed date mapping for 008/06=e,p,r,s,t - 2010/12/01 tmee
-	Revision 1.61 - Added 007 mappings for marccategory - 2010/11/12 tmee
-	Revision 1.60 - Added altRepGroups and 880 linkages for relevant fields, see mapping - 2010/11/26 tmee
-	Revision 1.59 - Added scriptTerm type=text to language for 546b and 066c - 2010/09/23 tmee
-	Revision 1.58 - Expanded script template to include code conversions for extended scripts - 2010/09/22 tmee
-	Revision 1.57 - Added Ldr/07 and Ldr/19 mappings - 2010/09/17 tmee
-	Revision 1.56 - Mapped 1xx usage="primary" - 2010/09/17 tmee
-	Revision 1.55 - Mapped UT 240/1xx nameTitleGroup - 2010/09/17 tmee
-	MODS 3.4
-	Revision 1.54 - Fixed 086 redundancy - 2010/07/27 tmee
-	Revision 1.53 - Added direct href for MARC21slimUtils - 2010/07/27 tmee
-	Revision 1.52 - Mapped 046 subfields c,e,k,l - 2010/04/09 tmee
-	Revision 1.51 - Corrected 856 transform - 2010/01/29 tmee
-	Revision 1.50 - Added 210 $2 authority attribute in <titleInfo type=”abbreviated”> 2009/11/23 tmee
-	Revision 1.49 - Aquifer revision 1.14 - Added 240s (version) data to <titleInfo type="uniform"><title> 2009/11/23 tmee
-	Revision 1.48 - Aquifer revision 1.27 - Added mapping of 242 second indicator (for nonfiling characters) to <titleInfo><nonSort > subelement  2007/08/08 tmee/dlf
-	Revision 1.47 - Aquifer revision 1.26 - Mapped 300 subfield f (type of unit) - and g (size of unit) 2009 ntra
-	Revision 1.46 - Aquifer revision 1.25 - Changed mapping of 767 so that <type="otherVersion>  2009/11/20  tmee
-	Revision 1.45 - Aquifer revision 1.24 - Changed mapping of 765 so that <type="otherVersion>  2009/11/20  tmee 
-	Revision 1.44 - Added <recordInfo><recordOrigin> canned text about the version of this stylesheet 2009 ntra
-	Revision 1.43 - Mapped 351 subfields a,b,c 2009/11/20 tmee
-	Revision 1.42 - Changed 856 second indicator=1 to go to <location><url displayLabel=”electronic resource”> instead of to <relatedItem type=”otherVersion”><url> 2009/11/20 tmee
-	Revision 1.41 - Aquifer revision 1.9 Added variable and choice protocol for adding usage=”primary display” 2009/11/19 tmee 
-	Revision 1.40 - Dropped <note> for 510 and added <relatedItem type="isReferencedBy"> for 510 2009/11/19 tmee
-	Revision 1.39 - Aquifer revision 1.23 Changed mapping for 762 (Subseries Entry) from <relatedItem type="series"> to <relatedItem type="constituent"> 2009/11/19 tmee
-	Revision 1.38 - Aquifer revision 1.29 Dropped 007s for electronic versions 2009/11/18 tmee
-	Revision 1.37 - Fixed date redundancy in output (with questionable dates) 2009/11/16 tmee
-	Revision 1.36 - If mss material (Ldr/06=d,p,f,t) map 008 dates and 260$c/$g dates to dateCreated 2009/11/24, otherwise map 008 and 260$c/$g to dateIssued 2010/01/08 tmee
-	Revision 1.35 - Mapped appended detailed dates from 008/07-10 and 008/11-14 to dateIssued or DateCreated w/encoding="marc" 2010/01/12 tmee
-	Revision 1.34 - Mapped 045b B.C. and C.E. date range info to iso8601-compliant dates in <subject><temporal> 2009/01/08 ntra
-	Revision 1.33 - Mapped Ldr/06 "o" to <typeOfResource>kit 2009/11/16 tmee
-	Revision 1.32 - Mapped specific note types from the MODS Note Type list <http://www.loc.gov/standards/mods/mods-notes.html> tmee 2009/11/17
-	Revision 1.31 - Mapped 540 to <accessCondition type="use and reproduction"> and 506 to <accessCondition type="restriction on access"> and delete mappings of 540 and 506 to <note>
-	Revision 1.30 - Mapped 037c to <identifier displayLabel=""> 2009/11/13 tmee
-	Revision 1.29 - Corrected schemaLocation to 3.3 2009/11/13 tmee
-	Revision 1.28 - Changed mapping from 752,662 g going to mods:hierarchicalGeographic/area instead of "region" 2009/07/30 ntra
-	Revision 1.27 - Mapped 648 to <subject> 2009/03/13 tmee
-	Revision 1.26 - Added subfield $s mapping for 130/240/730  2008/10/16 tmee
-	Revision 1.25 - Mapped 040e to <descriptiveStandard> and Leader/18 to <descriptive standard>aacr2  2008/09/18 tmee
-	Revision 1.24 - Mapped 852 subfields $h, $i, $j, $k, $l, $m, $t to <shelfLocation> and 852 subfield $u to <physicalLocation> with @xlink 2008/09/17 tmee
-	Revision 1.23 - Commented out xlink/uri for subfield 0 for 130/240/730, 100/700, 110/710, 111/711 as these are currently unactionable  2008/09/17 tmee
-	Revision 1.22 - Mapped 022 subfield $l to type "issn-l" subfield $m to output identifier element with corresponding @type and @invalid eq 'yes'2008/09/17 tmee
-	Revision 1.21 - Mapped 856 ind2=1 or ind2=2 to <relatedItem><location><url>  2008/07/03 tmee
-	Revision 1.20 - Added genre w/@auth="contents of 2" and type= "musical composition"  2008/07/01 tmee
-	Revision 1.19 - Added genre offprint for 008/24+ BK code 2  2008/07/01  tmee
-	Revision 1.18 - Added xlink/uri for subfield 0 for 130/240/730, 100/700, 110/710, 111/711  2008/06/26 tmee
-	Revision 1.17 - Added mapping of 662 2008/05/14 tmee	
-	Revision 1.16 - Changed @authority from "marc" to "marcgt" for 007 and 008 codes mapped to a term in <genre> 2007/07/10 tmee
-	Revision 1.15 - For field 630, moved call to part template outside title element  2007/07/10 tmee
-	Revision 1.14 - Fixed template isValid and fields 010, 020, 022, 024, 028, and 037 to output additional identifier elements with corresponding @type and @invalid eq 'yes' when subfields z or y (in the case of 022) exist in the MARCXML ::: 2007/01/04 17:35:20 cred
-	Revision 1.13 - Changed order of output under cartographics to reflect schema  2006/11/28 tmee
-	Revision 1.12 - Updated to reflect MODS 3.2 Mapping  2006/10/11 tmee
-	Revision 1.11 - The attribute objectPart moved from <languageTerm> to <language>  2006/04/08  jrad
-	Revision 1.10 - MODS 3.1 revisions to language and classification elements (plus ability to find marc:collection embedded in wrapper elements such as SRU zs: wrappers)  2006/02/06  ggar
-	Revision 1.09 - Subfield $y was added to field 242 2004/09/02 10:57 jrad
-	Revision 1.08 - Subject chopPunctuation expanded and attribute fixes 2004/08/12 jrad
-	Revision 1.07 - 2004/03/25 08:29 jrad
-	Revision 1.06 - Various validation fixes 2004/02/20 ntra
-	Revision 1.05 - MODS2 to MODS3 updates, language unstacking and de-duping, chopPunctuation expanded  2003/10/02 16:18:58  ntra
-	Revision 1.03 - Additional Changes not related to MODS Version 2.0 by ntra
-	Revision 1.02 - Added Log Comment  2003/03/24 19:37:42  ckeith
+	MARC21slim2MODS3-6 (Revision 1.111) 20180621
+
+Revision 1.112 - Fixed 700 ind1=0 to transform - tmee 2018/06/21
+Revision 1.111 - Added test to prevent empty authority attribute for 047 with no subfield 2. - ws 2016/03/24
+Revision 1.110 - Added test to prevent empty authority attribute for 336 with no subfield 2. - ws 2016/03/24
+Revision 1.109 - Added test to prevent empty authority attribute for 655 and use if ind2 if no subfield 2 is available. - ws 2016/03/24
+Revision 1.108 - Added filter to name templates to exclude names with title subfields. - ws 2016/03/24	
+Revision 1.107 - Added support for 024/@ind1=7 - ws 2016/1/7	
+Revision 1.106 - Added a xsl:when to deal with '#' and ' ' in $leader19 and $controlField008-18 - ws 2014/12/19		
+Revision 1.105 - Add @unit to extent - ws 2014/11/20	
+Revision 1.104 - Fixed 111$n and 711$n to reflect mapping to <namePart> tmee 20141112
+Revision 1.103 - Fixed 008/28 to reflect revised mapping for government publication tmee 20141104	
+Revision 1.102 - Fixed 240$s duplication tmee 20140812
+Revision 1.101 - Fixed 130 tmee 20140806
+Revision 1.100 - Fixed 245c tmee 20140804
+Revision 1.99 - Fixed 240 issue tmee 20140804
+Revision 1.98 - Fixed 336 mapping tmee 20140522
+Revision 1.97 - Fixed 264 mapping tmee 20140521
+Revision 1.96 - Fixed 310 and 321 and 008 frequency authority for marcfrequency tmee 2014/04/22
+Revision 1.95 - Modified 035 to include identifier type (WlCaITV) tmee 2014/04/21	
+Revision 1.94 - Leader 07 b changed mapping from continuing to serial tmee 2014/02/21
+MODS 3.5 
+Revision 1.93 - Fixed personal name transform for ind1=0 tmee 2014/01/31
+Revision 1.92 - Removed duplicate code for 856 1.51 tmee 2014/01/31
+Revision 1.91 - Fixed createnameFrom720 duplication tmee 2014/01/31
+Revision 1.90 - Fixed 520 displayLabel tmee tmee 2014/01/31
+Revision 1.89 - Fixed 008-06 when value = 's' for cartographics tmee tmee 2014/01/31
+Revision 1.88 - Fixed 510c mapping - tmee 2013/08/29
+Revision 1.87 - Fixed expressions of <accessCondition> type values - tmee 2013/08/29
+Revision 1.86 - Fixed 008 <frequency> subfield to occur w/i <originiInfo> - tmee 2013/08/29
+Revision 1.85 - Fixed 245$c - tmee 2013/03/07
+Revision 1.84 - Fixed 1.35 and 1.36 date mapping for 008 when 008/06=e,p,r,s,t so only 008/07-10 displays, rather than 008/07-14 - tmee 2013/02/01   
+Revision 1.83 - Deleted mapping for 534 to note - tmee 2013/01/18
+Revision 1.82 - Added mapping for 264 ind 0,1,2,3 to originInfo - 2013/01/15 tmee
+Revision 1.81 - Added mapping for 336$a$2, 337$a$2, 338$a$2 - 2012/12/03 tmee
+Revision 1.80 - Added 100/700 mapping for "family" - 2012/09/10 tmee
+Revision 1.79 - Added 245 $s mapping - 2012/07/11 tmee
+Revision 1.78 - Fixed 852 mapping <shelfLocation> was changed to <shelfLocator> - 2012/05/07 tmee
+Revision 1.77 - Fixed 008-06 when value = 's' - 2012/04/19 tmee
+Revision 1.76 - Fixed 242 - 2012/02/01 tmee
+Revision 1.75 - Fixed 653 - 2012/01/31 tmee
+Revision 1.74 - Fixed 510 note - 2011/07/15 tmee
+Revision 1.73 - Fixed 506 540 - 2011/07/11 tmee
+Revision 1.72 - Fixed frequency error - 2011/07/07 and 2011/07/14 tmee
+Revision 1.71 - Fixed subject titles for subfields t - 2011/04/26 tmee 
+Revision 1.70 - Added mapping for OCLC numbers in 035s to go into <identifier type="oclc"> 2011/02/27 - tmee 	
+Revision 1.69 - Added mapping for untyped identifiers for 024 - 2011/02/27 tmee 
+Revision 1.68 - Added <subject><titleInfo> mapping for 600/610/611 subfields t,p,n - 2010/12/22 tmee
+Revision 1.67 - Added frequency values and authority="marcfrequency" for 008/18 - 2010/12/09 tmee
+Revision 1.66 - Fixed 008/06=c,d,i,m,k,u, from dateCreated to dateIssued - 2010/12/06 tmee
+Revision 1.65 - Added back marcsmd and marccategory for 007 cr- 2010/12/06 tmee
+Revision 1.64 - Fixed identifiers - removed isInvalid template - 2010/12/06 tmee
+Revision 1.63 - Fixed descriptiveStandard value from aacr2 to aacr - 2010/12/06 tmee
+Revision 1.62 - Fixed date mapping for 008/06=e,p,r,s,t - 2010/12/01 tmee
+Revision 1.61 - Added 007 mappings for marccategory - 2010/11/12 tmee
+Revision 1.60 - Added altRepGroups and 880 linkages for relevant fields, see mapping - 2010/11/26 tmee
+Revision 1.59 - Added scriptTerm type=text to language for 546b and 066c - 2010/09/23 tmee
+Revision 1.58 - Expanded script template to include code conversions for extended scripts - 2010/09/22 tmee
+Revision 1.57 - Added Ldr/07 and Ldr/19 mappings - 2010/09/17 tmee
+Revision 1.56 - Mapped 1xx usage="primary" - 2010/09/17 tmee
+Revision 1.55 - Mapped UT 240/1xx nameTitleGroup - 2010/09/17 tmee
+MODS 3.4
+Revision 1.54 - Fixed 086 redundancy - 2010/07/27 tmee
+Revision 1.53 - Added direct href for MARC21slimUtils - 2010/07/27 tmee
+Revision 1.52 - Mapped 046 subfields c,e,k,l - 2010/04/09 tmee
+Revision 1.51 - Corrected 856 transform - 2010/01/29 tmee
+Revision 1.50 - Added 210 $2 authority attribute in <titleInfo type=”abbreviated”> 2009/11/23 tmee
+Revision 1.49 - Aquifer revision 1.14 - Added 240s (version) data to <titleInfo type="uniform"><title> 2009/11/23 tmee
+Revision 1.48 - Aquifer revision 1.27 - Added mapping of 242 second indicator (for nonfiling characters) to <titleInfo><nonSort > subelement  2007/08/08 tmee/dlf
+Revision 1.47 - Aquifer revision 1.26 - Mapped 300 subfield f (type of unit) - and g (size of unit) 2009 ntra
+Revision 1.46 - Aquifer revision 1.25 - Changed mapping of 767 so that <type="otherVersion>  2009/11/20  tmee
+Revision 1.45 - Aquifer revision 1.24 - Changed mapping of 765 so that <type="otherVersion>  2009/11/20  tmee 
+Revision 1.44 - Added <recordInfo><recordOrigin> canned text about the version of this stylesheet 2009 ntra
+Revision 1.43 - Mapped 351 subfields a,b,c 2009/11/20 tmee
+Revision 1.42 - Changed 856 second indicator=1 to go to <location><url displayLabel=”electronic resource”> instead of to <relatedItem type=”otherVersion”><url> 2009/11/20 tmee
+Revision 1.41 - Aquifer revision 1.9 Added variable and choice protocol for adding usage=”primary display” 2009/11/19 tmee 
+Revision 1.40 - Dropped <note> for 510 and added <relatedItem type="isReferencedBy"> for 510 2009/11/19 tmee
+Revision 1.39 - Aquifer revision 1.23 Changed mapping for 762 (Subseries Entry) from <relatedItem type="series"> to <relatedItem type="constituent"> 2009/11/19 tmee
+Revision 1.38 - Aquifer revision 1.29 Dropped 007s for electronic versions 2009/11/18 tmee
+Revision 1.37 - Fixed date redundancy in output (with questionable dates) 2009/11/16 tmee
+Revision 1.36 - If mss material (Ldr/06=d,p,f,t) map 008 dates and 260$c/$g dates to dateCreated 2009/11/24, otherwise map 008 and 260$c/$g to dateIssued 2010/01/08 tmee
+Revision 1.35 - Mapped appended detailed dates from 008/07-10 and 008/11-14 to dateIssued or DateCreated w/encoding="marc" 2010/01/12 tmee
+Revision 1.34 - Mapped 045b B.C. and C.E. date range info to iso8601-compliant dates in <subject><temporal> 2009/01/08 ntra
+Revision 1.33 - Mapped Ldr/06 "o" to <typeOfResource>kit 2009/11/16 tmee
+Revision 1.32 - Mapped specific note types from the MODS Note Type list <http://www.loc.gov/standards/mods/mods-notes.html> tmee 2009/11/17
+Revision 1.31 - Mapped 540 to <accessCondition type="use and reproduction"> and 506 to <accessCondition type="restriction on access"> and delete mappings of 540 and 506 to <note>
+Revision 1.30 - Mapped 037c to <identifier displayLabel=""> 2009/11/13 tmee
+Revision 1.29 - Corrected schemaLocation to 3.3 2009/11/13 tmee
+Revision 1.28 - Changed mapping from 752,662 g going to mods:hierarchicalGeographic/area instead of "region" 2009/07/30 ntra
+Revision 1.27 - Mapped 648 to <subject> 2009/03/13 tmee
+Revision 1.26 - Added subfield $s mapping for 130/240/730  2008/10/16 tmee
+Revision 1.25 - Mapped 040e to <descriptiveStandard> and Leader/18 to <descriptive standard>aacr2  2008/09/18 tmee
+Revision 1.24 - Mapped 852 subfields $h, $i, $j, $k, $l, $m, $t to <shelfLocation> and 852 subfield $u to <physicalLocation> with @xlink 2008/09/17 tmee
+Revision 1.23 - Commented out xlink/uri for subfield 0 for 130/240/730, 100/700, 110/710, 111/711 as these are currently unactionable  2008/09/17 tmee
+Revision 1.22 - Mapped 022 subfield $l to type "issn-l" subfield $m to output identifier element with corresponding @type and @invalid eq 'yes'2008/09/17 tmee
+Revision 1.21 - Mapped 856 ind2=1 or ind2=2 to <relatedItem><location><url>  2008/07/03 tmee
+Revision 1.20 - Added genre w/@auth="contents of 2" and type= "musical composition"  2008/07/01 tmee
+Revision 1.19 - Added genre offprint for 008/24+ BK code 2  2008/07/01  tmee
+Revision 1.18 - Added xlink/uri for subfield 0 for 130/240/730, 100/700, 110/710, 111/711  2008/06/26 tmee
+Revision 1.17 - Added mapping of 662 2008/05/14 tmee	
+Revision 1.16 - Changed @authority from "marc" to "marcgt" for 007 and 008 codes mapped to a term in <genre> 2007/07/10 tmee
+Revision 1.15 - For field 630, moved call to part template outside title element  2007/07/10 tmee
+Revision 1.14 - Fixed template isValid and fields 010, 020, 022, 024, 028, and 037 to output additional identifier elements with corresponding @type and @invalid eq 'yes' when subfields z or y (in the case of 022) exist in the MARCXML ::: 2007/01/04 17:35:20 cred
+Revision 1.13 - Changed order of output under cartographics to reflect schema  2006/11/28 tmee
+Revision 1.12 - Updated to reflect MODS 3.2 Mapping  2006/10/11 tmee
+Revision 1.11 - The attribute objectPart moved from <languageTerm> to <language>  2006/04/08  jrad
+Revision 1.10 - MODS 3.1 revisions to language and classification elements (plus ability to find marc:collection embedded in wrapper elements such as SRU zs: wrappers)  2006/02/06  ggar
+Revision 1.09 - Subfield $y was added to field 242 2004/09/02 10:57 jrad
+Revision 1.08 - Subject chopPunctuation expanded and attribute fixes 2004/08/12 jrad
+Revision 1.07 - 2004/03/25 08:29 jrad
+Revision 1.06 - Various validation fixes 2004/02/20 ntra
+Revision 1.05 - MODS2 to MODS3 updates, language unstacking and de-duping, chopPunctuation expanded  2003/10/02 16:18:58  ntra
+Revision 1.03 - Additional Changes not related to MODS Version 2.0 by ntra
+Revision 1.02 - Added Log Comment  2003/03/24 19:37:42  ckeith
 	-->
 
 	<xsl:template match="/">
@@ -140,7 +132,7 @@
 				</modsCollection>
 			</xsl:when>
 			<xsl:otherwise>
-				<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.6" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-6.xsd">
+				<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.5" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
 					<xsl:for-each select="//marc:record">
 						<xsl:call-template name="marcRecord"/>
 					</xsl:for-each>
@@ -230,8 +222,9 @@
 				</xsl:variable>
 				<xsl:choose>
 					<xsl:when test="@ind2&gt;0">
-						<!-- 1.112 -->
-						<nonSort xml:space="preserve"><xsl:value-of select="substring($titleChop,1,@ind2)"/> </nonSort>
+						<nonSort>
+							<xsl:value-of select="substring($titleChop,1,@ind2)"/>
+						</nonSort>
 						<title>
 							<xsl:value-of select="substring($titleChop,@ind2+1)"/>
 						</title>
@@ -2153,10 +2146,6 @@
 
 		<xsl:for-each select="marc:datafield[@tag=700][marc:subfield[@code='t']]">
 			<relatedItem>
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="constituentOrRelatedType"/>
 				<titleInfo>
 					<title>
@@ -2190,10 +2179,6 @@
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=710][marc:subfield[@code='t']]">
 			<relatedItem>
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="constituentOrRelatedType"/>
 				<titleInfo>
 					<title>
@@ -2240,10 +2225,6 @@
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=711][marc:subfield[@code='t']]">
 			<relatedItem>
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="constituentOrRelatedType"/>
 				<titleInfo>
 					<title>
@@ -2274,10 +2255,6 @@
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=730][@ind2=2]">
 			<relatedItem>
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="constituentOrRelatedType"/>
 				<titleInfo>
 					<title>
@@ -2296,12 +2273,9 @@
 			</relatedItem>
 		</xsl:for-each>
 
+
 		<xsl:for-each select="marc:datafield[@tag=740][@ind2=2]">
 			<relatedItem>
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="constituentOrRelatedType"/>
 				<titleInfo>
 					<title>
@@ -2318,10 +2292,6 @@
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=760]">
 			<relatedItem type="series">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
@@ -2329,10 +2299,6 @@
 		<!--AQ1.23 tmee/dlf -->
 		<xsl:for-each select="marc:datafield[@tag=762]">
 			<relatedItem type="constituent">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
@@ -2341,20 +2307,12 @@
 		<!-- 1.45 and 1.46 - AQ1.24 and 1.25 tmee-->
 		<xsl:for-each select="marc:datafield[@tag=765]|marc:datafield[@tag=767]|marc:datafield[@tag=775]">
 			<relatedItem type="otherVersion">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
 
 		<xsl:for-each select="marc:datafield[@tag=770]|marc:datafield[@tag=774]">
 			<relatedItem type="constituent">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
@@ -2362,46 +2320,26 @@
 
 		<xsl:for-each select="marc:datafield[@tag=772]|marc:datafield[@tag=773]">
 			<relatedItem type="host">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=776]">
 			<relatedItem type="otherFormat">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=780]">
 			<relatedItem type="preceding">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=785]">
 			<relatedItem type="succeeding">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
 		<xsl:for-each select="marc:datafield[@tag=786]">
 			<relatedItem type="original">
-				<!-- 1.115 -->
-				<xsl:if test="marc:subfield[@code='i']">
-					<xsl:attribute name="otherType"><xsl:value-of select="marc:subfield[@code='i']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:call-template name="relatedItem76X-78X"/>
 			</relatedItem>
 		</xsl:for-each>
@@ -2825,7 +2763,7 @@
 			</xsl:for-each>
 
 			<recordOrigin>Converted from MARCXML to MODS version 3.6 using MARC21slim2MODS3-6.xsl
-				(Revision 1.116 2016/3/15)</recordOrigin>
+				(Revision 1.112 2018/06/21)</recordOrigin>
 
 			<xsl:for-each select="marc:datafield[@tag=040]/marc:subfield[@code='b']">
 				<languageOfCataloging>
@@ -3126,16 +3064,6 @@
 		</namePart>
 	</xsl:template>
 	
-	<!-- 1.116 -->
-	<xsl:template name="nameIdentifier">
-		<xsl:if test="marc:subfield[@code='0']">
-			<nameIdentifier>
-				<xsl:call-template name="subfieldSelect">
-					<xsl:with-param name="codes">0</xsl:with-param>
-				</xsl:call-template>
-			</nameIdentifier>
-		</xsl:if>
-	</xsl:template>
 	
 	
 	<xsl:template name="constituentOrRelatedType">
@@ -4314,8 +4242,9 @@
 			<xsl:choose>
 				<xsl:when test="@ind2&gt;0">
 					<xsl:if test="@tag!='880'">
-						<!-- 1.112 -->
-						<nonSort xml:space="preserve"><xsl:value-of select="substring($titleChop,1,@ind2)"/> </nonSort>
+						<nonSort>
+							<xsl:value-of select="substring($titleChop,1,@ind2)"/>
+						</nonSort>
 					</xsl:if>
 					<title>
 						<xsl:value-of select="substring($titleChop,@ind2+1)"/>
@@ -4430,8 +4359,6 @@
 				<xsl:call-template name="nameABCDQ"/>
 				<xsl:call-template name="affiliation"/>
 				<xsl:call-template name="role"/>
-				<!-- 1.116 -->
-				<xsl:call-template name="nameIdentifier"/>
 			</name>
 		</xsl:if>
 		<!-- 1.99 240 fix 20140804 -->
@@ -4450,8 +4377,6 @@
 				<xsl:call-template name="nameABCDQ"/>
 				<xsl:call-template name="affiliation"/>
 				<xsl:call-template name="role"/>
-				<!-- 1.116 -->
-				<xsl:call-template name="nameIdentifier"/>
 			</name>
 		</xsl:if>
 	</xsl:template>
@@ -4466,8 +4391,6 @@
 			</xsl:if>
 			<xsl:call-template name="nameABCDN"/>
 			<xsl:call-template name="role"/>
-			<!-- 1.116 -->
-			<xsl:call-template name="nameIdentifier"/>
 		</name>
 	</xsl:template>
 
@@ -4484,8 +4407,6 @@
 			</xsl:if>
 			<xsl:call-template name="nameACDENQ"/>
 			<xsl:call-template name="role"/>
-			<!-- 1.116 -->
-			<xsl:call-template name="nameIdentifier"/>
 		</name>
 	</xsl:template>
 
@@ -4494,14 +4415,12 @@
 	<!-- name 700 710 711 720 -->
 
 	<xsl:template name="createNameFrom700">
-		<xsl:if test="@ind1='1'">
+		<xsl:if test="@ind1='0' or @ind1='1'">
 			<name type="personal">
 				<xsl:call-template name="xxx880"/>
 				<xsl:call-template name="nameABCDQ"/>
 				<xsl:call-template name="affiliation"/>
 				<xsl:call-template name="role"/>
-				<!-- 1.116 -->
-				<xsl:call-template name="nameIdentifier"/>
 			</name>
 		</xsl:if>
 		<xsl:if test="@ind1='3'">
@@ -4510,8 +4429,6 @@
 				<xsl:call-template name="nameABCDQ"/>
 				<xsl:call-template name="affiliation"/>
 				<xsl:call-template name="role"/>
-				<!-- 1.116 -->
-				<xsl:call-template name="nameIdentifier"/>
 			</name>
 		</xsl:if>
 	</xsl:template>
@@ -4521,8 +4438,6 @@
 			<xsl:call-template name="xxx880"/>
 			<xsl:call-template name="nameABCDN"/>
 			<xsl:call-template name="role"/>
-			<!-- 1.116 -->
-			<xsl:call-template name="nameIdentifier"/>
 		</name>
 	</xsl:template>
 
@@ -4532,8 +4447,6 @@
 			<xsl:call-template name="xxx880"/>
 			<xsl:call-template name="nameACDENQ"/>
 			<xsl:call-template name="role"/>
-			<!-- 1.116 -->
-			<xsl:call-template name="nameIdentifier"/>
 		</name>
 	</xsl:template>
 	
@@ -5399,10 +5312,6 @@
 		<subject>
 			<xsl:call-template name="xxx880"/>
 			<hierarchicalGeographic>
-				<!-- 1.113 -->
-				<xsl:if test="marc:subfield[@code='0']">
-					<xsl:attribute name="valueURI"><xsl:value-of select="marc:subfield[@code='0']"/></xsl:attribute>
-				</xsl:if>
 				<xsl:for-each select="marc:subfield[@code='a']">
 					<country>
 						<xsl:call-template name="chopPunctuation">
@@ -5615,21 +5524,6 @@
 						<xsl:with-param name="codes">hijklmt</xsl:with-param>
 					</xsl:call-template>
 				</shelfLocator>
-			</xsl:if>
-			<!-- 1.114 -->
-			<xsl:if test="marc:subfield[@code='p' or @code='t']">
-				<holdingSimple>
-					<copyInformation>
-						<xsl:for-each select="marc:subfield[@code='p']|marc:subfield[@code='t']">
-							<itemIdentifier>
-								<xsl:if test="@code='t'">
-									<xsl:attribute name="type"><xsl:text>copy number</xsl:text></xsl:attribute>
-								</xsl:if>
-								<xsl:apply-templates select="."/>
-							</itemIdentifier>							
-						</xsl:for-each>
-					</copyInformation>
-				</holdingSimple>
 			</xsl:if>
 		</location>
 	</xsl:template>
