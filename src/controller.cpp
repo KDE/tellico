@@ -217,7 +217,6 @@ void Controller::modifiedEntries(Tellico::Data::EntryList entries_) {
     obs->modifyEntries(entries_);
   }
   m_mainWindow->m_entryView->slotRefresh(); // special case
-  m_mainWindow->slotQueueFilter();
   blockAllSignals(false);
 }
 

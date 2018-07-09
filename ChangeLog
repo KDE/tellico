@@ -1,3 +1,7 @@
+2018-07-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that cleared selection on modification when a filter was applied (Bug 394343).
+
 2018-07-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated SRU fetcher to allow multiple marc records within a SRW result (DNB).
