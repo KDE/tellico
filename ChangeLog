@@ -1,3 +1,7 @@
+2018-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed LTR direction for year within Video template (Debian Bug #904259)
+
 2018-07-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug that cleared selection on modification when a filter was applied (Bug 394343).
