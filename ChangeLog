@@ -1,3 +1,7 @@
+2018-08-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon source to include multiple content listings in movie plots (Bug 396211).
+
 2018-08-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed LTR direction for year within Video template (Debian Bug #904259)

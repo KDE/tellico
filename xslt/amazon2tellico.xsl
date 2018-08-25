@@ -125,7 +125,7 @@
   <xsl:choose>
    <xsl:when test="$mode='Books'">
     <comments>
-     <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview/aws:Content"/>
+     <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview[1]/aws:Content"/>
     </comments>
 
     <keywords i18n="true">
@@ -171,6 +171,11 @@
 
    <xsl:when test="$mode='Video'">
     <plot>
+     <!-- see Bug 396211 -->
+     <xsl:if test="aws:EditorialReviews/aws:EditorialReview[2]">
+      <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview[2]/aws:Content"/>
+      <xsl:text>&#10;<br/></xsl:text> <!-- newline character -->
+     </xsl:if>
      <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview[1]/aws:Content"/>
     </plot>
 
