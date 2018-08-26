@@ -80,7 +80,7 @@
     <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
     <p xml:lang="it">Tellico è un'applicazione per organizzare le tue collezioni. Fornisce modelli predefiniti per libri, bibliografie, video, musica, videogiochi, monete, francobolli, carte da gioco, fumetti e vini. Ti permette di inserire la tua collezione in una base di dati, salvando molte proprietà differenti come titolo, autore, ecc.</p>
     <p xml:lang="nl">Tellico is een toepassing voor het organiseren van uw verzamelingen. Het biedt standaard sjablonen voor boeken, bibliografieën, video's, muziek, videogames, munten, postzegels, visitekaartjes, strips en wijnen. Het stelt u in staat om uw verzameling in een catalogusdatabase in te voeren, waarin veel verschillende eigenschappen, zoals titel, auteur, etc. opgeslagen kunnen worden.</p>
-    <p xml:lang="nn">Tellico er eit program for å halda oversikt i samlingane dine. Det kjem med malar for bøker, litteraturlister, filmar, musikk, spel, myntar, frimerke, samlekort, teikneseriar og vinar. Du kan leggja samlinga di inn i ei katalogdatabase og lagra mange forskjellige eigenskapar som tittel, forfattar, med meir.</p>
+    <p xml:lang="nn">Tellico er eit program for å halda oversikt over samlingane dine. Det kjem med malar for bøker, litteraturlister, filmar, musikk, spel, myntar, frimerke, samlekort, teikneseriar og vin. Du kan katalogisera samlinga di i ein database og lagra ulik mykje informasjon, for eksempel tittel og forfattar.</p>
     <p xml:lang="pl">Tellico jest programem do porządkowania twoich zbiorów. Dostarcza domyślnych szablonów dla książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win. Umożliwia wprowadzenie całego twojego zbioru do bazy danych katalogu, zapisując przy tym wiele różnych właściwości takich jak tytuł, autor, itp.</p>
     <p xml:lang="pt">O Tellico é uma aplicação para organizar as suas colecções. Oferece modelos predefinidos para livros, bibliografias, vídeos, músicas, jogos de vídeo, moedas, selos, cromos, livros de banda desenhada, vinhos, entre outras colecções. Permite-lhe introduzir a sua colecção numa base de dados de catálogos, gravando diversas propriedades, como o título, o autor, etc.</p>
     <p xml:lang="pt-BR">Tellico é um aplicativo para organizar suas coleções. Oferece modelos predefinidos para livros, bibliografias, vídeos, músicas, jogos de vídeo game, moedas, selos, figurinhas, histórias em quadrinhos, vinhos, entre outras coleções. Permite-lhe introduzir sua coleção em um banco de dados de catálogos, gravando diversas propriedades, como título, autor, etc.</p>
@@ -134,7 +134,7 @@
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
       <li xml:lang="it">Supporta collezioni standard di libri, voci bibliografiche, video, musica, videogiochi, fumetti, monete, francobolli, carte da gioco, vini, giochi da tavolo e collezioni di file</li>
       <li xml:lang="nl">Ondersteunt standaard verzamelingen van boeken, bibliografie-items, video's, muziek, videogames, strips, munten, postzegels, visitekaartjes, wijnen, bordspellen en catalogs van bestanden</li>
-      <li xml:lang="nn">Støttar samlingar av bøker, litteraturlister, filmar, musikk, spel, teikneseriar, myntar, frimerke, samlekort, vinar, brettspel og filkatalogar</li>
+      <li xml:lang="nn">Støttar samlingar av bøker, litteraturlister, filmar, musikk, spel, teikneseriar, myntar, frimerke, samlekort, vin, brettspel og filkatalogar</li>
       <li xml:lang="pl">Obsługa domyślnych zbiorów książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win, gier planszowych oraz katalogów plików</li>
       <li xml:lang="pt">Suporta diversas colecções de livros, itens bibliográficos, vídeos, músicas, jogos de vídeo, livros de banda desenhada, moedas, selos, cromos, vinhos, jogos de tabuleiros e catálogos de ficheiros</li>
       <li xml:lang="pt-BR">Suporte a diversas coleções de livros, itens bibliográficos, vídeos, músicas, jogos de vídeo game, histórias em quadrinhos, moedas, selos, figurinhas, vinhos, jogos de tabuleiro e catálogos de arquivos</li>
@@ -159,7 +159,7 @@
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
       <li xml:lang="it">Supporta collezioni personalizzate definite dall'utente</li>
       <li xml:lang="nl">Ondersteunt gebruikergedefinieerde eigen verzamelingen</li>
-      <li xml:lang="nn">Støttar oppretting av tilpassa samlingar</li>
+      <li xml:lang="nn">Støttar eigendefinerte samlingstypar</li>
       <li xml:lang="pl">Obsługa zbiorów określonych przez użytkownika</li>
       <li xml:lang="pt">Suporta colecções personalizadas pelo utilizador</li>
       <li xml:lang="pt-BR">Suporte a coleções personalizadas pelo usuário</li>
@@ -184,6 +184,7 @@
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
       <li xml:lang="it">Supporta un qualsiasi numero di campi definiti dall'utente, di molti tipi differenti: testo, paragrafi, liste, caselle, numeri, URL, dati, immagini e combinazioni</li>
       <li xml:lang="nl">Ondersteunt elk aantal gebruikergedefinieerde velden met verscheidene verschillende types: tekst, paragraaf, lijst, keuzevakje, aantal, URL, datum, afbeelding en combinaties</li>
+      <li xml:lang="nn">Støttar vilkårleg mange eigendefinerte felt i ulike variantar: tekst, avsnitt, liste, avkryssingsboks, tal, nettadresse, dato, bilete og kombinasjonar av desse variantane</li>
       <li xml:lang="pl">Obsługa dowolnej liczby pól określonych przez użytkownika, wielu różnych rodzajów: tekst, akapit, spis, pole zaznaczane, liczba, adres URL, data, obraz i ich kombinacje</li>
       <li xml:lang="pt">Suporta qualquer número de campos definidos pelo utilizador, de diferentes tipos: texto, parágrafo, lista, opção de marcação, número, URL, data, imagens e combinações</li>
       <li xml:lang="pt-BR">Suporte a qualquer número de campos definidos pelo usuário, de diferentes tipos: texto, parágrafo, lista, opção de marcação, número, URL, data, imagens e combinações</li>
@@ -208,7 +209,7 @@
       <li xml:lang="ia">Il manea entratas con multiple autores, generes, parolas clave, etc.</li>
       <li xml:lang="it">Gestisce voci con autori multipli, generi, parole chiave, ecc.</li>
       <li xml:lang="nl">Behandelt items met meerdere auteurs, genres, zoektermen, etc.</li>
-      <li xml:lang="nn">Kan handsama oppføringar som inneheld fleire forfattarar, sjangrar, nøkkelord, med meir.</li>
+      <li xml:lang="nn">Kan handtera oppføringar som inneheld fleire forfattarar, sjangrar, nøkkelord, …</li>
       <li xml:lang="pl">Obsługa wpisów z wieloma autorami, gatunkami, słowami kluczowymi, itp.</li>
       <li xml:lang="pt">Lida com itens de vários autores, géneros, palavras-chave, etc</li>
       <li xml:lang="pt-BR">Lida com itens de vários autores, gêneros, palavras-chave, etc</li>
@@ -233,7 +234,7 @@
       <li xml:lang="ia">Automaticamente da forma a titulos e nomines</li>
       <li xml:lang="it">Formatta automaticamente titoli e nomi</li>
       <li xml:lang="nl">Deelt automatisch titels en namen in</li>
-      <li xml:lang="nn">Formaterer automatisk titlar og namn</li>
+      <li xml:lang="nn">Automatisk formatering av titlar og namn</li>
       <li xml:lang="pl">Samoczynne formatowanie tytułów i nazw</li>
       <li xml:lang="pt">Formata automaticamente os títulos e nomes</li>
       <li xml:lang="pt-BR">Formata automaticamente os títulos e nomes</li>
@@ -308,6 +309,7 @@
       <li xml:lang="ia">Il permitte patronos de entratas personalisate per XSLT</li>
       <li xml:lang="it">Permette modelli di immissione personalizzabili attraverso XSLT</li>
       <li xml:lang="nl">Staat aanpasbare sjablonen van items toe via XSLT</li>
+      <li xml:lang="nn">Kan tilpassa oppføringsmalar ved hjelp av XSLT-stilsett</li>
       <li xml:lang="pl">Własne szablony wpisów dzięki XSLT</li>
       <li xml:lang="pt">Permite modelos de registos personalizados, através de XSLT</li>
       <li xml:lang="pt-BR">Permite modelos de registros personalizados, através de XSLT</li>
@@ -332,7 +334,7 @@
       <li xml:lang="ia">Il importa metadatos MODS, Bibtex, RIS, CSV, PDF e plure altere formatos</li>
       <li xml:lang="it">Importa MODS, Bibtex, RIS, CSV, metadati dei PDF, e molti altri formati</li>
       <li xml:lang="nl">Importeert MODS, Bibtex, RIS, CSV, PDF metadata en vele andere formaten</li>
-      <li xml:lang="nn">Kan importera MODS, BibTeX, RIS, CSV, PDF-metadata og mange andre format</li>
+      <li xml:lang="nn">Kan importera metadata frå blant anna MODS-, BibTeX-, RIS-, CSV- og PDF-filer</li>
       <li xml:lang="pl">Importowanie MODS, Bibtex, RIS, CSV, metadanych PDF i wielu innych formatów</li>
       <li xml:lang="pt">Importa dos formatos MODS, Bibtex, RIS, CSV, meta-dados de PDF, entre muitos outros</li>
       <li xml:lang="pt-BR">Importa dos formatos MODS, Bibtex, RIS, CSV, metadados de PDF, entre muitos outros</li>
@@ -378,7 +380,7 @@
       <li xml:lang="ia">Il importa information directemente ab Amazon.com, IMDb,  servitores z39.50, PubMed, seritores SRU, CrossRef.org, varie altere sitios web e ab external scripts</li>
       <li xml:lang="it">Importa informazioni direttamente da Amazon.com, IMDb, server z39.50, PubMed, server SRU, CrossRef.org, svariati altri siti web, e da script esterni</li>
       <li xml:lang="nl">Importeert informatie direct uit Amazon.com, IMDb, z39.50-servers, PubMed, SRU-servers, CrossRef.org, verschillende andere websites en uit externe scripts</li>
-      <li xml:lang="nn">Kan importera informasjon frå Amazon.com, IMDb, z39.50-tenarar, PubMed, SRU-tenarar, CrossRef.org, ymse andre nettstadar og eksterne skript</li>
+      <li xml:lang="nn">Kan henta informasjon frå Amazon.com, IMDb, z39.50-tenarar, PubMed, SRU-tenarar, CrossRef.org, ymse andre nettstadar og eksterne skript</li>
       <li xml:lang="pl">Importowanie szczegółów bezpośrednio z Amazon.com, IMDb, serwerów z39.50, PubMed, serwerów SRU, CrossRef.org i różnych innych stron sieciowych, a także z zewnętrznych skryptów</li>
       <li xml:lang="pt">Importa a informação directamente a partir da Amazon.com, IMDb, servidores de z39.50, PubMed, servidores de SRU, CrossRef.org, entre outros serviços, bem como de programas externos</li>
       <li xml:lang="pt-BR">Importa a informação diretamente a partir da Amazon.com, IMDb, servidores z39.50, PubMed, servidores SRU, CrossRef.org, entre outros serviços, bem como de scripts externos</li>
