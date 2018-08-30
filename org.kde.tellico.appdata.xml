@@ -449,22 +449,6 @@
   <screenshots>
     <screenshot type="default" width="867" height="627">
       <caption>The main window showing a simple item in a book collection</caption>
-      <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
-      <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
-      <caption xml:lang="de">Das Hauptfenster mit einem einfachen Eintrag einer Bücher-Sammlung</caption>
-      <caption xml:lang="en-GB">The main window showing a simple item in a book collection</caption>
-      <caption xml:lang="es">La ventana principal mostrando un elemento sencillo de una colección de libros</caption>
-      <caption xml:lang="fr">La fenêtre principale, qui affiche un élément simple au sein d'une collection de livres</caption>
-      <caption xml:lang="gl">A xanela principal, que mostra un elemento dunha colección de libros.</caption>
-      <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
-      <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
-      <caption xml:lang="nn">Hovudvindauget som viser ei enkel oppføring i ei boksamling</caption>
-      <caption xml:lang="pl">Okno główne pokazujące prosty element w zbiorze książek</caption>
-      <caption xml:lang="pt">A janela principal a mostrar um item simples numa colecção de livros</caption>
-      <caption xml:lang="pt-BR">A janela principal mostrando um item simples em uma coleção de livros</caption>
-      <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
-      <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книг</caption>
-      <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
       <image>http://kde.org/images/screenshots/tellico.png</image>
     </screenshot>
   </screenshots>
