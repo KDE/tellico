@@ -78,7 +78,7 @@ void KinoPoiskFetcherTest::testSuperman() {
   QCOMPARE(entry->field("composer"), QString::fromUtf8("Джон Оттмен"));
   QCOMPARE(set(entry, "genre"), set(QString::fromUtf8("фантастика; боевик; приключения")));
   QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
-  QCOMPARE(entry->field("running-time"), QStringLiteral("169"));
+  QCOMPARE(entry->field("running-time"), QStringLiteral("154"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QString::fromUtf8("Брэндон Рут"));

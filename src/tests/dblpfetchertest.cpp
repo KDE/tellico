@@ -60,7 +60,7 @@ void DBLPFetcherTest::testProceedings() {
   QCOMPARE(entry->field(QStringLiteral("pages")), QStringLiteral("433-446"));
   QCOMPARE(entry->field(QStringLiteral("booktitle")), QStringLiteral("IEEE Symposium on Security and Privacy"));
   QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral(""));
-  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("http://dblp.org/rec/conf/sp/MurdochDAB10"));
+  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("https://dblp.org/rec/conf/sp/MurdochDAB10"));
 //  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1109/SP.2010.33"));
   QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("inproceedings"));
   QCOMPARE(entry->field(QStringLiteral("bibtex-key")), QStringLiteral("MurdochDAB10"));
@@ -84,7 +84,7 @@ void DBLPFetcherTest::testArticle() {
   QCOMPARE(entry->field(QStringLiteral("number")), QStringLiteral("1"));
   QCOMPARE(entry->field(QStringLiteral("journal")), QStringLiteral("J. Comb. Theory, Ser. A"));
   QCOMPARE(entry->field(QStringLiteral("booktitle")), QStringLiteral(""));
-  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("http://dblp.org/rec/journals/jct/WangZ13"));
+  QCOMPARE(entry->field(QStringLiteral("url")), QStringLiteral("https://dblp.org/rec/journals/jct/WangZ13"));
 //  QCOMPARE(entry->field(QStringLiteral("doi")), QStringLiteral("10.1016/j.jcta.2012.07.005"));
   QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("article"));
   QCOMPARE(entry->field(QStringLiteral("bibtex-key")), QStringLiteral("WangZ13"));
