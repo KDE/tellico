@@ -317,7 +317,7 @@ void IMDBFetcher::search() {
   m_countOffset = 0;
 
   m_url = QUrl();
-  m_url.setScheme(QStringLiteral("http"));
+  m_url.setScheme(QStringLiteral("https"));
   m_url.setHost(m_host);
   m_url.setPath(QStringLiteral("/find"));
 
@@ -646,7 +646,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
   } else {
     // now it's sychronous
     // be quiet about failure
-    results = Tellico::fromHtmlData(FileHandler::readDataFile(url, true));
+    results = Tellico::fromHtmlData(FileHandler::readDataFile(url, true), "UTF-8");
     m_url = url; // needed for processing
 #if 0
     myWarning() << "Remove debug from imdbfetcher.cpp for /tmp/testimdbresult.html";
@@ -873,7 +873,7 @@ void IMDBFetcher::doPlot(const QString& str_, Tellico::Data::EntryPtr entry_, co
     QUrl plotURL = baseURL_;
     plotURL.setPath(QStringLiteral("/title/") + idRx.cap(1) + QStringLiteral("/plotsummary"));
     // be quiet about failure
-    QString plotPage = Tellico::fromHtmlData(FileHandler::readDataFile(plotURL, true));
+    QString plotPage = Tellico::fromHtmlData(FileHandler::readDataFile(plotURL, true), "UTF-8");
 
     if(!plotPage.isEmpty()) {
       QRegExp plotRx(QStringLiteral("id=\"plot-summaries-content\">(.*)</p"));
@@ -1384,7 +1384,7 @@ QString IMDBFetcher::defaultName() {
 }
 
 QString IMDBFetcher::defaultIcon() {
-  return favIcon("http://www.imdb.com");
+  return favIcon("https://www.imdb.com");
 }
 
 //static

@@ -70,10 +70,6 @@ void CiteTest::testLyxpipe() {
 }
 
 void CiteTest::testLyxpipeNotExists() {
-  QTemporaryFile tempFile(QStringLiteral("citetest.XXXXXX.in"));
-  // do not open/create the tempfile
-  //QVERIFY(tempFile.open());
-
   Tellico::Cite::Lyxpipe pipe;
 
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));

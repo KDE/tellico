@@ -38,8 +38,8 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* THEGAMESDB_SEARCH_API_URL = "http://thegamesdb.net/api/GetGamesList.php";
-  static const char* THEGAMESDB_DETAIL_API_URL = "http://thegamesdb.net/api/GetGame.php";
+  static const char* THEGAMESDB_SEARCH_API_URL = "http://legacy.thegamesdb.net/api/GetGamesList.php";
+  static const char* THEGAMESDB_DETAIL_API_URL = "http://legacy.thegamesdb.net/api/GetGame.php";
 }
 
 using namespace Tellico;

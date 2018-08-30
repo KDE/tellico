@@ -169,6 +169,12 @@
         text-align: center;
         clear: both;
    }
+   /* KHTML bug related to directional text.
+      See Debian Bug #904259 */
+   .year {
+        direction: ltr;
+        unicode-bidi: embed;
+   }
   </style>
   <title>
    <xsl:value-of select="tc:collection/tc:entry[1]//tc:title[1]"/>
@@ -268,7 +274,7 @@
         <xsl:value-of select=".//tc:nationality[1]"/>
        </span>
       </xsl:if>
-     <xsl:text>)</xsl:text>
+     <xsl:text>) </xsl:text>
     </span>
    </xsl:if>
   </h1>

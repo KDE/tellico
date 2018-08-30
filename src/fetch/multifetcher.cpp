@@ -196,6 +196,7 @@ MultiFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MultiFetcher* f
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
   label->setBuddy(m_collCombo);
+  hboxHBoxLayout->addWidget(m_collCombo);
 
   m_listWidget = new FetcherListWidget(optionsWidget());
   l->addWidget(m_listWidget);

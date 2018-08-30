@@ -1,3 +1,23 @@
+2018-08-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon source to include multiple content listings in movie plots (Bug 396211).
+
+2018-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed LTR direction for year within Video template (Debian Bug #904259)
+
+2018-07-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug that cleared selection on modification when a filter was applied (Bug 394343).
+
+2018-07-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated SRU fetcher to allow multiple marc records within a SRW result (DNB).
+
+2018-04-18  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IMDb data source (Bug 393239).
+
 2018-04-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated BibTeXML importer.
