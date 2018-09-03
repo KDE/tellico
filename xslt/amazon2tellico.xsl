@@ -174,7 +174,7 @@
      <!-- see Bug 396211 -->
      <xsl:if test="aws:EditorialReviews/aws:EditorialReview[2]">
       <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview[2]/aws:Content"/>
-      <xsl:text>&#10;<br/></xsl:text> <!-- newline character -->
+      <xsl:text>&#10;&lt;br/&gt;</xsl:text> <!-- newline character -->
      </xsl:if>
      <xsl:value-of select="aws:EditorialReviews/aws:EditorialReview[1]/aws:Content"/>
     </plot>
