@@ -1,3 +1,8 @@
+2018-09-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Released Tellico 3.1.3.
+	* Updated TheGamesDB data source.
+
 2018-08-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Amazon source to include multiple content listings in movie plots (Bug 396211).
