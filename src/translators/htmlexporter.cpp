@@ -454,7 +454,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   foreach(const QString& imageField, imageFields) {
     foreach(Data::EntryPtr entryIt, entries()) {
       QString id = entryIt->field(imageField);
-      // if no id or is already writen, continue
+      // if no id or is already written, continue
       if(id.isEmpty() || imageSet.has(id)) {
         continue;
       }

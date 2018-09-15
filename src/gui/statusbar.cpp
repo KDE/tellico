@@ -92,7 +92,7 @@ void StatusBar::clearStatus() {
 }
 
 void StatusBar::setStatus(const QString& status_) {
-  // always add a space for asthetics
+  // always add a space for aesthetics
   m_mainLabel->setText(status_ + QLatin1Char(' '));
 }
 

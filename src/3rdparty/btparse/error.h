@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------------------
 @NAME       : error.c
 @DESCRIPTION: Prototypes for the error-generating functions (i.e. functions
-              defined in error.c, and meant only for use elswhere in the
+              defined in error.c, and meant only for use elsewhere in the
               library).
 @CREATED    : Summer 1996, Greg Ward
 @MODIFIED   : 

@@ -329,7 +329,7 @@ private:
   bool querySaveModified();
 
   /**
-   * Called before the window is closed, either by the user or indirectely by the
+   * Called before the window is closed, either by the user or indirectly by the
    * session manager.
    *
    * The purpose of this function is to prepare the window in a way that it is safe to close it,

@@ -76,7 +76,7 @@ extern int     zzauto;
 #endif
 
 extern void	zzadvance(void);
-extern void	zzskip(void);	/* erase zzlextext, look for antoher token */
+extern void	zzskip(void);	/* erase zzlextext, look for another token */
 extern void	zzmore(void);	/* keep zzlextext, look for another token */
 extern void	zzmode(int k);	/* switch to automaton 'k' */
 extern void	zzrdstream(FILE *);/* what stream to read from */
