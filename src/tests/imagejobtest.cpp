@@ -86,7 +86,7 @@ void ImageJobTest::testInvalidUrl() {
 }
 
 void ImageJobTest::testNonexistant() {
-  QUrl u(QStringLiteral("file:///non-existant-location"));
+  QUrl u(QStringLiteral("file:///non-existent-location"));
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
   connect(job, SIGNAL(result(KJob*)),

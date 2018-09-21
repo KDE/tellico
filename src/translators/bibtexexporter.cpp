@@ -236,7 +236,7 @@ QWidget* BibtexExporter::widget(QWidget* parent_) {
   QHBoxLayout* hlay = new QHBoxLayout();
   vlay->addLayout(hlay);
 
-  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + QLatin1Char(' '), gbox); // add a space for asthetics
+  QLabel* l1 = new QLabel(i18n("Bibtex quotation style:") + QLatin1Char(' '), gbox); // add a space for aesthetics
   m_cbBibtexStyle = new KComboBox(gbox);
   m_cbBibtexStyle->addItem(i18n("Braces"));
   m_cbBibtexStyle->addItem(i18n("Quotes"));

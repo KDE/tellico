@@ -564,7 +564,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   // stretch to fill lower area
   l->addStretch(1);
 
-  // purely for asthetics make all widgets line up
+  // purely for aesthetics make all widgets line up
   QList<QWidget*> widgets;
   widgets.append(m_fontCombo);
   widgets.append(m_fontSizeInput);

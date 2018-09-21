@@ -644,7 +644,7 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
 //    myDebug() << "matches previous URL, no downloading needed.";
     results = Tellico::decodeHTML(m_text);
   } else {
-    // now it's sychronous
+    // now it's synchronous
     // be quiet about failure
     results = Tellico::fromHtmlData(FileHandler::readDataFile(url, true), "UTF-8");
     m_url = url; // needed for processing

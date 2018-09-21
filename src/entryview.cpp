@@ -308,7 +308,7 @@ void EntryView::slotRefresh() {
 
 // do some contortions in case the url is relative
 // need to interpret it relative to document URL instead of xslt file
-// the current node under the mouse vould be the text node inside
+// the current node under the mouse would be the text node inside
 // the anchor node, so iterate up the parents
 void EntryView::slotOpenURL(const QUrl& url_) {
   if(url_.scheme() == QLatin1String("tc")) {
@@ -322,7 +322,7 @@ void EntryView::slotOpenURL(const QUrl& url_) {
     if(node.nodeType() == DOM::Node::ELEMENT_NODE && static_cast<DOM::Element>(node).tagName() == "a") {
       QString href = static_cast<DOM::Element>(node).getAttribute("href").string();
       if(!href.isEmpty()) {
-        // interpet url relative to document url
+        // interpret url relative to document url
         u = Kernel::self()->URL().resolved(QUrl(href));
       }
       break;

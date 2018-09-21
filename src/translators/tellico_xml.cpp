@@ -58,7 +58,7 @@ const QString Tellico::XML::dtdBibtexml = QStringLiteral("bibtexml.dtd");
  *
  * VERSION 10 added the game board collection.
  *
- * VERSION 11 remove ReadOnly and Dependent fields, and added apprioriate FieldFlags. An ID field was added by default.
+ * VERSION 11 remove ReadOnly and Dependent fields, and added appropriate FieldFlags. An ID field was added by default.
  *
  * VERSION 12 added new filter rules: before and after, less than and greater than. But only use v12 when needed
  */

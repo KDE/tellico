@@ -61,7 +61,7 @@ void SpinBox::stepBy(int steps_) {
   QSpinBox::stepBy(steps_);
 
   // QT bug? Apparently, after the line edit is cleared, the internal value is not changed
-  // then when the little buttons are clickeed, the internal value is inserted in the line edit
+  // then when the little buttons are clicked, the internal value is inserted in the line edit
   // but the valueChanged signal is not emitted
   if(oldText != lineEdit()->text() && oldValue == value()) {
     emit valueChanged(value());

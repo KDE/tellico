@@ -353,7 +353,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     }
 
     // Releases might include a CD and a DVD, for example
-    // prefer only the tracks on the CD. Allow positionns of just numbers
+    // prefer only the tracks on the CD. Allow positions of just numbers
     if(hasCD && !(mapValue(trackMap, "position").at(0).isNumber() ||
                   mapValue(trackMap, "position").startsWith(QLatin1String("CD")))) {
       continue;

@@ -255,7 +255,7 @@ void barcodeRecognitionThread::sortDigits( int possible_numbers[10][13][2] )
 {
   int i;
   int temp_value;
-  int temp_occurence;
+  int temp_occurrence;
   bool changes;
 
   for (int j = 0; j < 13; j++) {
@@ -265,11 +265,11 @@ void barcodeRecognitionThread::sortDigits( int possible_numbers[10][13][2] )
       if ((possible_numbers[i - 1][j][0] >= 0) && (possible_numbers[i][j][0] >= 0)) {
         if (possible_numbers[i - 1][j][1] < possible_numbers[i][j][1]) {
           temp_value = possible_numbers[i - 1][j][0];
-          temp_occurence = possible_numbers[i - 1][j][1];
+          temp_occurrence = possible_numbers[i - 1][j][1];
           possible_numbers[i - 1][j][0] = possible_numbers[i][j][0];
           possible_numbers[i - 1][j][1] = possible_numbers[i][j][1];
           possible_numbers[i][j][0] = temp_value;
-          possible_numbers[i][j][1] = temp_occurence;
+          possible_numbers[i][j][1] = temp_occurrence;
 
           changes = true;
         }
@@ -782,7 +782,7 @@ QVector<int> Decoder_EAN13::decode( QVector< QVector<int> > fields, int start_i,
 
 MatchMakerResult Decoder_EAN13::recognizeNumber( QVector< QVector<int> > fields, int code_table_to_use)
 {
-  // convert the pixel lenghts of the four black&white fields into
+  // convert the pixel lengths of the four black&white fields into
   // normed values that have together a length of 70;
   int pixel_sum = fields[0][1] + fields[1][1] + fields[2][1] + fields[3][1];
   int b[4];
@@ -796,7 +796,7 @@ MatchMakerResult Decoder_EAN13::recognizeNumber( QVector< QVector<int> > fields,
   fprintf( stderr, "normed lengths: %i %i %i %i\n", b[0], b[1], b[2], b[3] );
 #endif
 
-  // try to detect the digit that is encoded by the set of four normed bar lenghts:
+  // try to detect the digit that is encoded by the set of four normed bar lengths:
   int max_difference_for_acceptance = 60;
   int temp;
 

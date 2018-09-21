@@ -244,7 +244,7 @@ QString GoogleScholarFetcher::defaultIcon() {
 }
 
 void GoogleScholarFetcher::setBibtexCookie() {
-  // it appears that the series of url reads are necessary to get the correct coookie set
+  // it appears that the series of url reads are necessary to get the correct cookie set
   // have to set preferences to have bibtex output
   const QString text = FileHandler::readTextFile(QUrl(QString::fromLatin1(SCHOLAR_SET_CONFIG_URL)), true);
   // find hidden input variables

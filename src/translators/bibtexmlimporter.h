@@ -49,7 +49,7 @@ public:
 
 private:
   void init();
-  // private so it can't be changed accidently
+  // private so it can't be changed accidentally
   void setXSLTURL(const QUrl& url);
 };
 
