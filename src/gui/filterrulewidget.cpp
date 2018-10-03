@@ -169,7 +169,8 @@ void FilterRuleWidget::slotRuleFunctionChanged(int which_) {
   } else {
     m_valueStack->setCurrentWidget(m_ruleValue);
     m_ruleValue->setPlaceholderText(QString());
-    if(m_ruleType == Number) {
+    if(m_ruleType == Number &&
+      (data != FilterRule::FuncRegExp && data != FilterRule::FuncNotRegExp)) {
       m_ruleValue->setValidator(new QIntValidator(this));
     } else {
       m_ruleValue->setValidator(nullptr);
