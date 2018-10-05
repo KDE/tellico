@@ -163,8 +163,8 @@
  </html>
 </xsl:template>
 
-<!-- type 3 is video collections -->
-<!-- warn user that this template is meant for videos only. -->
+<!-- type 4 is music collections -->
+<!-- warn user that this template is meant for music only. -->
 <xsl:template match="tc:collection[@type!=4]">
  <h1><i18n>This template is meant for music collections only.</i18n></h1>
 </xsl:template>
