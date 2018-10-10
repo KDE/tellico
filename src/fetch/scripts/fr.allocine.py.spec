@@ -15,6 +15,7 @@ Name[nn]=Allocine.fr
 Name[pl]=Allocine.fr
 Name[pt]=Allocine.fr
 Name[pt_BR]=Allocine.fr
+Name[ru]=Allocine.fr
 Name[sk]=Allocine.fr
 Name[sl]=Allocine.fr
 Name[sv]=Allocine.fr
