@@ -4,7 +4,6 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Tellico</name>
-  <name xml:lang="ast">Tellico</name>
   <name xml:lang="bs">Tellico</name>
   <name xml:lang="ca">Tellico</name>
   <name xml:lang="ca-valencia">Tellico</name>
@@ -25,6 +24,7 @@
   <name xml:lang="pl">Tellico</name>
   <name xml:lang="pt">Tellico</name>
   <name xml:lang="pt-BR">Tellico</name>
+  <name xml:lang="ru">Tellico</name>
   <name xml:lang="sk">Tellico</name>
   <name xml:lang="sl">Tellico</name>
   <name xml:lang="sv">Tellico</name>
@@ -53,6 +53,7 @@
   <summary xml:lang="pl">Zarządzanie zbiorem</summary>
   <summary xml:lang="pt">Gestor de Colecções</summary>
   <summary xml:lang="pt-BR">Gerenciador de Coleções</summary>
+  <summary xml:lang="ru">Менеджер коллекций</summary>
   <summary xml:lang="sk">Správca zbierok</summary>
   <summary xml:lang="sl">Upravljalnik zbirk</summary>
   <summary xml:lang="sv">Samlingshanterare</summary>
@@ -111,6 +112,7 @@
     <p xml:lang="pl">Cechy:</p>
     <p xml:lang="pt">Funcionalidades:</p>
     <p xml:lang="pt-BR">Funcionalidades:</p>
+    <p xml:lang="ru">Возможности:</p>
     <p xml:lang="sk">Funkcie:</p>
     <p xml:lang="sl">Zmožnosti:</p>
     <p xml:lang="sv">Funktioner:</p>
