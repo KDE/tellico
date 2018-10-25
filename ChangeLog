@@ -1,3 +1,7 @@
+2018-10-24  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug to escape the group name when filtering in the Group View (Bug 399928).
+
 2018-09-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.1.3.

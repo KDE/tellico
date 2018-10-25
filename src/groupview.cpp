@@ -337,7 +337,11 @@ void GroupView::slotFilterGroup() {
           filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
         } else {
           // TODO:: should not hard-code the semi-colon. Use FieldFormat::delimiterString()
-          const QString rxPattern(QLatin1String("(^|;\\s)") + group->groupName() + QLatin1String("($|;)"));
+          // but without trailing space
+          // TODO:: switch to QRegularExpression one day
+          const QString rxPattern(QLatin1String("(^|;\\s)") +
+                                  QRegExp::escape(group->groupName()) +
+                                  QLatin1String("($|;)"));
           filter->append(new FilterRule(m_groupBy, rxPattern, FilterRule::FuncRegExp));
         }
       }
