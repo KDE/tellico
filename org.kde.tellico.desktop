@@ -6,7 +6,6 @@ Exec=tellico -qwindowtitle %c %u
 Icon=tellico
 X-DocPath=tellico/index.html
 Comment=A collection manager
-Comment[ast]=Un xestor de coleiciones
 Comment[bg]=Управление на колекции
 Comment[bs]=Menadžer kolekcija
 Comment[ca]=Un gestor de col·leccions

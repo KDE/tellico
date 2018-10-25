@@ -3,7 +3,6 @@
   <mime-type type="application/x-tellico">
     <sub-class-of type="application/zip"/>
     <comment>Tellico Data File</comment>
-    <comment xml:lang="ast">Ficheru de datos Tellico</comment>
     <comment xml:lang="bs">Tellico datoteka s podacima</comment>
     <comment xml:lang="ca">Fitxer de dades del Tellico</comment>
     <comment xml:lang="ca@valencia">Fitxer de dades del Tellico</comment>
@@ -23,6 +22,7 @@
     <comment xml:lang="pl">Plik danych Tellico</comment>
     <comment xml:lang="pt">Ficheiro de Dados do Tellico</comment>
     <comment xml:lang="pt_BR">Arquivo de dados do Tellico</comment>
+    <comment xml:lang="ru">файл данных Tellico</comment>
     <comment xml:lang="sk">Dátový súbor Tellico</comment>
     <comment xml:lang="sl">Podatkovna datoteka Tellico</comment>
     <comment xml:lang="sv">Tellico-datafil</comment>
