@@ -2,6 +2,10 @@
 
 	* Fixed bug to escape the group name when filtering in the Group View (Bug 399928).
 
+2018-10-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug when using a regular expression for filtering in a number field (Bug 399323).
+
 2018-09-02  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.1.3.
