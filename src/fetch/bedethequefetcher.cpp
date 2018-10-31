@@ -46,7 +46,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* BD_BASE_URL = "http://m.bedetheque.com/album";
+  static const char* BD_BASE_URL = "https://m.bedetheque.com/album";
 }
 
 using namespace Tellico;
@@ -186,7 +186,7 @@ void BedethequeFetcher::slotComplete(KJob*) {
   const int pos_end = output.indexOf(QLatin1String("</ul>"), pos_list+1, Qt::CaseInsensitive);
   output = output.mid(pos_list, pos_end-pos_list);
 
-  QString pat = QStringLiteral("http://m.bedetheque.com/BD");
+  QString pat = QStringLiteral("https://m.bedetheque.com/BD");
   QRegExp anchorRx(QLatin1String("<a\\s+[^>]*href\\s*=\\s*[\"'](") +
                    QRegExp::escape(pat) +
                    QLatin1String("[^\"']*)\"[^>]*>(.*)</a"), Qt::CaseInsensitive);
@@ -431,7 +431,7 @@ Tellico::Fetch::FetchRequest BedethequeFetcher::updateRequest(Data::EntryPtr ent
 void BedethequeFetcher::fetchToken() {
   QRegExp tokenRx(QLatin1String("name\\s*=\\s*\"csrf_token_bedetheque\"\\s*value\\s*=\\s*\"([^\"]+)\""));
 
-  const QUrl url(QStringLiteral("http://www.bedetheque.com/search/albums"));
+  const QUrl url(QStringLiteral("https://www.bedetheque.com/search/albums"));
   const QString text = FileHandler::readTextFile(url, true /*quiet*/);
   if(tokenRx.indexIn(text) > -1) {
     m_token = tokenRx.cap(1);
