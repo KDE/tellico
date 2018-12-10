@@ -140,9 +140,9 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  // look for a paragraph, class=",", with an internal ink to "/film..."
+  // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
   QRegExp resultRx(QLatin1String("<p class=\"name\">\\s*"
-                                 "<a href=\"/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
+                                 "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
                                  "<span class=\"year\">(.*)</span"));
   resultRx.setMinimal(true);
 
