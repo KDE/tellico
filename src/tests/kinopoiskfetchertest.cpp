@@ -87,3 +87,21 @@ void KinoPoiskFetcherTest::testSuperman() {
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
+
+void KinoPoiskFetcherTest::testTop() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Top"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoPoiskFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  // the first entry had better be the right one
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field("title"), QString::fromUtf8("Top"));
+  QCOMPARE(entry->field("year"), QStringLiteral("1999"));
+  QVERIFY(!entry->field("plot").isEmpty());
+  QVERIFY(!entry->field("cover").isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
