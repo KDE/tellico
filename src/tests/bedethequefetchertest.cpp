@@ -79,7 +79,7 @@ void BedethequeFetcherTest::testTitle() {
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
-  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -114,7 +114,7 @@ void BedethequeFetcherTest::testSeries() {
   QCOMPARE(entry->field("genre"), QStringLiteral("Tout sur un auteur (hors BD)"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-227-72311-4"));
   QCOMPARE(entry->field("edition"), QString::fromUtf8("Je bouquine : à partir de 10 ans"));
-  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-AUT-Arno-Le-Combat-d-Odiri-46179.html"));
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -148,7 +148,7 @@ void BedethequeFetcherTest::testIsbn() {
   QCOMPARE(entry->field("edition"), QStringLiteral("Poisson Pilote"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Aventure"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("2-205-05868-1"));
-  QCOMPARE(entry->field("lien-bel"), QStringLiteral("http://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
+  QCOMPARE(entry->field("lien-bel"), QStringLiteral("https://www.bedetheque.com/BD-Chat-du-Rabbin-Tome-5-Jerusalem-d-Afrique-59668.html"));
   QVERIFY(!entry->field("comments").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));

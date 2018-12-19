@@ -49,7 +49,7 @@
 #include <QJsonObject>
 
 namespace {
-  static const char* KINO_BASE_URL = "http://www.kino.de/se/";
+  static const char* KINO_BASE_URL = "https://www.kino.de/se/";
 }
 
 using namespace Tellico;
@@ -84,7 +84,7 @@ void KinoFetcher::search() {
 
   switch(request().key) {
     case Title:
-      u.setPath(u.path() + request().value + QLatin1Char('/'));
+      q.addQueryItem(QStringLiteral("searchterm"), request().value);
       break;
 
     default:
@@ -143,7 +143,7 @@ void KinoFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression linkRx(QStringLiteral("<a .+?movie-link.+?href=\"(.+?)\".*>(.+?)</"));
+  QRegularExpression linkRx(QStringLiteral("<span class=\"card-label\">Film.+?<a .+?card-link.+?href=\"(.+?)\".*?>(.+?)</"));
   QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
@@ -151,9 +151,12 @@ void KinoFetcher::slotComplete(KJob*) {
   QRegularExpressionMatchIterator i = linkRx.globalMatch(s);
   while(i.hasNext()) {
     QRegularExpressionMatch match = i.next();
-    const QString u = match.captured(1);
+    QString u = match.captured(1);
     if(u.isEmpty()) {
       continue;
+    }
+    if(u.startsWith(QStringLiteral("//"))) {
+      u.prepend(QStringLiteral("https:"));
     }
     Data::CollPtr coll(new Data::VideoCollection(true));
     Data::EntryPtr entry(new Data::Entry(coll));
@@ -237,6 +240,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     if(!actors.isEmpty()) {
       entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
     }
+    entry->setField(QStringLiteral("cover"), mapValue(objectMap, "image"));
   }
 
   QRegularExpression tagRx(QStringLiteral("<.+?>"));
@@ -304,7 +308,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("studio"), s);
   }
 
-  QRegularExpression plotRx(QStringLiteral("<div class=\"post-body-teaser\"></div>(.*?)<(/section|h2)>"),
+  QRegularExpression plotRx(QStringLiteral("<div class=\"post-body-meta\">\\s*</div>(.*?)<(/section|h2)>"),
                                           QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch plotMatch = plotRx.match(str_);
   if(plotMatch.hasMatch()) {
@@ -318,13 +322,9 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("plot"), plot.trimmed());
   }
 
-  QRegularExpression divMetaRx(QStringLiteral("<div class=\"product-meta.*?>(.+?)</div>"),
-                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpressionMatch divMetaMatch = divMetaRx.match(str_);
-  if(divMetaMatch.hasMatch()) {
-    QRegularExpression coverRx(QStringLiteral("<img.+?src=\"(.+?)\".+?%1 Poster.*?/>").arg(entry->field(QStringLiteral("title"))));
-    QRegularExpressionMatch coverMatch = coverRx.match(divMetaMatch.captured(1));
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverMatch.captured(1)), true /* quiet */);
+  QString cover = entry->field(QStringLiteral("cover"));
+  if(!cover.isEmpty()) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(cover), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }

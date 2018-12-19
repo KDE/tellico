@@ -140,9 +140,9 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  // look for a paragraph, class=",", with an internal ink to "/film..."
+  // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
   QRegExp resultRx(QLatin1String("<p class=\"name\">\\s*"
-                                 "<a href=\"/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
+                                 "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
                                  "<span class=\"year\">(.*)</span"));
   resultRx.setMinimal(true);
 
@@ -365,6 +365,11 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   plotRx.setMinimal(true);
   if(str_.contains(plotRx)) {
     entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
+  } else {
+    plotRx.setPattern(QLatin1String("<meta name=\"description\" content=\"(.+)\""));
+    if(str_.contains(plotRx)) {
+      entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
+    }
   }
 
   QRegExp mpaaRx(QLatin1String("itemprop=\"contentRating\"[^>]+content=\"MPAA ([^>]+)\""));
@@ -375,10 +380,19 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("certification"), value);
   }
 
+  QString cover;
   QRegExp coverRx(QLatin1String("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
   coverRx.setMinimal(true);
   if(str_.contains(coverRx)) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(coverRx.cap(1)), true /* quiet */);
+    cover = coverRx.cap(1);
+  } else {
+    coverRx.setPattern(QLatin1String("<meta property=\"vk:image\" content=\"(.+)\""));
+    if(str_.contains(coverRx)) {
+      cover = coverRx.cap(1);
+    }
+  }
+  if(!cover.isEmpty()) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(cover), true /* quiet */);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
     }
