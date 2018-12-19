@@ -99,7 +99,7 @@ void ImageJobTest::testNonexistant() {
 void ImageJobTest::testUnreadable() {
   QTemporaryFile tmpFile;
   QVERIFY(tmpFile.open());
-  QVERIFY(tmpFile.setPermissions(0));
+  QVERIFY(tmpFile.setPermissions(QFileDevice::Permissions()));
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
