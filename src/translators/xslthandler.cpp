@@ -52,9 +52,10 @@ static int writeToQString(void* context, const char* buffer, int len) {
   return len;
 }
 
-static void closeQString(void* context) {
+static int closeQString(void* context) {
   QString* t = static_cast<QString*>(context);
   *t += QLatin1String("\n");
+  return 0;
 }
 
 using Tellico::XSLTHandler;
