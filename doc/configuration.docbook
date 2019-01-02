@@ -404,8 +404,8 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <title>Amazon.com</title>
 
 <para>
-Using the Amazon Web Services, &appname; can search any of nine different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
-France, Canada, China, Spain, and Italy.
+Using the Amazon Web Services, &appname; can search any of 14 different international sites operated by <ulink url="http://amazon.com">Amazon.com</ulink> for information: United States, United Kingdom, Germany, Japan,
+France, Canada, China, Spain, Italy, Brazil, Australia, India, Mexico, and Turkey.
 </para>
 
 <screenshot>

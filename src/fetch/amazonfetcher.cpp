@@ -71,9 +71,9 @@ using Tellico::Fetch::AmazonFetcher;
 
 // static
 const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
-  Q_ASSERT(site_>= 0);
-  Q_ASSERT(site_< 10);
-  static SiteData dataVector[9] = {
+  Q_ASSERT(site_ >= 0);
+  Q_ASSERT(site_ < 15);
+  static SiteData dataVector[14] = {
     {
       i18n("Amazon (US)"),
       QUrl(QLatin1String("http://webservices.amazon.com/onca/xml"))
@@ -101,6 +101,21 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
     }, {
       i18n("Amazon (Italy)"),
       QUrl(QLatin1String("http://webservices.amazon.it/onca/xml"))
+    }, {
+      i18n("Amazon (Brazil)"),
+      QUrl(QLatin1String("http://webservices.amazon.com.br/onca/xml"))
+    }, {
+      i18n("Amazon (Australia)"),
+      QUrl(QLatin1String("http://webservices.amazon.com.au/onca/xml"))
+    }, {
+      i18n("Amazon (India)"),
+      QUrl(QLatin1String("http://webservices.amazon.in/onca/xml"))
+    }, {
+      i18n("Amazon (Mexico)"),
+      QUrl(QLatin1String("http://webservices.amazon.com.mx/onca/xml"))
+    }, {
+      i18n("Amazon (Turkey)"),
+      QUrl(QLatin1String("http://webservices.amazon.com.tr/onca/xml"))
     }
   };
 
@@ -963,6 +978,12 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_siteCombo->addItem(i18n("China"), CN);
   m_siteCombo->addItem(i18n("Spain"), ES);
   m_siteCombo->addItem(i18n("Italy"), IT);
+  m_siteCombo->addItem(i18n("Brazil"), BR);
+  m_siteCombo->addItem(i18n("Australia"), AU);
+  m_siteCombo->addItem(i18n("India"), IN);
+  m_siteCombo->addItem(i18n("Mexico"), MX);
+  m_siteCombo->addItem(i18n("Turkey"), TR);
+
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
   l->addWidget(m_siteCombo, row, 1);

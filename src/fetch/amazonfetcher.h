@@ -71,7 +71,12 @@ public:
     CA = 5,
     CN = 6,
     ES = 7,
-    IT = 8
+    IT = 8,
+    BR = 9,
+    AU = 10,
+    IN = 11,
+    MX = 12,
+    TR = 13
   };
 
   enum ImageSize {
