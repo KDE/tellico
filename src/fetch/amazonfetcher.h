@@ -76,7 +76,8 @@ public:
     AU = 10,
     IN = 11,
     MX = 12,
-    TR = 13
+    TR = 13,
+    XX = 14
   };
 
   enum ImageSize {
@@ -103,6 +104,8 @@ public:
   struct SiteData {
     QString title;
     QUrl url;
+    QString country;
+    QString countryName;
   };
   static const SiteData& siteData(int site);
 

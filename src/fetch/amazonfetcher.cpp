@@ -57,6 +57,7 @@
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
+#include <QStandardPaths>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -76,46 +77,74 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   static SiteData dataVector[14] = {
     {
       i18n("Amazon (US)"),
-      QUrl(QLatin1String("http://webservices.amazon.com/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.com/onca/xml")),
+      QLatin1String("us"),
+      i18n("United States")
     }, {
       i18n("Amazon (UK)"),
-      QUrl(QLatin1String("http://webservices.amazon.co.uk/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.co.uk/onca/xml")),
+      QLatin1String("gb"),
+      i18n("United Kingdom")
     }, {
       i18n("Amazon (Germany)"),
-      QUrl(QLatin1String("http://webservices.amazon.de/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.de/onca/xml")),
+      QLatin1String("de"),
+      i18n("Germany")
     }, {
       i18n("Amazon (Japan)"),
-      QUrl(QLatin1String("http://webservices.amazon.co.jp/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.co.jp/onca/xml")),
+      QLatin1String("jp"),
+      i18n("Japan")
     }, {
       i18n("Amazon (France)"),
-      QUrl(QLatin1String("http://webservices.amazon.fr/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.fr/onca/xml")),
+      QLatin1String("fr"),
+      i18n("France")
     }, {
       i18n("Amazon (Canada)"),
-      QUrl(QLatin1String("http://webservices.amazon.ca/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.ca/onca/xml")),
+      QLatin1String("ca"),
+      i18n("Canada")
     }, {
       i18n("Amazon (China)"),
-      QUrl(QLatin1String("http://webservices.amazon.cn/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.cn/onca/xml")),
+      QLatin1String("ch"),
+      i18n("China")
     }, {
       i18n("Amazon (Spain)"),
-      QUrl(QLatin1String("http://webservices.amazon.es/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.es/onca/xml")),
+      QLatin1String("es"),
+      i18n("Spain")
     }, {
       i18n("Amazon (Italy)"),
-      QUrl(QLatin1String("http://webservices.amazon.it/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.it/onca/xml")),
+      QLatin1String("it"),
+      i18n("Italy")
     }, {
       i18n("Amazon (Brazil)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.br/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.com.br/onca/xml")),
+      QLatin1String("br"),
+      i18n("Brazil")
     }, {
       i18n("Amazon (Australia)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.au/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.com.au/onca/xml")),
+      QLatin1String("au"),
+      i18n("Australia")
     }, {
       i18n("Amazon (India)"),
-      QUrl(QLatin1String("http://webservices.amazon.in/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.in/onca/xml")),
+      QLatin1String("in"),
+      i18n("India")
     }, {
       i18n("Amazon (Mexico)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.mx/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.com.mx/onca/xml")),
+      QLatin1String("mx"),
+      i18n("Mexico")
     }, {
       i18n("Amazon (Turkey)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.tr/onca/xml"))
+      QUrl(QLatin1String("http://webservices.amazon.com.tr/onca/xml")),
+      QLatin1String("tr"),
+      i18n("Turkey")
     }
   };
 
@@ -969,20 +998,13 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   label = new QLabel(i18n("Country: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_siteCombo = new GUI::ComboBox(optionsWidget());
-  m_siteCombo->addItem(i18n("United States"), US);
-  m_siteCombo->addItem(i18n("United Kingdom"), UK);
-  m_siteCombo->addItem(i18n("Germany"), DE);
-  m_siteCombo->addItem(i18n("Japan"), JP);
-  m_siteCombo->addItem(i18n("France"), FR);
-  m_siteCombo->addItem(i18n("Canada"), CA);
-  m_siteCombo->addItem(i18n("China"), CN);
-  m_siteCombo->addItem(i18n("Spain"), ES);
-  m_siteCombo->addItem(i18n("Italy"), IT);
-  m_siteCombo->addItem(i18n("Brazil"), BR);
-  m_siteCombo->addItem(i18n("Australia"), AU);
-  m_siteCombo->addItem(i18n("India"), IN);
-  m_siteCombo->addItem(i18n("Mexico"), MX);
-  m_siteCombo->addItem(i18n("Turkey"), TR);
+  for(int i = 0; i < XX; ++i) {
+    const AmazonFetcher::SiteData& siteData = AmazonFetcher::siteData(i);
+    QIcon icon(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/%1/flag.png").arg(siteData.country)));
+    m_siteCombo->addItem(icon, siteData.countryName, i);
+    m_siteCombo->model()->sort(0);
+  }
 
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
   connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
