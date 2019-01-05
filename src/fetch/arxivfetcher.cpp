@@ -156,6 +156,7 @@ void ArxivFetcher::slotComplete(KJob*) {
     QDomDocument dom;
     if(!dom.setContent(data, true /*namespace*/)) {
       myWarning() << "server did not return valid XML.";
+      stop();
       return;
     }
     // total is top level element, with attribute totalResultsAvailable

@@ -28,7 +28,6 @@
 #include "../translators/tellico_xml.h"
 #include "../translators/xslthandler.h"
 #include "../translators/tellicoimporter.h"
-#include "../translators/xmlimporter.h"
 #include "../utils/guiproxy.h"
 #include "../gui/lineedit.h"
 #include "../gui/combobox.h"
@@ -52,6 +51,7 @@
 #include <QGridLayout>
 #include <QFile>
 #include <QUrlQuery>
+#include <QDomDocument>
 
 namespace {
   // 7090 was the old default port, but that was just because LoC used it
@@ -289,10 +289,14 @@ void SRUFetcher::slotComplete(KJob*) {
   const QString result = QString::fromUtf8(data.constData(), data.size());
 
   // first check for SRU errors
-  const QString& diag = XML::nsZingDiag;
-  Import::XMLImporter xmlImporter(result);
-  QDomDocument dom = xmlImporter.domDocument();
+  QDomDocument dom;
+  if(!dom.setContent(result, true /*namespace*/)) {
+    myWarning() << "server did not return valid XML.";
+    stop();
+    return;
+  }
 
+  const QString& diag = XML::nsZingDiag;
   QDomNodeList diagList = dom.elementsByTagNameNS(diag, QStringLiteral("diagnostic"));
   for(int i = 0; i < diagList.count(); ++i) {
     QDomElement elem = diagList.item(i).toElement();

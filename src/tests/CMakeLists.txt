@@ -260,7 +260,6 @@ TARGET_LINK_LIBRARIES(csvtest ${TELLICO_CSV_LIBS} translatorstest ${TELLICO_TEST
 
 add_executable(delicioustest delicioustest.cpp
   ../translators/deliciousimporter.cpp
-  ../translators/xmlimporter.cpp
 )
 ecm_mark_nongui_executable(delicioustest)
 add_test(delicioustest delicioustest)
@@ -301,7 +300,6 @@ TARGET_LINK_LIBRARIES(gcstartest translatorstest ${TELLICO_TEST_LIBS})
 
 add_executable(griffithtest griffithtest.cpp
   ../translators/griffithimporter.cpp
-  ../translators/xmlimporter.cpp
 )
 ecm_mark_nongui_executable(griffithtest)
 add_test(griffithtest griffithtest)
@@ -381,7 +379,6 @@ SET(fetcherstest_SRCS
   ${fetcherstest_SRCS}
   ../fetch/srufetcher.cpp
   ../fetch/xmlfetcher.cpp
-  ../translators/xmlimporter.cpp
   ../gui/lineedit.cpp
   ../gui/combobox.cpp
   ../gui/stringmapwidget.cpp
