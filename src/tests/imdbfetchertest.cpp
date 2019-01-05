@@ -164,7 +164,11 @@ void ImdbFetcherTest::testMary() {
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=262036
+// https://bugs.kde.org/show_bug.cgi?id=401894
 void ImdbFetcherTest::testOkunen() {
+  // test bug 401894
+  QLocale::setDefault(QLocale(QLocale::Italian, QLocale::Italy));
+
   KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
   QString groupName = QStringLiteral("IMDB Okunen");
   if(!config.hasGroup(groupName)) {
@@ -187,6 +191,9 @@ void ImdbFetcherTest::testOkunen() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Drama; Fantasy"));
   QCOMPARE(entry->field("director"), QStringLiteral("Takashi Miike"));
+  // imdb rating is a volatile value, shouldn't be empty, shouldn't be 0
+  QVERIFY(!entry->field("imdb-rating").isEmpty());
+  QVERIFY(entry->field("imdb-rating") != QStringLiteral("0"));
   QCOMPARE(set(entry, "writer"), set("Ikki Kajiwara; Hisao Maki; Masa Nakamura"));
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
