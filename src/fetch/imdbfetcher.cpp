@@ -1154,6 +1154,9 @@ void IMDBFetcher::doRating(const QString& str_, Tellico::Data::EntryPtr entry_) 
     if(ratingRx.indexIn(text) > -1) {
       bool ok;
       float value = ratingRx.cap(1).toFloat(&ok);
+      if(!ok) {
+        value = QLocale().toFloat(ratingRx.cap(1), &ok);
+      }
       if(ok) {
         entry_->setField(QStringLiteral("imdb-rating"), QString::number(value));
       }
