@@ -1055,6 +1055,7 @@ void IMDBFetcher::doCast(const QString& str_, Tellico::Data::EntryPtr entry_, co
   }
 
   QStringList cast;
+  cast.reserve(actorList.size());
   for(int i = 0; i < actorList.size(); ++i) {
     cast += actorList.at(i)
           + FieldFormat::columnDelimiterString()
