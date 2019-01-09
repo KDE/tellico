@@ -120,7 +120,7 @@ int main(int argc, char* argv[]) {
   KAboutData aboutData(QStringLiteral("tellico"), QStringLiteral("Tellico"),
                        QStringLiteral(TELLICO_VERSION), i18n("Tellico - a KDE collection manager"),
                        KAboutLicense::GPL_V2,
-                       i18n("(c) 2001-2018, Robby Stephenson"),
+                       i18n("(c) 2001-2019, Robby Stephenson"),
                        QString(),
                        QStringLiteral("http://tellico-project.org"));
   aboutData.addAuthor(QStringLiteral("Robby Stephenson"), QString(), QStringLiteral("robby@periapsis.org"));
