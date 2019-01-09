@@ -70,6 +70,7 @@
 #include "gui/lineedit.h"
 #include "gui/statusbar.h"
 #include "gui/tabwidget.h"
+#include "gui/dockwidget.h"
 #include "utils/cursorsaver.h"
 #include "utils/guiproxy.h"
 #include "tellico_debug.h"
@@ -94,10 +95,10 @@
 #include <KActionMenu>
 #include <KAboutData>
 #include <KFileWidget>
+#include <KDualAction>
 
 #include <QApplication>
 #include <QUndoStack>
-#include <QDockWidget>
 #include <QAction>
 #include <QSignalMapper>
 #include <QTimer>
@@ -218,6 +219,7 @@ void MainWindow::slotInit() {
 
   m_toggleEntryEditor->setChecked(Config::showEditWidget());
   slotToggleEntryEditor();
+  slotToggleLayoutLock(Config::lockLayout());
 
   initConnections();
   connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
@@ -634,6 +636,16 @@ void MainWindow::initActions() {
   setStandardToolBarMenuEnabled(true);
   createStandardStatusBarAction();
 
+  KDualAction* dualAction = new KDualAction(this);
+  connect(dualAction, SIGNAL(activeChanged(bool)), SLOT(slotToggleLayoutLock(bool)));
+  dualAction->setActiveText(i18n("Unlock Layout"));
+  dualAction->setActiveToolTip(i18n("Unlock the window's layout"));
+  dualAction->setActiveIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+  dualAction->setInactiveText(i18n("Lock Layout"));
+  dualAction->setInactiveToolTip(i18n("Lock the window's layout"));
+  dualAction->setInactiveIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
+  actionCollection()->addAction(QStringLiteral("lock_layout"), dualAction);
+
   action = actionCollection()->addAction(QLatin1String("reset_layout"), this, SLOT(slotResetLayout()));
   action->setText(i18n("Reset Layout"));
   action->setToolTip(i18n("Reset the window's layout"));
@@ -731,7 +743,7 @@ void MainWindow::initView() {
   // initialize the image factory before the entry models are created
   ImageFactory::init();
 
-  m_groupDock = new QDockWidget(i18n("Group Tabs"), this);
+  m_groupDock = new GUI::DockWidget(i18n("Group Tabs"), this);
   m_groupDock->setObjectName(QLatin1String("group_tabs"));
   m_groupDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
 
@@ -747,7 +759,7 @@ void MainWindow::initView() {
   addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
   actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_groupDock->toggleViewAction());
 
-  m_columnDock = new QDockWidget(i18n("Column View"), this);
+  m_columnDock = new GUI::DockWidget(i18n("Column View"), this);
   m_columnDock->setObjectName(QLatin1String("column_view"));
   m_columnDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
 
@@ -878,6 +890,8 @@ void MainWindow::saveOptions() {
   saveMainWindowSettings(config);
 
   Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
+  // check any single dock widget, they all get locked together
+  Config::setLockLayout(m_groupDock->isLocked());
 
   KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
   m_fileOpenRecent->saveEntries(filesConfig);
@@ -2344,6 +2358,11 @@ void MainWindow::slotToggleFullScreen() {
 void MainWindow::slotToggleMenuBarVisibility() {
   QMenuBar* mb = menuBar();
   mb->isHidden() ? mb->show() : mb->hide();
+}
+
+void MainWindow::slotToggleLayoutLock(bool lock_) {
+  m_groupDock->setLocked(lock_);
+  m_columnDock->setLocked(lock_);
 }
 
 void MainWindow::slotResetLayout() {

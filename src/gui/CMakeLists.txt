@@ -9,6 +9,7 @@ SET(gui_STAT_SRCS
    datefieldwidget.cpp
    datewidget.cpp
    detailedentryitemdelegate.cpp
+   dockwidget.cpp
    drophandler.cpp
    imagefieldwidget.cpp
    imagewidget.cpp

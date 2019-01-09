@@ -52,6 +52,7 @@ namespace Tellico {
   namespace GUI {
     class LineEdit;
     class TabWidget;
+    class DockWidget;
   }
   class Controller;
   class ViewStack;
@@ -456,6 +457,7 @@ private Q_SLOTS:
    * Toggle menubar visibility
    */
   void slotToggleMenuBarVisibility();
+  void slotToggleLayoutLock(bool lock);
   void slotResetLayout();
 
 private:
@@ -481,8 +483,8 @@ private:
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;
 
-  QDockWidget* m_groupDock;
-  QDockWidget* m_columnDock;
+  GUI::DockWidget* m_groupDock;
+  GUI::DockWidget* m_columnDock;
 
   Tellico::StatusBar* m_statusBar;
 
