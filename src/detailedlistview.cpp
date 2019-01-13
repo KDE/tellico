@@ -50,7 +50,7 @@ using namespace Tellico;
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
-    , m_loadingCollection(false), m_selectionChanging(false) {
+    , m_loadingCollection(false), m_selectionChanging(false), m_currentContextColumn(-1) {
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
@@ -281,6 +281,7 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
 bool DetailedListView::eventFilter(QObject* obj_, QEvent* event_) {
   if(event_->type() == QEvent::ContextMenu
      && obj_ == header()) {
+    m_currentContextColumn = header()->logicalIndexAt(static_cast<QContextMenuEvent*>(event_)->pos());
     m_headerMenu->exec(static_cast<QContextMenuEvent*>(event_)->globalPos());
     return true;
   }
@@ -325,6 +326,11 @@ void DetailedListView::hideAllColumns() {
       action->setChecked(false);
     }
   }
+  checkHeader();
+}
+
+void DetailedListView::hideCurrentColumn() {
+  setColumnHidden(m_currentContextColumn, true);
   checkHeader();
 }
 
@@ -532,14 +538,17 @@ void DetailedListView::updateHeaderMenu() {
   columnAction->setText(i18nc("Noun, Menu name", "Columns"));
   columnAction->setIcon(QIcon::fromTheme(QStringLiteral("view-file-columns")));
 
+  QAction* actHideThis = m_headerMenu->addAction(i18n("Hide This Column"));
+  connect(actHideThis, SIGNAL(triggered(bool)), this, SLOT(hideCurrentColumn()));
+  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Resize to Content"));
+  connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
+
   m_headerMenu->addSeparator();
 
   QAction* actShowAll = m_headerMenu->addAction(i18n("Show All Columns"));
   connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
   connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
-  QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Resize to Content"));
-  connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
 }
 
 void DetailedListView::updateColumnDelegates() {

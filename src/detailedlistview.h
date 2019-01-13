@@ -141,6 +141,7 @@ private Q_SLOTS:
   void updateHeaderMenu();
   void showAllColumns();
   void hideAllColumns();
+  void hideCurrentColumn();
   void resizeColumnsToContents();
   void hideNewColumn(const QModelIndex& index, int start, int end);
 //  void slotCacheColumnWidth(int section, int oldSize, int newSize);
@@ -166,6 +167,7 @@ private:
   QMenu* m_columnMenu;
   bool m_loadingCollection;
   bool m_selectionChanging;
+  int m_currentContextColumn;
 };
 
 } // end namespace;
