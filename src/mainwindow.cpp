@@ -646,10 +646,10 @@ void MainWindow::initActions() {
   dualAction->setInactiveIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
   actionCollection()->addAction(QStringLiteral("lock_layout"), dualAction);
 
-  action = actionCollection()->addAction(QLatin1String("reset_layout"), this, SLOT(slotResetLayout()));
+  action = actionCollection()->addAction(QStringLiteral("reset_layout"), this, SLOT(slotResetLayout()));
   action->setText(i18n("Reset Layout"));
   action->setToolTip(i18n("Reset the window's layout"));
-  action->setIcon(QIcon::fromTheme(QLatin1String("resetview")));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("resetview")));
 
   m_toggleEntryEditor = new KToggleAction(i18n("Entry &Editor"), this);
   connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
@@ -744,7 +744,7 @@ void MainWindow::initView() {
   ImageFactory::init();
 
   m_groupDock = new GUI::DockWidget(i18n("Group Tabs"), this);
-  m_groupDock->setObjectName(QLatin1String("group_tabs"));
+  m_groupDock->setObjectName(QStringLiteral("group_tabs"));
   m_groupDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
 
   m_viewTabs = new GUI::TabWidget(this);
@@ -757,10 +757,10 @@ void MainWindow::initView() {
                                     "based on a selected field.</qt>"));
   m_groupDock->setWidget(m_viewTabs);
   addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
-  actionCollection()->addAction(QLatin1String("toggle_group_widget"), m_groupDock->toggleViewAction());
+  actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_groupDock->toggleViewAction());
 
-  m_columnDock = new GUI::DockWidget(i18n("Column View"), this);
-  m_columnDock->setObjectName(QLatin1String("column_view"));
+  m_columnDock = new GUI::DockWidget(i18n("Collection View"), this);
+  m_columnDock->setObjectName(QStringLiteral("collection_view"));
   m_columnDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
 
   m_viewStack = new ViewStack(this);
@@ -782,7 +782,7 @@ void MainWindow::initView() {
 
   m_columnDock->setWidget(m_viewStack);
   addDockWidget(Qt::TopDockWidgetArea, m_columnDock);
-  actionCollection()->addAction(QLatin1String("toggle_column_widget"), m_columnDock->toggleViewAction());
+  actionCollection()->addAction(QStringLiteral("toggle_column_widget"), m_columnDock->toggleViewAction());
 
   m_entryView = new EntryView(this);
   connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
@@ -802,7 +802,7 @@ void MainWindow::initView() {
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
 
-  // settign up GUI now rather than in initActions
+  // setting up GUI now rather than in initActions
   setupGUI(Keys | ToolBar);
 #ifdef UIFILE
   myWarning() << "call!";
