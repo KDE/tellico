@@ -650,7 +650,8 @@ Tellico::Data::EntryPtr IMDBFetcher::fetchEntryHook(uint uid_) {
     m_url = url; // needed for processing
 #if 0
     myWarning() << "Remove debug from imdbfetcher.cpp for /tmp/testimdbresult.html";
-    QFile f(QString::fromLatin1("/tmp/testimdbresult.html"));
+    myDebug() << m_url;
+    QFile f(QStringLiteral("/tmp/testimdbresult.html"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
       t << results;
@@ -1187,9 +1188,54 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
     pos = posterRx.indexIn(str_, pos+posterRx.matchedLength());
   }
 
+  // <link rel='image_src'
+  QRegExp linkRx(QStringLiteral("<link (.*)>"), Qt::CaseInsensitive);
+  linkRx.setMinimal(true);
+
+  const QString src = QStringLiteral("image_src");
+  pos = linkRx.indexIn(str_);
+  while(pos > -1) {
+    const QString tag = linkRx.cap(1);
+    if(tag.contains(src, Qt::CaseInsensitive)) {
+      QRegExp hrefRx(QStringLiteral("href=['\"](.*)['\"]"), Qt::CaseInsensitive);
+      hrefRx.setMinimal(true);
+      if(hrefRx.indexIn(tag) > -1) {
+        QUrl u = QUrl(baseURL_).resolved(QUrl(hrefRx.cap(1)));
+        // imdb uses amazon media image, where the img src "encodes" requests for image sizing and cropping
+        // strip everything after the "@." and add UY64 to limit the max image dimension to 640
+        int n = u.url().indexOf(QStringLiteral("@."));
+        if(n > -1) {
+          const QString newLink = u.url().left(n) + QStringLiteral("@.UY640.jpg");
+          const QString id = ImageFactory::addImage(QUrl(newLink), true);
+          if(!id.isEmpty()) {
+            entry_->setField(cover, id);
+            return;
+          }
+        }
+        const QString id = ImageFactory::addImage(u, true);
+        if(!id.isEmpty()) {
+          entry_->setField(cover, id);
+          return;
+        }
+      }
+    }
+    pos = linkRx.indexIn(str_, pos+linkRx.matchedLength());
+  }
+
+  // <img alt="poster"
+  posterRx.setPattern(QStringLiteral("<img\\s+[^>]*alt\\s*=\\s*\"poster\"[^>]+src\\s*=\\s*\"([^\"]+)\""));
+  pos = posterRx.indexIn(str_);
+  if(pos > -1) {
+    QUrl u = QUrl(baseURL_).resolved(QUrl(posterRx.cap(1)));
+    QString id = ImageFactory::addImage(u, true);
+    if(!id.isEmpty()) {
+      entry_->setField(cover, id);
+      return;
+    }
+  }
+
   // didn't find the cover, IMDb also used to put "cover" inside the url
   // cover is the img with the "cover" alt text
-
   pos = imgRx.indexIn(str_);
   while(pos > -1) {
     const QString url = imgRx.cap(0).toLower();
@@ -1202,30 +1248,6 @@ void IMDBFetcher::doCover(const QString& str_, Tellico::Data::EntryPtr entry_, c
       }
     }
     pos = imgRx.indexIn(str_, pos+imgRx.matchedLength());
-  }
-
-  // also check for <link rel='image_src'
-  QRegExp linkRx(QStringLiteral("<link (.*)>"), Qt::CaseInsensitive);
-  linkRx.setMinimal(true);
-
-  const QString src = QStringLiteral("image_src");
-
-  pos = linkRx.indexIn(str_);
-  while(pos > -1) {
-    const QString tag = linkRx.cap(1);
-    if(tag.contains(src, Qt::CaseInsensitive)) {
-      QRegExp hrefRx(QStringLiteral("href=['\"](.*)['\"]"), Qt::CaseInsensitive);
-      hrefRx.setMinimal(true);
-      if(hrefRx.indexIn(tag) > -1) {
-        QUrl u = QUrl(baseURL_).resolved(QUrl(hrefRx.cap(1)));
-        QString id = ImageFactory::addImage(u, true);
-        if(!id.isEmpty()) {
-          entry_->setField(cover, id);
-          return;
-        }
-      }
-    }
-    pos = linkRx.indexIn(str_, pos+linkRx.matchedLength());
   }
 }
 
