@@ -804,12 +804,7 @@ void MainWindow::initView() {
 
   // setting up GUI now rather than in initActions
   setupGUI(Keys | ToolBar);
-#ifdef UIFILE
-  myWarning() << "call!";
-  createGUI(UIFILE);
-#else
   createGUI();
-#endif
 }
 
 void MainWindow::initConnections() {
