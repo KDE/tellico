@@ -1,3 +1,7 @@
+2019-01-19  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug reading Title from KinoPoisk (Bug 403184).
+
 2019-01-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with setting IMDB rating in various locales (Bug 401894).
