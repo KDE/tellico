@@ -186,10 +186,10 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-//  myDebug() << url.url();
 #if 0
+  myDebug() << url.url();
   myWarning() << "Remove debug from kinopoiskfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test2.html"));
+  QFile f(QStringLiteral("/tmp/test2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -226,9 +226,13 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   QRegExp anchorRx(QLatin1String("<a\\s+href=\".*\"[^>]*>(.*)</"));
   anchorRx.setMinimal(true);
 
-  QRegExp titleRx(QLatin1String("class=\"moviename-big\"[^>]*>([^<]+)</"));
+  QRegExp titleRx(QLatin1String("class=\"moviename-big\"[^>]*>([^(]+).*</"));
+  titleRx.setMinimal(true);
   if(str_.contains(titleRx)) {
-    entry->setField(QStringLiteral("title"), titleRx.cap(1));
+    QString t = titleRx.cap(1);
+    t.remove(tagRx);
+    t = t.simplified();
+    entry->setField(QStringLiteral("title"), t);
   }
 
   if(optionalFields().contains(QLatin1String("origtitle"))) {
@@ -361,32 +365,32 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("running-time"), runtimeRx.cap(1));
   }
 
-  QRegExp plotRx(QLatin1String("itemprop=\"description\"[^>]*>(.+)</div"));
+  QRegExp plotRx(QStringLiteral("itemprop=\"description\"[^>]*>(.+)</div"));
   plotRx.setMinimal(true);
   if(str_.contains(plotRx)) {
     entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
   } else {
-    plotRx.setPattern(QLatin1String("<meta name=\"description\" content=\"(.+)\""));
+    plotRx.setPattern(QStringLiteral("<meta name=\"description\" content=\"(.+)\""));
     if(str_.contains(plotRx)) {
       entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
     }
   }
 
-  QRegExp mpaaRx(QLatin1String("itemprop=\"contentRating\"[^>]+content=\"MPAA ([^>]+)\""));
+  QRegExp mpaaRx(QStringLiteral("itemprop=\"contentRating\"[^>]+content=\"MPAA ([^>]+)\""));
   mpaaRx.setMinimal(true);
   if(str_.contains(mpaaRx)) {
-    QString value = mpaaRx.cap(1) + QLatin1String(" (USA)");
+    QString value = mpaaRx.cap(1) + QStringLiteral(" (USA)");
 //    entry->setField(QLatin1String("certification"), i18n(value.toUtf8()));
     entry->setField(QStringLiteral("certification"), value);
   }
 
   QString cover;
-  QRegExp coverRx(QLatin1String("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
+  QRegExp coverRx(QStringLiteral("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
   coverRx.setMinimal(true);
   if(str_.contains(coverRx)) {
     cover = coverRx.cap(1);
   } else {
-    coverRx.setPattern(QLatin1String("<meta property=\"vk:image\" content=\"(.+)\""));
+    coverRx.setPattern(QStringLiteral("<meta property=\"vk:image\" content=\"(.+)\""));
     if(str_.contains(coverRx)) {
       cover = coverRx.cap(1);
     }
