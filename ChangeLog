@@ -1,6 +1,6 @@
 2019-01-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug reading Title from KinoPoisk (Bug 403184).
+	* Fixed bug reading Title from KinoPoisk (Bug 403185).
 
 2019-01-04  Robby Stephenson  <robby@periapsis.org>
 
