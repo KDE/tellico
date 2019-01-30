@@ -16,5 +16,3 @@ http://gapines.org/opac/extras/opensearch/1.1/-/mods3/title/bible
 Centralize all the optional fields inside CollectionManager so the names
 are ensured to stay consistent. Add UI for adding to collection outside
 of fetcher results.
-
-Import/export BibJSON
