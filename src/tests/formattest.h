@@ -39,6 +39,8 @@ private Q_SLOTS:
   void testName();
   void testName_data();
   void testSplit();
+  void testStripArticles();
+  void testStripArticles_data();
 };
 
 #endif

@@ -107,7 +107,7 @@ void FormatTest::testName() {
     options |= Tellico::FieldFormat::FormatAuto;
   }
 
-   QCOMPARE(Tellico::FieldFormat::name(string, options), formatted);
+  QCOMPARE(Tellico::FieldFormat::name(string, options), formatted);
 }
 
 void FormatTest::testName_data() {
@@ -139,4 +139,31 @@ void FormatTest::testSplit() {
   QCOMPARE(Tellico::FieldFormat::splitValue(list.join(Tellico::FieldFormat::delimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitRow(list.join(Tellico::FieldFormat::columnDelimiterString())), list);
   QCOMPARE(Tellico::FieldFormat::splitTable(list.join(Tellico::FieldFormat::rowDelimiterString())), list);
+}
+
+void FormatTest::testStripArticles() {
+  QFETCH(QString, articles);
+  QFETCH(QString, string);
+  QFETCH(QString, stripped);
+
+  Tellico::Config::setArticlesString(articles);
+  Tellico::FieldFormat::stripArticles(string);
+  QCOMPARE(string, stripped);
+}
+
+void FormatTest::testStripArticles_data() {
+  QTest::addColumn<QString>("articles");
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("stripped");
+
+  QTest::newRow("test1") << "the,l'" << "name" << "name";
+  QTest::newRow("test2") << "the,l'" << "the name" << "name";
+  QTest::newRow("test3") << "the,l'" << "name, the" << "name";
+  QTest::newRow("test4") << "the,l'" << "thename" << "thename";
+  QTest::newRow("test5") << "the,l'" << "l'name" << "name";
+  QTest::newRow("test6") << "the,l'" << "lname" << "lname";
+  QTest::newRow("test7") << "the,l'" << "al'name" << "al'name";
+  QTest::newRow("test8") << "the" << "l'name" << "l'name";
+  QTest::newRow("test9") << "l'" << "the name" << "the name";
+  QTest::newRow("test10") << "l'" << "l'name," << "name";
 }

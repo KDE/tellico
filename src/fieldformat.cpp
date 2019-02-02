@@ -87,12 +87,23 @@ QString FieldFormat::sortKeyTitle(const QString& title_) {
 }
 
 void FieldFormat::stripArticles(QString& value) {
-  foreach(const QString& article, Config::articleList()) {
-    QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
+  static QStringList oldArticleList;
+  static QList<QRegExp> rxList;
+  if(oldArticleList != Config::articleList()) {
+    oldArticleList = Config::articleList();
+    rxList.clear();
+    foreach(const QString& article, oldArticleList) {
+      QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
+      rxList << rx;
+    }
+  }
+  foreach(const QRegExp& rx, rxList) {
     value.remove(rx);
   }
   value = value.trimmed();
-  value.remove(QRegExp(QLatin1String(",$")));
+  if(value.endsWith(QLatin1Char(','))) {
+    value.chop(1);
+  }
 }
 
 QString FieldFormat::format(const QString& value_, Type type_, Request request_) {
@@ -302,7 +313,7 @@ QString FieldFormat::capitalize(QString str_) {
     if(!aposMatch) {
       // check against the noCapitalization list AND the surnamePrefix list
       // does this hold true everywhere other than english?
-      if(!Config::noCapitalizationList().contains(word, Qt::CaseInsensitive) && 
+      if(!Config::noCapitalizationList().contains(word, Qt::CaseInsensitive) &&
          !Config::surnamePrefixTokens().contains(word, Qt::CaseInsensitive) &&
          nextPos-pos > 1) {
         str_.replace(pos+1, 1, str_.at(pos+1).toUpper());
