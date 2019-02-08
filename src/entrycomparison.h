@@ -43,9 +43,23 @@ public:
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field);
   static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, const QString& field, const Data::Collection* coll);
 
-  // these are the values that should be compared against
-  // the result from Collection::sameEntry()
-  enum MatchValues {
+  // match scores for individual fields
+  enum MatchValue {
+    MATCH_VALUE_NONE = 0,
+    MATCH_VALUE_WEAK = 3,
+    MATCH_VALUE_STRONG = 5
+  };
+
+  // weights for which individual fields get marked
+  enum MatchWeight {
+    MATCH_WEIGHT_LOW  = 1,
+    MATCH_WEIGHT_MED  = 2,
+    MATCH_WEIGHT_HIGH = 3
+  };
+
+  // these are the total values that should be compared against
+  // the result from Collection::sameEntry()  ../entrycomparison.cpp
+  enum EntryMatchValue {
     ENTRY_GOOD_MATCH = 10,
     ENTRY_PERFECT_MATCH = 20
   };

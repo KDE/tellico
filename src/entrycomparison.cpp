@@ -45,100 +45,108 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
 
 int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, Tellico::Data::FieldPtr f) {
   if(!e1 || !e2 || !f) {
-    return 0;
+    return MATCH_VALUE_NONE;
   }
-  QString s1 = e1->field(f).toLower();
-  QString s2 = e2->field(f).toLower();
-  if(s1.isEmpty() || s2.isEmpty()) {
-    return 0;
+  QString s1 = e1->field(f);
+  if(s1.isEmpty()) {
+    return MATCH_VALUE_NONE;
+  }
+  QString s2 = e2->field(f);
+  if(s2.isEmpty()) {
+    return MATCH_VALUE_NONE;
   }
   // complicated string matching, here are the cases I want to match
   // "bend it like beckham" == "bend it like beckham (widescreen edition)"
   // "the return of the king" == "return of the king"
   if(s1 == s2) {
-    return 5;
+    return MATCH_VALUE_STRONG;
   }
   // special case for isbn
-  if(f->name() == QLatin1String("isbn") && ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2)) {
-    return 5;
+  if(f->name() == QStringLiteral("isbn")) {
+    return ISBNValidator::isbn10(s1) == ISBNValidator::isbn10(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if(f->name() == QLatin1String("lccn") && LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2)) {
-    return 5;
+  if(f->name() == QStringLiteral("lccn")) {
+    return LCCNValidator::formalize(s1) == LCCNValidator::formalize(s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if(f->name() == QLatin1String("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
+  if(f->name() == QStringLiteral("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
     // versions before 1.2.7 could have saved the url without the protocol
-    if(QUrl(s1) == QUrl(s2) ||
-       (f->property(QStringLiteral("relative")) == QLatin1String("true") &&
-        s_documentUrl.resolved(QUrl(s1)) == s_documentUrl.resolved(QUrl(s2)))) {
-      return 5;
-    }
+     return (QUrl(s1) == QUrl(s2) ||
+             (f->property(QStringLiteral("relative")) == QStringLiteral("true") &&
+              s_documentUrl.resolved(QUrl(s1)) == s_documentUrl.resolved(QUrl(s2)))) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
-  if (f->name() == QLatin1String("imdb")) {
+  if(f->name() == QStringLiteral("imdb")) {
     // imdb might be a different host since we query akas.imdb.com and normally it is www.imdb.com
     QUrl us1 = QUrl::fromUserInput(s1);
     QUrl us2 = QUrl::fromUserInput(s2);
     us1.setHost(QString());
     us2.setHost(QString());
-    if(us1 == us2) {
-      return 5;
-    }
-  }
-  if(f->name() == QLatin1String("arxiv")) {
-    // normalize and unVersion arxiv ID
-    s1.remove(QRegExp(QLatin1String("^arxiv:")));
-    s1.remove(QRegExp(QLatin1String("v\\d+$")));
-    s2.remove(QRegExp(QLatin1String("^arxiv:")));
-    s2.remove(QRegExp(QLatin1String("v\\d+$")));
-    if(s1 == s2) {
-      return 5;
-    }
+    return (us1 == us2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
   if(f->formatType() == FieldFormat::FormatName) {
     const QString s1n = e1->formattedField(f, FieldFormat::ForceFormat);
     const QString s2n = e2->formattedField(f, FieldFormat::ForceFormat);
-    if(s1n == s2n) {
-      return 5;
+    if(s1 == s2) {
+      // let this one fall through if no match, without returning 0
+      return MATCH_VALUE_STRONG;
     }
   }
-  // try removing punctuation
-  QRegExp notAlphaNum(QLatin1String("[^\\s\\w]"));
+  // don't lower-case until absolutely necessary to avoid overhead
+  // comparisons previous to this should be case insensitive
+  s1 = s1.toLower();
+  s2 = s2.toLower();
+  if(s1 == s2) {
+    return MATCH_VALUE_STRONG;
+  }
+  if(f->name() == QStringLiteral("arxiv")) {
+    // normalize and unVersion arxiv ID
+    static QRegExp rx1(QStringLiteral("^arxiv:"));
+    static QRegExp rx2(QStringLiteral("v\\d+$"));
+    s1.remove(rx1);
+    s1.remove(rx2);
+    s2.remove(rx1);
+    s2.remove(rx2);
+    return (s1 == s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
+  }
+  if(f->formatType() == FieldFormat::FormatTitle) {
+    FieldFormat::stripArticles(s1);
+    FieldFormat::stripArticles(s2);
+    if(!s1.isEmpty() && s1 == s2) {
+      // let this one fall through if no match, without returning 0
+      return MATCH_VALUE_WEAK;
+    }
+  }  // try removing punctuation
+  static QRegExp notAlphaNum(QStringLiteral("[^\\s\\w]"));
   QString s1a = s1;
   s1a.remove(notAlphaNum);
   QString s2a = s2;
   s2a.remove(notAlphaNum);
   if(!s1a.isEmpty() && s1a == s2a) {
 //    myDebug() << "match without punctuation";
-    return 5;
-  }
-  FieldFormat::stripArticles(s1);
-  FieldFormat::stripArticles(s2);
-  if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without articles";
-    return 3;
+    return MATCH_VALUE_STRONG;
   }
   // try removing everything between parentheses
-  QRegExp rx(QLatin1String("\\s*\\(.*\\)\\s*"));
+  static QRegExp rx(QStringLiteral("\\s*\\(.*\\)\\s*"));
   s1.remove(rx);
   s2.remove(rx);
   if(!s1.isEmpty() && s1 == s2) {
 //    myDebug() << "match without parentheses";
-    return 2;
+    return MATCH_VALUE_WEAK;
   }
   if(f->hasFlag(Data::Field::AllowMultiple)) {
     QStringList sl1 = FieldFormat::splitValue(e1->field(f));
     QStringList sl2 = FieldFormat::splitValue(e2->field(f));
     int matches = 0;
     for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
-      matches += sl2.count(*it);
+      matches += MATCH_VALUE_STRONG*sl2.count(*it);
     }
     if(matches == 0 && f->formatType() == FieldFormat::FormatName) {
       sl1 = FieldFormat::splitValue(e1->formattedField(f, FieldFormat::ForceFormat));
       sl2 = FieldFormat::splitValue(e2->formattedField(f, FieldFormat::ForceFormat));
       for(QStringList::ConstIterator it = sl1.constBegin(); it != sl1.constEnd(); ++it) {
-        matches += sl2.count(*it);
+        matches += MATCH_VALUE_STRONG*sl2.count(*it);
       }
     }
-    return matches;
+    return matches / sl1.count();
   }
-  return 0;
+  return MATCH_VALUE_NONE;
 }
