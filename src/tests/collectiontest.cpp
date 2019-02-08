@@ -31,6 +31,7 @@
 #include "../entry.h"
 #include "../collectionfactory.h"
 #include "../collections/collectioninitializer.h"
+#include "../collections/bookcollection.h"
 #include "../translators/tellicoxmlexporter.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -92,7 +93,7 @@ void CollectionTest::testEmpty() {
 
   Tellico::Data::Collection coll(false, QStringLiteral("Title"));
 
-  QCOMPARE(coll.id(), 1);
+  QCOMPARE(coll.id(), 2); // ID is 2 since ID of 1 is created in initTestCase()
   QCOMPARE(coll.entryCount(), 0);
   QCOMPARE(coll.type(), Tellico::Data::Collection::Base);
   QVERIFY(coll.fields().isEmpty());
@@ -624,30 +625,32 @@ void CollectionTest::testBookMatch() {
   e2->setField(QStringLiteral("isbn"), QStringLiteral("000000000"));
 
   // not a good match
-  QVERIFY(b->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
+  QVERIFY(c->sameEntry(e1, e2) < Tellico::EntryComparison::ENTRY_GOOD_MATCH);
 
   // perfect match now
   e2->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  QCOMPARE(b->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+  QCOMPARE(c->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
 
   QBENCHMARK {
-    QCOMPARE(b->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+    QCOMPARE(c->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
   }
 }
 
 void CollectionTest::testMergeBenchmark() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
+//  QUrl url = QUrl::fromLocalFile(QStringLiteral("/home/robby/tellico-stuff/MieiLibri.tc"));
 
   Tellico::Import::TellicoImporter importer1(url, false /* load all images */);
   Tellico::Data::CollPtr coll1 = importer1.collection();
   QVERIFY(coll1);
+  qDebug() << coll1->entryCount();
 
   Tellico::Import::TellicoImporter importer2(url);
   Tellico::Data::CollPtr coll2 = importer2.collection();
   QVERIFY(coll2);
 
   Tellico::Data::EntryList entriesToAdd;
-  for(int i = 0; i < 1000; ++i) {
+  for(int i = 0; i < 100; ++i) {
     Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
     entryToAdd->setField(QStringLiteral("title"), QString::number(i));
     entriesToAdd += entryToAdd;
@@ -655,7 +658,7 @@ void CollectionTest::testMergeBenchmark() {
   coll2->addEntries(entriesToAdd);
 
   QBENCHMARK {
-    Tellico::Data::Document::mergeCollection(coll1, coll2);
+    Tellico::Data::Document::mergeCollection(coll2, coll2);
   }
 }
 
