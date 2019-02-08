@@ -199,15 +199,16 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   if(!entry1_ || !entry2_) {
     return 0;
   }
-  // equal isbn's or lccn's are easy, give it a weight of 100
+  // equal isbn's or lccn's are easy
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"), this) > 0) {
-    return 100; // good match
+    return EntryComparison::ENTRY_PERFECT_MATCH;
   }
-  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-  res += 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("author"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("cr_year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("author"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("cr_year"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
   return res;
 }
