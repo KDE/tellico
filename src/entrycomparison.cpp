@@ -85,7 +85,7 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
   if(f->formatType() == FieldFormat::FormatName) {
     const QString s1n = e1->formattedField(f, FieldFormat::ForceFormat);
     const QString s2n = e2->formattedField(f, FieldFormat::ForceFormat);
-    if(s1 == s2) {
+    if(s1n == s2n) {
       // let this one fall through if no match, without returning 0
       return MATCH_VALUE_STRONG;
     }
