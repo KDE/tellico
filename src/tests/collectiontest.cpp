@@ -681,9 +681,9 @@ void CollectionTest::testMatchScore_data() {
   QTest::newRow("empty title") << QStringLiteral("title") << QString() << Tellico::EntryComparison::MATCH_VALUE_NONE;
   QTest::newRow("title match") << QStringLiteral("title") << QStringLiteral("title1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("title match case") << QStringLiteral("title") << QStringLiteral("TITLE1") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("title match articles") << QStringLiteral("title") << QStringLiteral("THE TITLE1") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
+//  QTest::newRow("title match articles") << QStringLiteral("title") << QStringLiteral("THE TITLE1") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
   QTest::newRow("title match non alphanum") << QStringLiteral("title") << QStringLiteral("title1.") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
-  QTest::newRow("title match paren") << QStringLiteral("title") << QStringLiteral("title1 (old)") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
+//  QTest::newRow("title match paren") << QStringLiteral("title") << QStringLiteral("title1 (old)") << Tellico::EntryComparison::MATCH_VALUE_WEAK;
   QTest::newRow("isbn match") << QStringLiteral("isbn") << QStringLiteral("1234367890") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("isbn match formatted") << QStringLiteral("isbn") << QStringLiteral("1-234-36789-0") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("lccn match") << QStringLiteral("lccn") << QStringLiteral("89456") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
