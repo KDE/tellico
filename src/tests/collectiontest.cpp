@@ -590,21 +590,26 @@ void CollectionTest::testMergeCollection() {
 
 void CollectionTest::testMergeBenchmark() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/movies-many.tc"));
-
-  Tellico::Import::TellicoImporter importer1(url);
-  Tellico::Data::CollPtr coll1 = importer1.collection();
-  QVERIFY(coll1);
-
-  Tellico::Import::TellicoImporter importer2(url);
-  Tellico::Data::CollPtr coll2 = importer2.collection();
-  QVERIFY(coll2);
-
-  for(int i = 0; i < 100; ++i) {
-    Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
-    coll2->addEntries(entryToAdd);
-  }
+  Tellico::Data::EntryList entriesToAdd;
 
   QBENCHMARK {
+    Tellico::Import::TellicoImporter importer1(url, false /* load all images */);
+    Tellico::Data::CollPtr coll1 = importer1.collection();
+    QVERIFY(coll1);
+
+    Tellico::Import::TellicoImporter importer2(url);
+    Tellico::Data::CollPtr coll2 = importer2.collection();
+    QVERIFY(coll2);
+
+    entriesToAdd.clear();
+    for(int i = 0; i < 500; ++i) {
+      Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
+      entryToAdd->setField(QStringLiteral("title"), QString::number(qrand()));
+      entryToAdd->setField(QStringLiteral("studio"), QString::number(i));
+      entriesToAdd += entryToAdd;
+    }
+    coll2->addEntries(entriesToAdd);
+
     Tellico::Data::Document::mergeCollection(coll1, coll2);
   }
 }
