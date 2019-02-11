@@ -333,9 +333,8 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
     Data::EntryPtr matchEntry, currEntry;
     // first, if we're checking against same ID
     if(checkSameId) {
-      currEntry = currEntries.first()->collection()->entryById(newEntry->id());
-      if(currEntry &&
-         currEntry->collection()->sameEntry(currEntry, newEntry) >= EntryComparison::ENTRY_PERFECT_MATCH) {
+      currEntry = coll1_->entryById(newEntry->id());
+      if(currEntry && coll1_->sameEntry(currEntry, newEntry) >= EntryComparison::ENTRY_PERFECT_MATCH) {
         // only have to compare against perfect match
         matchEntry = currEntry;
       }
@@ -343,9 +342,9 @@ Tellico::Data::MergePair Document::mergeCollection(Tellico::Data::CollPtr coll1_
     if(!matchEntry) {
       // alternative is to loop over them all
       for(int i = 0; i < currTotal; ++i) {
-        // since we're sorted by title, track the index of the previous match and starts comparison there
+        // since we're sorted by title, track the index of the previous match and start comparison there
         currEntry = currEntries.at((i+lastMatchId) % currTotal);
-        int match = currEntry->collection()->sameEntry(currEntry, newEntry);
+        const int match = coll1_->sameEntry(currEntry, newEntry);
         if(match >= EntryComparison::ENTRY_PERFECT_MATCH) {
           matchEntry = currEntry;
           lastMatchId = (i+lastMatchId) % currTotal;
@@ -803,7 +802,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, MergeConflictRes
         e1->setField(field, e2->field(field));
       }
     } else {
-      myDebug() << "Doing nothing for" << field->name();
+      myDebug() << "Keeping value of" << field->name() << "for" << e1->field(QStringLiteral("title"));
     }
   }
   return ret;

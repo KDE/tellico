@@ -83,7 +83,7 @@ Tellico::Data::CollPtr Entry::collection() const {
 
 void Entry::setCollection(Tellico::Data::CollPtr coll_) {
   if(coll_ == m_coll) {
-    myDebug() << "already belongs to collection!";
+//    myDebug() << "already belongs to collection!";
     return;
   }
   // special case adding a book to a bibtex collection

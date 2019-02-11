@@ -40,8 +40,8 @@ public:
    */
   static void setDocumentUrl(const QUrl& url);
 
-  static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field);
-  static int score(Data::EntryPtr entry1, Data::EntryPtr entry2, const QString& field, const Data::Collection* coll);
+  static int score(const Data::EntryPtr& entry1, const Data::EntryPtr& entry2, Data::FieldPtr field);
+  static int score(const Data::EntryPtr& entry1, const Data::EntryPtr& entry2, const QString& field, const Data::Collection* coll);
 
   // match scores for individual fields
   enum MatchValue {

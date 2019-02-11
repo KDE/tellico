@@ -38,12 +38,12 @@ void EntryComparison::setDocumentUrl(const QUrl& url_) {
   s_documentUrl = url_;
 }
 
-int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2,
+int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Data::EntryPtr& e2,
                            const QString& f, const Tellico::Data::Collection* c) {
   return score(e1, e2, c->fieldByName(f));
 }
 
-int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e2, Tellico::Data::FieldPtr f) {
+int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Data::EntryPtr& e2, Tellico::Data::FieldPtr f) {
   if(!e1 || !e2 || !f) {
     return MATCH_VALUE_NONE;
   }
@@ -90,11 +90,8 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
       return MATCH_VALUE_STRONG;
     }
   }
-  // don't lower-case until absolutely necessary to avoid overhead
-  // comparisons previous to this should be case insensitive
-  s1 = s1.toLower();
-  s2 = s2.toLower();
-  if(s1 == s2) {
+  // now do case-insensitive comparison
+  if(s1.compare(s2, Qt::CaseInsensitive) == 0) {
     return MATCH_VALUE_STRONG;
   }
   if(f->name() == QStringLiteral("arxiv")) {
@@ -108,29 +105,15 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     return (s1 == s2) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
   if(f->formatType() == FieldFormat::FormatTitle) {
-    FieldFormat::stripArticles(s1);
-    FieldFormat::stripArticles(s2);
-    if(!s1.isEmpty() && s1 == s2) {
+//    FieldFormat::stripArticles(s1);
+//    FieldFormat::stripArticles(s2);
+    const QString s1t = e1->formattedField(f, FieldFormat::ForceFormat);
+    const QString s2t = e2->formattedField(f, FieldFormat::ForceFormat);
+    if(s1t == s2t) {
+//    if(!s1.isEmpty() && s1 == s2) {
       // let this one fall through if no match, without returning 0
       return MATCH_VALUE_WEAK;
     }
-  }  // try removing punctuation
-  static QRegExp notAlphaNum(QStringLiteral("[^\\s\\w]"));
-  QString s1a = s1;
-  s1a.remove(notAlphaNum);
-  QString s2a = s2;
-  s2a.remove(notAlphaNum);
-  if(!s1a.isEmpty() && s1a == s2a) {
-//    myDebug() << "match without punctuation";
-    return MATCH_VALUE_STRONG;
-  }
-  // try removing everything between parentheses
-  static QRegExp rx(QStringLiteral("\\s*\\(.*\\)\\s*"));
-  s1.remove(rx);
-  s2.remove(rx);
-  if(!s1.isEmpty() && s1 == s2) {
-//    myDebug() << "match without parentheses";
-    return MATCH_VALUE_WEAK;
   }
   if(f->hasFlag(Data::Field::AllowMultiple)) {
     QStringList sl1 = FieldFormat::splitValue(e1->field(f));
@@ -148,5 +131,27 @@ int EntryComparison::score(Tellico::Data::EntryPtr e1, Tellico::Data::EntryPtr e
     }
     return matches / sl1.count();
   }
+  // last resort try removing punctuation
+  static QRegExp notAlphaNum(QStringLiteral("[^\\s\\w]"));
+  QString s1a = s1;
+  s1a.remove(notAlphaNum);
+  QString s2a = s2;
+  s2a.remove(notAlphaNum);
+  if(!s1a.isEmpty() && s1a == s2a) {
+//    myDebug() << "match without punctuation";
+    return MATCH_VALUE_STRONG;
+  }
+  // matching when removing parentheses was an attempt to
+  // accommodate many typical Amazon search results
+  // but it's too onerous on the matching time,
+  // no no longer do it
+/*
+  static QRegExp rx(QStringLiteral("\\s*\\(.*\\)\\s*"));
+  s1.remove(rx);
+  s2.remove(rx);
+  if(!s1.isEmpty() && s1 == s2) {
+    return MATCH_VALUE_WEAK;
+  }
+*/
   return MATCH_VALUE_NONE;
 }

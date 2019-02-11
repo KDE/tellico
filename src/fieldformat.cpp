@@ -93,7 +93,9 @@ void FieldFormat::stripArticles(QString& value) {
     oldArticleList = Config::articleList();
     rxList.clear();
     foreach(const QString& article, oldArticleList) {
-      QRegExp rx(QLatin1String("\\b") + article + QLatin1String("\\b"));
+      QRegExp rx(QLatin1String("\\b") +
+                 QRegExp::escape(article) +
+                 QLatin1String("\\b"));
       rxList << rx;
     }
   }
