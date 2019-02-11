@@ -858,13 +858,14 @@ int Collection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryP
   // used to just return 0, but we really want a default generic implementation
   // that specific collections can override.
 
+  int res = 0;
   // start with twice the title score
   // and since the minimum is > 10, then need more than just a perfect title match
-  int res = 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
   // then add score for each field
-  FieldList fields = entry1_->collection()->fields();
-  foreach(FieldPtr field, fields) {
-    res += EntryComparison::score(entry1_, entry2_, field->name(), this);
+  foreach(FieldPtr field, entry1_->collection()->fields()) {
+    res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, field->name(), this);
+    if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
   }
   return res;
 }

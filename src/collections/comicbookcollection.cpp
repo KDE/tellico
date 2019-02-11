@@ -177,21 +177,33 @@ int ComicBookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Dat
     return 0;
   }
   // equal isbn's or lccn's are easy, give it a weight of 100
-  // special for Bedetheque links for match
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("isbn"), this) > 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("lccn"), this) > 0) {
-    return 100; // great match
+    return EntryComparison::ENTRY_PERFECT_MATCH;
   }
   // special for Bedetheque links for match
-  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("lien-bel"), this) > 0) {
-    return 100; // great match
+  if(hasField(QStringLiteral("lien-bel")) && EntryComparison::score(entry1_, entry2_, QStringLiteral("lien-bel"), this) > 0) {
+    return EntryComparison::ENTRY_PERFECT_MATCH;
   }
-  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-  res += 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("series"), this);
-  res += 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("writer"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("artist"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("issue"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_MED *EntryComparison::score(entry1_, entry2_, QStringLiteral("series"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_MED *EntryComparison::score(entry1_, entry2_, QStringLiteral("writer"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("artist"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("issue"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("publisher"), this);
   return res;
 }

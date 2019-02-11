@@ -1,6 +1,10 @@
+2019-02-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved collection merging efficiency (Bug 349410).
+
 2019-01-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Fixed bug reading Title from KinoPoisk (Bug 403184).
+	* Fixed bug reading title from KinoPoisk (Bug 403184).
 
 2019-01-04  Robby Stephenson  <robby@periapsis.org>
 

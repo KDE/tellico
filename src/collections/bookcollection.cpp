@@ -206,9 +206,17 @@ int BookCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::En
   }
   int res = 0;
   res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("author"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("cr_year"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("pub_year"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
   res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("binding"), this);
   return res;
 }

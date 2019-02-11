@@ -45,8 +45,8 @@ public:
 
   // match scores for individual fields
   enum MatchValue {
-    MATCH_VALUE_NONE = 0,
-    MATCH_VALUE_WEAK = 3,
+    MATCH_VALUE_NONE   = 0,
+    MATCH_VALUE_WEAK   = 3,
     MATCH_VALUE_STRONG = 5
   };
 
@@ -60,7 +60,8 @@ public:
   // these are the total values that should be compared against
   // the result from Collection::sameEntry()  ../entrycomparison.cpp
   enum EntryMatchValue {
-    ENTRY_GOOD_MATCH = 10,
+    ENTRY_BAD_MATCH     = 0,
+    ENTRY_GOOD_MATCH    = 10,
     ENTRY_PERFECT_MATCH = 20
   };
 

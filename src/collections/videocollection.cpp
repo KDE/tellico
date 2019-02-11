@@ -231,18 +231,25 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
 }
 
 int VideoCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
+  // when imdb field is equal it is the same
+  if(EntryComparison::score(entry1_, entry2_, QStringLiteral("imdb"), this) > 0) {
+    return EntryComparison::ENTRY_PERFECT_MATCH;
+  }
   // not enough for title to be equal, must also have another field
   // ever possible for a studio to do two movies with identical titles?
-  int res = 3*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-//  if(res == 0) {
-//    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title();
-//  }
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("director"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("studio"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("medium"), this);
-  // when imdb field is equal it is the same
-  res += 10*EntryComparison::score(entry1_, entry2_, QStringLiteral("imdb"), this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_HIGH*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("year"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("director"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("studio"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW *EntryComparison::score(entry1_, entry2_, QStringLiteral("medium"), this);
   return res;
 }

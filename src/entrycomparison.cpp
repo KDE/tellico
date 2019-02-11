@@ -70,9 +70,11 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
   }
   if(f->name() == QStringLiteral("url") && e1->collection() && e1->collection()->type() == Data::Collection::File) {
     // versions before 1.2.7 could have saved the url without the protocol
-     return (QUrl(s1) == QUrl(s2) ||
-             (f->property(QStringLiteral("relative")) == QStringLiteral("true") &&
-              s_documentUrl.resolved(QUrl(s1)) == s_documentUrl.resolved(QUrl(s2)))) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
+    QUrl u1(s1);
+    QUrl u2(s2);
+    return (u1 == u2 ||
+            (f->property(QStringLiteral("relative")) == QStringLiteral("true") &&
+             s_documentUrl.resolved(u1) == s_documentUrl.resolved(u2))) ? MATCH_VALUE_STRONG : MATCH_VALUE_NONE;
   }
   if(f->name() == QStringLiteral("imdb")) {
     // imdb might be a different host since we query akas.imdb.com and normally it is www.imdb.com

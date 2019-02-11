@@ -131,14 +131,17 @@ Tellico::Data::FieldList MusicCollection::defaultFields() {
 
 int MusicCollection::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // not enough for title to be equal, must also have another field
-  int res = 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-//  if(res == 0) {
-//    myDebug() << "different titles for " << entry1_->title() << " vs. "
-//              << entry2_->title();
-//  }
-  res += 2*EntryComparison::score(entry1_, entry2_, QStringLiteral("artist"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("year"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("label"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("medium"), this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_MED*EntryComparison::score(entry1_, entry2_, QStringLiteral("artist"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("year"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("label"), this);
+  if(res >= EntryComparison::ENTRY_PERFECT_MATCH) return res;
+
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("medium"), this);
   return res;
 }

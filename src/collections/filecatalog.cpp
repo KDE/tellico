@@ -117,16 +117,17 @@ Tellico::Data::FieldList FileCatalog::defaultFields() {
 int FileCatalog::sameEntry(Tellico::Data::EntryPtr entry1_, Tellico::Data::EntryPtr entry2_) const {
   // equal urls are always equal, even if modification time or something is different
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("url"), this) > 0) {
-    return 100; // good match
+    return EntryComparison::ENTRY_PERFECT_MATCH;
   }
   // if volume or created time is different, it can't be same entry
   if(EntryComparison::score(entry1_, entry2_, QStringLiteral("volume"), this) == 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("created"), this) == 0 ||
      EntryComparison::score(entry1_, entry2_, QStringLiteral("size"), this) == 0) {
-    return 0;
+    return EntryComparison::ENTRY_BAD_MATCH;
   }
-  int res = EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("description"), this);
-  res += EntryComparison::score(entry1_, entry2_, QStringLiteral("mimetype"), this);
+  int res = 0;
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("title"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("description"), this);
+  res += EntryComparison::MATCH_WEIGHT_LOW*EntryComparison::score(entry1_, entry2_, QStringLiteral("mimetype"), this);
   return res;
 }
