@@ -31,7 +31,6 @@
 #include <KFileItem>
 
 #include <QPointer>
-#include <QPixmap>
 
 class QCheckBox;
 namespace KIO {
@@ -74,7 +73,6 @@ private:
   QCheckBox* m_filePreview;
   QPointer<KIO::Job> m_job;
   KFileItemList m_files;
-  QPixmap m_pixmap;
   bool m_cancelled;
 };
 
