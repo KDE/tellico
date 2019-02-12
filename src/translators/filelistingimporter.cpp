@@ -129,7 +129,9 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
   const QString metainfo = QStringLiteral("metainfo");
   const QString icon     = QStringLiteral("icon");
 
-  QPixmap pixmap;
+  // cache the icon image ids to avoid repeated creation of Data::Image objects
+  QHash<QString, QString> iconImageId;
+
   m_coll = new Data::FileCatalog(true);
   QString tmp;
   const uint stepSize = qMax(1, m_files.count()/100);
@@ -207,17 +209,22 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
     entry->setField(metainfo, strings.join(FieldFormat::rowDelimiterString()));
 #endif
 
+    QPixmap pixmap;
     if(!m_cancelled && usePreview) {
       pixmap = Tellico::NetAccess::filePreview(item, FILE_PREVIEW_SIZE);
-      if(pixmap.isNull()) {
+    }
+    if(pixmap.isNull()) {
+      if(iconImageId.contains(item.iconName())) {
+        entry->setField(icon, iconImageId.value(item.iconName()));
+      } else {
         pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
+        const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
+        if(!id.isEmpty()) {
+          entry->setField(icon, id);
+          iconImageId.insert(item.iconName(), id);
+        }
       }
     } else {
-      pixmap = QIcon::fromTheme(item.iconName()).pixmap(QSize(FILE_PREVIEW_SIZE, FILE_PREVIEW_SIZE));
-    }
-
-    if(!pixmap.isNull()) {
-      // is png best option?
       const QString id = ImageFactory::addImage(pixmap, QStringLiteral("PNG"));
       if(!id.isEmpty()) {
         entry->setField(icon, id);
