@@ -55,7 +55,7 @@ void IGDBFetcherTest::testKeyword() {
   KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Zelda Twilight Princess GameCube"));
+                                       QStringLiteral("Zelda Twilight Princess"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IGDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -67,7 +67,7 @@ void IGDBFetcherTest::testKeyword() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
-  QCOMPARE(entry->field("platform"), QStringLiteral("GameCube"));
+  QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo Wii"));
   QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Platform; Puzzle; Role-playing (RPG); Sport; Adventure"));

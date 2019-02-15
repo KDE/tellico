@@ -1,3 +1,7 @@
+2019-02-14  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IGDB data source to API v3.
+
 2019-02-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved collection merging efficiency (Bug 349410).
