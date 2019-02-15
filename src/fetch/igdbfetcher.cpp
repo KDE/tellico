@@ -83,7 +83,7 @@ bool IGDBFetcher::canFetch(int type) const {
 }
 
 void IGDBFetcher::readConfigHook(const KConfigGroup& config_) {
-  QString k = config_.readEntry("API Key");
+  QString k = config_.readEntry("APIv3 Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
@@ -644,7 +644,7 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
 void IGDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   const QString apiKey = m_apiKeyEdit->text().trimmed();
   if(!apiKey.isEmpty()) {
-    config_.writeEntry("API Key", apiKey);
+    config_.writeEntry("APIv3 Key", apiKey);
   }
 }
 
