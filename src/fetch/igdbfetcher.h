@@ -31,7 +31,6 @@
 
 #include <QLineEdit>
 #include <QPointer>
-#include <QDate>
 
 class KJob;
 namespace KIO {

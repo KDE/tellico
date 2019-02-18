@@ -45,7 +45,6 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonArray>
-#include <QUrlQuery>
 
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
@@ -106,7 +105,7 @@ void IGDBFetcher::continueSearch() {
   }
 
   QUrl u(QString::fromLatin1(IGDB_API_URL));
-  u.setPath(u.path() + QLatin1String("/games/"));
+  u.setPath(u.path() + QStringLiteral("/games/"));
 
   QStringList clauseList;
   switch(request().key) {
@@ -229,15 +228,15 @@ void IGDBFetcher::slotComplete(KJob* job_) {
 #endif
 
   Data::CollPtr coll(new Data::GameCollection(true));
-  if(optionalFields().contains(QLatin1String("pegi"))) {
+  if(optionalFields().contains(QStringLiteral("pegi"))) {
     QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
-                                    .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+                                    .split(QRegExp(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
     Data::FieldPtr field(new Data::Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi));
     field->setFlags(Data::Field::AllowGrouped);
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("igdb"))) {
+  if(optionalFields().contains(QStringLiteral("igdb"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("igdb"), i18n("IGDB Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -271,7 +270,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
 
   QString cover = mapValue(resultMap_, "cover", "url");
   if(cover.startsWith(QLatin1Char('/'))) {
-    cover.prepend(QLatin1String("https:"));
+    cover.prepend(QStringLiteral("https:"));
   }
   entry_->setField(QStringLiteral("cover"), cover);
 
@@ -298,25 +297,25 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     // just take the first one for now
     // TODO:: suport multiple
     const QString platform = m_platformHash.value(platforms.first().toInt());
-    if(platform == QLatin1String("Nintendo Entertainment System (NES)")) {
+    if(platform == QStringLiteral("Nintendo Entertainment System (NES)")) {
       entry_->setField(QStringLiteral("platform"), i18n("Nintendo"));
-    } else if(platform == QLatin1String("Nintendo PlayStation")) {
+    } else if(platform == QStringLiteral("Nintendo PlayStation")) {
       entry_->setField(QStringLiteral("platform"), i18n("PlayStation"));
-    } else if(platform == QLatin1String("PlayStation 2")) {
+    } else if(platform == QStringLiteral("PlayStation 2")) {
       entry_->setField(QStringLiteral("platform"), i18n("PlayStation2"));
-    } else if(platform == QLatin1String("PlayStation 3")) {
+    } else if(platform == QStringLiteral("PlayStation 3")) {
       entry_->setField(QStringLiteral("platform"), i18n("PlayStation3"));
-    } else if(platform == QLatin1String("PlayStation 4")) {
+    } else if(platform == QStringLiteral("PlayStation 4")) {
       entry_->setField(QStringLiteral("platform"), i18n("PlayStation4"));
-    } else if(platform == QLatin1String("PlayStation Portable")) {
+    } else if(platform == QStringLiteral("PlayStation Portable")) {
       entry_->setField(QStringLiteral("platform"), i18nc("PlayStation Portable", "PSP"));
-    } else if(platform == QLatin1String("Wii")) {
+    } else if(platform == QStringLiteral("Wii")) {
       entry_->setField(QStringLiteral("platform"), i18n("Nintendo Wii"));
-    } else if(platform == QLatin1String("Nintendo GameCube")) {
+    } else if(platform == QStringLiteral("Nintendo GameCube")) {
       entry_->setField(QStringLiteral("platform"), i18n("GameCube"));
-    } else if(platform == QLatin1String("PC (Microsoft Windows)")) {
+    } else if(platform == QStringLiteral("PC (Microsoft Windows)")) {
       entry_->setField(QStringLiteral("platform"), i18nc("Windows Platform", "Windows"));
-    } else if(platform == QLatin1String("Mac")) {
+    } else if(platform == QStringLiteral("Mac")) {
       entry_->setField(QStringLiteral("platform"), i18n("Mac OS"));
     } else {
       // TODO all the other platform translations
@@ -337,7 +336,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     const int rating = ratingMap.value(QStringLiteral("rating")).toInt();
     if(category == 1) {
       entry_->setField(QStringLiteral("certification"), m_esrbHash.value(rating));
-    } else if(category == 2 && optionalFields().contains(QLatin1String("pegi"))) {
+    } else if(category == 2 && optionalFields().contains(QStringLiteral("pegi"))) {
       entry_->setField(QStringLiteral("pegi"), m_pegiHash.value(rating));
     }
   }
@@ -355,7 +354,7 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   entry_->setField(QStringLiteral("pub-id"), pubs.join(FieldFormat::delimiterString()));
   entry_->setField(QStringLiteral("dev-id"), devs.join(FieldFormat::delimiterString()));
 
-  if(optionalFields().contains(QLatin1String("igdb"))) {
+  if(optionalFields().contains(QStringLiteral("igdb"))) {
     entry_->setField(QStringLiteral("igdb"), mapValue(resultMap_, "url"));
   }
 }
@@ -366,7 +365,7 @@ QString IGDBFetcher::companyName(const QString& companyId_) const {
   }
 
   QUrl u(QString::fromLatin1(IGDB_API_URL));
-  u.setPath(u.path() + QLatin1String("/companies/"));
+  u.setPath(u.path() + QStringLiteral("/companies/"));
 
   QStringList clauseList;
   clauseList += QStringLiteral("fields name;");
@@ -596,7 +595,7 @@ Tellico::StringHash IGDBFetcher::allOptionalFields() {
 
 QPointer<KIO::StoredTransferJob> IGDBFetcher::igdbJob(const QUrl& url_, const QString& apiKey_, const QString& query_) {
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(query_.toUtf8(), url_, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("user-key: ") + apiKey_);
+  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("user-key: ") + apiKey_);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;
@@ -614,7 +613,7 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 IGDBFetcher::defaultName(),
-                                QLatin1String("https://api.igdb.com/signup")),
+                                QStringLiteral("https://api.igdb.com/signup")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
