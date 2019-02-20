@@ -1,3 +1,7 @@
+2019-02-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for MobyGames.com.
+
 2019-02-14  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IGDB data source to API v3.

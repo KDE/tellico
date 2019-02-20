@@ -42,6 +42,7 @@ SET(fetch_STAT_SRCS
    kinofetcher.cpp
    kinopoiskfetcher.cpp
    messagehandler.cpp
+   mobygamesfetcher.cpp
    moviemeterfetcher.cpp
    mrlookupfetcher.cpp
    multifetcher.cpp

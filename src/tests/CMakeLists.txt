@@ -703,6 +703,14 @@ add_test(kinopoiskfetchertest kinopoiskfetchertest)
 ecm_mark_as_test(kinopoiskfetchertest)
 TARGET_LINK_LIBRARIES(kinopoiskfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(mobygamesfetchertest mobygamesfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/mobygamesfetcher.cpp
+)
+ecm_mark_nongui_executable(mobygamesfetchertest)
+add_test(mobygamesfetchertest mobygamesfetchertest)
+ecm_mark_as_test(mobygamesfetchertest)
+TARGET_LINK_LIBRARIES(mobygamesfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(moviemeterfetchertest moviemeterfetchertest.cpp abstractfetchertest.cpp
   ../fetch/moviemeterfetcher.cpp
 )

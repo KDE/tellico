@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,89 +22,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_H
-#define TELLICO_FETCH_H
+#ifndef MOBYGAMESFETCHERTEST_H
+#define MOBYGAMESFETCHERTEST_H
 
-namespace Tellico {
-  namespace Fetch {
+#include "abstractfetchertest.h"
 
-/**
- * FetchFirst must be first, and the rest must follow consecutively in value.
- * FetchLast must be last!
- */
-enum FetchKey {
-  FetchFirst = 0,
-  Title,
-  Person,
-  ISBN,
-  UPC,
-  Keyword,
-  DOI,
-  ArxivID,
-  PubmedID,
-  LCCN,
-  Raw,
-  ExecUpdate,
-  FetchLast
+#include <KConfig>
+
+class MobyGamesFetcherTest : public AbstractFetcherTest {
+Q_OBJECT
+public:
+  MobyGamesFetcherTest();
+
+private Q_SLOTS:
+  void initTestCase();
+  void testTitle();
+
+private:
+  bool m_hasConfigFile;
+  KConfig m_config;
 };
-
-// real ones must start at 0!
-enum Type {
-  Unknown = -1,
-  Amazon = 0,
-  IMDB,
-  Z3950,
-  SRU,
-  Entrez,
-  ExecExternal,
-  Yahoo, // Removed
-  AnimeNfo,
-  IBS,
-  ISBNdb,
-  GCstarPlugin,
-  CrossRef,
-  Citebase, // Removed
-  Arxiv,
-  Bibsonomy,
-  GoogleScholar,
-  Discogs,
-  WineCom,
-  TheMovieDB,
-  MusicBrainz,
-  GiantBomb,
-  OpenLibrary,
-  Multiple,
-  Freebase, // Removed
-  DVDFr,
-  Filmaster,
-  Douban,
-  BiblioShare,
-  MovieMeter,
-  GoogleBook,
-  MAS, // Removed
-  Springer,
-  Allocine,
-  ScreenRush, // Removed
-  FilmStarts, // Removed
-  SensaCine, // Removed
-  Beyazperde, // Removed
-  HathiTrust,
-  TheGamesDB,
-  DBLP,
-  VNDB,
-  MRLookup,
-  BoardGameGeek,
-  Bedetheque,
-  OMDB,
-  KinoPoisk,
-  VideoGameGeek,
-  DBC,
-  IGDB,
-  Kino,
-  MobyGames
-};
-
-  }
-}
 
 #endif
