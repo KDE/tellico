@@ -98,8 +98,9 @@ const QIcon& EntryIconModel::defaultIcon(Data::CollPtr coll_) const {
     return *icon;
   }
   QIcon tmpIcon = QIcon(QLatin1String(":/icons/nocover_") + CollectionFactory::typeName(coll_->type()));
-  if(tmpIcon.isNull()) {
-    myLog() << "null nocover image, loading tellico.png";
+  // apparently, for a resource icon that doesn't exist, it may not be null, but just have no available sizes
+  if(tmpIcon.isNull() || tmpIcon.availableSizes().isEmpty()) {
+//    myLog() << "null nocover image, loading tellico.png";
     tmpIcon = QIcon::fromTheme(QStringLiteral("tellico"), QIcon(QLatin1String(":/icons/tellico")));
   }
 
