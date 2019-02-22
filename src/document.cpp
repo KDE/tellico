@@ -794,7 +794,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, MergeConflictRes
       ret = true;
 #endif
     } else if(resolver_) {
-      int resolverResponse = resolver_->resolve(e1, e2, field);
+      const int resolverResponse = resolver_->resolve(e1, e2, field);
       if(resolverResponse == MergeConflictResolver::CancelMerge) {
         ret = false; // we got cancelled
         return false; // cancel all the merge right now
@@ -802,7 +802,7 @@ bool Document::mergeEntry(Data::EntryPtr e1, Data::EntryPtr e2, MergeConflictRes
         e1->setField(field, e2->field(field));
       }
     } else {
-      myDebug() << "Keeping value of" << field->name() << "for" << e1->field(QStringLiteral("title"));
+//      myDebug() << "Keeping value of" << field->name() << "for" << e1->field(QStringLiteral("title"));
     }
   }
   return ret;
