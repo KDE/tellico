@@ -53,14 +53,14 @@ EntryIconView::EntryIconView(QWidget* parent_)
     : QListView(parent_), m_maxAllowedIconWidth(MAX_ENTRY_ICON_SIZE) {
   setViewMode(QListView::IconMode);
   setMovement(QListView::Static);
-//  setUniformItemSizes(true);
   setDragEnabled(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setResizeMode(QListView::Adjust);
   setWordWrap(true);
   setSpacing(ENTRY_ICON_SIZE_PAD);
+  setLayoutMode(QListView::Batched);
 
-  connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
+  connect(this, &EntryIconView::doubleClicked, this, &EntryIconView::slotDoubleClicked);
 
   setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
                     "an icon, which may be an image in the entry.</qt>"));
@@ -120,7 +120,7 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
       menu.addAction(act);
     }
     if(!urlFields.isEmpty()) {
-      connect(&menu, SIGNAL(triggered(QAction*)), SLOT(slotOpenUrlMenuActivated(QAction*)));
+      connect(&menu, &QMenu::triggered, this, &EntryIconView::slotOpenUrlMenuActivated);
     }
 
     menu.addSeparator();
@@ -130,7 +130,7 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
   foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
     sortMenu->addAction(field->title())->setData(qVariantFromValue(field));
   }
-  connect(sortMenu, SIGNAL(triggered(QAction*)), SLOT(slotSortMenuActivated(QAction*)));
+  connect(sortMenu, &QMenu::triggered, this, &EntryIconView::slotSortMenuActivated);
 
   menu.exec(ev_->globalPos());
 }
