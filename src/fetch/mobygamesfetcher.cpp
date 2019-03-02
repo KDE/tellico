@@ -58,7 +58,7 @@ using Tellico::Fetch::MobyGamesFetcher;
 
 MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false) {
-  //  setLimit(IGDB_MAX_RETURNS_TOTAL);
+  //  setLimit(MOBYGAMES_MAX_RETURNS_TOTAL);
   if(m_esrbHash.isEmpty()) {
     populateHashes();
   }
@@ -475,7 +475,7 @@ MobyGamesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MobyGamesFe
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 MobyGamesFetcher::defaultName(),
-                                QLatin1String("https://api.igdb.com/signup")),
+                                QLatin1String("https://www.mobygames.com/info/api")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
