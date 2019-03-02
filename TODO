@@ -17,10 +17,8 @@ Centralize all the optional fields inside CollectionManager so the names
 are ensured to stay consistent. Add UI for adding to collection outside
 of fetcher results.
 
-Import/export BibJSON
-
 ComicVine API: https://comicvine.gamespot.com/api/
 Science Direct API v2 https://dev.elsevier.com
 
 Replace most of the toggle actions in the view settings with KDualAction
-IGDB API v3
+Update doc for MobyGames and data source changes
