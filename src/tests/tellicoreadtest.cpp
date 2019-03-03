@@ -31,6 +31,7 @@
 #include "../collections/coincollection.h"
 #include "../collectionfactory.h"
 #include "../translators/tellicoxmlexporter.h"
+#include "../translators/tellico_xml.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../fieldformat.h"
@@ -41,7 +42,7 @@
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
-#define QL1(x) QStringLiteral(x)
+#define QSL(x) QStringLiteral(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
 
 void TellicoReadTest::initTestCase() {
@@ -51,7 +52,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
-    QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QL1("data/books-format%1.bc").arg(i)));
+    QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/books-format%1.bc").arg(i)));
 
     Tellico::Import::TellicoImporter importer(url);
     Tellico::Data::CollPtr coll = importer.collection();
@@ -107,16 +108,16 @@ void TellicoReadTest::testEntries() {
 void TellicoReadTest::testEntries_data() {
   QTest::addColumn<QString>("fieldName");
 
-  QTest::newRow("title") << QL1("title");
-  QTest::newRow("author") << QL1("author");
-  QTest::newRow("publisher") << QL1("publisher");
-  QTest::newRow("keywords") << QL1("keywords");
-  QTest::newRow("keyword") << QL1("keyword");
-  QTest::newRow("genre") << QL1("genre");
-  QTest::newRow("isbn") << QL1("isbn");
-  QTest::newRow("pub_year") << QL1("pub_year");
-  QTest::newRow("rating") << QL1("rating");
-  QTest::newRow("comments") << QL1("comments");
+  QTest::newRow("title") << QSL("title");
+  QTest::newRow("author") << QSL("author");
+  QTest::newRow("publisher") << QSL("publisher");
+  QTest::newRow("keywords") << QSL("keywords");
+  QTest::newRow("keyword") << QSL("keyword");
+  QTest::newRow("genre") << QSL("genre");
+  QTest::newRow("isbn") << QSL("isbn");
+  QTest::newRow("pub_year") << QSL("pub_year");
+  QTest::newRow("rating") << QSL("rating");
+  QTest::newRow("comments") << QSL("comments");
 }
 
 void TellicoReadTest::testCoinCollection() {
@@ -132,12 +133,12 @@ void TellicoReadTest::testCoinCollection() {
   // old field has Dependent value, now is Line
   QVERIFY(field);
   QCOMPARE(field->type(), Tellico::Data::Field::Line);
-  QCOMPARE(field->title(), QL1("Title"));
+  QCOMPARE(field->title(), QSL("Title"));
   QVERIFY(field->hasFlag(Tellico::Data::Field::Derived));
 
   Tellico::Data::EntryPtr entry = coll->entries().at(0);
   // test creating the derived title
-  QCOMPARE(entry->title(), QL1("1974D Jefferson Nickel 0.05"));
+  QCOMPARE(entry->title(), QSL("1974D Jefferson Nickel 0.05"));
 }
 
 void TellicoReadTest::testTableData() {
@@ -175,11 +176,11 @@ void TellicoReadTest::testTableData() {
                 + Tellico::FieldFormat::rowDelimiterString() + "21"
                 + Tellico::FieldFormat::columnDelimiterString() + "22"
                 + Tellico::FieldFormat::columnDelimiterString() + "23";
-  e3->setField(QL1("table"), value);
+  e3->setField(QSL("table"), value);
   QStringList groups = e3->groupNamesByFieldName(QStringLiteral("table"));
   QCOMPARE(groups.count(), 3);
   // the order of the group names is not stable (it uses QSet::toList)
-  QCOMPARE(groups.toSet(), QSet<QString>() << QL1("11a") << QL1("11b") << QL1("21"));
+  QCOMPARE(groups.toSet(), QSet<QString>() << QSL("11a") << QSL("11b") << QSL("21"));
 
   // test having empty value in table
   Tellico::Data::EntryPtr e = coll2->entryById(2);
@@ -224,7 +225,7 @@ void TellicoReadTest::testDuplicateBorrowers() {
 
 void TellicoReadTest::testLocalImage() {
   // this is the md5 hash of the tellico.png icon, used as an image id
-  const QString imageId(QL1("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
+  const QString imageId(QSL("dde5bf2cbd90fad8635a26dfb362e0ff.png"));
   // not yet loaded
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
@@ -237,7 +238,7 @@ void TellicoReadTest::testLocalImage() {
   QTextStream in(&f);
   QString fileText = in.readAll();
   // replace %COVER% with image file location
-  fileText.replace(QL1("%COVER%"),
+  fileText.replace(QSL("%COVER%"),
                    QFINDTESTDATA("../../icons/tellico.png"));
 
   Tellico::Import::TellicoImporter importer(fileText);
@@ -259,7 +260,7 @@ void TellicoReadTest::testLocalImage() {
 
 void TellicoReadTest::testRemoteImage() {
   // this is the md5 hash of the logo.png icon, used as an image id
-  const QString imageId(QL1("757322046f4aa54290a3d92b05b71ca1.png"));
+  const QString imageId(QSL("757322046f4aa54290a3d92b05b71ca1.png"));
   // not yet loaded
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
@@ -272,8 +273,8 @@ void TellicoReadTest::testRemoteImage() {
   QTextStream in(&f);
   QString fileText = in.readAll();
   // replace %COVER% with image file location
-  fileText.replace(QL1("%COVER%"),
-                   QL1("http://tellico-project.org/sites/default/files/logo.png"));
+  fileText.replace(QSL("%COVER%"),
+                   QSL("http://tellico-project.org/sites/default/files/logo.png"));
 
   Tellico::Import::TellicoImporter importer(fileText);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -312,4 +313,28 @@ void TellicoReadTest::testXMLHandler_data() {
                         << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << false;
   QTest::newRow("latin1") << QByteArray("<?xml encoding=\"latin1\"?>\n<x>value</x>")
                           << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
+}
+
+void TellicoReadTest::testXmlName() {
+  QFETCH(bool, valid);
+  QFETCH(QString, input);
+  QFETCH(QString, modified);
+
+  QCOMPARE(Tellico::XML::validXMLElementName(input), valid);
+  QCOMPARE(Tellico::XML::elementName(input), modified);
+}
+
+void TellicoReadTest::testXmlName_data() {
+  QTest::addColumn<bool>("valid");
+  QTest::addColumn<QString>("input");
+  QTest::addColumn<QString>("modified");
+
+  QTest::newRow("start")  << true  << QSL("start")  << QSL("start");
+  QTest::newRow("_start") << true  << QSL("_start") << QSL("_start");
+  QTest::newRow("n42")    << true  << QSL("n42")    << QSL("n42");
+  QTest::newRow("42")     << false << QSL("42")     << QSL(""); // TODO: empty strign really shouldn't be result
+  QTest::newRow("she is") << false << QSL("she is") << QSL("she-is");
+  QTest::newRow("colon:") << true  << QSL("colon:") << QSL("colon:");
+  QTest::newRow("Svět")   << true  << QSL("Svět")   << QSL("Svět");
+  QTest::newRow("<test>") << false << QSL("<test>") << QSL("test");
 }

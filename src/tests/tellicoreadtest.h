@@ -48,6 +48,8 @@ private Q_SLOTS:
   void testRemoteImage();
   void testXMLHandler();
   void testXMLHandler_data();
+  void testXmlName();
+  void testXmlName_data();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
