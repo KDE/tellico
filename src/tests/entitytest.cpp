@@ -32,8 +32,7 @@
 
 QTEST_APPLESS_MAIN( EntityTest )
 
-#define QL1(x) QStringLiteral(x)
-#define QU8(x) QString::fromUtf8(x)
+#define QSL(x) QStringLiteral(x)
 
 void EntityTest::testEntities() {
   QFETCH(QByteArray, data);
@@ -46,10 +45,10 @@ void EntityTest::testEntities_data() {
   QTest::addColumn<QByteArray>("data");
   QTest::addColumn<QString>("expectedString");
 
-  QTest::newRow("robby") << QByteArray("robby") << QL1("robby");
-  QTest::newRow("&fake;") << QByteArray("&fake;") << QL1("&fake;");
-  QTest::newRow("&#48;") << QByteArray("&#48;") << QL1("0");
-  QTest::newRow("robby&#48;robb") << QByteArray("robby&#48;robby") << QL1("robby0robby");
+  QTest::newRow("robby") << QByteArray("robby") << QSL("robby");
+  QTest::newRow("&fake;") << QByteArray("&fake;") << QSL("&fake;");
+  QTest::newRow("&#48;") << QByteArray("&#48;") << QSL("0");
+  QTest::newRow("robby&#48;robb") << QByteArray("robby&#48;robby") << QSL("robby0robby");
 }
 
 void EntityTest::testAccents() {
@@ -63,13 +62,13 @@ void EntityTest::testAccents_data() {
   QTest::addColumn<QString>("inputString");
   QTest::addColumn<QString>("expectedString");
 
-  QTest::newRow("robby") << QL1("robby") << QL1("robby");
-  QTest::newRow("jose") << QU8("José Guzmán") << QL1("Jose Guzman");
-  QTest::newRow("inarritu") << QU8("Alejandro González Iñárritu") << QL1("Alejandro Gonzalez Inarritu");
-  QTest::newRow("harakiri") << QU8("'Shitsurakuen': jôbafuku onna harakiri") << QL1("'Shitsurakuen': jobafuku onna harakiri");
-  QTest::newRow("svet") << QU8("Tmavomodrý Svět") << QL1("Tmavomodry Svet");
-  QTest::newRow("russian") << QU8("Возвращение Супермена") << QU8("Возвращение Супермена");
-  QTest::newRow("chinese") << QU8("湖南科学技术出版社") << QU8("湖南科学技术出版社");
+  QTest::newRow("robby") << QSL("robby") << QSL("robby");
+  QTest::newRow("jose") << QSL("José Guzmán") << QSL("Jose Guzman");
+  QTest::newRow("inarritu") << QSL("Alejandro González Iñárritu") << QSL("Alejandro Gonzalez Inarritu");
+  QTest::newRow("harakiri") << QSL("'Shitsurakuen': jôbafuku onna harakiri") << QSL("'Shitsurakuen': jobafuku onna harakiri");
+  QTest::newRow("svet") << QSL("Tmavomodrý Svět") << QSL("Tmavomodry Svet");
+  QTest::newRow("russian") << QSL("Возвращение Супермена") << QSL("Возвращение Супермена");
+  QTest::newRow("chinese") << QSL("湖南科学技术出版社") << QSL("湖南科学技术出版社");
 }
 
 void EntityTest::testI18nReplace() {
@@ -83,14 +82,14 @@ void EntityTest::testI18nReplace_data() {
   QTest::addColumn<QString>("inputString");
   QTest::addColumn<QString>("expectedString");
 
-  QTest::newRow("robby") << QL1("robby") << QL1("robby");
-  QTest::newRow("basic1") << QL1("<i18n>robby</i18n>") << QL1("robby");
-  QTest::newRow("basic2") << QL1("<i18n>robby davy</i18n>") << QL1("robby davy");
-  QTest::newRow("basic3") << QL1("\n   <i18n>robby</i18n>  \n davy\n") << QL1("robby davy\n");
+  QTest::newRow("robby") << QSL("robby") << QSL("robby");
+  QTest::newRow("basic1") << QSL("<i18n>robby</i18n>") << QSL("robby");
+  QTest::newRow("basic2") << QSL("<i18n>robby davy</i18n>") << QSL("robby davy");
+  QTest::newRow("basic3") << QSL("\n   <i18n>robby</i18n>  \n davy\n") << QSL("robby davy\n");
   // KDE bug 254863
-  QTest::newRow("bug254863") << QL1("<i18n>Cer&ca</i18n>") << QL1("Cer&amp;ca");
-  QTest::newRow("multiple") << QL1("<i18n>robby</i18n> davy <i18n>jason</i18n>") << QL1("robby davy jason");
-  QTest::newRow("bracket") << QL1("<i18n>robby <robby></i18n>") << QL1("robby &lt;robby&gt;");
+  QTest::newRow("bug254863") << QSL("<i18n>Cer&ca</i18n>") << QSL("Cer&amp;ca");
+  QTest::newRow("multiple") << QSL("<i18n>robby</i18n> davy <i18n>jason</i18n>") << QSL("robby davy jason");
+  QTest::newRow("bracket") << QSL("<i18n>robby <robby></i18n>") << QSL("robby &lt;robby&gt;");
 }
 
 void EntityTest::testMinutes() {
@@ -98,15 +97,4 @@ void EntityTest::testMinutes() {
   QFETCH(QString, minutesString);
 
   QCOMPARE(Tellico::minutes(seconds), minutesString);
-}
-
-void EntityTest::testMinutes_data() {
-  QTest::addColumn<int>("seconds");
-  QTest::addColumn<QString>("minutesString");
-
-  QTest::newRow("1")   << 1   << QL1("0:01");
-  QTest::newRow("60")  << 60  << QL1("1:00");
-  QTest::newRow("600") << 600 << QL1("10:00");
-  QTest::newRow("0")   << 0   << QL1("0:00");
-  QTest::newRow("120") << 120 << QL1("2:00");
 }
