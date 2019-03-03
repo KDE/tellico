@@ -254,7 +254,7 @@ void ISBNValidator::fixup10(QString& input_) {
   input_.replace(QLatin1Char('x'), QLatin1Char('X'));
 
   // remove invalid chars
-  static const QRegularExpression badChars(QStringLiteral("[^\\d-X]"));
+  static const QRegularExpression badChars(QStringLiteral("[^\\d\\-X]"));
   input_.remove(badChars);
 
   // special case for EAN values that start with 978 or 979. That's the case
