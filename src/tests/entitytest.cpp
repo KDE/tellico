@@ -98,3 +98,14 @@ void EntityTest::testMinutes() {
 
   QCOMPARE(Tellico::minutes(seconds), minutesString);
 }
+
+void EntityTest::testMinutes_data() {
+  QTest::addColumn<int>("seconds");
+  QTest::addColumn<QString>("minutesString");
+
+  QTest::newRow("1")   << 1   << QSL("0:01");
+  QTest::newRow("60")  << 60  << QSL("1:00");
+  QTest::newRow("600") << 600 << QSL("10:00");
+  QTest::newRow("0")   << 0   << QSL("0:00");
+  QTest::newRow("120") << 120 << QSL("2:00");
+}
