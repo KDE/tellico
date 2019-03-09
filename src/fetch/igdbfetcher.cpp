@@ -56,7 +56,6 @@ using Tellico::Fetch::IGDBFetcher;
 
 IGDBFetcher::IGDBFetcher(QObject* parent_)
     : Fetcher(parent_), m_started(false) {
-  //  setLimit(IGDB_MAX_RETURNS_TOTAL);
   if(m_genreHash.isEmpty()) {
     populateHashes();
   }
