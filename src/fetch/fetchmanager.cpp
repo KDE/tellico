@@ -297,22 +297,33 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
 // static
 Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FetcherVec vec;
+  vec.append(SRUFetcher::libraryOfCongress(this));
+// books
+  FETCHER_ADD(ISBNdb);
+  FETCHER_ADD(OpenLibrary);
+  FETCHER_ADD(GoogleBook);
+// comic books
+  FETCHER_ADD(AnimeNfo);
+  FETCHER_ADD(Bedetheque);
+// bibliographic
+  FETCHER_ADD(Arxiv);
+  FETCHER_ADD(GoogleScholar);
+  FETCHER_ADD(BiblioShare);
+  FETCHER_ADD(DBLP);
+  FETCHER_ADD(HathiTrust);
+// music
+  FETCHER_ADD(MusicBrainz);
+// video games
+  FETCHER_ADD(TheGamesDB);
+  FETCHER_ADD(IGDB);
+  FETCHER_ADD(VNDB);
+// board games
+  FETCHER_ADD(BoardGameGeek);
+// movies
+  FETCHER_ADD(TheMovieDB);
 #ifdef ENABLE_IMDB
   FETCHER_ADD(IMDB);
 #endif
-  vec.append(SRUFetcher::libraryOfCongress(this));
-  FETCHER_ADD(ISBNdb);
-  FETCHER_ADD(AnimeNfo);
-  FETCHER_ADD(Arxiv);
-  FETCHER_ADD(GoogleScholar);
-  FETCHER_ADD(MusicBrainz);
-  FETCHER_ADD(BiblioShare);
-  FETCHER_ADD(TheGamesDB);
-  FETCHER_ADD(BoardGameGeek);
-  FETCHER_ADD(TheMovieDB);
-  FETCHER_ADD(OpenLibrary);
-  FETCHER_ADD(GoogleBook);
-  FETCHER_ADD(OMDB);
   QStringList langs = QLocale().uiLanguages();
   if(langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes
@@ -328,6 +339,18 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   }
   if(langs.contains(QLatin1String("ru"))) {
     FETCHER_ADD(KinoPoisk);
+  }
+  if(langs.contains(QLatin1String("ru"))) {
+    FETCHER_ADD(KinoPoisk);
+  }
+  if(langs.contains(QLatin1String("de"))) {
+    FETCHER_ADD(Kino);
+  }
+  if(langs.contains(QLatin1String("cn"))) {
+    FETCHER_ADD(Douban);
+  }
+  if(langs.contains(QLatin1String("dk"))) {
+    FETCHER_ADD(DBC);
   }
   return vec;
 }
