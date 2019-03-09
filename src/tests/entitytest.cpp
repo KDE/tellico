@@ -109,3 +109,10 @@ void EntityTest::testMinutes_data() {
   QTest::newRow("0")   << 0   << QSL("0:00");
   QTest::newRow("120") << 120 << QSL("2:00");
 }
+
+void EntityTest::testObfuscate() {
+  QString s(QStringLiteral("1q!Q+=% f"));
+  QByteArray b = Tellico::obfuscate(s);
+//  qDebug() << s << b;
+  QCOMPARE(s, Tellico::reverseObfuscate(b));
+}

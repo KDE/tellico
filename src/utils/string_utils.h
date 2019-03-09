@@ -67,6 +67,9 @@ namespace Tellico {
   // helper methods for the QVariantMaps used by the JSON importers
   QString mapValue(const QVariantMap& map, const char* object);
   QString mapValue(const QVariantMap& map, const char* object, const char* name);
+
+  QByteArray obfuscate(const QString& string);
+  QString reverseObfuscate(const QByteArray& bytes);
 }
 
 #endif

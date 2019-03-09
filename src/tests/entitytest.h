@@ -39,6 +39,7 @@ private Q_SLOTS:
   void testI18nReplace_data();
   void testMinutes();
   void testMinutes_data();
+  void testObfuscate();
 };
 
 #endif

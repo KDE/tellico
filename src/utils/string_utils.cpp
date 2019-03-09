@@ -183,3 +183,27 @@ QString Tellico::mapValue(const QVariantMap& map, const char* object, const char
     return QString();
   }
 }
+
+QByteArray Tellico::obfuscate(const QString& string) {
+  QByteArray b;
+  b.reserve(string.length() * 2);
+  for(int p = 0; p < string.length(); p++) {
+    char c = KRandom::random() % 255;
+    b.prepend(c ^ string.at(p).unicode());
+    b.prepend(c);
+  }
+  return b.toHex();
+}
+
+QString Tellico::reverseObfuscate(const QByteArray& bytes) {
+  if(bytes.length() % 2 != 0 || bytes.isEmpty()) {
+    return QString();
+  }
+  const QByteArray b = QByteArray::fromHex(bytes);
+  QString result;
+  result.reserve(b.length() / 2);
+  for(int p = b.length()-1; p >= 0; p -= 2) {
+    result.append(QLatin1Char(b.at(p-1) ^ b.at(p)));
+  }
+  return result;
+}
