@@ -457,8 +457,9 @@ void Controller::clearFilter() {
   blockAllSignals(false);
 }
 
-void Controller::editEntry(Tellico::Data::EntryPtr) const {
+void Controller::editEntry(Tellico::Data::EntryPtr entry_) const {
   m_mainWindow->slotShowEntryEditor();
+  m_mainWindow->m_editDialog->setContents(Data::EntryList() << entry_);
 }
 
 void Controller::plugCollectionActions(QMenu* popup_) {

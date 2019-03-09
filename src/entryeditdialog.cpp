@@ -108,12 +108,14 @@ void EntryEditDialog::slotHelp() {
 void EntryEditDialog::slotClose() {
   // check to see if an entry should be saved before hiding
   // block signals so the entry view and selection isn't cleared
-  if(queryModified()) {
+  if(m_modified && queryModified()) {
     accept();
     // make sure to reset values in the dialog
     m_needReset = true;
     setContents(m_currEntries);
     slotSetModified(false);
+  } else if(!m_modified) {
+    accept();
   }
 }
 
