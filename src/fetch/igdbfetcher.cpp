@@ -49,6 +49,7 @@
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
   static const char* IGDB_API_URL = "https://api-v3.igdb.com";
+  static const char* IGDB_MAGIC_TOKEN = "dabb2142d9bca4936809251194acd4b25635dfe74d7f1d2d8ced8ab241700a3320111d7995f741769ca94b7de88b487812738fb9043247707a4e281e48786051";
 }
 
 using namespace Tellico;
@@ -95,12 +96,7 @@ void IGDBFetcher::continueSearch() {
   m_started = true;
 
   if(m_apiKey.isEmpty()) {
-    myDebug() << "empty API key";
-    message(i18n("An access key is required to use this data source.")
-            + QLatin1Char(' ') +
-            i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
-    stop();
-    return;
+    m_apiKey = Tellico::reverseObfuscate(IGDB_MAGIC_TOKEN);
   }
 
   QUrl u(QString::fromLatin1(IGDB_API_URL));
@@ -634,7 +630,8 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
   // now add additional fields widget
   addFieldsWidget(IGDBFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
-  if(fetcher_) {
+  // don't show the default API key
+  if(fetcher_ && fetcher_->m_apiKey != Tellico::reverseObfuscate(IGDB_MAGIC_TOKEN)) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
   }
 }
