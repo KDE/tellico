@@ -9,6 +9,7 @@ Name[fi]=Dark Horse Comics
 Name[fr]=Bandes dessinées Dark Horse
 Name[gl]=Dark Horse Comics
 Name[it]=Dark Horse Comics
+Name[ko]=다크호스 코믹스
 Name[nl]=Dark Horse Comics
 Name[nn]=Dark Horse Comics
 Name[pl]=Dark Horse Comics
