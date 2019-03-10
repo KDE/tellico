@@ -46,7 +46,8 @@ void VNDBFetcherTest::initTestCase() {
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("G-senjou no Maou"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2008"));
-//  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Akabei Soft2"));
+  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Akabei Soft2"));
+  m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Akabei Soft2"));
   m_fieldValues.insert(QStringLiteral("origtitle"), QStringLiteral("G線上の魔王"));
   // alias value was removed from the vndb data for this item
 //  m_fieldValues.insert(QStringLiteral("alias"), QStringLiteral("The Devil on G-String"));

@@ -1,3 +1,7 @@
+2019-03-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated VNDB.org data source.
+
 2019-02-24  Robby Stephenson  <robby@periapsis.org>
 
 	* Corrected server for National Library of Lithuania (Bug 404743).
