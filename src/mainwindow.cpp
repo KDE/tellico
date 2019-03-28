@@ -743,25 +743,22 @@ void MainWindow::initView() {
   // initialize the image factory before the entry models are created
   ImageFactory::init();
 
-  m_groupDock = new GUI::DockWidget(i18n("Group Tabs"), this);
-  m_groupDock->setObjectName(QStringLiteral("group_tabs"));
-  m_groupDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
+  m_entryView = new EntryView(this);
+  connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
+          SLOT(slotURLAction(const QUrl&)));
+  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 
-  m_viewTabs = new GUI::TabWidget(this);
-  m_viewTabs->setTabBarHidden(true);
-  m_viewTabs->setDocumentMode(true);
-  m_groupView = new GroupView(m_viewTabs);
-  Controller::self()->addObserver(m_groupView);
-  m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QStringLiteral("folder")), i18n("Groups"));
-  m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
-                                    "based on a selected field.</qt>"));
-  m_groupDock->setWidget(m_viewTabs);
-  addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
-  actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_groupDock->toggleViewAction());
+  // trick to make sure the group views always extend along the entire left or right side
+  // using QMainWindow::setCorner does not seem to work
+  // https://wiki.qt.io/Technical_FAQ#Is_it_possible_for_either_the_left_or_right_dock_areas_to_have_full_height_of_their_side_rather_than_having_the_bottom_take_the_full_width.3F
+  m_dummyWindow = new QMainWindow(this);
+  m_dummyWindow->setCentralWidget(m_entryView->view());
+  m_dummyWindow->setWindowFlags(Qt::Widget);
+  setCentralWidget(m_dummyWindow);
 
-  m_columnDock = new GUI::DockWidget(i18n("Collection View"), this);
-  m_columnDock->setObjectName(QStringLiteral("collection_view"));
-  m_columnDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
+  m_collectionViewDock = new GUI::DockWidget(i18n("Collection View"), m_dummyWindow);
+  m_collectionViewDock->setObjectName(QStringLiteral("collection_dock"));
+  m_collectionViewDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
 
   m_viewStack = new ViewStack(this);
 
@@ -780,28 +777,32 @@ void MainWindow::initView() {
   m_iconView->setWhatsThis(i18n("<qt>The <i>Icon View</i> shows each entry in the collection or group using "
                                 "an icon, which may be an image in the entry.</qt>"));
 
-  m_columnDock->setWidget(m_viewStack);
-  addDockWidget(Qt::TopDockWidgetArea, m_columnDock);
-  actionCollection()->addAction(QStringLiteral("toggle_column_widget"), m_columnDock->toggleViewAction());
+  m_collectionViewDock->setWidget(m_viewStack);
+  m_dummyWindow->addDockWidget(Qt::TopDockWidgetArea, m_collectionViewDock);
+  actionCollection()->addAction(QStringLiteral("toggle_column_widget"), m_collectionViewDock->toggleViewAction());
 
-  m_entryView = new EntryView(this);
-  connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
-          SLOT(slotURLAction(const QUrl&)));
-  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
-  setCentralWidget(m_entryView->view());
+  m_groupViewDock = new GUI::DockWidget(i18n("Group View"), this);
+  m_groupViewDock->setObjectName(QStringLiteral("group_dock"));
+  m_groupViewDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea));
 
-  setDockOptions(QMainWindow::AnimatedDocks); // no tabbed docks
-  setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
-  setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
-  setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
-  setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
-  setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
+  m_viewTabs = new GUI::TabWidget(this);
+  m_viewTabs->setTabBarHidden(true);
+  m_viewTabs->setDocumentMode(true);
+  m_groupView = new GroupView(m_viewTabs);
+  Controller::self()->addObserver(m_groupView);
+  m_viewTabs->addTab(m_groupView, QIcon::fromTheme(QStringLiteral("folder")), i18n("Groups"));
+  m_groupView->setWhatsThis(i18n("<qt>The <i>Group View</i> sorts the entries into groupings "
+                                    "based on a selected field.</qt>"));
+  m_groupViewDock->setWidget(m_viewTabs);
+  addDockWidget(Qt::LeftDockWidgetArea, m_groupViewDock);
+  actionCollection()->addAction(QStringLiteral("toggle_group_widget"), m_groupViewDock->toggleViewAction());
 
   EntrySelectionModel* proxySelect = new EntrySelectionModel(m_iconView->model(),
                                                              m_detailedView->selectionModel(),
                                                              this);
   m_iconView->setSelectionModel(proxySelect);
 
+  setMinimumWidth(MAIN_WINDOW_MIN_WIDTH);
   // setting up GUI now rather than in initActions
   setupGUI(Keys | ToolBar);
   createGUI();
@@ -883,10 +884,11 @@ void MainWindow::initFileOpen(bool nofile_) {
 void MainWindow::saveOptions() {
   KConfigGroup config(KSharedConfig::openConfig(), "Main Window Options");
   saveMainWindowSettings(config);
+  config.writeEntry(QStringLiteral("Central Dock State"), m_dummyWindow->saveState());
 
   Config::setShowEditWidget(m_toggleEntryEditor->isChecked());
   // check any single dock widget, they all get locked together
-  Config::setLockLayout(m_groupDock->isLocked());
+  Config::setLockLayout(m_groupViewDock->isLocked());
 
   KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
   m_fileOpenRecent->saveEntries(filesConfig);
@@ -1013,6 +1015,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
 void MainWindow::readOptions() {
   KConfigGroup mainWindowConfig(KSharedConfig::openConfig(), "Main Window Options");
   applyMainWindowSettings(mainWindowConfig);
+  m_dummyWindow->restoreState(mainWindowConfig.readEntry(QStringLiteral("Central Dock State"), QByteArray()));
 
   m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
@@ -2356,16 +2359,16 @@ void MainWindow::slotToggleMenuBarVisibility() {
 }
 
 void MainWindow::slotToggleLayoutLock(bool lock_) {
-  m_groupDock->setLocked(lock_);
-  m_columnDock->setLocked(lock_);
+  m_groupViewDock->setLocked(lock_);
+  m_collectionViewDock->setLocked(lock_);
 }
 
 void MainWindow::slotResetLayout() {
-  removeDockWidget(m_groupDock);
-  addDockWidget(Qt::LeftDockWidgetArea, m_groupDock);
-  m_groupDock->show();
+  removeDockWidget(m_groupViewDock);
+  addDockWidget(Qt::LeftDockWidgetArea, m_groupViewDock);
+  m_groupViewDock->show();
 
-  removeDockWidget(m_columnDock);
-  addDockWidget(Qt::TopDockWidgetArea, m_columnDock);
-  m_columnDock->show();
+  m_dummyWindow->removeDockWidget(m_collectionViewDock);
+  m_dummyWindow->addDockWidget(Qt::TopDockWidgetArea, m_collectionViewDock);
+  m_collectionViewDock->show();
 }

@@ -483,8 +483,9 @@ private:
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;
 
-  GUI::DockWidget* m_groupDock;
-  GUI::DockWidget* m_columnDock;
+  QMainWindow* m_dummyWindow;
+  GUI::DockWidget* m_groupViewDock;
+  GUI::DockWidget* m_collectionViewDock;
 
   Tellico::StatusBar* m_statusBar;
 
