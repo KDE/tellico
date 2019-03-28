@@ -34,18 +34,19 @@ DockWidget::DockWidget(const QString& title_, QWidget* parent_, Qt::WindowFlags 
 }
 
 void DockWidget::setLocked(bool lock_) {
-  if(lock_ != m_isLocked) {
-    m_isLocked = lock_;
+  if(lock_ == m_isLocked) {
+    return;
+  }
+  m_isLocked = lock_;
 
-    if(lock_) {
-      if(!m_dockTitleBar) {
-        m_dockTitleBar = new DockTitleBar(this);
-      }
-      setTitleBarWidget(m_dockTitleBar);
-      setFeatures(QDockWidget::NoDockWidgetFeatures);
-    } else {
-      setTitleBarWidget(nullptr);
-      setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable);
+  if(lock_) {
+    if(!m_dockTitleBar) {
+      m_dockTitleBar = new DockTitleBar(this);
     }
+    setTitleBarWidget(m_dockTitleBar);
+    setFeatures(QDockWidget::NoDockWidgetFeatures);
+  } else {
+    setTitleBarWidget(nullptr);
+    setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable);
   }
 }
