@@ -1031,12 +1031,7 @@ void MainWindow::readOptions() {
   Qt::SortOrder sortOrder = Config::groupViewSortAscending() ? Qt::AscendingOrder : Qt::DescendingOrder;
   m_groupView->setSorting(sortOrder, sortRole);
 
-  bool useBraces = Config::useBraces();
-  if(useBraces) {
-    BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-  } else {
-    BibtexHandler::s_quoteStyle = BibtexHandler::QUOTES;
-  }
+  BibtexHandler::s_quoteStyle = Config::useBraces() ? BibtexHandler::BRACES : BibtexHandler::QUOTES;
 
   // Don't read any options for the edit dialog here, since it's not yet initialized.
   // Put them in init()
