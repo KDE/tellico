@@ -100,7 +100,7 @@ void VNDBFetcher::search() {
 
   //the client ver only wants digits, I think?
   QString clientVersion(QStringLiteral(TELLICO_VERSION));
-  clientVersion.remove(QRegularExpression(QLatin1String("[^0-9.]")));
+  clientVersion.remove(QRegularExpression(QStringLiteral("[^0-9.]")));
 
   QByteArray login = "login {"
                              "\"protocol\":1,"
