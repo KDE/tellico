@@ -253,6 +253,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
 void AbstractAllocineFetcher::slotComplete(KJob*) {
   if(m_job->error()) {
+    myDebug() << "Error:" << m_job->errorString();
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
