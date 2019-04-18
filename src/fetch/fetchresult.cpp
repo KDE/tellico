@@ -73,11 +73,18 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
   QString desc;
   switch(entry->collection()->type()) {
     case Data::Collection::Book:
-    case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       append(desc, entry, "author");
       append(desc, entry, "publisher");
       append(desc, entry, "cr_year") || append(desc, entry, "pub_year") || append(desc, entry, "year");
+      append(desc, entry, "issue");
+      break;
+
+    case Data::Collection::ComicBook:
+      append(desc, entry, "series");
+      append(desc, entry, "issue");
+      append(desc, entry, "publisher");
+      append(desc, entry, "pub_year") || append(desc, entry, "year");
       break;
 
     case Data::Collection::Video:
