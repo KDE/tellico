@@ -510,6 +510,14 @@ add_test(boardgamegeekfetchertest boardgamegeekfetchertest)
 ecm_mark_as_test(boardgamegeekfetchertest)
 TARGET_LINK_LIBRARIES(boardgamegeekfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(comicvinefetchertest comicvinefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/comicvinefetcher.cpp
+)
+ecm_mark_nongui_executable(comicvinefetchertest)
+add_test(comicvinefetchertest comicvinefetchertest)
+ecm_mark_as_test(comicvinefetchertest)
+TARGET_LINK_LIBRARIES(comicvinefetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(crossreffetchertest crossreffetchertest.cpp abstractfetchertest.cpp
   ../fetch/crossreffetcher.cpp
 )

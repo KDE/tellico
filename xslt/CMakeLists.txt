@@ -11,6 +11,7 @@ SET(XSLT_FILES
     bluray-logo.png
     boardgamegeek2tellico.xsl
     cassette-logo.png
+    comicvine2tellico.xsl
     cd-logo.png
     crossref2tellico.xsl
     dbc2tellico.xsl
