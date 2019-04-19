@@ -346,8 +346,8 @@ void IMDBFetcher::search() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
-  connect(m_job, SIGNAL(redirection(KIO::Job*, const QUrl&)),
-          SLOT(slotRedirection(KIO::Job*, const QUrl&)));
+  connect(m_job, SIGNAL(redirection(KIO::Job*, QUrl)),
+          SLOT(slotRedirection(KIO::Job*, QUrl)));
 }
 
 void IMDBFetcher::continueSearch() {
@@ -1500,7 +1500,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(10);
-  connect(m_numCast, SIGNAL(valueChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_numCast, SIGNAL(valueChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
   label->setWhatsThis(w);

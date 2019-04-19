@@ -520,9 +520,9 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   QLabel* label = new QLabel(i18n("Hos&t: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_hostEdit = new GUI::LineEdit(optionsWidget());
-  connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
-  connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SIGNAL(signalName(const QString&)));
-  connect(m_hostEdit, SIGNAL(textChanged(const QString&)), SLOT(slotCheckHost()));
+  connect(m_hostEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_hostEdit, SIGNAL(textChanged(QString)), SIGNAL(signalName(QString)));
+  connect(m_hostEdit, SIGNAL(textChanged(QString)), SLOT(slotCheckHost()));
   l->addWidget(m_hostEdit, row, 1);
   QString w = i18n("Enter the host name of the server.");
   label->setWhatsThis(w);
@@ -545,7 +545,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   label = new QLabel(i18n("Path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_pathEdit = new GUI::LineEdit(optionsWidget());
-  connect(m_pathEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_pathEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_pathEdit, row, 1);
   w = i18n("Enter the path to the database used by the server.");
   label->setWhatsThis(w);

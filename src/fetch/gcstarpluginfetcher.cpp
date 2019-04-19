@@ -246,8 +246,8 @@ void GCstarPluginFetcher::search() {
 
   m_thread = new GCstarThread(this);
   m_thread->setProgram(gcstar, args);
-  connect(m_thread, SIGNAL(standardOutput(const QByteArray&)), SLOT(slotData(const QByteArray&)));
-  connect(m_thread, SIGNAL(standardError(const QByteArray&)), SLOT(slotError(const QByteArray&)));
+  connect(m_thread, SIGNAL(standardOutput(QByteArray)), SLOT(slotData(QByteArray)));
+  connect(m_thread, SIGNAL(standardError(QByteArray)), SLOT(slotError(QByteArray)));
   connect(m_thread, SIGNAL(finished()), SLOT(slotProcessExited()));
   m_thread->start();
 }

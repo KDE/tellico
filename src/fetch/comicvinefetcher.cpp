@@ -177,7 +177,7 @@ Tellico::Data::EntryPtr ComicVineFetcher::fetchEntryHookData(Data::EntryPtr entr
     f2.close();
 #endif
     QJsonDocument doc = QJsonDocument::fromJson(data);
-    QVariantMap map = doc.object().toVariantMap().value(QStringLiteral("results")).toMap();
+    QVariantMap map = doc.object().toVariantMap().value(QLatin1String("results")).toMap();
     const QString pub = mapValue(map, "publisher", "name");
     if(!pub.isEmpty()) {
       Data::EntryPtr e = coll->entries().front();

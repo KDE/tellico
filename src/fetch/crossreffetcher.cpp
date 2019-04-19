@@ -325,7 +325,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   QLabel* label = new QLabel(i18n("&Username: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_userEdit = new QLineEdit(optionsWidget());
-  connect(m_userEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_userEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_userEdit, row, 1);
   QString w = i18n("A username and password is required to access the CrossRef service.");
   label->setWhatsThis(w);
@@ -336,7 +336,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   l->addWidget(label, ++row, 0);
   m_passEdit = new QLineEdit(optionsWidget());
 //  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-  connect(m_passEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_passEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_passEdit, row, 1);
   label->setWhatsThis(w);
   m_passEdit->setWhatsThis(w);
@@ -348,7 +348,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label = new QLabel(i18n("Email: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_emailEdit = new QLineEdit(optionsWidget());
-  connect(m_emailEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_emailEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_emailEdit, row, 1);
   label->setBuddy(m_emailEdit);
 

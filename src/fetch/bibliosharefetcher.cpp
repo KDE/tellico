@@ -72,7 +72,7 @@ void BiblioShareFetcher::readConfigHook(const KConfigGroup& config_) {
 
 QUrl BiblioShareFetcher::searchUrl() {
   QUrl u(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
-  u.setPath(u.path() + QLatin1String("BiblioSimple"));
+  u.setPath(u.path() + QStringLiteral("BiblioSimple"));
 
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("Token"), m_token);
@@ -112,13 +112,13 @@ Tellico::Data::EntryPtr BiblioShareFetcher::fetchEntryHookData(Data::EntryPtr en
       isbn.remove(QLatin1Char('-'));
 
       QUrl imageUrl(QString::fromLatin1(BIBLIOSHARE_BASE_URL));
-      imageUrl.setPath(imageUrl.path() + QLatin1String("Images"));
+      imageUrl.setPath(imageUrl.path() + QStringLiteral("Images"));
       QUrlQuery q;
-      q.addQueryItem(QLatin1String("Token"), m_token);
-      q.addQueryItem(QLatin1String("EAN"), isbn);
+      q.addQueryItem(QStringLiteral("Token"), m_token);
+      q.addQueryItem(QStringLiteral("EAN"), isbn);
       // the actual values for SAN Thumbnail don't seem to matter, they just can't be empty
-      q.addQueryItem(QLatin1String("SAN"), QLatin1String("string"));
-      q.addQueryItem(QLatin1String("Thumbnail"), QLatin1String("cover"));
+      q.addQueryItem(QStringLiteral("SAN"), QStringLiteral("string"));
+      q.addQueryItem(QStringLiteral("Thumbnail"), QStringLiteral("cover"));
       imageUrl.setQuery(q);
       const QString id = ImageFactory::addImage(imageUrl, true);
       if(!id.isEmpty()) {
@@ -167,7 +167,7 @@ BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioSha
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("http://www.booknetcanada.ca/biblioshare-web-services/#onixweb")),
+                                QStringLiteral("http://www.booknetcanada.ca/biblioshare-web-services/#onixweb")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);
@@ -180,7 +180,7 @@ BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioSha
   l->addWidget(label, ++row, 0);
 
   m_tokenEdit = new QLineEdit(optionsWidget());
-  connect(m_tokenEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_tokenEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_tokenEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
   label->setWhatsThis(w);

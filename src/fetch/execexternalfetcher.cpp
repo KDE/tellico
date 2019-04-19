@@ -364,7 +364,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   label = new QLabel(i18n("Application &path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_pathEdit = new KUrlRequester(optionsWidget());
-  connect(m_pathEdit, SIGNAL(textChanged(const QString&)), SLOT(slotSetModified()));
+  connect(m_pathEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
   l->addWidget(m_pathEdit, row, 1);
   w = i18n("Set the path of the application to run that should output a valid Tellico data file.");
   label->setWhatsThis(w);
