@@ -67,14 +67,14 @@
 
 namespace {
   static const int Z3950_DEFAULT_PORT = 210;
-  static const QString Z3950_DEFAULT_ESN = QStringLiteral("F");
+  static const char* Z3950_DEFAULT_ESN = "F";
 }
 
 using namespace Tellico;
 using Tellico::Fetch::Z3950Fetcher;
 
 Z3950Fetcher::Z3950Fetcher(QObject* parent_)
-    : Fetcher(parent_), m_conn(nullptr), m_port(Z3950_DEFAULT_PORT), m_esn(Z3950_DEFAULT_ESN),
+    : Fetcher(parent_), m_conn(nullptr), m_port(Z3950_DEFAULT_PORT), m_esn(QLatin1String(Z3950_DEFAULT_ESN)),
       m_started(false), m_done(true), m_MARC21XMLHandler(nullptr),
       m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
 }
@@ -106,7 +106,7 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
 Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& host_, int port_,
                            const QString& dbName_, const QString& syntax_)
     : Fetcher(parent_), m_conn(nullptr), m_host(host_), m_port(port_), m_dbname(dbName_)
-    , m_syntax(syntax_), m_esn(Z3950_DEFAULT_ESN)
+    , m_syntax(syntax_), m_esn(QLatin1String(Z3950_DEFAULT_ESN))
     , m_started(false), m_done(true), m_MARC21XMLHandler(nullptr)
     , m_UNIMARCXMLHandler(nullptr), m_MODSHandler(nullptr) {
 }
@@ -258,7 +258,7 @@ void Z3950Fetcher::search() {
       return;
   }
 //  m_pqn = QLatin1String("@attr 1=7 0253333490");
-  myLog() << "PQN query = " << m_pqn;
+//  myLog() << "PQN query = " << m_pqn;
 
   if(m_conn) {
     m_conn->reset(); // reset counts
