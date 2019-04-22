@@ -31,8 +31,8 @@
 #include <QListView>
 
 namespace {
-  static const int MIN_ENTRY_ICON_SIZE = 32;
-  static const int MAX_ENTRY_ICON_SIZE = 512;
+  static const int MIN_ENTRY_ICON_SIZE = 64;
+  static const int MAX_ENTRY_ICON_SIZE = 256;
   static const int SMALL_INCREMENT_ICON_SIZE = 1;
   static const int LARGE_INCREMENT_ICON_SIZE = 8;
 }
