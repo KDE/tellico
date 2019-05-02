@@ -96,6 +96,7 @@
 #include <KAboutData>
 #include <KFileWidget>
 #include <KDualAction>
+#include <KXMLGUIFactory>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -679,8 +680,8 @@ void MainWindow::initActions() {
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
   // really bad hack, but I can't figure out how to make the combobox resize when the contents change
-  // see note in slotChangeGrouping() - so ensure its at least a little bigger
-  m_entryGrouping->addAction(QStringLiteral("                         "));
+  // see note in slotUpdateCollectionToolBar() - found a hackier solution
+//  m_entryGrouping->addAction(QString(50, QLatin1Char(' ')));
   connect(m_entryGrouping, SIGNAL(triggered(int)), SLOT(slotChangeGrouping()));
   actionCollection()->addAction(QStringLiteral("change_entry_grouping"), m_entryGrouping);
 
@@ -1571,19 +1572,27 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
     }
   }
 
+  const QStringList titles = groupMap.values();
+  if(titles == m_entryGrouping->items()) {
+    // no need to update anything
+    return;
+  }
   const QStringList names = groupMap.keys();
   int index = names.indexOf(current);
   if(index == -1) {
     current = names[0];
     index = 0;
   }
-  const QStringList titles = groupMap.values();
   m_entryGrouping->setItems(titles);
   m_entryGrouping->setCurrentItem(index);
   // in case the current grouping field get modified to be non-grouping...
   m_groupView->setGroupField(current); // don't call slotChangeGrouping() since it adds an undo item
 
-  // I have no idea how to get the combobox to update its size
+  // TODO::I have no idea how to get the combobox to update its size
+  // this is the hackiest of hacks, taken from digging into KXMLGuiFactory guts
+  // are there side-effects for the user other than a window flicker as toolbar resizes?
+  guiFactory()->removeClient(this);
+  guiFactory()->addClient(this);
 }
 
 void MainWindow::slotChangeGrouping() {
@@ -2151,6 +2160,7 @@ void MainWindow::slotGroupLabelActivated() {
       QComboBox* combo = ::qobject_cast<QComboBox*>(container); //krazy:exclude=qclasses
       if(combo) {
         combo->showPopup();
+        break;
       }
     }
   }
