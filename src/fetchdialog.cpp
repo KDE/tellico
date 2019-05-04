@@ -101,6 +101,13 @@ namespace {
   private:
     QImage m_image;
   };
+
+  // class exists just to make sizeHintForColumn() public
+  class TreeWidget : public QTreeWidget {
+  public:
+    TreeWidget(QWidget* p) : QTreeWidget(p) {}
+    virtual int sizeHintForColumn(int c) const Q_DECL_OVERRIDE { return QTreeWidget::sizeHintForColumn(c); }
+  };
 }
 
 using Tellico::FetchDialog;
@@ -224,7 +231,8 @@ FetchDialog::FetchDialog(QWidget* parent_)
   topLayout->addWidget(split);
   split->setChildrenCollapsible(false);
 
-  m_treeWidget = new QTreeWidget(split);
+  // using <anonymous>::TreeWidget as a lazy step to make a protected method public
+  m_treeWidget = new TreeWidget(split);
   m_treeWidget->sortItems(1, Qt::AscendingOrder);
   m_treeWidget->setAllColumnsShowFocus(true);
   m_treeWidget->setSortingEnabled(true);
@@ -234,11 +242,11 @@ FetchDialog::FetchDialog(QWidget* parent_)
                                               << i18n("Title")
                                               << i18n("Description")
                                               << i18n("Source"));
-  m_treeWidget->setColumnWidth(0, 20); // will show a check mark when added
   m_treeWidget->model()->setHeaderData(0, Qt::Horizontal, Qt::AlignHCenter, Qt::TextAlignmentRole); // align checkmark in middle
   m_treeWidget->viewport()->installEventFilter(this);
   m_treeWidget->header()->setSortIndicatorShown(true);
-  m_treeWidget->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
+  m_treeWidget->header()->setSectionResizeMode(0, QHeaderView::ResizeToContents); // will show a check mark when added
+  m_treeWidget->header()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
 
   connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
   // double clicking should add the entry
@@ -476,22 +484,29 @@ void FetchDialog::slotResultFound(Tellico::Fetch::FetchResult* result_) {
   if(!m_treeWasResized) {
     m_treeWidget->header()->setStretchLastSection(false);
 
-    // we'd like to make the view look nice by resizing column 3, the final one
-    // but calling resizeColumnToContents(3) doesn't work since it's the final column
+    // do math to try to make a nice resizing, emphasizing sections 1 and 2 over 3
     const int w0 = m_treeWidget->columnWidth(0);
     const int w1 = m_treeWidget->columnWidth(1);
     const int w2 = m_treeWidget->columnWidth(2);
     const int w3 = m_treeWidget->columnWidth(3);
     const int wt = m_treeWidget->width();
-//    myDebug() << w0 << w1 << w2 << w3 << wt;
+//    myDebug() << "OLD:" << w0 << w1 << w2 << w3 << wt << (w0+w1+w2+w3);
 
     // whatever is leftover from resizing 3, split between 1 and 2
-    if(wt > w0 + w1 + w2 + w3) {
-      const int diff = wt - w0 - w1 - w2 - w3;
-      const int w1new = w1 + diff/2 - 4; // extra padding
-      const int w2new = w2 + diff/2 - 4; // extra padding
-      m_treeWidget->setColumnWidth(1, w1new);
-      m_treeWidget->setColumnWidth(2, w2new);
+    if(wt > (w0 + w1 + w2 + w3)) {
+      const int w1rec = static_cast<TreeWidget*>(m_treeWidget)->sizeHintForColumn(1);
+      const int w2rec = static_cast<TreeWidget*>(m_treeWidget)->sizeHintForColumn(2);
+      const int w3rec = static_cast<TreeWidget*>(m_treeWidget)->sizeHintForColumn(3);
+      if(w1 < w1rec || w2 < w2rec) {
+        const int w3new = qMin(w3, w3rec);
+        const int diff = wt - w0 - w1 - w2 - w3new;
+        const int w1new = qBound(w1, w1rec, w1 + diff/2 - 4);
+        const int w2new = qBound(w2, wt - w0 - w1new - w3new, w2rec);
+        m_treeWidget->setColumnWidth(1, w1new);
+        m_treeWidget->setColumnWidth(2, w2new);
+        m_treeWidget->setColumnWidth(3, w3new);
+//        myDebug() << "New:" << w0 << w1new << w2new << w3new << wt << (w0+w1new+w2new+w3new);
+      }
     }
     m_treeWidget->header()->setStretchLastSection(true);
     // because calling setColumnWidth() will change this
@@ -822,6 +837,7 @@ void FetchDialog::slotUPC2ISBN() {
 }
 
 void FetchDialog::columnResized(int column_) {
+  // only care about the middle two. First is the checkmark icon, last is not resizeable
   if(column_ == 1 || column_ == 2) {
     m_treeWasResized = true;
   }
