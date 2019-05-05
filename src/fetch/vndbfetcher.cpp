@@ -275,12 +275,12 @@ void VNDBFetcher::parseVNResults() {
   Data::FieldPtr f1(new Data::Field(QStringLiteral("vn-id"), QString(), Data::Field::Number));
   coll->addField(f1);
   // add new fields
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
   }
-  if(optionalFields().contains(QLatin1String("alias"))) {
+  if(optionalFields().contains(QStringLiteral("alias"))) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("alias"), i18n("Alias")));
     f->setFlags(Data::Field::AllowMultiple);
     f->setFormatType(FieldFormat::FormatTitle);
@@ -303,10 +303,10 @@ void VNDBFetcher::parseVNResults() {
     entry->setField(QStringLiteral("genre"), i18n("Visual Novel"));
     entry->setField(QStringLiteral("description"), mapValue(resultMap, "description"));
     entry->setField(QStringLiteral("cover"), mapValue(resultMap, "image"));
-    if(optionalFields().contains(QLatin1String("origtitle"))) {
+    if(optionalFields().contains(QStringLiteral("origtitle"))) {
       entry->setField(QStringLiteral("origtitle"), mapValue(resultMap, "original"));
     }
-    if(optionalFields().contains(QLatin1String("alias"))) {
+    if(optionalFields().contains(QStringLiteral("alias"))) {
       const QString aliases = mapValue(resultMap, "aliases");
       entry->setField(QStringLiteral("alias"), aliases.split(QStringLiteral("\n")).join(FieldFormat::delimiterString()));
     }

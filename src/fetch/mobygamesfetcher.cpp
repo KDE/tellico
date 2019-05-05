@@ -107,7 +107,7 @@ void MobyGamesFetcher::continueSearch() {
   }
 
   QUrl u(QString::fromLatin1(MOBYGAMES_API_URL));
-  u.setPath(u.path() + QLatin1String("/games"));
+  u.setPath(u.path() + QStringLiteral("/games"));
 
   QUrlQuery q;
   switch(request().key) {
@@ -153,7 +153,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr entry = m_entries.value(uid_);
 
   QUrl u(QString::fromLatin1(MOBYGAMES_API_URL));
-  u.setPath(u.path() + QString::fromLatin1("/games/%1/platforms/%2")
+  u.setPath(u.path() + QStringLiteral("/games/%1/platforms/%2")
                        .arg(entry->field(QStringLiteral("moby-id")),
                             entry->field(QStringLiteral("platform-id"))));
   QUrlQuery q;
@@ -228,7 +228,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   }
 
   u = QUrl(QString::fromLatin1(MOBYGAMES_API_URL));
-  u.setPath(u.path() + QString::fromLatin1("/games/%1/platforms/%2/covers")
+  u.setPath(u.path() + QStringLiteral("/games/%1/platforms/%2/covers")
                        .arg(entry->field(QStringLiteral("moby-id")),
                             entry->field(QStringLiteral("platform-id"))));
   u.setQuery(q);
@@ -386,7 +386,7 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
   }
   entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
 
-  if(optionalFields().contains(QLatin1String("mobygames"))) {
+  if(optionalFields().contains(QStringLiteral("mobygames"))) {
     entry->setField(QStringLiteral("mobygames"), mapValue(resultMap_, "moby_url"));
   }
 
@@ -475,7 +475,7 @@ MobyGamesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MobyGamesFe
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 MobyGamesFetcher::defaultName(),
-                                QLatin1String("https://www.mobygames.com/info/api")),
+                                QStringLiteral("https://www.mobygames.com/info/api")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

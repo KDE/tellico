@@ -244,7 +244,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::BookCollection(true));
-  if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QLatin1String("openlibrary"))) {
+  if(!coll->hasField(QStringLiteral("openlibrary")) && optionalFields().contains(QStringLiteral("openlibrary"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("openlibrary"), i18n("OpenLibrary Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -282,7 +282,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     QString binding = mapValue(resultMap, "physical_format");
     if(binding.toLower() == QLatin1String("hardcover")) {
       binding = QStringLiteral("Hardback");
-    } else if(binding.contains(QLatin1String("paperback"), Qt::CaseInsensitive)) {
+    } else if(binding.contains(QStringLiteral("paperback"), Qt::CaseInsensitive)) {
       binding = QStringLiteral("Paperback");
     }
     if(!binding.isEmpty()) {
@@ -293,7 +293,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     entry->setField(QStringLiteral("pages"), mapValue(resultMap, "number_of_pages"));
     entry->setField(QStringLiteral("comments"), mapValue(resultMap, "notes"));
 
-    if(optionalFields().contains(QLatin1String("openlibrary"))) {
+    if(optionalFields().contains(QStringLiteral("openlibrary"))) {
       entry->setField(QStringLiteral("openlibrary"), QLatin1String("http://openlibrary.org") + mapValue(resultMap, "key"));
     }
 

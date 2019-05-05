@@ -263,22 +263,22 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-  if(optionalFields().contains(QLatin1String("tmdb"))) {
+  if(optionalFields().contains(QStringLiteral("tmdb"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("tmdb"), i18n("TMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("imdb"))) {
+  if(optionalFields().contains(QStringLiteral("imdb"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("imdb"), i18n("IMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("alttitle"))) {
+  if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);

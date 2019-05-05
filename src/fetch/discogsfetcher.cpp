@@ -132,7 +132,7 @@ void DiscogsFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                .arg(QLatin1String(TELLICO_VERSION)));
+                                                                .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
@@ -248,19 +248,19 @@ void DiscogsFetcher::slotComplete(KJob*) {
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-  if(optionalFields().contains(QLatin1String("discogs"))) {
+  if(optionalFields().contains(QStringLiteral("discogs"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("discogs"), i18n("Discogs Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("nationality"))) {
+  if(optionalFields().contains(QStringLiteral("nationality"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("nationality"), i18n("Nationality")));
     field->setCategory(i18n("General"));
     field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
     field->setFormatType(FieldFormat::FormatPlain);
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("producer"))) {
+  if(optionalFields().contains(QStringLiteral("producer"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("producer"), i18n("Producer")));
     field->setCategory(i18n("General"));
     field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
@@ -386,7 +386,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   if(entry_->collection()->hasField(QStringLiteral("producer"))) {
     QStringList producers;
     foreach(const QVariant& extraartist, resultMap_.value(QLatin1String("extraartists")).toList()) {
-      if(mapValue(extraartist.toMap(), "role").contains(QLatin1String("Producer"))) {
+      if(mapValue(extraartist.toMap(), "role").contains(QStringLiteral("Producer"))) {
         producers << mapValue(extraartist.toMap(), "name");
       }
     }

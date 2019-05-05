@@ -252,7 +252,7 @@ void GoogleBookFetcher::slotComplete(KJob* job_) {
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-  if(!coll->hasField(QStringLiteral("googlebook")) && optionalFields().contains(QLatin1String("googlebook"))) {
+  if(!coll->hasField(QStringLiteral("googlebook")) && optionalFields().contains(QStringLiteral("googlebook"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("googlebook"), i18n("Google Book Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -345,7 +345,7 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
     entry->setField(QStringLiteral("cover"), mapValue(imageMap, "smallThumbnail"));
   }
 
-  if(optionalFields().contains(QLatin1String("googlebook"))) {
+  if(optionalFields().contains(QStringLiteral("googlebook"))) {
     entry->setField(QStringLiteral("googlebook"), mapValue(volumeMap, "infoLink"));
   }
 }

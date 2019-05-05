@@ -84,7 +84,7 @@ void KinoPoiskFetcher::search() {
   switch(request().key) {
     case Title:
       // first means return first result only
-      //q.addQueryItem(QLatin1String("first"), QLatin1String("yes"));
+      //q.addQueryItem(QStringLiteral("first"), QStringLiteral("yes"));
       q.addQueryItem(QStringLiteral("kp_query"), request().value);
       break;
 
@@ -131,7 +131,7 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
   const QString output = Tellico::decodeHTML(data);
 #if 0
   myWarning() << "Remove debug from kinopoiskfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test1.html"));
+  QFile f(QStringLiteral("/tmp/test1.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -141,9 +141,9 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
 #endif
 
   // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
-  QRegExp resultRx(QLatin1String("<p class=\"name\">\\s*"
-                                 "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
-                                 "<span class=\"year\">(.*)</span"));
+  QRegExp resultRx(QStringLiteral("<p class=\"name\">\\s*"
+                                  "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
+                                  "<span class=\"year\">(.*)</span"));
   resultRx.setMinimal(true);
 
   QString href, title, year;
@@ -204,7 +204,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  if(optionalFields().contains(QLatin1String("kinopoisk"))) {
+  if(optionalFields().contains(QStringLiteral("kinopoisk"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("kinopoisk"), i18n("KinoPoisk Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     entry->collection()->addField(field);
@@ -220,13 +220,13 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QRegExp tagRx(QLatin1String("<.*>"));
+  QRegExp tagRx(QStringLiteral("<.*>"));
   tagRx.setMinimal(true);
 
-  QRegExp anchorRx(QLatin1String("<a\\s+href=\".*\"[^>]*>(.*)</"));
+  QRegExp anchorRx(QStringLiteral("<a\\s+href=\".*\"[^>]*>(.*)</"));
   anchorRx.setMinimal(true);
 
-  QRegExp titleRx(QLatin1String("class=\"moviename-big\"[^>]*>([^(]+).*</"));
+  QRegExp titleRx(QStringLiteral("class=\"moviename-big\"[^>]*>([^(]+).*</"));
   titleRx.setMinimal(true);
   if(str_.contains(titleRx)) {
     QString t = titleRx.cap(1);
@@ -235,23 +235,23 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("title"), t);
   }
 
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
 
-    QRegExp origTitleRx(QLatin1String("itemprop=\"alternativeHeadline\"[^>]*>([^<]+)</"));
+    QRegExp origTitleRx(QStringLiteral("itemprop=\"alternativeHeadline\"[^>]*>([^<]+)</"));
     if(str_.contains(origTitleRx)) {
       entry->setField(QStringLiteral("origtitle"), origTitleRx.cap(1));
     }
   }
 
-  QRegExp yearRx(QLatin1String("<a href=\"/lists/m_act%5Byear[^\"]+\"[^>]*>([^<]+)</a"));
+  QRegExp yearRx(QStringLiteral("<a href=\"/lists/m_act%5Byear[^\"]+\"[^>]*>([^<]+)</a"));
   if(str_.contains(yearRx)) {
     entry->setField(QStringLiteral("year"), yearRx.cap(1));
   }
 
-  QRegExp countryRx(QLatin1String("<a href=\"/lists/m_act%5Bcountry[^\"]+\"[^>]*>([^<]+)</a"));
+  QRegExp countryRx(QStringLiteral("<a href=\"/lists/m_act%5Bcountry[^\"]+\"[^>]*>([^<]+)</a"));
   countryRx.setMinimal(true);
   QStringList countries;
   for(int pos = countryRx.indexIn(str_); pos > -1;
@@ -263,7 +263,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("nationality"), countries.join(Tellico::FieldFormat::delimiterString()));
   }
 
-  QRegExp genreRx(QLatin1String("<a href=\"/lists/m_act%5Bgenre[^\"]+\"[^>]*>([^<]+)</a"));
+  QRegExp genreRx(QStringLiteral("<a href=\"/lists/m_act%5Bgenre[^\"]+\"[^>]*>([^<]+)</a"));
   genreRx.setMinimal(true);
   QStringList genres;
   for(int pos = genreRx.indexIn(str_); pos > -1;
@@ -275,7 +275,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
   }
 
-  QRegExp directorRx(QLatin1String("<td itemprop=\"director\">(.*)</td"));
+  QRegExp directorRx(QStringLiteral("<td itemprop=\"director\">(.*)</td"));
   directorRx.setMinimal(true);
   if(str_.contains(directorRx)) {
     QString s = directorRx.cap(1);
@@ -283,7 +283,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     for(int pos = anchorRx.indexIn(s); pos > -1;
             pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
       QString value = anchorRx.cap(1);
-      if(value != QLatin1String("...")) {
+      if(value != QStringLiteral("...")) {
         directors += value;
       }
     }
@@ -300,7 +300,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     for(int pos = anchorRx.indexIn(s); pos > -1;
             pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
       QString value = anchorRx.cap(1);
-      if(value != QLatin1String("...")) {
+      if(value != QStringLiteral("...")) {
         writers += value;
       }
     }
@@ -309,7 +309,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp producerRx(QLatin1String("<td itemprop=\"producer\">(.*)</td"));
+  QRegExp producerRx(QStringLiteral("<td itemprop=\"producer\">(.*)</td"));
   producerRx.setMinimal(true);
   if(str_.contains(producerRx)) {
     QString s = producerRx.cap(1);
@@ -317,7 +317,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     for(int pos = anchorRx.indexIn(s); pos > -1;
             pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
       QString value = anchorRx.cap(1);
-      if(value != QLatin1String("...")) {
+      if(value != QStringLiteral("...")) {
         producers += value;
       }
     }
@@ -326,7 +326,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp composerRx(QLatin1String("<td itemprop=\"musicBy\">(.*)</td"));
+  QRegExp composerRx(QStringLiteral("<td itemprop=\"musicBy\">(.*)</td"));
   composerRx.setMinimal(true);
   if(str_.contains(composerRx)) {
     QString s = composerRx.cap(1);
@@ -334,7 +334,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     for(int pos = anchorRx.indexIn(s); pos > -1;
             pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
       QString value = anchorRx.cap(1);
-      if(value != QLatin1String("...")) {
+      if(value != QStringLiteral("...")) {
         composers += value;
       }
     }
@@ -351,7 +351,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     for(int pos = anchorRx.indexIn(s); pos > -1;
             pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
       QString value = anchorRx.cap(1);
-      if(value != QLatin1String("...")) {
+      if(value != QStringLiteral("...")) {
         actors += value;
       }
     }
@@ -360,7 +360,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp runtimeRx(QLatin1String("id=\"runtime\">(\\d+)"));
+  QRegExp runtimeRx(QStringLiteral("id=\"runtime\">(\\d+)"));
   if(str_.contains(runtimeRx)) {
     entry->setField(QStringLiteral("running-time"), runtimeRx.cap(1));
   }
@@ -380,7 +380,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   mpaaRx.setMinimal(true);
   if(str_.contains(mpaaRx)) {
     QString value = mpaaRx.cap(1) + QStringLiteral(" (USA)");
-//    entry->setField(QLatin1String("certification"), i18n(value.toUtf8()));
+//    entry->setField(QStringLiteral("certification"), i18n(value.toUtf8()));
     entry->setField(QStringLiteral("certification"), value);
   }
 

@@ -321,14 +321,14 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
   fieldMap.insert(QStringLiteral("Tome"),            QStringLiteral("issue"));
   fieldMap.insert(QStringLiteral("Collection"),      QStringLiteral("edition"));
 
-  if(optionalFields().contains(QLatin1String("isbn"))) {
+  if(optionalFields().contains(QStringLiteral("isbn"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("isbn"), i18n("ISBN#")));
     field->setCategory(i18n("Publishing"));
     field->setDescription(i18n("International Standard Book Number"));
     coll->addField(field);
     fieldMap.insert(QStringLiteral("ISBN"), QStringLiteral("isbn"));
   }
-  if(optionalFields().contains(QLatin1String("colorist"))) {
+  if(optionalFields().contains(QStringLiteral("colorist"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("colorist"), i18n("Colorist")));
     field->setCategory(i18n("General"));
     field->setFlags(Data::Field::AllowCompletion | Data::Field::AllowMultiple | Data::Field::AllowGrouped);
@@ -336,7 +336,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     coll->addField(field);
     fieldMap.insert(QStringLiteral("Couleurs"), QStringLiteral("colorist"));
   }
-  if(optionalFields().contains(QLatin1String("lien-bel"))) {
+  if(optionalFields().contains(QStringLiteral("lien-bel"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("lien-bel"), i18n("Bedetheque Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -393,7 +393,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  if(optionalFields().contains(QLatin1String("comments"))) {
+  if(optionalFields().contains(QStringLiteral("comments"))) {
     QRegExp chronRx(QLatin1String("La chronique\\s*</li>\\s*<li[^>]*>(.*)</ul>"));
     chronRx.setMinimal(true);
     if(chronRx.indexIn(str_) > -1) {
@@ -401,7 +401,7 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  if(optionalFields().contains(QLatin1String("lien-bel"))) {
+  if(optionalFields().contains(QStringLiteral("lien-bel"))) {
     QRegExp linkRx(QLatin1String("<link\\s+rel\\s*=\\s*\"canonical\"\\s+href\\s*=\\s*\"([^\"]+)\""));
     linkRx.setMinimal(true);
     if(linkRx.indexIn(str_) > -1) {

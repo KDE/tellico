@@ -376,7 +376,7 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   Data::EntryPtr e = coll->entries().front();
 
   // try to get a link, but only if necessary
-  if(optionalFields().contains(QLatin1String("url"))) {
+  if(optionalFields().contains(QStringLiteral("url"))) {
     QUrl link(QString::fromLatin1(ENTREZ_BASE_URL));
     link.setPath(link.path() + QLatin1String(ENTREZ_LINK_CGI));
     QUrlQuery q;

@@ -105,15 +105,15 @@ void ISBNdbFetcher::doSearch() {
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
   switch(request().key) {
     case Title:
-      u.setPath(QLatin1String("/books/") + request().value);
+      u.setPath(QStringLiteral("/books/") + request().value);
       break;
 
     case Person:
-      u.setPath(QLatin1String("/author/") + request().value);
+      u.setPath(QStringLiteral("/author/") + request().value);
       break;
 
     case ISBN:
-      u.setPath(QLatin1String("/book/"));
+      u.setPath(QStringLiteral("/book/"));
       {
         // can only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
@@ -291,7 +291,7 @@ void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
   }
 
   const QString dewey = mapValue(resultMap_, "dewey_decimal");
-  if(!dewey.isEmpty() && optionalFields().contains(QLatin1String("dewey"))) {
+  if(!dewey.isEmpty() && optionalFields().contains(QStringLiteral("dewey"))) {
     if(!entry_->collection()->hasField(QStringLiteral("dewey"))) {
       Data::FieldPtr field(new Data::Field(QStringLiteral("dewey"), i18n("Dewey Decimal"), Data::Field::Line));
       field->setCategory(i18n("Publishing"));
@@ -322,7 +322,7 @@ Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
 
 QPointer<KIO::StoredTransferJob> ISBNdbFetcher::isbndbJob(const QUrl& url_, const QString& apiKey_) {
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QLatin1String("X-API-Key: ") + apiKey_);
+  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("X-API-Key: ") + apiKey_);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;
@@ -339,7 +339,7 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QLatin1String("https://isbndb.com/isbn-database")),
+                                QStringLiteral("https://isbndb.com/isbn-database")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

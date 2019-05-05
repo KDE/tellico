@@ -216,12 +216,12 @@ void MovieMeterFetcher::slotComplete(KJob* job_) {
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-  if(optionalFields().contains(QLatin1String("moviemeter"))) {
+  if(optionalFields().contains(QStringLiteral("moviemeter"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("moviemeter"), i18n("MovieMeter Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("alttitle"))) {
+  if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
     coll->addField(field);

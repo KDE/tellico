@@ -96,7 +96,7 @@ void MusicBrainzFetcher::continueSearch() {
 void MusicBrainzFetcher::doSearch() {
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
   // all searches are for musical releases since Tellico only tracks albums
-  u.setPath(u.path() + QLatin1String("release"));
+  u.setPath(u.path() + QStringLiteral("release"));
 
   QString queryString;
   switch(request().key) {
@@ -109,9 +109,9 @@ void MusicBrainzFetcher::doSearch() {
       break;
 
     case Keyword:
-      queryString = QLatin1String("artist:\"") + request().value + QLatin1String("\" OR ") +
-                    QLatin1String("release:\"") + request().value + QLatin1String("\" OR ")  +
-                    QLatin1String("label:\"") + request().value + QLatin1String("\"");
+      queryString = QStringLiteral("artist:\"") + request().value + QStringLiteral("\" OR ") +
+                    QStringLiteral("release:\"") + request().value + QStringLiteral("\" OR ")  +
+                    QStringLiteral("label:\"") + request().value + QStringLiteral("\"");
       break;
 
     case Raw:
@@ -135,7 +135,7 @@ void MusicBrainzFetcher::doSearch() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // see https://musicbrainz.org/doc/XML_Web_Service/Rate_Limiting#Provide_meaningful_User-Agent_strings
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
-                                                                .arg(QLatin1String(TELLICO_VERSION)));
+                                                                .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)),
           SLOT(slotComplete(KJob*)));
@@ -172,7 +172,7 @@ void MusicBrainzFetcher::slotComplete(KJob* ) {
 
 #if 0
   myWarning() << "Remove debug from musicbrainzfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QStringLiteral("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -253,7 +253,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   }
 
   QUrl u(QString::fromLatin1(MUSICBRAINZ_API_URL));
-  u.setPath(u.path() + QLatin1String("release/") + mbid);
+  u.setPath(u.path() + QStringLiteral("release/") + mbid);
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("fmt"), QStringLiteral("xml"));
   q.addQueryItem(QStringLiteral("inc"), QStringLiteral("artists+recordings+release-groups+labels+url-rels"));
@@ -268,7 +268,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
 
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
-                                                                .arg(QLatin1String(TELLICO_VERSION)));
+                                                                .arg(QStringLiteral(TELLICO_VERSION)));
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;
@@ -276,7 +276,7 @@ Tellico::Data::EntryPtr MusicBrainzFetcher::fetchEntryHook(uint uid_) {
   const QString output = XMLHandler::readXMLData(dataJob->data());
 #if 0
   myWarning() << "Remove output debug from musicbrainzfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test2.xml"));
+  QFile f(QStringLiteral("/tmp/test2.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");

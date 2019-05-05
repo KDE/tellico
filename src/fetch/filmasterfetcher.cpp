@@ -229,7 +229,7 @@ void FilmasterFetcher::slotComplete(KJob* job_) {
   }
 
   Data::CollPtr coll(new Data::VideoCollection(true));
-  if(!coll->hasField(QStringLiteral("filmaster")) && optionalFields().contains(QLatin1String("filmaster"))) {
+  if(!coll->hasField(QStringLiteral("filmaster")) && optionalFields().contains(QStringLiteral("filmaster"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("filmaster"), i18n("Filmaster Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
@@ -288,7 +288,7 @@ void FilmasterFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& r
     }
   }
 
-  if(optionalFields().contains(QLatin1String("filmaster"))) {
+  if(optionalFields().contains(QStringLiteral("filmaster"))) {
     entry_->setField(QStringLiteral("filmaster"), QLatin1String("http://filmaster.com/film/") + mapValue(result_, "permalink"));
   }
 }

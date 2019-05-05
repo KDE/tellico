@@ -231,17 +231,17 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   coll->addField(field);
 
 #if 0
-  if(optionalFields().contains(QLatin1String("imdb"))) {
+  if(optionalFields().contains(QStringLiteral("imdb"))) {
     Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("alttitle"))) {
+  if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
@@ -334,7 +334,7 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "Poster"));
   entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "Plot"));
 
-  if(optionalFields().contains(QLatin1String("imdb"))) {
+  if(optionalFields().contains(QStringLiteral("imdb"))) {
     if(!entry_->collection()->hasField(QStringLiteral("imdb"))) {
       Data::FieldPtr field(new Data::Field(QStringLiteral("imdb"), i18n("IMDb Link"), Data::Field::URL));
       field->setCategory(i18n("General"));

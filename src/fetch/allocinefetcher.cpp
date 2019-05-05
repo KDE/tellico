@@ -94,7 +94,7 @@ void AbstractAllocineFetcher::search() {
 
   QUrl u(m_baseUrl);
   u = u.adjusted(QUrl::StripTrailingSlash);
-  u.setPath(u.path() + QLatin1Char('/') + QLatin1String("search"));
+  u.setPath(u.path() + QLatin1Char('/') + QStringLiteral("search"));
 //  myDebug() << u;
 
   // the order of the parameters appears to matter
@@ -106,7 +106,7 @@ void AbstractAllocineFetcher::search() {
   QString q = removeAccents(request().value);
   // should I just remove all non alphabetical characters?
   // see https://bugs.kde.org/show_bug.cgi?id=337432
-  q.remove(QRegExp(QLatin1String("[,:!?;\\(\\)]")));
+  q.remove(QRegExp(QStringLiteral("[,:!?;\\(\\)]")));
   q.replace(QLatin1Char('\''), QLatin1Char('+'));
   q.replace(QLatin1Char(' '), QLatin1Char('+'));
 
@@ -137,7 +137,7 @@ void AbstractAllocineFetcher::search() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   // 10/8/17: UserAgent appears necessary to receive data
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                .arg(QLatin1String(TELLICO_VERSION)));
+                                                                .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
 }
@@ -169,7 +169,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 
   QUrl u(m_baseUrl);
   u = u.adjusted(QUrl::StripTrailingSlash);
-  u.setPath(u.path() + QLatin1Char('/') + QLatin1String("movie"));
+  u.setPath(u.path() + QLatin1Char('/') + QStringLiteral("movie"));
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
@@ -193,7 +193,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
 //  QByteArray data = FileHandler::readDataFile(u, true);
   KIO::StoredTransferJob* dataJob = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   dataJob->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
-                                                                  .arg(QLatin1String(TELLICO_VERSION)));
+                                                                  .arg(QStringLiteral(TELLICO_VERSION)));
   if(!dataJob->exec()) {
     myDebug() << "Failed to load" << u;
     return entry;
@@ -316,12 +316,12 @@ Tellico::Data::CollPtr AbstractAllocineFetcher::createCollection() const {
   coll->addField(field);
 
   // add new fields
-  if(optionalFields().contains(QLatin1String("allocine"))) {
+  if(optionalFields().contains(QStringLiteral("allocine"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("allocine"), i18n("Allocine Link"), Data::Field::URL));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
     f->setFormatType(FieldFormat::FormatTitle);
     coll->addField(f);
@@ -336,7 +336,7 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
   }
 
   entry->setField(QStringLiteral("title"), mapValue(resultMap, "title"));
-  if(optionalFields().contains(QLatin1String("origtitle"))) {
+  if(optionalFields().contains(QStringLiteral("origtitle"))) {
     entry->setField(QStringLiteral("origtitle"), mapValue(resultMap, "originalTitle"));
   }
   if(entry->title().isEmpty()) {
@@ -394,7 +394,7 @@ void AbstractAllocineFetcher::populateEntry(Data::EntryPtr entry, const QVariant
   }
   entry->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
 
-  const QVariantMap colorMap = resultMap.value(QStringLiteral("color")).toMap();
+  const QVariantMap colorMap = resultMap.value(QLatin1String("color")).toMap();
   if(colorMap.value(QStringLiteral("code")) == QLatin1String("12001")) {
     entry->setField(QStringLiteral("color"), i18n("Color"));
   }

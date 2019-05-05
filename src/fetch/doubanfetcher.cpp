@@ -309,14 +309,14 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
     case Data::Collection::Book:
     case Data::Collection::Bibtex:
       coll = new Data::BookCollection(true);
-      if(optionalFields().contains(QLatin1String("origtitle")) &&
+      if(optionalFields().contains(QStringLiteral("origtitle")) &&
         !mapValue(resultMap_, "origin_title").isEmpty() &&
         !coll->hasField(QStringLiteral("origtitle"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
         f->setFormatType(FieldFormat::FormatTitle);
         coll->addField(f);
       }
-      if(optionalFields().contains(QLatin1String("douban")) &&
+      if(optionalFields().contains(QStringLiteral("douban")) &&
         !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
@@ -328,14 +328,14 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
       break;
     case Data::Collection::Video:
       coll = new Data::VideoCollection(true);
-      if(optionalFields().contains(QLatin1String("origtitle")) &&
+      if(optionalFields().contains(QStringLiteral("origtitle")) &&
         !mapValue(resultMap_, "original_title").isEmpty() &&
         !coll->hasField(QStringLiteral("origtitle"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
         f->setFormatType(FieldFormat::FormatTitle);
         coll->addField(f);
       }
-      if(optionalFields().contains(QLatin1String("douban")) &&
+      if(optionalFields().contains(QStringLiteral("douban")) &&
         !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
@@ -347,14 +347,14 @@ Tellico::Data::EntryPtr DoubanFetcher::createEntry(const QVariantMap& resultMap_
       break;
     case Data::Collection::Album:
       coll = new Data::MusicCollection(true);
-      if(optionalFields().contains(QLatin1String("origtitle")) &&
+      if(optionalFields().contains(QStringLiteral("origtitle")) &&
         !mapValue(resultMap_, "original_title").isEmpty() &&
         !coll->hasField(QStringLiteral("origtitle"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
         f->setFormatType(FieldFormat::FormatTitle);
         coll->addField(f);
       }
-      if(optionalFields().contains(QLatin1String("douban")) &&
+      if(optionalFields().contains(QStringLiteral("douban")) &&
         !mapValue(resultMap_, "alt").isEmpty() &&
         !coll->hasField(QStringLiteral("douban"))) {
         Data::FieldPtr f(new Data::Field(QStringLiteral("douban"), i18n("Douban Link"), Data::Field::URL));
@@ -391,11 +391,11 @@ void DoubanFetcher::populateBookEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QStringLiteral("cover"), mapValue(resultMap_, "image"));
   entry->setField(QStringLiteral("keyword"), mapValue(resultMap_, "tags", "title"));
 
-  if(optionalFields().contains(QLatin1String("origtitle")) &&
+  if(optionalFields().contains(QStringLiteral("origtitle")) &&
      !mapValue(resultMap_, "origin_title").isEmpty()) {
     entry->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "origin_title"));
   }
-  if(optionalFields().contains(QLatin1String("douban"))) {
+  if(optionalFields().contains(QStringLiteral("douban"))) {
     entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "alt"));
   }
   entry->setField(QStringLiteral("plot"), mapValue(resultMap_, "summary"));
@@ -416,11 +416,11 @@ void DoubanFetcher::populateVideoEntry(Data::EntryPtr entry, const QVariantMap& 
   }
   entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
 
-  if(optionalFields().contains(QLatin1String("origtitle")) &&
+  if(optionalFields().contains(QStringLiteral("origtitle")) &&
      !mapValue(resultMap_, "original_title").isEmpty()) {
     entry->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "original_title"));
   }
-  if(optionalFields().contains(QLatin1String("douban"))) {
+  if(optionalFields().contains(QStringLiteral("douban"))) {
     entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "alt"));
   }
 }
@@ -469,11 +469,11 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
   }
   entry->setField(QStringLiteral("track"), tracks.join(FieldFormat::rowDelimiterString()));
 
-  if(optionalFields().contains(QLatin1String("origtitle")) &&
+  if(optionalFields().contains(QStringLiteral("origtitle")) &&
      !mapValue(resultMap_, "original_title").isEmpty()) {
     entry->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "original_title"));
   }
-  if(optionalFields().contains(QLatin1String("douban"))) {
+  if(optionalFields().contains(QStringLiteral("douban"))) {
     entry->setField(QStringLiteral("douban"), mapValue(resultMap_, "alt"));
   }
 }
