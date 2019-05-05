@@ -419,6 +419,8 @@ bool Z3950Connection::makeConnection() {
     done(s, MessageHandler::Error);
     return false;
   }
+#else
+  Q_UNUSED(m_port);
 #endif
   m_connected = true;
   return true;
