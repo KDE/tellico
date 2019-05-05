@@ -759,7 +759,6 @@ void MainWindow::initView() {
 
   m_collectionViewDock = new GUI::DockWidget(i18n("Collection View"), m_dummyWindow);
   m_collectionViewDock->setObjectName(QStringLiteral("collection_dock"));
-  m_collectionViewDock->setAllowedAreas(Qt::DockWidgetAreas(Qt::TopDockWidgetArea | Qt::BottomDockWidgetArea));
 
   m_viewStack = new ViewStack(this);
 
