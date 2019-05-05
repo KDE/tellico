@@ -79,6 +79,9 @@ public:
 public Q_SLOTS:
   void slotResetCollection();
 
+protected:
+  void closeEvent(QCloseEvent* event) Q_DECL_OVERRIDE;
+
 private Q_SLOTS:
   void slotSearchClicked();
   void slotClearClicked();

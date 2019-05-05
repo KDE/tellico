@@ -368,12 +368,18 @@ FetchDialog::~FetchDialog() {
   config.writeEntry("Search Source", m_sourceCombo->currentText());
 }
 
+void FetchDialog::closeEvent(QCloseEvent* event_) { // stop fetchers when the dialog is closed
+  if(m_started) {
+    QTimer::singleShot(0, Fetch::Manager::self(), SLOT(stop()));
+  }
+  QDialog::closeEvent(event_);
+}
+
 void FetchDialog::slotSearchClicked() {
   m_valueLineEdit->selectAll();
   if(m_started) {
     setStatus(i18n("Cancelling the search..."));
     Fetch::Manager::self()->stop();
-    slotFetchDone();
   } else {
     const QString value = m_valueLineEdit->text().simplified();
     m_resultCount = 0;
@@ -431,7 +437,7 @@ void FetchDialog::setStatus(const QString& text_) {
 }
 
 void FetchDialog::slotFetchDone(bool checkISBN_ /* = true */) {
-//  myDebug();
+//  myDebug() << "slotFetchDone";
   m_started = false;
   KGuiItem::assign(m_searchButton, KGuiItem(i18n(FETCH_STRING_SEARCH),
                                             QIcon::fromTheme(QStringLiteral("edit-find"))));

@@ -82,7 +82,6 @@ public:
   KeyMap keyMap(const QString& source = QString()) const;
   void startSearch(const QString& source, FetchKey key, const QString& value);
   void continueSearch();
-  void stop();
   bool canFetch() const;
   bool hasMoreResults() const;
   void loadFetchers();
@@ -112,6 +111,9 @@ Q_SIGNALS:
   void signalStatus(const QString& status);
   void signalResultFound(Tellico::Fetch::FetchResult* result);
   void signalDone();
+
+public Q_SLOTS:
+  void stop();
 
 private Q_SLOTS:
   void slotFetcherDone(Tellico::Fetch::Fetcher* fetcher);
