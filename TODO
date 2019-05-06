@@ -22,3 +22,4 @@ Science Direct API v2 https://dev.elsevier.com
 
 Replace most of the toggle actions in the view settings with KDualAction
 Update doc for MobyGames and data source changes
+Port away from QImageBlitz to use QGradient

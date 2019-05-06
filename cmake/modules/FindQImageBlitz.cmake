@@ -20,32 +20,34 @@ if (NOT WIN32)
     # use pkg-config to get the directories and then use these values
     # in the FIND_PATH() and FIND_LIBRARY() calls
     find_package(PkgConfig)
-    pkg_check_modules(PC_QIMAGEBLITZ QUIET qimageblitz)
+    pkg_check_modules(PC_QIMAGEBLITZ5 QUIET qimageblitz5)
+    if(NOT PC_QIMAGEBLITZ5_FOUND)
+        pkg_check_modules(PC_QIMAGEBLITZ QUIET qimageblitz>=5.0)
+    endif()
 endif (NOT WIN32)
 
 find_path(QIMAGEBLITZ_INCLUDES
-  NAMES
-  qimageblitz.h
-  PATH_SUFFIXES qimageblitz
+  NAMES qimageblitz.h
+  PATH_SUFFIXES qimageblitz5 qimageblitz
   HINTS
   $ENV{QIMAGEBLITZDIR}/include
+  ${PC_QIMAGEBLITZ5_INCLUDEDIR}
   ${PC_QIMAGEBLITZ_INCLUDEDIR}
-  ${KDE4_INCLUDE_DIR}
   ${INCLUDE_INSTALL_DIR}
 )
 
 find_library_with_debug(QIMAGEBLITZ_LIBRARIES
   WIN32_DEBUG_POSTFIX d
-  qimageblitz
+  NAMES qimageblitz5 qimageblitz
   HINTS
   $ENV{QIMAGEBLITZDIR}/lib
+  ${PC_QIMAGEBLITZ5_LIBDIR}
   ${PC_QIMAGEBLITZ_LIBDIR}
-  ${KDE4_LIB_DIR}
   ${LIB_INSTALL_DIR}
 )
 
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(QImageBlitz DEFAULT_MSG 
+find_package_handle_standard_args(QImageBlitz DEFAULT_MSG
                                   QIMAGEBLITZ_INCLUDES QIMAGEBLITZ_LIBRARIES)
 
 mark_as_advanced(QIMAGEBLITZ_INCLUDES QIMAGEBLITZ_LIBRARIES)
