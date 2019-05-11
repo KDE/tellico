@@ -44,6 +44,7 @@
 #include <QFile>
 #include <QApplication>
 #include <QUrlQuery>
+#include <QThread>
 
 namespace {
   static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
@@ -116,15 +117,31 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   // could return HTTP 202 while the caching system generates the file
   // see http://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop
   // also has a root node of message. Try 5 times, waiting by 2 seconds each time
-  int loopCount = 0;
-  while(loopCount < 5 && dom.documentElement().tagName() == QLatin1String("message")) {
+  bool hasMessage = dom.documentElement().tagName() == QLatin1String("message");
+  for(int loopCount = 0; hasMessage && loopCount < 5; ++loopCount) {
     // wait 2 seconds and try again
-    QTime dieTime = QTime::currentTime().addSecs(2);
-    while(QTime::currentTime() < dieTime) {
-      QCoreApplication::processEvents(QEventLoop::AllEvents, 100); 
+    QTime timer;
+    timer.start();
+    while(timer.elapsed() < 2000) {
+      QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+      QThread::msleep(500);
     }
     dom = FileHandler::readXMLDocument(u, false, true);
-    ++loopCount;
+    hasMessage = dom.documentElement().tagName() == QLatin1String("message");
+  }
+
+  if(hasMessage) {
+    myDebug() << "BoardGameGeekImporter still has message and no collection";
+#if 0
+    myWarning() << "Remove debug from boardgamegeekimporter.cpp";
+    QFile f(QStringLiteral("/tmp/bgg-message.xml"));
+    if(f.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f);
+      t.setCodec("UTF-8");
+      t << dom.toString();
+    }
+    f.close();
+#endif
   }
 
   QDomNodeList items = dom.documentElement().elementsByTagName(QStringLiteral("item"));
@@ -139,7 +156,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   }
 
   if(idList.isEmpty()) {
-    myLog() << "No items found";
+    myLog() << "No items found in BGG collection";
     return Data::CollPtr();
   }
 
@@ -162,7 +179,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
 #if 0
     const QString xmlData = text(ids);
     myWarning() << "Remove debug from boardgamegeekimporter.cpp";
-    QFile f(QLatin1String("/tmp/test.xml"));
+    QFile f(QStringLiteral("/tmp/test.xml"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
       t.setCodec("UTF-8");
@@ -174,10 +191,23 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
     QString str = handler.applyStylesheet(text(ids));
 //    QString str = handler.applyStylesheet(xmlData);
     //  myDebug() << str;
+#if 0
+    myWarning() << "Remove debug2 from boardgamegeekimporter.cpp";
+    QFile f2(QStringLiteral("/tmp/test.tc"));
+    if(f2.open(QIODevice::WriteOnly)) {
+      QTextStream t(&f2);
+      t.setCodec("UTF-8");
+      t << str;
+    }
+    f2.close();
+#endif
 
     Import::TellicoImporter imp(str);
     imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
     Data::CollPtr c = imp.collection();
+    if(!c) {
+      continue;
+    }
     // assume we always want the 3 extra fields defined in boardgamegeek2tellico.xsl
     if(!m_coll->hasField(QStringLiteral("bggid"))) {
       m_coll->addField(Data::FieldPtr(new Data::Field(*c->fieldByName(QStringLiteral("bggid")))));
@@ -187,11 +217,11 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
       f->setTitle(i18nc("Comic Book Illustrator", "Artist"));
       m_coll->addField(f);
     }
-    m_coll->addEntries(imp.collection()->entries());
+    m_coll->addEntries(c->entries());
     setStatusMessage(imp.statusMessage());
 
     if(showProgress) {
-      emit signalProgress(this, 10 + 100*j/idList.size());
+      emit signalProgress(this, 10 + 100*maxSize/idList.size());
       qApp->processEvents();
     }
   }
