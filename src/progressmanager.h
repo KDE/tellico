@@ -47,7 +47,7 @@ friend class ProgressManager;
 public:
   class Done {
   public:
-    Done(QObject* obj) : m_object(obj) {}
+    Done(QObject* object);
     ~Done();
   private:
     QPointer<QObject> m_object;
@@ -57,7 +57,6 @@ public:
   const QString& label() const { return m_label; }
   void setLabel(const QString& label);
 
-//  uint progress() const { return m_total ? (100*m_completed/m_total) : 0; }
   qulonglong progress() const { return m_progress; }
   void setProgress(qulonglong steps);
   qulonglong totalSteps() const { return m_total; }
@@ -83,6 +82,7 @@ private:
   qulonglong m_progress;
   qulonglong m_total;
   bool m_cancelled;
+  bool m_done;
 };
 
 /**

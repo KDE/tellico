@@ -26,6 +26,7 @@
 #include "statusbar.h"
 #include "../progressmanager.h"
 #include "progress.h"
+#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 #include <KStandardGuiItem>
@@ -64,8 +65,8 @@ StatusBar::StatusBar(QWidget* parent_) : QStatusBar(parent_) {
   m_cancelButton->hide();
 
   ProgressManager* pm = ProgressManager::self();
-  connect(pm, SIGNAL(signalTotalProgress(qulonglong)), SLOT(slotProgress(qulonglong)));
-  connect(m_cancelButton, SIGNAL(clicked()), pm, SLOT(slotCancelAll()));
+  connect(pm, &ProgressManager::signalTotalProgress, this, &StatusBar::slotProgress);
+  connect(m_cancelButton, &QPushButton::clicked, pm, &ProgressManager::slotCancelAll);
 }
 
 void StatusBar::ensurePolished() const {
@@ -101,6 +102,7 @@ void StatusBar::setCount(const QString& count_) {
 }
 
 void StatusBar::slotProgress(qulonglong progress_) {
+//  myDebug() << "Progress" << progress_;
   // yes, yes, yes, casting from longlong to int is bad, I know...
   m_progress->setValue(progress_);
   if(m_progress->isDone()) {

@@ -150,11 +150,11 @@ ImportDialog::~ImportDialog() {
 Tellico::Data::CollPtr ImportDialog::collection() {
   if(m_importer && !m_coll) {
     ProgressItem& item = ProgressManager::self()->newProgressItem(m_importer, m_importer->progressLabel(), true);
-    connect(m_importer, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
-            ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
-    connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
-            ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-    connect(&item, &Tellico::ProgressItem::signalCancelled, m_importer, &Tellico::Import::Importer::slotCancel);
+    connect(m_importer, &Import::Importer::signalTotalSteps,
+            ProgressManager::self(), &ProgressManager::setTotalSteps);
+    connect(m_importer, &Import::Importer::signalProgress,
+            ProgressManager::self(), &ProgressManager::setProgress);
+    connect(&item, &ProgressItem::signalCancelled, m_importer, &Import::Importer::slotCancel);
     ProgressItem::Done done(m_importer);
     m_coll = m_importer->collection();
   }

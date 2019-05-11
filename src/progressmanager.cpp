@@ -37,6 +37,10 @@ uint qHash(const QPointer<T>& pointer_) {
   return qHash(pointer_.data());
 }
 
+ProgressItem::Done::Done(QObject* obj) : m_object(obj) {
+//  myDebug() << "**Done Item for" << m_object->metaObject()->className();
+}
+
 ProgressItem::Done::~Done() {
   // m_object might have been deleted, so check for existence
   if(m_object) {
@@ -44,18 +48,25 @@ ProgressItem::Done::~Done() {
   }
 }
 
+/* *********************************************** */
+
 ProgressItem::ProgressItem(const QString& label_, bool canCancel_)
     : m_label(label_)
     , m_canCancel(canCancel_)
     , m_progress(0)
     , m_total(0)
-    , m_cancelled(false) {
+    , m_cancelled(false)
+    , m_done(false) {
 }
 
 ProgressItem::~ProgressItem() {
 }
 
 void ProgressItem::setProgress(qulonglong steps_) {
+  if(m_done) {
+    myDebug() << "Setting progress on item already done";
+    return;
+  }
   m_progress = steps_;
   emit signalProgress(this);
 
@@ -73,9 +84,14 @@ void ProgressItem::setDone() {
   if(!m_cancelled) {
     m_progress = m_total;
   }
-  emit signalDone(this);
+  if(m_done) {
+    myDebug() << "Progress item is already done";
+  } else {
+    m_done = true;
+    emit signalDone(this);
+  }
   // make sure the deleting doesn't interfere with anything
-  QTimer::singleShot(3000, this, SLOT(deleteLater()));
+  QTimer::singleShot(3000, this, &QObject::deleteLater);
 }
 
 void ProgressItem::cancel() {
@@ -85,7 +101,10 @@ void ProgressItem::cancel() {
 
   m_cancelled = true;
   emit signalCancelled(this);
+  m_done = true;
 }
+
+/* *********************************************** */
 
 ProgressManager::ProgressManager() : QObject() {
 }
@@ -128,7 +147,6 @@ void ProgressManager::setDone(ProgressItem* item_) {
     return;
   }
   item_->setDone();
-//  updateTotalProgress();
 }
 
 void ProgressManager::slotItemDone(ProgressItem* item_) {
@@ -139,14 +157,13 @@ void ProgressManager::slotItemDone(ProgressItem* item_) {
     }
   }
   slotUpdateTotalProgress();
-//  emit signalItemDone(item_);
 }
 
 ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
                                                    const QString& label_,
                                                    bool canCancel_) {
   Q_ASSERT(owner_);
-//  myDebug() << owner_->className() << ":" << label_;
+//  myDebug() << "Progress Item for" << owner_->metaObject()->className() << ":" << label_;
   if(m_items.contains(owner_)) {
     return *m_items[owner_];
   }
@@ -157,8 +174,6 @@ ProgressItem& ProgressManager::newProgressItemImpl(QObject* owner_,
   connect(item, &Tellico::ProgressItem::signalTotalSteps,
           this, &Tellico::ProgressManager::slotUpdateTotalProgress);
   connect(item, &Tellico::ProgressItem::signalProgress,
-          this, &Tellico::ProgressManager::slotUpdateTotalProgress);
-  connect(item, &Tellico::ProgressItem::signalDone,
           this, &Tellico::ProgressManager::slotUpdateTotalProgress);
   connect(item, &Tellico::ProgressItem::signalDone,
           this, &Tellico::ProgressManager::slotItemDone);
@@ -178,7 +193,9 @@ void ProgressManager::slotUpdateTotalProgress() {
   }
 
   if(total == 0) {
-    emit signalTotalProgress(100);
+    if(!m_items.isEmpty()) {
+      emit signalTotalProgress(100);
+    }
     return;
   }
 
