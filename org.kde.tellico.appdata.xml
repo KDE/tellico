@@ -478,10 +478,10 @@
       <li xml:lang="x-test">xxScans and imports audio file collections, such as mp3 or oggxx</li>
     </ul>
   </description>
-  <url type="homepage">http://tellico-project.org/</url>
+  <url type="homepage">http://tellico-project.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=tellico</url>
   <url type="faq">http://tellico-project.org/faq</url>
-  <url type="help">http://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
+  <url type="help">https://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
   <screenshots>
     <screenshot type="default" width="867" height="627">
       <caption>The main window showing a simple item in a book collection</caption>
@@ -503,11 +503,28 @@
       <caption xml:lang="sv">Huvudfönstret som visar ett enkelt objekt i en boksamling</caption>
       <caption xml:lang="uk">Головне вікно програми із простим записом у збірці книжок</caption>
       <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
-      <image>http://kde.org/images/screenshots/tellico.png</image>
+      <image>https://kde.org/images/screenshots/tellico.png</image>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
   <provides>
     <binary>tellico</binary>
   </provides>
+  <releases>
+    <release version="3.1"   date="2017-10-14">
+      <url>https://tellico-project.org/tellico-31-released</url>
+    </release>
+    <release version="3.1.1" date="2018-01-15">
+      <url>https://tellico-project.org/tellico-311-released</url>
+    </release>
+    <release version="3.1.2" date="2018-03-28">
+      <url>https://tellico-project.org/tellico-312-released</url>
+    </release>
+    <release version="3.1.3" date="2018-09-03">
+      <url>https://tellico-project.org/tellico-313-released</url>
+    </release>
+    <release version="3.1.4" date="2018-12-20">
+      <url>https://tellico-project.org/tellico-314-released</url>
+    </release>
+  </releases>
 </component>
