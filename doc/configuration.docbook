@@ -154,29 +154,29 @@ Entry templates are saved in <filename class="directory">$<envar>KDEHOME</envar>
 
 <para>
 &appname; can use various sources for importing data, which can be configured
-in the Data Sources Dialog. There are many available types and sources. A few of them are listed below.</para>
+in the Data Sources Dialog. There are many available types and sources. A few of them are listed below,
+while the full list is <ulink url="http://tellico-project.org/data-sources">available on the Tellico web site</ulink>.</para>
 
 <itemizedlist>
-<listitem><para><link linkend="amazon-web-services">Amazon.com Web Services</link>,</para></listitem>
-<listitem><para>the <link linkend="imdb">Internet Movie Database</link>,</para></listitem>
-<listitem><para><link linkend="z3950">z39.50 servers</link>,</para></listitem>
-<listitem><para><link linkend="sru">SRU servers</link>,</para></listitem>
-<listitem><para><link linkend="entrez">Entrez (PubMed) databases</link>,</para></listitem>
-<listitem><para><link linkend="animenfo">AnimeNfo.com</link>,</para></listitem>
-<listitem><para><link linkend="ibs">Internet Bookshop Italia</link>,</para></listitem>
-<listitem><para><link linkend="isbndb">ISBNdb.com</link>,</para></listitem>
-<listitem><para><link linkend="bib-sources">arxiv.org</link>,</para></listitem>
-<listitem><para><link linkend="bib-sources">bibsonomy.org</link>,</para></listitem>
-<listitem><para><link linkend="bib-sources">crossref.org</link>,</para></listitem>
-<listitem><para><link linkend="discogs">Discogs.com</link>,</para></listitem>
-<listitem><para><link linkend="tmdb">TheMovieDB.org</link>,</para></listitem>
-<listitem><para><link linkend="tgdb">TheGamesDB.net</link>,</para></listitem>
-<listitem><para><link linkend="omdb">OMDBAPI.com</link>,</para></listitem>
-<listitem><para><link linkend="musicbrainz">MusicBrainz.org</link>,</para></listitem>
-<listitem><para><link linkend="giantbomb">GiantBomb.com</link>,</para></listitem>
-<listitem><para><link linkend="openlibrary">OpenLibrary.org</link>,</para></listitem>
-<listitem><para><link linkend="externalexec">other external scripts or applications</link>, and</para></listitem>
-<listitem><para><link linkend="multiple-sources">combinations of any of the above sources</link>.</para></listitem>
+<listitem><simpara><link linkend="amazon-web-services">Amazon.com Web Services</link>,</simpara></listitem>
+<listitem><simpara>the <link linkend="imdb">Internet Movie Database</link>,</simpara></listitem>
+<listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
+<listitem><simpara><link linkend="z3950">z39.50 servers</link>,</simpara></listitem>
+<listitem><simpara><link linkend="sru">SRU servers</link>,</simpara></listitem>
+<listitem><simpara><link linkend="entrez">Entrez (PubMed) databases</link>,</simpara></listitem>
+<listitem><simpara><link linkend="animenfo">AnimeNfo.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="bedetheque">BDGest</link>,</simpara></listitem>
+<listitem><simpara><link linkend="isbndb">ISBNdb.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="bib-sources">arxiv.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="discogs">Discogs.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="tmdb">TheMovieDB.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="tgdb">TheGamesDB.net</link>,</simpara></listitem>
+<listitem><simpara><link linkend="omdb">OMDBAPI.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="musicbrainz">MusicBrainz.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="giantbomb">GiantBomb.com</link>,</simpara></listitem>
+<listitem><simpara><link linkend="openlibrary">OpenLibrary.org</link>,</simpara></listitem>
+<listitem><simpara><link linkend="externalexec">other external scripts or applications</link>, and</simpara></listitem>
+<listitem><simpara><link linkend="multiple-sources">combinations of any of the above sources</link>.</simpara></listitem>
 </itemizedlist>
 
 <screenshot>
@@ -192,12 +192,6 @@ New sources may be added by clicking the <guibutton>New...</guibutton> button, w
 existing ones may be modified or deleted, using the <guibutton>Modify...</guibutton> or
 <guibutton>Delete</guibutton> buttons. The order of the sources, which shows up in the
 entry updating menus, can also be changed.
-</para>
-
-<para>
-Additional templates may be downloaded from the author's online repository by clicking
-the <guilabel>Download</guilabel> button. Those scripts are gpg-signed by the author to
-guard against dangerous scripts from unknown sources, which could cause damage to your system.
 </para>
 
 <warning>
@@ -279,17 +273,10 @@ the best known.
 <ulink url="http://arxiv.org">arXiv.org</ulink>, <ulink url="http://bibsonomy.org">Bibsonomy</ulink>, and <ulink url="http://crossref.org">CrossRef</ulink> are online databases for academic articles and bibliographic information. For access to the CrossRef source, you must <ulink url="http://www.crossref.org/requestaccount/">request an account</ulink> and add your account information to the data source configuration.</para>
 </sect3>
 
-<sect3 id="ibs">
-<title>Internet Bookstore Italia</title>
-<para>
-<ulink url="http://ibs.it">IBS, or Internet Bookstore Italia</ulink>, is an online Italian bookstore.
-</para>
-</sect3>
-
 <sect3 id="isbndb">
 <title>ISBNdb.com</title>
 <para>
-<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, with data collection libraries around the world.
+<ulink url="http://isbndb.com">ISBNdb.com</ulink> is an online book database, from libraries around the world.
 </para>
 </sect3>
 
@@ -311,6 +298,13 @@ the best known.
 <title>AnimeNfo.com</title>
 <para>
 <ulink url="http://www.animenfo.com">AnimeNfo</ulink> is a popular site for information on anime, or Japanese animation.
+</para>
+</sect3>
+
+<sect3 id="bedetheque">
+<title>Bedetheque</title>
+<para>
+<ulink url="http://www.bedetheque.com">Bedetheque</ulink> is a French comic book database, managed by BDGest.
 </para>
 </sect3>
 
@@ -346,6 +340,13 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <title>OMDBAPI.com</title>
 <para>
 <ulink url="http://omdbapi.com">The Open Movie Database</ulink> is a free web service to obtain movie information.
+</para>
+</sect3>
+
+<sect3 id="allocine">
+<title>AlloCiné</title>
+<para>
+<ulink url="http://allocine.fr">AlloCiné</ulink> is an online movie information service, based in France.
 </para>
 </sect3>
 
@@ -417,6 +418,9 @@ France, Canada, China, Spain, Italy, Brazil, Australia, India, Mexico, and Turke
 <para>
 Configuring each Amazon.com source involves three settings: the server location, image size, and associate's ID. Some information
 from <ulink url="http://amazon.com">Amazon.com</ulink> may include an image, such as a book or video cover. That image may be downloaded in three different sizes, depending on the item. The associate's ID must be used to access the Amazon.com Web Services, and is included in the links back to the item, as dictated by the license agreement for the use of the Amazon.com Web Services.
+</para>
+
+<para>Access to the <ulink url="https://docs.aws.amazon.com/AWSECommerceService/latest/DG/Welcome.html">Amazon Product Advertising API</ulink> may have restrictions related to sales referrals or advertising. Refer to the Amazon documentation for further information when signing up for API access.
 </para>
 
 </sect3>

@@ -39,8 +39,8 @@ need them for translation coordination !
 Please respect the format of the date (DD/MM/YYYY) and of the version
 (V.MM.LL), it could be used by automation scripts.
 Do NOT change these in the translation. -->
-<date>28/08/2009</date>
-<releaseinfo>2.0</releaseinfo>
+<date>12/05/2019</date>
+<releaseinfo>3.2</releaseinfo>
 
 <title>The &tellico; Handbook</title>
 
@@ -56,17 +56,7 @@ Do NOT change these in the translation. -->
 </authorgroup>
 
 <copyright>
-<year>2001</year>
-<year>2002</year>
-<year>2003</year>
-<year>2004</year>
-<year>2005</year>
-<year>2006</year>
-<year>2007</year>
-<year>2008</year>
-<year>2009</year>
-<year>2010</year>
-<year>2011</year>
+<year>2001-2019</year>
 <holder>&robby;</holder>
 </copyright>
 
@@ -147,7 +137,7 @@ little information as you like.
 </para>
 
 <para>
-Loans may be tracked, with optional integration with &korganizer;. Collections may be
+Loans of items in your collection may be tracked, including a due date. Collections may be
 imported or exported using a variety of formats, to allow for easy exchange
 or publication of data.
 </para>
@@ -254,10 +244,10 @@ file included in the KDE distribution. -->
 &tellico;
 </para>
 <para>
-Program copyright 2001-2011 &robby; <email>&email;</email>
+Program copyright 2001-2019 &robby; <email>&email;</email>
 </para>
 <para>
-Documentation copyright 2001-2011 &robby; <email>&email;</email>
+Documentation copyright 2001-2019 &robby; <email>&email;</email>
 </para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
