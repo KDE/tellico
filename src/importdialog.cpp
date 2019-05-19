@@ -120,7 +120,8 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
     topLayout->addWidget(w, 0);
   }
 
-  connect(m_buttonGroup, SIGNAL(buttonClicked(int)), m_importer, SLOT(slotActionChanged(int)));
+  connect(m_buttonGroup, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+          m_importer, &Tellico::Import::Importer::slotActionChanged);
 
   topLayout->addStretch();
 
@@ -129,9 +130,9 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(okButton, SIGNAL(clicked()), SLOT(slotOk()));
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(okButton, &QPushButton::clicked, this, &ImportDialog::slotOk);
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &ImportDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &ImportDialog::reject);
 
   KGuiItem ok = KStandardGuiItem::ok();
   ok.setText(i18n("&Import"));
@@ -139,7 +140,7 @@ ImportDialog::ImportDialog(Tellico::Import::Format format_, const QList<QUrl>& u
 
   // want to grab default button action, too
   // since the importer might do something with widgets, don't just call it, do it after layout is done
-  QTimer::singleShot(0, this, SLOT(slotUpdateAction()));
+  QTimer::singleShot(0, this, &ImportDialog::slotUpdateAction);
 }
 
 ImportDialog::~ImportDialog() {
@@ -441,11 +442,11 @@ Tellico::Data::CollPtr ImportDialog::importURL(Tellico::Import::Format format_, 
   }
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
-  connect(imp, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
-  connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, &Tellico::ProgressItem::signalCancelled, imp, &Tellico::Import::Importer::slotCancel);
+  connect(imp, &Import::Importer::signalTotalSteps,
+          ProgressManager::self(), &ProgressManager::setTotalSteps);
+  connect(imp, &Import::Importer::signalProgress,
+          ProgressManager::self(), &ProgressManager::setProgress);
+  connect(&item, &ProgressItem::signalCancelled, imp, &Import::Importer::slotCancel);
   ProgressItem::Done done(imp);
 
   Data::CollPtr c = imp->collection();
@@ -463,15 +464,15 @@ Tellico::Data::CollPtr ImportDialog::importText(Tellico::Import::Format format_,
   }
 
   // the Done() constructor crashes for some reason, so just don't use it
-/*
+  // 5/18/19 -> uncomment the progress Done again
   ProgressItem& item = ProgressManager::self()->newProgressItem(imp, imp->progressLabel(), true);
-  connect(imp, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
-  connect(imp, SIGNAL(signalProgress(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, &Tellico::ProgressItem::signalCancelled, imp, &Tellico::Import::Importer::slotCancel);
+  connect(imp, &Import::Importer::signalTotalSteps,
+          ProgressManager::self(), &ProgressManager::setTotalSteps);
+  connect(imp, &Import::Importer::signalProgress,
+          ProgressManager::self(), &ProgressManager::setProgress);
+  connect(&item, &ProgressItem::signalCancelled, imp, &Import::Importer::slotCancel);
   ProgressItem::Done done(imp);
-*/
+
   Data::CollPtr c = imp->collection();
   if(!c && !imp->statusMessage().isEmpty()) {
     GUI::Proxy::sorry(imp->statusMessage());

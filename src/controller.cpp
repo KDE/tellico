@@ -30,6 +30,7 @@
 #include "entryview.h"
 #include "entryiconview.h"
 #include "entry.h"
+#include "entrygroup.h"
 #include "field.h"
 #include "filter.h"
 #include "filterdialog.h"
@@ -147,18 +148,17 @@ void Controller::slotCollectionAdded(Tellico::Data::CollPtr coll_) {
 
   // there really should be a lot of signals to connect to, but right now, the only one
   // is used when a field is added on a merge
-  connect(coll_.data(), SIGNAL(mergeAddedField(Tellico::Data::CollPtr, Tellico::Data::FieldPtr)),
-          this, SLOT(slotFieldAdded(Tellico::Data::CollPtr, Tellico::Data::FieldPtr)));
+  connect(&*coll_, &Data::Collection::mergeAddedField,
+          this, &Controller::slotFieldAdded);
 
   emit collectionAdded(coll_->type());
 
   updateActions();
 
-  connect(&*coll_, SIGNAL(signalGroupsModified(Tellico::Data::CollPtr, QList<Tellico::Data::EntryGroup*>)),
-          m_mainWindow->m_groupView, SLOT(slotModifyGroups(Tellico::Data::CollPtr, QList<Tellico::Data::EntryGroup*>)));
-
-  connect(&*coll_, SIGNAL(signalRefreshField(Tellico::Data::FieldPtr)),
-          this, SLOT(slotRefreshField(Tellico::Data::FieldPtr)));
+  connect(&*coll_, &Data::Collection::signalGroupsModified,
+          m_mainWindow->m_groupView, &GroupView::slotModifyGroups);
+  connect(&*coll_, &Data::Collection::signalRefreshField,
+          this, &Controller::slotRefreshField);
 }
 
 void Controller::slotCollectionModified(Tellico::Data::CollPtr coll_) {
