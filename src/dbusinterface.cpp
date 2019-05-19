@@ -50,7 +50,7 @@ Tellico::Import::Action ApplicationInterface::actionType(const QString& actionNa
   return Import::Replace;
 }
 
-QList<int> ApplicationInterface::selectedEntries() const {
+QList<int> ApplicationInterface::selectedEntries() {
   QList<int> ids;
   foreach(Data::EntryPtr entry, Controller::self()->selectedEntries()) {
     ids << entry->id();
@@ -58,7 +58,7 @@ QList<int> ApplicationInterface::selectedEntries() const {
   return ids;
 }
 
-QList<int> ApplicationInterface::filteredEntries() const {
+QList<int> ApplicationInterface::filteredEntries() {
   QList<int> ids;
   foreach(Data::EntryPtr entry, Controller::self()->visibleEntries()) {
     ids << entry->id();
@@ -113,7 +113,7 @@ bool CollectionInterface::removeEntry(int id_) {
   return !coll->entryById(id_);
 }
 
-QStringList CollectionInterface::allValues(const QString& fieldName_) const {
+QStringList CollectionInterface::allValues(const QString& fieldName_) {
   QStringList results;
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
@@ -137,7 +137,7 @@ QStringList CollectionInterface::allValues(const QString& fieldName_) const {
   return results;
 }
 
-QStringList CollectionInterface::entryValues(int id_, const QString& fieldName_) const {
+QStringList CollectionInterface::entryValues(int id_, const QString& fieldName_) {
   QStringList results;
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll) {
@@ -161,7 +161,7 @@ QStringList CollectionInterface::entryValues(int id_, const QString& fieldName_)
   return results;
 }
 
-QStringList CollectionInterface::selectedBibtexKeys() const {
+QStringList CollectionInterface::selectedBibtexKeys() {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
     return QStringList();
@@ -169,7 +169,7 @@ QStringList CollectionInterface::selectedBibtexKeys() const {
   return BibtexHandler::bibtexKeys(Controller::self()->selectedEntries());
 }
 
-QString CollectionInterface::entryBibtexKey(int id_) const {
+QString CollectionInterface::entryBibtexKey(int id_) {
   Data::CollPtr coll = Data::Document::self()->collection();
   if(!coll || coll->type() != Data::Collection::Bibtex) {
     return QString();

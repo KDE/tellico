@@ -65,8 +65,8 @@ public Q_SLOTS:
   Q_SCRIPTABLE bool exportCSV(const QString& file, bool filtered=false)
     { return exportCollection(Export::CSV, QUrl::fromUserInput(file), filtered); }
 
-  Q_SCRIPTABLE QList<int> selectedEntries() const;
-  Q_SCRIPTABLE QList<int> filteredEntries() const;
+  Q_SCRIPTABLE QList<int> selectedEntries();
+  Q_SCRIPTABLE QList<int> filteredEntries();
 
   Q_SCRIPTABLE virtual void openFile(const QString& file);
   Q_SCRIPTABLE virtual void setFilter(const QString& text);
@@ -92,10 +92,10 @@ public Q_SLOTS:
   Q_SCRIPTABLE int addEntry();
   Q_SCRIPTABLE bool removeEntry(int entryID);
 
-  Q_SCRIPTABLE QStringList allValues(const QString& fieldName) const;
-  Q_SCRIPTABLE QStringList entryValues(int entryID, const QString& fieldName) const;
-  Q_SCRIPTABLE QStringList selectedBibtexKeys() const;
-  Q_SCRIPTABLE QString entryBibtexKey(int entryID) const;
+  Q_SCRIPTABLE QStringList allValues(const QString& fieldName);
+  Q_SCRIPTABLE QStringList entryValues(int entryID, const QString& fieldName);
+  Q_SCRIPTABLE QStringList selectedBibtexKeys();
+  Q_SCRIPTABLE QString entryBibtexKey(int entryID);
 
   Q_SCRIPTABLE bool setEntryValue(int entryID, const QString& fieldName, const QString& value);
   Q_SCRIPTABLE bool addEntryValue(int entryID, const QString& fieldName, const QString& value);
