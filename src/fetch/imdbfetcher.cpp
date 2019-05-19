@@ -568,13 +568,21 @@ void IMDBFetcher::parseTitleBlock(const QString& str_) {
       if(end == -1) {
         end = str_.length();
       }
-      QString text = str_.mid(start, end-start);
+      const QString text = str_.mid(start, end-start);
       pPos = text.indexOf(QLatin1Char('('));
       if(pPos > -1) {
-        int pNewLine = text.indexOf(QStringLiteral("<br"));
+        const int pNewLine = text.indexOf(QStringLiteral("<br"));
         if(pNewLine == -1 || pPos < pNewLine) {
-          int pPos2 = text.indexOf(QLatin1Char(')'), pPos);
+          const int pPos2 = text.indexOf(QLatin1Char(')'), pPos);
           desc = text.mid(pPos+1, pPos2-pPos-1);
+        }
+        // IMDB occasionally has (I) in results. If so, continue parsing string
+        if(desc == QStringLiteral("I") || desc == QStringLiteral("II")) {
+          pPos = text.indexOf(QLatin1Char('('), pPos+1);
+          if(pPos > -1 && (pNewLine == -1 || pPos < pNewLine)) {
+            const int pPos2 = text.indexOf(QLatin1Char(')'), pPos);
+            desc = text.mid(pPos+1, pPos2-pPos-1);
+          }
         }
         pPos = -1;
       }
