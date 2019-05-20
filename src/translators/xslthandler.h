@@ -29,9 +29,10 @@
 #include <QHash>
 #include <QString>
 
-extern "C" {
 // for xmlDocPtr
 #include <libxml/tree.h>
+
+extern "C" {
 // for xsltStyleSheetPtr
 #include <libxslt/xsltInternals.h>
 }
