@@ -51,7 +51,7 @@
   <summary xml:lang="ia">Gerente de collection</summary>
   <summary xml:lang="id">Pengelola Koleksi</summary>
   <summary xml:lang="it">Gestore della collezione</summary>
-  <summary xml:lang="ko">모음집 관리자</summary>
+  <summary xml:lang="ko">소장품 관리 도구</summary>
   <summary xml:lang="nl">Collectiebeheer</summary>
   <summary xml:lang="nn">Samlingsdatabase</summary>
   <summary xml:lang="pl">Zarządzanie zbiorem</summary>
@@ -85,7 +85,7 @@
     <p xml:lang="ia">Tellico es un application pro organisar tu collectiones. Il forni patronos predefinite pro libros, bibliographias, videos, musica, video jocos, numisma, timbros, cartas de commercio, libros in designos e vinos. Il permitte te insertar tu collection inn un base de datos de catalogo, salveguardante multe proprietates como titulo, autor, etc.</p>
     <p xml:lang="id">Tellico adalah aplikasi untuk mengatur koleksi Anda. Ini menyediakan template baku untuk buku, bibliografi, video, musik, video game, koin, perangko, kartu perdagangan, buku komik, dan wine. Ini memungkinkan Anda untuk memasukkan koleksi Anda di database katalog, menyimpan banyak properti berbeda seperti judul, penulis, dll.</p>
     <p xml:lang="it">Tellico è un'applicazione per organizzare le tue collezioni. Fornisce modelli predefiniti per libri, bibliografie, video, musica, videogiochi, monete, francobolli, carte da gioco, fumetti e vini. Ti permette di inserire la tua collezione in una base di dati, salvando molte proprietà differenti come titolo, autore, ecc.</p>
-    <p xml:lang="ko">Tellico는 내 모음집을 관리하는 응용 프로그램입니다. 책, 서지, 비디오, 음악, 비디오 게임, 동전, 우표, 트레이드 카드, 만화 및 와인에 대한 기본 템플릿을 제공합니다. 카탈로그 데이터베이스에 모음집을 입력하여 제목, 작성자 등과 같은 다양한 속성을 저장할 수 있습니다.</p>
+    <p xml:lang="ko">Tellico는 내 소장품을 관리하는 응용 프로그램입니다. 책, 서지, 비디오, 음악, 비디오 게임, 동전, 우표, 트레이드 카드, 만화 및 와인에 대한 기본 템플릿을 제공합니다. 카탈로그 데이터베이스에 소장품을 입력하여 제목, 작성자 등과 같은 다양한 속성을 저장할 수 있습니다.</p>
     <p xml:lang="nl">Tellico is een toepassing voor het organiseren van uw verzamelingen. Het biedt standaard sjablonen voor boeken, bibliografieën, video's, muziek, videogames, munten, postzegels, visitekaartjes, strips en wijnen. Het stelt u in staat om uw verzameling in een catalogusdatabase in te voeren, waarin veel verschillende eigenschappen, zoals titel, auteur, etc. opgeslagen kunnen worden.</p>
     <p xml:lang="nn">Tellico er eit program for å halda oversikt over samlingane dine. Det kjem med malar for bøker, litteraturlister, filmar, musikk, spel, myntar, frimerke, samlekort, teikneseriar og vin. Du kan katalogisera samlinga di i ein database og lagra mykje ulik informasjon, for eksempel tittel og forfattar.</p>
     <p xml:lang="pl">Tellico jest programem do porządkowania twoich zbiorów. Dostarcza domyślnych szablonów dla książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win. Umożliwia wprowadzenie całego twojego zbioru do bazy danych katalogu, zapisując przy tym wiele różnych właściwości takich jak tytuł, autor, itp.</p>
@@ -144,7 +144,7 @@
       <li xml:lang="ia">Il supporta collectiones predefinite de libros, entratas bibliographic, videos, musica, video jocos, libros in designo, numisma, timbros, cartas de commerciar, vinos, jocos de tabula e catalogos de files</li>
       <li xml:lang="id">Mendukung koleksi buku, entri bibliografi, video, musik, video game, buku komik, koin, perangko, kartu perdagangan, wine, permainan papan, dan katalog file standar yang didukung</li>
       <li xml:lang="it">Supporta collezioni standard di libri, voci bibliografiche, video, musica, videogiochi, fumetti, monete, francobolli, carte da gioco, vini, giochi da tavolo e collezioni di file</li>
-      <li xml:lang="ko">서적, 서지 항목, 비디오, 음악, 비디오 게임, 만화, 동전, 우표, 트레이딩 카드, 와인, 보드 게임 및 파일 카탈로그의 기본 모음집 지원</li>
+      <li xml:lang="ko">서적, 서지 정보 항목, 비디오, 음악, 비디오 게임, 만화책, 동전, 우표, 트레이딩 카드, 와인, 보드 게임 및 파일 카탈로그의 기본 소장품 지원</li>
       <li xml:lang="nl">Ondersteunt standaard verzamelingen van boeken, bibliografie-items, video's, muziek, videogames, strips, munten, postzegels, visitekaartjes, wijnen, bordspellen en catalogs van bestanden</li>
       <li xml:lang="nn">Støttar samlingar av bøker, litteraturlister, filmar, musikk, spel, teikneseriar, myntar, frimerke, samlekort, vin, brettspel og filkatalogar</li>
       <li xml:lang="pl">Obsługa domyślnych zbiorów książek, bibliografii, filmów, muzyki, gier wideo, monet, znaczków, kart handlowych, komiksów i win, gier planszowych oraz katalogów plików</li>
@@ -171,7 +171,7 @@
       <li xml:lang="ia">Il supporta collectiones personalisate definite per le usator</li>
       <li xml:lang="id">Dukungan koleksi kustom yang ditentukan pengguna</li>
       <li xml:lang="it">Supporta collezioni personalizzate definite dall'utente</li>
-      <li xml:lang="ko">사용자 정의 맞춤 모음집 지원</li>
+      <li xml:lang="ko">사용자 정의 맞춤 소장품 지원</li>
       <li xml:lang="nl">Ondersteunt gebruikergedefinieerde eigen verzamelingen</li>
       <li xml:lang="nn">Støttar eigendefinerte samlingstypar</li>
       <li xml:lang="pl">Obsługa zbiorów określonych przez użytkownika</li>
@@ -279,7 +279,7 @@
       <li xml:lang="ia">Il supporta cerca de collection e filtro de vista</li>
       <li xml:lang="id">Dukungan pencarian koleksi dan pemfilteran tampilan</li>
       <li xml:lang="it">Supporta ricerche nella collezione e filtraggio della vista</li>
-      <li xml:lang="ko">모음집 검색 및 보기 필터링 지원</li>
+      <li xml:lang="ko">소장품 검색 및 보기 필터링 지원</li>
       <li xml:lang="nl">Ondersteunt zoeken in verzamelingen en filtering op weergave</li>
       <li xml:lang="nn">Støttar søk og filtrering i samlingar</li>
       <li xml:lang="pl">Obsługa przedukiwania zbiorów i filtrowanych widoków</li>
@@ -306,7 +306,7 @@
       <li xml:lang="ia">Il ordina e gruppa per varie proprietates</li>
       <li xml:lang="id">Mengurutkan dan mengelompokkan koleksi dengan berbagai properti</li>
       <li xml:lang="it">Ordina e raggruppa la collezione in base a varie proprietà</li>
-      <li xml:lang="ko">다양한 속성별 모음집 정렬 및 그룹</li>
+      <li xml:lang="ko">다양한 속성별 소장품 정렬 및 그룹</li>
       <li xml:lang="nl">Sorteert en groepeert verzameling door verschillende eigenschappen</li>
       <li xml:lang="nn">Sorterer og grupperer automatisk samlingane</li>
       <li xml:lang="pl">Szeregowanie i grupowanie zbiorów według różnych właściwości</li>
@@ -464,7 +464,7 @@
       <li xml:lang="ia">Il scande e importa collectiones de file audio, tal como mp3 o ogg</li>
       <li xml:lang="id">Penyekénan dan pengimporan koleksi file audio, sepertihalnya mp3 atau ogg</li>
       <li xml:lang="it">Cerca e importa collezioni di file audio, come mp3 oppure ogg</li>
-      <li xml:lang="ko">MP3 또는 OGG 같은 오디오 파일 모음집 검색 및 가져오기</li>
+      <li xml:lang="ko">MP3 또는 OGG 같은 오디오 파일 소장품 검색 및 가져오기</li>
       <li xml:lang="nl">Scant en importeert verzamelingen van audio-bestanden, zoals mp3 of ogg</li>
       <li xml:lang="nn">Søkjer etter og importerer lydfilsamlingar, som MP3 og OGG</li>
       <li xml:lang="pl">Przeszukiwanie i importowanie zbiorów plików dźwiękowych, takich jak mp3 czy ogg</li>
@@ -494,7 +494,7 @@
       <caption xml:lang="gl">A xanela principal, mostrando un elemento sinxelo nunha colección de libros</caption>
       <caption xml:lang="id">Window utama menampilkan item sederhana dalam koleksi buku</caption>
       <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
-      <caption xml:lang="ko">서적 모음집의 간단한 항목을 표시하는 기본 창</caption>
+      <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 기본 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
       <caption xml:lang="nn">Hovudvindauget som viser ei enkel oppføring i ei boksamling</caption>
       <caption xml:lang="pl">Okno główne pokazujące prosty element w zbiorze książek</caption>
