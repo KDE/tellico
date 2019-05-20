@@ -57,7 +57,7 @@ using Tellico::Data::Document;
 Document* Document::s_self = nullptr;
 
 Document::Document() : QObject(), m_coll(nullptr), m_isModified(false),
-    m_loadAllImages(false), m_validFile(false), m_importer(nullptr), m_cancelImageWriting(false),
+    m_loadAllImages(false), m_validFile(false), m_importer(nullptr), m_cancelImageWriting(true),
     m_fileFormat(Import::TellicoImporter::Unknown) {
   m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
   newDocument(Collection::Book);
@@ -92,7 +92,7 @@ void Document::slotSetModified(bool modified_/*=true*/) {
  * the document modified flag
  */
 void Document::slotSetClean(bool clean_) {
-   slotSetModified(!clean_);
+  slotSetModified(!clean_);
 }
 
 bool Document::newDocument(int type_) {
@@ -131,12 +131,11 @@ bool Document::openDocument(const QUrl& url_) {
   m_importer = new Import::TellicoImporter(url_, m_loadAllImages);
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(m_importer, m_importer->progressLabel(), true);
-  connect(m_importer, SIGNAL(signalTotalSteps(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setTotalSteps(QObject*, qulonglong)));
-  connect(m_importer, SIGNAL(signalProgress(QObject*, qulonglong)),
-          ProgressManager::self(), SLOT(setProgress(QObject*, qulonglong)));
-  connect(&item, &Tellico::ProgressItem::signalCancelled,
-          m_importer.data(), &Tellico::Import::TellicoImporter::slotCancel);
+  connect(m_importer, &Import::Importer::signalTotalSteps,
+          ProgressManager::self(), &ProgressManager::setTotalSteps);
+  connect(m_importer, &Import::Importer::signalProgress,
+          ProgressManager::self(), &ProgressManager::setProgress);
+  connect(&item, &ProgressItem::signalCancelled, m_importer, &Import::Importer::slotCancel);
   ProgressItem::Done done(m_importer);
 
   CollPtr coll = m_importer->collection();
