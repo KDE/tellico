@@ -459,6 +459,7 @@ private Q_SLOTS:
   void slotToggleMenuBarVisibility();
   void slotToggleLayoutLock(bool lock);
   void slotResetLayout();
+  void guiFactoryReset();
 
 private:
   void importFile(Import::Format format, const QList<QUrl>& kurls);

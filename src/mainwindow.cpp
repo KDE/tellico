@@ -1588,14 +1588,14 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
   m_groupView->setGroupField(current); // don't call slotChangeGrouping() since it adds an undo item
 
   // TODO::I have no idea how to get the combobox to update its size
-  // this is the hackiest of hacks, taken from digging into KXMLGuiFactory guts
-  // are there side-effects for the user other than a window flicker as toolbar resizes?
-  guiFactory()->removeClient(this);
-  guiFactory()->addClient(this);
+  // this is the hackiest of hacks, taken from KXmlGuiWindow::saveNewToolbarConfig()
+  // the window flickers as toolbar resizes, unavoidable?
+  // crashes if removeCLient//addClient is called here, need to do later in event loop
+  QTimer::singleShot(0, this, &MainWindow::guiFactoryReset);
 }
 
 void MainWindow::slotChangeGrouping() {
-  QString title = m_entryGrouping->currentText();
+  const QString title = m_entryGrouping->currentText();
 
   QString groupName = Kernel::self()->fieldNameByTitle(title);
   if(groupName.isEmpty()) {
@@ -2375,4 +2375,10 @@ void MainWindow::slotResetLayout() {
   m_dummyWindow->removeDockWidget(m_collectionViewDock);
   m_dummyWindow->addDockWidget(Qt::TopDockWidgetArea, m_collectionViewDock);
   m_collectionViewDock->show();
+}
+
+void MainWindow::guiFactoryReset() {
+  guiFactory()->removeClient(this);
+  guiFactory()->reset();
+  guiFactory()->addClient(this);
 }
