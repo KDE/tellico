@@ -432,7 +432,7 @@ Tellico::Fetch::ConfigWidget* TheMovieDBFetcher::configWidget(QWidget* parent_) 
 }
 
 QString TheMovieDBFetcher::defaultName() {
-  return QStringLiteral("TheMovieDB.org");
+  return QStringLiteral("The Movie DB (TMDb)");
 }
 
 QString TheMovieDBFetcher::defaultIcon() {
