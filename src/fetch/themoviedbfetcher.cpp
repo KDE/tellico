@@ -38,8 +38,8 @@
 #include <KJobWidgets/KJobWidgets>
 #include <KIO/StoredTransferJob>
 
-#include <QUrl>
 #include <QLabel>
+#include <QLineEdit>
 #include <QFile>
 #include <QTextStream>
 #include <QGridLayout>
@@ -190,7 +190,7 @@ Tellico::Data::EntryPtr TheMovieDBFetcher::fetchEntryHook(uint uid_) {
     QByteArray data = FileHandler::readDataFile(u, true);
 #if 0
     myWarning() << "Remove debug2 from themoviedbfetcher.cpp";
-    QFile f(QString::fromLatin1("/tmp/test2.json"));
+    QFile f(QStringLiteral("/tmp/test2.json"));
     if(f.open(QIODevice::WriteOnly)) {
       QTextStream t(&f);
       t.setCodec("UTF-8");
@@ -236,7 +236,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
     return;
   }
 
-  QByteArray data = job->data();
+  const QByteArray data = job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -248,7 +248,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
 
 #if 0
   myWarning() << "Remove debug from themoviedbfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test.json"));
+  QFile f(QStringLiteral("/tmp/test.json"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -436,7 +436,7 @@ QString TheMovieDBFetcher::defaultName() {
 }
 
 QString TheMovieDBFetcher::defaultIcon() {
-  return favIcon("http://www.themoviedb.org");
+  return favIcon("https://www.themoviedb.org");
 }
 
 Tellico::StringHash TheMovieDBFetcher::allOptionalFields() {

@@ -29,9 +29,10 @@
 #include "configwidget.h"
 #include "../datavectors.h"
 
-#include <QLineEdit>
 #include <QPointer>
 #include <QDate>
+
+class QLineEdit;
 
 class KJob;
 namespace KIO {
