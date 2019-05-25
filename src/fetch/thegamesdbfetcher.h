@@ -39,6 +39,9 @@ namespace KIO {
 }
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
 
   namespace Fetch {
 
@@ -82,6 +85,7 @@ public:
 
   private:
     QLineEdit* m_apiKeyEdit;
+    GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -107,11 +111,19 @@ private:
   void loadCachedData();
   // update cached data
   void updateData(TgdbDataType dataType, const QByteArray& data);
-  // download data list form Tgdb and update cache
+  // download data list from Tgdb and update cache
   void readDataList(TgdbDataType dataType);
+
+  enum ImageSize {
+    SmallImage=0, // small is really the thumb size
+    MediumImage=1,
+    LargeImage=2,
+    NoImage=3
+  };
 
   bool m_started;
   QString m_apiKey;
+  ImageSize m_imageSize;
 
   QHash<int, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;

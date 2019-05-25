@@ -25,6 +25,7 @@
 #include "thegamesdbfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
+#include "../gui/combobox.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
@@ -61,7 +62,8 @@ using Tellico::Fetch::TheGamesDBFetcher;
 
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
     : Fetcher(parent_)
-    , m_started(false) {
+    , m_started(false)
+    , m_imageSize(SmallImage) {
   m_apiKey = Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN);
   loadCachedData();
 }
@@ -85,6 +87,10 @@ void TheGamesDBFetcher::readConfigHook(const KConfigGroup& config_) {
   const QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
+  }
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
   }
 }
 
@@ -274,7 +280,9 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
     entry_->setField(QStringLiteral("certification"), i18n(esrb.toUtf8().constData()));
   }
   const QString coverUrl = m_covers.value(mapValue(resultMap_, "id"));
-  entry_->setField(QStringLiteral("cover"), coverUrl);
+  if(m_imageSize != NoImage) {
+    entry_->setField(QStringLiteral("cover"), coverUrl);
+  }
 
   QStringList genres, pubs, devs;
 
@@ -354,8 +362,26 @@ void TheGamesDBFetcher::readPlatformList(const QVariantMap& platformMap_) {
 
 void TheGamesDBFetcher::readCoverList(const QVariantMap& coverDataMap_) {
   // first, get the base url
+  QString imageBase;
+  switch(m_imageSize) {
+    case SmallImage:
+      // this is the default size, using the thumb. Not the small size
+      imageBase = QStringLiteral("thumb");
+      break;
+    case MediumImage:
+      imageBase = QStringLiteral("medium");
+      break;
+    case LargeImage:
+      imageBase = QStringLiteral("large");
+      break;
+    case NoImage:
+      m_covers.clear();
+      return; // no need to read anything
+      break;
+  }
+
   QString baseUrl =  coverDataMap_.value(QStringLiteral("base_url")).toMap()
-                                  .value(QStringLiteral("thumb")).toString();
+                                  .value(imageBase).toString();
 
   QVariantMap coverMap = coverDataMap_.value(QStringLiteral("data")).toMap();
   QMapIterator<QString, QVariant> i(coverMap);
@@ -525,10 +551,29 @@ TheGamesDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheGamesDB
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 
+  label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+  m_imageCombo->addItem(i18n("Medium Image"), MediumImage);
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  connect(m_imageCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  l->addWidget(m_imageCombo, row, 1);
+  QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
+                   "collection may degrade performance.");
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
+
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_apiKeyEdit->setText(Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN));
+    m_imageCombo->setCurrentData(SmallImage);
   }
 
   // now add additional fields widget
@@ -540,6 +585,8 @@ void TheGamesDBFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty() && apiKey != Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN)) {
     config_.writeEntry("API Key", apiKey);
   }
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString TheGamesDBFetcher::ConfigWidget::preferredName() const {
