@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012-2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,9 +25,18 @@
 #ifndef TELLICO_THEGAMESDBFETCHER_H
 #define TELLICO_THEGAMESDBFETCHER_H
 
-#include "xmlfetcher.h"
+#include "fetcher.h"
 #include "configwidget.h"
 #include "../datavectors.h"
+
+#include <QPointer>
+
+class QLineEdit;
+
+class KJob;
+namespace KIO {
+  class StoredTransferJob;
+}
 
 namespace Tellico {
 
@@ -38,7 +47,7 @@ namespace Tellico {
  *
  * @author Robby Stephenson
  */
-class TheGamesDBFetcher : public XMLFetcher {
+class TheGamesDBFetcher : public Fetcher {
 Q_OBJECT
 
 public:
@@ -52,10 +61,13 @@ public:
   /**
    */
   virtual QString source() const Q_DECL_OVERRIDE;
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Keyword; }
+  virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
+  virtual void stop() Q_DECL_OVERRIDE;
+  virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return TheGamesDB; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
-  virtual void readConfigHook(const KConfigGroup&) Q_DECL_OVERRIDE {}
+  virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -67,6 +79,9 @@ public:
     explicit ConfigWidget(QWidget* parent_, const TheGamesDBFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
     virtual QString preferredName() const Q_DECL_OVERRIDE;
+
+  private:
+    QLineEdit* m_apiKeyEdit;
   };
   friend class ConfigWidget;
 
@@ -74,12 +89,38 @@ public:
   static QString defaultIcon();
   static StringHash allOptionalFields();
 
+private Q_SLOTS:
+  void slotComplete(KJob* job);
+
 private:
+  virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
-  virtual void resetSearch() Q_DECL_OVERRIDE {}
-  virtual QUrl searchUrl() Q_DECL_OVERRIDE;
-  virtual void parseData(QByteArray&) Q_DECL_OVERRIDE {}
-  virtual Data::EntryPtr fetchEntryHookData(Data::EntryPtr entry) Q_DECL_OVERRIDE;
+  void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void readPlatformList(const QVariantMap& platformMap);
+  void readCoverList(const QVariantMap& platformMap);
+
+  // right now, Tgdb has three data types for which the whole list must be read at once
+  enum TgdbDataType { Genre, Publisher, Developer };
+  static QString dataFileName(TgdbDataType dataType);
+
+  // read all cached data
+  void loadCachedData();
+  // update cached data
+  void updateData(TgdbDataType dataType, const QByteArray& data);
+  // download data list form Tgdb and update cache
+  void readDataList(TgdbDataType dataType);
+
+  bool m_started;
+  QString m_apiKey;
+
+  QHash<int, Data::EntryPtr> m_entries;
+  QPointer<KIO::StoredTransferJob> m_job;
+  // key is an int as a string
+  QHash<QString, QString> m_platforms;
+  QHash<QString, QString> m_covers;
+  QHash<int, QString> m_genres;
+  QHash<int, QString> m_publishers;
+  QHash<int, QString> m_developers;
 };
 
   } // end namespace

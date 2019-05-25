@@ -42,7 +42,6 @@ SET(XSLT_FILES
     tellico-by-title.xsl
     tellico-common.xsl
     tellico-printing.xsl
-    thegamesdb2tellico.xsl
     UNIMARC2MODS3.xsl
     unixref2tellico.xsl
     vhs-logo.png

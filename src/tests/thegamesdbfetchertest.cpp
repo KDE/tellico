@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2012 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2012-2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,16 +22,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "thegamesdbfetchertest.h"
 
 #include "../fetch/thegamesdbfetcher.h"
-#include "../collections/gamecollection.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
-#include "../utils/datafileregistry.h"
+
+#include <KConfig>
+#include <KConfigGroup>
 
 #include <QTest>
 
@@ -41,9 +40,6 @@ TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 }
 
 void TheGamesDBFetcherTest::initTestCase() {
-  Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
-  // since we use the importer
-  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/thegamesdb2tellico.xsl"));
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("GoldenEye 007"));
@@ -52,34 +48,21 @@ void TheGamesDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("certification"), QStringLiteral("Teen"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Action; Adventure; Shooter; Stealth"));
   m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo"));
-  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare"));
+  m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare, Ltd."));
+  m_fieldValues.insert(QStringLiteral("num-player"), QStringLiteral("4"));
 }
 
 void TheGamesDBFetcherTest::testTitle() {
+  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
+  QString groupName = QStringLiteral("TGDB");
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Goldeneye"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
-
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
-
-  QCOMPARE(results.size(), 1);
-
-  Tellico::Data::EntryPtr entry = results.at(0);
-  QHashIterator<QString, QString> i(m_fieldValues);
-  while(i.hasNext()) {
-    i.next();
-    QString result = entry->field(i.key()).toLower();
-    QCOMPARE(result, i.value().toLower());
+  if(config.hasGroup(groupName)) {
+    KConfigGroup cg(&config, groupName);
+    fetcher->readConfig(cg, cg.name());
   }
-  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
-}
-
-void TheGamesDBFetcherTest::testKeyword() {
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Goldeneye"));
-  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
