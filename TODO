@@ -23,3 +23,5 @@ Science Direct API v2 https://dev.elsevier.com
 Replace most of the toggle actions in the view settings with KDualAction
 Update doc for MobyGames and data source changes
 Port away from QImageBlitz to use QGradient
+
+Find away to generalize the video game platform names, such as a global way to map "Microsoft Xbox360" to "Xbox 360" as is the default in the game collection
