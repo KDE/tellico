@@ -382,6 +382,9 @@ void FetchDialog::slotSearchClicked() {
     Fetch::Manager::self()->stop();
   } else {
     const QString value = m_valueLineEdit->text().simplified();
+    if(value.isEmpty()) {
+      return;
+    }
     m_resultCount = 0;
     m_oldSearch = value;
     m_started = true;
