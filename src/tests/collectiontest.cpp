@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "collectiontest.h"
 
 #include "../collection.h"
@@ -370,7 +368,7 @@ void CollectionTest::testDtd() {
     QSKIP("This test requires xmllint", SkipAll);
   }
   // xmllint doesn't seem to support spaces in path. Is this an XML thing?
-  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegExp("\\s"))) {
+  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegExp(QStringLiteral("\\s")))) {
     QSKIP("This test prohibits whitespace in the build path", SkipAll);
   }
 
@@ -629,10 +627,10 @@ void CollectionTest::testBookMatch() {
 
   // perfect match now
   e2->setField(QStringLiteral("isbn"), QStringLiteral("1234567890"));
-  QCOMPARE(c->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+  QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
 
   QBENCHMARK {
-    QCOMPARE(c->sameEntry(e1, e2), Tellico::EntryComparison::ENTRY_PERFECT_MATCH);
+    QCOMPARE(c->sameEntry(e1, e2), int(Tellico::EntryComparison::ENTRY_PERFECT_MATCH));
   }
 }
 
@@ -670,7 +668,7 @@ void CollectionTest::testMatchScore() {
   QVERIFY(m_coll);
   Tellico::Data::EntryPtr e(new Tellico::Data::Entry(m_coll));
   e->setField(field, value);
-  QCOMPARE(Tellico::EntryComparison::score(m_entry, e, field, m_coll.data()), score);
+  QCOMPARE(Tellico::EntryComparison::score(m_entry, e, field, m_coll.data()), int(score));
 }
 
 void CollectionTest::testMatchScore_data() {
