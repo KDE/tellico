@@ -52,6 +52,7 @@ public:
   /**
    */
   virtual QString source() const Q_DECL_OVERRIDE;
+  virtual QString attribution() const Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Keyword; }
   virtual Type type() const Q_DECL_OVERRIDE { return VideoGameGeek; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;

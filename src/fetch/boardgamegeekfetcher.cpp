@@ -61,6 +61,11 @@ QString BoardGameGeekFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
+QString BoardGameGeekFetcher::attribution() const {
+  return i18n("This information was freely provided by <a href=\"https://boardgamegeek.com\">BoardGameGeek</a>.");
+}
+
 bool BoardGameGeekFetcher::canFetch(int type) const {
   return type == Data::Collection::BoardGame;
 }

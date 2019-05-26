@@ -117,7 +117,7 @@ void XMLFetcher::slotComplete(KJob* ) {
 
 #if 0
   myWarning() << "Remove debug from xmlfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QStringLiteral("/tmp/test.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("utf-8");
@@ -131,7 +131,7 @@ void XMLFetcher::slotComplete(KJob* ) {
   const QString str = m_xsltHandler->applyStylesheet(XMLHandler::readXMLData(data));
 #if 0
   myWarning() << "Remove debug from xmlfetcher.cpp";
-  QFile f2(QLatin1String("/tmp/test-tellico.xml"));
+  QFile f2(QStringLiteral("/tmp/test-tellico.xml"));
   if(f2.open(QIODevice::WriteOnly)) {
     QTextStream t(&f2);
     t.setCodec("utf-8");

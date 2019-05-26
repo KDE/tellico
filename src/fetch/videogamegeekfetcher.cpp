@@ -41,8 +41,9 @@
 namespace {
   // a lot of overlap with boardgamegeekimporter.h
   static const int BGG_MAX_RETURNS_TOTAL = 10;
-  static const char* BGG_SEARCH_URL  = "http://boardgamegeek.com/xmlapi2/search";
-  static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
+  // interchangeable with boardgamegeek.com
+  static const char* BGG_SEARCH_URL  = "http://videogamegeek.com/xmlapi2/search";
+  static const char* BGG_THING_URL  = "http://videogamegeek.com/xmlapi2/thing";
 }
 
 using namespace Tellico;
@@ -59,6 +60,11 @@ VideoGameGeekFetcher::~VideoGameGeekFetcher() {
 
 QString VideoGameGeekFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
+}
+
+// https://boardgamegeek.com/wiki/page/XML_API_Terms_of_Use
+QString VideoGameGeekFetcher::attribution() const {
+  return i18n("This information was freely provided by <a href=\"https://boardgamegeek.com\">BoardGameGeek</a>.");
 }
 
 bool VideoGameGeekFetcher::canFetch(int type) const {
@@ -118,7 +124,7 @@ Tellico::Data::EntryPtr VideoGameGeekFetcher::fetchEntryHookData(Data::EntryPtr 
 
 #if 0
   myWarning() << "Remove output debug from videogamegeekfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.xml"));
+  QFile f(QStringLiteral("/tmp/test-videogamegeek.xml"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");

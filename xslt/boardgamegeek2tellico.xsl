@@ -175,7 +175,8 @@
    </xsl:for-each>
   </developers>
 
-  <!-- VideoGameGeek returns multiple platforms. Bail and don't use any of them
+  <!-- VideoGameGeek returns multiple platforms. Bail and don't use any of them,
+       allowing the user to set the platform as desired.
   <platform>
    <xsl:choose>
     <xsl:when test="link[@type='videogameplatform']/@value = 'PlayStation 4'">PlayStation4</xsl:when>
