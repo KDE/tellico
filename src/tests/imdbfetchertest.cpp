@@ -187,7 +187,7 @@ void ImdbFetcherTest::testOkunen() {
 
   // if the settings included origtitle, then the title would be "Big Bang Love, Juvenile A"
   QCOMPARE(entry->field("title"), QStringLiteral("46-okunen no koi"));
-  QCOMPARE(entry->field("origtitle"), QStringLiteral(""));
+  QCOMPARE(entry->field("origtitle"), QString());
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("genre"), QStringLiteral("Drama; Fantasy"));
   QCOMPARE(entry->field("director"), QStringLiteral("Takashi Miike"));

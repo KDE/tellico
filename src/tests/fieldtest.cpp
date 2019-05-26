@@ -59,9 +59,9 @@ void FieldTest::testAll() {
   Tellico::Data::Field field2(QStringLiteral("table"), QStringLiteral("Table"), Tellico::Data::Field::Table2);
   // should be converted to Table type
   QCOMPARE(field2.type(), Tellico::Data::Field::Table);
-  QCOMPARE(field2.property("columns"), QStringLiteral("2"));
+  QCOMPARE(field2.property(QStringLiteral("columns")), QStringLiteral("2"));
   field2.setProperty(QStringLiteral("columns"), QStringLiteral("1"));
-  QCOMPARE(field2.property("columns"), QStringLiteral("1"));
+  QCOMPARE(field2.property(QStringLiteral("columns")), QStringLiteral("1"));
   QCOMPARE(field2.isSingleCategory(), true);
   QCOMPARE(field2.flags(), int(Tellico::Data::Field::AllowMultiple));
   QVERIFY(field2.hasFlag(Tellico::Data::Field::AllowMultiple));
@@ -72,7 +72,7 @@ void FieldTest::testAll() {
   QCOMPARE(field3.type(), Tellico::Data::Field::Choice);
   QCOMPARE(field3.allowed(), allowed);
   field3.setDefaultValue(QStringLiteral("default"));
-  QCOMPARE(field3.defaultValue(), QStringLiteral(""));
+  QCOMPARE(field3.defaultValue(), QString());
   QCOMPARE(field3.flags(), 0);
 
   Tellico::Data::Field field4(QStringLiteral("derived"), QStringLiteral("Derived"), Tellico::Data::Field::Dependent);
