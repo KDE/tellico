@@ -317,6 +317,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(TheGamesDB);
   FETCHER_ADD(IGDB);
   FETCHER_ADD(VNDB);
+  FETCHER_ADD(VideoGameGeek);
 // board games
   FETCHER_ADD(BoardGameGeek);
 // movies
