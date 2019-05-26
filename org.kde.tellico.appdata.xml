@@ -483,7 +483,7 @@
   <url type="faq">http://tellico-project.org/faq</url>
   <url type="help">https://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
   <screenshots>
-    <screenshot type="default" width="867" height="627">
+    <screenshot type="default" width="1002" height="765">
       <caption>The main window showing a simple item in a book collection</caption>
       <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
@@ -505,6 +505,10 @@
       <caption xml:lang="x-test">xxThe main window showing a simple item in a book collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico.png</image>
     </screenshot>
+    <screenshot width="1396" height="883">
+      <caption>The main window showing side-by-side views of a game collection</caption>
+      <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
+    </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
   <provides>
@@ -525,6 +529,9 @@
     </release>
     <release version="3.1.4" date="2018-12-20">
       <url>https://tellico-project.org/tellico-314-released</url>
+    </release>
+    <release version="3.2" date="2019-05-25">
+      <url>https://tellico-project.org/tellico-32-released</url>
     </release>
   </releases>
 </component>
