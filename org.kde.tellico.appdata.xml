@@ -507,6 +507,14 @@
     </screenshot>
     <screenshot width="1396" height="883">
       <caption>The main window showing side-by-side views of a game collection</caption>
+      <caption xml:lang="ca">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
+      <caption xml:lang="nl">Het hoofdvenster die een spellenverzameling naast elkaar toont</caption>
+      <caption xml:lang="pt">A janela principal a mostrar vistas lado-a-lado de uma colecção de jogos</caption>
+      <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
+      <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
+      <caption xml:lang="x-test">xxThe main window showing side-by-side views of a game collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
     </screenshot>
   </screenshots>
