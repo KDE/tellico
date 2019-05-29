@@ -220,7 +220,7 @@ void MainWindow::slotInit() {
 
   m_toggleEntryEditor->setChecked(Config::showEditWidget());
   slotToggleEntryEditor();
-  slotToggleLayoutLock(Config::lockLayout());
+  m_lockLayout->setActive(Config::lockLayout());
 
   initConnections();
   connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
@@ -637,15 +637,15 @@ void MainWindow::initActions() {
   setStandardToolBarMenuEnabled(true);
   createStandardStatusBarAction();
 
-  KDualAction* dualAction = new KDualAction(this);
-  connect(dualAction, SIGNAL(activeChanged(bool)), SLOT(slotToggleLayoutLock(bool)));
-  dualAction->setActiveText(i18n("Unlock Layout"));
-  dualAction->setActiveToolTip(i18n("Unlock the window's layout"));
-  dualAction->setActiveIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
-  dualAction->setInactiveText(i18n("Lock Layout"));
-  dualAction->setInactiveToolTip(i18n("Lock the window's layout"));
-  dualAction->setInactiveIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
-  actionCollection()->addAction(QStringLiteral("lock_layout"), dualAction);
+  m_lockLayout = new KDualAction(this);
+  connect(m_lockLayout, SIGNAL(activeChanged(bool)), SLOT(slotToggleLayoutLock(bool)));
+  m_lockLayout->setActiveText(i18n("Unlock Layout"));
+  m_lockLayout->setActiveToolTip(i18n("Unlock the window's layout"));
+  m_lockLayout->setActiveIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
+  m_lockLayout->setInactiveText(i18n("Lock Layout"));
+  m_lockLayout->setInactiveToolTip(i18n("Lock the window's layout"));
+  m_lockLayout->setInactiveIcon(QIcon::fromTheme(QStringLiteral("object-locked")));
+  actionCollection()->addAction(QStringLiteral("lock_layout"), m_lockLayout);
 
   action = actionCollection()->addAction(QStringLiteral("reset_layout"), this, SLOT(slotResetLayout()));
   action->setText(i18n("Reset Layout"));
