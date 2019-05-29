@@ -44,6 +44,7 @@ public:
   ~BiblioShareFetcher();
 
   virtual QString source() const Q_DECL_OVERRIDE;
+  virtual QString attribution() const Q_DECL_OVERRIDE;
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == ISBN; }
   virtual Type type() const Q_DECL_OVERRIDE { return BiblioShare; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
