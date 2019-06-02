@@ -62,7 +62,7 @@ void BiblioShareFetcherTest::testIsbn() {
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-670-06903-5"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Viking"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Penguin Canada"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -82,7 +82,7 @@ void BiblioShareFetcherTest::testIsbn13() {
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0-670-06903-5"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2010"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Viking"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Penguin Canada"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }

@@ -59,6 +59,11 @@ QString BiblioShareFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+// https://www.booknetcanada.ca/get-a-token
+QString BiblioShareFetcher::attribution() const {
+  return i18n("Data provided by <a href=\"https://www.booknetcanada.ca/biblioshare\">BNC BiblioShare</a>.");
+}
+
 bool BiblioShareFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
 }
@@ -153,7 +158,7 @@ QString BiblioShareFetcher::defaultName() {
 }
 
 QString BiblioShareFetcher::defaultIcon() {
-  return favIcon("https://www.biblioshare.org");
+  return favIcon("https://www.booknetcanada.ca/biblioshare");
 }
 
 BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioShareFetcher* fetcher_)
@@ -167,7 +172,7 @@ BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioSha
                                "If you agree to the terms and conditions, <a href='%2'>sign "
                                "up for an account</a>, and enter your information below.",
                                 preferredName(),
-                                QStringLiteral("http://www.booknetcanada.ca/biblioshare-web-services/#onixweb")),
+                                QStringLiteral("https://www.booknetcanada.ca/get-a-token")),
                           optionsWidget());
   al->setOpenExternalLinks(true);
   al->setWordWrap(true);

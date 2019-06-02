@@ -40,6 +40,7 @@ class KToolBar;
 class QAction;
 class KSelectAction;
 class KToggleAction;
+class KDualAction;
 class KRecentFilesAction;
 class KActionMenu;
 
@@ -480,6 +481,7 @@ private:
   QAction* m_checkInEntry;
   QAction* m_checkOutEntry;
   KToggleAction* m_toggleEntryEditor;
+  KDualAction* m_lockLayout;
 
   KSelectAction* m_entryGrouping;
   GUI::LineEdit* m_quickFilter;
