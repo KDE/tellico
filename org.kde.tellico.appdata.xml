@@ -494,7 +494,7 @@
       <caption xml:lang="gl">A xanela principal, mostrando un elemento sinxelo nunha colección de libros</caption>
       <caption xml:lang="id">Window utama menampilkan item sederhana dalam koleksi buku</caption>
       <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
-      <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 기본 창</caption>
+      <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
       <caption xml:lang="nn">Hovudvindauget som viser ei enkel oppføring i ei boksamling</caption>
       <caption xml:lang="pl">Okno główne pokazujące prosty element w zbiorze książek</caption>
@@ -507,6 +507,17 @@
     </screenshot>
     <screenshot width="1396" height="883">
       <caption>The main window showing side-by-side views of a game collection</caption>
+      <caption xml:lang="ca">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
+      <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
+      <caption xml:lang="it">La finestra principale che mostra le viste affiancate di una collezione di libri</caption>
+      <caption xml:lang="ko">게임 소장품을 나란히 표시하는 주 창</caption>
+      <caption xml:lang="nl">Het hoofdvenster die een spellenverzameling naast elkaar toont</caption>
+      <caption xml:lang="pt">A janela principal a mostrar vistas lado-a-lado de uma colecção de jogos</caption>
+      <caption xml:lang="sv">Huvudfönstret som visar en spelsamling med visning sida vid sida</caption>
+      <caption xml:lang="uk">Головне вікно програми із панелями паралельного перегляду збірки ігор</caption>
+      <caption xml:lang="x-test">xxThe main window showing side-by-side views of a game collectionxx</caption>
       <image>https://cdn.kde.org/screenshots/tellico/tellico-games.png</image>
     </screenshot>
   </screenshots>
