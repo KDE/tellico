@@ -322,11 +322,9 @@ Tellico::Data::EntryPtr BedethequeFetcher::parseEntry(const QString& str_) {
   fieldMap.insert(QStringLiteral("Collection"),      QStringLiteral("edition"));
 
   if(optionalFields().contains(QStringLiteral("isbn"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("isbn"), i18n("ISBN#")));
-    field->setCategory(i18n("Publishing"));
-    field->setDescription(i18n("International Standard Book Number"));
+    Data::FieldPtr field = Data::Field::createDefaultField(Data::Field::IsbnField);
     coll->addField(field);
-    fieldMap.insert(QStringLiteral("ISBN"), QStringLiteral("isbn"));
+    fieldMap.insert(QStringLiteral("ISBN"), field->name());
   }
   if(optionalFields().contains(QStringLiteral("colorist"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("colorist"), i18n("Colorist")));

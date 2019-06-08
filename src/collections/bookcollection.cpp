@@ -106,10 +106,7 @@ Tellico::Data::FieldList BookCollection::defaultFields() {
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("isbn"), i18n("ISBN#"));
-  field->setCategory(i18n(book_publishing));
-  field->setDescription(i18n("International Standard Book Number"));
-  list.append(field);
+  list.append(Field::createDefaultField(Field::IsbnField));
 
   field = new Field(QStringLiteral("lccn"), i18n("LCCN#"));
   field->setCategory(i18n(book_publishing));

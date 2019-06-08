@@ -66,10 +66,12 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   FieldList list;
   FieldPtr field;
 
+  const QString bibtex = QStringLiteral("bibtex");
+
 /******************* General ****************************/
 
   field = Field::createDefaultField(Field::TitleField);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("title"));
+  field->setProperty(bibtex, QStringLiteral("title"));
   list.append(field);
 
   QStringList types;
@@ -82,40 +84,40 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
         << QStringLiteral("unpublished") << QStringLiteral("periodical")
         << QStringLiteral("conference");
   field = new Field(QStringLiteral("entry-type"), i18n("Entry Type"), types);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("entry-type"));
+  field->setProperty(bibtex, QStringLiteral("entry-type"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowGrouped | Field::NoDelete);
   field->setDescription(i18n("These entry types are specific to bibtex. See the bibtex documentation."));
   list.append(field);
 
   field = new Field(QStringLiteral("author"), i18n("Author"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("author"));
+  field->setProperty(bibtex, QStringLiteral("author"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QStringLiteral("bibtex-key"), i18n("Bibtex Key"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("key"));
+  field->setProperty(bibtex, QStringLiteral("key"));
   field->setCategory(i18n("General"));
   field->setFlags(Field::NoDelete);
   list.append(field);
 
   field = new Field(QStringLiteral("booktitle"), i18n("Book Title"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("booktitle"));
+  field->setProperty(bibtex, QStringLiteral("booktitle"));
   field->setCategory(i18n(bibtex_general));
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("editor"), i18n("Editor"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("editor"));
+  field->setProperty(bibtex, QStringLiteral("editor"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatName);
   list.append(field);
 
   field = new Field(QStringLiteral("organization"), i18n("Organization"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("organization"));
+  field->setProperty(bibtex, QStringLiteral("organization"));
   field->setCategory(i18n(bibtex_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
@@ -130,51 +132,50 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
 
 /******************* Publishing ****************************/
   field = new Field(QStringLiteral("publisher"), i18n("Publisher"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("publisher"));
+  field->setProperty(bibtex, QStringLiteral("publisher"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("address"), i18n("Address"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("address"));
+  field->setProperty(bibtex, QStringLiteral("address"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("edition"), i18n("Edition"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("edition"));
+  field->setProperty(bibtex, QStringLiteral("edition"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion);
   list.append(field);
 
   // don't make it a number, it could have latex processing commands in it
   field = new Field(QStringLiteral("pages"), i18n("Pages"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("pages"));
+  field->setProperty(bibtex, QStringLiteral("pages"));
   field->setCategory(i18n(bibtex_publishing));
   list.append(field);
 
   field = new Field(QStringLiteral("year"), i18n("Year"), Field::Number);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("year"));
+  field->setProperty(bibtex, QStringLiteral("year"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowGrouped);
   list.append(field);
 
-  field = new Field(QStringLiteral("isbn"), i18n("ISBN#"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("isbn"));
+  field = Field::createDefaultField(Field::IsbnField);
+  field->setProperty(bibtex, QStringLiteral("isbn"));
   field->setCategory(i18n(bibtex_publishing));
-  field->setDescription(i18n("International Standard Book Number"));
   list.append(field);
 
   field = new Field(QStringLiteral("journal"), i18n("Journal"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("journal"));
+  field->setProperty(bibtex, QStringLiteral("journal"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("doi"), i18n("DOI"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("doi"));
+  field->setProperty(bibtex, QStringLiteral("doi"));
   field->setCategory(i18n(bibtex_publishing));
   field->setDescription(i18n("Digital Object Identifier"));
   list.append(field);
@@ -182,18 +183,18 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
   // could make this a string list, but since bibtex import could have funky values
   // keep it an editbox
   field = new Field(QStringLiteral("month"), i18n("Month"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("month"));
+  field->setProperty(bibtex, QStringLiteral("month"));
   field->setCategory(i18n(bibtex_publishing));
   field->setFlags(Field::AllowCompletion);
   list.append(field);
 
   field = new Field(QStringLiteral("number"), i18n("Number"), Field::Number);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("number"));
+  field->setProperty(bibtex, QStringLiteral("number"));
   field->setCategory(i18n(bibtex_publishing));
   list.append(field);
 
   field = new Field(QStringLiteral("howpublished"), i18n("How Published"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("howpublished"));
+  field->setProperty(bibtex, QStringLiteral("howpublished"));
   field->setCategory(i18n(bibtex_publishing));
   list.append(field);
 
@@ -205,24 +206,24 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
 
 /******************* Classification ****************************/
   field = new Field(QStringLiteral("chapter"), i18n("Chapter"), Field::Number);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("chapter"));
+  field->setProperty(bibtex, QStringLiteral("chapter"));
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
   field = new Field(QStringLiteral("series"), i18n("Series"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("series"));
+  field->setProperty(bibtex, QStringLiteral("series"));
   field->setCategory(i18n(bibtex_misc));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
   field = new Field(QStringLiteral("volume"), i18nc("A number field in a bibliography", "Volume"), Field::Number);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("volume"));
+  field->setProperty(bibtex, QStringLiteral("volume"));
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
   field = new Field(QStringLiteral("crossref"), i18n("Cross-Reference"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("crossref"));
+  field->setProperty(bibtex, QStringLiteral("crossref"));
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
@@ -232,22 +233,22 @@ Tellico::Data::FieldList BibtexCollection::defaultFields() {
 //  list.append(field);
 
   field = new Field(QStringLiteral("keyword"), i18n("Keywords"));
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("keywords"));
+  field->setProperty(bibtex, QStringLiteral("keywords"));
   field->setCategory(i18n(bibtex_misc));
   field->setFlags(Field::AllowCompletion | Field::AllowMultiple | Field::AllowGrouped);
   list.append(field);
 
   field = new Field(QStringLiteral("url"), i18n("URL"), Field::URL);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("url"));
+  field->setProperty(bibtex, QStringLiteral("url"));
   field->setCategory(i18n(bibtex_misc));
   list.append(field);
 
   field = new Field(QStringLiteral("abstract"), i18n("Abstract"), Field::Para);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("abstract"));
+  field->setProperty(bibtex, QStringLiteral("abstract"));
   list.append(field);
 
   field = new Field(QStringLiteral("note"), i18n("Notes"), Field::Para);
-  field->setProperty(QStringLiteral("bibtex"), QStringLiteral("note"));
+  field->setProperty(bibtex, QStringLiteral("note"));
   list.append(field);
 
   field = Field::createDefaultField(Field::IDField);
@@ -271,7 +272,7 @@ bool BibtexCollection::addField(Tellico::Data::FieldPtr field_) {
   }
   bool success = Collection::addField(field_);
   if(success) {
-    QString bibtex = field_->property(QStringLiteral("bibtex"));
+    const QString bibtex = field_->property(QStringLiteral("bibtex"));
     if(!bibtex.isEmpty()) {
       m_bibtexFieldDict.insert(bibtex, field_.data());
     }
@@ -284,15 +285,16 @@ bool BibtexCollection::modifyField(Tellico::Data::FieldPtr newField_) {
     return false;
   }
 //  myDebug();
+  const QString bibtex = QStringLiteral("bibtex");
   bool success = Collection::modifyField(newField_);
   FieldPtr oldField = fieldByName(newField_->name());
-  QString oldBibtex = oldField->property(QStringLiteral("bibtex"));
-  QString newBibtex = newField_->property(QStringLiteral("bibtex"));
+  const QString oldBibtex = oldField->property(bibtex);
+  const QString newBibtex = newField_->property(bibtex);
   if(!oldBibtex.isEmpty()) {
     success &= (m_bibtexFieldDict.remove(oldBibtex) != 0);
   }
   if(!newBibtex.isEmpty()) {
-    oldField->setProperty(QStringLiteral("bibtex"), newBibtex);
+    oldField->setProperty(bibtex, newBibtex);
     m_bibtexFieldDict.insert(newBibtex, oldField.data());
   }
   return success;
@@ -304,7 +306,7 @@ bool BibtexCollection::removeField(Tellico::Data::FieldPtr field_, bool force_) 
   }
 //  myDebug();
   bool success = true;
-  QString bibtex = field_->property(QStringLiteral("bibtex"));
+  const QString bibtex = field_->property(QStringLiteral("bibtex"));
   if(!bibtex.isEmpty()) {
     success &= (m_bibtexFieldDict.remove(bibtex) != 0);
   }
