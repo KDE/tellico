@@ -6,8 +6,6 @@
 
 #cmakedefine ENABLE_KNEWSTUFF3
 
-#cmakedefine HAVE_QIMAGEBLITZ
-
 #cmakedefine HAVE_TAGLIB
 
 #cmakedefine HAVE_POPPLER

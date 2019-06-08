@@ -17,11 +17,9 @@ Centralize all the optional fields inside CollectionManager so the names
 are ensured to stay consistent. Add UI for adding to collection outside
 of fetcher results.
 
-ComicVine API: https://comicvine.gamespot.com/api/
 Science Direct API v2 https://dev.elsevier.com
 
 Replace most of the toggle actions in the view settings with KDualAction
 Update doc for MobyGames and data source changes
-Port away from QImageBlitz to use QGradient
 
 Update the video game XSLT data sources to somehow use the platform normalization

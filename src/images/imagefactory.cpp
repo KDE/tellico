@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
- #include <config.h>
-
 #include "imagefactory.h"
 #include "image.h"
 #include "imageinfo.h"
@@ -31,6 +29,7 @@
 #include "imagejob.h"
 #include "../config/tellico_config.h"
 #include "../utils/tellico_utils.h"
+#include "../utils/gradient.h"
 #include "../tellico_debug.h"
 
 #include <KColorUtils>
@@ -38,9 +37,6 @@
 #include <QCache>
 #include <QFileInfo>
 #include <QDir>
-#ifdef HAVE_QIMAGEBLITZ
-#include <qimageblitz.h>
-#endif
 
 #define RELEASE_IMAGES
 
@@ -55,8 +51,6 @@ Tellico::ImageFactory* ImageFactory::factory = nullptr;
 
 class ImageFactory::Private {
 public:
-  // since most images get turned into pixmaps quickly, use 10 megs
-  // for images and 10 megs for pixmaps
   Private() {}
 
   QHash<QString, Data::Image*> imageDict;
@@ -600,24 +594,14 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
 
   const QString bgname(QStringLiteral("gradient_bg.png"));
   const QColor& bgc1 = KColorUtils::mix(baseColor, highColor, 0.3);
-#ifdef HAVE_QIMAGEBLITZ
-  QImage bgImage = Blitz::gradient(QSize(400, 1), bgc1, baseColor,
-                                   Blitz::PipeCrossGradient);
-#else
-  QImage bgImage(QSize(400, 1), QImage::Format_RGB32);
-  bgImage.fill(bgc1);
-#endif
+  QImage bgImage = Tellico::gradient(QSize(400, 1), bgc1, baseColor,
+                                     Tellico::PipeCrossGradient);
   bgImage = bgImage.transformed(QTransform().rotate(90));
 
   const QString hdrname(QStringLiteral("gradient_header.png"));
-#ifdef HAVE_QIMAGEBLITZ
   const QColor& bgc2 = KColorUtils::mix(baseColor, highColor, 0.5);
-  QImage hdrImage = Blitz::unbalancedGradient(QSize(1, 10), highColor, bgc2,
-                                              Blitz::VerticalGradient, 100, -100);
-#else
-  QImage hdrImage(QSize(1, 10), QImage::Format_RGB32);
-  hdrImage.fill(highColor);
-#endif
+  QImage hdrImage = Tellico::unbalancedGradient(QSize(1, 10), highColor, bgc2,
+                                                Tellico::VerticalGradient, 100, -100);
 
   if(opt_.imgDir.isEmpty()) {
     // write the style images both to the tmp dir and the cache dir
