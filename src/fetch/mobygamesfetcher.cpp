@@ -125,7 +125,7 @@ void MobyGamesFetcher::continueSearch() {
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("normal"));
   u.setQuery(q);
 //  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/games.json"));
-  myDebug() << u;
+//  myDebug() << u;
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
@@ -161,8 +161,8 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
-  // need to wait a bit after previous query
-  QThread::msleep(300);
+  // need to wait a bit after previous query, Moby error message say 1 sec
+  QThread::msleep(1000);
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(!job->exec()) {
@@ -175,7 +175,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     return entry;
   }
 #if 0
-  myWarning() << "Remove company debug from mobygamesfetcher.cpp";
+  myWarning() << "Remove platforms debug from mobygamesfetcher.cpp";
   QFile file(QStringLiteral("/tmp/moby-platforms.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);

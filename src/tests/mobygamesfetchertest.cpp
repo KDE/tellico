@@ -71,9 +71,9 @@ void MobyGamesFetcherTest::testTitle() {
   QCOMPARE(entry->field("genre"), QStringLiteral("Action; Behind view; Puzzle elements; Metroidvania; Fantasy"));
 //  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
-  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo"));
-  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD Group No. 3"));
-  QCOMPARE(entry->field("mobygames"), QStringLiteral("https://www.mobygames.com/games/the-legend-of-zelda-twilight-princess"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo of America Inc."));
+  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
+  QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));

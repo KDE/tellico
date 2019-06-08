@@ -73,7 +73,7 @@ void GiantBombFetcherTest::testKeyword() {
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2009"));
   QCOMPARE(entry->field(QStringLiteral("platform")), QStringLiteral("Xbox 360"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Action; First-Person Shooter"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Microsoft Studios"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Xbox Game Studios"));
   QCOMPARE(entry->field(QStringLiteral("certification")), QStringLiteral("Mature"));
   QCOMPARE(entry->field(QStringLiteral("giantbomb")), QStringLiteral("https://www.giantbomb.com/halo-3-odst/3030-24035/"));
   QCOMPARE(entry->field(QStringLiteral("pegi")), QStringLiteral("PEGI 16"));
