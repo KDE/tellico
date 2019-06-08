@@ -96,7 +96,7 @@ private:
   bool m_started;
 
   QString m_apiKey;
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   QHash<int, QString> m_genreHash;

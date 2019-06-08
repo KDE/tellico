@@ -24,6 +24,7 @@
  ***************************************************************************/
 
 #include "gamecollection.h"
+#include "../tellico_debug.h"
 
 #include <KLocalizedString>
 
@@ -49,15 +50,14 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   list.append(Field::createDefaultField(Field::TitleField));
 
   QStringList platform;
-  platform << i18n("Xbox One") << i18n("Xbox 360") << i18n("Xbox")
-           << i18n("PlayStation4") << i18n("PlayStation3") << i18n("PlayStation2") << i18n("PlayStation")
-           << i18nc("PlayStation Portable", "PSP") << i18n("PlayStation Vita")
-           << i18n("Nintendo Switch")
-           << i18n("Nintendo Wii") << i18n("Nintendo 3DS") << i18n("Nintendo DS")
-           << i18n("Nintendo 64") << i18n("Super Nintendo") << i18n("Nintendo")
-           << i18n("GameCube") << i18n("Dreamcast") << i18nc("Sega Genesis", "Genesis")
-           << i18n("Game Boy Advance") << i18n("Game Boy Color") << i18n("Game Boy")
-           << i18nc("Windows Platform", "Windows") << i18n("Mac OS") << i18n("Linux");
+  platform << platformName(XboxOne) << platformName(Xbox360) << platformName(Xbox)
+           << platformName(PlayStation4) << platformName(PlayStation3) << platformName(PlayStation2) << platformName(PlayStation)
+           << platformName(PlayStationPortable) << platformName(PlayStationVita)
+           << platformName(NintendoSwitch) << platformName(NintendoWiiU)
+           << platformName(NintendoWii)  << platformName(Nintendo3DS) << platformName(NintendoDS)
+           << platformName(Nintendo64)  << platformName(SuperNintendo) << platformName(Nintendo)
+           << platformName(NintendoGameCube) << platformName(Dreamcast)
+           << platformName(Windows) << platformName(MacOS) << platformName(Linux);
   field = new Field(QStringLiteral("platform"), i18n("Platform"), platform);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
@@ -136,4 +136,131 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   list.append(Field::createDefaultField(Field::ModifiedDateField));
 
   return list;
+}
+
+
+QString GameCollection::normalizePlatform(const QString& platformName_) {
+  GamePlatform platform = guessPlatform(platformName_);
+  if(platform == UnknownPlatform) {
+    QString platformName = platformName_;
+    if(platformName.startsWith(QStringLiteral("Microsoft"))) {
+      platformName = platformName.mid(sizeof("Microsoft"));
+    } else if(platformName.startsWith(QStringLiteral("Sony Playstation"))) {
+      // default video game collection has no space between 'PlayStation' and #
+      platformName = QStringLiteral("PlayStation") + platformName.mid(sizeof("Sony Playstation"));
+    }
+    myDebug() << "No default name for" << platformName_ << "; return" << platformName;
+    return platformName;
+  }
+  return platformName(platform);
+}
+
+Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const QString& name_) {
+  // try to be smart about guessing the platform from its name
+  if(name_.contains(QStringLiteral("PlayStation"), Qt::CaseInsensitive)) {
+    if(name_.contains(QStringLiteral("Vita"))) {
+      return PlayStationVita;
+    } else if(name_.contains(QStringLiteral("Portable"))) {
+      return PlayStationPortable;
+    } else if(name_.contains(QStringLiteral("4"))) {
+      return PlayStation4;
+    } else if(name_.contains(QStringLiteral("3"))) {
+      return PlayStation3;
+    } else if(name_.contains(QStringLiteral("2"))) {
+      return PlayStation2;
+    } else {
+      return PlayStation;
+    }
+  } else if(name_.contains(QStringLiteral("PSP"))) {
+    return PlayStationPortable;
+  } else if(name_.contains(QStringLiteral("Xbox"), Qt::CaseInsensitive)) {
+    if(name_.contains(QStringLiteral("One"))) {
+      return XboxOne;
+    } else if(name_.contains(QStringLiteral("360"))) {
+      return Xbox360;
+    } else {
+      return Xbox;
+    }
+  } else if(name_.contains(QStringLiteral("Switch"))) {
+    return NintendoSwitch;
+  } else if(name_.contains(QStringLiteral("Wii"))) {
+    if(name_.contains(QStringLiteral("U"))) {
+      return NintendoWiiU;
+    } else {
+      return NintendoWii;
+    }
+  } else if(name_.contains(QStringLiteral("PC")) ||
+            name_.contains(QStringLiteral("Windows"))) {
+    return Windows;
+  } else if(name_.contains(QStringLiteral("Mac"))) {
+    return MacOS;
+  } else if(name_.contains(QStringLiteral("3DS"))) {
+    return Nintendo3DS;
+  } else if(name_.contains(QStringLiteral("DS"))) {
+    return NintendoDS;
+  } else if(name_ == QStringLiteral("Nintendo 64")) {
+    return Nintendo64;
+  } else if(name_.contains(QStringLiteral("GameCube"), Qt::CaseInsensitive)) {
+    return NintendoGameCube;
+  } else if(name_.contains(QStringLiteral("Advance"))) {
+    return GameBoyAdvance;
+  } else if(name_ == QStringLiteral("Game Boy Color")) {
+    return GameBoyColor;
+  } else if(name_ == QStringLiteral("Game Boy")) {
+    return GameBoy;
+  } else if(name_.contains(QStringLiteral("SNES")) || name_.contains(QStringLiteral("Super Nintendo"))) {
+    return SuperNintendo;
+    // nothing left for Nintendo except original
+  } else if(name_.contains(QStringLiteral("Nintendo"))) {
+    return Nintendo;
+  } else if(name_.contains(QStringLiteral("Genesis"))) {
+    return Genesis;
+  } else if(name_.contains(QStringLiteral("Dreamcast"))) {
+    return Dreamcast;
+  } else if(name_.contains(QStringLiteral("Linux"))) {
+    return Linux;
+  } else if(name_.contains(QStringLiteral("ios"), Qt::CaseInsensitive)) {
+    return iOS;
+  } else if(name_.contains(QStringLiteral("Android"))) {
+    return Android;
+  }
+  myDebug() << "No platform guess for" << name_;
+  return UnknownPlatform;
+}
+
+QString GameCollection::platformName(GamePlatform platform_) {
+  switch(platform_) {
+    case Linux:               return i18n("Linux");
+    case MacOS:               return i18n("Mac OS");
+    case Windows:             return i18nc("Windows Platform", "Windows");
+    case iOS:                 return i18nc("iOS Platform", "iOS");
+    case Android:             return i18nc("Android Platform", "Android");
+    case Xbox:                return i18n("Xbox");
+    case Xbox360:             return i18n("Xbox 360");
+    case XboxOne:             return i18n("Xbox One");
+    case PlayStation:         return i18n("PlayStation");
+    case PlayStation2:        return i18n("PlayStation2");
+    case PlayStation3:        return i18n("PlayStation3");
+    case PlayStation4:        return i18n("PlayStation4");
+    case PlayStationPortable: return i18nc("PlayStation Portable", "PSP");
+    case PlayStationVita:     return i18n("PlayStation Vita");
+    case GameBoy:             return i18n("Game Boy");
+    case GameBoyColor:        return i18n("Game Boy Color");
+    case GameBoyAdvance:      return i18n("Game Boy Advance");
+    case Nintendo:            return i18n("Nintendo");
+    case SuperNintendo:       return i18n("Super Nintendo");
+    case Nintendo64:          return i18n("Nintendo 64");
+    case NintendoGameCube:    return i18n("GameCube");
+    case NintendoWii:         return i18n("Nintendo Wii");
+    case NintendoWiiU:        return i18n("Nintendo WiiU");
+    case NintendoSwitch:      return i18n("Nintendo Switch");
+    case NintendoDS:          return i18n("Nintendo DS");
+    case Nintendo3DS:         return i18n("Nintendo 3DS");
+    case Genesis:             return i18nc("Sega Genesis", "Genesis");
+    case Dreamcast:           return i18n("Dreamcast");
+    case UnknownPlatform:     break;
+    case LastPlatform:        break;
+  }
+  myDebug() << "Failed to return platform name for" << platform_;
+  return QString();
 }

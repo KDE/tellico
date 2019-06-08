@@ -291,36 +291,14 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   if(!platforms.isEmpty()) {
     // just take the first one for now
     // TODO:: suport multiple
-    const QString platform = m_platformHash.value(platforms.first().toInt());
-    if(platform == QStringLiteral("Nintendo Entertainment System (NES)")) {
-      entry_->setField(QStringLiteral("platform"), i18n("Nintendo"));
-    } else if(platform == QStringLiteral("Nintendo PlayStation")) {
-      entry_->setField(QStringLiteral("platform"), i18n("PlayStation"));
-    } else if(platform == QStringLiteral("PlayStation 2")) {
-      entry_->setField(QStringLiteral("platform"), i18n("PlayStation2"));
-    } else if(platform == QStringLiteral("PlayStation 3")) {
-      entry_->setField(QStringLiteral("platform"), i18n("PlayStation3"));
-    } else if(platform == QStringLiteral("PlayStation 4")) {
-      entry_->setField(QStringLiteral("platform"), i18n("PlayStation4"));
-    } else if(platform == QStringLiteral("PlayStation Portable")) {
-      entry_->setField(QStringLiteral("platform"), i18nc("PlayStation Portable", "PSP"));
-    } else if(platform == QStringLiteral("Wii")) {
-      entry_->setField(QStringLiteral("platform"), i18n("Nintendo Wii"));
-    } else if(platform == QStringLiteral("Nintendo GameCube")) {
-      entry_->setField(QStringLiteral("platform"), i18n("GameCube"));
-    } else if(platform == QStringLiteral("PC (Microsoft Windows)")) {
-      entry_->setField(QStringLiteral("platform"), i18nc("Windows Platform", "Windows"));
-    } else if(platform == QStringLiteral("Mac")) {
-      entry_->setField(QStringLiteral("platform"), i18n("Mac OS"));
-    } else {
-      // TODO all the other platform translations
-      // also make the assumption that if the platform name isn't already in the allowed list, it should be added
-      Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("platform"));
-      if(f && !f->allowed().contains(platform)) {
-        f->setAllowed(QStringList(f->allowed()) << platform);
-      }
-      entry_->setField(QStringLiteral("platform"), platform);
+    QString platform = m_platformHash.value(platforms.first().toInt());
+    platform = Data::GameCollection::normalizePlatform(platform);
+    // make the assumption that if the platform name isn't already in the allowed list, it should be added
+    Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("platform"));
+    if(f && !f->allowed().contains(platform)) {
+      f->setAllowed(QStringList(f->allowed()) << platform);
     }
+    entry_->setField(QStringLiteral("platform"), platform);
   }
 
   const QVariantList ageRatingList = resultMap_.value(QStringLiteral("age_ratings")).toList();

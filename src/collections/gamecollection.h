@@ -48,6 +48,42 @@ public:
   virtual Type type() const Q_DECL_OVERRIDE { return Game; }
 
   static FieldList defaultFields();
+
+  enum GamePlatform {
+      UnknownPlatform = 0,
+      Linux,
+      MacOS,
+      Windows,
+      iOS,
+      Android,
+      Xbox,
+      Xbox360,
+      XboxOne,
+      PlayStation,
+      PlayStation2,
+      PlayStation3,
+      PlayStation4,
+      PlayStationPortable,
+      PlayStationVita,
+      GameBoy,
+      GameBoyColor,
+      GameBoyAdvance,
+      Nintendo,
+      SuperNintendo,
+      Nintendo64,
+      NintendoGameCube,
+      NintendoWii,
+      NintendoWiiU,
+      NintendoSwitch,
+      NintendoDS,
+      Nintendo3DS,
+      Genesis,
+      Dreamcast,
+      LastPlatform
+  };
+  static QString normalizePlatform(const QString& platformName);
+  static GamePlatform guessPlatform(const QString& platformName);
+  static QString platformName(GamePlatform platform);
 };
 
   } // end namespace

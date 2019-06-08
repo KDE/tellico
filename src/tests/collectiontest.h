@@ -52,6 +52,7 @@ private Q_SLOTS:
   void testMergeBenchmark();
   void testMatchScore();
   void testMatchScore_data();
+  void testGamePlatform();
 
 private:
   Tellico::Data::CollPtr m_coll;

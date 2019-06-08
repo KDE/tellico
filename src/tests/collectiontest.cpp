@@ -30,6 +30,7 @@
 #include "../collectionfactory.h"
 #include "../collections/collectioninitializer.h"
 #include "../collections/bookcollection.h"
+#include "../collections/gamecollection.h"
 #include "../translators/tellicoxmlexporter.h"
 #include "../translators/tellicoimporter.h"
 #include "../images/imagefactory.h"
@@ -693,4 +694,13 @@ void CollectionTest::testMatchScore_data() {
   QTest::newRow("author formatted") << QStringLiteral("author") << QStringLiteral("Doe, John") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("author formatted2") << QStringLiteral("author") << QStringLiteral("doe, john") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
   QTest::newRow("author multiple") << QStringLiteral("author") << QStringLiteral("John Doe; Jane Doe") << Tellico::EntryComparison::MATCH_VALUE_STRONG;
+}
+
+void CollectionTest::testGamePlatform() {
+  // test that the platform name guessing heuristic works on its own names
+  for(int i = 1; i < Tellico::Data::GameCollection::LastPlatform; i++) {
+    QString pName = Tellico::Data::GameCollection::platformName(Tellico::Data::GameCollection::GamePlatform(i));
+    int pGuess = Tellico::Data::GameCollection::guessPlatform(pName);
+    QCOMPARE(i, pGuess);
+  }
 }

@@ -270,7 +270,13 @@ void TheGamesDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
 
   const QString platformId = mapValue(resultMap_, "platform");
   if(m_platforms.contains(platformId)) {
-    entry_->setField(QStringLiteral("platform"), m_platforms[platformId]);
+    const QString platform = m_platforms[platformId];
+    // make the assumption that if the platform name isn't already in the allowed list, it should be added
+    Data::FieldPtr f = entry_->collection()->fieldByName(QStringLiteral("platform"));
+    if(f && !f->allowed().contains(platform)) {
+      f->setAllowed(QStringList(f->allowed()) << platform);
+    }
+    entry_->setField(QStringLiteral("platform"), platform);
   }
 
   const QString esrb = mapValue(resultMap_, "rating")
@@ -340,23 +346,7 @@ void TheGamesDBFetcher::readPlatformList(const QVariantMap& platformMap_) {
     i.next();
     QVariantMap map = i.value().toMap();
     QString name = map.value(QStringLiteral("name")).toString();
-    if(name.startsWith(QLatin1String("Microsoft"))) {
-      name = name.mid(sizeof("Microsoft"));
-    } else if(name.startsWith(QLatin1String("Sony Playstation"))) {
-      // default video game collection has no space between 'PlayStation' and #
-      name = QLatin1String("PlayStation") + name.mid(sizeof("Sony Playstation"));
-    } else if(name == QLatin1String("Nintendo GameCube")) {
-      name = i18n("GameCube");
-    } else if(name == QLatin1String("Nintendo Game Boy Advance")) {
-      name = i18n("Game Boy Advance");
-    } else if(name.startsWith(QLatin1String("Nintendo Wii"))) {
-      name = i18n("Nintendo Wii");
-    } else if(name == QLatin1String("Super Nintendo (SNES)")) {
-      name = i18n("Super Nintendo");
-    } else if(name == QLatin1String("PC")) {
-      name = i18nc("Windows Platform", "Windows");
-    }
-    m_platforms.insert(i.key(), name);
+    m_platforms.insert(i.key(), Data::GameCollection::normalizePlatform(name));
   }
 }
 
