@@ -93,7 +93,7 @@ private:
   void populateEntry(Data::EntryPtr entry, const QVariantMap& result);
 
   QPointer<KIO::StoredTransferJob> m_job;
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
 
   bool m_started;
 };

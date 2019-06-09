@@ -100,7 +100,7 @@ private:
   bool verifyData();
   void parseReleaseResults(Data::EntryPtr entry);
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
 
   bool m_started;
   QTcpSocket* m_socket;

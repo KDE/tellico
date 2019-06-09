@@ -93,7 +93,7 @@ private:
   void readSources() const;
 
   Data::EntryList m_entries;
-  QHash<int, Data::EntryPtr> m_entryHash;
+  QHash<uint, Data::EntryPtr> m_entryHash;
   int m_collType;
   QStringList m_uuids;
   mutable QList<Fetcher::Ptr> m_fetchers;

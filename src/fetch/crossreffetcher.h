@@ -100,7 +100,7 @@ private:
   mutable QString m_password;
   QString m_email;
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

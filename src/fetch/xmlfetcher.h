@@ -86,7 +86,7 @@ private:
   XSLTHandler* m_xsltHandler;
 
   QPointer<KIO::StoredTransferJob> m_job;
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
 
   bool m_started;
   int m_limit;

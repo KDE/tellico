@@ -83,8 +83,8 @@ private:
   Data::EntryPtr parseEntry(const QString& str);
 
   int m_total;
-  QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, QUrl> m_matches;
+  QHash<uint, Data::EntryPtr> m_entries;
+  QHash<uint, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

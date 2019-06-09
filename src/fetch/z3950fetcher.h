@@ -115,7 +115,7 @@ private:
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   bool m_started;
   bool m_done;
   QString m_preset;

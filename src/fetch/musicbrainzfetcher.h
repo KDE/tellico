@@ -104,7 +104,7 @@ private:
   int m_offset;
   QElapsedTimer m_requestTimer;
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

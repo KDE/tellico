@@ -100,7 +100,7 @@ private:
   void endJob(KIO::StoredTransferJob* job);
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;

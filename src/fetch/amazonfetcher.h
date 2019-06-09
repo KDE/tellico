@@ -149,7 +149,7 @@ private:
   int m_page;
   int m_total;
   int m_numResults;
-  QHash<int, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
+  QHash<uint, Data::EntryPtr> m_entries; // they get modified after collection is created, so can't be const
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
