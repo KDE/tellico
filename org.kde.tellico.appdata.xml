@@ -462,7 +462,7 @@
       <li xml:lang="fr">Scanne et importe les collections de fichiers audio, tels que les fichiers mp3 ou ogg</li>
       <li xml:lang="gl">Analiza e importa coleccións de ficheiros de son, como MP3 ou OGG.</li>
       <li xml:lang="ia">Il scande e importa collectiones de file audio, tal como mp3 o ogg</li>
-      <li xml:lang="id">Penyekénan dan pengimporan koleksi file audio, sepertihalnya mp3 atau ogg</li>
+      <li xml:lang="id">Pemindaian dan pengimporan koleksi file audio, sepertihalnya mp3 atau ogg</li>
       <li xml:lang="it">Cerca e importa collezioni di file audio, come mp3 oppure ogg</li>
       <li xml:lang="ko">MP3 또는 OGG 같은 오디오 파일 소장품 검색 및 가져오기</li>
       <li xml:lang="nl">Scant en importeert verzamelingen van audio-bestanden, zoals mp3 of ogg</li>
@@ -511,6 +511,7 @@
       <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
       <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
+      <caption xml:lang="id">Window utama menampilkan tampilan sisi ke sisi dari sebuah koleksi permainan</caption>
       <caption xml:lang="it">La finestra principale che mostra le viste affiancate di una collezione di libri</caption>
       <caption xml:lang="ko">게임 소장품을 나란히 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een spellenverzameling naast elkaar toont</caption>
