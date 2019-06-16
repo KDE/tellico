@@ -342,8 +342,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(langs.contains(QStringLiteral("ru"))) {
     FETCHER_ADD(KinoPoisk);
   }
-  if(langs.contains(QStringLiteral("ru"))) {
-    FETCHER_ADD(KinoPoisk);
+  if(langs.contains(QStringLiteral("ua"))) {
+    FETCHER_ADD(KinoTeatr);
   }
   if(langs.contains(QStringLiteral("de"))) {
     FETCHER_ADD(Kino);
