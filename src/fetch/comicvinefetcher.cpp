@@ -182,7 +182,6 @@ Tellico::Data::EntryPtr ComicVineFetcher::fetchEntryHookData(Data::EntryPtr entr
     if(!pub.isEmpty()) {
       Data::EntryPtr e = coll->entries().front();
       if(e) {
-        myDebug() << pub;
         e->setField(QStringLiteral("publisher"), pub);
       }
     }
