@@ -240,7 +240,12 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     if(!actors.isEmpty()) {
       entry->setField(QStringLiteral("cast"), actors.join(FieldFormat::rowDelimiterString()));
     }
-    entry->setField(QStringLiteral("cover"), mapValue(objectMap, "image"));
+    // cover could be a relative link
+    QString coverLink = mapValue(objectMap, "image");
+    if(coverLink.startsWith(QStringLiteral("//"))) {
+      coverLink.prepend(QStringLiteral("https:"));
+    }
+    entry->setField(QStringLiteral("cover"), coverLink);
   }
 
   QRegularExpression tagRx(QStringLiteral("<.+?>"));
