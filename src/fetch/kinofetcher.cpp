@@ -155,8 +155,8 @@ void KinoFetcher::slotComplete(KJob*) {
     if(u.isEmpty()) {
       continue;
     }
-    if(u.startsWith(QStringLiteral("//"))) {
-      u.prepend(QStringLiteral("https:"));
+    if(u.startsWith(QLatin1String("//"))) {
+      u.prepend(QLatin1String("https:"));
     }
     Data::CollPtr coll(new Data::VideoCollection(true));
     Data::EntryPtr entry(new Data::Entry(coll));
@@ -242,8 +242,8 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     }
     // cover could be a relative link
     QString coverLink = mapValue(objectMap, "image");
-    if(coverLink.startsWith(QStringLiteral("//"))) {
-      coverLink.prepend(QStringLiteral("https:"));
+    if(coverLink.startsWith(QLatin1String("//"))) {
+      coverLink.prepend(QLatin1String("https:"));
     }
     entry->setField(QStringLiteral("cover"), coverLink);
   }
@@ -294,13 +294,13 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     QString c = certMatch.captured(1).remove(tagRx);
     if(c == QStringLiteral("ab 0")) {
       c = QStringLiteral("FSK 0 (DE)");
-    } else if(c == QStringLiteral("ab 6")) {
+    } else if(c == QLatin1String("ab 6")) {
       c = QStringLiteral("FSK 6 (DE)");
-    } else if(c == QStringLiteral("ab 12")) {
+    } else if(c == QLatin1String("ab 12")) {
       c = QStringLiteral("FSK 12 (DE)");
-    } else if(c == QStringLiteral("ab 16")) {
+    } else if(c == QLatin1String("ab 16")) {
       c = QStringLiteral("FSK 16 (DE)");
-    } else if(c == QStringLiteral("ab 18")) {
+    } else if(c == QLatin1String("ab 18")) {
       c = QStringLiteral("FSK 18 (DE)");
     }
     entry->setField(QStringLiteral("certification"), c);
