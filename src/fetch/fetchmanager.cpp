@@ -305,6 +305,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 // comic books
   FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Bedetheque);
+  FETCHER_ADD(ComicVine);
 // bibliographic
   FETCHER_ADD(Arxiv);
   FETCHER_ADD(GoogleScholar);
