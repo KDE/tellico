@@ -105,9 +105,13 @@ QPixmap NetAccess::filePreview(const QUrl& url, int size) {
 QPixmap NetAccess::filePreview(const KFileItem& item, int size) {
   NetAccess netaccess;
 
-  KIO::Job* previewJob = KIO::filePreview(KFileItemList() << item, QSize(size, size));
-  connect(previewJob, SIGNAL(gotPreview(const KFileItem&, const QPixmap&)),
-          &netaccess, SLOT(slotPreview(const KFileItem&, const QPixmap&)));
+  // the default plugins are not used by default (what???)
+  // the default ones are in config settings instead, so ignore that
+  const QStringList plugins = KIO::PreviewJob::defaultPlugins();
+  KIO::PreviewJob* previewJob = KIO::filePreview(KFileItemList() << item, QSize(size, size),
+                                                 &plugins);
+  connect(previewJob, &KIO::PreviewJob::gotPreview,
+          &netaccess, &Tellico::NetAccess::slotPreview);
 
   if(GUI::Proxy::widget()) {
     KJobWidgets::setWindow(previewJob, GUI::Proxy::widget());

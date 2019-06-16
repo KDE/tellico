@@ -252,7 +252,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
     }
 
     if(showProgress) {
-      ProgressManager::self()->setProgress(this, j);
+      ProgressManager::self()->setProgress(this, j+1);
       qApp->processEvents();
     }
   }
