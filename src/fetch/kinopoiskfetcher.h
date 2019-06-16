@@ -64,7 +64,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_);
+    explicit ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
     virtual QString preferredName() const Q_DECL_OVERRIDE;
   };

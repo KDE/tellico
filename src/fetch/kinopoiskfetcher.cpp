@@ -433,11 +433,13 @@ Tellico::StringHash KinoPoiskFetcher::allOptionalFields() {
   return hash;
 }
 
-KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_)
+KinoPoiskFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+
+  addFieldsWidget(KinoPoiskFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 QString KinoPoiskFetcher::ConfigWidget::preferredName() const {
