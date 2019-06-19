@@ -102,7 +102,8 @@ enum Type {
   IGDB,
   Kino,
   MobyGames,
-  ComicVine
+  ComicVine,
+  KinoTeatr
 };
 
   }

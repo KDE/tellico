@@ -97,7 +97,7 @@ private:
   bool initMARC21Handler();
   bool initMODSHandler();
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

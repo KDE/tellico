@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,8 +22,8 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_FETCH_IBSFETCHER_H
-#define TELLICO_FETCH_IBSFETCHER_H
+#ifndef TELLICO_FETCH_KINOTEATRFETCHER_H
+#define TELLICO_FETCH_KINOTEATRFETCHER_H
 
 #include "fetcher.h"
 #include "configwidget.h"
@@ -40,23 +40,23 @@ namespace Tellico {
   namespace Fetch {
 
 /**
- * A fetcher for www.ibs.it
+ * A fetcher for kino-teatr.ua
  *
  * @author Robby Stephenson
  */
-class IBSFetcher : public Fetcher {
+class KinoTeatrFetcher : public Fetcher {
 Q_OBJECT
 
 public:
-  IBSFetcher(QObject* parent);
-  virtual ~IBSFetcher();
+  KinoTeatrFetcher(QObject* parent);
+  virtual ~KinoTeatrFetcher();
 
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
-  virtual Type type() const Q_DECL_OVERRIDE { return IBS; }
+  virtual Type type() const Q_DECL_OVERRIDE { return KinoTeatr; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
@@ -64,7 +64,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_);
+    explicit ConfigWidget(QWidget* parent_, const KinoTeatrFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
     virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
@@ -72,7 +72,7 @@ public:
 
   static QString defaultName();
   static QString defaultIcon();
-  static StringHash allOptionalFields() { return StringHash(); }
+  static StringHash allOptionalFields();
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
@@ -81,8 +81,8 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryPtr parseEntry(const QString& str);
+  void parsePeople(Data::EntryPtr entry, const QString& str);
 
-  int m_total;
   QHash<uint, Data::EntryPtr> m_entries;
   QHash<uint, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;

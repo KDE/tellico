@@ -305,6 +305,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 // comic books
   FETCHER_ADD(AnimeNfo);
   FETCHER_ADD(Bedetheque);
+  FETCHER_ADD(ComicVine);
 // bibliographic
   FETCHER_ADD(Arxiv);
   FETCHER_ADD(GoogleScholar);
@@ -341,8 +342,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   if(langs.contains(QStringLiteral("ru"))) {
     FETCHER_ADD(KinoPoisk);
   }
-  if(langs.contains(QStringLiteral("ru"))) {
-    FETCHER_ADD(KinoPoisk);
+  if(langs.contains(QStringLiteral("ua"))) {
+    FETCHER_ADD(KinoTeatr);
   }
   if(langs.contains(QStringLiteral("de"))) {
     FETCHER_ADD(Kino);

@@ -120,7 +120,7 @@ private:
   QString m_updateArgs;
   QPointer<KProcess> m_process;
   QByteArray m_data;
-  QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
+  QHash<uint, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
   bool m_deleteOnRemove : 1;
   QString m_newStuffName;

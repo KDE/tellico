@@ -307,6 +307,11 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setCategory(i18n("Personal"));
       field->setFlags(Field::NoEdit);
       break;
+    case IsbnField:
+      field = new Field(QStringLiteral("isbn"), i18n("ISBN#"));
+      field->setCategory(i18n("Publishing"));
+      field->setDescription(i18n("International Standard Book Number"));
+      break;
   }
   Q_ASSERT(field);
   return field;

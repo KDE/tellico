@@ -106,7 +106,7 @@ private:
   QString m_format;
   StringMap m_queryMap;
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
   XSLTHandler* m_MARCXMLHandler;
   XSLTHandler* m_MODSHandler;

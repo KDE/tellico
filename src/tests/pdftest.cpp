@@ -30,17 +30,20 @@
 #include "../translators/pdfimporter.h"
 #include "../collections/bibtexcollection.h"
 #include "../collectionfactory.h"
+#include "../images/imagefactory.h"
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
 #include <QTest>
 
-QTEST_GUILESS_MAIN( PdfTest )
+// needs a GUI for QPixmaps
+QTEST_MAIN( PdfTest )
 
 void PdfTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBook(Tellico::Data::Collection::Bibtex, "bibliography");
   // since we use the XMP importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/xmp2tellico.xsl"));
+  Tellico::ImageFactory::init();
 }
 
 void PdfTest::testScienceDirect() {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2016 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,41 +22,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLLECTIONTEST_H
-#define COLLECTIONTEST_H
+#ifndef KINOTEATRFETCHERTEST_H
+#define KINOTEATRFETCHERTEST_H
 
-#include <QObject>
+#include "abstractfetchertest.h"
 
-#include "../datavectors.h"
-
-class CollectionTest : public QObject {
+class KinoTeatrFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
+public:
+  KinoTeatrFetcherTest();
 
 private Q_SLOTS:
   void initTestCase();
-  void cleanupTestCase();
-
-  void testEmpty();
-  void testCollection();
-  void testFields();
-  void testDerived();
-  void testValue();
-  void testValue_data();
-  void testDtd();
-  void testDtd_data();
-  void testDuplicate();
-  void testMergeFields();
-  void testAppendCollection();
-  void testMergeCollection();
-  void testBookMatch();
-  void testMergeBenchmark();
-  void testMatchScore();
-  void testMatchScore_data();
-  void testGamePlatform();
-
-private:
-  Tellico::Data::CollPtr m_coll;
-  Tellico::Data::EntryPtr m_entry;
+  void testSuperman();
 };
 
 #endif

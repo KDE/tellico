@@ -69,12 +69,9 @@ bool GRS1Importer::canImport(int type) const {
 Tellico::Data::CollPtr GRS1Importer::collection() {
   Data::CollPtr coll(new Data::BibtexCollection(true));
 
-  Data::FieldPtr f(new Data::Field(QStringLiteral("isbn"), i18n("ISBN#")));
-  f->setCategory(i18n("Publishing"));
-  f->setDescription(i18n("International Standard Book Number"));
-  coll->addField(f);
+  coll->addField(Data::Field::createDefaultField(Data::Field::IsbnField));
 
-  f = new Data::Field(QStringLiteral("language"), i18n("Language"));
+  Data::FieldPtr f(new Data::Field(QStringLiteral("language"), i18n("Language")));
   f->setCategory(i18n("Publishing"));
   f->setFlags(Data::Field::AllowCompletion | Data::Field::AllowGrouped | Data::Field::AllowMultiple);
   coll->addField(f);

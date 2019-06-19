@@ -4,6 +4,7 @@ SET(utils_STAT_SRCS
    bibtexhandler.cpp
    cursorsaver.cpp
    datafileregistry.cpp
+   gradient.cpp
    guiproxy.cpp
    iso5426converter.cpp
    iso6937converter.cpp

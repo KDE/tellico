@@ -100,8 +100,8 @@ private:
   int m_start;
   int m_total;
 
-  QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
-  QHash<int, int> m_matches; // search result id to pubmed id
+  QHash<uint, Data::EntryPtr> m_entries; // map from search result id to entry
+  QHash<uint, int> m_matches; // search result id to pubmed id
   QPointer<KIO::StoredTransferJob> m_job;
 
   QString m_queryKey;

@@ -18,8 +18,4 @@ TARGET_LINK_LIBRARIES(images
     Qt5::Gui
 )
 
-IF( QImageBlitz_FOUND )
-  TARGET_LINK_LIBRARIES(images ${QIMAGEBLITZ_LIBRARIES})
-ENDIF( QImageBlitz_FOUND )
-
 ADD_DEPENDENCIES(images tellico_config)

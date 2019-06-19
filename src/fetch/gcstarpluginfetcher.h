@@ -103,7 +103,7 @@ private:
 
   GCstarThread* m_thread;
   QByteArray m_data;
-  QHash<int, Data::EntryPtr> m_entries; // map from search result id to entry
+  QHash<uint, Data::EntryPtr> m_entries; // map from search result id to entry
   QStringList m_errors;
 };
 

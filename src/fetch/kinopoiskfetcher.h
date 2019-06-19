@@ -64,7 +64,7 @@ public:
 
   class ConfigWidget : public Fetch::ConfigWidget {
   public:
-    explicit ConfigWidget(QWidget* parent_);
+    explicit ConfigWidget(QWidget* parent_, const KinoPoiskFetcher* fetcher = nullptr);
     virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
     virtual QString preferredName() const Q_DECL_OVERRIDE;
   };
@@ -82,8 +82,8 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryPtr parseEntry(const QString& str);
 
-  QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, QUrl> m_matches;
+  QHash<uint, Data::EntryPtr> m_entries;
+  QHash<uint, QUrl> m_matches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

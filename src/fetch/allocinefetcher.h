@@ -86,7 +86,7 @@ private:
   Data::CollPtr createCollection() const;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
 
-  QHash<int, Data::EntryPtr> m_entries;
+  QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;

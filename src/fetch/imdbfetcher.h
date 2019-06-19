@@ -153,11 +153,11 @@ private:
   Data::EntryPtr parseEntry(const QString& str);
 
   QString m_text;
-  QHash<int, Data::EntryPtr> m_entries;
-  QHash<int, QUrl> m_matches;
+  QHash<uint, Data::EntryPtr> m_entries;
+  QHash<uint, QUrl> m_matches;
   // if a new search is started, m_matches is cleared
   // but we might still need to recover an entry by uid
-  QHash<int, QUrl> m_allMatches;
+  QHash<uint, QUrl> m_allMatches;
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
