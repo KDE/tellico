@@ -1,3 +1,7 @@
+2019-07-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with not updating status bar when cancelling an entry update (Bug 325591).
+
 2019-06-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed file preview generation.

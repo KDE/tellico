@@ -101,7 +101,6 @@ void ProgressItem::cancel() {
 
   m_cancelled = true;
   emit signalCancelled(this);
-  m_done = true;
 }
 
 /* *********************************************** */
@@ -206,7 +205,6 @@ void ProgressManager::slotCancelAll() {
   for(ProgressMap::Iterator it = m_items.begin(), end = m_items.end(); it != end; ++it) {
     if(it.value()) {
       it.value()->cancel();
-      setDone(it.value());
     }
   }
 }

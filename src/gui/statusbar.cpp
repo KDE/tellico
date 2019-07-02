@@ -24,8 +24,8 @@
  ***************************************************************************/
 
 #include "statusbar.h"
-#include "../progressmanager.h"
 #include "progress.h"
+#include "../progressmanager.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -89,6 +89,8 @@ void StatusBar::ensurePolished() const {
 }
 
 void StatusBar::clearStatus() {
+// always hide progress bar when clearing status
+  slotProgress(100);
   setStatus(i18n("Ready."));
 }
 
@@ -102,7 +104,7 @@ void StatusBar::setCount(const QString& count_) {
 }
 
 void StatusBar::slotProgress(qulonglong progress_) {
-//  myDebug() << "Progress" << progress_;
+//  myDebug() << "StatusBar::slotProgress - Progress:" << progress_;
   // yes, yes, yes, casting from longlong to int is bad, I know...
   m_progress->setValue(progress_);
   if(m_progress->isDone()) {
