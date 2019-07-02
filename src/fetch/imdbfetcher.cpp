@@ -383,7 +383,6 @@ void IMDBFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myLog();
   if(m_job) {
     m_job->kill();
     m_job = nullptr;

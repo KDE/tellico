@@ -85,7 +85,7 @@ void ProgressItem::setDone() {
     m_progress = m_total;
   }
   if(m_done) {
-    myDebug() << "Progress item is already done";
+    myDebug() << "ProgressItem::setDone() - Progress item is already done";
   } else {
     m_done = true;
     emit signalDone(this);
