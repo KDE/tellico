@@ -166,7 +166,6 @@ private:
   QMenu* m_headerMenu;
   QMenu* m_columnMenu;
   bool m_loadingCollection;
-  bool m_selectionChanging;
   int m_currentContextColumn;
 };
 

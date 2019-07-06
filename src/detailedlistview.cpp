@@ -50,7 +50,7 @@ using namespace Tellico;
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
-    , m_loadingCollection(false), m_selectionChanging(false), m_currentContextColumn(-1) {
+    , m_loadingCollection(false), m_currentContextColumn(-1) {
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
@@ -194,9 +194,6 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
   sourceModel()->addEntries(entries_);
   if(!m_loadingCollection) {
     setState(entries_, NewState);
-    if(!m_selectionChanging) {
-      setEntriesSelected(entries_);
-    }
   }
 }
 
@@ -206,9 +203,6 @@ void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {
   }
   sourceModel()->modifyEntries(entries_);
   setState(entries_, ModifiedState);
-  if(!m_selectionChanging) {
-    setEntriesSelected(entries_);
-  }
 }
 
 void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {

@@ -814,12 +814,12 @@ void MainWindow::initConnections() {
           this, SLOT(slotEditDialogFinished()));
 
   EntrySelectionModel* proxySelect = static_cast<EntrySelectionModel*>(m_iconView->selectionModel());
-  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
-          Controller::self(), SLOT(slotUpdateSelection(Tellico::Data::EntryList)));
-  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
-          m_editDialog, SLOT(setContents(Tellico::Data::EntryList)));
-  connect(proxySelect, SIGNAL(entriesSelected(Tellico::Data::EntryList)),
-          m_entryView, SLOT(showEntries(Tellico::Data::EntryList)));
+  connect(proxySelect, &EntrySelectionModel::entriesSelected,
+          Controller::self(), &Controller::slotUpdateSelection);
+  connect(proxySelect, &EntrySelectionModel::entriesSelected,
+          m_editDialog, &EntryEditDialog::setContents);
+  connect(proxySelect, &EntrySelectionModel::entriesSelected,
+          m_entryView, &EntryView::showEntries);
 
   // let the group view call filters, too
   connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),

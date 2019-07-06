@@ -1,3 +1,7 @@
+2019-07-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed selection bug when modifying an entry after selection changed (Bug 391614).
+
 2019-07-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with not updating status bar when cancelling an entry update (Bug 325591).

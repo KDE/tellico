@@ -454,7 +454,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   m_needReset = false;
 
   // first set contents to first item
-  setContents(entries_.front());
+  setEntry(entries_.front());
   // something weird...if list count can actually be 1 before the setContents call
   // and 0 after it. Why is that? It's const!
   if(entries_.count() < 2) {
@@ -491,7 +491,7 @@ void EntryEditDialog::setContents(Tellico::Data::EntryList entries_) {
   m_saveButton->setText(i18n("Sa&ve Entries"));
 }
 
-void EntryEditDialog::setContents(Tellico::Data::EntryPtr entry_) {
+void EntryEditDialog::setEntry(Tellico::Data::EntryPtr entry_) {
   if(m_isWorking || !queryModified()) {
     return;
   }
