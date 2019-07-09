@@ -38,7 +38,7 @@ LineEdit::LineEdit(QWidget* parent_) : KLineEdit(parent_) //krazy:exclude=qclass
     , m_allowSpellCheck(false)
     , m_enableSpellCheck(true)
     , m_sonnetDialog(nullptr) {
-  m_spellAction = KStandardAction::spelling(this, SLOT(slotCheckSpelling()), new KActionCollection(this));
+  m_spellAction = KStandardAction::spelling(this, &LineEdit::slotCheckSpelling, new KActionCollection(this));
 }
 
 void LineEdit::contextMenuEvent(QContextMenuEvent* event_) {
@@ -62,12 +62,13 @@ void LineEdit::slotCheckSpelling() {
   delete m_sonnetDialog;
   m_sonnetDialog = new Sonnet::Dialog(new Sonnet::BackgroundChecker(this), this);
 
-  connect(m_sonnetDialog, SIGNAL(done(const QString&)),
-          SLOT(spellCheckerFinished()));
-  connect(m_sonnetDialog, SIGNAL(misspelling( const QString&, int)),
-          SLOT(spellCheckerMisspelling(const QString&, int)));
-  connect(m_sonnetDialog, SIGNAL(corrected(const QString&, int, const QString&)),
-          SLOT(spellCheckerCorrected(const QString&, int, const QString&)));
+  void (Sonnet::Dialog::* doneString)(const QString&) = &Sonnet::Dialog::done;
+  connect(m_sonnetDialog, doneString,
+          this, &LineEdit::slotSpellCheckDone);
+  connect(m_sonnetDialog, &Sonnet::Dialog::misspelling,
+          this, &LineEdit::spellCheckerMisspelling);
+  connect(m_sonnetDialog, &Sonnet::Dialog::replace,
+          this, &LineEdit::spellCheckerCorrected);
 
   if(hasSelectedText()) {
     m_sonnetDialog->setBuffer(selectedText());

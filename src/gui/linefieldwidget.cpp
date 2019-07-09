@@ -38,7 +38,7 @@ LineFieldWidget::LineFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   m_lineEdit = new GUI::LineEdit(this);
   m_lineEdit->setAllowSpellCheck(true);
   m_lineEdit->setEnableSpellCheck(field_->formatType() != FieldFormat::FormatName);
-  connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
+  connect(m_lineEdit, &QLineEdit::textChanged, this, &LineFieldWidget::checkModified);
 
   registerWidget();
 

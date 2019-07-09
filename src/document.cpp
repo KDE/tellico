@@ -80,11 +80,15 @@ void Document::setURL(const QUrl& url_) {
   }
 }
 
-void Document::slotSetModified(bool modified_/*=true*/) {
+void Document::setModified(bool modified_) {
   if(modified_ != m_isModified) {
     m_isModified = modified_;
     emit signalModified(m_isModified);
   }
+}
+
+void Document::slotSetModified() {
+  setModified(true);
 }
 
 /**
@@ -92,7 +96,7 @@ void Document::slotSetModified(bool modified_/*=true*/) {
  * the document modified flag
  */
 void Document::slotSetClean(bool clean_) {
-  slotSetModified(!clean_);
+  setModified(!clean_);
 }
 
 bool Document::newDocument(int type_) {
@@ -108,7 +112,7 @@ bool Document::newDocument(int type_) {
   emit signalCollectionAdded(m_coll);
   emit signalCollectionImagesLoaded(m_coll);
 
-  slotSetModified(false);
+  setModified(false);
   QUrl url = QUrl::fromLocalFile(i18n(Tellico::untitledFilename));
   setURL(url);
   m_validFile = false;
@@ -168,7 +172,7 @@ bool Document::openDocument(const QUrl& url_) {
   emit signalCollectionAdded(m_coll);
 
   // m_importer might have been deleted?
-  slotSetModified(m_importer && m_importer->modifiedOriginal());
+  setModified(m_importer && m_importer->modifiedOriginal());
 //  if(pruneImages()) {
 //    slotSetModified(true);
 //  }
@@ -245,7 +249,7 @@ bool Document::saveDocument(const QUrl& url_, bool force_) {
   if(success) {
     setURL(url_);
     // if successful, doc is no longer modified
-    slotSetModified(false);
+    setModified(false);
   } else {
     myDebug() << "Document::saveDocument() - not successful saving to" << url_.url();
   }

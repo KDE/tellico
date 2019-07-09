@@ -84,12 +84,12 @@ KWidgetLister::KWidgetLister( int minWidgets, int maxWidgets, QWidget *parent, c
   mButtonBoxHBoxLayout->setStretchFactor( mBtnClear, 0 );
 
   //---------- connect everything
-  connect( mBtnMore, SIGNAL(clicked()),
-           this, SLOT(slotMore()) );
-  connect( mBtnFewer, SIGNAL(clicked()),
-           this, SLOT(slotFewer()) );
-  connect( mBtnClear, SIGNAL(clicked()),
-           this, SLOT(slotClear()) );
+  connect( mBtnMore, &QAbstractButton::clicked,
+           this, &KWidgetLister::slotMore );
+  connect( mBtnFewer, &QAbstractButton::clicked,
+           this, &KWidgetLister::slotFewer );
+  connect( mBtnClear, &QAbstractButton::clicked,
+           this, &KWidgetLister::slotClear );
 
   enableControls();
 }

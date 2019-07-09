@@ -39,7 +39,8 @@ ChoiceFieldWidget::ChoiceFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
     : FieldWidget(field_, parent_), m_comboBox(nullptr) {
 
   m_comboBox = new QComboBox(this);
-  connect(m_comboBox, SIGNAL(activated(int)), SLOT(checkModified()));
+  void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
+  connect(m_comboBox, activatedInt, this, &ChoiceFieldWidget::checkModified);
   m_maxTextWidth = MAX_FRACTION_SCREEN_WIDTH * QGuiApplication::primaryScreen()->size().width();
 
   QStringList values = field_->allowed();

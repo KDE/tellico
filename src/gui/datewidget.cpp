@@ -100,13 +100,15 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   l->addWidget(m_yearSpin, 1);
   l->setStretchFactor(m_yearSpin, 1);
 
-  connect(m_daySpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
-  connect(m_monthCombo, SIGNAL(activated(int)), SLOT(slotDateChanged()));
-  connect(m_yearSpin, SIGNAL(valueChanged(int)), SLOT(slotDateChanged()));
+  void (SpinBox::* valueChangedInt)(int) = &SpinBox::valueChanged;
+  void (KComboBox::* activatedInt)(int) = &KComboBox::activated;
+  connect(m_daySpin, valueChangedInt, this, &DateWidget::slotDateChanged);
+  connect(m_monthCombo, activatedInt, this, &DateWidget::slotDateChanged);
+  connect(m_yearSpin, valueChangedInt, this, &DateWidget::slotDateChanged);
 
   m_dateButton = new QPushButton(this);
   m_dateButton->setIcon(QIcon::fromTheme(QStringLiteral("view-pim-calendar")));
-  connect(m_dateButton, SIGNAL(clicked()), SLOT(slotShowPicker()));
+  connect(m_dateButton, &QAbstractButton::clicked, this, &DateWidget::slotShowPicker);
   l->addWidget(m_dateButton, 0);
 
   m_menu = new QMenu(this);
@@ -114,8 +116,8 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
 
   m_picker = new KDatePicker(m_menu);
   m_picker->setCloseButton(false);
-  connect(m_picker, SIGNAL(dateEntered(QDate)), SLOT(slotDateEntered(QDate)));
-  connect(m_picker, SIGNAL(dateSelected(QDate)), SLOT(slotDateSelected(QDate)));
+  connect(m_picker, &KDatePicker::dateEntered, this, &DateWidget::slotDateEntered);
+  connect(m_picker, &KDatePicker::dateSelected, this, &DateWidget::slotDateSelected);
 
   m_menu->addAction(new DatePickerAction(m_picker, m_menu));
 }

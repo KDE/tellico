@@ -48,7 +48,7 @@ NumberFieldWidget::NumberFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pa
 
 void NumberFieldWidget::initLineEdit() {
   m_lineEdit = new QLineEdit(this);
-  connect(m_lineEdit, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
+  connect(m_lineEdit, &QLineEdit::textChanged, this, &NumberFieldWidget::checkModified);
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
@@ -59,7 +59,8 @@ void NumberFieldWidget::initLineEdit() {
 void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers
   m_spinBox = new GUI::SpinBox(-1, INT_MAX, this);
-  connect(m_spinBox, SIGNAL(valueChanged(const QString&)), SLOT(checkModified()));
+  void (GUI::SpinBox::* valueChanged)(const QString&) = &GUI::SpinBox::valueChanged;
+  connect(m_spinBox, valueChanged, this, &NumberFieldWidget::checkModified);
 }
 
 QString NumberFieldWidget::text() const {

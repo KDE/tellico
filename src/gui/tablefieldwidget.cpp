@@ -72,12 +72,12 @@ TableFieldWidget::TableFieldWidget(Tellico::Data::FieldPtr field_, QWidget* pare
   m_table->verticalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
   m_table->horizontalHeader()->setContextMenuPolicy(Qt::CustomContextMenu);
 
-  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SLOT(checkModified()));
-  connect(m_table, SIGNAL(itemChanged(QTableWidgetItem*)), SLOT(slotResizeColumn(QTableWidgetItem*)));
-  connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCheckRows(int, int)));
-  connect(m_table, SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(tableContextMenu(const QPoint&)));
-  connect(m_table->horizontalHeader(), SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(horizontalHeaderContextMenu(const QPoint&)));
-  connect(m_table->verticalHeader(), SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(verticalHeaderContextMenu(const QPoint&)));
+  connect(m_table, &QTableWidget::itemChanged, this, &TableFieldWidget::checkModified);
+  connect(m_table, &QTableWidget::itemChanged, this, &TableFieldWidget::slotResizeColumn);
+  connect(m_table, &QTableWidget::currentCellChanged, this, &TableFieldWidget::slotCheckRows);
+  connect(m_table, &QWidget::customContextMenuRequested, this, &TableFieldWidget::tableContextMenu);
+  connect(m_table->horizontalHeader(), &QWidget::customContextMenuRequested, this, &TableFieldWidget::horizontalHeaderContextMenu);
+  connect(m_table->verticalHeader(), &QWidget::customContextMenuRequested, this, &TableFieldWidget::verticalHeaderContextMenu);
 
   registerWidget();
 }
@@ -232,9 +232,9 @@ void TableFieldWidget::horizontalHeaderContextMenu(QPoint point_) {
 
   QMenu menu(this);
   menu.addAction(QIcon::fromTheme(QStringLiteral("edit-rename")), i18n("Rename Column..."),
-                 this, SLOT(slotRenameColumn()));
+                 this, &TableFieldWidget::slotRenameColumn);
   menu.addAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Table"),
-                 this, SLOT(clearImpl()));
+                 this, &TableFieldWidget::clearImpl);
   menu.exec(m_table->horizontalHeader()->mapToGlobal(point_));
 }
 
@@ -251,28 +251,28 @@ void TableFieldWidget::verticalHeaderContextMenu(QPoint point_) {
 void TableFieldWidget::makeRowContextMenu(QPoint point_) {
   QMenu menu(this);
   menu.addAction(QIcon::fromTheme(QStringLiteral("edit-table-insert-row-below")), i18n("Insert Row"),
-                 this, SLOT(slotInsertRow()));
+                 this, &TableFieldWidget::slotInsertRow);
   menu.addAction(QIcon::fromTheme(QStringLiteral("edit-table-delete-row")), i18n("Remove Row"),
-                 this, SLOT(slotRemoveRow()));
+                 this, &TableFieldWidget::slotRemoveRow);
   QAction* act = menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-up")), i18n("Move Row Up"),
-                                this, SLOT(slotMoveRowUp()));
+                                this, &TableFieldWidget::slotMoveRowUp);
   if(m_row < 1) {
     act->setEnabled(false);
   }
   act = menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down")), i18n("Move Row Down"),
-                       this, SLOT(slotMoveRowDown()));
+                       this, &TableFieldWidget::slotMoveRowDown);
   if(m_row < 0 || m_row > m_table->rowCount()-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
   act = menu.addAction(QIcon::fromTheme(QStringLiteral("edit-rename")), i18n("Rename Column..."),
-                       this, SLOT(slotRenameColumn()));
+                       this, &TableFieldWidget::slotRenameColumn);
   if(m_col < 0 || m_col > m_columns-1) {
     act->setEnabled(false);
   }
   menu.addSeparator();
   menu.addAction(QIcon::fromTheme(QStringLiteral("edit-clear")), i18n("Clear Table"),
-                 this, SLOT(slotClear()));
+                 this, &TableFieldWidget::slotClear);
 
   menu.exec(point_);
 }

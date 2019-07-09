@@ -66,7 +66,7 @@ RatingWidget::RatingWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   } else {
     m_clearButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear-locationbar-ltr")));
   }
-  connect(m_clearButton, SIGNAL(clicked()), this, SLOT(clearClicked()));
+  connect(m_clearButton, &QAbstractButton::clicked, this, &RatingWidget::clearClicked);
   layout->addWidget(m_clearButton);
 
   // to keep the widget from resizing when the clear button is shown/hidden

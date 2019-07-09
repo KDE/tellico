@@ -45,8 +45,8 @@ StringMapDialog::StringMapDialog(const QMap<QString, QString>& map_, QWidget* pa
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   mainLayout->addWidget(buttonBox);
 
   setMinimumWidth(400);

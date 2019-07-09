@@ -76,6 +76,7 @@ public:
    * @return A boolean indicating the modified status
    */
   bool isModified() const { return m_isModified; }
+  void setModified(bool modified);
   /**
    * Sets whether all images are loaded from file or not
    */
@@ -188,11 +189,10 @@ public:
 
 public Q_SLOTS:
   /**
-   * Sets the modified flag. If it is true, the signalModified signal is made.
+   * Sets the modified flag to true, emitting signalModified.
    *
-   * @param m A boolean indicating the current modified status
    */
-  void slotSetModified(bool m=true);
+  void slotSetModified();
   void slotSetClean(bool clean);
 
 Q_SIGNALS:

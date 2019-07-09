@@ -32,7 +32,7 @@ using Tellico::GUI::RatingFieldWidget;
 RatingFieldWidget::RatingFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_) {
   m_rating = new RatingWidget(field_, this);
-  connect(m_rating, SIGNAL(signalModified()), SLOT(checkModified()));
+  connect(m_rating, &RatingWidget::signalModified, this, &RatingFieldWidget::checkModified);
 
   registerWidget();
 }

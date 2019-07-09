@@ -40,7 +40,7 @@ namespace {
 FilterRuleWidgetLister::FilterRuleWidgetLister(QWidget* parent_)
     : KWidgetLister(FILTER_MIN_RULE_WIDGETS, FILTER_MAX_RULES, parent_) {
 //  slotClear();
-  connect(this, SIGNAL(clearWidgets()), SIGNAL(signalModified()));
+  connect(this, &KWidgetLister::clearWidgets, this, &FilterRuleWidgetLister::signalModified);
 }
 
 void FilterRuleWidgetLister::setFilter(Tellico::FilterPtr filter_) {
@@ -85,8 +85,8 @@ void FilterRuleWidgetLister::setFocus() {
 }
 
 QWidget* FilterRuleWidgetLister::createWidget(QWidget* parent_) {
-  QWidget* w = new FilterRuleWidget(static_cast<Tellico::FilterRule*>(nullptr), parent_);
-  connect(w, SIGNAL(signalModified()), SIGNAL(signalModified()));
+  FilterRuleWidget* w = new FilterRuleWidget(static_cast<Tellico::FilterRule*>(nullptr), parent_);
+  connect(w, &FilterRuleWidget::signalModified, this, &FilterRuleWidgetLister::signalModified);
   return w;
 }
 
