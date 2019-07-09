@@ -78,8 +78,8 @@ void ImageJobTest::testInvalidUrl() {
   QUrl u;
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job, &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_MALFORMED_URL));
@@ -89,8 +89,8 @@ void ImageJobTest::testNonexistant() {
   QUrl u(QStringLiteral("file:///non-existent-location"));
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job, &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
@@ -103,8 +103,8 @@ void ImageJobTest::testUnreadable() {
   QUrl u = QUrl::fromLocalFile(tmpFile.fileName());
 
   Tellico::ImageJob* job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job, &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_CANNOT_OPEN_FOR_READING));
@@ -118,8 +118,8 @@ void ImageJobTest::testImageInvalid() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("imagejobtest.cpp"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
@@ -133,8 +133,8 @@ void ImageJobTest::testImageLoad() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   // success!
@@ -155,8 +155,8 @@ void ImageJobTest::testImageLoadWithId() {
   QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("../../icons/tellico.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u, QStringLiteral("tellico-rocks"));
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   // success!
@@ -176,8 +176,8 @@ void ImageJobTest::testImageLink() {
                                                           QString() /* id */,
                                                           false /* quiet */);
   job->setLinkOnly(true);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   // success!
@@ -200,8 +200,8 @@ void ImageJobTest::testNetworkImage() {
   QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   // success!
@@ -230,8 +230,8 @@ void ImageJobTest::testNetworkImageLink() {
                                                           QString() /* id */,
                                                           false /* quiet */);
   job->setLinkOnly(true);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   // success!
@@ -253,8 +253,8 @@ void ImageJobTest::testNetworkImageInvalid() {
   QUrl u(QStringLiteral("http://tellico-project.org"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
-  connect(job, SIGNAL(result(KJob*)),
-          this, SLOT(slotGetResult(KJob*)));
+  connect(job.data(), &KJob::result,
+          this, &ImageJobTest::slotGetResult);
 
   enterLoop();
   QCOMPARE(m_result, int(KIO::ERR_UNKNOWN));
