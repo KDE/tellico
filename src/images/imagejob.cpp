@@ -36,7 +36,7 @@ using Tellico::ImageJob;
 
 ImageJob::ImageJob(const QUrl& url_, const QString& id_, bool quiet_) : KIO::Job()
     , m_url(url_), m_id(id_), m_linkOnly(false), m_quiet(quiet_) {
-  QTimer::singleShot(0, this, SLOT(slotStart()));
+  QTimer::singleShot(0, this, &ImageJob::slotStart);
 }
 
 ImageJob::~ImageJob() {

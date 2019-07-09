@@ -259,11 +259,11 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
     menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
-                   i18n("Expand All Groups"), this, SLOT(expandAll()));
+                   i18n("Expand All Groups"), this, &QTreeView::expandAll);
     menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-up-double")),
-                   i18n("Collapse All Groups"), this, SLOT(collapseAll()));
+                   i18n("Collapse All Groups"), this, &QTreeView::collapseAll);
     menu.addAction(QIcon::fromTheme(QStringLiteral("view-filter")),
-                   i18n("Filter by Group"), this, SLOT(slotFilterGroup()));
+                   i18n("Filter by Group"), this, &GroupView::slotFilterGroup);
   } else {
     Controller::self()->plugEntryActions(&menu);
   }

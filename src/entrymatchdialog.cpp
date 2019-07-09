@@ -92,7 +92,7 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   m_treeWidget->setAllColumnsShowFocus(true);
   m_treeWidget->setSortingEnabled(true);
   m_treeWidget->setHeaderLabels(QStringList() << i18n("Title") << i18n("Description"));
-  connect(m_treeWidget, SIGNAL(itemSelectionChanged()), SLOT(slotShowEntry()));
+  connect(m_treeWidget, &QTreeWidget::itemSelectionChanged, this, &EntryMatchDialog::slotShowEntry);
 
   foreach(const EntryUpdater::UpdateResult& res, matchResults_) {
     Data::EntryPtr matchingEntry = res.first->fetchEntry();
@@ -112,8 +112,8 @@ EntryMatchDialog::EntryMatchDialog(QWidget* parent_, Data::EntryPtr entryToUpdat
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   mainLayout->addWidget(buttonBox);
 
   setMinimumWidth(qMax(minimumWidth(), DIALOG_MIN_WIDTH));

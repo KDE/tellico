@@ -80,7 +80,7 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning files..."), true);
   item.setTotalSteps(100);
-  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::FileListingImporter::slotCancel);
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &FileListingImporter::slotCancel);
   ProgressItem::Done done(this);
 
   // going to assume only one volume will ever be imported
@@ -91,8 +91,8 @@ Tellico::Data::CollPtr FileListingImporter::collection() {
           ? KIO::listRecursive(url(), KIO::DefaultFlags, false /* include hidden */)
           : KIO::listDir(url(), KIO::DefaultFlags, false /* include hidden */);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(entries(KIO::Job*, const KIO::UDSEntryList&)),
-          SLOT(slotEntries(KIO::Job*, const KIO::UDSEntryList&)));
+  void (KIO::ListJob::* jobEntries)(KIO::Job*, const KIO::UDSEntryList&) = &KIO::ListJob::entries;
+  connect(static_cast<KIO::ListJob*>(m_job.data()), jobEntries, this, &FileListingImporter::slotEntries);
 
   if(!m_job->exec() || m_cancelled) {
     myDebug() << "did not run job:" << m_job->errorString();

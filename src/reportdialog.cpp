@@ -102,19 +102,19 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QPushButton* pb1 = new QPushButton(mainWidget);
   KGuiItem::assign(pb1, KGuiItem(i18n("&Generate"), QStringLiteral("application-x-executable")));
   hlay->addWidget(pb1);
-  connect(pb1, SIGNAL(clicked()), SLOT(slotGenerate()));
+  connect(pb1, &QAbstractButton::clicked, this, &ReportDialog::slotGenerate);
 
   hlay->addStretch();
 
   QPushButton* pb2 = new QPushButton(mainWidget);
   KGuiItem::assign(pb2, KStandardGuiItem::saveAs());
   hlay->addWidget(pb2);
-  connect(pb2, SIGNAL(clicked()), SLOT(slotSaveAs()));
+  connect(pb2, &QAbstractButton::clicked, this, &ReportDialog::slotSaveAs);
 
   QPushButton* pb3 = new QPushButton(mainWidget);
   KGuiItem::assign(pb3, KStandardGuiItem::print());
   hlay->addWidget(pb3);
-  connect(pb3, SIGNAL(clicked()), SLOT(slotPrint()));
+  connect(pb3, &QAbstractButton::clicked, this, &ReportDialog::slotPrint);
 
   m_HTMLPart = new KHTMLPart(mainWidget);
   m_HTMLPart->setJScriptEnabled(true);
@@ -136,14 +136,14 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
   mainLayout->addWidget(buttonBox);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
 
   setMinimumWidth(qMax(minimumWidth(), REPORT_MIN_WIDTH));
   setMinimumHeight(qMax(minimumHeight(), REPORT_MIN_HEIGHT));
 
-  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
+  QTimer::singleShot(0, this, &ReportDialog::slotUpdateSize);
 }
 
 ReportDialog::~ReportDialog() {

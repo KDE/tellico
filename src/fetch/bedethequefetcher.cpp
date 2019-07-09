@@ -92,7 +92,7 @@ void BedethequeFetcher::search() {
     m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(BD_BASE_URL));
     KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
     // different slot here
-    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotLinkComplete(KJob*)));
+    connect(m_job.data(), &KJob::result, this, &BedethequeFetcher::slotLinkComplete);
     return;
   }
 
@@ -133,7 +133,7 @@ void BedethequeFetcher::search() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   m_job->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(BD_BASE_URL));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result, this, &BedethequeFetcher::slotComplete);
 }
 
 void BedethequeFetcher::stop() {

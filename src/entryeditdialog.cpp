@@ -75,7 +75,7 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Help|
                                                      QDialogButtonBox::Close|
                                                      QDialogButtonBox::Apply);
-  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  connect(buttonBox, &QDialogButtonBox::helpRequested, this, &EntryEditDialog::slotHelp);
   mainLayout->addWidget(buttonBox);
 
   m_newButton = new QPushButton();
@@ -89,9 +89,9 @@ EntryEditDialog::EntryEditDialog(QWidget* parent_)
   save.setText(i18n("Sa&ve Entry"));
   KGuiItem::assign(m_saveButton, save);
 
-  connect(buttonBox->button(QDialogButtonBox::Close), SIGNAL(clicked()), SLOT(slotClose()));
-  connect(m_saveButton, SIGNAL(clicked()), SLOT(slotHandleSave()));
-  connect(m_newButton, SIGNAL(clicked()), SLOT(slotHandleNew()));
+  connect(buttonBox->button(QDialogButtonBox::Close), &QAbstractButton::clicked, this, &EntryEditDialog::slotClose);
+  connect(m_saveButton, &QAbstractButton::clicked, this, &EntryEditDialog::slotHandleSave);
+  connect(m_newButton, &QAbstractButton::clicked, this, &EntryEditDialog::slotHandleNew);
 }
 
 EntryEditDialog::~EntryEditDialog() {
@@ -208,7 +208,7 @@ void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
         continue;
       }
       widget->insertDefault();
-      connect(widget, SIGNAL(valueChanged(Tellico::Data::FieldPtr)), SLOT(fieldValueChanged(Tellico::Data::FieldPtr)));
+      connect(widget, &GUI::FieldWidget::valueChanged, this, &EntryEditDialog::fieldValueChanged);
       if(!focusedFirst && widget->focusPolicy() != Qt::NoFocus) {
         widget->setFocus();
         focusedFirst = true;
@@ -760,7 +760,7 @@ void EntryEditDialog::showEvent(QShowEvent* event_) {
   was overriding any size changes I did here. Calling this->resize() would work but
   windowHandle()->resize() would not (as KWindowConfig::restoreWindowSize uses)
 */
-  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
+  QTimer::singleShot(0, this, &EntryEditDialog::slotUpdateSize);
 }
 
 void EntryEditDialog::slotUpdateSize() {

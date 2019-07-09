@@ -128,9 +128,9 @@ ExportDialog::ExportDialog(Tellico::Export::Format format_, Tellico::Data::CollP
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(okButton, SIGNAL(clicked()), SLOT(slotSaveOptions()));
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(okButton, &QAbstractButton::clicked, this, &ExportDialog::slotSaveOptions);
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
   topLayout->addWidget(buttonBox);
 
   readOptions();

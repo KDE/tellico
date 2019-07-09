@@ -139,8 +139,8 @@ void EntrezFetcher::search() {
 //  myLog() << "search url: " << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &EntrezFetcher::slotComplete);
 }
 
 void EntrezFetcher::continueSearch() {
@@ -258,8 +258,8 @@ void EntrezFetcher::doSummary() {
 //  myLog() << "summary url:" << u.url();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &EntrezFetcher::slotComplete);
 }
 
 void EntrezFetcher::summaryResults(const QByteArray& data_) {

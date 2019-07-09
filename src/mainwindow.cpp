@@ -200,7 +200,7 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
   new CollectionInterface(this);
 
   MARK_LINE;
-  QTimer::singleShot(0, this, SLOT(slotInit()));
+  QTimer::singleShot(0, this, &MainWindow::slotInit);
 }
 
 MainWindow::~MainWindow() {
@@ -223,8 +223,8 @@ void MainWindow::slotInit() {
   m_lockLayout->setActive(Config::lockLayout());
 
   initConnections();
-  connect(ImageFactory::self(), SIGNAL(imageLocationMismatch()),
-          SLOT(slotImageLocationMismatch()));
+  connect(ImageFactory::self(), &ImageFactory::imageLocationMismatch,
+          this, &MainWindow::slotImageLocationMismatch);
   // Init DBUS
   NewStuff::Manager::self();
 }
@@ -241,8 +241,9 @@ void MainWindow::initActions() {
    * File->New menu
    *************************************************/
   QSignalMapper* collectionMapper = new QSignalMapper(this);
-  connect(collectionMapper, SIGNAL(mapped(int)),
-          this, SLOT(slotFileNew(int)));
+  void (QSignalMapper::* mappedInt)(int) = &QSignalMapper::mapped;
+  connect(collectionMapper, mappedInt,
+          this, &MainWindow::slotFileNew);
 
   KActionMenu* fileNewMenu = new KActionMenu(i18n("New"), this);
   fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
@@ -252,8 +253,9 @@ void MainWindow::initActions() {
 
   QAction* action;
 
+  void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
 #define COLL_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QStringLiteral(NAME), collectionMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), collectionMapper, mapVoid); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(QIcon(QStringLiteral(":/icons/" ICON))); \
@@ -296,7 +298,7 @@ void MainWindow::initActions() {
   COLL_ACTION(File, "new_file_catalog", i18n("New &File Catalog"),
               i18n("Create a new file catalog"), "file");
 
-  action = actionCollection()->addAction(QStringLiteral("new_custom_collection"), collectionMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("new_custom_collection"), collectionMapper, mapVoid);
   action->setText(i18n("New C&ustom Collection"));
   action->setToolTip(i18n("Create a new custom collection"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
@@ -336,8 +338,8 @@ void MainWindow::initActions() {
 /**************** Import Menu ***************************/
 
   QSignalMapper* importMapper = new QSignalMapper(this);
-  connect(importMapper, SIGNAL(mapped(int)),
-          this, SLOT(slotFileImport(int)));
+  connect(importMapper, mappedInt,
+          this, &MainWindow::slotFileImport);
 
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
   importMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
@@ -346,7 +348,7 @@ void MainWindow::initActions() {
   actionCollection()->addAction(QStringLiteral("file_import"), importMenu);
 
 #define IMPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QStringLiteral(NAME), importMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), importMapper, mapVoid); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(ICON); \
@@ -431,8 +433,8 @@ void MainWindow::initActions() {
 /**************** Export Menu ***************************/
 
   QSignalMapper* exportMapper = new QSignalMapper(this);
-  connect(exportMapper, SIGNAL(mapped(int)),
-          this, SLOT(slotFileExport(int)));
+  connect(exportMapper, mappedInt,
+          this, &MainWindow::slotFileExport);
 
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
   exportMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
@@ -441,7 +443,7 @@ void MainWindow::initActions() {
   actionCollection()->addAction(QStringLiteral("file_export"), exportMenu);
 
 #define EXPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
-  action = actionCollection()->addAction(QStringLiteral(NAME), exportMapper, SLOT(map())); \
+  action = actionCollection()->addAction(QStringLiteral(NAME), exportMapper, mapVoid); \
   action->setText(TEXT); \
   action->setToolTip(TIP); \
   action->setIcon(ICON); \
@@ -601,24 +603,25 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Check for duplicate citation keys"));
 
   QSignalMapper* citeMapper = new QSignalMapper(this);
-  connect(citeMapper, SIGNAL(mapped(int)),
-          this, SLOT(slotCiteEntry(int)));
+  connect(citeMapper, mappedInt,
+          this, &MainWindow::slotCiteEntry);
 
-  action = actionCollection()->addAction(QStringLiteral("cite_clipboard"), citeMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("cite_clipboard"), citeMapper, mapVoid);
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
   action->setToolTip(i18n("Copy bibtex citations to the clipboard"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("edit-paste")));
   citeMapper->setMapping(action, Cite::CiteClipboard);
 
-  action = actionCollection()->addAction(QStringLiteral("cite_lyxpipe"), citeMapper, SLOT(map()));
+  action = actionCollection()->addAction(QStringLiteral("cite_lyxpipe"), citeMapper, mapVoid);
   action->setText(i18n("Cite Entry in &LyX"));
   action->setToolTip(i18n("Cite the selected entries in LyX"));
   action->setIcon(QIcon::fromTheme(QStringLiteral("lyx"), QIcon(QLatin1String(":/icons/lyx"))));
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
-  connect(m_updateMapper, SIGNAL(mapped(const QString&)),
-          Controller::self(), SLOT(slotUpdateSelectedEntries(const QString&)));
+  void (QSignalMapper::* mappedString)(const QString&) = &QSignalMapper::mapped;
+  connect(m_updateMapper, mappedString,
+          Controller::self(), &Controller::slotUpdateSelectedEntries);
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
   m_updateEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
@@ -626,7 +629,7 @@ void MainWindow::initActions() {
   m_updateEntryMenu->setDelayed(false);
   actionCollection()->addAction(QStringLiteral("coll_update_entry"), m_updateEntryMenu);
 
-  m_updateAll = actionCollection()->addAction(QStringLiteral("update_entry_all"), m_updateMapper, SLOT(map()));
+  m_updateAll = actionCollection()->addAction(QStringLiteral("update_entry_all"), m_updateMapper, mapVoid);
   m_updateAll->setText(i18n("All Sources"));
   m_updateAll->setToolTip(i18n("Update entry data from all available sources"));
   m_updateMapper->setMapping(m_updateAll, QStringLiteral("_all"));
@@ -638,7 +641,7 @@ void MainWindow::initActions() {
   createStandardStatusBarAction();
 
   m_lockLayout = new KDualAction(this);
-  connect(m_lockLayout, SIGNAL(activeChanged(bool)), SLOT(slotToggleLayoutLock(bool)));
+  connect(m_lockLayout, &KDualAction::activeChanged, this, &MainWindow::slotToggleLayoutLock);
   m_lockLayout->setActiveText(i18n("Unlock Layout"));
   m_lockLayout->setActiveToolTip(i18n("Unlock the window's layout"));
   m_lockLayout->setActiveIcon(QIcon::fromTheme(QStringLiteral("object-unlocked")));
@@ -653,7 +656,7 @@ void MainWindow::initActions() {
   action->setIcon(QIcon::fromTheme(QStringLiteral("resetview")));
 
   m_toggleEntryEditor = new KToggleAction(i18n("Entry &Editor"), this);
-  connect(m_toggleEntryEditor, SIGNAL(triggered()), SLOT(slotToggleEntryEditor()));
+  connect(m_toggleEntryEditor, &QAction::triggered, this, &MainWindow::slotToggleEntryEditor);
   m_toggleEntryEditor->setToolTip(i18n("Enable/disable the editor"));
   actionCollection()->addAction(QStringLiteral("toggle_edit_widget"), m_toggleEntryEditor);
 
@@ -679,10 +682,8 @@ void MainWindow::initActions() {
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
-  // really bad hack, but I can't figure out how to make the combobox resize when the contents change
-  // see note in slotUpdateCollectionToolBar() - found a hackier solution
-//  m_entryGrouping->addAction(QString(50, QLatin1Char(' ')));
-  connect(m_entryGrouping, SIGNAL(triggered(int)), SLOT(slotChangeGrouping()));
+  void (KSelectAction::* triggeredInt)(int) = &KSelectAction::triggered;
+  connect(m_entryGrouping, triggeredInt, this, &MainWindow::slotChangeGrouping);
   actionCollection()->addAction(QStringLiteral("change_entry_grouping"), m_entryGrouping);
 
   action = actionCollection()->addAction(QStringLiteral("quick_filter_accel"), this, SLOT(slotFilterLabelActivated()));
@@ -696,10 +697,10 @@ void MainWindow::initActions() {
   m_quickFilter->setMinimumWidth(150);
   m_quickFilter->setMaximumWidth(300);
   // want to update every time the filter text changes
-  connect(m_quickFilter, SIGNAL(textChanged(const QString&)),
-          this, SLOT(slotQueueFilter()));
-  connect(m_quickFilter, SIGNAL(clearButtonClicked()),
-          this, SLOT(slotClearFilter()));
+  connect(m_quickFilter, &QLineEdit::textChanged,
+          this, &MainWindow::slotQueueFilter);
+  connect(m_quickFilter, &KLineEdit::clearButtonClicked,
+          this, &MainWindow::slotClearFilter);
   m_quickFilter->installEventFilter(this); // intercept keyEvents
 
   QWidgetAction* widgetAction = new QWidgetAction(this);
@@ -723,20 +724,20 @@ void MainWindow::initDocument() {
   doc->setLoadAllImages(config.readEntry("Load All Images", false));
 
   // allow status messages from the document
-  connect(doc, SIGNAL(signalStatusMsg(const QString&)),
-          SLOT(slotStatusMsg(const QString&)));
+  connect(doc, &Data::Document::signalStatusMsg,
+          this, &MainWindow::slotStatusMsg);
 
   // do stuff that changes when the doc is modified
-  connect(doc, SIGNAL(signalModified(bool)),
-          SLOT(slotEnableModifiedActions(bool)));
+  connect(doc, &Data::Document::signalModified,
+          this, &MainWindow::slotEnableModifiedActions);
 
-  connect(doc, SIGNAL(signalCollectionAdded(Tellico::Data::CollPtr)),
-          Controller::self(), SLOT(slotCollectionAdded(Tellico::Data::CollPtr)));
-  connect(doc, SIGNAL(signalCollectionDeleted(Tellico::Data::CollPtr)),
-          Controller::self(), SLOT(slotCollectionDeleted(Tellico::Data::CollPtr)));
+  connect(doc, &Data::Document::signalCollectionAdded,
+          Controller::self(), &Controller::slotCollectionAdded);
+  connect(doc, &Data::Document::signalCollectionDeleted,
+          Controller::self(), &Controller::slotCollectionDeleted);
 
-  connect(Kernel::self()->commandHistory(), SIGNAL(cleanChanged(bool)),
-          doc, SLOT(slotSetClean(bool)));
+  connect(Kernel::self()->commandHistory(), &QUndoStack::cleanChanged,
+          doc, &Data::Document::slotSetClean);
 }
 
 void MainWindow::initView() {
@@ -745,8 +746,8 @@ void MainWindow::initView() {
   ImageFactory::init();
 
   m_entryView = new EntryView(this);
-  connect(m_entryView, SIGNAL(signalAction(const QUrl&)),
-          SLOT(slotURLAction(const QUrl&)));
+  connect(m_entryView, &EntryView::signalAction,
+          this, &MainWindow::slotURLAction);
   m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 
   // trick to make sure the group views always extend along the entire left or right side
@@ -766,8 +767,8 @@ void MainWindow::initView() {
   Controller::self()->addObserver(m_detailedView);
   m_detailedView->setWhatsThis(i18n("<qt>The <i>Column View</i> shows the value of multiple fields "
                                        "for each entry.</qt>"));
-  connect(Data::Document::self(), SIGNAL(signalCollectionImagesLoaded(Tellico::Data::CollPtr)),
-          m_detailedView, SLOT(slotRefreshImages()));
+  connect(Data::Document::self(), &Data::Document::signalCollectionImagesLoaded,
+          m_detailedView, &DetailedListView::slotRefreshImages);
 
   m_iconView = m_viewStack->iconView();
   EntryIconModel* iconModel = new EntryIconModel(m_iconView);
@@ -810,8 +811,8 @@ void MainWindow::initView() {
 
 void MainWindow::initConnections() {
   // have to toggle the menu item if the dialog gets closed
-  connect(m_editDialog, SIGNAL(finished(int)),
-          this, SLOT(slotEditDialogFinished()));
+  connect(m_editDialog, &QDialog::finished,
+          this, &MainWindow::slotEditDialogFinished);
 
   EntrySelectionModel* proxySelect = static_cast<EntrySelectionModel*>(m_iconView->selectionModel());
   connect(proxySelect, &EntrySelectionModel::entriesSelected,
@@ -822,8 +823,8 @@ void MainWindow::initConnections() {
           m_entryView, &EntryView::showEntries);
 
   // let the group view call filters, too
-  connect(m_groupView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-          this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+  connect(m_groupView, &GroupView::signalUpdateFilter,
+          this, &MainWindow::slotUpdateFilter);
   // use the EntrySelectionModel as a proxy so when entries get selected in the group view
   // the edit dialog and entry view are updated
   proxySelect->addSelectionProxy(m_groupView->selectionModel());
@@ -1020,7 +1021,7 @@ void MainWindow::readOptions() {
   m_viewStack->setCurrentWidget(Config::viewWidget());
   m_iconView->setMaxAllowedIconWidth(Config::maxIconSize());
 
-  connect(toolBar(QStringLiteral("collectionToolBar")), SIGNAL(iconSizeChanged(const QSize&)), SLOT(slotUpdateToolbarIcons()));
+  connect(toolBar(QStringLiteral("collectionToolBar")), &QToolBar::iconSizeChanged, this, &MainWindow::slotUpdateToolbarIcons);
 
   // initialize the recent file list
   KConfigGroup filesConfig(KSharedConfig::openConfig(), "Recent Files");
@@ -1051,7 +1052,7 @@ bool MainWindow::querySaveModified() {
         break;
 
       case KMessageBox::No:
-        Data::Document::self()->slotSetModified(false);
+        Data::Document::self()->setModified(false);
         completed = true;
         break;
 
@@ -1440,10 +1441,10 @@ void MainWindow::slotToggleEntryEditor() {
 void MainWindow::slotShowConfigDialog() {
   if(!m_configDlg) {
     m_configDlg = new ConfigDialog(this);
-    connect(m_configDlg, SIGNAL(signalConfigChanged()),
-            SLOT(slotHandleConfigChange()));
-    connect(m_configDlg, SIGNAL(finished(int)),
-            SLOT(slotHideConfigDialog()));
+    connect(m_configDlg, &ConfigDialog::signalConfigChanged,
+            this, &MainWindow::slotHandleConfigChange);
+    connect(m_configDlg, &QDialog::finished,
+            this, &MainWindow::slotHideConfigDialog);
   } else {
     KWindowSystem::activateWindow(m_configDlg->winId());
   }
@@ -1612,8 +1613,8 @@ void MainWindow::slotChangeGrouping() {
 void MainWindow::slotShowReportDialog() {
   if(!m_reportDlg) {
     m_reportDlg = new ReportDialog(this);
-    connect(m_reportDlg, SIGNAL(finished(int)),
-            SLOT(slotHideReportDialog()));
+    connect(m_reportDlg, &QDialog::finished,
+            this, &MainWindow::slotHideReportDialog);
   } else {
     KWindowSystem::activateWindow(m_reportDlg->winId());
   }
@@ -1666,12 +1667,12 @@ void MainWindow::slotShowFilterDialog() {
   if(!m_filterDlg) {
     m_filterDlg = new FilterDialog(FilterDialog::CreateFilter, this); // allow saving
     m_quickFilter->setEnabled(false);
-    connect(m_filterDlg, SIGNAL(signalCollectionModified()),
-            Data::Document::self(), SLOT(slotSetModified()));
-    connect(m_filterDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-            this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
-    connect(m_filterDlg, SIGNAL(finished(int)),
-            SLOT(slotHideFilterDialog()));
+    connect(m_filterDlg, &FilterDialog::signalCollectionModified,
+            Data::Document::self(), &Data::Document::slotSetModified);
+    connect(m_filterDlg, &FilterDialog::signalUpdateFilter,
+            this, &MainWindow::slotUpdateFilter);
+    connect(m_filterDlg, &QDialog::finished,
+            this, &MainWindow::slotHideFilterDialog);
   } else {
     KWindowSystem::activateWindow(m_filterDlg->winId());
   }
@@ -1694,10 +1695,10 @@ void MainWindow::slotQueueFilter() {
     return;
   }
   m_queuedFilters++;
-  QTimer::singleShot(200, this, SLOT(slotUpdateFilter()));
+  QTimer::singleShot(200, this, &MainWindow::slotCheckFilterQueue);
 }
 
-void MainWindow::slotUpdateFilter() {
+void MainWindow::slotCheckFilterQueue() {
   m_queuedFilters--;
   if(m_queuedFilters > 0) {
     return;
@@ -1766,8 +1767,8 @@ void MainWindow::setFilter(const QString& text_) {
 void MainWindow::slotShowCollectionFieldsDialog() {
   if(!m_collFieldsDlg) {
     m_collFieldsDlg = new CollectionFieldsDialog(Data::Document::self()->collection(), this);
-    connect(m_collFieldsDlg, SIGNAL(finished(int)),
-            SLOT(slotHideCollectionFieldsDialog()));
+    connect(m_collFieldsDlg, &QDialog::finished,
+            this, &MainWindow::slotHideCollectionFieldsDialog);
   } else {
     KWindowSystem::activateWindow(m_collFieldsDlg->winId());
   }
@@ -1883,7 +1884,7 @@ void MainWindow::slotShowStringMacroDialog() {
     m_stringMacroDlg = new StringMapDialog(c->macroList(), this, false);
     m_stringMacroDlg->setWindowTitle(i18n("String Macros"));
     m_stringMacroDlg->setLabels(i18n("Macro"), i18n("String"));
-    connect(m_stringMacroDlg, SIGNAL(finished(int)), SLOT(slotStringMacroDialogFinished(int)));
+    connect(m_stringMacroDlg, &QDialog::finished, this, &MainWindow::slotStringMacroDialogFinished);
   } else {
     KWindowSystem::activateWindow(m_stringMacroDlg->winId());
   }
@@ -1897,7 +1898,7 @@ void MainWindow::slotStringMacroDialogFinished(int result_) {
   }
   if(result_ == QDialog::Accepted) {
     static_cast<Data::BibtexCollection*>(Data::Document::self()->collection().data())->setMacroList(m_stringMacroDlg->stringMap());
-    Data::Document::self()->slotSetModified(true);
+    Data::Document::self()->setModified(true);
   }
   m_stringMacroDlg->hide();
   m_stringMacroDlg->deleteLater();
@@ -1911,9 +1912,9 @@ void MainWindow::slotShowBibtexKeyDialog() {
 
   if(!m_bibtexKeyDlg) {
     m_bibtexKeyDlg = new BibtexKeyDialog(Data::Document::self()->collection(), this);
-    connect(m_bibtexKeyDlg, SIGNAL(finished(int)), SLOT(slotHideBibtexKeyDialog()));
-    connect(m_bibtexKeyDlg, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-            this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+    connect(m_bibtexKeyDlg, &QDialog::finished, this, &MainWindow::slotHideBibtexKeyDialog);
+    connect(m_bibtexKeyDlg, &BibtexKeyDialog::signalUpdateFilter,
+            this, &MainWindow::slotUpdateFilter);
   } else {
     KWindowSystem::activateWindow(m_bibtexKeyDlg->winId());
   }
@@ -1981,8 +1982,8 @@ void MainWindow::slotCiteEntry(int action_) {
 void MainWindow::slotShowFetchDialog() {
   if(!m_fetchDlg) {
     m_fetchDlg = new FetchDialog(this);
-    connect(m_fetchDlg, SIGNAL(finished(int)), SLOT(slotHideFetchDialog()));
-    connect(Controller::self(), SIGNAL(collectionAdded(int)), m_fetchDlg, SLOT(slotResetCollection()));
+    connect(m_fetchDlg, &QDialog::finished, this, &MainWindow::slotHideFetchDialog);
+    connect(Controller::self(), &Controller::collectionAdded, m_fetchDlg, &FetchDialog::slotResetCollection);
   } else {
     KWindowSystem::activateWindow(m_fetchDlg->winId());
   }
@@ -2083,8 +2084,8 @@ void MainWindow::addFilterView() {
   m_filterView->setWhatsThis(i18n("<qt>The <i>Filter View</i> shows the entries which meet certain "
                                   "filter rules.</qt>"));
 
-  connect(m_filterView, SIGNAL(signalUpdateFilter(Tellico::FilterPtr)),
-          this, SLOT(slotUpdateFilter(Tellico::FilterPtr)));
+  connect(m_filterView, &FilterView::signalUpdateFilter,
+          this, &MainWindow::slotUpdateFilter);
   // use the EntrySelectionModel as a proxy so when entries get selected in the filter view
   // the edit dialog and entry view are updated
   // TODO: consider using KSelectionProxyModel
@@ -2181,7 +2182,7 @@ void MainWindow::slotRenameCollection() {
 
 void MainWindow::slotImageLocationMismatch() {
   // TODO: having a single image location mismatch should not be reason to completely save the whole document
-  QTimer::singleShot(0, this, SLOT(slotImageLocationChanged()));
+  QTimer::singleShot(0, this, &MainWindow::slotImageLocationChanged);
 }
 
 void MainWindow::slotImageLocationChanged() {
@@ -2230,7 +2231,9 @@ void MainWindow::updateEntrySources() {
   foreach(Fetch::Fetcher::Ptr fetcher, vec) {
     QAction* action = new QAction(Fetch::Manager::fetcherIcon(fetcher), fetcher->source(), actionCollection());
     action->setToolTip(i18n("Update entry data from %1", fetcher->source()));
-    connect(action, SIGNAL(triggered()), m_updateMapper, SLOT(map()));
+    void (QAction::* triggeredBool)(bool) = &QAction::triggered;
+    void (QSignalMapper::* mapVoid)() = &QSignalMapper::map;
+    connect(action, triggeredBool, m_updateMapper, mapVoid);
     m_updateMapper->setMapping(action, fetcher->source());
     m_fetchActions.append(action);
   }

@@ -83,22 +83,22 @@ BorrowerDialog::BorrowerDialog(QWidget* parent_)
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
   m_treeWidget = new QTreeWidget(mainWidget);
   mainLayout->addWidget(m_treeWidget);
   m_treeWidget->setHeaderLabel(i18n("Name"));
   m_treeWidget->setRootIsDecorated(false);
-  connect(m_treeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
-          SLOT(accept()));
-  connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
-          SLOT(updateEdit(QTreeWidgetItem*)));
+  connect(m_treeWidget, &QTreeWidget::itemDoubleClicked,
+          this, &QDialog::accept);
+  connect(m_treeWidget, &QTreeWidget::currentItemChanged,
+          this, &BorrowerDialog::updateEdit);
 
   m_lineEdit = new KLineEdit(mainWidget); //krazy:exclude=qclasses
   mainLayout->addWidget(m_lineEdit);
-  connect(m_lineEdit->completionObject(), SIGNAL(match(const QString&)),
-          SLOT(selectItem(const QString&)));
+  connect(m_lineEdit->completionObject(), &KCompletion::match,
+          this, &BorrowerDialog::selectItem);
   m_lineEdit->setFocus();
   m_lineEdit->completionObject()->setIgnoreCase(true);
 

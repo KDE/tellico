@@ -178,7 +178,7 @@ bool Document::openDocument(const QUrl& url_) {
 //  }
   if(m_importer && m_importer->hasImages()) {
     m_cancelImageWriting = false;
-    QTimer::singleShot(500, this, SLOT(slotLoadAllImages()));
+    QTimer::singleShot(500, this, &Document::slotLoadAllImages);
   } else {
     emit signalCollectionImagesLoaded(m_coll);
     if(m_importer) {

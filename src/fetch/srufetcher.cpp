@@ -239,8 +239,8 @@ void SRUFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &SRUFetcher::slotComplete);
 }
 
 void SRUFetcher::stop() {
@@ -520,9 +520,9 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   QLabel* label = new QLabel(i18n("Hos&t: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_hostEdit = new GUI::LineEdit(optionsWidget());
-  connect(m_hostEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
-  connect(m_hostEdit, SIGNAL(textChanged(QString)), SIGNAL(signalName(QString)));
-  connect(m_hostEdit, SIGNAL(textChanged(QString)), SLOT(slotCheckHost()));
+  connect(m_hostEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  connect(m_hostEdit, &QLineEdit::textChanged, this, &ConfigWidget::signalName);
+  connect(m_hostEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotCheckHost);
   l->addWidget(m_hostEdit, row, 1);
   QString w = i18n("Enter the host name of the server.");
   label->setWhatsThis(w);
@@ -535,7 +535,8 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_portSpinBox->setMaximum(999999);
   m_portSpinBox->setMinimum(0);
   m_portSpinBox->setValue(SRU_DEFAULT_PORT);
-  connect(m_portSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSetModified()));
+  void (QSpinBox::* valueChanged)(int) = &QSpinBox::valueChanged;
+  connect(m_portSpinBox, valueChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_portSpinBox, row, 1);
   w = i18n("Enter the port number of the server. The default is %1.", SRU_DEFAULT_PORT);
   label->setWhatsThis(w);
@@ -545,7 +546,7 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   label = new QLabel(i18n("Path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_pathEdit = new GUI::LineEdit(optionsWidget());
-  connect(m_pathEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_pathEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_pathEdit, row, 1);
   w = i18n("Enter the path to the database used by the server.");
   label->setWhatsThis(w);
@@ -560,8 +561,9 @@ SRUFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const SRUFetcher* fetch
   m_formatCombo->addItem(QStringLiteral("PAM"), QLatin1String("pam"));
   m_formatCombo->addItem(QStringLiteral("Dublin Core"), QLatin1String("dc"));
   m_formatCombo->setEditable(true);
-  connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_formatCombo, SIGNAL(editTextChanged(QString)), SLOT(slotSetModified()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_formatCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_formatCombo, &QComboBox::editTextChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Enter the result format used by the server.");
   label->setWhatsThis(w);

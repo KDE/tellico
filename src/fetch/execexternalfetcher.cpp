@@ -172,9 +172,10 @@ void ExecExternalFetcher::startSearch(const QStringList& args_) {
   }
 
   m_process = new KProcess();
-  connect(m_process, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
-  connect(m_process, SIGNAL(readyReadStandardError()), SLOT(slotError()));
-  connect(m_process, SIGNAL(finished(int, QProcess::ExitStatus)), SLOT(slotProcessExited()));
+  connect(m_process, &QProcess::readyReadStandardOutput, this, &ExecExternalFetcher::slotData);
+  connect(m_process, &QProcess::readyReadStandardError, this, &ExecExternalFetcher::slotError);
+  void (QProcess::* finished)(int, QProcess::ExitStatus) = &QProcess::finished;
+  connect(m_process, finished, this, &ExecExternalFetcher::slotProcessExited);
   m_process->setOutputChannelMode(KProcess::SeparateChannels);
   m_process->setProgram(m_path, args_);
   if(m_process && m_process->execute() < 0) {
@@ -340,7 +341,8 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   QLabel* label = new QLabel(i18n("Collection &type:"), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_collCombo = new GUI::CollectionTypeCombo(optionsWidget());
-  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_collCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_collCombo, row, 1);
   QString w = i18n("Set the collection type of the data returned from the external application.");
   label->setWhatsThis(w);
@@ -354,7 +356,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   m_formatCombo->addItem(QStringLiteral("Bibtex"), Import::Bibtex);
   m_formatCombo->addItem(QStringLiteral("MODS"), Import::MODS);
   m_formatCombo->addItem(QStringLiteral("RIS"), Import::RIS);
-  connect(m_formatCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  connect(m_formatCombo, activatedInt, this, &ExecExternalFetcher::ConfigWidget::slotSetModified);
   l->addWidget(m_formatCombo, row, 1);
   w = i18n("Set the result type of the data returned from the external application.");
   label->setWhatsThis(w);
@@ -364,7 +366,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   label = new QLabel(i18n("Application &path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_pathEdit = new KUrlRequester(optionsWidget());
-  connect(m_pathEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_pathEdit, &KUrlRequester::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_pathEdit, row, 1);
   w = i18n("Set the path of the application to run that should output a valid Tellico data file.");
   label->setWhatsThis(w);
@@ -402,7 +404,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
       cb->setChecked(false);
       le->setEnabled(false);
     }
-    connect(cb, SIGNAL(toggled(bool)), le, SLOT(setEnabled(bool)));
+    connect(cb, &QAbstractButton::toggled, le, &QWidget::setEnabled);
     cb->setWhatsThis(w);
     le->setWhatsThis(w2);
   }
@@ -427,7 +429,7 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
     m_cbUpdate->setChecked(false);
     m_leUpdate->setEnabled(false);
   }
-  connect(m_cbUpdate, SIGNAL(toggled(bool)), m_leUpdate, SLOT(setEnabled(bool)));
+  connect(m_cbUpdate, &QAbstractButton::toggled, m_leUpdate, &QWidget::setEnabled);
 
   l->setRowStretch(++row, 1);
 
@@ -533,7 +535,6 @@ void ExecExternalFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!m_newStuffName.isEmpty()) {
     config_.writeEntry("NewStuffName", m_newStuffName);
   }
-  slotSetModified(false);
 }
 
 void ExecExternalFetcher::ConfigWidget::removed() {

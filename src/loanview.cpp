@@ -48,11 +48,11 @@ LoanView::LoanView(QWidget* parent_) : GUI::TreeView(parent_), m_notSortedYet(tr
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
-          SLOT(slotDoubleClicked(const QModelIndex&)));
+  connect(this, &QAbstractItemView::doubleClicked,
+          this, &LoanView::slotDoubleClicked);
 
-  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
-          SLOT(slotSortingChanged(int,Qt::SortOrder)));
+  connect(header(), &QHeaderView::sortIndicatorChanged,
+          this, &LoanView::slotSortingChanged);
 
   BorrowerModel* borrowerModel = new BorrowerModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
@@ -116,9 +116,9 @@ void LoanView::contextMenuEvent(QContextMenuEvent* event_) {
   if(index.parent().isValid()) {
     QMenu menu(this);
     menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
-                   i18n("Check-in"), this, SLOT(slotCheckIn()));
+                   i18n("Check-in"), this, &LoanView::slotCheckIn);
     menu.addAction(QIcon::fromTheme(QStringLiteral("arrow-down-double")),
-                   i18n("Modify Loan..."), this, SLOT(slotModifyLoan()));
+                   i18n("Modify Loan..."), this, &LoanView::slotModifyLoan);
     menu.exec(event_->globalPos());
   }
 }

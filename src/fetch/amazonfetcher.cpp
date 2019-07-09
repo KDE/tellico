@@ -428,8 +428,8 @@ void AmazonFetcher::doSearch() {
 
   m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &AmazonFetcher::slotComplete);
 }
 
 void AmazonFetcher::stop() {
@@ -978,7 +978,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_accessEdit = new QLineEdit(optionsWidget());
-  connect(m_accessEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_accessEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_accessEdit, row, 1);
   QString w = i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.");
   label->setWhatsThis(w);
@@ -989,7 +989,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   l->addWidget(label, ++row, 0);
   m_secretKeyEdit = new QLineEdit(optionsWidget());
 //  m_secretKeyEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-  connect(m_secretKeyEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_secretKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_secretKeyEdit, row, 1);
   label->setWhatsThis(w);
   m_secretKeyEdit->setWhatsThis(w);
@@ -1006,8 +1006,9 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
     m_siteCombo->model()->sort(0);
   }
 
-  connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_siteCombo, SIGNAL(activated(int)), SLOT(slotSiteChanged()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_siteCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_siteCombo, activatedInt, this, &ConfigWidget::slotSiteChanged);
   l->addWidget(m_siteCombo, row, 1);
   w = i18n("Amazon.com provides data from several different localized sites. Choose the one "
            "you wish to use for this data source.");
@@ -1022,7 +1023,7 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   m_imageCombo->addItem(i18n("Medium Image"), MediumImage);
   m_imageCombo->addItem(i18n("Large Image"), LargeImage);
   m_imageCombo->addItem(i18n("No Image"), NoImage);
-  connect(m_imageCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_imageCombo, row, 1);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "
            "collection may degrade performance.");
@@ -1033,7 +1034,8 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
   label = new QLabel(i18n("&Associate's ID: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_assocEdit = new QLineEdit(optionsWidget());
-  connect(m_assocEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  void (QLineEdit::* textChanged)(const QString&) = &QLineEdit::textChanged;
+  connect(m_assocEdit, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_assocEdit, row, 1);
   w = i18n("The associate's id identifies the person accessing the Amazon.com Web Services, and is included "
            "in any links to the Amazon.com site.");

@@ -56,8 +56,8 @@ void ConfigWidget::setAccepted(bool accepted_) {
   m_accepted = accepted_;
 }
 
-void ConfigWidget::slotSetModified(bool modified_) {
-  m_modified = modified_;
+void ConfigWidget::slotSetModified() {
+  m_modified = true;;
 }
 
 void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, const QStringList& fieldsToAdd_) {
@@ -75,7 +75,7 @@ void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, con
     if(fieldsToAdd_.contains(it.key())) {
       cb->setChecked(true);
     }
-    connect(cb, SIGNAL(clicked()), SLOT(slotSetModified()));
+    connect(cb, &QAbstractButton::clicked, this, &ConfigWidget::slotSetModified);
     vbox->addWidget(cb);
   }
   vbox->addStretch(1);
@@ -94,7 +94,7 @@ void ConfigWidget::saveConfig(KConfigGroup& config_) {
   }
   config_.writeEntry(QStringLiteral("Custom Fields"), fields);
   saveConfigHook(config_);
-  slotSetModified(false);
+  m_modified = false;
 }
 
 QWidget* ConfigWidget::optionsWidget() {

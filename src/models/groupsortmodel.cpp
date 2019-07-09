@@ -47,8 +47,8 @@ GroupSortModel::~GroupSortModel() {
 void GroupSortModel::setSourceModel(QAbstractItemModel* sourceModel_) {
   AbstractSortModel::setSourceModel(sourceModel_);
   if(sourceModel_) {
-    connect(sourceModel_, SIGNAL(modelReset()),
-            this, SLOT(clearGroupComparison()));
+    connect(sourceModel_, &QAbstractItemModel::modelReset,
+            this, &GroupSortModel::clearGroupComparison);
   }
 }
 

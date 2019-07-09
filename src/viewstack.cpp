@@ -54,12 +54,12 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_listButton = new QToolButton(this);
   m_listButton->setCheckable(true);
   m_listButton->setIcon(QIcon::fromTheme(QStringLiteral("view-list-details")));
-  connect(m_listButton, SIGNAL(clicked(bool)), SLOT(showListView()));
+  connect(m_listButton, &QAbstractButton::clicked, this, &ViewStack::showListView);
 
   m_iconButton = new QToolButton(this);
   m_iconButton->setCheckable(true);
   m_iconButton->setIcon(QIcon::fromTheme(QStringLiteral("view-list-icons")));
-  connect(m_iconButton, SIGNAL(clicked(bool)), SLOT(showIconView()));
+  connect(m_iconButton, &QAbstractButton::clicked, this, &ViewStack::showIconView);
 
   QButtonGroup* bg = new QButtonGroup(this);
   bg->addButton(m_listButton);
@@ -73,7 +73,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_decreaseIconSizeButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-out")));
   m_decreaseIconSizeButton->setToolTip(i18n("Decrease the maximum icon size in the icon list view"));
   hlay->addWidget(m_decreaseIconSizeButton);
-  connect(m_decreaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotDecreaseIconSizeButtonClicked()));
+  connect(m_decreaseIconSizeButton, &QAbstractButton::clicked, this, &ViewStack::slotDecreaseIconSizeButtonClicked);
 
   m_iconSizeSlider = new QSlider(Qt::Horizontal, this);
   m_iconSizeSlider->setMinimum(MIN_ENTRY_ICON_SIZE);
@@ -84,13 +84,13 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
   m_iconSizeSlider->setTracking(true);
   m_iconSizeSlider->setToolTip(i18n("The current maximum icon size is %1.\nMove the slider to change it.", Config::maxIconSize()));
   hlay->addWidget(m_iconSizeSlider);
-  connect(m_iconSizeSlider, SIGNAL(valueChanged(int)), SLOT(slotIconSizeSliderChanged(int)));
+  connect(m_iconSizeSlider, &QAbstractSlider::valueChanged, this, &ViewStack::slotIconSizeSliderChanged);
 
   m_increaseIconSizeButton = new QToolButton(this);
   m_increaseIconSizeButton->setIcon(QIcon::fromTheme(QStringLiteral("zoom-in")));
   m_increaseIconSizeButton->setToolTip(i18n("Increase the maximum icon size in the icon list view"));
   hlay->addWidget(m_increaseIconSizeButton, 0);
-  connect(m_increaseIconSizeButton, SIGNAL(clicked(bool)), SLOT(slotIncreaseIconSizeButtonClicked()));
+  connect(m_increaseIconSizeButton, &QAbstractButton::clicked, this, &ViewStack::slotIncreaseIconSizeButtonClicked);
 
   setIconSizeInterfaceVisible(false);
 

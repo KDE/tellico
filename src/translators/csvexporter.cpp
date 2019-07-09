@@ -175,8 +175,8 @@ QWidget* CSVExporter::widget(QWidget* parent_) {
   m_editOther->setEnabled(m_radioOther->isChecked());
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_delimiterGroupLayout->addWidget(m_editOther, 1, 2);
-  QObject::connect(m_radioOther, SIGNAL(toggled(bool)),
-                   m_editOther, SLOT(setEnabled(bool)));
+  QObject::connect(m_radioOther, &QAbstractButton::toggled,
+                   m_editOther, &QWidget::setEnabled);
 
   if(m_delimiter == QLatin1String(",")) {
     m_radioComma->setChecked(true);

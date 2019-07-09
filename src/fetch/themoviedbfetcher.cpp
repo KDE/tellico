@@ -153,7 +153,7 @@ void TheMovieDBFetcher::continueSearch() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result, this, &TheMovieDBFetcher::slotComplete);
 }
 
 void TheMovieDBFetcher::stop() {
@@ -473,7 +473,7 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new QLineEdit(optionsWidget());
-  connect(m_apiKeyEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_apiKeyEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
   label->setWhatsThis(w);
@@ -487,8 +487,9 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   m_langCombo->addItem(i18nc("Language", "French"), QLatin1String("fr"));
   m_langCombo->addItem(i18nc("Language", "German"), QLatin1String("de"));
   m_langCombo->addItem(i18nc("Language", "Spanish"), QLatin1String("es"));
-  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_langCombo, SIGNAL(activated(int)), SLOT(slotLangChanged()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_langCombo, activatedInt, this, &ConfigWidget::slotLangChanged);
   l->addWidget(m_langCombo, row, 1);
   label->setBuddy(m_langCombo);
 

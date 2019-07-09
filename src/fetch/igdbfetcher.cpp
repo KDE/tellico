@@ -120,7 +120,7 @@ void IGDBFetcher::continueSearch() {
 //  myDebug() << u << clauseList.join(QStringLiteral(" "));
 
   m_job = igdbJob(u, m_apiKey, clauseList.join(QStringLiteral(" ")));
-  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result, this, &IGDBFetcher::slotComplete);
 }
 
 void IGDBFetcher::stop() {
@@ -599,7 +599,7 @@ IGDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IGDBFetcher* fet
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new QLineEdit(optionsWidget());
-  connect(m_apiKeyEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 

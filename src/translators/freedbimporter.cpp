@@ -357,7 +357,7 @@ void FreeDBImporter::readCache() {
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, progressLabel(), true);
   item.setTotalSteps(numFiles);
-  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::FreeDBImporter::slotCancel);
+  connect(&item, &Tellico::ProgressItem::signalCancelled, this, &FreeDBImporter::slotCancel);
   ProgressItem::Done done(this);
 
   uint step = 1;
@@ -529,7 +529,8 @@ QWidget* FreeDBImporter::widget(QWidget* parent_) {
   m_buttonGroup = new QButtonGroup(gbox);
   m_buttonGroup->addButton(m_radioCDROM);
   m_buttonGroup->addButton(m_radioCache);
-  connect(m_buttonGroup, SIGNAL(buttonClicked(int)), SLOT(slotClicked(int)));
+  void (QButtonGroup::* buttonClickedInt)(int) = &QButtonGroup::buttonClicked;
+  connect(m_buttonGroup, buttonClickedInt, this, &FreeDBImporter::slotClicked);
 
   l->addWidget(gbox);
   l->addStretch(1);

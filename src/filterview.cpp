@@ -49,11 +49,11 @@ FilterView::FilterView(QWidget* parent_)
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
 
-  connect(this, SIGNAL(doubleClicked(const QModelIndex&)),
-          SLOT(slotDoubleClicked(const QModelIndex&)));
+  connect(this, &QAbstractItemView::doubleClicked,
+          this, &FilterView::slotDoubleClicked);
 
-  connect(header(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
-          SLOT(slotSortingChanged(int,Qt::SortOrder)));
+  connect(header(), &QHeaderView::sortIndicatorChanged,
+          this, &FilterView::slotSortingChanged);
 
   FilterModel* filterModel = new FilterModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
@@ -130,9 +130,9 @@ void FilterView::contextMenuEvent(QContextMenuEvent* event_) {
   // no parent means it's a top-level item
   if(!index.parent().isValid()) {
     menu.addAction(QIcon::fromTheme(QStringLiteral("view-filter")),
-                    i18n("Modify Filter"), this, SLOT(slotModifyFilter()));
+                    i18n("Modify Filter"), this, &FilterView::slotModifyFilter);
     menu.addAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
-                    i18n("Delete Filter"), this, SLOT(slotDeleteFilter()));
+                    i18n("Delete Filter"), this, &FilterView::slotDeleteFilter);
   } else {
     Controller::self()->plugEntryActions(&menu);
   }

@@ -38,8 +38,8 @@ void GCstarThread::setProgram(const QString& program_, const QStringList& args_)
 
 void GCstarThread::run() {
   KProcess proc;
-  connect(&proc, SIGNAL(readyReadStandardOutput()), SLOT(slotData()));
-  connect(&proc, SIGNAL(readyReadStandardError()), SLOT(slotError()));
+  connect(&proc, &QProcess::readyReadStandardOutput, this, &GCstarThread::slotData);
+  connect(&proc, &QProcess::readyReadStandardError, this, &GCstarThread::slotError);
   proc.setOutputChannelMode(KProcess::SeparateChannels);
   proc.setProgram(m_program, m_args);
   proc.execute();
