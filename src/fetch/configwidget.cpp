@@ -57,7 +57,7 @@ void ConfigWidget::setAccepted(bool accepted_) {
 }
 
 void ConfigWidget::slotSetModified() {
-  m_modified = true;;
+  m_modified = true;
 }
 
 void ConfigWidget::addFieldsWidget(const Tellico::StringHash& customFields_, const QStringList& fieldsToAdd_) {
