@@ -43,6 +43,13 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   registerWidget();
 }
 
+ParaFieldWidget::~ParaFieldWidget() {
+  // saw a crash when closing Tellico and the KTextEdit d'tor called ~QSyntaxHighlighter()
+  // when ultimately signaled a valueChange for some reason, so disconnect
+  void (KTextEdit::* textChanged)() = &KTextEdit::textChanged;
+  disconnect(m_textEdit, textChanged, this, &ParaFieldWidget::checkModified);
+}
+
 QString ParaFieldWidget::text() const {
   QString text = m_textEdit->toPlainText();
   text.replace(QLatin1Char('\n'), QLatin1String("<br/>"));
