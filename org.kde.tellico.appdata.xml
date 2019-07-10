@@ -548,5 +548,8 @@
     <release version="3.2" date="2019-05-25">
       <url>https://tellico-project.org/tellico-32-released</url>
     </release>
+    <release version="3.2.1" date="2019-07-09">
+      <url>https://tellico-project.org/tellico-321-released</url>
+    </release>
   </releases>
 </component>
