@@ -137,9 +137,9 @@ void DoubanFetcher::search() {
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   if(request().key == ISBN) {
-    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotCompleteISBN(KJob*)));
+    connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotCompleteISBN);
   } else {
-    connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+    connect(m_job.data(), &KJob::result, this, &DoubanFetcher::slotComplete);
   }
 }
 

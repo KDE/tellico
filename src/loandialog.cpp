@@ -141,12 +141,12 @@ void LoanDialog::init() {
   topLayout->addWidget(m_borrowerEdit, row, 1);
   l->setBuddy(m_borrowerEdit);
   m_borrowerEdit->completionObject()->setIgnoreCase(true);
-  connect(m_borrowerEdit, SIGNAL(textChanged(const QString&)),
-          SLOT(slotBorrowerNameChanged(const QString&)));
+  connect(m_borrowerEdit, &QLineEdit::textChanged,
+          this, &LoanDialog::slotBorrowerNameChanged);
   QPushButton* pb = new QPushButton(QIcon::fromTheme(QStringLiteral("kaddressbook")), QString(), mainWidget);
   mainLayout->addWidget(pb);
   topLayout->addWidget(pb, row, 2);
-  connect(pb, SIGNAL(clicked()), SLOT(slotGetBorrower()));
+  connect(pb, &QAbstractButton::clicked, this, &LoanDialog::slotGetBorrower);
   QString whats = i18n("Enter the name of the person borrowing the items from you. "
                        "Clicking the button allows you to select from your address book.");
   l->setWhatsThis(whats);
@@ -179,7 +179,7 @@ void LoanDialog::init() {
   l->setBuddy(m_dueDate);
   topLayout->addWidget(m_dueDate, row, 1, 1, 2);
   // valid due dates will enable the calendar adding checkbox
-  connect(m_dueDate, SIGNAL(signalModified()), SLOT(slotDueDateChanged()));
+  connect(m_dueDate, &GUI::DateWidget::signalModified, this, &LoanDialog::slotDueDateChanged);
   whats = i18n("The due date is when the items are due to be returned. The due date "
                "is not required, unless you want to add the loan to your active calendar.");
   l->setWhatsThis(whats);
@@ -217,12 +217,12 @@ void LoanDialog::init() {
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
   okButton->setEnabled(false); // disable until a name is entered
-  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
   mainLayout->addWidget(m_buttonBox);
 
-  QTimer::singleShot(0, this, SLOT(slotUpdateSize()));
+  QTimer::singleShot(0, this, &LoanDialog::slotUpdateSize);
 }
 
 LoanDialog::~LoanDialog() {

@@ -47,8 +47,8 @@ StringMapWidget::StringMapWidget(const QMap<QString, QString>& map_, QWidget* pa
   m_treeWidget->setAllColumnsShowFocus(true);
   m_treeWidget->header()->setSortIndicatorShown(true);
   m_treeWidget->setHeaderHidden(true); // hide header since neither column has a label initially
-  connect(m_treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), SLOT(slotUpdate(QTreeWidgetItem*)));
-  connect(m_treeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), SLOT(slotUpdate(QTreeWidgetItem*)));
+  connect(m_treeWidget, &QTreeWidget::currentItemChanged, this, &StringMapWidget::slotUpdate);
+  connect(m_treeWidget, &QTreeWidget::itemClicked, this, &StringMapWidget::slotUpdate);
   l->addWidget(m_treeWidget);
 
   QWidget* box = new QWidget(this);
@@ -68,12 +68,12 @@ StringMapWidget::StringMapWidget(const QMap<QString, QString>& map_, QWidget* pa
 
   QPushButton* pb1 = new QPushButton(bb);
   KGuiItem::assign(pb1, KGuiItem(i18nc("set a value", "&Set"), QIcon::fromTheme(QStringLiteral("document-new"))));
-  connect(pb1, SIGNAL(clicked()), this, SLOT(slotAdd()));
+  connect(pb1, &QAbstractButton::clicked, this, &StringMapWidget::slotAdd);
   bb->addButton(pb1, QDialogButtonBox::ActionRole);
 
   QPushButton* pb2 = new QPushButton(bb);
   KGuiItem::assign(pb2, KGuiItem(i18nc("delete a value", "&Delete"), QIcon::fromTheme(QStringLiteral("edit-delete"))));
-  connect(pb2, SIGNAL(clicked()), this, SLOT(slotDelete()));
+  connect(pb2, &QAbstractButton::clicked, this, &StringMapWidget::slotDelete);
   bb->addButton(pb2, QDialogButtonBox::ActionRole);
 
   l->addWidget(box);

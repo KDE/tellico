@@ -35,7 +35,7 @@ SpinBox::SpinBox(int min_, int max_, QWidget * parent_) : QSpinBox(parent_) {
   // I want to be able to have an empty value
   // an empty string just removes the special value, so set white space
   setSpecialValueText(QStringLiteral(" "));
-  connect(lineEdit(), SIGNAL(textChanged(const QString&)), SLOT(checkValue(const QString&)));
+  connect(lineEdit(), &QLineEdit::textChanged, this, &SpinBox::checkValue);
 }
 
 void SpinBox::checkValue(const QString& text_) {

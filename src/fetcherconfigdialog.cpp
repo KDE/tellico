@@ -111,7 +111,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   m_nameEdit->setFocus();
   m_nameEdit->setWhatsThis(w);
   label->setBuddy(m_nameEdit);
-  connect(m_nameEdit, SIGNAL(textChanged(const QString&)), SLOT(slotNameChanged(const QString&)));
+  connect(m_nameEdit, &QLineEdit::textChanged, this, &FetcherConfigDialog::slotNameChanged);
 
   if(m_newSource) {
     label = new QLabel(i18n("Source &type: "), widget);
@@ -144,7 +144,8 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   if(m_newSource) {
     m_stack = new QStackedWidget(widget);
     vlay2->addWidget(m_stack);
-    connect(m_typeCombo, SIGNAL(activated(int)), SLOT(slotNewSourceSelected(int)));
+    void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
+    connect(m_typeCombo, activatedInt, this, &FetcherConfigDialog::slotNewSourceSelected);
 
     int z3950_idx = 0;
     Fetch::NameTypeMap typeMap = Fetch::Manager::self()->nameTypeMap();
@@ -165,7 +166,7 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
     m_configWidget->setParent(widget);
     m_configWidget->show();
     vlay2->addWidget(m_configWidget);
-    connect(m_configWidget, SIGNAL(signalName(const QString&)), SLOT(slotPossibleNewName(const QString&)));
+    connect(m_configWidget, &Fetch::ConfigWidget::signalName, this, &FetcherConfigDialog::slotPossibleNewName);
   }
 
   mainLayout->addWidget(widget);
@@ -176,9 +177,9 @@ void FetcherConfigDialog::init(Tellico::Fetch::Type type_) {
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+  connect(buttonBox, &QDialogButtonBox::helpRequested, this, &FetcherConfigDialog::slotHelp);
   mainLayout->addWidget(buttonBox);
 }
 
@@ -235,7 +236,7 @@ void FetcherConfigDialog::slotNewSourceSelected(int idx_) {
     slotNewSourceSelected(0);
     return;
   }
-  connect(cw, SIGNAL(signalName(const QString&)), SLOT(slotPossibleNewName(const QString&)));
+  connect(cw, &Fetch::ConfigWidget::signalName, this, &FetcherConfigDialog::slotPossibleNewName);
   m_configWidgets.insert(idx_, cw);
   m_stack->addWidget(cw);
   m_stack->setCurrentWidget(cw);

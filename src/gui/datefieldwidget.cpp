@@ -32,7 +32,7 @@ DateFieldWidget::DateFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     : FieldWidget(field_, parent_) {
 
   m_widget = new DateWidget(this);
-  connect(m_widget, SIGNAL(signalModified()), SLOT(checkModified()));
+  connect(m_widget, &DateWidget::signalModified, this, &DateFieldWidget::checkModified);
 
   registerWidget();
 }

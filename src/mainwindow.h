@@ -398,7 +398,7 @@ private Q_SLOTS:
    * Update the filter to match any field with text. If a non-word character appears, the
    * text is interpreted as a regexp.
    */
-  void slotUpdateFilter();
+  void slotCheckFilterQueue();
   void slotUpdateFilter(Tellico::FilterPtr filter);
   /**
    * Updates the collection toolbar.

@@ -398,7 +398,7 @@ void VNDBFetcher::slotRead() {
         break;
       case GetVN:
         // necessary for passing unit test
-        QTimer::singleShot(0, this, SLOT(parseVNResults()));
+        QTimer::singleShot(0, this, &VNDBFetcher::parseVNResults);
         break;
       case GetRelease:
         // handled asynch

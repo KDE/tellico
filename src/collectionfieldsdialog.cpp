@@ -105,7 +105,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
       (void) new FieldListItem(m_fieldsWidget, field);
     }
   }
-  connect(m_fieldsWidget, SIGNAL(currentRowChanged(int)), SLOT(slotHighlightedChanged(int)));
+  connect(m_fieldsWidget, &QListWidget::currentRowChanged, this, &CollectionFieldsDialog::slotHighlightedChanged);
 
   QWidget* hb1 = new QWidget(fieldsGroup);
   QHBoxLayout* hb1HBoxLayout = new QHBoxLayout(hb1);
@@ -120,8 +120,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_btnDelete->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
   m_btnDelete->setWhatsThis(i18n("Remove a field from the collection"));
 
-  connect(m_btnNew, SIGNAL(clicked()), SLOT(slotNew()));
-  connect(m_btnDelete, SIGNAL(clicked()), SLOT(slotDelete()));
+  connect(m_btnNew, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotNew);
+  connect(m_btnDelete, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotDelete);
 
   QWidget* hb2 = new QWidget(fieldsGroup);
   QHBoxLayout* hb2HBoxLayout = new QHBoxLayout(hb2);
@@ -138,8 +138,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_btnDown->setWhatsThis(i18n("Move this field down in the list. The list order is important "
                                "for the layout of the entry editor."));
 
-  connect(m_btnUp, SIGNAL(clicked()), SLOT(slotMoveUp()));
-  connect(m_btnDown, SIGNAL(clicked()), SLOT(slotMoveDown()));
+  connect(m_btnUp, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotMoveUp);
+  connect(m_btnDown, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotMoveDown);
 
   QWidget* vbox = new QWidget(page);
   QVBoxLayout* vboxVBoxLayout = new QVBoxLayout(vbox);
@@ -163,7 +163,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   QString whats = i18n("The title of the field");
   label->setWhatsThis(whats);
   m_titleEdit->setWhatsThis(whats);
-  connect(m_titleEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_titleEdit, &QLineEdit::textChanged, this, &CollectionFieldsDialog::slotModified);
 
   label = new QLabel(i18n("T&ype:"), grid);
   layout->addWidget(label, row, 2);
@@ -187,8 +187,10 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_typeCombo->setWhatsThis(whats);
   // the typeTitles match the fieldMap().values() but in a better order
   m_typeCombo->addItems(Data::Field::typeTitles());
-  connect(m_typeCombo, SIGNAL(activated(int)), SLOT(slotModified()));
-  connect(m_typeCombo, SIGNAL(activated(const QString&)), SLOT(slotTypeChanged(const QString&)));
+  void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
+  connect(m_typeCombo, activatedInt, this, &CollectionFieldsDialog::slotModified);
+  void (QComboBox::* activatedString)(const QString&) = &QComboBox::activated;
+  connect(m_typeCombo, activatedString, this, &CollectionFieldsDialog::slotTypeChanged);
 
   label = new QLabel(i18n("Cate&gory:"), grid);
   layout->addWidget(label, ++row, 0);
@@ -210,7 +212,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   }
   m_catCombo->addItems(cats);
   m_catCombo->setDuplicatesEnabled(false);
-  connect(m_catCombo, SIGNAL(currentTextChanged(const QString&)), SLOT(slotModified()));
+  connect(m_catCombo, &QComboBox::currentTextChanged, this, &CollectionFieldsDialog::slotModified);
 
   m_btnExtended = new QPushButton(i18n("Set &properties..."), grid);
   m_btnExtended->setIcon(QIcon::fromTheme(QStringLiteral("bookmarks")));
@@ -219,7 +221,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats = i18n("Extended field properties are used to specify things such as the corresponding bibtex field.");
   label->setWhatsThis(whats);
   m_btnExtended->setWhatsThis(whats);
-  connect(m_btnExtended, SIGNAL(clicked()), SLOT(slotShowExtendedProperties()));
+  connect(m_btnExtended, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotShowExtendedProperties);
 
   label = new QLabel(i18n("Description:"), grid);
   layout->addWidget(label, ++row, 0);
@@ -231,7 +233,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats = i18n("The description is a useful reminder of what information is contained in the field.");
   label->setWhatsThis(whats);
   m_descEdit->setWhatsThis(whats);
-  connect(m_descEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_descEdit, &QLineEdit::textChanged, this, &CollectionFieldsDialog::slotModified);
 
   QGroupBox* valueGroup = new QGroupBox(i18n("Value Options"), vbox);
   vboxVBoxLayout->addWidget(valueGroup);
@@ -246,7 +248,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   whats = i18n("<qt>A default value can be set for new entries.</qt>");
   label->setWhatsThis(whats);
   m_defaultEdit->setWhatsThis(whats);
-  connect(m_defaultEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_defaultEdit, &QLineEdit::textChanged, this, &CollectionFieldsDialog::slotModified);
 
   label = new QLabel(i18n("Value template:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
@@ -260,13 +262,13 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
                "Named fields, such as \"%{year} %{title}\", get substituted in the value.");
   label->setWhatsThis(whats);
   m_derivedEdit->setWhatsThis(whats);
-  connect(m_derivedEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_derivedEdit, &QLineEdit::textChanged, this, &CollectionFieldsDialog::slotModified);
 
   m_derived = new QCheckBox(i18n("Use derived value"), valueGroup);
   m_derived->setWhatsThis(whats);
   valueLayout->addWidget(m_derived, valueRow, 2, 1, 2);
-  connect(m_derived, SIGNAL(clicked(bool)), SLOT(slotDerivedChecked(bool)));
-  connect(m_derived, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_derived, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotDerivedChecked);
+  connect(m_derived, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotModified);
 
   label = new QLabel(i18n("A&llowed values:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
@@ -278,7 +280,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
                "for example: \"dog; cat; mouse\"</qt>");
   label->setWhatsThis(whats);
   m_allowEdit->setWhatsThis(whats);
-  connect(m_allowEdit, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_allowEdit, &QLineEdit::textChanged, this, &CollectionFieldsDialog::slotModified);
 
   label = new QLabel(i18n("Format options:"), valueGroup);
   valueLayout->addWidget(label, ++valueRow, 0);
@@ -290,7 +292,8 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_formatCombo->addItem(i18n("Allow auto-capitalization only"), FieldFormat::FormatPlain);
   m_formatCombo->addItem(i18n("Format as a title"), FieldFormat::FormatTitle);
   m_formatCombo->addItem(i18n("Format as a name"), FieldFormat::FormatName);
-  connect(m_formatCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotModified()));
+  void (QComboBox::* currentIndexChanged)(int) = &QComboBox::currentIndexChanged;
+  connect(m_formatCombo, currentIndexChanged, this, &CollectionFieldsDialog::slotModified);
 
   QGroupBox* optionsGroup = new QGroupBox(i18n("Field Options"), vbox);
   vboxVBoxLayout->addWidget(optionsGroup);
@@ -308,9 +311,9 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   optionsLayout->addWidget(m_multiple);
   optionsLayout->addWidget(m_grouped);
 
-  connect(m_complete, SIGNAL(clicked()), SLOT(slotModified()));
-  connect(m_multiple, SIGNAL(clicked()), SLOT(slotModified()));
-  connect(m_grouped, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_complete, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotModified);
+  connect(m_multiple, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotModified);
+  connect(m_grouped, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotModified);
 
   // need to stretch at bottom
   vboxVBoxLayout->addStretch(1);
@@ -328,15 +331,15 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   QPushButton* okButton = m_buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(m_buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(m_buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  connect(m_buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+  connect(m_buttonBox, &QDialogButtonBox::helpRequested, this, &CollectionFieldsDialog::slotHelp);
 
   m_buttonBox->button(QDialogButtonBox::RestoreDefaults)->setWhatsThis(i18n("Revert the selected field's properties to the default values."));
 
-  connect(okButton, SIGNAL(clicked()), SLOT(slotOk()));
-  connect(m_buttonBox->button(QDialogButtonBox::Apply), SIGNAL(clicked()), SLOT(slotApply()));
-  connect(m_buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(slotDefault()));
+  connect(okButton, &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotOk);
+  connect(m_buttonBox->button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotApply);
+  connect(m_buttonBox->button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked, this, &CollectionFieldsDialog::slotDefault);
 
   okButton->setEnabled(false);
   m_buttonBox->button(QDialogButtonBox::Apply)->setEnabled(false);
@@ -347,7 +350,7 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   // new types. The problem is that when more types are added, the size of the combo box
   // doesn't change. So when everything is laid out, the combo box needs to have all the
   // items there.
-  QTimer::singleShot(0, this, SLOT(slotSelectInitial()));
+  QTimer::singleShot(0, this, &CollectionFieldsDialog::slotSelectInitial);
 }
 
 CollectionFieldsDialog::~CollectionFieldsDialog() {
@@ -606,7 +609,7 @@ void CollectionFieldsDialog::slotHighlightedChanged(int index_) {
   // next check old values
   if(!checkValues()) {
     // Other functions get called and change selection after this one. Use a SingleShot to revert
-    QTimer::singleShot(0, this, SLOT(resetToCurrent()));
+    QTimer::singleShot(0, this, &CollectionFieldsDialog::resetToCurrent);
     m_updatingValues = false;
     return;
   }

@@ -137,8 +137,8 @@ void MusicBrainzFetcher::doSearch() {
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1 ( http://tellico-project.org )")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &MusicBrainzFetcher::slotComplete);
 }
 
 void MusicBrainzFetcher::stop() {

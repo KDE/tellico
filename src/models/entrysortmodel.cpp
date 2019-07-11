@@ -33,7 +33,7 @@ using Tellico::EntrySortModel;
 EntrySortModel::EntrySortModel(QObject* parent) : AbstractSortModel(parent) {
   setDynamicSortFilter(true);
   setSortLocaleAware(true);
-  connect(this, SIGNAL(modelReset()), SLOT(clearData()));
+  connect(this, &QAbstractItemModel::modelReset, this, &EntrySortModel::clearData);
 }
 
 void EntrySortModel::setFilter(Tellico::FilterPtr filter_) {

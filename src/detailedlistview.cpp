@@ -50,14 +50,14 @@ using namespace Tellico;
 using Tellico::DetailedListView;
 
 DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
-    , m_loadingCollection(false), m_selectionChanging(false), m_currentContextColumn(-1) {
+    , m_loadingCollection(false), m_currentContextColumn(-1) {
   setHeaderHidden(false);
   setSelectionMode(QAbstractItemView::ExtendedSelection);
   setAlternatingRowColors(true);
   setRootIsDecorated(false);
   setUniformRowHeights(true);
 
-  connect(this, SIGNAL(doubleClicked(const QModelIndex&)), SLOT(slotDoubleClicked(const QModelIndex&)));
+  connect(this, &QAbstractItemView::doubleClicked, this, &DetailedListView::slotDoubleClicked);
 
   // header menu
   header()->installEventFilter(this);
@@ -65,8 +65,8 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
 
   m_headerMenu = new QMenu(this);
   m_columnMenu = new QMenu(this);
-  connect(m_columnMenu, SIGNAL(triggered(QAction*)),
-          SLOT(slotColumnMenuActivated(QAction*)));
+  connect(m_columnMenu, &QMenu::triggered,
+          this, &DetailedListView::slotColumnMenuActivated);
 
   EntryModel* entryModel = new EntryModel(this);
   EntrySortModel* sortModel = new EntrySortModel(this);
@@ -77,10 +77,10 @@ DetailedListView::DetailedListView(QWidget* parent_) : GUI::TreeView(parent_)
 
   ModelManager::self()->setEntryModel(sortModel);
 
-  connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateHeaderMenu()));
-  connect(model(), SIGNAL(headerDataChanged(Qt::Orientation, int, int)), SLOT(updateColumnDelegates()));
-  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)), SLOT(hideNewColumn(const QModelIndex&, int, int)));
-  connect(header(), SIGNAL(sectionCountChanged(int, int)), SLOT(updateHeaderMenu()));
+  connect(model(), &QAbstractItemModel::headerDataChanged, this, &DetailedListView::updateHeaderMenu);
+  connect(model(), &QAbstractItemModel::headerDataChanged, this, &DetailedListView::updateColumnDelegates);
+  connect(model(), &QAbstractItemModel::columnsInserted, this, &DetailedListView::hideNewColumn);
+  connect(header(), &QHeaderView::sectionCountChanged, this, &DetailedListView::updateHeaderMenu);
 }
 
 DetailedListView::~DetailedListView() {
@@ -111,12 +111,12 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
   }
 
   // we don't want to immediately hide all these columns when adding fields
-  disconnect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)),
-             this, SLOT(hideNewColumn(const QModelIndex&, int, int)));
+  disconnect(model(), &QAbstractItemModel::columnsInserted,
+             this, &DetailedListView::hideNewColumn);
   sourceModel()->setImagesAreAvailable(false);
   sourceModel()->setFields(coll_->fields());
-  connect(model(), SIGNAL(columnsInserted(const QModelIndex&, int, int)),
-          this, SLOT(hideNewColumn(const QModelIndex&, int, int)));
+  connect(model(), &QAbstractItemModel::columnsInserted,
+          this, &DetailedListView::hideNewColumn);
 
   // we're not using saveState() and restoreState() since our columns are variable
   QStringList columnNames = config.readEntry(QLatin1String("ColumnNames") + configN, QStringList());
@@ -194,9 +194,6 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
   sourceModel()->addEntries(entries_);
   if(!m_loadingCollection) {
     setState(entries_, NewState);
-    if(!m_selectionChanging) {
-      setEntriesSelected(entries_);
-    }
   }
 }
 
@@ -206,9 +203,6 @@ void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {
   }
   sourceModel()->modifyEntries(entries_);
   setState(entries_, ModifiedState);
-  if(!m_selectionChanging) {
-    setEntriesSelected(entries_);
-  }
 }
 
 void DetailedListView::removeEntries(Tellico::Data::EntryList entries_) {
@@ -539,16 +533,16 @@ void DetailedListView::updateHeaderMenu() {
   columnAction->setIcon(QIcon::fromTheme(QStringLiteral("view-file-columns")));
 
   QAction* actHideThis = m_headerMenu->addAction(i18n("Hide This Column"));
-  connect(actHideThis, SIGNAL(triggered(bool)), this, SLOT(hideCurrentColumn()));
+  connect(actHideThis, &QAction::triggered, this, &DetailedListView::hideCurrentColumn);
   QAction* actResize = m_headerMenu->addAction(QIcon::fromTheme(QStringLiteral("zoom-fit-width")), i18n("Resize to Content"));
-  connect(actResize, SIGNAL(triggered(bool)), this, SLOT(resizeColumnsToContents()));
+  connect(actResize, &QAction::triggered, this, &DetailedListView::resizeColumnsToContents);
 
   m_headerMenu->addSeparator();
 
   QAction* actShowAll = m_headerMenu->addAction(i18n("Show All Columns"));
-  connect(actShowAll, SIGNAL(triggered(bool)), this, SLOT(showAllColumns()));
+  connect(actShowAll, &QAction::triggered, this, &DetailedListView::showAllColumns);
   QAction* actHideAll = m_headerMenu->addAction(i18n("Hide All Columns"));
-  connect(actHideAll, SIGNAL(triggered(bool)), this, SLOT(hideAllColumns()));
+  connect(actHideAll, &QAction::triggered, this, &DetailedListView::hideAllColumns);
 }
 
 void DetailedListView::updateColumnDelegates() {

@@ -132,7 +132,7 @@ FieldWidget::FieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_editMultiple = new QCheckBox(this);
   m_editMultiple->setChecked(true);
   m_editMultiple->setFixedWidth(m_editMultiple->sizeHint().width()); // don't let it have any extra space
-  connect(m_editMultiple, SIGNAL(toggled(bool)), SLOT(setEnabled(bool)));
+  connect(m_editMultiple, &QCheckBox::toggled, this, &FieldWidget::setEnabled);
   l->addWidget(m_editMultiple);
 
   setWhatsThis(field_->description());
@@ -189,10 +189,10 @@ void FieldWidget::editMultiple(bool show_) {
   // FIXME: maybe valueChanged should only be signaled when the button is toggled on
   if(show_) {
     m_editMultiple->show();
-    connect(m_editMultiple, SIGNAL(clicked()), this, SLOT(multipleChecked()));
+    connect(m_editMultiple, &QAbstractButton::clicked, this, &FieldWidget::multipleChecked);
   } else {
     m_editMultiple->hide();
-    disconnect(m_editMultiple, SIGNAL(clicked()), this, SLOT(multipleChecked()));
+    disconnect(m_editMultiple, &QAbstractButton::clicked, this, &FieldWidget::multipleChecked);
   }
   // the widget length needs to be updated since it gets shorter
   widget()->updateGeometry();

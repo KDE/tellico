@@ -55,10 +55,10 @@ EntryUpdater::EntryUpdater(Tellico::Data::CollPtr coll_, Tellico::Data::EntryLis
   // for now, we're assuming all entries are same collection type
   m_fetchers = Fetch::Manager::self()->createUpdateFetchers(m_coll->type());
   foreach(Fetch::Fetcher::Ptr fetcher, m_fetchers) {
-    connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-            SLOT(slotResult(Tellico::Fetch::FetchResult*)));
-    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-            SLOT(slotDone()));
+    connect(fetcher.data(), &Fetch::Fetcher::signalResultFound,
+            this, &EntryUpdater::slotResult);
+    connect(fetcher.data(), &Fetch::Fetcher::signalDone,
+            this, &EntryUpdater::slotDone);
   }
   init();
 }
@@ -72,10 +72,10 @@ EntryUpdater::EntryUpdater(const QString& source_, Tellico::Data::CollPtr coll_,
   Fetch::Fetcher::Ptr f = Fetch::Manager::self()->createUpdateFetcher(m_coll->type(), source_);
   if(f) {
     m_fetchers.append(f);
-    connect(f.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-            SLOT(slotResult(Tellico::Fetch::FetchResult*)));
-    connect(f.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-            SLOT(slotDone()));
+    connect(f.data(), &Fetch::Fetcher::signalResultFound,
+            this, &EntryUpdater::slotResult);
+    connect(f.data(), &Fetch::Fetcher::signalDone,
+            this, &EntryUpdater::slotDone);
   }
   init();
 }
@@ -104,7 +104,7 @@ void EntryUpdater::init() {
 
   // done if no fetchers available
   if(m_fetchers.isEmpty()) {
-    QTimer::singleShot(500, this, SLOT(slotCleanup()));
+    QTimer::singleShot(500, this, &EntryUpdater::slotCleanup);
   } else {
     slotStartNext(); // starts fetching
   }
@@ -121,8 +121,7 @@ void EntryUpdater::slotStartNext() {
 
 void EntryUpdater::slotDone() {
   if(m_cancelled) {
-    //    myLog() << "already cancelled";
-    QTimer::singleShot(500, this, SLOT(slotCleanup()));
+    QTimer::singleShot(500, this, &EntryUpdater::slotCleanup);
     return;
   }
 
@@ -140,13 +139,13 @@ void EntryUpdater::slotDone() {
     m_entriesToUpdate.removeAll(m_entriesToUpdate.front());
     // if there are no more entries, and this is the last fetcher, time to delete
     if(m_entriesToUpdate.isEmpty()) {
-      QTimer::singleShot(500, this, SLOT(slotCleanup()));
+      QTimer::singleShot(500, this, &EntryUpdater::slotCleanup);
       return;
     }
   }
   qApp->processEvents();
   // so the entry updater can clean up a bit
-  QTimer::singleShot(500, this, SLOT(slotStartNext()));
+  QTimer::singleShot(500, this, &EntryUpdater::slotStartNext);
 }
 
 void EntryUpdater::slotResult(Tellico::Fetch::FetchResult* result_) {
@@ -259,8 +258,8 @@ void EntryUpdater::mergeCurrent(Tellico::Data::EntryPtr entry_, bool overWrite_)
 }
 
 void EntryUpdater::slotCleanup() {
-  StatusBar::self()->clearStatus();
   ProgressManager::self()->setDone(this);
+  StatusBar::self()->clearStatus();
   Kernel::self()->endCommandGroup();
   deleteLater();
 }

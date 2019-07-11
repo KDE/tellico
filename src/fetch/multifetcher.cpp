@@ -72,10 +72,10 @@ void MultiFetcher::readSources() const {
     Fetcher::Ptr fetcher = Manager::self()->fetcherByUuid(uuid);
     if(fetcher) {
       m_fetchers.append(fetcher);
-      connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-              SLOT(slotResult(Tellico::Fetch::FetchResult*)));
-      connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-              SLOT(slotDone()));
+      connect(fetcher.data(), &Fetcher::signalResultFound,
+              this, &MultiFetcher::slotResult);
+      connect(fetcher.data(), &Fetcher::signalDone,
+              this, &MultiFetcher::slotDone);
     }
   }
 }
@@ -193,8 +193,9 @@ MultiFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MultiFetcher* f
   QLabel* label = new QLabel(i18n("Collection &type:"), hbox);
   hboxHBoxLayout->addWidget(label);
   m_collCombo = new GUI::CollectionTypeCombo(hbox);
-  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
+  void (GUI::CollectionTypeCombo::* activatedInt)(int) = &GUI::CollectionTypeCombo::activated;
+  connect(m_collCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_collCombo, activatedInt, this, &ConfigWidget::slotTypeChanged);
   label->setBuddy(m_collCombo);
   hboxHBoxLayout->addWidget(m_collCombo);
 
@@ -244,7 +245,8 @@ MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
   layout->addWidget(label);
   m_fetcherCombo = new GUI::ComboBox(this);
   layout->addWidget(m_fetcherCombo);
-  connect(m_fetcherCombo, SIGNAL(activated(int)), SIGNAL(signalModified()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_fetcherCombo, activatedInt, this, &FetcherItemWidget::signalModified);
   label->setBuddy(m_fetcherCombo);
 }
 
@@ -270,7 +272,7 @@ QString MultiFetcher::FetcherItemWidget::fetcherUuid() const {
 
 MultiFetcher::FetcherListWidget::FetcherListWidget(QWidget* parent_)
     : KWidgetLister(1, 8, parent_) {
-  connect(this, SIGNAL(clearWidgets()), SIGNAL(signalModified()));
+  connect(this, &KWidgetLister::clearWidgets, this, &FetcherListWidget::signalModified);
   // start with at least 1
   setNumberOfShownWidgetsTo(1);
 }
@@ -309,6 +311,6 @@ QStringList MultiFetcher::FetcherListWidget::uuids() const {
 QWidget* MultiFetcher::FetcherListWidget::createWidget(QWidget* parent_) {
   FetcherItemWidget* w = new FetcherItemWidget(parent_);
   w->setFetchers(m_fetchers);
-  connect(w, SIGNAL(signalModified()), SIGNAL(signalModified()));
+  connect(w, &FetcherItemWidget::signalModified, this, &FetcherListWidget::signalModified);
   return w;
 }

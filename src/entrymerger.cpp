@@ -60,7 +60,7 @@ EntryMerger::EntryMerger(Tellico::Data::EntryList entries_, QObject* parent_)
 
   // done if no entries to merge
   if(m_origCount < 2) {
-    QTimer::singleShot(500, this, SLOT(slotCleanup()));
+    QTimer::singleShot(500, this, &EntryMerger::slotCleanup);
   } else {
     slotStartNext(); // starts fetching
   }
@@ -96,9 +96,9 @@ void EntryMerger::slotStartNext() {
   m_entriesToCheck.removeAll(baseEntry);
 
   if(m_cancelled || m_entriesToCheck.count() < 2) {
-    QTimer::singleShot(0, this, SLOT(slotCleanup()));
+    QTimer::singleShot(0, this, &EntryMerger::slotCleanup);
   } else {
-    QTimer::singleShot(0, this, SLOT(slotStartNext()));
+    QTimer::singleShot(0, this, &EntryMerger::slotStartNext);
   }
 }
 

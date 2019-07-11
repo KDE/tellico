@@ -61,8 +61,8 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
   buttonBox->button(QDialogButtonBox::Close)->setDefault(true);
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
   QPushButton* checkDuplicates = new QPushButton(buttonBox);
   KGuiItem::assign(checkDuplicates, KGuiItem(i18n("Check for duplicates"), QStringLiteral("system-search")));
@@ -80,9 +80,9 @@ BibtexKeyDialog::BibtexKeyDialog(Data::CollPtr coll_, QWidget* parent_)
   } else {
     // the button is enabled when duplicates are found
     m_filterButton->setEnabled(false);
-    connect(m_filterButton, SIGNAL(clicked()), SLOT(slotFilterDuplicates()));
-    connect(checkDuplicates, SIGNAL(clicked()), SLOT(slotCheckDuplicates()));
-    QTimer::singleShot(0, this, SLOT(slotCheckDuplicatesImpl()));
+    connect(m_filterButton, &QAbstractButton::clicked, this, &BibtexKeyDialog::slotFilterDuplicates);
+    connect(checkDuplicates, &QAbstractButton::clicked, this, &BibtexKeyDialog::slotCheckDuplicates);
+    QTimer::singleShot(0, this, &BibtexKeyDialog::slotCheckDuplicatesImpl);
   }
 }
 
@@ -94,7 +94,7 @@ void BibtexKeyDialog::slotCheckDuplicates() {
     return;
   }
   m_dupeLabel->setComment(i18n("Checking for entries with duplicate citation keys..."));
-  QTimer::singleShot(0, this, SLOT(slotCheckDuplicatesImpl()));
+  QTimer::singleShot(0, this, &BibtexKeyDialog::slotCheckDuplicatesImpl);
 }
 
 void BibtexKeyDialog::slotCheckDuplicatesImpl() {

@@ -56,7 +56,7 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
   okButton->setDefault(true);
   okButton->setShortcut(Qt::CTRL | Qt::Key_Return);
-  connect(buttonBox, SIGNAL(accepted()), SLOT(accept()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   mainLayout->addWidget(buttonBox);
 
   resize(QSize(600, 500));

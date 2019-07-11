@@ -344,10 +344,10 @@ void IMDBFetcher::search() {
 
   m_job = KIO::storedGet(m_url, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
-  connect(m_job, SIGNAL(redirection(KIO::Job*, QUrl)),
-          SLOT(slotRedirection(KIO::Job*, QUrl)));
+  connect(m_job.data(), &KJob::result,
+          this, &IMDBFetcher::slotComplete);
+  connect(m_job.data(), &KIO::TransferJob::redirection,
+          this, &IMDBFetcher::slotRedirection);
 }
 
 void IMDBFetcher::continueSearch() {
@@ -383,7 +383,6 @@ void IMDBFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myLog();
   if(m_job) {
     m_job->kill();
     m_job = nullptr;
@@ -1508,7 +1507,8 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(10);
-  connect(m_numCast, SIGNAL(valueChanged(QString)), SLOT(slotSetModified()));
+  void (QSpinBox::* valueChanged)(const QString&) = &QSpinBox::valueChanged;
+  connect(m_numCast, valueChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
   label->setWhatsThis(w);
@@ -1516,7 +1516,7 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   label->setBuddy(m_numCast);
 
   m_fetchImageCheck = new QCheckBox(i18n("Download cover &image"), optionsWidget());
-  connect(m_fetchImageCheck, SIGNAL(clicked()), SLOT(slotSetModified()));
+  connect(m_fetchImageCheck, &QAbstractButton::clicked, this, &ConfigWidget::slotSetModified);
   ++row;
   l->addWidget(m_fetchImageCheck, row, 0, 1, 2);
   w = i18n("The cover image may be downloaded as well. However, too many large images in the "

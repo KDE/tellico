@@ -41,7 +41,7 @@ Q_OBJECT
 
 public:
   ParaFieldWidget(Data::FieldPtr field, QWidget* parent);
-  virtual ~ParaFieldWidget() {}
+  virtual ~ParaFieldWidget();
 
   virtual QString text() const Q_DECL_OVERRIDE;
   virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;

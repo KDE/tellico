@@ -34,10 +34,10 @@ using Tellico::Fetch::FetcherJob;
 
 FetcherJob::FetcherJob(QObject* parent_, Fetcher::Ptr fetcher_, const FetchRequest& request_)
     : KJob(parent_), m_fetcher(fetcher_), m_request(request_), m_maximumResults(0) {
-  connect(m_fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-          SLOT(slotResult(Tellico::Fetch::FetchResult*)));
-  connect(m_fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-          SLOT(slotDone()));
+  connect(m_fetcher.data(), &Fetcher::signalResultFound,
+          this, &FetcherJob::slotResult);
+  connect(m_fetcher.data(), &Fetcher::signalDone,
+          this, &FetcherJob::slotDone);
 }
 
 FetcherJob::~FetcherJob() {
@@ -62,7 +62,7 @@ void FetcherJob::setMaximumResults(int count_) {
 }
 
 void FetcherJob::start() {
-  QTimer::singleShot(0, this, SLOT(startSearch()));
+  QTimer::singleShot(0, this, &FetcherJob::startSearch);
 }
 
 void FetcherJob::startSearch() {

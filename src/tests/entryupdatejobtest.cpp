@@ -57,7 +57,7 @@ void EntryUpdateJobTest::testUpdate() {
 
   // don't use 'this' as job parent, it crashes
   Tellico::EntryUpdateJob* job = new Tellico::EntryUpdateJob(nullptr, entry, fetcher);
-  connect(job, SIGNAL(result(KJob*)), &m_loop, SLOT(quit()));
+  connect(job, &KJob::result, &m_loop, &QEventLoop::quit);
 
   job->start();
   m_loop.exec();

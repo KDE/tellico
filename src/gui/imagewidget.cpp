@@ -101,12 +101,12 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
 
   QPushButton* button1 = new QPushButton(i18n("Select Image..."), this);
   button1->setIcon(QIcon::fromTheme(QStringLiteral("insert-image")));
-  connect(button1, SIGNAL(clicked()), this, SLOT(slotGetImage()));
+  connect(button1, &QAbstractButton::clicked, this, &ImageWidget::slotGetImage);
   boxLayout->addWidget(button1);
 
   QPushButton* button2 = new QPushButton(i18n("Scan Image..."), this);
   button2->setIcon(QIcon::fromTheme(QStringLiteral("scanner")));
-  connect(button2, SIGNAL(clicked()), this, SLOT(slotScanImage()));
+  connect(button2, &QAbstractButton::clicked, this, &ImageWidget::slotScanImage);
   boxLayout->addWidget(button2);
 #ifndef HAVE_KSANE
   button2->setEnabled(false);
@@ -116,7 +116,7 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   m_edit->setText(i18n("Open With..."));
   m_edit->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
   m_edit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-  connect(m_edit, SIGNAL(clicked()), this, SLOT(slotEditImage()));
+  connect(m_edit, &QAbstractButton::clicked, this, &ImageWidget::slotEditImage);
   boxLayout->addWidget(m_edit);
 
   KConfigGroup config(KSharedConfig::openConfig(), "EditImage");
@@ -143,19 +143,19 @@ ImageWidget::ImageWidget(QWidget* parent_) : QWidget(parent_), m_editMenu(nullpt
   if(selectedAction) {
     slotEditMenu(selectedAction);
     m_edit->setMenu(m_editMenu);
-    connect(m_editMenu, SIGNAL(triggered(QAction*)), this, SLOT(slotEditMenu(QAction*)));
+    connect(m_editMenu, &QMenu::triggered, this, &ImageWidget::slotEditMenu);
   } else {
     m_edit->setEnabled(false);
   }
   QPushButton* button4 = new QPushButton(i18nc("Clear image", "Clear"), this);
   button4->setIcon(QIcon::fromTheme(QStringLiteral("edit-clear")));
-  connect(button4, SIGNAL(clicked()), this, SLOT(slotClear()));
+  connect(button4, &QAbstractButton::clicked, this, &ImageWidget::slotClear);
   boxLayout->addWidget(button4);
 
   boxLayout->addSpacing(8);
 
   m_cbLinkOnly = new QCheckBox(i18n("Save link only"), this);
-  connect(m_cbLinkOnly, SIGNAL(clicked()), SLOT(slotLinkOnlyClicked()));
+  connect(m_cbLinkOnly, &QAbstractButton::clicked, this, &ImageWidget::slotLinkOnlyClicked);
   boxLayout->addWidget(m_cbLinkOnly);
 
   boxLayout->addStretch(1);
@@ -275,10 +275,10 @@ void ImageWidget::slotScanImage() {
     m_saneDlg->addPage(m_saneWidget, QString());
     m_saneDlg->setStandardButtons(QDialogButtonBox::Cancel);
     m_saneDlg->setAttribute(Qt::WA_DeleteOnClose, false);
-    connect(m_saneWidget, SIGNAL(imageReady(QByteArray &, int, int, int, int)),
-            SLOT(imageReady(QByteArray &, int, int, int, int)));
-    connect(m_saneDlg, SIGNAL(rejected()),
-            SLOT(cancelScan()));
+    connect(m_saneWidget.data(), &KSaneIface::KSaneWidget::imageReady,
+            this, &ImageWidget::imageReady);
+    connect(m_saneDlg.data(), &QDialog::rejected,
+            this, &ImageWidget::cancelScan);
   }
   if(m_saneDevice.isEmpty()) {
     m_saneDevice = m_saneWidget->selectDevice(this);
@@ -311,7 +311,7 @@ void ImageWidget::imageReady(QByteArray& data, int w, int h, int bpl, int f) {
   } else {
     myWarning() << "Failed to open temp image file";
   }
-  QTimer::singleShot(100, m_saneDlg, SLOT(accept()));
+  QTimer::singleShot(100, m_saneDlg.data(), &QDialog::accept);
 #else
   Q_UNUSED(data);
   Q_UNUSED(w);
@@ -328,8 +328,9 @@ void ImageWidget::slotEditImage() {
 
   if(!m_editProcess) {
     m_editProcess = new KProcess(this);
-    connect(m_editProcess, SIGNAL(finished(int, QProcess::ExitStatus)),
-            this, SLOT(slotFinished()));
+    void (KProcess::* finished)(int, QProcess::ExitStatus) = &KProcess::finished;
+    connect(m_editProcess, finished,
+            this, &ImageWidget::slotFinished);
   }
   if(m_editor && m_editProcess->state() == QProcess::NotRunning) {
     QTemporaryFile temp(QDir::tempPath() + QLatin1String("/tellico_XXXXXX") + QLatin1String(".png"));

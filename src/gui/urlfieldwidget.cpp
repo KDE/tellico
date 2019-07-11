@@ -48,12 +48,17 @@ QString URLFieldWidget::URLCompletion::makeCompletion(const QString& text_) {
 URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
     : FieldWidget(field_, parent_) {
 
+  // the label is a KUrlLabel
+  KUrlLabel* urlLabel = dynamic_cast<KUrlLabel*>(label());
+  Q_ASSERT(urlLabel);
+
   m_requester = new KUrlRequester(this);
   m_requester->lineEdit()->setCompletionObject(new URLCompletion());
   m_requester->lineEdit()->setAutoDeleteCompletionObject(true);
-  connect(m_requester, SIGNAL(textChanged(const QString&)), SLOT(checkModified()));
-  connect(m_requester, SIGNAL(textChanged(const QString&)), label(), SLOT(setUrl(const QString&)));
-  connect(label(), SIGNAL(leftClickedUrl(const QString&)), SLOT(slotOpenURL(const QString&)));
+  connect(m_requester, &KUrlRequester::textChanged, this, &URLFieldWidget::checkModified);
+  connect(m_requester, &KUrlRequester::textChanged, urlLabel, &KUrlLabel::setUrl);
+  void (KUrlLabel::* clickedSignal)(const QString&) = &KUrlLabel::leftClickedUrl;
+  connect(urlLabel, clickedSignal, this, &URLFieldWidget::slotOpenURL);
   registerWidget();
 
   // special case, remember if it's a relative url

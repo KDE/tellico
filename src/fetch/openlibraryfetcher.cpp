@@ -144,7 +144,7 @@ void OpenLibraryFetcher::doSearch(const QString& term_) {
 
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  connect(job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(job.data(), &KJob::result, this, &OpenLibraryFetcher::slotComplete);
   m_jobs << job;
 }
 

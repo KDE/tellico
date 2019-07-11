@@ -77,28 +77,29 @@ void FilterRuleWidget::initLists() {
 void FilterRuleWidget::initWidget() {
   m_ruleField = new KComboBox(this);
   layout()->addWidget(m_ruleField);
-  connect(m_ruleField, SIGNAL(activated(int)), SIGNAL(signalModified()));
-  connect(m_ruleField, SIGNAL(activated(int)), SLOT(slotRuleFieldChanged(int)));
+  void (KComboBox::* activatedInt)(int) = &KComboBox::activated;
+  connect(m_ruleField, activatedInt, this, &FilterRuleWidget::signalModified);
+  connect(m_ruleField, activatedInt, this, &FilterRuleWidget::slotRuleFieldChanged);
 
   m_ruleFunc = new GUI::ComboBox(this);
   layout()->addWidget(m_ruleFunc);
-  connect(m_ruleFunc, SIGNAL(activated(int)), SIGNAL(signalModified()));
-  connect(m_ruleFunc, SIGNAL(activated(int)), SLOT(slotRuleFunctionChanged(int)));
+  connect(m_ruleFunc, activatedInt, this, &FilterRuleWidget::signalModified);
+  connect(m_ruleFunc, activatedInt, this, &FilterRuleWidget::slotRuleFunctionChanged);
 
   m_valueStack = new QStackedWidget(this);
   layout()->addWidget(m_valueStack);
 
   m_ruleValue = new KLineEdit(m_valueStack); //krazy:exclude=qclasses
-  connect(m_ruleValue, SIGNAL(textChanged(const QString&)), SIGNAL(signalModified()));
+  connect(m_ruleValue, &QLineEdit::textChanged, this, &FilterRuleWidget::signalModified);
   m_valueStack->addWidget(m_ruleValue);
 
   m_ruleDate = new KDateComboBox(m_valueStack);
-  connect(m_ruleDate, SIGNAL(dateChanged(const QDate&)), SIGNAL(signalModified()));
+  connect(m_ruleDate, &KDateComboBox::dateChanged, this, &FilterRuleWidget::signalModified);
   m_valueStack->addWidget(m_ruleDate);
 
   if(!KServiceTypeTrader::self()->query(QStringLiteral("KRegExpEditor/KRegExpEditor")).isEmpty()) {
     m_editRegExp = new QPushButton(i18n("Edit..."), this);
-    connect(m_editRegExp, SIGNAL(clicked()), this, SLOT(slotEditRegExp()));
+    connect(m_editRegExp, &QAbstractButton::clicked, this, &FilterRuleWidget::slotEditRegExp);
   }
 
   m_ruleField->addItems(m_ruleFieldList);

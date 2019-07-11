@@ -270,7 +270,7 @@ void TellicoImporter::loadZipData() {
 
   if(thisPtr && m_images.isEmpty()) {
     // give it some time
-    QTimer::singleShot(3000, this, SLOT(deleteLater()));
+    QTimer::singleShot(3000, this, &QObject::deleteLater);
   }
 }
 
@@ -292,7 +292,7 @@ bool TellicoImporter::loadImage(const QString& id_) {
   m_images.remove(id_);
   if(m_images.isEmpty()) {
     // give it some time
-    QTimer::singleShot(3000, this, SLOT(deleteLater()));
+    QTimer::singleShot(3000, this, &QObject::deleteLater);
   }
   return !newID.isEmpty();
 }

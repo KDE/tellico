@@ -72,13 +72,13 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
   }
   m_okButton = buttonBox->button(QDialogButtonBox::Ok);
   m_applyButton = buttonBox->button(QDialogButtonBox::Apply);
-  connect(m_okButton, SIGNAL(clicked()), SLOT(slotOk()));
+  connect(m_okButton, &QAbstractButton::clicked, this, &FilterDialog::slotOk);
   if(m_applyButton) {
-    connect(m_applyButton, SIGNAL(clicked()), SLOT(slotApply()));
+    connect(m_applyButton, &QAbstractButton::clicked, this, &FilterDialog::slotApply);
   }
-  connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
-  connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
-  connect(buttonBox, SIGNAL(helpRequested()), this, SLOT(slotHelp()));
+  connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+  connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+  connect(buttonBox, &QDialogButtonBox::helpRequested, this, &FilterDialog::slotHelp);
 
   QGroupBox* m_matchGroup = new QGroupBox(i18n("Filter Criteria"), this);
   QVBoxLayout* vlay = new QVBoxLayout(m_matchGroup);
@@ -95,11 +95,12 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
   QButtonGroup* bg = new QButtonGroup(m_matchGroup);
   bg->addButton(m_matchAll);
   bg->addButton(m_matchAny);
-  connect(bg, SIGNAL(buttonClicked(int)), SLOT(slotFilterChanged()));
+  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
+  connect(bg, buttonClicked, this, &FilterDialog::slotFilterChanged);
 
   m_ruleLister = new FilterRuleWidgetLister(m_matchGroup);
-  connect(m_ruleLister, SIGNAL(widgetRemoved()), SLOT(slotShrink()));
-  connect(m_ruleLister, SIGNAL(signalModified()), SLOT(slotFilterChanged()));
+  connect(m_ruleLister, &KWidgetLister::widgetRemoved, this, &FilterDialog::slotShrink);
+  connect(m_ruleLister, &FilterRuleWidgetLister::signalModified, this, &FilterDialog::slotFilterChanged);
   m_ruleLister->setFocus();
   vlay->addWidget(m_ruleLister);
 
@@ -110,14 +111,14 @@ FilterDialog::FilterDialog(Mode mode_, QWidget* parent_)
 
   m_filterName = new QLineEdit(this);
   blay->addWidget(m_filterName);
-  connect(m_filterName, SIGNAL(textChanged(const QString&)), SLOT(slotFilterChanged()));
+  connect(m_filterName, &QLineEdit::textChanged, this, &FilterDialog::slotFilterChanged);
 
   // only when creating a new filter can it be saved
   if(m_mode == CreateFilter) {
     m_saveFilter = new QPushButton(QIcon::fromTheme(QStringLiteral("view-filter")), i18n("&Save Filter"), this);
     blay->addWidget(m_saveFilter);
     m_saveFilter->setEnabled(false);
-    connect(m_saveFilter, SIGNAL(clicked()), SLOT(slotSaveFilter()));
+    connect(m_saveFilter, &QAbstractButton::clicked, this, &FilterDialog::slotSaveFilter);
     m_applyButton->setEnabled(false);
   }
   m_okButton->setEnabled(false); // disable at start

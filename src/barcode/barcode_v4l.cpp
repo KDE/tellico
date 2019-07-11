@@ -96,8 +96,8 @@ barcode_v4l::barcode_v4l()
   m_grab_height = 480;
 
   m_fd = -1;
-  m_buffer = 0;
-  m_image = 0;
+  m_buffer = nullptr;
+  m_image = nullptr;
 
   grab_init();
 }

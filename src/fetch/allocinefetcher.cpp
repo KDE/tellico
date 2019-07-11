@@ -139,7 +139,7 @@ void AbstractAllocineFetcher::search() {
   m_job->addMetaData(QStringLiteral("UserAgent"), QStringLiteral("Tellico/%1")
                                                                 .arg(QStringLiteral(TELLICO_VERSION)));
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result, this, &AbstractAllocineFetcher::slotComplete);
 }
 
 void AbstractAllocineFetcher::stop() {
@@ -428,7 +428,8 @@ AbstractAllocineFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Abst
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(10);
-  connect(m_numCast, SIGNAL(valueChanged(QString)), SLOT(slotSetModified()));
+  void (QSpinBox::* valueChanged)(const QString&) = &QSpinBox::valueChanged;
+  connect(m_numCast, valueChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
   label->setWhatsThis(w);

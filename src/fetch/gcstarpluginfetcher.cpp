@@ -246,9 +246,9 @@ void GCstarPluginFetcher::search() {
 
   m_thread = new GCstarThread(this);
   m_thread->setProgram(gcstar, args);
-  connect(m_thread, SIGNAL(standardOutput(QByteArray)), SLOT(slotData(QByteArray)));
-  connect(m_thread, SIGNAL(standardError(QByteArray)), SLOT(slotError(QByteArray)));
-  connect(m_thread, SIGNAL(finished()), SLOT(slotProcessExited()));
+  connect(m_thread, &GCstarThread::standardOutput, this, &GCstarPluginFetcher::slotData);
+  connect(m_thread, &GCstarThread::standardError, this, &GCstarPluginFetcher::slotError);
+  connect(m_thread, &QThread::finished, this, &GCstarPluginFetcher::slotProcessExited);
   m_thread->start();
 }
 
@@ -399,8 +399,9 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   QLabel* label = new QLabel(i18n("Collection &type:"), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_collCombo = new GUI::CollectionTypeCombo(optionsWidget());
-  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_collCombo, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_collCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_collCombo, activatedInt, this, &ConfigWidget::slotTypeChanged);
   l->addWidget(m_collCombo, row, 1, 1, 3);
   QString w = i18n("Set the collection type of the data returned from the plugin.");
   label->setWhatsThis(w);
@@ -410,8 +411,8 @@ GCstarPluginFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const GCstarPl
   label = new QLabel(i18n("&Plugin: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_pluginCombo = new GUI::ComboBox(optionsWidget());
-  connect(m_pluginCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
-  connect(m_pluginCombo, SIGNAL(activated(int)), SLOT(slotPluginChanged()));
+  connect(m_pluginCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  connect(m_pluginCombo, activatedInt, this, &ConfigWidget::slotPluginChanged);
   l->addWidget(m_pluginCombo, row, 1, 1, 3);
   w = i18n("Select the GCstar plugin used for the data source.");
   label->setWhatsThis(w);

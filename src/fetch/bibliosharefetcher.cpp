@@ -185,7 +185,7 @@ BiblioShareFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const BiblioSha
   l->addWidget(label, ++row, 0);
 
   m_tokenEdit = new QLineEdit(optionsWidget());
-  connect(m_tokenEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_tokenEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_tokenEdit, row, 1);
   QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
   label->setWhatsThis(w);

@@ -37,9 +37,17 @@ ParaFieldWidget::ParaFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
   if(field_->property(QStringLiteral("spellcheck")) != QLatin1String("false")) {
     m_textEdit->setCheckSpellingEnabled(true);
   }
-  connect(m_textEdit, SIGNAL(textChanged()), SLOT(checkModified()));
+  void (KTextEdit::* textChanged)() = &KTextEdit::textChanged;
+  connect(m_textEdit, textChanged, this, &ParaFieldWidget::checkModified);
 
   registerWidget();
+}
+
+ParaFieldWidget::~ParaFieldWidget() {
+  // saw a crash when closing Tellico and the KTextEdit d'tor called ~QSyntaxHighlighter()
+  // when ultimately signaled a valueChange for some reason, so disconnect
+  void (KTextEdit::* textChanged)() = &KTextEdit::textChanged;
+  disconnect(m_textEdit, textChanged, this, &ParaFieldWidget::checkModified);
 }
 
 QString ParaFieldWidget::text() const {

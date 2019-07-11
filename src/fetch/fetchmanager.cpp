@@ -168,10 +168,10 @@ void Manager::startSearch(const QString& source_, Tellico::Fetch::FetchKey key_,
   foreach(Fetcher::Ptr fetcher, m_fetchers) {
     if(source_ == fetcher->source()) {
       ++m_count; // Fetcher::search() might emit done(), so increment before calling search()
-      connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-              SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)));
-      connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-              SLOT(slotFetcherDone(Tellico::Fetch::Fetcher*)));
+      connect(fetcher.data(), &Fetcher::signalResultFound,
+              this, &Manager::signalResultFound);
+      connect(fetcher.data(), &Fetcher::signalDone,
+              this, &Manager::slotFetcherDone);
       fetcher->startSearch(request);
       m_currentFetcherIndex = i;
       break;
@@ -189,10 +189,10 @@ void Manager::continueSearch() {
   Fetcher::Ptr fetcher = m_fetchers[m_currentFetcherIndex];
   if(fetcher && fetcher->hasMoreResults()) {
     ++m_count;
-    connect(fetcher.data(), SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)),
-            SIGNAL(signalResultFound(Tellico::Fetch::FetchResult*)));
-    connect(fetcher.data(), SIGNAL(signalDone(Tellico::Fetch::Fetcher*)),
-            SLOT(slotFetcherDone(Tellico::Fetch::Fetcher*)));
+    connect(fetcher.data(), &Fetcher::signalResultFound,
+            this, &Manager::signalResultFound);
+    connect(fetcher.data(), &Fetcher::signalDone,
+            this, &Manager::slotFetcherDone);
     fetcher->continueSearch();
   } else {
     emit signalDone();

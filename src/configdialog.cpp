@@ -110,16 +110,16 @@ ConfigDialog::ConfigDialog(QWidget* parent_)
   resize(qMax(s.width(), CONFIG_MIN_WIDTH), qMax(s.height(), CONFIG_MIN_HEIGHT));
 
   // OK button is connected to buttonBox accepted() signal which is already connected to accept() slot
-  connect(button(QDialogButtonBox::Apply), SIGNAL(clicked()), SLOT(slotApply()));
-  connect(button(QDialogButtonBox::Help), SIGNAL(clicked()), SLOT(slotHelp()));
-  connect(button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), SLOT(slotDefault()));
+  connect(button(QDialogButtonBox::Apply), &QAbstractButton::clicked, this, &ConfigDialog::slotApply);
+  connect(button(QDialogButtonBox::Help), &QAbstractButton::clicked, this, &ConfigDialog::slotHelp);
+  connect(button(QDialogButtonBox::RestoreDefaults), &QAbstractButton::clicked, this, &ConfigDialog::slotDefault);
 
   button(QDialogButtonBox::Ok)->setEnabled(false);
   button(QDialogButtonBox::Apply)->setEnabled(false);
   button(QDialogButtonBox::Ok)->setDefault(true);
   button(QDialogButtonBox::Ok)->setShortcut(Qt::CTRL | Qt::Key_Return);
 
-  connect(this, SIGNAL(currentPageChanged(KPageWidgetItem*, KPageWidgetItem*)), SLOT(slotInitPage(KPageWidgetItem*)));
+  connect(this, &KPageDialog::currentPageChanged, this, &ConfigDialog::slotInitPage);
 }
 
 ConfigDialog::~ConfigDialog() {
@@ -214,19 +214,19 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   m_cbOpenLastFile->setWhatsThis(i18n("If checked, the file that was last open "
                                       "will be re-opened at program start-up."));
   l->addWidget(m_cbOpenLastFile);
-  connect(m_cbOpenLastFile, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbOpenLastFile, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
 
   m_cbShowTipDay = new QCheckBox(i18n("&Show \"Tip of the Day\" at startup"), frame);
   m_cbShowTipDay->setWhatsThis(i18n("If checked, the \"Tip of the Day\" will be "
                                     "shown at program start-up."));
   l->addWidget(m_cbShowTipDay);
-  connect(m_cbShowTipDay, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbShowTipDay, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
 
   m_cbEnableWebcam = new QCheckBox(i18n("&Enable webcam for barcode scanning"), frame);
   m_cbEnableWebcam->setWhatsThis(i18n("If checked, the input from a webcam will be used "
                                       "to scan barcodes for searching."));
   l->addWidget(m_cbEnableWebcam);
-  connect(m_cbEnableWebcam, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbEnableWebcam, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
 
   QGroupBox* imageGroupBox = new QGroupBox(i18n("Image Storage Options"), frame);
   l->addWidget(imageGroupBox);
@@ -247,7 +247,8 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   imageGroup->addButton(m_rbImageInFile);
   imageGroup->addButton(m_rbImageInAppDir);
   imageGroup->addButton(m_rbImageInLocalDir);
-  connect(imageGroup, SIGNAL(buttonClicked(int)), SLOT(slotModified()));
+  void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
+  connect(imageGroup, buttonClicked, this, &ConfigDialog::slotModified);
 
   QGroupBox* formatGroup = new QGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);
@@ -257,13 +258,13 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   m_cbCapitalize = new QCheckBox(i18n("Auto capitalize &titles and names"), formatGroup);
   m_cbCapitalize->setWhatsThis(i18n("If checked, titles and names will "
                                     "be automatically capitalized."));
-  connect(m_cbCapitalize, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbCapitalize, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
   formatGroupLayout->addWidget(m_cbCapitalize);
 
   m_cbFormat = new QCheckBox(i18n("Auto &format titles and names"), formatGroup);
   m_cbFormat->setWhatsThis(i18n("If checked, titles and names will "
                                 "be automatically formatted."));
-  connect(m_cbFormat, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbFormat, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
   formatGroupLayout->addWidget(m_cbFormat);
 
   QWidget* g1 = new QWidget(formatGroup);
@@ -280,7 +281,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                        "should be separated by a semi-colon.</qt>");
   lab->setWhatsThis(whats);
   m_leCapitals->setWhatsThis(whats);
-  connect(m_leCapitals, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_leCapitals, &QLineEdit::textChanged, this, &ConfigDialog::slotModified);
 
   lab = new QLabel(i18n("Artic&les:"), g1);
   g1Layout->addWidget(lab, 1, 0);
@@ -292,7 +293,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                "should be separated by a semi-colon.</qt>");
   lab->setWhatsThis(whats);
   m_leArticles->setWhatsThis(whats);
-  connect(m_leArticles, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_leArticles, &QLineEdit::textChanged, this, &ConfigDialog::slotModified);
 
   lab = new QLabel(i18n("Personal suffi&xes:"), g1);
   g1Layout->addWidget(lab, 2, 0);
@@ -303,7 +304,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                "should be separated by a semi-colon.</qt>");
   lab->setWhatsThis(whats);
   m_leSuffixes->setWhatsThis(whats);
-  connect(m_leSuffixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_leSuffixes, &QLineEdit::textChanged, this, &ConfigDialog::slotModified);
 
   lab = new QLabel(i18n("Surname &prefixes:"), g1);
   g1Layout->addWidget(lab, 3, 0);
@@ -314,7 +315,7 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
                "should be separated by a semi-colon.</qt>");
   lab->setWhatsThis(whats);
   m_lePrefixes->setWhatsThis(whats);
-  connect(m_lePrefixes, SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_lePrefixes, &QLineEdit::textChanged, this, &ConfigDialog::slotModified);
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -340,12 +341,12 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 
   m_cbPrintFormatted = new QCheckBox(i18n("&Format titles and names"), formatOptions);
   m_cbPrintFormatted->setWhatsThis(i18n("If checked, titles and names will be automatically formatted."));
-  connect(m_cbPrintFormatted, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbPrintFormatted, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
   formatLayout->addWidget(m_cbPrintFormatted);
 
   m_cbPrintHeaders = new QCheckBox(i18n("&Print field headers"), formatOptions);
   m_cbPrintHeaders->setWhatsThis(i18n("If checked, the field names will be printed as table headers."));
-  connect(m_cbPrintHeaders, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbPrintHeaders, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
   formatLayout->addWidget(m_cbPrintHeaders);
 
   QGroupBox* groupOptions = new QGroupBox(i18n("Grouping Options"), frame);
@@ -355,7 +356,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
 
   m_cbPrintGrouped = new QCheckBox(i18n("&Group the entries"), groupOptions);
   m_cbPrintGrouped->setWhatsThis(i18n("If checked, the entries will be grouped by the selected field."));
-  connect(m_cbPrintGrouped, SIGNAL(clicked()), SLOT(slotModified()));
+  connect(m_cbPrintGrouped, &QAbstractButton::clicked, this, &ConfigDialog::slotModified);
   groupLayout->addWidget(m_cbPrintGrouped);
 
   QGroupBox* imageOptions = new QGroupBox(i18n("Image Options"), frame);
@@ -376,10 +377,8 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   QString whats = i18n("The maximum width of the images in the printout. The aspect ratio is preserved.");
   lab->setWhatsThis(whats);
   m_imageWidthBox->setWhatsThis(whats);
-  connect(m_imageWidthBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
-  // QSpinBox doesn't emit valueChanged if you edit the value with
-  // the lineEdit until you change the keyboard focus
-//  connect(m_imageWidthBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  void (QSpinBox::* valueChanged)(int) = &QSpinBox::valueChanged;
+  connect(m_imageWidthBox, valueChanged, this, &ConfigDialog::slotModified);
 
   lab = new QLabel(i18n("&Maximum image height:"), imageOptions);
   gridLayout->addWidget(lab, 1, 0);
@@ -393,10 +392,7 @@ void ConfigDialog::initPrintingPage(QFrame* frame) {
   whats = i18n("The maximum height of the images in the printout. The aspect ratio is preserved.");
   lab->setWhatsThis(whats);
   m_imageHeightBox->setWhatsThis(whats);
-  connect(m_imageHeightBox, SIGNAL(valueChanged(int)), SLOT(slotModified()));
-  // QSpinBox doesn't emit valueChanged if you edit the value with
-  // the lineEdit until you change the keyboard focus
-//  connect(m_imageHeightBox->child("qt_spinbox_edit"), SIGNAL(textChanged(const QString&)), SLOT(slotModified()));
+  connect(m_imageHeightBox, valueChanged, this, &ConfigDialog::slotModified);
 
   // stretch to fill lower area
   l->addStretch(1);
@@ -430,7 +426,8 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
 
   lab = new QLabel(i18n("Template:"), frame);
   m_templateCombo = new GUI::ComboBox(frame);
-  connect(m_templateCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
+  connect(m_templateCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_templateCombo);
   QString whats = i18n("Select the template to use for the current type of collections. "
                        "Not all templates will use the font and color settings.");
@@ -443,7 +440,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   btn->setWhatsThis(i18n("Show a preview of the template"));
   btn->setIcon(QIcon::fromTheme(QStringLiteral("zoom-original")));
   gridLayout->addWidget(btn, row, 2);
-  connect(btn, SIGNAL(clicked()), SLOT(slotShowTemplatePreview()));
+  connect(btn, &QAbstractButton::clicked, this, &ConfigDialog::slotShowTemplatePreview);
 
   // so the button is squeezed small
   gridLayout->setColumnStretch(0, 10);
@@ -468,7 +465,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   fontLayout->addWidget(lab, ++row, 0);
   m_fontCombo = new QFontComboBox(fontGroup);
   fontLayout->addWidget(m_fontCombo, row, 1);
-  connect(m_fontCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  connect(m_fontCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_fontCombo);
   whats = i18n("This font is passed to the template used in the Entry View.");
   lab->setWhatsThis(whats);
@@ -480,7 +477,8 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   m_fontSizeInput->setMinimum(5);
   m_fontSizeInput->setSuffix(QStringLiteral("pt"));
   fontLayout->addWidget(m_fontSizeInput, row, 1);
-  connect(m_fontSizeInput, SIGNAL(valueChanged(int)), SLOT(slotModified()));
+  void (QSpinBox::* valueChangedInt)(int) = &QSpinBox::valueChanged;
+  connect(m_fontSizeInput, valueChangedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_fontSizeInput);
   lab->setWhatsThis(whats);
   m_fontSizeInput->setWhatsThis(whats);
@@ -496,7 +494,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   colLayout->addWidget(lab, ++row, 0);
   m_baseColorCombo = new KColorCombo(colGroup);
   colLayout->addWidget(m_baseColorCombo, row, 1);
-  connect(m_baseColorCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  connect(m_baseColorCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_baseColorCombo);
   whats = i18n("This color is passed to the template used in the Entry View.");
   lab->setWhatsThis(whats);
@@ -506,7 +504,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   colLayout->addWidget(lab, ++row, 0);
   m_textColorCombo = new KColorCombo(colGroup);
   colLayout->addWidget(m_textColorCombo, row, 1);
-  connect(m_textColorCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  connect(m_textColorCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_textColorCombo);
   lab->setWhatsThis(whats);
   m_textColorCombo->setWhatsThis(whats);
@@ -515,7 +513,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   colLayout->addWidget(lab, ++row, 0);
   m_highBaseColorCombo = new KColorCombo(colGroup);
   colLayout->addWidget(m_highBaseColorCombo, row, 1);
-  connect(m_highBaseColorCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  connect(m_highBaseColorCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_highBaseColorCombo);
   lab->setWhatsThis(whats);
   m_highBaseColorCombo->setWhatsThis(whats);
@@ -524,7 +522,7 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   colLayout->addWidget(lab, ++row, 0);
   m_highTextColorCombo = new KColorCombo(colGroup);
   colLayout->addWidget(m_highTextColorCombo, row, 1);
-  connect(m_highTextColorCombo, SIGNAL(activated(int)), SLOT(slotModified()));
+  connect(m_highTextColorCombo, activatedInt, this, &ConfigDialog::slotModified);
   lab->setBuddy(m_highTextColorCombo);
   lab->setWhatsThis(whats);
   m_highTextColorCombo->setWhatsThis(whats);
@@ -543,21 +541,21 @@ void ConfigDialog::initTemplatePage(QFrame* frame) {
   QPushButton* b1 = new QPushButton(i18n("Install..."), box1);
   box1HBoxLayout->addWidget(b1);
   b1->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
-  connect(b1, SIGNAL(clicked()), SLOT(slotInstallTemplate()));
+  connect(b1, &QAbstractButton::clicked, this, &ConfigDialog::slotInstallTemplate);
   whats = i18n("Click to install a new template directly.");
   b1->setWhatsThis(whats);
 
   QPushButton* b2 = new QPushButton(i18n("Download..."), box1);
   box1HBoxLayout->addWidget(b2);
   b2->setIcon(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")));
-  connect(b2, SIGNAL(clicked()), SLOT(slotDownloadTemplate()));
+  connect(b2, &QAbstractButton::clicked, this, &ConfigDialog::slotDownloadTemplate);
   whats = i18n("Click to download additional templates.");
   b2->setWhatsThis(whats);
 
   QPushButton* b3 = new QPushButton(i18n("Delete..."), box1);
   box1HBoxLayout->addWidget(b3);
   b3->setIcon(QIcon::fromTheme(QStringLiteral("list-remove")));
-  connect(b3, SIGNAL(clicked()), SLOT(slotDeleteTemplate()));
+  connect(b3, &QAbstractButton::clicked, this, &ConfigDialog::slotDeleteTemplate);
   whats = i18n("Click to select and remove installed templates.");
   b3->setWhatsThis(whats);
 
@@ -603,8 +601,8 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   m_sourceListWidget->setSortingEnabled(false); // no sorting
   m_sourceListWidget->setSelectionMode(QAbstractItemView::SingleSelection);
   leftLayout->addWidget(m_sourceListWidget, 1);
-  connect(m_sourceListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), SLOT(slotSelectedSourceChanged(QListWidgetItem*)));
-  connect(m_sourceListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(slotModifySourceClicked()));
+  connect(m_sourceListWidget, &QListWidget::currentItemChanged, this, &ConfigDialog::slotSelectedSourceChanged);
+  connect(m_sourceListWidget, &QListWidget::itemDoubleClicked, this, &ConfigDialog::slotModifySourceClicked);
 
   QWidget* hb = new QWidget(frame);
   QHBoxLayout* hbHBoxLayout = new QHBoxLayout(hb);
@@ -627,10 +625,11 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   leftLayout->addWidget(hb2);
   m_cbFilterSource = new QCheckBox(i18n("Filter by type:"), hb2);
   hb2HBoxLayout->addWidget(m_cbFilterSource);
-  connect(m_cbFilterSource, SIGNAL(clicked()), SLOT(slotSourceFilterChanged()));
+  connect(m_cbFilterSource, &QAbstractButton::clicked, this, &ConfigDialog::slotSourceFilterChanged);
   m_sourceTypeCombo = new GUI::CollectionTypeCombo(hb2);
   hb2HBoxLayout->addWidget(m_sourceTypeCombo);
-  connect(m_sourceTypeCombo, SIGNAL(currentIndexChanged(int)), SLOT(slotSourceFilterChanged()));
+  void (QComboBox::* currentIndexChanged)(int) = &QComboBox::currentIndexChanged;
+  connect(m_sourceTypeCombo, currentIndexChanged, this, &ConfigDialog::slotSourceFilterChanged);
   // we want to remove the item for a custom collection
   int index = m_sourceTypeCombo->findData(Data::Collection::Base);
   if(index > -1) {
@@ -666,12 +665,12 @@ void ConfigDialog::initFetchPage(QFrame* frame) {
   vlay->addWidget(m_newStuffBtn);
   vlay->addStretch(1);
 
-  connect(newSourceBtn, SIGNAL(clicked()), SLOT(slotNewSourceClicked()));
-  connect(m_modifySourceBtn, SIGNAL(clicked()), SLOT(slotModifySourceClicked()));
-  connect(m_moveUpSourceBtn, SIGNAL(clicked()), SLOT(slotMoveUpSourceClicked()));
-  connect(m_moveDownSourceBtn, SIGNAL(clicked()), SLOT(slotMoveDownSourceClicked()));
-  connect(m_removeSourceBtn, SIGNAL(clicked()), SLOT(slotRemoveSourceClicked()));
-  connect(m_newStuffBtn, SIGNAL(clicked()), SLOT(slotNewStuffClicked()));
+  connect(newSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotNewSourceClicked);
+  connect(m_modifySourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotModifySourceClicked);
+  connect(m_moveUpSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotMoveUpSourceClicked);
+  connect(m_moveDownSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotMoveDownSourceClicked);
+  connect(m_removeSourceBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotRemoveSourceClicked);
+  connect(m_newStuffBtn, &QAbstractButton::clicked, this, &ConfigDialog::slotNewStuffClicked);
 
   KAcceleratorManager::manage(frame);
   m_initializedPages |= Fetch;
@@ -768,7 +767,7 @@ void ConfigDialog::readFetchConfig() {
   }
 
   m_modifying = false;
-  QTimer::singleShot(500, this, SLOT(slotCreateConfigWidgets()));
+  QTimer::singleShot(500, this, &ConfigDialog::slotCreateConfigWidgets);
 }
 
 void ConfigDialog::saveConfiguration() {

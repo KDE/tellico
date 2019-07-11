@@ -403,7 +403,7 @@ QWidget* AudioFileImporter::widget(QWidget* parent_) {
   m_addFilePath = new QCheckBox(i18n("Include file &location"), gbox);
   m_addFilePath->setWhatsThis(i18n("If checked, the file names for each track are added to the entries."));
   m_addFilePath->setChecked(false);
-  connect(m_addFilePath, SIGNAL(toggled(bool)), SLOT(slotAddFileToggled(bool)));
+  connect(m_addFilePath, &QAbstractButton::toggled, this, &AudioFileImporter::slotAddFileToggled);
 
   m_addBitrate = new QCheckBox(i18n("Include &bitrate"), gbox);
   m_addBitrate->setWhatsThis(i18n("If checked, the bitrate for each track is added to the entries."));

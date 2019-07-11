@@ -104,8 +104,8 @@ void CrossRefFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &CrossRefFetcher::slotComplete);
 }
 
 void CrossRefFetcher::stop() {
@@ -325,7 +325,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   QLabel* label = new QLabel(i18n("&Username: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_userEdit = new QLineEdit(optionsWidget());
-  connect(m_userEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_userEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_userEdit, row, 1);
   QString w = i18n("A username and password is required to access the CrossRef service.");
   label->setWhatsThis(w);
@@ -336,7 +336,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   l->addWidget(label, ++row, 0);
   m_passEdit = new QLineEdit(optionsWidget());
 //  m_passEdit->setEchoMode(QLineEdit::PasswordEchoOnEdit);
-  connect(m_passEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_passEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_passEdit, row, 1);
   label->setWhatsThis(w);
   m_passEdit->setWhatsThis(w);
@@ -348,7 +348,7 @@ CrossRefFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const CrossRefFetc
   label = new QLabel(i18n("Email: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_emailEdit = new QLineEdit(optionsWidget());
-  connect(m_emailEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_emailEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_emailEdit, row, 1);
   label->setBuddy(m_emailEdit);
 
@@ -373,8 +373,6 @@ void CrossRefFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!s.isEmpty()) {
     config_.writeEntry("Email", s);
   }
-
-  slotSetModified(false);
 }
 
 QString CrossRefFetcher::ConfigWidget::preferredName() const {

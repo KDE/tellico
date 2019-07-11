@@ -33,7 +33,7 @@ BoolFieldWidget::BoolFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent
     : FieldWidget(field_, parent_) {
 
   m_checkBox = new QCheckBox(this);
-  connect(m_checkBox, SIGNAL(clicked()), SLOT(checkModified()));
+  connect(m_checkBox, &QCheckBox::clicked, this, &BoolFieldWidget::checkModified);
   registerWidget();
 }
 

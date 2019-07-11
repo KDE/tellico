@@ -86,8 +86,8 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
   DropHandler* drophandler = new DropHandler(this);
   view()->installEventFilter(drophandler);
 
-  connect(browserExtension(), SIGNAL(openUrlRequestDelayed(const QUrl&, const KParts::OpenUrlArguments&, const KParts::BrowserArguments&)),
-          SLOT(slotOpenURL(const QUrl&)));
+  connect(browserExtension(), &KParts::BrowserExtension::openUrlRequestDelayed,
+          this, &EntryView::slotOpenURL);
 }
 
 EntryView::~EntryView() {
@@ -335,7 +335,8 @@ void EntryView::slotOpenURL(const QUrl& url_) {
 void EntryView::slotReloadEntry() {
   // this slot should only be connected in setXSLTFile()
   // must disconnect the signal first, otherwise, get an infinite loop
-  disconnect(SIGNAL(completed()));
+  void (EntryView::* completed)() = &EntryView::completed;
+  disconnect(this, completed, this, &EntryView::slotReloadEntry);
   closeUrl(); // this is needed to stop everything, for some reason
   view()->setUpdatesEnabled(true);
 
@@ -415,5 +416,6 @@ void EntryView::resetColors() {
   // don't flicker
   view()->setUpdatesEnabled(false);
   openUrl(QUrl::fromLocalFile(m_tempFile->fileName()));
-  connect(this, SIGNAL(completed()), SLOT(slotReloadEntry()));
+  void (EntryView::* completed)() = &EntryView::completed;
+  connect(this, completed, this, &EntryView::slotReloadEntry);
 }

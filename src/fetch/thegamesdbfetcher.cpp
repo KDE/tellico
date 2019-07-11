@@ -137,7 +137,7 @@ void TheGamesDBFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)), SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result, this, &TheGamesDBFetcher::slotComplete);
 }
 
 void TheGamesDBFetcher::stop() {
@@ -537,7 +537,7 @@ TheGamesDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheGamesDB
   l->addWidget(label, ++row, 0);
 
   m_apiKeyEdit = new QLineEdit(optionsWidget());
-  connect(m_apiKeyEdit, SIGNAL(textChanged(QString)), SLOT(slotSetModified()));
+  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 
@@ -548,7 +548,8 @@ TheGamesDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheGamesDB
   m_imageCombo->addItem(i18n("Medium Image"), MediumImage);
   m_imageCombo->addItem(i18n("Large Image"), LargeImage);
   m_imageCombo->addItem(i18n("No Image"), NoImage);
-  connect(m_imageCombo, SIGNAL(activated(int)), SLOT(slotSetModified()));
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_imageCombo, row, 1);
   QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
                    "collection may degrade performance.");

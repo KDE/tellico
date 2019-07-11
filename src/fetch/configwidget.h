@@ -70,7 +70,7 @@ Q_SIGNALS:
   void signalName(const QString& name);
 
 public Q_SLOTS:
-  void slotSetModified(bool modified = true);
+  void slotSetModified();
 
 protected:
   QWidget* optionsWidget();

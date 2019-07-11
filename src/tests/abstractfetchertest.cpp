@@ -46,7 +46,7 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
                                                       int maxResults) {
   // don't use 'this' as job parent, it crashes
   Tellico::Fetch::FetcherJob* job = new Tellico::Fetch::FetcherJob(nullptr, fetcher, request);
-  connect(job, SIGNAL(result(KJob*)), SLOT(slotResult(KJob*)));
+  connect(job, &KJob::result, this, &AbstractFetcherTest::slotResult);
 
   if(maxResults > 0) {
     job->setMaximumResults(maxResults);

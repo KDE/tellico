@@ -113,8 +113,8 @@ void AnimeNfoFetcher::search() {
 
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
-  connect(m_job, SIGNAL(result(KJob*)),
-          SLOT(slotComplete(KJob*)));
+  connect(m_job.data(), &KJob::result,
+          this, &AnimeNfoFetcher::slotComplete);
 }
 
 void AnimeNfoFetcher::stop() {

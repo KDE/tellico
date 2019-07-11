@@ -139,7 +139,7 @@ private:
    * @param entry A pointer to the entry
    * @param highlight An optional string to highlight
    */
-  void setContents(Data::EntryPtr entry);
+  void setEntry(Data::EntryPtr entry);
   /**
    * Updates the completion objects in the edit boxes to include values
    * contained in a certain entry.

@@ -219,11 +219,12 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   hlay->addWidget(m_comboColl);
   lab->setBuddy(m_comboColl);
   m_comboColl->setWhatsThis(i18n("Select the type of collection being imported."));
-  connect(m_comboColl, SIGNAL(activated(int)), SLOT(slotTypeChanged()));
+  void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
+  connect(m_comboColl, activatedInt, this, &CSVImporter::slotTypeChanged);
 
   m_checkFirstRowHeader = new QCheckBox(i18n("&First row contains field titles"), groupBox);
   m_checkFirstRowHeader->setWhatsThis(i18n("If checked, the first row is used as field titles."));
-  connect(m_checkFirstRowHeader, SIGNAL(toggled(bool)), SLOT(slotFirstRowHeader(bool)));
+  connect(m_checkFirstRowHeader, &QAbstractButton::toggled, this, &CSVImporter::slotFirstRowHeader);
   hlay->addWidget(m_checkFirstRowHeader);
 
   hlay->addStretch(10);
@@ -264,9 +265,9 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_editOther->setEnabled(false);
   delimiterLayout->addWidget(m_editOther);
-  connect(m_radioOther, SIGNAL(toggled(bool)),
-          m_editOther, SLOT(setEnabled(bool)));
-  connect(m_editOther, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+  connect(m_radioOther, &QAbstractButton::toggled,
+          m_editOther, &QWidget::setEnabled);
+  connect(m_editOther, &QLineEdit::textChanged, this, &CSVImporter::slotDelimiter);
   delimiterLayout->addStretch(10);
 
   QButtonGroup* buttonGroup = new QButtonGroup(groupBox);
@@ -274,7 +275,8 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   buttonGroup->addButton(m_radioSemicolon);
   buttonGroup->addButton(m_radioTab);
   buttonGroup->addButton(m_radioOther);
-  connect(buttonGroup, SIGNAL(buttonClicked(int)), SLOT(slotDelimiter()));
+  void (QButtonGroup::* buttonClickedInt)(int) = &QButtonGroup::buttonClicked;
+  connect(buttonGroup, buttonClickedInt, this, &CSVImporter::slotDelimiter);
 
   QHBoxLayout* delimiterLayout2 = new QHBoxLayout();
   vlay->addLayout(delimiterLayout2);
@@ -288,7 +290,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_editColDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editColDelimiter->setMaxLength(1);
   delimiterLayout2->addWidget(m_editColDelimiter);
-  connect(m_editColDelimiter, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+  connect(m_editColDelimiter, &QLineEdit::textChanged, this, &CSVImporter::slotDelimiter);
 
   w = i18n("The row delimiter separates values in each row of a <i>Table</i> field.");
   lab = new QLabel(i18n("Table row delimiter:"), groupBox);
@@ -299,7 +301,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_editRowDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
   m_editRowDelimiter->setMaxLength(1);
   delimiterLayout2->addWidget(m_editRowDelimiter);
-  connect(m_editRowDelimiter, SIGNAL(textChanged(const QString&)), SLOT(slotDelimiter()));
+  connect(m_editRowDelimiter, &QLineEdit::textChanged, this, &CSVImporter::slotDelimiter);
 
   delimiterLayout2->addStretch(10);
 
@@ -311,8 +313,8 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_table->horizontalHeader()->setSectionsClickable(true);
   m_table->setMinimumHeight(m_widget->fontMetrics().lineSpacing() * 8);
   m_table->setWhatsThis(i18n("The table shows up to the first five lines of the CSV file."));
-  connect(m_table, SIGNAL(currentCellChanged(int, int, int, int)), SLOT(slotCurrentChanged(int, int)));
-  connect(m_table->horizontalHeader(), SIGNAL(sectionClicked(int)), SLOT(slotHeaderClicked(int)));
+  connect(m_table, &QTableWidget::currentCellChanged, this, &CSVImporter::slotCurrentChanged);
+  connect(m_table->horizontalHeader(), &QHeaderView::sectionClicked, this, &CSVImporter::slotHeaderClicked);
 
   QHBoxLayout* hlay3 = new QHBoxLayout();
   vlay->addLayout(hlay3);
@@ -326,7 +328,8 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   hlay3->addWidget(m_colSpinBox);
   m_colSpinBox->setWhatsThis(what);
   m_colSpinBox->setMinimum(1);
-  connect(m_colSpinBox, SIGNAL(valueChanged(int)), SLOT(slotSelectColumn(int)));
+  void (QSpinBox::* valueChangedInt)(int) = &QSpinBox::valueChanged;
+  connect(m_colSpinBox, valueChangedInt, this, &CSVImporter::slotSelectColumn);
   lab->setBuddy(m_colSpinBox);
 
   hlay3->addSpacing(10);
@@ -339,7 +342,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_comboField->setWhatsThis(what);
   m_comboField->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 20);
 //  m_comboField->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-  connect(m_comboField, SIGNAL(activated(int)), SLOT(slotFieldChanged(int)));
+  connect(m_comboField, activatedInt, this, &CSVImporter::slotFieldChanged);
   lab->setBuddy(m_comboField);
 
   hlay3->addSpacing(10);
@@ -348,7 +351,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   hlay3->addWidget(m_setColumnBtn);
   m_setColumnBtn->setWhatsThis(what);
   m_setColumnBtn->setIcon(QIcon::fromTheme(QStringLiteral("dialog-ok-apply")));
-  connect(m_setColumnBtn, SIGNAL(clicked()), SLOT(slotSetColumnTitle()));
+  connect(m_setColumnBtn, &QAbstractButton::clicked, this, &CSVImporter::slotSetColumnTitle);
 //  hlay3->addStretch(10);
 
   l->addWidget(groupBox);
