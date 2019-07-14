@@ -39,8 +39,9 @@
 
 #include <limits.h>
 
+#define AMC_FILE_ID " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be "
+
 namespace {
-  static const QByteArray AMC_FILE_ID = " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be ";
   static const quint32 AMC_MAX_STRING_SIZE = 128 * 1024;
 }
 
@@ -71,7 +72,7 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   m_ds.setByteOrder(QDataStream::LittleEndian);
   emit signalTotalSteps(this, f->size());
 
-  const uint l = AMC_FILE_ID.length();
+  const uint l = sizeof(AMC_FILE_ID)-1;
   QVector<char> buffer(l+1);
   m_ds.readRawData(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer.data(), l);

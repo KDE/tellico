@@ -1,7 +1,7 @@
 #ifndef __BLITZ_H
 #define __BLITZ_H
 
-/* 
+/*
  Copyright (C) 1998, 1999, 2001, 2002, 2004, 2005, 2007
       Daniel M. Duley <daniel.duley@verizon.net>
  (C) 2004 Zack Rusin <zack@kde.org>
@@ -50,7 +50,7 @@ namespace Tellico {
      * @param type The type of gradient.
      * @return The gradient.
      */
-    QImage gradient(const QSize &size, const QColor &ca,
+    QImage gradient(QSize size, const QColor &ca,
                     const QColor &cb, GradientType type);
     /**
      * Creates an 8bit grayscale gradient suitable for use as an alpha channel
@@ -62,7 +62,7 @@ namespace Tellico {
      * @param type The type of gradient.
      * @return The gradient.
      */
-    QImage grayGradient(const QSize &size, unsigned char ca,
+    QImage grayGradient(QSize size, unsigned char ca,
                         unsigned char cb, GradientType type);
     /**
      * Create an unbalanced gradient. An unbalanced gradient is a gradient
@@ -77,7 +77,7 @@ namespace Tellico {
      * @param yfactor The y decay length.
      * @return The gradient.
      */
-    QImage unbalancedGradient(const QSize &size, const QColor &ca,
+    QImage unbalancedGradient(QSize size, const QColor &ca,
                               const QColor &cb, GradientType type,
                               int xfactor=100, int yfactor=100);
     /**
@@ -92,7 +92,7 @@ namespace Tellico {
      * @param yfactor The y decay length.
      * @return The gradient.
      */
-    QImage grayUnbalancedGradient(const QSize &size, unsigned char ca,
+    QImage grayUnbalancedGradient(QSize size, unsigned char ca,
                                   unsigned char cb, GradientType type,
                                   int xfactor=100, int yfactor=100);
 }

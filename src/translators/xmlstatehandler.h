@@ -69,6 +69,7 @@ public:
 protected:
   StateData* d;
 private:
+  Q_DISABLE_COPY(StateHandler)
   virtual StateHandler* nextHandlerImpl(const QString&, const QString&, const QString&)  { return nullptr; }
 };
 

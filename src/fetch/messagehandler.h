@@ -44,6 +44,9 @@ public:
 
   virtual void send(const QString& message, Type type) = 0;
   virtual void infoList(const QString& message, const QStringList& list) = 0;
+
+private:
+  Q_DISABLE_COPY(MessageHandler)
 };
 
 class ManagerMessage : public MessageHandler {

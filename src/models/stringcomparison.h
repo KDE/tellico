@@ -38,6 +38,9 @@ public:
   virtual int compare(const QString& str1, const QString& str2);
 
   static StringComparison* create(Data::FieldPtr field);
+
+private:
+  Q_DISABLE_COPY(StringComparison)
 };
 
 class BoolComparison : public StringComparison {
