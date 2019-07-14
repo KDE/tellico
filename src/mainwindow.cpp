@@ -807,6 +807,7 @@ void MainWindow::initView() {
   EntrySelectionModel* proxySelect = new EntrySelectionModel(m_iconView->model(),
                                                              m_detailedView->selectionModel(),
                                                              this);
+  //TODO: update for selection model usage
   proxySelect->addSelectionProxy(m_flowView->selectionModel());
   m_iconView->setSelectionModel(proxySelect);
 

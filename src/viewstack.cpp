@@ -65,18 +65,9 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
 
   m_flowButton = new QToolButton(this);
   m_flowButton->setCheckable(true);
-  m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
-  connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
-
-  m_flowButton = new QToolButton(this);
-  m_flowButton->setCheckable(true);
-  m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
-  connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
-
-  m_flowButton = new QToolButton(this);
-  m_flowButton->setCheckable(true);
-  m_flowButton->setIcon(QIcon::fromTheme(QLatin1String("view-list-tree")));
-  connect(m_flowButton, SIGNAL(clicked(bool)), SLOT(showFlowView()));
+  // TODO: change icon
+  m_flowButton->setIcon(QIcon::fromTheme(QStringLiteral("view-list-tree")));
+  connect(m_flowButton, &QAbstractButton::clicked, this, &ViewStack::showFlowView);
 
   QButtonGroup* bg = new QButtonGroup(this);
   bg->addButton(m_listButton);
@@ -123,6 +114,7 @@ ViewStack::ViewStack(QWidget* parent_) : QWidget(parent_)
 }
 
 int ViewStack::currentWidget() const {
+  //TODO:: add picture flow
   if(m_stack->currentWidget() == m_listView) {
     return Config::ListView;
   } else {
@@ -131,6 +123,7 @@ int ViewStack::currentWidget() const {
 }
 
 void ViewStack::setCurrentWidget(int widget_) {
+  //TODO:: add picture flow
   switch(widget_) {
     case Config::ListView:
       m_listButton->setChecked(true);
