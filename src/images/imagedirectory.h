@@ -46,6 +46,9 @@ public:
 
   virtual bool hasImage(const QString& id) = 0;
   virtual Data::Image* imageById(const QString& id) = 0;
+
+private:
+  Q_DISABLE_COPY(ImageStorage)
 };
 
 class ImageDirectory : public ImageStorage {

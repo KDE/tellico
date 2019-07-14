@@ -48,6 +48,7 @@ protected:
   virtual int compare(const QString& str1, const QString& str2) = 0;
 
 private:
+  Q_DISABLE_COPY(FieldComparison)
   Data::FieldPtr m_field;
 };
 
