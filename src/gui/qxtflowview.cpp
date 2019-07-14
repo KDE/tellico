@@ -402,7 +402,7 @@ void QxtFlowView::showSlide(QModelIndex index)
 }
 
 /*! \reimp */
-void QxtFlowView::keyPressEvent(QKeyEvent * event)
+void QxtFlowView::keyPressEvent(QKeyEvent* event)
 {
     if (event->key() == Qt::Key_Left)
     {
@@ -428,7 +428,7 @@ void QxtFlowView::keyPressEvent(QKeyEvent * event)
 }
 
 /*! \reimp */
-void QxtFlowView::mousePressEvent(QMouseEvent * event)
+void QxtFlowView::mousePressEvent(QMouseEvent* event)
 {
     d->lastgrabpos = event->pos();
     if(!d->selectionModel)
@@ -586,6 +586,7 @@ void QxtFlowViewPrivate::headerDataChanged(Qt::Orientation orientation, int firs
 
 void QxtFlowViewPrivate::layoutAboutToBeChanged()
 {
+
 }
 
 void QxtFlowViewPrivate::layoutChanged()

@@ -56,6 +56,7 @@ void EntrySelectionModel::selectedEntriesChanged(const QItemSelection& selected_
     return;
   }
   m_processing = true;
+
   QItemSelectionModel* selectionModel = qobject_cast<QItemSelectionModel*>(sender());
   Q_ASSERT(selectionModel);
   if(!selectionModel) {

@@ -784,11 +784,6 @@ void MainWindow::initView() {
   m_flowView->setModel(m_detailedView->model());
   m_flowView->setPictureRole(ImageRole);
 
-  m_flowView = m_viewStack->flowView();
-  // use the same model in both views so they are sync'ed
-  m_flowView->setModel(m_detailedView->model());
-  m_flowView->setPictureRole(ImageRole);
-
   m_collectionViewDock->setWidget(m_viewStack);
   m_dummyWindow->addDockWidget(Qt::TopDockWidgetArea, m_collectionViewDock);
   actionCollection()->addAction(QStringLiteral("toggle_column_widget"), m_collectionViewDock->toggleViewAction());
