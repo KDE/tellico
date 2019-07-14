@@ -116,3 +116,23 @@ void EntityTest::testObfuscate() {
 //  qDebug() << s << b;
   QCOMPARE(s, Tellico::reverseObfuscate(b));
 }
+
+void EntityTest::testControlCodes() {
+  QFETCH(QString, string);
+  QFETCH(QString, result);
+
+  QCOMPARE(Tellico::removeControlCodes(string), result);
+}
+
+void EntityTest::testControlCodes_data() {
+  QTest::addColumn<QString>("string");
+  QTest::addColumn<QString>("result");
+
+  QTest::newRow("basic test") << QSL("basic test") << QSL("basic test");
+  QTest::newRow("basic test1") << (QSL("basic test") + QChar(1)) << QSL("basic test");
+  QTest::newRow("nl") << QSL("new\nline") << QSL("new\nline");
+  QTest::newRow("cr") << QSL("new\rline") << QSL("new\rline");
+  QTest::newRow("tab") << QSL("new\ttab") << QSL("new\ttab");
+  QTest::newRow("hex5") << QSL("hex5\x5") << QSL("hex5");
+  QTest::newRow("hexD") << QSL("hexD\xD") << QSL("hexD\xD");
+}

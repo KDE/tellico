@@ -207,3 +207,16 @@ QString Tellico::reverseObfuscate(const QByteArray& bytes) {
   }
   return result;
 }
+
+QString Tellico::removeControlCodes(const QString& string) {
+  QString result;
+  result.reserve(string.size());
+  for(int i = 0; i < string.size(); ++i) {
+    const ushort c = string.at(i).unicode();
+    // legal control codes in XML 1.0 are U+0009, U+000A, U+000D
+    if(c > 31 || c == 9 || c == 10 || c == 13) {
+      result += string.at(i);
+    }
+  }
+  return result;
+}
