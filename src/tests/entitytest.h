@@ -40,6 +40,8 @@ private Q_SLOTS:
   void testMinutes();
   void testMinutes_data();
   void testObfuscate();
+  void testControlCodes();
+  void testControlCodes_data();
 };
 
 #endif

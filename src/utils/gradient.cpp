@@ -1,4 +1,4 @@
-/* 
+/*
  Copyright (C) 1998, 1999, 2001, 2002, 2004, 2005, 2007
       Daniel M. Duley <daniel.duley@verizon.net>
  (C) 2004 Zack Rusin <zack@kde.org>
@@ -41,7 +41,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cmath>
 
-QImage Tellico::gradient(const QSize &size, const QColor &ca,
+QImage Tellico::gradient(QSize size, const QColor &ca,
                          const QColor &cb, Tellico::GradientType eff)
 {
     QImage image(size, QImage::Format_RGB32);
@@ -218,8 +218,8 @@ QImage Tellico::gradient(const QSize &size, const QColor &ca,
     return(image);
 }
 
-QImage Tellico::grayGradient(const QSize &size, unsigned char ca,
-                           unsigned char cb, Tellico::GradientType eff)
+QImage Tellico::grayGradient(QSize size, unsigned char ca,
+                             unsigned char cb, Tellico::GradientType eff)
 {
     QImage image(size, QImage::Format_Indexed8);
     if(!size.isValid())
@@ -332,9 +332,9 @@ QImage Tellico::grayGradient(const QSize &size, unsigned char ca,
     return(image);
 }
 
-QImage Tellico::unbalancedGradient(const QSize &size, const QColor &ca,
-                                 const QColor &cb, Tellico::GradientType eff,
-                                 int xfactor, int yfactor)
+QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
+                                   const QColor &cb, Tellico::GradientType eff,
+                                   int xfactor, int yfactor)
 {
     QImage image(size, QImage::Format_RGB32);
     if(!size.isValid())
@@ -490,9 +490,9 @@ QImage Tellico::unbalancedGradient(const QSize &size, const QColor &ca,
     return(image);
 }
 
-QImage Tellico::grayUnbalancedGradient(const QSize &size, unsigned char ca,
-                                     unsigned char cb, Tellico::GradientType eff,
-                                     int xfactor, int yfactor)
+QImage Tellico::grayUnbalancedGradient(QSize size, unsigned char ca,
+                                       unsigned char cb, Tellico::GradientType eff,
+                                       int xfactor, int yfactor)
 {
     QImage image(size, QImage::Format_Indexed8);
     if(!size.isValid())

@@ -46,6 +46,9 @@ public:
   virtual ~MergeConflictResolver() {}
   virtual Result resolve(Data::EntryPtr entry1, Data::EntryPtr entry2, Data::FieldPtr field,
                          const QString& value1 = QString(), const QString& value2 = QString()) = 0;
+
+private:
+  Q_DISABLE_COPY(MergeConflictResolver)
 };
 
   namespace Data {

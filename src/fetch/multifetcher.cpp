@@ -241,7 +241,7 @@ MultiFetcher::FetcherItemWidget::FetcherItemWidget(QWidget* parent_)
   layout->setMargin(0);
   setLayout(layout);
 
-  QLabel* label = new QLabel(QStringLiteral("Data source:"), this);
+  QLabel* label = new QLabel(i18n("Data source:"), this);
   layout->addWidget(label);
   m_fetcherCombo = new GUI::ComboBox(this);
   layout->addWidget(m_fetcherCombo);
