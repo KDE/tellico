@@ -36,8 +36,8 @@
 
 #include <QTest>
 
-#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
-#define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
+#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(QStringLiteral(fieldName)))
+#define TABLES(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
 
 QTEST_GUILESS_MAIN( GCstarTest )
 

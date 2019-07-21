@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "griffithtest.h"
 
 #include "../translators/griffithimporter.h"
@@ -35,8 +33,8 @@
 
 #include <QTest>
 
-#define FIELDS(entry, fieldName) Tellico::FieldFormat::splitValue(entry->field(fieldName))
-#define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(fieldName))
+#define QSL(x) QStringLiteral(x)
+#define ROWS(entry, fieldName) Tellico::FieldFormat::splitTable(entry->field(QStringLiteral(fieldName)))
 
 QTEST_GUILESS_MAIN( GriffithTest )
 
@@ -60,19 +58,19 @@ void GriffithTest::testMovies() {
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QStringLiteral("Serendipity"));
-  QCOMPARE(entry->field("origtitle"), QStringLiteral("Serendipity"));
-  QCOMPARE(entry->field("director"), QStringLiteral("Peter Chelsom"));
-  QCOMPARE(entry->field("year"), QStringLiteral("2001"));
-  QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
-  QCOMPARE(entry->field("nationality"), QStringLiteral("USA"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Comedy; Romance; Fantasy"));
-  QCOMPARE(entry->field("rating"), QStringLiteral("6"));
-  QCOMPARE(entry->field("running-time"), QStringLiteral("90"));
-  QCOMPARE(entry->field("studio"), QStringLiteral("studio"));
-  QCOMPARE(entry->field("seen"), QStringLiteral("true"));
-  QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
-  QCOMPARE(ROWS(entry, "cast").first(), QStringLiteral("John Cusack::Jonathan Trager"));
-  QVERIFY(!entry->field("plot").isEmpty());
+  QCOMPARE(entry->field(QSL("title")), QSL("Serendipity"));
+  QCOMPARE(entry->field(QSL("origtitle")), QSL("Serendipity"));
+  QCOMPARE(entry->field(QSL("director")), QSL("Peter Chelsom"));
+  QCOMPARE(entry->field(QSL("year")), QSL("2001"));
+  QCOMPARE(entry->field(QSL("certification")), QSL("PG-13 (USA)"));
+  QCOMPARE(entry->field(QSL("nationality")), QSL("USA"));
+  QCOMPARE(entry->field(QSL("genre")), QSL("Comedy; Romance; Fantasy"));
+  QCOMPARE(entry->field(QSL("rating")), QSL("6"));
+  QCOMPARE(entry->field(QSL("running-time")), QSL("90"));
+  QCOMPARE(entry->field(QSL("studio")), QSL("studio"));
+  QCOMPARE(entry->field(QSL("seen")), QSL("true"));
+  QCOMPARE(entry->field(QSL("medium")), QSL("DVD"));
+  QCOMPARE(ROWS(entry, "cast").first(), QSL("John Cusack::Jonathan Trager"));
+  QVERIFY(!entry->field(QSL("plot")).isEmpty());
   // cover will be empty since local images don't exist
 }

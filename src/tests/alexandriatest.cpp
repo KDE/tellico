@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "alexandriatest.h"
 
 #include "../translators/alexandriaimporter.h"
@@ -36,7 +34,7 @@
 
 QTEST_GUILESS_MAIN( AlexandriaTest )
 
-#define QL1(x) QStringLiteral(x)
+#define QSL(x) QStringLiteral(x)
 
 void AlexandriaTest::initTestCase() {
   Tellico::ImageFactory::init();
@@ -56,24 +54,24 @@ void AlexandriaTest::testImport() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Book);
   QCOMPARE(coll->entryCount(), 2);
   // should be translated somehow
-  QCOMPARE(coll->title(), QL1("My Books"));
+  QCOMPARE(coll->title(), QSL("My Books"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
-  QCOMPARE(entry->field("title"), QL1("The Hallowed Hunt"));
-  QCOMPARE(entry->field("comments"), QL1("first line<br/>second line"));
+  QCOMPARE(entry->field(QSL("title")), QSL("The Hallowed Hunt"));
+  QCOMPARE(entry->field(QSL("comments")), QSL("first line<br/>second line"));
 
   entry = coll->entryById(2);
-  QCOMPARE(entry->field("title"), QL1("Life Together"));
-  QCOMPARE(entry->field("author"), QL1("Dietrich Bonhoeffer; My Other Author"));
+  QCOMPARE(entry->field(QSL("title")), QSL("Life Together"));
+  QCOMPARE(entry->field(QSL("author")), QSL("Dietrich Bonhoeffer; My Other Author"));
   // translated
-  QCOMPARE(entry->field("binding"), QL1("Hardback"));
-  QCOMPARE(entry->field("isbn"), QL1("0-06-060853-6"));
-  QCOMPARE(entry->field("pub_year"), QL1("1993"));
-  QCOMPARE(entry->field("publisher"), QL1("Harper Collins"));
-  QCOMPARE(entry->field("rating"), QL1("3"));
-  QCOMPARE(entry->field("read"), QL1("true"));
-  QCOMPARE(entry->field("loaned"), QL1(""));
-  QVERIFY(!entry->field("comments").isEmpty());
+  QCOMPARE(entry->field(QSL("binding")), QSL("Hardback"));
+  QCOMPARE(entry->field(QSL("isbn")), QSL("0-06-060853-6"));
+  QCOMPARE(entry->field(QSL("pub_year")), QSL("1993"));
+  QCOMPARE(entry->field(QSL("publisher")), QSL("Harper Collins"));
+  QCOMPARE(entry->field(QSL("rating")), QSL("3"));
+  QCOMPARE(entry->field(QSL("read")), QSL("true"));
+  QCOMPARE(entry->field(QSL("loaned")), QString());
+  QVERIFY(!entry->field(QSL("comments")).isEmpty());
 
   QTemporaryDir outputDir;
 
@@ -82,7 +80,7 @@ void AlexandriaTest::testImport() {
   exporter.setURL(QUrl::fromLocalFile(outputDir.path()));
   QVERIFY(exporter.exec());
 
-  importer.setLibraryPath(outputDir.path() + "/.alexandria/" + coll->title());
+  importer.setLibraryPath(outputDir.path() + QSL("/.alexandria/") + coll->title());
   Tellico::Data::CollPtr coll2 = importer.collection();
 
   QVERIFY(coll2);

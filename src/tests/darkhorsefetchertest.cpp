@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "darkhorsefetchertest.h"
 
 #include "../fetch/execexternalfetcher.h"
@@ -42,11 +40,13 @@
 
 QTEST_GUILESS_MAIN( DarkHorseFetcherTest )
 
+#define QSL(x) QStringLiteral(x)
+
 DarkHorseFetcherTest::DarkHorseFetcherTest() : AbstractFetcherTest() {
 }
 
 void DarkHorseFetcherTest::initTestCase() {
-  const QString python = QStandardPaths::findExecutable(QStringLiteral("python"));
+  const QString python = QStandardPaths::findExecutable(QSL("python"));
   if(python.isEmpty()) {
     QSKIP("This test requires python", SkipAll);
   }
@@ -57,11 +57,11 @@ void DarkHorseFetcherTest::initTestCase() {
 
 void DarkHorseFetcherTest::testComic() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Title,
-                                       QStringLiteral("axe cop: bad guy earth #1"));
+                                       QSL("axe cop: bad guy earth #1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
   KConfig config(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"), KConfig::SimpleConfig);
-  KConfigGroup cg = config.group(QStringLiteral("<default>"));
+  KConfigGroup cg = config.group(QSL("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py"));
   // don't sync() and save the new path
   cg.markAsClean();
@@ -73,15 +73,15 @@ void DarkHorseFetcherTest::testComic() {
   // the first entry had better be the right one
   Tellico::Data::EntryPtr entry = results.at(0);
 
-  QCOMPARE(entry->field("title"), QStringLiteral("Axe Cop: Bad Guy Earth #1"));
-  QCOMPARE(entry->field("pub_year"), QStringLiteral("2011"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Humor"));
-  QCOMPARE(entry->field("pages"), QStringLiteral("32"));
-  QCOMPARE(entry->field("publisher"), QStringLiteral("Dark Horse Comics"));
-  QCOMPARE(entry->field("writer"), QStringLiteral("Malachai Nicolle"));
-  QCOMPARE(entry->field("artist"), QStringLiteral("Ethan Nicolle"));
-  QVERIFY(!entry->field("comments").isEmpty());
-  QVERIFY(!entry->field("cover").isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
-  QVERIFY(!Tellico::ImageFactory::imageById(entry->field("cover")).isNull());
+  QCOMPARE(entry->field(QSL("title")), QSL("Axe Cop: Bad Guy Earth #1"));
+  QCOMPARE(entry->field(QSL("pub_year")), QSL("2011"));
+  QCOMPARE(entry->field(QSL("genre")), QSL("Humor"));
+  QCOMPARE(entry->field(QSL("pages")), QSL("32"));
+  QCOMPARE(entry->field(QSL("publisher")), QSL("Dark Horse Comics"));
+  QCOMPARE(entry->field(QSL("writer")), QSL("Malachai Nicolle"));
+  QCOMPARE(entry->field(QSL("artist")), QSL("Ethan Nicolle"));
+  QVERIFY(!entry->field(QSL("comments")).isEmpty());
+  QVERIFY(!entry->field(QSL("cover")).isEmpty());
+  QVERIFY(!entry->field(QSL("cover")).contains(QLatin1Char('/')));
+  QVERIFY(!Tellico::ImageFactory::imageById(entry->field(QSL("cover"))).isNull());
 }
