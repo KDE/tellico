@@ -108,6 +108,7 @@
 #include <QMimeType>
 #include <QMenuBar>
 #include <QFileDialog>
+#include <QMetaMethod>
 
 #include <unistd.h>
 
