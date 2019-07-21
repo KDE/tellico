@@ -35,6 +35,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QFrame>
+#include <QDate>
 #include <QEvent>
 #include <QMenu>
 #include <QWidgetAction>
