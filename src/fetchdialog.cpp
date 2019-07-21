@@ -91,6 +91,7 @@ namespace {
     StringDataEvent(const QString& str) : QEvent(static_cast<QEvent::Type>(StringDataType)), m_string(str) {}
     QString string() const { return m_string; }
   private:
+    Q_DISABLE_COPY(StringDataEvent)
     QString m_string;
   };
 
@@ -99,6 +100,7 @@ namespace {
     ImageDataEvent(const QImage& img) : QEvent(static_cast<QEvent::Type>(ImageDataType)), m_image(img) {}
     QImage image() const { return m_image; }
   private:
+    Q_DISABLE_COPY(ImageDataEvent)
     QImage m_image;
   };
 
@@ -124,6 +126,9 @@ class FetchDialog::FetchResultItem : public QTreeWidgetItem {
     setData(3, Qt::DecorationRole, Fetch::Manager::self()->fetcherIcon(r->fetcher));
   }
   Fetch::FetchResult* m_result;
+
+private:
+  Q_DISABLE_COPY(FetchResultItem)
 };
 
 FetchDialog::FetchDialog(QWidget* parent_)

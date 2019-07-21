@@ -80,6 +80,7 @@ public:
   const QString& uid() const { return m_uid; }
 
 private:
+  Q_DISABLE_COPY(Item)
   QString m_uid;
 };
 

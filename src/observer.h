@@ -36,6 +36,7 @@ namespace Tellico {
 class Observer {
 
 public:
+  Observer() {}
   virtual ~Observer() {}
 
   virtual void    addBorrower(Data::BorrowerPtr) {}
@@ -54,6 +55,9 @@ public:
   virtual void    addFilter(FilterPtr) {}
   virtual void modifyFilter(FilterPtr) {}
   virtual void removeFilter(FilterPtr) {}
+
+private:
+  Q_DISABLE_COPY(Observer)
 };
 
 }

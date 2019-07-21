@@ -42,6 +42,7 @@ public:
   static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 11111); }
 
 private:
+  Q_DISABLE_COPY(Z3950ResultFound)
   QString m_result;
 };
 
@@ -57,6 +58,7 @@ public:
   static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 22222); }
 
 private:
+  Q_DISABLE_COPY(Z3950ConnectionDone)
   QString m_msg;
   int m_type;
   bool m_hasMore;
@@ -70,6 +72,7 @@ public:
   static QEvent::Type uid() { return static_cast<QEvent::Type>(QEvent::User + 33333); }
 
 private:
+  Q_DISABLE_COPY(Z3950SyntaxChange)
   QString m_syntax;
 };
 
