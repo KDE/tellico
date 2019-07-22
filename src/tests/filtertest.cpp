@@ -120,7 +120,7 @@ void FilterTest::testFilter() {
   QVERIFY(filter.matches(entry));
 
   Tellico::FilterRule* rule5 = new Tellico::FilterRule(QStringLiteral("title"),
-                                                       QLatin1String("Tmavomodry Svet"),
+                                                       QStringLiteral("Tmavomodry Svet"),
                                                        Tellico::FilterRule::FuncEquals);
 
   filter.clear();

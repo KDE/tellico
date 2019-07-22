@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "tellicoreadtest.h"
 
 #include "../translators/tellicoimporter.h"
@@ -170,12 +168,12 @@ void TellicoReadTest::testTableData() {
   // test table value concatenation
   Tellico::Data::EntryPtr e3(new Tellico::Data::Entry(coll));
   coll->addEntries(e3);
-  QString value = "11a" + Tellico::FieldFormat::delimiterString() + "11b"
-                + Tellico::FieldFormat::columnDelimiterString() + "12"
-                + Tellico::FieldFormat::columnDelimiterString() + "13"
-                + Tellico::FieldFormat::rowDelimiterString() + "21"
-                + Tellico::FieldFormat::columnDelimiterString() + "22"
-                + Tellico::FieldFormat::columnDelimiterString() + "23";
+  QString value = QSL("11a") + Tellico::FieldFormat::delimiterString() + QSL("11b")
+                + Tellico::FieldFormat::columnDelimiterString() + QSL("12")
+                + Tellico::FieldFormat::columnDelimiterString() + QSL("13")
+                + Tellico::FieldFormat::rowDelimiterString() + QSL("21")
+                + Tellico::FieldFormat::columnDelimiterString() + QSL("22")
+                + Tellico::FieldFormat::columnDelimiterString() + QSL("23");
   e3->setField(QSL("table"), value);
   QStringList groups = e3->groupNamesByFieldName(QStringLiteral("table"));
   QCOMPARE(groups.count(), 3);
@@ -185,7 +183,7 @@ void TellicoReadTest::testTableData() {
   // test having empty value in table
   Tellico::Data::EntryPtr e = coll2->entryById(2);
   QVERIFY(e);
-  const QStringList rows = Tellico::FieldFormat::splitTable(e->field(QStringLiteral("table")));
+  const QStringList rows = Tellico::FieldFormat::splitTable(e->field(QSL("table")));
   QCOMPARE(rows.count(), 1);
   const QStringList cols = Tellico::FieldFormat::splitRow(rows.at(0));
   QCOMPARE(cols.count(), 3);
@@ -333,7 +331,7 @@ void TellicoReadTest::testXmlName_data() {
   QTest::newRow("_start") << true  << QSL("_start") << QSL("_start");
   QTest::newRow("n42")    << true  << QSL("n42")    << QSL("n42");
   // an empty string is handled in CollectionFieldsDialog when creating the field name
-  QTest::newRow("42")     << false << QSL("42")     << QString("");
+  QTest::newRow("42")     << false << QSL("42")     << QString();
   QTest::newRow("she is") << false << QSL("she is") << QSL("she-is");
   QTest::newRow("colon:") << true  << QSL("colon:") << QSL("colon:");
   QTest::newRow("Svět")   << true  << QSL("Svět")   << QSL("Svět");

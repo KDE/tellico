@@ -48,6 +48,9 @@ public:
   virtual bool cite(Data::EntryList entries) = 0;
   virtual bool hasError() const { return false; }
   virtual QString errorString() const { return QString(); }
+
+private:
+  Q_DISABLE_COPY(Action)
 };
 
 /**

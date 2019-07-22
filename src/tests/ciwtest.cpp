@@ -22,8 +22,6 @@
  *                                                                         *
  ***************************************************************************/
 
-#undef QT_NO_CAST_FROM_ASCII
-
 #include "ciwtest.h"
 
 #include "../translators/ciwimporter.h"
@@ -33,6 +31,8 @@
 #include <QTest>
 
 QTEST_APPLESS_MAIN( CiwTest )
+
+#define QSL(x) QStringLiteral(x)
 
 void CiwTest::testImport() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("/data/test.ciw"));
@@ -44,34 +44,34 @@ void CiwTest::testImport() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Bibtex);
   QCOMPARE(coll->entryCount(), 6);
-  QCOMPARE(coll->title(), QStringLiteral("Bibliography"));
+  QCOMPARE(coll->title(), QSL("Bibliography"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(3);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
-  QCOMPARE(entry->field("title"), QStringLiteral("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
+  QCOMPARE(entry->field(QSL("entry-type")), QSL("article"));
+  QCOMPARE(entry->field(QSL("title")), QSL("Key Process Conditions for Production of C(4) Dicarboxylic Acids in "
                                                 "Bioreactor Batch Cultures of an Engineered Saccharomyces cerevisiae Strain"));
-  QCOMPARE(entry->field("year"), QStringLiteral("2010"));
-  QCOMPARE(entry->field("pages"), QStringLiteral("744-750"));
-  QCOMPARE(entry->field("volume"), QStringLiteral("76"));
-  QCOMPARE(entry->field("journal"), QStringLiteral("APPLIED AND ENVIRONMENTAL MICROBIOLOGY"));
-  QCOMPARE(entry->field("doi"), QStringLiteral("10.1128/AEM.02396-09"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 5);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("Zelle, Rintze M."));
-  QVERIFY(!entry->field("abstract").isEmpty());
+  QCOMPARE(entry->field(QSL("year")), QSL("2010"));
+  QCOMPARE(entry->field(QSL("pages")), QSL("744-750"));
+  QCOMPARE(entry->field(QSL("volume")), QSL("76"));
+  QCOMPARE(entry->field(QSL("journal")), QSL("APPLIED AND ENVIRONMENTAL MICROBIOLOGY"));
+  QCOMPARE(entry->field(QSL("doi")), QSL("10.1128/AEM.02396-09"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).count(), 5);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).first(), QSL("Zelle, Rintze M."));
+  QVERIFY(!entry->field(QSL("abstract")).isEmpty());
 
   entry = coll->entryById(6);
   QVERIFY(entry);
-  QCOMPARE(entry->field("entry-type"), QStringLiteral("article"));
-  QCOMPARE(entry->field("title"), QStringLiteral("Prematurity: An Overview and Public Health Implications"));
-  QCOMPARE(entry->field("booktitle"), QStringLiteral("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("978-0-8243-2732-3"));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 4);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("McCormick, Marie C."));
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("editor")).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("editor")).first(), QStringLiteral("Fielding, JE"));
+  QCOMPARE(entry->field(QSL("entry-type")), QSL("article"));
+  QCOMPARE(entry->field(QSL("title")), QSL("Prematurity: An Overview and Public Health Implications"));
+  QCOMPARE(entry->field(QSL("booktitle")), QSL("ANNUAL REVIEW OF PUBLIC HEALTH, VOL 32"));
+  QCOMPARE(entry->field(QSL("isbn")), QSL("978-0-8243-2732-3"));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).count(), 4);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("author"))).first(), QSL("McCormick, Marie C."));
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("editor"))).count(), 3);
+  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field(QSL("editor"))).first(), QSL("Fielding, JE"));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);
-  QCOMPARE(bColl->fieldByBibtexName("entry-type")->name(), QStringLiteral("entry-type"));
+  QCOMPARE(bColl->fieldByBibtexName(QSL("entry-type"))->name(), QSL("entry-type"));
 }

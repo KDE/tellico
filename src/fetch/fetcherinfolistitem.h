@@ -62,6 +62,7 @@ public:
   Fetch::Fetcher::Ptr fetcher() const;
 
 private:
+  Q_DISABLE_COPY(FetcherInfoListItem)
   Fetch::FetcherInfo m_info;
   QString m_configGroup;
   bool m_newSource;
