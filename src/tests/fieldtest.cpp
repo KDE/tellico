@@ -120,4 +120,11 @@ void FieldTest::testUrlFieldLogic() {
   logic.setBaseUrl(base);
   // url text should still be the file name since it's in the same folder
   QCOMPARE(logic.urlText(u), QStringLiteral("test.ris"));
+
+  // check a relative file one folder deep
+  u = QUrl::fromLocalFile(QFINDTESTDATA("data/alexandria/0060574623.yaml"));
+  QCOMPARE(logic.urlText(u), QStringLiteral("alexandria/0060574623.yaml"));
+
+  logic.setRelative(false);
+  QCOMPARE(logic.urlText(u), u.url());
 }

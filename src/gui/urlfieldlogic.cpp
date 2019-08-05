@@ -23,7 +23,6 @@
  ***************************************************************************/
 
 #include "urlfieldlogic.h"
-#include "../tellico_debug.h"
 
 #include <QDir>
 
@@ -48,6 +47,7 @@ QString UrlFieldLogic::urlText(const QUrl& url_) const {
   if(url_.isEmpty() || !m_isRelative || m_baseUrl.isEmpty() || !m_baseUrl.isLocalFile()) {
     return url_.url();
   }
-  myDebug() << url_.path() << "relative to"  << m_baseUrl.path() << "is" << QDir(m_baseUrl.path()).relativeFilePath(url_.path());
-  return QDir(m_baseUrl.path()).relativeFilePath(url_.path());
+  // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
+  return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())
+             .relativeFilePath(url_.path());
 }
