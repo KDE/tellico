@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,55 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_URLFIELDWIDGET_H
-#define TELLICO_URLFIELDWIDGET_H
+#ifndef TELLICO_URLFIELDLOGIC_H
+#define TELLICO_URLFIELDLOGIC_H
 
-#include "fieldwidget.h"
-#include "urlfieldlogic.h"
-
-#include <KUrlCompletion>
-
-#include <QPointer>
-
-class KUrlRequester;
+#include <QUrl>
 
 namespace Tellico {
-  namespace GUI {
 
 /**
  * @author Robby Stephenson
  */
-class URLFieldWidget : public FieldWidget {
-Q_OBJECT
-
+class UrlFieldLogic {
 public:
-  URLFieldWidget(Data::FieldPtr field, QWidget* parent);
-  virtual ~URLFieldWidget();
+  UrlFieldLogic();
 
-  virtual QString text() const Q_DECL_OVERRIDE;
-  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
+  void setRelative(bool relative);
+  bool isRelative() const { return m_isRelative; }
 
-public Q_SLOTS:
-  virtual void clearImpl() Q_DECL_OVERRIDE;
+  void setBaseUrl(const QUrl& baseUrl);
+  QUrl baseUrl() const { return m_baseUrl; }
 
-protected:
-  virtual QWidget* widget() Q_DECL_OVERRIDE;
-  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
-
-protected Q_SLOTS:
-  void slotOpenURL(const QString& url);
+  QString urlText(const QUrl& url) const;
 
 private:
-  class URLCompletion : public KUrlCompletion {
-  public:
-    URLCompletion() : KUrlCompletion() {}
-    virtual QString makeCompletion(const QString& text) Q_DECL_OVERRIDE;
-  };
-
-  KUrlRequester* m_requester;
-  mutable UrlFieldLogic m_logic; // mutable so the base url can be modified in text()
+  bool m_isRelative;
+  QUrl m_baseUrl;
 };
 
-  } // end GUI namespace
 } // end namespace
 #endif

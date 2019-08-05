@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -62,26 +62,17 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   registerWidget();
 
   // special case, remember if it's a relative url
-  m_isRelative = field_->property(QStringLiteral("relative")) == QLatin1String("true");
+  m_logic.setRelative(field_->property(QStringLiteral("relative")) == QLatin1String("true"));
 }
 
 URLFieldWidget::~URLFieldWidget() {
 }
 
 QString URLFieldWidget::text() const {
-  if(m_isRelative && Kernel::self()->URL().isLocalFile()) {
-    //KURl::relativeUrl() has no QUrl analog
-    QUrl base_url = Kernel::self()->URL();
-    QUrl url = m_requester->url();
-    //return Kernel::self()->URL().resolved(m_requester->url());
-    return QDir(base_url.path()).relativeFilePath(url.path());
-  }
   // for comparison purposes and to be consistent with the file listing importer
   // I want the full url here, including the protocol
-  // the requester only returns the path, so create a QUrl
-  // TODO: 2015-04-30 no longer necessary in KF5/Qt5?
-  //return QUrl(m_requester->url()).url();
-  return m_requester->url().url();
+  m_logic.setBaseUrl(Kernel::self()->URL());
+  return m_logic.urlText(m_requester->url());
 }
 
 void URLFieldWidget::setTextImpl(const QString& text_) {
@@ -95,14 +86,14 @@ void URLFieldWidget::clearImpl() {
 }
 
 void URLFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::FieldPtr newField_) {
-  m_isRelative = newField_->property(QStringLiteral("relative")) == QLatin1String("true");
+  m_logic.setRelative(newField_->property(QStringLiteral("relative")) == QLatin1String("true"));
 }
 
 void URLFieldWidget::slotOpenURL(const QString& url_) {
   if(url_.isEmpty()) {
     return;
   }
-  QDesktopServices::openUrl(m_isRelative ?
+  QDesktopServices::openUrl(m_logic.isRelative() ?
                             Kernel::self()->URL().resolved(QUrl::fromUserInput(url_)) :
                             QUrl::fromUserInput(url_));
 }
