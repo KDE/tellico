@@ -23,3 +23,5 @@ Replace most of the toggle actions in the view settings with KDualAction
 Update doc for MobyGames and data source changes
 
 Update the video game XSLT data sources to somehow use the platform normalization
+
+Colnect API https://colnect.com
