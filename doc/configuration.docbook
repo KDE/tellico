@@ -24,7 +24,7 @@ Some minor settings can only be changed by editing the configuration file itself
 <title><guilabel>General Options</guilabel></title>
 
 <screenshot>
-<screeninfo>The General Options Dialog</screeninfo>
+<!-- <screeninfo>The General Options Dialog</screeninfo> -->
 <mediaobject>
 <imageobject><imagedata format="PNG" fileref="general-options.png"/></imageobject>
 <textobject><phrase>The General Options Dialog</phrase></textobject>
@@ -166,7 +166,7 @@ while the full list is <ulink url="http://tellico-project.org/data-sources">avai
 <listitem><simpara>the <link linkend="imdb">Internet Movie Database</link>,</simpara></listitem>
 <listitem><simpara><link linkend="allocine">AlloCiné</link>,</simpara></listitem>
 <listitem><simpara><link linkend="tmdb">TheMovieDB.org</link>,</simpara></listitem>
-<listitem><simpara><link linkend="omdb">OMDBAPI.com</link>,</simpara></listitem>
+<listitem><simpara>the <link linkend="omdb">Open Movie Database</link>,</simpara></listitem>
 <listitem><simpara><link linkend="animenfo">AnimeNfo.com</link>,</simpara></listitem>
 <!-- comics -->
 <listitem><simpara><link linkend="bedetheque">BDGest</link>,</simpara></listitem>
@@ -349,9 +349,9 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 </sect3>
 
 <sect3 id="omdb">
-<title>OMDBAPI.com</title>
+<title>The Open Movie Database</title>
 <para>
-<ulink url="http://omdbapi.com">The Open Movie Database</ulink> is a free web service to obtain movie information.
+<ulink url="http://omdbapi.com">The Open Movie Database (OMDBAPI.com)</ulink> is a free web service to obtain movie information.
 </para>
 </sect3>
 
