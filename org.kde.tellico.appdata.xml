@@ -534,25 +534,25 @@
   </provides>
   <releases>
     <release version="3.1" date="2017-10-14">
-      <url>https://tellico-project.org/tellico-31-released</url>
+      <url>http://tellico-project.org/tellico-31-released</url>
     </release>
     <release version="3.1.1" date="2018-01-15">
-      <url>https://tellico-project.org/tellico-311-released</url>
+      <url>http://tellico-project.org/tellico-311-released</url>
     </release>
     <release version="3.1.2" date="2018-03-28">
-      <url>https://tellico-project.org/tellico-312-released</url>
+      <url>http://tellico-project.org/tellico-312-released</url>
     </release>
     <release version="3.1.3" date="2018-09-03">
-      <url>https://tellico-project.org/tellico-313-released</url>
+      <url>http://tellico-project.org/tellico-313-released</url>
     </release>
     <release version="3.1.4" date="2018-12-20">
-      <url>https://tellico-project.org/tellico-314-released</url>
+      <url>http://tellico-project.org/tellico-314-released</url>
     </release>
     <release version="3.2" date="2019-05-25">
-      <url>https://tellico-project.org/tellico-32-released</url>
+      <url>http://tellico-project.org/tellico-32-released</url>
     </release>
     <release version="3.2.1" date="2019-07-09">
-      <url>https://tellico-project.org/tellico-321-released</url>
+      <url>http://tellico-project.org/tellico-321-released</url>
     </release>
   </releases>
 </component>
