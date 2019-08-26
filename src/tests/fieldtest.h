@@ -32,6 +32,7 @@ Q_OBJECT
 
 private Q_SLOTS:
   void testAll();
+  void testUrlFieldLogic();
 };
 
 #endif

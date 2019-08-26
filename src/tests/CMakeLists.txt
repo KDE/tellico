@@ -43,7 +43,7 @@ add_test(formattest formattest)
 ecm_mark_as_test(formattest)
 TARGET_LINK_LIBRARIES(formattest config Qt5::Test)
 
-add_executable(fieldtest fieldtest.cpp ../field.cpp ../fieldformat.cpp)
+add_executable(fieldtest fieldtest.cpp ../field.cpp ../fieldformat.cpp ../gui/urlfieldlogic.cpp)
 ecm_mark_nongui_executable(fieldtest)
 add_test(fieldtest fieldtest)
 ecm_mark_as_test(fieldtest)

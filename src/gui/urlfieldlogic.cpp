@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,55 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_URLFIELDWIDGET_H
-#define TELLICO_URLFIELDWIDGET_H
-
-#include "fieldwidget.h"
 #include "urlfieldlogic.h"
 
-#include <KUrlCompletion>
+#include <QDir>
 
-#include <QPointer>
+using Tellico::UrlFieldLogic;
 
-class KUrlRequester;
+UrlFieldLogic::UrlFieldLogic()
+  : m_isRelative(false) {
+}
 
-namespace Tellico {
-  namespace GUI {
+void UrlFieldLogic::setRelative(bool relative_) {
+  m_isRelative = relative_;
+}
 
-/**
- * @author Robby Stephenson
- */
-class URLFieldWidget : public FieldWidget {
-Q_OBJECT
+void UrlFieldLogic::setBaseUrl(const QUrl& baseUrl_) {
+  m_baseUrl = baseUrl_;
+}
 
-public:
-  URLFieldWidget(Data::FieldPtr field, QWidget* parent);
-  virtual ~URLFieldWidget();
-
-  virtual QString text() const Q_DECL_OVERRIDE;
-  virtual void setTextImpl(const QString& text) Q_DECL_OVERRIDE;
-
-public Q_SLOTS:
-  virtual void clearImpl() Q_DECL_OVERRIDE;
-
-protected:
-  virtual QWidget* widget() Q_DECL_OVERRIDE;
-  virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
-
-protected Q_SLOTS:
-  void slotOpenURL(const QString& url);
-
-private:
-  class URLCompletion : public KUrlCompletion {
-  public:
-    URLCompletion() : KUrlCompletion() {}
-    virtual QString makeCompletion(const QString& text) Q_DECL_OVERRIDE;
-  };
-
-  KUrlRequester* m_requester;
-  mutable UrlFieldLogic m_logic; // mutable so the base url can be modified in text()
-};
-
-  } // end GUI namespace
-} // end namespace
-#endif
+QString UrlFieldLogic::urlText(const QUrl& url_) const {
+  // if it's not relative or if the base URL is not set,
+  // then there's nothing to do. Return the URL as-is.
+  // Also, if the base URL is not a local file, then ignore it
+  if(url_.isEmpty() || !m_isRelative || m_baseUrl.isEmpty() || !m_baseUrl.isLocalFile()) {
+    return url_.url();
+  }
+  // BUG 410551: use the directory of the base url, not the file itself, in the QDir c'tor
+  return QDir(m_baseUrl.adjusted(QUrl::RemoveFilename).path())
+             .relativeFilePath(url_.path());
+}

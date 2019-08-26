@@ -27,6 +27,7 @@
 #include "fieldtest.h"
 
 #include "../field.h"
+#include "../gui/urlfieldlogic.h"
 
 #include <QTest>
 
@@ -88,4 +89,42 @@ void FieldTest::testAll() {
   QCOMPARE(field5.isSingleCategory(), false);
   QCOMPARE(field5.flags(), int(Tellico::Data::Field::NoEdit));
   QVERIFY(field5.hasFlag(Tellico::Data::Field::NoEdit));
+}
+
+void FieldTest::testUrlFieldLogic() {
+  Tellico::UrlFieldLogic logic;
+  // starts out with absolute urls
+  QCOMPARE(logic.isRelative(), false);
+
+  // use a local data file to test
+  QUrl u = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ris"));
+  // since the logic is still absolute, the url should be unchanged
+  QCOMPARE(logic.urlText(u), u.url());
+
+  logic.setRelative(true);
+  // since the base url is not set, the url should be unchanged
+  QCOMPARE(logic.urlText(u), u.url());
+
+  logic.setBaseUrl(QUrl(QStringLiteral("http://tellico-project.org")));
+  // since the base url is not local, the url should be unchanged
+  QCOMPARE(logic.urlText(u), u.url());
+
+  // now use the local parent directory
+  QUrl base = u.adjusted(QUrl::RemoveFilename);
+  logic.setBaseUrl(base);
+  // url text should just be the file name since it's in the same folder
+  QCOMPARE(logic.urlText(u), QStringLiteral("test.ris"));
+
+  // the base url is actually a tellico data file
+  base = QUrl::fromLocalFile(QFINDTESTDATA("data/with-image.tc"));
+  logic.setBaseUrl(base);
+  // url text should still be the file name since it's in the same folder
+  QCOMPARE(logic.urlText(u), QStringLiteral("test.ris"));
+
+  // check a relative file one folder deep
+  u = QUrl::fromLocalFile(QFINDTESTDATA("data/alexandria/0060574623.yaml"));
+  QCOMPARE(logic.urlText(u), QStringLiteral("alexandria/0060574623.yaml"));
+
+  logic.setRelative(false);
+  QCOMPARE(logic.urlText(u), u.url());
 }
