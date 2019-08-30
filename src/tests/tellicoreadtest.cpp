@@ -272,7 +272,7 @@ void TellicoReadTest::testRemoteImage() {
   QString fileText = in.readAll();
   // replace %COVER% with image file location
   fileText.replace(QSL("%COVER%"),
-                   QSL("http://tellico-project.org/sites/default/files/logo.png"));
+                   QSL("https://tellico-project.org/sites/default/files/logo.png"));
 
   Tellico::Import::TellicoImporter importer(fileText);
   Tellico::Data::CollPtr coll = importer.collection();

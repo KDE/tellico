@@ -122,7 +122,7 @@ int main(int argc, char* argv[]) {
                        KAboutLicense::GPL_V2,
                        i18n("(c) 2001-2019, Robby Stephenson"),
                        QString(),
-                       QStringLiteral("http://tellico-project.org"));
+                       QStringLiteral("https://tellico-project.org"));
   aboutData.addAuthor(QStringLiteral("Robby Stephenson"), QString(), QStringLiteral("robby@periapsis.org"));
   aboutData.addAuthor(QStringLiteral("Mathias Monnerville"), i18n("Data source scripts"));
   aboutData.addAuthor(QStringLiteral("Regis Boudin"), QString(), QStringLiteral("regis@boudin.name"));
