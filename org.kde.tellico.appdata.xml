@@ -478,9 +478,9 @@
       <li xml:lang="x-test">xxScans and imports audio file collections, such as mp3 or oggxx</li>
     </ul>
   </description>
-  <url type="homepage">http://tellico-project.org</url>
+  <url type="homepage">https://tellico-project.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=tellico</url>
-  <url type="faq">http://tellico-project.org/faq</url>
+  <url type="faq">https://tellico-project.org/faq</url>
   <url type="help">https://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
   <screenshots>
     <screenshot type="default" width="1002" height="765">
@@ -534,25 +534,25 @@
   </provides>
   <releases>
     <release version="3.1" date="2017-10-14">
-      <url>http://tellico-project.org/tellico-31-released</url>
+      <url>https://tellico-project.org/tellico-31-released</url>
     </release>
     <release version="3.1.1" date="2018-01-15">
-      <url>http://tellico-project.org/tellico-311-released</url>
+      <url>https://tellico-project.org/tellico-311-released</url>
     </release>
     <release version="3.1.2" date="2018-03-28">
-      <url>http://tellico-project.org/tellico-312-released</url>
+      <url>https://tellico-project.org/tellico-312-released</url>
     </release>
     <release version="3.1.3" date="2018-09-03">
-      <url>http://tellico-project.org/tellico-313-released</url>
+      <url>https://tellico-project.org/tellico-313-released</url>
     </release>
     <release version="3.1.4" date="2018-12-20">
-      <url>http://tellico-project.org/tellico-314-released</url>
+      <url>https://tellico-project.org/tellico-314-released</url>
     </release>
     <release version="3.2" date="2019-05-25">
-      <url>http://tellico-project.org/tellico-32-released</url>
+      <url>https://tellico-project.org/tellico-32-released</url>
     </release>
     <release version="3.2.1" date="2019-07-09">
-      <url>http://tellico-project.org/tellico-321-released</url>
+      <url>https://tellico-project.org/tellico-321-released</url>
     </release>
   </releases>
 </component>

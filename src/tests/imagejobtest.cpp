@@ -224,7 +224,7 @@ void ImageJobTest::testNetworkImageLink() {
     return;
   }
 
-  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("https://tellico-project.org/sites/default/files/logo.png"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u,
                                                           QString() /* id */,
@@ -250,7 +250,7 @@ void ImageJobTest::testNetworkImageInvalid() {
     return;
   }
 
-  QUrl u(QStringLiteral("http://tellico-project.org"));
+  QUrl u(QStringLiteral("https://tellico-project.org"));
 
   QPointer<Tellico::ImageJob> job = new Tellico::ImageJob(u);
   connect(job.data(), &KJob::result,
@@ -320,7 +320,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
-  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("https://tellico-project.org/sites/default/files/logo.png"));
   Tellico::ImageFactory::requestImageById(u.url());
 
   enterLoop();
@@ -349,7 +349,7 @@ void ImageJobTest::testFactoryRequestNetworkLinkOnly() {
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
           this, &ImageJobTest::slotAvailable);
 
-  QUrl u(QStringLiteral("http://tellico-project.org/sites/default/files/logo.png"));
+  QUrl u(QStringLiteral("https://tellico-project.org/sites/default/files/logo.png"));
   // first, tell the image factory that the image is link only
   Tellico::Data::ImageInfo info(u.url(), "PNG", 64, 64, true /* link only */);
   Tellico::ImageFactory::cacheImageInfo(info);
