@@ -32,6 +32,7 @@
 #include <KComboBox>
 #include <KDatePicker>
 
+#include <QDate>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QFrame>
