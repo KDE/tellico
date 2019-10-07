@@ -28,6 +28,7 @@ SET(translators_STAT_SRCS
    grs1importer.cpp
    htmlexporter.cpp
    importer.cpp
+   librarythingimporter.cpp
    onixexporter.cpp
    pdfimporter.cpp
    referencerimporter.cpp

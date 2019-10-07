@@ -50,6 +50,7 @@
 #include "translators/ciwimporter.h"
 #include "translators/vinoxmlimporter.h"
 #include "translators/boardgamegeekimporter.h"
+#include "translators/librarythingimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -295,6 +296,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::BoardGameGeekImporter();
       break;
+
+    case Import::LibraryThing:
+      CHECK_SIZE;
+      importer = new Import::LibraryThingImporter();
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -386,6 +392,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::GRS1:
     case Import::Goodreads:
     case Import::BoardGameGeek:
+    case Import::LibraryThing:
       break;
   }
 
@@ -404,6 +411,7 @@ Tellico::Import::Target ImportDialog::importTarget(Tellico::Import::Format forma
     case Import::FreeDB:
     case Import::Goodreads:
     case Import::BoardGameGeek:
+    case Import::LibraryThing:
       return Import::None;
     default:
       return Import::File;

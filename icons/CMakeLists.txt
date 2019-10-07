@@ -17,8 +17,9 @@ set(PIC_FILES
     file.png
     game.png
     gcstar.png
-    griffith.png
     goodreads.png
+    griffith.png
+    librarything.png
     nocover_album.png
     nocover_bibtex.png
     nocover_boardgame.png
