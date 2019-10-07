@@ -130,7 +130,7 @@ QWidget* GoodreadsImporter::widget(QWidget* parent_) {
   m_userEdit = new QLineEdit(gbox);
   m_userEdit->setText(m_user);
 
-  lay->addRow(i18n("User ID"), m_userEdit);
+  lay->addRow(i18n("User ID:"), m_userEdit);
 
   l->addWidget(gbox);
   l->addStretch(1);
