@@ -195,6 +195,9 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
   if(!m_loadingCollection) {
     setState(entries_, NewState);
   }
+  // TODO: this only scrolls to new entries in the list view, not the other widgets
+  // who use this selection model
+  setEntriesSelected(entries_);
 }
 
 void DetailedListView::modifyEntries(Tellico::Data::EntryList entries_) {

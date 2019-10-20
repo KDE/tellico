@@ -1,3 +1,11 @@
+2019-10-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug to revert to behavior of selecting newly added entries (Bug 413217).
+
+2019-10-06  Robby Stephenson  <robby@periapsis.org>
+
+	* Added importer for LibraryThing.com JSON collection files (Bug 411095).
+
 2019-08-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with calculating relative file links (Bug 410551).
