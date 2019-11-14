@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,72 +22,41 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef TELLICO_IMPORT_LIBRARYTHINGIMPORTER_H
+#define TELLICO_IMPORT_LIBRARYTHINGIMPORTER_H
+
+#include "importer.h"
+
+class KUrlRequester;
 
 namespace Tellico {
   namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing
-    };
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+/**
+ * @author Robby Stephenson
+*/
+class LibraryThingImporter : public Importer {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
+public:
+  /**
+   */
+  LibraryThingImporter();
 
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
+  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
+  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
 
+public Q_SLOTS:
+  void slotCancel() Q_DECL_OVERRIDE {}
+
+private:
+  Data::CollPtr m_coll;
+  QWidget* m_widget;
+  KUrlRequester* m_URLRequester;
+};
+
+  } // end namespace
+} // end namespace
 #endif

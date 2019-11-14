@@ -390,6 +390,9 @@ void MainWindow::initActions() {
   IMPORT_ACTION(Import::Goodreads, "file_import_goodreads", i18n("Import Goodreads Collection..."),
                 i18n("Import a collection from Goodreads.com"), QIcon::fromTheme(QStringLiteral(":/icons/goodreads")));
 
+  IMPORT_ACTION(Import::LibraryThing, "file_import_librarything", i18n("Import LibraryThing Collection..."),
+                i18n("Import a collection from LibraryThing.com"), QIcon::fromTheme(QStringLiteral(":/icons/librarything")));
+
   IMPORT_ACTION(Import::PDF, "file_import_pdf", i18n("Import PDF File..."),
                 i18n("Import a PDF file"), mimeIcon("application/pdf"));
 

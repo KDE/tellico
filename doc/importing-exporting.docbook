@@ -184,6 +184,14 @@ The <ulink url="https://en.wikipedia.org/wiki/RIS_(file_format)"><acronym>RIS</a
 <ulink url="https://www.goodreads.com">Goodreads</ulink> is an online social network for readers to track book collections. &appname; can import the list of books in a user's collection, given either the user name or user ID, as long as the collection is set to be publicly accessible.
 </para>
 </sect3>
+
+<sect3 id="importing-librarything">
+<title>Importing LibraryThing Collection</title>
+<para>
+<ulink url="https://www.librarything.com">LibraryThing</ulink> is an online service to help people catalog their books easily. &appname; can import the list of books in a user's collection, <ulink url="https://www.librarything.com/export.php?export_type=json">exported in JSON format</ulink>.
+</para>
+</sect3>
+
 </sect2>
 
 <sect2 id="importing-file-listing">

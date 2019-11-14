@@ -194,6 +194,9 @@ void DetailedListView::addEntries(Tellico::Data::EntryList entries_) {
   sourceModel()->addEntries(entries_);
   if(!m_loadingCollection) {
     setState(entries_, NewState);
+    // TODO: this only scrolls to new entries in the list view, not the other widgets
+    // who use this selection model
+    setEntriesSelected(entries_);
   }
 }
 
@@ -262,12 +265,14 @@ void DetailedListView::setEntriesSelected(Data::EntryList entries_) {
     }
   }
   blockSignals(true);
+  QItemSelection itemSel;
   foreach(Data::EntryPtr entry, entries_) {
-    QModelIndex index = sourceModel()->indexFromEntry(entry);
-    selectionModel()->select(proxyModel->mapFromSource(index), QItemSelectionModel::Select | QItemSelectionModel::Rows);
+    QModelIndex index = proxyModel->mapFromSource(sourceModel()->indexFromEntry(entry));
+    itemSel.select(index, index);
   }
-  //setCurrentIndex(index);
+  selectionModel()->select(itemSel, QItemSelectionModel::Select | QItemSelectionModel::Rows);
   blockSignals(false);
+
   QModelIndex index = sourceModel()->indexFromEntry(entries_.first());
   scrollTo(proxyModel->mapFromSource(index));
 }

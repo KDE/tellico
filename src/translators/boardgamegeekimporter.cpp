@@ -252,7 +252,7 @@ QWidget* BoardGameGeekImporter::widget(QWidget* parent_) {
   m_checkOwned = new QCheckBox(i18n("Import owned items only"), gbox);
   m_checkOwned->setChecked(m_ownedOnly);
 
-  lay->addRow(i18n("User ID"), m_userEdit);
+  lay->addRow(i18n("User ID:"), m_userEdit);
   lay->addRow(m_checkOwned);
 
   l->addWidget(gbox);

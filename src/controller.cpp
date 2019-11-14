@@ -196,6 +196,7 @@ void Controller::slotFieldAdded(Tellico::Data::CollPtr coll_, Tellico::Data::Fie
   addedField(coll_, field_);
 }
 
+// TODO: should be adding entries to models rather than to widget observers
 void Controller::addedEntries(Tellico::Data::EntryList entries_) {
   blockAllSignals(true);
   foreach(Observer* obs, m_observers) {
