@@ -2,7 +2,7 @@ Checklist for a Tellico release:
 --------------------------------
 * Add entry in Changelog
 * Set release version in top-level CMakeLists.txt
-* Add release information to org.kde.tellico.appdata.xml
+* Add release information to org.kde.tellico.appdata.xml, before the others (as first)
 * Use releaseme/tarme.rb to create a tarball and test the build
 * Tag the release, using vX.Y.Z pattern, and annotating the tag
 * Update tarball and .md5 file
