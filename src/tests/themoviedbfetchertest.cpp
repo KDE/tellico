@@ -49,7 +49,7 @@ void TheMovieDBFetcherTest::initTestCase() {
                                                                 "Peters Entertainment; DC Comics; Legendary Entertainment; "
                                                                 "Bad Hat Harry Productions"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2006"));
-  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("action; adventure; fantasy; science fiction"));
+  m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("action; adventure; science fiction"));
   m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("Bryan Singer"));
   m_fieldValues.insert(QStringLiteral("producer"), QStringLiteral("Bryan Singer; Jon Peters; Gilbert Adler"));
   m_fieldValues.insert(QStringLiteral("running-time"), QStringLiteral("154"));
