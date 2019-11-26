@@ -45,7 +45,7 @@ void TheMovieDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Superman Returns"));
-  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; Red Sun Productions Pty. Ltd.; "
+  m_fieldValues.insert(QStringLiteral("studio"), QStringLiteral("Warner Bros. Pictures; DC Entertainment; Red Sun Productions Pty. Ltd.; "
                                                                 "Peters Entertainment; DC Comics; Legendary Entertainment; "
                                                                 "Bad Hat Harry Productions"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2006"));
