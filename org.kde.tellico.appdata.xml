@@ -538,6 +538,9 @@
     <binary>tellico</binary>
   </provides>
   <releases>
+    <release version="3.2.3" date="2019-11-25">
+      <url>https://tellico-project.org/tellico-323-released</url>
+    </release>
     <release version="3.2.2" date="2019-11-09">
       <url>https://tellico-project.org/tellico-322-released</url>
     </release>
