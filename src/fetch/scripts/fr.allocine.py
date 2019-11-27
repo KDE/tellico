@@ -220,8 +220,8 @@ class BasicTellicoDOM:
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print XML_HEADER; print DOCTYPE
-		print self.__root.toxml()
+		print(XML_HEADER); print(DOCTYPE)
+		print(self.__root.toxml())
 
 
 class AlloCineParser:
@@ -448,7 +448,7 @@ class AlloCineParser:
 
 
 def showUsage():
-	print "Usage: %s movietitle" % sys.argv[0]
+	print("Usage: %s movietitle" % sys.argv[0])
 	sys.exit(1)
 
 def main():
