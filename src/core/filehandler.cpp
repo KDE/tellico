@@ -196,10 +196,10 @@ bool FileHandler::queryExists(const QUrl& url_) {
 bool FileHandler::writeBackupFile(const QUrl& url_) {
   bool success = true;
   if(url_.isLocalFile()) {
-    success = KBackup::backupFile(url_.path());
+    success = KBackup::backupFile(url_.toLocalFile());
   } else {
     QUrl backup(url_);
-    backup.setPath(backup.path() + QLatin1Char('~'));
+    backup.setPath(backup.toLocalFile() + QLatin1Char('~'));
     KIO::DeleteJob* delJob = KIO::del(backup);
     KJobWidgets::setWindow(delJob, GUI::Proxy::widget());
     delJob->exec(); // might fail if backup doesn't exist, that's ok

@@ -26,6 +26,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 #include(ECMAddTests)
 #include(ECMMarkNonGuiExecutable)
 #include(ECMInstallIcons)
+include(ECMAddAppIcon)
 include(ECMUninstallTarget)
 include(FeatureSummary)
 
