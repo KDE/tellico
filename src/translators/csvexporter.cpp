@@ -93,7 +93,7 @@ QString CSVExporter::text() const {
   if(m_includeTitles) {
     foreach(Data::FieldPtr fIt, fields()) {
       QString title = fIt->title();
-      // because of Microsoft Excel bug, http://support.microsoft.com/kb/323626
+      // because of Microsoft Excel bug, https://support.microsoft.com/kb/323626
       if(text.isEmpty() && title == QLatin1String("ID")) {
         title = QStringLiteral("Id");
       }

@@ -26,7 +26,7 @@
  * We could use KCompactDisc now, but it's very buggy,
  * see https://bugs.kde.org/show_bug.cgi?id=183520
  *     https://bugs.kde.org/show_bug.cgi?id=183521
- *     http://lists.kde.org/?l=kde-multimedia&m=123397778013726&w=2
+ *     https://lists.kde.org/?l=kde-multimedia&m=123397778013726&w=2
  */
 
 #include <config.h>

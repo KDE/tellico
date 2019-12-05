@@ -131,7 +131,7 @@ int main(int argc, char* argv[]) {
 
   aboutData.addCredit(QStringLiteral("Virginie Quesnay"), i18n("Icons"));
   aboutData.addCredit(QStringLiteral("Amarok"), i18n("Code examples and general inspiration"),
-                      QString(), QStringLiteral("http://amarok.kde.org"));
+                      QString(), QStringLiteral("https://amarok.kde.org"));
   aboutData.addCredit(QStringLiteral("Greg Ward"), i18n("Author of btparse library"));
   aboutData.addCredit(QStringLiteral("Robert Gamble"), i18n("Author of libcsv library"));
   aboutData.addCredit(QStringLiteral("Valentin Lavrinenko"), i18n("Author of rtf2html library"));

@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 // This class is adapted from Iso5426ToUnicode from the MARC4J project, available
-// from http://marc4j.tigris.org, with the following notice:
+// from https://github.com/marc4j/marc4j, with the following notice:
 // * Copyright (C) 2002 Bas  Peters  (mail@bpeters.com)
 // * Copyright (C) 2002 Yves Pratter (ypratter@club-internet.fr)
 //
@@ -86,7 +86,7 @@ bool Iso5426Converter::isCombining(uchar c) {
   return c >= 0xC0 && c <= 0xDF;
 }
 
-// Source : http://www.itscj.ipsj.or.jp/ISO-IR/053.pdf
+// Source : https://www.itscj.ipsj.or.jp/iso-ir/053.pdf
 QChar Iso5426Converter::getChar(uchar c) {
   switch(c) {
   case 0xA1:

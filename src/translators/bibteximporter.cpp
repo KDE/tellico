@@ -227,7 +227,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
         str.replace(QRegExp(QLatin1String("\\sand\\s")),FieldFormat::delimiterString());
       }
       // there's a 'key' field different from the citation key
-      // http://nwalsh.com/tex/texhelp/bibtx-37.html
+      // https://nwalsh.com/tex/texhelp/bibtx-37.html
       // TODO account for this later
       if(fieldName == QLatin1String("key")) {
         myLog() << "skipping bibtex 'key' field for" << str;

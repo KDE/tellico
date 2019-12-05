@@ -95,7 +95,7 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   field->setCategory(i18n(stamp_condition));
   list.append(field);
 
-  /* TRANSLATORS: See http://en.wikipedia.org/wiki/Stamp_hinge */
+  /* TRANSLATORS: See https://en.wikipedia.org/wiki/Stamp_hinge */
   field = new Field(QStringLiteral("hinged"), i18n("Hinged"));
   field->setCategory(i18n(stamp_condition));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);

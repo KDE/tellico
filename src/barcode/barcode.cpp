@@ -4,7 +4,7 @@
 
 /***************************************************************************
  *                                                                         *
- *    ### based on BaToo: http://people.inf.ethz.ch/adelmanr/batoo/ ###    *
+ *  based on BaToo: http://www.vs.inf.ethz.ch/res/show.html?what=barcode   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *
@@ -24,7 +24,7 @@
  *                                                                         *
  ***************************************************************************/
 
-// includes code from http://v4l2spec.bytesex.org/spec/a16323.htm
+// includes code from https://www.linuxtv.org/downloads/v4l-dvb-apis-old/capture-example.html
 
 #include "barcode.h"
 

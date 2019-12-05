@@ -34,9 +34,9 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  *
- * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
- * @see http://www.eblong.com/zarf/bookscan/
- * @see http://doc.trolltech.com/qq/qq01-seriously-weird-qregexp.html
+ * @see https://web.archive.org/web/20130126042049/http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
+ * @see https://www.eblong.com/zarf/bookscan/
+ * @see https://doc.qt.io/archives/qq/qq01-seriously-weird-qregexp.html
  */
 class ISBNValidator : public QValidator {
 Q_OBJECT
@@ -68,13 +68,13 @@ public:
    * @li Part 3: The title identifier
    * @li Part 4: The check digit
    * For details
-   * @see http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
+   * @see https://web.archive.org/web/20130126042049/http://www.isbn.org/standards/home/isbn/international/hyphenation-instructions.asp
    * For details on ranges
-   * @see http://www.isbn-international.org/page/ranges
+   * @see https://www.isbn-international.org/range_file_generation
    * For info on group codes
-   * @see http://www.isbn.spk-berlin.de/html/prefix/allpref.htm
+   * @see https://web.archive.org/web/20030609050408/http://www.isbn.spk-berlin.de/html/prefix/allpref.htm
    * For info on French language publisher codes
-   * @see http://www.afnil.org
+   * @see https://www.afnil.org/
    * <pre>
    *  Group Identifiers    First Hyphen After
    *  -----------------------------------------
@@ -153,9 +153,9 @@ private:
   /**
    * This function calculates and returns the ISBN checksum. The
    * algorithm is based on some code by Andrew Plotkin, available at
-   * http://www.eblong.com/zarf/bookscan/
+   * https://www.eblong.com/zarf/bookscan/
    *
-   * @see http://www.eblong.com/zarf/bookscan/
+   * @see https://www.eblong.com/zarf/bookscan/
    *
    * @param input The raw string, with no hyphens
    */

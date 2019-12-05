@@ -32,7 +32,7 @@ namespace Tellico {
 /**
  * Library of Congress Control Number validator
  *
- * see http://www.loc.gov/marc/lccn_structure.html
+ * see https://www.loc.gov/marc/lccn_structure.html
  *
  * These are all valid
  * - 89-456
@@ -47,7 +47,7 @@ public:
 
   /**
    * Returns the formalized version as dictated by LOC search
-   * http://catalog.loc.gov/help/number.htm
+   * https://catalog.loc.gov/vwebv/ui/en_US/htdocs/help/searchBrowse.html
    */
   static QString formalize(const QString& value);
 };

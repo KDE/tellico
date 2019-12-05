@@ -114,7 +114,7 @@ private :
 #endif
 
 #if defined(TELLICO_LOG) && !defined(WIN32)
-// see http://www.gnome.org/~federico/news-2006-03.html#timeline-tools
+// see https://www.gnome.org/~federico/news-2006-03.html#timeline-tools
 // strace -ttt -f -o /tmp/logfile.strace src/tellico
 // plot-timeline.py -o prettygraph.png /tmp/logfile.strace
 #define MARK do { \

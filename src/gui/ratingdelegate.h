@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2010 Stefan Burnicki (stefan.burnicki@gmx.de)
- * <http://gitorious.org/bangarang> BANGARANG MEDIA PLAYER
+ * <https://bangarangkde.wordpress.com> BANGARANG MEDIA PLAYER
  * Copyright 2011 Jörg Ehrichs <joerg.ehrichs@gmx.de>
  *
  * This program is free software; you can redistribute it and/or

@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 // This class is adapted from Iso6937ToUnicode from the MARC4J project, available
-// from http://marc4j.tigris.org, with the following notice:
+// from https://github.com/marc4j/marc4j, with the following notice:
 // * Copyright (C) 2002 Bas  Peters  (mail@bpeters.com)
 // * Copyright (C) 2002 Yves Pratter (ypratter@club-internet.fr)
 //
@@ -80,7 +80,7 @@ bool Iso6937Converter::isCombining(uchar c) {
   return c >= 0xC0 && c <= 0xDF;
 }
 
-// Source : http://anubis.dkuug.dk/JTC1/SC2/WG3/docs/6937cd.pdf
+// Source : http://www.open-std.org/jtc1/sc2/wg3/docs/6937cd.pdf
 QChar Iso6937Converter::getChar(uchar c) {
   switch(c) {
   case 0xA0:

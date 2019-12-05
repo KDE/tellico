@@ -60,7 +60,7 @@ QString SpringerFetcher::source() const {
 
 QString SpringerFetcher::attribution() const {
   return i18n("This data is licensed under <a href=""%1"">specific terms</a>.",
-              QLatin1String("http://dev.springer.com/apps/tos"));
+              QLatin1String("https://dev.springernature.com/"));
 }
 
 bool SpringerFetcher::canSearch(FetchKey k) const  {

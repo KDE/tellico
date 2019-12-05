@@ -4,7 +4,7 @@
 
 /***************************************************************************
  *                                                                         *
- *    ### based on BaToo: http://people.inf.ethz.ch/adelmanr/batoo/ ###    *
+ *  based on BaToo: http://www.vs.inf.ethz.ch/res/show.html?what=barcode   *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or         *
  *   modify it under the terms of the GNU General Public License as        *

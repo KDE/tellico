@@ -115,7 +115,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   QStringList idList;
   QDomDocument dom = FileHandler::readXMLDocument(u, false, true);
   // could return HTTP 202 while the caching system generates the file
-  // see http://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop
+  // see https://boardgamegeek.com/thread/1188687/export-collections-has-been-updated-xmlapi-develop
   // also has a root node of message. Try 5 times, waiting by 2 seconds each time
   bool hasMessage = dom.documentElement().tagName() == QStringLiteral("message");
   for(int loopCount = 0; hasMessage && loopCount < 5; ++loopCount) {
