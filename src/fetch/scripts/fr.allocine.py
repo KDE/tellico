@@ -59,7 +59,9 @@ import xml.dom.minidom
 import locale
 try: import htmlentitydefs as htmlents
 except ImportError:
-	raise ImportError, 'Python 2.5+ required'
+        try: import html.entitydefs as htmlents
+        except ImportError:
+                raise ImportError, 'Python 2.5+ required'
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
@@ -220,8 +222,9 @@ class BasicTellicoDOM:
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print XML_HEADER; print DOCTYPE
-		print self.__root.toxml()
+		print(XML_HEADER);
+                print(DOCTYPE)
+		print(self.__root.toxml())
 
 
 class AlloCineParser:
@@ -448,7 +451,7 @@ class AlloCineParser:
 
 
 def showUsage():
-	print "Usage: %s movietitle" % sys.argv[0]
+	print("Usage: %s movietitle" % sys.argv[0])
 	sys.exit(1)
 
 def main():

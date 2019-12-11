@@ -191,17 +191,17 @@ class BasicTellicoDOM:
 		Prints entry's XML content to stdout
 		"""
 		try:
-			print nEntry.toxml()
+			print(nEntry.toxml())
 		except:
-			print sys.stderr, "Error while outputting XML content from entry to Tellico"
+			print(sys.stderr, "Error while outputting XML content from entry to Tellico")
 
 	def printXMLTree(self):
 		"""
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print XML_HEADER; print DOCTYPE
-		print self.__root.toxml()
+		print(XML_HEADER); print(DOCTYPE)
+		print(self.__root.toxml())
 
 
 class DarkHorseParser:
@@ -276,7 +276,7 @@ class DarkHorseParser:
 			f.write(img)
 			f.close()
 		except:
-			print sys.stderr, "Error: could not write image into /tmp"
+			print(sys.stderr, "Error: could not write image into /tmp")
 
 		b64data = (md5 + '.jpeg', base64.encodestring(img))
 
@@ -285,7 +285,7 @@ class DarkHorseParser:
 			try:
 				os.remove(imgPath)
 			except:
-				print sys.stderr, "Error: could not delete temporary image /tmp/%s.jpeg" % md5
+				print(sys.stderr, "Error: could not delete temporary image /tmp/%s.jpeg" % md5)
 
 		return b64data
 
@@ -425,11 +425,11 @@ class DarkHorseParser:
 			return None
 
 def halt():
-	print "HALT."
+	print("HALT.")
 	sys.exit(0)
 
 def showUsage():
-	print "Usage: %s comic" % sys.argv[0]
+	print("Usage: %s comic" % sys.argv[0])
 	sys.exit(1)
 
 def main():
