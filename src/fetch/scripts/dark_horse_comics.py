@@ -43,9 +43,16 @@ Title (checked) = %1
 Update (checked) = %{title}
 """
 
-import sys, os, re, md5, random, string
-import urllib, urllib2, time, base64
+import sys, os, re, hashlib, random, string
+import urllib, time, base64
 import xml.dom.minidom
+
+try:
+	# For Python 3.0 and later
+	from urllib.request import urlopen
+except ImportError:
+	# Fall back to Python 2's urllib2
+	from urllib2 import urlopen
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
@@ -59,10 +66,8 @@ def genMD5():
 	Generates and returns a random md5 string. Its main purpose is to allow random
 	image file name generation.
 	"""
-	obj = md5.new()
 	float = random.random()
-	obj.update(str(float))
-	return obj.hexdigest()
+	return hashlib.md5(str(float)).hexdigest()
 
 class BasicTellicoDOM:
 	"""
@@ -191,17 +196,17 @@ class BasicTellicoDOM:
 		Prints entry's XML content to stdout
 		"""
 		try:
-			print nEntry.toxml()
+			print(nEntry.toxml())
 		except:
-			print sys.stderr, "Error while outputting XML content from entry to Tellico"
+			print(sys.stderr, "Error while outputting XML content from entry to Tellico")
 
 	def printXMLTree(self):
 		"""
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print XML_HEADER; print DOCTYPE
-		print self.__root.toxml()
+		print(XML_HEADER); print(DOCTYPE)
+		print(self.__root.toxml())
 
 
 class DarkHorseParser:
@@ -247,7 +252,7 @@ class DarkHorseParser:
 		"""
 		Fetch HTML data from url
 		"""
-		u = urllib2.urlopen(url)
+		u = urlopen(url)
 		self.__data = u.read()
 		u.close()
 
@@ -267,7 +272,7 @@ class DarkHorseParser:
 		The image is deleted if delete is True
 		"""
 		md5 = genMD5()
-		imObj = urllib2.urlopen(path.strip())
+		imObj = urlopen(path.strip())
 		img = imObj.read()
 		imObj.close()
 		imgPath = "/tmp/%s.jpeg" % md5
@@ -276,7 +281,7 @@ class DarkHorseParser:
 			f.write(img)
 			f.close()
 		except:
-			print sys.stderr, "Error: could not write image into /tmp"
+			print(sys.stderr, "Error: could not write image into /tmp")
 
 		b64data = (md5 + '.jpeg', base64.encodestring(img))
 
@@ -285,7 +290,7 @@ class DarkHorseParser:
 			try:
 				os.remove(imgPath)
 			except:
-				print sys.stderr, "Error: could not delete temporary image /tmp/%s.jpeg" % md5
+				print(sys.stderr, "Error: could not delete temporary image /tmp/%s.jpeg" % md5)
 
 		return b64data
 
@@ -425,11 +430,11 @@ class DarkHorseParser:
 			return None
 
 def halt():
-	print "HALT."
+	print("HALT.")
 	sys.exit(0)
 
 def showUsage():
-	print "Usage: %s comic" % sys.argv[0]
+	print("Usage: %s comic" % sys.argv[0])
 	sys.exit(1)
 
 def main():

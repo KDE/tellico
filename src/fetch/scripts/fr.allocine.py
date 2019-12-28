@@ -54,12 +54,24 @@
 # * Initial release.
 
 import sys, os, re, hashlib, random, types
-import urllib, urllib2, time, base64
+import urllib, time, base64
 import xml.dom.minidom
 import locale
-try: import htmlentitydefs as htmlents
+try:
+	import htmlentitydefs as htmlents
 except ImportError:
-	raise ImportError, 'Python 2.5+ required'
+	try:
+		from html.entities import entitydefs as htmlents
+	except ImportError:
+		print('Python 2.5+ required')
+		raise
+
+try:
+	# For Python 3.0 and later
+	from urllib.request import urlopen
+except ImportError:
+	# Fall back to Python 2's urllib2
+	from urllib2 import urlopen
 
 XML_HEADER = """<?xml version="1.0" encoding="UTF-8"?>"""
 DOCTYPE = """<!DOCTYPE tellico PUBLIC "-//Robby Stephenson/DTD Tellico V9.0//EN" "http://periapsis.org/tellico/dtd/v9/tellico.dtd">"""
@@ -220,8 +232,9 @@ class BasicTellicoDOM:
 		Outputs XML content to stdout
 		"""
 		self.__collection.appendChild(self.__images)
-		print XML_HEADER; print DOCTYPE
-		print self.__root.toxml()
+		print(XML_HEADER);
+		print(DOCTYPE)
+		print(self.__root.toxml())
 
 
 class AlloCineParser:
@@ -281,7 +294,7 @@ class AlloCineParser:
 		Fetch HTML data from url
 		"""
 
-		u = urllib2.urlopen(url)
+		u = urlopen(url)
 		self.__data = u.read()
 		u.close()
 
@@ -369,7 +382,7 @@ class AlloCineParser:
 
 			# Save image to a temporary folder
 			md5 = genMD5()
-			imObj = urllib2.urlopen(matches['image'].strip())
+			imObj = urlopen(matches['image'].strip())
 			img = imObj.read()
 			imObj.close()
 			imgPath = "/tmp/%s.jpeg" % md5
@@ -448,7 +461,7 @@ class AlloCineParser:
 
 
 def showUsage():
-	print "Usage: %s movietitle" % sys.argv[0]
+	print("Usage: %s movietitle" % sys.argv[0])
 	sys.exit(1)
 
 def main():

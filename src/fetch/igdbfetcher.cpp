@@ -308,7 +308,11 @@ void IGDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
     const int category = ratingMap.value(QStringLiteral("category")).toInt();
     const int rating = ratingMap.value(QStringLiteral("rating")).toInt();
     if(category == 1) {
-      entry_->setField(QStringLiteral("certification"), m_esrbHash.value(rating));
+      if(m_esrbHash.contains(rating)) {
+        entry_->setField(QStringLiteral("certification"), m_esrbHash.value(rating));
+      } else {
+        myDebug() << "No ESRB rating for value =" << rating;
+      }
     } else if(category == 2 && optionalFields().contains(QStringLiteral("pegi"))) {
       entry_->setField(QStringLiteral("pegi"), m_pegiHash.value(rating));
     }
@@ -536,13 +540,14 @@ void IGDBFetcher::populateHashes() {
   while(esrb.size() < 8) {
     esrb << QString();
   }
-  m_esrbHash.insert(1, esrb.at(7));
-  m_esrbHash.insert(2, esrb.at(6));
-  m_esrbHash.insert(3, esrb.at(5));
-  m_esrbHash.insert(4, esrb.at(4));
-  m_esrbHash.insert(5, esrb.at(3));
-  m_esrbHash.insert(6, esrb.at(2));
-  m_esrbHash.insert(7, esrb.at(1));
+  // see https://api-docs.igdb.com/#age-rating
+  m_esrbHash.insert(12, esrb.at(1)); // adults only
+  m_esrbHash.insert(11, esrb.at(2)); // mature
+  m_esrbHash.insert(10, esrb.at(3)); // teen
+  m_esrbHash.insert(9,  esrb.at(4)); // e10
+  m_esrbHash.insert(8,  esrb.at(5)); // everyone
+  m_esrbHash.insert(7,  esrb.at(6)); // early childhood
+  m_esrbHash.insert(6,  esrb.at(7)); // pending
 
   m_pegiHash.insert(1, QStringLiteral("PEGI 3"));
   m_pegiHash.insert(2, QStringLiteral("PEGI 7"));
