@@ -155,7 +155,7 @@ Entry templates are saved in <filename class="directory">$<envar>KDEHOME</envar>
 <para>
 &appname; can use various sources for importing data, which can be configured
 in the Data Sources Dialog. There are many available types and sources. A few of them are listed below,
-while the full list is <ulink url="http://tellico-project.org/data-sources">available on the Tellico web site</ulink>.</para>
+while the full list is <ulink url="https://tellico-project.org/data-sources">available on the Tellico web site</ulink>.</para>
 
 <itemizedlist>
 <!-- books -->
