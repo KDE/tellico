@@ -518,6 +518,13 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   LANG_ITEM("Spanish", "es", "es");
 #undef LANG_ITEM
 
+  // instead of trying to include all possible languages offered by Colnect
+  // allow the user to enter it
+  m_langCombo->setEditable(true);
+  QRegularExpression rx(QLatin1String("\\w\\w")); // only 2 characters
+  QRegularExpressionValidator* val = new QRegularExpressionValidator(rx, this);
+  m_langCombo->setValidator(val);
+
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotLangChanged);
@@ -530,12 +537,21 @@ ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetche
   addFieldsWidget(ColnectFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 
   if(fetcher_) {
-    m_langCombo->setCurrentData(fetcher_->m_locale);
+    bool success = m_langCombo->setCurrentData(fetcher_->m_locale);
+    // a user-entered iso code might not be in the data list, insert it if not
+    if(!success) {
+      m_langCombo->addItem(fetcher_->m_locale, fetcher_->m_locale);
+      m_langCombo->setCurrentIndex(m_langCombo->count()-1);
+    }
   }
 }
 
 void ColnectFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
-  const QString lang = m_langCombo->currentData().toString();
+  QString lang = m_langCombo->currentData().toString();
+  if(lang.isEmpty()) {
+    // might be user-entered
+    lang = m_langCombo->currentText();
+  }
   config_.writeEntry("Locale", lang);
 }
 
