@@ -12,6 +12,7 @@ SET(fetch_STAT_SRCS
    bibliosharefetcher.cpp
    bibsonomyfetcher.cpp
    boardgamegeekfetcher.cpp
+   colnectfetcher.cpp
    comicvinefetcher.cpp
    configwidget.cpp
    crossreffetcher.cpp

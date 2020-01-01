@@ -518,6 +518,14 @@ add_test(comicvinefetchertest comicvinefetchertest)
 ecm_mark_as_test(comicvinefetchertest)
 TARGET_LINK_LIBRARIES(comicvinefetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(colnectfetchertest colnectfetchertest.cpp abstractfetchertest.cpp
+  ../fetch/colnectfetcher.cpp
+)
+ecm_mark_nongui_executable(colnectfetchertest)
+add_test(colnectfetchertest colnectfetchertest)
+ecm_mark_as_test(colnectfetchertest)
+TARGET_LINK_LIBRARIES(colnectfetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(crossreffetchertest crossreffetchertest.cpp abstractfetchertest.cpp
   ../fetch/crossreffetcher.cpp
 )

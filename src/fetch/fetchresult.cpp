@@ -115,6 +115,11 @@ QString FetchResult::makeDescription(Data::EntryPtr entry) {
       append(desc, entry, "appellation");
       break;
 
+    case Data::Collection::Coin:
+      append(desc, entry, "country");
+      append(desc, entry, "description");
+      break;
+
     default:
       myDebug() << "no description for collection type =" << entry->collection()->type();
       break;

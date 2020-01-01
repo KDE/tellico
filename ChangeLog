@@ -1,3 +1,7 @@
+2019-12-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Added fetcher for colnect.
+
 2019-11-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed performance regression when loading data file.
