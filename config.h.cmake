@@ -19,10 +19,6 @@
 #cmakedefine HAVE_KCDDB
 #cmakedefine HAVE_KF5KCDDB
 
-#cmakedefine ENABLE_AMAZON
-
-#cmakedefine ENABLE_IMDB
-
 #cmakedefine ENABLE_CDTEXT
 
 #cmakedefine ENABLE_WEBCAM

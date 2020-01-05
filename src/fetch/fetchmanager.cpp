@@ -215,11 +215,9 @@ void Manager::stop() {
       fetcher->saveConfig();
     }
   }
-#ifndef NDEBUG
   if(m_count != 0) {
     myDebug() << "count should be 0!";
   }
-#endif
   m_count = 0;
 }
 
@@ -323,9 +321,7 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
   FETCHER_ADD(BoardGameGeek);
 // movies
   FETCHER_ADD(TheMovieDB);
-#ifdef ENABLE_IMDB
   FETCHER_ADD(IMDB);
-#endif
   QStringList langs = QLocale().uiLanguages();
   if(langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes

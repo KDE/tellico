@@ -78,12 +78,8 @@
  * but as a static variable, they weren't always being initialized, so do it the manual way.
  */
 Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
-#ifdef ENABLE_AMAZON
   RegisterFetcher<Fetch::AmazonFetcher> registerAmazon(Amazon);
-#endif
-#ifdef ENABLE_IMDB
   RegisterFetcher<Fetch::IMDBFetcher> registerIMDB(IMDB);
-#endif
 #ifdef HAVE_YAZ
   RegisterFetcher<Fetch::Z3950Fetcher> registerZ3950(Z3950);
 #endif
