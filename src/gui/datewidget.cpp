@@ -91,7 +91,7 @@ DateWidget::DateWidget(QWidget* parent_) : QWidget(parent_) {
   // allow empty item
   m_monthCombo->addItem(QString());
   for(int i = 1; ; ++i) {
-    QString str = QDate::longMonthName(i);
+    QString str = QLocale().standaloneMonthName(i, QLocale::LongFormat);
     if(str.isEmpty()) {
       break;
     }
