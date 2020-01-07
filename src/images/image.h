@@ -59,6 +59,7 @@ public:
   bool isNull() const;
   bool linkOnly() const { return m_linkOnly; }
   void setLinkOnly(bool l) { m_linkOnly = l; }
+  qsizetype byteSize() const;
 
   QPixmap convertToPixmap() const;
   QPixmap convertToPixmap(int width, int height) const;

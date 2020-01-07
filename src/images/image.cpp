@@ -93,6 +93,15 @@ QByteArray Image::byteArray() const {
   return byteArray(*this, outputFormat(m_format));
 }
 
+// TODO: once the min qt version is raised to 5.10, this can be removed
+qsizetype Image::byteSize() const {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
+  return byteCount();
+#else
+  return sizeInBytes();
+#endif
+}
+
 bool Image::isNull() const {
   // 1x1 images are considered null for Tellico. Amazon returns some like that.
   return QImage::isNull() || (width() < 2 && height() < 2);
