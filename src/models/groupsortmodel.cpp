@@ -72,11 +72,7 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
     const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());
 
-    bool reverseOrder = false;
-    // sortOrder() was added in qt 4.5
-#if (QT_VERSION >= QT_VERSION_CHECK(4, 5, 0))
-    if (sortOrder() == Qt::DescendingOrder) reverseOrder = true;
-#endif
+    bool reverseOrder = (sortOrder() == Qt::DescendingOrder);
 
     // yeah, I should figure out some bit-wise operations...whatever
     if(emptyLeft && !emptyRight) {
