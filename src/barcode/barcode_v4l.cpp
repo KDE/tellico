@@ -151,7 +151,7 @@ QImage barcode_v4l::grab_one2()
     // optimized case
     QRgb *scanline;
     for (y = 0; y < m_win.height; ++y) {
-      scanline = (QRgb*)m_image->scanLine(y);
+      scanline = reinterpret_cast<QRgb*>(m_image->scanLine(y));
       for (x = 0; x < m_win.width; ++x) {
         const char src1 = *(src++);
         const char src2 = *(src++);

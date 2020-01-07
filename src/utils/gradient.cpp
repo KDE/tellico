@@ -70,7 +70,7 @@ QImage Tellico::gradient(QSize size, const QColor &ca,
                 bl += bcdelta;
                 rgb = qRgb( (rl>>16), (gl>>16), (bl>>16) );
 
-                p = (QRgb *)image.scanLine(y);
+                p = reinterpret_cast<QRgb*>(image.scanLine(y));
                 for(x = 0; x < size.width(); ++x)
                     *p++ = rgb;
             }
@@ -79,14 +79,14 @@ QImage Tellico::gradient(QSize size, const QColor &ca,
             int rcdelta = ((1<<16) / size.width()) * rDiff;
             int gcdelta = ((1<<16) / size.width()) * gDiff;
             int bcdelta = ((1<<16) / size.width()) * bDiff;
-            p = (QRgb *)image.scanLine(0);
+            p = reinterpret_cast<QRgb*>(image.scanLine(0));
             for(x = 0; x < size.width(); ++x){
                 rl += rcdelta;
                 gl += gcdelta;
                 bl += bcdelta;
                 *p++ = qRgb((rl>>16), (gl>>16), (bl>>16));
             }
-            p = (QRgb *)image.scanLine(0);
+            p = reinterpret_cast<QRgb*>(image.scanLine(0));
             for(y = 1; y < size.height(); ++y)
                 memcpy(image.scanLine(y), p, size.width()*sizeof(QRgb));
         }
@@ -123,7 +123,7 @@ QImage Tellico::gradient(QSize size, const QColor &ca,
             }
 
             for(y = 0; y < h; y++){
-                QRgb *p = (QRgb *)image.scanLine(y);
+                QRgb *p = reinterpret_cast<QRgb*>(image.scanLine(y));
                 for(x = 0; x < w; x++){
                     *p++ = qRgb(xtable[x*3] + ytable[y*3],
                                 xtable[x*3+1] + ytable[y*3+1],
@@ -169,8 +169,8 @@ QImage Tellico::gradient(QSize size, const QColor &ca,
             int x2;
             QRgb *sl1, *sl2;
             for(y = 0; y < dh; y++){
-                sl1 = (QRgb *)image.scanLine(y);
-                sl2 = (QRgb *)image.scanLine(qMax(h-y-1, y));
+                sl1 = reinterpret_cast<QRgb*>(image.scanLine(y));
+                sl2 = reinterpret_cast<QRgb*>(image.scanLine(qMax(h-y-1, y)));
                 for(x = 0, x2 = w-1; x < dw; x++, x2--){
                     switch(eff){
                     case PyramidGradient:
@@ -364,7 +364,7 @@ QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
             for(y=0; y < size.height(); y++){
                 dir = _yanti ? y : size.height() - 1 - y;
                 rat =  1 - std::exp( - (float)y  * ybal );
-                p = (QRgb *) image.scanLine(dir);
+                p = reinterpret_cast<QRgb*>(image.scanLine(dir));
                 rgbRow = qRgb(rcb - (int) ( rDiff * rat ),
                               gcb - (int) ( gDiff * rat ),
                               bcb - (int) ( bDiff * rat ));
@@ -373,7 +373,7 @@ QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
             }
         }
 	else{
-            p = (QRgb *)image.scanLine(0);
+            p = reinterpret_cast<QRgb*>(image.scanLine(0));
             for(x = 0; x < size.width(); x++){
                 dir = _xanti ? x : size.width() - 1 - x;
                 rat = 1 - std::exp( - (float)x  * xbal );
@@ -382,7 +382,7 @@ QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
                               bcb - (int) ( bDiff * rat ));
             }
 
-            p = (QRgb *)image.scanLine(0);
+            p = reinterpret_cast<QRgb*>(image.scanLine(0));
             for(y = 1; y < size.height(); ++y){
                 memcpy(image.scanLine(y), p,
                        size.width()*sizeof(QRgb));
@@ -415,7 +415,7 @@ QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
             }
 
             for(y = 0; y < h; y++){
-                p = (QRgb *)image.scanLine(y);
+                p = reinterpret_cast<QRgb*>(image.scanLine(y));
                 for(x = 0; x < w; x++){
                     *p++ = qRgb(rcb - (xtable[x*3] + ytable[y*3]),
                                 gcb - (xtable[x*3+1] + ytable[y*3+1]),
@@ -447,7 +447,7 @@ QImage Tellico::unbalancedGradient(QSize size, const QColor &ca,
             }
 
             for(y = 0; y < h; y++){
-                p = (QRgb *)image.scanLine(y);
+                p = reinterpret_cast<QRgb*>(image.scanLine(y));
                 for(x = 0; x < w; x++) {
                     if (eff == PyramidGradient){
                         *p++ = qRgb(rcb-rSign*(xtable[x*3]+ytable[y*3]),
