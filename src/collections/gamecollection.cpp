@@ -162,6 +162,8 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
       return PlayStationVita;
     } else if(name_.contains(QStringLiteral("Portable"))) {
       return PlayStationPortable;
+    } else if(name_.contains(QStringLiteral("5"))) {
+      return PlayStation5;
     } else if(name_.contains(QStringLiteral("4"))) {
       return PlayStation4;
     } else if(name_.contains(QStringLiteral("3"))) {
@@ -178,6 +180,8 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
       return XboxOne;
     } else if(name_.contains(QStringLiteral("360"))) {
       return Xbox360;
+    } else if(name_.endsWith(QStringLiteral("X"))) {
+      return XboxSeriesX;
     } else {
       return Xbox;
     }
@@ -238,10 +242,12 @@ QString GameCollection::platformName(GamePlatform platform_) {
     case Xbox:                return i18n("Xbox");
     case Xbox360:             return i18n("Xbox 360");
     case XboxOne:             return i18n("Xbox One");
+    case XboxSeriesX:         return i18n("Xbox Series X");
     case PlayStation:         return i18n("PlayStation");
     case PlayStation2:        return i18n("PlayStation2");
     case PlayStation3:        return i18n("PlayStation3");
     case PlayStation4:        return i18n("PlayStation4");
+    case PlayStation5:        return i18n("PlayStation5");
     case PlayStationPortable: return i18nc("PlayStation Portable", "PSP");
     case PlayStationVita:     return i18n("PlayStation Vita");
     case GameBoy:             return i18n("Game Boy");
