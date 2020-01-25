@@ -80,6 +80,7 @@ void Fetcher::startSearch(const FetchRequest& request_) {
     return;
   }
 
+  m_entries.clear();
   search();
 }
 
@@ -131,6 +132,11 @@ void Fetcher::setConfigGroup(const QString& group_) {
 }
 
 Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
+  // check if already fetched this entry
+  if(m_entries.contains(uid_)) {
+    return m_entries[uid_];
+  }
+
   QPointer<Fetcher> ptr(this);
   Data::EntryPtr entry = fetchEntryHook(uid_);
   // could be cancelled and killed after fetching entry, check ptr
@@ -146,6 +152,7 @@ Tellico::Data::EntryPtr Fetcher::fetchEntry(uint uid_) {
       }
     }
   }
+  m_entries.insert(uid_, entry);
   return entry;
 }
 

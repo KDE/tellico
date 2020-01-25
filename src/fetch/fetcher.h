@@ -162,6 +162,7 @@ private:
   QString m_configGroup;
   QStringList m_fields;
   QString m_uuid;
+  QHash<uint, Data::EntryPtr> m_entries;
 };
 
   } // end namespace
