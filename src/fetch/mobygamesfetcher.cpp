@@ -358,6 +358,16 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap map = doc.object().toVariantMap();
+
+  // check for error
+  if(map.contains(QStringLiteral("error"))) {
+    const QString msg = map.value(QStringLiteral("message")).toString();
+    message(msg, MessageHandler::Error);
+    myDebug() << "MobyGamesFetcher -" << msg;
+    stop();
+    return;
+  }
+
   foreach(const QVariant& result, map.value(QStringLiteral("games")).toList()) {
     QVariantMap resultMap = result.toMap();
     Data::EntryList entries = createEntries(coll, resultMap);
