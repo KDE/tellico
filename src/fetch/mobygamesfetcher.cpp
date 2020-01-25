@@ -29,6 +29,7 @@
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
+#include "../utils/tellico_utils.h"
 #include "../tellico_debug.h"
 
 #include <KLocalizedString>
@@ -65,6 +66,7 @@ MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
   if(m_esrbHash.isEmpty()) {
     populateHashes();
   }
+  m_idleTime.start();
 }
 
 MobyGamesFetcher::~MobyGamesFetcher() {
@@ -122,6 +124,10 @@ void MobyGamesFetcher::continueSearch() {
       q.addQueryItem(QStringLiteral("title"), request().value);
       break;
 
+    case Raw:
+      q.setQuery(request().value);
+      break;
+
     default:
       myWarning() << "key not recognized:" << request().key;
       stop();
@@ -132,8 +138,9 @@ void MobyGamesFetcher::continueSearch() {
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("normal"));
   u.setQuery(q);
 //  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/games.json"));
-//  myDebug() << u;
+  myDebug() << u;
 
+  markTime();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &MobyGamesFetcher::slotComplete);
@@ -168,8 +175,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
-  // need to wait a bit after previous query, Moby error message say 1 sec
-  QThread::msleep(1000);
+  markTime();
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(!job->exec()) {
@@ -183,7 +189,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   }
 #if 0
   myWarning() << "Remove platforms debug from mobygamesfetcher.cpp";
-  QFile file(QStringLiteral("/tmp/moby-platforms.json"));
+  QFile file(QStringLiteral("/tmp/moby-game-info.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
     t.setCodec("UTF-8");
@@ -247,8 +253,7 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   u.setQuery(q);
 //  myDebug() << u;
 
-  // need to wait a bit after previous query
-  QThread::msleep(1000);
+  markTime();
   job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   if(!job->exec()) {
@@ -347,7 +352,7 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
 
 #if 0
   myWarning() << "Remove debug from mobygamesfetcher.cpp";
-  QFile file(QStringLiteral("/tmp/test.json"));
+  QFile file(QStringLiteral("/tmp/moby-results.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
     t.setCodec("UTF-8");
@@ -388,6 +393,10 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
     return;
   }
 
+  if(m_platforms.isEmpty()) {
+    updatePlatforms();
+  }
+
   foreach(const QVariant& result, map.value(QStringLiteral("games")).toList()) {
     QVariantMap resultMap = result.toMap();
     Data::EntryList entries = createEntries(coll, resultMap);
@@ -409,7 +418,7 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
 
   QStringList genres;
   foreach(const QVariant& genreMap, resultMap_.value(QStringLiteral("genres")).toList()) {
-    QString g = genreMap.toMap().value(QStringLiteral("genre_name")).toString();
+    const QString g = genreMap.toMap().value(QStringLiteral("genre_name")).toString();
     if(!g.isEmpty()) {
       genres << g;
     }
@@ -426,21 +435,17 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
     Data::EntryPtr newEntry(new Data::Entry(*entry));
 
     const QVariantMap platformMap = platformMapV.toMap();
-    const QString platform = platformMap.value(QStringLiteral("platform_name")).toString();
-    if(platform == QStringLiteral("Wii")) {
-      newEntry->setField(QStringLiteral("platform"), i18n("Nintendo Wii"));
-    } else if(platform == QStringLiteral("Wii U")) {
-      // TODO:: add WII U to defaults?
-      newEntry->setField(QStringLiteral("platform"), i18n("Nintendo Wii"));
-    } else if(platform == QStringLiteral("Nintendo GameCube")) {
-      newEntry->setField(QStringLiteral("platform"), i18n("GameCube"));
-    } else {
-      // also make the assumption that if the platform name isn't already in the allowed list, it should be added
-      Data::FieldPtr f = coll_->fieldByName(QStringLiteral("platform"));
+    const int platformId = platformMap.value(QStringLiteral("platform_id")).toInt();
+    if(m_platforms.contains(platformId)) {
+      const QString platform = m_platforms[platformId];
+      // make the assumption that if the platform name isn't already in the allowed list, it should be added
+      Data::FieldPtr f = newEntry->collection()->fieldByName(QStringLiteral("platform"));
       if(f && !f->allowed().contains(platform)) {
         f->setAllowed(QStringList(f->allowed()) << platform);
       }
       newEntry->setField(QStringLiteral("platform"), platform);
+    } else {
+      myDebug() << "platform list does not contain" << platformId << mapValue(platformMap, "platform_name");
     }
 
     newEntry->setField(QStringLiteral("platform-id"),
@@ -450,6 +455,12 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
     entries << newEntry;
   }
   return entries;
+}
+
+void MobyGamesFetcher::markTime() {
+  // need to wait a bit after previous query, Moby error message say 1 sec
+  if(m_idleTime.elapsed() < 1000) QThread::msleep(1000);
+  m_idleTime.restart();
 }
 
 void MobyGamesFetcher::populateHashes() {
@@ -472,6 +483,43 @@ void MobyGamesFetcher::populateHashes() {
   m_esrbHash.insert(93, esrb.at(2));
   m_esrbHash.insert(94, esrb.at(1));
   m_esrbHash.insert(95, esrb.at(7));
+
+  // Read the cached data for the platform list
+  QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));
+  if(file.open(QIODevice::ReadOnly)) {
+    m_platforms.clear();
+    const QVariantMap topMap = QJsonDocument::fromJson(file.readAll()).object().toVariantMap();
+    foreach(const QVariant& platform, topMap.value(QStringLiteral("platforms")).toList()) {
+      const QVariantMap m = platform.toMap();
+      Data::GameCollection::GamePlatform pId = Data::GameCollection::guessPlatform(mapValue(m, "platform_name"));
+      if(pId != Data::GameCollection::UnknownPlatform) {
+        m_platforms.insert(m.value(QStringLiteral("platform_id")).toInt(),
+                           Data::GameCollection::platformName(pId));
+      }
+    }
+  } else {
+    myDebug() << "Failed to read from" << file.fileName() << file.errorString();
+  }
+}
+
+void MobyGamesFetcher::updatePlatforms() {
+  QUrl u(QString::fromLatin1(MOBYGAMES_API_URL));
+  u.setPath(u.path() + QStringLiteral("/platforms"));
+  QUrlQuery q;
+  q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+  u.setQuery(q);
+
+//  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/platforms.json")); // for testing
+//  myDebug() << "Reading platforms from" << u;
+  markTime();
+  const QByteArray data = FileHandler::readDataFile(u, true);
+  QFile file(Tellico::saveLocation(QStringLiteral("mobygames-data/")) + QLatin1String("platforms.json"));
+  if(!file.open(QIODevice::WriteOnly) || file.write(data) == -1) {
+    myDebug() << "unable to write to" << file.fileName() << file.errorString();
+    return;
+  }
+  file.close();
+  populateHashes();
 }
 
 Tellico::Fetch::ConfigWidget* MobyGamesFetcher::configWidget(QWidget* parent_) const {

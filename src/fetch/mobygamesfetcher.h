@@ -31,6 +31,7 @@
 
 #include <QLineEdit>
 #include <QPointer>
+#include <QTime>
 
 class KJob;
 namespace KIO {
@@ -100,7 +101,13 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryList createEntries(Data::CollPtr coll, const QVariantMap& resultMap);
+
+  // honor throttle limit for the API
+  void markTime();
+  // read all cached data
   void populateHashes();
+  // update cached data
+  void updatePlatforms();
 
   enum ImageSize {
     SmallImage=0, // small is really the thumb size
@@ -115,8 +122,11 @@ private:
   QString m_apiKey;
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
+  QTime m_idleTime;
 
   QHash<int, QString> m_esrbHash;
+  // key is the mobygames platform id
+  QHash<int, QString> m_platforms;
 };
 
   } // end namespace

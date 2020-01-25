@@ -78,3 +78,36 @@ void MobyGamesFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
+
+void MobyGamesFetcherTest::testRaw() {
+  // MobyGames2 group has no image
+  const QString groupName = QStringLiteral("MobyGames2");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Raw,
+                                       QStringLiteral("id=25103&platform=82"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2006"));
+  QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo Wii"));
+  QVERIFY(entry->field("genre").contains(QStringLiteral("Action")));
+//  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
+  QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo of America Inc."));
+  QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD"));
+  QCOMPARE(entry->field("mobygames"), QStringLiteral("http://www.mobygames.com/game/legend-of-zelda-twilight-princess"));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  // no cover image downloaded
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty());
+}
