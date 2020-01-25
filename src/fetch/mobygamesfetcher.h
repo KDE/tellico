@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -38,6 +38,7 @@ namespace KIO {
   class StoredTransferJob;
 }
 
+class MobyGamesFetcherTest;
 namespace Tellico {
   namespace GUI {
     class ComboBox;
@@ -51,6 +52,8 @@ namespace Tellico {
  */
 class MobyGamesFetcher : public Fetcher {
 Q_OBJECT
+
+friend class ::MobyGamesFetcherTest;
 
 public:
   /**
@@ -96,6 +99,8 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  // read all cached data
+  void populateHashes();
 
 private:
   virtual void search() Q_DECL_OVERRIDE;
@@ -104,8 +109,6 @@ private:
 
   // honor throttle limit for the API
   void markTime();
-  // read all cached data
-  void populateHashes();
   // update cached data
   void updatePlatforms();
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -39,12 +39,21 @@
 QTEST_GUILESS_MAIN( MobyGamesFetcherTest )
 
 MobyGamesFetcherTest::MobyGamesFetcherTest() : AbstractFetcherTest()
-    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
+    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig), m_needToWait(false) {
 }
 
 void MobyGamesFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
+}
+
+void MobyGamesFetcherTest::init() {
+  if(m_needToWait) QTest::qSleep(1000);
+  m_needToWait = false;
+}
+
+void MobyGamesFetcherTest::cleanup() {
+  m_needToWait = true;
 }
 
 void MobyGamesFetcherTest::testTitle() {
@@ -58,6 +67,10 @@ void MobyGamesFetcherTest::testTitle() {
                                        QStringLiteral("Twilight Princess"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
   fetcher->readConfig(cg, cg.name());
+
+  // since the platforms are read in the next event loop (single shot timer)
+  // to avoid downloading again, wait a moment
+  qApp->processEvents();
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -92,6 +105,10 @@ void MobyGamesFetcherTest::testRaw() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
+  // since the platforms are read in the next event loop (single shot timer)
+  // to avoid downloading again, wait a moment
+  qApp->processEvents();
+
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -110,4 +127,42 @@ void MobyGamesFetcherTest::testRaw() {
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   // no cover image downloaded
   QVERIFY(entry->field(QStringLiteral("cover")).isEmpty());
+}
+
+void MobyGamesFetcherTest::testUpdateRequest() {
+  // MobyGames2 group has no image
+  const QString groupName = QStringLiteral("MobyGames2");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::MobyGamesFetcher fetcher(this);
+  fetcher.readConfig(cg, cg.name());
+
+  // since the platforms are read in the next event loop (single shot timer)
+  // to avoid downloading again, wait a moment
+  qApp->processEvents();
+
+  // create an entry and check the update request
+  Tellico::Data::CollPtr coll(new Tellico::Data::GameCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("T"));
+
+  Tellico::Fetch::FetchRequest req = fetcher.updateRequest(entry);
+  QCOMPARE(req.key, Tellico::Fetch::Title);
+  QCOMPARE(req.value, entry->title());
+
+  // test having a user customized platform
+  QString p(QStringLiteral("playstation 4")); // pId = 141
+  Tellico::Data::FieldPtr f = coll->fieldByName(QStringLiteral("platform"));
+  QVERIFY(f);
+  if(!f->allowed().contains(p)) {
+    f->setAllowed(QStringList(f->allowed()) << p);
+  }
+
+  entry->setField(QStringLiteral("platform"), p);
+  req = fetcher.updateRequest(entry);
+  QCOMPARE(req.key, Tellico::Fetch::Raw);
+  QCOMPARE(req.value, QStringLiteral("title=T&platform=141"));
 }

@@ -1,6 +1,10 @@
+2020-01-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved MobyGames fetcher (Bug 416718).
+
 2019-12-10  Robby Stephenson  <robby@periapsis.org>
 
-	* Added fetcher for colnect.
+	* Added data source for colnect.net.
 
 2019-11-25  Robby Stephenson  <robby@periapsis.org>
 

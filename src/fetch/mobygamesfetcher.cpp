@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -49,6 +49,7 @@
 #include <QJsonObject>
 #include <QUrlQuery>
 #include <QThread>
+#include <QTimer>
 
 namespace {
   static const int MOBYGAMES_MAX_RETURNS_TOTAL = 10;
@@ -63,10 +64,9 @@ MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
     , m_started(false)
     , m_imageSize(SmallImage) {
   //  setLimit(MOBYGAMES_MAX_RETURNS_TOTAL);
-  if(m_esrbHash.isEmpty()) {
-    populateHashes();
-  }
   m_idleTime.start();
+  // delay reading the platform names from the cache file
+  QTimer::singleShot(0, this, &MobyGamesFetcher::populateHashes);
 }
 
 MobyGamesFetcher::~MobyGamesFetcher() {
@@ -138,7 +138,7 @@ void MobyGamesFetcher::continueSearch() {
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("normal"));
   u.setQuery(q);
 //  u = QUrl::fromLocalFile(QStringLiteral("/home/robby/games.json"));
-  myDebug() << u;
+//  myDebug() << u;
 
   markTime();
   m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
@@ -324,7 +324,24 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest MobyGamesFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString title = entry_->field(QStringLiteral("title"));
+  const QString platform = entry_->field(QStringLiteral("platform"));
+  // if the platform name is not empty, we can use that to limit the title search
+  if(!platform.isEmpty()) {
+    // iterate through platform map to potentially match name
+    // would ultimately be faster to have a second hash to map name to id or a bidirectional
+    // could assume the platform name is already normalized, but allow user to have entered something
+    // not quite the same
+    if(m_platforms.isEmpty()) {
+      updatePlatforms();
+    }
+    const int pId = m_platforms.key(Data::GameCollection::normalizePlatform(platform));
+    if(pId > 0) {
+      return FetchRequest(Raw, QString::fromLatin1("title=%1&platform=%2").arg(title, QString::number(pId)));
+    }
+  }
+
+  // fallback to pure title search
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
@@ -429,6 +446,17 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
     entry->setField(QStringLiteral("mobygames"), mapValue(resultMap_, "moby_url"));
   }
 
+  const QString platformS(QStringLiteral("platform"));
+
+  // for efficiency, check if the search includes a platform
+  // since the results will include all the platforms, not just the searched one
+  int pId = 0;
+  if(request().key == Raw &&
+     request().value.contains(platformS)) {
+    QUrlQuery q(request().value);
+    pId = q.queryItemValue(platformS).toInt();
+  }
+
   Data::EntryList entries;
   // return a new entry for every platform
   foreach(const QVariant& platformMapV, resultMap_.value(QStringLiteral("platforms")).toList()) {
@@ -439,11 +467,11 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
     if(m_platforms.contains(platformId)) {
       const QString platform = m_platforms[platformId];
       // make the assumption that if the platform name isn't already in the allowed list, it should be added
-      Data::FieldPtr f = newEntry->collection()->fieldByName(QStringLiteral("platform"));
+      Data::FieldPtr f = newEntry->collection()->fieldByName(platformS);
       if(f && !f->allowed().contains(platform)) {
         f->setAllowed(QStringList(f->allowed()) << platform);
       }
-      newEntry->setField(QStringLiteral("platform"), platform);
+      newEntry->setField(platformS, platform);
     } else {
       myDebug() << "platform list does not contain" << platformId << mapValue(platformMap, "platform_name");
     }
@@ -452,7 +480,7 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
                        platformMap.value(QStringLiteral("platform_id")).toString());
     newEntry->setField(QStringLiteral("year"),
                        platformMap.value(QStringLiteral("first_release_date")).toString().left(4));
-    entries << newEntry;
+    if(pId == 0 || pId == platformId) entries << newEntry;
   }
   return entries;
 }
@@ -497,7 +525,7 @@ void MobyGamesFetcher::populateHashes() {
                            Data::GameCollection::platformName(pId));
       }
     }
-  } else {
+  } else if(file.exists()) { // don't want errors for non-existing file
     myDebug() << "Failed to read from" << file.fileName() << file.errorString();
   }
 }

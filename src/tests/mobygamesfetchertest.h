@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -36,12 +36,16 @@ public:
 
 private Q_SLOTS:
   void initTestCase();
+  void init();
+  void cleanup();
   void testTitle();
   void testRaw();
+  void testUpdateRequest();
 
 private:
   bool m_hasConfigFile;
   KConfig m_config;
+  bool m_needToWait;
 };
 
 #endif
