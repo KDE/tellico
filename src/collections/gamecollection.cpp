@@ -224,7 +224,7 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
   } else if(name_.contains(QStringLiteral("Android"))) {
     return Android;
   }
-  myDebug() << "No platform guess for" << name_;
+//  myDebug() << "No platform guess for" << name_;
   return UnknownPlatform;
 }
 
