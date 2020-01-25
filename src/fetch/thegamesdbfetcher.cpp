@@ -470,7 +470,7 @@ void TheGamesDBFetcher::readDataList(TgdbDataType dataType_) {
   const QByteArray data = FileHandler::readDataFile(u, true);
   QFile file(dataFileName(dataType_));
   if(!file.open(QIODevice::WriteOnly) || file.write(data) == -1) {
-    myDebug() << "unable to write to" << dataFileName(dataType_);
+    myDebug() << "unable to write to" << file.fileName() << file.errorString();
     return;
   }
   file.close();
