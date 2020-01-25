@@ -284,17 +284,13 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
       const QVariantMap coverMap = coverVariant.toMap();
       if(media.isEmpty() &&
          coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Media")) {
-        if(m_imageSize == SmallImage) {
-          media = coverMap.value(QStringLiteral("thumbnail_image")).toString();
-        } else {
-          media = coverMap.value(QStringLiteral("image")).toString();
-        }
+        media = m_imageSize == SmallImage ?
+                coverMap.value(QStringLiteral("thumbnail_image")).toString() :
+                coverMap.value(QStringLiteral("image")).toString();
       } else if(coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Front Cover")) {
-        if(m_imageSize == SmallImage) {
-          front = coverMap.value(QStringLiteral("thumbnail_image")).toString();
-        } else {
-          front = coverMap.value(QStringLiteral("image")).toString();
-        }
+        front = m_imageSize == SmallImage ?
+                coverMap.value(QStringLiteral("thumbnail_image")).toString() :
+                coverMap.value(QStringLiteral("image")).toString();
         break;
       }
     }
@@ -303,11 +299,8 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
       break;
     }
   }
-  if(!front.isEmpty()) {
-    coverUrl = front;
-  } else {
-    coverUrl = media; // fall back to media image
-  }
+
+  coverUrl = front.isEmpty() ? media : front; // fall back to media image
 
   if(!coverUrl.isEmpty()) {
 //    myDebug() << coverUrl;
