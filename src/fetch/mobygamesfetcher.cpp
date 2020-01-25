@@ -25,6 +25,7 @@
 #include "mobygamesfetcher.h"
 #include "../collections/gamecollection.h"
 #include "../images/imagefactory.h"
+#include "../gui/combobox.h"
 #include "../core/filehandler.h"
 #include "../utils/guiproxy.h"
 #include "../utils/string_utils.h"
@@ -57,7 +58,9 @@ using namespace Tellico;
 using Tellico::Fetch::MobyGamesFetcher;
 
 MobyGamesFetcher::MobyGamesFetcher(QObject* parent_)
-    : Fetcher(parent_), m_started(false) {
+    : Fetcher(parent_)
+    , m_started(false)
+    , m_imageSize(SmallImage) {
   //  setLimit(MOBYGAMES_MAX_RETURNS_TOTAL);
   if(m_esrbHash.isEmpty()) {
     populateHashes();
@@ -87,6 +90,10 @@ void MobyGamesFetcher::readConfigHook(const KConfigGroup& config_) {
   QString k = config_.readEntry("API Key");
   if(!k.isEmpty()) {
     m_apiKey = k;
+  }
+  const int imageSize = config_.readEntry("Image Size", -1);
+  if(imageSize > -1) {
+    m_imageSize = static_cast<ImageSize>(imageSize);
   }
 }
 
@@ -221,6 +228,12 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
     entry->setField(QStringLiteral("developer"), devs.join(FieldFormat::delimiterString()));
   }
 
+  if(m_imageSize == NoImage) {
+    entry->setField(QStringLiteral("moby-id"), QString());
+    entry->setField(QStringLiteral("platform-id"), QString());
+    return entry;
+  }
+
   // check for empty cover
   const QString image_id = entry->field(QStringLiteral("cover"));
   if(!image_id.isEmpty()) {
@@ -261,25 +274,39 @@ Tellico::Data::EntryPtr MobyGamesFetcher::fetchEntryHook(uint uid_) {
   QString coverUrl;
   doc = QJsonDocument::fromJson(data);
   map = doc.object().toVariantMap();
+  // prefer "Front Cover" but fall back to "Media"
+  QString front, media;
   QVariantList coverGroupList = map.value(QStringLiteral("cover_groups")).toList();
   foreach(const QVariant& coverGroup, coverGroupList) {
-    // just take the first cover
+    // just take the cover from the first group with front cover, appear to be grouped by country
     QVariantList coverList = coverGroup.toMap().value(QStringLiteral("covers")).toList();
-    // take the cover that is a scan of "Media" unless there is none
-    bool foundCover = false;
     foreach(const QVariant& coverVariant, coverList) {
       const QVariantMap coverMap = coverVariant.toMap();
-      if(coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Media") ||
-         coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Front Cover")) {
-        coverUrl = coverMap.value(QStringLiteral("thumbnail_image")).toString();
-        foundCover = true;
+      if(media.isEmpty() &&
+         coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Media")) {
+        if(m_imageSize == SmallImage) {
+          media = coverMap.value(QStringLiteral("thumbnail_image")).toString();
+        } else {
+          media = coverMap.value(QStringLiteral("image")).toString();
+        }
+      } else if(coverMap.value(QStringLiteral("scan_of")) == QStringLiteral("Front Cover")) {
+        if(m_imageSize == SmallImage) {
+          front = coverMap.value(QStringLiteral("thumbnail_image")).toString();
+        } else {
+          front = coverMap.value(QStringLiteral("image")).toString();
+        }
         break;
       }
     }
-    if(foundCover) {
+    if(!front.isEmpty()) {
       // no need to continue iteration through cover groups
       break;
     }
+  }
+  if(!front.isEmpty()) {
+    coverUrl = front;
+  } else {
+    coverUrl = media; // fall back to media image
   }
 
   if(!coverUrl.isEmpty()) {
@@ -502,6 +529,22 @@ MobyGamesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MobyGamesFe
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 
+  label = new QLabel(i18n("&Image size: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_imageCombo = new GUI::ComboBox(optionsWidget());
+  m_imageCombo->addItem(i18n("Small Image"), SmallImage);
+//  m_imageCombo->addItem(i18n("Medium Image"), MediumImage); // no medium right now, either thumbnail (small) or large
+  m_imageCombo->addItem(i18n("Large Image"), LargeImage);
+  m_imageCombo->addItem(i18n("No Image"), NoImage);
+  void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
+  connect(m_imageCombo, activatedInt, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_imageCombo, row, 1);
+  QString w = i18n("The cover image may be downloaded as well. However, too many large images in the "
+                   "collection may degrade performance.");
+  label->setWhatsThis(w);
+  m_imageCombo->setWhatsThis(w);
+  label->setBuddy(m_imageCombo);
+
   l->setRowStretch(++row, 10);
 
   // now add additional fields widget
@@ -509,6 +552,9 @@ MobyGamesFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MobyGamesFe
 
   if(fetcher_) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    m_imageCombo->setCurrentData(fetcher_->m_imageSize);
+  } else { // defaults
+    m_imageCombo->setCurrentData(SmallImage);
   }
 }
 
@@ -517,6 +563,8 @@ void MobyGamesFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
+  const int n = m_imageCombo->currentData().toInt();
+  config_.writeEntry("Image Size", n);
 }
 
 QString MobyGamesFetcher::ConfigWidget::preferredName() const {

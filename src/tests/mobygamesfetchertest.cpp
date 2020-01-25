@@ -68,7 +68,7 @@ void MobyGamesFetcherTest::testTitle() {
   QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo Wii"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Action; Behind view; Puzzle elements; Metroidvania; Fantasy"));
+  QVERIFY(entry->field("genre").contains(QStringLiteral("Action")));
 //  QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo of America Inc."));

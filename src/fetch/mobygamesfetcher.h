@@ -38,6 +38,9 @@ namespace KIO {
 }
 
 namespace Tellico {
+  namespace GUI {
+    class ComboBox;
+  }
   namespace Fetch {
 
 /**
@@ -82,6 +85,7 @@ public:
 
   private:
     QLineEdit* m_apiKeyEdit;
+    GUI::ComboBox* m_imageCombo;
   };
   friend class ConfigWidget;
 
@@ -98,7 +102,15 @@ private:
   Data::EntryList createEntries(Data::CollPtr coll, const QVariantMap& resultMap);
   void populateHashes();
 
+  enum ImageSize {
+    SmallImage=0, // small is really the thumb size
+    MediumImage=1,
+    LargeImage=2,
+    NoImage=3
+  };
+
   bool m_started;
+  ImageSize m_imageSize;
 
   QString m_apiKey;
   QHash<uint, Data::EntryPtr> m_entries;
