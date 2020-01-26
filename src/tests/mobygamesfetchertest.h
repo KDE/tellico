@@ -39,6 +39,7 @@ private Q_SLOTS:
   void init();
   void cleanup();
   void testTitle();
+  void testKeyword();
   void testRaw();
   void testUpdateRequest();
 

@@ -81,7 +81,7 @@ QString MobyGamesFetcher::attribution() const {
 }
 
 bool MobyGamesFetcher::canSearch(FetchKey k) const {
-  return k == Title;
+  return k == Title || k == Keyword;
 }
 
 bool MobyGamesFetcher::canFetch(int type) const {
@@ -105,6 +105,7 @@ void MobyGamesFetcher::search() {
 
 void MobyGamesFetcher::continueSearch() {
   m_started = true;
+  m_requestPlatformId = 0;
 
   if(m_apiKey.isEmpty()) {
     myDebug() << "empty API key";
@@ -122,6 +123,34 @@ void MobyGamesFetcher::continueSearch() {
   switch(request().key) {
     case Title:
       q.addQueryItem(QStringLiteral("title"), request().value);
+      break;
+
+    case Keyword:
+      {
+      // figure out if the platform is part of the search string
+      int pId = 0;
+      QString value = request().value; // resulting value
+      QString matchedPlatform;
+      // iterate over all known platforms; this doesn't seem to be too much of a performance hit
+      QHash<int, QString>::const_iterator i = m_platforms.constBegin();
+      while(i != m_platforms.constEnd()) {
+        // don't forget that some platform names are substrings of others, like Wii and WiiU
+        if(i.value().length() > matchedPlatform.length() && request().value.contains(i.value())) {
+          pId = i.key();
+          matchedPlatform = i.value();
+          QString v = request().value; // reset search value
+          v.remove(matchedPlatform); // remove platform from search value
+          value = v.simplified();
+          // can't break, because of potential substring platform name
+        }
+        ++i;
+      }
+      q.addQueryItem(QStringLiteral("title"), value);
+      if(pId > 0) {
+        m_requestPlatformId = pId;
+        q.addQueryItem(QStringLiteral("platform"), QString::number(pId));
+      }
+      }
       break;
 
     case Raw:
@@ -450,11 +479,10 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
 
   // for efficiency, check if the search includes a platform
   // since the results will include all the platforms, not just the searched one
-  int pId = 0;
   if(request().key == Raw &&
      request().value.contains(platformS)) {
     QUrlQuery q(request().value);
-    pId = q.queryItemValue(platformS).toInt();
+    m_requestPlatformId = q.queryItemValue(platformS).toInt();
   }
 
   Data::EntryList entries;
@@ -480,7 +508,7 @@ Tellico::Data::EntryList MobyGamesFetcher::createEntries(Data::CollPtr coll_, co
                        platformMap.value(QStringLiteral("platform_id")).toString());
     newEntry->setField(QStringLiteral("year"),
                        platformMap.value(QStringLiteral("first_release_date")).toString().left(4));
-    if(pId == 0 || pId == platformId) entries << newEntry;
+    if(m_requestPlatformId == 0 || m_requestPlatformId == platformId) entries << newEntry;
   }
   return entries;
 }

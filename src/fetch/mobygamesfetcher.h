@@ -126,6 +126,7 @@ private:
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
   QTime m_idleTime;
+  int m_requestPlatformId;
 
   QHash<int, QString> m_esrbHash;
   // key is the mobygames platform id

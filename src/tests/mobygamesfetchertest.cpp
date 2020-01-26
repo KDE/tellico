@@ -72,6 +72,7 @@ void MobyGamesFetcherTest::testTitle() {
   // to avoid downloading again, wait a moment
   qApp->processEvents();
 
+  // assuming the Wii result will be first
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -90,6 +91,35 @@ void MobyGamesFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
+// same search, except to include platform name in search
+// which is a Keyword search and the WiiU result should be first
+void MobyGamesFetcherTest::testKeyword() {
+  const QString groupName = QStringLiteral("MobyGames");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
+                                       QStringLiteral("Twilight Princess Nintendo WiiU"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  // since the platforms are read in the next event loop (single shot timer)
+  // to avoid downloading again, wait a moment
+  qApp->processEvents();
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2016"));
+  QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo WiiU"));
 }
 
 void MobyGamesFetcherTest::testRaw() {
