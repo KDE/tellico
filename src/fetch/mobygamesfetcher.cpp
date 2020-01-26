@@ -520,7 +520,11 @@ void MobyGamesFetcher::populateHashes() {
     foreach(const QVariant& platform, topMap.value(QStringLiteral("platforms")).toList()) {
       const QVariantMap m = platform.toMap();
       Data::GameCollection::GamePlatform pId = Data::GameCollection::guessPlatform(mapValue(m, "platform_name"));
-      if(pId != Data::GameCollection::UnknownPlatform) {
+      if(pId == Data::GameCollection::UnknownPlatform) {
+        // platform is not in the default list, just keep it as is
+        m_platforms.insert(m.value(QStringLiteral("platform_id")).toInt(),
+                           mapValue(m, "platform_name"));
+      } else {
         m_platforms.insert(m.value(QStringLiteral("platform_id")).toInt(),
                            Data::GameCollection::platformName(pId));
       }

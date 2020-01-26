@@ -165,4 +165,15 @@ void MobyGamesFetcherTest::testUpdateRequest() {
   req = fetcher.updateRequest(entry);
   QCOMPARE(req.key, Tellico::Fetch::Raw);
   QCOMPARE(req.value, QStringLiteral("title=T&platform=141"));
+
+  // test having an unknown platform
+  p = QStringLiteral("Atari 2600"); // pId = 28
+  if(!f->allowed().contains(p)) {
+    f->setAllowed(QStringList(f->allowed()) << p);
+  }
+
+  entry->setField(QStringLiteral("platform"), p);
+  req = fetcher.updateRequest(entry);
+  QCOMPARE(req.key, Tellico::Fetch::Raw);
+  QCOMPARE(req.value, QStringLiteral("title=T&platform=28"));
 }
