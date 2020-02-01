@@ -382,6 +382,7 @@
       <li xml:lang="fi">Vie BibTeX-, ONIX-, CSV-, HTML- ja muihin tiedostomuotoihin</li>
       <li xml:lang="fr">Exporte vers Bibtex, ONIX, CSV, HTML et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode exportar coleccións nos formatos Bibtex, CSV, e HTML, entre outros.</li>
+      <li xml:lang="ia">Il exporta a Bibtex, ONIX, CSV, HTML, e altere formatos</li>
       <li xml:lang="id">Pengeksporan ke format Bibtex, ONIX, CSV, HTML, dan format lain</li>
       <li xml:lang="it">Esporta in formato Bibtex, ONIX, CSV, HTML e altri</li>
       <li xml:lang="ko">Bibtex, ONIX, CSV, HTML 및 기타 형식으로 내보내기</li>
@@ -494,6 +495,7 @@
       <caption xml:lang="et">Peaaken raamatukollektsiooni kirjega</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche un élément simple au sein d'une collection de livres</caption>
       <caption xml:lang="gl">A xanela principal, mostrando un elemento sinxelo nunha colección de libros</caption>
+      <caption xml:lang="ia">Le fenestra principale monstrante un simple elemento in un collection de libros</caption>
       <caption xml:lang="id">Window utama menampilkan item sederhana dalam koleksi buku</caption>
       <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
       <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 주 창</caption>
@@ -518,6 +520,7 @@
       <caption xml:lang="et">Peaaken mängude kõrvutivaatega</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche des vues côte-à-côte d'une collection de jeux</caption>
       <caption xml:lang="gl">A xanela principal mostrando as vistas lado a lado dunha colección de xogos</caption>
+      <caption xml:lang="ia">Le fenestra principale monstrante vistas flancate de un collection de joco</caption>
       <caption xml:lang="id">Window utama menampilkan tampilan sisi ke sisi dari sebuah koleksi permainan</caption>
       <caption xml:lang="it">La finestra principale che mostra le viste affiancate di una collezione di libri</caption>
       <caption xml:lang="ko">게임 소장품을 나란히 표시하는 주 창</caption>
