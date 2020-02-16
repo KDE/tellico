@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2007-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,47 +23,134 @@
  ***************************************************************************/
 
 #include "amazonrequest.h"
-#include "hmac_sha2.h"
+#include "../tellico_debug.h"
 
 #include <QDateTime>
+#include <QCryptographicHash>
+#include <QMessageAuthenticationCode>
+
+namespace {
+  static const char* AMAZON_REQUEST = "aws4_request";
+  static const char* AMAZON_REQUEST_ALGORITHM = "AWS4-HMAC-SHA256";
+  static const char* AMAZON_REQUEST_NAMESPACE = "com.amazon.paapi5";
+  static const char* AMAZON_REQUEST_VERSION = "v1";
+  static const char* AMAZON_REQUEST_SERVICE = "ProductAdvertisingAPI";
+}
 
 using Tellico::Fetch::AmazonRequest;
 
-AmazonRequest::AmazonRequest(const QUrl& site_, const QByteArray& key_) : m_siteUrl(site_), m_key(key_) {
+AmazonRequest::AmazonRequest(const QString& accessKey_, const QString& secretKey_)
+    : m_accessKey(accessKey_.toUtf8())
+    , m_secretKey(secretKey_.toUtf8())
+    , m_method("POST")
+    , m_service(AMAZON_REQUEST_SERVICE)
+    , m_operation(SearchItems) {
+  m_amzDate = QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyyMMdd'T'hhmmss'Z'")).toUtf8();
 }
 
-QUrl AmazonRequest::signedRequest(const QMap<QString, QString>& params_) const {
-  QMap<QString, QString> allParams = params_;
-  allParams.insert(QStringLiteral("Timestamp"),
-                   QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+void AmazonRequest::setHost(const QByteArray& host_) {
+  m_host = host_;
+}
 
-  QByteArray query;
-  // has to be a map so that the query elements are sorted
-  QMapIterator<QString, QString> i(allParams);
+void AmazonRequest::setRegion(const QByteArray& region_) {
+  m_region = region_;
+}
+
+void AmazonRequest::setOperation(int op_) {
+  m_operation = static_cast<Operation>(op_);
+}
+
+QMap<QByteArray, QByteArray> AmazonRequest::headers(const QByteArray& payload_) {
+  m_headers.insert("content-encoding", "amz-1.0");
+  m_headers.insert("content-type", "application/json; charset=utf-8");
+  m_headers.insert("host", m_host);
+  m_headers.insert("x-amz-date", m_amzDate);
+  m_headers.insert("x-amz-target", targetOperation());
+
+  const QByteArray canonicalURL = prepareCanonicalRequest(payload_);
+  const QByteArray stringToSign = prepareStringToSign(canonicalURL);
+  const QByteArray signature = calculateSignature(stringToSign);
+  m_headers.insert("Authorization", buildAuthorizationString(signature));
+  return m_headers;
+}
+
+QByteArray AmazonRequest::prepareCanonicalRequest(const QByteArray& payload_) const {
+  QByteArray req = m_method + '\n'
+                 + m_path + '\n' + '\n';
+
+  m_signedHeaders.clear();
+  // a map so that the query elements are sorted
+  QMapIterator<QByteArray, QByteArray> i(m_headers);
   while(i.hasNext()) {
     i.next();
 
-    query.append(i.key().toUtf8().toPercentEncoding());
-    query.append('=');
-    query.append(i.value().toUtf8().toPercentEncoding());
-    if(i.hasNext()) {
-      query.append('&');
-    }
+    m_signedHeaders.append(i.key());
+    m_signedHeaders.append(';');
+
+    req.append(i.key());
+    req.append(':');
+    req.append(i.value());
+    req.append('\n');
   }
+  req.append('\n');
 
-  const QByteArray toSign = "GET\n"
-                          + m_siteUrl.host().toUtf8() + '\n'
-                          + m_siteUrl.path().toUtf8() + '\n'
-                          + query;
+  m_signedHeaders.chop(1); // remove final ';'
+  req.append(m_signedHeaders);
+  req.append('\n');
 
-  QByteArray hmac_buffer(SHA256_DIGEST_SIZE, '\0');
-  hmac_sha256(reinterpret_cast<unsigned char*>(const_cast<char*>(m_key.data())), m_key.length(),
-              reinterpret_cast<unsigned char*>(const_cast<char*>(toSign.data())), toSign.length(),
-              reinterpret_cast<unsigned char*>(hmac_buffer.data()), hmac_buffer.length());
-  const QByteArray sig = hmac_buffer.toBase64().toPercentEncoding();
-//  myDebug() << sig;
+//  myDebug() << req;
 
-  QUrl url = m_siteUrl;
-  url.setQuery(QString::fromLocal8Bit(query + "&Signature=" + sig));
-  return url;
+  req.append(toHexHash(payload_));
+  return req;
+}
+
+QByteArray AmazonRequest::prepareStringToSign(const QByteArray& canonicalUrl_) const {
+  QByteArray stringToSign(AMAZON_REQUEST_ALGORITHM);
+  stringToSign += '\n';
+  stringToSign += m_amzDate + '\n';
+  stringToSign += m_amzDate.left(8) + '/' + m_region + '/' + m_service + '/' + AMAZON_REQUEST + '\n';
+  stringToSign += toHexHash(canonicalUrl_);
+  return stringToSign;
+}
+
+QByteArray AmazonRequest::calculateSignature(const QByteArray& stringToSign_) const {
+  QByteArray signatureKey;
+  signatureKey = QMessageAuthenticationCode::hash(m_amzDate.left(8), "AWS4" + m_secretKey, QCryptographicHash::Sha256);
+  signatureKey = QMessageAuthenticationCode::hash(m_region, signatureKey, QCryptographicHash::Sha256);
+  signatureKey = QMessageAuthenticationCode::hash(m_service, signatureKey, QCryptographicHash::Sha256);
+  signatureKey = QMessageAuthenticationCode::hash(AMAZON_REQUEST, signatureKey, QCryptographicHash::Sha256);
+  return QMessageAuthenticationCode::hash(stringToSign_, signatureKey, QCryptographicHash::Sha256).toHex(0);
+}
+
+QByteArray AmazonRequest::buildAuthorizationString(const QByteArray& signature_) const {
+  QByteArray authString(AMAZON_REQUEST_ALGORITHM);
+  authString += ' ';
+  authString += "Credential=" + m_accessKey;
+  authString += '/' + m_amzDate.left(8) + '/' + m_region + '/' + m_service + "/" + AMAZON_REQUEST + ", ";
+  authString += "SignedHeaders=" + m_signedHeaders + ", " + "Signature=" + signature_;
+  return authString;
+}
+
+QByteArray AmazonRequest::toHexHash(const QByteArray& data_) const {
+  const QByteArray hash = QCryptographicHash::hash(data_, QCryptographicHash::Sha256);
+  return hash.toHex(0); // '0' says no separators between hex encoded characters
+}
+
+QByteArray AmazonRequest::targetOperation() const {
+  QByteArray target(AMAZON_REQUEST_NAMESPACE);
+  target.append('.');
+  target.append(AMAZON_REQUEST_VERSION);
+  target.append('.');
+  target.append(m_service);
+  target.append(AMAZON_REQUEST_VERSION);
+  target.append('.');
+  switch(m_operation) {
+    case SearchItems:
+      target.append("SearchItems");
+      break;
+    case GetItems:
+      target.append("GetItems");
+      break;
+  }
+  return target;
 }

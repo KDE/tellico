@@ -1,0 +1,9 @@
+{
+ "__type": "com.amazon.paapi5#UnrecognizedClientException",
+ "Errors": [
+  {
+   "Code": "UnrecognizedClient",
+   "Message": "The Access Key ID or security token included in the request is invalid."
+  }
+ ]
+}

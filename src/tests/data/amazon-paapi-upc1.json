@@ -1,0 +1,71 @@
+{
+ "SearchResult": {
+  "Items": [
+   {
+    "ASIN": "0545162076",
+    "DetailPageURL": "https://www.amazon.com/dp/0545162076?tag=xyz-20&linkCode=osi&th=1&psc=1",
+    "Images": {
+     "Primary": {
+      "Medium": {
+       "Height": 77,
+       "URL": "https://m.media-amazon.com/images/I/41XlFN304wL._SL160_.jpg",
+       "Width": 160
+      }
+     }
+    },
+    "ItemInfo": {
+     "ExternalIds": {
+      "EANs": {
+       "DisplayValues": [
+        "9780545162074",
+        "0717356278525"
+       ],
+       "Label": "EAN",
+       "Locale": "en_US"
+      },
+      "ISBNs": {
+       "DisplayValues": [
+        "0545162076"
+       ],
+       "Label": "ISBN",
+       "Locale": "en_US"
+      },
+      "UPCs": {
+       "DisplayValues": [
+        "717356278525"
+       ],
+       "Label": "UPC",
+       "Locale": "en_US"
+      }
+     },
+     "Title": {
+      "DisplayValue": "Harry Potter Paperback Box Set (Books 1-7)",
+      "Label": "Title",
+      "Locale": "en_US"
+     }
+    },
+    "Offers": {
+     "Listings": [
+      {
+       "Id": "7zGLRO8zMe91QhHlbpbAVXroIa09en0xXckvtOhL06HTkngu3Gk%2FfQ4SiyWuqvc9JK2OkNlK2%2FgJMc%2B8Ya8kOqXCTlTN8dfY5Kgf29kPMfw3ALaWhxIArbNDf71jc5DLqEEjNTVxMGVFU7A9v4bkSn8KpOLj3Dur",
+       "Price": {
+        "Amount": 50,
+        "Currency": "USD",
+        "DisplayAmount": "$50.00",
+        "Savings": {
+         "Amount": 36.93,
+         "Currency": "USD",
+         "DisplayAmount": "$36.93 (42%)",
+         "Percentage": 42
+        }
+       },
+       "ViolatesMAP": false
+      }
+     ]
+    }
+   }
+  ],
+  "SearchURL": "https://www.amazon.com/s?k=717356278525&rh=p_n_availability%3A-1&tag=xyz-20&linkCode=osi",
+  "TotalResultCount": 1
+ }
+}

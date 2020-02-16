@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,31 +22,34 @@
  *                                                                         *
  ***************************************************************************/
 
+#ifndef TELLICO_FETCH_MESSAGELOGGER_H
+#define TELLICO_FETCH_MESSAGELOGGER_H
+
 #include "messagehandler.h"
-#include "fetchmanager.h"
-#include "../utils/guiproxy.h"
-#include "../utils/cursorsaver.h"
 
-#include <KMessageBox>
+#include <QString>
+#include <QStringList>
 
-using Tellico::Fetch::ManagerMessage;
+namespace Tellico {
+  namespace Fetch {
 
-// default: all messages go to manager
-void ManagerMessage::send(const QString& message_, Type type_) {
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  // plus errors get a message box
-  if(type_ == Error) {
-    KMessageBox::sorry(GUI::Proxy::widget(), message_);
-//                       QString(), // caption
-//                       KMessageBox::Options(KMessageBox::Notify | KMessageBox::AllowLink));
-  } else if(type_ == Warning) {
-    KMessageBox::information(GUI::Proxy::widget(), message_);
-  } else {
-    Fetch::Manager::self()->updateStatus(message_);
-  }
-}
+/**
+ * @author Robby Stephenson
+ */
+class MessageLogger : public MessageHandler {
+public:
+  MessageLogger() : MessageHandler() {}
+  virtual ~MessageLogger() {}
 
-void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
-}
+  virtual void send(const QString& message, Type type) Q_DECL_OVERRIDE;
+  virtual void infoList(const QString& message, const QStringList& list) Q_DECL_OVERRIDE;
+
+  QStringList statusList;
+  QStringList warningList;
+  QStringList errorList;
+};
+
+  } // end namespace
+} // end namespace
+
+#endif

@@ -16,6 +16,10 @@
 
 	* Fixed bug with writing invalid XML names (Bug 418067).
 
+2020-02-15  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated Amazon data source to PA-API v5.
+
 2020-01-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved MobyGames fetcher (Bug 416718).

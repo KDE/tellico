@@ -1,6 +1,0 @@
-The following files are part of a BSD-licensed SHA-2 implementation,
-downloaded from http://www.ouah.org/ogay/hmac/ on 21 August 2009
-  sha2.h
-  sha2.c
-  hmac_sha2.h
-  hmac_sha2.c

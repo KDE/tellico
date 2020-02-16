@@ -65,8 +65,9 @@ namespace Tellico {
   QString fromHtmlData(const QByteArray& data, const char* codecName = nullptr);
 
   // helper methods for the QVariantMaps used by the JSON importers
-  QString mapValue(const QVariantMap& map, const char* object);
-  QString mapValue(const QVariantMap& map, const char* object, const char* name);
+  QString mapValue(const QVariantMap& map, const char* name1);
+  QString mapValue(const QVariantMap& map, const char* name1, const char* name2);
+  QString mapValue(const QVariantMap& map, const char* name1, const char* name2, const char* name3);
 
   QByteArray obfuscate(const QString& string);
   QString reverseObfuscate(const QByteArray& bytes);

@@ -476,8 +476,7 @@ TARGET_LINK_LIBRARIES(allocinefetchertest
 add_executable(amazonfetchertest amazonfetchertest.cpp abstractfetchertest.cpp
   ../fetch/amazonfetcher.cpp
   ../fetch/amazonrequest.cpp
-  ../fetch/hmac_sha2.c
-  ../fetch/sha2.c
+  ../fetch/messagelogger.cpp
 )
 ecm_mark_nongui_executable(amazonfetchertest)
 add_test(amazonfetchertest amazonfetchertest)

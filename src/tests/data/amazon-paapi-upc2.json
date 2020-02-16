@@ -1,0 +1,126 @@
+{
+ "SearchResult": {
+  "Items": [
+   {
+    "ASIN": "0545162076",
+    "DetailPageURL": "https://www.amazon.com/dp/0545162076?tag=xyz-20&linkCode=osi&th=1&psc=1",
+    "Images": {
+     "Primary": {
+      "Medium": {
+       "Height": 77,
+       "URL": "https://m.media-amazon.com/images/I/41XlFN304wL._SL160_.jpg",
+       "Width": 160
+      }
+     }
+    },
+    "ItemInfo": {
+     "ExternalIds": {
+      "EANs": {
+       "DisplayValues": [
+        "9780545162074",
+        "0717356278525"
+       ],
+       "Label": "EAN",
+       "Locale": "en_US"
+      },
+      "ISBNs": {
+       "DisplayValues": [
+        "0545162076"
+       ],
+       "Label": "ISBN",
+       "Locale": "en_US"
+      },
+      "UPCs": {
+       "DisplayValues": [
+        "717356278525"
+       ],
+       "Label": "UPC",
+       "Locale": "en_US"
+      }
+     },
+     "Title": {
+      "DisplayValue": "Harry Potter Paperback Box Set (Books 1-7)",
+      "Label": "Title",
+      "Locale": "en_US"
+     }
+    },
+    "Offers": {
+     "Listings": [
+      {
+       "Id": "l3%2BVAIBi5OEt4atOWHgG01NT%2Bv7Qe%2Fr3y9WgD2WAjbhh%2BEDQ34Dd8dr6sRxEcTZz0bCliYKn2jRSNrcgq7%2BoTxvqWYYUesorAwZaqAGUVG7a6dJVjEF2BA%3D%3D",
+       "Price": {
+        "Amount": 39.74,
+        "Currency": "USD",
+        "DisplayAmount": "$39.74",
+        "Savings": {
+         "Amount": 47.19,
+         "Currency": "USD",
+         "DisplayAmount": "$47.19 (54%)",
+         "Percentage": 54
+        }
+       },
+       "ViolatesMAP": false
+      }
+     ]
+    }
+   },
+   {
+    "ASIN": "B075JSK7TR",
+    "DetailPageURL": "https://www.amazon.com/dp/B075JSK7TR?tag=xyz-20&linkCode=osi&th=1&psc=1",
+    "Images": {
+     "Primary": {
+      "Medium": {
+       "Height": 130,
+       "URL": "https://m.media-amazon.com/images/I/51TxM4dNYhL._SL160_.jpg",
+       "Width": 160
+      }
+     }
+    },
+    "ItemInfo": {
+     "ExternalIds": {
+      "EANs": {
+       "DisplayValues": [
+        "0842776102270"
+       ],
+       "Label": "EAN",
+       "Locale": "en_US"
+      },
+      "UPCs": {
+       "DisplayValues": [
+        "842776102270"
+       ],
+       "Label": "UPC",
+       "Locale": "en_US"
+      }
+     },
+     "Title": {
+      "DisplayValue": "Google Pixelbook (i5, 8 GB RAM, 128GB) (GA00122-US)",
+      "Label": "Title",
+      "Locale": "en_US"
+     }
+    },
+    "Offers": {
+     "Listings": [
+      {
+       "Id": "l3%2BVAIBi5OEiajSVNFFu3E5Iu%2F86pP8tJMgoUu38Mt%2Fvrczl8wlgSwkD6EAXdcKVMgD3eb7EIfaS9LLhEBZPQjSiEqcFpBEnk%2F3D%2FPY0skqahzVWRRdH0Mzh73bDSRaGYRjsyH8rEOAQN5cYVZO%2FI%2B9v3QuaAh9M",
+       "Price": {
+        "Amount": 949.99,
+        "Currency": "USD",
+        "DisplayAmount": "$949.99",
+        "Savings": {
+         "Amount": 49.01,
+         "Currency": "USD",
+         "DisplayAmount": "$49.01 (5%)",
+         "Percentage": 5
+        }
+       },
+       "ViolatesMAP": false
+      }
+     ]
+    }
+   }
+  ],
+  "SearchURL": "https://www.amazon.com/s?k=717356278525%7C842776102270&rh=p_n_availability%3A-1&tag=xyz-20&linkCode=osi",
+  "TotalResultCount": 2
+ }
+}

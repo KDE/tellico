@@ -4,7 +4,6 @@ ADD_SUBDIRECTORY( report-templates )
 ########### install files ###############
 
 SET(XSLT_FILES
-    amazon2tellico.xsl
     arxiv2tellico.xsl
     biblioshare2tellico.xsl
     bibtexml2tellico.xsl
