@@ -45,7 +45,6 @@ public:
     }
   }
   bool has(const QString& val) const { return contains(val); }
-  QStringList toList() const { return QSet<QString>::toList(); }
 };
 
 }
