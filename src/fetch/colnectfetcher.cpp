@@ -268,7 +268,7 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   }
   QVariantList resultList = doc.array().toVariantList();
   if(resultList.isEmpty()) {
-    myDebug() << "no results";
+//    myDebug() << "no results";
     stop();
     return;
   }
@@ -327,7 +327,9 @@ void ColnectFetcher::slotComplete(KJob* job_) {
     //list action - returns array of [item_id,series_id,producer_id,front_picture_id, back_picture_id,item_description,catalog_codes,item_name]
     const QVariantList values = result.toJsonArray().toVariantList();
     entry->setField(QStringLiteral("colnect-id"), values.first().toString());
-    entry->setField(QStringLiteral("description"), values.last().toString());
+    if(optionalFields().contains(desc)) {
+      entry->setField(desc, values.last().toString());
+    }
     entry->setField(QStringLiteral("year"), m_year);
 
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
