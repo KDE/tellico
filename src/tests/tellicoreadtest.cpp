@@ -258,7 +258,7 @@ void TellicoReadTest::testLocalImage() {
 
 void TellicoReadTest::testRemoteImage() {
   // this is the md5 hash of the logo.png icon, used as an image id
-  const QString imageId(QSL("757322046f4aa54290a3d92b05b71ca1.png"));
+  const QString imageId(QSL("ecaf5185c4016881aaabb4933211d5d6.png"));
   // not yet loaded
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInMemory(imageId));
   QVERIFY(!Tellico::ImageFactory::self()->hasImageInfo(imageId));
@@ -272,7 +272,7 @@ void TellicoReadTest::testRemoteImage() {
   QString fileText = in.readAll();
   // replace %COVER% with image file location
   fileText.replace(QSL("%COVER%"),
-                   QSL("https://tellico-project.org/sites/default/files/logo.png"));
+                   QSL("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
 
   Tellico::Import::TellicoImporter importer(fileText);
   Tellico::Data::CollPtr coll = importer.collection();
