@@ -70,7 +70,7 @@ bool TellicoXMLHandler::characters(const QString& ch_) {
 }
 
 QString TellicoXMLHandler::errorString() const {
-  return m_data->error;
+  return m_errorString.isEmpty() ? m_data->error : m_errorString;
 }
 
 Tellico::Data::CollPtr TellicoXMLHandler::collection() const {
@@ -87,4 +87,12 @@ void TellicoXMLHandler::setLoadImages(bool loadImages_) {
 
 void TellicoXMLHandler::setShowImageLoadErrors(bool showImageErrors_) {
   m_data->showImageLoadErrors = showImageErrors_;
+}
+
+bool TellicoXMLHandler::fatalError(const QXmlParseException& exception_) {
+  m_errorString = QString::fromLatin1("Fatal parsing error: %1 in line %2, column %3")
+                  .arg(exception_.message())
+                  .arg(exception_.lineNumber())
+                  .arg(exception_.columnNumber());
+  return false;
 }

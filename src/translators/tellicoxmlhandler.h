@@ -51,9 +51,12 @@ public:
   void setLoadImages(bool loadImages);
   void setShowImageLoadErrors(bool showImageErrors);
 
+  bool fatalError(const QXmlParseException& exception) Q_DECL_OVERRIDE;
+
 private:
   QStack<SAX::StateHandler*> m_handlers;
   SAX::StateData* m_data;
+  QString m_errorString;
 };
 
   }
