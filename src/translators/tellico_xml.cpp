@@ -79,7 +79,7 @@ QString Tellico::XML::dtdTellico(int version) {
 }
 
 bool Tellico::XML::validXMLElementName(const QString& name_) {
-  return xmlValidateNameValue((xmlChar *)name_.toUtf8().data());
+  return xmlValidateNCName((xmlChar *)name_.toUtf8().data(), 0) == 0;
 }
 
 QString Tellico::XML::elementName(const QString& name_) {

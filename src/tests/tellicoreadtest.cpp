@@ -333,7 +333,7 @@ void TellicoReadTest::testXmlName_data() {
   // an empty string is handled in CollectionFieldsDialog when creating the field name
   QTest::newRow("42")     << false << QSL("42")     << QString();
   QTest::newRow("she is") << false << QSL("she is") << QSL("she-is");
-  QTest::newRow("colon:") << true  << QSL("colon:") << QSL("colon:");
+  QTest::newRow("colon:") << false << QSL("colon:") << QSL("colon");
   QTest::newRow("Svět")   << true  << QSL("Svět")   << QSL("Svět");
   QTest::newRow("<test>") << false << QSL("<test>") << QSL("test");
 }
