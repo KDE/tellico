@@ -369,4 +369,6 @@ void TellicoReadTest::testBug418067() {
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
+  QVERIFY(coll->hasField(QSL("lc-no.")));
+  QVERIFY(coll->hasField(QSL("mein-wunschpreis-")));
 }
