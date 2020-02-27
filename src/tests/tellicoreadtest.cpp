@@ -358,6 +358,8 @@ void TellicoReadTest::testRecoverXmlName_data() {
                            << QByteArray("<fields><field name=\"nr\" d=\"d\"/></fields><nr>x</nr>");
   QTest::newRow("<nr:>3")  << QByteArray("<fields><field name=\"nr:\"/></fields><nr:s><nr:>x</nr:></nr:s>")
                            << QByteArray("<fields><field name=\"nr\"/></fields><nrs><nr>x</nr></nrs>");
+  QTest::newRow("<nr:>4")  << QByteArray("<fields><field d=\"nr:\" name=\"nr:\" d=\"nr:\"/></fields><nr:>x</nr:>")
+                           << QByteArray("<fields><field d=\"nr:\" name=\"nr\" d=\"nr:\"/></fields><nr>x</nr>");
   QTest::newRow("<is-€:>") << QByteArray("<fields><field name=\"is-€:\"/></fields><is-€:>x</is-€:>")
                            << QByteArray("<fields><field name=\"is-\"/></fields><is->x</is->");
 }

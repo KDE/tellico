@@ -153,7 +153,9 @@ QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
                             newName.toUtf8().prepend('<').append("s>"));
       badNames += qMakePair(fieldName.toUtf8().prepend("</").append("s>"),
                             newName.toUtf8().prepend("</").append("s>"));
-      newFieldsSection.replace(fieldName, newName);
+      // the bad name might be in the description attribute which is fine, leave it alone
+      newFieldsSection.replace(QStringLiteral("name=\"") + fieldName,
+                               QStringLiteral("name=\"") + newName);
     }
   }
 
