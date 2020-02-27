@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="11">
+ <collection title="Meine Musik" type="4">
+  <fields>
+   <field name="nr.:" title="Nr." description="Medien-Nr." category="Allgemein" flags="7" format="4" type="6"/>
+   <field name="id" title="ID" category="Allgemein" flags="32" format="4" type="1">
+    <prop name="template">%{@id}</prop>
+   </field>
+   <field name="veräußern" title="zu veräußern?" allowed="ja;nein;vielleicht;später ?;noch nicht" description="New Field 1" category="Veräußern" flags="2" format="4" type="3"/>
+   <field name="lc-no.:" title="LC-No.:" description="Neues Feld 1" category="Veräußern" flags="0" format="4" type="1"/>
+   <field name="q-hörtest" title="Q-Hörtest" description="Neues Feld 1" category="Veräußern" flags="0" format="4" type="1"/>
+   <field name="mein-wunschpreis-€:" title="mein Wunschpreis (€):" description="Neues Feld 1" category="Veräußern" flags="0" format="4" type="6"/>
+  </fields>
+  <entry id="2">
+   <nr.:s>
+    <nr.:>9999</nr.:>
+   </nr.:s>
+   <veräußern>ja</veräußern>
+   <lc-no.:>7717</lc-no.:>
+   <q-hörtest>test</q-hörtest>
+   <mein-wunschpreis-€:>5</mein-wunschpreis-€:>
+  </entry>
+ </collection>
+</tellico>

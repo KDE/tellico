@@ -1,3 +1,7 @@
+2020-02-26  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with writing invalid XML names (Bug 418067).
+
 2020-01-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved MobyGames fetcher (Bug 416718).

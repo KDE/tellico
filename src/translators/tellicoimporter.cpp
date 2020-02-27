@@ -131,6 +131,17 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
     success = reader.parseContinue();
+    if(!success) {
+      // could be bug 418067 where version of Tellico < 3.3 could use invalid XML names
+      // try to recover. If it's not a bad field name, this should be a pretty quick check
+      myDebug() << "XML parsing failed. Attempting to recover.";
+      const QByteArray newData = XML::recoverFromBadXMLName(data_);
+      if(newData.length() < data_.length()) {
+        myDebug() << "Reloading the XML data.";
+        loadXMLData(newData, loadImages_);
+        return;
+      }
+    }
     pos += blockSize;
     if(thisPtr && showProgress) {
       emit signalProgress(this, pos);

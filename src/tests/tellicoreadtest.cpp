@@ -27,6 +27,7 @@
 #include "../translators/tellicoimporter.h"
 #include "../collections/bookcollection.h"
 #include "../collections/coincollection.h"
+#include "../collections/musiccollection.h"
 #include "../collectionfactory.h"
 #include "../translators/tellicoxmlexporter.h"
 #include "../translators/tellico_xml.h"
@@ -48,6 +49,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::BookCollection> registerBook(Tellico::Data::Collection::Book, "book");
   Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerCoin(Tellico::Data::Collection::Coin, "coin");
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
+  Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
 
   for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
     QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/books-format%1.bc").arg(i)));
@@ -336,4 +338,35 @@ void TellicoReadTest::testXmlName_data() {
   QTest::newRow("colon:") << false << QSL("colon:") << QSL("colon");
   QTest::newRow("Svět")   << true  << QSL("Svět")   << QSL("Svět");
   QTest::newRow("<test>") << false << QSL("<test>") << QSL("test");
+  QTest::newRow("is-€:")  << false << QSL("is-€:")  << QSL("is-");
+}
+
+void TellicoReadTest::testRecoverXmlName() {
+  QFETCH(QByteArray, input);
+  QFETCH(QByteArray, modified);
+
+  QCOMPARE(Tellico::XML::recoverFromBadXMLName(input), modified);
+}
+
+void TellicoReadTest::testRecoverXmlName_data() {
+  QTest::addColumn<QByteArray>("input");
+  QTest::addColumn<QByteArray>("modified");
+
+  QTest::newRow("<nr:>")   << QByteArray("<fields><field name=\"nr:\"/></fields><nr:>x</nr:>")
+                           << QByteArray("<fields><field name=\"nr\"/></fields><nr>x</nr>");
+  QTest::newRow("<nr:>2")  << QByteArray("<fields><field name=\"nr:\" d=\"d\"/></fields><nr:>x</nr:>")
+                           << QByteArray("<fields><field name=\"nr\" d=\"d\"/></fields><nr>x</nr>");
+  QTest::newRow("<nr:>3")  << QByteArray("<fields><field name=\"nr:\"/></fields><nr:s><nr:>x</nr:></nr:s>")
+                           << QByteArray("<fields><field name=\"nr\"/></fields><nrs><nr>x</nr></nrs>");
+  QTest::newRow("<is-€:>") << QByteArray("<fields><field name=\"is-€:\"/></fields><is-€:>x</is-€:>")
+                           << QByteArray("<fields><field name=\"is-\"/></fields><is->x</is->");
+}
+
+void TellicoReadTest::testBug418067() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/bug418067.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
 }

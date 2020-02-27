@@ -23,6 +23,7 @@
  ***************************************************************************/
 
 #include "tellico_xml.h"
+#include "../tellico_debug.h"
 
 #include <libxml/parserInternals.h> // needed for IS_LETTER
 #include <libxml/parser.h> // has to be before valid.h
@@ -111,4 +112,62 @@ QString Tellico::XML::elementName(const QString& name_) {
     }
   }
   return name;
+}
+
+QByteArray Tellico::XML::recoverFromBadXMLName(const QByteArray& data_) {
+  // this is going to be ugly (Bug 418067)
+  // Do a rough parse of the data, grab the field names, determine which ones are invalid
+  // then search/replace to recover. Let's assume the XML format is as written directly from Tellico
+  // so don't worry about attribute order within the field elements
+  const int fieldsEnd = data_.indexOf("</fields>");
+  if(fieldsEnd == -1) {
+//    myDebug() << "no fields end";
+    return data_;
+  }
+
+  QByteArray newData = data_;
+
+  typedef QPair<QByteArray, QByteArray> ByteArrayPair;
+  // keep a list of pairs to replace
+  QList<ByteArrayPair> badNames;
+  // an expensive conversion, but have to convert to a string
+  const QString fieldsSection = QString::fromUtf8(data_.left(fieldsEnd));
+  QString newFieldsSection = fieldsSection;
+  QRegularExpression fieldNameRX(QStringLiteral("<field .*?name=\"(.+?)\".*?>"));
+  QRegularExpressionMatchIterator i = fieldNameRX.globalMatch(fieldsSection);
+  while(i.hasNext()) {
+    QRegularExpressionMatch match = i.next();
+    const QString fieldName = match.captured(1);
+    if(!validXMLElementName(fieldName)) {
+      const QString newName = elementName(fieldName);
+      if(newName.isEmpty()) {
+        return data_;
+      }
+      myDebug() << "Bad name is" << fieldName << "; Good name is" << newName;
+      badNames += qMakePair(fieldName.toUtf8().prepend('<').append('>'),
+                            newName.toUtf8().prepend('<').append('>'));
+      badNames += qMakePair(fieldName.toUtf8().prepend("</").append('>'),
+                            newName.toUtf8().prepend("</").append('>'));
+      // also have to check for plurals
+      badNames += qMakePair(fieldName.toUtf8().prepend('<').append("s>"),
+                            newName.toUtf8().prepend('<').append("s>"));
+      badNames += qMakePair(fieldName.toUtf8().prepend("</").append("s>"),
+                            newName.toUtf8().prepend("</").append("s>"));
+      newFieldsSection.replace(fieldName, newName);
+    }
+  }
+
+  // if there are no fields to replace, we're done
+  if(badNames.isEmpty()) {
+    return data_;
+  }
+
+  // swap out the new fields header
+  newData.replace(0, fieldsEnd, newFieldsSection.toUtf8());
+
+  foreach(const ByteArrayPair& ii, badNames) {
+//    myDebug() << "Replacing" << ii.first << "with" << ii.second;
+    newData.replace(ii.first, ii.second);
+  }
+  return newData;
 }

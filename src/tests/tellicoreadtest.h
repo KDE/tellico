@@ -50,6 +50,9 @@ private Q_SLOTS:
   void testXMLHandler_data();
   void testXmlName();
   void testXmlName_data();
+  void testRecoverXmlName();
+  void testRecoverXmlName_data();
+  void testBug418067();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
