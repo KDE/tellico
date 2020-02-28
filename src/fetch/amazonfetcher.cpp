@@ -896,18 +896,19 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
 
 void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   // assume that everything in brackets or parentheses is extra
-  QRegExp rx(QLatin1String("[\\(\\[](.*)[\\)\\]]"));
-  rx.setMinimal(true);
+  static const QRegularExpression rx(QLatin1String("[\\(\\[](.*?)[\\)\\]]"));
   QString title = entry_->field(QStringLiteral("title"));
-  int pos = rx.indexIn(title);
-  while(pos > -1) {
-    if(parseTitleToken(entry_, rx.cap(1))) {
-      title.remove(pos, rx.matchedLength());
+  int pos = 0;
+  QRegularExpressionMatch match = rx.match(title, pos);
+  while(match.hasMatch()) {
+    pos = match.capturedStart();
+    if(parseTitleToken(entry_, match.captured(1))) {
+      title.remove(match.capturedStart(), match.capturedLength());
       --pos; // search again there
     }
-    pos = rx.indexIn(title, pos+1);
+    match = rx.match(title, pos+1);
   }
-  entry_->setField(QStringLiteral("title"), title.trimmed());
+  entry_->setField(QStringLiteral("title"), title.simplified());
 }
 
 bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QString& token_) {
@@ -948,9 +949,10 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
-  static QRegExp regionRx(QLatin1String("Region [1-9]"));
-  if(regionRx.indexIn(token_) > -1) {
-    entry_->setField(QStringLiteral("region"), i18n(regionRx.cap(0).toUtf8().constData()));
+  static const QRegularExpression regionRx(QLatin1String("Region [1-9]"));
+  QRegularExpressionMatch match = regionRx.match(token_);
+  if(match.hasMatch()) {
+    entry_->setField(QStringLiteral("region"), i18n(match.captured().toUtf8().constData()));
     res = true;
   }
   if(entry_->collection()->type() == Data::Collection::Game) {

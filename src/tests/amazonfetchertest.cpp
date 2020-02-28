@@ -535,5 +535,23 @@ void AmazonFetcherTest::testNoAuthor() {
   QCOMPARE(entry->field("pages"), QStringLiteral("224"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2013"));
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/1921878657?tag=bookie09-20&linkCode=ogi&th=1&psc=1"));
   QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
+}
+
+void AmazonFetcherTest::testTitleParsing() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("title1 [DVD] (Widescreen) (NTSC) [Region 1]"));
+
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+
+  f->parseTitle(entry);
+  // the fetcher leaves widescreen in the title but adds the field value
+  QCOMPARE(entry->field("title"), QStringLiteral("title1 (Widescreen)"));
+  QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
+  QCOMPARE(entry->field("widescreen"), QStringLiteral("true"));
+  QCOMPARE(entry->field("format"), QStringLiteral("NTSC"));
+  QCOMPARE(entry->field("region"), QStringLiteral("Region 1"));
 }

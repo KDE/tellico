@@ -49,6 +49,7 @@ private Q_SLOTS:
   void testUpc1();
   void testUpc2();
   void testNoAuthor();
+  void testTitleParsing();
 
 private:
   bool m_hasConfigFile;
