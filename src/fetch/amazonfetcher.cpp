@@ -347,6 +347,9 @@ void AmazonFetcher::slotComplete(KJob*) {
     return;
   }
   QJsonObject resultObject = databject.value(QStringLiteral("SearchResult")).toObject();
+  if(resultObject.isEmpty()) {
+    resultObject = databject.value(QStringLiteral("ItemsResult")).toObject();
+  }
 
   if(m_total == -1) {
     int totalResults = resultObject.value(QStringLiteral("TotalResultCount")).toInt();
@@ -847,12 +850,29 @@ Tellico::Data::CollPtr AmazonFetcher::createCollection() {
 }
 
 void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info_) {
-  QVariantMap infoMap = info_.value(QLatin1String("ItemInfo")).toObject().toVariantMap();
-  entry_->setField(QStringLiteral("title"), mapValue(infoMap, "Title", "DisplayValue"));
-  const QString isbn = mapValue(infoMap, "ExternalIds", "ISBNs", "DisplayValues");
+  QVariantMap itemMap = info_.value(QLatin1String("ItemInfo")).toObject().toVariantMap();
+  entry_->setField(QStringLiteral("title"), mapValue(itemMap, "Title", "DisplayValue"));
+  const QString isbn = mapValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
   if(!isbn.isEmpty()) {
     entry_->setField(QStringLiteral("isbn"), isbn);
   }
+
+  QVariantMap contentMap = itemMap.value(QLatin1String("ContentInfo")).toMap();
+  entry_->setField(QStringLiteral("pages"), mapValue(contentMap, "PagesCount", "DisplayValue"));
+  const QString pubDate = mapValue(contentMap, "PublicationDate", "DisplayValue");
+  if(!pubDate.isEmpty()) {
+    entry_->setField(QStringLiteral("pub_year"), pubDate.left(4));
+  }
+  QVariantList langArray = itemMap.value(QLatin1String("ContentInfo")).toMap()
+                                  .value(QStringLiteral("Languages")).toMap()
+                                  .value(QStringLiteral("DisplayValues")).toList();
+  QStringList langs;
+  foreach(const QVariant& v, langArray) {
+    langs += mapValue(v.toMap(), "DisplayValue");
+  }
+  langs.removeDuplicates();
+  langs.removeAll(QString());
+  entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
 
   QVariantMap imagesMap = info_.value(QLatin1String("Images")).toObject().toVariantMap();
   switch(m_imageSize) {

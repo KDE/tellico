@@ -490,7 +490,7 @@ void AmazonFetcherTest::testUpc2() {
   fetcher->readConfig(cg, cg.name());
 
   QByteArray payload = f->requestPayload(request);
-  // verify the formatof the multiple UPC keyword
+  // verify the format of the multiple UPC keyword
   QVERIFY(payload.contains("\"Keywords\":\"717356278525|842776102270\""));
 
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-upc2.json");
@@ -505,4 +505,35 @@ void AmazonFetcherTest::testUpc2() {
   QCOMPARE(entry->field("isbn"), QStringLiteral("0545162076"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
+// from https://github.com/dkam/paapi/blob/master/test/data/get_item_no_author.json
+void AmazonFetcherTest::testNoAuthor() {
+  QString groupName = QStringLiteral("Amazon US");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525; 842776102270");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  cg.writeEntry("Image Size", 0);
+  cg.markAsClean();
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-no-author.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Muscle Car Mania: 100 legendary Australian motoring stories (Motoring Series)"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1921878657"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("224"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2013"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
 }
