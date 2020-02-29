@@ -50,6 +50,20 @@ void TheGamesDBFetcherTest::initTestCase() {
   m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Nintendo"));
   m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Rare, Ltd."));
   m_fieldValues.insert(QStringLiteral("num-player"), QStringLiteral("4"));
+
+  // need to delete cached data
+  QFile genreFile(Tellico::Fetch::TheGamesDBFetcher::dataFileName(Tellico::Fetch::TheGamesDBFetcher::Genre));
+  if(genreFile.exists()) {
+    genreFile.remove();
+  }
+  QFile publisherFile(Tellico::Fetch::TheGamesDBFetcher::dataFileName(Tellico::Fetch::TheGamesDBFetcher::Publisher));
+  if(publisherFile.exists()) {
+    publisherFile.remove();
+  }
+  QFile developerFile(Tellico::Fetch::TheGamesDBFetcher::dataFileName(Tellico::Fetch::TheGamesDBFetcher::Developer));
+  if(developerFile.exists()) {
+    developerFile.remove();
+  }
 }
 
 void TheGamesDBFetcherTest::testTitle() {

@@ -38,6 +38,7 @@ namespace KIO {
   class StoredTransferJob;
 }
 
+class TheGamesDBFetcherTest;
 namespace Tellico {
   namespace GUI {
     class ComboBox;
@@ -52,6 +53,8 @@ namespace Tellico {
  */
 class TheGamesDBFetcher : public Fetcher {
 Q_OBJECT
+
+friend class ::TheGamesDBFetcherTest;
 
 public:
   /**

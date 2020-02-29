@@ -409,7 +409,6 @@ void TheGamesDBFetcher::loadCachedData() {
 }
 
 void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jsonData_) {
-  const QString dataString = QStringLiteral("data");
   QString dataName;
   switch(dataType_) {
     case Genre:
@@ -425,8 +424,8 @@ void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jso
 
   QHash<int, QString> dataHash;
   const QVariantMap topMap = QJsonDocument::fromJson(jsonData_).object().toVariantMap();
-  const QVariantMap resultMap = topMap.value(dataString).toMap()
-                                        .value(dataName).toMap();
+  const QVariantMap resultMap = topMap.value(QStringLiteral("data")).toMap()
+                                      .value(dataName).toMap();
   for(QMapIterator<QString, QVariant> i(resultMap); i.hasNext(); ) {
     i.next();
     const QVariantMap m = i.value().toMap();
@@ -449,6 +448,7 @@ void TheGamesDBFetcher::updateData(TgdbDataType dataType_, const QByteArray& jso
 
 void TheGamesDBFetcher::readDataList(TgdbDataType dataType_) {
   QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));
+  u.setPath(QLatin1String("/v") + QLatin1String(THEGAMESDB_API_VERSION));
   switch(dataType_) {
     case Genre:
       u.setPath(u.path() + QLatin1String("/Genres"));
