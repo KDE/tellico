@@ -1,3 +1,4 @@
+ISBNdb.net API v2 (Bug 415883)
 anidb.net
 Douban
  * Implement multiple ISBN search and continued searching (for more than 20 results)
