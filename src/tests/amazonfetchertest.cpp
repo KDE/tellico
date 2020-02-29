@@ -508,21 +508,19 @@ void AmazonFetcherTest::testUpc2() {
 }
 
 // from https://github.com/dkam/paapi/blob/master/test/data/get_item_no_author.json
-void AmazonFetcherTest::testNoAuthor() {
-  QString groupName = QStringLiteral("Amazon US");
+void AmazonFetcherTest::testBasicBook() {
+  QString groupName = QStringLiteral("Amazon UK");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
   KConfigGroup cg(&m_config, groupName);
 
-  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525; 842776102270");
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  cg.writeEntry("Image Size", 0);
-  cg.markAsClean();
   fetcher->readConfig(cg, cg.name());
 
-  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-no-author.json");
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-book.json");
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -531,6 +529,10 @@ void AmazonFetcherTest::testNoAuthor() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("Muscle Car Mania: 100 legendary Australian motoring stories (Motoring Series)"));
+  QCOMPARE(entry->field("author"), QStringLiteral("No Author"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Rockpool Publishing"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("Slp"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("1921878657"));
   QCOMPARE(entry->field("pages"), QStringLiteral("224"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));

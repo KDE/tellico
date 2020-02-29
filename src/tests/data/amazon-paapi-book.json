@@ -18,7 +18,7 @@
             "Contributors": [
               {
                 "Locale": "en_US",
-                "Name": "",
+                "Name": "No Author",
                 "Role": "Author"
               }
             ],
@@ -29,6 +29,11 @@
             }
           },
           "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Slp",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
             "Languages": {
               "DisplayValues": [
                 {
@@ -112,6 +117,15 @@
               "DisplayValue": 1,
               "Label": "NumberOfItems",
               "Locale": "en_US"
+            }
+          },
+          "TechnicalInfo": {
+            "Formats": {
+              "DisplayValues": [
+                  "Paperback"
+                ],
+              "Label": "Format",
+              "Locale": "en_GB"
             }
           },
           "Title": {

@@ -671,6 +671,9 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
 
   QJsonArray resources;
   resources.append(QLatin1String("ItemInfo.Title"));
+  resources.append(QLatin1String("ItemInfo.ContentInfo"));
+  resources.append(QLatin1String("ItemInfo.ByLineInfo"));
+  resources.append(QLatin1String("ItemInfo.TechnicalInfo"));
 
   const int type = request_.collectionType;
   switch(type) {
@@ -679,6 +682,7 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
     case Data::Collection::Bibtex:
       payload.insert(QLatin1String("SearchIndex"), QLatin1String("Books"));
       resources.append(QLatin1String("ItemInfo.ExternalIds"));
+      resources.append(QLatin1String("ItemInfo.ManufactureInfo"));
       break;
 
     case Data::Collection::Album:
@@ -695,6 +699,7 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
         payload.insert(QStringLiteral("SearchIndex"), QStringLiteral("Video"));
       }
 //      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
+      resources.append(QLatin1String("ItemInfo.ContentRating"));
       break;
 
     case Data::Collection::Game:
@@ -857,7 +862,59 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
     entry_->setField(QStringLiteral("isbn"), isbn);
   }
 
+  QStringList actors, artists, authors, illustrators, publishers;
+  QVariantMap byLineMap = itemMap.value(QLatin1String("ByLineInfo")).toMap();
+  QVariantList contribArray = byLineMap.value(QLatin1String("Contributors")).toList();
+  foreach(const QVariant& v, contribArray) {
+    const QVariantMap contribMap = v.toMap();
+    const QString role = contribMap.value(QLatin1String("Role")).toString();
+    const QString name = contribMap.value(QLatin1String("Name")).toString();
+    if(role == QLatin1String("Actor")) {
+      actors += name;
+    } else if(role == QLatin1String("Artist")) {
+      artists += name;
+    } else if(role == QLatin1String("Author")) {
+      authors += name;
+    } else if(role == QLatin1String("Illustrator")) {
+      illustrators += name;
+    } else if(role == QLatin1String("Publisher")) {
+      publishers += name;
+    }
+  }
+  // assume for books that the manufacturer is the publishers
+  if(collectionType() == Data::Collection::Book ||
+     collectionType() == Data::Collection::Bibtex ||
+     collectionType() == Data::Collection::ComicBook) {
+    const QString manufacturer = byLineMap.value(QLatin1String("Manufacturer")).toMap()
+                                          .value(QLatin1String("DisplayValue")).toString();
+    publishers += manufacturer;
+  }
+
+  actors.removeDuplicates();
+  artists.removeDuplicates();
+  authors.removeDuplicates();
+  illustrators.removeDuplicates();
+  publishers.removeDuplicates();
+
+
+  if(!actors.isEmpty()) {
+    entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::delimiterString()));
+  }
+  if(!artists.isEmpty()) {
+    entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
+  }
+  if(!authors.isEmpty()) {
+    entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
+  }
+  if(!illustrators.isEmpty()) {
+    entry_->setField(QStringLiteral("illustrator"), illustrators.join(FieldFormat::delimiterString()));
+  }
+  if(!publishers.isEmpty()) {
+    entry_->setField(QStringLiteral("publisher"), publishers.join(FieldFormat::delimiterString()));
+  }
+
   QVariantMap contentMap = itemMap.value(QLatin1String("ContentInfo")).toMap();
+  entry_->setField(QStringLiteral("edition"), mapValue(contentMap, "Edition", "DisplayValue"));
   entry_->setField(QStringLiteral("pages"), mapValue(contentMap, "PagesCount", "DisplayValue"));
   const QString pubDate = mapValue(contentMap, "PublicationDate", "DisplayValue");
   if(!pubDate.isEmpty()) {
@@ -873,6 +930,13 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   langs.removeDuplicates();
   langs.removeAll(QString());
   entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
+
+  QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
+  if(collectionType() == Data::Collection::Book ||
+     collectionType() == Data::Collection::Bibtex ||
+     collectionType() == Data::Collection::ComicBook) {
+    entry_->setField(QStringLiteral("binding"), mapValue(technicalMap, "Formats", "DisplayValues"));
+  }
 
   QVariantMap imagesMap = info_.value(QLatin1String("Images")).toObject().toVariantMap();
   switch(m_imageSize) {
