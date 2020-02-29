@@ -1,3 +1,7 @@
+2020-02-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated data source endpoint for TheGamesDB.net.
+
 2020-02-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with writing invalid XML names (Bug 418067).
