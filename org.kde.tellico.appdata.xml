@@ -483,7 +483,7 @@
   <url type="homepage">https://tellico-project.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=tellico</url>
   <url type="faq">https://tellico-project.org/faq</url>
-  <url type="help">https://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
+  <url type="help">https://docs.kde.org/?application=tellico</url>
   <screenshots>
     <screenshot type="default" width="1002" height="765">
       <caption>The main window showing a simple item in a book collection</caption>
