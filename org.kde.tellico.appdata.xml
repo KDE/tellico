@@ -483,7 +483,7 @@
   <url type="homepage">https://tellico-project.org</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=tellico</url>
   <url type="faq">https://tellico-project.org/faq</url>
-  <url type="help">https://docs.kde.org/development/en/extragear-office/tellico/index.html</url>
+  <url type="help">https://docs.kde.org/?application=tellico</url>
   <screenshots>
     <screenshot type="default" width="1002" height="765">
       <caption>The main window showing a simple item in a book collection</caption>
@@ -496,7 +496,7 @@
       <caption xml:lang="fr">La fenêtre principale, qui affiche un élément simple au sein d'une collection de livres</caption>
       <caption xml:lang="gl">A xanela principal, mostrando un elemento sinxelo nunha colección de libros</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante un simple elemento in un collection de libros</caption>
-      <caption xml:lang="id">Window utama menampilkan item sederhana dalam koleksi buku</caption>
+      <caption xml:lang="id">Window utama menampilkan butir sederhana dalam koleksi buku</caption>
       <caption xml:lang="it">La finestra principale che mostra un semplice elemento in una collezione di libri</caption>
       <caption xml:lang="ko">도서 소장품의 간단한 항목을 표시하는 주 창</caption>
       <caption xml:lang="nl">Het hoofdvenster die een eenvoudig item in een boekenverzameling toont</caption>
