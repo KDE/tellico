@@ -57,6 +57,7 @@ using Tellico::Fetch::DiscogsFetcher;
 
 DiscogsFetcher::DiscogsFetcher(QObject* parent_)
     : Fetcher(parent_)
+    , m_limit(DISCOGS_MAX_RETURNS_TOTAL)
     , m_started(false) {
 }
 
@@ -80,6 +81,10 @@ void DiscogsFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+}
+
+void DiscogsFetcher::setLimit(int limit_) {
+  m_limit = qBound(1, limit_, DISCOGS_MAX_RETURNS_TOTAL);
 }
 
 void DiscogsFetcher::search() {
@@ -281,7 +286,7 @@ void DiscogsFetcher::slotComplete(KJob*) {
 
   int count = 0;
   foreach(const QVariant& result, resultMap.value(QLatin1String("results")).toList()) {
-    if(count >= DISCOGS_MAX_RETURNS_TOTAL) {
+    if(count >= m_limit) {
       break;
     }
 

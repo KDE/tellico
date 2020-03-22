@@ -68,7 +68,7 @@ public:
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
-  virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE {}
+  void setLimit(int limit);
 
   /**
    * Returns a widget for modifying the fetcher's config.
@@ -97,6 +97,7 @@ private:
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap, bool fullData);
 
+  int m_limit;
   bool m_started;
 
   QString m_apiKey;

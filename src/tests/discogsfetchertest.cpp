@@ -96,6 +96,7 @@ void DiscogsFetcherTest::testPerson() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
+  static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -122,6 +123,7 @@ void DiscogsFetcherTest::testKeyword() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
+  static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
