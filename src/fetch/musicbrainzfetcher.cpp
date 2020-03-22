@@ -81,6 +81,10 @@ bool MusicBrainzFetcher::canFetch(int type) const {
 void MusicBrainzFetcher::readConfigHook(const KConfigGroup&) {
 }
 
+void MusicBrainzFetcher::setLimit(int limit_) {
+  m_limit = qBound(1, limit_, MUSICBRAINZ_MAX_RETURNS_TOTAL);
+}
+
 void MusicBrainzFetcher::search() {
   m_started = true;
   m_total = -1;

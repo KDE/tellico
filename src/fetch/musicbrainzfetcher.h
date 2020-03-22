@@ -71,6 +71,7 @@ public:
   virtual Type type() const Q_DECL_OVERRIDE { return MusicBrainz; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  void setLimit(int limit);
 
   /**
    * Returns a widget for modifying the fetcher's config.

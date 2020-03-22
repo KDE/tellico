@@ -58,6 +58,7 @@ void MusicBrainzFetcherTest::testTitle() {
                                        m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
+  static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -82,6 +83,7 @@ void MusicBrainzFetcherTest::testKeyword() {
                                        m_fieldValues.value(QStringLiteral("title")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
+  static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -99,33 +101,20 @@ void MusicBrainzFetcherTest::testKeyword() {
 }
 
 void MusicBrainzFetcherTest::testPerson() {
+  const QString artist(QStringLiteral("artist"));
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Person,
-                                       m_fieldValues.value(QStringLiteral("artist")));
+                                       m_fieldValues.value(artist));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 20);
+  // TODO: Fetcher::setLimit should be virtual in Fetcher class
+  static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QVERIFY(results.size() > 0);
-  Tellico::Data::EntryPtr entry;  //  results can be randomly ordered, loop until we find the one we want
-  foreach(Tellico::Data::EntryPtr test, results) {
-    if(test->field(QStringLiteral("title")).toLower() == m_fieldValues.value(QStringLiteral("title"))) {
-      entry = test;
-      break;
-    } else {
-      qDebug() << "skipping" << test->title();
-    }
-  }
-  QVERIFY(entry);
 
-  QHashIterator<QString, QString> i(m_fieldValues);
-  while(i.hasNext()) {
-    i.next();
-    QString result = entry->field(i.key()).toLower();
-    QCOMPARE(result, i.value().toLower());
-  }
-  QVERIFY(!entry->field(QStringLiteral("track")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field(artist), m_fieldValues.value(artist));
 }
 
 // test grabbing cover art from coverartarchive.org
@@ -134,6 +123,7 @@ void MusicBrainzFetcherTest::testCoverArt() {
                                        QStringLiteral("Laulut ja tarinat"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
 
+  static_cast<Tellico::Fetch::MusicBrainzFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QVERIFY(!results.isEmpty());
