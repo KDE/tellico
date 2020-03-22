@@ -181,8 +181,12 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
 
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(data, &error);
-    if(error.error == QJsonParseError::NoError) {
-      populateEntry(entry, doc.object().toVariantMap(), true);
+    const QVariantMap resultMap = doc.object().toVariantMap();
+    if(resultMap.contains(QStringLiteral("message")) && mapValue(resultMap, "id").isEmpty()) {
+      message(mapValue(resultMap, "message"), MessageHandler::Error);
+      myLog() << "DiscogsFetcher -" << mapValue(resultMap, "message");
+    } else if(error.error == QJsonParseError::NoError) {
+      populateEntry(entry, resultMap, true);
     } else {
       myDebug() << "Bad JSON results";
     }
@@ -314,6 +318,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   foreach(const QVariant& artist, resultMap_.value(QLatin1String("artists")).toList()) {
     artists << mapValue(artist.toMap(), "name");
   }
+  artists.removeDuplicates(); // sometimes the same value is repeated
   entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
 
   QStringList labels;

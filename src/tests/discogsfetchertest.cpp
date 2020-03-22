@@ -37,6 +37,7 @@
 QTEST_GUILESS_MAIN( DiscogsFetcherTest )
 
 DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest()
+    , m_needToWait(false)
     , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
 }
 
@@ -82,9 +83,13 @@ void DiscogsFetcherTest::testTitle() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
+  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testPerson() {
+  // the total test case ends up exceeding the throttle limit so pause for a second
+  if(m_needToWait) QTest::qWait(1000);
+
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -109,9 +114,13 @@ void DiscogsFetcherTest::testPerson() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
+  m_needToWait = true;
 }
 
 void DiscogsFetcherTest::testKeyword() {
+  // the total test case ends up exceeding the throttle limit so pause for a second
+  if(m_needToWait) QTest::qWait(1000);
+
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -137,10 +146,13 @@ void DiscogsFetcherTest::testKeyword() {
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
   QVERIFY(!img.isNull());
+  m_needToWait = true;
 }
 
 // use the Raw query type to fully test the data for a Discogs release
 void DiscogsFetcherTest::testRawData() {
+  if(m_needToWait) QTest::qWait(1000);
+
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -163,7 +175,7 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2004"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Rock"));
   QCOMPARE(entry->field(QStringLiteral("discogs")), QStringLiteral("https://www.discogs.com/Evanescence-Anywhere-But-Home/release/1588789"));
-  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("Australia"));
+  QCOMPARE(entry->field(QStringLiteral("nationality")), QStringLiteral("Australia & New Zealand"));
   QCOMPARE(entry->field(QStringLiteral("medium")), QStringLiteral("Compact Disc"));
 
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
@@ -171,10 +183,13 @@ void DiscogsFetcherTest::testRawData() {
   QCOMPARE(trackList.at(0), QStringLiteral("Haunted::Evanescence::4:04"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  m_needToWait = true;
 }
 
 // do another check to make sure the Vinyl format is captured
 void DiscogsFetcherTest::testRawDataVinyl() {
+  if(m_needToWait) QTest::qWait(1000);
+
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
@@ -203,4 +218,5 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   QStringList trackList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("track")));
   QCOMPARE(trackList.count(), 14);
   QCOMPARE(trackList.at(0), QStringLiteral("Janie Jones::The Clash::2:05"));
+  m_needToWait = true;
 }
