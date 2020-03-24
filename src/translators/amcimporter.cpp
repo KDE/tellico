@@ -38,6 +38,7 @@
 #include <QApplication>
 
 #include <limits.h>
+#include <algorithm>
 
 #define AMC_FILE_ID " AMC_X.Y Ant Movie Catalog 3.5.x   www.buypin.com    www.antp.be "
 
@@ -165,7 +166,7 @@ QString AMCImporter::readImage(const QString& format_) {
   m_ds.readRawData(buffer.data(), l);
   QByteArray bytes;
   bytes.reserve(l);
-  qCopy(buffer.data(), buffer.data() + l, bytes.begin());
+  std::copy(buffer.data(), buffer.data() + l, bytes.begin());
   QImage img = QImage::fromData(bytes);
   if(img.isNull()) {
     myDebug() << "null image";
