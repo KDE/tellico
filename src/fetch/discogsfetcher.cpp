@@ -328,7 +328,7 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   entry_->setField(QStringLiteral("label"), labels.join(FieldFormat::delimiterString()));
 
   /* thumb value is not always in the full data, so go ahead and set it now */
-  QString coverUrl = mapValue(resultMap_, "thumb");
+  const QString coverUrl = mapValue(resultMap_, "thumb");
   if(!coverUrl.isEmpty()) {
     entry_->setField(QStringLiteral("cover"), coverUrl);
   }
@@ -342,14 +342,15 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
   // if there is a CD, prefer that in the track list
   bool hasCD = false;
   foreach(const QVariant& format, resultMap_.value(QLatin1String("formats")).toList()) {
-    if(mapValue(format.toMap(), "name") == QLatin1String("CD")) {
+    const QString formatName = mapValue(format.toMap(), "name");
+    if(formatName == QLatin1String("CD")) {
       entry_->setField(QStringLiteral("medium"), i18n("Compact Disc"));
       hasCD = true;
-    } else if(mapValue(format.toMap(), "name") == QLatin1String("Vinyl")) {
+    } else if(formatName == QLatin1String("Vinyl")) {
       entry_->setField(QStringLiteral("medium"), i18n("Vinyl"));
-    } else if(mapValue(format.toMap(), "name") == QLatin1String("Cassette")) {
+    } else if(formatName == QLatin1String("Cassette")) {
       entry_->setField(QStringLiteral("medium"), i18n("Cassette"));
-    } else if(!hasCD && mapValue(format.toMap(), "name") == QLatin1String("DVD")) {
+    } else if(!hasCD && formatName == QLatin1String("DVD")) {
       // sometimes a CD and DVD both are included. If we're using the CD, ignore the DVD
       entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     }
