@@ -45,6 +45,7 @@
 #include <QApplication>
 #include <QUrlQuery>
 #include <QThread>
+#include <QElapsedTimer>
 
 namespace {
   static const char* BGG_THING_URL  = "http://boardgamegeek.com/xmlapi2/thing";
@@ -120,7 +121,7 @@ Tellico::Data::CollPtr BoardGameGeekImporter::collection() {
   bool hasMessage = dom.documentElement().tagName() == QStringLiteral("message");
   for(int loopCount = 0; hasMessage && loopCount < 5; ++loopCount) {
     // wait 2 seconds and try again
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
     while(timer.elapsed() < 2000) {
       QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
