@@ -37,6 +37,7 @@ QTEST_APPLESS_MAIN( AudioFileTest )
 void AudioFileTest::testOgg() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ogg"));
   Tellico::Import::AudioFileImporter importer(url);
+  importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
   Tellico::Data::CollPtr coll = importer.collection();
 
   QVERIFY(coll);
