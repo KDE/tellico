@@ -57,6 +57,7 @@ void DiscogsFetcherTest::testTitle() {
                                        QStringLiteral("Anywhere But Home"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
   fetcher->readConfig(cg, cg.name());
+  QVERIFY(fetcher->needsUserAgent());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 

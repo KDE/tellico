@@ -1,3 +1,8 @@
+2020-03-28  Robby Stephenson  <robby@periapsis.org>
+
+	* Added notification if user agent is diabled and data source
+	requires it (Bug 419319).
+
 2020-02-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated data source endpoint for TheGamesDB.net.
