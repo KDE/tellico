@@ -208,6 +208,20 @@ add_test(amctest amctest)
 ecm_mark_as_test(amctest)
 TARGET_LINK_LIBRARIES(amctest ${TELLICO_TEST_LIBS})
 
+IF( TAGLIB_FOUND )
+
+add_executable(audiofiletest audiofiletest.cpp
+  ../translators/audiofileimporter.cpp
+  ../translators/dataimporter.cpp
+  ../translators/importer.cpp
+)
+ecm_mark_nongui_executable(audiofiletest)
+add_test(audiofiletest audiofiletest)
+ecm_mark_as_test(audiofiletest)
+TARGET_LINK_LIBRARIES(audiofiletest ${TELLICO_TEST_LIBS} ${TAGLIB_LIBRARIES})
+
+ENDIF( TAGLIB_FOUND )
+
 add_executable(bibtextest bibtextest.cpp
   ../translators/bibteximporter.cpp
   ../translators/importer.cpp

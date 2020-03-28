@@ -83,38 +83,41 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   item.setTotalSteps(100);
   connect(&item, &Tellico::ProgressItem::signalCancelled, this, &Tellico::Import::AudioFileImporter::slotCancel);
   ProgressItem::Done done(this);
-
-  // TODO: allow remote audio file importing
-  QStringList dirs;
-  dirs += url().path();
-  if(m_recursive->isChecked()) {
-    dirs += Tellico::findAllSubDirs(dirs[0]);
-  }
-
-  if(m_cancelled) {
-    return Data::CollPtr();
-  }
-
   const bool showProgress = options() & ImportProgress;
 
+  // TODO: allow remote audio file importing
   QStringList files;
-  for(QStringList::ConstIterator it = dirs.constBegin(); !m_cancelled && it != dirs.constEnd(); ++it) {
-    if((*it).isEmpty()) {
-      continue;
+  const QString urlFileName = url().fileName();
+  if(urlFileName.isEmpty()) {
+    // url is a directory
+    QStringList dirs = QStringList() << url().path();
+    if(m_recursive && m_recursive->isChecked()) {
+      dirs += Tellico::findAllSubDirs(dirs[0]);
     }
 
-    QDir dir(*it);
-    dir.setFilter(QDir::Files | QDir::Readable | QDir::Hidden); // hidden since I want directory files
-    const QStringList list = dir.entryList();
-    for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
-      files += dir.absoluteFilePath(*it2);
+    // grab every file in the dirs list
+    for(QStringList::ConstIterator it = dirs.constBegin(); !m_cancelled && it != dirs.constEnd(); ++it) {
+      if((*it).isEmpty()) {
+        continue;
+      }
+
+      QDir dir(*it);
+      dir.setFilter(QDir::Files | QDir::Readable | QDir::Hidden); // hidden since I want directory files
+      const QStringList list = dir.entryList();
+      for(QStringList::ConstIterator it2 = list.begin(); it2 != list.end(); ++it2) {
+        files += dir.absoluteFilePath(*it2);
+      }
     }
-//    qApp->processEvents(); not needed ?
+  } else {
+    // single file import
+    // TODO: allow for multiple file list in urls
+    files += url().path();
   }
 
   if(m_cancelled) {
     return Data::CollPtr();
   }
+
   item.setTotalSteps(files.count());
 
   const QString title    = QStringLiteral("title");
@@ -127,8 +130,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   m_coll = new Data::MusicCollection(true);
 
-  const bool addFile = m_addFilePath->isChecked();
-  const bool addBitrate = m_addBitrate->isChecked();
+  const bool addFile = m_addFilePath && m_addFilePath->isChecked();
+  const bool addBitrate = m_addBitrate && m_addBitrate->isChecked();
 
   Data::FieldPtr f;
   if(addFile) {
