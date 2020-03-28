@@ -32,6 +32,7 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 #include <KIO/Global>
+#include <KIO/SlaveConfig>
 #include <kio_version.h>
 #if KIO_VERSION >= QT_VERSION_CHECK(5,19,0)
 #include <KIO/FavIconRequestJob>
@@ -75,9 +76,29 @@ const Tellico::Fetch::FetchRequest& Fetcher::request() const {
 void Fetcher::startSearch(const FetchRequest& request_) {
   m_request = request_;
   if(!canFetch(m_request.collectionType)) {
-    message(i18n("%1 does not allow searching for this collection type.", source()), MessageHandler::Warning);
+    message(i18n("%1 does not allow searching for this collection type.", source()),
+            MessageHandler::Warning);
     emit signalDone(this);
     return;
+  }
+
+  if(needsUserAgent()) {
+    // copied from KProtocolManager::userAgentForHost
+    const QString sendUserAgent = KIO::SlaveConfig::self()->configData(QStringLiteral("http"),
+                                                                       QString(), // host name
+                                                                       QStringLiteral("SendUserAgent")).toLower();
+    if(sendUserAgent == QLatin1String("false")) {
+      myDebug() << "Fetcher - Need user agent for" << source();
+      // TODO: I'd like to link to kcmshell5 useragent as th eKonqueror about page does
+      // but KIO complains about unable to open exec links
+//      message(i18n("<html>%1 requires the network request to include identification.\n"
+//                   "Check the network configuration in <a href=\"%2\">KDE System Settings</a>.</html>", source(), QStringLiteral("exec:/kcmshell5 useragent")),
+      message(i18n("%1 requires the network request to include identification.\n"
+                   "Check the network configuration in KDE System Settings.", source()),
+              MessageHandler::Error);
+      emit signalDone(this);
+      return;
+    }
   }
 
   m_entries.clear();

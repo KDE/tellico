@@ -37,6 +37,8 @@ void ManagerMessage::send(const QString& message_, Type type_) {
   // plus errors get a message box
   if(type_ == Error) {
     KMessageBox::sorry(GUI::Proxy::widget(), message_);
+//                       QString(), // caption
+//                       KMessageBox::Options(KMessageBox::Notify | KMessageBox::AllowLink));
   } else if(type_ == Warning) {
     KMessageBox::information(GUI::Proxy::widget(), message_);
   } else {

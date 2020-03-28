@@ -63,6 +63,7 @@ public:
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
+  virtual bool needsUserAgent() const Q_DECL_OVERRIDE { return true; }
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
 
   class ConfigWidget : public Fetch::ConfigWidget {
