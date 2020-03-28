@@ -73,5 +73,10 @@ QSet<QString> AbstractFetcherTest::set(const char* value_) {
 }
 
 QSet<QString> AbstractFetcherTest::set(const QString& value_) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+  const QStringList values = Tellico::FieldFormat::splitValue(value_);
+  return QSet<QString>(values.begin(), values.end());
+#else
   return QSet<QString>::fromList(Tellico::FieldFormat::splitValue(value_));
+#endif
 }
