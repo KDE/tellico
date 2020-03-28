@@ -47,5 +47,8 @@ void AudioFileTest::testOgg() {
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
-  QCOMPARE(entry->field("artist"), QStringLiteral("The Artist"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("Album Artist"));
+  QCOMPARE(entry->field("track"), QStringLiteral("Test OGG::The Artist"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2020"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("The Genre"));
 }

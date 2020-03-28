@@ -44,6 +44,7 @@
 #include <vorbisfile.h>
 #include <flacfile.h>
 #include <audioproperties.h>
+#include <tpropertymap.h>
 #endif
 
 #include <KLocalizedString>
@@ -231,6 +232,9 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
       }
     }
+    if(albumArtist.isEmpty()) {
+      albumArtist = TStringToQString(f.file()->properties()["ALBUMARTIST"].front());
+    }
 
     entry = albumMap[albumKey];
     if(!entry) {
@@ -241,7 +245,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     // album entries use the album name as the title
     entry->setField(title, album);
     QString a = TStringToQString(tag->artist()).trimmed();
-    // If no album artist identified, we use track artist as album artist, or  "(Various)" if tracks have various artists.
+    // If no album artist identified, we use track artist as album artist, or "(Various)" if tracks have various artists.
     if(!albumArtist.isEmpty()) {
       entry->setField(artist, albumArtist);
     } else if(!a.isEmpty()) {

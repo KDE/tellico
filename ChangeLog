@@ -1,5 +1,6 @@
 2020-03-28  Robby Stephenson  <robby@periapsis.org>
 
+	* Improved audio file data importer to use Album Artist (Bug 419348).
 	* Added notification if user agent is diabled and data source
 	requires it (Bug 419319).
 
