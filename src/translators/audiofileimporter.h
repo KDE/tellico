@@ -45,6 +45,12 @@ namespace Tellico {
 class AudioFileImporter : public Importer {
 Q_OBJECT
 
+enum AudioFileImporterOptions {
+  Recursive    = 1 << 0,
+  AddFilePath  = 1 << 1,
+  AddBitrate   = 1 << 2
+};
+
 public:
   /**
    */
@@ -57,6 +63,10 @@ public:
    */
   virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
   virtual bool canImport(int type) const Q_DECL_OVERRIDE;
+
+  void setRecursive(bool recursive);
+  void setAddFilePath(bool addFilePath);
+  void setAddBitrate(bool addBitrate);
 
 public Q_SLOTS:
   void slotCancel() Q_DECL_OVERRIDE;
@@ -73,6 +83,7 @@ private:
   QCheckBox* m_addFilePath;
   QCheckBox* m_addBitrate;
   bool m_cancelled;
+  int m_options;
 };
 
   } // end namespace

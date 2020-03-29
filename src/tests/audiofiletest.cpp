@@ -34,8 +34,35 @@
 
 QTEST_APPLESS_MAIN( AudioFileTest )
 
+void AudioFileTest::testDirectory() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ogg"));
+  url = url.adjusted(QUrl::RemoveFilename);
+  QVERIFY(!url.isEmpty());
+  Tellico::Import::AudioFileImporter importer(url);
+  importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
+  importer.setRecursive(true);
+  importer.setAddFilePath(true);
+  importer.setAddBitrate(true);
+
+  QVERIFY(importer.canImport(Tellico::Data::Collection::Album));
+  QVERIFY(!importer.canImport(Tellico::Data::Collection::Book));
+
+  Tellico::Data::CollPtr coll = importer.collection();
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
+  QCOMPARE(coll->entryCount(), 1);
+  QCOMPARE(coll->title(), QStringLiteral("My Music"));
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
+  QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
+  QVERIFY(entry->field("file").contains(QStringLiteral("::610"))); // bitrate
+}
+
 void AudioFileTest::testOgg() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ogg"));
+  QVERIFY(!url.isEmpty());
   Tellico::Import::AudioFileImporter importer(url);
   importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
   Tellico::Data::CollPtr coll = importer.collection();
@@ -43,7 +70,6 @@ void AudioFileTest::testOgg() {
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 1);
-  QCOMPARE(coll->title(), QStringLiteral("My Music"));
 
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);

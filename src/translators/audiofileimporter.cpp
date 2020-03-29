@@ -64,11 +64,36 @@ AudioFileImporter::AudioFileImporter(const QUrl& url_) : Tellico::Import::Import
     , m_recursive(nullptr)
     , m_addFilePath(nullptr)
     , m_addBitrate(nullptr)
-    , m_cancelled(false) {
+    , m_cancelled(false)
+    , m_options(0){
 }
 
 bool AudioFileImporter::canImport(int type) const {
   return type == Data::Collection::Album;
+}
+
+void AudioFileImporter::setRecursive(bool recursive_) {
+  if(recursive_) {
+    m_options |= Recursive;
+  } else {
+    m_options ^= Recursive;
+  }
+}
+
+void AudioFileImporter::setAddFilePath(bool addFilePath_) {
+  if(addFilePath_) {
+    m_options |= AddFilePath;
+  } else {
+    m_options ^= AddFilePath;
+  }
+}
+
+void AudioFileImporter::setAddBitrate(bool addBitrate_) {
+  if(addBitrate_) {
+    m_options |= AddBitrate;
+  } else {
+    m_options ^= AddBitrate;
+  }
 }
 
 Tellico::Data::CollPtr AudioFileImporter::collection() {
@@ -79,6 +104,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   if(m_coll) {
     return m_coll;
   }
+
+  if(m_recursive) setRecursive(m_recursive->isChecked());
+  if(m_addFilePath) setAddFilePath(m_addFilePath->isChecked());
+  if(m_addBitrate) setAddBitrate(m_addBitrate->isChecked());
 
   ProgressItem& item = ProgressManager::self()->newProgressItem(this, i18n("Scanning audio files..."), true);
   item.setTotalSteps(100);
@@ -92,7 +121,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   if(urlFileName.isEmpty()) {
     // url is a directory
     QStringList dirs = QStringList() << url().path();
-    if(m_recursive && m_recursive->isChecked()) {
+    if(m_options & Recursive) {
       dirs += Tellico::findAllSubDirs(dirs[0]);
     }
 
@@ -131,8 +160,8 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   m_coll = new Data::MusicCollection(true);
 
-  const bool addFile = m_addFilePath && m_addFilePath->isChecked();
-  const bool addBitrate = m_addBitrate && m_addBitrate->isChecked();
+  const bool addFile = m_options & AddFilePath;
+  const bool addBitrate = m_options & AddBitrate;
 
   Data::FieldPtr f;
   if(addFile) {
