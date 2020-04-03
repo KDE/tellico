@@ -528,11 +528,12 @@ void AmazonFetcherTest::testBasicBook() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
-  QCOMPARE(entry->field("title"), QStringLiteral("Muscle Car Mania: 100 legendary Australian motoring stories (Motoring Series)"));
+  QCOMPARE(entry->field("title"), QStringLiteral("Muscle Car Mania: 100 legendary Australian motoring stories"));
   QCOMPARE(entry->field("author"), QStringLiteral("No Author"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Rockpool Publishing"));
   QCOMPARE(entry->field("edition"), QStringLiteral("Slp"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Motoring Series"));
   QCOMPARE(entry->field("isbn"), QStringLiteral("1921878657"));
   QCOMPARE(entry->field("pages"), QStringLiteral("224"));
   QCOMPARE(entry->field("language"), QStringLiteral("English"));
@@ -556,4 +557,80 @@ void AmazonFetcherTest::testTitleParsing() {
   QCOMPARE(entry->field("widescreen"), QStringLiteral("true"));
   QCOMPARE(entry->field("format"), QStringLiteral("NTSC"));
   QCOMPARE(entry->field("region"), QStringLiteral("Region 1"));
+}
+
+// from https://github.com/utekaravinash/gopaapi5/blob/master/_response/search_items.json
+void AmazonFetcherTest::testSearchItems_gopaapi5() {
+  QString groupName = QStringLiteral("Amazon UK");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-search-items-gopaapi5.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 3);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Go Programming Language, The"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Donovan, Alan A. A."));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Addison-Wesley Professional"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("1"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Addison-Wesley Professional Computing Series"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0134190440"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("398"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2015"));
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/0134190440?tag=associateTag-20&linkCode=osi&th=1&psc=1"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
+
+  entry = results.at(2);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Black Hat Go: Go Programming For Hackers and Pentesters"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Steele, Tom; Patten, Chris; Kottmann, Dan"));
+}
+
+// from https://github.com/utekaravinash/gopaapi5/blob/master/_response/get_items.json
+void AmazonFetcherTest::testGetItems_gopaapi5() {
+  QString groupName = QStringLiteral("Amazon UK");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-get-items-gopaapi5.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 2);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QVERIFY(entry->collection());
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(entry->field("title"), QStringLiteral("Light on Yoga: The Bible of Modern Yoga"));
+  QCOMPARE(entry->field("author"), QStringLiteral("B. K. S. Iyengar"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Schocken"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("Revised"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0805210318"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("544"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1979")); // it's a 1995 revised edition of a 1979 publication apparently
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/0805210318?tag=associateTag-20&linkCode=ogi&th=1&psc=1"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
 }

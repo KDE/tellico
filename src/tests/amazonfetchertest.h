@@ -50,6 +50,8 @@ private Q_SLOTS:
   void testUpc2();
   void testBasicBook();
   void testTitleParsing();
+  void testSearchItems_gopaapi5();
+  void testGetItems_gopaapi5();
 
 private:
   bool m_hasConfigFile;

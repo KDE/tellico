@@ -329,7 +329,7 @@ void AmazonFetcher::slotComplete(KJob*) {
 
 #if 0
   myWarning() << "Remove debug from amazonfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test%1.xml").arg(m_page));
+  QFile f(QString::fromLatin1("/tmp/test%1.json").arg(m_page));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -420,23 +420,6 @@ void AmazonFetcher::slotComplete(KJob*) {
       }
     }
 
-    // strip HTML from comments, or plot in movies
-    // tentatively don't do this, looks like ECS 4 cleaned everything up
-/*
-    if(coll->type() == Data::Collection::Video) {
-      QString plot = entry->field(QLatin1String("plot"));
-      plot.remove(stripHTML);
-      entry->setField(QLatin1String("plot"), plot);
-    } else if(coll->type() == Data::Collection::Game) {
-      QString desc = entry->field(QLatin1String("description"));
-      desc.remove(stripHTML);
-      entry->setField(QLatin1String("description"), desc);
-    } else {
-      QString comments = entry->field(QLatin1String("comments"));
-      comments.remove(stripHTML);
-      entry->setField(QLatin1String("comments"), comments);
-    }
-*/
 //    myDebug() << entry->title();
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
@@ -450,10 +433,10 @@ void AmazonFetcher::slotComplete(KJob*) {
   }
 
   // are there any additional results to get?
-  m_hasMoreResults = m_page * AMAZON_RETURNS_PER_REQUEST < m_total;
+  m_hasMoreResults = m_testResultsFile.isEmpty() && (m_page * AMAZON_RETURNS_PER_REQUEST < m_total);
 
   const int currentTotal = qMin(m_total, m_limit);
-  if(m_page * AMAZON_RETURNS_PER_REQUEST < currentTotal) {
+  if(m_testResultsFile.isEmpty() && (m_page * AMAZON_RETURNS_PER_REQUEST < currentTotal)) {
     int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
     message(i18n("Results from %1: %2/%3", source(), foundCount, m_total), MessageHandler::Status);
     ++m_page;
@@ -614,8 +597,9 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     default:
       break;
   }
-//  myDebug() << "grabbing " << imageURL;
+
   if(!imageURL.isEmpty()) {
+//    myDebug() << "grabbing " << imageURL;
     QString id = ImageFactory::addImage(QUrl::fromUserInput(imageURL), true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
@@ -859,7 +843,16 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   entry_->setField(QStringLiteral("title"), mapValue(itemMap, "Title", "DisplayValue"));
   const QString isbn = mapValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
   if(!isbn.isEmpty()) {
-    entry_->setField(QStringLiteral("isbn"), isbn);
+    // could be duplicate isbn10 and isbn13 values
+    QStringList isbns = FieldFormat::splitValue(isbn, FieldFormat::StringSplit);
+    for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
+      if((*it).length() > 12) {
+        (*it) = ISBNValidator::isbn10(*it);
+        (*it).remove(QLatin1Char('-'));
+      }
+    }
+    isbns.removeDuplicates();
+    entry_->setField(QStringLiteral("isbn"), isbns.join(FieldFormat::delimiterString()));
   }
 
   QStringList actors, artists, authors, illustrators, publishers;
@@ -896,7 +889,6 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   illustrators.removeDuplicates();
   publishers.removeDuplicates();
 
-
   if(!actors.isEmpty()) {
     entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::delimiterString()));
   }
@@ -931,11 +923,21 @@ void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info
   langs.removeAll(QString());
   entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
 
-  QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
   if(collectionType() == Data::Collection::Book ||
      collectionType() == Data::Collection::Bibtex ||
      collectionType() == Data::Collection::ComicBook) {
-    entry_->setField(QStringLiteral("binding"), mapValue(technicalMap, "Formats", "DisplayValues"));
+    QVariantMap classificationsMap = itemMap.value(QLatin1String("Classifications")).toMap();
+    QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
+    QString binding = mapValue(classificationsMap, "Binding", "DisplayValue");
+    if(binding.isEmpty()) {
+      binding = mapValue(technicalMap, "Formats", "DisplayValues");
+    }
+    if(binding.contains(QStringLiteral("Paperback")) && binding != QStringLiteral("Trade Paperback")) {
+      binding = i18n("Paperback");
+    } else if(binding.contains(QStringLiteral("Hard"))) { // could be Hardcover or Hardback
+      binding = i18n("Hardback");
+    }
+    entry_->setField(QStringLiteral("binding"), binding);
   }
 
   QVariantMap imagesMap = info_.value(QLatin1String("Images")).toObject().toVariantMap();
@@ -1011,6 +1013,10 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
   }
   if(token_.toLower() == QLatin1String("dvd")) {
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
+    res = true;
+  }
+  if(token_.indexOf(QLatin1String("series"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QStringLiteral("series"), token_);
     res = true;
   }
   static const QRegularExpression regionRx(QLatin1String("Region [1-9]"));
