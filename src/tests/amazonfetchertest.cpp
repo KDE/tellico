@@ -428,9 +428,11 @@ void AmazonFetcherTest::testPayload() {
 \"Operation\":\"SearchItems\",\
 \"PartnerTag\":\"tellico-20\",\
 \"PartnerType\":\"Associates\",\
-\"Resources\":[\"ItemInfo.Title\",\"ItemInfo.ExternalIds\",\"Images.Primary.Medium\"],\
-\"SearchIndex\":\"Books\"\
+\"Resources\":[\"ItemInfo.Title\",\"ItemInfo.ContentInfo\",\"ItemInfo.ByLineInfo\",\"ItemInfo.TechnicalInfo\",\"ItemInfo.ExternalIds\",\"ItemInfo.ManufactureInfo\",\"Images.Primary.Medium\"],\
+\"SearchIndex\":\"Books\",\
+\"SortBy\":\"Relevance\"\
 }");
+  QCOMPARE(payload.right(100), res1.right(100));
   QCOMPARE(payload, res1);
 }
 
