@@ -198,7 +198,7 @@
       <li xml:lang="ia">Il supporta qualcunque numero de campos definite per le usator, de plure typos differente: texto, paragrapho, lista, quadrato de selection, numero, URL, data, imagines e combinationes</li>
       <li xml:lang="id">Mendukung angka apa pun dari bidang yang ditentukan, beberapa tipe yang berbeda: teks, paragraf, daftar, kotak centang, nomor, URL, tanggal, gambar, dan kombinasi</li>
       <li xml:lang="it">Supporta un qualsiasi numero di campi definiti dall'utente, di molti tipi differenti: testo, paragrafi, liste, caselle, numeri, URL, dati, immagini e combinazioni</li>
-      <li xml:lang="ko">텍스트, 단락, 목록, 체크 상자, 번호, URL, 날짜, 이미지 및 조합 등 다양한 유형의 사용자 정의 필드 지원</li>
+      <li xml:lang="ko">텍스트, 단락, 목록, 체크 상자, 번호, URL, 날짜, 이미지 및 조합 등 다양한 형식의 사용자 정의 필드 지원</li>
       <li xml:lang="nl">Ondersteunt elk aantal gebruikergedefinieerde velden met verscheidene verschillende types: tekst, paragraaf, lijst, keuzevakje, aantal, URL, datum, afbeelding en combinaties</li>
       <li xml:lang="nn">Støttar vilkårleg mange eigendefinerte felt i ulike variantar: tekst, avsnitt, liste, avkryssingsboks, tal, nettadresse, dato, bilete og kombinasjonar av desse variantane</li>
       <li xml:lang="pl">Obsługa dowolnej liczby pól określonych przez użytkownika, wielu różnych rodzajów: tekst, akapit, spis, pole zaznaczane, liczba, adres URL, data, obraz i ich kombinacje</li>
@@ -439,7 +439,7 @@
       <li xml:lang="ia">Il importa datos de CDDB pro catalogar CDs audio</li>
       <li xml:lang="id">Pengimporan data CDDB untuk pengkatalogan CD-CD audio</li>
       <li xml:lang="it">Importa dati CDDB per catalogare cd audio</li>
-      <li xml:lang="ko">오디오 CD 카탈로그 작성을 위한 CDDB 데이터 가져오기</li>
+      <li xml:lang="ko">오디오 CD 카탈로그를 작성하려고 CDDB 데이터 가져오기</li>
       <li xml:lang="nl">Importeert CDDB-gegevens voor catalogiseren van audio-cd's</li>
       <li xml:lang="nn">Kan importera CDDB-data for lyd-CD-ar</li>
       <li xml:lang="pl">Importowanie danych CDDB do katalogowanie płyt muzycznych</li>
