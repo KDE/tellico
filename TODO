@@ -27,3 +27,4 @@ Update the video game XSLT data sources to somehow use the platform normalizatio
 Add stamps search from Colnect
 Investigate using KINO-Teatr.ua API, https://api.kino-teatr.ua
 Use KRatingWidget
+ADSABS API https://github.com/adsabs/adsabs-dev-api
