@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -92,7 +92,8 @@ Z3950Fetcher::Z3950Fetcher(QObject* parent_, const QString& preset_)
         m_host = cfg.readEntry("Host");
         m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
         m_dbname = cfg.readEntry("Database");
-        m_sourceCharSet = cfg.readEntry("Charset");
+        m_queryCharSet = cfg.readEntry("Charset");
+        m_responseCharSet = cfg.readEntry("CharsetResponse");
         m_syntax = cfg.readEntry("Syntax");
         m_user = cfg.readEntry("User");
         m_password = cfg.readEntry("Password");
@@ -143,7 +144,11 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
       m_port = p;
     }
     m_dbname = config_.readEntry("Database");
-    m_sourceCharSet = config_.readEntry("Charset");
+    m_queryCharSet = config_.readEntry("Charset");
+    m_responseCharSet = config_.readEntry("CharsetResponse");
+    if(m_responseCharSet.isEmpty()) {
+      m_responseCharSet = m_queryCharSet;
+    }
     m_syntax = config_.readEntry("Syntax");
     m_user = config_.readEntry("User");
     m_password = config_.readEntry("Password");
@@ -160,7 +165,7 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
           m_host = cfg.readEntry("Host");
           m_port = cfg.readEntry("Port", Z3950_DEFAULT_PORT);
           m_dbname = cfg.readEntry("Database");
-          m_sourceCharSet = cfg.readEntry("Charset");
+          m_queryCharSet = cfg.readEntry("Charset");
           m_syntax = cfg.readEntry("Syntax");
           m_user = cfg.readEntry("User");
           m_password = cfg.readEntry("Password");
@@ -271,6 +276,11 @@ void Z3950Fetcher::search() {
 #endif
 }
 
+void Z3950Fetcher::setCharacterSet(const QString& qcs_, const QString& rcs_) {
+  m_queryCharSet = qcs_;
+  m_responseCharSet = rcs_.isEmpty() ? qcs_ : rcs_;
+}
+
 void Z3950Fetcher::continueSearch() {
 #ifdef HAVE_YAZ
   m_started = true;
@@ -369,7 +379,8 @@ void Z3950Fetcher::process() {
   if(m_conn) {
     m_conn->wait();
   } else {
-    m_conn = new Z3950Connection(this, m_host, m_port, m_dbname, m_sourceCharSet, m_syntax, m_esn);
+    m_conn = new Z3950Connection(this, m_host, m_port, m_dbname, m_syntax, m_esn);
+    m_conn->setCharacterSet(m_queryCharSet, m_responseCharSet);
     if(!m_user.isEmpty()) {
       m_conn->setUserPassword(m_user, m_password);
     }
@@ -621,20 +632,35 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
   m_databaseEdit->setWhatsThis(w);
   label->setBuddy(m_databaseEdit);
 
-  label = new QLabel(i18n("Ch&aracter set: "), optionsWidget());
+  label = new QLabel(i18n("Query character set: "), optionsWidget());
   l->addWidget(label, ++row, 0);
-  m_charSetCombo = new KComboBox(true, optionsWidget());
-  m_charSetCombo->addItem(QString());
-  m_charSetCombo->addItem(QStringLiteral("marc8"));
-  m_charSetCombo->addItem(QStringLiteral("iso-8859-1"));
-  m_charSetCombo->addItem(QStringLiteral("utf-8"));
-  connect(m_charSetCombo, &QComboBox::currentTextChanged, this, &ConfigWidget::slotSetModified);
-  l->addWidget(m_charSetCombo, row, 1);
-  w = i18n("Enter the character set encoding used by the z39.50 server. The most likely choice "
+  m_charSetCombo1 = new KComboBox(true, optionsWidget());
+  m_charSetCombo1->addItem(QString());
+  m_charSetCombo1->addItem(QStringLiteral("marc8"));
+  m_charSetCombo1->addItem(QStringLiteral("iso-8859-1"));
+  m_charSetCombo1->addItem(QStringLiteral("utf-8"));
+  connect(m_charSetCombo1, &QComboBox::currentTextChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_charSetCombo1, row, 1);
+  w = i18n("Enter the character set encoding used for queries by the z39.50 server. The most likely choice "
            "is MARC-8, although ISO-8859-1 is common as well.");
   label->setWhatsThis(w);
-  m_charSetCombo->setWhatsThis(w);
-  label->setBuddy(m_charSetCombo);
+  m_charSetCombo1->setWhatsThis(w);
+  label->setBuddy(m_charSetCombo1);
+
+  label = new QLabel(i18n("Results character set: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+  m_charSetCombo2 = new KComboBox(true, optionsWidget());
+  m_charSetCombo2->addItem(QString());
+  m_charSetCombo2->addItem(QStringLiteral("marc8"));
+  m_charSetCombo2->addItem(QStringLiteral("iso-8859-1"));
+  m_charSetCombo2->addItem(QStringLiteral("utf-8"));
+  connect(m_charSetCombo2, &QComboBox::currentTextChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_charSetCombo2, row, 1);
+  w = i18n("Enter the character set encoding used for responses by the z39.50 server. The most likely choice "
+           "is MARC-8, although ISO-8859-1 is common as well.");
+  label->setWhatsThis(w);
+  m_charSetCombo2->setWhatsThis(w);
+  label->setBuddy(m_charSetCombo2);
 
   label = new QLabel(i18n("&Format: "), optionsWidget());
   l->addWidget(label, ++row, 0);
@@ -692,7 +718,8 @@ Z3950Fetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const Z3950Fetcher* f
     m_databaseEdit->setText(fetcher_->m_dbname);
     m_userEdit->setText(fetcher_->m_user);
     m_passwordEdit->setText(fetcher_->m_password);
-    m_charSetCombo->setEditText(fetcher_->m_sourceCharSet);
+    m_charSetCombo1->setEditText(fetcher_->m_queryCharSet);
+    m_charSetCombo2->setEditText(fetcher_->m_responseCharSet);
     // the syntax is detected automatically by the fetcher
     // since the config group gets deleted in the config file,
     // the value needs to be retained here
@@ -730,9 +757,13 @@ void Z3950Fetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!s.isEmpty()) {
     config_.writeEntry("Database", s);
   }
-  s = m_charSetCombo->currentText();
+  s = m_charSetCombo1->currentText().trimmed();
   if(!s.isEmpty()) {
     config_.writeEntry("Charset", s);
+  }
+  s = m_charSetCombo2->currentText().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("CharsetResponse", s);
   }
   s = m_userEdit->text();
   if(!s.isEmpty()) {
@@ -762,7 +793,8 @@ void Z3950Fetcher::ConfigWidget::slotTogglePreset(bool on) {
   m_databaseEdit->setEnabled(!on);
   m_userEdit->setEnabled(!on);
   m_passwordEdit->setEnabled(!on);
-  m_charSetCombo->setEnabled(!on);
+  m_charSetCombo1->setEnabled(!on);
+  m_charSetCombo2->setEnabled(!on);
   m_syntaxCombo->setEnabled(!on);
   if(on) {
     emit signalName(m_serverCombo->currentText());

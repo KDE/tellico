@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -85,7 +85,6 @@ public:
                   const QString& host,
                   uint port,
                   const QString& dbname,
-                  const QString& sourceCharSet,
                   const QString& syntax,
                   const QString& esn);
   ~Z3950Connection();
@@ -93,6 +92,7 @@ public:
   void reset();
   void setQuery(const QString& query);
   void setUserPassword(const QString& user, const QString& pword);
+  void setCharacterSet(const QString& queryCharSet, const QString& responseCharSet);
   void run() Q_DECL_OVERRIDE;
 
   void abort() { m_aborted = true; }
@@ -104,8 +104,8 @@ private:
   bool makeConnection();
   void done();
   void done(const QString& message, int type);
-  QByteArray toByteArray(const QString& text);
-  QString toString(const QByteArray& text);
+  QByteArray queryToByteArray(const QString& text);
+  QString responseToString(const QByteArray& text);
   void checkPendingEvents();
 
   class Private;
@@ -120,7 +120,8 @@ private:
   QString m_dbname;
   QString m_user;
   QString m_password;
-  QString m_sourceCharSet;
+  QString m_queryCharSet;
+  QString m_responseCharSet;
   QString m_syntax;
   QString m_pqn;
   QString m_esn;

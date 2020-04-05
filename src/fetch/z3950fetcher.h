@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -80,6 +80,7 @@ public:
   virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
 
   const QString& host() const { return m_host; }
+  void setCharacterSet(const QString& qcs, const QString& rcs = QString());
 
   virtual Fetch::ConfigWidget* configWidget(QWidget* parent) const Q_DECL_OVERRIDE;
 
@@ -110,7 +111,8 @@ private:
   QString m_dbname;
   QString m_user;
   QString m_password;
-  QString m_sourceCharSet;
+  QString m_queryCharSet;
+  QString m_responseCharSet;
   QString m_syntax;
   QString m_pqn; // prefix query notation
   QString m_esn; // element set name
@@ -150,7 +152,8 @@ private:
   GUI::LineEdit* m_databaseEdit;
   GUI::LineEdit* m_userEdit;
   GUI::LineEdit* m_passwordEdit;
-  KComboBox* m_charSetCombo;
+  KComboBox* m_charSetCombo1;
+  KComboBox* m_charSetCombo2;
   GUI::ComboBox* m_syntaxCombo;
   // have to remember syntax
   QString m_syntax;

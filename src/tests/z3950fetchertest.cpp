@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
     Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
@@ -84,7 +84,7 @@ void Z3950FetcherTest::testADS() {
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Raw,
                                        QStringLiteral("@and @attr 1=4 \"Particle creation by black holes\" "
-                                                     "@and @attr 1=1003 Hawking @attr 1=62 Generalized"));
+                                                      "@and @attr 1=1003 Hawking @attr 1=62 Generalized"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this,
                                                                         QStringLiteral("z3950.adsabs.harvard.edu"),
                                                                         210,
@@ -118,4 +118,27 @@ void Z3950FetcherTest::testBibsysIsbn() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("Grønn"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("82-42-40477-1"));
+}
+
+// https://bugs.kde.org/show_bug.cgi?id=419670
+void Z3950FetcherTest::testPortugal() {
+//  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
+//                                       QString::fromUtf8("972-706-024-2"));
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
+                                       QString::fromUtf8("Memórias póstumas de Brás Cubas"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::Z3950Fetcher(this,
+                                                                        QStringLiteral("catalogo.bnportugal.pt"),
+                                                                        210,
+                                                                        QStringLiteral("bn"),
+                                                                        QStringLiteral("unimarc")));
+  Tellico::Fetch::Z3950Fetcher* f = static_cast<Tellico::Fetch::Z3950Fetcher*>(fetcher.data());
+  f->setCharacterSet(QStringLiteral("ISO-8859-1"), QStringLiteral("iso5426"));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")).toUtf8(), QString::fromUtf8("Memórias póstumas de Brás Cubas").toUtf8());
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Assis, Machado de"));
 }

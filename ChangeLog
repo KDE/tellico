@@ -1,3 +1,7 @@
+2020-04-05  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated z3950fetcher to separate query and response character encoding (Bug 419670).
+
 2020-03-28  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved audio file data importer to use Album Artist (Bug 419348).

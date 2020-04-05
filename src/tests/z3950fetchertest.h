@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testIsbn();
   void testADS();
   void testBibsysIsbn();
+  void testPortugal();
 };
 
 #endif

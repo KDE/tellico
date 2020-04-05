@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -110,14 +110,10 @@ public:
 
 int Z3950Connection::resultsLeft = 0;
 
-// since the character set goes into a yaz api call
-// I'm paranoid about user insertions, so just grab 64
-// characters at most
 Z3950Connection::Z3950Connection(Tellico::Fetch::Z3950Fetcher* fetcher,
                                  const QString& host,
                                  uint port,
                                  const QString& dbname,
-                                 const QString& sourceCharSet,
                                  const QString& syntax,
                                  const QString& esn)
     : QThread()
@@ -128,7 +124,6 @@ Z3950Connection::Z3950Connection(Tellico::Fetch::Z3950Fetcher* fetcher,
     , m_host(host)
     , m_port(port)
     , m_dbname(dbname)
-    , m_sourceCharSet(sourceCharSet.left(64))
     , m_syntax(syntax)
     , m_esn(esn)
     , m_start(0)
@@ -156,6 +151,14 @@ void Z3950Connection::setUserPassword(const QString& user_, const QString& pword
   m_password = pword_;
 }
 
+// since the character set goes into a yaz api call
+// I'm paranoid about user insertions, so just grab 64
+// characters at most
+void Z3950Connection::setCharacterSet(const QString& queryCharSet_, const QString& responseCharSet_) {
+  m_queryCharSet = queryCharSet_.left(64);
+  m_responseCharSet = responseCharSet_.isEmpty() ? m_queryCharSet : responseCharSet_.left(64);
+}
+
 void Z3950Connection::run() {
 //  myDebug() << m_fetcher->source();
   m_aborted = false;
@@ -171,7 +174,7 @@ void Z3950Connection::run() {
   ZOOM_query query = ZOOM_query_create();
   QueryDestroyer qd(query);
 
-  const QByteArray ba = toByteArray(m_pqn);
+  const QByteArray ba = queryToByteArray(m_pqn);
   int errcode = ZOOM_query_prefix(query, ba.constData());
   if(errcode != 0) {
     myDebug() << "query error: " << m_pqn;
@@ -215,9 +218,9 @@ void Z3950Connection::run() {
   if(errcode != 0) {
     m_connected = false;
 
-    QString s = i18n("Connection search error %1: %2", errcode, toString(errmsg));
+    QString s = i18n("Connection search error %1: %2", errcode, responseToString(errmsg));
     if(!QByteArray(addinfo).isEmpty()) {
-      s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
+      s += QLatin1String(" (") + responseToString(addinfo) + QLatin1Char(')');
     }
     myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
@@ -317,8 +320,11 @@ void Z3950Connection::run() {
     m_syntax = newSyntax;
   }
 
-  if(m_sourceCharSet.isEmpty()) {
-    m_sourceCharSet = QStringLiteral("marc-8");
+  if(m_queryCharSet.isEmpty()) {
+    m_queryCharSet = QStringLiteral("marc-8");
+  }
+  if(m_responseCharSet.isEmpty()) {
+    m_responseCharSet = m_queryCharSet;
   }
 
   const size_t realLimit = qMin(numResults, m_limit);
@@ -331,9 +337,9 @@ void Z3950Connection::run() {
       myDebug() << "no record returned for index" << i;
       errcode = ZOOM_connection_error(d->conn, &errmsg, &addinfo);
       if(errcode != 0) {
-        QString s = i18n("Connection search error %1: %2", errcode, toString(errmsg));
+        QString s = i18n("Connection search error %1: %2", errcode, responseToString(errmsg));
         if(!QByteArray(addinfo).isEmpty()) {
-          s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
+          s += QLatin1String(" (") + responseToString(addinfo) + QLatin1Char(')');
         }
         myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
         if(showError) {
@@ -347,12 +353,12 @@ void Z3950Connection::run() {
     int len;
     QString data;
     if(m_syntax == QLatin1String("mods")) {
-      data = toString(ZOOM_record_get(rec, "xml", &len));
+      data = responseToString(ZOOM_record_get(rec, "xml", &len));
     } else if(m_syntax == QLatin1String("grs-1")) {
       // grs-1 means we have to try to parse the rendered data, very ugly...
-      data = toString(ZOOM_record_get(rec, "render", &len));
+      data = responseToString(ZOOM_record_get(rec, "render", &len));
     } else if(m_syntax == QLatin1String("ads")) {
-      data = toString(ZOOM_record_get(rec, "raw", &len));
+      data = responseToString(ZOOM_record_get(rec, "raw", &len));
       // haven't been able to figure out how to include line endings
       // just mangle the result by replacing % with \n%
       data.replace(QLatin1Char('%'), QLatin1String("\n%"));
@@ -368,7 +374,7 @@ void Z3950Connection::run() {
         f1.close();
       }
 #endif
-      data = toXML(ZOOM_record_get(rec, "raw", &len), m_sourceCharSet);
+      data = toXML(ZOOM_record_get(rec, "raw", &len), m_responseCharSet);
     }
     Z3950ResultFound* ev = new Z3950ResultFound(data);
     QApplication::postEvent(m_fetcher.data(), ev);
@@ -392,11 +398,11 @@ bool Z3950Connection::makeConnection() {
 #ifdef HAVE_YAZ
   d->conn_opt = ZOOM_options_create();
   ZOOM_options_set(d->conn_opt, "implementationName", "Tellico");
-  QByteArray ba = toByteArray(m_dbname);
+  QByteArray ba = queryToByteArray(m_dbname);
   ZOOM_options_set(d->conn_opt, "databaseName",       ba.constData());
-  ba = toByteArray(m_user);
+  ba = queryToByteArray(m_user);
   ZOOM_options_set(d->conn_opt, "user",               ba.constData());
-  ba = toByteArray(m_password);
+  ba = queryToByteArray(m_password);
   ZOOM_options_set(d->conn_opt, "password",           ba.constData());
 
   d->conn = ZOOM_connection_create(d->conn_opt);
@@ -411,9 +417,9 @@ bool Z3950Connection::makeConnection() {
     ZOOM_connection_destroy(d->conn);
     m_connected = false;
 
-    QString s = i18n("Connection error %1: %2", errcode, toString(errmsg));
+    QString s = i18n("Connection error %1: %2", errcode, responseToString(errmsg));
     if(!QByteArray(addinfo).isEmpty()) {
-      s += QLatin1String(" (") + toString(addinfo) + QLatin1Char(')');
+      s += QLatin1String(" (") + responseToString(addinfo) + QLatin1Char(')');
     }
     myDebug() << QStringLiteral("[%1/%2]").arg(m_host, m_dbname) << s;
     done(s, MessageHandler::Error);
@@ -448,13 +454,13 @@ void Z3950Connection::checkPendingEvents() {
 }
 
 inline
-QByteArray Z3950Connection::toByteArray(const QString& text_) {
-  return iconvRun(text_.toUtf8(), QStringLiteral("utf-8"), m_sourceCharSet);
+QByteArray Z3950Connection::queryToByteArray(const QString& text_) {
+  return iconvRun(text_.toUtf8(), QStringLiteral("utf-8"), m_queryCharSet);
 }
 
 inline
-QString Z3950Connection::toString(const QByteArray& text_) {
-  return QString::fromUtf8(iconvRun(text_, m_sourceCharSet, QStringLiteral("utf-8")));
+QString Z3950Connection::responseToString(const QByteArray& text_) {
+  return QString::fromUtf8(iconvRun(text_, m_responseCharSet, QStringLiteral("utf-8")));
 }
 
 // static
