@@ -128,7 +128,7 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
 
   QMenu* sortMenu = menu.addMenu(i18n("&Sort By"));
   foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
-    sortMenu->addAction(field->title())->setData(qVariantFromValue(field));
+    sortMenu->addAction(field->title())->setData(QVariant::fromValue(field));
   }
   connect(sortMenu, &QMenu::triggered, this, &EntryIconView::slotSortMenuActivated);
 

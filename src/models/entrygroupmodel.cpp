@@ -143,9 +143,9 @@ QVariant EntryGroupModel::data(const QModelIndex& index_, int role_) const {
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
-      return qVariantFromValue(entry(index_));
+      return QVariant::fromValue(entry(index_));
     case GroupPtrRole:
-      return qVariantFromValue(group(index_));
+      return QVariant::fromValue(group(index_));
     case ValidParentRole:
       return hasValidParent(index_);
   }

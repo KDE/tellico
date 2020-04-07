@@ -85,7 +85,7 @@ QVariant EntryModel::headerData(int section_, Qt::Orientation orientation_, int 
       return m_fields.at(section_)->title();
 
     case FieldPtrRole:
-      return qVariantFromValue(m_fields.at(section_));
+      return QVariant::fromValue(m_fields.at(section_));
   }
   return QVariant();
 }
@@ -172,14 +172,14 @@ QVariant EntryModel::data(const QModelIndex& index_, int role_) const {
       if(!entry) {
         return QVariant();
       }
-      return qVariantFromValue(entry);
+      return QVariant::fromValue(entry);
 
     case FieldPtrRole:
       field = this->field(index_);
       if(!field) {
         return QVariant();
       }
-      return qVariantFromValue(field);
+      return QVariant::fromValue(field);
 
     case SaveStateRole:
       if(!m_saveStates.contains(index_.row())) {

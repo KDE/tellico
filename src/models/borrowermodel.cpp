@@ -126,7 +126,7 @@ QVariant BorrowerModel::data(const QModelIndex& index_, int role_) const {
     case RowCountRole:
       return rowCount(index_);
     case EntryPtrRole:
-      return qVariantFromValue(entry(index_));
+      return QVariant::fromValue(entry(index_));
   }
 
   return QVariant();
