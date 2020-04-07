@@ -113,7 +113,7 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
     }, {
       // TODO: no chinese in PAAPI-5 yet?
       i18n("Amazon (China)"),
-      "http://webservices.amazon.cn/onca/xml",
+      "www.amazon.cn",
       "us-west-2",
       QLatin1String("ch"),
       i18n("China")
