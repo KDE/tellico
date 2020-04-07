@@ -101,6 +101,7 @@ void AmazonFetcherTest::initTestCase() {
 }
 
 void AmazonFetcherTest::testTitle() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(int, collType);
   QFETCH(QString, searchValue);
@@ -212,6 +213,7 @@ void AmazonFetcherTest::testTitle_data() {
 }
 
 void AmazonFetcherTest::testTitleVideoGame() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QString groupName = QStringLiteral("Amazon US");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
@@ -236,6 +238,7 @@ void AmazonFetcherTest::testTitleVideoGame() {
 }
 
 void AmazonFetcherTest::testIsbn() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(QString, searchValue);
   QFETCH(QString, resultName);
@@ -298,6 +301,7 @@ void AmazonFetcherTest::testIsbn_data() {
 }
 
 void AmazonFetcherTest::testUpc() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(int, collType);
   QFETCH(QString, searchValue);
