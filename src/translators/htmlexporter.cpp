@@ -409,10 +409,8 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
   // and so we need to write all of them too.
   if(m_exportEntryFiles || url().isEmpty()) {
     // add all image fields to string list
-    Data::FieldList iFields = coll_->imageFields();
     // take intersection with the fields to be exported
-    QSet<Data::FieldPtr> iFieldsSet = iFields.toSet();
-    iFields = iFieldsSet.intersect(fields().toSet()).values();
+    Data::FieldList iFields = Tellico::listIntersection(coll_->imageFields(), fields());
     foreach(Data::FieldPtr field, iFields) {
       imageFields.add(field->name());
     }

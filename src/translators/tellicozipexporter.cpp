@@ -29,7 +29,6 @@
 #include "../images/image.h"
 #include "../images/imageinfo.h"
 #include "../core/filehandler.h"
-#include "../utils/stringset.h"
 #include "../tellico_debug.h"
 #include "../progressmanager.h"
 
@@ -99,10 +98,8 @@ bool TellicoZipExporter::exec() {
     int j = 0;
     const QString imagesDir = QStringLiteral("images/");
     StringSet imageSet;
-    Data::FieldList imageFields = coll->imageFields();
     // take intersection with the fields to be exported
-    QSet<Data::FieldPtr> imageFieldSet = imageFields.toSet();
-    imageFields = imageFieldSet.intersect(fields().toSet()).values();
+    Data::FieldList imageFields = Tellico::listIntersection(coll->imageFields(), fields());
     // already took 10%, only 90% left
     const int stepSize = qMax(1, (coll->entryCount() * imageFields.count()) / 90);
     foreach(Data::EntryPtr entry, entries()) {

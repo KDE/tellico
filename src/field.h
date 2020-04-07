@@ -336,6 +336,8 @@ private:
 };
 
   } // end namespace
+
+  Data::FieldList listIntersection(const Data::FieldList& list1, const Data::FieldList& list2);
 } // end namespace
 
 Q_DECLARE_METATYPE(Tellico::Data::FieldPtr)

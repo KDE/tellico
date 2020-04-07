@@ -316,3 +316,7 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
   Q_ASSERT(field);
   return field;
 }
+
+Tellico::Data::FieldList Tellico::listIntersection(const Tellico::Data::FieldList& list1, const Tellico::Data::FieldList& list2) {
+  return list1.toSet().intersect(list2.toSet()).values();
+}
