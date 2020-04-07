@@ -43,6 +43,15 @@ private Q_SLOTS:
   void testIsbn_data();
   void testUpc();
   void testUpc_data();
+  void testRequest();
+  void testPayload();
+  void testError();
+  void testUpc1();
+  void testUpc2();
+  void testBasicBook();
+  void testTitleParsing();
+  void testSearchItems_gopaapi5();
+  void testGetItems_gopaapi5();
 
 private:
   bool m_hasConfigFile;

@@ -1,0 +1,1191 @@
+{
+  "SearchResult": {
+    "Items": [
+      {
+        "ASIN": "0134190440",
+        "BrowseNodeInfo": {
+          "BrowseNodes": [
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "ContextFreeName": "Books",
+                    "DisplayName": "Books",
+                    "Id": "283155"
+                  },
+                  "ContextFreeName": "Subjects",
+                  "DisplayName": "Subjects",
+                  "Id": "1000"
+                },
+                "ContextFreeName": "Computers & Technology",
+                "DisplayName": "Computers & Technology",
+                "Id": "5"
+              },
+              "ContextFreeName": "Programming Languages",
+              "DisplayName": "Programming Languages",
+              "Id": "3952",
+              "IsRoot": false,
+              "SalesRank": 35
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Specialty Boutique",
+                    "DisplayName": "Specialty Boutique",
+                    "Id": "2349030011"
+                  },
+                  "ContextFreeName": "Textbooks",
+                  "DisplayName": "New, Used & Rental Textbooks",
+                  "Id": "465600"
+                },
+                "ContextFreeName": "Computer Science",
+                "DisplayName": "Computer Science",
+                "Id": "468204"
+              },
+              "ContextFreeName": "Computer Programming Languages",
+              "DisplayName": "Programming Languages",
+              "Id": "491314",
+              "IsRoot": false,
+              "SalesRank": 17
+            }
+          ],
+          "WebsiteSalesRank": {
+            "ContextFreeName": "Books",
+            "DisplayName": "Books",
+            "SalesRank": 11005
+          }
+        },
+        "DetailPageURL": "https://www.amazon.com/dp/0134190440?tag=associateTag-20&linkCode=osi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/41aSIiETPPL.jpg",
+              "Width": 404
+            },
+            "Medium": {
+              "Height": 160,
+              "URL": "https://m.media-amazon.com/images/I/41aSIiETPPL._SL160_.jpg",
+              "Width": 129
+            },
+            "Small": {
+              "Height": 75,
+              "URL": "https://m.media-amazon.com/images/I/41aSIiETPPL._SL75_.jpg",
+              "Width": 61
+            }
+          },
+          "Variants": [
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/51ul4zg-hoL.jpg",
+                "Width": 404
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/51ul4zg-hoL._SL160_.jpg",
+                "Width": 129
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/51ul4zg-hoL._SL75_.jpg",
+                "Width": 61
+              }
+            },
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/31WBfgP59cL.jpg",
+                "Width": 375
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/31WBfgP59cL._SL160_.jpg",
+                "Width": 120
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/31WBfgP59cL._SL75_.jpg",
+                "Width": 56
+              }
+            }
+          ]
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Donovan, Alan A. A.",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Addison-Wesley Professional",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "Classifications": {
+            "Binding": {
+              "DisplayValue": "Paperback",
+              "Label": "Binding",
+              "Locale": "en_US"
+            },
+            "ProductGroup": {
+              "DisplayValue": "Book",
+              "Label": "ProductGroup",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "1",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 398,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2015-11-05T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780134190440"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "9780134190440",
+                "0134190440"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "ManufactureInfo": {
+            "ItemPartNumber": {
+              "DisplayValue": "42375234",
+              "Label": "PartNumber",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "IsAdultProduct": {
+              "DisplayValue": false,
+              "Label": "IsAdultProduct",
+              "Locale": "en_US"
+            },
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 1,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 9.1,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 1.45064168396,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 7.3,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "ReleaseDate": {
+              "DisplayValue": "2015-10-26T00:00:01Z",
+              "Label": "ReleaseDate",
+              "Locale": "en_US"
+            },
+            "UnitCount": {
+              "DisplayValue": 1,
+              "Label": "NumberOfItems",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Go Programming Language, The (Addison-Wesley Professional Computing Series)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "MaxOrderQuantity": 80,
+                "Message": "In Stock.",
+                "MinOrderQuantity": 1,
+                "Type": "Now"
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "H26dkOXFz3wk9n5bAuiKx5GM7RO4h9rOU5VNvDPADlz2evXUj7INzDWa5KETU0wsMkbCD3T0m4Bm%2BqkpGsTzjTj6PqqvbViQpRKgW%2FUtak4pF358CdeS1Q%3D%3D",
+              "IsBuyBoxWinner": true,
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 26.49,
+                "Currency": "USD",
+                "DisplayAmount": "$26.49",
+                "Savings": {
+                  "Amount": 13.5,
+                  "Currency": "USD",
+                  "DisplayAmount": "$13.50 (34%)",
+                  "Percentage": 34
+                }
+              },
+              "ProgramEligibility": {
+                "IsPrimeExclusive": false,
+                "IsPrimePantry": false
+              },
+              "SavingBasis": {
+                "Amount": 39.99,
+                "Currency": "USD",
+                "DisplayAmount": "$39.99"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "HighestPrice": {
+                "Amount": 71.35,
+                "Currency": "USD",
+                "DisplayAmount": "$71.35"
+              },
+              "LowestPrice": {
+                "Amount": 21.18,
+                "Currency": "USD",
+                "DisplayAmount": "$21.18"
+              },
+              "OfferCount": 18
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "HighestPrice": {
+                "Amount": 41.79,
+                "Currency": "USD",
+                "DisplayAmount": "$41.79"
+              },
+              "LowestPrice": {
+                "Amount": 23.23,
+                "Currency": "USD",
+                "DisplayAmount": "$23.23"
+              },
+              "OfferCount": 8
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "1838559337",
+        "BrowseNodeInfo": {
+          "BrowseNodes": [
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Databases & Big Data",
+                "DisplayName": "Databases & Big Data",
+                "Id": "549646"
+              },
+              "ContextFreeName": "Data Modeling & Design",
+              "DisplayName": "Data Modeling & Design",
+              "Id": "379382011",
+              "IsRoot": false,
+              "SalesRank": 102
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "Ancestor": {
+                        "ContextFreeName": "Books",
+                        "DisplayName": "Books",
+                        "Id": "283155"
+                      },
+                      "ContextFreeName": "Subjects",
+                      "DisplayName": "Subjects",
+                      "Id": "1000"
+                    },
+                    "ContextFreeName": "Computers & Technology",
+                    "DisplayName": "Computers & Technology",
+                    "Id": "5"
+                  },
+                  "ContextFreeName": "Networking & Cloud Computing",
+                  "DisplayName": "Networking & Cloud Computing",
+                  "Id": "3652"
+                },
+                "ContextFreeName": "Enterprise Data Computing",
+                "DisplayName": "Data in the Enterprise",
+                "Id": "3666"
+              },
+              "ContextFreeName": "Client-Server Networking Systems",
+              "DisplayName": "Client-Server Systems",
+              "Id": "3668",
+              "IsRoot": false,
+              "SalesRank": 55
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Networking & Cloud Computing",
+                "DisplayName": "Networking & Cloud Computing",
+                "Id": "3652"
+              },
+              "ContextFreeName": "Cloud Computing",
+              "DisplayName": "Cloud Computing",
+              "Id": "10806612011",
+              "IsRoot": false,
+              "SalesRank": 154
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Web Development & Design",
+                "DisplayName": "Web Development & Design",
+                "Id": "3510"
+              },
+              "ContextFreeName": "Web Development & Design Programming",
+              "DisplayName": "Programming",
+              "Id": "3600",
+              "IsRoot": false
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "ContextFreeName": "Books",
+                    "DisplayName": "Books",
+                    "Id": "283155"
+                  },
+                  "ContextFreeName": "Subjects",
+                  "DisplayName": "Subjects",
+                  "Id": "1000"
+                },
+                "ContextFreeName": "Computers & Technology",
+                "DisplayName": "Computers & Technology",
+                "Id": "5"
+              },
+              "ContextFreeName": "Programming Languages",
+              "DisplayName": "Programming Languages",
+              "Id": "3952",
+              "IsRoot": false
+            }
+          ],
+          "WebsiteSalesRank": {
+            "ContextFreeName": "Books",
+            "DisplayName": "Books",
+            "SalesRank": 151024
+          }
+        },
+        "DetailPageURL": "https://www.amazon.com/dp/1838559337?tag=associateTag-20&linkCode=osi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/51R0SXcmImL.jpg",
+              "Width": 406
+            },
+            "Medium": {
+              "Height": 160,
+              "URL": "https://m.media-amazon.com/images/I/51R0SXcmImL._SL160_.jpg",
+              "Width": 130
+            },
+            "Small": {
+              "Height": 75,
+              "URL": "https://m.media-amazon.com/images/I/51R0SXcmImL._SL75_.jpg",
+              "Width": 61
+            }
+          },
+          "Variants": [
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/51d-h-k-SdL.jpg",
+                "Width": 406
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/51d-h-k-SdL._SL160_.jpg",
+                "Width": 130
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/51d-h-k-SdL._SL75_.jpg",
+                "Width": 61
+              }
+            }
+          ]
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Tsoukalos, Mihalis",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Packt Publishing",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "Classifications": {
+            "Binding": {
+              "DisplayValue": "Paperback",
+              "Label": "Binding",
+              "Locale": "en_US"
+            },
+            "ProductGroup": {
+              "DisplayValue": "Book",
+              "Label": "ProductGroup",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 798,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2019-08-29T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9781838559335"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "1838559337"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "IsAdultProduct": {
+              "DisplayValue": false,
+              "Label": "IsAdultProduct",
+              "Locale": "en_US"
+            },
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 9.25,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 7.5,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 2.96,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 1.8,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "ReleaseDate": {
+              "DisplayValue": "2019-08-29T00:00:01Z",
+              "Label": "ReleaseDate",
+              "Locale": "en_US"
+            },
+            "UnitCount": {
+              "DisplayValue": 1,
+              "Label": "NumberOfItems",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Mastering Go: Create Golang production applications using network libraries, concurrency, machine learning, and advanced data structures, 2nd Edition",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "Message": "In Stock.",
+                "MinOrderQuantity": 1,
+                "Type": "Now"
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "H26dkOXFz3zUErquCtGkasp0ByRdzlE8azTBB1I3U7%2F%2BjrmprKqPCogrZ5p5G3387IeqhCTvjl%2BV3kDhzzEy9lgSXS%2Bjq5wEtrkDCJEk6kNSxYzcHU5KjA%3D%3D",
+              "IsBuyBoxWinner": true,
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 49.99,
+                "Currency": "USD",
+                "DisplayAmount": "$49.99"
+              },
+              "ProgramEligibility": {
+                "IsPrimeExclusive": false,
+                "IsPrimePantry": false
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "HighestPrice": {
+                "Amount": 82.6,
+                "Currency": "USD",
+                "DisplayAmount": "$82.60"
+              },
+              "LowestPrice": {
+                "Amount": 49.99,
+                "Currency": "USD",
+                "DisplayAmount": "$49.99"
+              },
+              "OfferCount": 7
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "HighestPrice": {
+                "Amount": 92.8,
+                "Currency": "USD",
+                "DisplayAmount": "$92.80"
+              },
+              "LowestPrice": {
+                "Amount": 88.8,
+                "Currency": "USD",
+                "DisplayAmount": "$88.80"
+              },
+              "OfferCount": 2
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "1593278659",
+        "BrowseNodeInfo": {
+          "BrowseNodes": [
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Networking & Cloud Computing",
+                "DisplayName": "Networking & Cloud Computing",
+                "Id": "3652"
+              },
+              "ContextFreeName": "Computer Network Security",
+              "DisplayName": "Network Security",
+              "Id": "3746",
+              "IsRoot": false,
+              "SalesRank": 10
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "Ancestor": {
+                        "ContextFreeName": "Books",
+                        "DisplayName": "Books",
+                        "Id": "283155"
+                      },
+                      "ContextFreeName": "Subjects",
+                      "DisplayName": "Subjects",
+                      "Id": "1000"
+                    },
+                    "ContextFreeName": "Computers & Technology",
+                    "DisplayName": "Computers & Technology",
+                    "Id": "5"
+                  },
+                  "ContextFreeName": "Computer Programming",
+                  "DisplayName": "Programming",
+                  "Id": "3839"
+                },
+                "ContextFreeName": "Software Design, Testing & Engineering",
+                "DisplayName": "Software Design, Testing & Engineering",
+                "Id": "4011"
+              },
+              "ContextFreeName": "Software Testing",
+              "DisplayName": "Testing",
+              "Id": "4133",
+              "IsRoot": false,
+              "SalesRank": 9
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Internet & Social Media",
+                "DisplayName": "Internet & Social Media",
+                "Id": "69766"
+              },
+              "ContextFreeName": "Computer Hacking",
+              "DisplayName": "Hacking",
+              "Id": "3648",
+              "IsRoot": false
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Computers & Technology",
+                  "DisplayName": "Computers & Technology",
+                  "Id": "5"
+                },
+                "ContextFreeName": "Computer Security & Encryption",
+                "DisplayName": "Security & Encryption",
+                "Id": "377560011"
+              },
+              "ContextFreeName": "Computer Viruses",
+              "DisplayName": "Viruses",
+              "Id": "3636",
+              "IsRoot": false,
+              "SalesRank": 4
+            }
+          ],
+          "WebsiteSalesRank": {
+            "ContextFreeName": "Books",
+            "DisplayName": "Books",
+            "SalesRank": 10424
+          }
+        },
+        "DetailPageURL": "https://www.amazon.com/dp/1593278659?tag=associateTag-20&linkCode=osi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/51Eznheb+3L.jpg",
+              "Width": 378
+            },
+            "Medium": {
+              "Height": 160,
+              "URL": "https://m.media-amazon.com/images/I/51Eznheb+3L._SL160_.jpg",
+              "Width": 121
+            },
+            "Small": {
+              "Height": 75,
+              "URL": "https://m.media-amazon.com/images/I/51Eznheb+3L._SL75_.jpg",
+              "Width": 57
+            }
+          },
+          "Variants": [
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/51PJIRJ6cOL.jpg",
+                "Width": 378
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/51PJIRJ6cOL._SL160_.jpg",
+                "Width": 121
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/51PJIRJ6cOL._SL75_.jpg",
+                "Width": 57
+              }
+            },
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/41bVAz0e7XL.jpg",
+                "Width": 378
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/41bVAz0e7XL._SL160_.jpg",
+                "Width": 121
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/41bVAz0e7XL._SL75_.jpg",
+                "Width": 57
+              }
+            },
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/41bbpNdF4FL.jpg",
+                "Width": 378
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/41bbpNdF4FL._SL160_.jpg",
+                "Width": 121
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/41bbpNdF4FL._SL75_.jpg",
+                "Width": 57
+              }
+            },
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/51ucroxGBVL.jpg",
+                "Width": 378
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/51ucroxGBVL._SL160_.jpg",
+                "Width": 121
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/51ucroxGBVL._SL75_.jpg",
+                "Width": 57
+              }
+            },
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/51EXsdd3bcL.jpg",
+                "Width": 378
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/51EXsdd3bcL._SL160_.jpg",
+                "Width": 121
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/51EXsdd3bcL._SL75_.jpg",
+                "Width": 57
+              }
+            }
+          ]
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Steele, Tom",
+                "Role": "Author",
+                "RoleType": "author"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Patten, Chris",
+                "Role": "Author",
+                "RoleType": "author"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Kottmann, Dan",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "No Starch Press",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "Classifications": {
+            "Binding": {
+              "DisplayValue": "Paperback",
+              "Label": "Binding",
+              "Locale": "en_US"
+            },
+            "ProductGroup": {
+              "DisplayValue": "Book",
+              "Label": "ProductGroup",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 368,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2020-01-24T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9781593278656"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "1593278659"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 9.19,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 7,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 1.55,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 0.86,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "ReleaseDate": {
+              "DisplayValue": "2020-01-24T00:00:01Z",
+              "Label": "ReleaseDate",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Black Hat Go: Go Programming For Hackers and Pentesters",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "Message": "In Stock.",
+                "MinOrderQuantity": 1,
+                "Type": "Now"
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "H26dkOXFz3wZmCrmj%2FYxrIeDi4T0C7c4DcpkwtKMwqik23CM63QRy5C1CKFdgAhBHMVTIblk06rmzbr2%2F1dHfdEJWfLQOsNwV2aFHfobYBLj4%2BjJ%2Bmm9zg%3D%3D",
+              "IsBuyBoxWinner": true,
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 26.93,
+                "Currency": "USD",
+                "DisplayAmount": "$26.93",
+                "Savings": {
+                  "Amount": 13.02,
+                  "Currency": "USD",
+                  "DisplayAmount": "$13.02 (33%)",
+                  "Percentage": 33
+                }
+              },
+              "ProgramEligibility": {
+                "IsPrimeExclusive": false,
+                "IsPrimePantry": false
+              },
+              "SavingBasis": {
+                "Amount": 39.95,
+                "Currency": "USD",
+                "DisplayAmount": "$39.95"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "HighestPrice": {
+                "Amount": 56.93,
+                "Currency": "USD",
+                "DisplayAmount": "$56.93"
+              },
+              "LowestPrice": {
+                "Amount": 24.49,
+                "Currency": "USD",
+                "DisplayAmount": "$24.49"
+              },
+              "OfferCount": 27
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "HighestPrice": {
+                "Amount": 45.7,
+                "Currency": "USD",
+                "DisplayAmount": "$45.70"
+              },
+              "LowestPrice": {
+                "Amount": 24.54,
+                "Currency": "USD",
+                "DisplayAmount": "$24.54"
+              },
+              "OfferCount": 11
+            }
+          ]
+        }
+      }
+    ],
+    "SearchRefinements": {
+      "SearchIndex": {
+        "Bins": [
+          {
+            "DisplayName": "Books",
+            "Id": "Books"
+          },
+          {
+            "DisplayName": "Kindle Store",
+            "Id": "KindleStore"
+          },
+          {
+            "DisplayName": "CDs & Vinyl",
+            "Id": "Music"
+          },
+          {
+            "DisplayName": "Digital Music",
+            "Id": "DigitalMusic"
+          },
+          {
+            "DisplayName": "Apps & Games",
+            "Id": "MobileApps"
+          }
+        ],
+        "DisplayName": "Department",
+        "Id": "SearchIndex"
+      }
+    },
+    "SearchURL": "https://www.amazon.com/s?k=golang&rh=p_n_availability%3A-1&tag=associateTag-20&linkCode=osi",
+    "TotalResultCount": 146
+  }
+}

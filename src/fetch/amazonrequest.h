@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2007-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2007-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,8 +26,9 @@
 #define TELLICO_FETCH_AMAZONREQUEST_H
 
 #include <QUrl>
-
 #include <QMap>
+
+class AmazonFetcherTest;
 
 namespace Tellico {
   namespace Fetch {
@@ -36,14 +37,41 @@ namespace Tellico {
  * @author Robby Stephenson
  */
 class AmazonRequest {
-public:
-  AmazonRequest(const QUrl& site, const QByteArray& key);
 
-  QUrl signedRequest(const QMap<QString, QString>& params) const;
+friend class ::AmazonFetcherTest;
+
+public:
+  enum Operation {
+    SearchItems,
+    GetItems
+  };
+
+  AmazonRequest(const QString& accessKey_, const QString& secretKey_);
+
+  void setHost(const QByteArray& host);
+  void setRegion(const QByteArray& region);
+  void setOperation(int op);
+  QMap<QByteArray, QByteArray> headers(const QByteArray& payload);
 
 private:
-  QUrl m_siteUrl;
-  QByteArray m_key;
+  QByteArray prepareCanonicalRequest(const QByteArray& payload) const;
+  QByteArray prepareStringToSign(const QByteArray& canonicalUrl) const;
+  QByteArray calculateSignature(const QByteArray& stringToSign) const;
+  QByteArray buildAuthorizationString(const QByteArray& signature) const;
+  QByteArray toHexHash(const QByteArray& data) const;
+  QByteArray targetOperation() const;
+
+  QMap<QByteArray, QByteArray> m_headers;
+  QByteArray m_accessKey;
+  QByteArray m_secretKey;
+  QByteArray m_method;
+  QByteArray m_service;
+  QByteArray m_host;
+  QByteArray m_region;
+  QByteArray m_path;
+  QByteArray m_amzDate;
+  Operation m_operation;
+  mutable QByteArray m_signedHeaders;
 };
 
   } // end Fetch namespace

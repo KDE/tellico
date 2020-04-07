@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2004-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2004-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,8 +26,7 @@
 
 #include "amazonfetcher.h"
 #include "amazonrequest.h"
-#include "../translators/xslthandler.h"
-#include "../translators/tellicoimporter.h"
+#include "../collectionfactory.h"
 #include "../images/imagefactory.h"
 #include "../utils/guiproxy.h"
 #include "../collection.h"
@@ -36,7 +35,6 @@
 #include "../fieldformat.h"
 #include "../utils/string_utils.h"
 #include "../utils/isbnvalidator.h"
-#include "../utils/datafileregistry.h"
 #include "../gui/combobox.h"
 #include "../tellico_debug.h"
 
@@ -50,101 +48,131 @@
 #include <KJobWidgets/KJobWidgets>
 
 #include <QLineEdit>
-#include <QDomDocument>
 #include <QLabel>
 #include <QCheckBox>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
 #include <QStandardPaths>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QTemporaryFile>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
   static const int AMAZON_MAX_RETURNS_TOTAL = 20;
   static const char* AMAZON_ASSOC_TOKEN = "tellico-20";
-  // need to have these in the translation file
-  static const char* linkText = I18N_NOOP("Amazon Link");
 }
 
 using namespace Tellico;
 using Tellico::Fetch::AmazonFetcher;
 
 // static
+// see https://webservices.amazon.com/paapi5/documentation/common-request-parameters.html#host-and-region
 const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   Q_ASSERT(site_ >= 0);
-  Q_ASSERT(site_ < 15);
-  static SiteData dataVector[14] = {
+  Q_ASSERT(site_ < XX);
+  static SiteData dataVector[16] = {
     {
       i18n("Amazon (US)"),
-      QUrl(QLatin1String("http://webservices.amazon.com/onca/xml")),
+      "www.amazon.com",
+      "us-east-1",
       QLatin1String("us"),
       i18n("United States")
     }, {
       i18n("Amazon (UK)"),
-      QUrl(QLatin1String("http://webservices.amazon.co.uk/onca/xml")),
+      "www.amazon.co.uk",
+      "eu-west-1",
       QLatin1String("gb"),
       i18n("United Kingdom")
     }, {
       i18n("Amazon (Germany)"),
-      QUrl(QLatin1String("http://webservices.amazon.de/onca/xml")),
+      "www.amazon.de",
+      "eu-west-1",
       QLatin1String("de"),
       i18n("Germany")
     }, {
       i18n("Amazon (Japan)"),
-      QUrl(QLatin1String("http://webservices.amazon.co.jp/onca/xml")),
+      "www.amazon.co.jp",
+      "us-west-2",
       QLatin1String("jp"),
       i18n("Japan")
     }, {
       i18n("Amazon (France)"),
-      QUrl(QLatin1String("http://webservices.amazon.fr/onca/xml")),
+      "www.amazon.fr",
+      "eu-west-1",
       QLatin1String("fr"),
       i18n("France")
     }, {
       i18n("Amazon (Canada)"),
-      QUrl(QLatin1String("http://webservices.amazon.ca/onca/xml")),
+      "www.amazon.ca",
+      "us-east-1",
       QLatin1String("ca"),
       i18n("Canada")
     }, {
+      // TODO: no chinese in PAAPI-5 yet?
       i18n("Amazon (China)"),
-      QUrl(QLatin1String("http://webservices.amazon.cn/onca/xml")),
+      "www.amazon.cn",
+      "us-west-2",
       QLatin1String("ch"),
       i18n("China")
     }, {
       i18n("Amazon (Spain)"),
-      QUrl(QLatin1String("http://webservices.amazon.es/onca/xml")),
+      "www.amazon.es",
+      "eu-west-1",
       QLatin1String("es"),
       i18n("Spain")
     }, {
       i18n("Amazon (Italy)"),
-      QUrl(QLatin1String("http://webservices.amazon.it/onca/xml")),
+      "www.amazon.it",
+      "eu-west-1",
       QLatin1String("it"),
       i18n("Italy")
     }, {
       i18n("Amazon (Brazil)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.br/onca/xml")),
+      "www.amazon.com.br",
+      "us-east-1",
       QLatin1String("br"),
       i18n("Brazil")
     }, {
       i18n("Amazon (Australia)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.au/onca/xml")),
+      "www.amazon.com.au",
+      "us-west-2",
       QLatin1String("au"),
       i18n("Australia")
     }, {
       i18n("Amazon (India)"),
-      QUrl(QLatin1String("http://webservices.amazon.in/onca/xml")),
+      "www.amazon.in",
+      "eu-west-1",
       QLatin1String("in"),
       i18n("India")
     }, {
       i18n("Amazon (Mexico)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.mx/onca/xml")),
+      "www.amazon.com.mx",
+      "us-east-1",
       QLatin1String("mx"),
       i18n("Mexico")
     }, {
       i18n("Amazon (Turkey)"),
-      QUrl(QLatin1String("http://webservices.amazon.com.tr/onca/xml")),
+      "www.amazon.com.tr",
+      "eu-west-1",
       QLatin1String("tr"),
       i18n("Turkey")
+    }, {
+      i18n("Amazon (Singapore)"),
+      "www.amazon.sg",
+      "us-west-2",
+      QLatin1String("sg"),
+      i18n("Singapore")
+    }, {
+      i18n("Amazon (UAE)"),
+      "www.amazon.ae",
+      "eu-west-1",
+      QLatin1String("ae"),
+      i18n("United Arab Emirates")
     }
   };
 
@@ -152,15 +180,16 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
 }
 
 AmazonFetcher::AmazonFetcher(QObject* parent_)
-    : Fetcher(parent_), m_xsltHandler(nullptr), m_site(Unknown), m_imageSize(MediumImage),
-      m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_addLinkField(true), m_limit(AMAZON_MAX_RETURNS_TOTAL),
+    : Fetcher(parent_), m_site(Unknown), m_imageSize(MediumImage),
+      m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(nullptr), m_started(false) {
-  (void)linkText; // just to shut up the compiler
+  // to facilitate transition to Amazon PAAPI5, allow users to enable logging the Amazon
+  // results so they can be shared for debugging
+  const QByteArray enableLog = qgetenv("TELLICO_ENABLE_AMAZON_LOG").trimmed().toLower();
+  m_enableLog = (enableLog == "true" || enableLog == "1");
 }
 
 AmazonFetcher::~AmazonFetcher() {
-  delete m_xsltHandler;
-  m_xsltHandler = nullptr;
 }
 
 QString AmazonFetcher::source() const {
@@ -185,10 +214,10 @@ bool AmazonFetcher::canFetch(int type) const {
 bool AmazonFetcher::canSearch(FetchKey k) const {
   // no UPC in Canada
   return k == Title
-         || k == Person
-         || k == ISBN
-         || (k == UPC && m_site != CA)
-         || k == Keyword;
+      || k == Person
+      || k == ISBN
+      || k == UPC
+      || k == Keyword;
 }
 
 void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -200,7 +229,7 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   }
   QString s = config_.readEntry("AccessKey");
   if(!s.isEmpty()) {
-    m_access = s;
+    m_accessKey = s;
   } else {
     myWarning() << "No Amazon access key";
   }
@@ -210,7 +239,7 @@ void AmazonFetcher::readConfigHook(const KConfigGroup& config_) {
   }
   s = config_.readEntry("SecretKey");
   if(!s.isEmpty()) {
-    m_amazonKey = s.toUtf8();
+    m_secretKey = s;
   } else {
     myWarning() << "No Amazon secret key";
   }
@@ -236,11 +265,7 @@ void AmazonFetcher::continueSearch() {
 }
 
 void AmazonFetcher::doSearch() {
-  // calling secretKey() ensures that we try to read it first
-  if(secretKey().isEmpty() || m_access.isEmpty()) {
-    if(m_access.isEmpty()) {
-      myWarning() << "No Amazon access key";
-    }
+  if(m_secretKey.isEmpty() || m_accessKey.isEmpty()) {
     // this message is split in two since the first half is reused later
     message(i18n("Access to data from Amazon.com requires an AWS Access Key ID and a Secret Key.") +
             QLatin1Char(' ') +
@@ -249,184 +274,30 @@ void AmazonFetcher::doSearch() {
     return;
   }
 
-//  myDebug() << "value = " << request().value;
-//  myDebug() << "getting page " << m_page;
-
-  QMap<QString, QString> params;
-  params.insert(QStringLiteral("Service"),        QStringLiteral("AWSECommerceService"));
-  params.insert(QStringLiteral("AssociateTag"),   m_assoc);
-  params.insert(QStringLiteral("AWSAccessKeyId"), m_access);
-  params.insert(QStringLiteral("Operation"),      QStringLiteral("ItemSearch"));
-  params.insert(QStringLiteral("ResponseGroup"),  QStringLiteral("Large"));
-  params.insert(QStringLiteral("ItemPage"),       QString::number(m_page));
-  // this should match the namespace in amazon2tellico.xsl
-  params.insert(QStringLiteral("Version"),        QStringLiteral("2011-08-01"));
-
-  const int type = collectionType();
-  switch(type) {
-    case Data::Collection::Book:
-    case Data::Collection::ComicBook:
-    case Data::Collection::Bibtex:
-      params.insert(QStringLiteral("SearchIndex"), QStringLiteral("Books"));
-      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
-      break;
-
-    case Data::Collection::Album:
-      params.insert(QStringLiteral("SearchIndex"), QStringLiteral("Music"));
-      break;
-
-    case Data::Collection::Video:
-      // CA and JP appear to have a bug where Video only returns VHS or Music results
-      // DVD will return DVD, Blu-ray, etc. so just ignore VHS for those users
-      if(m_site == CA || m_site == JP || m_site == IT || m_site == ES) {
-        params.insert(QStringLiteral("SearchIndex"), QStringLiteral("DVD"));
-      } else {
-        params.insert(QStringLiteral("SearchIndex"), QStringLiteral("Video"));
-      }
-      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
-      break;
-
-    case Data::Collection::Game:
-      params.insert(QStringLiteral("SearchIndex"), QStringLiteral("VideoGames"));
-      break;
-
-    case Data::Collection::BoardGame:
-      params.insert(QStringLiteral("SearchIndex"), QStringLiteral("Toys"));
-      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
-      break;
-
-    case Data::Collection::Coin:
-    case Data::Collection::Stamp:
-    case Data::Collection::Wine:
-    case Data::Collection::Base:
-    case Data::Collection::Card:
-      myDebug() << "can't fetch this type:" << collectionType();
-      stop();
-      return;
+  const QByteArray payload = requestPayload(request());
+  if(payload.isEmpty()) {
+    stop();
+    return;
   }
 
-  QString value = request().value;
+  AmazonRequest request(m_accessKey, m_secretKey);
+  request.setHost(siteData(m_site).host);
+  request.setRegion(siteData(m_site).region);
 
-  switch(request().key) {
-    case Title:
-      params.insert(QStringLiteral("Title"), value);
-      break;
-
-    case Person:
-      if(type == Data::Collection::Video) {
-        params.insert(QStringLiteral("Actor"),        value);
-        params.insert(QStringLiteral("Director"),     value);
-      } else if(type == Data::Collection::Album) {
-        params.insert(QStringLiteral("Artist"),       value);
-      } else if(type == Data::Collection::Game) {
-        params.insert(QStringLiteral("Manufacturer"), value);
-      } else { // books and bibtex
-        QString s = QStringLiteral("author:%1 or publisher:%2").arg(value, value);
-//        params.insert(QLatin1String("Author"),       value, mib);
-//        params.insert(QLatin1String("Publisher"),    value, mib);
-        params.insert(QStringLiteral("Power"),    s);
-      }
-      break;
-
-    case ISBN:
-      {
-        params.insert(QStringLiteral("Operation"), QStringLiteral("ItemLookup"));
-
-        QString cleanValue = value;
-        cleanValue.remove(QLatin1Char('-'));
-        // ISBN only get digits or 'X'
-        QStringList isbns = FieldFormat::splitValue(cleanValue);
-        // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
-        // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
-        // isbn13 search
-        bool isbn13 = false;
-        for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
-          if((*it).startsWith(QLatin1String("979"))) {
-            if(m_site == JP) { // never works for JP
-              myWarning() << "ISBN-13 searching not implemented for Japan";
-              it = isbns.erase(it);
-              continue;
-            }
-            isbn13 = true;
-            break;
-          }
-          ++it;
-        }
-        // if we want isbn10, then convert all
-        if(!isbn13) {
-          for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
-            if((*it).length() > 12) {
-              (*it) = ISBNValidator::isbn10(*it);
-              (*it).remove(QLatin1Char('-'));
-            }
-          }
-          // the default search is by ASIN, which prohibits SearchIndex
-          params.remove(QStringLiteral("SearchIndex"));
-        }
-        // limit to first 10
-        while(isbns.size() > 10) {
-          isbns.pop_back();
-        }
-        params.insert(QStringLiteral("ItemId"), isbns.join(QLatin1String(",")));
-        if(isbn13) {
-          params.insert(QStringLiteral("IdType"), QStringLiteral("EAN"));
-        }
-      }
-      break;
-
-    case UPC:
-      {
-        QString cleanValue = value;
-        cleanValue.remove(QLatin1Char('-'));
-        // for EAN values, add 0 to beginning if not 13 characters
-        // in order to assume US country code from UPC value
-        QStringList values;
-        foreach(const QString& splitValue, cleanValue.split(FieldFormat::delimiterString())) {
-          QString tmpValue = splitValue;
-          if(m_site != US && tmpValue.length() == 12) {
-            tmpValue.prepend(QLatin1Char('0'));
-          }
-          values << tmpValue;
-          // limit to first 10 values
-          if(values.length() >= 10) {
-            break;
-          }
-        }
-
-        params.insert(QStringLiteral("Operation"), QStringLiteral("ItemLookup"));
-        // US allows UPC, all others are EAN
-        if(m_site == US) {
-          params.insert(QStringLiteral("IdType"), QStringLiteral("UPC"));
-        } else {
-          params.insert(QStringLiteral("IdType"), QStringLiteral("EAN"));
-        }
-        params.insert(QStringLiteral("ItemId"), values.join(QLatin1String(",")));
-      }
-      break;
-
-    case Keyword:
-      params.insert(QStringLiteral("Keywords"), value);
-      break;
-
-    case Raw:
-      {
-        QString key = value.section(QLatin1Char('='), 0, 0).trimmed();
-        QString str = value.section(QLatin1Char('='), 1).trimmed();
-        params.insert(key, str);
-      }
-      break;
-
-    default:
-      myWarning() << "key not recognized: " << request().key;
-      stop();
-      return;
+  // debugging check
+  if(m_testResultsFile.isEmpty()) {
+    QUrl u;
+    u.setHost(QString::fromUtf8(siteData(m_site).host));
+    m_job = KIO::storedHttpPost(payload, u, KIO::HideProgressInfo);
+    QMapIterator<QByteArray, QByteArray> i(request.headers(payload));
+    while(i.hasNext()) {
+      i.next();
+      m_job->addMetaData(QStringLiteral("customHTTPHeader"), QString::fromUtf8(i.key() + ": " + i.value()));
+    }
+  } else {
+    myDebug() << "Reading" << m_testResultsFile;
+    m_job = KIO::storedGet(QUrl::fromLocalFile(m_testResultsFile), KIO::NoReload, KIO::HideProgressInfo);
   }
-
-  AmazonRequest request(siteData(m_site).url, m_amazonKey);
-  QUrl newUrl = request.signedRequest(params);
-//  myDebug() << newUrl;
-
-  m_job = KIO::storedGet(newUrl, KIO::NoReload, KIO::HideProgressInfo);
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &AmazonFetcher::slotComplete);
@@ -446,15 +317,13 @@ void AmazonFetcher::stop() {
 }
 
 void AmazonFetcher::slotComplete(KJob*) {
-//  myDebug();
-
   if(m_job->error()) {
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
   }
 
-  QByteArray data = m_job->data();
+  const QByteArray data = m_job->data();
   if(data.isEmpty()) {
     myDebug() << "no data";
     stop();
@@ -464,9 +333,19 @@ void AmazonFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = nullptr;
 
+  if(m_enableLog) {
+    QTemporaryFile logFile(QDir::tempPath() + QStringLiteral("/amazon-search-items-XXXXXX.json"));
+    logFile.setAutoRemove(false);
+    if(logFile.open()) {
+      QTextStream t(&logFile);
+      t.setCodec("UTF-8");
+      t << data;
+      myLog() << "Writing Amazon data output to" << logFile.fileName();
+    }
+  }
 #if 0
   myWarning() << "Remove debug from amazonfetcher.cpp";
-  QFile f(QString::fromLatin1("/tmp/test%1.xml").arg(m_page));
+  QFile f(QString::fromLatin1("/tmp/test%1.json").arg(m_page));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -475,88 +354,35 @@ void AmazonFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QStringList errors;
-  if(m_total == -1) {
-    QDomDocument dom;
-    if(!dom.setContent(data, false)) {
-      myWarning() << "server did not return valid XML.";
-      stop();
-      return;
-    }
-    // check for ItemSearchErrorResponse
-    if(dom.documentElement().tagName() == QLatin1String("ItemSearchErrorResponse")) {
-      QDomNode n = dom.documentElement().namedItem(QStringLiteral("Error")).namedItem(QStringLiteral("Message"));
-      if(!n.isNull()) {
-        message(n.toElement().text(), MessageHandler::Error);
-        stop();
-        return;
-      }
-    }
-    // find TotalResults element
-    // it's in the first level under the root element
-    //ItemSearchResponse/Items/TotalResults
-    QDomNode n = dom.documentElement().namedItem(QStringLiteral("Items"))
-                                      .namedItem(QStringLiteral("TotalResults"));
-    QDomElement e = n.toElement();
-    if(!e.isNull()) {
-      m_total = e.text().toInt();
-    }
-    n = dom.documentElement().namedItem(QStringLiteral("Items"))
-                             .namedItem(QStringLiteral("Request"))
-                             .namedItem(QStringLiteral("Errors"));
-    e = n.toElement();
-    if(!e.isNull()) {
-      QDomNodeList nodes = e.elementsByTagName(QStringLiteral("Error"));
-      for(int i = 0; i < nodes.count(); ++i) {
-        e = nodes.item(i).toElement().namedItem(QStringLiteral("Code")).toElement();
-        if(!e.isNull() && e.text() == QLatin1String("AWS.ECommerceService.NoExactMatches")) {
-          // no exact match, not a real error, so skip
-          continue;
-        }
-        // for some reason, Amazon will return an error simply when a valid ISBN is not found
-        // I really want to ignore that, so check the IsValid element in the Request element
-        QDomNode isValidNode = n.parentNode().namedItem(QStringLiteral("IsValid"));
-        if(request().key == ISBN && isValidNode.toElement().text().toLower() == QLatin1String("true")) {
-          continue;
-        }
-        e = nodes.item(i).toElement().namedItem(QStringLiteral("Message")).toElement();
-        if(!e.isNull()) {
-          errors << e.text();
-        }
-      }
-    }
-  }
-
-  if(!m_xsltHandler) {
-    initXSLTHandler();
-    if(!m_xsltHandler) { // probably an error somewhere in the stylesheet loading
-      stop();
-      return;
-    }
-  }
-
-//  QRegExp stripHTML(QLatin1String("<.*>"), true);
-//  stripHTML.setMinimal(true);
-
-  // assume amazon is always utf-8
-  QString str = m_xsltHandler->applyStylesheet(QString::fromUtf8(data.constData(), data.size()));
-  Import::TellicoImporter imp(str);
-  // be quiet when loading images
-  imp.setOptions(imp.options() ^ Import::ImportShowImageErrors);
-  Data::CollPtr coll = imp.collection();
-  if(!coll) {
-    myDebug() << "no collection pointer";
+  QJsonParseError jsonError;
+  QJsonObject databject = QJsonDocument::fromJson(data, &jsonError).object();
+  if(jsonError.error != QJsonParseError::NoError) {
+    myDebug() << "AmazonFetcher: JSON error -" << jsonError.errorString();
+    message(jsonError.errorString(), MessageHandler::Error);
     stop();
     return;
   }
-
-  if(!m_addLinkField) {
-    // remove amazon field if it's not to be added
-    coll->removeField(QStringLiteral("amazon"));
+  QJsonObject resultObject = databject.value(QStringLiteral("SearchResult")).toObject();
+  if(resultObject.isEmpty()) {
+    resultObject = databject.value(QStringLiteral("ItemsResult")).toObject();
   }
 
-  Data::EntryList entries = coll->entries();
-  if(entries.isEmpty() && !errors.isEmpty()) {
+  if(m_total == -1) {
+    int totalResults = resultObject.value(QStringLiteral("TotalResultCount")).toInt();
+    if(totalResults > 0) {
+      m_total = totalResults;
+//      myDebug() << "Total results is" << totalResults;
+    }
+  }
+
+  QStringList errors;
+  QJsonValue errorValue = databject.value(QLatin1String("Errors"));
+  if(!errorValue.isNull()) {
+    foreach(const QJsonValue& error, errorValue.toArray()) {
+      errors += error.toObject().value(QLatin1String("Message")).toString();
+    }
+  }
+  if(!errors.isEmpty()) {
     for(QStringList::ConstIterator it = errors.constBegin(); it != errors.constEnd(); ++it) {
       myDebug() << "AmazonFetcher::" << *it;
     }
@@ -565,19 +391,25 @@ void AmazonFetcher::slotComplete(KJob*) {
     return;
   }
 
+  Data::CollPtr coll = createCollection();
+  if(!coll) {
+    myDebug() << "no collection pointer";
+    stop();
+    return;
+  }
+
   int count = -1;
-  foreach(Data::EntryPtr entry, entries) {
+  foreach(const QJsonValue& item, resultObject.value(QLatin1String("Items")).toArray()) {
     ++count;
     if(m_numResults >= m_limit) {
       break;
-    }
-    if(count < m_countOffset) {
-      continue;
     }
     if(!m_started) {
       // might get aborted
       break;
     }
+    Data::EntryPtr entry(new Data::Entry(coll));
+    populateEntry(entry, item.toObject());
 
     // special case book author
     // amazon is really bad about not putting spaces after periods
@@ -604,23 +436,6 @@ void AmazonFetcher::slotComplete(KJob*) {
       }
     }
 
-    // strip HTML from comments, or plot in movies
-    // tentatively don't do this, looks like ECS 4 cleaned everything up
-/*
-    if(coll->type() == Data::Collection::Video) {
-      QString plot = entry->field(QLatin1String("plot"));
-      plot.remove(stripHTML);
-      entry->setField(QLatin1String("plot"), plot);
-    } else if(coll->type() == Data::Collection::Game) {
-      QString desc = entry->field(QLatin1String("description"));
-      desc.remove(stripHTML);
-      entry->setField(QLatin1String("description"), desc);
-    } else {
-      QString comments = entry->field(QLatin1String("comments"));
-      comments.remove(stripHTML);
-      entry->setField(QLatin1String("comments"), comments);
-    }
-*/
 //    myDebug() << entry->title();
     FetchResult* r = new FetchResult(Fetcher::Ptr(this), entry);
     m_entries.insert(r->uid, entry);
@@ -634,10 +449,10 @@ void AmazonFetcher::slotComplete(KJob*) {
   }
 
   // are there any additional results to get?
-  m_hasMoreResults = m_page * AMAZON_RETURNS_PER_REQUEST < m_total;
+  m_hasMoreResults = m_testResultsFile.isEmpty() && (m_page * AMAZON_RETURNS_PER_REQUEST < m_total);
 
   const int currentTotal = qMin(m_total, m_limit);
-  if(m_page * AMAZON_RETURNS_PER_REQUEST < currentTotal) {
+  if(m_testResultsFile.isEmpty() && (m_page * AMAZON_RETURNS_PER_REQUEST < currentTotal)) {
     int foundCount = (m_page-1) * AMAZON_RETURNS_PER_REQUEST + coll->entryCount();
     message(i18n("Results from %1: %2/%3", source(), foundCount, m_total), MessageHandler::Status);
     ++m_page;
@@ -674,19 +489,15 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
         StringSet newWords;
         const QStringList keywords = FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
         foreach(const QString& keyword, keywords) {
-          // the amazon2tellico stylesheet separates keywords with '/'
-          const QStringList words = keyword.split(QLatin1Char('/'));
-          foreach(const QString& word, words) {
-            if(word == QLatin1String("General") ||
-               word == QLatin1String("Subjects") ||
-               word == QLatin1String("Par prix") || // french stuff
-               word == QLatin1String("Divers") || // french stuff
-               word.startsWith(QLatin1Char('(')) ||
-               word.startsWith(QLatin1String("Authors"))) {
-              continue;
-            }
-            newWords.add(word);
+          if(keyword == QLatin1String("General") ||
+             keyword == QLatin1String("Subjects") ||
+             keyword == QLatin1String("Par prix") || // french stuff
+             keyword == QLatin1String("Divers") || // french stuff
+             keyword.startsWith(QLatin1Char('(')) ||
+             keyword.startsWith(QLatin1String("Authors"))) {
+            continue;
           }
+          newWords.add(keyword);
         }
         entry->setField(QStringLiteral("keyword"), newWords.toList().join(FieldFormat::delimiterString()));
       }
@@ -782,23 +593,29 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
+  // don't want to show image urls in the fetch dialog
+  // so clear them after reading the URL
   QString imageURL;
   switch(m_imageSize) {
     case SmallImage:
       imageURL = entry->field(QStringLiteral("small-image"));
+      entry->setField(QStringLiteral("small-image"),  QString());
       break;
     case MediumImage:
       imageURL = entry->field(QStringLiteral("medium-image"));
+      entry->setField(QStringLiteral("medium-image"),  QString());
       break;
     case LargeImage:
       imageURL = entry->field(QStringLiteral("large-image"));
+      entry->setField(QStringLiteral("large-image"),  QString());
       break;
     case NoImage:
     default:
       break;
   }
-//  myDebug() << "grabbing " << imageURL.toDisplayString();
+
   if(!imageURL.isEmpty()) {
+//    myDebug() << "grabbing " << imageURL;
     QString id = ImageFactory::addImage(QUrl::fromUserInput(imageURL), true);
     if(id.isEmpty()) {
       message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
@@ -808,30 +625,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     }
   }
 
-  // don't want to show image urls in the fetch dialog
-  entry->setField(QStringLiteral("small-image"),  QString());
-  entry->setField(QStringLiteral("medium-image"), QString());
-  entry->setField(QStringLiteral("large-image"),  QString());
   return entry;
-}
-
-void AmazonFetcher::initXSLTHandler() {
-  QString xsltfile = DataFileRegistry::self()->locate(QStringLiteral("amazon2tellico.xsl"));
-  if(xsltfile.isEmpty()) {
-    myWarning() << "can not locate amazon2tellico.xsl.";
-    return;
-  }
-
-  QUrl u = QUrl::fromLocalFile(xsltfile);
-
-  delete m_xsltHandler;
-  m_xsltHandler = new XSLTHandler(u);
-  if(!m_xsltHandler->isValid()) {
-    myWarning() << "error in amazon2tellico.xsl.";
-    delete m_xsltHandler;
-    m_xsltHandler = nullptr;
-    return;
-  }
 }
 
 Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_) {
@@ -863,20 +657,340 @@ Tellico::Fetch::FetchRequest AmazonFetcher::updateRequest(Data::EntryPtr entry_)
   return FetchRequest();
 }
 
+QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
+  QJsonObject payload;
+  payload.insert(QLatin1String("PartnerTag"), m_assoc);
+  payload.insert(QLatin1String("PartnerType"), QLatin1String("Associates"));
+  payload.insert(QLatin1String("Operation"), QLatin1String("SearchItems"));
+  payload.insert(QLatin1String("SortBy"), QLatin1String("Relevance"));
+  // not mandatory
+//  payload.insert(QLatin1String("Marketplace"), QLatin1String(siteData(m_site).host));
+  if(m_page > 1) {
+    payload.insert(QLatin1String("ItemPage"), m_page);
+  }
+
+  QJsonArray resources;
+  resources.append(QLatin1String("ItemInfo.Title"));
+  resources.append(QLatin1String("ItemInfo.ContentInfo"));
+  resources.append(QLatin1String("ItemInfo.ByLineInfo"));
+  resources.append(QLatin1String("ItemInfo.TechnicalInfo"));
+
+  const int type = request_.collectionType;
+  switch(type) {
+    case Data::Collection::Book:
+    case Data::Collection::ComicBook:
+    case Data::Collection::Bibtex:
+      payload.insert(QLatin1String("SearchIndex"), QLatin1String("Books"));
+      resources.append(QLatin1String("ItemInfo.ExternalIds"));
+      resources.append(QLatin1String("ItemInfo.ManufactureInfo"));
+      break;
+
+    case Data::Collection::Album:
+      payload.insert(QLatin1String("SearchIndex"), QLatin1String("Music"));
+      break;
+
+    case Data::Collection::Video:
+      // CA and JP appear to have a bug where Video only returns VHS or Music results
+      // DVD will return DVD, Blu-ray, etc. so just ignore VHS for those users
+      payload.insert(QLatin1String("SearchIndex"), QLatin1String("MoviesAndTV"));
+      if(m_site == CA || m_site == JP || m_site == IT || m_site == ES) {
+        payload.insert(QStringLiteral("SearchIndex"), QStringLiteral("DVD"));
+      } else {
+        payload.insert(QStringLiteral("SearchIndex"), QStringLiteral("Video"));
+      }
+//      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
+      resources.append(QLatin1String("ItemInfo.ContentRating"));
+      break;
+
+    case Data::Collection::Game:
+      payload.insert(QLatin1String("SearchIndex"), QLatin1String("VideoGames"));
+      break;
+
+    case Data::Collection::BoardGame:
+      payload.insert(QLatin1String("SearchIndex"), QLatin1String("ToysAndGames"));
+//      params.insert(QStringLiteral("SortIndex"), QStringLiteral("relevancerank"));
+      break;
+
+    case Data::Collection::Coin:
+    case Data::Collection::Stamp:
+    case Data::Collection::Wine:
+    case Data::Collection::Base:
+    case Data::Collection::Card:
+      myDebug() << "can't fetch this type:" << collectionType();
+      return QByteArray();
+  }
+
+  switch(request_.key) {
+    case Title:
+      payload.insert(QLatin1String("Title"), request_.value);
+      break;
+
+    case Person:
+      if(type == Data::Collection::Video) {
+        payload.insert(QStringLiteral("Actor"), request_.value);
+//        payload.insert(QStringLiteral("Director"), request_.value);
+      } else if(type == Data::Collection::Album) {
+        payload.insert(QStringLiteral("Artist"), request_.value);
+      } else if(type == Data::Collection::Book) {
+        payload.insert(QLatin1String("Author"), request_.value);
+      } else {
+        payload.insert(QLatin1String("Keywords"), request_.value);
+      }
+      break;
+
+    case ISBN:
+      {
+        QString cleanValue = request_.value;
+        cleanValue.remove(QLatin1Char('-'));
+        // ISBN only get digits or 'X'
+        QStringList isbns = FieldFormat::splitValue(cleanValue);
+        // Amazon isbn13 search is still very flaky, so if possible, we're going to convert
+        // all of them to isbn10. If we run into a 979 isbn13, then we're forced to do an
+        // isbn13 search
+        bool isbn13 = false;
+        for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ) {
+          if((*it).startsWith(QLatin1String("979"))) {
+            isbn13 = true;
+            break;
+          }
+          ++it;
+        }
+        // if we want isbn10, then convert all
+        if(!isbn13) {
+          for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
+            if((*it).length() > 12) {
+              (*it) = ISBNValidator::isbn10(*it);
+              (*it).remove(QLatin1Char('-'));
+            }
+          }
+        }
+        // limit to first 10
+        while(isbns.size() > 10) {
+          isbns.pop_back();
+        }
+        payload.insert(QLatin1String("Keywords"), isbns.join(QLatin1String("|")));
+        if(isbn13) {
+//          params.insert(QStringLiteral("IdType"), QStringLiteral("EAN"));
+        }
+      }
+      break;
+
+    case UPC:
+      {
+        QString cleanValue = request_.value;
+        cleanValue.remove(QLatin1Char('-'));
+        // for EAN values, add 0 to beginning if not 13 characters
+        // in order to assume US country code from UPC value
+        QStringList values;
+        foreach(const QString& splitValue, cleanValue.split(FieldFormat::delimiterString())) {
+          QString tmpValue = splitValue;
+          if(m_site != US && tmpValue.length() == 12) {
+            tmpValue.prepend(QLatin1Char('0'));
+          }
+          values << tmpValue;
+          // limit to first 10 values
+          if(values.length() >= 10) {
+            break;
+          }
+        }
+
+        payload.insert(QLatin1String("Keywords"), values.join(QLatin1String("|")));
+      }
+      break;
+
+    case Keyword:
+      payload.insert(QLatin1String("Keywords"), request_.value);
+      break;
+
+    case Raw:
+      {
+        QString key = request_.value.section(QLatin1Char('='), 0, 0).trimmed();
+        QString str = request_.value.section(QLatin1Char('='), 1).trimmed();
+        payload.insert(key, str);
+      }
+      break;
+
+    default:
+      myWarning() << "key not recognized: " << request().key;
+      return QByteArray();
+  }
+
+  switch(m_imageSize) {
+    case SmallImage:  resources.append(QLatin1String("Images.Primary.Small")); break;
+    case MediumImage: resources.append(QLatin1String("Images.Primary.Medium")); break;
+    case LargeImage:  resources.append(QLatin1String("Images.Primary.Large")); break;
+    case NoImage: break;
+  }
+
+  payload.insert(QLatin1String("Resources"), resources);
+  return QJsonDocument(payload).toJson(QJsonDocument::Compact);
+}
+
+Tellico::Data::CollPtr AmazonFetcher::createCollection() {
+  Data::CollPtr coll = CollectionFactory::collection(collectionType(), true);
+  if(!coll) {
+    return coll;
+  }
+
+  QString imageFieldName;
+  switch(m_imageSize) {
+    case SmallImage:  imageFieldName = QStringLiteral("small-image"); break;
+    case MediumImage: imageFieldName = QStringLiteral("medium-image"); break;
+    case LargeImage:  imageFieldName = QStringLiteral("large-image"); break;
+    case NoImage: break;
+  }
+
+  if(!imageFieldName.isEmpty()) {
+    Data::FieldPtr field(new Data::Field(imageFieldName, QString(), Data::Field::URL));
+    coll->addField(field);
+  }
+
+  if(optionalFields().contains(QStringLiteral("amazon"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("amazon"), i18n("Amazon Link"), Data::Field::URL));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
+  return coll;
+}
+
+void AmazonFetcher::populateEntry(Data::EntryPtr entry_, const QJsonObject& info_) {
+  QVariantMap itemMap = info_.value(QLatin1String("ItemInfo")).toObject().toVariantMap();
+  entry_->setField(QStringLiteral("title"), mapValue(itemMap, "Title", "DisplayValue"));
+  const QString isbn = mapValue(itemMap, "ExternalIds", "ISBNs", "DisplayValues");
+  if(!isbn.isEmpty()) {
+    // could be duplicate isbn10 and isbn13 values
+    QStringList isbns = FieldFormat::splitValue(isbn, FieldFormat::StringSplit);
+    for(QStringList::Iterator it = isbns.begin(); it != isbns.end(); ++it) {
+      if((*it).length() > 12) {
+        (*it) = ISBNValidator::isbn10(*it);
+        (*it).remove(QLatin1Char('-'));
+      }
+    }
+    isbns.removeDuplicates();
+    entry_->setField(QStringLiteral("isbn"), isbns.join(FieldFormat::delimiterString()));
+  }
+
+  QStringList actors, artists, authors, illustrators, publishers;
+  QVariantMap byLineMap = itemMap.value(QLatin1String("ByLineInfo")).toMap();
+  QVariantList contribArray = byLineMap.value(QLatin1String("Contributors")).toList();
+  foreach(const QVariant& v, contribArray) {
+    const QVariantMap contribMap = v.toMap();
+    const QString role = contribMap.value(QLatin1String("Role")).toString();
+    const QString name = contribMap.value(QLatin1String("Name")).toString();
+    if(role == QLatin1String("Actor")) {
+      actors += name;
+    } else if(role == QLatin1String("Artist")) {
+      artists += name;
+    } else if(role == QLatin1String("Author")) {
+      authors += name;
+    } else if(role == QLatin1String("Illustrator")) {
+      illustrators += name;
+    } else if(role == QLatin1String("Publisher")) {
+      publishers += name;
+    }
+  }
+  // assume for books that the manufacturer is the publishers
+  if(collectionType() == Data::Collection::Book ||
+     collectionType() == Data::Collection::Bibtex ||
+     collectionType() == Data::Collection::ComicBook) {
+    const QString manufacturer = byLineMap.value(QLatin1String("Manufacturer")).toMap()
+                                          .value(QLatin1String("DisplayValue")).toString();
+    publishers += manufacturer;
+  }
+
+  actors.removeDuplicates();
+  artists.removeDuplicates();
+  authors.removeDuplicates();
+  illustrators.removeDuplicates();
+  publishers.removeDuplicates();
+
+  if(!actors.isEmpty()) {
+    entry_->setField(QStringLiteral("cast"), actors.join(FieldFormat::delimiterString()));
+  }
+  if(!artists.isEmpty()) {
+    entry_->setField(QStringLiteral("artist"), artists.join(FieldFormat::delimiterString()));
+  }
+  if(!authors.isEmpty()) {
+    entry_->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
+  }
+  if(!illustrators.isEmpty()) {
+    entry_->setField(QStringLiteral("illustrator"), illustrators.join(FieldFormat::delimiterString()));
+  }
+  if(!publishers.isEmpty()) {
+    entry_->setField(QStringLiteral("publisher"), publishers.join(FieldFormat::delimiterString()));
+  }
+
+  QVariantMap contentMap = itemMap.value(QLatin1String("ContentInfo")).toMap();
+  entry_->setField(QStringLiteral("edition"), mapValue(contentMap, "Edition", "DisplayValue"));
+  entry_->setField(QStringLiteral("pages"), mapValue(contentMap, "PagesCount", "DisplayValue"));
+  const QString pubDate = mapValue(contentMap, "PublicationDate", "DisplayValue");
+  if(!pubDate.isEmpty()) {
+    entry_->setField(QStringLiteral("pub_year"), pubDate.left(4));
+  }
+  QVariantList langArray = itemMap.value(QLatin1String("ContentInfo")).toMap()
+                                  .value(QStringLiteral("Languages")).toMap()
+                                  .value(QStringLiteral("DisplayValues")).toList();
+  QStringList langs;
+  foreach(const QVariant& v, langArray) {
+    langs += mapValue(v.toMap(), "DisplayValue");
+  }
+  langs.removeDuplicates();
+  langs.removeAll(QString());
+  entry_->setField(QStringLiteral("language"), langs.join(FieldFormat::delimiterString()));
+
+  if(collectionType() == Data::Collection::Book ||
+     collectionType() == Data::Collection::Bibtex ||
+     collectionType() == Data::Collection::ComicBook) {
+    QVariantMap classificationsMap = itemMap.value(QLatin1String("Classifications")).toMap();
+    QVariantMap technicalMap = itemMap.value(QLatin1String("TechnicalInfo")).toMap();
+    QString binding = mapValue(classificationsMap, "Binding", "DisplayValue");
+    if(binding.isEmpty()) {
+      binding = mapValue(technicalMap, "Formats", "DisplayValues");
+    }
+    if(binding.contains(QStringLiteral("Paperback")) && binding != QStringLiteral("Trade Paperback")) {
+      binding = i18n("Paperback");
+    } else if(binding.contains(QStringLiteral("Hard"))) { // could be Hardcover or Hardback
+      binding = i18n("Hardback");
+    }
+    entry_->setField(QStringLiteral("binding"), binding);
+  }
+
+  QVariantMap imagesMap = info_.value(QLatin1String("Images")).toObject().toVariantMap();
+  switch(m_imageSize) {
+    case SmallImage:
+      entry_->setField(QStringLiteral("small-image"), mapValue(imagesMap, "Primary", "Small", "URL"));
+      break;
+    case MediumImage:
+      entry_->setField(QStringLiteral("medium-image"), mapValue(imagesMap, "Primary", "Medium", "URL"));
+      break;
+    case LargeImage:
+      entry_->setField(QStringLiteral("large-image"), mapValue(imagesMap, "Primary", "Large", "URL"));
+      break;
+    case NoImage:
+      break;
+  }
+
+  if(optionalFields().contains(QStringLiteral("amazon"))) {
+    entry_->setField(QStringLiteral("amazon"), mapValue(info_.toVariantMap(), "DetailPageURL"));
+  }
+}
+
 void AmazonFetcher::parseTitle(Tellico::Data::EntryPtr entry_) {
   // assume that everything in brackets or parentheses is extra
-  QRegExp rx(QLatin1String("[\\(\\[](.*)[\\)\\]]"));
-  rx.setMinimal(true);
+  static const QRegularExpression rx(QLatin1String("[\\(\\[](.*?)[\\)\\]]"));
   QString title = entry_->field(QStringLiteral("title"));
-  int pos = rx.indexIn(title);
-  while(pos > -1) {
-    if(parseTitleToken(entry_, rx.cap(1))) {
-      title.remove(pos, rx.matchedLength());
+  int pos = 0;
+  QRegularExpressionMatch match = rx.match(title, pos);
+  while(match.hasMatch()) {
+    pos = match.capturedStart();
+    if(parseTitleToken(entry_, match.captured(1))) {
+      title.remove(match.capturedStart(), match.capturedLength());
       --pos; // search again there
     }
-    pos = rx.indexIn(title, pos+1);
+    match = rx.match(title, pos+1);
   }
-  entry_->setField(QStringLiteral("title"), title.trimmed());
+  entry_->setField(QStringLiteral("title"), title.simplified());
 }
 
 bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QString& token_) {
@@ -917,9 +1031,14 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
-  static QRegExp regionRx(QLatin1String("Region [1-9]"));
-  if(regionRx.indexIn(token_) > -1) {
-    entry_->setField(QStringLiteral("region"), i18n(regionRx.cap(0).toUtf8().constData()));
+  if(token_.indexOf(QLatin1String("series"), 0, Qt::CaseInsensitive) > -1) {
+    entry_->setField(QStringLiteral("series"), token_);
+    res = true;
+  }
+  static const QRegularExpression regionRx(QLatin1String("Region [1-9]"));
+  QRegularExpressionMatch match = regionRx.match(token_);
+  if(match.hasMatch()) {
+    entry_->setField(QStringLiteral("region"), i18n(match.captured().toUtf8().constData()));
     res = true;
   }
   if(entry_->collection()->type() == Data::Collection::Game) {
@@ -929,10 +1048,6 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
     }
   }
   return res;
-}
-
-QString AmazonFetcher::secretKey() const {
-  return QString::fromUtf8(m_amazonKey);
 }
 
 //static
@@ -947,6 +1062,7 @@ QString AmazonFetcher::defaultIcon() {
 Tellico::StringHash AmazonFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("keyword")] = i18n("Keywords");
+  hash[QStringLiteral("amazon")] = i18n("Amazon Link");
   return hash;
 }
 
@@ -1047,8 +1163,8 @@ AmazonFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const AmazonFetcher*
 
   if(fetcher_) {
     m_siteCombo->setCurrentData(fetcher_->m_site);
-    m_accessEdit->setText(fetcher_->m_access);
-    m_secretKeyEdit->setText(fetcher_->secretKey());
+    m_accessEdit->setText(fetcher_->m_accessKey);
+    m_secretKeyEdit->setText(fetcher_->m_secretKey);
     m_assocEdit->setText(fetcher_->m_assoc);
     m_imageCombo->setCurrentData(fetcher_->m_imageSize);
   } else { // defaults
@@ -1068,9 +1184,9 @@ void AmazonFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!s.isEmpty()) {
     config_.writeEntry("AccessKey", s);
   }
-  QByteArray b = m_secretKeyEdit->text().trimmed().toUtf8();
-  if(!b.isEmpty()) {
-    config_.writeEntry("SecretKey", b);
+  s = m_secretKeyEdit->text().trimmed();
+  if(!s.isEmpty()) {
+    config_.writeEntry("SecretKey", s);
   }
   s = m_assocEdit->text().trimmed();
   if(!s.isEmpty()) {

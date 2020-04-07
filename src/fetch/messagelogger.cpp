@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,31 +22,21 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "messagehandler.h"
-#include "fetchmanager.h"
-#include "../utils/guiproxy.h"
-#include "../utils/cursorsaver.h"
+#include "messagelogger.h"
 
-#include <KMessageBox>
+using Tellico::Fetch::MessageLogger;
 
-using Tellico::Fetch::ManagerMessage;
-
-// default: all messages go to manager
-void ManagerMessage::send(const QString& message_, Type type_) {
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  // plus errors get a message box
+void MessageLogger::send(const QString& message_, Type type_) {
   if(type_ == Error) {
-    KMessageBox::sorry(GUI::Proxy::widget(), message_);
-//                       QString(), // caption
-//                       KMessageBox::Options(KMessageBox::Notify | KMessageBox::AllowLink));
+    errorList += message_;
   } else if(type_ == Warning) {
-    KMessageBox::information(GUI::Proxy::widget(), message_);
+    warningList += message_;
   } else {
-    Fetch::Manager::self()->updateStatus(message_);
+    statusList += message_;
   }
 }
 
-void ManagerMessage::infoList(const QString& message_, const QStringList& list_) {
-  GUI::CursorSaver cs(Qt::ArrowCursor);
-  KMessageBox::informationList(GUI::Proxy::widget(), message_, list_);
+void MessageLogger::infoList(const QString& message_, const QStringList& list_) {
+  Q_UNUSED(message_);
+  Q_UNUSED(list_);
 }

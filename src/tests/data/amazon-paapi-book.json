@@ -1,0 +1,182 @@
+{
+  "ItemsResult": {
+    "Items": [
+      {
+        "ASIN": "1921878657",
+        "DetailPageURL": "https://www.amazon.com/dp/1921878657?tag=bookie09-20&linkCode=ogi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/61xe6KCK16L.jpg",
+              "Width": 499
+            }
+          }
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "No Author",
+                "Role": "Author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Rockpool Publishing",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Slp",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 224,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2013-08-01T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9781921878657"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "1921878657"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "ManufactureInfo": {
+            "ItemPartNumber": {
+              "DisplayValue": "200 colour photos",
+              "Label": "PartNumber",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 9.0,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 9.0,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 1.65,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 0.6,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "UnitCount": {
+              "DisplayValue": 1,
+              "Label": "NumberOfItems",
+              "Locale": "en_US"
+            }
+          },
+          "TechnicalInfo": {
+            "Formats": {
+              "DisplayValues": [
+                  "Paperback"
+                ],
+              "Label": "Format",
+              "Locale": "en_GB"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Muscle Car Mania: 100 legendary Australian motoring stories (Motoring Series)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "Message": "In Stock."
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "oGEK9dN87uwQuSy0Cy2FsGZgiQlK9AMvmDO0cvPSFLdVtNKcF4nDn97DsoZMfMiHzI8W4FvyXDbV25mf3XuEwD8FU9znwQ1eZXjWM0aYpY5F1QIJ0Pm44w%3D%3D",
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 10.36,
+                "Currency": "USD",
+                "DisplayAmount": "$10.36",
+                "Savings": {
+                  "Amount": 11.59,
+                  "Currency": "USD",
+                  "DisplayAmount": "$11.59 (53%)",
+                  "Percentage": 53
+                }
+              },
+              "SavingBasis": {
+                "Amount": 21.95,
+                "Currency": "USD",
+                "DisplayAmount": "$21.95"
+              },
+              "ViolatesMAP": false
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

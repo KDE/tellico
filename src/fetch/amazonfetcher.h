@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2004-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2004-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -43,9 +43,9 @@ namespace KIO {
   class StoredTransferJob;
 }
 
+class AmazonFetcherTest;
 namespace Tellico {
 
-  class XSLTHandler;
   namespace GUI {
     class ComboBox;
   }
@@ -60,33 +60,9 @@ namespace Tellico {
 class AmazonFetcher : public Fetcher {
 Q_OBJECT
 
+friend class ::AmazonFetcherTest;
+
 public:
-  enum Site {
-    Unknown = -1,
-    US = 0,
-    UK = 1,
-    DE = 2,
-    JP = 3,
-    FR = 4,
-    CA = 5,
-    CN = 6,
-    ES = 7,
-    IT = 8,
-    BR = 9,
-    AU = 10,
-    IN = 11,
-    MX = 12,
-    TR = 13,
-    XX = 14
-  };
-
-  enum ImageSize {
-    SmallImage=0,
-    MediumImage=1,
-    LargeImage=2,
-    NoImage=3
-  };
-
   AmazonFetcher(QObject* parent);
   virtual ~AmazonFetcher();
 
@@ -103,7 +79,8 @@ public:
 
   struct SiteData {
     QString title;
-    QUrl url;
+    QByteArray host;
+    QByteArray region;
     QString country;
     QString countryName;
   };
@@ -128,21 +105,47 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
-  void initXSLTHandler();
   void doSearch();
+  QByteArray requestPayload(FetchRequest request);
+  Data::CollPtr createCollection();
+  void populateEntry(Data::EntryPtr entry, const QJsonObject& info);
   void parseTitle(Data::EntryPtr entry);
   bool parseTitleToken(Data::EntryPtr entry, const QString& token);
-  QString secretKey() const;
 
-  XSLTHandler* m_xsltHandler;
+  enum Site {
+    Unknown = -1,
+    US = 0,
+    UK = 1,
+    DE = 2,
+    JP = 3,
+    FR = 4,
+    CA = 5,
+    CN = 6,
+    ES = 7,
+    IT = 8,
+    BR = 9,
+    AU = 10,
+    IN = 11,
+    MX = 12,
+    TR = 13,
+    SG = 14,
+    AE = 15,
+    XX = 16
+  };
+
+  enum ImageSize {
+    SmallImage=0,
+    MediumImage=1,
+    LargeImage=2,
+    NoImage=3
+  };
+
   Site m_site;
   ImageSize m_imageSize;
 
-  QString m_access;
   QString m_assoc;
-  // mutable so that secretKey() can be const
-  mutable QByteArray m_amazonKey;
-  bool m_addLinkField;
+  QString m_accessKey;
+  QString m_secretKey;
   int m_limit;
   int m_countOffset;
 
@@ -153,6 +156,8 @@ private:
   QPointer<KIO::StoredTransferJob> m_job;
 
   bool m_started;
+  QString m_testResultsFile;
+  bool m_enableLog;
 };
 
 class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {

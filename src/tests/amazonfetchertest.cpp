@@ -27,6 +27,8 @@
 #include "amazonfetchertest.h"
 
 #include "../fetch/amazonfetcher.h"
+#include "../fetch/amazonrequest.h"
+#include "../fetch/messagelogger.h"
 #include "../collections/bookcollection.h"
 #include "../collections/musiccollection.h"
 #include "../collections/videocollection.h"
@@ -34,7 +36,6 @@
 #include "../collectionfactory.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
-#include "../utils/datafileregistry.h"
 
 #include <KConfigGroup>
 
@@ -51,8 +52,6 @@ void AmazonFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerMusic(Tellico::Data::Collection::Album, "music");
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "mvideo");
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
-  // since we use an XSL file
-  Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/amazon2tellico.xsl"));
   Tellico::ImageFactory::init();
 
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
@@ -102,6 +101,7 @@ void AmazonFetcherTest::initTestCase() {
 }
 
 void AmazonFetcherTest::testTitle() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(int, collType);
   QFETCH(QString, searchValue);
@@ -213,6 +213,7 @@ void AmazonFetcherTest::testTitle_data() {
 }
 
 void AmazonFetcherTest::testTitleVideoGame() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QString groupName = QStringLiteral("Amazon US");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
@@ -237,6 +238,7 @@ void AmazonFetcherTest::testTitleVideoGame() {
 }
 
 void AmazonFetcherTest::testIsbn() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(QString, searchValue);
   QFETCH(QString, resultName);
@@ -299,6 +301,7 @@ void AmazonFetcherTest::testIsbn_data() {
 }
 
 void AmazonFetcherTest::testUpc() {
+  return; // re-enable if/when Amazon searches are not so heavily throttled
   QFETCH(QString, locale);
   QFETCH(int, collType);
   QFETCH(QString, searchValue);
@@ -386,4 +389,254 @@ void AmazonFetcherTest::testUpc_data() {
                                 << static_cast<int>(Tellico::Data::Collection::Video)
                                 << QStringLiteral("5050582560985")
                                 << QStringLiteral("pacteDesLoups");
+}
+
+void AmazonFetcherTest::testRequest() {
+  // from aws-sig-v4-test-suite/post-vanilla
+  Tellico::Fetch::AmazonRequest req("AKIDEXAMPLE", "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY");
+
+  req.setHost("example.amazonaws.com");
+  req.m_headers.insert("host", req.m_host);
+  req.m_amzDate = "20150830T123600Z";
+  req.m_headers.insert("x-amz-date", req.m_amzDate);
+  req.m_path = "/";
+  QByteArray res1("POST\n/\n\nhost:example.amazonaws.com\nx-amz-date:20150830T123600Z\n\nhost;x-amz-date\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+  QCOMPARE(req.prepareCanonicalRequest(""), res1);
+
+  req.m_region = "us-east-1";
+  req.m_service = "service";
+  QByteArray res2("AWS4-HMAC-SHA256\n20150830T123600Z\n20150830/us-east-1/service/aws4_request\n553f88c9e4d10fc9e109e2aeb65f030801b70c2f6468faca261d401ae622fc87");
+  QCOMPARE(req.prepareStringToSign(res1), res2);
+
+  QByteArray res3("AWS4-HMAC-SHA256 Credential=AKIDEXAMPLE/20150830/us-east-1/service/aws4_request, SignedHeaders=host;x-amz-date, Signature=5da7c1a2acd57cee7505fc6676e4e544621c30862966e37dddb68e92efbe5d6b");
+  QCOMPARE(req.buildAuthorizationString(req.calculateSignature(res2)), res3);
+
+  QByteArray res4("com.amazon.paapi5.v1.servicev1.SearchItems");
+  QCOMPARE(req.targetOperation(), res4);
+}
+
+void AmazonFetcherTest::testPayload() {
+  QString groupName = QStringLiteral("Amazon US");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::AmazonFetcher* fetcher = new Tellico::Fetch::AmazonFetcher(this);
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Fetch::FetchRequest req(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  QByteArray payload = fetcher->requestPayload(req);
+  QByteArray res1("{\
+\"Keywords\":\"717356278525\",\
+\"Operation\":\"SearchItems\",\
+\"PartnerTag\":\"tellico-20\",\
+\"PartnerType\":\"Associates\",\
+\"Resources\":[\"ItemInfo.Title\",\"ItemInfo.ContentInfo\",\"ItemInfo.ByLineInfo\",\"ItemInfo.TechnicalInfo\",\"ItemInfo.ExternalIds\",\"ItemInfo.ManufactureInfo\",\"Images.Primary.Medium\"],\
+\"SearchIndex\":\"Books\",\
+\"SortBy\":\"Relevance\"\
+}");
+  QCOMPARE(payload.right(100), res1.right(100));
+  QCOMPARE(payload, res1);
+}
+
+void AmazonFetcherTest::testError() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+
+  Tellico::Fetch::MessageLogger* logger = new Tellico::Fetch::MessageLogger;
+  f->setMessageHandler(logger);
+  f->m_site = Tellico::Fetch::AmazonFetcher::US;
+  f->m_accessKey = QStringLiteral("test");
+  f->m_secretKey = QStringLiteral("test");
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-error1.json");
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  QVERIFY(!logger->errorList.isEmpty());
+  QCOMPARE(logger->errorList[0], QStringLiteral("The Access Key ID or security token included in the request is invalid."));
+}
+
+void AmazonFetcherTest::testUpc1() {
+  QString groupName = QStringLiteral("Amazon US");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-upc1.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Harry Potter Paperback Box Set (Books 1-7)"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0545162076"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
+void AmazonFetcherTest::testUpc2() {
+  QString groupName = QStringLiteral("Amazon US");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525; 842776102270");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  QByteArray payload = f->requestPayload(request);
+  // verify the format of the multiple UPC keyword
+  QVERIFY(payload.contains("\"Keywords\":\"717356278525|842776102270\""));
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-upc2.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 2);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Harry Potter Paperback Box Set (Books 1-7)"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0545162076"));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+}
+
+// from https://github.com/dkam/paapi/blob/master/test/data/get_item_no_author.json
+void AmazonFetcherTest::testBasicBook() {
+  QString groupName = QStringLiteral("Amazon UK");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-book.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Muscle Car Mania: 100 legendary Australian motoring stories"));
+  QCOMPARE(entry->field("author"), QStringLiteral("No Author"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Rockpool Publishing"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("Slp"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Motoring Series"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1921878657"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("224"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2013"));
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/1921878657?tag=bookie09-20&linkCode=ogi&th=1&psc=1"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
+}
+
+void AmazonFetcherTest::testTitleParsing() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::VideoCollection(true));
+  Tellico::Data::EntryPtr entry(new Tellico::Data::Entry(coll));
+  entry->setField(QStringLiteral("title"), QStringLiteral("title1 [DVD] (Widescreen) (NTSC) [Region 1]"));
+
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+
+  f->parseTitle(entry);
+  // the fetcher leaves widescreen in the title but adds the field value
+  QCOMPARE(entry->field("title"), QStringLiteral("title1 (Widescreen)"));
+  QCOMPARE(entry->field("medium"), QStringLiteral("DVD"));
+  QCOMPARE(entry->field("widescreen"), QStringLiteral("true"));
+  QCOMPARE(entry->field("format"), QStringLiteral("NTSC"));
+  QCOMPARE(entry->field("region"), QStringLiteral("Region 1"));
+}
+
+// from https://github.com/utekaravinash/gopaapi5/blob/master/_response/search_items.json
+void AmazonFetcherTest::testSearchItems_gopaapi5() {
+  QString groupName = QStringLiteral("Amazon UK");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-search-items-gopaapi5.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 3);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Go Programming Language, The"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Donovan, Alan A. A."));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Addison-Wesley Professional"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("1"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("series"), QStringLiteral("Addison-Wesley Professional Computing Series"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0134190440"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("398"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("2015"));
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/0134190440?tag=associateTag-20&linkCode=osi&th=1&psc=1"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
+
+  entry = results.at(2);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("Black Hat Go: Go Programming For Hackers and Pentesters"));
+  QCOMPARE(entry->field("author"), QStringLiteral("Steele, Tom; Patten, Chris; Kottmann, Dan"));
+}
+
+// from https://github.com/utekaravinash/gopaapi5/blob/master/_response/get_items.json
+void AmazonFetcherTest::testGetItems_gopaapi5() {
+  QString groupName = QStringLiteral("Amazon UK");
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Amazon settings.", SkipAll);
+  }
+  KConfigGroup cg(&m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
+  Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
+  Tellico::Fetch::Fetcher::Ptr fetcher(f);
+  fetcher->readConfig(cg, cg.name());
+
+  f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-get-items-gopaapi5.json");
+
+  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+
+  QCOMPARE(results.size(), 2);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QVERIFY(entry);
+  QVERIFY(entry->collection());
+  QCOMPARE(entry->collection()->type(), Tellico::Data::Collection::Book);
+  QCOMPARE(entry->field("title"), QStringLiteral("Light on Yoga: The Bible of Modern Yoga"));
+  QCOMPARE(entry->field("author"), QStringLiteral("B. K. S. Iyengar"));
+  QCOMPARE(entry->field("publisher"), QStringLiteral("Schocken"));
+  QCOMPARE(entry->field("edition"), QStringLiteral("Revised"));
+  QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0805210318"));
+  QCOMPARE(entry->field("pages"), QStringLiteral("544"));
+  QCOMPARE(entry->field("language"), QStringLiteral("English"));
+  QCOMPARE(entry->field("pub_year"), QStringLiteral("1979")); // it's a 1995 revised edition of a 1979 publication apparently
+  QCOMPARE(entry->field("amazon"), QStringLiteral("https://www.amazon.com/dp/0805210318?tag=associateTag-20&linkCode=ogi&th=1&psc=1"));
+  QVERIFY(entry->field(QStringLiteral("cover")).isEmpty()); // because image size as NoImage
 }

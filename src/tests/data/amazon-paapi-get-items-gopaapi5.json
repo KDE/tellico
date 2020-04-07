@@ -1,0 +1,717 @@
+{
+  "ItemsResult": {
+    "Items": [
+      {
+        "ASIN": "0805210318",
+        "BrowseNodeInfo": {
+          "BrowseNodes": [
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Health, Fitness & Dieting",
+                  "DisplayName": "Health, Fitness & Dieting",
+                  "Id": "10"
+                },
+                "ContextFreeName": "Alternative Medicine",
+                "DisplayName": "Alternative Medicine",
+                "Id": "4696"
+              },
+              "ContextFreeName": "Meditation",
+              "DisplayName": "Meditation",
+              "Id": "4713",
+              "IsRoot": false,
+              "SalesRank": 30
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Health, Fitness & Dieting",
+                  "DisplayName": "Health, Fitness & Dieting",
+                  "Id": "10"
+                },
+                "ContextFreeName": "Exercise & Fitness",
+                "DisplayName": "Exercise & Fitness",
+                "Id": "4645"
+              },
+              "ContextFreeName": "Yoga",
+              "DisplayName": "Yoga",
+              "Id": "4653",
+              "IsRoot": false,
+              "SalesRank": 5
+            },
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "ContextFreeName": "Books",
+                      "DisplayName": "Books",
+                      "Id": "283155"
+                    },
+                    "ContextFreeName": "Subjects",
+                    "DisplayName": "Subjects",
+                    "Id": "1000"
+                  },
+                  "ContextFreeName": "Religion & Spirituality",
+                  "DisplayName": "Religion & Spirituality",
+                  "Id": "22"
+                },
+                "ContextFreeName": "New Age & Spirituality",
+                "DisplayName": "New Age & Spirituality",
+                "Id": "12621"
+              },
+              "ContextFreeName": "Chakras",
+              "DisplayName": "Chakras",
+              "Id": "12631",
+              "IsRoot": false,
+              "SalesRank": 10
+            }
+          ],
+          "WebsiteSalesRank": {
+            "ContextFreeName": "Books",
+            "DisplayName": "Books",
+            "SalesRank": 1565
+          }
+        },
+        "DetailPageURL": "https://www.amazon.com/dp/0805210318?tag=associateTag-20&linkCode=ogi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/41CnWolqViL.jpg",
+              "Width": 324
+            },
+            "Medium": {
+              "Height": 160,
+              "URL": "https://m.media-amazon.com/images/I/41CnWolqViL._SL160_.jpg",
+              "Width": 104
+            },
+            "Small": {
+              "Height": 75,
+              "URL": "https://m.media-amazon.com/images/I/41CnWolqViL._SL75_.jpg",
+              "Width": 49
+            }
+          },
+          "Variants": [
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/31vJLdB77mL.jpg",
+                "Width": 375
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/31vJLdB77mL._SL160_.jpg",
+                "Width": 120
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/31vJLdB77mL._SL75_.jpg",
+                "Width": 56
+              }
+            }
+          ]
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "Schocken",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "B. K. S. Iyengar",
+                "Role": "Author",
+                "RoleType": "author"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Yehudi Menuhin",
+                "Role": "Foreword",
+                "RoleType": "foreword"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Schocken",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "Classifications": {
+            "Binding": {
+              "DisplayValue": "Paperback",
+              "Label": "Binding",
+              "Locale": "en_US"
+            },
+            "ProductGroup": {
+              "DisplayValue": "Book",
+              "Label": "ProductGroup",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Revised",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 544,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "1979T",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "8580001044736",
+                "8601404412103",
+                "8601300502786",
+                "9780805210316"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0805210318",
+                "9780805210316"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Features": {
+            "DisplayValues": [
+              "With complete descriptions and illustations of all the postures and breathing techniques."
+            ],
+            "Label": "Features",
+            "Locale": "en_US"
+          },
+          "ManufactureInfo": {
+            "ItemPartNumber": {
+              "DisplayValue": "9780805210316",
+              "Label": "PartNumber",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "Color": {
+              "DisplayValue": "White",
+              "Label": "Color",
+              "Locale": "en_US"
+            },
+            "IsAdultProduct": {
+              "DisplayValue": false,
+              "Label": "IsAdultProduct",
+              "Locale": "en_US"
+            },
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 7.93,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 5.15,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 1.10010668738,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 1.06,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "ReleaseDate": {
+              "DisplayValue": "1995-01-03T00:00:01Z",
+              "Label": "ReleaseDate",
+              "Locale": "en_US"
+            },
+            "UnitCount": {
+              "DisplayValue": 1,
+              "Label": "NumberOfItems",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Light on Yoga: The Bible of Modern Yoga",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "Message": "In Stock.",
+                "MinOrderQuantity": 1,
+                "Type": "Now"
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "a1Z9Bxb%2BApxyhGByHRFDSEzp6S0Axr2oLZWtZlajzohbj2jHRTW1cuwljnC%2BKdnB8wo50vkIX1iVMbLp3QrMOMkheLZoWngSJFVBHEmDzjo%3D",
+              "IsBuyBoxWinner": true,
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 13.59,
+                "Currency": "USD",
+                "DisplayAmount": "$13.59",
+                "Savings": {
+                  "Amount": 8.41,
+                  "Currency": "USD",
+                  "DisplayAmount": "$8.41 (38%)",
+                  "Percentage": 38
+                }
+              },
+              "ProgramEligibility": {
+                "IsPrimeExclusive": false,
+                "IsPrimePantry": false
+              },
+              "SavingBasis": {
+                "Amount": 22,
+                "Currency": "USD",
+                "DisplayAmount": "$22.00"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "HighestPrice": {
+                "Amount": 50.95,
+                "Currency": "USD",
+                "DisplayAmount": "$50.95"
+              },
+              "LowestPrice": {
+                "Amount": 13.25,
+                "Currency": "USD",
+                "DisplayAmount": "$13.25"
+              },
+              "OfferCount": 53
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "HighestPrice": {
+                "Amount": 515.4,
+                "Currency": "USD",
+                "DisplayAmount": "$515.40"
+              },
+              "LowestPrice": {
+                "Amount": 3.85,
+                "Currency": "USD",
+                "DisplayAmount": "$3.85"
+              },
+              "OfferCount": 181
+            },
+            {
+              "Condition": {
+                "Value": "Collectible"
+              },
+              "HighestPrice": {
+                "Amount": 678,
+                "Currency": "USD",
+                "DisplayAmount": "$678.00"
+              },
+              "LowestPrice": {
+                "Amount": 12.95,
+                "Currency": "USD",
+                "DisplayAmount": "$12.95"
+              },
+              "OfferCount": 2
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0892131349",
+        "BrowseNodeInfo": {
+          "BrowseNodes": [
+            {
+              "Ancestor": {
+                "Ancestor": {
+                  "Ancestor": {
+                    "Ancestor": {
+                      "Ancestor": {
+                        "ContextFreeName": "Books",
+                        "DisplayName": "Books",
+                        "Id": "283155"
+                      },
+                      "ContextFreeName": "Subjects",
+                      "DisplayName": "Subjects",
+                      "Id": "1000"
+                    },
+                    "ContextFreeName": "Religion & Spirituality",
+                    "DisplayName": "Religion & Spirituality",
+                    "Id": "22"
+                  },
+                  "ContextFreeName": "Hinduism",
+                  "DisplayName": "Hinduism",
+                  "Id": "12506"
+                },
+                "ContextFreeName": "Sacred Hindu Writings",
+                "DisplayName": "Sacred Writings",
+                "Id": "11309340011"
+              },
+              "ContextFreeName": "Bhagavad Gita",
+              "DisplayName": "Bhagavad Gita",
+              "Id": "12508",
+              "IsRoot": false,
+              "SalesRank": 6
+            }
+          ],
+          "WebsiteSalesRank": {
+            "ContextFreeName": "Books",
+            "DisplayName": "Books",
+            "SalesRank": 15006
+          }
+        },
+        "DetailPageURL": "https://www.amazon.com/dp/0892131349?tag=associateTag-20&linkCode=ogi&th=1&psc=1",
+        "Images": {
+          "Primary": {
+            "Large": {
+              "Height": 500,
+              "URL": "https://m.media-amazon.com/images/I/51iixzFhJDL.jpg",
+              "Width": 287
+            },
+            "Medium": {
+              "Height": 160,
+              "URL": "https://m.media-amazon.com/images/I/51iixzFhJDL._SL160_.jpg",
+              "Width": 92
+            },
+            "Small": {
+              "Height": 75,
+              "URL": "https://m.media-amazon.com/images/I/51iixzFhJDL._SL75_.jpg",
+              "Width": 43
+            }
+          },
+          "Variants": [
+            {
+              "Large": {
+                "Height": 500,
+                "URL": "https://m.media-amazon.com/images/I/31zlupl4ZiL.jpg",
+                "Width": 375
+              },
+              "Medium": {
+                "Height": 160,
+                "URL": "https://m.media-amazon.com/images/I/31zlupl4ZiL._SL160_.jpg",
+                "Width": 120
+              },
+              "Small": {
+                "Height": 75,
+                "URL": "https://m.media-amazon.com/images/I/31zlupl4ZiL._SL75_.jpg",
+                "Width": 56
+              }
+            }
+          ]
+        },
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "A. C. Bhaktivedanta Swami Prabhupada",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Bhaktivedanta Book Trust",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "Classifications": {
+            "Binding": {
+              "DisplayValue": "Mass Market Paperback",
+              "Label": "Binding",
+              "Locale": "en_US"
+            },
+            "ProductGroup": {
+              "DisplayValue": "Book",
+              "Label": "ProductGroup",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "De Luxe Ed",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "Sanskrit",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 703,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "1989-06-01T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780892131341"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "9780892131341",
+                "0892131349"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Features": {
+            "DisplayValues": [
+              "Most popular book",
+              "song of god",
+              "life manual",
+              "gives big picture of life",
+              "shows how to live happily from inside"
+            ],
+            "Label": "Features",
+            "Locale": "en_US"
+          },
+          "ManufactureInfo": {
+            "ItemPartNumber": {
+              "DisplayValue": "colour illustrations",
+              "Label": "PartNumber",
+              "Locale": "en_US"
+            }
+          },
+          "ProductInfo": {
+            "ItemDimensions": {
+              "Height": {
+                "DisplayValue": 7,
+                "Label": "Height",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Length": {
+                "DisplayValue": 4,
+                "Label": "Length",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              },
+              "Weight": {
+                "DisplayValue": 0.95,
+                "Label": "Weight",
+                "Locale": "en_US",
+                "Unit": "Pounds"
+              },
+              "Width": {
+                "DisplayValue": 1.75,
+                "Label": "Width",
+                "Locale": "en_US",
+                "Unit": "Inches"
+              }
+            },
+            "UnitCount": {
+              "DisplayValue": 1,
+              "Label": "NumberOfItems",
+              "Locale": "en_US"
+            }
+          },
+          "TechnicalInfo": {
+            "Formats": {
+              "DisplayValues": [
+                "Deluxe Edition"
+              ],
+              "Label": "Format",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Bhagavad-Gita As It Is (Paperback)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Availability": {
+                "MaxOrderQuantity": 80,
+                "Message": "In Stock.",
+                "MinOrderQuantity": 1,
+                "Type": "Now"
+              },
+              "Condition": {
+                "SubCondition": {
+                  "Value": "New"
+                },
+                "Value": "New"
+              },
+              "DeliveryInfo": {
+                "IsAmazonFulfilled": true,
+                "IsFreeShippingEligible": true,
+                "IsPrimeEligible": true
+              },
+              "Id": "a1Z9Bxb%2BApyW824hgnTU1Bupb9wXmyIXzXGidNbjm2S7k%2BF0L3X9CtpcxSVGU7TLspotILDwRGaIWQhcMpgvV1jyAtjRr0UNypSGY0cSNHY%3D",
+              "IsBuyBoxWinner": true,
+              "MerchantInfo": {
+                "Id": "ATVPDKIKX0DER",
+                "Name": "Amazon.com"
+              },
+              "Price": {
+                "Amount": 5.95,
+                "Currency": "USD",
+                "DisplayAmount": "$5.95"
+              },
+              "ProgramEligibility": {
+                "IsPrimeExclusive": false,
+                "IsPrimePantry": false
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "HighestPrice": {
+                "Amount": 15.99,
+                "Currency": "USD",
+                "DisplayAmount": "$15.99"
+              },
+              "LowestPrice": {
+                "Amount": 1.5,
+                "Currency": "USD",
+                "DisplayAmount": "$1.50"
+              },
+              "OfferCount": 86
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "HighestPrice": {
+                "Amount": 15.79,
+                "Currency": "USD",
+                "DisplayAmount": "$15.79"
+              },
+              "LowestPrice": {
+                "Amount": 0.1,
+                "Currency": "USD",
+                "DisplayAmount": "$0.10"
+              },
+              "OfferCount": 301
+            },
+            {
+              "Condition": {
+                "Value": "Collectible"
+              },
+              "HighestPrice": {
+                "Amount": 18.99,
+                "Currency": "USD",
+                "DisplayAmount": "$18.99"
+              },
+              "LowestPrice": {
+                "Amount": 3.95,
+                "Currency": "USD",
+                "DisplayAmount": "$3.95"
+              },
+              "OfferCount": 9
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
