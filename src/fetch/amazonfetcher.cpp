@@ -51,6 +51,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QFile>
+#include <QDir>
 #include <QTextStream>
 #include <QTextCodec>
 #include <QGridLayout>
@@ -58,6 +59,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QTemporaryFile>
 
 namespace {
   static const int AMAZON_RETURNS_PER_REQUEST = 10;
@@ -181,6 +183,10 @@ AmazonFetcher::AmazonFetcher(QObject* parent_)
     : Fetcher(parent_), m_site(Unknown), m_imageSize(MediumImage),
       m_assoc(QLatin1String(AMAZON_ASSOC_TOKEN)), m_limit(AMAZON_MAX_RETURNS_TOTAL),
       m_countOffset(0), m_page(1), m_total(-1), m_numResults(0), m_job(nullptr), m_started(false) {
+  // to facilitate transition to Amazon PAAPI5, allow users to enable logging the Amazon
+  // results so they can be shared for debugging
+  const QByteArray enableLog = qgetenv("TELLICO_ENABLE_AMAZON_LOG").trimmed().toLower();
+  m_enableLog = (enableLog == "true" || enableLog == "1");
 }
 
 AmazonFetcher::~AmazonFetcher() {
@@ -327,6 +333,16 @@ void AmazonFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = nullptr;
 
+  if(m_enableLog) {
+    QTemporaryFile logFile(QDir::tempPath() + QStringLiteral("/amazon-search-items-XXXXXX.json"));
+    logFile.setAutoRemove(false);
+    if(logFile.open()) {
+      QTextStream t(&logFile);
+      t.setCodec("UTF-8");
+      t << data;
+      myLog() << "Writing Amazon data output to" << logFile.fileName();
+    }
+  }
 #if 0
   myWarning() << "Remove debug from amazonfetcher.cpp";
   QFile f(QString::fromLatin1("/tmp/test%1.json").arg(m_page));

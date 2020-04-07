@@ -157,6 +157,7 @@ private:
 
   bool m_started;
   QString m_testResultsFile;
+  bool m_enableLog;
 };
 
 class AmazonFetcher::ConfigWidget : public Fetch::ConfigWidget {
