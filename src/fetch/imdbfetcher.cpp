@@ -966,7 +966,7 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
     }
   }
   if(!people.isEmpty()) {
-    entry_->setField(fieldName_, people.toList().join(FieldFormat::delimiterString()));
+    entry_->setField(fieldName_, people.values().join(FieldFormat::delimiterString()));
   }
 }
 

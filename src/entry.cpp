@@ -315,7 +315,7 @@ QStringList Entry::groupNamesByFieldName(const QString& fieldName_) const {
 
   // possible to be empty for no value
   // but we want to populate an empty group
-  return groups.isEmpty() ? QStringList(QString()) : groups.toList();
+  return groups.isEmpty() ? QStringList(QString()) : groups.values();
 }
 
 bool Entry::isOwned() {

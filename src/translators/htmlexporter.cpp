@@ -412,7 +412,7 @@ void HTMLExporter::writeImages(Tellico::Data::CollPtr coll_) {
     Data::FieldList iFields = coll_->imageFields();
     // take intersection with the fields to be exported
     QSet<Data::FieldPtr> iFieldsSet = iFields.toSet();
-    iFields = iFieldsSet.intersect(fields().toSet()).toList();
+    iFields = iFieldsSet.intersect(fields().toSet()).values();
     foreach(Data::FieldPtr field, iFields) {
       imageFields.add(field->name());
     }

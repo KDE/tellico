@@ -170,7 +170,7 @@ Tellico::Data::CollPtr CSVImporter::collection() {
         StringSet allow;
         allow.add(f->allowed());
         allow.add(value);
-        f->setAllowed(allow.toList());
+        f->setAllowed(allow.values());
         m_coll->modifyField(f);
         success = entry->setField(names[i], value);
       }

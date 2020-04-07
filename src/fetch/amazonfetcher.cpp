@@ -499,7 +499,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
           }
           newWords.add(keyword);
         }
-        entry->setField(QStringLiteral("keyword"), newWords.toList().join(FieldFormat::delimiterString()));
+        entry->setField(QStringLiteral("keyword"), newWords.values().join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("comments"), Tellico::decodeHTML(entry->field(QStringLiteral("comments"))));
       break;
@@ -529,11 +529,11 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
             break; // we're done
           }
         }
-        entry->setField(genres, words.toList().join(FieldFormat::delimiterString()));
+        entry->setField(genres, words.values().join(FieldFormat::delimiterString()));
         // language tracks get duplicated, too
         words.clear();
         words.add(FieldFormat::splitValue(entry->field(QStringLiteral("language"))));
-        entry->setField(QStringLiteral("language"), words.toList().join(FieldFormat::delimiterString()));
+        entry->setField(QStringLiteral("language"), words.values().join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(entry->field(QStringLiteral("plot"))));
       break;
@@ -565,7 +565,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
             }
           }
         }
-        entry->setField(genres, words.toList().join(FieldFormat::delimiterString()));
+        entry->setField(genres, words.values().join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("comments"), Tellico::decodeHTML(entry->field(QStringLiteral("comments"))));
       break;

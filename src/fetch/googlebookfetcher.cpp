@@ -315,7 +315,7 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   }
   // remove General
   cats.remove(QStringLiteral("General"));
-  catList = cats.toList();
+  catList = cats.values();
   catList.sort();
   entry->setField(QStringLiteral("keyword"), catList.join(FieldFormat::delimiterString()));
 

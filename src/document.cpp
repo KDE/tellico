@@ -697,7 +697,7 @@ void Document::removeImagesNotInCollection(Tellico::Data::EntryList entries_, Te
     }
   }
 
-  const QStringList realImagesToRemove = imagesToRemove.toList();
+  const QStringList realImagesToRemove = imagesToRemove.values();
   for(QStringList::ConstIterator it = realImagesToRemove.begin(); it != realImagesToRemove.end(); ++it) {
     ImageFactory::removeImage(*it, false); // doesn't delete, just remove link
   }

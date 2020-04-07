@@ -502,7 +502,7 @@ void Collection::removeEntriesFromDicts(const Tellico::Data::EntryList& entries_
     }
   }
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups.toList());
+    emit signalGroupsModified(CollPtr(this), modifiedGroups.values());
   }
 }
 
@@ -599,7 +599,7 @@ QStringList Collection::valuesByFieldName(const QString& name_) const {
     values.add(FieldFormat::splitValue(entry->field(name_)));
   } // end entry loop
 
-  return values.toList();
+  return values.values();
 }
 
 Tellico::Data::FieldPtr Collection::fieldByName(const QString& name_) const {
@@ -678,7 +678,7 @@ void Collection::populateDict(Tellico::Data::EntryGroupDict* dict_, const QStrin
     } // end group loop
   } // end entry loop
   if(!modifiedGroups.isEmpty()) {
-    emit signalGroupsModified(CollPtr(this), modifiedGroups.toList());
+    emit signalGroupsModified(CollPtr(this), modifiedGroups.values());
   }
 }
 
@@ -742,7 +742,7 @@ QStringList Collection::entryGroupNamesByField(Tellico::Data::EntryPtr entry_, c
     // we don't want the empty string
     values.remove(QString());
   }
-  return values.toList();
+  return values.values();
 }
 
 void Collection::invalidateGroups() {

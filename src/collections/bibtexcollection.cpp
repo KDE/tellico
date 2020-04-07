@@ -522,5 +522,5 @@ Tellico::Data::EntryList BibtexCollection::duplicateBibtexKeys() const {
        keyHash.insert(keyValue, entry);
      }
   }
-  return dupes.toList();
+  return dupes.values();
 }

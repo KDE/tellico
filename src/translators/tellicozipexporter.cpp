@@ -102,7 +102,7 @@ bool TellicoZipExporter::exec() {
     Data::FieldList imageFields = coll->imageFields();
     // take intersection with the fields to be exported
     QSet<Data::FieldPtr> imageFieldSet = imageFields.toSet();
-    imageFields = imageFieldSet.intersect(fields().toSet()).toList();
+    imageFields = imageFieldSet.intersect(fields().toSet()).values();
     // already took 10%, only 90% left
     const int stepSize = qMax(1, (coll->entryCount() * imageFields.count()) / 90);
     foreach(Data::EntryPtr entry, entries()) {
