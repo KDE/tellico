@@ -44,13 +44,10 @@ QString Iso5426Converter::toUtf8(const QByteArray& text_) {
   const uint len = text_.length();
   QString result;
   result.reserve(len);
-//  uint pos = 0;
   for(uint i = 0; i < len; ++i) {
     uchar c = text_[i];
     if(isAscii(c)) {
-//      result[pos++] = c;
       result.append(QLatin1Char(c));
-//      pos++;
     } else if(isCombining(c) && hasNext(i, len)) {
       // this is a hack
       // use the diaeresis instead of umlaut
@@ -67,15 +64,12 @@ QString Iso5426Converter::toUtf8(const QByteArray& text_) {
       }
       QChar d = getCombiningChar(comb + text_[i + skip]);
       if(!d.isNull()) {
-//        result[pos++] = d;
         result.append(d);
         i += skip;
       } else {
-//        result[pos++] = getChar(c);
         result.append(getChar(c));
       }
     } else {
-//      result[pos++] = getChar(c);
       result.append(getChar(c));
     }
   }
