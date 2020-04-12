@@ -73,6 +73,12 @@ add_test(iso6937test iso6937test)
 ecm_mark_as_test(iso6937test)
 TARGET_LINK_LIBRARIES(iso6937test utils Qt5::Test)
 
+add_executable(iso5426test iso5426test.cpp)
+ecm_mark_nongui_executable(iso5426test)
+add_test(iso5426test iso5426test)
+ecm_mark_as_test(iso5426test)
+TARGET_LINK_LIBRARIES(iso5426test utils Qt5::Test)
+
 SET(tellicotest_SRCS
    ../collection.cpp
    ../entry.cpp
