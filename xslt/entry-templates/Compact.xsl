@@ -108,7 +108,7 @@
   }
   td.fieldValue {
     text-align: left;
-    padding: 0px 10px 0px 2px;
+    padding: 0px 10px 0px 10px;
   }
   td.column1 {
     text-align: left;
