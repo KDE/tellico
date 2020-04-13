@@ -61,7 +61,6 @@ protected Q_SLOTS:
 
 private:
   void enterLoop();
-  bool networkIsAvailable();
 
   int m_result;
   QString m_imageId;

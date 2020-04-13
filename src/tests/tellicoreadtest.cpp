@@ -38,11 +38,21 @@
 #include "../utils/xmlhandler.h"
 
 #include <QTest>
+#include <QNetworkInterface>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
 #define QSL(x) QStringLiteral(x)
 #define TELLICOREAD_NUMBER_OF_CASES 10
+
+static bool hasNetwork() {
+  foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
+    if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
+      return true;
+    }
+  }
+  return false;
+}
 
 void TellicoReadTest::initTestCase() {
   // need to register this first
@@ -259,6 +269,8 @@ void TellicoReadTest::testLocalImage() {
 }
 
 void TellicoReadTest::testRemoteImage() {
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
+
   // this is the md5 hash of the logo.png icon, used as an image id
   const QString imageId(QSL("ecaf5185c4016881aaabb4933211d5d6.png"));
   // not yet loaded

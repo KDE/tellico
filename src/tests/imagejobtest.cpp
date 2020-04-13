@@ -36,7 +36,7 @@
 
 QTEST_GUILESS_MAIN( ImageJobTest )
 
-bool ImageJobTest::networkIsAvailable() {
+static bool hasNetwork() {
   foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
     if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
       return true;
@@ -192,10 +192,7 @@ void ImageJobTest::testImageLink() {
 }
 
 void ImageJobTest::testNetworkImage() {
-  if(!networkIsAvailable()) {
-    QSKIP("This test requires network access", SkipSingle);
-    return;
-  }
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QUrl u(QStringLiteral("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
 
@@ -219,10 +216,7 @@ void ImageJobTest::testNetworkImage() {
 }
 
 void ImageJobTest::testNetworkImageLink() {
-  if(!networkIsAvailable()) {
-    QSKIP("This test requires network access", SkipSingle);
-    return;
-  }
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QUrl u(QStringLiteral("https://tellico-project.org/wp-content/uploads/96-tellico.png"));
 
@@ -245,10 +239,7 @@ void ImageJobTest::testNetworkImageLink() {
 }
 
 void ImageJobTest::testNetworkImageInvalid() {
-  if(!networkIsAvailable()) {
-    QSKIP("This test requires network access", SkipSingle);
-    return;
-  }
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QUrl u(QStringLiteral("https://tellico-project.org"));
 
@@ -311,10 +302,7 @@ void ImageJobTest::testFactoryRequestLocalInvalid() {
 }
 
 void ImageJobTest::testFactoryRequestNetwork() {
-  if(!networkIsAvailable()) {
-    QSKIP("This test requires network access", SkipSingle);
-    return;
-  }
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QVERIFY(m_imageId.isEmpty());
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
@@ -340,10 +328,7 @@ void ImageJobTest::testFactoryRequestNetwork() {
 }
 
 void ImageJobTest::testFactoryRequestNetworkLinkOnly() {
-  if(!networkIsAvailable()) {
-    QSKIP("This test requires network access", SkipSingle);
-    return;
-  }
+  if(!hasNetwork()) QSKIP("This test requires network access", SkipSingle);
 
   QVERIFY(m_imageId.isEmpty());
   connect(Tellico::ImageFactory::self(), &Tellico::ImageFactory::imageAvailable,
