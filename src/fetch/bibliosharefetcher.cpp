@@ -38,7 +38,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* BIBLIOSHARE_BASE_URL = "http://www.biblioshare.org/BNCServices/BNCServices.asmx/";
+  static const char* BIBLIOSHARE_BASE_URL = "https://www.biblioshare.org/BNCServices/BNCServices.asmx/";
   static const char* BIBLIOSHARE_TOKEN = "nsnqwebh87kstlty";
 }
 
