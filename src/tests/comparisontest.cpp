@@ -47,7 +47,6 @@ void ComparisonTest::testNumber_data() {
   QTest::addColumn<int>("res");
 
   QTest::newRow("null") << QString() << QString() << 0;
-  QTest::newRow("empty") << QString() << QString() << 0;
   QTest::newRow("< 0") << QString() << QStringLiteral("0") << -1;
   QTest::newRow("> 0") << QStringLiteral("0") << QString() << 1;
   QTest::newRow("=1 1") << QStringLiteral("1") << QStringLiteral("1") << 0;
@@ -65,4 +64,27 @@ void ComparisonTest::testNumber_data() {
   QTest::newRow("float2") << QStringLiteral("5.1") << QStringLiteral("5.2") << -1;
   QTest::newRow("float3") << QStringLiteral("5.2") << QStringLiteral("5.1") << 1;
   QTest::newRow("float4") << QStringLiteral("5.1") << QStringLiteral("5.1") << 0;
+}
+
+void ComparisonTest::testLCC() {
+  QFETCH(QString, string1);
+  QFETCH(QString, string2);
+  QFETCH(int, res);
+
+  Tellico::LCCComparison comp;
+
+  QCOMPARE(comp.compare(string1, string2), res);
+}
+
+void ComparisonTest::testLCC_data() {
+  QTest::addColumn<QString>("string1");
+  QTest::addColumn<QString>("string2");
+  QTest::addColumn<int>("res");
+
+  QTest::newRow("null") << QString() << QString() << 0;
+  QTest::newRow("empty1") << QString() << QStringLiteral("B") << -1;
+  QTest::newRow("empty2") << QStringLiteral("B") << QString() << 1;
+  QTest::newRow("test1") << QStringLiteral("BX932 .C53 1993") << QStringLiteral("BX2230.3") << -1;
+  QTest::newRow("test2") << QStringLiteral("BX932 .C53 1993") << QStringLiteral("BX2380 .R67 2002") << -1;
+  QTest::newRow("test3") << QStringLiteral("AE25 E3 2002") << QStringLiteral("AE5 E333 2003") << 1;
 }

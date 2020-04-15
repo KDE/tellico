@@ -33,6 +33,8 @@ Q_OBJECT
 private Q_SLOTS:
   void testNumber();
   void testNumber_data();
+  void testLCC();
+  void testLCC_data();
 };
 
 #endif

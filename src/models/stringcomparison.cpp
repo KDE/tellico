@@ -138,6 +138,12 @@ Tellico::LCCComparison::LCCComparison() : StringComparison(),
 }
 
 int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) {
+  if(str1_.isEmpty()) {
+    return str2_.isEmpty() ? 0 : -1;
+  }
+  if(str2_.isEmpty()) {
+    return 1;
+  }
 //  myDebug() << str1_ << " to " << str2_;
   int pos1 = m_regexp.indexIn(str1_);
   const QStringList cap1 = m_regexp.capturedTexts();

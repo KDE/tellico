@@ -26,7 +26,6 @@
 #include "stringcomparison.h"
 #include "../field.h"
 #include "../collection.h"
-#include "../document.h"
 #include "../images/imagefactory.h"
 #include "../images/image.h"
 #include "../tellico_debug.h"
