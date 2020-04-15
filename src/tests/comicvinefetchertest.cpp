@@ -59,7 +59,7 @@ void ComicVineFetcherTest::testKeyword() {
   KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword,
-                                       QStringLiteral("Avengers Endgame"));
+                                       QStringLiteral("Avengers Endgame Prelude"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ComicVineFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
@@ -68,7 +68,7 @@ void ComicVineFetcherTest::testKeyword() {
   QCOMPARE(results.size(), 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
-  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Marvel's Avengers: Endgame Prelude"));
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("TPB"));
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2019"));
   QCOMPARE(entry->field(QStringLiteral("issue")), QStringLiteral("1"));
   QCOMPARE(entry->field(QStringLiteral("writer")), QStringLiteral("Will Corona Pilgrim"));

@@ -210,7 +210,7 @@ void AllocineFetcherTest::testTitleAPIAccented() {
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QString::fromUtf8("Opération Tonnerre"));
   QCOMPARE(entry->field(QStringLiteral("origtitle")), QStringLiteral("Thunderball"));
-  QCOMPARE(entry->field(QStringLiteral("studio")), QString());
+  QCOMPARE(entry->field(QStringLiteral("studio")), QStringLiteral("United International Pictures (UIP)"));
   QCOMPARE(entry->field(QStringLiteral("director")), QStringLiteral("Terence Young"));
   QCOMPARE(entry->field(QStringLiteral("color")), QStringLiteral("Color"));
   QVERIFY(!entry->field(QStringLiteral("allocine")).isEmpty());
