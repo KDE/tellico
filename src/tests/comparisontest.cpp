@@ -26,10 +26,15 @@
 
 #include "comparisontest.h"
 #include "../models/stringcomparison.h"
+#include "../config/tellico_config.h"
 
 #include <QTest>
 
-QTEST_APPLESS_MAIN( ComparisonTest )
+QTEST_GUILESS_MAIN( ComparisonTest )
+
+void ComparisonTest::initTestCase() {
+  Tellico::Config::setArticlesString(QStringLiteral("the,l'"));
+}
 
 void ComparisonTest::testNumber() {
   QFETCH(QString, string1);
@@ -82,9 +87,59 @@ void ComparisonTest::testLCC_data() {
   QTest::addColumn<int>("res");
 
   QTest::newRow("null") << QString() << QString() << 0;
-  QTest::newRow("empty1") << QString() << QStringLiteral("B") << -1;
-  QTest::newRow("empty2") << QStringLiteral("B") << QString() << 1;
+  QTest::newRow("null1") << QString() << QStringLiteral("B") << -1;
+  QTest::newRow("null2") << QStringLiteral("B") << QString() << 1;
   QTest::newRow("test1") << QStringLiteral("BX932 .C53 1993") << QStringLiteral("BX2230.3") << -1;
   QTest::newRow("test2") << QStringLiteral("BX932 .C53 1993") << QStringLiteral("BX2380 .R67 2002") << -1;
   QTest::newRow("test3") << QStringLiteral("AE25 E3 2002") << QStringLiteral("AE5 E333 2003") << 1;
+}
+
+void ComparisonTest::testDate() {
+  QFETCH(QString, string1);
+  QFETCH(QString, string2);
+  QFETCH(int, res);
+
+  Tellico::ISODateComparison comp;
+
+  QCOMPARE(comp.compare(string1, string2), res);
+}
+
+void ComparisonTest::testDate_data() {
+  QTest::addColumn<QString>("string1");
+  QTest::addColumn<QString>("string2");
+  QTest::addColumn<int>("res");
+
+  QTest::newRow("null") << QString() << QString() << 0;
+  QTest::newRow("null1") << QString() << QStringLiteral("2001") << -1;
+  QTest::newRow("null2") << QStringLiteral("2001") << QString() << 1;
+  QTest::newRow("test1") << QStringLiteral("2001-9-8") << QStringLiteral("2001-10-12") << -1;
+  QTest::newRow("test2") << QStringLiteral("1998") << QStringLiteral("2020-01-01") << -1;
+  QTest::newRow("test3") << QStringLiteral("2008--") << QStringLiteral("2008-1-1") << 0;
+  QTest::newRow("test5") << QStringLiteral("2008-2-2") << QStringLiteral("2008-02-02") << 0;
+}
+
+void ComparisonTest::testTitle() {
+  QFETCH(QString, string1);
+  QFETCH(QString, string2);
+  QFETCH(int, res);
+
+  Tellico::TitleComparison comp;
+
+  QCOMPARE(comp.compare(string1, string2), res);
+}
+
+void ComparisonTest::testTitle_data() {
+  QTest::addColumn<QString>("string1");
+  QTest::addColumn<QString>("string2");
+  QTest::addColumn<int>("res");
+
+  QTest::newRow("null") << QString() << QString() << 0;
+  QTest::newRow("null1") << QString() << QStringLiteral("The One") << -1;
+  QTest::newRow("null2") << QStringLiteral("The One") << QString() << 1;
+  // not that they're equal, but that "The One" should be sorted under "One"
+  QTest::newRow("test3") << QStringLiteral("The One") << QStringLiteral("One, The") << -1;
+  QTest::newRow("test4") << QStringLiteral("The One") << QStringLiteral("one, the") << -1;
+  QTest::newRow("test5") << QStringLiteral("l'One") << QStringLiteral("one, the") << -1;
+  QTest::newRow("test6") << QStringLiteral("l'One") << QStringLiteral("the one") << 0;
+  QTest::newRow("test7") << QStringLiteral("All One") << QStringLiteral("the one") << -1;
 }

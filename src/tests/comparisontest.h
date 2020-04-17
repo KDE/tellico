@@ -31,10 +31,15 @@ class ComparisonTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testNumber();
   void testNumber_data();
   void testLCC();
   void testLCC_data();
+  void testDate();
+  void testDate_data();
+  void testTitle();
+  void testTitle_data();
 };
 
 #endif
