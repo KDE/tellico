@@ -26,6 +26,7 @@
 
 #include "comparisontest.h"
 #include "../models/stringcomparison.h"
+#include "../models/fieldcomparison.h"
 #include "../config/tellico_config.h"
 
 #include <QTest>
@@ -116,6 +117,9 @@ void ComparisonTest::testDate_data() {
   QTest::newRow("test2") << QStringLiteral("1998") << QStringLiteral("2020-01-01") << -1;
   QTest::newRow("test3") << QStringLiteral("2008--") << QStringLiteral("2008-1-1") << 0;
   QTest::newRow("test5") << QStringLiteral("2008-2-2") << QStringLiteral("2008-02-02") << 0;
+  // non-integers get converted to current date
+  QTest::newRow("words") << QStringLiteral("all-by-myself") << QStringLiteral("---") << 0;
+  QTest::newRow("words") << QStringLiteral("2020--") << QStringLiteral("---") << 0;
 }
 
 void ComparisonTest::testTitle() {
@@ -142,4 +146,68 @@ void ComparisonTest::testTitle_data() {
   QTest::newRow("test5") << QStringLiteral("l'One") << QStringLiteral("one, the") << -1;
   QTest::newRow("test6") << QStringLiteral("l'One") << QStringLiteral("the one") << 0;
   QTest::newRow("test7") << QStringLiteral("All One") << QStringLiteral("the one") << -1;
+}
+
+void ComparisonTest::testString() {
+  QFETCH(QString, string1);
+  QFETCH(QString, string2);
+  QFETCH(int, res);
+
+  Tellico::StringComparison comp;
+
+  QCOMPARE(comp.compare(string1, string2), res);
+}
+
+void ComparisonTest::testString_data() {
+  QTest::addColumn<QString>("string1");
+  QTest::addColumn<QString>("string2");
+  QTest::addColumn<int>("res");
+
+  QTest::newRow("null") << QString() << QString() << 0;
+  QTest::newRow("null1") << QString() << QStringLiteral("string") << -1;
+  QTest::newRow("null2") << QStringLiteral("string") << QString() << 1;
+  QTest::newRow("test1") << QStringLiteral("string1") << QStringLiteral("string1") << 0;
+  QTest::newRow("test2") << QStringLiteral("string1") << QStringLiteral("string2") << -1;
+}
+
+void ComparisonTest::testBool() {
+  QFETCH(QString, string1);
+  QFETCH(QString, string2);
+  QFETCH(int, res);
+
+  Tellico::BoolComparison comp;
+
+  QCOMPARE(comp.compare(string1, string2), res);
+}
+
+void ComparisonTest::testBool_data() {
+  QTest::addColumn<QString>("string1");
+  QTest::addColumn<QString>("string2");
+  QTest::addColumn<int>("res");
+
+  QTest::newRow("null") << QString() << QString() << 0;
+  QTest::newRow("null1") << QString() << QStringLiteral("true") << -1;
+  QTest::newRow("null2") << QStringLiteral("true") << QString() << 1;
+  QTest::newRow("truetrue") << QStringLiteral("true") << QStringLiteral("true") << 0;
+  QTest::newRow("truefalse") << QStringLiteral("true") << QStringLiteral("false") << 1;
+  QTest::newRow("falsetrue") << QStringLiteral("false") << QStringLiteral("true") << -1;
+}
+
+void ComparisonTest::testChoiceField() {
+  Tellico::Data::CollPtr coll(new Tellico::Data::Collection(true)); // add default field
+
+  QStringList allowed;
+  allowed << QStringLiteral("choice2") << QStringLiteral("choice1");
+  QVERIFY(allowed.size() > 1);
+  Tellico::Data::FieldPtr field(new Tellico::Data::Field(QStringLiteral("choice"), QStringLiteral("Choice"), allowed));
+  coll->addField(field);
+
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  entry1->setField(field->name(), allowed.at(0));
+  Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(coll));
+  entry2->setField(field->name(), allowed.at(1));
+
+  Tellico::FieldComparison* comp = Tellico::FieldComparison::create(field);
+  // even though the second allowed value would sort first, it comes second in the list
+  QCOMPARE(comp->compare(entry1, entry2), -1);
 }

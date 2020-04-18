@@ -49,12 +49,6 @@ add_test(fieldtest fieldtest)
 ecm_mark_as_test(fieldtest)
 TARGET_LINK_LIBRARIES(fieldtest config utils Qt5::Test)
 
-add_executable(comparisontest comparisontest.cpp ../field.cpp ../fieldformat.cpp)
-ecm_mark_nongui_executable(comparisontest)
-add_test(comparisontest comparisontest)
-ecm_mark_as_test(comparisontest)
-TARGET_LINK_LIBRARIES(comparisontest tellicomodels Qt5::Test)
-
 add_executable(imagetest imagetest.cpp ../utils/tellico_utils.cpp ../utils/guiproxy.cpp ../utils/cursorsaver.cpp ../fieldformat.cpp)
 ecm_mark_nongui_executable(imagetest)
 add_test(imagetest imagetest)
@@ -147,6 +141,12 @@ ecm_mark_nongui_executable(collectiontest)
 add_test(collectiontest collectiontest)
 ecm_mark_as_test(collectiontest)
 TARGET_LINK_LIBRARIES(collectiontest translatorstest ${TELLICO_TEST_LIBS})
+
+add_executable(comparisontest comparisontest.cpp)
+ecm_mark_nongui_executable(comparisontest)
+add_test(comparisontest comparisontest)
+ecm_mark_as_test(comparisontest)
+TARGET_LINK_LIBRARIES(comparisontest tellicotest tellicomodels Qt5::Test)
 
 add_executable(documenttest documenttest.cpp
   ../document.cpp

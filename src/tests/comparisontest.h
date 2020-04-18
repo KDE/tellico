@@ -40,6 +40,11 @@ private Q_SLOTS:
   void testDate_data();
   void testTitle();
   void testTitle_data();
+  void testString();
+  void testString_data();
+  void testBool();
+  void testBool_data();
+  void testChoiceField();
 };
 
 #endif
