@@ -131,7 +131,7 @@ void KinoFetcher::slotComplete(KJob*) {
   // since the fetch is done, don't worry about holding the job pointer
   m_job = nullptr;
 
-  QString s = Tellico::decodeHTML(data);
+  const QString s = Tellico::decodeHTML(data);
 #if 0
   myWarning() << "Remove debug from kinofetcher.cpp";
   QFile f(QStringLiteral("/tmp/test.html"));
@@ -143,7 +143,7 @@ void KinoFetcher::slotComplete(KJob*) {
   f.close();
 #endif
 
-  QRegularExpression linkRx(QStringLiteral("<span class=\"card-label\">Film.+?<a .+?card-link.+?href=\"(.+?)\".*?>(.+?)</"));
+  QRegularExpression linkRx(QStringLiteral("<span class=\"alice-teaser-label\\s*?\">.+?Film.+?<a .+?teaser-link.+?href=\"(.+?)\".*?>(.+?)</"));
   QRegularExpression dateSpanRx(QStringLiteral("<span .+?movie-startdate.+?>(.+?)</span"));
   QRegularExpression dateRx(QStringLiteral("\\d{2}\\.\\d{2}\\.(\\d{4})"));
   QRegularExpression yearEndRx(QStringLiteral("(\\d{4})/?$"));
@@ -152,7 +152,7 @@ void KinoFetcher::slotComplete(KJob*) {
   while(i.hasNext()) {
     QRegularExpressionMatch match = i.next();
     QString u = match.captured(1);
-    if(u.isEmpty()) {
+    if(u.isEmpty() || u.contains(QLatin1String("news")) || !u.contains(QLatin1String("film"))) {
       continue;
     }
     if(u.startsWith(QLatin1String("//"))) {
@@ -250,7 +250,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
 
   QRegularExpression tagRx(QStringLiteral("<.+?>"));
 
-  QRegularExpression nationalityRx(QStringLiteral("<dt>Produktionsland</dt><dd>(.*?)</dd>"));
+  QRegularExpression nationalityRx(QStringLiteral("<dt.*?>Produktionsland</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch nationalityMatch = nationalityRx.match(str_);
   if(nationalityMatch.hasMatch()) {
     const QString n = nationalityMatch.captured(1).remove(tagRx);
@@ -276,7 +276,7 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("genre"), genres.join(FieldFormat::delimiterString()));
   }
 
-  QRegularExpression certRx(QStringLiteral("<dt>FSK</dt><dd>(.*?)</dd>"));
+  QRegularExpression certRx(QStringLiteral("<dt.*?>FSK</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch certMatch = certRx.match(str_);
   if(certMatch.hasMatch()) {
     // need to translate? Let's just add FSK ratings to the allowed values
@@ -306,25 +306,26 @@ void KinoFetcher::parseEntry(Data::EntryPtr entry, const QString& str_) {
     entry->setField(QStringLiteral("certification"), c);
   }
 
-  QRegularExpression studioRx(QStringLiteral("<dt>Filmverleih</dt><dd>(.*?)</dd>"));
+  QRegularExpression studioRx(QStringLiteral("<dt.*?>Filmverleih</dt><dd.*?>(.*?)</dd>"));
   QRegularExpressionMatch studioMatch = studioRx.match(str_);
   if(studioMatch.hasMatch()) {
     QString s = studioMatch.captured(1).remove(tagRx).remove(QStringLiteral(" Min"));
     entry->setField(QStringLiteral("studio"), s);
   }
 
-  QRegularExpression plotRx(QStringLiteral("<div class=\"post-body-meta\">\\s*</div>(.*?)<(/section|h2)>"),
+  QRegularExpression plotRx(QStringLiteral("(<p class=\"movie-plot-synopsis\">.+?</p>)<(div|h2)"),
                                           QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch plotMatch = plotRx.match(str_);
   if(plotMatch.hasMatch()) {
     QString plot;
     // sometimes the plot starts with double <p>
-    QRegularExpression pRx(QStringLiteral("<p>(?!<p>).*?</p>"));
+    QRegularExpression pRx(QStringLiteral("<p.*?>(?!<p.*?>).*?</p>"));
     QRegularExpressionMatchIterator i = pRx.globalMatch(plotMatch.captured(1));
     while(i.hasNext()) {
       plot += i.next().captured(0);
     }
-    entry->setField(QStringLiteral("plot"), plot.trimmed());
+    plot = plot.remove(tagRx).trimmed();
+    entry->setField(QStringLiteral("plot"), plot);
   }
 
   QString cover = entry->field(QStringLiteral("cover"));
