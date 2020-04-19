@@ -45,7 +45,7 @@ void MovieMeterFetcherTest::initTestCase() {
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Man from Snowy River, The"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("1982"));
-  m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("George Miller"));
+//  m_fieldValues.insert(QStringLiteral("director"), QStringLiteral("George Miller"));
   m_fieldValues.insert(QStringLiteral("running-time"), QStringLiteral("102"));
   m_fieldValues.insert(QStringLiteral("genre"), QStringLiteral("Western"));
   m_fieldValues.insert(QStringLiteral("nationality"), QStringLiteral("Australië"));

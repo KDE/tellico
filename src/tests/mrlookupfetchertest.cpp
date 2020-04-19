@@ -42,7 +42,7 @@ void MRLookupFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../translators/bibtex-translation.xml"));
 
   m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.4169/amer.math.monthly.121.10.917"));
-  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("An unnoticed consequence of Szeg\\\"o's distribution theorem"));
+  m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("An unnoticed consequence of Szegö's distribution theorem"));
   m_fieldValues.insert(QStringLiteral("author"), QStringLiteral("Trench, William F."));
   m_fieldValues.insert(QStringLiteral("volume"), QStringLiteral("121"));
   m_fieldValues.insert(QStringLiteral("journal"), QStringLiteral("American Mathematical Monthly"));

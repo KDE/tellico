@@ -95,7 +95,7 @@ void SRUFetcherTest::testKBTitle() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
 
