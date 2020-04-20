@@ -141,22 +141,21 @@ void KinoTeatrFetcher::slotComplete(KJob*) {
 #endif
 
   // look for a specific div, with an href and title, sometime uses single-quote, sometimes double-quotes
-  QRegularExpression resultRx(QStringLiteral("<div id=[\"']searchItemFilms[\"']>\\s*"
-                                             ".+?<div id=[\"']lineHr[\"']>"),
+  QRegularExpression resultRx(QStringLiteral("<a class=\"uk-margin-small-bottom\" href=\"(.+?)\".+?</a>"),
                               QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression titleRx(QStringLiteral("<a href='(.+?)' class='searchItemLink'.*?>(.+?)</a>"));
+  QRegularExpression titleRx(QStringLiteral("<h2 class=\"uk-h4\">(.+?)</"));
   // the year is within the searchItemText as a 4-digit number, starting with 1 or 2
-  QRegularExpression yearRx(QStringLiteral("<p class='searchItemText'>.*?([12]\\d\\d\\d).*?</p>"),
-                            QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpression yearRx(QStringLiteral(" ([12]\\d\\d\\d)[ \"]"));
 
   QString href, title, year;
   QRegularExpressionMatchIterator i = resultRx.globalMatch(output);
   while(i.hasNext() && m_started) {
-    const QString resultText = i.next().captured();
+    QRegularExpressionMatch topMatch = i.next();
+    const QString resultText = topMatch.captured();
+    href = topMatch.captured(1);
     QRegularExpressionMatch match = titleRx.match(resultText);
     if(match.hasMatch()) {
-      href = match.captured(1);
-      title = match.captured(2);
+      title = match.captured(1);
     }
     // there can be multiple
     match = yearRx.match(resultText);
@@ -252,15 +251,12 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  int pos = 0;
-
   QRegularExpression anchorRx(QStringLiteral("<a.+?href=[\"'].+?[\"'].*?>(.*?)</"));
 
-  QRegularExpression titleRx(QStringLiteral("<strong class=[\"']red[\"'] itemprop=[\"']name[\"']>(.+?)</strong>"));
-  QRegularExpressionMatch match = titleRx.match(str_, pos);
+  QRegularExpression titleRx(QStringLiteral("<span itemprop=[\"']name[\"']>(.+?)</span"));
+  QRegularExpressionMatch match = titleRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("title"), match.captured(1).simplified());
-    pos = match.capturedEnd();
   }
 
   if(optionalFields().contains(QStringLiteral("origtitle"))) {
@@ -269,22 +265,21 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
     coll->addField(f);
 
     QRegularExpression origTitleRx(QStringLiteral("itemprop=\"alternativeHeadline\".*?>(.+?)</"));
-    match = origTitleRx.match(str_, pos);
+    match = origTitleRx.match(str_);
     if(match.hasMatch()) {
       entry->setField(QStringLiteral("origtitle"), match.captured(1).simplified());
     }
   }
 
   QRegularExpression yearRx(QStringLiteral("Рік:.*?([12]\\d\\d\\d).*?</a"));
-  match = yearRx.match(str_, pos);
+  match = yearRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("year"), match.captured(1));
-    pos = match.capturedEnd();
   }
 
   QRegularExpression countryRx(QStringLiteral("Країна:(.*?)<br"),
                                QRegularExpression::DotMatchesEverythingOption);
-  match = countryRx.match(str_, pos);
+  match = countryRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList countries;
@@ -304,7 +299,7 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
 
   QRegularExpression genreRx(QStringLiteral("itemprop=\"genre\">(.*?)<br"),
                              QRegularExpression::DotMatchesEverythingOption);
-  match = genreRx.match(str_, pos);
+  match = genreRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList genres;
@@ -324,7 +319,7 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
 
   QRegularExpression directorRx(QStringLiteral("itemprop=\"director\".*?>(.*?)<br"),
                                 QRegularExpression::DotMatchesEverythingOption);
-  match = directorRx.match(str_, pos);
+  match = directorRx.match(str_);
   if(match.hasMatch()) {
     const QString innerText = match.captured(1);
     QStringList directors;
@@ -343,14 +338,14 @@ Tellico::Data::EntryPtr KinoTeatrFetcher::parseEntry(const QString& str_) {
 
   QRegularExpression runtimeRx(QStringLiteral("Тривалість:.*?(\\d+).*?хв<br>"),
                                QRegularExpression::DotMatchesEverythingOption);
-  match = runtimeRx.match(str_, pos);
+  match = runtimeRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("running-time"), match.captured(1));
   }
 
   QRegularExpression plotRx(QStringLiteral("itemprop=[\"']description[\"'].*?>(.+?)</div"),
                             QRegularExpression::DotMatchesEverythingOption);
-  match = plotRx.match(str_, pos);
+  match = plotRx.match(str_);
   if(match.hasMatch()) {
     entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(match.captured(1).simplified()));
   } else {
@@ -392,12 +387,12 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     return;
   }
 
-  QRegularExpression nameDivRx(QStringLiteral("<div class='liderName'>(.+?)</div"),
+  QRegularExpression nameDivRx(QStringLiteral("<div.*?>(.+?)</div"),
                                QRegularExpression::DotMatchesEverythingOption);
-  QRegularExpression anchorRx(QStringLiteral("<a.+?>(.+?)</a"));
-  QRegularExpression roleRx(QStringLiteral("<span id='role'>(.+?)</span"));
+  QRegularExpression anchorRx(QStringLiteral("<a[^>]+?person[^>]+?>(.+?)</a"));
+  QRegularExpression roleRx(QStringLiteral("<br>(.+?)$"));
 
-  QRegularExpression castRx(QStringLiteral("Актори(.+?)<div id"), // next div that has an id is for next text block
+  QRegularExpression castRx(QStringLiteral("Актори(.+?)<(header|/section)"),
                             QRegularExpression::DotMatchesEverythingOption);
   QRegularExpressionMatch match = castRx.match(str_);
   if(match.hasMatch()) {
@@ -409,8 +404,8 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
       QRegularExpressionMatch anchorMatch = anchorRx.match(match.captured(1));
       if(anchorMatch.hasMatch()) {
         actors += anchorMatch.captured(1).simplified();
-        QRegularExpressionMatch spanMatch = roleRx.match(match.captured(1));
-        roles += spanMatch.hasMatch() ? spanMatch.captured(1).simplified() : QString();
+        QRegularExpressionMatch roleMatch = roleRx.match(match.captured(1));
+        roles += roleMatch.hasMatch() ? roleMatch.captured(1).simplified() : QString();
       }
     }
     // interleave actors and roles
@@ -428,7 +423,7 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression writerRx(QStringLiteral("Сценаристи(.+?)<div id"), // next div that has an id is for next text block
+  QRegularExpression writerRx(QStringLiteral("Сценаристи(.+?)<(header|/section)"),
                               QRegularExpression::DotMatchesEverythingOption);
   match = writerRx.match(str_);
   if(match.hasMatch()) {
@@ -447,7 +442,7 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression producerRx(QStringLiteral("Продюсери(.+?)<div id"), // next div that has an id is for next text block
+  QRegularExpression producerRx(QStringLiteral("Продюсери(.+?)<(header|/section)"),
                                 QRegularExpression::DotMatchesEverythingOption);
   match = producerRx.match(str_);
   if(match.hasMatch()) {
@@ -466,7 +461,7 @@ void KinoTeatrFetcher::parsePeople(Data::EntryPtr entry_, const QString& str_) {
     }
   }
 
-  QRegularExpression composerRx(QStringLiteral("Композитори(.+?)<div id"), // next div that has an id is for next text block
+  QRegularExpression composerRx(QStringLiteral("Композитори(.+?)<(header|/section)"),
                                 QRegularExpression::DotMatchesEverythingOption);
   match = composerRx.match(str_);
   if(match.hasMatch()) {

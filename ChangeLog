@@ -1,6 +1,8 @@
 2020-04-19  Robby Stephenson  <robby@periapsis.org>
 
-	* Updated kino.de data source;
+	* Updated kino.de data source.
+	* Updated KinoPoisk data source.
+	* Updated Kino-Teatr data source.
 
 2020-04-14  Robby Stephenson  <robby@periapsis.org>
 
@@ -28,7 +30,7 @@
 
 	* Fixed bug with writing invalid XML names (Bug 418067).
 
-2020-02-15  Robby Stephenson  <robby@periapsis.org>
+ 2020-02-15  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Amazon data source to PA-API v5.
 

@@ -37,7 +37,9 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
-#include <QRegExp>
+#include <QRegExp> // TODO: port away from QRegExp
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -226,13 +228,21 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
   QRegExp anchorRx(QStringLiteral("<a\\s+href=\".*\"[^>]*>(.*)</"));
   anchorRx.setMinimal(true);
 
+  QString title;
   QRegExp titleRx(QStringLiteral("class=\"moviename-big\"[^>]*>([^(]+).*</"));
   titleRx.setMinimal(true);
   if(str_.contains(titleRx)) {
-    QString t = titleRx.cap(1);
-    t.remove(tagRx);
-    t = t.simplified();
-    entry->setField(QStringLiteral("title"), t);
+    title = titleRx.cap(1);
+  } else {
+    titleRx.setPattern(QStringLiteral("itemProp=\"name\">([^(]+).*</span"));
+    if(str_.contains(titleRx)) {
+      title = titleRx.cap(1);
+    }
+  }
+  if(!title.isEmpty()) {
+    title.remove(tagRx);
+    title = title.simplified();
+    entry->setField(QStringLiteral("title"), title);
   }
 
   if(optionalFields().contains(QStringLiteral("origtitle"))) {
@@ -246,12 +256,12 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     }
   }
 
-  QRegExp yearRx(QStringLiteral("<a href=\"/lists/m_act%5Byear[^\"]+\"[^>]*>([^<]+)</a"));
+  QRegExp yearRx(QStringLiteral("href=\"/lists/navigator/[^\"]+\"[^>]*>(\\d\\d\\d\\d)</a"));
   if(str_.contains(yearRx)) {
     entry->setField(QStringLiteral("year"), yearRx.cap(1));
   }
 
-  QRegExp countryRx(QStringLiteral("<a href=\"/lists/m_act%5Bcountry[^\"]+\"[^>]*>([^<]+)</a"));
+  QRegExp countryRx(QStringLiteral("<a href=\"/lists/navigator/country[^\"]+\"[^>]*>([^<]+)</a"));
   countryRx.setMinimal(true);
   QStringList countries;
   for(int pos = countryRx.indexIn(str_); pos > -1;
@@ -263,16 +273,19 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
     entry->setField(QStringLiteral("nationality"), countries.join(Tellico::FieldFormat::delimiterString()));
   }
 
-  QRegExp genreRx(QStringLiteral("<a href=\"/lists/m_act%5Bgenre[^\"]+\"[^>]*>([^<]+)</a"));
-  genreRx.setMinimal(true);
-  QStringList genres;
-  for(int pos = genreRx.indexIn(str_); pos > -1;
-          pos = genreRx.indexIn(str_, pos+genreRx.matchedLength())) {
-    genres += genreRx.cap(1);
-  }
-  if(!genres.isEmpty()) {
-    genres.removeDuplicates();
-    entry->setField(QStringLiteral("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
+  QRegularExpression genreRx(QStringLiteral("<span itemprop=\"genre\">(.+?)</span"));
+  QRegularExpressionMatch genreMatch = genreRx.match(str_);
+  if(genreMatch.hasMatch()) {
+    const QString genreText = genreMatch.captured();
+    QStringList genres;
+    for(int pos = anchorRx.indexIn(genreText); pos > -1;
+            pos = anchorRx.indexIn(genreText, pos+anchorRx.matchedLength())) {
+      genres += anchorRx.cap(1);
+    }
+    if(!genres.isEmpty()) {
+      genres.removeDuplicates();
+      entry->setField(QStringLiteral("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
+    }
   }
 
   QRegExp directorRx(QStringLiteral("<td itemprop=\"director\">(.*)</td"));
