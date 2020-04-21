@@ -1,30 +1,27 @@
-ISBNdb.net API v2 (Bug 415883)
-anidb.net
-Douban
- * Implement multiple ISBN search and continued searching (for more than 20 results)
-Add Zotero query
-When adding new default value to a field, offer to insert value in existing entries
-Make sure all usages of FileRef* deletes the pointer
+=== Data Sources
+* ISBNdb.net API v2 (Bug 415883)
+* anidb.net
+* Douban: Implement multiple ISBN search and continued searching (for more than 20 results)
+* brickset.com api
+* MusicBrainz api v2
+* Science Direct API v2 https://dev.elsevier.com
+* Colnect: Add stamps search
+* KINO-Teatr.ua API, https://api.kino-teatr.ua
+* ADSABS API https://github.com/adsabs/adsabs-dev-api
+* Add Zotero query
+* Update the video game XSLT data sources to somehow use the platform normalization
 
-Use FileRef for template installation to support network install
+=== User Interface
+* Replace most of the toggle actions in the view settings with KDualAction
+* Use KRatingWidget
+* When adding new default value to a field, offer to insert value in existing entries
+* Centralize all the optional fields inside CollectionManager so the names are ensured to stay consistent. Add UI for adding to collection outside of fetcher results.
 
-brickset.com api
-MusicBrainz api v2
+=== Bugs
+* Make sure all usages of FileRef* delete the pointer
+* Use FileRef for template installation to support network install
 
-Supercat script: url is now 
-http://gapines.org/opac/extras/opensearch/1.1/-/mods3/title/bible
+=== Miscellaneous
+* Supercat script: url is now 
+  http://gapines.org/opac/extras/opensearch/1.1/-/mods3/title/bible
 
-Centralize all the optional fields inside CollectionManager so the names
-are ensured to stay consistent. Add UI for adding to collection outside
-of fetcher results.
-
-Science Direct API v2 https://dev.elsevier.com
-
-Replace most of the toggle actions in the view settings with KDualAction
-
-Update the video game XSLT data sources to somehow use the platform normalization
-
-Add stamps search from Colnect
-Investigate using KINO-Teatr.ua API, https://api.kino-teatr.ua
-Use KRatingWidget
-ADSABS API https://github.com/adsabs/adsabs-dev-api
