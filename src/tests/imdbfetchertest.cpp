@@ -70,7 +70,7 @@ void ImdbFetcherTest::testSnowyRiver() {
 
   QCOMPARE(entry->field("title"), QStringLiteral("The Man from Snowy River"));
   QCOMPARE(entry->field("year"), QStringLiteral("1982"));
-  QCOMPARE(set(entry, "genre"), set("Adventure; Drama; Family; Romance; Western"));
+  QCOMPARE(set(entry, "genre"), set("Adventure; Drama; Romance; Western"));
   QCOMPARE(entry->field("nationality"), QStringLiteral("Australia"));
   QCOMPARE(set(entry, "studio"), set("Cambridge Productions; Michael Edgley International; Snowy River Investment Pty. Ltd."));
   QCOMPARE(entry->field("running-time"), QStringLiteral("102"));
@@ -126,7 +126,7 @@ void ImdbFetcherTest::testAsterix() {
   QStringList altTitleList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("alttitle")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Asterix at the Olympic Games")));
   QVERIFY(altTitleList.contains(QString::fromUtf8("Astérix en los Juegos Olímpicos")));
-  QVERIFY(altTitleList.contains(QStringLiteral("Asterix alle olimpiadi")));
+  QVERIFY(altTitleList.contains(QStringLiteral("Asterix alle Olimpiadi")));
 }
 
 // https://bugs.kde.org/show_bug.cgi?id=249096
