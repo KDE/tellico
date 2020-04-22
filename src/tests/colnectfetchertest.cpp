@@ -88,7 +88,7 @@ void ColnectFetcherTest::testRaw() {
   QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("Australia"));
   QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("$1.00"));
   QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("$ - Australian dollar"));
-  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("1952~Today - Elizabeth II"));
+  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("1970~Today - Numismatic Products"));
   QCOMPARE(entry->field(QStringLiteral("mintage")), QStringLiteral("25000"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("obverse")).isEmpty());

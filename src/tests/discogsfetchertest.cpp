@@ -120,7 +120,7 @@ void DiscogsFetcherTest::testPerson() {
 
 void DiscogsFetcherTest::testKeyword() {
   // the total test case ends up exceeding the throttle limit so pause for a second
-  if(m_needToWait) QTest::qWait(1000);
+  if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
@@ -152,7 +152,7 @@ void DiscogsFetcherTest::testKeyword() {
 
 // use the Raw query type to fully test the data for a Discogs release
 void DiscogsFetcherTest::testRawData() {
-  if(m_needToWait) QTest::qWait(1000);
+  if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
@@ -189,7 +189,7 @@ void DiscogsFetcherTest::testRawData() {
 
 // do another check to make sure the Vinyl format is captured
 void DiscogsFetcherTest::testRawDataVinyl() {
-  if(m_needToWait) QTest::qWait(1000);
+  if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
