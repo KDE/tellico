@@ -85,6 +85,7 @@ void IBSFetcher::search() {
   QUrl u(QString::fromLatin1(IBS_BASE_URL));
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("ts"), QStringLiteral("as"));
+  q.addQueryItem(QStringLiteral("filterProduct_type"), QStringLiteral("ITBOOK"));
 
   switch(request().key) {
     case Title:
@@ -92,7 +93,7 @@ void IBSFetcher::search() {
         // can't have ampersands
         QString s = request().value;
         s.remove(QLatin1Char('&'));
-        q.addQueryItem(QStringLiteral("query"), s);
+        q.addQueryItem(QStringLiteral("query"), s.simplified());
       }
       break;
 
@@ -102,7 +103,7 @@ void IBSFetcher::search() {
         // limit to first isbn
         s = s.section(QLatin1Char(';'), 0, 0);
         // isbn13 search doesn't work?
-        s = ISBNValidator::isbn10(s);
+        s = ISBNValidator::isbn13(s);
         // dashes don't work
         s.remove(QLatin1Char('-'));
         q.addQueryItem(QStringLiteral("query"), s);
@@ -153,20 +154,31 @@ void IBSFetcher::slotComplete(KJob*) {
     return;
   }
 
+#if 0
+  myWarning() << "Remove debug from ibsfetcher.cpp";
+  QFile f(QString::fromLatin1("/tmp/test-ibs.html"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << data;
+  }
+  f.close();
+#endif
+
   QString s = Tellico::decodeHTML(data);
   // really specific regexp
-  QRegExp itemRx(QLatin1String("class=\"item \">(.*)class=\"price"));
+  QRegExp itemRx(QLatin1String("class=\"info\">(.*)class=\"clearfix"));
   itemRx.setMinimal(true);
-  QRegExp titleRx(QLatin1String("<div class=\"title\">\\s*<a href=\"(.*)\">(.*)</div>"));
+  QRegExp titleRx(QLatin1String("<div class=\"title\">\\s*<a [^>]*href=\"(.*)\"[^>]*>(.*)</div"));
   titleRx.setMinimal(true);
-  QRegExp yearRx(QLatin1String("<label>Anno</label>(.*)</"));
+  QRegExp yearRx(QLatin1String("<span class=\"publication_date\">(.*)</"));
   yearRx.setMinimal(true);
   QRegExp tagRx(QLatin1String("<.*>"));
   tagRx.setMinimal(true);
 
   QString url, title, year;
   for(int pos = itemRx.indexIn(s); m_started && pos > -1; pos = itemRx.indexIn(s, pos+itemRx.matchedLength())) {
-    QString s = itemRx.cap(1);
+    const QString s = itemRx.cap(1);
     if(s.contains(titleRx)) {
       url = titleRx.cap(1);
       title = titleRx.cap(2).remove(tagRx).simplified();
@@ -208,10 +220,10 @@ Tellico::Data::EntryPtr IBSFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-//  myDebug() << url.url();
 #if 0
+  myDebug() << url.url();
   myWarning() << "Remove debug from ibsfetcher.cpp";
-  QFile f(QLatin1String("/tmp/test.html"));
+  QFile f(QLatin1String("/tmp/test-ibs2.html"));
   if(f.open(QIODevice::WriteOnly)) {
     QTextStream t(&f);
     t.setCodec("UTF-8");
@@ -278,8 +290,15 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   }
 
   entry->setField(QStringLiteral("pub_year"), mapValue(resultMap, "datePublished"));
-  entry->setField(QStringLiteral("cover"), mapValue(resultMap, "image"));
   entry->setField(QStringLiteral("isbn"), mapValue(resultMap, "isbn"));
+
+  const QString id = ImageFactory::addImage(QUrl::fromUserInput(mapValue(resultMap, "image")),
+                                            true /* quiet */);
+  if(id.isEmpty()) {
+    message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+  }
+  // empty image ID is ok
+  entry->setField(QStringLiteral("cover"), id);
 
   // inLanguage is upper-case language code
   const QString lang = mapValue(resultMap, "inLanguage");
@@ -314,17 +333,31 @@ Tellico::Data::EntryPtr IBSFetcher::parseEntry(const QString& str_) {
   tagRx.setMinimal(true);
 
   // editor is not in embedded json
-  QRegExp editorRx(QLatin1String("<strong>Curatore:</strong>(.*)</div"));
+  QRegExp editorRx(QLatin1String("<b>Curatore:</b>(.*)</div"));
   editorRx.setMinimal(true);
   if(str_.contains(editorRx)) {
     entry->setField(QStringLiteral("editor"), editorRx.cap(1).remove(tagRx).simplified());
   }
 
-  // editor is not in embedded json
-  QRegExp translatorRx(QLatin1String("<strong>Traduttore:</strong>(.*)</div"));
+  // translator is not in embedded json
+  QRegExp translatorRx(QLatin1String("<b>Traduttore:</b>(.*)</div"));
   translatorRx.setMinimal(true);
   if(str_.contains(translatorRx)) {
     entry->setField(QStringLiteral("translator"), translatorRx.cap(1).remove(tagRx).simplified());
+  }
+
+  // edition is not in embedded json
+  QRegExp editionRx(QLatin1String("<b>Editore:</b>(.*)</div"));
+  editionRx.setMinimal(true);
+  if(str_.contains(editionRx)) {
+    entry->setField(QStringLiteral("edition"), editionRx.cap(1).remove(tagRx).simplified());
+  }
+
+  // series is not in embedded json
+  QRegExp seriesRx(QLatin1String("<b>Collana:</b>(.*)</div"));
+  seriesRx.setMinimal(true);
+  if(str_.contains(seriesRx)) {
+    entry->setField(QStringLiteral("series"), seriesRx.cap(1).remove(tagRx).simplified());
   }
 
   return entry;
