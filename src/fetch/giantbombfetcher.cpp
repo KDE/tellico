@@ -42,7 +42,7 @@
 
 namespace {
   static const int GIANTBOMB_MAX_RETURNS_TOTAL = 20;
-  static const char* GIANTBOMB_API_URL = "http://api.giantbomb.com";
+  static const char* GIANTBOMB_API_URL = "https://www.giantbomb.com/api";
   static const char* GIANTBOMB_API_KEY = "291bfe4b2d77a460e67dd8f90c1e7e56c3e4f05a";
 }
 
@@ -87,7 +87,7 @@ QUrl GiantBombFetcher::searchUrl() {
 
   switch(request().key) {
     case Keyword:
-      u.setPath(QStringLiteral("/search"));
+      u.setPath(u.path() + QStringLiteral("/search"));
       q.addQueryItem(QStringLiteral("query"), request().value);
       q.addQueryItem(QStringLiteral("resources"), QStringLiteral("game"));
       break;
@@ -136,7 +136,7 @@ Tellico::Data::EntryPtr GiantBombFetcher::fetchEntryHookData(Data::EntryPtr entr
   }
 
   QUrl u(QString::fromLatin1(GIANTBOMB_API_URL));
-  u.setPath(QStringLiteral("/game/%1/").arg(id));
+  u.setPath(u.path() + QStringLiteral("/game/%1/").arg(id));
   QUrlQuery q;
   q.addQueryItem(QStringLiteral("format"), QStringLiteral("xml"));
   q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
