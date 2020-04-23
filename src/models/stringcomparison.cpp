@@ -88,7 +88,8 @@ Tellico::TitleComparison::TitleComparison() : StringComparison() {
 int Tellico::TitleComparison::compare(const QString& str1_, const QString& str2_) {
   const QString title1 = FieldFormat::sortKeyTitle(str1_).toLower();
   const QString title2 = FieldFormat::sortKeyTitle(str2_).toLower();
-  return title1.localeAwareCompare(title2);
+  const int ret = title1.localeAwareCompare(title2);
+  return ret > 0 ? 1 : (ret < 0 ? -1 : 0);
 }
 
 Tellico::NumberComparison::NumberComparison() : StringComparison() {
