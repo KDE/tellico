@@ -2,6 +2,7 @@ Name=Allocine.fr
 Name[ca]=Allocine.fr
 Name[ca@valencia]=Allocine.fr
 Name[cs]=Allocine.fr
+Name[da]=Allocine.fr
 Name[de]=Allocine.fr
 Name[en_GB]=Allocine.fr
 Name[es]=Allocine.fr
