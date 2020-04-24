@@ -485,6 +485,10 @@
   <url type="faq">https://tellico-project.org/faq</url>
   <url type="help">https://docs.kde.org/?application=tellico</url>
   <screenshots>
+    <screenshot type="default" width="1280" height="704">
+      <caption>The main window showing a movie collection</caption>
+      <image>https://cdn.kde.org/screenshots/tellico/tellico-movies.png</image>
+    </screenshot>
     <screenshot type="default" width="1002" height="765">
       <caption>The main window showing a simple item in a book collection</caption>
       <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
