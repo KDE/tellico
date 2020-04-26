@@ -45,7 +45,7 @@ QString Iso5426Converter::toUtf8(const QByteArray& text_) {
   QString result;
   result.reserve(len);
   for(uint i = 0; i < len; ++i) {
-    uchar c = text_[i];
+    uchar c = uchar(text_.at(i));
     if(isAscii(c)) {
       result.append(QLatin1Char(c));
     } else if(isCombining(c) && hasNext(i, len)) {
@@ -56,13 +56,15 @@ QString Iso5426Converter::toUtf8(const QByteArray& text_) {
         c = 0xC8;
       }
       // could be two combining characters
-      uint comb = c * 256;
+      uint comb = c << 8;
       uint skip = 1;
-      if(isCombining(text_[i + 1]) && hasNext(i+1, len)) {
-        comb = (comb + text_[i + 1]) * 256;
+      const uchar next = uchar(text_.at(i+1));
+      if(isCombining(next) && hasNext(i+1, len)) {
+        comb = (comb + next) << 8;
         skip++;
       }
-      QChar d = getCombiningChar(comb + text_[i + skip]);
+      comb += uchar(text_.at(i+skip));
+      QChar d = getCombiningChar(comb);
       if(!d.isNull()) {
         result.append(d);
         i += skip;
@@ -273,14 +275,6 @@ QChar Iso5426Converter::getCombiningChar(uint c) {
     return 0x1E81; // small w with grave
   case 0xC179:
     return 0x1EF3; // small y with grave
-  case 0xC1E1:
-    return 0x01FC; // CAPITAL LETTER AE WITH ACUTE
-  case 0xC1E9:
-    return 0x01FE; // CAPITAL LETTER O WITH STROKE AND ACUTE
-  case 0xC1F1:
-    return 0x01FD; // SMALL LETTER AE WITH ACUTE
-  case 0xC1F9:
-    return 0x01FF; // Small LETTER O WITH STROKE AND ACUTE
 
   // 4/2 acute accent
   case 0xC241:
@@ -353,8 +347,12 @@ QChar Iso5426Converter::getCombiningChar(uint c) {
     return 0x017A; // small z with acute accent
   case 0xC2E1:
     return 0x01FC; // CAPITAL AE WITH ACUTE
+  case 0xC2E9:
+    return 0x01FE; // CAPITAL LETTER O WITH STROKE AND ACUTE
   case 0xC2F1:
-    return 0x01FD; // small ae with acute
+    return 0x01FD; // SMALL LETTER AE WITH ACUTE
+  case 0xC2F9:
+    return 0x01FF; // Small LETTER O WITH STROKE AND ACUTE
 
   // 4/3 circumflex accent
   case 0xC341:
@@ -971,243 +969,243 @@ QChar Iso5426Converter::getCombiningChar(uint c) {
 
   // 5/15 right half of double tilde
 
-  case 0xBFC341:
+  case 0xC0C341:
     return 0x1EA8; // CAPITAL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC345:
+  case 0xC0C345:
     return 0x1EC2; // CAPITAL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC34F:
+  case 0xC0C34F:
     return 0x1ED4; // CAPITAL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC361:
+  case 0xC0C361:
     return 0x1EA9; // SMALL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC365:
+  case 0xC0C365:
     return 0x1EC3; // SMALL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC36F:
+  case 0xC0C36F:
     return 0x1ED5; // SMALL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
-  case 0xBFC641:
+  case 0xC0C641:
     return 0x1EB2; // CAPITAL LETTER A WITH BREVE AND HOOK ABOVE
-  case 0xBFC661:
+  case 0xC0C661:
     return 0x1EB3; // SMALL LETTER A WITH BREVE AND HOOK ABOVE
-  case 0xBFCE4F:
+  case 0xC0CE4F:
     return 0x1EDE; // CAPITAL LETTER O WITH HORN AND HOOK ABOVE
-  case 0xBFCE55:
+  case 0xC0CE55:
     return 0x1EEC; // CAPITAL LETTER U WITH HORN AND HOOK ABOVE
-  case 0xBFCE6F:
+  case 0xC0CE6F:
     return 0x1EDF; // SMALL LETTER O WITH HORN AND HOOK ABOVE
-  case 0xBFCE75:
+  case 0xC0CE75:
     return 0x1EED; // SMALL LETTER U WITH HORN AND HOOK ABOVE
 
-  case 0xC0C341:
+  case 0xC1C341:
     return 0x1EA6; // CAPITAL LETTER A WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C345:
+  case 0xC1C345:
     return 0x1EC0; // CAPITAL LETTER E WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C34F:
+  case 0xC1C34F:
     return 0x1ED2; // CAPITAL LETTER O WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C361:
+  case 0xC1C361:
     return 0x1EA7; // SMALL LETTER A WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C365:
+  case 0xC1C365:
     return 0x1EC1; // SMALL LETTER E WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C36F:
+  case 0xC1C36F:
     return 0x1ED3; // SMALL LETTER O WITH CIRCUMFLEX AND GRAVE
-  case 0xC0C545:
+  case 0xC1C545:
     return 0x1E14; // CAPITAL LETTER E WITH MACRON AND GRAVE
-  case 0xC0C54F:
+  case 0xC1C54F:
     return 0x1E50; // CAPITAL LETTER O WITH MACRON AND GRAVE
-  case 0xC0C565:
+  case 0xC1C565:
     return 0x1E15; // SMALL LETTER E WITH MACRON AND GRAVE
-  case 0xC0C56F:
+  case 0xC1C56F:
     return 0x1E51; // SMALL LETTER O WITH MACRON AND GRAVE
-  case 0xC0C641:
+  case 0xC1C641:
     return 0x1EB0; // CAPITAL LETTER A WITH BREVE AND GRAVE
-  case 0xC0C661:
+  case 0xC1C661:
     return 0x1EB1; // SMALL LETTER A WITH BREVE AND GRAVE
-  case 0xC0C855:
+  case 0xC1C855:
     return 0x01DB; // Capital Letter U with Diaeresis and GRAVE
-  case 0xC0C875:
+  case 0xC1C875:
     return 0x01DC; // Small Letter U with Diaeresis and GRAVE
-  case 0xC0CE4F:
+  case 0xC1CE4F:
     return 0x1EDC; // CAPITAL LETTER O WITH HORN AND GRAVE
-  case 0xC0CE55:
+  case 0xC1CE55:
     return 0x1EEA; // CAPITAL LETTER U WITH HORN AND GRAVE
-  case 0xC0CE6F:
+  case 0xC1CE6F:
     return 0x1EDD; // SMALL LETTER O WITH HORN AND GRAVE
-  case 0xC0CE75:
+  case 0xC1CE75:
     return 0x1EEB; // SMALL LETTER U WITH HORN AND GRAVE
 
-  case 0xC1C341:
+  case 0xC2C341:
     return 0x1EA4; // CAPITAL LETTER A WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C345:
+  case 0xC2C345:
     return 0x1EBE; // CAPITAL LETTER E WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C34F:
+  case 0xC2C34F:
     return 0x1ED0; // CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C361:
+  case 0xC2C361:
     return 0x1EA5; // SMALL LETTER A WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C365:
+  case 0xC2C365:
     return 0x1EBF; // SMALL LETTER E WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C36F:
+  case 0xC2C36F:
     return 0x1ED1; // SMALL LETTER O WITH CIRCUMFLEX AND ACUTE
-  case 0xC1C44F:
+  case 0xC2C44F:
     return 0x1E4C; // CAPITAL LETTER O WITH TILDE AND ACUTE
-  case 0xC1C455:
+  case 0xC2C455:
     return 0x1E78; // CAPITAL LETTER U WITH TILDE AND ACUTE
-  case 0xC1C46F:
+  case 0xC2C46F:
     return 0x1E4D; // SMALL LETTER O WITH TILDE AND ACUTE
-  case 0xC1C475:
+  case 0xC2C475:
     return 0x1E79; // SMALL LETTER U WITH TILDE AND ACUTE
-  case 0xC1C545:
+  case 0xC2C545:
     return 0x1E16; // CAPITAL LETTER E WITH MACRON AND ACUTE
-  case 0xC1C565:
+  case 0xC2C565:
     return 0x1E17; // SMALL LETTER E WITH MACRON AND ACUTE
-  case 0xC1C54F:
+  case 0xC2C54F:
     return 0x1E52; // CAPITAL LETTER O WITH MACRON AND ACUTE
-  case 0xC1C56F:
+  case 0xC2C56F:
     return 0x1E53; // SMALL LETTER O WITH MACRON AND ACUTE
-  case 0xC1C641:
+  case 0xC2C641:
     return 0x1EAE; // CAPITAL LETTER A WITH BREVE AND ACUTE
-  case 0xC1C661:
+  case 0xC2C661:
     return 0x1EAF; // SMALL LETTER A WITH BREVE AND ACUTE
-  case 0xC1C849:
+  case 0xC2C849:
     return 0x1E2E; // CAPITAL LETTER I WITH DIAERESIS AND ACUTE
-  case 0xC1C855:
+  case 0xC2C855:
     return 0x01D7; // Capital Letter U with Diaeresis and ACUTE
-  case 0xC1C869:
+  case 0xC2C869:
     return 0x1E2F; // Small LETTER I WITH DIAERESIS AND ACUTE
-  case 0xC1C875:
+  case 0xC2C875:
     return 0x01D8; // Small Letter U with Diaeresis and ACUTE
-  case 0xC1CA41:
+  case 0xC2CA41:
     return 0x01FA; // CAPITAL LETTER A WITH RING ABOVE AND ACUTE
-  case 0xC1CA61:
+  case 0xC2CA61:
     return 0x01FB; // SMALL LETTER A WITH RING ABOVE AND ACUTE
-  case 0xC1CE4F:
+  case 0xC2CE4F:
     return 0x1EDA; // CAPITAL LETTER O WITH HORN AND ACUTE
-  case 0xC1CE55:
+  case 0xC2CE55:
     return 0x1EE8; // CAPITAL LETTER U WITH HORN AND ACUTE
-  case 0xC1CE6F:
+  case 0xC2CE6F:
     return 0x1EDB; // SMALL LETTER O WITH HORN AND ACUTE
-  case 0xC1CE75:
+  case 0xC2CE75:
     return 0x1EE9; // small LETTER U WITH HORN AND ACUTE
-  case 0xC1D043:
+  case 0xC2D043:
     return 0x1E08; // CAPITAL LETTER C WITH CEDILLA AND ACUTE
-  case 0xC1D063:
+  case 0xC2D063:
     return 0x1E09; // Small LETTER C WITH CEDILLA AND ACUTE
 
-  case 0xC2D641:
+  case 0xC3D641:
     return 0x1EAC; // CAPITAL LETTER A WITH CIRCUMFLEX AND DOT BELOW
-  case 0xC2D645:
+  case 0xC3D645:
     return 0x1EC6; // CAPITAL LETTER E WITH CIRCUMFLEX AND DOT BELOW
-  case 0xC2D64F:
+  case 0xC3D64F:
     return 0x1ED8; // CAPITAL LETTER O WITH CIRCUMFLEX AND DOT BELOW
-  case 0xC2D661:
+  case 0xC3D661:
     return 0x1EAD; // SMALL LETTER A WITH CIRCUMFLEX AND DOT BELOW
-  case 0xC2D665:
+  case 0xC3D665:
     return 0x1EC7; // SMALL LETTER E WITH CIRCUMFLEX AND DOT BELOW
-  case 0xC2D66F:
+  case 0xC3D66F:
     return 0x1ED9; // SMALL LETTER O WITH CIRCUMFLEX AND DOT BELOW
 
-  case 0xC3C341:
+  case 0xC4C341:
     return 0x1EAA; // CAPITAL LETTER A WITH CIRCUMFLEX AND TILDE
-  case 0xC3C345:
+  case 0xC4C345:
     return 0x1EC4; // CAPITAL LETTER E WITH CIRCUMFLEX AND TILDE
-  case 0xC3C34F:
+  case 0xC4C34F:
     return 0x1ED6; // CAPITAL LETTER O WITH CIRCUMFLEX AND TILDE
-  case 0xC3C361:
+  case 0xC4C361:
     return 0x1EAB; // SMALL LETTER A WITH CIRCUMFLEX AND TILDE
-  case 0xC3C365:
+  case 0xC4C365:
     return 0x1EC5; // SMALL LETTER E WITH CIRCUMFLEX AND TILDE
-  case 0xC3C36F:
+  case 0xC4C36F:
     return 0x1ED7; // SMALL LETTER O WITH CIRCUMFLEX AND TILDE
-  case 0xC3C641:
+  case 0xC4C641:
     return 0x1EB4; // CAPITAL LETTER A WITH BREVE AND TILDE
-  case 0xC3C661:
+  case 0xC4C661:
     return 0x1EB5; // SMALL LETTER A WITH BREVE AND TILDE
-  case 0xC3CE4F:
+  case 0xC4CE4F:
     return 0x1EE0; // CAPITAL LETTER O WITH HORN AND TILDE
-  case 0xC3CE55:
+  case 0xC4CE55:
     return 0x1EEE; // CAPITAL LETTER U WITH HORN AND TILDE
-  case 0xC3CE6F:
+  case 0xC4CE6F:
     return 0x1EE1; // SMALL LETTER O WITH HORN AND TILDE
-  case 0xC3CE75:
+  case 0xC4CE75:
     return 0x1EEF; // SMALL LETTER U WITH HORN AND TILDE
 
-  case 0xC4C44F:
+  case 0xC5C44F:
     return 0x022C; // CAPITAL LETTER O WITH TILDE AND MACRON
-  case 0xC4C741:
+  case 0xC5C741:
     return 0x01E0; // CAPITAL LETTER A WITH DOT ABOVE AND MACRON
-  case 0xC4C74F:
+  case 0xC5C74F:
     return 0x0230; // CAPITAL LETTER O WITH DOT ABOVE AND MACRON
-  case 0xC4C761:
+  case 0xC5C761:
     return 0x01E1; // SMALL LETTER A WITH DOT ABOVE AND MACRON
-  case 0xC4C76F:
+  case 0xC5C76F:
     return 0x0231; // SMALL LETTER O WITH DOT ABOVE AND MACRON
-  case 0xC4C841:
+  case 0xC5C841:
     return 0x01DE; // CAPITAL LETTER A WITH DIAERESIS AND MACRON
-   case 0xC4C84F:
+  case 0xC5C84F:
     return 0x022A; // CAPITAL LETTER O WITH DIAERESIS AND MACRON
-  case 0xC4C855:
+  case 0xC5C855:
     return 0x01D5; // Capital Letter U with Diaeresis and Macron
-  case 0xC4C861:
+  case 0xC5C861:
     return 0x01DF; // Small LETTER A WITH DIAERESIS AND MACRON
-  case 0xC4C875:
+  case 0xC5C875:
     return 0x01D6; // Small Letter U with Diaeresis and Macron
-  case 0xC4D34F:
+  case 0xC5D34F:
     return 0x01EC; // CAPITAL LETTER O WITH OGONEK AND MACRON
-  case 0xC4D36F:
+  case 0xC5D36F:
     return 0x01ED; // SMALL LETTER O WITH OGONEK AND MACRON
-  case 0xC4C46F:
+  case 0xC5C46F:
     return 0x022D; // SMALL LETTER O WITH TILDE AND MACRON
-  case 0xC4D64C:
+  case 0xC5D64C:
     return 0x1E38; // CAPITAL LETTER L WITH DOT BELOW AND MACRON
-  case 0xC4D652:
+  case 0xC5D652:
     return 0x1E5C; // CAPITAL LETTER R WITH DOT BELOW AND MACRON
-  case 0xC4D66C:
+  case 0xC5D66C:
     return 0x1E39; // Small LETTER L WITH DOT BELOW AND MACRON
-  case 0xC4D672:
+  case 0xC5D672:
     return 0x1E5D; // SMALL LETTER R WITH DOT BELOW AND MACRON
-  case 0xCEC855:
-    return 0x01D9; // Capital Letter U with Diaeresis and CARON
-  case 0xC4C86F:
+  case 0xC5C86F:
     return 0x022B; // small LETTER O WITH DIAERESIS AND MACRON
 
-  case 0xC5d045:
+  case 0xC6D045:
     return 0x1E1C; // CAPITAL LETTER E WITH CEDILLA AND BREVE
-  case 0xC5d065:
+  case 0xC6D065:
     return 0x1E1D; // Small LETTER E WITH CEDILLA AND BREVE
-  case 0xC5d641:
+  case 0xC6D641:
     return 0x1EB6; // CAPITAL LETTER A WITH BREVE AND DOT BELOW
-  case 0xC5d661:
+  case 0xC6D661:
     return 0x1EB7; // SMALL LETTER A WITH BREVE AND DOT BELOW
 
-  case 0xC6C253:
+  case 0xC7C253:
     return 0x1E64; // CAPITAL LETTER S WITH ACUTE AND DOT ABOVE
-  case 0xC6C273:
+  case 0xC7C273:
     return 0x1E65; // SMALL LETTER S WITH ACUTE AND DOT ABOVE
-  case 0xC6CF53:
+  case 0xC7CF53:
     return 0x1E66; // CAPITAL LETTER S WITH CARON AND DOT ABOVE
-  case 0xC6CF73:
+  case 0xC7CF73:
     return 0x1E67; // SMALL LETTER S WITH CARON AND DOT ABOVE
-  case 0xC6D653:
+  case 0xC7D653:
     return 0x1E68; // CAPITAL LETTER S WITH DOT BELOW AND DOT ABOVE
-  case 0xC6D673:
+  case 0xC7D673:
     return 0x1E69; // SMALL LETTER S WITH DOT BELOW AND DOT ABOVE
 
-  case 0xC7C44F:
+  case 0xC8C44F:
     return 0x1E4E; // CAPITAL LETTER O WITH TILDE AND DIAERESIS
-  case 0xC7C46F:
+  case 0xC8C46F:
     return 0x1E4F; // SMALL LETTER O WITH TILDE AND DIAERESIS
-  case 0xC7C555:
+  case 0xC8C555:
     return 0x1E7A; // CAPITAL LETTER U WITH MACRON AND DIAERESIS
-  case 0xC7C575:
+  case 0xC8C575:
     return 0x1E7B; // SMALL LETTER U WITH MACRON AND DIAERESIS
 
-  case 0xCEC875:
+  case 0xCFC855:
+    return 0x01D9; // Capital Letter U with Diaeresis and CARON
+  case 0xCFC875:
     return 0x01DA; // Small Letter U with Diaeresis and CARON
 
-  case 0xD5CE4F:
+  case 0xD6CE4F:
     return 0x1EE2; // CAPITAL LETTER O WITH HORN AND DOT BELOW
-  case 0xD5CE55:
+  case 0xD6CE55:
     return 0x1EF0; // CAPITAL LETTER U WITH HORN AND DOT BELOW
-  case 0xD5CE6F:
+  case 0xD6CE6F:
     return 0x1EE3; // SMALL LETTER O WITH HORN AND DOT BELOW
-  case 0xD5CE75:
+  case 0xD6CE75:
     return 0x1EF1; // SMALL LETTER U WITH HORN AND DOT BELOW
 
   default:
