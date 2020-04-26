@@ -45,7 +45,7 @@ void Iso5426Test::testStrings_data() {
   QTest::newRow("numbers") << QStringLiteral("1234567890") << QByteArray("1234567890");
   QTest::newRow("symbols") << QStringLiteral("`-=[]\\;',./~!@#$%^&*()_+{}|:\"<>?") << QByteArray("`-=[]\\;',./~!@#$%^&*()_+{}|:\"<>?");
   // have to string concatenation since the hex looks for any length of valid characters
-//  QTest::newRow("symbols") << QStringLiteral("abcdefgäöüậ") << QByteArray("abcdefg\xc8" "a\xc8" "o\xc8" "u\xc3\xd6" "a");
+  QTest::newRow("accents") << QStringLiteral("abcdefgäöüậ") << QByteArray("abcdefg\xc8" "a\xc8" "o\xc8" "u\xc3\xd6" "a");
 }
 
 void Iso5426Test::testCharacters() {
