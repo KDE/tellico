@@ -56,8 +56,9 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
            << platformName(NintendoSwitch) << platformName(NintendoWiiU)
            << platformName(NintendoWii)  << platformName(Nintendo3DS) << platformName(NintendoDS)
            << platformName(Nintendo64)  << platformName(SuperNintendo) << platformName(Nintendo)
-           << platformName(NintendoGameCube) << platformName(Dreamcast)
-           << platformName(Windows) << platformName(MacOS) << platformName(Linux);
+           << platformName(GameBoy) << platformName(GameBoyColor) << platformName(GameBoyAdvance)
+           << platformName(NintendoGameCube) << platformName(Dreamcast) << platformName(Genesis)
+           << platformName(Windows) << platformName(MacOS) << platformName(Linux); 
   field = new Field(QStringLiteral("platform"), i18n("Platform"), platform);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);
@@ -206,11 +207,11 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
     return Nintendo64;
   } else if(name_.contains(QStringLiteral("GameCube"), Qt::CaseInsensitive)) {
     return NintendoGameCube;
-  } else if(name_.contains(QStringLiteral("Advance"))) {
+  } else if(name_.contains(QStringLiteral("Game Boy Advance")) || name_.contains(QStringLiteral("Gameboy Advance")) || name_.contains(QStringLiteral("Nintendo Game Boy Advance")) || name_.contains(QStringLiteral("Nintendo Gameboy Advance"))) {
     return GameBoyAdvance;
-  } else if(name_ == QStringLiteral("Game Boy Color")) {
+  } else if(name_.contains(QStringLiteral("Game Boy Color")) || name_.contains(QStringLiteral("Gameboy Color")) || name_.contains(QStringLiteral("Nintendo Game Boy Color")) || name_.contains(QStringLiteral("Nintendo Gameboy Color"))) {
     return GameBoyColor;
-  } else if(name_ == QStringLiteral("Game Boy")) {
+  } else if(name_.contains(QStringLiteral("Game Boy")) || name_.contains(QStringLiteral("Gameboy")) || name_.contains(QStringLiteral("Nintendo Game Boy")) || name_.contains(QStringLiteral("Nintendo Gameboy"))) {
     return GameBoy;
   } else if(name_.contains(QStringLiteral("SNES")) || name_.contains(QStringLiteral("Super Nintendo"))) {
     return SuperNintendo;
@@ -249,21 +250,21 @@ QString GameCollection::platformName(GamePlatform platform_) {
     case PlayStation4:        return i18n("PlayStation4");
     case PlayStation5:        return i18n("PlayStation5");
     case PlayStationPortable: return i18nc("PlayStation Portable", "PSP");
-    case PlayStationVita:     return i18n("PlayStation Vita");
+    case PlayStationVita:     return i18nc("PlayStation Vita", "PS Vita");
     case GameBoy:             return i18n("Game Boy");
     case GameBoyColor:        return i18n("Game Boy Color");
     case GameBoyAdvance:      return i18n("Game Boy Advance");
-    case Nintendo:            return i18n("Nintendo");
-    case SuperNintendo:       return i18n("Super Nintendo");
+    case Nintendo:            return i18n("Nintendo Entertainment System");
+    case SuperNintendo:       return i18nc("Super Nintendo", "Nintendo SNES");
     case Nintendo64:          return i18n("Nintendo 64");
-    case NintendoGameCube:    return i18n("GameCube");
-    case NintendoWii:         return i18n("Nintendo Wii");
-    case NintendoWiiU:        return i18n("Nintendo WiiU");
+    case NintendoGameCube:    return i18nc("Nintendo GameCube", "GameCube");
+    case NintendoWii:         return i18nc("Nintendo Wii", "Wii");
+    case NintendoWiiU:        return i18nc("Nintendo WiiU", "WiiU");
     case NintendoSwitch:      return i18n("Nintendo Switch");
     case NintendoDS:          return i18n("Nintendo DS");
     case Nintendo3DS:         return i18n("Nintendo 3DS");
     case Genesis:             return i18nc("Sega Genesis", "Genesis");
-    case Dreamcast:           return i18n("Dreamcast");
+    case Dreamcast:           return i18nc("Sega Dreamcast", "Dreamcast");
     case UnknownPlatform:     break;
     case LastPlatform:        break;
   }
