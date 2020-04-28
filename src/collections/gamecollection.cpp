@@ -140,6 +140,7 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
 
 
 QString GameCollection::normalizePlatform(const QString& platformName_) {
+  if(platformName_.isEmpty()) return QString();
   GamePlatform platform = guessPlatform(platformName_);
   if(platform == UnknownPlatform) {
     QString platformName = platformName_;
@@ -208,14 +209,14 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
     return NintendoGameCube;
   } else if(name_.contains(QStringLiteral("Advance"))) {
     return GameBoyAdvance;
-  } else if(name_ == QStringLiteral("Game Boy Color")) {
+  } else if(name_.contains(QStringLiteral("Game Boy Color")) || name_.contains(QStringLiteral("GameBoy Color"), Qt::CaseInsensitive)) {
     return GameBoyColor;
-  } else if(name_ == QStringLiteral("Game Boy")) {
+  } else if(name_.contains(QStringLiteral("Game Boy")) || name_.contains(QStringLiteral("GameBoy"), Qt::CaseInsensitive)) {
     return GameBoy;
   } else if(name_.contains(QStringLiteral("SNES")) || name_.contains(QStringLiteral("Super Nintendo"))) {
     return SuperNintendo;
     // nothing left for Nintendo except original
-  } else if(name_.contains(QStringLiteral("Nintendo"))) {
+  } else if(name_.contains(QStringLiteral("Nintendo")) || name_ == QStringLiteral("NES")) {
     return Nintendo;
   } else if(name_.contains(QStringLiteral("Genesis"))) {
     return Genesis;

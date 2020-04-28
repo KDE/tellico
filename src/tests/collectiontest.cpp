@@ -703,4 +703,15 @@ void CollectionTest::testGamePlatform() {
     int pGuess = Tellico::Data::GameCollection::guessPlatform(pName);
     QCOMPARE(i, pGuess);
   }
+
+  // test some specific platform names that some data sources might return
+  // thegamesdb.net returns "Nintendo Game Boy"
+  int gameBoy = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Nintendo Game Boy"));
+  QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoy));
+  gameBoy = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("gameboy"));
+  QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoy));
+  gameBoy = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("gameboy color"));
+  QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoyColor));
+  gameBoy = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Gameboy Advance"));
+  QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoyAdvance));
 }

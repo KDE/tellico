@@ -1,3 +1,7 @@
+2020-04-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Tweaked game platform normalization to match "Nintento Game Boy".
+
 2020-04-26  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed error in ISO-5426 conversion (Bug 420451).
