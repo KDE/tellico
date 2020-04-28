@@ -158,8 +158,10 @@ void CollectionTest::testCollection() {
                      + QStringLiteral("Value2");
   entry2->setField(QStringLiteral("table"), tableValue);
   QCOMPARE(entry2->formattedField(QStringLiteral("table")), tableValue);
-  QCOMPARE(QSet<QString>::fromList(entry2->groupNamesByFieldName(QStringLiteral("table"))),
-           QSet<QString>() << QStringLiteral("Value1") << QStringLiteral("Value2"));
+  groupNames = entry2->groupNamesByFieldName(QStringLiteral("table"));
+  QCOMPARE(groupNames.count(), 2);
+  QVERIFY(groupNames.contains(QStringLiteral("Value1")));
+  QVERIFY(groupNames.contains(QStringLiteral("Value2")));
 }
 
 void CollectionTest::testFields() {
