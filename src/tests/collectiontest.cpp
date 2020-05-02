@@ -716,4 +716,10 @@ void CollectionTest::testGamePlatform() {
   QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoyColor));
   gameBoy = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Gameboy Advance"));
   QCOMPARE(gameBoy, int(Tellico::Data::GameCollection::GameBoyAdvance));
+
+  // don't match Nintendo Virtual Boy with Nintendo
+  int guess = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Nintendo Virtual Boy"));
+  QCOMPARE(guess, int(Tellico::Data::GameCollection::UnknownPlatform));
+  guess = Tellico::Data::GameCollection::guessPlatform(QStringLiteral("Nintendo Entertainment System"));
+  QCOMPARE(guess, int(Tellico::Data::GameCollection::Nintendo));
 }

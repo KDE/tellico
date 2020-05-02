@@ -215,8 +215,11 @@ Tellico::Data::GameCollection::GamePlatform GameCollection::guessPlatform(const 
     return GameBoy;
   } else if(name_.contains(QStringLiteral("SNES")) || name_.contains(QStringLiteral("Super Nintendo"))) {
     return SuperNintendo;
-    // nothing left for Nintendo except original
-  } else if(name_.contains(QStringLiteral("Nintendo")) || name_ == QStringLiteral("NES")) {
+    // only return Nintendo if equal or includes Original or Entertainment
+    // could be platforms like "Nintendo Virtual Boy"
+  } else if(name_ == QStringLiteral("Nintendo")
+            || name_ == QStringLiteral("NES")
+            || name_.contains(QStringLiteral("Nintendo Entertainment"))) {
     return Nintendo;
   } else if(name_.contains(QStringLiteral("Genesis"))) {
     return Genesis;
