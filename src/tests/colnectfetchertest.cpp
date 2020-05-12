@@ -128,3 +128,36 @@ void ColnectFetcherTest::testSacagawea() {
   QVERIFY(!entry->field(QStringLiteral("reverse")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("reverse")).contains(QLatin1Char('/')));
 }
+
+void ColnectFetcherTest::testSkylab() {
+  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  QString groupName = QStringLiteral("colnect stamps");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file.", SkipAll);
+  }
+  KConfigGroup cg(&config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Stamp,
+                                       Tellico::Fetch::Title,
+                                       QStringLiteral("2013 Skylab"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+  Tellico::Data::EntryPtr entry = results.at(0);
+
+  QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("2013"));
+  QCOMPARE(entry->field(QStringLiteral("country")), QStringLiteral("Papua New Guinea"));
+  QCOMPARE(entry->field(QStringLiteral("stanley-gibbons")), QStringLiteral("PG 1638"));
+  QCOMPARE(entry->field(QStringLiteral("michel")), QStringLiteral("PG 1902"));
+  QCOMPARE(entry->field(QStringLiteral("series")), QStringLiteral("15th Anniversary of Launch of International Space Station"));
+  QCOMPARE(entry->field(QStringLiteral("gummed")), QStringLiteral("PVA (Polyvinyl Alcohol)"));
+  QCOMPARE(entry->field(QStringLiteral("denomination")), QStringLiteral("K1.30"));
+  QCOMPARE(entry->field(QStringLiteral("currency")), QStringLiteral("K - Papua New Guinean kina"));
+  QCOMPARE(entry->field(QStringLiteral("color")), QStringLiteral("Multicolor"));
+  QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("image")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("image")).contains(QLatin1Char('/')));
+}

@@ -98,8 +98,10 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantList& resultList);
+  void loadImage(Data::EntryPtr entry, const QString& fieldName);
 
   void readDataList();
+  void readStampColors();
 
   QHash<uint, Data::EntryPtr> m_entries;
 
@@ -107,9 +109,12 @@ private:
   QString m_locale;
   QPointer<KIO::StoredTransferJob> m_job;
   QString m_year;
+  QString m_category;
 
   // map from field name to position in result list
   QHash<QString, int> m_colnectFields;
+  // color names, for stamp collections
+  QHash<int, QString> m_stampColors;
 };
 
 class ColnectFetcher::ConfigWidget : public Fetch::ConfigWidget {

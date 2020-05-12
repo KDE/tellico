@@ -38,6 +38,7 @@ private Q_SLOTS:
   void testSlug_data();
   void testRaw();
   void testSacagawea();
+  void testSkylab();
 };
 
 #endif

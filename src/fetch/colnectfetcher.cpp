@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,6 +24,7 @@
 
 #include "colnectfetcher.h"
 #include "../collections/coincollection.h"
+#include "../collections/stampcollection.h"
 #include "../images/imagefactory.h"
 #include "../gui/combobox.h"
 #include "../utils/guiproxy.h"
@@ -78,11 +79,11 @@ QString ColnectFetcher::attribution() const {
 }
 
 bool ColnectFetcher::canSearch(FetchKey k) const {
-  return k == Keyword;
+  return k == Title || k == Keyword;
 }
 
 bool ColnectFetcher::canFetch(int type) const {
-  return type == Data::Collection::Coin;
+  return type == Data::Collection::Coin || type == Data::Collection::Stamp;
 }
 
 void ColnectFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -101,17 +102,56 @@ void ColnectFetcher::search() {
   // Colnect API calls are encoded as a path
   QString query(QLatin1Char('/') + m_locale);
 
+  switch(collectionType()) {
+    case Data::Collection::Coin:
+      m_category = QStringLiteral("coins");
+      break;
+    case Data::Collection::Stamp:
+      m_category = QStringLiteral("stamps");
+      break;
+    default:
+      myWarning() << "Colnect category type not available for" << collectionType();
+      stop();
+      return;
+  }
+
   QString value = request().value;
   switch(request().key) {
-    case Keyword:
+    case Title:
       {
-        query += QStringLiteral("/list/cat/coins");
-        // pull out mint year, keep the regexp a little loose
+        query += QStringLiteral("/list/cat/") + m_category;
+        // pull out year, keep the regexp a little loose
         QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
         QRegularExpressionMatch match = yearRX.match(value);
         if(match.hasMatch()) {
           m_year = match.captured(0);
-          query += QStringLiteral("/mint_year/") + m_year;
+          if(collectionType() == Data::Collection::Coin) {
+            query += QStringLiteral("/mint_year/");
+          } else {
+            query += QStringLiteral("/year/");
+          }
+          query += m_year;
+          value = value.remove(yearRX);
+        }
+      }
+      // everything left is for the item description
+      query += QStringLiteral("/item_name/") + value.simplified();
+      break;
+
+    case Keyword:
+      {
+        query += QStringLiteral("/list/cat/") + m_category;
+        // pull out year, keep the regexp a little loose
+        QRegularExpression yearRX(QStringLiteral("[0-9]{4}"));
+        QRegularExpressionMatch match = yearRX.match(value);
+        if(match.hasMatch()) {
+          m_year = match.captured(0);
+          if(collectionType() == Data::Collection::Coin) {
+            query += QStringLiteral("/mint_year/");
+          } else {
+            query += QStringLiteral("/year/");
+          }
+          query += m_year;
           value = value.remove(yearRX);
         }
       }
@@ -120,7 +160,7 @@ void ColnectFetcher::search() {
       break;
 
     case Raw:
-      query += QStringLiteral("/item/cat/coins/id/") + value;
+      query += QStringLiteral("/item/cat/") + m_category + QStringLiteral("/id/") + value;
       break;
 
     default:
@@ -160,7 +200,8 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
   const QString id = entry->field(QStringLiteral("colnect-id"));
   if(!id.isEmpty()) {
     QUrl u(QString::fromLatin1(COLNECT_API_URL));
-    QString query(QLatin1Char('/') + m_locale + QStringLiteral("/item/cat/coins/id/") + id);
+    QString query(QLatin1Char('/') + m_locale + QStringLiteral("/item/cat/")
+                  + m_category + QStringLiteral("/id/") + id);
     u.setPath(u.path() + query);
 //    myDebug() << "Reading item data from url:" << u;
 
@@ -196,24 +237,9 @@ Tellico::Data::EntryPtr ColnectFetcher::fetchEntryHook(uint uid_) {
   }
 
   // image might still be a URL only
-  QString image = entry->field(QStringLiteral("obverse"));
-  if(image.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image), true /* quiet */);
-    if(id.isEmpty()) {
-      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-    }
-    // empty image ID is ok
-    entry->setField(QStringLiteral("obverse"), id);
-  }
-  // now the reverse image
-  image = entry->field(QStringLiteral("reverse"));
-  if(image.contains(QLatin1Char('/'))) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image), true /* quiet */);
-    if(id.isEmpty()) {
-      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-    }
-    entry->setField(QStringLiteral("reverse"), id);
-  }
+  loadImage(entry, QStringLiteral("obverse"));
+  loadImage(entry, QStringLiteral("reverse"));
+  loadImage(entry, QStringLiteral("image")); // stamp image
 
   // don't want to include id
   entry->setField(QStringLiteral("colnect-id"), QString());
@@ -275,7 +301,12 @@ void ColnectFetcher::slotComplete(KJob* job_) {
 
   m_hasMoreResults = false; // for now, no continued searches
 
-  Data::CollPtr coll(new Data::CoinCollection(true));
+  Data::CollPtr coll;
+  if(collectionType() == Data::Collection::Coin) {
+    coll = new Data::CoinCollection(true);
+  } else {
+    coll = new Data::StampCollection(true);
+  }
   // placeholder for colnect id, to be removed later
   Data::FieldPtr f1(new Data::Field(QStringLiteral("colnect-id"), QString()));
   coll->addField(f1);
@@ -296,6 +327,20 @@ void ColnectFetcher::slotComplete(KJob* job_) {
   const QString mintage(QStringLiteral("mintage"));
   if(!coll->hasField(mintage) && optionalFields().contains(mintage)) {
     Data::FieldPtr field(new Data::Field(mintage, i18n("Mintage"), Data::Field::Number));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
+  const QString stanleygibbons(QStringLiteral("stanley-gibbons"));
+  if(!coll->hasField(stanleygibbons) && optionalFields().contains(stanleygibbons)) {
+    Data::FieldPtr field(new Data::Field(stanleygibbons, i18nc("Stanley Gibbons stamp catalog code", "Stanley Gibbons")));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
+
+  const QString michel(QStringLiteral("michel"));
+  if(!coll->hasField(michel) && optionalFields().contains(michel)) {
+    Data::FieldPtr field(new Data::Field(michel, i18nc("Michel stamp catalog code", "Michel")));
     field->setCategory(i18n("General"));
     coll->addField(field);
   }
@@ -355,7 +400,6 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
 
   // lookup the field name for the list index
   int idx = m_colnectFields.value(QStringLiteral("Issued on"), -1);
-
   // the year may have already been set in the query term
   if(m_year.isEmpty() && idx > -1) {
     entry_->setField(QStringLiteral("year"), resultList_.at(idx).toString());
@@ -364,6 +408,22 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
   idx = m_colnectFields.value(QStringLiteral("Country"), -1);
   if(idx > -1) {
     entry_->setField(QStringLiteral("country"), resultList_.at(idx).toString());
+  }
+
+  idx = m_colnectFields.value(QStringLiteral("Gum"), -1);
+  if(idx > -1) {
+    entry_->setField(QStringLiteral("gummed"), resultList_.at(idx).toString());
+  }
+
+  idx = m_colnectFields.value(QStringLiteral("Colors"), -1);
+  if(idx > -1) {
+    int colorId = resultList_.at(idx).toInt();
+    if(colorId > 0) {
+      if(m_stampColors.isEmpty()) {
+        readStampColors();
+      }
+      entry_->setField(QStringLiteral("color"), m_stampColors.value(colorId));
+    }
   }
 
   idx = m_colnectFields.value(QStringLiteral("Currency"), -1);
@@ -375,6 +435,7 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
       QString currency = entry_->field(QStringLiteral("currency"));
       if(!currency.isEmpty()) currency.truncate(1);
       const double value = resultList_.at(idx).toDouble();
+      // don't assume the value is in system currency
       entry_->setField(QStringLiteral("denomination"),
                        QLocale::system().toCurrencyString(value, currency));
     }
@@ -395,21 +456,66 @@ void ColnectFetcher::populateEntry(Data::EntryPtr entry_, const QVariantList& re
   idx = m_colnectFields.value(QStringLiteral("Description"), -1);
   static const QString desc(QStringLiteral("description"));
   if(idx > -1 && optionalFields().contains(desc)) {
-    entry_->setField(desc, resultList_.at(idx).toString());
+    QString s = resultList_.at(idx).toString();
+    // if description is empty, just use the name
+    if(s.isEmpty()) {
+      s = resultList_.at(m_colnectFields.value(QStringLiteral("Name"))).toString();
+    }
+    entry_->setField(desc, s);
+  }
+
+  // catalog codes
+  idx = m_colnectFields.value(QStringLiteral("Catalog Codes"), -1);
+  if(idx > -1) {
+    // split by comma, look for prefix
+    QStringList codes = resultList_.at(idx).toString().split(QLatin1Char(','));
+    Q_FOREACH(const QString& code, codes) {
+      const QString prefix = code.section(QLatin1Char(':'), 0, 0).trimmed();
+      const QString value = code.section(QLatin1Char(':'), 1, 1).trimmed();
+      // 'SG' for Stanley Gibbons, 'Sc' for Scott, 'Mi' for Michel and 'Yv' for Yvert & Tellier.
+      if(prefix == QLatin1String("Sc")) {
+        entry_->setField(QStringLiteral("scott"), value);
+      } else if(prefix == QLatin1String("Sg") && optionalFields().contains(QStringLiteral("stanley-gibbons"))) {
+        entry_->setField(QStringLiteral("stanley-gibbons"), value);
+      } else if(prefix == QLatin1String("Mi") && optionalFields().contains(QStringLiteral("michel"))) {
+        entry_->setField(QStringLiteral("michel"), value);
+      }
+    }
   }
 
   idx = m_colnectFields.value(QStringLiteral("FrontPicture"), -1);
-  if(idx  > -1 && optionalFields().contains(QStringLiteral("obverse"))) {
-    entry_->setField(QStringLiteral("obverse"),
-                     imageUrl(resultList_.at(0).toString(),
-                              resultList_.at(idx).toString()));
+  if(idx > -1) {
+    // for coins, it's the obverse field. For stamps, it's just image
+    if(collectionType() == Data::Collection::Coin &&
+       optionalFields().contains(QStringLiteral("obverse"))) {
+      entry_->setField(QStringLiteral("obverse"),
+                       imageUrl(resultList_.at(0).toString(),
+                                resultList_.at(idx).toString()));
+    } else if(collectionType() == Data::Collection::Stamp) {
+      // always include the stamp image, no optional choice
+      entry_->setField(QStringLiteral("image"),
+                       imageUrl(resultList_.at(0).toString(),
+                                resultList_.at(idx).toString()));
+    }
   }
 
   idx = m_colnectFields.value(QStringLiteral("BackPicture"), -1);
-  if(idx  > -1 && optionalFields().contains(QStringLiteral("reverse"))) {
+  if(idx > -1 && optionalFields().contains(QStringLiteral("reverse"))) {
     entry_->setField(QStringLiteral("reverse"),
                      imageUrl(resultList_.at(0).toString(),
                               resultList_.at(idx).toString()));
+  }
+}
+
+void ColnectFetcher::loadImage(Data::EntryPtr entry_, const QString& fieldName_) {
+  const QString image = entry_->field(fieldName_);
+  if(image.contains(QLatin1Char('/'))) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(image), true /* quiet */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry_->setField(fieldName_, id);
   }
 }
 
@@ -434,6 +540,8 @@ Tellico::StringHash ColnectFetcher::allOptionalFields() {
   /* TRANSLATORS: Mintage refers to the number of coins minted */
   hash[QStringLiteral("mintage")] = i18n("Mintage");
   hash[QStringLiteral("description")] = i18n("Description");
+  hash[QStringLiteral("stanley-gibbons")] = i18nc("Stanley Gibbons stamp catalog code", "Stanley Gibbons");
+  hash[QStringLiteral("michel")] = i18nc("Michel stamp catalog code", "Michel");
   return hash;
 }
 
@@ -474,7 +582,7 @@ void ColnectFetcher::readDataList() {
 //  myDebug() << "Reading Colnect fields";
   QUrl u(QString::fromLatin1(COLNECT_API_URL));
   // Colnect API calls are encoded as a path
-  QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/coins/"));
+  QString query(QLatin1Char('/') + m_locale + QStringLiteral("/fields/cat/") + m_category + QLatin1Char('/'));
   u.setPath(u.path() + query);
 
 //  myDebug() << "Reading" << u;
@@ -495,6 +603,36 @@ void ColnectFetcher::readDataList() {
 //    if(i == 5) myDebug() << m_colnectFields;
   }
 //  myDebug() << "Number of Colnect fields:" << m_colnectFields.count();
+}
+
+void ColnectFetcher::readStampColors() {
+  QUrl u(QString::fromLatin1(COLNECT_API_URL));
+  // Colnect API calls are encoded as a path
+  QString query(QLatin1Char('/') + m_locale + QStringLiteral("/colors/cat/") + m_category + QLatin1Char('/'));
+  u.setPath(u.path() + query);
+
+//  myDebug() << "Reading stamp colors from" << u;
+  const QByteArray data = FileHandler::readDataFile(u, true);
+  QJsonDocument doc = QJsonDocument::fromJson(data);
+  if(doc.isNull()) {
+    myDebug() << "null JSON document in colnect fields";
+    return;
+  }
+  QJsonArray resultList = doc.array();
+  if(resultList.isEmpty()) {
+    myDebug() << "no stamp color results";
+    return;
+  }
+  m_stampColors.clear();
+  for(int i = 0; i < resultList.size(); ++i) {
+    // an array of arrays, first value is id, second is color name
+    const QJsonArray values = resultList.at(i).toArray();
+    if(values.size() > 2) {
+      m_stampColors.insert(values.at(0).toInt(), values.at(1).toString());
+//      if(i == 5) myDebug() << resultList.at(i) << m_stampColors;
+    }
+  }
+//  myDebug() << "Number of stamp colors:" << m_stampColors.count();
 }
 
 ColnectFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ColnectFetcher* fetcher_)

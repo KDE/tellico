@@ -57,9 +57,16 @@ Tellico::Data::FieldList StampCollection::defaultFields() {
   field->setFormatType(FieldFormat::FormatTitle);
   list.append(field);
 
-  field = new Field(QStringLiteral("denomination"), i18n("Denomination"));
+  /* TRANSLATORS: denomination refers to the monetary value. */
+  field = new Field(QStringLiteral("denomination"), i18nc("monetary denomination", "Denomination"));
   field->setCategory(i18n(stamp_general));
   field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  list.append(field);
+
+  field = new Field(QStringLiteral("currency"), i18n("Currency"));
+  field->setCategory(i18n(stamp_general));
+  field->setFlags(Field::AllowCompletion | Field::AllowGrouped);
+  field->setFormatType(FieldFormat::FormatPlain);
   list.append(field);
 
   field = new Field(QStringLiteral("country"), i18n("Country"));
