@@ -29,6 +29,7 @@
 #include <KLineEdit>
 #include <KUrlRequester>
 #include <KUrlLabel>
+#include <kwidgetsaddons_version.h>
 
 #include <QUrl>
 #include <QDesktopServices>
@@ -57,7 +58,11 @@ URLFieldWidget::URLFieldWidget(Tellico::Data::FieldPtr field_, QWidget* parent_)
   m_requester->lineEdit()->setAutoDeleteCompletionObject(true);
   connect(m_requester, &KUrlRequester::textChanged, this, &URLFieldWidget::checkModified);
   connect(m_requester, &KUrlRequester::textChanged, urlLabel, &KUrlLabel::setUrl);
+#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 65, 0)
   void (KUrlLabel::* clickedSignal)(const QString&) = &KUrlLabel::leftClickedUrl;
+#else
+  void (KUrlLabel::* clickedSignal)(void) = &KUrlLabel::leftClickedUrl;
+#endif
   connect(urlLabel, clickedSignal, this, &URLFieldWidget::slotOpenURL);
   registerWidget();
 
@@ -89,13 +94,14 @@ void URLFieldWidget::updateFieldHook(Tellico::Data::FieldPtr, Tellico::Data::Fie
   m_logic.setRelative(newField_->property(QStringLiteral("relative")) == QLatin1String("true"));
 }
 
-void URLFieldWidget::slotOpenURL(const QString& url_) {
-  if(url_.isEmpty()) {
+void URLFieldWidget::slotOpenURL() {
+  const QString url = static_cast<KUrlLabel*>(label())->url();
+  if(url.isEmpty()) {
     return;
   }
   QDesktopServices::openUrl(m_logic.isRelative() ?
-                            Kernel::self()->URL().resolved(QUrl::fromUserInput(url_)) :
-                            QUrl::fromUserInput(url_));
+                            Kernel::self()->URL().resolved(QUrl::fromUserInput(url)) :
+                            QUrl::fromUserInput(url));
 }
 
 QWidget* URLFieldWidget::widget() {

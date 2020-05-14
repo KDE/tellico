@@ -59,8 +59,12 @@ void NumberFieldWidget::initLineEdit() {
 void NumberFieldWidget::initSpinBox() {
   // intentionally allow only positive numbers
   m_spinBox = new GUI::SpinBox(-1, INT_MAX, this);
-  void (GUI::SpinBox::* valueChanged)(const QString&) = &GUI::SpinBox::valueChanged;
-  connect(m_spinBox, valueChanged, this, &NumberFieldWidget::checkModified);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  void (GUI::SpinBox::* textChanged)(const QString&) = &GUI::SpinBox::valueChanged;
+#else
+  void (GUI::SpinBox::* textChanged)(const QString&) = &GUI::SpinBox::textChanged;
+#endif
+  connect(m_spinBox, textChanged, this, &NumberFieldWidget::checkModified);
 }
 
 QString NumberFieldWidget::text() const {

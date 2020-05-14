@@ -65,6 +65,10 @@ void SpinBox::stepBy(int steps_) {
   // but the valueChanged signal is not emitted
   if(oldText != lineEdit()->text() && oldValue == value()) {
     emit valueChanged(value());
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     emit valueChanged(text());
+#else
+    emit textChanged(text());
+#endif
   }
 }

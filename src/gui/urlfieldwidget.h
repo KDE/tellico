@@ -58,7 +58,7 @@ protected:
   virtual void updateFieldHook(Data::FieldPtr oldField, Data::FieldPtr newField) Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-  void slotOpenURL(const QString& url);
+  void slotOpenURL();
 
 private:
   class URLCompletion : public KUrlCompletion {
