@@ -229,6 +229,13 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   hlay->addStretch(10);
 
+  // use a constant width for the edit boxes. They're 1 or 2 characters long.
+#if (QT_VERSION < QT_VERSION_CHECK(5, 11, 0))
+  const int editWidth = 4 * m_widget->fontMetrics().width(QLatin1Char('X'));
+#else
+  const int editWidth = 4 * m_widget->fontMetrics().horizontalAdvance(QLatin1Char('X'));
+#endif
+
   QHBoxLayout* delimiterLayout = new QHBoxLayout();
   vlay->addLayout(delimiterLayout);
 
@@ -260,7 +267,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
 
   m_editOther = new QLineEdit(groupBox);
   m_editOther->setEnabled(false);
-  m_editOther->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
+  m_editOther->setFixedWidth(editWidth);
   m_editOther->setMaxLength(1);
   m_editOther->setWhatsThis(i18n("A custom string, such as a colon, may be used as a delimiter."));
   m_editOther->setEnabled(false);
@@ -287,7 +294,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   delimiterLayout2->addWidget(lab);
   m_editColDelimiter = new QLineEdit(groupBox);
   m_editColDelimiter->setWhatsThis(w);
-  m_editColDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
+  m_editColDelimiter->setFixedWidth(editWidth);
   m_editColDelimiter->setMaxLength(1);
   delimiterLayout2->addWidget(m_editColDelimiter);
   connect(m_editColDelimiter, &QLineEdit::textChanged, this, &CSVImporter::slotDelimiter);
@@ -298,7 +305,7 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   delimiterLayout2->addWidget(lab);
   m_editRowDelimiter = new QLineEdit(groupBox);
   m_editRowDelimiter->setWhatsThis(w);
-  m_editRowDelimiter->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 4);
+  m_editRowDelimiter->setFixedWidth(editWidth);
   m_editRowDelimiter->setMaxLength(1);
   delimiterLayout2->addWidget(m_editRowDelimiter);
   connect(m_editRowDelimiter, &QLineEdit::textChanged, this, &CSVImporter::slotDelimiter);
@@ -340,7 +347,8 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   m_comboField = new KComboBox(groupBox);
   hlay3->addWidget(m_comboField);
   m_comboField->setWhatsThis(what);
-  m_comboField->setFixedWidth(m_widget->fontMetrics().width(QLatin1Char('X')) * 20);
+  // roughly 5 times the width of the edit box
+  m_comboField->setFixedWidth(5 * editWidth);
 //  m_comboField->setSizeAdjustPolicy(QComboBox::AdjustToContents);
   connect(m_comboField, activatedInt, this, &CSVImporter::slotFieldChanged);
   lab->setBuddy(m_comboField);

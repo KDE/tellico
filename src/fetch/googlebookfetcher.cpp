@@ -307,17 +307,18 @@ void GoogleBookFetcher::populateEntry(Data::EntryPtr entry, const QVariantMap& r
   entry->setField(QStringLiteral("language"),  mapValue(volumeMap, "language"));
   entry->setField(QStringLiteral("comments"),  mapValue(volumeMap, "description"));
 
-  QStringList catList = volumeMap.value(QStringLiteral("categories")).toStringList();
+  const QStringList catList = volumeMap.value(QStringLiteral("categories")).toStringList();
   // google is going to give us a lot of categories
-  QSet<QString> cats;
+  QStringList cleanCategories;
   foreach(const QString& cat, catList) {
-    cats += cat.split(QRegExp(QLatin1String("\\s*/\\s*"))).toSet();
+    // split them by the '/' character, too
+    cleanCategories += cat.split(QRegularExpression(QLatin1String("\\s*/\\s*")));
   }
-  // remove General
-  cats.remove(QStringLiteral("General"));
-  catList = cats.values();
-  catList.sort();
-  entry->setField(QStringLiteral("keyword"), catList.join(FieldFormat::delimiterString()));
+  cleanCategories.sort();
+  cleanCategories.removeDuplicates();
+  // remove General since it's vague enough to not matter
+  cleanCategories.removeOne(QStringLiteral("General"));
+  entry->setField(QStringLiteral("keyword"), cleanCategories.join(FieldFormat::delimiterString()));
 
   QString isbn;
   foreach(const QVariant& idVariant, volumeMap.value(QLatin1String("industryIdentifiers")).toList()) {

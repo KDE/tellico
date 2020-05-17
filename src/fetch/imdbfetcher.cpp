@@ -1507,8 +1507,12 @@ IMDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const IMDBFetcher* fet
   m_numCast->setMaximum(99);
   m_numCast->setMinimum(0);
   m_numCast->setValue(10);
-  void (QSpinBox::* valueChanged)(const QString&) = &QSpinBox::valueChanged;
-  connect(m_numCast, valueChanged, this, &ConfigWidget::slotSetModified);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::valueChanged;
+#else
+  void (QSpinBox::* textChanged)(const QString&) = &QSpinBox::textChanged;
+#endif
+  connect(m_numCast, textChanged, this, &ConfigWidget::slotSetModified);
   l->addWidget(m_numCast, row, 1);
   QString w = i18n("The list of cast members may include many people. Set the maximum number returned from the search.");
   label->setWhatsThis(w);

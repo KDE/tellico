@@ -227,8 +227,12 @@ FetchDialog::FetchDialog(QWidget* parent_)
   foreach(Fetch::Fetcher::Ptr fetcher, sources) {
     m_sourceCombo->addItem(Fetch::Manager::self()->fetcherIcon(fetcher), fetcher->source());
   }
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   void (QComboBox::* activatedString)(const QString&) = &QComboBox::activated;
   connect(m_sourceCombo, activatedString, this, &FetchDialog::slotSourceChanged);
+#else
+  connect(m_sourceCombo, &QComboBox::textActivated, this, &FetchDialog::slotSourceChanged);
+#endif
   m_sourceCombo->setWhatsThis(i18n("Select the database to search"));
 
   // for whatever reason, the dialog window could get shrunk and truncate the text

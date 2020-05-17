@@ -189,8 +189,12 @@ CollectionFieldsDialog::CollectionFieldsDialog(Tellico::Data::CollPtr coll_, QWi
   m_typeCombo->addItems(Data::Field::typeTitles());
   void (QComboBox::* activatedInt)(int) = &QComboBox::activated;
   connect(m_typeCombo, activatedInt, this, &CollectionFieldsDialog::slotModified);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   void (QComboBox::* activatedString)(const QString&) = &QComboBox::activated;
   connect(m_typeCombo, activatedString, this, &CollectionFieldsDialog::slotTypeChanged);
+#else
+  connect(m_typeCombo, &QComboBox::textActivated, this, &CollectionFieldsDialog::slotTypeChanged);
+#endif
 
   label = new QLabel(i18n("Cate&gory:"), grid);
   layout->addWidget(label, ++row, 0);
