@@ -109,7 +109,8 @@ private:
   enum RuleType {
     General,
     Date,
-    Number
+    Number,
+    Image
   };
   RuleType m_ruleType;
 };

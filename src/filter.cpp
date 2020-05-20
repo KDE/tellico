@@ -25,9 +25,13 @@
 #include "filter.h"
 #include "entry.h"
 #include "utils/string_utils.h"
+#include "images/imageinfo.h"
+#include "images/imagefactory.h"
 #include "tellico_debug.h"
 
 #include <QRegExp>
+
+#include <functional>
 
 using Tellico::Filter;
 using Tellico::FilterRule;
@@ -87,6 +91,11 @@ bool FilterRule::equals(Tellico::Data::EntryPtr entry_) const {
         return true;
       }
     }
+  } else if(entry_->collection()->hasField(m_fieldName) &&
+            entry_->collection()->fieldByName(m_fieldName)->type() == Data::Field::Image) {
+    // this is just for image size comparison, all other number comparisons are ok
+    // falling back to the string comparison after this
+    return numberCompare(entry_, std::equal_to<double>());
   } else {
     return m_pattern.compare(entry_->field(m_fieldName), Qt::CaseInsensitive) == 0 ||
            (entry_->collection()->hasField(m_fieldName) &&
@@ -200,27 +209,11 @@ bool FilterRule::after(Tellico::Data::EntryPtr entry_) const {
 }
 
 bool FilterRule::lessThan(Tellico::Data::EntryPtr entry_) const {
-  // empty field name means search all
-  // but the rule widget should limit this function to number fields only
-  if(m_fieldName.isEmpty()) {
-    return false;
-  }
-  const double pattern = m_patternVariant.toDouble();
-  bool ok = false;
-  const double value = entry_->field(m_fieldName).toDouble(&ok);
-  return ok && value < pattern;
+  return numberCompare(entry_, std::less<double>());
 }
 
 bool FilterRule::greaterThan(Tellico::Data::EntryPtr entry_) const {
-  // empty field name means search all
-  // but the rule widget should limit this function to number fields only
-  if(m_fieldName.isEmpty()) {
-    return false;
-  }
-  const double pattern = m_patternVariant.toDouble();
-  bool ok = false;
-  const double value = entry_->field(m_fieldName).toDouble(&ok);
-  return ok && value > pattern;
+  return numberCompare(entry_, std::greater<double>());
 }
 
 void FilterRule::updatePattern() {
@@ -231,6 +224,9 @@ void FilterRule::updatePattern() {
   } else if(m_function == FuncLess || m_function == FuncGreater)  {
     m_patternVariant = m_pattern.toDouble();
   } else {
+    if(m_pattern.isEmpty()) {
+      m_pattern = m_patternVariant.toString();
+    }
     // we don't even use it
     m_patternVariant = QVariant();
   }
@@ -243,6 +239,33 @@ void FilterRule::setFunction(Function func_) {
 
 QString FilterRule::pattern() const {
   return m_pattern;
+}
+
+template <typename Func>
+bool FilterRule::numberCompare(Tellico::Data::EntryPtr entry_, Func f) const {
+  // empty field name means search all
+  // but the rule widget should limit this function to number fields only
+  if(m_fieldName.isEmpty()) {
+    return false;
+  }
+
+  bool ok = false;
+  const QString valueString = entry_->field(m_fieldName);
+  double value;
+  if(entry_->collection()->hasField(m_fieldName) &&
+     entry_->collection()->fieldByName(m_fieldName)->type() == Data::Field::Image) {
+    const Data::ImageInfo info = ImageFactory::imageInfo(valueString);
+    ok = !info.isNull();
+    // image size comparison presumes "fitting inside a box" so
+    // consider the pattern value to be the size of the square and compare against biggest dimension
+    value = qMax(info.width(), info.height());
+  } else {
+    value = valueString.toDouble(&ok);
+  }
+  // the equal compare is assumed to use the pattern string and the variant will be empty
+  // TODO: switch to using the variant for everything
+  return ok && f(value, m_patternVariant.isNull() ? m_pattern.toDouble()
+                                                  : m_patternVariant.toDouble());
 }
 
 /*******************************************************/

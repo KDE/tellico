@@ -96,6 +96,9 @@ public:
 //  void setPattern(const QString& pattern) { m_pattern = pattern; }
 
 private:
+  template <typename Func>
+  bool numberCompare(Tellico::Data::EntryPtr entry, Func f) const;
+
   bool equals(Data::EntryPtr entry) const;
   bool contains(Data::EntryPtr entry) const;
   bool matchesRegExp(Data::EntryPtr entry) const;

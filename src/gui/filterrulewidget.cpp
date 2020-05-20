@@ -152,6 +152,8 @@ void FilterRuleWidget::slotRuleFieldChanged(int which_) {
       m_ruleType = Date;
     } else if(field->type() == Data::Field::Number || field->type() == Data::Field::Rating) {
       m_ruleType = Number;
+    } else if(field->type() == Data::Field::Image) {
+      m_ruleType = Image;
     }
   }
   updateFunctionList();
@@ -270,6 +272,12 @@ void FilterRuleWidget::updateFunctionList() {
       m_ruleFunc->addItem(i18n("does not match regexp"), FilterRule::FuncNotRegExp);
       m_ruleFunc->addItem(i18nc("is less than a number", "is less than"), FilterRule::FuncLess);
       m_ruleFunc->addItem(i18nc("is greater than a number", "is greater than"), FilterRule::FuncGreater);
+      break;
+    case Image:
+      m_ruleFunc->addItem(i18n("image size equals"), FilterRule::FuncEquals);
+      m_ruleFunc->addItem(i18n("image size does not equal"), FilterRule::FuncNotEquals);
+      m_ruleFunc->addItem(i18nc("image size is less than a number", "image size is less than"), FilterRule::FuncLess);
+      m_ruleFunc->addItem(i18nc("image size is greater than a number", "image size is greater than"), FilterRule::FuncGreater);
       break;
     case General:
       m_ruleFunc->addItem(i18n("contains"), FilterRule::FuncContains);

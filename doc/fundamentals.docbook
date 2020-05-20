@@ -84,7 +84,7 @@ If an entry does not contain a value for the field being used to form the groups
 If any filters are saved for the collection, the <interface>Filter View</interface> becomes active. As you add or
 modify entries, they will automatically be checked against the filters and add or removed as
 appropriate. The filter may be modified by double-clicking on the item to open
-the <interface>Advanced Filter Dialog</interface>. Right-clicking gives you the option to delete it altogether.
+the <link linkend="filter-dialog"><interface>Advanced Filter Dialog</interface></link>. Right-clicking gives you the option to delete it altogether.
 </para>
 
 <screenshot>
@@ -396,7 +396,7 @@ find those that meet any of them. The <interface>Advanced Filter Dialog</interfa
 </screenshot>
 
 <para>
-Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton>Edit...</guibutton> button becomes active for editing the expression, if &kregexpeditor; is installed on your computer. Finally, the word or string to match should be entered in the text box.
+Each row contains a single filter rule. Select the field to match in the first box in the row, then select a matching rule in the center. Rules may match values that contain a certain word, or are exactly equal. A regular expression may also be used to match entries, in which case the <guibutton>Edit...</guibutton> button becomes active for editing the expression, if &kregexpeditor; is installed on your computer. Finally, the word or string to match should be entered in the text box. For image fields, the image size can be used for filtering where the filter value is compared against the larger image dimension, whether width or height.
 </para>
 
 <para>

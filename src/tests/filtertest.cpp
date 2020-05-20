@@ -29,6 +29,8 @@
 #include "../filter.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
+#include "../images/imageinfo.h"
+#include "../images/imagefactory.h"
 
 #include <QTest>
 
@@ -206,6 +208,38 @@ void FilterTest::testFilter() {
   QVERIFY(!filter.matches(entry));
 
   entry->setField(QStringLiteral("rating"), QStringLiteral("1"));
+  QVERIFY(filter.matches(entry));
+
+  // check image size comparisons
+  Tellico::Data::FieldPtr imageField(new Tellico::Data::Field(QStringLiteral("image"),
+                                                              QStringLiteral("image"),
+                                                              Tellico::Data::Field::Image));
+  coll->addField(imageField);
+  const QString imageName(QStringLiteral("image.png"));
+  entry->setField(QStringLiteral("image"), imageName);
+  // insert image size into cache (128x128)
+  Tellico::Data::ImageInfo imageInfo(imageName, "PNG", 128, 96, false);
+  Tellico::ImageFactory::cacheImageInfo(imageInfo);
+
+  Tellico::FilterRule* rule9 = new Tellico::FilterRule(QStringLiteral("image"),
+                                                       QStringLiteral("96"),
+                                                       Tellico::FilterRule::FuncGreater);
+  QCOMPARE(rule9->pattern(), QStringLiteral("96"));
+  filter.clear();
+  filter.append(rule9);
+  // compares against larger image dimension, so 128 > 96 matches
+  QVERIFY(filter.matches(entry));
+
+  // compares against larger image dimension, so 128 < 96 fails
+  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  QVERIFY(!filter.matches(entry));
+
+  Tellico::Data::ImageInfo imageInfo2(imageName, "PNG", 96, 96, false);
+  Tellico::ImageFactory::cacheImageInfo(imageInfo2);
+
+  rule9->setFunction(Tellico::FilterRule::FuncLess);
+  QVERIFY(!filter.matches(entry));
+  rule9->setFunction(Tellico::FilterRule::FuncEquals);
   QVERIFY(filter.matches(entry));
 }
 
