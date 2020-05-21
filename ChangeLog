@@ -1,3 +1,7 @@
+2020-05-20  Robby Stephenson  <robby@periapsis.org>
+
+	* Added entry filtering by image size.
+
 2020-05-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated Colnect data source to include stamp collections.
