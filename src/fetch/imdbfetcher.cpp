@@ -951,14 +951,14 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
   divRx.setMinimal(true);
 
   const QString name = QStringLiteral("/name/");
-  StringSet people;
+  QStringList people;
   for(int pos = str_.indexOf(divRx); pos > -1; pos = str_.indexOf(divRx, pos+divRx.matchedLength())) {
     const QString infoBlock = divRx.cap(1);
     if(infoBlock.contains(imdbHeader_, Qt::CaseInsensitive)) {
       int pos2 = s_anchorRx->indexIn(infoBlock);
       while(pos2 > -1) {
         if(s_anchorRx->cap(1).contains(name)) {
-          people.add(s_anchorRx->cap(2).trimmed());
+          people += s_anchorRx->cap(2).trimmed();
         }
         pos2 = s_anchorRx->indexIn(infoBlock, pos2+s_anchorRx->matchedLength());
       }
@@ -966,7 +966,8 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
     }
   }
   if(!people.isEmpty()) {
-    entry_->setField(fieldName_, people.values().join(FieldFormat::delimiterString()));
+    people.removeDuplicates();
+    entry_->setField(fieldName_, people.join(FieldFormat::delimiterString()));
   }
 }
 

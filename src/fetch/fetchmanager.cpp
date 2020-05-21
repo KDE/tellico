@@ -541,7 +541,7 @@ QPixmap Manager::fetcherIcon(Tellico::Fetch::Type type_, int group_, int size_) 
     pix = icon.pixmap(size_, size_);
   }
   if(pix.isNull()) {
-    pix = BarIcon(name);
+    pix = KIconLoader::global()->loadIcon(name, KIconLoader::Toolbar);
   }
   return pix;
 }

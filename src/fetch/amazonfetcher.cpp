@@ -486,7 +486,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
     case Data::Collection::ComicBook:
     case Data::Collection::Bibtex:
       if(optionalFields().contains(QStringLiteral("keyword"))) {
-        StringSet newWords;
+        QStringList newWords;
         const QStringList keywords = FieldFormat::splitValue(entry->field(QStringLiteral("keyword")));
         foreach(const QString& keyword, keywords) {
           if(keyword == QLatin1String("General") ||
@@ -497,9 +497,10 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
              keyword.startsWith(QLatin1String("Authors"))) {
             continue;
           }
-          newWords.add(keyword);
+          newWords += keyword;
         }
-        entry->setField(QStringLiteral("keyword"), newWords.values().join(FieldFormat::delimiterString()));
+        newWords.removeDuplicates();
+        entry->setField(QStringLiteral("keyword"), newWords.join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("comments"), Tellico::decodeHTML(entry->field(QStringLiteral("comments"))));
       break;
@@ -508,7 +509,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
       {
         const QString genres = QStringLiteral("genre");
         QStringList oldWords = FieldFormat::splitValue(entry->field(genres));
-        StringSet words;
+        QStringList newWords;
         // only care about genres that have "Genres" in the amazon response
         // and take the first word after that
         for(QStringList::Iterator it = oldWords.begin(); it != oldWords.end(); ++it) {
@@ -524,16 +525,17 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
             }
             ++it2;
             if(it2 != nodes.end() && *it2 != QLatin1String("General")) {
-              words.add(*it2);
+              newWords += *it2;
             }
             break; // we're done
           }
         }
-        entry->setField(genres, words.values().join(FieldFormat::delimiterString()));
+        newWords.removeDuplicates();
+        entry->setField(genres, newWords.join(FieldFormat::delimiterString()));
         // language tracks get duplicated, too
-        words.clear();
-        words.add(FieldFormat::splitValue(entry->field(QStringLiteral("language"))));
-        entry->setField(QStringLiteral("language"), words.values().join(FieldFormat::delimiterString()));
+        newWords = FieldFormat::splitValue(entry->field(QStringLiteral("language")));
+        newWords.removeDuplicates();
+        entry->setField(QStringLiteral("language"), newWords.join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(entry->field(QStringLiteral("plot"))));
       break;
@@ -542,7 +544,7 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
       {
         const QString genres = QStringLiteral("genre");
         QStringList oldWords = FieldFormat::splitValue(entry->field(genres));
-        StringSet words;
+        QStringList newWords;
         // only care about genres that have "Styles" in the amazon response
         // and take the first word after that
         for(QStringList::Iterator it = oldWords.begin(); it != oldWords.end(); ++it) {
@@ -561,11 +563,12 @@ Tellico::Data::EntryPtr AmazonFetcher::fetchEntryHook(uint uid_) {
               continue;
             }
             if(*it2 != QLatin1String("General")) {
-              words.add(*it2);
+              newWords += *it2;
             }
           }
         }
-        entry->setField(genres, words.values().join(FieldFormat::delimiterString()));
+        newWords.removeDuplicates();
+        entry->setField(genres, newWords.join(FieldFormat::delimiterString()));
       }
       entry->setField(QStringLiteral("comments"), Tellico::decodeHTML(entry->field(QStringLiteral("comments"))));
       break;
