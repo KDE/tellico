@@ -47,6 +47,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QUrlQuery>
+#include <QStandardPaths>
 
 namespace {
   static const int THEMOVIEDB_MAX_RETURNS_TOTAL = 20;
@@ -483,10 +484,18 @@ TheMovieDBFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const TheMovieDB
   label = new QLabel(i18n("Language: "), optionsWidget());
   l->addWidget(label, ++row, 0);
   m_langCombo = new GUI::ComboBox(optionsWidget());
-  m_langCombo->addItem(i18nc("Language", "English"), QLatin1String("en"));
-  m_langCombo->addItem(i18nc("Language", "French"), QLatin1String("fr"));
-  m_langCombo->addItem(i18nc("Language", "German"), QLatin1String("de"));
-  m_langCombo->addItem(i18nc("Language", "Spanish"), QLatin1String("es"));
+  QIcon iconUS(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/us/flag.png")));
+  m_langCombo->addItem(iconUS, i18nc("Language", "English"), QLatin1String("en"));
+  QIcon iconFR(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/fr/flag.png")));
+  m_langCombo->addItem(iconFR, i18nc("Language", "French"), QLatin1String("fr"));
+  QIcon iconDE(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/de/flag.png")));
+  m_langCombo->addItem(iconDE, i18nc("Language", "German"), QLatin1String("de"));
+  QIcon iconES(QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                      QStringLiteral("kf5/locale/countries/es/flag.png")));
+  m_langCombo->addItem(iconES, i18nc("Language", "Spanish"), QLatin1String("es"));
   void (GUI::ComboBox::* activatedInt)(int) = &GUI::ComboBox::activated;
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotSetModified);
   connect(m_langCombo, activatedInt, this, &ConfigWidget::slotLangChanged);
