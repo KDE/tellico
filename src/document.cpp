@@ -47,7 +47,6 @@
 #include <KLocalizedString>
 
 #include <QRegExp>
-#include <QTimer>
 #include <QApplication>
 
 #include <unistd.h>
@@ -58,8 +57,11 @@ Document* Document::s_self = nullptr;
 
 Document::Document() : QObject(), m_coll(nullptr), m_isModified(false),
     m_loadAllImages(false), m_validFile(false), m_importer(nullptr), m_cancelImageWriting(true),
-    m_fileFormat(Import::TellicoImporter::Unknown) {
+    m_fileFormat(Import::TellicoImporter::Unknown), m_loadImagesTimer(this) {
   m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
+  m_loadImagesTimer.setSingleShot(true);
+  m_loadImagesTimer.setInterval(500);
+  m_loadImagesTimer.callOnTimeout(this, &Document::slotLoadAllImages);
   newDocument(Collection::Book);
 }
 
@@ -123,11 +125,9 @@ bool Document::newDocument(int type_) {
 
 bool Document::openDocument(const QUrl& url_) {
   MARK;
-  m_loadAllImages = false;
   // delayed image loading only works for local files
-  if(!url_.isLocalFile()) {
-    m_loadAllImages = true;
-  }
+  m_loadAllImages = !url_.isLocalFile();
+  m_loadImagesTimer.stop(); // avoid potential race condition
 
   if(m_importer) {
     m_importer->deleteLater();
@@ -178,7 +178,7 @@ bool Document::openDocument(const QUrl& url_) {
 //  }
   if(m_importer && m_importer->hasImages()) {
     m_cancelImageWriting = false;
-    QTimer::singleShot(500, this, &Document::slotLoadAllImages);
+    m_loadImagesTimer.start();
   } else {
     emit signalCollectionImagesLoaded(m_coll);
     if(m_importer) {
