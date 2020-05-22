@@ -322,6 +322,8 @@ Tellico::Fetch::FetcherVec Manager::defaultFetchers() {
 // movies
   FETCHER_ADD(TheMovieDB);
   FETCHER_ADD(IMDB);
+// coins and stamps
+  FETCHER_ADD(Colnect);
   QStringList langs = QLocale().uiLanguages();
   if(langs.first().contains(QLatin1Char('-'))) {
     // I'm not sure QT always include two-letter locale codes
