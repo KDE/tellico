@@ -31,6 +31,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QUrl>
+#include <QTimer>
 
 namespace Tellico {
   namespace Import {
@@ -249,6 +250,7 @@ private:
   bool m_cancelImageWriting;
   int m_fileFormat;
   bool m_allImagesOnDisk;
+  QTimer m_loadImagesTimer;
 };
 
   } // end namespace
