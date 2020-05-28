@@ -61,6 +61,8 @@ Entry::Entry(const Entry& entry_) :
     m_id(-1),
     m_fieldValues(entry_.m_fieldValues),
     m_formattedFields(entry_.m_formattedFields) {
+  // special case for creation date since it gets set in Collection::addEntry IF cdate is empty
+  m_fieldValues.remove(QStringLiteral("cdate"));
 }
 
 Entry& Entry::operator=(const Entry& other_) {
@@ -70,6 +72,8 @@ Entry& Entry::operator=(const Entry& other_) {
   m_coll = other_.m_coll;
   m_id = other_.m_id;
   m_fieldValues = other_.m_fieldValues;
+  // special case for creation date field which gets set in Collection::addEntry IF cdate is empty
+  m_fieldValues.remove(QStringLiteral("cdate"));
   m_formattedFields = other_.m_formattedFields;
   return *this;
 }
@@ -87,7 +91,7 @@ void Entry::setCollection(Tellico::Data::CollPtr coll_) {
     return;
   }
   // special case adding a book to a bibtex collection
-  // it would be better to do this in a real OO way, but this should work
+  // it would be better to do this in a real object-oriented way, but this should work
   const bool addEntryType = m_coll->type() == Collection::Book &&
                             coll_->type() == Collection::Bibtex &&
                             !m_coll->hasField(QStringLiteral("entry-type"));

@@ -1,3 +1,7 @@
+2020-05-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with creation date for duplicated entries (Bug 422127).
+
 2020-05-20  Robby Stephenson  <robby@periapsis.org>
 
 	* Added entry filtering by image size.

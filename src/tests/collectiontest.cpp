@@ -444,6 +444,7 @@ void CollectionTest::testDuplicate() {
 
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
+  entry1->setField(QStringLiteral("cdate"), QStringLiteral("2019-01-01"));
   coll->addEntries(entry1);
   QCOMPARE(coll->entryCount(), 1);
 
@@ -454,6 +455,23 @@ void CollectionTest::testDuplicate() {
 
   QCOMPARE(entry1->title(), entry2->title());
   QVERIFY(entry1->id() != entry2->id());
+  // creation date should reflect current date in the duplicated entry
+  QVERIFY(entry1->field(QStringLiteral("cdate")) != entry2->field(QStringLiteral("cdate")));
+  QCOMPARE(entry2->field(QStringLiteral("cdate")), QDate::currentDate().toString(Qt::ISODate));
+
+  // also test operator= which is how ModifyEntries::swapValues() works
+  Tellico::Data::Entry* entryPtr = new Tellico::Data::Entry(coll);
+  *entryPtr = *entry1;
+  Tellico::Data::EntryPtr entry3(entryPtr);
+  coll->addEntries(entry3);
+  QCOMPARE(coll->entryCount(), 3);
+
+  QCOMPARE(entry1->title(), entry3->title());
+  // entry id should be different
+  QVERIFY(entry1->id() != entry3->id());
+  // creation date should reflect current date in the duplicated entry
+  QVERIFY(entry1->field(QStringLiteral("cdate")) != entry3->field(QStringLiteral("cdate")));
+  QCOMPARE(entry3->field(QStringLiteral("cdate")), QDate::currentDate().toString(Qt::ISODate));
 
   bool ret = Tellico::Data::Document::mergeEntry(entry1, entry2);
   QCOMPARE(ret, true);
