@@ -1,3 +1,7 @@
+2020-05-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed bug with creation date for duplicated entries (Bug 422127).
+
 2020-04-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Tweaked game platform normalization to match "Nintento Game Boy".
