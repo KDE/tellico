@@ -28,6 +28,8 @@
 
 #include <KLocalizedString>
 
+#include <algorithm>
+
 using namespace Tellico;
 using Tellico::Data::Field;
 
@@ -318,5 +320,22 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
 }
 
 Tellico::Data::FieldList Tellico::listIntersection(const Tellico::Data::FieldList& list1, const Tellico::Data::FieldList& list2) {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  // QList::toSet is deprecated
   return list1.toSet().intersect(list2.toSet()).values();
+#else
+  // std::set_intersection requires sorted lists. Just do the set intersection manually
+  Data::FieldList returnList;
+  QSet<Tellico::Data::FieldPtr> set(list1.begin(), list1.end());
+
+  std::for_each(list2.begin(), list2.end(),
+        [&set, &returnList](const Data::FieldPtr& f) {
+          if(set.contains(f)) {
+            returnList.append(f);
+            set.remove(f);
+          }
+        }
+      );
+  return returnList;
+#endif
 }

@@ -545,6 +545,21 @@ void CollectionTest::testMergeFields() {
   QVERIFY(addedFields.isEmpty());
 }
 
+void CollectionTest::testFieldsIntersection() {
+  // simple test for the list intersection utility method
+  Tellico::Data::CollPtr coll(new Tellico::Data::BookCollection(true));
+  Tellico::Data::FieldList imageFields = coll->imageFields();
+
+  Tellico::Data::FieldList list = Tellico::listIntersection(imageFields, coll->fields());
+  QCOMPARE(imageFields.count(), list.count());
+
+  QBENCHMARK {
+    // should be something less than 0.020 msecs :)
+    Tellico::Data::FieldList list = Tellico::listIntersection(coll->fields(), coll->fields());
+    Q_UNUSED(list);
+  }
+}
+
 void CollectionTest::testAppendCollection() {
   // appending a collection adds new fields, merges existing one, and add new entries
   // the new entries should belong to the original collection and the existing entries should
