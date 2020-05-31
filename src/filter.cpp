@@ -44,6 +44,11 @@ FilterRule::FilterRule(const QString& fieldName_, const QString& pattern_, Funct
   updatePattern();
 }
 
+bool FilterRule::isEmpty() const {
+  // FuncEquals and FuncNotEquals can match against empty string
+  return m_pattern.isEmpty() && !(m_function == FuncEquals || m_function == FuncNotEquals);
+}
+
 bool FilterRule::matches(Tellico::Data::EntryPtr entry_) const {
   Q_ASSERT(entry_);
   Q_ASSERT(entry_->collection());

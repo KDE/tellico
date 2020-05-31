@@ -224,6 +224,7 @@ void FilterTest::testFilter() {
   Tellico::FilterRule* rule9 = new Tellico::FilterRule(QStringLiteral("image"),
                                                        QStringLiteral("96"),
                                                        Tellico::FilterRule::FuncGreater);
+  QVERIFY(!rule9->isEmpty());
   QCOMPARE(rule9->pattern(), QStringLiteral("96"));
   filter.clear();
   filter.append(rule9);
@@ -241,6 +242,21 @@ void FilterTest::testFilter() {
   QVERIFY(!filter.matches(entry));
   rule9->setFunction(Tellico::FilterRule::FuncEquals);
   QVERIFY(filter.matches(entry));
+
+  // test a filter for matchign against an empty string
+  Tellico::Data::FieldPtr testField(new Tellico::Data::Field(QStringLiteral("test"),
+                                                             QStringLiteral("Test")));
+  coll->addField(testField);
+  Tellico::FilterRule* rule10 = new Tellico::FilterRule(QStringLiteral("test"),
+                                                        QString(),
+                                                        Tellico::FilterRule::FuncEquals);
+  QVERIFY(!rule10->isEmpty());
+  filter.clear();
+  filter.append(rule10);
+  QVERIFY(filter.matches(entry));
+  rule10->setFunction(Tellico::FilterRule::FuncNotEquals);
+  QVERIFY(!rule10->isEmpty());
+  QVERIFY(!filter.matches(entry));
 }
 
 void FilterTest::testGroupViewFilter() {
