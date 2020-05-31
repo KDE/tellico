@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,62 +22,47 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "fieldcompletion.h"
-#include "fieldformat.h"
+#include "completiontest.h"
 
-#include <KCompletion/KCompletionMatches>
+#include "../fieldcompletion.h"
+#include "../field.h"
 
-using Tellico::FieldCompletion;
+#include <QTest>
 
-FieldCompletion::FieldCompletion(bool multiple_) : KCompletion(), m_multiple(multiple_) {
+QTEST_APPLESS_MAIN( CompletionTest )
+
+void CompletionTest::testBasic() {
+  Tellico::FieldCompletion cmp(false); // not mutiple
+  cmp.addItem(QStringLiteral("Atlas V"));
+  cmp.addItem(QStringLiteral("Falcon 9"));
+  cmp.addItem(QStringLiteral("New Shephard"));
+  cmp.addItem(QStringLiteral("New Glenn"));
+
+  QString result = cmp.makeCompletion(QStringLiteral("Fal"));
+  QCOMPARE(result, QStringLiteral("Falcon 9"));
 }
 
-QString FieldCompletion::makeCompletion(const QString& string_) {
-  if(completionMode() == KCompletion::CompletionNone) {
-    m_beginText.clear();
-    return QString();
-  }
+void CompletionTest::testMultiple() {
+  Tellico::FieldCompletion cmp(true); // mutiple
+  cmp.addItem(QStringLiteral("Atlas V"));
+  cmp.addItem(QStringLiteral("Falcon 9"));
+  cmp.addItem(QStringLiteral("New Shephard"));
+  cmp.addItem(QStringLiteral("New Glenn"));
 
-  if(!m_multiple) {
-    return KCompletion::makeCompletion(string_);
-  }
+  QString result = cmp.makeCompletion(QStringLiteral("Fal"));
+  QCOMPARE(result, QStringLiteral("Falcon 9"));
+  result = cmp.makeCompletion(QStringLiteral("Atlas V; Fal"));
+  QCOMPARE(result, QStringLiteral("Atlas V; Falcon 9"));
+  result = cmp.makeCompletion(QStringLiteral("Atlas V; New"));
+  // matches first inserted
+  QCOMPARE(result, QStringLiteral("Atlas V; New Shephard"));
+  QVERIFY(cmp.hasMultipleMatches());
+  QStringList allMatches = cmp.allMatches();
+  QCOMPARE(allMatches.count(), 2);
+  QVERIFY(allMatches.contains(QStringLiteral("Atlas V; New Shephard")));
+  QVERIFY(allMatches.contains(QStringLiteral("Atlas V; New Glenn")));
 
-  static QRegExp rx = FieldFormat::delimiterRegExp();
-  int pos = rx.lastIndexIn(string_);
-  if(pos == -1) {
-    m_beginText.clear();
-    return KCompletion::makeCompletion(string_);
-  }
-
-  pos += rx.matchedLength();
-  m_beginText = string_.mid(0, pos);
-  // m_beginText is added back to the string in postProcessMatch
-  return KCompletion::makeCompletion(string_.mid(pos));
-}
-
-void FieldCompletion::clear() {
-  m_beginText.clear();
-  KCompletion::clear();
-}
-
-void FieldCompletion::postProcessMatch(QString* match_) const {
-  if(m_multiple) {
-    match_->prepend(m_beginText);
-  }
-}
-
-void FieldCompletion::postProcessMatches(QStringList* matches_) const {
-  if(m_multiple) {
-    for(QStringList::Iterator it = matches_->begin(); it != matches_->end(); ++it) {
-      (*it).prepend(m_beginText);
-    }
-  }
-}
-
-void FieldCompletion::postProcessMatches(KCompletionMatches* matches_) const {
-  if(m_multiple) {
-    for(KCompletionMatches::Iterator it = matches_->begin(); it != matches_->end(); ++it) {
-      (*it).value().prepend(m_beginText);
-    }
-  }
+  // now back to a single match
+  result = cmp.makeCompletion(QStringLiteral("Atl"));
+  QCOMPARE(result, QStringLiteral("Atlas V"));
 }

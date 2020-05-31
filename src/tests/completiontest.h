@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,62 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "fieldcompletion.h"
-#include "fieldformat.h"
+#ifndef COMPLETIONTEST_H
+#define COMPLETIONTEST_H
 
-#include <KCompletion/KCompletionMatches>
+#include <QObject>
 
-using Tellico::FieldCompletion;
+class CompletionTest : public QObject {
+Q_OBJECT
 
-FieldCompletion::FieldCompletion(bool multiple_) : KCompletion(), m_multiple(multiple_) {
-}
+private Q_SLOTS:
+  void testBasic();
+  void testMultiple();
+};
 
-QString FieldCompletion::makeCompletion(const QString& string_) {
-  if(completionMode() == KCompletion::CompletionNone) {
-    m_beginText.clear();
-    return QString();
-  }
-
-  if(!m_multiple) {
-    return KCompletion::makeCompletion(string_);
-  }
-
-  static QRegExp rx = FieldFormat::delimiterRegExp();
-  int pos = rx.lastIndexIn(string_);
-  if(pos == -1) {
-    m_beginText.clear();
-    return KCompletion::makeCompletion(string_);
-  }
-
-  pos += rx.matchedLength();
-  m_beginText = string_.mid(0, pos);
-  // m_beginText is added back to the string in postProcessMatch
-  return KCompletion::makeCompletion(string_.mid(pos));
-}
-
-void FieldCompletion::clear() {
-  m_beginText.clear();
-  KCompletion::clear();
-}
-
-void FieldCompletion::postProcessMatch(QString* match_) const {
-  if(m_multiple) {
-    match_->prepend(m_beginText);
-  }
-}
-
-void FieldCompletion::postProcessMatches(QStringList* matches_) const {
-  if(m_multiple) {
-    for(QStringList::Iterator it = matches_->begin(); it != matches_->end(); ++it) {
-      (*it).prepend(m_beginText);
-    }
-  }
-}
-
-void FieldCompletion::postProcessMatches(KCompletionMatches* matches_) const {
-  if(m_multiple) {
-    for(KCompletionMatches::Iterator it = matches_->begin(); it != matches_->end(); ++it) {
-      (*it).value().prepend(m_beginText);
-    }
-  }
-}
+#endif
