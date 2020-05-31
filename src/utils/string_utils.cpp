@@ -225,7 +225,8 @@ QString Tellico::removeControlCodes(const QString& string) {
   for(int i = 0; i < string.size(); ++i) {
     const ushort c = string.at(i).unicode();
     // legal control codes in XML 1.0 are U+0009, U+000A, U+000D
-    if(c > 31 || c == 9 || c == 10 || c == 13) {
+    // https://www.w3.org/TR/xml/#charsets
+    if(c > 0x1F || c == 0x9 || c == 0xA || c == 0xD) {
       result += string.at(i);
     }
   }
