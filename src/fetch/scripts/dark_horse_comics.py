@@ -311,7 +311,7 @@ class DarkHorseParser:
 
 		# Now isolate data between <div class="bodytext">...</div> elements
 		# re.DOTALL makes the "." special character match any character at all, including a newline
-		m = re.search("""<div id="inner_content">(?P<part>.*)end #inner_content""", self.__data, re.DOTALL)
+		m = re.search("""<div id="inner_content">(?P<part>.*)<div id="right_bar">""", self.__data, re.DOTALL)
 		try:
 			self.__data = m.group('part')
 		except AttributeError:
