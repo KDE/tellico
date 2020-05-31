@@ -1,3 +1,7 @@
+2020-05-30  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated filter dialog to allow matching against equal empty string.
+
 2020-05-27  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed bug with creation date for duplicated entries (Bug 422127).

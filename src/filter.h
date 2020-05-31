@@ -59,9 +59,9 @@ public:
   FilterRule(const QString& fieldName, const QString& text, Function func);
 
   /**
-   * A rule is empty if the pattern text is empty
+   * A rule is empty if the pattern text is empty and we're not matching an equal string
    */
-  bool isEmpty() const { return m_pattern.isEmpty(); }
+  bool isEmpty() const;
   /**
    * This is the primary function of the rule.
    *

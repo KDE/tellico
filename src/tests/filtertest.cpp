@@ -207,6 +207,21 @@ void FilterTest::testFilter() {
 
   entry->setField(QStringLiteral("rating"), QStringLiteral("1"));
   QVERIFY(filter.matches(entry));
+
+  // test a filter for matchign against an empty string
+  Tellico::Data::FieldPtr testField(new Tellico::Data::Field(QStringLiteral("test"),
+                                                             QStringLiteral("Test")));
+  coll->addField(testField);
+  Tellico::FilterRule* rule10 = new Tellico::FilterRule(QStringLiteral("test"),
+                                                        QString(),
+                                                        Tellico::FilterRule::FuncEquals);
+  QVERIFY(!rule10->isEmpty());
+  filter.clear();
+  filter.append(rule10);
+  QVERIFY(filter.matches(entry));
+  rule10->setFunction(Tellico::FilterRule::FuncNotEquals);
+  QVERIFY(!rule10->isEmpty());
+  QVERIFY(!filter.matches(entry));
 }
 
 void FilterTest::testGroupViewFilter() {
