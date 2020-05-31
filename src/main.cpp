@@ -118,9 +118,9 @@ int main(int argc, char* argv[]) {
 
   // component name = "tellico" is same as bugs.kde.org product name
   KAboutData aboutData(QStringLiteral("tellico"), QStringLiteral("Tellico"),
-                       QStringLiteral(TELLICO_VERSION), i18n("Tellico - a KDE collection manager"),
+                       QStringLiteral(TELLICO_VERSION), i18n("Tellico - collection management software, free and simple"),
                        KAboutLicense::GPL_V2,
-                       i18n("(c) 2001-2019, Robby Stephenson"),
+                       i18n("(c) 2001-2020, Robby Stephenson"),
                        QString(),
                        QStringLiteral("https://tellico-project.org"));
   aboutData.addAuthor(QStringLiteral("Robby Stephenson"), QString(), QStringLiteral("robby@periapsis.org"));

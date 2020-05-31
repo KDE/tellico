@@ -11,7 +11,7 @@ When running &appname; from the command line, there are several options for open
 <programlisting>
 Usage: tellico [options] [filename]
 
-Tellico - a KDE collection manager
+Tellico - collection management software, free and simple
 
 Options:
   --nofile                  Do not reopen the last open file
@@ -20,7 +20,7 @@ Options:
   --ris                     Import &lt;filename&gt; as a RIS file
 
 Arguments:
-  filename                  File to open
+  [filename]                File to open
 </programlisting>
 
 </sect1>
