@@ -51,9 +51,9 @@ public:
   // no config options
   virtual QWidget* widget(QWidget*) Q_DECL_OVERRIDE { return nullptr; }
 
-private:
-  static QString& escapeText(QString& str);
+  static QString escapeText(const QString& str);
 
+private:
   bool writeFile(const QDir& dir, Data::EntryPtr entry);
 };
 

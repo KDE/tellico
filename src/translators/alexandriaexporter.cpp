@@ -50,9 +50,18 @@ using Tellico::Export::AlexandriaExporter;
 AlexandriaExporter::AlexandriaExporter(Data::CollPtr coll_) : Exporter(coll_) {
 }
 
-QString& AlexandriaExporter::escapeText(QString& str_) {
-  str_.replace(QLatin1String("\""), QLatin1String("\\\""));
-  return str_;
+QString AlexandriaExporter::escapeText(const QString& str_) {
+  // no control characters at all which is more strict than XML (which is what string_utils::removeControlCharacters has)
+  QString result;
+  result.reserve(str_.size());
+  for(int i = 0; i < str_.size(); ++i) {
+    const ushort c = str_.at(i).unicode();
+    if((c > 0x1F && c < 0x7F) || (c > 0xA0)) {
+      result += str_.at(i);
+    }
+  }
+  result.replace(QLatin1String("\""), QLatin1String("\\\""));
+  return result;
 }
 
 QString AlexandriaExporter::formatString() const {
@@ -174,7 +183,7 @@ bool AlexandriaExporter::writeFile(const QDir& dir_, Tellico::Data::EntryPtr ent
   tmp.replace(rx, QStringLiteral("\n"));
   ts << "notes: |-\n";
   foreach(const QString& line, tmp.split(QLatin1Char('\n'))) {
-    ts << "  " << line << "\n";
+    ts << "  " << escapeText(line) << "\n";
   }
 
   tmp = entry_->formattedField(QStringLiteral("publisher"), format);
