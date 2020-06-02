@@ -61,7 +61,7 @@ Document::Document() : QObject(), m_coll(nullptr), m_isModified(false),
   m_allImagesOnDisk = Config::imageLocation() != Config::ImagesInFile;
   m_loadImagesTimer.setSingleShot(true);
   m_loadImagesTimer.setInterval(500);
-  m_loadImagesTimer.callOnTimeout(this, &Document::slotLoadAllImages);
+  connect(&m_loadImagesTimer, &QTimer::timeout, this, &Document::slotLoadAllImages);
   newDocument(Collection::Book);
 }
 
