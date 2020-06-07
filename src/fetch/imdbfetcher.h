@@ -127,11 +127,13 @@ private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   static void initRegExps();
+  static void deleteRegExps();
   static QRegExp* s_tagRx;
   static QRegExp* s_anchorRx;
   static QRegExp* s_anchorTitleRx;
   static QRegExp* s_anchorNameRx;
   static QRegExp* s_titleRx;
+  static int s_instanceCount;
 
   void doTitle(const QString& s, Data::EntryPtr e);
   void doRunningTime(const QString& s, Data::EntryPtr e);

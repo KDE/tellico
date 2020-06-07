@@ -62,6 +62,7 @@ QRegExp* IMDBFetcher::s_anchorRx = nullptr;
 QRegExp* IMDBFetcher::s_anchorTitleRx = nullptr;
 QRegExp* IMDBFetcher::s_anchorNameRx = nullptr;
 QRegExp* IMDBFetcher::s_titleRx = nullptr;
+int IMDBFetcher::s_instanceCount = 0;
 
 // static
 void IMDBFetcher::initRegExps() {
@@ -79,6 +80,23 @@ void IMDBFetcher::initRegExps() {
 
   s_titleRx = new QRegExp(QStringLiteral("<title>(.*)</title>"), Qt::CaseInsensitive);
   s_titleRx->setMinimal(true);
+}
+
+void IMDBFetcher::deleteRegExps() {
+  delete s_tagRx;
+  s_tagRx = nullptr;
+
+  delete s_anchorRx;
+  s_anchorRx = nullptr;
+
+  delete s_anchorTitleRx;
+  s_anchorTitleRx = nullptr;
+
+  delete s_anchorNameRx;
+  s_anchorNameRx = nullptr;
+
+  delete s_titleRx;
+  s_titleRx = nullptr;
 }
 
 // static
@@ -264,13 +282,16 @@ IMDBFetcher::IMDBFetcher(QObject* parent_) : Fetcher(parent_),
     m_job(nullptr), m_started(false), m_fetchImages(true),
     m_numCast(10), m_redirected(false), m_limit(IMDB_MAX_RESULTS), m_lang(EN),
     m_currentTitleBlock(Unknown), m_countOffset(0) {
-  if(!s_tagRx) {
+  if(!s_instanceCount++) {
     initRegExps();
   }
   m_host = langData(m_lang).siteHost;
 }
 
 IMDBFetcher::~IMDBFetcher() {
+  if(!--s_instanceCount) {
+    deleteRegExps();
+  }
 }
 
 QString IMDBFetcher::source() const {
