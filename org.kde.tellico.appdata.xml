@@ -489,6 +489,8 @@
       <caption>The main window showing a movie collection</caption>
       <caption xml:lang="ca">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra una col·lecció de pel·lícules</caption>
+      <caption xml:lang="cs">Hlavní okno zobrazující sbírku filmů</caption>
+      <caption xml:lang="en-GB">The main window showing a movie collection</caption>
       <caption xml:lang="es">La ventana principal mostrando una colección de películas</caption>
       <caption xml:lang="et">Peaaken filmikoguga</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche une collection de films</caption>
@@ -532,6 +534,7 @@
       <caption>The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="ca">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="cs">Hlavní okno zobrazující vedle sebe sbírku her</caption>
       <caption xml:lang="de">Das Hauptfenster mit einer zweispaltigen Ansicht einer Spiele-Sammlung</caption>
       <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
