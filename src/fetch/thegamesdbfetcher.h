@@ -125,6 +125,7 @@ private:
   };
 
   bool m_started;
+  bool m_needToLoadData;
   QString m_apiKey;
   ImageSize m_imageSize;
 

@@ -63,9 +63,9 @@ using Tellico::Fetch::TheGamesDBFetcher;
 TheGamesDBFetcher::TheGamesDBFetcher(QObject* parent_)
     : Fetcher(parent_)
     , m_started(false)
+    , m_needToLoadData(true)
     , m_imageSize(SmallImage) {
   m_apiKey = Tellico::reverseObfuscate(THEGAMESDB_MAGIC_TOKEN);
-  loadCachedData();
 }
 
 TheGamesDBFetcher::~TheGamesDBFetcher() {
@@ -104,6 +104,11 @@ void TheGamesDBFetcher::search() {
             i18n("Those values must be entered in the data source settings."), MessageHandler::Error);
     stop();
     return;
+  }
+
+  if(m_needToLoadData) {
+    m_needToLoadData = false;
+    loadCachedData();
   }
 
   QUrl u(QString::fromLatin1(THEGAMESDB_API_URL));

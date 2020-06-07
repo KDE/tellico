@@ -965,6 +965,7 @@ void IMDBFetcher::doPerson(const QString& str_, Tellico::Data::EntryPtr entry_,
       break;
     }
   }
+  people.removeDuplicates();
   if(!people.isEmpty()) {
     people.removeDuplicates();
     entry_->setField(fieldName_, people.join(FieldFormat::delimiterString()));
