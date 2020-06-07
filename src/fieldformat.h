@@ -86,6 +86,7 @@ public:
    * @return The delimiter regexp
    */
   static QRegExp delimiterRegExp();
+  static QRegExp commaSplitRegExp();
   static QString columnDelimiterString();
   static QString rowDelimiterString();
 
@@ -130,10 +131,6 @@ public:
    * @param str String to fix
    */
   static QString capitalize(QString str);
-
-private:
-  static QRegExp delimiterRx;
-  static QRegExp commaSplitRx;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(FieldFormat::Options)

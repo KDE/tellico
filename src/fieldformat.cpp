@@ -27,25 +27,30 @@
 
 using Tellico::FieldFormat;
 
-QRegExp FieldFormat::delimiterRx = QRegExp(QLatin1String("\\s*;\\s*"));
-QRegExp FieldFormat::commaSplitRx = QRegExp(QLatin1String("\\s*,\\s*"));
-
 QString FieldFormat::delimiterString() {
-  return QStringLiteral("; ");
+  static QString ds(QStringLiteral("; "));
+  return ds;
 }
 
 QRegExp FieldFormat::delimiterRegExp() {
-  return delimiterRx;
+  static QRegExp drx(QStringLiteral("\\s*;\\s*"));
+  return drx;
+}
+
+QRegExp FieldFormat::commaSplitRegExp() {
+  static QRegExp commaSplitRx(QStringLiteral("\\s*,\\s*"));
+  return commaSplitRx;
 }
 
 QString FieldFormat::fixupValue(const QString& value_) {
   QString value = value_;
-  value.replace(delimiterRx, delimiterString());
+  value.replace(delimiterRegExp(), delimiterString());
   return value;
 }
 
 QString FieldFormat::columnDelimiterString() {
-  return QStringLiteral("::");
+  static QString cds(QStringLiteral("::"));
+  return cds;
 }
 
 QString FieldFormat::rowDelimiterString() {
@@ -57,7 +62,7 @@ QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing
     return QStringList();
   }
   return parsing_ == StringSplit ? string_.split(delimiterString(), behavior_)
-                                 : string_.split(delimiterRx, behavior_);
+                                 : string_.split(delimiterRegExp(), behavior_);
 }
 
 QStringList FieldFormat::splitRow(const QString& string_, QString::SplitBehavior behavior_) {
@@ -155,7 +160,7 @@ QString FieldFormat::title(const QString& title_, Options opt_) {
 
     // arbitrarily impose rule that a space must follow every comma
     // has to come before the capitalization since the space is significant
-    newTitle.replace(commaSplitRx, QStringLiteral(", "));
+    newTitle.replace(commaSplitRegExp(), QStringLiteral(", "));
   }
 
   if(opt_.testFlag(FormatCapitalize)) {
@@ -206,7 +211,7 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
       (name.indexOf(QLatin1Char(',')) > -1 && !Config::nameSuffixList().contains(words.last(), Qt::CaseInsensitive))) {
     // arbitrarily impose rule that no spaces before a comma and
     // a single space after every comma
-    name.replace(commaSplitRx, QStringLiteral(", "));
+    name.replace(commaSplitRegExp(), QStringLiteral(", "));
   } else if(words.count() > 1) {
     // otherwise split it by white space, move the last word to the front
     // but only if there is more than one word
