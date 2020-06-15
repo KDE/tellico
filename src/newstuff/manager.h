@@ -50,7 +50,7 @@ public:
 private:
   friend class ManagerSingleton;
 
-  explicit Manager(QObject* parent = nullptr);
+  Manager();
   ~Manager();
 
   static QStringList archiveFiles(const KArchiveDirectory* dir,

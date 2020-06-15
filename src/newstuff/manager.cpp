@@ -63,13 +63,14 @@ Q_GLOBAL_STATIC(Tellico::NewStuff::ManagerSingleton, s_instance)
 
 using Tellico::NewStuff::Manager;
 
-Manager::Manager(QObject* parent_) : QObject(parent_) {
+Manager::Manager() : QObject(nullptr) {
   QDBusConnection::sessionBus().registerService(QStringLiteral("org.kde.tellico"));
   new NewstuffAdaptor(this);
   QDBusConnection::sessionBus().registerObject(QStringLiteral("/NewStuff"), this);
 }
 
 Manager::~Manager() {
+  QDBusConnection::sessionBus().unregisterObject(QStringLiteral("/NewStuff"));
   QDBusConnection::sessionBus().unregisterService(QStringLiteral("org.kde.tellico"));
 }
 

@@ -207,14 +207,18 @@ MainWindow::MainWindow(QWidget* parent_/*=0*/) : KXmlGuiWindow(parent_),
 MainWindow::~MainWindow() {
   qDeleteAll(m_fetchActions);
   m_fetchActions.clear();
+  // when closing the mainwindow, immediately after running Tellico, often there was a long pause
+  // before the application eventually quit, something related to polling on eventfd, I don't
+  // know what. So when closing the window, make sure to immediately quit the application
+  QTimer::singleShot(0, qApp, &QCoreApplication::quit);
 }
 
 void MainWindow::slotInit() {
-  MARK;
   // if the edit dialog exists, we know we've already called this function
   if(m_editDialog) {
     return;
   }
+  MARK;
 
   m_editDialog = new EntryEditDialog(this);
   Controller::self()->addObserver(m_editDialog);
@@ -226,7 +230,7 @@ void MainWindow::slotInit() {
   initConnections();
   connect(ImageFactory::self(), &ImageFactory::imageLocationMismatch,
           this, &MainWindow::slotImageLocationMismatch);
-  // Init DBUS
+  // Init DBUS for new stuff manager
   NewStuff::Manager::self();
 }
 
@@ -1074,7 +1078,7 @@ bool MainWindow::queryClose() {
   // in case we're still loading the images, cancel that
   Data::Document::self()->cancelImageWriting();
   const bool willClose = m_editDialog->queryModified() && querySaveModified();
-  if (willClose) {
+  if(willClose) {
     ImageFactory::clean(true);
     saveOptions();
   }
@@ -1595,7 +1599,7 @@ void MainWindow::slotUpdateCollectionToolBar(Tellico::Data::CollPtr coll_) {
   // TODO::I have no idea how to get the combobox to update its size
   // this is the hackiest of hacks, taken from KXmlGuiWindow::saveNewToolbarConfig()
   // the window flickers as toolbar resizes, unavoidable?
-  // crashes if removeCLient//addClient is called here, need to do later in event loop
+  // crashes if removeClient//addClient is called here, need to do later in event loop
   QTimer::singleShot(0, this, &MainWindow::guiFactoryReset);
 }
 
