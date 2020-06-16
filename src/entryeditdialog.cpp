@@ -143,7 +143,11 @@ void EntryEditDialog::resetLayout(Tellico::Data::CollPtr coll_) {
     return;
   }
 
-  m_newButton->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
+  if(Kernel::self()->collectionType() == Data::Collection::Base) {
+    m_newButton->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
+  } else {
+    m_newButton->setIcon(QIcon(QLatin1String(":/icons/") + Kernel::self()->collectionTypeName()));
+  }
 
   setUpdatesEnabled(false);
   if(m_tabs->count() > 0) {
