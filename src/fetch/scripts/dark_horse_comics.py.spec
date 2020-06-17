@@ -23,7 +23,6 @@ Name[sl]=Dark Horse Comics
 Name[sv]=Dark Horse Comics
 Name[tr]=Kara At Karikatürleri
 Name[uk]=Комікси Темного Коня
-Name[x-test]=xxDark Horse Comicsxx
 Type=data-source
 ArgumentKeys=1
 Arguments=%1
