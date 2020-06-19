@@ -20,8 +20,8 @@ endif(POLICY CMP0063)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      ${ECM_MODULE_PATH}
-                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules
+                      ${ECM_MODULE_PATH})
 
 #include(ECMAddTests)
 #include(ECMMarkNonGuiExecutable)
