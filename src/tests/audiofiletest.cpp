@@ -57,6 +57,7 @@ void AudioFileTest::testDirectory() {
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
+  qDebug() << entry->field("file");
   QVERIFY(entry->field("file").contains(QStringLiteral("::610"))); // bitrate
 }
 
