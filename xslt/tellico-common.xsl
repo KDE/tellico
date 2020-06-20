@@ -8,7 +8,8 @@
    ===================================================================
    Tellico XSLT file - some common templates.
 
-   Copyright (C) 2004-2009 Robby Stephenson <robby@periapsis.org>
+   Copyright (C) 2004-2020 Robby Stephenson <robby@periapsis.org>
+                           John Zaitseff <J.Zaitseff@zap.org.au>
 
    This XSLT stylesheet is designed to be used with the 'Tellico'
    application, which can be found at http://tellico-project.org
@@ -121,15 +122,16 @@
        <xsl:when test="$field = 'amazon'">
         <xsl:text>Buy from Amazon.com</xsl:text>
        </xsl:when>
+
        <!-- Requested by Giant Bomb API documentation -->
        <xsl:when test="$field = 'giantbomb'">
         <xsl:text>Find more information on Giant Bomb</xsl:text>
        </xsl:when>
-       <xsl:when test="string-length($child) &gt; 30">
-        <xsl:value-of select="concat(substring($child,1,15),'...',substring($child,string-length($child)-14,15))"/>
-       </xsl:when>
+
        <xsl:otherwise>
-        <xsl:value-of select="$child"/>
+        <xsl:call-template name="break-url-slash">
+         <xsl:with-param name="url" select="$child"/>
+        </xsl:call-template>
        </xsl:otherwise>
       </xsl:choose>
      </a>
@@ -319,6 +321,53 @@
   </xsl:variable>
   COL_SORT_ARRAY[<xsl:value-of select="position()-1"/>] = <xsl:value-of select="$sort-type"/>
  </xsl:for-each>
+</xsl:template>
+
+<!-- Output a full URL text that can line-break correctly -->
+<xsl:template name="break-url-slash">
+ <xsl:param name="url" />
+
+ <xsl:variable name="first" select="substring-before($url, '/')" />
+ <xsl:variable name="next" select="substring-after($url, '/')" />
+
+ <xsl:choose>
+  <xsl:when test="$first or $next">
+   <xsl:call-template name="break-url-hyphen">
+    <xsl:with-param name="url" select="$first" />
+   </xsl:call-template>
+   <xsl:text>/</xsl:text>
+   <wbr />
+   <xsl:call-template name="break-url-slash">
+    <xsl:with-param name="url" select="$next" />
+   </xsl:call-template>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:call-template name="break-url-hyphen">
+    <xsl:with-param name="url" select="$url" />
+   </xsl:call-template>
+  </xsl:otherwise>
+ </xsl:choose>
+</xsl:template>
+
+<xsl:template name="break-url-hyphen">
+ <xsl:param name="url" />
+
+ <xsl:variable name="first" select="substring-before($url, '-')" />
+ <xsl:variable name="next" select="substring-after($url, '-')" />
+
+ <xsl:choose>
+  <xsl:when test="$first or $next">
+   <xsl:value-of select="$first" />
+   <xsl:text>-</xsl:text>
+   <wbr />
+   <xsl:call-template name="break-url-hyphen">
+    <xsl:with-param name="url" select="$next" />
+   </xsl:call-template>
+  </xsl:when>
+  <xsl:otherwise>
+   <xsl:value-of select="$url" />
+  </xsl:otherwise>
+ </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
