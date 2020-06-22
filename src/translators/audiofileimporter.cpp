@@ -42,6 +42,7 @@
 #include <id3v2tag.h>
 #include <mpegfile.h>
 #include <vorbisfile.h>
+#include <vorbisproperties.h>
 #include <flacfile.h>
 #include <audioproperties.h>
 #include <tpropertymap.h>
@@ -321,9 +322,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         }
       }
       if(trackNum > 0) {
+        TagLib::AudioProperties* audioProps = f.audioProperties();
+        Q_ASSERT(audioProps);
         QString t = TStringToQString(tag->title()).trimmed();
         t += FieldFormat::columnDelimiterString() + a;
-        const int len = f.audioProperties()->length();
+        int len = audioProps->length();
+        if(len == 0) len = audioProps->lengthInSeconds();
+        if(len == 0) len = audioProps->lengthInMilliseconds() / 1000;
         if(len > 0) {
           t += FieldFormat::columnDelimiterString() + Tellico::minutes(len);
         }
@@ -332,7 +337,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
         if(addFile) {
           QString fileValue = *it;
           if(addBitrate) {
-            fileValue += FieldFormat::columnDelimiterString() + QString::number(f.audioProperties()->bitrate());
+            // for Vorbis, prefer the nominal bitrate (which is bytes/sec, where bitrate() is kb/s)
+            TagLib::Vorbis::Properties* vorbisProps = dynamic_cast<TagLib::Vorbis::Properties*>(audioProps);
+            const int bitrate = vorbisProps ? vorbisProps->bitrateNominal()/1000 : audioProps->bitrate();
+            fileValue += FieldFormat::columnDelimiterString() + QString::number(bitrate);
           }
           entry->setField(file, insertValue(entry->field(file), fileValue, trackNum));
         }
