@@ -17,4 +17,8 @@ TARGET_LINK_LIBRARIES(newstuff
     KF5::Archive
     )
 
-INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+if(${ECM_VERSION} STRGREATER "5.57.0")
+  INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})
+else()
+  INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+endif()
