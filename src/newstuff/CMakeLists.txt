@@ -17,4 +17,6 @@ TARGET_LINK_LIBRARIES(newstuff
     KF5::Archive
     )
 
-INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+IF( KF5NewStuff_FOUND )
+  INSTALL(FILES tellico-template.knsrc tellico-script.knsrc DESTINATION ${KDE_INSTALL_CONFDIR})
+endif()
