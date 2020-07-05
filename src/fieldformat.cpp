@@ -74,17 +74,16 @@ QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavi
 }
 
 QString FieldFormat::sortKeyTitle(const QString& title_) {
-  const QString lower = title_.toLower();
   foreach(const QString& article, Config::articleList()) {
     // assume white space is already stripped
     // the articles are already in lower-case
-    if(lower.startsWith(article + QLatin1Char(' '))) {
+    if(title_.startsWith(article + QLatin1Char(' '))) {
       return title_.mid(article.length() + 1);
     }
   }
   // check apostrophes, too
   foreach(const QString& article, Config::articleAposList()) {
-    if(lower.startsWith(article)) {
+    if(title_.startsWith(article)) {
       return title_.mid(article.length());
     }
   }

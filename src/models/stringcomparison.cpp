@@ -86,8 +86,10 @@ Tellico::TitleComparison::TitleComparison() : StringComparison() {
 }
 
 int Tellico::TitleComparison::compare(const QString& str1_, const QString& str2_) {
-  const QString title1 = FieldFormat::sortKeyTitle(str1_).toLower();
-  const QString title2 = FieldFormat::sortKeyTitle(str2_).toLower();
+  // sortKeyTitle compares against the article list (which is already in lower-case)
+  // additionally, we want lower case for localeAwareCompare
+  const QString title1 = FieldFormat::sortKeyTitle(str1_.toLower());
+  const QString title2 = FieldFormat::sortKeyTitle(str2_.toLower());
   const int ret = title1.localeAwareCompare(title2);
   return ret > 0 ? 1 : (ret < 0 ? -1 : 0);
 }
