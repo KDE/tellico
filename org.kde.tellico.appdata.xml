@@ -232,7 +232,7 @@
       <li xml:lang="pt">Lida com itens de vários autores, géneros, palavras-chave, etc</li>
       <li xml:lang="pt-BR">Lida com itens de vários autores, gêneros, palavras-chave, etc</li>
       <li xml:lang="sk">Spracúva položky s viacerými autormi, žánrami, kľúčovými slovami atď.</li>
-      <li xml:lang="sl">Zna ravnati z vnosi z večimi avtorji, zvrstmi, ključnimi besedami, itd.</li>
+      <li xml:lang="sl">Zna ravnati z vnosi z več avtorji, zvrstmi, ključnimi besedami, itd.</li>
       <li xml:lang="sv">Hanterar poster med flera författare, genrer, nyckelord, etc.</li>
       <li xml:lang="tr">Birden çok yazarı, türü ve anahtar kelimeyi işleyebilir</li>
       <li xml:lang="uk">Обробка записів з декількома авторами, жанрами, ключовими словами тощо.</li>
@@ -501,6 +501,7 @@
       <caption xml:lang="nn">Hovudvindauget som viser ei filmsamling</caption>
       <caption xml:lang="pt">A janela principal a mostrar uma colecção de filmes</caption>
       <caption xml:lang="pt-BR">A janela principal mostrando uma coleção de filmes</caption>
+      <caption xml:lang="sl">Glavno okno, ki prikazuje zbirko filmov</caption>
       <caption xml:lang="sv">Huvudfönstret som visar en filmsamling</caption>
       <caption xml:lang="uk">Головне вікно програми зі збіркою фільмів</caption>
       <caption xml:lang="x-test">xxThe main window showing a movie collectionxx</caption>
