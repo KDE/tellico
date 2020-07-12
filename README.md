@@ -1,7 +1,6 @@
-# Tellico
-## Collection management software, free and simple
+# Tellico - *Collection management software, free and simple*
 
-![Screenshot of Tellico](https://cdn.kde.org/screenshots/tellico/tellico-movies.png)]
+![Screenshot of Tellico](https://cdn.kde.org/screenshots/tellico/tellico-movies.png)
 
 ## Description
 
@@ -15,8 +14,8 @@ Tellico is a part of the Office group of KDE Applications.
 ## More Information
 
 Visit the [Tellico homepage](https://tellico-project.org) or
-[https://userbase.kde.org/Tellico] for more information.
+[https://userbase.kde.org/Tellico]() for more information.
 The [Tellico mailing list](mailto:tellico-users@kde.org) or
 [Tellico forum](https://forum.kde.org/viewforum.php?f=200) can provide
 further help. Please report bugs or make feature requests through the
-[KDE bug reporting system](https://bugs.kde.org/buglist.cgi?query_format=specific&order=relevance+desc&bug_status=__all__&product=tellico)
+[KDE bug reporting system](https://bugs.kde.org/buglist.cgi?query_format=specific&order=relevance+desc&bug_status=__all__&product=tellico).
