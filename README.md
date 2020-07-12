@@ -2,6 +2,10 @@
 
 ![Screenshot of Tellico](https://cdn.kde.org/screenshots/tellico/tellico-movies.png)
 
+Copyright: 2001-2020 Robby Stephenson <robby@periapsis.org>
+
+Author/Maintainer: Robby Stephenson <robby@periapsis.org>
+
 ## Description
 
 Tellico makes it easy to track your books, videos, music, even your wine and
