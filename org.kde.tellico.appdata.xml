@@ -488,6 +488,7 @@
     <screenshot type="default" width="1280" height="704">
       <caption>The main window showing a movie collection</caption>
       <caption xml:lang="ca">La finestra principal mostra una col·lecció de pel·lícules</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující sbírku filmů</caption>
       <caption xml:lang="en-GB">The main window showing a movie collection</caption>
       <caption xml:lang="es">La ventana principal mostrando una colección de películas</caption>
