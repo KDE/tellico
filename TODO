@@ -8,6 +8,7 @@
 * ADSABS API https://github.com/adsabs/adsabs-dev-api
 * Add Zotero query
 * Update the video game XSLT data sources to somehow use the platform normalization
+* TheAudioDB.com
 
 === User Interface
 * Replace most of the toggle actions in the view settings with KDualAction
