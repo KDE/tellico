@@ -42,7 +42,7 @@ class DockWidget : public QDockWidget {
 Q_OBJECT
 
 public:
-  explicit DockWidget(const QString& title, QWidget* parent, Qt::WindowFlags flags = nullptr);
+  explicit DockWidget(const QString& title, QWidget* parent);
   ~DockWidget() Q_DECL_OVERRIDE {};
 
   /**

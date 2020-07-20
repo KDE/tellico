@@ -246,9 +246,12 @@ void MainWindow::initActions() {
    * File->New menu
    *************************************************/
   QSignalMapper* collectionMapper = new QSignalMapper(this);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   void (QSignalMapper::* mappedInt)(int) = &QSignalMapper::mapped;
-  connect(collectionMapper, mappedInt,
-          this, &MainWindow::slotFileNew);
+  connect(collectionMapper, mappedInt, this, &MainWindow::slotFileNew);
+#else
+  connect(collectionMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileNew);
+#endif
 
   KActionMenu* fileNewMenu = new KActionMenu(i18n("New"), this);
   fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
@@ -343,8 +346,11 @@ void MainWindow::initActions() {
 /**************** Import Menu ***************************/
 
   QSignalMapper* importMapper = new QSignalMapper(this);
-  connect(importMapper, mappedInt,
-          this, &MainWindow::slotFileImport);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  connect(importMapper, mappedInt, this, &MainWindow::slotFileImport);
+#else
+  connect(importMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileImport);
+#endif
 
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
   importMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
@@ -441,8 +447,11 @@ void MainWindow::initActions() {
 /**************** Export Menu ***************************/
 
   QSignalMapper* exportMapper = new QSignalMapper(this);
-  connect(exportMapper, mappedInt,
-          this, &MainWindow::slotFileExport);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  connect(exportMapper, mappedInt, this, &MainWindow::slotFileExport);
+#else
+  connect(exportMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileExport);
+#endif
 
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
   exportMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
@@ -611,8 +620,11 @@ void MainWindow::initActions() {
   action->setToolTip(i18n("Check for duplicate citation keys"));
 
   QSignalMapper* citeMapper = new QSignalMapper(this);
-  connect(citeMapper, mappedInt,
-          this, &MainWindow::slotCiteEntry);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
+  connect(citeMapper, mappedInt, this, &MainWindow::slotCiteEntry);
+#else
+  connect(citeMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotCiteEntry);
+#endif
 
   action = actionCollection()->addAction(QStringLiteral("cite_clipboard"), citeMapper, mapVoid);
   action->setText(i18n("Copy Bibtex to Cli&pboard"));
@@ -627,9 +639,14 @@ void MainWindow::initActions() {
   citeMapper->setMapping(action, Cite::CiteLyxpipe);
 
   m_updateMapper = new QSignalMapper(this);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   void (QSignalMapper::* mappedString)(const QString&) = &QSignalMapper::mapped;
   connect(m_updateMapper, mappedString,
           Controller::self(), &Controller::slotUpdateSelectedEntries);
+#else
+  connect(m_updateMapper, &QSignalMapper::mappedString,
+          Controller::self(), &Controller::slotUpdateSelectedEntries);
+#endif
 
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
   m_updateEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));

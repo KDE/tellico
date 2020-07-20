@@ -247,8 +247,12 @@ void ConfigDialog::initGeneralPage(QFrame* frame) {
   imageGroup->addButton(m_rbImageInFile);
   imageGroup->addButton(m_rbImageInAppDir);
   imageGroup->addButton(m_rbImageInLocalDir);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   void (QButtonGroup::* buttonClicked)(int) = &QButtonGroup::buttonClicked;
   connect(imageGroup, buttonClicked, this, &ConfigDialog::slotModified);
+#else
+  connect(imageGroup, &QButtonGroup::idClicked, this, &ConfigDialog::slotModified);
+#endif
 
   QGroupBox* formatGroup = new QGroupBox(i18n("Formatting Options"), frame);
   l->addWidget(formatGroup);

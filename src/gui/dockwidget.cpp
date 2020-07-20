@@ -26,8 +26,8 @@
 
 using Tellico::GUI::DockWidget;
 
-DockWidget::DockWidget(const QString& title_, QWidget* parent_, Qt::WindowFlags flags_)
-  : QDockWidget(title_, parent_, flags_)
+DockWidget::DockWidget(const QString& title_, QWidget* parent_)
+  : QDockWidget(title_, parent_)
   , m_isLocked(false)
   , m_dockTitleBar(nullptr) {
   setFeatures(QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetClosable);
