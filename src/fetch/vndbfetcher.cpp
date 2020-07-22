@@ -87,12 +87,16 @@ void VNDBFetcher::search() {
   m_data.clear();
 
   if(!m_socket) {
+    m_socket = new QTcpSocket(this);
+    QObject::connect(m_socket, &QTcpSocket::readyRead,     this, &VNDBFetcher::slotRead);
+    QObject::connect(m_socket, &QTcpSocket::stateChanged,  this, &VNDBFetcher::slotState);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
     // see https://wiki.qt.io/New_Signal_Slot_Syntax#Overload for why this is necessary
     void (QTcpSocket::* errorSignal)(QAbstractSocket::SocketError) = &QAbstractSocket::error;
-    m_socket = new QTcpSocket(this);
-    QObject::connect(m_socket, &QTcpSocket::readyRead,    this, &VNDBFetcher::slotRead);
-    QObject::connect(m_socket, &QTcpSocket::stateChanged, this, &VNDBFetcher::slotState);
-    QObject::connect(m_socket, errorSignal,               this, &VNDBFetcher::slotError);
+    QObject::connect(m_socket, errorSignal,                this, &VNDBFetcher::slotError);
+#else
+    QObject::connect(m_socket, &QTcpSocket::errorOccurred, this, &VNDBFetcher::slotError);
+#endif
   }
   if(!m_isConnected) {
     m_socket->connectToHost(QLatin1String(VNDB_HOSTNAME), VNDB_PORT);

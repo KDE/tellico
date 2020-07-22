@@ -282,8 +282,12 @@ QWidget* CSVImporter::widget(QWidget* parent_) {
   buttonGroup->addButton(m_radioSemicolon);
   buttonGroup->addButton(m_radioTab);
   buttonGroup->addButton(m_radioOther);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   void (QButtonGroup::* buttonClickedInt)(int) = &QButtonGroup::buttonClicked;
   connect(buttonGroup, buttonClickedInt, this, &CSVImporter::slotDelimiter);
+#else
+  connect(buttonGroup, &QButtonGroup::idClicked, this, &CSVImporter::slotDelimiter);
+#endif
 
   QHBoxLayout* delimiterLayout2 = new QHBoxLayout();
   vlay->addLayout(delimiterLayout2);
