@@ -127,8 +127,13 @@ set_package_properties(Taglib PROPERTIES
     URL "https://taglib.org/"
     TYPE OPTIONAL)
 if(TAGLIB_FOUND)
-    add_definitions(${TAGLIB_CFLAGS})
-    include_directories(${TAGLIB_INCLUDES})
+    if(TAGLIB_LIBRARIES)
+        # Older taglib
+        add_definitions(${TAGLIB_CFLAGS})
+        include_directories(${TAGLIB_INCLUDES})
+    else()
+        set(TAGLIB_LIBRARIES Taglib::Taglib)
+    endif()
 endif(TAGLIB_FOUND)
 
 find_package(Yaz 2.0)
