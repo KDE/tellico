@@ -44,18 +44,18 @@
 </xsl:template>
 
 <xsl:template match="book">
-  <title>
-   <xsl:value-of select="title"/>
+ <title>
+   <!-- prefer title_without_series when it exists. XPath | operator returns in document order
+        so have to account for that to prefer -->
+   <xsl:value-of select="(title_without_series |
+                          title[not(following-sibling::title_without_series)])[1]"/>
   </title>
 
   <isbn>
-   <xsl:value-of select="isbn"/>
+   <!-- prefer isbn to isbn13 -->
+   <xsl:value-of select="(isbn |
+                          isbn13[not(following-sibling::isbn)])[1]"/>
   </isbn>
-  <xsl:if test="not(isbn)">
-   <isbn>
-    <xsl:value-of select="isbn13"/>
-   </isbn>
-  </xsl:if>
 
   <publisher>
    <xsl:value-of select="publisher"/>
@@ -72,6 +72,17 @@
     </author>
    </xsl:for-each>
   </authors>
+
+  <binding i18n="true">
+   <xsl:choose>
+    <xsl:when test="format='Hardcover'">
+     <xsl:text>Hardback</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+     <xsl:value-of select="format"/>
+    </xsl:otherwise>
+   </xsl:choose>
+  </binding>
 
   <cover>
    <xsl:value-of select="image_url"/>
