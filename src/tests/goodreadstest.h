@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,53 +22,17 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMPORT_GOODREADSIMPORTER_H
-#define TELLICO_IMPORT_GOODREADSIMPORTER_H
+#ifndef GOODREADSTEST_H
+#define GOODREADSTEST_H
 
-#include "importer.h"
+#include <QObject>
 
-#include <KSharedConfig>
-
-class QLineEdit;
-
-namespace Tellico {
-  namespace Import {
-
-/**
- * @author Robby Stephenson
-*/
-class GoodreadsImporter : public Importer {
+class GoodreadsTest : public QObject {
 Q_OBJECT
 
-public:
-  /**
-   */
-  GoodreadsImporter();
-
-  virtual Data::CollPtr collection() Q_DECL_OVERRIDE;
-  virtual bool canImport(int type) const Q_DECL_OVERRIDE;
-
-  virtual QWidget* widget(QWidget* parent) Q_DECL_OVERRIDE;
-
-  void setConfig(KSharedConfig::Ptr config);
-
-public Q_SLOTS:
-  void slotCancel() Q_DECL_OVERRIDE {}
-
-private:
-  QString text() const;
-  QString idFromName(const QString& userName) const;
-
-  Data::CollPtr m_coll;
-  QWidget* m_widget;
-  QLineEdit* m_userEdit;
-  KSharedConfig::Ptr m_config;
-
-  QUrl m_xsltURL;
-  QString m_user;
-  QString m_key;
+private Q_SLOTS:
+  void initTestCase();
+  void testImport();
 };
 
-  } // end namespace
-} // end namespace
 #endif

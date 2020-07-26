@@ -664,6 +664,14 @@ add_test(giantbombfetchertest giantbombfetchertest)
 ecm_mark_as_test(giantbombfetchertest)
 TARGET_LINK_LIBRARIES(giantbombfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(goodreadstest goodreadstest.cpp
+  ../translators/goodreadsimporter.cpp
+)
+ecm_mark_nongui_executable(goodreadstest)
+add_test(goodreadstest goodreadstest)
+ecm_mark_as_test(goodreadstest)
+TARGET_LINK_LIBRARIES(goodreadstest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(googlebookfetchertest googlebookfetchertest.cpp abstractfetchertest.cpp
   ../fetch/googlebookfetcher.cpp
 )

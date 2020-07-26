@@ -2,6 +2,10 @@
 
 	* Updated Allocine data source.
 
+2020-07-26  Robby  <robby@periapsis.org>
+
+	* Improved Goodreads importer.
+
 2020-05-31  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.3.1.

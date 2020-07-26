@@ -30,7 +30,6 @@
 #include "../tellico_debug.h"
 
 #include <KConfigGroup>
-#include <KSharedConfig>
 #include <KLocalizedString>
 
 #include <QLineEdit>
@@ -40,6 +39,7 @@
 #include <QDomDocument>
 #include <QRegExp>
 #include <QUrlQuery>
+#include <QFile>
 
 namespace {
   static const char* GOODREADS_LIST_URL = "https://www.goodreads.com/review/list.xml";
@@ -56,13 +56,10 @@ GoodreadsImporter::GoodreadsImporter() : Import::Importer(), m_widget(nullptr), 
   } else {
     myWarning() << "unable to find goodreads2tellico.xsl!";
   }
+}
 
-  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - Goodreads"));
-  m_user = config.readEntry("User ID");
-  m_key = config.readEntry("Developer Key");
-  if(m_key.isEmpty()) {
-    m_key = QLatin1String(GOODREADS_API_KEY);
-  }
+void GoodreadsImporter::setConfig(KSharedConfig::Ptr config_) {
+  m_config = config_;
 }
 
 bool GoodreadsImporter::canImport(int type) const {
@@ -74,17 +71,29 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
     return m_coll;
   }
 
+  if(!m_config) {
+    m_config = KSharedConfig::openConfig();
+  }
+
+  KConfigGroup cg(m_config, QStringLiteral("ImportOptions - Goodreads"));
+  m_user = cg.readEntry("User ID");
+  m_key = cg.readEntry("Developer Key");
+  if(m_key.isEmpty()) {
+    m_key = QLatin1String(GOODREADS_API_KEY);
+  }
+
   if(m_xsltURL.isEmpty() || !m_xsltURL.isValid()) {
     setStatusMessage(i18n("A valid XSLT file is needed to import the file."));
     return Data::CollPtr();
   }
 
-  if(!m_widget) {
-    myWarning() << "no widget!";
+  if(m_widget) {
+    m_user = m_userEdit->text().trimmed();
+  } else if(m_user.isEmpty()) {
+    myWarning() << "no widget and no user!";
     return Data::CollPtr();
   }
 
-  m_user = m_userEdit->text().trimmed();
   // if the user is not all digits, assume it's a user name and
   // convert it to a user id
   if(!QRegExp(QLatin1String("\\d+")).exactMatch(m_user)) {
@@ -101,8 +110,19 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
     return Data::CollPtr();
   }
 
-//  myDebug() << text();
-  QString str = handler.applyStylesheet(text());
+  const QString text = this->text();
+#if 0
+  myWarning() << "Remove output debug from goodreadsimporter.cpp";
+  QFile f(QLatin1String("/tmp/goodreads.xml"));
+  if(f.open(QIODevice::WriteOnly)) {
+    QTextStream t(&f);
+    t.setCodec("UTF-8");
+    t << text;
+  }
+  f.close();
+#endif
+
+  QString str = handler.applyStylesheet(text);
 //  myDebug() << str;
 
   Import::TellicoImporter imp(str);
@@ -110,9 +130,8 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
   m_coll = imp.collection();
   setStatusMessage(imp.statusMessage());
 
-  KConfigGroup config(KSharedConfig::openConfig(), QStringLiteral("ImportOptions - Goodreads"));
-  config.writeEntry("User ID", m_user);
-  config.writeEntry("Developer Key", m_key);
+  cg.writeEntry("User ID", m_user);
+  cg.writeEntry("Developer Key", m_key);
 
   return m_coll;
 }
