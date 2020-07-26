@@ -69,6 +69,9 @@ void TheGamesDBFetcherTest::initTestCase() {
 void TheGamesDBFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
   QString groupName = QStringLiteral("TGDB");
+  if(!config.hasGroup(groupName)) {
+    QSKIP("This test requires a config file with TGDB settings.", SkipAll);
+  }
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Goldeneye"));
