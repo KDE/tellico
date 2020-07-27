@@ -53,6 +53,7 @@ private Q_SLOTS:
   void testRecoverXmlName();
   void testRecoverXmlName_data();
   void testBug418067();
+  void testNoCreationDate();
 
 private:
   QList<Tellico::Data::CollPtr> m_collections;
