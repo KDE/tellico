@@ -182,7 +182,6 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   // here, we need to scan all the image values in all the entries and check
   // maybe this is too costly, especially since the capability wasn't advertised?
 
-  const bool hasMDate = d->coll->hasField(QStringLiteral("mdate"));
   const int maxImageWarnings = 3;
   int imageWarnings = 0;
 
@@ -211,15 +210,8 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
         } else {
           value = Data::Image::idClean(value);
         }
-        if(hasMDate) {
-          // since the modified date gets reset, keep a copy
-          const QString mdate = entry->field(QStringLiteral("mdate"));
-          entry->setField(field->name(), value);
-          entry->setField(QStringLiteral("mdate"), mdate);
-        } else {
-          // reset the image id to be whatever was loaded
-          entry->setField(field->name(), value);
-        }
+        // reset the image id to be whatever was loaded
+        entry->setField(field->name(), value, false /* no modified date update */);
       }
     }
   }

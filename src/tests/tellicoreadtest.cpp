@@ -39,6 +39,7 @@
 
 #include <QTest>
 #include <QNetworkInterface>
+#include <QDate>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
@@ -385,4 +386,24 @@ void TellicoReadTest::testBug418067() {
   QVERIFY(coll);
   QVERIFY(coll->hasField(QSL("lc-no.")));
   QVERIFY(coll->hasField(QSL("mein-wunschpreis-")));
+}
+
+void TellicoReadTest::testNoCreationDate() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/no_cdate.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QVERIFY(coll->hasField(QStringLiteral("cdate")));
+  QVERIFY(coll->hasField(QStringLiteral("mdate")));
+  QCOMPARE(coll->entries().count(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entries().at(0);
+  QVERIFY(entry);
+  // entry data has an mdate but no cdate
+  // cdate should be set to same as mdate
+  QString mdate(QStringLiteral("2020-05-30"));
+  QCOMPARE(entry->field(QStringLiteral("cdate")), mdate);
+  QCOMPARE(entry->field(QStringLiteral("mdate")), mdate);
 }

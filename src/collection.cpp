@@ -471,10 +471,15 @@ void Collection::addEntries(const Tellico::Data::EntryList& entries_) {
     m_entryById.insert(entry->id(), entry.data());
 
     if(hasField(QStringLiteral("cdate")) && entry->field(QStringLiteral("cdate")).isEmpty()) {
-      entry->setField(QStringLiteral("cdate"), QDate::currentDate().toString(Qt::ISODate));
+      // use mdate if it exists
+      QString cdate = entry->field(QStringLiteral("mdate"));
+      if(cdate.isEmpty()) {
+        cdate = QDate::currentDate().toString(Qt::ISODate);
+      }
+      entry->setField(QStringLiteral("cdate"), cdate, false);
     }
     if(hasField(QStringLiteral("mdate")) && entry->field(QStringLiteral("mdate")).isEmpty()) {
-      entry->setField(QStringLiteral("mdate"), QDate::currentDate().toString(Qt::ISODate));
+      entry->setField(QStringLiteral("mdate"), QDate::currentDate().toString(Qt::ISODate), false);
     }
   }
   if(m_trackGroups) {
