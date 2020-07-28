@@ -375,6 +375,7 @@
       <li>Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="ca">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
       <li xml:lang="ca-valencia">Exporta a Bibtex, ONIX, CSV, HTML i altres formats</li>
+      <li xml:lang="da">Eksporterer til Bibtex, ONIX, CSV, HTML og andre formater</li>
       <li xml:lang="de">Export zu Bibtex, ONIX, CSV, HTML, und andere Formate</li>
       <li xml:lang="en-GB">Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML y otros formatos</li>
@@ -490,6 +491,7 @@
       <caption xml:lang="ca">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra una col·lecció de pel·lícules</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující sbírku filmů</caption>
+      <caption xml:lang="da">Hovedvinduet som viser en filmsamling</caption>
       <caption xml:lang="en-GB">The main window showing a movie collection</caption>
       <caption xml:lang="es">La ventana principal mostrando una colección de películas</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche une collection de films</caption>
@@ -509,6 +511,7 @@
       <caption>The main window showing a simple item in a book collection</caption>
       <caption xml:lang="ca">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra un element senzill en una col·lecció de llibres</caption>
+      <caption xml:lang="da">Hovedvinduet som viser et simpelt element i en bogsamling</caption>
       <caption xml:lang="de">Das Hauptfenster mit einem einfachen Eintrag einer Bücher-Sammlung</caption>
       <caption xml:lang="en-GB">The main window showing a simple item in a book collection</caption>
       <caption xml:lang="es">La ventana principal mostrando un elemento sencillo de una colección de libros</caption>
@@ -535,6 +538,7 @@
       <caption xml:lang="ca">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
       <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující vedle sebe sbírku her</caption>
+      <caption xml:lang="da">Hovedvinduet som viser side-om-side-visninger af en spilsamling</caption>
       <caption xml:lang="de">Das Hauptfenster mit einer zweispaltigen Ansicht einer Spiele-Sammlung</caption>
       <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
