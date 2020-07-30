@@ -77,17 +77,15 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
       myWarning() << "bad collection type:" << coll->type();
   }
 
-  const QString mdateField = QStringLiteral("mdate");
   const QString uuidField = QStringLiteral("uuid");
   const QString coverField = QStringLiteral("cover");
   const bool isLocal = url().isLocalFile();
 
   foreach(Data::EntryPtr entry, coll->entries()) {
-    const QString mdate = entry->field(mdateField);
     const QString comments = entry->field(commField);
     if(!comments.isEmpty()) {
       RTF2HTML rtf2html(comments);
-      entry->setField(commField, rtf2html.toHTML());
+      entry->setField(commField, rtf2html.toHTML(), false /* no change to mdate */);
     }
 
     //try to add images
@@ -100,15 +98,13 @@ Tellico::Data::CollPtr DeliciousImporter::collection() {
         }
         QString imgID = ImageFactory::addImage(QUrl::fromLocalFile(imgPath), true);
         if(!imgID.isEmpty()) {
-          entry->setField(coverField, imgID);
+          entry->setField(coverField, imgID, false /* no change to mdate */);
         }
         break;
       }
       // not needed anymore
-      entry->setField(uuidField, QString());
+      entry->setField(uuidField, QString(), false /* no change to mdate */);
     }
-    //reset mdate value
-    entry->setField(mdateField, mdate);
   }
 
   coll->removeField(uuidField);
