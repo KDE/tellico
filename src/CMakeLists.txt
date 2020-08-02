@@ -78,11 +78,7 @@ SET(tellico_SRCS
    viewstack.cpp
    )
 
-qt5_add_resources(tellico_SRCS
-   ../icons/icons.qrc
-)
-
-add_executable(tellico ${tellico_SRCS})
+add_executable(tellico ${tellico_SRCS} ../icons/icons.qrc)
 
 TARGET_LINK_LIBRARIES(tellico
     core
