@@ -529,8 +529,12 @@ QWidget* FreeDBImporter::widget(QWidget* parent_) {
   m_buttonGroup = new QButtonGroup(gbox);
   m_buttonGroup->addButton(m_radioCDROM);
   m_buttonGroup->addButton(m_radioCache);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   void (QButtonGroup::* buttonClickedInt)(int) = &QButtonGroup::buttonClicked;
   connect(m_buttonGroup, buttonClickedInt, this, &FreeDBImporter::slotClicked);
+#else
+  connect(m_buttonGroup, &QButtonGroup::idClicked, this, &FreeDBImporter::slotClicked);
+#endif
 
   l->addWidget(gbox);
   l->addStretch(1);
