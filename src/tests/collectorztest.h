@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,73 +22,19 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TRANSLATORS_H
-#define TRANSLATORS_H
+#ifndef COLLECTORZTEST_H
+#define COLLECTORZTEST_H
 
-namespace Tellico {
-  namespace Import {
-    enum Format {
-      TellicoXML = 0,
-      Bibtex,
-      Bibtexml,
-      CSV,
-      XSLT,
-      AudioFile,
-      MODS,
-      Alexandria,
-      FreeDB,
-      RIS,
-      GCstar,
-      FileListing,
-      GRS1,
-      AMC,
-      Griffith,
-      PDF,
-      Referencer,
-      Delicious,
-      Goodreads,
-      CIW,
-      VinoXML,
-      BoardGameGeek,
-      LibraryThing,
-      Collectorz
-    };
+#include <QObject>
 
-    enum Action {
-      Replace,
-      Append,
-      Merge
-    };
+class CollectorzTest : public QObject {
+Q_OBJECT
 
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-
-  namespace Export {
-    enum Format {
-      TellicoXML = 0,
-      TellicoZip,
-      Bibtex,
-      Bibtexml,
-      HTML,
-      CSV,
-      XSLT,
-      Text,
-      PilotDB, // Deprecated
-      Alexandria,
-      ONIX,
-      GCstar
-    };
-
-    enum Target {
-      None,
-      File,
-      Dir
-    };
-  }
-}
+private Q_SLOTS:
+  void initTestCase();
+  void testBooks();
+  void testMovies();
+  void testMusic();
+};
 
 #endif

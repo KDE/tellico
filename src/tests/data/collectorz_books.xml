@@ -1,0 +1,4438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookinfo creationdate="7/25/2020 1:23:42 PM">
+  <localizedtemplatetexts>
+    <field id="ttBookDetails" label="Book Details"/>
+    <field id="ttOriginalDetails" label="Original Details"/>
+    <field id="ttProductDetails" label="Product Details"/>
+    <field id="ttPersonalDetails" label="Personal Details"/>
+    <field id="ttCredits" label="Credits"/>
+    <field id="ttCharacters" label="Characters"/>
+    <field id="ttImageLinkDetails" label="Images"/>
+    <field id="ttFirst" label="First"/>
+    <field id="ttPrev" label="Previous"/>
+    <field id="ttUp" label="Up"/>
+    <field id="ttNext" label="Next"/>
+    <field id="ttLast" label="Last"/>
+    <field id="ttBuyOnline" label="Buy this book online"/>
+  </localizedtemplatetexts>
+  <bookmetadata>
+    <field name="Index" id="dfIndex" label="Index"/>
+    <field name="Loaned To" id="dfLoaner" label="Loaned To"/>
+    <field name="Loan Date" id="dfLoanDate" label="Loan Date"/>
+    <field name="Due Date" id="dfDueDate" label="Due Date"/>
+    <field name="Overdue" id="dfIsOverdue" label="Overdue"/>
+    <field name="Return Date" id="dfReturnDate" label="Return Date"/>
+    <field name="Loan Notes" id="dfLoanNotes" label="Loan Notes"/>
+    <field name="Loaned To Email" id="dfLoanEmail" label="Loaned To Email"/>
+    <field name="Loaned To Address" id="dfLoanAddress" label="Loaned To Address"/>
+    <field name="Title" id="dfLoanTitle" label="Title"/>
+    <field name="Title" id="dfTitle" label="Title"/>
+    <field name="Title Sort" id="dfTitleSort" label="Title Sort"/>
+    <field name="Sub Title" id="dfSubTitle" label="Sub Title"/>
+    <field name="Collection Status" id="dfCollectionStatus" label="Collection Status"/>
+    <field name="Rare" id="dfRare" label="Rare"/>
+    <field name="Genre" id="dfGenre" label="Genre"/>
+    <field name="Tags" id="dfTag" label="Tags"/>
+    <field name="Character" id="dfCharacters" label="Character"/>
+    <field name="Series" id="dfSeries" label="Series"/>
+    <field name="Format" id="dfFormat" label="Format"/>
+    <field name="Publisher" id="dfPublisher" label="Publisher"/>
+    <field name="Printed By" id="dfPrintedBy" label="Printed By"/>
+    <field name="Country" id="dfCountry" label="Country"/>
+    <field name="Language" id="dfLanguage" label="Language"/>
+    <field name="No. of Pages" id="dfPageCount" label="No. of Pages"/>
+    <field name="Plot" id="dfPlot" label="Plot"/>
+    <field name="Issue No." id="dfIssueNr" label="Issue No."/>
+    <field name="Publication Date" id="dfPublicationDate" label="Publication Date"/>
+    <field name="Start Page" id="dfStartPage" label="Start Page"/>
+    <field name="ISBN" id="dfISBN" label="ISBN"/>
+    <field name="Publication Year" id="dfPublicationYear" label="Publication Year"/>
+    <field name="Purchase Price" id="dfPurchasePrice" label="Purchase Price"/>
+    <field name="Current Value" id="dfCurrentPrice" label="Current Value"/>
+    <field name="Cover Price" id="dfCoverPrice" label="Cover Price"/>
+    <field name="Store" id="dfStore" label="Store"/>
+    <field name="Purchase Date" id="dfPurchaseDate" label="Purchase Date"/>
+    <field name="Purchase Year" id="dfPurchaseYear" label="Purchase Year"/>
+    <field name="Rating" id="dfMyRating" label="Rating"/>
+    <field name="Condition" id="dfCondition" label="Condition"/>
+    <field name="Owner" id="dfOwner" label="Owner"/>
+    <field name="Notes" id="dfNotes" label="Notes"/>
+    <field name="Location" id="dfLocation" label="Location"/>
+    <field name="Links" id="dfLinks" label="Links"/>
+    <field name="Front Cover" id="dfCoverFront" label="Front Cover"/>
+    <field name="Back Cover" id="dfCoverBack" label="Back Cover"/>
+    <field name="Backdrop" id="dfBackDrop" label="Backdrop"/>
+    <field name="Translator" id="dfTranslator" label="Translator"/>
+    <field name="Cover Artist" id="dfCoverDesigner" label="Cover Artist"/>
+    <field name="Editor" id="dfEditor" label="Editor"/>
+    <field name="User Lookup 1" id="dfUserLookup1" label="User Lookup 1"/>
+    <field name="User Lookup 2" id="dfUserLookup2" label="User Lookup 2"/>
+    <field name="User Text 1" id="dfUserText1" label="User Text 1"/>
+    <field name="User Text 2" id="dfUserText2" label="User Text 2"/>
+    <field name="In Collection (0/1)" id="dfInCollectionBit" label="In Collection (0/1)"/>
+    <field name="My Rating" id="dfDynRating" label="My Rating"/>
+    <field name="ID" id="dfID" label="ID"/>
+    <field name="LoC Classification" id="dfLCCN" label="LoC Classification"/>
+    <field name="eBook File" id="dfeBookFile" label="eBook File"/>
+    <field name="Dewey" id="dfDewey" label="Dewey"/>
+    <field name="Dedication" id="dfDedication" label="Dedication"/>
+    <field name="Edition" id="dfEdition" label="Edition"/>
+    <field name="Printing" id="dfPrinting" label="Printing"/>
+    <field name="Paper Type" id="dfPaperType" label="Paper Type"/>
+    <field name="First Edition" id="dfFirstEdition" label="First Edition"/>
+    <field name="Height" id="dfDimHeight" label="Height"/>
+    <field name="Width" id="dfDimWidth" label="Width"/>
+    <field name="Volume" id="dfVolume" label="Volume"/>
+    <field name="Abridged" id="dfAbridged" label="Abridged"/>
+    <field name="Length" id="dfAudioLength" label="Length"/>
+    <field name="Original Title" id="dfOrigTitle" label="Original Title"/>
+    <field name="Original Subtitle" id="dfOrigSubTitle" label="Original Subtitle"/>
+    <field name="Original Publisher" id="dfOrigPublisher" label="Original Publisher"/>
+    <field name="Original Country" id="dfOrigCountry" label="Original Country"/>
+    <field name="Original Language" id="dfOrigLanguage" label="Original Language"/>
+    <field name="Original Publication Year" id="dfOrigPublicationYear" label="Original Publication Year"/>
+    <field name="Original Publication Date" id="dfOrigPublicationDate" label="Original Publication Date"/>
+    <field name="Author" id="dfAuthor" label="Author"/>
+    <field name="Illustrator" id="dfIllustrator" label="Illustrator"/>
+    <field name="Ghostwriter" id="dfGhostwriter" label="Ghostwriter"/>
+    <field name="Foreword Author" id="dfForewordAuthor" label="Foreword Author"/>
+    <field name="Photographer" id="dfPhotographer" label="Photographer"/>
+    <field name="Narrator" id="dfNarrator" label="Narrator"/>
+    <field name="Box Set" id="dfBoxSet" label="Box Set"/>
+    <field name="User Role 1" id="dfUserRole1" label="User Role 1"/>
+    <field name="User Role 2" id="dfUserRole2" label="User Role 2"/>
+    <field name="User Role 3" id="dfUserRole3" label="User Role 3"/>
+    <field name="Extras" id="dfExtras" label="Extras"/>
+    <field name="Subject" id="dfSubject" label="Subject"/>
+    <field name="Last Submission Date" id="dfSubmissionDate" label="Last Submission Date"/>
+    <field name="Book Title" id="dfBookTitle" label="Book Title"/>
+    <field name="Book Subtitle" id="dfBookSubtitle" label="Book Subtitle"/>
+    <field name="Book Plot" id="dfBookPlot" label="Book Plot"/>
+    <field name="Book Pages" id="dfBookPagecount" label="Book Pages"/>
+    <field name="Book ID" id="dfBookID" label="Book ID"/>
+    <field name="Clz Book ID" id="dfClzBookID" label="Clz Book ID"/>
+    <field name="Times Read" id="dfReadTimes" label="Times Read"/>
+    <field name="Read It" id="dfReadIt" label="Read It"/>
+    <field name="Reading Date" id="dfReadingDate" label="Reading Date"/>
+    <field name="Reading Year" id="dfReadingYear" label="Reading Year"/>
+    <field name="Quantity" id="dfQuantity" label="Quantity"/>
+    <field name="eBook Files" id="dfeBookLinks" label="eBook Files"/>
+    <field name="Audio Book Files" id="dfAudioBookLinks" label="Audio Book Files"/>
+    <field name="Image Files" id="dfImageLinks" label="Image Files"/>
+    <field name="Other Files" id="dfOtherLinks" label="Other Files"/>
+    <field name="Last Modified" id="dfLastModified" label="Last Modified"/>
+    <field name="Thumbnail" id="dfThumbFilePath" label="Thumbnail"/>
+    <field name="Author First Letter" id="dfDynAuthorLetter" label="Author First Letter"/>
+  </bookmetadata>
+  <booklist>
+    <book>
+      <id>761</id>
+      <index>652</index>
+      <mainsection>
+        <title>100 Statistical Tests (New Edition)</title>
+        <plot>The student and researcher are faced with a vast array of statistical tests, and this new edition of the bestselling 100 Statistical Tests covers all the most commonly used tests with information on how to calculate and interpret results with sample datasets. Each test has a short summary statement about its purpose along with any limitations of its usage clearly stated.
+
+In addition to the comprehensive range of tests covered, the book includes:
+
+- a short introduction to statistical testing
+
+- a useful Classification of Tests table
+
+- all the relevant statistical tables for checking critical values
+
+The new version simplifies and clarifies a number of tests and the information on
+
+the limitations of tests has been expanded.
+
+100 Statistical Tests is the one indispensable resource for users of statistical tests and consumers of statistical information at all levels and across all disciplines.</plot>
+        <notes>Copyright 1999 - Gopal K. Kanji
+(British ISBN Number)
+
+First edition published 1993, reprinted 1993
+Reprinted with corrections 1994
+Reprinted 1995, 1997
+New edition published 1999
+
+Typeset by the Alden Group, Oxford
+Printed in Great Britain by The Cromwell Press Ltd, Trowbridge, Wiltshire.
+
+Copyright shown as publish date.</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Gopal K. Kanji</displayname>
+              <sortname>Kanji, Gopal K.</sortname>
+              <lastname>Kanji</lastname>
+              <firstname>Gopal K.</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Sage Publications</displayname>
+        <sortname>Sage Publications</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1999</displayname>
+        </year>
+        <date>1999</date>
+      </publicationdate>
+      <isbn>0761961518</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Textbook</displayname>
+          <sortname>Textbook</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:39 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9861738</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>K</displayname>
+        <sortname>K</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>769</id>
+      <index>476</index>
+      <mainsection>
+        <title>1812: The Rivers of War (Trail of Glory #1)</title>
+        <plot>Flint's new alternate-history saga explores the possibility that the Trail of Tears never occurred by depicting a thoroughly different War of 1812. It begins with Andrew Jackson's campaign against the Creeks, in which the Cherokees fought on Jackson's side. Young Sam Houston, an adopted Cherokee, and Patrick Driscol, an Irish rebel and Napoleonic Wars veteran, are sent to Washington, arriving just before the British do. Though Flint does not eliminate the battle of Bladensburg (alas!), his British don't burn Washington and never get to Fort McHenry. They do get to New Orleans, however, where, despite a more intelligent plan of attack than Pakenham actually used, Jackson repels them with the aid of some free black naval gunners, the Cherokees, Houston, and Driscol. And Flint's Pakenham survives. Flint has thoroughly mastered storytelling, and his characterization is masterly. His characters, historical and invented, are plausible for the time and place, and he makes neither an icon nor a demon of anyone. Irresistible for Flint's 1632 series fans and, indeed, for alternate-history buffs in general.</plot>
+        <notes>Copyright 2005 - Eric Flint
+2006 Del Rey Mass Market Edition
+Copyright (Maps/Illustrations) - Jeffrey L. Ward
+
+Originally published in hardcover as 'The Rivers of War' in the United States by Del Rey Books, an imprint of The Random House Publishing Group, a division of Random House, Inc. in 2005
+
+(notes indicate that this is a 2nd printing edition)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Trail of Glory</displayname>
+          <sortname>Trail of Glory</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Eric Flint</displayname>
+              <sortname>Flint, Eric</sortname>
+              <lastname>Flint</lastname>
+              <firstname>Eric</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>1</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>2006</displayname>
+        </year>
+        <date>2006</date>
+      </publicationdate>
+      <isbn>0345465687</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Alternate History</displayname>
+          <sortname>Alternate History</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:37 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>collectorz\image.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>F</displayname>
+        <sortname>F</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>790</id>
+      <index>354</index>
+      <mainsection>
+        <title>All the Way to the Gallows</title>
+        <plot>Meet the goblin paratroopers and learn why a sane goblin would want to jump out of a perfectly good lighter-than-air balloon. Follow the problems of a team of hard-boiled, fearless space cops who have to operate under the niggling restrictions of a politically correct alien supervisor. March into the desert with a troop of rough, to ugh mercentary elves and humans who have to lose a dangerous magic talisman so that it will stay lost, all while being hectored by that same obnoxiously vocal talisman, which doesn't want to be lost.</plot>
+        <notes>Copyright 1996 David Drake
+Cover Art - Bob Eggleton
+First Printing December 1996</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>David Drake</displayname>
+              <sortname>Drake, David</sortname>
+              <lastname>Drake</lastname>
+              <firstname>David</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Baen Publishing Enterprises</displayname>
+        <sortname>Baen Publishing Enterprises</sortname>
+      </publisher>
+      <coverprice>$5.99</coverprice>
+      <coverpricefloat>5.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1996</displayname>
+        </year>
+        <date>1996</date>
+      </publicationdate>
+      <isbn>0671877534</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:37 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>D</displayname>
+        <sortname>D</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>6781</id>
+      <index>61</index>
+      <mainsection>
+        <title>At Least This Place Sells T-Shirts (Foxtrot)</title>
+        <plot>Fox Trot Book 10</plot>
+        <notes>Copyright 1996 Bill Amend (shown as publish date)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Foxtrot</displayname>
+          <sortname>Foxtrot</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Bill Amend</displayname>
+              <sortname>Amend, Bill</sortname>
+              <lastname>Amend</lastname>
+              <firstname>Bill</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Andrews McMeel Publishing</displayname>
+        <sortname>Andrews McMeel Publishing</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>10</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1996</displayname>
+        </year>
+        <date>1996</date>
+      </publicationdate>
+      <isbn>0836221206</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Humour</displayname>
+          <sortname>Humour</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:35 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9684102</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>A</displayname>
+        <sortname>A</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>826</id>
+      <index>140</index>
+      <mainsection>
+        <title>Bandsaw Book, The</title>
+        <plot>The bandsaw is one of the most widely used woodworking tools, found in 3 out 4 home and professional workshops. Although deceptively simple - a steel blade rotating around two rubber-clad wheels, the bandsaw does its best work when it's tuned properly. Unfortunately, most owner's manuals provided by tool manufacturers are difficult to understand, and the drawings and photos are unclear.
+
+In this book, professional woodworker Lonnie Bird gives all the information bandsaw owners wished came in the owner's manual plus much more - what to look for when buying a bandsaw and how to tune it up for optimal performance. The information is presented in an accessible, easy-to-understand way, making this a quick reference as well as comprehensive handbook. All the information is up-to-date and thoroughly researched. Excellent color photos by the author and a clean, friendly layout gives this book on a classic woodworking subject a fresh modern look. This clearly illustrated and photographed volume will quickly become the standard reference and is a must-have title for any woodworker. </plot>
+        <notes>Publication Date: October 1 1999</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Lonnie Bird</displayname>
+              <sortname>Bird, Lonnie</sortname>
+              <lastname>Bird</lastname>
+              <firstname>Lonnie</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Taunton Press</displayname>
+        <sortname>Taunton Press</sortname>
+      </publisher>
+      <coverprice>$19.95</coverprice>
+      <coverpricefloat>19.95</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1999</displayname>
+        </year>
+        <date>1999</date>
+      </publicationdate>
+      <isbn>1561582891</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Woodworking</displayname>
+          <sortname>Woodworking</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:35 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>B</displayname>
+        <sortname>B</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>845</id>
+      <index>875</index>
+      <mainsection>
+        <title>Betty Crocker's Party Foods</title>
+        <plot>Carefree Party-Giving:
+Planning the Party and Menu
+The Buffet Table
+Food Safety
+Beverages for a Crowd
+Creative Garnishes
+Buying Guide
+
+Appetizers and Beverages:
+Fruit, Nibbles, Dips, Punches
+
+Main Dishes:
+Meats, Poultry, Fish &amp; Seafood, Eggs, Cheese
+
+Accompaniments:
+Vegetables, Salads, Breads
+
+Desserts:
+Fruit, Cookies, Cakes, Pies, Refrigerated</plot>
+        <notes>No ISBN or Library of Congress CCN
+Copyright 1985 General Mills, Inc.
+Editor - Carol Murphy
+Copy Editor - Faith Sellman
+Food Stylists - Betty Crocker Camera Kitchen Home Economists
+Photography - Stephen A. Born
+Coordinator - Elizabeth Lemmer
+Art Direction &amp; Design - Cy DeCosse Inc.
+
+Standard grocery store magazine cookbook
+Published November/December 1985</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Carol Murphy</displayname>
+              <sortname>Murphy, Carol</sortname>
+              <lastname>Murphy</lastname>
+              <firstname>Carol</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Betty Crocker Kitchens</displayname>
+              <sortname>Betty Crocker Kitchens</sortname>
+              <lastname>Betty Crocker Kitchens</lastname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Pamphlet</displayname>
+        <templateimage>Images\Listitemimages\book-green15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\book-green16x16.jpg</scaledimage>
+        <sortname>Pamphlet</sortname>
+      </format>
+      <publisher>
+        <displayname>General Mills Inc.</displayname>
+        <sortname>General Mills Inc.</sortname>
+      </publisher>
+      <coverprice>$1.95</coverprice>
+      <coverpricefloat>1.95</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1985</displayname>
+        </year>
+        <date>1985</date>
+      </publicationdate>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Crafts/Cooking</displayname>
+          <sortname>Crafts/Cooking</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:40 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>M</displayname>
+        <sortname>M</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>20406</id>
+      <index>289</index>
+      <mainsection>
+        <title>The Bfg</title>
+        <titlesort>Bfg</titlesort>
+        <plot>Enter Giant Country, the home of the Big Friendly Giant and sweet and jumbly Frobscottle. But it's also home to gruesome giants like the Bonecruncher and the Fleshlumpeater, who gobble up little children each night. This is no place for orphan Sophie, who finds herself here after being picked up by the BFG. Together they decide to take matters into their own hands and stop the horrid giants once and for all.</plot>
+        <notes>Copyright 1982 Text - Roald Dahl
+Copyright 1982 Illustrations - Quentin Blake
+
+Manufactured in China
+
+First published by Puffin Books 1984
+Reissued in this edition by Puffin Books a division of Penguin Young Readers Group, 2007 (shown as publish date)
+Repinted by arrangement with Farrar, Straus &amp; Giroux LLC
+
+(notes indicate this is a 5th printing edition)
+
+
+</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <pagecount>208</pagecount>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Roald Dahl</displayname>
+              <sortname>Dahl, Roald</sortname>
+              <lastname>Dahl</lastname>
+              <firstname>Roald</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Penguin Books</displayname>
+        <sortname>Penguin Books</sortname>
+      </publisher>
+      <country>
+        <displayname>Great Britain</displayname>
+        <templateimage>Images\Listitemimages\uk.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>Great Britain</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <coverprice>$8.99</coverprice>
+      <coverpricefloat>8.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <publicationdate>
+        <year>
+          <displayname>2007</displayname>
+        </year>
+        <date>2007</date>
+      </publicationdate>
+      <isbn>9780142410387</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fiction</displayname>
+          <sortname>Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>17708</clzbookid>
+      <lccn>85-566</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>7.5</height>
+      <width>4.9</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>D</displayname>
+        <sortname>D</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>853</id>
+      <index>253</index>
+      <mainsection>
+        <title>Black Company (Black Company #01), The</title>
+        <plot>Adrift in a world torn by sorcery gone wild, the Company is the last remnant of a once-great mercenary army. Led by Croaker, former physician and primary chronicler, they must search the world for the last ray of hope--the White Rose.</plot>
+        <notes>Copyright 1984 Glen Cook
+A slightly different version fo Chapter 3 appeared in 'The Magazine of Fantasy &amp; Science Fiction,' August 1982 under the ttile 'Raker,' Copyright 1982 Mercury Press International
+
+First Printing May 1984
+(notes indicate this is a 2nd printing edition)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Black Company</displayname>
+          <sortname>Black Company</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Glen Cook</displayname>
+              <sortname>Cook, Glen</sortname>
+              <lastname>Cook</lastname>
+              <firstname>Glen</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Tom Doherty Associates</displayname>
+        <sortname>Tom Doherty Associates</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>1</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1984</displayname>
+        </year>
+        <date>1984</date>
+      </publicationdate>
+      <isbn>0812503899</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:36 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>C</displayname>
+        <sortname>C</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>17379</id>
+      <index>1104</index>
+      <mainsection>
+        <title>Blood Of Elves (The Witcher #1)</title>
+        <plot>Watch for the signs! What signs these shall be, I say unto you: first the earth will flow with the blood of Aen Seidhe, the Blood of Elves...For over a century, humans, dwarves, gnomes, and elves have lived together in relative peace. But times have changed, the uneasy peace is over, and now the races are fighting once again. The only good elf, it seems, is a dead elf. Geralt of Rivia, the cunning assassin known as The Witcher, has been waiting for the birth of a prophesied child. This child has the power to change the world - for good, or for evil. As the threat of war hangs over the land and the child is hunted for her extraordinary powers, it will become Geralt's responsibility to protect them all - and the Witcher never accepts defeat. Following The Last Wish, BLOOD OF ELVES is the new novel starring Geralt of Rivia, the inspiration for the critically-acclaimed videogame The Witcher.</plot>
+        <notes>Copyright 1994 - Andrzej Sapkowski (Original Text)
+Copyright 2008 - Danusia Stok (English Translation)
+
+Original Title: Krew Elfow
+
+Originally published in hardcover by Gollancz in the UK, 2008
+First Orbit (Hatchette Imprint) edition in the USA, May 2009
+
+(notes indicate this is a 4th printing edition)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <pagecount>409</pagecount>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>The Witcher</displayname>
+          <sortname>The Witcher</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Andrzej Sapkowski</displayname>
+              <sortname>Sapkowski, Andrzej</sortname>
+              <lastname>Sapkowski</lastname>
+              <firstname>Andrzej</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Hachette Book Group</displayname>
+        <sortname>Hachette Book Group</sortname>
+      </publisher>
+      <country>
+        <displayname>Poland</displayname>
+        <sortname>Poland</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <coverprice>$7.99</coverprice>
+      <coverpricefloat>7.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>1</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>2009</displayname>
+        </year>
+        <date>2009</date>
+      </publicationdate>
+      <isbn>9780316029193</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links>
+        <link>
+          <description>Amazon.com</description>
+          <url>http://www.amazon.com/gp/product/031602919X?tag=collectorzapp-20</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.co.uk</description>
+          <url>http://www.amazon.co.uk/gp/search?keywords=9780316029193+Andrzej+Sapkowski+Blood+of+Elves+%28The+Witcher%29&amp;tag=collectorzapp-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.de</description>
+          <url>http://www.amazon.de/gp/search?keywords=9780316029193+Andrzej+Sapkowski+Blood+of+Elves+%28The+Witcher%29&amp;tag=collectorzapp05-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.fr</description>
+          <url>http://www.amazon.fr/gp/search?keywords=9780316029193+Andrzej+Sapkowski+Blood+of+Elves+%28The+Witcher%29&amp;tag=collectorzapp0a-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.ca</description>
+          <url>http://www.amazon.ca/gp/search?keywords=9780316029193+Andrzej+Sapkowski+Blood+of+Elves+%28The+Witcher%29&amp;tag=collectorzapp0f-20&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Library of Congress</description>
+          <url>http://lccn.loc.gov/2009284593</url>
+          <urltype>URL</urltype>
+        </link>
+      </links>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>2452066</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>7.1</height>
+      <width>4.2</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>S</displayname>
+        <sortname>S</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>871</id>
+      <index>746</index>
+      <mainsection>
+        <title>Bolos Book 2: The Unconquerable (Collection)</title>
+        <plot>Short Story Collection:
+Created by Keith Laumer
+Edited by Bill Fawcett
+'Ancestral Voices' - S. M. Stirling
+'Sir Kendrick's Lady' - S. N. Lewitt
+'You're It' - Shirley Meier
+'Shared Experience' - Christopher Stasheff
+'The Murphosensor Bomb' - Karen Wehrstein
+'Legacy' - Todd Johnson
+'Endings' - William R. Forstchen</plot>
+        <notes>Copyright 1994 Bill Fawcett &amp; Associates
+The following stories are Copyrighted 1994 by the authors:
+'Ancestral Voices' - S. M. Stirling
+'Sir Kendrick's Lady' - S. N. Lewitt
+'You're It' - Shirley Meier
+'Shared Experience' - Christopher Stasheff
+'The Murphosensor Bomb' - Karen Wehrstein
+'Legacy' - Todd Johnson
+'Endings' - William R. Forstchen
+
+Cover Art - Paul Alexander
+First Printing - November 1994</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Bolo</displayname>
+          <sortname>Bolo</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Keith Laumer</displayname>
+              <sortname>Laumer, Keith</sortname>
+              <lastname>Laumer</lastname>
+              <firstname>Keith</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Bill Fawcett</displayname>
+              <sortname>Fawcett, Bill</sortname>
+              <lastname>Fawcett</lastname>
+              <firstname>Bill</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>S. M. Stirling</displayname>
+              <sortname>Stirling, S. M.</sortname>
+              <lastname>Stirling</lastname>
+              <firstname>S. M.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>S. N. Lewitt</displayname>
+              <sortname>Lewitt, S. N.</sortname>
+              <lastname>Lewitt</lastname>
+              <firstname>S. N.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Shirley Meier</displayname>
+              <sortname>Meier, Shirley</sortname>
+              <lastname>Meier</lastname>
+              <firstname>Shirley</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Christopher Stasheff</displayname>
+              <sortname>Stasheff, Christopher</sortname>
+              <lastname>Stasheff</lastname>
+              <firstname>Christopher</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Karen Wehrstein</displayname>
+              <sortname>Wehrstein, Karen</sortname>
+              <lastname>Wehrstein</lastname>
+              <firstname>Karen</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Todd Johnson</displayname>
+              <sortname>Johnson, Todd</sortname>
+              <lastname>Johnson</lastname>
+              <firstname>Todd</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>William R. Forstchen</displayname>
+              <sortname>Forstchen, William R.</sortname>
+              <lastname>Forstchen</lastname>
+              <firstname>William R.</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Baen Publishing Enterprises</displayname>
+        <sortname>Baen Publishing Enterprises</sortname>
+      </publisher>
+      <coverprice>$5.99</coverprice>
+      <coverpricefloat>5.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>2</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1994</displayname>
+        </year>
+        <date>1994</date>
+      </publicationdate>
+      <isbn>0671876295</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:39 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>L</displayname>
+        <sortname>L</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>884</id>
+      <index>772</index>
+      <mainsection>
+        <title>Boy's Book of Backyard Camping, The</title>
+        <plot>Subtitled: at-your-doorstep ways to become a skilled camper at home in the outdoors anywhere
+
+Come, learn to rough it and master basic camping skills in the backyard or in any nearby park, vacant lot, or playground. Here's how to become a seasoned camper almost anywhere.
+
+See how to a head start in learning to camp out. Know about camping equipment and how boys can have more fun camping together. This book tells you, then, all about shelters and tents, being outdoors with indoor comfort, and backyard ways to be expert with knots. It points the way to finding your way anywhere easily, talks about first aid, and suggest a backyard campers' code to live by. It also shows how to eat well on your own, make different things you need, use tools and fire, have fun with outdoor games, and stage a backyard camping show.
+
+And it all waits at your doorstep.</plot>
+        <notes>Copyright - Allan A. Macfarlan
+Illustrations - Paulette Macfarlan
+
+Publish date was derived from the Library of Congress Number (73- prefix indicates 1973).</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Allan A. Macfarlan</displayname>
+              <sortname>Macfarlan, Allan A.</sortname>
+              <lastname>Macfarlan</lastname>
+              <firstname>Allan A.</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Hardcover</displayname>
+        <templateimage>Images\Listitemimages\hardcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\hardcover-16x16.jpg</scaledimage>
+        <sortname>Hardcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Galahad Books</displayname>
+        <sortname>Galahad Books</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1973</displayname>
+        </year>
+        <date>1973</date>
+      </publicationdate>
+      <isbn>0883650274</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Non-Fiction</displayname>
+          <sortname>Non-Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:39 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>7381647</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>M</displayname>
+        <sortname>M</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>887</id>
+      <index>9</index>
+      <mainsection>
+        <title>Bring Me The Head Of Willy The Mailboy!</title>
+        <plot>Dilbert Collection of Strips
+Newspaper strips from 10/5/1990 to 5/18/1991</plot>
+        <notes>Copyright 1995 - United Feature Syndicate, Inc. (shown as publish date)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Dilbert</displayname>
+          <sortname>Dilbert</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Scott Adams</displayname>
+              <sortname>Adams, Scott</sortname>
+              <lastname>Adams</lastname>
+              <firstname>Scott</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Andrews McMeel Publishing</displayname>
+        <sortname>Andrews McMeel Publishing</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>5</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1995</displayname>
+        </year>
+        <date>1995</date>
+      </publicationdate>
+      <isbn>0836217799</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Humour</displayname>
+          <sortname>Humour</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 9:31:26 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9473226</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>A</displayname>
+        <sortname>A</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>6816</id>
+      <index>676</index>
+      <mainsection>
+        <title>By the Sword (Heralds of Valdemar-Kerowyn)</title>
+        <plot>Granddaughter of the sorceress Kethry, daughter of a noble house, Kerowyn had been forced to run the family keep since her mother's untimely death. Yet now at last her brother was preparing to wed, and when his bride became the lady of the keep, Kerowyn could return to her true enjoyments - training horses and hunting.
+
+But all Kerowyn's hopes and plans were shattered when her anscestral home was attacked, her father slain, her brother wounded, and his fiancee kidnapped. Drive by desperation and the knowledge that a scorcerer had led the journey which would prove but he first step on the road to the fulfillment of her destiny.</plot>
+        <notes>Copyright 1991 Mercedes R. Lackey
+Cover Art - Jody Lee
+All Songs - Copyright 1991 Firebird Arts &amp; Music Inc.
+
+First Printing - February 1991 (shown as publish date)
+(notes indicate this is 6th printing edition)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Heralds of Valdemar-Kerowyn</displayname>
+          <sortname>Heralds of Valdemar-Kerowyn</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Mercedes Lackey</displayname>
+              <sortname>Lackey, Mercedes</sortname>
+              <lastname>Lackey</lastname>
+              <firstname>Mercedes</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Daw Books Inc.</displayname>
+        <sortname>Daw Books Inc.</sortname>
+      </publisher>
+      <country>
+        <displayname>USA</displayname>
+        <templateimage>Images\Listitemimages\usa.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>USA</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <coverprice>$7.99</coverprice>
+      <coverpricefloat>7.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>999</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1991</displayname>
+        </year>
+        <date>1991</date>
+      </publicationdate>
+      <isbn>0886774632</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>L</displayname>
+        <sortname>L</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>920</id>
+      <index>255</index>
+      <mainsection>
+        <title>Cold Copper Tears (Files of Garrett P.I. #03)</title>
+        <plot>An elusive damsel in distress and an evasive Church Magister involve private investigator Garrett in a complex game of sorcery and murder that lays bare the seamy underside of the city of TunFaire. Set in a world where humans coexist alongside 11 half-breeds, ogres, and trolls, this third outing for the laconic hero of Sweet Silver Blues and Bitter Gold Hearts combines sword and sorcery with hard-boiled detective fiction in a fast-paced adventure that should appeal to fans of both genres</plot>
+        <notes>Copyright 1988 Glen Cook
+First Printing October 1988 (shown as publish date)
+(notes indicate this is a 3rd edition printing)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Files of Garrett P.I.</displayname>
+          <sortname>Files of Garrett P.I.</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Glen Cook</displayname>
+              <sortname>Cook, Glen</sortname>
+              <lastname>Cook</lastname>
+              <firstname>Glen</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Signet Books</displayname>
+        <sortname>Signet Books</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>3</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1988</displayname>
+        </year>
+        <date>1988</date>
+      </publicationdate>
+      <isbn>0451157737</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:36 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>C</displayname>
+        <sortname>C</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>20680</id>
+      <index>847</index>
+      <mainsection>
+        <title>Crown Of Renewal (Paladin's Legacy #5)</title>
+        <plot>Eight kingdoms in danger, an enemy that cannot die...
+
+Count Jeddrin has received a grisly message. His son, Filis, is dead, brutally killed by Alured the Black - the first move in his plan to take the eight kingdoms.
+
+But Filis managed to send his own message, telling of the dark forces that control Alured, warning of something more than human behind the man's eyes...
+
+Meanwhile, Dorrin Verrakai, last of a long line of magelords, must forever leave the home she loves in order to protect powerful magic relics created by her ancestors. For their power is desired both by Alured, and by the dark elves infesting the kingdoms. Searching for answers, her friend and King, Kieri, considers waking the magelords from their ancient slumber...
+</plot>
+        <notes>Copyright 2014 - Elizabeth Moon
+
+
+Del Rey Mass Market Edition: March 2015
+
+(notes indicate this is a 1st printing edition)
+</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <pagecount>491</pagecount>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Paladin's Legacy</displayname>
+          <sortname>Paladin's Legacy</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Elizabeth Moon</displayname>
+              <sortname>Moon, Elizabeth</sortname>
+              <lastname>Moon</lastname>
+              <firstname>Elizabeth</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <country>
+        <displayname>USA</displayname>
+        <templateimage>Images\Listitemimages\usa.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>USA</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>5</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>2015</displayname>
+        </year>
+        <date>2015</date>
+      </publicationdate>
+      <isbn>9780345533111</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>16766058</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>6.7</height>
+      <width>4.0</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>M</displayname>
+        <sortname>M</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>22813</id>
+      <index>1492</index>
+      <mainsection>
+        <title>Diana Tregarde Investigates  {Diana Tregarde - Omnibus}</title>
+        <plot>Omnibus - Publication dates are not the timeline dates for this series
+
+The Bedlam Bards series, the SERRAted Edge series, and the Diana Tregard books are all set in the same universe and feature elves, magic, and modern life. 
+
+Burning Water:
+Burning Water is the first book featuring Diana Tregarde and Guardians.
+
+Dallas Police Detective Mark Valdez isn't just any cop - he's a psychic who knows that the cattle mutilations and torture murders he's been investigating are somehow tied together. He also knows that his meager psychic abilities aren't enough to identify the killers, much less stop them.
+
+Luckily, Mark has an ace up his sleeve: an attractive young romance novelist who happens to be a practicing witch. And not just any witch, either - Diana Tregarde is a Guardian, charged with protecting the Earth and all its creatures.
+
+Using modern science and ancient magics, Diana and Mark discover that they are tailing no ordinary serial killer but the awakened avatar of an Aztec god. Tezcatlipoca and his four beautiful hand-maidens are preparing for a great sacrifice that will transform North America into a new Aztec realm.
+
+Diana isn't sure her powers are strong enough to take on those of a risen Aztec god, but she has no choice. As a Guardian, she is sworn to protect mankind, even at the cost of her own life. Luckily, she does not stand alone. Mark Valdez is more than just a cop. And Tezcatlipoca is not the only Aztec god walking in the world.
+
+
+Children of the Night:
+Children of the Night is the second book featuring Diana Tregarde and the Guardians.
+
+Rock band Wanderlust is about to hit it big; guitarist Dave Kendall is sure of that. They're playing better venues, in front of bigger crowds - and the people showing up at the after parties are increasingly good-looking and cool. Some even radiate power, like 'Master' Jeffries, the tall, saturine man who seems to have some sort of weird control over Dave's fellow bandmates.
+
+But Dave's too tired to pay much attention to Jeffries. He's tired a lot lately, and making music isn't as much fun as it used to be. Probably he's just working - and partying - too hard.
+
+Luckily, Dave has a friend who takes what's happening to him very serious. Diana Tregard is a practicing witch and a Guardian of the Earth. It's her job to keep an ey on innocents like Dave and make sure they stay out of trouble and don't become someone's lunch.
+
+Jeffries has been on Diana's hit list since she first spotted him pursuing a young Romany. Di wasn't fast enough to stop him, but the Rom have their own protector - a dashing, charming, very attractive vampire named Andre LeBrel.
+
+Together, the witch and the vampire face Jeffries and his evil minions in a battle for the soul of rock 'n' roll.
+
+Jinx High:
+Jinx High third book featuring Diana Tregarde and Guardians.
+
+Fay Harper looks like any other teenage girl&#8212;any other Queen Bee, that is. She's blond, and beautiful, and very, very popular&#8212;the kind of popular that attracts boys like honey. Fay and her gang take a lot of risks, but so far they've managed to get away with everything. It's as if they are magically protected. Summoned to Tulsa by an old friend whose son has fallen in with Fay's crowd, Diana Tregarde, practicing witch and successful romance novelist, quickly finds herself in hot water. The new girl at school, Monica Carlin, has come under sorcerous attack, but Diana cannot identify, or stop, the power-wielder. To make matters worse, there is an ancient being sleeping under Tulsa, a being who might be woken by the magic battles taking place in the city. What will happen then, even Diana cannot predict.
+</plot>
+        <notes>Children of the Night - Copyright 1990 - Mercedes Lackey
+Burning Water - Copyright 1989 - Mercedes Lackey
+Jinx High - Copyright 1991 - Mercedes Lackey
+
+First SFBC Science Fiction Printing - November 2006 (Shown as publication date)
+</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <pagecount>788</pagecount>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Diana Tregarde</displayname>
+          <sortname>Diana Tregarde</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Mercedes Lackey</displayname>
+              <sortname>Lackey, Mercedes</sortname>
+              <lastname>Lackey</lastname>
+              <firstname>Mercedes</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Hardcover</displayname>
+        <templateimage>Images\Listitemimages\hardcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\hardcover-16x16.jpg</scaledimage>
+        <sortname>Hardcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Tom Doherty Associates</displayname>
+        <sortname>Tom Doherty Associates</sortname>
+      </publisher>
+      <country>
+        <displayname>USA</displayname>
+        <templateimage>Images\Listitemimages\usa.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>USA</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>99</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>2006</displayname>
+        </year>
+        <date>2006</date>
+      </publicationdate>
+      <isbn>9780739477038</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\371bdf85a0e39e8c12d328e24e0b2d2b.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>1411173</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>8.2</height>
+      <width>5.9</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>L</displayname>
+        <sortname>L</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1004</id>
+      <index>1377</index>
+      <mainsection>
+        <title>Disinherited (U.S. Space Force #1), The</title>
+        <plot>The U.S. Space Force was already in big trouble when the aliens arrived. Though themselves entirely human, handsome as gods and pacifist to a fault, they bore bad tidings. For close on their heels were warlike creatures with conquest on their minds. Steve White is the coauthor of the hot Baen titles Insurrection and Crusade. </plot>
+        <notes>Copyright 1993 Steve White
+Cover Art - Paul Alexander
+First Printing - November 1993
+Second Printing - May 1999</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>U.S. Space Force</displayname>
+          <sortname>U.S. Space Force</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Steve White</displayname>
+              <sortname>White, Steve</sortname>
+              <lastname>White</lastname>
+              <firstname>Steve</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Baen Publishing Enterprises</displayname>
+        <sortname>Baen Publishing Enterprises</sortname>
+      </publisher>
+      <coverprice>$5.99</coverprice>
+      <coverpricefloat>5.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>1</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1999</displayname>
+        </year>
+        <date>1999</date>
+      </publicationdate>
+      <isbn>0671721941</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:44 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>W</displayname>
+        <sortname>W</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1019</id>
+      <index>794</index>
+      <mainsection>
+        <title>Dragonflight (Pern - 9th Pass #1)</title>
+        <plot>The planet Pern has been colonized for centuries by humans. When humans first settled on this world, they did not take notice of its sister planet, which had an indigenous life form that attempted to land on Pern when it came within reach. These silver "threads" fell in a destructive wave on the temperate lands of Pern once every 200 years, destroying all life they encountered. To combat this menace, the inhabitants of Pern developed a species of dragon that could burn these threads out of the sky before they touched down. Now, centuries have passed between threadfalls, and the danger of thread is considered a myth. However, a dragon rider named F'lar knows that the riders are once again needed.</plot>
+        <notes>Copyright 1968 Anne McCaffrey
+Dragondex Copyright 1978 Wendy Glasser
+Map - Bob Porter
+Cover Art - Michael Whelan
+A short version of this novel, titled 'Dragonrider,' first appeared in 'Analog' Copyright 1967 Conde Nast Publications Inc.
+
+First Edition - July 1968
+Fortieth Printing - October 1991</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Pern - 9th Pass</displayname>
+          <sortname>Pern - 9th Pass</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Anne McCaffrey</displayname>
+              <sortname>McCaffrey, Anne</sortname>
+              <lastname>McCaffrey</lastname>
+              <firstname>Anne</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <coverprice>$6.99</coverprice>
+      <coverpricefloat>6.99</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>1</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1991</displayname>
+        </year>
+        <date>1991</date>
+      </publicationdate>
+      <isbn>0345335465</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:40 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>M</displayname>
+        <sortname>M</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1044</id>
+      <index>1236</index>
+      <mainsection>
+        <title>Emperor for the Legion (Videssos #2), An</title>
+        <plot>Foul sorcery had slain the Emperor. Now the army of Videssos, betrayed by one man's craven folly, fled in panic from the savage victors. But there was no panic in the Legion, mysteriously displaced from Gaul and Rome into this strange world of magic.
+
+Wearily, Tribune Marcus Scaurus led his men through the chaos and enemy hordes in search of winter quarters, to regroup and seek to join up with Thorisin Gavras, now rightful ruler of Videssos.
+
+But in Videssos the city, capital of the beleaguered realm, Ortaias Sphrantzes, whose cowardice had caused their defeat, now sat upon the throne. There, behind great walls that had always made the city impregnable to storm or siege, he ruled with the support of evil sorcery. Overthrowing him seemed impossible.
+
+Grimly, Marcus Scaurus began the long march through hostile country toward that seemingly hopeless attempt. </plot>
+        <notes>Copyright 1987 Harry Turtledove
+Cover Art - Romas
+Map - Shelly Shapiro
+First Edition - May 1987
+Eighth Printing - October 1993</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Videssos</displayname>
+          <sortname>Videssos</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Harry Turtledove</displayname>
+              <sortname>Turtledove, Harry</sortname>
+              <lastname>Turtledove</lastname>
+              <firstname>Harry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>2</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1993</displayname>
+        </year>
+        <date>1993</date>
+      </publicationdate>
+      <isbn>0345330684</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:43 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>8691657</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>T</displayname>
+        <sortname>T</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>6940</id>
+      <index>94</index>
+      <mainsection>
+        <title>Flandry of Terra (Ensign Flandry #3)</title>
+        <plot>3 Novellas
+
+It is the twilight of the Terran Empire. The warriors who made it great are long gone. Aliens now prowl the outer precincts, while Sector Governors conspire for the Throne of Man. In this scene of terminal disarray, one man stands like a giant: Dominic Flandry, roguish agent of the Terran Empire.</plot>
+        <notes>No ISBN or Library of Congress CCN
+Copyright 1965 Poul Adnerson
+First Ace Printing July 1979 (shown as publish date)
+Cover Art by Michael Whelan
+(notes indicate this is a 3rd edition printing)
+
+'A Message in Secret,' Fantastic, December 1959 Copyright 1959 Ziff-Davis Publications Inc~ Reprinted 1961 Ace Books Inc under the title 'Mayday Orbit'
+
+'The Plague of Master,' Fantastic Stories of Imagination, December 1960 and January 1961 under the title 'A Plague fo Masters.' Copyright 1960 Ziff-Davis Publications Inc.~ Reprinted 1961 by Ace Books Inc under the title 'Earthman, Go Home!'
+
+'The Game of Glory,' Venture Science Fiction, March 1958, Copyright 1957 Fantasy House Inc.</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Ensign Flandry</displayname>
+          <sortname>Ensign Flandry</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Poul Anderson</displayname>
+              <sortname>Anderson, Poul</sortname>
+              <lastname>Anderson</lastname>
+              <firstname>Poul</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Ace Books</displayname>
+        <sortname>Ace Books</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>3</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1979</displayname>
+        </year>
+        <date>1979</date>
+      </publicationdate>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:35 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>A</displayname>
+        <sortname>A</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>6944</id>
+      <index>621</index>
+      <mainsection>
+        <title>Flying Fortress</title>
+        <plot>The illustrated biography of the B-17s and the men who flew them.
+
+Edward Jablonski's FLYING FORTRESS is a classic of aviation literature and is unique as the earliest, best-written "biography" of any aircraft. Sometimes imitated but never duplicated, FLYING FORTRESS is a wonderful read, less military history than memoir, and anyone who does read it comes away with love in their heart for the Boeing B-17, one of the most lethal, effective, rugged, and beautiful (if such a word applies to warplanes) flying machines ever built.
+
+Jablonski takes us through the step-by-step evolution of this airplane, from its earliest wooden strut-and-wire precursors to its ultimate development into the B-29 "atomic" bomber of Hiroshima and Nagasaki. The general design of the B-17 proceeded from Boeing's Model 299 to the wartime B-17G, of which almost 9000 were built. Although the "E," "F," and "G" variants were the most common of the more than 12,000 B-17s constructed, the Flying Fortress underwent literally hundreds of modifications and served variously as a heavy bomber, a command plane, a radar platform, an antisubmarine hunter, and even a kind of long-range superfighter during its decade-long career.
+
+The B-17 was as widely distributed as it was modified. Although the Flying Fortress is most commonly associated with the Eighth Air Force based in England, Fortresses served in Italy, Africa and the Pacific theatre as well. The B-17 (along with the B-24) was the backbone of America's Strategic Bombardment program against Germany during World War II. Although the price was steep (about 25% of Fortresses never came home) Strategic Bombardment demonstrably shortened the war by destroying Germany's industrial plant. (Strategic Bombardment really came into its own only with the development of stealth technology and smart bombs, which allowed for pinpoint accuracy in targeting.)
+
+Even more than the plane, Jablonski regales us with tales---some comic, some tragic---of the men who flew these planes and the dangers they faced. Jablonski rejoices in recounting the war stories of these now gray-haired old men (where they've survived), especially the exploits of the "Bloody 100th" Bomb Group (famous to this day as suffering from a Luftwaffe vendetta), and "Rosie's Riveters." Jablonski doesn't much credit the vendetta against the "Century Bombers" except as a pilots' legend, but he does do a wonderful job of bringing to life the exploits of the B-17 crews.
+
+FLYING FORTRESS is rounded out with an extensive technical section (including the pilot's manual) and hundreds of photographs. (Nowadays the Web holds the actual pilot training films, a must see for anyone interested in the B-17.) The only shortcomings of FLYING FORTRESS are the lack of a table of organization for the Army Air Forces, the absence of a brief summary of the postwar history of a few of the more famous planes, and nothing regarding expanded information on insignia and nose art (which is an engrossing subject all on its own).
+
+The Flying Fortress still fascinates, and is still beloved. Much of the continuing public fascination with the B-17 can be attributed largely to this book, which kept the B-17 alive before the Internet made esoteric information generally available.</plot>
+        <notes>Copyright 1965, but No Publish Date (possibly much newer publish date)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Edward Jablonski</displayname>
+              <sortname>Jablonski, Edward</sortname>
+              <lastname>Jablonski</lastname>
+              <firstname>Edward</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Hardcover</displayname>
+        <templateimage>Images\Listitemimages\hardcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\hardcover-16x16.jpg</scaledimage>
+        <sortname>Hardcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Doubleday &amp; Co.</displayname>
+        <sortname>Doubleday &amp; Co.</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Book Club</displayname>
+        <sortname>200 Book Club</sortname>
+        <lastname>200 Book Club</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate/>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>History</displayname>
+          <sortname>History</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:39 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>6519886</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>J</displayname>
+        <sortname>J</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1141</id>
+      <index>535</index>
+      <mainsection>
+        <title>Grimm's Fariy Tales</title>
+        <plot>Jacob Grimm (1785-1863) and his brother Wilhelm (1786-1859) were philologists and folklorists. The brothers rediscovered a host of fairy tales, telling of princes and princesses in their castles, witches in their towers and forests, of giants and dwarfs, of fabulous animals and dark deeds. Together with the well-known tales of 'Rapunzel', 'The Goose Girl', Sleeping Beauty', 'Hansel and Gretel' and 'Snow White', there are the darker tales such as 'Death's Messengers' which deserve to be better known, and which will appeal not only to all who are interested in the history of folklore, but also to all those who simply love good story-telling.</plot>
+        <notes>Copyright 1973 Crown Publishers, Inc. (shown as publish date)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Jacob Grimm</displayname>
+              <sortname>Grimm, Jacob</sortname>
+              <lastname>Grimm</lastname>
+              <firstname>Jacob</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Wilhelm Grimm</displayname>
+              <sortname>Grimm, Wilhelm</sortname>
+              <lastname>Grimm</lastname>
+              <firstname>Wilhelm</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Hardcover</displayname>
+        <templateimage>Images\Listitemimages\hardcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\hardcover-16x16.jpg</scaledimage>
+        <sortname>Hardcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Avenel Books</displayname>
+        <sortname>Avenel Books</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1973</displayname>
+        </year>
+        <date>1973</date>
+      </publicationdate>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fiction</displayname>
+          <sortname>Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:38 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>73922290</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>G</displayname>
+        <sortname>G</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1145</id>
+      <index>996</index>
+      <mainsection>
+        <title>Guards! Guards! (Discworld)</title>
+        <plot>Of all the cities in the world it could have flown into, it flew into mine. . '
+
+
+Some night-time prowler is turning the citizens of Ankh-Morpork, greatest city of the fantasy Discworld*, into something resembling small charcoal biscuits.
+
+And that's a real problem for Captain Vimes of the City Watch, who must tramp the mean streets of the city searching for a seventy-foot-long fire-breathing dragon which, he believes, can help him with their enquiries.
+
+In a city thrown into turmoil by magic, charcoal biscuits, secret societies and mad lady dragon breeders ('Just tell him 'sit' if he'sothering you'), he's just looking for the facts.
+
+* Which is flat and rides through space on the back of four elephants who stand on the shell of an enormous turtle, as every scholar knows.</plot>
+        <notes>Copyright 1989 Terry and Lyn Pratchett
+Cover Illustration - Josh Kirby
+
+Printed and Bound in Great Britain by Cox &amp; Wyman LTD, Reading, Berkshire
+
+Printing History:
+Victor Gallancz Ltd edition published 1989
+Corgi Edition published 1990
+Corgi Edition reprinted 1991
+Corgi Edition reprinted 1992 (twice)
+Corgi Edition reprinted 1993
+Corgi Edition reprinted 1994
+Corgi Edition reprinted 1995</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Discworld</displayname>
+          <sortname>Discworld</sortname>
+          <complete>No</complete>
+          <issn>    -    </issn>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Terry Pratchett</displayname>
+              <sortname>Pratchett, Terry</sortname>
+              <lastname>Pratchett</lastname>
+              <firstname>Terry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Corgi Books</displayname>
+        <sortname>Corgi Books</sortname>
+      </publisher>
+      <country>
+        <displayname>Great Britain</displayname>
+        <templateimage>Images\Listitemimages\uk.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>Great Britain</sortname>
+      </country>
+      <language>
+        <displayname>English (UK)</displayname>
+        <templateimage>Images\Listitemimages\ListitemimagesEnglishUK126_t.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>English (UK)</sortname>
+      </language>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>999</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1995</displayname>
+        </year>
+        <date>1995</date>
+      </publicationdate>
+      <isbn>0552134627</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:41 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>P</displayname>
+        <sortname>P</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1412</id>
+      <index>583</index>
+      <mainsection>
+        <title>I'm Off to See the Wizard (Wizard of ID)</title>
+        <plot>Wizard of Id #11</plot>
+        <notes>Copyright 1971, 1972 Publishers Newspaper Syndicate
+Copyright 1976 Fawcett Publications Inc. (shown as publish date)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Wizard of ID</displayname>
+          <sortname>Wizard of ID</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Johnny Hart</displayname>
+              <sortname>Hart, Johnny</sortname>
+              <lastname>Hart</lastname>
+              <firstname>Johnny</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Brant Parker</displayname>
+              <sortname>Parker, Brant</sortname>
+              <lastname>Parker</lastname>
+              <firstname>Brant</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Fawcett Publications Inc.</displayname>
+        <sortname>Fawcett Publications Inc.</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>11</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1976</displayname>
+        </year>
+        <date>1976</date>
+      </publicationdate>
+      <isbn>0449137007</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Humour</displayname>
+          <sortname>Humour</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:38 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>H</displayname>
+        <sortname>H</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1216</id>
+      <index>979</index>
+      <mainsection>
+        <title>Imperial Stars #3: Crash of Empire (Collection)</title>
+        <plot>Associate Editor - John F. Carr
+Collection Creator - Jerry Pournelle
+
+Short Story/Article Collection:
+The Crash of Empires - Jerry Pournelle
+Pebble Among the Stars - Gregory Benford
+The Claw and The Clock - Christopher Anvil
+The Only Thing We Learn - C. M. Kornbluth
+Remembering Vietnam - H. J. Kaplan
+Blessed Are The meek - G. C. Edmondson
+Limiting Factor - Theodore Cogswell
+Triage - William Walling
+Hyperdemocracy - John W. Campbell Jr.
+Chain Reaction - Algis Budrys
+Earthman's Burden - Morton Klass
+Blood Bank - Walter M. Miller Jr.
+Here, There Be Witches - Everett B. Cole
+The Buzz of Joy - Phillip C. Jennings
+Second Contact - W. R. Thompson
+The Quest - Rudyard Kipling</plot>
+        <notes>Copyright 1989 Jerry Pournelle
+Cover Art - David Egge
+
+Acknowledgments:
+Pebble Among the Stars - Gregory Benford - first appeared as 'Seascape' in the 'Faster Than Light' anthology in 1977. Copyright 1988 Abbenford Associates.
+The Claw and The Clock - Christopher Anvil - was first published in the February 1971 'Analog'. Copyright 1971 Conde Nast Publications
+The Only Thing We Learn - C. M. Kornbluth - appeared first in the July 1949 'Startling Stories.' Copyright 1949 Better Publications Inc.
+Remembering Vietnam - H. J. Kaplan - was published in the December 1987 issue of 'Commentary.' Copyright 1987 H. J. Kaplan
+Blessed Are The Meek - G. C. Edmondson - appeared by special arrangement with author. It was first published in the September 1955 issue of 'Astounding.' Copyright 1955 Street &amp; Smith Publications
+Limiting Factor - Theodore Cogswell - made its first appearance in the April 1954 issue of 'Galaxy.' Copyright 1954 Universal Publishing
+Triage - William Walling - first appeared in the November 1976 'Analog.' Copyright 1976 Conde Nast Publications.
+Hyperdemocracy - John W. Campbell Jr. - was first published in the August 1958 issue of 'Astounding.' Copyright 1958 Street &amp; Smith Publications.
+Chain Reaction - Algis Budrys - first appeared in the April 1957 'Astounding.' Copyright 1957 Street &amp; Smith Publications.
+Earthman's Burden - Morton Klass - appeared for the first time in the May 1954 issue of 'Astounding.' Copyright 1954 Street &amp; Smith Publications
+Blood Bank - Walter M. Miller Jr. - was previously published in the June 1952 'Astounding.' Copyright 1952 Street &amp; Smith Publications.
+Here, There Be Witches - Everett B. Cole - first appeared in the April 1970 issue of 'Analog.' Copyright 1970 Conde Nast Publications.
+The Buzz of Joy - Phillip C. Jennings - was written especially for this volume. Copyright 1988 Phillip C. Jennings.
+Second Contact - W. R. Thompson - was first published in the April 1988 issue of 'Analog.' Copyright 1988 David Publications
+The Quest - Rudyard Kipling - is in the public domain.
+
+First Printing - June 1989</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Imperial Stars</displayname>
+          <sortname>Imperial Stars</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Jerry Pournelle</displayname>
+              <sortname>Pournelle, Jerry</sortname>
+              <lastname>Pournelle</lastname>
+              <firstname>Jerry</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>John F. Carr</displayname>
+              <sortname>Carr, John F.</sortname>
+              <lastname>Carr</lastname>
+              <firstname>John F.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Gregory Benford</displayname>
+              <sortname>Benford, Gregory</sortname>
+              <lastname>Benford</lastname>
+              <firstname>Gregory</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Christopher Anvil</displayname>
+              <sortname>Anvil, Christopher</sortname>
+              <lastname>Anvil</lastname>
+              <firstname>Christopher</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>C. M. Kornbluth</displayname>
+              <sortname>Kornbluth, C. M.</sortname>
+              <lastname>Kornbluth</lastname>
+              <firstname>C. M.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>H. J. Kaplan</displayname>
+              <sortname>Kaplan, H. J.</sortname>
+              <lastname>Kaplan</lastname>
+              <firstname>H. J.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>G. C. Edmonson</displayname>
+              <sortname>Edmonson, G. C.</sortname>
+              <lastname>Edmonson</lastname>
+              <firstname>G. C.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Theodore Cogswell</displayname>
+              <sortname>Cogswell, Theodore</sortname>
+              <lastname>Cogswell</lastname>
+              <firstname>Theodore</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>William Walling</displayname>
+              <sortname>Walling, William</sortname>
+              <lastname>Walling</lastname>
+              <firstname>William</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>John W. Campbell</displayname>
+              <sortname>Campbell, John W.</sortname>
+              <lastname>Campbell</lastname>
+              <firstname>John W.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Algis Budrys</displayname>
+              <sortname>Budrys, Algis</sortname>
+              <lastname>Budrys</lastname>
+              <firstname>Algis</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Morton Klass</displayname>
+              <sortname>Klass, Morton</sortname>
+              <lastname>Klass</lastname>
+              <firstname>Morton</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Walter M. Miller Jr.</displayname>
+              <sortname>Miller, Walter M.</sortname>
+              <lastname>Miller</lastname>
+              <the>Jr.</the>
+              <firstname>Walter M.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Everett B. Cole</displayname>
+              <sortname>Cole, Everett B.</sortname>
+              <lastname>Cole</lastname>
+              <firstname>Everett B.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Phillip C. Jennings</displayname>
+              <sortname>Jennings, Phillip C.</sortname>
+              <lastname>Jennings</lastname>
+              <firstname>Phillip C.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>W. R. Thompson</displayname>
+              <sortname>Thompson, W. R.</sortname>
+              <lastname>Thompson</lastname>
+              <firstname>W. R.</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Rudyard Kipling</displayname>
+              <sortname>Kipling, Rudyard</sortname>
+              <lastname>Kipling</lastname>
+              <firstname>Rudyard</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Baen Publishing Enterprises</displayname>
+        <sortname>Baen Publishing Enterprises</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>3</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1989</displayname>
+        </year>
+        <date>1989</date>
+      </publicationdate>
+      <isbn>0671698265</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:41 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>P</displayname>
+        <sortname>P</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>20128</id>
+      <index>1346</index>
+      <mainsection>
+        <title>In Fire Forged (WOH #5 - Collection)</title>
+        <plot>Honor Harrington is arguably the most popular character in modern science fiction, but there are many other stories in the Honorverse besides those in which she has the central role. This fifth volume in the popular Worlds of Honor series explores some of those stories with the help of such top writers as best-selling author Jane Lindskjold,New York Timesbest-selling author Timothy Zahn, and more-including an all-new Honor Harrington adventure, set in her younger years, when a mob of space pirates made the mistake of tangling with Commander Harrington. That was a fatal mistake-for the pirates . . . </plot>
+        <notes>Copyright 2011 - Words of Weber
+"Ruthless" - Copyright 2011 - Jane Lindskold
+"An Act of War" - Copyright 2011 - Timothy Zahn
+"Lets Dance" - Copyright 2011 - Words of Weber
+"An Introduction to Modern Starship Armor Design" - Copyright 2011 - Words of Weber
+"Appendix: Armor Design Figures" - Copyright 2011 - Words of Weber
+
+Cover Art - David Mattingly
+Interior Schematics by Thomas Marrone, Thomas Pope and William H. Edwards
+
+First Printing February 2011
+
+(notes indicate this is a 1st printing edition)</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <pagecount>311</pagecount>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Worlds of Honor Harrington</displayname>
+          <sortname>Worlds of Honor Harrington</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>David Weber</displayname>
+              <sortname>Weber, David</sortname>
+              <lastname>Weber</lastname>
+              <firstname>David</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Jane Lindskold</displayname>
+              <sortname>Lindskold, Jane</sortname>
+              <lastname>Lindskold</lastname>
+              <firstname>Jane</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Timothy Zahn</displayname>
+              <sortname>Zahn, Timothy</sortname>
+              <lastname>Zahn</lastname>
+              <firstname>Timothy</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Presby, Andy</displayname>
+              <sortname>Presby, Andy</sortname>
+              <lastname>Presby</lastname>
+              <firstname>Andy</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Hardcover</displayname>
+        <templateimage>Images\Listitemimages\hardcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\hardcover-16x16.jpg</scaledimage>
+        <sortname>Hardcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Baen Publishing Enterprises</displayname>
+        <sortname>Baen Publishing Enterprises</sortname>
+      </publisher>
+      <country>
+        <displayname>USA</displayname>
+        <templateimage>Images\Listitemimages\usa.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>USA</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <coverprice>$26.00</coverprice>
+      <coverpricefloat>26.00</coverpricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>5</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>2011</displayname>
+        </year>
+        <month>2</month>
+        <date>February 2011</date>
+      </publicationdate>
+      <isbn>9781439134146</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links>
+        <link>
+          <description>Amazon.com</description>
+          <url>http://www.amazon.com/gp/search?keywords=9781439134146+David+Weber+In+Fire+Forged&amp;tag=collectorzapp-20&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.co.uk</description>
+          <url>http://www.amazon.co.uk/gp/search?keywords=9781439134146+David+Weber+In+Fire+Forged&amp;tag=collectorzapp-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.de</description>
+          <url>http://www.amazon.de/gp/search?keywords=9781439134146+David+Weber+In+Fire+Forged&amp;tag=collectorzapp05-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.fr</description>
+          <url>http://www.amazon.fr/gp/search?keywords=9781439134146+David+Weber+In+Fire+Forged&amp;tag=collectorzapp0a-21&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Amazon.ca</description>
+          <url>http://www.amazon.ca/gp/search?keywords=9781439134146+David+Weber+In+Fire+Forged&amp;tag=collectorzapp0f-20&amp;index=books</url>
+          <urltype>URL</urltype>
+        </link>
+        <link>
+          <description>Library of Congress</description>
+          <url>http://lccn.loc.gov/2010052024</url>
+          <urltype>URL</urltype>
+        </link>
+      </links>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <sections>
+        <section>
+          <title>Ruthless</title>
+          <myrating>0</myrating>
+          <myrating>
+            <displayname>0</displayname>
+            <sortname>0</sortname>
+          </myrating>
+          <startpage>1</startpage>
+          <credits/>
+          <characters/>
+          <original>
+            <origpublicationdate/>
+          </original>
+          <authors>
+            <author>
+              <role id="dfAuthor">Author</role>
+              <roleid>dfAuthor</roleid>
+              <person>
+                <displayname>Jane Lindskold</displayname>
+                <sortname>Lindskold, Jane</sortname>
+                <lastname>Lindskold</lastname>
+                <firstname>Jane</firstname>
+              </person>
+            </author>
+          </authors>
+        </section>
+        <section>
+          <title>An Act of War</title>
+          <myrating>0</myrating>
+          <myrating>
+            <displayname>0</displayname>
+            <sortname>0</sortname>
+          </myrating>
+          <startpage>61</startpage>
+          <credits/>
+          <characters/>
+          <original>
+            <origpublicationdate/>
+          </original>
+          <authors>
+            <author>
+              <role id="dfAuthor">Author</role>
+              <roleid>dfAuthor</roleid>
+              <person>
+                <displayname>Timothy Zahn</displayname>
+                <sortname>Zahn, Timothy</sortname>
+                <lastname>Zahn</lastname>
+                <firstname>Timothy</firstname>
+              </person>
+            </author>
+          </authors>
+        </section>
+        <section>
+          <title>"Let's Dance!"</title>
+          <myrating>0</myrating>
+          <myrating>
+            <displayname>0</displayname>
+            <sortname>0</sortname>
+          </myrating>
+          <startpage>139</startpage>
+          <credits/>
+          <characters/>
+          <original>
+            <origpublicationdate/>
+          </original>
+          <authors>
+            <author>
+              <role id="dfAuthor">Author</role>
+              <roleid>dfAuthor</roleid>
+              <person>
+                <displayname>David Weber</displayname>
+                <sortname>Weber, David</sortname>
+                <lastname>Weber</lastname>
+                <firstname>David</firstname>
+              </person>
+            </author>
+          </authors>
+        </section>
+        <section>
+          <title>An Introduction to Modern Starship Armor Design</title>
+          <myrating>0</myrating>
+          <myrating>
+            <displayname>0</displayname>
+            <sortname>0</sortname>
+          </myrating>
+          <startpage>279</startpage>
+          <credits/>
+          <characters/>
+          <original>
+            <origpublicationdate/>
+          </original>
+          <authors>
+            <author>
+              <role id="dfAuthor">Author</role>
+              <roleid>dfAuthor</roleid>
+              <person>
+                <displayname>Presby, Andy</displayname>
+                <sortname>Presby, Andy</sortname>
+                <lastname>Presby</lastname>
+                <firstname>Andy</firstname>
+              </person>
+            </author>
+          </authors>
+        </section>
+        <section>
+          <title>Appendix: Armor Design Figures</title>
+          <myrating>0</myrating>
+          <myrating>
+            <displayname>0</displayname>
+            <sortname>0</sortname>
+          </myrating>
+          <startpage>313</startpage>
+          <credits/>
+          <characters/>
+          <original>
+            <origpublicationdate/>
+          </original>
+          <authors/>
+        </section>
+      </sections>
+      <clzbookid>9456603</clzbookid>
+      <lccn>2010052024</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>9.3</height>
+      <width>6.1</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>W</displayname>
+        <sortname>W</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1248</id>
+      <index>1002</index>
+      <mainsection>
+        <title>Jingo (Discworld)</title>
+        <plot>A weather cock has risen from the sea of Discworld, and suddenly you can tell which way the wind is blowing.
+
+A new land has surfaced, and so have old feuds.
+
+And as two armies march, Commander Vimes of Ankh-Morpork City Watch has got just a few hours to deal with a crime so big that there's no law against it. It's called 'war'.
+
+He's facing unpleasant foes who are out to get him... that's just the people on his side. The enemy might be even worse. And his pocket Dis-organiser says he's got Die under `Things To Do Today'.
+
+But he'd better not, because the world's cleverest inventor and itsmost devious politician are on their way to the battlefield with alittle package that's guaranteed to stop a battle...
+
+Discworld goes to war, with armies of sardines, warriors, fishermen, squid and at least one very camp follower.</plot>
+        <notes>Copyright 1997 Terry and Lyn Pratchett
+Cover Illustration &amp; Typography - Copyright 1998 Michael Sabanosh
+A hardcover edition of this book was published in 1998 by HarperPrism
+First Paperback Printing - March 1999</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Discworld</displayname>
+          <sortname>Discworld</sortname>
+          <complete>No</complete>
+          <issn>    -    </issn>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Terry Pratchett</displayname>
+              <sortname>Pratchett, Terry</sortname>
+              <lastname>Pratchett</lastname>
+              <firstname>Terry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>HarperCollins Publishers</displayname>
+        <sortname>HarperCollins Publishers</sortname>
+      </publisher>
+      <country>
+        <displayname>Great Britain</displayname>
+        <templateimage>Images\Listitemimages\uk.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>Great Britain</sortname>
+      </country>
+      <language>
+        <displayname>English (UK)</displayname>
+        <templateimage>Images\Listitemimages\ListitemimagesEnglishUK126_t.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>English (UK)</sortname>
+      </language>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>999</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1999</displayname>
+        </year>
+        <date>1999</date>
+      </publicationdate>
+      <isbn>0061059064</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:41 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>P</displayname>
+        <sortname>P</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1251</id>
+      <index>27</index>
+      <mainsection>
+        <title>Journey To Cubeville</title>
+        <plot>Dilbert Collection of Strips
+Newspaper strips from 9/1/1996 to 1/18/1998</plot>
+        <notes>Copyright 1998 - United Feature Synidcate, Inc.
+First Printing Edition - 1998</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Dilbert</displayname>
+          <sortname>Dilbert</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Scott Adams</displayname>
+              <sortname>Adams, Scott</sortname>
+              <lastname>Adams</lastname>
+              <firstname>Scott</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>Andrews McMeel Publishing</displayname>
+        <sortname>Andrews McMeel Publishing</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>12</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1998</displayname>
+        </year>
+        <date>1998</date>
+      </publicationdate>
+      <isbn>0836267451</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Humour</displayname>
+          <sortname>Humour</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 9:31:26 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9885334</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>A</displayname>
+        <sortname>A</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1254</id>
+      <index>382</index>
+      <mainsection>
+        <title>Jungle, The/Clash by Night (Double Book)</title>
+        <plot>'The Jungle' (David Drake) written in the universe created by Henry Kuttner in his classic 'Clash By Night'; this is one of thoese double books.
+
+David Drake enters a future originally mapped by SF master Henry Kuttner in 'Clash by Night,' a 1943 novella-length story that is also printed here. earth having become a radioactive cinder, humanity has fled to a 'terraformed' Venus, where people live under the oceans in Keeps that battle one another with mercenary fleets. Drake writes of one small but fatally significant incident in one battle: Their torpedoboat wrecked, Commanding Officer Brainard and Officer-Trainee Wilding must move their men through a jungle to safety. Each officer, almost paralyzed with fear, misinterprets lucky breaks as bold and calculated moves on the other's part. Short scenes and discontinuous flashbacks create a stroboscopic effect that interferes with the story. After almost 50 years, Kuttner's 'Clash' still provides a much better read.</plot>
+        <notes>The Jungle - Copyright 1991 David Drake
+Clash By Night - Copyright 1943 Henry Kuttner; Renewed 1970 C. L. Moore
+First Edition September 1991
+First Mass Market Printing November 1992</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>David Drake</displayname>
+              <sortname>Drake, David</sortname>
+              <lastname>Drake</lastname>
+              <firstname>David</firstname>
+            </person>
+          </author>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Henry Kuttner</displayname>
+              <sortname>Kuttner, Henry</sortname>
+              <lastname>Kuttner</lastname>
+              <firstname>Henry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Tom Doherty Associates</displayname>
+        <sortname>Tom Doherty Associates</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>0</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1992</displayname>
+        </year>
+        <date>1992</date>
+      </publicationdate>
+      <isbn>0812501985</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:37 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>D</displayname>
+        <sortname>D</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>20805</id>
+      <index>55</index>
+      <mainsection>
+        <title>Logistic Regression Using SAS</title>
+        <subtitle>Theory and Application, Second Edition</subtitle>
+        <plot>If you are a researcher or student with experience in multiple linear regression and want to learn about logistic regression, Paul Allison's Logistic Regression Using SAS: Theory and Application, Second Edition, is for you! Informal and nontechnical, this book both explains the theory behind logistic regression, and looks at all the practical details involved in its implementation using SAS. Several real-world examples are included in full detail. This book also explains the differences and similarities among the many generalizations of the logistic regression model. The following topics are covered: binary logistic regression, logit analysis of contingency tables, multinomial logit analysis, ordered logit analysis, discrete-choice analysis, and Poisson regression. Other highlights include discussions on how to use the GENMOD procedure to do loglinear analysis and GEE estimation for longitudinal binary data. Only basic knowledge of the SAS DATA step is assumed. The second edition describes many new features of PROC LOGISTIC, including conditional logistic regression, exact logistic regression, generalized logit models, ROC curves, the ODDSRATIO statement (for analyzing interactions), and the EFFECTPLOT statement (for graphing non-linear effects). Also new is coverage of PROC SURVEYLOGISTIC (for complex samples), PROC GLIMMIX (for generalized linear mixed models), PROC QLIM (for selection models and heterogeneous logit models), and PROC MDC (for advanced discrete choice models).</plot>
+        <notes>Copyright 2012 SAS Institute Inc., Cary NC, USA
+
+1st printing, April 2012
+</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Paul D. Allison</displayname>
+              <sortname>Allison, Paul D.</sortname>
+              <lastname>Allison</lastname>
+              <firstname>Paul D.</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>SAS Institute Inc.</displayname>
+        <sortname>SAS Institute Inc.</sortname>
+      </publisher>
+      <country>
+        <displayname>USA</displayname>
+        <templateimage>Images\Listitemimages\usa.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>USA</sortname>
+      </country>
+      <language>
+        <displayname>English</displayname>
+        <scaledimage>Images\Listitemimages\usa16.jpg</scaledimage>
+        <sortname>English</sortname>
+      </language>
+      <purchaseprice>$53.95</purchaseprice>
+      <purchasepricefloat>53.95</purchasepricefloat>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <publicationdate>
+        <year>
+          <displayname>2012</displayname>
+        </year>
+        <date>2012</date>
+      </publicationdate>
+      <isbn>9781599946412</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Computers</displayname>
+          <sortname>Computers</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>7/13/2020 10:52:44 AM</date>
+      </lastmodified>
+      <sections/>
+      <clzbookid>16363499</clzbookid>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>11.0</height>
+      <width>8.2</width>
+      <units>inch</units>
+      <readtimes>1</readtimes>
+      <readit boolvalue="1">Yes</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>A</displayname>
+        <sortname>A</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1294</id>
+      <index>889</index>
+      <mainsection>
+        <title>Long Arm of Gil Hamilton (Collection), The</title>
+        <plot>Collection of three novellas dealing with the character Gil Hamilton as a science fiction detective.
+
+Death by Ecstasy
+The Defenseless Dead
+Arm
+
+This book is actually a collection of three stories centered around ARM (Amalgamation of Regional Militia) agent Gilbert Gilgamesh Hamilton (Gil The Arm). Born in Topeka, Kansas, to Flatlander parents near the end of the 21st century, he emigrates to the Belt as soon as he becomes an adult. There he begins work on an arduou  ten year apprenticeship towards the acquisition of his singleship licence. During this time he works as a member of small multi-person crews.
+
+After completing several successful trips, Gil loses his right arm. While attempting to move an asteroid with explosives, crew leader 'Cubes' Forsythe miscalculates, which results in the destruction of the valuable rock. A fast moving piece of shrapnel penetrates the ship, slicing off Gil's arm and killing Forsythe instantly. The remaining crewmember, Owen
+Jennison, quickly seals the hull breach, stops Gil's bleeding, and manages to get him to life-saving medical facilities in time.
+
+While recouperating from his injury, Gil broods over his future as a Belter. Their ship is missing a crew member, Gil is missing an arm, and Owen's reputation is ruined due to the fact that he took (what Belters consider) unacceptable risks to get Gil back to safety.
+
+In the low gravity of Ceres base, Gil discovers that he has a psi power. His brain, still remembering the "image" of his lost arm, can use it much as he did his own arm. He could feel and manipulate objects via ESP and telekinesis, respectively.  Finding a third crewman, Homer Chandrasekhar, they make several highly profitable trips over the following year. Gil
+finds his 'imaginary arm', though not strong, to be an asset, as he can reach through walls, and accomplish tasks beyond the ability of a normal person. After six months, Gil has earned enough to repay all his medical fees, with a comfortable cash reserve left over.
+
+Despite much disapproval from Owen and Homer, Gil decides to return to Earth and seek to get his citizenship back. On Earth, he can easily get a transplant to replace his missing arm. In the Belt he would have to pay exorbitantly high fees for a transplant, or settle for a prosthetic. Gil, by a quirk of his own nature, can not live with a prosthetic.
+
+Gil receives his new arm, but finds he can still dissociate his imaginary arm from his real one, and reach through walls, flesh, and even vidphone screens. Shortly afterward, Gil finds out that his new arm had not come from a condemned criminal as he had hoped, but from the captured stock of 'organleggers', black market dealers in illicit organ transplants.
+
+To make amends, Gil joins the ARM, the elite global police force.
+
+As an ARM, Hamilton is a high-tech detective, who hunts organleggers and other criminals for a living. With his unusual psi power, he is formidable and highly feared among his enemies. </plot>
+        <notes>Copyright 1976 Larry Niven
+Cover Art - George Bush
+
+Acknowledgments:
+'Death by Ecstasy' - Copyright 1969 (as 'The Organleggers') by Galaxy Publishing Corp., for Galaxy Magazine, January 1969
+'The Defenseless Dead' - Copyright 1973 Fawcett Publishcations for 'Ten Tomorrows'
+'ARM' - Copyright 1975 Robert Silverberg and Roger Elwood for 'Epoch'
+
+Printed in Canada
+First Edition - February 1976
+Twelfth Printing - December 1991
+First Canadian Printing - March 1976</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Gil Hamilton</displayname>
+          <sortname>Gil Hamilton</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Larry Niven</displayname>
+              <sortname>Niven, Larry</sortname>
+              <lastname>Niven</lastname>
+              <firstname>Larry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>999</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1991</displayname>
+        </year>
+        <date>1991</date>
+      </publicationdate>
+      <isbn>0345342380</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:40 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>7535969</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>N</displayname>
+        <sortname>N</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1297</id>
+      <index>511</index>
+      <mainsection>
+        <title>Lord Conrad's Lady (Conrad Stargard #5)</title>
+        <plot>VACATION IN PEACEFUL MEDIEVAL POLAND
+
+See the ancient city of Cracow burn!
+
+Wallow in the frightful murder of noblewomen and children at the invincible castle of East Gate!
+
+Enjoy the attack of the crazy old ladies at Sir Miesko's manor!
+
+Watch the regretful demise of the remaining Mongols as they drown in the cesspool at Three Walls!
+
+Consider various offers made to Conrad Stargard by eager blondes of just-barely-marriageable age!
+
+Notice his wife, the formidable Lady Francine, getting annoyed!
+
+ &#184;  Superlative lodging provided by the Pink Dragon Inns
+ &#184;  Excellent duty-free values on cloth, coal, and Mongol arms &amp; armor
+ &#184;  One-way packages
+ &#184;  Call your intertemporal travel agency for details
+</plot>
+        <notes>Copyright 1990 Leo A. Frankowski
+Cover Art - Barclay Shaw
+First Edition September 1990</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Conrad Stargard</displayname>
+          <sortname>Conrad Stargard</sortname>
+          <complete>No</complete>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Leo A. Frankowski</displayname>
+              <sortname>Frankowski, Leo A.</sortname>
+              <lastname>Frankowski</lastname>
+              <firstname>Leo A.</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Paperback</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Paperback</sortname>
+      </format>
+      <publisher>
+        <displayname>Del Rey Book</displayname>
+        <sortname>Del Rey Book</sortname>
+      </publisher>
+      <purchasedate/>
+      <condition>
+        <displayname>Fair</displayname>
+        <sortname>010 Fair</sortname>
+        <lastname>010 Fair</lastname>
+      </condition>
+      <issuenr>5</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1990</displayname>
+        </year>
+        <date>1990</date>
+      </publicationdate>
+      <isbn>0345368495</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Science Fiction</displayname>
+          <sortname>Science Fiction</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:38 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9093037</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>F</displayname>
+        <sortname>F</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+    <book>
+      <id>1299</id>
+      <index>1006</index>
+      <mainsection>
+        <title>Lords and Ladies (Discworld)</title>
+        <plot>It's a hot Midsummer Night. The crop circles are turning up everywhere -- even on the mustard-and-cress of Pewsey Ogg, aged four. And Magrat Garlick, witch, is going to be married in the morning...
+
+Everything ought to be going like a dream.
+
+But the Lancre All-Comers Morris Team have got drunk on afairy mound and the elves have come back, bringing all those things traditionally associated with the magical, glittering realm of Faerie: cruelty, kidnapping, malice and evil, evil murder.[*]
+
+Granny Weatherwax and her tiny argumentative coven have really got their work cut out this time... With full supporting cast of dwarfs, wizards, trolls, Morris Dancers and one orang-utan. And lots of hey-nonny-nonny and blood all over the place.
+
+[*] But with tons of style.</plot>
+        <notes>Copyright 1992 Terry and Lynn Pratchett
+Cover Design 1994 Michael Sabanosh
+Cover Photograph 1994 Optical Artists/Westlight</notes>
+        <myrating>0</myrating>
+        <myrating>
+          <displayname>0</displayname>
+          <sortname>0</sortname>
+        </myrating>
+        <credits/>
+        <characters/>
+        <series>
+          <displayname>Discworld</displayname>
+          <sortname>Discworld</sortname>
+          <complete>No</complete>
+          <issn>    -    </issn>
+          <bpseriesid>0</bpseriesid>
+        </series>
+        <original>
+          <origpublicationdate/>
+        </original>
+        <authors>
+          <author>
+            <role id="dfAuthor">Author</role>
+            <roleid>dfAuthor</roleid>
+            <person>
+              <displayname>Terry Pratchett</displayname>
+              <sortname>Pratchett, Terry</sortname>
+              <lastname>Pratchett</lastname>
+              <firstname>Terry</firstname>
+            </person>
+          </author>
+        </authors>
+      </mainsection>
+      <collectionstatus listid="3">In Collection</collectionstatus>
+      <rare boolvalue="0">No</rare>
+      <format>
+        <displayname>Softcover</displayname>
+        <templateimage>Images\Listitemimages\softcover-15x15.png</templateimage>
+        <scaledimage>Images\Listitemimages\softcover-16x16.jpg</scaledimage>
+        <sortname>Softcover</sortname>
+      </format>
+      <publisher>
+        <displayname>HarperCollins Publishers</displayname>
+        <sortname>HarperCollins Publishers</sortname>
+      </publisher>
+      <country>
+        <displayname>Great Britain</displayname>
+        <templateimage>Images\Listitemimages\uk.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>Great Britain</sortname>
+      </country>
+      <language>
+        <displayname>English (UK)</displayname>
+        <templateimage>Images\Listitemimages\ListitemimagesEnglishUK126_t.jpg</templateimage>
+        <scaledimage>Images\Listitemimages\uk16.jpg</scaledimage>
+        <sortname>English (UK)</sortname>
+      </language>
+      <purchasedate/>
+      <condition>
+        <displayname>Good</displayname>
+        <sortname>020 Good</sortname>
+        <lastname>020 Good</lastname>
+      </condition>
+      <issuenr>999</issuenr>
+      <publicationdate>
+        <year>
+          <displayname>1995</displayname>
+        </year>
+        <date>1995</date>
+      </publicationdate>
+      <isbn>0061092169</isbn>
+      <location>
+        <displayname>Library</displayname>
+        <sortname>010 Library</sortname>
+        <lastname>010 Library</lastname>
+      </location>
+      <genres>
+        <genre>
+          <displayname>Fantasy</displayname>
+          <sortname>Fantasy</sortname>
+        </genre>
+      </genres>
+      <tags/>
+      <links/>
+      <lastmodified>
+        <date>4/29/2017 10:22:41 AM</date>
+      </lastmodified>
+      <thumbfilepath>Thumbnails\9d780a2d5c4d89e3053237a6dd237218.jpg</thumbfilepath>
+      <sections/>
+      <clzbookid>0</clzbookid>
+      <lccn>9531694</lccn>
+      <printing>0</printing>
+      <firstedition boolvalue="0">No</firstedition>
+      <extras/>
+      <subjects/>
+      <height>0</height>
+      <width>0</width>
+      <units>inch</units>
+      <coverfront>Generic Images\Generic_Book.png</coverfront>
+      <readtimes>0</readtimes>
+      <readit boolvalue="0">No</readit>
+      <readingdate/>
+      <submissiondate/>
+      <quantity>1</quantity>
+      <authorfirstletter>
+        <displayname>P</displayname>
+        <sortname>P</sortname>
+      </authorfirstletter>
+      <abridged boolvalue="0">No</abridged>
+      <audiolengthminutes>0</audiolengthminutes>
+      <boxset/>
+    </book>
+  </booklist>
+</bookinfo>

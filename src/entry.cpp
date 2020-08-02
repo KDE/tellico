@@ -216,7 +216,7 @@ bool Entry::setField(const QString& name_, const QString& value_, bool updateMDa
     return false;
   }
 
-  const bool wasDifferent = field(name_) != value_;;
+  const bool wasDifferent = field(name_) != value_;
   const bool res = setFieldImpl(name_, value_);
   // returning true means entry was successfully modified
   if(res && wasDifferent && updateMDate_ &&

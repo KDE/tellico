@@ -274,6 +274,14 @@ add_test(ciwtest ciwtest)
 ecm_mark_as_test(ciwtest)
 TARGET_LINK_LIBRARIES(ciwtest ${TELLICO_TEST_LIBS})
 
+add_executable(collectorztest collectorztest.cpp
+  ../translators/collectorzimporter.cpp
+)
+ecm_mark_nongui_executable(collectorztest)
+add_test(collectorztest collectorztest)
+ecm_mark_as_test(collectorztest)
+TARGET_LINK_LIBRARIES(collectorztest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(csvtest csvtest.cpp
   ../translators/csvparser.cpp
   ../translators/csvexporter.cpp

@@ -49,7 +49,14 @@ To facilitate the use of barcode scanners, searches can include multiple ISBN/UP
 <sect2 id="alternate-software">
 <title>Importing Data From Other Software</title>
 
-<para>&appname; can import data directly from a variety of other collection management programs, including <application><ulink url="http://www.gcstar.org">GCstar</ulink></application>, <application><ulink url="https://github.com/mvz/alexandria-book-collection-manager">Alexandria</ulink></application>, <application><ulink url="https://www.delicious-monster.com">Delicious Library</ulink></application>, <application><ulink url="http://www.antp.be/software/moviecatalog/">Ant Movie Catalog</ulink></application>, <application><ulink url="https://en.wikipedia.org/wiki/Referencer">Referencer</ulink></application>, and <application><ulink url="https://launchpad.net/griffith">Griffith</ulink></application>.</para>
+<para>&appname; can import data directly from a variety of other collection management programs, including
+  <application><ulink url="http://www.gcstar.org">GCstar</ulink></application>,
+  <application><ulink url="https://github.com/mvz/alexandria-book-collection-manager">Alexandria</ulink></application>,
+  <application><ulink url="https://www.delicious-monster.com">Delicious Library</ulink></application>,
+  <application><ulink url="https://www.collectorz.com">Collectorz</ulink></application>,
+  <application><ulink url="http://www.antp.be/software/moviecatalog/">Ant Movie Catalog</ulink></application>,
+  <application><ulink url="https://en.wikipedia.org/wiki/Referencer">Referencer</ulink></application>,
+  and <application><ulink url="https://launchpad.net/griffith">Griffith</ulink></application>.</para>
 
 </sect2>
 

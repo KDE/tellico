@@ -12,6 +12,7 @@ SET(translators_STAT_SRCS
    bibtexmlimporter.cpp
    boardgamegeekimporter.cpp
    ciwimporter.cpp
+   collectorzimporter.cpp
    csvexporter.cpp
    csvimporter.cpp
    csvparser.cpp

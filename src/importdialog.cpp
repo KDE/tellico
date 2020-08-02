@@ -51,6 +51,7 @@
 #include "translators/vinoxmlimporter.h"
 #include "translators/boardgamegeekimporter.h"
 #include "translators/librarythingimporter.h"
+#include "translators/collectorzimporter.h"
 #include "utils/datafileregistry.h"
 
 #include <KLocalizedString>
@@ -301,6 +302,11 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
       CHECK_SIZE;
       importer = new Import::LibraryThingImporter();
       break;
+
+    case Import::Collectorz:
+      CHECK_SIZE;
+      importer = new Import::CollectorzImporter(firstURL);
+      break;
   }
   if(!importer) {
     myWarning() << "importer not created!";
@@ -353,6 +359,7 @@ QString ImportDialog::fileFilter(Tellico::Import::Format format_) {
     case Import::MODS:
     case Import::Delicious:
     case Import::Griffith:
+    case Import::Collectorz:
       text = i18n("XML Files") + QLatin1String(" (*.xml)") + QLatin1String(";;");
       break;
 

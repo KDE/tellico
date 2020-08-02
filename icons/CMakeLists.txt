@@ -12,6 +12,7 @@ set(PIC_FILES
     checkmark.png
     cite.png
     coin.png
+    collectorz.png
     comic.png
     deliciouslibrary.png
     file.png

@@ -384,6 +384,10 @@ void MainWindow::initActions() {
                 i18n("Import data from Delicious Library"),
                 QIcon::fromTheme(QStringLiteral("deliciouslibrary"), QIcon(QLatin1String(":/icons/deliciouslibrary"))));
 
+  IMPORT_ACTION(Import::Collectorz, "file_import_collectorz", i18n("Import Collectorz Data..."),
+                i18n("Import data from Collectorz"),
+                QIcon::fromTheme(QStringLiteral("collectorz"), QIcon(QLatin1String(":/icons/collectorz"))));
+
   IMPORT_ACTION(Import::Referencer, "file_import_referencer", i18n("Import Referencer Data..."),
                 i18n("Import data from Referencer"),
                 QIcon::fromTheme(QStringLiteral("referencer"), QIcon(QLatin1String(":/icons/referencer"))));
