@@ -453,6 +453,7 @@ void AmazonFetcherTest::testError() {
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-error1.json");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  QVERIFY(results.isEmpty());
   QVERIFY(!logger->errorList.isEmpty());
   QCOMPARE(logger->errorList[0], QStringLiteral("The Access Key ID or security token included in the request is invalid."));
 }
