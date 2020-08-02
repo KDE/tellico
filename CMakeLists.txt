@@ -9,7 +9,6 @@ set(QT_MIN_VERSION "5.4.0")
 # FindPoppler was added to ECM in 5.19
 find_package(ECM 5.19 REQUIRED NO_MODULE)
 
-CMAKE_POLICY(SET CMP0028 OLD)
 if(POLICY CMP0063)
   cmake_policy(SET CMP0063 NEW)
 endif(POLICY CMP0063)
