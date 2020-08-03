@@ -13,6 +13,7 @@
   <name xml:lang="en-GB">Tellico</name>
   <name xml:lang="es">Tellico</name>
   <name xml:lang="et">Tellico</name>
+  <name xml:lang="eu">Tellico</name>
   <name xml:lang="fi">Tellico</name>
   <name xml:lang="fr">Tellico</name>
   <name xml:lang="gl">Tellico</name>
@@ -44,6 +45,7 @@
   <summary xml:lang="en-GB">Collection Manager</summary>
   <summary xml:lang="es">Gestor de colecciones</summary>
   <summary xml:lang="et">Kogude haldur</summary>
+  <summary xml:lang="eu">Bilduma kudeatzailea</summary>
   <summary xml:lang="fi">Kokoelmahallinta</summary>
   <summary xml:lang="fr">Gestionnaire de collections</summary>
   <summary xml:lang="gl">Xestor de coleccións</summary>
@@ -79,6 +81,7 @@
     <p xml:lang="en-GB">Tellico is an application for organising your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.</p>
     <p xml:lang="es">Tellico es una aplicación para organizar colecciones. Proporciona plantillas predeterminadas para libros, bibliografías, vídeos, música, videojuegos, monedas, sellos, cromos, cómics, y vinos. También le permite almacenar sus colecciones en una base de datos de catálogo, guardando diversas propiedades como el título, el autor, etc.</p>
     <p xml:lang="et">Tellico on kõikvõimalike kogude haldamiseks mõeldud rakendus. See pakub vaikimisi malle raamatute, bibliograafiate, videode, muusika, videomängude, müntide, markide, mängukaartide, koomiksite ja veinide tarbeks. Rakenduses saab oma kogu sisestada kataloogi andmebaasi, kuhu salvestatakse hulk omadusi, näiteks nimi, autor jne.</p>
+    <p xml:lang="eu">Tellico zure bildumak antolatzeko aplikazio bat da. Lehenetsitako txantiloiak hornitzen ditu liburu, bibliografia, bideo, musika, bideo-joko, txanpon, zigilu, karta (kromo), komiki-liburu, eta ardoentzako. Zure bilduma katalogo datu-base batean sartzen uzten dizu, propietate ezberdin ugari gordez, izenburua,  egilea, eta abar.</p>
     <p xml:lang="fi">Tellico on sovellus kokoelmiesi järjestämiseen. Se tarjoaa oletusmallit kirjoille, lähdeluetteloille, videoille, musiikille, videopeleille, kolikoille, postimerkeille, keräilykorteille, sarjakuville ja viineille. Sen avulla voit syöttää kokoelmasi luettelotietokantaan eri ominaisuudet kuten otsikon, tekijän jne. säilyttäen.</p>
     <p xml:lang="fr">Tellico est une application pour organiser vos collections. Il fournit des modèles par défaut pour les livres, les bibliographies, les vidéos, la musique, les jeux vidéo, les monnaies, les timbres, les cartes à collectionner, les bandes dessinées et les vins. Il vous permet de saisir votre collection dans une base de données de catalogue, enregistrant différentes propriétés telles que le titre, l'auteur, etc.</p>
     <p xml:lang="gl">Tellico é unha aplicación para organizar coleccións. Fornece modelos predeterminados para libros, bibliografías, vídeos, música, videoxogos, moedas, selos, cartas de colección, banda deseñada, e vinos. Permítelle inserir a súa colección a unha base de datos de catálogo na que pode gardar moitas propiedades distintas, como o título de cada elemento, o seu autor, etc.</p>
@@ -107,6 +110,7 @@
     <p xml:lang="en-GB">Features:</p>
     <p xml:lang="es">Características:</p>
     <p xml:lang="et">Omadused:</p>
+    <p xml:lang="eu">Ezaugarriak:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
     <p xml:lang="fr">Fonctionnalités !</p>
     <p xml:lang="gl">Funcionalidades:</p>
@@ -138,6 +142,7 @@
       <li xml:lang="en-GB">Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogues</li>
       <li xml:lang="es">Soporte para colecciones predeterminadas de libros, entradas bibliográficas, vídeos, música, videojuegos, cómics, monedas, sellos, cromos, vinos, juegos de mesa y catálogos de archivos</li>
       <li xml:lang="et">Vaikimisi on toetatud, raamatute, bibliograafiliste kirjete, videode, muusika, videomängude, koomiksite, müntide, markide, mängukaartide, veinide, lauamängude ja failikataloogide kogud</li>
+      <li xml:lang="eu">Liburu, bibliografia-sarrera, bideo, musika, bideo-joko, komiki-liburu, txanpon, karta (kromo), ardo, taula-joko eta fitxategi-katalogoen bilduma lehenetsiak onartzen ditu</li>
       <li xml:lang="fi">Tukee kirjojen, lähdeluettelotietueiden, videoiden, musiikin, videopelien, sarjakuvien, kolikoiden, postimerkkien, keräilykuvien, viinien, lautapelien ja tiedostoluettelojen oletuskokoelmia</li>
       <li xml:lang="fr">Prends en charge par défaut des collections de livres, d'entrées bibliographiques, de vidéos, de musique, de jeux vidéo, de bandes dessinées, de monnaies, de timbres,de cartes à collectionner, de vins, de jeux de plateau et de catalogues de fichiers.</li>
       <li xml:lang="gl">Compatíbel con coleccións predeterminadas de libros, entradas bibliográficas, vídeos, música, videoxogos, banda deseñada, moedas, selos, cartas de colección, viños, xogos de taboleiro e catálogos de ficheiros.</li>
@@ -165,6 +170,7 @@
       <li xml:lang="en-GB">Supports user-defined custom collections</li>
       <li xml:lang="es">Soporta colecciones personalizadas definidas por el usuario</li>
       <li xml:lang="et">Toetatud on ka kasutaja loodud kohandatud kogud</li>
+      <li xml:lang="eu">Erabiltzaileek definitutako beren erara moldatutako bildumak onartzen ditu</li>
       <li xml:lang="fi">Tukee käyttäjän mukauttamia kokoelmia</li>
       <li xml:lang="fr">Prends en charge les collections personnalisées par l'utilisateur</li>
       <li xml:lang="gl">Permite aos usuarios definir coleccións personalizadas.</li>
@@ -192,6 +198,7 @@
       <li xml:lang="en-GB">Supports any number of user-defined fields, of several different types: text, paragraph, list, tickbox, number, URL, date, images, and combinations</li>
       <li xml:lang="es">Soporta cualquier número de campos definidos por el usuario, de varios tipos diferentes: texto, párrafo, lista, checkbox, número, URL, fecha, imágenes y combinaciones.</li>
       <li xml:lang="et">Toetatud on mis tahes hulk kasutaja määratud välju, mis võivad olla väga eri tüüpi: tekst, lõik, loend, märkekast, arv, URL, kuupäev, pilt või nende kombinatsioon</li>
+      <li xml:lang="eu">Erabiltzaileek definitutako eremu kopuru mugagabea onartzen du, mota ezberdinetakoak: testua, paragrafoa, zerrenda, egiaztapen-lauki, zenbaki, URL, data, irudi, eta konbinazioak</li>
       <li xml:lang="fi">Tukee rajattomasti käyttäjän määrittämiä useamman tyypin kenttiä (teksti, kappale, luettelo, valintaruutu, luku-, verkko-osoite, päiväys, kuvat ja niiden yhdistelmät)</li>
       <li xml:lang="fr">Prend en charge n'importe quel nombre de champs définis par l'utilisateur, de plusieurs types différents : texte, paragraphe, liste, case à cocher, nombre, URL, date, images et combinaisons</li>
       <li xml:lang="gl">Permite ao usuario definir campos de varios tipos: texto, parágrafo, lista, lista con caixas para marcar, número, URL, data, imaxes, e combinacións.</li>
@@ -219,6 +226,7 @@
       <li xml:lang="en-GB">Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="es">Maneja entradas con varios autores, géneros, palabras clave, etc</li>
       <li xml:lang="et">Raskusi ei valmista ka kirjed, mis sisaldavad mitut autorit, žanri, võtmesõna jne.</li>
+      <li xml:lang="eu">Egile, genero, gako-hitz, eta abar anizkoitzak dituzten sarrerak maneiatzen ditu</li>
       <li xml:lang="fi">Käsittelee tietueet, joissa on useampia tekijöitä, tyylilajeja, avainsanoja jne.</li>
       <li xml:lang="fr">Gestion des entrées avec plusieurs auteurs, genres, mots-clés, etc</li>
       <li xml:lang="gl">Pode xestionar entradas con varios autores, xéneros, palabras clave, etc.</li>
@@ -246,6 +254,7 @@
       <li xml:lang="en-GB">Automatically formats titles and names</li>
       <li xml:lang="es">Formatea automáticamente títulos y nombres</li>
       <li xml:lang="et">Pealkirjasid ja nimesid saab lasta automaatselt vormindada</li>
+      <li xml:lang="eu">Automatikoki formateatzen ditu izenburuak eta izenak</li>
       <li xml:lang="fi">Muotoilee otsikot ja nimet automaattisesti</li>
       <li xml:lang="fr">Formate automatiquement les titres et les noms</li>
       <li xml:lang="gl">Aplica automaticamente un formato aos títulos e nomes.</li>
@@ -273,6 +282,7 @@
       <li xml:lang="en-GB">Supports collection searching and view filtering</li>
       <li xml:lang="es">Soporta búsqueda de colecciones y filtrado de la vista</li>
       <li xml:lang="et">Toetatud on kogudes otsimine ja vaate filtreerimine</li>
+      <li xml:lang="eu">Bildumetan bilatzea eta ikuspegietan iragaztea onartzen du</li>
       <li xml:lang="fi">Tukee kokoelmien hakua ja näkymien suodatusta</li>
       <li xml:lang="fr">Prend en charge la recherche dans la collection et une vue filtrée</li>
       <li xml:lang="gl">Permite buscar nas coleccións e filtrar nas vistas.</li>
@@ -300,6 +310,7 @@
       <li xml:lang="en-GB">Sorts and groups collection by various properties</li>
       <li xml:lang="es">Ordena y agrupa las colecciones en función de diversas propiedades</li>
       <li xml:lang="et">Kogusid saab sortida ja rühmitada eri omaduste järgi</li>
+      <li xml:lang="eu">Bildumak hainbat propietateren arabera sailkatu eta taldekatzen ditu</li>
       <li xml:lang="fi">Lajittelee ja ryhmittelee kokoelmia eri ominaisuuksien mukaan</li>
       <li xml:lang="fr">Trie et groupe les collections suivant diverses propriétés</li>
       <li xml:lang="gl">Permite ordenar ou agrupar as coleccións en funcións de varias propiedades.</li>
@@ -327,6 +338,7 @@
       <li xml:lang="en-GB">Allows customisable entry templates through XSLT</li>
       <li xml:lang="es">Permite plantillas personalizadas de entradas a través de XSLT </li>
       <li xml:lang="et">XSLT abil on võimalik luua kohandatud kirjemalle</li>
+      <li xml:lang="eu">XSLT erabliz norbere erara molda daitezkeen sarrera-txantiloiak onartzen ditu</li>
       <li xml:lang="fi">Sallii mukautetut tietuemallit XSLT:n avulla</li>
       <li xml:lang="fr">Permet des modèles d'entrées personnalisable via XSLT</li>
       <li xml:lang="gl">Permite personalizar os modelos para entradas mediante XSLT.</li>
@@ -354,6 +366,7 @@
       <li xml:lang="en-GB">Imports MODS, Bibtex, RIS, CSV, PDF metadata, and many other formats</li>
       <li xml:lang="es">Importa MODS, Bibtex, RIS, CSV, metadatos PDF y muchos otros formatos</li>
       <li xml:lang="et">MODS-i, Bibtexi, RIS-i, CSV, PDF-i metaandmete ja veel paljude vormingute import</li>
+      <li xml:lang="eu">MODS, Bibtex, RIS, CSV, PDF meta-datuak, eta beste formatu ugari inportatzen ditu</li>
       <li xml:lang="fi">Tuo MODS-, BibTeX-, RIS-, CSV-, PDF-metatieto- ja muista tiedostomuodoista</li>
       <li xml:lang="fr">Importe MODS, Bibtex, RIS, CSV, les métadonnées PDF, et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode importar ficheiros en formato MODS, Bibtex, RIS, CSV, metadatos de PDF, e moitos outros formatos.</li>
@@ -380,6 +393,7 @@
       <li xml:lang="en-GB">Exports to Bibtex, ONIX, CSV, HTML, and other formats</li>
       <li xml:lang="es">Exporta a Bibtex, ONIX, CSV, HTML y otros formatos</li>
       <li xml:lang="et">Eksport Bibtexi, ONIX-i, CSV, HTML-i ja veel paljudesse vormingutesse</li>
+      <li xml:lang="eu">Bibtex, ONIX, CSV, HTML, eta beste formatuetara esportatzen du</li>
       <li xml:lang="fi">Vie BibTeX-, ONIX-, CSV-, HTML- ja muihin tiedostomuotoihin</li>
       <li xml:lang="fr">Exporte vers Bibtex, ONIX, CSV, HTML et beaucoup d'autres formats</li>
       <li xml:lang="gl">Pode exportar coleccións nos formatos Bibtex, CSV, e HTML, entre outros.</li>
@@ -407,6 +421,7 @@
       <li xml:lang="en-GB">Imports information directly from Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, various other websites, and from external scripts</li>
       <li xml:lang="es">Importa información directamente de Amazon.com, IMDb, z39.50 servers, PubMed, SRU servers, CrossRef.org, y más sitios web, además de hacerlo desde scripts externos</li>
       <li xml:lang="et">Teabe importimine otse Amazon.com-ist, IMDb-st, z39.50 serveritest, PubMed-ist, SRU serveritest, CrossRef.org-ist, veel paljudelt veebilehekülgedelt ja väliste skriptide kaudu</li>
+      <li xml:lang="eu">Informazioa inportatzen du zuzenean Amazon.com, IMDb, z39.50 zerbitzari, PubMed, SRU zerbitzari, CrossRef.org, beste webgune batzuetatik, eta kanpoko scriptetatik.</li>
       <li xml:lang="fi">Tuo tietoa suoraan Amazon.comista, IMDb:stä, z39.50-palvelimilta, PubMedistä, SRU-palvelimilta, CrossRef.orgista, muilta verkkosivuilta ja ulkoisista skripteistä</li>
       <li xml:lang="fr">Importe les informations directement depuis Amazon.com, IMDb, z39.50, PubMed, SRU, CrossRef.org et de nombreux autres sites web ainsi que depuis des scripts externes</li>
       <li xml:lang="gl">Importa información directamente de Amazon.com, IMDb, servidores z39.50, PubMed, servidores SRU, CrossRef.org, doutros sitios web, e de scripts externos.</li>
@@ -434,6 +449,7 @@
       <li xml:lang="en-GB">Imports CDDB data for cataloguing audio CDs</li>
       <li xml:lang="es">Importa datos CDDB para catalogar CD de audio</li>
       <li xml:lang="et">CDDB andmete import audio-CD-de kataloogimiseks</li>
+      <li xml:lang="eu">Audio CDak katalogatzeko CDDB datuak inportatzen ditu</li>
       <li xml:lang="fi">Tuo ääni-CD:iden luokitteluun tarvittavat CDDB-tiedot</li>
       <li xml:lang="fr">Importe les données CDDB pour cataloguer les CDs audio</li>
       <li xml:lang="gl">Importa datos de CDDB para catalogar CD de son.</li>
@@ -461,6 +477,7 @@
       <li xml:lang="en-GB">Scans and imports audio file collections, such as mp3 or ogg</li>
       <li xml:lang="es">Escanea e importa colecciones de archivos de audio, como por ejemplo mp3 u ogg</li>
       <li xml:lang="et">Helifailide (näiteks mp3 või ogg) kogude läbiuurimine ja import</li>
+      <li xml:lang="eu">Miatu eta audio bildumak inportatzen ditu, hala nola mp3 edo ogg</li>
       <li xml:lang="fi">Etsii ja tuo äänitiedostojen kuten MP3:ten ja Oggien kokoelmia</li>
       <li xml:lang="fr">Scanne et importe les collections de fichiers audio, tels que les fichiers mp3 ou ogg</li>
       <li xml:lang="gl">Analiza e importa coleccións de ficheiros de son, como MP3 ou OGG.</li>
@@ -494,6 +511,7 @@
       <caption xml:lang="da">Hovedvinduet som viser en filmsamling</caption>
       <caption xml:lang="en-GB">The main window showing a movie collection</caption>
       <caption xml:lang="es">La ventana principal mostrando una colección de películas</caption>
+      <caption xml:lang="eu">Leiho nagusia pelikulen bilduma bat erakutsiz</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche une collection de films</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante un collection de filmes</caption>
       <caption xml:lang="it">La finestra principale che mostra una collezione di film</caption>
@@ -516,6 +534,7 @@
       <caption xml:lang="en-GB">The main window showing a simple item in a book collection</caption>
       <caption xml:lang="es">La ventana principal mostrando un elemento sencillo de una colección de libros</caption>
       <caption xml:lang="et">Peaaken raamatukollektsiooni kirjega</caption>
+      <caption xml:lang="eu">Leiho nagusia liburu bilduma bateko elementu soil bat erakutsiz</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche un élément simple au sein d'une collection de livres</caption>
       <caption xml:lang="gl">A xanela principal, mostrando un elemento sinxelo nunha colección de libros</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante un simple elemento in un collection de libros</caption>
@@ -543,6 +562,7 @@
       <caption xml:lang="en-GB">The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="es">La ventana principal mostrando vistas en paralelo de una colección de juegos</caption>
       <caption xml:lang="et">Peaaken mängude kõrvutivaatega</caption>
+      <caption xml:lang="eu">Leiho nagusia alboz-albo joko bilduma baten ikuspegiak erakutsiz</caption>
       <caption xml:lang="fr">La fenêtre principale, qui affiche des vues côte-à-côte d'une collection de jeux</caption>
       <caption xml:lang="gl">A xanela principal mostrando as vistas lado a lado dunha colección de xogos</caption>
       <caption xml:lang="ia">Le fenestra principale monstrante vistas flancate de un collection de joco</caption>
