@@ -102,7 +102,7 @@ int Tellico::stringHash(const QString& str) {
     h &= ~g;
   }
 
-  int index = h;
+  const int index = h;
   return index < 0 ? -index : index;
 }
 
