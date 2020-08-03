@@ -7,6 +7,7 @@ Name[de]=Dark-Horse-Comics
 Name[en_GB]=Dark Horse Comics
 Name[es]=Dark Horse Comics
 Name[et]=Dark Horse koomiksid
+Name[eu]=Dark Horse Komikiak
 Name[fi]=Dark Horse Comics
 Name[fr]=Bandes dessinées Dark Horse
 Name[gl]=Dark Horse Comics
