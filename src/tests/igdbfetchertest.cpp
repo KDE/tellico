@@ -59,21 +59,28 @@ void IGDBFetcherTest::testKeyword() {
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IGDBFetcher(this));
   fetcher->readConfig(cg, cg.name());
 
-  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
 
-  QCOMPARE(results.size(), 1);
+  QVERIFY(!results.isEmpty());
+  // want the Wii version
+  Tellico::Data::EntryPtr entry;
+  foreach(Tellico::Data::EntryPtr e, results) {
+    if(e->field("platform") == QStringLiteral("Nintendo Wii")) {
+      entry = e;
+      break;
+    }
+  }
 
-  Tellico::Data::EntryPtr entry = results.at(0);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Legend of Zelda: Twilight Princess"));
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("platform"), QStringLiteral("Nintendo Wii"));
   QCOMPARE(entry->field("certification"), QStringLiteral("Teen"));
   QCOMPARE(entry->field("pegi"), QStringLiteral("PEGI 12"));
-  QCOMPARE(entry->field("genre"), QStringLiteral("Platform; Puzzle; Role-playing (RPG); Sport; Adventure"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("Role-playing (RPG); Adventure"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Nintendo"));
   QCOMPARE(entry->field("developer"), QStringLiteral("Nintendo EAD Group No. 3"));
-  QCOMPARE(entry->field("igdb"), QStringLiteral("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess"));
+  QCOMPARE(entry->field("igdb"), QStringLiteral("https://www.igdb.com/games/the-legend-of-zelda-twilight-princess--1"));
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
