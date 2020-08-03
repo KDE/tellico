@@ -52,9 +52,9 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* ALLOCINE_API_KEY = "100043982026";
+  static const char* ALLOCINE_API_KEY = "100ED1DA33EB";
   static const char* ALLOCINE_API_URL = "http://api.allocine.fr/rest/v3/";
-  static const char* ALLOCINE_PARTNER_KEY = "29d185d98c984a359e6e6f26a0474269";
+  static const char* ALLOCINE_PARTNER_KEY = "1a1ed8c1bed24d60ae3472eed1da33eb";
 }
 
 using namespace Tellico;
@@ -92,9 +92,11 @@ void AbstractAllocineFetcher::readConfigHook(const KConfigGroup& config_) {
 void AbstractAllocineFetcher::search() {
   m_started = true;
 
+  const QString method(QStringLiteral("search"));
+
   QUrl u(m_baseUrl);
   u = u.adjusted(QUrl::StripTrailingSlash);
-  u.setPath(u.path() + QLatin1Char('/') + QStringLiteral("search"));
+  u.setPath(u.path() + QLatin1Char('/') + method);
 //  myDebug() << u;
 
   // the order of the parameters appears to matter
@@ -126,7 +128,7 @@ void AbstractAllocineFetcher::search() {
   const QString sed = QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyyMMdd"));
   params.append(qMakePair(QStringLiteral("sed"), sed));
 
-  const QByteArray sig = calculateSignature(params);
+  const QByteArray sig = calculateSignature(method, params);
 
   QUrlQuery query;
   query.setQueryItems(params);
@@ -166,10 +168,11 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
     myDebug() << "no allocine release found";
     return entry;
   }
+  const QString method(QStringLiteral("movie"));
 
   QUrl u(m_baseUrl);
   u = u.adjusted(QUrl::StripTrailingSlash);
-  u.setPath(u.path() + QLatin1Char('/') + QStringLiteral("movie"));
+  u.setPath(u.path() + QLatin1Char('/') + method);
 
   // the order of the parameters appears to matter
   QList<QPair<QString, QString> > params;
@@ -182,7 +185,7 @@ Tellico::Data::EntryPtr AbstractAllocineFetcher::fetchEntryHook(uint uid_) {
   const QString sed = QDateTime::currentDateTimeUtc().toString(QStringLiteral("yyyyMMdd"));
   params.append(qMakePair(QStringLiteral("sed"), sed));
 
-  const QByteArray sig = calculateSignature(params);
+  const QByteArray sig = calculateSignature(method, params);
 
   QUrlQuery query;
   query.setQueryItems(params);
@@ -445,7 +448,7 @@ void AbstractAllocineFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_
   config_.writeEntry("Max Cast", m_numCast->value());
 }
 
-QByteArray AbstractAllocineFetcher::calculateSignature(const QList<QPair<QString, QString> >& params_) {
+QByteArray AbstractAllocineFetcher::calculateSignature(const QString& method, const QList<QPair<QString, QString> >& params_) {
   typedef QPair<QString, QString> StringPair;
   QByteArray queryString;
   foreach(const StringPair& pair, params_) {
@@ -457,10 +460,9 @@ QByteArray AbstractAllocineFetcher::calculateSignature(const QList<QPair<QString
   // remove final '&'
   queryString.chop(1);
 
-  const QByteArray toSign = ALLOCINE_PARTNER_KEY + queryString;
+  const QByteArray toSign = method.toUtf8() + queryString + ALLOCINE_PARTNER_KEY;
   const QByteArray hash = QCryptographicHash::hash(toSign, QCryptographicHash::Sha1);
-  QByteArray sig = hash.toBase64();
-  return sig;
+  return hash.toBase64();
 }
 
 /**********************************************************************************************/
