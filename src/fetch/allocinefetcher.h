@@ -80,7 +80,7 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
-  static QByteArray calculateSignature(const QList<QPair<QString, QString> >& params);
+  static QByteArray calculateSignature(const QString& method, const QList<QPair<QString, QString> >& params);
 
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
