@@ -75,7 +75,7 @@
     </p>
     <p xml:lang="bs">Tellico je aplikacija za organiziranje vaše kolekcije. Omogućava početne predloške za knjige, bibliografije, videa, muziku, video igrice, kovanice, markice, kartice za razmjenu, stripove i vina. Dopušta vam ulaz u vašu kolekiju u katalošku bazu podataka, snimajući mnogo različitih osobina kao što su naslov, autor, itd.</p>
     <p xml:lang="ca">El Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
-    <p xml:lang="ca-valencia">El Tellico és una aplicació per organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
+    <p xml:lang="ca-valencia">El Tellico és una aplicació per a organitzar col·leccions. Proporciona plantilles per defecte per a llibres, bibliografies, vídeos, música, videojocs, monedes, segells, cromos, còmics i vins. Permet introduir les col·leccions en una base de dades de catàlegs, desant moltes propietats diferents com el títol, l'autor, etc.</p>
     <p xml:lang="da">Tellico er et program til at organisere dine samlinger. Det giver standardskabeloner til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier og vine. Det lader dig angive din samling i en katalogdatabase, som gemmer mange forskellige egenskaber, såsom titel, forfatter osv.</p>
     <p xml:lang="de">Tellico ist eine Anwendung zur Organisation Ihrer Daten. Es enthält Standardvorlagen für Bücher, Literaturverzeichnisse, Videos, Musik, Videospiele, Comicbücher, Münzen, Briefmarken, Karten, Wein, Brettspiele und Dateikataloge. Sie können Ihre Sammlung in einer Katalog-Datenbank eingeben und viele verschiedene Eigenschaften wie Titel, Autor usw. darin speichern.</p>
     <p xml:lang="en-GB">Tellico is an application for organising your collections. It provides default templates for books, bibliographies, videos, music, video games, coins, stamps, trading cards, comic books, and wines. It allows you to enter your collection in a catalogue database, saving many different properties like title, author, etc.</p>
@@ -136,7 +136,7 @@
       <li>Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogs</li>
       <li xml:lang="bs">Podržava početne kolekcije knjiga, bibliografskih ulaza, videa, muzike, video igrica, stripova, kovanica, markica, kartica za razmjenu, vina, društvenih igara i datotečnih kataloga.</li>
       <li xml:lang="ca">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
-      <li xml:lang="ca-valencia">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades bibliografies, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
+      <li xml:lang="ca-valencia">Funciona amb col·leccions per defecte de catàlegs de llibres, entrades de bibliografia, vídeos, música, videojocs, còmics, monedes, segells, cromos, vins, jocs de taula i fitxers</li>
       <li xml:lang="da">Understøtter standardsamlinger til bøger, bibliografier, video, musik, computerspil, mønter, frimærker, byttekort, tegneserier, vine, brætspil og filkataloger</li>
       <li xml:lang="de">Unterstützt Standardsammlungen für Bücher, Literaturverzeichnisse, Videos, Musik, Videospiele, Comicbücher, Münzen, Briefmarken, Karten, Wein, Brettspiele und Dateikataloge</li>
       <li xml:lang="en-GB">Supports default collections of books, bibliographic entries, videos, music, video games, comic books, coins, stamps, trading cards, wines, board games, and file catalogues</li>
@@ -220,7 +220,7 @@
       <li>Handles entries with multiple authors, genres, keywords, etc</li>
       <li xml:lang="bs">Upravlja ulazima sa više autora, žanrova, ključnih riječi, itd.</li>
       <li xml:lang="ca">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
-      <li xml:lang="ca-valencia">Gestiona entrades amb diversos autors, gèneres, paraules clau, etc.</li>
+      <li xml:lang="ca-valencia">Gestiona entrades amb múltiples autors, gèneres, paraules clau, etc.</li>
       <li xml:lang="da">Kan håndtere indgange med flere forfattere, genrer, nøgleord osv.</li>
       <li xml:lang="de">Verarbeitet Einträge mit mehreren Autoren, Genres, Stichwörtern usw.</li>
       <li xml:lang="en-GB">Handles entries with multiple authors, genres, keywords, etc</li>
@@ -557,7 +557,7 @@
     <screenshot width="1396" height="883">
       <caption>The main window showing side-by-side views of a game collection</caption>
       <caption xml:lang="ca">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
-      <caption xml:lang="ca-valencia">La finestra principal mostra vistes un al costat de l'altra d'una col·lecció de jocs</caption>
+      <caption xml:lang="ca-valencia">La finestra principal mostra les vistes, una al costat de l'altra, d'una col·lecció de jocs</caption>
       <caption xml:lang="cs">Hlavní okno zobrazující vedle sebe sbírku her</caption>
       <caption xml:lang="da">Hovedvinduet som viser side-om-side-visninger af en spilsamling</caption>
       <caption xml:lang="de">Das Hauptfenster mit einer zweispaltigen Ansicht einer Spiele-Sammlung</caption>
