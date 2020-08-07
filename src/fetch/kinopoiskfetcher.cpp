@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -37,7 +37,6 @@
 #include <KJobUiDelegate>
 #include <KJobWidgets/KJobWidgets>
 
-#include <QRegExp> // TODO: port away from QRegExp
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QLabel>
@@ -45,9 +44,13 @@
 #include <QTextStream>
 #include <QVBoxLayout>
 #include <QUrlQuery>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonParseError>
 
 namespace {
-  static const char* KINOPOISK_SEARCH_URL = "http://www.kinopoisk.ru/index.php";
+  static const char* KINOPOISK_SEARCH_URL = "https://www.kinopoisk.ru/index.php";
 }
 
 using namespace Tellico;
@@ -143,17 +146,17 @@ void KinoPoiskFetcher::slotComplete(KJob*) {
 #endif
 
   // look for a paragraph, class=",", with an internal /ink to "/level/1/film..."
-  QRegExp resultRx(QStringLiteral("<p class=\"name\">\\s*"
-                                  "<a href=\"/level/1/film[^\"]+\".* data-url=\"([^\"]*)\".*>(.*)</a>\\s*"
-                                  "<span class=\"year\">(.*)</span"));
-  resultRx.setMinimal(true);
+  QRegularExpression resultRx(QStringLiteral("<p class=\"name\">\\s*"
+                                             "<a href=\"/film[^\"]+\".*? data-url=\"([^\"]*)\".*?>(.*?)</a>\\s*"
+                                             "<span class=\"year\">(.*?)</span"));
 
   QString href, title, year;
-  for(int pos = resultRx.indexIn(output); m_started && pos > -1;
-          pos = resultRx.indexIn(output, pos+resultRx.matchedLength())) {
-    href = resultRx.cap(1);
-    title = resultRx.cap(2);
-    year = resultRx.cap(3);
+  QRegularExpressionMatchIterator i = resultRx.globalMatch(output);
+  while(m_started && i.hasNext()) {
+    QRegularExpressionMatch match = i.next();
+    href = match.captured(1);
+    title = match.captured(2);
+    year = match.captured(3);
     if(!href.isEmpty()) {
       QUrl url(QString::fromLatin1(KINOPOISK_SEARCH_URL));
       url = url.resolved(QUrl(href));
@@ -182,7 +185,9 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
-  const QString results = Tellico::decodeHTML(FileHandler::readDataFile(url, true));
+// the HTML response has the character encoding after the first 1024 characters and Qt doesn't seem to detect that
+// and potentially falls back to iso-8859-1. Enforce UTF-8
+  const QString results = Tellico::decodeHTML(Tellico::fromHtmlData(FileHandler::readDataFile(url, true), "UTF-8"));
   if(results.isEmpty()) {
     myDebug() << "no text results";
     return Data::EntryPtr();
@@ -202,8 +207,23 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 
   entry = parseEntry(results);
   if(!entry) {
-    myDebug() << "error in processing entry";
+    // might want to check LD+JSON format
+    entry = parseEntryLinkedData(results);
+  }
+  if(!entry) {
+    myDebug() << "No discernible entry data";
     return Data::EntryPtr();
+  }
+
+  QString cover = entry->field(QStringLiteral("cover"));
+  if(!cover.isEmpty()) {
+    const QString id = ImageFactory::addImage(QUrl::fromUserInput(cover), true /* quiet */,
+                                              QUrl(QString::fromLatin1(KINOPOISK_SEARCH_URL)) /* referer */);
+    if(id.isEmpty()) {
+      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
+    }
+    // empty image ID is ok
+    entry->setField(QStringLiteral("cover"), id);
   }
 
   if(optionalFields().contains(QStringLiteral("kinopoisk"))) {
@@ -218,205 +238,227 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
+  QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/json\">(.+?)</script>"));
+  QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
+  if(!jsonMatch.hasMatch()) {
+    myDebug() << "No JSON data";
+    return Data::EntryPtr();
+  }
+
+  QJsonParseError parseError;
+  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8(), &parseError);
+  if(doc.isNull()) {
+    myDebug() << "Bad json data:" << parseError.errorString();
+    return Data::EntryPtr();
+  }
+
+  const QString queryId = doc.object().value(QStringLiteral("query")).toObject()
+                                      .value(QStringLiteral("id")).toString();
+  // if there's no query ID, then this is not a film object to parse
+  if(queryId.isEmpty()) {
+//    myDebug() << "No query ID...";
+    return Data::EntryPtr();
+  }
+
+  // otherwise, we're good to go
   Data::CollPtr coll(new Data::VideoCollection(true));
   Data::EntryPtr entry(new Data::Entry(coll));
   coll->addEntries(entry);
 
-  QRegExp tagRx(QStringLiteral("<.*>"));
-  tagRx.setMinimal(true);
-
-  QRegExp anchorRx(QStringLiteral("<a\\s+href=\".*\"[^>]*>(.*)</"));
-  anchorRx.setMinimal(true);
-
-  QString title;
-  QRegExp titleRx(QStringLiteral("class=\"moviename-big\"[^>]*>([^(]+).*</"));
-  titleRx.setMinimal(true);
-  if(str_.contains(titleRx)) {
-    title = titleRx.cap(1);
-  } else {
-    titleRx.setPattern(QStringLiteral("itemProp=\"name\">([^(]+).*</span"));
-    if(str_.contains(titleRx)) {
-      title = titleRx.cap(1);
+  QJsonObject dataObject = doc.object().value(QStringLiteral("props")).toObject()
+                                        .value(QStringLiteral("apolloState")).toObject()
+                                        .value(QStringLiteral("data")).toObject();
+  QJsonObject filmObject = dataObject.value(QStringLiteral("Film:") + queryId).toObject();
+  // iterate over the filmObject members to find the json keys in the dataObject
+  QJsonObject::const_iterator i = filmObject.constBegin();
+  for( ; i != filmObject.constEnd(); ++i) {
+    QString fieldName = fieldNameFromKey(i.key());
+    if(fieldName.isEmpty()) {
+      continue;
     }
-  }
-  if(!title.isEmpty()) {
-    title.remove(tagRx);
-    title = title.simplified();
-    entry->setField(QStringLiteral("title"), title);
-  }
-
-  if(optionalFields().contains(QStringLiteral("origtitle"))) {
-    Data::FieldPtr f(new Data::Field(QStringLiteral("origtitle"), i18n("Original Title")));
-    f->setFormatType(FieldFormat::FormatTitle);
-    coll->addField(f);
-
-    QRegExp origTitleRx(QStringLiteral("itemprop=\"alternativeHeadline\"[^>]*>([^<]+)</"));
-    if(str_.contains(origTitleRx)) {
-      entry->setField(QStringLiteral("origtitle"), origTitleRx.cap(1));
+    Data::FieldPtr field = entry->collection()->fieldByName(fieldName);
+    Q_ASSERT(field);
+    QString fieldValue = fieldValueFromObject(dataObject, fieldName, i.value(),
+                                              field ? field->allowed() : QStringList());
+    if(!fieldValue.isEmpty()) {
+      entry->setField(fieldName, fieldValue);
     }
-  }
 
-  QRegExp yearRx(QStringLiteral("href=\"/lists/navigator/[^\"]+\"[^>]*>(\\d\\d\\d\\d)</a"));
-  if(str_.contains(yearRx)) {
-    entry->setField(QStringLiteral("year"), yearRx.cap(1));
-  }
-
-  QRegExp countryRx(QStringLiteral("<a href=\"/lists/navigator/country[^\"]+\"[^>]*>([^<]+)</a"));
-  countryRx.setMinimal(true);
-  QStringList countries;
-  for(int pos = countryRx.indexIn(str_); pos > -1;
-          pos = countryRx.indexIn(str_, pos+countryRx.matchedLength())) {
-    countries += countryRx.cap(1);
-  }
-  if(!countries.isEmpty()) {
-    countries.removeDuplicates();
-    entry->setField(QStringLiteral("nationality"), countries.join(Tellico::FieldFormat::delimiterString()));
-  }
-
-  QRegularExpression genreRx(QStringLiteral("<span itemprop=\"genre\">(.+?)</span"));
-  QRegularExpressionMatch genreMatch = genreRx.match(str_);
-  if(genreMatch.hasMatch()) {
-    const QString genreText = genreMatch.captured();
-    QStringList genres;
-    for(int pos = anchorRx.indexIn(genreText); pos > -1;
-            pos = anchorRx.indexIn(genreText, pos+anchorRx.matchedLength())) {
-      genres += anchorRx.cap(1);
-    }
-    if(!genres.isEmpty()) {
-      genres.removeDuplicates();
-      entry->setField(QStringLiteral("genre"), genres.join(Tellico::FieldFormat::delimiterString()));
-    }
-  }
-
-  QRegExp directorRx(QStringLiteral("<td itemprop=\"director\">(.*)</td"));
-  directorRx.setMinimal(true);
-  if(str_.contains(directorRx)) {
-    QString s = directorRx.cap(1);
-    QStringList directors;
-    for(int pos = anchorRx.indexIn(s); pos > -1;
-            pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
-      QString value = anchorRx.cap(1);
-      if(value != QStringLiteral("...")) {
-        directors += value;
+    // also add original title
+    if(fieldName == QLatin1String("title")) {
+      const QString origTitle(QStringLiteral("origtitle"));
+      if(optionalFields().contains(origTitle)) {
+        if(!entry->collection()->hasField(origTitle)) {
+          Data::FieldPtr f(new Data::Field(origTitle, i18n("Original Title")));
+          f->setFormatType(FieldFormat::FormatTitle);
+          entry->collection()->addField(f);
+        }
+        fieldValue = fieldValueFromObject(dataObject, origTitle, i.value(), QStringList());
+        if(!fieldValue.isEmpty()) {
+          entry->setField(origTitle, fieldValue);
+        }
       }
     }
-    if(!directors.isEmpty()) {
-      entry->setField(QStringLiteral("director"), directors.join(Tellico::FieldFormat::delimiterString()));
-    }
   }
 
-  QRegExp writerRx(QStringLiteral("<td class=\"type\">сценарий</td>(.*)</td"));
-  writerRx.setMinimal(true);
-  if(str_.contains(writerRx)) {
-    QString s = writerRx.cap(1);
-    QStringList writers;
-    for(int pos = anchorRx.indexIn(s); pos > -1;
-            pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
-      QString value = anchorRx.cap(1);
-      if(value != QStringLiteral("...")) {
-        writers += value;
-      }
-    }
-    if(!writers.isEmpty()) {
-      entry->setField(QStringLiteral("writer"), writers.join(Tellico::FieldFormat::delimiterString()));
-    }
-  }
-
-  QRegExp producerRx(QStringLiteral("<td itemprop=\"producer\">(.*)</td"));
-  producerRx.setMinimal(true);
-  if(str_.contains(producerRx)) {
-    QString s = producerRx.cap(1);
-    QStringList producers;
-    for(int pos = anchorRx.indexIn(s); pos > -1;
-            pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
-      QString value = anchorRx.cap(1);
-      if(value != QStringLiteral("...")) {
-        producers += value;
-      }
-    }
-    if(!producers.isEmpty()) {
-      entry->setField(QStringLiteral("producer"), producers.join(Tellico::FieldFormat::delimiterString()));
-    }
-  }
-
-  QRegExp composerRx(QStringLiteral("<td itemprop=\"musicBy\">(.*)</td"));
-  composerRx.setMinimal(true);
-  if(str_.contains(composerRx)) {
-    QString s = composerRx.cap(1);
-    QStringList composers;
-    for(int pos = anchorRx.indexIn(s); pos > -1;
-            pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
-      QString value = anchorRx.cap(1);
-      if(value != QStringLiteral("...")) {
-        composers += value;
-      }
-    }
-    if(!composers.isEmpty()) {
-      entry->setField(QStringLiteral("composer"), composers.join(Tellico::FieldFormat::delimiterString()));
-    }
-  }
-
-  QRegExp castRx(QStringLiteral("<h4>В главных ролях.*</h4>.*<ul>(.*)</ul>"));
-  castRx.setMinimal(true);
-  if(str_.contains(castRx)) {
-    QString s = castRx.cap(1);
-    QStringList actors;
-    for(int pos = anchorRx.indexIn(s); pos > -1;
-            pos = anchorRx.indexIn(s, pos+anchorRx.matchedLength())) {
-      QString value = anchorRx.cap(1);
-      if(value != QStringLiteral("...")) {
-        actors += value;
-      }
-    }
-    if(!actors.isEmpty()) {
-      entry->setField(QStringLiteral("cast"), actors.join(Tellico::FieldFormat::rowDelimiterString()));
-    }
-  }
-
-  QRegExp runtimeRx(QStringLiteral("id=\"runtime\">(\\d+)"));
-  if(str_.contains(runtimeRx)) {
-    entry->setField(QStringLiteral("running-time"), runtimeRx.cap(1));
-  }
-
-  QRegExp plotRx(QStringLiteral("itemprop=\"description\"[^>]*>(.+)</div"));
-  plotRx.setMinimal(true);
-  if(str_.contains(plotRx)) {
-    entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
-  } else {
-    plotRx.setPattern(QStringLiteral("<meta name=\"description\" content=\"(.+)\""));
-    if(str_.contains(plotRx)) {
-      entry->setField(QStringLiteral("plot"), Tellico::decodeHTML(plotRx.cap(1)));
-    }
-  }
-
-  QRegExp mpaaRx(QStringLiteral("itemprop=\"contentRating\"[^>]+content=\"MPAA ([^>]+)\""));
-  mpaaRx.setMinimal(true);
-  if(str_.contains(mpaaRx)) {
-    QString value = mpaaRx.cap(1) + QStringLiteral(" (USA)");
-//    entry->setField(QStringLiteral("certification"), i18n(value.toUtf8()));
-    entry->setField(QStringLiteral("certification"), value);
-  }
-
-  QString cover;
-  QRegExp coverRx(QStringLiteral("<a class=\"popupBigImage\"[^>]+>\\s*<img.*src=\"([^\"]+)\""));
-  coverRx.setMinimal(true);
-  if(str_.contains(coverRx)) {
-    cover = coverRx.cap(1);
-  } else {
-    coverRx.setPattern(QStringLiteral("<meta property=\"vk:image\" content=\"(.+)\""));
-    if(str_.contains(coverRx)) {
-      cover = coverRx.cap(1);
-    }
-  }
-  if(!cover.isEmpty()) {
-    const QString id = ImageFactory::addImage(QUrl::fromUserInput(cover), true /* quiet */);
-    if(id.isEmpty()) {
-      message(i18n("The cover image could not be loaded."), MessageHandler::Warning);
-    }
-    // empty image ID is ok
-    entry->setField(QStringLiteral("cover"), id);
-  }
   return entry;
+}
+
+Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntryLinkedData(const QString& str_) {
+  QRegularExpression jsonRx(QStringLiteral("<script.*?type=\"application/ld\\+json\">(.+?)</script>"));
+  QRegularExpressionMatch jsonMatch = jsonRx.match(str_);
+  if(!jsonMatch.hasMatch()) {
+    myDebug() << "No JSON data";
+    return Data::EntryPtr();
+  }
+
+  QJsonParseError parseError;
+  QJsonDocument doc = QJsonDocument::fromJson(jsonMatch.captured(1).toUtf8(), &parseError);
+  if(doc.isNull()) {
+    myDebug() << "Bad json data:" << parseError.errorString();
+    return Data::EntryPtr();
+  }
+
+  // otherwise, we're good to go
+  Data::CollPtr coll(new Data::VideoCollection(true));
+  Data::EntryPtr entry(new Data::Entry(coll));
+  coll->addEntries(entry);
+
+  QVariantMap objectMap = doc.object().toVariantMap();
+  entry->setField(QStringLiteral("title"), mapValue(objectMap, "name"));
+  entry->setField(QStringLiteral("year"), mapValue(objectMap, "datePublished").left(4));
+  entry->setField(QStringLiteral("nationality"), mapValue(objectMap, "countryOfOrigin"));
+  entry->setField(QStringLiteral("cast"), mapValue(objectMap, "actor", "name"));
+  entry->setField(QStringLiteral("director"), mapValue(objectMap, "director", "name"));
+  entry->setField(QStringLiteral("producer"), mapValue(objectMap, "producer", "name"));
+  entry->setField(QStringLiteral("genre"), mapValue(objectMap, "genre"));
+  entry->setField(QStringLiteral("plot"), mapValue(objectMap, "description"));
+  QString cover = mapValue(objectMap, "image");
+  if(cover.startsWith(QLatin1Char('/'))) {
+    cover.prepend(QLatin1String("https:"));
+  }
+  entry->setField(QStringLiteral("cover"), cover);
+
+  return entry;
+}
+
+// static
+QString KinoPoiskFetcher::fieldNameFromKey(const QString& key_) {
+  static QHash<QString, QString> fieldHash;
+  if(fieldHash.isEmpty()) {
+    fieldHash.insert(QStringLiteral("title"), QStringLiteral("title"));
+    fieldHash.insert(QStringLiteral("productionYear"), QStringLiteral("year"));
+    fieldHash.insert(QStringLiteral("duration"), QStringLiteral("running-time"));
+    fieldHash.insert(QStringLiteral("countries"), QStringLiteral("nationality"));
+    fieldHash.insert(QStringLiteral("genres"), QStringLiteral("genre"));
+    fieldHash.insert(QStringLiteral("restriction"), QStringLiteral("certification"));
+    fieldHash.insert(QStringLiteral("synopsis"), QStringLiteral("plot"));
+    fieldHash.insert(QStringLiteral("poster"), QStringLiteral("cover"));
+  }
+  if(fieldHash.contains(key_)) {
+    return fieldHash.value(key_);
+  }
+
+  // otherwise some wonky key names
+  if(key_.contains(QLatin1String("DIRECTOR"), Qt::CaseInsensitive)) {
+    return QStringLiteral("director");
+  }
+  if(key_.contains(QLatin1String("WRITER"), Qt::CaseInsensitive)) {
+    return QStringLiteral("writer");
+  }
+  if(key_.contains(QLatin1String("PRODUCER"), Qt::CaseInsensitive)) {
+    return QStringLiteral("producer");
+  }
+  if(key_.contains(QLatin1String("COMPOSER"), Qt::CaseInsensitive)) {
+    return QStringLiteral("composer");
+  }
+  if(key_.contains(QLatin1String("ACTOR"), Qt::CaseInsensitive)) {
+    return QStringLiteral("cast");
+  }
+  return QString();
+}
+
+QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QString& field_,
+                                               const QJsonValue& value_, const QStringList& allowed_) {
+  // if it's an arrary, loop over and recurse
+  if(value_.isArray()) {
+    QJsonArray arr = value_.toArray();
+    QStringList fieldValues;
+    for(QJsonArray::const_iterator i = arr.constBegin(); i != arr.constEnd(); ++i) {
+      const QString value = fieldValueFromObject(obj_, field_, *i, allowed_);
+      if(!value.isEmpty()) {
+        fieldValues << value;
+      }
+    }
+    return fieldValues.isEmpty() ? QString() : fieldValues.join(field_ == QLatin1String("cast") ?
+                                                                Tellico::FieldFormat::rowDelimiterString() :
+                                                                Tellico::FieldFormat::delimiterString());
+  }
+
+  if(field_ == QLatin1String("year") ||
+     field_ == QLatin1String("running-time")) {
+    const int n = value_.toInt();
+    return n > 0 ? QString::number(n) : QString();
+  }
+  if(field_ == QLatin1String("plot")) {
+    return value_.toString();
+  }
+
+  QJsonObject valueObj = obj_.value(value_.toObject().value(QStringLiteral("id")).toString()).toObject();
+
+  // if it has a 'person' field, gotta grab the person name
+  if(valueObj.contains(QLatin1String("person"))) {
+    return fieldValueFromObject(obj_, field_, valueObj.value(QLatin1String("person")), allowed_);
+  }
+
+  if(field_ == QLatin1String("title")) {
+    QString title = valueObj.value(QStringLiteral("russian")).toString();
+    // return original if russian is not available
+    return title.isEmpty() ? valueObj.value(QStringLiteral("original")).toString() : title;
+  } else if(field_ == QLatin1String("origtitle")) {
+    return valueObj.value(QStringLiteral("original")).toString();
+  } else if(field_ == QLatin1String("cover")) {
+    QString url = valueObj.value(QStringLiteral("avatarsUrl")).toString();
+    if(url.startsWith(QLatin1Char('/'))) {
+      url.prepend(QLatin1String("https:"));
+    }
+    // also add size
+    url.append(QLatin1String("/300x450"));
+    return url;
+  } else if(field_ == QLatin1String("certification")) {
+    Q_ASSERT(allowed_.size() == 5);
+    // default collection has 5 MPAA values
+    if(allowed_.size() != 5) return QString();
+    const QString mpaa = valueObj.value(QLatin1String("mpaa")).toString();
+    if(mpaa == QLatin1String("g")) {
+      return allowed_.at(0);
+    } else if(mpaa == QLatin1String("pg")) {
+      return allowed_.at(1);
+    } else if(mpaa == QLatin1String("pg13")) {
+      return allowed_.at(2);
+    } else if(mpaa == QLatin1String("r")) {
+      return allowed_.at(3);
+    } else {
+      return allowed_.at(4);
+    }
+  // with a 'name' field return that
+  // and check this before comapring against field names for people, like 'director'
+  } else if(valueObj.contains(QLatin1String("name"))) {
+    return valueObj.value(QStringLiteral("name")).toString();
+  } else if(valueObj.contains(QLatin1String("items"))) {
+    // some additional nesting apparently
+    // key in film object points to director object, whose 'items' is an array where each 'is' points to
+    // a director object which has a person.id pointing to a person object with a 'name' and 'original' value
+    // valueObj is the director so we want the items array
+    QJsonValue itemsValue = valueObj.value(QLatin1String("items"));
+    if(!itemsValue.isArray()) {
+      myDebug() << "items value is not an array";
+      return QString();
+    }
+    return fieldValueFromObject(obj_, field_, itemsValue, allowed_);
+  }
+
+  return QString();
 }
 
 Tellico::Fetch::FetchRequest KinoPoiskFetcher::updateRequest(Data::EntryPtr entry_) {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -73,12 +73,13 @@ void KinoPoiskFetcherTest::testSuperman() {
   QCOMPARE(entry->field("year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("nationality"), QString::fromUtf8("США"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Брайан Сингер"));
-  QCOMPARE(entry->field("writer"), QString::fromUtf8("Майкл Догерти; Дэн Харрис; Брайан Сингер"));
-  QCOMPARE(entry->field("producer"), QString::fromUtf8("Гилберт Адлер; Джон Питерс; Брайан Сингер"));
+  QCOMPARE(entry->field("writer"), QString::fromUtf8("Майкл Догерти; Дэн Харрис; Брайан Сингер; Джерри Сигел"));
+  QCOMPARE(entry->field("producer"), QString::fromUtf8("Гилберт Адлер; Джон Питерс; Брайан Сингер; Уильям Фэй"));
   QCOMPARE(entry->field("composer"), QString::fromUtf8("Джон Оттмен"));
-  QCOMPARE(set(entry, "genre"), set(QString::fromUtf8("фантастика; боевик; приключения")));
+  QCOMPARE(entry->field("genre"), QString::fromUtf8("фантастика; боевик"));
   QCOMPARE(entry->field("certification"), QStringLiteral("PG-13 (USA)"));
   QCOMPARE(entry->field("running-time"), QStringLiteral("154"));
+  QCOMPARE(entry->field("kinopoisk"), QStringLiteral("https://www.kinopoisk.ru/film/38472"));
   QStringList castList = Tellico::FieldFormat::splitTable(entry->field(QStringLiteral("cast")));
   QVERIFY(!castList.isEmpty());
   QCOMPARE(castList.at(0), QString::fromUtf8("Брэндон Рут"));
@@ -88,6 +89,7 @@ void KinoPoiskFetcherTest::testSuperman() {
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
 
+// tests a movie without a Russian title
 void KinoPoiskFetcherTest::testTop() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Top"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoPoiskFetcher(this));
@@ -101,7 +103,6 @@ void KinoPoiskFetcherTest::testTop() {
 
   QCOMPARE(entry->field("title"), QString::fromUtf8("Top"));
   QCOMPARE(entry->field("year"), QStringLiteral("1999"));
-  QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
@@ -122,8 +123,9 @@ void KinoPoiskFetcherTest::testBug403185() {
   QCOMPARE(entry->field("year"), QStringLiteral("2007"));
   QCOMPARE(entry->field("nationality"), QString::fromUtf8("Россия"));
   QCOMPARE(entry->field("director"), QString::fromUtf8("Сергей Урсуляк"));
-  QCOMPARE(entry->field("producer"), QString::fromUtf8("Сергей Даниелян; Рубен Дишдишян; Алексей Кузнецов"));
+  QCOMPARE(entry->field("producer"), QString::fromUtf8("Сергей Даниелян; Рубен Дишдишян; Алексей Кузнецов; Юрий Мороз"));
   QCOMPARE(entry->field("genre"), QString::fromUtf8("детектив; криминал; триллер; драма"));
+  QVERIFY(!entry->field("cast").isEmpty());
   QVERIFY(!entry->field("plot").isEmpty());
   QVERIFY(!entry->field("cover").isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
