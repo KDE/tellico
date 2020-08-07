@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -29,6 +29,8 @@
 #include "configwidget.h"
 
 #include <QPointer>
+#include <QJsonValue>
+#include <QJsonObject>
 
 class QUrl;
 class KJob;
@@ -78,9 +80,14 @@ private Q_SLOTS:
   void slotComplete(KJob* job);
 
 private:
+  static QString fieldNameFromKey(const QString& key);
+  static QString fieldValueFromObject(const QJsonObject& obj, const QString& field,
+                                      const QJsonValue& value, const QStringList& allowed);
+
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   Data::EntryPtr parseEntry(const QString& str);
+  Data::EntryPtr parseEntryLinkedData(const QString& str);
 
   QHash<uint, Data::EntryPtr> m_entries;
   QHash<uint, QUrl> m_matches;
