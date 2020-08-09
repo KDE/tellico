@@ -43,7 +43,6 @@
 
 #include <QPushButton>
 #include <QMenu>
-#include <QMatrix>
 #include <QLabel>
 #include <QCheckBox>
 #include <QApplication> // needed for drag distance
@@ -229,7 +228,7 @@ void ImageWidget::scale() {
       newHeight = static_cast<int>(static_cast<double>(ph)*ww/static_cast<double>(pw));
     }
 
-    QMatrix wm;
+    QTransform wm;
     wm.scale(static_cast<double>(newWidth)/pw, static_cast<double>(newHeight)/ph);
     m_scaled = m_pixmap.transformed(wm, Qt::SmoothTransformation);
   } else {
