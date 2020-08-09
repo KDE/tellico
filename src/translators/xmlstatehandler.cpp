@@ -300,7 +300,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), QString::SkipEmptyParts);
 #else
-    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), QString::SkipEmptyParts);
+    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), Qt::SkipEmptyParts);
 #endif
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
