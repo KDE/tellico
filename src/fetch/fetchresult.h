@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -42,7 +42,7 @@ public:
 
   Data::EntryPtr fetchEntry();
 
-  uint uid;
+  quint32 uid;
   QExplicitlySharedDataPointer<Fetcher> fetcher;
   QString title;
   QString desc;

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -28,7 +28,11 @@
 #include "../collection.h"
 #include "../tellico_debug.h"
 
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
 #include <KRandom>
+#else
+#include <QRandomGenerator>
+#endif
 
 namespace {
   bool append(QString& text, Tellico::Data::EntryPtr entry, const char* field) {
@@ -49,7 +53,11 @@ using namespace Tellico::Fetch;
 using Tellico::Fetch::FetchResult;
 
 FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
    : uid(KRandom::random())
+#else
+   : uid(QRandomGenerator::global()->generate())
+#endif
    , fetcher(fetcher_)
    , title(entry_->title())
    , desc(makeDescription(entry_))
@@ -57,7 +65,11 @@ FetchResult::FetchResult(Fetcher::Ptr fetcher_, Data::EntryPtr entry_)
 }
 
 FetchResult::FetchResult(Fetcher::Ptr fetcher_, const QString& title_, const QString& desc_, const QString& isbn_)
+#if (QT_VERSION < QT_VERSION_CHECK(5, 10, 0))
    : uid(KRandom::random())
+#else
+   : uid(QRandomGenerator::global()->generate())
+#endif
    , fetcher(fetcher_)
    , title(title_)
    , desc(desc_)
