@@ -419,6 +419,10 @@ void BibtexImporter::appendCollection(Data::CollPtr coll_) {
     mainColl->setPreamble(pre + newColl->preamble());
   }
   StringMap macros = mainColl->macroList();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
   macros.unite(newColl->macroList());
+#else
+  macros.insert(newColl->macroList());
+#endif
   mainColl->setMacroList(macros);
 }
