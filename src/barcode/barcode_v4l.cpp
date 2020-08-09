@@ -138,9 +138,9 @@ QImage barcode_v4l::grab_one2()
     f = get_brightness_adj((unsigned char *)m_buffer->data(), m_win.width * m_win.height, &newbright);
     if (f) {
       m_pict.brightness += (newbright << 8);
-      myDebug() << "v4l: Adjusting brightness: new brightness " << m_pict.brightness << endl;
+      myDebug() << "v4l: Adjusting brightness: new brightness " << m_pict.brightness;
       if (v4l1_ioctl(m_fd, VIDIOCSPICT, &m_pict) == -1) {
-        myDebug() << "v4l: Cannot set brightness." << endl;
+        myDebug() << "v4l: Cannot set brightness.";
         counter = 0; // do not try again
       }
     } else
@@ -176,26 +176,26 @@ bool barcode_v4l::grab_init()
 {
   m_fd = v4l1_open(m_devname.toLatin1().constData(), O_RDONLY);
   if (m_fd < 0) {
-    myDebug() << "v4l: open " << m_devname << ": " << strerror(errno) << endl;
+    myDebug() << "v4l: open " << m_devname << ": " << strerror(errno);
     return false;
   }
 
   if (v4l1_ioctl(m_fd, VIDIOCGCAP, &m_capability) < 0) {
-    myDebug() << "v4l: ioctl VIDIOCGCAP failed; " << m_devname << " not a video4linux device?" << endl;
+    myDebug() << "v4l: ioctl VIDIOCGCAP failed; " << m_devname << " not a video4linux device?";
     v4l1_close(m_fd);
     m_fd = -1;
     return false;
   }
 
   if (v4l1_ioctl(m_fd, VIDIOCGWIN, &m_win) < 0) {
-    myDebug() << "v4l: ioctl VIDIOCGWIN failed" << endl;
+    myDebug() << "v4l: ioctl VIDIOCGWIN failed";
     v4l1_close(m_fd);
     m_fd = -1;
     return false;
   }
 
   if (v4l1_ioctl(m_fd, VIDIOCGPICT, &m_pict) < 0) {
-    myDebug() << "v4l: ioctl VIDIOCGPICT failed" << endl;
+    myDebug() << "v4l: ioctl VIDIOCGPICT failed";
     v4l1_close(m_fd);
     m_fd = -1;
     return false;
@@ -205,7 +205,7 @@ bool barcode_v4l::grab_init()
     m_pict.depth=8;
     m_pict.palette=VIDEO_PALETTE_GREY;    /* 8bit grey */
     if (v4l1_ioctl(m_fd, VIDIOCSPICT, &m_pict) < 0) {
-      myDebug() << "v4l: Unable to find a supported capture format." << endl;
+      myDebug() << "v4l: Unable to find a supported capture format.";
       v4l1_close(m_fd);
       m_fd = -1;
       return false;
@@ -214,7 +214,7 @@ bool barcode_v4l::grab_init()
     m_pict.depth=24;
     m_pict.palette=VIDEO_PALETTE_RGB24;
     if (v4l1_ioctl(m_fd, VIDIOCSPICT, &m_pict) < 0) {
-      myDebug() << "v4l: Unable to find a supported capture format." << endl;
+      myDebug() << "v4l: Unable to find a supported capture format.";
       v4l1_close(m_fd);
       m_fd = -1;
       return false;
@@ -225,7 +225,7 @@ bool barcode_v4l::grab_init()
   video_picture temp;
   v4l1_ioctl(m_fd, VIDIOCGPICT, &temp);
   if ((temp.depth != m_pict.depth) || (temp.palette != m_pict.palette)) {
-    myDebug() << "v4l: Unable to find a supported capture format." << endl;
+    myDebug() << "v4l: Unable to find a supported capture format.";
     v4l1_close(m_fd);
     m_fd = -1;
     return false;
