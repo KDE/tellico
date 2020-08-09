@@ -314,6 +314,17 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setCategory(i18n("Publishing"));
       field->setDescription(i18n("International Standard Book Number"));
       break;
+    case PegiField:
+      QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+                         .split(QRegExp(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
+#else
+                         .split(QRegExp(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
+#endif
+      field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
+      field->setCategory(i18n("General"));
+      field->setFlags(Data::Field::AllowGrouped);
+      break;
   }
   Q_ASSERT(field);
   return field;
