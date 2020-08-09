@@ -297,7 +297,11 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-    QStringList allowed = attValue(atts_, "allowed").split(QRegExp(QLatin1String("\\s*;\\s*")), QString::SkipEmptyParts);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), QString::SkipEmptyParts);
+#else
+    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), QString::SkipEmptyParts);
+#endif
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
         (*word) = i18n((*word).toUtf8().constData());
@@ -621,7 +625,11 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   if(d->textBuffer.isEmpty()) {
     d->textBuffer = QStringLiteral("--");
   }
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   QStringList tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
+#else
+  QStringList tokens = d->textBuffer.split(QLatin1Char('-'), Qt::KeepEmptyParts);
+#endif
   Q_ASSERT(tokens.size() == 3);
   if(localName_ == QLatin1String("year")) {
     tokens[0] = d->text;

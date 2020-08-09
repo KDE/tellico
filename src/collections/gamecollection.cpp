@@ -89,7 +89,11 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   QStringList cert = i18nc("Video game ratings - "
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending",
                            "Unrated, Adults Only, Mature, Teen, Everyone 10+, Everyone, Early Childhood, Pending")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
                      .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+#else
+                     .split(QRegExp(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
+#endif
   field = new Field(QStringLiteral("certification"), i18n("ESRB Rating"), cert);
   field->setCategory(i18n(game_general));
   field->setFlags(Field::AllowGrouped);

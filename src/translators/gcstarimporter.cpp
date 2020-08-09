@@ -280,7 +280,11 @@ void GCstarImporter::readGCstar(const QString& text_) {
 
 inline
 QString GCstarImporter::splitJoin(const QRegExp& rx, const QString& s) {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   return s.split(rx, QString::SkipEmptyParts).join(FieldFormat::delimiterString());
+#else
+  return s.split(rx, Qt::SkipEmptyParts).join(FieldFormat::delimiterString());
+#endif
 }
 
 void GCstarImporter::slotCancel() {

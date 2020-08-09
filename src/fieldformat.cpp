@@ -57,20 +57,33 @@ QString FieldFormat::rowDelimiterString() {
   return QChar(0x2028);
 }
 
-QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_, QString::SplitBehavior behavior_) {
+QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_) {
   if(string_.isEmpty()) {
     return QStringList();
   }
-  return parsing_ == StringSplit ? string_.split(delimiterString(), behavior_)
-                                 : string_.split(delimiterRegExp(), behavior_);
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  return parsing_ == StringSplit ? string_.split(delimiterString(), QString::KeepEmptyParts)
+                                 : string_.split(delimiterRegExp(), QString::KeepEmptyParts);
+#else
+  return parsing_ == StringSplit ? string_.split(delimiterString(), Qt::KeepEmptyParts)
+                                 : string_.split(delimiterRegExp(), Qt::KeepEmptyParts);
+#endif
 }
 
-QStringList FieldFormat::splitRow(const QString& string_, QString::SplitBehavior behavior_) {
-  return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), behavior_);
+QStringList FieldFormat::splitRow(const QString& string_) {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), QString::KeepEmptyParts);
+#else
+  return string_.isEmpty() ? QStringList() : string_.split(columnDelimiterString(), Qt::KeepEmptyParts);
+#endif
 }
 
-QStringList FieldFormat::splitTable(const QString& string_, QString::SplitBehavior behavior_) {
-  return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), behavior_);
+QStringList FieldFormat::splitTable(const QString& string_) {
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
+  return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), QString::KeepEmptyParts);
+#else
+  return string_.isEmpty() ? QStringList() : string_.split(rowDelimiterString(), Qt::KeepEmptyParts);
+#endif
 }
 
 QString FieldFormat::sortKeyTitle(const QString& title_) {
@@ -199,7 +212,11 @@ QString FieldFormat::name(const QString& name_, Options opt_) {
   }
 
   // split the name by white space and commas
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   QStringList words = name.split(spaceComma, QString::SkipEmptyParts);
+#else
+  QStringList words = name.split(spaceComma, Qt::SkipEmptyParts);
+#endif
   // psycho case where name == ","
   if(words.isEmpty()) {
     return name;

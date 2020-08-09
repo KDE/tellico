@@ -99,7 +99,11 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
                             "Almost Uncirculated-55,Almost Uncirculated-50,"
                             "Extremely Fine-40,Very Fine-30,Very Fine-20,Fine-12,"
                             "Very Good-8,Good-4,Fair")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
                       .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+#else
+                      .split(QRegExp(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
+#endif
   field = new Field(QStringLiteral("grade"), i18n("Grade"), grade);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);
@@ -108,7 +112,11 @@ Tellico::Data::FieldList CoinCollection::defaultFields() {
   QStringList service = i18nc("Coin grading services - "
                               "PCGS,NGC,ANACS,ICG,ASA,PCI",
                               "PCGS,NGC,ANACS,ICG,ASA,PCI")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
                         .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+#else
+                        .split(QRegExp(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
+#endif
   field = new Field(QStringLiteral("service"), i18n("Grading Service"), service);
   field->setCategory(i18n(coin_general));
   field->setFlags(Field::AllowGrouped);

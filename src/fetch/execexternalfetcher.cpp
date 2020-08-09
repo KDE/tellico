@@ -68,14 +68,22 @@ QStringList ExecExternalFetcher::parseArguments(const QString& str_) {
   int pos = 0;
   for(int nextPos = quotes.indexIn(str_); nextPos > -1; pos = nextPos+1, nextPos = quotes.indexIn(str_, pos)) {
     // a non-quotes arguments runs from pos to nextPos
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
     args += str_.mid(pos, nextPos-pos).split(spaces, QString::SkipEmptyParts);
+#else
+    args += str_.mid(pos, nextPos-pos).split(spaces, Qt::SkipEmptyParts);
+#endif
     // move nextpos marker to end of match
     pos = quotes.pos(2); // skip quotation mark
     nextPos += quotes.matchedLength();
     args += str_.mid(pos, nextPos-pos-1);
   }
   // catch the end stuff
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   args += str_.mid(pos).split(spaces, QString::SkipEmptyParts);
+#else
+  args += str_.mid(pos).split(spaces, Qt::SkipEmptyParts);
+#endif
 
   return args;
 }

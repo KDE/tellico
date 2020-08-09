@@ -68,12 +68,9 @@ public:
    */
   enum SplitParsing { StringSplit, RegExpSplit };
   static QStringList splitValue(const QString& string,
-                                SplitParsing parsing = RegExpSplit,
-                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
-  static QStringList splitRow(const QString& string,
-                              QString::SplitBehavior behavior = QString::KeepEmptyParts);
-  static QStringList splitTable(const QString& string,
-                                QString::SplitBehavior behavior = QString::KeepEmptyParts);
+                                SplitParsing parsing = RegExpSplit);
+  static QStringList splitRow(const QString& string);
+  static QStringList splitTable(const QString& string);
  /**
    * Returns the delimiter used to split field values
    *

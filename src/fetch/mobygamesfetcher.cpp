@@ -410,7 +410,11 @@ void MobyGamesFetcher::slotComplete(KJob* job_) {
   Data::CollPtr coll(new Data::GameCollection(true));
   if(optionalFields().contains(QStringLiteral("pegi"))) {
     QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
+#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
                                     .split(QRegExp(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
+#else
+                                    .split(QRegExp(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
+#endif
     Data::FieldPtr field(new Data::Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi));
     field->setFlags(Data::Field::AllowGrouped);
     field->setCategory(i18n("General"));
