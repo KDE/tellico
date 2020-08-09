@@ -41,6 +41,7 @@
 
 #include <QTest>
 #include <QStandardPaths>
+#include <QRandomGenerator>
 
 QTEST_GUILESS_MAIN( CollectionTest )
 
@@ -686,7 +687,7 @@ void CollectionTest::testMergeBenchmark() {
     entriesToAdd.clear();
     for(int i = 0; i < 500; ++i) {
       Tellico::Data::EntryPtr entryToAdd(new Tellico::Data::Entry(coll2));
-      entryToAdd->setField(QStringLiteral("title"), QString::number(qrand()));
+      entryToAdd->setField(QStringLiteral("title"), QString::number(QRandomGenerator::global()->generate()));
       entryToAdd->setField(QStringLiteral("studio"), QString::number(i));
       entriesToAdd += entryToAdd;
     }
