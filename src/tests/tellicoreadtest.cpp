@@ -191,7 +191,10 @@ void TellicoReadTest::testTableData() {
   QStringList groups = e3->groupNamesByFieldName(QStringLiteral("table"));
   QCOMPARE(groups.count(), 3);
   // the order of the group names is not stable (it uses QSet::toList)
-  QCOMPARE(groups.toSet(), QSet<QString>() << QSL("11a") << QSL("11b") << QSL("21"));
+  QCOMPARE(groups.size(), 3);
+  QVERIFY(groups.contains(QSL("11a")));
+  QVERIFY(groups.contains(QSL("11b")));
+  QVERIFY(groups.contains(QSL("21")));
 
   // test having empty value in table
   Tellico::Data::EntryPtr e = coll2->entryById(2);
