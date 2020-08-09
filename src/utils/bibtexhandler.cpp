@@ -218,7 +218,7 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   const QStringList tokens = text.split(QLatin1Char('#'), QString::KeepEmptyParts);
 #else
-  const QStringList tokens = text.split(QLatin1Char('#'), QString::KeepEmptyParts);
+  const QStringList tokens = text.split(QLatin1Char('#'), Qt::KeepEmptyParts);
 #endif
   foreach(const QString& token, tokens) {
     // check to see if token is a macro
