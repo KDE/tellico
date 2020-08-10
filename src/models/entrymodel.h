@@ -62,10 +62,11 @@ public:
   void modifyEntries(const Data::EntryList& entries);
   void removeEntries(const Data::EntryList& entries);
 
-  void    setFields(const Data::FieldList& fields);
-  void    addFields(const Data::FieldList& fields);
-  void modifyField(Data::FieldPtr oldField, Data::FieldPtr newField);
-  void removeFields(const Data::FieldList& fields);
+  void     setFields(const Data::FieldList& fields);
+  void reorderFields(const Data::FieldList& fields);
+  void     addFields(const Data::FieldList& fields);
+  void   modifyField(Data::FieldPtr oldField, Data::FieldPtr newField);
+  void  removeFields(const Data::FieldList& fields);
 
   QModelIndex indexFromEntry(Data::EntryPtr entry) const;
 

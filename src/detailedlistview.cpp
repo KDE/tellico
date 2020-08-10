@@ -370,7 +370,7 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
     }
   }
 
-  sourceModel()->setFields(fields_);
+  sourceModel()->reorderFields(fields_);
 
   QList<int> currentColumnOrder;
   // now restore widths and order
@@ -383,6 +383,7 @@ void DetailedListView::reorderFields(const Tellico::Data::FieldList& fields_) {
         currentColumnOrder << ncol;
       }
     } else {
+      setColumnHidden(ncol, false);
       setColumnWidth(ncol, columnWidths.at(idx));
       currentColumnOrder << ncol;
     }
