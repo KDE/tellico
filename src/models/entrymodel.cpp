@@ -329,16 +329,43 @@ void EntryModel::removeEntries(const Tellico::Data::EntryList& entries_) {
 }
 
 void EntryModel::setFields(const Tellico::Data::FieldList& fields_) {
+  // if fields are being replaced, it's a full model reset
+  // if not, it's just adding columns
   if(!m_fields.isEmpty()) {
     beginResetModel();
-    m_fields.clear();
+    m_fields = fields_;
     endResetModel();
-  }
-  if(!fields_.isEmpty()) {
+  } else if(!fields_.isEmpty()) {
     beginInsertColumns(QModelIndex(), 0, fields_.size()-1);
     m_fields = fields_;
     endInsertColumns();
   }
+}
+
+void EntryModel::reorderFields(const Tellico::Data::FieldList& fields_) {
+  emit layoutAboutToBeChanged();
+  // update the persistent model indexes by building list of old index
+  // and new if the columns are moved
+  QModelIndexList oldPersistentList = persistentIndexList();
+  QModelIndexList fromList, toList;
+  for(int i = 0; i < m_fields.count(); ++i) {
+    const int j = fields_.indexOf(m_fields.at(i));
+    Q_ASSERT(j >= 0);
+    // old add the model index list if the columns are different
+    if(i != j) {
+      foreach(QModelIndex oldIndex, oldPersistentList) {
+        if(oldIndex.column() == i) {
+          fromList += oldIndex;
+          toList += createIndex(oldIndex.row(), j);
+        }
+      }
+    }
+  }
+
+  m_fields = fields_;
+
+  changePersistentIndexList(fromList, toList);
+  emit layoutChanged();
 }
 
 void EntryModel::addFields(const Tellico::Data::FieldList& fields_) {

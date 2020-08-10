@@ -1,3 +1,7 @@
+2020-08-10  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed column header visibility after reordering fields (Bug 422298).
+
 2020-08-07  Robby  <robby@periapsis.org>
 
 	* Released Tellico 3.3.2.
