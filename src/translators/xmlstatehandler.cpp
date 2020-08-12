@@ -40,25 +40,21 @@
 namespace {
 
 inline
-QString attValue(const QXmlAttributes& atts, const char* name, const QString& defaultValue=QString()) {
-  int idx = atts.index(QLatin1String(name));
-  return idx < 0 ? defaultValue : atts.value(idx);
+QString attValue(const QXmlStreamAttributes& atts, const char* name, const QString& defaultValue=QString()) {
+  return atts.hasAttribute(QLatin1String(name)) ? atts.value(QLatin1String(name)).toString() : defaultValue;
 }
 
 inline
-QString attValue(const QXmlAttributes& atts, const char* name, const char* defaultValue) {
+QString attValue(const QXmlStreamAttributes& atts, const char* name, const char* defaultValue) {
   Q_ASSERT(defaultValue);
   return attValue(atts, name, QLatin1String(defaultValue));
 }
 
 inline
-QString realFieldName(int syntaxVersion, const QString& localName) {
-  QString fieldName = localName;
-  if(syntaxVersion < 2 && fieldName == QLatin1String("keywords")) {
-    // in version 2, "keywords" changed to "keyword"
-    fieldName = QStringLiteral("keyword");
-  }
-  return fieldName;
+QString realFieldName(int syntaxVersion, const QStringRef& localName) {
+  return (syntaxVersion < 2 && localName == QLatin1String("keywords")) ?
+    QStringLiteral("keyword") :
+    localName.toString();
 }
 
 }
@@ -88,22 +84,22 @@ using Tellico::Import::SAX::BorrowersHandler;
 using Tellico::Import::SAX::BorrowerHandler;
 using Tellico::Import::SAX::LoanHandler;
 
-StateHandler* StateHandler::nextHandler(const QString& ns_, const QString& localName_, const QString& qName_) {
-  StateHandler* handler = nextHandlerImpl(ns_, localName_, qName_);
+StateHandler* StateHandler::nextHandler(const QStringRef& ns_, const QStringRef& localName_) {
+  StateHandler* handler = nextHandlerImpl(ns_, localName_);
   if(!handler) {
     myWarning() << "no handler for" << localName_;
   }
   return handler ? handler : new NullHandler(d);
 }
 
-StateHandler* RootHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* RootHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("tellico") || localName_ == QLatin1String("bookcase")) {
     return new DocumentHandler(d);
   }
   return new RootHandler(d);
 }
 
-StateHandler* DocumentHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* DocumentHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("collection")) {
     return new CollectionHandler(d);
   } else if(localName_ == QLatin1String("filters")) {
@@ -114,17 +110,17 @@ StateHandler* DocumentHandler::nextHandlerImpl(const QString&, const QString& lo
   return nullptr;
 }
 
-bool DocumentHandler::start(const QString&, const QString& localName_, const QString&, const QXmlAttributes& atts_) {
+bool DocumentHandler::start(const QStringRef&, const QStringRef& localName_, const QXmlStreamAttributes& atts_) {
   // the syntax version field name changed from "version" to "syntaxVersion" in version 3
-  int idx = atts_.index(QLatin1String("syntaxVersion"));
-  if(idx < 0) {
-    idx = atts_.index(QLatin1String("version"));
+  QStringRef syntaxVersion = atts_.value(QLatin1String("syntaxVersion"));
+  if(syntaxVersion.isEmpty()) {
+    syntaxVersion = atts_.value(QLatin1String("version"));
+    if(syntaxVersion.isEmpty()) {
+      myWarning() << "no syntax version";
+      return false;
+    }
   }
-  if(idx < 0) {
-    myWarning() << "no syntax version";
-    return false;
-  }
-  d->syntaxVersion = atts_.value(idx).toUInt();
+  d->syntaxVersion = syntaxVersion.toUInt();
   if(d->syntaxVersion > Tellico::XML::syntaxVersion) {
     d->error = i18n("It is from a future version of Tellico.");
     return false;
@@ -139,11 +135,11 @@ bool DocumentHandler::start(const QString&, const QString& localName_, const QSt
   return true;
 }
 
-bool DocumentHandler::end(const QString&, const QString&, const QString&) {
+bool DocumentHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-StateHandler* CollectionHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* CollectionHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if((d->syntaxVersion > 3 && localName_ == QLatin1String("fields")) ||
      (d->syntaxVersion < 4 && localName_ == QLatin1String("attributes"))) {
     return new FieldsHandler(d);
@@ -159,18 +155,23 @@ StateHandler* CollectionHandler::nextHandlerImpl(const QString&, const QString& 
   return nullptr;
 }
 
-bool CollectionHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool CollectionHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   d->collTitle = attValue(atts_, "title");
-  d->collType = attValue(atts_, "type").toInt();
-  d->entryName = attValue(atts_, "unit");
-  // for error recovery, assume entry name is default if empty for now
-  if(d->entryName.isEmpty()) {
+  d->collType = atts_.value(QLatin1String("type")).toInt();
+  if(d->syntaxVersion > 6) {
     d->entryName = QStringLiteral("entry");
+  } else {
+    // old attribute
+    d->entryName = attValue(atts_, "unit");
+    // for error recovery, assume entry name is default if empty for now
+    if(d->entryName.isEmpty()) {
+      d->entryName = QLatin1String("entry");
+    }
   }
   return true;
 }
 
-bool CollectionHandler::end(const QString&, const QString&, const QString&) {
+bool CollectionHandler::end(const QStringRef&, const QStringRef&) {
   if(!d->coll) {
     myWarning() << "no collection created";
     return false;
@@ -218,7 +219,7 @@ bool CollectionHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* FieldsHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FieldsHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if((d->syntaxVersion > 3 && localName_ == QLatin1String("field")) ||
      (d->syntaxVersion < 4 && localName_ == QLatin1String("attribute"))) {
     return new FieldHandler(d);
@@ -226,12 +227,12 @@ StateHandler* FieldsHandler::nextHandlerImpl(const QString&, const QString& loca
   return nullptr;
 }
 
-bool FieldsHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool FieldsHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   d->defaultFields = false;
   return true;
 }
 
-bool FieldsHandler::end(const QString&, const QString&, const QString&) {
+bool FieldsHandler::end(const QStringRef&, const QStringRef&) {
   // add default fields if there was a default field name, or no names at all
   const bool addFields = d->defaultFields || d->fields.isEmpty();
   // in syntax 4, the element name was changed to "entry", always, rather than depending on
@@ -270,18 +271,18 @@ bool FieldsHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* FieldHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FieldHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("prop")) {
     return new FieldPropertyHandler(d);
   }
   return nullptr;
 }
 
-bool FieldHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   // special case: if the i18n attribute equals true, then translate the title, description, category, and allowed
-  const bool isI18n = attValue(atts_, "i18n") == QLatin1String("true");
+  const bool isI18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
 
-  QString name = attValue(atts_, "name", "unknown");
+  const QString name = attValue(atts_, "name", "unknown");
   if(name == QLatin1String("_default")) {
     d->defaultFields = true;
     return true;
@@ -312,53 +313,44 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
     field = new Data::Field(name, title, type);
   }
 
-  int idx = atts_.index(QLatin1String("category"));
-  if(idx > -1) {
-    // at one point, the categories had keyboard accels
-    QString cat = atts_.value(idx);
-    if(d->syntaxVersion < 9) {
-      cat.remove(QLatin1Char('&'));
-    }
-    if(isI18n) {
-      cat = i18n(cat.toUtf8().constData());
-    }
-    field->setCategory(cat);
+  QString cat = attValue(atts_, "category");
+  // at one point, the categories had keyboard accels
+  if(d->syntaxVersion < 9) {
+    cat.remove(QLatin1Char('&'));
+  }
+  if(isI18n) {
+    cat = i18n(cat.toUtf8().constData());
+  }
+  field->setCategory(cat);
+
+  int flags = atts_.value(QLatin1String("flags")).toInt();
+  // I also changed the enum values for syntax 3, but the only custom field
+  // would have been bibtex-id
+  if(d->syntaxVersion < 3 && name == QLatin1String("bibtex-id")) {
+    flags = 0;
   }
 
-  idx = atts_.index(QLatin1String("flags"));
-  if(idx > -1) {
-    int flags = atts_.value(idx).toInt();
-    // I also changed the enum values for syntax 3, but the only custom field
-    // would have been bibtex-id
-    if(d->syntaxVersion < 3 && name == QLatin1String("bibtex-id")) {
-      flags = 0;
-    }
-
-    // in syntax version 4, added a flag to disallow deleting attributes
-    // if it's a version before that and is the title, then add the flag
-    if(d->syntaxVersion < 4 && name == QLatin1String("title")) {
-      flags |= Data::Field::NoDelete;
-    }
-    // some of the flags may have been set in the constructor
-    // in the case of old Dependent fields changing, for example
-    // so combine with the existing flags
-    field->setFlags(field->flags() | flags);
+  // in syntax version 4, added a flag to disallow deleting attributes
+  // if it's a version before that and is the title, then add the flag
+  if(d->syntaxVersion < 4 && name == QLatin1String("title")) {
+    flags |= Data::Field::NoDelete;
   }
+  // some of the flags may have been set in the constructor
+  // in the case of old Dependent fields changing, for example
+  // so combine with the existing flags
+  field->setFlags(field->flags() | flags);
 
   QString formatStr = attValue(atts_, "format", QString::number(FieldFormat::FormatNone));
   FieldFormat::Type formatType = static_cast<FieldFormat::Type>(formatStr.toInt());
   field->setFormatType(formatType);
 
-  idx = atts_.index(QLatin1String("description"));
-  if(idx > -1) {
-    QString desc = atts_.value(idx);
-    if(isI18n) {
-      desc = i18n(desc.toUtf8().constData());
-    }
-    field->setDescription(desc);
+  QString desc = attValue(atts_, "description");
+  if(isI18n) {
+    desc = i18n(desc.toUtf8().constData());
   }
+  field->setDescription(desc);
 
-  if(d->syntaxVersion < 5 && atts_.index(QLatin1String("bibtex-field")) > -1) {
+  if(d->syntaxVersion < 5 && atts_.hasAttribute(QLatin1String("bibtex-field"))) {
     field->setProperty(QStringLiteral("bibtex"), attValue(atts_, "bibtex-field"));
   }
 
@@ -371,7 +363,7 @@ bool FieldHandler::start(const QString&, const QString&, const QString&, const Q
   return true;
 }
 
-bool FieldHandler::end(const QString&, const QString&, const QString&) {
+bool FieldHandler::end(const QStringRef&, const QStringRef&) {
   // the value template for derived values used to be the field description
   // now it is the 'template' property
   // for derived value fields, if there is no property and the description has a '%'
@@ -391,7 +383,7 @@ bool FieldHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-bool FieldPropertyHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool FieldPropertyHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   // there should be at least one field already so we can add properties to it
   Q_ASSERT(!d->fields.isEmpty());
   Data::FieldPtr field = d->fields.back();
@@ -414,7 +406,7 @@ bool FieldPropertyHandler::start(const QString&, const QString&, const QString&,
   return true;
 }
 
-bool FieldPropertyHandler::end(const QString&, const QString&, const QString&) {
+bool FieldPropertyHandler::end(const QStringRef&, const QStringRef&) {
   Q_ASSERT(!m_propertyName.isEmpty());
   // add the previous property
   Data::FieldPtr field = d->fields.back();
@@ -422,11 +414,11 @@ bool FieldPropertyHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-bool BibtexPreambleHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool BibtexPreambleHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BibtexPreambleHandler::end(const QString&, const QString&, const QString&) {
+bool BibtexPreambleHandler::end(const QStringRef&, const QStringRef&) {
   Q_ASSERT(d->coll);
   if(d->coll && d->collType == Data::Collection::Bibtex && !d->text.isEmpty()) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(d->coll.data());
@@ -435,27 +427,27 @@ bool BibtexPreambleHandler::end(const QString&, const QString&, const QString&) 
   return true;
 }
 
-StateHandler* BibtexMacrosHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* BibtexMacrosHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("macro")) {
     return new BibtexMacroHandler(d);
   }
   return nullptr;
 }
 
-bool BibtexMacrosHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool BibtexMacrosHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BibtexMacrosHandler::end(const QString&, const QString&, const QString&) {
+bool BibtexMacrosHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-bool BibtexMacroHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool BibtexMacroHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   m_macroName = attValue(atts_, "name");
   return true;
 }
 
-bool BibtexMacroHandler::end(const QString&, const QString&, const QString&) {
+bool BibtexMacroHandler::end(const QStringRef&, const QStringRef&) {
   if(d->coll && d->collType == Data::Collection::Bibtex && !m_macroName.isEmpty() && !d->text.isEmpty()) {
     Data::BibtexCollection* c = static_cast<Data::BibtexCollection*>(d->coll.data());
     c->addMacro(m_macroName, d->text);
@@ -463,14 +455,14 @@ bool BibtexMacroHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* EntryHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* EntryHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
 }
 
-bool EntryHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool EntryHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   // the entries must come after the fields
   if(!d->coll || d->coll->fields().isEmpty()) {
     // special case for very old versions which did not have user-editable fields
@@ -478,12 +470,11 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
     d->defaultFields = true;
     FieldsHandler handler(d);
     // fake the end of a fields element, which will add the default fields
-    handler.end(QString(), QString(), QString());
-
+    handler.end(QStringRef(), QStringRef());
     myWarning() << "entries should come after fields are defined, attempting to recover";
   }
   bool ok;
-  const int id = attValue(atts_, "id").toInt(&ok);
+  const int id = atts_.value(QLatin1String("id")).toInt(&ok);
   Data::EntryPtr entry;
   if(ok && id > -1) {
     entry = new Data::Entry(d->coll, id);
@@ -494,7 +485,7 @@ bool EntryHandler::start(const QString&, const QString&, const QString&, const Q
   return true;
 }
 
-bool EntryHandler::end(const QString&, const QString&, const QString&) {
+bool EntryHandler::end(const QStringRef&, const QStringRef&) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
   if(!d->modifiedDate.isEmpty() && d->coll->hasField(QStringLiteral("mdate"))) {
@@ -504,22 +495,22 @@ bool EntryHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* FieldValueContainerHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FieldValueContainerHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(d->coll->hasField(realFieldName(d->syntaxVersion, localName_))) {
     return new FieldValueHandler(d);
   }
   return new FieldValueContainerHandler(d);
 }
 
-bool FieldValueContainerHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool FieldValueContainerHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool FieldValueContainerHandler::end(const QString&, const QString&, const QString&) {
+bool FieldValueContainerHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FieldValueHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("year") ||
      localName_ == QLatin1String("month") ||
      localName_ == QLatin1String("day")) {
@@ -530,21 +521,22 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
   return nullptr;
 }
 
-bool FieldValueHandler::start(const QString&, const QString& localName_, const QString&, const QXmlAttributes& atts_) {
+bool FieldValueHandler::start(const QStringRef&, const QStringRef& localName_, const QXmlStreamAttributes& atts_) {
   d->currentField = d->coll->fieldByName(realFieldName(d->syntaxVersion, localName_));
-  m_i18n = attValue(atts_, "i18n") == QLatin1String("true");
+  Q_ASSERT(d->currentField);
+  m_i18n = atts_.value(QLatin1String("i18n")) == QLatin1String("true");
   m_validateISBN = (localName_ == QLatin1String("isbn")) &&
-                   (attValue(atts_, "validate") != QLatin1String("no"));
+                   (atts_.value(QLatin1String("validate")) != QLatin1String("no"));
   return true;
 }
 
-bool FieldValueHandler::end(const QString&, const QString& localName_, const QString&) {
+bool FieldValueHandler::end(const QStringRef&, const QStringRef& localName_) {
   Data::EntryPtr entry = d->entries.back();
   Q_ASSERT(entry);
-  QString fieldName = realFieldName(d->syntaxVersion, localName_);
+  QString fieldName = d->currentField ? d->currentField->name() : realFieldName(d->syntaxVersion, localName_);
   QString fieldValue = d->text;
 
-  Data::FieldPtr f = d->coll->fieldByName(fieldName);
+  Data::FieldPtr f = d->currentField;
   if(!f) {
     myWarning() << "no field named " << fieldName;
     return true;
@@ -597,12 +589,14 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
     val.fixup(fieldValue);
   }
   // for fields with multiple values, we need to add on the new value
-  QString oldValue = entry->field(fieldName);
-  if(!oldValue.isEmpty()) {
-    if(f->type() == Data::Field::Table) {
-      fieldValue = oldValue + FieldFormat::rowDelimiterString() + fieldValue;
-    } else if(f->hasFlag(Data::Field::AllowMultiple)) {
-      fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
+  if(f->type() == Data::Field::Table || f->hasFlag(Data::Field::AllowMultiple)) {
+    QString oldValue = entry->field(fieldName);
+    if(!oldValue.isEmpty()) {
+      if(f->type() == Data::Field::Table) {
+        fieldValue = oldValue + FieldFormat::rowDelimiterString() + fieldValue;
+      } else {
+        fieldValue = oldValue + FieldFormat::delimiterString() + fieldValue;
+      }
     }
   }
   // since the modified date value in the entry gets changed every time we set a new value
@@ -616,21 +610,26 @@ bool FieldValueHandler::end(const QString&, const QString& localName_, const QSt
   return true;
 }
 
-bool DateValueHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool DateValueHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool DateValueHandler::end(const QString&, const QString& localName_, const QString&) {
-  // the data value is y-m-d even if there are no date values
+bool DateValueHandler::end(const QStringRef&, const QStringRef& localName_) {
+  QStringList tokens;
   if(d->textBuffer.isEmpty()) {
-    d->textBuffer = QStringLiteral("--");
-  }
+    // the data value is y-m-d even if there are no date values, so create list of blank tokens
+    tokens = QStringList() << QString() << QString() << QString();
+  } else {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-  QStringList tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
+    tokens = d->textBuffer.split(QLatin1Char('-'), QString::KeepEmptyParts);
 #else
-  QStringList tokens = d->textBuffer.split(QLatin1Char('-'), Qt::KeepEmptyParts);
+    tokens = d->textBuffer.split(QLatin1Char('-'), Qt::KeepEmptyParts);
 #endif
+  }
   Q_ASSERT(tokens.size() == 3);
+  while(tokens.size() < 3) {
+    tokens += QString();
+  }
   if(localName_ == QLatin1String("year")) {
     tokens[0] = d->text;
   } else if(localName_ == QLatin1String("month")) {
@@ -650,11 +649,11 @@ bool DateValueHandler::end(const QString&, const QString& localName_, const QStr
   return true;
 }
 
-bool TableColumnHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool TableColumnHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
+bool TableColumnHandler::end(const QStringRef&, const QStringRef&) {
   // for old collections, if the second column holds the track length, bump it to next column
   if(d->syntaxVersion < 9 &&
      d->coll->type() == Data::Collection::Album &&
@@ -672,35 +671,35 @@ bool TableColumnHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* ImagesHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* ImagesHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("image")) {
     return new ImageHandler(d);
   }
   return nullptr;
 }
 
-bool ImagesHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool ImagesHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   // reset variable that gets updated in the image handler
   d->hasImages = false;
   return true;
 }
 
-bool ImagesHandler::end(const QString&, const QString&, const QString&) {
+bool ImagesHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-bool ImageHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool ImageHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   m_format = attValue(atts_, "format");
-  m_link = attValue(atts_, "link") == QLatin1String("true");
+  m_link = atts_.value(QLatin1String("link")) == QLatin1String("true");
   // idClean() already calls shareString()
   m_imageId = m_link ? shareString(attValue(atts_, "id"))
                      : Data::Image::idClean(attValue(atts_, "id"));
-  m_width = attValue(atts_, "width").toInt();
-  m_height = attValue(atts_, "height").toInt();
+  m_width = atts_.value(QLatin1String("width")).toInt();
+  m_height = atts_.value(QLatin1String("height")).toInt();
   return true;
 }
 
-bool ImageHandler::end(const QString&, const QString&, const QString&) {
+bool ImageHandler::end(const QStringRef&, const QStringRef&) {
   bool needToAddInfo = true;
   if(d->loadImages && !d->text.isEmpty()) {
     QByteArray ba = QByteArray::fromBase64(d->text.toLatin1());
@@ -721,39 +720,39 @@ bool ImageHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-StateHandler* FiltersHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FiltersHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("filter")) {
     return new FilterHandler(d);
   }
   return nullptr;
 }
 
-bool FiltersHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool FiltersHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool FiltersHandler::end(const QString&, const QString&, const QString&) {
+bool FiltersHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-StateHandler* FilterHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* FilterHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("rule")) {
     return new FilterRuleHandler(d);
   }
   return nullptr;
 }
 
-bool FilterHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool FilterHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   d->filter = new Filter(Filter::MatchAny);
   d->filter->setName(attValue(atts_, "name"));
 
-  if(attValue(atts_, "match") == QLatin1String("all")) {
+  if(atts_.value(QLatin1String("match")) == QLatin1String("all")) {
     d->filter->setMatch(Filter::MatchAll);
   }
   return true;
 }
 
-bool FilterHandler::end(const QString&, const QString&, const QString&) {
+bool FilterHandler::end(const QStringRef&, const QStringRef&) {
   if(d->coll && !d->filter->isEmpty()) {
     d->coll->addFilter(d->filter);
   }
@@ -761,7 +760,7 @@ bool FilterHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-bool FilterRuleHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool FilterRuleHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   QString field = attValue(atts_, "field");
   // empty field means match any of them
   QString pattern = attValue(atts_, "pattern");
@@ -801,33 +800,33 @@ bool FilterRuleHandler::start(const QString&, const QString&, const QString&, co
   return true;
 }
 
-bool FilterRuleHandler::end(const QString&, const QString&, const QString&) {
+bool FilterRuleHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-StateHandler* BorrowersHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* BorrowersHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("borrower")) {
     return new BorrowerHandler(d);
   }
   return nullptr;
 }
 
-bool BorrowersHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes&) {
+bool BorrowersHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes&) {
   return true;
 }
 
-bool BorrowersHandler::end(const QString&, const QString&, const QString&) {
+bool BorrowersHandler::end(const QStringRef&, const QStringRef&) {
   return true;
 }
 
-StateHandler* BorrowerHandler::nextHandlerImpl(const QString&, const QString& localName_, const QString&) {
+StateHandler* BorrowerHandler::nextHandlerImpl(const QStringRef&, const QStringRef& localName_) {
   if(localName_ == QLatin1String("loan")) {
     return new LoanHandler(d);
   }
   return nullptr;
 }
 
-bool BorrowerHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool BorrowerHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   QString name = attValue(atts_, "name");
   QString uid = attValue(atts_, "uid");
   d->borrower = new Data::Borrower(name, uid);
@@ -835,7 +834,7 @@ bool BorrowerHandler::start(const QString&, const QString&, const QString&, cons
   return true;
 }
 
-bool BorrowerHandler::end(const QString&, const QString&, const QString&) {
+bool BorrowerHandler::end(const QStringRef&, const QStringRef&) {
   if(d->coll && !d->borrower->isEmpty()) {
     d->coll->addBorrower(d->borrower);
   }
@@ -843,16 +842,16 @@ bool BorrowerHandler::end(const QString&, const QString&, const QString&) {
   return true;
 }
 
-bool LoanHandler::start(const QString&, const QString&, const QString&, const QXmlAttributes& atts_) {
+bool LoanHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamAttributes& atts_) {
   m_id = attValue(atts_, "entryRef").toInt();
   m_uid = attValue(atts_, "uid");
   m_loanDate = attValue(atts_, "loanDate");
   m_dueDate = attValue(atts_, "dueDate");
-  m_inCalendar = attValue(atts_, "calendar") == QLatin1String("true");
+  m_inCalendar = atts_.value(QLatin1String("calendar")) == QLatin1String("true");
   return true;
 }
 
-bool LoanHandler::end(const QString&, const QString&, const QString&) {
+bool LoanHandler::end(const QStringRef&, const QStringRef&) {
   Data::EntryPtr entry = d->coll->entryById(m_id);
   if(!entry) {
     myWarning() << "no entry with id = " << m_id;

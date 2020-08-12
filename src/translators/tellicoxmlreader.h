@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,28 +22,25 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_IMPORT_TELLICOXMLHANDLER_H
-#define TELLICO_IMPORT_TELLICOXMLHANDLER_H
+#ifndef TELLICO_TELLICOXMLREADER_H
+#define TELLICO_TELLICOXMLREADER_H
 
 #include "xmlstatehandler.h"
 
+#include <QXmlStreamReader>
 #include <QStack>
 
 namespace Tellico {
   namespace Import {
 
-class TellicoXMLHandler : public QXmlDefaultHandler {
+class TellicoXmlReader {
 public:
-  TellicoXMLHandler();
-  ~TellicoXMLHandler();
+  TellicoXmlReader();
+  ~TellicoXmlReader();
 
-  virtual bool startElement(const QString& namespaceURI, const QString& localName,
-                            const QString& qName, const QXmlAttributes& atts) Q_DECL_OVERRIDE;
-  virtual bool endElement(const QString& namespaceURI, const QString& localName,
-                          const QString& qName) Q_DECL_OVERRIDE;
-  virtual bool characters(const QString& ch) Q_DECL_OVERRIDE;
-
-  virtual QString errorString() const Q_DECL_OVERRIDE;
+  bool readNext(const QByteArray& data);
+  QString errorString() const;
+  bool isNotWellFormed() const;
 
   Data::CollPtr collection() const;
   bool hasImages() const;
@@ -51,12 +48,14 @@ public:
   void setLoadImages(bool loadImages);
   void setShowImageLoadErrors(bool showImageErrors);
 
-  bool fatalError(const QXmlParseException& exception) Q_DECL_OVERRIDE;
-
 private:
+  void handleStart();
+  void handleEnd();
+  void handleCharacters();
+
+  QXmlStreamReader m_xml;
   QStack<SAX::StateHandler*> m_handlers;
   SAX::StateData* m_data;
-  QString m_errorString;
 };
 
   }

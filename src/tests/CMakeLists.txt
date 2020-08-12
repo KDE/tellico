@@ -104,7 +104,7 @@ SET(translatorstest_SRCS
   ../translators/textimporter.cpp
   ../translators/dataimporter.cpp
   ../translators/importer.cpp
-  ../translators/tellicoxmlhandler.cpp
+  ../translators/tellicoxmlreader.cpp
   ../translators/tellico_xml.cpp
   ../translators/xmlstatehandler.cpp
   ../translators/xslthandler.cpp
@@ -179,7 +179,7 @@ add_executable(tellicomodeltest tellicomodeltest.cpp modeltest.cpp
   ../translators/tellicoxmlexporter.cpp
   ../translators/tellicozipexporter.cpp
   ../translators/exporter.cpp
-  ../translators/tellicoxmlhandler.cpp
+  ../translators/tellicoxmlreader.cpp
   ../translators/tellico_xml.cpp
   ../translators/xmlstatehandler.cpp
 )
