@@ -410,3 +410,13 @@ void TellicoReadTest::testNoCreationDate() {
   QCOMPARE(entry->field(QStringLiteral("cdate")), mdate);
   QCOMPARE(entry->field(QStringLiteral("mdate")), mdate);
 }
+
+void TellicoReadTest::testFutureVersion() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/future_version.xml")));
+
+  Tellico::Import::TellicoImporter importer(url);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(!coll);
+  QVERIFY(!importer.statusMessage().isEmpty());
+}

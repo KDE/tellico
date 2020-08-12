@@ -90,9 +90,9 @@ void TellicoXMLHandler::setShowImageLoadErrors(bool showImageErrors_) {
 }
 
 bool TellicoXMLHandler::fatalError(const QXmlParseException& exception_) {
-  m_errorString = QString::fromLatin1("Fatal parsing error: %1 in line %2, column %3")
-                  .arg(exception_.message())
+  m_errorString = QString::fromLatin1("Fatal parsing error in line %1, column %2. %3")
                   .arg(exception_.lineNumber())
-                  .arg(exception_.columnNumber());
+                  .arg(exception_.columnNumber())
+                  .arg(exception_.message());
   return false;
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tellico PUBLIC '-//Robby Stephenson/DTD Tellico V11.0//EN' 'http://periapsis.org/tellico/dtd/v11/tellico.dtd'>
+<!-- use a syntax version of 99 for future -->
+<tellico xmlns="http://periapsis.org/tellico/" syntaxVersion="99">
+ <collection title="Future Syntax Version" type="4">
+  <fields>
+   <field name="_default"/>
+  </fields>
+  <entry id="2">
+   <title>CDate Test</title>
+  </entry>
+ </collection>
+</tellico>
