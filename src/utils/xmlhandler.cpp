@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2010 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2010-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -24,24 +24,25 @@
 
 #include "xmlhandler.h"
 
+#include <QRegularExpression>
 #include <QTextStream>
 #include <QXmlInputSource>
 
 using Tellico::XMLHandler;
 
 bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
-  static const QRegExp rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
+  static const QRegularExpression rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
   QTextStream stream(&text_);
   // at this point, we read the data into a QString and plan to later convert to utf-8
   // but the xml header might still indicate an encoding other than utf-8
   // so, just to be safe, if the xml header is the first line, ensure it is set to utf-8
   QString firstLine = stream.readLine();
-  if(rx.indexIn(firstLine) > -1) {
-    if(rx.cap(1).toLower() != QLatin1String("utf-8")) {
-      firstLine.replace(rx, QStringLiteral("encoding=\"utf-8\""));
-      text_ = firstLine + QLatin1Char('\n') + stream.readAll();
-      return true;
-    }
+  QRegularExpressionMatch match = rx.match(firstLine);
+  if(match.hasMatch() &&
+     match.capturedRef(1).compare(QLatin1String("utf-8"), Qt::CaseInsensitive) != 0) {
+    firstLine.replace(rx, QStringLiteral("encoding=\"utf-8\""));
+    text_ = firstLine + QLatin1Char('\n') + stream.readAll();
+    return true;
   }
   return false;
 }

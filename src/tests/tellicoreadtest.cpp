@@ -40,6 +40,7 @@
 #include <QTest>
 #include <QNetworkInterface>
 #include <QDate>
+#include <QTextCodec>
 
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
@@ -327,8 +328,18 @@ void TellicoReadTest::testXMLHandler_data() {
   QTest::newRow("basic") << QByteArray("<x>value</x>") << QStringLiteral("<x>value</x>") << false;
   QTest::newRow("utf8") << QByteArray("<?xml encoding=\"utf-8\"?>\n<x>value</x>")
                         << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << false;
+  QTest::newRow("UTF8") << QByteArray("<?xml encoding=\"UTF-8\"?>\n<x>value</x>")
+                        << QStringLiteral("<?xml encoding=\"UTF-8\"?>\n<x>value</x>") << false;
   QTest::newRow("latin1") << QByteArray("<?xml encoding=\"latin1\"?>\n<x>value</x>")
                           << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
+  QTest::newRow("LATIN1") << QByteArray("<?xml encoding=\"LATIN1\"?>\n<x>value</x>")
+                          << QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>value</x>") << true;
+
+  QString usa = QString::fromUtf8("США");
+  QTextCodec* cp1251 = QTextCodec::codecForName("cp1251");
+  QByteArray usaBytes = QByteArray("<?xml encoding=\"cp1251\"?>\n<x>") + cp1251->fromUnicode(usa) + QByteArray("</x>");
+  QString usaString = QStringLiteral("<?xml encoding=\"utf-8\"?>\n<x>") + usa + QStringLiteral("</x>");
+  QTest::newRow("cp1251") << usaBytes << usaString << true;
 }
 
 void TellicoReadTest::testXmlName() {
