@@ -63,7 +63,7 @@ void CollectorzTest::testBooks() {
   QCOMPARE(entry->field("pub_year"), QStringLiteral("2006"));
   QCOMPARE(entry->field("author"), QStringLiteral("Eric Flint"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Del Rey Book"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("0345465687"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0-345-46568-7"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Paperback"));
   QCOMPARE(entry->field("series"), QStringLiteral("Trail of Glory"));
   QCOMPARE(entry->field("series_num"), QStringLiteral("1"));

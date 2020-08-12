@@ -119,7 +119,7 @@ void GCstarTest::testComicBook() {
   QCOMPARE(entry->field("issue"), QStringLiteral("1"));
   QCOMPARE(FIELDS(entry, "writer").count(), 2);
   QCOMPARE(FIELDS(entry, "writer").first(), QStringLiteral("writer1"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("1234567890"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("1-23456-789-X"));
   QCOMPARE(entry->field("artist"), QStringLiteral("illustrator"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("publisher"));
   QCOMPARE(entry->field("colorist"), QStringLiteral("colourist"));

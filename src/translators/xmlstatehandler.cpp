@@ -530,7 +530,7 @@ StateHandler* FieldValueHandler::nextHandlerImpl(const QString&, const QString& 
   return nullptr;
 }
 
-bool FieldValueHandler::start(const QString&, const QString&, const QString& localName_, const QXmlAttributes& atts_) {
+bool FieldValueHandler::start(const QString&, const QString& localName_, const QString&, const QXmlAttributes& atts_) {
   d->currentField = d->coll->fieldByName(realFieldName(d->syntaxVersion, localName_));
   m_i18n = attValue(atts_, "i18n") == QLatin1String("true");
   m_validateISBN = (localName_ == QLatin1String("isbn")) &&

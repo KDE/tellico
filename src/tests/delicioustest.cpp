@@ -67,7 +67,7 @@ void DeliciousTest::testBooks1() {
   QCOMPARE(entry->field("pub_year"), QStringLiteral("1998"));
   QCOMPARE(entry->field("author"), QStringLiteral("Nicole Mones; Robby Stephenson"));
   QCOMPARE(entry->field("publisher"), QStringLiteral("Delacorte Press"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("0385319347"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0-385-31934-7"));
   QCOMPARE(entry->field("binding"), QStringLiteral("Hardback"));
   QCOMPARE(entry->field("keyword"), QStringLiteral("United States; Contemporary & Robby"));
   QCOMPARE(entry->field("pages"), QStringLiteral("384"));
@@ -89,7 +89,7 @@ void DeliciousTest::testBooks2() {
   Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Restaurant at the End of the Universe"));
-  QCOMPARE(entry->field("isbn"), QStringLiteral("0517545357"));
+  QCOMPARE(entry->field("isbn"), QStringLiteral("0-517-54535-7"));
   QCOMPARE(entry->field("cdate"), QStringLiteral("2007-12-19"));
   QCOMPARE(entry->field("mdate"), QStringLiteral("2009-06-11"));
   QCOMPARE(FIELDS(entry, "author").count(), 1);
