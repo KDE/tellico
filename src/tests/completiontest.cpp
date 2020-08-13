@@ -53,6 +53,7 @@ void CompletionTest::testMultiple() {
   QCOMPARE(result, QStringLiteral("Falcon 9"));
   result = cmp.makeCompletion(QStringLiteral("Atlas V; Fal"));
   QCOMPARE(result, QStringLiteral("Atlas V; Falcon 9"));
+  QVERIFY(!cmp.hasMultipleMatches());
   result = cmp.makeCompletion(QStringLiteral("Atlas V; New"));
   // matches first inserted
   QCOMPARE(result, QStringLiteral("Atlas V; New Shephard"));

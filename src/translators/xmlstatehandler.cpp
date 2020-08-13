@@ -298,11 +298,7 @@ bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamA
 
   Data::FieldPtr field;
   if(type == Data::Field::Choice) {
-#if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), QString::SkipEmptyParts);
-#else
-    QStringList allowed = attValue(atts_, "allowed").split(FieldFormat::delimiterRegExp(), Qt::SkipEmptyParts);
-#endif
+    QStringList allowed = FieldFormat::splitValue(attValue(atts_, "allowed"), FieldFormat::RegExpSplit);
     if(isI18n) {
       for(QStringList::Iterator word = allowed.begin(); word != allowed.end(); ++word) {
         (*word) = i18n((*word).toUtf8().constData());

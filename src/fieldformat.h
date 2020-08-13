@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,7 +27,7 @@
 
 #include <QString>
 #include <QStringList>
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace Tellico {
 
@@ -82,8 +82,8 @@ public:
    *
    * @return The delimiter regexp
    */
-  static QRegExp delimiterRegExp();
-  static QRegExp commaSplitRegExp();
+  static QRegularExpression delimiterRegularExpression();
+  static QRegularExpression commaSplitRegularExpression();
   static QString columnDelimiterString();
   static QString rowDelimiterString();
 

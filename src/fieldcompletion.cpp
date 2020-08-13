@@ -42,14 +42,14 @@ QString FieldCompletion::makeCompletion(const QString& string_) {
     return KCompletion::makeCompletion(string_);
   }
 
-  static QRegExp rx = FieldFormat::delimiterRegExp();
-  int pos = rx.lastIndexIn(string_);
-  if(pos == -1) {
+  static const QRegularExpression rx = FieldFormat::delimiterRegularExpression();
+  QRegularExpressionMatch match = rx.match(string_);
+  if(!match.hasMatch()) {
     m_beginText.clear();
     return KCompletion::makeCompletion(string_);
   }
 
-  pos += rx.matchedLength();
+  const int pos = match.capturedEnd();
   m_beginText = string_.mid(0, pos);
   // m_beginText is added back to the string in postProcessMatch
   return KCompletion::makeCompletion(string_.mid(pos));
