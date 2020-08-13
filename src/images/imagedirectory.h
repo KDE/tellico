@@ -29,6 +29,8 @@
 
 #include <QString>
 
+#include <memory>
+
 class QTemporaryDir;
 
 class KZip;
@@ -93,14 +95,14 @@ public:
   ImageZipArchive();
   virtual ~ImageZipArchive();
 
-  void setZip(KZip* zip);
+  void setZip(std::unique_ptr<KZip> zip);
 
   bool hasImage(const QString& id) Q_DECL_OVERRIDE;
   Data::Image* imageById(const QString& id) Q_DECL_OVERRIDE;
 
 private:
   Q_DISABLE_COPY(ImageZipArchive)
-  KZip* m_zip;
+  std::unique_ptr<KZip> m_zip;
   const KArchiveDirectory* m_imgDir;
   StringSet m_images;
 };

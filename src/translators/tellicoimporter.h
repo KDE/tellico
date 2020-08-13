@@ -29,6 +29,10 @@
 #include "../datavectors.h"
 #include "../utils/stringset.h"
 
+#include <KZip>
+
+#include <memory>
+
 class QBuffer;
 class KZip;
 class KArchiveDirectory;
@@ -75,7 +79,7 @@ public:
   bool loadImage(const QString& id_);
 
   // take ownership of zip object with images
-  KZip* takeImages();
+  std::unique_ptr<KZip> takeImages();
 
   static bool loadAllImages(const QUrl& url);
 
@@ -95,8 +99,9 @@ private:
   bool m_hasImages;
   StringSet m_images;
 
-  QBuffer* m_buffer;
-  KZip* m_zip;
+  std::unique_ptr<QBuffer> m_buffer;
+  std::unique_ptr<KZip> m_zip;
+  // no ownership of this pointer
   const KArchiveDirectory* m_imgDir;
 };
 

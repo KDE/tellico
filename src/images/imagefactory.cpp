@@ -33,6 +33,7 @@
 #include "../tellico_debug.h"
 
 #include <KColorUtils>
+#include <KZip>
 
 #include <QCache>
 #include <QFileInfo>
@@ -705,11 +706,11 @@ void ImageFactory::setLocalDirectory(const QUrl& url_) {
   }
 }
 
-void ImageFactory::setZipArchive(KZip* zip_) {
+void ImageFactory::setZipArchive(std::unique_ptr<KZip> zip_) {
   if(!zip_) {
     return;
   }
-  factory->d->imageZipArchive.setZip(zip_);
+  factory->d->imageZipArchive.setZip(std::move(zip_));
 }
 
 void ImageFactory::slotImageJobResult(KJob* job_) {

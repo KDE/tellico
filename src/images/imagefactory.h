@@ -33,6 +33,8 @@
 #include <QHash>
 #include <QPixmap>
 
+#include <memory>
+
 class KZip;
 class KJob;
 
@@ -164,7 +166,7 @@ public:
 
   static QString localDirectory(const QUrl& url);
   static void setLocalDirectory(const QUrl& url);
-  static void setZipArchive(KZip* zip);
+  static void setZipArchive(std::unique_ptr<KZip> zip);
 
   static ImageFactory* self();
 

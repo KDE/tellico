@@ -62,10 +62,6 @@ TellicoImporter::TellicoImporter(const QString& text_) : DataImporter(text_),
 }
 
 TellicoImporter::~TellicoImporter() {
-  delete m_zip;
-  m_zip = nullptr;
-  delete m_buffer;
-  m_buffer = nullptr;
 }
 
 Tellico::Data::CollPtr TellicoImporter::collection() {
@@ -170,36 +166,28 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
 }
 
 void TellicoImporter::loadZipData() {
-  delete m_buffer;
-  delete m_zip;
+  std::unique_ptr<KZip> zip;
+  std::unique_ptr<QBuffer> buffer;
   if(source() == URL) {
-    m_buffer = nullptr;
-    m_zip = new KZip(fileRef().fileName());
+    buffer.reset();
+    zip.reset(new KZip(fileRef().fileName()));
   } else {
     QByteArray allData = data();
-    m_buffer = new QBuffer(&allData);
-    m_zip = new KZip(m_buffer);
+    buffer.reset(new QBuffer(&allData));
+    zip.reset(new KZip(buffer.get()));
   }
-  if(!m_zip->open(QIODevice::ReadOnly)) {
+  if(!zip->open(QIODevice::ReadOnly)) {
     setStatusMessage(i18n(errorLoad, url().fileName()));
     m_format = Error;
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
 
-  const KArchiveDirectory* dir = m_zip->directory();
+  const KArchiveDirectory* dir = zip->directory();
   if(!dir) {
     QString str = i18n(errorLoad, url().fileName()) + QLatin1Char('\n');
     str += i18n("The file is empty.");
     setStatusMessage(str);
     m_format = Error;
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
 
@@ -213,10 +201,6 @@ void TellicoImporter::loadZipData() {
     str += i18n("The file contains no collection data.");
     setStatusMessage(str);
     m_format = Error;
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
 
@@ -229,29 +213,22 @@ void TellicoImporter::loadZipData() {
   }
   if(!m_coll) {
     m_format = Error;
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
 
   if(m_cancelled) {
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
 
   const KArchiveEntry* imgDirEntry = dir->entry(QStringLiteral("images"));
   if(!imgDirEntry || !imgDirEntry->isDirectory()) {
-    delete m_zip;
-    m_zip = nullptr;
-    delete m_buffer;
-    m_buffer = nullptr;
     return;
   }
+
+  // past the point of dropping errors, so retain ownership of the objects
+  m_zip = std::move(zip);
+  m_buffer = std::move(buffer);
+
   m_imgDir = static_cast<const KArchiveDirectory*>(imgDirEntry);
   m_images.clear();
   m_images.add(m_imgDir->entries());
@@ -308,10 +285,8 @@ bool TellicoImporter::loadImage(const QString& id_) {
   return !newID.isEmpty();
 }
 
-KZip* TellicoImporter::takeImages() {
-  KZip* zip = m_zip;
-  m_zip = nullptr;
-  return zip;
+std::unique_ptr<KZip> TellicoImporter::takeImages() {
+  return std::move(m_zip);
 }
 
 void TellicoImporter::slotCancel() {
