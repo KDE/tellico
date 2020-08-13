@@ -46,7 +46,7 @@
 #include <QPointer>
 
 namespace {
-  static const int MIN_BLOCK_SIZE = 10*1024; // minimum read size of 10 kB
+  static const int MIN_BLOCK_SIZE = 100*1024; // minimum read size of 100 kB
 }
 
 using Tellico::Import::TellicoImporter;
