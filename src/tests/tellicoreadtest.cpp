@@ -45,7 +45,7 @@
 QTEST_GUILESS_MAIN( TellicoReadTest )
 
 #define QSL(x) QStringLiteral(x)
-#define TELLICOREAD_NUMBER_OF_CASES 10
+#define TELLICOREAD_NUMBER_OF_CASES 11
 
 static bool hasNetwork() {
   foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
@@ -63,7 +63,7 @@ void TellicoReadTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::Collection> registerBase(Tellico::Data::Collection::Base, "entry");
   Tellico::RegisterCollection<Tellico::Data::MusicCollection> registerAlbum(Tellico::Data::Collection::Album, "album");
 
-  for(int i = 1; i < TELLICOREAD_NUMBER_OF_CASES; ++i) {
+  for(int i = 1; i <= TELLICOREAD_NUMBER_OF_CASES; ++i) {
     QUrl url = QUrl::fromLocalFile(QFINDTESTDATA(QSL("data/books-format%1.bc").arg(i)));
 
     Tellico::Import::TellicoImporter importer(url);

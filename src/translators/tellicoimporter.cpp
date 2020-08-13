@@ -45,6 +45,10 @@
 #include <QApplication>
 #include <QPointer>
 
+namespace {
+  static const int MIN_BLOCK_SIZE = 10*1024; // minimum read size of 10 kB
+}
+
 using Tellico::Import::TellicoImporter;
 
 TellicoImporter::TellicoImporter(const QUrl& url_, bool loadAllImages_) : DataImporter(url_),
@@ -120,15 +124,15 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   source.setData(QByteArray()); // necessary
   bool success = reader.parse(&source, true);
 
-  const int blockSize = data_.size()/100 + 1;
+  const int blockSize = qMax(data_.size()/100 + 1, MIN_BLOCK_SIZE);
   int pos = 0;
   emit signalTotalSteps(this, data_.size());
 
   // hack to allow processEvents
   QPointer<TellicoImporter> thisPtr(this);
   while(thisPtr && success && !m_cancelled && pos < data_.size()) {
-    uint size = qMin(blockSize, data_.size() - pos);
-    QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
+    const uint size = qMin(blockSize, data_.size() - pos);
+    const QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
     source.setData(block);
     success = reader.parseContinue();
     if(!success) {
