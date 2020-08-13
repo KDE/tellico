@@ -225,7 +225,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 #add_definitions(${QT_DEFINITIONS}
 #                ${KDE4_DEFINITIONS}
 #                ${YAZ_CFLAGS})
-add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII -DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DQT_STL -DQT_NO_CAST_FROM_ASCII -DQT_NO_URL_CAST_FROM_STRING -DQT_USE_QSTRINGBUILDER)
 remove_definitions(-DQT_NO_STL)
 
 include_directories(${LIBXML2_INCLUDE_DIR}
