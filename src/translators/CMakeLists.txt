@@ -37,7 +37,7 @@ SET(translators_STAT_SRCS
    tellico_xml.cpp
    tellicoimporter.cpp
    tellicoxmlexporter.cpp
-   tellicoxmlhandler.cpp
+   tellicoxmlreader.cpp
    tellicozipexporter.cpp
    textimporter.cpp
    vinoxmlimporter.cpp

@@ -23,19 +23,20 @@
  ***************************************************************************/
 
 #include "xmlhandler.h"
+#include "../tellico_debug.h"
 
 #include <QRegularExpression>
 #include <QTextStream>
-#include <QXmlInputSource>
+#include <QXmlStreamReader>
+#include <QTextCodec>
 
 using Tellico::XMLHandler;
 
 bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
   static const QRegularExpression rx(QLatin1String("encoding\\s*=\\s*\"([\\w-]+)\""));
   QTextStream stream(&text_);
-  // at this point, we read the data into a QString and plan to later convert to utf-8
-  // but the xml header might still indicate an encoding other than utf-8
-  // so, just to be safe, if the xml header is the first line, ensure it is set to utf-8
+  // the xml header might still indicate an encoding other than utf-8
+  // so read the first line and ensure it is set to utf-8
   QString firstLine = stream.readLine();
   QRegularExpressionMatch match = rx.match(firstLine);
   if(match.hasMatch() &&
@@ -48,10 +49,27 @@ bool XMLHandler::setUtf8XmlEncoding(QString& text_) {
 }
 
 QString XMLHandler::readXMLData(const QByteArray& data_) {
-  QXmlInputSource source;
-  source.setData(data_);
-  QString text = source.data();
-  // since we always process XML files as utf-8, make sure the encoding is set to utf-8
-  setUtf8XmlEncoding(text);
+  // need to recognize encoding from the data, like QXmlInputSource::fromRawData() used to do
+  QXmlStreamReader reader(data_);
+  while(!reader.isStartDocument() && !reader.atEnd()) {
+    reader.readNext();
+  }
+  QStringRef enc = reader.documentEncoding();
+  if(enc.isEmpty() || enc.compare(QLatin1String("utf-8"), Qt::CaseInsensitive) == 0) {
+    // default to utf8 and no need to parse to change embedded encoding
+    return QString::fromUtf8(data_);
+  }
+
+  QTextCodec* codec = QTextCodec::codecForName(enc.toUtf8());
+  if(!codec) {
+    return QString::fromUtf8(data_);
+  }
+  QString text = codec->toUnicode(data_);
+  // since we always process XML files as utf-8, make sure the embedded encoding is set to utf-8
+  if(!setUtf8XmlEncoding(text)) {
+    myDebug() << "Found non utf-8 encoding but did not change the embedded declaration" << enc;
+    // output up to first 100 characters for debugging purposes
+    myDebug() << text.left(100);
+  }
   return text;
 }

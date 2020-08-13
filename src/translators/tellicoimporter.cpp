@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -23,7 +23,7 @@
  ***************************************************************************/
 
 #include "tellicoimporter.h"
-#include "tellicoxmlhandler.h"
+#include "tellicoxmlreader.h"
 #include "tellico_xml.h"
 #include "../collectionfactory.h"
 #include "../entry.h"
@@ -112,17 +112,10 @@ Tellico::Data::CollPtr TellicoImporter::collection() {
 void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   const bool showProgress = options() & ImportProgress;
 
-  TellicoXMLHandler handler;
-  handler.setLoadImages(loadImages_);
-  handler.setShowImageLoadErrors(options() & ImportShowImageErrors);
-
-  QXmlSimpleReader reader;
-  reader.setContentHandler(&handler);
-  reader.setErrorHandler(&handler);
-
-  QXmlInputSource source;
-  source.setData(QByteArray()); // necessary
-  bool success = reader.parse(&source, true);
+  TellicoXmlReader reader;
+  reader.setLoadImages(loadImages_);
+  reader.setShowImageLoadErrors(options() & ImportShowImageErrors);
+  bool success = true;
 
   const int blockSize = qMax(data_.size()/100 + 1, MIN_BLOCK_SIZE);
   int pos = 0;
@@ -133,9 +126,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   while(thisPtr && success && !m_cancelled && pos < data_.size()) {
     const uint size = qMin(blockSize, data_.size() - pos);
     const QByteArray block = QByteArray::fromRawData(data_.data() + pos, size);
-    source.setData(block);
-    success = reader.parseContinue();
-    if(!success) {
+    success = reader.readNext(block);
+    if(!success && reader.isNotWellFormed()) {
       // could be bug 418067 where version of Tellico < 3.3 could use invalid XML names
       // try to recover. If it's not a bad field name, this should be a pretty quick check
       myDebug() << "XML parsing failed. Attempting to recover.";
@@ -162,7 +154,7 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
     if(!url().isEmpty()) {
       error = i18n(errorLoad).arg(url().fileName());
     }
-    const QString errorString = handler.errorString();
+    const QString errorString = reader.errorString();
     if(!errorString.isEmpty()) {
       error += QStringLiteral("\n") + errorString;
     }
@@ -172,8 +164,8 @@ void TellicoImporter::loadXMLData(const QByteArray& data_, bool loadImages_) {
   }
 
   if(!m_cancelled) {
-    m_hasImages = handler.hasImages();
-    m_coll = handler.collection();
+    m_hasImages = reader.hasImages();
+    m_coll = reader.collection();
   }
 }
 
