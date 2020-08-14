@@ -72,7 +72,7 @@ bool TellicoXmlReader::readNext(const QByteArray& data_) {
         break;
     }
   }
-  // success is no error or error beign simply premature end of document
+  // success is no error or error being simply premature end of document
   return !m_xml.hasError() || m_xml.error() == QXmlStreamReader::PrematureEndOfDocumentError;
 }
 
