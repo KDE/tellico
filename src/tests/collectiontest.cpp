@@ -445,11 +445,14 @@ void CollectionTest::testDuplicate() {
   Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
   entry1->setField(QStringLiteral("title"), QStringLiteral("title1"));
   entry1->setField(QStringLiteral("cdate"), QStringLiteral("2019-01-01"));
+  entry1->setField(QStringLiteral("mdate"), QStringLiteral("2019-04-01"));
   coll->addEntries(entry1);
   QCOMPARE(coll->entryCount(), 1);
 
   // this is how Controller::slotCopySelectedEntries() does it
   Tellico::Data::EntryPtr entry2(new Tellico::Data::Entry(*entry1));
+  QVERIFY(entry2->field(QStringLiteral("cdate")).isEmpty());
+  QVERIFY(entry2->field(QStringLiteral("mdate")).isEmpty());
   coll->addEntries(entry2);
   QCOMPARE(coll->entryCount(), 2);
 
@@ -463,6 +466,8 @@ void CollectionTest::testDuplicate() {
   Tellico::Data::Entry* entryPtr = new Tellico::Data::Entry(coll);
   *entryPtr = *entry1;
   Tellico::Data::EntryPtr entry3(entryPtr);
+  QVERIFY(entry3->field(QStringLiteral("cdate")).isEmpty());
+  QVERIFY(entry3->field(QStringLiteral("mdate")).isEmpty());
   coll->addEntries(entry3);
   QCOMPARE(coll->entryCount(), 3);
 

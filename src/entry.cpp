@@ -63,6 +63,7 @@ Entry::Entry(const Entry& entry_) :
     m_formattedFields(entry_.m_formattedFields) {
   // special case for creation date since it gets set in Collection::addEntry IF cdate is empty
   m_fieldValues.remove(QStringLiteral("cdate"));
+  m_fieldValues.remove(QStringLiteral("mdate"));
 }
 
 Entry& Entry::operator=(const Entry& other_) {
@@ -74,6 +75,7 @@ Entry& Entry::operator=(const Entry& other_) {
   m_fieldValues = other_.m_fieldValues;
   // special case for creation date field which gets set in Collection::addEntry IF cdate is empty
   m_fieldValues.remove(QStringLiteral("cdate"));
+  m_fieldValues.remove(QStringLiteral("mdate"));
   m_formattedFields = other_.m_formattedFields;
   return *this;
 }

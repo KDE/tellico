@@ -1,3 +1,7 @@
+2020-08-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed regression for duplicated creation date (Bug 422127).
+
 2020-08-10  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed column header visibility after reordering fields (Bug 422298).
