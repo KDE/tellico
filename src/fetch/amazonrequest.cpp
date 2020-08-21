@@ -52,6 +52,10 @@ void AmazonRequest::setHost(const QByteArray& host_) {
   m_host = host_;
 }
 
+void AmazonRequest::setPath(const QByteArray& path_) {
+  m_path = path_;
+}
+
 void AmazonRequest::setRegion(const QByteArray& region_) {
   m_region = region_;
 }
@@ -75,6 +79,9 @@ QMap<QByteArray, QByteArray> AmazonRequest::headers(const QByteArray& payload_) 
 }
 
 QByteArray AmazonRequest::prepareCanonicalRequest(const QByteArray& payload_) const {
+  Q_ASSERT(!m_method.isEmpty());
+  Q_ASSERT(!m_path.isEmpty());
+  Q_ASSERT(!m_headers.isEmpty());
   QByteArray req = m_method + '\n'
                  + m_path + '\n' + '\n';
 
@@ -98,8 +105,6 @@ QByteArray AmazonRequest::prepareCanonicalRequest(const QByteArray& payload_) co
   req.append(m_signedHeaders);
   req.append('\n');
 
-//  myDebug() << req;
-
   req.append(toHexHash(payload_));
   return req;
 }
@@ -119,10 +124,15 @@ QByteArray AmazonRequest::calculateSignature(const QByteArray& stringToSign_) co
   signatureKey = QMessageAuthenticationCode::hash(m_region, signatureKey, QCryptographicHash::Sha256);
   signatureKey = QMessageAuthenticationCode::hash(m_service, signatureKey, QCryptographicHash::Sha256);
   signatureKey = QMessageAuthenticationCode::hash(AMAZON_REQUEST, signatureKey, QCryptographicHash::Sha256);
+  // '0' says no separators between hex encoded characters
   return QMessageAuthenticationCode::hash(stringToSign_, signatureKey, QCryptographicHash::Sha256).toHex(0);
 }
 
 QByteArray AmazonRequest::buildAuthorizationString(const QByteArray& signature_) const {
+  Q_ASSERT(!m_accessKey.isEmpty());
+  Q_ASSERT(!m_region.isEmpty());
+  Q_ASSERT(!m_service.isEmpty());
+  Q_ASSERT(!m_signedHeaders.isEmpty());
   QByteArray authString(AMAZON_REQUEST_ALGORITHM);
   authString += ' ';
   authString += "Credential=" + m_accessKey;

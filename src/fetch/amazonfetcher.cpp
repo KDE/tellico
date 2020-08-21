@@ -78,98 +78,98 @@ const AmazonFetcher::SiteData& AmazonFetcher::siteData(int site_) {
   static SiteData dataVector[16] = {
     {
       i18n("Amazon (US)"),
-      "www.amazon.com",
+      "webservices.amazon.com",
       "us-east-1",
       QLatin1String("us"),
       i18n("United States")
     }, {
       i18n("Amazon (UK)"),
-      "www.amazon.co.uk",
+      "webservices.amazon.co.uk",
       "eu-west-1",
       QLatin1String("gb"),
       i18n("United Kingdom")
     }, {
       i18n("Amazon (Germany)"),
-      "www.amazon.de",
+      "webservices.amazon.de",
       "eu-west-1",
       QLatin1String("de"),
       i18n("Germany")
     }, {
       i18n("Amazon (Japan)"),
-      "www.amazon.co.jp",
+      "webservices.amazon.co.jp",
       "us-west-2",
       QLatin1String("jp"),
       i18n("Japan")
     }, {
       i18n("Amazon (France)"),
-      "www.amazon.fr",
+      "webservices.amazon.fr",
       "eu-west-1",
       QLatin1String("fr"),
       i18n("France")
     }, {
       i18n("Amazon (Canada)"),
-      "www.amazon.ca",
+      "webservices.amazon.ca",
       "us-east-1",
       QLatin1String("ca"),
       i18n("Canada")
     }, {
       // TODO: no chinese in PAAPI-5 yet?
       i18n("Amazon (China)"),
-      "www.amazon.cn",
+      "webservices.amazon.cn",
       "us-west-2",
       QLatin1String("ch"),
       i18n("China")
     }, {
       i18n("Amazon (Spain)"),
-      "www.amazon.es",
+      "webservices.amazon.es",
       "eu-west-1",
       QLatin1String("es"),
       i18n("Spain")
     }, {
       i18n("Amazon (Italy)"),
-      "www.amazon.it",
+      "webservices.amazon.it",
       "eu-west-1",
       QLatin1String("it"),
       i18n("Italy")
     }, {
       i18n("Amazon (Brazil)"),
-      "www.amazon.com.br",
+      "webservices.amazon.com.br",
       "us-east-1",
       QLatin1String("br"),
       i18n("Brazil")
     }, {
       i18n("Amazon (Australia)"),
-      "www.amazon.com.au",
+      "webservices.amazon.com.au",
       "us-west-2",
       QLatin1String("au"),
       i18n("Australia")
     }, {
       i18n("Amazon (India)"),
-      "www.amazon.in",
+      "webservices.amazon.in",
       "eu-west-1",
       QLatin1String("in"),
       i18n("India")
     }, {
       i18n("Amazon (Mexico)"),
-      "www.amazon.com.mx",
+      "webservices.amazon.com.mx",
       "us-east-1",
       QLatin1String("mx"),
       i18n("Mexico")
     }, {
       i18n("Amazon (Turkey)"),
-      "www.amazon.com.tr",
+      "webservices.amazon.com.tr",
       "eu-west-1",
       QLatin1String("tr"),
       i18n("Turkey")
     }, {
       i18n("Amazon (Singapore)"),
-      "www.amazon.sg",
+      "webservices.amazon.sg",
       "us-west-2",
       QLatin1String("sg"),
       i18n("Singapore")
     }, {
       i18n("Amazon (UAE)"),
-      "www.amazon.ae",
+      "webservices.amazon.ae",
       "eu-west-1",
       QLatin1String("ae"),
       i18n("United Arab Emirates")
@@ -280,20 +280,27 @@ void AmazonFetcher::doSearch() {
     return;
   }
 
+  QString path(QStringLiteral("/paapi5/searchitems"));
+
   AmazonRequest request(m_accessKey, m_secretKey);
   request.setHost(siteData(m_site).host);
   request.setRegion(siteData(m_site).region);
+  request.setPath(path.toUtf8());
 
   // debugging check
   if(m_testResultsFile.isEmpty()) {
     QUrl u;
+    u.setScheme(QLatin1String("https"));
     u.setHost(QString::fromUtf8(siteData(m_site).host));
+    u.setPath(path);
     m_job = KIO::storedHttpPost(payload, u, KIO::HideProgressInfo);
+    QStringList customHeaders;
     QMapIterator<QByteArray, QByteArray> i(request.headers(payload));
     while(i.hasNext()) {
       i.next();
-      m_job->addMetaData(QStringLiteral("customHTTPHeader"), QString::fromUtf8(i.key() + ": " + i.value()));
+      customHeaders += QString::fromUtf8(i.key() + ": " + i.value());
     }
+    m_job->addMetaData(QStringLiteral("customHTTPHeader"), customHeaders.join(QLatin1String("\r\n")));
   } else {
     myDebug() << "Reading" << m_testResultsFile;
     m_job = KIO::storedGet(QUrl::fromLocalFile(m_testResultsFile), KIO::NoReload, KIO::HideProgressInfo);
@@ -307,7 +314,6 @@ void AmazonFetcher::stop() {
   if(!m_started) {
     return;
   }
-//  myDebug();
   if(m_job) {
     m_job->kill();
     m_job = nullptr;
@@ -318,6 +324,8 @@ void AmazonFetcher::stop() {
 
 void AmazonFetcher::slotComplete(KJob*) {
   if(m_job->error()) {
+    myDebug() << m_job->errorString() << m_job->data();
+    myDebug() << "Response code is" << m_job->metaData().value(QStringLiteral("responsecode"));
     m_job->uiDelegate()->showErrorMessage();
     stop();
     return;
@@ -664,6 +672,7 @@ QByteArray AmazonFetcher::requestPayload(FetchRequest request_) {
   QJsonObject payload;
   payload.insert(QLatin1String("PartnerTag"), m_assoc);
   payload.insert(QLatin1String("PartnerType"), QLatin1String("Associates"));
+  payload.insert(QLatin1String("Service"), QLatin1String("ProductAdvertisingAPIv1"));
   payload.insert(QLatin1String("Operation"), QLatin1String("SearchItems"));
   payload.insert(QLatin1String("SortBy"), QLatin1String("Relevance"));
   // not mandatory

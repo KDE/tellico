@@ -37,6 +37,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -434,10 +435,34 @@ void AmazonFetcherTest::testPayload() {
 \"PartnerType\":\"Associates\",\
 \"Resources\":[\"ItemInfo.Title\",\"ItemInfo.ContentInfo\",\"ItemInfo.ByLineInfo\",\"ItemInfo.TechnicalInfo\",\"ItemInfo.ExternalIds\",\"ItemInfo.ManufactureInfo\",\"Images.Primary.Medium\"],\
 \"SearchIndex\":\"Books\",\
+\"Service\":\"ProductAdvertisingAPIv1\",\
 \"SortBy\":\"Relevance\"\
 }");
   QCOMPARE(payload.right(100), res1.right(100));
   QCOMPARE(payload, res1);
+}
+
+void AmazonFetcherTest::testClient() {
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig);
+  KConfigGroup cg(config, QStringLiteral("AmazonClient"));
+  cg.writeEntry("Site", 0); // US
+  cg.writeEntry("Image Size", 3); // no image
+  cg.writeEntry("AccessKey", QStringLiteral("AKIAIYOQSCRWEGQPCSNA"));
+  cg.writeEntry("SecretKey", QStringLiteral("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"));
+  cg.writeEntry("AssocToken", QStringLiteral("tellico-20"));
+  config->sync();
+
+  Tellico::Fetch::AmazonFetcher* fetcher = new Tellico::Fetch::AmazonFetcher(this);
+  fetcher->readConfig(cg, cg.name());
+
+  Tellico::Fetch::FetchRequest req(Tellico::Data::Collection::Book, Tellico::Fetch::Keyword, "harry potter");
+  Tellico::Fetch::Fetcher::Ptr f(fetcher);
+  Tellico::Fetch::MessageLogger* logger = new Tellico::Fetch::MessageLogger;
+  f->setMessageHandler(logger);
+  Tellico::Data::EntryList results = DO_FETCH1(f, req, 1);
+  QVERIFY(results.isEmpty());
+  QVERIFY(!logger->errorList.isEmpty());
+  QVERIFY(logger->errorList[0].startsWith("The Access Key Id AKIAIYOQSCRWEGQPCSNA is not enabled for accessing Product Advertising API"));
 }
 
 void AmazonFetcherTest::testError() {

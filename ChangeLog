@@ -1,3 +1,7 @@
+2020-08-21  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed http headers for Amazon data source (Bug 425129).
+
 2020-08-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed regression for duplicated creation date (Bug 422127).
