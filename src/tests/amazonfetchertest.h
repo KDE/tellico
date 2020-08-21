@@ -46,7 +46,6 @@ private Q_SLOTS:
 
   void testRequest();
   void testPayload();
-  void testClient();
   void testError();
   void testUpc1();
   void testUpc2();
