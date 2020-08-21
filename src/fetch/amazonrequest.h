@@ -49,6 +49,7 @@ public:
   AmazonRequest(const QString& accessKey_, const QString& secretKey_);
 
   void setHost(const QByteArray& host);
+  void setPath(const QByteArray& path);
   void setRegion(const QByteArray& region);
   void setOperation(int op);
   QMap<QByteArray, QByteArray> headers(const QByteArray& payload);

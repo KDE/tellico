@@ -43,8 +43,10 @@ private Q_SLOTS:
   void testIsbn_data();
   void testUpc();
   void testUpc_data();
+
   void testRequest();
   void testPayload();
+  void testClient();
   void testError();
   void testUpc1();
   void testUpc2();
