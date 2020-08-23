@@ -1,3 +1,7 @@
+2020-08-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated DBC Open Search data source.
+
 2020-08-21  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed http headers for Amazon data source (Bug 425129).
