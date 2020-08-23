@@ -96,7 +96,7 @@ QUrl DBCFetcher::searchUrl() {
       return QUrl();
   }
   query.addQueryItem(QStringLiteral("action"), QStringLiteral("search"));
-  // see https://opensource.dbc.dk/services/open-search-web-service
+  // see https://github.com/DBCDK/OpenSearch-webservice/wiki/OpenSearch-Web-Service
   // agency and profile determine the search collections
 //  query.addQueryItem(QLatin1String("agency"), QLatin1String("100200"));
 //  query.addQueryItem(QLatin1String("profile"), QLatin1String("test"));
