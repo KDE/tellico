@@ -33,7 +33,7 @@
 #include <QUrlQuery>
 
 namespace {
-  static const char* DBC_API_URL = "https://oss-services.dbc.dk/opensearch/4.5/";
+  static const char* DBC_API_URL = "https://oss-services.dbc.dk/opensearch/5.2/";
   static const int DBC_MAX_RETURNS_TOTAL = 20;
 }
 
