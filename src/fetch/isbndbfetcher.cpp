@@ -46,7 +46,7 @@
 
 namespace {
   static const int ISBNDB_MAX_RETURNS_TOTAL = 25;
-  static const char* ISBNDB_BASE_URL = "https://api.isbndb.com";
+  static const char* ISBNDB_BASE_URL = "https://api2.isbndb.com";
 }
 
 using namespace Tellico;
@@ -168,7 +168,7 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
 
 #if 0
   myWarning() << "Remove debug from isbndbfetcher.cpp";
-  QFile file(QString::fromLatin1("/tmp/test.json"));
+  QFile file(QString::fromLatin1("/tmp/test-isbndb.json"));
   if(file.open(QIODevice::WriteOnly)) {
     QTextStream t(&file);
     t.setCodec("UTF-8");
@@ -323,8 +323,8 @@ Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
 
 QPointer<KIO::StoredTransferJob> ISBNdbFetcher::isbndbJob(const QUrl& url_, const QString& apiKey_) {
   QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("X-API-Key: ") + apiKey_);
-  job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
+  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: ") + apiKey_);
+  job->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
   return job;
 }

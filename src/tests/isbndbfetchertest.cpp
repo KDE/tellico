@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,7 @@
 #include "isbndbfetchertest.h"
 
 #include "../fetch/isbndbfetcher.h"
+#include "../fetch/messagelogger.h"
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
@@ -55,9 +56,12 @@ void ISBNdbFetcherTest::testIsbn() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("0789312239"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ISBNdbFetcher(this));
+  Tellico::Fetch::MessageLogger* logger = new Tellico::Fetch::MessageLogger;
+  fetcher->setMessageHandler(logger);
   fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
+  QVERIFY(logger->errorList.isEmpty());
 
   QCOMPARE(results.size(), 1);
 
@@ -91,12 +95,12 @@ void ISBNdbFetcherTest::testIsbn13() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")).toLower(), QStringLiteral("this is venice"));
-  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("M. Sasek"));
+  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("Sasek, M. (miroslav)"));
   QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("0789312239"));
-  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2008"));
-  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Universe Publishing Inc.,U.S."));
+  QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2005"));
+  QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Universe"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
-  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Children's Non-Fiction; People & Places"));
+  QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Description And Travel"));
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
 }
