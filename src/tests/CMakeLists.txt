@@ -738,6 +738,7 @@ TARGET_LINK_LIBRARIES(imdbfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
 add_executable(isbndbfetchertest isbndbfetchertest.cpp abstractfetchertest.cpp
   ../fetch/isbndbfetcher.cpp
+  ../fetch/messagelogger.cpp
 )
 ecm_mark_nongui_executable(isbndbfetchertest)
 add_test(isbndbfetchertest isbndbfetchertest)
