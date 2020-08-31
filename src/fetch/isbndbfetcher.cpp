@@ -189,6 +189,7 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
   } else {
     const QString msg = result.value(QStringLiteral("message")).toString();
     myDebug() << "no results:" << msg;
+    message(msg, MessageHandler::Error);
     stop();
     return;
   }
