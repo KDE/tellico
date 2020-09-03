@@ -53,7 +53,7 @@ public:
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual void continueSearch() Q_DECL_OVERRIDE;
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Person || k == Keyword || k == ISBN; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return ISBNdb; }
@@ -85,8 +85,6 @@ private:
   void doSearch();
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-
-  static QPointer<KIO::StoredTransferJob> isbndbJob(const QUrl& url, const QString& apiKey);
 
   int m_limit;
   int m_total;
