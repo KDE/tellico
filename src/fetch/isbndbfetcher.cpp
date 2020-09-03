@@ -43,6 +43,7 @@
 #include <QTextCodec>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QUrlQuery>
 
 namespace {
   static const int ISBNDB_MAX_RETURNS_TOTAL = 25;
@@ -67,6 +68,10 @@ QString ISBNdbFetcher::source() const {
 
 bool ISBNdbFetcher::canFetch(int type) const {
   return type == Data::Collection::Book || type == Data::Collection::Bibtex;
+}
+
+bool ISBNdbFetcher::canSearch(FetchKey k) const {
+  return k == Title || k == Person || k == ISBN || k == Keyword;
 }
 
 void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
@@ -102,6 +107,8 @@ void ISBNdbFetcher::continueSearch() {
 void ISBNdbFetcher::doSearch() {
 //  myDebug() << "value = " << value_;
 
+  const bool multipleIsbn = request().key == ISBN && request().value.contains(QLatin1Char(';'));
+
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
   switch(request().key) {
     case Title:
@@ -109,16 +116,34 @@ void ISBNdbFetcher::doSearch() {
       break;
 
     case Person:
+      // the /books/query search endpoint seems to not work with the author column yet [2020-09-02]
+      // so continue to user /author/query search (which may not return all the same info)
       u.setPath(QStringLiteral("/author/") + request().value);
       break;
 
     case ISBN:
-      u.setPath(QStringLiteral("/book/"));
-      {
+      if(multipleIsbn) {
+        u.setPath(QStringLiteral("/books"));
+      } else {
+        u.setPath(QStringLiteral("/book/"));
         // can only grab first value
         QString v = request().value.section(QLatin1Char(';'), 0);
         v.remove(QLatin1Char('-'));
         u.setPath(u.path() + v);
+      }
+      break;
+
+    case Keyword:
+      // the /books/query search endpoint seems to not work with the author column yet [2020-09-02]
+      // so continue to user /author/query search (which may not return all the same info)
+      u.setPath(QStringLiteral("/books/") + request().value);
+      {
+         QUrlQuery q;
+         q.addQueryItem(QStringLiteral("page"), QLatin1String("1"));
+         q.addQueryItem(QStringLiteral("pageSize"), QString::number(ISBNDB_MAX_RETURNS_TOTAL));
+         // disable beta searching
+         q.addQueryItem(QStringLiteral("beta"), QLatin1String("0"));
+         u.setQuery(q);
       }
       break;
 
@@ -129,7 +154,21 @@ void ISBNdbFetcher::doSearch() {
   }
 //  myDebug() << "url: " << u.url();
 
-  m_job = isbndbJob(u, m_apiKey);
+  if(multipleIsbn) {
+    QString postData = request().value;
+    postData = postData.replace(QLatin1Char(';'), QLatin1Char(','))
+                       .remove(QLatin1Char('-'))
+                       .remove(QLatin1Char(' '));
+    postData.prepend(QStringLiteral("isbns="));
+//    myDebug() << "posting" << postData;
+    m_job = KIO::storedHttpPost(postData.toUtf8(), u, KIO::HideProgressInfo);
+  } else {
+    m_job = KIO::storedGet(u, KIO::NoReload, KIO::HideProgressInfo);
+  }
+
+  m_job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: ") + m_apiKey);
+  m_job->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
+  KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result, this, &ISBNdbFetcher::slotComplete);
 }
 
@@ -187,8 +226,9 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
     m_total = result.value(QStringLiteral("total")).toInt();
     resultList = result.value(QStringLiteral("books")).toList();
   } else {
-    const QString msg = result.value(QStringLiteral("message")).toString();
-    myDebug() << "no results:" << msg;
+    QString msg = result.value(QStringLiteral("message")).toString();
+    if(msg.isEmpty()) msg = result.value(QStringLiteral("errorMessage")).toString();
+    myDebug() << "no results from ISBNDBFetcher:" << msg;
     message(msg, MessageHandler::Error);
     stop();
     return;
@@ -319,14 +359,6 @@ Tellico::StringHash ISBNdbFetcher::allOptionalFields() {
   StringHash hash;
   hash[QStringLiteral("dewey")] = i18nc("Dewey Decimal classification system", "Dewey Decimal");
   return hash;
-}
-
-QPointer<KIO::StoredTransferJob> ISBNdbFetcher::isbndbJob(const QUrl& url_, const QString& apiKey_) {
-  QPointer<KIO::StoredTransferJob> job = KIO::storedGet(url_, KIO::NoReload, KIO::HideProgressInfo);
-  job->addMetaData(QStringLiteral("customHTTPHeader"), QStringLiteral("Authorization: ") + apiKey_);
-  job->addMetaData(QStringLiteral("content-type"), QStringLiteral("application/json"));
-  KJobWidgets::setWindow(job, GUI::Proxy::widget());
-  return job;
 }
 
 ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher* fetcher_)

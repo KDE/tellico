@@ -1,3 +1,7 @@
+2020-09-02  Robby Stephenson  <robby@periapsis.org>
+
+	* Improved ISBNdb data source to search for multiple ISBN values (Bug 415883).
+
 2020-08-30  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated ISBNdb to API v2.
