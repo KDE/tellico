@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2006-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2006-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -82,16 +82,17 @@ private Q_SLOTS:
 
 private:
   virtual void search() Q_DECL_OVERRIDE;
-  void doSearch();
+  void doSearch(const QString& term);
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
+  void endJob(KIO::StoredTransferJob* job);
 
   int m_limit;
   int m_total;
   int m_numResults;
 
   QHash<uint, Data::EntryPtr> m_entries;
-  QPointer<KIO::StoredTransferJob> m_job;
+  QList< QPointer<KIO::StoredTransferJob> > m_jobs;
 
   bool m_started;
   QString m_apiKey;
