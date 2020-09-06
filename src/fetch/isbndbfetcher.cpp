@@ -36,6 +36,7 @@
 #include <KJobWidgets/KJobWidgets>
 
 #include <QLineEdit>
+#include <QCheckBox>
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
@@ -56,7 +57,8 @@ using Tellico::Fetch::ISBNdbFetcher;
 ISBNdbFetcher::ISBNdbFetcher(QObject* parent_)
     : Fetcher(parent_),
       m_limit(ISBNDB_MAX_RETURNS_TOTAL), m_total(-1), m_numResults(0),
-      m_started(false) {
+      m_started(false),
+      m_batchIsbn(false) {
 }
 
 ISBNdbFetcher::~ISBNdbFetcher() {
@@ -79,6 +81,7 @@ void ISBNdbFetcher::readConfigHook(const KConfigGroup& config_) {
   if(!k.isEmpty()) {
     m_apiKey = k;
   }
+  m_batchIsbn = config_.readEntry("Batch ISBN", false);
 }
 
 void ISBNdbFetcher::search() {
@@ -86,9 +89,9 @@ void ISBNdbFetcher::search() {
   m_total = -1;
   m_numResults = 0;
 
-  // we only split ISBN
+  // we only split ISBN when not doing batch searching
   QStringList searchTerms;
-  if(request().key == ISBN) {
+  if(request().key == ISBN && !m_batchIsbn) {
     searchTerms = FieldFormat::splitValue(request().value);
   } else  {
     searchTerms += request().value;
@@ -117,8 +120,6 @@ void ISBNdbFetcher::continueSearch() {
 }
 
 void ISBNdbFetcher::doSearch(const QString& term_) {
-//  myDebug() << "value = " << value_;
-
   const bool multipleIsbn = request().key == ISBN && term_.contains(QLatin1Char(';'));
 
   QUrl u(QString::fromLatin1(ISBNDB_BASE_URL));
@@ -407,10 +408,20 @@ ISBNdbFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ISBNdbFetcher*
   l->addWidget(m_apiKeyEdit, row, 1);
   label->setBuddy(m_apiKeyEdit);
 
+  m_enableBatchIsbn = new QCheckBox(i18n("Enable batch ISBN searching (requires Premium or Pro plan)"), optionsWidget());
+  connect(m_enableBatchIsbn, &QAbstractButton::clicked, this, &ConfigWidget::slotSetModified);
+  ++row;
+  l->addWidget(m_enableBatchIsbn, row, 0, 1, 2);
+  QString w = i18n("Batch searching for ISBN values is faster but only available for Premium or Pro plans.");
+  m_enableBatchIsbn->setWhatsThis(w);
+
   l->setRowStretch(++row, 10);
 
   if(fetcher_) {
     m_apiKeyEdit->setText(fetcher_->m_apiKey);
+    m_enableBatchIsbn->setChecked(fetcher_->m_batchIsbn);
+  } else { //defaults
+    m_enableBatchIsbn->setChecked(false);
   }
 
   // now add additional fields widget
@@ -422,6 +433,7 @@ void ISBNdbFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
   if(!apiKey.isEmpty()) {
     config_.writeEntry("API Key", apiKey);
   }
+  config_.writeEntry("Batch ISBN", m_enableBatchIsbn->isChecked());
 }
 
 QString ISBNdbFetcher::ConfigWidget::preferredName() const {

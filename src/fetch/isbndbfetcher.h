@@ -31,6 +31,7 @@
 #include <QPointer>
 
 class QLineEdit;
+class QCheckBox;
 
 class KJob;
 namespace KIO {
@@ -70,6 +71,7 @@ public:
     virtual QString preferredName() const Q_DECL_OVERRIDE;
   private:
     QLineEdit* m_apiKeyEdit;
+    QCheckBox* m_enableBatchIsbn;
   };
   friend class ConfigWidget;
 
@@ -96,6 +98,7 @@ private:
 
   bool m_started;
   QString m_apiKey;
+  bool m_batchIsbn;
 };
 
   }
