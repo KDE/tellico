@@ -37,7 +37,7 @@ void TabWidget::setFocusToFirstChild() {
   Q_ASSERT(page);
   QList<QWidget*> list = page->findChildren<QWidget*>();
   foreach(QWidget* w, list) {
-    if(w->focusPolicy() != Qt::NoFocus) {
+    if(!w->isHidden() && w->focusPolicy() != Qt::NoFocus) {
       w->setFocus();
       break;
     }
