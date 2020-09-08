@@ -243,6 +243,9 @@ void ISBNdbFetcher::slotComplete(KJob* job_) {
   } else if(result.contains(QStringLiteral("books"))) {
     m_total = result.value(QStringLiteral("total")).toInt();
     resultList = result.value(QStringLiteral("books")).toList();
+  } else if(result.contains(QStringLiteral("data"))) {
+    m_total = result.value(QStringLiteral("total")).toInt();
+    resultList = result.value(QStringLiteral("data")).toList();
   } else {
     QString msg = result.value(QStringLiteral("message")).toString();
     if(msg.isEmpty()) msg = result.value(QStringLiteral("errorMessage")).toString();
