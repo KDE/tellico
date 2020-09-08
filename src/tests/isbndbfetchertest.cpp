@@ -106,11 +106,13 @@ void ISBNdbFetcherTest::testIsbn13() {
 }
 
 void ISBNdbFetcherTest::testMultipleIsbn() {
+  const bool batchIsbn = true;
   QString groupName = QStringLiteral("ISBNdb");
   if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with ISBNdb settings.", SkipAll);
   }
   KConfigGroup cg(&m_config, groupName);
+  cg.writeEntry("Batch ISBN", batchIsbn);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        QStringLiteral("0789312239; 0393339912"));
@@ -138,8 +140,11 @@ void ISBNdbFetcherTest::testMultipleIsbn() {
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Universe"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Hardback"));
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Description And Travel"));
-  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  // no cover in batch mode
+  if(!batchIsbn) {
+    QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+    QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  }
 
   entry = results.at(veniceIsFirst ? 1 : 0);
   QVERIFY(entry);
@@ -149,8 +154,10 @@ void ISBNdbFetcherTest::testMultipleIsbn() {
   QCOMPARE(entry->field(QStringLiteral("pub_year")), QStringLiteral("2011"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("W. W. Norton & Company"));
   QCOMPARE(entry->field(QStringLiteral("binding")), QStringLiteral("Paperback"));
-  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
-  QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  if(!batchIsbn) {
+    QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+    QVERIFY(!entry->field(QStringLiteral("cover")).contains(QLatin1Char('/')));
+  }
 }
 
 void ISBNdbFetcherTest::testTitle() {
