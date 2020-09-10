@@ -1,11 +1,11 @@
 <?xml version = '1.0'?>
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui version="39" name="tellico">
+<kpartgui version="40" name="tellico">
  <MenuBar>
   <Menu name="file">
    <text>&amp;File</text>
    <Menu append="new_merge" name="file_new_collection" >
-    <text>&amp;New</text>
+    <text>&amp;New Collection</text>
     <Action name="new_book_collection"/>
     <Action name="new_bibtex_collection"/>
     <Action name="new_comic_book_collection"/>
@@ -70,12 +70,11 @@
    </Menu>
   </Menu>
   <Menu name="edit">
-   <Action name="edit_search_internet"/>
    <Action name="filter_dialog"/>
   </Menu>
   <Menu name="collection">
    <text context="@title:menu">&amp;Collection</text>
-   <Action name="coll_new_entry"/>
+   <Action name="coll_add_entry"/>
    <Action name="coll_edit_entry"/>
    <Action name="coll_copy_entry"/>
    <Action name="coll_delete_entry"/>
@@ -126,12 +125,10 @@
   <Action name="file_open"/>
   <Action name="file_save"/>
   <Action name="file_print"/>
-  <Separator/>
-  <Action name="edit_search_internet"/>
  </ToolBar>
  <ToolBar name="collectionToolBar">
   <text>Collection Toolbar</text>
-  <Action name="coll_new_entry"/>
+  <Action name="coll_add_entry"/>
   <Action name="coll_fields"/>
   <Action name="coll_reports"/>
   <Action name="change_entry_grouping"/>

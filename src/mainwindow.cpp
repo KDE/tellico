@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2001-2014 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2020 Robby Stephenson <robby@periapsis.org>
     Copyright (C) 2011 Pedro Miguel Carvalho <kde@pmc.com.pt>
  ***************************************************************************/
 
@@ -253,7 +253,7 @@ void MainWindow::initActions() {
   connect(collectionMapper, &QSignalMapper::mappedInt, this, &MainWindow::slotFileNew);
 #endif
 
-  KActionMenu* fileNewMenu = new KActionMenu(i18n("New"), this);
+  KActionMenu* fileNewMenu = new KActionMenu(i18n("New Collection"), this);
   fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
   fileNewMenu->setDelayed(false);
@@ -524,13 +524,6 @@ void MainWindow::initActions() {
   action = KStandardAction::deselect(this, SLOT(slotEditDeselect()), actionCollection());
   action->setToolTip(i18n("Deselect all the entries in the collection"));
 
-  action = actionCollection()->addAction(QStringLiteral("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
-  action->setText(i18n("Internet Search..."));
-  action->setIconText(i18n("Search"));  // find a better word for this?
-  action->setIcon(QIcon::fromTheme(QStringLiteral("tools-wizard")));
-  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_I);
-  action->setToolTip(i18n("Search the internet..."));
-
   action = actionCollection()->addAction(QStringLiteral("filter_dialog"), this, SLOT(slotShowFilterDialog()));
   action->setText(i18n("Advanced &Filter..."));
   action->setIconText(i18n("Filter"));
@@ -545,9 +538,24 @@ void MainWindow::initActions() {
                                              this, SLOT(slotNewEntry()));
   m_newEntry->setText(i18n("&New Entry..."));
   m_newEntry->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
-  m_newEntry->setIconText(i18n("New"));
+  m_newEntry->setIconText(i18n("New Entry"));
   actionCollection()->setDefaultShortcut(m_newEntry, Qt::CTRL + Qt::Key_N);
   m_newEntry->setToolTip(i18n("Create a new entry"));
+
+  KActionMenu* addEntryMenu = new KActionMenu(i18n("Add Entry"), this);
+  addEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+  addEntryMenu->setDelayed(false);
+  actionCollection()->addAction(QStringLiteral("coll_add_entry"), addEntryMenu);
+
+  action = actionCollection()->addAction(QStringLiteral("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
+  action->setText(i18n("Internet Search..."));
+  action->setIconText(i18n("Internet Search"));
+  action->setIcon(QIcon::fromTheme(QStringLiteral("tools-wizard")));
+  actionCollection()->setDefaultShortcut(action, Qt::CTRL + Qt::Key_I);
+  action->setToolTip(i18n("Search the internet..."));
+
+  addEntryMenu->addAction(m_newEntry);
+  addEntryMenu->addAction(actionCollection()->action(QStringLiteral("edit_search_internet")));
 
   m_editEntry = actionCollection()->addAction(QStringLiteral("coll_edit_entry"),
                                               this, SLOT(slotShowEntryEditor()));
