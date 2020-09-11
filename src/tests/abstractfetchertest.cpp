@@ -64,19 +64,16 @@ void AbstractFetcherTest::slotResult(KJob* job_) {
   m_loop.quit();
 }
 
-QSet<QString> AbstractFetcherTest::set(Tellico::Data::EntryPtr entry_, const char* field_) {
+QString AbstractFetcherTest::set(Tellico::Data::EntryPtr entry_, const char* field_) {
   return set(entry_->field(QLatin1String(field_)));
 }
 
-QSet<QString> AbstractFetcherTest::set(const char* value_) {
+QString AbstractFetcherTest::set(const char* value_) {
   return set(QLatin1String(value_));
 }
 
-QSet<QString> AbstractFetcherTest::set(const QString& value_) {
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-  const QStringList values = Tellico::FieldFormat::splitValue(value_);
-  return QSet<QString>(values.begin(), values.end());
-#else
-  return QSet<QString>::fromList(Tellico::FieldFormat::splitValue(value_));
-#endif
+QString AbstractFetcherTest::set(const QString& value_) {
+  QStringList values = Tellico::FieldFormat::splitValue(value_);
+  values.sort();
+  return values.join(QLatin1String("; "));
 }
