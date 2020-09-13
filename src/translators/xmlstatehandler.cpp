@@ -289,7 +289,7 @@ bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamA
   }
 
   QString title  = attValue(atts_, "title", i18n("Unknown"));
-  if(isI18n) {
+  if(isI18n && !title.isEmpty()) {
     title = i18n(title.toUtf8().constData());
   }
 
@@ -314,7 +314,7 @@ bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamA
   if(d->syntaxVersion < 9) {
     cat.remove(QLatin1Char('&'));
   }
-  if(isI18n) {
+  if(isI18n && !cat.isEmpty()) {
     cat = i18n(cat.toUtf8().constData());
   }
   field->setCategory(cat);
@@ -341,7 +341,7 @@ bool FieldHandler::start(const QStringRef&, const QStringRef&, const QXmlStreamA
   field->setFormatType(formatType);
 
   QString desc = attValue(atts_, "description");
-  if(isI18n) {
+  if(isI18n && !desc.isEmpty()) {
     desc = i18n(desc.toUtf8().constData());
   }
   field->setDescription(desc);
