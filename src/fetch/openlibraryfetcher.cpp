@@ -209,7 +209,6 @@ Tellico::Fetch::FetchRequest OpenLibraryFetcher::updateRequest(Data::EntryPtr en
 
 void OpenLibraryFetcher::slotComplete(KJob* job_) {
   KIO::StoredTransferJob* job = static_cast<KIO::StoredTransferJob*>(job_);
-//  myDebug();
 
   if(job->error()) {
     job->uiDelegate()->showErrorMessage();

@@ -77,7 +77,6 @@ bool NetAccess::download(const QUrl& url_, QString& target_, QWidget* window_, b
   if(getJob->exec()) {
     QFile f(target_);
     if(f.open(QIODevice::WriteOnly)) {
-//      if(f.write(getJob->data()) > -1) {
       if(f.write(getJob->data()) > -1) {
         return true;
       } else {
