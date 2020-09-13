@@ -51,6 +51,7 @@
 
 namespace {
   static const char* KINOPOISK_SEARCH_URL = "https://www.kinopoisk.ru/index.php";
+  static const char* KINOPOISK_IMAGE_SIZE = "300x450";
 }
 
 using namespace Tellico;
@@ -187,7 +188,8 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
 
 // the HTML response has the character encoding after the first 1024 characters and Qt doesn't seem to detect that
 // and potentially falls back to iso-8859-1. Enforce UTF-8
-  const QString results = Tellico::decodeHTML(Tellico::fromHtmlData(FileHandler::readDataFile(url, true), "UTF-8"));
+  const QByteArray data = FileHandler::readDataFile(url, true);
+  const QString results = Tellico::decodeHTML(Tellico::fromHtmlData(data, "UTF-8"));
   if(results.isEmpty()) {
     myDebug() << "no text results";
     return Data::EntryPtr();
@@ -208,6 +210,7 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
   entry = parseEntry(results);
   if(!entry) {
     // might want to check LD+JSON format
+    myDebug() << "...trying Linked Data";
     entry = parseEntryLinkedData(results);
   }
   if(!entry) {
@@ -269,10 +272,16 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::parseEntry(const QString& str_) {
                                         .value(QStringLiteral("apolloState")).toObject()
                                         .value(QStringLiteral("data")).toObject();
   QJsonObject filmObject = dataObject.value(QStringLiteral("Film:") + queryId).toObject();
+  if(filmObject.isEmpty()) {
+    filmObject = dataObject.value(QStringLiteral("TvSeries:") + queryId).toObject();
+  }
+  if(filmObject.isEmpty()) {
+    return Data::EntryPtr();
+  }
   // iterate over the filmObject members to find the json keys in the dataObject
   QJsonObject::const_iterator i = filmObject.constBegin();
   for( ; i != filmObject.constEnd(); ++i) {
-    QString fieldName = fieldNameFromKey(i.key());
+    const QString fieldName = fieldNameFromKey(i.key());
     if(fieldName.isEmpty()) {
       continue;
     }
@@ -380,7 +389,7 @@ QString KinoPoiskFetcher::fieldNameFromKey(const QString& key_) {
 
 QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QString& field_,
                                                const QJsonValue& value_, const QStringList& allowed_) {
-  // if it's an arrary, loop over and recurse
+  // if it's an array, loop over and recurse
   if(value_.isArray()) {
     QJsonArray arr = value_.toArray();
     QStringList fieldValues;
@@ -423,7 +432,7 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
       url.prepend(QLatin1String("https:"));
     }
     // also add size
-    url.append(QLatin1String("/300x450"));
+    url.append(QLatin1Char('/') + QLatin1String(KINOPOISK_IMAGE_SIZE));
     return url;
   } else if(field_ == QLatin1String("certification")) {
     Q_ASSERT(allowed_.size() == 5);
