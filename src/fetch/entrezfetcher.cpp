@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -43,8 +43,12 @@
 #include <QLabel>
 #include <QFile>
 #include <QTextStream>
-#include <QVBoxLayout>
+#include <QGridLayout>
+#include <QLineEdit>
 #include <QUrlQuery>
+#include <QThread>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace {
   static const int ENTREZ_MAX_RETURNS_TOTAL = 25;
@@ -83,6 +87,10 @@ void EntrezFetcher::readConfigHook(const KConfigGroup& config_) {
   QString s = config_.readEntry("Database", ENTREZ_DEFAULT_DATABASE); // default to pubmed
   if(!s.isEmpty()) {
     m_dbname = s;
+  }
+  QString k = config_.readEntry("API Key");
+  if(!k.isEmpty()) {
+    m_apiKey = k;
   }
 }
 
@@ -133,6 +141,9 @@ void EntrezFetcher::search() {
       stop();
       return;
   }
+  if(!m_apiKey.isEmpty()) {
+    q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+  }
   u.setQuery(q);
 
   m_step = Search;
@@ -141,6 +152,7 @@ void EntrezFetcher::search() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &EntrezFetcher::slotComplete);
+  markTime();
 }
 
 void EntrezFetcher::continueSearch() {
@@ -252,6 +264,9 @@ void EntrezFetcher::doSummary() {
   q.addQueryItem(QStringLiteral("db"),         m_dbname);
   q.addQueryItem(QStringLiteral("query_key"),  m_queryKey);
   q.addQueryItem(QStringLiteral("WebEnv"),     m_webEnv);
+  if(!m_apiKey.isEmpty()) {
+    q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+  }
   u.setQuery(q);
 
   m_step = Summary;
@@ -260,6 +275,7 @@ void EntrezFetcher::doSummary() {
   KJobWidgets::setWindow(m_job, GUI::Proxy::widget());
   connect(m_job.data(), &KJob::result,
           this, &EntrezFetcher::slotComplete);
+  markTime();
 }
 
 void EntrezFetcher::summaryResults(const QByteArray& data_) {
@@ -341,9 +357,14 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   q.addQueryItem(QStringLiteral("rettype"),    QStringLiteral("abstract"));
   q.addQueryItem(QStringLiteral("db"),         m_dbname);
   q.addQueryItem(QStringLiteral("id"),         QString::number(id));
+  if(!m_apiKey.isEmpty()) {
+    q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+  }
   u.setQuery(q);
 
   // now it's synchronous
+//  myDebug() << "id url:" << u.url();
+  markTime();
   QString xmlOutput = FileHandler::readXMLFile(u, true /*quiet*/);
   if(xmlOutput.isEmpty()) {
     myWarning() << "unable to download " << u;
@@ -360,6 +381,16 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
   f1.close();
 #endif
   QString str = m_xsltHandler->applyStylesheet(xmlOutput);
+  if(str.isEmpty()) {
+    // might be an API error, and message is in JSON
+    QJsonDocument doc = QJsonDocument::fromJson(xmlOutput.toUtf8());
+    if(!doc.isNull() && doc.object().contains(QStringLiteral("error"))) {
+      const QString error = doc.object().value(QStringLiteral("error")).toString();
+      message(error, MessageHandler::Error);
+      myLog() << "EntrezFetcher -" << error;
+    }
+    return Data::EntryPtr();
+  }
   Import::TellicoImporter imp(str);
   Data::CollPtr coll = imp.collection();
   if(!coll) {
@@ -385,8 +416,12 @@ Tellico::Data::EntryPtr EntrezFetcher::fetchEntryHook(uint uid_) {
     q.addQueryItem(QStringLiteral("db"),     m_dbname);
     q.addQueryItem(QStringLiteral("dbfrom"), m_dbname);
     q.addQueryItem(QStringLiteral("id"),     QString::number(id));
+    if(!m_apiKey.isEmpty()) {
+      q.addQueryItem(QStringLiteral("api_key"), m_apiKey);
+    }
     link.setQuery(q);
 
+    markTime();
     QDomDocument linkDom = FileHandler::readXMLDocument(link, false /* namespace */, true /* quiet */);
     // need eLinkResult/LinkSet/IdUrlList/IdUrlSet/ObjUrl/Url
     QDomNode linkNode = linkDom.namedItem(QStringLiteral("eLinkResult"))
@@ -433,8 +468,14 @@ void EntrezFetcher::initXSLTHandler() {
   }
 }
 
+// without an API key, limit is 3 searches per second
+// with a key, limit is 10
+// https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/
+void EntrezFetcher::markTime() {
+  QThread::msleep(m_apiKey.isEmpty() ? 350 : 110);
+}
+
 Tellico::Fetch::FetchRequest EntrezFetcher::updateRequest(Data::EntryPtr entry_) {
-//  myDebug();
   QString s = entry_->field(QStringLiteral("pmid"));
   if(!s.isEmpty()) {
     return FetchRequest(PubmedID, s);
@@ -475,12 +516,38 @@ Tellico::Fetch::ConfigWidget* EntrezFetcher::configWidget(QWidget* parent_) cons
 
 EntrezFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const EntrezFetcher* fetcher_/*=0*/)
     : Fetch::ConfigWidget(parent_) {
-  QVBoxLayout* l = new QVBoxLayout(optionsWidget());
-  l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
-  l->addStretch();
+  QGridLayout* l = new QGridLayout(optionsWidget());
+  l->setSpacing(4);
+  l->setColumnStretch(1, 10);
+
+  int row = -1;
+
+  QLabel* label = new QLabel(i18n("Access key: "), optionsWidget());
+  l->addWidget(label, ++row, 0);
+
+  m_apiKeyEdit = new QLineEdit(optionsWidget());
+  connect(m_apiKeyEdit, &QLineEdit::textChanged, this, &ConfigWidget::slotSetModified);
+  l->addWidget(m_apiKeyEdit, row, 1);
+  QString w = i18n("The default Tellico key may be used, but searching may fail due to reaching access limits.");
+  label->setWhatsThis(w);
+  m_apiKeyEdit->setWhatsThis(w);
+  label->setBuddy(m_apiKeyEdit);
+
+  l->setRowStretch(++row, 10);
 
   // now add additional fields widget
   addFieldsWidget(EntrezFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
+
+  if(fetcher_) {
+    m_apiKeyEdit->setText(fetcher_->m_apiKey);
+  }
+}
+
+void EntrezFetcher::ConfigWidget::saveConfigHook(KConfigGroup& config_) {
+  QString apiKey = m_apiKeyEdit->text().trimmed();
+  if(!apiKey.isEmpty()) {
+    config_.writeEntry("API Key", apiKey);
+  }
 }
 
 QString EntrezFetcher::ConfigWidget::preferredName() const {
