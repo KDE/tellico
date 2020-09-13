@@ -71,10 +71,12 @@ void OpenLibraryFetcherTest::testIsbn13() {
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
-  QCOMPARE(results.size(), 1);
+  // sometimes OpenLibrary has multiple works defined, so just verify one or more
+  QVERIFY(results.size() >= 1);
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("C Pocket Reference"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("978-0-596-00436-1"));
 }
 
 void OpenLibraryFetcherTest::testMultipleIsbn() {

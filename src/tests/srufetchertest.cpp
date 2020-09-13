@@ -104,7 +104,7 @@ void SRUFetcherTest::testKBTitle() {
 //  QCOMPARE(entry->field(QStringLiteral("author")), QStringLiteral("No Author"));
   QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("book"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Purmerend : Muusses"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("9023117042"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("90-231-1704-2"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1971"));
   QVERIFY(!entry->field(QStringLiteral("url")).isEmpty());
 }
@@ -132,7 +132,7 @@ void SRUFetcherTest::testKBIsbn() {
   QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Godfried Bomans: Erik of het klein insectenboek"));
   QCOMPARE(entry->field(QStringLiteral("entry-type")), QStringLiteral("book"));
   QCOMPARE(entry->field(QStringLiteral("publisher")), QStringLiteral("Purmerend : Muusses"));
-  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("9023117042"));
+  QCOMPARE(entry->field(QStringLiteral("isbn")), QStringLiteral("90-231-1704-2"));
   QCOMPARE(entry->field(QStringLiteral("year")), QStringLiteral("1971"));
   QVERIFY(!entry->field(QStringLiteral("url")).isEmpty());
 }
