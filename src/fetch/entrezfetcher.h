@@ -29,6 +29,7 @@
 #include "configwidget.h"
 
 #include <QPointer>
+#include <QElapsedTimer>
 
 class QLineEdit;
 
@@ -112,6 +113,7 @@ private:
   QHash<uint, Data::EntryPtr> m_entries; // map from search result id to entry
   QHash<uint, int> m_matches; // search result id to pubmed id
   QPointer<KIO::StoredTransferJob> m_job;
+  QElapsedTimer m_idleTime;
 
   QString m_queryKey;
   QString m_webEnv;

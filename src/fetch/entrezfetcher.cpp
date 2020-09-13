@@ -66,6 +66,7 @@ using Tellico::Fetch::EntrezFetcher;
 
 EntrezFetcher::EntrezFetcher(QObject* parent_) : Fetcher(parent_), m_xsltHandler(nullptr),
     m_start(1), m_total(-1), m_step(Begin), m_started(false) {
+  m_idleTime.start();
 }
 
 EntrezFetcher::~EntrezFetcher() {
@@ -472,7 +473,12 @@ void EntrezFetcher::initXSLTHandler() {
 // with a key, limit is 10
 // https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/
 void EntrezFetcher::markTime() {
-  QThread::msleep(m_apiKey.isEmpty() ? 350 : 110);
+  // not exactly the way to monitor rate over 3 or 10 calls, just a constant rate
+  const int wait = m_apiKey.isEmpty() ? 350 : 110;
+  while(m_idleTime.elapsed() < wait) {
+    QThread::msleep(100);
+  }
+  m_idleTime.restart();
 }
 
 Tellico::Fetch::FetchRequest EntrezFetcher::updateRequest(Data::EntryPtr entry_) {
