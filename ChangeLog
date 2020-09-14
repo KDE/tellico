@@ -1,5 +1,6 @@
 2020-09-13  Robby Stephenson  <robby@periapsis.org>
 
+	* Released Tellico 3.3.3.
 	* Improved Entrez data source to use API key and honor rate limit.
 
 2020-09-02  Robby Stephenson  <robby@periapsis.org>
