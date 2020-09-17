@@ -38,7 +38,9 @@ private Q_SLOTS:
   void initTestCase();
   void testTitle();
   void testPerson();
+  void testACDC();
   void testKeyword();
+  void testBug426560();
   void testCoverArt();
   void testSoundtrack();
 

@@ -1,3 +1,7 @@
+2020-09-16  Robby Stephenson  <robby@periapsis.org>
+
+	* Enabled general keyword search for MusicBrainz data source (Bug 426560).
+
 2020-09-13  Robby Stephenson  <robby@periapsis.org>
 
 	* Released Tellico 3.3.3.

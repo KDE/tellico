@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2018 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -113,11 +113,6 @@ void MusicBrainzFetcher::doSearch() {
       break;
 
     case Keyword:
-      queryString = QStringLiteral("artist:\"") + request().value + QStringLiteral("\" OR ") +
-                    QStringLiteral("release:\"") + request().value + QStringLiteral("\" OR ")  +
-                    QStringLiteral("label:\"") + request().value + QStringLiteral("\"");
-      break;
-
     case Raw:
       queryString = request().value;
       break;
