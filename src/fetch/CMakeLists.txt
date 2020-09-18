@@ -50,6 +50,7 @@ SET(fetch_STAT_SRCS
    mrlookupfetcher.cpp
    multifetcher.cpp
    musicbrainzfetcher.cpp
+   numistafetcher.cpp
    omdbfetcher.cpp
    openlibraryfetcher.cpp
    springerfetcher.cpp

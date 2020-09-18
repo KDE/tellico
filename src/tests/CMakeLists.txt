@@ -802,6 +802,14 @@ add_test(musicbrainzfetchertest musicbrainzfetchertest)
 ecm_mark_as_test(musicbrainzfetchertest)
 TARGET_LINK_LIBRARIES(musicbrainzfetchertest fetcherstest ${TELLICO_TEST_LIBS})
 
+add_executable(numistafetchertest numistafetchertest.cpp abstractfetchertest.cpp
+  ../fetch/numistafetcher.cpp
+)
+ecm_mark_nongui_executable(numistafetchertest)
+add_test(numistafetchertest numistafetchertest)
+ecm_mark_as_test(numistafetchertest)
+TARGET_LINK_LIBRARIES(numistafetchertest fetcherstest ${TELLICO_TEST_LIBS})
+
 add_executable(openlibraryfetchertest openlibraryfetchertest.cpp abstractfetchertest.cpp
   ../fetch/openlibraryfetcher.cpp
 )

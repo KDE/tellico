@@ -1,3 +1,7 @@
+2020-09-17  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for Numista.com.
+
 2020-09-16  Robby Stephenson  <robby@periapsis.org>
 
 	* Enabled general keyword search for MusicBrainz data source (Bug 426560).

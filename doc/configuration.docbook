@@ -189,6 +189,7 @@ while the full list is <ulink url="https://tellico-project.org/data-sources">ava
 <listitem><simpara><link linkend="sru">SRU servers</link>,</simpara></listitem>
 <!-- coins -->
 <listitem><simpara><link linkend="colnect">Colnect</link>,</simpara></listitem>
+<listitem><simpara><link linkend="numista">Numista</link>,</simpara></listitem>
 <!-- others -->
 <listitem><simpara><link linkend="externalexec">other external scripts or applications</link>, and</simpara></listitem>
 <listitem><simpara><link linkend="multiple-sources">combinations of any of the above sources</link>.</simpara></listitem>
@@ -462,6 +463,14 @@ The <ulink url="http://www.imdb.com">Internet Movie Database</ulink> provides in
 <para>
 <ulink url="https://colnect.com">Colnect</ulink> is an online community for collectibles providing personal collection management.
 &tellico; can search Colnect for coin and stamp information.
+</para>
+</sect3>
+
+<sect3 id="numista">
+<title>Numista</title>
+<para>
+<ulink url="https://numista.com">Numista</ulink> is a world coin catalog which grows thanks to member contributions, offering
+online collection management, tools to easily exchange with other collectors, and a forum.
 </para>
 </sect3>
 
