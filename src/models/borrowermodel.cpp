@@ -266,7 +266,8 @@ Tellico::Data::LoanPtr BorrowerModel::loan(const QModelIndex& index_) const {
   }
   Data::LoanPtr loan;
   Data::BorrowerPtr borrower = this->borrower(index_.parent());
-  if(borrower) {
+  // could have already removed the loan from the borrower
+  if(borrower && index_.row() < borrower->loans().size()) {
     loan = borrower->loans().at(index_.row());
   }
   return loan;
