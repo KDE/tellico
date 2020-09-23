@@ -1,3 +1,7 @@
+2020-09-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed crashing bug when checking in a loan (Bug 426815).
+
 2020-09-17  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for Numista.com.
