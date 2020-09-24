@@ -307,6 +307,7 @@ void ISBNValidator::fixup10(QString& input_) {
   if(input_.length() > 8
      && !input_.startsWith(QStringLiteral("978"))
      && !input_.startsWith(QStringLiteral("979"))) {
+    if(input_.length() == 9) input_.resize(10);
     input_[9] = checkSum10(input_);
   }
 
@@ -380,6 +381,7 @@ void ISBNValidator::fixup13(QString& input_) {
 
   // add the checksum
   if(after.length() > 8) {
+    if(after.length() == 9) after.resize(10);
     after[9] = checkSum13(input_.left(3) + after);
   }
 
