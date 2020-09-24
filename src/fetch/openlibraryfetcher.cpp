@@ -264,7 +264,11 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
 
     entry->setField(QStringLiteral("title"), mapValue(resultMap, "title"));
     entry->setField(QStringLiteral("subtitle"), mapValue(resultMap, "subtitle"));
-    entry->setField(QStringLiteral("pub_year"), mapValue(resultMap, "publish_date"));
+    QRegularExpression yearRx(QStringLiteral("\\d{4}"));
+    QRegularExpressionMatch yearMatch = yearRx.match(mapValue(resultMap, "publish_date"));
+    if(yearMatch.hasMatch()) {
+      entry->setField(QStringLiteral("pub_year"), yearMatch.captured());
+    }
     QString isbn = mapValue(resultMap, "isbn_10");
     if(isbn.isEmpty()) {
       isbn = mapValue(resultMap, "isbn_13");
@@ -293,7 +297,7 @@ void OpenLibraryFetcher::slotComplete(KJob* job_) {
     entry->setField(QStringLiteral("comments"), mapValue(resultMap, "notes"));
 
     if(optionalFields().contains(QStringLiteral("openlibrary"))) {
-      entry->setField(QStringLiteral("openlibrary"), QLatin1String("http://openlibrary.org") + mapValue(resultMap, "key"));
+      entry->setField(QStringLiteral("openlibrary"), QLatin1String("https://openlibrary.org") + mapValue(resultMap, "key"));
     }
 
     QStringList authors;
