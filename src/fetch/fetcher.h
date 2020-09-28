@@ -35,9 +35,9 @@
 #include <QString>
 #include <QStringList>
 #include <QExplicitlySharedDataPointer>
+#include <QUrl>
 
-class KConfigGroup;
-class QUrl;
+#include <KConfigGroup>
 
 namespace Tellico {
   namespace Fetch {
@@ -132,7 +132,7 @@ public:
    */
   void readConfig(const KConfigGroup& config, const QString& groupName);
   void saveConfig();
-  void setConfigGroup(const QString& group);
+  void setConfigGroup(const KConfigGroup& config);
   /**
    * Returns a widget for modifying the fetcher's config.
    */
@@ -163,7 +163,7 @@ private:
   virtual Data::EntryPtr fetchEntryHook(uint uid) = 0;
 
   MessageHandler* m_messager;
-  QString m_configGroup;
+  KConfigGroup m_configGroup;
   QStringList m_fields;
   QString m_uuid;
   QHash<uint, Data::EntryPtr> m_entries;

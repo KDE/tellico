@@ -121,7 +121,7 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
 
 void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {
   Q_ASSERT(config_.name() == groupName_);
-  m_configGroup = groupName_;
+  m_configGroup = config_;
 
   QString s = config_.readEntry("Name");
   if(!s.isEmpty()) {
@@ -140,15 +140,14 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
 }
 
 void Fetcher::saveConfig() {
-  if(m_configGroup.isEmpty()) {
+  if(!m_configGroup.isValid()) {
     return;
   }
-  KConfigGroup config(KSharedConfig::openConfig(), m_configGroup);
-  config.writeEntry("Uuid", m_uuid);
-  saveConfigHook(config);
+  m_configGroup.writeEntry("Uuid", m_uuid);
+  saveConfigHook(m_configGroup);
 }
 
-void Fetcher::setConfigGroup(const QString& group_) {
+void Fetcher::setConfigGroup(const KConfigGroup& group_) {
   m_configGroup = group_;
 }
 

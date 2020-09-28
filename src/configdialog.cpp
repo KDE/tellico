@@ -853,7 +853,7 @@ void ConfigDialog::saveFetchConfig() {
     cw->saveConfig(configGroup);
     item->setNewSource(false);
     // in case the ordering changed
-    item->setConfigGroup(group);
+    item->setConfigGroup(configGroup);
     reloadFetchers = true;
   }
   // now update total number of sources

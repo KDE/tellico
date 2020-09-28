@@ -27,35 +27,23 @@
 
 using Tellico::FetcherInfoListItem;
 
-FetcherInfoListItem::FetcherInfoListItem(const Tellico::Fetch::FetcherInfo& info_, const QString& groupName_)
-    : QListWidgetItem(), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(nullptr) {
-  setData(Qt::DisplayRole, info_.name);
-  QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
+FetcherInfoListItem::FetcherInfoListItem(QListWidget* parent_, const Tellico::Fetch::FetcherInfo& info_)
+    : QListWidgetItem(parent_)
+    , m_info(info_)
+    , m_newSource(true)
+    , m_fetcher(nullptr) {
+  setData(Qt::DisplayRole, m_info.name);
+  QPixmap pix = Fetch::Manager::fetcherIcon(m_info.type);
   if(!pix.isNull()) {
     setData(Qt::DecorationRole, pix);
   }
 }
 
-FetcherInfoListItem::FetcherInfoListItem(QListWidget* parent_, const Tellico::Fetch::FetcherInfo& info_, const QString& groupName_)
-    : QListWidgetItem(parent_), m_info(info_),
-      m_configGroup(groupName_), m_newSource(groupName_.isNull()), m_fetcher(nullptr) {
-  setData(Qt::DisplayRole, info_.name);
-  QPixmap pix = Fetch::Manager::fetcherIcon(info_.type);
-  if(!pix.isNull()) {
-    setData(Qt::DecorationRole, pix);
-  }
-}
-
-void FetcherInfoListItem::setConfigGroup(const QString& s) {
-  m_configGroup = s;
+void FetcherInfoListItem::setConfigGroup(const KConfigGroup& group_) {
+  m_configGroup = group_;
   if(m_fetcher) {
-    m_fetcher->setConfigGroup(s);
+    m_fetcher->setConfigGroup(m_configGroup);
   }
-}
-
-const QString& FetcherInfoListItem::configGroup() const {
-  return m_configGroup;
 }
 
 Tellico::Fetch::Type FetcherInfoListItem::fetchType() const {
@@ -66,7 +54,7 @@ void FetcherInfoListItem::setUpdateOverwrite(bool b) {
   m_info.updateOverwrite = b;
 }
 
-bool FetcherInfoListItem::updateOverwrite() const { 
+bool FetcherInfoListItem::updateOverwrite() const {
   return m_info.updateOverwrite;
 }
 

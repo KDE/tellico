@@ -29,6 +29,8 @@
 
 #include <QListWidgetItem>
 
+#include <KConfigGroup>
+
 namespace Tellico {
   namespace Fetch {
 
@@ -45,13 +47,9 @@ public:
 
 class FetcherInfoListItem : public QListWidgetItem {
 public:
-  explicit FetcherInfoListItem(const Fetch::FetcherInfo& info,
-                          const QString& groupName = QString());
-  FetcherInfoListItem(QListWidget* parent, const Fetch::FetcherInfo& info,
-                 const QString& groupName = QString());
+  FetcherInfoListItem(QListWidget* parent_, const Fetch::FetcherInfo& info_);
 
-  void setConfigGroup(const QString& s);
-  const QString& configGroup() const;
+  void setConfigGroup(const KConfigGroup& group);
   Fetch::Type fetchType() const;
   void setUpdateOverwrite(bool b);
   bool updateOverwrite() const;
@@ -64,7 +62,7 @@ public:
 private:
   Q_DISABLE_COPY(FetcherInfoListItem)
   Fetch::FetcherInfo m_info;
-  QString m_configGroup;
+  KConfigGroup m_configGroup;
   bool m_newSource;
   Fetch::Fetcher::Ptr m_fetcher;
 };
