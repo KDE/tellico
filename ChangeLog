@@ -1,3 +1,7 @@
+2020-10-04  Robby Stephenson  <robby@periapsis.org>
+
+	* Updated IGDB data source to APIv4.
+
 2020-09-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug when checking in a loan (Bug 426815).

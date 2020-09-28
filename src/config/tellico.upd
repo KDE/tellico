@@ -35,3 +35,8 @@ Id=tellico-3.2
 File=tellicorc
 Group=General Options
 RemoveKey=Show Group Widget
+#
+# config updates for Tellico 3.4
+Id=tellico-3.4
+File=tellicorc
+Script=tellico-3-4-update.pl,perl

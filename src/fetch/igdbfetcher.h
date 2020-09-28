@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -31,6 +31,7 @@
 
 #include <QLineEdit>
 #include <QPointer>
+#include <QElapsedTimer>
 
 class KJob;
 namespace KIO {
@@ -67,6 +68,7 @@ public:
   virtual Type type() const Q_DECL_OVERRIDE { return IGDB; }
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
+  virtual void saveConfigHook(KConfigGroup& config) Q_DECL_OVERRIDE;
   virtual void continueSearch() Q_DECL_OVERRIDE;
 
   /**
@@ -83,19 +85,33 @@ public:
 
 private Q_SLOTS:
   void slotComplete(KJob* job);
+  void populateHashes();
 
 private:
   virtual void search() Q_DECL_OVERRIDE;
   virtual FetchRequest updateRequest(Data::EntryPtr entry) Q_DECL_OVERRIDE;
   void populateEntry(Data::EntryPtr entry, const QVariantMap& resultMap);
-  void populateHashes();
-  QString companyName(const QString& companyId) const;
+  void markTime() const;
+  void checkAccessToken();
 
-  static QPointer<KIO::StoredTransferJob> igdbJob(const QUrl& url, const QString& apiKey, const QString& query);
+  QPointer<KIO::StoredTransferJob> igdbJob(const QUrl& url, const QString& query);
+
+  // IGDB has three data types for which the whole list must be read at once
+  enum IgdbDataType { Genre, Platform, Company };
+  static QString dataFileName(IgdbDataType dataType);
+
+  // read all cached data
+  void loadCachedData();
+  // update cached data
+  void updateData(IgdbDataType dataType, const QByteArray& data);
+  // download data list from Tgdb and update cache
+  void readDataList(IgdbDataType dataType, const QList<int>& idList=QList<int>());
 
   bool m_started;
+  mutable QElapsedTimer m_requestTimer;
 
-  QString m_apiKey;
+  QString m_accessToken;
+  QDateTime m_accessTokenExpires;
   QHash<uint, Data::EntryPtr> m_entries;
   QPointer<KIO::StoredTransferJob> m_job;
 
@@ -103,7 +119,7 @@ private:
   QHash<int, QString> m_platformHash;
   QHash<int, QString> m_esrbHash;
   QHash<int, QString> m_pegiHash;
-  mutable QHash<QString, QString> m_companyHash;
+  QHash<int, QString> m_companyHash;
 };
 
 class IGDBFetcher::ConfigWidget : public Fetch::ConfigWidget {
@@ -113,9 +129,6 @@ public:
   explicit ConfigWidget(QWidget* parent_, const IGDBFetcher* fetcher = nullptr);
   virtual void saveConfigHook(KConfigGroup&) Q_DECL_OVERRIDE;
   virtual QString preferredName() const Q_DECL_OVERRIDE;
-
-private:
-  QLineEdit* m_apiKeyEdit;
 };
 
   } // end namespace

@@ -481,7 +481,6 @@ void TheGamesDBFetcher::readDataList(TgdbDataType dataType_) {
   updateData(dataType_, data);
 }
 
-
 Tellico::Fetch::ConfigWidget* TheGamesDBFetcher::configWidget(QWidget* parent_) const {
   return new TheGamesDBFetcher::ConfigWidget(parent_, this);
 }
