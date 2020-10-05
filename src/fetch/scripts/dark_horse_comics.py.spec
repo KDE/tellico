@@ -4,6 +4,7 @@ Name[ca@valencia]=Comics Dark Horse
 Name[cs]=Dark Horse Comics
 Name[da]=Dark Horse Comics
 Name[de]=Dark-Horse-Comics
+Name[el]=Dark Horse Comics
 Name[en_GB]=Dark Horse Comics
 Name[es]=Dark Horse Comics
 Name[et]=Dark Horse koomiksid
