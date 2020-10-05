@@ -50,8 +50,8 @@ Tellico::Data::FieldList GameCollection::defaultFields() {
   list.append(Field::createDefaultField(Field::TitleField));
 
   QStringList platform;
-  platform << platformName(XboxOne) << platformName(Xbox360) << platformName(Xbox)
-           << platformName(PlayStation4) << platformName(PlayStation3) << platformName(PlayStation2) << platformName(PlayStation)
+  platform << platformName(XboxSeriesX) << platformName(XboxOne) << platformName(Xbox360) << platformName(Xbox)
+           << platformName(PlayStation5) << platformName(PlayStation4) << platformName(PlayStation3) << platformName(PlayStation2) << platformName(PlayStation)
            << platformName(PlayStationPortable) << platformName(PlayStationVita)
            << platformName(NintendoSwitch) << platformName(NintendoWiiU)
            << platformName(NintendoWii)  << platformName(Nintendo3DS) << platformName(NintendoDS)
