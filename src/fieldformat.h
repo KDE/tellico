@@ -86,6 +86,7 @@ public:
   static QRegularExpression commaSplitRegularExpression();
   static QString columnDelimiterString();
   static QString rowDelimiterString();
+  static QString matchValueRegularExpression(const QString& value);
 
   static QString fixupValue(const QString& value);
   /**

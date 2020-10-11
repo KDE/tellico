@@ -1,3 +1,7 @@
+2020-10-11  Robby Stephenson  <robby@periapsis.org>
+
+	* Improve "Filter br Group" expression to account for tables (Bug 427145).
+
 2020-10-04  Robby Stephenson  <robby@periapsis.org>
 
 	* Updated IGDB data source to APIv4.

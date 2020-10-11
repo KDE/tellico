@@ -29,6 +29,7 @@
 #include "../filter.h"
 #include "../entry.h"
 #include "../collections/bookcollection.h"
+#include "../collections/videocollection.h"
 #include "../images/imageinfo.h"
 #include "../images/imagefactory.h"
 
@@ -290,7 +291,7 @@ void FilterTest::testGroupViewFilter() {
   QVERIFY(filter1.matches(entry4));
   QVERIFY(filter1.matches(entry5));
 
-  QString rxPattern(QStringLiteral("(^|;\\s)") + pattern + QStringLiteral("($|;)"));
+  QString rxPattern = Tellico::FieldFormat::matchValueRegularExpression(pattern);
   // the filter should match entry1, entry3, and entry 4 but not entry2 or entry5
   Tellico::Filter filter2(Tellico::Filter::MatchAny);
   filter2.append(new Tellico::FilterRule(QStringLiteral("author"), rxPattern, Tellico::FilterRule::FuncRegExp));
@@ -299,4 +300,27 @@ void FilterTest::testGroupViewFilter() {
   QVERIFY(filter2.matches(entry3));
   QVERIFY(filter2.matches(entry4));
   QVERIFY(!filter2.matches(entry5));
+
+  // Bug 415886
+  Tellico::Data::CollPtr coll2(new Tellico::Data::VideoCollection(true, QStringLiteral("TestCollection2")));
+  Tellico::Data::EntryPtr movie(new Tellico::Data::Entry(coll2));
+  movie->setField(QStringLiteral("cast"), QStringLiteral("John Author") +
+                                          Tellico::FieldFormat::columnDelimiterString() +
+                                          QStringLiteral("role"));
+  Tellico::Filter castFilter(Tellico::Filter::MatchAny);
+  castFilter.append(new Tellico::FilterRule(QStringLiteral("cast"), rxPattern, Tellico::FilterRule::FuncRegExp));
+  // single table row with value
+  QVERIFY(castFilter.matches(movie));
+  movie->setField(QStringLiteral("cast"), QStringLiteral("John Author") +
+                                          Tellico::FieldFormat::rowDelimiterString() +
+                                          QStringLiteral("Second Author"));
+  // multiple table row with value only
+  QVERIFY(castFilter.matches(movie));
+  movie->setField(QStringLiteral("cast"), QStringLiteral("No one") +
+                                          Tellico::FieldFormat::rowDelimiterString() +
+                                          QStringLiteral("John Author") +
+                                          Tellico::FieldFormat::rowDelimiterString() +
+                                          QStringLiteral("Second Author"));
+  // multiple table row with value second
+  QVERIFY(castFilter.matches(movie));
 }

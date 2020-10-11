@@ -57,6 +57,25 @@ QString FieldFormat::rowDelimiterString() {
   return QChar(0x2028);
 }
 
+QString FieldFormat::matchValueRegularExpression(const QString& value_) {
+  // The regular expression accounts for values serialized either with multiple values,
+  // values in table columns, or values in table rows
+  // Beginning characters don't have to include the column delimiter since the filter
+  // only matches values in the first column
+  static const QString beginChars = FieldFormat::delimiterString()
+                                  + QLatin1String("|")
+                                  + FieldFormat::rowDelimiterString();
+  static const QString endChars = QLatin1String("[")
+                                + FieldFormat::delimiterString().front()
+                                + FieldFormat::columnDelimiterString().front()
+                                + FieldFormat::rowDelimiterString().front()
+                                + QLatin1String("]");
+  // TODO:: switch to QRegularExpression one day
+  return QLatin1String("(^|") + beginChars + QLatin1String(")") +
+         QRegExp::escape(value_) +
+         QLatin1String("($|") + endChars + QLatin1String(")");
+}
+
 QStringList FieldFormat::splitValue(const QString& string_, SplitParsing parsing_) {
   if(string_.isEmpty()) {
     return QStringList();
