@@ -108,7 +108,6 @@ void TheMovieDBFetcher::saveConfigHook(KConfigGroup& config_) {
     config_.writeEntry("ServerConfigDate", m_serverConfigDate);
   }
   config_.writeEntry("ImageBase", m_imageBase);
-  config_.sync();
 }
 
 void TheMovieDBFetcher::search() {

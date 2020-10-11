@@ -99,7 +99,6 @@ void IGDBFetcher::readConfigHook(const KConfigGroup& config_) {
 void IGDBFetcher::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("Access Token", m_accessToken);
   config_.writeEntry("Access Token Expires", m_accessTokenExpires);
-  config_.sync();
 }
 
 void IGDBFetcher::search() {

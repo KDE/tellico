@@ -179,7 +179,6 @@ void Z3950Fetcher::readConfigHook(const KConfigGroup& config_) {
 
 void Z3950Fetcher::saveConfigHook(KConfigGroup& config_) {
   config_.writeEntry("Syntax", m_syntax);
-  config_.sync();
 }
 
 void Z3950Fetcher::search() {

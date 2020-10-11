@@ -145,6 +145,7 @@ void Fetcher::saveConfig() {
   }
   m_configGroup.writeEntry("Uuid", m_uuid);
   saveConfigHook(m_configGroup);
+  m_configGroup.sync();
 }
 
 void Fetcher::setConfigGroup(const KConfigGroup& group_) {
