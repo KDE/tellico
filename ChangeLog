@@ -1,6 +1,7 @@
 2020-10-11  Robby Stephenson  <robby@periapsis.org>
 
-	* Improve "Filter br Group" expression to account for tables (Bug 427145).
+	* Improve "Filter by Group" expression to account for tables (Bug 427145).
+	* Switch to QRegularExpression from QRegExp for filtering.
 
 2020-10-04  Robby Stephenson  <robby@periapsis.org>
 

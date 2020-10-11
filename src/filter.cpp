@@ -29,7 +29,7 @@
 #include "images/imagefactory.h"
 #include "tellico_debug.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include <functional>
 
@@ -165,23 +165,23 @@ bool FilterRule::contains(Tellico::Data::EntryPtr entry_) const {
 
 bool FilterRule::matchesRegExp(Tellico::Data::EntryPtr entry_) const {
   // empty field name means search all
-  const QRegExp pattern = m_patternVariant.toRegExp();
+  const QRegularExpression pattern = m_patternVariant.toRegularExpression();
   if(m_fieldName.isEmpty()) {
     foreach(const QString& value, entry_->fieldValues()) {
-      if(pattern.indexIn(value) >= 0) {
+      if(pattern.match(value).hasMatch()) {
         return true;
       }
     }
     foreach(const QString& value, entry_->formattedFieldValues()) {
-      if(pattern.indexIn(value) >= 0) {
+      if(pattern.match(value).hasMatch()) {
         return true;
       }
     }
   } else {
-    return pattern.indexIn(entry_->field(m_fieldName)) >= 0 ||
+    return pattern.match(entry_->field(m_fieldName)).hasMatch() ||
            (entry_->collection()->hasField(m_fieldName) &&
             entry_->collection()->fieldByName(m_fieldName)->formatType() != FieldFormat::FormatNone &&
-            pattern.indexIn(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)) >= 0);
+            pattern.match(entry_->formattedField(m_fieldName, FieldFormat::ForceFormat)).hasMatch());
   }
 
   return false;
@@ -223,7 +223,7 @@ bool FilterRule::greaterThan(Tellico::Data::EntryPtr entry_) const {
 
 void FilterRule::updatePattern() {
   if(m_function == FuncRegExp || m_function == FuncNotRegExp) {
-    m_patternVariant = QRegExp(m_pattern, Qt::CaseInsensitive);
+    m_patternVariant = QRegularExpression(m_pattern, QRegularExpression::CaseInsensitiveOption);
   } else if(m_function == FuncBefore || m_function == FuncAfter)  {
     m_patternVariant = QDate::fromString(m_pattern, Qt::ISODate);
   } else if(m_function == FuncLess || m_function == FuncGreater)  {

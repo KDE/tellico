@@ -70,9 +70,8 @@ QString FieldFormat::matchValueRegularExpression(const QString& value_) {
                                 + FieldFormat::columnDelimiterString().front()
                                 + FieldFormat::rowDelimiterString().front()
                                 + QLatin1String("]");
-  // TODO:: switch to QRegularExpression one day
   return QLatin1String("(^|") + beginChars + QLatin1String(")") +
-         QRegExp::escape(value_) +
+         QRegularExpression::escape(value_) +
          QLatin1String("($|") + endChars + QLatin1String(")");
 }
 
