@@ -1769,23 +1769,23 @@ void MainWindow::setFilter(const QString& text_) {
     }
     // if the text contains any non-word characters, assume it's a regexp
     // but \W in qt is letter, number, or '_', I want to be a bit less strict
-    QRegExp rx(QLatin1String("[^\\w\\s-']"));
-    if(rx.indexIn(text) == -1) {
+    QRegularExpression rx(QLatin1String("[^\\w\\s-']"));
+    if(!rx.match(text).hasMatch()) {
       // split by whitespace, and add rules for each word
-      const QStringList tokens = text.split(QRegExp(QLatin1String("\\s")));
+      const QStringList tokens = text.split(QRegularExpression(QLatin1String("\\s")));
       foreach(const QString& token, tokens) {
         // an empty field string means check every field
         filter->append(new FilterRule(fieldName, token, FilterRule::FuncContains));
       }
     } else {
       // if it isn't valid, hold off on applying the filter
-      QRegExp tx(text);
+      QRegularExpression tx(text);
       if(!tx.isValid()) {
-        text = QRegExp::escape(text);
+        text = QRegularExpression::escape(text);
         tx.setPattern(text);
       }
       if(!tx.isValid()) {
-        myDebug() << "invalid regexp:" << text;
+        myDebug() << "invalid regular expression:" << text;
         return;
       }
       filter->append(new FilterRule(fieldName, text, FilterRule::FuncRegExp));

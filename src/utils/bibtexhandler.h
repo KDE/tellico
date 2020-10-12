@@ -29,7 +29,7 @@
 
 #include <QStringList>
 #include <QHash>
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace Tellico {
 
@@ -61,7 +61,7 @@ private:
   static QString addBraces(const QString& string);
 
   static StringListHash s_utf8LatexMap;
-  static const QRegExp s_badKeyChars;
+  static const QRegularExpression s_badKeyChars;
 };
 
 } // end namespace

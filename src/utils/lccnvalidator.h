@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -39,7 +39,7 @@ namespace Tellico {
  * - 2001-1114
  * - gm 71-2450
  */
-class LCCNValidator : public QRegExpValidator {
+class LCCNValidator : public QRegularExpressionValidator {
 Q_OBJECT
 
 public:

@@ -98,8 +98,8 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
   }
   if(f->name() == QStringLiteral("arxiv")) {
     // normalize and unVersion arxiv ID
-    static QRegExp rx1(QStringLiteral("^arxiv:"));
-    static QRegExp rx2(QStringLiteral("v\\d+$"));
+    static const QRegularExpression rx1(QStringLiteral("^arxiv:"));
+    static const QRegularExpression rx2(QStringLiteral("v\\d+$"));
     s1.remove(rx1);
     s1.remove(rx2);
     s2.remove(rx1);
@@ -134,7 +134,7 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
     return matches / sl1.count();
   }
   // last resort try removing punctuation
-  static QRegExp notAlphaNum(QStringLiteral("[^\\s\\w]"));
+  static const QRegularExpression notAlphaNum(QStringLiteral("[^\\s\\w]"));
   QString s1a = s1;
   s1a.remove(notAlphaNum);
   QString s2a = s2;
@@ -143,17 +143,5 @@ int EntryComparison::score(const Tellico::Data::EntryPtr& e1, const Tellico::Dat
 //    myDebug() << "match without punctuation";
     return MATCH_VALUE_STRONG;
   }
-  // matching when removing parentheses was an attempt to
-  // accommodate many typical Amazon search results
-  // but it's too onerous on the matching time,
-  // no no longer do it
-/*
-  static QRegExp rx(QStringLiteral("\\s*\\(.*\\)\\s*"));
-  s1.remove(rx);
-  s2.remove(rx);
-  if(!s1.isEmpty() && s1 == s2) {
-    return MATCH_VALUE_WEAK;
-  }
-*/
   return MATCH_VALUE_NONE;
 }

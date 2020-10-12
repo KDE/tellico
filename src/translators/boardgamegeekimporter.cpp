@@ -40,7 +40,6 @@
 #include <QGroupBox>
 #include <QCheckBox>
 #include <QDomDocument>
-#include <QRegExp>
 #include <QFile>
 #include <QApplication>
 #include <QUrlQuery>

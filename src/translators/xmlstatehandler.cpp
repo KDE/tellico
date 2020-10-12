@@ -37,6 +37,8 @@
 
 #include <KLocalizedString>
 
+#include <QRegularExpression>
+
 namespace {
 
 inline
@@ -656,8 +658,8 @@ bool TableColumnHandler::end(const QStringRef&, const QStringRef&) {
      d->currentField->name() == QLatin1String("track") &&
      !d->textBuffer.isEmpty() &&
      d->textBuffer.contains(FieldFormat::columnDelimiterString()) == 0) {
-    QRegExp rx(QLatin1String("\\d+:\\d\\d"));
-    if(rx.exactMatch(d->text)) {
+    const QRegularExpression rx(QLatin1String("^\\d+:\\d\\d$"));
+    if(rx.match(d->text).hasMatch()) {
       d->text += FieldFormat::columnDelimiterString();
       d->text += d->entries.back()->field(QStringLiteral("artist"));
     }

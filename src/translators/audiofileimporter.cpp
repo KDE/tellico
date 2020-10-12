@@ -387,7 +387,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   }
 
   QTextStream ts;
-  QRegExp iconRx(QLatin1String("Icon\\s*=\\s*(.*)"));
+  QRegularExpression iconRx(QLatin1String("^Icon\\s*=\\s*(.*?)\\s*$"));
   for(QStringList::ConstIterator it = directoryFiles.constBegin(); !m_cancelled && it != directoryFiles.constEnd(); ++it, ++j) {
     QFile file(*it);
     if(!file.open(QIODevice::ReadOnly)) {
@@ -395,12 +395,13 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     }
     ts.setDevice(&file);
     for(QString line = ts.readLine(); !line.isNull(); line = ts.readLine()) {
-      if(!iconRx.exactMatch(line)) {
+      QRegularExpressionMatch m = iconRx.match(line);
+      if(!m.hasMatch()) {
         continue;
       }
       QDir thisDir(*it);
       thisDir.cdUp();
-      QFileInfo fi(thisDir, iconRx.cap(1));
+      QFileInfo fi(thisDir, m.captured(1));
       Data::EntryPtr entry = albumMap[thisDir.dirName()];
       if(!entry) {
         continue;

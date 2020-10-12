@@ -33,8 +33,6 @@
 
 #include <KLocalizedString>
 
-#include <QRegExp>
-
 using namespace Tellico;
 using namespace Tellico::Data;
 using Tellico::Data::Entry;

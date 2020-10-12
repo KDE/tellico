@@ -35,8 +35,6 @@
 
 #include <KLocalizedString>
 
-#include <QRegExp>
-
 using namespace Tellico;
 using Tellico::Data::Collection;
 

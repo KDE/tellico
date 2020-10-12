@@ -77,16 +77,17 @@ Tellico::Data::CollPtr AMCImporter::collection() {
   QVector<char> buffer(l+1);
   m_ds.readRawData(buffer.data(), l);
   QString version = QString::fromLocal8Bit(buffer.data(), l);
-  QRegExp versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
-  if(versionRx.indexIn(version) == -1) {
+  QRegularExpression versionRx(QLatin1String(".+AMC_(\\d+)\\.(\\d+).+"));
+  QRegularExpressionMatch versionMatch = versionRx.match(version);
+  if(!versionMatch.hasMatch()) {
     myDebug() << "no file id match";
     return Data::CollPtr();
   }
 
   m_coll = new Data::VideoCollection(true);
 
-  m_majVersion = versionRx.cap(1).toInt();
-  m_minVersion = versionRx.cap(2).toInt();
+  m_majVersion = versionMatch.captured(1).toInt();
+  m_minVersion = versionMatch.captured(2).toInt();
 //  myDebug() << m_majVersion << "-" << m_minVersion;
 
   readString(); // name
@@ -223,12 +224,12 @@ void AMCImporter::readEntry() {
 
   e->setField(QStringLiteral("director"), readString());
   s = readString();
-  QRegExp roleRx(QLatin1String("(.+) \\(([^(]+)\\)"));
-  roleRx.setMinimal(true);
-  if(roleRx.indexIn(s) > -1) {
-    QString role = roleRx.cap(2).toLower();
+  QRegularExpression roleRx(QLatin1String("(.+?) \\(([^(]+)\\)"));
+  QRegularExpressionMatch roleMatch = roleRx.match(s);
+  if(roleMatch.hasMatch()) {
+    QString role = roleMatch.captured(2).toLower();
     if(role == QLatin1String("story") || role == QLatin1String("written by")) {
-      e->setField(QStringLiteral("writer"), roleRx.cap(1));
+      e->setField(QStringLiteral("writer"), roleMatch.captured(1));
     } else {
       e->setField(QStringLiteral("producer"), s);
     }
@@ -244,9 +245,10 @@ void AMCImporter::readEntry() {
   e->setField(QStringLiteral("plot"), readString());
   e->setField(QStringLiteral("comments"), readString());
   s = readString(); // video format
-  QRegExp regionRx(QLatin1String("Region \\d"));
-  if(regionRx.indexIn(s) > -1) {
-    e->setField(QStringLiteral("region"), regionRx.cap(0));
+  QRegularExpression regionRx(QLatin1String("Region \\d"));
+  QRegularExpressionMatch regionMatch = regionRx.match(s);
+  if(regionMatch.hasMatch()) {
+    e->setField(QStringLiteral("region"), regionMatch.captured());
   }
   e->setField(QStringLiteral("audio-track"), readString()); // audio format
   readString(); // resolution
@@ -266,10 +268,11 @@ void AMCImporter::readEntry() {
 QStringList AMCImporter::parseCast(const QString& text_) {
   QStringList cast;
   int nPar = 0;
-  QRegExp castRx(QLatin1String("[,()]"));
+  QRegularExpression castRx(QLatin1String("[,()]"));
+  QRegularExpressionMatch castMatch = castRx.match(text_);
   QString person, role;
   int oldPos = 0;
-  for(int pos = castRx.indexIn(text_); pos > -1; pos = castRx.indexIn(text_, pos+1)) {
+  for(int pos = castMatch.capturedStart(); pos > -1; pos = castMatch.capturedStart()) {
     if(text_.at(pos) == QLatin1Char(',') && nPar%2 == 0) {
       // we're done with this one
       person += text_.mid(oldPos, pos-oldPos).trimmed();
@@ -297,6 +300,7 @@ QStringList AMCImporter::parseCast(const QString& text_) {
         oldPos = pos+1; // add one to go past parenthesis
       }
     }
+    castMatch = castRx.match(text_, pos+1);
   }
   // grab the last one
   if(nPar%2 == 0) {

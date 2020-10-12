@@ -41,7 +41,7 @@ using Tellico::BibtexHandler;
 
 BibtexHandler::StringListHash BibtexHandler::s_utf8LatexMap;
 BibtexHandler::QuoteStyle BibtexHandler::s_quoteStyle = BibtexHandler::BRACES;
-const QRegExp BibtexHandler::s_badKeyChars(QLatin1String("[^0-9a-zA-Z-]"));
+const QRegularExpression BibtexHandler::s_badKeyChars(QLatin1String("[^0-9a-zA-Z-]"));
 
 QStringList BibtexHandler::bibtexKeys(const Tellico::Data::EntryList& entries_) {
   QStringList keys;
@@ -173,8 +173,7 @@ QString BibtexHandler::importText(char* text_) {
   // we need to lower-case any capitalized text after the first letter that is
   // NOT contained in braces
 
-  QRegExp rx(QStringLiteral("\\{([A-Z]+)\\}"));
-  rx.setMinimal(true);
+  QRegularExpression rx(QStringLiteral("\\{([A-Z]+?)\\}"));
   str.replace(rx, QStringLiteral("\\1"));
 
   return str;
@@ -239,11 +238,11 @@ QString BibtexHandler::exportText(const QString& text_, const QStringList& macro
 
 QString& BibtexHandler::cleanText(QString& text_) {
   // FIXME: need to improve this for removing all Latex entities
-//  QRegExp rx(QLatin1String("(?=[^\\\\])\\\\.+\\{"));
-  QRegExp rx(QLatin1String("\\\\.+\\{"));
-  rx.setMinimal(true);
+//  QRegularExpression rx(QLatin1String("(?=[^\\\\])\\\\.+\\{"));
+  static const QRegularExpression rx(QLatin1String("\\\\.+?\\{"));
+  static const QRegularExpression brackets(QLatin1String("[{}]"));
   text_.remove(rx);
-  text_.remove(QRegExp(QLatin1String("[{}]")));
+  text_.remove(brackets);
   return text_;
 }
 

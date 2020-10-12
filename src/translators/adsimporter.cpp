@@ -30,7 +30,7 @@
 #include "../core/filehandler.h"
 #include "../tellico_debug.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTextStream>
 
 using Tellico::Import::ADSImporter;
@@ -121,19 +121,19 @@ void ADSImporter::readText(const QString& text_, int n) {
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  QRegExp rx(QLatin1String("^\\s*%(\\w)\\s+(.*)$"));
+  QRegularExpression rx(QLatin1String("^\\s*%(\\w)\\s+(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !currLine.isNull(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
-    rx.indexIn(currLine);
-    QString tag = rx.cap(1);
-    QString value = rx.cap(2).trimmed();
+    QRegularExpressionMatch m = rx.match(currLine);
+    QString tag = m.captured(1);
+    QString value = m.captured(2).trimmed();
     if(tag.isEmpty()) {
       continue;
     }
 //    myDebug() << tag << ":" << value;
     // if the next line is not empty and does not match start regexp, append to value
-    while(!nextLine.isEmpty() && rx.indexIn(nextLine) == -1) {
+    while(!nextLine.isEmpty() && !rx.match(nextLine).hasMatch()) {
       value += nextLine.trimmed();
       nextLine = t.readLine();
     }
@@ -183,10 +183,10 @@ void ADSImporter::readText(const QString& text_, int n) {
     } else if(tag == QLatin1String("K")) {  // split the keywords
       value = value.split(QLatin1Char(',')).join(FieldFormat::delimiterString());
     } else if(tag == QLatin1String("Y")) {  // clean-up DOI
-      value.remove(QRegExp(QLatin1String("^\\s*DOI[\\s:]*"), Qt::CaseInsensitive));
+      value.remove(QRegularExpression(QLatin1String("^\\s*DOI[\\s:]*"), QRegularExpression::CaseInsensitiveOption));
       value = value.section(QLatin1Char(';'), 0, 0);
     } else if(tag == QLatin1String("J")) {  // clean-up journal
-      QStringList tokens = value.split(QRegExp(QLatin1String("\\s*,\\s*")));
+      QStringList tokens = value.split(QRegularExpression(QLatin1String("\\s*,\\s*")));
       if(!tokens.isEmpty()) {
         value = tokens.first();
       }

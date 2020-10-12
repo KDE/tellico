@@ -489,7 +489,7 @@ bool BibtexCollection::setFieldValue(Data::EntryPtr entry_, const QString& bibte
   QString value = value_;
   Q_ASSERT(field);
   if(bibtexField_.startsWith(QLatin1String("keyword"))) {
-    value.replace(QRegExp(QLatin1String("\\s*,\\s*")), FieldFormat::delimiterString());
+    value.replace(QRegularExpression(QLatin1String("\\s*,\\s*")), FieldFormat::delimiterString());
     // special case refbase bibtex export, with multiple keywords fields
     QString oValue = entry_->field(field);
     if(!oValue.isEmpty()) {

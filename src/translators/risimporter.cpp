@@ -33,7 +33,7 @@
 
 #include <KLocalizedString>
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTextStream>
 
 using Tellico::Import::RISImporter;
@@ -210,19 +210,19 @@ void RISImporter::readText(const QString& text_, int n, const QHash<QString, Tel
   // however, at least one website (Springer) outputs RIS with no space after the final "ER -"
   // so just strip the white space later
   // also be gracious and allow any amount of space before hyphen
-  QRegExp rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
+  const QRegularExpression rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
   QString currLine, nextLine;
   for(currLine = t.readLine(); !m_cancelled && !t.atEnd(); currLine = nextLine, j += currLine.length()) {
     nextLine = t.readLine();
-    rx.indexIn(currLine);
-    QString tag = rx.cap(1);
-    QString value = rx.cap(2).trimmed();
+    QRegularExpressionMatch m = rx.match(currLine);
+    QString tag = m.captured(1);
+    QString value = m.captured(2).trimmed();
     if(tag.isEmpty()) {
       continue;
     }
 //    myDebug() << tag << ": " << value;
     // if the next line is not empty and does not match start regexp, append to value
-    while(!nextLine.isEmpty() && rx.indexIn(nextLine) == -1) {
+    while(!nextLine.isEmpty() && !rx.match(nextLine).hasMatch()) {
       value += nextLine.trimmed();
       nextLine = t.readLine();
     }
@@ -354,7 +354,7 @@ bool RISImporter::maybeRIS(const QUrl& url_) {
   // and then first text line must be valid RIS
   QTextStream t(&text);
 
-  QRegExp rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
+  QRegularExpression rx(QLatin1String("^(\\w\\w)\\s+-(.*)$"));
   QString currLine;
   for(currLine = t.readLine(); !t.atEnd(); currLine = t.readLine()) {
     if(currLine.trimmed().isEmpty()) {
@@ -362,5 +362,5 @@ bool RISImporter::maybeRIS(const QUrl& url_) {
     }
     break;
   }
-  return rx.exactMatch(currLine);
+  return rx.match(currLine).hasMatch();
 }

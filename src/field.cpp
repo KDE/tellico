@@ -317,9 +317,9 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
     case PegiField:
       QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                         .split(QRegExp(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
+                         .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
 #else
-                         .split(QRegExp(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
+                         .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
 #endif
       field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
       field->setCategory(i18n("General"));

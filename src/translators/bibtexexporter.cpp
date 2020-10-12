@@ -36,7 +36,7 @@
 #include <KConfigGroup>
 #include <KComboBox>
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLabel>
@@ -295,10 +295,10 @@ void BibtexExporter::saveOptions(KSharedConfigPtr config_) {
 
 void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldList& fields_, const Tellico::Data::Entry& entry_,
                                     const QString& type_, const QString& key_) {
+  static const QRegularExpression numberRx(QLatin1String("^\\d+$"));
   const QStringList macros = static_cast<const Data::BibtexCollection*>(collection().data())->macroList().keys();
   const QString bibtex = QStringLiteral("bibtex");
   const QString bibtexSep = QStringLiteral("bibtex-separator");
-  QRegExp numberRx(QLatin1String("^\\d+$"));
 
   text_ += QLatin1Char('@') + type_ + QLatin1Char('{') + key_;
 
@@ -306,6 +306,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
   FieldFormat::Request format = (options() & Export::ExportFormatted ?
                                                 FieldFormat::ForceFormat :
                                                 FieldFormat::AsIsFormat);
+  QRegularExpression stripHTML(QLatin1String("<.*?>"));
   foreach(Data::FieldPtr fIt, fields_) {
     value = entry_.formattedField(fIt->name(), format);
     if(value.isEmpty()) {
@@ -324,13 +325,13 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
       }
     } else if(fIt->type() == Data::Field::Para) {
       // strip HTML from bibtex export
-      QRegExp stripHTML(QLatin1String("<.*>"));
-      stripHTML.setMinimal(true);
       value.remove(stripHTML);
     } else if(fIt->property(bibtex) == QLatin1String("pages")) {
-      QRegExp rx(QLatin1String("(\\d)-(\\d)"));
-      for(int pos = rx.indexIn(value); pos > -1; pos = rx.indexIn(value, pos+2)) {
-        value.replace(pos, 3, rx.cap(1) + QLatin1String("--") + rx.cap(2));
+      QRegularExpression rx(QLatin1String("(\\d)-(\\d)"));
+      QRegularExpressionMatch m = rx.match(value);
+      for(int pos = m.capturedStart(); pos > -1; pos = m.capturedStart()) {
+        value.replace(pos, 3, m.captured(1) + QLatin1String("--") + m.captured(2));
+        m = rx.match(value, pos+2);
       }
     }
 
@@ -339,7 +340,7 @@ void BibtexExporter::writeEntryText(QString& text_, const Tellico::Data::FieldLi
       value = (b ? QLatin1Char('{') : QLatin1Char('"'))
             + QLatin1String("\\url{") + value + QLatin1Char('}')
             + (b ? QLatin1Char('}') : QLatin1Char('"'));
-    } else if(numberRx.indexIn(value) == -1) {
+    } else if(!numberRx.match(value).hasMatch()) {
       // numbers aren't escaped, nor will they have macros
       // if m_expandMacros is true, then macros is empty, so this is ok even then
       value = BibtexHandler::exportText(value, macros);

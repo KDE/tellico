@@ -35,7 +35,6 @@
 #include <KLocalizedString>
 
 #include <QDomDocument>
-#include <QRegExp>
 #include <QTextCodec>
 
 using namespace Tellico;

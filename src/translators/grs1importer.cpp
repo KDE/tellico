@@ -80,10 +80,9 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   bool empty = true;
 
   // in format "(tag, tag) value"
-  QRegExp rx(QLatin1String("\\s*\\((\\d+),\\s*(.+)\\s*\\)\\s*(.+)\\s*"));
-//  rx.setMinimal(true);
-  QRegExp dateRx(QLatin1String(",[^,]*\\d{3,4}[^,]*")); // remove dates from authors
-  QRegExp pubRx(QLatin1String("([^:]+):([^,]+),?")); // split location and publisher
+  QRegularExpression rx(QLatin1String("^\\s*\\((\\d+),\\s*(.+)\\s*\\)\\s*(.+)\\s*$"));
+  QRegularExpression dateRx(QLatin1String(",[^,]*\\d{3,4}[^,]*")); // remove dates from authors
+  QRegularExpression pubRx(QLatin1String("([^:]+):([^,]+),?")); // split location and publisher
 
   bool ok;
   int n;
@@ -95,13 +94,14 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
   QTextStream t(&str, QIODevice::ReadOnly);
   for(QString line = t.readLine(); !t.atEnd(); line = t.readLine()) {
 //    myDebug() << line;
-    if(!rx.exactMatch(line)) {
+    QRegularExpressionMatch m = rx.match(line);
+    if(!m.hasMatch()) {
       continue;
     }
-    n = rx.cap(1).toInt();
-    v = rx.cap(2).toInt(&ok);
+    n = m.captured(1).toInt();
+    v = m.captured(2).toInt(&ok);
     if(!ok) {
-      v = rx.cap(2).toLower();
+      v = m.captured(2).toLower();
     }
     field = (*s_tagMap)[TagPair(n, v)];
     if(field.isEmpty()) {
@@ -109,7 +109,7 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     }
 //    myDebug() << "field is " << field;
     // assume if multiple values, it's allowed
-    val = rx.cap(3).trimmed();
+    val = m.captured(3).trimmed();
     if(val.isEmpty()) {
       continue;
     }
@@ -119,9 +119,10 @@ Tellico::Data::CollPtr GRS1Importer::collection() {
     } else if(field == QLatin1String("author")) {
       val.remove(dateRx);
     } else if(field == QLatin1String("publisher")) {
-      if(pubRx.indexIn(val) > -1) {
-        e->setField(QStringLiteral("address"), pubRx.cap(1));
-        val = pubRx.cap(2);
+      QRegularExpressionMatch pubMatch = pubRx.match(val);
+      if(pubMatch.hasMatch()) {
+        e->setField(QStringLiteral("address"), pubMatch.captured(1));
+        val = pubMatch.captured(2);
       }
     }
 

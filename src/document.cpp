@@ -46,7 +46,6 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 
-#include <QRegExp>
 #include <QApplication>
 
 #include <unistd.h>

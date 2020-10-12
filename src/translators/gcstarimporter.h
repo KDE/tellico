@@ -28,7 +28,7 @@
 #include "textimporter.h"
 #include "../datavectors.h"
 
-class QRegExp;
+class QRegularExpression;
 
 namespace Tellico {
   namespace Import {
@@ -59,7 +59,7 @@ public Q_SLOTS:
   void slotCancel() Q_DECL_OVERRIDE;
 
 private:
-  static QString splitJoin(const QRegExp& rx, const QString& s);
+  static QString splitJoin(const QRegularExpression& rx, const QString& s);
 
   void readGCfilms(const QString& text);
   void readGCstar(const QString& text);

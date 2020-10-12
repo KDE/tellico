@@ -42,7 +42,6 @@
 #include <QIcon>
 #include <QStringList>
 #include <QColor>
-#include <QRegExp>
 #include <QHeaderView>
 #include <QContextMenuEvent>
 

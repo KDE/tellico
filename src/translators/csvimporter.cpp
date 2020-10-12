@@ -47,7 +47,6 @@
 #include <QRadioButton>
 #include <QTableWidget>
 #include <QHeaderView>
-#include <QRegExp>
 #include <QGridLayout>
 #include <QByteArray>
 #include <QVBoxLayout>

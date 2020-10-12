@@ -56,7 +56,7 @@ void RisTest::testImport() {
   QCOMPARE(entry->field("year"), QStringLiteral("2002"));
   QCOMPARE(entry->field("pages"), QStringLiteral("1057-1119"));
   QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).count(), 3);
-  QCOMPARE(Tellico::FieldFormat::splitValue(entry->field("author")).first(), QStringLiteral("Koglin,M."));
+  QVERIFY(Tellico::FieldFormat::splitValue(entry->field("author")).contains(QStringLiteral("Koglin,M.")));
 
   Tellico::Data::BibtexCollection* bColl = dynamic_cast<Tellico::Data::BibtexCollection*>(coll.data());
   QVERIFY(bColl);

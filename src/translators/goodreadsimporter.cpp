@@ -37,7 +37,7 @@
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QDomDocument>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QUrlQuery>
 #include <QFile>
 
@@ -96,7 +96,7 @@ Tellico::Data::CollPtr GoodreadsImporter::collection() {
 
   // if the user is not all digits, assume it's a user name and
   // convert it to a user id
-  if(!QRegExp(QLatin1String("\\d+")).exactMatch(m_user)) {
+  if(!QRegularExpression(QLatin1String("^\\d+$")).match(m_user).hasMatch()) {
     m_user = idFromName(m_user);
   }
   if(m_user.isEmpty()) {

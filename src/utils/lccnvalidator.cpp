@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,15 +27,15 @@
 
 using Tellico::LCCNValidator;
 
-LCCNValidator::LCCNValidator(QObject* parent_) : QRegExpValidator(parent_) {
-  QRegExp rx(QLatin1String("[a-z ]{0,3}"
-                                  "("
-                                  "\\d{2}-?\\d{1,6}"
-                                  "|"
-                                  "\\d{4}-?\\d{1,6}"
-                                  ")"
-                                  " ?\\w*"));
-  setRegExp(rx);
+LCCNValidator::LCCNValidator(QObject* parent_) : QRegularExpressionValidator(parent_) {
+  QRegularExpression rx(QLatin1String("[a-z ]{0,3}"
+                                      "("
+                                      "\\d{2}-?\\d{1,6}"
+                                      "|"
+                                      "\\d{4}-?\\d{1,6}"
+                                      ")"
+                                      " ?\\w*"));
+  setRegularExpression(rx);
 }
 
 // static

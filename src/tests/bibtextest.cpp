@@ -102,6 +102,22 @@ void BibtexTest::testImport() {
   }
 }
 
+void BibtexTest::testPages() {
+  // small test to check the pages value ends up with 2 hyphens
+  Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
+  Tellico::Data::EntryPtr entry1(new Tellico::Data::Entry(coll));
+  coll->addEntries(entry1);
+  entry1->setField(QStringLiteral("title"), QStringLiteral("Title 1"));
+  entry1->setField(QStringLiteral("entry-type"), QStringLiteral("article"));
+  entry1->setField(QStringLiteral("pages"), QStringLiteral("2-8"));
+
+  Tellico::Export::BibtexExporter exporter(coll);
+  exporter.setEntries(coll->entries());
+  QString text = exporter.text();
+  qDebug() << text;
+  QVERIFY(text.contains(QStringLiteral("2--8")));
+}
+
 void BibtexTest::testDuplicateKeys() {
   Tellico::Data::CollPtr coll(new Tellico::Data::BibtexCollection(true));
   Tellico::Data::BibtexCollection* bColl = static_cast<Tellico::Data::BibtexCollection*>(coll.data());

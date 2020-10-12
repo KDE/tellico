@@ -65,7 +65,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <QPixmap>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QFileInfo>
 #include <QRadioButton>
 #include <QFrame>
@@ -704,7 +704,7 @@ void ConfigDialog::readGeneralConfig() {
   bool autoFormat = Config::autoFormat();
   m_cbFormat->setChecked(autoFormat);
 
-  const QRegExp comma(QLatin1String("\\s*,\\s*"));
+  const QRegularExpression comma(QLatin1String("\\s*,\\s*"));
 
   m_leCapitals->setText(Config::noCapitalizationString().replace(comma, FieldFormat::delimiterString()));
   m_leArticles->setText(Config::articlesString().replace(comma, FieldFormat::delimiterString()));
@@ -798,7 +798,7 @@ void ConfigDialog::saveGeneralConfig() {
   Config::setAutoCapitalization(m_cbCapitalize->isChecked());
   Config::setAutoFormat(m_cbFormat->isChecked());
 
-  const QRegExp semicolon(QLatin1String("\\s*;\\s*"));
+  const QRegularExpression semicolon(QLatin1String("\\s*;\\s*"));
   const QChar comma = QLatin1Char(',');
 
   Config::setNoCapitalizationString(m_leCapitals->text().replace(semicolon, comma));

@@ -93,10 +93,10 @@ void GCstarImporter::readGCfilms(const QString& text_) {
 
   bool convertUTF8 = false;
   QHash<QString, Data::BorrowerPtr> borrowers;
-  const QRegExp rx(QLatin1String("\\s*,\\s*"));
-  QRegExp year(QLatin1String("\\d{4}"));
-  QRegExp runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
-  QRegExp runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
+  QRegularExpression rx(QLatin1String("\\s*,\\s*"));
+  QRegularExpression year(QLatin1String("\\d{4}"));
+  QRegularExpression runTimeHr(QLatin1String("(\\d+)\\s?hr?"));
+  QRegularExpression runTimeMin(QLatin1String("(\\d+)\\s?mi?n?"));
 
   bool gotFirstLine = false;
 
@@ -142,24 +142,27 @@ void GCstarImporter::readGCfilms(const QString& text_) {
     Data::EntryPtr entry(new Data::Entry(m_coll));
     entry->setId(Tellico::toUInt(values[0], &ok));
     entry->setField(QStringLiteral("title"), values[1]);
-    if(year.indexIn(values[2]) > -1) {
-      entry->setField(QStringLiteral("year"), year.cap());
+    QRegularExpressionMatch yearMatch = year.match(values[2]);
+    if(yearMatch.hasMatch()) {
+      entry->setField(QStringLiteral("year"), yearMatch.captured());
     }
 
     uint time = 0;
-    if(runTimeHr.indexIn(values[3]) > -1) {
-      time = Tellico::toUInt(runTimeHr.cap(1), &ok) * 60;
+    QRegularExpressionMatch runTimeMatch = runTimeHr.match(values[3]);
+    if(runTimeMatch.hasMatch()) {
+      time = Tellico::toUInt(runTimeMatch.captured(1), &ok) * 60;
     }
-    if(runTimeMin.indexIn(values[3]) > -1) {
-      time += Tellico::toUInt(runTimeMin.cap(1), &ok);
+    runTimeMatch = runTimeMin.match(values[3]);
+    if(runTimeMatch.hasMatch()) {
+      time += Tellico::toUInt(runTimeMatch.captured(1), &ok);
     }
     if(time > 0) {
       entry->setField(QStringLiteral("running-time"),  QString::number(time));
     }
 
-    entry->setField(QStringLiteral("director"),      splitJoin(rx, values[4]));
-    entry->setField(QStringLiteral("nationality"),   splitJoin(rx, values[5]));
-    entry->setField(QStringLiteral("genre"),         splitJoin(rx, values[6]));
+    entry->setField(QStringLiteral("director"),    splitJoin(rx, values[4]));
+    entry->setField(QStringLiteral("nationality"), splitJoin(rx, values[5]));
+    entry->setField(QStringLiteral("genre"),       splitJoin(rx, values[6]));
     QUrl u = QUrl(values[7]);
     if(!u.isEmpty()) {
       QString id = ImageFactory::addImage(u, true /* quiet */);
@@ -279,7 +282,7 @@ void GCstarImporter::readGCstar(const QString& text_) {
 }
 
 inline
-QString GCstarImporter::splitJoin(const QRegExp& rx, const QString& s) {
+QString GCstarImporter::splitJoin(const QRegularExpression& rx, const QString& s) {
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
   return s.split(rx, QString::SkipEmptyParts).join(FieldFormat::delimiterString());
 #else

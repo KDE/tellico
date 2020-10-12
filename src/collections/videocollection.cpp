@@ -66,9 +66,9 @@ Tellico::Data::FieldList VideoCollection::defaultFields() {
                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)",
                            "G (USA),PG (USA),PG-13 (USA),R (USA), U (USA)")
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
-                     .split(QRegExp(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
+                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), QString::SkipEmptyParts);
 #else
-                     .split(QRegExp(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
+                     .split(QRegularExpression(QLatin1String("\\s*,\\s*")), Qt::SkipEmptyParts);
 #endif
   field = new Field(QStringLiteral("certification"), i18n("Certification"), cert);
   field->setCategory(i18n(video_general));
