@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2013 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2013-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 #include <QHash>
 
 class VNDBFetcherTest : public AbstractFetcherTest {
@@ -39,6 +41,7 @@ private Q_SLOTS:
   void testTitle();
 
 private:
+  KConfigGroup m_config;
   QHash<QString, QString> m_fieldValues;
 };
 

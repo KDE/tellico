@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2013 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2013-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -30,8 +30,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -44,27 +43,22 @@ void VNDBFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::GameCollection> registerGame(Tellico::Data::Collection::Game, "game");
   Tellico::ImageFactory::init();
 
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("vndb"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("origtitle,alias"));
+
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("G-senjou no Maou"));
   m_fieldValues.insert(QStringLiteral("year"), QStringLiteral("2008"));
   m_fieldValues.insert(QStringLiteral("developer"), QStringLiteral("Akabei Soft2"));
   m_fieldValues.insert(QStringLiteral("publisher"), QStringLiteral("Akabei Soft2"));
   m_fieldValues.insert(QStringLiteral("origtitle"), QStringLiteral("G線上の魔王"));
-  // alias value was removed from the vndb data for this item
-//  m_fieldValues.insert(QStringLiteral("alias"), QStringLiteral("The Devil on G-String"));
+  m_fieldValues.insert(QStringLiteral("alias"), QStringLiteral("The Devil on G-String"));
 }
 
 void VNDBFetcherTest::testTitle() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("vndb");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("G-senjou no Maou"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::VNDBFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -75,6 +69,9 @@ void VNDBFetcherTest::testTitle() {
   while(i.hasNext()) {
     i.next();
     QString result = entry->field(i.key()).toLower();
+    if(i.key() == QLatin1String("alias")) {
+      QEXPECT_FAIL("", "alias value was removed from the vndb data for this item", Continue);
+    }
     QCOMPARE(result, i.value().toLower());
   }
   QVERIFY(!entry->field(QStringLiteral("description")).isEmpty());

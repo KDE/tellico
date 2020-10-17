@@ -32,7 +32,7 @@
 #include "../images/image.h"
 #include "../fieldformat.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -60,12 +60,13 @@ void DarkHorseFetcherTest::testComic() {
                                        QSL("axe cop: bad guy earth #1"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
-  KConfig config(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"), KConfig::SimpleConfig);
-  KConfigGroup cg = config.group(QSL("<default>"));
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py.spec"),
+                                                        KConfig::SimpleConfig);
+  KConfigGroup cg = config->group(QSL("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/dark_horse_comics.py"));
+  fetcher->readConfig(cg);
   // don't sync() and save the new path
-  cg.markAsClean();
-  fetcher->readConfig(cg, cg.name());
+  cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

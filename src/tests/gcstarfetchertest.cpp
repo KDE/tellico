@@ -35,7 +35,7 @@
 #include "../fieldformat.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -59,16 +59,13 @@ void GCstarFetcherTest::initTestCase() {
 }
 
 void GCstarFetcherTest::testSnowyRiver() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("GCstar Video");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("gcstar"));
+  cg.writeEntry("CollectionType", QStringLiteral("3"));
+  cg.writeEntry("Plugin", QStringLiteral("Amazon (US)"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::GCstarPluginFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

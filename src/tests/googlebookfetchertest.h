@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,8 +27,6 @@
 
 #include "abstractfetchertest.h"
 
-#include <KConfig>
-
 class GoogleBookFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -43,9 +41,6 @@ private Q_SLOTS:
 
 private:
   void compareEntry(Tellico::Data::EntryPtr entry);
-
-  bool m_hasConfigFile;
-  KConfig m_config;
 };
 
 #endif

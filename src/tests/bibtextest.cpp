@@ -32,7 +32,8 @@
 #include "../utils/bibtexhandler.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
+#include <KSharedConfig>
+#include <KConfigGroup>
 
 #include <QTest>
 
@@ -46,7 +47,9 @@ void BibtexTest::initTestCase() {
 }
 
 void BibtexTest::testImport() {
-  KSharedConfigPtr config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
+  KSharedConfigPtr config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig);
+  KConfigGroup cg = config->group(QStringLiteral("ExportOptions - Bibtex"));
+  cg.writeEntry("URL Package", true);
 
   QList<QUrl> urls;
   urls << QUrl::fromLocalFile(QFINDTESTDATA("data/test.bib"));
@@ -114,7 +117,6 @@ void BibtexTest::testPages() {
   Tellico::Export::BibtexExporter exporter(coll);
   exporter.setEntries(coll->entries());
   QString text = exporter.text();
-  qDebug() << text;
   QVERIFY(text.contains(QStringLiteral("2--8")));
 }
 

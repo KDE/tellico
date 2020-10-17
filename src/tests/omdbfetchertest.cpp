@@ -31,8 +31,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -43,21 +42,23 @@ OMDBFetcherTest::OMDBFetcherTest() : AbstractFetcherTest() {
 
 void OMDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
+
+  QString configFile = QFINDTESTDATA("tellicotest_private.config");
+  if(!configFile.isEmpty()) {
+    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("OMDB"));
+  }
 }
 
 void OMDBFetcherTest::testTitle() {
   // all the private API test config is in tellicotest_private.config right now
-  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("OMDB");
-  if(!config.hasGroup(groupName)) {
+  if(!m_config.isValid()) {
     QSKIP("This test requires a config file.", SkipAll);
   }
-  KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QStringLiteral("superman returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -85,18 +86,14 @@ void OMDBFetcherTest::testTitle() {
 
 // see https://bugs.kde.org/show_bug.cgi?id=336765
 void OMDBFetcherTest::testBabel() {
-  // all the private API test config is in tellicotest_private.config right now
-  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("OMDB");
-  if(!config.hasGroup(groupName)) {
+  if(!m_config.isValid()) {
     QSKIP("This test requires a config file.", SkipAll);
   }
-  KConfigGroup cg(&config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title,
                                        QStringLiteral("babel"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::OMDBFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

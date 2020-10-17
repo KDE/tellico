@@ -31,8 +31,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -43,21 +42,17 @@ NumistaFetcherTest::NumistaFetcherTest() : AbstractFetcherTest() {
 
 void NumistaFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
+
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("numista"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("numista,description,obverse,reverse,km"));
 }
 
 void NumistaFetcherTest::testSacagawea() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("numista");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Coin,
                                        Tellico::Fetch::Keyword,
                                        QStringLiteral("2019 Sacagawea"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::NumistaFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   static_cast<Tellico::Fetch::NumistaFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);

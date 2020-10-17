@@ -57,7 +57,7 @@ void IGDBFetcherTest::testKeyword() {
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QStringLiteral("Zelda Twilight Princess"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::IGDBFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 5);
   fetcher->saveConfig(); // to save the access token

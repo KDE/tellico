@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class ComicVineFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -35,6 +37,9 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testKeyword();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

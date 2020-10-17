@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfig>
+
 #include <QHash>
 
 class EntrezFetcherTest : public AbstractFetcherTest {
@@ -43,6 +45,7 @@ private Q_SLOTS:
   void testDOI();
 
 private:
+  KConfigGroup m_config;
   QHash<QString, QString> m_fieldValues;
 };
 

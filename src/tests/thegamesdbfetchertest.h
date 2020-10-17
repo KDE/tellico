@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 #include <QHash>
 
 class TheGamesDBFetcherTest : public AbstractFetcherTest {
@@ -39,6 +41,7 @@ private Q_SLOTS:
   void testTitle();
 
 private:
+  KConfigGroup m_config;
   QHash<QString, QString> m_fieldValues;
 };
 

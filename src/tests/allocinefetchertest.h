@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class AllocineFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -44,6 +46,9 @@ private Q_SLOTS:
   void testTitleAPI();
   void testTitleAPIAccented();
   void testGhostDog();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2017 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2017-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class KinoTeatrFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -35,6 +37,9 @@ public:
 private Q_SLOTS:
   void initTestCase();
   void testSuperman();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

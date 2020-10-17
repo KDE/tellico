@@ -33,8 +33,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -46,6 +45,10 @@ AllocineFetcherTest::AllocineFetcherTest() : AbstractFetcherTest() {
 void AllocineFetcherTest::initTestCase() {
   Tellico::RegisterCollection<Tellico::Data::VideoCollection> registerVideo(Tellico::Data::Collection::Video, "video");
   Tellico::ImageFactory::init();
+
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("allocine"));
+  m_config.writeEntry("Max Cast", QStringLiteral("5"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("origtitle,allocine"));
 }
 
 void AllocineFetcherTest::cleanupTestCase() {
@@ -62,9 +65,9 @@ void AllocineFetcherTest::testTitle() {
   KConfig config(QFINDTESTDATA("../fetch/scripts/fr.allocine.py.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config.group(QStringLiteral("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/fr.allocine.py"));
+  fetcher->readConfig(cg);
   // don't sync() and save the new path
-  cg.markAsClean();
-  fetcher->readConfig(cg, cg.name());
+  cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -98,9 +101,9 @@ void AllocineFetcherTest::testTitleAccented() {
   KConfig config(QFINDTESTDATA("../fetch/scripts/fr.allocine.py.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config.group(QStringLiteral("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/fr.allocine.py"));
+  fetcher->readConfig(cg);
   // don't sync() and save the new path
-  cg.markAsClean();
-  fetcher->readConfig(cg, cg.name());
+  cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -122,9 +125,9 @@ void AllocineFetcherTest::testTitleAccentRemoved() {
   KConfig config(QFINDTESTDATA("../fetch/scripts/fr.allocine.py.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config.group(QStringLiteral("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/fr.allocine.py"));
+  fetcher->readConfig(cg);
   // don't sync() and save the new path
-  cg.markAsClean();
-  fetcher->readConfig(cg, cg.name());
+  cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -144,9 +147,9 @@ void AllocineFetcherTest::testPlotQuote() {
   KConfig config(QFINDTESTDATA("../fetch/scripts/fr.allocine.py.spec"), KConfig::SimpleConfig);
   KConfigGroup cg = config.group(QStringLiteral("<default>"));
   cg.writeEntry("ExecPath", QFINDTESTDATA("../fetch/scripts/fr.allocine.py"));
+  fetcher->readConfig(cg);
   // don't sync() and save the new path
-  cg.markAsClean();
-  fetcher->readConfig(cg, cg.name());
+  cg.deleteEntry("ExecPath");
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -158,17 +161,10 @@ void AllocineFetcherTest::testPlotQuote() {
 }
 
 void AllocineFetcherTest::testTitleAPI() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("allocine");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AllocineFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -192,17 +188,10 @@ void AllocineFetcherTest::testTitleAPI() {
 }
 
 void AllocineFetcherTest::testTitleAPIAccented() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("allocine");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QStringLiteral("Opération Tonnerre"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AllocineFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);
@@ -218,17 +207,10 @@ void AllocineFetcherTest::testTitleAPIAccented() {
 
 // mentioned in https://bugs.kde.org/show_bug.cgi?id=337432
 void AllocineFetcherTest::testGhostDog() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("allocine");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Keyword,
                                        QStringLiteral("Ghost Dog: la voie du samourai"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AllocineFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
   QCOMPARE(results.size(), 1);

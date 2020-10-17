@@ -37,26 +37,28 @@
 QTEST_GUILESS_MAIN( DiscogsFetcherTest )
 
 DiscogsFetcherTest::DiscogsFetcherTest() : AbstractFetcherTest()
-    , m_needToWait(false)
-    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
+    , m_needToWait(false) {
 }
 
 void DiscogsFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
+  if(m_hasConfigFile) {
+    m_config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
+  }
 }
 
 void DiscogsFetcherTest::testTitle() {
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Title,
                                        QStringLiteral("Anywhere But Home"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
   QVERIFY(fetcher->needsUserAgent());
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
@@ -92,15 +94,15 @@ void DiscogsFetcherTest::testPerson() {
   if(m_needToWait) QTest::qWait(1000);
 
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Person,
                                        QStringLiteral("Evanescence"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -123,15 +125,15 @@ void DiscogsFetcherTest::testKeyword() {
   if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Keyword,
                                        QStringLiteral("Fallen Evanescence 2004"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
@@ -155,15 +157,15 @@ void DiscogsFetcherTest::testRawData() {
   if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Raw,
                                        QStringLiteral("q=r1588789"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -192,15 +194,15 @@ void DiscogsFetcherTest::testRawDataVinyl() {
   if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::Raw,
                                        QStringLiteral("q=r456552"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

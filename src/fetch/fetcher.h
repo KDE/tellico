@@ -130,7 +130,7 @@ public:
   /**
    * Reads the config for the widget, given a config group.
    */
-  void readConfig(const KConfigGroup& config, const QString& groupName);
+  void readConfig(const KConfigGroup& config);
   void saveConfig();
   void setConfigGroup(const KConfigGroup& config);
   /**

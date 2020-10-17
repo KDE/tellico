@@ -53,7 +53,6 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
 }
 
 Fetcher::~Fetcher() {
-  DEBUG_BLOCK;
   saveConfig();
 }
 
@@ -120,8 +119,7 @@ void Fetcher::startUpdate(Tellico::Data::EntryPtr entry_) {
 //  updateEntry(entry_);
 }
 
-void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_) {
-  Q_ASSERT(config_.name() == groupName_);
+void Fetcher::readConfig(const KConfigGroup& config_) {
   m_configGroup = config_;
 
   QString s = config_.readEntry("Name");
@@ -141,11 +139,9 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
 }
 
 void Fetcher::saveConfig() {
-  DEBUG_BLOCK;
   if(!m_configGroup.isValid() || m_configGroup.isImmutable()) {
     return;
   }
-  myDebug() << m_configGroup.config();
   m_configGroup.writeEntry("Uuid", m_uuid);
   saveConfigHook(m_configGroup);
   m_configGroup.sync();

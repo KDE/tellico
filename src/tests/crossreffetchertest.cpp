@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2015 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2015-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -32,8 +32,7 @@
 #include "../entry.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -46,6 +45,9 @@ void CrossRefFetcherTest::initTestCase() {
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/unixref2tellico.xsl"));
   Tellico::RegisterCollection<Tellico::Data::BibtexCollection> registerBibtex(Tellico::Data::Collection::Bibtex, "bibtex");
 
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("crossref"));
+  m_config.writeEntry("Email", QStringLiteral("robby@periapsis.org"));
+
   m_fieldValues.insert(QStringLiteral("doi"), QStringLiteral("10.2514/1.G000894"));
   m_fieldValues.insert(QStringLiteral("entry-type"), QStringLiteral("article"));
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("Robustness and Efficiency Improvements for Star Tracker Attitude Estimation"));
@@ -57,17 +59,10 @@ void CrossRefFetcherTest::initTestCase() {
 }
 
 void CrossRefFetcherTest::testDOI() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("crossref");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::DOI,
                                        m_fieldValues.value(QStringLiteral("doi")));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::CrossRefFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   // easy place to check whether the user agent setting is correct
   QCOMPARE(fetcher->needsUserAgent(), false);

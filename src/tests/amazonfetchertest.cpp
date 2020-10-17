@@ -44,8 +44,7 @@
 
 QTEST_GUILESS_MAIN( AmazonFetcherTest )
 
-AmazonFetcherTest::AmazonFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false)
-    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig) {
+AmazonFetcherTest::AmazonFetcherTest() : AbstractFetcherTest(), m_hasConfigFile(false) {
 }
 
 void AmazonFetcherTest::initTestCase() {
@@ -56,6 +55,9 @@ void AmazonFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
 
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
+  if(m_hasConfigFile) {
+    m_config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
+  }
 
   QHash<QString, QString> practicalRdf;
   practicalRdf.insert(QStringLiteral("title"), QStringLiteral("Practical RDF"));
@@ -109,14 +111,14 @@ void AmazonFetcherTest::testTitle() {
   QFETCH(QString, resultName);
 
   QString groupName = QStringLiteral("Amazon ") + locale;
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(collType, Tellico::Fetch::Title, searchValue);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -216,15 +218,15 @@ void AmazonFetcherTest::testTitle_data() {
 void AmazonFetcherTest::testTitleVideoGame() {
   return; // re-enable if/when Amazon searches are not so heavily throttled
   QString groupName = QStringLiteral("Amazon US");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Ghostbusters Story Pack - LEGO Dimensions"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -245,16 +247,16 @@ void AmazonFetcherTest::testIsbn() {
   QFETCH(QString, resultName);
 
   QString groupName = QStringLiteral("Amazon ") + locale;
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   // also testing multiple values
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN,
                                        searchValue);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -309,14 +311,14 @@ void AmazonFetcherTest::testUpc() {
   QFETCH(QString, resultName);
 
   QString groupName = QStringLiteral("Amazon ") + locale;
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(collType, Tellico::Fetch::UPC, searchValue);
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::AmazonFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -418,13 +420,13 @@ void AmazonFetcherTest::testRequest() {
 
 void AmazonFetcherTest::testPayload() {
   QString groupName = QStringLiteral("Amazon US");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::AmazonFetcher* fetcher = new Tellico::Fetch::AmazonFetcher(this);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Fetch::FetchRequest req(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
   QByteArray payload = fetcher->requestPayload(req);
@@ -461,15 +463,15 @@ void AmazonFetcherTest::testError() {
 
 void AmazonFetcherTest::testUpc1() {
   QString groupName = QStringLiteral("Amazon US");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-upc1.json");
 
@@ -487,15 +489,15 @@ void AmazonFetcherTest::testUpc1() {
 
 void AmazonFetcherTest::testUpc2() {
   QString groupName = QStringLiteral("Amazon US");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::UPC, "717356278525; 842776102270");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   QByteArray payload = f->requestPayload(request);
   // verify the format of the multiple UPC keyword
@@ -518,15 +520,15 @@ void AmazonFetcherTest::testUpc2() {
 // from https://github.com/dkam/paapi/blob/master/test/data/get_item_no_author.json
 void AmazonFetcherTest::testBasicBook() {
   QString groupName = QStringLiteral("Amazon UK");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-book.json");
 
@@ -570,15 +572,15 @@ void AmazonFetcherTest::testTitleParsing() {
 // from https://github.com/utekaravinash/gopaapi5/blob/master/_response/search_items.json
 void AmazonFetcherTest::testSearchItems_gopaapi5() {
   QString groupName = QStringLiteral("Amazon UK");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-search-items-gopaapi5.json");
 
@@ -610,15 +612,15 @@ void AmazonFetcherTest::testSearchItems_gopaapi5() {
 // from https://github.com/utekaravinash/gopaapi5/blob/master/_response/get_items.json
 void AmazonFetcherTest::testGetItems_gopaapi5() {
   QString groupName = QStringLiteral("Amazon UK");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with Amazon settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Book, Tellico::Fetch::ISBN, "1921878657");
   Tellico::Fetch::AmazonFetcher* f = new Tellico::Fetch::AmazonFetcher(this);
   Tellico::Fetch::Fetcher::Ptr fetcher(f);
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   f->m_testResultsFile = QFINDTESTDATA("data/amazon-paapi-get-items-gopaapi5.json");
 

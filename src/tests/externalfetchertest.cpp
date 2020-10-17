@@ -32,7 +32,7 @@
 #include "../collectionfactory.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -54,9 +54,9 @@ void ExternalFetcherTest::testMods() {
                                        QFINDTESTDATA("data/example_mods.xml"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ExecExternalFetcher(this));
 
-  KConfig config(QFINDTESTDATA("data/cat_mods.spec"), KConfig::SimpleConfig);
-  KConfigGroup cg = config.group(QStringLiteral("<default>"));
-  fetcher->readConfig(cg, cg.name());
+  KSharedConfig::Ptr config = KSharedConfig::openConfig(QFINDTESTDATA("data/cat_mods.spec"), KConfig::SimpleConfig);
+  KConfigGroup cg = config->group(QStringLiteral("<default>"));
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

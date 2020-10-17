@@ -29,8 +29,7 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -41,6 +40,11 @@ TheGamesDBFetcherTest::TheGamesDBFetcherTest() : AbstractFetcherTest() {
 
 void TheGamesDBFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
+
+  QString configFile = QFINDTESTDATA("tellicotest_private.config");
+  if(!configFile.isEmpty()) {
+    m_config = KSharedConfig::openConfig(configFile, KConfig::SimpleConfig)->group(QStringLiteral("TGDB"));
+  }
 
   m_fieldValues.insert(QStringLiteral("title"), QStringLiteral("GoldenEye 007"));
   m_fieldValues.insert(QStringLiteral("platform"), QStringLiteral("Nintendo 64"));
@@ -67,19 +71,14 @@ void TheGamesDBFetcherTest::initTestCase() {
 }
 
 void TheGamesDBFetcherTest::testTitle() {
-  KConfig config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("TGDB");
-  if(!config.hasGroup(groupName)) {
+  if(!m_config.isValid()) {
     QSKIP("This test requires a config file with TGDB settings.", SkipAll);
   }
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Goldeneye"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::TheGamesDBFetcher(this));
-  if(config.hasGroup(groupName)) {
-    KConfigGroup cg(&config, groupName);
-    fetcher->readConfig(cg, cg.name());
-  }
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

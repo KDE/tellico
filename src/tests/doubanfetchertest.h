@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2011-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class DoubanFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -40,6 +42,9 @@ private Q_SLOTS:
   void testMusic();
   void testMusicAdele();
   void testMusicArtPepper();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,7 +33,7 @@
 #include "../entry.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 #include <KConfigGroup>
 
 #include <QTest>
@@ -83,17 +83,18 @@ void SRUFetcherTest::testIsbn() {
 
 // see http://raoulm.home.xs4all.nl/mcq.htm
 void SRUFetcherTest::testKBTitle() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("KB");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("KB"));
+  cg.writeEntry("Format", QStringLiteral("dc"));
+  cg.writeEntry("Host", QStringLiteral("jsru.kb.nl"));
+  cg.writeEntry("Path", QStringLiteral("/sru/sru.pl"));
+  cg.writeEntry("Port", 80);
+  cg.writeEntry("QueryFields", QStringLiteral("x-collection,x-fields"));
+  cg.writeEntry("QueryValues", QStringLiteral("GGC,ISBN"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::Title,
                                        QStringLiteral("Godfried Bomans: Erik of het klein insectenboek"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -111,17 +112,18 @@ void SRUFetcherTest::testKBTitle() {
 
 // see http://raoulm.home.xs4all.nl/mcq.htm
 void SRUFetcherTest::testKBIsbn() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("KB");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("KB"));
+  cg.writeEntry("Format", QStringLiteral("dc"));
+  cg.writeEntry("Host", QStringLiteral("jsru.kb.nl"));
+  cg.writeEntry("Path", QStringLiteral("/sru/sru.pl"));
+  cg.writeEntry("Port", 80);
+  cg.writeEntry("QueryFields", QStringLiteral("x-collection,x-fields"));
+  cg.writeEntry("QueryValues", QStringLiteral("GGC,ISBN"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
                                        QStringLiteral("9023117042"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 
@@ -138,17 +140,17 @@ void SRUFetcherTest::testKBIsbn() {
 }
 
 void SRUFetcherTest::testCopacIsbn() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("Copac");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("Copac"));
+  cg.writeEntry("Format", QStringLiteral("mods"));
+  cg.writeEntry("Host", QStringLiteral("copac.jisc.ac.uk"));
+  cg.writeEntry("Path", QStringLiteral("/copac"));
+  cg.writeEntry("Port", 3000);
+  cg.writeEntry("Custom Fields", QStringLiteral("lcc"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Bibtex, Tellico::Fetch::ISBN,
                                        QStringLiteral("1430202513"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::SRUFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH(fetcher, request);
 

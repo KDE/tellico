@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2009-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2009-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class ImdbFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -41,6 +43,9 @@ private Q_SLOTS:
   void testOkunen();
   void testFetchResultEncoding();
   void testBabel();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

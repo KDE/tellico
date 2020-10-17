@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -34,8 +34,7 @@
 #include "../fieldformat.h"
 #include "../fetch/fetcherjob.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -47,6 +46,9 @@ ColnectFetcherTest::ColnectFetcherTest() : AbstractFetcherTest() {
 void ColnectFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   Tellico::RegisterCollection<Tellico::Data::CoinCollection> registerMe(Tellico::Data::Collection::Coin, "coin");
+
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("obverse,reverse,series,mintage,description"));
 }
 
 void ColnectFetcherTest::testSlug() {
@@ -66,18 +68,11 @@ void ColnectFetcherTest::testSlug_data() {
 }
 
 void ColnectFetcherTest::testRaw() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("colnect");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Coin,
                                        Tellico::Fetch::Raw,
                                        QStringLiteral("147558"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -98,18 +93,11 @@ void ColnectFetcherTest::testRaw() {
 }
 
 void ColnectFetcherTest::testSacagawea() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("colnect");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Coin,
                                        Tellico::Fetch::Keyword,
                                        QStringLiteral("2007 Sacagawea"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -130,18 +118,14 @@ void ColnectFetcherTest::testSacagawea() {
 }
 
 void ColnectFetcherTest::testSkylab() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("colnect stamps");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("colnect stamps"));
+  cg.writeEntry("Custom Fields", QStringLiteral("image,series,description,stanley-gibbons,michel"));
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Stamp,
                                        Tellico::Fetch::Title,
                                        QStringLiteral("2013 Skylab"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ColnectFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

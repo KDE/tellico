@@ -1,8 +1,9 @@
-Name=Cat MDS
-Type=data-source
 ArgumentKeys=1
 Arguments=%1
 CollectionType=2
-FormatType=6
-UpdateArgs=%{title}
 ExecPath=/usr/bin/cat
+FormatType=6
+Name=Cat MDS
+Type=data-source
+UpdateArgs=%{title}
+Uuid={d8eeb500-0333-4c29-a390-618c97e060cb}

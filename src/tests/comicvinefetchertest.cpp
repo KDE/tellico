@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2019 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2019-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -33,8 +33,7 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
-#include <KConfig>
-#include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <QTest>
 
@@ -48,20 +47,16 @@ void ComicVineFetcherTest::initTestCase() {
   // since we use the importer
   Tellico::DataFileRegistry::self()->addDataLocation(QFINDTESTDATA("../../xslt/comicvine2tellico.xsl"));
   Tellico::ImageFactory::init();
+
+  m_config = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("comicvine"));
+  m_config.writeEntry("Custom Fields", QStringLiteral("comicvine,colorist"));
 }
 
 void ComicVineFetcherTest::testKeyword() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("comicvine");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::ComicBook, Tellico::Fetch::Keyword,
                                        QStringLiteral("Avengers Endgame Prelude"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::ComicVineFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(m_config);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

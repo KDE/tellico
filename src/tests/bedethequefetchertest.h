@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2016 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2016-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class BedethequeFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -38,6 +40,9 @@ private Q_SLOTS:
   void testSeries();
   void testIsbn();
   void testDonjon();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

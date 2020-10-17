@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class KinoPoiskFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -37,6 +39,9 @@ private Q_SLOTS:
   void testSuperman();
   void testTop();
   void testBug403185();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

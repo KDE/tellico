@@ -27,7 +27,7 @@
 
 #include "abstractfetchertest.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 
 class AmazonFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
@@ -56,7 +56,7 @@ private Q_SLOTS:
 
 private:
   bool m_hasConfigFile;
-  KConfig m_config;
+  KSharedConfig::Ptr m_config;
   QHash<QString, QHash<QString, QString> > m_fieldValues;
 };
 

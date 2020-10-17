@@ -280,7 +280,7 @@ Tellico::Fetch::Fetcher::Ptr Manager::createFetcher(KSharedConfigPtr config_, co
   Fetcher::Ptr f;
   if(functionRegistry.contains(fetchType)) {
     f = functionRegistry.value(fetchType).create(this);
-    f->readConfig(config, group_);
+    f->readConfig(config);
   }
   return f;
 }

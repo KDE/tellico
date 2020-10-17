@@ -34,9 +34,6 @@
 #include "../fieldformat.h"
 #include "../fetch/fetcherjob.h"
 
-#include <KConfig>
-#include <KConfigGroup>
-
 #include <QTest>
 
 QTEST_GUILESS_MAIN( KinoFetcherTest )
@@ -50,16 +47,8 @@ void KinoFetcherTest::initTestCase() {
 }
 
 void KinoFetcherTest::testTitle() {
-  KConfig config(QFINDTESTDATA("tellicotest.config"), KConfig::SimpleConfig);
-  QString groupName = QStringLiteral("IMDB");
-  if(!config.hasGroup(groupName)) {
-    QSKIP("This test requires a config file.", SkipAll);
-  }
-  KConfigGroup cg(&config, groupName);
-
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Video, Tellico::Fetch::Title, QStringLiteral("Superman Returns"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::KinoFetcher(this));
-  fetcher->readConfig(cg, cg.name());
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 

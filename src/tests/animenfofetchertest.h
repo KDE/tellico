@@ -27,6 +27,8 @@
 
 #include "abstractfetchertest.h"
 
+#include <KConfigGroup>
+
 class AnimenfoFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
 public:
@@ -37,6 +39,9 @@ private Q_SLOTS:
   void testMegami();
   void testHachimitsu();
   void testGhost();
+
+private:
+  KConfigGroup m_config;
 };
 
 #endif

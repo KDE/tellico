@@ -28,17 +28,17 @@
 
 #include "../fetch/fetcherjob.h"
 
-#include <QDebug>
 #include <QNetworkInterface>
+#include <QStandardPaths>
 
 AbstractFetcherTest::AbstractFetcherTest() : QObject(), m_loop(this), m_hasNetwork(false) {
   foreach(const QNetworkInterface& net, QNetworkInterface::allInterfaces()) {
     if(net.flags().testFlag(QNetworkInterface::IsUp) && !net.flags().testFlag(QNetworkInterface::IsLoopBack)) {
-//      qDebug() << net.humanReadableName();
       m_hasNetwork = true;
       break;
     }
   }
+  QStandardPaths::setTestModeEnabled(true);
 }
 
 Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::Ptr fetcher,
@@ -52,8 +52,6 @@ Tellico::Data::EntryList AbstractFetcherTest::doFetch(Tellico::Fetch::Fetcher::P
     job->setMaximumResults(maxResults);
   }
 
-  // TODO
-//  job->exec();
   job->start();
   m_loop.exec();
   return m_results;

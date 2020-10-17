@@ -31,20 +31,21 @@
 #include "../entry.h"
 #include "../images/imagefactory.h"
 
-#include <KConfig>
 #include <KConfigGroup>
 
 #include <QTest>
 
 QTEST_GUILESS_MAIN( MobyGamesFetcherTest )
 
-MobyGamesFetcherTest::MobyGamesFetcherTest() : AbstractFetcherTest()
-    , m_config(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig), m_needToWait(false) {
+MobyGamesFetcherTest::MobyGamesFetcherTest() : AbstractFetcherTest(), m_needToWait(false) {
 }
 
 void MobyGamesFetcherTest::initTestCase() {
   Tellico::ImageFactory::init();
   m_hasConfigFile = QFile::exists(QFINDTESTDATA("tellicotest_private.config"));
+  if(m_hasConfigFile) {
+    m_config = KSharedConfig::openConfig(QFINDTESTDATA("tellicotest_private.config"), KConfig::SimpleConfig);
+  }
 }
 
 void MobyGamesFetcherTest::init() {
@@ -58,15 +59,15 @@ void MobyGamesFetcherTest::cleanup() {
 
 void MobyGamesFetcherTest::testTitle() {
   const QString groupName = QStringLiteral("MobyGames");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Title,
                                        QStringLiteral("Twilight Princess"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   // since the platforms are read in the next event loop (single shot timer)
   // to avoid downloading again, wait a moment
@@ -97,15 +98,15 @@ void MobyGamesFetcherTest::testTitle() {
 // which is a Keyword search and the WiiU result should be first
 void MobyGamesFetcherTest::testKeyword() {
   const QString groupName = QStringLiteral("MobyGames");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Keyword,
                                        QStringLiteral("Twilight Princess Nintendo WiiU"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   // since the platforms are read in the next event loop (single shot timer)
   // to avoid downloading again, wait a moment
@@ -125,15 +126,15 @@ void MobyGamesFetcherTest::testKeyword() {
 void MobyGamesFetcherTest::testRaw() {
   // MobyGames2 group has no image
   const QString groupName = QStringLiteral("MobyGames2");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Game, Tellico::Fetch::Raw,
                                        QStringLiteral("id=25103&platform=82"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MobyGamesFetcher(this));
-  fetcher->readConfig(cg, cg.name());
+  fetcher->readConfig(cg);
 
   // since the platforms are read in the next event loop (single shot timer)
   // to avoid downloading again, wait a moment
@@ -162,13 +163,13 @@ void MobyGamesFetcherTest::testRaw() {
 void MobyGamesFetcherTest::testUpdateRequest() {
   // MobyGames2 group has no image
   const QString groupName = QStringLiteral("MobyGames2");
-  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
     QSKIP("This test requires a config file with MobyGames settings.", SkipAll);
   }
-  KConfigGroup cg(&m_config, groupName);
+  KConfigGroup cg(m_config, groupName);
 
   Tellico::Fetch::MobyGamesFetcher fetcher(this);
-  fetcher.readConfig(cg, cg.name());
+  fetcher.readConfig(cg);
 
   // since the platforms are read in the next event loop (single shot timer)
   // to avoid downloading again, wait a moment

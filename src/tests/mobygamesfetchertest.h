@@ -27,7 +27,7 @@
 
 #include "abstractfetchertest.h"
 
-#include <KConfig>
+#include <KSharedConfig>
 
 class MobyGamesFetcherTest : public AbstractFetcherTest {
 Q_OBJECT
@@ -45,8 +45,8 @@ private Q_SLOTS:
 
 private:
   bool m_hasConfigFile;
-  KConfig m_config;
   bool m_needToWait;
+  KSharedConfig::Ptr m_config;
 };
 
 #endif
