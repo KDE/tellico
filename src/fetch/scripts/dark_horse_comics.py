@@ -211,7 +211,7 @@ class BasicTellicoDOM:
 
 class DarkHorseParser:
 	def __init__(self):
-		self.__baseURL 	 = 'http://www.darkhorse.com'
+		self.__baseURL 	 = 'https://www.darkhorse.com'
 		self.__basePath  = '/Comics/'
 		self.__searchURL = '/Search/%s'
 		self.__coverPath = '/covers/'
