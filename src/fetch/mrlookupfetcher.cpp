@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2014 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2014-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -144,15 +144,15 @@ void MRLookupFetcher::slotComplete(KJob* job_) {
   m_job = nullptr;
 
   const QString text = QString::fromUtf8(data.constData(), data.size());
-  // grab everything within the <pre></pre> block
-  QRegExp preRx(QLatin1String("<pre>(.*)</pre>"));
-  preRx.setMinimal(true);
-
   QString bibtexString;
-  for(int pos = preRx.indexIn(text); pos > -1; pos = preRx.indexIn(text, pos-1)) {
-    bibtexString += preRx.cap(1);
-    pos += preRx.matchedLength();
- }
+
+  // grab everything within the <pre></pre> block
+  QRegularExpression preRx(QLatin1String("<pre>(.+?)</pre>"), QRegularExpression::DotMatchesEverythingOption);
+  QRegularExpressionMatchIterator i = preRx.globalMatch(text);
+  while(i.hasNext()) {
+    QRegularExpressionMatch match = i.next();
+    bibtexString += match.captured(1);
+  }
   if(bibtexString.isEmpty()) {
     myDebug() << "no bibtex response";
     stop();

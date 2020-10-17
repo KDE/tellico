@@ -52,8 +52,8 @@ void NumberFieldWidget::initLineEdit() {
 
   // regexp is any number of digits followed optionally by any number of
   // groups of a semi-colon followed optionally by a space, followed by digits
-  QRegExp rx(QLatin1String("-?\\d*(; ?-?\\d*)*"));
-  m_lineEdit->setValidator(new QRegExpValidator(rx, this));
+  QRegularExpression rx(QLatin1String("-?\\d*(; ?-?\\d*)*"));
+  m_lineEdit->setValidator(new QRegularExpressionValidator(rx, this));
 }
 
 void NumberFieldWidget::initSpinBox() {

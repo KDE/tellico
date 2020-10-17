@@ -40,7 +40,6 @@
 #include <KLocalizedString>
 
 #include <QWhatsThis>
-#include <QRegExp>
 #include <QLabel>
 #include <QCheckBox>
 #include <QStyle>

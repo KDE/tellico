@@ -108,7 +108,7 @@ void AbstractAllocineFetcher::search() {
   QString q = removeAccents(request().value);
   // should I just remove all non alphabetical characters?
   // see https://bugs.kde.org/show_bug.cgi?id=337432
-  q.remove(QRegExp(QStringLiteral("[,:!?;\\(\\)]")));
+  q.remove(QRegularExpression(QStringLiteral("[,:!?;\\(\\)]")));
   q.replace(QLatin1Char('\''), QLatin1Char('+'));
   q.replace(QLatin1Char(' '), QLatin1Char('+'));
 
@@ -473,6 +473,9 @@ QByteArray AbstractAllocineFetcher::calculateSignature(const QString& method, co
 
 AllocineFetcher::AllocineFetcher(QObject* parent_)
     : AbstractAllocineFetcher(parent_, QLatin1String(ALLOCINE_API_URL)) {
+}
+
+AllocineFetcher::~AllocineFetcher() {
 }
 
 QString AllocineFetcher::source() const {

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,6 +26,8 @@
 #include "../field.h"
 
 #include <KTextEdit>
+
+#include <QRegularExpression>
 
 using Tellico::GUI::ParaFieldWidget;
 
@@ -57,7 +59,7 @@ QString ParaFieldWidget::text() const {
 }
 
 void ParaFieldWidget::setTextImpl(const QString& text_) {
-  QRegExp rx(QLatin1String("<br/?>"), Qt::CaseInsensitive);
+  QRegularExpression rx(QLatin1String("<br/?>"), QRegularExpression::CaseInsensitiveOption);
   QString s = text_;
   s.replace(rx, QStringLiteral("\n"));
   m_textEdit->setPlainText(s);

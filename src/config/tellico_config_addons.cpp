@@ -73,8 +73,8 @@ QStringList Config::m_nameSuffixList;
 QStringList Config::m_surnamePrefixList;
 QStringList Config::m_surnamePrefixTokens;
 
-QRegExp Config::commaSplit() {
-  static const QRegExp rx(QLatin1String("\\s*,\\s*"));
+QRegularExpression Config::commaSplit() {
+  static const QRegularExpression rx(QLatin1String("\\s*,\\s*"));
   return rx;
 }
 

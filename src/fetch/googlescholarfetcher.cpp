@@ -54,10 +54,9 @@ using Tellico::Fetch::GoogleScholarFetcher;
 
 GoogleScholarFetcher::GoogleScholarFetcher(QObject* parent_)
     : Fetcher(parent_),
-      m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_total(0), m_job(nullptr), m_started(false),
-      m_cookieIsSet(false) {
-  m_bibtexRx = QRegExp(QLatin1String("<a\\s.*href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*)\""));
-  m_bibtexRx.setMinimal(true);
+      m_limit(GOOGLE_MAX_RETURNS_TOTAL), m_start(0), m_total(0), m_job(nullptr), m_started(false)
+    , m_bibtexRx(QLatin1String("<a\\s.*?href\\s*=\\s*\"([^>]*scholar\\.bib[^>]*?)\""))
+    , m_cookieIsSet(false) {
 }
 
 GoogleScholarFetcher::~GoogleScholarFetcher() {
@@ -177,9 +176,10 @@ void GoogleScholarFetcher::slotComplete(KJob*) {
 
   QString bibtex;
   int count = 0;
-  for(int pos = m_bibtexRx.indexIn(text); count < m_limit && pos > -1; pos = m_bibtexRx.indexIn(text, pos+m_bibtexRx.matchedLength()), ++count) {
+  for(QRegularExpressionMatchIterator i = m_bibtexRx.globalMatch(text); count < m_limit && i.hasNext(); ++count) {
+    QRegularExpressionMatch match = i.next();
     // for some reason, KIO and google don't return bibtex when '&' is escaped
-    QString url = m_bibtexRx.cap(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
+    QString url = match.captured(1).replace(QLatin1String("&amp;"), QLatin1String("&"));
     QUrl bibtexUrl = QUrl(QString::fromLatin1(SCHOLAR_BASE_URL)).resolved(QUrl(url));
 //    myDebug() << bibtexUrl;
     bibtex += FileHandler::readTextFile(bibtexUrl, true);

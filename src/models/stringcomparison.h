@@ -25,7 +25,7 @@
 #ifndef TELLICO_STRINGCOMPARISON_H
 #define TELLICO_STRINGCOMPARISON_H
 
-#include <QRegExp>
+#include <QRegularExpression>
 
 #include "../datavectors.h"
 
@@ -68,7 +68,7 @@ public:
 
 private:
   int compareLCC(const QStringList& cap1, const QStringList& cap2) const;
-  QRegExp m_regexp;
+  QRegularExpression m_regexp;
 };
 
 class ISODateComparison : public StringComparison {

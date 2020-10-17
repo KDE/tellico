@@ -34,7 +34,7 @@
 #include <KSharedConfig>
 #include <KConfigGroup>
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QGroupBox>
 #include <QRadioButton>
 #include <QTextCodec>
@@ -193,6 +193,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
 //    myDebug() << "entry key: " << str;
     Data::BibtexCollection::setFieldValue(entry, QStringLiteral("key"), str, currentColl);
 
+    QRegularExpression andRx(QLatin1String("\\sand\\s"));
     char* name;
     AST* field = nullptr;
     while((field = bt_next_field(node, field, &name))) {
@@ -224,7 +225,7 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
       }
       QString fieldName = QString::fromUtf8(name);
       if(fieldName == QLatin1String("author") || fieldName == QLatin1String("editor")) {
-        str.replace(QRegExp(QLatin1String("\\sand\\s")),FieldFormat::delimiterString());
+        str.replace(andRx,FieldFormat::delimiterString());
       }
       // there's a 'key' field different from the citation key
       // https://nwalsh.com/tex/texhelp/bibtx-37.html
@@ -269,15 +270,15 @@ void BibtexImporter::parseText(const QString& text) {
 //  bt_set_stringopts(BTE_PREAMBLE, BTO_CONVERT | BTO_EXPAND);
 
   QString entry;
-  QRegExp rx(QLatin1String("[{}]"));
-  QRegExp macroName(QLatin1String("@string\\s*\\{\\s*(.*)="), Qt::CaseInsensitive);
-  macroName.setMinimal(true);
+  QRegularExpression rx(QLatin1String("[{}]"));
+  QRegularExpression macroName(QLatin1String("@string\\s*\\{\\s*(.*?)="), QRegularExpression::CaseInsensitiveOption);
 
   int line = 1;
   bool needsCleanup = false;
   int brace = 0;
   int startpos = 0;
-  int pos = rx.indexIn(text, 0);
+  QRegularExpressionMatch m = rx.match(text);
+  int pos = m.capturedStart();
   while(pos > 0 && !m_cancelled) {
     if(text[pos] == QLatin1Char('{')) {
       ++brace;
@@ -293,10 +294,11 @@ void BibtexImporter::parseText(const QString& text) {
                                    filename.data(),
                                    line, bt_options, &ok);
       if(ok && node) {
-        if(bt_entry_metatype(node) == BTE_MACRODEF && macroName.indexIn(entry) > -1) {
+        QRegularExpressionMatch macroMatch = macroName.match(entry);
+        if(bt_entry_metatype(node) == BTE_MACRODEF && macroMatch.hasMatch()) {
           char* macro;
           (void) bt_next_field(node, nullptr, &macro);
-          m_macros.insert(QString::fromUtf8(macro), macroName.cap(1).trimmed());
+          m_macros.insert(QString::fromUtf8(macro), macroMatch.captured(1).trimmed());
         }
         m_nodes.append(node);
         needsCleanup = true;
@@ -304,7 +306,8 @@ void BibtexImporter::parseText(const QString& text) {
       startpos = pos+1;
       line += entry.count(QLatin1Char('\n'));
     }
-    pos = rx.indexIn(text, pos+1);
+    m = rx.match(text, pos+1);
+    pos = m.capturedStart();
   }
   if(needsCleanup) {
     // clean up some structures
@@ -365,14 +368,15 @@ bool BibtexImporter::maybeBibtex(const QUrl& url_) {
 
 bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
   bt_initialize();
-  QRegExp rx(QLatin1String("[{}]"));
+  QRegularExpression rx(QLatin1String("[{}]"));
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int
   bool foundOne = false;
   int brace = 0;
   int startpos = 0;
-  int pos = rx.indexIn(text, 0);
+  QRegularExpressionMatch m = rx.match(text);
+  int pos = m.capturedStart();
   while(pos > 0) {
     if(text[pos] == QLatin1Char('{')) {
       ++brace;
@@ -391,7 +395,8 @@ bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
       }
       startpos = pos+1;
     }
-    pos = rx.indexIn(text, pos+1);
+    m = rx.match(text, pos+1);
+    pos = m.capturedStart();
   }
   if(foundOne) {
     // clean up some structures

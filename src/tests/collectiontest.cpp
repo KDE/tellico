@@ -372,7 +372,7 @@ void CollectionTest::testDtd() {
     QSKIP("This test requires xmllint", SkipAll);
   }
   // xmllint doesn't seem to support spaces in path. Is this an XML thing?
-  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegExp(QStringLiteral("\\s")))) {
+  if(QFINDTESTDATA("../../tellico.dtd").contains(QRegularExpression(QStringLiteral("\\s")))) {
     QSKIP("This test prohibits whitespace in the build path", SkipAll);
   }
 

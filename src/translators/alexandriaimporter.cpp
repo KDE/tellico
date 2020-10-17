@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -91,6 +91,9 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
          << QStringLiteral("_medium.jpg")
          << QStringLiteral("_small.jpg");
 
+  const QRegularExpression begin(QLatin1String("^\\s*-\\s+"));
+  const QRegularExpression spaces(QLatin1String("^ +"));
+
   QTextStream ts;
   ts.setCodec("UTF-8"); // YAML is always utf8?
   uint j = 0;
@@ -139,7 +142,6 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
       if(alexField == QLatin1String("authors")) {
         QStringList authors;
         line = ts.readLine();
-        QRegExp begin(QLatin1String("^\\s*-\\s+"));
         while(!line.isNull() && line.indexOf(begin) > -1) {
           line.remove(begin);
           authors += clean(line);
@@ -180,12 +182,12 @@ Tellico::Data::CollPtr AlexandriaImporter::collection() {
         }
       } else if(alexField == QLatin1String("notes")) {
         if(alexValue.startsWith(QLatin1Char('|'))) {
-          QRegExp spaces(QLatin1String("^ +"));
           line = ts.readLine();
-          if(line.indexOf(spaces) > -1) {
+          QRegularExpressionMatch m = spaces.match(line);
+          if(m.hasMatch()) {
             alexValue.clear();
-            int spaceCount = spaces.matchedLength();
-            QRegExp begin(QStringLiteral("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
+            const int spaceCount = m.capturedLength();
+            QRegularExpression begin(QStringLiteral("^ {%1,%2}").arg(spaceCount).arg(spaceCount));
             while(!line.isNull() && line.indexOf(begin) > -1) {
               line.remove(begin);
               alexValue += clean(line) + QLatin1Char('\n');
@@ -254,25 +256,27 @@ QWidget* AlexandriaImporter::widget(QWidget* parent_) {
 }
 
 QString& AlexandriaImporter::cleanLine(QString& str_) {
-  static QRegExp escRx(QLatin1String("\\\\x(\\w\\w)"), Qt::CaseInsensitive);
+  static const QRegularExpression escRx(QLatin1String("\\\\x(\\w\\w)"), QRegularExpression::CaseInsensitiveOption);
   str_.remove(QStringLiteral("\\r"));
   str_.replace(QLatin1String("\\n"), QLatin1String("\n"));
   str_.replace(QLatin1String("\\t"), QLatin1String("\t"));
 
   // YAML uses escape sequences like \xC3
-  int pos = escRx.indexIn(str_);
+  QRegularExpressionMatch m = escRx.match(str_);
+  int pos = m.capturedStart();
   int origPos = pos;
   QByteArray bytes;
   while(pos > -1) {
     bool ok;
-    char c = static_cast<char>(escRx.cap(1).toInt(&ok, 16));
+    char c = static_cast<char>(m.captured(1).toInt(&ok, 16));
     if(ok) {
       bytes += c;
     } else {
       bytes.clear();
       break;
     }
-    pos = escRx.indexIn(str_, pos+1);
+    m = escRx.match(str_, pos+1);
+    pos = m.capturedStart();
   }
   if(!bytes.isEmpty()) {
     str_.replace(origPos, bytes.length()*4, QString::fromUtf8(bytes.data()));
@@ -281,7 +285,8 @@ QString& AlexandriaImporter::cleanLine(QString& str_) {
 }
 
 QString& AlexandriaImporter::clean(QString& str_) {
-  const QRegExp quote(QLatin1String("\\\\\"")); // equals \"
+  static const QRegularExpression quote(QLatin1String("\\\\\"")); // equals \"
+  static const QRegularExpression yamlTags(QLatin1String("^![^\\s]*\\s+"));
   if(str_.startsWith(QLatin1Char('\'')) || str_.startsWith(QLatin1Char('"'))) {
     str_.remove(0, 1);
   }
@@ -289,7 +294,7 @@ QString& AlexandriaImporter::clean(QString& str_) {
     str_.truncate(str_.length()-1);
   }
   // we ignore YAML tags, this is not actually a good parser, but will do for now
-  str_.remove(QRegExp(QLatin1String("^![^\\s]*\\s+")));
+  str_.remove(yamlTags);
   return str_.replace(quote, QStringLiteral("\""));
 }
 

@@ -193,7 +193,7 @@ void Z3950Fetcher::search() {
   m_started = true;
 
   QString svalue = request().value;
-  QRegExp rx1(QLatin1String("['\"].*\\1"));
+  QRegExp rx1(QLatin1String("^['\"].*\\1$"));
   if(!rx1.exactMatch(svalue)) {
     svalue = QLatin1Char('"') + svalue + QLatin1Char('"');
   }

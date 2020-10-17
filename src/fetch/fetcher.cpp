@@ -53,6 +53,7 @@ Fetcher::Fetcher(QObject* parent) : QObject(parent)
 }
 
 Fetcher::~Fetcher() {
+  DEBUG_BLOCK;
   saveConfig();
 }
 
@@ -140,9 +141,11 @@ void Fetcher::readConfig(const KConfigGroup& config_, const QString& groupName_)
 }
 
 void Fetcher::saveConfig() {
-  if(!m_configGroup.isValid()) {
+  DEBUG_BLOCK;
+  if(!m_configGroup.isValid() || m_configGroup.isImmutable()) {
     return;
   }
+  myDebug() << m_configGroup.config();
   m_configGroup.writeEntry("Uuid", m_uuid);
   saveConfigHook(m_configGroup);
   m_configGroup.sync();

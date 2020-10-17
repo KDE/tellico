@@ -104,7 +104,7 @@ bool Manager::installTemplate(const QString& file_) {
     if(!name.endsWith(QLatin1String(".xsl"))) {
       name += QLatin1String(".xsl");
     }
-    name.remove(QRegExp(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
+    name.remove(QRegularExpression(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
     name = Tellico::saveLocation(QStringLiteral("entry-templates/")) + name;
     // Should overwrite since we might be upgrading
     if(QFile::exists(name)) {
@@ -274,7 +274,7 @@ bool Manager::installScript(const QString& file_) {
   } else { // assume it's an script file
     exeFile = QFileInfo(file_).fileName();
 
-    exeFile.remove(QRegExp(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
+    exeFile.remove(QRegularExpression(QLatin1String("^\\d+-"))); // Remove possible kde-files.org id
     sourceName = QFileInfo(exeFile).completeBaseName();
     if(sourceName.isEmpty()) {
       myDebug() << "Invalid packet name";

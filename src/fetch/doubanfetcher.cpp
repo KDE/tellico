@@ -447,15 +447,16 @@ void DoubanFetcher::populateMusicEntry(Data::EntryPtr entry, const QVariantMap& 
       values << v.toString();
     }
   }
-  QRegExp trackNumRx(QLatin1String("^\\d+[.\\s]{2}"));
-  QRegExp trackDurRx(QLatin1String("\\d+:\\d{2}"));
+  QRegularExpression trackNumRx(QLatin1String("^\\d+[.\\s]{2}"));
+  QRegularExpression trackDurRx(QLatin1String("^\\d+:\\d{2}$"));
+  QRegularExpression tabRx(QLatin1String("[\t\n]+"));
   foreach(QString value, values) { // can't be const
     // might starts with track number
     QStringList l = value.remove(trackNumRx).split(QStringLiteral(" - "));
     if(l.size() == 1) {
       // might be split by tab characters and have track length at end
-      l = value.remove(trackNumRx).split(QRegExp(QLatin1String("[\t\n]+")));
-      if(trackDurRx.exactMatch(l.last())) {
+      l = value.remove(trackNumRx).split(tabRx);
+      if(l.last().contains(trackDurRx)) {
         tracks << l.first() + FieldFormat::columnDelimiterString() +
                   entry->field(QStringLiteral("artist")) + FieldFormat::columnDelimiterString() +
                   l.last();

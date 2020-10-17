@@ -41,6 +41,7 @@ FetcherJob::FetcherJob(QObject* parent_, Fetcher::Ptr fetcher_, const FetchReque
 }
 
 FetcherJob::~FetcherJob() {
+  DEBUG_BLOCK;
   qDeleteAll(m_results);
   m_results.clear();
 }

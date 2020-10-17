@@ -316,10 +316,11 @@ Tellico::Fetch::FetchRequest ISBNdbFetcher::updateRequest(Data::EntryPtr entry_)
 }
 
 void ISBNdbFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resultMap_) {
+  static const QRegularExpression nonDigits(QStringLiteral("[^\\d]"));
   entry_->setField(QStringLiteral("title"), mapValue(resultMap_, "title"));
   entry_->setField(QStringLiteral("isbn"), mapValue(resultMap_, "isbn"));
   // "date_published" can be "2008-12-13" or "July 2012"
-  QString pubYear = mapValue(resultMap_, "date_published").remove(QRegExp(QStringLiteral("[^\\d]"))).left(4);
+  QString pubYear = mapValue(resultMap_, "date_published").remove(nonDigits).left(4);
   entry_->setField(QStringLiteral("pub_year"), pubYear);
   QStringList authors;
   foreach(const QVariant& author, resultMap_.value(QLatin1String("authors")).toList()) {

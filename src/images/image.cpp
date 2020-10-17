@@ -27,7 +27,7 @@
 #include "../tellico_debug.h"
 
 #include <QBuffer>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QImageReader>
 #include <QImageWriter>
 #include <QCryptographicHash>
@@ -146,7 +146,7 @@ QByteArray Image::byteArray(const QImage& img_, const QByteArray& outputFormat_)
 }
 
 QString Image::idClean(const QString& id_) {
-  static const QRegExp rx(QLatin1Char('[') + QRegExp::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + QLatin1Char(']'));
+  static const QRegularExpression rx(QLatin1Char('[') + QRegularExpression::escape(QLatin1String("/@<>#\"&%?={}|^~[]'`\\:+")) + QLatin1Char(']'));
   QString clean = id_;
   return Tellico::shareString(clean.remove(rx));
 }

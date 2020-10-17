@@ -151,27 +151,34 @@ int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) 
   if(str2_.isEmpty()) {
     return 1;
   }
-//  myDebug() << str1_ << " to " << str2_;
-  int pos1 = m_regexp.indexIn(str1_);
-  const QStringList cap1 = m_regexp.capturedTexts();
-  int pos2 = m_regexp.indexIn(str2_);
-  const QStringList cap2 = m_regexp.capturedTexts();
-  if(pos1 > -1 && pos2 > -1) {
-    int res = compareLCC(cap1, cap2);
-//    myLog() << "...result = " << res;
-    return res;
-  } else {
-    if(pos1 == -1) {
-      myDebug() << "no regexp match:" << str1_;
-    }
-    if(pos2 == -1) {
-      myDebug() << "no regexp match:" << str2_;
-    }
+  myDebug() << str1_ << " to " << str2_;
+  QRegularExpressionMatch match1 = m_regexp.match(str1_);
+  if(!match1.hasMatch()) {
+    myDebug() << "no regexp match:" << str1_;
+    return StringComparison::compare(str1_, str2_);
   }
-  return StringComparison::compare(str1_, str2_);
+  QRegularExpressionMatch match2 = m_regexp.match(str2_);
+  if(!match2.hasMatch()) {
+    myDebug() << "no regexp match:" << str2_;
+    return StringComparison::compare(str1_, str2_);
+  }
+  QStringList cap1 = match1.capturedTexts();
+  QStringList cap2 = match2.capturedTexts();
+  // In contrast to QRegExp, QRegularExpression doesn't include an empty string
+  // in optional captured groups that don't exist
+  while(cap1.size() < 8) {
+    cap1 += QString();
+  }
+  while(cap2.size() < 8) {
+    cap2 += QString();
+  }
+  return compareLCC(cap1, cap2);
 }
 
 int Tellico::LCCComparison::compareLCC(const QStringList& cap1, const QStringList& cap2) const {
+
+  Q_ASSERT(cap1.size() == 8);
+  Q_ASSERT(cap2.size() == 8);
   // the first item in the list is the full match, so start array index at 1
   int res = 0;
   return (res = cap1[1].compare(cap2[1]))                    != 0 ? res :

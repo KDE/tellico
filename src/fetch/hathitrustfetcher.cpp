@@ -246,7 +246,7 @@ void HathiTrustFetcher::slotComplete(KJob* job_) {
     if(dom.setContent(marcxml, true /* namespace processing */) && dom.documentElement().namespaceURI().isEmpty()) {
       const QString rootName = dom.documentElement().tagName();
       myDebug() << "no namespace, attempting to set on" << rootName << "element";
-      QRegExp rootRx(QLatin1Char('<') + rootName + QLatin1Char('>'));
+      QRegularExpression rootRx(QLatin1Char('<') + rootName + QLatin1Char('>'));
       QString newRoot = QLatin1Char('<') + rootName + QLatin1String(" xmlns=\"http://www.loc.gov/MARC21/slim\">");
       marcxml.replace(rootRx, newRoot);
     }

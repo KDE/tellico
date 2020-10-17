@@ -29,7 +29,7 @@
 #include "configwidget.h"
 
 #include <QPointer>
-#include <QRegExp>
+#include <QRegularExpression>
 
 class KJob;
 namespace KIO {
@@ -103,7 +103,7 @@ private:
 
   bool m_started;
 
-  QRegExp m_bibtexRx;
+  QRegularExpression m_bibtexRx;
   bool m_cookieIsSet;
 };
 

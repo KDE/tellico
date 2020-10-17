@@ -108,6 +108,7 @@ public:
   /**
    */
   AllocineFetcher(QObject* parent);
+  ~AllocineFetcher();
 
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return Allocine; }

@@ -132,10 +132,10 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         entry = newColl->entries().front();
         hasDOI |= !entry->field(QStringLiteral("doi")).isEmpty();
         // the XMP handler has a habit of inserting empty values surrounded by parentheses
-        QRegExp rx(QLatin1String("\\(\\s*\\)"));
+        QRegularExpression rx(QLatin1String("^\\(\\s*\\)$"));
         foreach(Data::FieldPtr field, newColl->fields()) {
           QString value = entry->field(field);
-          if(rx.exactMatch(value)) {
+          if(value.contains(rx)) {
             entry->setField(field, QString());
           }
         }
@@ -164,7 +164,7 @@ Tellico::Data::CollPtr PDFImporter::collection() {
       // author could be separated by commas, "and" or whatever
       // we're not going to overwrite it
       if(entry->field(QStringLiteral("author")).isEmpty()) {
-        QRegExp rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
+        QRegularExpression rx(QLatin1String("\\s*(\\s+and\\s+|,|;)\\s*"));
         QStringList authors = doc->info(QStringLiteral("Author")).simplified().split(rx);
         entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
       }
@@ -180,32 +180,34 @@ Tellico::Data::CollPtr PDFImporter::collection() {
         // a null rectangle means get all text on page
         QString text = page->text(QRectF());
         // borrowed from Referencer
-        QRegExp rx(QLatin1String("(?:"
-                                       "(?:[Dd][Oo][Ii]:? *)"
-                                       "|"
-                                       "(?:[Dd]igital *[Oo]bject *[Ii]dentifier:? *)"
-                                       ")"
-                                       "("
-                                       "[^\\.\\s]+"
-                                       "\\."
-                                       "[^\\/\\s]+"
-                                       "\\/"
-                                       "[^\\s]+"
-                                       ")"));
-        if(rx.indexIn(text) > -1) {
-          QString doi = rx.cap(1);
+        QRegularExpression rx(QLatin1String("(?:"
+                                            "(?:[Dd][Oo][Ii]:? *)"
+                                            "|"
+                                            "(?:[Dd]igital *[Oo]bject *[Ii]dentifier:? *)"
+                                            ")"
+                                            "("
+                                            "[^\\.\\s]+"
+                                            "\\."
+                                            "[^\\/\\s]+"
+                                            "\\/"
+                                            "[^\\s]+"
+                                            ")"));
+        QRegularExpressionMatch m = rx.match(text);
+        if(m.hasMatch()) {
+          QString doi = m.captured(1);
           myLog() << "in PDF file, found DOI:" << doi;
           entry->setField(QStringLiteral("doi"), doi);
           hasDOI = true;
         }
-        rx = QRegExp(QLatin1String("arXiv:"
-                                         "("
-                                         "[^\\/\\s]+"
-                                         "[\\/\\.]"
-                                         "[^\\s]+"
-                                         ")"));
-        if(rx.indexIn(text) > -1) {
-          QString arxiv = rx.cap(1);
+        rx = QRegularExpression(QLatin1String("arXiv:"
+                                              "("
+                                              "[^\\/\\s]+"
+                                              "[\\/\\.]"
+                                              "[^\\s]+"
+                                              ")"));
+        m = rx.match(text);
+        if(m.hasMatch()) {
+          QString arxiv = m.captured(1);
           myLog() << "in PDF file, found arxiv:" << arxiv;
           if(!entry->collection()->hasField(QStringLiteral("arxiv"))) {
             Data::FieldPtr field(new Data::Field(QStringLiteral("arxiv"), i18n("arXiv ID")));
