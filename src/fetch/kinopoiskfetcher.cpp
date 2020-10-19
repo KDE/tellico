@@ -186,9 +186,18 @@ Tellico::Data::EntryPtr KinoPoiskFetcher::fetchEntryHook(uint uid_) {
     return Data::EntryPtr();
   }
 
+  QPointer<KIO::StoredTransferJob> getJob = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
+  getJob->addMetaData(QStringLiteral("referrer"), QString::fromLatin1(KINOPOISK_SEARCH_URL));
+  KJobWidgets::setWindow(getJob, GUI::Proxy::widget());
+  if(!getJob->exec()) {
+    myWarning() << "unable to read" << url;
+    return Data::EntryPtr();
+  }
+
 // the HTML response has the character encoding after the first 1024 characters and Qt doesn't seem to detect that
 // and potentially falls back to iso-8859-1. Enforce UTF-8
-  const QByteArray data = FileHandler::readDataFile(url, true);
+//  const QByteArray data = FileHandler::readDataFile(url, true);
+  const QByteArray data = getJob->data();
   const QString results = Tellico::decodeHTML(Tellico::fromHtmlData(data, "UTF-8"));
   if(results.isEmpty()) {
     myDebug() << "no text results";
@@ -450,10 +459,12 @@ QString KinoPoiskFetcher::fieldValueFromObject(const QJsonObject& obj_, const QS
     } else {
       return allowed_.at(4);
     }
-  // with a 'name' field return that
-  // and check this before comapring against field names for people, like 'director'
-  } else if(valueObj.contains(QLatin1String("name"))) {
-    return valueObj.value(QStringLiteral("name")).toString();
+  // with an 'originalName' or 'name' field return that
+  // and check this before comparing against field names for people, like 'director'
+  } else if(valueObj.contains(QLatin1String("originalName")) || valueObj.contains(QLatin1String("name"))) {
+    const QString name = valueObj.value(QStringLiteral("name")).toString();
+    // prefer name to originalName
+    return name.isEmpty() ? valueObj.value(QStringLiteral("originalName")).toString() : name;
   } else if(valueObj.contains(QLatin1String("items"))) {
     // some additional nesting apparently
     // key in film object points to director object, whose 'items' is an array where each 'is' points to
