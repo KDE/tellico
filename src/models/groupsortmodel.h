@@ -33,6 +33,7 @@ namespace Tellico {
   }
 
 class StringComparison;
+class FieldComparison;
 
 /**
  * @author Robby Stephenson
@@ -45,17 +46,19 @@ public:
   virtual ~GroupSortModel();
 
   virtual void setSourceModel(QAbstractItemModel* sourceModel) Q_DECL_OVERRIDE;
+  void setEntrySortField(const QString& fieldName);
 
 protected:
   virtual bool lessThan(const QModelIndex& left, const QModelIndex& right) const Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
-  void clearGroupComparison();
+  void clearComparisons();
 
 private:
-  StringComparison* getComparison(Data::EntryGroup* group) const;
+  FieldComparison* getEntryComparison(const QModelIndex& index, const QString& fieldName) const;
+  StringComparison* getGroupComparison(Data::EntryGroup* group) const;
 
-  StringComparison* m_titleComparison;
+  mutable FieldComparison* m_entryComparison;
   mutable StringComparison* m_groupComparison;
 };
 

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -35,7 +35,6 @@ namespace Tellico {
   class Filter;
   class GroupIterator;
   class EntryGroupModel;
-  class EntrySortModel;
 
 /**
  * The GroupView shows the entries grouped, as well as the saved filters.
@@ -142,6 +141,7 @@ private Q_SLOTS:
   void slotFilterGroup();
   void slotDoubleClicked(const QModelIndex& index);
   void slotSortingChanged(int column, Qt::SortOrder order);
+  void slotSortMenuActivated(QAction* action);
 
 Q_SIGNALS:
   /**

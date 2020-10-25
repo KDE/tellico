@@ -67,6 +67,7 @@ public:
    * Plug the default entry actions into a widget
    */
   void plugEntryActions(QMenu* popup);
+  QMenu* plugSortActions(QMenu* popup);
   void updateActions() const;
 
   /**

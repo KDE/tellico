@@ -491,6 +491,27 @@ void Controller::plugEntryActions(QMenu* popup_) {
   popup_->addAction(m_mainWindow->m_checkOutEntry);
 }
 
+QMenu* Controller::plugSortActions(QMenu* popup_) {
+  if(!popup_) {
+    return nullptr;
+  }
+
+  QMenu* sortMenu = popup_->addMenu(i18n("&Sort By"));
+  sortMenu->setIcon(QIcon::fromTheme(QStringLiteral("view-sort"),
+                                     QIcon::fromTheme(QStringLiteral("view-sort-ascending"))));
+  foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
+    // not allowed to sort by Image, Table, Para, or URL
+    if(field->type() == Data::Field::Image ||
+       field->type() == Data::Field::Table ||
+       field->type() == Data::Field::URL ||
+       field->type() == Data::Field::Para) {
+      continue;
+    }
+    sortMenu->addAction(field->title())->setData(QVariant::fromValue(field));
+  }
+  return sortMenu;
+}
+
 void Controller::plugUpdateMenu(QMenu* popup_) {
   QMenu* updatePopup = nullptr;
   foreach(QAction* action, popup_->actions()) {

@@ -183,7 +183,7 @@ void DetailedListView::addCollection(Tellico::Data::CollPtr coll_) {
 }
 
 void DetailedListView::slotReset() {
-  //clear() does not remove columns
+  // clear() does not remove columns
   sourceModel()->clear();
 }
 

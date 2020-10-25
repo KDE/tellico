@@ -1,3 +1,7 @@
+2020-10-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Added sorting in the group view, via context menu.
+
 2020-10-11  Robby Stephenson  <robby@periapsis.org>
 
 	* Improve "Filter by Group" expression to account for tables (Bug 427145).

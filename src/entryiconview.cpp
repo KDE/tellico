@@ -126,10 +126,7 @@ void EntryIconView::contextMenuEvent(QContextMenuEvent* ev_) {
     menu.addSeparator();
   }
 
-  QMenu* sortMenu = menu.addMenu(i18n("&Sort By"));
-  foreach(Data::FieldPtr field, Data::Document::self()->collection()->fields()) {
-    sortMenu->addAction(field->title())->setData(QVariant::fromValue(field));
-  }
+  QMenu* sortMenu = Controller::self()->plugSortActions(&menu);
   connect(sortMenu, &QMenu::triggered, this, &EntryIconView::slotSortMenuActivated);
 
   menu.exec(ev_->globalPos());
@@ -141,12 +138,10 @@ void EntryIconView::slotSortMenuActivated(QAction* action_) {
   if(!field) {
     return;
   }
-  // could have just put the index of the field in the list as the action data
-  // but instead, we need to iterate over the current fields and find the index since EntryTitleModel
-  // uses the field list index as the column value
-  Data::FieldList fields = Data::Document::self()->collection()->fields();
-  for(int i = 0; i < fields.count(); ++i) {
-    if(fields.at(i)->name() == field->name()) {
+  // EntryIconModel is a proxy to EntryModel which uses the field list as the full set of columns
+  // find which columns matches the field and sort on that column
+  for(int i = 0; i < model()->columnCount(); ++i) {
+    if(model()->headerData(i, Qt::Horizontal, FieldPtrRole).value<Data::FieldPtr>() == field) {
       model()->sort(i);
       break;
     }

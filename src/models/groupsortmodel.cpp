@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -25,31 +25,55 @@
 #include "groupsortmodel.h"
 #include "models.h"
 #include "stringcomparison.h"
+#include "fieldcomparison.h"
 #include "../field.h"
 #include "../entrygroup.h"
-#include "../document.h"
 #include "../tellico_debug.h"
 
 using Tellico::GroupSortModel;
 
 GroupSortModel::GroupSortModel(QObject* parent) : AbstractSortModel(parent)
-     , m_titleComparison(new TitleComparison())
+     , m_entryComparison(nullptr)
      , m_groupComparison(nullptr) {
 }
 
 GroupSortModel::~GroupSortModel() {
-  delete m_titleComparison;
-  m_titleComparison = nullptr;
-  delete m_groupComparison;
-  m_groupComparison = nullptr;
+  clearComparisons();
 }
 
 void GroupSortModel::setSourceModel(QAbstractItemModel* sourceModel_) {
   AbstractSortModel::setSourceModel(sourceModel_);
   if(sourceModel_) {
+    clearComparisons();
     connect(sourceModel_, &QAbstractItemModel::modelReset,
-            this, &GroupSortModel::clearGroupComparison);
+            this, &GroupSortModel::clearComparisons);
   }
+}
+
+void GroupSortModel::setEntrySortField(const QString& fieldName_) {
+  // only have to update if the field name is different than existing
+  if(m_entryComparison && m_entryComparison->field() &&
+     m_entryComparison->field()->name() == fieldName_) {
+    return;
+  }
+  // can only update the sort field if the model is not empty
+  QModelIndex groupIndex = index(0, 0);
+  if(!groupIndex.isValid()) {
+    myDebug() << "GroupSortModel::setEntrySortField - invalid group index";
+    return;
+  }
+  QModelIndex entryIndex = index(0, 0, groupIndex);
+  if(!entryIndex.isValid()) {
+    myDebug() << "GroupSortModel::setEntrySortField - invalid entry index";
+    return;
+  }
+  emit layoutAboutToBeChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
+  delete m_entryComparison;
+  m_entryComparison = getEntryComparison(entryIndex, fieldName_);
+  emit layoutChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
+  // emitting layoutChanged does not cause the sorting to be refreshed. I can't figure out why
+  // but calling invalidate() does. <shrug>
+  invalidate();
 }
 
 bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
@@ -58,6 +82,7 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
   /// all we really need to know is whether the parent is valid
   const bool leftParentValid = sourceModel()->data(left_, ValidParentRole).toBool();
   const bool rightParentValid = sourceModel()->data(right_, ValidParentRole).toBool();
+  const bool reverseOrder = (sortOrder() == Qt::DescendingOrder);
   if(!leftParentValid || !rightParentValid) {
     // now if we're using count, just pass up the line
     if(sortRole() == RowCountRole) {
@@ -72,8 +97,6 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     const bool emptyLeft = (!leftGroup || leftGroup->hasEmptyGroupName());
     const bool emptyRight = (!rightGroup || rightGroup->hasEmptyGroupName());
 
-    bool reverseOrder = (sortOrder() == Qt::DescendingOrder);
-
     // yeah, I should figure out some bit-wise operations...whatever
     if(emptyLeft && !emptyRight) {
       return reverseOrder ? false : true;
@@ -86,7 +109,7 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
    // if we can get the fields' type, then for certain non-text-only
     // types use the sort defined for that type.
     if(!m_groupComparison) {
-      m_groupComparison = getComparison(leftGroup);
+      m_groupComparison = getGroupComparison(leftGroup);
     }
     if(m_groupComparison) {
       return m_groupComparison->compare(leftGroup->groupName(), rightGroup->groupName()) < 0;
@@ -96,21 +119,48 @@ bool GroupSortModel::lessThan(const QModelIndex& left_, const QModelIndex& right
     return left_.data().toString().localeAwareCompare(right_.data().toString()) < 0;
   }
 
-  // for ordinary entries, just compare with title comparison
-  return m_titleComparison->compare(left_.data().toString(), right_.data().toString()) < 0;
+  if(!m_entryComparison) {
+    // default to using the title field for sorting
+    m_entryComparison = getEntryComparison(left_, QStringLiteral("title"));
+  }
+  Q_ASSERT(m_entryComparison);
+  if(!m_entryComparison) {
+    return left_.data().toString().localeAwareCompare(right_.data().toString()) < 0;
+  }
+  // entries always sort ascending, despite whatever the group order is
+  const bool res =  m_entryComparison->compare( left_.data(EntryPtrRole).value<Data::EntryPtr>(),
+                                                right_.data(EntryPtrRole).value<Data::EntryPtr>()) < 0;
+  return reverseOrder ? !res : res;
 }
 
-void GroupSortModel::clearGroupComparison() {
+void GroupSortModel::clearComparisons() {
+  delete m_entryComparison;
+  m_entryComparison = nullptr;
   delete m_groupComparison;
   m_groupComparison = nullptr;
 }
 
+Tellico::FieldComparison* GroupSortModel::getEntryComparison(const QModelIndex& index_, const QString& fieldName_) const {
+  FieldComparison* comp = nullptr;
+  // depend on the index pointing to an entry from which we can get a collection
+  Data::EntryPtr entry = index_.data(EntryPtrRole).value<Data::EntryPtr>();
+  if(entry) {
+    Data::CollPtr coll = entry->collection();
+    // by default, always sort by title
+    if(coll) {
+      comp = FieldComparison::create(coll->fieldByName(fieldName_));
+    }
+  }
+  return comp;
+}
+
 // if 'group_' contains a type of field that merits a non-alphabetic
 // sort, return a pointer to the proper sort function.
-Tellico::StringComparison* GroupSortModel::getComparison(Data::EntryGroup* group_) const {
+Tellico::StringComparison* GroupSortModel::getGroupComparison(Data::EntryGroup* group_) const {
   StringComparison* comp = nullptr;
-  if(group_) {
-    Data::CollPtr coll = Data::Document::self()->collection();
+  if(group_ && !group_->isEmpty()) {
+    // depend on the group NOT being empty which allows access to the first entry
+    Data::CollPtr coll = group_->first()->collection();
     if(coll && coll->hasField(group_->fieldName())) {
       comp = StringComparison::create(coll->fieldByName(group_->fieldName()));
     }

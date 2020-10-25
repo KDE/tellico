@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2001-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2001-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -266,6 +266,9 @@ void GroupView::contextMenuEvent(QContextMenuEvent* event_) {
   } else {
     Controller::self()->plugEntryActions(&menu);
   }
+  menu.addSeparator();
+  QMenu* sortMenu = Controller::self()->plugSortActions(&menu);
+  connect(sortMenu, &QMenu::triggered, this, &GroupView::slotSortMenuActivated);
   menu.exec(event_->globalPos());
 }
 
@@ -369,6 +372,17 @@ void GroupView::slotSortingChanged(int col_, Qt::SortOrder order_) {
 
   updateHeader();
   m_notSortedYet = false;
+}
+
+void GroupView::slotSortMenuActivated(QAction* action_) {
+  Data::FieldPtr field = action_->data().value<Data::FieldPtr>();
+  Q_ASSERT(field);
+  if(!field) {
+    return;
+  }
+  GroupSortModel* model = static_cast<GroupSortModel*>(sortModel());
+  Q_ASSERT(model);
+  model->setEntrySortField(field->name());
 }
 
 void GroupView::updateHeader(Tellico::Data::FieldPtr field_/*=0*/) {
