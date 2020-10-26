@@ -60,6 +60,16 @@ bool EntrySortModel::filterAcceptsRow(int row_, const QModelIndex& parent_) cons
 
 bool EntrySortModel::lessThan(const QModelIndex& left_, const QModelIndex& right_) const {
   if(sortRole() != EntryPtrRole) {
+    // for RowCount sorting, if there are no children, then sort by title
+    if(sortRole() == RowCountRole) {
+      const int leftCount = left_.data(RowCountRole).toInt();
+      const int rightCount = right_.data(RowCountRole).toInt();
+      if(leftCount == 0 && rightCount == 0) {
+        // also, never sort descending by title when sorting parent by count
+        const int res = left_.data().toString().localeAwareCompare(right_.data().toString());
+        return sortOrder() == Qt::DescendingOrder ? (res >= 0) : (res < 0);
+      }
+    }
     return AbstractSortModel::lessThan(left_, right_);
   }
   Data::EntryPtr leftEntry = left_.data(EntryPtrRole).value<Data::EntryPtr>();
