@@ -971,15 +971,17 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
   KConfigGroup group(KSharedConfig::openConfig(), configGroup);
 
   QString defaultGroup = coll_->defaultGroupField();
-  QString entryGroup;
+  QString entryGroup, groupSortField;
   if(coll_->type() != Data::Collection::Base) {
     entryGroup = group.readEntry("Group By", defaultGroup);
+    groupSortField = group.readEntry("GroupEntrySortField", QString());
   } else {
     QUrl url = Kernel::self()->URL();
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
       QUrl u(group.readEntry(QStringLiteral("URL_%1").arg(i)));
       if(url == u) {
         entryGroup = group.readEntry(QStringLiteral("Group By_%1").arg(i), defaultGroup);
+        groupSortField = group.readEntry(QStringLiteral("GroupEntrySortField_%1").arg(i), QString());
         break;
       }
     }
@@ -993,6 +995,10 @@ void MainWindow::readCollectionOptions(Tellico::Data::CollPtr coll_) {
     entryGroup = defaultGroup;
   }
   m_groupView->setGroupField(entryGroup);
+
+  if(!groupSortField.isEmpty()) {
+    m_groupView->setEntrySortField(groupSortField);
+  }
 
   QString entryXSLTFile = Config::templateName(coll_->type());
   if(entryXSLTFile.isEmpty()) {
@@ -1014,6 +1020,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
   QString configGroup = QStringLiteral("Options - %1").arg(CollectionFactory::typeName(coll_));
   KConfigGroup config(KSharedConfig::openConfig(), configGroup);
   QString groupName;
+  const QString groupEntrySort = m_groupView->entrySortField();
   if(m_entryGrouping->currentItem() > -1 &&
      static_cast<int>(coll_->entryGroups().count()) > m_entryGrouping->currentItem()) {
     if(m_entryGrouping->currentText() == (QLatin1Char('<') + i18n("People") + QLatin1Char('>'))) {
@@ -1023,6 +1030,9 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     }
     if(coll_->type() != Data::Collection::Base) {
       config.writeEntry("Group By", groupName);
+      if(!groupEntrySort.isEmpty()) {
+        config.writeEntry("GroupEntrySortField", groupEntrySort);
+      }
     }
   }
 
@@ -1031,12 +1041,15 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     QUrl url = Kernel::self()->URL();
     QList<QUrl> urls = QList<QUrl>() << url;
     QStringList groupBys = QStringList() << groupName;
+    QStringList groupSorts = QStringList() << groupEntrySort;
     for(int i = 0; i < Config::maxCustomURLSettings(); ++i) {
       QUrl u = config.readEntry(QStringLiteral("URL_%1").arg(i), QUrl());
       QString g = config.readEntry(QStringLiteral("Group By_%1").arg(i), QString());
+      QString gs = config.readEntry(QStringLiteral("GroupEntrySortField_%1").arg(i), QString());
       if(!u.isEmpty() && url != u) {
         urls.append(u);
         groupBys.append(g);
+        groupSorts.append(gs);
       } else if(!u.isEmpty()) {
         configIndex = i;
       }
@@ -1045,6 +1058,7 @@ void MainWindow::saveCollectionOptions(Tellico::Data::CollPtr coll_) {
     for(int i = 0; i < limit; ++i) {
       config.writeEntry(QStringLiteral("URL_%1").arg(i), urls[i].url());
       config.writeEntry(QStringLiteral("Group By_%1").arg(i), groupBys[i]);
+      config.writeEntry(QStringLiteral("GroupEntrySortField_%1").arg(i), groupSorts[i]);
     }
   }
   m_detailedView->saveConfig(coll_, configIndex);

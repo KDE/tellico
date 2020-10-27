@@ -46,6 +46,7 @@ public:
   virtual ~GroupSortModel();
 
   virtual void setSourceModel(QAbstractItemModel* sourceModel) Q_DECL_OVERRIDE;
+  QString entrySortField() const;
   void setEntrySortField(const QString& fieldName);
 
 protected:

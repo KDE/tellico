@@ -72,6 +72,8 @@ public:
    * @param groupFieldName The field name
    */
   void setGroupField(const QString& groupFieldName);
+  QString entrySortField() const;
+  void setEntrySortField(const QString& groupSortName);
   /**
    * Adds a collection, along with all all the groups for the collection in
    * the groupFieldribute. This method gets called as well when the groupFieldribute
@@ -157,6 +159,7 @@ private:
   bool m_notSortedYet;
   Data::CollPtr m_coll;
   QString m_groupBy;
+  QString m_entrySortField;
 
   QString m_groupOpenIconName;
   QString m_groupClosedIconName;

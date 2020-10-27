@@ -95,6 +95,7 @@ void GroupView::addCollection(Tellico::Data::CollPtr coll_) {
 
   updateHeader();
   populateCollection();
+  setEntrySortField(m_entrySortField);
 }
 
 void GroupView::removeCollection(Tellico::Data::CollPtr coll_) {
@@ -306,6 +307,17 @@ void GroupView::setGroupField(const QString& groupField_) {
   populateCollection();
 }
 
+QString GroupView::entrySortField() const {
+  return m_entrySortField;
+}
+
+void GroupView::setEntrySortField(const QString& groupSortName_) {
+  m_entrySortField = groupSortName_;
+  GroupSortModel* model = static_cast<GroupSortModel*>(sortModel());
+  Q_ASSERT(model);
+  model->setEntrySortField(groupSortName_);
+}
+
 void GroupView::slotFilterGroup() {
   QModelIndexList indexes = selectionModel()->selectedIndexes();
   if(indexes.isEmpty()) {
@@ -380,9 +392,7 @@ void GroupView::slotSortMenuActivated(QAction* action_) {
   if(!field) {
     return;
   }
-  GroupSortModel* model = static_cast<GroupSortModel*>(sortModel());
-  Q_ASSERT(model);
-  model->setEntrySortField(field->name());
+  setEntrySortField(field->name());
 }
 
 void GroupView::updateHeader(Tellico::Data::FieldPtr field_/*=0*/) {

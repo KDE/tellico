@@ -50,6 +50,10 @@ void GroupSortModel::setSourceModel(QAbstractItemModel* sourceModel_) {
   }
 }
 
+QString GroupSortModel::entrySortField() const {
+  return m_entryComparison ? m_entryComparison->field()->name() : QString();
+}
+
 void GroupSortModel::setEntrySortField(const QString& fieldName_) {
   // only have to update if the field name is different than existing
   if(m_entryComparison && m_entryComparison->field() &&
@@ -59,17 +63,20 @@ void GroupSortModel::setEntrySortField(const QString& fieldName_) {
   // can only update the sort field if the model is not empty
   QModelIndex groupIndex = index(0, 0);
   if(!groupIndex.isValid()) {
-    myDebug() << "GroupSortModel::setEntrySortField - invalid group index";
     return;
   }
   QModelIndex entryIndex = index(0, 0, groupIndex);
   if(!entryIndex.isValid()) {
-    myDebug() << "GroupSortModel::setEntrySortField - invalid entry index";
+    return;
+  }
+  // possible that field name does not exist in this collection
+  Tellico::FieldComparison* newComp = getEntryComparison(entryIndex, fieldName_);
+  if(!newComp) {
     return;
   }
   emit layoutAboutToBeChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
   delete m_entryComparison;
-  m_entryComparison = getEntryComparison(entryIndex, fieldName_);
+  m_entryComparison = newComp;
   emit layoutChanged(QList<QPersistentModelIndex>(), QAbstractItemModel::VerticalSortHint);
   // emitting layoutChanged does not cause the sorting to be refreshed. I can't figure out why
   // but calling invalidate() does. <shrug>
