@@ -128,7 +128,6 @@ void CollectorzTest::testMusic() {
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
   QCOMPARE(coll->entryCount(), 16);
 
-  // first a movie
   Tellico::Data::EntryPtr entry = coll->entryById(275);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("A Quiet Normal Life: The Best Of Warren Zevon"));

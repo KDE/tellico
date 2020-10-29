@@ -332,7 +332,7 @@
    </tc:producer>
   </xsl:for-each>
  </tc:producers>
- 
+
  <tc:writers>
   <xsl:for-each select="crewmember[role='Writer']">
    <tc:writer>
@@ -481,6 +481,8 @@
  <xsl:if test="$item = 'music'">
   <tc:tracks>
    <xsl:for-each select="detail[@type='disc']/details/detail[@type='track']">
+    <!-- sort first by disc index, then track index -->
+    <xsl:sort select="../../index"/>
     <xsl:sort select="index"/>
     <tc:track>
      <tc:column>
@@ -549,7 +551,7 @@
 <xsl:template name="formatdate">
  <xsl:param name="datestr" select="'robby'"/>
  <!-- input format mm/dd/yyyy -->
- 
+
  <tc:year>
   <xsl:value-of select="substring-after(substring-after($datestr,'/'), '/')" />
  </tc:year>
@@ -560,7 +562,7 @@
   <xsl:value-of select="format-number(substring-before(substring-after($datestr,'/'), '/'),'00')" />
  </tc:day>
 </xsl:template>
-   
+
 <!-- ignore anything not explicit -->
 <xsl:template match="*|@*"/>
 
