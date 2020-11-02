@@ -150,6 +150,38 @@ void DiscogsFetcherTest::testKeyword() {
   m_needToWait = true;
 }
 
+void DiscogsFetcherTest::testBarcode() {
+  // the total test case ends up exceeding the throttle limit so pause for a second
+  if(m_needToWait) QTest::qWait(2000);
+
+  QString groupName = QStringLiteral("Discogs");
+  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
+    QSKIP("This test requires a config file with Discogs settings.", SkipAll);
+  }
+  KConfigGroup cg(m_config, groupName);
+
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("4 547366 014099"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
+  fetcher->readConfig(cg);
+
+  static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QCOMPARE(results.size(), 1);
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->field(QStringLiteral("title")), QStringLiteral("Fallen"));
+  QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Evanescence"));
+  QVERIFY(!entry->field(QStringLiteral("label")).isEmpty());
+  QVERIFY(!entry->field(QStringLiteral("year")).isEmpty());
+
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  QVERIFY(!img.isNull());
+  m_needToWait = true;
+}
+
 // use the Raw query type to fully test the data for a Discogs release
 void DiscogsFetcherTest::testRawData() {
   if(m_needToWait) QTest::qWait(2000);

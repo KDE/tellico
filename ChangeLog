@@ -2,6 +2,10 @@
 
 	* Added barcode searching to MusicBrainz data source (Bug 429483).
 
+2020-11-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added barcode searching to Discogs data source.
+
 2020-09-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed crashing bug when checking in a loan (Bug 426815).

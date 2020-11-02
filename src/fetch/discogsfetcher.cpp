@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -69,7 +69,7 @@ QString DiscogsFetcher::source() const {
 }
 
 bool DiscogsFetcher::canSearch(FetchKey k) const {
-  return k == Title || k == Person || k == Keyword;
+  return k == Title || k == Person || k == Keyword || k == UPC;
 }
 
 bool DiscogsFetcher::canFetch(int type) const {
@@ -116,6 +116,7 @@ void DiscogsFetcher::search() {
       break;
 
     case Keyword:
+    case UPC:
       u.setPath(QStringLiteral("/database/search"));
       q.addQueryItem(QStringLiteral("q"), request().value);
       break;
@@ -211,12 +212,24 @@ Tellico::Data::EntryPtr DiscogsFetcher::fetchEntryHook(uint uid_) {
 }
 
 Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_) {
-  QString title = entry_->field(QStringLiteral("title"));
+  const QString barcode = entry_->field(QStringLiteral("barcode"));
+  if(!barcode.isEmpty()) {
+    return FetchRequest(UPC, barcode);
+  }
+
+  const QString title = entry_->field(QStringLiteral("title"));
+  const QString artist = entry_->field(QStringLiteral("artist"));
+  const QString year = entry_->field(QStringLiteral("year"));
+  // if any two of those are non-empty, combine them for a keyword search
+  const int sum = (title.isEmpty() ? 1:0) + (artist.isEmpty() ? 1:0) + (year.isEmpty() ? 1:0);
+  if(sum > 1) {
+    return FetchRequest(Keyword, title + QLatin1Char(' ') + artist + QLatin1Char(' ') + year);
+  }
+
   if(!title.isEmpty()) {
     return FetchRequest(Title, title);
   }
 
-  QString artist = entry_->field(QStringLiteral("artist"));
   if(!artist.isEmpty()) {
     return FetchRequest(Person, artist);
   }
