@@ -221,7 +221,7 @@ Tellico::Fetch::FetchRequest DiscogsFetcher::updateRequest(Data::EntryPtr entry_
   const QString artist = entry_->field(QStringLiteral("artist"));
   const QString year = entry_->field(QStringLiteral("year"));
   // if any two of those are non-empty, combine them for a keyword search
-  const int sum = (title.isEmpty() ? 1:0) + (artist.isEmpty() ? 1:0) + (year.isEmpty() ? 1:0);
+  const int sum = (title.isEmpty() ? 0:1) + (artist.isEmpty() ? 0:1) + (year.isEmpty() ? 0:1);
   if(sum > 1) {
     return FetchRequest(Keyword, title + QLatin1Char(' ') + artist + QLatin1Char(' ') + year);
   }
