@@ -1,3 +1,7 @@
+2020-11-01  Robby Stephenson  <robby@periapsis.org>
+
+	* Added barcode searching to Discogs data source.
+
 2020-10-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Added sorting in the group view, via context menu.
