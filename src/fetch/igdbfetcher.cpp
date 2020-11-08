@@ -54,8 +54,8 @@
 namespace {
   static const int IGDB_MAX_RETURNS_TOTAL = 20;
   static const char* IGDB_API_URL = "https://api.igdb.com/v4";
-  static const char* IGDB_MAGIC_TOKEN = "7e16c3f7244ea9db7c10d6b43e55364f714482e5542496fa97a6635bd6b383ef0e3cb5dd4777be8abfd8cfbd2118add8344e78400a6bceb800642918";
   static const char* IGDB_CLIENT_ID = "hc7jojgdmkcc6divxmz0mxzzt22ehr";
+  static const char* IGDB_TOKEN_URL = "https://api.tellico-project.org/igdb/";
 }
 
 using namespace Tellico;
@@ -508,14 +508,8 @@ void IGDBFetcher::checkAccessToken() {
     return;
   }
 
-  QUrl u(QStringLiteral("https://id.twitch.tv/oauth2/token"));
-  QUrlQuery q;
-  q.addQueryItem(QStringLiteral("grant_type"), QStringLiteral("client_credentials"));
-  q.addQueryItem(QStringLiteral("client_id"), QString::fromLatin1(IGDB_CLIENT_ID));
-  const QString token = Tellico::reverseObfuscate(IGDB_MAGIC_TOKEN);
-  q.addQueryItem(QStringLiteral("client_secret"), token);
-  u.setQuery(q);
-
+  QUrl u(QString::fromLatin1(IGDB_TOKEN_URL));
+//  myDebug() << "Downloading IGDN token from" << u.toString();
   QPointer<KIO::StoredTransferJob> job = KIO::storedHttpPost(QByteArray(), u, KIO::HideProgressInfo);
   job->addMetaData(QStringLiteral("accept"), QStringLiteral("application/json"));
   KJobWidgets::setWindow(job, GUI::Proxy::widget());
@@ -531,9 +525,14 @@ void IGDBFetcher::checkAccessToken() {
     return;
   }
   QJsonObject response = doc.object();
+  if(response.contains(QLatin1String("message"))) {
+    myDebug() << "IGDB:" << response.value(QLatin1String("message")).toString();
+  }
   m_accessToken = response.value(QLatin1String("access_token")).toString();
   const int expires = response.value(QLatin1String("expires_in")).toInt();
-  m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(expires);
+  if(expires > 0) {
+    m_accessTokenExpires = QDateTime::currentDateTimeUtc().addSecs(expires);
+  }
 //  myDebug() << "Received access token" << m_accessToken << m_accessTokenExpires;
 }
 
