@@ -48,6 +48,8 @@ void CompletionTest::testMultiple() {
   cmp.addItem(QStringLiteral("Falcon 9"));
   cmp.addItem(QStringLiteral("New Shephard"));
   cmp.addItem(QStringLiteral("New Glenn"));
+  cmp.addItem(QStringLiteral("Vulcan"));
+  cmp.addItem(QStringLiteral("Starship"));
 
   QString result = cmp.makeCompletion(QStringLiteral("Fal"));
   QCOMPARE(result, QStringLiteral("Falcon 9"));
@@ -62,6 +64,10 @@ void CompletionTest::testMultiple() {
   QCOMPARE(allMatches.count(), 2);
   QVERIFY(allMatches.contains(QStringLiteral("Atlas V; New Shephard")));
   QVERIFY(allMatches.contains(QStringLiteral("Atlas V; New Glenn")));
+
+  // complete on third item
+  result = cmp.makeCompletion(QStringLiteral("Atlas V; Falcon 9; S"));
+  QCOMPARE(result, QStringLiteral("Atlas V; Falcon 9; Starship"));
 
   // now back to a single match
   result = cmp.makeCompletion(QStringLiteral("Atl"));
