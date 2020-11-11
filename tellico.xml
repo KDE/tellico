@@ -20,6 +20,7 @@
     <comment xml:lang="sl">Podatkovna datoteka Tellico</comment>
     <comment xml:lang="sv">Tellico-datafil</comment>
     <comment xml:lang="uk">файл даних Tellico</comment>
+    <comment xml:lang="zh_CN">Tellico 数据文件</comment>
     <glob pattern="*.tc"/>
     <glob pattern="*.bc"/>
   </mime-type>
