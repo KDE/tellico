@@ -342,7 +342,9 @@ void GroupView::slotFilterGroup() {
       Q_ASSERT(entry);
       Data::FieldList fields = entry->collection()->peopleFields();
       foreach(Data::FieldPtr field, fields) {
-        filter->append(new FilterRule(field->name(), model()->data(index).toString(), FilterRule::FuncContains));
+        filter->append(new FilterRule(field->name(),
+                                      FieldFormat::matchValueRegularExpression(model()->data(index).toString()),
+                                      FilterRule::FuncRegExp));
       }
     } else {
       Data::EntryGroup* group = model()->data(index, GroupPtrRole).value<Data::EntryGroup*>();
@@ -350,9 +352,16 @@ void GroupView::slotFilterGroup() {
         if(group->hasEmptyGroupName()) {
           filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
         } else {
-          filter->append(new FilterRule(m_groupBy,
-                                        FieldFormat::matchValueRegularExpression(group->groupName()),
-                                        FilterRule::FuncRegExp));
+          // if the field does not allow multiple values and is not a table
+          // then can njust do an equal match
+          Data::FieldPtr field = group->at(0)->collection()->fieldByName(group->fieldName());
+          if(field && field->type() != Data::Field::Table && !field->hasFlag(Data::Field::AllowMultiple)) {
+            filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncEquals));
+          } else {
+            filter->append(new FilterRule(m_groupBy,
+                                          FieldFormat::matchValueRegularExpression(group->groupName()),
+                                          FilterRule::FuncRegExp));
+          }
         }
       }
     }
