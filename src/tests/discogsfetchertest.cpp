@@ -155,15 +155,15 @@ void DiscogsFetcherTest::testBarcode() {
   if(m_needToWait) QTest::qWait(2000);
 
   QString groupName = QStringLiteral("Discogs");
-  if(!m_hasConfigFile || !m_config->hasGroup(groupName)) {
+  if(!m_hasConfigFile || !m_config.hasGroup(groupName)) {
     QSKIP("This test requires a config file with Discogs settings.", SkipAll);
   }
-  KConfigGroup cg(m_config, groupName);
+  KConfigGroup cg(&m_config, groupName);
 
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
                                        QStringLiteral("4 547366 014099"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::DiscogsFetcher(this));
-  fetcher->readConfig(cg);
+  fetcher->readConfig(cg, cg.name());
 
   static_cast<Tellico::Fetch::DiscogsFetcher*>(fetcher.data())->setLimit(1);
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
