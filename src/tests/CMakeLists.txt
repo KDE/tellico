@@ -861,6 +861,14 @@ add_test(themoviedbfetchertest themoviedbfetchertest)
 ecm_mark_as_test(themoviedbfetchertest)
 TARGET_LINK_LIBRARIES(themoviedbfetchertest fetcherstest translatorstest ${TELLICO_TEST_LIBS})
 
+add_executable(tvmazefetchertest tvmazefetchertest.cpp abstractfetchertest.cpp
+  ../fetch/tvmazefetcher.cpp
+)
+ecm_mark_nongui_executable(tvmazefetchertest)
+add_test(tvmazefetchertest tvmazefetchertest)
+ecm_mark_as_test(tvmazefetchertest)
+TARGET_LINK_LIBRARIES(tvmazefetchertest fetcherstest translatorstest ${TELLICO_TEST_LIBS})
+
 add_executable(videogamegeekfetchertest videogamegeekfetchertest.cpp abstractfetchertest.cpp
   ../fetch/videogamegeekfetcher.cpp
 )

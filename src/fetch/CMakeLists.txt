@@ -57,6 +57,7 @@ SET(fetch_STAT_SRCS
    srufetcher.cpp
    thegamesdbfetcher.cpp
    themoviedbfetcher.cpp
+   tvmazefetcher.cpp
    videogamegeekfetcher.cpp
    vndbfetcher.cpp
    xmlfetcher.cpp

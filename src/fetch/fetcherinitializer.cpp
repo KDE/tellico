@@ -73,6 +73,7 @@
 #include "kinoteatrfetcher.h"
 #include "colnectfetcher.h"
 #include "numistafetcher.h"
+#include "tvmazefetcher.h"
 
 /**
  * Ideally, I'd like these initializations to be in each cpp file for each collection type
@@ -127,6 +128,7 @@ Tellico::Fetch::FetcherInitializer::FetcherInitializer() {
   RegisterFetcher<Fetch::KinoTeatrFetcher> registerTeatr(KinoTeatr);
   RegisterFetcher<Fetch::ColnectFetcher> registerColnect(Colnect);
   RegisterFetcher<Fetch::NumistaFetcher> registerNumista(Numista);
+  RegisterFetcher<Fetch::TVmazeFetcher> registerTVmaze(TVmaze);
 
   Fetch::Manager::self()->loadFetchers();
 }

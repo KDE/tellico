@@ -1,3 +1,7 @@
+2020-11-22  Robby Stephenson  <robby@periapsis.org>
+
+	* Added data source for TVmaze.com.
+
 2020-11-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Added barcode searching to Discogs data source.

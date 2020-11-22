@@ -345,10 +345,10 @@ void TheMovieDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& 
   }
 
   if(entry_->collection()->hasField(QStringLiteral("tmdb"))) {
-    entry_->setField(QStringLiteral("tmdb"), QLatin1String("http://www.themoviedb.org/movie/") + mapValue(resultMap_, "id"));
+    entry_->setField(QStringLiteral("tmdb"), QLatin1String("https://www.themoviedb.org/movie/") + mapValue(resultMap_, "id"));
   }
   if(entry_->collection()->hasField(QStringLiteral("imdb"))) {
-    entry_->setField(QStringLiteral("imdb"), QLatin1String("http://www.imdb.com/title/") + mapValue(resultMap_, "imdb_id"));
+    entry_->setField(QStringLiteral("imdb"), QLatin1String("https://www.imdb.com/title/") + mapValue(resultMap_, "imdb_id"));
   }
   if(entry_->collection()->hasField(QStringLiteral("origtitle"))) {
     entry_->setField(QStringLiteral("origtitle"), mapValue(resultMap_, "original_title"));
