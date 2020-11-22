@@ -43,6 +43,7 @@ private Q_SLOTS:
   void testBug426560();
   void testCoverArt();
   void testSoundtrack();
+  void testBarcode();
 
 private:
   QHash<QString, QString> m_fieldValues;

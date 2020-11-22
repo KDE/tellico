@@ -183,3 +183,16 @@ void MusicBrainzFetcherTest::testSoundtrack() {
   // sound tracks are the only genre tag that is read
   QCOMPARE(entry->field(QStringLiteral("genre")), QStringLiteral("Soundtrack"));
 }
+
+void MusicBrainzFetcherTest::testBarcode() {
+  Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
+                                       QStringLiteral("8024391054123"));
+  Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+
+  Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
+
+  QVERIFY(!results.isEmpty());
+
+  Tellico::Data::EntryPtr entry = results.at(0);
+  QCOMPARE(entry->title(), QStringLiteral("The Old Man and the Spirit"));
+}

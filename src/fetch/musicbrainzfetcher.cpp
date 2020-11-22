@@ -74,6 +74,10 @@ QString MusicBrainzFetcher::source() const {
   return m_name.isEmpty() ? defaultName() : m_name;
 }
 
+bool MusicBrainzFetcher::canSearch(FetchKey k) const {
+  return k == Title || k == Person || k == Keyword || k == UPC;
+}
+
 bool MusicBrainzFetcher::canFetch(int type) const {
   return type == Data::Collection::Album;
 }
@@ -110,6 +114,10 @@ void MusicBrainzFetcher::doSearch() {
 
     case Person:
       queryString = QStringLiteral("artist:\"%1\"").arg(request().value);
+      break;
+
+    case UPC:
+      queryString = QStringLiteral("barcode:\"%1\"").arg(request().value);
       break;
 
     case Keyword:
@@ -326,6 +334,11 @@ void MusicBrainzFetcher::initXSLTHandler() {
 }
 
 Tellico::Fetch::FetchRequest MusicBrainzFetcher::updateRequest(Data::EntryPtr entry_) {
+  const QString barcode = entry_->field(QStringLiteral("barcode"));
+  if(!barcode.isEmpty()) {
+    return FetchRequest(UPC, barcode);
+  }
+
   const QString title = entry_->field(QStringLiteral("title"));
   const QString artist = entry_->field(QStringLiteral("artist"));
   if(artist.isEmpty() && !title.isEmpty()) {

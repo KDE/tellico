@@ -1,6 +1,7 @@
 2020-11-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Added data source for TVmaze.com.
+	* Added barcode searching to MusicBrainz data source (Bug 429483).
 
 2020-11-01  Robby Stephenson  <robby@periapsis.org>
 
