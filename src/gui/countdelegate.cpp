@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2008-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2008-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -107,10 +107,17 @@ void CountDelegate::paint(QPainter* painter_,
   countRect.setTop(top);
   countRect.setHeight(fm.height());
 
+  QColor textColor = index_.data(Qt::ForegroundRole).value<QColor>();
+  if(!textColor.isValid()) {
+    if(option.state & QStyle::State_Selected) {
+      textColor = option.palette.highlightedText().color();
+    } else {
+      textColor = option.palette.text().color();
+    }
+  }
   KColorScheme::ColorSet colorSet = (option.state & QStyle::State_Selected) ?
                                      KColorScheme::Selection : KColorScheme::View;
   KColorScheme cs(QPalette::Active, colorSet);
-  QColor textColor = cs.foreground(index_.model()->hasChildren(index_) ? KColorScheme::NormalText : KColorScheme::InactiveText).color();
   QColor countColor = cs.foreground(KColorScheme::LinkText).color();
 
   painter_->save();
