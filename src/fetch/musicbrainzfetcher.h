@@ -64,11 +64,10 @@ public:
   virtual QString source() const Q_DECL_OVERRIDE;
   virtual bool isSearching() const Q_DECL_OVERRIDE { return m_started; }
   virtual void continueSearch() Q_DECL_OVERRIDE;
-  // amazon can search title or person
-  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE { return k == Title || k == Person || k == Keyword; }
   virtual void stop() Q_DECL_OVERRIDE;
   virtual Data::EntryPtr fetchEntryHook(uint uid) Q_DECL_OVERRIDE;
   virtual Type type() const Q_DECL_OVERRIDE { return MusicBrainz; }
+  virtual bool canSearch(FetchKey k) const Q_DECL_OVERRIDE;
   virtual bool canFetch(int type) const Q_DECL_OVERRIDE;
   virtual bool needsUserAgent() const Q_DECL_OVERRIDE { return true; }
   virtual void readConfigHook(const KConfigGroup& config) Q_DECL_OVERRIDE;
