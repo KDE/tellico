@@ -1,3 +1,7 @@
+2020-11-25  Robby Stephenson  <robby@periapsis.org>
+
+	* Released 3.3.4.
+
 2020-11-22  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed text in group view to use correct color (Bug 429475).
