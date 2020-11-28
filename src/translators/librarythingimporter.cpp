@@ -43,7 +43,9 @@
 
 using Tellico::Import::LibraryThingImporter;
 
-LibraryThingImporter::LibraryThingImporter() : Import::Importer(), m_widget(nullptr), m_URLRequester(nullptr) {
+LibraryThingImporter::LibraryThingImporter() : Import::Importer()
+  , m_widget(nullptr)
+  , m_URLRequester(nullptr) {
 }
 
 bool LibraryThingImporter::canImport(int type) const {
@@ -76,11 +78,13 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     return Data::CollPtr();
   }
 
+  QRegularExpression digits(QStringLiteral("\\d+"));
+
   m_coll = new Data::BookCollection(true);
   Data::EntryList entries;
   QVariantMap map = doc.object().toVariantMap();
   QMapIterator<QString, QVariant> i(map);
-  while (i.hasNext()) {
+  while(i.hasNext()) {
     i.next();
     QVariantMap valueMap = i.value().toMap();
     Data::EntryPtr entry(new Data::Entry(m_coll));
@@ -102,8 +106,9 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     entry->setField(QStringLiteral("author"), authors.join(FieldFormat::delimiterString()));
 
     QJsonArray formatArray = valueMap.value(QStringLiteral("format")).toJsonArray();
-    for(int i = 0; i < formatArray.size(); ++i) {
-      QVariantMap m = formatArray.at(i).toObject().toVariantMap();
+    if(!formatArray.isEmpty()) {
+      // use the first one
+      const QVariantMap m = formatArray.at(0).toObject().toVariantMap();
       const QString format = mapValue(m, "text");
       if(format == QLatin1String("Paperback")) {
         entry->setField(QStringLiteral("binding"), i18n("Paperback"));
@@ -113,7 +118,6 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
         // just in case there's a value there
         entry->setField(QStringLiteral("binding"), format);
       }
-      break;
     }
 
     QString isbn = mapValue(valueMap, "originalisbn");
@@ -121,7 +125,6 @@ Tellico::Data::CollPtr LibraryThingImporter::collection() {
     entry->setField(QStringLiteral("isbn"), isbn);
 
     // grab first set of digits
-    QRegularExpression digits(QStringLiteral("\\d+"));
     QRegularExpressionMatch match = digits.match(mapValue(valueMap, "pages"));
     if(match.hasMatch()) {
       entry->setField(QStringLiteral("pages"), match.captured(0));
