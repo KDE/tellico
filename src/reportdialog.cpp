@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2005-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -38,8 +38,6 @@
 #include "config/tellico_config.h"
 
 #include <KLocalizedString>
-#include <KHTMLPart>
-#include <KHTMLView>
 #include <KStandardGuiItem>
 #include <KWindowConfig>
 #include <KConfigGroup>
@@ -54,6 +52,17 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QDialogButtonBox>
+
+#ifdef USE_KHTML
+#include <KHTMLPart>
+#include <KHTMLView>
+#else
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QWebEngineView>
+#include <QWebEnginePage>
+#include <QWebEngineSettings>
+#endif
 
 namespace {
   static const int REPORT_MIN_WIDTH = 600;
@@ -116,6 +125,15 @@ ReportDialog::ReportDialog(QWidget* parent_)
   hlay->addWidget(pb3);
   connect(pb3, &QAbstractButton::clicked, this, &ReportDialog::slotPrint);
 
+  QColor color = palette().color(QPalette::Link);
+  QString text = QString::fromLatin1("<html><style>p{font-family:sans-serif;font-weight:bold;width:50%;"
+                                     "margin:20% auto auto auto;text-align:center;"
+                                     "color:%1;}</style><body><p>").arg(color.name())
+               + i18n("Select a report template and click <em>Generate</em>.") + QLatin1Char(' ')
+               + i18n("Some reports may take several seconds to generate for large collections.")
+               + QLatin1String("</p></body></html>");
+
+#ifdef USE_KHTML
   m_HTMLPart = new KHTMLPart(mainWidget);
   m_HTMLPart->setJScriptEnabled(true);
   m_HTMLPart->setJavaEnabled(false);
@@ -123,16 +141,20 @@ ReportDialog::ReportDialog(QWidget* parent_)
   m_HTMLPart->setPluginsEnabled(false);
   topLayout->addWidget(m_HTMLPart->view());
 
-  QColor color = palette().color(QPalette::Link);
-  QString text = QString::fromLatin1("<html><style>p{font-weight:bold;width:50%;"
-                                     "margin:20% auto auto auto;text-align:center;"
-                                     "color:%1;}</style><body><p>").arg(color.name())
-               + i18n("Select a report template and click <em>Generate</em>.") + QLatin1Char(' ')
-               + i18n("Some reports may take several seconds to generate for large collections.")
-               + QLatin1String("</p></body></html>");
   m_HTMLPart->begin();
   m_HTMLPart->write(text);
   m_HTMLPart->end();
+#else
+  m_webView = new QWebEngineView(mainWidget);
+  QWebEngineSettings* settings = m_webView->page()->settings();
+  settings->setAttribute(QWebEngineSettings::JavascriptEnabled, true);
+  settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
+  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
+  topLayout->addWidget(m_webView);
+
+  m_webView->setHtml(text);
+#endif
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Close);
   mainLayout->addWidget(buttonBox);
@@ -201,8 +223,13 @@ void ReportDialog::slotRefresh() {
   // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
   // by simply using a relative path in the xslt file
   QUrl u = QUrl::fromLocalFile(m_xsltFile);
+#ifdef USE_KHTML
   m_HTMLPart->begin(u);
   m_HTMLPart->write(m_exporter->text());
+  m_HTMLPart->end();
+#else
+  m_webView->setHtml(m_exporter->text(), u);
+#endif
 #if 0
   myDebug() << "Remove debug from reportdialog.cpp";
   QFile f(QLatin1String("/tmp/test.html"));
@@ -212,14 +239,23 @@ void ReportDialog::slotRefresh() {
   }
   f.close();
 #endif
-  m_HTMLPart->end();
-  // is this needed?
-//  view()->layout();
 }
 
 // actually the print button
 void ReportDialog::slotPrint() {
+#ifdef USE_KHTML
   m_HTMLPart->view()->print();
+#else
+  QPrinter printer;
+  printer.setResolution(300);
+  QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
+  if(dialog->exec() == QDialog::Accepted) {
+    QEventLoop loop;
+    GUI::CursorSaver cs(Qt::WaitCursor);
+    m_webView->page()->print(&printer, [&](bool) { loop.quit(); });
+    loop.exec();
+  }
+#endif
 }
 
 void ReportDialog::slotSaveAs() {

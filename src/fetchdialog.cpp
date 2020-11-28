@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2011 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -50,7 +50,6 @@
 #endif
 
 #include <KLocalizedString>
-#include <KHTMLView>
 #include <KSharedConfig>
 #include <KAcceleratorManager>
 #include <KTextEdit>
@@ -272,8 +271,12 @@ FetchDialog::FetchDialog(QWidget* parent_)
   // set the xslt file AFTER setting the gradient image option
   m_entryView->setXSLTFile(QStringLiteral("Compact.xsl"));
   m_entryView->addXSLTStringParam("skip-fields", "id,mdate,cdate");
-  m_entryView->view()->setWhatsThis(i18n("An entry may be shown here before adding it to the "
-                                         "current collection by selecting it in the list above"));
+  m_entryView->
+#ifdef USE_KHTML
+               view()->
+#endif
+               setWhatsThis(i18n("An entry may be shown here before adding it to the "
+                                 "current collection by selecting it in the list above"));
 
   QWidget* box3 = new QWidget(mainWidget);
   QHBoxLayout* box3HBoxLayout = new QHBoxLayout(box3);

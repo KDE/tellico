@@ -28,7 +28,6 @@
 #include "../images/imagefactory.h" // for StyleOptions
 
 #include <KLocalizedString>
-#include <KHTMLView>
 
 #include <QTemporaryDir>
 #include <QDialogButtonBox>
@@ -46,11 +45,12 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
   QVBoxLayout* mainLayout = new QVBoxLayout;
   setLayout(mainLayout);
 
-  QWidget* mainWidget = new QWidget(this);
-  mainLayout->addWidget(mainWidget);
-
-  m_view = new EntryView(mainWidget);
+  m_view = new EntryView(this);
+#ifdef USE_KHTML
   mainLayout->addWidget(m_view->view());
+#else
+  mainLayout->addWidget(m_view);
+#endif
 
   QDialogButtonBox* buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
   QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
@@ -59,7 +59,7 @@ PreviewDialog::PreviewDialog(QWidget* parent_)
   connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
   mainLayout->addWidget(buttonBox);
 
-  resize(QSize(600, 500));
+  resize(QSize(800, 600));
 
   m_tempDir->setAutoRemove(true);
 }

@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,8 +40,6 @@
 #include "tellico_debug.h"
 
 #include <KMessageBox>
-#include <KHTMLView>
-#include <dom/dom_element.h>
 #include <KLocalizedString>
 
 #include <QFile>
@@ -52,7 +50,16 @@
 #include <QApplication>
 #include <QDesktopServices>
 
+#ifdef USE_KHTML
+#include <dom/dom_element.h>
+#else
+#include <QWebEnginePage>
+#include <QWebEngineSettings>
+#endif
+
 using Tellico::EntryView;
+
+#ifdef USE_KHTML
 using Tellico::EntryViewWidget;
 
 EntryViewWidget::EntryViewWidget(EntryView* part, QWidget* parent)
@@ -89,6 +96,50 @@ EntryView::EntryView(QWidget* parent_) : KHTMLPart(new EntryViewWidget(this, par
   connect(browserExtension(), &KParts::BrowserExtension::openUrlRequestDelayed,
           this, &EntryView::slotOpenURL);
 }
+#else
+using Tellico::EntryViewPage;
+
+EntryViewPage::EntryViewPage(QWidget* parent)
+    : QWebEnginePage(parent) {
+  settings()->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
+  settings()->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+  settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
+  settings()->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
+}
+
+bool EntryViewPage::acceptNavigationRequest(const QUrl& url_, QWebEnginePage::NavigationType type_, bool isMainFrame_) {
+  Q_UNUSED(isMainFrame_);
+
+  if(url_.scheme() == QLatin1String("tc")) {
+    // handle this internally
+    emit signalTellicoAction(url_);
+    return false;
+  }
+
+  if(type_ == QWebEnginePage::NavigationTypeLinkClicked) {
+    const QUrl u = Kernel::self()->URL().resolved(url_);
+    QDesktopServices::openUrl(u);
+    return false;
+  }
+
+  return true;
+}
+
+EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
+    m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
+  EntryViewPage* page = new EntryViewPage(this);
+  setPage(page);
+
+  connect(page, &EntryViewPage::signalTellicoAction,
+          this, &EntryView::signalTellicoAction);
+
+  setAcceptDrops(true);
+  DropHandler* drophandler = new DropHandler(this);
+  installEventFilter(drophandler);
+
+  clear(); // needed for initial layout
+}
+#endif
 
 EntryView::~EntryView() {
   delete m_handler;
@@ -101,12 +152,22 @@ void EntryView::clear() {
   m_entry = nullptr;
 
   // just clear the view
+#ifdef USE_KHTML
   begin();
   if(!m_textToShow.isEmpty()) {
     write(m_textToShow);
   }
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
+#else
+  setUrl(QUrl());
+  if(!m_textToShow.isEmpty()) {
+    // the welcome page references local images, which won't load when passing HTML directly
+    // see https://bugreports.qt.io/browse/QTBUG-55902#comment-335945
+    // passing "disable-web-security" to QApplication is another option
+    page()->setHtml(m_textToShow, QUrl(QStringLiteral("file://")));
+  }
+#endif
 }
 
 void EntryView::showEntries(Tellico::Data::EntryList entries_) {
@@ -137,11 +198,9 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   m_entry = entry_;
 
-  // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
-  // by simply using a relative path in the xslt file
-  QUrl u = QUrl::fromLocalFile(m_xsltFile);
-  begin(u);
-
+#ifdef USE_KHTML
+  begin(QUrl::fromLocalFile(m_xsltFile));
+#endif
   Export::TellicoXMLExporter exporter(entry_->collection());
   exporter.setEntries(Data::EntryList() << entry_);
   long opt = exporter.options();
@@ -197,17 +256,26 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 #endif
 
 //  myDebug() << html;
+#ifdef USE_KHTML
   write(html);
   end();
-  // not need anymore?
   view()->layout(); // I need this because some of the margins and widths may get messed up
+#else
+  // by setting the xslt file as the URL, any images referenced in the xslt "theme" can be found
+  // by simply using a relative path in the xslt file
+  page()->setHtml(html, QUrl::fromLocalFile(m_xsltFile));
+#endif
 }
 
 void EntryView::showText(const QString& text_) {
   m_textToShow = text_;
+#ifdef USE_KHTML
   begin();
   write(text_);
   end();
+#else
+  clear(); // shows the default text
+#endif
 }
 
 void EntryView::setXSLTFile(const QString& file_) {
@@ -233,7 +301,11 @@ void EntryView::setXSLTFile(const QString& file_) {
         str += QLatin1Char(' ');
         str += i18n("Please check your installation.");
         str += QLatin1String("</qt>");
+#ifdef USE_KHTML
         KMessageBox::error(view(), str);
+#else
+        KMessageBox::error(this, str);
+#endif
         clear();
         return;
       }
@@ -303,9 +375,12 @@ void EntryView::setXSLTFile(const QString& file_) {
 void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
   showEntry(m_entry);
+#ifdef USE_KHTML
   view()->repaint();
+#endif
 }
 
+#ifdef USE_KHTML
 // do some contortions in case the url is relative
 // need to interpret it relative to document URL instead of xslt file
 // the current node under the mouse would be the text node inside
@@ -313,7 +388,7 @@ void EntryView::slotRefresh() {
 void EntryView::slotOpenURL(const QUrl& url_) {
   if(url_.scheme() == QLatin1String("tc")) {
     // handle this internally
-    emit signalAction(url_);
+    emit signalTellicoAction(url_);
     return;
   }
 
@@ -331,14 +406,20 @@ void EntryView::slotOpenURL(const QUrl& url_) {
   // open the url
   QDesktopServices::openUrl(u);
 }
+#endif
 
 void EntryView::slotReloadEntry() {
   // this slot should only be connected in setXSLTFile()
   // must disconnect the signal first, otherwise, get an infinite loop
+#ifdef USE_KHTML
   void (EntryView::* completed)() = &EntryView::completed;
   disconnect(this, completed, this, &EntryView::slotReloadEntry);
   closeUrl(); // this is needed to stop everything, for some reason
   view()->setUpdatesEnabled(true);
+#else
+  disconnect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
+  setUpdatesEnabled(true);
+#endif
 
   if(m_entry) {
     showEntry(m_entry);
@@ -409,13 +490,19 @@ void EntryView::resetColors() {
   stream << s;
   stream.flush();
 
+#ifdef USE_KHTML
   KParts::OpenUrlArguments args = arguments();
   args.setReload(true); // tell the cache to reload images
   setArguments(args);
 
-  // don't flicker
   view()->setUpdatesEnabled(false);
   openUrl(QUrl::fromLocalFile(m_tempFile->fileName()));
   void (EntryView::* completed)() = &EntryView::completed;
   connect(this, completed, this, &EntryView::slotReloadEntry);
+#else
+  // don't flicker
+  setUpdatesEnabled(false);
+  load(QUrl::fromLocalFile(m_tempFile->fileName()));
+  connect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
+#endif
 }

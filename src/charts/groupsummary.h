@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,62 +22,29 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_REPORTDIALOG_H
-#define TELLICO_REPORTDIALOG_H
+#ifndef TELLICO_CHARTS_GROUPSUMMARY_H
+#define TELLICO_CHARTS_GROUPSUMMARY_H
 
-#include <QDialog>
+#include <QWidget>
+#include <QList>
 
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
-class QWebEngineView;
-#endif
+class QChartView;
 
 namespace Tellico {
-  namespace Export {
-    class HTMLExporter;
-  }
-  namespace GUI {
-    class ComboBox;
-  }
+  namespace Charts {
 
-/**
- * @author Robby Stephenson
- */
-class ReportDialog : public QDialog {
+class GroupSummary : public QWidget {
 Q_OBJECT
 
 public:
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  ReportDialog(QWidget* parent);
-  virtual ~ReportDialog();
-
-public Q_SLOTS:
-  /**
-   * Regenerate the report.
-   */
-  void slotRefresh();
-
-private Q_SLOTS:
-  void slotGenerate();
-  void slotPrint();
-  void slotSaveAs();
-  void slotUpdateSize();
+  explicit GroupSummary(QWidget* parent = nullptr);
+  ~GroupSummary() Q_DECL_OVERRIDE {};
 
 private:
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
-  QWebEngineView* m_webView;
-#endif
-  GUI::ComboBox* m_templateCombo;
-  Export::HTMLExporter* m_exporter;
-  QString m_xsltFile;
+  QList<QChartView*> m_charts;
 };
 
-} // end namespace
+  } // end namespace
+} //end namespace
+
 #endif

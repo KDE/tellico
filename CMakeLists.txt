@@ -39,6 +39,7 @@ include(KDECMakeSettings)
 option(ENABLE_CDTEXT       "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
+option(USE_KHTML           "Build with KHTML rather than QWebEngine" FALSE)
 
 include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
@@ -68,12 +69,25 @@ find_package(KF5 REQUIRED COMPONENTS
     JobWidgets
     KIO
     Solid
+    Sonnet
+    TextWidgets
     Wallet
     WidgetsAddons
     WindowSystem
     XmlGui
 )
-find_package(KF5KHtml REQUIRED NO_MODULE)
+if(NOT USE_KHTML)
+  find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS WebEngineWidgets)
+  set_package_properties(Qt5WebEngineWidgets PROPERTIES
+    DESCRIPTION "Building with QWebEngine is preferrable to KHTML"
+    TYPE OPTIONAL)
+endif()
+if(USE_KHTML OR NOT Qt5WebEngineWidgets_FOUND)
+  set(USE_KHTML ON)
+  find_package(KF5KHtml REQUIRED NO_MODULE)
+  set_package_properties(KF5Html PROPERTIES
+    DESCRIPTION "Building with QWebEngine is preferrable to KHTML")
+endif()
 
 include(MacroBoolTo01)
 

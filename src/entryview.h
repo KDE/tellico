@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2003-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2003-2020 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -27,10 +27,14 @@
 
 #include "datavectors.h"
 
+#ifdef USE_KHTML
 #include <KHTMLPart>
 #include <KHTMLView>
-
+#else
+#include <QWebEngineView>
+#include <QWebEnginePage>
 #include <QPointer>
+#endif
 
 class QTemporaryFile;
 
@@ -42,7 +46,13 @@ namespace Tellico {
 /**
  * @author Robby Stephenson
  */
-class EntryView : public KHTMLPart {
+class EntryView : public
+#ifdef USE_KHTML
+  KHTMLPart {
+#else
+  QWebEngineView {
+#endif
+
 Q_OBJECT
 
 public:
@@ -81,7 +91,7 @@ public:
   void resetView();
 
 Q_SIGNALS:
-  void signalAction(const QUrl& url);
+  void signalTellicoAction(const QUrl& url);
 
 public Q_SLOTS:
   /**
@@ -91,12 +101,14 @@ public Q_SLOTS:
   void showEntries(Tellico::Data::EntryList entries);
 
 private Q_SLOTS:
+#ifdef USE_KHTML
   /**
    * Open a URL.
    *
    * @param url The URL to open
    */
   void slotOpenURL(const QUrl& url);
+#endif
   void slotReloadEntry();
 
 private:
@@ -112,8 +124,7 @@ private:
   bool m_checkCommonFile;
 };
 
-// stupid naming on my part, I need to subclass the view to
-// add a slot. EntryView is really a part though
+#ifdef USE_KHTML
 class EntryViewWidget : public KHTMLView {
 Q_OBJECT
 public:
@@ -125,6 +136,19 @@ public Q_SLOTS:
 protected:
   void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
 };
+#else
+class EntryViewPage : public QWebEnginePage {
+Q_OBJECT
+public:
+  EntryViewPage(QWidget* parent);
+
+Q_SIGNALS:
+  void signalTellicoAction(const QUrl& url);
+
+protected:
+  virtual bool acceptNavigationRequest(const QUrl& url, QWebEnginePage::NavigationType type, bool isMainFrame) Q_DECL_OVERRIDE;
+};
+#endif
 
 } //end namespace
 #endif

@@ -102,7 +102,6 @@ TARGET_LINK_LIBRARIES(tellico
     Qt5::Widgets
     Qt5::DBus
     KF5::Crash
-    KF5::KHtml
     KF5::KIOCore
     KF5::KIOFileWidgets
     KF5::WindowSystem
@@ -110,6 +109,13 @@ TARGET_LINK_LIBRARIES(tellico
     ${LIBXSLT_LIBRARIES}
     ${LIBXSLT_EXSLT_LIBRARIES}
     )
+
+IF(USE_KHTML)
+  TARGET_LINK_LIBRARIES(tellico KF5::KHtml)
+  ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
+ELSE()
+  TARGET_LINK_LIBRARIES(tellico Qt5::WebEngineWidgets)
+ENDIF()
 
 IF( KF5NewStuff_FOUND )
   TARGET_LINK_LIBRARIES(tellico KF5::NewStuff)

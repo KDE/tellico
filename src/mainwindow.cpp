@@ -82,7 +82,6 @@
 #include <KStandardAction>
 #include <KWindowSystem>
 #include <KWindowConfig>
-#include <KHTMLView>
 #include <KMessageBox>
 #include <KTipDialog>
 #include <KRecentDocument>
@@ -109,6 +108,17 @@
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QMetaMethod>
+
+#ifdef USE_KHTML
+#include <KHTMLPart>
+#include <KHTMLView>
+#else
+#include <QWebEngineView>
+#include <QWebEnginePage>
+#include <QWebEngineSettings>
+#include <QPrinter>
+#include <QPrintDialog>
+#endif
 
 #include <unistd.h>
 
@@ -327,6 +337,7 @@ void MainWindow::initActions() {
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   action->setToolTip(i18n("Save the document as a different file..."));
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
+#ifdef USE_KHTML
   {
     KHTMLPart w;
     // KHTMLPart printing was broken in KDE until KHTML 5.16
@@ -338,6 +349,7 @@ void MainWindow::initActions() {
       action->setEnabled(false);
     }
   }
+#endif
 
   action->setToolTip(i18n("Print the contents of the document..."));
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
@@ -783,15 +795,20 @@ void MainWindow::initView() {
   ImageFactory::init();
 
   m_entryView = new EntryView(this);
-  connect(m_entryView, &EntryView::signalAction,
+  connect(m_entryView, &EntryView::signalTellicoAction,
           this, &MainWindow::slotURLAction);
-  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
 
   // trick to make sure the group views always extend along the entire left or right side
   // using QMainWindow::setCorner does not seem to work
   // https://wiki.qt.io/Technical_FAQ#Is_it_possible_for_either_the_left_or_right_dock_areas_to_have_full_height_of_their_side_rather_than_having_the_bottom_take_the_full_width.3F
   m_dummyWindow = new QMainWindow(this);
+#ifdef USE_KHTML
+  m_entryView->view()->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
   m_dummyWindow->setCentralWidget(m_entryView->view());
+#else
+  m_entryView->setWhatsThis(i18n("<qt>The <i>Entry View</i> shows a formatted view of the entry's contents.</qt>"));
+  m_dummyWindow->setCentralWidget(m_entryView);
+#endif
   m_dummyWindow->setWindowFlags(Qt::Widget);
   setCentralWidget(m_dummyWindow);
 
@@ -1681,6 +1698,7 @@ void MainWindow::slotHideReportDialog() {
 }
 
 void MainWindow::doPrint(const QString& html_) {
+#ifdef USE_KHTML
   KHTMLPart w;
 
   // KHTMLPart printing was broken in KDE until KHTML 5.16
@@ -1700,12 +1718,28 @@ void MainWindow::doPrint(const QString& html_) {
   w.begin(Data::Document::self()->URL());
   w.write(html_);
   w.end();
-
-// the problem with doing my own layout is that the text gets truncated, both at the
-// top and at the bottom. Even adding the overlap parameter, there were problems.
-// KHTMLView takes care of that with a truncatedAt() parameter, but that's hidden in
-// the khtml::render_root class. So for now, just use the KHTMLView::print() method.
   w.view()->print();
+#else
+  QWebEngineView* view = new QWebEngineView(this);
+  QWebEngineSettings* settings = view->page()->settings();
+  settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
+  settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
+  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
+
+  view->setHtml(html_, Data::Document::self()->URL());
+
+  QPrinter printer;
+  printer.setResolution(300);
+  QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
+  if(dialog->exec() != QDialog::Accepted) {
+    return;
+  }
+  QEventLoop loop;
+  GUI::CursorSaver cs(Qt::WaitCursor);
+  view->page()->print(&printer, [&](bool) { loop.quit(); });
+  loop.exec();
+#endif
 }
 
 void MainWindow::XSLTError() {

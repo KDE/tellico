@@ -48,7 +48,6 @@
 #include <KLocalizedString>
 #include <KConfig>
 #include <KAcceleratorManager>
-#include <KHTMLView>
 #include <KColorCombo>
 #include <KHelpClient>
 #include <KRecentDirs>

@@ -47,11 +47,19 @@ TARGET_LINK_LIBRARIES(gui
     Qt5::Gui
     KF5::KIOCore
     KF5::KIOFileWidgets
-    KF5::KHtml
     KF5::SonnetCore
     KF5::SonnetUi
     KF5::XmlGui
+    KF5::I18n
+    KF5::TextWidgets
 )
+
+IF(USE_KHTML)
+  TARGET_LINK_LIBRARIES(gui KF5::KHtml)
+  ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
+ELSE()
+  TARGET_LINK_LIBRARIES(gui Qt5::WebEngineWidgets)
+ENDIF()
 
 IF( KF5Sane_FOUND )
   TARGET_LINK_LIBRARIES(gui KF5::Sane)
