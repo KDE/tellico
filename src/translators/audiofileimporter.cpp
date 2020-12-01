@@ -257,12 +257,12 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
     TagLib::MPEG::File* mpegFile = dynamic_cast<TagLib::MPEG::File*>(f.file());
     if(mpegFile && mpegFile->ID3v2Tag() && !mpegFile->ID3v2Tag()->frameListMap()["TPE2"].isEmpty()) {
       albumArtist = TStringToQString(mpegFile->ID3v2Tag()->frameListMap()["TPE2"].front()->toString()).trimmed();
-      if(!albumArtist.isEmpty()) {
-        albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
-      }
     }
-    if(albumArtist.isEmpty()) {
-      albumArtist = TStringToQString(f.file()->properties()["ALBUMARTIST"].front());
+    if(albumArtist.isEmpty() && !f.file()->properties()["ALBUMARTIST"].isEmpty()) {
+      albumArtist = TStringToQString(f.file()->properties()["ALBUMARTIST"].front()).trimmed();
+    }
+    if(!albumArtist.isEmpty()) {
+      albumKey += FieldFormat::columnDelimiterString() + albumArtist.toLower();
     }
 
     entry = albumMap[albumKey];

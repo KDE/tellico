@@ -50,10 +50,10 @@ void AudioFileTest::testDirectory() {
   Tellico::Data::CollPtr coll = importer.collection();
   QVERIFY(coll);
   QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
-  QCOMPARE(coll->entryCount(), 1);
+  QCOMPARE(coll->entryCount(), 2);
   QCOMPARE(coll->title(), QStringLiteral("My Music"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  Tellico::Data::EntryPtr entry = coll->entryById(2);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
@@ -78,4 +78,24 @@ void AudioFileTest::testOgg() {
   QCOMPARE(entry->field("track"), QStringLiteral("Test OGG::The Artist"));
   QCOMPARE(entry->field("year"), QStringLiteral("2020"));
   QCOMPARE(entry->field("genre"), QStringLiteral("The Genre"));
+}
+
+void AudioFileTest::testMp3() {
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.mp3"));
+  QVERIFY(!url.isEmpty());
+  Tellico::Import::AudioFileImporter importer(url);
+  importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
+  Tellico::Data::CollPtr coll = importer.collection();
+
+  QVERIFY(coll);
+  QCOMPARE(coll->type(), Tellico::Data::Collection::Album);
+  QCOMPARE(coll->entryCount(), 1);
+
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("mp3 album"));
+  QCOMPARE(entry->field("artist"), QStringLiteral("mp3 artist"));
+  QCOMPARE(entry->field("track"), QStringLiteral("mp3 title::mp3 artist::0:02"));
+  QCOMPARE(entry->field("year"), QStringLiteral("2020"));
+  QCOMPARE(entry->field("genre"), QStringLiteral("mp3 genre"));
 }
