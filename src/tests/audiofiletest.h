@@ -33,6 +33,7 @@ Q_OBJECT
 private Q_SLOTS:
   void testDirectory();
   void testOgg();
+  void testMp3();
 };
 
 #endif
