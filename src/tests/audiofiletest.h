@@ -31,6 +31,7 @@ class AudioFileTest : public QObject {
 Q_OBJECT
 
 private Q_SLOTS:
+  void initTestCase();
   void testDirectory();
   void testOgg();
   void testMp3();

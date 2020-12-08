@@ -180,6 +180,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   }
 
   QHash<QString, Data::EntryPtr> albumMap;
+  QHash<QString, QString> directoryAlbumHash;
 
   QStringList directoryFiles;
   const uint stepSize = qMax(1, files.count() / 100);
@@ -291,11 +292,16 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       entry->setField(genre, TStringToQString(tag->genre()).trimmed());
     }
 
+    QFileInfo fi(*it);
+    const QString dirName = fi.dir().canonicalPath();
+    if(!directoryAlbumHash.contains(dirName)) {
+      directoryAlbumHash.insert(dirName, albumKey);
+    }
+
     if(!tag->title().isEmpty()) {
       int trackNum = tag->track();
       if(trackNum <= 0) { // try to figure out track number from file name
-        QFileInfo f(*it);
-        QString fileName = f.baseName();
+        const QString fileName = fi.baseName();
         QString numString;
         int i = 0;
         const int len = fileName.length();
@@ -393,13 +399,12 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
       QDir thisDir(*it);
       thisDir.cdUp();
       QFileInfo fi(thisDir, iconRx.cap(1));
-      Data::EntryPtr entry = albumMap[thisDir.dirName()];
+      Data::EntryPtr entry = albumMap.value(directoryAlbumHash.value(thisDir.canonicalPath()));
       if(!entry) {
         continue;
       }
-      QUrl u;
-      u.setPath(fi.absoluteFilePath());
-      QString id = ImageFactory::addImage(u, true);
+      const QUrl u = QUrl::fromLocalFile(fi.absoluteFilePath());
+      const QString id = ImageFactory::addImage(u, true);
       if(!id.isEmpty()) {
         entry->setField(QStringLiteral("cover"), id);
       }
