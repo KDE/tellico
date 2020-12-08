@@ -97,7 +97,7 @@ void AudioFileTest::testOgg() {
 }
 
 void AudioFileTest::testMp3() {
-  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.mp3"));
+  QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/audio/test.mp3"));
   QVERIFY(!url.isEmpty());
   Tellico::Import::AudioFileImporter importer(url);
   importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
