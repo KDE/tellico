@@ -29,10 +29,16 @@
 #include "../translators/audiofileimporter.h"
 #include "../collections/musiccollection.h"
 #include "../fieldformat.h"
+#include "../images/imagefactory.h"
+#include "../images/image.h"
 
 #include <QTest>
 
-QTEST_APPLESS_MAIN( AudioFileTest )
+QTEST_GUILESS_MAIN( AudioFileTest )
+
+void AudioFileTest::initTestCase() {
+  Tellico::ImageFactory::init();
+}
 
 void AudioFileTest::testDirectory() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ogg"));
@@ -53,10 +59,18 @@ void AudioFileTest::testDirectory() {
   QCOMPARE(coll->entryCount(), 2);
   QCOMPARE(coll->title(), QStringLiteral("My Music"));
 
-  Tellico::Data::EntryPtr entry = coll->entryById(2);
+  Tellico::Data::EntryPtr entry = coll->entryById(1);
   QVERIFY(entry);
   QCOMPARE(entry->field("title"), QStringLiteral("The Album"));
   QVERIFY(entry->field("file").contains(QStringLiteral("data/test.ogg")));
+
+  entry = coll->entryById(2);
+  QVERIFY(entry);
+  QCOMPARE(entry->field("title"), QStringLiteral("mp3 album"));
+  QVERIFY(entry->field("file").contains(QStringLiteral("data/audio/test.mp3")));
+  QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
+  const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
+  QVERIFY(!img.isNull());
 }
 
 void AudioFileTest::testOgg() {
