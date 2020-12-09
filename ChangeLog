@@ -1,3 +1,7 @@
+2020-12-08  Robby Stephenson  <robby@periapsis.org>
+
+	* Fixed audio metadata import from directories (Bug 429803).
+
 2020-12-01  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed import failure bug in reading mp3 artist (Bug 429803).

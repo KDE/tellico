@@ -118,10 +118,10 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
 
   // TODO: allow remote audio file importing
   QStringList files;
-  const QString urlFileName = url().fileName();
-  if(urlFileName.isEmpty()) {
+  QFileInfo urlInfo(url().toLocalFile());
+  if(urlInfo.isDir()) {
     // url is a directory
-    QStringList dirs = QStringList() << url().path();
+    QStringList dirs = QStringList() << url().toLocalFile();
     if(m_options & Recursive) {
       dirs += Tellico::findAllSubDirs(dirs[0]);
     }
@@ -142,7 +142,7 @@ Tellico::Data::CollPtr AudioFileImporter::collection() {
   } else {
     // single file import
     // TODO: allow for multiple file list in urls
-    files += url().path();
+    files += url().toLocalFile();
   }
 
   if(m_cancelled) {
