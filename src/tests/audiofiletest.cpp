@@ -43,6 +43,8 @@ void AudioFileTest::initTestCase() {
 void AudioFileTest::testDirectory() {
   QUrl url = QUrl::fromLocalFile(QFINDTESTDATA("data/test.ogg"));
   url = url.adjusted(QUrl::RemoveFilename);
+  // url from chooser can be passed to the importer without the trailing slash, see bug 429803
+  url = url.adjusted(QUrl::StripTrailingSlash);
   QVERIFY(!url.isEmpty());
   Tellico::Import::AudioFileImporter importer(url);
   importer.setOptions(importer.options() ^ Tellico::Import::ImportProgress);
