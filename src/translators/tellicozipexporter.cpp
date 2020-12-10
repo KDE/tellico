@@ -93,15 +93,13 @@ bool TellicoZipExporter::exec() {
 
   if(m_includeImages) {
     ProgressManager::self()->setProgress(this, 10);
-    // gonna be lazy and just increment progress every 3 images
-    // it might be less, might be more
-    int j = 0;
     const QString imagesDir = QStringLiteral("images/");
     StringSet imageSet;
     // take intersection with the fields to be exported
     Data::FieldList imageFields = Tellico::listIntersection(coll->imageFields(), fields());
     // already took 10%, only 90% left
     const int stepSize = qMax(1, (coll->entryCount() * imageFields.count()) / 90);
+    int j = 0;
     foreach(Data::EntryPtr entry, entries()) {
       if(m_cancelled) {
         break;

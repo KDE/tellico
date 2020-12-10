@@ -612,7 +612,6 @@ void Document::writeAllImages(int cacheDir_, const QUrl& localDir_) {
     }
     if(j%stepSize == 0) {
       ProgressManager::self()->setProgress(this, j/stepSize);
-      qApp->processEvents();
     }
     ++j;
     if(m_cancelImageWriting) {
