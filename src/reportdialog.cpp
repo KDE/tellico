@@ -85,7 +85,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
   QMap<QString, QString> templates; // gets sorted by title
   foreach(const QString& file, files) {
     QFileInfo fi(file);
-    QString lfile = fi.fileName();
+    const QString lfile = fi.fileName();
     QString name = lfile.section(QLatin1Char('.'), 0, -2);
     name.replace(QLatin1Char('_'), QLatin1Char(' '));
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8().constData(), name.toUtf8().constData());
@@ -94,7 +94,7 @@ ReportDialog::ReportDialog(QWidget* parent_)
 
   m_templateCombo = new GUI::ComboBox(mainWidget);
   for(QMap<QString, QString>::ConstIterator it = templates.constBegin(); it != templates.constEnd(); ++it) {
-    m_templateCombo->addItem(it.key(), it.value());
+    m_templateCombo->addItem(QIcon::fromTheme(QStringLiteral("text-rdf")), it.key(), it.value());
   }
   hlay->addWidget(m_templateCombo);
   l->setBuddy(m_templateCombo);
