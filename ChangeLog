@@ -1,3 +1,7 @@
+2020-12-13  Robby Stephenson  <robby@periapsis.org>
+
+	* Switched to use QWebEngine over KHTML by default, when available.
+
 2020-12-08  Robby Stephenson  <robby@periapsis.org>
 
 	* Fixed audio metadata import from directories (Bug 429803).
