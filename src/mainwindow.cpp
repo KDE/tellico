@@ -41,7 +41,7 @@
 #include "importdialog.h"
 #include "exportdialog.h"
 #include "core/filehandler.h" // needed so static mainWindow variable can be set
-#include "translators/htmlexporter.h" // for printing
+#include "printhandler.h"
 #include "entryview.h"
 #include "entryiconview.h"
 #include "images/imagefactory.h" // needed so tmp files can get cleaned
@@ -92,7 +92,6 @@
 #include <KToggleAction>
 #include <KActionCollection>
 #include <KActionMenu>
-#include <KAboutData>
 #include <KFileWidget>
 #include <KDualAction>
 #include <KXMLGUIFactory>
@@ -108,17 +107,6 @@
 #include <QMenuBar>
 #include <QFileDialog>
 #include <QMetaMethod>
-
-#ifdef USE_KHTML
-#include <KHTMLPart>
-#include <KHTMLView>
-#else
-#include <QWebEngineView>
-#include <QWebEnginePage>
-#include <QWebEngineSettings>
-#include <QPrinter>
-#include <QPrintDialog>
-#endif
 
 #include <unistd.h>
 
@@ -337,6 +325,7 @@ void MainWindow::initActions() {
   action = KStandardAction::saveAs(this, SLOT(slotFileSaveAs()), actionCollection());
   action->setToolTip(i18n("Save the document as a different file..."));
   action = KStandardAction::print(this, SLOT(slotFilePrint()), actionCollection());
+  action->setToolTip(i18n("Print the contents of the document..."));
 #ifdef USE_KHTML
   {
     KHTMLPart w;
@@ -351,7 +340,6 @@ void MainWindow::initActions() {
   }
 #endif
 
-  action->setToolTip(i18n("Print the contents of the document..."));
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
   action->setToolTip(i18n("Quit the application"));
 
@@ -1397,11 +1385,6 @@ bool MainWindow::fileSaveAs() {
 void MainWindow::slotFilePrint() {
   slotStatusMsg(i18n("Printing..."));
 
-  bool printGrouped = Config::printGrouped();
-  bool printHeaders = Config::printFieldHeaders();
-  int imageWidth = Config::maxImageWidth();
-  int imageHeight = Config::maxImageHeight();
-
   // If the collection is being filtered, warn the user
   if(m_detailedView->filter()) {
     QString str = i18n("The collection is currently being filtered to show a limited subset of "
@@ -1414,39 +1397,10 @@ void MainWindow::slotFilePrint() {
     }
   }
 
-  GUI::CursorSaver cs(Qt::WaitCursor);
-
-  Export::HTMLExporter exporter(Data::Document::self()->collection());
-  // only print visible entries
-  exporter.setEntries(m_detailedView->visibleEntries());
-  exporter.setXSLTFile(QStringLiteral("tellico-printing.xsl"));
-  exporter.setPrintHeaders(printHeaders);
-  exporter.setPrintGrouped(printGrouped);
-  exporter.setGroupBy(Controller::self()->expandedGroupBy());
-  if(!printGrouped) { // the sort titles are only used if the entries are not grouped
-    exporter.setSortTitles(Controller::self()->sortTitles());
-  }
-  exporter.setColumns(m_detailedView->visibleColumns());
-  exporter.setMaxImageSize(imageWidth, imageHeight);
-
-  slotStatusMsg(i18n("Processing document..."));
-  if(Config::printFormatted()) {
-    exporter.setOptions(Export::ExportUTF8 | Export::ExportFormatted);
-  } else {
-    exporter.setOptions(Export::ExportUTF8);
-  }
-  QString html = exporter.text();
-  if(html.isEmpty()) {
-    XSLTError();
-    StatusBar::self()->clearStatus();
-    return;
-  }
-
-  // don't have busy cursor when showing the print dialog
-  cs.restore();
-//  myDebug() << html;
-  slotStatusMsg(i18n("Printing..."));
-  doPrint(html);
+  PrintHandler printHandler(this);
+  printHandler.setEntries(m_detailedView->visibleEntries());
+  printHandler.setColumns(m_detailedView->visibleColumns());
+  printHandler.print();
 
   StatusBar::self()->clearStatus();
 }
@@ -1695,51 +1649,6 @@ void MainWindow::slotHideReportDialog() {
     m_reportDlg->deleteLater();
     m_reportDlg = nullptr;
   }
-}
-
-void MainWindow::doPrint(const QString& html_) {
-#ifdef USE_KHTML
-  KHTMLPart w;
-
-  // KHTMLPart printing was broken in KDE until KHTML 5.16
-  // see https://git.reviewboard.kde.org/r/125681/
-  const QString version =  w.componentData().version();
-  const uint major = version.section(QLatin1Char('.'), 0, 0).toUInt();
-  const uint minor = version.section(QLatin1Char('.'), 1, 1).toUInt();
-  if(major == 5 && minor < 16) {
-    myWarning() << "Printing is broken for KDE Frameworks < 5.16. Please upgrade";
-    return;
-  }
-
-  w.setJScriptEnabled(false);
-  w.setJavaEnabled(false);
-  w.setMetaRefreshEnabled(false);
-  w.setPluginsEnabled(false);
-  w.begin(Data::Document::self()->URL());
-  w.write(html_);
-  w.end();
-  w.view()->print();
-#else
-  QWebEngineView* view = new QWebEngineView(this);
-  QWebEngineSettings* settings = view->page()->settings();
-  settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
-  settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
-  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
-
-  view->setHtml(html_, Data::Document::self()->URL());
-
-  QPrinter printer;
-  printer.setResolution(300);
-  QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, this);
-  if(dialog->exec() != QDialog::Accepted) {
-    return;
-  }
-  QEventLoop loop;
-  GUI::CursorSaver cs(Qt::WaitCursor);
-  view->page()->print(&printer, [&](bool) { loop.quit(); });
-  loop.exec();
-#endif
 }
 
 void MainWindow::XSLTError() {

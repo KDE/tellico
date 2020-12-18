@@ -72,6 +72,7 @@ SET(tellico_SRCS
    loanview.cpp
    main.cpp
    mainwindow.cpp
+   printhandler.cpp
    progressmanager.cpp
    reportdialog.cpp
    tellico_kernel.cpp
