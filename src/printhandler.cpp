@@ -39,6 +39,7 @@
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
 #include <QPrinter>
+#include <QPrinterInfo>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QPrintPreviewWidget>
@@ -128,13 +129,19 @@ void PrintHandler::print() {
   // don't have busy cursor when showing the print dialog
   cs.restore();
 
-  QPrinter printer;
-  printer.setResolution(300);
-  QPointer<QPrintDialog> dialog = new QPrintDialog(&printer, view.data());
+  auto info = QPrinterInfo::defaultPrinter();
+  QScopedPointer<QPrinter> printer;
+  if(info.isNull()) {
+    printer.reset(new QPrinter);
+  } else {
+    printer.reset(new QPrinter(info));
+  }
+  printer->setResolution(300);
+  QPointer<QPrintDialog> dialog = new QPrintDialog(printer.data(), view.data());
   if(dialog->exec() != QDialog::Accepted) {
     return;
   }
-  page->printDocument(&printer);
+  page->printDocument(printer.data());
 #endif
 }
 
@@ -163,9 +170,15 @@ void PrintHandler::printPreview() {
   cs.restore();
 
   m_inPrintPreview = true;
-//  QPrinter printer;
-//  printer.setResolution(300);
-  QPrintPreviewDialog preview(view.data());
+  auto info = QPrinterInfo::defaultPrinter();
+  QScopedPointer<QPrinter> printer;
+  if(info.isNull()) {
+    printer.reset(new QPrinter);
+  } else {
+    printer.reset(new QPrinter(info));
+  }
+  printer->setResolution(300);
+  QPrintPreviewDialog preview(printer.data(), view.data());
   connect(&preview, &QPrintPreviewDialog::paintRequested,
           page, &WebPagePrintable::printDocument);
   {
