@@ -29,9 +29,6 @@
 
 #include <QObject>
 
-class QPrinter;
-class QWebEnginePage;
-
 namespace Tellico {
 
 class PrintHandler : public QObject {
@@ -44,15 +41,16 @@ public:
   void setEntries(const Data::EntryList& entries);
   void setColumns(const QStringList& columns);
 
-public Q_SLOTS:
   void print();
   void printPreview();
-  void printDocument(QPrinter* printer, QWebEnginePage* page);
 
 private:
+  QString generateHtml() const;
+
   bool m_inPrintPreview;
   Data::EntryList m_entries;
   QStringList m_columns;
+  QString m_html;
 };
 
 }

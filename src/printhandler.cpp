@@ -40,10 +40,35 @@
 #include <QWebEngineSettings>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QPrintPreviewWidget>
 #include <QEventLoop>
 #endif
 
 using Tellico::PrintHandler;
+
+#ifndef USE_KHTML
+class WebPagePrintable : public QWebEnginePage {
+Q_OBJECT
+
+public:
+  WebPagePrintable(QObject* parent) : QWebEnginePage(parent) {
+    QWebEngineSettings* settings = this->settings();
+    settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
+    settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
+    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
+    settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
+  }
+
+public Q_SLOTS:
+  void printDocument(QPrinter* printer) {
+    Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
+    QEventLoop loop;
+    print(printer, [&](bool) { loop.quit(); });
+    loop.exec();
+  }
+};
+#endif
 
 PrintHandler::PrintHandler(QObject* parent_) : QObject(parent_)
     , m_inPrintPreview(false) {
@@ -54,37 +79,23 @@ PrintHandler::~PrintHandler() {
 
 void PrintHandler::setEntries(const Data::EntryList& entries_) {
   m_entries = entries_;
+  m_html.clear();
 }
 
 void PrintHandler::setColumns(const QStringList& columns_) {
   m_columns = columns_;
+  m_html.clear();
 }
 
 void PrintHandler::print() {
   GUI::CursorSaver cs(Qt::WaitCursor);
 
-  Export::HTMLExporter exporter(Data::Document::self()->collection());
-  // only print visible entries
-  exporter.setEntries(m_entries);
-  exporter.setXSLTFile(QStringLiteral("tellico-printing.xsl"));
-  exporter.setPrintHeaders(Config::printFieldHeaders());
-  exporter.setPrintGrouped(Config::printGrouped());
-  exporter.setGroupBy(Controller::self()->expandedGroupBy());
-  if(!Config::printGrouped()) { // the sort titles are only used if the entries are not grouped
-    exporter.setSortTitles(Controller::self()->sortTitles());
-  }
-  exporter.setColumns(m_columns);
-  exporter.setMaxImageSize(Config::maxImageWidth(), Config::maxImageHeight());
-  if(Config::printFormatted()) {
-    exporter.setOptions(Export::ExportUTF8 | Export::ExportFormatted);
-  } else {
-    exporter.setOptions(Export::ExportUTF8);
-  }
-
-  const QString html = exporter.text();
-  if(html.isEmpty()) {
-    myDebug() << "PrintHandler - empty html output";
-    return;
+  if(m_html.isEmpty()) {
+    m_html = generateHtml();
+    if(m_html.isEmpty()) {
+      myDebug() << "PrintHandler - empty html output";
+      return;
+    }
   }
 
 #ifdef USE_KHTML
@@ -105,18 +116,14 @@ void PrintHandler::print() {
   w.setMetaRefreshEnabled(false);
   w.setPluginsEnabled(false);
   w.begin(Data::Document::self()->URL());
-  w.write(html);
+  w.write(m_html);
   w.end();
   w.view()->print();
 #else
   QScopedPointer<QWebEngineView> view(new QWebEngineView);
-  QWebEngineSettings* settings = view->page()->settings();
-  settings->setAttribute(QWebEngineSettings::JavascriptEnabled, false);
-  settings->setAttribute(QWebEngineSettings::PluginsEnabled, false);
-  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessRemoteUrls, true);
-  settings->setAttribute(QWebEngineSettings::LocalContentCanAccessFileUrls, true);
-
-  view->setHtml(html, Data::Document::self()->URL());
+  WebPagePrintable* page = new WebPagePrintable(view.data());
+  view->setPage(page);
+  view->setHtml(m_html, Data::Document::self()->URL());
 
   // don't have busy cursor when showing the print dialog
   cs.restore();
@@ -127,21 +134,74 @@ void PrintHandler::print() {
   if(dialog->exec() != QDialog::Accepted) {
     return;
   }
-  printDocument(&printer, view->page());
+  page->printDocument(&printer);
 #endif
 }
 
 void PrintHandler::printPreview() {
-}
-
-void PrintHandler::printDocument(QPrinter* printer_, QWebEnginePage* page_) {
-#ifdef USE_KHTML
-  Q_UNUSED(printer_);
-  Q_UNUSED(page_);
-#else
+// print preview only works with WebEngine
+#ifndef USE_KHTML
+  if(m_inPrintPreview) {
+    return;
+  }
   GUI::CursorSaver cs(Qt::WaitCursor);
-  QEventLoop loop;
-  page_->print(printer_, [&](bool) { loop.quit(); });
-  loop.exec();
+
+  if(m_html.isEmpty()) {
+    m_html = generateHtml();
+    if(m_html.isEmpty()) {
+      myDebug() << "PrintHandler - empty html output in preview";
+      return;
+    }
+  }
+
+  QScopedPointer<QWebEngineView> view(new QWebEngineView);
+  WebPagePrintable* page = new WebPagePrintable(view.data());
+  view->setPage(page);
+  view->setHtml(m_html, Data::Document::self()->URL());
+
+  // don't have busy cursor when showing the print dialog
+  cs.restore();
+
+  m_inPrintPreview = true;
+//  QPrinter printer;
+//  printer.setResolution(300);
+  QPrintPreviewDialog preview(view.data());
+  connect(&preview, &QPrintPreviewDialog::paintRequested,
+          page, &WebPagePrintable::printDocument);
+  {
+    // this is a workaround for ensuring the initial dailog open shows the preview already
+    // with Qt 5.15.2, it didn't seem to get previewed initially
+    QList<QPrintPreviewWidget*> list = preview.findChildren<QPrintPreviewWidget*>();
+    QPrintPreviewWidget* w = list.first();
+    if(w) w->updatePreview();
+  }
+  preview.exec();
+  m_inPrintPreview = false;
 #endif
 }
+
+QString PrintHandler::generateHtml() const {
+  Export::HTMLExporter exporter(Data::Document::self()->collection());
+  // only print visible entries
+  exporter.setEntries(m_entries);
+  exporter.setXSLTFile(QStringLiteral("tellico-printing.xsl"));
+  exporter.setPrintHeaders(Config::printFieldHeaders());
+  exporter.setPrintGrouped(Config::printGrouped());
+  exporter.setGroupBy(Controller::self()->expandedGroupBy());
+  if(!Config::printGrouped()) { // the sort titles are only used if the entries are not grouped
+    exporter.setSortTitles(Controller::self()->sortTitles());
+  }
+  exporter.setColumns(m_columns);
+  exporter.setMaxImageSize(Config::maxImageWidth(), Config::maxImageHeight());
+  if(Config::printFormatted()) {
+    exporter.setOptions(Export::ExportUTF8 | Export::ExportFormatted);
+  } else {
+    exporter.setOptions(Export::ExportUTF8);
+  }
+
+  return exporter.text();
+}
+
+#ifndef USE_KHTML
+#include "printhandler.moc"
+#endif

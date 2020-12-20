@@ -95,6 +95,7 @@
 #include <KFileWidget>
 #include <KDualAction>
 #include <KXMLGUIFactory>
+#include <KAboutData>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -338,6 +339,10 @@ void MainWindow::initActions() {
       action->setEnabled(false);
     }
   }
+#else
+  // print preview is only available with QWebEngine
+  action = KStandardAction::printPreview(this, SLOT(slotFilePrintPreview()), actionCollection());
+  action->setToolTip(i18n("Preview the contents of the document..."));
 #endif
 
   action = KStandardAction::quit(this, SLOT(slotFileQuit()), actionCollection());
@@ -1383,6 +1388,14 @@ bool MainWindow::fileSaveAs() {
 }
 
 void MainWindow::slotFilePrint() {
+  doPrint(Print);
+}
+
+void MainWindow::slotFilePrintPreview() {
+  doPrint(PrintPreview);
+}
+
+void MainWindow::doPrint(PrintAction action_) {
   slotStatusMsg(i18n("Printing..."));
 
   // If the collection is being filtered, warn the user
@@ -1400,7 +1413,11 @@ void MainWindow::slotFilePrint() {
   PrintHandler printHandler(this);
   printHandler.setEntries(m_detailedView->visibleEntries());
   printHandler.setColumns(m_detailedView->visibleColumns());
-  printHandler.print();
+  if(action_ == Print) {
+    printHandler.print();
+  } else {
+    printHandler.printPreview();
+  }
 
   StatusBar::self()->clearStatus();
 }

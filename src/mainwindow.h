@@ -178,6 +178,7 @@ public Q_SLOTS:
    * Prints the current document.
    */
   void slotFilePrint();
+  void slotFilePrintPreview();
   /**
    * Quits the application.
    */
@@ -346,6 +347,13 @@ private:
    * @param url The url to open
    */
   bool openURL(const QUrl& url);
+  enum PrintAction { Print, PrintPreview };
+  /*
+   * Helper method to handle the printing duties.
+   *
+   * @param html The HTML string representing the doc to print
+   */
+  void doPrint(PrintAction action);
 
   void XSLTError();
   /**
