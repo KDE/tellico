@@ -96,6 +96,7 @@
 #include <KDualAction>
 #include <KXMLGUIFactory>
 #include <KAboutData>
+#include <kwidgetsaddons_version.h>
 
 #include <QApplication>
 #include <QUndoStack>
@@ -255,7 +256,11 @@ void MainWindow::initActions() {
   KActionMenu* fileNewMenu = new KActionMenu(i18n("New Collection"), this);
   fileNewMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-new")));
   fileNewMenu->setToolTip(i18n("Create a new collection"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
+  fileNewMenu->setPopupMode(QToolButton::InstantPopup);
+#else
   fileNewMenu->setDelayed(false);
+#endif
   actionCollection()->addAction(QStringLiteral("file_new_collection"), fileNewMenu);
 
   QAction* action;
@@ -360,7 +365,11 @@ void MainWindow::initActions() {
   KActionMenu* importMenu = new KActionMenu(i18n("&Import"), this);
   importMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-import")));
   importMenu->setToolTip(i18n("Import the collection data from other formats"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
+  importMenu->setPopupMode(QToolButton::InstantPopup);
+#else
   importMenu->setDelayed(false);
+#endif
   actionCollection()->addAction(QStringLiteral("file_import"), importMenu);
 
 #define IMPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
@@ -465,7 +474,11 @@ void MainWindow::initActions() {
   KActionMenu* exportMenu = new KActionMenu(i18n("&Export"), this);
   exportMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   exportMenu->setToolTip(i18n("Export the collection data to other formats"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
+  exportMenu->setPopupMode(QToolButton::InstantPopup);
+#else
   exportMenu->setDelayed(false);
+#endif
   actionCollection()->addAction(QStringLiteral("file_export"), exportMenu);
 
 #define EXPORT_ACTION(TYPE, NAME, TEXT, TIP, ICON) \
@@ -549,7 +562,11 @@ void MainWindow::initActions() {
 
   KActionMenu* addEntryMenu = new KActionMenu(i18n("Add Entry"), this);
   addEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("list-add")));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
+  addEntryMenu->setPopupMode(QToolButton::InstantPopup);
+#else
   addEntryMenu->setDelayed(false);
+#endif
   actionCollection()->addAction(QStringLiteral("coll_add_entry"), addEntryMenu);
 
   action = actionCollection()->addAction(QStringLiteral("edit_search_internet"), this, SLOT(slotShowFetchDialog()));
@@ -668,7 +685,11 @@ void MainWindow::initActions() {
   m_updateEntryMenu = new KActionMenu(i18n("&Update Entry"), this);
   m_updateEntryMenu->setIcon(QIcon::fromTheme(QStringLiteral("document-export")));
   m_updateEntryMenu->setIconText(i18nc("Update Entry", "Update"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,77,0)
+  m_updateEntryMenu->setPopupMode(QToolButton::InstantPopup);
+#else
   m_updateEntryMenu->setDelayed(false);
+#endif
   actionCollection()->addAction(QStringLiteral("coll_update_entry"), m_updateEntryMenu);
 
   m_updateAll = actionCollection()->addAction(QStringLiteral("update_entry_all"), m_updateMapper, mapVoid);
