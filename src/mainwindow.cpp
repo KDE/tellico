@@ -1465,6 +1465,7 @@ void MainWindow::slotEditPaste() {
 
 void MainWindow::activateEditSlot(const char* slot_) {
   // the edit widget is the only one that copies, cuts, and pastes
+  // the entry view can copy
   QWidget* w;
   if(m_editDialog->isVisible()) {
     w = m_editDialog->focusWidget();
@@ -1472,12 +1473,16 @@ void MainWindow::activateEditSlot(const char* slot_) {
     w = qApp->focusWidget();
   }
 
-  if(w && w->isVisible()) {
+  while(w && w->isVisible()) {
     const QMetaObject* meta = w->metaObject();
     const int idx = meta->indexOfSlot(slot_);
     if(idx > -1) {
-      //myDebug() << "MainWindow invoking" << meta->method(idx).signature();
+//      myDebug() << "MainWindow invoking" << meta->method(idx).methodSignature();
       meta->method(idx).invoke(w, Qt::DirectConnection);
+      break;
+    } else {
+//      myDebug() << "did not find" << slot_ << "in" << meta->className();
+      w = qobject_cast<QWidget*>(w->parent());
     }
   }
 }

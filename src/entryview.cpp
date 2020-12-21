@@ -36,11 +36,13 @@
 #include "core/filehandler.h"
 #include "config/tellico_config.h"
 #include "gui/drophandler.h"
+#include "utils/cursorsaver.h"
 #include "document.h"
 #include "tellico_debug.h"
 
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <KStandardAction>
 
 #include <QFile>
 #include <QTextStream>
@@ -49,12 +51,17 @@
 #include <QTemporaryFile>
 #include <QApplication>
 #include <QDesktopServices>
+#include <QMenu>
 
 #ifdef USE_KHTML
 #include <dom/dom_element.h>
 #else
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
+#include <QPrinter>
+#include <QPrinterInfo>
+#include <QPrintDialog>
+#include <QEventLoop>
 #endif
 
 using Tellico::EntryView;
@@ -129,6 +136,9 @@ EntryView::EntryView(QWidget* parent_) : QWebEngineView(parent_),
     m_handler(nullptr), m_tempFile(nullptr), m_useGradientImages(true), m_checkCommonFile(true) {
   EntryViewPage* page = new EntryViewPage(this);
   setPage(page);
+  if(m_printer.resolution() < 300) {
+    m_printer.setResolution(300);
+  }
 
   connect(page, &EntryViewPage::signalTellicoAction,
           this, &EntryView::signalTellicoAction);
@@ -372,6 +382,12 @@ void EntryView::setXSLTFile(const QString& file_) {
   }
 }
 
+void EntryView::copy() {
+#ifndef USE_KHTML
+  pageAction(QWebEnginePage::Copy)->trigger();
+#endif
+}
+
 void EntryView::slotRefresh() {
   setXSLTFile(m_xsltFile);
   showEntry(m_entry);
@@ -504,5 +520,32 @@ void EntryView::resetColors() {
   setUpdatesEnabled(false);
   load(QUrl::fromLocalFile(m_tempFile->fileName()));
   connect(this, &EntryView::loadFinished, this, &EntryView::slotReloadEntry);
+#endif
+}
+
+void EntryView::contextMenuEvent(QContextMenuEvent* event_) {
+  QMenu menu(this);
+  // can't use the KStandardAction for copy since I don't know what the receiver or trigger target is
+  QAction* standardCopy = KStandardAction::copy(nullptr, nullptr, &menu);
+  QAction* pageCopyAction = pageAction(QWebEnginePage::Copy);
+  pageCopyAction->setIcon(standardCopy->icon());
+  menu.addAction(pageCopyAction);
+
+  QAction* printAction = KStandardAction::print(this, &EntryView::slotPrint, this);
+  // remove shortcut since this is specific to the view widget
+  printAction->setShortcut(QKeySequence());
+  menu.addAction(printAction);
+
+  menu.exec(event_->globalPos());
+}
+
+void EntryView::slotPrint() {
+#ifndef USE_KHTML
+  QPointer<QPrintDialog> dialog = new QPrintDialog(&m_printer, this);
+  if(dialog->exec() != QDialog::Accepted) {
+    return;
+  }
+  Tellico::GUI::CursorSaver cs(Qt::WaitCursor);
+  page()->print(&m_printer, [](bool) {});
 #endif
 }

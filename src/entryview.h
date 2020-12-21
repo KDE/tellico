@@ -27,6 +27,8 @@
 
 #include "datavectors.h"
 
+#include <QPrinter>
+
 #ifdef USE_KHTML
 #include <KHTMLPart>
 #include <KHTMLView>
@@ -94,6 +96,7 @@ Q_SIGNALS:
   void signalTellicoAction(const QUrl& url);
 
 public Q_SLOTS:
+  void copy();
   /**
    * Helper function to refresh view.
    */
@@ -111,8 +114,12 @@ private Q_SLOTS:
 #endif
   void slotReloadEntry();
 
+private Q_SLOTS:
+  void slotPrint();
+
 private:
   void resetColors();
+  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
 
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
@@ -122,6 +129,7 @@ private:
   QTemporaryFile* m_tempFile;
   bool m_useGradientImages;
   bool m_checkCommonFile;
+  QPrinter m_printer;
 };
 
 #ifdef USE_KHTML
