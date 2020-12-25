@@ -53,14 +53,6 @@ ImageDirectory::~ImageDirectory() {
 }
 
 QString ImageDirectory::path() {
-  if(m_path.isEmpty()) {
-    // an empty path means the file hasn't been saved yet
-    if(!m_dir) {
-      m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
-    }
-    // in KDE4, the way this worked included the final slash.
-    setPath(m_dir->path() + QLatin1Char('/'));
-  }
   return m_path;
 }
 
@@ -71,7 +63,7 @@ void ImageDirectory::setPath(const QString& path_) {
 }
 
 bool ImageDirectory::hasImage(const QString& id_) {
-  return QFile::exists(path() + id_);
+  return m_pathExists && QFile::exists(path() + id_);
 }
 
 Tellico::Data::Image* ImageDirectory::imageById(const QString& id_) {
@@ -99,7 +91,8 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
       // an empty path means the file hasn't been saved yet
       if(!m_dir) {
         m_dir = new QTemporaryDir(); // default is to auto-delete, aka autoRemove()
-        ImageDirectory::setPath(m_dir->path());
+        // in KDE4, the way this worked included the final slash.
+        ImageDirectory::setPath(m_dir->path() + QLatin1Char('/'));
       }
       return writeImage(img_);
     }
@@ -117,7 +110,7 @@ bool ImageDirectory::writeImage(const Data::Image& img_) {
 }
 
 bool ImageDirectory::removeImage(const QString& id_) {
-  return QFile::remove(path() + id_);
+  return m_pathExists && QFile::remove(path() + id_);
 }
 
 TemporaryImageDirectory::TemporaryImageDirectory() : ImageDirectory(), m_dir(nullptr) {

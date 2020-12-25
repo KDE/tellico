@@ -271,9 +271,26 @@ bool ImageFactory::writeCachedImage(const QString& id_, CacheDir dir_, bool forc
     return false;
   }
 //  myLog() << "dir =" << (dir_ == DataDir ? "DataDir" : "TmpDir" ) << "; id =" << id_;
-  ImageDirectory* imgDir = dir_ == DataDir ? &factory->d->dataImageDir :
-                          (dir_ == TempDir ? &factory->d->tempImageDir :
-                                             &factory->d->localImageDir);
+  ImageDirectory* imgDir;
+  switch(dir_) {
+    case DataDir:
+      imgDir = &factory->d->dataImageDir;
+      break;
+    case TempDir:
+      imgDir = &factory->d->tempImageDir;
+      break;
+    case LocalDir:
+      // special case when configured to use local dir but for a new collection when no local dir exists
+      imgDir = factory->d->localImageDir.path().isEmpty() ?
+                 &factory->d->tempImageDir :
+                 &factory->d->localImageDir;
+      break;
+    case ZipArchive:
+      myDebug() << "writeCachedImage() - ZipArchive - should never be called";
+      imgDir = &factory->d->tempImageDir;
+      break;
+  }
+
   Q_ASSERT(imgDir);
   bool success = writeCachedImage(id_, imgDir, force_);
 
@@ -296,14 +313,13 @@ bool ImageFactory::writeCachedImage(const QString& id_, ImageDirectory* imgDir_,
   if(id_.isEmpty() || !imgDir_) {
     return false;
   }
-//  myLog() << "dir =" << imgDir_->path() << "; id =" << id_;
+//  myLog() << "ImageFactory::writeCachedImage() - dir =" << imgDir_->path() << "; id =" << id_;
   const bool exists = imgDir_->hasImage(id_);
   // only write if it doesn't exist
   bool success = (!force_ && exists);
   if(!success) {
     const Data::Image& img = imageById(id_);
     if(!img.isNull()) {
-//      myLog() << "writing image";
       success = imgDir_->writeImage(img);
     }
   }
@@ -605,17 +621,13 @@ void ImageFactory::createStyleImages(int collectionType_, const Tellico::StyleOp
                                                 Tellico::VerticalGradient, 100, -100);
 
   if(opt_.imgDir.isEmpty()) {
-    // write the style images both to the tmp dir and the cache dir
-    // doesn't really hurt and lets the user switch back and forth
     ImageFactory::removeImage(bgname, true /*delete */);
     factory->addImageImpl(Data::Image::byteArray(bgImage, "PNG"), QStringLiteral("PNG"), bgname);
     ImageFactory::writeCachedImage(bgname, cacheDir(), true /*force*/);
-    ImageFactory::writeCachedImage(bgname, TempDir, true /*force*/);
 
     ImageFactory::removeImage(hdrname, true /*delete */);
     factory->addImageImpl(Data::Image::byteArray(hdrImage, "PNG"), QStringLiteral("PNG"), hdrname);
     ImageFactory::writeCachedImage(hdrname, cacheDir(), true /*force*/);
-    ImageFactory::writeCachedImage(hdrname, TempDir, true /*force*/);
   } else {
     bgImage.save(opt_.imgDir + bgname, "PNG");
     hdrImage.save(opt_.imgDir + hdrname, "PNG");
