@@ -353,7 +353,7 @@ void GroupView::slotFilterGroup() {
           filter->append(new FilterRule(m_groupBy, QString(), FilterRule::FuncEquals));
         } else {
           // if the field does not allow multiple values and is not a table
-          // then can njust do an equal match
+          // then can just do an equal match
           Data::FieldPtr field = group->at(0)->collection()->fieldByName(group->fieldName());
           if(field && field->type() != Data::Field::Table && !field->hasFlag(Data::Field::AllowMultiple)) {
             filter->append(new FilterRule(m_groupBy, group->groupName(), FilterRule::FuncEquals));

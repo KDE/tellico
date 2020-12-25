@@ -173,6 +173,7 @@ void EntryView::clear() {
   setUrl(QUrl());
   if(!m_textToShow.isEmpty()) {
     // the welcome page references local images, which won't load when passing HTML directly
+    // so the base Url needs to be set to file://
     // see https://bugreports.qt.io/browse/QTBUG-55902#comment-335945
     // passing "disable-web-security" to QApplication is another option
     page()->setHtml(m_textToShow, QUrl(QStringLiteral("file://")));
@@ -208,19 +209,13 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
   m_entry = entry_;
 
-#ifdef USE_KHTML
-  begin(QUrl::fromLocalFile(m_xsltFile));
-#endif
-  Export::TellicoXMLExporter exporter(entry_->collection());
-  exporter.setEntries(Data::EntryList() << entry_);
+  Export::TellicoXMLExporter exporter(m_entry->collection());
+  exporter.setEntries(Data::EntryList() << m_entry);
   long opt = exporter.options();
   // verify images for the view
   opt |= Export::ExportVerifyImages;
   // on second thought, don't auto-format everything, just clean it
-//  if(Data::Field::autoFormat()) {
-//    opt = Export::ExportFormatted;
-//  }
-  if(entry_->collection()->type() == Data::Collection::Bibtex) {
+  if(m_entry->collection()->type() == Data::Collection::Bibtex) {
     opt |= Export::ExportClean;
   }
   exporter.setOptions(opt);
@@ -267,6 +262,7 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
 
 //  myDebug() << html;
 #ifdef USE_KHTML
+  begin(QUrl::fromLocalFile(m_xsltFile));
   write(html);
   end();
   view()->layout(); // I need this because some of the margins and widths may get messed up
@@ -370,7 +366,6 @@ void EntryView::setXSLTFile(const QString& file_) {
   } else {
     m_handler->addStringParam("imgdir", QUrl::fromLocalFile(ImageFactory::tempDir()).toEncoded());
   }
-
   m_handler->addStringParam("datadir", QUrl::fromLocalFile(Tellico::installationDir()).toEncoded());
 
   // if we don't have to reload the images, then just show the entry and we're done
@@ -487,13 +482,6 @@ void EntryView::resetColors() {
     dir.truncate(dir.length()-1);
   }
 
-  // this is a rather bad hack to get around the fact that the image cache is not reloaded when
-  // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
-  // work. So force a reload with a temp file, then catch the completed signal and repaint
-  QString s = QStringLiteral("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
-                             .arg(dir + QLatin1String("gradient_bg.png"),
-                                  dir + QLatin1String("gradient_header.png"));
-
   delete m_tempFile;
   m_tempFile = new QTemporaryFile();
   if(!m_tempFile->open()) {
@@ -502,6 +490,13 @@ void EntryView::resetColors() {
     m_tempFile = nullptr;
     return;
   }
+
+  // this is a rather bad hack to get around the fact that the image cache is not reloaded when
+  // the gradient files are changed on disk. Setting the URLArgs for write() calls doesn't seem to
+  // work. So force a reload with a temp file, then catch the completed signal and repaint
+  QString s = QStringLiteral("<html><body><img src=\"%1\"><img src=\"%2\"></body></html>")
+                             .arg(dir + QLatin1String("gradient_bg.png"),
+                                  dir + QLatin1String("gradient_header.png"));
   QTextStream stream(m_tempFile);
   stream << s;
   stream.flush();
