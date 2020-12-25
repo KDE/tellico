@@ -375,6 +375,9 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
 void EntryView::resetView() {
   delete m_handler;
   m_handler = nullptr;
+  // Many of the template style parameters use default values. The only way that
+  // KConfigSkeleton can be updated is to delete the existing config object, which will then be recreated
+  delete Config::self();
   setXSLTFile(m_xsltFile); // this ends up calling resetColors()
 }
 
