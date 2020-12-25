@@ -417,6 +417,16 @@ void EntryView::slotOpenURL(const QUrl& url_) {
   // open the url
   QDesktopServices::openUrl(u);
 }
+#else
+void EntryView::changeEvent(QEvent* event_) {
+  // this will delete and reread the default colors, assuming they changed
+  if(event_->type() == QEvent::PaletteChange ||
+     event_->type() == QEvent::FontChange ||
+     event_->type() == QEvent::ApplicationFontChange) {
+    resetView();
+  }
+  QWebEngineView::changeEvent(event_);
+}
 #endif
 
 void EntryView::slotReloadEntry() {
@@ -466,6 +476,9 @@ void EntryView::setXSLTOptions(const Tellico::StyleOptions& opt_) {
 void EntryView::resetView() {
   delete m_handler;
   m_handler = nullptr;
+  // Many of the template style parameters use default values. The only way that
+  // KConfigSkeleton can be updated is to delete the existing config object, which will then be recreated
+  delete Config::self();
   setXSLTFile(m_xsltFile); // this ends up calling resetColors()
 }
 

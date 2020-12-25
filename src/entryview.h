@@ -114,6 +114,11 @@ private Q_SLOTS:
 #endif
   void slotReloadEntry();
 
+protected:
+#ifndef USE_KHTML
+  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
+#endif
+
 private Q_SLOTS:
   void slotPrint();
 
