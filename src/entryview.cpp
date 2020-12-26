@@ -194,17 +194,20 @@ void EntryView::showEntry(Tellico::Data::EntryPtr entry_) {
   }
 
   m_textToShow.clear();
-#if 0
-  myWarning() << "turn me off!";
-  m_entry = 0;
-  setXSLTFile(m_xsltFile);
-#endif
   if(!m_handler || !m_handler->isValid()) {
     setXSLTFile(m_xsltFile);
   }
   if(!m_handler || !m_handler->isValid()) {
     myWarning() << "no xslt handler";
     return;
+  }
+
+  // check if the gradient images need to be written again which might be the case if the collection is different
+  // and using local directories for storage
+  if(entry_ && (!m_entry || m_entry->collection() != entry_->collection()) &&
+     ImageFactory::cacheDir() == ImageFactory::LocalDir) {
+    // use entry_ instead of m_entry since that's the new entry to show
+    ImageFactory::createStyleImages(entry_->collection()->type());
   }
 
   m_entry = entry_;
