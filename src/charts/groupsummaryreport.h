@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,66 +22,50 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_REPORTDIALOG_H
-#define TELLICO_REPORTDIALOG_H
+#ifndef TELLICO_GROUPSUMMARYREPORT_H
+#define TELLICO_GROUPSUMMARYREPORT_H
 
-#include <QDialog>
+#include "chartreport.h"
+#include "../datavectors.h"
 
-class QStackedWidget;
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
-class QWebEngineView;
-#endif
+#include <QScrollArea>
+
+class QGridLayout;
 
 namespace Tellico {
-  namespace Export {
-    class HTMLExporter;
-  }
-  namespace GUI {
-    class ComboBox;
-  }
 
-/**
- * @author Robby Stephenson
- */
-class ReportDialog : public QDialog {
+class BarChart;
+
+class GroupSummaryWidget : public QScrollArea {
 Q_OBJECT
 
 public:
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  ReportDialog(QWidget* parent);
-  virtual ~ReportDialog();
+  GroupSummaryWidget(const QString& title, int count, QWidget* parent = nullptr);
+
+  void addChart(Data::FieldPtr field);
 
 public Q_SLOTS:
-  /**
-   * Regenerate the report.
-   */
-  void slotRefresh();
-
-private Q_SLOTS:
-  void slotGenerate();
-  void slotPrint();
-  void slotSaveAs();
-  void slotUpdateSize();
+  void updateGeometry();
 
 private:
-  void generateChart();
-  void generateHtml();
+  void updateChartColumn(int column_);
 
-  QStackedWidget* m_reportView;
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
-  QWebEngineView* m_webView;
-#endif
-  GUI::ComboBox* m_templateCombo;
-  Export::HTMLExporter* m_exporter;
-  QString m_xsltFile;
+  QGridLayout* m_layout;
+  QList<BarChart*> m_charts;
+};
+
+/**
+ * The GroupSummary Report widget shows one or more charts as a report.
+ *
+ * @author Robby Stephenson
+ */
+class GroupSummaryReport : public ChartReport {
+
+public:
+  GroupSummaryReport();
+
+  virtual QString title() const;
+  virtual QWidget* createWidget();
 };
 
 } // end namespace

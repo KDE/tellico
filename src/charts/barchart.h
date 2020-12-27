@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,66 +22,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_REPORTDIALOG_H
-#define TELLICO_REPORTDIALOG_H
+#ifndef TELLICO_BARCHART_H
+#define TELLICO_BARCHART_H
 
-#include <QDialog>
-
-class QStackedWidget;
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
-class QWebEngineView;
-#endif
+#include <QChart>
 
 namespace Tellico {
-  namespace Export {
-    class HTMLExporter;
-  }
-  namespace GUI {
-    class ComboBox;
-  }
 
 /**
+ * The ChartReport class is a widget showing one or more charts as a report.
+ *
  * @author Robby Stephenson
  */
-class ReportDialog : public QDialog {
-Q_OBJECT
+class BarChart : public QtCharts::QChart {
 
 public:
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  ReportDialog(QWidget* parent);
-  virtual ~ReportDialog();
+  BarChart(const QStringList& names, const QList<qreal>& values);
 
-public Q_SLOTS:
-  /**
-   * Regenerate the report.
-   */
-  void slotRefresh();
-
-private Q_SLOTS:
-  void slotGenerate();
-  void slotPrint();
-  void slotSaveAs();
-  void slotUpdateSize();
-
-private:
-  void generateChart();
-  void generateHtml();
-
-  QStackedWidget* m_reportView;
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
-  QWebEngineView* m_webView;
-#endif
-  GUI::ComboBox* m_templateCombo;
-  Export::HTMLExporter* m_exporter;
-  QString m_xsltFile;
 };
 
 } // end namespace

@@ -52,6 +52,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS
     DBus
     Test
     Network
+    PrintSupport
 )
 
 find_package(KF5 REQUIRED COMPONENTS
@@ -78,7 +79,6 @@ find_package(KF5 REQUIRED COMPONENTS
 )
 if(NOT USE_KHTML)
   find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
-    PrintSupport
     WebEngineWidgets
   )
   set_package_properties(Qt5WebEngineWidgets PROPERTIES
@@ -91,6 +91,10 @@ if(USE_KHTML OR NOT Qt5WebEngineWidgets_FOUND)
   set_package_properties(KF5Html PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML")
 endif()
+
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+  Charts
+)
 
 include(MacroBoolTo01)
 
@@ -275,6 +279,7 @@ macro_bool_to_01(Btparse_FOUND HAVE_LIBBTPARSE)
 macro_bool_to_01(CDIO_FOUND HAVE_CDIO)
 macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
+macro_bool_to_01(Qt5Charts_FOUND HAVE_QCHARTS)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

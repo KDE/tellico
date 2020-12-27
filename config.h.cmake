@@ -36,3 +36,5 @@
 #cmakedefine HAVE_LIBCSV
 
 #cmakedefine HAVE_KFILEMETADATA
+
+#cmakedefine HAVE_QCHARTS

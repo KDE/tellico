@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,66 +22,32 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_REPORTDIALOG_H
-#define TELLICO_REPORTDIALOG_H
+#ifndef TELLICO_CHARTREPORT_H
+#define TELLICO_CHARTREPORT_H
 
-#include <QDialog>
-
-class QStackedWidget;
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
-class QWebEngineView;
-#endif
+class QWidget;
+#include <QUuid>
 
 namespace Tellico {
-  namespace Export {
-    class HTMLExporter;
-  }
-  namespace GUI {
-    class ComboBox;
-  }
 
 /**
+ * The ChartReport class provides a widget showing one or more charts as a report.
+ *
  * @author Robby Stephenson
  */
-class ReportDialog : public QDialog {
-Q_OBJECT
+class ChartReport {
 
 public:
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  ReportDialog(QWidget* parent);
-  virtual ~ReportDialog();
+  ChartReport() {}
+  virtual ~ChartReport() {}
 
-public Q_SLOTS:
-  /**
-   * Regenerate the report.
-   */
-  void slotRefresh();
-
-private Q_SLOTS:
-  void slotGenerate();
-  void slotPrint();
-  void slotSaveAs();
-  void slotUpdateSize();
+  QUuid uuid() { if(m_uuid.isNull()) m_uuid = QUuid::createUuid(); return m_uuid; }
+  virtual QString title() const = 0;
+  // the calling function is responsible for deleting the widget
+  virtual QWidget* createWidget() = 0;
 
 private:
-  void generateChart();
-  void generateHtml();
-
-  QStackedWidget* m_reportView;
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
-  QWebEngineView* m_webView;
-#endif
-  GUI::ComboBox* m_templateCombo;
-  Export::HTMLExporter* m_exporter;
-  QString m_xsltFile;
+  QUuid m_uuid;
 };
 
 } // end namespace

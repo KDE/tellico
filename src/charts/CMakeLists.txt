@@ -1,0 +1,15 @@
+########### next target ###############
+
+SET(charts_STAT_SRCS
+   barchart.cpp
+   chartmanager.cpp
+   collectionsizereport.cpp
+   groupsummaryreport.cpp
+)
+
+add_library(charts STATIC ${charts_STAT_SRCS})
+
+target_link_libraries(charts
+    tellicomodels
+    Qt5::Charts
+)

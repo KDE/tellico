@@ -1,5 +1,5 @@
 ADD_SUBDIRECTORY( core )
-ADD_SUBDIRECTORY(config )
+ADD_SUBDIRECTORY( config )
 ADD_SUBDIRECTORY( gui )
 ADD_SUBDIRECTORY( collections )
 ADD_SUBDIRECTORY( images )
@@ -11,6 +11,10 @@ ADD_SUBDIRECTORY( newstuff )
 ADD_SUBDIRECTORY( models )
 ADD_SUBDIRECTORY( utils )
 ADD_SUBDIRECTORY( 3rdparty )
+
+IF( Qt5Charts_FOUND )
+  ADD_SUBDIRECTORY( charts )
+ENDIF( Qt5Charts_FOUND )
 
 IF( BUILD_TESTING )
   ADD_SUBDIRECTORY( tests )
@@ -102,6 +106,7 @@ TARGET_LINK_LIBRARIES(tellico
     Qt5::Core
     Qt5::Widgets
     Qt5::DBus
+    Qt5::PrintSupport
     KF5::Crash
     KF5::KIOCore
     KF5::KIOFileWidgets
@@ -111,11 +116,15 @@ TARGET_LINK_LIBRARIES(tellico
     ${LIBXSLT_EXSLT_LIBRARIES}
     )
 
+IF( Qt5Charts_FOUND )
+  TARGET_LINK_LIBRARIES(tellico charts)
+ENDIF( Qt5Charts_FOUND )
+
 IF(USE_KHTML)
   TARGET_LINK_LIBRARIES(tellico KF5::KHtml)
   ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
 ELSE()
-  TARGET_LINK_LIBRARIES(tellico Qt5::PrintSupport Qt5::WebEngineWidgets)
+  TARGET_LINK_LIBRARIES(tellico Qt5::WebEngineWidgets)
 ENDIF()
 
 IF( KF5NewStuff_FOUND )

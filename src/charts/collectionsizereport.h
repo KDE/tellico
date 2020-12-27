@@ -1,5 +1,5 @@
 /***************************************************************************
-    Copyright (C) 2005-2009 Robby Stephenson <robby@periapsis.org>
+    Copyright (C) 2021 Robby Stephenson <robby@periapsis.org>
  ***************************************************************************/
 
 /***************************************************************************
@@ -22,66 +22,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef TELLICO_REPORTDIALOG_H
-#define TELLICO_REPORTDIALOG_H
+#ifndef TELLICO_COLLECTIONSIZEREPORT_H
+#define TELLICO_COLLECTIONSIZEREPORT_H
 
-#include <QDialog>
-
-class QStackedWidget;
-#ifdef USE_KHTML
-class KHTMLPart;
-#else
-class QWebEngineView;
-#endif
+#include "chartreport.h"
 
 namespace Tellico {
-  namespace Export {
-    class HTMLExporter;
-  }
-  namespace GUI {
-    class ComboBox;
-  }
 
-/**
- * @author Robby Stephenson
- */
-class ReportDialog : public QDialog {
-Q_OBJECT
+class CollectionSizeReport : public ChartReport {
 
 public:
-  /**
-   * The constructor sets up the dialog.
-   *
-   * @param parent A pointer to the parent widget
-   */
-  ReportDialog(QWidget* parent);
-  virtual ~ReportDialog();
+  CollectionSizeReport();
 
-public Q_SLOTS:
-  /**
-   * Regenerate the report.
-   */
-  void slotRefresh();
-
-private Q_SLOTS:
-  void slotGenerate();
-  void slotPrint();
-  void slotSaveAs();
-  void slotUpdateSize();
-
-private:
-  void generateChart();
-  void generateHtml();
-
-  QStackedWidget* m_reportView;
-#ifdef USE_KHTML
-  KHTMLPart* m_HTMLPart;
-#else
-  QWebEngineView* m_webView;
-#endif
-  GUI::ComboBox* m_templateCombo;
-  Export::HTMLExporter* m_exporter;
-  QString m_xsltFile;
+  virtual QString title() const;
+  virtual QWidget* createWidget();
 };
 
 } // end namespace
