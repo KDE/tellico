@@ -115,7 +115,7 @@ IF(USE_KHTML)
   TARGET_LINK_LIBRARIES(tellico KF5::KHtml)
   ADD_DEFINITIONS(-DUSE_KHTML=${USE_KHTML})
 ELSE()
-  TARGET_LINK_LIBRARIES(tellico Qt5::WebEngineWidgets)
+  TARGET_LINK_LIBRARIES(tellico Qt5::PrintSupport Qt5::WebEngineWidgets)
 ENDIF()
 
 IF( KF5NewStuff_FOUND )

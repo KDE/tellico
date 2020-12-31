@@ -77,7 +77,10 @@ find_package(KF5 REQUIRED COMPONENTS
     XmlGui
 )
 if(NOT USE_KHTML)
-  find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS WebEngineWidgets)
+  find_package(Qt5 ${QT_MIN_VERSION} CONFIG OPTIONAL_COMPONENTS
+    PrintSupport
+    WebEngineWidgets
+  )
   set_package_properties(Qt5WebEngineWidgets PROPERTIES
     DESCRIPTION "Building with QWebEngine is preferrable to KHTML"
     TYPE OPTIONAL)
