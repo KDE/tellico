@@ -151,7 +151,7 @@ int Tellico::LCCComparison::compare(const QString& str1_, const QString& str2_) 
   if(str2_.isEmpty()) {
     return 1;
   }
-  myDebug() << str1_ << " to " << str2_;
+//  myDebug() << str1_ << " to " << str2_;
   QRegularExpressionMatch match1 = m_regexp.match(str1_);
   if(!match1.hasMatch()) {
     myDebug() << "no regexp match:" << str1_;
