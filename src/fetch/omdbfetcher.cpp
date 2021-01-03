@@ -232,9 +232,7 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
 #if 0
   if(optionalFields().contains(QStringLiteral("imdb"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
+    coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
   }
   if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
@@ -334,13 +332,12 @@ void OMDBFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& result
   entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "Poster"));
   entry_->setField(QStringLiteral("plot"), mapValue(resultMap_, "Plot"));
 
-  if(optionalFields().contains(QStringLiteral("imdb"))) {
-    if(!entry_->collection()->hasField(QStringLiteral("imdb"))) {
-      Data::FieldPtr field(new Data::Field(QStringLiteral("imdb"), i18n("IMDb Link"), Data::Field::URL));
-      field->setCategory(i18n("General"));
-      entry_->collection()->addField(field);
+  const QString imdb(QStringLiteral("imdb"));
+  if(optionalFields().contains(imdb)) {
+    if(!entry_->collection()->hasField(imdb)) {
+      entry_->collection()->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
     }
-    entry_->setField(QStringLiteral("imdb"), QLatin1String("http://www.imdb.com/title/")
+    entry_->setField(imdb, QLatin1String("http://www.imdb.com/title/")
                                           + entry_->field(QStringLiteral("imdb-id"))
                                           + QLatin1Char('/'));
   }

@@ -730,9 +730,7 @@ Tellico::Data::EntryPtr IMDBFetcher::parseEntry(const QString& str_) {
 
   const QString imdb = QStringLiteral("imdb");
   if(!coll->hasField(imdb) && optionalFields().contains(imdb)) {
-    Data::FieldPtr field(new Data::Field(imdb, i18n("IMDb Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
+    coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
   }
   if(coll->hasField(imdb) && coll->fieldByName(imdb)->type() == Data::Field::URL) {
     m_url.setQuery(QString());

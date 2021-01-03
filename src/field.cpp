@@ -315,6 +315,7 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
       field->setDescription(i18n("International Standard Book Number"));
       break;
     case PegiField:
+      {
       QStringList pegi = QStringLiteral("PEGI 3, PEGI 7, PEGI 12, PEGI 16, PEGI 18")
 #if (QT_VERSION < QT_VERSION_CHECK(5, 14, 0))
                          .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), QString::SkipEmptyParts);
@@ -322,8 +323,13 @@ Tellico::Data::FieldPtr Field::createDefaultField(DefaultField fieldEnum) {
                          .split(QRegularExpression(QStringLiteral("\\s*,\\s*")), Qt::SkipEmptyParts);
 #endif
       field = new Field(QStringLiteral("pegi"), i18n("PEGI Rating"), pegi);
+      }
       field->setCategory(i18n("General"));
-      field->setFlags(Data::Field::AllowGrouped);
+      field->setFlags(Field::AllowGrouped);
+      break;
+    case ImdbField:
+      field = new Field(QStringLiteral("imdb"), i18n("IMDb Link"), Field::URL);
+      field->setCategory(i18n("General"));
       break;
   }
   Q_ASSERT(field);

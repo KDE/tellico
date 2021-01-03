@@ -316,7 +316,8 @@ public:
     CreatedDateField,
     ModifiedDateField,
     IsbnField,
-    PegiField
+    PegiField,
+    ImdbField
   };
 
   static FieldPtr createDefaultField(DefaultField field);

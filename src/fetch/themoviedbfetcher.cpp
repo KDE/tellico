@@ -269,9 +269,7 @@ void TheMovieDBFetcher::slotComplete(KJob* job_) {
     coll->addField(field);
   }
   if(optionalFields().contains(QStringLiteral("imdb"))) {
-    Data::FieldPtr field(new Data::Field(QStringLiteral("imdb"), i18n("IMDb Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
+    coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
   }
   if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QStringLiteral("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
