@@ -119,7 +119,8 @@ void ComparisonTest::testDate_data() {
   QTest::newRow("test5") << QStringLiteral("2008-2-2") << QStringLiteral("2008-02-02") << 0;
   // non-integers get converted to current date
   QTest::newRow("words") << QStringLiteral("all-by-myself") << QStringLiteral("---") << 0;
-  QTest::newRow("words") << QStringLiteral("2020--") << QStringLiteral("---") << 0;
+  // no longer in 2020, so all dashes converts to current year, after 2020
+  QTest::newRow("words") << QStringLiteral("2020--") << QStringLiteral("---") << -1;
 }
 
 void ComparisonTest::testTitle() {
