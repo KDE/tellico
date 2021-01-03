@@ -27,7 +27,6 @@
 
 #include "datavectors.h"
 
-#include <QPrinter>
 
 #ifdef USE_KHTML
 #include <KHTMLPart>
@@ -35,7 +34,7 @@
 #else
 #include <QWebEngineView>
 #include <QWebEnginePage>
-#include <QPointer>
+#include <QPrinter>
 #endif
 
 class QTemporaryFile;
@@ -104,27 +103,23 @@ public Q_SLOTS:
   void showEntries(Tellico::Data::EntryList entries);
 
 private Q_SLOTS:
-#ifdef USE_KHTML
   /**
    * Open a URL.
    *
    * @param url The URL to open
    */
   void slotOpenURL(const QUrl& url);
-#endif
   void slotReloadEntry();
 
 protected:
-#ifndef USE_KHTML
-  void changeEvent(QEvent* event) Q_DECL_OVERRIDE;
-#endif
+  void changeEvent(QEvent* event);
 
 private Q_SLOTS:
   void slotPrint();
 
 private:
   void resetColors();
-  void contextMenuEvent(QContextMenuEvent* event) Q_DECL_OVERRIDE;
+  void contextMenuEvent(QContextMenuEvent* event);
 
   Data::EntryPtr m_entry;
   XSLTHandler* m_handler;
@@ -134,7 +129,9 @@ private:
   QTemporaryFile* m_tempFile;
   bool m_useGradientImages;
   bool m_checkCommonFile;
+#ifndef USE_KHTML
   QPrinter m_printer;
+#endif
 };
 
 #ifdef USE_KHTML

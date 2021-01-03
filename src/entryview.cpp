@@ -394,12 +394,12 @@ void EntryView::slotRefresh() {
 #endif
 }
 
-#ifdef USE_KHTML
 // do some contortions in case the url is relative
 // need to interpret it relative to document URL instead of xslt file
 // the current node under the mouse would be the text node inside
 // the anchor node, so iterate up the parents
 void EntryView::slotOpenURL(const QUrl& url_) {
+#ifdef USE_KHTML
   if(url_.scheme() == QLatin1String("tc")) {
     // handle this internally
     emit signalTellicoAction(url_);
@@ -419,9 +419,15 @@ void EntryView::slotOpenURL(const QUrl& url_) {
   }
   // open the url
   QDesktopServices::openUrl(u);
-}
 #else
+  Q_UNUSED(url_);
+#endif
+}
+
 void EntryView::changeEvent(QEvent* event_) {
+#ifdef USE_KHTML
+  Q_UNUSED(event_);
+#else
   // this will delete and reread the default colors, assuming they changed
   if(event_->type() == QEvent::PaletteChange ||
      event_->type() == QEvent::FontChange ||
@@ -429,8 +435,8 @@ void EntryView::changeEvent(QEvent* event_) {
     resetView();
   }
   QWebEngineView::changeEvent(event_);
-}
 #endif
+}
 
 void EntryView::slotReloadEntry() {
   // this slot should only be connected in setXSLTFile()
@@ -535,6 +541,9 @@ void EntryView::resetColors() {
 }
 
 void EntryView::contextMenuEvent(QContextMenuEvent* event_) {
+#ifdef USE_KHTML
+  Q_UNUSED(event_);
+#else
   QMenu menu(this);
   // can't use the KStandardAction for copy since I don't know what the receiver or trigger target is
   QAction* standardCopy = KStandardAction::copy(nullptr, nullptr, &menu);
@@ -546,8 +555,8 @@ void EntryView::contextMenuEvent(QContextMenuEvent* event_) {
   // remove shortcut since this is specific to the view widget
   printAction->setShortcut(QKeySequence());
   menu.addAction(printAction);
-
   menu.exec(event_->globalPos());
+#endif
 }
 
 void EntryView::slotPrint() {
