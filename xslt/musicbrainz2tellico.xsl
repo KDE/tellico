@@ -29,6 +29,7 @@
    <fields>
     <field name="_default"/>
     <field flags="0" title="MusicBrainz ID" category="General" format="4" type="1" name="mbid"/>
+    <field flags="0" title="Barcode" category="General" format="4" type="1" name="barcode" i18n="true"/>
    </fields>
    <xsl:apply-templates select="//mb:release"/>
   </collection>
@@ -80,6 +81,10 @@
     <genre i18n='yes'>Soundtrack</genre>
    </xsl:if>
   </genres>
+
+  <barcode>
+   <xsl:value-of select="mb:barcode"/>
+  </barcode>
 
   <!-- tags are too random, don't use them -->
   <!--

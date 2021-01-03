@@ -289,6 +289,11 @@ void DiscogsFetcher::slotComplete(KJob*) {
     field->setFormatType(FieldFormat::FormatName);
     coll->addField(field);
   }
+  if(optionalFields().contains(QStringLiteral("barcode"))) {
+    Data::FieldPtr field(new Data::Field(QStringLiteral("barcode"), i18n("Barcode")));
+    field->setCategory(i18n("General"));
+    coll->addField(field);
+  }
 
   QJsonDocument doc = QJsonDocument::fromJson(data);
 //  const QVariantMap resultMap = doc.object().toVariantMap().value(QStringLiteral("feed")).toMap();
@@ -407,6 +412,16 @@ void DiscogsFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& res
     entry_->setField(QStringLiteral("nationality"), mapValue(resultMap_, "country"));
   }
 
+  if(entry_->collection()->hasField(QStringLiteral("barcode"))) {
+    foreach(const QVariant& identifier, resultMap_.value(QLatin1String("identifiers")).toList()) {
+      const QVariantMap idMap = identifier.toMap();
+      if(mapValue(idMap, "type") == QLatin1String("Barcode")) {
+        entry_->setField(QStringLiteral("barcode"), mapValue(idMap, "value"));
+        break;
+      }
+    }
+  }
+
   if(entry_->collection()->hasField(QStringLiteral("producer"))) {
     QStringList producers;
     foreach(const QVariant& extraartist, resultMap_.value(QLatin1String("extraartists")).toList()) {
@@ -437,6 +452,7 @@ Tellico::StringHash DiscogsFetcher::allOptionalFields() {
   hash[QStringLiteral("producer")] = i18n("Producer");
   hash[QStringLiteral("nationality")] = i18n("Nationality");
   hash[QStringLiteral("discogs")] = i18n("Discogs Link");
+  hash[QStringLiteral("barcode")] = i18n("Barcode");
   return hash;
 }
 

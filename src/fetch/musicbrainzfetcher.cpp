@@ -363,11 +363,21 @@ QString MusicBrainzFetcher::defaultIcon() {
   return favIcon("https://musicbrainz.org");
 }
 
-MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrainzFetcher*)
+Tellico::StringHash MusicBrainzFetcher::allOptionalFields() {
+  StringHash hash;
+//  hash[QStringLiteral("nationality")] = i18n("Nationality");
+  hash[QStringLiteral("barcode")] = i18n("Barcode");
+  return hash;
+}
+
+MusicBrainzFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const MusicBrainzFetcher* fetcher_)
     : Fetch::ConfigWidget(parent_) {
   QVBoxLayout* l = new QVBoxLayout(optionsWidget());
   l->addWidget(new QLabel(i18n("This source has no options."), optionsWidget()));
   l->addStretch();
+
+  // now add additional fields widget
+  addFieldsWidget(MusicBrainzFetcher::allOptionalFields(), fetcher_ ? fetcher_->optionalFields() : QStringList());
 }
 
 void MusicBrainzFetcher::ConfigWidget::saveConfigHook(KConfigGroup&) {

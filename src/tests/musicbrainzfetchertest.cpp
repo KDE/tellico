@@ -33,6 +33,8 @@
 #include "../images/imagefactory.h"
 #include "../utils/datafileregistry.h"
 
+#include <KSharedConfig>
+
 #include <QTest>
 
 QTEST_GUILESS_MAIN( MusicBrainzFetcherTest )
@@ -185,9 +187,13 @@ void MusicBrainzFetcherTest::testSoundtrack() {
 }
 
 void MusicBrainzFetcherTest::testBarcode() {
+  KConfigGroup cg = KSharedConfig::openConfig(QString(), KConfig::SimpleConfig)->group(QStringLiteral("musicbrainz"));
+  cg.writeEntry("Custom Fields", QStringLiteral("barcode"));
+
   Tellico::Fetch::FetchRequest request(Tellico::Data::Collection::Album, Tellico::Fetch::UPC,
                                        QStringLiteral("8024391054123"));
   Tellico::Fetch::Fetcher::Ptr fetcher(new Tellico::Fetch::MusicBrainzFetcher(this));
+  fetcher->readConfig(cg);
 
   Tellico::Data::EntryList results = DO_FETCH1(fetcher, request, 1);
 
@@ -195,4 +201,5 @@ void MusicBrainzFetcherTest::testBarcode() {
 
   Tellico::Data::EntryPtr entry = results.at(0);
   QCOMPARE(entry->title(), QStringLiteral("The Old Man and the Spirit"));
+  QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("8024391054123"));
 }

@@ -177,6 +177,7 @@ void DiscogsFetcherTest::testBarcode() {
   QCOMPARE(entry->field(QStringLiteral("artist")), QStringLiteral("Evanescence"));
   QVERIFY(!entry->field(QStringLiteral("label")).isEmpty());
   QVERIFY(!entry->field(QStringLiteral("year")).isEmpty());
+  QCOMPARE(entry->field(QStringLiteral("barcode")), QStringLiteral("4 547366 014099"));
 
   QVERIFY(!entry->field(QStringLiteral("cover")).isEmpty());
   const Tellico::Data::Image& img = Tellico::ImageFactory::imageById(entry->field(QStringLiteral("cover")));
