@@ -111,12 +111,17 @@ QString ImageFactory::imageDir() {
 }
 
 Tellico::ImageFactory::CacheDir ImageFactory::cacheDir() {
+  CacheDir dir = TempDir;
   switch(Config::imageLocation()) {
-    case Config::ImagesInLocalDir: return LocalDir;
-    case Config::ImagesInAppDir: return DataDir;
-    case Config::ImagesInFile: return TempDir;
+    case Config::ImagesInLocalDir: dir = LocalDir; break;
+    case Config::ImagesInAppDir:   dir = DataDir;  break;
+    case Config::ImagesInFile:     dir = TempDir;  break;
   }
-  return TempDir;
+  // special case when configured to use local dir but for a new collection when no local dir exists
+  if(dir == LocalDir && factory->d->localImageDir.path().isEmpty()) {
+    dir = TempDir;
+  }
+  return dir;
 }
 
 QString ImageFactory::addImage(const QUrl& url_, bool quiet_, const QUrl& refer_, bool link_) {
