@@ -231,9 +231,6 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   coll->addField(field);
 
 #if 0
-  if(optionalFields().contains(QStringLiteral("imdb"))) {
-    coll->addField(Data::Field::createDefaultField(Data::Field::ImdbField));
-  }
   if(optionalFields().contains(QStringLiteral("alttitle"))) {
     Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
     field->setFormatType(FieldFormat::FormatTitle);
@@ -251,8 +248,10 @@ void OMDBFetcher::slotComplete(KJob* job_) {
 
   const bool response = result.value(QStringLiteral("Response")).toBool();
   if(!response) {
+    // a lack of results is considered an error
+    // don't show a user alert for that
     myDebug() << "Error:" << result.value(QStringLiteral("Error")).toString();
-    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
+//    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
     stop();
     return;
   }
