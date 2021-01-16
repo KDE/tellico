@@ -230,31 +230,15 @@ void OMDBFetcher::slotComplete(KJob* job_) {
   field->setCategory(i18n("General"));
   coll->addField(field);
 
-#if 0
-  if(optionalFields().contains(QStringLiteral("imdb"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("imdb"), i18n("IMDb Link"), Data::Field::URL));
-    field->setCategory(i18n("General"));
-    coll->addField(field);
-  }
-  if(optionalFields().contains(QStringLiteral("alttitle"))) {
-    Data::FieldPtr field(new Data::Field(QLatin1String("alttitle"), i18n("Alternative Titles"), Data::Field::Table));
-    field->setFormatType(FieldFormat::FormatTitle);
-    coll->addField(field);
-  }
-  if(optionalFields().contains(QStringLiteral("origtitle"))) {
-    Data::FieldPtr f(new Data::Field(QLatin1String("origtitle"), i18n("Original Title")));
-    f->setFormatType(FieldFormat::FormatTitle);
-    coll->addField(f);
-  }
-#endif
-
   QJsonDocument doc = QJsonDocument::fromJson(data);
   QVariantMap result = doc.object().toVariantMap();
 
   const bool response = result.value(QStringLiteral("Response")).toBool();
   if(!response) {
+    // a lack of results is considered an error
+    // don't show a user alert for that
     myDebug() << "Error:" << result.value(QStringLiteral("Error")).toString();
-    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
+//    message(result.value(QStringLiteral("Error")).toString(), MessageHandler::Error);
     stop();
     return;
   }
