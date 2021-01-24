@@ -116,7 +116,7 @@
     <p xml:lang="et">Omadused:</p>
     <p xml:lang="eu">Ezaugarriak:</p>
     <p xml:lang="fi">Ominaisuuksia:</p>
-    <p xml:lang="fr">Fonctionnalités !</p>
+    <p xml:lang="fr">Fonctionnalités :</p>
     <p xml:lang="gl">Funcionalidades:</p>
     <p xml:lang="hu">Szolgáltatások:</p>
     <p xml:lang="ia">Characteristicas:</p>
@@ -236,7 +236,7 @@
       <li xml:lang="et">Raskusi ei valmista ka kirjed, mis sisaldavad mitut autorit, žanri, võtmesõna jne.</li>
       <li xml:lang="eu">Egile, genero, gako-hitz, eta abar anizkoitzak dituzten sarrerak maneiatzen ditu</li>
       <li xml:lang="fi">Käsittelee tietueet, joissa on useampia tekijöitä, tyylilajeja, avainsanoja jne.</li>
-      <li xml:lang="fr">Gestion des entrées avec plusieurs auteurs, genres, mots-clés, etc</li>
+      <li xml:lang="fr">Gestion des entrées avec plusieurs auteurs, genres, mots clé, etc.</li>
       <li xml:lang="gl">Pode xestionar entradas con varios autores, xéneros, palabras clave, etc.</li>
       <li xml:lang="ia">Il manea entratas con multiple autores, generes, parolas clave, etc.</li>
       <li xml:lang="id">Menangani entri-entri dengan beberapa penulis, genre, kata kunci, dll.</li>
