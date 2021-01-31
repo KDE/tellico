@@ -95,6 +95,12 @@ ReportDialog::ReportDialog(QWidget* parent_)
   foreach(const QString& file, files) {
     QFileInfo fi(file);
     const QString lfile = fi.fileName();
+    // the Group Summary report template doesn't work with QWebView
+#ifndef USE_KHTML
+    if(lfile == QStringLiteral("Group_Summary.xsl")) {
+      continue;
+    }
+#endif
     QString name = lfile.section(QLatin1Char('.'), 0, -2);
     name.replace(QLatin1Char('_'), QLatin1Char(' '));
     QString title = i18nc((name + QLatin1String(" XSL Template")).toUtf8().constData(), name.toUtf8().constData());
