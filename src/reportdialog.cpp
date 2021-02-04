@@ -59,13 +59,14 @@
 #include <QDialogButtonBox>
 #include <QStackedWidget>
 #include <QScrollArea>
+#include <QPainter>
+#include <QPrinter>
+#include <QPrintDialog>
 
 #ifdef USE_KHTML
 #include <KHTMLPart>
 #include <KHTMLView>
 #else
-#include <QPrinter>
-#include <QPrintDialog>
 #include <QWebEngineView>
 #include <QWebEnginePage>
 #include <QWebEngineSettings>
