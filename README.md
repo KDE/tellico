@@ -2,7 +2,7 @@
 
 ![Screenshot of Tellico](https://cdn.kde.org/screenshots/tellico/tellico-movies.png)
 
-Copyright: 2001-2020 Robby Stephenson <robby@periapsis.org>
+Copyright: 2001-2021 Robby Stephenson <robby@periapsis.org>
 
 Author/Maintainer: Robby Stephenson <robby@periapsis.org>
 
@@ -11,7 +11,7 @@ Author/Maintainer: Robby Stephenson <robby@periapsis.org>
 Tellico makes it easy to track your books, videos, music, even your wine and
 anything else. A simple and intuitive interface shows cover images, groupings,
 and any detail you want. Grab information from many popular Internet sites,
-including TheMovieDB, Discogs, IGDB, and most libraries.
+including TheMovieDB, Discogs, IGDB, and many libraries.
 
 Tellico is a part of the Office group of KDE Applications.
 
