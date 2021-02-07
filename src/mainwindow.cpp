@@ -745,7 +745,11 @@ void MainWindow::initActions() {
 
   m_entryGrouping = new KSelectAction(i18n("&Group Selection"), this);
   m_entryGrouping->setToolTip(i18n("Change the grouping of the collection"));
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5,78,0)
+  void (KSelectAction::* triggeredInt)(int) = &KSelectAction::indexTriggered;
+#else
   void (KSelectAction::* triggeredInt)(int) = &KSelectAction::triggered;
+#endif
   connect(m_entryGrouping, triggeredInt, this, &MainWindow::slotChangeGrouping);
   actionCollection()->addAction(QStringLiteral("change_entry_grouping"), m_entryGrouping);
 

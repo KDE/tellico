@@ -196,7 +196,7 @@ bool FileHandler::queryExists(const QUrl& url_) {
 bool FileHandler::writeBackupFile(const QUrl& url_) {
   bool success = true;
   if(url_.isLocalFile()) {
-    success = KBackup::backupFile(url_.toLocalFile());
+    success = KBackup::simpleBackupFile(url_.toLocalFile());
   } else {
     QUrl backup(url_);
     backup.setPath(backup.toLocalFile() + QLatin1Char('~'));
