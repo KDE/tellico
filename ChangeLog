@@ -1,3 +1,7 @@
+2021-02-07  Robby Stephenson  <robby@periapsis.org>
+
+	* Added UPCItemDB.com data source.
+
 2020-12-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved template refresh on palette or color change.
