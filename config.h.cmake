@@ -29,6 +29,7 @@
 
 #cmakedefine HAVE_V4L
 
+#cmakedefine ENABLE_BTPARSE
 #cmakedefine HAVE_LIBBTPARSE
 
 #cmakedefine HAVE_CDIO

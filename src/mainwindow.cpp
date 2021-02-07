@@ -406,6 +406,9 @@ void MainWindow::initActions() {
 
   IMPORT_ACTION(Import::Bibtex, "file_import_bibtex", i18n("Import Bibtex Data..."),
                 i18n("Import a bibtex bibliography file"), mimeIcon("text/x-bibtex"));
+#ifndef ENABLE_BTPARSE
+  action->setEnabled(false);
+#endif
 
   IMPORT_ACTION(Import::Bibtexml, "file_import_bibtexml", i18n("Import Bibtexml Data..."),
                 i18n("Import a Bibtexml bibliography file"), mimeIcon("text/xml"));

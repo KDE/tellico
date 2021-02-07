@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "bibteximporter.h"
 #include "../utils/bibtexhandler.h"
 #include "../collections/bibtexcollection.h"
@@ -45,6 +46,11 @@
 
 using namespace Tellico;
 using Tellico::Import::BibtexImporter;
+
+#ifndef ENABLE_BTPARSE
+void bt_cleanup() {}
+void bt_initialize() {}
+#endif
 
 int BibtexImporter::s_initCount = 0;
 
@@ -130,6 +136,7 @@ Tellico::Data::CollPtr BibtexImporter::collection() {
 }
 
 Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int urlCount) {
+#ifdef ENABLE_BTPARSE
   if(text.isEmpty()) {
     myDebug() << "no text";
     return Data::CollPtr();
@@ -255,9 +262,13 @@ Tellico::Data::CollPtr BibtexImporter::readCollection(const QString& text, int u
   }
 
   return ptr;
+#else
+  return Data::CollPtr();
+#endif // ENABLE_BTPARSE
 }
 
 void BibtexImporter::parseText(const QString& text) {
+#ifdef ENABLE_BTPARSE
   m_nodes.clear();
   m_macros.clear();
 
@@ -313,6 +324,7 @@ void BibtexImporter::parseText(const QString& text) {
     // clean up some structures
     bt_parse_entry_s(nullptr, nullptr, 1, 0, nullptr);
   }
+#endif // ENABLE_BTPARSE
 }
 
 void BibtexImporter::slotCancel() {
@@ -367,12 +379,13 @@ bool BibtexImporter::maybeBibtex(const QUrl& url_) {
 }
 
 bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
+  bool foundOne = false;
+#ifdef ENABLE_BTPARSE
   bt_initialize();
   QRegularExpression rx(QLatin1String("[{}]"));
 
   ushort bt_options = 0; // ushort is defined in btparse.h
   boolean ok; // boolean is defined in btparse.h as an int
-  bool foundOne = false;
   int brace = 0;
   int startpos = 0;
   QRegularExpressionMatch m = rx.match(text);
@@ -403,6 +416,7 @@ bool BibtexImporter::maybeBibtex(const QString& text, const QUrl& url_) {
     bt_parse_entry_s(nullptr, nullptr, 1, 0, nullptr);
   }
   bt_cleanup();
+#endif // ENABLE_BTPARSE
   return foundOne;
 }
 

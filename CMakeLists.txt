@@ -40,6 +40,12 @@ option(ENABLE_CDTEXT       "Enable cdtext" TRUE)
 option(ENABLE_WEBCAM       "Enable support for webcams" FALSE)
 option(BUILD_FETCHER_TESTS "Build tests which verify data sources" FALSE)
 option(USE_KHTML           "Build with KHTML rather than QWebEngine" FALSE)
+option(ENABLE_BTPARSE      "Build with bibtex importing using btparse, whether internal or external" TRUE)
+
+# btparse does not compile with msvc
+if(ENABLE_BTPARSE AND MSVC)
+  set(ENABLE_BTPARSE FALSE)
+endif()
 
 include(CheckSymbolExists)
 check_symbol_exists(strlwr "string.h" HAVE_STRLWR)
@@ -177,6 +183,7 @@ if(Exempi_FOUND)
     include_directories(${Exempi_INCLUDE_DIRS})
 endif(Exempi_FOUND)
 
+if(ENABLE_BTPARSE)
 find_package(Btparse)
 set_package_properties(Btparse PROPERTIES
     DESCRIPTION "External support for parsing and processing BibTeX data files"
@@ -188,6 +195,7 @@ if(Btparse_FOUND)
 else(Btparse_FOUND)
     set(TELLICO_BTPARSE_LIBS btparse-tellico)
 endif(Btparse_FOUND)
+endif(ENABLE_BTPARSE)
 
 find_package(CDIO)
 set_package_properties(CDIO PROPERTIES
@@ -280,6 +288,7 @@ macro_bool_to_01(CDIO_FOUND HAVE_CDIO)
 macro_bool_to_01(Csv_FOUND HAVE_LIBCSV)
 macro_bool_to_01(KF5FileMetaData_FOUND HAVE_KFILEMETADATA)
 macro_bool_to_01(Qt5Charts_FOUND HAVE_QCHARTS)
+macro_bool_to_01(ENABLE_BTPARSE ENABLE_BTPARSE)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 

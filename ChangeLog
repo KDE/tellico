@@ -1,6 +1,7 @@
 2021-02-07  Robby Stephenson  <robby@periapsis.org>
 
 	* Added UPCItemDB.com data source.
+	* Added flag for conditional bibtex importing with btparse.
 
 2020-12-27  Robby Stephenson  <robby@periapsis.org>
 

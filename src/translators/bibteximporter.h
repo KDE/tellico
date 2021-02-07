@@ -29,6 +29,7 @@
 #include "../datavectors.h"
 
 #include <config.h>
+#ifdef ENABLE_BTPARSE
 extern "C" {
 #ifdef HAVE_LIBBTPARSE
 /* btparse has a struct member 'class' */
@@ -39,6 +40,9 @@ extern "C" {
 #include "btparse/btparse.h"
 #endif
 }
+#else
+class AST;
+#endif
 
 #include <QList>
 #include <QHash>

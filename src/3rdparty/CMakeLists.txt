@@ -1,4 +1,4 @@
-IF( NOT Btparse_FOUND )
+IF( NOT Btparse_FOUND AND ENABLE_BTPARSE )
   ADD_SUBDIRECTORY( btparse )
 ENDIF( NOT Btparse_FOUND )
 
