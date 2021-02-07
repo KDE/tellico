@@ -2,6 +2,10 @@
 
 	* Added UPCItemDB.com data source.
 
+2020-12-27  Robby Stephenson  <robby@periapsis.org>
+
+	* Added additional report with QtCharts.
+
 2020-12-25  Robby Stephenson  <robby@periapsis.org>
 
 	* Improved template refresh on palette or color change.
