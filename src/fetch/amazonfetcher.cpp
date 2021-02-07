@@ -1035,11 +1035,12 @@ bool AmazonFetcher::parseTitleToken(Tellico::Data::EntryPtr entry_, const QStrin
     entry_->setField(QStringLiteral("directors-cut"), QStringLiteral("true"));
     // res = true; leave it in the title
   }
-  if(token_.toLower() == QLatin1String("ntsc")) {
+  const QString tokenLower = token_.toLower();
+  if(tokenLower == QLatin1String("ntsc")) {
     entry_->setField(QStringLiteral("format"), i18n("NTSC"));
     res = true;
   }
-  if(token_.toLower() == QLatin1String("dvd")) {
+  if(tokenLower == QLatin1String("dvd")) {
     entry_->setField(QStringLiteral("medium"), i18n("DVD"));
     res = true;
   }
