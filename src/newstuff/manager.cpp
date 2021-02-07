@@ -47,6 +47,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+// for msvc
+#ifndef S_IXUSR
+#define S_IXUSR 00100
+#endif
 
 namespace Tellico {
   namespace NewStuff {

@@ -578,7 +578,7 @@ resolve_token_range (bt_stringlist *tokens,
 @MODIFIED   :
 -------------------------------------------------------------------------- */
 static void
-split_simple_name (name_loc * loc __attribute__((unused)),
+split_simple_name (name_loc * loc,
                    bt_name * name,
                    int       first_lc,
                    int       last_lc)

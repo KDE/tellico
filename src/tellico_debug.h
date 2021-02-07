@@ -32,7 +32,6 @@
 #include <QDebug>
 // std::clock_t
 #include <ctime>
-#include <unistd.h>
 
 // linux has __GNUC_PREREQ, NetBSD has __GNUC_PREREQ__
 #if defined(__GNUC_PREREQ) && !defined(__GNUC_PREREQ__)
@@ -113,7 +112,8 @@ private :
 #define DEBUG_BLOCK
 #endif
 
-#if defined(TELLICO_LOG) && !defined(WIN32)
+#if defined(TELLICO_LOG) && !defined(WIN32) && (defined(__unix__) || defined(__unix))
+#include <unistd.h>
 // see https://www.gnome.org/~federico/news-2006-03.html#timeline-tools
 // strace -ttt -f -o /tmp/logfile.strace src/tellico
 // plot-timeline.py -o prettygraph.png /tmp/logfile.strace

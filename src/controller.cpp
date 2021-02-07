@@ -53,8 +53,6 @@
 
 #include <QMenu>
 
-#include <unistd.h>
-
 using Tellico::Controller;
 
 Controller* Controller::s_self = nullptr;
