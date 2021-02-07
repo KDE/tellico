@@ -364,7 +364,7 @@ void TVmazeFetcher::populateEntry(Data::EntryPtr entry_, const QVariantMap& resu
       alttitles << mapValue(title.toMap(), "name");
     }
     entry_->setField(alttitle, alttitles.join(FieldFormat::rowDelimiterString()));
-   }
+  }
 
   entry_->setField(QStringLiteral("cover"), mapValue(resultMap_, "image", "original"));
   entry_->setField(QStringLiteral("language"), mapValue(resultMap_, "language"));
