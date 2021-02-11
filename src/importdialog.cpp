@@ -22,6 +22,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <config.h>
 #include "importdialog.h"
 #include "document.h"
 #include "tellico_debug.h"
@@ -196,6 +197,9 @@ Tellico::Import::Importer* ImportDialog::importer(Tellico::Import::Format format
 
     case Import::Bibtex:
       importer = new Import::BibtexImporter(urls_);
+#ifndef ENABLE_BTPARSE
+      myLog() << "Bibtex importing is not available due to lack of btparse library";
+#endif
       break;
 
     case Import::Bibtexml:

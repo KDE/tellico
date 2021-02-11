@@ -52,6 +52,7 @@
 #include <QRegExp>
 #include <QGroupBox>
 #include <QGridLayout>
+#include <QStandardItemModel>
 
 using namespace Tellico;
 using Tellico::Fetch::ExecExternalFetcher;
@@ -370,6 +371,15 @@ ExecExternalFetcher::ConfigWidget::ConfigWidget(QWidget* parent_, const ExecExte
   label->setWhatsThis(w);
   m_formatCombo->setWhatsThis(w);
   label->setBuddy(m_formatCombo);
+#ifndef ENABLE_BTPARSE
+  // disable the option for bibtex
+  auto formatModel = qobject_cast<const QStandardItemModel*>(m_formatCombo->model());
+  auto matchList = formatModel->match(formatModel->index(0, 0), Qt::UserRole, Import::Bibtex);
+  if(!matchList.isEmpty()) {
+    auto item = formatModel->itemFromIndex(matchList.front());
+    item->setEnabled(false);
+  }
+#endif
 
   label = new QLabel(i18n("Application &path: "), optionsWidget());
   l->addWidget(label, ++row, 0);
